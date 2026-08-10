@@ -11,11 +11,14 @@ import {
   getQuestionsByIds, sampleQuestions, seededRandom, type BankIndex, type BankQuestion,
 } from '@/data/mcq'
 import {
-  addMistake, attemptedIds, fiveMinToday, getMistakes, recordActivity, recordAttempt,
-  recordFiveMin, savedMcqIds, toggleSavedMcq, wrongIds,
+  addMistake, attemptedIds, dueRevisionIds, fiveMinToday, getMistakes, recordActivity,
+  recordAttempt, recordFiveMin, savedMcqIds, toggleSavedMcq, wrongIds,
 } from '@/lib/progress'
-import { completeChallenge, recordQuizResult, getDueReviewIds, recordReview } from '@/lib/store'
+import {
+  completeChallenge, getMockAvailability, recordQuizResult, recordReview, recordScheduledMock,
+} from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
+import { questions as seedQuestions } from '@/data/quiz'
 
 
 
@@ -71,8 +74,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     let r: Resolved | null = null
     switch (m) {
       case 'revision': {
-        const due = getDueReviewIds(60)
-        const qs = await getQuestionsByIds(due)
+        const dueIds = dueRevisionIds(60)
+        const qs = await getQuestionsByIds(dueIds)
         r = {
           title: 'Smart Revision Queue',
           qs,
@@ -94,10 +97,82 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         r = { title: 'Daily Five-Minute Challenge', qs, exam: true, timeSec: 300 }
         break
       }
-      case 'mock': {
-        const mpt = cats.filter((c) => c.mpt).map((c) => c.slug)
-        const qs = await sampleQuestions(paramCats.length ? paramCats : mpt, 50)
-        r = { title: 'Full GK Mock', qs, exam: true, timeSec: 50 * 45 }
+      case 'mock':
+      case 'pms-mock': {
+        const availability = getMockAvailability('gk')
+        if (!availability.available) {
+          r = {
+            title: 'PMS GK Grand Mock',
+            qs: [],
+            exam: true,
+            timeSec: 0,
+            note: `Your next PMS GK Grand Mock becomes available ${new Date(availability.nextAvailableAt!).toLocaleString()}. A new PMS GK Grand Mock unlocks two days after completion.`,
+          }
+          break
+        }
+        const pmsAreas = [
+          'current-affairs', 'pakistan-affairs', 'pakistan-history', 'pakistan-geography',
+          'everyday-science', 'science', 'islamic-gk', 'english-grammar', 'urdu-language',
+          'computer-basics', 'misc-gk', 'international-organisations',
+        ]
+        const qs = await sampleQuestions(pmsAreas, 100)
+        r = {
+          title: 'PMS GK Grand Mock',
+          qs,
+          exam: true,
+          timeSec: 90 * 60,
+          note: 'A 100-question general-knowledge practice mock available every two days and drawn from the central CSS Vista question bank. Provincial PMS paper patterns can vary.',
+        }
+        break
+      }
+      case 'mpt-mock': {
+        const availability = getMockAvailability('mpt')
+        if (!availability.available) {
+          r = {
+            title: 'Full CSS MPT Practice Mock',
+            qs: [],
+            exam: true,
+            timeSec: 0,
+            note: `Your next MPT mock becomes available ${new Date(availability.nextAvailableAt!).toLocaleString()}. A new MPT mock unlocks three days after completion.`,
+          }
+          break
+        }
+        const abilityQuestions: BankQuestion[] = seedQuestions
+          .filter((question) => question.category === 'abilities' || question.category === 'reasoning')
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 15)
+          .map((question) => ({
+            id: `mpt-seed-${question.id}`,
+            q: question.question,
+            o: question.options,
+            a: question.answer,
+            s: question.topic,
+            d: question.difficulty === 'Easy'
+              ? 'Basic'
+              : question.difficulty === 'Hard'
+                ? 'Advanced'
+                : 'Intermediate',
+          }))
+        const [islamic, urdu, english, generalKnowledge] = await Promise.all([
+          sampleQuestions(['islamic-gk'], 5),
+          sampleQuestions(['urdu-language'], 5),
+          sampleQuestions(['english-grammar'], 12),
+          sampleQuestions(
+            [
+              'everyday-science', 'science', 'current-affairs', 'pakistan-affairs',
+              'pakistan-history', 'pakistan-geography',
+            ],
+            13,
+          ),
+        ])
+        r = {
+          title: 'Full CSS MPT Practice Mock',
+          qs: [...islamic, ...urdu, ...english, ...abilityQuestions, ...generalKnowledge]
+            .sort(() => Math.random() - 0.5),
+          exam: true,
+          timeSec: 50 * 60,
+          note: 'A 50-question proportional practice mock covering every official MPT paper area.',
+        }
         break
       }
       case 'timed': {
@@ -195,13 +270,15 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       }
     }
     // merge admin-uploaded MCQs into sampled modes + remove disabled ones
-    const idBasedModes = new Set(['saved', 'wrong'])
+    const idBasedModes = new Set(['saved', 'wrong', 'revision'])
     if (!idBasedModes.has(m)) {
       const chosen = paramCats.length ? paramCats : null
       const adminPool = chosen ? chosen.flatMap((c) => adminBankQuestions(c)) : adminBankQuestions()
       r.qs = [...r.qs, ...adminPool.sort(() => Math.random() - 0.5).slice(0, 25)]
     }
     r.qs = dedupeBankQuestions(filterDisabled(r.qs))
+    if (m === 'mock' || m === 'pms-mock') r.qs = r.qs.slice(0, 100)
+    if (m === 'mpt-mock') r.qs = r.qs.slice(0, 50)
     setResolved(r)
     setLoading(false)
     if (r.qs.length) {
@@ -313,6 +390,7 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
   const [finished, setFinished] = useState(false)
   const [left, setLeft] = useState(timeSec)
   const startRef = useRef(Date.now())
+  const finishedRef = useRef(false)
 
   const q = qs[cur]
   const rtl = isRtlText(q.q)
@@ -343,19 +421,25 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
   }
 
   function finish() {
+    if (finishedRef.current) return
+    finishedRef.current = true
     setFinished(true)
     const secs = Math.round((Date.now() - startRef.current) / 1000)
     qs.forEach((x) => {
       const sel = answers[x.id]
       if (sel === undefined) return
       const correct = sel === x.a
-      recordAttempt(x.id, correct)
-      recordReview(x.id, correct)
-      if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
+      if (!x.id.startsWith('mpt-seed-')) {
+        recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''))
+        recordReview(x.id, correct)
+        if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
+      }
     })
     recordQuizResult({ type: 'quiz', category: title, score, total: qs.length })
     if (mode === 'five-minute') recordFiveMin(score, qs.length)
     if (mode === 'daily') completeChallenge(new Date().toISOString().slice(0, 10))
+    if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk')
+    if (mode === 'mpt-mock') recordScheduledMock('mpt')
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
 

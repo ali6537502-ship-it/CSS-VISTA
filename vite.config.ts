@@ -1,7 +1,6 @@
 import path from "path"
 import react from "@vitejs/plugin-react"
 import { defineConfig, type Plugin } from "vite"
-import { inspectAttr } from 'kimi-plugin-inspect-react'
 
 function stripEmDash(): Plugin {
   return {
@@ -22,9 +21,11 @@ function stripEmDash(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [inspectAttr(), react(), stripEmDash()],
+  plugins: [react(), stripEmDash()],
   server: {
+    host: '0.0.0.0',
     port: 3000,
+    allowedHosts: ['terminal.local'],
   },
   resolve: {
     alias: {

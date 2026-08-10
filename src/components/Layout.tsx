@@ -5,13 +5,16 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, Download, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
+  NotebookPen, Video, CalendarRange, FileCheck2, type LucideIcon,
 } from 'lucide-react'
-import { site, notifications } from '@/data/site'
-import type { Notification } from '@/data/site'
+import { featureAnnouncements, site, notifications } from '@/data/site'
+import { defaultHomeCards } from '@/data/homeCards'
+import { cardIcons } from '@/data/homeCardIcons'
 import { searchSite, type SearchResult } from '@/lib/search'
 import { touchVisit } from '@/lib/store'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
+import { AdSenseLoader, PageFooterAd, PageHeaderAd } from '@/components/Ads'
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -37,7 +40,7 @@ const nav = [
       { label: 'Essay - Miss Sadia Zahoor, PAS', to: '/essay', icon: PenLine },
       { label: 'Answer Timer', to: '/answer-timer', icon: ClipboardList },
       { label: 'Answer-Writing Practice', to: '/answer-writing', icon: PenLine },
-      { label: 'Answer Evaluation by Miss Sadia Zahoor, PAS', to: '/answer-evaluation', icon: PenLine },
+      { label: 'Answer Evaluation by Miss Sadia Zahoor, PAS', to: '/answer-evaluation', icon: FileCheck2 },
       { label: 'Vocabulary and Daily Challenge', to: '/grammar-vocabulary', icon: Languages },
       { label: 'Current Affairs', to: '/current-affairs', icon: Newspaper },
     ],
@@ -46,8 +49,8 @@ const nav = [
     label: 'Library',
     items: [
       { label: 'Notes Library', to: '/notes', icon: FileText },
-      { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: PenLine },
-      { label: 'Free CSS Vista Lectures', to: '/lectures', icon: GraduationCap },
+      { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: NotebookPen },
+      { label: 'Free CSS Vista Lectures', to: '/lectures', icon: Video },
       { label: 'One-Liner GK', to: '/one-liner-gk', icon: BookOpen },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
@@ -58,12 +61,12 @@ const nav = [
   {
     label: 'Tools',
     items: [
-      { label: 'Test Series Announcement', to: '/test-series', icon: Megaphone },
+      { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
       { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
       { label: 'CSS Games', to: '/games', icon: Gamepad2 },
       { label: 'Performance Dashboard', to: '/dashboard', icon: LayoutDashboard },
-      { label: 'My CSS Study Planner', to: '/study-planner', icon: ClipboardList },
+      { label: 'My CSS Study Planner', to: '/study-planner', icon: CalendarRange },
     ],
   },
   {
@@ -88,145 +91,62 @@ const primaryNav = [
 
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
-  { label: 'GK World', to: '/gk', icon: Globe2 },
-  { label: 'MPT Preparation', to: '/mpt', icon: ClipboardList },
-  { label: 'Current Affairs', to: '/current-affairs', icon: Newspaper },
-  { label: 'Past Papers', to: '/past-papers', icon: FileText },
-  { label: 'Notes Library', to: '/notes', icon: BookOpen },
-  { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
-  { label: 'One-Liner GK', to: '/one-liner-gk', icon: Target },
+  ...defaultHomeCards
+    .filter((item) => item.visible)
+    .sort((a, b) => a.order - b.order)
+    .map((item) => ({
+      label: item.title,
+      to: item.to,
+      icon: cardIcons[item.icon] ?? Grid2X2,
+    })),
 ]
 
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
-function NotificationBar() {
-  const [dismissed, setDismissed] = useState<string[]>([])
-  const [idx, setIdx] = useState(0)
-  const active = notifications.filter(
-    (n) => !dismissed.includes(n.id) && (!n.expires || new Date(n.expires) > new Date())
-  )
-  useEffect(() => {
-    if (active.length <= 1) return
-    const t = setInterval(() => setIdx((i) => (i + 1) % active.length), 6000)
-    return () => clearInterval(t)
-  }, [active.length])
-  if (!active.length) return null
-  const n = active[idx % active.length]
-  return (
-    <div className="bg-pine-deep text-emerald-50 text-[13px]" role="status">
-      <div className="mx-auto max-w-7xl px-4 py-1.5 flex items-center gap-2">
-        <span className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase ${n.kind === 'fpsc' ? 'bg-amber-400/90 text-emerald-950' : 'bg-emerald-700 text-emerald-50'}`}>
-          {n.kind === 'fpsc' ? 'FPSC' : 'CSS Vista'}
-        </span>
-        <Link to={n.link} className="truncate hover:underline underline-offset-2">{n.text}</Link>
-        <button
-          aria-label="Dismiss notification"
-          className="ml-auto shrink-0 rounded p-0.5 hover:bg-white/10 transition-colors"
-          onClick={() => setDismissed((d) => [...d, n.id])}
-        >
-          <X className="h-3.5 w-3.5" />
-        </button>
-      </div>
-    </div>
-  )
+interface FlatNavigationLink {
+  label: string
+  to: string
+  icon: LucideIcon
 }
 
-function SearchBox() {
-  const [q, setQ] = useState('')
-  const [results, setResults] = useState<SearchResult[]>([])
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const t = setTimeout(() => setResults(searchSite(q, 8)), 150)
-    return () => clearTimeout(t)
-  }, [q])
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+const desktopMoreLinks = (() => {
+  const collected: FlatNavigationLink[] = [...mobileQuickLinks]
+  nav.forEach((item) => {
+    if ('items' in item && item.items) {
+      item.items.forEach((sub) => collected.push(sub))
+    } else if ('to' in item && item.to) {
+      collected.push({ label: item.label, to: item.to, icon: Grid2X2 })
     }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
-
-  return (
-    <div ref={ref} className="relative w-full max-w-xs">
-      <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-      <input
-        value={q}
-        onChange={(e) => { setQ(e.target.value); setOpen(true) }}
-        onFocus={() => setOpen(true)}
-        placeholder="Search subjects, notes, MCQs…"
-        aria-label="Search the website"
-        className="h-9 w-full rounded-md border border-input bg-white pl-8 pr-3 text-sm outline-none ring-ring transition-shadow focus:ring-2"
-      />
-      {open && q.length >= 2 && (
-        <div className="absolute right-0 top-10 z-50 w-[min(90vw,420px)] overflow-hidden rounded-lg border bg-white shadow-lg">
-          {results.length === 0 ? (
-            <div className="p-4 text-sm text-muted-foreground">
-              No results for “{q}”. Try a subject name, topic, or keyword like “precis”.
-            </div>
-          ) : (
-            <ul className="max-h-80 overflow-y-auto py-1">
-              {results.map((r) => (
-                <li key={r.id}>
-                  <button
-                    className="block w-full px-3 py-2 text-left transition-colors hover:bg-secondary"
-                    onClick={() => { setOpen(false); setQ(''); navigate(r.link) }}
-                  >
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-emerald-800/70">{r.category}</span>
-                    <div className="truncate text-sm font-medium text-foreground">{r.title}</div>
-                    <div className="truncate text-xs text-muted-foreground">{r.snippet}</div>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </div>
+  })
+  return collected.filter(
+    (item, index, all) => all.findIndex((candidate) => candidate.to === item.to) === index,
   )
-}
+})()
 
-const featureTickerItems: Notification[] = [
-  { id: 'feature-mpt', kind: 'platform', text: 'Prepare MPT subject-wise and attempt a scheduled full mock every 3 days.', link: '/mpt' },
-  { id: 'feature-pms-gk-mock', kind: 'platform', text: 'A new 100-question PMS GK Grand Mock becomes available every 2 days after completion.', link: '/gk/quiz?mode=pms-mock' },
-  { id: 'feature-revision', kind: 'platform', text: 'Smart Revision automatically brings questions back after 1, 3, 7, 14, 30 and 60 days.', link: '/gk' },
-  { id: 'feature-daily', kind: 'platform', text: 'Build consistency with the Daily Five-Minute Challenge and unlimited visit streak.', link: '/five-minute' },
-  { id: 'feature-planner', kind: 'platform', text: 'Create a personal CSS study plan based on your subjects, available hours and progress.', link: '/study-planner' },
-  { id: 'feature-evaluation', kind: 'platform', text: 'Prepare answers for evaluation by Miss Sadia Zahoor, PAS.', link: '/answer-evaluation' },
-  { id: 'feature-custom-test-series', kind: 'platform', text: 'Build a customized CSS test series with subjects, dates and fee calculation for Miss Sadia Zahoor, PAS.', link: '/test-series' },
-  { id: 'feature-notes', kind: 'platform', text: 'Explore handwritten notes by Miss Sadia Zahoor, PAS and the complete notes library.', link: '/handwritten-notes' },
-  { id: 'feature-lectures', kind: 'platform', text: 'Free CSS Vista lectures cover compulsory and selected optional subjects.', link: '/lectures' },
-  { id: 'feature-papers', kind: 'platform', text: 'Browse organised CSS, PMS and PPSC past papers with View and Download controls.', link: '/past-papers' },
-  { id: 'feature-library', kind: 'platform', text: 'Search One-Liner GK, book summaries, grammar courses and study resources in one place.', link: '/one-liner-gk' },
-]
-
-function LiveTicker() {
+function NotificationBar() {
   const [hidden, setHidden] = useState(false)
-  const [now, setNow] = useState(() => new Date())
+  const [deviceTime, setDeviceTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
   const { user, syncStatus, lastSyncedAt } = useAccount()
-  const items = [...notifications, ...featureTickerItems].filter((n) => !n.expires || new Date(n.expires) > new Date())
+  const active = [...notifications, ...featureAnnouncements].filter(
+    (item) => !item.expires || new Date(item.expires) > new Date(),
+  )
 
   useEffect(() => {
-    const clock = window.setInterval(() => setNow(new Date()), 1000)
-    const on = () => setOnline(true)
-    const off = () => setOnline(false)
-    window.addEventListener('online', on)
-    window.addEventListener('offline', off)
+    const clock = window.setInterval(() => setDeviceTime(new Date()), 1000)
+    const updateConnection = () => setOnline(navigator.onLine)
+    window.addEventListener('online', updateConnection)
+    window.addEventListener('offline', updateConnection)
     return () => {
       window.clearInterval(clock)
-      window.removeEventListener('online', on)
-      window.removeEventListener('offline', off)
+      window.removeEventListener('online', updateConnection)
+      window.removeEventListener('offline', updateConnection)
     }
   }, [])
 
-  if (!items.length || hidden) return null
+  if (!active.length || hidden) return null
 
-  const status = !online
+  const syncLabel = !online
     ? 'Offline - device copy'
     : user
       ? syncStatus === 'syncing'
@@ -237,25 +157,37 @@ function LiveTicker() {
             ? 'Progress synced'
             : 'Account connected'
       : 'Saved on device'
-  const time = new Intl.DateTimeFormat(void 0, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(now)
+  const timeLabel = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  }).format(deviceTime)
 
   return (
     <div className="bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <span className="shrink-0 rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">Live</span>
+        <span className="shrink-0 rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">
+          Live
+        </span>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
           <div className="vista-live-ticker-track flex w-max items-center">
-            {[false, true].map((copy) => (
-              <div key={copy ? 'duplicate' : 'primary'} className="flex shrink-0 items-center" aria-hidden={copy || undefined}>
-                {items.map((n) => (
+            {[false, true].map((duplicate) => (
+              <div
+                key={duplicate ? 'duplicate' : 'primary'}
+                className="flex shrink-0 items-center"
+                aria-hidden={duplicate || undefined}
+              >
+                {active.map((item) => (
                   <Link
-                    key={`${copy ? 'copy-' : ''}${n.id}`}
-                    to={n.link}
-                    tabIndex={copy ? -1 : undefined}
+                    key={`${duplicate ? 'copy-' : ''}${item.id}`}
+                    to={item.link}
+                    tabIndex={duplicate ? -1 : undefined}
                     className="group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs text-emerald-50/90 outline-none hover:text-white focus:text-white sm:text-[13px]"
                   >
-                    <span className={`mr-2 h-1.5 w-1.5 rounded-full ${n.kind === 'fpsc' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
-                    <span className="underline-offset-2 group-hover:underline group-focus:underline">{n.text}</span>
+                    <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.kind === 'fpsc' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
+                    <span className="underline-offset-2 group-hover:underline group-focus:underline">
+                      {item.text}
+                    </span>
                   </Link>
                 ))}
               </div>
@@ -267,9 +199,9 @@ function LiveTicker() {
           title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Progress status and time from this device'}
         >
           <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-          <span>{status}</span>
+          <span>{syncLabel}</span>
           <span className="text-emerald-200/50">·</span>
-          <time dateTime={now.toISOString()}>{time}</time>
+          <time dateTime={deviceTime.toISOString()}>{timeLabel}</time>
         </div>
         <button
           aria-label="Hide live updates"
@@ -279,6 +211,91 @@ function LiveTicker() {
           <X className="h-3.5 w-3.5" />
         </button>
       </div>
+    </div>
+  )
+}
+
+function SearchBox({ onSelect, autoFocus = false }: { onSelect?: () => void; autoFocus?: boolean }) {
+  const [q, setQ] = useState('')
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [loading, setLoading] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let active = true
+    if (q.trim().length < 2) {
+      return () => { active = false }
+    }
+    const timer = window.setTimeout(() => {
+      searchSite(q, 12)
+        .then((nextResults) => {
+          if (active) setResults(nextResults)
+        })
+        .finally(() => {
+          if (active) setLoading(false)
+        })
+    }, 180)
+    return () => {
+      active = false
+      window.clearTimeout(timer)
+    }
+  }, [q])
+
+  return (
+    <div ref={ref} className="w-full">
+      <div className="relative">
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-emerald-800" />
+        <input
+          value={q}
+          onChange={(event) => {
+            const nextQuery = event.target.value
+            setQ(nextQuery)
+            if (nextQuery.trim().length < 2) {
+              setResults([])
+              setLoading(false)
+            } else {
+              setLoading(true)
+            }
+          }}
+          autoFocus={autoFocus}
+          placeholder="Search subjects, lectures, notes, papers, books and GK..."
+          aria-label="Search the entire website"
+          className="h-12 w-full rounded-xl border border-input bg-white pl-10 pr-3 text-sm outline-none ring-ring transition-shadow focus:ring-2"
+        />
+      </div>
+      {q.trim().length < 2 ? (
+        <p className="px-1 pt-3 text-xs text-muted-foreground">
+          Type at least two letters. Press Ctrl+K or Command+K anywhere to open search.
+        </p>
+      ) : loading ? (
+        <div className="space-y-2 py-4" aria-label="Searching CSS Vista">
+          {[1, 2, 3].map((item) => <div key={item} className="h-14 animate-pulse rounded-lg bg-secondary" />)}
+        </div>
+      ) : results.length === 0 ? (
+        <div className="py-6 text-center text-sm text-muted-foreground">
+          No results for “{q}”. Try a subject, year, author, lecture topic or GK category.
+        </div>
+      ) : (
+        <ul className="mt-3 max-h-[min(55vh,430px)] overflow-y-auto rounded-xl border py-1">
+          {results.map((result) => (
+            <li key={`${result.category}-${result.id}`}>
+              <button
+                className="block w-full px-4 py-3 text-left transition-colors hover:bg-secondary"
+                onClick={() => {
+                  setQ('')
+                  onSelect?.()
+                  navigate(result.link)
+                }}
+              >
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-emerald-800/70">{result.category}</span>
+                <div className="line-clamp-2 text-sm font-semibold text-foreground">{result.title}</div>
+                <div className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{result.snippet}</div>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -384,9 +401,20 @@ export default function Layout() {
     })
   }, [currentRoute, navigationType])
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [mobileOpen])
+  }, [mobileOpen, searchOpen])
+  useEffect(() => {
+    const openSearch = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLocaleLowerCase() === 'k') {
+        event.preventDefault()
+        setSearchOpen(true)
+      }
+      if (event.key === 'Escape') setSearchOpen(false)
+    }
+    window.addEventListener('keydown', openSearch)
+    return () => window.removeEventListener('keydown', openSearch)
+  }, [])
 
   const goBack = () => {
     if (routeHistory.length > 1) {
@@ -405,11 +433,11 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <LiveTicker />
+      <AdSenseLoader />
       <NotificationBar />
       <NotificationOptInBar />
       <header className="sticky top-0 z-40 border-b bg-white/95 shadow-[0_6px_24px_rgba(8,76,49,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="mx-auto flex h-[76px] max-w-[1520px] items-center gap-3 px-4 sm:px-6 xl:h-[92px] xl:px-6">
+        <div className="mx-auto flex h-[76px] max-w-[1520px] items-center gap-1 px-3 sm:gap-3 sm:px-6 xl:h-[92px] xl:px-6">
           <button
             className="rounded-lg p-2 hover:bg-secondary xl:hidden"
             onClick={() => setMobileOpen(true)}
@@ -419,7 +447,7 @@ export default function Layout() {
           </button>
 
           <div className="flex flex-1 justify-center xl:flex-none">
-            <Logo className="h-11 w-auto max-w-[160px] object-contain sm:h-14 sm:max-w-[220px] xl:h-[70px] xl:max-w-[270px]" />
+            <Logo className="h-11 w-auto max-w-[132px] object-contain sm:h-14 sm:max-w-[220px] xl:h-[70px] xl:max-w-[270px]" />
           </div>
 
           <nav className="ml-auto hidden items-stretch gap-1 xl:flex" aria-label="Main navigation">
@@ -455,66 +483,51 @@ export default function Layout() {
                 <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDrop === 'More' ? 'rotate-180' : ''}`} />
               </button>
               <div
-                className={`absolute right-0 top-full z-50 mt-1 grid max-h-[72vh] w-[min(90vw,640px)] origin-top-right grid-cols-2 gap-4 overflow-y-auto rounded-xl border bg-white p-4 shadow-xl transition-all duration-150 ${
+                className={`absolute right-0 top-full z-50 mt-1 max-h-[76vh] w-[min(90vw,390px)] origin-top-right overflow-y-auto rounded-xl border bg-white p-2 shadow-xl transition-all duration-150 ${
                   openDrop === 'More' ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0'
                 }`}
               >
-                {nav
-                  .filter((item) => !('to' in item) || !primaryNav.some((primary) => primary.to === item.to))
-                  .map((item) =>
-                    'to' in item ? (
-                      <NavLink
-                        key={item.label}
-                        to={item.to!}
-                        className="rounded-lg border bg-secondary/40 px-3 py-2 text-sm font-semibold text-pine hover:bg-secondary"
-                      >
-                        {item.label}
-                      </NavLink>
-                    ) : (
-                      <div key={item.label}>
-                        <p className="px-2 text-[10px] font-bold uppercase tracking-wider text-emerald-800/60">
-                          {item.label}
-                        </p>
-                        <div className="mt-1 space-y-0.5">
-                          {item.items
-                            .filter((sub) => !primaryNav.some((primary) => primary.to === sub.to))
-                            .map((sub) => (
-                              <NavLink
-                                key={sub.to}
-                                to={sub.to}
-                                className={({ isActive }) =>
-                                  `flex items-center gap-2 rounded-md px-2 py-1.5 text-xs transition-colors ${
-                                    isActive ? 'bg-secondary font-semibold text-pine' : 'text-foreground/75 hover:bg-secondary'
-                                  }`
-                                }
-                              >
-                                <sub.icon className="h-3.5 w-3.5 text-emerald-800/70" />
-                                {sub.label}
-                              </NavLink>
-                            ))}
-                        </div>
-                      </div>
-                    ),
-                  )}
+                <div className="sticky top-0 z-10 mb-1 flex items-center justify-between rounded-lg bg-white px-3 py-2 shadow-sm">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-pine">All sections</p>
+                  <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                    {desktopMoreLinks.length}
+                  </span>
+                </div>
+                <div className="space-y-0.5">
+                  {desktopMoreLinks.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      end={item.to === '/'}
+                      onClick={() => setOpenDrop(null)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
+                          isActive
+                            ? 'bg-emerald-50 font-semibold text-pine'
+                            : 'text-foreground/80 hover:bg-secondary hover:text-pine'
+                        }`
+                      }
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-pine text-white">
+                        <item.icon className="h-3.5 w-3.5" />
+                      </span>
+                      <span>{item.label}</span>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
             </div>
           </nav>
 
-          <div className="relative hidden xl:block">
-            <button
-              onClick={() => setSearchOpen((open) => !open)}
-              className="rounded-full border bg-white p-2.5 text-pine transition-colors hover:bg-secondary"
-              aria-label="Search the website"
-              aria-expanded={searchOpen}
-            >
-              <Search className="h-4 w-4" />
-            </button>
-            {searchOpen && (
-              <div className="absolute right-0 top-12 w-80 rounded-xl border bg-white p-3 shadow-xl">
-                <SearchBox />
-              </div>
-            )}
-          </div>
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary"
+            aria-label="Search the entire website"
+            aria-expanded={searchOpen}
+            title="Search CSS Vista"
+          >
+            <Search className="h-4 w-4" />
+          </button>
 
           <NotificationCenter />
           <Link
@@ -526,6 +539,37 @@ export default function Layout() {
             <UserRound className="h-5 w-5" />
           </Link>
         </div>
+        {searchOpen && (
+          <div
+            className="fixed inset-0 z-[80] flex items-start justify-center bg-emerald-950/65 px-3 pt-[8vh] backdrop-blur-sm sm:px-5"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="universal-search-title"
+            onMouseDown={(event) => {
+              if (event.currentTarget === event.target) setSearchOpen(false)
+            }}
+          >
+            <section className="w-full max-w-2xl rounded-2xl border bg-white p-4 shadow-2xl sm:p-5">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <h2 id="universal-search-title" className="font-display text-xl font-bold text-pine">
+                    Search CSS Vista
+                  </h2>
+                  <p className="text-xs text-muted-foreground">One search across the complete preparation platform.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(false)}
+                  className="rounded-full border p-2 text-pine hover:bg-secondary"
+                  aria-label="Close website search"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <SearchBox autoFocus onSelect={() => setSearchOpen(false)} />
+            </section>
+          </div>
+        )}
         <BackBar onBack={goBack} />
       </header>
 
@@ -548,13 +592,15 @@ export default function Layout() {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="border-b px-4 py-3 md:hidden">
-          <SearchBox />
-        </div>
         <nav className="flex-1 overflow-y-auto px-3 py-3" aria-label="Mobile">
-          <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
-            Main categories
-          </p>
+          <div className="flex items-center justify-between px-2 pb-2">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+              Main categories
+            </p>
+            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold text-emerald-800">
+              {mobileQuickLinks.length} sections
+            </span>
+          </div>
           <div className="grid grid-cols-2 gap-2 pb-4">
             {mobileQuickLinks.map((item) => (
               <NavLink
@@ -619,6 +665,8 @@ export default function Layout() {
         </nav>
       </aside>
 
+      <PageHeaderAd />
+
       <main className="flex-1">
         <div
           key={location.key}
@@ -631,6 +679,8 @@ export default function Layout() {
           <Outlet />
         </div>
       </main>
+
+      <PageFooterAd />
 
       <footer className="border-t border-t-amber-500/30 bg-cream">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -652,12 +702,16 @@ export default function Layout() {
             <h3 className="text-sm font-semibold text-foreground">Library & Tools</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link className="hover:text-pine transition-colors" to="/notes">Notes Library</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/handwritten-notes">Handwritten Notes by Miss Sadia Zahoor, PAS</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/lectures">Free CSS Vista Lectures</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/past-papers">Past Papers</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/books">Books by Sir Ali</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/book-summaries">Book Summaries</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/opinions">Opinions by Authors</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/test-series">Test Series Announcement</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Test Series</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/dashboard">Performance Dashboard</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/study-planner">My CSS Study Planner</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/answer-evaluation">Answer Evaluation</Link></li>
             </ul>
           </div>
           <div>

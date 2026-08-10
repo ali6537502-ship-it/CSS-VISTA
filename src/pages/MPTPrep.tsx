@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState, type ComponentType } from 'react'
 import { Link } from 'react-router'
 import {
   BookOpen, Brain, Calculator, Clock, FileText, Globe2, Languages, Layers,
-  MoonStar, Shuffle, Upload,
+  LockKeyhole, MoonStar, Shuffle, Upload,
 } from 'lucide-react'
 import { PageHeader, Section, OfficialNotice, Badge } from '@/components/shared'
 import { questions as seedQuestions, quizCategories } from '@/data/quiz'
 import QuizEngine from '@/components/QuizEngine'
-import { getState } from '@/lib/store'
+import { getMockAvailability, getState } from '@/lib/store'
 import { mergedMcqs } from '@/lib/admin'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
@@ -108,6 +108,7 @@ export default function MPTPrep() {
 
   const history = getState().quizResults.filter((r) => r.type === 'mpt' || r.type === 'quiz').slice(0, 8)
   const bookmarked = getState().bookmarks.filter((b) => b.startsWith('q-')).length
+  const mptMock = getMockAvailability('mpt')
 
   function startMode(nextMode: Mode) {
     if (nextMode === 'random' || nextMode === 'mock') {
@@ -138,13 +139,37 @@ export default function MPTPrep() {
                 { id: 'subject' as Mode, icon: Layers, title: 'Subject / topic-wise quiz', desc: 'Choose a subject, then narrow to a topic' },
                 { id: 'random' as Mode, icon: Shuffle, title: 'Random quiz', desc: 'A shuffled mix from the whole bank' },
                 { id: 'mock' as Mode, icon: Clock, title: 'Full MPT mock test', desc: 'Up to 50 mixed questions under time' },
-              ].map((m) => (
-                <button key={m.title} onClick={() => startMode(m.id)} className="group rounded-lg border bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-800/40 hover:shadow-md">
-                  <m.icon className="h-5 w-5 text-emerald-800" />
-                  <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
-                  <div className="mt-0.5 text-[13px] text-muted-foreground">{m.desc}</div>
-                </button>
-              ))}
+              ].map((m) => {
+                if (m.id === 'mock') {
+                  return mptMock.available ? (
+                    <Link
+                      key={m.title}
+                      to="/gk/quiz?mode=mpt-mock"
+                      data-google-vignette="false"
+                      className="group rounded-lg border bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-800/40 hover:shadow-md"
+                    >
+                      <m.icon className="h-5 w-5 text-emerald-800" />
+                      <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">50 questions across every MPT area. Available once every 3 days.</div>
+                    </Link>
+                  ) : (
+                    <div key={m.title} className="rounded-lg border bg-secondary/45 p-4 text-left">
+                      <LockKeyhole className="h-5 w-5 text-amber-700" />
+                      <div className="mt-2 font-semibold">{m.title}</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">
+                        Next available {new Date(mptMock.nextAvailableAt!).toLocaleString()}
+                      </div>
+                    </div>
+                  )
+                }
+                return (
+                  <button key={m.title} onClick={() => startMode(m.id)} className="group rounded-lg border bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-800/40 hover:shadow-md">
+                    <m.icon className="h-5 w-5 text-emerald-800" />
+                    <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
+                    <div className="mt-0.5 text-[13px] text-muted-foreground">{m.desc}</div>
+                  </button>
+                )
+              })}
               <div className="rounded-lg border bg-secondary/60 p-4">
                 <FileText className="h-5 w-5 text-emerald-800" />
                 <div className="mt-2 font-semibold">Daily MCQ challenge</div>
@@ -260,9 +285,19 @@ export default function MPTPrep() {
                 })}
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Link to="/gk/quiz?mode=mock" className="inline-flex h-9 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-                  <Clock className="h-4 w-4" /> Full MPT-style mock from the central bank
-                </Link>
+                {mptMock.available ? (
+                  <Link
+                    to="/gk/quiz?mode=mpt-mock"
+                    data-google-vignette="false"
+                    className="inline-flex h-9 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"
+                  >
+                    <Clock className="h-4 w-4" /> Start the scheduled MPT mock
+                  </Link>
+                ) : (
+                  <span className="inline-flex h-9 items-center gap-1.5 rounded-md border bg-secondary px-4 text-sm font-semibold text-muted-foreground">
+                    <LockKeyhole className="h-4 w-4" /> MPT mock unlocks {new Date(mptMock.nextAvailableAt!).toLocaleDateString()}
+                  </span>
+                )}
                 <Link to="/gk" className="inline-flex h-9 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine hover:bg-secondary">
                   Open GK World
                 </Link>
@@ -331,7 +366,17 @@ export default function MPTPrep() {
                     Start quiz ({pool.length} in pool)
                   </button>
                   <button onClick={() => startMode('random')} className="h-11 rounded-md border px-6 text-sm font-semibold hover:bg-secondary">Random quiz</button>
-                  <button onClick={() => startMode('mock')} className="h-11 rounded-md border px-6 text-sm font-semibold hover:bg-secondary">Full mock test</button>
+                  {mptMock.available ? (
+                    <Link
+                      to="/gk/quiz?mode=mpt-mock"
+                      data-google-vignette="false"
+                      className="inline-flex h-11 items-center rounded-md border px-6 text-sm font-semibold hover:bg-secondary"
+                    >
+                      Full mock test
+                    </Link>
+                  ) : (
+                    <button type="button" disabled className="h-11 rounded-md border px-6 text-sm font-semibold opacity-50">Mock locked</button>
+                  )}
                 </div>
               </div>
             </Section>

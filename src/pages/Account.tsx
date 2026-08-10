@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   CheckCircle2, Cloud, LoaderCircle, LockKeyhole, LogOut, Mail, RefreshCw,
   ShieldCheck, UserRound,
@@ -8,19 +8,25 @@ import { PageHeader } from '@/components/shared'
 import { useAccount } from '@/lib/accountContext'
 
 type Mode = 'sign-in' | 'create'
+const googleAuthEnabled = import.meta.env.VITE_SUPABASE_GOOGLE_AUTH_ENABLED === 'true'
 
 export default function Account() {
   const {
     configured, loading, user, signIn, signUp, signInWithGoogle, signOut,
+    requestPasswordReset, updatePassword,
     syncNow, syncStatus, syncError, lastSyncedAt,
   } = useAccount()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [mode, setMode] = useState<Mode>('sign-in')
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [newPassword, setNewPassword] = useState('')
+  const [updatingPassword, setUpdatingPassword] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const resetMode = searchParams.get('reset') === '1'
 
   async function submit(event: FormEvent) {
     event.preventDefault()
@@ -38,6 +44,39 @@ export default function Account() {
     if (result.confirmationRequired) {
       setMessage('Check your email to confirm the account, then return here to sign in.')
     }
+  }
+
+  async function sendPasswordReset() {
+    setMessage('')
+    setError('')
+    if (!email.trim()) {
+      setError('Enter your email address first.')
+      return
+    }
+    setSubmitting(true)
+    const result = await requestPasswordReset(email.trim())
+    setSubmitting(false)
+    if (result.error) {
+      setError(result.error)
+      return
+    }
+    setMessage('If an account exists for this email, a secure password-reset link has been sent.')
+  }
+
+  async function saveNewPassword(event: FormEvent) {
+    event.preventDefault()
+    setMessage('')
+    setError('')
+    setUpdatingPassword(true)
+    const result = await updatePassword(newPassword)
+    setUpdatingPassword(false)
+    if (result.error) {
+      setError(result.error)
+      return
+    }
+    setNewPassword('')
+    setSearchParams({})
+    setMessage('Your password has been updated successfully.')
   }
 
   const displayName = typeof user?.user_metadata?.full_name === 'string'
@@ -74,8 +113,39 @@ export default function Account() {
             </Link>
           </div>
         ) : user ? (
-          <div className="grid gap-5 md:grid-cols-[1.15fr_.85fr]">
-            <section className="vista-card p-6">
+          <div className="space-y-5">
+            {resetMode && (
+              <form onSubmit={saveNewPassword} className="vista-card border-l-4 border-l-amber-400 p-6">
+                <h2 className="text-xl font-bold text-pine">Choose a new password</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Use at least eight characters. This replaces the old password immediately.
+                </p>
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                  <input
+                    type="password"
+                    value={newPassword}
+                    onChange={(event) => setNewPassword(event.target.value)}
+                    required
+                    minLength={8}
+                    autoComplete="new-password"
+                    className="h-11 flex-1 rounded-md border bg-white px-3 outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="New password"
+                  />
+                  <button
+                    type="submit"
+                    disabled={updatingPassword}
+                    className="flex h-11 items-center justify-center gap-2 rounded-md bg-pine px-5 text-sm font-semibold text-white disabled:opacity-60"
+                  >
+                    {updatingPassword && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                    Save new password
+                  </button>
+                </div>
+              </form>
+            )}
+            {message && <p className="rounded-md bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{message}</p>}
+            {error && <p className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
+            <div className="grid gap-5 md:grid-cols-[1.15fr_.85fr]">
+              <section className="vista-card p-6">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-pine">
                 <UserRound className="h-7 w-7" />
               </span>
@@ -98,8 +168,8 @@ export default function Account() {
                   <LogOut className="h-4 w-4" /> Sign out
                 </button>
               </div>
-            </section>
-            <section className="vista-card p-6">
+              </section>
+              <section className="vista-card p-6">
               <h2 className="flex items-center gap-2 text-lg font-bold text-pine">
                 <Cloud className="h-5 w-5" /> Progress sync
               </h2>
@@ -121,7 +191,8 @@ export default function Account() {
                 </p>
               )}
               {syncError && <p className="mt-3 text-xs font-medium text-red-700">{syncError}</p>}
-            </section>
+              </section>
+            </div>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-[1fr_.85fr]">
@@ -199,17 +270,31 @@ export default function Account() {
                   {submitting && <LoaderCircle className="h-4 w-4 animate-spin" />}
                   {mode === 'sign-in' ? 'Sign in securely' : 'Create my account'}
                 </button>
+                {mode === 'sign-in' && (
+                  <button
+                    type="button"
+                    onClick={() => void sendPasswordReset()}
+                    disabled={submitting}
+                    className="w-full text-center text-sm font-semibold text-emerald-800 underline-offset-4 hover:underline disabled:opacity-60"
+                  >
+                    Forgot your password?
+                  </button>
+                )}
               </form>
 
-              <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
-                <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
-              </div>
-              <button
-                onClick={() => void signInWithGoogle()}
-                className="flex h-11 w-full items-center justify-center rounded-md border bg-white px-4 text-sm font-semibold hover:bg-secondary"
-              >
-                Continue with Google
-              </button>
+              {googleAuthEnabled && (
+                <>
+                  <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
+                  </div>
+                  <button
+                    onClick={() => void signInWithGoogle()}
+                    className="flex h-11 w-full items-center justify-center rounded-md border bg-white px-4 text-sm font-semibold hover:bg-secondary"
+                  >
+                    Continue with Google
+                  </button>
+                </>
+              )}
             </section>
 
             <aside className="vista-card h-fit p-5 sm:p-6">

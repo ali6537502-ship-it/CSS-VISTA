@@ -88,5 +88,74 @@ export const notifications: Notification[] = [
   },
 ]
 
+export const featureAnnouncements: Notification[] = [
+  {
+    id: 'feature-mpt',
+    kind: 'platform',
+    text: 'Prepare MPT subject-wise and attempt a scheduled full mock every 3 days.',
+    link: '/mpt',
+  },
+  {
+    id: 'feature-pms-gk-mock',
+    kind: 'platform',
+    text: 'A new 100-question PMS GK Grand Mock becomes available every 2 days after completion.',
+    link: '/gk/quiz?mode=pms-mock',
+  },
+  {
+    id: 'feature-revision',
+    kind: 'platform',
+    text: 'Smart Revision automatically brings questions back after 1, 3, 7, 14, 30 and 60 days.',
+    link: '/gk',
+  },
+  {
+    id: 'feature-daily',
+    kind: 'platform',
+    text: 'Build consistency with the Daily Five-Minute Challenge and unlimited visit streak.',
+    link: '/five-minute',
+  },
+  {
+    id: 'feature-planner',
+    kind: 'platform',
+    text: 'Create a personal CSS study plan based on your subjects, available hours and progress.',
+    link: '/study-planner',
+  },
+  {
+    id: 'feature-evaluation',
+    kind: 'platform',
+    text: 'Prepare answers for evaluation by Miss Sadia Zahoor, PAS.',
+    link: '/answer-evaluation',
+  },
+  {
+    id: 'feature-custom-test-series',
+    kind: 'platform',
+    text: 'Build a customized CSS test series with subjects, dates and fee calculation for Miss Sadia Zahoor, PAS.',
+    link: '/test-series',
+  },
+  {
+    id: 'feature-notes',
+    kind: 'platform',
+    text: 'Explore handwritten notes by Miss Sadia Zahoor, PAS and the complete notes library.',
+    link: '/handwritten-notes',
+  },
+  {
+    id: 'feature-lectures',
+    kind: 'platform',
+    text: 'Free CSS Vista lectures cover compulsory and selected optional subjects.',
+    link: '/lectures',
+  },
+  {
+    id: 'feature-papers',
+    kind: 'platform',
+    text: 'Browse organised CSS, PMS and PPSC past papers with View and Download controls.',
+    link: '/past-papers',
+  },
+  {
+    id: 'feature-library',
+    kind: 'platform',
+    text: 'Search One-Liner GK, book summaries, grammar courses and study resources in one place.',
+    link: '/one-liner-gk',
+  },
+]
+
 export const fpscVerificationNote =
   'Rules and dates may change. Always confirm current information from the official FPSC notice linked on this page.'

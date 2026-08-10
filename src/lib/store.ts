@@ -25,6 +25,52 @@ export interface SavedAnswer {
   date: string
 }
 
+export type ScheduledMockKind = 'mpt' | 'gk'
+
+export interface MockScheduleEntry {
+  lastCompletedAt: string
+  nextAvailableAt: string
+  attempts: number
+}
+
+export interface StudyPlannerSettings {
+  examDate: string
+  dailyHours: number
+  restDay: number
+  selectedOptionals: string[]
+  configuredAt: string
+}
+
+export interface EvaluationRequest {
+  id: string
+  subject: string
+  question: string
+  answer: string
+  notes: string
+  wordCount: number
+  status: 'draft' | 'request-sent'
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CustomTestSeriesRequest {
+  id: string
+  studentName: string
+  phone: string
+  subjects: string[]
+  testCount: number
+  schedulingMode: 'automatic' | 'fixed-gap'
+  startDate: string
+  durationDays: number
+  gapDays: number
+  schedule: Array<{ number: number; date: string; subject: string }>
+  unitPrice: number | null
+  totalFee: number | null
+  status: 'draft' | 'request-sent'
+  createdAt: string
+  updatedAt: string
+}
+
 export interface VistaState {
   quizResults: QuizResult[]
   savedAnswers: SavedAnswer[]
@@ -38,30 +84,12 @@ export interface VistaState {
   testSchedules: any[]
   gameHighScores: Record<string, number>
   goalText: string
+  mockSchedule: Partial<Record<ScheduledMockKind, MockScheduleEntry>>
   studyPlanner: StudyPlannerSettings | null
-  planTaskCompletions: Record<string, string[]> // ISO date -> completed task ids
+  planTaskCompletions: Record<string, string[]>
   evaluationRequests: EvaluationRequest[]
+  customTestSeriesRequests: CustomTestSeriesRequest[]
   reviews: Record<string, ReviewEntry> // MCQ id -> spaced-repetition state
-}
-
-export interface StudyPlannerSettings {
-  examDate: string // ISO date
-  dailyHours: number
-  restDay: number // 0 = Sunday
-  selectedOptionals: string[]
-  configuredAt?: string
-}
-
-export interface EvaluationRequest {
-  id: string
-  subject: string
-  question: string
-  answer: string
-  notes: string
-  wordCount: number
-  status: 'draft' | 'request-sent'
-  createdAt: string
-  updatedAt: string
 }
 
 export interface ReviewEntry {
@@ -84,9 +112,11 @@ const empty: VistaState = {
   testSchedules: [],
   gameHighScores: {},
   goalText: '',
+  mockSchedule: {},
   studyPlanner: null,
   planTaskCompletions: {},
   evaluationRequests: [],
+  customTestSeriesRequests: [],
   reviews: {},
 }
 
@@ -267,6 +297,151 @@ export function setGoal(text: string) {
   save(s)
 }
 
+const MOCK_COOLDOWN_DAYS: Record<ScheduledMockKind, number> = {
+  mpt: 3,
+  gk: 2,
+}
+
+export interface MockAvailability {
+  available: boolean
+  cooldownDays: number
+  nextAvailableAt: string | null
+  remainingMs: number
+  attempts: number
+}
+
+export function getMockAvailability(kind: ScheduledMockKind, now = new Date()): MockAvailability {
+  const entry = getState().mockSchedule?.[kind]
+  const cooldownDays = MOCK_COOLDOWN_DAYS[kind]
+  if (!entry?.nextAvailableAt) {
+    return {
+      available: true,
+      cooldownDays,
+      nextAvailableAt: null,
+      remainingMs: 0,
+      attempts: entry?.attempts ?? 0,
+    }
+  }
+
+  const nextTime = new Date(entry.nextAvailableAt).getTime()
+  const remainingMs = Math.max(0, nextTime - now.getTime())
+  return {
+    available: remainingMs === 0,
+    cooldownDays,
+    nextAvailableAt: entry.nextAvailableAt,
+    remainingMs,
+    attempts: entry.attempts,
+  }
+}
+
+export function recordScheduledMock(kind: ScheduledMockKind) {
+  const s = getState()
+  const completedAt = new Date()
+  const nextAvailable = new Date(completedAt)
+  nextAvailable.setDate(nextAvailable.getDate() + MOCK_COOLDOWN_DAYS[kind])
+  const previous = s.mockSchedule?.[kind]
+  s.mockSchedule = {
+    ...(s.mockSchedule ?? {}),
+    [kind]: {
+      lastCompletedAt: completedAt.toISOString(),
+      nextAvailableAt: nextAvailable.toISOString(),
+      attempts: (previous?.attempts ?? 0) + 1,
+    },
+  }
+  save(s)
+}
+
+export function saveStudyPlanner(settings: Omit<StudyPlannerSettings, 'configuredAt'>) {
+  const s = getState()
+  s.studyPlanner = {
+    ...settings,
+    dailyHours: Math.max(1, Math.min(12, settings.dailyHours)),
+    selectedOptionals: [...new Set(settings.selectedOptionals)],
+    configuredAt: new Date().toISOString(),
+  }
+  save(s)
+}
+
+export function togglePlanTask(date: string, taskId: string): boolean {
+  const s = getState()
+  const current = new Set(s.planTaskCompletions?.[date] ?? [])
+  const completed = !current.has(taskId)
+  if (completed) current.add(taskId)
+  else current.delete(taskId)
+  s.planTaskCompletions = {
+    ...(s.planTaskCompletions ?? {}),
+    [date]: [...current],
+  }
+  save(s)
+  return completed
+}
+
+export function saveEvaluationRequest(
+  request: Omit<EvaluationRequest, 'id' | 'createdAt' | 'updatedAt' | 'status'>,
+): EvaluationRequest {
+  const s = getState()
+  const now = new Date().toISOString()
+  const saved: EvaluationRequest = {
+    ...request,
+    id: `evaluation-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    status: 'draft',
+    createdAt: now,
+    updatedAt: now,
+  }
+  s.evaluationRequests = [saved, ...(s.evaluationRequests ?? [])].slice(0, 100)
+  save(s)
+  return saved
+}
+
+export function markEvaluationRequestSent(id: string) {
+  const s = getState()
+  s.evaluationRequests = (s.evaluationRequests ?? []).map((request) => (
+    request.id === id
+      ? { ...request, status: 'request-sent', updatedAt: new Date().toISOString() }
+      : request
+  ))
+  save(s)
+}
+
+export function deleteEvaluationRequest(id: string) {
+  const s = getState()
+  s.evaluationRequests = (s.evaluationRequests ?? []).filter((request) => request.id !== id)
+  save(s)
+}
+
+export function saveCustomTestSeriesRequest(
+  request: Omit<CustomTestSeriesRequest, 'id' | 'createdAt' | 'updatedAt' | 'status'>,
+): CustomTestSeriesRequest {
+  const state = getState()
+  const now = new Date().toISOString()
+  const saved: CustomTestSeriesRequest = {
+    ...request,
+    id: `series-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    status: 'draft',
+    createdAt: now,
+    updatedAt: now,
+  }
+  state.customTestSeriesRequests = [saved, ...(state.customTestSeriesRequests ?? [])].slice(0, 30)
+  save(state)
+  return saved
+}
+
+export function markCustomTestSeriesRequestSent(id: string) {
+  const state = getState()
+  state.customTestSeriesRequests = (state.customTestSeriesRequests ?? []).map((request) => (
+    request.id === id
+      ? { ...request, status: 'request-sent', updatedAt: new Date().toISOString() }
+      : request
+  ))
+  save(state)
+}
+
+export function deleteCustomTestSeriesRequest(id: string) {
+  const state = getState()
+  state.customTestSeriesRequests = (state.customTestSeriesRequests ?? []).filter((request) => request.id !== id)
+  save(state)
+}
+
 export function exportData(): string {
   return JSON.stringify(getState(), null, 2)
 }
@@ -313,65 +488,6 @@ export function getStats() {
 
   return { totalQuizzes, avgScore, accuracy, attempted, categories, weak, strong, savedAnswers: s.savedAnswers.length, bookmarks: s.bookmarks.length, streak: s.streakDays, challenges: s.completedChallenges.length }
 }
-
-
-// ---- Study planner ----
-
-export function saveStudyPlanner(settings: Omit<StudyPlannerSettings, 'configuredAt'>) {
-  const s = getState()
-  s.studyPlanner = { ...settings, configuredAt: new Date().toISOString() }
-  save(s)
-}
-
-export function togglePlanTask(date: string, taskId: string): boolean {
-  const s = getState()
-  const list = s.planTaskCompletions[date] ?? []
-  const done = !list.includes(taskId)
-  s.planTaskCompletions[date] = done ? [...list, taskId] : list.filter((id) => id !== taskId)
-  save(s)
-  return done
-}
-
-// ---- Answer evaluation drafts ----
-
-export function saveEvaluationDraft(input: { subject: string; question: string; answer: string; notes: string; wordCount: number }): EvaluationRequest {
-  const s = getState()
-  const now = new Date().toISOString()
-  const existing = s.evaluationRequests.find((r) => r.question === input.question && r.subject === input.subject)
-  if (existing) {
-    Object.assign(existing, input, { updatedAt: now })
-    save(s)
-    return existing
-  }
-  const request: EvaluationRequest = {
-    id: Math.random().toString(36).slice(2),
-    ...input,
-    status: 'draft',
-    createdAt: now,
-    updatedAt: now,
-  }
-  s.evaluationRequests.unshift(request)
-  if (s.evaluationRequests.length > 100) s.evaluationRequests.length = 100
-  save(s)
-  return request
-}
-
-export function markEvaluationRequestSent(id: string) {
-  const s = getState()
-  const request = s.evaluationRequests.find((r) => r.id === id)
-  if (request) {
-    request.status = 'request-sent'
-    request.updatedAt = new Date().toISOString()
-    save(s)
-  }
-}
-
-export function deleteEvaluationDraft(id: string) {
-  const s = getState()
-  s.evaluationRequests = s.evaluationRequests.filter((r) => r.id !== id)
-  save(s)
-}
-
 // ---- Smart revision (spaced repetition for MCQs) ----
 
 // Intervals in days: questions come back after 1, 3, 7, 14, 30 and 60 days.

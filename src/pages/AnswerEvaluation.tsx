@@ -1,18 +1,17 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
-import { BadgeCheck, Clock3, MailCheck, Save, ShieldCheck, SquarePen, Trash2 } from 'lucide-react'
-import { PageHeader, Section, Badge } from '@/components/shared'
-import { useAccount } from '@/lib/accountContext'
 import {
-  getState,
-  saveEvaluationDraft,
-  markEvaluationRequestSent,
-  deleteEvaluationDraft,
+  CheckCircle2, Clock3, FileCheck2, MessageCircle, Save, ShieldCheck, Trash2,
+} from 'lucide-react'
+import { Badge, PageHeader, Section } from '@/components/shared'
+import { mentors, waLink } from '@/data/site'
+import {
+  deleteEvaluationRequest, getState, markEvaluationRequestSent, saveEvaluationRequest,
   type EvaluationRequest,
 } from '@/lib/store'
-import { mentors } from '@/data/site'
+import { useAccount } from '@/lib/accountContext'
 
-const COMPULSORY = [
+const compulsorySubjects = [
   'English Essay',
   'English (Precis & Composition)',
   'General Science & Ability',
@@ -20,42 +19,64 @@ const COMPULSORY = [
   'Pakistan Affairs',
   'Islamic Studies / Comparative Religion',
 ]
-const OPTIONAL = ['Political Science', 'Criminology', 'European History', 'Environmental Science', 'Punjabi']
-const ALL_SUBJECTS = [...COMPULSORY, ...OPTIONAL]
 
-function whatsappLink(number: string, message: string): string {
-  return `https://wa.me/${number}?text=${encodeURIComponent(message)}`
-}
+const optionalSubjects = [
+  'Political Science',
+  'Criminology',
+  'European History',
+  'Environmental Science',
+  'Punjabi',
+]
+
+const supportedSubjects = [...compulsorySubjects, ...optionalSubjects]
 
 export default function AnswerEvaluation() {
-  const [params] = useSearchParams()
-  const initial = params.get('subject')
-  const [subject, setSubject] = useState(initial && ALL_SUBJECTS.includes(initial) ? initial : ALL_SUBJECTS[0])
+  const [searchParams] = useSearchParams()
+  const requestedSubject = searchParams.get('subject')
+  const initialSubject = requestedSubject && supportedSubjects.includes(requestedSubject)
+    ? requestedSubject
+    : supportedSubjects[0]
+  const [subject, setSubject] = useState(initialSubject)
   const [question, setQuestion] = useState('')
   const [answer, setAnswer] = useState('')
   const [notes, setNotes] = useState('')
-  const [saved, setSaved] = useState<EvaluationRequest | null>(null)
-  const [requests, setRequests] = useState<EvaluationRequest[]>(() => getState().evaluationRequests ?? [])
+  const [savedRequest, setSavedRequest] = useState<EvaluationRequest | null>(null)
+  const [history, setHistory] = useState(() => getState().evaluationRequests ?? [])
   const { user, configured } = useAccount()
-  const sadia = mentors.find((m) => m.id === 'sadia')
-  const wordCount = useMemo(() => answer.trim().split(/\s+/).filter(Boolean).length, [answer])
+  const sadia = mentors.find((mentor) => mentor.id === 'sadia')!
+  const wordCount = useMemo(
+    () => answer.trim().split(/\s+/).filter(Boolean).length,
+    [answer],
+  )
 
-  function handleSave() {
+  function saveDraft() {
     if (!question.trim() || !answer.trim()) return
-    const request = saveEvaluationDraft({ subject, question: question.trim(), answer: answer.trim(), notes: notes.trim(), wordCount })
-    setSaved(request)
-    setRequests(getState().evaluationRequests ?? [])
+    const request = saveEvaluationRequest({
+      subject,
+      question: question.trim(),
+      answer: answer.trim(),
+      notes: notes.trim(),
+      wordCount,
+    })
+    setSavedRequest(request)
+    setHistory(getState().evaluationRequests ?? [])
   }
 
-  function handleRequest() {
-    let request = saved
+  function requestEvaluation() {
+    let request = savedRequest
     if (!request || request.question !== question.trim() || request.answer !== answer.trim()) {
       if (!question.trim() || !answer.trim()) return
-      request = saveEvaluationDraft({ subject, question: question.trim(), answer: answer.trim(), notes: notes.trim(), wordCount })
-      setSaved(request)
+      request = saveEvaluationRequest({
+        subject,
+        question: question.trim(),
+        answer: answer.trim(),
+        notes: notes.trim(),
+        wordCount,
+      })
+      setSavedRequest(request)
     }
     markEvaluationRequestSent(request.id)
-    setRequests(getState().evaluationRequests ?? [])
+    setHistory(getState().evaluationRequests ?? [])
     const message = [
       'Assalam-o-Alaikum Ma’am, I want to request answer evaluation through CSS Vista.',
       `Subject: ${request.subject}`,
@@ -63,16 +84,16 @@ export default function AnswerEvaluation() {
       `Word count: ${request.wordCount}`,
       'My answer draft is saved in CSS Vista. Please share the evaluation procedure, availability and fee.',
     ].join('\n')
-    if (sadia) window.open(whatsappLink(sadia.whatsapp, message), '_blank', 'noopener,noreferrer')
+    window.open(waLink(sadia.whatsapp, message), '_blank', 'noopener,noreferrer')
   }
 
-  function handleDelete(id: string) {
-    deleteEvaluationDraft(id)
-    setRequests(getState().evaluationRequests ?? [])
-    if (saved?.id === id) setSaved(null)
+  function removeRequest(id: string) {
+    deleteEvaluationRequest(id)
+    setHistory(getState().evaluationRequests ?? [])
+    if (savedRequest?.id === id) setSavedRequest(null)
   }
 
-  const ready = question.trim().length >= 10 && answer.trim().length >= 50
+  const canSubmit = question.trim().length >= 10 && answer.trim().length >= 50
 
   return (
     <div>
@@ -83,7 +104,7 @@ export default function AnswerEvaluation() {
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
         <section className="grid gap-3 sm:grid-cols-3">
           <div className="vista-card p-4">
-            <SquarePen className="h-5 w-5 text-emerald-800" />
+            <FileCheck2 className="h-5 w-5 text-emerald-800" />
             <p className="mt-2 text-2xl font-bold text-pine">11</p>
             <p className="text-xs text-muted-foreground">Supported CSS subjects</p>
           </div>
@@ -100,45 +121,86 @@ export default function AnswerEvaluation() {
         </section>
 
         <div className="grid gap-8 lg:grid-cols-[1.55fr_0.8fr]">
-          <Section title="Prepare your answer for evaluation" description="Your answer is not sent automatically. The final button opens a direct evaluation request.">
+          <Section
+            title="Prepare your answer for evaluation"
+            description="Your answer is not sent automatically. The final button opens a direct evaluation request."
+          >
             <div className="rounded-xl border bg-white p-5">
               <label className="block text-sm font-semibold text-pine">
                 Subject
-                <select value={subject} onChange={(e) => setSubject(e.target.value)} className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground">
+                <select
+                  value={subject}
+                  onChange={(event) => setSubject(event.target.value)}
+                  className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
+                >
                   <optgroup label="Compulsory subjects">
-                    {COMPULSORY.map((s) => <option key={s}>{s}</option>)}
+                    {compulsorySubjects.map((name) => <option key={name}>{name}</option>)}
                   </optgroup>
                   <optgroup label="Optional subjects">
-                    {OPTIONAL.map((s) => <option key={s}>{s}</option>)}
+                    {optionalSubjects.map((name) => <option key={name}>{name}</option>)}
                   </optgroup>
                 </select>
               </label>
+
               <label className="mt-4 block text-sm font-semibold text-pine">
                 Original question
-                <textarea value={question} onChange={(e) => setQuestion(e.target.value)} rows={3} placeholder="Paste or type the exact CSS question." className="mt-1.5 w-full rounded-md border p-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-ring" />
+                <textarea
+                  value={question}
+                  onChange={(event) => setQuestion(event.target.value)}
+                  rows={3}
+                  placeholder="Paste or type the exact CSS question."
+                  className="mt-1.5 w-full rounded-md border p-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-ring"
+                />
               </label>
+
               <label className="mt-4 block text-sm font-semibold text-pine">
                 Your complete answer
-                <textarea value={answer} onChange={(e) => setAnswer(e.target.value)} rows={18} placeholder="Write the outline and complete answer here." className="mt-1.5 w-full rounded-md border p-3 font-normal leading-relaxed text-foreground outline-none focus:ring-2 focus:ring-ring" />
+                <textarea
+                  value={answer}
+                  onChange={(event) => setAnswer(event.target.value)}
+                  rows={18}
+                  placeholder="Write the outline and complete answer here."
+                  className="mt-1.5 w-full rounded-md border p-3 font-normal leading-relaxed text-foreground outline-none focus:ring-2 focus:ring-ring"
+                />
               </label>
+
               <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
                 <span>{wordCount.toLocaleString()} words</span>
                 <span>Minimum draft: 50 characters</span>
               </div>
+
               <label className="mt-4 block text-sm font-semibold text-pine">
                 What should the evaluator focus on? <span className="font-normal text-muted-foreground">(optional)</span>
-                <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} placeholder="For example: thesis, structure, evidence, language or time management." className="mt-1.5 w-full rounded-md border p-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-ring" />
+                <textarea
+                  value={notes}
+                  onChange={(event) => setNotes(event.target.value)}
+                  rows={3}
+                  placeholder="For example: thesis, structure, evidence, language or time management."
+                  className="mt-1.5 w-full rounded-md border p-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-ring"
+                />
               </label>
+
               <div className="mt-5 flex flex-wrap gap-2">
-                <button type="button" onClick={handleSave} disabled={!ready} className="inline-flex h-10 items-center gap-2 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50">
+                <button
+                  type="button"
+                  onClick={saveDraft}
+                  disabled={!canSubmit}
+                  className="inline-flex h-10 items-center gap-2 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
+                >
                   <Save className="h-4 w-4" /> Save evaluation draft
                 </button>
-                <button type="button" onClick={handleRequest} disabled={!ready} className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-50">
-                  <MailCheck className="h-4 w-4" /> Request evaluation
+                <button
+                  type="button"
+                  onClick={requestEvaluation}
+                  disabled={!canSubmit}
+                  className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <MessageCircle className="h-4 w-4" /> Request evaluation
                 </button>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                Clicking “Request evaluation” opens WhatsApp with the subject and question details. Availability, turnaround time and any evaluation fee are confirmed directly by the mentor.
+                Clicking “Request evaluation” opens WhatsApp with the subject and question details. Availability,
+                turnaround time and any evaluation fee are confirmed directly by the mentor.
               </p>
             </div>
           </Section>
@@ -148,14 +210,15 @@ export default function AnswerEvaluation() {
               <div className="rounded-xl border bg-white p-4">
                 <p className="text-xs font-bold uppercase tracking-wide text-emerald-800">Compulsory</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {COMPULSORY.map((s) => <Badge key={s} tone="gray">{s}</Badge>)}
+                  {compulsorySubjects.map((name) => <Badge key={name} tone="gray">{name}</Badge>)}
                 </div>
                 <p className="mt-4 text-xs font-bold uppercase tracking-wide text-emerald-800">Optional</p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {OPTIONAL.map((s) => <Badge key={s} tone="gold">{s}</Badge>)}
+                  {optionalSubjects.map((name) => <Badge key={name} tone="gold">{name}</Badge>)}
                 </div>
               </div>
             </Section>
+
             <Section title="Saving and privacy">
               <div className="rounded-xl border bg-secondary/45 p-4 text-sm leading-relaxed text-muted-foreground">
                 {user
@@ -169,27 +232,37 @@ export default function AnswerEvaluation() {
         </div>
 
         <Section title="My evaluation drafts" description="Saved drafts and requests from this device or synced account.">
-          {requests.length === 0 ? (
-            <p className="rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">No evaluation draft has been saved yet.</p>
+          {history.length === 0 ? (
+            <p className="rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">
+              No evaluation draft has been saved yet.
+            </p>
           ) : (
             <div className="grid gap-3 md:grid-cols-2">
-              {requests.map((r) => (
-                <article key={r.id} className="rounded-xl border bg-white p-4">
+              {history.map((request) => (
+                <article key={request.id} className="rounded-xl border bg-white p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <Badge tone={r.status === 'request-sent' ? 'green' : 'gray'}>{r.status === 'request-sent' ? 'Request opened' : 'Draft'}</Badge>
-                      <h3 className="mt-2 line-clamp-2 font-bold text-pine">{r.question}</h3>
+                      <Badge tone={request.status === 'request-sent' ? 'green' : 'gray'}>
+                        {request.status === 'request-sent' ? 'Request opened' : 'Draft'}
+                      </Badge>
+                      <h3 className="mt-2 line-clamp-2 font-bold text-pine">{request.question}</h3>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {r.subject} · {r.wordCount} words · {new Date(r.updatedAt).toLocaleDateString()}
+                        {request.subject} · {request.wordCount} words · {new Date(request.updatedAt).toLocaleDateString()}
                       </p>
                     </div>
-                    <button type="button" onClick={() => handleDelete(r.id)} className="rounded-md p-2 text-muted-foreground hover:bg-red-50 hover:text-red-700" aria-label="Delete evaluation draft">
+                    <button
+                      type="button"
+                      onClick={() => removeRequest(request.id)}
+                      className="rounded-md p-2 text-muted-foreground hover:bg-red-50 hover:text-red-700"
+                      aria-label="Delete evaluation draft"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
-                  {r.status === 'request-sent' && (
+                  {request.status === 'request-sent' && (
                     <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-emerald-800">
-                      <BadgeCheck className="h-4 w-4" /> Contact request opened. Await direct confirmation from the mentor.
+                      <CheckCircle2 className="h-4 w-4" />
+                      Contact request opened. Await direct confirmation from the mentor.
                     </p>
                   )}
                 </article>

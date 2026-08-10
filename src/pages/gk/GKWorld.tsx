@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
-  Award, BookOpen, Brain, CalendarDays, Clock, Coins, Compass, Cpu, Flag,
+  Award, BookOpen, Brain, CalendarDays, ClipboardList, Coins, Compass, Cpu, Flag,
   Globe, History, Landmark, Layers, MapPin, Medal, Microscope, Moon, Mountain, Shuffle,
   Star, Sun, Target, Timer, TrendingUp, Trophy, Users, Waves, Zap, Bookmark, AlertTriangle,
-  CircleHelp, Sparkles, Dices, SlidersHorizontal, Search, Building2, Scroll, HeartPulse, RotateCcw,
-  Languages,
+  CircleHelp, Sparkles, Dices, SlidersHorizontal, Search, Building2, Scroll, HeartPulse,
+  Languages, LockKeyhole, RefreshCw,
   type LucideIcon,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
-import { getMistakes, savedMcqIds } from '@/lib/progress'
+import { getMistakes, getRevisionStats, savedMcqIds } from '@/lib/progress'
 import { mergedCategoryOverrides } from '@/lib/admin'
+import { getMockAvailability } from '@/lib/store'
 
 const catIcons: Record<string, LucideIcon> = {
   'world-geography': Globe, 'pakistan-geography': MapPin, mountains: Mountain, rivers: Waves,
@@ -32,11 +33,11 @@ const catIcons: Record<string, LucideIcon> = {
 const modes = [
   { id: 'one-liner', icon: BookOpen, title: 'One-Liner GK Notes', desc: 'Searchable facts organised by topic', to: '/one-liner-gk' },
   { id: 'daily', icon: CalendarDays, title: 'Daily GK Challenge', desc: '10 fresh questions every day', to: '/gk/quiz?mode=daily' },
-  { id: 'revision', icon: RotateCcw, title: 'Smart Revision Queue', desc: 'Questions return after 1, 3, 7, 14, 30 and 60 days', to: '/gk/quiz?mode=revision' },
   { id: 'five', icon: Zap, title: 'Five-Minute Challenge', desc: '10 questions against the clock', to: '/five-minute' },
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },
   { id: 'timed', icon: Timer, title: 'Timed Quiz', desc: 'Set your pace, race the clock', to: '/gk/quiz?mode=timed' },
-  { id: 'mock', icon: Clock, title: 'Full GK Mock', desc: '50 questions, exam style', to: '/gk/quiz?mode=mock' },
+  { id: 'pms-mock', icon: ClipboardList, title: 'PMS GK Grand Mock', desc: '100 questions, available every 2 days', to: '/gk/quiz?mode=pms-mock' },
+  { id: 'revision', icon: RefreshCw, title: 'Smart Revision Queue', desc: 'Due questions selected by spaced revision', to: '/gk/quiz?mode=revision' },
   { id: 'weak', icon: Target, title: 'Weak-Area Practice', desc: 'Built from your mistake history', to: '/gk/quiz?mode=weak' },
   { id: 'saved', icon: Bookmark, title: 'Saved Questions', desc: 'Your bookmarked MCQs', to: '/gk/quiz?mode=saved' },
   { id: 'wrong', icon: AlertTriangle, title: 'Wrong Answers', desc: 'Retry what you got wrong', to: '/gk/quiz?mode=wrong' },
@@ -52,6 +53,8 @@ export default function GKWorld() {
   const [query, setQuery] = useState('')
   const mistakes = getMistakes().length
   const saved = savedMcqIds().length
+  const revisionStats = getRevisionStats()
+  const pmsMock = getMockAvailability('gk')
 
   useEffect(() => {
     getBankIndex().then(setIdx)
@@ -84,19 +87,45 @@ export default function GKWorld() {
         {/* Practice modes */}
         <h2 className="font-display text-xl font-bold text-pine">Practice modes</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {modes.map((m) => (
-            <Link
-              key={m.id}
-              to={m.to}
-              className="group rounded-xl border bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-700/40 hover:shadow-md active:scale-[0.98]"
-            >
-              <m.icon className="h-5 w-5 text-emerald-800" />
-              <p className="mt-2 text-sm font-bold text-foreground group-hover:text-pine">{m.title}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{m.desc}</p>
-              {m.id === 'weak' && mistakes > 0 && <span className="mt-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">{mistakes} mistakes logged</span>}
-              {m.id === 'saved' && saved > 0 && <span className="mt-1.5 inline-block rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800">{saved} saved</span>}
-            </Link>
-          ))}
+          {modes.map((m) => {
+            if (m.id === 'pms-mock' && !pmsMock.available) {
+              return (
+                <div key={m.id} className="rounded-xl border bg-secondary/40 p-4">
+                  <LockKeyhole className="h-5 w-5 text-amber-700" />
+                  <p className="mt-2 text-sm font-bold text-foreground">{m.title}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    Next available {new Date(pmsMock.nextAvailableAt!).toLocaleString()}
+                  </p>
+                  <span className="mt-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
+                    Unlocks every 2 days
+                  </span>
+                </div>
+              )
+            }
+            return (
+              <Link
+                key={m.id}
+                to={m.to}
+                data-google-vignette="false"
+                className="group rounded-xl border bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-700/40 hover:shadow-md active:scale-[0.98]"
+              >
+                <m.icon className="h-5 w-5 text-emerald-800" />
+                <p className="mt-2 text-sm font-bold text-foreground group-hover:text-pine">{m.title}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  {m.desc}
+                </p>
+                {m.id === 'weak' && mistakes > 0 && <span className="mt-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">{mistakes} mistakes logged</span>}
+                {m.id === 'saved' && saved > 0 && <span className="mt-1.5 inline-block rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-800">{saved} saved</span>}
+                {m.id === 'revision' && (
+                  <span className={`mt-1.5 inline-block rounded px-1.5 py-0.5 text-[10px] font-bold ${
+                    revisionStats.due ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                  }`}>
+                    {revisionStats.due ? `${revisionStats.due} due now` : 'Nothing due'}
+                  </span>
+                )}
+              </Link>
+            )
+          })}
         </div>
 
         {/* Category browser */}

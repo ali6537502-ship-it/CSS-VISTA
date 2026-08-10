@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   AlertTriangle, BookOpenCheck, ChevronLeft, ChevronRight, Clock3,
   Filter, Layers3, Search,
@@ -16,10 +16,11 @@ const PAGE_SIZE = 40
 type FreshnessFilter = 'all' | 'stable' | 'dated'
 
 export default function OneLinerGK() {
+  const [searchParams] = useSearchParams()
   const [index, setIndex] = useState<OneLinerIndex | null>(null)
   const [category, setCategory] = useState<OneLinerCategory | null>(null)
-  const [selectedSlug, setSelectedSlug] = useState('general-knowledge')
-  const [query, setQuery] = useState('')
+  const [selectedSlug, setSelectedSlug] = useState(() => searchParams.get('category') ?? 'general-knowledge')
+  const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [subcategory, setSubcategory] = useState('all')
   const [freshness, setFreshness] = useState<FreshnessFilter>('all')
   const [page, setPage] = useState(1)

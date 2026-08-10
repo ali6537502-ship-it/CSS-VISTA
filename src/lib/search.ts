@@ -1,4 +1,4 @@
-// Unified client-side search index across site content
+// Unified, lazy client-side search across CSS Vista content.
 import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 import { vocabulary } from '@/data/vocab'
 import { grammarTopics, idioms, pairOfWords } from '@/data/grammar'
@@ -8,6 +8,10 @@ import { libraryItems } from '@/data/library'
 import { essayThemes } from '@/data/essay'
 import { questions } from '@/data/quiz'
 import { fpscNotices } from '@/data/updates'
+import { defaultHomeCards } from '@/data/homeCards'
+import { noteProducts } from '@/data/notes'
+import { lectureCourses } from '@/data/lectures'
+import { handwrittenNoteSubjects } from '@/data/handwrittenNotes'
 
 export interface SearchResult {
   id: string
@@ -18,130 +22,387 @@ export interface SearchResult {
   date?: string
 }
 
-const corpus: SearchResult[] = [
+interface SearchDocument extends SearchResult {
+  keywords?: string
+  linkForQuery?: (query: string) => string
+}
+
+interface RemoteBookLibrary {
+  categories: { slug: string; name: string }[]
+  books: {
+    slug: string
+    category: string
+    title: string
+    author: string
+    excerpt: string
+    body: string
+  }[]
+}
+
+interface RemoteBankIndex {
+  categories: { slug: string; name: string; count: number; mpt: boolean }[]
+}
+
+interface RemoteOneLinerIndex {
+  categories: { slug: string; name: string; subcategories: { name: string }[] }[]
+}
+
+interface RemoteOneLinerCategory {
+  slug: string
+  name: string
+  notes: { id: string; text: string; subcategory: string }[]
+}
+
+interface RemoteGrammarCourse {
+  language: string
+  topics: {
+    slug: string
+    title: string
+    description: string
+    items: { id: string; fields: { label: string; value: string }[] }[]
+  }[]
+}
+
+const pageCorpus: SearchDocument[] = defaultHomeCards.map((card) => ({
+  id: `page-${card.id}`,
+  title: card.title,
+  category: 'Website Section',
+  snippet: card.desc,
+  link: card.to,
+}))
+
+const localCorpus: SearchDocument[] = [
+  ...pageCorpus,
   {
     id: 'one-liner-gk',
     title: 'One-Liner GK',
     category: 'GK World',
-    snippet: 'Thousands of searchable, category-wise facts for Pakistan Affairs, Islamiat, geography, science, computers and general knowledge.',
+    snippet: 'Searchable, category-wise facts for Pakistan Affairs, Islamiat, geography, science, computers and general knowledge.',
     link: '/one-liner-gk',
   },
   {
     id: 'language-grammar',
-    title: 'Urdu & English Grammar',
+    title: 'Urdu and English Grammar',
     category: 'Grammar Courses',
-    snippet: 'Structured Urdu قواعد and English grammar lessons covering morphology, syntax, literature, voice, articles, narration, parts of speech, prepositions, clauses, pronouns and tenses.',
+    snippet: 'Structured Urdu and English grammar lessons, rules and reference material.',
     link: '/language-grammar',
   },
   {
-    id: 'book-summaries',
-    title: 'Book Summaries',
-    category: 'Reading Library',
-    snippet: 'One hundred exam-focused summaries covering political thought, international relations, economics, society, Pakistan, literature and priority all-round reading.',
-    link: '/book-summaries',
+    id: 'answer-evaluation-subjects',
+    title: 'Answer Evaluation by Miss Sadia Zahoor, PAS',
+    category: 'Answer Evaluation',
+    snippet: 'CSS Essay, English Precis and Composition, General Science and Ability, Current Affairs, Pakistan Affairs, Islamic Studies, Political Science, Criminology, European History, Environmental Science and Punjabi.',
+    link: '/answer-evaluation',
   },
-  ...compulsorySubjects.map((s) => ({
-    id: `sub-${s.slug}`,
-    title: s.name,
-    category: 'Compulsory Subjects',
-    snippet: `${s.overview} Topics: ${s.topics.flatMap((t) => t.points).slice(0, 6).join(', ')}`,
-    link: `/subjects/compulsory/${s.slug}`,
-  })),
-  ...optionalGroups.flatMap((g) =>
-    g.subjects.map((s) => ({
-      id: `opt-${s.name}`,
-      title: `${s.name} (Group ${g.group}, ${s.marks} marks)`,
+  ...compulsorySubjects.flatMap((subject) => [
+    {
+      id: `sub-${subject.slug}`,
+      title: subject.name,
+      category: 'Compulsory Subjects',
+      snippet: `${subject.overview} Topics: ${subject.topics.flatMap((topic) => topic.points).slice(0, 8).join(', ')}`,
+      link: `/subjects/compulsory/${subject.slug}`,
+    },
+    ...subject.topics.map((topic) => ({
+      id: `sub-topic-${subject.slug}-${topic.title}`,
+      title: `${subject.name}: ${topic.title}`,
+      category: 'Compulsory Subject Topic',
+      snippet: topic.points.join(', '),
+      link: `/subjects/compulsory/${subject.slug}`,
+    })),
+  ]),
+  ...optionalGroups.flatMap((group) =>
+    group.subjects.map((subject) => ({
+      id: `opt-${subject.name}`,
+      title: `${subject.name} (Group ${group.group}, ${subject.marks} marks)`,
       category: 'Optional Subjects',
-      snippet: `${s.nature}. Background: ${s.background}. Overlap: ${s.overlap}. Difficulty: ${s.difficulty}. ${s.suitedFor}`,
+      snippet: `${subject.nature}. Background: ${subject.background}. Overlap: ${subject.overlap}. ${subject.suitedFor}`,
       link: '/subjects/optional',
-    }))
+    })),
   ),
-  ...vocabulary.map((v) => ({
-    id: `voc-${v.word}`,
-    title: v.word,
+  ...lectureCourses.flatMap((course) => [
+    {
+      id: `lecture-${course.slug}`,
+      title: `${course.title} Lectures`,
+      category: 'Free CSS Vista Lectures',
+      snippet: `${course.kind}, ${course.marks} marks, ${course.paperLabel}.`,
+      link: '/lectures',
+    },
+    ...course.topics.map((topic) => ({
+      id: `lecture-topic-${course.slug}-${topic.slug}`,
+      title: `${course.title}: ${topic.title}`,
+      category: 'Lecture Topic',
+      snippet: topic.summary,
+      link: '/lectures',
+    })),
+  ]),
+  ...handwrittenNoteSubjects.map((subject) => ({
+    id: `handwritten-${subject.slug}`,
+    title: `${subject.title} Handwritten Notes`,
+    category: 'Handwritten Notes by Miss Sadia Zahoor, PAS',
+    snippet: subject.description,
+    link: '/handwritten-notes',
+  })),
+  ...noteProducts.flatMap((product) => [
+    {
+      id: `notes-${product.id}`,
+      title: product.subject,
+      category: 'Notes Library',
+      snippet: product.description,
+      link: '/notes',
+    },
+    ...(product.samples ?? []).map((sample) => ({
+      id: `notes-sample-${sample.url}`,
+      title: sample.title,
+      category: 'Sample Notes',
+      snippet: `${product.subject} sample PDF`,
+      link: '/notes',
+    })),
+  ]),
+  ...vocabulary.map((item) => ({
+    id: `voc-${item.word}`,
+    title: item.word,
     category: 'Vocabulary',
-    snippet: `${v.pos} - ${v.meaning}. Synonyms: ${v.synonyms.join(', ')}. ${v.sentence}`,
+    snippet: `${item.pos}: ${item.meaning}. Synonyms: ${item.synonyms.join(', ')}. ${item.sentence}`,
     link: '/grammar-vocabulary',
   })),
-  ...grammarTopics.map((g) => ({
-    id: `gram-${g.slug}`,
-    title: g.name,
+  ...grammarTopics.map((topic) => ({
+    id: `gram-${topic.slug}`,
+    title: topic.name,
     category: 'Grammar',
-    snippet: `${g.summary} ${g.rules.map((r) => r.rule).join(' ')}`,
+    snippet: `${topic.summary} ${topic.rules.map((rule) => rule.rule).join(' ')}`,
     link: '/grammar-vocabulary',
   })),
-  ...idioms.map((i) => ({ id: `idiom-${i.idiom}`, title: i.idiom, category: 'Grammar - Idioms', snippet: `${i.meaning}. ${i.sentence}`, link: '/grammar-vocabulary' })),
-  ...pairOfWords.map((p) => ({ id: `pair-${p.a}`, title: `${p.a} vs ${p.b}`, category: 'Grammar - Pair of Words', snippet: `${p.a}: ${p.aMeaning}. ${p.b}: ${p.bMeaning}.`, link: '/grammar-vocabulary' })),
-  ...caIssues.map((c) => ({
-    id: `ca-${c.slug}`,
-    title: c.title,
+  ...idioms.map((item) => ({
+    id: `idiom-${item.idiom}`,
+    title: item.idiom,
+    category: 'Grammar: Idioms',
+    snippet: `${item.meaning}. ${item.sentence}`,
+    link: '/grammar-vocabulary',
+  })),
+  ...pairOfWords.map((item) => ({
+    id: `pair-${item.a}`,
+    title: `${item.a} vs ${item.b}`,
+    category: 'Grammar: Pair of Words',
+    snippet: `${item.a}: ${item.aMeaning}. ${item.b}: ${item.bMeaning}.`,
+    link: '/grammar-vocabulary',
+  })),
+  ...caIssues.map((issue) => ({
+    id: `ca-${issue.slug}`,
+    title: issue.title,
     category: 'Current Affairs',
-    snippet: `${c.background} ${c.pakistanImplications.join(' ')}`,
-    link: `/current-affairs#${c.slug}`,
-    date: c.lastUpdated,
+    snippet: `${issue.background} ${issue.pakistanImplications.join(' ')}`,
+    link: `/current-affairs#${issue.slug}`,
+    date: issue.lastUpdated,
   })),
-  ...serviceGroups.map((s) => ({
-    id: `svc-${s.slug}`,
-    title: s.name,
+  ...serviceGroups.map((service) => ({
+    id: `svc-${service.slug}`,
+    title: service.name,
     category: 'Services Guide',
-    snippet: `${s.role} ${s.work}`,
-    link: `/services#${s.slug}`,
+    snippet: `${service.role} ${service.work}`,
+    link: `/services#${service.slug}`,
   })),
-  ...libraryItems.map((l) => ({
-    id: l.id,
-    title: l.title,
-    category: 'Downloads & Notes',
-    snippet: `${l.description} Tags: ${l.tags.join(', ')}`,
+  ...libraryItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    category: 'Downloads and Notes',
+    snippet: `${item.description} Tags: ${item.tags.join(', ')}`,
     link: '/downloads',
-    date: l.lastUpdated,
+    date: item.lastUpdated,
   })),
-  ...essayThemes.map((t) => ({
-    id: `essay-${t.slug}`,
-    title: `Essay theme: ${t.name}`,
+  ...essayThemes.map((theme) => ({
+    id: `essay-${theme.slug}`,
+    title: `Essay theme: ${theme.name}`,
     category: 'Essay',
-    snippet: `${t.angles.join(', ')}. Topics: ${t.sampleTopics.join('; ')}`,
+    snippet: `${theme.angles.join(', ')}. Topics: ${theme.sampleTopics.join('; ')}`,
     link: '/essay',
   })),
-  ...questions.map((q) => ({
-    id: `q-${q.id}`,
-    title: q.question.slice(0, 80),
-    category: 'MCQ Bank',
-    snippet: q.options.join(' / '),
+  ...questions.map((question) => ({
+    id: `q-${question.id}`,
+    title: question.question.slice(0, 110),
+    category: 'MPT Question',
+    snippet: question.options.join(' / '),
     link: '/mpt',
   })),
-  ...fpscNotices.map((n) => ({
-    id: n.id,
-    title: n.title,
+  ...fpscNotices.map((notice) => ({
+    id: notice.id,
+    title: notice.title,
     category: 'FPSC Updates',
-    snippet: n.summary,
+    snippet: notice.summary,
     link: '/fpsc-updates',
   })),
 ]
 
-export function searchSite(query: string, limit = 12): SearchResult[] {
-  const q = query.toLowerCase().trim()
-  if (q.length < 2) return []
-  const terms = q.split(/\s+/)
-  const scored = corpus
+async function fetchJson<T>(url: string): Promise<T | null> {
+  try {
+    const response = await fetch(url)
+    if (!response.ok) return null
+    return response.json() as Promise<T>
+  } catch {
+    return null
+  }
+}
+
+let remoteCorpusRequest: Promise<SearchDocument[]> | null = null
+
+function loadRemoteCorpus(): Promise<SearchDocument[]> {
+  if (remoteCorpusRequest) return remoteCorpusRequest
+
+  remoteCorpusRequest = (async () => {
+    const [
+      pastPaperModule,
+      bookLibrary,
+      bankIndex,
+      oneLinerIndex,
+      englishGrammar,
+      urduGrammar,
+    ] = await Promise.all([
+      import('@/data/pastPapers').catch(() => null),
+      fetchJson<RemoteBookLibrary>('/book-summaries/index.json'),
+      fetchJson<RemoteBankIndex>('/mcq/index.json'),
+      fetchJson<RemoteOneLinerIndex>('/one-liner-gk/index.json'),
+      fetchJson<RemoteGrammarCourse>('/language-grammar/english.json'),
+      fetchJson<RemoteGrammarCourse>('/language-grammar/urdu.json'),
+    ])
+
+    const remote: SearchDocument[] = []
+
+    if (pastPaperModule) {
+      remote.push(...pastPaperModule.pastPapers.map((paper) => ({
+        id: `paper-${paper.id}`,
+        title: `${paper.examination}: ${paper.title}`,
+        category: 'Past Papers',
+        snippet: `${paper.subjectType}, ${paper.paper}, ${paper.mode}${paper.optionalGroup ? `, Group ${paper.optionalGroup}` : ''}`,
+        link: '/past-papers',
+        keywords: `${paper.subject} ${paper.year} ${paper.examination}`,
+        linkForQuery: (query: string) => `/past-papers?search=${encodeURIComponent(query)}`,
+      })))
+    }
+
+    if (bookLibrary) {
+      const categoryNames = new Map(bookLibrary.categories.map((category) => [category.slug, category.name]))
+      remote.push(...bookLibrary.books.map((book) => ({
+        id: `book-summary-${book.slug}`,
+        title: book.title,
+        category: 'Book Summaries',
+        snippet: `${book.author}. ${book.excerpt}`,
+        keywords: `${categoryNames.get(book.category) ?? ''} ${book.body}`,
+        link: '/book-summaries',
+        linkForQuery: (query: string) => `/book-summaries?search=${encodeURIComponent(query)}`,
+      })))
+    }
+
+    if (bankIndex) {
+      remote.push(...bankIndex.categories.map((category) => ({
+        id: `gk-category-${category.slug}`,
+        title: category.name,
+        category: 'GK World Category',
+        snippet: `${category.count.toLocaleString()} questions${category.mpt ? ', included in MPT preparation' : ''}.`,
+        link: `/gk/cat/${category.slug}`,
+      })))
+    }
+
+    if (oneLinerIndex) {
+      const categoryFiles = await Promise.all(
+        oneLinerIndex.categories.map((category) => (
+          fetchJson<RemoteOneLinerCategory>(`/one-liner-gk/${encodeURIComponent(category.slug)}.json`)
+        )),
+      )
+      categoryFiles.forEach((category) => {
+        if (!category) return
+        remote.push(...category.notes.map((note) => ({
+          id: `one-liner-${note.id}`,
+          title: note.text,
+          category: `One-Liner GK: ${category.name}`,
+          snippet: note.subcategory,
+          link: '/one-liner-gk',
+          linkForQuery: (query: string) => (
+            `/one-liner-gk?category=${encodeURIComponent(category.slug)}&search=${encodeURIComponent(query)}`
+          ),
+        })))
+      })
+    }
+
+    const grammarCourses = [
+      { course: englishGrammar, lang: 'english' },
+      { course: urduGrammar, lang: 'urdu' },
+    ] as const
+    grammarCourses.forEach(({ course, lang }) => {
+      if (!course) return
+      course.topics.forEach((topic) => {
+        remote.push({
+          id: `grammar-topic-${lang}-${topic.slug}`,
+          title: topic.title,
+          category: lang === 'urdu' ? 'Urdu Grammar' : 'English Grammar',
+          snippet: topic.description,
+          link: `/language-grammar?lang=${lang}`,
+          keywords: topic.items
+            .flatMap((item) => item.fields.map((field) => `${field.label} ${field.value}`))
+            .join(' '),
+        })
+      })
+    })
+
+    return remote
+  })()
+
+  return remoteCorpusRequest
+}
+
+function scoreDocuments(corpus: SearchDocument[], query: string) {
+  const normalizedQuery = query.toLocaleLowerCase().trim()
+  const terms = normalizedQuery.split(/\s+/).filter(Boolean)
+
+  return corpus
     .map((item) => {
-      const hay = `${item.title} ${item.snippet} ${item.category}`.toLowerCase()
+      const title = item.title.toLocaleLowerCase()
+      const category = item.category.toLocaleLowerCase()
+      const haystack = `${title} ${category} ${item.snippet} ${item.keywords ?? ''}`.toLocaleLowerCase()
       let score = 0
-      for (const t of terms) {
-        if (item.title.toLowerCase().includes(t)) score += 3
-        if (hay.includes(t)) score += 1
+      for (const term of terms) {
+        if (title === normalizedQuery) score += 14
+        if (title.startsWith(term)) score += 6
+        else if (title.includes(term)) score += 4
+        if (category.includes(term)) score += 2
+        if (haystack.includes(term)) score += 1
       }
       return { item, score }
     })
-    .filter((s) => s.score >= terms.length)
-    .sort((a, b) => b.score - a.score)
-  return scored.slice(0, limit).map((s) => s.item)
+    .filter((entry) => entry.score >= terms.length)
+    .sort((left, right) => right.score - left.score || left.item.title.localeCompare(right.item.title))
 }
 
-export const searchCategories = [...new Set(corpus.map((c) => c.category))]
+export async function searchSite(query: string, limit = 12): Promise<SearchResult[]> {
+  const normalizedQuery = query.trim()
+  if (normalizedQuery.length < 2) return []
+
+  const remoteCorpus = await loadRemoteCorpus()
+  const scored = scoreDocuments([...localCorpus, ...remoteCorpus], normalizedQuery)
+  const seen = new Set<string>()
+  const results: SearchResult[] = []
+
+  for (const { item } of scored) {
+    const key = `${item.category}|${item.title}`.toLocaleLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    results.push({
+      id: item.id,
+      title: item.title,
+      category: item.category,
+      snippet: item.snippet,
+      link: item.linkForQuery?.(normalizedQuery) ?? item.link,
+      date: item.date,
+    })
+    if (results.length >= limit) break
+  }
+
+  return results
+}
+
+export const searchCategories = [...new Set(localCorpus.map((item) => item.category))]
 
 export function highlight(text: string, query: string): string {
-  const q = query.trim()
-  if (!q) return text
-  const esc = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return text.replace(new RegExp(`(${esc})`, 'gi'), '<mark>$1</mark>')
+  const normalizedQuery = query.trim()
+  if (!normalizedQuery) return text
+  const escaped = normalizedQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>')
 }

@@ -11,6 +11,17 @@ export interface AttemptRecord {
   ts: number
 }
 
+export interface ReviewSchedule {
+  id: string
+  cat: string
+  level: number
+  streak: number
+  lapses: number
+  intervalDays: number
+  lastReviewedAt: number
+  dueAt: number
+}
+
 export interface Mistake {
   id: string // question id
   sel: number // selected option index
@@ -39,6 +50,7 @@ export interface TimerSession {
 
 export interface ProgressState {
   attempts: Record<string, AttemptRecord>
+  reviews: Record<string, ReviewSchedule>
   savedMcqs: string[]
   mistakes: Mistake[]
   activities: Activity[]
@@ -56,6 +68,7 @@ export interface ProgressState {
 
 const empty: ProgressState = {
   attempts: {},
+  reviews: {},
   savedMcqs: [],
   mistakes: [],
   activities: [],
@@ -88,9 +101,28 @@ function save(s: ProgressState) {
 }
 
 // ---------- Attempts ----------
-export function recordAttempt(id: string, correct: boolean) {
+const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
+
+export function recordAttempt(id: string, correct: boolean, cat = '') {
   const s = getProgress()
-  s.attempts[id] = { c: correct, ts: Date.now() }
+  const now = Date.now()
+  s.attempts[id] = { c: correct, ts: now }
+  const previous = s.reviews?.[id]
+  const level = correct ? Math.min((previous?.level ?? -1) + 1, REVIEW_INTERVALS.length - 1) : 0
+  const intervalDays = correct ? REVIEW_INTERVALS[level] : 1
+  s.reviews = {
+    ...(s.reviews ?? {}),
+    [id]: {
+      id,
+      cat: cat || previous?.cat || id.replace(/-\d+$/, ''),
+      level,
+      streak: correct ? (previous?.streak ?? 0) + 1 : 0,
+      lapses: (previous?.lapses ?? 0) + (correct ? 0 : 1),
+      intervalDays,
+      lastReviewedAt: now,
+      dueAt: now + intervalDays * 24 * 60 * 60 * 1000,
+    },
+  }
   const keys = Object.keys(s.attempts)
   if (keys.length > 8000) {
     keys
@@ -114,6 +146,25 @@ export function wrongIds(): string[] {
   return Object.entries(s.attempts)
     .filter(([, v]) => !v.c)
     .map(([k]) => k)
+}
+
+export function getDueReviews(now = Date.now()): ReviewSchedule[] {
+  return Object.values(getProgress().reviews ?? {})
+    .filter((review) => review.dueAt <= now)
+    .sort((a, b) => a.dueAt - b.dueAt || b.lapses - a.lapses)
+}
+
+export function dueRevisionIds(limit = 60): string[] {
+  return getDueReviews().slice(0, limit).map((review) => review.id)
+}
+
+export function getRevisionStats(now = Date.now()) {
+  const reviews = Object.values(getProgress().reviews ?? {})
+  const due = reviews.filter((review) => review.dueAt <= now).length
+  const learning = reviews.filter((review) => review.level < 2).length
+  const strengthening = reviews.filter((review) => review.level >= 2 && review.level < 4).length
+  const mature = reviews.filter((review) => review.level >= 4).length
+  return { total: reviews.length, due, learning, strengthening, mature }
 }
 
 // ---------- Saved MCQs ----------

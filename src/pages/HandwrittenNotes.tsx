@@ -1,16 +1,23 @@
 import { useMemo, useState } from 'react'
-import { BookOpenCheck, FileClock, PenLine, Search } from 'lucide-react'
+import {
+  BookOpenCheck, FileClock, NotebookPen, Search, UserRound,
+} from 'lucide-react'
 import { PageHeader } from '@/components/shared'
-import { handwrittenNoteCategories, notesAuthor } from '@/data/handwrittenNotes'
+import {
+  handwrittenNotesOwner,
+  handwrittenNoteSubjects,
+} from '@/data/handwrittenNotes'
 
 export default function HandwrittenNotes() {
   const [query, setQuery] = useState('')
   const [kind, setKind] = useState<'All' | 'Compulsory' | 'Optional'>('All')
-  const shown = useMemo(() => {
-    const q = query.trim().toLocaleLowerCase()
-    return handwrittenNoteCategories.filter(
-      (c) => (kind === 'All' || c.kind === kind) && (!q || `${c.title} ${c.description}`.toLocaleLowerCase().includes(q)),
-    )
+
+  const visibleSubjects = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase()
+    return handwrittenNoteSubjects.filter((subject) => (
+      (kind === 'All' || subject.kind === kind)
+      && (!normalizedQuery || `${subject.title} ${subject.description}`.toLocaleLowerCase().includes(normalizedQuery))
+    ))
   }, [kind, query])
 
   return (
@@ -19,6 +26,7 @@ export default function HandwrittenNotes() {
         title="Handwritten Notes by Miss Sadia Zahoor, PAS"
         description="A dedicated subject-wise library for original handwritten CSS preparation notes. Categories are ready and files will appear only after the owner provides them."
       />
+
       <main className="mx-auto max-w-7xl px-4 py-8">
         <section className="overflow-hidden rounded-2xl bg-pine text-white shadow-lg">
           <div className="grid gap-5 p-5 sm:p-7 md:grid-cols-[auto_1fr] md:items-center">
@@ -29,9 +37,9 @@ export default function HandwrittenNotes() {
             />
             <div>
               <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-300">
-                <PenLine className="h-4 w-4" /> Notes author
+                <UserRound className="h-4 w-4" /> Notes author
               </p>
-              <h2 className="mt-2 font-display text-2xl font-bold">{notesAuthor}</h2>
+              <h2 className="mt-2 font-display text-2xl font-bold">{handwrittenNotesOwner}</h2>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-emerald-50/80">
                 Notes will remain organised by CSS paper and will be published only when an original, readable file is supplied.
               </p>
@@ -45,21 +53,23 @@ export default function HandwrittenNotes() {
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(event) => setQuery(event.target.value)}
               placeholder="Search note subjects..."
               className="h-11 w-full rounded-lg border bg-white pl-9 pr-3 text-sm outline-none ring-ring focus:ring-2"
             />
           </label>
           <div className="flex gap-2 overflow-x-auto">
-            {(['All', 'Compulsory', 'Optional'] as const).map((k) => (
+            {(['All', 'Compulsory', 'Optional'] as const).map((value) => (
               <button
-                key={k}
+                key={value}
                 type="button"
-                onClick={() => setKind(k)}
-                aria-pressed={kind === k}
-                className={`shrink-0 rounded-lg px-4 py-2 text-sm font-semibold ${kind === k ? 'bg-pine text-white' : 'bg-secondary text-pine hover:bg-emerald-50'}`}
+                onClick={() => setKind(value)}
+                aria-pressed={kind === value}
+                className={`shrink-0 rounded-lg px-4 py-2 text-sm font-semibold ${
+                  kind === value ? 'bg-pine text-white' : 'bg-secondary text-pine hover:bg-emerald-50'
+                }`}
               >
-                {k}
+                {value}
               </button>
             ))}
           </div>
@@ -68,38 +78,46 @@ export default function HandwrittenNotes() {
         <section className="mt-7" aria-labelledby="handwritten-note-subjects">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h2 id="handwritten-note-subjects" className="font-display text-xl font-bold text-pine sm:text-2xl">Subject categories</h2>
-              <p className="mt-1 text-sm text-muted-foreground">{shown.length} categories shown</p>
+              <h2 id="handwritten-note-subjects" className="font-display text-xl font-bold text-pine sm:text-2xl">
+                Subject categories
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">{visibleSubjects.length} categories shown</p>
             </div>
-            <span className="hidden rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 sm:block">Original uploads only</span>
+            <span className="hidden rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 sm:block">
+              Original uploads only
+            </span>
           </div>
+
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {shown.map((c) => (
-              <article key={c.slug} className="vista-card flex min-h-52 flex-col p-5">
+            {visibleSubjects.map((subject) => (
+              <article key={subject.slug} className="vista-card flex min-h-52 flex-col p-5">
                 <div className="flex items-start justify-between gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-pine text-white">
-                    <BookOpenCheck className="h-5 w-5" />
+                    <NotebookPen className="h-5 w-5" />
                   </span>
-                  <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-800">{c.kind}</span>
+                  <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-800">
+                    {subject.kind}
+                  </span>
                 </div>
-                <h3 className="mt-4 font-display text-lg font-bold text-pine">{c.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{c.description}</p>
+                <h3 className="mt-4 font-display text-lg font-bold text-pine">{subject.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{subject.description}</p>
                 <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs">
                   <span className="inline-flex items-center gap-1.5 font-semibold text-amber-700">
                     <FileClock className="h-4 w-4" /> Upload pending
                   </span>
                   <span className="inline-flex items-center gap-1 text-muted-foreground">
-                    <BookOpenCheck className="h-4 w-4" /> {c.uploadedNotes} notes
+                    <BookOpenCheck className="h-4 w-4" /> {subject.uploadedNotes} notes
                   </span>
                 </div>
               </article>
             ))}
-            {shown.length === 0 && (
-              <p className="mt-4 rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">
-                No note category matches this search.
-              </p>
-            )}
           </div>
+
+          {visibleSubjects.length === 0 && (
+            <p className="mt-4 rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground">
+              No note category matches this search.
+            </p>
+          )}
         </section>
       </main>
     </div>

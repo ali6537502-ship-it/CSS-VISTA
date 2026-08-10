@@ -17,6 +17,8 @@ import {
 } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 
+const CLOUD_SYNC_DEBOUNCE_MS = 12_000
+
 export function AccountProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(accountServiceConfigured)
   const [client, setClient] = useState<SupabaseClient | null>(null)
@@ -25,9 +27,12 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [syncError, setSyncError] = useState('')
   const [lastSyncedAt, setLastSyncedAt] = useState<Date | null>(null)
   const syncTimer = useRef<number | null>(null)
+  const syncInFlight = useRef(false)
 
   const syncNow = useCallback(async (): Promise<ActionResult> => {
     if (!client || !user) return { error: 'Sign in to sync progress.' }
+    if (syncInFlight.current) return {}
+    syncInFlight.current = true
     setSyncStatus('syncing')
     setSyncError('')
     try {
@@ -40,6 +45,8 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       setSyncStatus('error')
       setSyncError(message)
       return { error: message }
+    } finally {
+      syncInFlight.current = false
     }
   }, [client, user])
 
@@ -88,11 +95,26 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       syncTimer.current = window.setTimeout(() => {
         syncTimer.current = null
         void syncNow()
-      }, 1200)
+      }, CLOUD_SYNC_DEBOUNCE_MS)
+    }
+    const flushPendingSync = () => {
+      if (!user || !client) return
+      if (syncTimer.current !== null) {
+        window.clearTimeout(syncTimer.current)
+        syncTimer.current = null
+      }
+      void syncNow()
+    }
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') flushPendingSync()
     }
     window.addEventListener(PROGRESS_CHANGED_EVENT, scheduleSync)
+    window.addEventListener('online', flushPendingSync)
+    document.addEventListener('visibilitychange', handleVisibilityChange)
     return () => {
       window.removeEventListener(PROGRESS_CHANGED_EVENT, scheduleSync)
+      window.removeEventListener('online', flushPendingSync)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       if (syncTimer.current !== null) window.clearTimeout(syncTimer.current)
     }
   }, [client, syncNow, user])
@@ -114,7 +136,10 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       const { data, error } = await client.auth.signUp({
         email,
         password,
-        options: { data: { full_name: fullName.trim() } },
+        options: {
+          data: { full_name: fullName.trim() },
+          emailRedirectTo: `${window.location.origin}/account`,
+        },
       })
       if (error) return { error: error.message }
       return { confirmationRequired: !data.session }
@@ -125,6 +150,18 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         provider: 'google',
         options: { redirectTo: `${window.location.origin}/account` },
       })
+      return error ? { error: error.message } : {}
+    },
+    async requestPasswordReset(email) {
+      if (!client) return { error: 'Account service is not configured yet.' }
+      const { error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/account?reset=1`,
+      })
+      return error ? { error: error.message } : {}
+    },
+    async updatePassword(password) {
+      if (!client || !user) return { error: 'Open the password-reset link from your email first.' }
+      const { error } = await client.auth.updateUser({ password })
       return error ? { error: error.message } : {}
     },
     async signOut() {

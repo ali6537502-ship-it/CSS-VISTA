@@ -6,7 +6,7 @@ import { Badge } from '@/components/shared'
 import {
   getCountdownConfig, saveCountdownConfig, mergedHomeCards, upsertHomeCard, deleteHomeCard,
   mergedUpdates, upsertUpdate, deleteUpdate, mergedCategoryOverrides, upsertCategoryOverride,
-  deleteCategoryOverride, getReports, deleteReport, getMcqOverride, upsertMcqOverride,
+  deleteCategoryOverride, getReports, getCloudReports, deleteReport, getMcqOverride, upsertMcqOverride,
   getAdminContent, getMentorOverride, upsertMentorOverride, getPriceOverride, setPriceOverride,
   fileToDataUrl, type CountdownConfig, type HomeCard, type SiteUpdate, type MentorOverride,
 } from '@/lib/admin'
@@ -281,6 +281,10 @@ export function McqManager() {
   const [editQ, setEditQ] = useState<{ id: string; q: string; o: string[]; a: number; e: string } | null>(null)
   const overrides = getAdminContent().mcqOverrides
 
+  useEffect(() => {
+    void getCloudReports().then(setReports)
+  }, [])
+
   async function loadForEdit(id: string) {
     const q = await getQuestionById(id)
     if (!q) return alert('Question not found. Check the ID (e.g. capitals-120).')
@@ -293,14 +297,14 @@ export function McqManager() {
     upsertMcqOverride({ id: editQ.id, q: editQ.q, o: editQ.o, a: editQ.a, e: editQ.e })
     setEditQ(null)
     force((f) => f + 1)
-    alert('Correction saved on this device. Export site data to publish it.')
+    alert('Correction saved and queued for cloud publishing.')
   }
 
   return (
     <div className="space-y-6">
       <div className="rounded-lg border bg-white p-5">
         <h3 className="font-semibold text-pine">Reported errors ({reports.length})</h3>
-        <p className="mt-1 text-xs text-muted-foreground">Reports submitted by visitors on this device/browser. Fix the question, then delete the report.</p>
+        <p className="mt-1 text-xs text-muted-foreground">Reports from signed-in students are stored securely in the cloud. Guest reports remain on their device until they sign in. Fix the question, then remove the report.</p>
         <ul className="mt-3 divide-y">
           {reports.map((r) => {
             const o = getMcqOverride(r.questionId)
@@ -315,7 +319,7 @@ export function McqManager() {
                 >
                   {o?.disabled ? 'Re-enable' : 'Disable question'}
                 </button>
-                <button onClick={() => { deleteReport(r.id); setReports(getReports()) }} className="rounded p-1.5 text-red-600 hover:bg-red-50"><Trash2 className="h-4 w-4" /></button>
+                <button onClick={() => { deleteReport(r.id); setReports((current) => current.filter((item) => item.id !== r.id)) }} className="rounded p-1.5 text-red-600 hover:bg-red-50"><Trash2 className="h-4 w-4" /></button>
               </li>
             )
           })}

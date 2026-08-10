@@ -43,10 +43,10 @@ const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
 const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
-const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
-const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
+const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
+const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
 
 function PageLoader() {
   return (
@@ -98,10 +98,10 @@ export default function App() {
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
-        <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
-        <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
+        <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/past-papers/view/:id" element={<S><PastPaperOpen /></S>} />
+        <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
         <Route path="/gk/cat/:slug" element={<S><GKCategory /></S>} />
         <Route path="/gk/quiz" element={<S><GKQuiz /></S>} />
         <Route path="/five-minute" element={<S><GKQuiz forceMode="five-minute" /></S>} />

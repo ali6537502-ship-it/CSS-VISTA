@@ -1,27 +1,151 @@
-// CSS Vista Admin - simple content management stored in the browser's localStorage.
-// The owner edits Current Affairs, CSS 2027 dates, FPSC notifications, announcements,
-// past papers and MCQs from mobile or laptop without touching code.
-// To publish edits for everyone, use "Export site data" and send the file to your developer.
+// CSS Vista content management. Published content is stored in Supabase and cached
+// locally so the public site remains fast and resilient during brief network outages.
 
 import type { Question } from '@/data/quiz'
 import type { PastPaper } from '@/data/pastPapers'
 import type { FpscNotification2027, CssDate } from '@/data/css2027'
 import type { TestSeriesAnnouncement } from '@/data/testSeries'
+import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 
 const AUTH_KEY = 'cssvista:admin:auth'
 const PASS_KEY = 'cssvista:admin:pass'
 const CONTENT_KEY = 'cssvista:admin:content'
-const DEFAULT_PASSWORD = 'cssvista2026' // CHANGE THIS on first login (Admin → Settings)
+export const ADMIN_CONTENT_EVENT = 'cssvista:admin-content'
+export const ADMIN_CLOUD_STATUS_EVENT = 'cssvista:admin-cloud-status'
+
+export type AdminCloudStatus = {
+  state: 'idle' | 'saving' | 'saved' | 'error'
+  message?: string
+  updatedAt?: string
+}
+
+let cloudInitialisePromise: Promise<void> | null = null
+let cloudSaveTimer: number | null = null
+let latestPendingContent: AdminContent | null = null
+
+function dispatchContentChanged() {
+  window.dispatchEvent(new CustomEvent(ADMIN_CONTENT_EVENT))
+}
+
+function dispatchCloudStatus(detail: AdminCloudStatus) {
+  window.dispatchEvent(new CustomEvent(ADMIN_CLOUD_STATUS_EVENT, { detail }))
+}
+
+function hasContent(content: AdminContent): boolean {
+  return Boolean(
+    content.caTopics.length
+    || content.css2027Dates.length
+    || content.notifications2027.length
+    || content.announcements.length
+    || content.pastPapers.length
+    || content.mcqs.length
+    || content.countdown
+    || content.homeCards.length
+    || content.updates.length
+    || content.mcqOverrides.length
+    || content.categoryOverrides.length
+    || content.mentorOverrides.length
+    || Object.keys(content.priceOverrides).length
+  )
+}
+
+function cacheAdminContent(content: AdminContent) {
+  localStorage.setItem(CONTENT_KEY, JSON.stringify(content))
+  dispatchContentChanged()
+}
+
+async function publishAdminContent(content: AdminContent): Promise<void> {
+  const client = await getSupabaseClient()
+  if (!client) return
+  dispatchCloudStatus({ state: 'saving', message: 'Publishing changes…' })
+  const { data, error } = await client.rpc('publish_css_vista_content', {
+    next_content: content,
+  })
+  if (error) {
+    dispatchCloudStatus({ state: 'error', message: error.message })
+    throw error
+  }
+  dispatchCloudStatus({
+    state: 'saved',
+    message: 'Published for all visitors',
+    updatedAt: typeof data === 'string' ? data : new Date().toISOString(),
+  })
+}
+
+function scheduleCloudSave(content: AdminContent) {
+  if (!accountServiceConfigured) return
+  latestPendingContent = content
+  dispatchCloudStatus({ state: 'saving', message: 'Publishing changes…' })
+  if (cloudSaveTimer !== null) window.clearTimeout(cloudSaveTimer)
+  cloudSaveTimer = window.setTimeout(() => {
+    cloudSaveTimer = null
+    const pending = latestPendingContent
+    latestPendingContent = null
+    if (pending) void publishAdminContent(pending).catch(() => {
+      // The local cache remains intact and the admin UI exposes the failure.
+    })
+  }, 700)
+}
+
+export function initialiseCloudAdminContent(): Promise<void> {
+  if (!accountServiceConfigured) return Promise.resolve()
+  if (cloudInitialisePromise) return cloudInitialisePromise
+
+  cloudInitialisePromise = (async () => {
+    const client = await getSupabaseClient()
+    if (!client) return
+    const { data, error } = await client
+      .from('site_content')
+      .select('content, updated_at')
+      .eq('id', 'published')
+      .maybeSingle()
+    if (error) {
+      dispatchCloudStatus({ state: 'error', message: 'Cloud content is temporarily unavailable.' })
+      return
+    }
+
+    const local = getAdminContent()
+    const remote = data?.content && typeof data.content === 'object'
+      ? { ...emptyContent, ...(data.content as Partial<AdminContent>) }
+      : null
+
+    if (remote && hasContent(remote)) {
+      cacheAdminContent(remote)
+      dispatchCloudStatus({ state: 'saved', message: 'Cloud content loaded', updatedAt: data?.updated_at })
+      return
+    }
+
+    // Safely migrate genuine owner edits already present in this browser.
+    if (hasContent(local)) {
+      const { data: isAdmin } = await client.rpc('is_css_vista_admin')
+      if (isAdmin === true) await publishAdminContent(local)
+    }
+  })().catch(() => {
+    dispatchCloudStatus({ state: 'error', message: 'Using the safe local content cache.' })
+  })
+
+  return cloudInitialisePromise
+}
+
+export function flushAdminContentSave(): Promise<void> {
+  if (!accountServiceConfigured || !latestPendingContent) return Promise.resolve()
+  if (cloudSaveTimer !== null) window.clearTimeout(cloudSaveTimer)
+  cloudSaveTimer = null
+  const pending = latestPendingContent
+  latestPendingContent = null
+  return publishAdminContent(pending)
+}
 
 // ---------- Auth ----------
-export function getPassword(): string {
-  return localStorage.getItem(PASS_KEY) || DEFAULT_PASSWORD
+export function hasLocalPassword(): boolean {
+  return Boolean(localStorage.getItem(PASS_KEY))
 }
 export function setPassword(p: string) {
   localStorage.setItem(PASS_KEY, p)
 }
 export function login(password: string): boolean {
-  if (password === getPassword()) {
+  const storedPassword = localStorage.getItem(PASS_KEY)
+  if (storedPassword && password === storedPassword) {
     sessionStorage.setItem(AUTH_KEY, '1')
     return true
   }
@@ -154,7 +278,8 @@ export function getAdminContent(): AdminContent {
 
 export function saveAdminContent(c: AdminContent) {
   try {
-    localStorage.setItem(CONTENT_KEY, JSON.stringify(c))
+    cacheAdminContent(c)
+    scheduleCloudSave(c)
   } catch {
     alert('Storage is full. Remove large files or export your data first.')
   }
@@ -329,7 +454,20 @@ export function mergedHomeCards(seed: HomeCard[]): HomeCard[] {
   const admin = getAdminContent().homeCards
   const map = new Map<string, HomeCard>()
   seed.forEach((h) => map.set(h.id, h))
-  admin.forEach((h) => map.set(h.id, h))
+  admin.forEach((h) => {
+    if (h.id === 'gk-grand-mock') return
+    if (h.id === 'pms-grand-mock' || h.id === 'test-series') {
+      const current = map.get(h.id)
+      map.set(h.id, {
+        ...h,
+        title: current?.title ?? h.title,
+        desc: current?.desc ?? h.desc,
+        to: current?.to ?? h.to,
+      })
+      return
+    }
+    map.set(h.id, h)
+  })
   return [...map.values()].sort((a, b) => a.order - b.order)
 }
 export function upsertHomeCard(h: HomeCard) {
@@ -409,6 +547,18 @@ export function addReport(r: Omit<ErrorReport, 'id' | 'date'>) {
   } catch {
     /* ignore */
   }
+  if (accountServiceConfigured) {
+    void getSupabaseClient().then(async (client) => {
+      if (!client) return
+      const { data: auth } = await client.auth.getUser()
+      if (!auth.user) return
+      await client.from('mcq_error_reports').insert({
+        user_id: auth.user.id,
+        question_id: r.questionId,
+        note: r.note,
+      })
+    })
+  }
 }
 export function deleteReport(id: string) {
   try {
@@ -416,6 +566,28 @@ export function deleteReport(id: string) {
   } catch {
     /* ignore */
   }
+  if (accountServiceConfigured) {
+    void getSupabaseClient().then((client) => client?.from('mcq_error_reports').delete().eq('id', id))
+  }
+}
+
+export async function getCloudReports(): Promise<ErrorReport[]> {
+  if (!accountServiceConfigured) return getReports()
+  const client = await getSupabaseClient()
+  if (!client) return getReports()
+  const { data, error } = await client
+    .from('mcq_error_reports')
+    .select('id, question_id, note, created_at')
+    .eq('status', 'open')
+    .order('created_at', { ascending: false })
+    .limit(500)
+  if (error) return getReports()
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    questionId: row.question_id,
+    note: row.note,
+    date: String(row.created_at).slice(0, 10),
+  }))
 }
 
 export function getMentorOverride(id: string): MentorOverride | undefined {

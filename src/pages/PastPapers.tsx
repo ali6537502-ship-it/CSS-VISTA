@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { Search, Download, Eye, FileText, PenLine, Bookmark, BookmarkCheck, BarChart3 } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
@@ -27,8 +27,9 @@ const repeatedThemes: { subject: string; themes: string[] }[] = [
 ]
 
 export default function PastPapers() {
+  const [searchParams] = useSearchParams()
   const papers = useMemo(() => mergedPastPapers(seedPapers), [])
-  const [q, setQ] = useState('')
+  const [q, setQ] = useState(() => searchParams.get('search') ?? '')
   const [exam, setExam] = useState('All')
   const [subject, setSubject] = useState('All')
   const [year, setYear] = useState('All')
@@ -212,8 +213,14 @@ export default function PastPapers() {
                       </button>
                       {p.fileUrl ? (
                         <div className="flex gap-2">
-                          <a href={p.fileUrl} target="_blank" rel="noopener noreferrer" onClick={() => recordActivity({ type: 'past-paper', label: p.title, path: '/past-papers' })} className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium hover:bg-secondary"><Eye className="h-4 w-4" /> View</a>
-                          <a href={p.fileUrl} download className="inline-flex items-center gap-1.5 rounded-md bg-pine px-3 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><Download className="h-4 w-4" /> Download</a>
+                          <Link
+                            to={`/past-papers/view/${p.id}`}
+                            onClick={() => recordActivity({ type: 'past-paper', label: p.title, path: `/past-papers/view/${p.id}` })}
+                            className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium hover:bg-secondary"
+                          >
+                            <Eye className="h-4 w-4" /> View
+                          </Link>
+                          <a href={p.fileUrl} download data-google-vignette="false" className="inline-flex items-center gap-1.5 rounded-md bg-pine px-3 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><Download className="h-4 w-4" /> Download</a>
                         </div>
                       ) : (
                         <span className="text-xs text-muted-foreground">File being uploaded</span>

@@ -1,8 +1,6 @@
-// Handwritten notes library by Miss Sadia Zahoor, PAS. Categories follow the same
-// subject structure as the lecture centre; files appear only after original uploads.
-import { allLectureCourses } from './lectures'
+import { lectureCourses } from '@/data/lectures'
 
-export interface HandwrittenNoteCategory {
+export interface HandwrittenNoteSubject {
   slug: string
   title: string
   kind: 'Compulsory' | 'Optional'
@@ -10,15 +8,14 @@ export interface HandwrittenNoteCategory {
   uploadedNotes: number
 }
 
-export const handwrittenNoteCategories: HandwrittenNoteCategory[] = allLectureCourses.map((c) => ({
-  slug: c.slug,
-  title: c.title,
-  kind: c.kind,
-  description:
-    c.kind === 'Compulsory'
-      ? 'Handwritten preparation notes for this compulsory CSS paper.'
-      : `Handwritten preparation notes for ${c.title}.`,
+export const handwrittenNoteSubjects: HandwrittenNoteSubject[] = lectureCourses.map((course) => ({
+  slug: course.slug,
+  title: course.title,
+  kind: course.kind,
+  description: course.kind === 'Compulsory'
+    ? 'Handwritten preparation notes for this compulsory CSS paper.'
+    : `Handwritten preparation notes for ${course.title}.`,
   uploadedNotes: 0,
 }))
 
-export const notesAuthor = 'Miss Sadia Zahoor, PAS'
+export const handwrittenNotesOwner = 'Miss Sadia Zahoor, PAS'

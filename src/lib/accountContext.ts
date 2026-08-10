@@ -18,6 +18,8 @@ export interface AccountContextValue {
   signIn(email: string, password: string): Promise<ActionResult>
   signUp(email: string, password: string, fullName: string): Promise<ActionResult>
   signInWithGoogle(): Promise<ActionResult>
+  requestPasswordReset(email: string): Promise<ActionResult>
+  updatePassword(password: string): Promise<ActionResult>
   signOut(): Promise<ActionResult>
   syncNow(): Promise<ActionResult>
   resetProgress(): Promise<ActionResult>

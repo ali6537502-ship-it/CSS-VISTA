@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useSearchParams } from 'react-router'
 import {
   ArrowRight, BookOpen, Clock3, LibraryBig, Search, Sparkles, X,
 } from 'lucide-react'
@@ -206,9 +207,10 @@ function BookReader({
 }
 
 export default function BookSummaries() {
+  const [searchParams] = useSearchParams()
   const [library, setLibrary] = useState<BookSummaryLibrary | null>(null)
   const [error, setError] = useState('')
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [category, setCategory] = useState('all')
   const [activeBook, setActiveBook] = useState<BookSummary | null>(null)
 

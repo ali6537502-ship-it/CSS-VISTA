@@ -1,0 +1,902 @@
+{
+  "why-nations-fail": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7253519-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL16568759W",
+    "matchTitle": "Why Nations Fail",
+    "matchScore": "0.963",
+    "width": 300,
+    "height": 456
+  },
+  "the-narrow-corridor": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8872725-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20220421W",
+    "matchTitle": "The Narrow Corridor",
+    "matchScore": "0.963",
+    "width": 263,
+    "height": 400
+  },
+  "sapiens-a-brief-history-of-humankind": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8634250-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL17075811W",
+    "matchTitle": "Sapiens",
+    "matchScore": "0.474",
+    "width": 326,
+    "height": 500
+  },
+  "guns-germs-and-steel": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7884018-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL276558W",
+    "matchTitle": "Guns, Germs, and Steel",
+    "matchScore": "1.000",
+    "width": 317,
+    "height": 500
+  },
+  "the-lessons-of-history": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7240225-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1073956W",
+    "matchTitle": "The Lessons of History",
+    "matchScore": "0.945",
+    "width": 300,
+    "height": 300
+  },
+  "factfulness": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8186237-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL17877260W",
+    "matchTitle": "Factfulness",
+    "matchScore": "0.963",
+    "width": 324,
+    "height": 499
+  },
+  "the-black-swan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/5721840-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3295030W",
+    "matchTitle": "The Black Swan",
+    "matchScore": "1.000",
+    "width": 140,
+    "height": 212
+  },
+  "the-righteous-mind": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7256782-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL16568840W",
+    "matchTitle": "The Righteous Mind",
+    "matchScore": "1.000",
+    "width": 322,
+    "height": 500
+  },
+  "development-as-freedom": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/120233-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL116534W",
+    "matchTitle": "Development as Freedom",
+    "matchScore": "1.000",
+    "width": 114,
+    "height": 180
+  },
+  "capital-in-the-twenty-first-century": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10103429-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19718884W",
+    "matchTitle": "Thomas Piketty's Capital in the twenty-first century",
+    "matchScore": "0.628",
+    "width": 353,
+    "height": 500
+  },
+  "the-origins-of-political-order": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7895385-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15539013W",
+    "matchTitle": "The origins of political order",
+    "matchScore": "1.000",
+    "width": 329,
+    "height": 500
+  },
+  "prisoners-of-geography": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8900233-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20010115W",
+    "matchTitle": "Prisoners of geography",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-silk-roads": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8963642-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19666939W",
+    "matchTitle": "The Silk Roads",
+    "matchScore": "1.000",
+    "width": 327,
+    "height": 500
+  },
+  "the-age-of-surveillance-capitalism": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8353262-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL18201749W",
+    "matchTitle": "The Age of Surveillance Capitalism",
+    "matchScore": "1.000",
+    "width": 301,
+    "height": 500
+  },
+  "the-sixth-extinction": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7910870-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL16820830W",
+    "matchTitle": "The Sixth Extinction",
+    "matchScore": "1.000",
+    "width": 331,
+    "height": 500
+  },
+  "the-republic": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12828820-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL28588519W",
+    "matchTitle": "The republic, Plato",
+    "matchScore": "0.624",
+    "width": 289,
+    "height": 500
+  },
+  "politics": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6528920-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL13703833W",
+    "matchTitle": "Poetics",
+    "matchScore": "0.844",
+    "width": 287,
+    "height": 500
+  },
+  "leviathan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6525465-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL653987W",
+    "matchTitle": "Leviathan",
+    "matchScore": "1.000",
+    "width": 328,
+    "height": 500
+  },
+  "two-treatises-of-government": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/13704679-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL31805824W",
+    "matchTitle": "Two Treatises of Government",
+    "matchScore": "1.000",
+    "width": 329,
+    "height": 500
+  },
+  "the-social-contract": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/15217301-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL34030769W",
+    "matchTitle": "Gateway to the Social Contract",
+    "matchScore": "0.825",
+    "width": 312,
+    "height": 500
+  },
+  "on-liberty": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/966821-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1068091W",
+    "matchTitle": "On Liberty",
+    "matchScore": "1.000",
+    "width": 284,
+    "height": 475
+  },
+  "democracy-in-america": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/15186498-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL38891618W",
+    "matchTitle": "Democracy in America",
+    "matchScore": "1.000",
+    "width": 280,
+    "height": 500
+  },
+  "the-open-society-and-its-enemies": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/3069237-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL8975462W",
+    "matchTitle": "The Open Society and Its Enemies",
+    "matchScore": "1.000",
+    "width": 325,
+    "height": 475
+  },
+  "the-origins-of-totalitarianism": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10793645-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL10460640W",
+    "matchTitle": "The Origins of Totalitarianism",
+    "matchScore": "1.000",
+    "width": 335,
+    "height": 500
+  },
+  "the-road-to-serfdom": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6991871-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1165001W",
+    "matchTitle": "The Road to Serfdom",
+    "matchScore": "1.000",
+    "width": 363,
+    "height": 500
+  },
+  "justice-what-s-the-right-thing-to-do": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/1129014-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1810923W",
+    "matchTitle": "Justice",
+    "matchScore": "0.474",
+    "width": 348,
+    "height": 500
+  },
+  "how-democracies-die": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8311412-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL18139175W",
+    "matchTitle": "How Democracies Die",
+    "matchScore": "0.956",
+    "width": 423,
+    "height": 500
+  },
+  "the-dictator-s-handbook": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8114194-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15980652W",
+    "matchTitle": "The dictator's handbook",
+    "matchScore": "0.969",
+    "width": 333,
+    "height": 499
+  },
+  "diplomacy": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/3945662-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1967243W",
+    "matchTitle": "Diplomacy",
+    "matchScore": "1.000",
+    "width": 128,
+    "height": 198
+  },
+  "world-order": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7311877-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1967211W",
+    "matchTitle": "World order",
+    "matchScore": "1.000",
+    "width": 124,
+    "height": 187
+  },
+  "the-tragedy-of-great-power-politics": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/246652-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL4652460W",
+    "matchTitle": "The Tragedy of Great Power Politics",
+    "matchScore": "1.000",
+    "width": 314,
+    "height": 476
+  },
+  "the-rise-and-fall-of-the-great-powers": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/14570519-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3907743W",
+    "matchTitle": "The Rise and Fall of the Great Powers",
+    "matchScore": "1.000",
+    "width": 324,
+    "height": 500
+  },
+  "the-clash-of-civilizations-and-the-remaking-of-world-order": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/472725-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3289930W",
+    "matchTitle": "The Clash of Civilizations and the Remaking of World Order",
+    "matchScore": "1.000",
+    "width": 310,
+    "height": 500
+  },
+  "the-end-of-history-and-the-last-man": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/18768-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2670501W",
+    "matchTitle": "The End of History and the Last Man",
+    "matchScore": "1.000",
+    "width": 310,
+    "height": 475
+  },
+  "the-grand-chessboard": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/1022262-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2657616W",
+    "matchTitle": "The Grand Chessboard",
+    "matchScore": "1.000",
+    "width": 276,
+    "height": 420
+  },
+  "the-anarchical-society": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/5005196-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3490685W",
+    "matchTitle": "The Anarchical Society",
+    "matchScore": "1.000",
+    "width": 128,
+    "height": 197
+  },
+  "the-strategy-of-conflict": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/414074-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2259845W",
+    "matchTitle": "The strategy of conflict",
+    "matchScore": "1.000",
+    "width": 336,
+    "height": 500
+  },
+  "on-war": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9933109-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL62744W",
+    "matchTitle": "Vom Kriege",
+    "matchScore": "0.512",
+    "width": 290,
+    "height": 500
+  },
+  "the-art-of-war": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/4849549-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL244537W",
+    "matchTitle": "The Art of War",
+    "matchScore": "1.000",
+    "width": 128,
+    "height": 192
+  },
+  "the-guns-of-august": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6616967-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3378527W",
+    "matchTitle": "The Guns of August",
+    "matchScore": "0.927",
+    "width": 297,
+    "height": 500
+  },
+  "postwar-a-history-of-europe-since-1945": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/111385-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1894813W",
+    "matchTitle": "Postwar",
+    "matchScore": "0.463",
+    "width": 118,
+    "height": 180
+  },
+  "the-cold-war-a-world-history": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10368271-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19715211W",
+    "matchTitle": "The cold war",
+    "matchScore": "0.688",
+    "width": 324,
+    "height": 500
+  },
+  "the-wealth-of-nations": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12816911-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL76827W",
+    "matchTitle": "The Wealth of Nations",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-general-theory-of-employment-interest-and-money": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/116182-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL35951W",
+    "matchTitle": "The general theory of employment, interest and money",
+    "matchScore": "1.000",
+    "width": 317,
+    "height": 475
+  },
+  "the-great-transformation": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/966056-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3617884W",
+    "matchTitle": "The Great Transformation",
+    "matchScore": "1.000",
+    "width": 290,
+    "height": 475
+  },
+  "capitalism-and-freedom": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/140808-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2747782W",
+    "matchTitle": "Capitalism and freedom",
+    "matchScore": "1.000",
+    "width": 302,
+    "height": 475
+  },
+  "poor-economics": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6765497-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15743097W",
+    "matchTitle": "Poor Economics",
+    "matchScore": "0.927",
+    "width": 326,
+    "height": 500
+  },
+  "good-economics-for-hard-times": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9322264-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20659791W",
+    "matchTitle": "Good Economics for Hard Times",
+    "matchScore": "0.927",
+    "width": 307,
+    "height": 475
+  },
+  "the-bottom-billion": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/1128787-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3478148W",
+    "matchTitle": "The bottom billion",
+    "matchScore": "1.000",
+    "width": 331,
+    "height": 500
+  },
+  "the-great-escape": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8977010-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20315800W",
+    "matchTitle": "The Great Escape",
+    "matchScore": "1.000",
+    "width": 324,
+    "height": 500
+  },
+  "globalization-and-its-discontents": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/247709-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL624826W",
+    "matchTitle": "Globalization and its discontents",
+    "matchScore": "1.000",
+    "width": 301,
+    "height": 475
+  },
+  "the-price-of-inequality": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9328023-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20662505W",
+    "matchTitle": "The Price of Inequality",
+    "matchScore": "1.000",
+    "width": 334,
+    "height": 500
+  },
+  "the-ascent-of-money": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6327852-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL792952W",
+    "matchTitle": "The ascent of money",
+    "matchScore": "1.000",
+    "width": 197,
+    "height": 300
+  },
+  "the-future-of-capitalism": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8814733-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20168548W",
+    "matchTitle": "The Future of Capitalism",
+    "matchScore": "1.000",
+    "width": 331,
+    "height": 500
+  },
+  "doughnut-economics": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8347411-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL18139098W",
+    "matchTitle": "Doughnut economics",
+    "matchScore": "1.000",
+    "width": 200,
+    "height": 300
+  },
+  "the-entrepreneurial-state": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7265270-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL16808725W",
+    "matchTitle": "THE ENTREPRENEURIAL STATE",
+    "matchScore": "1.000",
+    "width": 267,
+    "height": 400
+  },
+  "the-prize-the-epic-quest-for-oil-money-and-power": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/409010-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2748135W",
+    "matchTitle": "The Prize",
+    "matchScore": "0.466",
+    "width": 316,
+    "height": 475
+  },
+  "nudge": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6402116-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3936258W",
+    "matchTitle": "Nudge",
+    "matchScore": "0.969",
+    "width": 375,
+    "height": 500
+  },
+  "behave": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8814831-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL17835813W",
+    "matchTitle": "Behave",
+    "matchScore": "1.000",
+    "width": 326,
+    "height": 500
+  },
+  "bowling-alone": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/426348-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL4291077W",
+    "matchTitle": "Bowling Alone",
+    "matchScore": "1.000",
+    "width": 312,
+    "height": 475
+  },
+  "the-weirdest-people-in-the-world": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10154462-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20844844W",
+    "matchTitle": "The WEIRDest People in the World",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-better-angels-of-our-nature": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7906239-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL16239379W",
+    "matchTitle": "The better angels of our nature",
+    "matchScore": "1.000",
+    "width": 332,
+    "height": 500
+  },
+  "invisible-women": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8802593-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20157508W",
+    "matchTitle": "Invisible Women",
+    "matchScore": "1.000",
+    "width": 331,
+    "height": 500
+  },
+  "the-second-sex": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/4230379-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2270159W",
+    "matchTitle": "After The second sex",
+    "matchScore": "0.642",
+    "width": 128,
+    "height": 204
+  },
+  "a-room-of-one-s-own": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6559057-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL39379W",
+    "matchTitle": "A Room of One's Own",
+    "matchScore": "1.000",
+    "width": 322,
+    "height": 500
+  },
+  "orientalism": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/254331-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL27405W",
+    "matchTitle": "Orientalism",
+    "matchScore": "1.000",
+    "width": 310,
+    "height": 475
+  },
+  "imagined-communities": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/652236-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1702855W",
+    "matchTitle": "Imagined communities",
+    "matchScore": "1.000",
+    "width": 310,
+    "height": 475
+  },
+  "the-wretched-of-the-earth": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10681366-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL24219413W",
+    "matchTitle": "Meditations on Frantz Fanon's Wretched of the Earth",
+    "matchScore": "0.472",
+    "width": 333,
+    "height": 500
+  },
+  "manufacturing-consent": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7900362-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL31013W",
+    "matchTitle": "Manufacturing consent",
+    "matchScore": "0.963",
+    "width": 329,
+    "height": 500
+  },
+  "amusing-ourselves-to-death": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/94285-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL137916W",
+    "matchTitle": "Amusing Ourselves to Death",
+    "matchScore": "1.000",
+    "width": 307,
+    "height": 500
+  },
+  "the-shallows": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6458532-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15297392W",
+    "matchTitle": "The Shallows",
+    "matchScore": "1.000",
+    "width": 182,
+    "height": 277
+  },
+  "chip-war": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12968901-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL27846746W",
+    "matchTitle": "Chip War",
+    "matchScore": "1.000",
+    "width": 238,
+    "height": 360
+  },
+  "pakistan-a-hard-country": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/10355209-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15931690W",
+    "matchTitle": "Pakistan",
+    "matchScore": "0.623",
+    "width": 340,
+    "height": 500
+  },
+  "the-idea-of-pakistan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/613751-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2324513W",
+    "matchTitle": "The idea of Pakistan",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-sole-spokesman": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/340474-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL85854W",
+    "matchTitle": "The sole spokesman",
+    "matchScore": "1.000",
+    "width": 295,
+    "height": 475
+  },
+  "the-struggle-for-pakistan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8881203-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19986815W",
+    "matchTitle": "The struggle for Pakistan",
+    "matchScore": "1.000",
+    "width": 329,
+    "height": 500
+  },
+  "the-great-partition": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7233894-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL12254113W",
+    "matchTitle": "The great Partition",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-indus-saga-and-the-making-of-pakistan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/1130306-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL2608638W",
+    "matchTitle": "The Indus saga and the making of Pakistan",
+    "matchScore": "1.000",
+    "width": 301,
+    "height": 475
+  },
+  "no-exit-from-pakistan": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/7817393-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL17557903W",
+    "matchTitle": "No Exit from Pakistan",
+    "matchScore": "1.000",
+    "width": 266,
+    "height": 400
+  },
+  "nineteen-eighty-four": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9267242-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1168083W",
+    "matchTitle": "Nineteen Eighty-Four",
+    "matchScore": "1.000",
+    "width": 330,
+    "height": 500
+  },
+  "brave-new-world": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8231823-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL64365W",
+    "matchTitle": "Brave New World",
+    "matchScore": "1.000",
+    "width": 314,
+    "height": 500
+  },
+  "animal-farm": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/11261770-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1168007W",
+    "matchTitle": "Animal Farm",
+    "matchScore": "1.000",
+    "width": 330,
+    "height": 500
+  },
+  "the-plague": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/1521194-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL480801W",
+    "matchTitle": "The Plague",
+    "matchScore": "0.780",
+    "width": 307,
+    "height": 475
+  },
+  "things-fall-apart": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12816943-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL891786W",
+    "matchTitle": "Things Fall Apart",
+    "matchScore": "1.000",
+    "width": 288,
+    "height": 500
+  },
+  "to-kill-a-mockingbird": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/14351077-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL3140822W",
+    "matchTitle": "To Kill a Mockingbird",
+    "matchScore": "1.000",
+    "width": 337,
+    "height": 500
+  },
+  "the-handmaid-s-tale": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8231851-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL675783W",
+    "matchTitle": "The Handmaid's Tale",
+    "matchScore": "1.000",
+    "width": 325,
+    "height": 500
+  },
+  "the-reluctant-fundamentalist": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/2010955-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL489097W",
+    "matchTitle": "The Reluctant Fundamentalist",
+    "matchScore": "1.000",
+    "width": 327,
+    "height": 500
+  },
+  "man-s-search-for-meaning": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/465226-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL8257090W",
+    "matchTitle": "Man's Search for Ultimate Meaning",
+    "matchScore": "0.877",
+    "width": 310,
+    "height": 475
+  },
+  "long-walk-to-freedom": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12702407-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1783377W",
+    "matchTitle": "Long Walk to Freedom",
+    "matchScore": "1.000",
+    "width": 318,
+    "height": 500
+  },
+  "a-short-history-of-nearly-everything": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12725620-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL74128W",
+    "matchTitle": "A short history of nearly everything",
+    "matchScore": "1.000",
+    "width": 329,
+    "height": 500
+  },
+  "thinking-fast-and-slow": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/13290711-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL15992072W",
+    "matchTitle": "Thinking, fast and slow",
+    "matchScore": "1.000",
+    "width": 386,
+    "height": 500
+  },
+  "political-order-and-political-decay": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9381734-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19986556W",
+    "matchTitle": "Political order and political decay",
+    "matchScore": "1.000",
+    "width": 333,
+    "height": 500
+  },
+  "the-revenge-of-geography": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/9065634-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL20398275W",
+    "matchTitle": "The Revenge of Geography",
+    "matchScore": "1.000",
+    "width": 338,
+    "height": 500
+  },
+  "the-prince": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/12726168-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1089297W",
+    "matchTitle": "The Prince",
+    "matchScore": "1.000",
+    "width": 307,
+    "height": 500
+  },
+  "the-uninhabitable-earth": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8801133-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL19096883W",
+    "matchTitle": "The Uninhabitable Earth",
+    "matchScore": "1.000",
+    "width": 328,
+    "height": 500
+  },
+  "the-twenty-years-crisis-1919-1939": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/47924-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL1170631W",
+    "matchTitle": "The Twenty Years' Crisis, 1919-1939",
+    "matchScore": "0.853",
+    "width": 325,
+    "height": 475
+  },
+  "the-murder-of-history": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/6287881-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL364053W",
+    "matchTitle": "The murder of history",
+    "matchScore": "0.890",
+    "width": 160,
+    "height": 240
+  },
+  "pakistan-beyond-the-crisis-state": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/13249164-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL21258447W",
+    "matchTitle": "Pakistan Beyond the Crisis State",
+    "matchScore": "0.890",
+    "width": 320,
+    "height": 500
+  },
+  "the-pakistan-paradox": {
+    "imageUrl": "https://covers.openlibrary.org/b/id/8372942-L.jpg?default=false",
+    "provider": "Open Library",
+    "recordUrl": "https://openlibrary.org/works/OL18942159W",
+    "matchTitle": "The Pakistan Paradox: Instability and Resilience (The Ceri Series in Comparative Politics and International Studies)",
+    "matchScore": "0.938",
+    "width": 320,
+    "height": 500
+  },
+  "the-rule-of-law": {
+    "imageUrl": "https://cdn.penguin.co.uk/dam-assets/books/9780141034539/9780141034539-jacket-large.jpg",
+    "provider": "Penguin Books",
+    "recordUrl": "https://www.penguin.co.uk/books/56375/the-rule-of-law-by-tom-bingham/9780141034539",
+    "matchTitle": "The Rule of Law",
+    "matchScore": "1.000",
+    "width": 326,
+    "height": 500
+  }
+}

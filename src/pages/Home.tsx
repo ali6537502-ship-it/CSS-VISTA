@@ -1,18 +1,67 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import {
-  CalendarCheck2, ChevronRight, EyeOff, FileText, Flame, Globe, History,
-  Infinity as InfinityIcon, Landmark, Play, Target,
+  CalendarCheck2, CheckCircle2, ChevronRight, FileText, Flame, Globe,
+  Landmark, Sparkles, Target,
 } from 'lucide-react'
-import { getStats, getVisitStreak, touchVisit } from '@/lib/store'
-import { lastActivity, recentActivities } from '@/lib/progress'
+import { getState, getStats, getVisitStreak, touchVisit } from '@/lib/store'
+import { getRevisionStats, recentActivities } from '@/lib/progress'
 import { mergedHomeCards } from '@/lib/admin'
 import { defaultHomeCards } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import LiveCountdown from '@/components/LiveCountdown'
+import { useAccount } from '@/lib/accountContext'
 
-const RESUME_HIDDEN_KEY = 'cssvista:home:resume-hidden'
-const HERO_HIDDEN_KEY = 'cssvista:home:hero-hidden'
+function CinematicGreenFlow() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoEnabled, setVideoEnabled] = useState(false)
+
+  useEffect(() => {
+    const connection = navigator as Navigator & { connection?: { saveData?: boolean } }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    if (connection.connection?.saveData || reducedMotion.matches) return
+
+    const timer = window.setTimeout(() => setVideoEnabled(true), 250)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const syncPlayback = () => {
+      if (document.hidden) {
+        video.pause()
+      } else {
+        void video.play().catch(() => undefined)
+      }
+    }
+
+    syncPlayback()
+    document.addEventListener('visibilitychange', syncPlayback)
+    return () => document.removeEventListener('visibilitychange', syncPlayback)
+  }, [videoEnabled])
+
+  return (
+    <div className="home-live-wallpaper" aria-hidden="true">
+      {videoEnabled && (
+        <video
+          ref={videoRef}
+          className="home-live-wallpaper-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src="/videos/css-vista-live-green-lite.mp4" type="video/mp4" />
+        </video>
+      )}
+      <div className="home-live-wallpaper-tint" />
+    </div>
+  )
+}
 
 function greeting() {
   const hour = new Date().getHours()
@@ -32,194 +81,131 @@ function relativeTime(timestamp: number) {
 }
 
 export default function Home() {
+  const { user } = useAccount()
   const stats = useMemo(() => getStats(), [])
-  const activity = useMemo(() => lastActivity(), [])
   const activities = useMemo(() => recentActivities(4), [])
   const modules = useMemo(
     () => mergedHomeCards(defaultHomeCards).filter((card) => card.visible),
     [],
-  )
-  const [resumeHidden, setResumeHidden] = useState(
-    () => localStorage.getItem(RESUME_HIDDEN_KEY) === '1',
-  )
-  const [heroHidden, setHeroHidden] = useState(
-    () => localStorage.getItem(HERO_HIDDEN_KEY) === '1',
   )
   const [visit] = useState(() => {
     const current = getVisitStreak()
     return current.checkedInToday ? current : touchVisit()
   })
 
-  const resumePath = activity?.path ?? '/gk/quiz?mode=random'
-  const resumeLabel = activity?.label ?? 'Start a mixed GK quiz'
   const practiceProgress = stats.totalQuizzes ? stats.accuracy : 0
-
-  function setResumeVisibility(hidden: boolean) {
-    setResumeHidden(hidden)
-    localStorage.setItem(RESUME_HIDDEN_KEY, hidden ? '1' : '0')
-  }
-
-  function setHeroVisibility(hidden: boolean) {
-    setHeroHidden(hidden)
-    localStorage.setItem(HERO_HIDDEN_KEY, hidden ? '1' : '0')
-  }
+  const plannerConfigured = useMemo(() => Boolean(getState().studyPlanner), [])
+  const revisionDue = useMemo(() => getRevisionStats().due, [])
+  const studentName = useMemo(() => {
+    const fullName = user?.user_metadata?.full_name
+    if (typeof fullName === 'string' && fullName.trim()) return fullName.trim()
+    return user?.email?.split('@')[0] || 'aspirant'
+  }, [user])
 
   return (
     <div className="min-h-screen bg-[#fbfcfb]">
       <div className="mx-auto max-w-[1520px] space-y-4 px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
-        <section className={heroHidden ? 'space-y-3' : 'grid gap-3 lg:grid-cols-[1.6fr_1fr]'}>
-          {heroHidden ? (
-            <div className="home-resume-enter flex items-center justify-between rounded-lg border bg-white px-3 py-2 shadow-sm sm:px-4">
-              <span className="text-xs font-medium text-muted-foreground">Welcome panel hidden</span>
-              <button
-                type="button"
-                onClick={() => setHeroVisibility(false)}
-                className="inline-flex items-center gap-2 rounded-md bg-pine px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-emerald-900"
-              >
-                <History className="h-4 w-4" /> Show welcome panel
-              </button>
-            </div>
-          ) : (
-          <div className="vista-hero relative overflow-hidden rounded-xl px-5 py-5 text-white shadow-[0_14px_38px_rgba(4,69,43,0.16)] sm:px-7 sm:py-6">
+        <section className="grid gap-3 lg:grid-cols-[1.6fr_1fr]">
+          <div className="vista-hero relative overflow-hidden rounded-xl px-5 py-4 text-white shadow-[0_14px_38px_rgba(4,69,43,0.16)] sm:px-6 sm:py-4">
+            <CinematicGreenFlow />
             <div className="absolute -bottom-20 -right-16 opacity-[0.09]" aria-hidden="true">
               <Landmark className="h-80 w-80" strokeWidth={1} />
             </div>
-            <button
-              type="button"
-              onClick={() => setHeroVisibility(true)}
-              className="absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-md border border-white/25 bg-emerald-950/35 px-2.5 py-2 text-[10px] font-bold text-white backdrop-blur-sm transition-colors hover:bg-emerald-950/55 sm:right-4 sm:top-4 sm:text-xs"
-              aria-label="Hide welcome panel"
-            >
-              <EyeOff className="h-3.5 w-3.5" /> Hide panel
-            </button>
             <div className="relative z-10">
-              <h1 className="font-display text-[27px] font-bold leading-tight sm:text-4xl lg:text-[38px]">
-                {greeting()},{' '}
-                <span className="block text-amber-400 sm:inline">aspirant</span>
-              </h1>
-              <span className="mt-3 block h-1 w-11 rounded-full bg-amber-400" />
-              <p className="mt-3 text-sm text-emerald-50/90 sm:text-base">
-                Your preparation command center
-              </p>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h1 className="font-display text-[27px] font-bold leading-tight sm:text-[32px] lg:text-[34px]">
+                    {greeting()},{' '}
+                    <span className="block text-amber-400 sm:inline">{studentName}</span>
+                  </h1>
+                  <span className="mt-2 block h-1 w-10 rounded-full bg-amber-400" />
+                  <p className="mt-2 text-sm text-emerald-50/90">
+                    Your preparation command center
+                  </p>
+                </div>
 
-              <div className="mt-5 grid grid-cols-1 items-center gap-3 sm:grid-cols-[minmax(0,1fr)_100px] sm:gap-4">
-                {resumeHidden ? (
-                  <button
-                    type="button"
-                    onClick={() => setResumeVisibility(false)}
-                    className="home-resume-enter inline-flex w-fit items-center gap-2 rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-white/15"
-                  >
-                    <History className="h-4 w-4" /> Show recent activity
-                  </button>
-                ) : (
-                  <div className="home-resume-enter relative min-w-0 rounded-xl bg-white text-foreground shadow-lg">
-                    <Link
-                      to={resumePath}
-                      className="group block rounded-xl p-3 pr-12 transition-transform hover:-translate-y-0.5 sm:p-4 sm:pr-16"
-                    >
-                      <div className="flex items-center gap-2.5 sm:gap-3">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-pine text-white sm:h-11 sm:w-11">
-                          <History className="h-5 w-5" />
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="hidden text-[10px] font-bold uppercase tracking-wide text-emerald-700 sm:block">
-                            Continue where you left off
-                          </p>
-                          <p className="truncate text-sm font-bold text-pine sm:text-[15px]">{resumeLabel}</p>
-                          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-secondary">
-                            <div
-                              className="h-full rounded-full bg-emerald-700"
-                              style={{ width: `${Math.max(8, practiceProgress)}%` }}
-                            />
-                          </div>
-                        </div>
-                        <span className="hidden items-center gap-1 rounded-md bg-pine px-3 py-2 text-xs font-bold text-white md:flex">
-                          Resume <Play className="h-3.5 w-3.5 fill-current" />
-                        </span>
-                      </div>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => setResumeVisibility(true)}
-                      className="absolute right-2 top-2 inline-flex items-center gap-1 rounded-md border bg-white/95 p-1.5 text-[10px] font-bold text-muted-foreground transition-colors hover:bg-secondary hover:text-pine sm:right-2.5 sm:top-2.5"
-                      aria-label="Hide continue where you left off"
-                      title="Hide this card"
-                    >
-                      <EyeOff className="h-3.5 w-3.5" />
-                      <span className="hidden lg:inline">Hide</span>
-                    </button>
-                  </div>
-                )}
+                <Link
+                  to="/dashboard"
+                  className="group inline-flex shrink-0 items-center gap-2 rounded-xl border border-white/20 bg-black/15 px-2.5 py-2 text-white shadow-sm backdrop-blur-md transition-colors hover:bg-black/25"
+                  aria-label={`${visit.current} day streak. Best ${visit.best}. Unlimited streak.`}
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 shadow-sm">
+                    <Flame className="h-5 w-5 fill-white/20" />
+                  </span>
+                  <span>
+                    <span className="block whitespace-nowrap text-xs font-black">
+                      {visit.current} day streak <span className="text-amber-300">· ∞</span>
+                    </span>
+                    <span className="block text-[9px] text-emerald-50/75">
+                      Best {visit.best} · {visit.totalVisitDays} visits
+                    </span>
+                  </span>
+                </Link>
+              </div>
+
+              <div className="mt-3 grid grid-cols-1 items-center gap-3 sm:grid-cols-[minmax(0,560px)_84px] sm:justify-between sm:gap-3">
+                <div className="min-w-0 max-w-[560px] [&>div]:shadow-lg">
+                  <LiveCountdown compact hero />
+                </div>
 
                 <Link to="/dashboard" className="group mx-auto hidden text-center sm:block">
                   <div
-                    className="flex h-[82px] w-[82px] items-center justify-center rounded-full p-1.5 sm:h-24 sm:w-24 sm:p-2"
+                    className="flex h-[72px] w-[72px] items-center justify-center rounded-full p-1.5 sm:h-20 sm:w-20"
                     style={{
                       background: `conic-gradient(#79c66e ${practiceProgress * 3.6}deg, rgba(255,255,255,.18) 0deg)`,
                     }}
                   >
                     <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-pine">
-                      <span className="text-2xl font-black">{practiceProgress}%</span>
-                      <span className="text-[8px] text-emerald-100 sm:text-[10px]">Overall progress</span>
+                      <span className="text-xl font-black">{practiceProgress}%</span>
+                      <span className="text-[8px] text-emerald-100">Overall progress</span>
                     </div>
                   </div>
-                  <span className="mt-2 inline-flex items-center text-[10px] font-bold text-amber-300 sm:text-xs">
-                    View progress <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4" />
+                  <span className="mt-1 inline-flex items-center text-[10px] font-bold text-amber-300">
+                    View progress <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>
               </div>
             </div>
           </div>
-          )}
 
-          <div className={heroHidden
-            ? 'grid grid-cols-2 gap-3 lg:grid-cols-[0.85fr_0.85fr_1.3fr]'
-            : 'grid grid-cols-2 gap-3 lg:grid-cols-1'
-          }>
+          <div className="grid grid-cols-2 gap-2">
             <Link
-              to="/dashboard"
-              className="vista-card group relative flex min-w-0 items-center gap-3 overflow-hidden border-amber-200 bg-gradient-to-r from-amber-50/80 via-white to-emerald-50/60 p-3 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md sm:px-4"
+              to="/study-planner"
+              className="vista-card group relative col-span-2 flex min-h-[118px] min-w-0 items-center gap-3 overflow-hidden border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-amber-50/70 p-3 transition-all hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md sm:p-4 lg:h-full lg:flex-col lg:items-start lg:justify-center"
             >
-              <span className="absolute -right-8 -top-10 h-28 w-28 rounded-full bg-amber-300/15 blur-2xl" aria-hidden="true" />
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md shadow-amber-500/20 sm:h-12 sm:w-12 sm:rounded-2xl">
-                <Flame className="h-6 w-6 fill-white/20 sm:h-7 sm:w-7" />
-              </span>
-              <div className="relative min-w-0 flex-1">
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <p className="whitespace-nowrap text-lg font-black leading-none text-pine sm:text-2xl">
-                    {visit.current} <span className="text-xs font-bold text-foreground sm:text-base">day streak</span>
-                  </p>
-                  <span className="ml-auto hidden items-center gap-1 rounded-full border border-emerald-200 bg-white/80 px-2 py-1 text-[9px] font-black uppercase tracking-wide text-emerald-800 sm:inline-flex">
-                    <InfinityIcon className="h-3.5 w-3.5" /> No limit
-                  </span>
-                </div>
-                <p className="mt-1 text-[9px] font-bold uppercase tracking-wide text-amber-700 sm:hidden">
-                  ∞ Unlimited comeback
-                </p>
-                <p className="mt-0.5 text-[9px] text-muted-foreground sm:mt-1 sm:text-xs">
-                  Best {visit.best} · {visit.totalVisitDays} visits
-                </p>
-              </div>
-            </Link>
-
-            <Link
-              to="/study-tools"
-              className="vista-card flex min-w-0 items-center gap-3 p-3 transition-all hover:-translate-y-0.5 hover:shadow-md sm:px-4"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-pine">
+              <span className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-amber-300/15 blur-2xl" aria-hidden="true" />
+              <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-pine text-white shadow-md shadow-emerald-900/10">
                 <CalendarCheck2 className="h-6 w-6" />
               </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-base font-bold text-foreground sm:text-lg">Today’s plan</p>
-                <p className="hidden text-xs text-muted-foreground sm:block">Daily challenge · Quiz · Revision</p>
+              <div className="relative min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <p className="text-lg font-black text-pine">Today’s plan</p>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-amber-800">
+                    <Sparkles className="h-3 w-3" /> Personal
+                  </span>
+                </div>
+                <p className="mt-1 text-xs font-medium text-muted-foreground">
+                  {plannerConfigured
+                    ? revisionDue
+                      ? `${revisionDue} smart revision${revisionDue === 1 ? '' : 's'} ready today`
+                      : 'You are caught up. Choose the next focused task.'
+                    : 'Build a focused plan from your subjects, hours and targets.'}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {[
+                    plannerConfigured ? `${revisionDue} due` : 'Set subjects',
+                    'Practice',
+                    'Review',
+                  ].map((item) => (
+                    <span key={item} className="inline-flex items-center gap-1 rounded-md border border-emerald-100 bg-white/80 px-2 py-1 text-[10px] font-bold text-emerald-900">
+                      <CheckCircle2 className="h-3 w-3 text-emerald-600" /> {item}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <span className="hidden rounded-md bg-pine px-3 py-2 text-xs font-bold text-white xl:block">View plan</span>
-              <ChevronRight className="h-5 w-5 shrink-0 text-emerald-800 xl:hidden" />
+              <span className="relative hidden rounded-md bg-pine px-3 py-2 text-xs font-bold text-white 2xl:block">Open plan</span>
+              <ChevronRight className="relative h-5 w-5 shrink-0 text-emerald-800 transition-transform group-hover:translate-x-1 2xl:hidden" />
             </Link>
-
-            <div className="col-span-2 lg:col-span-1 [&>div]:h-full [&>div]:shadow-sm">
-              <LiveCountdown compact />
-            </div>
           </div>
         </section>
 

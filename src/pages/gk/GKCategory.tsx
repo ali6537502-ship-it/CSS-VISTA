@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { ChevronLeft, ChevronRight, Play, Search } from 'lucide-react'
 import { PageHeader, EmptyState } from '@/components/shared'
-import { adminBankQuestions, dedupeBankQuestions, filterDisabled, getBankIndex, getCategoryQuestions, type BankQuestion } from '@/data/mcq'
+import { adminBankQuestions, dedupeBankQuestions, filterDisabled, getBankIndex, getChunk, type BankQuestion } from '@/data/mcq'
 import McqCard from '@/components/McqCard'
 import PrintMenu from '@/components/PrintMenu'
 import { recordActivity } from '@/lib/progress'
@@ -21,19 +21,49 @@ export default function GKCategory() {
   const [, setRefresh] = useState(0)
 
   useEffect(() => {
+    let cancelled = false
+    let backgroundTimer: number | null = null
     setQs(null)
-    getBankIndex().then((idx) => {
+    getBankIndex().then(async (idx) => {
       const cat = idx.categories.find((c) => c.slug === slug)
+      if (cancelled) return
       setName(cat?.name ?? slug)
       setTotal(cat?.count ?? 0)
+      if (!cat) {
+        setQs(adminBankQuestions(slug))
+        return
+      }
+
+      const firstChunk = await getChunk(slug, 0)
+      if (cancelled) return
+      const initialQuestions = dedupeBankQuestions(filterDisabled([
+        ...firstChunk,
+        ...adminBankQuestions(slug),
+      ]))
+      setQs(initialQuestions)
+      recordActivity({
+        type: 'gk-category',
+        label: `GK - ${cat.name}`,
+        path: `/gk/cat/${slug}`,
+      })
+
+      if (cat.chunks > 1) {
+        backgroundTimer = window.setTimeout(async () => {
+          for (let chunk = 1; chunk < cat.chunks; chunk += 1) {
+            const nextQuestions = await getChunk(slug, chunk)
+            if (cancelled) return
+            setQs((current) => dedupeBankQuestions(filterDisabled([
+              ...(current ?? []),
+              ...nextQuestions,
+            ])))
+          }
+        }, 250)
+      }
     })
-    getCategoryQuestions(slug).then((data) => {
-      const questions = dedupeBankQuestions(filterDisabled([...data, ...adminBankQuestions(slug)]))
-      setQs(questions)
-      setTotal(questions.length)
-      recordActivity({ type: 'gk-category', label: `GK - ${name}`, path: `/gk/cat/${slug}` })
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      cancelled = true
+      if (backgroundTimer !== null) window.clearTimeout(backgroundTimer)
+    }
   }, [slug])
 
   const subs = useMemo(() => {

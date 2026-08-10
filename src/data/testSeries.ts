@@ -1,4 +1,4 @@
-// Test Series Announcement - announcements only (no generator).
+// Official announcements displayed below the customized test-series planner.
 // The owner posts announcements, posters, schedules and registration details via the admin panel.
 export interface TestSeriesAnnouncement {
   id: string

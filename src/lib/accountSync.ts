@@ -8,6 +8,27 @@ const PRIMARY_PROGRESS_KEYS = new Set([
   'cssvista:progress:v1',
 ])
 
+interface CloudActivityRow {
+  user_id: string
+  event_key: string
+  activity_type: string
+  label: string
+  path: string | null
+  metadata: Record<string, unknown>
+  occurred_at: string
+}
+
+interface CloudQuizAttemptRow {
+  user_id: string
+  attempt_key: string
+  quiz_type: string
+  category: string
+  score: number
+  total: number
+  metadata: Record<string, unknown>
+  completed_at: string
+}
+
 function isStudentProgressKey(key: string) {
   return PRIMARY_PROGRESS_KEYS.has(key) || key.startsWith('cssvista:tool:')
 }
@@ -46,6 +67,103 @@ function mergeValues(cloud: unknown, local: unknown): unknown {
     return result
   }
   return local
+}
+
+function asArray(value: unknown): unknown[] {
+  return Array.isArray(value) ? value : []
+}
+
+function asFiniteNumber(value: unknown): number | null {
+  return typeof value === 'number' && Number.isFinite(value) ? value : null
+}
+
+function toIsoDate(value: unknown): string | null {
+  if (typeof value === 'number' || typeof value === 'string') {
+    const date = new Date(value)
+    if (!Number.isNaN(date.getTime())) return date.toISOString()
+  }
+  return null
+}
+
+function activityRows(snapshot: ProgressSnapshot, userId: string): CloudActivityRow[] {
+  const progress = isRecord(snapshot['cssvista:progress:v1'])
+    ? snapshot['cssvista:progress:v1']
+    : {}
+
+  return asArray(progress.activities).flatMap((entry) => {
+    if (!isRecord(entry)) return []
+    const type = typeof entry.type === 'string' ? entry.type : ''
+    const label = typeof entry.label === 'string' ? entry.label : ''
+    const path = typeof entry.path === 'string' ? entry.path : null
+    const occurredAt = toIsoDate(entry.ts)
+    if (!type || !occurredAt) return []
+    const eventKey = `activity:${type}:${path ?? ''}:${occurredAt}`
+    return [{
+      user_id: userId,
+      event_key: eventKey,
+      activity_type: type,
+      label,
+      path,
+      metadata: {},
+      occurred_at: occurredAt,
+    }]
+  })
+}
+
+function quizAttemptRows(snapshot: ProgressSnapshot, userId: string): CloudQuizAttemptRow[] {
+  const state = isRecord(snapshot['cssvista:v1']) ? snapshot['cssvista:v1'] : {}
+  return asArray(state.quizResults).flatMap((entry) => {
+    if (!isRecord(entry)) return []
+    const id = typeof entry.id === 'string' ? entry.id : ''
+    const type = typeof entry.type === 'string' ? entry.type : ''
+    const category = typeof entry.category === 'string' ? entry.category : ''
+    const score = asFiniteNumber(entry.score)
+    const total = asFiniteNumber(entry.total)
+    const completedAt = toIsoDate(entry.date)
+    if (!id || !type || score === null || total === null || total <= 0 || score < 0 || score > total || !completedAt) {
+      return []
+    }
+    return [{
+      user_id: userId,
+      attempt_key: id,
+      quiz_type: type,
+      category,
+      score: Math.trunc(score),
+      total: Math.trunc(total),
+      metadata: {
+        wrong_topics: Array.isArray(entry.wrongTopics) ? entry.wrongTopics : [],
+      },
+      completed_at: completedAt,
+    }]
+  })
+}
+
+async function syncNormalizedStudentRecords(
+  client: SupabaseClient,
+  userId: string,
+  snapshot: ProgressSnapshot,
+) {
+  const activities = activityRows(snapshot, userId)
+  if (activities.length) {
+    const { error } = await client
+      .from('student_activity')
+      .upsert(activities, { onConflict: 'user_id,event_key', ignoreDuplicates: true })
+    if (error) throw error
+  }
+
+  const attempts = quizAttemptRows(snapshot, userId)
+  if (attempts.length) {
+    const { error } = await client
+      .from('quiz_attempts')
+      .upsert(attempts, { onConflict: 'user_id,attempt_key' })
+    if (error) throw error
+  }
+
+  const { error: profileError } = await client
+    .from('student_profiles')
+    .update({ last_seen_at: new Date().toISOString() })
+    .eq('user_id', userId)
+  if (profileError) throw profileError
 }
 
 export function captureProgressSnapshot(): ProgressSnapshot {
@@ -117,6 +235,7 @@ export async function syncStudentProgress(
     )
 
   if (upsertError) throw upsertError
+  await syncNormalizedStudentRecords(client, userId, merged)
   applyProgressSnapshot(merged)
   return merged
 }
