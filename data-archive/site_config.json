@@ -1,0 +1,62 @@
+{
+  "temporary_site_name": "CSS with Aliyan Sir",
+  "site_name_is_final": false,
+  "tagline": "Free, focused and source-aware preparation for CSS and PPSC aspirants.",
+  "registration_required": false,
+  "core_content_paywall": false,
+  "navigation": [
+    {"label": "Home", "route": "/"},
+    {"label": "CSS Past Papers", "route": "/css-past-papers"},
+    {"label": "Precis & Composition", "route": "/precis-composition"},
+    {"label": "Vocabulary", "route": "/vocabulary"},
+    {"label": "CSS Syllabus", "route": "/css-syllabus"},
+    {"label": "PPSC One-Paper", "route": "/ppsc-one-paper"},
+    {"label": "Study Planner", "route": "/study-planner"},
+    {"label": "Eligibility & Checklists", "route": "/eligibility-checklists"},
+    {"label": "Learn Essay", "route": "/learn-essay"},
+    {"label": "Subject Notes", "route": "/subject-notes"},
+    {"label": "My Profile", "route": "/profile"}
+  ],
+  "enabled_features": [
+    "global_search",
+    "subject_and_year_filters",
+    "source_status_badges",
+    "local_bookmarks",
+    "local_vocabulary_progress",
+    "local_study_planner",
+    "print_and_export_plan",
+    "age_and_eligibility_precheck",
+    "application_checklist",
+    "document_checklist"
+  ],
+  "excluded_features": [
+    "registration",
+    "login",
+    "subscriptions",
+    "paywall",
+    "current_affairs_portal",
+    "quotation_bank",
+    "evidence_bank",
+    "statistics_bank",
+    "case_study_bank",
+    "essay_laboratory",
+    "answer_writing_centre",
+    "test_series",
+    "personalized_test_series",
+    "digital_notes_library",
+    "ai_study_assistant",
+    "community",
+    "study_partners",
+    "attempt_tracker",
+    "examiner_centre_information",
+    "notification_alerts",
+    "deadline_calendar"
+  ],
+  "data_authenticity_rules": [
+    "Never label a third-party file as an official FPSC or PPSC file.",
+    "Show the source_status or authenticity_label beside every paper link.",
+    "Do not display an MCQ answer as correct unless a cited source verifies it.",
+    "Do not invent missing papers, profile information, dates, qualifications or results.",
+    "Link to the current official advertisement whenever a time-sensitive rule is presented."
+  ]
+}

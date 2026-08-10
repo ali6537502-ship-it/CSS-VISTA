@@ -1,0 +1,59 @@
+{
+  "scope": "CSS Competitive Examination",
+  "rules_source": "https://establishment.gov.pk/SiteImage/Misc/files/CSS%20Competitive%20Examination%20Rules%2C%202019.pdf",
+  "verified_on": "2026-07-16",
+  "calculator": {
+    "minimum_age_years": 21,
+    "standard_maximum_age_years": 30,
+    "relaxed_maximum_age_years": 32,
+    "cutoff_rule": "31 December of the year immediately preceding the examination year",
+    "age_relaxation_years": 2,
+    "age_relaxation_is_additive": false,
+    "relaxation_categories_summary": [
+      "Scheduled Castes and Buddhist community, with the prescribed certificate",
+      "Recognized tribes who are permanent residents of the areas specified in the CSS rules",
+      "Permanent residents of Azad Jammu and Kashmir, with the prescribed certificate",
+      "Permanent residents of Gilgit-Baltistan, with the prescribed certificate",
+      "Specified persons with disabilities, with the prescribed disability certificate",
+      "In-service government servants and armed-forces personnel with at least two years of continuous service by the cut-off date, subject to the rules"
+    ],
+    "education": {
+      "minimum": "At least a second-division or Grade C bachelor's degree, or an equivalent qualification recognized by HEC",
+      "third_division_exception": "A third-division/Grade D bachelor's holder may be eligible if they have obtained a higher division or grade in a master's degree",
+      "foreign_degree": "HEC equivalence is required"
+    },
+    "nationality": "Citizen of Pakistan or a person deriving nationality from the State of Jammu and Kashmir",
+    "result_values": [
+      "appears_eligible",
+      "appears_ineligible",
+      "manual_verification_required"
+    ],
+    "mandatory_disclaimer": "This calculator provides preliminary guidance only. Candidates must verify eligibility from the latest FPSC rules and examination advertisement."
+  },
+  "application_checklist": [
+    "Read the latest CSS/MPT advertisement and applicable rules.",
+    "Confirm age, qualification, nationality, domicile and any relaxation claim.",
+    "Complete the online application within the notified period.",
+    "Pay the prescribed fee through the method stated in the current advertisement.",
+    "Select optional subjects in accordance with the official group restrictions.",
+    "Review names, CNIC details, date of birth, domicile, subjects and centre before submission.",
+    "Save the submitted application, fee proof and tracking information.",
+    "Submit a hard copy only when the current CSS advertisement expressly requires it."
+  ],
+  "document_checklist": [
+    "Printed online application, when required by the current advertisement",
+    "CNIC copy",
+    "Domicile certificate",
+    "Matriculation certificate showing date of birth",
+    "Intermediate certificate",
+    "Bachelor's degree and transcript/DMC",
+    "Master's degree and transcript/DMC, if relied upon for eligibility",
+    "HEC equivalence certificate for a foreign or equivalent qualification, where applicable",
+    "Recent photographs in the number and format stated in the advertisement",
+    "Fee-payment proof",
+    "Departmental Permission Certificate/NOC for eligible government servants, where applicable",
+    "Certificate supporting an age-relaxation claim, where applicable",
+    "Disability certificate, where applicable",
+    "Any additional document required in the current advertisement"
+  ]
+}

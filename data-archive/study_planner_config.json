@@ -1,0 +1,62 @@
+{
+  "storage": "browser_local_storage_only",
+  "registration_required": false,
+  "fields": [
+    {
+      "id": "start_date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "id": "target_date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "id": "hours_per_day",
+      "type": "number",
+      "min": 0.5,
+      "max": 16,
+      "step": 0.5
+    },
+    {
+      "id": "study_days",
+      "type": "weekday_multi_select",
+      "required": true
+    },
+    {
+      "id": "subjects",
+      "type": "subject_multi_select",
+      "source": "css_syllabus_subjects.json"
+    },
+    {
+      "id": "revision_interval_days",
+      "type": "number",
+      "default": 7
+    }
+  ],
+  "task_statuses": [
+    "not_started",
+    "in_progress",
+    "completed",
+    "needs_revision"
+  ],
+  "actions": [
+    "add_task",
+    "edit_task",
+    "complete_task",
+    "move_task",
+    "reschedule_missed_tasks",
+    "add_revision_day",
+    "print_plan",
+    "export_plan",
+    "reset_plan"
+  ],
+  "scheduling_rules": [
+    "Schedule tasks only on selected study days.",
+    "Never exceed the user's declared daily study hours.",
+    "Move unfinished work to the next available study day when requested.",
+    "Keep every generated task editable.",
+    "Do not generate a test series."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "registration_required": false,
+  "all_core_resources_free": true,
+  "essay_module": {
+    "heading": "Learn CSS Essay from Miss Sadia Zahoor",
+    "description": "Develop a proper understanding of essay structure, argumentation, outlines, expression and analytical writing through the complete CSS Essay module by Miss Sadia Zahoor.",
+    "display_phone": "03-00-12-02-251",
+    "normalized_phone": "+923001202251",
+    "whatsapp_url": "https://wa.me/923001202251",
+    "call_url": "tel:+923001202251"
+  },
+  "subject_notes": {
+    "heading": "Structured Subject Notes",
+    "description": "Comprehensive and carefully organised notes for Political Science, Current Affairs, Pakistan Affairs and Criminology are available through Sir Ali.",
+    "subjects": [
+      "Political Science",
+      "Current Affairs",
+      "Pakistan Affairs",
+      "Criminology"
+    ],
+    "contact_name": "Sir Ali",
+    "display_phone": "0309-299-6294",
+    "normalized_phone": "+923092996294",
+    "whatsapp_url": "https://wa.me/923092996294",
+    "call_url": "tel:+923092996294"
+  },
+  "profile": {
+    "status": "awaiting_user_supplied_information",
+    "fields": [
+      "full_name",
+      "professional_title",
+      "biography",
+      "academic_qualifications",
+      "teaching_experience",
+      "subjects_taught",
+      "publications_or_achievements",
+      "teaching_philosophy",
+      "profile_photo",
+      "social_links"
+    ],
+    "instruction": "Do not invent any profile information."
+  }
+}

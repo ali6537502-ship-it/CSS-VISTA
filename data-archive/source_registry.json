@@ -1,0 +1,59 @@
+[
+  {
+    "id": "fpsc-css-syllabus",
+    "title": "Revised Scheme and Syllabus for CSS Competitive Examination, CE-2016 and onwards",
+    "publisher": "Federal Public Service Commission",
+    "url": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+    "type": "official_primary_source"
+  },
+  {
+    "id": "css-rules-2019",
+    "title": "CSS Competitive Examination Rules, 2019",
+    "publisher": "Government of Pakistan, Establishment Division / FPSC",
+    "url": "https://establishment.gov.pk/SiteImage/Misc/files/CSS%20Competitive%20Examination%20Rules%2C%202019.pdf",
+    "type": "official_primary_source"
+  },
+  {
+    "id": "css-past-paper-archive",
+    "title": "CSS Past Papers 2016-2026 subject archive",
+    "publisher": "CSSAspirants.pk",
+    "url": "https://cssaspirants.pk/css-past-papers/",
+    "type": "third_party_archive"
+  },
+  {
+    "id": "ppsc-official-downloads",
+    "title": "PPSC Downloads and officially published past papers",
+    "publisher": "Punjab Public Service Commission",
+    "url": "https://www.ppsc.gop.pk/Downloads.aspx",
+    "type": "official_primary_source"
+  },
+  {
+    "id": "ppsc-recalled-archive",
+    "title": "PPSC past-paper reading archive",
+    "publisher": "PACE GK Academy",
+    "url": "https://pacegkacademy.com/PPSC-Past-Papers/6",
+    "type": "third_party_candidate_recalled_archive"
+  },
+  {
+    "id": "wordnet",
+    "title": "WordNet 3.1 lexical database",
+    "publisher": "Princeton University / wordnet-db package",
+    "url": "https://wordnet.princeton.edu/",
+    "type": "open_lexical_source"
+  },
+  {
+    "id": "cmudict",
+    "title": "CMU Pronouncing Dictionary",
+    "publisher": "Carnegie Mellon University",
+    "url": "http://www.speech.cs.cmu.edu/cgi-bin/cmudict",
+    "type": "open_pronunciation_source"
+  },
+  {
+    "id": "gre-word-list-collection",
+    "title": "GRE Words Collection",
+    "publisher": "Xatta Trone and listed source-list publishers",
+    "url": "https://github.com/Xatta-Trone/gre-words-collection",
+    "type": "third_party_candidate_ranking_source",
+    "usage_note": "Used only to rank candidate words by cross-list occurrence. The repository's raw lists are not redistributed in this package."
+  }
+]

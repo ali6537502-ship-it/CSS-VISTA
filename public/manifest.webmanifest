@@ -1,0 +1,21 @@
+{
+  "name": "CSS Vista - CSS Exam Preparation Platform",
+  "short_name": "CSS Vista",
+  "description": "CSS and MPT preparation with verified MCQs, past papers, notes, study tools and book summaries.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfcfb",
+  "theme_color": "#063d2b",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "failed_archive_pages": [],
+  "missing_subject_year_links": [
+    {
+      "subject": "Comparative Study of Major Religions",
+      "year": 2026,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/comparative-study-of-major-religions/"
+    },
+    {
+      "subject": "Law",
+      "year": 2026,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/law/"
+    },
+    {
+      "subject": "International Law",
+      "year": 2022,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/international-law/"
+    },
+    {
+      "subject": "International Law",
+      "year": 2023,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/international-law/"
+    },
+    {
+      "subject": "Persian",
+      "year": 2026,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/persian/"
+    },
+    {
+      "subject": "Arabic",
+      "year": 2026,
+      "status": "no_pdf_link_found_on_archive_page",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/arabic/"
+    }
+  ]
+}

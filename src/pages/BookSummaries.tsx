@@ -1,0 +1,407 @@
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import {
+  ArrowRight, BookOpen, Clock3, LibraryBig, Search, Sparkles, X,
+} from 'lucide-react'
+import { PageHeader } from '@/components/shared'
+import {
+  loadBookSummaries,
+  type BookSummary,
+  type BookSummaryLibrary,
+} from '@/data/bookSummaries'
+import { recordActivity } from '@/lib/progress'
+
+function InlineText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={index}>{part.slice(2, -2)}</strong>
+        }
+        if (part.startsWith('*') && part.endsWith('*')) {
+          return <em key={index}>{part.slice(1, -1)}</em>
+        }
+        return <span key={index}>{part}</span>
+      })}
+    </>
+  )
+}
+
+function SummaryBody({ body }: { body: string }) {
+  const lines = body.split('\n')
+  const blocks: ReactNode[] = []
+  let index = 0
+
+  while (index < lines.length) {
+    const line = lines[index].trim()
+    if (!line) {
+      index += 1
+      continue
+    }
+
+    const heading = line.match(/^###\s+(.+)$/)
+    if (heading) {
+      blocks.push(
+        <h3 key={`heading-${index}`} className="mt-7 font-display text-xl font-bold text-pine">
+          <InlineText text={heading[1]} />
+        </h3>,
+      )
+      index += 1
+      continue
+    }
+
+    if (/^\d+\.\s+/.test(line)) {
+      const items: string[] = []
+      while (index < lines.length && /^\d+\.\s+/.test(lines[index].trim())) {
+        items.push(lines[index].trim().replace(/^\d+\.\s+/, ''))
+        index += 1
+      }
+      blocks.push(
+        <ol key={`ordered-${index}`} className="my-5 list-decimal space-y-3 pl-6 marker:font-bold marker:text-emerald-800">
+          {items.map((item, itemIndex) => (
+            <li key={itemIndex} className="pl-1 leading-7 text-foreground/85">
+              <InlineText text={item} />
+            </li>
+          ))}
+        </ol>,
+      )
+      continue
+    }
+
+    if (/^[*+-]\s+/.test(line)) {
+      const items: string[] = []
+      while (index < lines.length && /^[*+-]\s+/.test(lines[index].trim())) {
+        items.push(lines[index].trim().replace(/^[*+-]\s+/, ''))
+        index += 1
+      }
+      blocks.push(
+        <ul key={`unordered-${index}`} className="my-5 space-y-3">
+          {items.map((item, itemIndex) => (
+            <li key={itemIndex} className="flex gap-3 leading-7 text-foreground/85">
+              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+              <span><InlineText text={item} /></span>
+            </li>
+          ))}
+        </ul>,
+      )
+      continue
+    }
+
+    const paragraph: string[] = []
+    while (
+      index < lines.length
+      && lines[index].trim()
+      && !/^###\s+/.test(lines[index].trim())
+      && !/^\d+\.\s+/.test(lines[index].trim())
+      && !/^[*+-]\s+/.test(lines[index].trim())
+    ) {
+      paragraph.push(lines[index].trim())
+      index += 1
+    }
+    blocks.push(
+      <p key={`paragraph-${index}`} className="my-4 leading-8 text-foreground/85">
+        <InlineText text={paragraph.join(' ')} />
+      </p>,
+    )
+  }
+
+  return <div>{blocks}</div>
+}
+
+function BookReader({
+  book,
+  categoryName,
+  onClose,
+}: {
+  book: BookSummary
+  categoryName: string
+  onClose: () => void
+}) {
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeRef.current?.focus()
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [onClose])
+
+  return (
+    <div
+      className="book-summary-backdrop fixed inset-0 z-[70] flex items-end justify-center bg-emerald-950/75 p-0 backdrop-blur-sm sm:items-center sm:p-5"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="book-summary-title"
+      onMouseDown={(event) => {
+        if (event.currentTarget === event.target) onClose()
+      }}
+    >
+      <article className="book-summary-reader flex max-h-[96vh] w-full max-w-6xl flex-col overflow-hidden rounded-t-2xl bg-[#fcfdfc] shadow-2xl sm:max-h-[90vh] sm:rounded-2xl">
+        <header className="flex items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
+          <img
+            src={book.cover}
+            alt={`Cover of ${book.title}`}
+            className="hidden h-28 w-[74px] rounded-md border object-cover shadow-sm sm:block"
+          />
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">{categoryName}</p>
+            <h2 id="book-summary-title" className="mt-1 font-display text-2xl font-bold leading-tight text-pine sm:text-3xl">
+              {book.title}
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">by {book.author}</p>
+            <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1">
+                <Clock3 className="h-3.5 w-3.5" /> {book.wordCount.toLocaleString()} words
+              </span>
+              {book.priority && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 font-semibold text-amber-800">
+                  <Sparkles className="h-3.5 w-3.5" /> Priority reading
+                </span>
+              )}
+            </div>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            className="rounded-full border bg-white p-2 text-pine transition-colors hover:bg-secondary"
+            aria-label="Close book summary"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </header>
+
+        <div className="flex-1 overflow-y-auto">
+          <div className="mx-auto max-w-4xl px-5 py-6 sm:px-8 sm:py-9">
+            <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
+              <p className="text-xs font-bold uppercase tracking-wide text-amber-800">Book summary</p>
+              <p className="mt-2 leading-7 text-foreground/85">{book.excerpt}</p>
+            </div>
+            <SummaryBody body={book.body} />
+            {book.coverSource && (
+              <p className="mt-9 border-t pt-4 text-xs text-muted-foreground">
+                Cover metadata from{' '}
+                <a
+                  href={book.coverSource}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-emerald-800 hover:underline"
+                >
+                  {book.coverProvider}
+                </a>.
+              </p>
+            )}
+          </div>
+        </div>
+      </article>
+    </div>
+  )
+}
+
+export default function BookSummaries() {
+  const [library, setLibrary] = useState<BookSummaryLibrary | null>(null)
+  const [error, setError] = useState('')
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState('all')
+  const [activeBook, setActiveBook] = useState<BookSummary | null>(null)
+
+  useEffect(() => {
+    loadBookSummaries()
+      .then(setLibrary)
+      .catch((reason) => setError(reason instanceof Error ? reason.message : 'Book summaries could not be loaded.'))
+  }, [])
+
+  const categoriesBySlug = useMemo(
+    () => new Map(library?.categories.map((item) => [item.slug, item.name]) ?? []),
+    [library],
+  )
+
+  const filteredBooks = useMemo(() => {
+    if (!library) return []
+    const needle = query.trim().toLocaleLowerCase()
+    return library.books.filter((book) => {
+      if (category !== 'all' && book.category !== category) return false
+      if (!needle) return true
+      return `${book.title} ${book.author} ${book.excerpt} ${book.body}`
+        .toLocaleLowerCase()
+        .includes(needle)
+    })
+  }, [library, query, category])
+
+  const totalWords = useMemo(
+    () => library?.books.reduce((sum, book) => sum + book.wordCount, 0) ?? 0,
+    [library],
+  )
+
+  function openBook(book: BookSummary) {
+    setActiveBook(book)
+    recordActivity({ type: 'page', label: `Book summary: ${book.title}`, path: '/book-summaries' })
+  }
+
+  return (
+    <div>
+      <PageHeader
+        title="Book Summaries"
+        description="Clear, exam-focused summaries of influential books for essays, current affairs, political thought, international relations, economics, society, Pakistan and literature."
+      />
+
+      <main className="mx-auto max-w-7xl space-y-7 px-4 py-8">
+        {error ? (
+          <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-800">{error}</div>
+        ) : !library ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="Loading book summaries">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              <div key={item} className="h-[430px] animate-pulse rounded-xl bg-secondary" />
+            ))}
+          </div>
+        ) : (
+          <>
+            <section className="overflow-hidden rounded-2xl bg-pine px-5 py-6 text-emerald-50 shadow-lg sm:px-8 sm:py-8">
+              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                <div>
+                  <div className="flex items-center gap-2 text-amber-300">
+                    <LibraryBig className="h-5 w-5" />
+                    <span className="text-xs font-bold uppercase tracking-[0.2em]">CSS Vista reading library</span>
+                  </div>
+                  <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+                    Read the central ideas before opening the complete summary
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-sm leading-7 text-emerald-50/80">
+                    Browse concise previews, then open a focused reader with the complete supplied explanation, lessons and quotations.
+                  </p>
+                </div>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-xl bg-white/10 px-4 py-3">
+                    <div className="text-2xl font-bold">{library.total}</div>
+                    <div className="text-[11px] text-emerald-100">Books</div>
+                  </div>
+                  <div className="rounded-xl bg-white/10 px-4 py-3">
+                    <div className="text-2xl font-bold">{library.categories.length}</div>
+                    <div className="text-[11px] text-emerald-100">Categories</div>
+                  </div>
+                  <div className="rounded-xl bg-white/10 px-4 py-3">
+                    <div className="text-2xl font-bold">{Math.round(totalWords / 1000)}k</div>
+                    <div className="text-[11px] text-emerald-100">Words</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded-xl border bg-white p-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search books, authors, ideas or topics..."
+                  aria-label="Search book summaries"
+                  className="h-11 w-full rounded-lg border border-input pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700/30"
+                />
+              </div>
+              <div className="mt-3 flex gap-2 overflow-x-auto pb-1" aria-label="Book summary categories">
+                <button
+                  type="button"
+                  onClick={() => setCategory('all')}
+                  aria-pressed={category === 'all'}
+                  className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                    category === 'all' ? 'bg-pine text-emerald-50' : 'bg-secondary text-pine hover:bg-emerald-50'
+                  }`}
+                >
+                  All {library.total}
+                </button>
+                {library.categories.map((item) => (
+                  <button
+                    key={item.slug}
+                    type="button"
+                    onClick={() => setCategory(item.slug)}
+                    aria-pressed={category === item.slug}
+                    className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                      category === item.slug ? 'bg-pine text-emerald-50' : 'bg-secondary text-pine hover:bg-emerald-50'
+                    }`}
+                  >
+                    {item.name} {item.total}
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="font-display text-xl font-bold text-pine">
+                  {category === 'all' ? 'All summaries' : categoriesBySlug.get(category)}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">{filteredBooks.length} books found</p>
+              </div>
+            </div>
+
+            {filteredBooks.length ? (
+              <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {filteredBooks.map((book) => (
+                  <article
+                    key={book.slug}
+                    className="group flex overflow-hidden rounded-xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:flex-col"
+                  >
+                    <div className="relative w-[116px] shrink-0 overflow-hidden bg-gradient-to-br from-emerald-50 to-stone-100 sm:aspect-[4/3] sm:w-full">
+                      <img
+                        src={book.cover}
+                        alt={`Cover of ${book.title}`}
+                        loading="lazy"
+                        className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.035] sm:p-3"
+                      />
+                      {book.priority && (
+                        <span className="absolute left-2 top-2 rounded-full bg-amber-400 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-950 shadow">
+                          Priority
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex min-w-0 flex-1 flex-col p-4">
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                        {categoriesBySlug.get(book.category)}
+                      </p>
+                      <h3 className="mt-1 font-display text-lg font-bold leading-snug text-pine">{book.title}</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">by {book.author}</p>
+                      <div className="mt-3">
+                        <p className="text-[10px] font-bold uppercase tracking-wide text-amber-700">Book summary</p>
+                        <p className="book-summary-excerpt mt-1 text-sm leading-6 text-muted-foreground">{book.excerpt}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => openBook(book)}
+                        className="mt-auto inline-flex items-center justify-between gap-2 pt-4 text-sm font-bold text-emerald-800"
+                        aria-label={`Open summary of ${book.title}`}
+                      >
+                        Open summary
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </section>
+            ) : (
+              <div className="rounded-xl border border-dashed bg-secondary/30 p-10 text-center">
+                <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
+                <h2 className="mt-3 font-semibold text-pine">No summaries match this search</h2>
+                <p className="mt-1 text-sm text-muted-foreground">Try a book title, author, idea or another category.</p>
+              </div>
+            )}
+          </>
+        )}
+      </main>
+
+      {activeBook && (
+        <BookReader
+          book={activeBook}
+          categoryName={categoriesBySlug.get(activeBook.category) ?? 'Book Summary'}
+          onClose={() => setActiveBook(null)}
+        />
+      )}
+    </div>
+  )
+}

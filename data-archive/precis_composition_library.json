@@ -1,0 +1,230 @@
+{
+  "title": "CSS English (Precis and Composition) Library",
+  "marks": 100,
+  "official_source": "https://www.fpsc.gov.pk/uploads/syllabus/1767002683737_Syllabus-for-CE-2016-and-onwards.pdf",
+  "verified_on": "2026-07-16",
+  "components": [
+    {
+      "order": 1,
+      "name": "Precis Writing",
+      "marks": 20,
+      "official_description": "A selected passage is given for precis writing and an appropriate title; 15 marks are allocated to the precis and 5 to the title."
+    },
+    {
+      "order": 2,
+      "name": "Reading Comprehension",
+      "marks": 20,
+      "official_description": "A substantive, non-technical passage is followed by five questions of four marks each."
+    },
+    {
+      "order": 3,
+      "name": "Grammar and Vocabulary",
+      "marks": 20,
+      "topics": [
+        "Tenses",
+        "Articles",
+        "Prepositions",
+        "Conjunctions",
+        "Punctuation",
+        "Phrasal verbs",
+        "Synonyms",
+        "Antonyms"
+      ]
+    },
+    {
+      "order": 4,
+      "name": "Sentence Correction",
+      "marks": 10,
+      "official_description": "Structurally or punctuationally flawed sentences are rewritten with only the necessary corrections."
+    },
+    {
+      "order": 5,
+      "name": "Grouping of Words",
+      "marks": 10,
+      "official_description": "Twenty words are grouped into pairs with similar or opposite meanings, as directed."
+    },
+    {
+      "order": 6,
+      "name": "Pairs of Words",
+      "marks": 10,
+      "official_description": "Ten commonly confused pairs are given; candidates explain and use any five pairs in sentences."
+    },
+    {
+      "order": 7,
+      "name": "Translation",
+      "marks": 10,
+      "official_description": "Ten Urdu sentences involving structure and idiomatic expression are translated into English."
+    }
+  ],
+  "suggested_readings_from_official_syllabus": [
+    {
+      "title": "English Grammar in Use",
+      "author": "Raymond Murphy"
+    },
+    {
+      "title": "Practical English Usage",
+      "author": "Michael Swan"
+    },
+    {
+      "title": "The Little, Brown Handbook",
+      "author": "H. Ramsey Fowler and Jane E. Aaron"
+    },
+    {
+      "title": "A University Grammar of English",
+      "author": "Randolph Quirk and Sidney Greenbaum"
+    },
+    {
+      "title": "Write Better, Speak Better",
+      "author": "Reader's Digest Association"
+    },
+    {
+      "title": "Modern English in Action",
+      "author": "Henry I. Christ"
+    }
+  ],
+  "past_papers": [
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2026,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2026",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2026/07/english-precis-2026.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2025,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2025",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2026/07/english-precis-2025.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2024,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2024",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2026/07/english-precis-2024.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2023,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2023",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2023/10/English-PC-2023.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2022,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2022",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2023/10/English-PC-2022.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2021,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2021",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2021.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2020,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2020",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2020.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2019,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2019",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2019.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2018,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2018",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2018.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2017,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2017",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2017.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    },
+    {
+      "exam": "CSS Competitive Examination",
+      "year": 2016,
+      "subject": "English (Precis and Composition)",
+      "paper_number": null,
+      "display_title": "English Precis and Composition Past Paper 2016",
+      "pdf_url": "https://cssaspirants.pk/wp-content/uploads/2021/08/English-PC-2016.pdf",
+      "archive_page_url": "https://cssaspirants.pk/css-past-papers/english-precis-and-composition/",
+      "exam_body": "Federal Public Service Commission (FPSC)",
+      "source_status": "third_party_hosted_exam_paper",
+      "content_verification": "link_and_title_verified; PDF content not republished",
+      "verified_on": "2026-07-16"
+    }
+  ]
+}
