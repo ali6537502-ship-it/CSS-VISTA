@@ -1,0 +1,56 @@
+name: Import full CSS Vista project
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-full-project.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download archive parts
+        env:
+          KIMI_GW_KEY: ${{ secrets.KIMI_GW_KEY }}
+        run: |
+          set -euo pipefail
+          cd /tmp
+          ids=(
+            "19feac77-b562-84cb-8000-0000fd96a31e"
+            "19feac78-69f2-8ecd-8000-0000744fa876"
+            "19feac79-43e2-8527-8000-000046c06dcc"
+            "19feac7a-2272-8aee-8000-0000aa367e16"
+            "19feac7b-06d2-8f60-8000-0000f5c52803"
+            "19feac7b-e7a2-81d1-8000-00008caa7993"
+            "19feac7c-c3e2-8f3a-8000-0000fbd4f58c"
+            "19feac7d-a2b2-8988-8000-000050756544"
+            "19feac7e-4282-84c3-8000-0000b6eedbb3"
+            "19feac7e-f552-8a05-8000-00001c45ac9b"
+            "19feac7f-2d32-89f8-8000-00003d6db524"
+          )
+          for i in "${!ids[@]}"; do
+            p=$(printf 'csvpart_%02d' "$i")
+            echo "signing + downloading part $i (${ids[$i]})"
+            url=$(curl -fsS -H "Authorization: Bearer $KIMI_GW_KEY" \
+              "https://agent-gw.kimi.com/coding/v1/storage/${ids[$i]}" | jq -r '.signed_url')
+            curl -fL --retry 5 --retry-all-errors --connect-timeout 30 -o "$p" "$url"
+          done
+          cat csvpart_* > css-vista-full.tar
+          ls -la css-vista-full.tar
+      - name: Extract into repository
+        run: |
+          tar -xf /tmp/css-vista-full.tar -C "$GITHUB_WORKSPACE"
+          rm -f /tmp/csvpart_* /tmp/css-vista-full.tar
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "No changes to import"; exit 0; fi
+          git commit -m "Import complete CSS Vista project (full source + all data, PDFs, covers, videos)"
+          git push origin HEAD:main
