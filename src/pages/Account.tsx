@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import {
-  CheckCircle2, Cloud, LoaderCircle, LockKeyhole, LogOut, Mail, RefreshCw,
+  Activity, CheckCircle2, Cloud, LoaderCircle, LockKeyhole, LogOut, Mail, RefreshCw,
   ShieldCheck, UserRound,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
@@ -87,7 +87,7 @@ export default function Account() {
     <div>
       <PageHeader
         title="Your CSS Vista Account"
-        description="Sign in to carry your quiz history, streaks, saved MCQs, mistake notebook, checklists and study tools across devices."
+        description="Sign in to carry your study hours, question-speed history, quiz results, streaks, saved MCQs, mistake notebook and study tools across devices."
       />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:py-10">
         {loading ? (
@@ -153,10 +153,16 @@ export default function Account() {
               <h2 className="mt-1 text-2xl font-bold text-pine">{displayName || 'CSS aspirant'}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{user.email}</p>
               <div className="mt-6 flex flex-wrap gap-2">
+                <Link
+                  to="/dashboard"
+                  className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-semibold text-white"
+                >
+                  <Activity className="h-4 w-4" /> Daily progress report
+                </Link>
                 <button
                   onClick={() => void syncNow()}
                   disabled={syncStatus === 'syncing'}
-                  className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-semibold text-white disabled:opacity-60"
+                  className="inline-flex h-10 items-center gap-2 rounded-md border px-4 text-sm font-semibold text-pine disabled:opacity-60"
                 >
                   <RefreshCw className={`h-4 w-4 ${syncStatus === 'syncing' ? 'animate-spin' : ''}`} />
                   {syncStatus === 'syncing' ? 'Syncing…' : 'Sync progress now'}
@@ -304,6 +310,7 @@ export default function Account() {
               <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
                 {[
                   'Quiz attempts, scores and streak history',
+                  'Daily study hours and question response-time trends',
                   'Saved MCQs and mistake notebook',
                   'Checklists, timers and study-tool entries',
                   'Recent learning activity across your devices',

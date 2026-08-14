@@ -1,20 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate, useNavigationType } from 'react-router'
 import {
   Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine,
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, Download, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, type LucideIcon,
 } from 'lucide-react'
 import { featureAnnouncements, site, notifications } from '@/data/site'
 import { defaultHomeCards } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { searchSite, type SearchResult } from '@/lib/search'
-import { touchVisit } from '@/lib/store'
+import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/store'
+import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
 import { AdSenseLoader, PageFooterAd, PageHeaderAd } from '@/components/Ads'
+import StudyActivityTracker from '@/components/StudyActivityTracker'
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -89,6 +91,14 @@ const primaryNav = [
   { label: 'Past Papers', to: '/past-papers', icon: FileText },
 ]
 
+const mobileBottomNav = [
+  { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/gk'] },
+  { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/downloads', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
+  { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
+]
+
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
   ...defaultHomeCards
@@ -124,11 +134,24 @@ const desktopMoreLinks = (() => {
 })()
 
 function NotificationBar() {
-  const [hidden, setHidden] = useState(false)
   const [deviceTime, setDeviceTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
   const { user, syncStatus, lastSyncedAt } = useAccount()
-  const active = [...notifications, ...featureAnnouncements].filter(
+  const mockNotices = (['gk', 'mpt'] as const).map((kind) => {
+    const status = getDailyMockStatus(kind, deviceTime)
+    return {
+      id: `daily-${kind}-mock-${status.dateKey}`,
+      kind: 'platform' as const,
+      text: status.live
+        ? `LIVE REGISTRATION: ${status.title} · ${DAILY_MOCK_TIME_LABELS[kind]}. Enter now and finish your paper after entry.`
+        : status.completedToday
+          ? `${status.title} completed today. Your printable result and previous record are saved.`
+          : `${status.title} · every day · ${DAILY_MOCK_TIME_LABELS[kind]}.`,
+      link: status.route,
+      expires: undefined,
+    }
+  })
+  const active = [...mockNotices, ...notifications, ...featureAnnouncements].filter(
     (item) => !item.expires || new Date(item.expires) > new Date(),
   )
 
@@ -144,7 +167,7 @@ function NotificationBar() {
     }
   }, [])
 
-  if (!active.length || hidden) return null
+  if (!active.length) return null
 
   const syncLabel = !online
     ? 'Offline - device copy'
@@ -166,9 +189,10 @@ function NotificationBar() {
   return (
     <div className="bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <span className="shrink-0 rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">
-          Live
-        </span>
+        <Link to="/mentors" className="flex shrink-0 items-center gap-1.5" aria-label="Meet Ms. Sadia Zahoor">
+          <img src="/images/mentor-sadia.jpg" alt="" className="h-6 w-6 rounded-full border border-amber-300/60 object-cover" />
+          <span className="rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">Live</span>
+        </Link>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
           <div className="vista-live-ticker-track flex w-max items-center">
             {[false, true].map((duplicate) => (
@@ -177,19 +201,20 @@ function NotificationBar() {
                 className="flex shrink-0 items-center"
                 aria-hidden={duplicate || undefined}
               >
-                {active.map((item) => (
-                  <Link
-                    key={`${duplicate ? 'copy-' : ''}${item.id}`}
-                    to={item.link}
-                    tabIndex={duplicate ? -1 : undefined}
-                    className="group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs text-emerald-50/90 outline-none hover:text-white focus:text-white sm:text-[13px]"
-                  >
+                {active.map((item) => {
+                  const className = "group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs text-emerald-50/90 outline-none hover:text-white focus:text-white sm:text-[13px]"
+                  const content = <>
                     <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.kind === 'fpsc' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
                     <span className="underline-offset-2 group-hover:underline group-focus:underline">
                       {item.text}
                     </span>
-                  </Link>
-                ))}
+                  </>
+                  return item.link.startsWith('http') ? (
+                    <a key={`${duplicate ? 'copy-' : ''}${item.id}`} href={item.link} target="_blank" rel="noopener noreferrer" tabIndex={duplicate ? -1 : undefined} className={className}>{content}</a>
+                  ) : (
+                    <Link key={`${duplicate ? 'copy-' : ''}${item.id}`} to={item.link} tabIndex={duplicate ? -1 : undefined} className={className}>{content}</Link>
+                  )
+                })}
               </div>
             ))}
           </div>
@@ -203,14 +228,33 @@ function NotificationBar() {
           <span className="text-emerald-200/50">·</span>
           <time dateTime={deviceTime.toISOString()}>{timeLabel}</time>
         </div>
-        <button
-          aria-label="Hide live updates"
-          className="ml-auto shrink-0 rounded p-0.5 hover:bg-white/10 transition-colors"
-          onClick={() => setHidden(true)}
-        >
-          <X className="h-3.5 w-3.5" />
-        </button>
+        <SocialLinks compact />
       </div>
+    </div>
+  )
+}
+
+function SocialLinks({ compact = false }: { compact?: boolean }) {
+  const links = [
+    { label: 'Follow CSS Vista on Instagram', href: site.instagram, icon: Instagram, tone: 'hover:bg-pink-500/20 hover:text-pink-200' },
+    { label: 'Join the CSS Vista WhatsApp group', href: site.cssGroupLink, icon: WhatsAppIcon, tone: 'hover:bg-emerald-400/20 hover:text-emerald-200' },
+    { label: 'Visit the CSS Vista YouTube channel', href: site.youtube, icon: Youtube, tone: 'hover:bg-red-500/20 hover:text-red-200' },
+  ]
+  return (
+    <div className={`no-print flex shrink-0 items-center ${compact ? 'gap-0.5 border-l border-white/15 pl-1.5' : 'gap-1'}`} aria-label="CSS Vista social channels">
+      {links.map((item) => (
+        <a
+          key={item.label}
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={item.label}
+          title={item.label}
+          className={`grid place-items-center rounded-full transition-colors ${compact ? `h-6 w-6 text-emerald-50/85 ${item.tone}` : 'h-9 w-9 border bg-white text-pine hover:bg-emerald-50'}`}
+        >
+          <item.icon className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
+        </a>
+      ))}
     </div>
   )
 }
@@ -312,6 +356,19 @@ function Logo({ className }: { className?: string }) {
   )
 }
 
+function PrintBranding() {
+  return (
+    <div className="print-branding" aria-hidden="true">
+      <div className="print-brand-header">
+        <img src="/images/logo.png?v=20260810b" alt="" />
+        <div><strong>CSS VISTA</strong><span>Study · Practice · Progress</span></div>
+      </div>
+      <img className="print-brand-watermark" src="/images/logo.png?v=20260810b" alt="" />
+      <div className="print-brand-footer">CSS VISTA · Printed study resource</div>
+    </div>
+  )
+}
+
 function BackBar({ onBack }: { onBack: () => void }) {
   const location = useLocation()
   if (location.pathname === '/') return null
@@ -328,33 +385,12 @@ function BackBar({ onBack }: { onBack: () => void }) {
         <Link to="/" className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-emerald-800 transition-colors hover:bg-secondary">
           <GraduationCap className="h-4 w-4" /> Home
         </Link>
-        <span className="ml-2 hidden truncate text-xs text-muted-foreground sm:block">{location.pathname}</span>
       </div>
     </div>
   )
 }
 
-const ROUTE_HISTORY_KEY = 'cssvista:route-history:v1'
-
-function readRouteHistory(currentRoute: string): string[] {
-  try {
-    const parsed = JSON.parse(sessionStorage.getItem(ROUTE_HISTORY_KEY) || '[]')
-    const routes = Array.isArray(parsed)
-      ? parsed.filter((route): route is string => typeof route === 'string' && route.startsWith('/')).slice(-50)
-      : []
-    return routes[routes.length - 1] === currentRoute ? routes : [...routes, currentRoute].slice(-50)
-  } catch {
-    return [currentRoute]
-  }
-}
-
-function saveRouteHistory(routes: string[]) {
-  try {
-    sessionStorage.setItem(ROUTE_HISTORY_KEY, JSON.stringify(routes.slice(-50)))
-  } catch {
-    /* session storage unavailable */
-  }
-}
+const routeScrollPositions = new Map<string, number>()
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -364,14 +400,10 @@ export default function Layout() {
   const navigate = useNavigate()
   const navigationType = useNavigationType()
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
-  const [routeHistory, setRouteHistory] = useState<string[]>(() => readRouteHistory(currentRoute))
-  const [backTransitionRoute, setBackTransitionRoute] = useState('')
-  const skipNextRouteSync = useRef(false)
   const { user, configured: accountsConfigured } = useAccount()
 
   useEffect(() => { touchVisit() }, [])
   useEffect(() => {
-    window.scrollTo(0, 0)
     const frame = window.requestAnimationFrame(() => {
       setMobileOpen(false)
       setOpenDrop(null)
@@ -380,25 +412,40 @@ export default function Layout() {
     return () => window.cancelAnimationFrame(frame)
   }, [location.pathname])
   useEffect(() => {
-    setRouteHistory((previous) => {
-      if (skipNextRouteSync.current) {
-        skipNextRouteSync.current = false
-        return previous
-      }
-
-      let next = previous
-      if (navigationType === 'POP') {
-        const existingIndex = previous.lastIndexOf(currentRoute)
-        next = existingIndex >= 0
-          ? previous.slice(0, existingIndex + 1)
-          : [...previous, currentRoute].slice(-50)
-      } else if (previous[previous.length - 1] !== currentRoute) {
-        next = [...previous, currentRoute].slice(-50)
-      }
-
-      if (next !== previous) saveRouteHistory(next)
-      return next
-    })
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    return () => { window.history.scrollRestoration = previous }
+  }, [])
+  useEffect(() => {
+    const entryRoute = currentRoute
+    const capture = () => {
+      const browserRoute = `${window.location.pathname}${window.location.search}${window.location.hash}`
+      if (browserRoute !== entryRoute) return
+      routeScrollPositions.set(entryRoute, Math.max(0, Math.round(window.scrollY)))
+    }
+    capture()
+    window.addEventListener('scroll', capture, { passive: true })
+    document.addEventListener('click', capture, true)
+    return () => {
+      window.removeEventListener('scroll', capture)
+      document.removeEventListener('click', capture, true)
+    }
+  }, [currentRoute])
+  useLayoutEffect(() => {
+    const target = navigationType === 'POP'
+      ? routeScrollPositions.get(currentRoute) ?? 0
+      : 0
+    const restore = () => window.scrollTo({ top: target, left: 0, behavior: 'auto' })
+    restore()
+    if (navigationType !== 'POP') return
+    const frame = window.requestAnimationFrame(restore)
+    const shortRetry = window.setTimeout(restore, 80)
+    const lazyContentRetry = window.setTimeout(restore, 260)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(shortRetry)
+      window.clearTimeout(lazyContentRetry)
+    }
   }, [currentRoute, navigationType])
   useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
@@ -412,42 +459,43 @@ export default function Layout() {
       }
       if (event.key === 'Escape') setSearchOpen(false)
     }
+    const openSearchFromPage = () => setSearchOpen(true)
     window.addEventListener('keydown', openSearch)
-    return () => window.removeEventListener('keydown', openSearch)
+    window.addEventListener('cssvista:open-search', openSearchFromPage)
+    return () => {
+      window.removeEventListener('keydown', openSearch)
+      window.removeEventListener('cssvista:open-search', openSearchFromPage)
+    }
   }, [])
 
   const goBack = () => {
-    if (routeHistory.length > 1) {
-      const nextHistory = routeHistory.slice(0, -1)
-      const previousRoute = nextHistory[nextHistory.length - 1]
-      skipNextRouteSync.current = true
-      saveRouteHistory(nextHistory)
-      setRouteHistory(nextHistory)
-      setBackTransitionRoute(previousRoute)
-      navigate(previousRoute, { replace: true })
+    const historyIndex = window.history.state?.idx
+    if (typeof historyIndex === 'number' && historyIndex > 0) {
+      navigate(-1)
       return
     }
-    setBackTransitionRoute('/')
     navigate('/', { replace: true })
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <PrintBranding />
       <AdSenseLoader />
+      <StudyActivityTracker />
       <NotificationBar />
-      <NotificationOptInBar />
+      {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
       <header className="sticky top-0 z-40 border-b bg-white/95 shadow-[0_6px_24px_rgba(8,76,49,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="mx-auto flex h-[76px] max-w-[1520px] items-center gap-1 px-3 sm:gap-3 sm:px-6 xl:h-[92px] xl:px-6">
+        <div className="mx-auto flex h-14 max-w-[1520px] items-center gap-1 px-2.5 sm:h-[68px] sm:gap-3 sm:px-6 xl:h-[82px] xl:px-6">
           <button
-            className="rounded-lg p-2 hover:bg-secondary xl:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg hover:bg-secondary xl:hidden"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-5 w-5" />
           </button>
 
           <div className="flex flex-1 justify-center xl:flex-none">
-            <Logo className="h-11 w-auto max-w-[132px] object-contain sm:h-14 sm:max-w-[220px] xl:h-[70px] xl:max-w-[270px]" />
+            <Logo className="h-9 w-auto max-w-[116px] object-contain sm:h-12 sm:max-w-[190px] xl:h-[62px] xl:max-w-[245px]" />
           </div>
 
           <nav className="ml-auto hidden items-stretch gap-1 xl:flex" aria-label="Main navigation">
@@ -519,9 +567,17 @@ export default function Layout() {
             </div>
           </nav>
 
+          <div className="hidden xl:flex xl:items-center xl:gap-2">
+            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 pl-1 pr-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet Ms. Sadia Zahoor">
+              <img src="/images/mentor-sadia.jpg" alt="" className="h-7 w-7 rounded-full object-cover" />
+              <span>Ms. Sadia</span>
+            </Link>
+            <SocialLinks />
+          </div>
+
           <button
             onClick={() => setSearchOpen(true)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:h-10 sm:w-10"
             aria-label="Search the entire website"
             aria-expanded={searchOpen}
             title="Search CSS Vista"
@@ -532,7 +588,7 @@ export default function Layout() {
           <NotificationCenter />
           <Link
             to="/account"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:flex"
             aria-label={user ? `Open account for ${user.email ?? 'signed-in student'}` : 'Open student account'}
             title={user ? user.email : accountsConfigured ? 'Sign in' : 'Account setup'}
           >
@@ -580,11 +636,14 @@ export default function Layout() {
         aria-hidden={!mobileOpen}
       />
       <aside
+        hidden={!mobileOpen}
+        style={mobileOpen ? undefined : { display: 'none' }}
         className={`fixed inset-y-0 right-0 z-50 flex w-[85%] max-w-sm flex-col bg-white shadow-xl transition-transform duration-300 ease-out xl:hidden ${
-          mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          mobileOpen ? 'visible translate-x-0' : 'invisible translate-x-full'
         }`}
         role="dialog"
         aria-label="Mobile navigation"
+        aria-hidden={!mobileOpen}
       >
         <div className="flex items-center justify-between border-b px-4 py-3">
           <Logo className="h-12 w-auto max-w-[220px] object-contain" />
@@ -665,13 +724,13 @@ export default function Layout() {
         </nav>
       </aside>
 
-      <PageHeaderAd />
+      {location.pathname !== '/' && <PageHeaderAd />}
 
-      <main className="flex-1">
+      <main className="flex-1 pb-[68px] md:pb-0">
         <div
           key={location.key}
           className={
-            navigationType === 'POP' || backTransitionRoute === currentRoute
+            navigationType === 'POP'
               ? 'route-transition-back'
               : 'route-transition-forward'
           }
@@ -680,9 +739,32 @@ export default function Layout() {
         </div>
       </main>
 
+      <nav className="no-print fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/90 bg-white/96 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_26px_rgba(15,42,32,0.08)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
+        <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
+          {mobileBottomNav.map((item) => {
+            const active = item.paths.some((path) => (
+              path === '/' ? location.pathname === '/' : location.pathname === path || location.pathname.startsWith(`${path}/`)
+            ))
+            return (
+              <Link
+                key={item.label}
+                to={item.to}
+                aria-current={active ? 'page' : undefined}
+                className={`cssv-tap flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg text-[9px] font-semibold transition-colors ${active ? 'text-emerald-800' : 'text-slate-500'}`}
+              >
+                <span className={`grid h-7 w-9 place-items-center rounded-full transition-colors ${active ? 'bg-emerald-50' : ''}`}>
+                  <item.icon className="h-[17px] w-[17px]" strokeWidth={active ? 2.4 : 2} />
+                </span>
+                <span className="leading-none">{item.label}</span>
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
+
       <PageFooterAd />
 
-      <footer className="border-t border-t-amber-500/30 bg-cream">
+      <footer className="hidden border-t border-t-amber-500/30 bg-cream md:block">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Logo className="h-12 w-auto object-contain" />
@@ -692,7 +774,7 @@ export default function Layout() {
             <h3 className="text-sm font-semibold text-foreground">Practice</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link className="hover:text-pine transition-colors" to="/gk">GK World</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/mpt">MPT Preparation</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/mpt">MPT Mocks & Preparation</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/five-minute">Five-Minute Challenge</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/mistakes">Mistake Notebook</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/grammar-vocabulary">Vocabulary and Daily Challenge</Link></li>
@@ -708,7 +790,7 @@ export default function Layout() {
               <li><Link className="hover:text-pine transition-colors" to="/books">Books by Sir Ali</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/book-summaries">Book Summaries</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/opinions">Opinions by Authors</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Test Series</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Written Mocks by Ms. Sadia Zahoor</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/dashboard">Performance Dashboard</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/study-planner">My CSS Study Planner</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/answer-evaluation">Answer Evaluation</Link></li>
@@ -730,7 +812,6 @@ export default function Layout() {
                   <span>{site.cssGroupLabel}</span>
                 )}
               </li>
-              <li><Link className="text-xs text-muted-foreground/70 hover:text-pine transition-colors" to="/admin">Admin</Link></li>
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
               Guest progress stays in this browser. Signed-in students can securely sync progress across devices.

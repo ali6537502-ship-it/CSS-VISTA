@@ -7,7 +7,7 @@ import {
 import { PageHeader, Section, OfficialNotice, Badge } from '@/components/shared'
 import { questions as seedQuestions, quizCategories } from '@/data/quiz'
 import QuizEngine from '@/components/QuizEngine'
-import { getMockAvailability, getState } from '@/lib/store'
+import { DAILY_MOCK_TIME_LABELS, getMockAvailability, getState } from '@/lib/store'
 import { mergedMcqs } from '@/lib/admin'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
@@ -82,9 +82,15 @@ export default function MPTPrep() {
   const [timed, setTimed] = useState(true)
   const [negative, setNegative] = useState(false)
   const [randomQuestions, setRandomQuestions] = useState<typeof allQuestions>([])
+  const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
     getBankIndex().then(setBankIndex)
+  }, [])
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 1000)
+    return () => window.clearInterval(timer)
   }, [])
 
   const bankCount = (slugs: string[]) => (
@@ -108,7 +114,7 @@ export default function MPTPrep() {
 
   const history = getState().quizResults.filter((r) => r.type === 'mpt' || r.type === 'quiz').slice(0, 8)
   const bookmarked = getState().bookmarks.filter((b) => b.startsWith('q-')).length
-  const mptMock = getMockAvailability('mpt')
+  const mptMock = getMockAvailability('mpt', now)
 
   function startMode(nextMode: Mode) {
     if (nextMode === 'random' || nextMode === 'mock') {
@@ -150,14 +156,14 @@ export default function MPTPrep() {
                     >
                       <m.icon className="h-5 w-5 text-emerald-800" />
                       <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
-                      <div className="mt-0.5 text-[13px] text-muted-foreground">50 questions across every MPT area. Available once every 3 days.</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">50 questions across every MPT area. Daily entry from {DAILY_MOCK_TIME_LABELS.mpt}.</div>
                     </Link>
                   ) : (
                     <div key={m.title} className="rounded-lg border bg-secondary/45 p-4 text-left">
                       <LockKeyhole className="h-5 w-5 text-amber-700" />
                       <div className="mt-2 font-semibold">{m.title}</div>
                       <div className="mt-0.5 text-[13px] text-muted-foreground">
-                        Next available {new Date(mptMock.nextAvailableAt!).toLocaleString()}
+                        Opens {new Date(mptMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
                       </div>
                     </div>
                   )
@@ -295,7 +301,7 @@ export default function MPTPrep() {
                   </Link>
                 ) : (
                   <span className="inline-flex h-9 items-center gap-1.5 rounded-md border bg-secondary px-4 text-sm font-semibold text-muted-foreground">
-                    <LockKeyhole className="h-4 w-4" /> MPT mock unlocks {new Date(mptMock.nextAvailableAt!).toLocaleDateString()}
+                    <LockKeyhole className="h-4 w-4" /> MPT mock opens {new Date(mptMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
                   </span>
                 )}
                 <Link to="/gk" className="inline-flex h-9 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine hover:bg-secondary">

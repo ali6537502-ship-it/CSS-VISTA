@@ -132,6 +132,10 @@ function quizAttemptRows(snapshot: ProgressSnapshot, userId: string): CloudQuizA
       total: Math.trunc(total),
       metadata: {
         wrong_topics: Array.isArray(entry.wrongTopics) ? entry.wrongTopics : [],
+        wrong_topic_counts: isRecord(entry.wrongTopicCounts) ? entry.wrongTopicCounts : {},
+        student_name: typeof entry.studentName === 'string' ? entry.studentName : null,
+        duration_seconds: asFiniteNumber(entry.durationSeconds),
+        mock_kind: entry.mockKind === 'gk' || entry.mockKind === 'mpt' ? entry.mockKind : null,
       },
       completed_at: completedAt,
     }]

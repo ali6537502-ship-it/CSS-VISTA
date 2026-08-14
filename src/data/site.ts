@@ -5,8 +5,10 @@ export const site = {
   name: 'CSS Vista',
   tagline: 'A complete preparation platform for CSS aspirants in Pakistan',
   whatsappNumber: '',
-  cssGroupLink: 'https://chat.whatsapp.com/KkmMs8KS4wZ7Z39grDLZwT',
+  cssGroupLink: 'https://chat.whatsapp.com/KkmMs8KS4wZ7Z39grDLZwT?s=cl&p=i&ilr=2&amv=2',
   cssGroupLabel: 'Join the CSS Vista WhatsApp Group',
+  instagram: 'https://www.instagram.com/cssvista?igsh=bmx0cWNiamJ5OTU4&utm_source=qr',
+  youtube: 'https://youtube.com/@cssvista?si=gir1JExcbaJg7Xnm',
   email: '',
 }
 
@@ -90,15 +92,21 @@ export const notifications: Notification[] = [
 
 export const featureAnnouncements: Notification[] = [
   {
+    id: 'feature-sadia-custom-series',
+    kind: 'platform',
+    text: 'Registration open: build a customized written test series with alternate papers and divided syllabus by Ms. Sadia Zahoor.',
+    link: '/test-series',
+  },
+  {
     id: 'feature-mpt',
     kind: 'platform',
-    text: 'Prepare MPT subject-wise and attempt a scheduled full mock every 3 days.',
+    text: 'CSS MPT Grand Mock registration opens every day from 10:30 PM until midnight.',
     link: '/mpt',
   },
   {
     id: 'feature-pms-gk-mock',
     kind: 'platform',
-    text: 'A new 100-question PMS GK Grand Mock becomes available every 2 days after completion.',
+    text: 'PMS GK Grand Mock registration opens every day from 8:00 PM until 10:00 PM.',
     link: '/gk/quiz?mode=pms-mock',
   },
   {
@@ -134,14 +142,14 @@ export const featureAnnouncements: Notification[] = [
   {
     id: 'feature-notes',
     kind: 'platform',
-    text: 'Explore handwritten notes by Miss Sadia Zahoor, PAS and the complete notes library.',
-    link: '/handwritten-notes',
+    text: 'Study CSS Pakistan Affairs, CSS Current Affairs and CSS Criminology notes by Sir Ali Hassan Sargana.',
+    link: '/notes',
   },
   {
-    id: 'feature-lectures',
+    id: 'feature-youtube-guide',
     kind: 'platform',
-    text: 'Free CSS Vista lectures cover compulsory and selected optional subjects.',
-    link: '/lectures',
+    text: 'Want to know every CSS VISTA feature? Watch the complete platform guide on our YouTube channel.',
+    link: site.youtube,
   },
   {
     id: 'feature-papers',

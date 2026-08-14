@@ -1,6 +1,7 @@
 // Student progress - saved locally for guests and synced for signed-in students.
 // Covers: attempted MCQs, saved MCQs, mistake notebook, recent activity,
-// checklist progress, timer sessions and notification preferences.
+// checklist progress, timer sessions, active study time, question response time
+// and notification preferences.
 
 import { notifyProgressChanged } from '@/lib/progressEvents'
 
@@ -48,6 +49,60 @@ export interface TimerSession {
   finished: boolean
 }
 
+export interface BookSummaryProgress {
+  saved: boolean
+  completed: boolean
+  progress: number
+  updatedAt: number
+}
+
+export interface StudySession {
+  id: string
+  date: string
+  path: string
+  area: string
+  seconds: number
+  startedAt: number
+  updatedAt: number
+}
+
+export interface QuestionTiming {
+  id: string
+  questionId: string
+  category: string
+  mode: 'mpt' | 'gk' | 'quiz' | 'game' | 'challenge'
+  seconds: number
+  correct: boolean
+  ts: number
+}
+
+export interface StudyDayReport {
+  date: string
+  label: string
+  seconds: number
+  minutes: number
+  questions: number
+  correct: number
+  accuracy: number
+  avgQuestionSeconds: number
+}
+
+export interface StudyAnalytics {
+  today: StudyDayReport
+  daily: StudyDayReport[]
+  totalStudySeconds: number
+  currentWeekSeconds: number
+  previousWeekSeconds: number
+  studyChangePercent: number | null
+  currentAvgQuestionSeconds: number
+  previousAvgQuestionSeconds: number
+  speedImprovementPercent: number | null
+  currentAccuracy: number
+  previousAccuracy: number
+  accuracyChange: number | null
+  topAreas: Array<{ area: string; seconds: number }>
+}
+
 export interface ProgressState {
   attempts: Record<string, AttemptRecord>
   reviews: Record<string, ReviewSchedule>
@@ -64,6 +119,9 @@ export interface ProgressState {
   }
   seenUpdates: string[]
   fiveMin: { date: string; score: number; total: number }[]
+  bookSummaries: Record<string, BookSummaryProgress>
+  studySessions: StudySession[]
+  questionTimings: QuestionTiming[]
 }
 
 const empty: ProgressState = {
@@ -77,6 +135,9 @@ const empty: ProgressState = {
   notif: { asked: false, enabled: false, tags: { Mentors: true, Opinions: true, 'Test Series': true, FPSC: true, General: true }, dismissed: false },
   seenUpdates: [],
   fiveMin: [],
+  bookSummaries: {},
+  studySessions: [],
+  questionTimings: [],
 }
 
 export function getProgress(): ProgressState {
@@ -233,6 +294,41 @@ export function recentActivities(n = 4): Activity[] {
   return getProgress().activities.slice(0, n)
 }
 
+// ---------- Book-summary reading ----------
+export function getBookSummaryProgress(slug: string): BookSummaryProgress {
+  return getProgress().bookSummaries?.[slug] ?? {
+    saved: false,
+    completed: false,
+    progress: 0,
+    updatedAt: 0,
+  }
+}
+
+export function getAllBookSummaryProgress(): Record<string, BookSummaryProgress> {
+  return getProgress().bookSummaries ?? {}
+}
+
+export function updateBookSummaryProgress(slug: string, patch: Partial<Omit<BookSummaryProgress, 'updatedAt'>>) {
+  const state = getProgress()
+  const previous = state.bookSummaries?.[slug] ?? {
+    saved: false,
+    completed: false,
+    progress: 0,
+    updatedAt: 0,
+  }
+  state.bookSummaries = {
+    ...(state.bookSummaries ?? {}),
+    [slug]: {
+      ...previous,
+      ...patch,
+      progress: Math.max(0, Math.min(100, Math.round(patch.progress ?? previous.progress))),
+      updatedAt: Date.now(),
+    },
+  }
+  save(state)
+  return state.bookSummaries[slug]
+}
+
 // ---------- Checklists ----------
 export function getChecklist(id: string, len: number): boolean[] {
   const s = getProgress()
@@ -257,6 +353,143 @@ export function saveTimerSession(sess: Omit<TimerSession, 'id' | 'ts'>) {
 
 export function getTimerSessions(): TimerSession[] {
   return getProgress().timerSessions
+}
+
+// ---------- Study-time and question-speed analytics ----------
+function localDateKey(date = new Date()): string {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+function shiftedDateKey(dateKey: string, amount: number): string {
+  const [year, month, day] = dateKey.split('-').map(Number)
+  return localDateKey(new Date(year, month - 1, day + amount, 12))
+}
+
+export function saveStudySession(session: StudySession) {
+  if (!session.id || session.seconds <= 0) return
+  const state = getProgress()
+  const normalized: StudySession = {
+    ...session,
+    seconds: Math.max(0, Math.round(session.seconds)),
+    updatedAt: Date.now(),
+  }
+  if (normalized.seconds <= 0) return
+  const existingIndex = state.studySessions.findIndex((entry) => entry.id === session.id)
+  if (existingIndex >= 0) state.studySessions[existingIndex] = normalized
+  else state.studySessions.unshift(normalized)
+  state.studySessions = state.studySessions
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+    .slice(0, 1200)
+  save(state)
+}
+
+export function recordQuestionTiming(
+  timing: Omit<QuestionTiming, 'id' | 'ts' | 'seconds'> & { seconds: number },
+) {
+  const state = getProgress()
+  state.questionTimings.unshift({
+    ...timing,
+    id: `question-time-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    seconds: Math.max(1, Math.min(1800, Math.round(timing.seconds))),
+    ts: Date.now(),
+  })
+  if (state.questionTimings.length > 4000) state.questionTimings.length = 4000
+  save(state)
+}
+
+export function getStudyAnalytics(days = 7): StudyAnalytics {
+  const state = getProgress()
+  const todayKey = localDateKey()
+  const dayCount = Math.max(1, days)
+  const currentKeys = Array.from({ length: dayCount }, (_, index) => shiftedDateKey(todayKey, index - dayCount + 1))
+  const previousKeys = Array.from({ length: dayCount }, (_, index) => shiftedDateKey(todayKey, index - dayCount * 2 + 1))
+  const allKeys = [...previousKeys, ...currentKeys]
+  const reports = new Map<string, StudyDayReport>()
+
+  allKeys.forEach((date) => {
+    const parsed = new Date(`${date}T12:00:00`)
+    reports.set(date, {
+      date,
+      label: new Intl.DateTimeFormat(undefined, { weekday: 'short' }).format(parsed),
+      seconds: 0,
+      minutes: 0,
+      questions: 0,
+      correct: 0,
+      accuracy: 0,
+      avgQuestionSeconds: 0,
+    })
+  })
+
+  const areaSeconds = new Map<string, number>()
+  const currentKeySet = new Set(currentKeys)
+  for (const session of state.studySessions ?? []) {
+    const report = reports.get(session.date)
+    if (report) report.seconds += Math.max(0, session.seconds || 0)
+    if (currentKeySet.has(session.date)) {
+      areaSeconds.set(session.area, (areaSeconds.get(session.area) ?? 0) + Math.max(0, session.seconds || 0))
+    }
+  }
+
+  const timingSeconds = new Map<string, number>()
+  for (const timing of state.questionTimings ?? []) {
+    const date = localDateKey(new Date(timing.ts))
+    const report = reports.get(date)
+    if (!report) continue
+    report.questions += 1
+    if (timing.correct) report.correct += 1
+    timingSeconds.set(date, (timingSeconds.get(date) ?? 0) + Math.max(1, timing.seconds || 0))
+  }
+
+  reports.forEach((report) => {
+    report.minutes = Math.round(report.seconds / 60)
+    report.accuracy = report.questions ? Math.round((report.correct / report.questions) * 100) : 0
+    report.avgQuestionSeconds = report.questions
+      ? Math.round((timingSeconds.get(report.date) ?? 0) / report.questions)
+      : 0
+  })
+
+  const sum = (keys: string[], field: 'seconds' | 'questions' | 'correct') => (
+    keys.reduce((total, key) => total + (reports.get(key)?.[field] ?? 0), 0)
+  )
+  const currentWeekSeconds = sum(currentKeys, 'seconds')
+  const previousWeekSeconds = sum(previousKeys, 'seconds')
+  const currentQuestions = sum(currentKeys, 'questions')
+  const previousQuestions = sum(previousKeys, 'questions')
+  const currentCorrect = sum(currentKeys, 'correct')
+  const previousCorrect = sum(previousKeys, 'correct')
+  const currentTimingSeconds = currentKeys.reduce((total, key) => total + (timingSeconds.get(key) ?? 0), 0)
+  const previousTimingSeconds = previousKeys.reduce((total, key) => total + (timingSeconds.get(key) ?? 0), 0)
+  const currentAvgQuestionSeconds = currentQuestions ? Math.round(currentTimingSeconds / currentQuestions) : 0
+  const previousAvgQuestionSeconds = previousQuestions ? Math.round(previousTimingSeconds / previousQuestions) : 0
+  const currentAccuracy = currentQuestions ? Math.round((currentCorrect / currentQuestions) * 100) : 0
+  const previousAccuracy = previousQuestions ? Math.round((previousCorrect / previousQuestions) * 100) : 0
+
+  return {
+    today: reports.get(todayKey)!,
+    daily: currentKeys.map((key) => reports.get(key)!),
+    totalStudySeconds: (state.studySessions ?? []).reduce((total, session) => total + Math.max(0, session.seconds || 0), 0),
+    currentWeekSeconds,
+    previousWeekSeconds,
+    studyChangePercent: previousWeekSeconds
+      ? Math.round(((currentWeekSeconds - previousWeekSeconds) / previousWeekSeconds) * 100)
+      : null,
+    currentAvgQuestionSeconds,
+    previousAvgQuestionSeconds,
+    speedImprovementPercent: previousAvgQuestionSeconds && currentAvgQuestionSeconds
+      ? Math.round(((previousAvgQuestionSeconds - currentAvgQuestionSeconds) / previousAvgQuestionSeconds) * 100)
+      : null,
+    currentAccuracy,
+    previousAccuracy,
+    accuracyChange: previousQuestions ? currentAccuracy - previousAccuracy : null,
+    topAreas: [...areaSeconds.entries()]
+      .map(([area, seconds]) => ({ area, seconds }))
+      .filter((area) => area.seconds > 0)
+      .sort((a, b) => b.seconds - a.seconds)
+      .slice(0, 5),
+  }
 }
 
 // ---------- Notifications ----------

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
   BadgeCheck, CalendarDays, Calculator, Check, ChevronRight, CircleAlert,
-  Clock3, FilePenLine, MessageCircle, Save, Sparkles, Trash2,
+  Clock3, FilePenLine, MessageCircle, Printer, Save, Shuffle, Sparkles, Trash2,
 } from 'lucide-react'
 import { Badge, PageHeader, Section } from '@/components/shared'
 import { testSeriesAnnouncements as seed } from '@/data/testSeries'
@@ -10,7 +10,7 @@ import { mergedAnnouncements } from '@/lib/admin'
 import { mentors, waLink } from '@/data/site'
 import {
   buildTestSeriesSchedule, compulsoryTestSeriesSubjects, getTestSeriesPrice,
-  optionalTestSeriesSubjects, type TestSeriesScheduleItem, type TestSeriesScheduleMode,
+  optionalTestSeriesSubjects, rebalanceTestSeriesSyllabus, type TestSeriesScheduleItem, type TestSeriesScheduleMode,
   type TestSeriesSubject,
 } from '@/data/customTestSeries'
 import {
@@ -19,6 +19,8 @@ import {
 } from '@/lib/store'
 import { submitTestSeriesRequest } from '@/lib/testSeriesRequests'
 import { useAccount } from '@/lib/accountContext'
+import { MilestoneCelebration } from '@/components/MilestoneCelebration'
+import { printPage } from '@/components/PrintMenu'
 
 const input = 'mt-1.5 h-11 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
 
@@ -43,6 +45,7 @@ export default function TestSeries() {
   const [selectedSubjects, setSelectedSubjects] = useState<TestSeriesSubject[]>(['English Essay'])
   const [testCount, setTestCount] = useState(12)
   const [mode, setMode] = useState<TestSeriesScheduleMode>('automatic')
+  const [alternatePapers, setAlternatePapers] = useState(true)
   const [startDate, setStartDate] = useState(todayInput)
   const [durationDays, setDurationDays] = useState(60)
   const [gapDays, setGapDays] = useState(5)
@@ -55,6 +58,7 @@ export default function TestSeries() {
     subjects: ['English Essay'],
   }))
   const [message, setMessage] = useState('')
+  const [showCelebration, setShowCelebration] = useState(false)
   const [history, setHistory] = useState(() => getState().customTestSeriesRequests ?? [])
   const price = useMemo(() => getTestSeriesPrice(testCount), [testCount])
 
@@ -70,32 +74,37 @@ export default function TestSeries() {
       ? (selectedSubjects.length === 1 ? selectedSubjects : selectedSubjects.filter((item) => item !== subject))
       : [...selectedSubjects, subject]
     setSelectedSubjects(next)
-    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays, mode, subjects: next }))
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays, mode, subjects: next, alternatePapers }))
   }
 
   function changeMode(next: TestSeriesScheduleMode) {
     setMode(next)
-    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays, mode: next, subjects: selectedSubjects }))
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays, mode: next, subjects: selectedSubjects, alternatePapers }))
   }
 
   function changeTestCount(next: number) {
     setTestCount(next)
-    setSchedule(buildTestSeriesSchedule({ startDate, testCount: next, durationDays, gapDays, mode, subjects: selectedSubjects }))
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount: next, durationDays, gapDays, mode, subjects: selectedSubjects, alternatePapers }))
   }
 
   function changeStartDate(next: string) {
     setStartDate(next)
-    setSchedule(buildTestSeriesSchedule({ startDate: next, testCount, durationDays, gapDays, mode, subjects: selectedSubjects }))
+    setSchedule(buildTestSeriesSchedule({ startDate: next, testCount, durationDays, gapDays, mode, subjects: selectedSubjects, alternatePapers }))
   }
 
   function changeDuration(next: number) {
     setDurationDays(next)
-    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays: next, gapDays, mode, subjects: selectedSubjects }))
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays: next, gapDays, mode, subjects: selectedSubjects, alternatePapers }))
   }
 
   function changeGap(next: number) {
     setGapDays(next)
-    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays: next, mode, subjects: selectedSubjects }))
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays: next, mode, subjects: selectedSubjects, alternatePapers }))
+  }
+
+  function changeAlternatePapers(next: boolean) {
+    setAlternatePapers(next)
+    setSchedule(buildTestSeriesSchedule({ startDate, testCount, durationDays, gapDays, mode, subjects: selectedSubjects, alternatePapers: next }))
   }
 
   function buildSavedRequest() {
@@ -105,6 +114,7 @@ export default function TestSeries() {
       subjects: selectedSubjects,
       testCount,
       schedulingMode: mode,
+      alternatePapers,
       startDate,
       durationDays,
       gapDays,
@@ -114,10 +124,15 @@ export default function TestSeries() {
     })
   }
 
+  function printSchedule() {
+    printPage(true, '.test-series-print-area')
+  }
+
   function saveDraft() {
     const saved = buildSavedRequest()
     setHistory(getState().customTestSeriesRequests ?? [])
     setMessage(`Draft ${saved.id.slice(-5)} saved with ${saved.testCount} tests.`)
+    setShowCelebration(true)
   }
 
   function sendRequest() {
@@ -133,7 +148,7 @@ export default function TestSeries() {
       ? `${money(request.unitPrice!)} per test; calculated total ${money(request.totalFee)}`
       : 'Fee confirmation required for this number of tests'
     const testList = request.schedule
-      .map((test) => `${test.number}. ${test.subject} - ${test.date}`)
+      .map((test) => `${test.number}. ${test.subject} - ${test.date}\n   Syllabus: ${test.syllabus || 'To be finalized'}`)
       .join('\n')
     const whatsappMessage = [
       'Assalam-o-Alaikum Ma’am, I want a customized CSS test series through CSS Vista.',
@@ -142,6 +157,7 @@ export default function TestSeries() {
       `Subjects: ${request.subjects.join(', ')}`,
       `Tests: ${request.testCount}`,
       `Schedule: ${request.schedulingMode === 'automatic' ? `${request.durationDays} days, automatically divided` : `${request.gapDays}-day gap`}`,
+      `Paper order: ${request.alternatePapers === false ? 'Grouped by subject' : 'Alternate papers active'}`,
       `Starting date: ${request.startDate}`,
       `Fee: ${feeLine}`,
       '',
@@ -165,32 +181,68 @@ export default function TestSeries() {
   return (
     <div>
       <PageHeader
-        title="Customized CSS Test Series"
-        description="Build a personalised test plan for evaluation by Miss Sadia Zahoor, PAS. Choose the subjects, number of tests and timing, then edit the proposed schedule before requesting confirmation."
+        title="Customized Written Test Series"
+        description="Build a personalised written-test and mock schedule by Ms. Sadia Zahoor. Alternate papers, divide the selected syllabus across your tests, edit every date and print the final plan. This builder does not include MPT mocks."
       />
 
+      <section className="test-series-print-area" aria-label="Printable customized test-series schedule">
+        <div className="mb-5 border-b-2 border-emerald-900 pb-3">
+          <h1 className="text-2xl font-bold text-emerald-950">Customized Written Test Series</h1>
+          <p className="mt-1 text-sm font-semibold">By Ms. Sadia Zahoor · CSS VISTA</p>
+          <p className="mt-1 text-xs">Student: {studentName.trim() || '________________'} · Generated: {new Date().toLocaleDateString('en-PK')}</p>
+        </div>
+        <table className="w-full border-collapse text-left text-[10px]">
+          <thead>
+            <tr><th>Test</th><th>Date</th><th>Paper</th><th>Divided syllabus</th></tr>
+          </thead>
+          <tbody>
+            {schedule.map((test) => (
+              <tr key={`print-${test.number}`}>
+                <td>{test.number}</td><td>{test.date}</td><td>{test.subject}</td><td>{test.syllabus}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-4 text-[9px] text-slate-600">Proposed student schedule. Final paper dates, questions, evaluation and availability remain subject to confirmation by Ms. Sadia Zahoor.</p>
+      </section>
+
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-8">
-        <section className="grid gap-3 sm:grid-cols-3">
-          <div className="vista-card p-4">
-            <Sparkles className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 font-bold text-pine">Mentor-customized</p>
-            <p className="mt-1 text-xs text-muted-foreground">Final questions, checking and feedback are confirmed by Miss Sadia.</p>
-          </div>
-          <div className="vista-card p-4">
-            <CalendarDays className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 font-bold text-pine">Automatic or student-planned</p>
-            <p className="mt-1 text-xs text-muted-foreground">Distribute tests across a duration or choose the gap and edit every date.</p>
-          </div>
-          <div className="vista-card p-4">
-            <BadgeCheck className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 font-bold text-pine">11 supported subjects</p>
-            <p className="mt-1 text-xs text-muted-foreground">All six compulsory papers and five selected optional subjects.</p>
+        <section className="test-series-hero overflow-hidden rounded-2xl bg-pine text-white shadow-[0_18px_55px_rgba(6,63,49,0.18)]">
+          <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+            <div>
+              <div className="flex items-center gap-3">
+                <img src={sadia.photo} alt="Ms. Sadia Zahoor" className="h-12 w-12 rounded-xl border border-white/25 object-cover shadow-md" />
+                <p className="flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-amber-300"><Sparkles className="h-4 w-4" /> By Ms. Sadia Zahoor</p>
+              </div>
+              <h2 className="mt-3 font-display text-2xl font-bold leading-tight sm:text-3xl">Build your written test series around your preparation</h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-emerald-50/78">Choose the papers, rotate them on alternate dates, divide the complete syllabus and edit every test before printing or requesting evaluation.</p>
+              <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-bold text-emerald-50">
+                <span className="rounded-full bg-white/10 px-3 py-1.5"><Shuffle className="mr-1.5 inline h-3.5 w-3.5 text-amber-300" />Alternate papers</span>
+                <span className="rounded-full bg-white/10 px-3 py-1.5"><BadgeCheck className="mr-1.5 inline h-3.5 w-3.5 text-amber-300" />Divided syllabus</span>
+                <span className="rounded-full bg-white/10 px-3 py-1.5"><Printer className="mr-1.5 inline h-3.5 w-3.5 text-amber-300" />Branded print plan</span>
+              </div>
+            </div>
+            <div className="rounded-xl border border-white/12 bg-white/8 p-3 backdrop-blur-sm">
+              <div className="flex items-center justify-between gap-3">
+                <div><p className="text-[9px] font-bold uppercase tracking-[0.16em] text-emerald-200">Live plan preview</p><p className="mt-0.5 text-xs text-white/65">Updates as you customize</p></div>
+                <span className="rounded-full bg-amber-300 px-2.5 py-1 text-[9px] font-extrabold text-emerald-950">{testCount} tests</span>
+              </div>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {schedule.slice(0, 4).map((test) => (
+                  <div key={`${test.number}-${test.subject}-${test.date}-${alternatePapers}`} className="test-series-preview-card rounded-lg border border-white/10 bg-emerald-950/35 p-2.5">
+                    <div className="flex items-center justify-between gap-2"><span className="text-[9px] font-extrabold text-amber-300">TEST {test.number}</span><span className="text-[8px] text-emerald-100/60">{test.date}</span></div>
+                    <p className="mt-1 line-clamp-1 text-[11px] font-bold">{test.subject}</p>
+                    <p className="mt-0.5 line-clamp-1 text-[8px] text-emerald-100/60">{test.syllabus}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="space-y-7">
-            <Section title="1. Select papers" description="Choose one or more subjects. Tests are divided evenly and can be changed individually below.">
+          <div className="min-w-0 space-y-7">
+            <Section title="1. Select written papers" description="Choose one or more papers. They are placed in an alternating sequence and can be changed individually below.">
               <div className="rounded-xl border bg-white p-5">
                 <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">Compulsory subjects</p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -208,7 +260,7 @@ export default function TestSeries() {
                     </button>
                   ))}
                 </div>
-                <p className="mt-5 text-xs font-bold uppercase tracking-wider text-emerald-800">Optional subjects taught by Miss Sadia</p>
+                <p className="mt-5 text-xs font-bold uppercase tracking-wider text-emerald-800">Optional subjects taught by Ms. Sadia Zahoor</p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {optionalTestSeriesSubjects.map((subject) => (
                     <button
@@ -242,10 +294,23 @@ export default function TestSeries() {
                   </button>
                 </div>
 
+                <div className="mt-4 flex items-center justify-between gap-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5">
+                  <span className="flex min-w-0 items-center gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white text-emerald-800 shadow-sm"><Shuffle className="h-4 w-4" /></span>
+                    <span><span className="block text-sm font-bold text-pine">Alternate papers</span><span className="mt-0.5 block text-xs text-muted-foreground">Rotate selected subjects instead of completing one subject at a time.</span></span>
+                  </span>
+                  <button type="button" role="switch" aria-checked={alternatePapers} onClick={() => changeAlternatePapers(!alternatePapers)} className={`cssv-tap relative h-7 w-12 shrink-0 rounded-full transition-colors ${alternatePapers ? 'bg-emerald-700' : 'bg-slate-300'}`} aria-label="Use alternate-paper scheduling">
+                    <span className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${alternatePapers ? 'translate-x-6' : 'translate-x-1'}`} />
+                  </button>
+                </div>
+
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <label className="text-sm font-semibold text-pine">
                     Number of tests
                     <input type="number" min={1} max={60} value={testCount} onChange={(event) => changeTestCount(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} className={input} />
+                    <span className="mt-2 flex flex-wrap gap-1.5">
+                      {[6, 12, 24, 48].map((count) => <button key={count} type="button" onClick={() => changeTestCount(count)} className={`cssv-tap rounded-md border px-2.5 py-1 text-[10px] font-bold ${testCount === count ? 'border-emerald-700 bg-emerald-700 text-white' : 'bg-white text-slate-500 hover:border-emerald-300'}`}>{count}</button>)}
+                    </span>
                   </label>
                   <label className="text-sm font-semibold text-pine">
                     Starting date
@@ -263,17 +328,23 @@ export default function TestSeries() {
                     </label>
                   )}
                 </div>
+                <div className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 text-xs leading-relaxed text-emerald-950">
+                  <strong>{alternatePapers ? 'Alternate-paper rotation is active.' : 'Subjects are grouped.'}</strong>{' '}
+                  {alternatePapers
+                    ? 'Your selected papers repeat in order across the schedule—for example, English Essay, Islamic Studies, Pakistan Affairs, then English Essay again.'
+                    : 'The schedule completes the allocated tests for one selected subject before moving to the next.'}
+                </div>
               </div>
             </Section>
 
-            <Section title="3. Review or edit every test" description="Change any proposed subject or date before sending the request.">
-              <div className="overflow-hidden rounded-xl border bg-white">
-                <div className="grid grid-cols-[3.5rem_1fr_1.25fr] gap-2 bg-secondary/70 px-3 py-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                  <span>Test</span><span>Date</span><span>Subject</span>
+            <Section title="3. Review the divided syllabus" description="CSS Vista divides the syllabus according to the number of tests. Change any date, paper or syllabus unit before sending the request.">
+              <div className="overflow-x-auto rounded-xl border bg-white">
+                <div className="grid min-w-[760px] grid-cols-[3.5rem_8rem_13rem_minmax(19rem,1fr)] gap-2 bg-secondary/70 px-3 py-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                  <span>Test</span><span>Date</span><span>Paper</span><span>Divided syllabus</span>
                 </div>
-                <div className="max-h-[34rem] divide-y overflow-y-auto">
+                <div className="max-h-[38rem] min-w-[760px] divide-y overflow-y-auto">
                   {schedule.map((test, index) => (
-                    <div key={test.number} className="grid grid-cols-[3.5rem_1fr_1.25fr] items-center gap-2 px-3 py-2.5">
+                    <div key={test.number} className="grid grid-cols-[3.5rem_8rem_13rem_minmax(19rem,1fr)] items-center gap-2 px-3 py-2.5">
                       <span className="font-bold text-pine">{test.number}</span>
                       <input
                         type="date"
@@ -285,7 +356,7 @@ export default function TestSeries() {
                       <select
                         aria-label={`Test ${test.number} subject`}
                         value={test.subject}
-                        onChange={(event) => setSchedule((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, subject: event.target.value as TestSeriesSubject } : item))}
+                        onChange={(event) => setSchedule((current) => rebalanceTestSeriesSyllabus(current.map((item, itemIndex) => itemIndex === index ? { ...item, subject: event.target.value as TestSeriesSubject } : item)))}
                         className="h-9 min-w-0 rounded-md border px-2 text-xs"
                       >
                         <optgroup label="Compulsory">
@@ -295,6 +366,13 @@ export default function TestSeries() {
                           {optionalTestSeriesSubjects.map((subject) => <option key={subject}>{subject}</option>)}
                         </optgroup>
                       </select>
+                      <textarea
+                        aria-label={`Test ${test.number} divided syllabus`}
+                        value={test.syllabus}
+                        onChange={(event) => setSchedule((current) => current.map((item, itemIndex) => itemIndex === index ? { ...item, syllabus: event.target.value } : item))}
+                        rows={2}
+                        className="min-h-[3.25rem] min-w-0 resize-y rounded-md border px-2 py-1.5 text-xs leading-relaxed"
+                      />
                     </div>
                   ))}
                 </div>
@@ -302,7 +380,7 @@ export default function TestSeries() {
             </Section>
           </div>
 
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <aside className="min-w-0 space-y-6 lg:sticky lg:top-24 lg:self-start">
             <div className="overflow-hidden rounded-xl border bg-white shadow-sm">
               <div className="bg-pine p-5 text-white">
                 <p className="text-xs font-bold uppercase tracking-wider text-emerald-200">Your proposed series</p>
@@ -343,15 +421,18 @@ export default function TestSeries() {
 
                 <div className="grid gap-2">
                   <button type="button" onClick={sendRequest} className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
-                    <MessageCircle className="h-4 w-4" /> Request from Miss Sadia
+                    <MessageCircle className="h-4 w-4" /> Request from Ms. Sadia Zahoor
                   </button>
                   <button type="button" onClick={saveDraft} className="inline-flex h-10 items-center justify-center gap-2 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary">
                     <Save className="h-4 w-4" /> Save schedule draft
                   </button>
+                  <button type="button" onClick={printSchedule} className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-4 text-sm font-bold text-pine hover:bg-emerald-100">
+                    <Printer className="h-4 w-4" /> Print or save as PDF
+                  </button>
                 </div>
                 {message && <p className="rounded-md bg-emerald-50 p-3 text-xs font-medium text-emerald-900" role="status">{message}</p>}
                 <p className="text-xs leading-relaxed text-muted-foreground">
-                  This is a planning and request tool. The series begins only after Miss Sadia confirms availability, dates, evaluation process and payment.
+                  This builder covers the written test series and grand mocks conducted by Ms. Sadia Zahoor. It does not create or include MPT mocks. The series begins only after availability, dates, evaluation and payment are confirmed.
                 </p>
                 {!user && configured && <Link to="/account" className="inline-flex items-center gap-1 text-xs font-bold text-emerald-800 hover:underline">Sign in to sync requests <ChevronRight className="h-3.5 w-3.5" /></Link>}
               </div>
@@ -393,7 +474,7 @@ export default function TestSeries() {
             {announcements.length === 0 && <p className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">No announcements yet.</p>}
             {announcements.map((announcement) => (
               <article key={announcement.id} className="overflow-hidden rounded-xl border bg-white">
-                {announcement.posterUrl && <img src={announcement.posterUrl} alt={`Poster - ${announcement.title}`} className="max-h-96 w-full bg-secondary object-contain" />}
+                {announcement.posterUrl && <img src={announcement.posterUrl} alt={`Poster - ${announcement.title}`} loading="lazy" decoding="async" className="max-h-96 w-full bg-secondary object-contain" />}
                 <div className="p-5">
                   <div className="flex flex-wrap items-center gap-2"><Badge>Announcement</Badge><span className="text-xs text-muted-foreground">{announcement.date}</span>{announcement.startDate && <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800"><CalendarDays className="h-3.5 w-3.5" /> Starts: {announcement.startDate}</span>}</div>
                   <h2 className="mt-2 font-display text-xl font-bold text-pine">{announcement.title}</h2>
@@ -405,6 +486,12 @@ export default function TestSeries() {
           </div>
         </Section>
       </div>
+      <MilestoneCelebration
+        open={showCelebration}
+        title="Your written-test plan is ready"
+        description={`${testCount} tests have been saved with dates, paper order and divided syllabus.`}
+        onClose={() => setShowCelebration(false)}
+      />
     </div>
   )
 }

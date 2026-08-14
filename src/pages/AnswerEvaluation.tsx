@@ -102,6 +102,14 @@ export default function AnswerEvaluation() {
         description="Write and save your CSS answer, then request personalised manual evaluation for all compulsory papers and five supported optional subjects."
       />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
+        <section className="flex items-center gap-3 rounded-xl border border-emerald-900/10 bg-emerald-50/60 p-3">
+          <img src={sadia.photo} alt="Miss Sadia Zahoor, PAS" className="h-14 w-14 rounded-xl object-cover shadow-sm" />
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-700">Personalised evaluation</p>
+            <p className="mt-0.5 text-sm font-bold text-pine">Miss Sadia Zahoor, PAS</p>
+            <p className="mt-0.5 text-xs text-muted-foreground">Manual review, feedback and improvement guidance.</p>
+          </div>
+        </section>
         <section className="grid gap-3 sm:grid-cols-3">
           <div className="vista-card p-4">
             <FileCheck2 className="h-5 w-5 text-emerald-800" />

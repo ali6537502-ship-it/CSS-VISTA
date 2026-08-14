@@ -11,6 +11,10 @@ export interface QuizResult {
   total: number
   date: string
   wrongTopics?: string[]
+  wrongTopicCounts?: Record<string, number>
+  studentName?: string
+  durationSeconds?: number
+  mockKind?: ScheduledMockKind
 }
 
 export interface SavedAnswer {
@@ -27,10 +31,18 @@ export interface SavedAnswer {
 
 export type ScheduledMockKind = 'mpt' | 'gk'
 
+export const DAILY_MOCK_TIME_LABELS: Record<ScheduledMockKind, string> = {
+  gk: '8:00–10:00 PM registration',
+  mpt: '10:30 PM–12:00 midnight registration',
+}
+
+const DAILY_MOCK_TIME_ZONE = 'Asia/Karachi'
+
 export interface MockScheduleEntry {
   lastCompletedAt: string
   nextAvailableAt: string
   attempts: number
+  lastSessionDateKey?: string
 }
 
 export interface StudyPlannerSettings {
@@ -60,10 +72,11 @@ export interface CustomTestSeriesRequest {
   subjects: string[]
   testCount: number
   schedulingMode: 'automatic' | 'fixed-gap'
+  alternatePapers?: boolean
   startDate: string
   durationDays: number
   gapDays: number
-  schedule: Array<{ number: number; date: string; subject: string }>
+  schedule: Array<{ number: number; date: string; subject: string; syllabus?: string }>
   unitPrice: number | null
   totalFee: number | null
   status: 'draft' | 'request-sent'
@@ -297,9 +310,84 @@ export function setGoal(text: string) {
   save(s)
 }
 
-const MOCK_COOLDOWN_DAYS: Record<ScheduledMockKind, number> = {
-  mpt: 3,
-  gk: 2,
+function pakistanDateKey(date = new Date()): string {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: DAILY_MOCK_TIME_ZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date)
+  const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((item) => item.type === type)?.value ?? ''
+  return `${part('year')}-${part('month')}-${part('day')}`
+}
+
+function shiftDateKey(dateKey: string, amount: number): string {
+  const [year, month, day] = dateKey.split('-').map(Number)
+  const shifted = new Date(Date.UTC(year, month - 1, day + amount))
+  return `${shifted.getUTCFullYear()}-${String(shifted.getUTCMonth() + 1).padStart(2, '0')}-${String(shifted.getUTCDate()).padStart(2, '0')}`
+}
+
+function mockTitle(kind: ScheduledMockKind): string {
+  return kind === 'mpt' ? 'CSS MPT Grand Mock' : 'PMS GK Grand Mock'
+}
+
+export interface DailyMockStatus {
+  dateKey: string
+  kind: ScheduledMockKind
+  title: string
+  route: string
+  startAt: string
+  registrationClosesAt: string
+  state: 'upcoming' | 'live' | 'completed' | 'closed'
+  live: boolean
+  completedToday: boolean
+  available: boolean
+  remainingMs: number
+  nextAvailableAt: string
+}
+
+function mockWindow(kind: ScheduledMockKind, dateKey: string) {
+  const startAt = kind === 'gk'
+    ? new Date(`${dateKey}T20:00:00+05:00`)
+    : new Date(`${dateKey}T22:30:00+05:00`)
+  const registrationClosesAt = kind === 'gk'
+    ? new Date(`${dateKey}T22:00:00+05:00`)
+    : new Date(`${shiftDateKey(dateKey, 1)}T00:00:00+05:00`)
+  return { startAt, registrationClosesAt }
+}
+
+export function getDailyMockStatus(kind: ScheduledMockKind, now = new Date()): DailyMockStatus {
+  const dateKey = pakistanDateKey(now)
+  const { startAt, registrationClosesAt } = mockWindow(kind, dateKey)
+  const entry = getState().mockSchedule?.[kind]
+  const completedToday = entry?.lastSessionDateKey === dateKey
+  const beforeStart = now.getTime() < startAt.getTime()
+  const afterClose = now.getTime() >= registrationClosesAt.getTime()
+  const live = !beforeStart && !afterClose && !completedToday
+  const nextDateKey = completedToday || afterClose ? shiftDateKey(dateKey, 1) : dateKey
+  const nextStart = mockWindow(kind, nextDateKey).startAt
+  const state: DailyMockStatus['state'] = completedToday
+    ? 'completed'
+    : live
+      ? 'live'
+      : afterClose
+        ? 'closed'
+        : 'upcoming'
+
+  return {
+    dateKey,
+    kind,
+    title: mockTitle(kind),
+    route: kind === 'mpt' ? '/gk/quiz?mode=mpt-mock' : '/gk/quiz?mode=pms-mock',
+    startAt: startAt.toISOString(),
+    registrationClosesAt: registrationClosesAt.toISOString(),
+    state,
+    live,
+    completedToday,
+    available: live,
+    remainingMs: Math.max(0, (live ? registrationClosesAt : nextStart).getTime() - now.getTime()),
+    nextAvailableAt: nextStart.toISOString(),
+  }
 }
 
 export interface MockAvailability {
@@ -311,34 +399,22 @@ export interface MockAvailability {
 }
 
 export function getMockAvailability(kind: ScheduledMockKind, now = new Date()): MockAvailability {
+  const status = getDailyMockStatus(kind, now)
   const entry = getState().mockSchedule?.[kind]
-  const cooldownDays = MOCK_COOLDOWN_DAYS[kind]
-  if (!entry?.nextAvailableAt) {
-    return {
-      available: true,
-      cooldownDays,
-      nextAvailableAt: null,
-      remainingMs: 0,
-      attempts: entry?.attempts ?? 0,
-    }
-  }
-
-  const nextTime = new Date(entry.nextAvailableAt).getTime()
-  const remainingMs = Math.max(0, nextTime - now.getTime())
   return {
-    available: remainingMs === 0,
-    cooldownDays,
-    nextAvailableAt: entry.nextAvailableAt,
-    remainingMs,
-    attempts: entry.attempts,
+    available: status.available,
+    cooldownDays: 1,
+    nextAvailableAt: status.available ? null : status.nextAvailableAt,
+    remainingMs: status.remainingMs,
+    attempts: entry?.attempts ?? 0,
   }
 }
 
-export function recordScheduledMock(kind: ScheduledMockKind) {
+export function recordScheduledMock(kind: ScheduledMockKind, sessionDateKey = pakistanDateKey()) {
   const s = getState()
   const completedAt = new Date()
-  const nextAvailable = new Date(completedAt)
-  nextAvailable.setDate(nextAvailable.getDate() + MOCK_COOLDOWN_DAYS[kind])
+  const nextSessionDateKey = shiftDateKey(sessionDateKey, 1)
+  const nextAvailable = mockWindow(kind, nextSessionDateKey).startAt
   const previous = s.mockSchedule?.[kind]
   s.mockSchedule = {
     ...(s.mockSchedule ?? {}),
@@ -346,6 +422,7 @@ export function recordScheduledMock(kind: ScheduledMockKind) {
       lastCompletedAt: completedAt.toISOString(),
       nextAvailableAt: nextAvailable.toISOString(),
       attempts: (previous?.attempts ?? 0) + 1,
+      lastSessionDateKey: sessionDateKey,
     },
   }
   save(s)

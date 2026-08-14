@@ -12,10 +12,11 @@ import {
 } from '@/data/mcq'
 import {
   addMistake, attemptedIds, dueRevisionIds, fiveMinToday, getMistakes, recordActivity,
-  recordAttempt, recordFiveMin, savedMcqIds, toggleSavedMcq, wrongIds,
+  recordAttempt, recordFiveMin, recordQuestionTiming, savedMcqIds, toggleSavedMcq, wrongIds,
 } from '@/lib/progress'
 import {
-  completeChallenge, getMockAvailability, recordQuizResult, recordReview, recordScheduledMock,
+  completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
+  recordQuizResult, recordReview, recordScheduledMock,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import { questions as seedQuestions } from '@/data/quiz'
@@ -37,6 +38,10 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   const [resolved, setResolved] = useState<Resolved | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const scheduledKind = mode === 'mpt-mock' ? 'mpt' : mode === 'pms-mock' || mode === 'mock' ? 'gk' : null
+  const [studentName, setStudentName] = useState(() => localStorage.getItem('cssvista:mock-student-name') ?? '')
+  const [mockRegistered, setMockRegistered] = useState(false)
+  const [mockSessionDateKey, setMockSessionDateKey] = useState('')
 
   // custom mode config
   const allCats = useMemo(() => idx?.categories ?? [], [idx])
@@ -53,6 +58,10 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 
   useEffect(() => {
     if (!idx) return
+    if (scheduledKind && !mockRegistered) {
+      setLoading(false)
+      return
+    }
     if (mode === 'custom') {
       setLoading(false)
       return // wait for user config
@@ -62,7 +71,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       setLoading(false)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idx, mode])
+  }, [idx, mode, mockRegistered, scheduledKind])
 
   async function resolve(m: string, custom?: { cats: string[]; n: number; diff: string; time: number; order: string; attempt: string }) {
     setLoading(true)
@@ -106,7 +115,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             qs: [],
             exam: true,
             timeSec: 0,
-            note: `Your next PMS GK Grand Mock becomes available ${new Date(availability.nextAvailableAt!).toLocaleString()}. A new PMS GK Grand Mock unlocks two days after completion.`,
+            note: `PMS GK registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until 10:00 PM.`,
           }
           break
         }
@@ -121,7 +130,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           qs,
           exam: true,
           timeSec: 90 * 60,
-          note: 'A 100-question general-knowledge practice mock available every two days and drawn from the central CSS Vista question bank. Provincial PMS paper patterns can vary.',
+          note: `Tonight’s 100-question general-knowledge Grand Mock, drawn from the central CSS Vista question bank. Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}. Once entered, you may finish after registration closes. Provincial PMS paper patterns can vary.`,
         }
         break
       }
@@ -133,7 +142,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             qs: [],
             exam: true,
             timeSec: 0,
-            note: `Your next MPT mock becomes available ${new Date(availability.nextAvailableAt!).toLocaleString()}. A new MPT mock unlocks three days after completion.`,
+            note: `CSS MPT registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until midnight.`,
           }
           break
         }
@@ -171,7 +180,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             .sort(() => Math.random() - 0.5),
           exam: true,
           timeSec: 50 * 60,
-          note: 'A 50-question proportional practice mock covering every official MPT paper area.',
+          note: `Tonight’s 50-question proportional Grand Mock covering every official MPT paper area. Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}. Once entered, you may finish after registration closes.`,
         }
         break
       }
@@ -286,13 +295,60 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     }
   }
 
-  if (loading || !idx) {
+  if (!idx) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
         <Loader2 className="h-6 w-6 animate-spin text-pine" />
         <span className="ml-2 text-sm text-muted-foreground">Preparing your quiz…</span>
       </div>
     )
+  }
+
+  if (scheduledKind && !mockRegistered) {
+    const status = getDailyMockStatus(scheduledKind)
+    const label = DAILY_MOCK_TIME_LABELS[scheduledKind]
+    return (
+      <div>
+        <PageHeader title={status.title} description={`Daily supervised entry window: ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
+        <div className="mx-auto max-w-xl px-4 py-10">
+          <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-7">
+            <p className={`text-xs font-extrabold uppercase tracking-[.16em] ${status.available ? 'text-emerald-700' : 'text-amber-700'}`}>
+              {status.available ? 'Registration open now' : status.completedToday ? 'Today’s attempt completed' : 'Registration currently closed'}
+            </p>
+            <h2 className="mt-2 font-display text-2xl font-bold text-pine">Student registration</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              {status.available
+                ? `Entry is open during ${label}. Your paper timer continues normally after you enter.`
+                : status.completedToday
+                  ? 'Your result is saved in your mock record. Return tomorrow for the next paper.'
+                  : `Next entry opens ${new Date(status.nextAvailableAt).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}.`}
+            </p>
+            <label className="mt-5 block text-sm font-bold text-pine">
+              Student full name
+              <input value={studentName} onChange={(event) => setStudentName(event.target.value)} placeholder="Enter your name as it should appear on the result" className="mt-1.5 h-11 w-full rounded-lg border px-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-emerald-700" />
+            </label>
+            <button
+              type="button"
+              disabled={!status.available || studentName.trim().length < 2}
+              onClick={() => {
+                localStorage.setItem('cssvista:mock-student-name', studentName.trim())
+                setMockSessionDateKey(status.dateKey)
+                setLoading(true)
+                setMockRegistered(true)
+              }}
+              className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              Enter today’s mock
+            </button>
+            <p className="mt-3 text-xs text-muted-foreground">One recorded attempt per student profile per daily session. Results include score, time, weak areas and previous mock records.</p>
+          </section>
+        </div>
+      </div>
+    )
+  }
+
+  if (loading) {
+    return <div className="flex min-h-[50vh] items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-pine" /><span className="ml-2 text-sm text-muted-foreground">Preparing your quiz…</span></div>
   }
 
   if (mode === 'custom' && !resolved) {
@@ -377,11 +433,11 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     )
   }
 
-  return <QuizRun resolved={resolved} mode={mode} onRestart={() => { setResolved(null); resolve(mode) }} />
+  return <QuizRun resolved={resolved} mode={mode} studentName={scheduledKind ? studentName.trim() : ''} sessionDateKey={mockSessionDateKey} onRestart={() => { setResolved(null); resolve(mode) }} />
 }
 
 // ---------------- Runner ----------------
-function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: string; onRestart: () => void }) {
+function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
   const { qs, title, exam, timeSec } = resolved
   const [cur, setCur] = useState(0)
   const [answers, setAnswers] = useState<Record<string, number>>({})
@@ -389,7 +445,10 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
   const [savedMap, setSavedMap] = useState<Record<string, boolean>>({})
   const [finished, setFinished] = useState(false)
   const [left, setLeft] = useState(timeSec)
+  const [questionElapsed, setQuestionElapsed] = useState(0)
+  const [resultTimeSeconds, setResultTimeSeconds] = useState(0)
   const startRef = useRef(Date.now())
+  const questionStartedAtRef = useRef(Date.now())
   const finishedRef = useRef(false)
 
   const q = qs[cur]
@@ -409,8 +468,30 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [left])
 
+  useEffect(() => {
+    questionStartedAtRef.current = Date.now()
+    const resetFrame = window.requestAnimationFrame(() => setQuestionElapsed(0))
+    if (finished) return () => window.cancelAnimationFrame(resetFrame)
+    const timer = window.setInterval(() => {
+      setQuestionElapsed(Math.max(0, Math.round((Date.now() - questionStartedAtRef.current) / 1000)))
+    }, 1000)
+    return () => {
+      window.cancelAnimationFrame(resetFrame)
+      window.clearInterval(timer)
+    }
+  }, [q.id, finished])
+
   function choose(i: number) {
     if (finished) return
+    if (answers[q.id] === undefined) {
+      recordQuestionTiming({
+        questionId: q.id,
+        category: title,
+        mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
+        seconds: Math.max(1, Math.round((Date.now() - questionStartedAtRef.current) / 1000)),
+        correct: i === q.a,
+      })
+    }
     if (exam) {
       setAnswers((a) => ({ ...a, [q.id]: i }))
     } else {
@@ -425,21 +506,39 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
     finishedRef.current = true
     setFinished(true)
     const secs = Math.round((Date.now() - startRef.current) / 1000)
+    setResultTimeSeconds(secs)
+    const weaknessCounts = new Map<string, number>()
     qs.forEach((x) => {
       const sel = answers[x.id]
-      if (sel === undefined) return
       const correct = sel === x.a
+      if (!correct) {
+        const area = x.s || x.id.replace(/-\d+$/, '').replaceAll('-', ' ')
+        weaknessCounts.set(area, (weaknessCounts.get(area) ?? 0) + 1)
+      }
+      if (sel === undefined) return
       if (!x.id.startsWith('mpt-seed-')) {
         recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''))
         recordReview(x.id, correct)
         if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
       }
     })
-    recordQuizResult({ type: 'quiz', category: title, score, total: qs.length })
+    const wrongTopics = [...weaknessCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([area]) => area)
+    const mockKind = mode === 'mpt-mock' ? 'mpt' : mode === 'pms-mock' || mode === 'mock' ? 'gk' : undefined
+    recordQuizResult({
+      type: 'quiz',
+      category: title,
+      score,
+      total: qs.length,
+      wrongTopics,
+      wrongTopicCounts: Object.fromEntries(weaknessCounts),
+      studentName: studentName || undefined,
+      durationSeconds: secs,
+      mockKind,
+    })
     if (mode === 'five-minute') recordFiveMin(score, qs.length)
     if (mode === 'daily') completeChallenge(new Date().toISOString().slice(0, 10))
-    if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk')
-    if (mode === 'mpt-mock') recordScheduledMock('mpt')
+    if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk', sessionDateKey)
+    if (mode === 'mpt-mock') recordScheduledMock('mpt', sessionDateKey)
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
 
@@ -449,20 +548,45 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
 
   if (finished) {
     const pct = Math.round((score / qs.length) * 100)
+    const weaknessCounts = new Map<string, number>()
+    qs.forEach((item) => {
+      if (answers[item.id] === item.a) return
+      const area = item.s || item.id.replace(/-\d+$/, '').replaceAll('-', ' ')
+      weaknessCounts.set(area, (weaknessCounts.get(area) ?? 0) + 1)
+    })
+    const weakAreas = [...weaknessCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
+    const mockKind = mode === 'mpt-mock' ? 'mpt' : mode === 'pms-mock' || mode === 'mock' ? 'gk' : null
+    const history = mockKind
+      ? getState().quizResults.filter((result) => result.mockKind === mockKind && (!studentName || result.studentName === studentName)).slice(0, 6)
+      : []
     return (
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <div className="rounded-xl border bg-white p-6 text-center">
+        <section className="print-area">
+        <div className="mock-result-summary rounded-xl border bg-white p-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{title} - Result</p>
+          {studentName && <p className="mt-1 font-bold text-emerald-900">Student: {studentName}</p>}
           <p className="mt-2 font-display text-4xl font-bold text-pine">{score} / {qs.length}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Accuracy {pct}% · Time {Math.floor((Date.now() - startRef.current) / 60000)}m {Math.floor(((Date.now() - startRef.current) / 1000) % 60)}s
+            Accuracy {pct}% · Time {Math.floor(resultTimeSeconds / 60)}m {resultTimeSeconds % 60}s
           </p>
+          {mockKind && (
+            <div className="mt-5 grid gap-3 text-left sm:grid-cols-2">
+              <div className="rounded-lg bg-amber-50 p-3">
+                <h3 className="text-sm font-bold text-amber-950">Weakness areas</h3>
+                {weakAreas.length ? <ol className="mt-2 space-y-1 text-xs text-amber-950">{weakAreas.map(([area, count]) => <li key={area}>{area} · {count} missed</li>)}</ol> : <p className="mt-2 text-xs text-amber-900">No weakness detected in this attempt.</p>}
+              </div>
+              <div className="rounded-lg bg-emerald-50 p-3">
+                <h3 className="text-sm font-bold text-emerald-950">Previous mock record</h3>
+                <div className="mt-2 space-y-1 text-xs text-emerald-950">{history.map((item, index) => <p key={item.id}>{index + 1}. {new Date(item.date).toLocaleDateString('en-PK')} · {item.score}/{item.total} · {Math.round(item.score / Math.max(1, item.total) * 100)}%</p>)}</div>
+              </div>
+            </div>
+          )}
           {mode === 'five-minute' && <p className="mt-1 text-xs font-semibold text-emerald-700">Saved to your daily challenge history.</p>}
           <div className="no-print mt-4 flex flex-wrap items-center justify-center gap-2">
-            <button onClick={onRestart} className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50">
+            {!mockKind && <button onClick={onRestart} className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50">
               <RotateCcw className="h-4 w-4" /> New quiz
-            </button>
-            <PrintMenu label="Print quiz" />
+            </button>}
+            <PrintMenu answersAvailable={!mockKind} label={mockKind ? 'Print branded result' : 'Print quiz'} targetSelector={mockKind ? '.mock-result-summary' : '.print-area'} />
             <Link to="/mistakes" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine">
               Review mistake notebook
             </Link>
@@ -472,8 +596,8 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
           </div>
         </div>
 
-        <h2 className="print-area mt-8 font-display text-xl font-bold text-pine">Review - answers</h2>
-        <div className="print-area mt-3 space-y-4">
+        <h2 className="mt-8 font-display text-xl font-bold text-pine">Review - answers</h2>
+        <div className="mt-3 space-y-4">
           {qs.map((x, i) => {
             const sel = answers[x.id]
             const reviewRtl = isRtlText(x.q)
@@ -520,6 +644,7 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
             )
           })}
         </div>
+        </section>
       </div>
     )
   }
@@ -536,6 +661,9 @@ function QuizRun({ resolved, mode, onRestart }: { resolved: Resolved; mode: stri
                 <Clock className="h-3.5 w-3.5" /> {mm}:{String(ss).padStart(2, '0')}
               </span>
             )}
+            <span className="rounded bg-emerald-50 px-2 py-0.5 font-mono text-[11px] font-semibold text-pine" title="Time spent on this question">
+              Q {Math.floor(questionElapsed / 60)}:{String(questionElapsed % 60).padStart(2, '0')}
+            </span>
             <span className="text-xs text-muted-foreground">{answeredCount}/{qs.length} answered</span>
           </div>
         </div>

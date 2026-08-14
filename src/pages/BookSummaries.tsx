@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'react-router'
 import {
-  ArrowRight, BookOpen, Clock3, LibraryBig, Search, Sparkles, X,
+  ArrowLeft, ArrowRight, BookOpen, Bookmark, BookmarkCheck, CheckCircle2, Clock3, Copy,
+  LibraryBig, Minus, Plus, Printer, Search, Sparkles, X,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
@@ -9,7 +10,11 @@ import {
   type BookSummary,
   type BookSummaryLibrary,
 } from '@/data/bookSummaries'
-import { recordActivity } from '@/lib/progress'
+import {
+  getAllBookSummaryProgress, getBookSummaryProgress, recordActivity,
+  updateBookSummaryProgress, type BookSummaryProgress,
+} from '@/lib/progress'
+import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 
 function InlineText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
@@ -52,16 +57,22 @@ function SummaryBody({ body }: { body: string }) {
     }
 
     if (/^\d+\.\s+/.test(line)) {
-      const items: string[] = []
+      const items: Array<{ number: number; text: string }> = []
       while (index < lines.length && /^\d+\.\s+/.test(lines[index].trim())) {
-        items.push(lines[index].trim().replace(/^\d+\.\s+/, ''))
+        const numberedLine = lines[index].trim().match(/^(\d+)\.\s+(.+)$/)
+        if (numberedLine) {
+          items.push({
+            number: Number(numberedLine[1]),
+            text: numberedLine[2],
+          })
+        }
         index += 1
       }
       blocks.push(
         <ol key={`ordered-${index}`} className="my-5 list-decimal space-y-3 pl-6 marker:font-bold marker:text-emerald-800">
-          {items.map((item, itemIndex) => (
-            <li key={itemIndex} className="pl-1 leading-7 text-foreground/85">
-              <InlineText text={item} />
+          {items.map((item) => (
+            <li key={item.number} value={item.number} className="pl-1 leading-7 text-foreground/85">
+              <InlineText text={item.text} />
             </li>
           ))}
         </ol>,
@@ -109,16 +120,40 @@ function SummaryBody({ body }: { body: string }) {
   return <div>{blocks}</div>
 }
 
+function keyQuotation(body: string) {
+  const line = body.split('\n').map((item) => item.trim()).find((item) => /(?:famous|important) quotation/i.test(item))
+  return line?.replace(/^[*+-]\s+/, '').replace(/^\d+\.\s+/, '').replace(/\*\*/g, '') ?? ''
+}
+
 function BookReader({
   book,
   categoryName,
   onClose,
+  previousBook,
+  nextBook,
+  onOpenBook,
+  readingState,
+  onReadingStateChange,
 }: {
   book: BookSummary
   categoryName: string
   onClose: () => void
+  previousBook?: BookSummary
+  nextBook?: BookSummary
+  onOpenBook: (book: BookSummary) => void
+  readingState: BookSummaryProgress
+  onReadingStateChange: (slug: string, state: BookSummaryProgress) => void
 }) {
   const closeRef = useRef<HTMLButtonElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const lastSavedProgress = useRef(readingState.progress)
+  const [localReadingState, setLocalReadingState] = useState(readingState)
+  const [readingProgress, setReadingProgress] = useState(readingState.progress)
+  const [fontSize, setFontSize] = useState(() => Number(localStorage.getItem('cssvista:book-font-size') ?? 1))
+  const [copied, setCopied] = useState(false)
+  const [showCelebration, setShowCelebration] = useState(false)
+  const quote = useMemo(() => keyQuotation(book.body), [book.body])
+  const readingMinutes = Math.max(2, Math.ceil(book.wordCount / 220))
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
@@ -134,6 +169,75 @@ function BookReader({
     }
   }, [onClose])
 
+  useEffect(() => {
+    const saved = getBookSummaryProgress(book.slug)
+    lastSavedProgress.current = saved.progress
+    const frame = window.requestAnimationFrame(() => {
+      const reader = scrollRef.current
+      if (!reader || saved.progress <= 0) return
+      reader.scrollTop = ((reader.scrollHeight - reader.clientHeight) * saved.progress) / 100
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [book.slug])
+
+  function persist(patch: Partial<Omit<BookSummaryProgress, 'updatedAt'>>) {
+    const next = updateBookSummaryProgress(book.slug, patch)
+    setLocalReadingState(next)
+    onReadingStateChange(book.slug, next)
+    return next
+  }
+
+  function handleReaderScroll() {
+    const reader = scrollRef.current
+    if (!reader) return
+    const available = reader.scrollHeight - reader.clientHeight
+    const next = available <= 0 ? 100 : Math.min(100, Math.round((reader.scrollTop / available) * 100))
+    setReadingProgress(next)
+    if (Math.abs(next - lastSavedProgress.current) >= 3 || next === 100) {
+      lastSavedProgress.current = next
+      persist({ progress: next })
+    }
+  }
+
+  function toggleSaved() {
+    persist({ saved: !localReadingState.saved })
+  }
+
+  function markCompleted() {
+    const firstCompletion = !localReadingState.completed
+    persist({ completed: true, progress: 100 })
+    setReadingProgress(100)
+    recordActivity({ type: 'page', label: `Completed book summary: ${book.title}`, path: '/book-summaries' })
+    if (firstCompletion) setShowCelebration(true)
+  }
+
+  function changeFontSize(next: number) {
+    const safe = Math.max(0, Math.min(2, next))
+    setFontSize(safe)
+    localStorage.setItem('cssvista:book-font-size', String(safe))
+  }
+
+  async function copyQuote() {
+    if (!quote) return
+    try {
+      await navigator.clipboard.writeText(`${quote}\n— ${book.title}, ${book.author}`)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1800)
+    } catch {
+      setCopied(false)
+    }
+  }
+
+  function printSummary() {
+    document.body.classList.add('print-book-summary')
+    const cleanup = () => {
+      document.body.classList.remove('print-book-summary')
+      window.removeEventListener('afterprint', cleanup)
+    }
+    window.addEventListener('afterprint', cleanup)
+    window.print()
+  }
+
   return (
     <div
       className="book-summary-backdrop fixed inset-0 z-[70] flex items-end justify-center bg-emerald-950/75 p-0 backdrop-blur-sm sm:items-center sm:p-5"
@@ -144,7 +248,8 @@ function BookReader({
         if (event.currentTarget === event.target) onClose()
       }}
     >
-      <article className="book-summary-reader flex max-h-[96vh] w-full max-w-6xl flex-col overflow-hidden rounded-t-2xl bg-[#fcfdfc] shadow-2xl sm:max-h-[90vh] sm:rounded-2xl">
+      <article className="book-summary-reader relative flex max-h-[96vh] w-full max-w-6xl flex-col overflow-hidden rounded-t-2xl bg-[#fcfdfc] shadow-2xl sm:max-h-[90vh] sm:rounded-2xl">
+        <span className="absolute inset-x-0 top-0 z-20 h-1 bg-slate-100"><span className="cssv-progress block h-full bg-amber-400" style={{ width: `${localReadingState.completed ? 100 : readingProgress}%` }} /></span>
         <header className="flex items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
           <img
             src={book.cover}
@@ -159,8 +264,9 @@ function BookReader({
             <p className="mt-1 text-sm text-muted-foreground">by {book.author}</p>
             <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1">
-                <Clock3 className="h-3.5 w-3.5" /> {book.wordCount.toLocaleString()} words
+                <Clock3 className="h-3.5 w-3.5" /> {readingMinutes} min read
               </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 font-semibold text-emerald-800">{localReadingState.completed ? 'Completed' : `${readingProgress}% read`}</span>
               {book.priority && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 font-semibold text-amber-800">
                   <Sparkles className="h-3.5 w-3.5" /> Priority reading
@@ -179,13 +285,31 @@ function BookReader({
           </button>
         </header>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="no-print flex gap-1.5 overflow-x-auto border-b bg-white px-3 py-2 sm:px-6" aria-label="Book reading tools">
+          <button type="button" onClick={toggleSaved} aria-pressed={localReadingState.saved} className={`cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold ${localReadingState.saved ? 'border-amber-300 bg-amber-50 text-amber-900' : 'text-pine hover:bg-secondary'}`}>
+            {localReadingState.saved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />} {localReadingState.saved ? 'Saved' : 'Save'}
+          </button>
+          <button type="button" onClick={markCompleted} disabled={localReadingState.completed} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 text-xs font-bold text-emerald-900 disabled:opacity-70">
+            <CheckCircle2 className="h-4 w-4" /> {localReadingState.completed ? 'Completed' : 'Mark complete'}
+          </button>
+          {quote && <button type="button" onClick={() => void copyQuote()} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold text-pine hover:bg-secondary"><Copy className="h-4 w-4" /> {copied ? 'Copied' : 'Key quote'}</button>}
+          <button type="button" onClick={printSummary} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold text-pine hover:bg-secondary"><Printer className="h-4 w-4" /> Print</button>
+          <span className="ml-auto flex shrink-0 items-center rounded-lg border bg-white">
+            <button type="button" onClick={() => changeFontSize(fontSize - 1)} disabled={fontSize === 0} className="cssv-tap grid h-9 w-9 place-items-center text-pine disabled:opacity-35" aria-label="Decrease reading text size"><Minus className="h-4 w-4" /></button>
+            <span className="text-[10px] font-bold text-slate-500">Text</span>
+            <button type="button" onClick={() => changeFontSize(fontSize + 1)} disabled={fontSize === 2} className="cssv-tap grid h-9 w-9 place-items-center text-pine disabled:opacity-35" aria-label="Increase reading text size"><Plus className="h-4 w-4" /></button>
+          </span>
+        </div>
+
+        <div ref={scrollRef} onScroll={handleReaderScroll} className="flex-1 overflow-y-auto">
           <div className="mx-auto max-w-4xl px-5 py-6 sm:px-8 sm:py-9">
             <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-amber-800">Book summary</p>
               <p className="mt-2 leading-7 text-foreground/85">{book.excerpt}</p>
             </div>
-            <SummaryBody body={book.body} />
+            <div className={`book-summary-reading-copy ${fontSize === 0 ? 'book-text-small' : fontSize === 2 ? 'book-text-large' : ''}`}>
+              <SummaryBody body={book.body} />
+            </div>
             {book.coverSource && (
               <p className="mt-9 border-t pt-4 text-xs text-muted-foreground">
                 Cover metadata from{' '}
@@ -199,9 +323,27 @@ function BookReader({
                 </a>.
               </p>
             )}
+            <div className="no-print mt-8 grid grid-cols-2 gap-2 border-t pt-5">
+              {previousBook ? <button type="button" onClick={() => onOpenBook(previousBook)} className="cssv-tap inline-flex min-h-11 items-center justify-start gap-2 rounded-lg border px-3 text-left text-xs font-bold text-pine hover:bg-secondary"><ArrowLeft className="h-4 w-4 shrink-0" /><span className="line-clamp-1">{previousBook.title}</span></button> : <span />}
+              {nextBook && <button type="button" onClick={() => onOpenBook(nextBook)} className="cssv-tap inline-flex min-h-11 items-center justify-end gap-2 rounded-lg border px-3 text-right text-xs font-bold text-pine hover:bg-secondary"><span className="line-clamp-1">{nextBook.title}</span><ArrowRight className="h-4 w-4 shrink-0" /></button>}
+            </div>
           </div>
         </div>
+
+        <section className="book-summary-print-area" aria-label={`Printable summary of ${book.title}`}>
+          <p className="text-xs font-bold uppercase tracking-wide text-emerald-800">{categoryName}</p>
+          <h1 className="mt-2 text-2xl font-bold text-emerald-950">{book.title}</h1>
+          <p className="mt-1 text-sm">by {book.author}</p>
+          <div className="mt-5 border-l-4 border-amber-400 bg-amber-50 p-4"><p className="leading-7">{book.excerpt}</p></div>
+          <SummaryBody body={book.body} />
+        </section>
       </article>
+      <MilestoneCelebration
+        open={showCelebration}
+        title={`${book.title} completed`}
+        description="The summary is now marked complete and saved with your reading progress."
+        onClose={() => setShowCelebration(false)}
+      />
     </div>
   )
 }
@@ -213,6 +355,7 @@ export default function BookSummaries() {
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [category, setCategory] = useState('all')
   const [activeBook, setActiveBook] = useState<BookSummary | null>(null)
+  const [readingStates, setReadingStates] = useState(() => getAllBookSummaryProgress())
 
   useEffect(() => {
     loadBookSummaries()
@@ -246,6 +389,8 @@ export default function BookSummaries() {
     setActiveBook(book)
     recordActivity({ type: 'page', label: `Book summary: ${book.title}`, path: '/book-summaries' })
   }
+
+  const activeBookIndex = activeBook ? filteredBooks.findIndex((book) => book.slug === activeBook.slug) : -1
 
   return (
     <div>
@@ -348,7 +493,7 @@ export default function BookSummaries() {
                 {filteredBooks.map((book) => (
                   <article
                     key={book.slug}
-                    className="group flex overflow-hidden rounded-xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:flex-col"
+                    className="cssv-tap group flex overflow-hidden rounded-xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:flex-col"
                   >
                     <div className="relative w-[116px] shrink-0 overflow-hidden bg-gradient-to-br from-emerald-50 to-stone-100 sm:aspect-[4/3] sm:w-full">
                       <img
@@ -362,6 +507,11 @@ export default function BookSummaries() {
                           Priority
                         </span>
                       )}
+                      {readingStates[book.slug]?.completed ? (
+                        <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-emerald-800 px-2 py-1 text-[9px] font-bold text-white shadow"><CheckCircle2 className="h-3 w-3" /> Completed</span>
+                      ) : readingStates[book.slug]?.saved ? (
+                        <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-amber-400 px-2 py-1 text-[9px] font-bold text-amber-950 shadow"><BookmarkCheck className="h-3 w-3" /> Saved</span>
+                      ) : null}
                     </div>
                     <div className="flex min-w-0 flex-1 flex-col p-4">
                       <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">
@@ -382,6 +532,11 @@ export default function BookSummaries() {
                         Open summary
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </button>
+                      {(readingStates[book.slug]?.progress ?? 0) > 0 && !readingStates[book.slug]?.completed && (
+                        <span className="mt-2 h-1 overflow-hidden rounded-full bg-slate-100" aria-label={`${readingStates[book.slug].progress}% read`}>
+                          <span className="cssv-progress block h-full rounded-full bg-amber-400" style={{ width: `${readingStates[book.slug].progress}%` }} />
+                        </span>
+                      )}
                     </div>
                   </article>
                 ))}
@@ -399,9 +554,15 @@ export default function BookSummaries() {
 
       {activeBook && (
         <BookReader
+          key={activeBook.slug}
           book={activeBook}
           categoryName={categoriesBySlug.get(activeBook.category) ?? 'Book Summary'}
           onClose={() => setActiveBook(null)}
+          previousBook={activeBookIndex > 0 ? filteredBooks[activeBookIndex - 1] : undefined}
+          nextBook={activeBookIndex >= 0 && activeBookIndex < filteredBooks.length - 1 ? filteredBooks[activeBookIndex + 1] : undefined}
+          onOpenBook={openBook}
+          readingState={readingStates[activeBook.slug] ?? getBookSummaryProgress(activeBook.slug)}
+          onReadingStateChange={(slug, state) => setReadingStates((current) => ({ ...current, [slug]: state }))}
         />
       )}
     </div>

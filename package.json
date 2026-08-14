@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "install:ci": "npm ci --no-audit --no-fund",
+    "install:ci": "bash scripts/install-ci-safe.sh",
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build && node scripts/prepare-sites-build.mjs && mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json",
     "build:sites": "npm run build",

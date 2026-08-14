@@ -12,7 +12,7 @@ import { PageHeader } from '@/components/shared'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
 import { getMistakes, getRevisionStats, savedMcqIds } from '@/lib/progress'
 import { mergedCategoryOverrides } from '@/lib/admin'
-import { getMockAvailability } from '@/lib/store'
+import { DAILY_MOCK_TIME_LABELS, getMockAvailability } from '@/lib/store'
 
 const catIcons: Record<string, LucideIcon> = {
   'world-geography': Globe, 'pakistan-geography': MapPin, mountains: Mountain, rivers: Waves,
@@ -36,7 +36,7 @@ const modes = [
   { id: 'five', icon: Zap, title: 'Five-Minute Challenge', desc: '10 questions against the clock', to: '/five-minute' },
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },
   { id: 'timed', icon: Timer, title: 'Timed Quiz', desc: 'Set your pace, race the clock', to: '/gk/quiz?mode=timed' },
-  { id: 'pms-mock', icon: ClipboardList, title: 'PMS GK Grand Mock', desc: '100 questions, available every 2 days', to: '/gk/quiz?mode=pms-mock' },
+  { id: 'pms-mock', icon: ClipboardList, title: 'PMS GK Grand Mock', desc: '100 questions · daily entry 8–10 PM', to: '/gk/quiz?mode=pms-mock' },
   { id: 'revision', icon: RefreshCw, title: 'Smart Revision Queue', desc: 'Due questions selected by spaced revision', to: '/gk/quiz?mode=revision' },
   { id: 'weak', icon: Target, title: 'Weak-Area Practice', desc: 'Built from your mistake history', to: '/gk/quiz?mode=weak' },
   { id: 'saved', icon: Bookmark, title: 'Saved Questions', desc: 'Your bookmarked MCQs', to: '/gk/quiz?mode=saved' },
@@ -51,13 +51,19 @@ const modes = [
 export default function GKWorld() {
   const [idx, setIdx] = useState<BankIndex | null>(null)
   const [query, setQuery] = useState('')
+  const [now, setNow] = useState(() => new Date())
   const mistakes = getMistakes().length
   const saved = savedMcqIds().length
   const revisionStats = getRevisionStats()
-  const pmsMock = getMockAvailability('gk')
+  const pmsMock = getMockAvailability('gk', now)
 
   useEffect(() => {
     getBankIndex().then(setIdx)
+  }, [])
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 1000)
+    return () => window.clearInterval(timer)
   }, [])
 
   const cats = useMemo(() => {
@@ -94,10 +100,10 @@ export default function GKWorld() {
                   <LockKeyhole className="h-5 w-5 text-amber-700" />
                   <p className="mt-2 text-sm font-bold text-foreground">{m.title}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
-                    Next available {new Date(pmsMock.nextAvailableAt!).toLocaleString()}
+                    Opens {new Date(pmsMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
                   </p>
                   <span className="mt-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
-                    Unlocks every 2 days
+                    Daily Grand Mock · {DAILY_MOCK_TIME_LABELS.gk}
                   </span>
                 </div>
               )

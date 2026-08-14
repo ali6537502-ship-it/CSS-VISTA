@@ -14,7 +14,7 @@ export interface CloudTestSeriesRequest {
   start_date: string
   duration_days: number
   gap_days: number
-  schedule: Array<{ number: number; date: string; subject: string }>
+  schedule: Array<{ number: number; date: string; subject: string; syllabus?: string }>
   unit_price: number | null
   total_fee: number | null
   status: 'submitted' | 'contacted' | 'approved' | 'completed' | 'cancelled'
@@ -68,4 +68,3 @@ export async function updateTestSeriesRequestStatus(
     .eq('request_id', requestId)
   if (error) throw error
 }
-

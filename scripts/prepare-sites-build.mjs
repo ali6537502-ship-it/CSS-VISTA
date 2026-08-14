@@ -1,10 +1,22 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 const root = new URL('..', import.meta.url).pathname
 const dist = join(root, 'dist')
+const clientDir = join(dist, 'client')
+const publicDir = join(root, 'public')
 const serverDir = join(dist, 'server')
-const indexPath = join(dist, 'index.html')
+const indexPath = join(clientDir, 'index.html')
+
+// Keep the interactive preview bundle lean while preserving the complete study
+// archive in GitHub. Large PDFs are served from the matching public repository
+// path by the Worker fallback below; all other public assets ship with the Site.
+const remotelyServedDirectories = new Set(['past-papers', 'samples'])
+
+for (const entry of await readdir(publicDir, { withFileTypes: true })) {
+  if (entry.isDirectory() && remotelyServedDirectories.has(entry.name)) continue
+  await cp(join(publicDir, entry.name), join(clientDir, entry.name), { recursive: true })
+}
 
 await readFile(indexPath, 'utf8')
 await mkdir(serverDir, { recursive: true })
@@ -29,17 +41,39 @@ function withHeaders(response, pathname) {
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
 }
 
+async function fetchPackagedAsset(request, env) {
+  let response = await env.ASSETS.fetch(request)
+  if (response.status !== 404) return response
+
+  const url = new URL(request.url)
+  const packagedUrl = new URL('/dist' + url.pathname, url)
+  packagedUrl.search = url.search
+  return env.ASSETS.fetch(new Request(packagedUrl, request))
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
-    let response = await env.ASSETS.fetch(request)
+    let response = await fetchPackagedAsset(request, env)
+
+    if (
+      response.status === 404
+      && request.method === 'GET'
+      && (url.pathname.startsWith('/past-papers/') || url.pathname.startsWith('/samples/'))
+    ) {
+      const repositoryAsset = new URL(
+        url.pathname.replace(/^\\/+/, '') + url.search,
+        'https://raw.githubusercontent.com/ali6537502-ship-it/CSS-VISTA/main/public/',
+      )
+      return Response.redirect(repositoryAsset, 302)
+    }
 
     if (
       response.status === 404
       && request.method === 'GET'
       && request.headers.get('accept')?.includes('text/html')
     ) {
-      response = await env.ASSETS.fetch(new Request(new URL('/index.html', url), request))
+      response = await fetchPackagedAsset(new Request(new URL('/index.html', url), request), env)
     }
 
     if (response.headers.get('content-type')?.includes('text/html')) {
@@ -53,4 +87,4 @@ export default {
 `
 
 await writeFile(join(serverDir, 'index.js'), worker)
-console.log('Prepared Sites worker entrypoint and SPA fallback.')
+console.log('Prepared Sites assets, worker entrypoint, and SPA fallback.')

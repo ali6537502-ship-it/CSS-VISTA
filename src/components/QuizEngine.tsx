@@ -4,6 +4,7 @@ import type { Question } from '@/data/quiz'
 import { recordQuizResult, toggleBookmark, isBookmarked } from '@/lib/store'
 import { Badge } from './shared'
 import { isRtlText } from '@/lib/utils'
+import { recordQuestionTiming } from '@/lib/progress'
 
 interface Props {
   questions: Question[]
@@ -33,6 +34,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({})
   const [retryWrong, setRetryWrong] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const questionStartedAtRef = useRef(Date.now())
 
   const totalTime = timePerQuestion * qs.length
 
@@ -49,6 +51,10 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
       return () => { if (timerRef.current) clearInterval(timerRef.current) }
     }
   }, [started, finished])
+
+  useEffect(() => {
+    questionStartedAtRef.current = Date.now()
+  }, [idx, started, finished])
 
   useEffect(() => {
     if (started && totalTime > 0 && seconds >= totalTime && !finished) finish()
@@ -69,6 +75,20 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
     setFinished(false)
     setStarted(true)
     setRetryWrong(onlyWrong)
+    questionStartedAtRef.current = Date.now()
+  }
+
+  function chooseAnswer(q: Question, optionIndex: number) {
+    if (answers[q.id] === undefined) {
+      recordQuestionTiming({
+        questionId: `q-${q.id}`,
+        category,
+        mode,
+        seconds: Math.max(1, Math.round((Date.now() - questionStartedAtRef.current) / 1000)),
+        correct: optionIndex === q.answer,
+      })
+    }
+    setAnswers((current) => ({ ...current, [q.id]: optionIndex }))
   }
 
   function finish() {
@@ -184,6 +204,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const q = qs[idx]
   const rtl = isRtlText(q.question)
   const remaining = totalTime > 0 ? totalTime - seconds : null
+  const questionElapsed = Math.max(0, Math.round((Date.now() - questionStartedAtRef.current) / 1000))
 
   return (
     <div className="rounded-lg border bg-white">
@@ -203,6 +224,9 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
           </button>
           <span className={`inline-flex items-center gap-1 text-sm font-medium ${remaining !== null && remaining < 60 ? 'text-red-600' : 'text-muted-foreground'}`}>
             <Clock className="h-4 w-4" /> {remaining !== null ? fmt(remaining) : fmt(seconds)}
+          </span>
+          <span className="rounded bg-secondary px-2 py-1 font-mono text-[11px] font-semibold text-pine" title="Time spent on this question">
+            Q {fmt(questionElapsed)}
           </span>
         </div>
       </div>
@@ -226,7 +250,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
                 lang={optionRtl ? 'ur' : undefined}
                 role="radio"
                 aria-checked={selected}
-                onClick={() => setAnswers((a) => ({ ...a, [q.id]: oi }))}
+                onClick={() => chooseAnswer(q, oi)}
                 className={`rounded-md border px-4 py-3 text-sm transition-all duration-150 ${optionRtl ? 'text-right' : 'text-left'} ${
                   selected ? 'border-emerald-700 bg-emerald-50 font-medium text-emerald-900' : 'hover:border-emerald-800/40 hover:bg-secondary/60'
                 }`}

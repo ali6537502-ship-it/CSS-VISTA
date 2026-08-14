@@ -186,7 +186,7 @@ export default function PastPapers() {
         ) : filtered.length === 0 ? (
           <EmptyState title="No papers match your filters" hint="Try clearing a filter or the search term." />
         ) : (
-          <div className="space-y-6">
+          <div className="print-area space-y-6">
             {grouped.map(([group, list]) => (
               <div key={group}>
                 <h2 className="font-display text-lg font-bold text-pine">{group}</h2>

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   AlertTriangle, Bookmark, BookmarkCheck, Check, ChevronRight, Eye, Flag,
-  Printer, RotateCcw, Share2, X,
+  Clock3, Printer, RotateCcw, Share2, X,
 } from 'lucide-react'
 import type { BankQuestion } from '@/data/mcq'
-import { addMistake, getAttempt, recordAttempt, toggleSavedMcq, savedMcqIds } from '@/lib/progress'
+import { addMistake, getAttempt, recordAttempt, recordQuestionTiming, toggleSavedMcq, savedMcqIds } from '@/lib/progress'
 import { addReport } from '@/lib/admin'
 import { isRtlText } from '@/lib/utils'
 
@@ -14,6 +14,8 @@ interface Props {
   catName?: string
   onAction?: () => void // ask parent to refresh (saved/mistakes changed)
 }
+
+const nowMs = () => Date.now()
 
 export function printSingleQuestion(cardId: string) {
   document.querySelectorAll('.print-target').forEach((el) => el.classList.remove('print-target'))
@@ -31,6 +33,10 @@ export function printSingleQuestion(cardId: string) {
 
 export default function McqCard({ q, num, catName, onAction }: Props) {
   const cardId = `mcq-${q.id}`
+  const cardRef = useRef<HTMLDivElement>(null)
+  const visibleSinceRef = useRef<number | null>(null)
+  const accumulatedMsRef = useRef(0)
+  const visibleRef = useRef(false)
   const [selected, setSelected] = useState<number | null>(null)
   const [revealed, setRevealed] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -38,6 +44,7 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
   const [reportNote, setReportNote] = useState('')
   const [reportSent, setReportSent] = useState(false)
   const [shared, setShared] = useState(false)
+  const [responseSeconds, setResponseSeconds] = useState<number | null>(null)
   const rtl = isRtlText(q.q)
 
   useEffect(() => {
@@ -48,20 +55,53 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
     setSaved(savedMcqIds().includes(q.id))
   }, [q.id])
 
+  useEffect(() => {
+    accumulatedMsRef.current = 0
+    visibleSinceRef.current = null
+    visibleRef.current = false
+    const element = cardRef.current
+    if (!element || typeof IntersectionObserver === 'undefined') {
+      visibleRef.current = true
+      visibleSinceRef.current = Date.now()
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      const now = Date.now()
+      const visible = entry.isIntersecting && entry.intersectionRatio >= 0.55
+      if (visible && !visibleRef.current) {
+        visibleSinceRef.current = now
+      } else if (!visible && visibleRef.current && visibleSinceRef.current !== null) {
+        accumulatedMsRef.current += now - visibleSinceRef.current
+        visibleSinceRef.current = null
+      }
+      visibleRef.current = visible
+    }, { threshold: [0.55] })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [q.id])
+
   const showAnswer = revealed || selected !== null
 
   function choose(i: number) {
     if (selected !== null) return
     setSelected(i)
     const correct = i === q.a
-    recordAttempt(q.id, correct)
-    if (!correct) addMistake(q.id, i, catName ?? q.id.replace(/-\d+$/, ''))
+    const category = catName ?? q.id.replace(/-\d+$/, '')
+    const visibleMs = visibleSinceRef.current === null ? 0 : nowMs() - visibleSinceRef.current
+    const seconds = Math.max(1, Math.round((accumulatedMsRef.current + visibleMs) / 1000))
+    setResponseSeconds(seconds)
+    recordQuestionTiming({ questionId: q.id, category, mode: 'gk', seconds, correct })
+    recordAttempt(q.id, correct, category)
+    if (!correct) addMistake(q.id, i, category)
     onAction?.()
   }
 
   function retry() {
     setSelected(null)
     setRevealed(false)
+    setResponseSeconds(null)
+    accumulatedMsRef.current = 0
+    visibleSinceRef.current = visibleRef.current ? Date.now() : null
   }
 
   async function share() {
@@ -80,7 +120,7 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
   }
 
   return (
-    <div id={cardId} className="mcq-card rounded-lg border bg-white p-4 transition-shadow hover:shadow-sm sm:p-5">
+    <div ref={cardRef} id={cardId} className="mcq-card rounded-lg border bg-white p-4 transition-shadow hover:shadow-sm sm:p-5">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
         {num !== undefined && <span className="font-semibold text-pine">Q{num}</span>}
         {catName && <span className="rounded bg-secondary px-1.5 py-0.5 font-medium">{catName}</span>}
@@ -88,6 +128,11 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
         {q.d && (
           <span className={`rounded px-1.5 py-0.5 font-medium ${q.d === 'Advanced' ? 'bg-red-50 text-red-700' : q.d === 'Intermediate' ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'}`}>
             {q.d}
+          </span>
+        )}
+        {responseSeconds !== null && (
+          <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-1.5 py-0.5 font-semibold text-emerald-800">
+            <Clock3 className="h-3 w-3" /> {responseSeconds}s
           </span>
         )}
       </div>

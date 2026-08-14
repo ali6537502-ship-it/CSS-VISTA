@@ -14,11 +14,12 @@ export interface TestSeriesAnnouncement {
 export const testSeriesAnnouncements: TestSeriesAnnouncement[] = [
   {
     id: 'ts-seed-1',
-    title: 'CSS 2027 Test Series & Grand Mocks - with Miss Sadia Zahoor, PAS',
-    date: '2026-07-17',
-    body: 'The CSS 2027 Test Series and Grand Mocks by Miss Sadia Zahoor, PAS include scheduled essay tests, personalised evaluation and answer-writing feedback. Registration details, posters and the full schedule will be posted here as announced.',
+    title: 'Registration Open: Test Series & Evaluation Program by Ms. Sadia Zahoor',
+    date: '2026-08-10',
+    body: 'Create a completely customized written test series covering all compulsory subjects and the selected optional subjects taught by Ms. Sadia Zahoor. Choose alternate papers, the number of tests, dates and syllabus division. The program includes daily answer writing, topic-wise and subject-wise tests, full-length mock examinations, detailed evaluation and optional live mock evaluation on Google Meet.',
+    posterUrl: '/images/test-series-sadia-zahoor.webp',
     registrationInfo: 'Contact on WhatsApp 0300-1202251 for registration details.',
-    startDate: 'To be announced',
+    startDate: 'Customized for each student',
     published: true,
   },
 ]
