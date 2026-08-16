@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ArrowLeft, ArrowUpDown, Check, Trophy } from 'lucide-react'
+import { ArrowLeft, ArrowUpDown, Check, RotateCcw, Trophy } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import QuizEngine from '@/components/QuizEngine'
 import { pakistanGeography, worldGeography, internationalOrgs, constitutionTimeline, pakistanMovementTimeline, matchConcepts } from '@/data/games'
@@ -7,15 +7,25 @@ import { questions as mcqBank } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
 import { getState, recordGameScore } from '@/lib/store'
 
-let gid = 10000
+const gid = 10000
 function toQuestions(items: { question: string; options: string[]; answer: number; explanation: string }[], category: string): Question[] {
   return items.map((i, n) => ({ id: gid + n, category, difficulty: 'Medium' as const, ...i }))
 }
 
+function stableHash(value: string) {
+  let hash = 2166136261
+  for (let index = 0; index < value.length; index += 1) hash = Math.imul(hash ^ value.charCodeAt(index), 16777619)
+  return hash >>> 0
+}
+
+function stableShuffle<T>(items: T[], seed: string): T[] {
+  return [...items].sort((left, right) => stableHash(`${seed}|${JSON.stringify(left)}`) - stableHash(`${seed}|${JSON.stringify(right)}`))
+}
+
 // ---- Timeline ordering game ----
 function TimelineGame({ items, title, gameId }: { items: { event: string; year: number }[]; title: string; gameId: string }) {
-  const shuffled = useMemo(() => [...items].sort(() => Math.random() - 0.5), [items])
-  const [order, setOrder] = useState(shuffled)
+  const [play, setPlay] = useState(0)
+  const [order, setOrder] = useState(() => stableShuffle(items, `${gameId}:0`))
   const [result, setResult] = useState<null | { correct: number }>(null)
   const high = getState().gameHighScores[gameId] ?? 0
 
@@ -60,7 +70,7 @@ function TimelineGame({ items, title, gameId }: { items: { event: string; year: 
         ) : (
           <>
             <Badge tone={result.correct === items.length ? 'green' : 'gold'}>{result.correct}/{items.length} in correct position</Badge>
-            <button onClick={() => { setOrder([...items].sort(() => Math.random() - 0.5)); setResult(null) }} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Play again</button>
+            <button onClick={() => { const next = play + 1; setPlay(next); setOrder(stableShuffle(items, `${gameId}:${next}`)); setResult(null) }} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Play again</button>
           </>
         )}
       </div>
@@ -76,7 +86,7 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
     const rotated = [...safePairs.slice(round % Math.max(1, safePairs.length)), ...safePairs.slice(0, round % Math.max(1, safePairs.length))]
     return rotated.slice(0, Math.min(6, rotated.length))
   }, [round, safePairs])
-  const matches = useMemo(() => [...roundPairs.map((p) => p.match)].sort(() => Math.random() - 0.5), [roundPairs])
+  const matches = useMemo(() => stableShuffle(roundPairs.map((p) => p.match), `${gameId}:${round}`), [gameId, round, roundPairs])
   const [selConcept, setSelConcept] = useState<string | null>(null)
   const [solved, setSolved] = useState<Record<string, string>>({})
   const [wrong, setWrong] = useState(0)
@@ -101,7 +111,12 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
   }
 
   function nextRound() {
-    setSolved({}); setWrong(0); setSelConcept(null); setLastWrong(false); setRound((value) => value + 1)
+    resetRound()
+    setRound((value) => value + Math.min(6, Math.max(1, safePairs.length)))
+  }
+
+  function resetRound() {
+    setSolved({}); setWrong(0); setSelConcept(null); setLastWrong(false)
   }
 
   return (
@@ -118,6 +133,8 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
               key={p.concept}
               disabled={!!solved[p.concept]}
               onClick={() => setSelConcept(p.concept)}
+              draggable={!solved[p.concept]}
+              onDragStart={() => setSelConcept(p.concept)}
               className={`block w-full rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${solved[p.concept] ? 'border-emerald-600 bg-emerald-50 text-emerald-900' : selConcept === p.concept ? 'border-emerald-700 bg-emerald-100 font-medium' : 'hover:bg-secondary'}`}
             >
               {p.concept}
@@ -129,7 +146,7 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
           {matches.map((m) => {
             const used = Object.values(solved).includes(m)
             return (
-              <button key={m} disabled={used} onClick={() => pickMatch(m)} className={`block w-full rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${used ? 'border-emerald-600 bg-emerald-50 text-emerald-900' : selConcept ? 'hover:bg-amber-50 hover:border-amber-400' : 'opacity-70'}`}>
+              <button key={m} disabled={used} onClick={() => pickMatch(m)} onDragOver={(event) => event.preventDefault()} onDrop={() => pickMatch(m)} className={`block w-full rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${used ? 'border-emerald-600 bg-emerald-50 text-emerald-900' : selConcept ? 'hover:bg-amber-50 hover:border-amber-400' : 'opacity-70'}`}>
                 {m}
               </button>
             )
@@ -137,6 +154,7 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
         </div>
       </div>
       <p className={`mt-3 min-h-5 text-sm font-semibold ${lastWrong ? 'text-red-700' : 'text-emerald-800'}`} aria-live="polite">{lastWrong ? 'Not a match — try another pair.' : selConcept ? 'Now choose the corresponding match.' : ''}</p>
+      {!done && <button type="button" onClick={resetRound} className="inline-flex min-h-10 items-center gap-1.5 rounded-md border px-3 text-sm font-semibold text-pine hover:bg-secondary"><RotateCcw className="h-4 w-4" /> Reset round</button>}
       {done && (
         <div className="mt-4 flex items-center gap-3">
           <Badge tone="green">Completed - score {score}</Badge>

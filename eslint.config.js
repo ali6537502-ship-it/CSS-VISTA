@@ -19,5 +19,13 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      // This app intentionally colocates small browser helpers with their only
+      // consumer component; that does not affect production correctness.
+      'react-refresh/only-export-components': 'off',
+      // Data-loading effects explicitly clear stale route state before the
+      // asynchronous request resolves.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

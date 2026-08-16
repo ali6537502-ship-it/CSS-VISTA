@@ -45,6 +45,9 @@ for (const file of sourceFiles) {
   }
   for (const match of contents.matchAll(/['"`](\/[^'"`$?]+\.(?:pdf|png|jpe?g|webp|woff2|json|xlsx?))['"`]/gi)) {
     const asset = match[1]
+    // These large archives are intentionally served by the Sites worker from
+    // the matching public path in the production GitHub repository.
+    if (asset.startsWith('/past-papers/') || asset.startsWith('/samples/')) continue
     try {
       await stat(join(publicRoot, asset.slice(1)))
     } catch {

@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
   BadgeCheck, CalendarDays, Calculator, Check, ChevronRight, CircleAlert,
-  Clock3, FilePenLine, FileSearch, MessageCircle, Printer, Save, Shuffle, Sparkles, Trash2,
+  Clock3, Eye, FilePenLine, LockKeyhole, MessageCircle, Printer, Save, ShieldCheck,
+  Shuffle, Sparkles, Trash2, X,
 } from 'lucide-react'
 import { Badge, PageHeader, Section } from '@/components/shared'
 import { testSeriesAnnouncements as seed } from '@/data/testSeries'
@@ -23,6 +24,56 @@ import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPage } from '@/components/PrintMenu'
 
 const input = 'mt-1.5 h-11 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
+
+interface CheckedMockSample {
+  id: string
+  test: string
+  subject: string
+  pages: number
+}
+
+const checkedMockSamples: CheckedMockSample[] = [
+  { id: 'test-1', test: 'Test 1', subject: 'Criminology', pages: 27 },
+  { id: 'test-2', test: 'Test 2', subject: 'European History', pages: 37 },
+  { id: 'test-3', test: 'Test 3', subject: 'Current Affairs', pages: 59 },
+]
+
+function CheckedMockViewer({ sample, onClose }: { sample: CheckedMockSample; onClose: () => void }) {
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => event.key === 'Escape' && onClose()
+    document.addEventListener('keydown', close)
+    document.body.classList.add('notes-preview-open')
+    return () => {
+      document.removeEventListener('keydown', close)
+      document.body.classList.remove('notes-preview-open')
+    }
+  }, [onClose])
+
+  return (
+    <div className="fixed inset-0 z-[100] flex flex-col bg-slate-950/95 text-white print:hidden" role="dialog" aria-modal="true" aria-label={`${sample.test}: ${sample.subject} checked mock sample`}>
+      <header className="flex items-center justify-between gap-4 border-b border-white/15 px-4 py-3">
+        <div className="min-w-0">
+          <p className="truncate font-semibold">{sample.test} · {sample.subject}</p>
+          <p className="mt-0.5 flex items-center gap-1.5 text-xs text-white/65"><ShieldCheck className="h-3.5 w-3.5" /> Genuine checked sample · download and print controls disabled</p>
+        </div>
+        <button type="button" onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/25 hover:bg-white/10" aria-label="Close checked mock preview"><X className="h-5 w-5" /></button>
+      </header>
+      <div className="flex-1 overflow-y-auto overscroll-contain px-3 py-5 sm:px-6" onContextMenu={(event) => event.preventDefault()}>
+        <div className="mx-auto max-w-4xl space-y-5 select-none">
+          {Array.from({ length: sample.pages }, (_, index) => {
+            const page = String(index + 1).padStart(2, '0')
+            return (
+              <div key={page} className="relative overflow-hidden rounded-md bg-white shadow-2xl">
+                <img src={`/checked-mocks/${sample.id}/page-${page}.jpg`} alt={`${sample.test}, ${sample.subject}, checked page ${index + 1}`} draggable={false} loading={index ? 'lazy' : 'eager'} className="w-full" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent p-3 text-right text-[10px] font-bold uppercase tracking-widest text-white/90">CSS Vista · Checked by Miss Sadia Zahoor</div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function todayInput() {
   const date = new Date()
@@ -59,6 +110,7 @@ export default function TestSeries() {
   }))
   const [message, setMessage] = useState('')
   const [showCelebration, setShowCelebration] = useState(false)
+  const [checkedMockPreview, setCheckedMockPreview] = useState<CheckedMockSample | null>(null)
   const [history, setHistory] = useState(() => getState().customTestSeriesRequests ?? [])
   const price = useMemo(() => getTestSeriesPrice(testCount), [testCount])
 
@@ -241,17 +293,25 @@ export default function TestSeries() {
         </section>
 
         <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5 sm:p-6">
-          <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="grid gap-5">
             <div>
               <p className="text-xs font-bold uppercase tracking-[.15em] text-amber-800">Test Series & Evaluation</p>
               <h2 className="mt-2 font-display text-xl font-bold text-pine">Written-paper checking with direct mentor feedback</h2>
               <p className="mt-2 text-sm leading-relaxed text-amber-950">Get your test checked within 3 days, or have your paper evaluated by Miss Sadia Zahoor live on Google Meet.</p>
-              <p className="mt-2 text-xs text-amber-900/75">The checked-mock sample archive was not available in this deployment batch, so no sample or subject identity is being fabricated.</p>
             </div>
-            <div className="flex flex-col gap-2">
-              <button type="button" disabled className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-amber-300 bg-white px-4 text-sm font-bold text-slate-500 disabled:cursor-not-allowed"><FileSearch className="h-4 w-4" /> View Checked Mock Sample · unavailable</button>
-              <a href={waLink(sadia.whatsapp, 'Assalam-o-Alaikum, I want information about CSS Vista test checking and live paper evaluation with Miss Sadia Zahoor.')} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> Inquire about evaluation</a>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {checkedMockSamples.map((sample) => (
+                <article key={sample.id} className="rounded-xl border border-amber-200 bg-white p-4 shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <div><p className="text-xs font-extrabold uppercase tracking-wider text-amber-800">{sample.test}</p><h3 className="mt-1 font-bold text-pine">{sample.subject}</h3></div>
+                    <LockKeyhole className="h-4 w-4 text-amber-700" aria-hidden="true" />
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">{sample.pages} checked pages</p>
+                  <button type="button" onClick={() => setCheckedMockPreview(sample)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-amber-300 bg-amber-50 px-3 text-sm font-bold text-pine hover:bg-amber-100"><Eye className="h-4 w-4" /> View Checked Mock Sample</button>
+                </article>
+              ))}
             </div>
+            <a href={waLink(sadia.whatsapp, 'Assalam-o-Alaikum, I want information about CSS Vista test checking and live paper evaluation with Miss Sadia Zahoor.')} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> Inquire about evaluation</a>
           </div>
         </section>
 
@@ -507,6 +567,7 @@ export default function TestSeries() {
         description={`${testCount} tests have been saved with dates, paper order and divided syllabus.`}
         onClose={() => setShowCelebration(false)}
       />
+      {checkedMockPreview && <CheckedMockViewer sample={checkedMockPreview} onClose={() => setCheckedMockPreview(null)} />}
     </div>
   )
 }

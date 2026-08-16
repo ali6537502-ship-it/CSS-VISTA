@@ -58,9 +58,9 @@ stable
 security definer
 set search_path = public
 as $$
-  select exists (
+  select check_user_id = (select auth.uid()) and exists (
     select 1 from public.admin_users
-    where user_id = check_user_id
+    where user_id = (select auth.uid())
   );
 $$;
 
@@ -105,6 +105,9 @@ drop trigger if exists css_vista_profile_on_signup on auth.users;
 create trigger css_vista_profile_on_signup
 after insert on auth.users
 for each row execute function public.create_css_vista_profile();
+
+-- Trigger-only function: never expose it as a Data API RPC.
+revoke all on function public.create_css_vista_profile() from public, anon, authenticated;
 
 insert into public.student_profiles (user_id, display_name, avatar_url)
 select

@@ -390,6 +390,7 @@ function BackBar({ onBack }: { onBack: () => void }) {
 }
 
 const routeScrollPositions = new Map<string, number>()
+const routeStackKey = 'cssvista:route-stack:v1'
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -399,6 +400,7 @@ export default function Layout() {
   const navigate = useNavigate()
   const navigationType = useNavigationType()
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
+  const routeStackRef = useRef<string[]>([])
   const { user, configured: accountsConfigured } = useAccount()
 
   useEffect(() => { touchVisit() }, [])
@@ -447,6 +449,25 @@ export default function Layout() {
     }
   }, [currentRoute, navigationType])
   useEffect(() => {
+    let stack = routeStackRef.current
+    if (!stack.length) {
+      try {
+        const stored = JSON.parse(sessionStorage.getItem(routeStackKey) ?? '[]')
+        if (Array.isArray(stored)) stack = stored.filter((item): item is string => typeof item === 'string' && item.startsWith('/'))
+      } catch { stack = [] }
+    }
+    if (navigationType === 'POP') {
+      const existing = stack.lastIndexOf(currentRoute)
+      stack = existing >= 0 ? stack.slice(0, existing + 1) : [...stack, currentRoute]
+    } else if (navigationType === 'REPLACE') {
+      stack = stack.length ? [...stack.slice(0, -1), currentRoute] : [currentRoute]
+    } else if (stack.at(-1) !== currentRoute) {
+      stack = [...stack, currentRoute]
+    }
+    routeStackRef.current = stack.slice(-80)
+    sessionStorage.setItem(routeStackKey, JSON.stringify(routeStackRef.current))
+  }, [currentRoute, navigationType])
+  useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen, searchOpen])
@@ -468,9 +489,12 @@ export default function Layout() {
   }, [])
 
   const goBack = () => {
-    const historyIndex = window.history.state?.idx
-    if (typeof historyIndex === 'number' && historyIndex > 0) {
-      navigate(-1)
+    const stack = routeStackRef.current
+    if (stack.length > 1) {
+      const target = stack[stack.length - 2]
+      routeStackRef.current = stack.slice(0, -1)
+      sessionStorage.setItem(routeStackKey, JSON.stringify(routeStackRef.current))
+      navigate(target, { replace: true })
       return
     }
     navigate('/', { replace: true })

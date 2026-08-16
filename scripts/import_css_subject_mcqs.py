@@ -29,6 +29,24 @@ QUESTION_RE = re.compile(r"(?:(?<=^)|(?<=\n))(\d{1,4})[.)]\s+(?=\S)", re.M)
 ANSWER_RE = re.compile(r"(?:correct\s+answer|answer|ans(?:wer)?)[\s:–—-]*\(?([A-Da-d])\)?", re.I)
 KEY_PAIR_RE = re.compile(r"(?:^|\s)(\d{1,4})\s*[-.:)]\s*([A-Da-d])(?=\s|$)")
 SOURCE_RE = re.compile(r"^(?:source|sources|reference|references)\s*[:–—-]\s*(.+)$", re.I)
+QUESTION_PREFIX_RE = re.compile(r"^\s*([0-9۰-۹٠-٩]{1,4})[.)۔]\s*(\S.*)$", re.S)
+LOCAL_LABEL = r"(?:A|B|C|D|a|b|c|d|الف|[أاابجد])"
+OPTION_MARKER_LOCAL_RE = re.compile(rf"(?:(?<=^)|(?<=\s))(?:\(\s*({LOCAL_LABEL})\s*\)|({LOCAL_LABEL})[.)۔])\s*", re.I)
+ANSWER_LOCAL_RE = re.compile(
+    rf"(?:correct\s+answer|answer|ans(?:wer)?|الإجابة\s+الصحيحة|درست\s+جواب|صحیح\s+جواب|"
+    rf"پاسخ(?:\s+صحیح|\s+درست)?|جواب(?:\s+درست)?)[\s:–—-]*\(?\s*({LOCAL_LABEL})\s*\)?",
+    re.I,
+)
+KEY_PAIR_LOCAL_RE = re.compile(
+    rf"(?<!\w)([0-9۰-۹٠-٩]{{1,4}})\s*(?:[-.:)—–—]|\.\s*)\s*\(?\s*({LOCAL_LABEL})\s*\)?",
+    re.I,
+)
+ANSWER_KEY_HEADING_RE = re.compile(r"(?:answer\s*key|key\s*answers|جواب\s*نام|جوابنام|الإجابات|پاسخ\s*نامه)", re.I)
+
+LABEL_MAP = {
+    "A": "A", "B": "B", "C": "C", "D": "D",
+    "ا": "A", "أ": "A", "الف": "A", "ب": "B", "ج": "C", "د": "D",
+}
 
 
 @dataclass(frozen=True)
@@ -167,11 +185,77 @@ def topic_for(offset: int, heading_positions: list[tuple[int, str]], subject: st
     return heading[:160]
 
 
+def file_topic(path: Path) -> str:
+    """Derive a readable fallback only from an explicit source filename title."""
+    value = path.stem.replace("_", " ")
+    value = re.sub(r"\b(?:FPSC|CSS|MCQs?|bank|master|index|advanced|verified|expanded|rebuilt)\b", " ", value, flags=re.I)
+    value = re.sub(r"\b(?:high yield|exam style|per topic subtopic)\b", " ", value, flags=re.I)
+    value = re.sub(r"\b(?:vol(?:ume)?|unit)\s*0*\d+\b", " ", value, flags=re.I)
+    value = re.sub(r"\b\d+\b", " ", value)
+    value = clean(value.replace("-", " "))
+    return value[:160] if len(fingerprint(value)) >= 3 else "General"
+
+
 def answer_keys(text: str) -> dict[int, str]:
     found: dict[int, set[str]] = defaultdict(set)
     for num, label in KEY_PAIR_RE.findall(text):
         found[int(num)].add(label.upper())
     return {num: next(iter(values)) for num, values in found.items() if len(values) == 1}
+
+
+def local_label(value: str | None) -> str | None:
+    if not value:
+        return None
+    return LABEL_MAP.get(clean(value).upper()) or LABEL_MAP.get(clean(value))
+
+
+def local_number(value: str) -> int:
+    return int("".join(str(unicodedata.digit(ch)) if ch.isdigit() else ch for ch in value))
+
+
+def local_answer(value: str) -> str | None:
+    match = ANSWER_LOCAL_RE.search(clean(value))
+    return local_label(match.group(1)) if match else None
+
+
+def local_key_pairs(value: str) -> dict[int, str]:
+    pairs: dict[int, str] = {}
+    for number, label in KEY_PAIR_LOCAL_RE.findall(clean(value)):
+        normalized = local_label(label)
+        if normalized:
+            pairs[local_number(number)] = normalized
+    return pairs
+
+
+def unique_local_key_pairs(value: str) -> dict[int, str]:
+    found: dict[int, set[str]] = defaultdict(set)
+    for number, label in KEY_PAIR_LOCAL_RE.findall(clean(value)):
+        normalized = local_label(label)
+        if normalized:
+            found[local_number(number)].add(normalized)
+    return {number: next(iter(labels)) for number, labels in found.items() if len(labels) == 1}
+
+
+def local_options(value: str) -> tuple[str, dict[str, str], str | None]:
+    """Return text before the first option, normalized A–D options and an inline answer."""
+    value = clean(value)
+    answer_match = ANSWER_LOCAL_RE.search(value)
+    markers = [
+        marker for marker in OPTION_MARKER_LOCAL_RE.finditer(value)
+        if not answer_match or marker.start() < answer_match.start()
+    ]
+    options: dict[str, str] = {}
+    if not markers:
+        return value, options, local_answer(value)
+    for index, marker in enumerate(markers):
+        label = local_label(marker.group(1) or marker.group(2))
+        if not label or label in options:
+            continue
+        end = markers[index + 1].start() if index + 1 < len(markers) else (answer_match.start() if answer_match else len(value))
+        option = clean(value[marker.end():end]).strip(" ;|—–-")
+        if option:
+            options[label] = option
+    return clean(value[:markers[0].start()]), options, local_label(answer_match.group(1)) if answer_match else None
 
 
 def parse_chunk(chunk: str, number: int, key: dict[int, str]) -> tuple[str, list[str], int, str | None, str | None] | None:
@@ -233,81 +317,45 @@ def parse_document(path: Path, batch: str) -> tuple[list[dict], dict, list[str]]
         return [], {"file": path.name, "status": "unclassified", "accepted": 0, "rejected": 0}, headings
 
     doc = Document(path)
-    styled_questions = [p for p in doc.paragraphs if p.style and p.style.name.lower() == "question"]
-    if styled_questions:
-        accepted: list[dict] = []
-        current_topic = "General"
-        current: dict | None = None
-        rejected = 0
-
-        def publish() -> None:
-            nonlocal current, rejected
-            if not current:
-                return
-            answer_match = ANSWER_RE.search(current.get("answerText", ""))
-            if len(current["options"]) != 4 or not answer_match:
-                rejected += 1
-                current = None
-                return
-            label = answer_match.group(1).upper()
-            normalized = fingerprint(current["question"])
-            digest = hashlib.sha256((meta.slug + "|" + normalized).encode()).hexdigest()
-            accepted.append({
-                "id": f"css-{meta.slug}-{digest[:16]}", "hash": digest,
-                "designation": meta.designation, "group": meta.group,
-                "subject": meta.subject, "subjectSlug": meta.slug,
-                "topic": current.get("topic") or current_topic,
-                "question": current["question"], "options": current["options"],
-                "answer": ord(label) - ord("A"), "explanation": None,
-                "sourceDocument": path.name, "source": current.get("source"),
-                "importBatch": batch, "verification": "source-supplied",
-            })
-            current = None
-
-        for paragraph in doc.paragraphs:
-            value = clean(paragraph.text)
-            if not value:
-                continue
-            style = (paragraph.style.name if paragraph.style else "").lower()
-            if "heading" in style:
-                current_topic = re.sub(r"^[IVXLCDM]+[.)]\s*", "", value, flags=re.I)[:160]
-            elif style == "question":
-                publish()
-                current = {"question": re.sub(r"^Q?\d+[.)]\s*", "", value), "options": [], "topic": current_topic}
-            elif current and style == "option":
-                current["options"].append(re.sub(r"^[A-D][.)]\s*", "", value))
-            elif current and style == "answer":
-                current["answerText"] = value
-            elif current and style == "reference":
-                current["source"] = re.sub(r"^Verification:\s*", "", value, flags=re.I)
-            elif current and value.lower().startswith("syllabus focus:"):
-                current["topic"] = clean(value.split(":", 1)[1])[:160]
-        publish()
-        return accepted, {"file": path.name, "subject": meta.subject, "status": "accepted" if accepted else "no-valid-records", "accepted": len(accepted), "rejected": rejected}, headings
-
-    text = "\n".join(blocks)
-    positions: list[tuple[int, str]] = []
-    cursor = 0
-    heading_set = set(headings)
-    for block in blocks:
-        pos = text.find(block, cursor)
-        if block in heading_set:
-            positions.append((max(0, pos), block))
-        cursor = max(cursor, pos + len(block))
-
-    starts = list(QUESTION_RE.finditer(text))
-    key = answer_keys(text)
     accepted: list[dict] = []
     rejected = 0
-    for index, start in enumerate(starts):
-        end = starts[index + 1].start() if index + 1 < len(starts) else len(text)
-        number = int(start.group(1))
-        parsed = parse_chunk(text[start.start():end], number, key)
-        if not parsed:
+    current_topic = "General"
+    current: dict | None = None
+    pending: list[dict] = []
+    section_keys: dict[int, str] = {}
+    answer_key_mode = False
+
+    # A few banks use one consolidated key with globally unique numbering. It is
+    # only a fallback; section-local keys encountered in document order win.
+    all_text = "\n".join(blocks)
+    global_keys = answer_keys(all_text)
+    global_keys.update(unique_local_key_pairs(all_text))
+    row_key_candidates: dict[int, set[str]] = defaultdict(set)
+    for table in doc.tables:
+        for row in table.rows:
+            cells = [clean(cell.text) for cell in row.cells]
+            if len(cells) < 2 or not re.fullmatch(r"[0-9۰-۹٠-٩]{1,4}", cells[0]):
+                continue
+            label = local_label(cells[1].strip(" ().–—-"))
+            if label:
+                row_key_candidates[local_number(cells[0])].add(label)
+    global_keys.update({number: next(iter(labels)) for number, labels in row_key_candidates.items() if len(labels) == 1})
+
+    def emit(question: dict, fallback_keys: dict[int, str] | None = None) -> None:
+        nonlocal rejected
+        labels = question.get("options", {})
+        options = [clean(labels.get(label, "")) for label in ("A", "B", "C", "D")]
+        answer_label = question.get("answer") or (fallback_keys or {}).get(question.get("number")) or global_keys.get(question.get("number"))
+        text = clean(question.get("question", ""))
+        if (
+            len(fingerprint(text)) < 12
+            or any(not fingerprint(option) or len(option) > 800 for option in options)
+            or len({fingerprint(option) for option in options}) != 4
+            or answer_label not in {"A", "B", "C", "D"}
+        ):
             rejected += 1
-            continue
-        question, options, answer, explanation, source = parsed
-        normalized = fingerprint(question)
+            return
+        normalized = fingerprint(text)
         digest = hashlib.sha256((meta.slug + "|" + normalized).encode()).hexdigest()
         accepted.append({
             "id": f"css-{meta.slug}-{digest[:16]}",
@@ -316,18 +364,156 @@ def parse_document(path: Path, batch: str) -> tuple[list[dict], dict, list[str]]
             "group": meta.group,
             "subject": meta.subject,
             "subjectSlug": meta.slug,
-            "topic": topic_for(start.start(), positions, meta.subject),
-            "question": question,
+            "topic": clean(question.get("topic") or "General")[:160],
+            "question": text,
             "options": options,
-            "answer": answer,
-            "explanation": explanation,
+            "answer": ord(answer_label) - ord("A"),
+            "explanation": clean(question.get("explanation", ""))[:1500] or None,
             "sourceDocument": path.name,
-            "source": source,
+            "source": clean(question.get("source", ""))[:500] or None,
             "importBatch": batch,
             "verification": "source-supplied",
         })
+
+    def finish_current() -> None:
+        nonlocal current
+        if not current:
+            return
+        if current.get("answer"):
+            emit(current)
+        else:
+            pending.append(current)
+        current = None
+
+    def flush_pending(keys: dict[int, str] | None = None) -> None:
+        nonlocal pending, section_keys
+        merged = dict(section_keys)
+        if keys:
+            merged.update(keys)
+        for question in pending:
+            emit(question, merged)
+        pending = []
+        section_keys = {}
+
+    def start_question(value: str, style: str) -> bool:
+        nonlocal current, answer_key_mode
+        match = QUESTION_PREFIX_RE.match(value)
+        if not match and "question" not in style:
+            return False
+        finish_current()
+        number = local_number(match.group(1)) if match else len(accepted) + len(pending) + 1
+        body = match.group(2) if match else value
+        question_text, inline_options, inline_answer = local_options(body)
+        question_topic = current_topic
+        if "current_affairs_500" in path.stem.lower():
+            question_topic = (
+                "Pakistan Domestic Affairs" if number <= 100
+                else "Pakistan External Affairs" if number <= 300
+                else "Global Issues"
+            )
+        elif question_topic in {"General", "MCQs"}:
+            question_topic = file_topic(path)
+        current = {
+            "number": number,
+            "question": re.sub(r"^Q\s*", "", question_text, flags=re.I),
+            "options": inline_options,
+            "answer": inline_answer,
+            "topic": question_topic,
+        }
+        answer_key_mode = False
+        return True
+
+    for block in iter_blocks(doc):
+        if isinstance(block, Table):
+            cell_texts = [clean(cell.text) for row in block.rows for cell in row.cells if clean(cell.text)]
+            table_keys: dict[int, str] = {}
+            table_options: dict[str, str] = {}
+            # Some verified banks store one complete question in each one-cell
+            # table so that the question stays together in print.
+            if len(cell_texts) == 1 and QUESTION_PREFIX_RE.match(cell_texts[0]):
+                start_question(cell_texts[0], "question")
+                finish_current()
+                continue
+            # Other banks use a three-column Q / Ans. / Source table. Join the
+            # first two cells row-wise before falling back to inline key pairs.
+            for row in block.rows:
+                row_cells = [clean(cell.text) for cell in row.cells]
+                if len(row_cells) >= 2 and re.fullmatch(r"[0-9۰-۹٠-٩]{1,4}", row_cells[0]):
+                    label = local_label(row_cells[1].strip(" ().–—-"))
+                    if label:
+                        table_keys[local_number(row_cells[0])] = label
+            for cell_text in cell_texts:
+                table_keys.update(local_key_pairs(cell_text))
+                _, found_options, _ = local_options(cell_text)
+                table_options.update(found_options)
+            if current and len(table_options) >= 2:
+                current["options"].update(table_options)
+            elif table_keys and (pending or current):
+                finish_current()
+                flush_pending(table_keys)
+                answer_key_mode = False
+            continue
+
+        value = clean(block.text)
+        if not value:
+            continue
+        style = (block.style.name if block.style else "").lower()
+        is_heading = "heading" in style or style == "title"
+
+        if ANSWER_KEY_HEADING_RE.search(value) or "answer key" in style:
+            finish_current()
+            answer_key_mode = True
+            section_keys.update(local_key_pairs(value))
+            continue
+
+        key_pairs = local_key_pairs(value)
+        if answer_key_mode and key_pairs:
+            section_keys.update(key_pairs)
+            continue
+
+        if is_heading:
+            if pending:
+                flush_pending(section_keys)
+            heading = re.sub(r"^\s*(?:[IVXLCDM]+|[0-9۰-۹٠-٩]+)[.)۔-]\s*", "", value, flags=re.I)
+            current_topic = clean(heading)[:160] if len(fingerprint(heading)) >= 3 else "General"
+            answer_key_mode = False
+            continue
+
+        if start_question(value, style):
+            continue
+
+        if not current:
+            continue
+
+        explicit_answer = local_answer(value)
+        if explicit_answer or "answer" in style:
+            current["answer"] = explicit_answer or current.get("answer")
+            continue
+        before, found_options, inline_answer = local_options(value)
+        if "option" in style or found_options:
+            current["options"].update(found_options)
+            if inline_answer:
+                current["answer"] = inline_answer
+            continue
+        if "rationale" in style or "explanation" in style or value.lower().startswith(("explanation:", "rationale:", "details:")):
+            current["explanation"] = re.sub(r"^(?:explanation|rationale|details)\s*[:–—-]\s*", "", value, flags=re.I)
+            continue
+        if "reference" in style or SOURCE_RE.match(value):
+            current["source"] = re.sub(r"^(?:verification|source|sources|reference|references)\s*[:–—-]\s*", "", value, flags=re.I)
+            continue
+        if value.lower().startswith("syllabus focus:"):
+            current["topic"] = clean(value.split(":", 1)[1])[:160]
+
+    finish_current()
+    flush_pending(section_keys)
     status = "accepted" if accepted else "no-valid-records"
-    return accepted, {"file": path.name, "subject": meta.subject, "status": status, "accepted": len(accepted), "rejected": rejected}, headings
+    return accepted, {
+        "file": path.name,
+        "subject": meta.subject,
+        "status": status,
+        "accepted": len(accepted),
+        "rejected": rejected,
+    }, headings
 
 
 def main() -> None:
@@ -335,6 +521,7 @@ def main() -> None:
     parser.add_argument("roots", nargs="+", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--batch", default="2026-08-16-supplied-academic-material")
+    parser.add_argument("--preserve-from", type=Path)
     args = parser.parse_args()
 
     paths: list[Path] = []
@@ -347,6 +534,17 @@ def main() -> None:
     file_report: list[dict] = []
     duplicate_count: Counter[str] = Counter()
     seen: dict[str, str] = {}
+    preserved: dict[str, dict] = {}
+    if args.preserve_from and args.preserve_from.exists():
+        for shard in args.preserve_from.glob("*.json"):
+            if shard.name in {"index.json", "import-report.json"}:
+                continue
+            try:
+                previous = json.loads(shard.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            if isinstance(previous, list):
+                preserved.update({item["id"]: item for item in previous if isinstance(item, dict) and item.get("id")})
 
     for path in paths:
         try:
@@ -356,6 +554,15 @@ def main() -> None:
             continue
         file_report.append(report)
         for record in records:
+            previous = preserved.get(record["id"])
+            if previous:
+                if (
+                    "current_affairs_500" not in record["sourceDocument"].lower()
+                    and previous.get("topic") not in {None, "", "General", "MCQs"}
+                ):
+                    record["topic"] = previous["topic"]
+                record["explanation"] = previous.get("explanation") or record.get("explanation")
+                record["source"] = previous.get("source") or record.get("source")
             key = fingerprint(record["question"])
             if key in seen:
                 duplicate_count[record["subject"]] += 1

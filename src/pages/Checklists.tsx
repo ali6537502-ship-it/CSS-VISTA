@@ -59,8 +59,6 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
     setChecklist(id, next)
   }
 
-  let stepIndex = -1
-
   return (
     <div className="mt-6">
       <div className="print-area rounded-xl border bg-white p-5">
@@ -72,13 +70,16 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
           <div className="h-full rounded-full bg-emerald-600 transition-all" style={{ width: `${(done / allSteps.length) * 100}%` }} />
         </div>
 
-        {groups.map((g) => (
+        {groups.map((g, groupIndex) => {
+          const groupOffset = groups
+            .slice(0, groupIndex)
+            .reduce((total, item) => total + item.steps.length, 0)
+          return (
           <div key={g.group} className="mt-5">
             <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{g.group}</p>
             <div className="mt-2 space-y-2">
-              {g.steps.map((s) => {
-                stepIndex += 1
-                const i = stepIndex
+              {g.steps.map((s, stepIndex) => {
+                const i = groupOffset + stepIndex
                 return (
                   <button
                     key={s.id}
@@ -97,7 +98,8 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
               })}
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
 
       <div className="no-print mt-4 flex flex-wrap items-center gap-2">

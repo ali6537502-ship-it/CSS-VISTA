@@ -18,17 +18,16 @@ export function printPage(withAnswers: boolean, targetSelector = '.print-area') 
     }
   })
   if (targets.length) document.body.classList.add('printing-selected-area')
-  let fallback: number | undefined
   const cleanup = () => {
     document.body.classList.remove('print-with-answers', 'print-no-answers', 'printing-selected-area')
     document.querySelectorAll('.print-selected-area').forEach((node) => node.classList.remove('print-selected-area'))
     document.querySelectorAll('.print-hidden-sibling').forEach((node) => node.classList.remove('print-hidden-sibling'))
     window.removeEventListener('afterprint', cleanup)
-    if (fallback) window.clearTimeout(fallback)
+    window.clearTimeout(fallback)
   }
   window.addEventListener('afterprint', cleanup)
+  const fallback = window.setTimeout(cleanup, 3000)
   window.print()
-  fallback = window.setTimeout(cleanup, 3000)
 }
 
 export default function PrintMenu({ answersAvailable = true, label = 'Print', targetSelector = '.print-area' }: { answersAvailable?: boolean; label?: string; targetSelector?: string }) {

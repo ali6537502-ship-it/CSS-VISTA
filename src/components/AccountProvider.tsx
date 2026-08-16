@@ -17,7 +17,9 @@ import {
 } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 
-const CLOUD_SYNC_DEBOUNCE_MS = 12_000
+// Batch personal writes so active study sessions do not generate one database
+// request per click. Pending state is also flushed on hide/offline recovery.
+const CLOUD_SYNC_DEBOUNCE_MS = 60_000
 
 export function AccountProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(accountServiceConfigured)

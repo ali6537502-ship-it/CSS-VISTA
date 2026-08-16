@@ -144,7 +144,7 @@ export default function SubjectSelector() {
                   <span className="text-sm font-medium">{f.label}</span>
                   <div className="mt-1.5 flex flex-wrap gap-2">
                     {f.opts.map((o) => (
-                      <button key={o} onClick={() => setW({ ...w, [f.key]: o } as Wizard)} className={`rounded-md px-3 py-1.5 text-sm ${(w as any)[f.key] === o ? 'bg-pine text-emerald-50' : 'bg-secondary'}`}>{o}</button>
+                      <button key={o} onClick={() => setW({ ...w, [f.key]: o } as Wizard)} className={`rounded-md px-3 py-1.5 text-sm ${w[f.key as keyof Wizard] === o ? 'bg-pine text-emerald-50' : 'bg-secondary'}`}>{o}</button>
                     ))}
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export default function SubjectSelector() {
                   <span className="text-sm font-medium">{f.label}</span>
                   <div className="mt-1.5 flex flex-wrap gap-2">
                     {f.opts.map((o) => (
-                      <button key={o} onClick={() => setW({ ...w, [f.key]: o } as Wizard)} className={`rounded-md px-3 py-1.5 text-sm ${(w as any)[f.key] === o ? 'bg-pine text-emerald-50' : 'bg-secondary'}`}>{o}</button>
+                      <button key={o} onClick={() => setW({ ...w, [f.key]: o } as Wizard)} className={`rounded-md px-3 py-1.5 text-sm ${w[f.key as keyof Wizard] === o ? 'bg-pine text-emerald-50' : 'bg-secondary'}`}>{o}</button>
                     ))}
                   </div>
                 </div>

@@ -12,4 +12,4 @@ if [[ -x node_modules/.bin/vite ]] \
   exit 0
 fi
 
-npm ci --no-audit --no-fund
+npm ci --no-audit --no-fund --cache "${TMPDIR:-/tmp}/css-vista-npm-cache"

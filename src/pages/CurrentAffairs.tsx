@@ -6,7 +6,7 @@ import { PageHeader } from '@/components/shared'
 type OneLiner = { date: string; development: string; fact: string; source: string }
 type AffairMcq = {
   id: string; date: string; development: string; background: string; whyItMatters: string
-  question: string; options: string[]; answer: number; explanation: string; source: string
+  question: string; options: string[]; answer: number; explanation: string; source: string; updatedAt: string
 }
 type AffairsBatch = { batch: string; title: string; sourceDocument: string; verification: string; oneLiners: OneLiner[]; mcqs: AffairMcq[] }
 
@@ -21,6 +21,7 @@ function McqCard({ item, number }: { item: AffairMcq; number: number }) {
     <article className="rounded-xl border bg-white p-4 sm:p-5">
       <p className="text-xs font-semibold text-muted-foreground">{item.date} · Question {number}</p>
       <h3 className="mt-2 font-semibold leading-relaxed text-pine">{item.question}</h3>
+      <p className="mt-1 text-[11px] font-semibold text-emerald-700">Updated: {item.updatedAt}</p>
       <div className="mt-3 grid gap-2">
         {item.options.map((option, index) => {
           const correct = submitted && index === item.answer
@@ -72,8 +73,6 @@ export default function CurrentAffairs() {
   const pages = Math.max(1, Math.ceil(current.length / PAGE_SIZE))
   const start = (Math.min(page, pages) - 1) * PAGE_SIZE
 
-  useEffect(() => setPage(1), [query, tab])
-
   return (
     <div>
       <PageHeader title="Recent Current & Pakistan Affairs" description="The supplied 11 July–16 August 2026 dossier, presented as dated one-liners and MCQs with source-linked Details, plus the genuine weekly magazine issue." />
@@ -84,12 +83,12 @@ export default function CurrentAffairs() {
             ['mcqs', 'Current-Affairs MCQs', CheckCircle2],
             ['magazine', 'Weekly Magazine', Newspaper],
           ] as const).map(([value, label, Icon]) => (
-            <button key={value} type="button" onClick={() => setTab(value)} aria-pressed={tab === value} className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-bold ${tab === value ? 'border-pine bg-pine text-white' : 'bg-white text-pine hover:bg-secondary'}`}><Icon className="h-4 w-4" /> {label}</button>
+            <button key={value} type="button" onClick={() => { setTab(value); setPage(1) }} aria-pressed={tab === value} className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-bold ${tab === value ? 'border-pine bg-pine text-white' : 'bg-white text-pine hover:bg-secondary'}`}><Icon className="h-4 w-4" /> {label}</button>
           ))}
         </div>
 
         {tab !== 'magazine' && (
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={`Search ${tab === 'mcqs' ? 'questions' : 'facts'}, dates or developments...`} className="mt-5 h-11 w-full rounded-lg border bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700" />
+          <input value={query} onChange={(event) => { setQuery(event.target.value); setPage(1) }} placeholder={`Search ${tab === 'mcqs' ? 'questions' : 'facts'}, dates or developments...`} className="mt-5 h-11 w-full rounded-lg border bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700" />
         )}
 
         {!batch && <div className="grid place-items-center py-20 text-muted-foreground"><Loader2 className="h-7 w-7 animate-spin" /><p className="mt-2 text-sm">Loading the supplied batch…</p></div>}

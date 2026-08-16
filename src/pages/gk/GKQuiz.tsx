@@ -15,7 +15,7 @@ import {
   recordAttempt, recordFiveMin, recordQuestionTiming, savedMcqIds, toggleSavedMcq, wrongIds,
 } from '@/lib/progress'
 import {
-  completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
+  completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState,
   recordQuizResult, recordReview, recordScheduledMock,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
@@ -138,17 +138,6 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       }
       case 'mock':
       case 'pms-mock': {
-        const availability = getMockAvailability('gk')
-        if (!availability.available) {
-          r = {
-            title: 'Punjab PMS / PPSC GK Grand Mock',
-            qs: [],
-            exam: true,
-            timeSec: 0,
-            note: `PMS GK registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until 10:00 PM.`,
-          }
-          break
-        }
         const pmsAreas = [
           'current-affairs', 'pakistan-affairs', 'pakistan-history', 'pakistan-geography',
           'everyday-science', 'science', 'islamic-gk', 'english-grammar', 'urdu-language',
@@ -166,17 +155,6 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         break
       }
       case 'mpt-mock': {
-        const availability = getMockAvailability('mpt')
-        if (!availability.available) {
-          r = {
-            title: 'Full CSS MPT Practice Mock',
-            qs: [],
-            exam: true,
-            timeSec: 0,
-            note: `CSS MPT registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until midnight.`,
-          }
-          break
-        }
         const abilityQuestions: BankQuestion[] = [...seedQuestions
           .filter((question) => question.category === 'abilities' || question.category === 'reasoning')
           .map((question) => ({
@@ -329,7 +307,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     }
     r.qs = dedupeBankQuestions(filterDisabled(r.qs))
     if (m === 'mock' || m === 'pms-mock') r.qs = r.qs.slice(0, 100)
-    if (m === 'mpt-mock') r.qs = r.qs.slice(0, 50)
+    if (m === 'mpt-mock') r.qs = r.qs.slice(0, 200)
     setResolved(r)
     setLoading(false)
     if (r.qs.length) {
@@ -351,19 +329,17 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     const label = DAILY_MOCK_TIME_LABELS[scheduledKind]
     return (
       <div>
-        <PageHeader title={status.title} description={`Daily supervised entry window: ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
+        <PageHeader title={status.title} description={`Full practice is available anytime. The daily recorded window is ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
         <div className="mx-auto max-w-xl px-4 py-10">
           <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-7">
             <p className={`text-xs font-extrabold uppercase tracking-[.16em] ${status.available ? 'text-emerald-700' : 'text-amber-700'}`}>
-              {status.available ? 'Registration open now' : status.completedToday ? 'Today’s attempt completed' : 'Registration currently closed'}
+              {status.available ? 'Daily recorded window open' : 'Anytime practice available'}
             </p>
             <h2 className="mt-2 font-display text-2xl font-bold text-pine">Student registration</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               {status.available
-                ? `Entry is open during ${label}. Your paper timer continues normally after you enter.`
-                : status.completedToday
-                  ? 'Your result is saved in your mock record. Return tomorrow for the next paper.'
-                  : `Next entry opens ${new Date(status.nextAvailableAt).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}.`}
+                ? `The daily recorded window is open during ${label}. Your paper timer continues normally after you enter.`
+                : `Start a complete practice paper now. The next daily recorded window opens ${new Date(status.nextAvailableAt).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}.`}
             </p>
             <label className="mt-5 block text-sm font-bold text-pine">
               Student full name
@@ -371,18 +347,18 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             </label>
             <button
               type="button"
-              disabled={!status.available || studentName.trim().length < 2}
+              disabled={studentName.trim().length < 2}
               onClick={() => {
                 localStorage.setItem('cssvista:mock-student-name', studentName.trim())
-                setMockSessionDateKey(status.dateKey)
+                setMockSessionDateKey(status.available ? status.dateKey : '')
                 setLoading(true)
                 setMockRegistered(true)
               }}
               className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-45"
             >
-              Enter today’s mock
+              Start full mock
             </button>
-            <p className="mt-3 text-xs text-muted-foreground">One recorded attempt per student profile per daily session. Results include score, time, weak areas and previous mock records.</p>
+            <p className="mt-3 text-xs text-muted-foreground">Daily-window attempts are recorded once per student profile; anytime practice remains available. Results include score, time, weak areas and previous mock records.</p>
           </section>
         </div>
       </div>
@@ -579,8 +555,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     })
     if (mode === 'five-minute') recordFiveMin(score, qs.length)
     if (mode === 'daily') completeChallenge(new Date().toISOString().slice(0, 10))
-    if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk', sessionDateKey)
-    if (mode === 'mpt-mock') recordScheduledMock('mpt', sessionDateKey)
+    if ((mode === 'mock' || mode === 'pms-mock') && sessionDateKey) recordScheduledMock('gk', sessionDateKey)
+    if (mode === 'mpt-mock' && sessionDateKey) recordScheduledMock('mpt', sessionDateKey)
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
 

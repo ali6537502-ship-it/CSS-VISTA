@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/shared'
 import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 
 type IndexSubject = { slug: string; name: string; designation: string; group: number | null; topics: string[] }
+type OfficialSubject = { slug: string; name: string; designation: 'compulsory' | 'optional'; group: number | null; marks: number; pages: [number, number]; sections: { title: string; items: string[] }[] }
 type CustomTopic = { id: string; text: string; done: boolean }
 type PlannerState = { selected: string[]; hidden: string[]; complete: string[]; custom: Record<string, CustomTopic[]> }
 const key = 'cssvista:fpsc-personal-syllabus:v1'
@@ -13,30 +14,57 @@ function load(): PlannerState {
   try { return { ...emptyState, ...JSON.parse(localStorage.getItem(key) ?? '{}') } } catch { return emptyState }
 }
 function slugify(value: string) { return value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
+function customTopicId(slug: string, text: string, existing: CustomTopic[]) {
+  let hash = 2166136261
+  for (let index = 0; index < text.length; index += 1) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619)
+  const base = `${slug}-${(hash >>> 0).toString(36)}`
+  let id = base
+  let suffix = 1
+  const used = new Set(existing.map((item) => item.id))
+  while (used.has(id)) { id = `${base}-${suffix}`; suffix += 1 }
+  return id
+}
 
 export default function StudyPlanner() {
   const [state, setState] = useState<PlannerState>(load)
   const [indexSubjects, setIndexSubjects] = useState<IndexSubject[]>([])
+  const [officialSubjects, setOfficialSubjects] = useState<OfficialSubject[]>([])
   const [open, setOpen] = useState<Record<string, boolean>>({})
   const [drafts, setDrafts] = useState<Record<string, string>>({})
   const [editing, setEditing] = useState<string | null>(null)
 
   useEffect(() => { fetch('/css-subject-mcqs/index.json').then((response) => response.json()).then((value) => setIndexSubjects(value.subjects ?? [])) }, [])
+  useEffect(() => {
+    fetch('/fpsc-syllabus.json')
+      .then((response) => {
+        if (!response.ok) throw new Error(`FPSC syllabus returned ${response.status}`)
+        return response.json()
+      })
+      .then((value) => setOfficialSubjects(value.subjects ?? []))
+      .catch(() => setOfficialSubjects([]))
+  }, [])
   useEffect(() => { localStorage.setItem(key, JSON.stringify(state)) }, [state])
 
   const subjectTopics = useMemo(() => {
     const map: Record<string, string[]> = {}
-    compulsorySubjects.forEach((subject) => {
-      map[subject.slug] = subject.topics.flatMap((section) => [section.title, ...section.points.map((point) => `${section.title} — ${point}`)])
+    officialSubjects.forEach((subject) => {
+      map[subject.slug] = subject.sections.flatMap((section) => [
+        section.title,
+        ...section.items.map((item) => `${section.title} — ${item}`),
+      ])
     })
-    indexSubjects.forEach((subject) => { if (subject.topics.length) map[subject.slug] = subject.topics.filter((topic) => topic !== 'General') })
     return map
-  }, [indexSubjects])
+  }, [officialSubjects])
 
-  const master = useMemo(() => [
+  const master = useMemo(() => officialSubjects.length ? officialSubjects.map((subject) => ({
+    slug: subject.slug,
+    name: subject.name,
+    kind: subject.designation === 'compulsory' ? 'Compulsory' : 'Optional',
+    group: subject.group,
+  })) : [
     ...compulsorySubjects.map((subject) => ({ slug: subject.slug, name: subject.name, kind: 'Compulsory', group: null as number | null })),
     ...optionalGroups.flatMap((group) => group.subjects.map((subject) => ({ slug: indexSubjects.find((item) => item.name === subject.name)?.slug ?? slugify(subject.name), name: subject.name, kind: 'Optional', group: group.group }))),
-  ], [indexSubjects])
+  ], [indexSubjects, officialSubjects])
   const selectedSubjects = master.filter((subject) => state.selected.includes(subject.slug) && !state.hidden.includes(subject.slug))
 
   function select(slug: string) {
@@ -47,8 +75,11 @@ export default function StudyPlanner() {
   }
   function addCustom(slug: string) {
     const text = drafts[slug]?.trim(); if (!text) return
-    const item: CustomTopic = { id: `${slug}-${Date.now()}`, text, done: false }
-    setState((current) => ({ ...current, custom: { ...current.custom, [slug]: [...(current.custom[slug] ?? []), item] } }))
+    setState((current) => {
+      const existing = current.custom[slug] ?? []
+      const item: CustomTopic = { id: customTopicId(slug, text, existing), text, done: false }
+      return { ...current, custom: { ...current.custom, [slug]: [...existing, item] } }
+    })
     setDrafts((current) => ({ ...current, [slug]: '' }))
   }
   function updateCustom(slug: string, id: string, patchValue: Partial<CustomTopic>) {
@@ -70,7 +101,7 @@ export default function StudyPlanner() {
       <main className="mx-auto max-w-7xl px-4 py-8">
         <section className="rounded-xl border bg-white p-5 print:hidden">
           <h2 className="font-display text-xl font-bold text-pine">Configure my subjects</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Selecting or hiding a subject changes only your personal view; the master FPSC subject list remains intact.</p>
+          <p className="mt-1 text-sm text-muted-foreground">Selecting or hiding a subject changes only your personal view; the master FPSC subject list remains intact. The checklist is extracted from the official FPSC CE syllabus dated 7 July 2015.</p>
           <div className="mt-5"><h3 className="text-sm font-bold uppercase tracking-wide text-emerald-800">Compulsory</h3><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{master.filter((subject) => subject.kind === 'Compulsory').map((subject) => <SubjectToggle key={subject.slug} subject={subject} checked={state.selected.includes(subject.slug)} onChange={() => select(subject.slug)} />)}</div></div>
           {optionalGroups.map((group) => <details key={group.group} className="mt-4 rounded-lg border" open={group.group === 1}><summary className="cursor-pointer px-4 py-3 text-sm font-bold text-pine">Optional Group {group.group} · {group.rule}</summary><div className="grid gap-2 border-t p-3 sm:grid-cols-2 lg:grid-cols-3">{master.filter((subject) => subject.group === group.group).map((subject) => <SubjectToggle key={subject.slug} subject={subject} checked={state.selected.includes(subject.slug)} onChange={() => select(subject.slug)} />)}</div></details>)}
         </section>
@@ -89,10 +120,10 @@ export default function StudyPlanner() {
                 const percent = topics.length ? Math.round(complete / topics.length * 100) : 0
                 const expanded = open[subject.slug] ?? true
                 return <article key={subject.slug} className="rounded-xl border bg-white p-5 break-inside-avoid">
-                  <div className="flex flex-wrap items-start justify-between gap-3"><button type="button" onClick={() => setOpen((current) => ({ ...current, [subject.slug]: !expanded }))} className="min-w-0 flex-1 text-left"><p className="text-xs font-bold uppercase tracking-wide text-amber-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''}</p><h3 className="mt-1 font-display text-xl font-bold text-pine">{subject.name}</h3><p className="mt-1 text-xs text-muted-foreground">{topics.length ? `${complete}/${topics.length} official areas complete · ${percent}%` : 'Detailed outline not published from the verified source batch'}</p></button><div className="flex gap-2 print:hidden"><button type="button" onClick={() => setState((current) => ({ ...current, hidden: [...current.hidden, subject.slug] }))} className="grid h-10 w-10 place-items-center rounded-lg border" aria-label={`Hide ${subject.name}`}><EyeOff className="h-4 w-4" /></button><ChevronDown className={`mt-2 h-5 w-5 transition-transform ${expanded ? 'rotate-180' : ''}`} /></div></div>
+                  <div className="flex flex-wrap items-start justify-between gap-3"><button type="button" onClick={() => setOpen((current) => ({ ...current, [subject.slug]: !expanded }))} className="min-w-0 flex-1 text-left"><p className="text-xs font-bold uppercase tracking-wide text-amber-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''}</p><h3 className="mt-1 font-display text-xl font-bold text-pine">{subject.name}</h3><p className="mt-1 text-xs text-muted-foreground">{topics.length ? `${complete}/${topics.length} official areas complete · ${percent}%` : 'The official source pages contain non-extractable local-language text; no heading has been fabricated'}</p></button><div className="flex gap-2 print:hidden"><button type="button" onClick={() => setState((current) => ({ ...current, hidden: [...current.hidden, subject.slug] }))} className="grid h-10 w-10 place-items-center rounded-lg border" aria-label={`Hide ${subject.name}`}><EyeOff className="h-4 w-4" /></button><ChevronDown className={`mt-2 h-5 w-5 transition-transform ${expanded ? 'rotate-180' : ''}`} /></div></div>
                   <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary"><div className="h-full bg-emerald-700" style={{ width: `${percent}%` }} /></div>
                   {expanded && <div className="mt-5 grid gap-6 lg:grid-cols-2">
-                    <section><h4 className="font-bold text-pine">Official FPSC syllabus checklist</h4>{topics.length ? <div className="mt-3 max-h-[30rem] space-y-2 overflow-y-auto pr-1 print:max-h-none print:overflow-visible">{topics.map((topic) => { const id = `${subject.slug}::${topic}`; const done = state.complete.includes(id); return <label key={id} className={`flex cursor-pointer gap-3 rounded-lg border px-3 py-2.5 text-sm ${done ? 'border-emerald-300 bg-emerald-50' : ''}`}><input type="checkbox" checked={done} onChange={() => toggleOfficial(id)} className="mt-0.5 h-4 w-4 accent-emerald-700" /><span className={done ? 'text-emerald-950 line-through' : ''}>{topic}</span></label>})}</div> : <p className="mt-3 rounded-lg border border-dashed p-4 text-sm text-muted-foreground">No detailed, reliably extracted topic hierarchy was available for this subject in the present source batch. The subject remains selectable without fabricated headings.</p>}</section>
+                    <section><h4 className="font-bold text-pine">Official FPSC syllabus checklist</h4>{topics.length ? <div className="mt-3 max-h-[30rem] space-y-2 overflow-y-auto pr-1 print:max-h-none print:overflow-visible">{topics.map((topic) => { const id = `${subject.slug}::${topic}`; const done = state.complete.includes(id); return <label key={id} className={`flex cursor-pointer gap-3 rounded-lg border px-3 py-2.5 text-sm ${done ? 'border-emerald-300 bg-emerald-50' : ''}`}><input type="checkbox" checked={done} onChange={() => toggleOfficial(id)} className="mt-0.5 h-4 w-4 accent-emerald-700" /><span className={done ? 'text-emerald-950 line-through' : ''}>{topic}</span></label>})}</div> : <p className="mt-3 rounded-lg border border-dashed p-4 text-sm text-muted-foreground">The official PDF pages for this regional-language paper are image-based and could not be extracted reliably with the available OCR language data. The subject remains selectable without invented headings.</p>}</section>
                     <section className="rounded-xl border-2 border-dashed border-amber-300 bg-amber-50/50 p-4"><h4 className="font-bold text-pine">My Topics to Do</h4><p className="mt-1 text-xs text-muted-foreground">Personal preparation layer — not part of the official FPSC syllabus.</p><div className="mt-3 flex gap-2 print:hidden"><input value={drafts[subject.slug] ?? ''} onChange={(event) => setDrafts((current) => ({ ...current, [subject.slug]: event.target.value }))} onKeyDown={(event) => event.key === 'Enter' && addCustom(subject.slug)} placeholder="Add a personal topic…" className="h-10 min-w-0 flex-1 rounded-lg border bg-white px-3 text-sm" /><button type="button" onClick={() => addCustom(subject.slug)} className="grid h-10 w-10 place-items-center rounded-lg bg-pine text-white" aria-label="Add personal topic"><Plus className="h-4 w-4" /></button></div><ol className="mt-3 space-y-2">{(state.custom[subject.slug] ?? []).map((item, indexValue) => <li key={item.id} className="flex items-center gap-2 rounded-lg bg-white p-2 text-sm"><button type="button" onClick={() => updateCustom(subject.slug, item.id, { done: !item.done })} className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border ${item.done ? 'bg-emerald-700 text-white' : ''}`} aria-label={item.done ? 'Mark incomplete' : 'Mark complete'}>{item.done && <Check className="h-4 w-4" />}</button>{editing === item.id ? <input autoFocus defaultValue={item.text} onBlur={(event) => { updateCustom(subject.slug, item.id, { text: event.target.value.trim() || item.text }); setEditing(null) }} onKeyDown={(event) => event.key === 'Enter' && event.currentTarget.blur()} className="h-8 min-w-0 flex-1 rounded border px-2" /> : <button type="button" onClick={() => setEditing(item.id)} className={`min-w-0 flex-1 text-left ${item.done ? 'line-through text-muted-foreground' : ''}`}>{item.text}</button>}<span className="flex print:hidden"><button type="button" disabled={indexValue === 0} onClick={() => moveCustom(subject.slug, indexValue, -1)} className="grid h-8 w-7 place-items-center disabled:opacity-30" aria-label="Move up"><ArrowUp className="h-3.5 w-3.5" /></button><button type="button" disabled={indexValue === (state.custom[subject.slug]?.length ?? 0) - 1} onClick={() => moveCustom(subject.slug, indexValue, 1)} className="grid h-8 w-7 place-items-center disabled:opacity-30" aria-label="Move down"><ArrowDown className="h-3.5 w-3.5" /></button><button type="button" onClick={() => deleteCustom(subject.slug, item.id)} className="grid h-8 w-7 place-items-center text-red-600" aria-label="Delete personal topic"><Trash2 className="h-3.5 w-3.5" /></button></span></li>)}</ol></section>
                   </div>}
                 </article>

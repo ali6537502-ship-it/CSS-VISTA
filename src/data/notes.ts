@@ -49,6 +49,7 @@ export const noteProducts: NoteProduct[] = [
     description: 'European History material supplied for CSS preparation.',
     samples: [
       { title: 'Events of the French Revolution (1789–1799)', previewFolder: 'french-revolution', pages: 3 },
+      { title: 'Metternich’s Era', previewFolder: 'metternich-era', pages: 3 },
     ],
   },
 ]

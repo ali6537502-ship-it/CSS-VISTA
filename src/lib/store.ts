@@ -94,7 +94,7 @@ export interface VistaState {
   bestStreakDays: number
   visitDates: string[]
   subjectProgress: Record<string, number> // slug -> 0..100 manual tracker
-  testSchedules: any[]
+  testSchedules: unknown[]
   gameHighScores: Record<string, number>
   goalText: string
   mockSchedule: Partial<Record<ScheduledMockKind, MockScheduleEntry>>
@@ -292,7 +292,7 @@ export function setSubjectProgress(slug: string, pct: number) {
   save(s)
 }
 
-export function saveSchedule(schedule: any) {
+export function saveSchedule(schedule: unknown) {
   const s = getState()
   s.testSchedules = [schedule]
   save(s)

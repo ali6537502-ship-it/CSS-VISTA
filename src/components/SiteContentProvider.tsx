@@ -1,31 +1,45 @@
-import { useEffect, useState, type ReactNode } from 'react'
-import { accountServiceConfigured } from '@/lib/supabase'
-import { initialiseCloudAdminContent } from '@/lib/admin'
+import { useEffect, type ReactNode } from 'react'
+import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
+import { initialiseCloudAdminContent, refreshCloudAdminContent } from '@/lib/admin'
+import { useAccount } from '@/lib/accountContext'
 
 export function SiteContentProvider({ children }: { children: ReactNode }) {
-  const [ready, setReady] = useState(!accountServiceConfigured)
+  const { user } = useAccount()
 
   useEffect(() => {
     if (!accountServiceConfigured) return
-    let active = true
-    initialiseCloudAdminContent().finally(() => {
-      if (active) setReady(true)
-    })
-    return () => {
-      active = false
-    }
+    // Static academic content renders immediately; the small CMS overlay is
+    // refreshed in the background and cached for temporary outages.
+    void initialiseCloudAdminContent()
   }, [])
 
-  if (!ready) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f7faf8] px-6">
-        <div className="text-center">
-          <div className="mx-auto h-9 w-9 animate-spin rounded-full border-4 border-emerald-100 border-t-emerald-800" />
-          <p className="mt-3 text-sm font-medium text-emerald-950">Loading CSS Vista…</p>
-        </div>
-      </div>
-    )
-  }
+  useEffect(() => {
+    // Keep public traffic off Realtime so the site remains free-tier friendly.
+    // Only an authenticated owner/admin needs an immediate CMS refresh.
+    if (!accountServiceConfigured || !user) return
+    let active = true
+    let removeChannel: (() => Promise<unknown>) | undefined
+
+    void getSupabaseClient().then(async (client) => {
+      if (!active || !client) return
+      const { data: isAdmin } = await client.rpc('is_css_vista_admin')
+      if (!active || isAdmin !== true) return
+      const channel = client
+        .channel('css-vista-published-content')
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'site_content', filter: 'id=eq.published' },
+          () => void refreshCloudAdminContent(),
+        )
+        .subscribe()
+      removeChannel = () => client.removeChannel(channel)
+    })
+
+    return () => {
+      active = false
+      if (removeChannel) void removeChannel()
+    }
+  }, [user])
 
   return children
 }
