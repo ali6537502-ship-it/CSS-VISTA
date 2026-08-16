@@ -236,7 +236,7 @@ export default function Dashboard() {
                 </button>
               ) : (
                 <span className="inline-flex flex-wrap items-center gap-2 rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800">
-                  Delete all progress on this device?
+                  Delete all progress?
                   <button
                     onClick={async () => {
                       const result = await resetProgress()

@@ -232,7 +232,7 @@ export default function AnswerEvaluation() {
                 {user
                   ? 'Your draft is included in your signed-in progress record and can sync across your devices.'
                   : configured
-                    ? 'Your draft stays on this device until you sign in and sync your progress.'
+                    ? 'Your draft remains available until you sign in and sync your progress.'
                     : 'Your draft currently stays in this browser. Do not use a shared device for private answers.'}
               </div>
             </Section>

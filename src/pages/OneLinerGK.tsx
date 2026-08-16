@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useSearchParams } from 'react-router'
 import {
-  AlertTriangle, BookOpenCheck, ChevronLeft, ChevronRight, Clock3,
+  BookOpenCheck, ChevronLeft, ChevronRight, Clock3,
   Filter, Layers3, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
@@ -109,17 +109,6 @@ export default function OneLinerGK() {
             <p className="text-xs text-muted-foreground">Time-sensitive notes clearly marked</p>
           </div>
         </section>
-
-        <div className="mt-5 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
-          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-          <p>
-            These notes were structurally cleaned and deduplicated from the supplied material. They have not all been
-            independently fact-checked. Items marked <strong>Dated source</strong> reflect the source’s 2024–25 snapshot;
-            verify changing facts with an official, current source before relying on them. The excluded language appendix
-            is available separately in the{' '}
-            <Link to="/language-grammar" className="font-semibold underline underline-offset-2">Urdu & English Grammar course</Link>.
-          </p>
-        </div>
 
         {error && (
           <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">

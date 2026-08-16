@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate, useNavigationType } fr
 import {
   Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine,
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
-  Landmark, TrendingUp, Languages, Target, Download, LayoutDashboard,
+  Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
   NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, type LucideIcon,
 } from 'lucide-react'
@@ -36,6 +36,7 @@ const nav = [
   {
     label: 'Practice',
     items: [
+      { label: 'ALL CSS SUBJECTS MCQs', to: '/mcqs', icon: Target },
       { label: 'MPT Preparation', to: '/mpt', icon: ClipboardList },
       { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
       { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
@@ -56,8 +57,6 @@ const nav = [
       { label: 'One-Liner GK', to: '/one-liner-gk', icon: BookOpen },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
-      { label: 'Past-Paper Trend Analyzer', to: '/trend-analyzer', icon: TrendingUp },
-      { label: 'Download Centre', to: '/downloads', icon: Download },
     ],
   },
   {
@@ -85,6 +84,7 @@ const nav = [
 
 const primaryNav = [
   { label: 'Home', to: '/', icon: HomeIcon },
+  { label: 'All Subject MCQs', to: '/mcqs', icon: Target },
   { label: 'GK World', to: '/gk', icon: Globe2 },
   { label: 'MPT Practice', to: '/mpt', icon: PenLine },
   { label: 'Current Affairs', to: '/current-affairs', icon: Newspaper },
@@ -95,7 +95,7 @@ const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
   { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/gk'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/downloads', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
 ]
 
@@ -170,7 +170,7 @@ function NotificationBar() {
   if (!active.length) return null
 
   const syncLabel = !online
-    ? 'Offline - device copy'
+    ? 'Offline'
     : user
       ? syncStatus === 'syncing'
         ? 'Syncing'
@@ -179,7 +179,7 @@ function NotificationBar() {
           : lastSyncedAt
             ? 'Progress synced'
             : 'Account connected'
-      : 'Saved on device'
+      : 'Progress ready'
   const timeLabel = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
     minute: '2-digit',
@@ -189,8 +189,7 @@ function NotificationBar() {
   return (
     <div className="bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <Link to="/mentors" className="flex shrink-0 items-center gap-1.5" aria-label="Meet Ms. Sadia Zahoor">
-          <img src="/images/mentor-sadia.jpg" alt="" className="h-6 w-6 rounded-full border border-amber-300/60 object-cover" />
+        <Link to="/mentors" className="flex shrink-0 items-center gap-1.5" aria-label="Meet the CSS Vista mentors">
           <span className="rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">Live</span>
         </Link>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
@@ -221,7 +220,7 @@ function NotificationBar() {
         </div>
         <div
           className="hidden shrink-0 items-center gap-2 border-l border-white/15 pl-3 text-[10px] font-semibold text-emerald-100 md:flex"
-          title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Progress status and time from this device'}
+          title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Progress status and current time'}
         >
           <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
           <span>{syncLabel}</span>
@@ -568,9 +567,9 @@ export default function Layout() {
           </nav>
 
           <div className="hidden xl:flex xl:items-center xl:gap-2">
-            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 pl-1 pr-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet Ms. Sadia Zahoor">
-              <img src="/images/mentor-sadia.jpg" alt="" className="h-7 w-7 rounded-full object-cover" />
-              <span>Ms. Sadia</span>
+            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-3 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet the CSS Vista mentors">
+              <UserRound className="h-4 w-4" />
+              <span>Mentors</span>
             </Link>
             <SocialLinks />
           </div>

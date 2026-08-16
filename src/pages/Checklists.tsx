@@ -15,7 +15,7 @@ export default function Checklists() {
     <div>
       <PageHeader
         title={tab === 'mpt' ? 'CSS MPT Application Checklist' : 'CSS Written Application Method and Document Checklist'}
-        description="Tick each step as you complete it - your progress is saved on this device. Always follow the latest official FPSC advertisement; requirements can change."
+        description="Tick each step as you complete it. Always follow the latest official FPSC advertisement; requirements can change."
       />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <OfficialNotice />

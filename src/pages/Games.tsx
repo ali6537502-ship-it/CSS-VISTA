@@ -70,23 +70,38 @@ function TimelineGame({ items, title, gameId }: { items: { event: string; year: 
 
 // ---- Match the concept game ----
 function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: string; match: string }[]; gameId: string }) {
-  const matches = useMemo(() => [...pairs.map((p) => p.match)].sort(() => Math.random() - 0.5), [pairs])
+  const safePairs = useMemo(() => pairs.filter((pair, index, all) => all.findIndex((candidate) => candidate.concept === pair.concept || candidate.match === pair.match) === index), [pairs])
+  const [round, setRound] = useState(0)
+  const roundPairs = useMemo(() => {
+    const rotated = [...safePairs.slice(round % Math.max(1, safePairs.length)), ...safePairs.slice(0, round % Math.max(1, safePairs.length))]
+    return rotated.slice(0, Math.min(6, rotated.length))
+  }, [round, safePairs])
+  const matches = useMemo(() => [...roundPairs.map((p) => p.match)].sort(() => Math.random() - 0.5), [roundPairs])
   const [selConcept, setSelConcept] = useState<string | null>(null)
   const [solved, setSolved] = useState<Record<string, string>>({})
   const [wrong, setWrong] = useState(0)
-  const done = Object.keys(solved).length === pairs.length
+  const [lastWrong, setLastWrong] = useState(false)
+  const done = roundPairs.length > 0 && Object.keys(solved).length === roundPairs.length
   const high = getState().gameHighScores[gameId] ?? 0
-  const score = Math.max(0, pairs.length * 10 - wrong * 2)
+  const score = Math.max(0, roundPairs.length * 10 - wrong * 2)
 
   function pickMatch(m: string) {
     if (!selConcept || Object.values(solved).includes(m)) return
-    const pair = pairs.find((p) => p.concept === selConcept)
+    const pair = roundPairs.find((p) => p.concept === selConcept)
     if (pair && pair.match === m) {
       const next = { ...solved, [selConcept]: m }
       setSolved(next)
-      if (Object.keys(next).length === pairs.length) recordGameScore(gameId, Math.max(0, pairs.length * 10 - wrong * 2))
-    } else setWrong((w) => w + 1)
+      setLastWrong(false)
+      if (Object.keys(next).length === roundPairs.length) recordGameScore(gameId, Math.max(0, roundPairs.length * 10 - wrong * 2))
+    } else {
+      setWrong((w) => w + 1)
+      setLastWrong(true)
+    }
     setSelConcept(null)
+  }
+
+  function nextRound() {
+    setSolved({}); setWrong(0); setSelConcept(null); setLastWrong(false); setRound((value) => value + 1)
   }
 
   return (
@@ -98,7 +113,7 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
       <p className="mt-1 text-sm text-muted-foreground">Select a concept, then its match. Wrong attempts cost 2 points.</p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          {pairs.map((p) => (
+          {roundPairs.map((p) => (
             <button
               key={p.concept}
               disabled={!!solved[p.concept]}
@@ -121,10 +136,11 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: { concept: 
           })}
         </div>
       </div>
+      <p className={`mt-3 min-h-5 text-sm font-semibold ${lastWrong ? 'text-red-700' : 'text-emerald-800'}`} aria-live="polite">{lastWrong ? 'Not a match — try another pair.' : selConcept ? 'Now choose the corresponding match.' : ''}</p>
       {done && (
         <div className="mt-4 flex items-center gap-3">
           <Badge tone="green">Completed - score {score}</Badge>
-          <button onClick={() => { setSolved({}); setWrong(0); setSelConcept(null) }} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Play again</button>
+          <button onClick={nextRound} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Next round</button>
         </div>
       )}
     </div>

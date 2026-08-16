@@ -1,14 +1,16 @@
 import { useMemo, useState } from 'react'
 import {
-  BookOpenCheck, FileClock, NotebookPen, Search, UserRound,
+  BookOpenCheck, MessageCircle, NotebookPen, Search, UserRound,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
   handwrittenNotesOwner,
   handwrittenNoteSubjects,
 } from '@/data/handwrittenNotes'
+import { mentors, waLink } from '@/data/site'
 
 export default function HandwrittenNotes() {
+  const sadia = mentors[0]
   const [query, setQuery] = useState('')
   const [kind, setKind] = useState<'All' | 'Compulsory' | 'Optional'>('All')
 
@@ -102,13 +104,19 @@ export default function HandwrittenNotes() {
                 <h3 className="mt-4 font-display text-lg font-bold text-pine">{subject.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{subject.description}</p>
                 <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs">
-                  <span className="inline-flex items-center gap-1.5 font-semibold text-amber-700">
-                    <FileClock className="h-4 w-4" /> Upload pending
-                  </span>
+                  <span className="inline-flex items-center gap-1.5 font-semibold text-amber-700">Inquiry only</span>
                   <span className="inline-flex items-center gap-1 text-muted-foreground">
                     <BookOpenCheck className="h-4 w-4" /> {subject.uploadedNotes} notes
                   </span>
                 </div>
+                <a
+                  href={waLink(sadia.whatsapp, `Assalam-o-Alaikum, I want information about the handwritten notes for ${subject.title} available through CSS Vista.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-pine px-3 text-center text-sm font-bold text-white hover:bg-emerald-900"
+                >
+                  <MessageCircle className="h-4 w-4 shrink-0" /> Purchase / Inquire on WhatsApp
+                </a>
               </article>
             ))}
           </div>

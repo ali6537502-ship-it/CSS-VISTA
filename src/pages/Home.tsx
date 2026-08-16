@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  ClipboardCheck, FileText, Globe2, GraduationCap, LibraryBig,
+  ClipboardCheck, FileText, Globe2, LibraryBig,
   NotebookPen, PenLine, PlayCircle, Search, LockKeyhole,
-  Target, TimerReset, type LucideIcon,
+  Target, TimerReset, X, type LucideIcon,
 } from 'lucide-react'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
 import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
@@ -27,10 +27,10 @@ interface LinkCard {
 
 const quickActions: LinkCard[] = [
   {
-    title: 'Start CSS',
-    description: 'Understand the complete journey',
-    to: '/start-css',
-    icon: GraduationCap,
+    title: 'ALL CSS SUBJECTS MCQs',
+    description: 'Compulsory & optional practice',
+    to: '/mcqs',
+    icon: Target,
     tone: 'emerald',
   },
   {
@@ -41,9 +41,9 @@ const quickActions: LinkCard[] = [
     tone: 'gold',
   },
   {
-    title: 'GK World',
-    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ verified MCQs`,
-    to: '/gk',
+    title: 'PMS / GK Mock',
+    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ question central bank`,
+    to: '/gk/quiz?mode=pms-mock',
     icon: Globe2,
     tone: 'blue',
   },
@@ -156,12 +156,14 @@ function CountdownUnit({ value, label, emphasized = false }: { value: number; la
 
 function ExamCountdown() {
   const [now, setNow] = useState(Date.now)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
     return () => window.clearInterval(timer)
   }, [])
 
+  if (!visible) return null
   return (
     <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '70ms' } as CSSProperties} aria-labelledby="exam-countdown-title">
       <div className="mb-2 flex items-center justify-between px-0.5">
@@ -169,7 +171,7 @@ function ExamCountdown() {
           <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-35 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
           Live exam countdowns
         </h2>
-        <span className="text-[9px] font-semibold text-slate-400">Official FPSC dates</span>
+        <span className="flex items-center gap-2 text-[9px] font-semibold text-slate-400">Official FPSC dates <button type="button" onClick={() => setVisible(false)} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-slate-100" aria-label="Hide exam countdowns for this visit"><X className="h-3.5 w-3.5" /></button></span>
       </div>
       <div className="grid grid-cols-2 gap-2">
         {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).map((key) => {
@@ -330,6 +332,10 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 }
 
 export default function Home() {
+  const [showContinue, setShowContinue] = useState(true)
+  const personalizedConfigured = useMemo(() => {
+    try { return (JSON.parse(localStorage.getItem('cssvista:fpsc-personal-syllabus:v1') ?? '{}').selected ?? []).length > 0 } catch { return false }
+  }, [])
   const stats = useMemo(() => getStats(), [])
   const activity = useMemo(() => recentActivities(4)[0], [])
   const initialState = useMemo(() => getState(), [])
@@ -353,7 +359,7 @@ export default function Home() {
   const continueProgress = getContinueProgress(activity, stats, initialState)
   const allFeatures = useMemo(
     () => mergedHomeCards(defaultHomeCards)
-      .filter((card) => card.visible && card.id !== 'current-affairs')
+      .filter((card) => card.visible)
       .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
     [],
   )
@@ -376,8 +382,8 @@ export default function Home() {
         <ExamCountdown />
         <DailyGrandMockCard />
 
-        <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
-          <SectionHeading title="Continue studying" action="History" to="/dashboard" />
+        {showContinue && <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
+          <div className="flex items-center justify-between"><SectionHeading title="Continue studying" action="History" to="/dashboard" /><button type="button" onClick={() => setShowContinue(false)} className="mb-3 grid h-8 w-8 place-items-center rounded-lg hover:bg-white" aria-label="Hide Continue studying for this visit"><X className="h-4 w-4" /></button></div>
           <article className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-[#073f31] text-white shadow-[0_10px_26px_rgba(6,63,49,0.12)]">
             <div className="relative flex min-h-[96px] items-center gap-3 overflow-hidden p-3 sm:p-3.5">
               <div className="cssv-continue-grid absolute inset-0 opacity-40" aria-hidden="true" />
@@ -411,9 +417,9 @@ export default function Home() {
               </Link>
             </div>
           </article>
-        </section>
+        </section>}
 
-        <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '105ms' } as CSSProperties} aria-labelledby="planner-home-card">
+        {personalizedConfigured ? <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '105ms' } as CSSProperties} aria-labelledby="planner-home-card">
           <Link to="/study-planner" className="cssv-tap flex min-h-[68px] items-center gap-3 rounded-xl border border-emerald-200/80 bg-white p-3 shadow-[0_3px_16px_rgba(15,42,32,0.04)]">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800"><CalendarCheck2 className="h-[18px] w-[18px]" /></span>
             <span className="min-w-0 flex-1">
@@ -423,7 +429,7 @@ export default function Home() {
             </span>
             <ChevronRight className="h-4 w-4 shrink-0 text-emerald-700" />
           </Link>
-        </section>
+        </section> : <Link to="/study-planner" className="cssv-reveal cssv-tap mt-3 flex min-h-[68px] items-center gap-3 rounded-xl border border-dashed border-emerald-300 bg-white p-3" style={{ '--cssv-delay': '105ms' } as CSSProperties}><span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-800"><CalendarCheck2 className="h-5 w-5" /></span><span><span className="block text-xs font-bold text-pine">Configure FPSC syllabus & topic planner</span><span className="text-[10px] text-slate-500">Choose subjects before a personalized plan appears.</span></span></Link>}
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
@@ -493,7 +499,7 @@ export default function Home() {
         </section>
 
         <div className="mt-7 flex items-center justify-between gap-3 rounded-xl border border-emerald-900/10 bg-emerald-50/60 px-3.5 py-3 text-[10px] text-emerald-900 md:hidden">
-          <span>Progress is saved on this device.</span>
+          <span>Your study progress remains available between visits.</span>
           <Link to="/account" className="font-bold">Sync with account</Link>
         </div>
       </div>

@@ -4,7 +4,6 @@ import { vocabulary } from '@/data/vocab'
 import { grammarTopics, idioms, pairOfWords } from '@/data/grammar'
 import { caIssues } from '@/data/currentAffairs'
 import { serviceGroups } from '@/data/services'
-import { libraryItems } from '@/data/library'
 import { essayThemes } from '@/data/essay'
 import { questions } from '@/data/quiz'
 import { fpscNotices } from '@/data/updates'
@@ -41,6 +40,10 @@ interface RemoteBookLibrary {
 
 interface RemoteBankIndex {
   categories: { slug: string; name: string; count: number; mpt: boolean }[]
+}
+
+interface RemoteSubjectIndex {
+  subjects: { slug: string; name: string; count: number; designation: string; group: number | null; topics: string[] }[]
 }
 
 interface RemoteOneLinerIndex {
@@ -151,10 +154,10 @@ const localCorpus: SearchDocument[] = [
       link: '/notes',
     },
     ...(product.samples ?? []).map((sample) => ({
-      id: `notes-sample-${sample.url}`,
+      id: `notes-sample-${sample.previewFolder}`,
       title: sample.title,
       category: 'Sample Notes',
-      snippet: `${product.subject} sample PDF`,
+      snippet: `${product.subject} genuine protected sample preview`,
       link: '/notes',
     })),
   ]),
@@ -201,14 +204,6 @@ const localCorpus: SearchDocument[] = [
     snippet: `${service.role} ${service.work}`,
     link: `/services#${service.slug}`,
   })),
-  ...libraryItems.map((item) => ({
-    id: item.id,
-    title: item.title,
-    category: 'Downloads and Notes',
-    snippet: `${item.description} Tags: ${item.tags.join(', ')}`,
-    link: '/downloads',
-    date: item.lastUpdated,
-  })),
   ...essayThemes.map((theme) => ({
     id: `essay-${theme.slug}`,
     title: `Essay theme: ${theme.name}`,
@@ -253,6 +248,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       bookLibrary,
       bankIndex,
       oneLinerIndex,
+      subjectIndex,
       englishGrammar,
       urduGrammar,
     ] = await Promise.all([
@@ -260,6 +256,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       fetchJson<RemoteBookLibrary>('/book-summaries/index.json'),
       fetchJson<RemoteBankIndex>('/mcq/index.json'),
       fetchJson<RemoteOneLinerIndex>('/one-liner-gk/index.json'),
+      fetchJson<RemoteSubjectIndex>('/css-subject-mcqs/index.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/english.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/urdu.json'),
     ])
@@ -298,6 +295,17 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         category: 'GK World Category',
         snippet: `${category.count.toLocaleString()} questions${category.mpt ? ', included in MPT preparation' : ''}.`,
         link: `/gk/cat/${category.slug}`,
+      })))
+    }
+
+    if (subjectIndex) {
+      remote.push(...subjectIndex.subjects.map((subject) => ({
+        id: `css-subject-mcqs-${subject.slug}`,
+        title: `${subject.name} MCQs`,
+        category: subject.designation === 'compulsory' ? 'Compulsory Subject MCQs' : `Optional Group ${subject.group} MCQs`,
+        snippet: `${subject.count.toLocaleString()} accepted questions. Areas: ${subject.topics.slice(0, 8).join(', ')}.`,
+        keywords: subject.topics.join(' '),
+        link: '/mcqs',
       })))
     }
 

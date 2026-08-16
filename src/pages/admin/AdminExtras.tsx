@@ -422,7 +422,7 @@ export function MentorsEditor() {
                   const data = await fileToDataUrl(f)
                   upsertMentorOverride({ ...o, id: m.id, photoData: data })
                   force((f) => f + 1)
-                  alert('Photo updated on this device. Export site data to publish it.')
+                  alert('Photo updated. Export site data to publish it.')
                 }} />
               </Field>
               <div className="sm:col-span-2">
@@ -434,7 +434,7 @@ export function MentorsEditor() {
           </div>
         )
       })}
-      <p className="text-xs text-muted-foreground">Edits apply on this device immediately. Use Settings & Data → Export site data to publish for all visitors.</p>
+      <p className="text-xs text-muted-foreground">Edits apply immediately. Use Settings & Data → Export site data to publish for all visitors.</p>
     </div>
   )
 }
@@ -446,7 +446,7 @@ export function PricesEditor() {
   return (
     <div className="max-w-xl rounded-lg border bg-white p-5">
       <h3 className="font-semibold text-pine">Notes prices</h3>
-      <p className="mt-1 text-xs text-muted-foreground">Change any price - the Notes Library updates immediately on this device. Leave empty to restore the default.</p>
+      <p className="mt-1 text-xs text-muted-foreground">Change any price override here. Leave empty to show Contact for Price.</p>
       <div className="mt-4 space-y-3">
         {items.map((it) => (
           <div key={it.id} className="flex items-center gap-3">

@@ -142,11 +142,11 @@ export default function LanguageGrammar() {
             dir={course.direction}
             aria-label={language === 'urdu' ? 'Urdu Grammar course' : 'English Grammar course'}
           >
-            <aside className="self-start rounded-xl border bg-white p-3 lg:sticky lg:top-24">
+            <aside className="self-start rounded-xl border bg-white p-3 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-hidden">
               <h2 className={`px-2 py-1 font-display text-lg font-bold text-pine ${rtl ? 'urdu-text text-right' : ''}`}>
                 {language === 'urdu' ? 'موضوعات' : 'Course topics'}
               </h2>
-              <div className="mt-2 flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-1.5 lg:overflow-visible">
+              <div className="mt-2 flex gap-2 overflow-x-auto overscroll-x-contain pb-1 touch-pan-x lg:block lg:max-h-[calc(100vh-11rem)] lg:space-y-1.5 lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-contain lg:pr-1 lg:touch-pan-y">
                 {course.topics.map((topic) => {
                   const selected = topic.slug === activeTopic?.slug
                   return (

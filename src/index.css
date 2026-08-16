@@ -1018,6 +1018,21 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+  a[href]::after {
+    content: none !important;
+  }
+  img, svg, table {
+    max-width: 100% !important;
+  }
+  h1, h2, h3, h4 {
+    break-after: avoid;
+  }
+  article, table, figure, .break-inside-avoid {
+    break-inside: avoid;
+  }
+  button, [role="button"], input, select, textarea {
+    box-shadow: none !important;
+  }
   main {
     padding: 86px 0 34px !important;
   }
@@ -1150,6 +1165,9 @@
   }
   .print-area, .print-area * {
     visibility: visible;
+  }
+  .print-area {
+    width: 100% !important;
   }
   .mcq-card {
     break-inside: avoid;

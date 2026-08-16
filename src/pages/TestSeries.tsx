@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
   BadgeCheck, CalendarDays, Calculator, Check, ChevronRight, CircleAlert,
-  Clock3, FilePenLine, MessageCircle, Printer, Save, Shuffle, Sparkles, Trash2,
+  Clock3, FilePenLine, FileSearch, MessageCircle, Printer, Save, Shuffle, Sparkles, Trash2,
 } from 'lucide-react'
 import { Badge, PageHeader, Section } from '@/components/shared'
 import { testSeriesAnnouncements as seed } from '@/data/testSeries'
@@ -172,9 +172,9 @@ export default function TestSeries() {
     if (user) {
       void submitTestSeriesRequest(user, { ...request, status: 'request-sent' })
         .then(() => setMessage('Request saved to your account and opened in WhatsApp.'))
-        .catch(() => setMessage('WhatsApp opened. The account copy could not sync, but your draft remains saved on this device.'))
+        .catch(() => setMessage('WhatsApp opened. Account sync is pending, but your draft remains available.'))
     } else {
-      setMessage('Request opened in WhatsApp and saved on this device. Sign in to keep future requests with your account.')
+      setMessage('Request opened in WhatsApp. Sign in to keep future requests with your account.')
     }
   }
 
@@ -236,6 +236,21 @@ export default function TestSeries() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5 sm:p-6">
+          <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.15em] text-amber-800">Test Series & Evaluation</p>
+              <h2 className="mt-2 font-display text-xl font-bold text-pine">Written-paper checking with direct mentor feedback</h2>
+              <p className="mt-2 text-sm leading-relaxed text-amber-950">Get your test checked within 3 days, or have your paper evaluated by Miss Sadia Zahoor live on Google Meet.</p>
+              <p className="mt-2 text-xs text-amber-900/75">The checked-mock sample archive was not available in this deployment batch, so no sample or subject identity is being fabricated.</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <button type="button" disabled className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-amber-300 bg-white px-4 text-sm font-bold text-slate-500 disabled:cursor-not-allowed"><FileSearch className="h-4 w-4" /> View Checked Mock Sample · unavailable</button>
+              <a href={waLink(sadia.whatsapp, 'Assalam-o-Alaikum, I want information about CSS Vista test checking and live paper evaluation with Miss Sadia Zahoor.')} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> Inquire about evaluation</a>
             </div>
           </div>
         </section>
@@ -451,7 +466,7 @@ export default function TestSeries() {
         </div>
 
         {history.length > 0 && (
-          <Section title="My saved test-series plans" description="Plans saved on this device or synced through your student account.">
+          <Section title="My test-series plans" description="Your prepared plans and account-synced requests.">
             <div className="grid gap-3 md:grid-cols-2">
               {history.map((request) => (
                 <article key={request.id} className="rounded-xl border bg-white p-4">

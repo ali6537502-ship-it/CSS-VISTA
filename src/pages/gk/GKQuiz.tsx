@@ -20,6 +20,7 @@ import {
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import { questions as seedQuestions } from '@/data/quiz'
+import { mptAbilityQuestions } from '@/data/mptAbilityQuestions'
 
 
 
@@ -29,6 +30,35 @@ interface Resolved {
   exam: boolean
   timeSec: number
   note?: string
+}
+
+const mptHistoryKey = 'cssvista:mpt-question-history:v2'
+
+function normalizedQuestion(value: string) {
+  return value.toLocaleLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu, '')
+}
+
+function uniqueQuestions(items: BankQuestion[], excluded = new Set<string>()) {
+  const seen = new Set(excluded)
+  return items.filter((item) => {
+    const key = normalizedQuestion(item.q)
+    if (!key || seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+function mptSeenQuestions() {
+  try { return new Set<string>(JSON.parse(localStorage.getItem(mptHistoryKey) ?? '[]')) } catch { return new Set<string>() }
+}
+
+async function sampleMptSection(categories: string[], count: number, prior: Set<string>, used: Set<string>) {
+  const pool = uniqueQuestions(await sampleQuestions(categories, Math.max(count * 4, count + 30)), used)
+  const unseen = pool.filter((item) => !prior.has(normalizedQuestion(item.q)))
+  const reused = pool.filter((item) => prior.has(normalizedQuestion(item.q)))
+  const selected = [...unseen, ...reused].slice(0, count)
+  selected.forEach((item) => used.add(normalizedQuestion(item.q)))
+  return selected
 }
 
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
@@ -111,7 +141,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         const availability = getMockAvailability('gk')
         if (!availability.available) {
           r = {
-            title: 'PMS GK Grand Mock',
+            title: 'Punjab PMS / PPSC GK Grand Mock',
             qs: [],
             exam: true,
             timeSec: 0,
@@ -124,13 +154,14 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           'everyday-science', 'science', 'islamic-gk', 'english-grammar', 'urdu-language',
           'computer-basics', 'misc-gk', 'international-organisations',
         ]
-        const qs = await sampleQuestions(pmsAreas, 100)
+        const qs = uniqueQuestions(await sampleQuestions(pmsAreas, 350)).slice(0, 100)
+        if (qs.length !== 100) throw new Error(`PPSC PMS bank could produce only ${qs.length} unique questions.`)
         r = {
-          title: 'PMS GK Grand Mock',
+          title: 'Punjab PMS / PPSC GK Grand Mock',
           qs,
           exam: true,
           timeSec: 90 * 60,
-          note: `Tonight’s 100-question general-knowledge Grand Mock, drawn from the central CSS Vista question bank. Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}. Once entered, you may finish after registration closes. Provincial PMS paper patterns can vary.`,
+          note: `A 100-question Punjab PMS / PPSC general-knowledge simulation. Selection is drawn across the serious one-paper domains without forcing a perfectly even classroom quota; official PPSC topic proportions vary by paper. Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}.`,
         }
         break
       }
@@ -146,41 +177,52 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const abilityQuestions: BankQuestion[] = seedQuestions
+        const abilityQuestions: BankQuestion[] = [...seedQuestions
           .filter((question) => question.category === 'abilities' || question.category === 'reasoning')
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 15)
           .map((question) => ({
             id: `mpt-seed-${question.id}`,
             q: question.question,
             o: question.options,
             a: question.answer,
             s: question.topic,
-            d: question.difficulty === 'Easy'
+            d: (question.difficulty === 'Easy'
               ? 'Basic'
               : question.difficulty === 'Hard'
                 ? 'Advanced'
-                : 'Intermediate',
-          }))
-        const [islamic, urdu, english, generalKnowledge] = await Promise.all([
-          sampleQuestions(['islamic-gk'], 5),
-          sampleQuestions(['urdu-language'], 5),
-          sampleQuestions(['english-grammar'], 12),
-          sampleQuestions(
-            [
-              'everyday-science', 'science', 'current-affairs', 'pakistan-affairs',
-              'pakistan-history', 'pakistan-geography',
-            ],
-            13,
-          ),
-        ])
+              : 'Intermediate') as BankQuestion['d'],
+            e: question.explanation,
+          })), ...mptAbilityQuestions]
+        const prior = mptSeenQuestions()
+        const used = new Set<string>()
+        const islamic = await sampleMptSection(['islamic-gk'], 20, prior, used)
+        const urdu = await sampleMptSection(['urdu-language'], 20, prior, used)
+        const english = await sampleMptSection(['english-grammar'], 50, prior, used)
+        const abilities = uniqueQuestions(abilityQuestions.sort(() => Math.random() - 0.5), used).slice(0, 60)
+        abilities.forEach((item) => used.add(normalizedQuestion(item.q)))
+        const generalKnowledge = await sampleMptSection(
+          ['everyday-science', 'science', 'current-affairs', 'pakistan-affairs', 'pakistan-history', 'pakistan-geography'],
+          50,
+          prior,
+          used,
+        )
+        const labelSection = (items: BankQuestion[], label: string) => items.map((item) => ({ ...item, s: `${label}${item.s ? ` · ${item.s}` : ''}` }))
+        const fullPaper = [
+          ...labelSection(islamic, 'Section I · Islamic Studies / Civics & Ethics'),
+          ...labelSection(urdu, 'Section II · Urdu'),
+          ...labelSection(english, 'Section III · English'),
+          ...labelSection(abilities, 'Section IV · General Abilities'),
+          ...labelSection(generalKnowledge, 'Section V · General Knowledge'),
+        ]
+        if (fullPaper.length !== 200 || uniqueQuestions(fullPaper).length !== 200) {
+          throw new Error(`MPT bank could produce only ${fullPaper.length} unique questions.`)
+        }
+        localStorage.setItem(mptHistoryKey, JSON.stringify(Array.from(new Set([...prior, ...fullPaper.map((item) => normalizedQuestion(item.q))])).slice(-3000)))
         r = {
           title: 'Full CSS MPT Practice Mock',
-          qs: [...islamic, ...urdu, ...english, ...abilityQuestions, ...generalKnowledge]
-            .sort(() => Math.random() - 0.5),
+          qs: fullPaper,
           exam: true,
-          timeSec: 50 * 60,
-          note: `Tonight’s 50-question proportional Grand Mock covering every official MPT paper area. Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}. Once entered, you may finish after registration closes.`,
+          timeSec: 200 * 60,
+          note: `Official FPSC MPT structure: 200 MCQs in 200 minutes, no negative marking. Sections remain in official sequence: Islamic Studies/Civics & Ethics 20, Urdu 20, English 50, General Abilities 60, and General Knowledge 50. Qualifying threshold: 66/200. Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}.`,
         }
         break
       }
@@ -569,6 +611,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
           <p className="mt-1 text-sm text-muted-foreground">
             Accuracy {pct}% · Time {Math.floor(resultTimeSeconds / 60)}m {resultTimeSeconds % 60}s
           </p>
+          {mode === 'mpt-mock' && <p className={`mt-2 text-sm font-bold ${score >= 66 ? 'text-emerald-700' : 'text-red-700'}`}>{score >= 66 ? 'Qualified at the FPSC MPT threshold' : 'Below the FPSC MPT qualifying threshold of 66/200'} · no negative marking</p>}
           {mockKind && (
             <div className="mt-5 grid gap-3 text-left sm:grid-cols-2">
               <div className="rounded-lg bg-amber-50 p-3">

@@ -190,7 +190,7 @@ function NotificationSettings({ onChange }: { onChange: () => void }) {
         </div>
       )}
       <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-        {user ? 'These preferences are included in your account progress sync.' : 'Guest preferences save on this device.'}{' '}
+        {user ? 'These preferences are included in your account progress sync.' : 'Guest preferences remain available between visits.'}{' '}
         <Link to={user ? '/account' : '/dashboard'} className="underline underline-offset-2">Learn more</Link>
       </p>
     </div>

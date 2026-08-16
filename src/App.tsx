@@ -10,8 +10,8 @@ const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
 const SubjectSelector = lazy(() => import('./pages/SubjectSelector'))
 const NotesLibrary = lazy(() => import('./pages/NotesLibrary'))
+const AllSubjectMcqs = lazy(() => import('./pages/AllSubjectMcqs'))
 const PastPapers = lazy(() => import('./pages/PastPapers'))
-const Downloads = lazy(() => import('./pages/Downloads'))
 const EssayModule = lazy(() => import('./pages/EssayModule'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
@@ -36,7 +36,6 @@ const AnswerTimer = lazy(() => import('./pages/AnswerTimer'))
 const Checklists = lazy(() => import('./pages/Checklists'))
 const BooksPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.BooksPage })))
 const OpinionsPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.OpinionsPage })))
-const TrendAnalyzer = lazy(() => import('./pages/TrendAnalyzer'))
 const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
@@ -75,8 +74,8 @@ export default function App() {
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
+        <Route path="/mcqs" element={<S><AllSubjectMcqs /></S>} />
         <Route path="/past-papers" element={<S><PastPapers /></S>} />
-        <Route path="/downloads" element={<S><Downloads /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />
@@ -110,7 +109,6 @@ export default function App() {
         <Route path="/checklists" element={<S><Checklists /></S>} />
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
-        <Route path="/trend-analyzer" element={<S><TrendAnalyzer /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />

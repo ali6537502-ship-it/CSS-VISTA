@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import { Search, Download, Eye, FileText, PenLine, Bookmark, BookmarkCheck, BarChart3 } from 'lucide-react'
+import { Search, Download, Eye, FileText, PenLine, Bookmark, BookmarkCheck } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
@@ -103,9 +103,6 @@ export default function PastPapers() {
           >
             <Bookmark className="h-4 w-4" /> {savedOnly ? 'Showing saved only' : 'Show saved papers'}
           </button>
-          <Link to="/trend-analyzer" className="inline-flex h-9 items-center gap-1.5 rounded-md border border-emerald-700/40 bg-emerald-50 px-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100">
-            <BarChart3 className="h-4 w-4" /> Trend analysis
-          </Link>
         </div>
       </PageHeader>
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">

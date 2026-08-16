@@ -118,7 +118,7 @@ export default function MPTPrep() {
 
   function startMode(nextMode: Mode) {
     if (nextMode === 'random' || nextMode === 'mock') {
-      const limit = nextMode === 'mock' ? Math.min(50, allQuestions.length) : count
+      const limit = nextMode === 'mock' ? Math.min(200, allQuestions.length) : count
       setRandomQuestions([...allQuestions].sort(() => Math.random() - 0.5).slice(0, limit))
     }
     setMode(nextMode)
@@ -144,7 +144,7 @@ export default function MPTPrep() {
               {[
                 { id: 'subject' as Mode, icon: Layers, title: 'Subject / topic-wise quiz', desc: 'Choose a subject, then narrow to a topic' },
                 { id: 'random' as Mode, icon: Shuffle, title: 'Random quiz', desc: 'A shuffled mix from the whole bank' },
-                { id: 'mock' as Mode, icon: Clock, title: 'Full MPT mock test', desc: 'Up to 50 mixed questions under time' },
+                { id: 'mock' as Mode, icon: Clock, title: 'Full MPT mock test', desc: 'Official 200-question paper in 200 minutes' },
               ].map((m) => {
                 if (m.id === 'mock') {
                   return mptMock.available ? (
@@ -156,7 +156,7 @@ export default function MPTPrep() {
                     >
                       <m.icon className="h-5 w-5 text-emerald-800" />
                       <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
-                      <div className="mt-0.5 text-[13px] text-muted-foreground">50 questions across every MPT area. Daily entry from {DAILY_MOCK_TIME_LABELS.mpt}.</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">200 questions in official section sequence · 200 minutes · no negative marking. Daily entry from {DAILY_MOCK_TIME_LABELS.mpt}.</div>
                     </Link>
                   ) : (
                     <div key={m.title} className="rounded-lg border bg-secondary/45 p-4 text-left">

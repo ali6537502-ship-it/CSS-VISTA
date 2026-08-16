@@ -61,22 +61,14 @@ export function getBankIndex(): Promise<BankIndex> {
   return indexPromise
 }
 
-// All 92 question shards are bundled into the build as lazy chunks, so the bank
-// works with zero runtime fetches. Vite code-splits each shard; it loads on demand.
-const shardLoaders = import.meta.glob<{ default: BankQuestion[] }>('./mcq-shards/*.json')
-
 const chunkCache = new Map<string, Promise<BankQuestion[]>>()
 export function getChunk(slug: string, chunk: number): Promise<BankQuestion[]> {
   const key = `${slug}:${chunk}`
   if (!chunkCache.has(key)) {
-    const path = `./mcq-shards/cat-${slug}-${chunk}.json`
-    const loader = shardLoaders[path]
-    const promise: Promise<BankQuestion[]> = loader
-      ? loader().then((m) => applyMcqCorrections(m.default)).catch(() => [])
-      : fetch(`/mcq/cat-${slug}-${chunk}.json`)
-          .then((r) => (r.ok ? r.json() : []))
-          .then((qs: BankQuestion[]) => applyMcqCorrections(qs))
-          .catch(() => [])
+    const promise: Promise<BankQuestion[]> = fetch(`/mcq/cat-${slug}-${chunk}.json`)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((qs: BankQuestion[]) => applyMcqCorrections(qs))
+      .catch(() => [])
     chunkCache.set(key, promise)
   }
   return chunkCache.get(key)!
