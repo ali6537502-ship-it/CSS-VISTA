@@ -10,8 +10,8 @@ const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
 const SubjectSelector = lazy(() => import('./pages/SubjectSelector'))
 const NotesLibrary = lazy(() => import('./pages/NotesLibrary'))
-const AllSubjectMcqs = lazy(() => import('./pages/AllSubjectMcqs'))
 const PastPapers = lazy(() => import('./pages/PastPapers'))
+const CssSubjectMcqs = lazy(() => import('./pages/CssSubjectMcqs'))
 const EssayModule = lazy(() => import('./pages/EssayModule'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
@@ -46,6 +46,7 @@ const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
+const FpscSyllabus = lazy(() => import('./pages/FpscSyllabus'))
 
 function PageLoader() {
   return (
@@ -74,8 +75,8 @@ export default function App() {
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
-        <Route path="/mcqs" element={<S><AllSubjectMcqs /></S>} />
         <Route path="/past-papers" element={<S><PastPapers /></S>} />
+        <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />
@@ -101,6 +102,7 @@ export default function App() {
         <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/past-papers/view/:id" element={<S><PastPaperOpen /></S>} />
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
+        <Route path="/fpsc-syllabus" element={<S><FpscSyllabus /></S>} />
         <Route path="/gk/cat/:slug" element={<S><GKCategory /></S>} />
         <Route path="/gk/quiz" element={<S><GKQuiz /></S>} />
         <Route path="/five-minute" element={<S><GKQuiz forceMode="five-minute" /></S>} />

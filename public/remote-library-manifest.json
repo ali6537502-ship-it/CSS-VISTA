@@ -1,0 +1,3965 @@
+{
+  "repository": "ali6537502-ship-it/CSS-VISTA",
+  "branch": "main",
+  "publicBase": "https://raw.githubusercontent.com/ali6537502-ship-it/CSS-VISTA/main/public/",
+  "generatedAt": "2026-08-22T13:58:23.962Z",
+  "fileCount": 791,
+  "totalBytes": 916137925,
+  "files": [
+    {
+      "path": "/past-papers/2016/accountancy-and-auditing-2016(1).pdf",
+      "size": 137197,
+      "sha256": "26913adea2134cbb4ac6d5367e15d08196c818db96770bd2a4020729a465df3a"
+    },
+    {
+      "path": "/past-papers/2016/agriculture-and-forestry-2016(1).pdf",
+      "size": 116018,
+      "sha256": "6b0199c41e451538a49ee2fc024f8dec92b58eedc1ab9d3a55a2070c96ac9b01"
+    },
+    {
+      "path": "/past-papers/2016/anthropology-2016(1).pdf",
+      "size": 826244,
+      "sha256": "1a2c6997816f7bd763b76d144f9a8a502874044f4e5f4091eda146693cdfa851"
+    },
+    {
+      "path": "/past-papers/2016/applied-mathematics-2016(1).pdf",
+      "size": 1478439,
+      "sha256": "15d13d6f2664986ad18f63fb0e77e9ea72bb7830c1644b46a0bd841761ce0155"
+    },
+    {
+      "path": "/past-papers/2016/arabic-2016(1).pdf",
+      "size": 1998850,
+      "sha256": "bda49d49167659b58c8aececa824ef3a2043d640ab15b7397888980c5a2326cf"
+    },
+    {
+      "path": "/past-papers/2016/balochi-2016(1).pdf",
+      "size": 204169,
+      "sha256": "ffc75c2c55b8cc7e9a7a4d366dfcdaffe51133feb5935241b6f9cad7442acebb"
+    },
+    {
+      "path": "/past-papers/2016/botany-2016(1).pdf",
+      "size": 826068,
+      "sha256": "75e7f3fb9db2e56b13025a200eaa82649de088309e27cdab819ea54968b87dd1"
+    },
+    {
+      "path": "/past-papers/2016/british-history-2016(1).pdf",
+      "size": 826239,
+      "sha256": "4a21a0b30630bb73d828d57d1316ee2d92021d981d5fd55cca023a1957c77431"
+    },
+    {
+      "path": "/past-papers/2016/business-administration-2016(1).pdf",
+      "size": 827024,
+      "sha256": "5f218f48805a2939096751d37bac2b583fda3d714862eedce8c13e0b4df34a2a"
+    },
+    {
+      "path": "/past-papers/2016/chemistry-2016(1).pdf",
+      "size": 2854739,
+      "sha256": "f559c82ac6e9f3933b9a325283ad775ef1ab5da2297560f16062ec1df7dc4391"
+    },
+    {
+      "path": "/past-papers/2016/comparative-study-of-major-religions-2016(1).pdf",
+      "size": 1604245,
+      "sha256": "c31e399fc3fc9d9b4bc014eda0190a68372d54f4f55bb0a717df06c953a8897a"
+    },
+    {
+      "path": "/past-papers/2016/computer-science-2016(1).pdf",
+      "size": 5962436,
+      "sha256": "59a8bfa6c7ea48a2e33565e1f65b4ba7e6ddb539f7bc3949e370fa87285a66e8"
+    },
+    {
+      "path": "/past-papers/2016/constitutional-law-2016(1).pdf",
+      "size": 826818,
+      "sha256": "97d0fa1ab0ad11b291be48b4d3d1fd10768846e5e7f62cb2f796b741efde580d"
+    },
+    {
+      "path": "/past-papers/2016/criminology-2016(1).pdf",
+      "size": 826168,
+      "sha256": "d8f2fae3f9587fbda4a478117c6edf99707ec4a60427d37e0e44faaa55ac2dfd"
+    },
+    {
+      "path": "/past-papers/2016/current-affairs-2016(1).pdf",
+      "size": 86657,
+      "sha256": "cf1b3dbe17ed04606c88e9484d6f98ef3209c7ab1ff4e727af0123728778db3b"
+    },
+    {
+      "path": "/past-papers/2016/economics-2016(1).pdf",
+      "size": 77635,
+      "sha256": "f7cf262e4447b3f8543c5999781d43945e4c9416ced8de0f9c6d24200d14cf7c"
+    },
+    {
+      "path": "/past-papers/2016/english-essay-2016(1).pdf",
+      "size": 86974,
+      "sha256": "3a31d14cb55f5a07985abe8e86e3e0140641f1bd29cf31e59f1252afa0748f65"
+    },
+    {
+      "path": "/past-papers/2016/english-literature-2016(1).pdf",
+      "size": 1167519,
+      "sha256": "9db0802a3685e0678b263d457762d37f28780ef5029956a9e727e6fb414ae7d9"
+    },
+    {
+      "path": "/past-papers/2016/english-precis-and-composition-2016(1).pdf",
+      "size": 197359,
+      "sha256": "b6824ad18a7ca2f532b74c7e3cf9bda1b361fd4f78bd4ec35cdb85b8e3afc5e5"
+    },
+    {
+      "path": "/past-papers/2016/environmental-sciences-2016(1).pdf",
+      "size": 827167,
+      "sha256": "2812d25b8a4c5ffea721b299de777e3d138688d22c17d352727daed8e524df13"
+    },
+    {
+      "path": "/past-papers/2016/european-history-2016.pdf",
+      "size": 826350,
+      "sha256": "fb51c77d61a466952b14e6450b2d8689649985d419ffba7651f7d64568508ceb"
+    },
+    {
+      "path": "/past-papers/2016/gender-studies-2016.pdf",
+      "size": 153660,
+      "sha256": "658d2e06eea5830227111d6591aeb578de6465fca2920203f273fe180a5fdc6a"
+    },
+    {
+      "path": "/past-papers/2016/general-science-and-ability-2016.pdf",
+      "size": 124025,
+      "sha256": "7b465b8bbdb23b0b1e6751f2a337975807024e2f2b5bf8f045a6479eaedc923d"
+    },
+    {
+      "path": "/past-papers/2016/geography-2016.pdf",
+      "size": 826075,
+      "sha256": "e7c7818abef9bf02d910a420eb8cd34926a8ade5adbcefe7721ea3f39100dcfc"
+    },
+    {
+      "path": "/past-papers/2016/geology-2016.pdf",
+      "size": 827816,
+      "sha256": "f5688b7e00135988f3367338e2ae65a16234e5e215055121a1871ef6ae9d1b72"
+    },
+    {
+      "path": "/past-papers/2016/governance-and-public-policies-2016.pdf",
+      "size": 826160,
+      "sha256": "7d23941fac313505d286cb01e74a88a18c2637c6df57fbe3998b335fd9316a78"
+    },
+    {
+      "path": "/past-papers/2016/history-of-pakistan-and-india-2016.pdf",
+      "size": 826251,
+      "sha256": "2dc586ce14d78df7c813a59e5a35e02b1e369b4bda0e46df7c53887fe987d85a"
+    },
+    {
+      "path": "/past-papers/2016/history-of-usa-2016.pdf",
+      "size": 841759,
+      "sha256": "6519b4b90df70a0bd48128f34f2aa3d347b811eb947238ecc6cefa32399e8482"
+    },
+    {
+      "path": "/past-papers/2016/international-law-2016.pdf",
+      "size": 1182383,
+      "sha256": "74e7e91e7ccb48f2c9be5cd49fe96f285c751fd34d5896e1b7e4b9ae0d77d823"
+    },
+    {
+      "path": "/past-papers/2016/international-relations-2016.pdf",
+      "size": 1661476,
+      "sha256": "98b76a1cd7a4f9afe7ff08db40efe9bec41b4f83ea8516873d5c0fc91b5f6f91"
+    },
+    {
+      "path": "/past-papers/2016/islamic-history-and-culture-2016.pdf",
+      "size": 826461,
+      "sha256": "4b5d4e71b95ba190beae9fc134f542e2f13ed8dc6e8f1f9b19e337ef7933e067"
+    },
+    {
+      "path": "/past-papers/2016/islamic-studies-2016.pdf",
+      "size": 103866,
+      "sha256": "368c15f67bc9de7f02302b39ce8284531695dc22f75d728e866f0864ca8e7fa4"
+    },
+    {
+      "path": "/past-papers/2016/journalism-and-mass-communication-2016.pdf",
+      "size": 827044,
+      "sha256": "0a9100c495bd81bcbd9ac6e43ddbe897c24d8e0f5db7319000a1fe0063da15a8"
+    },
+    {
+      "path": "/past-papers/2016/law-2016.pdf",
+      "size": 841888,
+      "sha256": "c9add663c1f9a87adac2bb8cb1bed50c2fd44d37c41718c102c4312be4c5b137"
+    },
+    {
+      "path": "/past-papers/2016/mercantile-law-2016.pdf",
+      "size": 825923,
+      "sha256": "fe05f33a91dc17fca2e7cb7da91acc5b85aa55c0d626edc16c2d9df4bac32edf"
+    },
+    {
+      "path": "/past-papers/2016/muslim-law-and-jurisprudence-2016.pdf",
+      "size": 1182098,
+      "sha256": "d8b5eafffc048296428de3fb7b24e6dd972d95e13e8b3daebf909d134da4e00f"
+    },
+    {
+      "path": "/past-papers/2016/pakistan-affairs-2016.pdf",
+      "size": 77015,
+      "sha256": "8a09aeb5cce4346ed7189de7c175e283726ec06151c5d1817d8c66fe90253890"
+    },
+    {
+      "path": "/past-papers/2016/pashto-2016.pdf",
+      "size": 132563,
+      "sha256": "c15bfc1798bcb243c405942919539b92d12083a4d2b128a7046aa469d6b2854f"
+    },
+    {
+      "path": "/past-papers/2016/persian-2016.pdf",
+      "size": 167498,
+      "sha256": "7cdd715735b8ab595e803aed44d6ee8b447cdcb61c3a1830a325fd0559f043cd"
+    },
+    {
+      "path": "/past-papers/2016/philosophy-2016.pdf",
+      "size": 841524,
+      "sha256": "27c1ac38e68f14c92a0817b58e8ba230eb42233482f4a6a09b90f9938515e7b1"
+    },
+    {
+      "path": "/past-papers/2016/physics-2016.pdf",
+      "size": 3708503,
+      "sha256": "c797a454dc4d6a0be72b03dede0355619185b3dcbc329bdf9c479b96950ed177"
+    },
+    {
+      "path": "/past-papers/2016/political-science-2016.pdf",
+      "size": 1652592,
+      "sha256": "5e6260e1b2995205c63c237e4b24d15583d066af9e52934db6049db3e7a5d377"
+    },
+    {
+      "path": "/past-papers/2016/psychology-2016.pdf",
+      "size": 826419,
+      "sha256": "982d44f4a80eec16f34c805ea09ce386fd6976d604c86ce87a901dfa5199c3ac"
+    },
+    {
+      "path": "/past-papers/2016/public-administration-2016.pdf",
+      "size": 205607,
+      "sha256": "97c74096e3c44a966e5b0ed2aa1ee5d3e47d56519512dc25a4ace97a882fdf95"
+    },
+    {
+      "path": "/past-papers/2016/punjabi-2016.pdf",
+      "size": 174853,
+      "sha256": "5ec68967b3db39c745f129897c6aa380a2f0117c28f08ca53c3346687afe5d36"
+    },
+    {
+      "path": "/past-papers/2016/pure-mathematics-2016.pdf",
+      "size": 3122939,
+      "sha256": "618df9ad9a4f4c99aaaf44e0aaa86d65238bf30459e95db7312caeaa17395c98"
+    },
+    {
+      "path": "/past-papers/2016/sindhi-2016.pdf",
+      "size": 172983,
+      "sha256": "c672dd36d3da163403b113f09377dc0a288e0fd6e41c9fa61264f66fdb33d1ba"
+    },
+    {
+      "path": "/past-papers/2016/sociology-2016.pdf",
+      "size": 826420,
+      "sha256": "82c93872d031a70bdf2048dc2a7075a6dcf1b003249a9234c836adef3d9c61f4"
+    },
+    {
+      "path": "/past-papers/2016/statistics-2016.pdf",
+      "size": 1261850,
+      "sha256": "8e28118aa37115e2a29a768ee6d6e05230f06fe559fe53b3b6b25c97c47e78a4"
+    },
+    {
+      "path": "/past-papers/2016/town-planning-and-urban-management-2016.pdf",
+      "size": 827210,
+      "sha256": "9cc38e4d49dad8f180ac8161b3aa337234cf91083dcec2d77b075f0da6e264df"
+    },
+    {
+      "path": "/past-papers/2016/urdu-literature-2016.pdf",
+      "size": 215650,
+      "sha256": "0ed784de0d395e91031376bbaf0005f6e331f78613dba4452cb37f9063f4fa67"
+    },
+    {
+      "path": "/past-papers/2016/zoology-2016.pdf",
+      "size": 842246,
+      "sha256": "ddc897561d71be7a6640b53395dbbe4eec06e1310fd7db6182a89b23e0ecee3c"
+    },
+    {
+      "path": "/past-papers/2017/accountancy-and-auditing-2017(1).pdf",
+      "size": 277549,
+      "sha256": "92a18ebcbde8aa94876aefdbcc5f986e0cc61e5e50b152395e46dcd8b1b7f178"
+    },
+    {
+      "path": "/past-papers/2017/agriculture-and-forestry-2017(1).pdf",
+      "size": 14511,
+      "sha256": "3bf286489a7d40bc0895a05f854758073f60e29bfa99d021f6a269764f957d9f"
+    },
+    {
+      "path": "/past-papers/2017/anthropology-2017(1).pdf",
+      "size": 17933,
+      "sha256": "d2b39c5998a0c5e9e69c7d2a6d66fcd6086307cf16924bde4ad1fd59e44a4ee6"
+    },
+    {
+      "path": "/past-papers/2017/applied-mathematics-2017(1).pdf",
+      "size": 358886,
+      "sha256": "929436b5a27f0c8ec8e3d29f0edc9692dc280d5140cc2eaceb556a7ff213edb8"
+    },
+    {
+      "path": "/past-papers/2017/arabic-2017(1).pdf",
+      "size": 98839,
+      "sha256": "ba5ec1c2c75496b0beb8aaad050d3281614c99261adca4886a2b24fc99f4169c"
+    },
+    {
+      "path": "/past-papers/2017/balochi-2017(1).pdf",
+      "size": 569844,
+      "sha256": "57e5a58bc669fdb703423604a0ca491141104a0d33fc1d8a864bc5acf602897d"
+    },
+    {
+      "path": "/past-papers/2017/botany-2017(1).pdf",
+      "size": 10657,
+      "sha256": "c29593ef44c595bb574eb16930d7ffe5368d05d985f5aac8588945eabab074f0"
+    },
+    {
+      "path": "/past-papers/2017/british-history-2017(1).pdf",
+      "size": 75405,
+      "sha256": "c51420973f000be951e4c285f432369f015dccc8548d9b631aa935c26fe386a7"
+    },
+    {
+      "path": "/past-papers/2017/business-administration-2017(1).pdf",
+      "size": 12209,
+      "sha256": "a569501d033ed541791a2a17026fd1e5d8d8815c1c1385d10e934ebe2e410193"
+    },
+    {
+      "path": "/past-papers/2017/chemistry-2017(1).pdf",
+      "size": 70742,
+      "sha256": "23f6c861e9b637ce9c3612d8871c88ecf33cdf60af772e60cf42cd576152e419"
+    },
+    {
+      "path": "/past-papers/2017/comparative-study-of-major-religions-2017(1).pdf",
+      "size": 54094,
+      "sha256": "9a5b909b37afaa0aa0c0759ddb82ca4663405d76b0ca8076bc71cae41b3fd257"
+    },
+    {
+      "path": "/past-papers/2017/computer-science-2017(1).pdf",
+      "size": 267537,
+      "sha256": "3a24f33597410c220d0c9c73495d51a9c0352917724c2275af5665d76f7899f3"
+    },
+    {
+      "path": "/past-papers/2017/constitutional-law-2017(1).pdf",
+      "size": 75699,
+      "sha256": "8ca2d3ff90ac733f4a0dc8b54696df7a5980b73eb3032edd97a2fe6a9b0fcc5b"
+    },
+    {
+      "path": "/past-papers/2017/criminology-2017(1).pdf",
+      "size": 9865,
+      "sha256": "703db06c86323e8069c56041e7b52b2a99740f13521c4c97cfff4ebacdc985dc"
+    },
+    {
+      "path": "/past-papers/2017/current-affairs-2017(1).pdf",
+      "size": 73210,
+      "sha256": "064273dad8503469f2f02a3a41e35062366a89a9e845a960584ee6e3803b24ad"
+    },
+    {
+      "path": "/past-papers/2017/economics-2017(2).pdf",
+      "size": 76383,
+      "sha256": "9970179e099a729224301b8b77464b81e2bdb4a6b8a94e0920e262c232789c2d"
+    },
+    {
+      "path": "/past-papers/2017/english-essay-2017(2).pdf",
+      "size": 60878,
+      "sha256": "8c089cd31176d98715049dc0cba4c69be5688ffaef59aeea639f824fb43eca12"
+    },
+    {
+      "path": "/past-papers/2017/english-literature-2017(2).pdf",
+      "size": 90032,
+      "sha256": "88a7942055e80f28f33432a5d7384be9bbf43d585f1356f41f2ea423c6780949"
+    },
+    {
+      "path": "/past-papers/2017/english-precis-and-composition-2017(2).pdf",
+      "size": 340314,
+      "sha256": "c5d6f9f9c161bdee928cc6b5e1243fbe99824463ece04a3d6ac6a8b9cbcec435"
+    },
+    {
+      "path": "/past-papers/2017/environmental-sciences-2017(2).pdf",
+      "size": 11992,
+      "sha256": "adfd378e72e2496a637ca3faeac0924ac91b15130811e4f61971d7b6832316a6"
+    },
+    {
+      "path": "/past-papers/2017/european-history-2017.pdf",
+      "size": 77182,
+      "sha256": "47b596a038717efb2f4981c4564c0ad2a139bbae0d9da3db185906bb94d99062"
+    },
+    {
+      "path": "/past-papers/2017/gender-studies-2017.pdf",
+      "size": 17899,
+      "sha256": "825c672cb9d50988ee136a18af053556914847a4ba2158fe7c8d355b0faf2806"
+    },
+    {
+      "path": "/past-papers/2017/general-science-and-ability-2017.pdf",
+      "size": 172837,
+      "sha256": "31f404c0045fc5fa3c39b8d6ff4a5e1801b69cc6b936c25658e5754739160a1f"
+    },
+    {
+      "path": "/past-papers/2017/geography-2017.pdf",
+      "size": 85181,
+      "sha256": "9847c6dc7d7c946d77dc20eb416247b3aa48835fed9c699b0c696884b6382725"
+    },
+    {
+      "path": "/past-papers/2017/geology-2017.pdf",
+      "size": 17180,
+      "sha256": "9084fdf7072bf5d2775a2f0c7a32c0ebc84b9996411d1c64ba54b283a0169708"
+    },
+    {
+      "path": "/past-papers/2017/governance-and-public-policies-2017.pdf",
+      "size": 18520,
+      "sha256": "171986b90a6b1b71e8803f92d47fdc89a2e2e55c2e4a430853cb0e68e0d3686a"
+    },
+    {
+      "path": "/past-papers/2017/history-of-pakistan-and-india-2017.pdf",
+      "size": 17322,
+      "sha256": "695551b2f8e13504d56bd9d0e313250b0448949551e1c95bac09e4ce32747a1f"
+    },
+    {
+      "path": "/past-papers/2017/history-of-usa-2017.pdf",
+      "size": 16220,
+      "sha256": "2570985f51708998964457685472280a19e97f3115ed2eda75303312ee90414d"
+    },
+    {
+      "path": "/past-papers/2017/international-law-2017.pdf",
+      "size": 16695,
+      "sha256": "b956909cd5f85644219fddb8c0b5e3800c489b168a4e070d7d6448a3b0619d67"
+    },
+    {
+      "path": "/past-papers/2017/international-relations-2017.pdf",
+      "size": 35562,
+      "sha256": "f44a598c7ebd4e5637f1f0c111507d1f7caefb056f4f8591f04d5163d0298c80"
+    },
+    {
+      "path": "/past-papers/2017/islamic-history-and-culture-2017.pdf",
+      "size": 75224,
+      "sha256": "abc85722272d694de23e4bb500a2000943d996b200b4a16b6c1ab4703a417e38"
+    },
+    {
+      "path": "/past-papers/2017/islamic-studies-2017.pdf",
+      "size": 57144,
+      "sha256": "41ac03ec7663035a35e8ff38e5c6b1891409279b7b3923e4d5fa2a3a33a85c30"
+    },
+    {
+      "path": "/past-papers/2017/journalism-and-mass-communication-2017.pdf",
+      "size": 75634,
+      "sha256": "cbc43dac8240b96952ae4f877e34be7b98882842c1dfb69fdd4ffda8ca9cded7"
+    },
+    {
+      "path": "/past-papers/2017/law-2017.pdf",
+      "size": 74049,
+      "sha256": "4ee4cbd358ac377125975e5cf365d43ec8c763deb036dece67234e704051b2a9"
+    },
+    {
+      "path": "/past-papers/2017/mercantile-law-2017.pdf",
+      "size": 71284,
+      "sha256": "ee4d8f62c783bb3727c86b744a03c54242e6ee1aa6e97d263ce28d201ee721e9"
+    },
+    {
+      "path": "/past-papers/2017/muslim-law-and-jurisprudence-2017.pdf",
+      "size": 186100,
+      "sha256": "64cd3565748fad850405727031b924a008355559c36d91d3212c4594014191e4"
+    },
+    {
+      "path": "/past-papers/2017/pakistan-affairs-2017.pdf",
+      "size": 151105,
+      "sha256": "18aa0459ec920d8858170c847ba98aa23d80555ddd94db620f06238e2f576ec5"
+    },
+    {
+      "path": "/past-papers/2017/pashto-2017.pdf",
+      "size": 201386,
+      "sha256": "59e532a4b936e821743bac5f50f7100557a4ee50fe88ad4b46cd896c73f916b1"
+    },
+    {
+      "path": "/past-papers/2017/persian-2017.pdf",
+      "size": 321714,
+      "sha256": "4f2c3f8032665844b93a3a79812e36f756ff21ea1db7ce3960c31aae9b517e4b"
+    },
+    {
+      "path": "/past-papers/2017/philosophy-2017.pdf",
+      "size": 174135,
+      "sha256": "7f754afdb9e84535baeeb4b8704f1b613109e6614d2b995c1f36ef4f6b41b65f"
+    },
+    {
+      "path": "/past-papers/2017/physics-2017.pdf",
+      "size": 138007,
+      "sha256": "909c92303f7fe3cdcd594fc6953de781b04b0162c041e2717fbfa2601fe73878"
+    },
+    {
+      "path": "/past-papers/2017/political-science-2017.pdf",
+      "size": 221408,
+      "sha256": "15b557e1649af8e5e5c0bc50aead9282c0e7351acda1d43751c9b51099af10f9"
+    },
+    {
+      "path": "/past-papers/2017/psychology-2017.pdf",
+      "size": 155579,
+      "sha256": "fddaba785420b916afe425457120cbe6ea4b1ec39acddb594db65b2e97926426"
+    },
+    {
+      "path": "/past-papers/2017/public-administration-2017.pdf",
+      "size": 93925,
+      "sha256": "7f0ce5688321226643212b993e4b68d6dd35bd0c1358c6fc2bc2527d81d82bad"
+    },
+    {
+      "path": "/past-papers/2017/punjabi-2017.pdf",
+      "size": 247615,
+      "sha256": "7cf401eb0b38c54e3682930fe6998ff07e3273a6f2d930c3a971652c4531a29d"
+    },
+    {
+      "path": "/past-papers/2017/pure-mathematics-2017.pdf",
+      "size": 734716,
+      "sha256": "15b96e44554c2697a1a3590889c9f23345f8a1285509e02334726c71c9ab046c"
+    },
+    {
+      "path": "/past-papers/2017/sindhi-2017.pdf",
+      "size": 536689,
+      "sha256": "2691e61b114ade63b2d7f9beb70722c7f5c61c6b61f4a94771650992df221041"
+    },
+    {
+      "path": "/past-papers/2017/sociology-2017.pdf",
+      "size": 156608,
+      "sha256": "e6aff1d5f20a9e86dc785134472b3973c969c8d81ccea40583e19fec0340c680"
+    },
+    {
+      "path": "/past-papers/2017/statistics-2017.pdf",
+      "size": 236932,
+      "sha256": "384fcbc354e493e2d00d9dab55de719cef14a66b8ac7c9262ddd5e8912596b71"
+    },
+    {
+      "path": "/past-papers/2017/town-planning-and-urban-management-2017.pdf",
+      "size": 94904,
+      "sha256": "7bdd8876f1948509bdc947bf5b7b0f1c034f3948e0853d78bfe65d68e728d0d2"
+    },
+    {
+      "path": "/past-papers/2017/urdu-literature-2017.pdf",
+      "size": 1121348,
+      "sha256": "07b168b5c54f45eb798da385ff916845713133dcb0e68cad30dd6991e660cee9"
+    },
+    {
+      "path": "/past-papers/2017/zoology-2017.pdf",
+      "size": 157475,
+      "sha256": "626c07b5f60b97708b50d514cf9df6f81e248ad386d3f43395aa03a8e173014a"
+    },
+    {
+      "path": "/past-papers/2018/accountancy-and-auditing-2018.pdf",
+      "size": 261735,
+      "sha256": "da188958cdc01c5faae48b4eae06d9a8216156580bf5c56f14bf1b7c30f5f5e6"
+    },
+    {
+      "path": "/past-papers/2018/agriculture-and-forestry-2018.pdf",
+      "size": 105452,
+      "sha256": "5581894b3cc65c2d52296a2a19520a56a06ee476bb243d0f7552bd49130453e5"
+    },
+    {
+      "path": "/past-papers/2018/anthropology-2018.pdf",
+      "size": 106283,
+      "sha256": "dc9bdb5a0757672f39fc24e3dd38acfac8a0ea47621d54eb68c0d5c116f7086d"
+    },
+    {
+      "path": "/past-papers/2018/applied-mathematics-2018.pdf",
+      "size": 127181,
+      "sha256": "45c5dbf7602b2f723b9376c2f9890c2684cc65e48e128583dd475a131afd2bd9"
+    },
+    {
+      "path": "/past-papers/2018/arabic-2018.pdf",
+      "size": 147114,
+      "sha256": "f50a4326318f052056f24969977351e180d5c3f363e4491f90eb996c1a0de6a6"
+    },
+    {
+      "path": "/past-papers/2018/balochi-2018.pdf",
+      "size": 948954,
+      "sha256": "c5bb3abb24aeb6182b536885b1a52e89af5aba3cb121ab7f466acd6faa5ebba2"
+    },
+    {
+      "path": "/past-papers/2018/botany-2018.pdf",
+      "size": 105963,
+      "sha256": "4bae89ff7f0ba335df8bd1e5773f82bf59d6479733ede82fcdb38ad5cd8c3c41"
+    },
+    {
+      "path": "/past-papers/2018/british-history-2018.pdf",
+      "size": 105286,
+      "sha256": "58bcfc565d09e4be9c5d972e90256de8e76e29f71aa59acd3a2b9f3aa1f498ee"
+    },
+    {
+      "path": "/past-papers/2018/business-administration-2018.pdf",
+      "size": 109506,
+      "sha256": "aec26910d42aa2416d9c963e292dc1de8809ed9323078d007ff05a7f422cc8a9"
+    },
+    {
+      "path": "/past-papers/2018/chemistry-2018.pdf",
+      "size": 136643,
+      "sha256": "473c1af08b26143946c8af55bf312cf09ad9b2d2c2e1059520383ecff84f023c"
+    },
+    {
+      "path": "/past-papers/2018/comparative-study-of-major-religions-2018.pdf",
+      "size": 170432,
+      "sha256": "a18e8d1b6081b1a959af66bed9b7095677f7cda36c059ea62e0ec29120caf5c1"
+    },
+    {
+      "path": "/past-papers/2018/computer-science-2018.pdf",
+      "size": 190939,
+      "sha256": "96aed1a5a982ed417c24b04bd3b2eca9c91040a5a970e6973b0b825924476338"
+    },
+    {
+      "path": "/past-papers/2018/constitutional-law-2018.pdf",
+      "size": 104863,
+      "sha256": "7a30896c4377a7de6a99b1ee80d9e0af59f2bcf54ebf5456a272c15909dcfd68"
+    },
+    {
+      "path": "/past-papers/2018/criminology-2018.pdf",
+      "size": 105155,
+      "sha256": "023540ab9082bbc8474cb134d26919b7d71f0599e3c6de75b9702bfce49ca57d"
+    },
+    {
+      "path": "/past-papers/2018/current-affairs-2018.pdf",
+      "size": 164965,
+      "sha256": "2add93901fddca85bae531c73ba42df378141f1dbee6ffc3aa2be9e1d84abebb"
+    },
+    {
+      "path": "/past-papers/2018/economics-2018.pdf",
+      "size": 170464,
+      "sha256": "5ad037e9642b75b55c24f68a23607e615ccb57b08c656ea28deabd71254270d3"
+    },
+    {
+      "path": "/past-papers/2018/english-essay-2018.pdf",
+      "size": 183286,
+      "sha256": "271407f4ce2a742bc31ee1a47713b6131dcfbabb9c8d810db9714f07791014da"
+    },
+    {
+      "path": "/past-papers/2018/english-literature-2018.pdf",
+      "size": 106524,
+      "sha256": "fc2187ecd908cc647a3b19b948450c0d9d41410d6c96ac922f7f64bd697d02f7"
+    },
+    {
+      "path": "/past-papers/2018/english-precis-and-composition-2018.pdf",
+      "size": 288771,
+      "sha256": "443a8117e5a2fd4e5b8df9c2be49ba46148693173517353d9a8682a50024c9ae"
+    },
+    {
+      "path": "/past-papers/2018/environmental-sciences-2018(1).pdf",
+      "size": 1266906,
+      "sha256": "4ba670f2f41325c2bcea97d5fbe2d80aa38eca52430c81aae64cc7b88fcf9d85"
+    },
+    {
+      "path": "/past-papers/2018/european-history-2018.pdf",
+      "size": 1248943,
+      "sha256": "8e6070624dd6402391182ea86443e8c4fcc3c49abceb0bf25157fbd07852eca6"
+    },
+    {
+      "path": "/past-papers/2018/gender-studies-2018.pdf",
+      "size": 1255365,
+      "sha256": "86eb09c6bc47c7e4c0a56cb684733c0d3129e9890950bb5fad125596446dbfe9"
+    },
+    {
+      "path": "/past-papers/2018/general-science-and-ability-2018.pdf",
+      "size": 2733371,
+      "sha256": "8e514b41a8e2884a1bf026ee4ce4f8afd2f57e9feea35c67fa81c57ec7b4a62b"
+    },
+    {
+      "path": "/past-papers/2018/geography-2018.pdf",
+      "size": 1251998,
+      "sha256": "b5dccdffe4b21fb296a28cf8035fb21054f1dcf2a081ad5436100de636ce8c41"
+    },
+    {
+      "path": "/past-papers/2018/geology-2018.pdf",
+      "size": 1255482,
+      "sha256": "20da0915c0c627a51e28ca48d5169eda13d01df065ba926b244bb0e2a2e92b04"
+    },
+    {
+      "path": "/past-papers/2018/governance-and-public-policies-2018.pdf",
+      "size": 1269757,
+      "sha256": "b81b44ade4223f325eabe7c97f43f6608777a95113434c2cc89307aa6e8501c4"
+    },
+    {
+      "path": "/past-papers/2018/history-of-pakistan-and-india-2018.pdf",
+      "size": 1247169,
+      "sha256": "dc9f30cecba4a1ac92de0331b763810467c053315daa16e8e90beee84c890674"
+    },
+    {
+      "path": "/past-papers/2018/history-of-usa-2018.pdf",
+      "size": 1248701,
+      "sha256": "dbc66c2a89b9e365294325ca7284a95e70b436abff87f9cbb0f680392da1ea61"
+    },
+    {
+      "path": "/past-papers/2018/international-law-2018.pdf",
+      "size": 1261892,
+      "sha256": "52ad8d9cd5206ca0c21d84b4ce1c5e3e1e7a8e54bf440e9a142f69ece6869a40"
+    },
+    {
+      "path": "/past-papers/2018/international-relations-2018.pdf",
+      "size": 2493992,
+      "sha256": "b471ad40aa67e8a4a84072ce99e3397a13e64e1a59de054bcb82e0468fc25294"
+    },
+    {
+      "path": "/past-papers/2018/islamic-history-and-culture-2018.pdf",
+      "size": 1249207,
+      "sha256": "8059d4f748d7627cc4bf354d6dd46fc56425776a1efbb203d4ca57b405bebf7d"
+    },
+    {
+      "path": "/past-papers/2018/islamic-studies-2018.pdf",
+      "size": 2522812,
+      "sha256": "d09bfdf48ebd8aebe140bf5e955c2472ff3578a2ca2fa756bd997a04bf2f2372"
+    },
+    {
+      "path": "/past-papers/2018/journalism-and-mass-communication-2018.pdf",
+      "size": 1254114,
+      "sha256": "d3df68f57d3b96dc1fc77bb577ba8fb3d8685bc47513bc65ac9cd3f209f9ec14"
+    },
+    {
+      "path": "/past-papers/2018/law-2018.pdf",
+      "size": 1247528,
+      "sha256": "29d3b14c46f37494115ca41640753ecfd9d9b06bf7cd2b7e557ba46df55c4b6c"
+    },
+    {
+      "path": "/past-papers/2018/mercantile-law-2018.pdf",
+      "size": 1245357,
+      "sha256": "f79797b2b33f290ebfc6d785500ee0aa170f870b2d9a8a7e4f3069050c94b449"
+    },
+    {
+      "path": "/past-papers/2018/muslim-law-and-jurisprudence-2018.pdf",
+      "size": 228044,
+      "sha256": "fcf48772e60e71c36521204bf42a7dcffe2a528a754eb289dba2e682bfc90aef"
+    },
+    {
+      "path": "/past-papers/2018/pakistan-affairs-2018.pdf",
+      "size": 182831,
+      "sha256": "e932c38d6f470a4612c23cf13d725706ee24e51dbdea282a288591acd41621fe"
+    },
+    {
+      "path": "/past-papers/2018/pashto-2018.pdf",
+      "size": 160462,
+      "sha256": "002c0b3a7f2b51d33f8cf20351654bdfc1a4533991454961a1cd8168bd4cc739"
+    },
+    {
+      "path": "/past-papers/2018/persian-2018.pdf",
+      "size": 176644,
+      "sha256": "aace6d4c99b518a614bbfa1cf5cd8ff50c46aa9955599ff78dcc39df64243650"
+    },
+    {
+      "path": "/past-papers/2018/physics-2018.pdf",
+      "size": 188003,
+      "sha256": "ecf118b8031d9280870632590034e0dfa12708801f360fae69c2aa0a347cad88"
+    },
+    {
+      "path": "/past-papers/2018/political-science-2018.pdf",
+      "size": 131873,
+      "sha256": "b466d91157ac7b126f0a54aa1b59a89302fa1721f16fd8a66b5c51ab0198f321"
+    },
+    {
+      "path": "/past-papers/2018/psychology-2018.pdf",
+      "size": 122501,
+      "sha256": "85109f042bbca43caa7f460bc4dd5ba773ad3d3893675854b5907ea8b18b00d1"
+    },
+    {
+      "path": "/past-papers/2018/public-administration-2018.pdf",
+      "size": 123465,
+      "sha256": "5c366a23c5808ba734962440556e050012d282c6b1f8df50ee4d0e710a6637bb"
+    },
+    {
+      "path": "/past-papers/2018/pure-mathematics-2018.pdf",
+      "size": 183510,
+      "sha256": "c69064ba43e8051ae4e6a7bd556804e84248bfdf8f130988de3151a7b58e9a55"
+    },
+    {
+      "path": "/past-papers/2018/sindhi-2018.pdf",
+      "size": 185027,
+      "sha256": "9ca4ca2e05231ed773650373d3fb4be3d77dcb4580e00446939c2c3677e5fe1c"
+    },
+    {
+      "path": "/past-papers/2018/sociology-2018.pdf",
+      "size": 122811,
+      "sha256": "9efa7efd4519cd37465a7915981646d9f5555336148b8dde19af4043c4002b03"
+    },
+    {
+      "path": "/past-papers/2018/statistics-2018.pdf",
+      "size": 141468,
+      "sha256": "50630141abe305cf351f856656f3722a0929453571be7779b5e0830d181d0188"
+    },
+    {
+      "path": "/past-papers/2018/town-planning-and-urban-management-2018.pdf",
+      "size": 123000,
+      "sha256": "c13e61cf037423a83f6cf0a2eb3ad8cc559b369f915c90d6c91c2db0bd514c94"
+    },
+    {
+      "path": "/past-papers/2018/urdu-literature-2018.pdf",
+      "size": 1306927,
+      "sha256": "13bb67f130978981fdc585403553341d858e47324465c1869249d0d4306ba90d"
+    },
+    {
+      "path": "/past-papers/2018/zoology-2018.pdf",
+      "size": 123119,
+      "sha256": "f3d8fc35c2e5d71404df43af6ffe935279dd3749d96ba57117a37a2f1b799bc1"
+    },
+    {
+      "path": "/past-papers/2019/accountancy-and-auditing-2019(1).pdf",
+      "size": 297602,
+      "sha256": "f5dba001bb51e78859c79045bb0027b4b79bfdcd60a4c111ea52f91f27bf0aaf"
+    },
+    {
+      "path": "/past-papers/2019/agriculture-and-forestry-2019.pdf",
+      "size": 345783,
+      "sha256": "4fb13889b02b21b7397dd9c9c5b8e78e5ee0df80c3ef9d711b6a0675c96e9cad"
+    },
+    {
+      "path": "/past-papers/2019/anthropology-2019(1).pdf",
+      "size": 152034,
+      "sha256": "966df030a2e0bc5e9a2e9d89ccde542fd311543563f1989ada3ce00cd77aff96"
+    },
+    {
+      "path": "/past-papers/2019/applied-mathematics-2019(1).pdf",
+      "size": 192597,
+      "sha256": "a48461e7c78af42777e0caa53312fa6b2edd3c27f2a3bae891669132cbfcdfaf"
+    },
+    {
+      "path": "/past-papers/2019/arabic-2019.pdf",
+      "size": 635980,
+      "sha256": "87fd6ab7059585edc6f9e0a7745052f217b665c48151242052c8e855d2f9e5e2"
+    },
+    {
+      "path": "/past-papers/2019/balochi-2019.pdf",
+      "size": 897311,
+      "sha256": "5fe89d1f778a624f8f6f192d08452cb888af32cf9413061fdd5b3ec6c85ab3ad"
+    },
+    {
+      "path": "/past-papers/2019/botany-2019(1).pdf",
+      "size": 152372,
+      "sha256": "c02e663cfc05f6428023fd76397d00599ba004f29fc8bf3f166c7f56a0db5b55"
+    },
+    {
+      "path": "/past-papers/2019/british-history-2019.pdf",
+      "size": 152671,
+      "sha256": "06f86de24a55aec14133cfcd2f565130bc36964df266cf8dd5fa918e36aad31a"
+    },
+    {
+      "path": "/past-papers/2019/business-administration-2019.pdf",
+      "size": 153034,
+      "sha256": "5ed43cd68dc2485b5f90a259451e999fd9693c1b1dc95f7d13764507a5989ddb"
+    },
+    {
+      "path": "/past-papers/2019/chemistry-2019(1).pdf",
+      "size": 169084,
+      "sha256": "9a08e68d3c57fe7c69896573cf82d5b1a04bae3190703b3d573abeee99712f1b"
+    },
+    {
+      "path": "/past-papers/2019/comparative-study-of-major-religions-2019.pdf",
+      "size": 343681,
+      "sha256": "d9f655fc7620a287dc34eef6899ac2c2f95f75f4748b403f716539e35725be92"
+    },
+    {
+      "path": "/past-papers/2019/computer-science-2019(1).pdf",
+      "size": 185527,
+      "sha256": "fc986c434c5f8bd4ec9872cc776194798fc2c653a240bc6cd523542ed036ab5b"
+    },
+    {
+      "path": "/past-papers/2019/constitutional-law-2019(1).pdf",
+      "size": 152669,
+      "sha256": "d0d6932e42980c9accf2e81f6b80e24463141698e1786a48835a9e8ea6fc9f5e"
+    },
+    {
+      "path": "/past-papers/2019/criminology-2019(1).pdf",
+      "size": 153286,
+      "sha256": "36850ae47187879a8ccbb625ea8465fda31f4e093b92328147f3ed19a5a97e5c"
+    },
+    {
+      "path": "/past-papers/2019/current-affairs-2019(1).pdf",
+      "size": 212587,
+      "sha256": "ae97ce8d04762d324d85674974241c65cc6a7a599cfa85f96219936fea4dbb7e"
+    },
+    {
+      "path": "/past-papers/2019/economics-2019(1).pdf",
+      "size": 159932,
+      "sha256": "479bfc40ce6798d63b67fa27a9329b6086b03a586d8e22fdde5a8398012d32d7"
+    },
+    {
+      "path": "/past-papers/2019/english-essay-2019.pdf",
+      "size": 187175,
+      "sha256": "aa4e71afa6c28e5964b67ad7c5fdffbfd7ad03aff68a2b44267bb7ee1e7e2a64"
+    },
+    {
+      "path": "/past-papers/2019/english-literature-2019(1).pdf",
+      "size": 297827,
+      "sha256": "99dbe94acc3bc3800e9f3180bcb0b735aebc5854aaa16bda56055aa5cec12371"
+    },
+    {
+      "path": "/past-papers/2019/english-precis-and-composition-2019(1).pdf",
+      "size": 361989,
+      "sha256": "f9b6d189a51f29adeb2c8cb530820bfe9ffb1048542e29f11424c77cd8186b6a"
+    },
+    {
+      "path": "/past-papers/2019/environmental-sciences-2019.pdf",
+      "size": 235354,
+      "sha256": "51ee89fd1cba5463f6c6b606b80bc41ad648c3b8dc2ef54d327b0ea7dee1c728"
+    },
+    {
+      "path": "/past-papers/2019/european-history-2019.pdf",
+      "size": 231804,
+      "sha256": "a7d88df5370c6591a8a43794065fc12040ba8ac601ca395a38f5a3dc25bbf1ca"
+    },
+    {
+      "path": "/past-papers/2019/gender-studies-2019.pdf",
+      "size": 232777,
+      "sha256": "be51355785f701f1c4ff5bb1a82c312b18f1d3c3d29753d646f1c2ffbedf7eae"
+    },
+    {
+      "path": "/past-papers/2019/general-science-and-ability-2019.pdf",
+      "size": 504377,
+      "sha256": "65ec4c1252794223b4f05b5df1d893ffd12f9c6f7cc97e25364d201782750c7d"
+    },
+    {
+      "path": "/past-papers/2019/geography-2019.pdf",
+      "size": 232359,
+      "sha256": "634a9fcc5f73af0a95feaa28c402933b82724543a2d0b31041b2c54a6a12dd4a"
+    },
+    {
+      "path": "/past-papers/2019/geology-2019.pdf",
+      "size": 232786,
+      "sha256": "1ac6ff87d700794bbf434c41c6efbb32e52a8e58858b794510522bf5127e467f"
+    },
+    {
+      "path": "/past-papers/2019/governance-and-public-policies-2019.pdf",
+      "size": 271820,
+      "sha256": "cc49cfa4f5a640174b18ef182f888900cc99adfe1a87f563735cf4a2bf234976"
+    },
+    {
+      "path": "/past-papers/2019/history-of-pakistan-and-india-2019.pdf",
+      "size": 235801,
+      "sha256": "2fdd05b3ae8c0eae391f99573a39f51a3b2f129e3637730397d95b033d784923"
+    },
+    {
+      "path": "/past-papers/2019/history-of-usa-2019.pdf",
+      "size": 232132,
+      "sha256": "a5ed19867405f405c859af6a61250c561392ad8e5b8bedea2ffa0bb31480ff30"
+    },
+    {
+      "path": "/past-papers/2019/international-law-2019.pdf",
+      "size": 232892,
+      "sha256": "e9b94e84d6b7d89573784600fbee745acca6a1c3f3e4f936b1af694614af0e1d"
+    },
+    {
+      "path": "/past-papers/2019/international-relations-2019.pdf",
+      "size": 330875,
+      "sha256": "f658ed7cde264fd7b5b2e671a1eac6993587c18ba59ee0b8dd8cf80fecc42e3a"
+    },
+    {
+      "path": "/past-papers/2019/islamic-history-and-culture-2019.pdf",
+      "size": 233854,
+      "sha256": "f9a07ba3f5c20363dce0049caa4610ab7b0df37e90c4999e1edc8cf3c9994811"
+    },
+    {
+      "path": "/past-papers/2019/islamic-studies-2019.pdf",
+      "size": 413733,
+      "sha256": "277b0c718743f53b16dfff4537820de1d3b1cc26492d5558a9bb53c6f4664053"
+    },
+    {
+      "path": "/past-papers/2019/journalism-and-mass-communication-2019.pdf",
+      "size": 232323,
+      "sha256": "4c33c8064a0081f55ef0a61774977ae03de0e3f361abd07891c6fba679d6e42b"
+    },
+    {
+      "path": "/past-papers/2019/law-2019.pdf",
+      "size": 233155,
+      "sha256": "a2e37f540c713fdd8b0f1da711280f55bd27ad1175dff914a6bb4b3ea7b3e567"
+    },
+    {
+      "path": "/past-papers/2019/mercantile-law-2019.pdf",
+      "size": 231861,
+      "sha256": "2c39154b260e6c81a83bcb1e58a533b70bfe1cb295287bf4dbcb97b48494b427"
+    },
+    {
+      "path": "/past-papers/2019/muslim-law-and-jurisprudence-2019.pdf",
+      "size": 371591,
+      "sha256": "f49ccd76aa045fff874bdb65e2fd6f4e151eff8988d336e1477e2c3fa50f47d5"
+    },
+    {
+      "path": "/past-papers/2019/pakistan-affairs-2019.pdf",
+      "size": 293455,
+      "sha256": "6ed584762f1097af9884476d2db221fe7b450eb75316defd3204e6ea5cc9f47b"
+    },
+    {
+      "path": "/past-papers/2019/pashto-2019.pdf",
+      "size": 917230,
+      "sha256": "2edf2cc3b4facedb2a84f5aae8a591bf0a5440e37bb5741418344ef4c0aa4584"
+    },
+    {
+      "path": "/past-papers/2019/persian-2019.pdf",
+      "size": 1040380,
+      "sha256": "7f5f635ba560f1cb86ad9a515575eeba63037b0b6442a5511b97628384e7f721"
+    },
+    {
+      "path": "/past-papers/2019/philosophy-2019.pdf",
+      "size": 119538,
+      "sha256": "38c01dce926ccb7672c265a42ae1807c93451de10b2e05ab978869f213148d6d"
+    },
+    {
+      "path": "/past-papers/2019/physics-2019.pdf",
+      "size": 180864,
+      "sha256": "432eb42b550125ec541d3b59f33567a86daaa9d639d8f9666f6b65b4c9ab56e5"
+    },
+    {
+      "path": "/past-papers/2019/political-science-2019.pdf",
+      "size": 123770,
+      "sha256": "fa964591034d8cced684adda884dd27e9fb6b92e4eaa450cda1d1219f30b7408"
+    },
+    {
+      "path": "/past-papers/2019/psychology-2019.pdf",
+      "size": 119216,
+      "sha256": "4cd37a3001afe680facde260f9e47c3420f51c1aee3d9b78a63e7919aeebdd74"
+    },
+    {
+      "path": "/past-papers/2019/public-administration-2019.pdf",
+      "size": 118322,
+      "sha256": "38c96faa003ca0cc1333682ff9b000c45c68430af962de5e4725ca129f46952a"
+    },
+    {
+      "path": "/past-papers/2019/punjabi-2019.pdf",
+      "size": 614118,
+      "sha256": "1f1ce7803f6c07d9b740b7b60e26d39b9fa219b55099b4685d553870ee0e8871"
+    },
+    {
+      "path": "/past-papers/2019/pure-mathematics-2019.pdf",
+      "size": 208337,
+      "sha256": "54c4cfdd223ba356c5cd2fb19c4a82949d476831024ec741cac6e18b279e7eb8"
+    },
+    {
+      "path": "/past-papers/2019/sindhi-2019.pdf",
+      "size": 678538,
+      "sha256": "f1b5a690d9261734a7ecf29f9c1e4a4bbb8fc1c798d2a4142dc837468b1e4435"
+    },
+    {
+      "path": "/past-papers/2019/sociology-2019.pdf",
+      "size": 118496,
+      "sha256": "8c29091e2b4e2dc162b103b5caa9cdffe8ff34a04856d73ce4984aaa48d63140"
+    },
+    {
+      "path": "/past-papers/2019/statistics-2019.pdf",
+      "size": 215423,
+      "sha256": "dbe7b0983f288cf0d7ba1fd627ec35a4959f7a8ba0230fdeeb097472f9407619"
+    },
+    {
+      "path": "/past-papers/2019/town-planning-and-urban-management-2019.pdf",
+      "size": 118266,
+      "sha256": "da64e0bbbc7847fe0388a817e438b01c3642d901be603bd7d65672990a839987"
+    },
+    {
+      "path": "/past-papers/2019/urdu-literature-2019.pdf",
+      "size": 1267173,
+      "sha256": "ca25a78615479fa7c0d18cc980e2aceee0d0e1646234ae6b32d57712a1339150"
+    },
+    {
+      "path": "/past-papers/2019/zoology-2019.pdf",
+      "size": 117893,
+      "sha256": "89c4a6fda8b3bfd1b8c179a03bdec53085018587198f4669f2d7179a2d7d53ac"
+    },
+    {
+      "path": "/past-papers/2021/accountancy-and-auditing-2021.pdf",
+      "size": 276533,
+      "sha256": "b78dab50828933be84769c110ef923e97440c9ce70bd091fa21fc3354b96a3d4"
+    },
+    {
+      "path": "/past-papers/2021/agriculture-and-forestry-2021.pdf",
+      "size": 137806,
+      "sha256": "e0d37329975b1e7988efff2838d7902c94ca9431836cfb035f8b08326b10d9e9"
+    },
+    {
+      "path": "/past-papers/2021/anthropology-2021(1).pdf",
+      "size": 145836,
+      "sha256": "de0b6b2cb26cce7ffd7d0a0f3f88e63c5270ea458694aa2f08161f4a696b389a"
+    },
+    {
+      "path": "/past-papers/2021/applied-mathematics-2021.pdf",
+      "size": 178012,
+      "sha256": "fe20bc6a526b8c76497004cc645cab691ba781f67cb1703645448ab97dec0d6d"
+    },
+    {
+      "path": "/past-papers/2021/arabic-2021.pdf",
+      "size": 193633,
+      "sha256": "79bb6166309944db09790d984babe4866a496207c5290e62126a768cb2727331"
+    },
+    {
+      "path": "/past-papers/2021/balochi-2021.pdf",
+      "size": 744673,
+      "sha256": "325506de742d40d0c002b4e145165079ca16192526d5936a033cbab5ffc28d08"
+    },
+    {
+      "path": "/past-papers/2021/botany-2021.pdf",
+      "size": 147555,
+      "sha256": "aec623987721a511eb9c4650f607cf2828a49f713067473c1329a15a1735b4c6"
+    },
+    {
+      "path": "/past-papers/2021/british-history-2021.pdf",
+      "size": 147032,
+      "sha256": "861d865bf09768782d59e7cf6aaf5c9f34c600d0a4c1511c488f9a9ba07002a4"
+    },
+    {
+      "path": "/past-papers/2021/business-administration-2021(1).pdf",
+      "size": 148068,
+      "sha256": "494adbeb86e160bc881a84daec6ada8fc21f7fc89be337108c31e21f0afc763f"
+    },
+    {
+      "path": "/past-papers/2021/chemistry-2021.pdf",
+      "size": 347756,
+      "sha256": "b94ab16883998ffb389dcbe8c6deb0b4c1ada47f6f125f71137d70938c95fc2f"
+    },
+    {
+      "path": "/past-papers/2021/comparative-study-of-major-religions-2021(1).pdf",
+      "size": 187274,
+      "sha256": "e57ac4d8d7aebe461befb9839731e4ec44fe95bea98dfa42582e73393ed55748"
+    },
+    {
+      "path": "/past-papers/2021/computer-science-2021(1).pdf",
+      "size": 328248,
+      "sha256": "78caad0441ee05a50bae1e1a9b3b51bb70b2e8873536082ad3a72d3280c671e9"
+    },
+    {
+      "path": "/past-papers/2021/constitutional-law-2021(1).pdf",
+      "size": 146610,
+      "sha256": "7c57ce9ca7dfc431686c228aee7ee9a095f0b1050a582d9331eb9ec76f3a08c9"
+    },
+    {
+      "path": "/past-papers/2021/criminology-2021.pdf",
+      "size": 147334,
+      "sha256": "dbe2e80d88eec15110b621c3c503c4e7b256e3dd18943e8594d7b02904d9192e"
+    },
+    {
+      "path": "/past-papers/2021/current-affairs-2021(1).pdf",
+      "size": 133667,
+      "sha256": "24fd01d5311cafb5df2bb605135134894831023b04f5b83968f6acc438cfec4f"
+    },
+    {
+      "path": "/past-papers/2021/economics-2021.pdf",
+      "size": 158136,
+      "sha256": "ecbb45b8287aadabd3c65637f0011387fcc222c76b25895b9664803fb5d84d5c"
+    },
+    {
+      "path": "/past-papers/2021/english-essay-2021(1).pdf",
+      "size": 194220,
+      "sha256": "f58d78e5f3c18973f34406d4b4d12425c427eda4434f88320a48900d60bdf62d"
+    },
+    {
+      "path": "/past-papers/2021/english-literature-2021(1).pdf",
+      "size": 147102,
+      "sha256": "7d0a77e306637edc1fa87bbd77bafcae25da4fb4691d006887bc4921f842e415"
+    },
+    {
+      "path": "/past-papers/2021/english-precis-and-composition-2021(1).pdf",
+      "size": 197685,
+      "sha256": "8243f0a7cd0fecbf22c5ac919da2dd013f4d94bd2810d9b1e1e9087069730a05"
+    },
+    {
+      "path": "/past-papers/2021/environmental-sciences-2021.pdf",
+      "size": 1546440,
+      "sha256": "de95d7c530316cde8870ef87a75511252f04fccd3cc27332f6d97ed4f0528e29"
+    },
+    {
+      "path": "/past-papers/2021/european-history-2021.pdf",
+      "size": 1563195,
+      "sha256": "1036457fb4fe9cff10d6d138879f7c34f243848000bf6103a9cd2b3232cd641b"
+    },
+    {
+      "path": "/past-papers/2021/gender-studies-2021.pdf",
+      "size": 1556584,
+      "sha256": "05196cbc57c5883e073182d3b27854f466795758c4e27d8f4749764ef9cc4931"
+    },
+    {
+      "path": "/past-papers/2021/general-science-and-ability-2021.pdf",
+      "size": 1867831,
+      "sha256": "8b53fcb1cc8751c673816bd532bf1bb2d4d41603720e93198f8f2fe4bb17d8dc"
+    },
+    {
+      "path": "/past-papers/2021/geography-2021.pdf",
+      "size": 1563810,
+      "sha256": "513341939bab473821f2350559b5bd0dc43a1b45e587fb1118bf80ec549d1ff8"
+    },
+    {
+      "path": "/past-papers/2021/geology-2021.pdf",
+      "size": 1554529,
+      "sha256": "e4e0a83cb0aa25a359e29f2a13915e9fccb976bd29f6833f04a07eafc3352a13"
+    },
+    {
+      "path": "/past-papers/2021/governance-and-public-policies-2021.pdf",
+      "size": 1587918,
+      "sha256": "904e6e4150be023491d56fb2155f56f2a739d43c4b69e7f3d98496d50b2f949e"
+    },
+    {
+      "path": "/past-papers/2021/history-of-pakistan-and-india-2021.pdf",
+      "size": 1555627,
+      "sha256": "ee9b96fbb7ef8b32d03f71ee85fc5f0b90ee886a4ed9014d21bd69c3f21e9f53"
+    },
+    {
+      "path": "/past-papers/2021/history-of-usa-2021.pdf",
+      "size": 1554173,
+      "sha256": "2b1e343e9fb5c0139420edcaa1fc7153e72338ecd605b92391c2a02584e1b915"
+    },
+    {
+      "path": "/past-papers/2021/international-law-2021.pdf",
+      "size": 1564718,
+      "sha256": "3ada11d2a17aa1dd25a1a0cb818c277a88614a8c0549f98c1d35a24b1dd29a5d"
+    },
+    {
+      "path": "/past-papers/2021/international-relations-2021.pdf",
+      "size": 1584673,
+      "sha256": "d619f5957cdbb83343ac1ae9590bff56db4b41bde29209333dc0a50816089d0d"
+    },
+    {
+      "path": "/past-papers/2021/islamic-history-and-culture-2021.pdf",
+      "size": 1546808,
+      "sha256": "c7dde66f1dcf191d7e915f65cbe027474f336694e5563d64ea423e1393740744"
+    },
+    {
+      "path": "/past-papers/2021/islamic-studies-2021.pdf",
+      "size": 1589805,
+      "sha256": "70c909a7a4cac2704bdd02dd835eacecfb1cf966ac1c316012d11862a5711bdd"
+    },
+    {
+      "path": "/past-papers/2021/journalism-and-mass-communication-2021.pdf",
+      "size": 1563099,
+      "sha256": "5bbbd0de85d42d71b3266691773598ce340696b6c141abd83a645ba24484daf8"
+    },
+    {
+      "path": "/past-papers/2021/law-2021(1).pdf",
+      "size": 573385,
+      "sha256": "7c1e8f9b36fa13287ea43d8e8312258e30c5f65b4ea5973f2d100c31b348e058"
+    },
+    {
+      "path": "/past-papers/2021/mercantile-law-2021(1).pdf",
+      "size": 568223,
+      "sha256": "21c06a81f69e8f1fc95954e4c94baa925f2c7f290937473d2ae4be4ece97ccf8"
+    },
+    {
+      "path": "/past-papers/2021/muslim-law-and-jurisprudence-2021(1).pdf",
+      "size": 579309,
+      "sha256": "ebe8d0a625f37c82319632637507ced65f4ae75c8128cce72370c850d4aee408"
+    },
+    {
+      "path": "/past-papers/2021/pakistan-affairs-2021(1).pdf",
+      "size": 667813,
+      "sha256": "45bb9db0aa7d83eb22620029b93f535057774c9ae319532683bb91163bcdae12"
+    },
+    {
+      "path": "/past-papers/2021/pashto-2021(1).pdf",
+      "size": 613928,
+      "sha256": "8a918d4337595122a12e15fe94ef825e7fed41690f01b8909d51803a35192583"
+    },
+    {
+      "path": "/past-papers/2021/persian-2021(2).pdf",
+      "size": 1660568,
+      "sha256": "d7b7edc9552455e4fd96c61258fc271b5f5520ddd4471027a9654a423db1d3c8"
+    },
+    {
+      "path": "/past-papers/2021/philosophy-2021(2).pdf",
+      "size": 154912,
+      "sha256": "3b198953d0bc458687fb25af52c0cd3b4f4a70fbc9601a56467352956ea4686c"
+    },
+    {
+      "path": "/past-papers/2021/physics-2021(2).pdf",
+      "size": 247517,
+      "sha256": "d88ce1480b39983a7da78801206c48c7d37781c73c89fd8d6fe2ea97cf78b7ba"
+    },
+    {
+      "path": "/past-papers/2021/political-science-2021(2).pdf",
+      "size": 175848,
+      "sha256": "bebd8244992a22d6ab75f1fde2628e28412e5fdd072265ebb0ee39113c99053a"
+    },
+    {
+      "path": "/past-papers/2021/psychology-2021(2).pdf",
+      "size": 154472,
+      "sha256": "74c22258b3f94fa6650cde9f50494d2c7035d5bc72ed0676ca96e3b963e29c62"
+    },
+    {
+      "path": "/past-papers/2021/public-administration-2021(2).pdf",
+      "size": 156433,
+      "sha256": "74421b4f13bbee904bedde846a16870ddee012707280bf7dfa7145a68ee68662"
+    },
+    {
+      "path": "/past-papers/2021/punjabi-2021(2).pdf",
+      "size": 621653,
+      "sha256": "f3cc87b86d4d1fd8cf9a4502609fd1ddb0df6e97bfe6dd9e9fd89ab799f50c82"
+    },
+    {
+      "path": "/past-papers/2021/pure-mathematics-2021(2).pdf",
+      "size": 317675,
+      "sha256": "ee4c860e7015a38b68422162812e57b9de385cdfc3f42965d7a94eb165584ed1"
+    },
+    {
+      "path": "/past-papers/2021/sindhi-2021(2).pdf",
+      "size": 295256,
+      "sha256": "a7a72a58e5aa1add06bb8c34221ea0a440a0f18d73adeaa406762b0d8044219f"
+    },
+    {
+      "path": "/past-papers/2021/sociology-2021(2).pdf",
+      "size": 147103,
+      "sha256": "7c9721e397b4142a0b6958f7ca3ac69da4f4474ac86d22df34743e350499f2fc"
+    },
+    {
+      "path": "/past-papers/2021/statistics-2021(2).pdf",
+      "size": 242460,
+      "sha256": "4e5c84724a5d47dd33c83806a57ec78c2f39c85f15ac170c828519dd19722f6b"
+    },
+    {
+      "path": "/past-papers/2021/town-planning-and-urban-management-2021(2).pdf",
+      "size": 157096,
+      "sha256": "a232b7bbd7a4d033fdcef9f352160180b8ee6c180bb9226ff17db06189ec27d3"
+    },
+    {
+      "path": "/past-papers/2021/urdu-literature-2021(2).pdf",
+      "size": 200894,
+      "sha256": "79e027646297e13e14ca09f7131b42f9ecd4f40d82789d8c2d6269fb1ae557aa"
+    },
+    {
+      "path": "/past-papers/2021/zoology-2021(2).pdf",
+      "size": 145593,
+      "sha256": "aedb268743ff58ff08a2eac3852a46bbdab91ef01ccad77a6ea8a4c77c0bba96"
+    },
+    {
+      "path": "/past-papers/2022/accountancy-and-auditing-2022.pdf",
+      "size": 8588958,
+      "sha256": "7c6bc9280060665bc463f351796161901a823bd306547269d5df6c613c1dbbc8"
+    },
+    {
+      "path": "/past-papers/2022/applied-mathematics-2022.pdf",
+      "size": 2907234,
+      "sha256": "51047bc655870f2ea1060aae02668261f8d0ce4d8b8d4f502e737ca009cc0e7e"
+    },
+    {
+      "path": "/past-papers/2022/balochi-2022.pdf",
+      "size": 1501528,
+      "sha256": "d2820518bf2dc651746de37f33a052ec34388a3185582bdd56a084b57b61286e"
+    },
+    {
+      "path": "/past-papers/2022/botany-2022.pdf",
+      "size": 1448566,
+      "sha256": "a3b64816e51fd5d26b2b9eb510e7d0a6dce9d7311efac0d27f1054341b88973c"
+    },
+    {
+      "path": "/past-papers/2022/british-history-2022.pdf",
+      "size": 1456551,
+      "sha256": "20517361d99fe814651e5c8a0abeb2cc7f84d41dbe5095a21b5ddedf9523a1c4"
+    },
+    {
+      "path": "/past-papers/2022/business-administration-2022.pdf",
+      "size": 1472761,
+      "sha256": "7e283b0702802cd99bb2878b00be4abe518406309e4be16fe9cf7b021223c429"
+    },
+    {
+      "path": "/past-papers/2022/chemistry-2022.pdf",
+      "size": 5778771,
+      "sha256": "15e16b0d948ae0202783189b76d96c479a44122e0c675d706b8252df64fa949f"
+    },
+    {
+      "path": "/past-papers/2022/computer-science-2022.pdf",
+      "size": 7240770,
+      "sha256": "422659faca6ec9034a64c0a933941f82340f15f1eb074d1fd60086e2572555cb"
+    },
+    {
+      "path": "/past-papers/2022/criminology-2022.pdf",
+      "size": 1457877,
+      "sha256": "4a355258974cbc8b60aa220367cfad65050061113d9edfeffff147e02cf9e7cc"
+    },
+    {
+      "path": "/past-papers/2022/economics-2022.pdf",
+      "size": 2916944,
+      "sha256": "b0a5bfead23d6e3d6100c504a4b4d9fe209bd447783973f1fed51c329371ad74"
+    },
+    {
+      "path": "/past-papers/2022/english-literature-2022.pdf",
+      "size": 1456265,
+      "sha256": "aa44dd0744d4e2e915999b86c4385b00347efc75b3c78374a37262898e374836"
+    },
+    {
+      "path": "/past-papers/2022/English-PC-2023.pdf",
+      "size": 205522,
+      "sha256": "a59c7e33fa6f44e517818223db657e35281bc6d3ddac5551308854ef2e2d42fd"
+    },
+    {
+      "path": "/past-papers/2022/environmental-sciences-2022.pdf",
+      "size": 155746,
+      "sha256": "e5f171241163365230c282267aad5548488ec261c2d0d03b54a703d7f13e5db3"
+    },
+    {
+      "path": "/past-papers/2022/european-history-2022.pdf",
+      "size": 160701,
+      "sha256": "fd2c21cd9e2fa5b51da7a2a0735e7e3b741d02d8e5437a119539c41ad61b5972"
+    },
+    {
+      "path": "/past-papers/2022/gender-studies-2022.pdf",
+      "size": 103344,
+      "sha256": "66f9d7baf4dec0f6eb31a9c399fd7add89d898ddbb84ebba834840cd01e495a1"
+    },
+    {
+      "path": "/past-papers/2022/general-science-and-ability-2022.pdf",
+      "size": 424886,
+      "sha256": "5bf0ae9d6dfbca072554f5b169944ef0c834e48ee280fe8acc21f2bac1c562d5"
+    },
+    {
+      "path": "/past-papers/2022/geography-2022.pdf",
+      "size": 165188,
+      "sha256": "dde8bca7c9631fba5e93ef6e6b96829b2a6f75cdcf596c03ccc48db7852f8fc4"
+    },
+    {
+      "path": "/past-papers/2022/geology-2022.pdf",
+      "size": 184484,
+      "sha256": "38b98d299da43c68c752be7fa6f071a6a6cf6a594117e46544eea24fac7ddbd7"
+    },
+    {
+      "path": "/past-papers/2022/governance-and-public-policies-2022.pdf",
+      "size": 159017,
+      "sha256": "cda4806686d8b81274590dc9b39a519afaff948895280a5d9a9a11352a70511f"
+    },
+    {
+      "path": "/past-papers/2022/history-of-pakistan-and-india-2022.pdf",
+      "size": 159801,
+      "sha256": "967747fe9833416ba3c04ffb3cc44b143366ce1af4c2b750cdf20c4f8e009426"
+    },
+    {
+      "path": "/past-papers/2022/history-of-usa-2022.pdf",
+      "size": 158594,
+      "sha256": "d4ca727e1c0478098a651cc57818374fb97e29deaa4a8bec6184437a1815ee98"
+    },
+    {
+      "path": "/past-papers/2022/international-relations-2022.pdf",
+      "size": 438464,
+      "sha256": "66c1fdff73a01763b1bf16f33717a6cba76a11582dcd9755728c61ccc989ed9e"
+    },
+    {
+      "path": "/past-papers/2022/islamic-history-and-culture-2022.pdf",
+      "size": 161786,
+      "sha256": "09837ab051c2dc2ee7b6c18d090e8b411e87759de09528168628f805b3f79cd5"
+    },
+    {
+      "path": "/past-papers/2022/islamic-studies-2022.pdf",
+      "size": 436324,
+      "sha256": "a379252bb9f6a452b5d91a6927a8916da424280ae68681730c63ab67fe098226"
+    },
+    {
+      "path": "/past-papers/2022/journalism-and-mass-communication-2022.pdf",
+      "size": 160060,
+      "sha256": "091acce4a09339d569620b3cb26b278c9371cf8c97a96d614c3d503c877442c5"
+    },
+    {
+      "path": "/past-papers/2022/law-2022.pdf",
+      "size": 160076,
+      "sha256": "5832b4588c24589a3f543ed2032bf10137dfe9ea9f415722e035e9ad9def5f66"
+    },
+    {
+      "path": "/past-papers/2022/mercantile-law-2022.pdf",
+      "size": 157019,
+      "sha256": "198fd2131d37168efd25ddbb59cb41cde52a7cabe27b975b6e81e64fdf8c561b"
+    },
+    {
+      "path": "/past-papers/2022/muslim-law-and-jurisprudence-2022.pdf",
+      "size": 164624,
+      "sha256": "54a9dcfece639a9ea87dacbcc6328dcf43a4cff3f7235023459b13d768e8c040"
+    },
+    {
+      "path": "/past-papers/2022/pakistan-affairs-2022.pdf",
+      "size": 404068,
+      "sha256": "e2e6bf9cb315f3f04fa703bc73bf61a2dc93847dd72572b7cb786e6fef1ff77b"
+    },
+    {
+      "path": "/past-papers/2022/pashto-2022.pdf",
+      "size": 176829,
+      "sha256": "fa2b0914c616e8c16ffd821424c03d1d208b93f32394ebd31ef8125f856d8b97"
+    },
+    {
+      "path": "/past-papers/2022/persian-2022.pdf",
+      "size": 192793,
+      "sha256": "db8d90a26604ed80fa03a38afee7f5e41d544d310c860d414ed7ce0ddd975f1d"
+    },
+    {
+      "path": "/past-papers/2022/physics-2022.pdf",
+      "size": 321957,
+      "sha256": "6d0445c5f9a2a83a051d79c2cb9ef7fe42c2efb702a3ccc0f4c2038e7decd74a"
+    },
+    {
+      "path": "/past-papers/2022/political-science-2022.pdf",
+      "size": 499497,
+      "sha256": "8b2beb5d308bbc486fa30244b5b07668695423c297019e954e0863f2d54a4043"
+    },
+    {
+      "path": "/past-papers/2022/psychology-2022.pdf",
+      "size": 189978,
+      "sha256": "52fc71dc38f4ad333fd2bd8bf8fcc53e212d12675059a81c26c85650defc6e09"
+    },
+    {
+      "path": "/past-papers/2022/public-administration-2022.pdf",
+      "size": 194322,
+      "sha256": "463ed6483ffe470d45ae669f46076fe7776a80c091f18b63f34f2deee64fec3c"
+    },
+    {
+      "path": "/past-papers/2022/punjabi-2022.pdf",
+      "size": 225692,
+      "sha256": "b2afc7020e701a070d53be078598743403187e15c15dd5f9791aa955aa3c6b4e"
+    },
+    {
+      "path": "/past-papers/2022/pure-mathematics-2022.pdf",
+      "size": 245185,
+      "sha256": "225c77b24b2125976184c8abf41c3e029250d1a6a489047dfaf45713a53ef420"
+    },
+    {
+      "path": "/past-papers/2022/sindhi-2022.pdf",
+      "size": 229395,
+      "sha256": "2c17f6cc14b2ca6a53be00862ea74bc3c66ec61ad1d2a8c1480a703a8026aa89"
+    },
+    {
+      "path": "/past-papers/2022/sociology-2022.pdf",
+      "size": 191708,
+      "sha256": "5c7c8efe538867142a8d66e8a9bd9701427a9ca9325fcaad623898032ee33846"
+    },
+    {
+      "path": "/past-papers/2022/statistics-2022.pdf",
+      "size": 260811,
+      "sha256": "15d54ff94ea81675d295a4b1fd2388ed81b81a47e8594e6611737115c9aa0b34"
+    },
+    {
+      "path": "/past-papers/2022/town-planning-and-urban-management-2022.pdf",
+      "size": 193499,
+      "sha256": "4d455a01b2a13594ff0349aa1923c942fa7f53fff819f050e98b6098e05f1122"
+    },
+    {
+      "path": "/past-papers/2022/urdu-literature-2022.pdf",
+      "size": 292935,
+      "sha256": "c5df4a8f78bb7b78f8a47f32393d52142a2343a3ce1f39aab312d2d1b0972d6e"
+    },
+    {
+      "path": "/past-papers/2022/zoology-2022.pdf",
+      "size": 186930,
+      "sha256": "64d1eb4e8c79e7c6d18b32eec38ab3d324d12815c2bbf5f748adab31f39f4624"
+    },
+    {
+      "path": "/past-papers/2023/Accountancy-Auditing-2023.pdf",
+      "size": 140311,
+      "sha256": "a941f239741bb32cb66e7fcff5059082a019271a157f38f6c6211c48e5b02fee"
+    },
+    {
+      "path": "/past-papers/2023/Comparative-Studies-2023.pdf",
+      "size": 142548,
+      "sha256": "ecdb66ea997bd615526b61684eb0efa4e6f283e87b4c19722f96810b5ab75a7c"
+    },
+    {
+      "path": "/past-papers/2023/Computer-Science-2023.pdf",
+      "size": 172584,
+      "sha256": "eb5507e36441c83e4959f7934fc48561e9895d308077064dbb188031d6bc85cf"
+    },
+    {
+      "path": "/past-papers/2023/constitutional-law-2023.pdf",
+      "size": 90929,
+      "sha256": "74af05a52b24d691a9c39e040fbf789efe3e364314933e54799c7d67c13a4b94"
+    },
+    {
+      "path": "/past-papers/2023/criminology-2023.pdf",
+      "size": 89272,
+      "sha256": "b7a61d3f1d4df52d169d4e2e38030298bb2e96986e479b6a7ce871e8ab02d7d2"
+    },
+    {
+      "path": "/past-papers/2023/Current-Affairs-2023.pdf",
+      "size": 190039,
+      "sha256": "87e6099920ce2712c494a297e7f890658d9d72aef9adcc7402c9abef9a2a1404"
+    },
+    {
+      "path": "/past-papers/2023/Economics-2023.pdf",
+      "size": 96373,
+      "sha256": "ab9cf8cdabfada9787bc862f9b368954aa9b3daa290c2bf4c726cbd879c17e22"
+    },
+    {
+      "path": "/past-papers/2023/Essay-2023.pdf",
+      "size": 90548,
+      "sha256": "76d284c946b12c127e413cd0b4de136d4e5bc510fdb29130becbd649d4561fa0"
+    },
+    {
+      "path": "/past-papers/2023/General-Science-Ability-2023.pdf",
+      "size": 120913,
+      "sha256": "a62bafc66651478aa16dbb21be09613aee55a8d5683d9d57412c61bd557c0a88"
+    },
+    {
+      "path": "/past-papers/2023/governance-public-policies-2023.pdf",
+      "size": 93842,
+      "sha256": "599b2ea678b024204edcd087d071315b823c76da428592e6f57c489d8f9679b7"
+    },
+    {
+      "path": "/past-papers/2023/history-pakistan-india-2023.pdf",
+      "size": 90437,
+      "sha256": "f7acb91d4c4cb689e2a3628afd61be3f211a17962e2176c499c39f91a895493e"
+    },
+    {
+      "path": "/past-papers/2023/history-usa-2023.pdf",
+      "size": 93623,
+      "sha256": "a88ae8bd63c2fd96d93e11560ec78088b75a270dad246dceed747cb69856c5cf"
+    },
+    {
+      "path": "/past-papers/2023/International-Relations-2023.pdf",
+      "size": 94607,
+      "sha256": "5839c539d2190e5922fb176d43b1d29464f51a54cc699a2e35fe5abb02368543"
+    },
+    {
+      "path": "/past-papers/2023/islamic-history-culture-2023.pdf",
+      "size": 119711,
+      "sha256": "2e0f80c8e7d9a52bf5ee812589b476bc81654d406fc197f18601bdbacecf1795"
+    },
+    {
+      "path": "/past-papers/2023/Islamic-Studies-2023.pdf",
+      "size": 124487,
+      "sha256": "473d640894f9f74c88fb144b8e93c62805449a92f7de7a674ab96f08e8e21209"
+    },
+    {
+      "path": "/past-papers/2023/journalism-mass-communication-2023.pdf",
+      "size": 91872,
+      "sha256": "1691ed09a7d097b2d9415f488ecc1af9fb3c3b1b312608fef2ce4df03289065a"
+    },
+    {
+      "path": "/past-papers/2023/Pakistan-Affairs-2023.pdf",
+      "size": 89594,
+      "sha256": "bfd2224cb3bf11b3d7d887d644fcc0176e4b6cb09c5f03fe1e14505d5d94d45b"
+    },
+    {
+      "path": "/past-papers/2023/pashto-2023.pdf",
+      "size": 156374,
+      "sha256": "1bd00429d63b91db1b5b094eaded2dfa94d88848f442049fdce5465c59c78f00"
+    },
+    {
+      "path": "/past-papers/2023/physics-2023.pdf",
+      "size": 251427,
+      "sha256": "b497c2f5cbaf12fb56548da6a4305b2ad3b2a03a08c4709b641b5450703abe2a"
+    },
+    {
+      "path": "/past-papers/2023/Political-Science-2023.pdf",
+      "size": 94828,
+      "sha256": "4b6b1be2fa3f5042658f0f0224448e98a3db79ce6546bc7b5c3e416049041750"
+    },
+    {
+      "path": "/past-papers/2023/psychology-2023.pdf",
+      "size": 89107,
+      "sha256": "fab7d46709e43a81fe53480111b074c6026f956e13eb8b2b4fca98db18c689e8"
+    },
+    {
+      "path": "/past-papers/2023/public-administration-2023.pdf",
+      "size": 89999,
+      "sha256": "bfc8a837f35f5f5e47c3da253d4042da16788cf28f2ce8e1bdcfa6c122f62ddf"
+    },
+    {
+      "path": "/past-papers/2023/punjabi-2023.pdf",
+      "size": 142893,
+      "sha256": "edf1299dec0a2438f1f990077950cc6f23a1c9d4f00bc8dd0927c4991f1d5b68"
+    },
+    {
+      "path": "/past-papers/2023/pure-mathematics-2023.pdf",
+      "size": 131665,
+      "sha256": "3fa10df6e3c58a4fbbbd8f5dfec453f282d53581596a85360531ba5d8c894ea8"
+    },
+    {
+      "path": "/past-papers/2023/sociology-2023.pdf",
+      "size": 89543,
+      "sha256": "c37fbb57b19a410c315514a8d856a187a665c3a1cbf5dfe6f4824be6ec949b4f"
+    },
+    {
+      "path": "/past-papers/2023/town-planning-urban-management-2023.pdf",
+      "size": 92547,
+      "sha256": "b9f54c4223432c4633915b75234952c757e5ab08a4754f5388de73aa9c62291a"
+    },
+    {
+      "path": "/past-papers/2023/urdu-literature-2023.pdf",
+      "size": 161809,
+      "sha256": "80e6d63b6ec4cc413a653d11d66d7b3ac2e0bf632555e9f9c1990297fbd782d8"
+    },
+    {
+      "path": "/past-papers/2024/agriculture-and-forestry-2024.pdf",
+      "size": 117945,
+      "sha256": "dc7cb3fb13659c459f2f41295f00af87edde2a4dcb50d83416db86a2ef35338e"
+    },
+    {
+      "path": "/past-papers/2024/arabic-2024.pdf",
+      "size": 177134,
+      "sha256": "d7a8addfb7c135d2d8af3660007d1fa615489f7d51548a6e72d86954baef707d"
+    },
+    {
+      "path": "/past-papers/2024/balochi-2024.pdf",
+      "size": 177525,
+      "sha256": "49e6190384d6aeb5df34a51993a9ffc558b1194a4c47b591c7cf87dd2a409efb"
+    },
+    {
+      "path": "/past-papers/2024/chemistry-2024.pdf",
+      "size": 500753,
+      "sha256": "451dd8c828946b9ca71f604b7d29a26f891c1f5d1271c5e84322f0eb869cbe60"
+    },
+    {
+      "path": "/past-papers/2024/computer-science-2024.pdf",
+      "size": 262593,
+      "sha256": "764431a0ce9101de5c7f22854b2234fa196451d2cd0658c8612bfbe59e3872f1"
+    },
+    {
+      "path": "/past-papers/2024/constitutional-law-2024.pdf",
+      "size": 151893,
+      "sha256": "4320dec39a3f32352815ad793f2745e44f1e21f93a9bcdc3952f91ae57068784"
+    },
+    {
+      "path": "/past-papers/2024/criminology-2024.pdf",
+      "size": 136888,
+      "sha256": "b56bff814fa02ca2cf9e7bfee0c404209eda91dfb40c622d147faf24d21a9da1"
+    },
+    {
+      "path": "/past-papers/2024/current-affairs-2024.pdf",
+      "size": 140809,
+      "sha256": "5a38a15e81a0db69a66feaed9a17a2ab7836dc8f242aa9c03825ed591aaea523"
+    },
+    {
+      "path": "/past-papers/2024/economics-2024.pdf",
+      "size": 179048,
+      "sha256": "5976b65caf8b40728b7e5f9619329abbd7cc5366a4826eb48c6e924fb98ba53f"
+    },
+    {
+      "path": "/past-papers/2024/english-essay-2024.pdf",
+      "size": 103051,
+      "sha256": "45d08130e430b997adc74b09f8327ebb4fa626c4337ae43743aa5b0ca938bb2f"
+    },
+    {
+      "path": "/past-papers/2024/english-literature-2024.pdf",
+      "size": 128695,
+      "sha256": "6fca2b752d5c28d46f2e1bead8d45e303c2d196d45ab85ab9c99971d36f8ef5b"
+    },
+    {
+      "path": "/past-papers/2024/english-precis-2024.pdf",
+      "size": 163911,
+      "sha256": "b23175dc7a4c9a886acdfa7835e59908642ad940fa2ea5399db539ac69393a79"
+    },
+    {
+      "path": "/past-papers/2024/environmental-sciences-2024.pdf",
+      "size": 126105,
+      "sha256": "722f0b4344eed8052fce10b700b15cc9104907630e975edb5cdf769742933c54"
+    },
+    {
+      "path": "/past-papers/2024/european-history-2024.pdf",
+      "size": 136590,
+      "sha256": "47faffeca91ab70a9a26709c973a6c8d0eef099c61dd5f3eeb82c4f979360945"
+    },
+    {
+      "path": "/past-papers/2024/gender-studies-2024.pdf",
+      "size": 165542,
+      "sha256": "b4442c607c907412973d393f11a10df00d450a17b642ff3c29b45a54993d9f49"
+    },
+    {
+      "path": "/past-papers/2024/general-science-and-ability-2024.pdf",
+      "size": 137578,
+      "sha256": "05999d4d6c017375e1ebf9c8036fe334de010370a4012de52673dea34f38e587"
+    },
+    {
+      "path": "/past-papers/2024/geography-2024.pdf",
+      "size": 143106,
+      "sha256": "26fd1f40d53af17039780e09b76a33f7f7d414edcbea8f95a8d7bbe7978000bf"
+    },
+    {
+      "path": "/past-papers/2024/geology-2024.pdf",
+      "size": 89027,
+      "sha256": "0e0dac0c0f6d63bc85a358e7ebabc1266a2f730f62486226d6eda01d859ca50c"
+    },
+    {
+      "path": "/past-papers/2024/governance-and-public-policies-2024.pdf",
+      "size": 138410,
+      "sha256": "2b8eda3a2d85035ada818cf212e9cc77f2a5f602b32a531e7594b4ba61183ad0"
+    },
+    {
+      "path": "/past-papers/2024/history-of-pakistan-and-india-2024.pdf",
+      "size": 133681,
+      "sha256": "bc5dddf8457878f2d77c5ea913abefdf45dbcd00409109abea0f6823ed545780"
+    },
+    {
+      "path": "/past-papers/2024/history-of-usa-2024.pdf",
+      "size": 121448,
+      "sha256": "8f824a375ada37922c352aaf30850ea8e60ab041fdcb9e4bbe6b7fba755e5bf7"
+    },
+    {
+      "path": "/past-papers/2024/international-law-2024.pdf",
+      "size": 102062,
+      "sha256": "8050c2813d6afd078529d32a902a97ea7cfdd419296fd28907a9e8becb147d83"
+    },
+    {
+      "path": "/past-papers/2024/international-relations-2024.pdf",
+      "size": 394305,
+      "sha256": "b62a838afc42a59c80aa6824f8edb1f4c9bba2a5d0e61291371dd2a3054a835d"
+    },
+    {
+      "path": "/past-papers/2024/islamic-history-and-culture-2024.pdf",
+      "size": 265381,
+      "sha256": "f801e1635859cc5f9b36b548b93d5141e6a74b5a79b1177b8bdec985e9d9ca9b"
+    },
+    {
+      "path": "/past-papers/2024/islamic-studies-2024.pdf",
+      "size": 257636,
+      "sha256": "4ba7bc1e867c32bd949175b36e605887d3472a047e1bc21f856490c7165df910"
+    },
+    {
+      "path": "/past-papers/2024/journalism-and-mass-communication-2024.pdf",
+      "size": 127768,
+      "sha256": "1369c6ddd7c4b53466663b04ceae124aba528e801ad6b4aa372f669433d17fb3"
+    },
+    {
+      "path": "/past-papers/2024/law-2024.pdf",
+      "size": 114648,
+      "sha256": "fd50c460592045d0da0809aba646eceb521a0f0b6fee335f8737f321f885a7c8"
+    },
+    {
+      "path": "/past-papers/2024/muslim-law-and-jurisprudence-2024.pdf",
+      "size": 179296,
+      "sha256": "a7ae0e1840a1411c055a3c5d74f267d64477227e58e375e8745cb9de2eedcf88"
+    },
+    {
+      "path": "/past-papers/2024/pakistan-affairs-2024.pdf",
+      "size": 152082,
+      "sha256": "274c35030555b8dd63e1300090d30432cb7ebfd7d2faf4d5abb6bf227366d999"
+    },
+    {
+      "path": "/past-papers/2024/pashto-2024.pdf",
+      "size": 285001,
+      "sha256": "e479a5b880e04dfad869bb4ac9b57e3f655de0ad8cdae5881be141d1eac38609"
+    },
+    {
+      "path": "/past-papers/2024/persian-2024.pdf",
+      "size": 249465,
+      "sha256": "0e748d4b2665c7422e3cf590ab5653672820f0c9a10894973f0c201d4c40e79a"
+    },
+    {
+      "path": "/past-papers/2024/philosophy-2024.pdf",
+      "size": 171306,
+      "sha256": "368d40b7172538e3fbb72b5263bc16ebdce75820d44fd72d7e15b78d5a16e419"
+    },
+    {
+      "path": "/past-papers/2024/physics-2024.pdf",
+      "size": 457877,
+      "sha256": "05ac1a909bef005509a09a777941618eb96cb5569b6c9da4e0da47d93a279b4b"
+    },
+    {
+      "path": "/past-papers/2024/political-science-2024.pdf",
+      "size": 254711,
+      "sha256": "9598fd144721dc315da7f5ca9337cc9c1026587cbbea9ed77d261d95c4901587"
+    },
+    {
+      "path": "/past-papers/2024/psychology-2024.pdf",
+      "size": 130304,
+      "sha256": "7b2b7612dd0c07d96d97f9b322847900a2acb2d1cf32a0a6ebeb9bc5d01eac8f"
+    },
+    {
+      "path": "/past-papers/2024/punjabi-2024.pdf",
+      "size": 1545695,
+      "sha256": "30da05d2cb9d2499e17fe96e3b0cc300536a102e76e0d30c0ddf16a8157ae8dd"
+    },
+    {
+      "path": "/past-papers/2024/pure-mathematics-2024.pdf",
+      "size": 140520,
+      "sha256": "3d5f0104b9581b177d89fed2a54754097e6280e1084908cd7f71a61bfa90d1dd"
+    },
+    {
+      "path": "/past-papers/2024/sociology-2024.pdf",
+      "size": 89053,
+      "sha256": "dc77e68efaf0674e6980ca7575cfc5abd2747c05c05ab8c3d1b3ae7800e126e1"
+    },
+    {
+      "path": "/past-papers/2024/statistics-2024.pdf",
+      "size": 532774,
+      "sha256": "d61f5fe600c9be8f6573d42b578fb73925c412574d35b74515e97be4c2345d8a"
+    },
+    {
+      "path": "/past-papers/2024/town-planning-and-urban-management-2024.pdf",
+      "size": 133732,
+      "sha256": "0b903d0585e7277c4f25723b52b06a2b716bdd0dcc7b62f896bc870378b3579e"
+    },
+    {
+      "path": "/past-papers/2025/accountancy-and-auditing-2025.pdf",
+      "size": 425717,
+      "sha256": "42d8976983882b65f31da1f4d6a53c2da0b6e664e8c956c29d6dce3c50a68183"
+    },
+    {
+      "path": "/past-papers/2025/agriculture-and-forestry-2025.pdf",
+      "size": 212215,
+      "sha256": "9ef50458af1b72133ba1e6b07688f473520a4d7c69145d41dbf8e2a5f47c5e52"
+    },
+    {
+      "path": "/past-papers/2025/anthropology-2025.pdf",
+      "size": 247069,
+      "sha256": "0a10dbf9bb3f89ef3a74a06f1acd7b75ef87cb007b9c1536e8ad589e18340018"
+    },
+    {
+      "path": "/past-papers/2025/applied-mathematics-2025.pdf",
+      "size": 221230,
+      "sha256": "d992d7805db8d521c3ae451b91780ca67fee8cb9563d811582da01acd741a7e4"
+    },
+    {
+      "path": "/past-papers/2025/arabic-2025.pdf",
+      "size": 234354,
+      "sha256": "dafab937e4436a59b5d01503f5f61631d0fc815d87310a7b1f61d3dfe0eeb7d0"
+    },
+    {
+      "path": "/past-papers/2025/balochi-2025.pdf",
+      "size": 284242,
+      "sha256": "98554c8a651a67651b5cd7ecd72a7e98fb031318db1796837d1bfd55b6fe0f97"
+    },
+    {
+      "path": "/past-papers/2025/botany-2025.pdf",
+      "size": 197254,
+      "sha256": "81e65538f5749a80666bdd7932e02033ecc4c9314614ed7e4d17f7135ed598d7"
+    },
+    {
+      "path": "/past-papers/2025/british-history-2025.pdf",
+      "size": 202871,
+      "sha256": "bdfdad7e53887824f69c001bf0cea416148e4de68b873319791e00e0244c6866"
+    },
+    {
+      "path": "/past-papers/2025/business-administration-2025.pdf",
+      "size": 249556,
+      "sha256": "02e8f19a687dadf2259f6e57520888faebb96bb51247f2d17f076e2ce5b6778d"
+    },
+    {
+      "path": "/past-papers/2025/chemistry-2025.pdf",
+      "size": 459085,
+      "sha256": "1a7f490b82348559119b14e8508b42a5a40f6b48f33a2a2bd5314bc1a021df8b"
+    },
+    {
+      "path": "/past-papers/2025/comparative-study-of-major-religions-2025.pdf",
+      "size": 315055,
+      "sha256": "9b739786181578fa8bbfcbd694680272cd33c9841482e51fa9cd24534e22ab90"
+    },
+    {
+      "path": "/past-papers/2025/computer-science-2025.pdf",
+      "size": 487600,
+      "sha256": "f01a292833f6ac86ecfb90dc14be23c7b1dc24dc360d44d45b2852a8df4d7ad9"
+    },
+    {
+      "path": "/past-papers/2025/constitutional-law-2025.pdf",
+      "size": 199877,
+      "sha256": "37f42030c57c37395f6d2405ed2bc1c2e334b320b4264f61e68abde261113b36"
+    },
+    {
+      "path": "/past-papers/2025/criminology-2025.pdf",
+      "size": 243121,
+      "sha256": "c58d6f0b12c4f3a255ba7cae6f5e7d2c966eef08262c40805380d098f8d9d43d"
+    },
+    {
+      "path": "/past-papers/2025/current-affairs-2025.pdf",
+      "size": 186517,
+      "sha256": "d265f5250b551cdaa66d5dabf6b43025e725e9673c5653860c2225c7b28b59b2"
+    },
+    {
+      "path": "/past-papers/2025/economics-2025.pdf",
+      "size": 375812,
+      "sha256": "c2385c412458922ccc4f5b7ab5b5ddbb96489e9c38fb4090c5a2a5a3acd5a3b1"
+    },
+    {
+      "path": "/past-papers/2025/english-essay-2025.pdf",
+      "size": 169891,
+      "sha256": "f1ffbefda4b0a09028e324d9e67ccd06a76e79e26a94c5cb668c7cb324af8dfa"
+    },
+    {
+      "path": "/past-papers/2025/english-literature-2025.pdf",
+      "size": 205579,
+      "sha256": "35f699f00b6349c5617a497d572fd9f524883f251d828a105fe114428059ed52"
+    },
+    {
+      "path": "/past-papers/2025/english-precis-2025.pdf",
+      "size": 264402,
+      "sha256": "3181eb91c29bbe3c72df102393caa936a404ade94fef5162c5b52d18c24d07fa"
+    },
+    {
+      "path": "/past-papers/2025/environmental-sciences-2025.pdf",
+      "size": 178774,
+      "sha256": "ab8bd83c15eb57757606f18743ba7a8eef4e640e2258d32648e66968cb2f797c"
+    },
+    {
+      "path": "/past-papers/2025/european-history-2025.pdf",
+      "size": 213626,
+      "sha256": "f1fd8a4cefc33e2534b108b30bc1597091beaa918593179ffe98f0862ac96037"
+    },
+    {
+      "path": "/past-papers/2025/gender-studies-2025.pdf",
+      "size": 219374,
+      "sha256": "d5c41ebffcf9010a93c21c3549771c7ad4a8bcb1f6fd4e23ed52678bc16398d9"
+    },
+    {
+      "path": "/past-papers/2025/general-science-ability-2025.pdf",
+      "size": 240536,
+      "sha256": "99417eef520fd6b87a2e898ca4d08d43fbb4adb6ac42f1cf6922e98671dbcfe3"
+    },
+    {
+      "path": "/past-papers/2025/geography-2025.pdf",
+      "size": 216080,
+      "sha256": "5cce54f7e640a07cf1b184b4626019b098c5623de469775e081e668f9c9f5306"
+    },
+    {
+      "path": "/past-papers/2025/geology-2025.pdf",
+      "size": 196392,
+      "sha256": "48696bc60684686c8bbbcd2739af46eee329507b9f63bcaf1ffa270844748aef"
+    },
+    {
+      "path": "/past-papers/2025/governance-and-public-policies-2025.pdf",
+      "size": 222785,
+      "sha256": "2ce80cc88ad51fdc016da0f8db8c812f778ad1ca49b2fb7a7dd76051386fb183"
+    },
+    {
+      "path": "/past-papers/2025/history-of-pakistan-and-india-2025.pdf",
+      "size": 280793,
+      "sha256": "50ce3a7b75fd69d395a39674a63126d64b1266b224226bf983b16fd2e2cc5a29"
+    },
+    {
+      "path": "/past-papers/2025/history-of-usa-2025.pdf",
+      "size": 192974,
+      "sha256": "fc5ff262d57ad8d6cb43946d5bb7372568785329e9309c76ad1f0f8421f9f185"
+    },
+    {
+      "path": "/past-papers/2025/international-law-2025.pdf",
+      "size": 240404,
+      "sha256": "c80a7e185bfeb0c88ddbe26a1ace921c8aa70b3f93f211dd5c57b8e8a471bee8"
+    },
+    {
+      "path": "/past-papers/2025/international-relations-2025.pdf",
+      "size": 371399,
+      "sha256": "e7fb15ae2650db3e3513e58717edffbd23d3356a88156207ef76553fa4e8cf43"
+    },
+    {
+      "path": "/past-papers/2025/islamic-history-and-culture-2025.pdf",
+      "size": 227961,
+      "sha256": "e8d59f9c18e568c994efa97e95440df382921f1876f0733b75b045bcf8261dc7"
+    },
+    {
+      "path": "/past-papers/2025/islamic-studies-2025.pdf",
+      "size": 317693,
+      "sha256": "db4c7eadd39efd56d599e32466c80edce4a2a19cafcf0ea478f59d3e248b6888"
+    },
+    {
+      "path": "/past-papers/2025/journalism-and-mass-communication-2025.pdf",
+      "size": 259726,
+      "sha256": "576e5c70f2c78ca51339cba2f70b73eeadeba339c61b32a035571adef5f674be"
+    },
+    {
+      "path": "/past-papers/2025/law-2025.pdf",
+      "size": 197021,
+      "sha256": "9fd274369b0662c26cc1c28da56a695f3b30b792b343129509fe14d9aab655d8"
+    },
+    {
+      "path": "/past-papers/2025/mercantile-law-2025.pdf",
+      "size": 187930,
+      "sha256": "0b8b7fdad9c2d96e6191b3f62083305df9a1eacfc9c08578e1489d9659fbf8e6"
+    },
+    {
+      "path": "/past-papers/2025/muslim-law-and-jurisprudence-2025.pdf",
+      "size": 311130,
+      "sha256": "047b7eb90b204e6004147d8c4639fdcaa573b9f44953213ae29a3cc03454c855"
+    },
+    {
+      "path": "/past-papers/2025/pakistan-affairs-2025.pdf",
+      "size": 220601,
+      "sha256": "b374b98c54f50f59a35cffe4f7968e377ac8e1c0fc85480359087af913162700"
+    },
+    {
+      "path": "/past-papers/2025/pashto-2025.pdf",
+      "size": 324458,
+      "sha256": "58dccad6c98b3a07e5430bb9aaba9f4afb4178d999e31e367dc88e6d1fb1888d"
+    },
+    {
+      "path": "/past-papers/2025/persian-2025.pdf",
+      "size": 312555,
+      "sha256": "6e8789ec3725095517dced031ba7e62c218bcc532ca357ba0203bf0039997650"
+    },
+    {
+      "path": "/past-papers/2025/philosophy-2025.pdf",
+      "size": 248879,
+      "sha256": "adb627bc335349a7ce34449d334a5e2c1c8a51db8ba39e9f3debc19e335427d3"
+    },
+    {
+      "path": "/past-papers/2025/physics-2025.pdf",
+      "size": 368753,
+      "sha256": "9761522a4dd07019368c325cec9d2fa1be5734c94e6de3c1e7c5542a4a456c98"
+    },
+    {
+      "path": "/past-papers/2025/political-science-2025.pdf",
+      "size": 342392,
+      "sha256": "6456b7c41d8013733db72604e05a1e07bb2432fc0617aeb10a7b3e958bc940eb"
+    },
+    {
+      "path": "/past-papers/2025/psychology-2025.pdf",
+      "size": 198636,
+      "sha256": "9d957b34725c6d97e6baa83d03ae060fa449eb5a6867b31615f19b096e875a35"
+    },
+    {
+      "path": "/past-papers/2025/public-administration-2025.pdf",
+      "size": 241373,
+      "sha256": "1f67354dbd8d1f6ea43bf995ad0408f840a45a0a90721259f6942f94f4f1ebad"
+    },
+    {
+      "path": "/past-papers/2025/punjabi-2025.pdf",
+      "size": 272209,
+      "sha256": "c52e58ef10a7d6f750cc1a3f3f3051c6da8d5a11d10ccf441fd7f6b11176e1f4"
+    },
+    {
+      "path": "/past-papers/2025/pure-mathematics-2025.pdf",
+      "size": 198689,
+      "sha256": "62d40833feee1b3bb56f24e973de86a42c5b348e3b8d86be1a81ecaeccd418fa"
+    },
+    {
+      "path": "/past-papers/2025/sindhi-2025.pdf",
+      "size": 332387,
+      "sha256": "1c4e4694dfa9d54488ba2bab9ced7c69bd283d2cae2edd61da518851239a098a"
+    },
+    {
+      "path": "/past-papers/2025/sociology-2025.pdf",
+      "size": 210385,
+      "sha256": "ccab0f6518c6823b268068470470749cd0f72eee4f431dcec89977aada90d7b7"
+    },
+    {
+      "path": "/past-papers/2025/statistics-2025.pdf",
+      "size": 289159,
+      "sha256": "25b90800a0de48f1cdcd4696d02badaceb9be268ee0b75f93e1c7faa9c82fa18"
+    },
+    {
+      "path": "/past-papers/2025/town-planning-and-urban-management-2025.pdf",
+      "size": 219395,
+      "sha256": "972c6e5a4e18df2618d86f5bbf206961e70e02383a00a77a94c3ef8932921d38"
+    },
+    {
+      "path": "/past-papers/2025/urdu-literature-2025.pdf",
+      "size": 301223,
+      "sha256": "496900973664589a276b715ffc60f9209ae07d1be3103115d08dff9e9d71ea3b"
+    },
+    {
+      "path": "/past-papers/2025/zoology-2025.pdf",
+      "size": 219413,
+      "sha256": "f06b80cce66d98586034dbe3468e922faa36e362976e077b58391f31374a3d37"
+    },
+    {
+      "path": "/past-papers/2026/accountancy-auditing-2026.pdf",
+      "size": 1099154,
+      "sha256": "9fcd99bf52ee010b8abe67e5a655979c593a25c3dcc13ea2ef57af49d927a514"
+    },
+    {
+      "path": "/past-papers/2026/agriculture-forestry-2026.pdf",
+      "size": 674731,
+      "sha256": "ac7ada1cfc1f238e830bb8cf532290e6f4e315745612cf3e4df76cfa9ef23b5c"
+    },
+    {
+      "path": "/past-papers/2026/anthropology-2026.pdf",
+      "size": 696725,
+      "sha256": "b6805a6d8ce3de920f90ecfcf543608894367aac8bbbece1585973f59db4e425"
+    },
+    {
+      "path": "/past-papers/2026/applied-mathematics-2026.pdf",
+      "size": 571328,
+      "sha256": "0534aba3114de2895b83fff5243f1e2661e5c15c4fbc27deb5a1b93628afe562"
+    },
+    {
+      "path": "/past-papers/2026/balochi-2026.pdf",
+      "size": 614143,
+      "sha256": "51abcda5b30d83877d807892f9ab1f5e6bd04a507c08d7362904010d60b493db"
+    },
+    {
+      "path": "/past-papers/2026/botany-2026.pdf",
+      "size": 594305,
+      "sha256": "7edaec08dd025b9dd9ef7de23d1257c50659715d4dc7c8aad7d0650d352c1838"
+    },
+    {
+      "path": "/past-papers/2026/british-history-2026.pdf",
+      "size": 693080,
+      "sha256": "f7559b48d2088c14b50e2c2cf6c9d9db11bc7f22aa9d347635b67ed979ce563c"
+    },
+    {
+      "path": "/past-papers/2026/business-administration-2026.pdf",
+      "size": 599083,
+      "sha256": "d2c8d8a5cfc710e538758ff4497e8b33bd1bfe55150cb718398a8577aade9a12"
+    },
+    {
+      "path": "/past-papers/2026/chemistry-2026.pdf",
+      "size": 839393,
+      "sha256": "5e5bd44db7c26e1524cc0deedcf2175ff9f69b1de787c0873dddf4d265aa07ae"
+    },
+    {
+      "path": "/past-papers/2026/computer-science-2026.pdf",
+      "size": 721481,
+      "sha256": "f9db404db4a8b07386dc9a71f1ee28f819beaff3c704dd4b29ea1193102a95c6"
+    },
+    {
+      "path": "/past-papers/2026/constitutional-law-2026.pdf",
+      "size": 740358,
+      "sha256": "4bc737f90b8333d0ecdc811c4bdb04128d002f764233e7ae75b9d8b4604eb0c8"
+    },
+    {
+      "path": "/past-papers/2026/criminology-2026.pdf",
+      "size": 674579,
+      "sha256": "fbfec2101323c045358d1cf3108270d4291e524fc481b98c23a37c62bcb8e6fb"
+    },
+    {
+      "path": "/past-papers/2026/current-affairs-2026.pdf",
+      "size": 661554,
+      "sha256": "f458988c80b1f40f2ec93741a7d3ebf070991da08af0bea190859ac0a74f7607"
+    },
+    {
+      "path": "/past-papers/2026/economics-2026.pdf",
+      "size": 680943,
+      "sha256": "deb12fc6541f809d00c4df26b9d49ed97f8f673859629701539433b38d6cc7f1"
+    },
+    {
+      "path": "/past-papers/2026/english-essay-2026.pdf",
+      "size": 363731,
+      "sha256": "c6d301feee5d3c7ffddf1f41c9ba404204f05d65636963555c419d33609b4d98"
+    },
+    {
+      "path": "/past-papers/2026/english-literature-2026.pdf",
+      "size": 637894,
+      "sha256": "9fecb6083361e2992514b24e563a1b9407cc69de25846eb1f88a0cb2aa87074e"
+    },
+    {
+      "path": "/past-papers/2026/english-precis-2026.pdf",
+      "size": 919713,
+      "sha256": "86395ef3adc6d6c326b7a18e2f89146a9feac783bc6b249ab23b2e86a52c08de"
+    },
+    {
+      "path": "/past-papers/2026/environmental-sciences-2026.pdf",
+      "size": 706020,
+      "sha256": "1c81b1311bac3b2cb7aae5d93b5888e9ed93aae5bca2efca9c5e36d381fd6b8a"
+    },
+    {
+      "path": "/past-papers/2026/european-history-2026.pdf",
+      "size": 769784,
+      "sha256": "6421bf3e7f4a83192ebcc543f37119547fbcb3b9a05770df9244483e2c6c54b5"
+    },
+    {
+      "path": "/past-papers/2026/gender-studies-2026.pdf",
+      "size": 694678,
+      "sha256": "cfce72ba9a1f01fa94d378bba23b3ea53504a404fd7a06de0ca05ab7157b64c9"
+    },
+    {
+      "path": "/past-papers/2026/general-science-ability-2026.pdf",
+      "size": 805061,
+      "sha256": "fd164390d37eb9b17030fa98f735b5856f1a77816ca7de9de91a7828e8f83c70"
+    },
+    {
+      "path": "/past-papers/2026/geography-2026.pdf",
+      "size": 650633,
+      "sha256": "2f344f3f25201678a01a1a2c91051c18b119e66ca549300fb275900792a11a37"
+    },
+    {
+      "path": "/past-papers/2026/geology-2026.pdf",
+      "size": 741175,
+      "sha256": "93c54f71d54a4d37fa2eb45cfb61094da0a9915549556bf9e59ce221d0c9775d"
+    },
+    {
+      "path": "/past-papers/2026/governance-public-policies-2026.pdf",
+      "size": 795139,
+      "sha256": "1cad242c16c938918d0d26c7f60568e3e44064f672b2c86f1d4f6afdb5d08d9a"
+    },
+    {
+      "path": "/past-papers/2026/history-pakistan-india-2026.pdf",
+      "size": 769079,
+      "sha256": "2c3499bc5e7b164c00cd3cda18130e0a7a0af7d4e8bef01a201a149487f96aab"
+    },
+    {
+      "path": "/past-papers/2026/history-usa-2026.pdf",
+      "size": 699827,
+      "sha256": "b8f0ec1f2f6835fb5bf6c6bff417b3921e401c725a0fc0620ebeea942b4f5db7"
+    },
+    {
+      "path": "/past-papers/2026/international-law-2026.pdf",
+      "size": 969820,
+      "sha256": "aefc89fb9cb6ea37f6d56405e9e96fbdbdd2d77f1214a73ea5238c0b11f4cb35"
+    },
+    {
+      "path": "/past-papers/2026/international-relations-2026.pdf",
+      "size": 559625,
+      "sha256": "6128e3376ec6d13a1ff0c1b1ca6a6b40c2139636560c68067f9e837e65a60fae"
+    },
+    {
+      "path": "/past-papers/2026/islamic-history-culture-2026.pdf",
+      "size": 681594,
+      "sha256": "3736062522ee3cb0b40d9310628f64ac977c419da0169546e3cbf02a1edfd6cd"
+    },
+    {
+      "path": "/past-papers/2026/islamic-studies-2026.pdf",
+      "size": 665082,
+      "sha256": "6f692fcfbf949364a717ca1e42f1bce744750f62d1fd8179f9d38c79ab10b2f3"
+    },
+    {
+      "path": "/past-papers/2026/journalism-mass-communication-2026.pdf",
+      "size": 638985,
+      "sha256": "11d287cc9920c5c391ef140bb76113b97a43724726fdf47c29ac1e4aa57be1c7"
+    },
+    {
+      "path": "/past-papers/2026/muslim-law-jurisprudence-2026.pdf",
+      "size": 637726,
+      "sha256": "7ad2888cf001acd7dd8c8d1245e5e3017a2a56f3bdd9a9f97ae5f1764f2144f5"
+    },
+    {
+      "path": "/past-papers/2026/pakistan-affairs-2026.pdf",
+      "size": 505005,
+      "sha256": "ca4ae5f654247c7270361d56f2b5ed84beab4ea271aece8f81f039ed06b419c3"
+    },
+    {
+      "path": "/past-papers/2026/pashto-2026.pdf",
+      "size": 702082,
+      "sha256": "a5abfbd12736283cadeca217ad4ec2de5d5a4f1f010871a7cc3d347eb3b5cf26"
+    },
+    {
+      "path": "/past-papers/2026/philosophy-2026.pdf",
+      "size": 628605,
+      "sha256": "317ffe514135ae191a18976d6781343f01517691d9fe3f906f062bef581852a8"
+    },
+    {
+      "path": "/past-papers/2026/physics-2026.pdf",
+      "size": 710264,
+      "sha256": "e7e637f8568b1ea5cb8404f06c73b6f79e27bc52f9340877bc0bc5dc77283089"
+    },
+    {
+      "path": "/past-papers/2026/political-science-2026.pdf",
+      "size": 686592,
+      "sha256": "2af9e3c0ece158154fd3cdbb4b0ea06ea888d797cc43edba02faf26782d90582"
+    },
+    {
+      "path": "/past-papers/2026/psychology-2026.pdf",
+      "size": 718129,
+      "sha256": "a616b4e803e72e35b7cd778ebe0b9380ad0df5a236b6bcd7a319846b6f49d401"
+    },
+    {
+      "path": "/past-papers/2026/public-administration-2026.pdf",
+      "size": 754595,
+      "sha256": "c166ffb9f75e6c679dc33b15bfbb4b36e10aa48fc2eafbef5549127088bad940"
+    },
+    {
+      "path": "/past-papers/2026/punjabi-2026.pdf",
+      "size": 596985,
+      "sha256": "0ff3662bc16b0fe201f68b5b530ef0f4874961a279e185fb014ab2d02c5fae69"
+    },
+    {
+      "path": "/past-papers/2026/pure-mathematics-2026.pdf",
+      "size": 607002,
+      "sha256": "e0caf58e56e8c3ebe53070286f775dd8cc1a67c28b40fce553c7553356a394d6"
+    },
+    {
+      "path": "/past-papers/2026/sindhi-2026.pdf",
+      "size": 667677,
+      "sha256": "f039a2c6143f49604dc55d26ceba11d1fe11e700a09494ce69a3e661a233b47c"
+    },
+    {
+      "path": "/past-papers/2026/sociology-2026.pdf",
+      "size": 617408,
+      "sha256": "f9ab07aed4e7cfd1b9a544fac8c588e34a102bee1192796a61e4c950ca574470"
+    },
+    {
+      "path": "/past-papers/2026/statistics-2026.pdf",
+      "size": 986009,
+      "sha256": "168f10a260e2809f93d03a1569af73051f81d6008986116c0e3d0f79c6123a3d"
+    },
+    {
+      "path": "/past-papers/2026/town-planning-urban-management-2026.pdf",
+      "size": 702279,
+      "sha256": "43b7cf36081b3c5a79d14647e639aa0bc2cf8d3d602ddbebd1c55ecaa78b870b"
+    },
+    {
+      "path": "/past-papers/2026/urdu-literature-2026.pdf",
+      "size": 776951,
+      "sha256": "8a5eb62e9d8ac12cea36059ed52e2cf0b553d12cb83f7d63162a0b1f9a6444b6"
+    },
+    {
+      "path": "/past-papers/2026/zoology-2026.pdf",
+      "size": 684779,
+      "sha256": "20ef3906d37361f8eed6b946d86bdee1b86f1cd1f2aa1df49b62a529b543ea50"
+    },
+    {
+      "path": "/past-papers/mpt/CSS-MPT-2022-Watermarked.pdf",
+      "size": 1511025,
+      "sha256": "a6f42bed0a72b2db18fc90dc3717f6d43578e13b31bf9fc4d4ff221ac0658ea6"
+    },
+    {
+      "path": "/past-papers/mpt/CSS-MPT-2023-Special-Watermarked.pdf",
+      "size": 1033919,
+      "sha256": "9d4c682d2cf3bb8cc92b7d367cd0a6232943fbc71f478c9c5800b27d7d1a70ce"
+    },
+    {
+      "path": "/past-papers/mpt/CSS-MPT-2024-Watermarked.pdf",
+      "size": 5480923,
+      "sha256": "5315d9c60eee16d53d373b6f3fcf468e07aaca9c620d5a2dfba53174caec1e67"
+    },
+    {
+      "path": "/past-papers/mpt/CSS-MPT-2025-Watermarked.pdf",
+      "size": 35558433,
+      "sha256": "f56536b03b15002b0e142d2447d8bcadc453879bd96b9ef937087d4c60acbfa1"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2019-English-Essay.pdf",
+      "size": 618497,
+      "sha256": "35122328337cac7132ff66189cb43b7c7c09a1836e77f15d1b75f86a3405021b"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2019-English-precis-composition.pdf",
+      "size": 1687611,
+      "sha256": "41596a2b7f0126e0f077fb54d990cad8183b95e4bfb11c8ee3ec19a8cafbb376"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2020-English-Essay.pdf",
+      "size": 385224,
+      "sha256": "4d464646c54ab300c5da5472fd09ca6dc199d86a9639c055a13e201054c19361"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2020-English-precis-composition.pdf",
+      "size": 1148321,
+      "sha256": "ec25c3f34a573f21a69ebc7fb8df2c50e276b4b7ca97bae2eaf205530196873f"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2022-English-Essay.pdf",
+      "size": 2089078,
+      "sha256": "6a4693f4dd945132e5fe8cd4cae721ebd2947c52dc1b2f5ab7813f6b44a7f46d"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2022-English-precis-composition.pdf",
+      "size": 2707453,
+      "sha256": "ae2cd0deb5d4dd36db5a9be9fe051cfc75a282eecdc7201a5bcf79a62d598887"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2023-English-Essay.pdf",
+      "size": 640027,
+      "sha256": "96cbce61f71586f4f58132ea0b70242cebc7cc9630a7442fe432d81bfcfd733b"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-2023-English-precis-composition.pdf",
+      "size": 1970612,
+      "sha256": "36837e205671cc534b784d82cd9da6f770d73d886ae5cb6990675d9307037e4a"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Islamic-Studies-2019.pdf",
+      "size": 1258691,
+      "sha256": "655f9957c14e2d5a39e2b09e2c2f3b8f303a4e29ca3eca9c538f111004542bd1"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Islamic-Studies-2020.pdf",
+      "size": 507745,
+      "sha256": "93ce710e3814d04078f3d8730b2bd7ffc10b8a69efd7c41b3d37d6c6ea1f47fc"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Islamic-Studies-2022.pdf",
+      "size": 2871235,
+      "sha256": "a0a6ee2fc68229fbbf40c01566095754d7b9581d2375039bd4da9f25397b7622"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Islamic-Studies-2023.pdf",
+      "size": 2340918,
+      "sha256": "2b65fcfd13c698b16e5361623e48a3c90bb1cf89125598ef97832ca7f52168e8"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/pms-pakistan-study-paper-2019.pdf",
+      "size": 916833,
+      "sha256": "ee36a65956d0047e581991045556c61ad121f55c9d229b66ef17862a05cc242e"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/pms-pakistan-study-paper-2020.pdf",
+      "size": 594640,
+      "sha256": "24d3bf1b7d525e938a036664e930428c8fa2abd6133ba6a9783b1e2557a9fd64"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/pms-pakistan-study-paper-2022.pdf",
+      "size": 1470584,
+      "sha256": "e3f4b65c7501b963d23ea92bd7b047e8c4815b48ac999acbcf70006ed36f29da"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/pms-pakistan-study-paper-2023.pdf",
+      "size": 1261234,
+      "sha256": "a310faab603ae9661da536b5446286c25d55f08b33b7f995c7e554fedad027ae"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Urdu-2019-paper.pdf",
+      "size": 987659,
+      "sha256": "16d1fa49af126762cc6a029b7c72185432a675a34ce186fc4ff4a1eda8a30053"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Urdu-2020-paper.pdf",
+      "size": 1823434,
+      "sha256": "a8e896de071cc57b639d2e029b0f94e018fed511c3473ffc9e701601f60970d2"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Urdu-2022-paper.pdf",
+      "size": 2257653,
+      "sha256": "c41f15a56ad005fb4a667439c3219852dc0a35ad5cf2524314da50e3396f1345"
+    },
+    {
+      "path": "/past-papers/pms/compulsory/PMS-Urdu-2023-paper.pdf",
+      "size": 1633670,
+      "sha256": "3b427cc704781ffac7cf3fc613d7ec8a9bbe758f5fbec12073d7fc89b2061ed8"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Business-Administration-Paper-2019.pdf",
+      "size": 2338659,
+      "sha256": "ec997511c3d1692404059d8f8930330bf288818346e3bc967d5860ad71474ec2"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Business-Administration-Paper-2020.pdf",
+      "size": 1426016,
+      "sha256": "06516e6dd158566bcc47df5a291592c7becfda008f9575d46299bfab91d4d5fb"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Business-Administration-Paper-2022.pdf",
+      "size": 3029220,
+      "sha256": "59ef7ee510041969914fb6047c49cc9f844817473d58badf48dafb8fda3fa9c0"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Business-Administration-Paper-2023.pdf",
+      "size": 2613147,
+      "sha256": "d1a35b010fa030f4902ea1d6d226fb2c5e55093155db0b5a5fe12a67e33a0cd2"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-commerce-paper-2019.pdf",
+      "size": 3781403,
+      "sha256": "c8975692114b1012fd2372b157a0fa5c38ebec43e03e79c692ba696e12478609"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-commerce-paper-2020.pdf",
+      "size": 1692769,
+      "sha256": "b27d501c9c8743a447bd161555dbf4d82ed46a31a744e589078cb45298138906"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-commerce-paper-2022.pdf",
+      "size": 6939329,
+      "sha256": "25faa53cdf267b107765378573e59047328eed007de214bcd7c6713f36ff1d31"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-commerce-paper-2023.pdf",
+      "size": 3528293,
+      "sha256": "9d62bf8020f9422ecc328713082a1c3a74293660bebc5ec4934fab9c2c3520ce"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Economics-paper-2019.pdf",
+      "size": 1658693,
+      "sha256": "8cd312665b993d9c7cf582c4ed74049ba331feb3626f21f57ee3df4f420b2315"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Economics-paper-2020.pdf",
+      "size": 1312209,
+      "sha256": "2964de5040888354ad1fe19b82c74d2cf30a01c8787447ce2292e2c1c3e234bb"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Economics-paper-2022.pdf",
+      "size": 2558959,
+      "sha256": "1d6d2f1a77522f48ed13357377f8ba24d7916fc568315b4a2b7b2be11b6bb54c"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Economics-paper-2023.pdf",
+      "size": 3665603,
+      "sha256": "0bf745e63c4183cd22fa5d7e4a00d99c737ac0e96255586ea9b316f98489945d"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Public-Administration-Paper-2020.pdf",
+      "size": 974078,
+      "sha256": "0527454a73f74b7a178878cacbc9c201a7d3a28a109f3601704ba30ee850a197"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Public-Administration-Paper-2022.pdf",
+      "size": 2522366,
+      "sha256": "61150412ec1e823c52c38e9575102d4c53376abe9cda116c9c78b53bd1e1bbc5"
+    },
+    {
+      "path": "/past-papers/pms/group-a/PMS-Public-Administration-Paper-2023.pdf",
+      "size": 3082231,
+      "sha256": "a96c6b8cda7e1f9875f0e5919f8de6410f22d25affd69e7c4d0f9486a585356b"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-agriculture-paper-2019.pdf",
+      "size": 1329817,
+      "sha256": "4e0f7642893106280dd63b49dc1fb145a904309623c6139da2d8aaf7861abbe1"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-agriculture-paper-2020.pdf",
+      "size": 999866,
+      "sha256": "9d4cbba7ada823ed9631c96bc68b9d7692a393cc807463dea8d6456a7daeabc6"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-agriculture-paper-2022.pdf",
+      "size": 2652131,
+      "sha256": "ff3133f5266bcd8305ff5169e7ea721041dadd6901debd897d31071fd40c529a"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-agriculture-paper-2023.pdf",
+      "size": 1636954,
+      "sha256": "81d7b42028cee3722dc1179219e7b0ef205c9fb20c43417060f5fa47a3cae708"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Botany-paper-2019.pdf",
+      "size": 1625271,
+      "sha256": "8a1d78d914e70d804eb0b157413479c68c7910162e494377f453425950afe04d"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Botany-paper-2020.pdf",
+      "size": 1070805,
+      "sha256": "70f2781030ef43319823fc11c5b92829c0e4245a3bf93f7a2005dfe9e4de5fc2"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Botany-paper-2022.pdf",
+      "size": 2723952,
+      "sha256": "dbdb087cc6631f4a88d0e7fd0e2842d1e12e2de52421a607be86933e9b7d7ffa"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Botany-paper-2023.pdf",
+      "size": 1500705,
+      "sha256": "aaba110ca0e38882a4071afea904cfb036d5f58b1fe78be5e5e063a327206a17"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Veterinary-Science-paper-2019.pdf",
+      "size": 1514064,
+      "sha256": "d1e9eaebe97416f3d23e1f2ce8f09ace613ed01fc6d42976bf56cda77c64cc45"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Veterinary-Science-paper-2020.pdf",
+      "size": 1153740,
+      "sha256": "a8942d41a2c023afc4f8e9dfd06f7c87e7c90b33d9023c68eee8256d1b9db594"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Veterinary-Science-paper-2022.pdf",
+      "size": 2345484,
+      "sha256": "afe5044cf00e5b50113f00361409ad393897c77dfab4e7e15249943e28eeef90"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Veterinary-Science-paper-2023.pdf",
+      "size": 1714864,
+      "sha256": "da6458d6a9c79f8df3423e97407a8ae41fc85ef666c589aeebcf834785b958f5"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Zoology-paper-2019.pdf",
+      "size": 1910131,
+      "sha256": "e1a7e7eae70b528a350abbb85d61b250065e2790830b94b1cfda6a7fdadd041e"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Zoology-paper-2020.pdf",
+      "size": 2310578,
+      "sha256": "b395b38122836da3881bee3fda0b63e1b57525914ac7bf2c92b711f6e049a97f"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Zoology-paper-2022.pdf",
+      "size": 2577918,
+      "sha256": "ab11ec7b8c4cce102802be08666e66fc3d3e282d4e873aa0d46f75f9c8407239"
+    },
+    {
+      "path": "/past-papers/pms/group-b/PMS-Zoology-paper-2023.pdf",
+      "size": 1604564,
+      "sha256": "8b8314343782b238965b9d793c94704ff333dbaeeba665bc91c34d047802b049"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Computer-Science-paper-2019.pdf",
+      "size": 2422781,
+      "sha256": "0f30922efdd4b83c7dda7ef8061803304eeb10d28ce151eabe525d25878166db"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Computer-Science-paper-2020.pdf",
+      "size": 3256433,
+      "sha256": "2f0a3b281f624defa5bbfb17482957f09d4cd57a0a4d7844037751071ca75792"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Computer-Science-paper-2022.pdf",
+      "size": 5155453,
+      "sha256": "115e6baa27961d5b30c20cc72c0185490b7e4a04b45aac9fac6819dc550ff989"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Computer-Science-paper-2023.pdf",
+      "size": 3020116,
+      "sha256": "c2ad4b455a16ac031aa19a212d09bd7963bd5c1178cf00186702c64f6d9fdd9c"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Mathematics-paper-2019.pdf",
+      "size": 2108071,
+      "sha256": "84a4378406835f7c52c18b31175a4da0d5854f1150b76d0244b4dc97c3c23962"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Mathematics-paper-2020.pdf",
+      "size": 2341579,
+      "sha256": "a3b7feab43f17878357a636f4a1d53732164a37532735321abe1c34b29517938"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Mathematics-paper-2022.pdf",
+      "size": 3729613,
+      "sha256": "579926862c4c510586764881867d60e2d21219e9273e40eceb9f772870a590fe"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Mathematics-paper-2023.pdf",
+      "size": 2488346,
+      "sha256": "1ed9ce3fc6992eb500526c4d1f62158dbf90039537baff86fcfb1e96fca160d8"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Principle-of-Engineering-paper-2019.pdf",
+      "size": 1830379,
+      "sha256": "a225ae5ef0d8193729041c32962923dfb0c074de3507fa2c1429689d3db87410"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Principle-of-Engineering-paper-2020.pdf",
+      "size": 3428979,
+      "sha256": "ec46081f5a86958a47672160613a27fbe16172d48991698e4de379e4a604e23d"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Principle-of-Engineering-paper-2022.pdf",
+      "size": 7517753,
+      "sha256": "db1c2e2afcd4a243fb0144242f76d627373a288ef910113e2c1711fb96fc2b55"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Principle-of-Engineering-paper-2023.pdf",
+      "size": 5548525,
+      "sha256": "f889c3648c8ad92e4d488fc2d0ccecdaf040e4a93bed6daf500922484ba3998a"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Statistics-paper-2019.pdf",
+      "size": 2895823,
+      "sha256": "450ea46509d6f497addc713310fb1697b999cfd607b9a5c69d77d0a086bd5b49"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Statistics-paper-2020.pdf",
+      "size": 3132344,
+      "sha256": "b5f1e7562982f6d40d937ba45bfe8dbd0176f55bd5787906734760eb9b1e5ece"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Statistics-paper-2022.pdf",
+      "size": 5249077,
+      "sha256": "4737f80f010de129971f1ac1dc6d58780750a969c196fbea137c8b99c53343ce"
+    },
+    {
+      "path": "/past-papers/pms/group-c/PMS-Statistics-paper-2023.pdf",
+      "size": 2690781,
+      "sha256": "0ce806a9868e805a6da7e4a04da710880d77d3712c3f64880e895146f765eb33"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Chemistry-paper-2019.pdf",
+      "size": 1455049,
+      "sha256": "4837f5937f3a1a5116954516eb15d6522edb39a463b24880b5fd84fdcbc95a5a"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Chemistry-paper-2020.pdf",
+      "size": 2065610,
+      "sha256": "c52b3c48845e26ec0d7933864e9f6ac4bdcb83975b4ceb1236919f61f06f79a5"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Chemistry-paper-2022.pdf",
+      "size": 2132112,
+      "sha256": "50e3d509e78b4a7bc818bfd01c5e79e2196a6df84d00a2d9973897546749aab9"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Chemistry-paper-2023.pdf",
+      "size": 1832665,
+      "sha256": "bd8aa1551421a83a9f6cafcb3c385b962ceb6d2bd7346b7063210b17705149a2"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geography-paper-2019.pdf",
+      "size": 825722,
+      "sha256": "c29664630ac6196d5646e76fab4b7efbffe472805f25a144d380a8a2d77221f8"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geography-paper-2020.pdf",
+      "size": 1486701,
+      "sha256": "6bad196426216942ae6c4a0fd9c45efbbd1b55ad2fbdbe3b5e8b57f756cde35b"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geography-paper-2022.pdf",
+      "size": 2047340,
+      "sha256": "8b135f69f70746883c026de85e2292ffa83777943c3c245533e5edea2937a3f6"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geography-paper-2023.pdf",
+      "size": 1461336,
+      "sha256": "185ee41dfe36cce126cc007dfeb186a638a3bb6f876afbe98155b2f34b10abb9"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geology-paper-2019.pdf",
+      "size": 835224,
+      "sha256": "888b38747e3ee2b4a0e9e94cee3d657428dd9b221a2359ef52e085742af50cf1"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geology-paper-2020.pdf",
+      "size": 1527863,
+      "sha256": "eddc3d888cea1e99bbc6186ae6046dd54637f29146c12adca1ea670143805d03"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geology-paper-2022.pdf",
+      "size": 2134433,
+      "sha256": "f0e79b5febf20be97b740c438541d1fc9787ffe3d42fc721ddb46d84c32dd7c1"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Geology-paper-2023.pdf",
+      "size": 1622509,
+      "sha256": "54d2b7874dcee8b62b2827c4d6ac09ddaec4eff7b055c215327a19a614ac1cdf"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Physics-paper-2019.pdf",
+      "size": 1023413,
+      "sha256": "e08885fde9ba7d377ac9524fadd631baa66f17b0f309904eb6e6c292f5945e2e"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Physics-paper-2020.pdf",
+      "size": 2314650,
+      "sha256": "d4420f69b55f44fb2814a813e1110cc787f742ef8316bbe427f8f79b1556d677"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Physics-paper-2022.pdf",
+      "size": 2370289,
+      "sha256": "f1a6b2dae371e0189c91dbbc12563a7e4ebffa690835e8b0277ecb35ba4ed793"
+    },
+    {
+      "path": "/past-papers/pms/group-d/PMS-Physics-paper-2023.pdf",
+      "size": 3512559,
+      "sha256": "35da02fd43cfeacf90267f899b5e0aa0352630e66f35f47df2bf901c1c1862a9"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-History-paper-2019.pdf",
+      "size": 770910,
+      "sha256": "c0ac4cfa80375eeb76dd57651450a38fbf37fabb7c0061d32e7d83d337dd6a6e"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-History-paper-2020.pdf",
+      "size": 1573919,
+      "sha256": "0df1fa6bbf30f3137e59fac60333ef3f788a271dc7ac54f7cc1e44755b442bb4"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-History-paper-2022.pdf",
+      "size": 2240971,
+      "sha256": "5552629849c115ce114ce33d41af2471b9e3440bee8479a7f536e8b34f7761d1"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-History-paper-2023.pdf",
+      "size": 1566448,
+      "sha256": "fb26bca9603403f2fd39adab47f251e7b65e8649744bc071af55980a9b2e1b8c"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Law-paper-2019.pdf",
+      "size": 1146319,
+      "sha256": "dade7b1def57131a62cf324532a9c603a24aabb4dd4b812114ffdf93c39c91a1"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Law-paper-2020.pdf",
+      "size": 1901100,
+      "sha256": "d26263b0890e28bee0b7bae4034619745eb7c54de2e875692197052f651cb77e"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Law-paper-2022.pdf",
+      "size": 2005027,
+      "sha256": "ee36df4c2adfc16d8e17545a9033007bf1211fb5476f496ee3229a9785c06789"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Law-paper-2023.pdf",
+      "size": 1778895,
+      "sha256": "328afdee72499b3fc6dc267c1498e9ca6d17b5e82841d52e548683b48cd0b70a"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Mass-Communication-paper-2019.pdf",
+      "size": 1016169,
+      "sha256": "47d1317a3a31769229ae7e01dc305decab5d6633a443d15d4b1c3addb5b418af"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Mass-Communication-paper-2020.pdf",
+      "size": 1809074,
+      "sha256": "bf18556570537f026a8e9a2b9d617afcb311ad6eb4befd42bce9e2ab54f99e4a"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Mass-Communication-paper-2022.pdf",
+      "size": 2129652,
+      "sha256": "c906a20ac3c69dee29a641fe146f6b53baec9297e029c61c05ac0d909ac69829"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Mass-Communication-paper-2023.pdf",
+      "size": 1697517,
+      "sha256": "b289cc6b18495488c8f1fed5184c0b026bdff6ab474786b0dffc0c83f84a3a17"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Political-Science-paper-2019.pdf",
+      "size": 756095,
+      "sha256": "729d67071b417996ece9c323f7bfb4a812e32f688b238d2680da0e5d561d4e50"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Political-Science-paper-2020.pdf",
+      "size": 1488138,
+      "sha256": "8bbf4a19c40c437e496b5c7989e67e17a72860b88d4d30085f8423ec71f38b9d"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Political-Science-paper-2022.pdf",
+      "size": 2121277,
+      "sha256": "7a777f3d1a5c04217988e2dccf4191ffdf37373a04f1a4f1a68f04195f4fd570"
+    },
+    {
+      "path": "/past-papers/pms/group-e/PMS-Political-Science-paper-2023.pdf",
+      "size": 1430748,
+      "sha256": "fda84adbc7a7120c52b5dec6734ba26b1ae17ed440c3f9d4a1682ad0800f4348"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Philosphy-paper-2019.pdf",
+      "size": 760040,
+      "sha256": "4fb617e59786f021721e3af94770b77d4804922a9f02917cd75c004e95199ba6"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Philosphy-paper-2020.pdf",
+      "size": 1607407,
+      "sha256": "e927ec9575904d7f169ad9bd260179cd80ac4887d2f75167028132934354995f"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Philosphy-paper-2022.pdf",
+      "size": 1854723,
+      "sha256": "e66ffdea4e2c859ffab9396a7dedb30355aa7e254c7fe6df9fe1c72676c46445"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Philosphy-paper-2023.pdf",
+      "size": 1400454,
+      "sha256": "ca2d7abb1052b585c5e2a4822e2ba188ba6c0191eab8666e92548683dee53018"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Psychology-paper-2019.pdf",
+      "size": 794650,
+      "sha256": "3b900571f8283fbc557a050bcfdfd6e5f29f2daa18892ad50e778383265266d8"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Psychology-paper-2020.pdf",
+      "size": 1589286,
+      "sha256": "9b31ff080af3393fa449f102fc103cbe5cd0bb354212f5a0fd0f3cfac13e6cb6"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Psychology-paper-2022.pdf",
+      "size": 2158654,
+      "sha256": "c1719007f02d9e9f30ce9e3b705c652a13357731b29391394059be9de398a7e5"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Psychology-paper-2023.pdf",
+      "size": 1376851,
+      "sha256": "ac6ac18a5b66ee5cb43ce02f864adea0bb5168870f21619cd7f99f4a818b5bbd"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Social-Work-paper-2019.pdf",
+      "size": 809276,
+      "sha256": "4443b1dfeb872225cb4f385da454923161f56aacfbfbc7ad0a6953ce2075b688"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Social-Work-paper-2020.pdf",
+      "size": 1659839,
+      "sha256": "ab3f7d3f2f29375a1d0ff26d49c9cbb8d0ccb3cca5a43cdf3049e78cfc7d4adb"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Social-Work-paper-2022.pdf",
+      "size": 2080250,
+      "sha256": "a3e7e042b82e534c2f1ce553ecc0aa644a86360ee03e5c37eeb120cac725c351"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Social-Work-paper-2023.pdf",
+      "size": 1383732,
+      "sha256": "03acdee5a05aff620a24358625e62b3ca4458caaffc6a7cbde6077647ea99110"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Sociology-paper-2019.pdf",
+      "size": 834251,
+      "sha256": "fae428ec888d79bedb1215029bccc49484748b89b49b3922470a1ed42d1b1998"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Sociology-paper-2020.pdf",
+      "size": 1658410,
+      "sha256": "eaa02d3bed975a58bba134443b53dce1fecec223125fea9ac4dad93808fc2d48"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Sociology-paper-2022.pdf",
+      "size": 2012253,
+      "sha256": "570952c80bed2ead3cd3263b7809f520f6952a4e3cd8572fd278e7a5ed8a3250"
+    },
+    {
+      "path": "/past-papers/pms/group-f/PMS-Sociology-paper-2023.pdf",
+      "size": 1469874,
+      "sha256": "cbc1521c915e2bd73325cb37e8d07b413f638cff4d09678e30ad966c8f63249f"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Arabic-paper-2019.pdf",
+      "size": 1367537,
+      "sha256": "11dddfc92918efbb865c7835935162e30186f9fb0c8cbb8e3f64c417f19263db"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Arabic-paper-2020.pdf",
+      "size": 2110441,
+      "sha256": "df7bacdf572ac1d02ab82cc9cd2063a3830aaa2ac0d06f40d05929bf89a8cc48"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Arabic-paper-2022.pdf",
+      "size": 2887340,
+      "sha256": "812b789ccd3e95cc10daeff13d2bc6f837f5f69054b5451dedee89c240bcdcb8"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Arabic-paper-2023.pdf",
+      "size": 1957570,
+      "sha256": "dc0a9b61175bfefb3804df59f22e2c8cb5fb589b0ecd8ebb35a557628ab2db9c"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Education-paper-2019.pdf",
+      "size": 797580,
+      "sha256": "a2f7a28188457ecc5b2febe3402f99b44b4cf565adb3ec3e2ac2c7a8c922a5db"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Education-paper-2020.pdf",
+      "size": 1808306,
+      "sha256": "1f52549f83aa3af172e10e3c1e5a0d58b8ad15fe848eeee6a0b495396a4129a4"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Education-paper-2022.pdf",
+      "size": 2523668,
+      "sha256": "1014b71f9d39c27b559512f5b8aa799cd23a2100a3c8ca141adaa74733cc67a5"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Education-paper-2023.pdf",
+      "size": 1540476,
+      "sha256": "782a8173d6d882a7b648a22e61ece4573e83513e14ae30700d3dcef828d70b08"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-English-Literature-paper-2019.pdf",
+      "size": 1279078,
+      "sha256": "b7810f937abca8e7204eaadd1360cc7734f910fd991bc248d66fe0e1321ac2c3"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-English-Literature-paper-2020.pdf",
+      "size": 2011966,
+      "sha256": "0151869f8b28f5428acaebf7676c27d8f037f99e08f8e19719df9ff1101030bc"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-English-Literature-paper-2022.pdf",
+      "size": 2551695,
+      "sha256": "a60b77bcb6939ab4d266c21312d8cec402ce9f5748d4562e47854432b84e326d"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-English-Literature-paper-2023.pdf",
+      "size": 1464119,
+      "sha256": "32d0bb4ca7cd7146773d12ce0a520bc31de33e4891a759d2e8f949d17807196f"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Persian-paper-2019.pdf",
+      "size": 1557192,
+      "sha256": "9a730825e4a43e0385fa17c3d718a65fa39c6701239ca5e691b3febc27b00ef8"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Persian-paper-2020.pdf",
+      "size": 2870633,
+      "sha256": "a69f97bb52137ec845f4921f40dbc2a513e247d98991652a8145c8a14f1cfac1"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Persian-paper-2022.pdf",
+      "size": 3427678,
+      "sha256": "3681b6e08b9be3f0d3635d258ecae07226ca3391d7ad4d91ef882dc77f62d221"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Persian-paper-2023.pdf",
+      "size": 2535062,
+      "sha256": "728ea9ceeedc993de88b9ee266c85350680f73407d6303b3643bc61d623b9574"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Punjabi-paper-2019.pdf",
+      "size": 1094101,
+      "sha256": "1f4baa36b8e2cac7ff04748158c7525617122f7381bdc535c7ccf7bf780b7465"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Punjabi-paper-2020.pdf",
+      "size": 1893917,
+      "sha256": "b7702edbb04ec375008f156639b95f2a43bb3d24f2bc880f07f158c310513165"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Punjabi-paper-2022.pdf",
+      "size": 2228282,
+      "sha256": "fbac6384adc4a431b5c57b2d5de8c84d23031e730fefa26614c2cd8375e6cde0"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Punjabi-paper-2023.pdf",
+      "size": 1985518,
+      "sha256": "902bcc1a93221d366b0e0aa748b9ae5ee0dd17937e09ab9791a2b82a0d68420f"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Urdu-Essay-Precies-paper-2019.pdf",
+      "size": 1287483,
+      "sha256": "8f6d1915d944928e885f450916ec9756e8062d5a128f80e65770256618125bf1"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Urdu-Essay-Precies-paper-2020.pdf",
+      "size": 790384,
+      "sha256": "0fa7ebdf1924c3abef0e7715e31887b2bb480385f96e5caebc8cee1ee543717f"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Urdu-Essay-Precies-paper-2022.pdf",
+      "size": 1948489,
+      "sha256": "708ddc3338bd4aefae792419e08d80c64b651ed6ca00165b2231ca9cf4bf7b1f"
+    },
+    {
+      "path": "/past-papers/pms/group-g/PMS-Urdu-Essay-Precies-paper-2023.pdf",
+      "size": 1923553,
+      "sha256": "8d8386080360317ea75ef80bcc62e22194cee395fd1aaad844aefc8cec20a218"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/01_PPSC_2021_Lecturer_Urdu_(Female)_Education.pdf",
+      "size": 723232,
+      "sha256": "3e6a42c9fa7ec586f744d351e220685b9242470ac80a10c513212a31c6fe3c7c"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/02_PPSC_2021_Lecturer_Urdu_(Male)_Education.pdf",
+      "size": 721418,
+      "sha256": "5a199359347f495dcec935eb56138e4273d365531334896ff75d328de0f0db16"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/03_PPSC_2021_Junior_Clerk_Board_of_Revenue.pdf",
+      "size": 714524,
+      "sha256": "4cf51114ebeb8e4cd6e71007b20a5ed529230727e321ef081f1a8f6ae61f5b21"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/04_PPSC_2021_Store_Officer_Punjab_Agriculture.pdf",
+      "size": 718192,
+      "sha256": "6f4ba078b613c30b079dfb6b83fadc66d41ebe64cea4a8e22713b59696677b45"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/05_PPSC_2021_Assistant_-_Set_1_Board_of_Revenue.pdf",
+      "size": 711706,
+      "sha256": "b61dce71bf930bec03bb5c0bafad5d954d338b1ec7982d0b6c6fea762c20b07b"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/06_PPSC_2021_Assistant_-_Set_1_Planning_and_Development.pdf",
+      "size": 719324,
+      "sha256": "1e415e72a8b81625d9472386cc96f25239957cd0f14117c5e2a7fb225f40d97f"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/07_PPSC_2021_Office_Assistant_Planning_and_Development.pdf",
+      "size": 716458,
+      "sha256": "f0d025cba0aa87355d9ecb26201e23b1cbb2e382af6f3995a2a0a35ac235415b"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/08_PPSC_2021_Assistant_-_Set_2_Planning_and_Development.pdf",
+      "size": 714625,
+      "sha256": "5be96e6586fbc4de2d2a62459c8e4d21bee5b2eebfeadca7afab629ac403e77e"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/09_PPSC_2021_Head_Clerk_-_Assistant_Planning_and_Development.pdf",
+      "size": 714459,
+      "sha256": "586399250a36ede063b374c87fa1f78e528c9bbaf4af9a4e3d13f80b695eff9c"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/10_PPSC_2021_Assistant_Director_Administration_Planning_and_Development.pdf",
+      "size": 714285,
+      "sha256": "3250044c5005627144690869f45afd308c18fbd83adf9e5f6981bd03df9e70d4"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/11_PPSC_2021_Lecturer_Islamiat_-_Set_1_Education.pdf",
+      "size": 724505,
+      "sha256": "a5579ca03810e1a8b72c4372daaa63c7c6acb9de2fdd5b1b65f97c1f4a1b57d5"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/12_PPSC_2021_Lecturer_Islamiat_-_Set_2_Education.pdf",
+      "size": 724520,
+      "sha256": "c38b55296efee7b27181c141e14a219227d5eb56b830ab94d1c4785575771a0b"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/13_PPSC_2021_Lecturer_History_-_Set_1_Education.pdf",
+      "size": 703778,
+      "sha256": "dd362fc117e87fff763aeae83d0681cb03e1b0412ca105de7f0dd47fa33eb142"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/14_PPSC_2021_Lecturer_History_-_Set_2_Education.pdf",
+      "size": 705577,
+      "sha256": "62bd64d18e470e3d9a60d9702309d7185c44cfda29983d2c0a7120198e731dc7"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/15_PPSC_2021_Assistant_-_Set_2_Board_of_Revenue.pdf",
+      "size": 715741,
+      "sha256": "a7d377ae2a2e5c96f36b7f0a9f054937213e9b179b11b5a52c66ed430833642a"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/16_PPSC_2021_Tehsildar_-_Consolidation_Officer_(General_Knowledge)_-_Set_1_Board_of_Revenue.pdf",
+      "size": 712269,
+      "sha256": "6b32cb089b345a4638c6d4442a58d0f100d283636315daf0dbcf84f6d7d2340c"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/17_PPSC_2021_Tehsildar_-_Consolidation_Officer_(English)_-_Set_2_Board_of_Revenue.pdf",
+      "size": 709726,
+      "sha256": "c871eb900875aba19755d5c812f64f3628f2f3e1375fbba65ff61b4748703aee"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/18_PPSC_2021_Tehsildar_-_Consolidation_Officer_(General_Knowledge)_-_Set_2_Board_of_Revenue.pdf",
+      "size": 711984,
+      "sha256": "29b43b58a0244f5df26cddb57a5b6880a91f9b21046f987ed5fda938bf059685"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/19_PPSC_2021_Assistant_Sub_Inspector_(Service_Quota)_Punjab_Police.pdf",
+      "size": 707442,
+      "sha256": "7c40fa928d28748579e1f777bf887c6675947db40787a8a355eea2188f541e0c"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/20_PPSC_2021_Sub_Inspector_(Service_Quota)_Punjab_Police.pdf",
+      "size": 709010,
+      "sha256": "0ca163a085f700223f779590f318fd7fe0830376ba4a57427749e276bf27b339"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/21_PPSC_2021_Assistant_Livestock_and_Dairy_Development.pdf",
+      "size": 711091,
+      "sha256": "4b557dd4e7b66a8e48927789b0df968d960b206e18e75fbf072cefaff42159fe"
+    },
+    {
+      "path": "/past-papers/ppsc/2021/22_PPSC_2021_Probation_Officer_Home.pdf",
+      "size": 712039,
+      "sha256": "16937201b45f969d20c056644b0bfe4f8f37d4416074df145f93f05f59e02072"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/01_PPSC_2022_Parole_-_Probation_Officer_Home.pdf",
+      "size": 698919,
+      "sha256": "207291bc2521350f6f68f5588cde9bee1078e0fde44db6d83bc354d3ef43b74e"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/02_PPSC_2022_Assistant_Director_Processing_Punjab_Agriculture.pdf",
+      "size": 712908,
+      "sha256": "76721e2a8016e598e954115752d11b9d7b26475969b8a67eb55483cdfa220e9f"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/03_PPSC_2022_Assistant_Education.pdf",
+      "size": 719312,
+      "sha256": "6c8f34688bb4e503550edec8c1e888330462bb3d302743e72425be28f6b6c946"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/04_PPSC_2022_Provincial_Management_Service_Provincial_Management_Service_(PMS).pdf",
+      "size": 664171,
+      "sha256": "4b8e6414d6eebab352adf0dcbac3cfa1724c800e72434686fecb97687908bea1"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/05_PPSC_2022_Lecturer_Urdu_Education.pdf",
+      "size": 723119,
+      "sha256": "5dc14c48a723a142119f86fe3d85b39756456d0a28380c4e7a15d3e493ad751b"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/06_PPSC_2022_Lecturer_Islamiat_Education.pdf",
+      "size": 730545,
+      "sha256": "59ddd75fa32881f9f41b60e9d0ec3751295f8768e120e042dfa97af38cec98d3"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/07_PPSC_2022_Lecturer_Political_Science_Education.pdf",
+      "size": 702624,
+      "sha256": "727496ac9b11ffd81c62c6a826fbccec957dd254fc6d59ab8555251bf6ccdf1c"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/08_PPSC_2022_Lecturer_History_Education.pdf",
+      "size": 703435,
+      "sha256": "5127876a66540b0e35ca3883e21a4a2458b140c2079ecef1bb3619e0ee25a6af"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/09_PPSC_2022_Lecturer_Pakistan_Studies_Education.pdf",
+      "size": 702449,
+      "sha256": "2e01dc73ccee0689e1e97c9f506436cc9813bb0ec8929d07e205338e3b8ac9bc"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/10_PPSC_2022_Assistant_Industries_Commerce_Investment_and_Skills_Development.pdf",
+      "size": 712246,
+      "sha256": "6a9eeff9065933d47b93d194216cd992adcbdd1d17fea2202c97ed01f2b36a24"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/11_PPSC_2022_Assistant_Center_for_Professional_Development_of_Public_Prosecutors.pdf",
+      "size": 713179,
+      "sha256": "ee4d8aab99ead0510df6ca2a9eb81258aa43f2c0b41c48dda05787daa1e256a1"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/12_PPSC_2022_Assistant_Punjab_Public_Service_Commission_(PPSC).pdf",
+      "size": 712066,
+      "sha256": "7d95176998c7850acea79ad38e28f5fe6cd52f51facb7da5398c166ff6899a23"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/13_PPSC_2022_Assistant_Services_and_General_Administration.pdf",
+      "size": 711866,
+      "sha256": "ce129489c9a08d55657c81cfee3db33e6cdf0ee7c931d20c99eac520073a9b5d"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/14_PPSC_2022_Assistant_Punjab_Employees_Social_Security_Institution_(PESSI).pdf",
+      "size": 711318,
+      "sha256": "179b3d7cf646489346704a79feb9469bec837e60b1a8ae33bf4797f67dff3e0c"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/15_PPSC_2022_Manager_Auqaf_Auqaf.pdf",
+      "size": 717190,
+      "sha256": "b09b45679583b690178cef75c0c4f727904e28aee76ec8f5aa92e9b527c1cd2c"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/16_PPSC_2022_Assistant_-_Head_Clerk_Livestock_and_Dairy_Development.pdf",
+      "size": 709457,
+      "sha256": "ca62fad77423ca64783a69a1e7bf877684b5b177f750790af26ac5912916f09e"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/17_PPSC_2022_Assistant_Director_Civil_Defence_in_the_Punjab_Home_Department.pdf",
+      "size": 709993,
+      "sha256": "51bba391d1882db3c334f108ff1065d1b4cf62117d5486c06bddb6627eb998e2"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/18_PPSC_2022_Naib_Tehsildar_(English)_-_Set_1_Board_of_Revenue.pdf",
+      "size": 712602,
+      "sha256": "bf56793bf4894d1a8f2bb0fee3ee55c034d325256fb01a75f90d0a15b00e681d"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/19_PPSC_2022_Naib_Tehsildar_(General_Knowledge)_-_Set_1_Board_of_Revenue.pdf",
+      "size": 715316,
+      "sha256": "11d13e3f7be816d1679d9e6eeb88d8e22a4dc794cebad06fc84884fded4c4232"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/20_PPSC_2022_Naib_Tehsildar_(English)_-_Set_2_Board_of_Revenue.pdf",
+      "size": 704263,
+      "sha256": "b7bd0fae5ecd03b61a0c4d5d34c5ba607cc3ea4c354110e2b20b319bf8b6b950"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/21_PPSC_2022_Naib_Tehsildar_(General_Knowledge)_-_Set_2_Board_of_Revenue.pdf",
+      "size": 717076,
+      "sha256": "892b2ab9d279d1ffb3afe3c054afd32e360abbbf73b5e99a22db89eb4818de5e"
+    },
+    {
+      "path": "/past-papers/ppsc/2022/22_PPSC_2022_Junior_Clerk_Punjab_Police.pdf",
+      "size": 716130,
+      "sha256": "3ea0642bea3ca99ec85cb3b9d1743da52cdfc2fc54029b47cca05b9701f9913d"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/01_PPSC_2023_Assistant_Director_Labour_Welfare_Labour_and_Human_Resource.pdf",
+      "size": 715493,
+      "sha256": "1b1ed8c0304e44239648edafd1aa4fa3284a294df79300ca3b5cc1edcfe731f8"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/02_PPSC_2023_Code-53_Assistant_Miscellaneous.pdf",
+      "size": 712411,
+      "sha256": "ce50dab32b1bb1af8a8439d1e06f208a5221e965e678ae2c5c8b0f168b7d11b7"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/03_PPSC_2023_Assistant_Director_Intelligence_Punjab_Police.pdf",
+      "size": 714523,
+      "sha256": "89244a39781e57c220fb6b8619c1f554276828ead62796e02ff30084ff920a4e"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/04_PPSC_2023_CODE-41_Assistant_Industries_Commerce_Investment_and_Skills_Development.pdf",
+      "size": 718527,
+      "sha256": "e5e3c6e53d40a37ed4bfad1c1b1caea1c6fce1b174e9a772dfc18ea74085d5bf"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/05_PPSC_2023_Junior_Clerk_Board_of_Revenue.pdf",
+      "size": 712721,
+      "sha256": "bc237c26273c5e16c4a90803342ed230d49234efed48bbeecbb501427cc376b3"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/06_PPSC_2023_District_Trainer_Literacy_and_Non_Formal_Basic_Education.pdf",
+      "size": 703827,
+      "sha256": "868a31219387ab6eadcd39db6042eef2cdd148624476aaacc68dfebbbba69b50"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/07_PPSC_2023_Assistant_Administrative_Officer_Information_and_Culture_(Punjab_Council_of_the_Arts).pdf",
+      "size": 718284,
+      "sha256": "269cbc5b14ab11582c947d89d6307beeb5d7f496705c99df43f67aa4763792da"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/08_PPSC_2023_Assistant_Food_Controller_Punjab_Food_Authority.pdf",
+      "size": 716088,
+      "sha256": "5479b542a1e1df597d14bcc4244f3d17cee7c8a7772c69cc81673caf5a4852a2"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/09_PPSC_2023_Food_Grain_Supervisor_Punjab_Food_Authority.pdf",
+      "size": 729751,
+      "sha256": "048a2ea2586983ea943db2247246b4325f9165348ee99f4cb74fd9b140a10930"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/10_PPSC_2023_Food_Grains_Inspector_Punjab_Food_Authority.pdf",
+      "size": 717238,
+      "sha256": "a6b37677850bc24170b8739419c8c15cfb2a377ce4396df090731bdf519dcbbc"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/11_PPSC_2023_Assistant_Director_Accounts_Budget_and_Accounts_Officer_Accounts_Officer_Audit_Officer_Finance_Audit_and_Accounts.pdf",
+      "size": 668069,
+      "sha256": "81cdb163a959f8e941766877e8f2c7a34f4f68974aaef33e1d22c5f11803fe42"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/12_PPSC_2023_Assistant_Director_Revenue_Board_of_Revenue.pdf",
+      "size": 705308,
+      "sha256": "3472a9c00f586a4cbc9a880bebb5cfe74586a07930b7d73b593518d23dc320a6"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/13_PPSC_2023_Food_Grain_Supervisor_(Evening)_Punjab_Food_Authority.pdf",
+      "size": 723893,
+      "sha256": "ce8c5be9c295f72a6559847b8b8ae2843db6438122705b6b4a9bfb487be540f2"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/14_PPSC_2023_Combined_Competitive_Examination_Services_and_General_Administration.pdf",
+      "size": 663935,
+      "sha256": "9e38ced3d6d7fa9c008c7d587694a1cd92a607a83acd2a336d5079b5aaa39635"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/15_PPSC_2023_Junior_Clerk_Punjab_Public_Service_Commission_(PPSC).pdf",
+      "size": 718309,
+      "sha256": "2f5677389ff9ef4bbd0fd6515f8453adbc6c256e8da322ddd3885f59fa38db02"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/16_PPSC_2023_Junior_Computer_Operator_Punjab_Public_Service_Commission_(PPSC).pdf",
+      "size": 702972,
+      "sha256": "6389cceac30c929ae6500938a95e9a1c2892625a7bc684ebe4c67422f6993c61"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/17_PPSC_2023_Junior_Clerk_Land_Record_Authority.pdf",
+      "size": 719136,
+      "sha256": "a14e92576016b98ccff134603ecfa3e53642ecf9be07202f7bab34124ff4e640"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/18_PPSC_2023_District_Zakat_Officer_Zakat_and_Ushr.pdf",
+      "size": 708306,
+      "sha256": "b217abba169a641914c6b15c68286129812b76ff601476ec91a553a81491757e"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/19_PPSC_2023_Junior_Clerk_Board_of_Revenue.pdf",
+      "size": 708117,
+      "sha256": "737bba78852639149431568322ed59e4cd47b5dcf2ae617f37cfe47d4b1cc57e"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/20_PPSC_2023_Club-69_Assistant_Auqaf.pdf",
+      "size": 714323,
+      "sha256": "6f4ee10fba5ffd2a83445a02087707bd3af7b48ba3da741a33aedf5c9a484593"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/21_PPSC_2023_Code-72_Deputy_Secretary_Controller_of_Examinations_Assistant_Secretary_Assistant_Controller_of_Examinations_Boards_of_Intermediate_and_Secondary_Education.pdf",
+      "size": 715968,
+      "sha256": "afec2ed1f4981de90bd7b0d0420f7841acede8e57cdbc9f38b3c42bbbc985608"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/22_PPSC_2023_Clubbed_Case_Canal_Patwari_-_First_Phase_(Morning)_Irrigation_and_Power.pdf",
+      "size": 713791,
+      "sha256": "4cbd9034df18a07018a82e07b05362993580dda6e7170bf87bc92dab20ce4c7e"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/23_PPSC_2023_Clubbed_Case_Canal_Patwari_-_First_Phase_(Evening)_Irrigation_and_Power.pdf",
+      "size": 712364,
+      "sha256": "25f0a26f6ab14f431fd5ff2b54c26ab09c34a305fb63afd0b11827b72578de89"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/24_PPSC_2023_Clubbed_Case_Canal_Patwari_-_Second_Phase_(Morning)_Irrigation_and_Power.pdf",
+      "size": 713811,
+      "sha256": "788a30518ba9577b80930b51c968cb5356f1327d64e853174326267eb02cebab"
+    },
+    {
+      "path": "/past-papers/ppsc/2023/25_PPSC_2023_Clubbed_Case_Canal_Patwari_-_Second_Phase_(Evening)_Irrigation_and_Power.pdf",
+      "size": 712015,
+      "sha256": "5de9fd43e6c1e4e9c8108d06b6c3f56ccf371f3367bf7ad6c306ec81ccbaf2cf"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/01_08-06-2024_Assistant_Director_Communication_and_Works_GK_Portion.pdf",
+      "size": 1481728,
+      "sha256": "e7cc0d2fbba7dc1e6a2454643cf57001002b1c67e1904790274ad51da190ed63"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/02_08-06-2024_Clubbed_Case_76_Evening.pdf",
+      "size": 1485790,
+      "sha256": "fc67c605e9d491d6a03c0debc52b6bfebb1d871ce9be65ebd9ba1f15630dad63"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/03_08-06-2024_Clubbed_Case_85_Morning.pdf",
+      "size": 1483179,
+      "sha256": "62baadfa760267a62cd2db9534583121e80ce0effd40be37a2c9c334d5883a20"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/04_09-06-2024_Instructor_Lecturer_Male_English_GK_Portion.pdf",
+      "size": 1496193,
+      "sha256": "5dbe44366240808d1c3b120029d01406071b39c953c2e24ef63a74410660c3bf"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/05_09-06-2024_Medical_Officer_BS_17_GK_Portion.pdf",
+      "size": 1465683,
+      "sha256": "88580ea8ad8d53ba7070435f05354e840f8aa9e4c8f4590bf822d7743acc4130"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/06_25-06-2024_Accounts_Officer_BS_17.pdf",
+      "size": 1468048,
+      "sha256": "7b3045e266cd5522cbd0b63a6c6497ac46b9c9e25927c01c089f93b0bc0777da"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/07_13-07-2024_Assistant_Director_Farms_Procurement.pdf",
+      "size": 1481961,
+      "sha256": "4edc2663a446fbe04d612955f1d3288abbf0ba8c4a214c2983297831894054f0"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/08_13-07-2024_Clubbed_Case_75_Evening.pdf",
+      "size": 1485472,
+      "sha256": "6359ef0f81d66bba7bcfd7ece64fa90c63a64543968af5f210226d9767397844"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/09_13-07-2024_Clubbed_Case_97_Evening.pdf",
+      "size": 1482016,
+      "sha256": "b1f7b7aa3e346c17c96682129c0059dab25ae3c4248d7c53b5ed9cc86bdbca1a"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/10_13-07-2024_Inspector_Tourist_Services_BS_16.pdf",
+      "size": 1504259,
+      "sha256": "94a2d2fe88aa1abd48e6719bfe013ae72728e7c3cee3b8c50ed0e18aacfc9683"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/11_13-07-2024_Lecturer_Punjabi_BS_17_GK_Portion.pdf",
+      "size": 1488919,
+      "sha256": "68a91f0a83703d96190fd21022316e13c17b60f8fd5902b60020f4d1d78bc165"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/12_13-07-2024_Planning_Officer_Assistant_Director_Planning.pdf",
+      "size": 1483174,
+      "sha256": "1e77556d0dfa32966eaf8c6c4dec35fdabc41a3dd677d9a61f8c1616ec03a959"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/13_14-07-2024_Assistant_Director_Accounts_FDA_GK_Portion.pdf",
+      "size": 1480995,
+      "sha256": "a0fdb71d57e87801d6c8528c23b57afc665e86359fe8c03075ca01aaf32efe89"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/14_14-07-2024_Computer_Instructor_BS_17_GK_Portion.pdf",
+      "size": 1482380,
+      "sha256": "c2d925bccf484134bfec62ce9ba09e152c4eb186df4b4cbe77cc869d5f61327b"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/15_26-07-2024_Program_Officer_IT_Punjab_Revenue_Authority.pdf",
+      "size": 1484643,
+      "sha256": "0a4ea5155fe90cbe535b5acca54a0c31c6461394ea7077d5c47edfdc6041c6dc"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/16_27-07-2024_Clubbed_Case_ID_96.pdf",
+      "size": 1468265,
+      "sha256": "723a8ebea3fa62bd9a5c8ed6f47f3342fd591837884e640bbfdea1051d4b8774"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/17_10-08-2024_Biomedical_Engineer_GK_Portion.pdf",
+      "size": 1493438,
+      "sha256": "8e92759e48f800643ec68cbb0a8561ec7fe7ebf5910e87caa7e8773ceabfaedb"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/18_10-08-2024_Clubbed_Case_91_Morning.pdf",
+      "size": 1486444,
+      "sha256": "f7267529562393ec336683e4bd8f3be58450cb051627c38d253e6af2adbaa610"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/19_10-08-2024_Inspector_Cooperative.pdf",
+      "size": 1516907,
+      "sha256": "fd7178d998df15a0b5a00314fb06d67dffb202d2a383c96e4214716a7e3e34ae"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/20_10-08-2024_Lecturer_Urdu_GK_Portion.pdf",
+      "size": 1445281,
+      "sha256": "9767c025e22658529f391b3b39bad8417054145f60e466d01aa29ffb4bc741fe"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/21_10-08-2024_Physiotherapist_GK_Portion.pdf",
+      "size": 1484303,
+      "sha256": "7e6af49333ac0e84a8c5561d41b8b9d1d00b6490ed5fc79dd3ec95066848c1e8"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/22_11-08-2024_Chief_Officer_Municipal_Officer_Regulations.pdf",
+      "size": 1505687,
+      "sha256": "8eba511d8a63c7ebe3b3cc70c53b72d2379e8533f68931ce0a47c59fc9356460"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/23_11-08-2024_Corporal_Counter_Terrorism_Department.pdf",
+      "size": 1468257,
+      "sha256": "d62a5729955d346683b964ad5ad9224b1121b6d645e98db017c59e5cb4bab13c"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/24_24-08-2024_Assistant_Director_Legal.pdf",
+      "size": 1466385,
+      "sha256": "5ddbf78a1781e0b00b8f11a195ad8a6b47b2e0b8d7726379a9d77a4c81cb09b6"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/25_25-08-2024_Clubbed_Posts_Labour_Inspector_Officer_Assistant.pdf",
+      "size": 1519263,
+      "sha256": "076dc0150d82140f68d8b4509d6f718eab334e96fd90c7338126fbaa76002adf"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/26_25-08-2024_Intelligence_Officer_Special_Branch.pdf",
+      "size": 1517522,
+      "sha256": "1da317eb5fbec39e1abbf0bb353ee83cd74ede2e1b582318afe5a6fa403761ad"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/27_08-09-2024_Excise_Inspector_Evening.pdf",
+      "size": 1521854,
+      "sha256": "027f103d4f609708adf37a0c3fc280be2964ac90a1c83ec318175a290c7330fa"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/28_08-09-2024_Excise_Inspector_Morning.pdf",
+      "size": 1521818,
+      "sha256": "fe43176de69548c0dd6e499a6cf7478709d00060e57239f5efdbd7d329616fd7"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/29_28-09-2024_Assistant_Director_Labour_Morning.pdf",
+      "size": 1498822,
+      "sha256": "7ad5240575b597235a76c5389001319ac0d489069924a7e4ce88ad17928d0788"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/30_28-09-2024_Assistant_Director_Local_Government_Evening.pdf",
+      "size": 1515712,
+      "sha256": "c6972bea4f9ca6f128775b6bb6d321297470f42f4698ddbaf4389bc956d2c24e"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/31_29-09-2024_Clubbed_Case_ID_49_Junior_Computer_Operator_BPS_12.pdf",
+      "size": 1479372,
+      "sha256": "c36c6aa9f60ccd4fc69c1bd2c65b98aa72d9b204ca5ec4c7ad483f5f0b8aa5e6"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/32_29-09-2024_Junior_Computer_Operator_Morning_Irrigation.pdf",
+      "size": 1505291,
+      "sha256": "608034cc84fa23ca2e88ef1da50a1872931feb2c9cc812235edc40c99c47e6cf"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/33_13-10-2024_Account_and_Audit_Officer_Morning.pdf",
+      "size": 1466045,
+      "sha256": "caa239f65a70dc5eef07eaa62168646fd7b25e725be162585f6896d27c7016d3"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/34_23-11-2024_Assistant_Controller_Morning.pdf",
+      "size": 1448772,
+      "sha256": "a0785bf25269bb3e7de616ddd26cca3cbd84b10cd1c5ef2780e9ee9f7fc084c7"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/35_23-11-2024_Assistant_Director_LDA_Evening.pdf",
+      "size": 1465675,
+      "sha256": "161dc54af6e3162ad5a2eaa6ddaab5bbfc802effc9b8b2f38e4734a32c604e26"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/36_23-11-2024_Junior_Computer_Operator_BS_11_Anti_Corruption_Establishment.pdf",
+      "size": 1465739,
+      "sha256": "f5e41d7e8de05b6edba332e69de164802df9e566b3d9d9475df8a674d8d1d2cd"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/37_23-11-2024_Nutritionist_Morning.pdf",
+      "size": 1464832,
+      "sha256": "20069b7e079032a97305759a0b2eacd1d81cac8fd53cd833539474de546b1f74"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/38_24-11-2024_Assistant_SandGAD_Evening.pdf",
+      "size": 1465206,
+      "sha256": "1879608803eb364bff63732d0feacbf9cd867e1ba3c65c19ef6dea7c992329be"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/39_24-11-2024_Assistant_SandGAD_Morning.pdf",
+      "size": 1465324,
+      "sha256": "2ffbddf7424c4f19b70110264886d88b3e4fe2d74fb24178aa6e4591a79067a3"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/40_30-11-2024_Horticulture_Officer_GK_Portion.pdf",
+      "size": 1481724,
+      "sha256": "aced7636340c62bd57673c09f6353f890edb9c7471c5b13ab5f3803d9861a887"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/41_30-11-2024_Junior_Computer_Operator_Morning.pdf",
+      "size": 1446214,
+      "sha256": "ab76f97925e6ca3aad1fa275a5fb69de6b3e708e5cf51dca8a59a5c2a5d31b2a"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/42_30-11-2024_Sub_Engineer_Civil_BS_14_GK_Portion.pdf",
+      "size": 1443533,
+      "sha256": "01e4f19bd0f0a9cb7588a24285b3ec21198fd3a424d341c5f4e56b04119378e0"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/43_30-11-2024_Sub_Engineer_Mechanical_BS_14_GK_Portion.pdf",
+      "size": 1441749,
+      "sha256": "760a185899c0285f3e41b3f3c0ebf104c5d4514997a39626b7df3ff68bfbfb96"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/44_01-12-2024_Assistant_SandGAD_Evening.pdf",
+      "size": 1490419,
+      "sha256": "bc5f99e42501d5b5cb5bceb557faa7f011988ae2fd6822cef306fe16202da821"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/45_01-12-2024_Assistant_SandGAD_Morning.pdf",
+      "size": 1489580,
+      "sha256": "c83372ac96eb6cd367fee99e0b8ca138f70b0510366665ac8c7a79c02136bc61"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/46_15-12-2024_PMS_General_Knowledge.pdf",
+      "size": 1465540,
+      "sha256": "399257831d3a9dc163092cbd48835dc7a2919489228985afaee5cdde4c8fa383"
+    },
+    {
+      "path": "/past-papers/ppsc/2024/47_15-12-2024_Tehsildar_Consolidation_Officer_Hill_Torrent_Officer_GK_Screening.pdf",
+      "size": 1489903,
+      "sha256": "df4609faab658dd0d65883681cd0f9461c0d5812c93d4d13d079ff23bb9a024f"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/01_Assistant_Director_Wildlife_BS_17_23-02-2025.pdf",
+      "size": 1453319,
+      "sha256": "d5f612e6b78c03be89bbd346d5e4aa26841f18dc4afdcc3bdb7776aeb2b109c1"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/02_Accountant_Auditor_24-02-2025.pdf",
+      "size": 1416466,
+      "sha256": "85a2ddd01252d42e3a33ef4a79446cce80d536f243bb5afb0538e9b13b56d59c"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/03_Statistical_Officer_BS_17_24-02-2025.pdf",
+      "size": 1452972,
+      "sha256": "6d3c0d59fe763f0c9847aed6f4a87f8238606f66452bb688efa3cfc7c242d3bd"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/04_Junior_Traffic_Warden_BS_11_09-03-2025.pdf",
+      "size": 1427663,
+      "sha256": "61f06ff584b686814d697881cd41eae0b44db8391ef92e814dd8859a2714357a"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/05_Assistant_Sub_Inspector_Punjab_Highway_Patrol_09-03-2025.pdf",
+      "size": 1417461,
+      "sha256": "a2077e2925b84c8657963873a1375f70295c7f7b4dde77fe3cc17077d594fa18"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/06_Enforcement_Officer_PERA_16-03-2025.pdf",
+      "size": 1432982,
+      "sha256": "fe3f62eac5043d4030fcca6a2549dedbbe5d4d19bdfc92118d4acaf1627f7788"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/07_Computer_Operator_BS_15_Clubbed_Cases_3J2025_51J2024_12-04-2025.pdf",
+      "size": 1462894,
+      "sha256": "f3846231fca27529d7304b52ce7b9a3430efb8cb557eddc05c6ebdab4426afd9"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/08_Municipal_Officer_General_Knowledge_Portion_12-04-2025.pdf",
+      "size": 1415569,
+      "sha256": "b998445c2a046c7943dd3f98920243c404ddeadfec947ddec1ec7d946c4500d0"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/09_Assistant_Director_Research_40_GK_Portion_12-04-2025.pdf",
+      "size": 1421167,
+      "sha256": "2b66a1fda07533afcdd0d711eb9f51eee69f400c4606d6010a151caf592df50c"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/10_PMS_Ministerial_Service_Quota_13-04-2025.pdf",
+      "size": 1435581,
+      "sha256": "9e6761ca75d9d3b9085297786b192492b3e5b6c7a544c83be7bc4b599c4286a1"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/11_ASI_Service_Quota_13-04-2025.pdf",
+      "size": 1421659,
+      "sha256": "29029666b25c193d8fd9906d14dfa035e7abbeb39aa90d82226c77e76e9a49d1"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/12_Social_Welfare_Paper_20_GK_Portion_26-04-2025.pdf",
+      "size": 1416257,
+      "sha256": "d6ddc1040a3a5230ea5330d946e741d95ca0851c365c31f1129714faa076b95a"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/13_Assistant_Director_District_Development_Officer_Assistant_Secretary_Economist_Manager_26-04-2025.pdf",
+      "size": 1420264,
+      "sha256": "b118fa353188523e2d56c4983a79f4e2d3b5952b8bd9c975abfea0c7e975f0bc"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/14_Assistant_Director_LDA_27-04-2025.pdf",
+      "size": 1461543,
+      "sha256": "663c1d022441a842efedb1489c0769d93b4bc2983c737cad8b387def654d1691"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/15_Assistant_Board_of_Revenue_Clubbed_27-04-2025.pdf",
+      "size": 1459895,
+      "sha256": "08e2743f2d0fca0f3400c5354f3ac87cc493891f514f8949f4536e34199abb30"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/16_Internal_Audit_Specialist_BS_16_31-05-2025.pdf",
+      "size": 1451094,
+      "sha256": "ad82fcb7e1f66350bc40546b67bdfe11107c975b74d8eb873469593e2c58807d"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/17_Data_Entry_Operator_BS_12_31-05-2025.pdf",
+      "size": 1426919,
+      "sha256": "a35517f97268413b1c9a0df535da45f2e6695cc6436f9884e9203bcd7af35bb9"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/18_Junior_Clerk_BS_11_Board_of_Revenue_01-06-2025.pdf",
+      "size": 1432520,
+      "sha256": "c71b3a25e25a4ef2cbc2522984debd72ecb95e6a6df9b6318c4c678ddf4a7052"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/19_Assistant_Director_Fisheries_BS_17_01-06-2025.pdf",
+      "size": 1437717,
+      "sha256": "1a2f44cf12f754d70ac77e6697097a545cb3758b8b1ef05eaebca59435f3af8a"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/20_Junior_Clerk_BS_11_Clubbed_Case_ID_125_01-06-2025.pdf",
+      "size": 1419073,
+      "sha256": "40411cc1de6658f0fa581cbc35ee99b0e0ba181da05448c50c68f714d87f6012"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/21_Planning_Officer_BS_17_Advertisement_15_Case_7D2025_22-06-2025.pdf",
+      "size": 1456746,
+      "sha256": "ba9a7e54f478705ff2fa157ade3c860b970574b61166416fcf0ae2a58aa5d83d"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/22_Planning_Officer_BS_17_20_GK_Portion_28-06-2025.pdf",
+      "size": 1434433,
+      "sha256": "710b8271b2415a51ae409bdf2198aa308d8f369a7efcce6a0f685a762574cf36"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/23_Zilladar_Morning_29-06-2025.pdf",
+      "size": 1461392,
+      "sha256": "af532733ba018598c76fa03401e5c77f058fe8b5985df54d9f0f22c00a60c4e1"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/24_Zilladar_Evening_29-06-2025.pdf",
+      "size": 1477382,
+      "sha256": "67732b1bf83681a7d21654266a57cac07152886f0151dbf0773895a12f93e1c9"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/25_Assistant_Director_BS_17_HUD_and_PHED_12-07-2025.pdf",
+      "size": 1416186,
+      "sha256": "e56fd1b29b302771f311d8d80568e4cd53e41cef48ea7c654f524bba99f73dd1"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/26_Assistant_Director_TEPA_BS_17_13-07-2025.pdf",
+      "size": 1435310,
+      "sha256": "d2578429fd6dd78d72a144ad151c8e5bdea24c2566a140147b927f5fd844bcfa"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/27_Assistant_PESSI_13-07-2025.pdf",
+      "size": 1464594,
+      "sha256": "1683a52ad8f019eb295273c30b3b0a99c08b83c844de2f8c5d9211012d0b1995"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/28_Assistant_Director_Statistics_BS_17_Morning_21-09-2025.pdf",
+      "size": 1438704,
+      "sha256": "e360d4b904ff1da34b1c7a3064294b768c7c8d9d3e46e197962fda1c3e549a2f"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/29_Assistant_Director_Statistics_BS_17_Evening_20_GK_21-09-2025.pdf",
+      "size": 1439432,
+      "sha256": "63e22a67339b49c8e108613abad624a1ce836fa655d7eb0e23918032aa45d101"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/30_Junior_Clerk_BS_11_PPSC_Case_28C2025_27-09-2025.pdf",
+      "size": 1456871,
+      "sha256": "da4b856efcc2da42713d4df47d36d1931f75ae7ca26a2c692f71a5ffb677b7a5"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/31_Assistant_Registrar_Cooperative_Societies_GK_28-09-2025.pdf",
+      "size": 1456676,
+      "sha256": "ccfd6966c438118b48a01a4834bee8ca45d3402482e39470fd8ede9383f53ca9"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/32_Sub_Inspector_BS_14_19-10-2025.pdf",
+      "size": 1432336,
+      "sha256": "994731255b307b9edddf27d0c8acd92d45db7b11e8ef6fe0ba9face284ecc2af"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/33_Assistant_PESSI_19-10-2025.pdf",
+      "size": 1480925,
+      "sha256": "1ebd428c60bca1076aa199e634219ca6e83388da579baa053a320e82ff90c28a"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/34_Labour_Officer_16-11-2025.pdf",
+      "size": 1477369,
+      "sha256": "47346b87c44881a35207d2791dc56bada94343b0fae392fc39267a5e8fd9d10d"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/35_Assistant_Clubbed_Case_ID_163_16-11-2025.pdf",
+      "size": 1479651,
+      "sha256": "3af5e98117909d7b367968746c7bd98db4844f9e04cd6d630d16a8890ff137d7"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/36_Assistant_Board_of_Revenue_07-12-2025.pdf",
+      "size": 1469478,
+      "sha256": "e27c9fa48019bf4bbfc5731435e162767ebef3eeea045d17ec3a28bfa851ae78"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/37_Technical_Inspector_BS_12_07-12-2025.pdf",
+      "size": 1454023,
+      "sha256": "f928dc15be8499004ebc7494f1904b55819fd942f9baf21e95a375fafd1581d4"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/38_Assistant_Deputy_Superintendent_Jail_GK_13-12-2025.pdf",
+      "size": 1481830,
+      "sha256": "d30de5b96a4835d9fafcd0bbc33bcf03ee003cccc786802e72bdb2fba9e69865"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/39_Junior_Clerk_Punjab_Police_Morning_14-12-2025.pdf",
+      "size": 1480957,
+      "sha256": "40b428b0d9c71f15bfac8c5e54152da53c5a537c2d68c2063a16bb6066826925"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/40_Junior_Clerk_Punjab_Police_Evening_14-12-2025.pdf",
+      "size": 1433752,
+      "sha256": "a8185b36c6ad2f8fd5b7721a56c79bb68a5d52c92bac043226d839c9b6d92e07"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/41_Junior_Clerk_Board_of_Revenue_20-12-2025.pdf",
+      "size": 1477405,
+      "sha256": "8444bfe3744bba658d85a2a0f38b8a0dbd3b801be6be25d74f8dda6c5f0772a0"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/42_Junior_Clerk_BS_11_Clubbed_Case_ID_169_20-12-2025.pdf",
+      "size": 1482869,
+      "sha256": "e2abbfbc1f97bfb64b1bf4b63dfe28c6c7c9c6d754229e59dde325c3569faa9b"
+    },
+    {
+      "path": "/past-papers/ppsc/2025/43_Sub_Divisional_Enforcement_Officer_PERA_GK_21-12-2025.pdf",
+      "size": 1481034,
+      "sha256": "721e6f57008d213ddfda84939dda8fd115b8b0914e7d8f698efd834ee9b671ad"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/01_Assistant_Clubbed_24-01-2026.pdf",
+      "size": 1597839,
+      "sha256": "1e550a5da066112e2803893e86954e8e3c886f1bcb00a27b2f17db59dc2c0722"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/01_PMS_GK_Phase_I_25-01-2026.pdf",
+      "size": 1553696,
+      "sha256": "04c7066ea8b1973779ee9bcb029fb6c3beeb43a6fce1562d5869c37bf2c20f18"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/02_ESE_Urdu_24-01-2026.pdf",
+      "size": 1606427,
+      "sha256": "a07bb5f30fc5005a754d4872b36806effb7c31706648c6e122b005a130654d93"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/02_PMS_GK_Phase_II_25-01-2026.pdf",
+      "size": 1549725,
+      "sha256": "e97634f8c7a5b91849539177aed7210ef7bfb8f4936d14acd69771309257edf8"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/03_ESE_PTI_01-02-2026.pdf",
+      "size": 1582362,
+      "sha256": "8d95b38de36240408bea4062085fc48c15907225a23978fd5be78b3a3d5665af"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/04_Superintendent_01-02-2026.pdf",
+      "size": 1534281,
+      "sha256": "3211633cdc06b084d36c9f257ea7b63ac34d4348fea0fb273127a4ff10fc4fa7"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/05_Computer_System_Operator_14-02-2026.pdf",
+      "size": 1553584,
+      "sha256": "76c42a2b1a218360af37768c569772a73933544547ec6c552a5aa69569fdec1f"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/06_ESE_General_15-02-2026.pdf",
+      "size": 1584893,
+      "sha256": "31223652eaf4b61485f0bcd6564e0d39376ff7bbbf8ea39b183cf0a19ef0ca35"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/07_PERA_Enforcement_Investigation_Officer_15-03-2026.pdf",
+      "size": 1551159,
+      "sha256": "3376a6b88e9e3d070f7b90e907ae6323ef4fc52e6d5a28845f84080c030c9d9a"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/08_Assistant_BOR_05-04-2026.pdf",
+      "size": 1600902,
+      "sha256": "edc683d4b049306a2d9a8c1d9ac10e3c2c13f3d1e037c6fc832dd5f254133ced"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/09_Sergeant_PERA_19-04-2026.pdf",
+      "size": 1542474,
+      "sha256": "5928cd11cec735786f03dff73b9400a8f38c50213a82223aca584621ae2a4426"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/10_Senior_Inspector_Assistant_Director_19-04-2026.pdf",
+      "size": 1571076,
+      "sha256": "a3b6edd8e9cb057c644bccfa1e38245134fb2d198551689aa23e9d15b88d990b"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/11_Audit_Officer_06-06-2026.pdf",
+      "size": 1570911,
+      "sha256": "fc19a4ad0ec8c937da047f14b00b209f00ea5b259788d85493554d7afaf8e4bb"
+    },
+    {
+      "path": "/past-papers/ppsc/2026/12_Enforcement_Officer_07-06-2026.pdf",
+      "size": 1588207,
+      "sha256": "5f07fd205b7c7d9e8025ae48e7dc86cb17c57861c06672672e5d87a2a4064641"
+    },
+    {
+      "path": "/samples/aristotle-political-theories-political-science-sample.pdf",
+      "size": 19039245,
+      "sha256": "d1f63cbfec05a890a5cab12ff4f8e2517b91457794cd6de6050b6c677bee9bd7"
+    },
+    {
+      "path": "/samples/cybercrime-criminology-sample.pdf",
+      "size": 40115324,
+      "sha256": "6b930c6c4f8fb9dc69b950f54010366aedbc27ee49dbd627561b893c5875f085"
+    },
+    {
+      "path": "/samples/forms-of-government-political-science-sample.pdf",
+      "size": 14829678,
+      "sha256": "b482a7738b9e0a9ba493ecae62969ce43d1bf2530df20d50612c1c48ca30a378"
+    },
+    {
+      "path": "/samples/multipolar-world-ca-pa.pdf",
+      "size": 4577651,
+      "sha256": "d67aecef8edcfde7ef0bbeb530cd9ba5d18c9979032bf90898a3a24c449d0d2b"
+    },
+    {
+      "path": "/samples/pakistan-india-relations-ca-pa.pdf",
+      "size": 2916013,
+      "sha256": "dec8375e9e819e554bf7e178764c30278899c6596a7b5f556a726077c1eaa18c"
+    },
+    {
+      "path": "/samples/proxy-wars-ca-pa.pdf",
+      "size": 7702693,
+      "sha256": "9e3fad00cc8495dcb7db90a2ce1cece912c15fadf1d79c7f3cc38c7eb307761f"
+    },
+    {
+      "path": "/samples/psychological-theory-of-crime-criminology-sample.pdf",
+      "size": 29760155,
+      "sha256": "e73fd42e1adb806ab0569b61899f519cc800bc1117fafabbf0ac05e6758adf1c"
+    },
+    {
+      "path": "/samples/state-system-political-science-sample.pdf",
+      "size": 30000398,
+      "sha256": "88b3a4563128b1d1b20b7739a561916a03cb7547a144ec6024c2d47194b62082"
+    }
+  ]
+}

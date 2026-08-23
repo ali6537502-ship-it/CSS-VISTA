@@ -1,0 +1,88 @@
+import type { BankQuestion } from '@/data/mcq'
+
+// Small audited additions from the GitHub donor set. The broader donor file was
+// not imported: only self-contained items with independently checkable working
+// and no exact stem match in the current curated ability pool are retained.
+export const auditedMptAbilityAdditions: BankQuestion[] = [
+  {
+    id: 'mock-ability-github-001',
+    q: 'After a 15% discount, an item costs Rs 1,700. What was its marked price?',
+    o: ['Rs 1,850', 'Rs 1,900', 'Rs 2,000', 'Rs 2,150'],
+    a: 2,
+    s: 'Percentages',
+    e: 'The selling price is 85% of the marked price, so 1,700 ÷ 0.85 = 2,000.',
+    d: 'Intermediate',
+  },
+  {
+    id: 'mock-ability-github-002',
+    q: 'On a map, 2 cm represents 15 km. What distance does 7 cm represent?',
+    o: ['45 km', '52.5 km', '60 km', '105 km'],
+    a: 1,
+    s: 'Ratio and Scale',
+    e: 'Seven centimetres represents 7 × 15 ÷ 2 = 52.5 km.',
+    d: 'Basic',
+  },
+  {
+    id: 'mock-ability-github-003',
+    q: 'What is the square root of 0.0081?',
+    o: ['0.009', '0.09', '0.9', '9'],
+    a: 1,
+    s: 'Arithmetic',
+    e: '0.09 × 0.09 = 0.0081.',
+    d: 'Basic',
+  },
+  {
+    id: 'mock-ability-github-004',
+    q: 'Bird is to aviary as lion is to:',
+    o: ['Burrow', 'Den', 'Stable', 'Kennel'],
+    a: 1,
+    s: 'Analogies',
+    e: 'An aviary is an enclosure for birds; a den is the corresponding shelter for a lion.',
+    d: 'Basic',
+  },
+  {
+    id: 'mock-ability-github-005',
+    q: 'Which number is the odd one out: 8, 27, 64, 100, 125?',
+    o: ['8', '27', '100', '125'],
+    a: 2,
+    s: 'Classification',
+    e: 'All except 100 are perfect cubes: 2³, 3³, 4³ and 5³.',
+    d: 'Intermediate',
+  },
+  {
+    id: 'mock-ability-github-006',
+    q: 'If yesterday was Thursday, what day will the day after tomorrow be?',
+    o: ['Friday', 'Saturday', 'Sunday', 'Monday'],
+    a: 2,
+    s: 'Calendar Reasoning',
+    e: 'Today is Friday, tomorrow is Saturday, and the day after tomorrow is Sunday.',
+    d: 'Basic',
+  },
+  {
+    id: 'mock-ability-github-007',
+    q: 'What is the smaller angle between the hands of a clock at 6:00?',
+    o: ['90°', '120°', '150°', '180°'],
+    a: 3,
+    s: 'Clock Reasoning',
+    e: 'At 6:00 the minute hand is at 12 and the hour hand is at 6, so the hands are 180° apart.',
+    d: 'Basic',
+  },
+  {
+    id: 'mock-ability-github-008',
+    q: 'Some poets are teachers. Which conclusion is certainly true?',
+    o: ['All teachers are poets', 'Some teachers are poets', 'No poet is a teacher', 'All poets are teachers'],
+    a: 1,
+    s: 'Logical Reasoning',
+    e: 'The particular affirmative proposition is convertible: if some poets are teachers, then some teachers are poets.',
+    d: 'Intermediate',
+  },
+  {
+    id: 'mock-ability-github-009',
+    q: 'In a row of seats, P sits immediately left of Q and R immediately right of Q. Which block must occur?',
+    o: ['P–Q–R', 'Q–P–R', 'R–Q–P', 'P–R–Q'],
+    a: 0,
+    s: 'Analytical Reasoning',
+    e: 'Both immediate-position conditions place Q between P and R, giving P–Q–R.',
+    d: 'Intermediate',
+  },
+]

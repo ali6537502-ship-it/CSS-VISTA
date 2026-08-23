@@ -100,13 +100,13 @@ export const featureAnnouncements: Notification[] = [
   {
     id: 'feature-mpt',
     kind: 'platform',
-    text: 'CSS MPT Grand Mock registration opens every day from 10:30 PM until midnight.',
+    text: 'CSS MPT Grand Mock: daily entry opens at 10:30 PM and closes at midnight (Pakistan time).',
     link: '/mpt',
   },
   {
     id: 'feature-pms-gk-mock',
     kind: 'platform',
-    text: 'PMS GK Grand Mock registration opens every day from 8:00 PM until 10:00 PM.',
+    text: 'PMS GK Grand Mock: daily entry remains open from 8:00–10:00 PM (Pakistan time).',
     link: '/gk/quiz?mode=pms-mock',
   },
   {

@@ -13,6 +13,7 @@ export interface QuizResult {
   wrongTopics?: string[]
   wrongTopicCounts?: Record<string, number>
   studentName?: string
+  candidateName?: string
   durationSeconds?: number
   mockKind?: ScheduledMockKind
 }
@@ -394,6 +395,8 @@ export interface MockAvailability {
   available: boolean
   cooldownDays: number
   nextAvailableAt: string | null
+  closesAt: string | null
+  windowLabel: string
   remainingMs: number
   attempts: number
 }
@@ -405,6 +408,8 @@ export function getMockAvailability(kind: ScheduledMockKind, now = new Date()): 
     available: status.available,
     cooldownDays: 1,
     nextAvailableAt: status.available ? null : status.nextAvailableAt,
+    closesAt: status.available ? status.registrationClosesAt : null,
+    windowLabel: DAILY_MOCK_TIME_LABELS[kind],
     remainingMs: status.remainingMs,
     attempts: entry?.attempts ?? 0,
   }

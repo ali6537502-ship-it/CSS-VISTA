@@ -1,5 +1,4 @@
--- Realtime public-content refresh and private, authenticated sample documents.
--- The frontend uses short-lived signed URLs; no public bucket access is granted.
+-- Realtime CMS refresh and a private bucket for authenticated academic samples.
 
 do $$
 begin
@@ -23,37 +22,21 @@ set public = false,
 
 drop policy if exists "Signed-in students view protected academic samples" on storage.objects;
 create policy "Signed-in students view protected academic samples"
-on storage.objects for select
-to authenticated
+on storage.objects for select to authenticated
 using (bucket_id = 'protected-academic-samples');
 
 drop policy if exists "Admins upload protected academic samples" on storage.objects;
 create policy "Admins upload protected academic samples"
-on storage.objects for insert
-to authenticated
-with check (
-  bucket_id = 'protected-academic-samples'
-  and public.is_css_vista_admin()
-);
+on storage.objects for insert to authenticated
+with check (bucket_id = 'protected-academic-samples' and public.is_css_vista_admin());
 
 drop policy if exists "Admins update protected academic samples" on storage.objects;
 create policy "Admins update protected academic samples"
-on storage.objects for update
-to authenticated
-using (
-  bucket_id = 'protected-academic-samples'
-  and public.is_css_vista_admin()
-)
-with check (
-  bucket_id = 'protected-academic-samples'
-  and public.is_css_vista_admin()
-);
+on storage.objects for update to authenticated
+using (bucket_id = 'protected-academic-samples' and public.is_css_vista_admin())
+with check (bucket_id = 'protected-academic-samples' and public.is_css_vista_admin());
 
 drop policy if exists "Admins delete protected academic samples" on storage.objects;
 create policy "Admins delete protected academic samples"
-on storage.objects for delete
-to authenticated
-using (
-  bucket_id = 'protected-academic-samples'
-  and public.is_css_vista_admin()
-);
+on storage.objects for delete to authenticated
+using (bucket_id = 'protected-academic-samples' and public.is_css_vista_admin());

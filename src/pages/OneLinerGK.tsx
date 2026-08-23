@@ -32,15 +32,13 @@ export default function OneLinerGK() {
       .then((data) => {
         if (!active) return
         setIndex(data)
-        setSelectedSlug((current) => (
-          data.categories.some((item) => item.slug === current) || !data.categories[0]
-            ? current
-            : data.categories[0].slug
-        ))
+        if (!data.categories.some((item) => item.slug === selectedSlug) && data.categories[0]) {
+          setSelectedSlug(data.categories[0].slug)
+        }
       })
       .catch(() => active && setError('The One-Liner GK index could not be loaded. Please refresh and try again.'))
     return () => { active = false }
-  }, [])
+  }, [selectedSlug])
 
   useEffect(() => {
     let active = true

@@ -37,6 +37,7 @@ const modes = [
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },
   { id: 'timed', icon: Timer, title: 'Timed Quiz', desc: 'Set your pace, race the clock', to: '/gk/quiz?mode=timed' },
   { id: 'pms-mock', icon: ClipboardList, title: 'PMS GK Grand Mock', desc: '100 questions · daily entry 8–10 PM', to: '/gk/quiz?mode=pms-mock' },
+  { id: 'one-paper', icon: Target, title: 'One-Paper Competitive Mock', desc: '100 curated MCQs · 90 minutes', to: '/gk/quiz?mode=one-paper' },
   { id: 'revision', icon: RefreshCw, title: 'Smart Revision Queue', desc: 'Due questions selected by spaced revision', to: '/gk/quiz?mode=revision' },
   { id: 'weak', icon: Target, title: 'Weak-Area Practice', desc: 'Built from your mistake history', to: '/gk/quiz?mode=weak' },
   { id: 'saved', icon: Bookmark, title: 'Saved Questions', desc: 'Your bookmarked MCQs', to: '/gk/quiz?mode=saved' },

@@ -20,11 +20,11 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      // This app intentionally colocates small browser helpers with their only
-      // consumer component; that does not affect production correctness.
+      // Shared component modules intentionally export variants/helpers alongside
+      // components (the standard shadcn pattern).
       'react-refresh/only-export-components': 'off',
-      // Data-loading effects explicitly clear stale route state before the
-      // asynchronous request resolves.
+      // Several effects intentionally reset route-driven state before loading
+      // fresh async content. This is correct synchronization, not derived state.
       'react-hooks/set-state-in-effect': 'off',
     },
   },

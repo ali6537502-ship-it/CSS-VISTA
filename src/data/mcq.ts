@@ -2,6 +2,8 @@
 // Questions live in small JSON shards under /mcq/ and are fetched only when needed.
 
 import { bundledBankIndex } from './mcqIndex'
+import { getCuratedSubjectQuestionById } from './cssSubjectMcqs'
+import { getRecentAffairsQuestionById } from './recentAffairsDossier'
 
 export interface BankQuestion {
   id: string // "{slug}-{seq}" - seq locates the chunk: chunk = ceil(seq/800)
@@ -11,6 +13,8 @@ export interface BankQuestion {
   e?: string
   s?: string // subcategory
   d?: 'Basic' | 'Intermediate' | 'Advanced'
+  paperSection?: string // ordered section used by competitive mock papers
+  sourceUrl?: string // shown only with post-paper answer review
 }
 
 export interface BankCategory {
@@ -61,14 +65,22 @@ export function getBankIndex(): Promise<BankIndex> {
   return indexPromise
 }
 
+// All 92 question shards are bundled into the build as lazy chunks, so the bank
+// works with zero runtime fetches. Vite code-splits each shard; it loads on demand.
+const shardLoaders = import.meta.glob<{ default: BankQuestion[] }>('./mcq-shards/*.json')
+
 const chunkCache = new Map<string, Promise<BankQuestion[]>>()
 export function getChunk(slug: string, chunk: number): Promise<BankQuestion[]> {
   const key = `${slug}:${chunk}`
   if (!chunkCache.has(key)) {
-    const promise: Promise<BankQuestion[]> = fetch(`/mcq/cat-${slug}-${chunk}.json`)
-      .then((r) => (r.ok ? r.json() : []))
-      .then((qs: BankQuestion[]) => applyMcqCorrections(qs))
-      .catch(() => [])
+    const path = `./mcq-shards/cat-${slug}-${chunk}.json`
+    const loader = shardLoaders[path]
+    const promise: Promise<BankQuestion[]> = loader
+      ? loader().then((m) => applyMcqCorrections(m.default)).catch(() => [])
+      : fetch(`/mcq/cat-${slug}-${chunk}.json`)
+          .then((r) => (r.ok ? r.json() : []))
+          .then((qs: BankQuestion[]) => applyMcqCorrections(qs))
+          .catch(() => [])
     chunkCache.set(key, promise)
   }
   return chunkCache.get(key)!
@@ -94,6 +106,8 @@ export async function getCategoryQuestions(slug: string): Promise<BankQuestion[]
 }
 
 export async function getQuestionById(id: string): Promise<BankQuestion | null> {
+  if (id.startsWith('css-')) return getCuratedSubjectQuestionById(id)
+  if (id.startsWith('ca-')) return getRecentAffairsQuestionById(id)
   if (id.startsWith('adm-')) {
     return adminBankQuestions().find((x) => x.id === id) ?? null
   }
@@ -111,14 +125,24 @@ export async function getQuestionsByIds(ids: string[]): Promise<BankQuestion[]> 
   const out: BankQuestion[] = []
   const adminPool = adminBankQuestions()
   const shardIds: string[] = []
+  const subjectIds: string[] = []
+  const recentAffairsIds: string[] = []
   for (const id of ids) {
-    if (id.startsWith('adm-')) {
+    if (id.startsWith('ca-')) {
+      recentAffairsIds.push(id)
+    } else if (id.startsWith('css-')) {
+      subjectIds.push(id)
+    } else if (id.startsWith('adm-')) {
       const q = adminPool.find((x) => x.id === id)
       if (q) out.push(q)
     } else {
       shardIds.push(id)
     }
   }
+  const subjectQuestions = await Promise.all(subjectIds.map((id) => getCuratedSubjectQuestionById(id)))
+  subjectQuestions.forEach((question) => { if (question) out.push(question) })
+  const recentQuestions = await Promise.all(recentAffairsIds.map((id) => getRecentAffairsQuestionById(id)))
+  recentQuestions.forEach((question) => { if (question) out.push(question) })
   // group by chunk to minimise fetches
   const groups = new Map<string, string[]>()
   for (const id of shardIds) {

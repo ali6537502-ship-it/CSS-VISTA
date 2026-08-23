@@ -17,8 +17,8 @@ import {
 } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 
-// Batch personal writes so active study sessions do not generate one database
-// request per click. Pending state is also flushed on hide/offline recovery.
+// Batch active-study writes so question taps and planner edits do not create a
+// database request every few seconds. Pending progress still flushes on hide.
 const CLOUD_SYNC_DEBOUNCE_MS = 60_000
 
 export function AccountProvider({ children }: { children: ReactNode }) {

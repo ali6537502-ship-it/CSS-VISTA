@@ -15,6 +15,7 @@ import {
   updateBookSummaryProgress, type BookSummaryProgress,
 } from '@/lib/progress'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
+import { printPage } from '@/components/PrintMenu'
 
 function InlineText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
@@ -229,13 +230,7 @@ function BookReader({
   }
 
   function printSummary() {
-    document.body.classList.add('print-book-summary')
-    const cleanup = () => {
-      document.body.classList.remove('print-book-summary')
-      window.removeEventListener('afterprint', cleanup)
-    }
-    window.addEventListener('afterprint', cleanup)
-    window.print()
+    printPage(true, '.book-summary-print-area')
   }
 
   return (

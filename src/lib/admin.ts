@@ -5,7 +5,6 @@ import type { Question } from '@/data/quiz'
 import type { PastPaper } from '@/data/pastPapers'
 import type { FpscNotification2027, CssDate } from '@/data/css2027'
 import type { TestSeriesAnnouncement } from '@/data/testSeries'
-import type { Json } from '@/lib/database.types'
 import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 
 const AUTH_KEY = 'cssvista:admin:auth'
@@ -60,7 +59,7 @@ async function publishAdminContent(content: AdminContent): Promise<void> {
   if (!client) return
   dispatchCloudStatus({ state: 'saving', message: 'Publishing changes…' })
   const { data, error } = await client.rpc('publish_css_vista_content', {
-    next_content: content as unknown as Json,
+    next_content: content,
   })
   if (error) {
     dispatchCloudStatus({ state: 'error', message: error.message })
@@ -128,11 +127,6 @@ export function initialiseCloudAdminContent(): Promise<void> {
   return cloudInitialisePromise
 }
 
-/**
- * Refresh the public content cache after a Supabase Realtime notification.
- * This deliberately performs a fresh RLS-protected read instead of trusting
- * the notification payload as the canonical content value.
- */
 export async function refreshCloudAdminContent(): Promise<void> {
   if (!accountServiceConfigured) return
   const client = await getSupabaseClient()

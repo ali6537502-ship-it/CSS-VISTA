@@ -7,6 +7,7 @@ import type { BankQuestion } from '@/data/mcq'
 import { addMistake, getAttempt, recordAttempt, recordQuestionTiming, toggleSavedMcq, savedMcqIds } from '@/lib/progress'
 import { addReport } from '@/lib/admin'
 import { isRtlText } from '@/lib/utils'
+import { printPage } from '@/components/PrintMenu'
 
 interface Props {
   q: BankQuestion
@@ -18,17 +19,7 @@ interface Props {
 const nowMs = () => Date.now()
 
 export function printSingleQuestion(cardId: string) {
-  document.querySelectorAll('.print-target').forEach((el) => el.classList.remove('print-target'))
-  const el = document.getElementById(cardId)
-  if (el) el.classList.add('print-target')
-  document.body.classList.add('printing-single', 'print-with-answers')
-  const cleanup = () => {
-    document.body.classList.remove('printing-single', 'print-with-answers')
-    el?.classList.remove('print-target')
-    window.removeEventListener('afterprint', cleanup)
-  }
-  window.addEventListener('afterprint', cleanup)
-  window.print()
+  printPage(true, `#${cardId}`)
 }
 
 export default function McqCard({ q, num, catName, onAction }: Props) {
@@ -186,6 +177,12 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
               {q.o[q.a]}
             </span>
           </p>
+          {q.e && <p className="mt-1.5 leading-relaxed text-foreground/80">{q.e}</p>}
+          {q.sourceUrl && (
+            <a href={q.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1.5 inline-flex text-xs font-semibold text-emerald-800 underline underline-offset-2">
+              Review source
+            </a>
+          )}
         </div>
       </div>
 

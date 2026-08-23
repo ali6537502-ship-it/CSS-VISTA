@@ -10,6 +10,7 @@ import { vocabulary } from '@/data/vocab'
 import { getState, setSubjectProgress, setGoal, getStats } from '@/lib/store'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { notifyProgressChanged } from '@/lib/progressEvents'
+import { printPage } from '@/components/PrintMenu'
 
 const quotationsSeed = [
   { text: 'With faith, discipline and selfless devotion to duty, there is nothing worthwhile that you cannot achieve.', source: 'Muhammad Ali Jinnah' },
@@ -173,7 +174,7 @@ export default function StudyTools() {
 
   return (
     <div>
-      <PageHeader title="Study Tools" description="Planners, timers, trackers and organisers - simple, useful and saved privately in your browser." />
+      <PageHeader title="Study Tools" description="Planners, timers, trackers and organisers for focused daily preparation." />
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10">
         {/* Featured tool shortcuts */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -203,8 +204,9 @@ export default function StudyTools() {
           </div>
         </div>
 
-        {/* Planners */}
-        <Section title="Daily, weekly & monthly planner">
+        <div className="study-tools-plan-print-area space-y-12">
+          {/* Planners */}
+          <Section title="Daily, weekly & monthly planner">
           <div className="grid gap-4 lg:grid-cols-2">
             <div className="overflow-x-auto rounded-lg border bg-white">
               <table className="w-full min-w-[420px] text-sm">
@@ -242,10 +244,10 @@ export default function StudyTools() {
             <SimpleList toolKey="daily-targets" title="Daily targets" placeholder="e.g. 1 precis + 20 MCQs + editorial" addLabel="Add daily target" />
             <SimpleList toolKey="weekly-targets" title="Weekly targets" placeholder="e.g. Finish PA notes ch. 4–6 + 1 essay" addLabel="Add weekly target" />
           </div>
-        </Section>
+          </Section>
 
-        {/* Trackers */}
-        <Section title="Syllabus & subject-progress tracker">
+          {/* Trackers */}
+          <Section title="Syllabus & subject-progress tracker">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {compulsorySubjects.map((s) => {
               const pct = state.subjectProgress[s.slug] ?? 0
@@ -263,7 +265,8 @@ export default function StudyTools() {
               )
             })}
           </div>
-        </Section>
+          </Section>
+        </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
           <MistakeLog />
@@ -347,13 +350,13 @@ export default function StudyTools() {
           <div className="rounded-lg border bg-white p-5">
             <h3 className="flex items-center gap-1.5 font-semibold text-pine"><Printer className="h-4 w-4" /> Printable study plan</h3>
             <p className="mt-1 text-sm text-muted-foreground">Print your planners, targets and trackers for your study wall.</p>
-            <button onClick={() => window.print()} className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><Printer className="h-4 w-4" /> Print this plan</button>
+            <button onClick={() => printPage(true, '.study-tools-plan-print-area')} className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><Printer className="h-4 w-4" /> Print this plan</button>
           </div>
         </div>
 
         <div className="rounded-lg border bg-secondary/50 p-5 text-sm text-muted-foreground">
           <BookMarked className="mr-1.5 inline h-4 w-4 text-emerald-800" />
-          Guest progress stays in this browser. Sign in to sync these tools across devices, or reset progress from the{' '}
+          Sign in to sync these tools across devices, or reset your progress from the{' '}
           <Link to="/dashboard" className="font-medium text-emerald-800 underline underline-offset-2">Performance Dashboard</Link>.
         </div>
       </div>

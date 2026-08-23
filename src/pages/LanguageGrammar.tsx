@@ -146,7 +146,7 @@ export default function LanguageGrammar() {
               <h2 className={`px-2 py-1 font-display text-lg font-bold text-pine ${rtl ? 'urdu-text text-right' : ''}`}>
                 {language === 'urdu' ? 'موضوعات' : 'Course topics'}
               </h2>
-              <div className="mt-2 flex gap-2 overflow-x-auto overscroll-x-contain pb-1 touch-pan-x lg:block lg:max-h-[calc(100vh-11rem)] lg:space-y-1.5 lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-contain lg:pr-1 lg:touch-pan-y">
+              <div className="mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 lg:block lg:max-h-[calc(100vh-11rem)] lg:space-y-1.5 lg:overflow-x-hidden lg:overflow-y-auto lg:overscroll-contain lg:pr-1">
                 {course.topics.map((topic) => {
                   const selected = topic.slug === activeTopic?.slug
                   return (
@@ -154,7 +154,7 @@ export default function LanguageGrammar() {
                       key={topic.slug}
                       type="button"
                       onClick={() => selectTopic(topic.slug)}
-                      className={`min-w-52 rounded-lg px-3 py-2.5 text-sm transition-colors lg:block lg:w-full ${
+                      className={`min-w-52 snap-start rounded-lg px-3 py-2.5 text-sm transition-colors lg:block lg:w-full ${
                         rtl ? 'urdu-text text-right leading-8' : 'text-left'
                       } ${selected ? 'bg-pine font-semibold text-white' : 'bg-secondary/60 hover:bg-emerald-100'}`}
                     >

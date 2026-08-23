@@ -232,14 +232,14 @@ export default function AnswerEvaluation() {
                 {user
                   ? 'Your draft is included in your signed-in progress record and can sync across your devices.'
                   : configured
-                    ? 'Your draft remains available until you sign in and sync your progress.'
-                    : 'Your draft currently stays in this browser. Do not use a shared device for private answers.'}
+                    ? 'Sign in to sync this draft with your progress.'
+                    : 'Sign in to protect and sync private answer drafts.'}
               </div>
             </Section>
           </div>
         </div>
 
-        <Section title="My evaluation drafts" description="Saved drafts and requests from this device or synced account.">
+        <Section title="My evaluation drafts" description="Your saved drafts, requests and synced account history.">
           {history.length === 0 ? (
             <p className="rounded-xl border border-dashed p-6 text-center text-sm text-muted-foreground">
               No evaluation draft has been saved yet.

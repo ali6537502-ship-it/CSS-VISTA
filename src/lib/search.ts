@@ -4,6 +4,7 @@ import { vocabulary } from '@/data/vocab'
 import { grammarTopics, idioms, pairOfWords } from '@/data/grammar'
 import { caIssues } from '@/data/currentAffairs'
 import { serviceGroups } from '@/data/services'
+import { libraryItems } from '@/data/library'
 import { essayThemes } from '@/data/essay'
 import { questions } from '@/data/quiz'
 import { fpscNotices } from '@/data/updates'
@@ -42,10 +43,6 @@ interface RemoteBankIndex {
   categories: { slug: string; name: string; count: number; mpt: boolean }[]
 }
 
-interface RemoteSubjectIndex {
-  subjects: { slug: string; name: string; count: number; designation: string; group: number | null; topics: string[] }[]
-}
-
 interface RemoteOneLinerIndex {
   categories: { slug: string; name: string; subcategories: { name: string }[] }[]
 }
@@ -64,6 +61,19 @@ interface RemoteGrammarCourse {
     description: string
     items: { id: string; fields: { label: string; value: string }[] }[]
   }[]
+}
+
+interface RemoteSubjectMcqIndex {
+  subjects: { slug: string; name: string; designation: string; group: number | null; count: number; topics: string[] }[]
+}
+
+interface RemoteFpscSyllabus {
+  subjects: { slug: string; name: string; designation: string; group: number | null; marks: number; sections: { title: string; items: string[] }[] }[]
+}
+
+interface RemoteRecentAffairs {
+  oneLiners: { date: string; development: string; fact: string }[]
+  mcqs: { id: string; date: string; development: string; question: string; explanation: string }[]
 }
 
 const pageCorpus: SearchDocument[] = defaultHomeCards.map((card) => ({
@@ -154,10 +164,10 @@ const localCorpus: SearchDocument[] = [
       link: '/notes',
     },
     ...(product.samples ?? []).map((sample) => ({
-      id: `notes-sample-${sample.previewFolder}`,
+      id: `notes-sample-${sample.url ?? sample.previewFolder}`,
       title: sample.title,
       category: 'Sample Notes',
-      snippet: `${product.subject} genuine protected sample preview`,
+      snippet: `${product.subject} sample preview`,
       link: '/notes',
     })),
   ]),
@@ -204,6 +214,14 @@ const localCorpus: SearchDocument[] = [
     snippet: `${service.role} ${service.work}`,
     link: `/services#${service.slug}`,
   })),
+  ...libraryItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    category: 'Study Library',
+    snippet: `${item.description} Tags: ${item.tags.join(', ')}`,
+    link: item.fileUrl === '/past-papers' ? '/past-papers' : '/notes',
+    date: item.lastUpdated,
+  })),
   ...essayThemes.map((theme) => ({
     id: `essay-${theme.slug}`,
     title: `Essay theme: ${theme.name}`,
@@ -248,17 +266,21 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       bookLibrary,
       bankIndex,
       oneLinerIndex,
-      subjectIndex,
       englishGrammar,
       urduGrammar,
+      subjectMcqIndex,
+      fpscSyllabus,
+      recentAffairs,
     ] = await Promise.all([
       import('@/data/pastPapers').catch(() => null),
       fetchJson<RemoteBookLibrary>('/book-summaries/index.json'),
       fetchJson<RemoteBankIndex>('/mcq/index.json'),
       fetchJson<RemoteOneLinerIndex>('/one-liner-gk/index.json'),
-      fetchJson<RemoteSubjectIndex>('/css-subject-mcqs/index.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/english.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/urdu.json'),
+      fetchJson<RemoteSubjectMcqIndex>('/css-subject-mcqs-curated/index.json'),
+      fetchJson<RemoteFpscSyllabus>('/fpsc-syllabus.json'),
+      fetchJson<RemoteRecentAffairs>('/recent-affairs/batch-2026-07-11_2026-08-16.json'),
     ])
 
     const remote: SearchDocument[] = []
@@ -295,17 +317,6 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         category: 'GK World Category',
         snippet: `${category.count.toLocaleString()} questions${category.mpt ? ', included in MPT preparation' : ''}.`,
         link: `/gk/cat/${category.slug}`,
-      })))
-    }
-
-    if (subjectIndex) {
-      remote.push(...subjectIndex.subjects.map((subject) => ({
-        id: `css-subject-mcqs-${subject.slug}`,
-        title: `${subject.name} MCQs`,
-        category: subject.designation === 'compulsory' ? 'Compulsory Subject MCQs' : `Optional Group ${subject.group} MCQs`,
-        snippet: `${subject.count.toLocaleString()} accepted questions. Areas: ${subject.topics.slice(0, 8).join(', ')}.`,
-        keywords: subject.topics.join(' '),
-        link: '/mcqs',
       })))
     }
 
@@ -349,6 +360,47 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         })
       })
     })
+
+    if (subjectMcqIndex) {
+      remote.push(...subjectMcqIndex.subjects.map((subject) => ({
+        id: `subject-mcqs-${subject.slug}`,
+        title: `${subject.name} MCQs`,
+        category: 'All Subject MCQs',
+        snippet: `${subject.count.toLocaleString()} questions · ${subject.designation}${subject.group ? ` group ${subject.group}` : ''}.`,
+        keywords: subject.topics.join(' '),
+        link: '/css-mcqs',
+      })))
+    }
+
+    if (fpscSyllabus) {
+      remote.push(...fpscSyllabus.subjects.map((subject) => ({
+        id: `fpsc-syllabus-${subject.slug}`,
+        title: `${subject.name} — FPSC Syllabus`,
+        category: 'FPSC Syllabus & Topic Planner',
+        snippet: `${subject.designation}${subject.group ? ` group ${subject.group}` : ''} · ${subject.marks} marks.`,
+        keywords: subject.sections.map((section) => `${section.title} ${section.items.join(' ')}`).join(' '),
+        link: `/fpsc-syllabus?subject=${encodeURIComponent(subject.slug)}`,
+      })))
+    }
+
+    if (recentAffairs) {
+      remote.push(...recentAffairs.oneLiners.map((item, index) => ({
+        id: `recent-affairs-fact-${index}`,
+        title: item.development,
+        category: 'Recent Affairs One-Liner',
+        snippet: item.fact,
+        date: item.date,
+        link: '/current-affairs',
+      })))
+      remote.push(...recentAffairs.mcqs.map((item) => ({
+        id: `recent-affairs-mcq-${item.id}`,
+        title: item.question,
+        category: 'Recent Affairs MCQ',
+        snippet: `${item.development}. ${item.explanation}`,
+        date: item.date,
+        link: '/current-affairs?tab=mcqs',
+      })))
+    }
 
     return remote
   })()

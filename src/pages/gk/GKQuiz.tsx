@@ -15,14 +15,13 @@ import {
   recordAttempt, recordFiveMin, recordQuestionTiming, savedMcqIds, toggleSavedMcq, wrongIds,
 } from '@/lib/progress'
 import {
-  completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState,
+  completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
   recordQuizResult, recordReview, recordScheduledMock,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
-import { questions as seedQuestions } from '@/data/quiz'
-import { mptAbilityQuestions } from '@/data/mptAbilityQuestions'
-
-
+import {
+  buildCompetitiveMock, currentPakistanDateKey, MOCK_BLUEPRINTS, type MockSection,
+} from '@/data/mockPapers'
 
 interface Resolved {
   title: string
@@ -30,35 +29,7 @@ interface Resolved {
   exam: boolean
   timeSec: number
   note?: string
-}
-
-const mptHistoryKey = 'cssvista:mpt-question-history:v2'
-
-function normalizedQuestion(value: string) {
-  return value.toLocaleLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]+/gu, '')
-}
-
-function uniqueQuestions(items: BankQuestion[], excluded = new Set<string>()) {
-  const seen = new Set(excluded)
-  return items.filter((item) => {
-    const key = normalizedQuestion(item.q)
-    if (!key || seen.has(key)) return false
-    seen.add(key)
-    return true
-  })
-}
-
-function mptSeenQuestions() {
-  try { return new Set<string>(JSON.parse(localStorage.getItem(mptHistoryKey) ?? '[]')) } catch { return new Set<string>() }
-}
-
-async function sampleMptSection(categories: string[], count: number, prior: Set<string>, used: Set<string>) {
-  const pool = uniqueQuestions(await sampleQuestions(categories, Math.max(count * 4, count + 30)), used)
-  const unseen = pool.filter((item) => !prior.has(normalizedQuestion(item.q)))
-  const reused = pool.filter((item) => prior.has(normalizedQuestion(item.q)))
-  const selected = [...unseen, ...reused].slice(0, count)
-  selected.forEach((item) => used.add(normalizedQuestion(item.q)))
-  return selected
+  blueprint?: MockSection[]
 }
 
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
@@ -138,69 +109,60 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       }
       case 'mock':
       case 'pms-mock': {
-        const pmsAreas = [
-          'current-affairs', 'pakistan-affairs', 'pakistan-history', 'pakistan-geography',
-          'everyday-science', 'science', 'islamic-gk', 'english-grammar', 'urdu-language',
-          'computer-basics', 'misc-gk', 'international-organisations',
-        ]
-        const qs = uniqueQuestions(await sampleQuestions(pmsAreas, 350)).slice(0, 100)
-        if (qs.length !== 100) throw new Error(`PPSC PMS bank could produce only ${qs.length} unique questions.`)
+        const availability = getMockAvailability('gk')
+        if (!availability.available) {
+          r = {
+            title: 'PMS GK Grand Mock',
+            qs: [],
+            exam: true,
+            timeSec: 0,
+            note: `PMS GK registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until 10:00 PM.`,
+          }
+          break
+        }
+        const paper = buildCompetitiveMock('pms-gk', mockSessionDateKey || getDailyMockStatus('gk').dateKey)
         r = {
-          title: 'Punjab PMS / PPSC GK Grand Mock',
-          qs,
+          title: paper.title,
+          qs: paper.questions,
           exam: true,
-          timeSec: 90 * 60,
-          note: `A 100-question Punjab PMS / PPSC general-knowledge simulation. Selection is drawn across the serious one-paper domains without forcing a perfectly even classroom quota; official PPSC topic proportions vary by paper. Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}.`,
+          timeSec: paper.timeSec,
+          note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}. Once entered, you may finish after registration closes.`,
+          blueprint: paper.blueprint,
         }
         break
       }
       case 'mpt-mock': {
-        const abilityQuestions: BankQuestion[] = [...seedQuestions
-          .filter((question) => question.category === 'abilities' || question.category === 'reasoning')
-          .map((question) => ({
-            id: `mpt-seed-${question.id}`,
-            q: question.question,
-            o: question.options,
-            a: question.answer,
-            s: question.topic,
-            d: (question.difficulty === 'Easy'
-              ? 'Basic'
-              : question.difficulty === 'Hard'
-                ? 'Advanced'
-              : 'Intermediate') as BankQuestion['d'],
-            e: question.explanation,
-          })), ...mptAbilityQuestions]
-        const prior = mptSeenQuestions()
-        const used = new Set<string>()
-        const islamic = await sampleMptSection(['islamic-gk'], 20, prior, used)
-        const urdu = await sampleMptSection(['urdu-language'], 20, prior, used)
-        const english = await sampleMptSection(['english-grammar'], 50, prior, used)
-        const abilities = uniqueQuestions(abilityQuestions.sort(() => Math.random() - 0.5), used).slice(0, 60)
-        abilities.forEach((item) => used.add(normalizedQuestion(item.q)))
-        const generalKnowledge = await sampleMptSection(
-          ['everyday-science', 'science', 'current-affairs', 'pakistan-affairs', 'pakistan-history', 'pakistan-geography'],
-          50,
-          prior,
-          used,
-        )
-        const labelSection = (items: BankQuestion[], label: string) => items.map((item) => ({ ...item, s: `${label}${item.s ? ` · ${item.s}` : ''}` }))
-        const fullPaper = [
-          ...labelSection(islamic, 'Section I · Islamic Studies / Civics & Ethics'),
-          ...labelSection(urdu, 'Section II · Urdu'),
-          ...labelSection(english, 'Section III · English'),
-          ...labelSection(abilities, 'Section IV · General Abilities'),
-          ...labelSection(generalKnowledge, 'Section V · General Knowledge'),
-        ]
-        if (fullPaper.length !== 200 || uniqueQuestions(fullPaper).length !== 200) {
-          throw new Error(`MPT bank could produce only ${fullPaper.length} unique questions.`)
+        const availability = getMockAvailability('mpt')
+        if (!availability.available) {
+          r = {
+            title: 'Full CSS MPT Practice Mock',
+            qs: [],
+            exam: true,
+            timeSec: 0,
+            note: `CSS MPT registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until midnight.`,
+          }
+          break
         }
-        localStorage.setItem(mptHistoryKey, JSON.stringify(Array.from(new Set([...prior, ...fullPaper.map((item) => normalizedQuestion(item.q))])).slice(-3000)))
+        const paper = buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
         r = {
-          title: 'Full CSS MPT Practice Mock',
-          qs: fullPaper,
+          title: paper.title,
+          qs: paper.questions,
           exam: true,
-          timeSec: 200 * 60,
-          note: `Official FPSC MPT structure: 200 MCQs in 200 minutes, no negative marking. Sections remain in official sequence: Islamic Studies/Civics & Ethics 20, Urdu 20, English 50, General Abilities 60, and General Knowledge 50. Qualifying threshold: 66/200. Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}.`,
+          timeSec: paper.timeSec,
+          note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}. Once entered, you may finish after registration closes.`,
+          blueprint: paper.blueprint,
+        }
+        break
+      }
+      case 'one-paper': {
+        const paper = buildCompetitiveMock('one-paper', currentPakistanDateKey())
+        r = {
+          title: paper.title,
+          qs: paper.questions,
+          exam: true,
+          timeSec: paper.timeSec,
+          note: paper.note,
+          blueprint: paper.blueprint,
         }
         break
       }
@@ -299,8 +261,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       }
     }
     // merge admin-uploaded MCQs into sampled modes + remove disabled ones
-    const idBasedModes = new Set(['saved', 'wrong', 'revision'])
-    if (!idBasedModes.has(m)) {
+    const protectedModes = new Set(['saved', 'wrong', 'revision', 'mock', 'pms-mock', 'mpt-mock', 'one-paper'])
+    if (!protectedModes.has(m)) {
       const chosen = paramCats.length ? paramCats : null
       const adminPool = chosen ? chosen.flatMap((c) => adminBankQuestions(c)) : adminBankQuestions()
       r.qs = [...r.qs, ...adminPool.sort(() => Math.random() - 0.5).slice(0, 25)]
@@ -308,6 +270,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     r.qs = dedupeBankQuestions(filterDisabled(r.qs))
     if (m === 'mock' || m === 'pms-mock') r.qs = r.qs.slice(0, 100)
     if (m === 'mpt-mock') r.qs = r.qs.slice(0, 200)
+    if (m === 'one-paper') r.qs = r.qs.slice(0, 100)
     setResolved(r)
     setLoading(false)
     if (r.qs.length) {
@@ -327,38 +290,57 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   if (scheduledKind && !mockRegistered) {
     const status = getDailyMockStatus(scheduledKind)
     const label = DAILY_MOCK_TIME_LABELS[scheduledKind]
+    const registrationBlueprint = MOCK_BLUEPRINTS[scheduledKind === 'mpt' ? 'mpt' : 'pms-gk']
     return (
       <div>
-        <PageHeader title={status.title} description={`Full practice is available anytime. The daily recorded window is ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
+        <PageHeader title={status.title} description={`Daily supervised entry window: ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
         <div className="mx-auto max-w-xl px-4 py-10">
           <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-7">
             <p className={`text-xs font-extrabold uppercase tracking-[.16em] ${status.available ? 'text-emerald-700' : 'text-amber-700'}`}>
-              {status.available ? 'Daily recorded window open' : 'Anytime practice available'}
+              {status.available ? 'Registration open now' : status.completedToday ? 'Today’s attempt completed' : 'Registration currently closed'}
             </p>
             <h2 className="mt-2 font-display text-2xl font-bold text-pine">Student registration</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               {status.available
-                ? `The daily recorded window is open during ${label}. Your paper timer continues normally after you enter.`
-                : `Start a complete practice paper now. The next daily recorded window opens ${new Date(status.nextAvailableAt).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}.`}
+                ? `Entry is open during ${label}. Your paper timer continues normally after you enter.`
+                : status.completedToday
+                  ? 'Your result is saved in your mock record. Return tomorrow for the next paper.'
+                  : `Next entry opens ${new Date(status.nextAvailableAt).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}.`}
             </p>
+            <div className="mt-4 rounded-xl border bg-secondary/35 p-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-extrabold uppercase tracking-[.12em] text-pine">Paper sequence</p>
+                <span className="text-[11px] font-semibold text-muted-foreground">
+                  {registrationBlueprint.reduce((total, section) => total + section.count, 0)} questions
+                </span>
+              </div>
+              <ol className="mt-2 grid gap-1.5 sm:grid-cols-2">
+                {registrationBlueprint.map((section, index) => (
+                  <li key={section.label} className="flex items-center justify-between gap-2 rounded-lg bg-white px-2.5 py-2 text-xs">
+                    <span className="min-w-0 truncate"><strong className="mr-1 text-emerald-800">{index + 1}.</strong>{section.label}</span>
+                    <span className="shrink-0 font-bold text-pine">{section.count}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
             <label className="mt-5 block text-sm font-bold text-pine">
               Student full name
               <input value={studentName} onChange={(event) => setStudentName(event.target.value)} placeholder="Enter your name as it should appear on the result" className="mt-1.5 h-11 w-full rounded-lg border px-3 font-normal text-foreground outline-none focus:ring-2 focus:ring-emerald-700" />
             </label>
             <button
               type="button"
-              disabled={studentName.trim().length < 2}
+              disabled={!status.available || studentName.trim().length < 2}
               onClick={() => {
                 localStorage.setItem('cssvista:mock-student-name', studentName.trim())
-                setMockSessionDateKey(status.available ? status.dateKey : '')
+                setMockSessionDateKey(status.dateKey)
                 setLoading(true)
                 setMockRegistered(true)
               }}
               className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-45"
             >
-              Start full mock
+              Enter today’s mock
             </button>
-            <p className="mt-3 text-xs text-muted-foreground">Daily-window attempts are recorded once per student profile; anytime practice remains available. Results include score, time, weak areas and previous mock records.</p>
+            <p className="mt-3 text-xs text-muted-foreground">One recorded attempt per student profile per daily session. Results include score, time, weak areas and previous mock records.</p>
           </section>
         </div>
       </div>
@@ -456,7 +438,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 
 // ---------------- Runner ----------------
 function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
-  const { qs, title, exam, timeSec } = resolved
+  const { qs, title, exam, timeSec, blueprint, note } = resolved
   const [cur, setCur] = useState(0)
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
@@ -534,7 +516,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         weaknessCounts.set(area, (weaknessCounts.get(area) ?? 0) + 1)
       }
       if (sel === undefined) return
-      if (!x.id.startsWith('mpt-seed-')) {
+      if (!x.id.startsWith('mock-')) {
         recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''))
         recordReview(x.id, correct)
         if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
@@ -555,8 +537,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     })
     if (mode === 'five-minute') recordFiveMin(score, qs.length)
     if (mode === 'daily') completeChallenge(new Date().toISOString().slice(0, 10))
-    if ((mode === 'mock' || mode === 'pms-mock') && sessionDateKey) recordScheduledMock('gk', sessionDateKey)
-    if (mode === 'mpt-mock' && sessionDateKey) recordScheduledMock('mpt', sessionDateKey)
+    if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk', sessionDateKey)
+    if (mode === 'mpt-mock') recordScheduledMock('mpt', sessionDateKey)
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
 
@@ -577,6 +559,11 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     const history = mockKind
       ? getState().quizResults.filter((result) => result.mockKind === mockKind && (!studentName || result.studentName === studentName)).slice(0, 6)
       : []
+    const sectionResults = (blueprint ?? []).map((section) => {
+      const sectionQuestions = qs.filter((item) => item.paperSection === section.label)
+      const correct = sectionQuestions.filter((item) => answers[item.id] === item.a).length
+      return { ...section, correct, total: sectionQuestions.length }
+    })
     return (
       <div className="mx-auto max-w-4xl px-4 py-8">
         <section className="print-area">
@@ -587,17 +574,29 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
           <p className="mt-1 text-sm text-muted-foreground">
             Accuracy {pct}% · Time {Math.floor(resultTimeSeconds / 60)}m {resultTimeSeconds % 60}s
           </p>
-          {mode === 'mpt-mock' && <p className={`mt-2 text-sm font-bold ${score >= 66 ? 'text-emerald-700' : 'text-red-700'}`}>{score >= 66 ? 'Qualified at the FPSC MPT threshold' : 'Below the FPSC MPT qualifying threshold of 66/200'} · no negative marking</p>}
-          {mockKind && (
+          {(mockKind || sectionResults.length > 0) && (
             <div className="mt-5 grid gap-3 text-left sm:grid-cols-2">
               <div className="rounded-lg bg-amber-50 p-3">
                 <h3 className="text-sm font-bold text-amber-950">Weakness areas</h3>
                 {weakAreas.length ? <ol className="mt-2 space-y-1 text-xs text-amber-950">{weakAreas.map(([area, count]) => <li key={area}>{area} · {count} missed</li>)}</ol> : <p className="mt-2 text-xs text-amber-900">No weakness detected in this attempt.</p>}
               </div>
-              <div className="rounded-lg bg-emerald-50 p-3">
+              {mockKind && <div className="rounded-lg bg-emerald-50 p-3">
                 <h3 className="text-sm font-bold text-emerald-950">Previous mock record</h3>
                 <div className="mt-2 space-y-1 text-xs text-emerald-950">{history.map((item, index) => <p key={item.id}>{index + 1}. {new Date(item.date).toLocaleDateString('en-PK')} · {item.score}/{item.total} · {Math.round(item.score / Math.max(1, item.total) * 100)}%</p>)}</div>
-              </div>
+              </div>}
+              {sectionResults.length > 0 && (
+                <div className="rounded-lg bg-sky-50 p-3 sm:col-span-2">
+                  <h3 className="text-sm font-bold text-sky-950">Section performance</h3>
+                  <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+                    {sectionResults.map((section) => (
+                      <div key={section.label} className="flex items-center justify-between gap-2 rounded-md bg-white/75 px-2.5 py-1.5 text-xs text-sky-950">
+                        <span>{section.label}</span>
+                        <strong>{section.correct}/{section.total}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
           {mode === 'five-minute' && <p className="mt-1 text-xs font-semibold text-emerald-700">Saved to your daily challenge history.</p>}
@@ -658,6 +657,12 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                       {x.o[x.a]}
                     </span>
                   </span>
+                  {x.e && <p className="mt-1.5 text-muted-foreground">{x.e}</p>}
+                  {x.sourceUrl && (
+                    <a href={x.sourceUrl} target="_blank" rel="noopener noreferrer" className="no-print mt-1.5 inline-flex font-bold text-emerald-800 underline underline-offset-2">
+                      Official reference ↗
+                    </a>
+                  )}
                 </div>
               </div>
             )
@@ -691,6 +696,22 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         </div>
       </div>
 
+      {blueprint && blueprint.length > 0 && (
+        <div className="no-print mt-3 overflow-x-auto pb-1" aria-label="Paper section sequence">
+          <ol className="flex min-w-max gap-1.5">
+            {blueprint.map((section, index) => {
+              const active = q.paperSection === section.label
+              return (
+                <li key={section.label} className={`rounded-full border px-2.5 py-1 text-[11px] font-bold ${active ? 'border-emerald-700 bg-emerald-50 text-pine' : 'bg-white text-muted-foreground'}`}>
+                  {index + 1}. {section.label} · {section.count}
+                </li>
+              )
+            })}
+          </ol>
+        </div>
+      )}
+      {note && <p className="no-print mt-2 text-xs leading-relaxed text-muted-foreground">{note}</p>}
+
       {mode === 'five-minute' && fiveDone && (
         <p className="no-print mt-3 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-800">
           You already completed today’s challenge ({fiveDone.score}/{fiveDone.total}). You can practise again - your best daily record stays saved.
@@ -700,7 +721,10 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       {/* Question */}
       <div className="mt-4 rounded-xl border bg-white p-5">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold text-muted-foreground">Question {cur + 1} of {qs.length}</span>
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="shrink-0 text-xs font-bold text-muted-foreground">Question {cur + 1} of {qs.length}</span>
+            {q.paperSection && <span className="truncate rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">{q.paperSection}</span>}
+          </div>
           <button
             onClick={() => setSavedMap((s) => ({ ...s, [q.id]: toggleSavedMcq(q.id) }))}
             className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary"
@@ -756,6 +780,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                 {q.o[q.a]}
               </span>
             </p>
+            {q.e && <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{q.e}</p>}
           </div>
         )}
         {!exam && !revealed[q.id] && (

@@ -3,4 +3,3 @@ dist/
 .sites-runtime/
 *.local
 .DS_Store
-__pycache__/

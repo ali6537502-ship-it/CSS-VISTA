@@ -1,11 +1,11 @@
 // GK question-bank index - bundled at build time so all categories render instantly.
-// Mirrors public/mcq/index.json (regenerate if the bank changes).
+// Mirrors public/mcq/index.json; regenerate with scripts/clean-mcq-bank.mjs.
 
 import type { BankIndex } from './mcq'
 
 export const bundledBankIndex: BankIndex = {
-  "generatedAt": "2026-07-26",
-  "total": 52356,
+  "generatedAt": "2026-08-15",
+  "total": 46144,
   "categories": [
     {
       "slug": "pakistan-geography",
@@ -52,7 +52,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "capitals",
       "name": "Capitals",
-      "count": 1121,
+      "count": 1119,
       "chunks": 2,
       "mpt": true
     },
@@ -73,7 +73,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "flags",
       "name": "Flags",
-      "count": 82,
+      "count": 81,
       "chunks": 1,
       "mpt": true
     },
@@ -101,7 +101,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "pakistan-affairs",
       "name": "Pakistan Affairs",
-      "count": 3033,
+      "count": 3022,
       "chunks": 4,
       "mpt": true
     },
@@ -143,28 +143,28 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "international-organisations",
       "name": "International Organisations",
-      "count": 637,
+      "count": 636,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "united-nations",
       "name": "United Nations",
-      "count": 702,
+      "count": 686,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "science",
       "name": "Science",
-      "count": 4998,
+      "count": 4996,
       "chunks": 7,
       "mpt": true
     },
     {
       "slug": "everyday-science",
       "name": "Everyday Science",
-      "count": 3833,
+      "count": 2970,
       "chunks": 5,
       "mpt": true
     },
@@ -206,7 +206,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "islamic-gk",
       "name": "Islamic General Knowledge",
-      "count": 8448,
+      "count": 8407,
       "chunks": 11,
       "mpt": true
     },
@@ -227,14 +227,14 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "current-affairs",
       "name": "Current Affairs",
-      "count": 7500,
+      "count": 2250,
       "chunks": 10,
       "mpt": true
     },
     {
       "slug": "english-grammar",
       "name": "English Grammar",
-      "count": 4969,
+      "count": 4944,
       "chunks": 7,
       "mpt": true
     },

@@ -606,8 +606,8 @@ function SidebarMenuSkeleton({
 }: React.ComponentProps<"div"> & {
   showIcon?: boolean
 }) {
-  // A stable width keeps skeleton rendering pure and avoids hydration jitter.
-  const width = "67%"
+  // Stable width avoids hydration/layout changes while the menu is loading.
+  const width = "70%"
 
   return (
     <div

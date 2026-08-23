@@ -4,6 +4,7 @@ import { ExternalLink, Printer, RotateCcw, Save } from 'lucide-react'
 import { PageHeader, OfficialNotice } from '@/components/shared'
 import { mptChecklist, writtenChecklist } from '@/data/checklists'
 import { getChecklist, recordActivity, setChecklist } from '@/lib/progress'
+import { printPage } from '@/components/PrintMenu'
 
 const LAST_UPDATED = '17 July 2026'
 const FPSC_URL = 'https://www.fpsc.gov.pk/'
@@ -70,16 +71,12 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
           <div className="h-full rounded-full bg-emerald-600 transition-all" style={{ width: `${(done / allSteps.length) * 100}%` }} />
         </div>
 
-        {groups.map((g, groupIndex) => {
-          const groupOffset = groups
-            .slice(0, groupIndex)
-            .reduce((total, item) => total + item.steps.length, 0)
-          return (
+        {groups.map((g) => (
           <div key={g.group} className="mt-5">
             <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{g.group}</p>
             <div className="mt-2 space-y-2">
-              {g.steps.map((s, stepIndex) => {
-                const i = groupOffset + stepIndex
+              {g.steps.map((s) => {
+                const i = allSteps.findIndex((step) => step.id === s.id)
                 return (
                   <button
                     key={s.id}
@@ -98,8 +95,7 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
               })}
             </div>
           </div>
-          )
-        })}
+        ))}
       </div>
 
       <div className="no-print mt-4 flex flex-wrap items-center gap-2">
@@ -109,7 +105,7 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
         >
           <Save className="h-4 w-4" /> {savedFlash ? 'Saved ✓' : 'Save progress'}
         </button>
-        <button onClick={() => window.print()} className="inline-flex h-10 items-center gap-1.5 rounded-md border bg-white px-4 text-sm font-semibold text-pine">
+        <button onClick={() => printPage(true, '.print-area')} className="inline-flex h-10 items-center gap-1.5 rounded-md border bg-white px-4 text-sm font-semibold text-pine">
           <Printer className="h-4 w-4" /> Print checklist
         </button>
         <button onClick={reset} className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-red-600">

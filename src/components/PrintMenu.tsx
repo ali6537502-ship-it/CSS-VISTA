@@ -1,33 +1,68 @@
 import { useState } from 'react'
 import { Printer } from 'lucide-react'
 
-// Print helper: hides menus/buttons via print CSS; optionally hides answers.
+const PRINT_PORTAL_CLASS = 'print-portal'
+
+function afterPrintLayout(callback: () => void) {
+  window.requestAnimationFrame(() => window.requestAnimationFrame(callback))
+}
+
+// Print only the requested resource. A detached print copy avoids stray navigation,
+// modals and long blank pages while keeping the visible React tree untouched.
 export function printPage(withAnswers: boolean, targetSelector = '.print-area') {
+  document.querySelectorAll(`.${PRINT_PORTAL_CLASS}`).forEach((node) => node.remove())
   document.body.classList.remove('print-with-answers', 'print-no-answers')
   document.body.classList.add(withAnswers ? 'print-with-answers' : 'print-no-answers')
-  const targets = [...document.querySelectorAll<HTMLElement>(targetSelector)]
-  targets.forEach((target) => {
-    target.classList.add('print-selected-area')
-    let current: HTMLElement | null = target
-    while (current?.parentElement && current.parentElement.tagName !== 'MAIN') {
-      const parent: HTMLElement = current.parentElement
-      ;[...parent.children].forEach((sibling) => {
-        if (sibling !== current && sibling instanceof HTMLElement) sibling.classList.add('print-hidden-sibling')
-      })
-      current = parent
-    }
-  })
-  if (targets.length) document.body.classList.add('printing-selected-area')
+  const target = document.querySelector<HTMLElement>(targetSelector)
+  const portal = target ? document.createElement('section') : null
+  if (portal && target) {
+    portal.className = PRINT_PORTAL_CLASS
+    portal.setAttribute('aria-hidden', 'true')
+    const branding = document.querySelector<HTMLElement>('.print-branding')
+    if (branding) portal.appendChild(branding.cloneNode(true))
+    portal.appendChild(target.cloneNode(true))
+    document.body.appendChild(portal)
+    document.body.classList.add('printing-selected-area')
+  }
+
+  const cleanupState: { fallback?: number; media?: MediaQueryList } = {}
   const cleanup = () => {
     document.body.classList.remove('print-with-answers', 'print-no-answers', 'printing-selected-area')
-    document.querySelectorAll('.print-selected-area').forEach((node) => node.classList.remove('print-selected-area'))
-    document.querySelectorAll('.print-hidden-sibling').forEach((node) => node.classList.remove('print-hidden-sibling'))
+    portal?.remove()
     window.removeEventListener('afterprint', cleanup)
-    window.clearTimeout(fallback)
+    cleanupState.media?.removeEventListener('change', handlePrintMedia)
+    if (cleanupState.fallback) window.clearTimeout(cleanupState.fallback)
+  }
+  const handlePrintMedia = (event: MediaQueryListEvent) => {
+    if (!event.matches) cleanup()
   }
   window.addEventListener('afterprint', cleanup)
-  const fallback = window.setTimeout(cleanup, 3000)
-  window.print()
+  cleanupState.media = window.matchMedia('print')
+  cleanupState.media.addEventListener('change', handlePrintMedia)
+  cleanupState.fallback = window.setTimeout(cleanup, 60_000)
+  afterPrintLayout(() => window.print())
+}
+
+// Same-origin PDFs are sent directly to the browser print dialog. If a browser
+// blocks embedded PDF printing, opening the PDF still provides its native print control.
+export function printPdfFile(pdfUrl: string) {
+  const frame = document.createElement('iframe')
+  frame.className = 'pdf-print-frame'
+  frame.title = 'CSS Vista magazine print preview'
+  frame.src = pdfUrl
+  const cleanup = () => frame.remove()
+  frame.addEventListener('load', () => {
+    window.setTimeout(() => {
+      try {
+        frame.contentWindow?.focus()
+        frame.contentWindow?.print()
+      } catch {
+        window.open(pdfUrl, '_blank', 'noopener,noreferrer')
+      }
+      window.setTimeout(cleanup, 60_000)
+    }, 180)
+  }, { once: true })
+  document.body.appendChild(frame)
 }
 
 export default function PrintMenu({ answersAvailable = true, label = 'Print', targetSelector = '.print-area' }: { answersAvailable?: boolean; label?: string; targetSelector?: string }) {

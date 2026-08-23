@@ -8,7 +8,7 @@ import {
   NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, type LucideIcon,
 } from 'lucide-react'
 import { featureAnnouncements, site, notifications } from '@/data/site'
-import { defaultHomeCards } from '@/data/homeCards'
+import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { searchSite, type SearchResult } from '@/lib/search'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/store'
@@ -36,7 +36,6 @@ const nav = [
   {
     label: 'Practice',
     items: [
-      { label: 'ALL CSS SUBJECTS MCQs', to: '/mcqs', icon: Target },
       { label: 'MPT Preparation', to: '/mpt', icon: ClipboardList },
       { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
       { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
@@ -64,6 +63,7 @@ const nav = [
     items: [
       { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
+      { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
       { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
       { label: 'CSS Games', to: '/games', icon: Gamepad2 },
       { label: 'Performance Dashboard', to: '/dashboard', icon: LayoutDashboard },
@@ -84,16 +84,15 @@ const nav = [
 
 const primaryNav = [
   { label: 'Home', to: '/', icon: HomeIcon },
-  { label: 'All Subject MCQs', to: '/mcqs', icon: Target },
+  { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
   { label: 'GK World', to: '/gk', icon: Globe2 },
   { label: 'MPT Practice', to: '/mpt', icon: PenLine },
-  { label: 'Current Affairs', to: '/current-affairs', icon: Newspaper },
   { label: 'Past Papers', to: '/past-papers', icon: FileText },
 ]
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/gk'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/css-mcqs', '/gk'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
   { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
@@ -101,9 +100,7 @@ const mobileBottomNav = [
 
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
-  ...defaultHomeCards
-    .filter((item) => item.visible)
-    .sort((a, b) => a.order - b.order)
+  ...sortHomeCardsByPriority(defaultHomeCards.filter((item) => item.visible))
     .map((item) => ({
       label: item.title,
       to: item.to,
@@ -169,7 +166,7 @@ function NotificationBar() {
 
   if (!active.length) return null
 
-  const syncLabel = !online
+  const syncLabel: string | null = !online
     ? 'Offline'
     : user
       ? syncStatus === 'syncing'
@@ -179,7 +176,7 @@ function NotificationBar() {
           : lastSyncedAt
             ? 'Progress synced'
             : 'Account connected'
-      : 'Progress ready'
+      : null
   const timeLabel = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
     minute: '2-digit',
@@ -187,9 +184,10 @@ function NotificationBar() {
   }).format(deviceTime)
 
   return (
-    <div className="bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
+    <div className="cssv-live-bar bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
         <Link to="/mentors" className="flex shrink-0 items-center gap-1.5" aria-label="Meet the CSS Vista mentors">
+          <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><UserCheck className="h-3.5 w-3.5" /></span>
           <span className="rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">Live</span>
         </Link>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
@@ -220,11 +218,10 @@ function NotificationBar() {
         </div>
         <div
           className="hidden shrink-0 items-center gap-2 border-l border-white/15 pl-3 text-[10px] font-semibold text-emerald-100 md:flex"
-          title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Progress status and current time'}
+          title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Account sync status and local time'}
         >
           <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-          <span>{syncLabel}</span>
-          <span className="text-emerald-200/50">·</span>
+          {syncLabel && <><span>{syncLabel}</span><span className="text-emerald-200/50">·</span></>}
           <time dateTime={deviceTime.toISOString()}>{timeLabel}</time>
         </div>
         <SocialLinks compact />
@@ -360,10 +357,10 @@ function PrintBranding() {
     <div className="print-branding" aria-hidden="true">
       <div className="print-brand-header">
         <img src="/images/logo.png?v=20260810b" alt="" />
-        <div><strong>CSS VISTA</strong><span>Study · Practice · Progress</span></div>
+        <div><strong>Official study resource</strong><span>Study · Practice · Progress</span></div>
       </div>
       <img className="print-brand-watermark" src="/images/logo.png?v=20260810b" alt="" />
-      <div className="print-brand-footer">CSS VISTA · Printed study resource</div>
+      <div className="print-brand-footer">CSS Vista · Official study resource</div>
     </div>
   )
 }
@@ -390,7 +387,6 @@ function BackBar({ onBack }: { onBack: () => void }) {
 }
 
 const routeScrollPositions = new Map<string, number>()
-const routeStackKey = 'cssvista:route-stack:v1'
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -400,7 +396,6 @@ export default function Layout() {
   const navigate = useNavigate()
   const navigationType = useNavigationType()
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
-  const routeStackRef = useRef<string[]>([])
   const { user, configured: accountsConfigured } = useAccount()
 
   useEffect(() => { touchVisit() }, [])
@@ -449,25 +444,6 @@ export default function Layout() {
     }
   }, [currentRoute, navigationType])
   useEffect(() => {
-    let stack = routeStackRef.current
-    if (!stack.length) {
-      try {
-        const stored = JSON.parse(sessionStorage.getItem(routeStackKey) ?? '[]')
-        if (Array.isArray(stored)) stack = stored.filter((item): item is string => typeof item === 'string' && item.startsWith('/'))
-      } catch { stack = [] }
-    }
-    if (navigationType === 'POP') {
-      const existing = stack.lastIndexOf(currentRoute)
-      stack = existing >= 0 ? stack.slice(0, existing + 1) : [...stack, currentRoute]
-    } else if (navigationType === 'REPLACE') {
-      stack = stack.length ? [...stack.slice(0, -1), currentRoute] : [currentRoute]
-    } else if (stack.at(-1) !== currentRoute) {
-      stack = [...stack, currentRoute]
-    }
-    routeStackRef.current = stack.slice(-80)
-    sessionStorage.setItem(routeStackKey, JSON.stringify(routeStackRef.current))
-  }, [currentRoute, navigationType])
-  useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen, searchOpen])
@@ -489,26 +465,25 @@ export default function Layout() {
   }, [])
 
   const goBack = () => {
-    const stack = routeStackRef.current
-    if (stack.length > 1) {
-      const target = stack[stack.length - 2]
-      routeStackRef.current = stack.slice(0, -1)
-      sessionStorage.setItem(routeStackKey, JSON.stringify(routeStackRef.current))
-      navigate(target, { replace: true })
+    const historyIndex = window.history.state?.idx
+    if (typeof historyIndex === 'number' && historyIndex > 0) {
+      navigate(-1)
       return
     }
     navigate('/', { replace: true })
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
       <PrintBranding />
       <AdSenseLoader />
       <StudyActivityTracker />
       <NotificationBar />
       {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
-      <header className="sticky top-0 z-40 border-b bg-white/95 shadow-[0_6px_24px_rgba(8,76,49,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="mx-auto flex h-14 max-w-[1520px] items-center gap-1 px-2.5 sm:h-[68px] sm:gap-3 sm:px-6 xl:h-[82px] xl:px-6">
+      <header className="cssv-site-header sticky top-0 z-40 border-b backdrop-blur-xl">
+        <div className="cssv-site-header-inner mx-auto flex h-14 max-w-[1520px] items-center gap-1 px-2.5 sm:h-[68px] sm:gap-3 sm:px-6 xl:h-[82px] xl:px-6">
+          <div className="hidden xl:block"><SocialLinks compact /></div>
+
           <button
             className="grid h-9 w-9 place-items-center rounded-lg hover:bg-secondary xl:hidden"
             onClick={() => setMobileOpen(true)}
@@ -591,8 +566,8 @@ export default function Layout() {
           </nav>
 
           <div className="hidden xl:flex xl:items-center xl:gap-2">
-            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-3 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet the CSS Vista mentors">
-              <UserRound className="h-4 w-4" />
+            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet the CSS Vista mentors">
+              <UserCheck className="h-4 w-4 text-emerald-800" />
               <span>Mentors</span>
             </Link>
             <SocialLinks />
@@ -628,7 +603,7 @@ export default function Layout() {
               if (event.currentTarget === event.target) setSearchOpen(false)
             }}
           >
-            <section className="w-full max-w-2xl rounded-2xl border bg-white p-4 shadow-2xl sm:p-5">
+            <section className="cssv-glass-panel w-full max-w-2xl rounded-2xl border p-4 shadow-2xl sm:p-5">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <h2 id="universal-search-title" className="font-display text-xl font-bold text-pine">
@@ -661,7 +636,7 @@ export default function Layout() {
       <aside
         hidden={!mobileOpen}
         style={mobileOpen ? undefined : { display: 'none' }}
-        className={`fixed inset-y-0 right-0 z-50 flex w-[85%] max-w-sm flex-col bg-white shadow-xl transition-transform duration-300 ease-out xl:hidden ${
+        className={`cssv-glass-drawer fixed inset-y-0 right-0 z-50 flex w-[85%] max-w-sm flex-col shadow-xl transition-transform duration-300 ease-out xl:hidden ${
           mobileOpen ? 'visible translate-x-0' : 'invisible translate-x-full'
         }`}
         role="dialog"
@@ -673,6 +648,10 @@ export default function Layout() {
           <button onClick={() => setMobileOpen(false)} aria-label="Close menu" className="rounded-md p-2 hover:bg-secondary">
             <X className="h-5 w-5" />
           </button>
+        </div>
+        <div className="flex items-center justify-between border-b px-5 py-2.5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Follow CSS Vista</span>
+          <SocialLinks compact />
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-3" aria-label="Mobile">
           <div className="flex items-center justify-between px-2 pb-2">
@@ -762,7 +741,7 @@ export default function Layout() {
         </div>
       </main>
 
-      <nav className="no-print fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/90 bg-white/96 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_26px_rgba(15,42,32,0.08)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
+      <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
           {mobileBottomNav.map((item) => {
             const active = item.paths.some((path) => (
@@ -787,7 +766,7 @@ export default function Layout() {
 
       <PageFooterAd />
 
-      <footer className="hidden border-t border-t-amber-500/30 bg-cream md:block">
+      <footer className="cssv-site-footer hidden border-t md:block">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Logo className="h-12 w-auto object-contain" />
@@ -837,7 +816,7 @@ export default function Layout() {
               </li>
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              Guest progress stays in this browser. Signed-in students can securely sync progress across devices.
+              Sign in to securely keep your study progress available across devices.
             </p>
           </div>
         </div>

@@ -1,21 +1,21 @@
-import { useEffect, useMemo, useState, type CSSProperties } from 'react'
-import { Link } from 'react-router'
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
+import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  ClipboardCheck, FileText, Globe2, LibraryBig,
-  NotebookPen, PenLine, PlayCircle, Search, LockKeyhole,
-  Target, TimerReset, X, type LucideIcon,
+  ClipboardCheck, Download, FileText, Globe2, GraduationCap, LibraryBig,
+  Newspaper, NotebookPen, PenLine, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
+  Sparkles, Target, TimerReset, type LucideIcon,
 } from 'lucide-react'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
 import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
 import { mergedHomeCards } from '@/lib/admin'
-import { defaultHomeCards } from '@/data/homeCards'
+import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
-import {
-  buildDailyPlan, defaultStudyPlannerSettings, localDateKey,
-} from '@/lib/studyPlanner'
+import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
+import { printPdfFile } from '@/components/PrintMenu'
+import { weeklyMagazine } from '@/data/weeklyMagazine'
 
 interface LinkCard {
   title: string
@@ -27,10 +27,17 @@ interface LinkCard {
 
 const quickActions: LinkCard[] = [
   {
-    title: 'ALL CSS SUBJECTS MCQs',
-    description: 'Compulsory & optional practice',
-    to: '/mcqs',
-    icon: Target,
+    title: 'All CSS Subject MCQs',
+    description: 'Compulsory & optional banks',
+    to: '/css-mcqs',
+    icon: LibraryBig,
+    tone: 'blue',
+  },
+  {
+    title: 'Start CSS',
+    description: 'Understand the complete journey',
+    to: '/start-css',
+    icon: GraduationCap,
     tone: 'emerald',
   },
   {
@@ -41,9 +48,9 @@ const quickActions: LinkCard[] = [
     tone: 'gold',
   },
   {
-    title: 'PMS / GK Mock',
-    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ question central bank`,
-    to: '/gk/quiz?mode=pms-mock',
+    title: 'GK World',
+    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ verified MCQs`,
+    to: '/gk',
     icon: Globe2,
     tone: 'blue',
   },
@@ -71,7 +78,7 @@ const featuredServices = [
   {
     eyebrow: 'PREMIUM NOTES',
     title: 'Notes by Sir Ali Hassan Sargana',
-    description: 'Structured material for CA, PA, Criminology and Political Science.',
+    description: 'Structured material for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History.',
     to: '/notes',
     action: 'View library',
     icon: LibraryBig,
@@ -93,28 +100,106 @@ function openSearch() {
   window.dispatchEvent(new Event('cssvista:open-search'))
 }
 
+function HomeHero() {
+  return (
+    <section
+      className="cssv-home-hero cssv-reveal mt-3"
+      style={{ '--cssv-delay': '55ms' } as CSSProperties}
+      aria-labelledby="css-vista-home-title"
+    >
+      <div className="cssv-home-hero-copy">
+        <p className="cssv-home-hero-eyebrow">
+          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+          Pakistan’s first all-in-one digital ecosystem
+        </p>
+        <h1 id="css-vista-home-title" className="cssv-home-hero-title">
+          Built exclusively for <span>competitive exam preparation.</span>
+        </h1>
+        <p className="cssv-home-hero-description">
+          MCQs, mocks, past papers, notes, study tools and performance tracking—connected in one intelligent platform.
+        </p>
+        <div className="cssv-home-hero-actions">
+          <Link to="/start-css" className="cssv-tap cssv-home-hero-primary">
+            Start preparing <ArrowRight className="h-4 w-4" />
+          </Link>
+          <a href="#all-css-vista-features" className="cssv-tap cssv-home-hero-secondary">
+            Explore all features
+          </a>
+        </div>
+        <div className="cssv-home-hero-proof" aria-label="Platform highlights">
+          <span>Structured resources</span>
+          <span>Daily practice</span>
+          <span>Progress insights</span>
+        </div>
+      </div>
+      <div className="cssv-home-hero-art" aria-hidden="true">
+        <img
+          src="/images/home-hero-pakistan.webp"
+          alt=""
+          width="1200"
+          height="820"
+          fetchPriority="high"
+        />
+        <span className="cssv-home-hero-badge">Pakistan focused</span>
+      </div>
+    </section>
+  )
+}
+
 function SectionHeading({
   title,
   eyebrow,
   action,
   to,
+  headingId,
+  visibility,
 }: {
   title: string
   eyebrow?: string
   action?: string
   to?: string
+  headingId?: string
+  visibility?: { open: boolean; onToggle: () => void; label: string }
 }) {
   return (
     <div className="mb-3 flex items-end justify-between gap-3">
       <div className="min-w-0">
         {eyebrow && <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">{eyebrow}</p>}
-        <h2 className="mt-0.5 text-[17px] font-bold tracking-[-0.02em] text-slate-900 sm:text-lg">{title}</h2>
+        <h2 id={headingId} className="mt-0.5 text-[17px] font-bold tracking-[-0.02em] text-slate-900 sm:text-lg">{title}</h2>
       </div>
-      {action && to && (
-        <Link to={to} className="cssv-tap inline-flex min-h-10 shrink-0 items-center gap-0.5 px-1 text-xs font-bold text-emerald-800">
-          {action} <ChevronRight className="h-3.5 w-3.5" />
-        </Link>
-      )}
+      <div className="flex shrink-0 items-center gap-1">
+        {action && to && (
+          <Link to={to} className="cssv-tap inline-flex min-h-9 items-center gap-0.5 rounded-lg px-1.5 text-xs font-bold text-emerald-800">
+            {action} <ChevronRight className="h-3.5 w-3.5" />
+          </Link>
+        )}
+        {visibility && <VisibilityToggle {...visibility} />}
+      </div>
+    </div>
+  )
+}
+
+function VisibilityToggle({ open, onToggle, label }: { open: boolean; onToggle: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`cssv-visibility-toggle cssv-tap group inline-flex min-h-9 items-center gap-1.5 rounded-full border py-1 pl-1 pr-2.5 text-[10px] font-extrabold shadow-sm ${open ? 'border-slate-200 bg-white text-slate-600 hover:border-emerald-200 hover:text-emerald-900' : 'border-emerald-900 bg-emerald-950 text-white shadow-[0_5px_16px_rgba(6,63,49,0.16)]'}`}
+      aria-expanded={open}
+      aria-label={`${open ? 'Hide' : 'Show'} ${label}`}
+    >
+      <span className={`grid h-6 w-6 place-items-center rounded-full ${open ? 'bg-slate-100 text-slate-500 group-hover:bg-emerald-50 group-hover:text-emerald-800' : 'bg-amber-300 text-emerald-950'}`}>
+        {open ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+      </span>
+      {open ? 'Hide' : 'Show'}
+    </button>
+  )
+}
+
+function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNode }) {
+  return (
+    <div className={`cssv-collapsible-panel ${open ? 'is-open' : 'is-closing'}`} aria-hidden={!open}>
+      <div className="cssv-collapsible-panel-inner">{children}</div>
     </div>
   )
 }
@@ -123,13 +208,13 @@ const officialExamDates = {
   mpt: {
     label: 'MPT 2027',
     dateLabel: '27 September 2026',
-    target: '2026-09-27T09:00:00+05:00',
+    target: '2026-09-27T00:00:00+05:00',
     source: 'https://www.fpsc.gov.pk/uploads/content/1785753970885_MPT_CE-2027.pdf',
   },
   written: {
     label: 'CSS Written 2027',
     dateLabel: '27 January 2027',
-    target: '2027-01-27T09:00:00+05:00',
+    target: '2027-01-27T00:00:00+05:00',
     source: 'https://www.fpsc.gov.pk/',
   },
 } as const
@@ -154,24 +239,24 @@ function CountdownUnit({ value, label, emphasized = false }: { value: number; la
   )
 }
 
-function ExamCountdown() {
+function ExamCountdown({ active = true }: { active?: boolean }) {
   const [now, setNow] = useState(Date.now)
-  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
+    if (!active) return undefined
+    setNow(Date.now())
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
     return () => window.clearInterval(timer)
-  }, [])
+  }, [active])
 
-  if (!visible) return null
   return (
-    <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '70ms' } as CSSProperties} aria-labelledby="exam-countdown-title">
-      <div className="mb-2 flex items-center justify-between px-0.5">
-        <h2 id="exam-countdown-title" className="flex items-center gap-1.5 text-[12px] font-bold text-slate-700">
+    <section className="cssv-glass-subcard min-w-0 rounded-xl border p-2.5" aria-labelledby="exam-countdown-title">
+      <div className="mb-2 flex items-center justify-between gap-2 px-0.5">
+        <h3 id="exam-countdown-title" className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.11em] text-slate-600">
           <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-35 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
-          Live exam countdowns
-        </h2>
-        <span className="flex items-center gap-2 text-[9px] font-semibold text-slate-400">Official FPSC dates <button type="button" onClick={() => setVisible(false)} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-slate-100" aria-label="Hide exam countdowns for this visit"><X className="h-3.5 w-3.5" /></button></span>
+          Official exam dates
+        </h3>
+        <span className="text-[8px] font-semibold text-slate-400">Updates live</span>
       </div>
       <div className="grid grid-cols-2 gap-2">
         {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).map((key) => {
@@ -184,31 +269,31 @@ function ExamCountdown() {
               href={exam.source}
               target="_blank"
               rel="noopener noreferrer"
-              className={`cssv-tap group relative overflow-hidden rounded-xl border p-2.5 shadow-[0_3px_14px_rgba(15,42,32,0.045)] ${isMpt ? 'border-emerald-200 bg-emerald-950 text-white' : 'border-slate-200 bg-white text-slate-900'}`}
+              className={`cssv-glass-subcard cssv-countdown-card cssv-tap group relative overflow-hidden rounded-xl border p-2.5 ${isMpt ? 'cssv-countdown-card-primary' : ''}`}
               aria-label={`${exam.label} countdown. Exam date ${exam.dateLabel}. Open official source.`}
             >
               <span className={`absolute -right-3 -top-3 h-14 w-14 rounded-full ${isMpt ? 'bg-amber-300/10' : 'bg-emerald-100/70'}`} aria-hidden="true" />
               <span className="relative flex items-start justify-between gap-1">
                 <span>
-                  <span className={`block text-[9px] font-extrabold uppercase tracking-[0.12em] ${isMpt ? 'text-emerald-200' : 'text-emerald-700'}`}>{exam.label}</span>
+                  <span className="block text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">{exam.label}</span>
                   <span className="mt-0.5 block text-[9px] font-medium opacity-65">{exam.dateLabel}</span>
                 </span>
-                <span className={`rounded-full px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wide ${isMpt ? 'bg-amber-300 text-emerald-950' : 'bg-emerald-50 text-emerald-800'}`}>
+                <span className={`rounded-full px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wide ${isMpt ? 'bg-amber-100 text-amber-800' : 'bg-emerald-50 text-emerald-800'}`}>
                   {isMpt ? 'Next exam' : 'Written'}
                 </span>
               </span>
-              <time dateTime={exam.target} className={`relative mt-2 grid grid-cols-4 gap-1 ${isMpt ? 'text-white' : 'text-slate-800'}`} aria-hidden="true">
-                <CountdownUnit value={remaining.days} label="days" emphasized={isMpt} />
-                <CountdownUnit value={remaining.hours} label="hrs" emphasized={isMpt} />
-                <CountdownUnit value={remaining.minutes} label="min" emphasized={isMpt} />
-                <CountdownUnit value={remaining.seconds} label="sec" emphasized={isMpt} />
+              <time dateTime={exam.target} className="relative mt-2 grid grid-cols-4 gap-1 text-slate-800" aria-hidden="true">
+                <CountdownUnit value={remaining.days} label="days" />
+                <CountdownUnit value={remaining.hours} label="hrs" />
+                <CountdownUnit value={remaining.minutes} label="min" />
+                <CountdownUnit value={remaining.seconds} label="sec" />
               </time>
               <span className="sr-only">
                 {remaining.days} days, {remaining.hours} hours, {remaining.minutes} minutes and {remaining.seconds} seconds remaining.
               </span>
-              <span className={`relative mt-1.5 flex items-center justify-between text-[8px] font-semibold ${isMpt ? 'text-emerald-100/75' : 'text-slate-400'}`}>
+              <span className="relative mt-1.5 flex items-center justify-between text-[8px] font-semibold text-slate-500">
                 <span>Updates every second</span>
-                <TimerReset className={`cssv-timer h-3.5 w-3.5 ${isMpt ? 'text-amber-300' : 'text-emerald-700'}`} />
+                <TimerReset className={`cssv-timer h-3.5 w-3.5 ${isMpt ? 'text-amber-600' : 'text-emerald-700'}`} />
               </span>
             </a>
           )
@@ -218,46 +303,74 @@ function ExamCountdown() {
   )
 }
 
-function DailyGrandMockCard() {
+function DailyGrandMockCard({ active = true }: { active?: boolean }) {
   const [now, setNow] = useState(Date.now)
 
   useEffect(() => {
+    if (!active) return undefined
+    setNow(Date.now())
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
     return () => window.clearInterval(timer)
-  }, [])
+  }, [active])
 
   return (
-    <section className="cssv-reveal mt-3 grid gap-2 sm:grid-cols-2" style={{ '--cssv-delay': '78ms' } as CSSProperties} aria-label="Daily Grand Mocks">
-      {(['gk', 'mpt'] as const).map((kind) => {
-        const schedule = getDailyMockStatus(kind, new Date(now))
-        const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
-        const remaining = remainingTime(target, now)
-        const body = (
-          <div className={`cssv-tap rounded-xl border p-3 shadow-[0_3px_16px_rgba(15,42,32,0.045)] ${schedule.live ? 'border-amber-300 bg-emerald-950 text-white' : 'border-slate-200 bg-white text-slate-900'}`}>
-            <div className="flex items-start gap-2.5">
-              <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${schedule.live ? 'bg-amber-300 text-emerald-950' : 'bg-emerald-50 text-emerald-800'}`}>
-                {schedule.live ? <PlayCircle className="h-4.5 w-4.5" /> : <LockKeyhole className="h-4.5 w-4.5" />}
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className={`block text-[8px] font-extrabold uppercase tracking-[0.14em] ${schedule.live ? 'text-amber-300' : 'text-emerald-700'}`}>
-                  {schedule.live ? 'Registration open now' : schedule.completedToday ? 'Completed today' : 'Daily Grand Mock'}
+    <section className="cssv-glass-subcard cssv-daily-mock rounded-xl border p-2 text-slate-900" aria-labelledby="daily-mock-timers-title">
+      <div className="mb-1.5 flex items-center justify-between gap-2 px-0.5">
+        <h3 id="daily-mock-timers-title" className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">Tonight’s mock windows</h3>
+        <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
+      </div>
+      <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
+        {(['gk', 'mpt'] as const).map((kind) => {
+          const schedule = getDailyMockStatus(kind, new Date(now))
+          const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
+          const remaining = remainingTime(target, now)
+          const totalHours = remaining.hours + (remaining.days * 24)
+          const timeValue = `${String(totalHours).padStart(2, '0')}:${String(remaining.minutes).padStart(2, '0')}:${String(remaining.seconds).padStart(2, '0')}`
+          const body = (
+            <div className={`cssv-glass-subcard cssv-tap min-w-0 rounded-lg border p-2 ${schedule.live ? 'cssv-daily-mock-live text-emerald-950' : 'text-slate-900'}`}>
+              <div className="flex min-w-0 items-center gap-1.5">
+                <span className={`cssv-glass-icon grid h-7 w-7 shrink-0 place-items-center rounded-md ${schedule.live ? 'text-amber-700' : 'text-emerald-800'}`}>
+                  {schedule.live ? <PlayCircle className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
                 </span>
-                <span className="mt-0.5 block text-[13px] font-bold">{schedule.title}</span>
-                <span className={`mt-0.5 block text-[9px] ${schedule.live ? 'text-emerald-100/75' : 'text-slate-500'}`}>{DAILY_MOCK_TIME_LABELS[kind]}</span>
-              </span>
+                <span className="min-w-0 flex-1">
+                  <span className={`block truncate text-[7px] font-extrabold uppercase tracking-[0.1em] ${schedule.live ? 'text-amber-700' : 'text-emerald-700'}`}>
+                    {schedule.live ? 'Open now' : schedule.completedToday ? 'Completed' : 'Starts in'}
+                  </span>
+                  <span className="block truncate text-[9px] font-bold leading-tight">{schedule.title.replace(' Grand Mock', '')}</span>
+                </span>
+              </div>
+              <time dateTime={target} className="mt-1.5 block font-mono text-[13px] font-black leading-none tabular-nums tracking-[-0.04em]" aria-label={`${totalHours} hours, ${remaining.minutes} minutes and ${remaining.seconds} seconds`}>
+                {timeValue}
+              </time>
+              <span className="mt-1 block truncate text-[7px] font-semibold text-slate-500">{DAILY_MOCK_TIME_LABELS[kind]}</span>
             </div>
-            <div className="mt-2 grid grid-cols-3 gap-1.5">
-              <CountdownUnit value={remaining.hours + (remaining.days * 24)} label="hrs" />
-              <CountdownUnit value={remaining.minutes} label="min" />
-              <CountdownUnit value={remaining.seconds} label="sec" />
-            </div>
-            <p className={`mt-1.5 text-[8px] ${schedule.live ? 'text-emerald-100/70' : 'text-slate-500'}`}>
-              {schedule.live ? 'Time left to enter · finish after registration closes' : 'Countdown to next registration'}
-            </p>
-          </div>
-        )
-        return schedule.live ? <Link key={kind} to={schedule.route}>{body}</Link> : <div key={kind}>{body}</div>
-      })}
+          )
+          return schedule.live ? <Link key={kind} to={schedule.route}>{body}</Link> : <div key={kind}>{body}</div>
+        })}
+      </div>
+    </section>
+  )
+}
+
+function TimerHub({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+  return (
+    <section className="cssv-glass-panel cssv-timer-hub cssv-reveal mt-3 rounded-2xl border p-2.5" style={{ '--cssv-delay': '70ms' } as CSSProperties} aria-labelledby="all-countdowns-title">
+      <div className="flex items-center justify-between gap-3 px-0.5">
+        <div className="min-w-0">
+          <h2 id="all-countdowns-title" className="flex items-center gap-1.5 text-[12px] font-bold text-slate-800">
+            <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-30 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
+            Live preparation timers
+          </h2>
+          <p className="mt-0.5 text-[8px] font-medium text-slate-400">{open ? 'Daily mock windows and official exam countdowns' : 'All countdowns are hidden for this view'}</p>
+        </div>
+        <VisibilityToggle open={open} onToggle={onToggle} label="all preparation timers" />
+      </div>
+      <AnimatedCollapse open={open}>
+        <div className="mt-2 grid items-start gap-2 md:grid-cols-[minmax(190px,0.62fr)_minmax(0,1.38fr)] lg:grid-cols-[minmax(210px,0.55fr)_minmax(0,1.45fr)]">
+          <DailyGrandMockCard active={open} />
+          <ExamCountdown active={open} />
+        </div>
+      </AnimatedCollapse>
     </section>
   )
 }
@@ -280,7 +393,7 @@ const resourceTabs = {
 function ResourceToggle() {
   const [tab, setTab] = useState<keyof typeof resourceTabs>('study')
   return (
-    <section className="cssv-reveal mt-5 rounded-2xl border border-slate-200 bg-white p-3" aria-labelledby="home-resource-switch">
+    <section className="cssv-glass-panel cssv-reveal mt-5 rounded-2xl border p-3" aria-labelledby="home-resource-switch">
       <div className="flex items-center justify-between gap-3">
         <h2 id="home-resource-switch" className="text-[15px] font-bold tracking-[-0.02em] text-slate-900">Browse by goal</h2>
         <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-0.5">
@@ -288,10 +401,10 @@ function ResourceToggle() {
           <button type="button" onClick={() => setTab('practice')} className={`cssv-tap min-h-8 rounded-md px-3 text-[10px] font-bold ${tab === 'practice' ? 'bg-white text-emerald-900 shadow-sm' : 'text-slate-500'}`} aria-pressed={tab === 'practice'}>Practice</button>
         </div>
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+      <div key={tab} className="cssv-content-swap mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
         {resourceTabs[tab].map((item) => (
-          <Link key={item.title} to={item.to} className="cssv-tap flex min-h-[60px] items-center gap-2.5 rounded-xl bg-slate-50 p-2.5 hover:bg-emerald-50">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white text-emerald-800 shadow-sm"><item.icon className="h-4 w-4" /></span>
+          <Link key={item.title} to={item.to} className="cssv-glass-subcard cssv-tap flex min-h-[60px] items-center gap-2.5 rounded-xl p-2.5">
+            <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800"><item.icon className="h-4 w-4" /></span>
             <span className="min-w-0"><span className="block text-[11px] font-bold text-slate-800">{item.title}</span><span className="mt-0.5 line-clamp-1 block text-[9px] leading-snug text-slate-500">{item.detail}</span></span>
           </Link>
         ))}
@@ -301,12 +414,14 @@ function ResourceToggle() {
 }
 
 function FeatureVisual({ variant, icon: Icon }: { variant: string; icon: LucideIcon }) {
-  if (variant === 'test' || variant === 'handwritten') {
+  if (variant === 'test' || variant === 'handwritten' || variant === 'library') {
+    const mentorPhoto = variant === 'library' ? '/images/mentor-ali.jpg' : '/images/mentor-sadia.jpg'
+    const mentorLabel = variant === 'library' ? 'Sir Ali' : 'Ms. Sadia'
     return (
       <div className={`cssv-feature-visual cssv-feature-visual-${variant} flex items-center justify-center`} aria-hidden="true">
         <span className="cssv-visual-orb" />
-        <img src="/images/mentor-sadia.jpg" alt="" className="relative z-[2] h-[72%] w-[72%] rounded-2xl border border-white/70 object-cover shadow-lg" />
-        <span className="absolute bottom-3 z-[3] rounded-full bg-white/92 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wide text-emerald-900 shadow-sm">Ms. Sadia</span>
+        <img src={mentorPhoto} alt="" className="relative z-[2] h-[72%] w-[72%] rounded-2xl border border-white/70 object-cover object-top shadow-lg" />
+        <span className="absolute bottom-3 z-[3] rounded-full bg-white/92 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wide text-emerald-900 shadow-sm">{mentorLabel}</span>
       </div>
     )
   }
@@ -324,6 +439,68 @@ function FeatureVisual({ variant, icon: Icon }: { variant: string; icon: LucideI
   )
 }
 
+function WeeklyMagazineCard() {
+  const available = Boolean(weeklyMagazine.pdfUrl)
+
+  return (
+    <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
+      <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
+      <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
+        <div className="grid grid-cols-[minmax(0,1fr)_96px] gap-0 sm:grid-cols-[minmax(0,1fr)_190px]">
+          <div className="min-w-0 p-3.5 pr-2 sm:p-5">
+            <div className="flex items-start gap-3">
+              <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
+                <Newspaper className="h-5 w-5" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{weeklyMagazine.issue}</p>
+                <h3 id="weekly-magazine-title" className="mt-0.5 text-[16px] font-bold tracking-[-0.02em] text-slate-900">{weeklyMagazine.title}</h3>
+                <p className="mt-1 max-w-2xl text-[11px] leading-relaxed text-slate-500 sm:text-xs">{weeklyMagazine.description}</p>
+                {weeklyMagazine.pageCount && <span className="mt-1.5 inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-[8px] font-bold text-emerald-800">{weeklyMagazine.pageCount} pages · Free issue</span>}
+              </div>
+            </div>
+            <ul className="mt-3 hidden gap-1.5 text-[10px] text-slate-600 min-[390px]:grid sm:grid-cols-3">
+              {weeklyMagazine.coverage.map((item) => (
+                <li key={item} className="flex items-start gap-1.5"><span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />{item}</li>
+              ))}
+            </ul>
+            <div className="no-print mt-4 flex flex-wrap gap-2">
+              {available && weeklyMagazine.pdfUrl ? (
+                <a href={weeklyMagazine.pdfUrl} download className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg bg-emerald-900 px-3 text-[10px] font-bold text-white">
+                  <Download className="h-3.5 w-3.5" /> Free PDF download
+                </a>
+              ) : (
+                <button type="button" disabled className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-slate-100 px-3 text-[10px] font-bold text-slate-400">
+                  <Download className="h-3.5 w-3.5" /> Free PDF · Coming soon
+                </button>
+              )}
+              <button
+                type="button"
+                disabled={!available || !weeklyMagazine.pdfUrl}
+                onClick={() => weeklyMagazine.pdfUrl && printPdfFile(weeklyMagazine.pdfUrl)}
+                className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900 disabled:cursor-not-allowed disabled:text-slate-400"
+              >
+                <Printer className="h-3.5 w-3.5" /> Print magazine
+              </button>
+            </div>
+          </div>
+          <div className="relative min-h-[176px] overflow-hidden bg-emerald-950 p-2 sm:min-h-[210px] sm:p-4">
+            <span className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-amber-300/25" aria-hidden="true" />
+            <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
+            {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
+              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative block h-full overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl" aria-label="Open the weekly current affairs journal">
+                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="h-full w-full object-cover object-top" />
+              </a>
+            ) : (
+              <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>
+            )}
+          </div>
+        </div>
+      </article>
+    </section>
+  )
+}
+
 function getContinueProgress(activity: Activity | undefined, stats: ReturnType<typeof getStats>, state: ReturnType<typeof getState>) {
   if (!activity) return 0
   if (/mpt|gk|quiz|five-minute/.test(activity.path)) return stats.accuracy
@@ -332,20 +509,21 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 }
 
 export default function Home() {
-  const [showContinue, setShowContinue] = useState(true)
-  const personalizedConfigured = useMemo(() => {
-    try { return (JSON.parse(localStorage.getItem('cssvista:fpsc-personal-syllabus:v1') ?? '{}').selected ?? []).length > 0 } catch { return false }
-  }, [])
+  const location = useLocation()
+  const [showTimers, setShowTimers] = useState(true)
+  const [showContinueStudy, setShowContinueStudy] = useState(true)
   const stats = useMemo(() => getStats(), [])
   const activity = useMemo(() => recentActivities(4)[0], [])
   const initialState = useMemo(() => getState(), [])
   const revisionStats = useMemo(() => getRevisionStats(), [])
   const today = useMemo(() => localDateKey(), [])
   const completed = initialState.planTaskCompletions?.[today] ?? []
-
-  const plannerSettings = initialState.studyPlanner ?? defaultStudyPlannerSettings()
+  const plannerSettings = initialState.studyPlanner
+  const hasPlanner = Boolean(plannerSettings)
   const todayTasks = useMemo(
-    () => buildDailyPlan(plannerSettings, initialState.subjectProgress, today, revisionStats.due).slice(0, 4),
+    () => plannerSettings
+      ? buildDailyPlan(plannerSettings, initialState.subjectProgress, today, revisionStats.due).slice(0, 4)
+      : [],
     [initialState.subjectProgress, plannerSettings, revisionStats.due, today],
   )
   const completedCount = todayTasks.filter((task) => completed.includes(task.id)).length
@@ -358,19 +536,48 @@ export default function Home() {
   })
   const continueProgress = getContinueProgress(activity, stats, initialState)
   const allFeatures = useMemo(
-    () => mergedHomeCards(defaultHomeCards)
-      .filter((card) => card.visible)
+    () => sortHomeCardsByPriority(mergedHomeCards(defaultHomeCards)
+      .filter((card) => (
+        card.visible
+        && card.id !== 'current-affairs'
+        && !card.to.includes('/current-affairs')
+        && card.id !== 'pakistan-affairs'
+        && !card.to.includes('/pakistan-affairs')
+        && card.id !== 'trend-analyzer'
+        && !card.to.includes('/trend-analyzer')
+        && card.id !== 'downloads'
+        && !card.to.includes('/downloads')
+        && (hasPlanner || card.id !== 'study-planner')
+      )))
       .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
-    [],
+    [hasPlanner],
   )
 
+  useEffect(() => {
+    setShowTimers(true)
+    setShowContinueStudy(true)
+  }, [location.key])
+
+  useEffect(() => {
+    const restoreDismissedPanels = () => {
+      setShowTimers(true)
+      setShowContinueStudy(true)
+    }
+    window.addEventListener('pageshow', restoreDismissedPanels)
+    window.addEventListener('popstate', restoreDismissedPanels)
+    return () => {
+      window.removeEventListener('pageshow', restoreDismissedPanels)
+      window.removeEventListener('popstate', restoreDismissedPanels)
+    }
+  }, [])
+
   return (
-    <div className="cssv-home min-h-screen bg-[#f7f6f1] pb-4 text-slate-900">
+    <div className="cssv-home min-h-screen pb-4 text-slate-900">
       <div className="mx-auto max-w-[1240px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-7">
         <button
           type="button"
           onClick={openSearch}
-          className="cssv-reveal cssv-tap flex h-11 w-full items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3 text-left shadow-[0_2px_14px_rgba(15,42,32,0.04)]"
+          className="cssv-glass-panel cssv-home-search cssv-reveal cssv-tap flex h-11 w-full items-center gap-2.5 rounded-xl border px-3 text-left"
           style={{ '--cssv-delay': '40ms' } as CSSProperties}
           aria-label="Search notes, MCQs, subjects, past papers and more"
         >
@@ -379,68 +586,79 @@ export default function Home() {
           <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
         </button>
 
-        <ExamCountdown />
-        <DailyGrandMockCard />
+        <HomeHero />
 
-        {showContinue && <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
-          <div className="flex items-center justify-between"><SectionHeading title="Continue studying" action="History" to="/dashboard" /><button type="button" onClick={() => setShowContinue(false)} className="mb-3 grid h-8 w-8 place-items-center rounded-lg hover:bg-white" aria-label="Hide Continue studying for this visit"><X className="h-4 w-4" /></button></div>
-          <article className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-[#073f31] text-white shadow-[0_10px_26px_rgba(6,63,49,0.12)]">
-            <div className="relative flex min-h-[96px] items-center gap-3 overflow-hidden p-3 sm:p-3.5">
-              <div className="cssv-continue-grid absolute inset-0 opacity-40" aria-hidden="true" />
-              <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-amber-300 ring-1 ring-white/10">
-                {activity?.type === 'past-paper' ? <FileText className="h-5 w-5" /> : <PlayCircle className="h-5 w-5" />}
-              </div>
-              <div className="relative min-w-0 flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-200">
-                  {activity ? 'Pick up where you stopped' : 'Your first step'}
-                </p>
-                <h3 className="mt-0.5 line-clamp-1 text-[14px] font-bold">
-                  {activity?.label || 'Build your CSS preparation roadmap'}
-                </h3>
-                <p className="mt-0.5 line-clamp-1 text-[10px] text-emerald-100/75">
-                  {activity ? relativeTime(activity.ts) : 'Choose subjects, understand the exam and begin with confidence.'}
-                </p>
-                {continueProgress > 0 && (
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/15">
-                      <span className="cssv-progress block h-full rounded-full bg-amber-400" style={{ width: `${continueProgress}%` }} />
-                    </span>
-                    <span className="text-[10px] font-bold text-amber-200">{continueProgress}%</span>
-                  </div>
-                )}
-              </div>
-              <Link
-                to={activity?.path || '/start-css'}
-                className="cssv-tap relative inline-flex h-9 shrink-0 items-center gap-1 rounded-lg bg-white px-2.5 text-[10px] font-bold text-emerald-950"
-              >
-                {activity ? 'Resume' : 'Start'} <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </article>
-        </section>}
+        <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 
-        {personalizedConfigured ? <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '105ms' } as CSSProperties} aria-labelledby="planner-home-card">
-          <Link to="/study-planner" className="cssv-tap flex min-h-[68px] items-center gap-3 rounded-xl border border-emerald-200/80 bg-white p-3 shadow-[0_3px_16px_rgba(15,42,32,0.04)]">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800"><CalendarCheck2 className="h-[18px] w-[18px]" /></span>
-            <span className="min-w-0 flex-1">
-              <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-700">My study planner</span>
-              <span id="planner-home-card" className="mt-0.5 block text-[13px] font-bold text-slate-900">{completedCount} of {todayTasks.length} tasks completed today</span>
-              <span className="mt-0.5 block truncate text-[9px] text-slate-500">Open today’s syllabus-based plan</span>
-            </span>
-            <ChevronRight className="h-4 w-4 shrink-0 text-emerald-700" />
-          </Link>
-        </section> : <Link to="/study-planner" className="cssv-reveal cssv-tap mt-3 flex min-h-[68px] items-center gap-3 rounded-xl border border-dashed border-emerald-300 bg-white p-3" style={{ '--cssv-delay': '105ms' } as CSSProperties}><span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-800"><CalendarCheck2 className="h-5 w-5" /></span><span><span className="block text-xs font-bold text-pine">Configure FPSC syllabus & topic planner</span><span className="text-[10px] text-slate-500">Choose subjects before a personalized plan appears.</span></span></Link>}
+        <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
+          <SectionHeading
+            title="Continue studying"
+            headingId="continue-studying"
+            action="History"
+            to="/dashboard"
+            visibility={{ open: showContinueStudy, onToggle: () => setShowContinueStudy((current) => !current), label: 'Continue studying panel' }}
+          />
+          <AnimatedCollapse open={showContinueStudy}>
+            <article className="cssv-glass-panel cssv-continue-panel overflow-hidden rounded-2xl border text-slate-900">
+              <div className="relative flex min-h-[96px] items-center gap-3 overflow-hidden p-3 sm:p-3.5">
+                <div className="cssv-continue-grid absolute inset-0 opacity-40" aria-hidden="true" />
+                <div className="cssv-glass-icon relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-emerald-800">
+                  {activity?.type === 'past-paper' ? <FileText className="h-5 w-5" /> : <PlayCircle className="h-5 w-5" />}
+                </div>
+                <div className="relative min-w-0 flex-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">
+                    {activity ? 'Pick up where you stopped' : 'Your first step'}
+                  </p>
+                  <h3 className="mt-0.5 line-clamp-1 text-[14px] font-bold">
+                    {activity?.label || 'Build your CSS preparation roadmap'}
+                  </h3>
+                  <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-500">
+                    {activity ? relativeTime(activity.ts) : 'Choose subjects, understand the exam and begin with confidence.'}
+                  </p>
+                  {continueProgress > 0 && (
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-emerald-950/10">
+                        <span className="cssv-progress block h-full rounded-full bg-amber-400" style={{ width: `${continueProgress}%` }} />
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-800">{continueProgress}%</span>
+                    </div>
+                  )}
+                </div>
+                <Link
+                  to={activity?.path || '/start-css'}
+                  className="cssv-tap relative inline-flex h-9 shrink-0 items-center gap-1 rounded-lg bg-emerald-900 px-2.5 text-[10px] font-bold text-white shadow-[0_8px_20px_rgba(4,78,52,0.18)]"
+                >
+                  {activity ? 'Resume' : 'Start'} <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </article>
+          </AnimatedCollapse>
+        </section>
+
+        {hasPlanner && (
+          <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '35ms' } as CSSProperties} aria-labelledby="planner-home-card">
+            <Link to="/study-planner" className="cssv-glass-panel cssv-tap flex min-h-[68px] items-center gap-3 rounded-xl border p-3">
+              <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800"><CalendarCheck2 className="h-[18px] w-[18px]" /></span>
+              <span className="min-w-0 flex-1">
+                <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-700">My study planner</span>
+                <span id="planner-home-card" className="mt-0.5 block text-[13px] font-bold text-slate-900">{completedCount} of {todayTasks.length} tasks completed today</span>
+                <span className="mt-0.5 block truncate text-[9px] text-slate-500">Open today’s syllabus-based plan</span>
+              </span>
+              <ChevronRight className="h-4 w-4 shrink-0 text-emerald-700" />
+            </Link>
+          </section>
+        )}
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
-          <div id="quick-access" className="grid grid-cols-3 gap-2 lg:gap-2.5">
+          <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-2.5">
             {quickActions.map((item) => (
               <Link
                 key={item.title}
                 to={item.to}
-                className={`cssv-quick-card cssv-quick-${item.tone} cssv-tap group flex min-h-[80px] min-w-0 flex-col items-start gap-1.5 rounded-xl border bg-white p-2.5 sm:flex-row sm:items-center sm:gap-2.5 sm:p-3`}
+                className={`cssv-glass-panel cssv-quick-card cssv-quick-${item.tone} cssv-tap group flex min-h-[80px] min-w-0 flex-col items-start gap-1.5 rounded-xl border p-2.5 sm:flex-row sm:items-center sm:gap-2.5 sm:p-3`}
               >
-                <span className="cssv-quick-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9">
+                <span className="cssv-glass-icon cssv-quick-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9">
                   <item.icon className={`h-4 w-4 sm:h-[18px] sm:w-[18px] ${item.title === 'GK World' ? 'cssv-globe' : item.title === 'CSS MPT' ? 'cssv-timer' : ''}`} />
                 </span>
                 <span className="min-w-0">
@@ -454,6 +672,8 @@ export default function Home() {
 
         <ResourceToggle />
 
+        <WeeklyMagazineCard />
+
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
           <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
           <div id="featured-services" className="cssv-feature-track -mx-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2 sm:-mx-5 sm:px-5 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
@@ -461,7 +681,7 @@ export default function Home() {
               <Link
                 key={service.eyebrow}
                 to={service.to}
-                className="cssv-feature-card cssv-tap group grid min-w-[84%] snap-center grid-cols-[1.15fr_.85fr] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_5px_24px_rgba(15,42,32,0.055)] sm:min-w-[58%] lg:min-w-0"
+                className="cssv-glass-panel cssv-feature-card cssv-tap group grid min-w-[84%] snap-center grid-cols-[1.15fr_.85fr] overflow-hidden rounded-2xl border sm:min-w-[58%] lg:min-w-0"
               >
                 <span className="flex min-w-0 flex-col p-4 pr-1">
                   <span className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{service.eyebrow}</span>
@@ -483,8 +703,8 @@ export default function Home() {
             {allFeatures.map((feature) => {
               const FeatureIcon = cardIcons[feature.icon] ?? BookOpen
               return (
-                <Link key={feature.id} to={feature.to} className="cssv-tap group flex min-h-[58px] min-w-0 items-center gap-2.5 rounded-xl border border-slate-200 bg-white p-2.5 hover:border-emerald-200 hover:bg-emerald-50/45">
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-50 text-emerald-800 group-hover:bg-white">
+                <Link key={feature.id} to={feature.to} className="cssv-glass-panel cssv-feature-link cssv-tap group flex min-h-[58px] min-w-0 items-center gap-2.5 rounded-xl border p-2.5">
+                  <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800">
                     <FeatureIcon className="h-4 w-4" />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -498,10 +718,6 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="mt-7 flex items-center justify-between gap-3 rounded-xl border border-emerald-900/10 bg-emerald-50/60 px-3.5 py-3 text-[10px] text-emerald-900 md:hidden">
-          <span>Your study progress remains available between visits.</span>
-          <Link to="/account" className="font-bold">Sync with account</Link>
-        </div>
       </div>
       <MilestoneCelebration
         open={showDailyCelebration}

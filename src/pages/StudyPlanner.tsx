@@ -1,141 +1,247 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ArrowDown, ArrowUp, Check, ChevronDown, EyeOff, Plus, Printer, RotateCcw, Trash2 } from 'lucide-react'
-import { PageHeader } from '@/components/shared'
-import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
-
-type IndexSubject = { slug: string; name: string; designation: string; group: number | null; topics: string[] }
-type OfficialSubject = { slug: string; name: string; designation: 'compulsory' | 'optional'; group: number | null; marks: number; pages: [number, number]; sections: { title: string; items: string[] }[] }
-type CustomTopic = { id: string; text: string; done: boolean }
-type PlannerState = { selected: string[]; hidden: string[]; complete: string[]; custom: Record<string, CustomTopic[]> }
-const key = 'cssvista:fpsc-personal-syllabus:v1'
-const emptyState: PlannerState = { selected: [], hidden: [], complete: [], custom: {} }
-
-function load(): PlannerState {
-  try { return { ...emptyState, ...JSON.parse(localStorage.getItem(key) ?? '{}') } } catch { return emptyState }
-}
-function slugify(value: string) { return value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
-function customTopicId(slug: string, text: string, existing: CustomTopic[]) {
-  let hash = 2166136261
-  for (let index = 0; index < text.length; index += 1) hash = Math.imul(hash ^ text.charCodeAt(index), 16777619)
-  const base = `${slug}-${(hash >>> 0).toString(36)}`
-  let id = base
-  let suffix = 1
-  const used = new Set(existing.map((item) => item.id))
-  while (used.has(id)) { id = `${base}-${suffix}`; suffix += 1 }
-  return id
-}
+import { useMemo, useState } from 'react'
+import { Link } from 'react-router'
+import {
+  BookOpen, CalendarCheck2, Check, ChevronRight, Clock3, RotateCcw, Save, Target,
+} from 'lucide-react'
+import { Badge, PageHeader, Section } from '@/components/shared'
+import PrintMenu from '@/components/PrintMenu'
+import {
+  getState, saveStudyPlanner, togglePlanTask, type StudyPlannerSettings,
+} from '@/lib/store'
+import { getRevisionStats } from '@/lib/progress'
+import { useAccount } from '@/lib/accountContext'
+import {
+  allOptionalSubjects, buildDailyPlan, defaultStudyPlannerSettings, localDateKey,
+} from '@/lib/studyPlanner'
+import FpscSyllabusPlanner from '@/components/FpscSyllabusPlanner'
 
 export default function StudyPlanner() {
-  const [state, setState] = useState<PlannerState>(load)
-  const [indexSubjects, setIndexSubjects] = useState<IndexSubject[]>([])
-  const [officialSubjects, setOfficialSubjects] = useState<OfficialSubject[]>([])
-  const [open, setOpen] = useState<Record<string, boolean>>({})
-  const [drafts, setDrafts] = useState<Record<string, string>>({})
-  const [editing, setEditing] = useState<string | null>(null)
+  const initial = getState()
+  const [openedAt] = useState(() => Date.now())
+  const stored = initial.studyPlanner
+  const [settings, setSettings] = useState<Omit<StudyPlannerSettings, 'configuredAt'>>(
+    stored
+      ? {
+          examDate: stored.examDate,
+          dailyHours: stored.dailyHours,
+          restDay: stored.restDay,
+          selectedOptionals: stored.selectedOptionals,
+        }
+      : defaultStudyPlannerSettings(),
+  )
+  const [savedSettings, setSavedSettings] = useState(stored)
+  const [completed, setCompleted] = useState<string[]>(
+    initial.planTaskCompletions?.[localDateKey()] ?? [],
+  )
+  const { user, configured } = useAccount()
+  const revisionStats = getRevisionStats()
+  const today = localDateKey()
+  const isRestDay = new Date().getDay() === settings.restDay
+  const tasks = useMemo(
+    () => buildDailyPlan(settings, getState().subjectProgress, today, revisionStats.due),
+    [revisionStats.due, settings, today],
+  )
+  const completedCount = tasks.filter((task) => completed.includes(task.id)).length
+  const examTime = new Date(`${settings.examDate}T00:00:00+05:00`).getTime()
+  const daysLeft = Math.max(0, Math.ceil((examTime - openedAt) / 86400000))
 
-  useEffect(() => { fetch('/css-subject-mcqs/index.json').then((response) => response.json()).then((value) => setIndexSubjects(value.subjects ?? [])) }, [])
-  useEffect(() => {
-    fetch('/fpsc-syllabus.json')
-      .then((response) => {
-        if (!response.ok) throw new Error(`FPSC syllabus returned ${response.status}`)
-        return response.json()
-      })
-      .then((value) => setOfficialSubjects(value.subjects ?? []))
-      .catch(() => setOfficialSubjects([]))
-  }, [])
-  useEffect(() => { localStorage.setItem(key, JSON.stringify(state)) }, [state])
+  function saveSettings() {
+    saveStudyPlanner(settings)
+    setSavedSettings(getState().studyPlanner)
+  }
 
-  const subjectTopics = useMemo(() => {
-    const map: Record<string, string[]> = {}
-    officialSubjects.forEach((subject) => {
-      map[subject.slug] = subject.sections.flatMap((section) => [
-        section.title,
-        ...section.items.map((item) => `${section.title} — ${item}`),
-      ])
-    })
-    return map
-  }, [officialSubjects])
-
-  const master = useMemo(() => officialSubjects.length ? officialSubjects.map((subject) => ({
-    slug: subject.slug,
-    name: subject.name,
-    kind: subject.designation === 'compulsory' ? 'Compulsory' : 'Optional',
-    group: subject.group,
-  })) : [
-    ...compulsorySubjects.map((subject) => ({ slug: subject.slug, name: subject.name, kind: 'Compulsory', group: null as number | null })),
-    ...optionalGroups.flatMap((group) => group.subjects.map((subject) => ({ slug: indexSubjects.find((item) => item.name === subject.name)?.slug ?? slugify(subject.name), name: subject.name, kind: 'Optional', group: group.group }))),
-  ], [indexSubjects, officialSubjects])
-  const selectedSubjects = master.filter((subject) => state.selected.includes(subject.slug) && !state.hidden.includes(subject.slug))
-
-  function select(slug: string) {
-    setState((current) => ({ ...current, selected: current.selected.includes(slug) ? current.selected.filter((value) => value !== slug) : [...current.selected, slug], hidden: current.hidden.filter((value) => value !== slug) }))
-  }
-  function toggleOfficial(id: string) {
-    setState((current) => ({ ...current, complete: current.complete.includes(id) ? current.complete.filter((value) => value !== id) : [...current.complete, id] }))
-  }
-  function addCustom(slug: string) {
-    const text = drafts[slug]?.trim(); if (!text) return
-    setState((current) => {
-      const existing = current.custom[slug] ?? []
-      const item: CustomTopic = { id: customTopicId(slug, text, existing), text, done: false }
-      return { ...current, custom: { ...current.custom, [slug]: [...existing, item] } }
-    })
-    setDrafts((current) => ({ ...current, [slug]: '' }))
-  }
-  function updateCustom(slug: string, id: string, patchValue: Partial<CustomTopic>) {
-    setState((current) => ({ ...current, custom: { ...current.custom, [slug]: (current.custom[slug] ?? []).map((item) => item.id === id ? { ...item, ...patchValue } : item) } }))
-  }
-  function deleteCustom(slug: string, id: string) {
-    setState((current) => ({ ...current, custom: { ...current.custom, [slug]: (current.custom[slug] ?? []).filter((item) => item.id !== id) } }))
-  }
-  function moveCustom(slug: string, index: number, direction: -1 | 1) {
-    const items = [...(state.custom[slug] ?? [])]; const next = index + direction
-    if (next < 0 || next >= items.length) return
-    ;[items[index], items[next]] = [items[next], items[index]]
-    setState((current) => ({ ...current, custom: { ...current.custom, [slug]: items } }))
+  function toggleTask(taskId: string) {
+    const done = togglePlanTask(today, taskId)
+    setCompleted((current) => (
+      done ? [...new Set([...current, taskId])] : current.filter((id) => id !== taskId)
+    ))
   }
 
   return (
     <div>
-      <PageHeader title="FPSC Syllabus & Topic Planner" description="Choose your own CSS combination, track verified syllabus areas, and keep personal preparation tasks clearly separate from the official outline." />
-      <main className="mx-auto max-w-7xl px-4 py-8">
-        <section className="rounded-xl border bg-white p-5 print:hidden">
-          <h2 className="font-display text-xl font-bold text-pine">Configure my subjects</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Selecting or hiding a subject changes only your personal view; the master FPSC subject list remains intact. The checklist is extracted from the official FPSC CE syllabus dated 7 July 2015.</p>
-          <div className="mt-5"><h3 className="text-sm font-bold uppercase tracking-wide text-emerald-800">Compulsory</h3><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{master.filter((subject) => subject.kind === 'Compulsory').map((subject) => <SubjectToggle key={subject.slug} subject={subject} checked={state.selected.includes(subject.slug)} onChange={() => select(subject.slug)} />)}</div></div>
-          {optionalGroups.map((group) => <details key={group.group} className="mt-4 rounded-lg border" open={group.group === 1}><summary className="cursor-pointer px-4 py-3 text-sm font-bold text-pine">Optional Group {group.group} · {group.rule}</summary><div className="grid gap-2 border-t p-3 sm:grid-cols-2 lg:grid-cols-3">{master.filter((subject) => subject.group === group.group).map((subject) => <SubjectToggle key={subject.slug} subject={subject} checked={state.selected.includes(subject.slug)} onChange={() => select(subject.slug)} />)}</div></details>)}
+      <PageHeader
+        title="My CSS Study Planner"
+        description="A personal, syllabus-based daily plan that uses your selected subjects, available study time, progress and due revisions."
+      />
+      <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
+        <div className="flex justify-end">
+          <PrintMenu answersAvailable={false} label="Print or save plan" />
+        </div>
+        <section className="grid gap-3 sm:grid-cols-3">
+          <div className="vista-card p-4">
+            <CalendarCheck2 className="h-5 w-5 text-emerald-800" />
+            <p className="mt-2 text-2xl font-bold text-pine">{daysLeft}</p>
+            <p className="text-xs text-muted-foreground">Days to selected exam date</p>
+          </div>
+          <div className="vista-card p-4">
+            <Target className="h-5 w-5 text-emerald-800" />
+            <p className="mt-2 text-2xl font-bold text-pine">{completedCount}/{tasks.length}</p>
+            <p className="text-xs text-muted-foreground">Today&apos;s tasks completed</p>
+          </div>
+          <div className="vista-card p-4">
+            <RotateCcw className="h-5 w-5 text-emerald-800" />
+            <p className="mt-2 text-2xl font-bold text-pine">{revisionStats.due}</p>
+            <p className="text-xs text-muted-foreground">MCQs due for smart revision</p>
+          </div>
         </section>
 
-        {state.hidden.length > 0 && <button type="button" onClick={() => setState((current) => ({ ...current, hidden: [] }))} className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-lg border bg-white px-4 text-sm font-bold text-pine print:hidden"><RotateCcw className="h-4 w-4" /> Restore hidden selected subjects</button>}
+        <Section
+          title="Set up your plan"
+          description="Your settings and task completion are part of your progress record."
+        >
+          <div className="rounded-xl border bg-white p-5">
+            <div className="grid gap-4 md:grid-cols-3">
+              <label className="text-sm font-semibold text-pine">
+                Target examination date
+                <input
+                  type="date"
+                  value={settings.examDate}
+                  onChange={(event) => setSettings((current) => ({ ...current, examDate: event.target.value }))}
+                  className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
+                />
+              </label>
+              <label className="text-sm font-semibold text-pine">
+                Study hours each day
+                <input
+                  type="number"
+                  min={1}
+                  max={12}
+                  value={settings.dailyHours}
+                  onChange={(event) => setSettings((current) => ({
+                    ...current,
+                    dailyHours: Number(event.target.value) || 1,
+                  }))}
+                  className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
+                />
+              </label>
+              <label className="text-sm font-semibold text-pine">
+                Weekly light-study day
+                <select
+                  value={settings.restDay}
+                  onChange={(event) => setSettings((current) => ({
+                    ...current,
+                    restDay: Number(event.target.value),
+                  }))}
+                  className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
+                >
+                  {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+                    .map((day, index) => <option key={day} value={index}>{day}</option>)}
+                </select>
+              </label>
+            </div>
 
-        {selectedSubjects.length === 0 ? (
-          <section className="mt-6 rounded-xl border border-dashed bg-white p-10 text-center"><h2 className="font-display text-xl font-bold text-pine">Build your personal syllabus first</h2><p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">Select compulsory and optional subjects above. The personalized checklist remains hidden until you choose what you are preparing.</p></section>
-        ) : (
-          <div className="print-area mt-6">
-            <div className="mb-4 flex items-center justify-between gap-3 print:hidden"><div><h2 className="font-display text-2xl font-bold text-pine">My personal syllabus</h2><p className="text-sm text-muted-foreground">{selectedSubjects.length} selected subjects</p></div><button type="button" onClick={() => window.print()} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white"><Printer className="h-4 w-4" /> Print personal syllabus</button></div>
-            <div className="space-y-4">
-              {selectedSubjects.map((subject) => {
-                const topics = subjectTopics[subject.slug] ?? []
-                const complete = topics.filter((topic) => state.complete.includes(`${subject.slug}::${topic}`)).length
-                const percent = topics.length ? Math.round(complete / topics.length * 100) : 0
-                const expanded = open[subject.slug] ?? true
-                return <article key={subject.slug} className="rounded-xl border bg-white p-5 break-inside-avoid">
-                  <div className="flex flex-wrap items-start justify-between gap-3"><button type="button" onClick={() => setOpen((current) => ({ ...current, [subject.slug]: !expanded }))} className="min-w-0 flex-1 text-left"><p className="text-xs font-bold uppercase tracking-wide text-amber-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''}</p><h3 className="mt-1 font-display text-xl font-bold text-pine">{subject.name}</h3><p className="mt-1 text-xs text-muted-foreground">{topics.length ? `${complete}/${topics.length} official areas complete · ${percent}%` : 'The official source pages contain non-extractable local-language text; no heading has been fabricated'}</p></button><div className="flex gap-2 print:hidden"><button type="button" onClick={() => setState((current) => ({ ...current, hidden: [...current.hidden, subject.slug] }))} className="grid h-10 w-10 place-items-center rounded-lg border" aria-label={`Hide ${subject.name}`}><EyeOff className="h-4 w-4" /></button><ChevronDown className={`mt-2 h-5 w-5 transition-transform ${expanded ? 'rotate-180' : ''}`} /></div></div>
-                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary"><div className="h-full bg-emerald-700" style={{ width: `${percent}%` }} /></div>
-                  {expanded && <div className="mt-5 grid gap-6 lg:grid-cols-2">
-                    <section><h4 className="font-bold text-pine">Official FPSC syllabus checklist</h4>{topics.length ? <div className="mt-3 max-h-[30rem] space-y-2 overflow-y-auto pr-1 print:max-h-none print:overflow-visible">{topics.map((topic) => { const id = `${subject.slug}::${topic}`; const done = state.complete.includes(id); return <label key={id} className={`flex cursor-pointer gap-3 rounded-lg border px-3 py-2.5 text-sm ${done ? 'border-emerald-300 bg-emerald-50' : ''}`}><input type="checkbox" checked={done} onChange={() => toggleOfficial(id)} className="mt-0.5 h-4 w-4 accent-emerald-700" /><span className={done ? 'text-emerald-950 line-through' : ''}>{topic}</span></label>})}</div> : <p className="mt-3 rounded-lg border border-dashed p-4 text-sm text-muted-foreground">The official PDF pages for this regional-language paper are image-based and could not be extracted reliably with the available OCR language data. The subject remains selectable without invented headings.</p>}</section>
-                    <section className="rounded-xl border-2 border-dashed border-amber-300 bg-amber-50/50 p-4"><h4 className="font-bold text-pine">My Topics to Do</h4><p className="mt-1 text-xs text-muted-foreground">Personal preparation layer — not part of the official FPSC syllabus.</p><div className="mt-3 flex gap-2 print:hidden"><input value={drafts[subject.slug] ?? ''} onChange={(event) => setDrafts((current) => ({ ...current, [subject.slug]: event.target.value }))} onKeyDown={(event) => event.key === 'Enter' && addCustom(subject.slug)} placeholder="Add a personal topic…" className="h-10 min-w-0 flex-1 rounded-lg border bg-white px-3 text-sm" /><button type="button" onClick={() => addCustom(subject.slug)} className="grid h-10 w-10 place-items-center rounded-lg bg-pine text-white" aria-label="Add personal topic"><Plus className="h-4 w-4" /></button></div><ol className="mt-3 space-y-2">{(state.custom[subject.slug] ?? []).map((item, indexValue) => <li key={item.id} className="flex items-center gap-2 rounded-lg bg-white p-2 text-sm"><button type="button" onClick={() => updateCustom(subject.slug, item.id, { done: !item.done })} className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border ${item.done ? 'bg-emerald-700 text-white' : ''}`} aria-label={item.done ? 'Mark incomplete' : 'Mark complete'}>{item.done && <Check className="h-4 w-4" />}</button>{editing === item.id ? <input autoFocus defaultValue={item.text} onBlur={(event) => { updateCustom(subject.slug, item.id, { text: event.target.value.trim() || item.text }); setEditing(null) }} onKeyDown={(event) => event.key === 'Enter' && event.currentTarget.blur()} className="h-8 min-w-0 flex-1 rounded border px-2" /> : <button type="button" onClick={() => setEditing(item.id)} className={`min-w-0 flex-1 text-left ${item.done ? 'line-through text-muted-foreground' : ''}`}>{item.text}</button>}<span className="flex print:hidden"><button type="button" disabled={indexValue === 0} onClick={() => moveCustom(subject.slug, indexValue, -1)} className="grid h-8 w-7 place-items-center disabled:opacity-30" aria-label="Move up"><ArrowUp className="h-3.5 w-3.5" /></button><button type="button" disabled={indexValue === (state.custom[subject.slug]?.length ?? 0) - 1} onClick={() => moveCustom(subject.slug, indexValue, 1)} className="grid h-8 w-7 place-items-center disabled:opacity-30" aria-label="Move down"><ArrowDown className="h-3.5 w-3.5" /></button><button type="button" onClick={() => deleteCustom(subject.slug, item.id)} className="grid h-8 w-7 place-items-center text-red-600" aria-label="Delete personal topic"><Trash2 className="h-3.5 w-3.5" /></button></span></li>)}</ol></section>
-                  </div>}
-                </article>
-              })}
+            <div className="mt-5">
+              <p className="text-sm font-semibold text-pine">Your optional subjects</p>
+              <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {allOptionalSubjects.map((subject) => {
+                  const selected = settings.selectedOptionals.includes(subject)
+                  return (
+                    <label
+                      key={subject}
+                      className={`flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm ${
+                        selected ? 'border-emerald-700 bg-emerald-50' : 'hover:bg-secondary/50'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selected}
+                        onChange={() => setSettings((current) => ({
+                          ...current,
+                          selectedOptionals: selected
+                            ? current.selectedOptionals.filter((name) => name !== subject)
+                            : [...current.selectedOptionals, subject],
+                        }))}
+                        className="h-4 w-4 accent-emerald-800"
+                      />
+                      {subject}
+                    </label>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={saveSettings}
+                className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"
+              >
+                <Save className="h-4 w-4" /> Save and rebuild plan
+              </button>
+              <p className="text-xs text-muted-foreground">
+                {savedSettings
+                  ? `Last configured ${new Date(savedSettings.configuredAt).toLocaleDateString()}.`
+                  : 'Save once to activate your personal plan.'}{' '}
+                {user
+                  ? 'This plan can sync with your signed-in account.'
+                  : configured
+                    ? 'Sign in to carry this plan across devices.'
+                    : 'Sign in whenever you want to use this plan across devices.'}
+              </p>
             </div>
           </div>
-        )}
-      </main>
+        </Section>
+
+        <FpscSyllabusPlanner />
+
+        <div className="print-area">
+        <Section
+          title={isRestDay ? 'Today: light study and recovery' : "Today's preparation plan"}
+          description={isRestDay
+            ? 'Keep the streak alive with a lighter schedule. Complete the most important tasks only.'
+            : 'The lowest-progress subjects and due revisions receive priority automatically.'}
+        >
+          <div className="space-y-2">
+            {tasks.map((task, index) => {
+              const done = completed.includes(task.id)
+              return (
+                <article
+                  key={task.id}
+                  className={`flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center ${
+                    done ? 'border-emerald-200 bg-emerald-50/70' : 'bg-white'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleTask(task.id)}
+                    className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border ${
+                      done ? 'border-emerald-700 bg-emerald-700 text-white' : 'text-muted-foreground hover:bg-secondary'
+                    }`}
+                    aria-label={done ? `Mark ${task.title} incomplete` : `Mark ${task.title} complete`}
+                  >
+                    {done ? <Check className="h-5 w-5" /> : <span className="text-sm font-bold">{index + 1}</span>}
+                  </button>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className={`font-bold ${done ? 'text-emerald-900 line-through' : 'text-pine'}`}>
+                        {task.title}
+                      </h3>
+                      <Badge tone="gray">{task.subject}</Badge>
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">{task.detail}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+                      <Clock3 className="h-3.5 w-3.5" /> {task.minutes} min
+                    </span>
+                    <Link
+                      to={task.to}
+                      className="inline-flex h-9 items-center gap-1 rounded-md bg-pine px-3 text-xs font-bold text-white hover:bg-emerald-900"
+                    >
+                      Start <ChevronRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </article>
+              )
+            })}
+          </div>
+          <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+            <BookOpen className="h-4 w-4" />
+            Plan tasks rotate daily and automatically prioritise lower-progress subjects.
+          </p>
+        </Section>
+        </div>
+      </div>
     </div>
   )
-}
-
-function SubjectToggle({ subject, checked, onChange }: { subject: { slug: string; name: string }; checked: boolean; onChange: () => void }) {
-  return <label className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2.5 text-sm ${checked ? 'border-emerald-700 bg-emerald-50' : 'hover:bg-secondary'}`}><input type="checkbox" checked={checked} onChange={onChange} className="h-4 w-4 accent-emerald-700" />{subject.name}</label>
 }
