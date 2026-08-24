@@ -89,8 +89,9 @@ export default function CurrentAffairs() {
 
   return (
     <div>
-      <PageHeader title="Recent Current & Pakistan Affairs" description="Dated revision facts, MCQs with explanations, structured issue files and the weekly magazine in one focused section." />
+      <PageHeader title="Global Pakistan Affairs Expanded" description="Current and Pakistan affairs from the supplied 11 July–16 August 2026 dossier, with dated one-liners, MCQs, issue files and the weekly magazine." />
       <main className="mx-auto max-w-6xl px-4 py-8">
+        {batch && <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4" aria-label="Supplied dossier coverage"><div><p className="text-xs font-extrabold uppercase tracking-[.15em] text-emerald-800">Global Pakistan Affairs Expanded</p><p className="mt-1 text-sm font-semibold text-pine">11 July–16 August 2026 · supplied source collection</p></div><p className="mt-2 text-xs font-bold text-emerald-900 sm:mt-0">{batch.oneLiners.length.toLocaleString()} one-liners · {batch.mcqs.length.toLocaleString()} MCQs</p></section>}
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
           {([['one-liners', 'One-Liners', BookOpen], ['mcqs', 'Recent MCQs', CheckCircle2], ['issue-files', 'Issue Files', FileText], ['magazine', 'Weekly Magazine', Newspaper]] as const).map(([value, label, Icon]) => <button key={value} type="button" onClick={() => selectTab(value)} aria-pressed={tab === value} className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-3 text-xs font-bold sm:text-sm ${tab === value ? 'border-pine bg-pine text-white' : 'bg-white text-pine hover:bg-secondary'}`}><Icon className="h-4 w-4" /> {label}</button>)}
         </div>

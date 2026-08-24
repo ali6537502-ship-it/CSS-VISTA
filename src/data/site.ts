@@ -41,7 +41,7 @@ export const mentors = [
   {
     id: 'ali',
     name: 'Sir Ali Hassan Sargana',
-    role: 'Advocate and CSS Mentor',
+    role: 'Founder of CSS VISTA',
     photo: '/images/mentor-ali.jpg',
     instagram: 'https://www.instagram.com/ali_hassan_sargana_',
     credentials: [],

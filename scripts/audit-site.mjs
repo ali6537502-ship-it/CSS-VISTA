@@ -1,7 +1,8 @@
 import { open, readFile, readdir, stat } from 'node:fs/promises'
 import { basename, extname, join, relative } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const root = new URL('..', import.meta.url).pathname
+const root = fileURLToPath(new URL('..', import.meta.url))
 const sourceRoot = join(root, 'src')
 const publicRoot = join(root, 'public')
 const appSource = await readFile(join(sourceRoot, 'App.tsx'), 'utf8')

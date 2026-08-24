@@ -56,6 +56,46 @@
   }
 }
 
+@keyframes cssv-shortcut-open {
+  0% { opacity: 0; transform: translateY(18px) scale(.86); filter: blur(5px); }
+  62% { opacity: 1; transform: translateY(-3px) scale(1.018); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.cssv-vista-shortcut-panel {
+  transform-origin: 92% 100%;
+  animation: cssv-shortcut-open 360ms cubic-bezier(.2, .88, .24, 1.08) both;
+}
+
+.cssv-vista-shortcut {
+  transition: transform 280ms cubic-bezier(.2, .88, .24, 1.12), box-shadow 220ms ease;
+}
+
+.cssv-vista-shortcut:hover {
+  transform: translateY(-2px) scale(1.035);
+  box-shadow: 0 20px 35px -16px rgb(4 78 52 / .58);
+}
+
+.cssv-vista-shortcut.is-open {
+  transform: scale(.94);
+}
+
+.cssv-vista-shortcut-tile {
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.cssv-vista-shortcut-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgb(5 150 105 / .45);
+  background: rgb(236 253 245 / .86);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cssv-vista-shortcut-panel { animation: none; }
+  .cssv-vista-shortcut,
+  .cssv-vista-shortcut-tile { transition: none; }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

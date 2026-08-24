@@ -24,7 +24,7 @@ export default function HandwrittenNotes() {
     <div>
       <PageHeader
         title="Handwritten Notes by Miss Sadia Zahoor, PAS"
-        description="A dedicated subject-wise library for original handwritten CSS preparation notes. Categories are ready and files will appear only after the owner provides them."
+        description="Contact to get handwritten notes by Miss Sadia Zahoor, PAS."
       />
 
       <main className="mx-auto max-w-7xl px-4 py-8">
@@ -41,7 +41,7 @@ export default function HandwrittenNotes() {
               </p>
               <h2 className="mt-2 font-display text-2xl font-bold">{handwrittenNotesOwner}</h2>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-emerald-50/80">
-                Notes will remain organised by CSS paper and will be published only when an original, readable file is supplied.
+                Contact to get handwritten notes by Miss Sadia Zahoor, PAS.
               </p>
             </div>
           </div>

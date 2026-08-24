@@ -9,6 +9,7 @@ export interface CssSubjectMcqSummary {
   topics: string[]
   file: string
   sourceCount: number
+  sourceDocuments?: string[]
   audit: string
 }
 
@@ -33,7 +34,7 @@ export interface CssSubjectQuestion {
   verification: string
 }
 
-const root = '/css-subject-mcqs-curated'
+const root = '/css-subject-mcqs'
 let indexPromise: Promise<CssSubjectMcqIndex> | null = null
 const bankCache = new Map<string, Promise<CssSubjectQuestion[]>>()
 

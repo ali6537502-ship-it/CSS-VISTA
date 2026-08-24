@@ -15,7 +15,7 @@ import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPdfFile } from '@/components/PrintMenu'
-import { weeklyMagazine } from '@/data/weeklyMagazine'
+import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 
 interface LinkCard {
   title: string
@@ -60,7 +60,7 @@ const featuredServices = [
   {
     eyebrow: 'BY MS. SADIA ZAHOOR',
     title: 'Customized Written Test Series',
-    description: 'Alternate papers · divided syllabus · printable plan. Written mocks only; MPT mocks remain separate.',
+    description: 'By Miss Sadia Zahoor, PAS · alternate papers · divided syllabus · printable plan. Written mocks only; MPT mocks remain separate.',
     to: '/test-series',
     action: 'Start customizing',
     icon: ClipboardCheck,
@@ -140,7 +140,6 @@ function HomeHero() {
           height="820"
           fetchPriority="high"
         />
-        <span className="cssv-home-hero-badge">Pakistan focused</span>
       </div>
     </section>
   )
@@ -414,14 +413,12 @@ function ResourceToggle() {
 }
 
 function FeatureVisual({ variant, icon: Icon }: { variant: string; icon: LucideIcon }) {
-  if (variant === 'test' || variant === 'handwritten' || variant === 'library') {
-    const mentorPhoto = variant === 'library' ? '/images/mentor-ali.jpg' : '/images/mentor-sadia.jpg'
-    const mentorLabel = variant === 'library' ? 'Sir Ali' : 'Ms. Sadia'
+  if (variant === 'library') {
     return (
       <div className={`cssv-feature-visual cssv-feature-visual-${variant} flex items-center justify-center`} aria-hidden="true">
         <span className="cssv-visual-orb" />
-        <img src={mentorPhoto} alt="" className="relative z-[2] h-[72%] w-[72%] rounded-2xl border border-white/70 object-cover object-top shadow-lg" />
-        <span className="absolute bottom-3 z-[3] rounded-full bg-white/92 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wide text-emerald-900 shadow-sm">{mentorLabel}</span>
+        <img src="/images/mentor-ali.jpg" alt="" className="relative z-[2] h-[72%] w-[72%] rounded-2xl border border-white/70 object-cover object-top shadow-lg" />
+        <span className="absolute bottom-3 z-[3] rounded-full bg-white/92 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wide text-emerald-900 shadow-sm">Sir Ali</span>
       </div>
     )
   }
@@ -446,7 +443,7 @@ function WeeklyMagazineCard() {
     <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
       <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
       <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
-        <div className="grid grid-cols-[minmax(0,1fr)_96px] gap-0 sm:grid-cols-[minmax(0,1fr)_190px]">
+        <div className="grid gap-0 sm:grid-cols-[minmax(0,1fr)_210px]">
           <div className="min-w-0 p-3.5 pr-2 sm:p-5">
             <div className="flex items-start gap-3">
               <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
@@ -474,6 +471,7 @@ function WeeklyMagazineCard() {
                   <Download className="h-3.5 w-3.5" /> Free PDF · Coming soon
                 </button>
               )}
+              {available && weeklyMagazine.pdfUrl && <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900"><Eye className="h-3.5 w-3.5" /> View</a>}
               <button
                 type="button"
                 disabled={!available || !weeklyMagazine.pdfUrl}
@@ -483,13 +481,17 @@ function WeeklyMagazineCard() {
                 <Printer className="h-3.5 w-3.5" /> Print magazine
               </button>
             </div>
+            <details className="no-print mt-3 rounded-lg border bg-white/70 p-2.5">
+              <summary className="cursor-pointer text-[10px] font-bold text-emerald-900">Past weeks magazine archive</summary>
+              <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printPdfFile(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
+            </details>
           </div>
-          <div className="relative min-h-[176px] overflow-hidden bg-emerald-950 p-2 sm:min-h-[210px] sm:p-4">
+          <div className="relative min-h-[260px] overflow-hidden bg-emerald-950 p-3 sm:min-h-[230px] sm:p-4">
             <span className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-amber-300/25" aria-hidden="true" />
             <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
             {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
-              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative block h-full overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl" aria-label="Open the weekly current affairs journal">
-                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="h-full w-full object-cover object-top" />
+              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[236px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
+                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="max-h-full w-full object-contain object-center" />
               </a>
             ) : (
               <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>

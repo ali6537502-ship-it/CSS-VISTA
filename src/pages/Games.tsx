@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowLeft, ArrowUpDown, Check, CheckCircle2, RotateCcw, Sparkles, Trophy } from 'lucide-react'
+import { ArrowLeft, ArrowUpDown, Check, CheckCircle2, Loader2, RotateCcw, Sparkles, Trophy } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import QuizEngine from '@/components/QuizEngine'
 import { pakistanGeography, worldGeography, internationalOrgs, constitutionTimeline, pakistanMovementTimeline, matchConcepts, type MatchPair } from '@/data/games'
@@ -7,6 +7,7 @@ import { questions as mcqBank, quizCategories } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
 import { optionalGroups } from '@/data/syllabus'
 import { getState, recordGameScore } from '@/lib/store'
+import { getBankIndex, sampleQuestions, type BankQuestion } from '@/data/mcq'
 
 const gid = 10000
 function toQuestions(items: { question: string; options: string[]; answer: number; explanation: string }[], category: string): Question[] {
@@ -123,7 +124,7 @@ function TimelineGame({ items, title, gameId }: { items: { event: string; year: 
 function MatchGame({ title, pairs, gameId }: { title: string; pairs: MatchPair[]; gameId: string }) {
   const [round, setRound] = useState(0)
   const roundPairs = useMemo(
-    () => shuffled(pairs, seedFrom(`${gameId}-${round}`)).slice(0, Math.min(6, pairs.length)),
+    () => shuffled(pairs, seedFrom(`${gameId}-${round}`)).slice(0, Math.min(10, pairs.length)),
     [gameId, pairs, round],
   )
   const answerOptions = useMemo(
@@ -180,7 +181,7 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: MatchPair[]
       <div className="border-b bg-gradient-to-r from-emerald-950 to-emerald-800 p-4 text-white sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-amber-300">Matching round</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-amber-300">Matching page {(round % 10) + 1} of 10 · refresh for new pairs</p>
             <h3 className="mt-1 font-display text-lg font-bold">{title}</h3>
           </div>
           <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 text-xs"><Trophy className="h-3.5 w-3.5 text-amber-300" /> Best {best}</span>
@@ -253,7 +254,40 @@ function MatchGame({ title, pairs, gameId }: { title: string; pairs: MatchPair[]
   )
 }
 
-type ActiveGame = { kind: 'quiz'; title: string; qs: Question[] } | { kind: 'timeline'; title: string; items: { event: string; year: number }[]; id: string } | { kind: 'match'; title: string; pairs: { concept: string; match: string }[]; id: string } | null
+function bankQuestionToQuiz(question: BankQuestion, index: number): Question {
+  return {
+    id: 500000 + index,
+    category: 'gk',
+    difficulty: question.d === 'Basic' ? 'Easy' : question.d === 'Advanced' ? 'Hard' : 'Medium',
+    question: question.q,
+    options: question.o,
+    answer: question.a,
+    explanation: question.e ?? `Topic: ${question.s ?? 'General Knowledge'}`,
+  }
+}
+
+function BankMarathonGame() {
+  const [questions, setQuestions] = useState<Question[]>([])
+  const [page, setPage] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [refresh, setRefresh] = useState(0)
+
+  useEffect(() => {
+    let active = true
+    setLoading(true)
+    getBankIndex()
+      .then((index) => sampleQuestions(index.categories.filter((category) => category.mpt).map((category) => category.slug), 100))
+      .then((rows) => { if (active) { setQuestions(rows.map(bankQuestionToQuiz)); setPage(0) } })
+      .finally(() => active && setLoading(false))
+    return () => { active = false }
+  }, [refresh])
+
+  if (loading) return <div className="grid place-items-center rounded-xl border bg-white py-20"><Loader2 className="h-7 w-7 animate-spin text-pine" /><p className="mt-2 text-sm text-muted-foreground">Building a fresh 100-question game…</p></div>
+  const pageQuestions = questions.slice(page * 10, page * 10 + 10)
+  return <div><div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-3"><div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">10 pages · 10 questions each</p><p className="text-sm font-bold text-pine">Page {page + 1} of 10</p></div><button type="button" onClick={() => setRefresh((value) => value + 1)} className="inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-emerald-800"><RotateCcw className="h-4 w-4" /> Refresh all questions</button><div className="flex flex-wrap gap-1">{Array.from({ length: 10 }, (_, index) => <button key={index} type="button" onClick={() => setPage(index)} className={`grid h-8 w-8 place-items-center rounded-md text-xs font-bold ${page === index ? 'bg-pine text-white' : 'bg-secondary text-pine'}`}>{index + 1}</button>)}</div></div>{pageQuestions.length ? <QuizEngine key={`${refresh}-${page}`} questions={pageQuestions} mode="game" category={`Bank Marathon · Page ${page + 1}`} timePerQuestion={30} /> : <p className="rounded-xl border bg-white p-8 text-center text-sm text-muted-foreground">This page could not be loaded. Refresh the bank.</p>}</div>
+}
+
+type ActiveGame = { kind: 'quiz'; title: string; qs: Question[] } | { kind: 'timeline'; title: string; items: { event: string; year: number }[]; id: string } | { kind: 'match'; title: string; pairs: { concept: string; match: string }[]; id: string } | { kind: 'bank'; title: string } | null
 
 interface GameCard {
   title: string
@@ -301,6 +335,7 @@ export default function Games() {
     }
   })
   const otherCards: GameCard[] = [
+    { title: '10-Page MCQ Bank Marathon', desc: '100 fresh questions from the full shipped bank, split into ten pages with a one-tap refresh mode', badge: '100 questions', play: () => setActive({ kind: 'bank', title: '10-Page MCQ Bank Marathon' }) },
     { title: 'Pakistan Map Challenge', desc: 'Provinces, passes, rivers, deserts and borders', badge: 'Geography', play: () => setActive({ kind: 'quiz', title: 'Pakistan Map Challenge', qs: toQuestions(pakistanGeography, 'Pakistan Geography') }) },
     { title: 'World Map Challenge', desc: 'Straits, seas, regions and borders that matter for CSS', badge: 'Geography', play: () => setActive({ kind: 'quiz', title: 'World Map Challenge', qs: toQuestions(worldGeography, 'World Geography') }) },
     { title: 'International Organisations', desc: 'UN, IMF, SCO, OIC, SAARC, WTO - members, seats, roles', badge: 'IR', play: () => setActive({ kind: 'quiz', title: 'International Organisations', qs: toQuestions(internationalOrgs, 'International Organisations') }) },
@@ -320,6 +355,7 @@ export default function Games() {
             {active.kind === 'quiz' && <QuizEngine questions={active.qs} mode="game" category={active.title} timePerQuestion={30} />}
             {active.kind === 'timeline' && <TimelineGame items={active.items} title={active.title} gameId={active.id} />}
             {active.kind === 'match' && <MatchGame title={active.title} pairs={active.pairs} gameId={active.id} />}
+            {active.kind === 'bank' && <BankMarathonGame />}
           </div>
         ) : (
           <div className="space-y-10">

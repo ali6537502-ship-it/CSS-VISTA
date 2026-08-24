@@ -66,7 +66,7 @@ export default function CssSubjectMcqs() {
   useEffect(() => {
     getCssSubjectMcqIndex()
       .then(setIndex)
-      .catch(() => setError('The curated subject-bank index could not be loaded. Please retry.'))
+      .catch(() => setError('The supplied subject-bank index could not be loaded. Please retry.'))
       .finally(() => setLoading(false))
   }, [])
 
@@ -147,7 +147,7 @@ export default function CssSubjectMcqs() {
       <div>
         <PageHeader
           title={selected.name}
-          description="Focused CSS subject practice from the deliberately limited, quality-gated academic bank. Every answer, save, response time and mistake connects to the existing progress system."
+          description="Focused CSS subject practice from the complete structurally validated owner-supplied bank. Every answer, save, response time and mistake connects to the existing progress system."
         />
         <main className="mx-auto max-w-6xl px-4 py-7 sm:py-9">
           <button type="button" onClick={() => { setSelected(null); setRawBank([]); setBank([]); setError('') }} className="inline-flex min-h-10 items-center gap-1.5 text-sm font-bold text-emerald-800 hover:underline">
@@ -158,11 +158,11 @@ export default function CssSubjectMcqs() {
             <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
               <div>
                 <p className="text-[10px] font-extrabold uppercase tracking-[.14em] text-amber-700">
-                  {selected.designation === 'optional' ? `Optional Group ${selected.group}` : 'Compulsory'} · quality-gated bank
+                  {selected.designation === 'optional' ? `Optional Group ${selected.group}` : 'Compulsory'} · supplied bank
                 </p>
                 <h2 className="mt-1 font-display text-xl font-bold text-pine sm:text-2xl">{selected.name} MCQs</h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {selected.count.toLocaleString()} selected from {selected.sourceCount.toLocaleString()} supplied items · {selected.topics.length} syllabus areas
+                  {selected.count.toLocaleString()} structurally complete questions from {selected.sourceCount.toLocaleString()} detected source items · {selected.topics.length} syllabus areas
                 </p>
                 <p className="mt-1 text-xs font-semibold text-emerald-800">
                   {answeredCount} answered · {correctCount} correct · {Math.max(0, answeredCount - correctCount)} incorrect
@@ -250,13 +250,11 @@ export default function CssSubjectMcqs() {
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">CSS written subjects</p>
               <h2 className="mt-2 max-w-2xl font-display text-xl font-bold leading-tight sm:text-2xl">Focused banks, useful progress, carefully reviewed questions.</h2>
-              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-emerald-100 sm:text-sm">
-                Questions load one subject at a time. Answers, bookmarks, timing and mistakes join the same study record used across CSS Vista.
-              </p>
+              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-emerald-100 sm:text-sm">All recoverable questions from the supplied archive load one subject at a time. Answers, bookmarks, timing and mistakes join the same study record used across CSS Vista.</p>
             </div>
             <div className="grid grid-cols-2 gap-2 text-center">
               <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.subjects.length ?? '–'}</strong><span className="text-[10px] text-emerald-100">Active subjects</span></div>
-              <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.total.toLocaleString() ?? '–'}</strong><span className="text-[10px] text-emerald-100">Curated MCQs</span></div>
+              <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.total.toLocaleString() ?? '–'}</strong><span className="text-[10px] text-emerald-100">Imported MCQs</span></div>
             </div>
           </div>
         </section>
@@ -279,7 +277,7 @@ export default function CssSubjectMcqs() {
               const Icon = subject.kind === 'Compulsory' ? BookOpenCheck : Layers3
               return <button key={`${subject.kind}-${subject.slug}`} type="button" disabled={!subject.bank} onClick={() => subject.bank && openSubject(subject.bank)} className={`flex min-h-[78px] items-center gap-3 rounded-xl border bg-white p-3 text-left transition-colors ${subject.bank ? 'hover:border-emerald-700/40 hover:bg-emerald-50/40' : 'cursor-default'}`}>
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><Icon className="h-4 w-4" /></span>
-                <span className="min-w-0 flex-1"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''} · {subject.marks} marks</span><span className="mt-0.5 block text-sm font-bold leading-snug text-slate-900">{subject.name}</span><span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold ${subject.bank ? 'text-emerald-700' : 'text-slate-400'}`}>{subject.bank ? <><CheckCircle2 className="h-3 w-3" /> {subject.bank.count.toLocaleString()} quality-gated MCQs</> : 'Question bank under audit'}</span></span>
+                <span className="min-w-0 flex-1"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''} · {subject.marks} marks</span><span className="mt-0.5 block text-sm font-bold leading-snug text-slate-900">{subject.name}</span><span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold ${subject.bank ? 'text-emerald-700' : 'text-slate-400'}`}>{subject.bank ? <><CheckCircle2 className="h-3 w-3" /> {subject.bank.count.toLocaleString()} imported MCQs</> : 'No supplied question file'}</span></span>
                 {subject.bank && <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700" />}
               </button>
             })}

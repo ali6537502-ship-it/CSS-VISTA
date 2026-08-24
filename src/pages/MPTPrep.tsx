@@ -71,6 +71,22 @@ const mptStudyAreas: MptStudyArea[] = [
   },
 ]
 
+const mptCategorySlugs: Record<string, string[]> = {
+  english: ['english-grammar'],
+  vocabulary: ['english-grammar'],
+  grammar: ['english-grammar'],
+  correction: ['english-grammar'],
+  science: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'],
+  gk: ['capitals', 'currencies', 'countries-continents', 'first-world', 'largest-longest', 'important-personalities', 'discoveries-inventions', 'awards-honours'],
+  current: ['current-affairs'],
+  pakistan: ['pakistan-affairs', 'pakistan-history', 'pakistan-geography'],
+  islamiat: ['islamic-gk'],
+  urdu: ['urdu-language'],
+  geography: ['pakistan-geography', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'countries-continents'],
+  history: ['pakistan-history', 'first-world', 'important-personalities'],
+  organisations: ['international-organisations', 'united-nations'],
+}
+
 export default function MPTPrep() {
   const allQuestions = useMemo(() => mergedMcqs(seedQuestions), [])
   const [bankIndex, setBankIndex] = useState<BankIndex | null>(null)
@@ -311,25 +327,27 @@ export default function MPTPrep() {
             </Section>
 
             {/* Category counts */}
-            <Section title="Question bank by subject">
+            <Section title="Question bank by subject" description={`Connected to the central ${shippedMcqSummary} MPT/GK bank; every displayed count is loaded from the shipped index.`}>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {quizCategories.map((c) => {
-                  const n = allQuestions.filter((q) => q.category === c.id).length
-                  return (
-                    <button
+                  const slugs = mptCategorySlugs[c.id] ?? []
+                  const centralCount = bankCount(slugs)
+                  const seedCount = allQuestions.filter((q) => q.category === c.id).length
+                  const n = centralCount || seedCount
+                  return slugs.length ? (
+                    <Link
                       key={c.id}
-                      onClick={() => { setCategory(c.id); setTopic('all'); setMode('subject') }}
+                      to={`/gk/quiz?mode=mixed&cats=${slugs.join(',')}&n=20`}
                       className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/60"
                     >
                       <span>{c.icon} {c.name}</span>
-                      <Badge tone="gray">{n}</Badge>
-                    </button>
+                      <Badge tone="gray">{bankIndex ? n.toLocaleString() : '…'}</Badge>
+                    </Link>
+                  ) : (
+                    <button key={c.id} onClick={() => { setCategory(c.id); setTopic('all'); setMode('subject') }} className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/60"><span>{c.icon} {c.name}</span><Badge tone="gray">{n}</Badge></button>
                   )
                 })}
               </div>
-              <p className="mt-3 text-xs text-muted-foreground">
-                The bank is built to scale to 10,000+ MCQs. New questions are added through the admin bulk-upload (CSV/Excel) - counts shown here are always real, never advertised ahead of the actual bank.
-              </p>
             </Section>
 
             {/* Filters (visible pre-selection for subject mode) */}

@@ -11,7 +11,7 @@ import QuizEngine from '@/components/QuizEngine'
 import { completeChallenge, getState, recordQuizResult } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 
-const tabs = ['Daily Challenge', 'Word Bank', 'Commonly Confused', 'Idioms & Phrases', 'One-Word Substitutions', 'Grammar Lessons', 'Quizzes'] as const
+const tabs = ['Daily Challenge', 'Word Bank', 'Commonly Confused', 'Phrasal Verbs', 'Idioms & Phrases', 'One-Word Substitutions', 'Grammar Lessons', 'Quizzes'] as const
 
 const phrasalVerbs: { verb: string; meaning: string; sentence: string }[] = [
   { verb: 'Account for', meaning: 'to explain; to make up (a proportion)', sentence: 'Remittances account for a significant share of foreign exchange.' },
@@ -42,6 +42,8 @@ export default function GrammarVocab() {
   const [topic, setTopic] = useState(grammarTopics[0].slug)
   const [quiz, setQuiz] = useState<null | { title: string; qs: Question[] }>(null)
   const [search, setSearch] = useState('')
+  const [partOfSpeech, setPartOfSpeech] = useState('All')
+  const [wordPage, setWordPage] = useState(0)
   const active = grammarTopics.find((t) => t.slug === topic)!
 
   // Daily challenge state
@@ -54,7 +56,10 @@ export default function GrammarVocab() {
   const [done, setDone] = useState(() => getState().completedChallenges.includes(today))
   const streak = getState().streakDays
 
-  const filteredVocab = vocabulary.filter((v) => !search || v.word.toLowerCase().includes(search.toLowerCase()) || v.meaning.toLowerCase().includes(search.toLowerCase()))
+  const partsOfSpeech = useMemo(() => ['All', ...new Set(vocabulary.map((word) => word.pos).filter(Boolean))].sort(), [])
+  const filteredVocab = vocabulary.filter((v) => (partOfSpeech === 'All' || v.pos === partOfSpeech) && (!search || v.word.toLowerCase().includes(search.toLowerCase()) || v.meaning.toLowerCase().includes(search.toLowerCase())))
+  const wordPageCount = Math.max(1, Math.ceil(filteredVocab.length / 60))
+  const visibleVocab = filteredVocab.slice(wordPage * 60, wordPage * 60 + 60)
   const englishQs = questions.filter((q) => q.category === 'english')
   const grammarQs = questions.filter((q) => ['english', 'grammar', 'correction'].includes(q.category))
 
@@ -69,7 +74,7 @@ export default function GrammarVocab() {
     <div>
       <PageHeader
         title="Vocabulary and Daily Challenge"
-        description="Word of the Day with CSS-style usage, confused words, idioms, phrasal verbs, one-word substitutions, sentence correction and grammar lessons - plus daily and weekly quizzes."
+        description={`${vocabulary.length.toLocaleString()} source-backed vocabulary records with usage, confused words, idioms, phrasal verbs, substitutions, grammar lessons and quizzes.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-wrap gap-1.5 border-b pb-3">
@@ -149,17 +154,20 @@ export default function GrammarVocab() {
 
           {tab === 'Word Bank' && (
             <div>
-              <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search words or meanings…" className="h-10 w-full max-w-md rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring" aria-label="Search vocabulary" />
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center"><input value={search} onChange={(e) => { setSearch(e.target.value); setWordPage(0) }} placeholder="Search words or meanings…" className="h-10 w-full max-w-md rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring" aria-label="Search vocabulary" /><select value={partOfSpeech} onChange={(e) => { setPartOfSpeech(e.target.value); setWordPage(0) }} className="h-10 rounded-md border bg-white px-3 text-sm" aria-label="Filter vocabulary by part of speech">{partsOfSpeech.map((value) => <option key={value}>{value}</option>)}</select><span className="text-xs font-bold text-emerald-800">{filteredVocab.length.toLocaleString()} verified entries</span></div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredVocab.map((v) => (
+                {visibleVocab.map((v) => (
                   <div key={v.word} className="rounded-lg border bg-white p-4">
                     <div className="font-display text-lg font-bold text-pine">{v.word} <span className="font-sans text-xs font-normal text-muted-foreground">({v.pos})</span></div>
                     <p className="mt-1 text-sm">{v.meaning}</p>
-                    <p className="mt-2 text-xs text-muted-foreground"><strong>Syn:</strong> {v.synonyms.join(', ')} · <strong>Ant:</strong> {v.antonyms.join(', ')}</p>
-                    <p className="mt-2 text-[13px] italic text-foreground/80">“{v.sentence}”</p>
+                    {v.synonyms.length > 0 && <p className="mt-2 text-xs text-muted-foreground"><strong>Synonyms:</strong> {v.synonyms.join(', ')}</p>}
+                    {v.antonyms.length > 0 && <p className="mt-1 text-xs text-muted-foreground"><strong>Antonyms:</strong> {v.antonyms.join(', ')}</p>}
+                    {v.sentence && <p className="mt-2 text-[13px] italic text-foreground/80">“{v.sentence}”</p>}
+                    {v.source && <p className="mt-2 text-[9px] leading-relaxed text-slate-400">Source: {v.source}</p>}
                   </div>
                 ))}
               </div>
+              <div className="mt-5 flex items-center justify-center gap-3"><button type="button" disabled={wordPage === 0} onClick={() => setWordPage((value) => Math.max(0, value - 1))} className="rounded-md border px-3 py-2 text-xs font-bold disabled:opacity-40">Previous</button><span className="text-xs text-muted-foreground">Page {wordPage + 1} of {wordPageCount}</span><button type="button" disabled={wordPage >= wordPageCount - 1} onClick={() => setWordPage((value) => Math.min(wordPageCount - 1, value + 1))} className="rounded-md bg-pine px-3 py-2 text-xs font-bold text-white disabled:opacity-40">Next</button></div>
             </div>
           )}
 
@@ -192,18 +200,12 @@ export default function GrammarVocab() {
                   ))}
                 </div>
               </div>
-              <div>
-                <h3 className="font-display text-lg font-bold text-pine">Phrasal verbs</h3>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {phrasalVerbs.map((p) => (
-                    <div key={p.verb} className="rounded-lg border bg-white p-4">
-                      <div className="font-semibold text-pine">{p.verb}</div>
-                      <p className="text-sm text-muted-foreground">{p.meaning}</p>
-                      <p className="mt-1 text-[13px] italic">“{p.sentence}”</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            </div>
+          )}
+
+          {tab === 'Phrasal Verbs' && (
+            <div className="grid gap-2 sm:grid-cols-2">
+              {phrasalVerbs.map((p) => <div key={p.verb} className="rounded-lg border bg-white p-4"><div className="font-semibold text-pine">{p.verb}</div><p className="text-sm text-muted-foreground">{p.meaning}</p><p className="mt-1 text-[13px] italic">“{p.sentence}”</p></div>)}
             </div>
           )}
 

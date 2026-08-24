@@ -1,3 +1,5 @@
+import verifiedVocabulary from '../../data-archive/vocabulary_1500.json'
+
 export interface VocabWord {
   word: string
   pos: string
@@ -5,9 +7,10 @@ export interface VocabWord {
   synonyms: string[]
   antonyms: string[]
   sentence: string
+  source?: string
 }
 
-export const vocabulary: VocabWord[] = [
+const curatedVocabulary: VocabWord[] = [
   { word: 'Aberration', pos: 'noun', meaning: 'A departure from what is normal or expected', synonyms: ['anomaly', 'deviation'], antonyms: ['norm', 'regularity'], sentence: 'The low turnout was an aberration in an otherwise highly participatory election.' },
   { word: 'Abate', pos: 'verb', meaning: 'To become less intense or widespread', synonyms: ['subside', 'diminish'], antonyms: ['intensify', 'escalate'], sentence: 'Flood waters began to abate after three days of continuous rain.' },
   { word: 'Alleviate', pos: 'verb', meaning: 'To make suffering or a problem less severe', synonyms: ['ease', 'mitigate'], antonyms: ['aggravate', 'worsen'], sentence: 'Targeted subsidies can alleviate the burden of inflation on low-income households.' },
@@ -48,4 +51,29 @@ export const vocabulary: VocabWord[] = [
   { word: 'Viable', pos: 'adjective', meaning: 'Capable of working successfully', synonyms: ['workable', 'feasible'], antonyms: ['unworkable', 'impossible'], sentence: 'Local manufacturing is a viable path to reduce import dependence.' },
   { word: 'Volatile', pos: 'adjective', meaning: 'Liable to change rapidly and unpredictably', synonyms: ['unstable', 'unpredictable'], antonyms: ['stable', 'steady'], sentence: 'Volatile exchange rates complicate trade planning.' },
   { word: 'Zealous', pos: 'adjective', meaning: 'Showing great energy and enthusiasm for a cause', synonyms: ['ardent', 'fervent'], antonyms: ['apathetic', 'indifferent'], sentence: 'Zealous preparation must still leave space for sleep and health.' },
+]
+
+interface VerifiedVocabularyRow {
+  word: string
+  primary_part_of_speech: string
+  primary_definition: string
+  synonyms: string[]
+  examples: string[]
+  source: string
+}
+
+const generatedVocabulary: VocabWord[] = (verifiedVocabulary as VerifiedVocabularyRow[]).map((row) => ({
+  word: row.word.charAt(0).toLocaleUpperCase() + row.word.slice(1),
+  pos: row.primary_part_of_speech,
+  meaning: row.primary_definition,
+  synonyms: row.synonyms.slice(0, 8),
+  antonyms: [],
+  sentence: row.examples[0] ?? '',
+  source: row.source,
+}))
+
+const generatedWords = new Set(generatedVocabulary.map((row) => row.word.toLocaleLowerCase()))
+export const vocabulary: VocabWord[] = [
+  ...generatedVocabulary,
+  ...curatedVocabulary.filter((row) => !generatedWords.has(row.word.toLocaleLowerCase())),
 ]

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import {
-  AlertTriangle, BookOpen, ChevronLeft, ChevronRight, Languages, Search,
+  BookOpen, ChevronLeft, ChevronRight, Languages, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
@@ -113,14 +113,6 @@ export default function LanguageGrammar() {
             )
           })}
         </section>
-
-        <div className="mt-5 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950">
-          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-          <p>
-            The material has been cleaned and organised from the owner-provided appendix. Image-only reference pages
-            were converted into concise rule summaries. Verify any disputed rule against a standard grammar reference.
-          </p>
-        </div>
 
         {error && (
           <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">

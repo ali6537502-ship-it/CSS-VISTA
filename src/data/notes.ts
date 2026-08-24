@@ -24,7 +24,6 @@ export const noteProducts: NoteProduct[] = [
     samples: [
       { title: 'Internal Security and Political Order', previewFolder: 'internal-security', pages: 3 },
       { title: 'China–Pakistan Economic Corridor (CPEC)', previewFolder: 'cpec', pages: 3 },
-      { title: 'Indus Waters Dispute and Water Security', previewFolder: 'indus-waters', pages: 3 },
       { title: 'Pakistan–India Relations and Kashmir', previewFolder: 'pakistan-india-relations', pages: 3 },
       { title: 'Proxy Wars', url: '/samples/proxy-wars-ca-pa.pdf' },
       { title: 'Multipolar World Order — Pakistan’s Balancing Strategy', url: '/samples/multipolar-world-ca-pa.pdf' },

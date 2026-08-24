@@ -3,14 +3,16 @@ import { Link } from 'react-router'
 import {
   Pause, Play, RotateCcw, Target, Timer, Coffee, Plus, Trash2,
   AlertTriangle, BookMarked, PenLine, CalendarDays, Printer, FileText, Zap, Globe,
+  Settings2,
 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { compulsorySubjects } from '@/data/syllabus'
 import { vocabulary } from '@/data/vocab'
-import { getState, setSubjectProgress, setGoal, getStats } from '@/lib/store'
+import { getState, setSubjectProgress, setGoal, getStats, setVistaShortcut } from '@/lib/store'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { printPage } from '@/components/PrintMenu'
+import ScheduledSyllabusBoard from '@/components/ScheduledSyllabusBoard'
 
 const quotationsSeed = [
   { text: 'With faith, discipline and selfless devotion to duty, there is nothing worthwhile that you cannot achieve.', source: 'Muhammad Ali Jinnah' },
@@ -164,6 +166,7 @@ export default function StudyTools() {
   const [flipped, setFlipped] = useState(false)
   const stats = getStats()
   const [quoteIdx] = useState(() => new Date().getDate() % quotationsSeed.length)
+  const [shortcutSettings, setShortcutSettings] = useState(state.vistaShortcut)
 
   const reminders = useList<{ id: string; text: string }>('reminders')
   const [remText, setRemText] = useState('')
@@ -191,6 +194,19 @@ export default function StudyTools() {
             </Link>
           ))}
         </div>
+
+        <section id="vista-shortcut-settings" className="rounded-xl border bg-white p-4 sm:p-5" aria-labelledby="vista-shortcut-settings-title">
+          <div className="flex items-start gap-3"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-pine text-white"><Settings2 className="h-5 w-5" /></span><div><h2 id="vista-shortcut-settings-title" className="font-display text-xl font-bold text-pine">VISTA SHORTCUT settings</h2><p className="mt-1 text-xs leading-relaxed text-muted-foreground">Choose the website tools that appear in the floating AssistiveTouch-style menu. Your choice is saved with your study data.</p></div></div>
+          <label className="mt-4 flex items-center gap-2 rounded-lg bg-secondary/50 px-3 py-2 text-sm font-bold text-pine"><input type="checkbox" checked={shortcutSettings.enabled} onChange={(event) => { const next = { ...shortcutSettings, enabled: event.target.checked }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> Show VISTA SHORTCUT</label>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{[
+            ['goals', 'Goal checklist'], ['note', 'Quick note'], ['syllabus', 'FPSC syllabus'], ['planner', 'Study planner'],
+            ['timer', 'Answer timer'], ['search', 'Website search'], ['gk', 'GK World'], ['mistakes', 'Mistake notebook'],
+            ['current-affairs', 'Current affairs'], ['css-mcqs', 'CSS subject MCQs'], ['mpt', 'MPT practice'], ['games', 'CSS games'],
+            ['grammar', 'Grammar & vocabulary'], ['papers', 'Past papers'], ['notes', 'Notes library'], ['dashboard', 'Dashboard'],
+          ].map(([id, label]) => <label key={id} className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold"><input type="checkbox" checked={shortcutSettings.shortcutIds.includes(id)} onChange={() => { const ids = shortcutSettings.shortcutIds.includes(id) ? shortcutSettings.shortcutIds.filter((value) => value !== id) : [...shortcutSettings.shortcutIds, id]; const next = { ...shortcutSettings, shortcutIds: ids }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> {label}</label>)}</div>
+        </section>
+
+        <ScheduledSyllabusBoard />
 
         {/* Timers row */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

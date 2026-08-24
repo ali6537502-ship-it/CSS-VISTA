@@ -54,6 +54,27 @@ export interface StudyPlannerSettings {
   configuredAt: string
 }
 
+export type SyllabusItemStatus = 'not-started' | 'in-progress' | 'completed'
+
+export interface StudyScheduleTask {
+  id: string
+  syllabusItemId: string
+  subject: string
+  paper: string
+  section: string
+  topic: string
+  date: string
+  time?: string
+  minutes: number
+  status: SyllabusItemStatus
+  createdAt: string
+}
+
+export interface VistaShortcutSettings {
+  enabled: boolean
+  shortcutIds: string[]
+}
+
 export interface EvaluationRequest {
   id: string
   subject: string
@@ -101,6 +122,11 @@ export interface VistaState {
   mockSchedule: Partial<Record<ScheduledMockKind, MockScheduleEntry>>
   studyPlanner: StudyPlannerSettings | null
   planTaskCompletions: Record<string, string[]>
+  syllabusItemStatuses: Record<string, SyllabusItemStatus>
+  studyScheduleTasks: StudyScheduleTask[]
+  quickNotes: string
+  goalChecklist: Array<{ id: string; text: string; completed: boolean }>
+  vistaShortcut: VistaShortcutSettings
   evaluationRequests: EvaluationRequest[]
   customTestSeriesRequests: CustomTestSeriesRequest[]
   reviews: Record<string, ReviewEntry> // MCQ id -> spaced-repetition state
@@ -129,6 +155,14 @@ const empty: VistaState = {
   mockSchedule: {},
   studyPlanner: null,
   planTaskCompletions: {},
+  syllabusItemStatuses: {},
+  studyScheduleTasks: [],
+  quickNotes: '',
+  goalChecklist: [],
+  vistaShortcut: {
+    enabled: true,
+    shortcutIds: ['goals', 'note', 'syllabus', 'planner', 'timer', 'search'],
+  },
   evaluationRequests: [],
   customTestSeriesRequests: [],
   reviews: {},
@@ -456,6 +490,74 @@ export function togglePlanTask(date: string, taskId: string): boolean {
   }
   save(s)
   return completed
+}
+
+export function setSyllabusItemStatus(id: string, status: SyllabusItemStatus) {
+  const state = getState()
+  state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [id]: status }
+  state.studyScheduleTasks = (state.studyScheduleTasks ?? []).map((task) => (
+    task.syllabusItemId === id ? { ...task, status } : task
+  ))
+  save(state)
+}
+
+export function addStudyScheduleTasks(tasks: Array<Omit<StudyScheduleTask, 'id' | 'createdAt' | 'status'>>) {
+  const state = getState()
+  const existing = new Set((state.studyScheduleTasks ?? []).map((task) => `${task.syllabusItemId}|${task.date}`))
+  const additions: StudyScheduleTask[] = tasks
+    .filter((task) => !existing.has(`${task.syllabusItemId}|${task.date}`))
+    .map((task) => ({
+      ...task,
+      id: `syllabus-task-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: new Date().toISOString(),
+      status: state.syllabusItemStatuses?.[task.syllabusItemId] === 'completed' ? 'completed' : 'in-progress',
+    }))
+  state.studyScheduleTasks = [...(state.studyScheduleTasks ?? []), ...additions].slice(-3000)
+  additions.forEach((task) => {
+    if (state.syllabusItemStatuses?.[task.syllabusItemId] !== 'completed') {
+      state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [task.syllabusItemId]: 'in-progress' }
+    }
+  })
+  save(state)
+  return additions
+}
+
+export function updateStudyScheduleTask(id: string, patch: Partial<Pick<StudyScheduleTask, 'date' | 'time' | 'minutes' | 'status'>>) {
+  const state = getState()
+  let syllabusItemId = ''
+  state.studyScheduleTasks = (state.studyScheduleTasks ?? []).map((task) => {
+    if (task.id !== id) return task
+    syllabusItemId = task.syllabusItemId
+    return { ...task, ...patch }
+  })
+  if (syllabusItemId && patch.status) {
+    state.syllabusItemStatuses = { ...(state.syllabusItemStatuses ?? {}), [syllabusItemId]: patch.status }
+  }
+  save(state)
+}
+
+export function deleteStudyScheduleTask(id: string) {
+  const state = getState()
+  state.studyScheduleTasks = (state.studyScheduleTasks ?? []).filter((task) => task.id !== id)
+  save(state)
+}
+
+export function setQuickNotes(value: string) {
+  const state = getState()
+  state.quickNotes = value.slice(0, 12000)
+  save(state)
+}
+
+export function setGoalChecklist(items: VistaState['goalChecklist']) {
+  const state = getState()
+  state.goalChecklist = items.slice(0, 100)
+  save(state)
+}
+
+export function setVistaShortcut(settings: VistaShortcutSettings) {
+  const state = getState()
+  state.vistaShortcut = settings
+  save(state)
 }
 
 export function saveEvaluationRequest(

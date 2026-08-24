@@ -20,11 +20,18 @@ for (const subject of syllabus.subjects ?? []) {
   if (subject.designation === 'optional') groups.add(subject.group)
 }
 if ([1, 2, 3, 4, 5, 6, 7].some((group) => !groups.has(group))) errors.push('FPSC optional hierarchy does not contain all seven groups')
+for (const subject of syllabus.subjects?.filter((item) => languageAppendixSubjects.has(item.slug)) ?? []) {
+  if (!Array.isArray(subject.scanPages) || subject.scanPages.length !== 2) errors.push(`FPSC syllabus scan pages missing: ${subject.slug}`)
+  for (const scanPage of subject.scanPages ?? []) {
+    const file = path.join(root, 'public', scanPage.replace(/^\//, ''))
+    if (!fs.existsSync(file) || fs.statSync(file).size < 1024) errors.push(`Missing/invalid syllabus scan page: ${scanPage}`)
+  }
+}
 
-const curatedRoot = path.join(root, 'public', 'css-subject-mcqs-curated')
-const curatedIndex = readJson('public/css-subject-mcqs-curated/index.json')
-if (curatedIndex.total <= 0 || curatedIndex.total > 2500) errors.push(`Curated subject bank must remain limited to 1–2,500 questions; found ${curatedIndex.total}`)
-if (fs.existsSync(path.join(root, 'public', 'css-subject-mcqs'))) errors.push('The full donor CSS subject MCQ directory must not be connected')
+const curatedRoot = path.join(root, 'public', 'css-subject-mcqs')
+const curatedIndex = readJson('public/css-subject-mcqs/index.json')
+if (curatedIndex.total < 30000) errors.push(`Full supplied subject bank expected at least 30,000 structurally complete questions; found ${curatedIndex.total}`)
+if (!Number.isInteger(curatedIndex.unresolved) || curatedIndex.unresolved < 0) errors.push('Full supplied bank must report unresolved source items rather than guessing them')
 const curatedIds = new Set()
 const curatedStems = new Set()
 const curatedAnswers = [0, 0, 0, 0]
@@ -74,7 +81,6 @@ if ((remoteLibrary.totalBytes ?? 0) < 800_000_000) errors.push(`Remote study-lib
 const previewSets = {
   'internal-security': 3,
   cpec: 3,
-  'indus-waters': 3,
   'pakistan-india-relations': 3,
   'biological-theory-crime': 3,
   'legal-ethical-investigation': 3,
@@ -110,4 +116,4 @@ if (errors.length) {
   process.exit(1)
 }
 
-console.log(`Integrated academic audit passed: ${syllabus.subjects.length} syllabus entries, ${curatedTotal.toLocaleString()} curated subject MCQs, ${affairs.mcqs.length} recent-affairs MCQs, 33 note previews, 123 checked-paper pages and ${remoteLibrary.fileCount} remotely served study files.`)
+console.log(`Integrated academic audit passed: ${syllabus.subjects.length} syllabus entries, ${curatedTotal.toLocaleString()} supplied subject MCQs, ${affairs.mcqs.length} recent-affairs MCQs, 30 note previews, 123 checked-paper pages and ${remoteLibrary.fileCount} remotely served study files.`)

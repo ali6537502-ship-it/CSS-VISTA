@@ -1345,7 +1345,11 @@
         39,
         40
       ],
-      "sections": []
+      "sections": [],
+      "scanPages": [
+        "/fpsc-syllabus-scans/balochi-page-1.webp",
+        "/fpsc-syllabus-scans/balochi-page-2.webp"
+      ]
     },
     {
       "slug": "botany",
@@ -5077,7 +5081,11 @@
         137,
         138
       ],
-      "sections": []
+      "sections": [],
+      "scanPages": [
+        "/fpsc-syllabus-scans/punjabi-page-1.webp",
+        "/fpsc-syllabus-scans/punjabi-page-2.webp"
+      ]
     },
     {
       "slug": "pure-mathematics",
@@ -5492,7 +5500,11 @@
         152,
         153
       ],
-      "sections": []
+      "sections": [],
+      "scanPages": [
+        "/fpsc-syllabus-scans/urdu-literature-page-1.webp",
+        "/fpsc-syllabus-scans/urdu-literature-page-2.webp"
+      ]
     },
     {
       "slug": "zoology",

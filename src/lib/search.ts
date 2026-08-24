@@ -278,7 +278,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       fetchJson<RemoteOneLinerIndex>('/one-liner-gk/index.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/english.json'),
       fetchJson<RemoteGrammarCourse>('/language-grammar/urdu.json'),
-      fetchJson<RemoteSubjectMcqIndex>('/css-subject-mcqs-curated/index.json'),
+      fetchJson<RemoteSubjectMcqIndex>('/css-subject-mcqs/index.json'),
       fetchJson<RemoteFpscSyllabus>('/fpsc-syllabus.json'),
       fetchJson<RemoteRecentAffairs>('/recent-affairs/batch-2026-07-11_2026-08-16.json'),
     ])

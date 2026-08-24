@@ -1,7 +1,8 @@
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const root = new URL('..', import.meta.url).pathname
+const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
 const clientDir = join(dist, 'client')
 const publicDir = join(root, 'public')

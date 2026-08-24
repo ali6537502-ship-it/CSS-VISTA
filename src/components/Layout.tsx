@@ -5,9 +5,9 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, type LucideIcon,
 } from 'lucide-react'
-import { featureAnnouncements, site, notifications } from '@/data/site'
+import { site } from '@/data/site'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { searchSite, type SearchResult } from '@/lib/search'
@@ -17,6 +17,7 @@ import NotificationCenter, { NotificationOptInBar } from '@/components/Notificat
 import { useAccount } from '@/lib/accountContext'
 import { AdSenseLoader, PageFooterAd, PageHeaderAd } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
+import VistaShortcut from '@/components/VistaShortcut'
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -133,6 +134,7 @@ const desktopMoreLinks = (() => {
 function NotificationBar() {
   const [deviceTime, setDeviceTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
+  const [streak] = useState(() => touchVisit())
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mockNotices = (['gk', 'mpt'] as const).map((kind) => {
     const status = getDailyMockStatus(kind, deviceTime)
@@ -148,9 +150,11 @@ function NotificationBar() {
       expires: undefined,
     }
   })
-  const active = [...mockNotices, ...notifications, ...featureAnnouncements].filter(
-    (item) => !item.expires || new Date(item.expires) > new Date(),
-  )
+  const active = [
+    ...mockNotices,
+    { id: 'test-series', kind: 'platform' as const, text: 'Customized CSS written test series by Miss Sadia Zahoor, PAS', link: '/test-series' },
+    { id: 'instagram-posts', kind: 'platform' as const, text: 'Follow CSS Vista on Instagram for preparation posts', link: site.instagram },
+  ]
 
   useEffect(() => {
     const clock = window.setInterval(() => setDeviceTime(new Date()), 1000)
@@ -186,9 +190,9 @@ function NotificationBar() {
   return (
     <div className="cssv-live-bar bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <Link to="/mentors" className="flex shrink-0 items-center gap-1.5" aria-label="Meet the CSS Vista mentors">
-          <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><UserCheck className="h-3.5 w-3.5" /></span>
-          <span className="rounded bg-emerald-700 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-50">Live</span>
+        <Link to="/dashboard" className="flex shrink-0 items-center gap-1.5" aria-label={`${streak.current} day study visit streak`} title="Visit every day to keep your streak">
+          <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><Flame className="h-3.5 w-3.5" /></span>
+          <span className="rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-950">{streak.current} day</span>
         </Link>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
           <div className="vista-live-ticker-track flex w-max items-center">
@@ -201,7 +205,7 @@ function NotificationBar() {
                 {active.map((item) => {
                   const className = "group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs text-emerald-50/90 outline-none hover:text-white focus:text-white sm:text-[13px]"
                   const content = <>
-                    <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.kind === 'fpsc' ? 'bg-amber-400' : 'bg-emerald-400'}`} />
+                    <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.id === 'instagram-posts' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
                     <span className="underline-offset-2 group-hover:underline group-focus:underline">
                       {item.text}
                     </span>
@@ -226,6 +230,7 @@ function NotificationBar() {
         </div>
         <SocialLinks compact />
       </div>
+      <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="block bg-amber-300 px-3 py-1 text-center text-[10px] font-bold leading-snug text-emerald-950 hover:bg-amber-200 sm:text-xs">Want to suggest a change that benefits CSS preparation and this website? Message us on Instagram—the CSS Vista team will work on it.</a>
     </div>
   )
 }
@@ -398,7 +403,6 @@ export default function Layout() {
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
   const { user, configured: accountsConfigured } = useAccount()
 
-  useEffect(() => { touchVisit() }, [])
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       setMobileOpen(false)
@@ -417,7 +421,9 @@ export default function Layout() {
     const capture = () => {
       const browserRoute = `${window.location.pathname}${window.location.search}${window.location.hash}`
       if (browserRoute !== entryRoute) return
-      routeScrollPositions.set(entryRoute, Math.max(0, Math.round(window.scrollY)))
+      const position = Math.max(0, Math.round(window.scrollY))
+      routeScrollPositions.set(location.key, position)
+      routeScrollPositions.set(entryRoute, position)
     }
     capture()
     window.addEventListener('scroll', capture, { passive: true })
@@ -426,10 +432,10 @@ export default function Layout() {
       window.removeEventListener('scroll', capture)
       document.removeEventListener('click', capture, true)
     }
-  }, [currentRoute])
+  }, [currentRoute, location.key])
   useLayoutEffect(() => {
     const target = navigationType === 'POP'
-      ? routeScrollPositions.get(currentRoute) ?? 0
+      ? routeScrollPositions.get(location.key) ?? routeScrollPositions.get(currentRoute) ?? 0
       : 0
     const restore = () => window.scrollTo({ top: target, left: 0, behavior: 'auto' })
     restore()
@@ -437,12 +443,14 @@ export default function Layout() {
     const frame = window.requestAnimationFrame(restore)
     const shortRetry = window.setTimeout(restore, 80)
     const lazyContentRetry = window.setTimeout(restore, 260)
+    const finalRetry = window.setTimeout(restore, 750)
     return () => {
       window.cancelAnimationFrame(frame)
       window.clearTimeout(shortRetry)
       window.clearTimeout(lazyContentRetry)
+      window.clearTimeout(finalRetry)
     }
-  }, [currentRoute, navigationType])
+  }, [currentRoute, location.key, navigationType])
   useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -465,6 +473,7 @@ export default function Layout() {
   }, [])
 
   const goBack = () => {
+    routeScrollPositions.set(location.key, Math.max(0, Math.round(window.scrollY)))
     const historyIndex = window.history.state?.idx
     if (typeof historyIndex === 'number' && historyIndex > 0) {
       navigate(-1)
@@ -658,9 +667,6 @@ export default function Layout() {
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
               Main categories
             </p>
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold text-emerald-800">
-              {mobileQuickLinks.length} sections
-            </span>
           </div>
           <div className="grid grid-cols-2 gap-2 pb-4">
             {mobileQuickLinks.map((item) => (
@@ -740,6 +746,8 @@ export default function Layout() {
           <Outlet />
         </div>
       </main>
+
+      <VistaShortcut />
 
       <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
