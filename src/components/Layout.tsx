@@ -374,16 +374,18 @@ function BackBar({ onBack }: { onBack: () => void }) {
   const location = useLocation()
   if (location.pathname === '/') return null
   return (
-    <div className="border-b bg-white">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2">
+    <div className="cssv-page-nav no-print border-b">
+      <div className="mx-auto flex max-w-7xl items-center gap-1.5 px-3 py-2 sm:px-5">
         <button
+          type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+          className="cssv-page-nav-back group inline-flex min-h-10 items-center gap-2 rounded-full border border-emerald-900/10 bg-white/90 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-pine shadow-sm transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-md active:translate-y-0"
           aria-label="Go back to previous page"
         >
-          <ArrowLeft className="h-4 w-4" /> Back
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-50 text-emerald-800 transition-transform duration-200 group-hover:-translate-x-0.5"><ArrowLeft className="h-4 w-4" /></span>
+          Previous
         </button>
-        <Link to="/" className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-emerald-800 transition-colors hover:bg-secondary">
+        <Link to="/" className="inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-50">
           <GraduationCap className="h-4 w-4" /> Home
         </Link>
       </div>
@@ -392,6 +394,25 @@ function BackBar({ onBack }: { onBack: () => void }) {
 }
 
 const routeScrollPositions = new Map<string, number>()
+let lastRouteKey: string | null = null
+let lastRouteHistoryIndex: number | null = null
+let animatedRouteKey: string | null = null
+let animatedRouteDirection: 'forward' | 'back' | 'none' = 'none'
+
+function resolveRouteDirection(locationKey: string, navigationType: 'POP' | 'PUSH' | 'REPLACE', historyIndex: number | null) {
+  if (animatedRouteKey === locationKey) return animatedRouteDirection
+  animatedRouteKey = locationKey
+  animatedRouteDirection = lastRouteKey === null || lastRouteKey === locationKey
+    ? 'none'
+    : navigationType === 'POP'
+      ? historyIndex !== null && lastRouteHistoryIndex !== null && historyIndex > lastRouteHistoryIndex
+        ? 'forward'
+        : 'back'
+      : navigationType === 'PUSH'
+        ? 'forward'
+        : 'none'
+  return animatedRouteDirection
+}
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -401,6 +422,9 @@ export default function Layout() {
   const navigate = useNavigate()
   const navigationType = useNavigationType()
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
+  const currentHistoryIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
+  const initialHistoryIndexRef = useRef(currentHistoryIndex)
+  const routeDirection = resolveRouteDirection(location.key, navigationType, currentHistoryIndex)
   const { user, configured: accountsConfigured } = useAccount()
 
   useEffect(() => {
@@ -434,23 +458,61 @@ export default function Layout() {
     }
   }, [currentRoute, location.key])
   useLayoutEffect(() => {
+    lastRouteHistoryIndex = currentHistoryIndex
+    lastRouteKey = location.key
+  }, [currentHistoryIndex, location.key])
+  useLayoutEffect(() => {
     const target = navigationType === 'POP'
       ? routeScrollPositions.get(location.key) ?? routeScrollPositions.get(currentRoute) ?? 0
       : 0
-    const restore = () => window.scrollTo({ top: target, left: 0, behavior: 'auto' })
-    restore()
-    if (navigationType !== 'POP') return
-    const frame = window.requestAnimationFrame(restore)
-    const shortRetry = window.setTimeout(restore, 80)
-    const lazyContentRetry = window.setTimeout(restore, 260)
-    const finalRetry = window.setTimeout(restore, 750)
+    let frame = 0
+    let cancelled = false
+    const cancelRestore = () => { cancelled = true }
+
+    window.addEventListener('wheel', cancelRestore, { passive: true })
+    window.addEventListener('touchstart', cancelRestore, { passive: true })
+    window.addEventListener('pointerdown', cancelRestore, { passive: true })
+    window.addEventListener('keydown', cancelRestore)
+
+    if (navigationType !== 'POP') {
+      frame = window.requestAnimationFrame(() => {
+        if (location.hash) {
+          const rawId = location.hash.slice(1)
+          let id = rawId
+          try { id = decodeURIComponent(rawId) } catch { /* Keep the original hash when malformed. */ }
+          const anchor = document.getElementById(id) ?? document.querySelector<HTMLElement>(`[name="${CSS.escape(id)}"]`)
+          if (anchor) {
+            anchor.scrollIntoView({ block: 'start', behavior: 'auto' })
+            return
+          }
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      })
+    } else {
+      const startedAt = performance.now()
+      const restore = () => {
+        if (cancelled) return
+        const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
+        const reachableTarget = Math.min(target, maximum)
+        if (Math.abs(window.scrollY - reachableTarget) > 1) {
+          window.scrollTo({ top: reachableTarget, left: 0, behavior: 'auto' })
+        }
+        const fullyRestored = maximum >= target - 1 && Math.abs(window.scrollY - target) <= 1
+        if (!fullyRestored && performance.now() - startedAt < 900) {
+          frame = window.requestAnimationFrame(restore)
+        }
+      }
+      restore()
+    }
+
     return () => {
       window.cancelAnimationFrame(frame)
-      window.clearTimeout(shortRetry)
-      window.clearTimeout(lazyContentRetry)
-      window.clearTimeout(finalRetry)
+      window.removeEventListener('wheel', cancelRestore)
+      window.removeEventListener('touchstart', cancelRestore)
+      window.removeEventListener('pointerdown', cancelRestore)
+      window.removeEventListener('keydown', cancelRestore)
     }
-  }, [currentRoute, location.key, navigationType])
+  }, [currentRoute, location.hash, location.key, navigationType])
   useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -474,8 +536,9 @@ export default function Layout() {
 
   const goBack = () => {
     routeScrollPositions.set(location.key, Math.max(0, Math.round(window.scrollY)))
-    const historyIndex = window.history.state?.idx
-    if (typeof historyIndex === 'number' && historyIndex > 0) {
+    const historyIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
+    const initialHistoryIndex = initialHistoryIndexRef.current
+    if (historyIndex !== null && initialHistoryIndex !== null && historyIndex > initialHistoryIndex) {
       navigate(-1)
       return
     }
@@ -737,11 +800,7 @@ export default function Layout() {
       <main className="flex-1 pb-[68px] md:pb-0">
         <div
           key={location.key}
-          className={
-            navigationType === 'POP'
-              ? 'route-transition-back'
-              : 'route-transition-forward'
-          }
+          className={`cssv-route-stage route-transition-${routeDirection}`}
         >
           <Outlet />
         </div>
