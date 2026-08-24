@@ -171,8 +171,8 @@ async function fetchPackagedAsset(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
-    const paperMatch = url.pathname.match(/^\/past-papers\/view\/([a-z0-9-]+)\/?$/)
-    const collectionMatch = url.pathname.match(/^\/past-papers\/(css|pms|ppsc)\/(\d{4})\/?$/)
+    const paperMatch = url.pathname.match(/^\\/past-papers\\/view\\/([a-z0-9-]+)\\/?$/)
+    const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc)\\/(\\d{4})\\/?$/)
     const seoPath = paperMatch
       ? '/seo/past-papers/' + paperMatch[1] + '.html'
       : collectionMatch

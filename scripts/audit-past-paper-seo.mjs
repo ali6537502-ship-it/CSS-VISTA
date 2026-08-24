@@ -1,6 +1,6 @@
 import { access, readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -41,8 +41,10 @@ if (process.argv.includes('--artifact')) {
 
   const robots = await readFile(join(clientDir, 'robots.txt'), 'utf8')
   assert(robots.includes('Allow: /') && robots.includes('/sitemap.xml'), 'robots.txt must allow crawling and advertise the sitemap')
-  const worker = await readFile(join(root, 'dist', 'server', 'index.js'), 'utf8')
+  const workerPath = join(root, 'dist', 'server', 'index.js')
+  const worker = await readFile(workerPath, 'utf8')
   assert(worker.includes('/seo/past-papers/') && worker.includes('/seo/past-paper-collections/'), 'Worker does not serve SEO pages at public URLs')
+  await import(`${pathToFileURL(workerPath).href}?audit=${Date.now()}`)
 }
 
 console.log(`Past-paper SEO audit passed: ${papers.length} direct paper records${process.argv.includes('--artifact') ? ' and generated crawlable pages' : ''}.`)
