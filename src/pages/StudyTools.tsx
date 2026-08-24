@@ -180,12 +180,13 @@ export default function StudyTools() {
       <PageHeader title="Study Tools" description="Planners, timers, trackers and organisers for focused daily preparation." />
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10">
         {/* Featured tool shortcuts */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {[
             { to: '/answer-timer', icon: PenLine, t: 'Handwritten Answer Timer', d: '5/10/20/35-minute structure alerts' },
             { to: '/five-minute', icon: Zap, t: 'Daily Five-Minute Challenge', d: 'A quick mixed quiz against the clock' },
             { to: '/mistakes', icon: AlertTriangle, t: 'Mistake Notebook', d: 'Every wrong answer, ready to revise' },
             { to: '/gk', icon: Globe, t: 'GK World', d: shippedMcqSummary },
+            { to: '/css-past-paper-analysis', icon: FileText, t: 'CSS Past Paper Analysis', d: 'Topic-wise questions linked to the official syllabus' },
           ].map((c) => (
             <Link key={c.to} to={c.to} className="group rounded-xl border bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-emerald-700/40 hover:shadow-md">
               <c.icon className="h-5 w-5 text-emerald-800" />
@@ -203,6 +204,7 @@ export default function StudyTools() {
             ['timer', 'Answer timer'], ['search', 'Website search'], ['gk', 'GK World'], ['mistakes', 'Mistake notebook'],
             ['current-affairs', 'Current affairs'], ['css-mcqs', 'CSS subject MCQs'], ['mpt', 'MPT practice'], ['games', 'CSS games'],
             ['grammar', 'Grammar & vocabulary'], ['papers', 'Past papers'], ['notes', 'Notes library'], ['dashboard', 'Dashboard'],
+            ['paper-analysis', 'Past paper analysis'],
           ].map(([id, label]) => <label key={id} className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold"><input type="checkbox" checked={shortcutSettings.shortcutIds.includes(id)} onChange={() => { const ids = shortcutSettings.shortcutIds.includes(id) ? shortcutSettings.shortcutIds.filter((value) => value !== id) : [...shortcutSettings.shortcutIds, id]; const next = { ...shortcutSettings, shortcutIds: ids }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> {label}</label>)}</div>
         </section>
 

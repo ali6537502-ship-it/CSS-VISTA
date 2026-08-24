@@ -1,13 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router'
 import {
   CalendarPlus, CheckSquare2, ChevronRight, Copy, ExternalLink,
-  FileText, Loader2, Search, Square, X,
+  FileText, History, Loader2, Search, Square, X,
 } from 'lucide-react'
 import ScheduledSyllabusBoard from '@/components/ScheduledSyllabusBoard'
 import {
   addStudyScheduleTasks, getState, setSyllabusItemStatus,
   type SyllabusItemStatus,
 } from '@/lib/store'
+import {
+  loadPastPaperAnalysis,
+  loadPastPaperAnalysisIndex,
+  type PastPaperAnalysisData,
+  type PastPaperAnalysisIndex,
+} from '@/lib/pastPaperAnalysis'
 
 interface FpscSyllabusSection { title: string; items: string[] }
 interface FpscSyllabusSubject {
@@ -97,6 +104,11 @@ export default function FpscSyllabusPlanner() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [boardVersion, setBoardVersion] = useState(0)
+  const [analysisIndex, setAnalysisIndex] = useState<PastPaperAnalysisIndex | null>(null)
+  const [analysisData, setAnalysisData] = useState<PastPaperAnalysisData | null>(null)
+  const [evidenceKey, setEvidenceKey] = useState('')
+  const [evidenceLoading, setEvidenceLoading] = useState(false)
+  const [evidenceError, setEvidenceError] = useState('')
 
   useEffect(() => {
     fetch('/fpsc-syllabus.json')
@@ -106,10 +118,14 @@ export default function FpscSyllabusPlanner() {
       })
       .then((value) => {
         setData(value)
-        const requested = new URLSearchParams(window.location.search).get('subject')
+        const parameters = new URLSearchParams(window.location.search)
+        const requested = parameters.get('subject')
         setSelectedSlug(value.subjects.some((subject) => subject.slug === requested) ? requested! : value.subjects[0]?.slug ?? '')
+        const requestedTopic = parameters.get('topic')
+        if (requestedTopic) setQuery(requestedTopic)
       })
       .catch(() => setError('The official syllabus hierarchy could not be loaded.'))
+    loadPastPaperAnalysisIndex().then(setAnalysisIndex).catch(() => undefined)
   }, [])
 
   const allTopics = useMemo(() => data?.subjects.flatMap(flattenSubject) ?? [], [data])
@@ -143,6 +159,8 @@ export default function FpscSyllabusPlanner() {
   const overallCompleted = allTopics.filter((topic) => statuses[topic.id] === 'completed').length
   const subjectPercent = selectedTopics.length ? Math.round((subjectCompleted / selectedTopics.length) * 100) : 0
   const overallPercent = allTopics.length ? Math.round((overallCompleted / allTopics.length) * 100) : 0
+  const analysisSubject = analysisIndex?.subjects.find((subject) => subject.slug === selected?.slug) ?? null
+  const loadedAnalysisSubject = analysisData?.subjects.find((subject) => subject.slug === selected?.slug) ?? null
 
   function setStatus(topicId: string, status: SyllabusItemStatus) {
     setSyllabusItemStatus(topicId, status)
@@ -203,6 +221,21 @@ export default function FpscSyllabusPlanner() {
     window.setTimeout(() => setMessage(''), 2200)
   }
 
+  function toggleEvidence(key: string) {
+    if (evidenceKey === key) {
+      setEvidenceKey('')
+      return
+    }
+    setEvidenceKey(key)
+    if (analysisData || evidenceLoading) return
+    setEvidenceLoading(true)
+    setEvidenceError('')
+    loadPastPaperAnalysis()
+      .then(setAnalysisData)
+      .catch(() => setEvidenceError('Past-paper evidence could not be loaded.'))
+      .finally(() => setEvidenceLoading(false))
+  }
+
   return (
     <section aria-labelledby="fpsc-syllabus-planner-title">
       <div className="rounded-2xl bg-pine p-5 text-white sm:p-7">
@@ -253,9 +286,16 @@ export default function FpscSyllabusPlanner() {
                 const sectionTopics = selectedTopics.filter((topic) => topic.id.startsWith(`${selected.slug}:${sectionIndex}:`) && displayedItems.has(topic.topic))
                 const key = `${selected.slug}:${sectionIndex}`
                 const open = openSections[key] ?? (sectionIndex === 0 || Boolean(query.trim()))
-                return <section key={key} className="overflow-hidden rounded-lg border"><div className="flex items-stretch"><button type="button" onClick={() => setOpenSections((current) => ({ ...current, [key]: !open }))} aria-expanded={open} className="flex min-h-12 min-w-0 flex-1 items-center gap-2 px-3 text-left"><ChevronRight className={`h-4 w-4 shrink-0 text-emerald-700 transition-transform ${open ? 'rotate-90' : ''}`} /><span className="min-w-0"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{sectionTopics[0]?.paper ?? 'Official heading'}</span><span className="block text-sm font-bold leading-snug text-pine">{section.title}</span></span></button>{sectionTopics.length > 0 && <button type="button" onClick={() => toggleChecked(sectionTopics.map((topic) => topic.id))} className="grid w-12 shrink-0 place-items-center border-l text-emerald-800 hover:bg-emerald-50" aria-label={`Select ${section.title}`}>{sectionTopics.every((topic) => checked.has(topic.id)) ? <CheckSquare2 className="h-4 w-4" /> : <Square className="h-4 w-4" />}</button>}</div>{open && <div className="space-y-2 border-t bg-secondary/20 p-3">{sectionTopics.length ? sectionTopics.map((topic) => {
+                const compactEvidenceTopics = analysisSubject?.sections.flatMap((item) => item.topics.filter((analysisTopic) => (analysisTopic.syllabusSectionIndex ?? item.syllabusSectionIndex) === sectionIndex)) ?? []
+                const evidenceCount = compactEvidenceTopics.reduce((sum, item) => sum + item.questionCount, 0)
+                const fullEvidenceTopics = loadedAnalysisSubject?.sections.flatMap((item) => item.topics.filter((analysisTopic) => (analysisTopic.syllabusSectionIndex ?? item.syllabusSectionIndex) === sectionIndex)) ?? []
+                const evidenceRows = fullEvidenceTopics.flatMap((analysisTopic) => analysisTopic.questions.map((question) => ({ analysisTopic, question }))).sort((a, b) => b.question.year - a.question.year).slice(0, 8)
+                return <section key={key} className="overflow-hidden rounded-lg border"><div className="flex items-stretch"><button type="button" onClick={() => setOpenSections((current) => ({ ...current, [key]: !open }))} aria-expanded={open} className="flex min-h-12 min-w-0 flex-1 items-center gap-2 px-3 text-left"><ChevronRight className={`h-4 w-4 shrink-0 text-emerald-700 transition-transform ${open ? 'rotate-90' : ''}`} /><span className="min-w-0"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{sectionTopics[0]?.paper ?? 'Official heading'}</span><span className="block text-sm font-bold leading-snug text-pine">{section.title}</span></span></button>{evidenceCount > 0 && <button type="button" onClick={() => toggleEvidence(key)} className={`flex min-w-14 shrink-0 flex-col items-center justify-center border-l px-2 text-[9px] font-bold ${evidenceKey === key ? 'bg-amber-50 text-amber-900' : 'text-emerald-800 hover:bg-emerald-50'}`} aria-label={`Show ${evidenceCount} past-paper questions for ${section.title}`}><History className="h-3.5 w-3.5" /><span>{evidenceCount}</span></button>}{sectionTopics.length > 0 && <button type="button" onClick={() => toggleChecked(sectionTopics.map((topic) => topic.id))} className="grid w-12 shrink-0 place-items-center border-l text-emerald-800 hover:bg-emerald-50" aria-label={`Select ${section.title}`}>{sectionTopics.every((topic) => checked.has(topic.id)) ? <CheckSquare2 className="h-4 w-4" /> : <Square className="h-4 w-4" />}</button>}</div>{evidenceKey === key && <div className="border-t border-amber-200 bg-amber-50/60 p-3"><div className="flex flex-wrap items-center justify-between gap-2"><div><p className="text-[9px] font-bold uppercase tracking-wide text-amber-800">Past-paper evidence for this syllabus area</p><p className="mt-0.5 text-xs text-amber-950">{evidenceCount} original questions across {compactEvidenceTopics.length} mapped topic groups</p></div><Link to={`/css-past-paper-analysis?subject=${encodeURIComponent(selected.slug)}&section=${sectionIndex}`} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 text-[10px] font-bold text-amber-950">Open complete analysis <ExternalLink className="h-3.5 w-3.5" /></Link></div>{evidenceLoading && <p className="mt-3 flex items-center gap-2 text-xs text-amber-950"><Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading exact questions…</p>}{evidenceError && <p className="mt-3 text-xs text-red-700">{evidenceError}</p>}{evidenceRows.length > 0 && <div className="mt-3 grid gap-2 sm:grid-cols-2">{evidenceRows.map(({ analysisTopic, question }) => <article key={question.id} className="rounded-lg border bg-white p-3"><p className="text-[9px] font-bold uppercase tracking-wide text-emerald-700">{question.year} · {question.paper !== 'Single Paper' ? `${question.paper} · ` : ''}{question.number}</p><p className="mt-1 line-clamp-3 text-xs leading-relaxed text-foreground/80">{question.text}</p><Link to={`/css-past-paper-analysis?subject=${encodeURIComponent(selected.slug)}&topic=${encodeURIComponent(analysisTopic.id)}`} className="mt-2 inline-block text-[10px] font-bold text-emerald-800 underline underline-offset-2">{analysisTopic.title}</Link></article>)}</div>}</div>}{open && <div className="space-y-2 border-t bg-secondary/20 p-3">{sectionTopics.length ? sectionTopics.map((topic) => {
                   const status = statuses[topic.id] ?? 'not-started'
-                  return <div key={topic.id} className={`grid gap-2 rounded-lg border bg-white p-3 sm:grid-cols-[1.5rem_minmax(0,1fr)_8.5rem_auto] sm:items-start ${checked.has(topic.id) ? 'border-emerald-500 ring-1 ring-emerald-500/20' : ''}`}><input type="checkbox" checked={checked.has(topic.id)} onChange={() => toggleChecked([topic.id])} className="mt-1 h-4 w-4 accent-emerald-700" aria-label={`Select ${topic.topic}`} /><p className="text-xs leading-relaxed text-foreground/85">{topic.topic}</p><select value={status} onChange={(event) => setStatus(topic.id, event.target.value as SyllabusItemStatus)} className="h-9 rounded-md border bg-white px-2 text-[10px] font-bold text-slate-700" aria-label={`Progress for ${topic.topic}`}>{(Object.keys(statusLabel) as SyllabusItemStatus[]).map((value) => <option key={value} value={value}>{statusLabel[value]}</option>)}</select><button type="button" onClick={() => openSchedule([topic])} className="inline-flex h-9 items-center justify-center gap-1 rounded-md border px-2 text-[10px] font-bold text-emerald-800 hover:bg-emerald-50"><CalendarPlus className="h-3.5 w-3.5" /> Add</button></div>
+                  const itemIndex = Number(topic.id.split(':').at(-1))
+                  const itemEvidence = compactEvidenceTopics.filter((item) => item.syllabusItemIndexes.includes(itemIndex))
+                  const itemEvidenceCount = itemEvidence.reduce((sum, item) => sum + item.questionCount, 0)
+                  return <div key={topic.id} className={`grid gap-2 rounded-lg border bg-white p-3 sm:grid-cols-[1.5rem_minmax(0,1fr)_8.5rem_auto] sm:items-start ${checked.has(topic.id) ? 'border-emerald-500 ring-1 ring-emerald-500/20' : ''}`}><input type="checkbox" checked={checked.has(topic.id)} onChange={() => toggleChecked([topic.id])} className="mt-1 h-4 w-4 accent-emerald-700" aria-label={`Select ${topic.topic}`} /><div><p className="text-xs leading-relaxed text-foreground/85">{topic.topic}</p>{itemEvidenceCount > 0 && <Link to={`/css-past-paper-analysis?subject=${encodeURIComponent(selected.slug)}&topic=${encodeURIComponent(itemEvidence[0].id)}`} className="mt-1 inline-flex items-center gap-1 text-[9px] font-bold text-amber-800 underline underline-offset-2"><History className="h-3 w-3" /> {itemEvidenceCount} past question{itemEvidenceCount === 1 ? '' : 's'} from this topic</Link>}</div><select value={status} onChange={(event) => setStatus(topic.id, event.target.value as SyllabusItemStatus)} className="h-9 rounded-md border bg-white px-2 text-[10px] font-bold text-slate-700" aria-label={`Progress for ${topic.topic}`}>{(Object.keys(statusLabel) as SyllabusItemStatus[]).map((value) => <option key={value} value={value}>{statusLabel[value]}</option>)}</select><button type="button" onClick={() => openSchedule([topic])} className="inline-flex h-9 items-center justify-center gap-1 rounded-md border px-2 text-[10px] font-bold text-emerald-800 hover:bg-emerald-50"><CalendarPlus className="h-3.5 w-3.5" /> Add</button></div>
                 }) : <p className="rounded-lg border border-dashed bg-white p-4 text-xs text-muted-foreground">The official PDF provides this heading without a separate machine-readable topic line.</p>}</div>}</section>
               })}</div>
               <a href={data.source.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 underline underline-offset-2">Open the supplied official FPSC PDF <ExternalLink className="h-3.5 w-3.5" /></a>

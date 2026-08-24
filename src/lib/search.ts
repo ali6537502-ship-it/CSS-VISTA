@@ -71,6 +71,17 @@ interface RemoteFpscSyllabus {
   subjects: { slug: string; name: string; designation: string; group: number | null; marks: number; sections: { title: string; items: string[] }[] }[]
 }
 
+interface RemotePastPaperAnalysisIndex {
+  subjects: {
+    slug: string
+    name: string
+    questionCount: number
+    topicCount: number
+    years: number[]
+    sections: { title: string; topics: { id: string; title: string; questionCount: number; years: number[] }[] }[]
+  }[]
+}
+
 interface RemoteRecentAffairs {
   oneLiners: { date: string; development: string; fact: string }[]
   mcqs: { id: string; date: string; development: string; question: string; explanation: string }[]
@@ -270,6 +281,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       urduGrammar,
       subjectMcqIndex,
       fpscSyllabus,
+      pastPaperAnalysis,
       recentAffairs,
     ] = await Promise.all([
       import('@/data/pastPapers').catch(() => null),
@@ -280,6 +292,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       fetchJson<RemoteGrammarCourse>('/language-grammar/urdu.json'),
       fetchJson<RemoteSubjectMcqIndex>('/css-subject-mcqs/index.json'),
       fetchJson<RemoteFpscSyllabus>('/fpsc-syllabus.json'),
+      fetchJson<RemotePastPaperAnalysisIndex>('/css-past-paper-analysis-index.json'),
       fetchJson<RemoteRecentAffairs>('/recent-affairs/batch-2026-07-11_2026-08-16.json'),
     ])
 
@@ -381,6 +394,29 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         keywords: subject.sections.map((section) => `${section.title} ${section.items.join(' ')}`).join(' '),
         link: `/fpsc-syllabus?subject=${encodeURIComponent(subject.slug)}`,
       })))
+    }
+
+    if (pastPaperAnalysis) {
+      pastPaperAnalysis.subjects.forEach((subject) => {
+        remote.push({
+          id: `past-paper-analysis-${subject.slug}`,
+          title: `${subject.name} — CSS Past Paper Analysis`,
+          category: 'CSS Past Paper Analysis',
+          snippet: `${subject.questionCount.toLocaleString()} questions across ${subject.topicCount.toLocaleString()} syllabus topic groups.`,
+          keywords: subject.sections.map((section) => `${section.title} ${section.topics.map((topic) => topic.title).join(' ')}`).join(' '),
+          link: `/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}`,
+          linkForQuery: (query: string) => `/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}&search=${encodeURIComponent(query)}`,
+        })
+        subject.sections.forEach((section) => {
+          section.topics.forEach((topic) => remote.push({
+            id: `past-paper-analysis-topic-${topic.id}`,
+            title: `${subject.name}: ${topic.title}`,
+            category: 'CSS Past Paper Analysis Topic',
+            snippet: `${topic.questionCount} past-paper question${topic.questionCount === 1 ? '' : 's'} · ${topic.years.join(', ')}. ${section.title}`,
+            link: `/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}&topic=${encodeURIComponent(topic.id)}`,
+          }))
+        })
+      })
     }
 
     if (recentAffairs) {

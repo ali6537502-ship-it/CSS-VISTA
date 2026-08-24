@@ -56,6 +56,7 @@ const nav = [
       { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: NotebookPen },
       { label: 'Free CSS Vista Lectures', to: '/lectures', icon: Video },
       { label: 'One-Liner GK', to: '/one-liner-gk', icon: BookOpen },
+      { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
     ],
@@ -94,9 +95,9 @@ const primaryNav = [
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/css-mcqs', '/gk'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
 ]
 
@@ -441,6 +442,7 @@ function resolveRouteDirection(locationKey: string, navigationType: 'POP' | 'PUS
 function fallbackRoute(pathname: string) {
   if (/^\/subjects\/compulsory\/[^/]+\/?$/.test(pathname)) return '/subjects/compulsory'
   if (/^\/past-papers\/view\/[^/]+\/?$/.test(pathname)) return '/past-papers'
+  if (pathname === '/css-past-paper-analysis') return '/past-papers'
   if (/^\/gk\/(?:cat\/[^/]+|quiz)\/?$/.test(pathname)) return '/gk'
   if (['/fpsc-syllabus', '/study-planner', '/answer-timer', '/checklists', '/dashboard'].includes(pathname)) return '/study-tools'
   return '/'

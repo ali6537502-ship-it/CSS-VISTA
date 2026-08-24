@@ -24,6 +24,7 @@ const shortcutDefinitions = [
   { id: 'games', label: 'CSS games', description: 'Play question-bank games and the 10-page marathon.', icon: Globe2, to: '/games' },
   { id: 'grammar', label: 'Grammar & vocabulary', description: 'Open vocabulary, grammar, idioms and practice.', icon: FileCheck2, to: '/grammar-vocabulary' },
   { id: 'papers', label: 'Past papers', description: 'Search the CSS, PMS and PPSC paper archive.', icon: FileCheck2, to: '/past-papers' },
+  { id: 'paper-analysis', label: 'Past paper analysis', description: 'See 3,277 questions mapped to FPSC syllabus areas.', icon: FileCheck2, to: '/css-past-paper-analysis' },
   { id: 'notes', label: 'Notes library', description: 'Open the available CSS Vista study notes.', icon: NotebookPen, to: '/notes' },
   { id: 'dashboard', label: 'Dashboard', description: 'See progress, streaks and preparation activity.', icon: CheckSquare2, to: '/dashboard' },
 ] as const
