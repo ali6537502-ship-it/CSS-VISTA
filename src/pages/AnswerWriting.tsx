@@ -4,6 +4,7 @@ import { PageHeader, Section, Badge } from '@/components/shared'
 import { analyticalQuestions } from '@/data/challenges'
 import { saveAnswer, getState, deleteAnswer } from '@/lib/store'
 import { essayRubric } from '@/data/essay'
+import { usePageBack } from '@/lib/backNavigation'
 
 export default function AnswerWriting() {
   const [question, setQuestion] = useState(analyticalQuestions[0].question)
@@ -12,6 +13,7 @@ export default function AnswerWriting() {
   const [secondsLeft, setSecondsLeft] = useState(20 * 60)
   const [running, setRunning] = useState(false)
   const [fullscreen, setFullscreen] = useState(false)
+  usePageBack(fullscreen, () => setFullscreen(false))
   const [outline, setOutline] = useState('')
   const [intro, setIntro] = useState('')
   const [body, setBody] = useState('')

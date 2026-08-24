@@ -8,6 +8,7 @@ import type { Question } from '@/data/quiz'
 import { optionalGroups } from '@/data/syllabus'
 import { getState, recordGameScore } from '@/lib/store'
 import { getBankIndex, sampleQuestions, type BankQuestion } from '@/data/mcq'
+import { usePageBack } from '@/lib/backNavigation'
 
 const gid = 10000
 function toQuestions(items: { question: string; options: string[]; answer: number; explanation: string }[], category: string): Question[] {
@@ -308,6 +309,7 @@ function GameCardButton({ card }: { card: GameCard }) {
 
 export default function Games() {
   const [active, setActive] = useState<ActiveGame>(null)
+  usePageBack(Boolean(active), () => setActive(null))
   const mcqMatchSets = useMemo(() => buildMcqMatchSets(mcqBank), [])
 
   const mcqMatchingCards: GameCard[] = mcqMatchSets.map((game) => ({

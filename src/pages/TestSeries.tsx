@@ -18,6 +18,7 @@ import {
   deleteCustomTestSeriesRequest, getState, markCustomTestSeriesRequestSent,
   saveCustomTestSeriesRequest,
 } from '@/lib/store'
+import { usePageBack } from '@/lib/backNavigation'
 import { submitTestSeriesRequest } from '@/lib/testSeriesRequests'
 import { useAccount } from '@/lib/accountContext'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
@@ -80,6 +81,7 @@ export default function TestSeries() {
   const [message, setMessage] = useState('')
   const [showCelebration, setShowCelebration] = useState(false)
   const [checkedMockPreview, setCheckedMockPreview] = useState<CheckedMockSample | null>(null)
+  usePageBack(Boolean(checkedMockPreview), () => setCheckedMockPreview(null))
   const [history, setHistory] = useState(() => getState().customTestSeriesRequests ?? [])
   const price = useMemo(() => getTestSeriesPrice(testCount), [testCount])
 

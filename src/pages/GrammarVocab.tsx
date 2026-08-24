@@ -10,6 +10,7 @@ import type { Question } from '@/data/quiz'
 import QuizEngine from '@/components/QuizEngine'
 import { completeChallenge, getState, recordQuizResult } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
+import { usePageBack } from '@/lib/backNavigation'
 
 const tabs = ['Daily Challenge', 'Word Bank', 'Commonly Confused', 'Phrasal Verbs', 'Idioms & Phrases', 'One-Word Substitutions', 'Grammar Lessons', 'Quizzes'] as const
 
@@ -41,6 +42,7 @@ export default function GrammarVocab() {
   const [tab, setTab] = useState<(typeof tabs)[number]>('Daily Challenge')
   const [topic, setTopic] = useState(grammarTopics[0].slug)
   const [quiz, setQuiz] = useState<null | { title: string; qs: Question[] }>(null)
+  usePageBack(Boolean(quiz), () => setQuiz(null))
   const [search, setSearch] = useState('')
   const [partOfSpeech, setPartOfSpeech] = useState('All')
   const [wordPage, setWordPage] = useState(0)

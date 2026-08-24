@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { AlertTriangle, CheckCircle2, RotateCcw, Target } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import { optionalGroups, type OptionalSubject } from '@/data/syllabus'
+import { usePageBack } from '@/lib/backNavigation'
 
 const backgrounds = ['Commerce / Business', 'Computer Science / IT', 'Engineering', 'Natural Sciences (Bio/Chem/Physics)', 'Social Sciences / Arts', 'Law', 'Languages / Literature', 'Medical']
 const interests = ['Politics & governance', 'Economy & finance', 'History', 'Society & gender', 'Science & environment', 'Law & justice', 'Media & psychology', 'Languages & literature']
@@ -76,6 +77,7 @@ function buildCombo(ranked: OptionalSubject[]): Combo {
 
 export default function SubjectSelector() {
   const [step, setStep] = useState(0)
+  usePageBack(step > 0, () => setStep((value) => Math.max(0, value - 1)))
   const [w, setW] = useState<Wizard>(initial)
 
   const result = useMemo(() => {

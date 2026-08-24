@@ -12,6 +12,7 @@ import {
 } from '@/data/cssSubjectMcqs'
 import type { BankQuestion } from '@/data/mcq'
 import { getAttempt, savedMcqIds } from '@/lib/progress'
+import { usePageBack } from '@/lib/backNavigation'
 
 type View = 'all' | 'compulsory' | 'optional'
 type PracticeMode = 'topic' | 'unanswered' | 'incorrect' | 'saved'
@@ -65,6 +66,14 @@ export default function CssSubjectMcqs() {
   const [mode, setMode] = useState<PracticeMode>('topic')
   const [cursor, setCursor] = useState(0)
   const [progressVersion, setProgressVersion] = useState(0)
+
+  const closeSubject = () => {
+    setSelected(null)
+    setRawBank([])
+    setBank([])
+    setError('')
+  }
+  usePageBack(Boolean(selected), closeSubject)
 
   useEffect(() => {
     getCssSubjectMcqIndex()
@@ -153,7 +162,7 @@ export default function CssSubjectMcqs() {
           description="Focused CSS subject practice from the complete structurally validated owner-supplied bank. Every answer, save, response time and mistake connects to the existing progress system."
         />
         <main className="mx-auto max-w-6xl px-4 py-7 sm:py-9">
-          <button type="button" onClick={() => { setSelected(null); setRawBank([]); setBank([]); setError('') }} className="inline-flex min-h-10 items-center gap-1.5 text-sm font-bold text-emerald-800 hover:underline">
+          <button type="button" onClick={closeSubject} className="inline-flex min-h-10 items-center gap-1.5 text-sm font-bold text-emerald-800 hover:underline">
             <ArrowLeft className="h-4 w-4" /> All CSS subjects
           </button>
 

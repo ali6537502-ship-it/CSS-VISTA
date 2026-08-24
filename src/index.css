@@ -678,7 +678,7 @@
   }
 }
 
-/* Direction-aware page navigation with a restrained, native-feeling motion. */
+/* Direction-aware navigation with a short, stable transition. */
 .cssv-page-nav {
   background: rgb(248 252 249 / .88);
   border-color: rgb(5 83 55 / .09);
@@ -690,15 +690,14 @@
 .cssv-route-stage {
   min-width: 0;
   backface-visibility: hidden;
-  transform-origin: 50% 16%;
 }
 
 .route-transition-forward {
-  animation: route-enter-forward 260ms cubic-bezier(.22, .8, .28, 1) both;
+  animation: route-enter-forward 160ms ease-out both;
 }
 
 .route-transition-back {
-  animation: route-enter-back 240ms cubic-bezier(.22, .8, .28, 1) both;
+  animation: route-enter-back 140ms ease-out both;
 }
 
 .route-transition-none {
@@ -707,23 +706,23 @@
 
 @keyframes route-enter-forward {
   from {
-    opacity: 0;
-    transform: translate3d(14px, 0, 0) scale(.996);
+    opacity: .88;
+    transform: translateY(3px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0);
   }
 }
 
 @keyframes route-enter-back {
   from {
-    opacity: 0;
-    transform: translate3d(-14px, 0, 0) scale(.996);
+    opacity: .9;
+    transform: translateY(-2px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0);
   }
 }
 

@@ -18,6 +18,7 @@ import { useAccount } from '@/lib/accountContext'
 import { AdSenseLoader, PageFooterAd, PageHeaderAd } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
 import VistaShortcut from '@/components/VistaShortcut'
+import { requestPageBack } from '@/lib/backNavigation'
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -399,13 +400,12 @@ function BackBar({ onBack }: { onBack: () => void }) {
         <button
           type="button"
           onClick={onBack}
-          className="cssv-page-nav-back group inline-flex min-h-10 items-center gap-2 rounded-full border border-emerald-900/10 bg-white/90 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-pine shadow-sm transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-md active:translate-y-0"
+          className="cssv-page-nav-back inline-flex min-h-10 items-center gap-2 rounded-lg border border-emerald-900/10 bg-white px-3 text-sm font-semibold text-pine shadow-sm transition-colors hover:border-emerald-700/25 hover:bg-emerald-50"
           aria-label="Go back to previous page"
         >
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-50 text-emerald-800 transition-transform duration-200 group-hover:-translate-x-0.5"><ArrowLeft className="h-4 w-4" /></span>
-          Previous
+          <ArrowLeft className="h-4 w-4" /> Back
         </button>
-        <Link to="/" className="inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-50">
+        <Link to="/" className="inline-flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-50">
           <GraduationCap className="h-4 w-4" /> Home
         </Link>
       </div>
@@ -418,6 +418,10 @@ let lastRouteKey: string | null = null
 let lastRouteHistoryIndex: number | null = null
 let animatedRouteKey: string | null = null
 let animatedRouteDirection: 'forward' | 'back' | 'none' = 'none'
+
+function saveRouteScroll(locationKey: string, position: number) {
+  routeScrollPositions.set(locationKey, Math.max(0, Math.round(position)))
+}
 
 function resolveRouteDirection(locationKey: string, navigationType: 'POP' | 'PUSH' | 'REPLACE', historyIndex: number | null) {
   if (animatedRouteKey === locationKey) return animatedRouteDirection
@@ -434,6 +438,14 @@ function resolveRouteDirection(locationKey: string, navigationType: 'POP' | 'PUS
   return animatedRouteDirection
 }
 
+function fallbackRoute(pathname: string) {
+  if (/^\/subjects\/compulsory\/[^/]+\/?$/.test(pathname)) return '/subjects/compulsory'
+  if (/^\/past-papers\/view\/[^/]+\/?$/.test(pathname)) return '/past-papers'
+  if (/^\/gk\/(?:cat\/[^/]+|quiz)\/?$/.test(pathname)) return '/gk'
+  if (['/fpsc-syllabus', '/study-planner', '/answer-timer', '/checklists', '/dashboard'].includes(pathname)) return '/study-tools'
+  return '/'
+}
+
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState<string | null>(null)
@@ -444,6 +456,7 @@ export default function Layout() {
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
   const currentHistoryIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
   const initialHistoryIndexRef = useRef(currentHistoryIndex)
+  const restoringRef = useRef<string | null>(null)
   const routeDirection = resolveRouteDirection(location.key, navigationType, currentHistoryIndex)
   const { user, configured: accountsConfigured } = useAccount()
 
@@ -461,69 +474,72 @@ export default function Layout() {
     return () => { window.history.scrollRestoration = previous }
   }, [])
   useEffect(() => {
-    const entryRoute = currentRoute
     const capture = () => {
-      const browserRoute = `${window.location.pathname}${window.location.search}${window.location.hash}`
-      if (browserRoute !== entryRoute) return
-      const position = Math.max(0, Math.round(window.scrollY))
-      routeScrollPositions.set(location.key, position)
-      routeScrollPositions.set(entryRoute, position)
+      if (restoringRef.current === location.key) return
+      saveRouteScroll(location.key, window.scrollY)
     }
-    capture()
+    if (navigationType !== 'POP') capture()
     window.addEventListener('scroll', capture, { passive: true })
-    document.addEventListener('click', capture, true)
+    window.addEventListener('pagehide', capture)
+    document.addEventListener('pointerdown', capture, true)
     return () => {
       window.removeEventListener('scroll', capture)
-      document.removeEventListener('click', capture, true)
+      window.removeEventListener('pagehide', capture)
+      document.removeEventListener('pointerdown', capture, true)
     }
-  }, [currentRoute, location.key])
+  }, [location.key, navigationType])
   useLayoutEffect(() => {
     lastRouteHistoryIndex = currentHistoryIndex
     lastRouteKey = location.key
   }, [currentHistoryIndex, location.key])
   useLayoutEffect(() => {
     const target = navigationType === 'POP'
-      ? routeScrollPositions.get(location.key) ?? routeScrollPositions.get(currentRoute) ?? 0
+      ? routeScrollPositions.get(location.key) ?? 0
       : 0
     let frame = 0
     let cancelled = false
-    const cancelRestore = () => { cancelled = true }
+    const startedAt = performance.now()
+    restoringRef.current = location.key
+    const finishRestore = () => {
+      if (restoringRef.current === location.key) restoringRef.current = null
+    }
+    const cancelRestore = () => {
+      cancelled = true
+      finishRestore()
+    }
 
     window.addEventListener('wheel', cancelRestore, { passive: true })
     window.addEventListener('touchstart', cancelRestore, { passive: true })
     window.addEventListener('pointerdown', cancelRestore, { passive: true })
     window.addEventListener('keydown', cancelRestore)
 
-    if (navigationType !== 'POP') {
-      frame = window.requestAnimationFrame(() => {
-        if (location.hash) {
-          const rawId = location.hash.slice(1)
-          let id = rawId
-          try { id = decodeURIComponent(rawId) } catch { /* Keep the original hash when malformed. */ }
-          const anchor = document.getElementById(id) ?? document.querySelector<HTMLElement>(`[name="${CSS.escape(id)}"]`)
-          if (anchor) {
-            anchor.scrollIntoView({ block: 'start', behavior: 'auto' })
-            return
-          }
-        }
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-      })
-    } else {
-      const startedAt = performance.now()
-      const restore = () => {
-        if (cancelled) return
-        const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
-        const reachableTarget = Math.min(target, maximum)
-        if (Math.abs(window.scrollY - reachableTarget) > 1) {
-          window.scrollTo({ top: reachableTarget, left: 0, behavior: 'auto' })
-        }
-        const fullyRestored = maximum >= target - 1 && Math.abs(window.scrollY - target) <= 1
-        if (!fullyRestored && performance.now() - startedAt < 900) {
-          frame = window.requestAnimationFrame(restore)
+    const restore = () => {
+      if (cancelled) return
+      if (navigationType !== 'POP' && location.hash) {
+        const rawId = location.hash.slice(1)
+        let id = rawId
+        try { id = decodeURIComponent(rawId) } catch { /* Keep the original hash when malformed. */ }
+        const anchor = document.getElementById(id) ?? document.querySelector<HTMLElement>(`[name="${CSS.escape(id)}"]`)
+        if (anchor) {
+          anchor.scrollIntoView({ block: 'start', behavior: 'auto' })
+          finishRestore()
+          return
         }
       }
-      restore()
+      const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
+      const reachableTarget = Math.min(target, maximum)
+      if (Math.abs(window.scrollY - reachableTarget) > 1) {
+        window.scrollTo({ top: reachableTarget, left: 0, behavior: 'auto' })
+      }
+      const fullyRestored = maximum >= target - 1 && Math.abs(window.scrollY - target) <= 1
+      const timeLimit = navigationType === 'POP' ? 1400 : 360
+      if ((!fullyRestored || navigationType !== 'POP') && performance.now() - startedAt < timeLimit) {
+        frame = window.requestAnimationFrame(restore)
+      } else {
+        finishRestore()
+      }
     }
+    restore()
 
     return () => {
       window.cancelAnimationFrame(frame)
@@ -531,6 +547,7 @@ export default function Layout() {
       window.removeEventListener('touchstart', cancelRestore)
       window.removeEventListener('pointerdown', cancelRestore)
       window.removeEventListener('keydown', cancelRestore)
+      finishRestore()
     }
   }, [currentRoute, location.hash, location.key, navigationType])
   useEffect(() => {
@@ -555,14 +572,15 @@ export default function Layout() {
   }, [])
 
   const goBack = () => {
-    routeScrollPositions.set(location.key, Math.max(0, Math.round(window.scrollY)))
+    if (requestPageBack()) return
+    saveRouteScroll(location.key, window.scrollY)
     const historyIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
     const initialHistoryIndex = initialHistoryIndexRef.current
     if (historyIndex !== null && initialHistoryIndex !== null && historyIndex > initialHistoryIndex) {
       navigate(-1)
       return
     }
-    navigate('/', { replace: true })
+    navigate(fallbackRoute(location.pathname), { replace: true })
   }
 
   return (

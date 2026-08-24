@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/shared'
 import { bundle, noteProducts, notesCoverageStatement, type NoteSample } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
 import { getPriceOverride } from '@/lib/admin'
+import { usePageBack } from '@/lib/backNavigation'
 
 function ProtectedPreview({ sample, onClose }: { sample: NoteSample; onClose: () => void }) {
   useEffect(() => {
@@ -39,6 +40,7 @@ function ProtectedPreview({ sample, onClose }: { sample: NoteSample; onClose: ()
 export default function NotesLibrary() {
   const ali = mentors[1]
   const [preview, setPreview] = useState<NoteSample | null>(null)
+  usePageBack(Boolean(preview), () => setPreview(null))
   const contact = (subject: string) => waLink(ali.whatsapp, `Assalam-o-Alaikum Sir, I want to purchase the ${subject} notes package. Please share payment and delivery details.`)
 
   return (

@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/shared'
 import { books, opinions, type Opinion } from '@/data/books'
 import { mentors, waLink } from '@/data/site'
 import { getNotifPrefs, setNotifPrefs } from '@/lib/progress'
+import { usePageBack } from '@/lib/backNavigation'
 
 export function BooksPage() {
   const ali = mentors[1]
@@ -55,6 +56,7 @@ export function BooksPage() {
 
 export function OpinionsPage() {
   const [active, setActive] = useState<Opinion | null>(null)
+  usePageBack(Boolean(active), () => setActive(null))
   const [pageIdx, setPageIdx] = useState(0)
   const [prefs, setPrefs] = useState(getNotifPrefs())
   const opinionsOn = prefs.enabled && (prefs.tags['Opinions'] ?? true)

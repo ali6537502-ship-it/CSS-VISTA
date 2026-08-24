@@ -16,6 +16,7 @@ import {
 } from '@/lib/progress'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPage } from '@/components/PrintMenu'
+import { usePageBack } from '@/lib/backNavigation'
 
 function InlineText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
@@ -350,6 +351,7 @@ export default function BookSummaries() {
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [category, setCategory] = useState('all')
   const [activeBook, setActiveBook] = useState<BookSummary | null>(null)
+  usePageBack(Boolean(activeBook), () => setActiveBook(null))
   const [readingStates, setReadingStates] = useState(() => getAllBookSummaryProgress())
 
   useEffect(() => {

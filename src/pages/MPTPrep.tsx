@@ -11,6 +11,7 @@ import { DAILY_MOCK_TIME_LABELS, getMockAvailability, getState } from '@/lib/sto
 import { mergedMcqs } from '@/lib/admin'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
+import { usePageBack } from '@/lib/backNavigation'
 
 type Mode = 'subject' | 'topic' | 'random' | 'mock' | null
 
@@ -91,6 +92,7 @@ export default function MPTPrep() {
   const allQuestions = useMemo(() => mergedMcqs(seedQuestions), [])
   const [bankIndex, setBankIndex] = useState<BankIndex | null>(null)
   const [mode, setMode] = useState<Mode>(null)
+  usePageBack(Boolean(mode), () => setMode(null))
   const [category, setCategory] = useState('mixed')
   const [topic, setTopic] = useState('all')
   const [difficulty, setDifficulty] = useState('all')

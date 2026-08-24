@@ -7,6 +7,7 @@ import { weeklyMagazine } from '@/data/weeklyMagazine'
 import { mergedCaTopics, type CaTopic } from '@/lib/admin'
 import { addMistake, recordAttempt, recordQuestionTiming } from '@/lib/progress'
 import { printPdfFile } from '@/components/PrintMenu'
+import { usePageBack } from '@/lib/backNavigation'
 
 type OneLiner = { date: string; development: string; fact: string; source: string }
 type AffairMcq = { id: string; date: string; development: string; background: string; whyItMatters: string; question: string; options: string[]; answer: number; explanation: string; source: string; updatedAt: string }
@@ -63,6 +64,7 @@ export default function CurrentAffairs() {
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
   const [viewer, setViewer] = useState(false)
+  usePageBack(viewer, () => setViewer(false))
 
   useEffect(() => {
     fetch('/recent-affairs/batch-2026-07-11_2026-08-16.json')
