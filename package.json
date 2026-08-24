@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "engines": {
-    "node": ">=20.19.0 <25"
+    "node": ">=22.0.0 <25"
   },
   "scripts": {
     "install:ci": "bash scripts/install-ci-safe.sh",
@@ -15,8 +15,10 @@
     "audit": "node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs && node scripts/audit-past-paper-seo.mjs",
     "audit:hostinger": "node scripts/audit-hostinger-build.mjs",
     "check:adsense": "node scripts/check-adsense-production.mjs",
+    "check:supabase": "node --env-file-if-exists=.env.local scripts/check-supabase.mjs",
     "test:ads": "node --test tests/adPolicy.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts",
+    "test:supabase": "node --test tests/supabaseConfig.test.ts",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "validate:artifact": "bash scripts/validate-artifact.sh"
@@ -49,7 +51,7 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@supabase/supabase-js": "^2.110.8",
+    "@supabase/supabase-js": "^2.112.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
