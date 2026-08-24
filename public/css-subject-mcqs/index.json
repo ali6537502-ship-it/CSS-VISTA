@@ -2,8 +2,8 @@
   "batch": "2026-08-24-owner-supplied-complete-import",
   "generatedAt": "2026-08-24T00:00:00.000Z",
   "policy": "All structurally complete questions from the owner-supplied archive are connected. Unresolved source items are counted, never guessed.",
-  "total": 48874,
-  "detected": 49360,
+  "total": 49331,
+  "detected": 50093,
   "unresolved": 380,
   "subjects": [
     {
@@ -988,6 +988,52 @@
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
     {
+      "slug": "islamic-studies",
+      "name": "Islamic Studies",
+      "designation": "compulsory",
+      "group": null,
+      "count": 457,
+      "topics": [
+        "I.1 Concept of Islam",
+        "I.2 Importance of Deen in Human Life",
+        "I.3 Difference between Deen and Religion",
+        "I.4 Distinctive Aspects of Islam",
+        "I.5 Islamic Beliefs, Their Impact and the Fundamentals of Islam",
+        "I.6 Islamic Worships: Spiritual, Moral and Social Impact",
+        "II.1 Seerah as Role Model for the Individual",
+        "II.2 Seerah as Role Model for a Diplomat",
+        "II.3 Seerah as Role Model for an Educator",
+        "II.4 Seerah as Role Model for a Military Strategist",
+        "II.5 Seerah as Role Model for a Peace Maker",
+        "III.1 Human Rights and Status of Woman in Islam",
+        "III.2 Dignity of Men and Women",
+        "IV.1 Islamic Civilization and Culture: Meanings and Vital Elements",
+        "IV.2 Role of Civilization in Developing Personality and Communities",
+        "IV.3 Distinctions of Islamic Civilization",
+        "V.1 Impact of Islamic Civilization on the West and Vice Versa",
+        "V.2 Role of Islam in the Modern World",
+        "V.3 Muslim World and Contemporary Challenges",
+        "V.4 Rise of Extremism",
+        "VI.1 Concept of Public Administration in Islam",
+        "VI.2 Qur’anic Guidance on Good Governance",
+        "VI.3 Governance in Light of Qur’an, Sunnah and Fiqh",
+        "VI.4 Governance Structure: Shura, Legislation and Sources of Islamic Law",
+        "VI.5 Governance under the Pious Caliphate",
+        "VI.6 Letters of Hazrat Umar and Hazrat Ali to Authorities",
+        "VI.7 Responsibilities of Civil Servants",
+        "VI.8 System of Accountability in Islam",
+        "VII.1 Salient Features of Islamic Social, Political, Economic, Judicial and Administrative Systems",
+        "VII.2 Procedure of Ijma and Ijtihad"
+      ],
+      "file": "islamic-studies.json",
+      "sourceCount": 733,
+      "sourceDocuments": [
+        "CSS_Islamiat_Topicwise_300_MCQs.docx",
+        "Islamiat_Topicwise_433_MCQs.docx"
+      ],
+      "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
+    },
+    {
       "slug": "journalism-and-mass-communication",
       "name": "Journalism & Mass Communication",
       "designation": "optional",
@@ -1685,6 +1731,20 @@
     }
   ],
   "documents": [
+    {
+      "file": "CSS_Islamiat_Topicwise_300_MCQs.docx",
+      "subject": "Islamic Studies",
+      "detected": 300,
+      "complete": 300,
+      "unresolved": 0
+    },
+    {
+      "file": "Islamiat_Topicwise_433_MCQs.docx",
+      "subject": "Islamic Studies",
+      "detected": 433,
+      "complete": 433,
+      "unresolved": 0
+    },
     {
       "file": "CSS_GSA_480_High_Yield_MCQs.docx",
       "subject": "General Science & Ability",

@@ -53,6 +53,8 @@ SUBJECT_RULES: tuple[tuple[str, str], ...] = (
     ("computer_science", "Computer Science"),
     ("constitutional_law", "Constitutional Law"),
     ("economics", "Economics"),
+    ("islamic_studies", "Islamic Studies"),
+    ("islamiat", "Islamic Studies"),
     ("islamic_history", "Islamic History & Culture"),
     ("fpsc_law", "Law"),
     ("persian", "Persian"),
