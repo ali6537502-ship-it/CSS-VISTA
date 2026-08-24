@@ -6,6 +6,7 @@ import { shippedMcqSummary } from '@/data/mcqMeta'
 // tools later. This intentionally wins over stale locally saved card order.
 export const homeFeaturePriority = [
   'css-subject-mcqs',
+  'css-past-paper-analysis',
   'start-css',
   'mpt',
   'gk',
@@ -14,7 +15,6 @@ export const homeFeaturePriority = [
   'mpt-grand-mock',
   'five-minute',
   'past-papers',
-  'css-past-paper-analysis',
   'notes',
   'handwritten-notes',
   'essay',

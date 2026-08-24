@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from
 import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  ClipboardCheck, Download, FileText, Globe2, GraduationCap, LibraryBig,
+  ClipboardCheck, Download, FileText, Globe2, LibraryBig,
   Newspaper, NotebookPen, PenLine, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
   Sparkles, Target, TimerReset, type LucideIcon,
 } from 'lucide-react'
@@ -34,10 +34,10 @@ const quickActions: LinkCard[] = [
     tone: 'blue',
   },
   {
-    title: 'Start CSS',
-    description: 'Understand the complete journey',
-    to: '/start-css',
-    icon: GraduationCap,
+    title: 'CSS Past Paper Analysis',
+    description: '3,277 questions mapped topic-wise',
+    to: '/css-past-paper-analysis',
+    icon: BarChart3,
     tone: 'emerald',
   },
   {
