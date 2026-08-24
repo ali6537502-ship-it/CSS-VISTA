@@ -77,6 +77,7 @@ export default function App() {
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
         <Route path="/past-papers" element={<S><PastPapers /></S>} />
+        <Route path="/past-papers/:exam/:year" element={<S><PastPapers /></S>} />
         <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />

@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useParams, useSearchParams } from 'react-router'
 import { Search, Download, Eye, FileText, PenLine, Bookmark, BookmarkCheck } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
@@ -27,17 +27,38 @@ const repeatedThemes: { subject: string; themes: string[] }[] = [
 ]
 
 export default function PastPapers() {
+  const routeParams = useParams<{ exam?: string; year?: string }>()
   const [searchParams] = useSearchParams()
   const papers = useMemo(() => mergedPastPapers(seedPapers), [])
+  const routeExam = examinations.find((name) => name.toLowerCase() === routeParams.exam?.toLowerCase()) ?? 'All'
+  const routeYear = /^\d{4}$/.test(routeParams.year ?? '') ? routeParams.year! : 'All'
   const [q, setQ] = useState(() => searchParams.get('search') ?? '')
-  const [exam, setExam] = useState('All')
+  const [exam, setExam] = useState(routeExam)
   const [subject, setSubject] = useState('All')
-  const [year, setYear] = useState('All')
+  const [year, setYear] = useState(routeYear)
   const [stype, setStype] = useState('All')
   const [optionalGroup, setOptionalGroup] = useState('All')
   const [mode, setMode] = useState('All')
   const [savedOnly, setSavedOnly] = useState(false)
   const [, forceRefresh] = useState(0)
+  const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
+  const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
+  const pageDescription = isYearCollection
+    ? `Browse original ${routeExam} ${routeYear} compulsory and optional past papers by subject, with direct view and download access.`
+    : 'CSS, PMS and PPSC papers organised by examination, subject and year, with direct view and download controls.'
+
+  useEffect(() => {
+    const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
+    const title = isYearCollection ? `${pageTitle} — All Subjects | CSS Vista` : 'CSS, PMS & PPSC Past Papers | CSS Vista'
+    document.title = title
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    const previousDescription = description?.content
+    if (description) description.content = pageDescription
+    return () => {
+      document.title = defaultTitle
+      if (description && previousDescription) description.content = previousDescription
+    }
+  }, [isYearCollection, pageDescription, pageTitle])
 
   const papersForSelectedExam = papers.filter((paper) => exam === 'All' || paper.examination === exam)
   const years = [...new Set(papersForSelectedExam.map((p) => p.year))].sort((a, b) => b - a)
@@ -63,7 +84,7 @@ export default function PastPapers() {
       (optionalGroup === 'All' || (p.subjectType === 'Optional' && String(groupForPaper(p)) === optionalGroup)) &&
       (mode === 'All' || p.mode === mode) &&
       (!savedOnly || isBookmarked(`pp-${p.id}`)) &&
-      (!q || `${p.title} ${p.subject}`.toLowerCase().includes(q.toLowerCase()))
+      (!q || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(q.toLowerCase()))
   )
 
   const grouped = useMemo(() => {
@@ -92,8 +113,8 @@ export default function PastPapers() {
   return (
     <div>
       <PageHeader
-        title="Past Papers"
-        description="CSS, PMS and PPSC papers organised by examination, subject, year and paper - each with view and download controls. Papers are added as the owner provides them; only authentic papers appear here."
+        title={pageTitle}
+        description={pageDescription}
       >
         <div className="no-print mt-4 flex flex-wrap items-center gap-2">
           <PrintMenu answersAvailable={false} label="Print list" />
@@ -132,6 +153,11 @@ export default function PastPapers() {
             </button>
           ))}
         </section>
+
+        <nav aria-label="Browse CSS past papers by year" className="rounded-xl border bg-white p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS past papers by year</p>
+          <div className="mt-2 flex flex-wrap gap-2">{[...new Set(papers.filter((paper) => paper.examination === 'CSS').map((paper) => paper.year))].sort((a, b) => b - a).map((paperYear) => <Link key={paperYear} to={`/past-papers/css/${paperYear}`} className={`rounded-full border px-3 py-1.5 text-xs font-bold ${exam === 'CSS' && year === String(paperYear) ? 'border-pine bg-pine text-white' : 'text-pine hover:bg-emerald-50'}`}>CSS {paperYear}</Link>)}</div>
+        </nav>
 
         {/* Filters */}
         <div className="grid gap-2.5 rounded-lg border bg-white p-4 sm:grid-cols-3 lg:grid-cols-7">

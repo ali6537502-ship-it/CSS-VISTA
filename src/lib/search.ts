@@ -304,7 +304,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         title: `${paper.examination}: ${paper.title}`,
         category: 'Past Papers',
         snippet: `${paper.subjectType}, ${paper.paper}, ${paper.mode}${paper.optionalGroup ? `, Group ${paper.optionalGroup}` : ''}`,
-        link: '/past-papers',
+        link: paper.fileUrl ? `/past-papers/view/${paper.id}` : '/past-papers',
         keywords: `${paper.subject} ${paper.year} ${paper.examination}`,
         linkForQuery: (query: string) => `/past-papers?search=${encodeURIComponent(query)}`,
       })))

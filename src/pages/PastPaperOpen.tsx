@@ -7,6 +7,15 @@ import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
 import { recordActivity } from '@/lib/progress'
 
+function paperPageTitle(paper: (typeof seedPapers)[number]) {
+  const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
+  return `${paper.examination} ${paper.year} ${paper.subject}${part} Past Paper`
+}
+
+function paperPageDescription(paper: (typeof seedPapers)[number]) {
+  return `View and download the original ${paper.examination} ${paper.year} ${paper.subject} ${paper.paper.toLowerCase()} past paper on CSS Vista.`
+}
+
 export default function PastPaperOpen() {
   const { id } = useParams()
   const paper = useMemo(
@@ -17,6 +26,20 @@ export default function PastPaperOpen() {
   useEffect(() => {
     if (!paper) return
     recordActivity({ type: 'past-paper', label: paper.title, path: `/past-papers/view/${paper.id}` })
+    const title = `${paperPageTitle(paper)} | CSS Vista`
+    const descriptionText = paperPageDescription(paper)
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    const previousDescription = description?.content
+    const previousCanonical = canonical?.href
+    document.title = title
+    if (description) description.content = descriptionText
+    if (canonical) canonical.href = `${window.location.origin}/past-papers/view/${paper.id}`
+    return () => {
+      document.title = 'CSS Vista - CSS Exam Preparation Platform'
+      if (description && previousDescription) description.content = previousDescription
+      if (canonical && previousCanonical) canonical.href = previousCanonical
+    }
   }, [paper])
 
   if (!paper?.fileUrl) {
@@ -38,8 +61,8 @@ export default function PastPaperOpen() {
   return (
     <div>
       <PageHeader
-        title={paper.title}
-        description="Read the original paper in the built-in viewer or open the unchanged PDF in a separate tab."
+        title={paperPageTitle(paper)}
+        description={paperPageDescription(paper)}
       >
         <div className="mt-4 flex flex-wrap gap-2">
           <Badge tone="gray">{paper.examination}</Badge>

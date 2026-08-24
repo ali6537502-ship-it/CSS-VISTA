@@ -8,7 +8,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build && node scripts/prepare-sites-build.mjs && mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json",
     "build:sites": "npm run build",
-    "audit": "node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs",
+    "audit": "node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs && node scripts/audit-past-paper-seo.mjs",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "validate:artifact": "bash scripts/validate-artifact.sh"
