@@ -100,6 +100,44 @@ def option_index(label: str) -> int | None:
     return None
 
 
+def table_option_entries(text: str) -> dict[int, str]:
+    """Recover labelled options from one logical row of a DOCX table."""
+    mapped: dict[int, str] = {}
+    for token in (clean(value) for value in text.split("|")):
+        match = OPTION_RE.match(token)
+        if not match:
+            continue
+        index = option_index(match.group(1))
+        value = clean(match.group(2))
+        if index is not None and value and index not in mapped:
+            mapped[index] = value
+    return mapped
+
+
+def table_options(text: str) -> list[str] | None:
+    """Recover A-D options when a DOCX stores them in a table."""
+    mapped = table_option_entries(text)
+    if set(mapped) == {0, 1, 2, 3}:
+        return [mapped[index] for index in range(4)]
+    return None
+
+
+def table_answer_pairs(text: str) -> list[tuple[int, int]]:
+    """Recover answer rows such as ``1 | B - accountability``."""
+    tokens = [clean(token) for token in text.split("|")]
+    pairs: list[tuple[int, int]] = []
+    for token_index in range(len(tokens) - 1):
+        if not re.fullmatch(r"\d{1,4}", tokens[token_index]):
+            continue
+        answer_match = re.match(r"^\s*\(?(الف|[A-Dاأبجد])\)?(?:\s*[.)\-:–—�])?(?:\s|$)", tokens[token_index + 1], re.I)
+        if not answer_match:
+            continue
+        answer = option_index(answer_match.group(1))
+        if answer is not None:
+            pairs.append((int(tokens[token_index]), answer))
+    return pairs
+
+
 def answer_from_text(text: str) -> tuple[int | None, str]:
     match = ANSWER_RE.search(text)
     if match:
@@ -194,35 +232,49 @@ def parse_document(path: Path, subject: str) -> tuple[list[dict[str, Any]], dict
     pending: dict[int, dict[str, Any]] = {}
     previous_number = 0
     section = 1
+    in_consolidated_answer_key = False
+    answer_section_hint: int | None = None
     index = 0
+
+    def assign_answer_pairs(pairs: Iterable[tuple[int, int]]) -> None:
+        if in_consolidated_answer_key and answer_section_hint is not None:
+            targets = {
+                row["number"]: row
+                for row in questions
+                if row["section"] == answer_section_hint
+            }
+        else:
+            targets = pending
+        for number, answer in pairs:
+            target = targets.get(number)
+            if target is not None and target.get("answer") is None:
+                target["answer"] = answer
 
     while index < len(blocks):
         text, style = blocks[index]
         if style == "Table":
-            tokens = [clean(token) for token in text.split("|")]
-            paired = []
-            for token_index in range(len(tokens) - 1):
-                if re.fullmatch(r"\d{1,4}", tokens[token_index]) and option_index(tokens[token_index + 1]) is not None:
-                    paired.append((int(tokens[token_index]), option_index(tokens[token_index + 1])))
+            paired = table_answer_pairs(text)
             if paired:
-                for number, answer in paired:
-                    target = pending.get(number)
-                    if target is not None and target.get("answer") is None:
-                        target["answer"] = answer
+                assign_answer_pairs(paired)
                 index += 1
                 continue
         key_pairs = KEY_RE.findall(text)
-        if key_pairs and (style == "Table" or "answer" in text.lower() or len(key_pairs) > 1):
-            for number, letter in key_pairs:
-                target = pending.get(int(number))
-                answer = option_index(letter)
-                if target is not None and target.get("answer") is None and answer is not None:
-                    target["answer"] = answer
+        if key_pairs and (style == "Table" or "answer key" in text.casefold() or style.casefold() == "answer key" or len(key_pairs) > 1):
+            assign_answer_pairs(
+                (int(number), answer)
+                for number, letter in key_pairs
+                if (answer := option_index(letter)) is not None
+            )
             index += 1
             continue
 
         question_match = QUESTION_RE.match(text)
         if not question_match:
+            if "consolidated answer key" in text.casefold():
+                in_consolidated_answer_key = True
+            paper_match = re.search(r"\bpractice\s+paper\s+(\d+)\b", text, re.I)
+            if in_consolidated_answer_key and paper_match:
+                answer_section_hint = int(paper_match.group(1))
             if looks_like_heading(text, style):
                 current_topic = clean(re.sub(r"^\d+\s*[.)]\s*", "", text))[:180]
 
@@ -240,14 +292,25 @@ def parse_document(path: Path, subject: str) -> tuple[list[dict[str, Any]], dict
         stem = clean(question_match.group(2))
         options: list[str] = []
         cursor = index + 1
-        while cursor < len(blocks) and len(options) < 4:
-            option_match = OPTION_RE.match(blocks[cursor][0])
-            if not option_match:
-                break
-            if option_index(option_match.group(1)) != len(options):
-                break
-            options.append(clean(option_match.group(2)))
-            cursor += 1
+        if cursor < len(blocks) and blocks[cursor][1] == "Table":
+            table_cursor = cursor
+            collected: dict[int, str] = {}
+            while table_cursor < len(blocks) and blocks[table_cursor][1] == "Table" and set(collected) != {0, 1, 2, 3}:
+                for option, value in table_option_entries(blocks[table_cursor][0]).items():
+                    collected.setdefault(option, value)
+                table_cursor += 1
+            if set(collected) == {0, 1, 2, 3}:
+                options = [collected[option] for option in range(4)]
+                cursor = table_cursor
+        if not options:
+            while cursor < len(blocks) and len(options) < 4:
+                option_match = OPTION_RE.match(blocks[cursor][0])
+                if not option_match:
+                    break
+                if option_index(option_match.group(1)) != len(options):
+                    break
+                options.append(clean(option_match.group(2)))
+                cursor += 1
 
         if len(options) != 4:
             index += 1
@@ -286,7 +349,7 @@ def parse_document(path: Path, subject: str) -> tuple[list[dict[str, Any]], dict
         if row["answer"] is None or len(row["question"]) < 8 or len(set(row["options"])) != 4 or identity in seen:
             continue
         seen.add(identity)
-        digest = hashlib.sha1(f"{path.as_posix()}|{identity}".encode("utf-8")).hexdigest()[:14]
+        digest = hashlib.sha1(f"{path.name}|{identity}".encode("utf-8")).hexdigest()[:14]
         row.update({
             "id": f"css-{slugify(subject)}-{digest}",
             "sourceDocument": path.name,
@@ -304,10 +367,18 @@ def main() -> None:
     parser.add_argument("source", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--syllabus", type=Path, default=Path("public/fpsc-syllabus.json"))
+    parser.add_argument(
+        "--merge-existing",
+        action="store_true",
+        help="Replace only subjects found in source while preserving other generated subject banks.",
+    )
     args = parser.parse_args()
 
     syllabus = json.loads(args.syllabus.read_text(encoding="utf-8"))
     official = {item["name"]: item for item in syllabus["subjects"]}
+    existing_index: dict[str, Any] | None = None
+    if args.merge_existing and (args.output / "index.json").exists():
+        existing_index = json.loads((args.output / "index.json").read_text(encoding="utf-8"))
     by_subject: dict[str, list[dict[str, Any]]] = defaultdict(list)
     documents = []
     skipped = []
@@ -328,9 +399,9 @@ def main() -> None:
         by_subject[subject].extend(rows)
         documents.append({"file": path.relative_to(args.source).as_posix(), "subject": subject, **stats})
 
-    if args.output.exists():
+    if args.output.exists() and not args.merge_existing:
         shutil.rmtree(args.output)
-    args.output.mkdir(parents=True)
+    args.output.mkdir(parents=True, exist_ok=True)
 
     subject_index = []
     global_stems = set()
@@ -362,16 +433,49 @@ def main() -> None:
             "audit": "four options, recoverable answer key, duplicate identity and source attribution checked",
         })
 
+    replaced_subjects = set(by_subject)
+    if existing_index:
+        subject_index.extend(
+            item for item in existing_index.get("subjects", [])
+            if item.get("name") not in replaced_subjects
+        )
+        documents.extend(
+            item for item in existing_index.get("documents", [])
+            if item.get("subject") not in replaced_subjects
+        )
+        skipped.extend(existing_index.get("skippedDocuments", []))
+
+    subject_index.sort(key=lambda item: item["name"])
+    if existing_index:
+        # Re-apply the full importer's no-repeated-stem rule across preserved and
+        # newly replaced banks in the same deterministic subject order.
+        merged_stems: set[str] = set()
+        for item in subject_index:
+            file_path = args.output / item["file"]
+            rows = json.loads(file_path.read_text(encoding="utf-8"))
+            unique_rows = []
+            for row in rows:
+                identity = clean(row["question"]).casefold()
+                if identity in merged_stems:
+                    continue
+                merged_stems.add(identity)
+                unique_rows.append(row)
+            if len(unique_rows) != len(rows):
+                file_path.write_text(json.dumps(unique_rows, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+            item["count"] = len(unique_rows)
+            item["topics"] = sorted({row["topic"] for row in unique_rows})
+            item["sourceDocuments"] = sorted({row["sourceDocument"] for row in unique_rows})
+
     index = {
-        "batch": "2026-08-23-owner-supplied-complete-import",
-        "generatedAt": "2026-08-23T00:00:00.000Z",
+        "batch": "2026-08-24-owner-supplied-complete-import",
+        "generatedAt": "2026-08-24T00:00:00.000Z",
         "policy": "All structurally complete questions from the owner-supplied archive are connected. Unresolved source items are counted, never guessed.",
         "total": sum(item["count"] for item in subject_index),
         "detected": sum(item["detected"] for item in documents),
         "unresolved": sum(item["unresolved"] for item in documents),
         "subjects": subject_index,
         "documents": documents,
-        "skippedDocuments": skipped,
+        "skippedDocuments": sorted(set(skipped)),
     }
     (args.output / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"total": index["total"], "detected": index["detected"], "unresolved": index["unresolved"], "subjects": len(subject_index), "skipped": skipped}, indent=2))

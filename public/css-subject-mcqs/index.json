@@ -1,10 +1,10 @@
 {
-  "batch": "2026-08-23-owner-supplied-complete-import",
-  "generatedAt": "2026-08-23T00:00:00.000Z",
+  "batch": "2026-08-24-owner-supplied-complete-import",
+  "generatedAt": "2026-08-24T00:00:00.000Z",
   "policy": "All structurally complete questions from the owner-supplied archive are connected. Unresolved source items are counted, never guessed.",
-  "total": 46039,
-  "detected": 47959,
-  "unresolved": 1819,
+  "total": 48397,
+  "detected": 48880,
+  "unresolved": 380,
   "subjects": [
     {
       "slug": "accounting-and-auditing",
@@ -750,11 +750,15 @@
       "name": "Governance & Public Policies",
       "designation": "optional",
       "group": 3,
-      "count": 0,
-      "topics": [],
+      "count": 600,
+      "topics": [
+        "GOVERNANCE & PUBLIC POLICIES"
+      ],
       "file": "governance-and-public-policies.json",
-      "sourceCount": 599,
-      "sourceDocuments": [],
+      "sourceCount": 600,
+      "sourceDocuments": [
+        "Governance_Public_Policies_600_Practical_MCQs_Rewritten.docx"
+      ],
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
     {
@@ -814,11 +818,70 @@
       "name": "International Law",
       "designation": "optional",
       "group": 6,
-      "count": 0,
-      "topics": [],
+      "count": 840,
+      "topics": [
+        "I Nature, Origin and Basis of International Law",
+        "I.1 The Emergence of International Law",
+        "I.2 Early European Authors",
+        "I.3 The Nation-State System",
+        "I.4 The Enforcement of International Law",
+        "I.5 The Effectiveness of International Law",
+        "I.6 The Weakness of International Law",
+        "I.7 The Juridical Basis of International Law",
+        "I.8 The Future of International Law",
+        "I.9 Material Sources of International Law",
+        "II Relation between International Law and State Law",
+        "II.1 Article 38 of the Statute of the International Court of Justice",
+        "II.2 Primary Sources of International Law",
+        "II.3 Subsidiary Sources of International Law",
+        "II.4 International Soft Law",
+        "III State in General and Recognition",
+        "III.1 Personality and Statehood in International Law",
+        "III.2 The Subjects of International Law",
+        "III.3 Recognition of State and Government in International Law",
+        "III.4 Recognition of State and Government in National Law",
+        "IV The Law and Practice as to Treaties",
+        "IV.1 The Vienna Convention on the Law of Treaties",
+        "IX State Territorial Sovereignty",
+        "V The Settlement of International Disputes",
+        "V.1 Negotiation",
+        "V.2 Mediation and Good Offices",
+        "V.3 Inquiry",
+        "V.4 Settlement by the United Nations",
+        "V.5 Conciliation",
+        "V.6 Arbitration",
+        "V.7 The International Court of Justice",
+        "VI International Humanitarian Law",
+        "VI.1 International and Non-International Armed Conflicts",
+        "VI.10 Limits on the Choice of Methods and Means of Warfare",
+        "VI.2 Non-International Armed Conflict",
+        "VI.3 Combatant and Protected Persons",
+        "VI.4 Protection of Wounded Persons",
+        "VI.5 Protection of Sick Persons",
+        "VI.6 Protection of Ship-Wrecked Persons",
+        "VI.7 Prisoners of War (POWs)",
+        "VI.8 Civilians",
+        "VI.9 Limitations on the Conduct of War",
+        "VII The Use of Force",
+        "VII.1 The Law before the UN Charter",
+        "VII.2 The Law after the UN Charter",
+        "VII.3 The Collective Use of Force",
+        "VII.4 The Right of Self-Defence",
+        "VIII International Institutions",
+        "X State Responsibility",
+        "XI State Jurisdiction",
+        "XII Succession to Rights and Obligations",
+        "XIII The State and the Individual",
+        "XIV The State and the Economic Interest",
+        "XV Diplomatic Envoys, Counsels and Other Representatives",
+        "XVI War, Armed Conflicts and Other Hostilities",
+        "XVII Neutrality"
+      ],
       "file": "international-law.json",
       "sourceCount": 840,
-      "sourceDocuments": [],
+      "sourceDocuments": [
+        "International_Law_High_Yield_840_MCQ_Bank (1).docx"
+      ],
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
     {
@@ -1024,11 +1087,20 @@
       "name": "Pashto",
       "designation": "optional",
       "group": 7,
-      "count": 0,
-      "topics": [],
+      "count": 120,
+      "topics": [
+        "PRACTICE PAPER 1",
+        "PRACTICE PAPER 2",
+        "PRACTICE PAPER 3",
+        "PRACTICE PAPER 4",
+        "PRACTICE PAPER 5",
+        "PRACTICE PAPER 6"
+      ],
       "file": "pashto.json",
-      "sourceCount": 0,
-      "sourceDocuments": [],
+      "sourceCount": 120,
+      "sourceDocuments": [
+        "Pashto_High_Yield_Exam_Style_MCQs_120.docx"
+      ],
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
     {
@@ -1052,11 +1124,84 @@
       "name": "Philosophy",
       "designation": "optional",
       "group": 6,
-      "count": 0,
-      "topics": [],
+      "count": 799,
+      "topics": [
+        "Abu Nasr Al-Farabi",
+        "Allama Muhammad Iqbal",
+        "Aristotle — Deductive Method",
+        "Aristotle — Virtue Ethics",
+        "Baruch Spinoza — Rationalism",
+        "Charles Sanders Peirce",
+        "Contemporary Philosophical Movements",
+        "Coverage in this batch",
+        "Cultural Relativism",
+        "David Hume — Empiricism",
+        "Deductive Method",
+        "Definition of Philosophy",
+        "Definition, Nature and Scope of Philosophy",
+        "Dialectical Materialism",
+        "Dialectical Method",
+        "Ethical Egoism",
+        "Fallibilistic Method",
+        "Francis Bacon",
+        "G. W. F. Hegel",
+        "George Berkeley — Empiricism",
+        "George Berkeley — Idealism",
+        "Henri Bergson",
+        "Historical Materialism",
+        "Historical and Dialectical Materialism",
+        "III. Epistemology",
+        "IV. Ontology",
+        "Ibn Khaldun",
+        "Ibn Rushd / Averroes",
+        "Ibn Sina / Avicenna",
+        "Imam Abu Hamid Al-Ghazali",
+        "Immanuel Kant — Moral Absolutism",
+        "Immanuel Kant — Transcendentalism",
+        "Inductive Method",
+        "Introduction to Philosophy",
+        "J. S. Mill",
+        "J. S. Mill — Utilitarianism",
+        "Jacques Derrida",
+        "Jean-François Lyotard",
+        "Jean-Paul Sartre",
+        "John Dewey",
+        "John Locke — Empiricism",
+        "John Locke — Representative Realism",
+        "John Rawls",
+        "Karl Marx",
+        "Karl Popper",
+        "Martin Heidegger",
+        "Michel Foucault",
+        "Moral Absolutism",
+        "Morality and Religion",
+        "Muslim Thinkers",
+        "Nature of Morality",
+        "Nature of Philosophy",
+        "Philosophical Methods",
+        "Plato — Idealism",
+        "Plato — Rationalism",
+        "Psychological Egoism",
+        "René Descartes — Deductive Method",
+        "René Descartes — Rationalism",
+        "Representative Realism",
+        "Richard Rorty",
+        "Scope of Philosophy",
+        "Shah Waliullah Dehlawi",
+        "Social Contract Theory",
+        "Socratic Method",
+        "The Challenge of Cultural Relativism",
+        "Thomas Hobbes",
+        "V. Ethics",
+        "Virtue Ethics",
+        "William James"
+      ],
       "file": "philosophy.json",
-      "sourceCount": 0,
-      "sourceDocuments": [],
+      "sourceCount": 800,
+      "sourceDocuments": [
+        "Philosophy_CSS_MCQs_Batch_1_390.docx",
+        "Philosophy_Complete_Selective_Objective_Bank_410.docx"
+      ],
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
     {
@@ -1087,7 +1232,7 @@
       "name": "Political Science",
       "designation": "optional",
       "group": 1,
-      "count": 3657,
+      "count": 3656,
       "topics": [
         "COUNTRY 2/5 — IRAN",
         "COUNTRY 3/5 — MALAYSIA",
@@ -1484,6 +1629,41 @@
   ],
   "documents": [
     {
+      "file": "Governance_Public_Policies_600_Practical_MCQs_Rewritten.docx",
+      "subject": "Governance & Public Policies",
+      "detected": 600,
+      "complete": 600,
+      "unresolved": 0
+    },
+    {
+      "file": "International_Law_High_Yield_840_MCQ_Bank (1).docx",
+      "subject": "International Law",
+      "detected": 840,
+      "complete": 840,
+      "unresolved": 0
+    },
+    {
+      "file": "Pashto_High_Yield_Exam_Style_MCQs_120.docx",
+      "subject": "Pashto",
+      "detected": 120,
+      "complete": 120,
+      "unresolved": 0
+    },
+    {
+      "file": "Philosophy_Complete_Selective_Objective_Bank_410.docx",
+      "subject": "Philosophy",
+      "detected": 410,
+      "complete": 410,
+      "unresolved": 0
+    },
+    {
+      "file": "Philosophy_CSS_MCQs_Batch_1_390.docx",
+      "subject": "Philosophy",
+      "detected": 390,
+      "complete": 390,
+      "unresolved": 0
+    },
+    {
       "file": "06_History_of_Pakistan_1947_to_Date.docx",
       "subject": "History of Pakistan & India",
       "detected": 225,
@@ -1785,25 +1965,11 @@
       "unresolved": 0
     },
     {
-      "file": "Governance_Public_Policies_600_Practical_MCQs_Rewritten.docx",
-      "subject": "Governance & Public Policies",
-      "detected": 599,
-      "complete": 0,
-      "unresolved": 599
-    },
-    {
       "file": "History_of_USA_FPSC_MCQs_1890.docx",
       "subject": "History of USA",
       "detected": 1890,
       "complete": 1890,
       "unresolved": 0
-    },
-    {
-      "file": "International_Law_High_Yield_840_MCQ_Bank (1).docx",
-      "subject": "International Law",
-      "detected": 840,
-      "complete": 0,
-      "unresolved": 840
     },
     {
       "file": "International_Relations_640_Refined_Selective_MCQs.docx",
@@ -2118,27 +2284,6 @@
       "subject": "Sindhi",
       "detected": 180,
       "complete": 180,
-      "unresolved": 0
-    },
-    {
-      "file": "Pashto_High_Yield_Exam_Style_MCQs_120.docx",
-      "subject": "Pashto",
-      "detected": 0,
-      "complete": 0,
-      "unresolved": 0
-    },
-    {
-      "file": "Philosophy_Complete_Selective_Objective_Bank_410.docx",
-      "subject": "Philosophy",
-      "detected": 0,
-      "complete": 0,
-      "unresolved": 0
-    },
-    {
-      "file": "Philosophy_CSS_MCQs_Batch_1_390.docx",
-      "subject": "Philosophy",
-      "detected": 0,
-      "complete": 0,
       "unresolved": 0
     },
     {
