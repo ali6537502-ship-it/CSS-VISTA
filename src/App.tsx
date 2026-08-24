@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
+import { AdSenseProvider } from './components/Ads'
 import Home from './pages/Home'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
@@ -48,6 +49,7 @@ const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
 const FpscSyllabus = lazy(() => import('./pages/FpscSyllabus'))
 const CssPastPaperAnalysis = lazy(() => import('./pages/CssPastPaperAnalysis'))
+const Privacy = lazy(() => import('./pages/Privacy'))
 
 function PageLoader() {
   return (
@@ -68,7 +70,7 @@ function S({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Routes>
-      <Route element={<ErrorBoundary><Layout /></ErrorBoundary>}>
+      <Route element={<AdSenseProvider><ErrorBoundary><Layout /></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
@@ -115,6 +117,7 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
+        <Route path="/privacy" element={<S><Privacy /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />
       </Route>

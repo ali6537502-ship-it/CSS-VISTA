@@ -1,0 +1,51 @@
+import { ExternalLink, ShieldCheck } from 'lucide-react'
+import { PageHeader } from '@/components/shared'
+
+export default function Privacy() {
+  return (
+    <div>
+      <PageHeader
+        title="Privacy, Cookies & Advertising"
+        description="How CSS Vista handles account data, local study preferences, advertising technology and consent."
+      />
+      <main className="mx-auto max-w-4xl space-y-6 px-4 py-10 text-sm leading-relaxed text-foreground/85">
+        <section className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-5 sm:p-6">
+          <div className="flex items-start gap-3">
+            <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-800" />
+            <div>
+              <h2 className="font-display text-xl font-bold text-pine">Content and examinations come first</h2>
+              <p className="mt-2">CSS Vista does not place site-managed advertising on the homepage, mocks, timed examinations, question screens, results, account areas, private study dashboards, payment or inquiry workflows, error pages, loading screens, or legal pages including this one.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border bg-white p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold text-pine">Information used by CSS Vista</h2>
+          <p className="mt-2">Guest study preferences and progress may be kept in browser storage so features work on the current device. If you choose to sign in, account and study-progress information may be synchronised through CSS Vista&apos;s account service. Advertising logic does not read or transmit answers, scores, study plans, account details, or other private academic information.</p>
+        </section>
+
+        <section className="rounded-2xl border bg-white p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold text-pine">Google AdSense</h2>
+          <p className="mt-2">Eligible informational pages may use Google AdSense, publisher ID <span className="font-mono text-xs">ca-pub-6131271603014611</span>. Google and its advertising partners may use cookies or similar storage to deliver, limit, measure, and protect advertising. Depending on region, consent and account settings, advertising may be personalised, non-personalised, limited, or unavailable.</p>
+          <p className="mt-3">CSS Vista keeps only minimal session-scoped advertising controls: the count of distinct eligible content pages, whether a delayed opportunity was handled for the current history entry, a cooldown timestamp, and recent opportunity identifiers. These controls are not used to build an academic profile.</p>
+          <a className="mt-3 inline-flex items-center gap-1 font-semibold text-emerald-800 underline underline-offset-2" href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">
+            How Google uses information for advertising <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </section>
+
+        <section className="rounded-2xl border bg-white p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold text-pine">Consent and regional choices</h2>
+          <p className="mt-2">Where consent is legally or contractually required, CSS Vista uses the Google-certified consent message configured through AdSense. That system supplies the appropriate regional disclosures and choices, including controls for eligible visitors in the EEA, the United Kingdom and Switzerland. Personalised advertising must not be enabled for those visitors without the required consent signal.</p>
+          <p className="mt-3">When Google&apos;s privacy message is active, its “Privacy and cookie settings” control can be used to revisit or revoke choices. Browser controls can also clear or restrict cookies and local storage, although doing so may affect saved guest preferences.</p>
+        </section>
+
+        <section className="rounded-2xl border bg-white p-5 sm:p-6">
+          <h2 className="font-display text-xl font-bold text-pine">Advertising safety</h2>
+          <p className="mt-2">Advertisements are separated from navigation, questions, answers, download controls and purchases. CSS Vista does not ask students to click advertisements, does not use a custom floating advertisement window or custom close button, and does not require advertising interaction to continue studying.</p>
+        </section>
+
+        <p className="text-xs text-muted-foreground">Last updated: 24 August 2026. Material changes to advertising or data handling should be reflected on this page before release.</p>
+      </main>
+    </div>
+  )
+}

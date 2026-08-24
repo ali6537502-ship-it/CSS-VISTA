@@ -15,7 +15,7 @@ import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/st
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
-import { AdSenseLoader, PageFooterAd, PageHeaderAd } from '@/components/Ads'
+import { ManagedAdOpportunity } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
 import VistaShortcut from '@/components/VistaShortcut'
 import { requestPageBack } from '@/lib/backNavigation'
@@ -588,7 +588,6 @@ export default function Layout() {
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
       <PrintBranding />
-      <AdSenseLoader />
       <StudyActivityTracker />
       <NotificationBar />
       {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
@@ -835,8 +834,6 @@ export default function Layout() {
         </nav>
       </aside>
 
-      {location.pathname !== '/' && <PageHeaderAd />}
-
       <main className="flex-1 pb-[68px] md:pb-0">
         <div
           key={location.key}
@@ -844,9 +841,14 @@ export default function Layout() {
         >
           <Outlet />
         </div>
+        <ManagedAdOpportunity />
       </main>
 
       <VistaShortcut />
+
+      <div className="pb-20 pt-4 text-center text-[11px] text-muted-foreground md:hidden">
+        <Link className="underline underline-offset-2 hover:text-pine" to="/privacy">Privacy &amp; advertising</Link>
+      </div>
 
       <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
@@ -870,8 +872,6 @@ export default function Layout() {
           })}
         </div>
       </nav>
-
-      <PageFooterAd />
 
       <footer className="cssv-site-footer hidden border-t md:block">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -928,7 +928,8 @@ export default function Layout() {
           </div>
         </div>
         <div className="border-t py-4 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} CSS Vista · Verify all rules and dates at fpsc.gov.pk
+          © {new Date().getFullYear()} CSS Vista · Verify all rules and dates at fpsc.gov.pk ·{' '}
+          <Link className="underline underline-offset-2 hover:text-pine" to="/privacy">Privacy &amp; advertising</Link>
         </div>
       </footer>
     </div>

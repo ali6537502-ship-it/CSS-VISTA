@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { Download, ExternalLink, FileText } from 'lucide-react'
-import { AdSlot } from '@/components/Ads'
 import { Badge, EmptyState, PageHeader } from '@/components/shared'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
@@ -114,8 +113,6 @@ export default function PastPaperOpen() {
           </>}
         </div>
 
-        <AdSlot slot={import.meta.env.VITE_ADSENSE_SLOT_PAST_PAPER_TOP} format="horizontal" className="min-h-24" label="Past paper advertisement 1 of 2" />
-
         {pdfAvailable && paper.fileUrl ? (
           <section aria-label={`${paper.title} PDF viewer`} className="overflow-hidden rounded-xl border bg-white">
             <iframe src={paper.fileUrl} title={paper.title} className="h-[72vh] min-h-[520px] w-full" />
@@ -129,7 +126,6 @@ export default function PastPaperOpen() {
           </section>
         )}
 
-        <AdSlot slot={import.meta.env.VITE_ADSENSE_SLOT_PAST_PAPER_BOTTOM} format="horizontal" className="min-h-24" label="Past paper advertisement 2 of 2" />
       </div>
     </div>
   )

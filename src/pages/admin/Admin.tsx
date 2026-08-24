@@ -718,47 +718,30 @@ function HelpGuide() {
 }
 
 function AdPlacementGuide() {
-  const clientReady = Boolean((import.meta.env.VITE_ADSENSE_CLIENT ?? '').trim())
-  const topReady = Boolean((import.meta.env.VITE_ADSENSE_SLOT_TOP ?? '').trim())
-  const bottomReady = Boolean((import.meta.env.VITE_ADSENSE_SLOT_BOTTOM ?? '').trim())
-  const paperTopReady = Boolean((import.meta.env.VITE_ADSENSE_SLOT_PAST_PAPER_TOP ?? '').trim())
-  const paperBottomReady = Boolean((import.meta.env.VITE_ADSENSE_SLOT_PAST_PAPER_BOTTOM ?? '').trim())
+  const slotReady = Boolean((
+    import.meta.env.VITE_ADSENSE_SLOT_CONTENT
+    || import.meta.env.VITE_ADSENSE_SLOT_BOTTOM
+    || import.meta.env.VITE_ADSENSE_SLOT_TOP
+    || ''
+  ).trim())
   const positions = [
     {
-      title: 'Page-transition advertisement',
-      location: 'Between eligible page changes',
-      detail: 'Google Vignette Auto ads provide the full-page presentation and close control. They are disabled when opening tests, mocks and timed practice.',
-      ready: clientReady,
+      title: 'Managed in-page opportunity',
+      location: 'After eligible content and before the footer',
+      detail: 'One responsive unit can appear after 60 seconds of active use or on every third distinct eligible content page. It never overlays content and unfilled space collapses.',
+      ready: slotReady,
     },
     {
-      title: 'Top page advertisement',
-      location: 'Below navigation and above eligible page content',
-      detail: 'A compact responsive placement appears at the start of normal content pages without covering navigation or study controls.',
-      ready: clientReady && topReady,
+      title: 'Frequency protection',
+      location: 'Session scoped',
+      detail: 'The two triggers share one opportunity, each history entry is handled once, and a five-minute cooldown prevents rapid repeat requests.',
+      ready: true,
     },
     {
-      title: 'Bottom page advertisement',
-      location: 'After page content and before the footer',
-      detail: 'A horizontal placement appears on eligible content pages. Scroll to the bottom of a page to see its labelled development preview.',
-      ready: clientReady && bottomReady,
-    },
-    {
-      title: 'Desktop side rails',
-      location: 'Outside the content on sufficiently wide screens',
-      detail: 'Side rails are controlled by Google Auto ads and appear only when screen width and available space allow them.',
-      ready: clientReady,
-    },
-    {
-      title: 'Past paper advertisement 1 of 2',
-      location: 'Above the built-in PDF viewer',
-      detail: 'Separated from the Open and Download controls to avoid accidental clicks.',
-      ready: clientReady && paperTopReady,
-    },
-    {
-      title: 'Past paper advertisement 2 of 2',
-      location: 'Below the built-in PDF viewer',
-      detail: 'The second and final advertisement placement on an individual past-paper page.',
-      ready: clientReady && paperBottomReady,
+      title: 'Google-controlled consent and vignette',
+      location: 'AdSense Privacy & messaging / Auto ads dashboard',
+      detail: 'Consent messages and any optional dismissible vignette must be controlled by Google. CSS Vista does not create a custom overlay or close button.',
+      ready: false,
     },
   ]
 
@@ -772,8 +755,8 @@ function AdPlacementGuide() {
               Development previews are labelled. Real advertisements appear only after the domain and AdSense account are approved and the environment IDs are configured.
             </p>
           </div>
-          <Badge tone={clientReady ? 'green' : 'gold'}>
-            {clientReady ? 'AdSense client configured' : 'AdSense client not configured'}
+          <Badge tone={slotReady ? 'green' : 'gold'}>
+            {slotReady ? 'Publisher and in-page slot configured' : 'Publisher configured · slot ID required'}
           </Badge>
         </div>
       </div>
@@ -789,7 +772,7 @@ function AdPlacementGuide() {
                 </p>
               </div>
               <Badge tone={position.ready ? 'green' : 'gray'}>
-                {position.ready ? 'Configured' : 'Awaiting ID'}
+                {position.ready ? 'Configured' : 'Dashboard action'}
               </Badge>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{position.detail}</p>
@@ -800,7 +783,7 @@ function AdPlacementGuide() {
       <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-5">
         <h3 className="font-bold text-pine">Protected study routes</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          No advertisements appear inside GK quizzes, MPT preparation, scheduled mocks, the Five-Minute Challenge, answer writing, answer evaluation, timers or games.
+          No advertisements appear on the homepage or inside GK/PMS quizzes, MPT preparation, scheduled mocks, full papers, the Five-Minute Challenge, answer writing, answer evaluation, account areas, private dashboards, timers or games.
         </p>
       </div>
     </div>
