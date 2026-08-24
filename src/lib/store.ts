@@ -172,7 +172,18 @@ export function getState(): VistaState {
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return { ...empty }
-    return { ...empty, ...JSON.parse(raw) }
+    const saved = JSON.parse(raw) as Partial<VistaState>
+    const savedShortcut = saved.vistaShortcut
+    return {
+      ...empty,
+      ...saved,
+      vistaShortcut: {
+        enabled: typeof savedShortcut?.enabled === 'boolean' ? savedShortcut.enabled : empty.vistaShortcut.enabled,
+        shortcutIds: Array.isArray(savedShortcut?.shortcutIds)
+          ? savedShortcut.shortcutIds.filter((id): id is string => typeof id === 'string')
+          : [...empty.vistaShortcut.shortcutIds],
+      },
+    }
   } catch {
     return { ...empty }
   }
