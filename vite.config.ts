@@ -33,7 +33,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist/client',
+    outDir: process.env.CSSV_BUILD_TARGET === 'sites' ? 'dist/client' : 'dist',
     copyPublicDir: false,
   },
 });

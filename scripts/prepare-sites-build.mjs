@@ -1,15 +1,23 @@
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
-const clientDir = join(dist, 'client')
+const clientDir = process.env.CSSV_CLIENT_DIR
+  ? resolve(root, process.env.CSSV_CLIENT_DIR)
+  : join(dist, 'client')
 const publicDir = join(root, 'public')
 const serverDir = join(dist, 'server')
 const indexPath = join(clientDir, 'index.html')
-const siteOrigin = 'https://css-vista.ali6537.chatgpt.site'
+const emitWorker = process.env.CSSV_EMIT_WORKER !== 'false'
+const requestedOrigin = process.env.SITE_ORIGIN || 'https://css-vista.ali6537.chatgpt.site'
+const siteUrl = new URL(requestedOrigin)
+if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search || siteUrl.hash) {
+  throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${requestedOrigin}`)
+}
+const siteOrigin = siteUrl.origin
 
 // Keep the interactive preview bundle lean while preserving the complete study
 // archive in GitHub. Large PDFs are served from the matching public repository
@@ -23,7 +31,7 @@ for (const entry of await readdir(publicDir, { withFileTypes: true })) {
 
 const clientIndex = await readFile(indexPath, 'utf8')
 const pastPaperAnalysis = JSON.parse(await readFile(join(publicDir, 'css-past-paper-analysis.json'), 'utf8'))
-await mkdir(serverDir, { recursive: true })
+if (emitWorker) await mkdir(serverDir, { recursive: true })
 
 const analysisSubjectAliases = new Map([
   ['essay', 'english essay'],
@@ -179,6 +187,9 @@ const sitemapUrls = [
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`
 await writeFile(join(clientDir, 'sitemap.xml'), sitemap)
 await writeFile(join(clientDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteOrigin}/sitemap.xml\n`)
+if (!emitWorker) {
+  await writeFile(indexPath, clientIndex.replaceAll('__SITE_ORIGIN__', siteOrigin))
+}
 
 const worker = `const SECURITY_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -254,5 +265,9 @@ export default {
 }
 `
 
-await writeFile(join(serverDir, 'index.js'), worker)
-console.log('Prepared Sites assets, worker entrypoint, and SPA fallback.')
+if (emitWorker) {
+  await writeFile(join(serverDir, 'index.js'), worker)
+  console.log('Prepared Sites assets, worker entrypoint, and SPA fallback.')
+} else {
+  console.log(`Prepared static Hostinger assets for ${siteOrigin}.`)
+}
