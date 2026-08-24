@@ -443,7 +443,7 @@ function WeeklyMagazineCard() {
     <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
       <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
       <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
-        <div className="grid gap-0 sm:grid-cols-[minmax(0,1fr)_210px]">
+        <div className="grid gap-0 min-[360px]:grid-cols-[minmax(0,1fr)_118px] sm:grid-cols-[minmax(0,1fr)_190px] lg:grid-cols-[minmax(0,1fr)_210px]">
           <div className="min-w-0 p-3.5 pr-2 sm:p-5">
             <div className="flex items-start gap-3">
               <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
@@ -486,12 +486,12 @@ function WeeklyMagazineCard() {
               <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printPdfFile(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
             </details>
           </div>
-          <div className="relative min-h-[260px] overflow-hidden bg-emerald-950 p-3 sm:min-h-[230px] sm:p-4">
+          <div className="relative min-h-[168px] overflow-hidden bg-emerald-950 p-2.5 min-[360px]:min-h-0 sm:min-h-[230px] sm:p-4">
             <span className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-amber-300/25" aria-hidden="true" />
             <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
             {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
-              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[236px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
-                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="max-h-full w-full object-contain object-center" />
+              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
+                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full" />
               </a>
             ) : (
               <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>
