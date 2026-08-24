@@ -1,8 +1,30 @@
 DirectoryIndex index.html
 
+# Keep Google ownership and advertising verification endpoints as literal
+# public files. These rules run before the SPA fallback so the crawler always
+# receives the file itself instead of index.html.
+<IfModule mod_mime.c>
+  AddType text/plain .txt
+</IfModule>
+
+<IfModule mod_headers.c>
+  <Files "ads.txt">
+    Header always set Content-Type "text/plain; charset=UTF-8"
+    Header always set Cache-Control "public, max-age=300, must-revalidate"
+    Header always set X-Content-Type-Options "nosniff"
+  </Files>
+  <Files "googlec96e2248070e0570.html">
+    Header always set Cache-Control "public, max-age=300, must-revalidate"
+    Header always set X-Content-Type-Options "nosniff"
+  </Files>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Never rewrite crawler control and verification files into the React app.
+  RewriteRule ^(?:ads\.txt|robots\.txt|sitemap\.xml|googlec96e2248070e0570\.html)$ - [L,NC]
 
   # Serve the generated search-friendly past-paper pages at their public URLs.
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]

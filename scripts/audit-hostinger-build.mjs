@@ -15,13 +15,17 @@ await Promise.all([
   access(join(dist, 'assets')),
   access(join(dist, 'robots.txt')),
   access(join(dist, 'sitemap.xml')),
+  access(join(dist, 'ads.txt')),
+  access(join(dist, 'googlec96e2248070e0570.html')),
 ])
 
-const [indexHtml, htaccess, robots, sitemap, paperFiles] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemap, adsTxt, searchConsoleVerification, paperFiles] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
   readFile(join(dist, 'sitemap.xml'), 'utf8'),
+  readFile(join(dist, 'ads.txt'), 'utf8'),
+  readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
 ])
 
@@ -40,8 +44,13 @@ assert(indexHtml.includes('https://www.css-vista.com/'), 'Hostinger index is mis
 assert(!samplePaperHtml.includes('__SITE_ORIGIN__'), 'Generated past-paper page still contains the Sites runtime origin placeholder')
 assert(htaccess.includes('RewriteRule ^ index.html [L]'), 'SPA fallback rule is missing')
 assert(htaccess.includes('seo/past-papers/$1.html'), 'Direct past-paper SEO rewrite is missing')
+assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are not explicitly protected from SPA rewrites')
+assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
 assert(robots.includes('https://www.css-vista.com/sitemap.xml'), 'Hostinger robots.txt uses the wrong origin')
 assert(sitemap.includes('<loc>https://www.css-vista.com/past-papers'), 'Hostinger sitemap uses the wrong origin')
+assert(adsTxt === 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0\n', 'ads.txt publisher record is missing or malformed')
+assert(searchConsoleVerification.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Google Search Console verification file is malformed')
+assert(indexHtml.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"'), 'AdSense account verification metadata is missing')
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === 605, 'Expected 605 direct past-paper SEO pages')
 
-console.log('Hostinger artifact audit passed: static root, custom-domain metadata, SPA rewrites and 605 paper pages verified.')
+console.log('Hostinger artifact audit passed: ads.txt, Google verification, static root, SPA rewrites and 605 paper pages verified.')
