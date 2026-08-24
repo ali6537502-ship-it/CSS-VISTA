@@ -215,10 +215,33 @@ function shiftedDateKey(dateKey: string, amount: number): string {
   return localDateKey(new Date(year, month - 1, day + amount, 12))
 }
 
+function isValidDateKey(dateKey: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) return false
+  const [year, month, day] = dateKey.split('-').map(Number)
+  return localDateKey(new Date(year, month - 1, day, 12)) === dateKey
+}
+
 function validVisitDates(s: VistaState): string[] {
   const dates = Array.isArray(s.visitDates) ? s.visitDates : []
-  const migrated = s.lastVisit ? [...dates, s.lastVisit] : dates
-  return [...new Set(migrated.filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)))].sort()
+  const validDates = dates.filter(isValidDateKey)
+  const legacyRunLength = Math.min(3650, Math.max(1, Math.floor(Number(s.streakDays) || 1)))
+  const migrated = validDates.length === 0 && isValidDateKey(s.lastVisit)
+    ? Array.from({ length: legacyRunLength }, (_, index) => shiftedDateKey(s.lastVisit, -index))
+    : isValidDateKey(s.lastVisit)
+      ? [...validDates, s.lastVisit]
+      : validDates
+  return [...new Set(migrated)].sort()
+}
+
+function consecutiveVisitDays(visitDates: string[], endingOn: string): number {
+  const visited = new Set(visitDates)
+  let cursor = endingOn
+  let count = 0
+  while (visited.has(cursor) && count <= visited.size) {
+    count += 1
+    cursor = shiftedDateKey(cursor, -1)
+  }
+  return count
 }
 
 function nextStreakMilestone(current: number): number {
@@ -231,8 +254,8 @@ function streakSnapshot(s: VistaState, wasReset = false): VisitStreak {
   const yesterday = shiftedDateKey(today, -1)
   const visitDates = validVisitDates(s)
   const visited = new Set(visitDates)
-  const active = s.lastVisit === today || s.lastVisit === yesterday
-  const current = active ? Math.max(0, s.streakDays) : 0
+  const activeEnding = visited.has(today) ? today : visited.has(yesterday) ? yesterday : ''
+  const current = activeEnding ? consecutiveVisitDays(visitDates, activeEnding) : 0
   const recentDays = Array.from({ length: 7 }, (_, index) => {
     const date = shiftedDateKey(today, index - 6)
     const parsed = new Date(`${date}T12:00:00`)
@@ -263,20 +286,27 @@ export function touchVisit(): VisitStreak {
   const s = getState()
   const today = localDateKey()
   const yesterday = shiftedDateKey(today, -1)
-  const wasReset = Boolean(s.lastVisit && s.lastVisit !== today && s.lastVisit !== yesterday)
+  const storedDates = validVisitDates(s)
+  const visitDates = storedDates.filter((date) => date <= today)
+  const visited = new Set(visitDates)
+  const checkedInToday = visited.has(today)
+  const wasReset = !checkedInToday && visitDates.length > 0 && !visited.has(yesterday)
 
-  if (s.lastVisit !== today) {
-    s.streakDays = s.lastVisit === yesterday ? s.streakDays + 1 : 1
-    s.lastVisit = today
-    s.bestStreakDays = Math.max(s.bestStreakDays || 0, s.streakDays)
-    s.visitDates = [...new Set([...validVisitDates(s), today])].sort()
-    save(s)
-  } else if (!s.bestStreakDays || !Array.isArray(s.visitDates) || !s.visitDates.includes(today)) {
-    // Migrate older saved progress without counting the same day twice.
-    s.bestStreakDays = Math.max(s.bestStreakDays || 0, s.streakDays)
-    s.visitDates = [...new Set([...validVisitDates(s), today])].sort()
-    save(s)
-  }
+  visited.add(today)
+  const normalizedDates = [...visited].sort()
+  const current = consecutiveVisitDays(normalizedDates, today)
+  const best = Math.max(s.bestStreakDays || 0, current)
+  const needsSave = s.lastVisit !== today
+    || s.streakDays !== current
+    || s.bestStreakDays !== best
+    || normalizedDates.length !== storedDates.length
+    || normalizedDates.some((date, index) => date !== storedDates[index])
+
+  s.lastVisit = today
+  s.streakDays = current
+  s.bestStreakDays = best
+  s.visitDates = normalizedDates
+  if (needsSave) save(s)
 
   return streakSnapshot(s, wasReset)
 }
@@ -670,7 +700,7 @@ export function getStats() {
   const weak = categories.filter((c) => c.attempts >= 5).sort((a, b) => a.pct - b.pct).slice(0, 3)
   const strong = [...categories].sort((a, b) => b.pct - a.pct).slice(0, 3)
 
-  return { totalQuizzes, avgScore, accuracy, attempted, categories, weak, strong, savedAnswers: s.savedAnswers.length, bookmarks: s.bookmarks.length, streak: s.streakDays, challenges: s.completedChallenges.length }
+  return { totalQuizzes, avgScore, accuracy, attempted, categories, weak, strong, savedAnswers: s.savedAnswers.length, bookmarks: s.bookmarks.length, streak: streakSnapshot(s).current, challenges: s.completedChallenges.length }
 }
 // ---- Smart revision (spaced repetition for MCQs) ----
 

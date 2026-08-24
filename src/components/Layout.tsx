@@ -134,7 +134,8 @@ const desktopMoreLinks = (() => {
 function NotificationBar() {
   const [deviceTime, setDeviceTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
-  const [streak] = useState(() => touchVisit())
+  const [streak, setStreak] = useState(() => touchVisit())
+  const streakDayRef = useRef(deviceTime.toDateString())
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mockNotices = (['gk', 'mpt'] as const).map((kind) => {
     const status = getDailyMockStatus(kind, deviceTime)
@@ -158,14 +159,33 @@ function NotificationBar() {
   ]
 
   useEffect(() => {
-    const clock = window.setInterval(() => setDeviceTime(new Date()), 1000)
+    const refreshStreak = () => setStreak(touchVisit())
+    const updateClock = () => {
+      const now = new Date()
+      setDeviceTime(now)
+      const dateKey = now.toDateString()
+      if (dateKey !== streakDayRef.current) {
+        streakDayRef.current = dateKey
+        refreshStreak()
+      }
+    }
+    const clock = window.setInterval(updateClock, 1000)
     const updateConnection = () => setOnline(navigator.onLine)
+    const updateAfterVisibilityChange = () => {
+      if (document.visibilityState === 'visible') refreshStreak()
+    }
     window.addEventListener('online', updateConnection)
     window.addEventListener('offline', updateConnection)
+    window.addEventListener('focus', refreshStreak)
+    window.addEventListener('storage', refreshStreak)
+    document.addEventListener('visibilitychange', updateAfterVisibilityChange)
     return () => {
       window.clearInterval(clock)
       window.removeEventListener('online', updateConnection)
       window.removeEventListener('offline', updateConnection)
+      window.removeEventListener('focus', refreshStreak)
+      window.removeEventListener('storage', refreshStreak)
+      document.removeEventListener('visibilitychange', updateAfterVisibilityChange)
     }
   }, [])
 
@@ -191,9 +211,9 @@ function NotificationBar() {
   return (
     <div className="cssv-live-bar bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <Link to="/dashboard" className="flex shrink-0 items-center gap-1.5" aria-label={`${streak.current} day study visit streak`} title="Visit every day to keep your streak">
+        <Link to="/dashboard" className="flex shrink-0 items-center gap-1.5" aria-label={`${streak.current}-day study visit streak. Today's visit is counted.`} title={`Checked in today · Best: ${streak.best} days · Next milestone: ${streak.nextMilestone} days`}>
           <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><Flame className="h-3.5 w-3.5" /></span>
-          <span className="rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-950">{streak.current} day</span>
+          <span className="rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-950">{streak.current} {streak.current === 1 ? 'day' : 'days'}</span>
         </Link>
         <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
           <div className="vista-live-ticker-track flex w-max items-center">
