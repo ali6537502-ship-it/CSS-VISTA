@@ -659,7 +659,7 @@
 }
 
 .vista-live-ticker-track {
-  animation: vista-live-ticker-scroll 105s linear infinite;
+  animation: vista-live-ticker-scroll 82s linear infinite;
   will-change: transform;
 }
 
