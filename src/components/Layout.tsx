@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, type LucideIcon,
 } from 'lucide-react'
 import { site } from '@/data/site'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
@@ -66,6 +66,7 @@ const nav = [
     items: [
       { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
+      { label: 'My Factbook', to: '/factbook', icon: BookMarked },
       { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
       { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
       { label: 'CSS Games', to: '/games', icon: Gamepad2 },
@@ -95,7 +96,7 @@ const primaryNav = [
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
   { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
@@ -902,6 +903,7 @@ export default function Layout() {
               <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Written Mocks by Ms. Sadia Zahoor</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/dashboard">Performance Dashboard</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/study-planner">My CSS Study Planner</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/factbook">My Factbook</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/answer-evaluation">Answer Evaluation</Link></li>
             </ul>
           </div>

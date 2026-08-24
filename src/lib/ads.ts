@@ -41,6 +41,7 @@ export const AD_ROUTE_DENYLIST: readonly AdRouteRule[] = [
   { pattern: '/mistakes', match: 'prefix', reason: 'Private study data' },
   { pattern: '/checklists', match: 'prefix', reason: 'Interactive/private checklist' },
   { pattern: '/dashboard', match: 'prefix', reason: 'Private study dashboard' },
+  { pattern: '/factbook', match: 'prefix', reason: 'Private student factbook and writing workspace' },
   { pattern: '/study-planner', match: 'prefix', reason: 'Private study dashboard' },
   { pattern: '/account', match: 'prefix', reason: 'Login, registration, and account settings' },
   { pattern: '/admin', match: 'prefix', reason: 'Private administration' },

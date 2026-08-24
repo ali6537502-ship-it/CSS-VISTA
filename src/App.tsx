@@ -50,6 +50,7 @@ const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
 const FpscSyllabus = lazy(() => import('./pages/FpscSyllabus'))
 const CssPastPaperAnalysis = lazy(() => import('./pages/CssPastPaperAnalysis'))
 const Privacy = lazy(() => import('./pages/Privacy'))
+const Factbook = lazy(() => import('./pages/Factbook'))
 
 function PageLoader() {
   return (
@@ -117,6 +118,7 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
+        <Route path="/factbook" element={<S><Factbook /></S>} />
         <Route path="/privacy" element={<S><Privacy /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />

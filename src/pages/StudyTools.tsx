@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import {
   Pause, Play, RotateCcw, Target, Timer, Coffee, Plus, Trash2,
   AlertTriangle, BookMarked, PenLine, CalendarDays, Printer, FileText, Zap, Globe,
-  Settings2,
+  Settings2, LibraryBig,
 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { compulsorySubjects } from '@/data/syllabus'
@@ -180,8 +180,9 @@ export default function StudyTools() {
       <PageHeader title="Study Tools" description="Planners, timers, trackers and organisers for focused daily preparation." />
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10">
         {/* Featured tool shortcuts */}
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {[
+            { to: '/factbook', icon: LibraryBig, t: 'My Factbook', d: 'Your private, searchable evidence library' },
             { to: '/answer-timer', icon: PenLine, t: 'Handwritten Answer Timer', d: '5/10/20/35-minute structure alerts' },
             { to: '/five-minute', icon: Zap, t: 'Daily Five-Minute Challenge', d: 'A quick mixed quiz against the clock' },
             { to: '/mistakes', icon: AlertTriangle, t: 'Mistake Notebook', d: 'Every wrong answer, ready to revise' },

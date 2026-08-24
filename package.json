@@ -15,6 +15,7 @@
     "audit": "node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs && node scripts/audit-past-paper-seo.mjs",
     "audit:hostinger": "node scripts/audit-hostinger-build.mjs",
     "test:ads": "node --test tests/adPolicy.test.ts",
+    "test:factbook": "node --test tests/factbook.test.ts",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "validate:artifact": "bash scripts/validate-artifact.sh"
