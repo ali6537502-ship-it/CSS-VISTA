@@ -12,8 +12,8 @@ export default function Mentors() {
         title="Mentors & Contact"
         description="A CSS position holder for complete mentorship, and an advocate-mentor for subject specialisation and notes. Contact either mentor directly on WhatsApp or Instagram."
       />
-      <div className="mx-auto max-w-5xl space-y-6 px-4 py-10">
-        <div className="grid gap-6 md:grid-cols-2">
+      <div className="mx-auto max-w-5xl space-y-6 px-2 py-6 sm:px-4 sm:py-10">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:gap-6">
           {/* Miss Sadia Zahoor, PAS */}
           <MentorCard
             id={sadia.id}
@@ -26,24 +26,24 @@ export default function Mentors() {
             message={sadia.message}
             instagram={sadia.instagram}
           >
-            <div className="mt-3 flex flex-wrap gap-1.5">
+            <div className="mt-3 flex flex-wrap gap-1 sm:gap-1.5">
               {sadia.credentials.map((c) => (
-                <span key={c} className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900">
+                <span key={c} className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-[9px] font-semibold text-amber-900 sm:px-3 sm:text-xs">
                   <Award className="h-3 w-3" /> {c}
                 </span>
               ))}
             </div>
             <div className="mt-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Her optional subjects in CSS</p>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Her optional subjects in CSS</p>
+              <div className="mt-1.5 flex flex-wrap gap-1 sm:gap-1.5">
                 {sadia.optionalSubjects.map((s) => (
-                  <span key={s} className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-900">{s}</span>
+                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-medium text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
                 ))}
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Services</p>
-              <ul className="mt-1.5 grid gap-x-4 gap-y-1 text-sm text-foreground/85 sm:grid-cols-2">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Services</p>
+              <ul className="mt-1.5 grid gap-x-4 gap-y-1 text-[10px] leading-relaxed text-foreground/85 sm:text-sm lg:grid-cols-2">
                 {sadia.services.map((s) => <li key={s}>· {s}</li>)}
               </ul>
             </div>
@@ -62,16 +62,16 @@ export default function Mentors() {
             instagram={ali.instagram}
           >
             <div className="mt-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Areas of specialisation</p>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Areas of specialisation</p>
+              <div className="mt-1.5 flex flex-wrap gap-1 sm:gap-1.5">
                 {(ali.specialisations ?? []).map((s) => (
-                  <span key={s} className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-900">{s}</span>
+                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
                 ))}
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Also provides</p>
-              <ul className="mt-1.5 space-y-1 text-sm text-foreground/85">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Also provides</p>
+              <ul className="mt-1.5 space-y-1 text-[10px] leading-relaxed text-foreground/85 sm:text-sm">
                 {ali.services.slice(4).map((s) => <li key={s}>· {s}</li>)}
               </ul>
             </div>
@@ -131,28 +131,28 @@ function MentorCard({
   const finalWaDisplay = o?.whatsapp ? o.whatsapp.replace(/^92/, '0') : whatsappDisplay
 
   return (
-    <div className="overflow-hidden rounded-xl border bg-white transition-shadow hover:shadow-md">
-      <div className="flex flex-col items-center p-6 text-center">
-        <div className="w-44 overflow-hidden rounded-xl">
+    <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-white transition-shadow hover:shadow-md">
+      <div className="flex flex-col items-center p-2.5 text-center sm:p-4 lg:p-6">
+        <div className="w-full max-w-44 overflow-hidden rounded-lg sm:rounded-xl">
           <img src={finalPhoto} alt={finalName} className="aspect-[4/5] w-full object-cover" />
         </div>
-        <h2 className="mt-4 font-display text-xl font-bold text-pine">{finalName}</h2>
-        <p className="mt-0.5 text-sm font-semibold text-emerald-800">{finalRole}</p>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{finalBio}</p>
+        <h2 className="mt-3 font-display text-sm font-bold leading-tight text-pine sm:mt-4 sm:text-lg lg:text-xl">{finalName}</h2>
+        <p className="mt-1 text-[10px] font-semibold leading-tight text-emerald-800 sm:text-sm">{finalRole}</p>
+        <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground sm:text-sm">{finalBio}</p>
       </div>
-      <div className="px-6 pb-2 text-left">{children}</div>
-      <div className="flex gap-2 p-6 pt-3">
+      <div className="flex-1 px-2.5 pb-2 text-left sm:px-4 lg:px-6">{children}</div>
+      <div className="flex flex-col gap-2 p-2.5 pt-3 sm:p-4 sm:pt-3 lg:flex-row lg:p-6 lg:pt-3">
         <a
           href={waLink(finalWa, message)}
           target="_blank" rel="noopener noreferrer"
-          className="flex h-11 flex-1 items-center justify-center gap-2 rounded-md bg-emerald-600 text-sm font-bold text-white hover:bg-emerald-700"
+          className="flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-emerald-600 px-2 text-[10px] font-bold text-white hover:bg-emerald-700 sm:text-sm"
         >
-          <MessageCircle className="h-4 w-4" /> WhatsApp - {finalWaDisplay}
+          <MessageCircle className="h-4 w-4 shrink-0" /> WhatsApp <span className="hidden lg:inline">- {finalWaDisplay}</span>
         </a>
         <a
           href={instagram}
           target="_blank" rel="noopener noreferrer"
-          className="flex h-11 items-center justify-center gap-2 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-4 text-sm font-bold text-white hover:opacity-90"
+          className="flex h-10 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-2 text-[10px] font-bold text-white hover:opacity-90 sm:text-sm lg:px-4"
           aria-label={`${finalName} on Instagram`}
         >
           <Instagram className="h-4 w-4" /> Instagram
