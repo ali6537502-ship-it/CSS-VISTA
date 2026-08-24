@@ -57,14 +57,25 @@
 }
 
 @keyframes cssv-shortcut-open {
-  0% { opacity: 0; transform: translateY(18px) scale(.86); filter: blur(5px); }
-  62% { opacity: 1; transform: translateY(-3px) scale(1.018); filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  0% { opacity: 0; transform: translate3d(0, 12px, 0) scale(.965); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes cssv-shortcut-tool-open {
+  0% { opacity: 0; transform: translate3d(8px, 8px, 0) scale(.975); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 .cssv-vista-shortcut-panel {
   transform-origin: 92% 100%;
-  animation: cssv-shortcut-open 360ms cubic-bezier(.2, .88, .24, 1.08) both;
+  will-change: transform, opacity;
+  animation: cssv-shortcut-open 220ms cubic-bezier(.22, .8, .28, 1) both;
+}
+
+.cssv-vista-shortcut-tool-panel {
+  transform-origin: 92% 100%;
+  will-change: transform, opacity;
+  animation: cssv-shortcut-tool-open 200ms cubic-bezier(.22, .8, .28, 1) both;
 }
 
 .cssv-vista-shortcut {
@@ -81,7 +92,9 @@
 }
 
 .cssv-vista-shortcut-tile {
-  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  animation: cssv-shortcut-open 180ms cubic-bezier(.22, .8, .28, 1) both;
+  animation-delay: calc(var(--shortcut-index, 0) * 18ms);
+  transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
 }
 
 .cssv-vista-shortcut-tile:hover {
@@ -91,7 +104,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cssv-vista-shortcut-panel { animation: none; }
+  .cssv-vista-shortcut-panel,
+  .cssv-vista-shortcut-tool-panel { animation: none; }
   .cssv-vista-shortcut,
   .cssv-vista-shortcut-tile { transition: none; }
 }
