@@ -2,8 +2,8 @@
   "batch": "2026-08-24-owner-supplied-complete-import",
   "generatedAt": "2026-08-24T00:00:00.000Z",
   "policy": "All structurally complete questions from the owner-supplied archive are connected. Unresolved source items are counted, never guessed.",
-  "total": 48397,
-  "detected": 48880,
+  "total": 48874,
+  "detected": 49360,
   "unresolved": 380,
   "subjects": [
     {
@@ -698,6 +698,63 @@
       "sourceDocuments": [
         "Gender_Studies_600_High_Yield_MCQs.docx",
         "Gender_Studies_Volume_II_300_Advanced_High_Yield_MCQs.docx"
+      ],
+      "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
+    },
+    {
+      "slug": "general-science-and-ability",
+      "name": "General Science & Ability",
+      "designation": "compulsory",
+      "group": null,
+      "count": 478,
+      "topics": [
+        "Analytical constraints",
+        "Applications, information systems and social media",
+        "Arithmetic and percentages",
+        "Artificial intelligence",
+        "Atmosphere, hydrosphere, biosphere and lithosphere",
+        "Atmospheric pollution",
+        "Atomic structure and bonding",
+        "Balanced diet and nutrients",
+        "Basic arithmetic",
+        "Biofuel production",
+        "Biomolecules and enzymes",
+        "Calendar reasoning",
+        "Cell structure and function",
+        "Clock reasoning",
+        "Common diseases and epidemics",
+        "Computer fundamentals",
+        "Data interpretation",
+        "Decision analysis",
+        "Deductive reasoning",
+        "Energy resources",
+        "Food deterioration, adulteration and preservation",
+        "Food quality and bioavailability",
+        "Human physiology",
+        "I/O and data storage",
+        "Land pollution and solid waste",
+        "Mechanical ability",
+        "Modern materials and chemicals",
+        "Natural hazards",
+        "Networking and internet standards",
+        "Number patterns",
+        "Numerical ability",
+        "Plant and animal kingdoms",
+        "Population planning",
+        "Processes of nature",
+        "Random sampling",
+        "Relations and directions",
+        "Remote sensing and GIS",
+        "Sets and probability",
+        "Social ability and psychometrics",
+        "Universe and astronomy",
+        "Verbal ability",
+        "Water pollution and standards"
+      ],
+      "file": "general-science-and-ability.json",
+      "sourceCount": 480,
+      "sourceDocuments": [
+        "CSS_GSA_480_High_Yield_MCQs.docx"
       ],
       "audit": "four options, recoverable answer key, duplicate identity and source attribution checked"
     },
@@ -1538,7 +1595,7 @@
       "name": "Statistics",
       "designation": "optional",
       "group": 2,
-      "count": 539,
+      "count": 538,
       "topics": [
         "PART I — I. Descriptive Statistics",
         "PART I — II. Basic Probability",
@@ -1628,6 +1685,13 @@
     }
   ],
   "documents": [
+    {
+      "file": "CSS_GSA_480_High_Yield_MCQs.docx",
+      "subject": "General Science & Ability",
+      "detected": 480,
+      "complete": 480,
+      "unresolved": 0
+    },
     {
       "file": "Governance_Public_Policies_600_Practical_MCQs_Rewritten.docx",
       "subject": "Governance & Public Policies",

@@ -60,6 +60,7 @@ SUBJECT_RULES: tuple[tuple[str, str], ...] = (
     ("zoology", "Zoology"),
     ("geography", "Geography"),
     ("geology", "Geology"),
+    ("gsa", "General Science & Ability"),
     ("governance", "Governance & Public Policies"),
     ("history_of_usa", "History of USA"),
     ("history_of_pakistan", "History of Pakistan & India"),
@@ -98,6 +99,23 @@ def option_index(label: str) -> int | None:
     if normalized in {"D", "د"}:
         return 3
     return None
+
+
+def roman_index(value: str) -> int | None:
+    """Convert a positive Roman-numeral section label to an integer."""
+    values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100}
+    total = 0
+    previous = 0
+    for character in reversed(clean(value).upper()):
+        current = values.get(character)
+        if current is None:
+            return None
+        if current < previous:
+            total -= current
+        else:
+            total += current
+            previous = current
+    return total or None
 
 
 def table_option_entries(text: str) -> dict[int, str]:
@@ -275,6 +293,9 @@ def parse_document(path: Path, subject: str) -> tuple[list[dict[str, Any]], dict
             paper_match = re.search(r"\bpractice\s+paper\s+(\d+)\b", text, re.I)
             if in_consolidated_answer_key and paper_match:
                 answer_section_hint = int(paper_match.group(1))
+            roman_match = re.match(r"^\s*([IVXLC]+)\.\s+", text, re.I)
+            if in_consolidated_answer_key and roman_match:
+                answer_section_hint = roman_index(roman_match.group(1))
             if looks_like_heading(text, style):
                 current_topic = clean(re.sub(r"^\d+\s*[.)]\s*", "", text))[:180]
 
