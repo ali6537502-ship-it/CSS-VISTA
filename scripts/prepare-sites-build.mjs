@@ -174,9 +174,9 @@ export default {
     const paperMatch = url.pathname.match(/^\\/past-papers\\/view\\/([a-z0-9-]+)\\/?$/)
     const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc)\\/(\\d{4})\\/?$/)
     const seoPath = paperMatch
-      ? '/seo/past-papers/' + paperMatch[1] + '.html'
+      ? '/seo/past-papers/' + paperMatch[1]
       : collectionMatch
-        ? '/seo/past-paper-collections/' + collectionMatch[1] + '/' + collectionMatch[2] + '.html'
+        ? '/seo/past-paper-collections/' + collectionMatch[1] + '/' + collectionMatch[2]
         : null
     let response = seoPath
       ? await fetchPackagedAsset(new Request(new URL(seoPath, url), request), env)

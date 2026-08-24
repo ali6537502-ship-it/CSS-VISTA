@@ -44,7 +44,16 @@ if (process.argv.includes('--artifact')) {
   const workerPath = join(root, 'dist', 'server', 'index.js')
   const worker = await readFile(workerPath, 'utf8')
   assert(worker.includes('/seo/past-papers/') && worker.includes('/seo/past-paper-collections/'), 'Worker does not serve SEO pages at public URLs')
-  await import(`${pathToFileURL(workerPath).href}?audit=${Date.now()}`)
+  assert(!worker.includes("paperMatch[1] + '.html'") && !worker.includes("collectionMatch[2] + '.html'"), 'Worker must request extensionless HTML assets so public URLs do not redirect')
+  const workerModule = await import(`${pathToFileURL(workerPath).href}?audit=${Date.now()}`)
+  const requestedAssetPaths = []
+  const mockEnv = { ASSETS: { fetch: async (request) => {
+    requestedAssetPaths.push(new URL(request.url).pathname)
+    return new Response('<!doctype html><div id="root"></div>', { headers: { 'content-type': 'text/html' } })
+  } } }
+  const routeResponse = await workerModule.default.fetch(new Request('https://css-vista.ali6537.chatgpt.site/past-papers/css/2023', { headers: { accept: 'text/html' } }), mockEnv)
+  assert(routeResponse.status === 200, 'Public collection route must resolve without a redirect')
+  assert(requestedAssetPaths[0] === '/seo/past-paper-collections/css/2023', 'Public collection route must resolve through the extensionless packaged asset path')
 }
 
 console.log(`Past-paper SEO audit passed: ${papers.length} direct paper records${process.argv.includes('--artifact') ? ' and generated crawlable pages' : ''}.`)
