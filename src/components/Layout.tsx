@@ -154,6 +154,7 @@ function NotificationBar() {
     ...mockNotices,
     { id: 'test-series', kind: 'platform' as const, text: 'Customized CSS written test series by Miss Sadia Zahoor, PAS', link: '/test-series' },
     { id: 'instagram-posts', kind: 'platform' as const, text: 'Follow CSS Vista on Instagram for preparation posts', link: site.instagram },
+    { id: 'suggestion', kind: 'platform' as const, text: 'Want to suggest a change that benefits CSS preparation and this website? Message us on Instagram—the CSS Vista team will work on it.', link: site.instagram },
   ]
 
   useEffect(() => {
@@ -203,7 +204,7 @@ function NotificationBar() {
                 aria-hidden={duplicate || undefined}
               >
                 {active.map((item) => {
-                  const className = "group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs text-emerald-50/90 outline-none hover:text-white focus:text-white sm:text-[13px]"
+                  const className = `group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs outline-none hover:text-white focus:text-white sm:text-[13px] ${item.id === 'suggestion' ? 'font-semibold text-amber-200' : 'text-emerald-50/90'}`
                   const content = <>
                     <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.id === 'instagram-posts' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
                     <span className="underline-offset-2 group-hover:underline group-focus:underline">
@@ -230,7 +231,6 @@ function NotificationBar() {
         </div>
         <SocialLinks compact />
       </div>
-      <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="block bg-amber-300 px-3 py-1 text-center text-[10px] font-bold leading-snug text-emerald-950 hover:bg-amber-200 sm:text-xs">Want to suggest a change that benefits CSS preparation and this website? Message us on Instagram—the CSS Vista team will work on it.</a>
     </div>
   )
 }
