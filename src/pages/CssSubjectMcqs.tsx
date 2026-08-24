@@ -38,7 +38,10 @@ const subjectSlots: SubjectBankSlot[] = [
     kind: 'Optional' as const,
     group: group.group,
   }))),
-]
+].filter((subject) => ![
+  'English Essay',
+  'English (Precis & Composition)',
+].includes(subject.name))
 
 const comparableName = (value: string) => value
   .toLocaleLowerCase()
@@ -249,12 +252,11 @@ export default function CssSubjectMcqs() {
           <div className="grid gap-5 p-5 sm:grid-cols-[1fr_auto] sm:items-center sm:p-7">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-300">CSS written subjects</p>
-              <h2 className="mt-2 max-w-2xl font-display text-xl font-bold leading-tight sm:text-2xl">Focused banks, useful progress, carefully reviewed questions.</h2>
-              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-emerald-100 sm:text-sm">All recoverable questions from the supplied archive load one subject at a time. Answers, bookmarks, timing and mistakes join the same study record used across CSS Vista.</p>
+              <h2 className="mt-2 max-w-2xl font-display text-xl font-bold leading-tight sm:text-2xl">Pick your subject. Challenge your recall. Master the paper.</h2>
             </div>
             <div className="grid grid-cols-2 gap-2 text-center">
               <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.subjects.length ?? '–'}</strong><span className="text-[10px] text-emerald-100">Active subjects</span></div>
-              <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.total.toLocaleString() ?? '–'}</strong><span className="text-[10px] text-emerald-100">Imported MCQs</span></div>
+              <div className="rounded-xl bg-white/10 px-4 py-3"><strong className="block text-xl">{index?.total.toLocaleString() ?? '–'}</strong><span className="text-[10px] text-emerald-100">Practice MCQs</span></div>
             </div>
           </div>
         </section>
@@ -277,7 +279,7 @@ export default function CssSubjectMcqs() {
               const Icon = subject.kind === 'Compulsory' ? BookOpenCheck : Layers3
               return <button key={`${subject.kind}-${subject.slug}`} type="button" disabled={!subject.bank} onClick={() => subject.bank && openSubject(subject.bank)} className={`flex min-h-[78px] items-center gap-3 rounded-xl border bg-white p-3 text-left transition-colors ${subject.bank ? 'hover:border-emerald-700/40 hover:bg-emerald-50/40' : 'cursor-default'}`}>
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><Icon className="h-4 w-4" /></span>
-                <span className="min-w-0 flex-1"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''} · {subject.marks} marks</span><span className="mt-0.5 block text-sm font-bold leading-snug text-slate-900">{subject.name}</span><span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold ${subject.bank ? 'text-emerald-700' : 'text-slate-400'}`}>{subject.bank ? <><CheckCircle2 className="h-3 w-3" /> {subject.bank.count.toLocaleString()} imported MCQs</> : 'No supplied question file'}</span></span>
+                <span className="min-w-0 flex-1"><span className="block text-[10px] font-bold uppercase tracking-wide text-emerald-700">{subject.kind}{subject.group ? ` · Group ${subject.group}` : ''} · {subject.marks} marks</span><span className="mt-0.5 block text-sm font-bold leading-snug text-slate-900">{subject.name}</span><span className={`mt-1 inline-flex items-center gap-1 text-[10px] font-semibold ${subject.bank ? 'text-emerald-700' : 'text-slate-400'}`}>{subject.bank ? <><CheckCircle2 className="h-3 w-3" /> {subject.bank.count.toLocaleString()} practice MCQs</> : 'No supplied question file'}</span></span>
                 {subject.bank && <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700" />}
               </button>
             })}
