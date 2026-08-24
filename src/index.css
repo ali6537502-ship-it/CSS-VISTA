@@ -1629,23 +1629,24 @@
   padding: 1.25rem 1.25rem 0.35rem;
 }
 
-.cssv-home-hero-eyebrow {
+.cssv-home-hero-kicker {
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
+  margin-top: 0.85rem;
   color: #8b671c;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.075em;
   line-height: 1.45;
   text-transform: uppercase;
 }
 
 .cssv-home-hero-title {
-  max-width: 16ch;
-  margin-top: 0.7rem;
+  max-width: 15ch;
+  margin-top: 0;
   color: #0b2d22;
-  font-size: clamp(2rem, 9vw, 3.35rem);
+  font-size: clamp(2.25rem, 9vw, 3.55rem);
   font-weight: 600;
   letter-spacing: -0.045em;
   line-height: 0.98;
@@ -1869,7 +1870,7 @@
   }
 
   .cssv-home-hero-title {
-    font-size: clamp(3.2rem, 4.6vw, 4.65rem);
+    font-size: clamp(3.35rem, 4.7vw, 4.75rem);
   }
 
   .cssv-home-hero-description {
@@ -1903,7 +1904,12 @@
   }
 
   .cssv-home-hero-title {
-    font-size: clamp(1.8rem, 8.8vw, 2.25rem);
+    font-size: clamp(1.95rem, 9vw, 2.4rem);
+  }
+
+  .cssv-home-hero-kicker {
+    font-size: 0.62rem;
+    letter-spacing: 0.055em;
   }
 
   .cssv-home-hero-description {

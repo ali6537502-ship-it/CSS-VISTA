@@ -108,13 +108,13 @@ function HomeHero() {
       aria-labelledby="css-vista-home-title"
     >
       <div className="cssv-home-hero-copy">
-        <p className="cssv-home-hero-eyebrow">
-          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-          Pakistan’s first all-in-one digital ecosystem
-        </p>
         <h1 id="css-vista-home-title" className="cssv-home-hero-title">
-          Built exclusively for <span>competitive exam preparation.</span>
+          Pakistan’s first <span>all-in-one digital ecosystem.</span>
         </h1>
+        <p className="cssv-home-hero-kicker">
+          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+          Built exclusively for competitive exam preparation
+        </p>
         <p className="cssv-home-hero-description">
           MCQs, mocks, past papers, notes, study tools and performance tracking—connected in one intelligent platform.
         </p>
