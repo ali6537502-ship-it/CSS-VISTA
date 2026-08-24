@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
-import { Search, Eye, FileText, PenLine, Bookmark, BookmarkCheck } from 'lucide-react'
+import { Search, Eye, FileText, Bookmark, BookmarkCheck } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
@@ -17,14 +17,6 @@ const optionalGroupBySubject = new Map(
 function groupForPaper(paper: PastPaper) {
   return paper.optionalGroup ?? optionalGroupBySubject.get(paper.subject)
 }
-
-// Recurring-theme guidance (clearly labelled; exact counts come from uploaded papers)
-const repeatedThemes: { subject: string; themes: string[] }[] = [
-  { subject: 'Essay', themes: ['Education crises', 'Democracy & governance', 'Climate change', 'Gender equality', 'Technology & society'] },
-  { subject: 'Pakistan Affairs', themes: ['Ideology of Pakistan', 'Constitutional development', 'Federalism & 18th Amendment', 'Water & economy issues'] },
-  { subject: 'Current Affairs', themes: ['CPEC & geo-economics', 'Afghanistan', 'Climate diplomacy', 'IMF & economy'] },
-  { subject: 'Islamic Studies', themes: ['Seerah as a model', 'Human rights in Islam', 'Ijtihad & modernity'] },
-]
 
 export default function PastPapers() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
@@ -44,8 +36,8 @@ export default function PastPapers() {
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse ${routeExam} ${routeYear} compulsory and optional past-paper records by subject, with direct paper pages and verified question text where recoverable.`
-    : 'CSS, PMS and PPSC papers organised by examination, subject and year, with direct paper pages and verified question text where recoverable.'
+    ? `Browse ${routeExam} ${routeYear} compulsory and optional watermarked past-paper PDFs by subject.`
+    : 'Owner-provided watermarked CSS, PMS and PPSC past-paper PDFs organised by examination, subject and year.'
 
   useEffect(() => {
     const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
@@ -255,35 +247,6 @@ export default function PastPapers() {
           </div>
         )}
 
-        {/* Attempt mode */}
-        <div className="rounded-lg border bg-white p-5">
-          <h2 className="font-semibold text-foreground">Attempt mode</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Practise answer writing under exam time while the paper archive grows:
-          </p>
-          <Link to="/answer-writing" className="mt-3 inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-            <PenLine className="h-4 w-4" /> Open answer-writing practice
-          </Link>
-        </div>
-
-        {/* Repeated themes (guidance) */}
-        <section>
-          <h2 className="font-display text-lg font-bold text-pine">Recurring themes - guidance</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Frequently recurring areas in recent compulsory papers (guidance only, not extracted counts).</p>
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
-            {repeatedThemes.map((t) => (
-              <div key={t.subject} className="rounded-lg border bg-white p-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold">{t.subject}</h3>
-                  <Badge tone="gold">Guidance</Badge>
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {t.themes.map((th) => <span key={th} className="rounded-full bg-secondary px-2.5 py-1 text-xs">{th}</span>)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
     </div>
   )
