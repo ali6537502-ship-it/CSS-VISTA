@@ -169,9 +169,11 @@ export async function trashFactbookCategoryTree(userId: string, rootId: string, 
 export async function restoreFactbookCategoryTree(userId: string, rootId: string, categories: FactbookCategory[]) {
   const client = await requireClient()
   const ids = categoryTreeIds(rootId, categories)
+  const deletedAt = categories.find((category) => category.id === rootId)?.deleted_at
+  if (!deletedAt) throw new Error('This category tree is not currently in Trash.')
   const [{ error: categoryError }, { error: entryError }] = await Promise.all([
-    client.from('factbook_categories').update({ deleted_at: null }).eq('user_id', userId).in('id', ids),
-    client.from('factbook_entries').update({ deleted_at: null }).eq('user_id', userId).in('category_id', ids),
+    client.from('factbook_categories').update({ deleted_at: null }).eq('user_id', userId).in('id', ids).eq('deleted_at', deletedAt),
+    client.from('factbook_entries').update({ deleted_at: null }).eq('user_id', userId).in('category_id', ids).eq('deleted_at', deletedAt),
   ])
   if (categoryError || entryError) throw new Error(messageFrom(categoryError ?? entryError, 'The category tree could not be restored.'))
 }
