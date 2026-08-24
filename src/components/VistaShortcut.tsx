@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router'
 import {
-  ArrowLeft, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2,
+  Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
   NotebookPen, Pause, Play, Plus, RotateCcw, Search, Settings2, StickyNote,
   Trash2, X,
 } from 'lucide-react'
@@ -168,9 +168,9 @@ export default function VistaShortcut() {
       {activeTool && (
         <section key={activeTool.id} className="cssv-vista-shortcut-tool-panel mb-3 w-[min(22rem,calc(100vw-1.5rem))] overflow-hidden rounded-[1.35rem] border border-white/90 bg-white/95 p-3 shadow-2xl backdrop-blur-xl" aria-label={`${activeTool.label} shortcut tool`}>
           <div className="flex items-center gap-2 border-b px-1 pb-3">
-            <button type="button" onClick={() => { setActiveId(null); setMenuOpen(true) }} className="grid h-8 w-8 shrink-0 place-items-center rounded-full border bg-white text-pine" aria-label="Back to all shortcuts"><ArrowLeft className="h-4 w-4" /></button>
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><activeTool.icon className="h-4 w-4" /></span>
             <div className="min-w-0 flex-1"><p className="truncate text-xs font-extrabold text-pine">{activeTool.label}</p><p className="truncate text-[9px] text-muted-foreground">VISTA SHORTCUT</p></div>
+            <button type="button" onClick={() => { setActiveId(null); setMenuOpen(true) }} className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-emerald-100 bg-emerald-50/80 px-2.5 text-[10px] font-bold text-emerald-800 transition-colors hover:bg-emerald-100" aria-label="Show all shortcuts"><Grid2X2 className="h-3.5 w-3.5" /> All</button>
             <button type="button" onClick={closeEverything} className="grid h-8 w-8 shrink-0 place-items-center rounded-full border bg-white text-pine" aria-label={`Close ${activeTool.label}`}><X className="h-4 w-4" /></button>
           </div>
 
