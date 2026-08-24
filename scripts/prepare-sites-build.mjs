@@ -22,7 +22,42 @@ for (const entry of await readdir(publicDir, { withFileTypes: true })) {
 }
 
 const clientIndex = await readFile(indexPath, 'utf8')
+const pastPaperAnalysis = JSON.parse(await readFile(join(publicDir, 'css-past-paper-analysis.json'), 'utf8'))
 await mkdir(serverDir, { recursive: true })
+
+const analysisSubjectAliases = new Map([
+  ['essay', 'english essay'],
+  ['precis & composition', 'english (precis and composition)'],
+  ['accounting & auditing', 'accountancy & auditing'],
+  ['environmental sciences', 'environmental science'],
+])
+
+function normalized(value) {
+  return String(value).normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ').trim()
+}
+
+function normalizedPaperLabel(value) {
+  return normalized(value).replace('paper one', 'paper i').replace('paper two', 'paper ii')
+}
+
+function analysisForPaper(paper) {
+  if (paper.examination !== 'CSS') return { subjectSlug: '', questions: [] }
+  const requested = analysisSubjectAliases.get(normalized(paper.subject)) ?? normalized(paper.subject)
+  const subject = pastPaperAnalysis.subjects.find((item) => normalized(item.name) === requested)
+  if (!subject) return { subjectSlug: '', questions: [] }
+  const questions = subject.sections.flatMap((section) => section.topics.flatMap((topic) => topic.questions
+    .filter((question) => question.year === paper.year && (
+      paper.paper === 'Single Paper'
+      || paper.paper === 'Combined Papers'
+      || normalizedPaperLabel(question.paper) === normalizedPaperLabel(paper.paper)
+    ))
+    .map((question) => ({ ...question, topic: topic.title }))))
+  return {
+    subjectSlug: subject.slug,
+    questions: [...new Map(questions.map((question) => [question.id, question])).values()]
+      .sort((left, right) => Number.parseInt(left.number.replace(/\D/g, ''), 10) - Number.parseInt(right.number.replace(/\D/g, ''), 10)),
+  }
+}
 
 function escapeHtml(value) {
   return String(value)
@@ -59,17 +94,23 @@ function paperTitle(paper) {
 }
 
 function paperDescription(paper) {
-  return `View and download the original ${paper.examination} ${paper.year} ${paper.subject} ${paper.paper.toLowerCase()} past paper. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
+  return `Explore the ${paper.examination} ${paper.year} ${paper.subject} ${paper.paper.toLowerCase()} past-paper record, with verified question text where recoverable. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
 }
 
-function paperBody(paper) {
+function paperBody(paper, analysis) {
   const title = paperTitle(paper)
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl><div class="mt-5 flex flex-wrap gap-3"><a href="${escapeHtml(paper.fileUrl)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">View original PDF</a><a href="/past-papers/${paper.examination.toLowerCase()}/${paper.year}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${paper.examination} ${paper.year} papers</a></div></main>`
+  const questionList = analysis.questions.length
+    ? `<section class="mt-6"><h2 class="font-display text-2xl font-bold text-pine">Verified questions recovered for ${paper.year}</h2><ol class="mt-4 space-y-3">${analysis.questions.map((question) => `<li class="rounded-xl border bg-white p-4"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(question.number)} · ${escapeHtml(question.paper)} · ${escapeHtml(question.topic)}</p><p class="mt-2 text-sm leading-7">${escapeHtml(question.text)}</p></li>`).join('')}</ol></section>`
+    : '<p class="mt-6 rounded-xl border bg-white p-4 text-sm">No reliable question transcription was recovered for this source record. It remains listed for archive completeness without invented content.</p>'
+  const analysisLink = analysis.subjectSlug
+    ? `<a href="/css-past-paper-analysis?subject=${encodeURIComponent(analysis.subjectSlug)}&year=${paper.year}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Topic-wise analysis</a>`
+    : ''
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl>${questionList}<div class="mt-5 flex flex-wrap gap-3">${analysisLink}<a href="/past-papers/${paper.examination.toLowerCase()}/${paper.year}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${paper.examination} ${paper.year} papers</a></div></main>`
 }
 
 function collectionBody(examination, year, papers) {
   const links = papers.map((paper) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${paper.id}">${escapeHtml(paperTitle(paper))}</a></li>`).join('')
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Complete year collection</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${examination} ${year} Past Papers</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">Browse ${papers.length} original ${examination} ${year} compulsory and optional past papers by subject, with direct viewing and download access.</p><ul class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2">${links}</ul><a class="mt-5 inline-block font-bold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete past-paper archive</a></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Complete year collection</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${examination} ${year} Past Papers</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">Browse ${papers.length} ${examination} ${year} compulsory and optional past-paper records by subject, with direct pages and verified question text where recoverable.</p><ul class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2">${links}</ul><a class="mt-5 inline-block font-bold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete past-paper archive</a></main>`
 }
 
 const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
@@ -82,6 +123,7 @@ for (const paper of pastPapers) {
   const canonical = `${siteOrigin}/past-papers/view/${paper.id}`
   const title = `${paperTitle(paper)} | CSS Vista`
   const description = paperDescription(paper)
+  const analysis = analysisForPaper(paper)
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'DigitalDocument',
@@ -97,7 +139,7 @@ for (const paper of pastPapers) {
     provider: { '@type': 'Organization', name: 'CSS Vista', url: siteOrigin },
   }
   await writeFile(join(paperSeoDir, `${paper.id}.html`), replaceMeta(clientIndex, {
-    title, description, canonical, structuredData, body: paperBody(paper),
+    title, description, canonical, structuredData, body: paperBody(paper, analysis),
   }))
 }
 
@@ -112,7 +154,7 @@ for (const [key, papers] of collections) {
   const year = Number(rawYear)
   const canonical = `${siteOrigin}/past-papers/${examSlug}/${year}`
   const title = `${examination} ${year} Past Papers — All Subjects | CSS Vista`
-  const description = `Browse and download ${papers.length} original ${examination} ${year} past papers for compulsory and optional subjects on CSS Vista.`
+  const description = `Browse ${papers.length} ${examination} ${year} past-paper records for compulsory and optional subjects, with direct pages and verified question text where recoverable.`
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -194,11 +236,11 @@ export default {
       return Response.redirect(repositoryAsset, 302)
     }
 
-    if (
-      response.status === 404
-      && request.method === 'GET'
-      && request.headers.get('accept')?.includes('text/html')
-    ) {
+    const documentNavigation = request.method === 'GET' && (
+      request.headers.get('accept')?.includes('text/html')
+      || !/\\.[a-z0-9]{1,8}$/i.test(url.pathname)
+    )
+    if (response.status === 404 && documentNavigation) {
       response = await fetchPackagedAsset(new Request(new URL('/index.html', url), request), env)
     }
 

@@ -26,6 +26,8 @@ if (process.argv.includes('--artifact')) {
   assert(sample.includes('rel="canonical" href="https://css-vista.ali6537.chatgpt.site/past-papers/view/css-2023-current-affairs"'), 'Direct paper canonical URL is missing')
   assert(sample.includes('<h1') && sample.includes('CSS 2023 Current Affairs Past Paper'), 'Direct paper content is not present in HTML')
   assert(sample.includes('"@type":"DigitalDocument"'), 'Direct paper structured data is missing')
+  assert(sample.includes('Verified questions recovered for 2023'), 'Direct paper HTML lacks the supplied question transcription')
+  assert(!sample.includes('href="/past-papers/2023/Current-Affairs-2023.pdf"'), 'Direct paper HTML must not advertise an unavailable source file')
   assert(!sample.includes('property="og:image"') && !sample.includes('name="twitter:image"'), 'Detail pages must not inherit the generic social image')
 
   const collection = await readFile(join(clientDir, 'seo', 'past-paper-collections', 'css', '2023.html'), 'utf8')
@@ -54,6 +56,16 @@ if (process.argv.includes('--artifact')) {
   const routeResponse = await workerModule.default.fetch(new Request('https://css-vista.ali6537.chatgpt.site/past-papers/css/2023', { headers: { accept: 'text/html' } }), mockEnv)
   assert(routeResponse.status === 200, 'Public collection route must resolve without a redirect')
   assert(requestedAssetPaths[0] === '/seo/past-paper-collections/css/2023', 'Public collection route must resolve through the extensionless packaged asset path')
+
+  const appAssetPaths = []
+  const appMockEnv = { ASSETS: { fetch: async (request) => {
+    const pathname = new URL(request.url).pathname
+    appAssetPaths.push(pathname)
+    if (pathname.endsWith('/index.html')) return new Response('<!doctype html><div id="root"></div>', { headers: { 'content-type': 'text/html' } })
+    return new Response('Not found', { status: 404 })
+  } } }
+  const appRouteResponse = await workerModule.default.fetch(new Request('https://css-vista.ali6537.chatgpt.site/games'), appMockEnv)
+  assert(appRouteResponse.status === 200 && appAssetPaths.some((pathname) => pathname.endsWith('/index.html')), 'Extensionless app routes must resolve without relying on a browser-specific Accept header')
 }
 
 console.log(`Past-paper SEO audit passed: ${papers.length} direct paper records${process.argv.includes('--artifact') ? ' and generated crawlable pages' : ''}.`)

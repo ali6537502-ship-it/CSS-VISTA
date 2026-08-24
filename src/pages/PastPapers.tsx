@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
-import { Search, Download, Eye, FileText, PenLine, Bookmark, BookmarkCheck } from 'lucide-react'
+import { Search, Eye, FileText, PenLine, Bookmark, BookmarkCheck } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
@@ -44,8 +44,8 @@ export default function PastPapers() {
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse original ${routeExam} ${routeYear} compulsory and optional past papers by subject, with direct view and download access.`
-    : 'CSS, PMS and PPSC papers organised by examination, subject and year, with direct view and download controls.'
+    ? `Browse ${routeExam} ${routeYear} compulsory and optional past-paper records by subject, with direct paper pages and verified question text where recoverable.`
+    : 'CSS, PMS and PPSC papers organised by examination, subject and year, with direct paper pages and verified question text where recoverable.'
 
   useEffect(() => {
     const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
@@ -243,7 +243,6 @@ export default function PastPapers() {
                           >
                             <Eye className="h-4 w-4" /> View
                           </Link>
-                          <a href={p.fileUrl} download data-google-vignette="false" className="inline-flex items-center gap-1.5 rounded-md bg-pine px-3 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><Download className="h-4 w-4" /> Download</a>
                         </div>
                       ) : (
                         <span className="text-xs text-muted-foreground">File being uploaded</span>
