@@ -1,4 +1,7 @@
+import { useState } from 'react'
 import { PageHeader, Section, OfficialNotice } from '@/components/shared'
+import QuestionPagination from '@/components/QuestionPagination'
+import { questionPageRange } from '@/lib/questionPagination'
 
 const sections = [
   {
@@ -41,6 +44,10 @@ const mockQuestions = [
 const servicePrefs = ['Pakistan Administrative Service', 'Police Service of Pakistan', 'Foreign Service of Pakistan', 'Inland Revenue Service', 'Pakistan Customs Service', 'Audit & Accounts', 'Information Group', 'Office Management Group', 'Commerce & Trade', 'ML&C', 'Postal', 'Railways (C&T)']
 
 export default function PsychViva() {
+  const [questionPage, setQuestionPage] = useState(1)
+  const questionRange = questionPageRange(questionPage, mockQuestions.length)
+  const visibleMockQuestions = mockQuestions.slice(questionRange.start, questionRange.end)
+
   return (
     <div>
       <PageHeader title="Psychological Assessment & Viva Voce" description="What the final stages actually assess, how to prepare honestly, and how to avoid the classic mistakes. Viva carries 300 marks - it can rescue or sink a written score." />
@@ -63,12 +70,13 @@ export default function PsychViva() {
 
         <Section title="Mock interview questions" description="Practise aloud with a timer; record and review yourself.">
           <div className="grid gap-2 md:grid-cols-2">
-            {mockQuestions.map((q, i) => (
+            {visibleMockQuestions.map((q, i) => (
               <div key={q} className="rounded-md border bg-white px-4 py-3 text-sm">
-                <span className="mr-2 font-display font-bold text-pine">{i + 1}.</span> {q}
+                <span className="mr-2 font-display font-bold text-pine">{questionRange.start + i + 1}.</span> {q}
               </div>
             ))}
           </div>
+          <QuestionPagination currentPage={questionPage} totalItems={mockQuestions.length} onPageChange={setQuestionPage} itemLabel="Mock interview questions" className="mt-5" />
         </Section>
 
         <Section title="Service-group awareness worksheet" description="For your top three preferences, write one line each: role, first posting, one skill you bring.">

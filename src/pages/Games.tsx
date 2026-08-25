@@ -269,7 +269,6 @@ function bankQuestionToQuiz(question: BankQuestion, index: number): Question {
 
 function BankMarathonGame() {
   const [questions, setQuestions] = useState<Question[]>([])
-  const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(true)
   const [refresh, setRefresh] = useState(0)
 
@@ -278,14 +277,13 @@ function BankMarathonGame() {
     setLoading(true)
     getBankIndex()
       .then((index) => sampleQuestions(index.categories.filter((category) => category.mpt).map((category) => category.slug), 100))
-      .then((rows) => { if (active) { setQuestions(rows.map(bankQuestionToQuiz)); setPage(0) } })
+      .then((rows) => { if (active) setQuestions(rows.map(bankQuestionToQuiz)) })
       .finally(() => active && setLoading(false))
     return () => { active = false }
   }, [refresh])
 
   if (loading) return <div className="grid place-items-center rounded-xl border bg-white py-20"><Loader2 className="h-7 w-7 animate-spin text-pine" /><p className="mt-2 text-sm text-muted-foreground">Building a fresh 100-question game…</p></div>
-  const pageQuestions = questions.slice(page * 10, page * 10 + 10)
-  return <div><div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-3"><div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">10 pages · 10 questions each</p><p className="text-sm font-bold text-pine">Page {page + 1} of 10</p></div><button type="button" onClick={() => setRefresh((value) => value + 1)} className="inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-emerald-800"><RotateCcw className="h-4 w-4" /> Refresh all questions</button><div className="flex flex-wrap gap-1">{Array.from({ length: 10 }, (_, index) => <button key={index} type="button" onClick={() => setPage(index)} className={`grid h-8 w-8 place-items-center rounded-md text-xs font-bold ${page === index ? 'bg-pine text-white' : 'bg-secondary text-pine'}`}>{index + 1}</button>)}</div></div>{pageQuestions.length ? <QuizEngine key={`${refresh}-${page}`} questions={pageQuestions} mode="game" category={`Bank Marathon · Page ${page + 1}`} timePerQuestion={30} /> : <p className="rounded-xl border bg-white p-8 text-center text-sm text-muted-foreground">This page could not be loaded. Refresh the bank.</p>}</div>
+  return <div><div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-3"><div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">100-question attempt · 10 questions per page</p><p className="text-sm font-bold text-pine">One continuous score, timer and review</p></div><button type="button" onClick={() => setRefresh((value) => value + 1)} className="inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-emerald-800"><RotateCcw className="h-4 w-4" /> Refresh all questions</button></div>{questions.length ? <QuizEngine key={refresh} questions={questions} mode="game" category="100-Question Bank Marathon" timePerQuestion={30} /> : <p className="rounded-xl border bg-white p-8 text-center text-sm text-muted-foreground">This game could not be loaded. Refresh the bank.</p>}</div>
 }
 
 type ActiveGame = { kind: 'quiz'; title: string; qs: Question[] } | { kind: 'timeline'; title: string; items: { event: string; year: number }[]; id: string } | { kind: 'match'; title: string; pairs: { concept: string; match: string }[]; id: string } | { kind: 'bank'; title: string } | null

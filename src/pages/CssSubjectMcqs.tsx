@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import McqCard from '@/components/McqCard'
+import QuestionPagination from '@/components/QuestionPagination'
 import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 import {
   cssSubjectSlug, getCssSubjectMcqBank, getCssSubjectMcqIndex, toBankQuestion,
@@ -13,6 +14,7 @@ import {
 import type { BankQuestion } from '@/data/mcq'
 import { getAttempt, savedMcqIds } from '@/lib/progress'
 import { usePageBack } from '@/lib/backNavigation'
+import { clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 
 type View = 'all' | 'compulsory' | 'optional'
 type PracticeMode = 'topic' | 'unanswered' | 'incorrect' | 'saved'
@@ -64,7 +66,7 @@ export default function CssSubjectMcqs() {
   const [withinQuery, setWithinQuery] = useState('')
   const [topic, setTopic] = useState('All topics')
   const [mode, setMode] = useState<PracticeMode>('topic')
-  const [cursor, setCursor] = useState(0)
+  const [page, setPage] = useState(1)
   const [progressVersion, setProgressVersion] = useState(0)
 
   const closeSubject = () => {
@@ -116,17 +118,16 @@ export default function CssSubjectMcqs() {
     // progressVersion refreshes the filters after answers, saves and mistake actions.
   }, [bank, mode, progressVersion, topic, withinQuery])
 
-  const currentQuestion = visibleQuestions[cursor]
-  const currentSource = currentQuestion
-    ? rawBank.find((question) => question.id === currentQuestion.id)
-    : null
+  const range = questionPageRange(page, visibleQuestions.length)
+  const pageQuestions = visibleQuestions.slice(range.start, range.end)
   const answeredCount = bank.filter((question) => Boolean(getAttempt(question.id))).length
   const correctCount = bank.filter((question) => getAttempt(question.id)?.c).length
 
-  useEffect(() => setCursor(0), [mode, topic, withinQuery])
+  useEffect(() => setPage(1), [mode, topic, withinQuery])
   useEffect(() => {
-    if (cursor >= visibleQuestions.length) setCursor(Math.max(0, visibleQuestions.length - 1))
-  }, [cursor, visibleQuestions.length])
+    const safePage = clampQuestionPage(page, visibleQuestions.length)
+    if (safePage !== page) setPage(safePage)
+  }, [page, visibleQuestions.length])
 
   function chooseView(next: View) {
     setView(next)
@@ -140,7 +141,7 @@ export default function CssSubjectMcqs() {
     setTopic('All topics')
     setMode('topic')
     setWithinQuery('')
-    setCursor(0)
+    setPage(1)
     try {
       const questions = await getCssSubjectMcqBank(subject)
       setRawBank(questions)
@@ -215,29 +216,27 @@ export default function CssSubjectMcqs() {
               <button type="button" onClick={() => openSubject(selected)} className="mt-3 rounded-lg border border-red-300 bg-white px-4 py-2 font-bold">Retry</button>
             </div>
           )}
-          {!loading && !error && currentQuestion && (
-            <section className="mx-auto mt-5 max-w-4xl" aria-label="Current subject question">
-              <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-                <span>Question {cursor + 1} of {visibleQuestions.length}</span>
-                <span>{currentQuestion.s}</span>
+          {!loading && !error && pageQuestions.length > 0 && (
+            <section className="mx-auto mt-5 max-w-4xl" aria-label="Current subject questions">
+              <div className="space-y-4">
+                {pageQuestions.map((question, index) => {
+                  const source = rawBank.find((item) => item.id === question.id)
+                  return (
+                    <div key={question.id}>
+                      <McqCard q={question} num={range.start + index + 1} catName={selected.name} onAction={() => setProgressVersion((value) => value + 1)} />
+                      {source && (
+                        <p className="mt-2 rounded-lg bg-secondary/50 px-3 py-2 text-[11px] leading-relaxed text-muted-foreground">
+                          Supplied academic source: {source.source || source.sourceDocument}. Use Report on the question if an answer needs review.
+                        </p>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
-              <McqCard q={currentQuestion} num={cursor + 1} catName={selected.name} onAction={() => setProgressVersion((value) => value + 1)} />
-              {currentSource && (
-                <p className="mt-2 rounded-lg bg-secondary/50 px-3 py-2 text-[11px] leading-relaxed text-muted-foreground">
-                  Supplied academic source: {currentSource.source || currentSource.sourceDocument}. Use Report on the question if an answer needs review.
-                </p>
-              )}
-              <div className="mt-4 flex items-center justify-between gap-3">
-                <button type="button" disabled={cursor === 0} onClick={() => setCursor((value) => Math.max(0, value - 1))} className="inline-flex min-h-11 items-center gap-1 rounded-lg border bg-white px-4 text-sm font-bold disabled:opacity-40">
-                  <ArrowLeft className="h-4 w-4" /> Previous
-                </button>
-                <button type="button" disabled={cursor >= visibleQuestions.length - 1} onClick={() => setCursor((value) => Math.min(visibleQuestions.length - 1, value + 1))} className="inline-flex min-h-11 items-center gap-1 rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:opacity-40">
-                  Next <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
+              <QuestionPagination currentPage={page} totalItems={visibleQuestions.length} onPageChange={setPage} className="mt-6" />
             </section>
           )}
-          {!loading && !error && !currentQuestion && (
+          {!loading && !error && pageQuestions.length === 0 && (
             <div className="mt-5 rounded-xl border border-dashed bg-white p-10 text-center">
               <RotateCcw className="mx-auto h-6 w-6 text-emerald-800" />
               <p className="mt-2 text-sm font-semibold text-pine">No questions in this view</p>

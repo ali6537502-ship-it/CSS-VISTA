@@ -5,28 +5,33 @@ import { recordQuizResult, toggleBookmark, isBookmarked } from '@/lib/store'
 import { Badge } from './shared'
 import { isRtlText } from '@/lib/utils'
 import { recordQuestionTiming } from '@/lib/progress'
+import QuestionPagination from '@/components/QuestionPagination'
+import { QUESTIONS_PER_PAGE, questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 
 interface Props {
   questions: Question[]
   mode: 'mpt' | 'game' | 'quiz' | 'challenge'
   category: string
-  timePerQuestion?: number // seconds; 0 = untimed
+  timePerQuestion?: number
   negativeMarking?: boolean
   onDone?: (score: number, total: number) => void
 }
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
+  for (let i = a.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[a[i], a[j]] = [a[j], a[i]]
   }
   return a
 }
 
+const fmt = (seconds: number) => `${String(Math.floor(Math.max(0, seconds) / 60)).padStart(2, '0')}:${String(Math.max(0, seconds) % 60).padStart(2, '0')}`
+
 export default function QuizEngine({ questions, mode, category, timePerQuestion = 0, negativeMarking = false, onDone }: Props) {
   const [qs, setQs] = useState<Question[]>([])
-  const [idx, setIdx] = useState(0)
+  const [page, setPage] = useState(1)
+  const [reviewPage, setReviewPage] = useState(1)
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
@@ -34,65 +39,88 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({})
   const [retryWrong, setRetryWrong] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const questionStartedAtRef = useRef(Date.now())
-
+  const questionStartedAtRef = useRef<Record<number, number>>({})
   const totalTime = timePerQuestion * qs.length
+  const range = questionPageRange(page, qs.length)
+  const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
+  const answeredCount = Object.keys(answers).length
 
   useEffect(() => {
     setQs(shuffle(questions))
-    const bm: Record<number, boolean> = {}
-    questions.forEach((q) => (bm[q.id] = isBookmarked(`q-${q.id}`)))
-    setBookmarked(bm)
+    const saved: Record<number, boolean> = {}
+    questions.forEach((question) => { saved[question.id] = isBookmarked(`q-${question.id}`) })
+    setBookmarked(saved)
   }, [questions])
 
   useEffect(() => {
-    if (started && !finished) {
-      timerRef.current = setInterval(() => setSeconds((s) => s + 1), 1000)
-      return () => { if (timerRef.current) clearInterval(timerRef.current) }
-    }
+    if (!started || finished) return
+    timerRef.current = setInterval(() => setSeconds((value) => value + 1), 1000)
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
   }, [started, finished])
 
   useEffect(() => {
-    questionStartedAtRef.current = Date.now()
-  }, [idx, started, finished])
+    if (!started || finished) return
+    const now = Date.now()
+    pageQuestions.forEach((question) => {
+      if (!questionStartedAtRef.current[question.id]) questionStartedAtRef.current[question.id] = now
+    })
+  }, [finished, pageQuestions, started])
 
   useEffect(() => {
     if (started && totalTime > 0 && seconds >= totalTime && !finished) finish()
+    // finish intentionally follows the latest timer tick.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds])
 
   const wrongQuestions = useMemo(
-    () => qs.filter((q) => answers[q.id] !== undefined && answers[q.id] !== q.answer),
-    [qs, answers]
+    () => qs.filter((question) => answers[question.id] !== undefined && answers[question.id] !== question.answer),
+    [answers, qs],
   )
 
   function start(onlyWrong = false) {
     const base = onlyWrong ? wrongQuestions : questions
-    setQs(shuffle(base))
+    const next = shuffle(base)
+    setQs(next)
     setAnswers({})
-    setIdx(0)
+    setPage(1)
+    setReviewPage(1)
     setSeconds(0)
     setFinished(false)
     setStarted(true)
     setRetryWrong(onlyWrong)
-    questionStartedAtRef.current = Date.now()
+    questionStartedAtRef.current = {}
+    const now = Date.now()
+    next.slice(0, QUESTIONS_PER_PAGE).forEach((question) => { questionStartedAtRef.current[question.id] = now })
   }
 
-  function chooseAnswer(q: Question, optionIndex: number) {
-    if (answers[q.id] === undefined) {
+  function chooseAnswer(question: Question, optionIndex: number) {
+    if (answers[question.id] === undefined) {
+      const beganAt = questionStartedAtRef.current[question.id] ?? Date.now()
       recordQuestionTiming({
-        questionId: `q-${q.id}`,
+        questionId: `q-${question.id}`,
         category,
         mode,
-        seconds: Math.max(1, Math.round((Date.now() - questionStartedAtRef.current) / 1000)),
-        correct: optionIndex === q.answer,
+        seconds: Math.max(1, Math.round((Date.now() - beganAt) / 1000)),
+        correct: optionIndex === question.answer,
       })
     }
-    setAnswers((current) => ({ ...current, [q.id]: optionIndex }))
+    setAnswers((current) => ({ ...current, [question.id]: optionIndex }))
+  }
+
+  function computeScore() {
+    let correct = 0
+    let wrong = 0
+    for (const question of qs) {
+      if (answers[question.id] === question.answer) correct += 1
+      else if (answers[question.id] !== undefined) wrong += 1
+    }
+    const final = negativeMarking ? Math.max(0, correct - wrong * 0.25) : correct
+    return { correct, wrong, final: Math.round(final * 100) / 100 }
   }
 
   function finish() {
     setFinished(true)
+    setReviewPage(1)
     if (timerRef.current) clearInterval(timerRef.current)
     const score = computeScore()
     recordQuizResult({
@@ -100,36 +128,32 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
       category: retryWrong ? `${category} (retry)` : category,
       score: score.correct,
       total: qs.length,
-      wrongTopics: wrongQuestions.map((q) => q.category),
+      wrongTopics: wrongQuestions.map((question) => question.category),
     })
     onDone?.(score.correct, qs.length)
   }
 
-  function computeScore() {
-    let correct = 0, wrong = 0
-    for (const q of qs) {
-      if (answers[q.id] === q.answer) correct++
-      else if (answers[q.id] !== undefined) wrong++
-    }
-    const final = negativeMarking ? Math.max(0, correct - wrong * 0.25) : correct
-    return { correct, wrong, final: Math.round(final * 100) / 100 }
+  function goToPage(nextPage: number) {
+    setPage(nextPage)
+    window.requestAnimationFrame(() => document.getElementById('quiz-question-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
   }
 
-  const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+  function goToQuestion(index: number) {
+    const nextPage = questionPageForIndex(index)
+    setPage(nextPage)
+    window.setTimeout(() => document.getElementById(`quiz-question-${index + 1}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0)
+  }
 
-  // ---------- Screens ----------
   if (!started) {
     return (
       <div className="rounded-lg border bg-white p-6 text-center">
         <h3 className="font-display text-lg font-bold text-pine">{category}</h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          {qs.length} questions{totalTime > 0 ? ` · ${fmt(totalTime)} total` : ' · untimed'}
+          {qs.length} questions · {Math.max(1, Math.ceil(qs.length / QUESTIONS_PER_PAGE))} page{qs.length > QUESTIONS_PER_PAGE ? 's' : ''}{totalTime > 0 ? ` · ${fmt(totalTime)} total` : ' · untimed'}
           {negativeMarking ? ' · −0.25 per wrong answer' : ''}
         </p>
-        <p className="mt-1 text-xs text-muted-foreground">Correct answers are shown after submission. Your score is saved locally.</p>
-        <button onClick={() => start()} className="mt-4 h-11 rounded-md bg-pine px-6 text-sm font-semibold text-emerald-50 transition-colors hover:bg-emerald-900">
-          Start test
-        </button>
+        <p className="mt-1 text-xs text-muted-foreground">Ten questions appear per page. Correct answers are shown after submission and your score is saved locally.</p>
+        <button onClick={() => start()} className="mt-4 h-11 rounded-md bg-pine px-6 text-sm font-semibold text-emerald-50 transition-colors hover:bg-emerald-900">Start test</button>
       </div>
     )
   }
@@ -137,58 +161,35 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   if (finished) {
     const score = computeScore()
     const pct = qs.length ? Math.round((score.correct / qs.length) * 100) : 0
+    const reviewRange = questionPageRange(reviewPage, qs.length)
+    const reviewQuestions = qs.slice(reviewRange.start, reviewRange.end)
     return (
       <div className="space-y-5">
         <div className="rounded-lg border bg-white p-6 text-center">
           <div className="font-display text-4xl font-bold text-pine">{score.final}<span className="text-xl text-muted-foreground">/{qs.length}</span></div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {score.correct} correct · {score.wrong} wrong · {qs.length - score.correct - score.wrong} skipped · {pct}% · Time {fmt(seconds)}
-          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{score.correct} correct · {score.wrong} wrong · {qs.length - score.correct - score.wrong} skipped · {pct}% · Time {fmt(seconds)}</p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            <button onClick={() => start()} className="inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-              <RotateCcw className="h-4 w-4" /> New attempt
-            </button>
-            {wrongQuestions.length > 0 && (
-              <button onClick={() => start(true)} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary">
-                <Flag className="h-4 w-4" /> Retry {wrongQuestions.length} wrong
-              </button>
-            )}
+            <button onClick={() => start()} className="inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><RotateCcw className="h-4 w-4" /> New attempt</button>
+            {wrongQuestions.length > 0 && <button onClick={() => start(true)} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary"><Flag className="h-4 w-4" /> Retry {wrongQuestions.length} wrong</button>}
           </div>
         </div>
 
-        <div className="space-y-3">
-          <h4 className="font-semibold text-pine">Review answers</h4>
-          {qs.map((q, i) => {
-            const given = answers[q.id]
-            const ok = given === q.answer
-            const rtl = isRtlText(q.question)
+        <section className="space-y-3" aria-labelledby="quiz-review-heading">
+          <h4 id="quiz-review-heading" className="font-semibold text-pine">Review answers</h4>
+          {reviewQuestions.map((question, index) => {
+            const given = answers[question.id]
+            const ok = given === question.answer
+            const rtl = isRtlText(question.question)
             return (
-              <div key={q.id} className="rounded-lg border bg-white p-4">
+              <div key={question.id} className="rounded-lg border bg-white p-4">
                 <div className="flex items-start gap-2">
                   {ok ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" /> : <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />}
                   <div className="flex-1">
-                    <p
-                      dir={rtl ? 'rtl' : undefined}
-                      lang={rtl ? 'ur' : undefined}
-                      className={`text-sm font-medium text-foreground ${rtl ? 'urdu-text text-right' : ''}`}
-                    >
-                      {i + 1}. {q.question}
-                    </p>
+                    <p dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`text-sm font-medium text-foreground ${rtl ? 'urdu-text text-right' : ''}`}>{reviewRange.start + index + 1}. {question.question}</p>
                     <div className="mt-2 grid gap-1.5">
-                      {q.options.map((o, oi) => {
-                        const optionRtl = isRtlText(o)
-                        return (
-                          <div
-                            key={oi}
-                            dir={optionRtl ? 'rtl' : undefined}
-                            lang={optionRtl ? 'ur' : undefined}
-                            className={`rounded px-2.5 py-1.5 text-[13px] ${optionRtl ? 'urdu-text text-right' : ''} ${
-                              oi === q.answer ? 'bg-emerald-100 font-medium text-emerald-900' : oi === given ? 'bg-red-100 text-red-900' : 'bg-secondary/60 text-muted-foreground'
-                            }`}
-                          >
-                            {o}
-                          </div>
-                        )
+                      {question.options.map((option, optionIndex) => {
+                        const optionRtl = isRtlText(option)
+                        return <div key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} className={`rounded px-2.5 py-1.5 text-[13px] ${optionRtl ? 'urdu-text text-right' : ''} ${optionIndex === question.answer ? 'bg-emerald-100 font-medium text-emerald-900' : optionIndex === given ? 'bg-red-100 text-red-900' : 'bg-secondary/60 text-muted-foreground'}`}>{option}</div>
                       })}
                     </div>
                   </div>
@@ -196,101 +197,65 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
               </div>
             )
           })}
-        </div>
+          <QuestionPagination currentPage={reviewPage} totalItems={qs.length} onPageChange={setReviewPage} className="pt-3" />
+        </section>
       </div>
     )
   }
 
-  const q = qs[idx]
-  const rtl = isRtlText(q.question)
   const remaining = totalTime > 0 ? totalTime - seconds : null
-  const questionElapsed = Math.max(0, Math.round((Date.now() - questionStartedAtRef.current) / 1000))
-
   return (
-    <div className="rounded-lg border bg-white">
-      <div className="flex flex-wrap items-center gap-3 border-b px-4 py-3">
-        <span className="text-sm font-semibold text-pine">Question {idx + 1} of {qs.length}</span>
-        <Badge tone="gray">{q.difficulty}</Badge>
-        <div className="ml-auto flex items-center gap-3">
-          <button
-            aria-label="Bookmark question"
-            onClick={() => {
-              const now = toggleBookmark(`q-${q.id}`)
-              setBookmarked((b) => ({ ...b, [q.id]: now }))
-            }}
-            className="rounded p-1 hover:bg-secondary"
-          >
-            {bookmarked[q.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-800" /> : <Bookmark className="h-4 w-4 text-muted-foreground" />}
-          </button>
-          <span className={`inline-flex items-center gap-1 text-sm font-medium ${remaining !== null && remaining < 60 ? 'text-red-600' : 'text-muted-foreground'}`}>
-            <Clock className="h-4 w-4" /> {remaining !== null ? fmt(remaining) : fmt(seconds)}
-          </span>
-          <span className="rounded bg-secondary px-2 py-1 font-mono text-[11px] font-semibold text-pine" title="Time spent on this question">
-            Q {fmt(questionElapsed)}
-          </span>
+    <div className="space-y-4">
+      <section className="sticky top-14 z-20 rounded-lg border bg-white/95 p-3 shadow-sm backdrop-blur" aria-label="Test progress">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm font-semibold text-pine">Questions {range.start + 1}–{range.end} of {qs.length}</span>
+          <span className="text-xs font-medium text-muted-foreground">{answeredCount} answered · {qs.length - answeredCount} remaining</span>
+          <span className={`ml-auto inline-flex items-center gap-1 text-sm font-bold ${remaining !== null && remaining < 60 ? 'text-red-600' : 'text-pine'}`}><Clock className="h-4 w-4" /> {remaining !== null ? fmt(remaining) : fmt(seconds)}</span>
         </div>
+      </section>
+
+      <div id="quiz-question-list" className="scroll-mt-32 space-y-4">
+        {pageQuestions.map((question, index) => {
+          const questionNumber = range.start + index + 1
+          const rtl = isRtlText(question.question)
+          return (
+            <article key={question.id} id={`quiz-question-${questionNumber}`} className="scroll-mt-32 rounded-lg border bg-white">
+              <div className="flex flex-wrap items-center gap-3 border-b px-4 py-3">
+                <span className="text-sm font-semibold text-pine">Question {questionNumber}</span>
+                <Badge tone="gray">{question.difficulty}</Badge>
+                <button aria-label={`Bookmark question ${questionNumber}`} onClick={() => { const saved = toggleBookmark(`q-${question.id}`); setBookmarked((current) => ({ ...current, [question.id]: saved })) }} className="ml-auto rounded p-1 hover:bg-secondary">
+                  {bookmarked[question.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-800" /> : <Bookmark className="h-4 w-4 text-muted-foreground" />}
+                </button>
+              </div>
+              <div className="p-4 sm:p-5">
+                <p dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`text-[15px] font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}>{question.question}</p>
+                <div className="mt-4 grid gap-2" role="radiogroup" aria-label={`Answer options for question ${questionNumber}`}>
+                  {question.options.map((option, optionIndex) => {
+                    const optionRtl = isRtlText(option)
+                    const selected = answers[question.id] === optionIndex
+                    return <button key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} role="radio" aria-checked={selected} onClick={() => chooseAnswer(question, optionIndex)} className={`rounded-md border px-4 py-3 text-sm transition-all duration-150 ${optionRtl ? 'text-right' : 'text-left'} ${selected ? 'border-emerald-700 bg-emerald-50 font-medium text-emerald-900' : 'hover:border-emerald-800/40 hover:bg-secondary/60'}`}><span className="mr-2 font-semibold text-muted-foreground">{String.fromCharCode(65 + optionIndex)}.</span> <span className={optionRtl ? 'urdu-text' : undefined}>{option}</span></button>
+                  })}
+                </div>
+              </div>
+            </article>
+          )
+        })}
       </div>
 
-      <div className="p-5">
-        <p
-          dir={rtl ? 'rtl' : undefined}
-          lang={rtl ? 'ur' : undefined}
-          className={`text-[15px] font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}
-        >
-          {q.question}
-        </p>
-        <div className="mt-4 grid gap-2" role="radiogroup" aria-label="Answer options">
-          {q.options.map((o, oi) => {
-            const optionRtl = isRtlText(o)
-            const selected = answers[q.id] === oi
-            return (
-              <button
-                key={oi}
-                dir={optionRtl ? 'rtl' : undefined}
-                lang={optionRtl ? 'ur' : undefined}
-                role="radio"
-                aria-checked={selected}
-                onClick={() => chooseAnswer(q, oi)}
-                className={`rounded-md border px-4 py-3 text-sm transition-all duration-150 ${optionRtl ? 'text-right' : 'text-left'} ${
-                  selected ? 'border-emerald-700 bg-emerald-50 font-medium text-emerald-900' : 'hover:border-emerald-800/40 hover:bg-secondary/60'
-                }`}
-              >
-                <span className="mr-2 font-semibold text-muted-foreground">{String.fromCharCode(65 + oi)}.</span>{' '}
-                <span className={optionRtl ? 'urdu-text' : undefined}>{o}</span>
-              </button>
-            )
+      <QuestionPagination currentPage={page} totalItems={qs.length} onPageChange={goToPage} />
+
+      <section className="no-print rounded-lg border bg-white p-3" aria-label="Question navigator">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><h3 className="text-xs font-bold uppercase tracking-wide text-pine">Question navigator</h3><span className="text-[11px] text-muted-foreground">Answered questions are green; bookmarks have a ring.</span></div>
+        <div className="flex flex-wrap gap-1.5">
+          {qs.map((question, index) => {
+            const number = index + 1
+            const onCurrentPage = questionPageForIndex(index) === page
+            return <button key={question.id} type="button" onClick={() => goToQuestion(index)} aria-label={`Go to question ${number}`} className={`grid h-9 min-w-9 place-items-center rounded-md border px-1 text-xs font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-100 text-emerald-900' : onCurrentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${bookmarked[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
           })}
         </div>
-      </div>
+      </section>
 
-      <div className="flex items-center justify-between border-t px-4 py-3">
-        <button
-          onClick={() => setIdx((i) => Math.max(0, i - 1))}
-          disabled={idx === 0}
-          className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary disabled:opacity-40"
-        >
-          Previous
-        </button>
-        <div className="hidden gap-1 sm:flex" aria-label="Question navigation">
-          {qs.map((qq, i) => (
-            <button
-              key={qq.id}
-              onClick={() => setIdx(i)}
-              aria-label={`Go to question ${i + 1}`}
-              className={`h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? 'bg-pine' : answers[qq.id] !== undefined ? 'bg-emerald-400' : 'bg-border'}`}
-            />
-          ))}
-        </div>
-        {idx === qs.length - 1 ? (
-          <button onClick={finish} className="rounded-md bg-pine px-5 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-            Submit test
-          </button>
-        ) : (
-          <button onClick={() => setIdx((i) => Math.min(qs.length - 1, i + 1))} className="rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-            Next
-          </button>
-        )}
-      </div>
+      <div className="flex justify-end"><button onClick={finish} className="min-h-11 rounded-md bg-pine px-5 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">Submit test</button></div>
     </div>
   )
 }

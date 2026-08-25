@@ -6,6 +6,8 @@ import PrintMenu from '@/components/PrintMenu'
 import { getQuestionsByIds, type BankQuestion } from '@/data/mcq'
 import { getMistakes, removeMistake, toggleMistakeRevised, type Mistake } from '@/lib/progress'
 import { isRtlText } from '@/lib/utils'
+import QuestionPagination from '@/components/QuestionPagination'
+import { clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 
 export default function Mistakes() {
   const [mistakes, setMistakes] = useState<Mistake[]>([])
@@ -14,6 +16,7 @@ export default function Mistakes() {
   const [status, setStatus] = useState<'all' | 'revised' | 'unrevised'>('all')
   const [minCount, setMinCount] = useState(0)
   const [sort, setSort] = useState<'recent' | 'count'>('recent')
+  const [page, setPage] = useState(1)
 
   function load() {
     const m = getMistakes()
@@ -37,6 +40,14 @@ export default function Mistakes() {
     if (minCount > 0) f = f.filter((m) => m.count > minCount)
     return [...f].sort((a, b) => (sort === 'recent' ? b.ts - a.ts : b.count - a.count))
   }, [mistakes, cat, status, minCount, sort])
+
+  useEffect(() => setPage(1), [cat, status, minCount, sort])
+  useEffect(() => {
+    const safePage = clampQuestionPage(page, filtered.length)
+    if (safePage !== page) setPage(safePage)
+  }, [filtered.length, page])
+  const range = questionPageRange(page, filtered.length)
+  const pageMistakes = filtered.slice(range.start, range.end)
 
   return (
     <div>
@@ -85,12 +96,13 @@ export default function Mistakes() {
           {mistakes.length > 0 && filtered.length === 0 && (
             <EmptyState title="Nothing matches these filters" hint="Try a different category or status." />
           )}
-          {filtered.map((m) => {
+          {pageMistakes.map((m, index) => {
             const q = qs[m.id]
             const rtl = q ? isRtlText(q.q) : false
             return (
               <div key={m.id} className={`mcq-card rounded-lg border bg-white p-4 ${m.revised ? 'opacity-75' : ''}`}>
                 <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
+                  <span className="font-bold text-pine">Q{range.start + index + 1}</span>
                   <span className="rounded bg-secondary px-1.5 py-0.5 font-medium">{m.cat}</span>
                   <span>{new Date(m.ts).toLocaleDateString()}</span>
                   <span className={`rounded px-1.5 py-0.5 font-bold ${m.count > 1 ? 'bg-red-100 text-red-700' : 'bg-secondary'}`}>
@@ -141,6 +153,8 @@ export default function Mistakes() {
             )
           })}
         </div>
+
+        <QuestionPagination currentPage={page} totalItems={filtered.length} onPageChange={setPage} className="mt-6" />
 
         {mistakes.length > 0 && (
           <p className="no-print mt-6 flex items-center gap-2 rounded-lg bg-secondary/60 px-4 py-3 text-xs text-muted-foreground">

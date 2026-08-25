@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import {
-  Bookmark, BookmarkCheck, Check, ChevronLeft, ChevronRight, Clock, Flag, Loader2,
+  Bookmark, BookmarkCheck, Check, Clock, Flag, Loader2,
   RotateCcw, X, Zap,
 } from 'lucide-react'
 import { PageHeader, EmptyState } from '@/components/shared'
@@ -22,6 +22,8 @@ import { isRtlText } from '@/lib/utils'
 import {
   buildCompetitiveMock, currentPakistanDateKey, MOCK_BLUEPRINTS, type MockSection,
 } from '@/data/mockPapers'
+import QuestionPagination from '@/components/QuestionPagination'
+import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 
 interface Resolved {
   title: string
@@ -439,20 +441,21 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 // ---------------- Runner ----------------
 function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
   const { qs, title, exam, timeSec, blueprint, note } = resolved
-  const [cur, setCur] = useState(0)
+  const [page, setPage] = useState(1)
+  const [reviewPage, setReviewPage] = useState(1)
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const [revealed, setRevealed] = useState<Record<string, boolean>>({})
   const [savedMap, setSavedMap] = useState<Record<string, boolean>>({})
   const [finished, setFinished] = useState(false)
   const [left, setLeft] = useState(timeSec)
-  const [questionElapsed, setQuestionElapsed] = useState(0)
   const [resultTimeSeconds, setResultTimeSeconds] = useState(0)
   const startRef = useRef(Date.now())
-  const questionStartedAtRef = useRef(Date.now())
+  const questionStartedAtRef = useRef<Record<string, number>>({})
   const finishedRef = useRef(false)
 
-  const q = qs[cur]
-  const rtl = isRtlText(q.q)
+  const range = questionPageRange(page, qs.length)
+  const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
+  const activeSections = useMemo(() => new Set(pageQuestions.map((question) => question.paperSection).filter(Boolean)), [pageQuestions])
   const answeredCount = Object.keys(answers).length
   const score = qs.filter((x) => answers[x.id] !== undefined && answers[x.id] === x.a).length
 
@@ -469,35 +472,30 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   }, [left])
 
   useEffect(() => {
-    questionStartedAtRef.current = Date.now()
-    const resetFrame = window.requestAnimationFrame(() => setQuestionElapsed(0))
-    if (finished) return () => window.cancelAnimationFrame(resetFrame)
-    const timer = window.setInterval(() => {
-      setQuestionElapsed(Math.max(0, Math.round((Date.now() - questionStartedAtRef.current) / 1000)))
-    }, 1000)
-    return () => {
-      window.cancelAnimationFrame(resetFrame)
-      window.clearInterval(timer)
-    }
-  }, [q.id, finished])
-
-  function choose(i: number) {
     if (finished) return
-    if (answers[q.id] === undefined) {
+    const now = Date.now()
+    pageQuestions.forEach((question) => {
+      if (!questionStartedAtRef.current[question.id]) questionStartedAtRef.current[question.id] = now
+    })
+  }, [finished, pageQuestions])
+
+  function choose(question: BankQuestion, i: number) {
+    if (finished) return
+    if (answers[question.id] === undefined) {
       recordQuestionTiming({
-        questionId: q.id,
+        questionId: question.id,
         category: title,
         mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
-        seconds: Math.max(1, Math.round((Date.now() - questionStartedAtRef.current) / 1000)),
-        correct: i === q.a,
+        seconds: Math.max(1, Math.round((Date.now() - (questionStartedAtRef.current[question.id] ?? Date.now())) / 1000)),
+        correct: i === question.a,
       })
     }
     if (exam) {
-      setAnswers((a) => ({ ...a, [q.id]: i }))
+      setAnswers((a) => ({ ...a, [question.id]: i }))
     } else {
-      if (answers[q.id] !== undefined) return
-      setAnswers((a) => ({ ...a, [q.id]: i }))
-      setRevealed((r) => ({ ...r, [q.id]: true }))
+      if (answers[question.id] !== undefined) return
+      setAnswers((a) => ({ ...a, [question.id]: i }))
+      setRevealed((r) => ({ ...r, [question.id]: true }))
     }
   }
 
@@ -505,6 +503,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (finishedRef.current) return
     finishedRef.current = true
     setFinished(true)
+    setReviewPage(1)
     const secs = Math.round((Date.now() - startRef.current) / 1000)
     setResultTimeSeconds(secs)
     const weaknessCounts = new Map<string, number>()
@@ -548,6 +547,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
   if (finished) {
     const pct = Math.round((score / qs.length) * 100)
+    const reviewRange = questionPageRange(reviewPage, qs.length)
+    const reviewQuestions = qs.slice(reviewRange.start, reviewRange.end)
     const weaknessCounts = new Map<string, number>()
     qs.forEach((item) => {
       if (answers[item.id] === item.a) return
@@ -616,7 +617,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
         <h2 className="mt-8 font-display text-xl font-bold text-pine">Review - answers</h2>
         <div className="mt-3 space-y-4">
-          {qs.map((x, i) => {
+          {reviewQuestions.map((x, i) => {
             const sel = answers[x.id]
             const reviewRtl = isRtlText(x.q)
             return (
@@ -626,7 +627,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                   lang={reviewRtl ? 'ur' : undefined}
                   className={`text-sm font-semibold text-foreground ${reviewRtl ? 'urdu-text text-right' : ''}`}
                 >
-                  Q{i + 1}. {x.q}
+                  Q{reviewRange.start + i + 1}. {x.q}
                 </p>
                 <div className="mt-2 grid gap-1.5">
                   {x.o.map((o, j) => {
@@ -668,6 +669,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
             )
           })}
         </div>
+        <QuestionPagination currentPage={reviewPage} totalItems={qs.length} onPageChange={setReviewPage} className="mt-6" />
         </section>
       </div>
     )
@@ -685,8 +687,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                 <Clock className="h-3.5 w-3.5" /> {mm}:{String(ss).padStart(2, '0')}
               </span>
             )}
-            <span className="rounded bg-emerald-50 px-2 py-0.5 font-mono text-[11px] font-semibold text-pine" title="Time spent on this question">
-              Q {Math.floor(questionElapsed / 60)}:{String(questionElapsed % 60).padStart(2, '0')}
+            <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-pine">
+              Questions {range.start + 1}–{range.end}
             </span>
             <span className="text-xs text-muted-foreground">{answeredCount}/{qs.length} answered</span>
           </div>
@@ -700,7 +702,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         <div className="no-print mt-3 overflow-x-auto pb-1" aria-label="Paper section sequence">
           <ol className="flex min-w-max gap-1.5">
             {blueprint.map((section, index) => {
-              const active = q.paperSection === section.label
+              const active = activeSections.has(section.label)
               return (
                 <li key={section.label} className={`rounded-full border px-2.5 py-1 text-[11px] font-bold ${active ? 'border-emerald-700 bg-emerald-50 text-pine' : 'bg-white text-muted-foreground'}`}>
                   {index + 1}. {section.label} · {section.count}
@@ -718,125 +720,66 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         </p>
       )}
 
-      {/* Question */}
-      <div className="mt-4 rounded-xl border bg-white p-5">
-        <div className="flex items-center justify-between">
-          <div className="flex min-w-0 items-center gap-2">
-            <span className="shrink-0 text-xs font-bold text-muted-foreground">Question {cur + 1} of {qs.length}</span>
-            {q.paperSection && <span className="truncate rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">{q.paperSection}</span>}
-          </div>
-          <button
-            onClick={() => setSavedMap((s) => ({ ...s, [q.id]: toggleSavedMcq(q.id) }))}
-            className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary"
-            aria-label="Save question"
-          >
-            {savedMap[q.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
-          </button>
-        </div>
-        <p
-          dir={rtl ? 'rtl' : undefined}
-          lang={rtl ? 'ur' : undefined}
-          className={`mt-2 text-base font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}
-        >
-          {q.q}
-        </p>
-        <div className="mt-4 grid gap-2">
-          {q.o.map((o, i) => {
-            const optionRtl = isRtlText(o)
-            const sel = answers[q.id] === i
-            const show = !exam && revealed[q.id]
-            let cls = 'border hover:border-emerald-700/50 hover:bg-emerald-50/40'
-            if (exam && sel) cls = 'border-emerald-700 bg-emerald-50'
-            if (show) {
-              if (i === q.a) cls = 'border-emerald-600 bg-emerald-50'
-              else if (sel) cls = 'border-red-400 bg-red-50'
-              else cls = 'opacity-70'
-            }
-            return (
-              <button
-                key={i}
-                dir={optionRtl ? 'rtl' : undefined}
-                lang={optionRtl ? 'ur' : undefined}
-                onClick={() => choose(i)}
-                className={`flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${cls}`}
-              >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold text-muted-foreground">
-                  {'ABCD'[i]}
-                </span>
-                <span className={optionRtl ? 'urdu-text' : undefined}>{o}</span>
-              </button>
-            )
+      <div id="gk-quiz-question-list" className="mt-4 scroll-mt-32 space-y-4">
+        {pageQuestions.map((question, questionIndex) => {
+          const questionNumber = range.start + questionIndex + 1
+          const rtl = isRtlText(question.q)
+          return (
+            <article key={question.id} id={`gk-quiz-question-${questionNumber}`} className="scroll-mt-32 rounded-xl border bg-white p-4 sm:p-5">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-muted-foreground">Question {questionNumber} of {qs.length}</span>
+                  {question.paperSection && <span className="truncate rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">{question.paperSection}</span>}
+                </div>
+                <button onClick={() => setSavedMap((current) => ({ ...current, [question.id]: toggleSavedMcq(question.id) }))} className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary" aria-label={`Save question ${questionNumber}`}>
+                  {savedMap[question.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
+                </button>
+              </div>
+              <p dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`mt-2 text-base font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}>{question.q}</p>
+              <div className="mt-4 grid gap-2">
+                {question.o.map((option, optionIndex) => {
+                  const optionRtl = isRtlText(option)
+                  const selected = answers[question.id] === optionIndex
+                  const show = !exam && revealed[question.id]
+                  let classes = 'border hover:border-emerald-700/50 hover:bg-emerald-50/40'
+                  if (exam && selected) classes = 'border-emerald-700 bg-emerald-50'
+                  if (show) {
+                    if (optionIndex === question.a) classes = 'border-emerald-600 bg-emerald-50'
+                    else if (selected) classes = 'border-red-400 bg-red-50'
+                    else classes = 'border opacity-70'
+                  }
+                  return <button key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} onClick={() => choose(question, optionIndex)} className={`flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${classes}`}><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold text-muted-foreground">{'ABCD'[optionIndex]}</span><span className={optionRtl ? 'urdu-text' : undefined}>{option}</span></button>
+                })}
+              </div>
+              {!exam && revealed[question.id] && (
+                <div className="answer-block mt-3 rounded-md border-l-4 border-emerald-500 bg-emerald-50/60 px-3 py-2.5 text-sm">
+                  <p className="font-semibold text-pine">Correct answer: {'ABCD'[question.a]}) <span dir={isRtlText(question.o[question.a]) ? 'rtl' : undefined} lang={isRtlText(question.o[question.a]) ? 'ur' : undefined} className={isRtlText(question.o[question.a]) ? 'urdu-text inline-block' : undefined}>{question.o[question.a]}</span></p>
+                  {question.e && <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{question.e}</p>}
+                </div>
+              )}
+              {!exam && !revealed[question.id] && <button onClick={() => setRevealed((current) => ({ ...current, [question.id]: true }))} className="no-print mt-3 inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-amber-700 hover:bg-amber-50"><Flag className="h-3.5 w-3.5" /> Reveal answer without attempting</button>}
+            </article>
+          )
+        })}
+      </div>
+
+      <QuestionPagination currentPage={page} totalItems={qs.length} onPageChange={(nextPage) => { setPage(nextPage); window.requestAnimationFrame(() => document.getElementById('gk-quiz-question-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' })) }} className="mt-5" />
+
+      <section className="no-print mt-4 rounded-lg border bg-white p-3" aria-label="Question navigator">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><h2 className="text-xs font-bold uppercase tracking-wide text-pine">Question navigator</h2><span className="text-[11px] text-muted-foreground">Green means answered; a ring means saved.</span></div>
+        <div className="flex flex-wrap gap-1.5">
+          {qs.map((question, index) => {
+            const number = index + 1
+            const currentPage = questionPageForIndex(index) === page
+            return <button key={question.id} onClick={() => { setPage(questionPageForIndex(index)); window.setTimeout(() => document.getElementById(`gk-quiz-question-${number}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0) }} aria-label={`Go to question ${number}`} className={`grid h-8 min-w-8 place-items-center rounded border px-1 text-[11px] font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-200 text-emerald-900' : currentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${savedMap[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
           })}
         </div>
-        {!exam && revealed[q.id] && (
-          <div className="answer-block mt-3 rounded-md border-l-4 border-emerald-500 bg-emerald-50/60 px-3 py-2.5 text-sm">
-            <p className="font-semibold text-pine">
-              Correct answer: {'ABCD'[q.a]}){' '}
-              <span
-                dir={isRtlText(q.o[q.a]) ? 'rtl' : undefined}
-                lang={isRtlText(q.o[q.a]) ? 'ur' : undefined}
-                className={isRtlText(q.o[q.a]) ? 'urdu-text inline-block' : undefined}
-              >
-                {q.o[q.a]}
-              </span>
-            </p>
-            {q.e && <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{q.e}</p>}
-          </div>
-        )}
-        {!exam && !revealed[q.id] && (
-          <button
-            onClick={() => setRevealed((r) => ({ ...r, [q.id]: true }))}
-            className="no-print mt-3 inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-amber-700 hover:bg-amber-50"
-          >
-            <Flag className="h-3.5 w-3.5" /> Reveal answer without attempting
-          </button>
-        )}
+      </section>
+
+      <div className="no-print mt-5 flex justify-end">
+        <button onClick={finish} className="inline-flex min-h-11 items-center gap-1 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white"><Check className="h-4 w-4" /> Finish &amp; see result</button>
       </div>
 
-      {/* Navigation */}
-      <div className="no-print mt-4 flex items-center justify-between">
-        <button
-          onClick={() => setCur((c) => Math.max(0, c - 1))}
-          disabled={cur === 0}
-          className="inline-flex h-10 items-center gap-1 rounded-md border bg-white px-4 text-sm font-semibold disabled:opacity-40"
-        >
-          <ChevronLeft className="h-4 w-4" /> Previous
-        </button>
-        {cur < qs.length - 1 ? (
-          <button
-            onClick={() => setCur((c) => c + 1)}
-            className="inline-flex h-10 items-center gap-1 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50"
-          >
-            Next <ChevronRight className="h-4 w-4" />
-          </button>
-        ) : (
-          <button
-            onClick={finish}
-            className="inline-flex h-10 items-center gap-1 rounded-md bg-emerald-700 px-4 text-sm font-semibold text-white"
-          >
-            <Check className="h-4 w-4" /> Finish &amp; see result
-          </button>
-        )}
-      </div>
-
-      {/* Palette */}
-      <div className="no-print mt-4 flex flex-wrap gap-1.5">
-        {qs.map((x, i) => (
-          <button
-            key={x.id}
-            onClick={() => setCur(i)}
-            className={`h-7 w-7 rounded text-[11px] font-bold ${i === cur ? 'bg-pine text-white' : answers[x.id] !== undefined ? 'bg-emerald-200 text-emerald-900' : 'bg-secondary text-muted-foreground'}`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
-
-      <div className="no-print mt-6 text-center">
-        <button onClick={finish} className="text-xs font-semibold text-muted-foreground underline underline-offset-2">
-          End quiz and view result
-        </button>
-      </div>
     </div>
   )
 }

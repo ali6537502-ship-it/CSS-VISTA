@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { ChevronLeft, ChevronRight, Play, Search } from 'lucide-react'
+import { Play, Search } from 'lucide-react'
 import { PageHeader, EmptyState } from '@/components/shared'
 import { adminBankQuestions, dedupeBankQuestions, filterDisabled, getBankIndex, getChunk, type BankQuestion } from '@/data/mcq'
 import McqCard from '@/components/McqCard'
 import PrintMenu from '@/components/PrintMenu'
 import { recordActivity } from '@/lib/progress'
-
-const PAGE_SIZE = 25
+import QuestionPagination from '@/components/QuestionPagination'
+import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 
 export default function GKCategory() {
   const { slug = '' } = useParams()
@@ -85,8 +85,13 @@ export default function GKCategory() {
 
   useEffect(() => setPage(1), [sub, diff, query])
 
-  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
-  const view = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const range = questionPageRange(page, filtered.length)
+  const view = filtered.slice(range.start, range.end)
+
+  useEffect(() => {
+    const safePage = clampQuestionPage(page, filtered.length)
+    if (safePage !== page) setPage(safePage)
+  }, [filtered.length, page])
 
   return (
     <div>
@@ -144,35 +149,14 @@ export default function GKCategory() {
             <McqCard
               key={q.id}
               q={q}
-              num={(page - 1) * PAGE_SIZE + i + 1}
+              num={range.start + i + 1}
               catName={name}
               onAction={() => setRefresh((r) => r + 1)}
             />
           ))}
         </div>
 
-        {/* Pagination */}
-        {pages > 1 && (
-          <div className="no-print mt-6 flex items-center justify-center gap-2">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page === 1}
-              className="inline-flex h-9 items-center gap-1 rounded-md border bg-white px-3 text-sm font-semibold disabled:opacity-40"
-            >
-              <ChevronLeft className="h-4 w-4" /> Previous
-            </button>
-            <span className="text-sm text-muted-foreground">
-              Page {page} of {pages}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(pages, p + 1))}
-              disabled={page === pages}
-              className="inline-flex h-9 items-center gap-1 rounded-md border bg-white px-3 text-sm font-semibold disabled:opacity-40"
-            >
-              Next <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        )}
+        <QuestionPagination currentPage={page} totalItems={filtered.length} pageSize={QUESTIONS_PER_PAGE} onPageChange={setPage} className="mt-6" />
       </div>
     </div>
   )

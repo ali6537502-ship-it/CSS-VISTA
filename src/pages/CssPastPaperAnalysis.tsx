@@ -5,12 +5,14 @@ import {
   FileSearch, Loader2, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import QuestionPagination from '@/components/QuestionPagination'
 import {
   loadPastPaperAnalysis,
   type PastPaperAnalysisData,
   type PastPaperAnalysisTopic,
   type PastPaperQuestion,
 } from '@/lib/pastPaperAnalysis'
+import { questionPageRange } from '@/lib/questionPagination'
 
 function normalized(value: string) {
   return value.normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ').trim()
@@ -23,6 +25,32 @@ function syllabusLink(subjectSlug: string, topic?: string) {
 interface VisibleTopic {
   topic: PastPaperAnalysisTopic
   questions: PastPaperQuestion[]
+}
+
+function PastPaperQuestionPage({ questions }: { questions: PastPaperQuestion[] }) {
+  const [page, setPage] = useState(1)
+  const range = questionPageRange(page, questions.length)
+  const visible = questions.slice(range.start, range.end)
+
+  useEffect(() => setPage(1), [questions])
+
+  return (
+    <div className="mt-3">
+      <div className="space-y-2">
+        {visible.map((question, index) => (
+          <div key={question.id} className="rounded-lg border bg-white p-3">
+            <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+              <span>Q{range.start + index + 1}</span><span>·</span><span>{question.year}</span><span>·</span>
+              {question.paper !== 'Single Paper' && <><span>{question.paper}</span><span>·</span></>}
+              <span>{question.number}</span>
+            </div>
+            <p className="mt-1.5 text-sm leading-relaxed text-foreground/85">{question.text}</p>
+          </div>
+        ))}
+      </div>
+      <QuestionPagination currentPage={page} totalItems={questions.length} onPageChange={setPage} itemLabel="Past-paper questions" className="mt-4" />
+    </div>
+  )
 }
 
 export default function CssPastPaperAnalysis() {
@@ -170,7 +198,7 @@ export default function CssPastPaperAnalysis() {
                     <button type="button" onClick={() => toggleTopic(topic.id)} aria-expanded={open} className="flex min-h-14 w-full items-center gap-3 px-3 text-left hover:bg-secondary/30 sm:px-4"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-800"><BarChart3 className="h-4 w-4" /></span><span className="min-w-0 flex-1"><span className="block text-sm font-bold leading-snug text-pine">{topic.title}</span><span className="mt-0.5 block text-[10px] text-muted-foreground">{questions.length} question{questions.length === 1 ? '' : 's'} · {Array.from(new Set(questions.map((question) => question.year))).sort().join(', ')}</span></span><ChevronDown className={`h-4 w-4 shrink-0 text-emerald-700 transition-transform ${open ? 'rotate-180' : ''}`} /></button>
                     {open && <div className="border-t bg-secondary/20 p-3 sm:p-4">
                       <div className="flex flex-wrap gap-2">{topic.analysis.map((line) => <span key={line} className="rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold text-slate-600 ring-1 ring-border">{line}</span>)}</div>
-                      <div className="mt-3 space-y-2">{questions.map((question) => <div key={question.id} className="rounded-lg border bg-white p-3"><div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wide text-emerald-700"><span>{question.year}</span><span>·</span>{question.paper !== 'Single Paper' && <><span>{question.paper}</span><span>·</span></>}<span>{question.number}</span></div><p className="mt-1.5 text-sm leading-relaxed text-foreground/85">{question.text}</p></div>)}</div>
+                      <PastPaperQuestionPage questions={questions} />
                       <Link to={syllabusLink(selected!.slug, topic.syllabusItemIndexes.length ? topic.title : undefined)} className="mt-3 inline-flex min-h-10 items-center gap-2 rounded-lg border bg-white px-3 text-xs font-bold text-emerald-800 hover:bg-emerald-50"><BookOpenCheck className="h-4 w-4" /> Find this area in the syllabus & planner</Link>
                     </div>}
                   </article>

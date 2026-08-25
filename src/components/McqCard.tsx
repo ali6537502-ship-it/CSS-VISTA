@@ -4,7 +4,7 @@ import {
   Clock3, Printer, RotateCcw, Share2, X,
 } from 'lucide-react'
 import type { BankQuestion } from '@/data/mcq'
-import { addMistake, getAttempt, recordAttempt, recordQuestionTiming, toggleSavedMcq, savedMcqIds } from '@/lib/progress'
+import { addMistake, getAttempt, getMistakes, recordAttempt, recordQuestionTiming, toggleSavedMcq, savedMcqIds } from '@/lib/progress'
 import { addReport } from '@/lib/admin'
 import { isRtlText } from '@/lib/utils'
 import { printPage } from '@/components/PrintMenu'
@@ -41,10 +41,15 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
   useEffect(() => {
     const a = getAttempt(q.id)
     if (a) {
+      const previousMistake = a.c ? null : getMistakes().find((mistake) => mistake.id === q.id)
+      setSelected(a.c ? q.a : previousMistake?.sel ?? null)
       setRevealed(true)
+    } else {
+      setSelected(null)
+      setRevealed(false)
     }
     setSaved(savedMcqIds().includes(q.id))
-  }, [q.id])
+  }, [q.a, q.id])
 
   useEffect(() => {
     accumulatedMsRef.current = 0

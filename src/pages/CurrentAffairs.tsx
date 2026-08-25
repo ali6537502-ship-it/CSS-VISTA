@@ -5,16 +5,18 @@ import { PageHeader, Badge } from '@/components/shared'
 import { caIssues } from '@/data/currentAffairs'
 import { weeklyMagazine } from '@/data/weeklyMagazine'
 import { mergedCaTopics, type CaTopic } from '@/lib/admin'
-import { addMistake, recordAttempt, recordQuestionTiming } from '@/lib/progress'
+import { addMistake, getAttempt, getMistakes, recordAttempt, recordQuestionTiming } from '@/lib/progress'
 import { printPdfFile } from '@/components/PrintMenu'
 import { usePageBack } from '@/lib/backNavigation'
+import QuestionPagination from '@/components/QuestionPagination'
+import { QUESTIONS_PER_PAGE, clampQuestionPage } from '@/lib/questionPagination'
 
 type OneLiner = { date: string; development: string; fact: string; source: string }
 type AffairMcq = { id: string; date: string; development: string; background: string; whyItMatters: string; question: string; options: string[]; answer: number; explanation: string; source: string; updatedAt: string }
 type AffairsBatch = { batch: string; title: string; sourceDocument: string; verification: string; oneLiners: OneLiner[]; mcqs: AffairMcq[] }
 type Tab = 'one-liners' | 'mcqs' | 'issue-files' | 'magazine'
 
-const PAGE_SIZE = 20
+const COLLECTION_PAGE_SIZE = 20
 const nowMs = () => Date.now()
 
 function TopicCard({ topic }: { topic: CaTopic }) {
@@ -31,10 +33,13 @@ function TopicCard({ topic }: { topic: CaTopic }) {
 }
 
 function McqCard({ item, number }: { item: AffairMcq; number: number }) {
-  const [selected, setSelected] = useState<number | null>(null)
+  const previousAttempt = getAttempt(item.id)
+  const previousMistake = previousAttempt?.c === false ? getMistakes().find((mistake) => mistake.id === item.id) : null
+  const [selected, setSelected] = useState<number | null>(() => previousAttempt?.c ? item.answer : previousMistake?.sel ?? null)
+  const [previouslyAnswered] = useState(Boolean(previousAttempt))
   const [details, setDetails] = useState(false)
   const startedAt = useRef(nowMs())
-  const submitted = selected !== null
+  const submitted = selected !== null || previouslyAnswered
 
   function answer(option: number) {
     if (submitted) return
@@ -82,8 +87,10 @@ export default function CurrentAffairs() {
     return mergedCaTopics(seed).filter((topic) => topic.published && (!normalized || `${topic.title} ${topic.summary} ${topic.content}`.toLowerCase().includes(normalized)))
   }, [normalized])
   const currentCount = tab === 'mcqs' ? mcqs.length : tab === 'one-liners' ? oneLiners.length : topics.length
-  const pages = Math.max(1, Math.ceil(currentCount / PAGE_SIZE))
-  const start = (Math.min(page, pages) - 1) * PAGE_SIZE
+  const pageSize = tab === 'mcqs' ? QUESTIONS_PER_PAGE : COLLECTION_PAGE_SIZE
+  const pages = Math.max(1, Math.ceil(currentCount / pageSize))
+  const safePage = clampQuestionPage(page, currentCount, pageSize)
+  const start = (safePage - 1) * pageSize
 
   function selectTab(next: Tab) {
     setSearchParams(next === 'one-liners' ? {} : { tab: next })
@@ -103,11 +110,12 @@ export default function CurrentAffairs() {
         {!batch && !loadError && tab !== 'issue-files' && tab !== 'magazine' && <div className="grid place-items-center py-20 text-muted-foreground"><Loader2 className="h-7 w-7 animate-spin" /><p className="mt-2 text-sm">Loading recent-affairs collection…</p></div>}
         {loadError && tab !== 'issue-files' && tab !== 'magazine' && <p className="mt-5 rounded-xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-800">The recent-affairs batch could not be loaded. Issue files and the weekly magazine remain available.</p>}
 
-        {batch && tab === 'one-liners' && <section className="mt-5 space-y-3" aria-label="Recent affairs one-liners">{oneLiners.slice(start, start + PAGE_SIZE).map((item, index) => <article key={`${item.date}-${item.development}-${index}`} className="rounded-xl border bg-white p-4"><p className="text-xs font-bold text-emerald-800">{item.date}</p><h2 className="mt-1 text-sm font-semibold text-pine">{item.development}</h2><p className="mt-2 text-sm leading-relaxed">{item.fact}</p>{item.source && <p className="mt-2 text-xs text-muted-foreground">Source recorded in the supplied dossier: {item.source}</p>}</article>)}</section>}
-        {batch && tab === 'mcqs' && <section className="mt-5 space-y-4" aria-label="Recent affairs MCQs">{mcqs.slice(start, start + PAGE_SIZE).map((item, index) => <McqCard key={item.id} item={item} number={start + index + 1} />)}</section>}
-        {tab === 'issue-files' && <section className="mt-5 space-y-4" aria-label="Current affairs issue files">{topics.slice(start, start + PAGE_SIZE).map((topic) => <TopicCard key={topic.id} topic={topic} />)}</section>}
+        {batch && tab === 'one-liners' && <section className="mt-5 space-y-3" aria-label="Recent affairs one-liners">{oneLiners.slice(start, start + pageSize).map((item, index) => <article key={`${item.date}-${item.development}-${index}`} className="rounded-xl border bg-white p-4"><p className="text-xs font-bold text-emerald-800">{item.date}</p><h2 className="mt-1 text-sm font-semibold text-pine">{item.development}</h2><p className="mt-2 text-sm leading-relaxed">{item.fact}</p>{item.source && <p className="mt-2 text-xs text-muted-foreground">Source recorded in the supplied dossier: {item.source}</p>}</article>)}</section>}
+        {batch && tab === 'mcqs' && <section className="mt-5 space-y-4" aria-label="Recent affairs MCQs">{mcqs.slice(start, start + pageSize).map((item, index) => <McqCard key={item.id} item={item} number={start + index + 1} />)}</section>}
+        {tab === 'issue-files' && <section className="mt-5 space-y-4" aria-label="Current affairs issue files">{topics.slice(start, start + pageSize).map((topic) => <TopicCard key={topic.id} topic={topic} />)}</section>}
         {tab !== 'magazine' && currentCount === 0 && !loadError && <p className="mt-5 rounded-xl border border-dashed bg-white p-10 text-center text-sm text-muted-foreground">No item matches this search.</p>}
-        {tab !== 'magazine' && currentCount > PAGE_SIZE && <nav className="mt-6 flex items-center justify-center gap-3" aria-label="Collection pages"><button type="button" disabled={page <= 1} onClick={() => setPage((value) => value - 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Previous</button><span className="text-sm text-muted-foreground">Page {Math.min(page, pages)} of {pages}</span><button type="button" disabled={page >= pages} onClick={() => setPage((value) => value + 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Next</button></nav>}
+        {tab === 'mcqs' && <QuestionPagination currentPage={safePage} totalItems={currentCount} onPageChange={setPage} className="mt-6" />}
+        {tab !== 'mcqs' && tab !== 'magazine' && currentCount > pageSize && <nav className="mt-6 flex items-center justify-center gap-3" aria-label="Collection pages"><button type="button" disabled={safePage <= 1} onClick={() => setPage((value) => value - 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Previous</button><span className="text-sm text-muted-foreground">Page {safePage} of {pages}</span><button type="button" disabled={safePage >= pages} onClick={() => setPage((value) => value + 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Next</button></nav>}
 
         {tab === 'magazine' && <section className="mt-6 rounded-2xl border bg-white p-5 sm:p-7"><div className="grid gap-5 sm:grid-cols-[150px_1fr] sm:items-center">{weeklyMagazine.coverUrl ? <img src={weeklyMagazine.coverUrl} alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`} className="aspect-[3/4] w-full rounded-xl border object-cover object-top shadow-md" /> : <div className="grid aspect-[3/4] place-items-center rounded-xl bg-pine text-white"><Newspaper className="h-8 w-8" /></div>}<div><p className="text-xs font-bold uppercase tracking-[.15em] text-amber-700">Free weekly issue</p><h2 className="mt-2 font-display text-2xl font-bold text-pine">{weeklyMagazine.title}</h2><p className="mt-1 text-sm font-semibold text-emerald-800">{weeklyMagazine.issue}</p><p className="mt-2 text-sm text-muted-foreground">{weeklyMagazine.description} {weeklyMagazine.pageCount ? `${weeklyMagazine.pageCount} pages.` : ''}</p><div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={() => setViewer(true)} disabled={!weeklyMagazine.pdfUrl} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:opacity-50"><FileText className="h-4 w-4" /> View magazine</button>{weeklyMagazine.pdfUrl && <a href={weeklyMagazine.pdfUrl} download className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary"><Download className="h-4 w-4" /> Free PDF</a>}<button type="button" onClick={() => weeklyMagazine.pdfUrl && printPdfFile(weeklyMagazine.pdfUrl)} disabled={!weeklyMagazine.pdfUrl} className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary disabled:opacity-50"><Printer className="h-4 w-4" /> Print</button></div></div></div></section>}
       </main>
