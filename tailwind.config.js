@@ -1,9 +1,17 @@
+const googleSansStack = ['"Google Sans"', '"Product Sans"', '"Inter"', 'Arial', 'sans-serif']
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: googleSansStack,
+        serif: googleSansStack,
+        mono: googleSansStack,
+        display: googleSansStack,
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

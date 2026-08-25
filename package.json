@@ -19,6 +19,7 @@
     "generate:past-papers": "node scripts/generate-supplemental-past-papers.mjs",
     "sync:resources": "node scripts/sync-resource-manifests.mjs",
     "audit:resources": "node scripts/audit-resource-integrity.mjs",
+    "audit:fonts": "node scripts/audit-font-system.mjs",
     "check:supabase": "node --env-file-if-exists=.env.local scripts/check-supabase.mjs",
     "test:ads": "node --test tests/adPolicy.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts",
