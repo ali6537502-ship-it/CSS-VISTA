@@ -15,6 +15,7 @@
     "audit": "node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs && node scripts/audit-past-paper-seo.mjs",
     "audit:hostinger": "node scripts/audit-hostinger-build.mjs",
     "check:adsense": "node scripts/check-adsense-production.mjs",
+    "check:production-data": "node scripts/check-production-assets.mjs",
     "check:supabase": "node --env-file-if-exists=.env.local scripts/check-supabase.mjs",
     "test:ads": "node --test tests/adPolicy.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts",
