@@ -726,7 +726,7 @@ export default function Layout() {
           <div className="hidden xl:block"><SocialLinks compact /></div>
 
           <button
-            className="grid h-9 w-9 place-items-center rounded-lg hover:bg-secondary xl:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg transition duration-150 ease-out hover:bg-secondary active:scale-95 xl:hidden"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
@@ -826,6 +826,13 @@ export default function Layout() {
 
           <NotificationCenter />
           <Link
+            to="/mentors"
+            className="cssv-tap flex h-9 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50/70 px-2 text-[9px] font-extrabold text-emerald-950 transition-colors hover:bg-emerald-100 sm:px-2.5 sm:text-[10px] xl:hidden"
+            aria-label="About CSS Vista and its mentors"
+          >
+            About Us
+          </Link>
+          <Link
             to="/account"
             className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:flex"
             aria-label={user ? `Open account for ${user.email ?? 'signed-in student'}` : 'Open student account'}
@@ -875,10 +882,9 @@ export default function Layout() {
         aria-hidden={!mobileOpen}
       />
       <aside
-        hidden={!mobileOpen}
-        style={mobileOpen ? undefined : { display: 'none' }}
-        className={`cssv-glass-drawer fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-sm flex-col shadow-xl transition-transform duration-300 ease-out xl:hidden ${
-          mobileOpen ? 'visible translate-x-0' : 'invisible -translate-x-full'
+        inert={!mobileOpen}
+        className={`cssv-glass-drawer fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-sm flex-col shadow-xl will-change-transform transition-[transform,opacity] duration-200 ease-out xl:hidden ${
+          mobileOpen ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-full opacity-0'
         }`}
         role="dialog"
         aria-label="Mobile navigation"
