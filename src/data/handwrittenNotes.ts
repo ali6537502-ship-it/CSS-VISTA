@@ -5,7 +5,6 @@ export interface HandwrittenNoteSubject {
   title: string
   kind: 'Compulsory' | 'Optional'
   description: string
-  uploadedNotes: number
 }
 
 export const handwrittenNoteSubjects: HandwrittenNoteSubject[] = lectureCourses.map((course) => ({
@@ -15,7 +14,6 @@ export const handwrittenNoteSubjects: HandwrittenNoteSubject[] = lectureCourses.
   description: course.kind === 'Compulsory'
     ? 'Handwritten preparation notes for this compulsory CSS paper.'
     : `Handwritten preparation notes for ${course.title}.`,
-  uploadedNotes: 0,
 }))
 
 export const handwrittenNotesOwner = 'Miss Sadia Zahoor, PAS'

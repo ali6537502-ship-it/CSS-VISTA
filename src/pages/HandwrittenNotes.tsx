@@ -1,30 +1,32 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import {
-  BookOpenCheck, FileClock, NotebookPen, Search, UserRound,
+  MessageCircle, NotebookPen, Search, UserRound,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
   handwrittenNotesOwner,
   handwrittenNoteSubjects,
 } from '@/data/handwrittenNotes'
+import { mentors, waLink } from '@/data/site'
+import { notesPriceLabel } from '@/data/notes'
 
 export default function HandwrittenNotes() {
   const [query, setQuery] = useState('')
   const [kind, setKind] = useState<'All' | 'Compulsory' | 'Optional'>('All')
+  const sadia = mentors.find((mentor) => mentor.id === 'sadia')!
+  const inquiry = (title: string) => waLink(sadia.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${title} handwritten notes available on CSS VISTA. Please share the price and purchase details.`)
 
-  const visibleSubjects = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase()
-    return handwrittenNoteSubjects.filter((subject) => (
-      (kind === 'All' || subject.kind === kind)
-      && (!normalizedQuery || `${subject.title} ${subject.description}`.toLocaleLowerCase().includes(normalizedQuery))
-    ))
-  }, [kind, query])
+  const normalizedQuery = query.trim().toLocaleLowerCase()
+  const visibleSubjects = handwrittenNoteSubjects.filter((subject) => (
+    (kind === 'All' || subject.kind === kind)
+    && (!normalizedQuery || `${subject.title} ${subject.description}`.toLocaleLowerCase().includes(normalizedQuery))
+  ))
 
   return (
     <div>
       <PageHeader
         title="Handwritten Notes by Miss Sadia Zahoor, PAS"
-        description="Contact to get handwritten notes by Miss Sadia Zahoor, PAS."
+        description="Browse the available subject categories and contact the verified author for current availability and purchase details."
       />
 
       <main className="mx-auto max-w-7xl px-4 py-8">
@@ -41,7 +43,7 @@ export default function HandwrittenNotes() {
               </p>
               <h2 className="mt-2 font-display text-2xl font-bold">{handwrittenNotesOwner}</h2>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-emerald-50/80">
-                Contact to get handwritten notes by Miss Sadia Zahoor, PAS.
+                Handwritten preparation resources for compulsory and optional CSS subjects. Availability and purchase details are provided on request.
               </p>
             </div>
           </div>
@@ -101,13 +103,9 @@ export default function HandwrittenNotes() {
                 </div>
                 <h3 className="mt-4 font-display text-lg font-bold text-pine">{subject.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{subject.description}</p>
-                <div className="mt-4 flex items-center justify-between border-t pt-3 text-xs">
-                  <span className="inline-flex items-center gap-1.5 font-semibold text-amber-700">
-                    <FileClock className="h-4 w-4" /> Upload pending
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-muted-foreground">
-                    <BookOpenCheck className="h-4 w-4" /> {subject.uploadedNotes} notes
-                  </span>
+                <div className="mt-4 border-t pt-3">
+                  <p className="font-display text-lg font-bold text-pine">{notesPriceLabel}</p>
+                  <a href={inquiry(subject.title)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> Inquire about these notes</a>
                 </div>
               </article>
             ))}

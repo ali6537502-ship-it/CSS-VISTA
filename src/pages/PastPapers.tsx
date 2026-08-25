@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
-import { Search, Eye, FileText, Bookmark, BookmarkCheck } from 'lucide-react'
+import { Search, Eye, FileText, Bookmark, BookmarkCheck, Download } from 'lucide-react'
 import { PageHeader, Badge, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
@@ -9,6 +9,14 @@ import { mergedPastPapers } from '@/lib/admin'
 import { toggleBookmark, isBookmarked } from '@/lib/store'
 import { recordActivity } from '@/lib/progress'
 import { optionalGroups } from '@/data/syllabus'
+import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
+
+const PAPERS_PER_PAGE = 30
+
+interface PdfFileMetadata {
+  pages: number
+  sizeBytes: number
+}
 
 const optionalGroupBySubject = new Map(
   optionalGroups.flatMap((group) => group.subjects.map((subject) => [subject.name, group.group] as const)),
@@ -20,28 +28,40 @@ function groupForPaper(paper: PastPaper) {
 
 export default function PastPapers() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const papers = useMemo(() => mergedPastPapers(seedPapers), [])
   const routeExam = examinations.find((name) => name.toLowerCase() === routeParams.exam?.toLowerCase()) ?? 'All'
   const routeYear = /^\d{4}$/.test(routeParams.year ?? '') ? routeParams.year! : 'All'
   const [q, setQ] = useState(() => searchParams.get('search') ?? '')
-  const [exam, setExam] = useState(routeExam)
-  const [subject, setSubject] = useState('All')
-  const [year, setYear] = useState(routeYear)
-  const [stype, setStype] = useState('All')
-  const [optionalGroup, setOptionalGroup] = useState('All')
-  const [mode, setMode] = useState('All')
-  const [savedOnly, setSavedOnly] = useState(false)
+  const [exam, setExam] = useState(() => routeExam !== 'All' ? routeExam : searchParams.get('exam') ?? 'All')
+  const [subject, setSubject] = useState(() => searchParams.get('subject') ?? 'All')
+  const [year, setYear] = useState(() => routeYear !== 'All' ? routeYear : searchParams.get('year') ?? 'All')
+  const [stype, setStype] = useState(() => searchParams.get('subjectType') ?? 'All')
+  const [optionalGroup, setOptionalGroup] = useState(() => searchParams.get('group') ?? 'All')
+  const [mode, setMode] = useState(() => searchParams.get('mode') ?? 'All')
+  const [savedOnly, setSavedOnly] = useState(() => searchParams.get('saved') === '1')
+  const [currentPage, setCurrentPage] = useState(() => Math.max(1, Number(searchParams.get('page')) || 1))
+  const [pdfIndex, setPdfIndex] = useState<Record<string, PdfFileMetadata>>({})
+  const filtersMounted = useRef(false)
   const [, forceRefresh] = useState(0)
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse ${routeExam} ${routeYear} compulsory and optional watermarked past-paper PDFs by subject.`
-    : 'Owner-provided watermarked CSS, PMS and PPSC past-paper PDFs organised by examination, subject and year.'
+    ? `Browse the owner-provided ${routeExam} ${routeYear} watermarked past-paper PDFs in this verified collection.`
+    : 'Owner-provided watermarked CSS, PMS, PPSC and MPT past-paper PDFs organised by examination, subject and year.'
+
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch('/pdf-page-counts.json', { signal: controller.signal })
+      .then((response) => response.ok ? response.json() as Promise<Record<string, PdfFileMetadata>> : {})
+      .then((records) => setPdfIndex(records))
+      .catch(() => { /* Cards remain usable when optional file metadata is blocked. */ })
+    return () => controller.abort()
+  }, [])
 
   useEffect(() => {
     const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
-    const title = isYearCollection ? `${pageTitle} — All Subjects | CSS Vista` : 'CSS, PMS & PPSC Past Papers | CSS Vista'
+    const title = isYearCollection ? `${pageTitle} — All Subjects | CSS Vista` : 'CSS, PMS, PPSC & MPT Past Papers | CSS Vista'
     document.title = title
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     const previousDescription = description?.content
@@ -79,10 +99,39 @@ export default function PastPapers() {
       (!q || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(q.toLowerCase()))
   )
 
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAPERS_PER_PAGE))
+  const pagedPapers = filtered.slice((currentPage - 1) * PAPERS_PER_PAGE, currentPage * PAPERS_PER_PAGE)
+
+  useEffect(() => {
+    if (!filtersMounted.current) {
+      filtersMounted.current = true
+      return
+    }
+    setCurrentPage(1)
+  }, [exam, mode, optionalGroup, q, savedOnly, stype, subject, year])
+
+  useEffect(() => {
+    if (currentPage > pageCount) setCurrentPage(pageCount)
+  }, [currentPage, pageCount])
+
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (q.trim()) next.set('search', q.trim())
+    if (exam !== 'All') next.set('exam', exam)
+    if (subject !== 'All') next.set('subject', subject)
+    if (year !== 'All') next.set('year', year)
+    if (stype !== 'All') next.set('subjectType', stype)
+    if (optionalGroup !== 'All') next.set('group', optionalGroup)
+    if (mode !== 'All') next.set('mode', mode)
+    if (savedOnly) next.set('saved', '1')
+    if (currentPage > 1) next.set('page', String(currentPage))
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [currentPage, exam, mode, optionalGroup, q, savedOnly, searchParams, setSearchParams, stype, subject, year])
+
   const grouped = useMemo(() => {
     const map = new Map<string, PastPaper[]>()
-    for (const p of filtered) {
-      const group = p.subjectType === 'Optional' ? `Optional Group ${groupForPaper(p) ?? '-'}` : 'Compulsory'
+    for (const p of pagedPapers) {
+      const group = p.subjectType === 'Optional' ? `Optional Group ${groupForPaper(p) ?? '-'}` : p.subjectType
       const key = `${p.examination} · ${group} · ${p.subject}`
       map.set(key, [...(map.get(key) ?? []), p])
     }
@@ -92,7 +141,10 @@ export default function PastPapers() {
         const first = a[0]
         const second = b[0]
         if (first.examination !== second.examination) return first.examination.localeCompare(second.examination)
-        if (first.subjectType !== second.subjectType) return first.subjectType === 'Compulsory' ? -1 : 1
+        if (first.subjectType !== second.subjectType) {
+          const order = { Compulsory: 0, General: 1, Optional: 2 }
+          return order[first.subjectType] - order[second.subjectType]
+        }
         const groupDifference = String(groupForPaper(first) ?? '').localeCompare(
           String(groupForPaper(second) ?? ''),
           undefined,
@@ -100,7 +152,15 @@ export default function PastPapers() {
         )
         return groupDifference || first.subject.localeCompare(second.subject)
       })
-  }, [filtered])
+  }, [pagedPapers])
+
+  const pagination = pageCount > 1 && (
+    <nav aria-label="Past paper archive pages" className="no-print flex flex-wrap items-center justify-center gap-2 rounded-xl border bg-white p-3">
+      <button type="button" onClick={() => setCurrentPage((value) => Math.max(1, value - 1))} disabled={currentPage === 1} className="h-9 rounded-lg border px-3 text-sm font-bold text-pine disabled:opacity-40">Previous</button>
+      <span className="px-2 text-sm text-muted-foreground">Page <strong className="text-pine">{currentPage}</strong> of {pageCount} · {filtered.length} papers</span>
+      <button type="button" onClick={() => setCurrentPage((value) => Math.min(pageCount, value + 1))} disabled={currentPage === pageCount} className="h-9 rounded-lg border px-3 text-sm font-bold text-pine disabled:opacity-40">Next</button>
+    </nav>
+  )
 
   return (
     <div>
@@ -193,15 +253,17 @@ export default function PastPapers() {
         {papers.length === 0 ? (
           <div className="rounded-lg border border-dashed bg-secondary/40 p-8 text-center">
             <FileText className="mx-auto h-8 w-8 text-muted-foreground/60" />
-            <h2 className="mt-3 font-semibold text-foreground">Archive ready - papers being collected</h2>
+            <h2 className="mt-3 font-semibold text-foreground">No verified past papers are available</h2>
             <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
-              The structure is fully prepared: every paper will be filed by examination (CSS / PMS / PPSC), subject, year, compulsory/optional, Paper One/Two and objective/subjective, with a preview and download button. The first papers will appear here as the owner provides them - no fake or placeholder papers are ever shown.
+              Only owner-provided or official documents are published. Please return after verified papers have been added to the archive.
             </p>
           </div>
         ) : filtered.length === 0 ? (
           <EmptyState title="No papers match your filters" hint="Try clearing a filter or the search term." />
         ) : (
-          <div className="print-area space-y-6">
+          <div className="space-y-4">
+            {pagination}
+            <div className="print-area space-y-6">
             {grouped.map(([group, list]) => (
               <div key={group}>
                 <h2 className="font-display text-lg font-bold text-pine">{group}</h2>
@@ -217,6 +279,8 @@ export default function PastPapers() {
                           {p.subjectType === 'Optional' && <Badge tone="gray">Group {groupForPaper(p) ?? '-'}</Badge>}
                           <Badge tone="gray">{p.paper}</Badge>
                           <Badge tone="gray">{p.mode}</Badge>
+                          <Badge tone="gray">PDF</Badge>
+                          {p.fileUrl && pdfIndex[p.fileUrl] && <span className="self-center text-[11px]">{pdfIndex[p.fileUrl].pages} pages · {formatFileSize(pdfIndex[p.fileUrl].sizeBytes)}</span>}
                         </div>
                       </div>
                       <button
@@ -233,8 +297,17 @@ export default function PastPapers() {
                             onClick={() => recordActivity({ type: 'past-paper', label: p.title, path: `/past-papers/view/${p.id}` })}
                             className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium hover:bg-secondary"
                           >
-                            <Eye className="h-4 w-4" /> View
+                            <Eye className="h-4 w-4" /> View Paper
                           </Link>
+                          <a
+                            href={p.fileUrl}
+                            download={safeDownloadName(`${p.examination}-${p.year}-${p.title}`)}
+                            data-google-vignette="false"
+                            onClick={() => recordActivity({ type: 'past-paper', label: `${p.title} download`, path: p.fileUrl! })}
+                            className="inline-flex items-center gap-1.5 rounded-md bg-pine px-3 py-2 text-sm font-medium text-white hover:bg-emerald-900"
+                          >
+                            <Download className="h-4 w-4" /> Download PDF
+                          </a>
                         </div>
                       ) : (
                         <span className="text-xs text-muted-foreground">File being uploaded</span>
@@ -244,6 +317,8 @@ export default function PastPapers() {
                 </div>
               </div>
             ))}
+            </div>
+            {pagination}
           </div>
         )}
 

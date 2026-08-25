@@ -5,6 +5,7 @@ import { Badge, EmptyState, PageHeader } from '@/components/shared'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
 import { recordActivity } from '@/lib/progress'
+import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
 
 type Paper = (typeof seedPapers)[number]
 const PAST_PAPER_ASSET_VERSION = '20260824'
@@ -15,12 +16,13 @@ function versionedPaperUrl(fileUrl: string) {
 }
 
 function paperPageTitle(paper: Paper) {
+  if (paper.examination === 'MPT') return `CSS MPT ${paper.year} Screening Test Past Paper`
   const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
   return `${paper.examination} ${paper.year} ${paper.subject}${part} Past Paper`
 }
 
 function paperPageDescription(paper: Paper) {
-  return `Open the owner-provided watermarked PDF for the ${paper.examination} ${paper.year} ${paper.subject} ${paper.paper.toLowerCase()} past paper.`
+  return `Open and download the owner-provided watermarked PDF for the ${paperPageTitle(paper)}.`
 }
 
 export default function PastPaperOpen() {
@@ -30,6 +32,7 @@ export default function PastPaperOpen() {
     [id],
   )
   const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
+  const [pdfSize, setPdfSize] = useState<number | null>(null)
   const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
 
   useEffect(() => {
@@ -54,13 +57,18 @@ export default function PastPaperOpen() {
   useEffect(() => {
     let active = true
     setPdfAvailable(null)
+    setPdfSize(null)
     if (!paper) return () => { active = false }
 
     if (pdfUrl) {
       fetch(pdfUrl, { method: 'HEAD' })
         .then((response) => {
           const contentType = response.headers.get('content-type') ?? ''
-          if (active) setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
+          if (active) {
+            setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
+            const length = Number(response.headers.get('content-length'))
+            setPdfSize(Number.isFinite(length) && length > 0 ? length : null)
+          }
         })
         .catch(() => active && setPdfAvailable(false))
     } else {
@@ -106,7 +114,7 @@ export default function PastPaperOpen() {
               {pdfAvailable === null
                 ? 'Checking the owner-provided watermarked file…'
                 : pdfAvailable
-                  ? 'The supplied document is available in its watermarked format.'
+                  ? `The supplied document is available in its watermarked format${pdfSize ? ` · ${formatFileSize(pdfSize)}` : ''}.`
                   : 'The owner-provided watermarked PDF is not currently stored. No analysis or reconstructed paper is substituted.'}
             </p>
           </div>
@@ -114,8 +122,8 @@ export default function PastPaperOpen() {
             <a href={pdfUrl} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary">
               <ExternalLink className="h-4 w-4" /> Open full window
             </a>
-            <a href={pdfUrl} download data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
-              <Download className="h-4 w-4" /> Download
+            <a href={pdfUrl} download={safeDownloadName(`${paper.examination}-${paper.year}-${paper.subject}-${paper.paper}`)} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
+              <Download className="h-4 w-4" /> Download PDF
             </a>
           </>}
         </div>

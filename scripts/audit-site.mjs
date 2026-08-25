@@ -86,7 +86,7 @@ for (const file of publicFiles) {
   }
 }
 
-const paperRegistryFiles = ['pastPapers.generated.ts', 'pmsPastPapers.generated.ts']
+const paperRegistryFiles = ['pastPapers.generated.ts', 'pmsPastPapers.generated.ts', 'supplementalPastPapers.generated.ts']
 const paperIds = new Set()
 const paperUrls = new Set()
 for (const registry of paperRegistryFiles) {

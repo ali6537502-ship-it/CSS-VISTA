@@ -11,6 +11,7 @@ const SubjectDetail = lazy(() => import('./pages/SubjectDetail'))
 const OptionalSubjects = lazy(() => import('./pages/OptionalSubjects'))
 const SubjectSelector = lazy(() => import('./pages/SubjectSelector'))
 const NotesLibrary = lazy(() => import('./pages/NotesLibrary'))
+const NoteViewer = lazy(() => import('./pages/NoteViewer'))
 const PastPapers = lazy(() => import('./pages/PastPapers'))
 const CssSubjectMcqs = lazy(() => import('./pages/CssSubjectMcqs'))
 const EssayModule = lazy(() => import('./pages/EssayModule'))
@@ -79,6 +80,7 @@ export default function App() {
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
+        <Route path="/notes/view/:productId/:documentId" element={<S><NoteViewer /></S>} />
         <Route path="/past-papers" element={<S><PastPapers /></S>} />
         <Route path="/past-papers/:exam/:year" element={<S><PastPapers /></S>} />
         <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />

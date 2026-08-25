@@ -35,6 +35,7 @@ export const AD_ROUTE_DENYLIST: readonly AdRouteRule[] = [
   { pattern: '/answer-timer', match: 'prefix', reason: 'Timed examination tool' },
   { pattern: '/essay', match: 'prefix', reason: 'Interactive answer-practice workflow' },
   { pattern: '/past-papers/view', match: 'prefix', reason: 'Full-paper view' },
+  { pattern: '/notes/view', match: 'prefix', reason: 'Full notes sample viewer' },
   { pattern: '/study-tools', match: 'prefix', reason: 'Interactive study tools' },
   { pattern: '/subjects/selector', match: 'prefix', reason: 'Interactive subject-selection tool' },
   { pattern: '/games', match: 'prefix', reason: 'Interactive game' },

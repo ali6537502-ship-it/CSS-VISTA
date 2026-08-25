@@ -16,6 +16,7 @@ export async function loadGeneratedPastPapers(root) {
   const sources = [
     ['src/data/pastPapers.generated.ts', 'importedPastPapers'],
     ['src/data/pmsPastPapers.generated.ts', 'importedPmsPastPapers'],
+    ['src/data/supplementalPastPapers.generated.ts', 'importedSupplementalPastPapers'],
   ]
   const groups = await Promise.all(sources.map(async ([relativePath, exportName]) => {
     const filePath = join(root, relativePath)

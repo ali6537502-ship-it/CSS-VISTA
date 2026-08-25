@@ -8,6 +8,8 @@ const dist = join(root, 'dist')
 const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
 const cssPapers = registeredPapers.filter((paper) => paper.examination === 'CSS')
 const pmsPapers = registeredPapers.filter((paper) => paper.examination === 'PMS')
+const ppscPapers = registeredPapers.filter((paper) => paper.examination === 'PPSC')
+const mptPapers = registeredPapers.filter((paper) => paper.examination === 'MPT')
 
 function assert(condition, message) {
   if (!condition) throw new Error(message)
@@ -57,6 +59,7 @@ assert(indexHtml.includes('https://www.css-vista.com/'), 'Hostinger index is mis
 assert(!samplePaperHtml.includes('__SITE_ORIGIN__'), 'Generated past-paper page still contains the Sites runtime origin placeholder')
 assert(htaccess.includes('RewriteRule ^ index.html [L]'), 'SPA fallback rule is missing')
 assert(htaccess.includes('seo/past-papers/$1.html'), 'Direct past-paper SEO rewrite is missing')
+assert(htaccess.includes('(css|pms|ppsc|mpt)'), 'Past-paper collection rewrites must include CSS, PMS, PPSC and MPT')
 assert(htaccess.includes('book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers'), 'Asset-directory SPA route rewrites are missing')
 assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are not explicitly protected from SPA rewrites')
 assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
@@ -69,15 +72,21 @@ assert(/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(supabaseUrl ?? ''), 'Product
 assert(supabasePublishableKey?.startsWith('sb_publishable_'), 'Production Supabase key must be a browser-safe publishable key')
 assert(javascriptBundles.some((source) => source.includes(supabaseUrl)), 'Production JavaScript is missing the Supabase project URL')
 assert(javascriptBundles.some((source) => source.includes(supabasePublishableKey)), 'Production JavaScript is missing the Supabase publishable key')
-assert(paperFiles.filter((name) => name.endsWith('.html')).length === 605, 'Expected 605 direct past-paper SEO pages')
+assert(paperFiles.filter((name) => name.endsWith('.html')).length === 782, 'Expected 782 direct past-paper SEO pages')
 assert(cssPapers.length === 467, 'Expected 467 registered CSS past papers')
 assert(pmsPapers.length === 138, 'Expected 138 registered PMS past papers')
-assert(registeredPapers.length === 605, 'Expected 605 registered past papers in total')
+assert(ppscPapers.length === 173, 'Expected 173 registered PPSC past papers')
+assert(mptPapers.length === 4, 'Expected 4 registered MPT past papers')
+assert(registeredPapers.length === 782, 'Expected 782 registered past papers in total')
 
 for (const paper of registeredPapers) {
-  const validUrl = paper.examination === 'CSS'
-    ? /^\/past-papers\/20\d{2}\/[^/]+\.pdf$/i.test(paper.fileUrl)
-    : /^\/past-papers\/pms\/(?:compulsory|group-[a-g])\/[^/]+\.pdf$/i.test(paper.fileUrl)
+  const patterns = {
+    CSS: /^\/past-papers\/20\d{2}\/[^/]+\.pdf$/i,
+    PMS: /^\/past-papers\/pms\/(?:compulsory|group-[a-g])\/[^/]+\.pdf$/i,
+    PPSC: /^\/past-papers\/ppsc\/20\d{2}\/[^/]+\.pdf$/i,
+    MPT: /^\/past-papers\/mpt\/[^/]+\.pdf$/i,
+  }
+  const validUrl = patterns[paper.examination]?.test(paper.fileUrl)
   assert(validUrl, `Invalid ${paper.examination} paper URL: ${paper.fileUrl}`)
   const pdfPath = join(dist, paper.fileUrl.replace(/^\/+/, ''))
   let handle
@@ -95,4 +104,4 @@ for (const paper of registeredPapers) {
   }
 }
 
-console.log('Hostinger artifact audit passed: Supabase, crawler files, static root, SPA rewrites, 605 paper pages, 467 CSS PDFs and 138 PMS PDFs verified.')
+console.log('Hostinger artifact audit passed: Supabase, crawler files, static root, SPA rewrites, 782 paper pages, 467 CSS, 138 PMS, 173 PPSC and 4 MPT PDFs verified.')

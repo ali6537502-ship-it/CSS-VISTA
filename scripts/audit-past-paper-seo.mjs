@@ -10,7 +10,7 @@ function assert(condition, message) {
   if (!condition) throw new Error(message)
 }
 
-assert(papers.length === 605, `Expected 605 supplied papers, received ${papers.length}`)
+assert(papers.length === 782, `Expected 782 supplied papers, received ${papers.length}`)
 assert(papers.every((paper) => paper.id && paper.fileUrl && paper.title && paper.subject && paper.year), 'Every paper needs complete searchable metadata')
 assert(new Set(papers.map((paper) => paper.id)).size === papers.length, 'Past-paper IDs must be unique')
 assert(papers.some((paper) => paper.id === 'css-2023-current-affairs'), 'CSS 2023 direct-search sample is missing')

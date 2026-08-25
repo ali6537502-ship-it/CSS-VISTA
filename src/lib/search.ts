@@ -175,11 +175,11 @@ const localCorpus: SearchDocument[] = [
       link: '/notes',
     },
     ...(product.samples ?? []).map((sample) => ({
-      id: `notes-sample-${sample.url ?? sample.previewFolder}`,
+      id: `notes-sample-${product.id}-${sample.id}`,
       title: sample.title,
       category: 'Sample Notes',
-      snippet: `${product.subject} sample preview`,
-      link: '/notes',
+      snippet: `${product.subject} authorised ${sample.pages}-page ${sample.kind === 'pdf' ? 'PDF' : 'sample'} preview`,
+      link: `/notes/view/${product.id}/${sample.id}`,
     })),
   ]),
   ...vocabulary.map((item) => ({
@@ -306,7 +306,6 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         snippet: `${paper.subjectType}, ${paper.paper}, ${paper.mode}${paper.optionalGroup ? `, Group ${paper.optionalGroup}` : ''}`,
         link: paper.fileUrl ? `/past-papers/view/${paper.id}` : '/past-papers',
         keywords: `${paper.subject} ${paper.year} ${paper.examination}`,
-        linkForQuery: (query: string) => `/past-papers?search=${encodeURIComponent(query)}`,
       })))
     }
 

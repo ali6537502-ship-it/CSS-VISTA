@@ -7,14 +7,14 @@ import {
   getCountdownConfig, saveCountdownConfig, mergedHomeCards, upsertHomeCard, deleteHomeCard,
   mergedUpdates, upsertUpdate, deleteUpdate, mergedCategoryOverrides, upsertCategoryOverride,
   deleteCategoryOverride, getReports, getCloudReports, deleteReport, getMcqOverride, upsertMcqOverride,
-  getAdminContent, getMentorOverride, upsertMentorOverride, getPriceOverride, setPriceOverride,
+  getAdminContent, getMentorOverride, upsertMentorOverride,
   fileToDataUrl, type CountdownConfig, type HomeCard, type SiteUpdate, type MentorOverride,
 } from '@/lib/admin'
 import { defaultHomeCards } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { getBankIndex, getQuestionById, type BankIndex } from '@/data/mcq'
 import { mentors } from '@/data/site'
-import { noteProducts, bundle } from '@/data/notes'
+import { notesPriceLabel } from '@/data/notes'
 
 const uid = () => Math.random().toString(36).slice(2, 10)
 const input = 'h-10 w-full rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
@@ -441,25 +441,10 @@ export function MentorsEditor() {
 
 // ---------------- Prices ----------------
 export function PricesEditor() {
-  const [, force] = useState(0)
-  const items = [...noteProducts.map((p) => ({ id: p.id, label: p.subject, price: p.price ?? '' })), { id: 'bundle', label: bundle.title, price: bundle.price }]
   return (
     <div className="max-w-xl rounded-lg border bg-white p-5">
-      <h3 className="font-semibold text-pine">Notes prices</h3>
-      <p className="mt-1 text-xs text-muted-foreground">Change any price - the Notes Library updates immediately on this device. Leave empty to restore the default.</p>
-      <div className="mt-4 space-y-3">
-        {items.map((it) => (
-          <div key={it.id} className="flex items-center gap-3">
-            <span className="min-w-0 flex-1 truncate text-sm font-medium">{it.label}</span>
-            <input
-              className={input + ' w-36'}
-              defaultValue={getPriceOverride(it.id) ?? it.price}
-              placeholder="e.g. PKR 6,000"
-              onBlur={(e) => { setPriceOverride(it.id, e.target.value); force((f) => f + 1) }}
-            />
-          </div>
-        ))}
-      </div>
+      <h3 className="font-semibold text-pine">Public notes pricing</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">The public Notes Library uses the fixed label <strong className="text-pine">{notesPriceLabel}</strong>. Current prices and purchase details are shared privately by the verified notes author after a student sends an inquiry.</p>
     </div>
   )
 }

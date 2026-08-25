@@ -67,12 +67,13 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
 }
 
 function paperTitle(paper) {
+  if (paper.examination === 'MPT') return `CSS MPT ${paper.year} Screening Test Past Paper`
   const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
   return `${paper.examination} ${paper.year} ${paper.subject}${part} Past Paper`
 }
 
 function paperDescription(paper) {
-  return `Open the owner-provided watermarked PDF for the ${paper.examination} ${paper.year} ${paper.subject} ${paper.paper.toLowerCase()} past paper. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
+  return `Open and download the owner-provided watermarked PDF for the ${paperTitle(paper)}. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
 }
 
 function paperBody(paper) {
@@ -125,7 +126,7 @@ for (const [key, papers] of collections) {
   const year = Number(rawYear)
   const canonical = `${siteOrigin}/past-papers/${examSlug}/${year}`
   const title = `${examination} ${year} Past Papers — All Subjects | CSS Vista`
-  const description = `Browse ${papers.length} ${examination} ${year} owner-provided watermarked past-paper PDFs for compulsory and optional subjects.`
+  const description = `Browse ${papers.length} owner-provided ${examination} ${year} watermarked past-paper PDFs in this verified collection.`
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -188,7 +189,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url)
     const paperMatch = url.pathname.match(/^\\/past-papers\\/view\\/([a-z0-9-]+)\\/?$/)
-    const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc)\\/(\\d{4})\\/?$/)
+    const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc|mpt)\\/(\\d{4})\\/?$/)
     const seoPath = paperMatch
       ? '/seo/past-papers/' + paperMatch[1]
       : collectionMatch

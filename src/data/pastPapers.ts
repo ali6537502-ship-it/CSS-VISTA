@@ -2,13 +2,14 @@
 // through the admin panel. No fabricated papers: only owner-provided files or official sources.
 import { importedPastPapers } from './pastPapers.generated'
 import { importedPmsPastPapers } from './pmsPastPapers.generated'
+import { importedSupplementalPastPapers } from './supplementalPastPapers.generated'
 
 export interface PastPaper {
   id: string
   title: string
-  examination: 'CSS' | 'PMS' | 'PPSC'
+  examination: 'CSS' | 'PMS' | 'PPSC' | 'MPT'
   subject: string
-  subjectType: 'Compulsory' | 'Optional'
+  subjectType: 'Compulsory' | 'Optional' | 'General'
   year: number
   paper: 'Single Paper' | 'Paper One' | 'Paper Two' | 'Combined Papers'
   mode: 'Objective' | 'Subjective'
@@ -17,10 +18,10 @@ export interface PastPaper {
   source: 'Owner-provided' | 'Official'
 }
 
-export const pastPapers: PastPaper[] = [...importedPastPapers, ...importedPmsPastPapers]
+export const pastPapers: PastPaper[] = [...importedPastPapers, ...importedPmsPastPapers, ...importedSupplementalPastPapers]
 
-export const examinations = ['CSS', 'PMS', 'PPSC'] as const
-export const subjectTypes = ['Compulsory', 'Optional'] as const
+export const examinations = ['CSS', 'PMS', 'PPSC', 'MPT'] as const
+export const subjectTypes = ['Compulsory', 'Optional', 'General'] as const
 export const paperParts = ['Single Paper', 'Paper One', 'Paper Two', 'Combined Papers'] as const
 export const paperModes = ['Objective', 'Subjective'] as const
 

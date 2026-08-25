@@ -32,7 +32,7 @@ DirectoryIndex index.html
 
   # Serve the generated search-friendly past-paper pages at their public URLs.
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]
-  RewriteRule ^past-papers/(css|pms|ppsc)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
+  RewriteRule ^past-papers/(css|pms|ppsc|mpt)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
 
   # Keep real files and directories intact, then hand app routes to React.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
