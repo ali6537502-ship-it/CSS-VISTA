@@ -2286,6 +2286,28 @@
   }
 }
 
+/* Keep long homepages cheap to render and mobile scrolling GPU-friendly. */
+.cssv-home > div > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 460px;
+}
+
+@media (max-width: 767px) {
+  .cssv-site-header,
+  .cssv-glass-drawer,
+  .cssv-mobile-nav {
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(10px) saturate(120%);
+  }
+
+  .cssv-glass-panel,
+  .cssv-glass-subcard,
+  .cssv-glass-icon {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 /* Main homepage poster: preserve the complete artwork at every viewport size. */
 .cssv-home-hero.cssv-home-hero-poster {
   display: block;

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate, useNavigationType } from 'react-router'
 import {
   Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine,
@@ -10,15 +10,16 @@ import {
 import { site } from '@/data/site'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
-import { searchSite, type SearchResult } from '@/lib/search'
+import type { SearchResult } from '@/lib/search'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/store'
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
 import { ManagedAdOpportunity } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
-import VistaShortcut from '@/components/VistaShortcut'
 import { requestPageBack } from '@/lib/backNavigation'
+import { lazyWithRecovery } from '@/lib/chunkRecovery'
+import { scheduleIdleWork } from '@/lib/idle'
 import {
   getRouteScrollPosition,
   parseRouteScrollState,
@@ -121,6 +122,17 @@ const mobileQuickLinks = [
 ]
 
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
+
+const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
+
+function DeferredVistaShortcut() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => scheduleIdleWork(() => setReady(true), { timeout: 1_200, fallbackDelay: 500 }), [])
+
+  if (!ready) return null
+  return <Suspense fallback={null}><VistaShortcut /></Suspense>
+}
 
 interface FlatNavigationLink {
   label: string
@@ -305,9 +317,13 @@ function SearchBox({ onSelect, autoFocus = false }: { onSelect?: () => void; aut
       return () => { active = false }
     }
     const timer = window.setTimeout(() => {
-      searchSite(q, 12)
+      import('@/lib/search')
+        .then(({ searchSite }) => searchSite(q, 12))
         .then((nextResults) => {
           if (active) setResults(nextResults)
+        })
+        .catch(() => {
+          if (active) setResults([])
         })
         .finally(() => {
           if (active) setLoading(false)
@@ -981,7 +997,7 @@ export default function Layout() {
         <ManagedAdOpportunity />
       </main>
 
-      <VistaShortcut />
+      <DeferredVistaShortcut />
 
       <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">

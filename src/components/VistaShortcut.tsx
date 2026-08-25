@@ -6,7 +6,7 @@ import {
   Trash2, X,
 } from 'lucide-react'
 import WhatsAppIcon from '@/components/WhatsAppIcon'
-import { searchSite, type SearchResult } from '@/lib/search'
+import type { SearchResult } from '@/lib/search'
 import { getState, setGoalChecklist, setQuickNotes } from '@/lib/store'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { site } from '@/data/site'
@@ -90,7 +90,16 @@ export default function VistaShortcut() {
       return
     }
     let active = true
-    const timeout = window.setTimeout(() => searchSite(query, 8).then((rows) => active && setResults(rows)), 160)
+    const timeout = window.setTimeout(() => {
+      void import('@/lib/search')
+        .then(({ searchSite }) => searchSite(query, 8))
+        .then((rows) => {
+          if (active) setResults(rows)
+        })
+        .catch(() => {
+          if (active) setResults([])
+        })
+    }, 160)
     return () => { active = false; window.clearTimeout(timeout) }
   }, [query])
 

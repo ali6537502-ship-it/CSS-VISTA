@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
+import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
@@ -14,7 +14,7 @@ import { cardIcons } from '@/data/homeCardIcons'
 import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
-import ExamIntelligenceHomeCard from '@/components/ExamIntelligenceHomeCard'
+import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
@@ -127,6 +127,8 @@ function HomeHero() {
     </section>
   )
 }
+
+const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/ExamIntelligenceHomeCard'))
 
 function SectionHeading({
   title,
@@ -605,7 +607,7 @@ export default function Home() {
           </AnimatedCollapse>
         </section>
 
-        <ExamIntelligenceHomeCard />
+        <Suspense fallback={null}><ExamIntelligenceHomeCard /></Suspense>
 
         {hasPlanner && (
           <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '35ms' } as CSSProperties} aria-labelledby="planner-home-card">

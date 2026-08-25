@@ -16,6 +16,7 @@ import {
   syncStudentProgress,
 } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { scheduleIdleWork } from '@/lib/idle'
 
 // Batch active-study writes so question taps and planner edits do not create a
 // database request every few seconds. Pending progress still flushes on hide.
@@ -62,13 +63,18 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     if (!accountServiceConfigured) return
 
     let active = true
-    getSupabaseClient().then((nextClient) => {
-      if (!active) return
-      setClient(nextClient)
-      if (!nextClient) setLoading(false)
-    })
+    const authCriticalRoute = /^\/(?:account|factbook|admin)(?:\/|$)/.test(window.location.pathname)
+      || new URLSearchParams(window.location.search).has('reset')
+    const cancel = scheduleIdleWork(() => {
+      void getSupabaseClient().then((nextClient) => {
+        if (!active) return
+        setClient(nextClient)
+        if (!nextClient) setLoading(false)
+      })
+    }, { timeout: 1_500, fallbackDelay: 500, immediate: authCriticalRoute })
     return () => {
       active = false
+      cancel()
     }
   }, [])
 

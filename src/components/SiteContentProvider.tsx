@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react'
 import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 import { initialiseCloudAdminContent, refreshCloudAdminContent } from '@/lib/admin'
 import { useAccount } from '@/lib/accountContext'
+import { scheduleIdleWork } from '@/lib/idle'
 
 export function SiteContentProvider({ children }: { children: ReactNode }) {
   const { user } = useAccount()
@@ -10,7 +11,11 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
     if (!accountServiceConfigured) return
     // Render the static learning platform immediately; refresh the small CMS
     // overlay in the background so a slow network never blocks the first screen.
-    void initialiseCloudAdminContent()
+    const contentCriticalRoute = /^\/admin(?:\/|$)/.test(window.location.pathname)
+    return scheduleIdleWork(
+      () => void initialiseCloudAdminContent(),
+      { timeout: 1_800, fallbackDelay: 650, immediate: contentCriticalRoute },
+    )
   }, [])
 
   useEffect(() => {
