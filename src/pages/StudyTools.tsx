@@ -13,6 +13,7 @@ import { shippedMcqSummary } from '@/data/mcqMeta'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { printPage } from '@/components/PrintMenu'
 import ScheduledSyllabusBoard from '@/components/ScheduledSyllabusBoard'
+import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 
 const quotationsSeed = [
   { text: 'With faith, discipline and selfless devotion to duty, there is nothing worthwhile that you cannot achieve.', source: 'Muhammad Ali Jinnah' },
@@ -101,13 +102,8 @@ function MistakeLog() {
 }
 
 function CountdownTimer({ defaultMinutes, label, presets = [10, 20, 30] }: { defaultMinutes: number; label: string; presets?: number[] }) {
-  const [left, setLeft] = useState(defaultMinutes * 60)
-  const [running, setRunning] = useState(false)
-  useEffect(() => {
-    if (!running) return
-    const t = setInterval(() => setLeft((s) => (s <= 1 ? (setRunning(false), 0) : s - 1)), 1000)
-    return () => clearInterval(t)
-  }, [running])
+  const timer = useAccurateCountdown(defaultMinutes * 60)
+  const { remaining: left, running } = timer
   const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
   return (
     <div className="rounded-lg border bg-white p-4 text-center">
@@ -115,10 +111,10 @@ function CountdownTimer({ defaultMinutes, label, presets = [10, 20, 30] }: { def
       <div className={`mt-2 font-display text-3xl font-bold tabular-nums ${left < 60 ? 'text-red-600' : 'text-pine'}`}>{fmt(left)}</div>
       <div className="mt-3 flex items-center justify-center gap-2">
         {presets.map((m) => (
-          <button key={m} onClick={() => { setLeft(m * 60); setRunning(false) }} className="rounded bg-secondary px-2 py-1 text-xs font-medium">{m}m</button>
+          <button key={m} onClick={() => timer.reset(m * 60)} className="rounded bg-secondary px-2 py-1 text-xs font-medium">{m}m</button>
         ))}
-        <button onClick={() => setRunning(!running)} className="rounded-md bg-pine p-2 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>{running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</button>
-        <button onClick={() => { setLeft(defaultMinutes * 60); setRunning(false) }} className="rounded-md border p-2 hover:bg-secondary" aria-label="Reset"><RotateCcw className="h-4 w-4" /></button>
+        <button onClick={timer.toggle} className="rounded-md bg-pine p-2 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>{running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</button>
+        <button onClick={() => timer.reset(defaultMinutes * 60)} className="rounded-md border p-2 hover:bg-secondary" aria-label="Reset"><RotateCcw className="h-4 w-4" /></button>
       </div>
     </div>
   )
@@ -126,22 +122,22 @@ function CountdownTimer({ defaultMinutes, label, presets = [10, 20, 30] }: { def
 
 function PomodoroTimer() {
   const [mode, setMode] = useState<'study' | 'break'>('study')
-  const [left, setLeft] = useState(25 * 60)
-  const [running, setRunning] = useState(false)
   const [cycles, setCycles] = useState(0)
+  const timer = useAccurateCountdown(25 * 60)
+  const { remaining: left, running, startFrom } = timer
+
   useEffect(() => {
-    if (!running) return
-    const t = setInterval(() => {
-      setLeft((s) => {
-        if (s <= 1) {
-          if (mode === 'study') { setMode('break'); setCycles((c) => c + 1); return 5 * 60 }
-          setMode('study'); return 25 * 60
-        }
-        return s - 1
-      })
-    }, 1000)
-    return () => clearInterval(t)
-  }, [running, mode])
+    if (left !== 0 || running) return
+    if (mode === 'study') {
+      setMode('break')
+      setCycles((current) => current + 1)
+      startFrom(5 * 60)
+    } else {
+      setMode('study')
+      startFrom(25 * 60)
+    }
+  }, [left, mode, running, startFrom])
+
   const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
   return (
     <div className="rounded-lg border bg-white p-5 text-center">
@@ -151,8 +147,8 @@ function PomodoroTimer() {
       </div>
       <div className="mt-3 font-display text-4xl font-bold tabular-nums text-pine">{fmt(left)}</div>
       <div className="mt-4 flex justify-center gap-2">
-        <button onClick={() => setRunning(!running)} className="rounded-md bg-pine p-2.5 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>{running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</button>
-        <button onClick={() => { setRunning(false); setMode('study'); setLeft(25 * 60) }} className="rounded-md border p-2.5 hover:bg-secondary" aria-label="Reset"><RotateCcw className="h-4 w-4" /></button>
+        <button onClick={timer.toggle} className="rounded-md bg-pine p-2.5 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>{running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}</button>
+        <button onClick={() => { setMode('study'); timer.reset(25 * 60) }} className="rounded-md border p-2.5 hover:bg-secondary" aria-label="Reset"><RotateCcw className="h-4 w-4" /></button>
       </div>
       <p className="mt-2 text-xs text-muted-foreground">Completed cycles: {cycles}</p>
     </div>

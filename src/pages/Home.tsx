@@ -16,6 +16,7 @@ import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
+import { css2027Dates, notifications2027 } from '@/data/css2027'
 
 interface LinkCard {
   title: string
@@ -203,12 +204,21 @@ function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNo
   )
 }
 
+const mpt2027Date = css2027Dates.find((item) => item.id === 'd4')?.date ?? '2026-10-10'
+const mpt2027Notice = notifications2027.find((item) => item.id === 'mpt-ce-2027-rescheduled')
+const mpt2027DateLabel = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${mpt2027Date}T00:00:00Z`))
+
 const officialExamDates = {
   mpt: {
     label: 'MPT 2027',
-    dateLabel: '10 October 2026',
-    target: '2026-10-10T00:00:00+05:00',
-    source: 'https://fpsc.gov.pk/uploads/content/1787222788872_Public_Notice_-_Re-Scheduling_of_MPT-2027.pdf',
+    dateLabel: mpt2027DateLabel,
+    target: `${mpt2027Date}T00:00:00+05:00`,
+    source: mpt2027Notice?.officialUrl ?? 'https://www.fpsc.gov.pk/',
   },
   written: {
     label: 'CSS Written 2027',

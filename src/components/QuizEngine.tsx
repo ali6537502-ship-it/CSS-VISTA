@@ -38,7 +38,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const [seconds, setSeconds] = useState(0)
   const [bookmarked, setBookmarked] = useState<Record<number, boolean>>({})
   const [retryWrong, setRetryWrong] = useState(false)
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const testStartedAtRef = useRef<number | null>(null)
   const questionStartedAtRef = useRef<Record<number, number>>({})
   const totalTime = timePerQuestion * qs.length
   const range = questionPageRange(page, qs.length)
@@ -54,8 +54,21 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
 
   useEffect(() => {
     if (!started || finished) return
-    timerRef.current = setInterval(() => setSeconds((value) => value + 1), 1000)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    const updateElapsed = () => {
+      const beganAt = testStartedAtRef.current
+      if (beganAt === null) return
+      const elapsed = Math.max(0, Math.floor((Date.now() - beganAt) / 1000))
+      setSeconds((current) => current === elapsed ? current : elapsed)
+    }
+    updateElapsed()
+    const interval = window.setInterval(updateElapsed, 250)
+    document.addEventListener('visibilitychange', updateElapsed)
+    window.addEventListener('pageshow', updateElapsed)
+    return () => {
+      window.clearInterval(interval)
+      document.removeEventListener('visibilitychange', updateElapsed)
+      window.removeEventListener('pageshow', updateElapsed)
+    }
   }, [started, finished])
 
   useEffect(() => {
@@ -88,6 +101,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
     setFinished(false)
     setStarted(true)
     setRetryWrong(onlyWrong)
+    testStartedAtRef.current = Date.now()
     questionStartedAtRef.current = {}
     const now = Date.now()
     next.slice(0, QUESTIONS_PER_PAGE).forEach((question) => { questionStartedAtRef.current[question.id] = now })
@@ -119,9 +133,12 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   }
 
   function finish() {
+    const elapsed = testStartedAtRef.current === null
+      ? seconds
+      : Math.max(0, Math.floor((Date.now() - testStartedAtRef.current) / 1000))
+    setSeconds(elapsed)
     setFinished(true)
     setReviewPage(1)
-    if (timerRef.current) clearInterval(timerRef.current)
     const score = computeScore()
     recordQuizResult({
       type: mode,

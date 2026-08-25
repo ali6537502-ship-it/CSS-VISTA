@@ -427,7 +427,6 @@ let routeScrollPositions: RouteScrollEntry[] = []
 let routeScrollHydrated = false
 let lastRouteKey: string | null = null
 let lastRoutePathname: string | null = null
-let lastRouteHistoryIndex: number | null = null
 let animatedRouteKey: string | null = null
 let animatedRouteDirection: 'forward' | 'back' | 'none' = 'none'
 
@@ -460,16 +459,12 @@ function saveRouteScroll(locationKey: string, position: number, historyIndex: nu
   if (indexedKey) routeScrollPositions = updateRouteScrollState(routeScrollPositions, indexedKey, position)
 }
 
-function resolveRouteDirection(locationKey: string, pathname: string, navigationType: 'POP' | 'PUSH' | 'REPLACE', historyIndex: number | null) {
+function resolveRouteDirection(locationKey: string, pathname: string, navigationType: 'POP' | 'PUSH' | 'REPLACE') {
   if (animatedRouteKey === locationKey) return animatedRouteDirection
   animatedRouteKey = locationKey
   animatedRouteDirection = lastRouteKey === null || lastRouteKey === locationKey || lastRoutePathname === pathname
     ? 'none'
-    : navigationType === 'POP'
-      ? historyIndex !== null && lastRouteHistoryIndex !== null && historyIndex > lastRouteHistoryIndex
-        ? 'forward'
-        : 'back'
-      : navigationType === 'PUSH'
+    : navigationType === 'PUSH'
         ? 'forward'
         : 'none'
   return animatedRouteDirection
@@ -494,12 +489,23 @@ export default function Layout() {
   const currentRoute = `${location.pathname}${location.search}${location.hash}`
   const currentHistoryIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
   const initialHistoryIndexRef = useRef(currentHistoryIndex)
+  const [releasedRestoreKey, setReleasedRestoreKey] = useState<string | null>(null)
   const restoringRef = useRef<string | null>(null)
   const previousPathnameRef = useRef(location.pathname)
   const previousHashRef = useRef(location.hash)
   const focusPathnameRef = useRef(location.pathname)
   const activeRouteKeyRef = useRef(location.key)
-  const routeDirection = resolveRouteDirection(location.key, location.pathname, navigationType, currentHistoryIndex)
+  hydrateRouteScrollPositions()
+  const indexedScrollKey = historyScrollKey(currentHistoryIndex)
+  const renderSavedPosition = getRouteScrollPosition(routeScrollPositions, location.key)
+    ?? (indexedScrollKey ? getRouteScrollPosition(routeScrollPositions, indexedScrollKey) : undefined)
+  const renderRestoreMinHeight = navigationType === 'POP'
+    && renderSavedPosition !== undefined
+    && renderSavedPosition > 0
+    && releasedRestoreKey !== location.key
+      ? Math.ceil(renderSavedPosition + window.innerHeight)
+      : undefined
+  const routeDirection = resolveRouteDirection(location.key, location.pathname, navigationType)
   const { user, configured: accountsConfigured } = useAccount()
 
   useLayoutEffect(() => {
@@ -548,7 +554,6 @@ export default function Layout() {
   }, [currentHistoryIndex, location.key, navigationType])
   useLayoutEffect(() => {
     activeRouteKeyRef.current = location.key
-    lastRouteHistoryIndex = currentHistoryIndex
     lastRouteKey = location.key
     lastRoutePathname = location.pathname
   }, [currentHistoryIndex, location.key, location.pathname])
@@ -578,19 +583,20 @@ export default function Layout() {
     let cancelled = false
     const startedAt = performance.now()
     const routeStage = document.querySelector<HTMLElement>('.cssv-route-stage')
-    const previousStageMinHeight = routeStage?.style.minHeight ?? ''
     const stageTop = routeStage ? routeStage.getBoundingClientRect().top + window.scrollY : 0
     const requiredStageHeight = Math.max(0, Math.ceil(target + window.innerHeight - stageTop))
     let reservedRestoreHeight = intent === 'restore' && target > 0 && Boolean(routeStage)
     restoringRef.current = location.key
     if (reservedRestoreHeight && routeStage) {
-      routeStage.style.minHeight = `${requiredStageHeight}px`
+      const renderedMinHeight = Number.parseFloat(routeStage.style.minHeight) || 0
+      routeStage.style.minHeight = `${Math.max(requiredStageHeight, renderedMinHeight)}px`
       window.scrollTo({ top: target, left: 0, behavior: 'auto' })
     }
     const releaseRestoreHeight = () => {
       if (!reservedRestoreHeight) return
       reservedRestoreHeight = false
-      if (routeStage) routeStage.style.minHeight = previousStageMinHeight
+      if (routeStage) routeStage.style.minHeight = ''
+      setReleasedRestoreKey(location.key)
     }
     const finishRestore = () => {
       releaseRestoreHeight()
@@ -960,6 +966,7 @@ export default function Layout() {
         <div
           key={location.pathname}
           className={`cssv-route-stage route-transition-${routeDirection}`}
+          style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
           <Outlet />
         </div>

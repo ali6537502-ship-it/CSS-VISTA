@@ -1,17 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Download, Maximize2, Minimize2, Pause, Play, RotateCcw, Save, Trash2 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { analyticalQuestions } from '@/data/challenges'
 import { saveAnswer, getState, deleteAnswer } from '@/lib/store'
 import { essayRubric } from '@/data/essay'
 import { usePageBack } from '@/lib/backNavigation'
+import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 
 export default function AnswerWriting() {
   const [question, setQuestion] = useState(analyticalQuestions[0].question)
   const [subject, setSubject] = useState(analyticalQuestions[0].subject)
   const [minutes, setMinutes] = useState(20)
-  const [secondsLeft, setSecondsLeft] = useState(20 * 60)
-  const [running, setRunning] = useState(false)
+  const timer = useAccurateCountdown(20 * 60)
+  const { remaining: secondsLeft, running } = timer
   const [fullscreen, setFullscreen] = useState(false)
   usePageBack(fullscreen, () => setFullscreen(false))
   const [outline, setOutline] = useState('')
@@ -21,25 +22,12 @@ export default function AnswerWriting() {
   const [saved, setSaved] = useState(false)
   const [rubric, setRubric] = useState<Record<string, boolean>>({})
   const [history, setHistory] = useState(() => getState().savedAnswers)
-  const ref = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  useEffect(() => {
-    if (running) {
-      ref.current = setInterval(() => {
-        setSecondsLeft((s) => {
-          if (s <= 1) { setRunning(false); return 0 }
-          return s - 1
-        })
-      }, 1000)
-      return () => { if (ref.current) clearInterval(ref.current) }
-    }
-  }, [running])
-
   const wordCount = [intro, body, conclusion].join(' ').trim().split(/\s+/).filter(Boolean).length
   const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
   function resetTimer(m: number) {
-    setMinutes(m); setSecondsLeft(m * 60); setRunning(false)
+    setMinutes(m)
+    timer.reset(m * 60)
   }
 
   function handleSave() {
@@ -95,7 +83,7 @@ export default function AnswerWriting() {
 
               <div className="flex items-center gap-4 border-b bg-secondary/40 px-4 py-2.5">
                 <span className={`font-display text-2xl font-bold tabular-nums ${secondsLeft < 120 ? 'text-red-600' : 'text-pine'}`}>{fmt(secondsLeft)}</span>
-                <button onClick={() => setRunning(!running)} className="rounded-md bg-pine p-2 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>
+                <button onClick={timer.toggle} className="rounded-md bg-pine p-2 text-emerald-50 hover:bg-emerald-900" aria-label={running ? 'Pause' : 'Start'}>
                   {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                 </button>
                 <button onClick={() => resetTimer(minutes)} className="rounded-md border p-2 hover:bg-secondary" aria-label="Reset timer"><RotateCcw className="h-4 w-4" /></button>

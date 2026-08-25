@@ -24,6 +24,7 @@ import {
 } from '@/data/mockPapers'
 import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
+import { remainingSeconds } from '@/hooks/useAccurateCountdown'
 
 interface Resolved {
   title: string
@@ -450,6 +451,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   const [left, setLeft] = useState(timeSec)
   const [resultTimeSeconds, setResultTimeSeconds] = useState(0)
   const startRef = useRef(Date.now())
+  const deadlineRef = useRef(exam && timeSec > 0 ? startRef.current + timeSec * 1000 : null)
   const questionStartedAtRef = useRef<Record<string, number>>({})
   const finishedRef = useRef(false)
 
@@ -460,11 +462,23 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   const score = qs.filter((x) => answers[x.id] !== undefined && answers[x.id] === x.a).length
 
   useEffect(() => {
-    if (exam && !finished && left > 0) {
-      const t = setInterval(() => setLeft((s) => s - 1), 1000)
-      return () => clearInterval(t)
+    if (!exam || finished || deadlineRef.current === null) return
+    const updateRemaining = () => {
+      const deadline = deadlineRef.current
+      if (deadline === null) return
+      const next = remainingSeconds(deadline)
+      setLeft((current) => current === next ? current : next)
     }
-  }, [exam, finished, left])
+    updateRemaining()
+    const interval = window.setInterval(updateRemaining, 250)
+    document.addEventListener('visibilitychange', updateRemaining)
+    window.addEventListener('pageshow', updateRemaining)
+    return () => {
+      window.clearInterval(interval)
+      document.removeEventListener('visibilitychange', updateRemaining)
+      window.removeEventListener('pageshow', updateRemaining)
+    }
+  }, [exam, finished])
 
   useEffect(() => {
     if (exam && left <= 0 && !finished) finish()
@@ -502,6 +516,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   function finish() {
     if (finishedRef.current) return
     finishedRef.current = true
+    deadlineRef.current = null
     setFinished(true)
     setReviewPage(1)
     const secs = Math.round((Date.now() - startRef.current) / 1000)

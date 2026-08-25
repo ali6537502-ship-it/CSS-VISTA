@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { recordActivity, saveTimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
+import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 
 const ALERTS = [
   { at: 5, text: '5 minutes: Outline should be ready.' },
@@ -11,6 +12,8 @@ const ALERTS = [
   { at: 20, text: '20 minutes: Check balance and evidence.' },
   { at: 35, text: '35 minutes: Conclude and review.' },
 ]
+
+const PAPER_QUESTION_SECONDS = 45 * 60
 
 function beep() {
   try {
@@ -63,48 +66,39 @@ function SingleTimer() {
   const paperTitles = usePaperTitles()
   const [question, setQuestion] = useState('')
   const [customMin, setCustomMin] = useState(35)
-  const [left, setLeft] = useState(customMin * 60)
-  const [running, setRunning] = useState(false)
+  const timer = useAccurateCountdown(customMin * 60)
+  const { remaining: left, running } = timer
   const [soundOn, setSoundOn] = useState(true)
   const [fired, setFired] = useState<number[]>([])
   const [banner, setBanner] = useState<string | null>(null)
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
-  const elapsedRef = useRef(0)
+  const bannerTimerRef = useRef<number | null>(null)
 
   useEffect(() => {
-    if (!running) return
-    const t = setInterval(() => {
-      setLeft((s) => {
-        const next = s - 1
-        elapsedRef.current += 1
-        const elapsedMin = Math.floor(elapsedRef.current / 60)
-        const alert = ALERTS.find((a) => a.at === elapsedMin && !fired.includes(a.at))
-        if (alert && elapsedRef.current % 60 === 0) {
-          setFired((f) => [...f, alert.at])
-          setBanner(alert.text)
-          if (soundOn) beep()
-          setTimeout(() => setBanner(null), 8000)
-        }
-        if (next <= 0) {
-          setRunning(false)
-          return 0
-        }
-        return next
-      })
-    }, 1000)
-    return () => clearInterval(t)
-  }, [running, fired, soundOn])
+    const elapsed = Math.max(0, customMin * 60 - left)
+    const crossed = ALERTS.filter((alert) => elapsed >= alert.at * 60 && !fired.includes(alert.at))
+    if (crossed.length === 0) return
+    setFired((current) => [...current, ...crossed.map((alert) => alert.at)])
+    const latest = crossed[crossed.length - 1]
+    setBanner(latest.text)
+    if (soundOn) beep()
+    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
+    bannerTimerRef.current = window.setTimeout(() => setBanner(null), 8000)
+  }, [customMin, fired, left, soundOn])
+
+  useEffect(() => () => {
+    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
+  }, [])
 
   function reset(newMin = customMin) {
-    setRunning(false)
-    setLeft(newMin * 60)
-    elapsedRef.current = 0
+    timer.reset(newMin * 60)
     setFired([])
     setBanner(null)
+    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
   }
 
   function complete() {
-    const secs = elapsedRef.current
+    const secs = Math.max(0, customMin * 60 - timer.getRemaining())
     setDoneTimes((d) => [...d, { q: question || `Question ${d.length + 1}`, secs }])
     saveTimerSession({ mode: 'single', questions: [question || 'Untitled question'], times: [secs], total: secs, finished: true })
     recordActivity({ type: 'timer', label: `Answer timer - ${question.slice(0, 40) || 'question'} in ${Math.floor(secs / 60)}m`, path: '/answer-timer' })
@@ -158,11 +152,11 @@ function SingleTimer() {
         <p className={`mt-3 font-display text-5xl font-bold tabular-nums ${left < 300 ? 'text-red-600' : 'text-pine'}`}>{fmt(Math.max(0, left))}</p>
         <div className="mt-4 flex items-center justify-center gap-2">
           {!running ? (
-            <button onClick={() => setRunning(true)} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
+            <button onClick={timer.start} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
               <Play className="h-4 w-4" /> {left < customMin * 60 && left > 0 ? 'Resume' : 'Start'}
             </button>
           ) : (
-            <button onClick={() => setRunning(false)} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-amber-600 px-5 text-sm font-semibold text-white">
+            <button onClick={timer.pause} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-amber-600 px-5 text-sm font-semibold text-white">
               <Pause className="h-4 w-4" /> Pause
             </button>
           )}
@@ -203,22 +197,42 @@ function PaperTimer() {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(0)
-  const [qLeft, setQLeft] = useState(45 * 60)
+  const [qLeft, setQLeft] = useState(PAPER_QUESTION_SECONDS)
   const [totalLeft, setTotalLeft] = useState(3 * 3600)
   const [paused, setPaused] = useState(false)
   const [times, setTimes] = useState<(number | null)[]>([null, null, null, null])
-  const qElapsed = useRef(0)
-  const QTIME = 45 * 60
+  const runningStartedAtRef = useRef<number | null>(null)
+  const questionElapsedBaseRef = useRef(0)
+  const totalLeftBaseRef = useRef(3 * 3600)
+
+  const clockSnapshot = useCallback(() => {
+    const beganAt = runningStartedAtRef.current
+    const delta = beganAt === null ? 0 : Math.max(0, Math.floor((Date.now() - beganAt) / 1000))
+    const questionElapsed = questionElapsedBaseRef.current + delta
+    return {
+      questionElapsed,
+      questionLeft: Math.max(0, PAPER_QUESTION_SECONDS - questionElapsed),
+      paperLeft: Math.max(0, totalLeftBaseRef.current - delta),
+    }
+  }, [])
 
   useEffect(() => {
     if (phase !== 'running' || paused) return
-    const t = setInterval(() => {
-      setQLeft((s) => Math.max(0, s - 1))
-      setTotalLeft((s) => Math.max(0, s - 1))
-      qElapsed.current += 1
-    }, 1000)
-    return () => clearInterval(t)
-  }, [phase, paused])
+    const updateClocks = () => {
+      const snapshot = clockSnapshot()
+      setQLeft((currentValue) => currentValue === snapshot.questionLeft ? currentValue : snapshot.questionLeft)
+      setTotalLeft((currentValue) => currentValue === snapshot.paperLeft ? currentValue : snapshot.paperLeft)
+    }
+    updateClocks()
+    const interval = window.setInterval(updateClocks, 250)
+    document.addEventListener('visibilitychange', updateClocks)
+    window.addEventListener('pageshow', updateClocks)
+    return () => {
+      window.clearInterval(interval)
+      document.removeEventListener('visibilitychange', updateClocks)
+      window.removeEventListener('pageshow', updateClocks)
+    }
+  }, [clockSnapshot, phase, paused])
 
   useEffect(() => {
     if (phase === 'running' && totalLeft <= 0) finishPaper()
@@ -229,30 +243,54 @@ function PaperTimer() {
     setPhase('running')
     setCurrent(0)
     setTimes([null, null, null, null])
-    setQLeft(QTIME)
+    setQLeft(PAPER_QUESTION_SECONDS)
     setTotalLeft(3 * 3600)
-    qElapsed.current = 0
+    questionElapsedBaseRef.current = 0
+    totalLeftBaseRef.current = 3 * 3600
+    runningStartedAtRef.current = Date.now()
+    setPaused(false)
     recordActivity({ type: 'timer', label: 'Four-question paper attempt started', path: '/answer-timer' })
   }
 
+  function pausePaper() {
+    const snapshot = clockSnapshot()
+    questionElapsedBaseRef.current = snapshot.questionElapsed
+    totalLeftBaseRef.current = snapshot.paperLeft
+    runningStartedAtRef.current = null
+    setQLeft(snapshot.questionLeft)
+    setTotalLeft(snapshot.paperLeft)
+    setPaused(true)
+  }
+
+  function resumePaper() {
+    if (totalLeft <= 0) return
+    runningStartedAtRef.current = Date.now()
+    totalLeftBaseRef.current = totalLeft
+    setPaused(false)
+  }
+
   function finishQuestion() {
-    setTimes((t) => {
-      const n = [...t]
-      n[current] = qElapsed.current
-      return n
-    })
+    const snapshot = clockSnapshot()
+    const nextTimes = [...times]
+    nextTimes[current] = snapshot.questionElapsed
+    setTimes(nextTimes)
     if (current < 3) {
       setCurrent((c) => c + 1)
-      setQLeft(QTIME)
-      qElapsed.current = 0
+      setQLeft(PAPER_QUESTION_SECONDS)
+      setTotalLeft(snapshot.paperLeft)
+      questionElapsedBaseRef.current = 0
+      totalLeftBaseRef.current = snapshot.paperLeft
+      runningStartedAtRef.current = Date.now()
       setPaused(false)
     } else {
-      finishPaper([...times.slice(0, 3), qElapsed.current] as number[])
+      finishPaper(nextTimes as number[])
     }
   }
 
   function finishPaper(finalTimes?: number[]) {
-    const t = finalTimes ?? times.map((x, i) => (x ?? (i === current ? qElapsed.current : null)))
+    const snapshot = clockSnapshot()
+    runningStartedAtRef.current = null
+    const t = finalTimes ?? times.map((value, index) => (value ?? (index === current ? snapshot.questionElapsed : null)))
     const done = t.filter((x): x is number => x !== null)
     const total = done.reduce((a, b) => a + b, 0)
     saveTimerSession({
@@ -267,6 +305,9 @@ function PaperTimer() {
       label: `Paper attempt - ${done.length}/4 questions in ${Math.floor(total / 60)}m`,
       path: '/answer-timer',
     })
+    setTimes(t)
+    setQLeft(snapshot.questionLeft)
+    setTotalLeft(snapshot.paperLeft)
     setPhase('done')
   }
 
@@ -363,7 +404,7 @@ function PaperTimer() {
       </div>
       <div className="rounded-xl border bg-white p-5">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <button onClick={() => setPaused(!paused)} className={`inline-flex h-11 items-center gap-1.5 rounded-md px-5 text-sm font-semibold text-white ${paused ? 'bg-pine' : 'bg-amber-600'}`}>
+          <button onClick={paused ? resumePaper : pausePaper} className={`inline-flex h-11 items-center gap-1.5 rounded-md px-5 text-sm font-semibold text-white ${paused ? 'bg-pine' : 'bg-amber-600'}`}>
             {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />} {paused ? 'Resume' : 'Pause'}
           </button>
           <button onClick={finishQuestion} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white">
