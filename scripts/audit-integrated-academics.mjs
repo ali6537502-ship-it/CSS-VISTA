@@ -8,7 +8,8 @@ const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(root, relati
 
 const syllabus = readJson('public/fpsc-syllabus.json')
 if (!/fpsc\.gov\.pk/.test(syllabus.source?.url ?? '')) errors.push('FPSC syllabus source is not an official FPSC URL')
-if (syllabus.subjects?.length !== 52) errors.push(`FPSC syllabus expected 52 entries; found ${syllabus.subjects?.length ?? 0}`)
+if (syllabus.subjects?.length !== 51) errors.push(`FPSC syllabus expected 51 entries after the requested Essay exclusion; found ${syllabus.subjects?.length ?? 0}`)
+if (syllabus.subjects?.some((subject) => subject.slug === 'essay')) errors.push('English Essay must remain excluded from the FPSC syllabus planner')
 const syllabusSlugs = new Set()
 const groups = new Set()
 const languageAppendixSubjects = new Set(['balochi', 'punjabi', 'urdu-literature'])

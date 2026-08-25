@@ -32,6 +32,15 @@ function messageFrom(error: unknown, fallback: string) {
   return fallback
 }
 
+export function isFactbookSchemaUnavailable(error: unknown) {
+  const message = error instanceof Error
+    ? error.message
+    : error && typeof error === 'object' && 'message' in error
+      ? String(error.message)
+      : String(error ?? '')
+  return /schema cache|PGRST205|could not find (?:the )?table.*factbook_|relation .*factbook_.*does not exist/i.test(message)
+}
+
 async function requireClient(): Promise<SupabaseClient> {
   const client = await getSupabaseClient()
   if (!client) throw new Error('Factbook cloud storage is not configured.')

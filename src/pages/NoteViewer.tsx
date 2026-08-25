@@ -104,13 +104,13 @@ export default function NoteViewer() {
 
   const ali = mentors.find((mentor) => mentor.id === 'ali')!
   const inquiry = waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${product.subject} notes available on CSS VISTA. Please share the price and purchase details.`)
-  const pdfName = safeDownloadName(`${product.subject}-${noteDoc.title}-sample`)
+  const pdfName = safeDownloadName(`${product.subject}-${noteDoc.title}`)
 
   return (
     <div>
-      <PageHeader title={noteDoc.title} description={`Authorised public sample from ${product.subject}.`}>
+      <PageHeader title={noteDoc.title} description={`${noteDoc.kind === 'pdf' ? 'Complete supplied note' : 'Three-page preview'} from ${product.subject}.`}>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Badge tone="green">Public sample</Badge>
+          <Badge tone="green">{noteDoc.kind === 'pdf' ? 'Complete supplied note' : 'Preview'}</Badge>
           <Badge tone="gray">{noteDoc.kind === 'pdf' ? 'PDF document' : 'Page images'}</Badge>
           <Badge tone="gray">{noteDoc.pages} pages</Badge>
           <Badge tone="gray">{formatFileSize(noteDoc.sizeBytes)}</Badge>
@@ -120,10 +120,10 @@ export default function NoteViewer() {
       <main className="mx-auto max-w-7xl space-y-5 px-4 py-7">
         <div className="flex flex-wrap items-center gap-2 rounded-xl border bg-white p-3 shadow-sm">
           <Link to="/notes" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ArrowLeft className="h-4 w-4" /> Notes Library</Link>
-          <span className="mr-auto text-sm text-muted-foreground">Complete authorised sample · {noteDoc.pages} pages</span>
+          <span className="mr-auto text-sm text-muted-foreground">{noteDoc.kind === 'pdf' ? 'Complete supplied document' : 'Available preview'} · {noteDoc.pages} pages</span>
           {noteDoc.kind === 'pdf' && noteDoc.url && pdfAvailable && <>
             <a href={noteDoc.url} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ExternalLink className="h-4 w-4" /> Open PDF</a>
-            <a href={noteDoc.url} download={pdfName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download Sample</a>
+            <a href={noteDoc.url} download={pdfName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download PDF</a>
           </>}
           <a href={inquiry} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-emerald-600 px-3 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPriceLabel}</a>
         </div>
@@ -169,7 +169,7 @@ export default function NoteViewer() {
         )}
 
         <p className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-relaxed text-emerald-950">
-          This viewer contains every page of the authorised public sample. Complete paid notes are supplied privately after an independent purchase inquiry; no private material is exposed here.
+          This viewer contains every supplied page of this file. PDF entries are shown in full; three-page image entries remain labelled as previews because no complete source file is present in the project.
         </p>
       </main>
     </div>

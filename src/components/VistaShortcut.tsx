@@ -1,19 +1,22 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router'
 import {
-  Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
+  BookMarked, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
+  MessageCircle,
   NotebookPen, Pause, Play, Plus, RotateCcw, Search, Settings2, StickyNote,
   Trash2, X,
 } from 'lucide-react'
 import { searchSite, type SearchResult } from '@/lib/search'
 import { getState, setGoalChecklist, setQuickNotes } from '@/lib/store'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { site } from '@/data/site'
 
 const shortcutDefinitions = [
   { id: 'goals', label: 'Goal checklist', description: 'Add, complete and remove today’s goals.', icon: CheckSquare2 },
   { id: 'note', label: 'Quick note', description: 'Keep a saved preparation note without leaving the page.', icon: StickyNote },
   { id: 'syllabus', label: 'FPSC syllabus', description: 'Search, select and schedule official syllabus topics.', icon: FileCheck2, to: '/fpsc-syllabus' },
   { id: 'planner', label: 'Study planner', description: 'Review saved syllabus tasks and open the full planner.', icon: NotebookPen, to: '/study-planner' },
+  { id: 'factbook', label: 'My Factbook', description: 'Open your private, searchable CSS knowledge library.', icon: BookMarked, to: '/factbook' },
   { id: 'timer', label: 'Answer timer', description: 'Run a focused answer-writing countdown here.', icon: Clock3, to: '/answer-timer' },
   { id: 'search', label: 'Website search', description: 'Find any CSS Vista page, topic or study resource.', icon: Search },
   { id: 'gk', label: 'GK World', description: 'Open the complete GK preparation bank.', icon: Globe2, to: '/gk' },
@@ -205,7 +208,10 @@ export default function VistaShortcut() {
         </section>
       )}
 
-      <button type="button" onClick={() => { if (menuOpen || activeId) closeEverything(); else setMenuOpen(true) }} className={`cssv-vista-shortcut grid h-[58px] w-[58px] place-items-center rounded-[1.15rem] border border-white/95 bg-white/90 shadow-xl backdrop-blur-lg ${menuOpen || activeId ? 'is-open' : ''}`} aria-label={menuOpen || activeId ? 'Close VISTA SHORTCUT' : 'Open VISTA SHORTCUT'} aria-expanded={menuOpen || Boolean(activeId)}><img src="/images/logo.png?v=20260810b" alt="" className="h-8 w-12 object-contain" /></button>
+      <div className="flex flex-col items-end gap-2">
+        <a href={site.cssGroupLink} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="cssv-tap grid h-12 w-12 place-items-center rounded-2xl border border-emerald-500/30 bg-emerald-600 text-white shadow-lg" aria-label="Join the CSS Vista WhatsApp group" title="Join the CSS Vista WhatsApp group"><MessageCircle className="h-5 w-5" /></a>
+        <button type="button" onClick={() => { if (menuOpen || activeId) closeEverything(); else setMenuOpen(true) }} className={`cssv-vista-shortcut grid h-[58px] w-[58px] place-items-center rounded-[1.15rem] border border-white/95 bg-white/90 shadow-xl backdrop-blur-lg ${menuOpen || activeId ? 'is-open' : ''}`} aria-label={menuOpen || activeId ? 'Close VISTA SHORTCUT' : 'Open VISTA SHORTCUT'} aria-expanded={menuOpen || Boolean(activeId)}><img src="/images/logo.png?v=20260810b" alt="" className="h-8 w-12 object-contain" /></button>
+      </div>
     </div>
   )
 }

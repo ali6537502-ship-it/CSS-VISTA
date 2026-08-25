@@ -13,6 +13,7 @@ import { useAccount } from '@/lib/accountContext'
 import CategoryTree from '@/features/factbook/CategoryTree'
 import EntryContent from '@/features/factbook/EntryContent'
 import EntryEditor from '@/features/factbook/EntryEditor'
+import DeviceFactbook from '@/features/factbook/DeviceFactbook'
 import FactbookPrint, { DEFAULT_PRINT_SETTINGS } from '@/features/factbook/FactbookPrint'
 import { ENTRY_TYPE_DEFINITIONS, ENTRY_TYPE_MAP } from '@/features/factbook/entryTypes'
 import { deleteFactbookImage, uploadFactbookImage } from '@/features/factbook/media'
@@ -28,6 +29,7 @@ import {
   saveLocalFactbookDraft, setCollectionEntries, updateFactbookCategory,
   updateFactbookCollection, updateFactbookEntry, updateFactbookSubject, updateManyFactbookEntries,
   trashFactbookCategoryTree, validateFactbookBackup,
+  isFactbookSchemaUnavailable,
 } from '@/features/factbook/service'
 import type {
   FactbookBackup, FactbookCategory, FactbookCollection, FactbookEntry,
@@ -102,6 +104,7 @@ function Modal({ title, children, onClose }: { title: string; children: ReactNod
 export default function Factbook() {
   const { configured, loading: accountLoading, user } = useAccount()
   const [loading, setLoading] = useState(false)
+  const [cloudUnavailable, setCloudUnavailable] = useState(false)
   const [notice, setNotice] = useState<Notice>(null)
   const [tab, setTab] = useState<FactbookTab>('dashboard')
   const [subjects, setSubjects] = useState<FactbookSubject[]>([])
@@ -175,7 +178,13 @@ export default function Factbook() {
   useEffect(() => {
     if (!user) return
     setLoading(true)
-    void refreshOverview().catch((error) => showNotice(error instanceof Error ? error.message : 'Your Factbook could not be loaded.', 'error')).finally(() => setLoading(false))
+    void refreshOverview().then(() => setCloudUnavailable(false)).catch((error) => {
+      if (isFactbookSchemaUnavailable(error)) {
+        setCloudUnavailable(true)
+        return
+      }
+      showNotice(error instanceof Error ? error.message : 'Your Factbook could not be loaded.', 'error')
+    }).finally(() => setLoading(false))
   }, [refreshOverview, showNotice, user])
 
   const refreshWorkspace = useCallback(async () => {
@@ -352,6 +361,12 @@ export default function Factbook() {
 
   if (accountLoading) return <div className="mx-auto max-w-7xl px-4 py-16" role="status">Preparing your private Factbook…</div>
   if (!configured || !user) return <main className="factbook-shell min-h-[70vh] px-4 py-12 sm:py-16"><section className="mx-auto max-w-3xl rounded-3xl border border-emerald-900/10 bg-white/90 p-6 text-center shadow-xl shadow-emerald-950/5 sm:p-10"><span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-pine text-white"><ShieldCheck className="h-7 w-7" /></span><p className="mt-5 text-xs font-bold uppercase tracking-[.2em] text-amber-700">Private student workspace</p><h1 className="mt-2 font-display text-3xl font-bold text-pine sm:text-4xl">Build Your Personal Factbook</h1><p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">Collect the facts, arguments, statistics, quotations and examples you want to remember—all in one organized place.</p><p className="mt-5 text-sm text-slate-600">Sign in with your CSS VISTA account to keep your Factbook private and available across supported devices.</p><Link to="/account?returnTo=/factbook" className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl bg-pine px-6 text-sm font-bold text-white hover:bg-emerald-900">Sign in to My Factbook</Link></section></main>
+  if (cloudUnavailable) return <DeviceFactbook userId={user.id} onRetryCloud={() => {
+    setLoading(true)
+    void refreshOverview().then(() => setCloudUnavailable(false)).catch((error) => {
+      if (!isFactbookSchemaUnavailable(error)) showNotice(error instanceof Error ? error.message : 'Cloud Factbook could not be loaded.', 'error')
+    }).finally(() => setLoading(false))
+  }} retrying={loading} />
 
   return <main className="factbook-shell min-h-screen pb-28">
     {notice && <div className={`fixed right-4 top-20 z-[100] max-w-sm rounded-xl border px-4 py-3 text-sm font-semibold shadow-xl ${notice.tone === 'error' ? 'border-red-200 bg-red-50 text-red-800' : notice.tone === 'success' ? 'border-emerald-200 bg-emerald-50 text-emerald-900' : 'border-slate-200 bg-white text-slate-700'}`} role="status">{notice.text}</div>}

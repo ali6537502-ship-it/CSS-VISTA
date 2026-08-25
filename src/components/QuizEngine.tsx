@@ -7,6 +7,7 @@ import { isRtlText } from '@/lib/utils'
 import { recordQuestionTiming } from '@/lib/progress'
 import QuestionPagination from '@/components/QuestionPagination'
 import { QUESTIONS_PER_PAGE, questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
+import { usePageBack } from '@/lib/backNavigation'
 
 interface Props {
   questions: Question[]
@@ -44,6 +45,15 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const range = questionPageRange(page, qs.length)
   const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
   const answeredCount = Object.keys(answers).length
+
+  usePageBack(
+    (started && !finished && page > 1) || (finished && reviewPage > 1),
+    () => {
+      if (finished) setReviewPage((current) => Math.max(1, current - 1))
+      else setPage((current) => Math.max(1, current - 1))
+    },
+    10,
+  )
 
   useEffect(() => {
     setQs(shuffle(questions))

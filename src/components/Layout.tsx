@@ -216,6 +216,7 @@ function NotificationBar() {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
+    hour12: true,
   }).format(deviceTime)
 
   return (
@@ -842,7 +843,7 @@ export default function Layout() {
               if (event.currentTarget === event.target) setSearchOpen(false)
             }}
           >
-            <section className="cssv-glass-panel w-full max-w-2xl rounded-2xl border p-4 shadow-2xl sm:p-5">
+            <section className="w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl sm:p-5">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <h2 id="universal-search-title" className="font-display text-xl font-bold text-pine">
@@ -875,8 +876,8 @@ export default function Layout() {
       <aside
         hidden={!mobileOpen}
         style={mobileOpen ? undefined : { display: 'none' }}
-        className={`cssv-glass-drawer fixed inset-y-0 right-0 z-50 flex w-[85%] max-w-sm flex-col shadow-xl transition-transform duration-300 ease-out xl:hidden ${
-          mobileOpen ? 'visible translate-x-0' : 'invisible translate-x-full'
+        className={`cssv-glass-drawer fixed inset-y-0 left-0 z-50 flex w-[85%] max-w-sm flex-col shadow-xl transition-transform duration-300 ease-out xl:hidden ${
+          mobileOpen ? 'visible translate-x-0' : 'invisible -translate-x-full'
         }`}
         role="dialog"
         aria-label="Mobile navigation"
@@ -975,10 +976,6 @@ export default function Layout() {
 
       <VistaShortcut />
 
-      <div className="pb-20 pt-4 text-center text-[11px] text-muted-foreground md:hidden">
-        <Link className="underline underline-offset-2 hover:text-pine" to="/privacy">Privacy &amp; advertising</Link>
-      </div>
-
       <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
           {mobileBottomNav.map((item) => {
@@ -1058,8 +1055,7 @@ export default function Layout() {
           </div>
         </div>
         <div className="border-t py-4 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} CSS Vista · Verify all rules and dates at fpsc.gov.pk ·{' '}
-          <Link className="underline underline-offset-2 hover:text-pine" to="/privacy">Privacy &amp; advertising</Link>
+          © {new Date().getFullYear()} CSS Vista · Verify all rules and dates at fpsc.gov.pk
         </div>
       </footer>
     </div>

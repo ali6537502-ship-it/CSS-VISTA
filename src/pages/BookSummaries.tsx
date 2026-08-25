@@ -236,7 +236,7 @@ function BookReader({
 
   return (
     <div
-      className="book-summary-backdrop fixed inset-0 z-[70] flex items-end justify-center bg-emerald-950/75 p-0 backdrop-blur-sm sm:items-center sm:p-5"
+      className="book-summary-backdrop fixed inset-0 z-[120] flex bg-[#fcfdfc]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="book-summary-title"
@@ -244,7 +244,7 @@ function BookReader({
         if (event.currentTarget === event.target) onClose()
       }}
     >
-      <article className="book-summary-reader relative flex max-h-[96vh] w-full max-w-6xl flex-col overflow-hidden rounded-t-2xl bg-[#fcfdfc] shadow-2xl sm:max-h-[90vh] sm:rounded-2xl">
+      <article className="book-summary-reader relative flex h-full min-h-0 w-full flex-col overflow-hidden bg-[#fcfdfc]">
         <span className="absolute inset-x-0 top-0 z-20 h-1 bg-slate-100"><span className="cssv-progress block h-full bg-amber-400" style={{ width: `${localReadingState.completed ? 100 : readingProgress}%` }} /></span>
         <header className="flex items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
           <img
@@ -274,10 +274,10 @@ function BookReader({
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="rounded-full border bg-white p-2 text-pine transition-colors hover:bg-secondary"
-            aria-label="Close book summary"
+            className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-lg border bg-white px-3 text-xs font-bold text-pine transition-colors hover:bg-secondary"
+            aria-label="Back to all book summaries"
           >
-            <X className="h-5 w-5" />
+            <ArrowLeft className="h-4 w-4" /><span className="hidden sm:inline">All summaries</span><X className="h-4 w-4 sm:hidden" />
           </button>
         </header>
 

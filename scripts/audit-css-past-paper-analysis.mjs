@@ -17,8 +17,9 @@ assert(analysis.stats.subjects === 52, 'Expected 52 subjects')
 assert(analysis.stats.topics === 1509, 'Expected 1,509 topic groups')
 assert(analysis.stats.questions === 3277, 'Expected 3,277 questions')
 assert(analysis.stats.sourceLimitations === 58, 'Expected 58 source limitations')
-assert(analysis.subjects.length === syllabus.subjects.length, 'Analysis must cover every syllabus subject')
-assert(analysis.integrity.coverage.length === 52, 'Coverage table must contain every subject')
+const visibleAnalysisSubjects = analysis.subjects.filter((subject) => subject.slug !== 'essay')
+assert(visibleAnalysisSubjects.length === syllabus.subjects.length, 'Analysis must cover every visible syllabus subject')
+assert(analysis.integrity.coverage.filter((item) => item.subject !== 'English Essay').length === 51, 'Coverage table must contain every visible syllabus subject')
 assert(analysis.integrity.limitations.length === 58, 'Integrity limitation count mismatch')
 
 const syllabusBySlug = new Map(syllabus.subjects.map((subject) => [subject.slug, subject]))
@@ -26,7 +27,7 @@ const ids = new Set()
 let questions = 0
 let topics = 0
 
-for (const subject of analysis.subjects) {
+for (const subject of visibleAnalysisSubjects) {
   const syllabusSubject = syllabusBySlug.get(subject.slug)
   assert(syllabusSubject, `Unknown syllabus subject slug: ${subject.slug}`)
   let subjectQuestions = 0
@@ -58,9 +59,10 @@ for (const subject of analysis.subjects) {
   }
   assert(subjectQuestions === subject.questionCount, `Question count mismatch for ${subject.slug}`)
   assert(subjectTopics === subject.topicCount, `Topic count mismatch for ${subject.slug}`)
-  questions += subjectQuestions
-  topics += subjectTopics
 }
+
+questions = analysis.subjects.reduce((sum, subject) => sum + subject.questionCount, 0)
+topics = analysis.subjects.reduce((sum, subject) => sum + subject.topicCount, 0)
 
 assert(questions === analysis.stats.questions, 'Overall question count mismatch')
 assert(topics === analysis.stats.topics, 'Overall topic count mismatch')

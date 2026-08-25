@@ -7,28 +7,6 @@
   },
   "subjects": [
     {
-      "slug": "essay",
-      "name": "English Essay",
-      "designation": "compulsory",
-      "group": null,
-      "marks": 100,
-      "pages": [
-        4,
-        4
-      ],
-      "sections": [
-        {
-          "title": "Official FPSC description",
-          "items": [
-            "Candidates will be required to write one or more Essay in English. A wide choice of topics",
-            "Candidates are expected to reflect comprehensive and research based knowledge on a",
-            "selected t opic. Candidate’s articulation, expression and technical treatment of the style of",
-            "English Essay writing will be examined."
-          ]
-        }
-      ]
-    },
-    {
       "slug": "precis-composition",
       "name": "English (Precis & Composition)",
       "designation": "compulsory",

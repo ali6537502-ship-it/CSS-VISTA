@@ -198,7 +198,7 @@ export default function StudyTools() {
           <label className="mt-4 flex items-center gap-2 rounded-lg bg-secondary/50 px-3 py-2 text-sm font-bold text-pine"><input type="checkbox" checked={shortcutSettings.enabled} onChange={(event) => { const next = { ...shortcutSettings, enabled: event.target.checked }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> Show VISTA SHORTCUT</label>
           <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{[
             ['goals', 'Goal checklist'], ['note', 'Quick note'], ['syllabus', 'FPSC syllabus'], ['planner', 'Study planner'],
-            ['timer', 'Answer timer'], ['search', 'Website search'], ['gk', 'GK World'], ['mistakes', 'Mistake notebook'],
+            ['timer', 'Answer timer'], ['search', 'Website search'], ['factbook', 'My Factbook'], ['gk', 'GK World'], ['mistakes', 'Mistake notebook'],
             ['current-affairs', 'Current affairs'], ['css-mcqs', 'CSS subject MCQs'], ['mpt', 'MPT practice'], ['games', 'CSS games'],
             ['grammar', 'Grammar & vocabulary'], ['papers', 'Past papers'], ['notes', 'Notes library'], ['dashboard', 'Dashboard'],
             ['paper-analysis', 'Past paper analysis'],

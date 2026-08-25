@@ -28,7 +28,7 @@ export function NotificationOptInBar() {
     } else if ('Notification' in window) {
       granted = Notification.permission === 'granted'
     }
-    setNotifPrefs({ asked: true, enabled: true })
+    setNotifPrefs({ asked: true, enabled: granted })
     setPrefs({ ...getNotifPrefs() })
     if (!granted) {
       alert('Browser notifications are blocked, but you will still see every update in the bell icon at the top of the site.')
@@ -150,11 +150,15 @@ function NotificationSettings({ onChange }: { onChange: () => void }) {
 
   async function toggleEnabled() {
     const next = !enabled
+    let granted = next
     if (next && 'Notification' in window && Notification.permission === 'default') {
-      await Notification.requestPermission()
+      granted = (await Notification.requestPermission()) === 'granted'
+    } else if (next && 'Notification' in window) {
+      granted = Notification.permission === 'granted'
     }
-    setEnabled(next)
-    setNotifPrefs({ enabled: next, asked: true })
+    setEnabled(granted)
+    setNotifPrefs({ enabled: granted, asked: true })
+    if (next && !granted) window.alert('Browser notifications are blocked. Updates will remain available in the CSS Vista bell feed.')
     onChange()
   }
 

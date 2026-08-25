@@ -13,7 +13,7 @@ const googleAuthEnabled = import.meta.env.VITE_SUPABASE_GOOGLE_AUTH_ENABLED === 
 export default function Account() {
   const {
     configured, loading, user, signIn, signUp, signInWithGoogle, signOut,
-    requestPasswordReset, updatePassword,
+    requestPasswordReset, updatePassword, passwordRecovery, clearPasswordRecovery,
     syncNow, syncStatus, syncError, lastSyncedAt,
   } = useAccount()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -23,10 +23,12 @@ export default function Account() {
   const [password, setPassword] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false)
   const [updatingPassword, setUpdatingPassword] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
-  const resetMode = searchParams.get('reset') === '1'
+  const resetMode = passwordRecovery || searchParams.get('reset') === '1'
 
   async function submit(event: FormEvent) {
     event.preventDefault()
@@ -53,6 +55,11 @@ export default function Account() {
       setError('Enter your email address first.')
       return
     }
+    const previousRequest = Number(sessionStorage.getItem('cssvista:last-password-reset') ?? 0)
+    if (Date.now() - previousRequest < 60_000) {
+      setMessage('A reset request was already sent recently. Please check your inbox and spam folder before requesting another link.')
+      return
+    }
     setSubmitting(true)
     const result = await requestPasswordReset(email.trim())
     setSubmitting(false)
@@ -60,6 +67,7 @@ export default function Account() {
       setError(result.error)
       return
     }
+    sessionStorage.setItem('cssvista:last-password-reset', String(Date.now()))
     setMessage('If an account exists for this email, a secure password-reset link has been sent.')
   }
 
@@ -67,6 +75,10 @@ export default function Account() {
     event.preventDefault()
     setMessage('')
     setError('')
+    if (newPassword !== confirmPassword) {
+      setError('The two password entries do not match.')
+      return
+    }
     setUpdatingPassword(true)
     const result = await updatePassword(newPassword)
     setUpdatingPassword(false)
@@ -75,6 +87,9 @@ export default function Account() {
       return
     }
     setNewPassword('')
+    setConfirmPassword('')
+    setChangePasswordOpen(false)
+    clearPasswordRecovery()
     setSearchParams({})
     setMessage('Your password has been updated successfully.')
   }
@@ -114,13 +129,13 @@ export default function Account() {
           </div>
         ) : user ? (
           <div className="space-y-5">
-            {resetMode && (
+            {(resetMode || changePasswordOpen) && (
               <form onSubmit={saveNewPassword} className="vista-card border-l-4 border-l-amber-400 p-6">
-                <h2 className="text-xl font-bold text-pine">Choose a new password</h2>
+                <h2 className="text-xl font-bold text-pine">{resetMode ? 'Choose a new password' : 'Change your password'}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Use at least eight characters. This replaces the old password immediately.
                 </p>
-                <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   <input
                     type="password"
                     value={newPassword}
@@ -131,6 +146,18 @@ export default function Account() {
                     className="h-11 flex-1 rounded-md border bg-white px-3 outline-none focus:ring-2 focus:ring-ring"
                     placeholder="New password"
                   />
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    required
+                    minLength={8}
+                    autoComplete="new-password"
+                    className="h-11 rounded-md border bg-white px-3 outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="Confirm new password"
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
                   <button
                     type="submit"
                     disabled={updatingPassword}
@@ -139,6 +166,7 @@ export default function Account() {
                     {updatingPassword && <LoaderCircle className="h-4 w-4 animate-spin" />}
                     Save new password
                   </button>
+                  {!resetMode && <button type="button" onClick={() => { setChangePasswordOpen(false); setNewPassword(''); setConfirmPassword('') }} className="h-11 rounded-md border px-5 text-sm font-semibold text-pine">Cancel</button>}
                 </div>
               </form>
             )}
@@ -173,6 +201,7 @@ export default function Account() {
                 >
                   <LogOut className="h-4 w-4" /> Sign out
                 </button>
+                {!resetMode && <button onClick={() => setChangePasswordOpen((open) => !open)} className="inline-flex h-10 items-center gap-2 rounded-md border px-4 text-sm font-semibold text-foreground hover:bg-secondary"><LockKeyhole className="h-4 w-4" /> Change password</button>}
               </div>
               </section>
               <section className="vista-card p-6">
@@ -286,6 +315,7 @@ export default function Account() {
                     Forgot your password?
                   </button>
                 )}
+                {mode === 'sign-in' && <p className="text-center text-xs leading-relaxed text-muted-foreground">A secure recovery email is sent only when requested. Signed-in students can change their password directly without an email.</p>}
               </form>
 
               {googleAuthEnabled && (

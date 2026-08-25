@@ -161,7 +161,7 @@ const empty: VistaState = {
   goalChecklist: [],
   vistaShortcut: {
     enabled: true,
-    shortcutIds: ['goals', 'note', 'syllabus', 'planner', 'timer', 'search'],
+    shortcutIds: ['goals', 'note', 'syllabus', 'planner', 'factbook', 'timer', 'search'],
   },
   evaluationRequests: [],
   customTestSeriesRequests: [],
@@ -180,7 +180,10 @@ export function getState(): VistaState {
       vistaShortcut: {
         enabled: typeof savedShortcut?.enabled === 'boolean' ? savedShortcut.enabled : empty.vistaShortcut.enabled,
         shortcutIds: Array.isArray(savedShortcut?.shortcutIds)
-          ? savedShortcut.shortcutIds.filter((id): id is string => typeof id === 'string')
+          ? [...new Set([
+              ...savedShortcut.shortcutIds.filter((id): id is string => typeof id === 'string'),
+              'factbook',
+            ])]
           : [...empty.vistaShortcut.shortcutIds],
       },
     }

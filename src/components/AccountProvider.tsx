@@ -25,6 +25,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(accountServiceConfigured)
   const [client, setClient] = useState<SupabaseClient | null>(null)
   const [user, setUser] = useState<User | null>(null)
+  const [passwordRecovery, setPasswordRecovery] = useState(() => new URLSearchParams(window.location.search).get('reset') === '1')
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
   const [syncError, setSyncError] = useState('')
   const [lastSyncedAt, setLastSyncedAt] = useState<Date | null>(null)
@@ -74,8 +75,10 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       setUser(data.session?.user ?? null)
       setLoading(false)
     })
-    const { data } = client.auth.onAuthStateChange((_event, session) => {
+    const { data } = client.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
+      if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
+      if (event === 'SIGNED_OUT') setPasswordRecovery(false)
       setLoading(false)
     })
     return () => {
@@ -125,6 +128,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     configured: accountServiceConfigured,
     loading,
     user,
+    passwordRecovery,
     syncStatus,
     syncError,
     lastSyncedAt,
@@ -164,7 +168,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     async updatePassword(password) {
       if (!client || !user) return { error: 'Open the password-reset link from your email first.' }
       const { error } = await client.auth.updateUser({ password })
+      if (!error) setPasswordRecovery(false)
       return error ? { error: error.message } : {}
+    },
+    clearPasswordRecovery() {
+      setPasswordRecovery(false)
     },
     async signOut() {
       if (!client) return {}
@@ -185,7 +193,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         }
       }
     },
-  }), [client, lastSyncedAt, loading, syncError, syncNow, syncStatus, user])
+  }), [client, lastSyncedAt, loading, passwordRecovery, syncError, syncNow, syncStatus, user])
 
   return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
 }

@@ -12,6 +12,7 @@ export interface AccountContextValue {
   configured: boolean
   loading: boolean
   user: User | null
+  passwordRecovery: boolean
   syncStatus: SyncStatus
   syncError: string
   lastSyncedAt: Date | null
@@ -20,6 +21,7 @@ export interface AccountContextValue {
   signInWithGoogle(): Promise<ActionResult>
   requestPasswordReset(email: string): Promise<ActionResult>
   updatePassword(password: string): Promise<ActionResult>
+  clearPasswordRecovery(): void
   signOut(): Promise<ActionResult>
   syncNow(): Promise<ActionResult>
   resetProgress(): Promise<ActionResult>

@@ -1,14 +1,22 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 
 const PAGE_BACK_EVENT = 'cssvista:page-back'
+type PageBackHandler = { id: symbol; priority: number; order: number; run(): void }
+const pageBackHandlers: PageBackHandler[] = []
+let pageBackOrder = 0
 
 export function requestPageBack() {
+  const handler = [...pageBackHandlers].sort((left, right) => right.priority - left.priority || right.order - left.order)[0]
+  if (handler) {
+    handler.run()
+    return true
+  }
   const event = new Event(PAGE_BACK_EVENT, { cancelable: true })
   window.dispatchEvent(event)
   return event.defaultPrevented
 }
 
-export function usePageBack(active: boolean, onBack: () => void) {
+export function usePageBack(active: boolean, onBack: () => void, priority = 0) {
   const onBackRef = useRef(onBack)
   const inactiveScrollRef = useRef(0)
   const wasActiveRef = useRef(active)
@@ -19,14 +27,13 @@ export function usePageBack(active: boolean, onBack: () => void) {
 
   useEffect(() => {
     if (!active) return
-    const handleBack = (event: Event) => {
-      event.preventDefault()
-      event.stopImmediatePropagation()
-      onBackRef.current()
+    const handler: PageBackHandler = { id: Symbol('page-back'), priority, order: pageBackOrder += 1, run: () => onBackRef.current() }
+    pageBackHandlers.push(handler)
+    return () => {
+      const index = pageBackHandlers.findIndex((item) => item.id === handler.id)
+      if (index >= 0) pageBackHandlers.splice(index, 1)
     }
-    window.addEventListener(PAGE_BACK_EVENT, handleBack)
-    return () => window.removeEventListener(PAGE_BACK_EVENT, handleBack)
-  }, [active])
+  }, [active, priority])
 
   useEffect(() => {
     if (active) return
