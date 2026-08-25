@@ -26,9 +26,11 @@ await Promise.all([
   access(join(dist, 'icon-512.png')),
   access(join(dist, 'ads.txt')),
   access(join(dist, 'googlec96e2248070e0570.html')),
+  access(join(dist, 'sw.js')),
+  access(join(dist, 'stale-module.js')),
 ])
 
-const [indexHtml, htaccess, robots, sitemap, faviconIco, adsTxt, searchConsoleVerification, paperFiles, assetFiles, productionEnv] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemap, faviconIco, adsTxt, searchConsoleVerification, serviceWorker, staleModule, paperFiles, assetFiles, productionEnv] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
@@ -36,6 +38,8 @@ const [indexHtml, htaccess, robots, sitemap, faviconIco, adsTxt, searchConsoleVe
   readFile(join(dist, 'favicon.ico')),
   readFile(join(dist, 'ads.txt'), 'utf8'),
   readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
+  readFile(join(dist, 'sw.js'), 'utf8'),
+  readFile(join(dist, 'stale-module.js'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
   readdir(join(dist, 'assets')),
   readFile(join(root, '.env.production'), 'utf8'),
@@ -72,6 +76,12 @@ assert(htaccess.includes('(css|pms|ppsc|mpt)'), 'Past-paper collection rewrites 
 assert(htaccess.includes('book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers'), 'Asset-directory SPA route rewrites are missing')
 assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are not explicitly protected from SPA rewrites')
 assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
+assert(htaccess.includes('index\\.html|sw\\.js|stale-module\\.js'), 'Runtime recovery files need no-cache headers')
+assert(htaccess.includes('^assets/.*\\.js$ stale-module.js'), 'Obsolete JavaScript chunks must load the recovery module')
+assert(htaccess.includes('[R=404,L,NC]'), 'Missing static assets must return a real 404 instead of index.html')
+assert(!serviceWorker.includes("addEventListener('fetch'"), 'The retired service worker must not intercept page or asset requests')
+assert(serviceWorker.includes('registration.unregister()'), 'The service-worker retirement script must unregister itself')
+assert(staleModule.includes('window.location.replace'), 'The obsolete-module fallback must refresh to the latest deployment')
 assert(robots.includes('https://www.css-vista.com/sitemap.xml'), 'Hostinger robots.txt uses the wrong origin')
 assert(sitemap.includes('<loc>https://www.css-vista.com/past-papers'), 'Hostinger sitemap uses the wrong origin')
 assert(sitemap.includes('<loc>https://www.css-vista.com/subjects/compulsory</loc>'), 'Compulsory subjects are missing from the sitemap')

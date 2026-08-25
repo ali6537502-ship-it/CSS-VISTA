@@ -1,9 +1,10 @@
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import { Routes, Route } from 'react-router'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import Home from './pages/Home'
+import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
 const CompulsoryList = lazy(() => import('./pages/CompulsoryList'))

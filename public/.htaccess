@@ -8,6 +8,11 @@ DirectoryIndex index.html
 </IfModule>
 
 <IfModule mod_headers.c>
+  <FilesMatch "^(?:index\.html|sw\.js|stale-module\.js)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
   <Files "ads.txt">
     Header always set Content-Type "text/plain; charset=UTF-8"
     Header always set Cache-Control "public, max-age=300, must-revalidate"
@@ -25,6 +30,17 @@ DirectoryIndex index.html
 
   # Never rewrite crawler control and verification files into the React app.
   RewriteRule ^(?:ads\.txt|robots\.txt|sitemap\.xml|googlec96e2248070e0570\.html)$ - [L,NC]
+
+  # An already-open tab may ask for a page module from the preceding release.
+  # Serve a tiny recovery module at that obsolete JavaScript URL so even the
+  # old application refreshes itself without showing a broken-page screen.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^assets/.*\.js$ stale-module.js [L,NC]
+
+  # Other removed static assets must return a real error. Never send index.html
+  # with a CSS, JSON, font or image URL.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule \.(?:js|mjs|css|json|map|woff2?|ttf|png|jpe?g|gif|svg|webp|ico)$ - [R=404,L,NC]
 
   # These React routes share names with public asset directories. Route only
   # the exact page URL to the SPA; child paths must remain available as files.
