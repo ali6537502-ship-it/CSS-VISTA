@@ -8,7 +8,7 @@ import {
   handwrittenNoteSubjects,
 } from '@/data/handwrittenNotes'
 import { mentors, waLink } from '@/data/site'
-import { notesPriceLabel } from '@/data/notes'
+import { notesPurchaseActionLabel } from '@/data/notes'
 
 export default function HandwrittenNotes() {
   const [query, setQuery] = useState('')
@@ -104,8 +104,7 @@ export default function HandwrittenNotes() {
                 <h3 className="mt-4 font-display text-lg font-bold text-pine">{subject.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{subject.description}</p>
                 <div className="mt-4 border-t pt-3">
-                  <p className="font-display text-lg font-bold text-pine">{notesPriceLabel}</p>
-                  <a href={inquiry(subject.title)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> Inquire about these notes</a>
+                  <a href={inquiry(subject.title)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
                 </div>
               </article>
             ))}

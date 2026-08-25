@@ -14,7 +14,7 @@ import { defaultHomeCards } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { getBankIndex, getQuestionById, type BankIndex } from '@/data/mcq'
 import { mentors } from '@/data/site'
-import { notesPriceLabel } from '@/data/notes'
+import { notesPurchaseActionLabel } from '@/data/notes'
 
 const uid = () => Math.random().toString(36).slice(2, 10)
 const input = 'h-10 w-full rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
@@ -444,7 +444,7 @@ export function PricesEditor() {
   return (
     <div className="max-w-xl rounded-lg border bg-white p-5">
       <h3 className="font-semibold text-pine">Public notes pricing</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">The public Notes Library uses the fixed label <strong className="text-pine">{notesPriceLabel}</strong>. Current prices and purchase details are shared privately by the verified notes author after a student sends an inquiry.</p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">The public Notes Library uses the WhatsApp action <strong className="text-pine">{notesPurchaseActionLabel}</strong>. Current prices and purchase details are shared privately by the verified notes author.</p>
     </div>
   )
 }

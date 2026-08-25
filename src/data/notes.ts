@@ -17,7 +17,7 @@ export interface NoteProduct {
   samples: NoteDocument[]
 }
 
-export const notesPriceLabel = 'Contact for Price'
+export const notesPurchaseActionLabel = 'Contact to purchase'
 
 export const noteProducts: NoteProduct[] = [
   {

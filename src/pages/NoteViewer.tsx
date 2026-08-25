@@ -6,7 +6,7 @@ import {
   RefreshCw,
 } from 'lucide-react'
 import { Badge, EmptyState, PageHeader } from '@/components/shared'
-import { findNoteDocument, notesPriceLabel } from '@/data/notes'
+import { findNoteDocument, notesPurchaseActionLabel } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
 import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
 
@@ -125,7 +125,7 @@ export default function NoteViewer() {
             <a href={noteDoc.url} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ExternalLink className="h-4 w-4" /> Open PDF</a>
             <a href={noteDoc.url} download={pdfName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download PDF</a>
           </>}
-          <a href={inquiry} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-emerald-600 px-3 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPriceLabel}</a>
+          <a href={inquiry} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-emerald-600 px-3 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
         </div>
 
         {noteDoc.kind === 'image-pages' ? (
