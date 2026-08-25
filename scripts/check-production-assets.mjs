@@ -91,6 +91,15 @@ if (!supabaseUrl || !entrySources.some((source) => source.includes(supabaseUrl))
   failures.push('/: deployed JavaScript is missing the configured Supabase project URL')
 }
 
+for (const route of ['/book-summaries', '/books', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
+  const response = await fetch(new URL(route, origin), { signal: AbortSignal.timeout(20_000) })
+  const contentType = response.headers.get('content-type') || ''
+  const body = await response.text()
+  if (!response.ok || !contentType.includes('text/html') || !body.includes('<div id="root">')) {
+    failures.push(`${route}: SPA route is unavailable (HTTP ${response.status}, content-type ${contentType || 'missing'})`)
+  }
+}
+
 if (failures.length > 0) {
   console.error(`Production asset audit failed with ${failures.length} error(s):`)
   for (const failure of failures) console.error(`  ${failure}`)

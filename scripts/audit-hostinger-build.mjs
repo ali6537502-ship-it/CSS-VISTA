@@ -57,6 +57,7 @@ assert(indexHtml.includes('https://www.css-vista.com/'), 'Hostinger index is mis
 assert(!samplePaperHtml.includes('__SITE_ORIGIN__'), 'Generated past-paper page still contains the Sites runtime origin placeholder')
 assert(htaccess.includes('RewriteRule ^ index.html [L]'), 'SPA fallback rule is missing')
 assert(htaccess.includes('seo/past-papers/$1.html'), 'Direct past-paper SEO rewrite is missing')
+assert(htaccess.includes('book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers'), 'Asset-directory SPA route rewrites are missing')
 assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are not explicitly protected from SPA rewrites')
 assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
 assert(robots.includes('https://www.css-vista.com/sitemap.xml'), 'Hostinger robots.txt uses the wrong origin')

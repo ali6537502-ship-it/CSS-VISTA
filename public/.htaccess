@@ -26,6 +26,10 @@ DirectoryIndex index.html
   # Never rewrite crawler control and verification files into the React app.
   RewriteRule ^(?:ads\.txt|robots\.txt|sitemap\.xml|googlec96e2248070e0570\.html)$ - [L,NC]
 
+  # These React routes share names with public asset directories. Route only
+  # the exact page URL to the SPA; child paths must remain available as files.
+  RewriteRule ^(?:book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers)/?$ index.html [L,NC]
+
   # Serve the generated search-friendly past-paper pages at their public URLs.
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]
   RewriteRule ^past-papers/(css|pms|ppsc)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
