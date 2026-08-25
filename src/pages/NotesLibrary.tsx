@@ -1,4 +1,4 @@
-import { Eye, FileImage, FileText, MessageCircle, ShieldCheck } from 'lucide-react'
+import { Eye, FileImage, FileText, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router'
 import { PageHeader } from '@/components/shared'
 import { bundle, noteProducts, notesCoverageStatement, notesPurchaseActionLabel } from '@/data/notes'
@@ -49,8 +49,6 @@ export default function NotesLibrary() {
             <a href={contact('complete notes bundle')} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-11 shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-6 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
           </div>
         </section>
-
-        <p className="mt-6 flex items-start gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" /> Complete PDFs above expose every supplied page. Items whose source consists of only three images remain clearly marked previews until the complete owner-authorised files are provided.</p>
       </main>
     </div>
   )
