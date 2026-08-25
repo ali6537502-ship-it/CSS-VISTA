@@ -5,7 +5,6 @@ import QuizEngine from '@/components/QuizEngine'
 import { pakistanGeography, worldGeography, internationalOrgs, constitutionTimeline, pakistanMovementTimeline, matchConcepts, type MatchPair } from '@/data/games'
 import { questions as mcqBank, quizCategories } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
-import { optionalGroups } from '@/data/syllabus'
 import { getState, recordGameScore } from '@/lib/store'
 import { getBankIndex, sampleQuestions, type BankQuestion } from '@/data/mcq'
 import { usePageBack } from '@/lib/backNavigation'
@@ -359,18 +358,6 @@ export default function Games() {
     badge: 'Subject concepts',
     play: () => setActive({ kind: 'match', title: `Match: ${game.title}`, pairs: game.pairs, id: `match-${index}`, page: 0 }),
   }))
-  const optionalSubjectCards: GameCard[] = optionalGroups.map((group) => {
-    const pairs = group.subjects.map((subject) => ({
-      concept: subject.name,
-      match: `${subject.marks} marks · ${subject.nature} · Best suited to ${subject.suitedFor}`,
-    }))
-    return {
-      title: `Optional Group ${group.group}: Subject Profiles`,
-      desc: `Ten matching pages covering official subject choices, marks, nature and suitable background.`,
-      badge: `Optional Group ${group.group}`,
-      play: () => setActive({ kind: 'match', title: `Optional Group ${group.group}: Subject Profiles`, pairs, id: `optional-group-${group.group}`, page: 0 }),
-    }
-  })
   const otherCards: GameCard[] = [
     { title: '10-Page MCQ Bank Marathon', desc: '100 fresh questions from the full shipped bank, split into ten pages with a one-tap refresh mode', badge: '100 questions', play: () => setActive({ kind: 'bank', title: '10-Page MCQ Bank Marathon' }) },
     { title: 'Pakistan Map Challenge', desc: 'A Pakistan-geography lead round plus wider CSS reinforcement: 100 questions across ten pages', badge: 'Geography', play: () => setActive({ kind: 'quiz', title: 'Pakistan Map Challenge', qs: buildQuestionGame(toQuestions(pakistanGeography, 'Pakistan Geography'), ['pakistan', 'geography'], 'pakistan-map') }) },
@@ -407,17 +394,6 @@ export default function Games() {
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {mcqMatchingCards.map((card) => <GameCardButton key={card.title} card={card} />)}
-              </div>
-            </section>
-
-            <section aria-labelledby="optional-subject-matching-games">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">Complete optional-subject coverage</p>
-                <h2 id="optional-subject-matching-games" className="mt-1 font-display text-xl font-bold text-pine">All optional groups</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Match every official optional subject with its marks, academic nature and preparation background.</p>
-              </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {optionalSubjectCards.map((card) => <GameCardButton key={card.title} card={card} />)}
               </div>
             </section>
 
