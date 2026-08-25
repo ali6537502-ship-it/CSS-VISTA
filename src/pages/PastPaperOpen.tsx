@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { Download, ExternalLink, FileText } from 'lucide-react'
+import { Download, ExternalLink } from 'lucide-react'
 import { Badge, EmptyState, PageHeader } from '@/components/shared'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
 import { recordActivity } from '@/lib/progress'
-import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
+import { safeDownloadName } from '@/lib/resourceFiles'
 
 type Paper = (typeof seedPapers)[number]
 const PAST_PAPER_ASSET_VERSION = '20260824'
@@ -32,7 +32,6 @@ export default function PastPaperOpen() {
     [id],
   )
   const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
-  const [pdfSize, setPdfSize] = useState<number | null>(null)
   const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
 
   useEffect(() => {
@@ -57,18 +56,13 @@ export default function PastPaperOpen() {
   useEffect(() => {
     let active = true
     setPdfAvailable(null)
-    setPdfSize(null)
     if (!paper) return () => { active = false }
 
     if (pdfUrl) {
       fetch(pdfUrl, { method: 'HEAD' })
         .then((response) => {
           const contentType = response.headers.get('content-type') ?? ''
-          if (active) {
-            setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
-            const length = Number(response.headers.get('content-length'))
-            setPdfSize(Number.isFinite(length) && length > 0 ? length : null)
-          }
+          if (active) setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
         })
         .catch(() => active && setPdfAvailable(false))
     } else {
@@ -96,7 +90,7 @@ export default function PastPaperOpen() {
 
   return (
     <div>
-      <PageHeader title={paperPageTitle(paper)} description={paperPageDescription(paper)}>
+      <PageHeader title={paperPageTitle(paper)}>
         <div className="mt-4 flex flex-wrap gap-2">
           <Badge tone="gray">{paper.examination}</Badge>
           <Badge tone="gray">{paper.year}</Badge>
@@ -106,27 +100,16 @@ export default function PastPaperOpen() {
       </PageHeader>
 
       <div className="mx-auto max-w-7xl space-y-7 px-4 py-8">
-        <div className="flex flex-wrap items-center gap-2 rounded-xl border bg-white p-4">
-          <FileText className="h-5 w-5 text-emerald-800" />
-          <div className="mr-auto">
-            <p className="text-sm font-bold text-pine">{pdfAvailable ? 'Watermarked PDF' : 'Watermarked PDF record'}</p>
-            <p className="text-xs text-muted-foreground">
-              {pdfAvailable === null
-                ? 'Checking the owner-provided watermarked file…'
-                : pdfAvailable
-                  ? `The supplied document is available in its watermarked format${pdfSize ? ` · ${formatFileSize(pdfSize)}` : ''}.`
-                  : 'The owner-provided watermarked PDF is not currently stored. No analysis or reconstructed paper is substituted.'}
-            </p>
-          </div>
-          {pdfAvailable && pdfUrl && <>
+        {pdfAvailable && pdfUrl && (
+          <div className="flex flex-wrap items-center gap-2 rounded-xl border bg-white p-4">
             <a href={pdfUrl} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary">
               <ExternalLink className="h-4 w-4" /> Open full window
             </a>
             <a href={pdfUrl} download={safeDownloadName(`${paper.examination}-${paper.year}-${paper.subject}-${paper.paper}`)} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
               <Download className="h-4 w-4" /> Download PDF
             </a>
-          </>}
-        </div>
+          </div>
+        )}
 
         {pdfAvailable && pdfUrl ? (
           <section aria-label={`${paper.title} PDF viewer`} className="overflow-hidden rounded-xl border bg-white">
@@ -134,7 +117,7 @@ export default function PastPaperOpen() {
           </section>
         ) : (
           <section className="rounded-2xl border bg-white p-4 sm:p-6">
-            <EmptyState title="Watermarked PDF unavailable" hint="This paper will open here after its owner-provided watermarked PDF is restored." />
+            <EmptyState title="PDF unavailable" hint="This paper will open here after its PDF is restored." />
             <div className="mt-4 text-center">
               <Link to="/past-papers" className="text-sm font-bold text-emerald-800 underline underline-offset-2">Return to Past Papers</Link>
             </div>

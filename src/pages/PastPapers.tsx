@@ -206,11 +206,6 @@ export default function PastPapers() {
           ))}
         </section>
 
-        <nav aria-label="Browse CSS past papers by year" className="rounded-xl border bg-white p-4">
-          <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS past papers by year</p>
-          <div className="mt-2 flex flex-wrap gap-2">{[...new Set(papers.filter((paper) => paper.examination === 'CSS').map((paper) => paper.year))].sort((a, b) => b - a).map((paperYear) => <Link key={paperYear} to={`/past-papers/css/${paperYear}`} className={`rounded-full border px-3 py-1.5 text-xs font-bold ${exam === 'CSS' && year === String(paperYear) ? 'border-pine bg-pine text-white' : 'text-pine hover:bg-emerald-50'}`}>CSS {paperYear}</Link>)}</div>
-        </nav>
-
         {/* Filters */}
         <div className="grid gap-2.5 rounded-lg border bg-white p-4 sm:grid-cols-3 lg:grid-cols-7">
           <div className="relative sm:col-span-3 lg:col-span-2">
