@@ -7,6 +7,12 @@ import { mergedPastPapers } from '@/lib/admin'
 import { recordActivity } from '@/lib/progress'
 
 type Paper = (typeof seedPapers)[number]
+const PAST_PAPER_ASSET_VERSION = '20260824'
+
+function versionedPaperUrl(fileUrl: string) {
+  const separator = fileUrl.includes('?') ? '&' : '?'
+  return `${fileUrl}${separator}v=${PAST_PAPER_ASSET_VERSION}`
+}
 
 function paperPageTitle(paper: Paper) {
   const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
@@ -24,6 +30,7 @@ export default function PastPaperOpen() {
     [id],
   )
   const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
+  const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
 
   useEffect(() => {
     if (!paper) return
@@ -49,8 +56,8 @@ export default function PastPaperOpen() {
     setPdfAvailable(null)
     if (!paper) return () => { active = false }
 
-    if (paper.fileUrl) {
-      fetch(paper.fileUrl, { method: 'HEAD' })
+    if (pdfUrl) {
+      fetch(pdfUrl, { method: 'HEAD' })
         .then((response) => {
           const contentType = response.headers.get('content-type') ?? ''
           if (active) setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
@@ -61,7 +68,7 @@ export default function PastPaperOpen() {
     }
 
     return () => { active = false }
-  }, [paper])
+  }, [paper, pdfUrl])
 
   if (!paper) {
     return (
@@ -103,19 +110,19 @@ export default function PastPaperOpen() {
                   : 'The owner-provided watermarked PDF is not currently stored. No analysis or reconstructed paper is substituted.'}
             </p>
           </div>
-          {pdfAvailable && paper.fileUrl && <>
-            <a href={paper.fileUrl} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary">
+          {pdfAvailable && pdfUrl && <>
+            <a href={pdfUrl} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-bold text-pine hover:bg-secondary">
               <ExternalLink className="h-4 w-4" /> Open full window
             </a>
-            <a href={paper.fileUrl} download data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
+            <a href={pdfUrl} download data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900">
               <Download className="h-4 w-4" /> Download
             </a>
           </>}
         </div>
 
-        {pdfAvailable && paper.fileUrl ? (
+        {pdfAvailable && pdfUrl ? (
           <section aria-label={`${paper.title} PDF viewer`} className="overflow-hidden rounded-xl border bg-white">
-            <iframe src={paper.fileUrl} title={paper.title} className="h-[72vh] min-h-[520px] w-full" />
+            <iframe src={pdfUrl} title={paper.title} className="h-[72vh] min-h-[520px] w-full" />
           </section>
         ) : (
           <section className="rounded-2xl border bg-white p-4 sm:p-6">
