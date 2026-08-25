@@ -2,7 +2,7 @@
   "repository": "ali6537502-ship-it/CSS-VISTA",
   "branch": "main",
   "publicBase": "https://raw.githubusercontent.com/ali6537502-ship-it/CSS-VISTA/main/public/",
-  "generatedAt": "2026-08-25T03:02:59.649Z",
+  "generatedAt": "2026-08-25T05:10:19.750Z",
   "fileCount": 790,
   "totalBytes": 918076874,
   "files": [
@@ -2342,22 +2342,22 @@
       "sha256": "20ef3906d37361f8eed6b946d86bdee1b86f1cd1f2aa1df49b62a529b543ea50"
     },
     {
-      "path": "/past-papers/mpt/CSS-MPT-2022-Watermarked.pdf",
+      "path": "/past-papers/mpt/CSS-MPT-2022.pdf",
       "size": 1511025,
       "sha256": "a6f42bed0a72b2db18fc90dc3717f6d43578e13b31bf9fc4d4ff221ac0658ea6"
     },
     {
-      "path": "/past-papers/mpt/CSS-MPT-2023-Special-Watermarked.pdf",
+      "path": "/past-papers/mpt/CSS-MPT-2023-Special.pdf",
       "size": 1033919,
       "sha256": "9d4c682d2cf3bb8cc92b7d367cd0a6232943fbc71f478c9c5800b27d7d1a70ce"
     },
     {
-      "path": "/past-papers/mpt/CSS-MPT-2024-Watermarked.pdf",
+      "path": "/past-papers/mpt/CSS-MPT-2024.pdf",
       "size": 5480923,
       "sha256": "5315d9c60eee16d53d373b6f3fcf468e07aaca9c620d5a2dfba53174caec1e67"
     },
     {
-      "path": "/past-papers/mpt/CSS-MPT-2025-Watermarked.pdf",
+      "path": "/past-papers/mpt/CSS-MPT-2025.pdf",
       "size": 35558433,
       "sha256": "f56536b03b15002b0e142d2447d8bcadc453879bd96b9ef937087d4c60acbfa1"
     },

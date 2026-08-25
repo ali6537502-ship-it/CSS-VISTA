@@ -43,7 +43,7 @@ export default function QuestionPagination({
         <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
           {page > 1 && (
             <button type="button" onClick={() => onPageChange(page - 1)} className="inline-flex min-h-10 items-center gap-1 rounded-lg border bg-white px-3 text-xs font-bold text-pine hover:bg-secondary sm:text-sm">
-              <ChevronLeft className="h-4 w-4" /> Previous 10 Questions
+              <ChevronLeft className="h-4 w-4" /> Previous
             </button>
           )}
           <div className="flex items-center gap-1" aria-label="Choose a page">
@@ -64,7 +64,7 @@ export default function QuestionPagination({
           </div>
           {page < pages && (
             <button type="button" onClick={() => onPageChange(page + 1)} className="inline-flex min-h-10 items-center gap-1 rounded-lg bg-pine px-3 text-xs font-bold text-white hover:bg-emerald-900 sm:text-sm">
-              Next 10 Questions <ChevronRight className="h-4 w-4" />
+              Next <ChevronRight className="h-4 w-4" />
             </button>
           )}
         </div>

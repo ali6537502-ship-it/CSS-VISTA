@@ -385,7 +385,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
     }
 
     if (fpscSyllabus) {
-      remote.push(...fpscSyllabus.subjects.map((subject) => ({
+      remote.push(...fpscSyllabus.subjects.filter((subject) => subject.slug !== 'essay').map((subject) => ({
         id: `fpsc-syllabus-${subject.slug}`,
         title: `${subject.name} — FPSC Syllabus`,
         category: 'FPSC Syllabus & Topic Planner',

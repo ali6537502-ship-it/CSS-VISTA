@@ -42,6 +42,8 @@ interface SyllabusTopic {
 type SubjectView = 'all' | 'compulsory' | 'optional'
 type ScheduleMode = 'today' | 'tomorrow' | 'specific' | 'this-week' | 'custom-week'
 
+const hiddenSyllabusSubjects = new Set(['essay'])
+
 const statusLabel: Record<SyllabusItemStatus, string> = {
   'not-started': 'Not Started',
   'in-progress': 'In Progress',
@@ -117,10 +119,14 @@ export default function FpscSyllabusPlanner() {
         return response.json() as Promise<FpscSyllabusData>
       })
       .then((value) => {
-        setData(value)
+        const visibleData = {
+          ...value,
+          subjects: value.subjects.filter((subject) => !hiddenSyllabusSubjects.has(subject.slug)),
+        }
+        setData(visibleData)
         const parameters = new URLSearchParams(window.location.search)
         const requested = parameters.get('subject')
-        setSelectedSlug(value.subjects.some((subject) => subject.slug === requested) ? requested! : value.subjects[0]?.slug ?? '')
+        setSelectedSlug(visibleData.subjects.some((subject) => subject.slug === requested) ? requested! : visibleData.subjects[0]?.slug ?? '')
         const requestedTopic = parameters.get('topic')
         if (requestedTopic) setQuery(requestedTopic)
       })

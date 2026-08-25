@@ -19,6 +19,13 @@ import { ManagedAdOpportunity } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
 import VistaShortcut from '@/components/VistaShortcut'
 import { requestPageBack } from '@/lib/backNavigation'
+import {
+  getRouteScrollPosition,
+  parseRouteScrollState,
+  resolveScrollIntent,
+  updateRouteScrollState,
+  type RouteScrollEntry,
+} from '@/lib/navigationState'
 
 const nav = [
   { label: 'Home', to: '/' },
@@ -415,20 +422,48 @@ function BackBar({ onBack }: { onBack: () => void }) {
   )
 }
 
-const routeScrollPositions = new Map<string, number>()
+const ROUTE_SCROLL_STORAGE_KEY = 'cssvista:navigation-scroll:v1'
+let routeScrollPositions: RouteScrollEntry[] = []
+let routeScrollHydrated = false
 let lastRouteKey: string | null = null
+let lastRoutePathname: string | null = null
 let lastRouteHistoryIndex: number | null = null
 let animatedRouteKey: string | null = null
 let animatedRouteDirection: 'forward' | 'back' | 'none' = 'none'
 
-function saveRouteScroll(locationKey: string, position: number) {
-  routeScrollPositions.set(locationKey, Math.max(0, Math.round(position)))
+function hydrateRouteScrollPositions() {
+  if (routeScrollHydrated) return
+  routeScrollHydrated = true
+  try {
+    routeScrollPositions = parseRouteScrollState(window.sessionStorage.getItem(ROUTE_SCROLL_STORAGE_KEY))
+  } catch {
+    routeScrollPositions = []
+  }
 }
 
-function resolveRouteDirection(locationKey: string, navigationType: 'POP' | 'PUSH' | 'REPLACE', historyIndex: number | null) {
+function persistRouteScrollPositions() {
+  try {
+    window.sessionStorage.setItem(ROUTE_SCROLL_STORAGE_KEY, JSON.stringify(routeScrollPositions))
+  } catch {
+    // Private browsing and strict storage policies must not affect navigation.
+  }
+}
+
+function historyScrollKey(historyIndex: number | null) {
+  return historyIndex === null ? null : `history:${historyIndex}`
+}
+
+function saveRouteScroll(locationKey: string, position: number, historyIndex: number | null = null) {
+  hydrateRouteScrollPositions()
+  routeScrollPositions = updateRouteScrollState(routeScrollPositions, locationKey, position)
+  const indexedKey = historyScrollKey(historyIndex)
+  if (indexedKey) routeScrollPositions = updateRouteScrollState(routeScrollPositions, indexedKey, position)
+}
+
+function resolveRouteDirection(locationKey: string, pathname: string, navigationType: 'POP' | 'PUSH' | 'REPLACE', historyIndex: number | null) {
   if (animatedRouteKey === locationKey) return animatedRouteDirection
   animatedRouteKey = locationKey
-  animatedRouteDirection = lastRouteKey === null || lastRouteKey === locationKey
+  animatedRouteDirection = lastRouteKey === null || lastRouteKey === locationKey || lastRoutePathname === pathname
     ? 'none'
     : navigationType === 'POP'
       ? historyIndex !== null && lastRouteHistoryIndex !== null && historyIndex > lastRouteHistoryIndex
@@ -460,50 +495,105 @@ export default function Layout() {
   const currentHistoryIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
   const initialHistoryIndexRef = useRef(currentHistoryIndex)
   const restoringRef = useRef<string | null>(null)
-  const routeDirection = resolveRouteDirection(location.key, navigationType, currentHistoryIndex)
+  const previousPathnameRef = useRef(location.pathname)
+  const previousHashRef = useRef(location.hash)
+  const focusPathnameRef = useRef(location.pathname)
+  const activeRouteKeyRef = useRef(location.key)
+  const routeDirection = resolveRouteDirection(location.key, location.pathname, navigationType, currentHistoryIndex)
   const { user, configured: accountsConfigured } = useAccount()
 
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setMobileOpen(false)
-      setOpenDrop(null)
-      setSearchOpen(false)
-    })
-    return () => window.cancelAnimationFrame(frame)
-  }, [location.pathname])
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setMobileOpen(false)
+    setOpenDrop(null)
+    setSearchOpen(false)
+  }, [location.key])
+  useLayoutEffect(() => {
     const previous = window.history.scrollRestoration
     window.history.scrollRestoration = 'manual'
     return () => { window.history.scrollRestoration = previous }
   }, [])
-  useEffect(() => {
-    const capture = () => {
-      if (restoringRef.current === location.key) return
-      saveRouteScroll(location.key, window.scrollY)
-    }
-    if (navigationType !== 'POP') capture()
-    window.addEventListener('scroll', capture, { passive: true })
-    window.addEventListener('pagehide', capture)
-    document.addEventListener('pointerdown', capture, true)
-    return () => {
-      window.removeEventListener('scroll', capture)
-      window.removeEventListener('pagehide', capture)
-      document.removeEventListener('pointerdown', capture, true)
-    }
-  }, [location.key, navigationType])
   useLayoutEffect(() => {
+    const routeKey = location.key
+    let frame = 0
+    const isCurrentHistoryEntry = () => {
+      const browserIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
+      return activeRouteKeyRef.current === routeKey && browserIndex === currentHistoryIndex
+    }
+    const capture = () => {
+      if (!isCurrentHistoryEntry() || restoringRef.current === routeKey) return
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => saveRouteScroll(routeKey, window.scrollY, currentHistoryIndex))
+    }
+    const captureImmediately = () => {
+      if (!isCurrentHistoryEntry() || restoringRef.current === routeKey) return
+      window.cancelAnimationFrame(frame)
+      saveRouteScroll(routeKey, window.scrollY, currentHistoryIndex)
+    }
+    const captureAndPersist = () => {
+      captureImmediately()
+      persistRouteScrollPositions()
+    }
+    if (navigationType !== 'POP') captureImmediately()
+    window.addEventListener('scroll', capture, { passive: true })
+    window.addEventListener('pagehide', captureAndPersist)
+    document.addEventListener('pointerdown', captureImmediately, true)
+    document.addEventListener('keydown', captureImmediately, true)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', capture)
+      window.removeEventListener('pagehide', captureAndPersist)
+      document.removeEventListener('pointerdown', captureImmediately, true)
+      document.removeEventListener('keydown', captureImmediately, true)
+    }
+  }, [currentHistoryIndex, location.key, navigationType])
+  useLayoutEffect(() => {
+    activeRouteKeyRef.current = location.key
     lastRouteHistoryIndex = currentHistoryIndex
     lastRouteKey = location.key
-  }, [currentHistoryIndex, location.key])
+    lastRoutePathname = location.pathname
+  }, [currentHistoryIndex, location.key, location.pathname])
   useLayoutEffect(() => {
-    const target = navigationType === 'POP'
-      ? routeScrollPositions.get(location.key) ?? 0
-      : 0
+    hydrateRouteScrollPositions()
+    const indexedKey = historyScrollKey(currentHistoryIndex)
+    const savedPosition = getRouteScrollPosition(routeScrollPositions, location.key)
+      ?? (indexedKey ? getRouteScrollPosition(routeScrollPositions, indexedKey) : undefined)
+    const intent = resolveScrollIntent({
+      navigationType,
+      previousPathname: previousPathnameRef.current,
+      pathname: location.pathname,
+      previousHash: previousHashRef.current,
+      hash: location.hash,
+      hasSavedPosition: savedPosition !== undefined,
+    })
+    previousPathnameRef.current = location.pathname
+    previousHashRef.current = location.hash
+
+    if (intent === 'preserve') {
+      saveRouteScroll(location.key, window.scrollY)
+      return
+    }
+
+    const target = intent === 'restore' ? savedPosition ?? window.scrollY : 0
     let frame = 0
     let cancelled = false
     const startedAt = performance.now()
+    const routeStage = document.querySelector<HTMLElement>('.cssv-route-stage')
+    const previousStageMinHeight = routeStage?.style.minHeight ?? ''
+    const stageTop = routeStage ? routeStage.getBoundingClientRect().top + window.scrollY : 0
+    const requiredStageHeight = Math.max(0, Math.ceil(target + window.innerHeight - stageTop))
+    let reservedRestoreHeight = intent === 'restore' && target > 0 && Boolean(routeStage)
     restoringRef.current = location.key
+    if (reservedRestoreHeight && routeStage) {
+      routeStage.style.minHeight = `${requiredStageHeight}px`
+      window.scrollTo({ top: target, left: 0, behavior: 'auto' })
+    }
+    const releaseRestoreHeight = () => {
+      if (!reservedRestoreHeight) return
+      reservedRestoreHeight = false
+      if (routeStage) routeStage.style.minHeight = previousStageMinHeight
+    }
     const finishRestore = () => {
+      releaseRestoreHeight()
       if (restoringRef.current === location.key) restoringRef.current = null
     }
     const cancelRestore = () => {
@@ -518,7 +608,7 @@ export default function Layout() {
 
     const restore = () => {
       if (cancelled) return
-      if (navigationType !== 'POP' && location.hash) {
+      if (intent === 'hash' && location.hash) {
         const rawId = location.hash.slice(1)
         let id = rawId
         try { id = decodeURIComponent(rawId) } catch { /* Keep the original hash when malformed. */ }
@@ -529,14 +619,32 @@ export default function Layout() {
           return
         }
       }
+      if (reservedRestoreHeight) {
+        const naturalHeight = routeStage?.firstElementChild instanceof HTMLElement
+          ? routeStage.firstElementChild.scrollHeight
+          : 0
+        if (naturalHeight >= requiredStageHeight - 1) {
+          releaseRestoreHeight()
+          window.scrollTo({ top: target, left: 0, behavior: 'auto' })
+          finishRestore()
+          return
+        }
+        window.scrollTo({ top: target, left: 0, behavior: 'auto' })
+        if (performance.now() - startedAt < 4000) {
+          frame = window.requestAnimationFrame(restore)
+        } else {
+          finishRestore()
+        }
+        return
+      }
       const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
       const reachableTarget = Math.min(target, maximum)
       if (Math.abs(window.scrollY - reachableTarget) > 1) {
         window.scrollTo({ top: reachableTarget, left: 0, behavior: 'auto' })
       }
       const fullyRestored = maximum >= target - 1 && Math.abs(window.scrollY - target) <= 1
-      const timeLimit = navigationType === 'POP' ? 1400 : 360
-      if ((!fullyRestored || navigationType !== 'POP') && performance.now() - startedAt < timeLimit) {
+      const timeLimit = intent === 'restore' ? 1400 : 360
+      if (!fullyRestored && performance.now() - startedAt < timeLimit) {
         frame = window.requestAnimationFrame(restore)
       } else {
         finishRestore()
@@ -552,7 +660,19 @@ export default function Layout() {
       window.removeEventListener('keydown', cancelRestore)
       finishRestore()
     }
-  }, [currentRoute, location.hash, location.key, navigationType])
+  }, [currentHistoryIndex, currentRoute, location.hash, location.key, location.pathname, navigationType])
+  useEffect(() => {
+    const previousPathname = focusPathnameRef.current
+    focusPathnameRef.current = location.pathname
+    if (navigationType === 'POP' || previousPathname === location.pathname || location.hash) return
+    const frame = window.requestAnimationFrame(() => {
+      const heading = document.querySelector<HTMLElement>('.cssv-route-stage h1')
+      if (!heading) return
+      if (!heading.hasAttribute('tabindex')) heading.tabIndex = -1
+      heading.focus({ preventScroll: true })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash, location.pathname, navigationType])
   useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -576,7 +696,8 @@ export default function Layout() {
 
   const goBack = () => {
     if (requestPageBack()) return
-    saveRouteScroll(location.key, window.scrollY)
+    saveRouteScroll(location.key, window.scrollY, currentHistoryIndex)
+    persistRouteScrollPositions()
     const historyIndex = typeof window.history.state?.idx === 'number' ? window.history.state.idx : null
     const initialHistoryIndex = initialHistoryIndexRef.current
     if (historyIndex !== null && initialHistoryIndex !== null && historyIndex > initialHistoryIndex) {
@@ -837,7 +958,7 @@ export default function Layout() {
 
       <main className="flex-1 pb-[68px] md:pb-0">
         <div
-          key={location.key}
+          key={location.pathname}
           className={`cssv-route-stage route-transition-${routeDirection}`}
         >
           <Outlet />

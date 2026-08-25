@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   Award, BookOpen, Brain, CalendarDays, ClipboardList, Coins, Compass, Cpu, Flag,
   Globe, History, Landmark, Layers, MapPin, Medal, Microscope, Moon, Mountain, Shuffle,
@@ -50,8 +50,9 @@ const modes = [
 ]
 
 export default function GKWorld() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [idx, setIdx] = useState<BankIndex | null>(null)
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
   const [now, setNow] = useState(() => new Date())
   const mistakes = getMistakes().length
   const saved = savedMcqIds().length
@@ -66,6 +67,12 @@ export default function GKWorld() {
     const timer = window.setInterval(() => setNow(new Date()), 1000)
     return () => window.clearInterval(timer)
   }, [])
+
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (query.trim()) next.set('q', query.trim())
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [query, searchParams, setSearchParams])
 
   const cats = useMemo(() => {
     if (!idx) return []

@@ -10,7 +10,7 @@ export interface LibraryItem {
   type: 'Notes' | 'Past Paper' | 'Planner' | 'Worksheet' | 'Revision Sheet' | 'Syllabus Guide' | 'Outline' | 'Grammar Exercise'
   description: string
   author: string
-  source: 'Owner-provided' | 'CSS Vista original' | 'Official (FPSC/GoP)'
+  source: 'Owner-provided' | 'CSS Vista original' | 'CSS Vista archive' | 'Official (FPSC/GoP)'
   pages?: number
   year?: number
   tags: string[]
@@ -27,7 +27,7 @@ export const libraryItems: LibraryItem[] = [
   { id: 'lib5', title: 'Islamic Studies - Core Topics & Reference Guide', subject: 'Islamic Studies', topic: 'Full syllabus', type: 'Notes', description: 'Beliefs, pillars, Seerah timeline and contemporary topics with guidance on accurate referencing.', author: 'CSS Vista', source: 'CSS Vista original', tags: ['islamiat', 'seerah'], lastUpdated: '2026-07-17', status: 'available' },
   { id: 'lib6', title: 'General Science & Ability - Concept Checklist', subject: 'General Science & Ability', topic: 'Full syllabus', type: 'Revision Sheet', description: 'Topic checklist for science concepts and the quantitative/reasoning areas to drill.', author: 'CSS Vista', source: 'CSS Vista original', tags: ['gsa', 'checklist'], lastUpdated: '2026-07-17', status: 'available' },
   { id: 'lib7', title: 'Answer-Writing Self-Assessment Rubric', subject: 'All subjects', topic: 'Answer writing', type: 'Worksheet', description: 'Twelve-point rubric covering relevance, structure, analysis, evidence and presentation.', author: 'CSS Vista', source: 'CSS Vista original', tags: ['answer writing', 'rubric'], lastUpdated: '2026-07-17', status: 'available' },
-  { id: 'lib8', title: 'CSS, PMS & PPSC Past-Paper Archive', subject: 'All subjects', topic: 'Past papers', type: 'Past Paper', description: 'Browse the owner-provided archive by examination, subject, year, paper type and mode.', author: 'CSS Vista', source: 'Owner-provided', tags: ['past papers'], lastUpdated: '2026-08-15', fileUrl: '/past-papers', status: 'available' },
+  { id: 'lib8', title: 'CSS, PMS & PPSC Past-Paper Archive', subject: 'All subjects', topic: 'Past papers', type: 'Past Paper', description: 'Browse the CSS Vista archive by examination, subject, year, paper type and mode.', author: 'CSS Vista', source: 'CSS Vista archive', tags: ['past papers'], lastUpdated: '2026-08-24', fileUrl: '/past-papers', status: 'available' },
   { id: 'lib9', title: 'Grammar Book Lessons - Owner file pending', subject: 'Precis & Composition', topic: 'Grammar', type: 'Grammar Exercise', description: 'The authorised grammar lessons activate when the owner uploads the grammar book; CSS Vista original lessons remain available meanwhile.', author: '-', source: 'Owner-provided', tags: ['grammar'], lastUpdated: '2026-07-17', status: 'awaiting-owner-file' },
 ]
 

@@ -47,8 +47,8 @@ export default function PastPapers() {
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse the owner-provided ${routeExam} ${routeYear} watermarked past-paper PDFs in this verified collection.`
-    : 'Owner-provided watermarked CSS, PMS, PPSC and MPT past-paper PDFs organised by examination, subject and year.'
+    ? `Browse ${routeExam} ${routeYear} past-paper PDFs by subject.`
+    : 'CSS, PMS, PPSC and MPT past-paper PDFs organised by examination, subject and year.'
 
   useEffect(() => {
     const controller = new AbortController()
@@ -250,7 +250,7 @@ export default function PastPapers() {
             <FileText className="mx-auto h-8 w-8 text-muted-foreground/60" />
             <h2 className="mt-3 font-semibold text-foreground">No verified past papers are available</h2>
             <p className="mx-auto mt-1 max-w-xl text-sm text-muted-foreground">
-              Only owner-provided or official documents are published. Please return after verified papers have been added to the archive.
+              Verified past-paper documents will appear here after they are added to the archive.
             </p>
           </div>
         ) : filtered.length === 0 ? (

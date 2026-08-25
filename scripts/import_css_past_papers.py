@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Restore the owner-provided CSS past-paper PDFs from the source archive.
+"""Restore the registered CSS past-paper PDFs from a source archive.
 
 The generated TypeScript registry is the source of truth for public URLs. The
 archive contains duplicate working folders, so this importer selects exactly
@@ -44,7 +44,9 @@ def parse_registry(path: Path) -> list[dict[str, object]]:
 
 def canonical_filename(name: str) -> str:
     stem = Path(name).stem.casefold()
+    stem = re.sub(r"\(\d+\)$", "", stem)
     stem = re.sub(r"[-_ ]*css[-_ ]*vista$", "", stem)
+    stem = re.sub(r"[-_ ]*restored$", "", stem)
     stem = re.sub(r"\s+", "-", stem)
     stem = re.sub(r"[^a-z0-9()]+", "-", stem).strip("-")
     return f"{stem}.pdf"
@@ -66,6 +68,7 @@ def choose_entry(
     year: str,
     by_name: dict[str, list[zipfile.ZipInfo]],
     by_canonical_name: dict[str, list[zipfile.ZipInfo]],
+    preferred_size: int | None = None,
 ) -> tuple[zipfile.ZipInfo, str]:
     exact = by_name.get(expected_name.casefold(), [])
     candidates = exact or by_canonical_name.get(canonical_filename(expected_name), [])
@@ -78,6 +81,9 @@ def choose_entry(
         if year in PurePosixPath(entry.filename).parts or year in entry.filename
     ]
     candidates = year_candidates or candidates
+    if preferred_size:
+        same_size = [entry for entry in candidates if entry.file_size == preferred_size]
+        candidates = same_size or candidates
     candidates = sorted(candidates, key=lambda entry: (len(entry.filename), entry.filename.casefold()))
     return candidates[0], "exact" if exact else "normalised"
 
@@ -141,7 +147,15 @@ def restore_papers(
 
         selections: list[tuple[str, str, zipfile.ZipInfo, str]] = []
         for year, expected_name, file_url in expected_records:
-            entry, match_type = choose_entry(expected_name, year, by_name, by_canonical_name)
+            destination = output_root / year / expected_name
+            preferred_size = destination.stat().st_size if destination.exists() else None
+            entry, match_type = choose_entry(
+                expected_name,
+                year,
+                by_name,
+                by_canonical_name,
+                preferred_size,
+            )
             if entry.filename in selected_entries:
                 raise ValueError(f"One source file matched multiple registry records: {entry.filename}")
             selected_entries.add(entry.filename)
@@ -151,11 +165,30 @@ def restore_papers(
             exact_matches = sum(match_type == "exact" for *_, match_type in selections)
             normalised_matches = len(selections) - exact_matches
             total_bytes = sum(entry.file_size for _, _, entry, _ in selections)
+            current_matches = 0
+            current_differences: list[str] = []
+            current_missing = 0
+            for year, expected_name, entry, _ in selections:
+                destination = output_root / year / expected_name
+                if not destination.exists():
+                    current_missing += 1
+                    continue
+                with source_zip.open(entry) as source:
+                    archive_digest = hashlib.file_digest(source, "sha256").hexdigest()
+                if sha256_file(destination) == archive_digest:
+                    current_matches += 1
+                else:
+                    current_differences.append(f"{year}/{expected_name}")
+            ignored_entries = len(entries) - len(selected_entries)
             print(
                 f"Import plan verified: {len(selections)} registered PDFs "
                 f"({exact_matches} exact, {normalised_matches} normalised), "
-                f"{total_bytes} source bytes."
+                f"{total_bytes} source bytes; {current_matches} byte-identical current files, "
+                f"{len(current_differences)} alternate editions, {current_missing} missing, "
+                f"{ignored_entries} duplicate or unregistered archive entries ignored."
             )
+            if current_differences:
+                print("Alternate editions retained on the website: " + ", ".join(current_differences))
             return
 
         output_root.mkdir(parents=True, exist_ok=True)
@@ -203,7 +236,7 @@ def restore_papers(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("archive", type=Path, help="Owner-provided ZIP archive")
+    parser.add_argument("archive", type=Path, help="Source ZIP archive")
     parser.add_argument(
         "--registry",
         type=Path,

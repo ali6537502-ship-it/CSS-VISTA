@@ -24,6 +24,7 @@
     "test:ads": "node --test tests/adPolicy.test.ts",
     "test:factbook": "node --test tests/factbook.test.ts",
     "test:pagination": "node --test tests/questionPagination.test.ts",
+    "test:navigation": "node --test tests/navigationState.test.ts",
     "test:supabase": "node --test tests/supabaseConfig.test.ts",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",

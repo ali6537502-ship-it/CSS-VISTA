@@ -22,7 +22,7 @@ function paperPageTitle(paper: Paper) {
 }
 
 function paperPageDescription(paper: Paper) {
-  return `Open and download the owner-provided watermarked PDF for the ${paperPageTitle(paper)}.`
+  return `Open and download the ${paperPageTitle(paper)} on CSS Vista.`
 }
 
 export default function PastPaperOpen() {

@@ -77,7 +77,7 @@ const featuredServices = [
   },
   {
     eyebrow: 'PREMIUM NOTES',
-    title: 'Notes by Sir Ali Hassan Sargana',
+    title: 'CSS Premium Notes Library',
     description: 'Structured material for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History.',
     to: '/notes',
     action: 'View library',
@@ -112,7 +112,7 @@ function HomeHero() {
           Pakistan’s first <span>all-in-one digital ecosystem.</span>
         </h1>
         <p className="cssv-home-hero-kicker">
-          <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+          <Sparkles className="h-7 w-7" aria-hidden="true" />
           Built exclusively for competitive exam preparation
         </p>
         <p className="cssv-home-hero-description">
@@ -206,9 +206,9 @@ function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNo
 const officialExamDates = {
   mpt: {
     label: 'MPT 2027',
-    dateLabel: '27 September 2026',
-    target: '2026-09-27T00:00:00+05:00',
-    source: 'https://www.fpsc.gov.pk/uploads/content/1785753970885_MPT_CE-2027.pdf',
+    dateLabel: '10 October 2026',
+    target: '2026-10-10T00:00:00+05:00',
+    source: 'https://fpsc.gov.pk/uploads/content/1787222788872_Public_Notice_-_Re-Scheduling_of_MPT-2027.pdf',
   },
   written: {
     label: 'CSS Written 2027',
@@ -409,30 +409,6 @@ function ResourceToggle() {
         ))}
       </div>
     </section>
-  )
-}
-
-function FeatureVisual({ variant, icon: Icon }: { variant: string; icon: LucideIcon }) {
-  if (variant === 'library') {
-    return (
-      <div className={`cssv-feature-visual cssv-feature-visual-${variant} flex items-center justify-center`} aria-hidden="true">
-        <span className="cssv-visual-orb" />
-        <img src="/images/mentor-ali.jpg" alt="" className="relative z-[2] h-[72%] w-[72%] rounded-2xl border border-white/70 object-cover object-top shadow-lg" />
-        <span className="absolute bottom-3 z-[3] rounded-full bg-white/92 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wide text-emerald-900 shadow-sm">Sir Ali</span>
-      </div>
-    )
-  }
-  return (
-    <div className={`cssv-feature-visual cssv-feature-visual-${variant}`} aria-hidden="true">
-      <span className="cssv-visual-orb" />
-      <span className="cssv-visual-sheet">
-        <span />
-        <span />
-        <span />
-      </span>
-      <span className="cssv-visual-icon"><Icon /></span>
-      <BarChart3 className="cssv-visual-chart" />
-    </div>
   )
 }
 
@@ -683,9 +659,9 @@ export default function Home() {
               <Link
                 key={service.eyebrow}
                 to={service.to}
-                className="cssv-glass-panel cssv-feature-card cssv-tap group grid min-w-[84%] snap-center grid-cols-[1.15fr_.85fr] overflow-hidden rounded-2xl border sm:min-w-[58%] lg:min-w-0"
+                className="cssv-glass-panel cssv-feature-card cssv-tap group min-w-[70%] snap-center overflow-hidden rounded-2xl border sm:min-w-[42%] lg:min-w-0"
               >
-                <span className="flex min-w-0 flex-col p-4 pr-1">
+                <span className="flex min-w-0 flex-col p-4">
                   <span className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{service.eyebrow}</span>
                   <span className={`mt-2 font-bold leading-snug text-slate-900 ${service.variant === 'test' ? 'text-[19px] tracking-[-0.025em]' : 'text-[15px]'}`}>{service.title}</span>
                   <span className={`mt-1 line-clamp-2 leading-relaxed text-slate-500 ${service.variant === 'test' ? 'text-[10px]' : 'text-[11px]'}`}>{service.description}</span>
@@ -693,7 +669,6 @@ export default function Home() {
                     {service.action} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </span>
-                <FeatureVisual variant={service.variant} icon={service.icon} />
               </Link>
             ))}
           </div>

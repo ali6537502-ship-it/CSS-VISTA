@@ -27,16 +27,24 @@ export const css2027ScheduleSource = {
   title: 'FPSC Advance Public Notice - CSS Competitive Examination 2027',
   url: 'https://www.fpsc.gov.pk/uploads/content/1783075774884_Advance_Public_Notice_-_CSS_Competitive_Examination-2027.pdf',
   published: '2026-07-05',
-  lastVerified: '2026-08-15',
+  lastVerified: '2026-08-20',
 }
 
 export const notifications2027: FpscNotification2027[] = [
+  {
+    id: 'mpt-ce-2027-rescheduled',
+    title: 'Revised date - MPT for CSS Competitive Examination 2027',
+    date: '2026-08-19',
+    category: 'MPT Examination',
+    summary: 'FPSC rescheduled the CSS CE-2027 MPT to Saturday, 10 October 2026, replacing the previously announced date of 27 September 2026.',
+    officialUrl: 'https://fpsc.gov.pk/uploads/content/1787222788872_Public_Notice_-_Re-Scheduling_of_MPT-2027.pdf',
+  },
   {
     id: 'mpt-ce-2027-public-notice',
     title: 'Public Notice - MPT for CSS Competitive Examination 2027',
     date: '2026-08-02',
     category: 'MPT Advertisement',
-    summary: 'FPSC opened the CE-2027 MPT application cycle. Online applications close on 20 August 2026 and the MPT is scheduled for 27 September 2026.',
+    summary: 'FPSC opened the CE-2027 MPT application cycle. Online applications closed on 20 August 2026; FPSC later rescheduled the examination to 10 October 2026.',
     officialUrl: 'https://www.fpsc.gov.pk/uploads/content/1785753970885_MPT_CE-2027.pdf',
   },
   {
@@ -73,7 +81,7 @@ export const css2027Dates: CssDate[] = [
   { id: 'd1', item: 'MPT public notice', date: '2026-08-02', status: 'Official' },
   { id: 'd2', item: 'MPT online applications open', date: '2026-08-03', status: 'Official' },
   { id: 'd3', item: 'MPT online application deadline', date: '2026-08-20', status: 'Official' },
-  { id: 'd4', item: 'MPT examination', date: '2026-09-27', status: 'Official' },
+  { id: 'd4', item: 'MPT examination', date: '2026-10-10', status: 'Official' },
   { id: 'd5', item: 'MPT result date', date: '', status: 'To Be Announced' },
   { id: 'd5a', item: 'Written examination advertisement', date: '2026-11-08', status: 'Tentative' },
   { id: 'd6', item: 'Written online applications open', date: '2026-11-10', status: 'Tentative' },

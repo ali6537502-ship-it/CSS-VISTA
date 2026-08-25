@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useParams, useSearchParams } from 'react-router'
 import { Play, Search } from 'lucide-react'
 import { PageHeader, EmptyState } from '@/components/shared'
 import { adminBankQuestions, dedupeBankQuestions, filterDisabled, getBankIndex, getChunk, type BankQuestion } from '@/data/mcq'
@@ -11,19 +11,22 @@ import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/
 
 export default function GKCategory() {
   const { slug = '' } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [qs, setQs] = useState<BankQuestion[] | null>(null)
+  const [loadingComplete, setLoadingComplete] = useState(false)
   const [name, setName] = useState(slug)
   const [total, setTotal] = useState(0)
-  const [sub, setSub] = useState('all')
-  const [diff, setDiff] = useState('all')
-  const [query, setQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const [sub, setSub] = useState(() => searchParams.get('sub') || 'all')
+  const [diff, setDiff] = useState(() => ['Basic', 'Intermediate', 'Advanced'].includes(searchParams.get('level') ?? '') ? searchParams.get('level')! : 'all')
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
+  const [page, setPage] = useState(() => Math.max(1, Number.parseInt(searchParams.get('page') ?? '1', 10) || 1))
   const [, setRefresh] = useState(0)
 
   useEffect(() => {
     let cancelled = false
     let backgroundTimer: number | null = null
     setQs(null)
+    setLoadingComplete(false)
     getBankIndex().then(async (idx) => {
       const cat = idx.categories.find((c) => c.slug === slug)
       if (cancelled) return
@@ -31,6 +34,7 @@ export default function GKCategory() {
       setTotal(cat?.count ?? 0)
       if (!cat) {
         setQs(adminBankQuestions(slug))
+        setLoadingComplete(true)
         return
       }
 
@@ -57,7 +61,10 @@ export default function GKCategory() {
               ...nextQuestions,
             ])))
           }
+          if (!cancelled) setLoadingComplete(true)
         }, 250)
+      } else {
+        setLoadingComplete(true)
       }
     })
     return () => {
@@ -83,15 +90,23 @@ export default function GKCategory() {
     return f
   }, [qs, sub, diff, query])
 
-  useEffect(() => setPage(1), [sub, diff, query])
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (query.trim()) next.set('q', query.trim())
+    if (sub !== 'all') next.set('sub', sub)
+    if (diff !== 'all') next.set('level', diff)
+    if (page > 1) next.set('page', String(page))
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [diff, page, query, searchParams, setSearchParams, sub])
 
   const range = questionPageRange(page, filtered.length)
   const view = filtered.slice(range.start, range.end)
 
   useEffect(() => {
+    if (!loadingComplete) return
     const safePage = clampQuestionPage(page, filtered.length)
     if (safePage !== page) setPage(safePage)
-  }, [filtered.length, page])
+  }, [filtered.length, loadingComplete, page])
 
   return (
     <div>
@@ -117,20 +132,20 @@ export default function GKCategory() {
             <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => { setQuery(e.target.value); setPage(1) }}
               placeholder="Search within this category…"
               className="h-9 w-full rounded-md border bg-white pl-8 pr-3 text-sm"
             />
           </div>
           {subs.length > 1 && (
-            <select value={sub} onChange={(e) => setSub(e.target.value)} className="h-9 max-w-52 rounded-md border bg-white px-2 text-sm">
+            <select value={sub} onChange={(e) => { setSub(e.target.value); setPage(1) }} className="h-9 max-w-52 rounded-md border bg-white px-2 text-sm">
               <option value="all">All subcategories</option>
               {subs.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
           )}
-          <select value={diff} onChange={(e) => setDiff(e.target.value)} className="h-9 rounded-md border bg-white px-2 text-sm">
+          <select value={diff} onChange={(e) => { setDiff(e.target.value); setPage(1) }} className="h-9 rounded-md border bg-white px-2 text-sm">
             <option value="all">All levels</option>
             <option value="Basic">Basic</option>
             <option value="Intermediate">Intermediate</option>

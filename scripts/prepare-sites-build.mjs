@@ -62,8 +62,9 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/\s*<meta property="og:image" content="[^"]*" \/>/, '')
     .replace(/\s*<meta name="twitter:image" content="[^"]*" \/>/, '')
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
-    .replace('</head>', `    <meta name="robots" content="index, follow, max-image-preview:large" />\n    <script type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
+    .replace('</head>', `    <script type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
+    .replaceAll('__SITE_ORIGIN__', siteOrigin)
 }
 
 function paperTitle(paper) {
@@ -73,17 +74,17 @@ function paperTitle(paper) {
 }
 
 function paperDescription(paper) {
-  return `Open and download the owner-provided watermarked PDF for the ${paperTitle(paper)}. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
+  return `Open and download the ${paperTitle(paper)}. ${paper.subjectType} ${paper.mode.toLowerCase()} paper on CSS Vista.`
 }
 
 function paperBody(paper) {
   const title = paperTitle(paper)
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl><p class="mt-6 rounded-xl border bg-white p-4 text-sm">Past Paper pages contain only the owner-provided watermarked PDF. Analysis and reconstructed question text are not substituted here.</p><div class="mt-5 flex flex-wrap gap-3"><a href="/past-papers/view/${paper.id}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open watermarked PDF</a><a href="/past-papers/${paper.examination.toLowerCase()}/${paper.year}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${paper.examination} ${paper.year} papers</a></div></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl><div class="mt-5 flex flex-wrap gap-3"><a href="/past-papers/view/${paper.id}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open PDF</a><a href="/past-papers/${paper.examination.toLowerCase()}/${paper.year}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${paper.examination} ${paper.year} papers</a></div></main>`
 }
 
 function collectionBody(examination, year, papers) {
   const links = papers.map((paper) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${paper.id}">${escapeHtml(paperTitle(paper))}</a></li>`).join('')
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Complete year collection</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${examination} ${year} Past Papers</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">Browse ${papers.length} ${examination} ${year} owner-provided watermarked past-paper PDFs by subject.</p><ul class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2">${links}</ul><a class="mt-5 inline-block font-bold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete past-paper archive</a></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Complete year collection</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${examination} ${year} Past Papers</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">Browse ${papers.length} ${examination} ${year} past-paper PDFs by subject.</p><ul class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2">${links}</ul><a class="mt-5 inline-block font-bold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete past-paper archive</a></main>`
 }
 
 const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
@@ -126,7 +127,7 @@ for (const [key, papers] of collections) {
   const year = Number(rawYear)
   const canonical = `${siteOrigin}/past-papers/${examSlug}/${year}`
   const title = `${examination} ${year} Past Papers — All Subjects | CSS Vista`
-  const description = `Browse ${papers.length} owner-provided ${examination} ${year} watermarked past-paper PDFs in this verified collection.`
+  const description = `Browse ${papers.length} ${examination} ${year} past-paper PDFs in this verified collection.`
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -142,7 +143,24 @@ for (const [key, papers] of collections) {
   }))
 }
 
-const coreUrls = ['/', '/past-papers', '/css-past-paper-analysis', '/fpsc-syllabus', '/css-mcqs', '/mpt', '/gk', '/current-affairs', '/study-tools']
+const coreUrls = [
+  '/',
+  '/subjects/compulsory',
+  '/subjects/optional',
+  '/css-mcqs',
+  '/mpt',
+  '/gk',
+  '/current-affairs',
+  '/past-papers',
+  '/css-past-paper-analysis',
+  '/fpsc-syllabus',
+  '/notes',
+  '/book-summaries',
+  '/five-minute',
+  '/answer-writing',
+  '/start-css',
+  '/study-tools',
+]
 const sitemapUrls = [
   ...coreUrls.map((path) => `${siteOrigin}${path}`),
   ...[...collections.keys()].map((key) => `${siteOrigin}/past-papers/${key}`),

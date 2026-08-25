@@ -21,15 +21,19 @@ await Promise.all([
   access(join(dist, 'assets')),
   access(join(dist, 'robots.txt')),
   access(join(dist, 'sitemap.xml')),
+  access(join(dist, 'favicon.ico')),
+  access(join(dist, 'favicon.png')),
+  access(join(dist, 'icon-512.png')),
   access(join(dist, 'ads.txt')),
   access(join(dist, 'googlec96e2248070e0570.html')),
 ])
 
-const [indexHtml, htaccess, robots, sitemap, adsTxt, searchConsoleVerification, paperFiles, assetFiles, productionEnv] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemap, faviconIco, adsTxt, searchConsoleVerification, paperFiles, assetFiles, productionEnv] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
   readFile(join(dist, 'sitemap.xml'), 'utf8'),
+  readFile(join(dist, 'favicon.ico')),
   readFile(join(dist, 'ads.txt'), 'utf8'),
   readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
@@ -56,6 +60,11 @@ const samplePaperHtml = await readFile(join(dist, 'seo', 'past-papers', 'css-202
 assert(!indexHtml.includes('__SITE_ORIGIN__'), 'Hostinger index still contains the Sites runtime origin placeholder')
 assert(!nestedClientExists, 'Hostinger build must not nest the site under dist/client')
 assert(indexHtml.includes('https://www.css-vista.com/'), 'Hostinger index is missing the custom-domain metadata')
+assert(indexHtml.includes('<link rel="icon" href="/favicon.ico" sizes="any"'), 'ICO favicon metadata is missing')
+assert(indexHtml.includes('<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"'), 'PNG favicon metadata is missing')
+assert(indexHtml.includes('"@type": "EducationalOrganization"'), 'Organization structured data is missing')
+assert(indexHtml.includes('https://www.css-vista.com/icon-512.png'), 'Organization logo must use the compact CV asset')
+assert(faviconIco.length > 6 && faviconIco[0] === 0 && faviconIco[1] === 0 && faviconIco[2] === 1 && faviconIco[3] === 0, 'favicon.ico is not a valid ICO file')
 assert(!samplePaperHtml.includes('__SITE_ORIGIN__'), 'Generated past-paper page still contains the Sites runtime origin placeholder')
 assert(htaccess.includes('RewriteRule ^ index.html [L]'), 'SPA fallback rule is missing')
 assert(htaccess.includes('seo/past-papers/$1.html'), 'Direct past-paper SEO rewrite is missing')
@@ -65,6 +74,8 @@ assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are n
 assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
 assert(robots.includes('https://www.css-vista.com/sitemap.xml'), 'Hostinger robots.txt uses the wrong origin')
 assert(sitemap.includes('<loc>https://www.css-vista.com/past-papers'), 'Hostinger sitemap uses the wrong origin')
+assert(sitemap.includes('<loc>https://www.css-vista.com/subjects/compulsory</loc>'), 'Compulsory subjects are missing from the sitemap')
+assert(sitemap.includes('<loc>https://www.css-vista.com/notes</loc>'), 'Notes are missing from the sitemap')
 assert(adsTxt.trim() === 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0', 'ads.txt publisher record is missing or malformed')
 assert(searchConsoleVerification.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Google Search Console verification file is malformed')
 assert(indexHtml.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"'), 'AdSense account verification metadata is missing')

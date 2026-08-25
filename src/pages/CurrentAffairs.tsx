@@ -66,8 +66,8 @@ export default function CurrentAffairs() {
   const tab: Tab = ['one-liners', 'mcqs', 'issue-files', 'magazine'].includes(requestedTab ?? '') ? requestedTab! : 'one-liners'
   const [batch, setBatch] = useState<AffairsBatch | null>(null)
   const [loadError, setLoadError] = useState(false)
-  const [query, setQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
+  const [page, setPage] = useState(() => Math.max(1, Number.parseInt(searchParams.get('page') ?? '1', 10) || 1))
   const [viewer, setViewer] = useState(false)
   usePageBack(viewer, () => setViewer(false))
 
@@ -78,7 +78,13 @@ export default function CurrentAffairs() {
       .catch(() => setLoadError(true))
   }, [])
 
-  useEffect(() => setPage(1), [query, tab])
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (tab !== 'one-liners') next.set('tab', tab)
+    if (query.trim()) next.set('q', query.trim())
+    if (page > 1) next.set('page', String(page))
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [page, query, searchParams, setSearchParams, tab])
   const normalized = query.trim().toLowerCase()
   const oneLiners = useMemo(() => batch?.oneLiners.filter((item) => !normalized || `${item.date} ${item.development} ${item.fact}`.toLowerCase().includes(normalized)) ?? [], [batch, normalized])
   const mcqs = useMemo(() => batch?.mcqs.filter((item) => !normalized || `${item.date} ${item.development} ${item.question}`.toLowerCase().includes(normalized)) ?? [], [batch, normalized])
@@ -93,7 +99,11 @@ export default function CurrentAffairs() {
   const start = (safePage - 1) * pageSize
 
   function selectTab(next: Tab) {
-    setSearchParams(next === 'one-liners' ? {} : { tab: next })
+    setPage(1)
+    const params = new URLSearchParams()
+    if (next !== 'one-liners') params.set('tab', next)
+    if (query.trim()) params.set('q', query.trim())
+    setSearchParams(params, { replace: true })
   }
 
   return (
@@ -105,7 +115,7 @@ export default function CurrentAffairs() {
           {([['one-liners', 'One-Liners', BookOpen], ['mcqs', 'Recent MCQs', CheckCircle2], ['issue-files', 'Issue Files', FileText], ['magazine', 'Weekly Magazine', Newspaper]] as const).map(([value, label, Icon]) => <button key={value} type="button" onClick={() => selectTab(value)} aria-pressed={tab === value} className={`flex min-h-12 items-center justify-center gap-2 rounded-xl border px-3 text-xs font-bold sm:text-sm ${tab === value ? 'border-pine bg-pine text-white' : 'bg-white text-pine hover:bg-secondary'}`}><Icon className="h-4 w-4" /> {label}</button>)}
         </div>
 
-        {tab !== 'magazine' && <label className="relative mt-5 block"><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><span className="sr-only">Search current affairs</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search dates, developments, questions or issues…" className="h-11 w-full rounded-lg border bg-white pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700" /></label>}
+        {tab !== 'magazine' && <label className="relative mt-5 block"><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><span className="sr-only">Search current affairs</span><input value={query} onChange={(event) => { setQuery(event.target.value); setPage(1) }} placeholder="Search dates, developments, questions or issues…" className="h-11 w-full rounded-lg border bg-white pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700" /></label>}
 
         {!batch && !loadError && tab !== 'issue-files' && tab !== 'magazine' && <div className="grid place-items-center py-20 text-muted-foreground"><Loader2 className="h-7 w-7 animate-spin" /><p className="mt-2 text-sm">Loading recent-affairs collection…</p></div>}
         {loadError && tab !== 'issue-files' && tab !== 'magazine' && <p className="mt-5 rounded-xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-800">The recent-affairs batch could not be loaded. Issue files and the weekly magazine remain available.</p>}
