@@ -5,6 +5,7 @@ import { examFacts, allocationQuotaNote, syllabusSource } from '@/data/syllabus'
 import { typicalCycle } from '@/data/updates'
 import { mptChecklist, writtenChecklist } from '@/data/checklists'
 import { mptFacts, mptOfficialSources, mptSyllabusSubjects } from '@/data/mptSyllabus'
+import ConsultationCard from '@/components/ConsultationCard'
 
 const stages = [
   { name: 'MPT - MCQ-based Preliminary Test', detail: 'A screening MCQ paper conducted before the written exam (introduced from CSS 2022). Only candidates who qualify the MPT may appear in the written examination. Qualifying threshold and pattern are set in the official notice.' },
@@ -312,6 +313,8 @@ export default function StartCSS() {
             </table>
           </div>
         </Section>
+
+        <ConsultationCard variant="compact" heading="Unsure how to start CSS?" description="Discuss your preparation roadmap, optional subjects, resources and study plan privately with Sir Ali Hassan or Ms. Sadia Zahoor." />
 
         <Section title="Application checklists" description="Step-by-step, tick-off checklists for the MPT and the written application.">
           <div className="flex flex-wrap gap-2">

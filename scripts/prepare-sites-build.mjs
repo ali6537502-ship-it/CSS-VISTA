@@ -159,6 +159,7 @@ const coreUrls = [
   '/five-minute',
   '/answer-writing',
   '/start-css',
+  '/consultation',
   '/study-tools',
 ]
 const sitemapUrls = [

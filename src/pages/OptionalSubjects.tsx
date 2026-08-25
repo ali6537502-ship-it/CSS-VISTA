@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { Search, Target } from 'lucide-react'
 import { PageHeader, SourceNote, Badge } from '@/components/shared'
 import { optionalGroups, syllabusSource, examFacts } from '@/data/syllabus'
+import ConsultationCard from '@/components/ConsultationCard'
 
 export default function OptionalSubjects() {
   const [q, setQ] = useState('')
@@ -85,6 +86,9 @@ export default function OptionalSubjects() {
               No subjects match your filters. Try clearing the search or choosing another group.
             </p>
           )}
+        </div>
+        <div className="mt-8">
+          <ConsultationCard variant="compact" heading="Need help choosing optional subjects?" description="Book private guidance to discuss subject suitability, preparation time, overlap, risks and your academic background." />
         </div>
         <SourceNote source={syllabusSource.name} url={syllabusSource.url} date={syllabusSource.lastUpdated} />
       </div>

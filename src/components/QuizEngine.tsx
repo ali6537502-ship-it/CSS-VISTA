@@ -16,6 +16,7 @@ interface Props {
   timePerQuestion?: number
   negativeMarking?: boolean
   onDone?: (score: number, total: number) => void
+  onNewRound?: () => void
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -29,7 +30,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 const fmt = (seconds: number) => `${String(Math.floor(Math.max(0, seconds) / 60)).padStart(2, '0')}:${String(Math.max(0, seconds) % 60).padStart(2, '0')}`
 
-export default function QuizEngine({ questions, mode, category, timePerQuestion = 0, negativeMarking = false, onDone }: Props) {
+export default function QuizEngine({ questions, mode, category, timePerQuestion = 0, negativeMarking = false, onDone, onNewRound }: Props) {
   const [qs, setQs] = useState<Question[]>([])
   const [page, setPage] = useState(1)
   const [reviewPage, setReviewPage] = useState(1)
@@ -197,6 +198,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
           <p className="mt-1 text-sm text-muted-foreground">{score.correct} correct · {score.wrong} wrong · {qs.length - score.correct - score.wrong} skipped · {pct}% · Time {fmt(seconds)}</p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             <button onClick={() => start()} className="inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><RotateCcw className="h-4 w-4" /> New attempt</button>
+            {onNewRound && <button onClick={onNewRound} className="inline-flex items-center gap-1.5 rounded-md border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-50"><RotateCcw className="h-4 w-4" /> Next fresh question round</button>}
             {wrongQuestions.length > 0 && <button onClick={() => start(true)} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary"><Flag className="h-4 w-4" /> Retry {wrongQuestions.length} wrong</button>}
           </div>
         </div>

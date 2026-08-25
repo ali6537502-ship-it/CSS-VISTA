@@ -2,6 +2,8 @@ import { Award, Instagram, MessageCircle, Users } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { mentors, site, waLink } from '@/data/site'
 import { getMentorOverride } from '@/lib/admin'
+import ConsultationCard, { ConsultationBookingButton } from '@/components/ConsultationCard'
+import type { ConsultationMentorId } from '@/data/consultations'
 
 export default function Mentors() {
   const [sadia, ali] = mentors
@@ -16,7 +18,7 @@ export default function Mentors() {
         <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:gap-6">
           {/* Miss Sadia Zahoor, PAS */}
           <MentorCard
-            id={sadia.id}
+            id={sadia.id as ConsultationMentorId}
             photo={sadia.photo}
             name={sadia.name}
             role={sadia.role}
@@ -51,7 +53,7 @@ export default function Mentors() {
 
           {/* Sir Ali Hassan Sargana */}
           <MentorCard
-            id={ali.id}
+            id={ali.id as ConsultationMentorId}
             photo={ali.photo}
             name={ali.name}
             role={ali.role}
@@ -77,6 +79,8 @@ export default function Mentors() {
             </div>
           </MentorCard>
         </div>
+
+        <ConsultationCard heading="Choose a CSS VISTA mentor for private guidance" description="Book a paid 1-on-1 Google Meet session to discuss your CSS preparation, subject choices, study strategy or answer-writing direction." />
 
         {/* WhatsApp group */}
         <div className="rounded-xl border bg-gradient-to-r from-emerald-950 to-pine p-6 text-emerald-50">
@@ -111,7 +115,7 @@ export default function Mentors() {
 function MentorCard({
   id, photo, name, role, bio, whatsapp, whatsappDisplay, message, instagram, children,
 }: {
-  id: string
+  id: ConsultationMentorId
   photo: string
   name: string
   role: string
@@ -141,6 +145,9 @@ function MentorCard({
         <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground sm:text-sm">{finalBio}</p>
       </div>
       <div className="flex-1 px-2.5 pb-2 text-left sm:px-4 lg:px-6">{children}</div>
+      <div className="px-2.5 pb-2 sm:px-4 lg:px-6">
+        <ConsultationBookingButton mentorId={id} className="w-full" />
+      </div>
       <div className="flex flex-col gap-2 p-2.5 pt-3 sm:p-4 sm:pt-3 lg:flex-row lg:p-6 lg:pt-3">
         <a
           href={waLink(finalWa, message)}

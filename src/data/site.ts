@@ -92,6 +92,12 @@ export const notifications: Notification[] = [
 
 export const featureAnnouncements: Notification[] = [
   {
+    id: 'feature-consultation',
+    kind: 'platform',
+    text: 'Book a paid 1-on-1 CSS consultation with Sir Ali Hassan or Ms. Sadia Zahoor through CSS VISTA.',
+    link: '/consultation',
+  },
+  {
     id: 'feature-sadia-custom-series',
     kind: 'platform',
     text: 'Registration open: build a customized written test series with alternate papers and divided syllabus by Ms. Sadia Zahoor.',

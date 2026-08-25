@@ -23,6 +23,7 @@ import { submitTestSeriesRequest } from '@/lib/testSeriesRequests'
 import { useAccount } from '@/lib/accountContext'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPage } from '@/components/PrintMenu'
+import ConsultationCard from '@/components/ConsultationCard'
 
 const input = 'mt-1.5 h-11 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
 
@@ -478,6 +479,8 @@ export default function TestSeries() {
             </div>
           </aside>
         </div>
+
+        <ConsultationCard mentorIds={['sadia']} variant="compact" heading="Need private strategy guidance from Ms. Sadia Zahoor?" description="Book a separate 1-on-1 Google Meet consultation for preparation planning, examination approach, answer-writing direction or study management." />
 
         {history.length > 0 && (
           <Section title="My saved test-series plans" description="Your customized plans and synced student-account history.">

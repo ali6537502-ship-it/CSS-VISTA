@@ -10,6 +10,7 @@ import {
   type EvaluationRequest,
 } from '@/lib/store'
 import { useAccount } from '@/lib/accountContext'
+import ConsultationCard from '@/components/ConsultationCard'
 
 const compulsorySubjects = [
   'English Essay',
@@ -238,6 +239,8 @@ export default function AnswerEvaluation() {
             </Section>
           </div>
         </div>
+
+        <ConsultationCard mentorIds={['sadia']} variant="compact" heading="Want broader preparation guidance?" description="A 1-on-1 consultation with Ms. Sadia Zahoor is separate from answer evaluation and can cover strategy, subject planning, study management and examination approach." />
 
         <Section title="My evaluation drafts" description="Your saved drafts, requests and synced account history.">
           {history.length === 0 ? (
