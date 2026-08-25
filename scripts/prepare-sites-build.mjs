@@ -19,14 +19,19 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
 }
 const siteOrigin = siteUrl.origin
 
-// Keep the interactive preview bundle lean while preserving the complete study
-// archive in GitHub. Large PDFs are served from the matching public repository
-// path by the Worker fallback below; all other public assets ship with the Site.
-const remotelyServedDirectories = new Set(['past-papers', 'samples'])
+// Keep the Sites preview bundle lean while preserving the complete study
+// archive in GitHub. Its Worker can use the repository fallback below.
+// Hostinger has no Worker fallback, so its static build must include every PDF.
+const remotelyServedDirectories = emitWorker
+  ? new Set(['past-papers', 'samples'])
+  : new Set()
 
 for (const entry of await readdir(publicDir, { withFileTypes: true })) {
   if (entry.isDirectory() && remotelyServedDirectories.has(entry.name)) continue
-  await cp(join(publicDir, entry.name), join(clientDir, entry.name), { recursive: true })
+  await cp(join(publicDir, entry.name), join(clientDir, entry.name), {
+    recursive: true,
+    dereference: true,
+  })
 }
 
 const clientIndex = await readFile(indexPath, 'utf8')

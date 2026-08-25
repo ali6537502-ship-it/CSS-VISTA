@@ -1,9 +1,11 @@
-import { access, readFile, readdir } from 'node:fs/promises'
+import { access, open, readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
+const cssPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.examination === 'CSS')
 
 function assert(condition, message) {
   if (!condition) throw new Error(message)
@@ -52,5 +54,19 @@ assert(adsTxt === 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0\n'
 assert(searchConsoleVerification.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Google Search Console verification file is malformed')
 assert(indexHtml.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"'), 'AdSense account verification metadata is missing')
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === 605, 'Expected 605 direct past-paper SEO pages')
+assert(cssPapers.length === 467, 'Expected 467 registered CSS past papers')
 
-console.log('Hostinger artifact audit passed: ads.txt, Google verification, static root, SPA rewrites and 605 paper pages verified.')
+for (const paper of cssPapers) {
+  assert(/^\/past-papers\/20\d{2}\/[^/]+\.pdf$/i.test(paper.fileUrl), `Invalid CSS paper URL: ${paper.fileUrl}`)
+  const pdfPath = join(dist, paper.fileUrl.replace(/^\/+/, ''))
+  const handle = await open(pdfPath, 'r')
+  try {
+    const signature = Buffer.alloc(5)
+    const { bytesRead } = await handle.read(signature, 0, signature.length, 0)
+    assert(bytesRead === 5 && signature.toString('ascii') === '%PDF-', `Invalid PDF file: ${paper.fileUrl}`)
+  } finally {
+    await handle.close()
+  }
+}
+
+console.log('Hostinger artifact audit passed: crawler files, static root, SPA rewrites, 605 paper pages and 467 CSS PDFs verified.')
