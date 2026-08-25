@@ -3,6 +3,7 @@ import {
   BookMarked, Bookmark, Download, Edit3, FileUp, Plus, RefreshCw,
   Search, ShieldCheck, Trash2, X,
 } from 'lucide-react'
+import type { FactbookBackup, FactbookEntry, FactbookSubject } from './types'
 
 type DeviceSubject = {
   id: string
@@ -55,11 +56,68 @@ function readData(userId: string): DeviceFactbookData {
 }
 
 function downloadBackup(userId: string, data: DeviceFactbookData) {
-  const blob = new Blob([JSON.stringify({ ...data, exportedAt: new Date().toISOString() }, null, 2)], { type: 'application/json' })
+  const exportedAt = new Date().toISOString()
+  const subjects: FactbookSubject[] = data.subjects.map((subject, position) => ({
+    id: subject.id,
+    user_id: userId,
+    name: subject.name,
+    description: '',
+    icon: 'book',
+    cover_style: 'classic',
+    accent_color: subject.colour,
+    exam_label: '',
+    target_date: null,
+    position,
+    category_count: 0,
+    entry_count: data.entries.filter((entry) => entry.subjectId === subject.id).length,
+    archived_at: null,
+    deleted_at: null,
+    created_at: subject.createdAt,
+    updated_at: subject.createdAt,
+  }))
+  const entries: FactbookEntry[] = data.entries.map((entry, position) => ({
+    id: entry.id,
+    user_id: userId,
+    subject_id: entry.subjectId,
+    category_id: null,
+    title: entry.title,
+    entry_type: 'fact',
+    content: { mainFact: entry.body, explanation: '' },
+    importance: 'normal',
+    revision_status: 'not-reviewed',
+    bookmarked: entry.bookmarked,
+    personal_remarks: '',
+    position,
+    archived_at: null,
+    deleted_at: null,
+    created_at: entry.createdAt,
+    updated_at: entry.updatedAt,
+    tags: entry.tags,
+    sources: [],
+    media: [],
+  }))
+  const backup: FactbookBackup = {
+    format: 'css-vista-factbook',
+    version: 1,
+    exported_at: exportedAt,
+    subjects,
+    categories: [],
+    entries,
+    collections: [],
+    preferences: {
+      user_id: userId,
+      default_view: 'cards',
+      default_print_layout: 'standard',
+      source_reminders: true,
+      autosave_enabled: true,
+      revision_labels: true,
+    },
+  }
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.download = `css-vista-factbook-device-${userId.slice(0, 8)}-${new Date().toISOString().slice(0, 10)}.json`
+  link.download = `css-vista-factbook-${userId.slice(0, 8)}-${exportedAt.slice(0, 10)}.json`
   link.click()
   URL.revokeObjectURL(url)
 }
@@ -68,6 +126,35 @@ function cleanImport(value: unknown): DeviceFactbookData | null {
   if (!value || typeof value !== 'object') return null
   const record = value as Record<string, unknown>
   if (record.version !== 1 || !Array.isArray(record.subjects) || !Array.isArray(record.entries)) return null
+  if (record.format === 'css-vista-factbook') {
+    const subjects = record.subjects.filter((item): item is FactbookSubject => Boolean(
+      item && typeof item === 'object' && typeof (item as FactbookSubject).id === 'string'
+      && typeof (item as FactbookSubject).name === 'string',
+    )).map<DeviceSubject>((subject) => ({
+      id: subject.id,
+      name: subject.name,
+      colour: subject.accent_color || colours[0]!,
+      createdAt: subject.created_at || new Date().toISOString(),
+    }))
+    const subjectIds = new Set(subjects.map((item) => item.id))
+    const entries = record.entries.filter((item): item is FactbookEntry => Boolean(
+      item && typeof item === 'object' && typeof (item as FactbookEntry).id === 'string'
+      && typeof (item as FactbookEntry).title === 'string'
+      && subjectIds.has((item as FactbookEntry).subject_id),
+    )).map<DeviceEntry>((entry) => ({
+      id: entry.id,
+      subjectId: entry.subject_id,
+      title: entry.title,
+      body: typeof entry.content?.mainFact === 'string'
+        ? entry.content.mainFact
+        : typeof entry.content?.html === 'string' ? entry.content.html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim() : '',
+      tags: Array.isArray(entry.tags) ? entry.tags.map(String) : [],
+      bookmarked: Boolean(entry.bookmarked),
+      createdAt: entry.created_at || new Date().toISOString(),
+      updatedAt: entry.updated_at || entry.created_at || new Date().toISOString(),
+    }))
+    return { version: 1, subjects, entries }
+  }
   const subjects = record.subjects.filter((item): item is DeviceSubject => Boolean(item && typeof item === 'object' && typeof (item as DeviceSubject).id === 'string' && typeof (item as DeviceSubject).name === 'string'))
   const subjectIds = new Set(subjects.map((item) => item.id))
   const entries = record.entries.filter((item): item is DeviceEntry => Boolean(
