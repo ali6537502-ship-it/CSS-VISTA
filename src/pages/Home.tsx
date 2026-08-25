@@ -478,7 +478,7 @@ function WeeklyMagazineCard() {
             <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
             {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
               <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
-                <img src={weeklyMagazine.coverUrl} alt="CSS VISTA Current Affairs Weekly, Issue No. 01 cover" loading="lazy" className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full" />
+                <img src={weeklyMagazine.coverUrl} alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`} loading="lazy" className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full" />
               </a>
             ) : (
               <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>

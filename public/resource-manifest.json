@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T05:10:19.750Z",
+  "generatedAt": "2026-08-25T18:32:41.584Z",
   "sourceOfTruth": "public filesystem and generated past-paper registry",
-  "resourceCount": 1225,
-  "totalBytes": 1016168179,
+  "resourceCount": 1227,
+  "totalBytes": 1025688569,
   "resources": [
     {
       "id": "book-summaries-304f15848fd94a59",
@@ -3728,6 +3728,34 @@
       "access": "public",
       "availability": "available",
       "viewUrl": "/magazines/css-vista-current-affairs-weekly-15-august-2026.webp"
+    },
+    {
+      "id": "magazines-1b8b03c8ceb32b94",
+      "title": "Css Vista Current Affairs Weekly 25 August 2026",
+      "category": "Weekly Publications",
+      "source": "Bundled resource",
+      "path": "/magazines/css-vista-current-affairs-weekly-25-august-2026.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 9453392,
+      "sha256": "cf52cd071aa6c633a105411091b5c48f0299bcdafda753070b33716417020c41",
+      "pageCount": 23,
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/magazines/css-vista-current-affairs-weekly-25-august-2026.pdf",
+      "downloadUrl": "/magazines/css-vista-current-affairs-weekly-25-august-2026.pdf"
+    },
+    {
+      "id": "magazines-bd935de7e97c1ffb",
+      "title": "Css Vista Current Affairs Weekly 25 August 2026",
+      "category": "Weekly Publications",
+      "source": "Bundled resource",
+      "path": "/magazines/css-vista-current-affairs-weekly-25-august-2026.webp",
+      "mimeType": "image/webp",
+      "sizeBytes": 66998,
+      "sha256": "01f3947b4dc4ac0929c96f7bcca7649941dd9967bed5514eedea17143e901faa",
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/magazines/css-vista-current-affairs-weekly-25-august-2026.webp"
     },
     {
       "id": "mcq-180389b693bda3ee",
