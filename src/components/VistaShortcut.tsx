@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router'
 import {
   BookMarked, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
-  MessageCircle,
   NotebookPen, Pause, Play, Plus, RotateCcw, Search, Settings2, StickyNote,
   Trash2, X,
 } from 'lucide-react'
+import WhatsAppIcon from '@/components/WhatsAppIcon'
 import { searchSite, type SearchResult } from '@/lib/search'
 import { getState, setGoalChecklist, setQuickNotes } from '@/lib/store'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -209,7 +209,7 @@ export default function VistaShortcut() {
       )}
 
       <div className="flex flex-col items-end gap-2">
-        <a href={site.cssGroupLink} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="cssv-tap grid h-12 w-12 place-items-center rounded-2xl border border-emerald-500/30 bg-emerald-600 text-white shadow-lg" aria-label="Join the CSS Vista WhatsApp group" title="Join the CSS Vista WhatsApp group"><MessageCircle className="h-5 w-5" /></a>
+        <a href={site.cssGroupLink} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="cssv-tap grid h-12 w-12 place-items-center rounded-2xl border border-emerald-500/30 bg-emerald-600 text-white shadow-lg" aria-label="Join the CSS Vista WhatsApp group" title="Join the CSS Vista WhatsApp group"><WhatsAppIcon className="h-6 w-6" aria-hidden="true" /></a>
         <button type="button" onClick={() => { if (menuOpen || activeId) closeEverything(); else setMenuOpen(true) }} className={`cssv-vista-shortcut grid h-[58px] w-[58px] place-items-center rounded-[1.15rem] border border-white/95 bg-white/90 shadow-xl backdrop-blur-lg ${menuOpen || activeId ? 'is-open' : ''}`} aria-label={menuOpen || activeId ? 'Close VISTA SHORTCUT' : 'Open VISTA SHORTCUT'} aria-expanded={menuOpen || Boolean(activeId)}><img src="/images/logo.png?v=20260810b" alt="" className="h-8 w-12 object-contain" /></button>
       </div>
     </div>
