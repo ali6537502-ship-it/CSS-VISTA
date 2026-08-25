@@ -18,6 +18,15 @@ Add these build-time environment variables in Hostinger before deploying:
 - `VITE_SUPABASE_PUBLISHABLE_KEY`: the browser-safe `sb_publishable_...` key
 - `VITE_SUPABASE_GOOGLE_AUTH_ENABLED`: `true` only after the Google provider and callback URL are configured
 
+In Supabase **Authentication → URL Configuration**, set:
+
+- Site URL: `https://www.css-vista.com`
+- Redirect URL: `https://www.css-vista.com/account`
+- Redirect URL: `https://www.css-vista.com/account?reset=1`
+
+Do not leave the production Site URL set to `http://localhost:3000`; Supabase
+uses the Site URL as the fallback for confirmation and password-recovery emails.
+
 Do not put an `sb_secret_...` key or legacy `service_role` key in a `VITE_`
 variable. Vite embeds these values in the public browser bundle; database
 access is protected by the row-level-security policies in the supplied SQL

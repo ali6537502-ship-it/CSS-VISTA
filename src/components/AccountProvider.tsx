@@ -20,6 +20,11 @@ import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 // Batch active-study writes so question taps and planner edits do not create a
 // database request every few seconds. Pending progress still flushes on hide.
 const CLOUD_SYNC_DEBOUNCE_MS = 60_000
+const AUTH_APP_ORIGIN = 'https://www.css-vista.com'
+
+function authRedirect(path: string) {
+  return new URL(path, AUTH_APP_ORIGIN).toString()
+}
 
 export function AccountProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(accountServiceConfigured)
@@ -144,7 +149,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         password,
         options: {
           data: { full_name: fullName.trim() },
-          emailRedirectTo: `${window.location.origin}/account`,
+          emailRedirectTo: authRedirect('/account'),
         },
       })
       if (error) return { error: error.message }
@@ -154,14 +159,14 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       if (!client) return { error: 'Account service is not configured yet.' }
       const { error } = await client.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/account` },
+        options: { redirectTo: authRedirect('/account') },
       })
       return error ? { error: error.message } : {}
     },
     async requestPasswordReset(email) {
       if (!client) return { error: 'Account service is not configured yet.' }
       const { error } = await client.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/account?reset=1`,
+        redirectTo: authRedirect('/account?reset=1'),
       })
       return error ? { error: error.message } : {}
     },
