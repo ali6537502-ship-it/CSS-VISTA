@@ -45,8 +45,8 @@ function McqCard({ item, number }: { item: AffairMcq; number: number }) {
     if (submitted) return
     const correct = option === item.answer
     setSelected(option)
-    recordAttempt(item.id, correct, 'Recent affairs')
-    recordQuestionTiming({ questionId: item.id, category: 'Recent affairs', mode: 'quiz', seconds: Math.max(1, Math.round((nowMs() - startedAt.current) / 1000)), correct })
+    recordAttempt(item.id, correct, 'Recent affairs', { selected: option, topic: item.development, mode: 'quiz' })
+    recordQuestionTiming({ questionId: item.id, category: 'Recent affairs', mode: 'quiz', seconds: Math.max(1, Math.round((nowMs() - startedAt.current) / 1000)), correct, selected: option, topic: item.development })
     if (!correct) addMistake(item.id, option, 'Recent affairs')
   }
 

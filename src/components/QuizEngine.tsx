@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import { Bookmark, BookmarkCheck, Clock, Flag, RotateCcw, CheckCircle2, XCircle } from 'lucide-react'
 import type { Question } from '@/data/quiz'
 import { recordQuizResult, toggleBookmark, isBookmarked } from '@/lib/store'
 import { Badge } from './shared'
 import { isRtlText } from '@/lib/utils'
-import { recordQuestionTiming } from '@/lib/progress'
+import { recordAttemptBatch, recordQuestionTiming } from '@/lib/progress'
 import QuestionPagination from '@/components/QuestionPagination'
 import { QUESTIONS_PER_PAGE, questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 import { usePageBack } from '@/lib/backNavigation'
@@ -42,6 +43,8 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   const [retryWrong, setRetryWrong] = useState(false)
   const testStartedAtRef = useRef<number | null>(null)
   const questionStartedAtRef = useRef<Record<number, number>>({})
+  const attemptSessionRef = useRef('')
+  const finishedRef = useRef(false)
   const totalTime = timePerQuestion * qs.length
   const range = questionPageRange(page, qs.length)
   const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
@@ -114,6 +117,8 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
     setRetryWrong(onlyWrong)
     testStartedAtRef.current = Date.now()
     questionStartedAtRef.current = {}
+    attemptSessionRef.current = `quiz-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+    finishedRef.current = false
     const now = Date.now()
     next.slice(0, QUESTIONS_PER_PAGE).forEach((question) => { questionStartedAtRef.current[question.id] = now })
   }
@@ -127,6 +132,9 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
         mode,
         seconds: Math.max(1, Math.round((Date.now() - beganAt) / 1000)),
         correct: optionIndex === question.answer,
+        selected: optionIndex,
+        topic: question.topic || question.category,
+        difficulty: question.difficulty,
       })
     }
     setAnswers((current) => ({ ...current, [question.id]: optionIndex }))
@@ -144,6 +152,8 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
   }
 
   function finish() {
+    if (finishedRef.current) return
+    finishedRef.current = true
     const elapsed = testStartedAtRef.current === null
       ? seconds
       : Math.max(0, Math.floor((Date.now() - testStartedAtRef.current) / 1000))
@@ -151,6 +161,18 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
     setFinished(true)
     setReviewPage(1)
     const score = computeScore()
+    recordAttemptBatch(
+      qs.flatMap((question) => answers[question.id] === undefined ? [] : [{
+        id: `q-${question.id}`,
+        correct: answers[question.id] === question.answer,
+        category,
+        selected: answers[question.id],
+        topic: question.topic || question.category,
+        difficulty: question.difficulty,
+        mode,
+      }]),
+      attemptSessionRef.current || `quiz-${Date.now()}`,
+    )
     recordQuizResult({
       type: mode,
       category: retryWrong ? `${category} (retry)` : category,
@@ -200,6 +222,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
             <button onClick={() => start()} className="inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"><RotateCcw className="h-4 w-4" /> New attempt</button>
             {onNewRound && <button onClick={onNewRound} className="inline-flex items-center gap-1.5 rounded-md border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-50"><RotateCcw className="h-4 w-4" /> Next fresh question round</button>}
             {wrongQuestions.length > 0 && <button onClick={() => start(true)} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary"><Flag className="h-4 w-4" /> Retry {wrongQuestions.length} wrong</button>}
+            <Link to="/exam-intelligence" className="inline-flex items-center gap-1.5 rounded-md bg-emerald-800 px-4 py-2 text-sm font-semibold text-white">Exam Intelligence</Link>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import {
   ArrowLeft, ChevronLeft, ChevronRight, Download, Expand, ExternalLink,
@@ -54,6 +54,13 @@ export default function NoteViewer() {
     return () => document.removeEventListener('fullscreenchange', update)
   }, [])
 
+  const goToPage = useCallback((nextPage: number) => {
+    if (!noteDoc) return
+    const bounded = Math.max(1, Math.min(noteDoc.pages, nextPage))
+    viewerRef.current?.querySelector<HTMLElement>(`[data-note-page="${bounded}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    setPage(bounded)
+  }, [noteDoc])
+
   useEffect(() => {
     if (!noteDoc || noteDoc.kind !== 'image-pages') return
     const root = viewerRef.current?.querySelector('[data-page-scroller]') ?? null
@@ -75,14 +82,7 @@ export default function NoteViewer() {
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
-  })
-
-  function goToPage(nextPage: number) {
-    if (!noteDoc) return
-    const bounded = Math.max(1, Math.min(noteDoc.pages, nextPage))
-    viewerRef.current?.querySelector<HTMLElement>(`[data-note-page="${bounded}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    setPage(bounded)
-  }
+  }, [goToPage, noteDoc, page])
 
   async function toggleFullscreen() {
     if (!viewerRef.current || !document.fullscreenEnabled) return

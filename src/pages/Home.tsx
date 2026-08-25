@@ -14,6 +14,7 @@ import { cardIcons } from '@/data/homeCardIcons'
 import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
+import ExamIntelligenceHomeCard from '@/components/ExamIntelligenceHomeCard'
 import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
@@ -622,6 +623,8 @@ export default function Home() {
             </article>
           </AnimatedCollapse>
         </section>
+
+        <ExamIntelligenceHomeCard />
 
         {hasPlanner && (
           <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '35ms' } as CSSProperties} aria-labelledby="planner-home-card">

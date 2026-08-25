@@ -170,6 +170,9 @@ export default function StudyTools() {
 
   const plannerRows = useMemo(() => ['Morning block', 'Midday block', 'Evening block', 'Night review'], [])
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const dailyPlan = useList<{ id: string; text: string; done: boolean }>('daily-planner-blocks', plannerRows.map((id) => ({ id, text: '', done: false })))
+  const weeklyPlan = useList<{ id: string; text: string }>('weekly-planner-focus', weekDays.map((id) => ({ id, text: '' })))
+  const lockedShortcuts = new Set(['factbook', 'exam-intelligence'])
 
   return (
     <div>
@@ -201,8 +204,8 @@ export default function StudyTools() {
             ['timer', 'Answer timer'], ['search', 'Website search'], ['factbook', 'My Factbook'], ['gk', 'GK World'], ['mistakes', 'Mistake notebook'],
             ['current-affairs', 'Current affairs'], ['css-mcqs', 'CSS subject MCQs'], ['mpt', 'MPT practice'], ['games', 'CSS games'],
             ['grammar', 'Grammar & vocabulary'], ['papers', 'Past papers'], ['notes', 'Notes library'], ['dashboard', 'Dashboard'],
-            ['paper-analysis', 'Past paper analysis'],
-          ].map(([id, label]) => <label key={id} className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold"><input type="checkbox" checked={shortcutSettings.shortcutIds.includes(id)} onChange={() => { const ids = shortcutSettings.shortcutIds.includes(id) ? shortcutSettings.shortcutIds.filter((value) => value !== id) : [...shortcutSettings.shortcutIds, id]; const next = { ...shortcutSettings, shortcutIds: ids }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> {label}</label>)}</div>
+            ['paper-analysis', 'Past paper analysis'], ['exam-intelligence', 'Exam Intelligence'],
+          ].map(([id, label]) => <label key={id} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold ${lockedShortcuts.has(id) ? 'bg-emerald-50 text-emerald-900' : 'cursor-pointer'}`}><input type="checkbox" checked={shortcutSettings.shortcutIds.includes(id)} disabled={lockedShortcuts.has(id)} onChange={() => { const ids = shortcutSettings.shortcutIds.includes(id) ? shortcutSettings.shortcutIds.filter((value) => value !== id) : [...shortcutSettings.shortcutIds, id]; const next = { ...shortcutSettings, shortcutIds: ids }; setShortcutSettings(next); setVistaShortcut(next) }} className="h-4 w-4 accent-emerald-700" /> {label}{lockedShortcuts.has(id) && <span className="ml-auto text-[9px] uppercase tracking-wide">Always shown</span>}</label>)}</div>
         </section>
 
         <ScheduledSyllabusBoard />
@@ -229,11 +232,11 @@ export default function StudyTools() {
                   <tr><th className="px-4 py-2.5">Daily blocks</th><th className="px-4 py-2.5">Task</th><th className="px-4 py-2.5">Done</th></tr>
                 </thead>
                 <tbody>
-                  {plannerRows.map((r) => (
-                    <tr key={r} className="border-t">
-                      <td className="px-4 py-2.5 font-medium text-pine">{r}</td>
-                      <td className="px-4 py-2"><input className="h-9 w-full rounded-md border border-input px-2 text-sm" placeholder="Task…" aria-label={`${r} task`} /></td>
-                      <td className="px-4 py-2"><input type="checkbox" className="h-4 w-4 accent-emerald-800" aria-label={`${r} done`} /></td>
+                  {dailyPlan.items.map((row) => (
+                    <tr key={row.id} className="border-t">
+                      <td className="px-4 py-2.5 font-medium text-pine">{row.id}</td>
+                      <td className="px-4 py-2"><input value={row.text} onChange={(event) => dailyPlan.save(dailyPlan.items.map((item) => item.id === row.id ? { ...item, text: event.target.value.slice(0, 300) } : item))} className="h-9 w-full rounded-md border border-input px-2 text-sm" placeholder="Task…" aria-label={`${row.id} task`} /></td>
+                      <td className="px-4 py-2"><input type="checkbox" checked={row.done} onChange={(event) => dailyPlan.save(dailyPlan.items.map((item) => item.id === row.id ? { ...item, done: event.target.checked } : item))} className="h-4 w-4 accent-emerald-800" aria-label={`${row.id} done`} /></td>
                     </tr>
                   ))}
                 </tbody>
@@ -245,10 +248,10 @@ export default function StudyTools() {
                   <tr><th className="px-4 py-2.5">Weekly plan</th><th className="px-4 py-2.5">Focus subject / task</th></tr>
                 </thead>
                 <tbody>
-                  {weekDays.map((d) => (
-                    <tr key={d} className="border-t">
-                      <td className="px-4 py-2.5 font-medium text-pine">{d}</td>
-                      <td className="px-4 py-2"><input className="h-9 w-full rounded-md border border-input px-2 text-sm" placeholder="Focus…" aria-label={`${d} focus`} /></td>
+                  {weeklyPlan.items.map((row) => (
+                    <tr key={row.id} className="border-t">
+                      <td className="px-4 py-2.5 font-medium text-pine">{row.id}</td>
+                      <td className="px-4 py-2"><input value={row.text} onChange={(event) => weeklyPlan.save(weeklyPlan.items.map((item) => item.id === row.id ? { ...item, text: event.target.value.slice(0, 300) } : item))} className="h-9 w-full rounded-md border border-input px-2 text-sm" placeholder="Focus…" aria-label={`${row.id} focus`} /></td>
                     </tr>
                   ))}
                 </tbody>

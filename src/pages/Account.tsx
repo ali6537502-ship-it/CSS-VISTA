@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import {
   Activity, CheckCircle2, Cloud, LoaderCircle, LockKeyhole, LogOut, Mail, RefreshCw,
   ShieldCheck, UserRound,
@@ -16,6 +16,7 @@ export default function Account() {
     requestPasswordReset, updatePassword, passwordRecovery, clearPasswordRecovery,
     syncNow, syncStatus, syncError, lastSyncedAt,
   } = useAccount()
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [mode, setMode] = useState<Mode>('sign-in')
   const [fullName, setFullName] = useState('')
@@ -45,7 +46,10 @@ export default function Account() {
     }
     if (result.confirmationRequired) {
       setMessage('Check your email to confirm the account, then return here to sign in.')
+      return
     }
+    const requestedReturn = searchParams.get('returnTo')
+    if (requestedReturn?.startsWith('/') && !requestedReturn.startsWith('//')) navigate(requestedReturn, { replace: true })
   }
 
   async function sendPasswordReset() {

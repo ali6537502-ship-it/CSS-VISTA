@@ -8,6 +8,11 @@ DirectoryIndex index.html
 </IfModule>
 
 <IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
   <FilesMatch "^(?:index\.html|sw\.js|stale-module\.js)$">
     Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
     Header always set Pragma "no-cache"

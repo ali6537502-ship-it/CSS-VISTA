@@ -26,6 +26,7 @@ test('strictly excluded routes fail closed with no reserved height', () => {
     '/notes/view/criminology/cybercrime',
     '/account',
     '/dashboard',
+    '/exam-intelligence',
     '/privacy',
     '/not-a-real-route',
   ]

@@ -86,8 +86,8 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
     const visibleMs = visibleSinceRef.current === null ? 0 : nowMs() - visibleSinceRef.current
     const seconds = Math.max(1, Math.round((accumulatedMsRef.current + visibleMs) / 1000))
     setResponseSeconds(seconds)
-    recordQuestionTiming({ questionId: q.id, category, mode: 'gk', seconds, correct })
-    recordAttempt(q.id, correct, category)
+    recordQuestionTiming({ questionId: q.id, category, mode: 'gk', seconds, correct, selected: i, topic: q.s, difficulty: q.d })
+    recordAttempt(q.id, correct, category, { selected: i, topic: q.s, difficulty: q.d, mode: 'gk' })
     if (!correct) addMistake(q.id, i, category)
     onAction?.()
   }
@@ -170,26 +170,28 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
         })}
       </div>
 
-      <div className={`answer-block overflow-hidden transition-all duration-300 ${showAnswer ? 'mt-3 max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className={`rounded-md border-l-4 px-3 py-2.5 text-sm ${selected !== null && selected !== q.a ? 'border-red-400 bg-red-50/60' : 'border-emerald-500 bg-emerald-50/60'}`}>
-          <p className="font-semibold text-pine">
-            Correct answer: {'ABCD'[q.a]}){' '}
-            <span
-              dir={isRtlText(q.o[q.a]) ? 'rtl' : undefined}
-              lang={isRtlText(q.o[q.a]) ? 'ur' : undefined}
-              className={isRtlText(q.o[q.a]) ? 'urdu-text inline-block' : undefined}
-            >
-              {q.o[q.a]}
-            </span>
-          </p>
-          {q.e && <p className="mt-1.5 leading-relaxed text-foreground/80">{q.e}</p>}
-          {q.sourceUrl && (
-            <a href={q.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1.5 inline-flex text-xs font-semibold text-emerald-800 underline underline-offset-2">
-              Review source
-            </a>
-          )}
+      {showAnswer && (
+        <div className="answer-block mt-3 overflow-hidden">
+          <div className={`rounded-md border-l-4 px-3 py-2.5 text-sm ${selected !== null && selected !== q.a ? 'border-red-400 bg-red-50/60' : 'border-emerald-500 bg-emerald-50/60'}`}>
+            <p className="font-semibold text-pine">
+              Correct answer: {'ABCD'[q.a]}){' '}
+              <span
+                dir={isRtlText(q.o[q.a]) ? 'rtl' : undefined}
+                lang={isRtlText(q.o[q.a]) ? 'ur' : undefined}
+                className={isRtlText(q.o[q.a]) ? 'urdu-text inline-block' : undefined}
+              >
+                {q.o[q.a]}
+              </span>
+            </p>
+            {q.e && <p className="mt-1.5 leading-relaxed text-foreground/80">{q.e}</p>}
+            {q.sourceUrl && (
+              <a href={q.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-1.5 inline-flex text-xs font-semibold text-emerald-800 underline underline-offset-2">
+                Review source
+              </a>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="no-print mt-3 flex flex-wrap items-center gap-1.5 border-t pt-2.5">
         {selected === null && !revealed && (

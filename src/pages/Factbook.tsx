@@ -1,7 +1,7 @@
 import {
   useCallback, useEffect, useMemo, useRef, useState, type ReactNode,
 } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   Archive, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, BookMarked, BookOpen,
   BookOpenCheck, Bookmark, ChevronRight, Cloud, Copy, Download,
@@ -103,6 +103,7 @@ function Modal({ title, children, onClose }: { title: string; children: ReactNod
 
 export default function Factbook() {
   const { configured, loading: accountLoading, user } = useAccount()
+  const [routeParams, setRouteParams] = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [cloudUnavailable, setCloudUnavailable] = useState(false)
   const [notice, setNotice] = useState<Notice>(null)
@@ -147,6 +148,8 @@ export default function Factbook() {
   const [revisionEntry, setRevisionEntry] = useState<FactbookEntry | null>(null)
   const [revisions, setRevisions] = useState<FactbookRevision[]>([])
   const lastSavedSignature = useRef('')
+  const quickAddHandled = useRef(false)
+  const pendingQuickAdd = useRef<{ title: string; subject: string } | null>(null)
 
   const selectedSubject = subjects.find((subject) => subject.id === selectedSubjectId) ?? null
   const selectedCategory = categories.find((category) => category.id === selectedCategoryId) ?? null
@@ -226,6 +229,29 @@ export default function Factbook() {
     setSaveState('idle')
   }, [selectedCategoryId, selectedSubjectId, subjects, user])
 
+  useEffect(() => {
+    if (!user || loading || quickAddHandled.current || routeParams.get('quick-add') !== '1') return
+    const title = (routeParams.get('title') ?? '').trim().slice(0, 180)
+    const requestedSubject = (routeParams.get('subject') ?? '').trim().slice(0, 100)
+    if (!title) return
+    quickAddHandled.current = true
+    setRouteParams({}, { replace: true })
+    if (!subjects.length) {
+      pendingQuickAdd.current = { title, subject: requestedSubject || 'General Knowledge' }
+      setSubjectForm((current) => ({ ...current, name: requestedSubject || 'General Knowledge' }))
+      setSubjectModal(true)
+      return
+    }
+    const target = subjects.find((subject) => subject.name.localeCompare(requestedSubject, undefined, { sensitivity: 'base' }) === 0) ?? subjects[0]
+    const draft = newEntryDraft(target.id, null)
+    draft.title = title
+    draft.entry_type = 'fact'
+    draft.content = { mainFact: '', explanation: '', sourceName: 'VISTA Exam Intelligence', sourceYear: String(new Date().getFullYear()) }
+    setSelectedSubjectId(target.id)
+    setEditorDraft(draft)
+    setSaveState('idle')
+  }, [loading, routeParams, setRouteParams, subjects, user])
+
   const saveEditor = useCallback(async () => {
     if (!user || !editorDraft || !editorDraft.title.trim()) return
     saveLocalFactbookDraft(user.id, editorDraft)
@@ -275,6 +301,15 @@ export default function Factbook() {
       await refreshOverview()
       setSelectedSubjectId(created.id)
       setTab('workspace')
+      if (pendingQuickAdd.current) {
+        const draft = newEntryDraft(created.id, null)
+        draft.title = pendingQuickAdd.current.title
+        draft.entry_type = 'fact'
+        draft.content = { mainFact: '', explanation: '', sourceName: 'VISTA Exam Intelligence', sourceYear: String(new Date().getFullYear()) }
+        pendingQuickAdd.current = null
+        setEditorDraft(draft)
+        setSaveState('idle')
+      }
       showNotice('Your new subject is ready.', 'success')
     } catch (error) { showNotice(error instanceof Error ? error.message : 'The subject could not be created.', 'error') }
   }

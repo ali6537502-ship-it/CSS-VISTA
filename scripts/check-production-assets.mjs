@@ -21,24 +21,28 @@ async function walk(directory) {
 
 async function checkAsset(path, expectedType) {
   const url = new URL(path, origin)
-  url.searchParams.set('deployment-audit', Date.now().toString(36))
-  try {
-    const response = await fetch(url, {
-      method: 'HEAD',
-      redirect: 'follow',
-      signal: AbortSignal.timeout(20_000),
-    })
-    const contentType = response.headers.get('content-type') || ''
-    if (!response.ok || !contentType.toLowerCase().includes(expectedType)) {
-      return `${path}: HTTP ${response.status}, content-type ${contentType || 'missing'}`
+  let lastFailure = ''
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    url.searchParams.set('deployment-audit', `${Date.now().toString(36)}-${attempt}`)
+    try {
+      const response = await fetch(url, {
+        method: 'HEAD',
+        redirect: 'follow',
+        signal: AbortSignal.timeout(30_000),
+      })
+      const contentType = response.headers.get('content-type') || ''
+      if (response.ok && contentType.toLowerCase().includes(expectedType)) return null
+      lastFailure = `HTTP ${response.status}, content-type ${contentType || 'missing'}`
+      if (response.status !== 429 && response.status < 500) break
+    } catch (error) {
+      lastFailure = error instanceof Error ? error.message : String(error)
     }
-  } catch (error) {
-    return `${path}: ${error instanceof Error ? error.message : String(error)}`
+    await new Promise((resolve) => setTimeout(resolve, 400 * (attempt + 1)))
   }
-  return null
+  return `${path}: ${lastFailure}`
 }
 
-async function checkInParallel(entries, concurrency = 16) {
+async function checkInParallel(entries, concurrency = 8) {
   const failures = []
   let cursor = 0
   await Promise.all(Array.from({ length: concurrency }, async () => {

@@ -64,7 +64,8 @@ export default function StudyPlanner() {
         description="A personal, syllabus-based daily plan that uses your selected subjects, available study time, progress and due revisions."
       />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
-        <div className="flex justify-end">
+        <div className="flex flex-wrap justify-end gap-2">
+          <Link to="/exam-intelligence" className="inline-flex min-h-10 items-center rounded-lg bg-emerald-800 px-4 text-xs font-bold text-white">Open Exam Intelligence</Link>
           <PrintMenu answersAvailable={false} label="Print or save plan" />
         </div>
         <section className="grid gap-3 sm:grid-cols-3">

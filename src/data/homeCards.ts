@@ -58,6 +58,7 @@ export function sortHomeCardsByPriority<T extends HomeCard>(cards: T[]): T[] {
 }
 
 export const defaultHomeCards: HomeCard[] = [
+  { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
   { id: 'mpt', title: 'CSS MPT', desc: 'Timed MCQ tests and mocks', to: '/mpt', icon: 'ClipboardList', visible: true, order: 2 },
   { id: 'gk', title: 'GK World', desc: shippedMcqSummary, to: '/gk', icon: 'Globe', visible: true, order: 3 },

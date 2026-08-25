@@ -207,6 +207,10 @@ export default function Dashboard() {
     <div>
       <PageHeader title="Performance Dashboard" description="Your progress centre - scores, accuracy, strong and weak areas, streaks and recent learning activity." />
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-10">
+        <Link to="/exam-intelligence" className="flex flex-col gap-3 rounded-2xl border border-emerald-200 bg-emerald-950 p-5 text-white shadow-lg sm:flex-row sm:items-center sm:justify-between">
+          <span><span className="text-[10px] font-bold uppercase tracking-[.16em] text-amber-300">Flagship preparation command center</span><span className="mt-1 block font-display text-2xl font-bold">VISTA Exam Intelligence</span><span className="mt-1 block text-xs leading-5 text-emerald-100">Turn these activity records into readiness, weaknesses, revision priorities and a personalized study session.</span></span>
+          <span className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg bg-white px-4 text-sm font-bold text-pine">What should I study now?</span>
+        </Link>
         {/* Guest mode + continue */}
         <div className="grid gap-3 lg:grid-cols-2">
           <div className="rounded-xl border bg-white p-5">

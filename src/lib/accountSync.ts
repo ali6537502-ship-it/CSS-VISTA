@@ -29,6 +29,20 @@ interface CloudQuizAttemptRow {
   completed_at: string
 }
 
+interface CloudQuestionAttemptRow {
+  user_id: string
+  event_key: string
+  question_id: string
+  category: string
+  topic: string | null
+  subtopic: string | null
+  mode: string | null
+  difficulty: string | null
+  selected_option: number | null
+  correct: boolean
+  attempted_at: string
+}
+
 function isStudentProgressKey(key: string) {
   return PRIMARY_PROGRESS_KEYS.has(key) || key.startsWith('cssvista:tool:')
 }
@@ -142,6 +156,34 @@ function quizAttemptRows(snapshot: ProgressSnapshot, userId: string): CloudQuizA
   })
 }
 
+function questionAttemptRows(snapshot: ProgressSnapshot, userId: string): CloudQuestionAttemptRow[] {
+  const progress = isRecord(snapshot['cssvista:progress:v1'])
+    ? snapshot['cssvista:progress:v1']
+    : {}
+  return asArray(progress.attemptEvents).flatMap((entry) => {
+    if (!isRecord(entry)) return []
+    const eventKey = typeof entry.id === 'string' ? entry.id : ''
+    const questionId = typeof entry.questionId === 'string' ? entry.questionId : ''
+    const category = typeof entry.category === 'string' ? entry.category.slice(0, 180) : ''
+    const attemptedAt = toIsoDate(entry.ts)
+    if (!eventKey || !questionId || typeof entry.correct !== 'boolean' || !attemptedAt) return []
+    const selected = asFiniteNumber(entry.selected)
+    return [{
+      user_id: userId,
+      event_key: eventKey,
+      question_id: questionId.slice(0, 220),
+      category,
+      topic: typeof entry.topic === 'string' ? entry.topic.slice(0, 500) : null,
+      subtopic: typeof entry.subtopic === 'string' ? entry.subtopic.slice(0, 500) : null,
+      mode: typeof entry.mode === 'string' ? entry.mode.slice(0, 40) : null,
+      difficulty: typeof entry.difficulty === 'string' ? entry.difficulty.slice(0, 40) : null,
+      selected_option: selected === null ? null : Math.max(-1, Math.min(20, Math.trunc(selected))),
+      correct: entry.correct,
+      attempted_at: attemptedAt,
+    }]
+  })
+}
+
 async function syncNormalizedStudentRecords(
   client: SupabaseClient,
   userId: string,
@@ -160,6 +202,15 @@ async function syncNormalizedStudentRecords(
     const { error } = await client
       .from('quiz_attempts')
       .upsert(attempts, { onConflict: 'user_id,attempt_key' })
+    if (error) throw error
+  }
+
+
+  const questionAttempts = questionAttemptRows(snapshot, userId)
+  if (questionAttempts.length) {
+    const { error } = await client
+      .from('question_attempts')
+      .upsert(questionAttempts, { onConflict: 'user_id,event_key', ignoreDuplicates: true })
     if (error) throw error
   }
 
@@ -248,9 +299,8 @@ export async function clearCloudStudentProgress(
   client: SupabaseClient,
   userId: string,
 ) {
-  const { error } = await client
-    .from('student_progress')
-    .delete()
-    .eq('user_id', userId)
-  if (error) throw error
+  for (const table of ['question_attempts', 'quiz_attempts', 'student_activity', 'student_progress']) {
+    const { error } = await client.from(table).delete().eq('user_id', userId)
+    if (error) throw error
+  }
 }

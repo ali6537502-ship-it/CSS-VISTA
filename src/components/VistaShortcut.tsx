@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router'
 import {
-  BookMarked, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
+  BookMarked, BrainCircuit, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
   NotebookPen, Pause, Play, Plus, RotateCcw, Search, Settings2, StickyNote,
   Trash2, X,
 } from 'lucide-react'
@@ -17,6 +17,7 @@ const shortcutDefinitions = [
   { id: 'syllabus', label: 'FPSC syllabus', description: 'Search, select and schedule official syllabus topics.', icon: FileCheck2, to: '/fpsc-syllabus' },
   { id: 'planner', label: 'Study planner', description: 'Review saved syllabus tasks and open the full planner.', icon: NotebookPen, to: '/study-planner' },
   { id: 'factbook', label: 'My Factbook', description: 'Open your private, searchable CSS knowledge library.', icon: BookMarked, to: '/factbook' },
+  { id: 'exam-intelligence', label: 'Exam Intelligence', description: 'See what to study next from your real preparation activity.', icon: BrainCircuit, to: '/exam-intelligence' },
   { id: 'timer', label: 'Answer timer', description: 'Run a focused answer-writing countdown here.', icon: Clock3, to: '/answer-timer' },
   { id: 'search', label: 'Website search', description: 'Find any CSS Vista page, topic or study resource.', icon: Search },
   { id: 'gk', label: 'GK World', description: 'Open the complete GK preparation bank.', icon: Globe2, to: '/gk' },

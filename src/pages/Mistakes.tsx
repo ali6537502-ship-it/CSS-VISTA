@@ -4,6 +4,7 @@ import { BookMarked, Check, RotateCcw, Trash2 } from 'lucide-react'
 import { PageHeader, EmptyState } from '@/components/shared'
 import PrintMenu from '@/components/PrintMenu'
 import { getQuestionsByIds, type BankQuestion } from '@/data/mcq'
+import { questions as quizQuestions } from '@/data/quiz'
 import { getMistakes, removeMistake, toggleMistakeRevised, type Mistake } from '@/lib/progress'
 import { isRtlText } from '@/lib/utils'
 import QuestionPagination from '@/components/QuestionPagination'
@@ -13,10 +14,12 @@ export default function Mistakes() {
   const [mistakes, setMistakes] = useState<Mistake[]>([])
   const [qs, setQs] = useState<Record<string, BankQuestion>>({})
   const [cat, setCat] = useState('all')
-  const [status, setStatus] = useState<'all' | 'revised' | 'unrevised'>('all')
+  const [status, setStatus] = useState<'all' | 'unreviewed' | 'repeated' | 'recent' | 'resolved'>('all')
+  const [topic, setTopic] = useState('all')
   const [minCount, setMinCount] = useState(0)
   const [sort, setSort] = useState<'recent' | 'count'>('recent')
   const [page, setPage] = useState(1)
+  const [recentSince] = useState(() => Date.now() - 7 * 86400000)
 
   function load() {
     const m = getMistakes()
@@ -24,6 +27,11 @@ export default function Mistakes() {
     getQuestionsByIds(m.map((x) => x.id)).then((list) => {
       const map: Record<string, BankQuestion> = {}
       list.forEach((q) => (map[q.id] = q))
+      quizQuestions.forEach((question) => {
+        const id = `q-${question.id}`
+        if (!m.some((mistake) => mistake.id === id)) return
+        map[id] = { id, q: question.question, o: question.options, a: question.answer, e: question.explanation, s: question.topic || question.category, d: question.difficulty === 'Easy' ? 'Basic' : question.difficulty === 'Hard' ? 'Advanced' : 'Intermediate' }
+      })
       setQs(map)
     })
   }
@@ -31,17 +39,21 @@ export default function Mistakes() {
   useEffect(load, [])
 
   const cats = useMemo(() => [...new Set(mistakes.map((m) => m.cat))].sort(), [mistakes])
+  const topics = useMemo(() => [...new Set(Object.values(qs).map((question) => question.s).filter((value): value is string => Boolean(value)))].sort(), [qs])
 
   const filtered = useMemo(() => {
     let f = mistakes
     if (cat !== 'all') f = f.filter((m) => m.cat === cat)
-    if (status === 'revised') f = f.filter((m) => m.revised)
-    if (status === 'unrevised') f = f.filter((m) => !m.revised)
+    if (topic !== 'all') f = f.filter((m) => qs[m.id]?.s === topic)
+    if (status === 'unreviewed') f = f.filter((m) => !m.revised && !m.resolvedAt)
+    if (status === 'repeated') f = f.filter((m) => m.count > 1 && !m.resolvedAt)
+    if (status === 'recent') f = f.filter((m) => m.ts >= recentSince && !m.resolvedAt)
+    if (status === 'resolved') f = f.filter((m) => Boolean(m.resolvedAt))
     if (minCount > 0) f = f.filter((m) => m.count > minCount)
     return [...f].sort((a, b) => (sort === 'recent' ? b.ts - a.ts : b.count - a.count))
-  }, [mistakes, cat, status, minCount, sort])
+  }, [mistakes, cat, topic, qs, status, minCount, recentSince, sort])
 
-  useEffect(() => setPage(1), [cat, status, minCount, sort])
+  useEffect(() => setPage(1), [cat, topic, status, minCount, sort])
   useEffect(() => {
     const safePage = clampQuestionPage(page, filtered.length)
     if (safePage !== page) setPage(safePage)
@@ -56,6 +68,7 @@ export default function Mistakes() {
         description="Every question you answer incorrectly can be kept here - with your answer and the correct answer. Revise, retry and clear them as you improve."
       >
         <div className="mt-4 flex flex-wrap gap-2">
+          <Link to="/exam-intelligence?section=mistakes" className="no-print inline-flex h-9 items-center gap-1.5 rounded-md bg-emerald-800 px-4 text-sm font-semibold text-white">Mistake intelligence</Link>
           <PrintMenu label="Print notebook" />
           <Link to="/gk/quiz?mode=wrong" className="no-print inline-flex h-9 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
             <RotateCcw className="h-4 w-4" /> Retry all wrong answers
@@ -69,10 +82,16 @@ export default function Mistakes() {
             <option value="all">All subjects/categories</option>
             {cats.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
-          <select value={status} onChange={(e) => setStatus(e.target.value as 'all')} className="h-9 rounded-md border bg-white px-2">
-            <option value="all">Revised + unrevised</option>
-            <option value="unrevised">Unrevised only</option>
-            <option value="revised">Revised only</option>
+          <select value={topic} onChange={(e) => setTopic(e.target.value)} className="h-9 rounded-md border bg-white px-2">
+            <option value="all">All topics</option>
+            {topics.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+          <select value={status} onChange={(e) => setStatus(e.target.value as typeof status)} className="h-9 rounded-md border bg-white px-2">
+            <option value="all">All recovery states</option>
+            <option value="unreviewed">Unreviewed</option>
+            <option value="repeated">Repeated mistakes</option>
+            <option value="recent">Recently incorrect</option>
+            <option value="resolved">Resolved</option>
           </select>
           <select value={minCount} onChange={(e) => setMinCount(parseInt(e.target.value, 10))} className="h-9 rounded-md border bg-white px-2">
             <option value={0}>Any mistake count</option>
@@ -108,7 +127,7 @@ export default function Mistakes() {
                   <span className={`rounded px-1.5 py-0.5 font-bold ${m.count > 1 ? 'bg-red-100 text-red-700' : 'bg-secondary'}`}>
                     Mistaken {m.count}×
                   </span>
-                  {m.revised && <span className="rounded bg-emerald-100 px-1.5 py-0.5 font-bold text-emerald-800">Revised</span>}
+                  {m.resolvedAt ? <span className="rounded bg-emerald-700 px-1.5 py-0.5 font-bold text-white">Resolved after {m.successfulRetries ?? 2} correct retries</span> : m.revised && <span className="rounded bg-emerald-100 px-1.5 py-0.5 font-bold text-emerald-800">Reviewed · {m.successfulRetries ?? 0}/2 correct retries</span>}
                 </div>
                 {q ? (
                   <>

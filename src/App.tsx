@@ -54,6 +54,7 @@ const CssPastPaperAnalysis = lazy(() => import('./pages/CssPastPaperAnalysis'))
 const Privacy = lazy(() => import('./pages/Privacy'))
 const Factbook = lazy(() => import('./pages/Factbook'))
 const Consultation = lazy(() => import('./pages/Consultation'))
+const ExamIntelligence = lazy(() => import('./pages/ExamIntelligence'))
 
 function PageLoader() {
   return (
@@ -124,6 +125,7 @@ export default function App() {
         <Route path="/account" element={<S><Account /></S>} />
         <Route path="/factbook" element={<S><Factbook /></S>} />
         <Route path="/consultation" element={<S><Consultation /></S>} />
+        <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />
         <Route path="/privacy" element={<S><Privacy /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />

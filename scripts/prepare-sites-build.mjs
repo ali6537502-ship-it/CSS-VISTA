@@ -160,6 +160,7 @@ const coreUrls = [
   '/answer-writing',
   '/start-css',
   '/consultation',
+  '/exam-intelligence',
   '/study-tools',
 ]
 const sitemapUrls = [

@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, type LucideIcon,
 } from 'lucide-react'
 import { site } from '@/data/site'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
@@ -74,6 +74,7 @@ const nav = [
       { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
       { label: 'My Factbook', to: '/factbook', icon: BookMarked },
+      { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },
       { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
       { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
       { label: 'CSS Games', to: '/games', icon: Gamepad2 },
@@ -103,10 +104,10 @@ const primaryNav = [
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
   { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
-  { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
+  { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
 ]
 
 const mobileQuickLinks = [
@@ -476,7 +477,7 @@ function fallbackRoute(pathname: string) {
   if (/^\/past-papers\/view\/[^/]+\/?$/.test(pathname)) return '/past-papers'
   if (pathname === '/css-past-paper-analysis') return '/past-papers'
   if (/^\/gk\/(?:cat\/[^/]+|quiz)\/?$/.test(pathname)) return '/gk'
-  if (['/fpsc-syllabus', '/study-planner', '/answer-timer', '/checklists', '/dashboard'].includes(pathname)) return '/study-tools'
+  if (['/fpsc-syllabus', '/study-planner', '/answer-timer', '/checklists', '/dashboard', '/exam-intelligence'].includes(pathname)) return '/study-tools'
   return '/'
 }
 

@@ -12,6 +12,20 @@ export interface AttemptRecord {
   ts: number
 }
 
+export interface AttemptEvent {
+  id: string
+  questionId: string
+  correct: boolean
+  category: string
+  topic?: string
+  subtopic?: string
+  difficulty?: string
+  selected?: number
+  mode?: QuestionTiming['mode']
+  sessionId?: string
+  ts: number
+}
+
 export interface ReviewSchedule {
   id: string
   cat: string
@@ -30,6 +44,9 @@ export interface Mistake {
   count: number
   revised: boolean
   cat: string
+  successfulRetries?: number
+  lastCorrectAt?: number
+  resolvedAt?: number
 }
 
 export interface Activity {
@@ -74,6 +91,19 @@ export interface QuestionTiming {
   seconds: number
   correct: boolean
   ts: number
+  selected?: number
+  topic?: string
+  subtopic?: string
+  difficulty?: string
+}
+
+export interface IntelligencePreferences {
+  focusSubjects: string[]
+  reducedSubjects: string[]
+  pausedTopics: string[]
+  ignoredRecommendations: string[]
+  customRevisionDue: Record<string, number>
+  onboardingDismissed: boolean
 }
 
 export interface StudyDayReport {
@@ -105,6 +135,7 @@ export interface StudyAnalytics {
 
 export interface ProgressState {
   attempts: Record<string, AttemptRecord>
+  attemptEvents: AttemptEvent[]
   reviews: Record<string, ReviewSchedule>
   savedMcqs: string[]
   mistakes: Mistake[]
@@ -122,10 +153,12 @@ export interface ProgressState {
   bookSummaries: Record<string, BookSummaryProgress>
   studySessions: StudySession[]
   questionTimings: QuestionTiming[]
+  intelligence: IntelligencePreferences
 }
 
 const empty: ProgressState = {
   attempts: {},
+  attemptEvents: [],
   reviews: {},
   savedMcqs: [],
   mistakes: [],
@@ -138,6 +171,14 @@ const empty: ProgressState = {
   bookSummaries: {},
   studySessions: [],
   questionTimings: [],
+  intelligence: {
+    focusSubjects: [],
+    reducedSubjects: [],
+    pausedTopics: [],
+    ignoredRecommendations: [],
+    customRevisionDue: {},
+    onboardingDismissed: false,
+  },
 }
 
 export function getProgress(): ProgressState {
@@ -164,9 +205,16 @@ function save(s: ProgressState) {
 // ---------- Attempts ----------
 const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
 
-export function recordAttempt(id: string, correct: boolean, cat = '') {
-  const s = getProgress()
-  const now = Date.now()
+function applyAttempt(
+  state: ProgressState,
+  id: string,
+  correct: boolean,
+  cat: string,
+  metadata: Partial<Omit<AttemptEvent, 'id' | 'questionId' | 'correct' | 'category' | 'ts'>> = {},
+  ts = Date.now(),
+) {
+  const s = state
+  const now = ts
   s.attempts[id] = { c: correct, ts: now }
   const previous = s.reviews?.[id]
   const level = correct ? Math.min((previous?.level ?? -1) + 1, REVIEW_INTERVALS.length - 1) : 0
@@ -184,6 +232,26 @@ export function recordAttempt(id: string, correct: boolean, cat = '') {
       dueAt: now + intervalDays * 24 * 60 * 60 * 1000,
     },
   }
+  const mistake = s.mistakes.find((entry) => entry.id === id)
+  if (mistake && correct) {
+    mistake.successfulRetries = (mistake.successfulRetries ?? 0) + 1
+    mistake.lastCorrectAt = now
+    mistake.revised = true
+    if (mistake.successfulRetries >= 2) mistake.resolvedAt = now
+  }
+  const eventId = metadata.sessionId
+    ? `attempt:${metadata.sessionId}:${id}`
+    : `attempt:${now}:${id}:${Math.random().toString(36).slice(2, 7)}`
+  if (!(s.attemptEvents ?? []).some((event) => event.id === eventId)) {
+    s.attemptEvents = [{
+      id: eventId,
+      questionId: id,
+      correct,
+      category: cat || id.replace(/-\d+$/, ''),
+      ...metadata,
+      ts: now,
+    }, ...(s.attemptEvents ?? [])].slice(0, 12_000)
+  }
   const keys = Object.keys(s.attempts)
   if (keys.length > 8000) {
     keys
@@ -191,7 +259,69 @@ export function recordAttempt(id: string, correct: boolean, cat = '') {
       .slice(0, keys.length - 8000)
       .forEach((k) => delete s.attempts[k])
   }
-  save(s)
+}
+
+export function recordAttempt(
+  id: string,
+  correct: boolean,
+  cat = '',
+  metadata: Partial<Omit<AttemptEvent, 'id' | 'questionId' | 'correct' | 'category' | 'ts'>> = {},
+) {
+  const state = getProgress()
+  applyAttempt(state, id, correct, cat, metadata)
+  save(state)
+}
+
+export function recordAttemptBatch(
+  attempts: Array<{
+    id: string
+    correct: boolean
+    category: string
+    selected?: number
+    topic?: string
+    subtopic?: string
+    difficulty?: string
+    mode?: QuestionTiming['mode']
+  }>,
+  sessionId: string,
+) {
+  if (!sessionId || !attempts.length) return
+  const state = getProgress()
+  const now = Date.now()
+  attempts.forEach((attempt, index) => {
+    if ((state.attemptEvents ?? []).some((event) => event.id === `attempt:${sessionId}:${attempt.id}`)) return
+    applyAttempt(state, attempt.id, attempt.correct, attempt.category, {
+      selected: attempt.selected,
+      topic: attempt.topic,
+      subtopic: attempt.subtopic,
+      difficulty: attempt.difficulty,
+      mode: attempt.mode,
+      sessionId,
+    }, now + index)
+    if (!attempt.correct && attempt.selected !== undefined) {
+      const existing = state.mistakes.find((mistake) => mistake.id === attempt.id)
+      if (existing) {
+        existing.count += 1
+        existing.sel = attempt.selected
+        existing.ts = now
+        existing.revised = false
+        existing.successfulRetries = 0
+        existing.resolvedAt = undefined
+      } else {
+        state.mistakes.unshift({
+          id: attempt.id,
+          sel: attempt.selected,
+          ts: now,
+          count: 1,
+          revised: false,
+          cat: attempt.category,
+          successfulRetries: 0,
+        })
+      }
+    }
+  })
+  state.mistakes = state.mistakes.slice(0, 800)
+  save(state)
 }
 
 export function getAttempt(id: string): AttemptRecord | undefined {
@@ -251,8 +381,10 @@ export function addMistake(id: string, sel: number, cat: string) {
     ex.sel = sel
     ex.ts = Date.now()
     ex.revised = false
+    ex.successfulRetries = 0
+    ex.resolvedAt = undefined
   } else {
-    s.mistakes.unshift({ id, sel, ts: Date.now(), count: 1, revised: false, cat })
+    s.mistakes.unshift({ id, sel, ts: Date.now(), count: 1, revised: false, cat, successfulRetries: 0 })
   }
   if (s.mistakes.length > 800) s.mistakes.length = 800
   save(s)
@@ -275,6 +407,36 @@ export function toggleMistakeRevised(id: string) {
 
 export function getMistakes(): Mistake[] {
   return getProgress().mistakes
+}
+
+// ---------- Exam Intelligence controls ----------
+export function getIntelligencePreferences(): IntelligencePreferences {
+  const saved = getProgress().intelligence
+  return {
+    ...empty.intelligence,
+    ...saved,
+    focusSubjects: [...new Set(saved?.focusSubjects ?? [])],
+    reducedSubjects: [...new Set(saved?.reducedSubjects ?? [])],
+    pausedTopics: [...new Set(saved?.pausedTopics ?? [])],
+    ignoredRecommendations: [...new Set(saved?.ignoredRecommendations ?? [])],
+    customRevisionDue: { ...(saved?.customRevisionDue ?? {}) },
+  }
+}
+
+export function updateIntelligencePreferences(patch: Partial<IntelligencePreferences>) {
+  const state = getProgress()
+  const current = getIntelligencePreferences()
+  state.intelligence = {
+    ...current,
+    ...patch,
+    focusSubjects: [...new Set(patch.focusSubjects ?? current.focusSubjects)].slice(0, 30),
+    reducedSubjects: [...new Set(patch.reducedSubjects ?? current.reducedSubjects)].slice(0, 30),
+    pausedTopics: [...new Set(patch.pausedTopics ?? current.pausedTopics)].slice(0, 200),
+    ignoredRecommendations: [...new Set(patch.ignoredRecommendations ?? current.ignoredRecommendations)].slice(-200),
+    customRevisionDue: { ...current.customRevisionDue, ...(patch.customRevisionDue ?? {}) },
+  }
+  save(state)
+  return state.intelligence
 }
 
 // ---------- Continue where you left off ----------

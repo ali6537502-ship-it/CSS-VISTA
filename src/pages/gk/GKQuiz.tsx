@@ -82,12 +82,13 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     const cats = idx!.categories
     const catSlugs = cats.map((c) => c.slug)
     const paramCats = (sp.get('cats') ?? '').split(',').filter(Boolean)
-    const n = parseInt(sp.get('n') ?? '15', 10)
+    const requestedCount = Number.parseInt(sp.get('n') ?? '15', 10)
+    const n = Math.max(5, Math.min(200, Number.isFinite(requestedCount) ? requestedCount : 15))
 
     let r: Resolved | null = null
     switch (m) {
       case 'revision': {
-        const dueIds = dueRevisionIds(60)
+        const dueIds = dueRevisionIds(n)
         const qs = await getQuestionsByIds(dueIds)
         r = {
           title: 'Smart Revision Queue',
@@ -193,6 +194,28 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       }
       case 'weak': {
         const mis = getMistakes()
+        const requestedTopic = (sp.get('topic') ?? '').trim()
+        const requestedSubject = (sp.get('subject') ?? '').trim().toLowerCase()
+        const subjectCategory: Record<string, string> = {
+          'pakistan affairs': 'pakistan-affairs', 'islamic studies': 'islamic-gk', 'islamiyat': 'islamic-gk',
+          english: 'english-grammar', urdu: 'urdu-language', geography: 'pakistan-geography', history: 'pakistan-history',
+          'everyday science': 'everyday-science', science: 'science', 'current affairs': 'current-affairs',
+          'general knowledge': 'misc-gk', economics: 'economics', environment: 'environment',
+          'international organisations': 'international-organisations',
+        }
+        const requestedCategory = subjectCategory[requestedSubject]
+        if (requestedTopic && requestedCategory && catSlugs.includes(requestedCategory)) {
+          const all = await getCategoryQuestions(requestedCategory)
+          const topicNeedle = requestedTopic.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+          const matching = all.filter((question) => (question.s ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').includes(topicNeedle))
+          const source = matching.length >= 5 ? matching : all
+          const qs = [...source].sort(() => Math.random() - 0.5).slice(0, n)
+          r = {
+            title: `${requestedTopic} Practice`, qs, exam: false, timeSec: 0,
+            note: matching.length >= 5 ? `Focused questions for ${requestedTopic}.` : `A related ${requestedSubject} recovery set; the verified bank does not yet tag enough questions with this exact topic.`,
+          }
+          break
+        }
         const counts: Record<string, number> = {}
         mis.forEach((m2) => { counts[m2.cat] = (counts[m2.cat] ?? 0) + 1 })
         const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([c]) => c)
@@ -200,7 +223,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         if (valid.length === 0) {
           r = { title: 'Weak-Area Practice', qs: [], exam: false, timeSec: 0, note: 'Answer some questions first - your weak areas will appear here automatically.' }
         } else {
-          const qs = await sampleQuestions(valid, 15)
+          const qs = await sampleQuestions(valid, n)
           r = { title: 'Weak-Area Practice', qs, exam: false, timeSec: 0, note: `Focus: ${valid.map((v) => cats.find((c) => c.slug === v)?.name ?? v).join(', ')}` }
         }
         break
@@ -212,14 +235,14 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         break
       }
       case 'wrong': {
-        const qs = await getQuestionsByIds(wrongIds().slice(0, 60))
+        const qs = await getQuestionsByIds(wrongIds().slice(0, n))
         r = { title: 'Wrong Answers', qs, exam: false, timeSec: 0, note: qs.length ? undefined : 'No wrong answers recorded yet - good news!' }
         break
       }
       case 'unattempted': {
         const pool = await sampleQuestions(catSlugs, 250)
         const done = attemptedIds()
-        const qs = pool.filter((q) => !done.has(q.id)).slice(0, 15)
+        const qs = pool.filter((q) => !done.has(q.id)).slice(0, n)
         r = { title: 'Unattempted Questions', qs, exam: false, timeSec: 0 }
         break
       }
@@ -233,14 +256,14 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             pool.push(...(await getChunk(slug, cat.chunks - 1)))
           }),
         )
-        const qs = pool.sort(() => Math.random() - 0.5).slice(0, 15)
+        const qs = pool.sort(() => Math.random() - 0.5).slice(0, n)
         r = { title: 'Recently Added Questions', qs, exam: false, timeSec: 0 }
         break
       }
       case 'difficult': {
         const withDiff = cats.filter((c) => ['science', 'islamic-gk', 'current-affairs', 'capitals', 'currencies', 'computer-basics', 'solar-system'].includes(c.slug))
         const pool = await sampleQuestions(withDiff.map((c) => c.slug), 300)
-        const qs = pool.filter((q) => q.d === 'Advanced').slice(0, 15)
+        const qs = pool.filter((q) => q.d === 'Advanced').slice(0, n)
         r = { title: 'Difficult Questions', qs, exam: false, timeSec: 0, note: 'Advanced-level questions only.' }
         break
       }
@@ -502,6 +525,9 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
         seconds: Math.max(1, Math.round((Date.now() - (questionStartedAtRef.current[question.id] ?? Date.now())) / 1000)),
         correct: i === question.a,
+        selected: i,
+        topic: question.s,
+        difficulty: question.d,
       })
     }
     if (exam) {
@@ -531,7 +557,12 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       }
       if (sel === undefined) return
       if (!x.id.startsWith('mock-')) {
-        recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''))
+        recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''), {
+          selected: sel,
+          topic: x.s,
+          difficulty: x.d,
+          mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
+        })
         recordReview(x.id, correct)
         if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
       }
@@ -623,6 +654,9 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
             <PrintMenu answersAvailable={!mockKind} label={mockKind ? 'Print branded result' : 'Print quiz'} targetSelector={mockKind ? '.mock-result-summary' : '.print-area'} />
             <Link to="/mistakes" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine">
               Review mistake notebook
+            </Link>
+            <Link to="/exam-intelligence" className="inline-flex h-10 items-center gap-1.5 rounded-md bg-emerald-800 px-4 text-sm font-semibold text-white">
+              Exam Intelligence report
             </Link>
             <Link to="/gk" className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine">
               GK World

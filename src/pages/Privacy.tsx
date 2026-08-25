@@ -22,6 +22,7 @@ export default function Privacy() {
         <section className="rounded-2xl border bg-white p-5 sm:p-6">
           <h2 className="font-display text-xl font-bold text-pine">Information used by CSS Vista</h2>
           <p className="mt-2">Guest study preferences and progress may be kept in browser storage so features work on the current device. If you choose to sign in, account and study-progress information may be synchronised through CSS Vista&apos;s account service. Advertising logic does not read or transmit answers, scores, study plans, account details, or other private academic information.</p>
+          <p className="mt-3">VISTA Exam Intelligence uses only the student&apos;s own recorded study activity—such as question outcomes, subjects, topics, revision schedules, mock results and measured study sessions—to calculate private preparation summaries and recommendations. It does not manufacture marks or readiness data. Signed-in records are restricted to their owner through database access policies; guest records remain on the current device. This private analysis is excluded from site-managed advertising.</p>
         </section>
 
         <section className="rounded-2xl border bg-white p-5 sm:p-6">
@@ -44,7 +45,7 @@ export default function Privacy() {
           <p className="mt-2">Advertisements are separated from navigation, questions, answers, download controls and purchases. CSS Vista does not ask students to click advertisements, does not use a custom floating advertisement window or custom close button, and does not require advertising interaction to continue studying.</p>
         </section>
 
-        <p className="text-xs text-muted-foreground">Last updated: 24 August 2026. Material changes to advertising or data handling should be reflected on this page before release.</p>
+        <p className="text-xs text-muted-foreground">Last updated: 25 August 2026. Material changes to advertising or data handling should be reflected on this page before release.</p>
       </main>
     </div>
   )

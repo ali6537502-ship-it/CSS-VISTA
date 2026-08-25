@@ -21,8 +21,8 @@ assert(manifest.resourceCount === manifest.resources.length, 'Resource manifest 
 assert(new Set(manifest.resources.map((item) => item.id)).size === manifest.resources.length, 'Resource IDs must be unique')
 assert(new Set(manifest.resources.map((item) => item.path)).size === manifest.resources.length, 'Resource paths must be unique')
 assert(!notesSource.includes("price: 'PKR") && !notesSource.includes('price: "PKR'), 'Public notes data must not contain numeric prices')
-assert(notesSource.includes("notesPriceLabel = 'Contact for Price'"), 'Exact public notes price label is missing')
-assert(notesPage.includes('{notesPriceLabel}'), 'Notes Library does not render the central price label')
+assert(notesSource.includes("notesPurchaseActionLabel = 'Contact to purchase'"), 'Exact public notes purchase label is missing')
+assert(notesPage.includes('{notesPurchaseActionLabel}'), 'Notes Library does not render the central purchase label')
 assert(paperPage.includes('View Paper') && paperPage.includes('Download PDF'), 'Past-paper cards require separate View Paper and Download PDF actions')
 
 for (const item of manifest.resources) {
