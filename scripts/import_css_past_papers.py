@@ -102,7 +102,13 @@ def validate_pdf(path: Path) -> int:
     return page_count
 
 
-def restore_papers(archive: Path, registry: Path, output_root: Path, plan_only: bool) -> None:
+def restore_papers(
+    archive: Path,
+    registry: Path,
+    output_root: Path,
+    plan_only: bool,
+    force: bool,
+) -> None:
     records = parse_registry(registry)
     expected_records: list[tuple[str, str, str]] = []
     seen_urls: set[str] = set()
@@ -156,6 +162,18 @@ def restore_papers(archive: Path, registry: Path, output_root: Path, plan_only: 
         for year, expected_name, entry, match_type in selections:
             destination = output_root / year / expected_name
             destination.parent.mkdir(parents=True, exist_ok=True)
+            exact_matches += match_type == "exact"
+            normalised_matches += match_type == "normalised"
+            if destination.exists() and not force:
+                try:
+                    page_count = validate_pdf(destination)
+                except Exception:
+                    pass
+                else:
+                    skipped += 1
+                    total_pages += page_count
+                    total_bytes += destination.stat().st_size
+                    continue
             with tempfile.NamedTemporaryFile(
                 prefix=f".{expected_name}.", suffix=".tmp", dir=destination.parent, delete=False
             ) as temporary:
@@ -175,8 +193,6 @@ def restore_papers(archive: Path, registry: Path, output_root: Path, plan_only: 
                 raise
             total_pages += page_count
             total_bytes += destination.stat().st_size
-            exact_matches += match_type == "exact"
-            normalised_matches += match_type == "normalised"
 
     print(
         f"CSS past papers restored: {restored} written, {skipped} unchanged, "
@@ -201,6 +217,11 @@ def main() -> int:
         help="Destination corresponding to the /past-papers URL root",
     )
     parser.add_argument("--plan", action="store_true", help="Verify mappings without extracting files")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Replace valid existing PDFs with the exact archive copies",
+    )
     args = parser.parse_args()
 
     try:
@@ -209,6 +230,7 @@ def main() -> int:
             registry=args.registry.resolve(),
             output_root=args.output_root.resolve(),
             plan_only=args.plan,
+            force=args.force,
         )
     except Exception as error:
         print(f"CSS past-paper import failed: {error}", file=sys.stderr)
