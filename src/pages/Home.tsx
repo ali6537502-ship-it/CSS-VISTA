@@ -105,44 +105,25 @@ function openSearch() {
 function HomeHero() {
   return (
     <section
-      className="cssv-home-hero cssv-reveal mt-3"
+      className="cssv-home-hero cssv-home-hero-poster cssv-reveal mt-3"
       style={{ '--cssv-delay': '55ms' } as CSSProperties}
       aria-labelledby="css-vista-home-title"
     >
-      <div className="cssv-home-hero-copy">
-        <h1 id="css-vista-home-title" className="cssv-home-hero-title">
-          Pakistan’s first <span>all-in-one digital ecosystem.</span>
-        </h1>
-        <p className="cssv-home-hero-kicker">
-          <Sparkles className="h-7 w-7" aria-hidden="true" />
-          Built exclusively for competitive exam preparation
-        </p>
-        <p className="cssv-home-hero-description">
-          MCQs, mocks, past papers, notes, study tools and performance tracking—connected in one intelligent platform.
-        </p>
-        <div className="cssv-home-hero-actions">
-          <Link to="/start-css" className="cssv-tap cssv-home-hero-primary">
-            Start preparing <ArrowRight className="h-4 w-4" />
-          </Link>
-          <a href="#all-css-vista-features" className="cssv-tap cssv-home-hero-secondary">
-            Explore all features
-          </a>
-        </div>
-        <div className="cssv-home-hero-proof" aria-label="Platform highlights">
-          <span>Structured resources</span>
-          <span>Daily practice</span>
-          <span>Progress insights</span>
-        </div>
-      </div>
-      <div className="cssv-home-hero-art" aria-hidden="true">
+      <h1 id="css-vista-home-title" className="sr-only">
+        CSS VISTA — built for aspirants, open to everyone
+      </h1>
+      <picture className="cssv-home-hero-picture">
         <img
-          src="/images/home-hero-pakistan.webp"
-          alt=""
-          width="1200"
-          height="820"
+          src="/images/css-vista-main-poster-1440.webp"
+          srcSet="/images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w"
+          sizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px"
+          alt="CSS VISTA, presented by Ms. Sadia Zahoor and Sir Ali Hassan Sargana. Built for aspirants and open to everyone—a free digital platform for organized competitive-examination preparation."
+          width="2862"
+          height="1338"
           fetchPriority="high"
+          decoding="async"
         />
-      </div>
+      </picture>
     </section>
   )
 }
