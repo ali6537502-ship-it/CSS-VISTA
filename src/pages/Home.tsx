@@ -575,6 +575,21 @@ export default function Home() {
           <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
         </button>
 
+        <aside className="cssv-glass-panel cssv-reveal mt-3 flex items-start gap-3 rounded-xl border border-emerald-200/80 bg-emerald-50/65 p-3 sm:items-center sm:px-4" style={{ '--cssv-delay': '48ms' } as CSSProperties} aria-label="A message from the CSS Vista team">
+          <span className="cssv-glass-icon grid h-9 w-9 shrink-0 place-items-center rounded-lg text-emerald-800" aria-hidden="true">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[9px] font-extrabold uppercase tracking-[0.16em] text-emerald-700">A message from our team</p>
+            <p className="mt-0.5 text-[11px] leading-relaxed text-slate-600 sm:text-xs">
+              We created CSS VISTA as a free preparation platform so aspirants can access organized MCQs, past papers, current-affairs magazines, study tools and core learning resources in one place.
+            </p>
+          </div>
+          <Link to="/mentors" className="cssv-tap mt-0.5 shrink-0 rounded-lg border border-emerald-200 bg-white px-2.5 py-2 text-[10px] font-bold text-emerald-900 hover:bg-emerald-50 sm:mt-0">
+            About Us
+          </Link>
+        </aside>
+
         <HomeHero />
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />

@@ -90,7 +90,7 @@ const nav = [
       { label: 'Success & Failure Analysis', to: '/analysis', icon: TrendingUp },
     ],
   },
-  { label: 'Mentors', to: '/mentors' },
+  { label: 'About Us', to: '/mentors' },
   { label: 'Account', to: '/account' },
 ]
 
@@ -807,9 +807,9 @@ export default function Layout() {
           </nav>
 
           <div className="hidden xl:flex xl:items-center xl:gap-2">
-            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="Meet the CSS Vista mentors">
+            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="About CSS Vista and its mentors">
               <UserCheck className="h-4 w-4 text-emerald-800" />
-              <span>Mentors</span>
+              <span>About Us</span>
             </Link>
             <SocialLinks />
           </div>

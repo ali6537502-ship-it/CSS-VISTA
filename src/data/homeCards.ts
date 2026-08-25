@@ -86,7 +86,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'books', title: 'Books by Sir Ali', desc: 'Free PDF downloads', to: '/books', icon: 'BookMarked', visible: true, order: 23 },
   { id: 'psych-viva', title: 'Psychological Assessment & Viva', desc: 'The final stage explained', to: '/psych-viva', icon: 'Brain', visible: true, order: 24 },
   { id: 'consultation', title: '1-on-1 CSS Consultation', desc: 'Paid private guidance with Sir Ali Hassan or Ms. Sadia Zahoor', to: '/consultation', icon: 'Users', visible: true, order: 24.5 },
-  { id: 'mentors', title: 'Mentors', desc: 'Guidance and contact', to: '/mentors', icon: 'Users', visible: true, order: 25 },
+  { id: 'mentors', title: 'About Us', desc: 'Meet the CSS Vista mentors', to: '/mentors', icon: 'Users', visible: true, order: 25 },
   { id: 'opinions', title: 'Opinions by Authors', desc: 'Published analyses and commentary', to: '/opinions', icon: 'ScrollText', visible: true, order: 26 },
   { id: 'games', title: 'CSS Games', desc: 'Fast, interactive exam-prep games', to: '/games', icon: 'Gamepad2', visible: true, order: 27 },
   { id: 'answer-timer', title: 'Answer Timer', desc: 'Practice answers against the clock', to: '/answer-timer', icon: 'Timer', visible: true, order: 28 },
