@@ -1,34 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowLeft, ArrowUpDown, Check, CheckCircle2, Loader2, RotateCcw, Sparkles, Trophy } from 'lucide-react'
+import { ArrowLeft, ArrowUpDown, Check, CheckCircle2, RotateCcw, Sparkles, Trophy } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
-import QuizEngine from '@/components/QuizEngine'
-import { pakistanGeography, worldGeography, internationalOrgs, constitutionTimeline, pakistanMovementTimeline, matchConcepts, type MatchPair } from '@/data/games'
+import { constitutionTimeline, pakistanMovementTimeline, matchConcepts, type MatchPair } from '@/data/games'
 import { questions as mcqBank, quizCategories } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
 import { getState, recordGameScore } from '@/lib/store'
-import { getBankIndex, sampleQuestions, type BankQuestion } from '@/data/mcq'
 import { usePageBack } from '@/lib/backNavigation'
 import {
   MATCHES_PER_GAME_SET,
-  QUESTIONS_PER_GAME_ROUND,
   gameSeed,
   seededGameShuffle,
   unlimitedMatchingSet,
-  unlimitedQuestionRound,
 } from '@/lib/unlimitedGames'
-
-const gid = 10000
-function toQuestions(items: { question: string; options: string[]; answer: number; explanation: string }[], category: string): Question[] {
-  return items.map((i, n) => ({ id: gid + n, category, difficulty: 'Medium' as const, ...i }))
-}
-
-function buildQuestionPool(base: Question[], preferredCategories: string[], gameId: string) {
-  const preferred = mcqBank.filter((question) => preferredCategories.includes(question.category))
-  const pool = [...base, ...seededGameShuffle(preferred, gameSeed(`${gameId}-preferred`))]
-  const unique = [...new Map(pool.map((question) => [question.question.trim().toLocaleLowerCase(), question])).values()]
-  const idBase = gameSeed(gameId) * 1_000
-  return unique.map((question, index) => ({ ...question, id: idBase + index }))
-}
 
 const mcqMatchCategoryOrder = [
   'english', 'abilities', 'reasoning', 'science', 'gk', 'pakistan',
@@ -89,7 +72,7 @@ function TimelineGame({ items, title, gameId, page, onPage }: { items: { event: 
   return (
     <div className="rounded-lg border bg-white p-5">
       <div className="flex items-center justify-between">
-        <div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">Unlimited timeline sets · Set {page + 1}</p><h3 className="mt-1 flex items-center gap-2 font-semibold text-pine"><ArrowUpDown className="h-4 w-4" /> {title}</h3></div>
+        <div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">Academic timeline practice · Set {page + 1}</p><h3 className="mt-1 flex items-center gap-2 font-semibold text-pine"><ArrowUpDown className="h-4 w-4" /> {title}</h3></div>
         <span className="inline-flex items-center gap-1 text-xs text-muted-foreground"><Trophy className="h-3.5 w-3.5 text-amber-600" /> Best: {high}/{items.length}</span>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">Arrange from earliest to latest using the arrows.</p>
@@ -113,11 +96,11 @@ function TimelineGame({ items, title, gameId, page, onPage }: { items: { event: 
         ) : (
           <>
             <Badge tone={result.correct === items.length ? 'green' : 'gold'}>{result.correct}/{items.length} in correct position</Badge>
-            <button onClick={() => { setOrder(seededGameShuffle(items, Date.now())); setResult(null) }} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Play again</button>
+            <button onClick={() => { setOrder(seededGameShuffle(items, Date.now())); setResult(null) }} className="rounded-md border px-4 py-2 text-sm hover:bg-secondary">Try another order</button>
           </>
         )}
       </div>
-      <nav className="mt-5 flex items-center justify-between gap-3 border-t pt-4" aria-label="Timeline game sets">
+      <nav className="mt-5 flex items-center justify-between gap-3 border-t pt-4" aria-label="Timeline practice sets">
         <button type="button" onClick={() => onPage(page - 1)} disabled={page === 0} className="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-pine disabled:opacity-40"><ArrowLeft className="h-4 w-4" /> Previous set</button>
         <span className="text-xs font-bold text-slate-600">Set {page + 1}</span>
         <button type="button" onClick={() => onPage(page + 1)} className="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-pine">Next fresh set <ArrowLeft className="h-4 w-4 rotate-180" /></button>
@@ -249,7 +232,7 @@ function MatchGame({ title, pairs, gameId, page, onPage }: { title: string; pair
           </>
         )}
       </div>
-      <nav className="flex items-center justify-between gap-3 border-t bg-slate-50 px-4 py-3" aria-label="Matching game pages">
+      <nav className="flex items-center justify-between gap-3 border-t bg-slate-50 px-4 py-3" aria-label="Matching practice sets">
         <button type="button" onClick={() => openPage(page - 1)} disabled={page === 0} className="inline-flex min-h-10 items-center gap-2 rounded-lg border bg-white px-3 text-xs font-bold text-pine disabled:opacity-40"><ArrowLeft className="h-4 w-4" /> Previous page</button>
         <span className="text-xs font-bold text-slate-600">Set {page + 1}</span>
         <button type="button" onClick={() => openPage(page + 1)} className="inline-flex min-h-10 items-center gap-2 rounded-lg border bg-white px-3 text-xs font-bold text-pine">Next fresh set <ArrowLeft className="h-4 w-4 rotate-180" /></button>
@@ -258,57 +241,7 @@ function MatchGame({ title, pairs, gameId, page, onPage }: { title: string; pair
   )
 }
 
-function UnlimitedQuizGame({ title, gameId, pool, round, onRound }: { title: string; gameId: string; pool: Question[]; round: number; onRound(round: number): void }) {
-  const questions = useMemo(() => unlimitedQuestionRound(pool, gameId, round), [gameId, pool, round])
-
-  if (!questions.length) return <p className="rounded-xl border bg-white p-8 text-center text-sm text-muted-foreground">No relevant questions are available for this game yet.</p>
-
-  return (
-    <div>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-3">
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">Unlimited relevant rounds · Round {round + 1}</p>
-          <p className="text-sm font-bold text-pine">{questions.length} subject-related questions in this round</p>
-        </div>
-        <button type="button" onClick={() => onRound(round + 1)} className="inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-emerald-800"><RotateCcw className="h-4 w-4" /> Load another round</button>
-      </div>
-      <QuizEngine key={`${gameId}-${round}`} questions={questions} mode="game" category={`${title} · Round ${round + 1}`} timePerQuestion={30} onNewRound={() => onRound(round + 1)} />
-    </div>
-  )
-}
-
-function bankQuestionToQuiz(question: BankQuestion, index: number, round: number): Question {
-  return {
-    id: 500000 + round * QUESTIONS_PER_GAME_ROUND + index,
-    category: 'gk',
-    difficulty: question.d === 'Basic' ? 'Easy' : question.d === 'Advanced' ? 'Hard' : 'Medium',
-    question: question.q,
-    options: question.o,
-    answer: question.a,
-    explanation: question.e ?? `Topic: ${question.s ?? 'General Knowledge'}`,
-  }
-}
-
-function BankMarathonGame() {
-  const [questions, setQuestions] = useState<Question[]>([])
-  const [loading, setLoading] = useState(true)
-  const [refresh, setRefresh] = useState(0)
-
-  useEffect(() => {
-    let active = true
-    setLoading(true)
-    getBankIndex()
-      .then((index) => sampleQuestions(index.categories.filter((category) => category.mpt).map((category) => category.slug), QUESTIONS_PER_GAME_ROUND))
-      .then((rows) => { if (active) setQuestions(rows.map((question, index) => bankQuestionToQuiz(question, index, refresh))) })
-      .finally(() => active && setLoading(false))
-    return () => { active = false }
-  }, [refresh])
-
-  if (loading) return <div className="grid place-items-center rounded-xl border bg-white py-20"><Loader2 className="h-7 w-7 animate-spin text-pine" /><p className="mt-2 text-sm text-muted-foreground">Building a fresh subject-related question round…</p></div>
-  return <div><div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-3"><div><p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">Unlimited bank rounds · Round {refresh + 1}</p><p className="text-sm font-bold text-pine">Up to 100 related questions per round with one continuous score and review</p></div><button type="button" onClick={() => setRefresh((value) => value + 1)} className="inline-flex h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-emerald-800"><RotateCcw className="h-4 w-4" /> Load another round</button></div>{questions.length ? <QuizEngine key={refresh} questions={questions} mode="game" category={`MCQ Bank Marathon · Round ${refresh + 1}`} timePerQuestion={30} onNewRound={() => setRefresh((value) => value + 1)} /> : <p className="rounded-xl border bg-white p-8 text-center text-sm text-muted-foreground">This game could not be loaded. Try another round.</p>}</div>
-}
-
-type ActiveGame = { kind: 'quiz'; title: string; pool: Question[]; id: string; round: number } | { kind: 'timeline'; title: string; items: { event: string; year: number }[]; id: string; page: number } | { kind: 'match'; title: string; pairs: { concept: string; match: string }[]; id: string; page: number } | { kind: 'bank'; title: string } | null
+type ActivePractice = { kind: 'timeline'; title: string; items: { event: string; year: number }[]; id: string; page: number } | { kind: 'match'; title: string; pairs: { concept: string; match: string }[]; id: string; page: number } | null
 
 interface GameCard {
   title: string
@@ -328,7 +261,7 @@ function GameCardButton({ card }: { card: GameCard }) {
 }
 
 export default function Games() {
-  const [active, setActive] = useState<ActiveGame>(null)
+  const [active, setActive] = useState<ActivePractice>(null)
   const goBack = () => {
     setActive((current) => (current?.kind === 'match' || current?.kind === 'timeline') && current.page > 0
       ? { ...current, page: current.page - 1 }
@@ -349,36 +282,29 @@ export default function Games() {
     badge: 'Subject concepts',
     play: () => setActive({ kind: 'match', title: `Match: ${game.title}`, pairs: game.pairs, id: `match-${index}`, page: 0 }),
   }))
-  const otherCards: GameCard[] = [
-    { title: 'Unlimited MCQ Bank Marathon', desc: 'Continuously generated 100-question rounds from the complete relevant preparation bank', badge: 'Unlimited rounds', play: () => setActive({ kind: 'bank', title: 'Unlimited MCQ Bank Marathon' }) },
-    { title: 'Pakistan Map Challenge', desc: 'Unlimited rounds drawn only from Pakistan and geography questions', badge: 'Unlimited geography', play: () => setActive({ kind: 'quiz', title: 'Pakistan Map Challenge', pool: buildQuestionPool(toQuestions(pakistanGeography, 'Pakistan Geography'), ['pakistan', 'geography'], 'pakistan-map'), id: 'pakistan-map', round: 0 }) },
-    { title: 'World Map Challenge', desc: 'Unlimited rounds drawn only from world geography and general-knowledge questions', badge: 'Unlimited geography', play: () => setActive({ kind: 'quiz', title: 'World Map Challenge', pool: buildQuestionPool(toQuestions(worldGeography, 'World Geography'), ['geography', 'gk'], 'world-map'), id: 'world-map', round: 0 }) },
-    { title: 'International Organisations', desc: 'Unlimited rounds drawn only from international-organisations and related GK questions', badge: 'Unlimited IR', play: () => setActive({ kind: 'quiz', title: 'International Organisations', pool: buildQuestionPool(toQuestions(internationalOrgs, 'International Organisations'), ['organisations', 'gk'], 'international-organisations'), id: 'international-organisations', round: 0 }) },
-    { title: 'Subject-wise MCQ Challenge', desc: 'Unlimited fresh rounds from the mixed CSS preparation bank', badge: 'Unlimited mixed', play: () => setActive({ kind: 'quiz', title: 'MCQ Challenge', pool: buildQuestionPool(mcqBank, [], 'mixed-mcq'), id: 'mixed-mcq', round: 0 }) },
-    { title: 'Constitutional History Timeline', desc: 'Unlimited ordering sets covering Pakistan’s constitutional milestones', badge: 'Unlimited sets', play: () => setActive({ kind: 'timeline', title: 'Constitutional History Timeline', items: constitutionTimeline, id: 'tl-constitution', page: 0 }) },
-    { title: 'Pakistan Movement Timeline', desc: 'Unlimited ordering sets covering events from 1857 to 1947', badge: 'Unlimited sets', play: () => setActive({ kind: 'timeline', title: 'Pakistan Movement Timeline', items: pakistanMovementTimeline, id: 'tl-movement', page: 0 }) },
+  const timelineCards: GameCard[] = [
+    { title: 'Constitutional History Timeline', desc: 'Order Pakistan’s constitutional milestones from earliest to latest.', badge: 'History practice', play: () => setActive({ kind: 'timeline', title: 'Constitutional History Timeline', items: constitutionTimeline, id: 'tl-constitution', page: 0 }) },
+    { title: 'Pakistan Movement Timeline', desc: 'Order the major Pakistan Movement events from 1857 to 1947.', badge: 'History practice', play: () => setActive({ kind: 'timeline', title: 'Pakistan Movement Timeline', items: pakistanMovementTimeline, id: 'tl-movement', page: 0 }) },
   ]
 
   return (
     <div>
-      <PageHeader title="CSS Games" description="Unlimited subject-focused matching sets, question rounds, timed challenges and score tracking. Every new round stays connected to its selected topic." />
+      <PageHeader title="Interactive Practice" description="Focused academic matching and timeline activities built from CSS subject concepts and examination material." />
       <div className="mx-auto max-w-7xl px-4 py-10">
         {active ? (
           <div>
-            <button onClick={goBack} className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-emerald-800 hover:underline"><ArrowLeft className="h-4 w-4" /> {(active.kind === 'match' || active.kind === 'timeline') && active.page > 0 ? 'Previous game set' : 'All games'}</button>
+            <button onClick={goBack} className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-emerald-800 hover:underline"><ArrowLeft className="h-4 w-4" /> {active.page > 0 ? 'Previous practice set' : 'All activities'}</button>
             <h2 className="mb-4 font-display text-xl font-bold text-pine">{active.title}</h2>
-            {active.kind === 'quiz' && <UnlimitedQuizGame title={active.title} gameId={active.id} pool={active.pool} round={active.round} onRound={(round) => setActive({ ...active, round: Math.max(0, round) })} />}
             {active.kind === 'timeline' && <TimelineGame key={`${active.id}-${active.page}`} items={active.items} title={active.title} gameId={active.id} page={active.page} onPage={(page) => setActive({ ...active, page: Math.max(0, page) })} />}
             {active.kind === 'match' && <MatchGame key={`${active.id}-${active.page}`} title={active.title} pairs={active.pairs} gameId={active.id} page={active.page} onPage={(page) => setActive({ ...active, page })} />}
-            {active.kind === 'bank' && <BankMarathonGame />}
           </div>
         ) : (
           <div className="space-y-10">
-            <section aria-labelledby="mcq-bank-matching-games">
+            <section aria-labelledby="mcq-bank-matching-practice">
               <div className="flex flex-wrap items-end justify-between gap-2">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">Question-bank powered</p>
-                  <h2 id="mcq-bank-matching-games" className="mt-1 font-display text-xl font-bold text-pine">MCQ matching games</h2>
+                  <h2 id="mcq-bank-matching-practice" className="mt-1 font-display text-xl font-bold text-pine">MCQ matching practice</h2>
                   <p className="mt-1 text-sm text-muted-foreground">Prompts and correct matches are taken from the existing subject question bank.</p>
                 </div>
                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-900"><Sparkles className="h-3.5 w-3.5" /> {mcqMatchingCards.length} subjects</span>
@@ -388,10 +314,10 @@ export default function Games() {
               </div>
             </section>
 
-            <section aria-labelledby="concept-matching-games">
+            <section aria-labelledby="concept-matching-practice">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">Written-subject foundations</p>
-                <h2 id="concept-matching-games" className="mt-1 font-display text-xl font-bold text-pine">Syllabus concept matching</h2>
+                <h2 id="concept-matching-practice" className="mt-1 font-display text-xl font-bold text-pine">Syllabus concept matching</h2>
                 <p className="mt-1 text-sm text-muted-foreground">Key terms, thinkers, theories, instruments and subject fundamentals.</p>
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -399,13 +325,13 @@ export default function Games() {
               </div>
             </section>
 
-            <section aria-labelledby="other-study-games">
+            <section aria-labelledby="timeline-practice">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">More practice</p>
-                <h2 id="other-study-games" className="mt-1 font-display text-xl font-bold text-pine">Quizzes and timelines</h2>
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">Chronology revision</p>
+                <h2 id="timeline-practice" className="mt-1 font-display text-xl font-bold text-pine">Academic timelines</h2>
               </div>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {otherCards.map((card) => <GameCardButton key={card.title} card={card} />)}
+                {timelineCards.map((card) => <GameCardButton key={card.title} card={card} />)}
               </div>
             </section>
           </div>

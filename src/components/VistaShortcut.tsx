@@ -25,7 +25,7 @@ const shortcutDefinitions = [
   { id: 'current-affairs', label: 'Current affairs', description: 'Open dated one-liners, MCQs and issue files.', icon: Globe2, to: '/current-affairs' },
   { id: 'css-mcqs', label: 'CSS subject MCQs', description: 'Practice the supplied compulsory and optional banks.', icon: CheckSquare2, to: '/css-mcqs' },
   { id: 'mpt', label: 'MPT practice', description: 'Open the connected MPT question bank and mocks.', icon: CheckSquare2, to: '/mpt' },
-  { id: 'games', label: 'CSS games', description: 'Play question-bank games and the 10-page marathon.', icon: Globe2, to: '/games' },
+  { id: 'games', label: 'Interactive practice', description: 'Revise through academic matching and timelines.', icon: Globe2, to: '/games' },
   { id: 'grammar', label: 'Grammar & vocabulary', description: 'Open vocabulary, grammar, idioms and practice.', icon: FileCheck2, to: '/grammar-vocabulary' },
   { id: 'papers', label: 'Past papers', description: 'Search the CSS, PMS and PPSC paper archive.', icon: FileCheck2, to: '/past-papers' },
   { id: 'paper-analysis', label: 'Past paper analysis', description: 'See 3,277 questions mapped to FPSC syllabus areas.', icon: FileCheck2, to: '/css-past-paper-analysis' },

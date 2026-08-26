@@ -28,19 +28,30 @@ export interface BookSummaryLibrary {
   coverSources: Record<string, number>
 }
 
-// The summary library is bundled as a lazy chunk so it loads without runtime fetches.
-const bundledLoader = import.meta.glob<{ default: BookSummaryLibrary }>('./bundled/book-summaries-index.json')
+function isBookSummaryLibrary(value: unknown): value is BookSummaryLibrary {
+  if (!value || typeof value !== 'object') return false
+  const candidate = value as Partial<BookSummaryLibrary>
+  return Array.isArray(candidate.categories)
+    && Array.isArray(candidate.books)
+    && candidate.books.every((book) => (
+      Boolean(book)
+      && typeof book.slug === 'string'
+      && typeof book.title === 'string'
+      && typeof book.author === 'string'
+      && typeof book.category === 'string'
+      && typeof book.body === 'string'
+    ))
+}
 
-export async function loadBookSummaries(): Promise<BookSummaryLibrary> {
-  const loader = bundledLoader['./bundled/book-summaries-index.json']
-  if (loader) {
-    try {
-      return (await loader()).default
-    } catch {
-      // fall through to fetch
-    }
-  }
-  const response = await fetch('/book-summaries/index.json')
-  if (!response.ok) throw new Error('Book summaries could not be loaded.')
-  return response.json()
+// This file is a public, version-independent asset. Fetching it directly avoids
+// coupling the library to a content-hashed JavaScript chunk during deployments.
+export async function loadBookSummaries(signal?: AbortSignal): Promise<BookSummaryLibrary> {
+  const response = await fetch('/book-summaries/index.json', {
+    signal,
+    headers: { Accept: 'application/json' },
+  })
+  if (!response.ok) throw new Error('BOOK_SUMMARIES_UNAVAILABLE')
+  const library: unknown = await response.json()
+  if (!isBookSummaryLibrary(library)) throw new Error('BOOK_SUMMARIES_INVALID')
+  return library
 }

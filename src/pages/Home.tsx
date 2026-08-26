@@ -18,6 +18,7 @@ import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
+import TutorialAnnouncement from '@/components/TutorialAnnouncement'
 
 interface LinkCard {
   title: string
@@ -643,6 +644,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <TutorialAnnouncement />
 
         <ResourceToggle />
 

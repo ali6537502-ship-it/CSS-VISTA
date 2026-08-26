@@ -78,7 +78,7 @@ const nav = [
       { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },
       { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
       { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
-      { label: 'CSS Games', to: '/games', icon: Gamepad2 },
+      { label: 'Interactive Practice', to: '/games', icon: Gamepad2 },
       { label: 'Performance Dashboard', to: '/dashboard', icon: LayoutDashboard },
       { label: 'My CSS Study Planner', to: '/study-planner', icon: CalendarRange },
     ],

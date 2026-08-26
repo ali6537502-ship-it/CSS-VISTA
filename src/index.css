@@ -16,6 +16,11 @@
   animation: book-summary-reader-in 160ms ease-out both;
 }
 
+.book-summary-scroll-area {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
 .book-summary-excerpt {
   display: -webkit-box;
   overflow: hidden;
@@ -2290,6 +2295,37 @@
 .cssv-home > div > section {
   content-visibility: auto;
   contain-intrinsic-size: auto 460px;
+}
+
+.cssv-tutorial-backdrop {
+  animation: cssv-tutorial-fade 180ms ease-out both;
+}
+
+.cssv-tutorial-dialog {
+  animation: cssv-tutorial-enter 220ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+@keyframes cssv-tutorial-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cssv-tutorial-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cssv-tutorial-backdrop,
+  .cssv-tutorial-dialog {
+    animation: none;
+  }
 }
 
 @media (max-width: 767px) {

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { useSearchParams } from 'react-router'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useNavigate, useSearchParams } from 'react-router'
 import {
   ArrowLeft, ArrowRight, BookOpen, Bookmark, BookmarkCheck, CheckCircle2, Clock3, Copy,
   LibraryBig, Minus, Plus, Printer, Search, Sparkles, X,
@@ -297,7 +297,7 @@ function BookReader({
           </span>
         </div>
 
-        <div ref={scrollRef} onScroll={handleReaderScroll} className="flex-1 overflow-y-auto">
+        <div ref={scrollRef} onScroll={handleReaderScroll} className="book-summary-scroll-area min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y">
           <div className="mx-auto max-w-4xl px-5 py-6 sm:px-8 sm:py-9">
             <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-amber-800">Book summary</p>
@@ -345,20 +345,33 @@ function BookReader({
 }
 
 export default function BookSummaries() {
-  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [library, setLibrary] = useState<BookSummaryLibrary | null>(null)
   const [error, setError] = useState('')
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
-  const [category, setCategory] = useState('all')
-  const [activeBook, setActiveBook] = useState<BookSummary | null>(null)
-  usePageBack(Boolean(activeBook), () => setActiveBook(null))
+  const [category, setCategory] = useState(() => searchParams.get('category') ?? 'all')
+  const [loadAttempt, setLoadAttempt] = useState(0)
+  const openedFromListRef = useRef(false)
   const [readingStates, setReadingStates] = useState(() => getAllBookSummaryProgress())
 
   useEffect(() => {
-    loadBookSummaries()
+    setQuery(searchParams.get('search') ?? '')
+    setCategory(searchParams.get('category') ?? 'all')
+  }, [searchParams])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    setError('')
+    setLibrary(null)
+    loadBookSummaries(controller.signal)
       .then(setLibrary)
-      .catch((reason) => setError(reason instanceof Error ? reason.message : 'Book summaries could not be loaded.'))
-  }, [])
+      .catch((reason: unknown) => {
+        if (reason instanceof DOMException && reason.name === 'AbortError') return
+        setError('Book summaries are temporarily unavailable. Please try again.')
+      })
+    return () => controller.abort()
+  }, [loadAttempt])
 
   const categoriesBySlug = useMemo(
     () => new Map(library?.categories.map((item) => [item.slug, item.name]) ?? []),
@@ -371,21 +384,63 @@ export default function BookSummaries() {
     return library.books.filter((book) => {
       if (category !== 'all' && book.category !== category) return false
       if (!needle) return true
-      return `${book.title} ${book.author} ${book.excerpt} ${book.body}`
+      return `${book.title} ${book.author} ${categoriesBySlug.get(book.category) ?? ''} ${book.excerpt} ${book.body}`
         .toLocaleLowerCase()
         .includes(needle)
     })
-  }, [library, query, category])
+  }, [library, query, category, categoriesBySlug])
 
   const totalWords = useMemo(
     () => library?.books.reduce((sum, book) => sum + book.wordCount, 0) ?? 0,
     [library],
   )
 
-  function openBook(book: BookSummary) {
-    setActiveBook(book)
+  const requestedBookSlug = searchParams.get('book')
+  const activeBook = useMemo(
+    () => requestedBookSlug && library
+      ? library.books.find((book) => book.slug === requestedBookSlug) ?? null
+      : null,
+    [library, requestedBookSlug],
+  )
+
+  function updateSearch(nextQuery: string) {
+    setQuery(nextQuery)
+    const next = new URLSearchParams(searchParams)
+    if (nextQuery.trim()) next.set('search', nextQuery)
+    else next.delete('search')
+    next.delete('book')
+    setSearchParams(next, { replace: true })
+  }
+
+  function updateCategory(nextCategory: string) {
+    setCategory(nextCategory)
+    const next = new URLSearchParams(searchParams)
+    if (nextCategory !== 'all') next.set('category', nextCategory)
+    else next.delete('category')
+    next.delete('book')
+    setSearchParams(next, { replace: true })
+  }
+
+  function openBook(book: BookSummary, replace = false) {
+    if (!replace) openedFromListRef.current = true
+    const next = new URLSearchParams(searchParams)
+    next.set('book', book.slug)
+    setSearchParams(next, { replace })
     recordActivity({ type: 'page', label: `Book summary: ${book.title}`, path: '/book-summaries' })
   }
+
+  const closeBook = useCallback(() => {
+    if (openedFromListRef.current) {
+      openedFromListRef.current = false
+      navigate(-1)
+      return
+    }
+    const next = new URLSearchParams(searchParams)
+    next.delete('book')
+    setSearchParams(next, { replace: true })
+  }, [navigate, searchParams, setSearchParams])
+
+  usePageBack(Boolean(activeBook), closeBook)
 
   const activeBookIndex = activeBook ? filteredBooks.findIndex((book) => book.slug === activeBook.slug) : -1
 
@@ -398,7 +453,14 @@ export default function BookSummaries() {
 
       <main className="mx-auto max-w-7xl space-y-7 px-4 py-8">
         {error ? (
-          <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-800">{error}</div>
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
+            <BookOpen className="mx-auto h-8 w-8 text-amber-700" />
+            <h2 className="mt-3 font-semibold text-pine">We could not open the reading library</h2>
+            <p className="mt-1 text-sm text-slate-600">{error}</p>
+            <button type="button" onClick={() => setLoadAttempt((attempt) => attempt + 1)} className="mt-4 min-h-10 rounded-lg bg-pine px-4 text-sm font-bold text-white">
+              Try again
+            </button>
+          </div>
         ) : !library ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="Loading book summaries">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
@@ -443,7 +505,7 @@ export default function BookSummaries() {
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   value={query}
-                  onChange={(event) => setQuery(event.target.value)}
+                  onChange={(event) => updateSearch(event.target.value)}
                   placeholder="Search books, authors, ideas or topics..."
                   aria-label="Search book summaries"
                   className="h-11 w-full rounded-lg border border-input pl-9 pr-3 text-sm outline-none focus:ring-2 focus:ring-emerald-700/30"
@@ -452,7 +514,7 @@ export default function BookSummaries() {
               <div className="mt-3 flex gap-2 overflow-x-auto pb-1" aria-label="Book summary categories">
                 <button
                   type="button"
-                  onClick={() => setCategory('all')}
+                  onClick={() => updateCategory('all')}
                   aria-pressed={category === 'all'}
                   className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     category === 'all' ? 'bg-pine text-emerald-50' : 'bg-secondary text-pine hover:bg-emerald-50'
@@ -464,7 +526,7 @@ export default function BookSummaries() {
                   <button
                     key={item.slug}
                     type="button"
-                    onClick={() => setCategory(item.slug)}
+                    onClick={() => updateCategory(item.slug)}
                     aria-pressed={category === item.slug}
                     className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                       category === item.slug ? 'bg-pine text-emerald-50' : 'bg-secondary text-pine hover:bg-emerald-50'
@@ -484,6 +546,12 @@ export default function BookSummaries() {
                 <p className="mt-1 text-sm text-muted-foreground">{filteredBooks.length} books found</p>
               </div>
             </div>
+
+            {requestedBookSlug && !activeBook && (
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-950" role="status">
+                This book summary is not available. You can browse the complete library below.
+              </div>
+            )}
 
             {filteredBooks.length ? (
               <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -541,8 +609,8 @@ export default function BookSummaries() {
             ) : (
               <div className="rounded-xl border border-dashed bg-secondary/30 p-10 text-center">
                 <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
-                <h2 className="mt-3 font-semibold text-pine">No summaries match this search</h2>
-                <p className="mt-1 text-sm text-muted-foreground">Try a book title, author, idea or another category.</p>
+                <h2 className="mt-3 font-semibold text-pine">{query.trim() ? 'No summaries match this search' : 'No summaries available in this category yet'}</h2>
+                <p className="mt-1 text-sm text-muted-foreground">{query.trim() ? 'Try a book title, author, category or another topic.' : 'Choose another category to continue browsing.'}</p>
               </div>
             )}
           </>
@@ -554,10 +622,10 @@ export default function BookSummaries() {
           key={activeBook.slug}
           book={activeBook}
           categoryName={categoriesBySlug.get(activeBook.category) ?? 'Book Summary'}
-          onClose={() => setActiveBook(null)}
+          onClose={closeBook}
           previousBook={activeBookIndex > 0 ? filteredBooks[activeBookIndex - 1] : undefined}
           nextBook={activeBookIndex >= 0 && activeBookIndex < filteredBooks.length - 1 ? filteredBooks[activeBookIndex + 1] : undefined}
-          onOpenBook={openBook}
+          onOpenBook={(book) => openBook(book, true)}
           readingState={readingStates[activeBook.slug] ?? getBookSummaryProgress(activeBook.slug)}
           onReadingStateChange={(slug, state) => setReadingStates((current) => ({ ...current, [slug]: state }))}
         />

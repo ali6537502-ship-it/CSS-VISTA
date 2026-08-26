@@ -38,7 +38,10 @@ import bundledIndexJson from './bundled/index.json'
 
 // Every One-Liner GK subject file is bundled as a lazy chunk so the section
 // works even when runtime fetches of /one-liner-gk/*.json are unavailable.
-const categoryLoaders = import.meta.glob<{ default: OneLinerCategory }>('./bundled/*.json')
+const categoryLoaders = import.meta.glob<{ default: OneLinerCategory }>([
+  './bundled/*.json',
+  '!./bundled/book-summaries-index.json',
+])
 
 const bundledIndex = bundledIndexJson as OneLinerIndex
 

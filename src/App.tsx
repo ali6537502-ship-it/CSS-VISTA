@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import Home from './pages/Home'
+import BookSummaries from './pages/BookSummaries'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
@@ -42,7 +43,6 @@ const OpinionsPage = lazy(() => import('./pages/Books').then((m) => ({ default: 
 const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
-const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
@@ -105,7 +105,7 @@ export default function App() {
         <Route path="/gk" element={<S><GKWorld /></S>} />
         <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
-        <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
+        <Route path="/book-summaries" element={<BookSummaries />} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
