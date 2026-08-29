@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import {
   BookMarked, BrainCircuit, Check, CheckSquare2, Clock3, ExternalLink, FileCheck2, Globe2, Grid2X2,
   NotebookPen, Pause, Play, Plus, RotateCcw, Search, Settings2, StickyNote,
@@ -41,6 +41,7 @@ function formatCountdown(seconds: number) {
 
 export default function VistaShortcut() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [state, setState] = useState(() => getState())
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -83,6 +84,11 @@ export default function VistaShortcut() {
     window.addEventListener('keydown', closeWithEscape)
     return () => window.removeEventListener('keydown', closeWithEscape)
   }, [activeId])
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setActiveId(null)
+  }, [location.pathname, location.search])
 
   useEffect(() => {
     if (query.trim().length < 2) {
@@ -153,7 +159,7 @@ export default function VistaShortcut() {
   }
 
   return (
-    <div className="no-print fixed bottom-[78px] right-3 z-50 md:bottom-6 md:right-5">
+    <div className="no-print fixed bottom-[calc(78px+env(safe-area-inset-bottom))] right-3 z-50 md:bottom-6 md:right-5">
       {menuOpen && (
         <section className="cssv-vista-shortcut-panel mb-3 w-[min(22rem,calc(100vw-1.5rem))] overflow-hidden rounded-[1.35rem] border border-white/90 bg-white/95 p-3 shadow-2xl backdrop-blur-xl" aria-label="VISTA SHORTCUT menu">
           <div className="flex items-center justify-between gap-3 border-b px-1 pb-3">

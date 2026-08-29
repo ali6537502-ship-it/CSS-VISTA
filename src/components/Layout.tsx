@@ -986,7 +986,7 @@ export default function Layout() {
         </nav>
       </aside>
 
-      <main className="flex-1 pb-[68px] md:pb-0">
+      <main className="flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0">
         <div
           key={location.pathname}
           className={`cssv-route-stage route-transition-${routeDirection}`}

@@ -309,7 +309,7 @@ export default function LiveThemeDemos() {
                 className="font-semibold text-emerald-800 underline underline-offset-2"
                 href="https://www.pexels.com/video/flowing-green-particles-12987971/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Pexels
               </a>.

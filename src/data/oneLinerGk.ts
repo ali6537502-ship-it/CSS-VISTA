@@ -40,6 +40,7 @@ import bundledIndexJson from './bundled/index.json'
 // works even when runtime fetches of /one-liner-gk/*.json are unavailable.
 const categoryLoaders = import.meta.glob<{ default: OneLinerCategory }>([
   './bundled/*.json',
+  '!./bundled/index.json',
   '!./bundled/book-summaries-index.json',
 ])
 

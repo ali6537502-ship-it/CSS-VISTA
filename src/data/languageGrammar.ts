@@ -42,7 +42,10 @@ export interface GrammarIndex {
 import bundledIndexJson from './bundled-grammar/index.json'
 
 // Grammar courses are bundled as lazy chunks so they load without runtime fetches.
-const courseLoaders = import.meta.glob<{ default: GrammarCourse }>('./bundled-grammar/*.json')
+const courseLoaders = import.meta.glob<{ default: GrammarCourse }>([
+  './bundled-grammar/*.json',
+  '!./bundled-grammar/index.json',
+])
 
 const bundledIndex = bundledIndexJson as GrammarIndex
 
