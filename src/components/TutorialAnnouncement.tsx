@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ArrowRight, Compass, Instagram, MessageCircle, PlayCircle, X, Youtube } from 'lucide-react'
+import { isNotesDiscountActive } from '@/data/notes'
 
 const TUTORIAL_URL = 'https://youtu.be/RawGyL7BkEk?si=EiZ8EPo6oMKr-zW9'
 const TUTORIAL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/RawGyL7BkEk?autoplay=1&rel=0'
@@ -53,6 +54,7 @@ export default function TutorialAnnouncement() {
   }, [])
 
   useEffect(() => {
+    if (isNotesDiscountActive()) return
     if (readStorage(window.localStorage, TUTORIAL_SEEN_KEY)) return
     if (readStorage(window.sessionStorage, TUTORIAL_DISMISSED_KEY)) return
     const timer = window.setTimeout(() => setMode('introduction'), 1200)
