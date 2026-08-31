@@ -6,6 +6,7 @@ import {
   getVisibleBundleIncludes,
   getVisibleNoteProducts,
   isEuropeanHistoryTemporarilyHidden,
+  isNotesDiscountActive,
 } from '../src/data/notes.ts'
 
 test('European History notes are hidden only for the requested Pakistan date', () => {
@@ -61,6 +62,8 @@ test('owner-supplied topic coverage and today prices are preserved exactly', () 
     [currentPakistan, politicalScience, criminology].map((product) => getNoteDisplayPrice(product, duringOffer).price),
     [4900, 2800, 2530],
   )
+  assert.equal(isNotesDiscountActive(duringOffer), true)
+  assert.equal(isNotesDiscountActive(afterOffer), false)
   assert.deepEqual(
     [currentPakistan, politicalScience, criminology].map((product) => getNoteDisplayPrice(product, afterOffer).price),
     [7000, 4000, 3600],
