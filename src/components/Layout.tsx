@@ -8,6 +8,7 @@ import {
   NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, type LucideIcon,
 } from 'lucide-react'
 import { site } from '@/data/site'
+import { css2026WrittenResult } from '@/data/css2026Result'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import type { SearchResult } from '@/lib/search'
@@ -20,6 +21,7 @@ import StudyActivityTracker from '@/components/StudyActivityTracker'
 import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
+import { shouldShowCss2026ResultAnnouncement } from '@/lib/resultAnnouncement'
 import {
   getRouteScrollPosition,
   parseRouteScrollState,
@@ -175,6 +177,7 @@ function NotificationBar() {
     }
   })
   const active = [
+    { id: 'css-2026-result', kind: 'platform' as const, text: `CSS 2026 written result announced · ${css2026WrittenResult.qualifiedCandidates} candidates qualified · View the complete result`, link: css2026WrittenResult.pagePath },
     ...mockNotices,
     { id: 'test-series', kind: 'platform' as const, text: 'Customized CSS written test series by Miss Sadia Zahoor, PAS', link: '/test-series' },
     { id: 'instagram-posts', kind: 'platform' as const, text: 'Follow CSS Vista on Instagram for preparation posts', link: site.instagram },
@@ -301,6 +304,39 @@ function SocialLinks({ compact = false }: { compact?: boolean }) {
         </a>
       ))}
     </div>
+  )
+}
+
+function Css2026ResultAnnouncement() {
+  return (
+    <section className="no-print border-b border-amber-200 bg-amber-50/95 text-emerald-950" aria-label="CSS 2026 written result announcement">
+      <div className="mx-auto flex min-h-14 max-w-[1520px] items-center gap-2 px-3 py-2 sm:gap-3 sm:px-6">
+        <span className="shrink-0 rounded-full bg-amber-300 px-2 py-1 text-[9px] font-extrabold uppercase tracking-[0.12em] text-amber-950 sm:text-[10px]">
+          Just announced
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-xs font-extrabold sm:text-sm">CSS 2026 Written Result</p>
+          <p className="truncate text-[10px] text-emerald-900/75 sm:text-xs">
+            {css2026WrittenResult.qualifiedCandidates} candidates qualified · Official result PDF available
+          </p>
+        </div>
+        <Link
+          to={css2026WrittenResult.pagePath}
+          className="cssv-tap inline-flex min-h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-emerald-900 px-3 text-[10px] font-bold text-white transition-colors hover:bg-emerald-800 sm:px-4 sm:text-xs"
+          aria-label="View the CSS 2026 written result"
+        >
+          <FileText className="h-3.5 w-3.5" />
+          View result
+        </Link>
+        <a
+          href={css2026WrittenResult.pdfUrl}
+          download={css2026WrittenResult.downloadFilename}
+          className="cssv-tap hidden min-h-9 shrink-0 items-center justify-center rounded-lg border border-emerald-800/20 bg-white px-3 text-xs font-bold text-emerald-900 transition-colors hover:bg-emerald-50 sm:inline-flex"
+        >
+          Download PDF
+        </a>
+      </div>
+    </section>
   )
 }
 
@@ -890,6 +926,8 @@ export default function Layout() {
         )}
         <BackBar onBack={goBack} />
       </header>
+
+      {shouldShowCss2026ResultAnnouncement(location.pathname) && <Css2026ResultAnnouncement />}
 
       {/* Mobile drawer */}
       <div

@@ -590,9 +590,9 @@ export default function Home() {
           <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
         </button>
 
-        <HomeHero />
-
         <Css2026ResultCard />
+
+        <HomeHero />
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 
