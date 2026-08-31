@@ -308,6 +308,26 @@ function SocialLinks({ compact = false }: { compact?: boolean }) {
 }
 
 function Css2026ResultAnnouncement() {
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return true
+    try {
+      return window.sessionStorage.getItem('cssVistaCss2026ResultAnnouncementHidden') !== '1'
+    } catch {
+      return true
+    }
+  })
+
+  const hideAnnouncement = () => {
+    setVisible(false)
+    try {
+      window.sessionStorage.setItem('cssVistaCss2026ResultAnnouncementHidden', '1')
+    } catch {
+      // The close control still works when browser storage is unavailable.
+    }
+  }
+
+  if (!visible) return null
+
   return (
     <section className="no-print border-b border-amber-200 bg-amber-50/95 text-emerald-950" aria-label="CSS 2026 written result announcement">
       <div className="mx-auto flex min-h-14 max-w-[1520px] items-center gap-2 px-3 py-2 sm:gap-3 sm:px-6">
@@ -335,6 +355,15 @@ function Css2026ResultAnnouncement() {
         >
           Download PDF
         </a>
+        <button
+          type="button"
+          onClick={hideAnnouncement}
+          className="cssv-tap grid h-9 w-9 shrink-0 place-items-center rounded-full text-emerald-950/70 transition-colors hover:bg-amber-100 hover:text-emerald-950"
+          aria-label="Hide CSS 2026 written result announcement for this session"
+          title="Hide announcement"
+        >
+          <X className="h-4 w-4" />
+        </button>
       </div>
     </section>
   )
