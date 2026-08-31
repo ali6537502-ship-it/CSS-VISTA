@@ -19,6 +19,7 @@ import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
 import TutorialAnnouncement from '@/components/TutorialAnnouncement'
+import NotesDiscountAnnouncement from '@/components/NotesDiscountAnnouncement'
 
 interface LinkCard {
   title: string
@@ -644,6 +645,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <NotesDiscountAnnouncement />
 
         <TutorialAnnouncement />
 
