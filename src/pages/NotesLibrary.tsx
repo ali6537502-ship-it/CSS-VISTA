@@ -55,7 +55,7 @@ export default function NotesLibrary() {
                 <details className="group mt-4 overflow-hidden rounded-xl border bg-emerald-50/50">
                   <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-3 text-sm font-bold text-pine marker:hidden">
                     <ListChecks className="h-4 w-4 shrink-0 text-emerald-700" />
-                    <span className="min-w-0 flex-1">Complete topic coverage</span>
+                    <span className="min-w-0 flex-1">Topics covered in the notes</span>
                     <span className="shrink-0 rounded-full bg-white px-2 py-1 text-[10px] text-emerald-800">{product.topics.length} topics</span>
                     <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
                   </summary>
@@ -66,16 +66,23 @@ export default function NotesLibrary() {
                   </div>
                 </details>
               )}
-              <div className="mt-4 space-y-2" aria-label={`${product.subject} available notes`}>
-                {[...product.samples].sort((left, right) => Number(right.kind !== 'image-pages') - Number(left.kind !== 'image-pages')).map((sample) => (
-                  <Link key={sample.id} to={`/notes/view/${product.id}/${sample.id}`} className="flex w-full items-center gap-2 rounded-lg border bg-secondary/35 px-3 py-2.5 text-left text-sm font-semibold text-pine hover:border-emerald-600 hover:bg-emerald-50">
-                    {sample.kind !== 'image-pages' ? <FileText className="h-4 w-4 shrink-0" /> : <FileImage className="h-4 w-4 shrink-0" />}
-                    <span className="min-w-0 flex-1"><span className="block">{sample.title}</span><span className="mt-0.5 block text-xs font-normal text-muted-foreground">{sample.pages} pages · {formatFileSize(sample.sizeBytes)} · {sample.kind === 'pdf' ? 'complete PDF' : sample.kind === 'docx' ? 'complete Word document' : 'all supplied public pages'}</span></span>
-                    <Eye className="h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
-                    <span className="sr-only">View available note</span>
-                  </Link>
-                ))}
-              </div>
+              <details className="group mt-3 overflow-hidden rounded-xl border bg-emerald-50/50">
+                <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-3 text-sm font-bold text-pine marker:hidden">
+                  <FileText className="h-4 w-4 shrink-0 text-emerald-700" />
+                  <span className="min-w-0 flex-1">Sample notes</span>
+                  <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="space-y-2 border-t bg-white p-3" aria-label={`${product.subject} sample notes`}>
+                  {[...product.samples].sort((left, right) => Number(right.kind !== 'image-pages') - Number(left.kind !== 'image-pages')).map((sample) => (
+                    <Link key={sample.id} to={`/notes/view/${product.id}/${sample.id}`} className="flex w-full items-center gap-2 rounded-lg border bg-secondary/35 px-3 py-2.5 text-left text-sm font-semibold text-pine hover:border-emerald-600 hover:bg-emerald-50">
+                      {sample.kind !== 'image-pages' ? <FileText className="h-4 w-4 shrink-0" /> : <FileImage className="h-4 w-4 shrink-0" />}
+                      <span className="min-w-0 flex-1"><span className="block">{sample.title}</span><span className="mt-0.5 block text-xs font-normal text-muted-foreground">{sample.pages} pages · {formatFileSize(sample.sizeBytes)} · {sample.kind === 'pdf' ? 'complete PDF' : sample.kind === 'docx' ? 'complete Word document' : 'all supplied public pages'}</span></span>
+                      <Eye className="h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+                      <span className="sr-only">View available note</span>
+                    </Link>
+                  ))}
+                </div>
+              </details>
               <a href={contact(product.subject)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
             </article>
           ))}
