@@ -79,9 +79,9 @@ const featuredServices = [
     variant: 'handwritten',
   },
   {
-    eyebrow: 'PREMIUM NOTES',
-    title: 'CSS Premium Notes Library',
-    description: 'Structured material for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History.',
+    eyebrow: 'CSS NOTES',
+    title: 'CSS Notes by Sir Ali Hassan Sargana',
+    description: 'Structured examination notes for Current Affairs, Pakistan Affairs, Criminology and Political Science.',
     to: '/notes',
     action: 'View library',
     icon: LibraryBig,

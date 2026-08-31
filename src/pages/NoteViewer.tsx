@@ -14,7 +14,7 @@ function useDocumentMetadata(title: string | undefined) {
   useEffect(() => {
     if (!title) return
     const previous = document.title
-    document.title = `${title} Sample Notes | CSS Vista`
+    document.title = `${title} Notes | CSS Vista`
     return () => { document.title = previous }
   }, [title])
 }
@@ -26,27 +26,33 @@ export default function NoteViewer() {
   const product = record?.product
   const [page, setPage] = useState(1)
   const [zoom, setZoom] = useState(100)
-  const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
-  const [pdfRetry, setPdfRetry] = useState(0)
+  const [documentAvailable, setDocumentAvailable] = useState<boolean | null>(null)
+  const [documentRetry, setDocumentRetry] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const viewerRef = useRef<HTMLDivElement>(null)
   useDocumentMetadata(noteDoc?.title)
 
   useEffect(() => {
-    if (!noteDoc || noteDoc.kind !== 'pdf' || !noteDoc.url) {
-      setPdfAvailable(null)
+    if (!noteDoc || noteDoc.kind === 'image-pages' || !noteDoc.url) {
+      setDocumentAvailable(null)
       return
     }
     let active = true
-    setPdfAvailable(null)
+    setDocumentAvailable(null)
     fetch(noteDoc.url, { method: 'HEAD' })
       .then((response) => {
         const type = response.headers.get('content-type')?.toLowerCase() ?? ''
-        if (active) setPdfAvailable(response.ok && type.includes('application/pdf'))
+        const validType = type === '' || (
+          noteDoc.kind === 'pdf'
+            ? type.includes('application/pdf')
+            : type.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+              || type.includes('application/octet-stream')
+        )
+        if (active) setDocumentAvailable(response.ok && validType)
       })
-      .catch(() => active && setPdfAvailable(false))
+      .catch(() => active && setDocumentAvailable(false))
     return () => { active = false }
-  }, [noteDoc, pdfRetry])
+  }, [noteDoc, documentRetry])
 
   useEffect(() => {
     const update = () => setIsFullscreen(document.fullscreenElement === viewerRef.current)
@@ -104,14 +110,20 @@ export default function NoteViewer() {
 
   const ali = mentors.find((mentor) => mentor.id === 'ali')!
   const inquiry = waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${product.subject} notes available on CSS VISTA. Please share the price and purchase details.`)
-  const pdfName = safeDownloadName(`${product.subject}-${noteDoc.title}`)
+  const isCompleteDocument = noteDoc.kind !== 'image-pages'
+  const fileTypeLabel = noteDoc.kind === 'pdf' ? 'PDF document' : noteDoc.kind === 'docx' ? 'Word document' : 'Page images'
+  const fileActionLabel = noteDoc.kind === 'pdf' ? 'PDF' : 'document'
+  const downloadName = safeDownloadName(`${product.subject}-${noteDoc.title}`, noteDoc.kind === 'docx' ? 'docx' : 'pdf')
+  const officeEmbedUrl = noteDoc.kind === 'docx' && noteDoc.url
+    ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(new URL(noteDoc.url, 'https://www.css-vista.com').href)}`
+    : null
 
   return (
     <div>
-      <PageHeader title={noteDoc.title} description={`${noteDoc.kind === 'pdf' ? 'Complete supplied note' : 'Three-page preview'} from ${product.subject}.`}>
+      <PageHeader title={noteDoc.title} description={`${isCompleteDocument ? 'Complete supplied note' : 'All supplied public pages'} from ${product.subject}.`}>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Badge tone="green">{noteDoc.kind === 'pdf' ? 'Complete supplied note' : 'Preview'}</Badge>
-          <Badge tone="gray">{noteDoc.kind === 'pdf' ? 'PDF document' : 'Page images'}</Badge>
+          <Badge tone="green">{isCompleteDocument ? 'Complete supplied note' : 'Public pages'}</Badge>
+          <Badge tone="gray">{fileTypeLabel}</Badge>
           <Badge tone="gray">{noteDoc.pages} pages</Badge>
           <Badge tone="gray">{formatFileSize(noteDoc.sizeBytes)}</Badge>
         </div>
@@ -120,16 +132,16 @@ export default function NoteViewer() {
       <main className="mx-auto max-w-7xl space-y-5 px-4 py-7">
         <div className="flex flex-wrap items-center gap-2 rounded-xl border bg-white p-3 shadow-sm">
           <Link to="/notes" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ArrowLeft className="h-4 w-4" /> Notes Library</Link>
-          <span className="mr-auto text-sm text-muted-foreground">{noteDoc.kind === 'pdf' ? 'Complete supplied document' : 'Available preview'} · {noteDoc.pages} pages</span>
-          {noteDoc.kind === 'pdf' && noteDoc.url && pdfAvailable && <>
-            <a href={noteDoc.url} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ExternalLink className="h-4 w-4" /> Open PDF</a>
-            <a href={noteDoc.url} download={pdfName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download PDF</a>
+          <span className="mr-auto text-sm text-muted-foreground">{isCompleteDocument ? 'Complete supplied document' : 'All supplied public pages'} · {noteDoc.pages} pages</span>
+          {isCompleteDocument && noteDoc.url && documentAvailable && <>
+            <a href={noteDoc.url} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg border px-3 text-sm font-bold text-pine hover:bg-secondary"><ExternalLink className="h-4 w-4" /> Open {fileActionLabel}</a>
+            <a href={noteDoc.url} download={downloadName} data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-pine px-3 text-sm font-bold text-white hover:bg-emerald-900"><Download className="h-4 w-4" /> Download {fileActionLabel}</a>
           </>}
           <a href={inquiry} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-10 items-center gap-1.5 rounded-lg bg-emerald-600 px-3 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
         </div>
 
         {noteDoc.kind === 'image-pages' ? (
-          <section ref={viewerRef} aria-label={`${noteDoc.title} complete sample viewer`} className="overflow-hidden rounded-xl border bg-slate-900 text-white shadow-lg">
+          <section ref={viewerRef} aria-label={`${noteDoc.title} supplied pages viewer`} className="overflow-hidden rounded-xl border bg-slate-900 text-white shadow-lg">
             <div className="flex flex-wrap items-center gap-2 border-b border-white/15 bg-slate-950 px-3 py-2.5">
               <button type="button" onClick={() => goToPage(page - 1)} disabled={page === 1} className="grid h-9 w-9 place-items-center rounded-lg border border-white/20 disabled:opacity-40" aria-label="Previous page"><ChevronLeft className="h-4 w-4" /></button>
               <label className="flex items-center gap-1 text-sm"><span className="sr-only">Current page</span><input type="number" min={1} max={noteDoc.pages} value={page} onChange={(event) => goToPage(Number(event.target.value))} className="h-9 w-16 rounded-lg border border-white/20 bg-white/10 px-2 text-center" /> <span className="text-white/65">of {noteDoc.pages}</span></label>
@@ -148,29 +160,26 @@ export default function NoteViewer() {
                 {Array.from({ length: noteDoc.pages }, (_, index) => (
                   <figure key={index} data-note-page={index + 1} className="scroll-mt-4 overflow-hidden rounded bg-white shadow-2xl">
                     <img src={`/note-previews/${noteDoc.previewFolder}/page-${index + 1}.webp`} alt={`${noteDoc.title}, page ${index + 1} of ${noteDoc.pages}`} loading={index === 0 ? 'eager' : 'lazy'} draggable={false} className="w-full" />
-                    <figcaption className="border-t px-3 py-2 text-right text-[10px] font-bold uppercase tracking-widest text-slate-500">CSS Vista sample · Page {index + 1} of {noteDoc.pages}</figcaption>
+                    <figcaption className="border-t px-3 py-2 text-right text-[10px] font-bold uppercase tracking-widest text-slate-500">CSS Vista notes · Page {index + 1} of {noteDoc.pages}</figcaption>
                   </figure>
                 ))}
               </div>
             </div>
           </section>
-        ) : pdfAvailable === false ? (
+        ) : documentAvailable === false ? (
           <section role="alert" className="rounded-xl border bg-white p-6 text-center">
             <FileText className="mx-auto h-9 w-9 text-muted-foreground" />
-            <h2 className="mt-3 font-display text-xl font-bold text-pine">Sample PDF is temporarily unavailable</h2>
+            <h2 className="mt-3 font-display text-xl font-bold text-pine">This note is temporarily unavailable</h2>
             <p className="mt-1 text-sm text-muted-foreground">The document could not be verified. Return to the library or retry after refreshing this page.</p>
-            <button type="button" onClick={() => setPdfRetry((value) => value + 1)} className="mt-4 inline-flex h-10 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary"><RefreshCw className="h-4 w-4" /> Retry</button>
+            <button type="button" onClick={() => setDocumentRetry((value) => value + 1)} className="mt-4 inline-flex h-10 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary"><RefreshCw className="h-4 w-4" /> Retry</button>
           </section>
         ) : (
-          <section aria-label={`${noteDoc.title} PDF viewer`} className="overflow-hidden rounded-xl border bg-white shadow-sm">
-            {pdfAvailable === null && <p className="p-4 text-sm text-muted-foreground" role="status" aria-live="polite">Verifying the authorised PDF…</p>}
-            {noteDoc.url && <iframe src={noteDoc.url} title={`${noteDoc.title}, ${noteDoc.pages}-page sample`} className="h-[76vh] min-h-[560px] w-full" />}
+          <section aria-label={`${noteDoc.title} document viewer`} className="overflow-hidden rounded-xl border bg-white shadow-sm">
+            {documentAvailable === null && <p className="p-4 text-sm text-muted-foreground" role="status" aria-live="polite">Verifying the supplied document…</p>}
+            {noteDoc.kind === 'pdf' && noteDoc.url && <iframe src={noteDoc.url} title={`${noteDoc.title}, ${noteDoc.pages}-page PDF`} className="h-[76vh] min-h-[560px] w-full" />}
+            {noteDoc.kind === 'docx' && officeEmbedUrl && <iframe src={officeEmbedUrl} title={`${noteDoc.title}, ${noteDoc.pages}-page Word document`} className="h-[76vh] min-h-[560px] w-full" />}
           </section>
         )}
-
-        <p className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-relaxed text-emerald-950">
-          This viewer contains every supplied page of this file. PDF entries are shown in full; three-page image entries remain labelled as previews because no complete source file is present in the project.
-        </p>
       </main>
     </div>
   )

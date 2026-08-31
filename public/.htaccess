@@ -5,6 +5,7 @@ DirectoryIndex index.html
 # receives the file itself instead of index.html.
 <IfModule mod_mime.c>
   AddType text/plain .txt
+  AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx
 </IfModule>
 
 <IfModule mod_headers.c>

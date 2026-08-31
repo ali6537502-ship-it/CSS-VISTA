@@ -178,7 +178,7 @@ const localCorpus: SearchDocument[] = [
       id: `notes-sample-${product.id}-${sample.id}`,
       title: sample.title,
       category: 'Sample Notes',
-      snippet: `${product.subject} authorised ${sample.pages}-page ${sample.kind === 'pdf' ? 'PDF' : 'sample'} preview`,
+      snippet: `${product.subject} authorised ${sample.pages}-page ${sample.kind === 'pdf' ? 'PDF' : sample.kind === 'docx' ? 'Word document' : 'public preview'}`,
       link: `/notes/view/${product.id}/${sample.id}`,
     })),
   ]),
