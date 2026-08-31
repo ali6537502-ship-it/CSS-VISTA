@@ -209,6 +209,10 @@ export const bundle = {
 export const europeanHistoryHiddenUntil = Date.parse('2026-09-01T00:00:00+05:00')
 export const notesDiscountEndsAt = Date.parse('2026-09-01T00:00:00+05:00')
 
+export function isNotesDiscountActive(now = Date.now()) {
+  return now < notesDiscountEndsAt
+}
+
 export function isEuropeanHistoryTemporarilyHidden(now = Date.now()) {
   return now < europeanHistoryHiddenUntil
 }
@@ -227,7 +231,7 @@ export function getVisibleBundleIncludes(now = Date.now()) {
 
 export function getNoteDisplayPrice(product: NoteProduct, now = Date.now()) {
   const hasPrice = product.pricing.regularPrice > 0
-  const hasActiveOffer = hasPrice && now < notesDiscountEndsAt
+  const hasActiveOffer = hasPrice && isNotesDiscountActive(now)
   const price = hasActiveOffer ? product.pricing.offerPrice : product.pricing.regularPrice
   const discountPercent = hasActiveOffer
     ? Math.round((1 - product.pricing.offerPrice / product.pricing.regularPrice) * 100)
