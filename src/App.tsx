@@ -55,6 +55,7 @@ const Privacy = lazy(() => import('./pages/Privacy'))
 const Factbook = lazy(() => import('./pages/Factbook'))
 const Consultation = lazy(() => import('./pages/Consultation'))
 const ExamIntelligence = lazy(() => import('./pages/ExamIntelligence'))
+const Css2026Result = lazy(() => import('./pages/Css2026Result'))
 
 function PageLoader() {
   return (
@@ -126,6 +127,7 @@ export default function App() {
         <Route path="/factbook" element={<S><Factbook /></S>} />
         <Route path="/consultation" element={<S><Consultation /></S>} />
         <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />
+        <Route path="/css-2026-written-result" element={<S><Css2026Result /></S>} />
         <Route path="/privacy" element={<S><Privacy /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />

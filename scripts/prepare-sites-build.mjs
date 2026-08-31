@@ -18,6 +18,7 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
   throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${requestedOrigin}`)
 }
 const siteOrigin = siteUrl.origin
+const css2026Result = JSON.parse(await readFile(join(root, 'src', 'data', 'css2026Result.json'), 'utf8'))
 
 // Keep the Sites preview bundle lean while preserving the complete study
 // archive in GitHub. Its Worker can use the repository fallback below.
@@ -50,11 +51,12 @@ function jsonLd(value) {
   return JSON.stringify(value).replaceAll('<', '\\u003c')
 }
 
-function replaceMeta(html, { title, description, canonical, body, structuredData }) {
+function replaceMeta(html, { title, description, canonical, body, structuredData, ogType = 'website', additionalMeta = '' }) {
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(description)}" />`)
     .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(title)}" />`)
+    .replace(/<meta property="og:type" content="[^"]*" \/>/, `<meta property="og:type" content="${escapeHtml(ogType)}" />`)
     .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(description)}" />`)
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
@@ -62,7 +64,7 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/\s*<meta property="og:image" content="[^"]*" \/>/, '')
     .replace(/\s*<meta name="twitter:image" content="[^"]*" \/>/, '')
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
-    .replace('</head>', `    <script type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
+    .replace('</head>', `${additionalMeta ? `    ${additionalMeta}\n` : ''}    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
     .replaceAll('__SITE_ORIGIN__', siteOrigin)
 }
@@ -85,6 +87,10 @@ function paperBody(paper) {
 function collectionBody(examination, year, papers) {
   const links = papers.map((paper) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${paper.id}">${escapeHtml(paperTitle(paper))}</a></li>`).join('')
   return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Complete year collection</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${examination} ${year} Past Papers</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">Browse ${papers.length} ${examination} ${year} past-paper PDFs by subject.</p><ul class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2">${links}</ul><a class="mt-5 inline-block font-bold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete past-paper archive</a></main>`
+}
+
+function css2026ResultBody() {
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">FPSC written result · announced ${escapeHtml(css2026Result.announcedDateLabel)}</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(css2026Result.title)}</h1><p class="mt-4 text-base leading-relaxed text-muted-foreground">View and download the complete ${css2026Result.pageCount}-page list of ${css2026Result.qualifiedCandidates} candidates who qualified the written portion of the CSS Competitive Examination 2026.</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-3"><div><dt class="text-xs text-muted-foreground">Announced</dt><dd class="font-bold text-pine">${escapeHtml(css2026Result.announcedDateLabel)}</dd></div><div><dt class="text-xs text-muted-foreground">Qualified candidates</dt><dd class="font-bold text-pine">${css2026Result.qualifiedCandidates}</dd></div><div><dt class="text-xs text-muted-foreground">Document</dt><dd class="font-bold text-pine">${css2026Result.pageCount} pages · ${escapeHtml(css2026Result.fileSizeLabel)}</dd></div></dl><div class="mt-5 flex flex-wrap gap-3"><a href="${escapeHtml(css2026Result.pdfUrl)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">View result PDF</a><a href="${escapeHtml(css2026Result.pdfUrl)}" download="${escapeHtml(css2026Result.downloadFilename)}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Download result</a></div><section class="mt-8"><h2 class="font-display text-2xl font-bold text-pine">How to check the CSS 2026 result</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Open the PDF and use its Find or Search command to locate a six-digit roll number or candidate name. This is the written-portion result, not the final allocation result.</p><a class="mt-4 inline-block font-bold text-emerald-800 underline underline-offset-2" href="${escapeHtml(css2026Result.officialResultsUrl)}">Verify updates on the FPSC results page</a></section></main>`
 }
 
 const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
@@ -143,6 +149,56 @@ for (const [key, papers] of collections) {
   }))
 }
 
+const css2026ResultCanonical = `${siteOrigin}${css2026Result.pagePath}`
+const css2026ResultTitle = `${css2026Result.title} | CSS Vista`
+const css2026ResultStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'NewsArticle',
+      headline: css2026Result.title,
+      description: css2026Result.description,
+      datePublished: css2026Result.announcedDate,
+      dateModified: css2026Result.announcedDate,
+      mainEntityOfPage: css2026ResultCanonical,
+      author: { '@type': 'Organization', name: 'CSS Vista', url: siteOrigin },
+      publisher: { '@type': 'Organization', name: 'CSS Vista', url: siteOrigin, logo: { '@type': 'ImageObject', url: `${siteOrigin}/icon-512.png` } },
+      isBasedOn: css2026Result.officialResultsUrl,
+      about: 'CSS Competitive Examination 2026 written result',
+    },
+    {
+      '@type': 'DigitalDocument',
+      name: css2026Result.title,
+      description: css2026Result.description,
+      url: css2026ResultCanonical,
+      contentUrl: `${siteOrigin}${css2026Result.pdfUrl}`,
+      encodingFormat: 'application/pdf',
+      numberOfPages: css2026Result.pageCount,
+      datePublished: css2026Result.announcedDate,
+      inLanguage: 'en',
+      provider: { '@type': 'Organization', name: 'CSS Vista', url: siteOrigin },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteOrigin}/` },
+        { '@type': 'ListItem', position: 2, name: 'FPSC Updates', item: `${siteOrigin}/fpsc-updates` },
+        { '@type': 'ListItem', position: 3, name: css2026Result.shortTitle, item: css2026ResultCanonical },
+      ],
+    },
+  ],
+}
+await mkdir(join(clientDir, 'seo'), { recursive: true })
+await writeFile(join(clientDir, 'seo', 'css-2026-written-result.html'), replaceMeta(clientIndex, {
+  title: css2026ResultTitle,
+  description: css2026Result.description,
+  canonical: css2026ResultCanonical,
+  structuredData: css2026ResultStructuredData,
+  body: css2026ResultBody(),
+  ogType: 'article',
+  additionalMeta: `<meta property="article:published_time" content="${escapeHtml(css2026Result.announcedDate)}" />`,
+}))
+
 const coreUrls = [
   '/',
   '/subjects/compulsory',
@@ -162,13 +218,16 @@ const coreUrls = [
   '/consultation',
   '/exam-intelligence',
   '/study-tools',
+  css2026Result.pagePath,
 ]
 const sitemapUrls = [
   ...coreUrls.map((path) => `${siteOrigin}${path}`),
   ...[...collections.keys()].map((key) => `${siteOrigin}/past-papers/${key}`),
   ...pastPapers.map((paper) => `${siteOrigin}/past-papers/view/${paper.id}`),
 ]
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => url === css2026ResultCanonical
+  ? `  <url><loc>${escapeHtml(url)}</loc><lastmod>${escapeHtml(css2026Result.announcedDate)}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>`
+  : `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`
 await writeFile(join(clientDir, 'sitemap.xml'), sitemap)
 await writeFile(join(clientDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteOrigin}/sitemap.xml\n`)
 if (!emitWorker) {
@@ -210,11 +269,13 @@ export default {
     const url = new URL(request.url)
     const paperMatch = url.pathname.match(/^\\/past-papers\\/view\\/([a-z0-9-]+)\\/?$/)
     const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc|mpt)\\/(\\d{4})\\/?$/)
-    const seoPath = paperMatch
-      ? '/seo/past-papers/' + paperMatch[1]
-      : collectionMatch
-        ? '/seo/past-paper-collections/' + collectionMatch[1] + '/' + collectionMatch[2]
-        : null
+    const seoPath = url.pathname.replace(/\/$/, '') === '${css2026Result.pagePath}'
+      ? '/seo/css-2026-written-result'
+      : paperMatch
+        ? '/seo/past-papers/' + paperMatch[1]
+        : collectionMatch
+          ? '/seo/past-paper-collections/' + collectionMatch[1] + '/' + collectionMatch[2]
+          : null
     let response = seoPath
       ? await fetchPackagedAsset(new Request(new URL(seoPath, url), request), env)
       : await fetchPackagedAsset(request, env)

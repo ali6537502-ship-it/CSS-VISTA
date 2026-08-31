@@ -23,6 +23,7 @@ test('strictly excluded routes fail closed with no reserved height', () => {
     '/css-mcqs',
     '/answer-timer',
     '/past-papers/view/css-2025',
+    '/css-2026-written-result',
     '/notes/view/criminology/cybercrime',
     '/account',
     '/dashboard',

@@ -54,6 +54,7 @@ DirectoryIndex index.html
   RewriteRule ^(?:book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers)/?$ index.html [L,NC]
 
   # Serve the generated search-friendly past-paper pages at their public URLs.
+  RewriteRule ^css-2026-written-result/?$ seo/css-2026-written-result.html [L]
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]
   RewriteRule ^past-papers/(css|pms|ppsc|mpt)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
 

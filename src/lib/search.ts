@@ -12,6 +12,7 @@ import { defaultHomeCards } from '@/data/homeCards'
 import { noteProducts } from '@/data/notes'
 import { lectureCourses } from '@/data/lectures'
 import { handwrittenNoteSubjects } from '@/data/handwrittenNotes'
+import { css2026WrittenResult } from '@/data/css2026Result'
 
 export interface SearchResult {
   id: string
@@ -97,6 +98,14 @@ const pageCorpus: SearchDocument[] = defaultHomeCards.map((card) => ({
 
 const localCorpus: SearchDocument[] = [
   ...pageCorpus,
+  {
+    id: 'css-2026-written-result',
+    title: css2026WrittenResult.title,
+    category: 'FPSC Result',
+    snippet: `${css2026WrittenResult.qualifiedCandidates} candidates qualified the written portion. Announced ${css2026WrittenResult.announcedDateLabel}; complete PDF available to view or download.`,
+    link: css2026WrittenResult.pagePath,
+    keywords: 'CSS 2026 result written result FPSC result qualified candidates roll number list download PDF',
+  },
   {
     id: 'one-liner-gk',
     title: 'One-Liner GK',

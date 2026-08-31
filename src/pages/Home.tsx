@@ -18,6 +18,7 @@ import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { printPdfFile } from '@/components/PrintMenu'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
+import { css2026WrittenResult } from '@/data/css2026Result'
 import TutorialAnnouncement from '@/components/TutorialAnnouncement'
 import NotesDiscountAnnouncement from '@/components/NotesDiscountAnnouncement'
 
@@ -408,6 +409,35 @@ function ResourceToggle() {
   )
 }
 
+function Css2026ResultCard() {
+  return (
+    <section className="cssv-reveal mt-3" aria-labelledby="css-2026-result-home-title">
+      <article className="cssv-glass-panel overflow-hidden rounded-2xl border border-emerald-900/15">
+        <div className="grid gap-0 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="flex min-w-0 items-start gap-3 p-3.5 sm:p-4">
+            <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
+              <FileText className="h-5 w-5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[9px] font-extrabold uppercase tracking-[0.16em] text-amber-700">Latest FPSC result · {css2026WrittenResult.announcedDateLabel}</p>
+              <h2 id="css-2026-result-home-title" className="mt-1 text-[16px] font-black tracking-[-0.02em] text-slate-900 sm:text-[18px]">CSS 2026 written result announced</h2>
+              <p className="mt-1 text-[11px] leading-relaxed text-slate-500">View or download the complete list of {css2026WrittenResult.qualifiedCandidates} candidates who qualified the written portion.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 border-t border-emerald-900/10 bg-emerald-50/60 p-3 sm:border-l sm:border-t-0">
+            <Link to={css2026WrittenResult.pagePath} className="cssv-tap inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-900 px-4 text-[11px] font-bold text-white sm:flex-none">
+              View result <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a href={css2026WrittenResult.pdfUrl} download={css2026WrittenResult.downloadFilename} className="cssv-tap inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-lg border bg-white px-4 text-[11px] font-bold text-emerald-900 sm:flex-none">
+              <Download className="h-3.5 w-3.5" /> Download
+            </a>
+          </div>
+        </div>
+      </article>
+    </section>
+  )
+}
+
 function WeeklyMagazineCard() {
   const available = Boolean(weeklyMagazine.pdfUrl)
 
@@ -561,6 +591,8 @@ export default function Home() {
         </button>
 
         <HomeHero />
+
+        <Css2026ResultCard />
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 

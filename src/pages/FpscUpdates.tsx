@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { ExternalLink, Download } from 'lucide-react'
 import { PageHeader, Section, Badge, OfficialNotice } from '@/components/shared'
 import { css2027ScheduleSource, notifications2027 as seedNotifs, css2027Dates as seedDates, type FpscNotification2027 } from '@/data/css2027'
 import { mergedNotifications, mergedDates } from '@/lib/admin'
+import { css2026WrittenResult } from '@/data/css2026Result'
 
 const notifCats: (FpscNotification2027['category'] | 'All')[] = [
   'All', 'MPT Advertisement', 'MPT Applications', 'MPT Examination', 'MPT Result',
@@ -34,9 +35,26 @@ export default function FpscUpdates() {
 
   return (
     <div>
-      <PageHeader title="FPSC Notifications - CSS 2027" description="Official FPSC notifications for the CSS 2027 cycle and the important dates - posted only after verification from fpsc.gov.pk. No rumoured or invented dates." />
+      <PageHeader title="FPSC Notifications & CSS Results" description="Verified FPSC notifications, current CSS results and important dates. No rumoured or invented dates." />
       <div className="mx-auto max-w-5xl space-y-8 px-4 py-10">
         <OfficialNotice />
+
+        <article className="overflow-hidden rounded-2xl border border-emerald-900/15 bg-white shadow-sm">
+          <div className="border-b border-emerald-900/10 bg-emerald-950 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-emerald-50">
+            Latest CSS written result
+          </div>
+          <div className="p-5 sm:flex sm:items-center sm:gap-6">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-bold text-amber-700">Announced {css2026WrittenResult.announcedDateLabel}</p>
+              <h2 className="mt-1 text-xl font-black text-emerald-950">CSS 2026 Written Result - Qualified Candidates</h2>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">The complete {css2026WrittenResult.pageCount}-page list contains {css2026WrittenResult.qualifiedCandidates} candidates who qualified the written portion.</p>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-0 sm:shrink-0">
+              <Link to={css2026WrittenResult.pagePath} className="inline-flex min-h-10 items-center rounded-lg bg-pine px-4 py-2 text-sm font-bold text-emerald-50 hover:bg-emerald-900">View result</Link>
+              <a href={css2026WrittenResult.pdfUrl} download={css2026WrittenResult.downloadFilename} className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-bold text-pine hover:bg-secondary"><Download className="h-4 w-4" /> Download</a>
+            </div>
+          </div>
+        </article>
 
         <div className="flex gap-2 border-b">
           {([['notifs', 'FPSC Notifications - CSS 2027'], ['dates', 'CSS 2027 Important Dates']] as const).map(([id, label]) => (
