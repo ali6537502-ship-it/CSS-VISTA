@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import {
-  BookOpenCheck, ChevronLeft, ChevronRight, Clock3,
-  Filter, Layers3, Search,
+  BookOpenCheck, ChevronLeft, ChevronRight,
+  Filter, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
@@ -13,7 +13,7 @@ import {
 } from '@/data/oneLinerGk'
 import { formatOneLiner } from '@/lib/oneLinerFormat'
 
-const PAGE_SIZE = 40
+const PAGE_SIZE = 20
 type FreshnessFilter = 'all' | 'stable' | 'dated'
 
 function OneLinerContent({ text }: { text: string }) {
@@ -23,9 +23,9 @@ function OneLinerContent({ text }: { text: string }) {
     return (
       <dl className="flex flex-wrap gap-x-6 gap-y-2">
         {formatted.fields.map((field, index) => (
-          <div key={`${field.label}-${index}`} className="min-w-[125px] flex-1">
+          <div key={`${field.label}-${index}`} className="min-w-[135px] flex-1 rounded-xl border border-emerald-100 bg-emerald-50/55 px-3 py-2.5">
             <dt className="text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-700">{field.label}</dt>
-            <dd className="mt-0.5 text-sm font-semibold leading-snug text-slate-900">{field.value}</dd>
+            <dd className="mt-1 text-sm font-semibold leading-snug text-slate-900">{field.value}</dd>
           </div>
         ))}
       </dl>
@@ -97,11 +97,6 @@ export default function OneLinerGK() {
   }, [selectedSlug, query, subcategory, freshness])
 
   const selectedSummary = index?.categories.find((item) => item.slug === selectedSlug)
-  const datedTotal = useMemo(
-    () => index?.categories.reduce((total, item) => total + item.timeSensitiveCount, 0) ?? 0,
-    [index],
-  )
-
   const filteredNotes = useMemo(() => {
     if (!category) return []
     const normalizedQuery = query.trim().toLocaleLowerCase()
@@ -129,113 +124,98 @@ export default function OneLinerGK() {
   return (
     <div>
       <PageHeader
-        title="One-Liner GK"
-        description="Quick, category-wise study facts extracted and organised from the supplied GK notes."
+        title="GK Quick Revision"
+        description="Clear, subject-wise fact cards designed for fast reading and focused revision."
       />
 
       <main className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
-        <section className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border bg-white p-4">
-            <BookOpenCheck className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 text-2xl font-bold text-pine">{index ? index.total.toLocaleString() : '…'}</p>
-          </div>
-          <div className="rounded-xl border bg-white p-4">
-            <Layers3 className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 text-2xl font-bold text-pine">{index ? index.categories.length : '…'}</p>
-            <p className="text-xs text-muted-foreground">Subject categories</p>
-          </div>
-          <div className="rounded-xl border bg-white p-4">
-            <Clock3 className="h-5 w-5 text-amber-700" />
-            <p className="mt-2 text-2xl font-bold text-pine">{index ? datedTotal.toLocaleString() : '…'}</p>
-            <p className="text-xs text-muted-foreground">Time-sensitive notes clearly marked</p>
-          </div>
-        </section>
-
         {error && (
-          <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
             {error}
           </p>
         )}
 
-        <section className="mt-8" aria-labelledby="one-liner-categories">
-          <h2 id="one-liner-categories" className="font-display text-xl font-bold text-pine">Choose a category</h2>
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-2 sm:flex-wrap">
-            {index?.categories.map((item) => {
-              const active = item.slug === selectedSlug
-              return (
-                <button
-                  key={item.slug}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => chooseCategory(item.slug)}
-                  className={`shrink-0 rounded-lg border px-3 py-2 text-left transition-colors ${
-                    active
-                      ? 'border-emerald-900 bg-pine text-white'
-                      : 'bg-white text-foreground hover:border-emerald-700/50 hover:bg-secondary'
-                  }`}
-                >
-                  <span className="block text-sm font-semibold">{item.name}</span>
-                  <span className={`text-[11px] ${active ? 'text-emerald-100' : 'text-muted-foreground'}`}>
-                    {item.count.toLocaleString()} notes
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-        </section>
-
-        <section className="mt-7" aria-labelledby="one-liner-results">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <h2 id="one-liner-results" className="font-display text-xl font-bold text-pine">
-                {category?.name ?? selectedSummary?.name ?? 'Loading category…'}
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {category ? `${filteredNotes.length.toLocaleString()} matching notes` : 'Loading notes…'}
+        <section className="rounded-2xl border border-emerald-900/15 bg-white p-4 shadow-sm sm:p-5" aria-labelledby="quick-revision-controls">
+          <div className="flex items-start gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
+              <BookOpenCheck className="h-5 w-5" />
+            </span>
+            <div className="min-w-0">
+              <h2 id="quick-revision-controls" className="font-display text-lg font-bold text-pine">Find the facts you need</h2>
+              <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                {index ? `${index.total.toLocaleString()} revision facts across ${index.categories.length} subjects` : 'Loading revision library…'}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Filter className="h-3.5 w-3.5" />
-              Search and filters apply within this category
-            </div>
           </div>
 
-          <div className="mt-4 grid gap-3 rounded-xl border bg-secondary/40 p-3 sm:grid-cols-3">
-            <label className="relative block sm:col-span-1">
-              <span className="sr-only">Search one-liner notes</span>
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search these notes…"
-                className="h-10 w-full rounded-lg border bg-white pl-9 pr-3 text-sm outline-none ring-ring focus:ring-2"
-              />
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="block">
+              <span className="mb-1.5 block text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-800">Subject</span>
+              <select
+                value={selectedSlug}
+                onChange={(event) => chooseCategory(event.target.value)}
+                className="h-11 w-full rounded-xl border bg-white px-3 text-sm font-semibold text-slate-800"
+              >
+                {index?.categories.map((item) => (
+                  <option key={item.slug} value={item.slug}>{item.name} ({item.count.toLocaleString()})</option>
+                ))}
+              </select>
             </label>
-            <label>
-              <span className="sr-only">Filter by subcategory</span>
+            <label className="block lg:col-span-1">
+              <span className="mb-1.5 block text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-800">Search</span>
+              <span className="relative block">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Type a fact or keyword…"
+                  className="h-11 w-full rounded-xl border bg-white pl-9 pr-3 text-sm outline-none ring-ring focus:ring-2"
+                />
+              </span>
+            </label>
+            <label className="block">
+              <span className="mb-1.5 block text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-800">Topic</span>
               <select
                 value={subcategory}
                 onChange={(event) => setSubcategory(event.target.value)}
-                className="h-10 w-full rounded-lg border bg-white px-3 text-sm"
+                className="h-11 w-full rounded-xl border bg-white px-3 text-sm text-slate-800"
               >
-                <option value="all">All subcategories</option>
+                <option value="all">All topics</option>
                 {selectedSummary?.subcategories.map((item) => (
                   <option key={item.name} value={item.name}>{item.name} ({item.count})</option>
                 ))}
               </select>
             </label>
-            <label>
-              <span className="sr-only">Filter by date sensitivity</span>
+            <label className="block">
+              <span className="mb-1.5 block text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-800">Freshness</span>
               <select
                 value={freshness}
                 onChange={(event) => setFreshness(event.target.value as FreshnessFilter)}
-                className="h-10 w-full rounded-lg border bg-white px-3 text-sm"
+                className="h-11 w-full rounded-xl border bg-white px-3 text-sm text-slate-800"
               >
-                <option value="all">All notes</option>
-                <option value="stable">Exclude dated-source notes</option>
-                <option value="dated">Dated-source notes only</option>
+                <option value="all">All facts</option>
+                <option value="stable">Evergreen facts</option>
+                <option value="dated">Dated facts only</option>
               </select>
             </label>
+          </div>
+        </section>
+
+        <section className="mt-7" aria-labelledby="one-liner-results">
+          <div className="flex flex-wrap items-end justify-between gap-3 border-b border-emerald-900/10 pb-3">
+            <div>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-emerald-700">Revision cards</p>
+              <h2 id="one-liner-results" className="mt-1 font-display text-xl font-bold text-pine">
+                {category?.name ?? selectedSummary?.name ?? 'Loading subject…'}
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {category ? `${filteredNotes.length.toLocaleString()} matching facts · 20 per page` : 'Loading facts…'}
+              </p>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Filter className="h-3.5 w-3.5" />
+              Use the controls above to narrow this subject
+            </div>
           </div>
 
           {!category && !error && (
@@ -250,27 +230,23 @@ export default function OneLinerGK() {
             </p>
           )}
 
-          <ol start={resultStart} className="mt-4 grid gap-2">
+          <ol start={resultStart} className="mt-4 grid gap-3">
             {visibleNotes.map((note, indexInPage) => (
-              <li key={note.id} className="rounded-xl border bg-white px-4 py-3">
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 min-w-7 rounded bg-secondary px-1.5 py-1 text-center text-[11px] font-bold text-pine">
+              <li key={note.id} className="rounded-2xl border border-emerald-900/10 bg-white p-4 shadow-sm sm:p-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="grid h-7 min-w-7 place-items-center rounded-full bg-pine px-1.5 text-[11px] font-bold text-white">
                     {resultStart + indexInPage}
                   </span>
-                  <div className="min-w-0 flex-1">
-                    <OneLinerContent text={note.text} />
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-900">
-                        {note.subcategory}
-                      </span>
-                      {note.timeSensitive && (
-                        <span className="rounded bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-900">
-                          Dated source
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-900">
+                    {note.subcategory}
+                  </span>
+                  {note.timeSensitive && (
+                    <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold text-amber-900">
+                      Check current date
+                    </span>
+                  )}
                 </div>
+                <div className="mt-3 min-w-0"><OneLinerContent text={note.text} /></div>
               </li>
             ))}
           </ol>
