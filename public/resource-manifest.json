@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T18:32:41.584Z",
+  "generatedAt": "2026-09-03T19:19:24.523Z",
   "sourceOfTruth": "public filesystem and generated past-paper registry",
-  "resourceCount": 1227,
-  "totalBytes": 1025688569,
+  "resourceCount": 1231,
+  "totalBytes": 1077713759,
   "resources": [
     {
       "id": "book-summaries-304f15848fd94a59",
@@ -3702,6 +3702,34 @@
       "viewUrl": "/language-grammar/urdu.json"
     },
     {
+      "id": "magazines-8ddd7eac12ca6c1e",
+      "title": "Css Vista Current Affairs Weekly 03 September 2026",
+      "category": "Weekly Publications",
+      "source": "Bundled resource",
+      "path": "/magazines/css-vista-current-affairs-weekly-03-september-2026.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 52029226,
+      "sha256": "40e4c157f6c7ba6ed2435069c70cfe84a69a37d68ba9ac85962e503752000dc1",
+      "pageCount": 21,
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/magazines/css-vista-current-affairs-weekly-03-september-2026.pdf",
+      "downloadUrl": "/magazines/css-vista-current-affairs-weekly-03-september-2026.pdf"
+    },
+    {
+      "id": "magazines-6a846dfd92456f29",
+      "title": "Css Vista Current Affairs Weekly 03 September 2026",
+      "category": "Weekly Publications",
+      "source": "Bundled resource",
+      "path": "/magazines/css-vista-current-affairs-weekly-03-september-2026.webp",
+      "mimeType": "image/webp",
+      "sizeBytes": 195208,
+      "sha256": "65afe65d503cf7fbd6fa2159919d735544428dea42c2720687d8f0f65cdf22fa",
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/magazines/css-vista-current-affairs-weekly-03-september-2026.webp"
+    },
+    {
       "id": "magazines-eecbafb5e98c95ee",
       "title": "Css Vista Current Affairs Weekly 15 August 2026",
       "category": "Weekly Publications",
@@ -4336,8 +4364,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-0.json",
       "mimeType": "application/json",
-      "sizeBytes": 305534,
-      "sha256": "ddd5a728074c2bc2f073667c450f20839b1ac33094c1e2afcb7c47c286d5b75c",
+      "sizeBytes": 125416,
+      "sha256": "7eda03d2db0facf5f7c6ed2fc90c2bd8d487e7e554a3a36d270265e3aec997de",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-0.json"
@@ -4349,8 +4377,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-1.json",
       "mimeType": "application/json",
-      "sizeBytes": 368314,
-      "sha256": "05c9fe9bf1e8b790be8eb69341b11e6ce99afe63874e9243dbf707fe6038c4c7",
+      "sizeBytes": 69477,
+      "sha256": "840df9498b76e9846779be12dc6c97ce102aa94cd3bafe8243b70380887faa15",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-1.json"
@@ -4362,8 +4390,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-2.json",
       "mimeType": "application/json",
-      "sizeBytes": 379470,
-      "sha256": "9ef80793316f5d27e3982f06422e5dc59564e2a3191504e4e15fe8e9bc6be722",
+      "sizeBytes": 71955,
+      "sha256": "61906784890f12f4d340f0af0020445296c66db90dbfda9b5d170d409d36ed4c",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-2.json"
@@ -4375,8 +4403,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-3.json",
       "mimeType": "application/json",
-      "sizeBytes": 366569,
-      "sha256": "a2cc9aa1aeb0a4d3b32f788597f419af4bfd9ef17d4b4df8fe914277868cbf2a",
+      "sizeBytes": 70865,
+      "sha256": "8b223efff483813b513a4aa3dde6afd647eb4a3c25f316b902b1649428930c95",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-3.json"
@@ -4388,8 +4416,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-4.json",
       "mimeType": "application/json",
-      "sizeBytes": 359124,
-      "sha256": "ca9d97fcf35f1538dfe73523c8496c5cd7d71ff75ac518609bc7f4f1ad31e040",
+      "sizeBytes": 68667,
+      "sha256": "41d6d33d4b39ef2440a90ec29f9ed2f72dc881f676840d01f36402c5af767096",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-4.json"
@@ -4401,8 +4429,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-5.json",
       "mimeType": "application/json",
-      "sizeBytes": 346408,
-      "sha256": "d294133aee7805bc5f826aa9779d5c39530b02ae197843caafe6a6a05f69821c",
+      "sizeBytes": 67240,
+      "sha256": "ff17144b0225abc88012e5f43376610db18718847a8a8b154436c35144e6e04a",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-5.json"
@@ -4414,8 +4442,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-6.json",
       "mimeType": "application/json",
-      "sizeBytes": 319275,
-      "sha256": "35b075ca22ab1ca1a838129efc317575f871fc6639c7c7d28d4f3cab46d6e3cc",
+      "sizeBytes": 130330,
+      "sha256": "4bf580dfe439cf00ac440016736b4dba5a6f013cf77aae7b0ef823dd7a09a449",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-6.json"
@@ -4427,8 +4455,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-7.json",
       "mimeType": "application/json",
-      "sizeBytes": 333717,
-      "sha256": "a452f83b5b1b149bc06857a666a2c0ce54f6c30897bebc193cff531cc7bbb8ca",
+      "sizeBytes": 186302,
+      "sha256": "0e5395a7ce78b2a4b090cc05a16f87e59bf31a65165e38d3d60bdcf40af8c814",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-7.json"
@@ -4440,8 +4468,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-8.json",
       "mimeType": "application/json",
-      "sizeBytes": 255165,
-      "sha256": "ecf757206e55773095062f6ca172b48d28fa4aada4e7c2e436b2576089d56be0",
+      "sizeBytes": 191948,
+      "sha256": "cfde9289910e80aeb93d0e777426fbdc51e153c7ba8003519e9cfa553a729f52",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-8.json"
@@ -4453,8 +4481,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-9.json",
       "mimeType": "application/json",
-      "sizeBytes": 209038,
-      "sha256": "8ad1a9ae45961576199a2c651800d86ca58dc921bda8479b2eaaaa4711fdf9a9",
+      "sizeBytes": 197611,
+      "sha256": "1de22c56104da94264792d2c99356ddcdd42ef2fdb1f1c477217838a92295b73",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-9.json"
@@ -4466,8 +4494,8 @@
       "source": "Bundled resource",
       "path": "/mcq/cat-islamic-gk-10.json",
       "mimeType": "application/json",
-      "sizeBytes": 130720,
-      "sha256": "243f8e227e90a2eec25b99451bb1b573e065d2f5697a18345158f7fe2f290c97",
+      "sizeBytes": 112341,
+      "sha256": "0e8749a46d52424b63bc04c80c46598668a54f2a544096ad20cfcf3957f7a711",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/cat-islamic-gk-10.json"
@@ -4960,8 +4988,8 @@
       "source": "Bundled resource",
       "path": "/mcq/index.json",
       "mimeType": "application/json",
-      "sizeBytes": 4305,
-      "sha256": "845349802b86761c5edb50485e42a7143a9d26850cc2b5354d87b62130da1022",
+      "sizeBytes": 4061,
+      "sha256": "87d016cac4a8a6ade1599bdd547477f2bf2a3766bd5f3db248b28d58d1f05f1c",
       "access": "public",
       "availability": "available",
       "viewUrl": "/mcq/index.json"
@@ -22106,6 +22134,19 @@
       "downloadUrl": "/samples/aristotle-political-theories-political-science-sample.pdf"
     },
     {
+      "id": "samples-b80994d98f13eb82",
+      "title": "Cpec Css Notes With Maps",
+      "category": "Notes Samples",
+      "source": "Owner-authorised sample",
+      "path": "/samples/cpec-css-notes-with-maps.docx",
+      "mimeType": "application/octet-stream",
+      "sizeBytes": 1608084,
+      "sha256": "84db81b27a14bfe70fa8cddd731bdba24dbd47d0a09042b7f2b811542f8e0e1f",
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/samples/cpec-css-notes-with-maps.docx"
+    },
+    {
       "id": "samples-16d1fd1f991f5d6d",
       "title": "Cybercrime Criminology Sample",
       "category": "Notes Samples",
@@ -22164,6 +22205,21 @@
       "availability": "available",
       "viewUrl": "/samples/pakistan-india-relations-ca-pa.pdf",
       "downloadUrl": "/samples/pakistan-india-relations-ca-pa.pdf"
+    },
+    {
+      "id": "samples-a0b3eff2ad334a1b",
+      "title": "Pakistan India Relations Kashmir Ca Pa",
+      "category": "Notes Samples",
+      "source": "Owner-authorised sample",
+      "path": "/samples/pakistan-india-relations-kashmir-ca-pa.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 274098,
+      "sha256": "123acf242be8ad368e2fb989522bf7cd9d5777e18ebcf787c66445430983ab7d",
+      "pageCount": 36,
+      "access": "public",
+      "availability": "available",
+      "viewUrl": "/samples/pakistan-india-relations-kashmir-ca-pa.pdf",
+      "downloadUrl": "/samples/pakistan-india-relations-kashmir-ca-pa.pdf"
     },
     {
       "id": "samples-46ed21504b64a616",

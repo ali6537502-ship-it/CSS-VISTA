@@ -49,7 +49,7 @@ for (const item of manifest.resources) {
 const papers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
 assert(papers.length === 782, `Expected 782 registered past papers, received ${papers.length}`)
 assert(papers.every((paper) => manifest.resources.some((item) => item.path === paper.fileUrl && item.id === paper.id)), 'Every registered past paper must appear in the resource manifest')
-assert(remote.fileCount === 790 && remote.files.length === 790, 'Remote library must contain 782 papers and 8 authorised notes samples')
+assert(remote.fileCount === 791 && remote.files.length === 791, 'Remote library must contain 782 papers and 9 authorised notes samples')
 assert(!remote.files.some((item) => item.path.endsWith('/PMS-Islamic-Studies-2020.pdf')), 'Corrupt legacy PMS record must not be published')
 
 console.log(`Resource integrity audit passed: ${manifest.resources.length} resources, ${papers.length} past papers and ${remote.files.length} remote PDFs verified.`)

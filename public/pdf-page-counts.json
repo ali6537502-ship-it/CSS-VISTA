@@ -19,6 +19,11 @@
     "sizeBytes": 9453392,
     "encrypted": false
   },
+  "/magazines/css-vista-current-affairs-weekly-03-september-2026.pdf": {
+    "pages": 21,
+    "sizeBytes": 52029226,
+    "encrypted": false
+  },
   "/past-papers/2016/accountancy-and-auditing-2016(1).pdf": {
     "pages": 6,
     "sizeBytes": 137197,
@@ -3947,6 +3952,11 @@
   "/samples/multipolar-world-ca-pa.pdf": {
     "pages": 34,
     "sizeBytes": 4577651,
+    "encrypted": false
+  },
+  "/samples/pakistan-india-relations-kashmir-ca-pa.pdf": {
+    "pages": 36,
+    "sizeBytes": 274098,
     "encrypted": false
   },
   "/samples/pakistan-india-relations-ca-pa.pdf": {

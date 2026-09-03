@@ -2,9 +2,9 @@
   "repository": "ali6537502-ship-it/CSS-VISTA",
   "branch": "main",
   "publicBase": "https://raw.githubusercontent.com/ali6537502-ship-it/CSS-VISTA/main/public/",
-  "generatedAt": "2026-08-25T18:32:41.584Z",
-  "fileCount": 790,
-  "totalBytes": 918076874,
+  "generatedAt": "2026-09-03T19:19:24.523Z",
+  "fileCount": 791,
+  "totalBytes": 918350972,
   "files": [
     {
       "path": "/past-papers/2016/accountancy-and-auditing-2016(1).pdf",
@@ -3940,6 +3940,11 @@
       "path": "/samples/pakistan-india-relations-ca-pa.pdf",
       "size": 2916013,
       "sha256": "dec8375e9e819e554bf7e178764c30278899c6596a7b5f556a726077c1eaa18c"
+    },
+    {
+      "path": "/samples/pakistan-india-relations-kashmir-ca-pa.pdf",
+      "size": 274098,
+      "sha256": "123acf242be8ad368e2fb989522bf7cd9d5777e18ebcf787c66445430983ab7d"
     },
     {
       "path": "/samples/proxy-wars-ca-pa.pdf",
