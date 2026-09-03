@@ -11,9 +11,51 @@ import {
   type OneLinerCategory,
   type OneLinerIndex,
 } from '@/data/oneLinerGk'
+import { formatOneLiner } from '@/lib/oneLinerFormat'
 
 const PAGE_SIZE = 40
 type FreshnessFilter = 'all' | 'stable' | 'dated'
+
+function OneLinerContent({ text }: { text: string }) {
+  const formatted = formatOneLiner(text)
+
+  if (formatted.kind === 'fields') {
+    return (
+      <dl className="flex flex-wrap gap-x-6 gap-y-2">
+        {formatted.fields.map((field, index) => (
+          <div key={`${field.label}-${index}`} className="min-w-[125px] flex-1">
+            <dt className="text-[10px] font-extrabold uppercase tracking-[0.1em] text-emerald-700">{field.label}</dt>
+            <dd className="mt-0.5 text-sm font-semibold leading-snug text-slate-900">{field.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  if (formatted.kind === 'term') {
+    return (
+      <div>
+        <p className="text-sm font-bold leading-snug text-slate-900">{formatted.term}</p>
+        <p className="mt-1 text-sm leading-relaxed text-slate-600">{formatted.detail}</p>
+      </div>
+    )
+  }
+
+  if (formatted.kind === 'list') {
+    return (
+      <ul className="grid gap-1.5 text-sm leading-relaxed text-slate-700 sm:grid-cols-2">
+        {formatted.items.map((item, index) => (
+          <li key={`${item}-${index}`} className="flex items-start gap-2">
+            <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-600" aria-hidden="true" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  return <p className="text-sm font-medium leading-relaxed text-slate-800">{formatted.text}</p>
+}
 
 export default function OneLinerGK() {
   const [searchParams] = useSearchParams()
@@ -96,7 +138,6 @@ export default function OneLinerGK() {
           <div className="rounded-xl border bg-white p-4">
             <BookOpenCheck className="h-5 w-5 text-emerald-800" />
             <p className="mt-2 text-2xl font-bold text-pine">{index ? index.total.toLocaleString() : '…'}</p>
-            <p className="text-xs text-muted-foreground">Cleaned one-liner notes</p>
           </div>
           <div className="rounded-xl border bg-white p-4">
             <Layers3 className="h-5 w-5 text-emerald-800" />
@@ -216,8 +257,8 @@ export default function OneLinerGK() {
                   <span className="mt-0.5 min-w-7 rounded bg-secondary px-1.5 py-1 text-center text-[11px] font-bold text-pine">
                     {resultStart + indexInPage}
                   </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium leading-relaxed text-foreground">{note.text}</p>
+                  <div className="min-w-0 flex-1">
+                    <OneLinerContent text={note.text} />
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-900">
                         {note.subcategory}
