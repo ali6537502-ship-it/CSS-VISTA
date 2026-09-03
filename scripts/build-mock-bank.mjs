@@ -85,25 +85,12 @@ const rejectedStem = new RegExp([
   'select the accurate .* fact for',
   'which fact is correctly associated',
   'which concept, defined as',
-  'In the Important Personalities section',
-  'Choose the option that correctly completes',
-  'Which answer correctly identifies',
-  'Which statement about the capital',
   'ISO alpha-[23] code',
   'UN M49 numeric code',
   'English demonym',
   'boiling point in kelvin',
-  'Select the correct association concerning',
-  'Who is most closely associated with Execution',
   'which value is correctly recorded under',
   'standard Kufan numbering used by Quran.com',
-  'Which name matches both',
-  'Which actor-description pair',
-  'principal location connected with',
-  'Who or which body is chiefly identified',
-  'Which description fits',
-  'Which institution or personality is correctly connected',
-  'Choose the accurate person-and-description match',
   'ISO 4217 code',
   'capital designated by Israel',
 ].join('|'), 'i')
@@ -188,23 +175,18 @@ function selectDiverse(questions, limit) {
     .sort((left, right) => qualityScore(right) - qualityScore(left) || stableHash(left.id) - stableHash(right.id))
 
   const selected = []
-  const answerTopicKeys = new Set()
   const topicCounts = new Map()
   const difficultyCounts = new Map()
 
   for (const question of candidates) {
     if (selected.length >= limit) break
     const topic = normalize(question.s || 'general')
-    const answer = normalize(question.o[question.a])
-    const answerTopicKey = `${topic}|${answer}`
-    if (answerTopicKeys.has(answerTopicKey)) continue
     if ((topicCounts.get(topic) ?? 0) >= Math.max(5, Math.ceil(limit / 8))) continue
     const difficulty = question.d || 'Intermediate'
     if (difficulty === 'Basic' && (difficultyCounts.get('Basic') ?? 0) >= Math.ceil(limit * 0.35)) continue
     if (selected.some((picked) => normalize(picked.s || 'general') === topic && similarity(picked.q, question.q) >= 0.68)) continue
 
     selected.push(question)
-    answerTopicKeys.add(answerTopicKey)
     topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1)
     difficultyCounts.set(difficulty, (difficultyCounts.get(difficulty) ?? 0) + 1)
   }

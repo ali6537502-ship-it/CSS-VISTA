@@ -1,44 +1,44 @@
 // GK question-bank index - bundled at build time so all categories render instantly.
-// Mirrors public/mcq/index.json; regenerate with scripts/clean-mcq-bank.mjs.
+// Mirrors public/mcq/index.json; regenerate with scripts/clean-mcq-quality.mjs.
 
 import type { BankIndex } from './mcq'
 
 export const bundledBankIndex: BankIndex = {
-  "generatedAt": "2026-09-03",
-  "total": 41565,
+  "generatedAt": "2026-09-04",
+  "total": 22758,
   "categories": [
     {
       "slug": "pakistan-geography",
       "name": "Pakistan Geography",
-      "count": 686,
+      "count": 164,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "mountains",
       "name": "Mountains",
-      "count": 459,
+      "count": 55,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "rivers",
       "name": "Rivers",
-      "count": 389,
+      "count": 65,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "oceans-seas",
       "name": "Oceans and Seas",
-      "count": 349,
+      "count": 50,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "deserts",
       "name": "Deserts",
-      "count": 330,
+      "count": 40,
       "chunks": 1,
       "mpt": true
     },
@@ -52,21 +52,21 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "capitals",
       "name": "Capitals",
-      "count": 1119,
+      "count": 577,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "currencies",
       "name": "Currencies",
-      "count": 1340,
+      "count": 801,
       "chunks": 3,
       "mpt": true
     },
     {
       "slug": "countries-continents",
       "name": "Countries and Continents",
-      "count": 1419,
+      "count": 1399,
       "chunks": 2,
       "mpt": true
     },
@@ -94,98 +94,98 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "pakistan-history",
       "name": "Pakistan History",
-      "count": 890,
+      "count": 89,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "pakistan-affairs",
       "name": "Pakistan Affairs",
-      "count": 3022,
+      "count": 3021,
       "chunks": 4,
       "mpt": true
     },
     {
       "slug": "first-world",
       "name": "First in the World",
-      "count": 440,
+      "count": 55,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "largest-longest",
       "name": "Largest, Longest, Highest and Smallest",
-      "count": 583,
+      "count": 405,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "important-personalities",
       "name": "Important Personalities",
-      "count": 586,
+      "count": 111,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "discoveries-inventions",
       "name": "Discoveries and Inventions",
-      "count": 490,
+      "count": 70,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "awards-honours",
       "name": "Awards and Honours",
-      "count": 589,
+      "count": 61,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "international-organisations",
       "name": "International Organisations",
-      "count": 636,
+      "count": 95,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "united-nations",
       "name": "United Nations",
-      "count": 686,
+      "count": 103,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "science",
       "name": "Science",
-      "count": 4996,
+      "count": 4012,
       "chunks": 7,
       "mpt": true
     },
     {
       "slug": "everyday-science",
       "name": "Everyday Science",
-      "count": 2970,
+      "count": 1124,
       "chunks": 5,
       "mpt": true
     },
     {
       "slug": "solar-system",
       "name": "Solar System and Planets",
-      "count": 430,
+      "count": 70,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "environment",
       "name": "Environment",
-      "count": 988,
+      "count": 981,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "economics",
       "name": "Economics",
-      "count": 289,
+      "count": 76,
       "chunks": 1,
       "mpt": true
     },
@@ -199,49 +199,49 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "important-days",
       "name": "Important Days",
-      "count": 561,
+      "count": 71,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "islamic-gk",
       "name": "Islamic General Knowledge",
-      "count": 3828,
+      "count": 3791,
       "chunks": 11,
       "mpt": true
     },
     {
       "slug": "computer-basics",
       "name": "Computer Basics",
-      "count": 440,
+      "count": 88,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "misc-gk",
       "name": "Miscellaneous General Knowledge",
-      "count": 4107,
+      "count": 2707,
       "chunks": 12,
       "mpt": true
     },
     {
       "slug": "current-affairs",
       "name": "Current Affairs",
-      "count": 2250,
+      "count": 750,
       "chunks": 10,
       "mpt": true
     },
     {
       "slug": "english-grammar",
       "name": "English Grammar",
-      "count": 4944,
+      "count": 186,
       "chunks": 7,
       "mpt": true
     },
     {
       "slug": "urdu-language",
       "name": "Urdu Language",
-      "count": 833,
+      "count": 825,
       "chunks": 2,
       "mpt": true
     }

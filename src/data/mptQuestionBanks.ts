@@ -24,7 +24,7 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
     name: 'Sentence Correction',
     centralSlugs: ['english-grammar'],
     topicNeedles: ['sentence structure, fragments and parallelism'],
-    expectedCount: 250,
+    expectedCount: 10,
   },
   abilities: {
     id: 'abilities',
