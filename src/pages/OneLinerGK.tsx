@@ -124,7 +124,7 @@ export default function OneLinerGK() {
   return (
     <div>
       <PageHeader
-        title="GK Quick Revision"
+        title="4800 One-Liner GK Questions"
         description="Clear, subject-wise fact cards designed for fast reading and focused revision."
       />
 

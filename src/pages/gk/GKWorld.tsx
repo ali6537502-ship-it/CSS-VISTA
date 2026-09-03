@@ -31,7 +31,7 @@ const catIcons: Record<string, LucideIcon> = {
 }
 
 const modes = [
-  { id: 'one-liner', icon: BookOpen, title: 'GK Quick Revision', desc: 'Clear fact cards organised by subject', to: '/one-liner-gk' },
+  { id: 'one-liner', icon: BookOpen, title: '4800 One-Liner GK Questions', desc: 'Clear fact cards organised by subject', to: '/one-liner-gk' },
   { id: 'daily', icon: CalendarDays, title: 'Daily GK Challenge', desc: '10 fresh questions every day', to: '/gk/quiz?mode=daily' },
   { id: 'five', icon: Zap, title: 'Five-Minute Challenge', desc: '10 questions against the clock', to: '/five-minute' },
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },

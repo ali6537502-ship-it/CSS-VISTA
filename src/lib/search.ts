@@ -108,7 +108,7 @@ const localCorpus: SearchDocument[] = [
   },
   {
     id: 'one-liner-gk',
-    title: 'One-Liner GK',
+    title: '4800 One-Liner GK Questions',
     category: 'GK World',
     snippet: 'Searchable, category-wise facts for Pakistan Affairs, Islamiat, geography, science, computers and general knowledge.',
     link: '/one-liner-gk',
@@ -352,7 +352,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
         remote.push(...category.notes.map((note) => ({
           id: `one-liner-${note.id}`,
           title: note.text,
-          category: `One-Liner GK: ${category.name}`,
+          category: `4800 One-Liner GK Questions: ${category.name}`,
           snippet: note.subcategory,
           link: '/one-liner-gk',
           linkForQuery: (query: string) => (

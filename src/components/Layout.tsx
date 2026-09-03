@@ -65,7 +65,7 @@ const nav = [
       { label: 'Notes Library', to: '/notes', icon: FileText },
       { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: NotebookPen },
       { label: 'Free CSS Vista Lectures', to: '/lectures', icon: Video },
-      { label: 'One-Liner GK', to: '/one-liner-gk', icon: BookOpen },
+      { label: '4800 One-Liner GK Questions', to: '/one-liner-gk', icon: BookOpen },
       { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },

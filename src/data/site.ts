@@ -166,7 +166,7 @@ export const featureAnnouncements: Notification[] = [
   {
     id: 'feature-library',
     kind: 'platform',
-    text: 'Search One-Liner GK, book summaries, grammar courses and study resources in one place.',
+    text: 'Search 4800 One-Liner GK Questions, book summaries, grammar courses and study resources in one place.',
     link: '/one-liner-gk',
   },
 ]
