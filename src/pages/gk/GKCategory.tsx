@@ -8,6 +8,7 @@ import PrintMenu from '@/components/PrintMenu'
 import { recordActivity } from '@/lib/progress'
 import QuestionPagination from '@/components/QuestionPagination'
 import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
+import { diversifyQuestions } from '@/lib/questionDiversity'
 
 export default function GKCategory() {
   const { slug = '' } = useParams()
@@ -40,10 +41,10 @@ export default function GKCategory() {
 
       const firstChunk = await getChunk(slug, 0)
       if (cancelled) return
-      const initialQuestions = dedupeBankQuestions(filterDisabled([
+      const initialQuestions = diversifyQuestions(dedupeBankQuestions(filterDisabled([
         ...firstChunk,
         ...adminBankQuestions(slug),
-      ]))
+      ])))
       setQs(initialQuestions)
       recordActivity({
         type: 'gk-category',
@@ -56,10 +57,10 @@ export default function GKCategory() {
           for (let chunk = 1; chunk < cat.chunks; chunk += 1) {
             const nextQuestions = await getChunk(slug, chunk)
             if (cancelled) return
-            setQs((current) => dedupeBankQuestions(filterDisabled([
+            setQs((current) => diversifyQuestions(dedupeBankQuestions(filterDisabled([
               ...(current ?? []),
               ...nextQuestions,
-            ])))
+            ]))))
           }
           if (!cancelled) setLoadingComplete(true)
         }, 250)

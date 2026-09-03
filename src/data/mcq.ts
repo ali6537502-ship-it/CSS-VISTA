@@ -4,6 +4,7 @@
 import { bundledBankIndex } from './mcqIndex'
 import { getCuratedSubjectQuestionById } from './cssSubjectMcqs'
 import { getRecentAffairsQuestionById } from './recentAffairsDossier'
+import { diversifyQuestions } from '@/lib/questionDiversity'
 
 export interface BankQuestion {
   id: string // "{slug}-{seq}" - seq locates the chunk: chunk = ceil(seq/800)
@@ -203,7 +204,7 @@ export async function sampleQuestions(
     const j = Math.floor(rng() * (i + 1))
     ;[arr[i], arr[j]] = [arr[j], arr[i]]
   }
-  return arr.slice(0, n)
+  return diversifyQuestions(arr).slice(0, n)
 }
 
 export function categoryName(idx: BankIndex | null, slug: string): string {

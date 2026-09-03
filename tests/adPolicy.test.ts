@@ -16,6 +16,7 @@ test('strictly excluded routes fail closed with no reserved height', () => {
     '/',
     '/mpt',
     '/mpt/mock',
+    '/mpt/bank/english',
     '/gk',
     '/gk/quiz',
     '/five-minute',

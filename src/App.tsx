@@ -18,6 +18,7 @@ const PastPapers = lazy(() => import('./pages/PastPapers'))
 const CssSubjectMcqs = lazy(() => import('./pages/CssSubjectMcqs'))
 const EssayModule = lazy(() => import('./pages/EssayModule'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
+const MPTQuestionBank = lazy(() => import('./pages/MPTQuestionBank'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
 const AnswerWriting = lazy(() => import('./pages/AnswerWriting'))
 const TestSeries = lazy(() => import('./pages/TestSeries'))
@@ -90,6 +91,7 @@ export default function App() {
         <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
+        <Route path="/mpt/bank/:bankId" element={<S><MPTQuestionBank /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />
         <Route path="/test-series" element={<S><TestSeries /></S>} />

@@ -12,16 +12,19 @@ import { mergedMcqs } from '@/lib/admin'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { getBankIndex, type BankIndex } from '@/data/mcq'
 import { usePageBack } from '@/lib/backNavigation'
+import { mptQuestionBanks, mptQuestionBankPath } from '@/data/mptQuestionBanks'
 
 type Mode = 'subject' | 'topic' | 'random' | 'mock' | null
 
 interface MptStudyUnit {
   label: string
+  bankId: string
   slugs: string[]
 }
 
 interface MptStudyArea {
   title: string
+  bankId: string
   marks: number
   description: string
   icon: ComponentType<{ className?: string }>
@@ -32,27 +35,31 @@ interface MptStudyArea {
 const mptStudyAreas: MptStudyArea[] = [
   {
     title: 'Islamic Studies / Civics & Ethics',
+    bankId: 'islamiat',
     marks: 20,
     description: 'Islamic Studies for Muslim candidates; the official Civics & Ethics alternative applies to non-Muslim candidates.',
     icon: MoonStar,
-    units: [{ label: 'Islamic Studies', slugs: ['islamic-gk'] }],
+    units: [{ label: 'Islamic Studies', bankId: 'islamiat', slugs: ['islamic-gk'] }],
   },
   {
     title: 'Urdu',
+    bankId: 'urdu',
     marks: 20,
     description: 'Urdu grammar usage, vocabulary and translation practice.',
     icon: Languages,
-    units: [{ label: 'Urdu Language', slugs: ['urdu-language'] }],
+    units: [{ label: 'Urdu Language', bankId: 'urdu', slugs: ['urdu-language'] }],
   },
   {
     title: 'English',
+    bankId: 'english',
     marks: 50,
     description: 'Vocabulary, grammar usage, sentence correction and comprehension.',
     icon: BookOpen,
-    units: [{ label: 'English Grammar', slugs: ['english-grammar'] }],
+    units: [{ label: 'English Grammar', bankId: 'english', slugs: ['english-grammar'] }],
   },
   {
     title: 'General Abilities',
+    bankId: 'abilities',
     marks: 60,
     description: 'SSC-level quantitative ability plus logical, analytical and mental ability.',
     icon: Calculator,
@@ -61,32 +68,17 @@ const mptStudyAreas: MptStudyArea[] = [
   },
   {
     title: 'General Knowledge',
+    bankId: 'mpt-gk',
     marks: 50,
     description: 'Only the three General Knowledge areas named in the FPSC MPT syllabus.',
     icon: Globe2,
     units: [
-      { label: 'Everyday Science', slugs: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'] },
-      { label: 'Current Affairs', slugs: ['current-affairs'] },
-      { label: 'Pakistan Affairs', slugs: ['pakistan-affairs', 'pakistan-history', 'pakistan-geography'] },
+      { label: 'Everyday Science', bankId: 'science', slugs: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'] },
+      { label: 'Current Affairs', bankId: 'current', slugs: ['current-affairs'] },
+      { label: 'Pakistan Affairs', bankId: 'pakistan', slugs: ['pakistan-affairs', 'pakistan-history', 'pakistan-geography'] },
     ],
   },
 ]
-
-const mptCategorySlugs: Record<string, string[]> = {
-  english: ['english-grammar'],
-  vocabulary: ['english-grammar'],
-  grammar: ['english-grammar'],
-  correction: ['english-grammar'],
-  science: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'],
-  gk: ['capitals', 'currencies', 'countries-continents', 'first-world', 'largest-longest', 'important-personalities', 'discoveries-inventions', 'awards-honours'],
-  current: ['current-affairs'],
-  pakistan: ['pakistan-affairs', 'pakistan-history', 'pakistan-geography'],
-  islamiat: ['islamic-gk'],
-  urdu: ['urdu-language'],
-  geography: ['pakistan-geography', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'countries-continents'],
-  history: ['pakistan-history', 'first-world', 'important-personalities'],
-  organisations: ['international-organisations', 'united-nations'],
-}
 
 export default function MPTPrep() {
   const allQuestions = useMemo(() => mergedMcqs(seedQuestions), [])
@@ -237,7 +229,7 @@ export default function MPTPrep() {
                             return (
                               <Link
                                 key={unit.label}
-                                to={`/gk/quiz?mode=mixed&cats=${unit.slugs.join(',')}&n=20`}
+                                to={mptQuestionBankPath(unit.bankId)}
                                 className="flex items-center justify-between gap-3 rounded-lg border bg-secondary/35 px-3 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-emerald-700/40 hover:bg-emerald-50"
                               >
                                 <span>{unit.label}</span>
@@ -255,21 +247,18 @@ export default function MPTPrep() {
                             { label: 'Logical & Analytical', category: 'reasoning', icon: Brain },
                           ].map((unit) => {
                             const UnitIcon = unit.icon
-                            const unitCount = allQuestions.filter((question) => question.category === unit.category).length
+                            const unitCount = mptQuestionBanks[unit.category]?.expectedCount
+                              ?? allQuestions.filter((question) => question.category === unit.category).length
                             return (
-                              <button
+                              <Link
                                 key={unit.category}
-                                onClick={() => {
-                                  setCategory(unit.category)
-                                  setTopic('all')
-                                  setMode('subject')
-                                }}
+                                to={mptQuestionBankPath(unit.category)}
                                 className="rounded-lg border bg-secondary/35 p-3 text-left transition-colors hover:border-emerald-700/40 hover:bg-emerald-50"
                               >
                                 <UnitIcon className="h-4 w-4 text-emerald-800" />
                                 <span className="mt-2 block text-xs font-semibold leading-snug">{unit.label}</span>
                                 <span className="mt-1 block text-[11px] font-bold text-emerald-800">{unitCount} MCQs</span>
-                              </button>
+                              </Link>
                             )
                           })}
                         </div>
@@ -283,7 +272,7 @@ export default function MPTPrep() {
                         ) : (
                           <div className="flex flex-wrap gap-2">
                             <Link
-                              to={`/gk/quiz?mode=mixed&cats=${allSlugs.join(',')}&n=20`}
+                              to={mptQuestionBankPath(area.bankId)}
                               className="inline-flex h-9 items-center rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"
                             >
                               Practise {area.units.length === 1 ? area.units[0].label : area.title}
@@ -329,24 +318,22 @@ export default function MPTPrep() {
             </Section>
 
             {/* Category counts */}
-            <Section title="Question bank by subject" description={`Connected to the central ${shippedMcqSummary} MPT/GK bank; every displayed count is loaded from the shipped index.`}>
+            <Section title="Question bank by subject" description={`Open the complete source question bank for each subject—not a short random quiz. Central categories use the shipped ${shippedMcqSummary} bank, while General Science & Ability uses its verified owner-supplied bank.`}>
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {quizCategories.map((c) => {
-                  const slugs = mptCategorySlugs[c.id] ?? []
-                  const centralCount = bankCount(slugs)
-                  const seedCount = allQuestions.filter((q) => q.category === c.id).length
-                  const n = centralCount || seedCount
-                  return slugs.length ? (
+                  const definition = mptQuestionBanks[c.id]
+                  if (!definition) return null
+                  const centralCount = bankCount(definition.centralSlugs ?? [])
+                  const n = definition.expectedCount || centralCount || allQuestions.filter((q) => q.category === c.id).length
+                  return (
                     <Link
                       key={c.id}
-                      to={`/gk/quiz?mode=mixed&cats=${slugs.join(',')}&n=20`}
+                      to={mptQuestionBankPath(c.id)}
                       className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/60"
                     >
                       <span>{c.icon} {c.name}</span>
-                      <Badge tone="gray">{bankIndex ? n.toLocaleString() : '…'}</Badge>
+                      <Badge tone="gray">{definition.centralSlugs && !bankIndex ? '…' : n.toLocaleString()}</Badge>
                     </Link>
-                  ) : (
-                    <button key={c.id} onClick={() => { setCategory(c.id); setTopic('all'); setMode('subject') }} className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/60"><span>{c.icon} {c.name}</span><Badge tone="gray">{n}</Badge></button>
                   )
                 })}
               </div>
