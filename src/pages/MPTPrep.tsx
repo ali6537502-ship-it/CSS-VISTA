@@ -73,7 +73,7 @@ const mptStudyAreas: MptStudyArea[] = [
     description: 'Only the three General Knowledge areas named in the FPSC MPT syllabus.',
     icon: Globe2,
     units: [
-      { label: 'Everyday Science', bankId: 'science', slugs: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'] },
+      { label: 'Everyday Science', bankId: 'science', slugs: ['everyday-science'] },
       { label: 'Current Affairs', bankId: 'current', slugs: ['current-affairs'] },
       { label: 'Pakistan Affairs', bankId: 'pakistan', slugs: ['pakistan-affairs', 'pakistan-history', 'pakistan-geography'] },
     ],

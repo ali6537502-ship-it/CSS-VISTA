@@ -1,6 +1,7 @@
 export interface MptQuestionBankDefinition {
   id: string
   name: string
+  directPath?: string
   centralSlugs?: string[]
   cssSubjectSlug?: string
   topicNeedles?: string[]
@@ -41,7 +42,8 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
   science: {
     id: 'science',
     name: 'Everyday Science',
-    centralSlugs: ['everyday-science', 'science', 'solar-system', 'environment', 'computer-basics'],
+    directPath: '/gk/cat/everyday-science',
+    centralSlugs: ['everyday-science'],
   },
   'mpt-gk': {
     id: 'mpt-gk',
@@ -82,7 +84,7 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
 }
 
 export function mptQuestionBankPath(id: string) {
-  return `/mpt/bank/${id}`
+  return mptQuestionBanks[id]?.directPath ?? `/mpt/bank/${id}`
 }
 
 export function matchesMptBankTopic(topic: string | undefined, definition: MptQuestionBankDefinition) {

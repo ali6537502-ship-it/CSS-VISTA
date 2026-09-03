@@ -12,8 +12,14 @@ test('every MPT directory subject opens a full question-bank route', () => {
   ]
   ids.forEach((id) => {
     assert.ok(mptQuestionBanks[id])
-    assert.equal(mptQuestionBankPath(id), `/mpt/bank/${id}`)
+    const expectedPath = id === 'science' ? '/gk/cat/everyday-science' : `/mpt/bank/${id}`
+    assert.equal(mptQuestionBankPath(id), expectedPath)
   })
+})
+
+test('Everyday Science opens its dedicated source bank', () => {
+  assert.deepEqual(mptQuestionBanks.science?.centralSlugs, ['everyday-science'])
+  assert.equal(mptQuestionBankPath('science'), '/gk/cat/everyday-science')
 })
 
 test('question diversity keeps every source item while separating topics', () => {
