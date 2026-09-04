@@ -36,7 +36,6 @@ function loadAdSenseOnce() {
     script.async = true
     script.crossOrigin = 'anonymous'
     script.src = src
-    script.dataset.cssVistaAdsense = ADSENSE_PUBLISHER_ID
     script.addEventListener('load', () => resolve(true), { once: true })
     script.addEventListener('error', () => resolve(false), { once: true })
     document.head.appendChild(script)

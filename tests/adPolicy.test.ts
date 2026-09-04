@@ -57,6 +57,8 @@ test('legacy artificial timing and page-count state is absent', async () => {
   for (const legacy of ['AD_ACTIVE_TIME_MS', 'eligiblePageCount', 'third-page', 'setInterval']) {
     assert.equal(source.includes(legacy), false, legacy)
   }
+  const componentSource = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Ads.tsx', import.meta.url), 'utf8'))
+  assert.equal(componentSource.includes('dataset.cssVistaAdsense'), false)
 })
 
 test('indexable routes have unique crawlable metadata and unknown paths fail closed', () => {

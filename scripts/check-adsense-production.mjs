@@ -57,6 +57,7 @@ for (const path of routes) {
       && body.includes(`<link rel="canonical" href="${canonical}"`)
       && body.includes(route.h1)
       && body.includes('<h1')
+      && body.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"')
       && !body.includes('__SITE_ORIGIN__')
       && (path !== '/' || !body.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'))
     result(valid, `initial HTML ${path}`, `${response.status}, canonical ${canonical}`)
