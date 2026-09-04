@@ -12,6 +12,9 @@ const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'))
 
 const norm = (v) => String(v ?? '')
   .normalize('NFKC').toLocaleLowerCase().replace(/[’‘]/g, "'")
+  .replace(/[^\p{L}\p{N}\p{S}]+/gu, ' ').replace(/\s+/g, ' ').trim()
+const wordNorm = (v) => String(v ?? '')
+  .normalize('NFKC').toLocaleLowerCase().replace(/[’‘]/g, "'")
   .replace(/[^\p{L}\p{N}]+/gu, ' ').replace(/\s+/g, ' ').trim()
 
 const shardsByCategory = new Map()
@@ -46,9 +49,12 @@ const replace = (item, q, reason) => {
   changed.set(item.q.id, { q, category: item.category.slug, reason, before: item.q })
 }
 
-// A definite duplicate missed by answer-string normalization because the two correct
-// options use long-form and abbreviated UN wording.
-for (const [keepId, dropId] of [['pakistan-affairs-1092', 'pakistan-affairs-2584']]) {
+// Definite duplicates identified by the deep audit. Keep the clearer/canonical version.
+const explicitDuplicatePairs = [
+  ['pakistan-affairs-1092', 'pakistan-affairs-2584'],
+  ['science-4890', 'science-4780'],
+]
+for (const [keepId, dropId] of explicitDuplicatePairs) {
   const keep = all.find((x) => x.q.id === keepId)
   const drop = all.find((x) => x.q.id === dropId)
   if (keep && drop) remove(drop, 'definite duplicate question')
@@ -60,7 +66,7 @@ for (const [keepId, dropId] of [['pakistan-affairs-1092', 'pakistan-affairs-2584
 const environment = all.filter((x) => x.category.slug === 'environment' && !removed.has(x.q.id))
 const environmentGroups = new Map()
 for (const item of environment) {
-  const key = norm(item.q.e)
+  const key = wordNorm(item.q.e)
   if (!key) continue
   const group = environmentGroups.get(key) ?? []
   group.push(item)
@@ -99,25 +105,20 @@ for (const group of environmentGroups.values()) {
 }
 
 // Make Reuters explanations report-specific. The answer/date remains untouched; this
-// removes boilerplate explanation repetition without adding any new factual claim.
+// removes boilerplate explanation repetition without adding a new factual claim.
 for (const item of all.filter((x) => x.category.slug === 'current-affairs' && !removed.has(x.q.id))) {
   const current = changed.get(item.q.id)?.q ?? item.q
-  const text = String(current.q)
-  let title = ''
-  const quoted = text.match(/[“"](.+?)[”"]/)
-  if (quoted?.[1]) title = quoted[1]
-  if (!title) {
-    const original = String(item.q.q)
-    const originalQuoted = original.match(/[“"](.+?)[”"]/)
-    if (originalQuoted?.[1]) title = originalQuoted[1]
-  }
+  const originalText = String(current.q)
+  const quoted = originalText.match(/[“"](.+?)[”"]/)
+  const title = quoted?.[1] ?? ''
   const date = current.o?.[current.a]
   if (!title || !date) continue
   const nextExplanation = `Reuters published “${title}” on ${date}.`
   if (current.e !== nextExplanation) replace(item, { ...current, e: nextExplanation }, 'report-specific Current Affairs explanation')
 }
 
-// Post-consolidation exact normalized stem check. Any same-category exact repeat is a hard failure.
+// Post-consolidation exact normalized stem check. Preserve meaningful symbols such as
+// flag emoji so visually distinct flag questions do not collapse during normalization.
 const seen = new Map()
 const unresolved = []
 for (const item of all) {
