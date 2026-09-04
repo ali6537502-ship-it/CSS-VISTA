@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 import { useAccount } from '@/lib/accountContext'
@@ -7,15 +7,18 @@ import { scheduleIdleWork } from '@/lib/idle'
 export function SiteContentProvider({ children }: { children: ReactNode }) {
   const { user } = useAccount()
   const location = useLocation()
+  const contentInitialised = useRef(false)
 
   useEffect(() => {
-    if (!accountServiceConfigured) return
+    if (!accountServiceConfigured || contentInitialised.current) return
     // Public pages render from static/local content immediately. The cloud CMS
     // refresh is deliberately deferred so anonymous mobile visitors do not
     // download and initialise Supabase during the critical first-load window.
     const contentCriticalRoute = /^\/admin(?:\/|$)/.test(location.pathname)
     return scheduleIdleWork(
       () => {
+        if (contentInitialised.current) return
+        contentInitialised.current = true
         void import('@/lib/admin')
           .then(({ initialiseCloudAdminContent }) => initialiseCloudAdminContent())
           .catch(() => {
