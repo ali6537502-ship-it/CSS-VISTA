@@ -1,3 +1,5 @@
+const RESULT_ANNOUNCEMENT_ENABLED = false
+
 const RESULT_ANNOUNCEMENT_HIDDEN_ROUTES = [
   '/css-2026-written-result',
   '/mpt',
@@ -30,7 +32,7 @@ function normalizePathname(pathname: string) {
 
 export function shouldShowCss2026ResultAnnouncement(pathname: string) {
   const normalized = normalizePathname(pathname)
-  return !RESULT_ANNOUNCEMENT_HIDDEN_ROUTES.some((route) => (
+  return RESULT_ANNOUNCEMENT_ENABLED && !RESULT_ANNOUNCEMENT_HIDDEN_ROUTES.some((route) => (
     normalized === route || normalized.startsWith(`${route}/`)
   ))
 }
