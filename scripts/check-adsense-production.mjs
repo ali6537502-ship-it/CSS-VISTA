@@ -77,7 +77,11 @@ for (const variant of ['http://css-vista.com/current-affairs', 'https://css-vist
   try {
     const { response } = await fetchText(variant, { redirect: 'manual' })
     const location = response.headers.get('location') || ''
-    result([301, 308].includes(response.status) && location === `${origin}/current-affairs`, `canonical redirect ${variant}`, `${response.status} -> ${location || '(none)'}`)
+    const firstHopIsSafe = [301, 308].includes(response.status)
+      && (location === `${origin}/current-affairs` || location === 'https://css-vista.com/current-affairs')
+    const finalResponse = await fetch(variant, { redirect: 'follow', headers: { 'user-agent': userAgent } })
+    const resolvesCanonical = finalResponse.url === `${origin}/current-affairs`
+    result(firstHopIsSafe && resolvesCanonical, `canonical redirect ${variant}`, `${response.status} -> ${location || '(none)'} -> ${finalResponse.url}`)
   } catch (error) {
     result(false, `canonical redirect ${variant}`, error instanceof Error ? error.message : String(error))
   }
