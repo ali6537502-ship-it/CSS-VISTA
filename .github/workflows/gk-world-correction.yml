@@ -1,0 +1,42 @@
+name: GK World Correction Dry Run
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - 'scripts/correct-gk-world-repetition.mjs'
+      - '.github/workflows/gk-world-correction.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current production GK World data
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            public/mcq
+            src/data/mcq-shards
+            src/data/mcqIndex.ts
+            src/data/mcqMeta.ts
+            scripts/audit-mcq-data.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout correction tool
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/correct-gk-world-repetition.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Simulate correction
+        working-directory: site
+        run: node ../tools/scripts/correct-gk-world-repetition.mjs
