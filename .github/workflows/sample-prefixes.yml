@@ -1,0 +1,36 @@
+name: Sample Remaining MCQ Prefixes
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - '.github/workflows/sample-prefixes.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main MCQ data
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            public/css-subject-mcqs
+
+      - name: Checkout sample script
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/sample-repeated-prefixes.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Print remaining phrase samples
+        working-directory: site
+        run: node ../tools/scripts/sample-repeated-prefixes.mjs
