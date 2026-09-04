@@ -1,6 +1,6 @@
 {
  "generatedAt": "2026-09-04",
- "total": 21939,
+ "total": 22189,
  "categories": [
   {
    "slug": "pakistan-geography",
@@ -222,8 +222,8 @@
   {
    "slug": "general-ability",
    "name": "General Ability",
-   "count": 250,
-   "chunks": 1,
+   "count": 500,
+   "chunks": 6,
    "mpt": true
   },
   {
