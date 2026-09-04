@@ -1,0 +1,102 @@
+name: Apply Curated GK PDF Import 2026-09-04
+
+on:
+  push:
+    branches:
+      - gk-pdf-import-20260904
+    paths:
+      - '.github/workflows/apply-gk-pdf-import-20260904.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production MCQ bank
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 1
+          sparse-checkout: |
+            public/mcq
+            src/data/mcq-shards
+            src/data/mcqIndex.ts
+            src/data/mcqMeta.ts
+            src/data/mcq.ts
+            scripts/audit-mcq-data.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout staged PDF import
+        uses: actions/checkout@v4
+        with:
+          ref: gk-pdf-import-20260904
+          path: tools
+          sparse-checkout: |
+            scripts/import-gk-pdf-batch.mjs
+            data-archive/gk-pdf-import-20260904.json.gz.b64
+          sparse-checkout-cone-mode: false
+
+      - name: Dry-run guarded import
+        working-directory: site
+        run: node ../tools/scripts/import-gk-pdf-batch.mjs
+
+      - name: Apply guarded import
+        working-directory: site
+        run: node ../tools/scripts/import-gk-pdf-batch.mjs --apply
+
+      - name: Validate repository MCQ structure
+        working-directory: site
+        run: node scripts/audit-mcq-data.mjs
+
+      - name: Validate totals, bundle sync and duplicate gate
+        working-directory: site
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs'
+          import path from 'node:path'
+          const idx=JSON.parse(fs.readFileSync('public/mcq/index.json','utf8'))
+          if(idx.total!==22446) throw new Error(`Expected total 22446, got ${idx.total}`)
+          if(idx.categories.length!==35) throw new Error(`Expected 35 categories, got ${idx.categories.length}`)
+          const expected={science:4122,'solar-system':101,'important-personalities':132,'united-nations':121,'important-days':89,'oceans-seas':64,economics:87,'international-organisations':105,mountains:64,'discoveries-inventions':75,'straits-canals':120,deserts:43,rivers:67,'general-ability':500}
+          for(const [slug,count] of Object.entries(expected)){const c=idx.categories.find(x=>x.slug===slug);if(!c||c.count!==count)throw new Error(`Bad ${slug} count ${c?.count}`)}
+          const bundled=fs.readFileSync('src/data/mcqIndex.ts','utf8')
+          if(!bundled.includes('"total": 22446')) throw new Error('Bundled index total is not synchronized')
+          const meta=fs.readFileSync('src/data/mcqMeta.ts','utf8')
+          if(!meta.includes('SHIPPED_MCQ_TOTAL = 22_446')) throw new Error('MCQ meta total is not synchronized')
+          for(const c of idx.categories)for(let k=0;k<c.chunks;k++){const n=`cat-${c.slug}-${k}.json`;if(!fs.existsSync(path.join('src/data/mcq-shards',n)))throw new Error(`Missing bundled shard ${n}`)}
+          const norm=v=>String(v??'').normalize('NFKC').toLowerCase().replace(/[’‘]/g,"'").replace(/[^\p{L}\p{N}\p{S}]+/gu,' ').replace(/\s+/g,' ').trim()
+          const leads=[/^(which|what|who|where|when) (?:of the following )?(?:is|are|was|were|does|did|has|have|can|could|would|should) /,/^which (?:country|city|planet|river|mountain|ocean|sea|strait|desert|person|scientist|organisation|organization) /,/^the (?:term|process|phenomenon|law|principle) /,/^(identify|name|select) /]
+          const core=v=>{let x=norm(v);for(const p of leads)x=x.replace(p,'');return x.trim()}
+          const ids=new Set(),qs=new Map(),cores=new Map();let total=0
+          for(const c of idx.categories)for(let k=0;k<c.chunks;k++)for(const q of JSON.parse(fs.readFileSync(`public/mcq/cat-${c.slug}-${k}.json`,'utf8'))){total++;if(ids.has(q.id))throw new Error(`Duplicate id ${q.id}`);ids.add(q.id);const n=norm(q.q);if(qs.has(n))throw new Error(`Exact duplicate: ${q.q} <> ${qs.get(n)}`);qs.set(n,q.q);const cc=core(q.q);if(cc.length>=18){if(cores.has(cc))throw new Error(`Same-core duplicate: ${q.q} <> ${cores.get(cc)}`);cores.set(cc,q.q)}}
+          if(total!==idx.total)throw new Error(`Loaded ${total}, index says ${idx.total}`)
+          console.log(`Publish gate passed: ${total} MCQs, zero exact/same-core duplicates, bundle synchronized.`)
+          NODE
+
+      - name: Enforce MCQ-data-only scope
+        working-directory: site
+        shell: bash
+        run: |
+          git diff --check
+          bad=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            path="${line:3}"
+            case "$path" in
+              public/mcq/*|src/data/mcq-shards/*|src/data/mcqIndex.ts|src/data/mcqMeta.ts) ;;
+              *) echo "Unexpected non-MCQ change: $path"; bad=1 ;;
+            esac
+          done < <(git status --porcelain)
+          test "$bad" -eq 0
+
+      - name: Commit and push production data
+        working-directory: site
+        run: |
+          git config user.name "CSS VISTA Data Expansion"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/mcq src/data/mcq-shards src/data/mcqIndex.ts src/data/mcqMeta.ts
+          git commit -m "feat: add curated PDF-derived GK MCQs"
+          git push origin HEAD:main
