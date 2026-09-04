@@ -31,6 +31,7 @@ jobs:
             scripts/cleanup-css-subject-repetition.mjs
             scripts/cleanup-sindhi-final-near-duplicates.mjs
             scripts/polish-repetitive-mcq-phrases.mjs
+            scripts/final-targeted-mcq-cleanup.mjs
             scripts/report-css-mcq-repetition.mjs
           sparse-checkout-cone-mode: false
 
@@ -39,6 +40,7 @@ jobs:
         run: |
           node ../tools/scripts/cleanup-css-subject-repetition.mjs
           node ../tools/scripts/polish-repetitive-mcq-phrases.mjs
+          node ../tools/scripts/final-targeted-mcq-cleanup.mjs
           node ../tools/scripts/cleanup-sindhi-final-near-duplicates.mjs
 
       - name: Verify no non-MCQ website files changed
@@ -78,7 +80,7 @@ jobs:
             echo 'Nothing to commit.'
             exit 0
           fi
-          git commit -m 'fix: remove remaining CSS MCQ phrase repetition'
+          git commit -m 'fix: clear final CSS MCQ repetition families'
           git push origin HEAD:main
 
       - name: Upload cleanup report
