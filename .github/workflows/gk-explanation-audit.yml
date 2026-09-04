@@ -1,0 +1,38 @@
+name: Inspect GK Repeated Explanations
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - 'scripts/inspect-gk-explanations.mjs'
+      - '.github/workflows/gk-explanation-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production GK World data
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            public/mcq
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout inspection tool
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/inspect-gk-explanations.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Inspect repeated explanations
+        working-directory: site
+        run: node ../tools/scripts/inspect-gk-explanations.mjs
