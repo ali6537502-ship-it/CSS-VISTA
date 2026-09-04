@@ -6,6 +6,7 @@ on:
       - chat-preview
     paths:
       - 'scripts/finalize-gk-world-correction.mjs'
+      - 'scripts/polish-gk-world-templates.mjs'
       - 'scripts/inspect-gk-postcorrection.mjs'
       - '.github/workflows/gk-world-correction-validation.yml'
 
@@ -37,6 +38,7 @@ jobs:
           sparse-checkout: |
             scripts/correct-gk-world-repetition.mjs
             scripts/finalize-gk-world-correction.mjs
+            scripts/polish-gk-world-templates.mjs
             scripts/sample-repeated-prefixes.mjs
             scripts/inspect-gk-postcorrection.mjs
           sparse-checkout-cone-mode: false
@@ -46,6 +48,7 @@ jobs:
         run: |
           node ../tools/scripts/finalize-gk-world-correction.mjs --apply
           node ../tools/scripts/correct-gk-world-repetition.mjs --apply
+          node ../tools/scripts/polish-gk-world-templates.mjs --apply
 
       - name: Validate structural integrity
         working-directory: site
