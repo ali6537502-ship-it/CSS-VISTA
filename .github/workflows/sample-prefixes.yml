@@ -1,4 +1,4 @@
-name: Sample Remaining MCQ Prefixes
+name: Audit GK World Repetition
 
 on:
   push:
@@ -11,18 +11,18 @@ permissions:
   contents: read
 
 jobs:
-  sample:
+  audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main MCQ data
+      - name: Checkout current production GK World data
         uses: actions/checkout@v4
         with:
           ref: main
           path: site
           sparse-checkout: |
-            public/css-subject-mcqs
+            public/mcq
 
-      - name: Checkout sample script
+      - name: Checkout audit script
         uses: actions/checkout@v4
         with:
           ref: chat-preview
@@ -31,6 +31,13 @@ jobs:
             scripts/sample-repeated-prefixes.mjs
           sparse-checkout-cone-mode: false
 
-      - name: Print remaining phrase samples
+      - name: Run complete GK World repetition audit
         working-directory: site
         run: node ../tools/scripts/sample-repeated-prefixes.mjs
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: gk-world-repetition-audit
+          path: site/audit-output/
+          retention-days: 2
