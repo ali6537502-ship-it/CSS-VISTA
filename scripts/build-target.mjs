@@ -37,6 +37,7 @@ await import(`./prepare-sites-build.mjs?target=${target}`)
 if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
   await import('./repair-search-visibility.mjs')
+  await import('./enhance-search-landing-pages.mjs')
 }
 
 if (target === 'sites') {
