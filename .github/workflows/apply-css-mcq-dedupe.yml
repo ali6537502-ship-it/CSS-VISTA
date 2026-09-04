@@ -38,8 +38,8 @@ jobs:
         working-directory: site
         run: |
           node ../tools/scripts/cleanup-css-subject-repetition.mjs
-          node ../tools/scripts/cleanup-sindhi-final-near-duplicates.mjs
           node ../tools/scripts/polish-repetitive-mcq-phrases.mjs
+          node ../tools/scripts/cleanup-sindhi-final-near-duplicates.mjs
 
       - name: Verify no non-MCQ website files changed
         working-directory: site
