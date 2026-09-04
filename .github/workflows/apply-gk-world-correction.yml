@@ -60,7 +60,7 @@ jobs:
           const r = JSON.parse(fs.readFileSync('audit-output/gk-world-repetition-report.json', 'utf8'))
           if (r.loadedTotal !== 21689) throw new Error(`Expected 21689 retained questions, found ${r.loadedTotal}`)
           if (r.global.exactQuestion.extra !== 0) throw new Error(`Exact duplicate extras remain: ${r.global.exactQuestion.extra}`)
-          if (r.global.normalizedCoreQuestion.extra !== 0) throw new Error(`Same-core duplicate extras remain: ${r.global.normalizedCoreQuestion.extra}`)
+          if (r.global.sameCoreAfterGenericLeadRemoval.extra !== 0) throw new Error(`Same-core duplicate extras remain: ${r.global.sameCoreAfterGenericLeadRemoval.extra}`)
           console.log(`Deep GK audit passed: ${r.loadedTotal} questions, zero exact and zero same-core duplicate extras.`)
           NODE
           rm -rf audit-output
