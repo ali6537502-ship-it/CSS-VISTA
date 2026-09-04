@@ -49,10 +49,21 @@ const replace = (item, q, reason) => {
   changed.set(item.q.id, { q, category: item.category.slug, reason, before: item.q })
 }
 
-// Definite duplicates identified by the deep audit. Keep the clearer/canonical version.
+// Definite duplicates identified by the deep audit. Keep the version in the most
+// appropriate category and remove only the redundant cross-category copy.
 const explicitDuplicatePairs = [
   ['pakistan-affairs-1092', 'pakistan-affairs-2584'],
   ['science-4890', 'science-4780'],
+  ['environment-278', 'everyday-science-2644'],
+  ['computer-basics-247', 'everyday-science-2983'],
+  ['computer-basics-269', 'everyday-science-2985'],
+  ['computer-basics-258', 'everyday-science-3039'],
+  ['computer-basics-207', 'everyday-science-3084'],
+  ['computer-basics-276', 'everyday-science-3094'],
+  ['computer-basics-218', 'everyday-science-3100'],
+  ['computer-basics-225', 'everyday-science-3190'],
+  ['computer-basics-232', 'everyday-science-3191'],
+  ['environment-163', 'environment-623'],
 ]
 for (const [keepId, dropId] of explicitDuplicatePairs) {
   const keep = all.find((x) => x.q.id === keepId)
