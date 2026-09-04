@@ -6,6 +6,7 @@ on:
       - chat-preview
     paths:
       - 'scripts/finalize-gk-world-correction.mjs'
+      - 'scripts/inspect-gk-postcorrection.mjs'
       - '.github/workflows/gk-world-correction-validation.yml'
 
 permissions:
@@ -37,6 +38,7 @@ jobs:
             scripts/correct-gk-world-repetition.mjs
             scripts/finalize-gk-world-correction.mjs
             scripts/sample-repeated-prefixes.mjs
+            scripts/inspect-gk-postcorrection.mjs
           sparse-checkout-cone-mode: false
 
       - name: Apply correction in disposable workspace
@@ -48,6 +50,10 @@ jobs:
       - name: Validate structural integrity
         working-directory: site
         run: node scripts/audit-mcq-data.mjs
+
+      - name: Inspect remaining core matches and templates
+        working-directory: site
+        run: node ../tools/scripts/inspect-gk-postcorrection.mjs
 
       - name: Run post-correction repetition audit
         working-directory: site
