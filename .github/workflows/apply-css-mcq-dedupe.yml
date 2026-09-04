@@ -1,0 +1,84 @@
+name: Apply CSS MCQ Repetition Cleanup
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - '.github/workflows/apply-css-mcq-dedupe.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Checkout cleanup tool only
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/cleanup-css-subject-repetition.mjs
+            scripts/report-css-mcq-repetition.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Remove duplicate and repetitive CSS MCQ variants only
+        working-directory: site
+        run: node ../tools/scripts/cleanup-css-subject-repetition.mjs
+
+      - name: Verify no non-MCQ website files changed
+        working-directory: site
+        shell: bash
+        run: |
+          git diff --check
+          changed="$(git diff --name-only)"
+          echo "$changed"
+          if [ -z "$changed" ]; then
+            echo 'No repetition cleanup changes were required.'
+            exit 0
+          fi
+          bad="$(printf '%s\n' "$changed" | grep -v '^public/css-subject-mcqs/' || true)"
+          if [ -n "$bad" ]; then
+            echo 'Refusing to continue because non-MCQ files changed:'
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Run existing conservative duplicate check
+        working-directory: site
+        run: node scripts/clean-mcq-quality.mjs --check
+
+      - name: Generate post-cleanup repetition report
+        working-directory: site
+        run: node ../tools/scripts/report-css-mcq-repetition.mjs > cleanup-output/post-cleanup-report.txt
+
+      - name: Commit only CSS subject MCQ data to main
+        working-directory: site
+        shell: bash
+        run: |
+          git config user.name 'CSS VISTA MCQ Cleanup'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/css-subject-mcqs/
+          if git diff --cached --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'fix: remove CSS MCQ duplication and repetitive variants'
+          git push origin HEAD:main
+
+      - name: Upload cleanup report
+        uses: actions/upload-artifact@v4
+        with:
+          name: css-mcq-repetition-cleanup
+          path: site/cleanup-output/
+          retention-days: 2
