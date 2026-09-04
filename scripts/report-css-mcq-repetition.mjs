@@ -9,7 +9,7 @@ const norm = (v) => String(v ?? '')
   .normalize('NFKC')
   .toLocaleLowerCase()
   .replace(/[’‘]/g, "'")
-  .replace(/[^\p{L}\p{N}]+/gu, ' ')
+  .replace(/[^\p{L}\p{N}\p{S}]+/gu, ' ')
   .replace(/\s+/g, ' ')
   .trim()
 
@@ -82,6 +82,8 @@ for (const meta of index.subjects) {
   const rows = getRows(JSON.parse(fs.readFileSync(file, 'utf8')))
   total += rows.length
   const exact = new Map(), core = new Map(), explanations = new Map(), optionSets = new Map(), answerTopic = new Map()
+  const subjectPrefixes = new Map()
+  const subjectPhrases = new Map()
   let repeatedOptionsInside = 0
   let malformedOptions = 0
 
@@ -105,16 +107,20 @@ for (const meta of index.subjects) {
 
     const toks = tokenise(item.q)
     const prefix = toks.slice(0, 6).join(' ')
-    if (prefix.split(' ').length >= 4) prefixCounts.set(prefix, (prefixCounts.get(prefix) ?? 0) + 1)
-    const seen5 = new Set()
+    if (prefix.split(' ').length >= 4) {
+      prefixCounts.set(prefix, (prefixCounts.get(prefix) ?? 0) + 1)
+      subjectPrefixes.set(prefix, (subjectPrefixes.get(prefix) ?? 0) + 1)
+    }
+    const seenNgrams = new Set()
     for (let n = 5; n <= 7; n++) {
       for (let p = 0; p + n <= toks.length; p++) {
         const gramToks = toks.slice(p, p + n)
         if (gramToks.filter(t => !stop.has(t)).length < 2) continue
         const gram = gramToks.join(' ')
-        if (seen5.has(gram)) continue
-        seen5.add(gram)
+        if (seenNgrams.has(gram)) continue
+        seenNgrams.add(gram)
         ngramCounts.set(gram, (ngramCounts.get(gram) ?? 0) + 1)
+        subjectPhrases.set(gram, (subjectPhrases.get(gram) ?? 0) + 1)
         const set = ngramSubjects.get(gram) ?? new Set(); set.add(meta.name); ngramSubjects.set(gram, set)
       }
     }
@@ -126,8 +132,6 @@ for (const meta of index.subjects) {
   const explanationGroups = groups(explanations)
   const optionSetGroups = groups(optionSets)
 
-  // Additional near-duplicate candidates: same topic + same answer, token Jaccard >= 0.72.
-  // To keep runtime bounded, compare only rows sharing a rare-ish first content token bucket.
   let nearPairs = []
   for (const bucket of answerTopic.values()) {
     if (bucket.length < 2 || bucket.length > 250) continue
@@ -162,11 +166,13 @@ for (const meta of index.subjects) {
     optionSetGroups: optionSetGroups.length, optionSetExtra: optionSetGroups.reduce((s,g)=>s+g.length-1,0),
     repeatedOptionsInside, malformedOptions,
     nearPairs: nearPairs.length,
+    topOpeningPrefixes: [...subjectPrefixes.entries()].filter(([,c])=>c>=5).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([phrase,count])=>({phrase,count})),
+    topRepeatedPhrases: [...subjectPhrases.entries()].filter(([,c])=>c>=8).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([phrase,count])=>({phrase,count})),
     examples: {
       exact: exactGroups.slice(0,3).map(g => g.slice(0,3).map(x => ({id:x.id,q:x.q,answer:x.answer}))),
       core: coreGroups.slice(0,3).map(g => g.slice(0,3).map(x => ({id:x.id,q:x.q,answer:x.answer}))),
       explanation: explanationGroups.slice(0,2).map(g => ({ explanation:g[0].explanation, items:g.slice(0,3).map(x=>({id:x.id,q:x.q})) })),
-      optionSet: optionSetGroups.slice(0,2).map(g => g.slice(0,3).map(x=>({id:x.id,q:x.q,options:opts(rows.find(r=>id(r,rows.indexOf(r),meta.slug)===x.id))}))),
+      optionSet: optionSetGroups.slice(0,2).map(g => g.slice(0,3).map(x=>({id:x.id,q:x.q}))),
       near: nearPairs.slice(0,5).map(p => ({score:Number(p.score.toFixed(3)),a:{id:p.a.id,q:p.a.q,answer:p.a.answer},b:{id:p.b.id,q:p.b.q,answer:p.b.answer}})),
     }
   })
@@ -215,6 +221,7 @@ for (const s of subjects.filter(s => (s.exactExtra||s.coreExtra||s.nearPairs||s.
   if (s.examples?.exact?.length) { md += `**Exact repeats**\n`; for (const g of s.examples.exact) { for (const x of g) md += `- ${x.id}: ${x.q} [${x.answer}]\n`; md += `\n` } }
   if (s.examples?.core?.length) { md += `**Same core wording / generic lead-in variant**\n`; for (const g of s.examples.core) { for (const x of g) md += `- ${x.id}: ${x.q} [${x.answer}]\n`; md += `\n` } }
   if (s.examples?.near?.length) { md += `**Near-duplicate candidates**\n`; for (const p of s.examples.near) md += `- ${p.score}: ${p.a.id} “${p.a.q}” ↔ ${p.b.id} “${p.b.q}”\n`; md += `\n` }
+  if (s.topOpeningPrefixes?.length) { md += `**Repeated opening templates**\n`; for (const p of s.topOpeningPrefixes.slice(0,5)) md += `- ${p.count}× — \`${p.phrase}\`\n`; md += `\n` }
 }
 fs.writeFileSync(path.join(root, 'audit-output', 'css-mcq-repetition-report.md'), md)
 console.log(md)
