@@ -16,8 +16,9 @@ import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/st
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
-import { ManagedAdOpportunity } from '@/components/Ads'
+import { ManagedContentAd } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
+import RouteSeo from '@/components/RouteSeo'
 import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
@@ -798,6 +799,7 @@ export default function Layout() {
 
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
+      <RouteSeo />
       <PrintBranding />
       <StudyActivityTracker />
       <NotificationBar />
@@ -1061,7 +1063,7 @@ export default function Layout() {
         >
           <Outlet />
         </div>
-        <ManagedAdOpportunity />
+        <ManagedContentAd />
       </main>
 
       <DeferredVistaShortcut />

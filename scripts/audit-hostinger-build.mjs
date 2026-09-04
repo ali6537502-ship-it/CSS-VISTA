@@ -2,6 +2,7 @@ import { access, open, readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -30,6 +31,10 @@ await Promise.all([
   access(join(dist, 'stale-module.js')),
   access(join(dist, 'results', 'css-2026-written-qualified-candidates.pdf')),
   access(join(dist, 'seo', 'css-2026-written-result.html')),
+  access(join(dist, 'seo', 'routes', 'current-affairs.html')),
+  access(join(dist, 'seo', 'routes', 'consultation.html')),
+  access(join(dist, 'seo', 'routes', 'fpsc-syllabus.html')),
+  access(join(dist, '404.html')),
 ])
 
 const [indexHtml, htaccess, robots, sitemap, faviconIco, adsTxt, searchConsoleVerification, serviceWorker, staleModule, paperFiles, assetFiles, productionEnv, css2026ResultHtml, css2026ResultPdf] = await Promise.all([
@@ -74,11 +79,15 @@ assert(indexHtml.includes('"@type": "EducationalOrganization"'), 'Organization s
 assert(indexHtml.includes('https://www.css-vista.com/icon-512.png'), 'Organization logo must use the compact CV asset')
 assert(faviconIco.length > 6 && faviconIco[0] === 0 && faviconIco[1] === 0 && faviconIco[2] === 1 && faviconIco[3] === 0, 'favicon.ico is not a valid ICO file')
 assert(!samplePaperHtml.includes('__SITE_ORIGIN__'), 'Generated past-paper page still contains the Sites runtime origin placeholder')
-assert(htaccess.includes('RewriteRule ^ index.html [L]'), 'SPA fallback rule is missing')
+assert(!htaccess.includes('RewriteRule ^ index.html [L]'), 'Catch-all SPA fallback would create soft 404s')
+assert(htaccess.includes('RewriteRule ^ - [R=404,L]'), 'Unknown routes must return a real HTTP 404')
+assert(htaccess.includes('https://www.css-vista.com%{REQUEST_URI} [R=301'), 'Canonical protocol/host redirect is missing')
+assert(htaccess.includes('ErrorDocument 404 /404.html'), 'Branded 404 response is not configured')
 assert(htaccess.includes('seo/past-papers/$1.html'), 'Direct past-paper SEO rewrite is missing')
 assert(htaccess.includes('css-2026-written-result.html'), 'CSS 2026 result SEO rewrite is missing')
 assert(htaccess.includes('(css|pms|ppsc|mpt)'), 'Past-paper collection rewrites must include CSS, PMS, PPSC and MPT')
-assert(htaccess.includes('book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers'), 'Asset-directory SPA route rewrites are missing')
+assert(htaccess.includes('seo/routes/book-summaries.html'), 'Book summaries must use route-specific initial HTML')
+assert(htaccess.includes('seo/routes/current-affairs.html'), 'Current affairs must use route-specific initial HTML')
 assert(htaccess.includes('ads\\.txt|robots\\.txt'), 'Crawler-control files are not explicitly protected from SPA rewrites')
 assert(htaccess.includes('Content-Type "text/plain; charset=UTF-8"'), 'ads.txt plain-text response header is missing')
 assert(htaccess.includes('index\\.html|sw\\.js|stale-module\\.js'), 'Runtime recovery files need no-cache headers')
@@ -91,6 +100,7 @@ assert(robots.includes('https://www.css-vista.com/sitemap.xml'), 'Hostinger robo
 assert(sitemap.includes('<loc>https://www.css-vista.com/past-papers'), 'Hostinger sitemap uses the wrong origin')
 assert(sitemap.includes('<loc>https://www.css-vista.com/subjects/compulsory</loc>'), 'Compulsory subjects are missing from the sitemap')
 assert(sitemap.includes('<loc>https://www.css-vista.com/notes</loc>'), 'Notes are missing from the sitemap')
+assert(!sitemap.includes('/account</loc>') && !sitemap.includes('/dashboard</loc>') && !sitemap.includes('/gk/quiz</loc>'), 'Private or interactive state URLs leaked into the sitemap')
 assert(sitemap.includes('<loc>https://www.css-vista.com/css-2026-written-result</loc><lastmod>2026-08-31</lastmod>'), 'CSS 2026 written result is missing from the sitemap or has the wrong date')
 assert(css2026ResultHtml.includes('<title>CSS 2026 Written Result - Qualified Candidates List | CSS Vista</title>'), 'CSS 2026 result has the wrong search title')
 assert(css2026ResultHtml.includes('<link rel="canonical" href="https://www.css-vista.com/css-2026-written-result"'), 'CSS 2026 result canonical URL is missing')
@@ -105,6 +115,8 @@ assert(css2026ResultPdf.subarray(0, 5).toString('ascii') === '%PDF-', 'CSS 2026 
 assert(adsTxt.trim() === 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0', 'ads.txt publisher record is missing or malformed')
 assert(searchConsoleVerification.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Google Search Console verification file is malformed')
 assert(indexHtml.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"'), 'AdSense account verification metadata is missing')
+assert(indexHtml.includes('<h1') && indexHtml.includes('CSS Vista competitive examination preparation'), 'Homepage lacks meaningful initial HTML')
+assert(!indexHtml.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'), 'Homepage initial HTML must not load AdSense')
 assert(/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(supabaseUrl ?? ''), 'Production Supabase URL is missing or invalid')
 assert(supabasePublishableKey?.startsWith('sb_publishable_'), 'Production Supabase key must be a browser-safe publishable key')
 assert(javascriptBundles.some((source) => source.includes(supabaseUrl)), 'Production JavaScript is missing the Supabase project URL')
@@ -115,6 +127,22 @@ assert(pmsPapers.length === 138, 'Expected 138 registered PMS past papers')
 assert(ppscPapers.length === 173, 'Expected 173 registered PPSC past papers')
 assert(mptPapers.length === 4, 'Expected 4 registered MPT past papers')
 assert(registeredPapers.length === 782, 'Expected 782 registered past papers in total')
+
+const sitemapLocCount = (sitemap.match(/<loc>/g) || []).length
+const expectedSitemapCount = INDEXABLE_STATIC_ROUTES.length + new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size + registeredPapers.length
+assert(sitemapLocCount === expectedSitemapCount, `Expected ${expectedSitemapCount} canonical sitemap URLs, found ${sitemapLocCount}`)
+
+for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
+  const routeFile = route.path === '/'
+    ? join(dist, 'index.html')
+    : join(dist, 'seo', 'routes', `${route.path.slice(1).replaceAll('/', '--')}.html`)
+  const html = await readFile(routeFile, 'utf8')
+  const canonical = `https://www.css-vista.com${route.path}`
+  assert(html.includes(`<title>${route.title}</title>`), `${route.path} has the wrong initial title`)
+  assert(html.includes(`<link rel="canonical" href="${canonical}"`), `${route.path} lacks a self-referencing canonical`)
+  assert(html.includes(`<h1`) && html.includes(route.h1), `${route.path} lacks a meaningful initial H1`)
+  assert(html.includes(`<meta name="robots" content="${route.robots}"`), `${route.path} has the wrong robots directive`)
+}
 
 for (const paper of registeredPapers) {
   const patterns = {
@@ -141,4 +169,4 @@ for (const paper of registeredPapers) {
   }
 }
 
-console.log('Hostinger artifact audit passed: Supabase, crawler files, static root, SPA rewrites, 782 paper pages, 467 CSS, 138 PMS, 173 PPSC and 4 MPT PDFs verified.')
+console.log(`Hostinger artifact audit passed: ${ROUTE_REGISTRY.length} registered routes, ${sitemapLocCount} sitemap URLs, real 404 handling, crawler files, Supabase and 782 paper PDFs verified.`)

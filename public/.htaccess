@@ -1,10 +1,12 @@
 DirectoryIndex index.html
+ErrorDocument 404 /404.html
 
 # Keep Google ownership and advertising verification endpoints as literal
 # public files. These rules run before the SPA fallback so the crawler always
 # receives the file itself instead of index.html.
 <IfModule mod_mime.c>
   AddType text/plain .txt
+  AddType application/xml .xml
   AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx
 </IfModule>
 
@@ -35,6 +37,11 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
+  # Consolidate every protocol and hostname variant on the canonical origin.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.css-vista\.com$ [NC]
+  RewriteRule ^ https://www.css-vista.com%{REQUEST_URI} [R=301,L,NE]
+
   # Never rewrite crawler control and verification files into the React app.
   RewriteRule ^(?:ads\.txt|robots\.txt|sitemap\.xml|googlec96e2248070e0570\.html)$ - [L,NC]
 
@@ -49,18 +56,20 @@ DirectoryIndex index.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule \.(?:js|mjs|css|json|map|woff2?|ttf|png|jpe?g|gif|svg|webp|ico)$ - [R=404,L,NC]
 
-  # These React routes share names with public asset directories. Route only
-  # the exact page URL to the SPA; child paths must remain available as files.
-  RewriteRule ^(?:book-summaries|books|language-grammar|one-liner-gk|opinions|past-papers)/?$ index.html [L,NC]
+  # CSSV_GENERATED_ROUTE_RULES_START
+  # Exact application routes are inserted here by the production build.
+  # CSSV_GENERATED_ROUTE_RULES_END
 
   # Serve the generated search-friendly past-paper pages at their public URLs.
   RewriteRule ^css-2026-written-result/?$ seo/css-2026-written-result.html [L]
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]
   RewriteRule ^past-papers/(css|pms|ppsc|mpt)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
+  RewriteRule ^(?:notes/view/[^/]+/[^/]+|mpt/bank/[^/]+|gk/cat/[^/]+)/?$ seo/routes/protected.html [L,NC]
 
-  # Keep real files and directories intact, then hand app routes to React.
+  # Keep real files and directories intact. Unknown clean URLs deliberately
+  # return 404 instead of the SPA shell, preventing Search Console soft 404s.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
-  RewriteRule ^ index.html [L]
+  RewriteRule ^ - [R=404,L]
 </IfModule>

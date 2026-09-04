@@ -1,39 +1,87 @@
+import { findRouteDefinition } from '../src/data/routeRegistry.mjs'
+
 const expectedRecord = 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0'
-const canonicalOrigin = (process.env.ADSENSE_SITE_ORIGIN || 'https://www.css-vista.com').replace(/\/$/, '')
-const apexOrigin = canonicalOrigin.replace('://www.', '://')
-
-const checks = [
-  { name: 'canonical ads.txt', url: `${canonicalOrigin}/ads.txt`, includes: expectedRecord, contentType: 'text/plain' },
-  { name: 'apex ads.txt', url: `${apexOrigin}/ads.txt`, includes: expectedRecord, contentType: 'text/plain' },
-  { name: 'robots.txt', url: `${canonicalOrigin}/robots.txt`, includes: 'Sitemap:', contentType: 'text/plain' },
-  { name: 'Search Console verification', url: `${canonicalOrigin}/googlec96e2248070e0570.html`, includes: 'google-site-verification: googlec96e2248070e0570.html' },
-]
-
+const origin = (process.env.ADSENSE_SITE_ORIGIN || 'https://www.css-vista.com').replace(/\/$/, '')
+const routes = ['/', '/current-affairs', '/consultation', '/fpsc-syllabus', '/gk', '/past-papers']
+const userAgent = 'AdsBot-Google (+http://www.google.com/adsbot.html)'
 let failed = false
-for (const check of checks) {
+
+function result(valid, label, details) {
+  console.log(`${valid ? 'PASS' : 'FAIL'} ${label}: ${details}`)
+  if (!valid) failed = true
+}
+
+async function fetchText(url, options = {}) {
+  const response = await fetch(url, { headers: { 'user-agent': userAgent }, ...options })
+  return { response, body: await response.text() }
+}
+
+try {
+  const { response, body } = await fetchText(`${origin}/ads.txt`)
+  result(response.status === 200 && body.trim() === expectedRecord && /text\/plain/i.test(response.headers.get('content-type') || ''), 'ads.txt', `${response.status} ${response.headers.get('content-type')} -> ${response.url}`)
+} catch (error) {
+  result(false, 'ads.txt', error instanceof Error ? error.message : String(error))
+}
+
+try {
+  const { response, body } = await fetchText(`${origin}/robots.txt`)
+  const exactRules = /^User-agent: \*\r?\nAllow: \/\r?\n\r?\nSitemap: https:\/\/www\.css-vista\.com\/sitemap\.xml\r?\n?$/.test(body)
+  result(response.status === 200 && /text\/plain/i.test(response.headers.get('content-type') || '') && exactRules, 'robots.txt', `${response.status} ${response.headers.get('content-type')}`)
+} catch (error) {
+  result(false, 'robots.txt', error instanceof Error ? error.message : String(error))
+}
+
+try {
+  const { response, body } = await fetchText(`${origin}/sitemap.xml`)
+  const xml = body.startsWith('<?xml') && body.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">') && !/<html/i.test(body)
+  result(response.status === 200 && /(?:application|text)\/xml/i.test(response.headers.get('content-type') || '') && xml, 'sitemap.xml', `${response.status} ${response.headers.get('content-type')} (${(body.match(/<loc>/g) || []).length} URLs)`)
+} catch (error) {
+  result(false, 'sitemap.xml', error instanceof Error ? error.message : String(error))
+}
+
+try {
+  const { response, body } = await fetchText(`${origin}/googlec96e2248070e0570.html`)
+  result(response.status === 200 && body.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Search Console verification', `${response.status} -> ${response.url}`)
+} catch (error) {
+  result(false, 'Search Console verification', error instanceof Error ? error.message : String(error))
+}
+
+for (const path of routes) {
   try {
-    const response = await fetch(check.url, {
-      redirect: 'follow',
-      headers: { 'user-agent': 'AdsBot-Google (+http://www.google.com/adsbot.html)' },
-    })
-    const body = await response.text()
-    const contentType = response.headers.get('content-type') || ''
+    const { response, body } = await fetchText(`${origin}${path}`)
+    const route = findRouteDefinition(path)
+    const canonical = `${origin}${path}`
     const valid = response.status === 200
-      && body.includes(check.includes)
-      && (!check.contentType || contentType.toLowerCase().includes(check.contentType))
-    const hcdn = response.headers.has('x-hcdn-request-id') || response.headers.get('server') === 'hcdn'
-    console.log(`${valid ? 'PASS' : 'FAIL'} ${check.name}: ${response.status} ${contentType || '(no content type)'} -> ${response.url}`)
-    if (!valid) {
-      failed = true
-      if (hcdn && response.status === 403) {
-        console.error('  Hostinger CDN blocked the crawler. Disable Under Attack mode, review bot/country blocking, then purge CDN cache.')
-      }
-    }
+      && Boolean(route)
+      && body.includes(`<title>${route.title}</title>`)
+      && body.includes(`<link rel="canonical" href="${canonical}"`)
+      && body.includes(route.h1)
+      && body.includes('<h1')
+      && !body.includes('__SITE_ORIGIN__')
+      && (path !== '/' || !body.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'))
+    result(valid, `initial HTML ${path}`, `${response.status}, canonical ${canonical}`)
   } catch (error) {
-    failed = true
-    console.error(`FAIL ${check.name}: ${error instanceof Error ? error.message : String(error)}`)
+    result(false, `initial HTML ${path}`, error instanceof Error ? error.message : String(error))
+  }
+}
+
+try {
+  const fakePath = `/definitely-not-a-css-vista-route-${Date.now()}`
+  const { response, body } = await fetchText(`${origin}${fakePath}`, { redirect: 'manual' })
+  result(response.status === 404 && /noindex/i.test(body), 'real 404', `${response.status} ${fakePath}`)
+} catch (error) {
+  result(false, 'real 404', error instanceof Error ? error.message : String(error))
+}
+
+for (const variant of ['http://css-vista.com/current-affairs', 'https://css-vista.com/current-affairs']) {
+  try {
+    const { response } = await fetchText(variant, { redirect: 'manual' })
+    const location = response.headers.get('location') || ''
+    result([301, 308].includes(response.status) && location === `${origin}/current-affairs`, `canonical redirect ${variant}`, `${response.status} -> ${location || '(none)'}`)
+  } catch (error) {
+    result(false, `canonical redirect ${variant}`, error instanceof Error ? error.message : String(error))
   }
 }
 
 if (failed) process.exitCode = 1
-else console.log('Production AdSense discovery endpoints are publicly crawlable and correctly formatted.')
+else console.log('Production AdSense discovery, route HTML, canonical redirects and real 404 checks passed.')

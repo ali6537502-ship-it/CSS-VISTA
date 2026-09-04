@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -51,7 +52,7 @@ function jsonLd(value) {
   return JSON.stringify(value).replaceAll('<', '\\u003c')
 }
 
-function replaceMeta(html, { title, description, canonical, body, structuredData, ogType = 'website', additionalMeta = '' }) {
+function replaceMeta(html, { title, description, canonical, body, structuredData, robots = 'index, follow', ogType = 'website', additionalMeta = '' }) {
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(description)}" />`)
@@ -61,12 +62,36 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
-    .replace(/\s*<meta property="og:image" content="[^"]*" \/>/, '')
-    .replace(/\s*<meta name="twitter:image" content="[^"]*" \/>/, '')
+    .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${escapeHtml(robots)}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
     .replace('</head>', `${additionalMeta ? `    ${additionalMeta}\n` : ''}    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
     .replaceAll('__SITE_ORIGIN__', siteOrigin)
+}
+
+function staticRouteFile(routePath) {
+  const name = routePath.replace(/^\/+|\/+$/g, '').replaceAll('/', '--') || 'home'
+  return `${name}.html`
+}
+
+function routeBody(route) {
+  const related = INDEXABLE_STATIC_ROUTES
+    .filter((candidate) => candidate.path !== route.path && candidate.path !== '/')
+    .map((candidate) => `<li><a href="${escapeHtml(candidate.path)}">${escapeHtml(candidate.h1)}</a></li>`)
+    .join('')
+  return `<main class="mx-auto max-w-5xl px-4 py-12"><h1 class="font-display text-4xl font-bold text-pine">${escapeHtml(route.h1)}</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(route.intro)}</p><nav class="mt-8 rounded-xl border bg-white p-5" aria-label="CSS Vista resources"><h2 class="font-display text-xl font-bold text-pine">Explore CSS Vista resources</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav></main>`
+}
+
+function routeStructuredData(route, canonical) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': route.schemaType,
+    name: route.h1,
+    description: route.description,
+    url: canonical,
+    isPartOf: { '@type': 'WebSite', name: 'CSS Vista', url: `${siteOrigin}/` },
+    publisher: { '@type': 'Organization', name: 'CSS Vista', url: `${siteOrigin}/` },
+  }
 }
 
 function paperTitle(paper) {
@@ -92,6 +117,55 @@ function collectionBody(examination, year, papers) {
 function css2026ResultBody() {
   return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">FPSC written result · announced ${escapeHtml(css2026Result.announcedDateLabel)}</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(css2026Result.title)}</h1><p class="mt-4 text-base leading-relaxed text-muted-foreground">View and download the complete ${css2026Result.pageCount}-page list of ${css2026Result.qualifiedCandidates} candidates who qualified the written portion of the CSS Competitive Examination 2026.</p><dl class="mt-6 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-3"><div><dt class="text-xs text-muted-foreground">Announced</dt><dd class="font-bold text-pine">${escapeHtml(css2026Result.announcedDateLabel)}</dd></div><div><dt class="text-xs text-muted-foreground">Qualified candidates</dt><dd class="font-bold text-pine">${css2026Result.qualifiedCandidates}</dd></div><div><dt class="text-xs text-muted-foreground">Document</dt><dd class="font-bold text-pine">${css2026Result.pageCount} pages · ${escapeHtml(css2026Result.fileSizeLabel)}</dd></div></dl><div class="mt-5 flex flex-wrap gap-3"><a href="${escapeHtml(css2026Result.pdfUrl)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">View result PDF</a><a href="${escapeHtml(css2026Result.pdfUrl)}" download="${escapeHtml(css2026Result.downloadFilename)}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Download result</a></div><section class="mt-8"><h2 class="font-display text-2xl font-bold text-pine">How to check the CSS 2026 result</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Open the PDF and use its Find or Search command to locate a six-digit roll number or candidate name. This is the written-portion result, not the final allocation result.</p><a class="mt-4 inline-block font-bold text-emerald-800 underline underline-offset-2" href="${escapeHtml(css2026Result.officialResultsUrl)}">Verify updates on the FPSC results page</a></section></main>`
 }
+
+const routeSeoDir = join(clientDir, 'seo', 'routes')
+await mkdir(routeSeoDir, { recursive: true })
+for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
+  const canonical = `${siteOrigin}${route.path}`
+  const html = replaceMeta(clientIndex, {
+    title: route.title,
+    description: route.description,
+    canonical,
+    robots: route.robots,
+    structuredData: routeStructuredData(route, canonical),
+    body: routeBody(route),
+  })
+  if (route.path === '/') await writeFile(indexPath, html)
+  else await writeFile(join(routeSeoDir, staticRouteFile(route.path)), html)
+}
+
+const notFoundHtml = replaceMeta(clientIndex, {
+  title: 'Page Not Found | CSS Vista',
+  description: 'The requested CSS Vista page could not be found.',
+  canonical: `${siteOrigin}/404`,
+  robots: 'noindex, nofollow',
+  structuredData: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Page not found', url: `${siteOrigin}/404` },
+  body: '<main class="mx-auto max-w-3xl px-4 py-16"><h1 class="font-display text-4xl font-bold text-pine">Page not found</h1><p class="mt-4 text-muted-foreground">The requested page does not exist or has moved.</p><a class="mt-6 inline-block font-bold text-emerald-800 underline" href="/">Return to CSS Vista</a></main>',
+})
+await writeFile(join(clientDir, '404.html'), notFoundHtml)
+const protectedRouteHtml = replaceMeta(clientIndex, {
+  title: 'CSS Vista Interactive Study Page',
+  description: 'Interactive CSS Vista study session.',
+  canonical: `${siteOrigin}/`,
+  robots: 'noindex, follow',
+  structuredData: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'CSS Vista interactive study page' },
+  body: '<main class="mx-auto max-w-3xl px-4 py-12"><h1 class="font-display text-3xl font-bold text-pine">CSS Vista interactive study page</h1><p class="mt-3 text-muted-foreground">The interactive application is loading.</p></main>',
+})
+await writeFile(join(routeSeoDir, 'protected.html'), protectedRouteHtml)
+
+const htaccessPath = join(clientDir, '.htaccess')
+const routeRules = ROUTE_REGISTRY
+  .filter((route) => route.match === 'exact' && route.path !== '/' && route.path !== css2026Result.pagePath)
+  .map((route) => {
+    const pattern = route.path.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    return `  RewriteRule ^${pattern}/?$ seo/routes/${staticRouteFile(route.path)} [L,NC]`
+  })
+  .join('\n')
+const htaccess = await readFile(htaccessPath, 'utf8')
+await writeFile(htaccessPath, htaccess.replace(
+  /  # CSSV_GENERATED_ROUTE_RULES_START[\s\S]*?  # CSSV_GENERATED_ROUTE_RULES_END/,
+  `  # CSSV_GENERATED_ROUTE_RULES_START\n${routeRules}\n  # CSSV_GENERATED_ROUTE_RULES_END`,
+))
 
 const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
 const paperSeoDir = join(clientDir, 'seo', 'past-papers')
@@ -199,29 +273,8 @@ await writeFile(join(clientDir, 'seo', 'css-2026-written-result.html'), replaceM
   additionalMeta: `<meta property="article:published_time" content="${escapeHtml(css2026Result.announcedDate)}" />`,
 }))
 
-const coreUrls = [
-  '/',
-  '/subjects/compulsory',
-  '/subjects/optional',
-  '/css-mcqs',
-  '/mpt',
-  '/gk',
-  '/current-affairs',
-  '/past-papers',
-  '/css-past-paper-analysis',
-  '/fpsc-syllabus',
-  '/notes',
-  '/book-summaries',
-  '/five-minute',
-  '/answer-writing',
-  '/start-css',
-  '/consultation',
-  '/exam-intelligence',
-  '/study-tools',
-  css2026Result.pagePath,
-]
 const sitemapUrls = [
-  ...coreUrls.map((path) => `${siteOrigin}${path}`),
+  ...INDEXABLE_STATIC_ROUTES.map((route) => `${siteOrigin}${route.path}`),
   ...[...collections.keys()].map((key) => `${siteOrigin}/past-papers/${key}`),
   ...pastPapers.map((paper) => `${siteOrigin}/past-papers/view/${paper.id}`),
 ]
@@ -230,9 +283,11 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://w
   : `  <url><loc>${escapeHtml(url)}</loc></url>`).join('\n')}\n</urlset>\n`
 await writeFile(join(clientDir, 'sitemap.xml'), sitemap)
 await writeFile(join(clientDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${siteOrigin}/sitemap.xml\n`)
-if (!emitWorker) {
-  await writeFile(indexPath, clientIndex.replaceAll('__SITE_ORIGIN__', siteOrigin))
-}
+
+const exactSeoRoutes = Object.fromEntries(ROUTE_REGISTRY
+  .filter((route) => route.match === 'exact' && route.path !== '/')
+  .map((route) => [route.path, `/seo/routes/${staticRouteFile(route.path).replace(/\.html$/, '')}`]))
+exactSeoRoutes[css2026Result.pagePath] = '/seo/css-2026-written-result'
 
 const worker = `const SECURITY_HEADERS = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -267,15 +322,17 @@ async function fetchPackagedAsset(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
+    const normalizedPath = url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '')
+    const exactSeoRoutes = ${JSON.stringify(exactSeoRoutes)}
     const paperMatch = url.pathname.match(/^\\/past-papers\\/view\\/([a-z0-9-]+)\\/?$/)
     const collectionMatch = url.pathname.match(/^\\/past-papers\\/(css|pms|ppsc|mpt)\\/(\\d{4})\\/?$/)
-    const seoPath = url.pathname.replace(/\/$/, '') === '${css2026Result.pagePath}'
-      ? '/seo/css-2026-written-result'
-      : paperMatch
+    const protectedDynamic = /^\/(?:notes\/view\/[^/]+\/[^/]+|mpt\/bank\/[^/]+|gk\/cat\/[^/]+)\/?$/.test(url.pathname)
+    const seoPath = exactSeoRoutes[normalizedPath]
+      || (paperMatch
         ? '/seo/past-papers/' + paperMatch[1]
         : collectionMatch
           ? '/seo/past-paper-collections/' + collectionMatch[1] + '/' + collectionMatch[2]
-          : null
+          : protectedDynamic ? '/seo/routes/protected' : null)
     let response = seoPath
       ? await fetchPackagedAsset(new Request(new URL(seoPath, url), request), env)
       : await fetchPackagedAsset(request, env)
@@ -297,7 +354,8 @@ export default {
       || !/\\.[a-z0-9]{1,8}$/i.test(url.pathname)
     )
     if (response.status === 404 && documentNavigation) {
-      response = await fetchPackagedAsset(new Request(new URL('/index.html', url), request), env)
+      const notFound = await fetchPackagedAsset(new Request(new URL('/404.html', url), request), env)
+      response = new Response(notFound.body, { status: 404, headers: notFound.headers })
     }
 
     if (response.headers.get('content-type')?.includes('text/html')) {

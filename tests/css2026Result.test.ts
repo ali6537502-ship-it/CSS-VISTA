@@ -24,7 +24,8 @@ test('CSS 2026 result PDF is present, complete and publicly addressable', async 
 
 test('CSS 2026 result page is ad-free under the central route policy', () => {
   const policy = getAdRoutePolicy(css2026WrittenResult.pagePath)
-  assert.equal(policy.eligible, false)
+  assert.equal(policy.autoAdsEnabled, false)
+  assert.equal(policy.manualAdsEnabled, false)
   assert.equal(policy.minimumHeight, 0)
 })
 
