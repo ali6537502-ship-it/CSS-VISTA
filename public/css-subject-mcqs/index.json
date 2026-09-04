@@ -1,8 +1,8 @@
 {
   "batch": "2026-08-24-owner-supplied-complete-import",
   "generatedAt": "2026-09-04T00:00:00.000Z",
-  "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
-  "total": 44820,
+  "policy": "All structurally complete owner-supplied questions are connected after removal of exact, reciprocal, high-confidence duplicate facts and repetitive production-template variants. Distinct facts and legitimate quantitative/formula variants are retained.",
+  "total": 43170,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -366,7 +366,7 @@
       "name": "Criminology",
       "designation": "optional",
       "group": 6,
-      "count": 2385,
+      "count": 2379,
       "topics": [
         "TOPIC 1 - CRIME",
         "TOPIC 2 - CRIMINALITY",
@@ -548,7 +548,7 @@
       "name": "Environmental Sciences",
       "designation": "optional",
       "group": 5,
-      "count": 1242,
+      "count": 1241,
       "topics": [
         "I. History and Development of Environmental Thought",
         "II. Sustainable Development",
@@ -823,7 +823,7 @@
       "name": "History of Pakistan & India",
       "designation": "optional",
       "group": 4,
-      "count": 221,
+      "count": 220,
       "topics": [
         "VOLUME VI"
       ],
@@ -1140,7 +1140,7 @@
       "name": "Mercantile Law",
       "designation": "optional",
       "group": 6,
-      "count": 688,
+      "count": 588,
       "topics": [
         "I. Law of Contract",
         "II. Sale of Goods",
@@ -1165,7 +1165,7 @@
       "name": "Muslim Law & Jurisprudence",
       "designation": "optional",
       "group": 6,
-      "count": 698,
+      "count": 693,
       "topics": [
         "I. The Sources of Islamic Law",
         "II. Principles of Islamic Jurisprudence",
@@ -1211,7 +1211,7 @@
       "name": "Persian",
       "designation": "optional",
       "group": 7,
-      "count": 1566,
+      "count": 1300,
       "topics": [
         "همسو با سرفصل رسمی FPSC — ۶۰ پرسش برای هر عنوان و زیرعنوان"
       ],
@@ -1335,7 +1335,7 @@
       "name": "Political Science",
       "designation": "optional",
       "group": 1,
-      "count": 3656,
+      "count": 3655,
       "topics": [
         "TOPIC 1: PLATO",
         "TOPIC 3: NICCOLÒ MACHIAVELLI",
@@ -1418,7 +1418,7 @@
       "name": "Public Administration",
       "designation": "optional",
       "group": 3,
-      "count": 717,
+      "count": 716,
       "topics": [
         "Coverage Map"
       ],
@@ -1483,7 +1483,7 @@
       "name": "Sindhi",
       "designation": "optional",
       "group": 7,
-      "count": 5232,
+      "count": 3995,
       "topics": [
         "جلد 1: سنڌي ٻوليءَ جي قدامت",
         "جلد 2: سنڌي لوڪ ادب",
@@ -1530,7 +1530,7 @@
       "name": "Sociology",
       "designation": "optional",
       "group": 7,
-      "count": 1455,
+      "count": 1426,
       "topics": [
         "I. General Sociology",
         "II. Sociological Theory",
@@ -1697,7 +1697,7 @@
       "name": "Zoology",
       "designation": "optional",
       "group": 5,
-      "count": 1342,
+      "count": 1339,
       "topics": [
         "Hemichordates and Invertebrate Chordates",
         "Chemical Basis of Animal Life",
