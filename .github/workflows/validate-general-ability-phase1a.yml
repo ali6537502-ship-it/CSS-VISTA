@@ -1,0 +1,82 @@
+name: Validate General Ability Phase 1A
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - 'scripts/add-general-ability-phase1a.mjs'
+      - '.github/workflows/validate-general-ability-phase1a.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production GK World
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          sparse-checkout: |
+            public/mcq
+            src/data/mcq-shards
+            src/data/mcqIndex.ts
+            src/data/mcqMeta.ts
+            scripts/audit-mcq-data.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout Phase 1A tools
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/add-general-ability-phase1a.mjs
+            scripts/sample-repeated-prefixes.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Generate Phase 1A in disposable workspace
+        working-directory: site
+        run: node ../tools/scripts/add-general-ability-phase1a.mjs --apply
+
+      - name: Validate bank structure
+        working-directory: site
+        run: node scripts/audit-mcq-data.mjs
+
+      - name: Validate duplicate and category gates
+        working-directory: site
+        run: |
+          node ../tools/scripts/sample-repeated-prefixes.mjs > /tmp/ga-audit.txt
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs'
+          const idx = JSON.parse(fs.readFileSync('public/mcq/index.json','utf8'))
+          if (idx.total !== 21939) throw new Error(`Expected total 21939; found ${idx.total}`)
+          if (idx.categories.length !== 35) throw new Error(`Expected 35 categories; found ${idx.categories.length}`)
+          const ga = idx.categories.find(c => c.slug === 'general-ability')
+          if (!ga || ga.count !== 250 || ga.chunks !== 1) throw new Error(`General Ability metadata invalid: ${JSON.stringify(ga)}`)
+          const r = JSON.parse(fs.readFileSync('audit-output/gk-world-repetition-report.json','utf8'))
+          if (r.global.exactQuestion.extra !== 0) throw new Error(`Exact duplicate extras: ${r.global.exactQuestion.extra}`)
+          if (r.global.sameCoreAfterGenericLeadRemoval.extra !== 0) throw new Error(`Same-core duplicate extras: ${r.global.sameCoreAfterGenericLeadRemoval.extra}`)
+          const category = r.categories.find(c => c.slug === 'general-ability')
+          if (!category || category.count !== 250) throw new Error('General Ability missing from deep audit')
+          console.log(`Phase 1A passed: ${idx.total} total MCQs, 250 General Ability MCQs, zero exact/same-core duplicate extras.`)
+          NODE
+          rm -rf audit-output
+
+      - name: Enforce GK-only scope
+        working-directory: site
+        run: |
+          git diff --check
+          bad=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            path="${line:3}"
+            case "$path" in
+              public/mcq/*|src/data/mcq-shards/*|src/data/mcqIndex.ts|src/data/mcqMeta.ts) ;;
+              *) echo "Unexpected non-GK change: $path"; bad=1 ;;
+            esac
+          done < <(git status --porcelain)
+          test "$bad" -eq 0
