@@ -168,34 +168,64 @@ const empty: VistaState = {
   reviews: {},
 }
 
+function hydrateState(saved: Partial<VistaState>): VistaState {
+  const savedShortcut = saved.vistaShortcut
+  return {
+    ...empty,
+    ...saved,
+    vistaShortcut: {
+      enabled: typeof savedShortcut?.enabled === 'boolean' ? savedShortcut.enabled : empty.vistaShortcut.enabled,
+      shortcutIds: Array.isArray(savedShortcut?.shortcutIds)
+        ? [...new Set([
+            ...savedShortcut.shortcutIds.filter((id): id is string => typeof id === 'string'),
+            'factbook',
+            'exam-intelligence',
+          ])]
+        : [...empty.vistaShortcut.shortcutIds],
+    },
+  }
+}
+
 export function getState(): VistaState {
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return { ...empty }
-    const saved = JSON.parse(raw) as Partial<VistaState>
-    const savedShortcut = saved.vistaShortcut
-    return {
-      ...empty,
-      ...saved,
-      vistaShortcut: {
-        enabled: typeof savedShortcut?.enabled === 'boolean' ? savedShortcut.enabled : empty.vistaShortcut.enabled,
-        shortcutIds: Array.isArray(savedShortcut?.shortcutIds)
-          ? [...new Set([
-              ...savedShortcut.shortcutIds.filter((id): id is string => typeof id === 'string'),
-              'factbook',
-              'exam-intelligence',
-            ])]
-          : [...empty.vistaShortcut.shortcutIds],
-      },
-    }
+    return hydrateState(JSON.parse(raw) as Partial<VistaState>)
   } catch {
     return { ...empty }
   }
 }
 
+// Read-only selectors such as live timers can run every second. Re-parsing a
+// large student record (thousands of attempts/tasks) on every tick can freeze
+// low-memory phones, so reuse the parsed snapshot until storage actually changes.
+let cachedReadRaw: string | null | undefined
+let cachedReadState: VistaState | null = null
+
+function getCachedReadState(): VistaState {
+  try {
+    const raw = localStorage.getItem(KEY)
+    if (raw === cachedReadRaw && cachedReadState) return cachedReadState
+    const state = raw ? hydrateState(JSON.parse(raw) as Partial<VistaState>) : { ...empty }
+    cachedReadRaw = raw
+    cachedReadState = state
+    return state
+  } catch {
+    cachedReadRaw = undefined
+    cachedReadState = { ...empty }
+    return cachedReadState
+  }
+}
+
+function invalidateReadCache() {
+  cachedReadRaw = undefined
+  cachedReadState = null
+}
+
 function save(s: VistaState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(s))
+    invalidateReadCache()
     notifyProgressChanged()
   } catch {
     /* storage full or unavailable */
@@ -439,7 +469,7 @@ function mockWindow(kind: ScheduledMockKind, dateKey: string) {
 export function getDailyMockStatus(kind: ScheduledMockKind, now = new Date()): DailyMockStatus {
   const dateKey = pakistanDateKey(now)
   const { startAt, registrationClosesAt } = mockWindow(kind, dateKey)
-  const entry = getState().mockSchedule?.[kind]
+  const entry = getCachedReadState().mockSchedule?.[kind]
   const completedToday = entry?.lastSessionDateKey === dateKey
   const beforeStart = now.getTime() < startAt.getTime()
   const afterClose = now.getTime() >= registrationClosesAt.getTime()
@@ -482,7 +512,7 @@ export interface MockAvailability {
 
 export function getMockAvailability(kind: ScheduledMockKind, now = new Date()): MockAvailability {
   const status = getDailyMockStatus(kind, now)
-  const entry = getState().mockSchedule?.[kind]
+  const entry = getCachedReadState().mockSchedule?.[kind]
   return {
     available: status.available,
     cooldownDays: 1,
@@ -687,11 +717,12 @@ export function importData(json: string): boolean {
 
 export function resetData() {
   localStorage.removeItem(KEY)
+  invalidateReadCache()
   notifyProgressChanged()
 }
 
 export function getStats() {
-  const s = getState()
+  const s = getCachedReadState()
   const totalQuizzes = s.quizResults.length
   const avgScore = totalQuizzes
     ? Math.round((s.quizResults.reduce((a, r) => a + r.score / Math.max(1, r.total), 0) / totalQuizzes) * 100)
@@ -743,7 +774,7 @@ export function recordReview(questionId: string, correct: boolean) {
 }
 
 export function getDueReviewIds(limit = 60, now = Date.now()): string[] {
-  return Object.values(getState().reviews)
+  return Object.values(getCachedReadState().reviews)
     .filter((r) => r.dueAt <= now)
     .sort((a, b) => a.dueAt - b.dueAt || b.lapses - a.lapses)
     .slice(0, limit)
@@ -751,7 +782,7 @@ export function getDueReviewIds(limit = 60, now = Date.now()): string[] {
 }
 
 export function getRevisionStats(now = Date.now()) {
-  const reviews = Object.values(getState().reviews)
+  const reviews = Object.values(getCachedReadState().reviews)
   return {
     total: reviews.length,
     due: reviews.filter((r) => r.dueAt <= now).length,
