@@ -1,0 +1,88 @@
+name: Apply General Ability Phase 1A
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - '.github/workflows/apply-general-ability-phase1a.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 1
+          sparse-checkout: |
+            public/mcq
+            src/data/mcq-shards
+            src/data/mcqIndex.ts
+            src/data/mcqMeta.ts
+            scripts/audit-mcq-data.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout validated Phase 1A tools
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/add-general-ability-phase1a.mjs
+            scripts/sample-repeated-prefixes.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Apply Phase 1A
+        working-directory: site
+        run: node ../tools/scripts/add-general-ability-phase1a.mjs --apply
+
+      - name: Validate structure
+        working-directory: site
+        run: node scripts/audit-mcq-data.mjs
+
+      - name: Validate duplicates and totals
+        working-directory: site
+        run: |
+          node ../tools/scripts/sample-repeated-prefixes.mjs > /tmp/ga-audit.txt
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs'
+          const idx = JSON.parse(fs.readFileSync('public/mcq/index.json','utf8'))
+          const r = JSON.parse(fs.readFileSync('audit-output/gk-world-repetition-report.json','utf8'))
+          const ga = idx.categories.find(c => c.slug === 'general-ability')
+          if (idx.total !== 21939 || idx.categories.length !== 35) throw new Error(`Unexpected totals ${idx.total}/${idx.categories.length}`)
+          if (!ga || ga.count !== 250 || ga.chunks !== 1) throw new Error(`Bad General Ability metadata: ${JSON.stringify(ga)}`)
+          if (r.global.exactQuestion.extra !== 0) throw new Error(`Exact duplicates remain: ${r.global.exactQuestion.extra}`)
+          if (r.global.sameCoreAfterGenericLeadRemoval.extra !== 0) throw new Error(`Same-core duplicates remain: ${r.global.sameCoreAfterGenericLeadRemoval.extra}`)
+          console.log('Phase 1A publish gate passed.')
+          NODE
+          rm -rf audit-output
+
+      - name: Enforce GK-only scope
+        working-directory: site
+        run: |
+          git diff --check
+          bad=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            path="${line:3}"
+            case "$path" in
+              public/mcq/*|src/data/mcq-shards/*|src/data/mcqIndex.ts|src/data/mcqMeta.ts) ;;
+              *) echo "Unexpected non-GK change: $path"; bad=1 ;;
+            esac
+          done < <(git status --porcelain)
+          test "$bad" -eq 0
+
+      - name: Commit and push to main
+        working-directory: site
+        run: |
+          git config user.name "CSS VISTA Data Expansion"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/mcq src/data/mcq-shards src/data/mcqIndex.ts src/data/mcqMeta.ts
+          git commit -m "feat: add General Ability phase 1A MCQs"
+          git push origin HEAD:main
