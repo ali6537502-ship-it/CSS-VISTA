@@ -1,0 +1,91 @@
+name: Apply GK World Repetition Correction
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - '.github/workflows/apply-gk-world-correction.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current production main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: site
+          fetch-depth: 1
+          sparse-checkout: |
+            public/mcq
+            src/data/mcq-shards
+            src/data/mcqIndex.ts
+            src/data/mcqMeta.ts
+            scripts/audit-mcq-data.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout validated correction tools
+        uses: actions/checkout@v4
+        with:
+          ref: chat-preview
+          path: tools
+          sparse-checkout: |
+            scripts/finalize-gk-world-correction.mjs
+            scripts/correct-gk-world-repetition.mjs
+            scripts/polish-gk-world-templates.mjs
+            scripts/sample-repeated-prefixes.mjs
+          sparse-checkout-cone-mode: false
+
+      - name: Apply validated GK-only correction
+        working-directory: site
+        run: |
+          node ../tools/scripts/finalize-gk-world-correction.mjs --apply
+          node ../tools/scripts/correct-gk-world-repetition.mjs --apply
+          node ../tools/scripts/polish-gk-world-templates.mjs --apply
+
+      - name: Validate GK structural integrity
+        working-directory: site
+        run: node scripts/audit-mcq-data.mjs
+
+      - name: Validate deep duplication result
+        working-directory: site
+        run: |
+          node ../tools/scripts/sample-repeated-prefixes.mjs > /tmp/gk-audit.txt
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs'
+          const r = JSON.parse(fs.readFileSync('audit-output/gk-world-repetition-report.json', 'utf8'))
+          if (r.loadedTotal !== 21689) throw new Error(`Expected 21689 retained questions, found ${r.loadedTotal}`)
+          if (r.global.exactQuestion.extra !== 0) throw new Error(`Exact duplicate extras remain: ${r.global.exactQuestion.extra}`)
+          if (r.global.normalizedCoreQuestion.extra !== 0) throw new Error(`Same-core duplicate extras remain: ${r.global.normalizedCoreQuestion.extra}`)
+          console.log(`Deep GK audit passed: ${r.loadedTotal} questions, zero exact and zero same-core duplicate extras.`)
+          NODE
+          rm -rf audit-output
+
+      - name: Enforce GK-only file scope
+        working-directory: site
+        run: |
+          git diff --check
+          bad=0
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            path="${line:3}"
+            case "$path" in
+              public/mcq/*|src/data/mcq-shards/*|src/data/mcqIndex.ts|src/data/mcqMeta.ts) ;;
+              *) echo "Unexpected non-GK change: $path"; bad=1 ;;
+            esac
+          done < <(git status --porcelain)
+          if [ "$bad" -ne 0 ]; then exit 1; fi
+          echo "Only GK World bank files and required mirrors/metadata changed."
+
+      - name: Commit and push to production main
+        working-directory: site
+        run: |
+          git config user.name "CSS VISTA GK Cleanup"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/mcq src/data/mcq-shards src/data/mcqIndex.ts src/data/mcqMeta.ts
+          git commit -m "fix: clear GK World MCQ duplication and repetition"
+          git push origin HEAD:main
