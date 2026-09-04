@@ -38,6 +38,13 @@ const quickActions: LinkCard[] = [
     tone: 'blue',
   },
   {
+    title: 'English Grammar Course',
+    description: '30 days · 840 quiz questions',
+    to: '/language-grammar?lang=english&view=master-course',
+    icon: BookOpen,
+    tone: 'emerald',
+  },
+  {
     title: 'CSS Past Paper Analysis',
     description: '3,277 questions mapped topic-wise',
     to: '/css-past-paper-analysis',
@@ -627,7 +634,7 @@ export default function Home() {
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
-          <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-2.5">
+          <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-2.5">
             {quickActions.map((item) => (
               <Link
                 key={item.title}
