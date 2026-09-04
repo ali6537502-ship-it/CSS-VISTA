@@ -3,6 +3,7 @@ import {
   type ReactNode,
 } from 'react'
 import type { SupabaseClient, User } from '@supabase/supabase-js'
+import { useLocation } from 'react-router'
 import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 import {
   AccountContext,
@@ -10,11 +11,6 @@ import {
   type ActionResult,
   type SyncStatus,
 } from '@/lib/accountContext'
-import {
-  clearCloudStudentProgress,
-  clearLocalStudentProgress,
-  syncStudentProgress,
-} from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { scheduleIdleWork } from '@/lib/idle'
 
@@ -27,8 +23,29 @@ function authRedirect(path: string) {
   return new URL(path, AUTH_APP_ORIGIN).toString()
 }
 
+function hasPersistedSupabaseSession() {
+  try {
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index)
+      if (!key?.startsWith('sb-') || !key.endsWith('-auth-token')) continue
+      if (window.localStorage.getItem(key)) return true
+    }
+  } catch {
+    // Storage can be unavailable in strict/private browser modes.
+  }
+  return false
+}
+
+function isAuthCriticalRoute(pathname: string, search: string) {
+  return /^\/(?:account|factbook|admin)(?:\/|$)/.test(pathname)
+    || new URLSearchParams(search).has('reset')
+}
+
 export function AccountProvider({ children }: { children: ReactNode }) {
-  const [loading, setLoading] = useState(accountServiceConfigured)
+  const location = useLocation()
+  const shouldHydrateInitially = accountServiceConfigured
+    && (isAuthCriticalRoute(location.pathname, location.search) || hasPersistedSupabaseSession())
+  const [loading, setLoading] = useState(shouldHydrateInitially)
   const [client, setClient] = useState<SupabaseClient | null>(null)
   const [user, setUser] = useState<User | null>(null)
   const [passwordRecovery, setPasswordRecovery] = useState(() => new URLSearchParams(window.location.search).get('reset') === '1')
@@ -45,6 +62,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     setSyncStatus('syncing')
     setSyncError('')
     try {
+      const { syncStudentProgress } = await import('@/lib/accountSync')
       await syncStudentProgress(client, user.id)
       setLastSyncedAt(new Date())
       setSyncStatus('synced')
@@ -60,23 +78,33 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   }, [client, user])
 
   useEffect(() => {
-    if (!accountServiceConfigured) return
+    if (!accountServiceConfigured || client) return
 
+    const authCriticalRoute = isAuthCriticalRoute(location.pathname, location.search)
+    const shouldLoadAccountRuntime = authCriticalRoute || hasPersistedSupabaseSession()
+    if (!shouldLoadAccountRuntime) {
+      setLoading(false)
+      return
+    }
+
+    if (authCriticalRoute) setLoading(true)
     let active = true
-    const authCriticalRoute = /^\/(?:account|factbook|admin)(?:\/|$)/.test(window.location.pathname)
-      || new URLSearchParams(window.location.search).has('reset')
     const cancel = scheduleIdleWork(() => {
       void getSupabaseClient().then((nextClient) => {
         if (!active) return
         setClient(nextClient)
         if (!nextClient) setLoading(false)
       })
-    }, { timeout: 1_500, fallbackDelay: 500, immediate: authCriticalRoute })
+    }, {
+      timeout: authCriticalRoute ? 1_500 : 6_000,
+      fallbackDelay: authCriticalRoute ? 0 : 2_500,
+      immediate: authCriticalRoute,
+    })
     return () => {
       active = false
       cancel()
     }
-  }, [])
+  }, [client, location.pathname, location.search])
 
   useEffect(() => {
     if (!client) return
@@ -193,6 +221,10 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     syncNow,
     async resetProgress() {
       try {
+        const {
+          clearCloudStudentProgress,
+          clearLocalStudentProgress,
+        } = await import('@/lib/accountSync')
         clearLocalStudentProgress()
         if (client && user) await clearCloudStudentProgress(client, user.id)
         setSyncStatus(user ? 'synced' : 'idle')

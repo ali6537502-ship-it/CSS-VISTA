@@ -1,4 +1,3 @@
-import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 import type { StudyPlannerSettings } from '@/lib/store'
 
 export interface PlanTask {
@@ -10,9 +9,65 @@ export interface PlanTask {
   to: string
 }
 
-export const allOptionalSubjects = optionalGroups
-  .flatMap((group) => group.subjects.map((subject) => subject.name))
-  .sort((a, b) => a.localeCompare(b))
+const compulsoryPlannerSubjects = [
+  { name: 'English Essay', slug: 'essay' },
+  { name: 'English (Precis & Composition)', slug: 'precis-composition' },
+  { name: 'General Science & Ability', slug: 'general-science-ability' },
+  { name: 'Current Affairs', slug: 'current-affairs' },
+  { name: 'Pakistan Affairs', slug: 'pakistan-affairs' },
+  { name: 'Islamic Studies / Comparative Religion', slug: 'islamic-studies' },
+] as const
+
+// Keep the homepage planner independent from the full 30 KB detailed syllabus
+// dataset. The planner only needs the official subject names, while syllabus
+// pages load the detailed FPSC material in their own lazy route chunk.
+export const allOptionalSubjects = [
+  'Accounting & Auditing',
+  'Economics',
+  'Computer Science',
+  'Political Science',
+  'International Relations',
+  'Physics',
+  'Chemistry',
+  'Applied Mathematics',
+  'Pure Mathematics',
+  'Statistics',
+  'Geology',
+  'Business Administration',
+  'Public Administration',
+  'Governance & Public Policies',
+  'Town Planning & Urban Management',
+  'History of Pakistan & India',
+  'Islamic History & Culture',
+  'British History',
+  'European History',
+  'History of USA',
+  'Gender Studies',
+  'Environmental Sciences',
+  'Agriculture & Forestry',
+  'Botany',
+  'Zoology',
+  'English Literature',
+  'Urdu Literature',
+  'Law',
+  'Constitutional Law',
+  'International Law',
+  'Muslim Law & Jurisprudence',
+  'Mercantile Law',
+  'Criminology',
+  'Philosophy',
+  'Journalism & Mass Communication',
+  'Psychology',
+  'Geography',
+  'Sociology',
+  'Anthropology',
+  'Punjabi',
+  'Sindhi',
+  'Pashto',
+  'Balochi',
+  'Persian',
+  'Arabic',
+].sort((a, b) => a.localeCompare(b))
 
 export function localDateKey(date = new Date()) {
   const year = date.getFullYear()
@@ -40,7 +95,7 @@ export function buildDailyPlan(
   dateKey: string,
   dueRevisions: number,
 ): PlanTask[] {
-  const compulsory = compulsorySubjects.map((subject) => ({
+  const compulsory = compulsoryPlannerSubjects.map((subject) => ({
     name: subject.name,
     slug: subject.slug,
     progress: progress[subject.slug] ?? 0,

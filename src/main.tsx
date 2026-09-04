@@ -11,12 +11,12 @@ installChunkRecovery()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AccountProvider>
-      <SiteContentProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AccountProvider>
+        <SiteContentProvider>
           <App />
-        </BrowserRouter>
-      </SiteContentProvider>
-    </AccountProvider>
+        </SiteContentProvider>
+      </AccountProvider>
+    </BrowserRouter>
   </StrictMode>,
 )
