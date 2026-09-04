@@ -22,19 +22,22 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Checkout cleanup tool only
+      - name: Checkout cleanup tools only
         uses: actions/checkout@v4
         with:
           ref: chat-preview
           path: tools
           sparse-checkout: |
             scripts/cleanup-css-subject-repetition.mjs
+            scripts/cleanup-sindhi-final-near-duplicates.mjs
             scripts/report-css-mcq-repetition.mjs
           sparse-checkout-cone-mode: false
 
       - name: Remove duplicate and repetitive CSS MCQ variants only
         working-directory: site
-        run: node ../tools/scripts/cleanup-css-subject-repetition.mjs
+        run: |
+          node ../tools/scripts/cleanup-css-subject-repetition.mjs
+          node ../tools/scripts/cleanup-sindhi-final-near-duplicates.mjs
 
       - name: Verify no non-MCQ website files changed
         working-directory: site
