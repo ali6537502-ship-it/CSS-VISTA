@@ -43,6 +43,8 @@ jobs:
           node ../tools/scripts/final-targeted-mcq-cleanup.mjs
           node ../tools/scripts/cleanup-sindhi-final-near-duplicates.mjs
           node ../tools/scripts/cleanup-css-subject-repetition.mjs
+          node scripts/clean-mcq-quality.mjs --apply
+          git restore -- public/mcq src/data docs
 
       - name: Verify no non-MCQ website files changed
         working-directory: site
