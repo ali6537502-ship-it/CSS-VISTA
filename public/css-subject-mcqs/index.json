@@ -1,8 +1,8 @@
 {
   "batch": "2026-08-24-owner-supplied-complete-import",
   "generatedAt": "2026-09-04T00:00:00.000Z",
-  "policy": "All structurally complete owner-supplied questions are connected after removal of exact, reciprocal, high-confidence duplicate facts and repetitive production-template variants. Distinct facts and legitimate quantitative/formula variants are retained.",
-  "total": 43143,
+  "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
+  "total": 42730,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -1140,7 +1140,7 @@
       "name": "Mercantile Law",
       "designation": "optional",
       "group": 6,
-      "count": 588,
+      "count": 586,
       "topics": [
         "I. Law of Contract",
         "II. Sale of Goods",
@@ -1483,7 +1483,7 @@
       "name": "Sindhi",
       "designation": "optional",
       "group": 7,
-      "count": 3968,
+      "count": 3564,
       "topics": [
         "جلد 1: سنڌي ٻوليءَ جي قدامت",
         "جلد 2: سنڌي لوڪ ادب",
@@ -1697,7 +1697,7 @@
       "name": "Zoology",
       "designation": "optional",
       "group": 5,
-      "count": 1339,
+      "count": 1332,
       "topics": [
         "Hemichordates and Invertebrate Chordates",
         "Chemical Basis of Animal Life",
