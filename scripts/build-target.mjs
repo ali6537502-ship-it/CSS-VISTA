@@ -34,6 +34,7 @@ if (target === 'hostinger') {
 run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])
 await import(`./prepare-sites-build.mjs?target=${target}`)
+if (target === 'hostinger') await import('./expand-hostinger-seo.mjs')
 
 if (target === 'sites') {
   const metadataDir = join(root, 'dist', '.openai')
