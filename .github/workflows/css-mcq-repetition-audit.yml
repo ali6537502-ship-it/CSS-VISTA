@@ -1,0 +1,36 @@
+name: CSS MCQ Repetition Audit
+
+on:
+  push:
+    branches:
+      - chat-preview
+    paths:
+      - 'scripts/report-css-mcq-repetition.mjs'
+      - '.github/workflows/css-mcq-repetition-audit.yml'
+      - 'public/css-subject-mcqs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run deep repetition audit
+        run: node scripts/report-css-mcq-repetition.mjs
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: css-mcq-repetition-report
+          path: audit-output
+          retention-days: 2
