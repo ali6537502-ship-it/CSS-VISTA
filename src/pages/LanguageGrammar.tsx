@@ -4,6 +4,7 @@ import {
   BookOpen, ChevronLeft, ChevronRight, Languages, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import MasterGrammarCourse from './MasterGrammarCourse'
 import {
   getGrammarCourse,
   getGrammarIndex,
@@ -65,6 +66,7 @@ export default function LanguageGrammar() {
   const resultStart = filtered.length ? (safePage - 1) * PAGE_SIZE + 1 : 0
   const resultEnd = Math.min(safePage * PAGE_SIZE, filtered.length)
   const rtl = course?.direction === 'rtl'
+  const showMasterCourse = language === 'english' && searchParams.get('view') === 'master-course'
 
   function selectLanguage(next: Language) {
     setLanguage(next)
@@ -76,6 +78,8 @@ export default function LanguageGrammar() {
     setQuery('')
     setPage(1)
   }
+
+  if (showMasterCourse) return <MasterGrammarCourse />
 
   return (
     <div>
@@ -113,6 +117,28 @@ export default function LanguageGrammar() {
             )
           })}
         </section>
+
+        {language === 'english' && (
+          <section className="mt-4 overflow-hidden rounded-2xl border border-emerald-900/10 bg-gradient-to-r from-emerald-950 to-emerald-800 p-5 text-white shadow-sm sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-300">New guided course</p>
+                <h2 className="mt-1 font-display text-2xl font-bold">30-Day Master Grammar Course</h2>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-emerald-100">
+                  Study the complete 30-day book as an expanded web course with deeper explanations,
+                  worked examples, extra drills, daily quizzes, answer feedback, and saved progress.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSearchParams({ lang: 'english', view: 'master-course' })}
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amber-300 px-4 py-2.5 text-sm font-bold text-emerald-950 hover:bg-amber-200"
+              >
+                Open full course <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </section>
+        )}
 
         {error && (
           <p role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
