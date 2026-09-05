@@ -13,7 +13,9 @@ export interface AdRoutePolicy {
 /**
  * Advertising is fail-closed: only a substantial route explicitly marked as
  * content in the shared route registry may load Auto ads or render a manual
- * slot. Google, not application timers, controls vignette frequency.
+ * slot. The homepage is the one deliberate exception: it may render a single
+ * manual pre-footer slot while Auto ads remain disabled there. Google, not
+ * application timers, controls vignette frequency.
  */
 export function getAdRoutePolicy(pathname: string, search = ''): AdRoutePolicy {
   const route = findRouteDefinition(pathname)
@@ -24,6 +26,16 @@ export function getAdRoutePolicy(pathname: string, search = ''): AdRoutePolicy {
       reason: 'Unknown or insufficient-content route',
       placementType: 'pre-footer',
       minimumHeight: 0,
+    }
+  }
+
+  if (normalizeRoutePath(pathname) === '/') {
+    return {
+      autoAdsEnabled: false,
+      manualAdsEnabled: true,
+      reason: 'Homepage manual pre-footer placement',
+      placementType: 'pre-footer',
+      minimumHeight: 250,
     }
   }
 
@@ -64,11 +76,12 @@ export function shouldProtectVignetteLink(input: {
   download?: boolean
   navigationControl?: boolean
 }) {
+  const currentPolicy = getAdRoutePolicy(input.currentPath, input.currentSearch)
   return Boolean(
     input.download
     || input.external
     || input.navigationControl
-    || isAdFreePath(input.currentPath, input.currentSearch)
+    || !currentPolicy.autoAdsEnabled
     || (input.destinationPath && isAdFreePath(input.destinationPath, input.destinationSearch)),
   )
 }

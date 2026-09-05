@@ -7,9 +7,17 @@ test('publisher ID is the verified CSS Vista publisher', () => {
   assert.equal(ADSENSE_PUBLISHER_ID, 'ca-pub-6131271603014611')
 })
 
-test('homepage, private, legal, viewer and active question routes are ad-free', () => {
+test('homepage permits one manual pre-footer ad while Auto ads stay disabled', () => {
+  const policy = getAdRoutePolicy('/')
+  assert.equal(policy.autoAdsEnabled, false)
+  assert.equal(policy.manualAdsEnabled, true)
+  assert.equal(policy.placementType, 'pre-footer')
+  assert.ok(policy.minimumHeight >= 250)
+})
+
+test('private, legal, viewer and active question routes are ad-free', () => {
   const protectedRoutes = [
-    '/', '/mpt', '/mpt/bank/everyday-science', '/gk', '/gk/cat/islamic-general-knowledge',
+    '/mpt', '/mpt/bank/everyday-science', '/gk', '/gk/cat/islamic-general-knowledge',
     '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
     '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
     '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy',
@@ -23,7 +31,7 @@ test('homepage, private, legal, viewer and active question routes are ad-free', 
   }
 })
 
-test('only substantial public content is monetization eligible', () => {
+test('only substantial public content is fully monetization eligible', () => {
   const eligibleRoutes = [
     '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
