@@ -85,7 +85,7 @@ export default function LanguageGrammar() {
     <div>
       <PageHeader
         title="Urdu & English Grammar"
-        description="Structured grammar lessons reconstructed from the supplied study material. These are course rules and reference notes, not MCQs."
+        description="Grammar rules and reference material for Urdu and English, with a separate 30-day English practice course."
       />
 
       <main className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
@@ -111,7 +111,7 @@ export default function LanguageGrammar() {
                   {item === 'urdu' ? 'اردو قواعد' : 'English Grammar'}
                 </p>
                 <p className={`mt-1 text-xs ${selected ? 'text-emerald-100' : 'text-muted-foreground'}`}>
-                  {summary ? `${summary.total.toLocaleString()} lesson records · ${summary.topics} topics` : 'Loading course summary…'}
+                  {summary ? `${summary.total.toLocaleString()} reference entries · ${summary.topics} topics` : 'Loading course summary…'}
                 </p>
               </button>
             )
@@ -122,11 +122,10 @@ export default function LanguageGrammar() {
           <section className="mt-4 overflow-hidden rounded-2xl border border-emerald-900/10 bg-gradient-to-r from-emerald-950 to-emerald-800 p-5 text-white shadow-sm sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-300">New guided course</p>
-                <h2 className="mt-1 font-display text-2xl font-bold">30-Day Master Grammar Course</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-300">30-day English course</p>
+                <h2 className="mt-1 font-display text-2xl font-bold">30-Day English Grammar Course</h2>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-emerald-100">
-                  Study the complete 30-day book as an expanded web course with deeper explanations,
-                  worked examples, extra drills, daily quizzes, answer feedback, and saved progress.
+                  Follow one lesson each day: learn the rule, see clear examples, practise it, take a daily test, and track your progress.
                 </p>
               </div>
               <button
@@ -134,7 +133,7 @@ export default function LanguageGrammar() {
                 onClick={() => setSearchParams({ lang: 'english', view: 'master-course' })}
                 className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amber-300 px-4 py-2.5 text-sm font-bold text-emerald-950 hover:bg-amber-200"
               >
-                Open full course <ChevronRight className="h-4 w-4" />
+                Start 30-day course <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </section>
@@ -178,7 +177,7 @@ export default function LanguageGrammar() {
                     >
                       <span className="block">{topic.title}</span>
                       <span className={`text-[10px] ${selected ? 'text-emerald-100' : 'text-muted-foreground'}`}>
-                        {topic.items.length.toLocaleString()} {language === 'urdu' ? 'اسباق' : 'records'}
+                        {topic.items.length.toLocaleString()} {language === 'urdu' ? 'اسباق' : 'entries'}
                       </span>
                     </button>
                   )
@@ -208,13 +207,13 @@ export default function LanguageGrammar() {
               </label>
 
               <div className="mt-3 flex items-center justify-between gap-3 text-xs text-muted-foreground">
-                <span>{filtered.length.toLocaleString()} {language === 'urdu' ? 'نتائج' : 'matching records'}</span>
-                <span>{language === 'urdu' ? 'اردو نستعلیق' : 'English reference course'}</span>
+                <span>{filtered.length.toLocaleString()} {language === 'urdu' ? 'نتائج' : 'matching entries'}</span>
+                <span>{language === 'urdu' ? 'اردو نستعلیق' : 'English grammar reference'}</span>
               </div>
 
               {visible.length === 0 ? (
                 <p className="mt-4 rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground">
-                  {language === 'urdu' ? 'کوئی نتیجہ نہیں ملا۔' : 'No lesson record matches this search.'}
+                  {language === 'urdu' ? 'کوئی نتیجہ نہیں ملا۔' : 'No grammar entry matches this search.'}
                 </p>
               ) : (
                 <ol start={resultStart} className="mt-4 grid gap-3">
