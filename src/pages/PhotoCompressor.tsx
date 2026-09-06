@@ -4,6 +4,16 @@ import { PageHeader } from '@/components/shared'
 
 const TARGET_SIZES = Array.from({ length: 51 }, (_, index) => index + 10)
 const MAX_INPUT_BYTES = 20 * 1024 * 1024
+const MIN_JPEG_QUALITY = 0.84
+const MAX_JPEG_QUALITY = 0.94
+const MIN_DIMENSION = 80
+
+type CompressionResult = {
+  blob: Blob
+  width: number
+  height: number
+  quality: number
+}
 
 function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`
@@ -35,7 +45,22 @@ function loadImage(file: File) {
   })
 }
 
-async function compressImage(file: File, targetKb: number) {
+function renderAtSize(image: HTMLImageElement, width: number, height: number) {
+  const canvas = document.createElement('canvas')
+  canvas.width = width
+  canvas.height = height
+  const context = canvas.getContext('2d', { alpha: false })
+  if (!context) throw new Error('Image compression is not supported by this browser.')
+
+  context.fillStyle = '#ffffff'
+  context.fillRect(0, 0, width, height)
+  context.imageSmoothingEnabled = true
+  context.imageSmoothingQuality = 'high'
+  context.drawImage(image, 0, 0, width, height)
+  return canvas
+}
+
+async function compressImage(file: File, targetKb: number): Promise<CompressionResult> {
   const image = await loadImage(file)
   const targetBytes = targetKb * 1024
   const originalWidth = image.naturalWidth || image.width
@@ -43,51 +68,61 @@ async function compressImage(file: File, targetKb: number) {
 
   if (!originalWidth || !originalHeight) throw new Error('The selected image has invalid dimensions.')
 
-  const initialScale = Math.min(1, 1800 / Math.max(originalWidth, originalHeight))
+  const initialScale = Math.min(1, 1600 / Math.max(originalWidth, originalHeight))
   let width = Math.max(1, Math.round(originalWidth * initialScale))
   let height = Math.max(1, Math.round(originalHeight * initialScale))
-  let smallestBlob: Blob | null = null
 
-  for (let resizeAttempt = 0; resizeAttempt < 18; resizeAttempt += 1) {
-    const canvas = document.createElement('canvas')
-    canvas.width = width
-    canvas.height = height
-    const context = canvas.getContext('2d', { alpha: false })
-    if (!context) throw new Error('Image compression is not supported by this browser.')
+  for (let resizeAttempt = 0; resizeAttempt < 14; resizeAttempt += 1) {
+    const canvas = renderAtSize(image, width, height)
+    const floorBlob = await canvasToBlob(canvas, MIN_JPEG_QUALITY)
 
-    context.fillStyle = '#ffffff'
-    context.fillRect(0, 0, width, height)
-    context.imageSmoothingEnabled = true
-    context.imageSmoothingQuality = 'high'
-    context.drawImage(image, 0, 0, width, height)
+    // Quality-first rule: never crush JPEG quality to hit the target. If the
+    // image is still too large at good JPEG quality, reduce dimensions instead.
+    if (floorBlob.size > targetBytes) {
+      if (width <= MIN_DIMENSION || height <= MIN_DIMENSION) break
 
-    let low = 0.03
-    let high = 0.96
-    let bestUnderTarget: Blob | null = null
+      const estimatedScale = Math.sqrt(targetBytes / floorBlob.size)
+      const shrinkFactor = Math.min(0.9, Math.max(0.6, estimatedScale * 0.97))
+      const nextWidth = Math.max(MIN_DIMENSION, Math.round(width * shrinkFactor))
+      const nextHeight = Math.max(MIN_DIMENSION, Math.round(height * shrinkFactor))
 
-    for (let qualityAttempt = 0; qualityAttempt < 12; qualityAttempt += 1) {
+      if (nextWidth === width && nextHeight === height) {
+        width = Math.max(MIN_DIMENSION, width - 1)
+        height = Math.max(MIN_DIMENSION, height - 1)
+      } else {
+        width = nextWidth
+        height = nextHeight
+      }
+      continue
+    }
+
+    const topBlob = await canvasToBlob(canvas, MAX_JPEG_QUALITY)
+    if (topBlob.size <= targetBytes) {
+      return { blob: topBlob, width, height, quality: MAX_JPEG_QUALITY }
+    }
+
+    let low = MIN_JPEG_QUALITY
+    let high = MAX_JPEG_QUALITY
+    let bestBlob = floorBlob
+    let bestQuality = MIN_JPEG_QUALITY
+
+    for (let qualityAttempt = 0; qualityAttempt < 10; qualityAttempt += 1) {
       const quality = (low + high) / 2
       const blob = await canvasToBlob(canvas, quality)
 
-      if (!smallestBlob || blob.size < smallestBlob.size) smallestBlob = blob
-
       if (blob.size <= targetBytes) {
-        bestUnderTarget = blob
+        bestBlob = blob
+        bestQuality = quality
         low = quality
       } else {
         high = quality
       }
     }
 
-    if (bestUnderTarget) return bestUnderTarget
-
-    if (width <= 120 || height <= 120) break
-    width = Math.max(120, Math.round(width * 0.82))
-    height = Math.max(120, Math.round(height * 0.82))
+    return { blob: bestBlob, width, height, quality: bestQuality }
   }
 
-  if (smallestBlob && smallestBlob.size <= targetBytes) return smallestBlob
-  throw new Error(`This photo could not be reduced below ${targetKb} KB without making it unusably small.`)
+  throw new Error(`This photo could not be reduced below ${targetKb} KB while preserving acceptable image quality.`)
 }
 
 export default function PhotoCompressor() {
@@ -96,6 +131,7 @@ export default function PhotoCompressor() {
   const [originalPreview, setOriginalPreview] = useState<string | null>(null)
   const [outputBlob, setOutputBlob] = useState<Blob | null>(null)
   const [outputPreview, setOutputPreview] = useState<string | null>(null)
+  const [outputMeta, setOutputMeta] = useState<Omit<CompressionResult, 'blob'> | null>(null)
   const [working, setWorking] = useState(false)
   const [error, setError] = useState('')
 
@@ -113,6 +149,7 @@ export default function PhotoCompressor() {
     if (outputPreview) URL.revokeObjectURL(outputPreview)
     setOutputPreview(null)
     setOutputBlob(null)
+    setOutputMeta(null)
   }
 
   function handleFile(nextFile: File | null) {
@@ -147,9 +184,10 @@ export default function PhotoCompressor() {
     clearOutput()
 
     try {
-      const blob = await compressImage(file, targetKb)
-      setOutputBlob(blob)
-      setOutputPreview(URL.createObjectURL(blob))
+      const result = await compressImage(file, targetKb)
+      setOutputBlob(result.blob)
+      setOutputMeta({ width: result.width, height: result.height, quality: result.quality })
+      setOutputPreview(URL.createObjectURL(result.blob))
     } catch (compressionError) {
       setError(compressionError instanceof Error ? compressionError.message : 'The photo could not be compressed.')
     } finally {
@@ -242,7 +280,7 @@ export default function PhotoCompressor() {
 
           <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-6">
             <h2 className="font-display text-xl font-bold text-pine">Preview & download</h2>
-            <p className="mt-1 text-xs text-muted-foreground">The result is saved as a JPG at or below the selected size.</p>
+            <p className="mt-1 text-xs text-muted-foreground">Quality-first compression keeps JPEG quality high and reduces dimensions only as much as needed.</p>
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div>
@@ -265,6 +303,7 @@ export default function PhotoCompressor() {
                   <div>
                     <p className="text-sm font-bold text-emerald-950">Ready to download</p>
                     <p className="mt-0.5 text-xs text-emerald-800">Final size: {formatBytes(outputBlob.size)} · Limit: {targetKb} KB</p>
+                    {outputMeta && <p className="mt-0.5 text-xs text-emerald-800">Dimensions: {outputMeta.width} × {outputMeta.height}px · High-quality JPEG</p>}
                   </div>
                   <span className="rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-900">JPG</span>
                 </div>
@@ -279,7 +318,7 @@ export default function PhotoCompressor() {
             )}
 
             <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-              Very small targets such as 10–14 KB require stronger compression. CSS Vista automatically adjusts image quality and dimensions while keeping the result within the selected limit.
+              Extremely small targets such as 10–14 KB cannot keep the original pixel dimensions. CSS Vista now protects image quality first and reduces resolution gradually instead of using destructive low-quality JPEG compression.
             </p>
           </section>
         </div>
