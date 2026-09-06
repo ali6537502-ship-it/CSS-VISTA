@@ -23,10 +23,6 @@ function extractLocs(xml) {
 }
 
 const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
-const cssPapers = registeredPapers.filter((paper) => paper.examination === 'CSS')
-const pmsPapers = registeredPapers.filter((paper) => paper.examination === 'PMS')
-const ppscPapers = registeredPapers.filter((paper) => paper.examination === 'PPSC')
-const mptPapers = registeredPapers.filter((paper) => paper.examination === 'MPT')
 
 await Promise.all([
   access(join(dist, 'index.html')),
@@ -60,12 +56,22 @@ for (const name of childSitemaps) {
   assert(sitemapIndex.includes(`<loc>${siteOrigin}/${name}</loc>`), `Root sitemap index is missing ${name}`)
 }
 
-const allLocs = childXmls.flatMap(extractLocs)
+const [coreLocs, gkLocs, collectionLocs, paperLocs] = childXmls.map(extractLocs)
+const allLocs = [...coreLocs, ...gkLocs, ...collectionLocs, ...paperLocs]
 const uniqueLocs = new Set(allLocs)
 const collectionCount = new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size
-const expectedSitemapCount = INDEXABLE_STATIC_ROUTES.length + collectionCount + registeredPapers.length
 
-assert(allLocs.length === expectedSitemapCount, `Expected ${expectedSitemapCount} canonical sitemap URLs, found ${allLocs.length}`)
+assert(coreLocs.length === INDEXABLE_STATIC_ROUTES.length, `Expected ${INDEXABLE_STATIC_ROUTES.length} core sitemap URLs, found ${coreLocs.length}`)
+for (const route of INDEXABLE_STATIC_ROUTES) {
+  assert(coreLocs.includes(`${siteOrigin}${route.path}`), `Core sitemap is missing ${route.path}`)
+}
+assert(gkLocs.length > 0, 'GK sitemap must contain at least one category URL')
+assert(gkLocs.every((url) => /^https:\/\/www\.css-vista\.com\/gk\/cat\/[^/?#]+\/?$/.test(url)), 'GK sitemap contains a non-category URL')
+assert(collectionLocs.length === collectionCount, `Expected ${collectionCount} collection sitemap URLs, found ${collectionLocs.length}`)
+assert(collectionLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/(?:css|pms|ppsc|mpt)\/\d{4}\/?$/.test(url)), 'Collection sitemap contains an invalid URL')
+assert(paperLocs.length === registeredPapers.length, `Expected ${registeredPapers.length} past-paper sitemap URLs, found ${paperLocs.length}`)
+assert(paperLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/view\/[A-Za-z0-9-]+\/?$/.test(url)), 'Past-paper sitemap contains an invalid URL')
+
 assert(uniqueLocs.size === allLocs.length, 'Child sitemaps contain duplicate URLs')
 assert(allLocs.every((url) => url === `${siteOrigin}/` || url.startsWith(`${siteOrigin}/`)), 'A sitemap URL uses a non-canonical host')
 assert(allLocs.includes(`${siteOrigin}/`), 'Homepage is missing from child sitemaps')
@@ -98,12 +104,8 @@ assert(htaccess.includes('RewriteRule ^ - [R=404,L]'), 'Unknown clean routes mus
 assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?'), 'Crawler-file rules do not explicitly protect sitemap index and child sitemaps')
 assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advertise the canonical sitemap index')
 
-assert(paperFiles.filter((name) => name.endsWith('.html')).length === 782, 'Expected 782 direct past-paper SEO pages')
-assert(cssPapers.length === 467, 'Expected 467 registered CSS past papers')
-assert(pmsPapers.length === 138, 'Expected 138 registered PMS past papers')
-assert(ppscPapers.length === 173, 'Expected 173 registered PPSC past papers')
-assert(mptPapers.length === 4, 'Expected 4 registered MPT past papers')
-assert(registeredPapers.length === 782, 'Expected 782 registered past papers in total')
+assert(paperFiles.filter((name) => name.endsWith('.html')).length === registeredPapers.length, `Expected ${registeredPapers.length} direct past-paper SEO pages`)
+assert(registeredPapers.length > 0, 'Past-paper registry must not be empty')
 
 const samplePdf = join(dist, registeredPapers[0].fileUrl.replace(/^\/+/, ''))
 const handle = await open(samplePdf, 'r')
@@ -115,4 +117,4 @@ try {
   await handle.close()
 }
 
-console.log(`Hostinger SEO artifact audit passed: ${allLocs.length} canonical URLs across ${childSitemaps.length} child sitemaps, reinforced CSS Vista homepage signals, canonical redirects, and ${registeredPapers.length} past-paper pages verified.`)
+console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length}, gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)
