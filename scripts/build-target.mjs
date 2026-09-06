@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const target = process.argv[2] || 'hostinger'
+const strictContentValidation = process.argv.includes('--strict') || process.env.CSSV_STRICT_CONTENT_VALIDATION === 'true'
 
 if (!['hostinger', 'sites'].includes(target)) {
   throw new Error(`Unknown build target: ${target}`)
@@ -25,6 +26,8 @@ if (target === 'hostinger') {
   process.env.CSSV_CLIENT_DIR = 'dist'
   process.env.CSSV_EMIT_WORKER = 'false'
   process.env.SITE_ORIGIN ||= 'https://www.css-vista.com'
+  process.env.CSSV_STRICT_CONTENT_VALIDATION = strictContentValidation ? 'true' : 'false'
+  run('scripts/hostinger-preflight.mjs')
 } else {
   delete process.env.CSSV_CLIENT_DIR
   delete process.env.CSSV_EMIT_WORKER
@@ -39,7 +42,8 @@ if (target === 'hostinger') {
   await import('./repair-search-visibility.mjs')
   await import('./enhance-search-landing-pages.mjs')
   await import('./enrich-past-paper-collections-before-validation.mjs')
-  await import('./strengthen-longtail-search-pages.mjs')
+  if (strictContentValidation) await import('./strengthen-longtail-search-pages.mjs')
+  else await import('./safe-longtail-enrichment.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')
