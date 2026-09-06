@@ -9,11 +9,13 @@ In Hostinger, connect the GitHub repository and use exactly these settings:
 - Branch: `main`
 - Framework: Vite / React front-end
 - Node.js version: `22.x`
-- Install command: `npm ci --no-audit --no-fund`
+- Install command: `npm install --no-audit --no-fund`
 - Build command: `npm run build:hostinger`
 - Output directory: `dist`
 - Entry/start file: none
 - Production domain: `https://www.css-vista.com`
+
+Use `npm install`, not `npm ci`, for the Hostinger build. The repository previously had a lock-only install state that could omit the direct `react-router` dependency in a completely clean build. The production install now reconciles `package.json` and the lockfile before compiling.
 
 Once the repository is connected to Hostinger Git deployment, new commits on `main` can be deployed through the normal Hostinger Git deployment flow without creating a separate server build.
 
