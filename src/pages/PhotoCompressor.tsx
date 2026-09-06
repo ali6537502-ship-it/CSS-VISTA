@@ -4,9 +4,11 @@ import { PageHeader } from '@/components/shared'
 
 const TARGET_SIZES = Array.from({ length: 51 }, (_, index) => index + 10)
 const MAX_INPUT_BYTES = 20 * 1024 * 1024
-const MIN_JPEG_QUALITY = 0.84
-const MAX_JPEG_QUALITY = 0.94
-const MIN_DIMENSION = 80
+const MIN_JPEG_QUALITY = 0.6
+const MAX_JPEG_QUALITY = 0.82
+const MIN_DIMENSION = 220
+const MAX_STARTING_SIDE = 1400
+const FIT_CANDIDATES = 3
 
 type CompressionResult = {
   blob: Blob
@@ -60,6 +62,42 @@ function renderAtSize(image: HTMLImageElement, width: number, height: number) {
   return canvas
 }
 
+async function encodeBestQualityForSize(canvas: HTMLCanvasElement, targetBytes: number) {
+  const floorBlob = await canvasToBlob(canvas, MIN_JPEG_QUALITY)
+  if (floorBlob.size > targetBytes) return null
+
+  const topBlob = await canvasToBlob(canvas, MAX_JPEG_QUALITY)
+  if (topBlob.size <= targetBytes) {
+    return { blob: topBlob, quality: MAX_JPEG_QUALITY }
+  }
+
+  let low = MIN_JPEG_QUALITY
+  let high = MAX_JPEG_QUALITY
+  let bestBlob = floorBlob
+  let bestQuality = MIN_JPEG_QUALITY
+
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    const quality = (low + high) / 2
+    const blob = await canvasToBlob(canvas, quality)
+    if (blob.size <= targetBytes) {
+      bestBlob = blob
+      bestQuality = quality
+      low = quality
+    } else {
+      high = quality
+    }
+  }
+
+  return { blob: bestBlob, quality: bestQuality }
+}
+
+function candidateScore(result: CompressionResult) {
+  // A balanced score avoids both failure modes we saw in testing:
+  // huge dimensions at destructive JPEG quality, and tiny dimensions at very high quality.
+  const pixels = result.width * result.height
+  return Math.log(Math.max(1, pixels)) + (result.quality * 2)
+}
+
 async function compressImage(file: File, targetKb: number): Promise<CompressionResult> {
   const image = await loadImage(file)
   const targetBytes = targetKb * 1024
@@ -68,61 +106,54 @@ async function compressImage(file: File, targetKb: number): Promise<CompressionR
 
   if (!originalWidth || !originalHeight) throw new Error('The selected image has invalid dimensions.')
 
-  const initialScale = Math.min(1, 1600 / Math.max(originalWidth, originalHeight))
+  if ((file.type === 'image/jpeg' || file.type === 'image/jpg') && file.size <= targetBytes) {
+    return { blob: file, width: originalWidth, height: originalHeight, quality: 1 }
+  }
+
+  const initialScale = Math.min(1, MAX_STARTING_SIDE / Math.max(originalWidth, originalHeight))
   let width = Math.max(1, Math.round(originalWidth * initialScale))
   let height = Math.max(1, Math.round(originalHeight * initialScale))
+  const candidates: CompressionResult[] = []
+  let fitCount = 0
 
-  for (let resizeAttempt = 0; resizeAttempt < 14; resizeAttempt += 1) {
+  for (let resizeAttempt = 0; resizeAttempt < 18; resizeAttempt += 1) {
     const canvas = renderAtSize(image, width, height)
-    const floorBlob = await canvasToBlob(canvas, MIN_JPEG_QUALITY)
+    const encoded = await encodeBestQualityForSize(canvas, targetBytes)
 
-    // Quality-first rule: never crush JPEG quality to hit the target. If the
-    // image is still too large at good JPEG quality, reduce dimensions instead.
-    if (floorBlob.size > targetBytes) {
-      if (width <= MIN_DIMENSION || height <= MIN_DIMENSION) break
+    if (encoded) {
+      candidates.push({ blob: encoded.blob, width, height, quality: encoded.quality })
+      fitCount += 1
 
-      const estimatedScale = Math.sqrt(targetBytes / floorBlob.size)
-      const shrinkFactor = Math.min(0.9, Math.max(0.6, estimatedScale * 0.97))
-      const nextWidth = Math.max(MIN_DIMENSION, Math.round(width * shrinkFactor))
-      const nextHeight = Math.max(MIN_DIMENSION, Math.round(height * shrinkFactor))
+      if (fitCount >= FIT_CANDIDATES || width <= MIN_DIMENSION || height <= MIN_DIMENSION) break
 
-      if (nextWidth === width && nextHeight === height) {
-        width = Math.max(MIN_DIMENSION, width - 1)
-        height = Math.max(MIN_DIMENSION, height - 1)
-      } else {
-        width = nextWidth
-        height = nextHeight
-      }
+      width = Math.max(MIN_DIMENSION, Math.round(width * 0.9))
+      height = Math.max(MIN_DIMENSION, Math.round(height * 0.9))
       continue
     }
 
-    const topBlob = await canvasToBlob(canvas, MAX_JPEG_QUALITY)
-    if (topBlob.size <= targetBytes) {
-      return { blob: topBlob, width, height, quality: MAX_JPEG_QUALITY }
+    const floorBlob = await canvasToBlob(canvas, MIN_JPEG_QUALITY)
+    if (width <= MIN_DIMENSION || height <= MIN_DIMENSION) break
+
+    const estimatedScale = Math.sqrt(targetBytes / floorBlob.size)
+    const shrinkFactor = Math.min(0.92, Math.max(0.78, estimatedScale * 0.98))
+    const nextWidth = Math.max(MIN_DIMENSION, Math.round(width * shrinkFactor))
+    const nextHeight = Math.max(MIN_DIMENSION, Math.round(height * shrinkFactor))
+
+    if (nextWidth === width && nextHeight === height) {
+      width = Math.max(MIN_DIMENSION, width - 1)
+      height = Math.max(MIN_DIMENSION, height - 1)
+    } else {
+      width = nextWidth
+      height = nextHeight
     }
-
-    let low = MIN_JPEG_QUALITY
-    let high = MAX_JPEG_QUALITY
-    let bestBlob = floorBlob
-    let bestQuality = MIN_JPEG_QUALITY
-
-    for (let qualityAttempt = 0; qualityAttempt < 10; qualityAttempt += 1) {
-      const quality = (low + high) / 2
-      const blob = await canvasToBlob(canvas, quality)
-
-      if (blob.size <= targetBytes) {
-        bestBlob = blob
-        bestQuality = quality
-        low = quality
-      } else {
-        high = quality
-      }
-    }
-
-    return { blob: bestBlob, width, height, quality: bestQuality }
   }
 
-  throw new Error(`This photo could not be reduced below ${targetKb} KB while preserving acceptable image quality.`)
+  if (!candidates.length) {
+    throw new Error(`This photo cannot be reduced below ${targetKb} KB without unacceptable quality loss. Try a slightly larger target size.`)
+  }
+
+  candidates.sort((a, b) => candidateScore(b) - candidateScore(a))
+  return candidates[0]
 }
 
 export default function PhotoCompressor() {
@@ -280,7 +311,7 @@ export default function PhotoCompressor() {
 
           <section className="rounded-2xl border bg-white p-5 shadow-sm sm:p-6">
             <h2 className="font-display text-xl font-bold text-pine">Preview & download</h2>
-            <p className="mt-1 text-xs text-muted-foreground">Quality-first compression keeps JPEG quality high and reduces dimensions only as much as needed.</p>
+            <p className="mt-1 text-xs text-muted-foreground">Balanced compression protects both facial sharpness and useful image resolution instead of sacrificing one completely.</p>
 
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               <div>
@@ -303,7 +334,7 @@ export default function PhotoCompressor() {
                   <div>
                     <p className="text-sm font-bold text-emerald-950">Ready to download</p>
                     <p className="mt-0.5 text-xs text-emerald-800">Final size: {formatBytes(outputBlob.size)} · Limit: {targetKb} KB</p>
-                    {outputMeta && <p className="mt-0.5 text-xs text-emerald-800">Dimensions: {outputMeta.width} × {outputMeta.height}px · High-quality JPEG</p>}
+                    {outputMeta && <p className="mt-0.5 text-xs text-emerald-800">Dimensions: {outputMeta.width} × {outputMeta.height}px · JPEG quality: {Math.round(outputMeta.quality * 100)}%</p>}
                   </div>
                   <span className="rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-900">JPG</span>
                 </div>
@@ -318,7 +349,7 @@ export default function PhotoCompressor() {
             )}
 
             <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-              Extremely small targets such as 10–14 KB cannot keep the original pixel dimensions. CSS Vista now protects image quality first and reduces resolution gradually instead of using destructive low-quality JPEG compression.
+              Targets such as 10–14 KB always require some loss. CSS Vista now searches several resolution/quality combinations and chooses the best balanced result instead of producing an extremely blurry or heavily pixelated photo.
             </p>
           </section>
         </div>
