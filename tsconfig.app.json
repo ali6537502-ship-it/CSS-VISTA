@@ -12,6 +12,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "react-router": [
+        "./node_modules/react-router/dist/development/index.d.ts"
       ]
     },
     /* Bundler mode */
