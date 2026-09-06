@@ -1,0 +1,44 @@
+name: Hostinger build check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: hostinger-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deployment-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Hostinger production build
+        env:
+          SITE_ORIGIN: https://www.css-vista.com
+          CSSV_STRICT_CONTENT_VALIDATION: 'false'
+        run: npm run build:hostinger
+
+      - name: Verify Hostinger artifact
+        run: npm run audit:hostinger
+
+      - name: Strict content-quality audit
+        continue-on-error: true
+        env:
+          SITE_ORIGIN: https://www.css-vista.com
+          CSSV_STRICT_CONTENT_VALIDATION: 'true'
+        run: npm run build:hostinger:strict
