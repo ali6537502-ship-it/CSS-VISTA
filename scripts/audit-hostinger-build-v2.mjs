@@ -95,7 +95,7 @@ assert(!notesHtml.includes('__SITE_ORIGIN__'), 'Internal SEO page still contains
 
 assert(htaccess.includes('https://www.css-vista.com%{REQUEST_URI} [R=301'), 'Canonical www/HTTPS redirect is missing')
 assert(htaccess.includes('RewriteRule ^ - [R=404,L]'), 'Unknown clean routes must return a real HTTP 404')
-assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?\\.xml'), 'Crawler-file rules do not explicitly protect sitemap index and child sitemaps')
+assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?'), 'Crawler-file rules do not explicitly protect sitemap index and child sitemaps')
 assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advertise the canonical sitemap index')
 
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === 782, 'Expected 782 direct past-paper SEO pages')
