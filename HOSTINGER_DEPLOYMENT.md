@@ -1,22 +1,50 @@
-# Hostinger deployment
+# CSS Vista — Hostinger production deployment
 
-Deploy this repository through **Websites → Add Website → Deploy Web App → Import Git Repository**.
+CSS Vista is prepared for Hostinger Git deployment from the `main` branch.
 
-Use these settings:
+## Hostinger project settings
+
+In Hostinger, connect the GitHub repository and use exactly these settings:
 
 - Branch: `main`
 - Framework: Vite / React front-end
 - Node.js version: `22.x`
-- Install command: `npm ci`
-- Build command: `npm run build` (or `npm run build:hostinger`)
+- Install command: `npm ci --no-audit --no-fund`
+- Build command: `npm run build:hostinger`
 - Output directory: `dist`
 - Entry/start file: none
+- Production domain: `https://www.css-vista.com`
 
-Add these build-time environment variables in Hostinger before deploying:
+Once the repository is connected to Hostinger Git deployment, new commits on `main` can be deployed through the normal Hostinger Git deployment flow without creating a separate server build.
 
-- `VITE_SUPABASE_URL`: the Project URL shown in the Supabase **Connect** panel
-- `VITE_SUPABASE_PUBLISHABLE_KEY`: the browser-safe `sb_publishable_...` key
-- `VITE_SUPABASE_GOOGLE_AUTH_ENABLED`: `true` only after the Google provider and callback URL are configured
+## Production environment variables
+
+Use `.env.hostinger.example` as the template and configure the values in Hostinger's build-time Environment Variables panel.
+
+Required canonical deployment setting:
+
+```text
+SITE_ORIGIN=https://www.css-vista.com
+CSSV_STRICT_CONTENT_VALIDATION=false
+```
+
+Account-backed features use these browser-safe Supabase variables:
+
+```text
+VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+VITE_SUPABASE_GOOGLE_AUTH_ENABLED=false
+```
+
+Optional AdSense manual in-content unit:
+
+```text
+VITE_ADSENSE_SLOT_CONTENT=
+```
+
+Never place `sb_secret_...`, `service_role`, private API keys, server credentials, or database passwords in a `VITE_` variable. Vite exposes `VITE_` values to browser JavaScript.
+
+## Supabase authentication URLs
 
 In Supabase **Authentication → URL Configuration**, set:
 
@@ -24,32 +52,68 @@ In Supabase **Authentication → URL Configuration**, set:
 - Redirect URL: `https://www.css-vista.com/account`
 - Redirect URL: `https://www.css-vista.com/account?reset=1`
 
-Do not leave the production Site URL set to `http://localhost:3000`; Supabase
-uses the Site URL as the fallback for confirmation and password-recovery emails.
+Do not leave the production Site URL as localhost.
 
-Do not put an `sb_secret_...` key or legacy `service_role` key in a `VITE_`
-variable. Vite embeds these values in the public browser bundle; database
-access is protected by the row-level-security policies in the supplied SQL
-migrations.
+## Deployment-safe build design
 
-The default build is the Hostinger static build. It produces `dist/index.html`, replaces runtime origin placeholders with `https://www.css-vista.com`, generates the sitemap and 605 direct past-paper pages, and copies `.htaccess` routing rules for React Router.
+`npm run build:hostinger` now uses the deployment-safe production path:
 
-To verify the artifact before deployment:
+1. checks Node, canonical origin and public environment safety;
+2. compiles TypeScript;
+3. builds the Vite application;
+4. generates route-specific crawler-visible HTML;
+5. enriches past-paper and collection pages;
+6. treats only thin-content word-count thresholds as deployment warnings;
+7. keeps structural generation failures as fatal errors;
+8. generates the canonical sitemap index and child sitemaps;
+9. validates the final Hostinger artifact before the command succeeds.
+
+This separation prevents an advisory SEO content threshold from taking the whole website offline while still blocking genuine build, routing, sitemap and artifact corruption.
+
+For a strict editorial/content-quality build, run:
 
 ```sh
-npm run build
+npm run build:hostinger:strict
+```
+
+Strict mode converts the long-tail word-count checks back into deployment-blocking errors. It is intended for quality review, not ordinary Hostinger production availability.
+
+## Preflight and verification commands
+
+Run only the environment preflight:
+
+```sh
+npm run preflight:hostinger
+```
+
+Build the same artifact Hostinger should publish:
+
+```sh
+npm run build:hostinger
+```
+
+Verify an already-built artifact:
+
+```sh
 npm run audit:hostinger
 ```
 
-To verify the connection without writing data, create `.env.local` from
-`.env.example` and run:
+Run the complete deployment preparation path:
 
 ```sh
-npm run check:supabase
+npm run prepare:hostinger
 ```
 
-The check queries only the public `site_content` singleton and never prints the
-API key. If it reports that the table is missing, run every file in
-`supabase/migrations` in filename order using the Supabase SQL editor.
+The final Hostinger build produces `dist/index.html`, canonical `www` metadata, `.htaccess` routing, a sitemap index with child sitemaps, route-specific SEO HTML and 782 registered past-paper pages/assets.
 
-The OpenAI Sites deployment remains available through `npm run build:sites`.
+## GitHub build guard
+
+`.github/workflows/hostinger-build-check.yml` runs the same deployment build on pushes and pull requests to `main`. The deployment smoke build is blocking when it encounters a genuine build/artifact problem. The stricter content-quality pass is intentionally advisory so a thin page cannot prevent the production website from being generated.
+
+## Other deployment target
+
+The OpenAI Sites build remains separate and is available through:
+
+```sh
+npm run build:sites
+```
