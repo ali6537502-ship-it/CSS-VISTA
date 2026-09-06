@@ -10,8 +10,13 @@ concurrency:
   group: hostinger-build-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  SITE_ORIGIN: https://www.css-vista.com
+  CSSV_STRICT_CONTENT_VALIDATION: 'false'
+
 jobs:
-  deployment-smoke:
+  clean-lockfile-parity:
+    name: Hostinger parity — npm ci + npm run build
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -24,35 +29,53 @@ jobs:
           node-version: '22'
           cache: npm
 
-      - name: Install production build dependencies
-        run: npm install --no-audit --no-fund
+      - name: Install exactly from lockfile
+        run: npm ci --no-audit --no-fund
 
-      - name: Verify React Router install
+      - name: Verify critical runtime dependency
         run: |
           node -e "console.log(require.resolve('react-router/package.json'))"
           test -f node_modules/react-router/dist/development/index.d.ts
-          node -e "const p=require('./node_modules/react-router/package.json'); console.log({version:p.version,types:p.types,main:p.main,module:p.module})"
 
-      - name: Hostinger production build
-        env:
-          SITE_ORIGIN: https://www.css-vista.com
-          CSSV_STRICT_CONTENT_VALIDATION: 'false'
-        run: npm run build:hostinger
+      - name: Build with default Hostinger command
+        run: npm run build
 
-      - name: Verify Hostinger artifact
+      - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 
-      - name: Strict content-quality audit
+  documented-hostinger-parity:
+    name: Hostinger parity — npm install + build:hostinger
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install using documented Hostinger command
+        run: npm install --no-audit --no-fund
+
+      - name: Ensure install did not rewrite dependency lock state
+        run: git diff --exit-code -- package.json package-lock.json
+
+      - name: Verify critical runtime dependency
+        run: |
+          node -e "console.log(require.resolve('react-router/package.json'))"
+          test -f node_modules/react-router/dist/development/index.d.ts
+
+      - name: Build Hostinger production artifact
+        run: npm run build:hostinger
+
+      - name: Verify generated Hostinger artifact
+        run: npm run audit:hostinger
+
+      - name: Strict editorial/content audit
         continue-on-error: true
         env:
-          SITE_ORIGIN: https://www.css-vista.com
           CSSV_STRICT_CONTENT_VALIDATION: 'true'
         run: npm run build:hostinger:strict
-
-      - name: Save reconciled lockfile
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reconciled-package-lock
-          path: package-lock.json
-          retention-days: 3
