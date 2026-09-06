@@ -1,0 +1,118 @@
+import { access, open, readFile, readdir } from 'node:fs/promises'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
+
+const root = fileURLToPath(new URL('..', import.meta.url))
+const dist = join(root, 'dist')
+const siteOrigin = 'https://www.css-vista.com'
+const childSitemaps = [
+  'sitemap-core.xml',
+  'sitemap-gk.xml',
+  'sitemap-past-paper-collections.xml',
+  'sitemap-past-papers.xml',
+]
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message)
+}
+
+function extractLocs(xml) {
+  return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+}
+
+const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
+const cssPapers = registeredPapers.filter((paper) => paper.examination === 'CSS')
+const pmsPapers = registeredPapers.filter((paper) => paper.examination === 'PMS')
+const ppscPapers = registeredPapers.filter((paper) => paper.examination === 'PPSC')
+const mptPapers = registeredPapers.filter((paper) => paper.examination === 'MPT')
+
+await Promise.all([
+  access(join(dist, 'index.html')),
+  access(join(dist, '.htaccess')),
+  access(join(dist, 'robots.txt')),
+  access(join(dist, 'sitemap.xml')),
+  ...childSitemaps.map((name) => access(join(dist, name))),
+  access(join(dist, 'favicon.ico')),
+  access(join(dist, 'favicon.png')),
+  access(join(dist, 'icon-512.png')),
+  access(join(dist, 'ads.txt')),
+  access(join(dist, 'googlec96e2248070e0570.html')),
+  access(join(dist, 'seo', 'routes', 'notes.html')),
+  access(join(dist, 'seo', 'past-papers')),
+  access(join(dist, '404.html')),
+])
+
+const [indexHtml, htaccess, robots, sitemapIndex, notesHtml, paperFiles, ...childXmls] = await Promise.all([
+  readFile(join(dist, 'index.html'), 'utf8'),
+  readFile(join(dist, '.htaccess'), 'utf8'),
+  readFile(join(dist, 'robots.txt'), 'utf8'),
+  readFile(join(dist, 'sitemap.xml'), 'utf8'),
+  readFile(join(dist, 'seo', 'routes', 'notes.html'), 'utf8'),
+  readdir(join(dist, 'seo', 'past-papers')),
+  ...childSitemaps.map((name) => readFile(join(dist, name), 'utf8')),
+])
+
+assert(sitemapIndex.includes('<sitemapindex '), 'Root sitemap must be a sitemap index')
+assert(!sitemapIndex.includes('<urlset '), 'Root sitemap must not remain a flat URL sitemap after splitting')
+for (const name of childSitemaps) {
+  assert(sitemapIndex.includes(`<loc>${siteOrigin}/${name}</loc>`), `Root sitemap index is missing ${name}`)
+}
+
+const allLocs = childXmls.flatMap(extractLocs)
+const uniqueLocs = new Set(allLocs)
+const collectionCount = new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size
+const expectedSitemapCount = INDEXABLE_STATIC_ROUTES.length + collectionCount + registeredPapers.length
+
+assert(allLocs.length === expectedSitemapCount, `Expected ${expectedSitemapCount} canonical sitemap URLs, found ${allLocs.length}`)
+assert(uniqueLocs.size === allLocs.length, 'Child sitemaps contain duplicate URLs')
+assert(allLocs.every((url) => url === `${siteOrigin}/` || url.startsWith(`${siteOrigin}/`)), 'A sitemap URL uses a non-canonical host')
+assert(allLocs.includes(`${siteOrigin}/`), 'Homepage is missing from child sitemaps')
+assert(allLocs.includes(`${siteOrigin}/past-papers`), 'Past-paper landing page is missing from child sitemaps')
+assert(allLocs.includes(`${siteOrigin}/subjects/compulsory`), 'Compulsory subjects are missing from child sitemaps')
+assert(allLocs.includes(`${siteOrigin}/notes`), 'Notes page is missing from child sitemaps')
+
+for (const route of ROUTE_REGISTRY.filter((entry) => !entry.indexable && entry.match === 'exact')) {
+  assert(!uniqueLocs.has(`${siteOrigin}${route.path}`), `Protected route leaked into sitemap: ${route.path}`)
+}
+
+assert(indexHtml.includes('<title>CSS Vista | CSS &amp; PMS Exam Preparation in Pakistan</title>') || indexHtml.includes('<title>CSS Vista | CSS & PMS Exam Preparation in Pakistan</title>'), 'Homepage search title is incorrect')
+assert(indexHtml.includes('name="application-name" content="CSS Vista"'), 'Homepage application-name brand signal is missing')
+assert(indexHtml.includes(`rel="canonical" href="${siteOrigin}/"`), 'Homepage canonical is missing or incorrect')
+assert(indexHtml.includes(`rel="home" href="${siteOrigin}/" title="CSS Vista"`), 'Homepage rel=home signal is missing')
+assert(/<h1\b[^>]*>CSS Vista<\/h1>/.test(indexHtml), 'Homepage H1 must identify the brand as CSS Vista')
+assert(indexHtml.includes('CSS Vista is an independent CSS and PMS exam preparation platform in Pakistan'), 'Homepage meta description is not the reinforced production description')
+assert(indexHtml.includes('EducationalOrganization'), 'Homepage organization structured data is missing')
+assert(indexHtml.includes('WebSite'), 'Homepage WebSite structured data is missing')
+assert(indexHtml.includes('https://www.instagram.com/cssvista/'), 'Homepage structured data is missing the official Instagram profile')
+assert(indexHtml.includes('https://www.youtube.com/@cssvista'), 'Homepage structured data is missing the official YouTube profile')
+assert(!indexHtml.includes('__SITE_ORIGIN__'), 'Homepage still contains an unresolved origin placeholder')
+
+assert(notesHtml.includes('data-cssv-brand-home-link'), 'Indexable internal pages are missing a visible CSS Vista home-brand link')
+assert(notesHtml.includes('href="/" rel="home"'), 'Internal brand link does not point to the homepage')
+assert(!notesHtml.includes('__SITE_ORIGIN__'), 'Internal SEO page still contains an unresolved origin placeholder')
+
+assert(htaccess.includes('https://www.css-vista.com%{REQUEST_URI} [R=301'), 'Canonical www/HTTPS redirect is missing')
+assert(htaccess.includes('RewriteRule ^ - [R=404,L]'), 'Unknown clean routes must return a real HTTP 404')
+assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?'), 'Crawler-file rules do not explicitly protect sitemap index and child sitemaps')
+assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advertise the canonical sitemap index')
+
+assert(paperFiles.filter((name) => name.endsWith('.html')).length === 782, 'Expected 782 direct past-paper SEO pages')
+assert(cssPapers.length === 467, 'Expected 467 registered CSS past papers')
+assert(pmsPapers.length === 138, 'Expected 138 registered PMS past papers')
+assert(ppscPapers.length === 173, 'Expected 173 registered PPSC past papers')
+assert(mptPapers.length === 4, 'Expected 4 registered MPT past papers')
+assert(registeredPapers.length === 782, 'Expected 782 registered past papers in total')
+
+const samplePdf = join(dist, registeredPapers[0].fileUrl.replace(/^\/+/, ''))
+const handle = await open(samplePdf, 'r')
+try {
+  const signature = Buffer.alloc(5)
+  const { bytesRead } = await handle.read(signature, 0, signature.length, 0)
+  assert(bytesRead === 5 && signature.toString('ascii') === '%PDF-', 'Sample registered past-paper asset is not a valid PDF')
+} finally {
+  await handle.close()
+}
+
+console.log(`Hostinger SEO artifact audit passed: ${allLocs.length} canonical URLs across ${childSitemaps.length} child sitemaps, reinforced CSS Vista homepage signals, canonical redirects, and ${registeredPapers.length} past-paper pages verified.`)
