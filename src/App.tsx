@@ -22,6 +22,7 @@ const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
 const AnswerWriting = lazy(() => import('./pages/AnswerWriting'))
 const TestSeries = lazy(() => import('./pages/TestSeries'))
 const StudyTools = lazy(() => import('./pages/StudyTools'))
+const PhotoCompressor = lazy(() => import('./pages/PhotoCompressor'))
 const Games = lazy(() => import('./pages/Games'))
 const PsychViva = lazy(() => import('./pages/PsychViva'))
 const FpscUpdates = lazy(() => import('./pages/FpscUpdates'))
@@ -96,6 +97,7 @@ export default function App() {
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />
         <Route path="/test-series" element={<S><TestSeries /></S>} />
         <Route path="/study-tools" element={<S><StudyTools /></S>} />
+        <Route path="/photo-compressor" element={<S><PhotoCompressor /></S>} />
         <Route path="/games" element={<S><Games /></S>} />
         <Route path="/psych-viva" element={<S><PsychViva /></S>} />
         <Route path="/fpsc-updates" element={<S><FpscUpdates /></S>} />
