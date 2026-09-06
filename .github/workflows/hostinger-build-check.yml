@@ -27,6 +27,12 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
 
+      - name: Verify React Router install
+        run: |
+          node -e "console.log(require.resolve('react-router/package.json'))"
+          test -f node_modules/react-router/dist/development/index.d.ts
+          node -e "const p=require('./node_modules/react-router/package.json'); console.log({version:p.version,types:p.types,main:p.main,module:p.module})"
+
       - name: Hostinger production build
         env:
           SITE_ORIGIN: https://www.css-vista.com
