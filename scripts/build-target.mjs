@@ -38,6 +38,7 @@ if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
   await import('./repair-search-visibility.mjs')
   await import('./enhance-search-landing-pages.mjs')
+  await import('./enrich-past-paper-collections-before-validation.mjs')
   await import('./strengthen-longtail-search-pages.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
