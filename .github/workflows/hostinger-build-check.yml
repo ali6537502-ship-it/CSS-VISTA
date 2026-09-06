@@ -24,8 +24,8 @@ jobs:
           node-version: '22'
           cache: npm
 
-      - name: Install locked dependencies
-        run: npm ci --no-audit --no-fund
+      - name: Install production build dependencies
+        run: npm install --no-audit --no-fund
 
       - name: Verify React Router install
         run: |
@@ -48,3 +48,11 @@ jobs:
           SITE_ORIGIN: https://www.css-vista.com
           CSSV_STRICT_CONTENT_VALIDATION: 'true'
         run: npm run build:hostinger:strict
+
+      - name: Save reconciled lockfile
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reconciled-package-lock
+          path: package-lock.json
+          retention-days: 3
