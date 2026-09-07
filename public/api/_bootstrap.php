@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-// Resolve the private Hostinger runtime config without ever exposing its path
-// or values. Deployments may swap public_html to a fresh hbuild release, so a
-// config that was placed in an earlier release must be recovered once and then
-// persisted under the account home outside the public web root.
+// Resolve the private Hostinger runtime config without exposing its path or
+// values. Keep recovery deliberately cheap: retained Hostinger releases can be
+// large, so only a small set of fixed paths/globs is inspected.
 $configCandidates = [];
 $explicitConfig = getenv('CSSV_CONFIG_FILE');
 if ($explicitConfig !== false && trim((string)$explicitConfig) !== '') {
@@ -31,72 +30,73 @@ if ($persistentConfig !== '') {
 }
 
 $documentRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/\\');
-$searchRoots = [];
 if ($documentRoot !== '') {
     $configCandidates[] = $documentRoot . DIRECTORY_SEPARATOR . 'config.php';
-    $searchRoots[] = $documentRoot;
-}
-$searchRoots[] = __DIR__;
-if ($home !== '') {
-    $searchRoots[] = $home;
-    $domainRoot = rtrim($home, '/\\') . DIRECTORY_SEPARATOR . 'domains' . DIRECTORY_SEPARATOR . 'css-vista.com';
-    if (is_dir($domainRoot)) {
-        $searchRoots[] = $domainRoot;
-        $configCandidates[] = $domainRoot . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'config.php';
-    }
 }
 
-// Collect fixed ancestor candidates plus any hbuild directories beside them.
+$domainRoot = $home !== ''
+    ? rtrim($home, '/\\') . DIRECTORY_SEPARATOR . 'domains' . DIRECTORY_SEPARATOR . 'css-vista.com'
+    : '';
+if ($domainRoot !== '') {
+    $configCandidates[] = $domainRoot . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'config.php';
+}
+
+// Fixed nearby locations used by Hostinger shared hosting/build releases.
+$roots = array_filter(array_unique([
+    $documentRoot,
+    $documentRoot !== '' ? dirname($documentRoot) : '',
+    $documentRoot !== '' ? dirname(dirname($documentRoot)) : '',
+    __DIR__,
+    dirname(__DIR__),
+    $home,
+    $domainRoot,
+]));
+foreach ($roots as $root) {
+    $root = rtrim((string)$root, '/\\');
+    $configCandidates[] = $root . DIRECTORY_SEPARATOR . 'config.php';
+    $configCandidates[] = $root . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
+    $configCandidates[] = dirname($root) . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
+}
+
+// Search only known hbuild root candidates and only a few shallow layouts.
 $hbuildRoots = [];
-foreach (array_unique($searchRoots) as $root) {
-    $cursor = rtrim((string)$root, '/\\');
-    for ($level = 0; $level < 10; $level++) {
-        if ($cursor === '' || $cursor === DIRECTORY_SEPARATOR || $cursor === '.') {
-            break;
+foreach ($roots as $root) {
+    $root = rtrim((string)$root, '/\\');
+    foreach ([
+        $root . DIRECTORY_SEPARATOR . 'hbuilds',
+        dirname($root) . DIRECTORY_SEPARATOR . 'hbuilds',
+    ] as $candidateRoot) {
+        if (is_dir($candidateRoot) && is_readable($candidateRoot)) {
+            $hbuildRoots[] = $candidateRoot;
         }
-        $configCandidates[] = $cursor . DIRECTORY_SEPARATOR . 'config.php';
-        $configCandidates[] = $cursor . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
-        $configCandidates[] = dirname($cursor) . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
-
-        if (basename($cursor) === 'hbuilds' && is_dir($cursor)) {
-            $hbuildRoots[] = $cursor;
-        }
-        $beside = $cursor . DIRECTORY_SEPARATOR . 'hbuilds';
-        if (is_dir($beside)) {
-            $hbuildRoots[] = $beside;
-        }
-
-        $parent = dirname($cursor);
-        if ($parent === $cursor) {
-            break;
-        }
-        $cursor = $parent;
     }
 }
+if ($home !== '') {
+    $hbuildRoots[] = rtrim($home, '/\\') . DIRECTORY_SEPARATOR . 'hbuilds';
+    $hbuildRoots[] = rtrim($home, '/\\') . DIRECTORY_SEPARATOR . 'domains' . DIRECTORY_SEPARATOR . 'css-vista.com' . DIRECTORY_SEPARATOR . 'hbuilds';
+}
 
-// Hostinger hbuild layouts differ slightly between accounts. Scan only a
-// bounded hbuild tree (not the account home) and only files named config.php.
 $historicConfigs = [];
+$patterns = [
+    '*' . DIRECTORY_SEPARATOR . 'config.php',
+    '*' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'config.php',
+    '*' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'config.php',
+    '*' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . 'config.php',
+];
 foreach (array_unique($hbuildRoots) as $hbuildRoot) {
-    try {
-        $directory = new RecursiveDirectoryIterator(
-            $hbuildRoot,
-            FilesystemIterator::SKIP_DOTS | FilesystemIterator::CURRENT_AS_FILEINFO
-        );
-        $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
-        $iterator->setMaxDepth(5);
-        foreach ($iterator as $entry) {
-            if (!$entry instanceof SplFileInfo || !$entry->isFile() || $entry->getFilename() !== 'config.php') {
-                continue;
-            }
-            $path = $entry->getPathname();
-            if (is_readable($path)) {
-                $historicConfigs[$path] = $entry->getMTime();
+    if (!is_dir($hbuildRoot) || !is_readable($hbuildRoot)) {
+        continue;
+    }
+    foreach ($patterns as $pattern) {
+        $matches = @glob(rtrim($hbuildRoot, '/\\') . DIRECTORY_SEPARATOR . $pattern);
+        if (!is_array($matches)) {
+            continue;
+        }
+        foreach ($matches as $match) {
+            if (is_file($match) && is_readable($match)) {
+                $historicConfigs[$match] = @filemtime($match) ?: 0;
             }
         }
-    } catch (Throwable $error) {
-        // A retained release may be unreadable; simply continue to the next
-        // bounded root. Never emit paths or filesystem details to the client.
     }
 }
 if ($historicConfigs !== []) {
@@ -115,22 +115,25 @@ foreach (array_unique($configCandidates) as $candidate) {
     if (!is_string($probe)) {
         continue;
     }
-    // Avoid accidentally selecting an unrelated config.php from a framework
-    // or retained build. These key names identify the CSS Vista runtime file.
     if (str_contains($probe, 'CSSV_DB_HOST') && str_contains($probe, 'CSSV_APP_SECRET')) {
         $selectedConfig = $candidate;
         break;
     }
 }
 
-// If the valid config was recovered from an old release, persist it outside
-// public_html so future release swaps do not lose it again.
+// Persist a recovered valid runtime config outside public_html so later
+// Hostinger release swaps no longer remove it.
 if ($selectedConfig !== '' && $persistentConfig !== '' && $selectedConfig !== $persistentConfig) {
     $privateDir = dirname($persistentConfig);
     if ((is_dir($privateDir) || @mkdir($privateDir, 0700, true)) && is_writable($privateDir)) {
         $contents = @file_get_contents($selectedConfig);
         if (is_string($contents) && $contents !== '') {
-            $tmp = $persistentConfig . '.tmp-' . bin2hex(random_bytes(6));
+            try {
+                $suffix = bin2hex(random_bytes(6));
+            } catch (Throwable) {
+                $suffix = (string)mt_rand(100000, 999999);
+            }
+            $tmp = $persistentConfig . '.tmp-' . $suffix;
             if (@file_put_contents($tmp, $contents, LOCK_EX) !== false) {
                 @chmod($tmp, 0600);
                 if (@rename($tmp, $persistentConfig)) {
