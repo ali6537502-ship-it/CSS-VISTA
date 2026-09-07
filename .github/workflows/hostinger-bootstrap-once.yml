@@ -1,8 +1,7 @@
 name: Hostinger one-time schema bootstrap
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: cssv-hostinger-schema-bootstrap
@@ -18,9 +17,13 @@ jobs:
         shell: bash
         env:
           SITE_ORIGIN: https://www.css-vista.com
-          CSSV_BOOTSTRAP_TOKEN: xEciPC9NPqrqd2O8e72ppmoPF8mgwBDCiTrBgwN-PBE
+          CSSV_BOOTSTRAP_TOKEN: ${{ secrets.CSSV_BOOTSTRAP_TOKEN }}
         run: |
           set +e
+          if [ -z "${CSSV_BOOTSTRAP_TOKEN}" ]; then
+            echo "::error::CSSV_BOOTSTRAP_TOKEN repository secret is not configured."
+            exit 1
+          fi
           endpoint="${SITE_ORIGIN}/api/bootstrap-schema.php"
           for attempt in $(seq 1 24); do
             body_file="$(mktemp)"
