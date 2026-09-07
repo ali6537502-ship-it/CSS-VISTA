@@ -15,6 +15,10 @@ This directory contains the server-side foundation for the zero-data-loss Supaba
 
 No values belong in Git or in any `VITE_` variable. The backend reads true PHP environment variables first and, for shared-hosting setups where runtime environment injection is unavailable, can read a private `../cssv-private/config.php` file outside the public web root. `server/config/config.example.php` is a non-secret template only.
 
+Use a current `sb_secret_...` key for the private migration runner. The runner
+still accepts the legacy `CSSV_SUPABASE_SERVICE_ROLE_KEY` variable temporarily,
+but new setup must use `CSSV_SUPABASE_SECRET_KEY`.
+
 - `CSSV_DB_HOST`
 - `CSSV_DB_PORT` (usually 3306)
 - `CSSV_DB_NAME`
@@ -24,6 +28,8 @@ No values belong in Git or in any `VITE_` variable. The backend reads true PHP e
 - `CSSV_PRIVATE_STORAGE_DIR` (directory outside public web root)
 - `CSSV_SUPABASE_URL` (temporary bridge only)
 - `CSSV_SUPABASE_PUBLISHABLE_KEY` (temporary bridge only)
+- `CSSV_SUPABASE_SECRET_KEY` (private migration runner only)
+- `CSSV_BOOTSTRAP_TOKEN` (optional one-time schema bootstrap; private config and GitHub Actions secret only)
 - `CSSV_SMTP_HOST`
 - `CSSV_SMTP_PORT`
 - `CSSV_SMTP_USER`
