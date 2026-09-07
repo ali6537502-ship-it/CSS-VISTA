@@ -94,3 +94,38 @@ jobs:
         env:
           CSSV_STRICT_CONTENT_VALIDATION: 'true'
         run: npm run build:hostinger:strict
+
+  live-backend-readiness:
+    name: Live Hostinger backend readiness
+    if: github.event_name == 'push'
+    needs:
+      - clean-lockfile-parity
+      - documented-hostinger-parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Probe production backend without exposing secrets
+        shell: bash
+        run: |
+          set +e
+          health_url="${SITE_ORIGIN}/api/health.php"
+          for attempt in $(seq 1 12); do
+            body_file="$(mktemp)"
+            http_code="$(curl -sS --connect-timeout 10 --max-time 20 -o "$body_file" -w '%{http_code}' "$health_url")"
+            echo "Health probe attempt ${attempt}: HTTP ${http_code}"
+            if jq -e '.service == "css-vista-hostinger-backend"' "$body_file" >/dev/null 2>&1; then
+              jq '{ok, runtime, configured, database}' "$body_file"
+              if jq -e '.database.reachable == true and .database.schema_ready == true' "$body_file" >/dev/null 2>&1; then
+                echo "::notice::Hostinger backend database is reachable and the core schema is ready."
+              else
+                echo "::warning::Hostinger backend is deployed, but the production database/configuration is not ready for migration yet."
+              fi
+              rm -f "$body_file"
+              exit 0
+            fi
+            cat "$body_file" || true
+            rm -f "$body_file"
+            if [ "$attempt" -lt 12 ]; then sleep 15; fi
+          done
+          echo "::warning::The live Hostinger backend health endpoint could not be verified after retries."
+          exit 0
