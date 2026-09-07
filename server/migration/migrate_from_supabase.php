@@ -146,11 +146,16 @@ function sourceBase(): string
     return $url;
 }
 
-function serviceKey(): string
+function supabaseAdminKey(): string
 {
-    $key = (string)cfg('CSSV_SUPABASE_SERVICE_ROLE_KEY', '');
+    // Prefer a revocable opaque key and retain the legacy variable only as a
+    // temporary fallback for installations that have not rotated yet.
+    $key = (string)cfg('CSSV_SUPABASE_SECRET_KEY', '');
     if ($key === '') {
-        fail('CSSV_SUPABASE_SERVICE_ROLE_KEY is required for the private migration runner.');
+        $key = (string)cfg('CSSV_SUPABASE_SERVICE_ROLE_KEY', '');
+    }
+    if ($key === '') {
+        fail('CSSV_SUPABASE_SECRET_KEY is required for the private migration runner.');
     }
     return $key;
 }
@@ -165,11 +170,16 @@ function httpJson(string $method, string $url, ?array $payload = null, array $he
         fail('Could not initialise the migration HTTP client.');
     }
     $responseHeaders = [];
+    $adminKey = supabaseAdminKey();
     $baseHeaders = [
-        'apikey: ' . serviceKey(),
-        'Authorization: Bearer ' . serviceKey(),
+        'apikey: ' . $adminKey,
         'Accept: application/json',
     ];
+    // Opaque sb_secret_ keys are not JWTs and must not be sent as Bearer
+    // tokens. Legacy service_role keys are JWTs and still need this header.
+    if (!str_starts_with($adminKey, 'sb_secret_')) {
+        $baseHeaders[] = 'Authorization: Bearer ' . $adminKey;
+    }
     if ($payload !== null) {
         $baseHeaders[] = 'Content-Type: application/json';
     }
