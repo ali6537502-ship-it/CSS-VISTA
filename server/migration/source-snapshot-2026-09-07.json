@@ -1,15 +1,15 @@
 {
   "source_project": "puxdxzvzzwqglxjtiyre",
   "source_name": "css-vista-production",
-  "captured_at_utc": "2026-09-07T08:04:11.614230Z",
+  "captured_at_utc": "2026-09-07T20:05:11.444474Z",
   "counts": {
-    "auth.users": 150,
-    "auth.identities": 150,
-    "public.student_profiles": 150,
-    "public.student_progress": 150,
-    "public.student_activity": 947,
-    "public.quiz_attempts": 278,
-    "public.question_attempts": 6537,
+    "auth.users": 152,
+    "auth.identities": 152,
+    "public.student_profiles": 152,
+    "public.student_progress": 152,
+    "public.student_activity": 977,
+    "public.quiz_attempts": 283,
+    "public.question_attempts": 6621,
     "public.admin_users": 1,
     "public.site_content": 1,
     "public.site_content_versions": 0,
@@ -30,14 +30,14 @@
     "storage.objects": 0
   },
   "auth": {
-    "password_accounts": 150,
-    "bcrypt_password_accounts": 150
+    "password_accounts": 152,
+    "bcrypt_password_accounts": 152
   },
   "timestamps": {
     "first_user_created": "2026-07-30T21:04:07.684184Z",
-    "latest_user_created": "2026-09-07T00:32:31.155133Z",
-    "latest_progress_update": "2026-09-07T07:56:48.453Z",
-    "latest_question_attempt": "2026-09-07T03:49:37.869Z"
+    "latest_user_created": "2026-09-07T12:57:20.515503Z",
+    "latest_progress_update": "2026-09-07T19:19:12.054Z",
+    "latest_question_attempt": "2026-09-07T13:10:40.613Z"
   },
   "contains_personal_data": false,
   "note": "Aggregate reconciliation baseline only. No student email, password hash, profile, progress payload, or other personal record is committed to Git."
