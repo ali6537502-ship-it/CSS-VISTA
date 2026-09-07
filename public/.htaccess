@@ -12,15 +12,15 @@ ErrorDocument 404 /404.html
   </IfModule>
 </Files>
 
-# One-time bootstrap SQL is server-readable only and must never be downloadable.
-<Files "_bootstrap_schema.sql">
+# One-time bootstrap schema payloads are server-readable only.
+<FilesMatch "^_bootstrap_schema\.(?:sql|txt)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
   <IfModule !mod_authz_core.c>
     Deny from all
   </IfModule>
-</Files>
+</FilesMatch>
 
 # Keep Google ownership, crawler-control and advertising verification endpoints
 # as literal public files. These rules run before application routing so search
@@ -67,10 +67,10 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTP_HOST} !^www\.css-vista\.com$ [NC]
   RewriteRule ^ https://www.css-vista.com%{REQUEST_URI} [R=301,L,NE]
 
-  # Block private runtime config/storage and bootstrap SQL from direct web access.
+  # Block private runtime config/storage and bootstrap schema from direct web access.
   RewriteRule ^config\.php$ - [F,L,NC]
   RewriteRule ^storage(?:/|$) - [F,L,NC]
-  RewriteRule ^api/_bootstrap_schema\.sql$ - [F,L,NC]
+  RewriteRule ^api/_bootstrap_schema\.(?:sql|txt)$ - [F,L,NC]
 
   # Never rewrite crawler-control and verification files into the React app.
   # This explicitly covers the sitemap index and every generated child sitemap.

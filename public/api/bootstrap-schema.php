@@ -25,7 +25,9 @@ if ($totalTables !== 0) {
     cssv_fail('Target database is not empty, so automatic bootstrap was refused.', 409, 'database_not_empty');
 }
 
-$schemaFile = __DIR__ . '/_bootstrap_schema.sql';
+// Hostinger can suppress .sql files in a public deployment. Ship the same
+// non-sensitive schema payload as a blocked .txt asset for local PHP reads.
+$schemaFile = __DIR__ . '/_bootstrap_schema.txt';
 $raw = @file_get_contents($schemaFile);
 if (!is_string($raw) || trim($raw) === '') {
     cssv_fail('Bootstrap schema is unavailable.', 503, 'schema_unavailable');
