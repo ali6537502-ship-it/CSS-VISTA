@@ -1,13 +1,13 @@
 {
   "source_project": "puxdxzvzzwqglxjtiyre",
   "source_name": "css-vista-production",
-  "captured_at_utc": "2026-09-07T05:58:01.624469Z",
+  "captured_at_utc": "2026-09-07T08:04:11.614230Z",
   "counts": {
     "auth.users": 150,
     "auth.identities": 150,
     "public.student_profiles": 150,
     "public.student_progress": 150,
-    "public.student_activity": 946,
+    "public.student_activity": 947,
     "public.quiz_attempts": 278,
     "public.question_attempts": 6537,
     "public.admin_users": 1,
@@ -36,7 +36,7 @@
   "timestamps": {
     "first_user_created": "2026-07-30T21:04:07.684184Z",
     "latest_user_created": "2026-09-07T00:32:31.155133Z",
-    "latest_progress_update": "2026-09-07T05:55:39.468Z",
+    "latest_progress_update": "2026-09-07T07:56:48.453Z",
     "latest_question_attempt": "2026-09-07T03:49:37.869Z"
   },
   "contains_personal_data": false,
