@@ -55,7 +55,11 @@ if ($existing = $dup->fetchColumn()) {
     cssv_fail('This email is already registered for the selected batch.', 409, 'already_registered');
 }
 
-$photo = cssv_store_profile_photo($_FILES['photo'] ?? [], 'batch-photos');
+$photoUpload = $_FILES['photo'] ?? [];
+if (isset($photoUpload['size']) && (int)$photoUpload['size'] > 15360) {
+    cssv_fail('Profile photo must be 15 KB or smaller.', 422, 'photo_size_invalid');
+}
+$photo = cssv_store_profile_photo($photoUpload, 'batch-photos');
 $userStmt = $pdo->prepare('SELECT id FROM users WHERE email=? LIMIT 1');
 $userStmt->execute([$email]);
 $userId = $userStmt->fetchColumn() ?: null;
