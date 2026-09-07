@@ -4,8 +4,8 @@ require_once __DIR__ . '/_bootstrap.php';
 cssv_require_method('POST');
 
 $provided = trim((string)($_SERVER['HTTP_X_CSSV_BOOTSTRAP_TOKEN'] ?? ''));
-$expectedHash = '964d8e164ae5bbb9821f93debd34e0202815a60fbae0b3b1a26c0567639c0f24';
-if ($provided === '' || !hash_equals($expectedHash, hash('sha256', $provided))) {
+$expected = trim((string)cssv_env('CSSV_BOOTSTRAP_TOKEN', ''));
+if ($provided === '' || $expected === '' || !hash_equals(hash('sha256', $expected), hash('sha256', $provided))) {
     cssv_fail('Not found.', 404, 'not_found');
 }
 
