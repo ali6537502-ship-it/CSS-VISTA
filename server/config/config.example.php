@@ -18,6 +18,13 @@ return [
     'CSSV_SUPABASE_URL' => 'https://your-project.supabase.co',
     'CSSV_SUPABASE_PUBLISHABLE_KEY' => 'sb_publishable_replace_me',
 
+    // Private migration runner only. Never expose this in browser code.
+    'CSSV_SUPABASE_SECRET_KEY' => 'sb_secret_replace_me',
+
+    // Optional one-time schema bootstrap endpoint token. Store the same value
+    // as a GitHub Actions repository secret, never in a committed workflow.
+    'CSSV_BOOTSTRAP_TOKEN' => 'replace_with_a_unique_random_value',
+
     // Hostinger mailbox / SMTP settings.
     'CSSV_SMTP_HOST' => 'smtp.hostinger.com',
     'CSSV_SMTP_PORT' => '465',
