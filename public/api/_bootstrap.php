@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 // Hostinger deployments can expose a document root that is nested under an
 // internal build directory while File Manager shows the account-level root.
-// Search only fixed, private cssv-private/config.php locations. No secret
-// values or absolute paths are ever emitted.
+// Search only fixed config locations. No secret values or absolute paths are
+// ever emitted.
 $configCandidates = [];
 $explicitConfig = getenv('CSSV_CONFIG_FILE');
 if ($explicitConfig !== false && trim((string)$explicitConfig) !== '') {
@@ -31,6 +31,9 @@ if ($currentOwner !== '' && preg_match('/^[A-Za-z0-9._-]+$/', $currentOwner)) {
 $searchRoots = [];
 $documentRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/\\');
 if ($documentRoot !== '') {
+    // Simple fallback for shared hosting: config.php may live directly in the
+    // web root. public/.htaccess blocks direct HTTP access to this file.
+    $configCandidates[] = $documentRoot . DIRECTORY_SEPARATOR . 'config.php';
     $searchRoots[] = $documentRoot;
 }
 $searchRoots[] = __DIR__;
