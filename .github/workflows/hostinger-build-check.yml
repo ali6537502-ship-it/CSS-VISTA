@@ -43,6 +43,11 @@ jobs:
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 
+      - name: Lint Hostinger PHP backend
+        run: |
+          test -f dist/api/health.php
+          find dist/api -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
   documented-hostinger-parity:
     name: Hostinger parity — npm install + build:hostinger
     runs-on: ubuntu-latest
@@ -78,6 +83,11 @@ jobs:
 
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
+
+      - name: Lint Hostinger PHP backend
+        run: |
+          test -f dist/api/health.php
+          find dist/api -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
       - name: Strict editorial/content audit
         continue-on-error: true
