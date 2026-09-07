@@ -1,0 +1,45 @@
+name: Hostinger one-time schema bootstrap
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: cssv-hostinger-schema-bootstrap
+  cancel-in-progress: true
+
+jobs:
+  bootstrap:
+    name: Bootstrap empty Hostinger schema once
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Wait for deployment and install schema
+        shell: bash
+        env:
+          SITE_ORIGIN: https://www.css-vista.com
+          CSSV_BOOTSTRAP_TOKEN: xEciPC9NPqrqd2O8e72ppmoPF8mgwBDCiTrBgwN-PBE
+        run: |
+          set +e
+          endpoint="${SITE_ORIGIN}/api/bootstrap-schema.php"
+          for attempt in $(seq 1 24); do
+            body_file="$(mktemp)"
+            http_code="$(curl -sS --connect-timeout 10 --max-time 45 -X POST -H "X-CSSV-Bootstrap-Token: ${CSSV_BOOTSTRAP_TOKEN}" -o "$body_file" -w '%{http_code}' "$endpoint")"
+            echo "Bootstrap attempt ${attempt}: HTTP ${http_code}"
+            if [ "$http_code" = "200" ] && jq -e '.ok == true and .schema_ready == true' "$body_file" >/dev/null 2>&1; then
+              jq '{ok, schema_ready, already_installed, table_count}' "$body_file"
+              rm -f "$body_file"
+              echo "::notice::Hostinger schema bootstrap completed."
+              exit 0
+            fi
+            if [ "$http_code" = "409" ]; then
+              jq '{ok, error, message}' "$body_file" || cat "$body_file"
+              rm -f "$body_file"
+              echo "::error::Bootstrap refused because the target database is not empty."
+              exit 1
+            fi
+            rm -f "$body_file"
+            if [ "$attempt" -lt 24 ]; then sleep 15; fi
+          done
+          echo "::error::Hostinger schema bootstrap could not be completed within the deployment window."
+          exit 1
