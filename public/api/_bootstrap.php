@@ -31,12 +31,45 @@ if ($currentOwner !== '' && preg_match('/^[A-Za-z0-9._-]+$/', $currentOwner)) {
 $searchRoots = [];
 $documentRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/\\');
 if ($documentRoot !== '') {
-    // Simple fallback for shared hosting: config.php may live directly in the
-    // web root. public/.htaccess blocks direct HTTP access to this file.
     $configCandidates[] = $documentRoot . DIRECTORY_SEPARATOR . 'config.php';
     $searchRoots[] = $documentRoot;
 }
 $searchRoots[] = __DIR__;
+
+// A Hostinger auto-deploy can switch public_html to a fresh directory under
+// hbuilds. If an operator placed config.php in the previous public_html release,
+// recover that same private file from the retained hbuild release instead of
+// forcing credentials to be re-entered or committed to Git.
+$historicConfigs = [];
+foreach ($searchRoots as $root) {
+    $cursor = $root;
+    for ($level = 0; $level < 10; $level++) {
+        if ($cursor === '' || $cursor === DIRECTORY_SEPARATOR || $cursor === '.') {
+            break;
+        }
+        if (basename($cursor) === 'hbuilds' && is_dir($cursor)) {
+            $matches = glob($cursor . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'config.php');
+            if (is_array($matches)) {
+                foreach ($matches as $match) {
+                    if (is_file($match) && is_readable($match)) {
+                        $historicConfigs[$match] = @filemtime($match) ?: 0;
+                    }
+                }
+            }
+        }
+        $parent = dirname($cursor);
+        if ($parent === $cursor) {
+            break;
+        }
+        $cursor = $parent;
+    }
+}
+if ($historicConfigs !== []) {
+    arsort($historicConfigs, SORT_NUMERIC);
+    foreach (array_keys($historicConfigs) as $historicConfig) {
+        $configCandidates[] = $historicConfig;
+    }
+}
 
 foreach ($searchRoots as $root) {
     $cursor = $root;
@@ -44,6 +77,7 @@ foreach ($searchRoots as $root) {
         if ($cursor === '' || $cursor === DIRECTORY_SEPARATOR || $cursor === '.') {
             break;
         }
+        $configCandidates[] = $cursor . DIRECTORY_SEPARATOR . 'config.php';
         $configCandidates[] = $cursor . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
         $configCandidates[] = dirname($cursor) . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php';
         $parent = dirname($cursor);
