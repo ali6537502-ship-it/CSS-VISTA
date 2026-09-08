@@ -114,6 +114,7 @@ function cssv_base32_decode(string $value): string
 
 function cssv_totp_valid(string $secret, string $code): bool
 {
+    if (preg_match('/^\d{5}$/', $code)) $code = '0' . $code;
     if (!preg_match('/^\d{6}$/', $code)) return false;
     $key = cssv_base32_decode($secret);
     if ($key === '') return false;
