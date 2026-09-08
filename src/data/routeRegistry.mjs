@@ -94,7 +94,15 @@ export const ROUTE_REGISTRY = [
   publicPage('/consultation', 'One-to-One CSS Consultation', 'Learn about one-to-one CSS consultation, preparation guidance and booking information.', 'One-to-one CSS consultation', { adMode: 'none', minimumHeight: 0 }),
   protectedPage('/exam-intelligence', 'Vista Exam Intelligence', 'Private examination-planning and performance dashboard.'),
   publicPage('/css-2026-written-result', 'CSS 2026 Written Result - Qualified Candidates List', 'View and download the CSS Competitive Examination 2026 written result and qualified-candidate list.', 'CSS 2026 written result', { adMode: 'none', minimumHeight: 0, schemaType: 'NewsArticle' }),
-  publicPage('/privacy', 'Privacy, Cookies and Advertising', 'Read how CSS Vista handles account data, local study preferences, cookies, advertising technology and consent.', 'Privacy, cookies and advertising', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/legal', 'Legal & Trust Centre', 'Access CSS Vista privacy, cookie, terms, copyright, editorial, identity and contact information.', 'Legal & Trust Centre', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/privacy-policy', 'Privacy Policy', 'Read how CSS Vista handles account information, study progress, security data, browser storage, advertising and service providers.', 'Privacy Policy', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/cookie-policy', 'Cookie Policy', 'Read about the cookies, local storage, session storage and advertising technologies used by CSS Vista.', 'Cookie Policy', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/terms-and-conditions', 'Terms & Conditions', 'Read the terms governing use of CSS Vista educational resources, accounts, study tools and public content.', 'Terms & Conditions', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/disclaimer', 'Disclaimer', 'Read CSS Vista\'s independent educational disclaimer and guidance on verifying official examination information.', 'Disclaimer', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/copyright', 'Copyright Policy', 'Read how CSS Vista distinguishes its original material from official, public and third-party works.', 'Copyright & Intellectual Property', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/editorial-policy', 'Editorial & Corrections Policy', 'Read CSS Vista standards for accuracy, sourcing, updates, corrections and official examination information.', 'Editorial & Corrections Policy', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { title: 'About CSS Vista', adMode: 'none', minimumHeight: 0 }),
+  publicPage('/contact', 'Contact CSS Vista', 'Use CSS Vista verified public channels for general enquiries, technical issues, corrections, privacy and copyright concerns.', 'Contact CSS Vista', { title: 'Contact CSS Vista', adMode: 'none', minimumHeight: 0 }),
   protectedPage('/admin', 'Administration', 'Private administration area.', { robots: 'noindex, nofollow' }),
 ]
 
