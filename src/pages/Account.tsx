@@ -220,22 +220,22 @@ export default function Account() {
                   {syncStatus === 'syncing'
                     ? 'Synchronising your progress'
                     : syncBackend === 'hostinger'
-                      ? 'Hostinger sync verified'
+                      ? 'Secure sync verified'
                       : syncBackend === 'supabase'
-                        ? 'Supabase safety sync active'
+                        ? 'Secure backup sync active'
                         : 'Local-first sync is active'}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-emerald-900/70">
                   {syncBackend === 'hostinger'
-                    ? 'Your latest progress was stored successfully in the Hostinger database.'
+                    ? 'Your latest progress was stored securely in your private account.'
                     : syncBackend === 'supabase'
-                      ? 'The Hostinger check did not complete, so your progress was protected by the Supabase fallback.'
+                      ? 'The primary sync could not complete, so your progress was protected by the secure backup.'
                       : 'Your device keeps working offline. When connected, progress is merged into your private account record.'}
                 </p>
               </div>
               {lastSyncedAt && (
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Last synced{syncBackend ? ` via ${syncBackend === 'hostinger' ? 'Hostinger' : 'Supabase fallback'}` : ''}: {lastSyncedAt.toLocaleString()}
+                  Last synced: {lastSyncedAt.toLocaleString()}
                 </p>
               )}
               {syncError && <p className="mt-3 text-xs font-medium text-red-700">{syncError}</p>}
