@@ -80,8 +80,8 @@ export default function AdminLogin() {
 
   async function verifyTotp() {
     await run(async () => {
-      if (!/^\d{6}$/.test(totpCode)) throw new Error('Enter the current six-digit authenticator code.')
-      await api('/api/admin-auth/verify-totp.php', { code: totpCode })
+      if (!/^\d{5,6}$/.test(totpCode)) throw new Error('Enter the current authenticator code.')
+      await api('/api/admin-auth/verify-totp.php', { code: totpCode.padStart(6, '0') })
       navigate('/admin', { replace: true })
     })
   }
@@ -156,7 +156,7 @@ export default function AdminLogin() {
                 <button type="button" disabled={busy} onClick={() => void regenerateTotp()} className="mt-3 w-full rounded-md border border-amber-300 bg-white py-2.5 text-xs font-bold text-amber-800 disabled:opacity-60">Generate a new private setup key</button>
               </div>
             )}
-            <label className="block text-sm font-medium">Authenticator code<input inputMode="numeric" autoComplete="one-time-code" className={input + ' mt-1 text-center text-lg tracking-[0.3em]'} value={totpCode} onChange={(event) => setTotpCode(event.target.value.replace(/\D/g, '').slice(0, 6))} /></label>
+            <label className="block text-sm font-medium">Authenticator code<input inputMode="numeric" autoComplete="one-time-code" placeholder="6 digits" className={input + ' mt-1 text-center text-lg tracking-[0.3em]'} value={totpCode} onChange={(event) => setTotpCode(event.target.value.replace(/\D/g, '').slice(0, 6))} /></label>
             <button disabled={busy} onClick={() => void verifyTotp()} className="w-full rounded-md bg-pine py-3 text-sm font-semibold text-white disabled:opacity-60">{busy ? 'Verifying…' : 'Verify and open admin panel'}</button>
             {stage === 'totp' && <button onClick={() => setStage('login')} className="w-full text-sm font-semibold text-emerald-800 underline underline-offset-2">Start again</button>}
           </div>
