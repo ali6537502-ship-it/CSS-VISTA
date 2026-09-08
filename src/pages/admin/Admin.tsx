@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Lock } from 'lucide-react'
+import { ArrowLeft, Lock } from 'lucide-react'
 import AdminPanel from './AdminPanel'
+import StudentManagementPanel from './StudentManagementPanel'
 
 export default function Admin() {
   const navigate = useNavigate()
   const [ready, setReady] = useState(false)
+  const [workspace, setWorkspace] = useState<'students' | 'website'>('students')
 
   useEffect(() => {
     let active = true
@@ -31,5 +33,22 @@ export default function Admin() {
     )
   }
 
-  return <AdminPanel />
+  if (workspace === 'students') {
+    return <StudentManagementPanel onOpenWebsiteTools={() => setWorkspace('website')} />
+  }
+
+  return (
+    <div>
+      <div className="mx-auto max-w-7xl px-4 pt-5">
+        <button
+          type="button"
+          onClick={() => setWorkspace('students')}
+          className="inline-flex items-center gap-1.5 rounded-md border bg-white px-3 py-2 text-sm font-semibold text-pine hover:bg-secondary"
+        >
+          <ArrowLeft className="h-4 w-4" /> Student management
+        </button>
+      </div>
+      <AdminPanel />
+    </div>
+  )
 }
