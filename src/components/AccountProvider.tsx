@@ -142,7 +142,9 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     const { data } = client.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
       if (session?.user && hostingerAccountBackendEnabled) {
-        void ensureHostingerSession(client).catch(() => undefined)
+        window.setTimeout(() => {
+          void ensureHostingerSession(client).catch(() => undefined)
+        }, 0)
       }
       if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
       if (event === 'SIGNED_OUT') setPasswordRecovery(false)
