@@ -5,6 +5,7 @@ import {
   ShieldCheck, UserRound,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { useAccount } from '@/lib/accountContext'
 
 type Mode = 'sign-in' | 'create'
@@ -241,6 +242,7 @@ export default function Account() {
               {syncError && <p className="mt-3 text-xs font-medium text-red-700">{syncError}</p>}
               </section>
             </div>
+            <StudentProfilePanel email={user.email ?? ''} />
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-[1fr_.85fr]">
