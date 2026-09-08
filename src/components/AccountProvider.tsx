@@ -6,6 +6,11 @@ import type { SupabaseClient, User } from '@supabase/supabase-js'
 import { useLocation } from 'react-router'
 import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
 import {
+  ensureHostingerSession,
+  hostingerAccountBackendEnabled,
+  logoutHostinger,
+} from '@/lib/hostingerApi'
+import {
   AccountContext,
   type AccountContextValue,
   type ActionResult,
@@ -62,8 +67,20 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     setSyncStatus('syncing')
     setSyncError('')
     try {
-      const { syncStudentProgress } = await import('@/lib/accountSync')
-      await syncStudentProgress(client, user.id)
+      if (hostingerAccountBackendEnabled) {
+        try {
+          const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
+          await syncStudentProgressToHostinger(client, user.id)
+        } catch {
+          // Keep the existing cloud path as an immediate rollback while the
+          // Hostinger cutover is being verified in production.
+          const { syncStudentProgress } = await import('@/lib/accountSync')
+          await syncStudentProgress(client, user.id)
+        }
+      } else {
+        const { syncStudentProgress } = await import('@/lib/accountSync')
+        await syncStudentProgress(client, user.id)
+      }
       setLastSyncedAt(new Date())
       setSyncStatus('synced')
       return {}
@@ -109,13 +126,26 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!client) return
     let active = true
-    client.auth.getSession().then(({ data }) => {
+    client.auth.getSession().then(async ({ data }) => {
+      if (!active) return
+      if (data.session?.user && hostingerAccountBackendEnabled) {
+        try {
+          await ensureHostingerSession(client)
+        } catch {
+          // The existing Supabase session remains a safe login fallback.
+        }
+      }
       if (!active) return
       setUser(data.session?.user ?? null)
       setLoading(false)
     })
     const { data } = client.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
+      if (session?.user && hostingerAccountBackendEnabled) {
+        window.setTimeout(() => {
+          void ensureHostingerSession(client).catch(() => undefined)
+        }, 0)
+      }
       if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
       if (event === 'SIGNED_OUT') setPasswordRecovery(false)
       setLoading(false)
@@ -174,7 +204,15 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     async signIn(email, password) {
       if (!client) return { error: 'Account service is not configured yet.' }
       const { error } = await client.auth.signInWithPassword({ email, password })
-      return error ? { error: error.message } : {}
+      if (error) return { error: error.message }
+      if (hostingerAccountBackendEnabled) {
+        try {
+          await ensureHostingerSession(client)
+        } catch {
+          // Login still succeeds through the retained Supabase rollback path.
+        }
+      }
+      return {}
     },
     async signUp(email, password, fullName) {
       if (!client) return { error: 'Account service is not configured yet.' }
@@ -215,6 +253,13 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     },
     async signOut() {
       if (!client) return {}
+      if (hostingerAccountBackendEnabled) {
+        try {
+          await logoutHostinger()
+        } catch {
+          // Continue so the retained Supabase session is always cleared.
+        }
+      }
       const { error } = await client.auth.signOut()
       return error ? { error: error.message } : {}
     },
@@ -226,7 +271,17 @@ export function AccountProvider({ children }: { children: ReactNode }) {
           clearLocalStudentProgress,
         } = await import('@/lib/accountSync')
         clearLocalStudentProgress()
-        if (client && user) await clearCloudStudentProgress(client, user.id)
+        if (client && user) {
+          if (hostingerAccountBackendEnabled) {
+            try {
+              const { clearHostingerStudentProgress } = await import('@/lib/hostingerSync')
+              await clearHostingerStudentProgress(client)
+            } catch {
+              // Continue with the rollback store so reset remains reliable.
+            }
+          }
+          await clearCloudStudentProgress(client, user.id)
+        }
         setSyncStatus(user ? 'synced' : 'idle')
         setLastSyncedAt(user ? new Date() : null)
         return {}

@@ -52,13 +52,15 @@ The schema contains migration audit tables. Every source table must reconcile by
 - `/api/health.php` — safe runtime/configuration/database probe
 - `/api/auth/login.php` — local login with temporary Supabase password bridge
 - `/api/auth/session.php` — local session status
+- `/api/auth/supabase-session.php` — temporary verified Supabase-session exchange for phased cutover
 - `/api/auth/logout.php` — CSRF-protected logout
 - `/api/auth/forgot-password.php` — one-time reset token + Hostinger SMTP/mail transport
 - `/api/auth/reset-password.php` — reset + revoke all old sessions
 - `/api/student/profile.php` — self profile read/update
+- `/api/student/progress.php` — authenticated progress read/sync/reset on Hostinger
 - `/api/student/photo.php` — server-validated <=25 KiB private profile photo upload
 - `/api/student/photo-view.php` — authenticated/self-or-admin private photo response
 - `/api/admin/students.php` — owner-only student directory with age/gender/city/attempt/batch/status/payment filters
 - `/api/batch/register.php` — public batch registration with required photo and duplicate/capacity checks
 
-These endpoints are additive. The current React frontend does not call them yet, so publishing this foundation does not change existing student login or progress behavior.
+The React account runtime now establishes a Hostinger session from the verified Supabase session and writes merged progress to Hostinger first. Supabase authentication and the original progress path remain available as a temporary automatic rollback while the remaining account-dependent modules are converted. Set the non-secret build variable `VITE_ACCOUNT_BACKEND=supabase` to disable the Hostinger account path immediately.
