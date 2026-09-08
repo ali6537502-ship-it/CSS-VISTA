@@ -8,8 +8,8 @@ cssv_require_csrf($session);
 $userId = (string)$session['user_id'];
 
 $photoUpload = $_FILES['photo'] ?? [];
-if (isset($photoUpload['size']) && (int)$photoUpload['size'] > 15360) {
-    cssv_fail('Profile photo must be 15 KB or smaller.', 422, 'photo_size_invalid');
+if (isset($photoUpload['size']) && (int)$photoUpload['size'] > CSSV_MAX_PROFILE_PHOTO_BYTES) {
+    cssv_fail('Profile photo must be 25 KB or smaller.', 422, 'photo_size_invalid');
 }
 $photo = cssv_store_profile_photo($photoUpload, 'student-photos');
 $oldStmt = $pdo->prepare('SELECT profile_photo_path FROM student_profiles WHERE user_id=?');
