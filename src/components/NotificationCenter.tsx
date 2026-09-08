@@ -1,18 +1,68 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { Bell, BellRing, Check, X } from 'lucide-react'
-import { mergedUpdates } from '@/lib/admin'
+import { ADMIN_CONTENT_EVENT, mergedUpdates, type SiteUpdate } from '@/lib/admin'
 import { getNotifPrefs, markUpdatesSeen, setNotifPrefs, unseenUpdateIds } from '@/lib/progress'
 import { useAccount } from '@/lib/accountContext'
 
 export const UPDATE_TAGS = ['Mentors', 'Opinions', 'Test Series', 'FPSC', 'General']
 
+type NotificationFeedResponse = {
+  ok?: boolean
+  updates?: SiteUpdate[]
+}
+
+function mergeNotificationFeeds(remote: SiteUpdate[], local: SiteUpdate[]) {
+  const map = new Map<string, SiteUpdate>()
+  local.forEach((update) => map.set(update.id, update))
+  remote.forEach((update) => map.set(update.id, update))
+  return [...map.values()].sort((a, b) => {
+    const byDate = (b.date || '').localeCompare(a.date || '')
+    return byDate || b.id.localeCompare(a.id)
+  })
+}
+
 export function useUpdates() {
-  const [updates, setUpdates] = useState(mergedUpdates())
+  const [updates, setUpdates] = useState<SiteUpdate[]>(() => mergedUpdates())
+
   useEffect(() => {
-    const t = setInterval(() => setUpdates(mergedUpdates()), 5000)
-    return () => clearInterval(t)
+    let active = true
+
+    async function refresh() {
+      const local = mergedUpdates()
+      try {
+        const response = await fetch('/api/notifications.php', {
+          credentials: 'same-origin',
+          cache: 'no-store',
+          headers: { Accept: 'application/json' },
+        })
+        const body = await response.json().catch(() => null) as NotificationFeedResponse | null
+        if (!response.ok || !body?.ok || !Array.isArray(body.updates)) throw new Error('Notification feed unavailable')
+        if (active) setUpdates(mergeNotificationFeeds(body.updates, local))
+      } catch {
+        // Keep the legacy/local feed as an offline fallback.
+        if (active) setUpdates(local)
+      }
+    }
+
+    void refresh()
+    const timer = window.setInterval(() => { void refresh() }, 15_000)
+    const onFocus = () => { void refresh() }
+    const onVisibility = () => { if (document.visibilityState === 'visible') void refresh() }
+    const onContentChange = () => { void refresh() }
+    window.addEventListener('focus', onFocus)
+    window.addEventListener(ADMIN_CONTENT_EVENT, onContentChange)
+    document.addEventListener('visibilitychange', onVisibility)
+
+    return () => {
+      active = false
+      window.clearInterval(timer)
+      window.removeEventListener('focus', onFocus)
+      window.removeEventListener(ADMIN_CONTENT_EVENT, onContentChange)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
   }, [])
+
   return updates
 }
 
@@ -66,6 +116,9 @@ export default function NotificationCenter() {
   const prefs = getNotifPrefs()
   const unseen = unseenUpdateIds(updates.map((u) => u.id))
   const ref = useRef<HTMLDivElement>(null)
+  const pushedIds = useRef<Set<string>>(
+    new Set(JSON.parse(sessionStorage.getItem('cssvista:notification-pushes') || '[]') as string[]),
+  )
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -75,10 +128,17 @@ export default function NotificationCenter() {
     return () => document.removeEventListener('mousedown', onClick)
   }, [])
 
-  // Browser push for new notify-enabled updates (when permission granted)
+  // Browser push for new notify-enabled updates (when permission granted).
+  // A browser pop-up must never mark the bell item as read: students should
+  // still see the red unread badge until they actually open the notification panel.
   useEffect(() => {
     if (!prefs.enabled || !('Notification' in window) || Notification.permission !== 'granted') return
-    const fresh = updates.filter((u) => unseen.includes(u.id) && u.notify && (prefs.tags[u.tag] ?? true))
+    const fresh = updates.filter((u) =>
+      unseen.includes(u.id)
+      && u.notify
+      && (prefs.tags[u.tag] ?? true)
+      && !pushedIds.current.has(u.id),
+    )
     if (fresh.length > 0) {
       const u = fresh[0]
       try {
@@ -86,11 +146,17 @@ export default function NotificationCenter() {
       } catch {
         /* some browsers require service workers - bell feed still works */
       }
-      markUpdatesSeen(fresh.map((x) => x.id))
-      force((f) => f + 1)
+      // Avoid repeated operating-system pop-ups during polling, but leave all
+      // notification IDs unread until the student opens the bell panel.
+      fresh.forEach((item) => pushedIds.current.add(item.id))
+      try {
+        sessionStorage.setItem('cssvista:notification-pushes', JSON.stringify([...pushedIds.current].slice(-200)))
+      } catch {
+        // Session storage is only a duplicate-push convenience.
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updates.length])
+  }, [updates])
 
   return (
     <div className="relative" ref={ref}>
