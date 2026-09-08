@@ -86,6 +86,16 @@ export default function AdminLogin() {
     })
   }
 
+  async function regenerateTotp() {
+    await run(async () => {
+      const data = await api('/api/admin-auth/regenerate-totp.php', {})
+      if (!data.secret) throw new Error('Could not generate a new setup key.')
+      setTotpSecret(data.secret)
+      setTotpCode('')
+      setNotice('A new private setup key was generated. Delete the old entry from your authenticator app and use this new key.')
+    })
+  }
+
   const title = stage === 'setup-email' || stage === 'setup-details'
     ? 'Create private admin account'
     : stage === 'reset-email' || stage === 'reset-details'
@@ -142,6 +152,8 @@ export default function AdminLogin() {
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-muted-foreground"><li>Tap + and choose “Enter a setup key”.</li><li>Account: CSS Vista Owner</li><li>Type: Time based</li><li>Enter the key below.</li></ol>
                 <button type="button" onClick={() => void navigator.clipboard.writeText(totpSecret)} className="mt-3 w-full break-all rounded-md border bg-white p-3 font-mono text-xs font-bold text-pine">{totpSecret}</button>
                 <p className="mt-2 text-center text-xs text-muted-foreground">Tap the key to copy it.</p>
+                <p className="mt-3 rounded-md bg-amber-50 p-3 text-xs font-medium text-amber-800">Keep this key private. Never send it in a message or screenshot.</p>
+                <button type="button" disabled={busy} onClick={() => void regenerateTotp()} className="mt-3 w-full rounded-md border border-amber-300 bg-white py-2.5 text-xs font-bold text-amber-800 disabled:opacity-60">Generate a new private setup key</button>
               </div>
             )}
             <label className="block text-sm font-medium">Authenticator code<input inputMode="numeric" autoComplete="one-time-code" className={input + ' mt-1 text-center text-lg tracking-[0.3em]'} value={totpCode} onChange={(event) => setTotpCode(event.target.value.replace(/\D/g, '').slice(0, 6))} /></label>
