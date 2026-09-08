@@ -2,7 +2,9 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 
 type ApiFailure = { error?: string; message?: string }
 
-export const hostingerAccountBackendEnabled = import.meta.env.VITE_ACCOUNT_BACKEND === 'hostinger'
+// Hostinger is the production default after the verified data copy. Setting the
+// variable to `supabase` is an immediate, deployment-only rollback switch.
+export const hostingerAccountBackendEnabled = import.meta.env.VITE_ACCOUNT_BACKEND !== 'supabase'
 
 function csrfToken() {
   const match = document.cookie.match(/(?:^|;\s*)cssv_csrf=([^;]+)/)
