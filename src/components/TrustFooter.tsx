@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { site } from '@/data/site'
 
 type GoogleFcApi = {
@@ -9,6 +9,7 @@ type GoogleFcWindow = Window & { googlefc?: GoogleFcApi }
 
 export default function TrustFooter() {
   const navigate = useNavigate()
+  const location = useLocation()
   const reopenPrivacyChoices = () => {
     const googlefc = (window as GoogleFcWindow).googlefc
     if (typeof googlefc?.showRevocationMessage === 'function') {
@@ -16,6 +17,30 @@ export default function TrustFooter() {
       return
     }
     navigate('/cookie-policy#managing-cookies')
+  }
+
+  const isAdmin = location.pathname === '/admin' || location.pathname.startsWith('/admin/')
+  const isFocusedStudy = location.pathname === '/gk/quiz'
+    || location.pathname === '/five-minute'
+    || location.pathname.startsWith('/mpt/bank/')
+    || location.pathname.startsWith('/notes/view/')
+
+  if (isAdmin) return <style>{`.cssv-site-footer{display:none!important}`}</style>
+
+  if (isFocusedStudy) {
+    return (
+      <>
+        <style>{`.cssv-site-footer{display:none!important}`}</style>
+        <footer className="border-t bg-white pb-[calc(76px+env(safe-area-inset-bottom))] md:pb-0" aria-label="CSS Vista legal links">
+          <nav className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 py-4 text-xs text-muted-foreground" aria-label="Legal navigation">
+            <Link className="hover:text-pine" to="/privacy-policy">Privacy</Link>
+            <Link className="hover:text-pine" to="/terms-and-conditions">Terms</Link>
+            <Link className="hover:text-pine" to="/contact">Contact</Link>
+            <button type="button" onClick={reopenPrivacyChoices} className="hover:text-pine">Privacy & Cookie Settings</button>
+          </nav>
+        </footer>
+      </>
+    )
   }
 
   return (
