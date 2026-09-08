@@ -1,8 +1,9 @@
 import { Suspense } from 'react'
-import { Routes, Route } from 'react-router'
+import { Navigate, Routes, Route } from 'react-router'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
+import TrustFooter from './components/TrustFooter'
 import Home from './pages/Home'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
@@ -54,11 +55,19 @@ const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
 const FpscSyllabus = lazy(() => import('./pages/FpscSyllabus'))
 const CssPastPaperAnalysis = lazy(() => import('./pages/CssPastPaperAnalysis'))
-const Privacy = lazy(() => import('./pages/Privacy'))
 const Factbook = lazy(() => import('./pages/Factbook'))
 const Consultation = lazy(() => import('./pages/Consultation'))
 const ExamIntelligence = lazy(() => import('./pages/ExamIntelligence'))
 const Css2026Result = lazy(() => import('./pages/Css2026Result'))
+const LegalCentre = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.LegalCentre })))
+const PrivacyPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.PrivacyPolicy })))
+const CookiePolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.CookiePolicy })))
+const TermsConditions = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.TermsConditions })))
+const Disclaimer = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.Disclaimer })))
+const CopyrightPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.CopyrightPolicy })))
+const AboutCssVista = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.AboutCssVista })))
+const ContactCssVista = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.ContactCssVista })))
+const EditorialPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ default: m.EditorialPolicy })))
 
 function PageLoader() {
   return (
@@ -79,7 +88,7 @@ function S({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Routes>
-      <Route element={<AdSenseProvider><ErrorBoundary><Layout /></ErrorBoundary></AdSenseProvider>}>
+      <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /></></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
@@ -133,7 +142,16 @@ export default function App() {
         <Route path="/consultation" element={<S><Consultation /></S>} />
         <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />
         <Route path="/css-2026-written-result" element={<S><Css2026Result /></S>} />
-        <Route path="/privacy" element={<S><Privacy /></S>} />
+        <Route path="/legal" element={<S><LegalCentre /></S>} />
+        <Route path="/privacy-policy" element={<S><PrivacyPolicy /></S>} />
+        <Route path="/cookie-policy" element={<S><CookiePolicy /></S>} />
+        <Route path="/terms-and-conditions" element={<S><TermsConditions /></S>} />
+        <Route path="/disclaimer" element={<S><Disclaimer /></S>} />
+        <Route path="/copyright" element={<S><CopyrightPolicy /></S>} />
+        <Route path="/about" element={<S><AboutCssVista /></S>} />
+        <Route path="/contact" element={<S><ContactCssVista /></S>} />
+        <Route path="/editorial-policy" element={<S><EditorialPolicy /></S>} />
+        <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
         <Route path="/admin" element={<S><Admin /></S>} />
         <Route path="/admin/login" element={<S><AdminLogin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />
