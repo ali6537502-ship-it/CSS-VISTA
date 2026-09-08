@@ -30,6 +30,9 @@ export default function AdminLogin() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
+  const authenticatorUri = totpSecret
+    ? `otpauth://totp/${encodeURIComponent(`CSS Vista:${OWNER_EMAIL}`)}?secret=${encodeURIComponent(totpSecret)}&issuer=${encodeURIComponent('CSS Vista')}&algorithm=SHA1&digits=6&period=30`
+    : ''
 
   useEffect(() => {
     let active = true
@@ -112,7 +115,7 @@ export default function AdminLogin() {
         <div className="text-center">
           {stage === 'totp' || stage === 'totp-setup' ? <ShieldCheck className="mx-auto h-10 w-10 text-pine" /> : <Lock className="mx-auto h-10 w-10 text-pine" />}
           <p className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-emerald-800">CSS Vista owner only</p>
-          <h1 className="mt-1 font-display text-2xl font-bold text-pine">{title}</h1>
+          <h1 className="mt-1 font-display text-2xl font-bold text-pine">{stage === 'totp-setup' ? 'Connect Google Authenticator' : title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">This login is separate from every student account.</p>
         </div>
 
@@ -148,15 +151,16 @@ export default function AdminLogin() {
           <div className="mt-6 space-y-4">
             {stage === 'totp-setup' && (
               <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm">
-                <p className="font-bold text-pine">In Google Authenticator or Microsoft Authenticator:</p>
-                <ol className="mt-2 list-decimal space-y-1 pl-5 text-muted-foreground"><li>Tap + and choose “Enter a setup key”.</li><li>Account: CSS Vista Owner</li><li>Type: Time based</li><li>Enter the key below.</li></ol>
+                <p className="font-bold text-pine">Use Google Authenticator:</p>
+                <ol className="mt-2 list-decimal space-y-1 pl-5 text-muted-foreground"><li>Sign in to Google Authenticator with {OWNER_EMAIL} if you want Google sync.</li><li>Tap + and choose “Enter a setup key”.</li><li>Account: {OWNER_EMAIL}</li><li>Type: Time based</li><li>Enter the private key below.</li></ol>
+                {authenticatorUri && <a href={authenticatorUri} className="mt-3 block w-full rounded-md bg-pine px-3 py-2.5 text-center text-xs font-bold text-white">Open in Google Authenticator on this phone</a>}
                 <button type="button" onClick={() => void navigator.clipboard.writeText(totpSecret)} className="mt-3 w-full break-all rounded-md border bg-white p-3 font-mono text-xs font-bold text-pine">{totpSecret}</button>
                 <p className="mt-2 text-center text-xs text-muted-foreground">Tap the key to copy it.</p>
                 <p className="mt-3 rounded-md bg-amber-50 p-3 text-xs font-medium text-amber-800">Keep this key private. Never send it in a message or screenshot.</p>
                 <button type="button" disabled={busy} onClick={() => void regenerateTotp()} className="mt-3 w-full rounded-md border border-amber-300 bg-white py-2.5 text-xs font-bold text-amber-800 disabled:opacity-60">Generate a new private setup key</button>
               </div>
             )}
-            <label className="block text-sm font-medium">Authenticator code<input inputMode="numeric" autoComplete="one-time-code" placeholder="6 digits" className={input + ' mt-1 text-center text-lg tracking-[0.3em]'} value={totpCode} onChange={(event) => setTotpCode(event.target.value.replace(/\D/g, '').slice(0, 6))} /></label>
+            <label className="block text-sm font-medium">Six-digit code shown in Google Authenticator<input inputMode="numeric" autoComplete="one-time-code" placeholder="000000" className={input + ' mt-1 text-center text-lg tracking-[0.3em]'} value={totpCode} onChange={(event) => setTotpCode(event.target.value.replace(/\D/g, '').slice(0, 6))} /></label>
             <button disabled={busy} onClick={() => void verifyTotp()} className="w-full rounded-md bg-pine py-3 text-sm font-semibold text-white disabled:opacity-60">{busy ? 'Verifying…' : 'Verify and open admin panel'}</button>
             {stage === 'totp' && <button onClick={() => setStage('login')} className="w-full text-sm font-semibold text-emerald-800 underline underline-offset-2">Start again</button>}
           </div>
