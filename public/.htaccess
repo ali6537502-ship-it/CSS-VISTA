@@ -31,12 +31,43 @@ ErrorDocument 404 /404.html
   AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx
 </IfModule>
 
+# Prefer Brotli for compressible text responses when the host supports it.
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+<IfModule !mod_brotli.c>
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+  </IfModule>
+</IfModule>
+
+# Vite production files under /assets/ use content-hashed filenames, so they can
+# be cached immutably. Other public images/fonts/data use shorter safe lifetimes.
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI "^/assets/" cssv_hashed_asset=1
+</IfModule>
+
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Public generated HTML is short-lived and revalidated. The SPA shell and
+  # service-worker recovery files below deliberately override this with no-store.
+  <FilesMatch "\.html$">
+    Header always set Cache-Control "public, max-age=300, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(?:png|jpe?g|gif|webp|svg|ico)$">
+    Header always set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
+  </FilesMatch>
+  <FilesMatch "\.(?:woff2?|ttf)$">
+    Header always set Cache-Control "public, max-age=2592000, stale-while-revalidate=86400"
+  </FilesMatch>
+  <FilesMatch "\.json$">
+    Header always set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
 
   <FilesMatch "^(?:index\.html|sw\.js|stale-module\.js)$">
     Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
@@ -56,6 +87,8 @@ ErrorDocument 404 /404.html
     Header always set Cache-Control "public, max-age=300, must-revalidate"
     Header always set X-Content-Type-Options "nosniff"
   </Files>
+
+  Header always set Cache-Control "public, max-age=31536000, immutable" env=cssv_hashed_asset
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -66,6 +99,9 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\.css-vista\.com$ [NC]
   RewriteRule ^ https://www.css-vista.com%{REQUEST_URI} [R=301,L,NE]
+
+  # Consolidate the retired generic privacy URL onto the canonical policy URL.
+  RewriteRule ^privacy/?$ https://www.css-vista.com/privacy-policy [R=301,L,NE]
 
   # Block private runtime config/storage and bootstrap schema from direct web access.
   RewriteRule ^config\.php$ - [F,L,NC]
