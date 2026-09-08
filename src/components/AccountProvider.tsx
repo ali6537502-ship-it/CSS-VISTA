@@ -14,6 +14,7 @@ import {
   AccountContext,
   type AccountContextValue,
   type ActionResult,
+  type SyncBackend,
   type SyncStatus,
 } from '@/lib/accountContext'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -55,6 +56,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [passwordRecovery, setPasswordRecovery] = useState(() => new URLSearchParams(window.location.search).get('reset') === '1')
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
+  const [syncBackend, setSyncBackend] = useState<SyncBackend>(null)
   const [syncError, setSyncError] = useState('')
   const [lastSyncedAt, setLastSyncedAt] = useState<Date | null>(null)
   const syncTimer = useRef<number | null>(null)
@@ -71,15 +73,18 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         try {
           const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
           await syncStudentProgressToHostinger(client, user.id)
+          setSyncBackend('hostinger')
         } catch {
           // Keep the existing cloud path as an immediate rollback while the
           // Hostinger cutover is being verified in production.
           const { syncStudentProgress } = await import('@/lib/accountSync')
           await syncStudentProgress(client, user.id)
+          setSyncBackend('supabase')
         }
       } else {
         const { syncStudentProgress } = await import('@/lib/accountSync')
         await syncStudentProgress(client, user.id)
+        setSyncBackend('supabase')
       }
       setLastSyncedAt(new Date())
       setSyncStatus('synced')
@@ -199,6 +204,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     user,
     passwordRecovery,
     syncStatus,
+    syncBackend,
     syncError,
     lastSyncedAt,
     async signIn(email, password) {
@@ -291,7 +297,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         }
       }
     },
-  }), [client, lastSyncedAt, loading, passwordRecovery, syncError, syncNow, syncStatus, user])
+  }), [client, lastSyncedAt, loading, passwordRecovery, syncBackend, syncError, syncNow, syncStatus, user])
 
   return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
 }
