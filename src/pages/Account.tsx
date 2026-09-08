@@ -14,7 +14,7 @@ export default function Account() {
   const {
     configured, loading, user, signIn, signUp, signInWithGoogle, signOut,
     requestPasswordReset, updatePassword, passwordRecovery, clearPasswordRecovery,
-    syncNow, syncStatus, syncError, lastSyncedAt,
+    syncNow, syncStatus, syncBackend, syncError, lastSyncedAt,
   } = useAccount()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -217,16 +217,25 @@ export default function Account() {
                   {syncStatus === 'syncing'
                     ? <LoaderCircle className="h-4 w-4 animate-spin" />
                     : <CheckCircle2 className="h-4 w-4" />}
-                  {syncStatus === 'syncing' ? 'Synchronising your progress' : 'Local-first sync is active'}
+                  {syncStatus === 'syncing'
+                    ? 'Synchronising your progress'
+                    : syncBackend === 'hostinger'
+                      ? 'Hostinger sync verified'
+                      : syncBackend === 'supabase'
+                        ? 'Supabase safety sync active'
+                        : 'Local-first sync is active'}
                 </p>
                 <p className="mt-1 text-xs leading-relaxed text-emerald-900/70">
-                  Your device keeps working offline. When connected, student progress is merged into your private
-                  account record.
+                  {syncBackend === 'hostinger'
+                    ? 'Your latest progress was stored successfully in the Hostinger database.'
+                    : syncBackend === 'supabase'
+                      ? 'The Hostinger check did not complete, so your progress was protected by the Supabase fallback.'
+                      : 'Your device keeps working offline. When connected, progress is merged into your private account record.'}
                 </p>
               </div>
               {lastSyncedAt && (
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Last synced: {lastSyncedAt.toLocaleString()}
+                  Last synced{syncBackend ? ` via ${syncBackend === 'hostinger' ? 'Hostinger' : 'Supabase fallback'}` : ''}: {lastSyncedAt.toLocaleString()}
                 </p>
               )}
               {syncError && <p className="mt-3 text-xs font-medium text-red-700">{syncError}</p>}
