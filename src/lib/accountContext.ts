@@ -7,6 +7,7 @@ export type ActionResult = {
 }
 
 export type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error'
+export type SyncBackend = 'hostinger' | 'supabase' | null
 
 export interface AccountContextValue {
   configured: boolean
@@ -14,6 +15,7 @@ export interface AccountContextValue {
   user: User | null
   passwordRecovery: boolean
   syncStatus: SyncStatus
+  syncBackend: SyncBackend
   syncError: string
   lastSyncedAt: Date | null
   signIn(email: string, password: string): Promise<ActionResult>
