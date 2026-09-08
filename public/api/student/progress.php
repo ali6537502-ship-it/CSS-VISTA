@@ -59,10 +59,31 @@ function cssv_progress_list(mixed $value, int $limit): array
 
 function cssv_progress_datetime(mixed $value): ?string
 {
+    $iso = cssv_progress_iso($value);
+    if ($iso === null) return null;
+    return (new DateTimeImmutable($iso))->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d H:i:s');
+}
+
+function cssv_progress_iso(mixed $value): ?string
+{
     if (!is_string($value) && !is_int($value) && !is_float($value)) return null;
-    $timestamp = is_numeric($value) ? (int)(((float)$value) / 1000) : strtotime((string)$value);
-    if (!$timestamp || $timestamp < 946684800 || $timestamp > time() + 86400) return null;
-    return gmdate('Y-m-d H:i:s', $timestamp);
+    try {
+        if (is_numeric($value)) {
+            $milliseconds = (int)round((float)$value);
+            $seconds = intdiv($milliseconds, 1000);
+            $millis = abs($milliseconds % 1000);
+            $date = (new DateTimeImmutable('@' . $seconds))->setTimezone(new DateTimeZone('UTC'));
+            $iso = $date->format('Y-m-d\\TH:i:s') . sprintf('.%03dZ', $millis);
+        } else {
+            $date = (new DateTimeImmutable((string)$value))->setTimezone(new DateTimeZone('UTC'));
+            $iso = $date->format('Y-m-d\\TH:i:s.v\\Z');
+            $seconds = $date->getTimestamp();
+        }
+    } catch (Throwable) {
+        return null;
+    }
+    if ($seconds < 946684800 || $seconds > time() + 86400) return null;
+    return $iso;
 }
 
 $progress = cssv_progress_record($payload['cssvista:progress:v1'] ?? []);
@@ -80,9 +101,10 @@ try {
         $type = mb_substr(trim((string)($entry['type'] ?? '')), 0, 100);
         $label = mb_substr(trim((string)($entry['label'] ?? '')), 0, 500);
         $path = isset($entry['path']) ? mb_substr((string)$entry['path'], 0, 1000) : null;
+        $occurredIso = cssv_progress_iso($entry['ts'] ?? null);
         $occurredAt = cssv_progress_datetime($entry['ts'] ?? null);
-        if ($type === '' || $occurredAt === null) continue;
-        $eventKey = mb_substr('activity:' . $type . ':' . ($path ?? '') . ':' . gmdate('c', strtotime($occurredAt)), 0, 255);
+        if ($type === '' || $occurredAt === null || $occurredIso === null) continue;
+        $eventKey = mb_substr('activity:' . $type . ':' . ($path ?? '') . ':' . $occurredIso, 0, 255);
         $activityStmt->execute([$userId, $eventKey, $type, $label, $path, $occurredAt]);
     }
 
