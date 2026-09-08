@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/../_bootstrap.php';
+require_once __DIR__ . '/../_admin_auth.php';
+cssv_require_method('POST');
+$pdo = cssv_db();
+cssv_admin_ensure_schema($pdo);
+$body = cssv_request_json();
+$email = cssv_normalize_email($body['email'] ?? '');
+if (!cssv_is_owner_email($email)) cssv_fail('This admin account is not available.', 403, 'owner_only');
+$password = cssv_admin_validate_password($body['password'] ?? '');
+cssv_admin_consume_code($pdo, $email, 'setup', trim((string)($body['code'] ?? '')));
+$check = $pdo->prepare('SELECT 1 FROM admin_accounts WHERE email=? LIMIT 1');
+$check->execute([$email]);
+if ($check->fetchColumn()) cssv_fail('The private admin account already exists.', 409, 'already_configured');
+$adminId = cssv_uuid_v4();
+$secret = cssv_base32_encode(random_bytes(20));
+$stmt = $pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher) VALUES (?,?,?,?)');
+$stmt->execute([$adminId, $email, password_hash($password, PASSWORD_DEFAULT), cssv_admin_encrypt($secret)]);
+cssv_admin_issue_session($pdo, $adminId);
+$label = rawurlencode('CSS Vista Owner');
+$issuer = rawurlencode('CSS Vista');
+$uri = 'otpauth://totp/' . $label . '?secret=' . $secret . '&issuer=' . $issuer . '&digits=6&period=30';
+cssv_json(['ok' => true, 'stage' => 'totp_setup', 'secret' => $secret, 'otpauth_uri' => $uri]);

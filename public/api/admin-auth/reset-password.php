@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/../_bootstrap.php';
+require_once __DIR__ . '/../_admin_auth.php';
+cssv_require_method('POST');
+$pdo = cssv_db();
+cssv_admin_ensure_schema($pdo);
+$body = cssv_request_json();
+$email = cssv_normalize_email($body['email'] ?? '');
+if (!cssv_is_owner_email($email)) cssv_fail('This admin account is not available.', 403, 'owner_only');
+$password = cssv_admin_validate_password($body['password'] ?? '');
+cssv_admin_consume_code($pdo, $email, 'reset', trim((string)($body['code'] ?? '')));
+$stmt = $pdo->prepare('SELECT id FROM admin_accounts WHERE email=? AND disabled_at IS NULL LIMIT 1');
+$stmt->execute([$email]);
+$adminId = $stmt->fetchColumn();
+if (!$adminId) cssv_fail('The private admin account does not exist.', 404, 'not_configured');
+$pdo->prepare('UPDATE admin_accounts SET password_hash=?,failed_attempts=0,locked_until=NULL WHERE id=?')->execute([password_hash($password, PASSWORD_DEFAULT), $adminId]);
+$pdo->prepare('UPDATE admin_sessions SET revoked_at=COALESCE(revoked_at,NOW(6)) WHERE admin_id=?')->execute([$adminId]);
+cssv_admin_issue_session($pdo, (string)$adminId);
+cssv_json(['ok' => true, 'stage' => 'totp_challenge']);
