@@ -25,6 +25,7 @@ import { pastPapers as seedPapers, examinations, subjectTypes, paperParts, paper
 import { caIssues } from '@/data/currentAffairs'
 import { quizCategories } from '@/data/quiz'
 import { useAccount } from '@/lib/accountContext'
+import { getSupabaseClient } from '@/lib/supabase'
 import {
   getAdminTestSeriesRequests, updateTestSeriesRequestStatus,
   type CloudTestSeriesRequest,
@@ -922,41 +923,159 @@ export default function Admin() {
   const { configured, loading: accountLoading, user, signOut } = useAccount()
   const [authed, setAuthed] = useState(isAuthed())
   const [cloudAccess, setCloudAccess] = useState<'checking' | 'granted' | 'denied'>('checking')
+  const [mfaStage, setMfaStage] = useState<'checking' | 'setup' | 'challenge' | 'verifying' | 'ready' | 'denied'>('checking')
+  const [mfaFactorId, setMfaFactorId] = useState('')
+  const [mfaQrCode, setMfaQrCode] = useState('')
+  const [mfaSecret, setMfaSecret] = useState('')
+  const [mfaCode, setMfaCode] = useState('')
+  const [mfaError, setMfaError] = useState('')
   const [pass, setPass] = useState('')
   const [tab, setTab] = useState<(typeof adminTabs)[number]['id']>('students')
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!configured || accountLoading) return
-    if (!user) return
-    let active = true
-    fetch('/api/auth/session.php', {
-      credentials: 'include',
-      headers: { Accept: 'application/json' },
-    })
-      .then(async (response) => {
-        if (!response.ok) return false
-        const result = await response.json() as {
-          authenticated?: boolean
-          user?: { is_admin?: boolean }
-        }
-        return result.authenticated === true && result.user?.is_admin === true
-      })
-      .then((allowed) => {
-        if (active) setCloudAccess(allowed ? 'granted' : 'denied')
-      })
-      .catch(() => {
-        if (active) setCloudAccess('denied')
-      })
-    return () => {
-      active = false
+    if (!user) {
+      setCloudAccess('denied')
+      setMfaStage('denied')
+      return
     }
+    let active = true
+
+    async function activateOwnerSession(client: Awaited<ReturnType<typeof getSupabaseClient>>) {
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      const { data: sessionData, error: sessionError } = await client.auth.getSession()
+      const accessToken = sessionData.session?.access_token
+      if (sessionError || !accessToken) throw new Error('Sign in again to verify the owner account.')
+
+      const exchange = await fetch('/api/auth/supabase-session.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      if (!exchange.ok) {
+        const body = await exchange.json().catch(() => null) as { message?: string } | null
+        throw new Error(body?.message || 'Could not refresh the secure owner session.')
+      }
+
+      const response = await fetch('/api/auth/admin-mfa.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      const body = await response.json().catch(() => null) as { ok?: boolean, message?: string } | null
+      if (!response.ok || !body?.ok) throw new Error(body?.message || 'Owner verification failed.')
+    }
+
+    async function prepareOwnerSecurity() {
+      const client = await getSupabaseClient()
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      if (user?.email?.trim().toLowerCase() !== 'alihassansargana1@gmail.com') {
+        if (active) {
+          setCloudAccess('denied')
+          setMfaStage('denied')
+        }
+        return
+      }
+
+      const { data: assurance, error: assuranceError } = await client.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (assuranceError) throw assuranceError
+      if (assurance.currentLevel === 'aal2') {
+        await activateOwnerSession(client)
+        if (active) {
+          setCloudAccess('granted')
+          setMfaStage('ready')
+        }
+        return
+      }
+
+      const { data: factors, error: factorsError } = await client.auth.mfa.listFactors()
+      if (factorsError) throw factorsError
+      const verified = factors.totp.find((factor) => factor.status === 'verified')
+      if (verified) {
+        if (active) {
+          setMfaFactorId(verified.id)
+          setMfaStage('challenge')
+          setCloudAccess('checking')
+        }
+        return
+      }
+
+      for (const factor of factors.totp.filter((item) => item.status !== 'verified')) {
+        await client.auth.mfa.unenroll({ factorId: factor.id })
+      }
+      const { data: enrollment, error: enrollError } = await client.auth.mfa.enroll({
+        factorType: 'totp',
+        friendlyName: 'CSS Vista Owner',
+      })
+      if (enrollError) throw enrollError
+      if (active) {
+        setMfaFactorId(enrollment.id)
+        setMfaQrCode(enrollment.totp.qr_code)
+        setMfaSecret(enrollment.totp.secret)
+        setMfaStage('setup')
+        setCloudAccess('checking')
+      }
+    }
+
+    void prepareOwnerSecurity().catch((reason) => {
+      if (!active) return
+      setMfaError(reason instanceof Error ? reason.message : 'Owner verification failed.')
+      setMfaStage('denied')
+      setCloudAccess('denied')
+    })
+    return () => { active = false }
   }, [accountLoading, configured, user])
+
+  async function verifyMfaCode() {
+    if (!/^\d{6}$/.test(mfaCode.trim()) || !mfaFactorId) {
+      setMfaError('Enter the six-digit code from your authenticator app.')
+      return
+    }
+    setMfaStage('verifying')
+    setMfaError('')
+    try {
+      const client = await getSupabaseClient()
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      const { error } = await client.auth.mfa.challengeAndVerify({
+        factorId: mfaFactorId,
+        code: mfaCode.trim(),
+      })
+      if (error) throw error
+      const { data: sessionData } = await client.auth.getSession()
+      const accessToken = sessionData.session?.access_token
+      if (!accessToken) throw new Error('Sign in again to complete verification.')
+
+      const exchange = await fetch('/api/auth/supabase-session.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      if (!exchange.ok) throw new Error('Could not refresh the secure owner session.')
+      const response = await fetch('/api/auth/admin-mfa.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      const body = await response.json().catch(() => null) as { ok?: boolean, message?: string } | null
+      if (!response.ok || !body?.ok) throw new Error(body?.message || 'Owner verification failed.')
+      setMfaCode('')
+      setMfaStage('ready')
+      setCloudAccess('granted')
+    } catch (reason) {
+      setMfaError(reason instanceof Error ? reason.message : 'The verification code was not accepted.')
+      setMfaStage(mfaQrCode ? 'setup' : 'challenge')
+    }
+  }
 
   const resolvedCloudAccess = !accountLoading && !user ? 'denied' : cloudAccess
   const localPasswordReady = hasLocalPassword()
 
-  if (configured && (accountLoading || resolvedCloudAccess === 'checking')) {
+  if (configured && accountLoading) {
     return (
       <div className="mx-auto max-w-sm px-4 py-20 text-center">
         <div className="rounded-lg border bg-white p-6">
@@ -968,21 +1087,89 @@ export default function Admin() {
     )
   }
 
-  if (configured && (!user || resolvedCloudAccess !== 'granted')) {
+  if (configured && !user) {
     return (
       <div className="mx-auto max-w-sm px-4 py-20">
         <div className="rounded-lg border bg-white p-6 text-center">
           <Lock className="mx-auto h-8 w-8 text-pine" />
-          <h1 className="mt-3 font-display text-xl font-bold text-pine">CSS Vista Admin</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {user ? 'This account does not have administrator access.' : 'Sign in with the owner account to continue.'}
+          <h1 className="mt-3 font-display text-xl font-bold text-pine">Private Owner Panel</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Create or sign in to the sole owner account, then complete two-factor verification.
           </p>
-          <Link to="/account" className="mt-4 inline-flex rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-            {user ? 'Open account' : 'Sign in'}
+          <Link to="/account?returnTo=/admin" className="mt-4 inline-flex rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-900">
+            Create or sign in
           </Link>
         </div>
       </div>
     )
+  }
+
+  if (configured && user && mfaStage === 'denied') {
+    return (
+      <div className="mx-auto max-w-md px-4 py-20">
+        <div className="rounded-lg border bg-white p-6 text-center">
+          <Lock className="mx-auto h-8 w-8 text-pine" />
+          <h1 className="mt-3 font-display text-xl font-bold text-pine">Owner account required</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Only the newly designated owner account can open private student records.
+          </p>
+          {mfaError && <p className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-700">{mfaError}</p>}
+          <button onClick={() => void signOut().then(() => navigate('/account?returnTo=/admin'))} className="mt-4 rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-white">
+            Sign out and use owner account
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (configured && user && mfaStage !== 'ready') {
+    return (
+      <div className="mx-auto max-w-md px-4 py-14">
+        <div className="rounded-xl border bg-white p-6 text-center">
+          <ShieldAlert className="mx-auto h-9 w-9 text-pine" />
+          <h1 className="mt-3 font-display text-2xl font-bold text-pine">
+            {mfaStage === 'setup' ? 'Set up two-factor authentication' : 'Enter your security code'}
+          </h1>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {mfaStage === 'setup'
+              ? 'Scan this QR code with Google Authenticator, Microsoft Authenticator, Authy or another authenticator app.'
+              : 'Open your authenticator app and enter the current six-digit code.'}
+          </p>
+          {mfaStage === 'checking' && <RefreshCw className="mx-auto mt-6 h-6 w-6 animate-spin text-pine" />}
+          {mfaStage === 'setup' && mfaQrCode && (
+            <div className="mt-5">
+              <img src={mfaQrCode} alt="Two-factor authentication QR code" className="mx-auto h-52 w-52 rounded-lg border p-2" />
+              <details className="mt-3 text-left">
+                <summary className="cursor-pointer text-xs font-semibold text-emerald-800">Cannot scan? Show setup key</summary>
+                <code className="mt-2 block break-all rounded bg-secondary p-3 text-xs">{mfaSecret}</code>
+              </details>
+            </div>
+          )}
+          {(mfaStage === 'setup' || mfaStage === 'challenge' || mfaStage === 'verifying') && (
+            <div className="mt-5">
+              <input
+                value={mfaCode}
+                onChange={(event) => setMfaCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                onKeyDown={(event) => { if (event.key === 'Enter') void verifyMfaCode() }}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="6-digit code"
+                aria-label="Six-digit authentication code"
+                className={input + ' text-center text-lg tracking-[0.35em]'}
+              />
+              {mfaError && <p className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-700">{mfaError}</p>}
+              <button onClick={() => void verifyMfaCode()} disabled={mfaStage === 'verifying'} className="mt-3 w-full rounded-md bg-pine py-2.5 text-sm font-semibold text-white disabled:opacity-60">
+                {mfaStage === 'verifying' ? 'Verifying…' : 'Verify and open admin panel'}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  if (configured && resolvedCloudAccess !== 'granted') {
+    return null
   }
 
   if (!configured && !authed) {
