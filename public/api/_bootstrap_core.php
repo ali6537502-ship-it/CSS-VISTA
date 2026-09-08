@@ -5,6 +5,7 @@ const CSSV_MAX_PROFILE_PHOTO_BYTES = 25600; // 25 KiB hard server limit.
 const CSSV_MAX_PROFILE_PHOTO_PIXELS = 16000000;
 const CSSV_SESSION_COOKIE = 'cssv_session';
 const CSSV_CSRF_COOKIE = 'cssv_csrf';
+const CSSV_ADMIN_MFA_COOKIE = 'cssv_admin_mfa';
 
 $GLOBALS['CSSV_RUNTIME_CONFIG'] = [];
 $documentRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/\\');
@@ -296,11 +297,53 @@ function cssv_is_admin(PDO $pdo, string $userId): bool
     return (bool)$stmt->fetchColumn();
 }
 
+function cssv_admin_mfa_payload(array $session): ?array
+{
+    $token = (string)($_COOKIE[CSSV_ADMIN_MFA_COOKIE] ?? '');
+    if ($token === '' || strlen($token) > 1024 || !str_contains($token, '.')) {
+        return null;
+    }
+    [$encoded, $signature] = explode('.', $token, 2);
+    $expected = hash_hmac('sha256', $encoded, cssv_secret());
+    if (!hash_equals($expected, $signature)) {
+        return null;
+    }
+    $decoded = base64_decode(strtr($encoded, '-_', '+/'), true);
+    $payload = is_string($decoded) ? json_decode($decoded, true) : null;
+    if (!is_array($payload)
+        || !isset($payload['sid'], $payload['uid'], $payload['exp'])
+        || !hash_equals((string)$session['session_id'], (string)$payload['sid'])
+        || !hash_equals((string)$session['user_id'], (string)$payload['uid'])
+        || (int)$payload['exp'] <= time()) {
+        return null;
+    }
+    return $payload;
+}
+
+function cssv_issue_admin_mfa(array $session): void
+{
+    $expires = time() + 60 * 60 * 12;
+    $payload = json_encode([
+        'sid' => (string)$session['session_id'],
+        'uid' => (string)$session['user_id'],
+        'exp' => $expires,
+    ], JSON_UNESCAPED_SLASHES);
+    if (!is_string($payload)) {
+        cssv_fail('Could not establish owner verification.', 503, 'mfa_session_failed');
+    }
+    $encoded = rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
+    $token = $encoded . '.' . hash_hmac('sha256', $encoded, cssv_secret());
+    cssv_set_cookie(CSSV_ADMIN_MFA_COOKIE, $token, $expires, true);
+}
+
 function cssv_require_admin(PDO $pdo): array
 {
     $session = cssv_require_user($pdo);
     if (!cssv_is_admin($pdo, (string)$session['user_id'])) {
         cssv_fail('Administrator access required.', 403, 'administrator_required');
+    }
+    if (!cssv_admin_mfa_payload($session)) {
+        cssv_fail('Two-factor owner verification required.', 403, 'admin_mfa_required');
     }
     return $session;
 }
@@ -323,6 +366,7 @@ function cssv_revoke_current_session(PDO $pdo): void
     }
     cssv_set_cookie(CSSV_SESSION_COOKIE, '', time() - 3600, true);
     cssv_set_cookie(CSSV_CSRF_COOKIE, '', time() - 3600, false);
+    cssv_set_cookie(CSSV_ADMIN_MFA_COOKIE, '', time() - 3600, true);
 }
 
 function cssv_parse_timestamp(?string $value): ?string

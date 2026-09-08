@@ -365,13 +365,42 @@ function McqUploader() {
 type StudentDirectoryRow = {
   user_id: string
   email: string
-  display_name: string
+  auth_source: string
   created_at: string
   last_sign_in_at: string | null
   last_seen_at: string | null
+  display_name: string
+  phone: string | null
+  whatsapp: string | null
+  date_of_birth: string | null
+  age: number | null
+  gender: string | null
+  city: string | null
+  province_region: string | null
+  country: string | null
+  css_attempt_year: number | null
+  preparation_level: string | null
+  optional_subjects: string[]
+  education: string | null
+  previous_academy_mentor: string | null
+  profile_completed_at: string | null
+  registration_id: string | null
+  registration_code: string | null
+  registration_status: string | null
+  payment_status: string | null
+  submitted_at: string | null
+  batch_id: string | null
+  batch_title: string | null
   progress_updated_at: string | null
   activity_count: number
   quiz_attempt_count: number
+}
+
+type StudentDirectoryResponse = {
+  ok: boolean
+  total: number
+  students: StudentDirectoryRow[]
+  message?: string
 }
 
 function friendlyDate(value: string | null) {
@@ -384,24 +413,49 @@ function friendlyDate(value: string | null) {
   }).format(date)
 }
 
+function showValue(value: unknown) {
+  if (value === null || value === undefined || value === '') return 'Not provided'
+  return String(value)
+}
+
 function StudentsPanel() {
   const [rows, setRows] = useState<StudentDirectoryRow[]>([])
+  const [total, setTotal] = useState(0)
+  const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  async function fetchStudents() {
-    const client = await getSupabaseClient()
-    if (!client) throw new Error('Student records are available after Supabase is configured.')
-    const { data, error: queryError } = await client.rpc('admin_student_directory')
-    if (queryError) throw queryError
-    return (data ?? []) as StudentDirectoryRow[]
+  async function fetchStudents(search = '') {
+    const collected: StudentDirectoryRow[] = []
+    let expected = 0
+    let offset = 0
+    do {
+      const params = new URLSearchParams({ limit: '100', offset: String(offset) })
+      if (search.trim()) params.set('q', search.trim())
+      const response = await fetch('/api/admin/students.php?' + params.toString(), {
+        credentials: 'include',
+        headers: { Accept: 'application/json' },
+      })
+      const body = await response.json().catch(() => null) as StudentDirectoryResponse | null
+      if (!response.ok || !body?.ok) {
+        throw new Error(body?.message || (response.status === 403
+          ? 'This account does not have owner access.'
+          : 'Could not load the protected student directory.'))
+      }
+      expected = Number(body.total || 0)
+      collected.push(...(body.students || []))
+      offset = collected.length
+    } while (offset < expected)
+    return { students: collected, total: expected }
   }
 
-  async function load() {
+  async function load(search = query) {
     setLoading(true)
     setError('')
     try {
-      setRows(await fetchStudents())
+      const result = await fetchStudents(search)
+      setRows(result.students)
+      setTotal(result.total)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Could not load student records.')
     } finally {
@@ -413,7 +467,10 @@ function StudentsPanel() {
     let active = true
     void fetchStudents()
       .then((result) => {
-        if (active) setRows(result)
+        if (active) {
+          setRows(result.students)
+          setTotal(result.total)
+        }
       })
       .catch((reason) => {
         if (active) setError(reason instanceof Error ? reason.message : 'Could not load student records.')
@@ -421,22 +478,45 @@ function StudentsPanel() {
       .finally(() => {
         if (active) setLoading(false)
       })
-    return () => {
-      active = false
-    }
+    return () => { active = false }
   }, [])
 
   const active = rows.filter((row) => row.last_seen_at || row.last_sign_in_at).length
   const attempts = rows.reduce((sum, row) => sum + Number(row.quiz_attempt_count || 0), 0)
-  const events = rows.reduce((sum, row) => sum + Number(row.activity_count || 0), 0)
+  const complete = rows.filter((row) => row.profile_completed_at).length
+
+  function downloadCsv() {
+    const headings = [
+      'Name', 'Email', 'Phone', 'WhatsApp', 'City', 'Province/Region', 'Country', 'Age', 'Gender',
+      'Attempt Year', 'Preparation Level', 'Optional Subjects', 'Education', 'Previous Academy/Mentor',
+      'Batch', 'Registration Code', 'Registration Status', 'Payment Status', 'Joined', 'Last Active',
+      'Activity Records', 'Quiz Attempts', 'Progress Synced',
+    ]
+    const values = rows.map((row) => [
+      row.display_name, row.email, row.phone, row.whatsapp, row.city, row.province_region, row.country,
+      row.age, row.gender, row.css_attempt_year, row.preparation_level, row.optional_subjects?.join('; '),
+      row.education, row.previous_academy_mentor, row.batch_title, row.registration_code,
+      row.registration_status, row.payment_status, row.created_at, row.last_seen_at || row.last_sign_in_at,
+      row.activity_count, row.quiz_attempt_count, row.progress_updated_at,
+    ])
+    const escape = (value: unknown) => '"' + String(value ?? '').replaceAll('"', '""') + '"'
+    const csv = [headings, ...values].map((line) => line.map(escape).join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = 'student-directory-' + new Date().toISOString().slice(0, 10) + '.csv'
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
 
   return (
     <div className="space-y-5">
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          ['Student accounts', rows.length],
-          ['Students who have signed in', active],
-          ['Recorded quiz attempts', attempts],
+          ['Student accounts', total],
+          ['Signed-in students', active],
+          ['Complete profiles', complete],
+          ['Quiz attempts', attempts],
         ].map(([label, value]) => (
           <div key={label} className="rounded-xl border bg-white p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
@@ -446,49 +526,98 @@ function StudentsPanel() {
       </div>
 
       <div className="rounded-xl border bg-white">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b p-5">
-          <div>
-            <h2 className="font-bold text-pine">Student directory</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Account and study summaries only. Passwords are encrypted by Supabase and can never be viewed here. {events} activity records are stored.
-            </p>
+        <div className="border-b p-5">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 className="font-bold text-pine">Complete student directory</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Private owner view of student profiles, contact details, preparation, registration and learning activity.
+                Passwords and security credentials are never displayed.
+              </p>
+            </div>
+            <button onClick={downloadCsv} disabled={loading || rows.length === 0} className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium hover:bg-secondary disabled:opacity-60">
+              <Download className="h-4 w-4" /> Download list
+            </button>
           </div>
-          <button onClick={() => void load()} disabled={loading} className="inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium hover:bg-secondary disabled:opacity-60">
-            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} /> Refresh
-          </button>
+          <form onSubmit={(event) => { event.preventDefault(); void load() }} className="mt-4 flex flex-col gap-2 sm:flex-row">
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search name, email, phone or WhatsApp"
+              className={input + ' flex-1'}
+            />
+            <button type="submit" disabled={loading} className="inline-flex h-10 items-center justify-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-white disabled:opacity-60">
+              <RefreshCw className={'h-4 w-4 ' + (loading ? 'animate-spin' : '')} /> Search
+            </button>
+            {query && <button type="button" onClick={() => { setQuery(''); void load('') }} className="h-10 rounded-md border px-4 text-sm font-medium">Clear</button>}
+          </form>
         </div>
+
         {error && <p className="m-5 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</p>}
         {!error && loading && <p className="p-5 text-sm text-muted-foreground">Loading protected student records…</p>}
-        {!error && !loading && rows.length === 0 && <p className="p-5 text-sm text-muted-foreground">No student accounts yet.</p>}
+        {!error && !loading && rows.length === 0 && <p className="p-5 text-sm text-muted-foreground">No matching student accounts.</p>}
         {!error && !loading && rows.length > 0 && (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[820px] text-left text-sm">
-              <thead className="bg-secondary/60 text-xs uppercase tracking-wide text-muted-foreground">
-                <tr>
-                  <th className="px-5 py-3">Student</th>
-                  <th className="px-4 py-3">Joined</th>
-                  <th className="px-4 py-3">Last active</th>
-                  <th className="px-4 py-3">Activity</th>
-                  <th className="px-4 py-3">Quizzes</th>
-                  <th className="px-4 py-3">Progress synced</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {rows.map((row) => (
-                  <tr key={row.user_id}>
-                    <td className="px-5 py-3">
-                      <div className="font-semibold text-pine">{row.display_name || 'Student'}</div>
-                      <div className="text-xs text-muted-foreground">{row.email}</div>
-                    </td>
-                    <td className="px-4 py-3 text-muted-foreground">{friendlyDate(row.created_at)}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{friendlyDate(row.last_seen_at || row.last_sign_in_at)}</td>
-                    <td className="px-4 py-3 font-medium">{row.activity_count}</td>
-                    <td className="px-4 py-3 font-medium">{row.quiz_attempt_count}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{friendlyDate(row.progress_updated_at)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="divide-y">
+            {rows.map((row) => (
+              <details key={row.user_id} className="group p-5">
+                <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div className="font-bold text-pine">{row.display_name || 'Student'}</div>
+                    <div className="mt-0.5 text-sm text-muted-foreground">{row.email}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {[row.phone, row.city, row.css_attempt_year ? 'Attempt ' + row.css_attempt_year : ''].filter(Boolean).join(' · ') || 'Profile details not yet completed'}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge tone={row.profile_completed_at ? 'green' : 'gold'}>{row.profile_completed_at ? 'Profile complete' : 'Incomplete profile'}</Badge>
+                    <span className="rounded-md border px-3 py-1.5 text-xs font-semibold group-open:bg-secondary">View everything</span>
+                  </div>
+                </summary>
+
+                <div className="mt-5 grid gap-4 border-t pt-5 md:grid-cols-2 xl:grid-cols-4">
+                  <section className="rounded-lg bg-secondary/50 p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wide text-emerald-800">Contact</h3>
+                    <dl className="mt-3 space-y-2 text-sm">
+                      <div><dt className="text-xs text-muted-foreground">Email</dt><dd className="break-all font-medium">{row.email}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Phone</dt><dd className="font-medium">{showValue(row.phone)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">WhatsApp</dt><dd className="font-medium">{showValue(row.whatsapp)}</dd></div>
+                    </dl>
+                  </section>
+                  <section className="rounded-lg bg-secondary/50 p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wide text-emerald-800">Personal & location</h3>
+                    <dl className="mt-3 space-y-2 text-sm">
+                      <div><dt className="text-xs text-muted-foreground">Age / date of birth</dt><dd className="font-medium">{showValue(row.age)}{row.date_of_birth ? ' · ' + row.date_of_birth : ''}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Gender</dt><dd className="font-medium">{showValue(row.gender)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">City</dt><dd className="font-medium">{showValue(row.city)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Province / region</dt><dd className="font-medium">{showValue(row.province_region)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Country</dt><dd className="font-medium">{showValue(row.country)}</dd></div>
+                    </dl>
+                  </section>
+                  <section className="rounded-lg bg-secondary/50 p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wide text-emerald-800">Preparation</h3>
+                    <dl className="mt-3 space-y-2 text-sm">
+                      <div><dt className="text-xs text-muted-foreground">Attempt year</dt><dd className="font-medium">{showValue(row.css_attempt_year)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Preparation level</dt><dd className="font-medium">{showValue(row.preparation_level)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Education</dt><dd className="font-medium">{showValue(row.education)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Previous academy / mentor</dt><dd className="font-medium">{showValue(row.previous_academy_mentor)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Optional subjects</dt><dd className="font-medium">{row.optional_subjects?.length ? row.optional_subjects.join(', ') : 'Not provided'}</dd></div>
+                    </dl>
+                  </section>
+                  <section className="rounded-lg bg-secondary/50 p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wide text-emerald-800">Registration & activity</h3>
+                    <dl className="mt-3 space-y-2 text-sm">
+                      <div><dt className="text-xs text-muted-foreground">Batch</dt><dd className="font-medium">{showValue(row.batch_title)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Registration code</dt><dd className="font-medium">{showValue(row.registration_code)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Registration / payment</dt><dd className="font-medium">{showValue(row.registration_status)} · {showValue(row.payment_status)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Joined</dt><dd className="font-medium">{friendlyDate(row.created_at)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Last active</dt><dd className="font-medium">{friendlyDate(row.last_seen_at || row.last_sign_in_at)}</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Activity / quizzes</dt><dd className="font-medium">{row.activity_count || 0} records · {row.quiz_attempt_count || 0} attempts</dd></div>
+                      <div><dt className="text-xs text-muted-foreground">Progress synced</dt><dd className="font-medium">{friendlyDate(row.progress_updated_at)}</dd></div>
+                    </dl>
+                  </section>
+                </div>
+              </details>
+            ))}
           </div>
         )}
       </div>
@@ -794,36 +923,159 @@ export default function Admin() {
   const { configured, loading: accountLoading, user, signOut } = useAccount()
   const [authed, setAuthed] = useState(isAuthed())
   const [cloudAccess, setCloudAccess] = useState<'checking' | 'granted' | 'denied'>('checking')
+  const [mfaStage, setMfaStage] = useState<'checking' | 'setup' | 'challenge' | 'verifying' | 'ready' | 'denied'>('checking')
+  const [mfaFactorId, setMfaFactorId] = useState('')
+  const [mfaQrCode, setMfaQrCode] = useState('')
+  const [mfaSecret, setMfaSecret] = useState('')
+  const [mfaCode, setMfaCode] = useState('')
+  const [mfaError, setMfaError] = useState('')
   const [pass, setPass] = useState('')
   const [tab, setTab] = useState<(typeof adminTabs)[number]['id']>('students')
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!configured || accountLoading) return
-    if (!user) return
-    let active = true
-    getSupabaseClient()
-      .then(async (client) => {
-        if (!client) return false
-        const { data, error } = await client.rpc('is_css_vista_admin')
-        if (error) throw error
-        return data === true
-      })
-      .then((allowed) => {
-        if (active) setCloudAccess(allowed ? 'granted' : 'denied')
-      })
-      .catch(() => {
-        if (active) setCloudAccess('denied')
-      })
-    return () => {
-      active = false
+    if (!user) {
+      setCloudAccess('denied')
+      setMfaStage('denied')
+      return
     }
+    let active = true
+
+    async function activateOwnerSession(client: Awaited<ReturnType<typeof getSupabaseClient>>) {
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      const { data: sessionData, error: sessionError } = await client.auth.getSession()
+      const accessToken = sessionData.session?.access_token
+      if (sessionError || !accessToken) throw new Error('Sign in again to verify the owner account.')
+
+      const exchange = await fetch('/api/auth/supabase-session.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      if (!exchange.ok) {
+        const body = await exchange.json().catch(() => null) as { message?: string } | null
+        throw new Error(body?.message || 'Could not refresh the secure owner session.')
+      }
+
+      const response = await fetch('/api/auth/admin-mfa.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      const body = await response.json().catch(() => null) as { ok?: boolean, message?: string } | null
+      if (!response.ok || !body?.ok) throw new Error(body?.message || 'Owner verification failed.')
+    }
+
+    async function prepareOwnerSecurity() {
+      const client = await getSupabaseClient()
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      if (user?.email?.trim().toLowerCase() !== 'alihassansargana1@gmail.com') {
+        if (active) {
+          setCloudAccess('denied')
+          setMfaStage('denied')
+        }
+        return
+      }
+
+      const { data: assurance, error: assuranceError } = await client.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (assuranceError) throw assuranceError
+      if (assurance.currentLevel === 'aal2') {
+        await activateOwnerSession(client)
+        if (active) {
+          setCloudAccess('granted')
+          setMfaStage('ready')
+        }
+        return
+      }
+
+      const { data: factors, error: factorsError } = await client.auth.mfa.listFactors()
+      if (factorsError) throw factorsError
+      const verified = factors.totp.find((factor) => factor.status === 'verified')
+      if (verified) {
+        if (active) {
+          setMfaFactorId(verified.id)
+          setMfaStage('challenge')
+          setCloudAccess('checking')
+        }
+        return
+      }
+
+      for (const factor of factors.totp.filter((item) => item.status !== 'verified')) {
+        await client.auth.mfa.unenroll({ factorId: factor.id })
+      }
+      const { data: enrollment, error: enrollError } = await client.auth.mfa.enroll({
+        factorType: 'totp',
+        friendlyName: 'CSS Vista Owner',
+      })
+      if (enrollError) throw enrollError
+      if (active) {
+        setMfaFactorId(enrollment.id)
+        setMfaQrCode(enrollment.totp.qr_code)
+        setMfaSecret(enrollment.totp.secret)
+        setMfaStage('setup')
+        setCloudAccess('checking')
+      }
+    }
+
+    void prepareOwnerSecurity().catch((reason) => {
+      if (!active) return
+      setMfaError(reason instanceof Error ? reason.message : 'Owner verification failed.')
+      setMfaStage('denied')
+      setCloudAccess('denied')
+    })
+    return () => { active = false }
   }, [accountLoading, configured, user])
+
+  async function verifyMfaCode() {
+    if (!/^\d{6}$/.test(mfaCode.trim()) || !mfaFactorId) {
+      setMfaError('Enter the six-digit code from your authenticator app.')
+      return
+    }
+    setMfaStage('verifying')
+    setMfaError('')
+    try {
+      const client = await getSupabaseClient()
+      if (!client) throw new Error('Owner authentication is unavailable.')
+      const { error } = await client.auth.mfa.challengeAndVerify({
+        factorId: mfaFactorId,
+        code: mfaCode.trim(),
+      })
+      if (error) throw error
+      const { data: sessionData } = await client.auth.getSession()
+      const accessToken = sessionData.session?.access_token
+      if (!accessToken) throw new Error('Sign in again to complete verification.')
+
+      const exchange = await fetch('/api/auth/supabase-session.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      if (!exchange.ok) throw new Error('Could not refresh the secure owner session.')
+      const response = await fetch('/api/auth/admin-mfa.php', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_token: accessToken }),
+      })
+      const body = await response.json().catch(() => null) as { ok?: boolean, message?: string } | null
+      if (!response.ok || !body?.ok) throw new Error(body?.message || 'Owner verification failed.')
+      setMfaCode('')
+      setMfaStage('ready')
+      setCloudAccess('granted')
+    } catch (reason) {
+      setMfaError(reason instanceof Error ? reason.message : 'The verification code was not accepted.')
+      setMfaStage(mfaQrCode ? 'setup' : 'challenge')
+    }
+  }
 
   const resolvedCloudAccess = !accountLoading && !user ? 'denied' : cloudAccess
   const localPasswordReady = hasLocalPassword()
 
-  if (configured && (accountLoading || resolvedCloudAccess === 'checking')) {
+  if (configured && accountLoading) {
     return (
       <div className="mx-auto max-w-sm px-4 py-20 text-center">
         <div className="rounded-lg border bg-white p-6">
@@ -835,21 +1087,89 @@ export default function Admin() {
     )
   }
 
-  if (configured && (!user || resolvedCloudAccess !== 'granted')) {
+  if (configured && !user) {
     return (
       <div className="mx-auto max-w-sm px-4 py-20">
         <div className="rounded-lg border bg-white p-6 text-center">
           <Lock className="mx-auto h-8 w-8 text-pine" />
-          <h1 className="mt-3 font-display text-xl font-bold text-pine">CSS Vista Admin</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {user ? 'This account does not have administrator access.' : 'Sign in with the owner account to continue.'}
+          <h1 className="mt-3 font-display text-xl font-bold text-pine">Private Owner Panel</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Create or sign in to the sole owner account, then complete two-factor verification.
           </p>
-          <Link to="/account" className="mt-4 inline-flex rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
-            {user ? 'Open account' : 'Sign in'}
+          <Link to="/account?returnTo=/admin" className="mt-4 inline-flex rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-900">
+            Create or sign in
           </Link>
         </div>
       </div>
     )
+  }
+
+  if (configured && user && mfaStage === 'denied') {
+    return (
+      <div className="mx-auto max-w-md px-4 py-20">
+        <div className="rounded-lg border bg-white p-6 text-center">
+          <Lock className="mx-auto h-8 w-8 text-pine" />
+          <h1 className="mt-3 font-display text-xl font-bold text-pine">Owner account required</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Only the newly designated owner account can open private student records.
+          </p>
+          {mfaError && <p className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-700">{mfaError}</p>}
+          <button onClick={() => void signOut().then(() => navigate('/account?returnTo=/admin'))} className="mt-4 rounded-md bg-pine px-4 py-2.5 text-sm font-semibold text-white">
+            Sign out and use owner account
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (configured && user && mfaStage !== 'ready') {
+    return (
+      <div className="mx-auto max-w-md px-4 py-14">
+        <div className="rounded-xl border bg-white p-6 text-center">
+          <ShieldAlert className="mx-auto h-9 w-9 text-pine" />
+          <h1 className="mt-3 font-display text-2xl font-bold text-pine">
+            {mfaStage === 'setup' ? 'Set up two-factor authentication' : 'Enter your security code'}
+          </h1>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {mfaStage === 'setup'
+              ? 'Scan this QR code with Google Authenticator, Microsoft Authenticator, Authy or another authenticator app.'
+              : 'Open your authenticator app and enter the current six-digit code.'}
+          </p>
+          {mfaStage === 'checking' && <RefreshCw className="mx-auto mt-6 h-6 w-6 animate-spin text-pine" />}
+          {mfaStage === 'setup' && mfaQrCode && (
+            <div className="mt-5">
+              <img src={mfaQrCode} alt="Two-factor authentication QR code" className="mx-auto h-52 w-52 rounded-lg border p-2" />
+              <details className="mt-3 text-left">
+                <summary className="cursor-pointer text-xs font-semibold text-emerald-800">Cannot scan? Show setup key</summary>
+                <code className="mt-2 block break-all rounded bg-secondary p-3 text-xs">{mfaSecret}</code>
+              </details>
+            </div>
+          )}
+          {(mfaStage === 'setup' || mfaStage === 'challenge' || mfaStage === 'verifying') && (
+            <div className="mt-5">
+              <input
+                value={mfaCode}
+                onChange={(event) => setMfaCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                onKeyDown={(event) => { if (event.key === 'Enter') void verifyMfaCode() }}
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="6-digit code"
+                aria-label="Six-digit authentication code"
+                className={input + ' text-center text-lg tracking-[0.35em]'}
+              />
+              {mfaError && <p className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-700">{mfaError}</p>}
+              <button onClick={() => void verifyMfaCode()} disabled={mfaStage === 'verifying'} className="mt-3 w-full rounded-md bg-pine py-2.5 text-sm font-semibold text-white disabled:opacity-60">
+                {mfaStage === 'verifying' ? 'Verifying…' : 'Verify and open admin panel'}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  if (configured && resolvedCloudAccess !== 'granted') {
+    return null
   }
 
   if (!configured && !authed) {
