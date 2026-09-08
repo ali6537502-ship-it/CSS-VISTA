@@ -32,6 +32,7 @@ const Analysis = lazy(() => import('./pages/Analysis'))
 const GrammarVocab = lazy(() => import('./pages/GrammarVocab'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Admin = lazy(() => import('./pages/admin/Admin'))
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const GKWorld = lazy(() => import('./pages/gk/GKWorld'))
 const GKCategory = lazy(() => import('./pages/gk/GKCategory'))
@@ -134,6 +135,7 @@ export default function App() {
         <Route path="/css-2026-written-result" element={<S><Css2026Result /></S>} />
         <Route path="/privacy" element={<S><Privacy /></S>} />
         <Route path="/admin" element={<S><Admin /></S>} />
+        <Route path="/admin/login" element={<S><AdminLogin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />
       </Route>
     </Routes>

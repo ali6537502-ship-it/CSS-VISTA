@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/_bootstrap.php';
+require_once dirname(__DIR__) . '/_admin_auth.php';
 cssv_require_method('GET');
 $pdo = cssv_db();
-cssv_require_admin($pdo);
+cssv_require_separate_admin($pdo);
 
 $limit = max(1, min(100, (int)($_GET['limit'] ?? 50)));
 $offset = max(0, (int)($_GET['offset'] ?? 0));
