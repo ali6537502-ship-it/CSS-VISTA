@@ -18,7 +18,7 @@ $secret = cssv_base32_encode(random_bytes(20));
 $stmt = $pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher) VALUES (?,?,?,?)');
 $stmt->execute([$adminId, $email, password_hash($password, PASSWORD_DEFAULT), cssv_admin_encrypt($secret)]);
 cssv_admin_issue_session($pdo, $adminId);
-$label = rawurlencode('CSS Vista Owner');
+$label = rawurlencode('CSS Vista:' . CSSV_OWNER_EMAIL);
 $issuer = rawurlencode('CSS Vista');
 $uri = 'otpauth://totp/' . $label . '?secret=' . $secret . '&issuer=' . $issuer . '&digits=6&period=30';
 cssv_json(['ok' => true, 'stage' => 'totp_setup', 'secret' => $secret, 'otpauth_uri' => $uri]);
