@@ -164,7 +164,7 @@ export default function VistaShortcut() {
         <section className="cssv-vista-shortcut-panel mb-3 w-[min(22rem,calc(100vw-1.5rem))] overflow-hidden rounded-[1.35rem] border border-white/90 bg-white/95 p-3 shadow-2xl backdrop-blur-xl" aria-label="VISTA SHORTCUT menu">
           <div className="flex items-center justify-between gap-3 border-b px-1 pb-3">
             <div className="flex items-center gap-2">
-              <img src="/images/logo.webp?v=20260909" alt="" width="920" height="300" loading="lazy" decoding="async" className="h-7 w-auto max-w-[110px] object-contain" />
+              <img src="/images/logo.webp?v=20260909" alt="" width="480" height="157" loading="lazy" decoding="async" className="h-7 w-auto max-w-[110px] object-contain" />
               <span className="text-[10px] font-extrabold uppercase tracking-[.15em] text-emerald-800">VISTA SHORTCUT</span>
             </div>
             <button type="button" onClick={closeEverything} className="grid h-8 w-8 place-items-center rounded-full border bg-white text-pine" aria-label="Close VISTA SHORTCUT"><X className="h-4 w-4" /></button>
@@ -226,7 +226,7 @@ export default function VistaShortcut() {
 
       <div className="flex flex-col items-end gap-2">
         <a href={site.cssGroupLink} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="cssv-tap grid h-12 w-12 place-items-center rounded-2xl border border-emerald-500/30 bg-emerald-600 text-white shadow-lg" aria-label="Join the CSS Vista WhatsApp group" title="Join the CSS Vista WhatsApp group"><WhatsAppIcon className="h-6 w-6" aria-hidden="true" /></a>
-        <button type="button" onClick={() => { if (menuOpen || activeId) closeEverything(); else setMenuOpen(true) }} className={`cssv-vista-shortcut grid h-[58px] w-[58px] place-items-center rounded-[1.15rem] border border-white/95 bg-white/90 shadow-xl backdrop-blur-lg ${menuOpen || activeId ? 'is-open' : ''}`} aria-label={menuOpen || activeId ? 'Close VISTA SHORTCUT' : 'Open VISTA SHORTCUT'} aria-expanded={menuOpen || Boolean(activeId)}><img src="/images/logo.webp?v=20260909" alt="" width="920" height="300" loading="lazy" decoding="async" className="h-8 w-12 object-contain" /></button>
+        <button type="button" onClick={() => { if (menuOpen || activeId) closeEverything(); else setMenuOpen(true) }} className={`cssv-vista-shortcut grid h-[58px] w-[58px] place-items-center rounded-[1.15rem] border border-white/95 bg-white/90 shadow-xl backdrop-blur-lg ${menuOpen || activeId ? 'is-open' : ''}`} aria-label={menuOpen || activeId ? 'Close VISTA SHORTCUT' : 'Open VISTA SHORTCUT'} aria-expanded={menuOpen || Boolean(activeId)}><img src="/images/logo.webp?v=20260909" alt="" width="480" height="157" loading="lazy" decoding="async" className="h-8 w-12 object-contain" /></button>
       </div>
     </div>
   )

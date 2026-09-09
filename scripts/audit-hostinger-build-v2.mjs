@@ -94,7 +94,7 @@ assert(indexHtml.includes(`rel="canonical" href="${siteOrigin}/"`), 'Homepage ca
 assert(indexHtml.includes(`rel="home" href="${siteOrigin}/" title="CSS Vista"`), 'Homepage rel=home signal is missing')
 assert(/<h1\b[^>]*>CSS Vista<\/h1>/.test(indexHtml), 'Homepage H1 must identify the brand as CSS Vista')
 assert(indexHtml.includes('CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan'), 'Homepage meta description is not the reinforced production description')
-assert(indexHtml.includes('rel="preload" as="image"') && indexHtml.includes('css-vista-main-poster-720.webp'), 'Homepage LCP poster is not preloaded responsively')
+assert(indexHtml.includes('rel="preload" as="image"') && indexHtml.includes('css-vista-main-poster-480.webp'), 'Homepage LCP poster is not preloaded responsively')
 assert(indexHtml.includes('EducationalOrganization'), 'Homepage organization structured data is missing')
 assert(indexHtml.includes('WebSite'), 'Homepage WebSite structured data is missing')
 assert(indexHtml.includes('https://www.instagram.com/cssvista/'), 'Homepage structured data is missing the official Instagram profile')

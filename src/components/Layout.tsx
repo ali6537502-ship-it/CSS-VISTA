@@ -465,8 +465,8 @@ function Logo({ className }: { className?: string }) {
       <img
         src="/images/logo.webp?v=20260909"
         alt="CSS Vista - official logo"
-        width="920"
-        height="300"
+        width="480"
+        height="157"
         decoding="async"
         className={className ?? 'h-10 w-auto max-w-[250px] object-contain'}
       />
@@ -478,10 +478,10 @@ function PrintBranding() {
   return (
     <div className="print-branding" aria-hidden="true">
       <div className="print-brand-header">
-        <img src="/images/logo.webp?v=20260909" alt="" width="920" height="300" decoding="async" />
+        <img src="/images/logo.webp?v=20260909" alt="" width="480" height="157" decoding="async" />
         <div><strong>Official study resource</strong><span>Study · Practice · Progress</span></div>
       </div>
-      <img className="print-brand-watermark" src="/images/logo.webp?v=20260909" alt="" width="920" height="300" decoding="async" />
+      <img className="print-brand-watermark" src="/images/logo.webp?v=20260909" alt="" width="480" height="157" decoding="async" />
       <div className="print-brand-footer">CSS Vista · Official study resource</div>
     </div>
   )

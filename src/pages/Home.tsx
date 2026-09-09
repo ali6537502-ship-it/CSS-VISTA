@@ -124,7 +124,7 @@ function HomeHero() {
       <picture className="cssv-home-hero-picture">
         <img
           src="/images/css-vista-main-poster-1440.webp"
-          srcSet="/images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w"
+          srcSet="/images/css-vista-main-poster-480.webp 480w, /images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w"
           sizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px"
           alt="CSS VISTA, presented by Ms. Sadia Zahoor and Sir Ali Hassan Sargana. Built for aspirants and open to everyone—a free digital platform for organized competitive-examination preparation."
           width="2862"
@@ -472,8 +472,8 @@ function WeeklyMagazineCard() {
               <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
                 <img
                   src={weeklyMagazine.coverUrl}
-                  srcSet={weeklyMagazine.coverUrl.includes('03-september-2026') ? '/magazines/css-vista-current-affairs-weekly-03-september-2026-240.webp 240w, /magazines/css-vista-current-affairs-weekly-03-september-2026-480.webp 480w, /magazines/css-vista-current-affairs-weekly-03-september-2026.webp 900w' : undefined}
-                  sizes="(max-width: 639px) 45vw, (max-width: 1023px) 34vw, 320px"
+                  srcSet={weeklyMagazine.coverUrl.includes('03-september-2026') ? '/magazines/css-vista-current-affairs-weekly-03-september-2026-240.webp 240w, /magazines/css-vista-current-affairs-weekly-03-september-2026-320.webp 320w, /magazines/css-vista-current-affairs-weekly-03-september-2026-480.webp 480w, /magazines/css-vista-current-affairs-weekly-03-september-2026.webp 900w' : undefined}
+                  sizes="(max-width: 639px) 24vw, (max-width: 1023px) 34vw, 320px"
                   alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`}
                   width="900"
                   height="1273"
