@@ -11,6 +11,15 @@ function result(valid, label, details) {
   if (!valid) failed = true
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
 async function fetchText(url, options = {}) {
   const response = await fetch(url, { headers: { 'user-agent': userAgent }, ...options })
   return { response, body: await response.text() }
@@ -72,7 +81,7 @@ for (const path of routes) {
     const canonical = `${origin}${path}`
     const valid = response.status === 200
       && Boolean(route)
-      && body.includes(`<title>${route.title}</title>`)
+      && body.includes(`<title>${escapeHtml(route.title)}</title>`)
       && body.includes(`<link rel="canonical" href="${canonical}"`)
       && body.includes(route.h1)
       && body.includes('<h1')
