@@ -119,7 +119,7 @@ function HomeHero() {
       aria-labelledby="css-vista-home-title"
     >
       <h1 id="css-vista-home-title" className="sr-only">
-        CSS Vista — Free CSS, PMS and One-Paper Preparation Platform
+        CSS Vista
       </h1>
       <picture className="cssv-home-hero-picture">
         <img

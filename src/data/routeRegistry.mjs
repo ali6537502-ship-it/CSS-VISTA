@@ -37,7 +37,7 @@ const protectedPage = (path, title, description, options = {}) => ({
  * server routing and advertising eligibility. Unknown routes fail closed.
  */
 export const ROUTE_REGISTRY = [
-  publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista — Free CSS, PMS and One-Paper Preparation Platform', { title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', adMode: 'none', minimumHeight: 0, schemaType: 'WebSite' }),
+  publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista', { title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', adMode: 'none', minimumHeight: 0, schemaType: 'WebSite' }),
   publicPage('/start-css', 'How to Start CSS Preparation', 'A practical guide to CSS eligibility, examination stages, subject selection and an effective preparation roadmap.', 'How to start CSS preparation'),
   publicPage('/subjects/compulsory', 'CSS Compulsory Subjects', 'Explore the compulsory CSS subjects, syllabus coverage and study resources for the written examination.', 'CSS compulsory subjects'),
   publicPage('/subjects/compulsory/essay', 'CSS English Essay', 'Study the CSS English Essay syllabus, preparation approach and relevant learning resources.', 'CSS English Essay'),
