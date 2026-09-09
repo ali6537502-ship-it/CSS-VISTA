@@ -1,0 +1,307 @@
+{
+  "baseline": {
+    "mcqActual": 32988,
+    "mcqIndexed": 33276,
+    "oneActual": 30179,
+    "oneIndexed": 30179
+  },
+  "branch": "main",
+  "duplicates_removed_or_skipped": 180,
+  "existing_mcq_categories_used": [
+    "awards-honours",
+    "books-authors",
+    "capitals",
+    "countries-continents",
+    "deserts",
+    "economics",
+    "everyday-science",
+    "famous-places",
+    "flags",
+    "important-days",
+    "international-borders",
+    "international-organisations",
+    "islamic-gk",
+    "largest-longest",
+    "misc-gk",
+    "mountains",
+    "national-symbols",
+    "oceans-seas",
+    "pakistan-affairs",
+    "pakistan-geography",
+    "pakistan-history",
+    "politics-government",
+    "rivers",
+    "science",
+    "sports",
+    "straits-canals",
+    "world-history"
+  ],
+  "existing_one_liner_categories_used": [
+    "computer",
+    "general-knowledge",
+    "geography",
+    "islamiat",
+    "pakistan-affairs",
+    "science-health"
+  ],
+  "files": [
+    {
+      "destinations": {
+        "MCQ:awards-honours": 1,
+        "MCQ:capitals": 15,
+        "MCQ:countries-continents": 54,
+        "MCQ:deserts": 9,
+        "MCQ:everyday-science": 2,
+        "MCQ:flags": 1,
+        "MCQ:international-borders": 3,
+        "MCQ:international-organisations": 1,
+        "MCQ:islamic-gk": 6,
+        "MCQ:largest-longest": 1,
+        "MCQ:mountains": 8,
+        "MCQ:oceans-seas": 1,
+        "MCQ:pakistan-affairs": 9,
+        "MCQ:politics-government": 1,
+        "MCQ:rivers": 22,
+        "MCQ:science": 8,
+        "MCQ:sports": 1,
+        "MCQ:straits-canals": 17,
+        "MCQ:world-history": 4
+      },
+      "detected_category": {
+        "Awards and Honors": 1,
+        "Biology": 3,
+        "Chemistry": 2,
+        "Everyday Science": 2,
+        "Geography": 130,
+        "History": 4,
+        "International Organizations": 1,
+        "Islamic General Knowledge": 6,
+        "Pakistan Affairs": 9,
+        "Physics": 3,
+        "Politics and Government": 1,
+        "Sports": 1,
+        "World General Knowledge": 2
+      },
+      "detected_type": {
+        "MCQ": 165
+      },
+      "duplicate": 1,
+      "inserted": 164,
+      "prepared": 165,
+      "skip_reasons": {},
+      "skipped": 0,
+      "source_file": "GK_MCQs_Master_Deduplicated(1)(2).xlsx",
+      "total_records": 165
+    },
+    {
+      "destinations": {},
+      "detected_category": {
+        "Urdu": 1125
+      },
+      "detected_type": {
+        "MCQ": 331,
+        "One-Liner": 794
+      },
+      "duplicate": 0,
+      "inserted": 0,
+      "prepared": 0,
+      "skip_reasons": {
+        "Urdu text is stored in legacy visual order and cannot be normalized reliably": 1125
+      },
+      "skipped": 1125,
+      "source_file": "Urdu_Question_Bank_Master(2).xlsx",
+      "total_records": 1125
+    },
+    {
+      "destinations": {
+        "MCQ:islamic-gk": 2238,
+        "One-Liner:islamiat": 16
+      },
+      "detected_category": {
+        "Islamic General Knowledge": 2312
+      },
+      "detected_type": {
+        "MCQ": 2295,
+        "One-Liner": 17
+      },
+      "duplicate": 22,
+      "inserted": 2254,
+      "prepared": 2284,
+      "skip_reasons": {
+        "MCQ contains repeated options": 3,
+        "MCQ does not contain four complete options": 23,
+        "conflicting answer for an existing MCQ stem": 9,
+        "correct answer could not be mapped reliably": 1
+      },
+      "skipped": 36,
+      "source_file": "Islamic_Studies_Master_Question_Bank(2).xlsx",
+      "total_records": 2312
+    },
+    {
+      "destinations": {
+        "MCQ:awards-honours": 11,
+        "MCQ:books-authors": 81,
+        "MCQ:capitals": 98,
+        "MCQ:countries-continents": 114,
+        "MCQ:deserts": 24,
+        "MCQ:economics": 4,
+        "MCQ:everyday-science": 1,
+        "MCQ:famous-places": 5,
+        "MCQ:important-days": 3,
+        "MCQ:international-organisations": 285,
+        "MCQ:largest-longest": 6,
+        "MCQ:misc-gk": 591,
+        "MCQ:mountains": 62,
+        "MCQ:national-symbols": 1,
+        "MCQ:oceans-seas": 2,
+        "MCQ:pakistan-affairs": 428,
+        "MCQ:pakistan-geography": 117,
+        "MCQ:pakistan-history": 99,
+        "MCQ:politics-government": 246,
+        "MCQ:rivers": 94,
+        "MCQ:sports": 18,
+        "MCQ:straits-canals": 6,
+        "One-Liner:computer": 3,
+        "One-Liner:general-knowledge": 188,
+        "One-Liner:geography": 45,
+        "One-Liner:pakistan-affairs": 53,
+        "One-Liner:science-health": 7
+      },
+      "detected_category": {
+        "Awards and Honors": 11,
+        "Books and Authors": 109,
+        "Computer / Information Technology": 4,
+        "Economics": 6,
+        "Everyday Science": 8,
+        "General Knowledge": 751,
+        "Geography": 608,
+        "History": 113,
+        "International Organizations": 357,
+        "Pakistan Affairs": 531,
+        "Politics and Government": 293,
+        "Sports": 24
+      },
+      "detected_type": {
+        "MCQ": 2502,
+        "One-Liner": 313
+      },
+      "duplicate": 157,
+      "inserted": 2592,
+      "prepared": 2765,
+      "skip_reasons": {
+        "MCQ contains repeated options": 8,
+        "MCQ does not contain four complete options": 37,
+        "conflicting answer for an existing MCQ stem": 10,
+        "conflicting answer for an existing one-liner question": 6,
+        "conflicting answer for an incoming MCQ stem": 4,
+        "one-liner has no reliable answer": 1
+      },
+      "skipped": 66,
+      "source_file": "Pakistan_GK_Master_Question_Bank(2).xlsx",
+      "total_records": 2815
+    }
+  ],
+  "files_processed": 4,
+  "fill_in_the_blanks_handled": 0,
+  "final_mcq_total": 37686,
+  "final_one_liner_total": 30491,
+  "generated_at": "2026-09-10",
+  "inserted_by_destination": {
+    "MCQ:awards-honours": 12,
+    "MCQ:books-authors": 81,
+    "MCQ:capitals": 113,
+    "MCQ:countries-continents": 168,
+    "MCQ:deserts": 33,
+    "MCQ:economics": 4,
+    "MCQ:everyday-science": 3,
+    "MCQ:famous-places": 5,
+    "MCQ:flags": 1,
+    "MCQ:important-days": 3,
+    "MCQ:international-borders": 3,
+    "MCQ:international-organisations": 286,
+    "MCQ:islamic-gk": 2244,
+    "MCQ:largest-longest": 7,
+    "MCQ:misc-gk": 591,
+    "MCQ:mountains": 70,
+    "MCQ:national-symbols": 1,
+    "MCQ:oceans-seas": 3,
+    "MCQ:pakistan-affairs": 437,
+    "MCQ:pakistan-geography": 117,
+    "MCQ:pakistan-history": 99,
+    "MCQ:politics-government": 247,
+    "MCQ:rivers": 116,
+    "MCQ:science": 8,
+    "MCQ:sports": 19,
+    "MCQ:straits-canals": 23,
+    "MCQ:world-history": 4,
+    "One-Liner:computer": 3,
+    "One-Liner:general-knowledge": 188,
+    "One-Liner:geography": 45,
+    "One-Liner:islamiat": 16,
+    "One-Liner:pakistan-affairs": 53,
+    "One-Liner:science-health": 7
+  },
+  "invalid_or_incomplete_skipped": 1227,
+  "mcqs_inserted": 4698,
+  "merge_skip_reasons": {
+    "conflicting answer for an existing MCQ stem": 19,
+    "conflicting answer for an existing one-liner question": 6
+  },
+  "new_mcq_categories_created": [],
+  "new_one_liner_categories_created": [],
+  "one_liners_inserted": 312,
+  "preexisting_category_count_repair": {
+    "actual": 39,
+    "displayed": 35
+  },
+  "preexisting_index_repairs": [
+    {
+      "corrected_by": -112,
+      "indexed_before": 703,
+      "records_present_before": 591,
+      "slug": "capitals"
+    },
+    {
+      "corrected_by": -60,
+      "indexed_before": 857,
+      "records_present_before": 797,
+      "slug": "currencies"
+    },
+    {
+      "corrected_by": -62,
+      "indexed_before": 123,
+      "records_present_before": 61,
+      "slug": "awards-honours"
+    },
+    {
+      "corrected_by": -54,
+      "indexed_before": 804,
+      "records_present_before": 750,
+      "slug": "current-affairs"
+    }
+  ],
+  "repository": "ali6537502-ship-it/CSS-VISTA",
+  "stale_count_references_updated": [
+    "src/components/Layout.tsx",
+    "src/data/homeCards.ts",
+    "src/data/routeRegistry.mjs",
+    "src/data/site.ts",
+    "src/lib/search.ts",
+    "src/pages/gk/GKWorld.tsx",
+    "src/data/mcq.ts"
+  ],
+  "total_final_records_inserted": 5010,
+  "total_source_records": 6417,
+  "total_usable_records_found": 5214,
+  "verification": {
+    "baseline_index_matches_files": false,
+    "mcq_index_matches_files": true,
+    "one_liner_index_matches_files": true,
+    "quality_audit": "passed",
+    "new_mcq_records_valid": true,
+    "new_one_liner_records_valid": true,
+    "source_row_reconciliation": true,
+    "branding_scan_hits": 0,
+    "duplicate_groups_not_increased": true
+  }
+}

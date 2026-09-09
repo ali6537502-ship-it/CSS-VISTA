@@ -66,7 +66,7 @@ export function getBankIndex(): Promise<BankIndex> {
   return indexPromise
 }
 
-// All 103 question shards are bundled as lazy chunks, so every indexed category
+// All indexed question shards are bundled as lazy chunks, so every indexed category
 // retains a network-independent fallback. Vite code-splits each shard and loads
 // it only when the corresponding category is requested.
 const shardLoaders = import.meta.glob<{ default: BankQuestion[] }>('./mcq-shards/*.json')

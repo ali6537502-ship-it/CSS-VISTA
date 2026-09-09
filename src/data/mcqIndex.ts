@@ -4,104 +4,104 @@
 import type { BankIndex } from './mcq'
 
 export const bundledBankIndex: BankIndex = {
-  "generatedAt": "2026-09-09",
-  "total": 33276,
+  "generatedAt": "2026-09-10",
+  "total": 37686,
   "categories": [
     {
       "slug": "pakistan-geography",
       "name": "Pakistan Geography",
-      "count": 165,
+      "count": 282,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "mountains",
       "name": "Mountains",
-      "count": 139,
+      "count": 209,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "rivers",
       "name": "Rivers",
-      "count": 168,
+      "count": 284,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "oceans-seas",
       "name": "Oceans and Seas",
-      "count": 275,
+      "count": 278,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "deserts",
       "name": "Deserts",
-      "count": 80,
+      "count": 113,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "straits-canals",
       "name": "Straits and Canals",
-      "count": 179,
+      "count": 202,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "capitals",
       "name": "Capitals",
-      "count": 703,
+      "count": 704,
       "chunks": 3,
       "mpt": true
     },
     {
       "slug": "currencies",
       "name": "Currencies",
-      "count": 857,
+      "count": 797,
       "chunks": 3,
       "mpt": true
     },
     {
       "slug": "countries-continents",
       "name": "Countries and Continents",
-      "count": 1525,
+      "count": 1693,
       "chunks": 3,
       "mpt": true
     },
     {
       "slug": "flags",
       "name": "Flags",
-      "count": 106,
+      "count": 107,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "international-borders",
       "name": "International Borders",
-      "count": 150,
+      "count": 153,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "famous-places",
       "name": "Famous Places",
-      "count": 120,
+      "count": 125,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "pakistan-history",
       "name": "Pakistan History",
-      "count": 89,
+      "count": 188,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "pakistan-affairs",
       "name": "Pakistan Affairs",
-      "count": 3389,
+      "count": 3826,
       "chunks": 5,
       "mpt": true
     },
@@ -115,7 +115,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "largest-longest",
       "name": "Largest, Longest, Highest and Smallest",
-      "count": 576,
+      "count": 583,
       "chunks": 2,
       "mpt": true
     },
@@ -136,15 +136,15 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "awards-honours",
       "name": "Awards and Honours",
-      "count": 123,
+      "count": 73,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "international-organisations",
       "name": "International Organisations",
-      "count": 486,
-      "chunks": 1,
+      "count": 772,
+      "chunks": 2,
       "mpt": true
     },
     {
@@ -157,14 +157,14 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "science",
       "name": "Science",
-      "count": 4636,
+      "count": 4644,
       "chunks": 8,
       "mpt": true
     },
     {
       "slug": "everyday-science",
       "name": "Everyday Science",
-      "count": 1385,
+      "count": 1388,
       "chunks": 6,
       "mpt": true
     },
@@ -185,29 +185,29 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "economics",
       "name": "Economics",
-      "count": 146,
+      "count": 150,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "national-symbols",
       "name": "National Symbols",
-      "count": 434,
+      "count": 435,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "important-days",
       "name": "Important Days",
-      "count": 71,
+      "count": 74,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "islamic-gk",
       "name": "Islamic General Knowledge",
-      "count": 3803,
-      "chunks": 11,
+      "count": 6047,
+      "chunks": 14,
       "mpt": true
     },
     {
@@ -220,8 +220,8 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "misc-gk",
       "name": "Miscellaneous General Knowledge",
-      "count": 4583,
-      "chunks": 15,
+      "count": 5174,
+      "chunks": 16,
       "mpt": true
     },
     {
@@ -234,7 +234,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "current-affairs",
       "name": "Current Affairs",
-      "count": 804,
+      "count": 750,
       "chunks": 10,
       "mpt": true
     },
@@ -255,28 +255,28 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "books-authors",
       "name": "Books and Authors",
-      "count": 135,
+      "count": 216,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "politics-government",
       "name": "Politics and Government",
-      "count": 131,
+      "count": 378,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "sports",
       "name": "Sports",
-      "count": 284,
+      "count": 303,
       "chunks": 1,
       "mpt": true
     },
     {
       "slug": "world-history",
       "name": "World History",
-      "count": 181,
+      "count": 185,
       "chunks": 1,
       "mpt": true
     }

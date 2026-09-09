@@ -93,7 +93,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'games', title: 'Interactive Practice', desc: 'Academic matching and timelines', to: '/games', icon: 'Gamepad2', visible: true, order: 27 },
   { id: 'answer-timer', title: 'Answer Timer', desc: 'Practice answers against the clock', to: '/answer-timer', icon: 'Timer', visible: true, order: 28 },
   { id: 'mistakes', title: 'Mistake Notebook', desc: 'Revisit weak areas and wrong answers', to: '/mistakes', icon: 'TriangleAlert', visible: true, order: 29 },
-  { id: 'one-liner-gk', title: '4800 One-Liner GK Questions', desc: 'Clear fact cards for rapid revision', to: '/one-liner-gk', icon: 'ListTree', visible: true, order: 30 },
+  { id: 'one-liner-gk', title: '30,491 One-Liner GK Questions', desc: 'Clear fact cards for rapid revision', to: '/one-liner-gk', icon: 'ListTree', visible: true, order: 30 },
   { id: 'language-grammar', title: 'Urdu & English Grammar', desc: 'Grammar practice and language rules', to: '/language-grammar', icon: 'Languages', visible: true, order: 31 },
   { id: 'answer-writing', title: 'Answer-Writing Practice', desc: 'Plan, structure and improve answers', to: '/answer-writing', icon: 'FilePenLine', visible: true, order: 32 },
   { id: 'subject-selector', title: 'Subject Selection Tool', desc: 'Compare optional subjects smartly', to: '/subjects/selector', icon: 'SlidersHorizontal', visible: true, order: 35 },
