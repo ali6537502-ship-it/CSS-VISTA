@@ -7,12 +7,12 @@ test('publisher ID is the verified CSS Vista publisher', () => {
   assert.equal(ADSENSE_PUBLISHER_ID, 'ca-pub-6131271603014611')
 })
 
-test('homepage permits one manual pre-footer ad while Auto ads stay disabled', () => {
+test('homepage is completely ad-free while ownership remains verifiable by meta tag and ads.txt', () => {
   const policy = getAdRoutePolicy('/')
   assert.equal(policy.autoAdsEnabled, false)
-  assert.equal(policy.manualAdsEnabled, true)
+  assert.equal(policy.manualAdsEnabled, false)
   assert.equal(policy.placementType, 'pre-footer')
-  assert.ok(policy.minimumHeight >= 250)
+  assert.equal(policy.minimumHeight, 0)
 })
 
 test('private, legal, viewer and active question routes are ad-free', () => {
@@ -21,7 +21,7 @@ test('private, legal, viewer and active question routes are ad-free', () => {
     '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
     '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
     '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy',
-    '/not-a-real-route',
+    '/mentors', '/handwritten-notes', '/lectures', '/not-a-real-route',
   ]
   for (const path of protectedRoutes) {
     const policy = getAdRoutePolicy(path)
@@ -36,7 +36,7 @@ test('only substantial public content is fully monetization eligible', () => {
     '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
     '/current-affairs', '/fpsc-updates', '/fpsc-syllabus', '/book-summaries',
-    '/one-liner-gk', '/lectures', '/css-past-paper-analysis', '/opinions',
+    '/one-liner-gk', '/css-past-paper-analysis', '/opinions',
   ]
   for (const path of eligibleRoutes) {
     const policy = getAdRoutePolicy(path)
@@ -44,6 +44,15 @@ test('only substantial public content is fully monetization eligible', () => {
     assert.equal(policy.manualAdsEnabled, true, path)
     assert.ok(policy.minimumHeight >= 250, path)
   }
+})
+
+test('unfinished lecture placeholder is noindex, ad-free and absent from static sitemap routes', () => {
+  const route = ROUTE_REGISTRY.find((entry) => entry.path === '/lectures')
+  assert.ok(route)
+  assert.equal(route.indexable, false)
+  assert.equal(route.robots, 'noindex, follow')
+  assert.equal(route.adMode, 'none')
+  assert.equal(INDEXABLE_STATIC_ROUTES.some((entry) => entry.path === '/lectures'), false)
 })
 
 test('current-affairs MCQ state is protected while informational content remains eligible', () => {
