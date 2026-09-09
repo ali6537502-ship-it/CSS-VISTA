@@ -1,0 +1,542 @@
+{
+  "generated_at": "2026-09-09",
+  "repository": "ali6537502-ship-it/CSS-VISTA",
+  "summary": {
+    "source_records": 37549,
+    "mcq_inserted": 10264,
+    "one_liners_inserted": 25363,
+    "fill_in_the_blanks_handled": 7054,
+    "duplicates_skipped": 1618,
+    "invalid_or_incomplete_skipped": 117,
+    "conflicts_skipped": 187,
+    "option_e_omitted": 192,
+    "answer_mappings_corrected": 0,
+    "text_fields_normalized": 10232,
+    "existing_mcqs_before": 22216,
+    "existing_one_liners_before": 4816,
+    "final_mcq_total": 33276,
+    "final_one_liner_total": 30179,
+    "total_inserted": 35627,
+    "preexisting_unindexed_mcqs_exposed": 796
+  },
+  "existing_categories_used": [
+    "astronomy",
+    "capitals",
+    "computer",
+    "computer-basics",
+    "countries-continents",
+    "current-affairs-archive",
+    "deserts",
+    "discoveries-inventions",
+    "economics",
+    "english-grammar",
+    "everyday-science",
+    "first-world",
+    "flags",
+    "general-knowledge",
+    "geography",
+    "international-borders",
+    "international-organisations",
+    "islamiat",
+    "islamic-gk",
+    "islamic-history",
+    "largest-longest",
+    "misc-gk",
+    "mountains",
+    "national-symbols",
+    "oceans-seas",
+    "pakistan-affairs",
+    "pakistan-geography",
+    "rivers",
+    "science",
+    "science-health",
+    "solar-system",
+    "straits-canals",
+    "united-nations"
+  ],
+  "new_mcq_categories": [
+    {
+      "slug": "books-authors",
+      "name": "Books and Authors"
+    },
+    {
+      "slug": "politics-government",
+      "name": "Politics and Government"
+    },
+    {
+      "slug": "sports",
+      "name": "Sports"
+    },
+    {
+      "slug": "world-history",
+      "name": "World History"
+    }
+  ],
+  "new_one_liner_categories": [
+    {
+      "slug": "english-language",
+      "name": "English Language"
+    }
+  ],
+  "destination_counts": {
+    "One-Liner:general-knowledge": 13275,
+    "One-Liner:science-health": 3298,
+    "MCQ:english-grammar": 2633,
+    "MCQ:misc-gk": 2342,
+    "One-Liner:pakistan-affairs": 2201,
+    "One-Liner:english-language": 2097,
+    "MCQ:computer-basics": 1803,
+    "One-Liner:computer": 1608,
+    "One-Liner:geography": 1562,
+    "One-Liner:islamiat": 934,
+    "MCQ:science": 633,
+    "MCQ:international-organisations": 391,
+    "MCQ:pakistan-affairs": 369,
+    "One-Liner:islamic-history": 359,
+    "MCQ:sports": 284,
+    "MCQ:everyday-science": 270,
+    "MCQ:oceans-seas": 225,
+    "MCQ:world-history": 181,
+    "MCQ:largest-longest": 171,
+    "MCQ:books-authors": 135,
+    "MCQ:politics-government": 131,
+    "MCQ:countries-continents": 128,
+    "MCQ:rivers": 92,
+    "MCQ:mountains": 80,
+    "MCQ:discoveries-inventions": 75,
+    "MCQ:united-nations": 69,
+    "MCQ:economics": 62,
+    "MCQ:straits-canals": 57,
+    "MCQ:deserts": 33,
+    "MCQ:solar-system": 31,
+    "MCQ:flags": 26,
+    "One-Liner:current-affairs-archive": 24,
+    "MCQ:capitals": 14,
+    "MCQ:islamic-gk": 13,
+    "MCQ:national-symbols": 10,
+    "One-Liner:astronomy": 5,
+    "MCQ:international-borders": 4,
+    "MCQ:first-world": 1,
+    "MCQ:pakistan-geography": 1
+  },
+  "skipped_reasons": {
+    "conflicting answer for an existing one-liner question": 87,
+    "conflicting answer for an existing factual relation": 65,
+    "conflicting answer for an existing MCQ stem": 35,
+    "MCQ contains repeated options": 21,
+    "one-liner has no reliable answer": 24,
+    "answer depends on missing options": 24,
+    "MCQ does not contain four complete options": 17,
+    "missing, malformed, or promotional question text": 13,
+    "answer text does not match the stated answer option": 8,
+    "correct answer is Option E, outside the four-option website schema": 8,
+    "correct answer could not be mapped reliably": 2
+  },
+  "files": [
+    {
+      "source_file": "10000_GK_Clean_Deduplicated_Question_Bank(3).xlsx",
+      "detected_type": {
+        "One-Liner": 9929
+      },
+      "detected_category": {
+        "Miscellaneous General Knowledge": 4939,
+        "World General Knowledge": 882,
+        "Biology": 738,
+        "Important Personalities": 671,
+        "Geography": 601,
+        "Books and Authors": 411,
+        "Sports": 366,
+        "History": 365,
+        "Everyday Science": 202,
+        "Inventions and Discoveries": 183,
+        "Politics and Government": 154,
+        "Awards and Honors": 131,
+        "Capitals and Currencies": 77,
+        "Computer / Information Technology": 58,
+        "Chemistry": 57,
+        "Economics": 36,
+        "Physics": 24,
+        "Islamic General Knowledge": 20,
+        "International Organizations": 10,
+        "Pakistan Affairs": 4
+      },
+      "total_records": 9929,
+      "inserted": 9925,
+      "duplicate": 0,
+      "skipped": 4,
+      "destinations": {
+        "One-Liner:general-knowledge": 8221,
+        "One-Liner:science-health": 1021,
+        "One-Liner:geography": 601,
+        "One-Liner:computer": 58,
+        "One-Liner:islamic-history": 20,
+        "One-Liner:pakistan-affairs": 4
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing factual relation": 3,
+        "one-liner has no reliable answer": 1
+      }
+    },
+    {
+      "source_file": "Computer_MCQs_Master_Question_Bank(3).xlsx",
+      "detected_type": {
+        "MCQ": 1248
+      },
+      "detected_category": {
+        "Computer / Information Technology": 1248
+      },
+      "total_records": 1248,
+      "inserted": 725,
+      "duplicate": 515,
+      "skipped": 8,
+      "destinations": {
+        "MCQ:computer-basics": 725
+      },
+      "skip_reasons": {
+        "MCQ contains repeated options": 6,
+        "answer text does not match the stated answer option": 1,
+        "MCQ does not contain four complete options": 1
+      }
+    },
+    {
+      "source_file": "Computer_Question_Bank_Master(4).xlsx",
+      "detected_type": {
+        "MCQ": 1255,
+        "Fill-in-the-Blank": 426,
+        "One-Liner": 332,
+        "Unknown": 1
+      },
+      "detected_category": {
+        "Computer / Information Technology": 2014
+      },
+      "total_records": 2014,
+      "inserted": 1816,
+      "duplicate": 166,
+      "skipped": 32,
+      "destinations": {
+        "MCQ:computer-basics": 1060,
+        "One-Liner:computer": 756
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing MCQ stem": 15,
+        "MCQ contains repeated options": 4,
+        "correct answer is Option E, outside the four-option website schema": 7,
+        "MCQ does not contain four complete options": 3,
+        "answer text does not match the stated answer option": 2,
+        "one-liner has no reliable answer": 1
+      }
+    },
+    {
+      "source_file": "Country_Capital_Currency_Master_Question_Bank(3).xlsx",
+      "detected_type": {
+        "One-Liner": 352
+      },
+      "detected_category": {
+        "Capitals and Currencies": 352
+      },
+      "total_records": 352,
+      "inserted": 298,
+      "duplicate": 18,
+      "skipped": 36,
+      "destinations": {
+        "One-Liner:general-knowledge": 298
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing factual relation": 34,
+        "conflicting answer for an existing one-liner question": 2
+      }
+    },
+    {
+      "source_file": "English_Master_Question_Bank(3).xlsx",
+      "detected_type": {
+        "MCQ": 2640,
+        "One-Liner": 1425,
+        "Fill-in-the-Blank": 697,
+        "Unknown": 8
+      },
+      "detected_category": {
+        "English": 4770
+      },
+      "total_records": 4770,
+      "inserted": 4730,
+      "duplicate": 12,
+      "skipped": 28,
+      "destinations": {
+        "MCQ:english-grammar": 2633,
+        "One-Liner:english-language": 2097
+      },
+      "skip_reasons": {
+        "one-liner has no reliable answer": 9,
+        "answer depends on missing options": 8,
+        "missing, malformed, or promotional question text": 6,
+        "MCQ contains repeated options": 4,
+        "MCQ does not contain four complete options": 1
+      }
+    },
+    {
+      "source_file": "GK_Master_Question_Bank(3).xlsx",
+      "detected_type": {
+        "Fill-in-the-Blank": 5751,
+        "MCQ": 5354,
+        "One-Liner": 2426
+      },
+      "detected_category": {
+        "Miscellaneous General Knowledge": 2829,
+        "Pakistan Affairs": 2382,
+        "World General Knowledge": 1424,
+        "Islamic General Knowledge": 1200,
+        "Geography": 906,
+        "Computer / Information Technology": 834,
+        "Everyday Science": 819,
+        "International Organizations": 681,
+        "Sports": 606,
+        "History": 387,
+        "Biology": 274,
+        "Inventions and Discoveries": 204,
+        "Capitals and Currencies": 178,
+        "Physics": 176,
+        "Politics and Government": 146,
+        "Books and Authors": 132,
+        "Chemistry": 108,
+        "Awards and Honors": 104,
+        "Current Affairs": 64,
+        "Economics": 62,
+        "Important Personalities": 15
+      },
+      "total_records": 13531,
+      "inserted": 12897,
+      "duplicate": 574,
+      "skipped": 60,
+      "destinations": {
+        "One-Liner:general-knowledge": 2383,
+        "MCQ:misc-gk": 2330,
+        "One-Liner:pakistan-affairs": 1995,
+        "One-Liner:science-health": 1265,
+        "One-Liner:islamiat": 931,
+        "One-Liner:computer": 745,
+        "MCQ:international-organisations": 391,
+        "MCQ:pakistan-affairs": 368,
+        "One-Liner:geography": 364,
+        "MCQ:sports": 284,
+        "One-Liner:islamic-history": 256,
+        "MCQ:oceans-seas": 220,
+        "MCQ:world-history": 181,
+        "MCQ:largest-longest": 170,
+        "MCQ:books-authors": 133,
+        "MCQ:politics-government": 131,
+        "MCQ:countries-continents": 107,
+        "MCQ:science": 96,
+        "MCQ:rivers": 88,
+        "MCQ:mountains": 79,
+        "MCQ:united-nations": 69,
+        "MCQ:economics": 62,
+        "MCQ:straits-canals": 57,
+        "MCQ:discoveries-inventions": 41,
+        "MCQ:deserts": 32,
+        "MCQ:solar-system": 30,
+        "MCQ:flags": 26,
+        "MCQ:capitals": 14,
+        "MCQ:islamic-gk": 13,
+        "MCQ:computer-basics": 10,
+        "MCQ:national-symbols": 10,
+        "One-Liner:current-affairs-archive": 8,
+        "One-Liner:astronomy": 4,
+        "MCQ:international-borders": 3,
+        "MCQ:first-world": 1
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing one-liner question": 21,
+        "conflicting answer for an existing factual relation": 12,
+        "conflicting answer for an existing MCQ stem": 9,
+        "MCQ contains repeated options": 6,
+        "answer text does not match the stated answer option": 4,
+        "MCQ does not contain four complete options": 4,
+        "missing, malformed, or promotional question text": 2,
+        "one-liner has no reliable answer": 2
+      }
+    },
+    {
+      "source_file": "Geography_Question_Bank_Master(3).xlsx",
+      "detected_type": {
+        "One-Liner": 747,
+        "Fill-in-the-Blank": 90,
+        "MCQ": 17
+      },
+      "detected_category": {
+        "Geography": 484,
+        "World General Knowledge": 253,
+        "Capitals and Currencies": 74,
+        "Everyday Science": 21,
+        "International Organizations": 6,
+        "Important Personalities": 5,
+        "History": 4,
+        "Islamic General Knowledge": 3,
+        "Biology": 2,
+        "Pakistan Affairs": 1,
+        "Computer / Information Technology": 1
+      },
+      "total_records": 854,
+      "inserted": 780,
+      "duplicate": 50,
+      "skipped": 24,
+      "destinations": {
+        "One-Liner:geography": 449,
+        "One-Liner:general-knowledge": 292,
+        "One-Liner:science-health": 19,
+        "MCQ:rivers": 4,
+        "One-Liner:islamiat": 3,
+        "MCQ:misc-gk": 3,
+        "MCQ:oceans-seas": 2,
+        "One-Liner:pakistan-affairs": 1,
+        "MCQ:solar-system": 1,
+        "MCQ:everyday-science": 1,
+        "MCQ:countries-continents": 1,
+        "MCQ:pakistan-geography": 1,
+        "MCQ:deserts": 1,
+        "One-Liner:computer": 1,
+        "MCQ:international-borders": 1
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing one-liner question": 13,
+        "conflicting answer for an existing factual relation": 9,
+        "conflicting answer for an existing MCQ stem": 1,
+        "correct answer could not be mapped reliably": 1
+      }
+    },
+    {
+      "source_file": "Master_GK_Question_Database(3).xlsx",
+      "detected_type": {
+        "One-Liner": 2697,
+        "Fill-in-the-Blank": 28,
+        "MCQ": 22,
+        "Unknown": 1
+      },
+      "detected_category": {
+        "General Knowledge": 1324,
+        "Pakistan Affairs": 209,
+        "International Organizations": 165,
+        "Politics and Government": 156,
+        "Geography": 143,
+        "Important Personalities": 114,
+        "Books and Authors": 107,
+        "History": 99,
+        "Islamic General Knowledge": 88,
+        "Inventions and Discoveries": 44,
+        "Sports": 42,
+        "Physics": 42,
+        "Biology": 39,
+        "Economics": 39,
+        "Computer / Information Technology": 33,
+        "Awards and Honors": 28,
+        "Everyday Science": 22,
+        "Capitals and Currencies": 21,
+        "Chemistry": 17,
+        "Current Affairs": 16
+      },
+      "total_records": 2748,
+      "inserted": 2555,
+      "duplicate": 120,
+      "skipped": 73,
+      "destinations": {
+        "One-Liner:general-knowledge": 2002,
+        "One-Liner:pakistan-affairs": 201,
+        "One-Liner:geography": 125,
+        "One-Liner:science-health": 86,
+        "One-Liner:islamic-history": 83,
+        "One-Liner:computer": 29,
+        "One-Liner:current-affairs-archive": 16,
+        "MCQ:misc-gk": 9,
+        "MCQ:discoveries-inventions": 1,
+        "MCQ:pakistan-affairs": 1,
+        "MCQ:books-authors": 1,
+        "MCQ:largest-longest": 1
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing one-liner question": 27,
+        "answer depends on missing options": 16,
+        "one-liner has no reliable answer": 11,
+        "MCQ does not contain four complete options": 8,
+        "conflicting answer for an existing factual relation": 7,
+        "missing, malformed, or promotional question text": 3,
+        "correct answer is Option E, outside the four-option website schema": 1
+      }
+    },
+    {
+      "source_file": "Master_Question_Bank(3).xlsx",
+      "detected_type": {
+        "MCQ": 995,
+        "One-Liner": 926,
+        "Fill-in-the-Blank": 182
+      },
+      "detected_category": {
+        "Biology": 662,
+        "Everyday Science": 561,
+        "Physics": 344,
+        "Chemistry": 311,
+        "Inventions and Discoveries": 143,
+        "Geography": 50,
+        "Computer / Information Technology": 31,
+        "Books and Authors": 1
+      },
+      "total_records": 2103,
+      "inserted": 1901,
+      "duplicate": 163,
+      "skipped": 39,
+      "destinations": {
+        "One-Liner:science-health": 907,
+        "MCQ:science": 537,
+        "MCQ:everyday-science": 269,
+        "One-Liner:general-knowledge": 79,
+        "MCQ:discoveries-inventions": 33,
+        "One-Liner:geography": 23,
+        "MCQ:countries-continents": 20,
+        "One-Liner:computer": 19,
+        "MCQ:computer-basics": 8,
+        "MCQ:oceans-seas": 3,
+        "MCQ:books-authors": 1,
+        "MCQ:mountains": 1,
+        "One-Liner:astronomy": 1
+      },
+      "skip_reasons": {
+        "conflicting answer for an existing one-liner question": 24,
+        "conflicting answer for an existing MCQ stem": 10,
+        "MCQ contains repeated options": 1,
+        "missing, malformed, or promotional question text": 2,
+        "answer text does not match the stated answer option": 1,
+        "correct answer could not be mapped reliably": 1
+      }
+    }
+  ],
+  "preexisting_index_repairs": [
+    {
+      "slug": "capitals",
+      "indexed_before": 577,
+      "records_present_before": 689,
+      "newly_exposed": 112
+    },
+    {
+      "slug": "currencies",
+      "indexed_before": 797,
+      "records_present_before": 857,
+      "newly_exposed": 60
+    },
+    {
+      "slug": "awards-honours",
+      "indexed_before": 61,
+      "records_present_before": 123,
+      "newly_exposed": 62
+    },
+    {
+      "slug": "computer-basics",
+      "indexed_before": 88,
+      "records_present_before": 596,
+      "newly_exposed": 508
+    },
+    {
+      "slug": "current-affairs",
+      "indexed_before": 750,
+      "records_present_before": 804,
+      "newly_exposed": 54
+    }
+  ]
+}
