@@ -619,7 +619,7 @@ export default function Home() {
                   to={activity?.path || '/start-css'}
                   className="cssv-tap relative inline-flex h-9 shrink-0 items-center gap-1 rounded-lg bg-emerald-900 px-2.5 text-[10px] font-bold text-white shadow-[0_8px_20px_rgba(4,78,52,0.18)]"
                 >
-                  {activity ? 'Resume' : 'Start'} <ArrowRight className="h-3.5 w-3.5" />
+                  {activity ? 'Resume' : <>Start<span className="sr-only"> CSS preparation</span></>} <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
             </article>
