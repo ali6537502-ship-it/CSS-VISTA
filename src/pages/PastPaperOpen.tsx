@@ -9,6 +9,7 @@ import { safeDownloadName } from '@/lib/resourceFiles'
 
 type Paper = (typeof seedPapers)[number]
 const PAST_PAPER_ASSET_VERSION = '20260824'
+const SITE_ORIGIN = 'https://www.css-vista.com'
 
 function versionedPaperUrl(fileUrl: string) {
   const separator = fileUrl.includes('?') ? '&' : '?'
@@ -35,21 +36,90 @@ export default function PastPaperOpen() {
   const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
 
   useEffect(() => {
-    if (!paper) return
+    if (!paper) {
+      const previousTitle = document.title
+      const robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+      const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+      const previousRobots = robots?.content ?? null
+      const previousCanonical = canonical?.href ?? null
+      document.title = 'Past Paper Unavailable | CSS Vista'
+      if (robots) robots.content = 'noindex, follow'
+      if (canonical) canonical.href = `${SITE_ORIGIN}/404`
+      document.getElementById('cssv-route-structured-data')?.remove()
+      return () => {
+        document.title = previousTitle
+        if (robots && previousRobots !== null) robots.content = previousRobots
+        if (canonical && previousCanonical) canonical.href = previousCanonical
+      }
+    }
     recordActivity({ type: 'past-paper', label: paper.title, path: `/past-papers/view/${paper.id}` })
     const title = `${paperPageTitle(paper)} | CSS Vista`
     const descriptionText = paperPageDescription(paper)
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    const canonicalUrl = `${SITE_ORIGIN}/past-papers/view/${paper.id}`
+    const previousTitle = document.title
+    const metaUpdates = [
+      ['meta[name="description"]', 'content', descriptionText],
+      ['meta[name="robots"]', 'content', 'index, follow, max-image-preview:large'],
+      ['meta[property="og:type"]', 'content', 'website'],
+      ['meta[property="og:title"]', 'content', title],
+      ['meta[property="og:description"]', 'content', descriptionText],
+      ['meta[property="og:url"]', 'content', canonicalUrl],
+      ['meta[name="twitter:title"]', 'content', title],
+      ['meta[name="twitter:description"]', 'content', descriptionText],
+    ] as const
+    const previousMeta = metaUpdates.map(([selector, attribute, value]) => {
+      const element = document.querySelector<HTMLMetaElement>(selector)
+      const previous = element?.getAttribute(attribute) ?? null
+      element?.setAttribute(attribute, value)
+      return { element, attribute, previous }
+    })
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-    const previousDescription = description?.content
     const previousCanonical = canonical?.href
+    const structuredData = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+    const schema = structuredData || document.createElement('script')
+    const createdSchema = !structuredData
+    const previousSchema = structuredData?.textContent ?? null
+
     document.title = title
-    if (description) description.content = descriptionText
-    if (canonical) canonical.href = `${window.location.origin}/past-papers/view/${paper.id}`
+    if (canonical) canonical.href = canonicalUrl
+    schema.id = 'cssv-route-structured-data'
+    schema.type = 'application/ld+json'
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'DigitalDocument',
+          name: paperPageTitle(paper),
+          description: descriptionText,
+          url: canonicalUrl,
+          contentUrl: paper.fileUrl ? `${SITE_ORIGIN}${paper.fileUrl}` : undefined,
+          encodingFormat: 'application/pdf',
+          inLanguage: 'en',
+          learningResourceType: 'Past examination paper',
+          provider: { '@id': `${SITE_ORIGIN}/#organization` },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'CSS Vista', item: `${SITE_ORIGIN}/` },
+            { '@type': 'ListItem', position: 2, name: 'Past Papers', item: `${SITE_ORIGIN}/past-papers` },
+            { '@type': 'ListItem', position: 3, name: paperPageTitle(paper), item: canonicalUrl },
+          ],
+        },
+      ],
+    })
+    if (createdSchema) document.head.append(schema)
+
     return () => {
-      document.title = 'CSS Vista - CSS Exam Preparation Platform'
-      if (description && previousDescription) description.content = previousDescription
+      document.title = previousTitle
+      previousMeta.forEach(({ element, attribute, previous }) => {
+        if (!element) return
+        if (previous === null) element.removeAttribute(attribute)
+        else element.setAttribute(attribute, previous)
+      })
       if (canonical && previousCanonical) canonical.href = previousCanonical
+      if (createdSchema) schema.remove()
+      else schema.textContent = previousSchema
     }
   }, [paper])
 

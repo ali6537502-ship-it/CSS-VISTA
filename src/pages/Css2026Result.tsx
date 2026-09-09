@@ -64,6 +64,7 @@ function useResultSeo() {
 
     const upserts = [
       ['meta[name="description"]', 'name', 'description', result.description],
+      ['meta[name="robots"]', 'name', 'robots', 'index, follow, max-image-preview:large'],
       ['meta[property="og:type"]', 'property', 'og:type', 'article'],
       ['meta[property="og:title"]', 'property', 'og:title', `${result.title} | CSS Vista`],
       ['meta[property="og:description"]', 'property', 'og:description', result.description],
@@ -84,13 +85,6 @@ function useResultSeo() {
       element.content = value
       return () => created ? element?.remove() : element && (element.content = previous)
     })
-
-    const socialImages = [
-      document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]'),
-      document.head.querySelector<HTMLMetaElement>('meta[name="twitter:image"]'),
-    ].filter((element): element is HTMLMetaElement => Boolean(element))
-    const socialImageAnchors = socialImages.map((element) => ({ element, next: element.nextSibling }))
-    socialImages.forEach((element) => element.remove())
 
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     const createdCanonical = !canonical
@@ -118,10 +112,6 @@ function useResultSeo() {
       restores.forEach((restore) => restore())
       if (createdCanonical) canonical?.remove()
       else if (canonical) canonical.href = previousCanonical
-      socialImageAnchors.forEach(({ element, next }) => {
-        if (next?.parentNode === document.head) document.head.insertBefore(element, next)
-        else document.head.append(element)
-      })
       if (createdStructuredData) structuredData?.remove()
       else if (structuredData) structuredData.textContent = previousStructuredData
     }

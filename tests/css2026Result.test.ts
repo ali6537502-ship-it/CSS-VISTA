@@ -29,9 +29,9 @@ test('CSS 2026 result page is ad-free under the central route policy', () => {
   assert.equal(policy.minimumHeight, 0)
 })
 
-test('CSS 2026 result announcement is prominent without interrupting exams or private work', () => {
-  assert.equal(shouldShowCss2026ResultAnnouncement('/'), true)
-  assert.equal(shouldShowCss2026ResultAnnouncement('/current-affairs'), true)
+test('the retired CSS 2026 announcement does not reappear on any route', () => {
+  assert.equal(shouldShowCss2026ResultAnnouncement('/'), false)
+  assert.equal(shouldShowCss2026ResultAnnouncement('/current-affairs'), false)
   assert.equal(shouldShowCss2026ResultAnnouncement('/mpt/mock/active'), false)
   assert.equal(shouldShowCss2026ResultAnnouncement('/gk/quiz/world'), false)
   assert.equal(shouldShowCss2026ResultAnnouncement('/factbook'), false)

@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { ENTRY_TYPE_DEFINITIONS, createEmptyContent } from '../src/features/factbook/entryTypes.ts'
 import { FACTBOOK_ENTRY_TYPES } from '../src/features/factbook/types.ts'
 import { safeWebUrl, sanitizePlainText, searchableText } from '../src/features/factbook/safety.ts'
+import { getAdRoutePolicy } from '../src/lib/ads.ts'
 
 test('every supported Factbook entry type has a functional definition', () => {
   assert.equal(FACTBOOK_ENTRY_TYPES.length, 17)
@@ -56,6 +57,8 @@ test('database migration enforces private ownership on every Factbook entity', (
 })
 
 test('Factbook route is centrally denied advertising', () => {
-  const policy = readFileSync(new URL('../src/lib/ads.ts', import.meta.url), 'utf8')
-  assert.match(policy, /pattern: '\/factbook'.*Private student factbook/)
+  const policy = getAdRoutePolicy('/factbook')
+  assert.equal(policy.autoAdsEnabled, false)
+  assert.equal(policy.manualAdsEnabled, false)
+  assert.equal(policy.minimumHeight, 0)
 })

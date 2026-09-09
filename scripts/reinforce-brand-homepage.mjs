@@ -12,8 +12,9 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
 }
 const siteOrigin = siteUrl.origin
 const homeCanonical = `${siteOrigin}/`
-const homeTitle = 'CSS Vista | CSS & PMS Exam Preparation in Pakistan'
-const homeDescription = 'CSS Vista is an independent CSS and PMS exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs, syllabus guidance and study tools.'
+const homeTitle = 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform'
+const homeDescription = 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.'
+const homePosterPreload = '<link rel="preload" as="image" href="/images/css-vista-main-poster-720.webp" imagesrcset="/images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w" imagesizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px" fetchpriority="high" />'
 
 function escapeHtml(value) {
   return String(value)
@@ -41,6 +42,9 @@ function reinforceHomepage(html) {
   }
   if (!next.includes('rel="home"')) {
     next = next.replace('<link rel="canonical"', `<link rel="home" href="${homeCanonical}" title="CSS Vista" />\n    <link rel="canonical"`)
+  }
+  if (!next.includes('css-vista-main-poster-720.webp" imagesrcset=')) {
+    next = next.replace('</head>', `    ${homePosterPreload}\n  </head>`)
   }
   return next
 }

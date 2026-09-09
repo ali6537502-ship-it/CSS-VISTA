@@ -10,6 +10,8 @@ import QuestionPagination from '@/components/QuestionPagination'
 import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 import { diversifyQuestions } from '@/lib/questionDiversity'
 
+const SITE_ORIGIN = 'https://www.css-vista.com'
+
 export default function GKCategory() {
   const { slug = '' } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -73,6 +75,75 @@ export default function GKCategory() {
       if (backgroundTimer !== null) window.clearTimeout(backgroundTimer)
     }
   }, [slug])
+
+  useEffect(() => {
+    if (!total || !name) {
+      if (!loadingComplete) return
+      const previousTitle = document.title
+      const robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+      const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+      const previousRobots = robots?.content ?? null
+      const previousCanonical = canonical?.href ?? null
+      document.title = 'GK Category Unavailable | CSS Vista'
+      if (robots) robots.content = 'noindex, follow'
+      if (canonical) canonical.href = `${SITE_ORIGIN}/404`
+      document.getElementById('cssv-route-structured-data')?.remove()
+      return () => {
+        document.title = previousTitle
+        if (robots && previousRobots !== null) robots.content = previousRobots
+        if (canonical && previousCanonical) canonical.href = previousCanonical
+      }
+    }
+    const canonicalUrl = `${SITE_ORIGIN}/gk/cat/${slug}`
+    const title = `${name} MCQs - ${total.toLocaleString('en-US')} Questions | CSS Vista`
+    const description = `Practice ${total.toLocaleString('en-US')} ${name} MCQs for competitive-examination preparation, with four-option questions, answer review and topic filters.`
+    const previousTitle = document.title
+    const metaUpdates = [
+      ['meta[name="description"]', description],
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', description],
+      ['meta[property="og:url"]', canonicalUrl],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', description],
+    ] as const
+    const previousMeta = metaUpdates.map(([selector, value]) => {
+      const element = document.querySelector<HTMLMetaElement>(selector)
+      const previous = element?.content ?? null
+      if (element) element.content = value
+      return { element, previous }
+    })
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    const previousCanonical = canonical?.href ?? null
+    const structuredData = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+    const schema = structuredData || document.createElement('script')
+    const createdSchema = !structuredData
+    const previousSchema = structuredData?.textContent ?? null
+
+    document.title = title
+    if (canonical) canonical.href = canonicalUrl
+    schema.id = 'cssv-route-structured-data'
+    schema.type = 'application/ld+json'
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: `${name} MCQs`,
+      description,
+      url: canonicalUrl,
+      isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+      about: { '@type': 'Thing', name },
+    })
+    if (createdSchema) document.head.append(schema)
+
+    return () => {
+      document.title = previousTitle
+      previousMeta.forEach(({ element, previous }) => {
+        if (element && previous !== null) element.content = previous
+      })
+      if (canonical && previousCanonical) canonical.href = previousCanonical
+      if (createdSchema) schema.remove()
+      else schema.textContent = previousSchema
+    }
+  }, [loadingComplete, name, slug, total])
 
   const subs = useMemo(() => {
     if (!qs) return []

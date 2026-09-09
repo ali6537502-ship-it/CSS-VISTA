@@ -1,1 +1,251 @@
-{"generatedAt":"2026-09-04","total":22225,"categories":[{"slug":"pakistan-geography","name":"Pakistan Geography","count":164,"chunks":1,"mpt":true},{"slug":"mountains","name":"Mountains","count":59,"chunks":2,"mpt":true},{"slug":"rivers","name":"Rivers","count":76,"chunks":2,"mpt":true},{"slug":"oceans-seas","name":"Oceans and Seas","count":50,"chunks":1,"mpt":true},{"slug":"deserts","name":"Deserts","count":47,"chunks":2,"mpt":true},{"slug":"straits-canals","name":"Straits and Canals","count":122,"chunks":2,"mpt":true},{"slug":"capitals","name":"Capitals","count":577,"chunks":2,"mpt":true},{"slug":"currencies","name":"Currencies","count":797,"chunks":3,"mpt":true},{"slug":"countries-continents","name":"Countries and Continents","count":1397,"chunks":2,"mpt":true},{"slug":"flags","name":"Flags","count":80,"chunks":1,"mpt":true},{"slug":"international-borders","name":"International Borders","count":146,"chunks":1,"mpt":true},{"slug":"famous-places","name":"Famous Places","count":120,"chunks":1,"mpt":true},{"slug":"pakistan-history","name":"Pakistan History","count":89,"chunks":2,"mpt":true},{"slug":"pakistan-affairs","name":"Pakistan Affairs","count":3020,"chunks":4,"mpt":true},{"slug":"first-world","name":"First in the World","count":55,"chunks":1,"mpt":true},{"slug":"largest-longest","name":"Largest, Longest, Highest and Smallest","count":405,"chunks":2,"mpt":true},{"slug":"important-personalities","name":"Important Personalities","count":111,"chunks":2,"mpt":true},{"slug":"discoveries-inventions","name":"Discoveries and Inventions","count":70,"chunks":1,"mpt":true},{"slug":"awards-honours","name":"Awards and Honours","count":61,"chunks":1,"mpt":true},{"slug":"international-organisations","name":"International Organisations","count":95,"chunks":1,"mpt":true},{"slug":"united-nations","name":"United Nations","count":103,"chunks":1,"mpt":true},{"slug":"science","name":"Science","count":4011,"chunks":7,"mpt":true},{"slug":"everyday-science","name":"Everyday Science","count":1115,"chunks":5,"mpt":true},{"slug":"solar-system","name":"Solar System and Planets","count":70,"chunks":1,"mpt":true},{"slug":"environment","name":"Environment","count":426,"chunks":2,"mpt":true},{"slug":"economics","name":"Economics","count":84,"chunks":2,"mpt":true},{"slug":"national-symbols","name":"National Symbols","count":424,"chunks":1,"mpt":true},{"slug":"important-days","name":"Important Days","count":71,"chunks":1,"mpt":true},{"slug":"islamic-gk","name":"Islamic General Knowledge","count":3790,"chunks":11,"mpt":true},{"slug":"computer-basics","name":"Computer Basics","count":88,"chunks":1,"mpt":true},{"slug":"misc-gk","name":"Miscellaneous General Knowledge","count":2241,"chunks":12,"mpt":true},{"slug":"general-ability","name":"General Ability","count":500,"chunks":6,"mpt":true},{"slug":"current-affairs","name":"Current Affairs","count":750,"chunks":10,"mpt":true},{"slug":"english-grammar","name":"English Grammar","count":186,"chunks":7,"mpt":true},{"slug":"urdu-language","name":"Urdu Language","count":825,"chunks":2,"mpt":true}]}
+{
+ "generatedAt": "2026-09-09",
+ "total": 22216,
+ "categories": [
+  {
+   "slug": "pakistan-geography",
+   "name": "Pakistan Geography",
+   "count": 164,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "mountains",
+   "name": "Mountains",
+   "count": 59,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "rivers",
+   "name": "Rivers",
+   "count": 76,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "oceans-seas",
+   "name": "Oceans and Seas",
+   "count": 50,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "deserts",
+   "name": "Deserts",
+   "count": 47,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "straits-canals",
+   "name": "Straits and Canals",
+   "count": 122,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "capitals",
+   "name": "Capitals",
+   "count": 577,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "currencies",
+   "name": "Currencies",
+   "count": 797,
+   "chunks": 3,
+   "mpt": true
+  },
+  {
+   "slug": "countries-continents",
+   "name": "Countries and Continents",
+   "count": 1397,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "flags",
+   "name": "Flags",
+   "count": 80,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "international-borders",
+   "name": "International Borders",
+   "count": 146,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "famous-places",
+   "name": "Famous Places",
+   "count": 120,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "pakistan-history",
+   "name": "Pakistan History",
+   "count": 89,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "pakistan-affairs",
+   "name": "Pakistan Affairs",
+   "count": 3020,
+   "chunks": 4,
+   "mpt": true
+  },
+  {
+   "slug": "first-world",
+   "name": "First in the World",
+   "count": 55,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "largest-longest",
+   "name": "Largest, Longest, Highest and Smallest",
+   "count": 405,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "important-personalities",
+   "name": "Important Personalities",
+   "count": 111,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "discoveries-inventions",
+   "name": "Discoveries and Inventions",
+   "count": 70,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "awards-honours",
+   "name": "Awards and Honours",
+   "count": 61,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "international-organisations",
+   "name": "International Organisations",
+   "count": 95,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "united-nations",
+   "name": "United Nations",
+   "count": 103,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "science",
+   "name": "Science",
+   "count": 4003,
+   "chunks": 7,
+   "mpt": true
+  },
+  {
+   "slug": "everyday-science",
+   "name": "Everyday Science",
+   "count": 1115,
+   "chunks": 5,
+   "mpt": true
+  },
+  {
+   "slug": "solar-system",
+   "name": "Solar System and Planets",
+   "count": 70,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "environment",
+   "name": "Environment",
+   "count": 425,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "economics",
+   "name": "Economics",
+   "count": 84,
+   "chunks": 2,
+   "mpt": true
+  },
+  {
+   "slug": "national-symbols",
+   "name": "National Symbols",
+   "count": 424,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "important-days",
+   "name": "Important Days",
+   "count": 71,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "islamic-gk",
+   "name": "Islamic General Knowledge",
+   "count": 3790,
+   "chunks": 11,
+   "mpt": true
+  },
+  {
+   "slug": "computer-basics",
+   "name": "Computer Basics",
+   "count": 88,
+   "chunks": 1,
+   "mpt": true
+  },
+  {
+   "slug": "misc-gk",
+   "name": "Miscellaneous General Knowledge",
+   "count": 2241,
+   "chunks": 12,
+   "mpt": true
+  },
+  {
+   "slug": "general-ability",
+   "name": "General Ability",
+   "count": 500,
+   "chunks": 6,
+   "mpt": true
+  },
+  {
+   "slug": "current-affairs",
+   "name": "Current Affairs",
+   "count": 750,
+   "chunks": 10,
+   "mpt": true
+  },
+  {
+   "slug": "english-grammar",
+   "name": "English Grammar",
+   "count": 186,
+   "chunks": 7,
+   "mpt": true
+  },
+  {
+   "slug": "urdu-language",
+   "name": "Urdu Language",
+   "count": 825,
+   "chunks": 2,
+   "mpt": true
+  }
+ ]
+}

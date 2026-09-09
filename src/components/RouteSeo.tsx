@@ -17,8 +17,17 @@ export default function RouteSeo() {
     const description = route?.description || 'The requested CSS Vista page could not be found.'
     const robots = location.search ? 'noindex, follow' : (route?.robots || 'noindex, nofollow')
     const canonical = unknown ? `${CANONICAL_ORIGIN}/404` : canonicalForPath(location.pathname)
+    const routeSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
 
-    if (location.pathname.startsWith('/past-papers/view/')) {
+    document.getElementById('cssv-runtime-route-structured-data')?.remove()
+
+    // These routes have data-dependent metadata and structured data that their
+    // page components own. Avoid replacing it with a generic route definition.
+    if (
+      location.pathname.startsWith('/past-papers/view/')
+      || location.pathname.startsWith('/gk/cat/')
+      || location.pathname === '/css-2026-written-result'
+    ) {
       setMeta('meta[name="robots"]', 'content', robots)
       return
     }
@@ -33,10 +42,9 @@ export default function RouteSeo() {
     setMeta('meta[name="twitter:description"]', 'content', description)
     document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonical)
 
-    document.getElementById('cssv-runtime-route-structured-data')?.remove()
-    if (route && route.match === 'exact') {
-      const script = document.createElement('script')
-      script.id = 'cssv-runtime-route-structured-data'
+    if (route && route.match === 'exact' && route.path !== '/') {
+      const script = routeSchema || document.createElement('script')
+      script.id = 'cssv-route-structured-data'
       script.type = 'application/ld+json'
       script.text = JSON.stringify({
         '@context': 'https://schema.org',
@@ -46,7 +54,9 @@ export default function RouteSeo() {
         url: canonical,
         isPartOf: { '@type': 'WebSite', name: 'CSS Vista', url: `${CANONICAL_ORIGIN}/` },
       })
-      document.head.appendChild(script)
+      if (!routeSchema) document.head.appendChild(script)
+    } else {
+      routeSchema?.remove()
     }
   }, [location.pathname, location.search])
 

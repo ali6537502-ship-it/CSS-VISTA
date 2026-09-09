@@ -12,7 +12,7 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
   throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${siteUrl.href}`)
 }
 const siteOrigin = siteUrl.origin
-const SEO_CONTENT_REFRESH = '2026-09-05'
+const SEO_CONTENT_REFRESH = '2026-09-09'
 
 function escapeHtml(value) {
   return String(value)

@@ -9,7 +9,7 @@ const clientDir = process.env.CSSV_CLIENT_DIR
   : join(root, 'dist', 'client')
 const siteUrl = new URL(process.env.SITE_ORIGIN || 'https://www.css-vista.com')
 const siteOrigin = siteUrl.origin
-const refreshDate = '2026-09-05'
+const refreshDate = '2026-09-09'
 
 function xmlDocument(entries) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join('\n')}\n</urlset>\n`

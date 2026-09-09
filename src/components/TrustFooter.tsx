@@ -50,7 +50,7 @@ export default function TrustFooter() {
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
           <section>
             <Link to="/" className="inline-flex items-center" aria-label="CSS Vista home">
-              <img src="/images/logo.png?v=20260810b" alt="CSS Vista" className="h-12 w-auto object-contain" />
+              <img src="/images/logo.webp?v=20260909" alt="CSS Vista" width="920" height="300" loading="lazy" decoding="async" className="h-12 w-auto object-contain" />
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">{site.tagline}. Independent educational preparation; official examination rules and notices should be verified with the relevant examining authority.</p>
           </section>

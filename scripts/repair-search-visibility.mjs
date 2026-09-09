@@ -12,9 +12,8 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
   throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${siteUrl.href}`)
 }
 const siteOrigin = siteUrl.origin
-const SEO_REFRESH_DATE = '2026-09-05'
+const SEO_REFRESH_DATE = '2026-09-09'
 const organizationId = `${siteOrigin}/#organization`
-const websiteId = `${siteOrigin}/#website`
 
 function escapeHtml(value) {
   return String(value)
@@ -30,6 +29,9 @@ function jsonLd(value) {
 }
 
 function replaceSearchMeta(html, { title, description, canonical, structuredData }) {
+  const routeSchema = structuredData
+    ? `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n`
+    : ''
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(description)}" />`)
@@ -41,7 +43,7 @@ function replaceSearchMeta(html, { title, description, canonical, structuredData
     .replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="index, follow, max-image-preview:large" />')
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/\s*<script id="cssv-route-structured-data"[^>]*>[\s\S]*?<\/script>/, '')
-    .replace('</head>', `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
+    .replace('</head>', `${routeSchema}  </head>`)
 }
 
 function replaceRootBody(html, body, label) {
@@ -55,40 +57,6 @@ function patchOrganizationReferences(html) {
     .replaceAll(`"publisher":{"@type":"Organization","name":"CSS Vista","url":"${siteOrigin}/"}`, `"publisher":{"@id":"${organizationId}"}`)
     .replaceAll(`"provider":{"@type":"Organization","name":"CSS Vista","url":"${siteOrigin}"}`, `"provider":{"@id":"${organizationId}"}`)
     .replaceAll(`"author":{"@type":"Organization","name":"CSS Vista","url":"${siteOrigin}"}`, `"author":{"@id":"${organizationId}"}`)
-}
-
-function homeStructuredData() {
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebSite',
-        '@id': websiteId,
-        url: `${siteOrigin}/`,
-        name: 'CSS Vista',
-        alternateName: ['CSS VISTA', 'CSS Vista Pakistan'],
-        description: 'CSS and PMS competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.',
-        inLanguage: 'en',
-        publisher: { '@id': organizationId },
-      },
-      {
-        '@type': 'EducationalOrganization',
-        '@id': organizationId,
-        name: 'CSS Vista',
-        alternateName: 'CSS VISTA',
-        url: `${siteOrigin}/`,
-        logo: {
-          '@type': 'ImageObject',
-          url: `${siteOrigin}/icon-512.png`,
-          contentUrl: `${siteOrigin}/icon-512.png`,
-          width: 512,
-          height: 512,
-        },
-        image: `${siteOrigin}/og.png`,
-        sameAs: ['https://www.instagram.com/cssvista/', 'https://www.youtube.com/@cssvista'],
-      },
-    ],
-  }
 }
 
 function homeBody() {
@@ -107,7 +75,7 @@ function homeBody() {
     ['/grammar-vocabulary', 'Grammar and vocabulary'],
   ]
   const links = resources.map(([href, label]) => `<li><a href="${href}" class="font-semibold text-emerald-800 underline underline-offset-2">${escapeHtml(label)}</a></li>`).join('')
-  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS VISTA · Pakistan</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">CSS Vista — CSS &amp; PMS Exam Preparation in Pakistan</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">CSS Vista is a competitive examination preparation platform for aspirants in Pakistan. It brings together subject preparation, MCQ practice, CSS MPT resources, general knowledge, past papers, current affairs, notes, syllabus guidance, grammar support and study tools under one website.</p><section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Prepare with CSS Vista</h2><p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Use the subject pages for compulsory and optional preparation, practise topic-based questions, review previous examination papers, follow current-affairs material and organise revision through the study utilities available across CSS Vista.</p><ul class="mt-5 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2 lg:grid-cols-3">${links}</ul></section><section class="mt-9 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">CSS Vista preparation areas</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">The platform covers written CSS preparation, MPT practice, PMS and general-knowledge preparation, past-paper review, English Essay and grammar support, answer-writing practice, FPSC syllabus guidance and subject-specific study resources. Each public resource is linked through the main navigation and sitemap so visitors can reach the relevant section directly.</p></section></main>`
+  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS VISTA · Pakistan</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">CSS Vista</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">CSS Vista is a free CSS, PMS and one-paper competitive examination preparation platform for aspirants in Pakistan. It brings together subject preparation, MCQ practice, CSS MPT resources, general knowledge, past papers, current affairs, notes, syllabus guidance, grammar support and study tools under one website.</p><section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Prepare with CSS Vista</h2><p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Use the subject pages for compulsory and optional preparation, practise topic-based questions, review previous examination papers, follow current-affairs material and organise revision through the study utilities available across CSS Vista.</p><ul class="mt-5 grid gap-3 rounded-xl border bg-white p-5 sm:grid-cols-2 lg:grid-cols-3">${links}</ul></section><section class="mt-9 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">CSS Vista preparation areas</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">The platform covers written CSS preparation, MPT practice, PMS and one-paper preparation, general knowledge, past-paper review, English Essay and grammar support, answer-writing practice, FPSC syllabus guidance and subject-specific study resources. Each public resource is linked through the main navigation and sitemap so visitors can reach the relevant section directly.</p></section></main>`
 }
 
 function paperTitle(paper) {
@@ -175,10 +143,10 @@ function paperStructuredData(paper, canonical) {
 const homePath = join(clientDir, 'index.html')
 let homeHtml = await readFile(homePath, 'utf8')
 homeHtml = replaceSearchMeta(homeHtml, {
-  title: 'CSS Vista | CSS & PMS Exam Preparation in Pakistan',
-  description: 'CSS Vista is a competitive exam preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.',
+  title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform',
+  description: 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.',
   canonical: `${siteOrigin}/`,
-  structuredData: homeStructuredData(),
+  structuredData: null,
 })
 homeHtml = replaceRootBody(homeHtml, homeBody(), 'homepage')
 await writeFile(homePath, homeHtml)

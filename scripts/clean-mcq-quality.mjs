@@ -4,6 +4,7 @@ import path from 'node:path'
 const root = process.cwd()
 const apply = process.argv.includes('--apply')
 const check = process.argv.includes('--check')
+const verbose = process.argv.includes('--verbose')
 const today = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Asia/Karachi', year: 'numeric', month: '2-digit', day: '2-digit',
 }).format(new Date())
@@ -39,7 +40,10 @@ const stopWords = new Set([
   'were', 'what', 'when', 'where', 'which', 'who', 'with', 'under', 'following',
 ])
 
-const tokens = (value) => new Set(normalise(value).split(' ').filter((token) => token.length > 2 && !stopWords.has(token)))
+const tokens = (value) => new Set(normalise(value).split(' ').filter((token) => (
+  !stopWords.has(token)
+  && (token.length > 2 || /\d/.test(token) || /^[a-z]$/.test(token))
+)))
 
 function similarity(leftValue, rightValue) {
   const left = tokens(leftValue)
@@ -48,6 +52,27 @@ function similarity(leftValue, rightValue) {
   let intersection = 0
   for (const token of left) if (right.has(token)) intersection += 1
   return { score: intersection / (left.size + right.size - intersection), intersection }
+}
+
+function stripNearDuplicateNoise(value) {
+  return String(value ?? '')
+    .replace(/\s*\[parallel drill \d+\]\s*$/i, '')
+    .replace(/_{2,}/g, '_')
+    .replace(/\bmain\s+(?=layers?\b)/i, '')
+    .trim()
+}
+
+function discriminatingSignature(value) {
+  const raw = String(value ?? '').normalize('NFKC')
+  const quoted = [...raw.matchAll(/[“"]([^”"]+)[”"]/g)].map((match) => normalise(match[1]))
+  const numeric = raw.match(/\b\d+(?:[.,]\d+)?%?\b/g) ?? []
+  const algebraic = raw.match(/\b[A-Za-z]\s*(?:\([^)]{1,24}\)|[=+\-*/^]\s*[A-Za-z0-9().+\-*/^]{1,24})/g) ?? []
+  const chemical = raw.match(/[A-Za-z]{1,3}[A-Za-z0-9₀-₉⁰-⁹⁺⁻]*[0-9₀-₉⁰-⁹⁺⁻]/gu) ?? []
+  return [...quoted, ...numeric.map(normalise), ...algebraic.map(normalise), ...chemical.map(normalise)].sort().join('|')
+}
+
+function isStatementCombination(value) {
+  return /\bstatement\s+(?:i|ii)\b|بيان\s*(?:i|ii)/iu.test(String(value ?? ''))
 }
 
 const gkQuestion = (question) => question.q
@@ -191,11 +216,19 @@ function markNearDuplicates({ questions, removed, getQuestion, getAnswer, getTop
     const kept = []
     for (const question of ranked) {
       const duplicate = kept.some((candidate) => {
-        const comparison = similarity(getQuestion(question), getQuestion(candidate))
+        const questionStem = stripNearDuplicateNoise(getQuestion(question))
+        const candidateStem = stripNearDuplicateNoise(getQuestion(candidate))
+        const canonicalQuestion = exactNormalise(questionStem)
+        const canonicalCandidate = exactNormalise(candidateStem)
+        if (canonicalQuestion && canonicalQuestion === canonicalCandidate) return true
+        if (isStatementCombination(questionStem) || isStatementCombination(candidateStem)) return false
+        const comparison = similarity(questionStem, candidateStem)
         if (comparison.intersection < 3) return false
         const sameExplanation = normalise(getExplanation(question)).length >= 12 &&
           normalise(getExplanation(question)) === normalise(getExplanation(candidate))
-        return comparison.score >= 0.84 || (sameExplanation && comparison.score >= 0.64)
+        return sameExplanation
+          && comparison.score >= 0.64
+          && discriminatingSignature(questionStem) === discriminatingSignature(candidateStem)
       })
       if (duplicate) {
         removed.set(question.id, 'near-identical wording of the same fact')
@@ -307,6 +340,7 @@ for (const category of bankIndex.categories) {
     const filename = `cat-${category.slug}-${chunk}.json`
     const publicPath = path.join(publicMcqDir, filename)
     const bundledPath = path.join(bundledMcqDir, filename)
+    if (!fs.existsSync(bundledPath)) throw new Error(`${filename}: bundled copy is missing.`)
     if (!fs.readFileSync(publicPath).equals(fs.readFileSync(bundledPath))) throw new Error(`${filename}: public and bundled copies differ.`)
     const rows = JSON.parse(fs.readFileSync(publicPath, 'utf8'))
     shards.push({ publicPath, bundledPath, rows })
@@ -335,6 +369,12 @@ const summary = {
   subjects: cssResults.filter((result) => result.removed.size).map((result) => ({
     slug: result.subject.slug, before: result.before, removed: result.removed.size, retained: result.retained.length, reasons: result.reasons,
   })),
+  ...(verbose ? {
+    candidates: {
+      gk: gkResults.flatMap((result) => [...result.removed.entries()].map(([id, reason]) => ({ id, reason }))),
+      css: cssResults.flatMap((result) => [...result.removed.entries()].map(([id, reason]) => ({ id, reason }))),
+    },
+  } : {}),
 }
 
 if (!apply) {

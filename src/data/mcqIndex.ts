@@ -1,11 +1,11 @@
 // GK question-bank index - bundled at build time so all categories render instantly.
-// Mirrors public/mcq/index.json.
+// Mirrors public/mcq/index.json; regenerate with scripts/clean-mcq-quality.mjs.
 
 import type { BankIndex } from './mcq'
 
 export const bundledBankIndex: BankIndex = {
-  "generatedAt": "2026-09-04",
-  "total": 21939,
+  "generatedAt": "2026-09-09",
+  "total": 22216,
   "categories": [
     {
       "slug": "pakistan-geography",
@@ -17,15 +17,15 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "mountains",
       "name": "Mountains",
-      "count": 55,
-      "chunks": 1,
+      "count": 59,
+      "chunks": 2,
       "mpt": true
     },
     {
       "slug": "rivers",
       "name": "Rivers",
-      "count": 65,
-      "chunks": 1,
+      "count": 76,
+      "chunks": 2,
       "mpt": true
     },
     {
@@ -38,15 +38,15 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "deserts",
       "name": "Deserts",
-      "count": 40,
-      "chunks": 1,
+      "count": 47,
+      "chunks": 2,
       "mpt": true
     },
     {
       "slug": "straits-canals",
       "name": "Straits and Canals",
-      "count": 116,
-      "chunks": 1,
+      "count": 122,
+      "chunks": 2,
       "mpt": true
     },
     {
@@ -157,7 +157,7 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "science",
       "name": "Science",
-      "count": 4011,
+      "count": 4003,
       "chunks": 7,
       "mpt": true
     },
@@ -178,15 +178,15 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "environment",
       "name": "Environment",
-      "count": 426,
+      "count": 425,
       "chunks": 2,
       "mpt": true
     },
     {
       "slug": "economics",
       "name": "Economics",
-      "count": 76,
-      "chunks": 1,
+      "count": 84,
+      "chunks": 2,
       "mpt": true
     },
     {
@@ -227,8 +227,8 @@ export const bundledBankIndex: BankIndex = {
     {
       "slug": "general-ability",
       "name": "General Ability",
-      "count": 250,
-      "chunks": 1,
+      "count": 500,
+      "chunks": 6,
       "mpt": true
     },
     {

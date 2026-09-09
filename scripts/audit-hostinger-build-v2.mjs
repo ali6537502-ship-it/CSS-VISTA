@@ -1,4 +1,4 @@
-import { access, open, readFile, readdir } from 'node:fs/promises'
+import { access, open, readFile, readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
@@ -33,6 +33,11 @@ await Promise.all([
   access(join(dist, 'favicon.ico')),
   access(join(dist, 'favicon.png')),
   access(join(dist, 'icon-512.png')),
+  access(join(dist, 'images', 'logo.webp')),
+  access(join(dist, 'fonts', 'inter-latin-variable.woff2')),
+  access(join(dist, 'fonts', 'noto-nastaliq-urdu-arabic-variable.woff2')),
+  access(join(dist, 'fonts', 'INTER-OFL.txt')),
+  access(join(dist, 'fonts', 'NOTO-NASTALIQ-URDU-OFL.txt')),
   access(join(dist, 'ads.txt')),
   access(join(dist, 'googlec96e2248070e0570.html')),
   access(join(dist, 'seo', 'routes', 'notes.html')),
@@ -83,16 +88,21 @@ for (const route of ROUTE_REGISTRY.filter((entry) => !entry.indexable && entry.m
   assert(!uniqueLocs.has(`${siteOrigin}${route.path}`), `Protected route leaked into sitemap: ${route.path}`)
 }
 
-assert(indexHtml.includes('<title>CSS Vista | CSS &amp; PMS Exam Preparation in Pakistan</title>') || indexHtml.includes('<title>CSS Vista | CSS & PMS Exam Preparation in Pakistan</title>'), 'Homepage search title is incorrect')
+assert(indexHtml.includes('<title>CSS Vista | Free CSS, PMS &amp; One-Paper Preparation Platform</title>') || indexHtml.includes('<title>CSS Vista | Free CSS, PMS & One-Paper Preparation Platform</title>'), 'Homepage search title is incorrect')
 assert(indexHtml.includes('name="application-name" content="CSS Vista"'), 'Homepage application-name brand signal is missing')
 assert(indexHtml.includes(`rel="canonical" href="${siteOrigin}/"`), 'Homepage canonical is missing or incorrect')
 assert(indexHtml.includes(`rel="home" href="${siteOrigin}/" title="CSS Vista"`), 'Homepage rel=home signal is missing')
 assert(/<h1\b[^>]*>CSS Vista<\/h1>/.test(indexHtml), 'Homepage H1 must identify the brand as CSS Vista')
-assert(indexHtml.includes('CSS Vista is an independent CSS and PMS exam preparation platform in Pakistan'), 'Homepage meta description is not the reinforced production description')
+assert(indexHtml.includes('CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan'), 'Homepage meta description is not the reinforced production description')
+assert(indexHtml.includes('rel="preload" as="image"') && indexHtml.includes('css-vista-main-poster-720.webp'), 'Homepage LCP poster is not preloaded responsively')
 assert(indexHtml.includes('EducationalOrganization'), 'Homepage organization structured data is missing')
 assert(indexHtml.includes('WebSite'), 'Homepage WebSite structured data is missing')
 assert(indexHtml.includes('https://www.instagram.com/cssvista/'), 'Homepage structured data is missing the official Instagram profile')
 assert(indexHtml.includes('https://www.youtube.com/@cssvista'), 'Homepage structured data is missing the official YouTube profile')
+assert(indexHtml.includes('id="cssv-site-structured-data"'), 'Homepage site structured data needs a stable identifier')
+assert(!indexHtml.includes('id="cssv-route-structured-data"'), 'Homepage must not duplicate its WebSite structured data as route structured data')
+assert(indexHtml.includes('href="/fonts/inter-latin-variable.woff2"'), 'Homepage does not preload the self-hosted primary font')
+assert(!indexHtml.includes('fonts.googleapis.com'), 'Homepage still depends on render-blocking Google Fonts CSS')
 assert(!indexHtml.includes('__SITE_ORIGIN__'), 'Homepage still contains an unresolved origin placeholder')
 
 assert(notesHtml.includes('data-cssv-brand-home-link'), 'Indexable internal pages are missing a visible CSS Vista home-brand link')
@@ -106,6 +116,9 @@ assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advert
 
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === registeredPapers.length, `Expected ${registeredPapers.length} direct past-paper SEO pages`)
 assert(registeredPapers.length > 0, 'Past-paper registry must not be empty')
+
+const optimizedLogo = await stat(join(dist, 'images', 'logo.webp'))
+assert(optimizedLogo.size < 50_000, `Optimized header logo is unexpectedly large: ${optimizedLogo.size} bytes`)
 
 const samplePdf = join(dist, registeredPapers[0].fileUrl.replace(/^\/+/, ''))
 const handle = await open(samplePdf, 'r')

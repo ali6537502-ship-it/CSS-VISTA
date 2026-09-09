@@ -129,7 +129,11 @@ function loadProgress(): ProgressState {
 }
 
 function saveProgress(progress: ProgressState) {
-  try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)) } catch {}
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress))
+  } catch {
+    // Storage can be unavailable in private or restricted browser contexts.
+  }
 }
 
 function LessonNavigation({

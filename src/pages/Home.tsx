@@ -119,7 +119,7 @@ function HomeHero() {
       aria-labelledby="css-vista-home-title"
     >
       <h1 id="css-vista-home-title" className="sr-only">
-        CSS VISTA — built for aspirants, open to everyone
+        CSS Vista — free CSS, PMS and one-paper preparation platform
       </h1>
       <picture className="cssv-home-hero-picture">
         <img
@@ -470,7 +470,17 @@ function WeeklyMagazineCard() {
             <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
             {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
               <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
-                <img src={weeklyMagazine.coverUrl} alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`} loading="lazy" className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full" />
+                <img
+                  src={weeklyMagazine.coverUrl}
+                  srcSet={weeklyMagazine.coverUrl.includes('03-september-2026') ? '/magazines/css-vista-current-affairs-weekly-03-september-2026-240.webp 240w, /magazines/css-vista-current-affairs-weekly-03-september-2026-480.webp 480w, /magazines/css-vista-current-affairs-weekly-03-september-2026.webp 900w' : undefined}
+                  sizes="(max-width: 639px) 45vw, (max-width: 1023px) 34vw, 320px"
+                  alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`}
+                  width="900"
+                  height="1273"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full"
+                />
               </a>
             ) : (
               <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>

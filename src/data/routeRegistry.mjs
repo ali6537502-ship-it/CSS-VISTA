@@ -37,7 +37,7 @@ const protectedPage = (path, title, description, options = {}) => ({
  * server routing and advertising eligibility. Unknown routes fail closed.
  */
 export const ROUTE_REGISTRY = [
-  publicPage('/', 'CSS and PMS Competitive Exam Preparation', 'Free CSS and PMS preparation resources including MCQs, past papers, current affairs, notes, syllabus guidance and study tools.', 'CSS Vista competitive examination preparation', { adMode: 'none', minimumHeight: 0, schemaType: 'WebSite' }),
+  publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista competitive examination preparation', { title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', adMode: 'none', minimumHeight: 0, schemaType: 'WebSite' }),
   publicPage('/start-css', 'How to Start CSS Preparation', 'A practical guide to CSS eligibility, examination stages, subject selection and an effective preparation roadmap.', 'How to start CSS preparation'),
   publicPage('/subjects/compulsory', 'CSS Compulsory Subjects', 'Explore the compulsory CSS subjects, syllabus coverage and study resources for the written examination.', 'CSS compulsory subjects'),
   publicPage('/subjects/compulsory/essay', 'CSS English Essay', 'Study the CSS English Essay syllabus, preparation approach and relevant learning resources.', 'CSS English Essay'),
@@ -61,6 +61,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/answer-writing', 'Answer-Writing Practice', 'Practise timed competitive-examination answers with an outline, structured sections, word count, local saving and a self-assessment rubric.', 'Answer-writing practice', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/test-series', 'Customized Test Series', 'Build a personalised written-test schedule, divide selected syllabi across tests, review checked-paper samples and prepare a printable plan.', 'Customized written test series', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/study-tools', 'CSS Study Tools', 'Use planners, timers, trackers, revision organisers and preparation utilities designed for focused daily competitive-examination study.', 'CSS study tools', { adMode: 'none', minimumHeight: 0 }),
+  protectedPage('/photo-compressor', 'Photo Compressor', 'Interactive photo-compression utility.'),
   publicPage('/games', 'Interactive Practice', 'Use academic matching activities and interactive practice tools for quick revision and recall.', 'Interactive academic practice', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/psych-viva', 'CSS Psychological Assessment and Viva Guidance', 'Prepare for the CSS psychological assessment and viva with structured guidance and resources.', 'CSS psychological assessment and viva guidance'),
   publicPage('/fpsc-updates', 'FPSC Updates and CSS Results', 'Read important FPSC notices, CSS examination updates and result information.', 'FPSC updates and CSS results'),
@@ -104,6 +105,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { title: 'About CSS Vista', adMode: 'none', minimumHeight: 0 }),
   publicPage('/contact', 'Contact CSS Vista', 'Use CSS Vista verified public channels for general enquiries, technical issues, corrections, privacy and copyright concerns.', 'Contact CSS Vista', { title: 'Contact CSS Vista', adMode: 'none', minimumHeight: 0 }),
   protectedPage('/admin', 'Administration', 'Private administration area.', { robots: 'noindex, nofollow' }),
+  protectedPage('/admin/login', 'Administration Sign In', 'Private administration sign-in page.', { robots: 'noindex, nofollow' }),
 ]
 
 export function normalizeRoutePath(pathname) {

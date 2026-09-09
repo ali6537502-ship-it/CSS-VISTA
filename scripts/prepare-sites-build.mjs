@@ -53,6 +53,10 @@ function jsonLd(value) {
 }
 
 function replaceMeta(html, { title, description, canonical, body, structuredData, robots = 'index, follow', ogType = 'website', additionalMeta = '' }) {
+  const headAdditions = [
+    additionalMeta ? `    ${additionalMeta}` : '',
+    structuredData ? `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>` : '',
+  ].filter(Boolean).join('\n')
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeHtml(description)}" />`)
@@ -64,7 +68,7 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
     .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${escapeHtml(robots)}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
-    .replace('</head>', `${additionalMeta ? `    ${additionalMeta}\n` : ''}    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
+    .replace('</head>', `${headAdditions ? `${headAdditions}\n` : ''}  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
     .replaceAll('__SITE_ORIGIN__', siteOrigin)
 }
@@ -127,7 +131,7 @@ for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
     description: route.description,
     canonical,
     robots: route.robots,
-    structuredData: routeStructuredData(route, canonical),
+    structuredData: route.path === '/' ? null : routeStructuredData(route, canonical),
     body: routeBody(route),
   })
   if (route.path === '/') await writeFile(indexPath, html)
