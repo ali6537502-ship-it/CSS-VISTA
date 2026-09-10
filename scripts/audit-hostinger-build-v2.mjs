@@ -105,6 +105,15 @@ assert(indexHtml.includes('href="/fonts/inter-latin-variable.woff2"'), 'Homepage
 assert(!indexHtml.includes('fonts.googleapis.com'), 'Homepage still depends on render-blocking Google Fonts CSS')
 assert(!indexHtml.includes('__SITE_ORIGIN__'), 'Homepage still contains an unresolved origin placeholder')
 
+// The crawler-visible landing copy must remain in the production HTML, but the
+// first viewport should resemble the interactive homepage rather than exposing
+// the separate SEO article while React is starting.
+assert(indexHtml.includes('data-cssv-home-first-paint'), 'Homepage first-paint shell is missing')
+assert(indexHtml.includes('id="cssv-home-first-paint-critical"'), 'Homepage first-paint critical styling is missing')
+assert(!indexHtml.includes('Preparing your study page'), 'Legacy visible prerender loading message leaked into the homepage')
+assert(indexHtml.includes('What you can do here'), 'Crawler-visible homepage preparation content was removed')
+assert(indexHtml.indexOf('data-cssv-home-first-paint') < indexHtml.indexOf('What you can do here'), 'Homepage first-paint shell must precede crawler-visible landing content')
+
 assert(notesHtml.includes('data-cssv-brand-home-link'), 'Indexable internal pages are missing a visible CSS Vista home-brand link')
 assert(notesHtml.includes('href="/" rel="home"'), 'Internal brand link does not point to the homepage')
 assert(!notesHtml.includes('__SITE_ORIGIN__'), 'Internal SEO page still contains an unresolved origin placeholder')
