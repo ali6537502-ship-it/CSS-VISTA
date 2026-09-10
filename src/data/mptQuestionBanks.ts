@@ -28,9 +28,9 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
   },
   abilities: {
     id: 'abilities',
-    name: 'General Science & Ability',
-    cssSubjectSlug: 'general-science-and-ability',
-    expectedCount: 478,
+    name: 'General Abilities',
+    centralSlugs: ['general-ability'],
+    expectedCount: 900,
   },
   reasoning: {
     id: 'reasoning',
