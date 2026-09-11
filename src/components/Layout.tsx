@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, type LucideIcon,
 } from 'lucide-react'
 import { site } from '@/data/site'
 import { css2026WrittenResult } from '@/data/css2026Result'
@@ -16,7 +16,6 @@ import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/st
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
-import { ManagedContentAd } from '@/components/Ads'
 import StudyActivityTracker from '@/components/StudyActivityTracker'
 import RouteSeo from '@/components/RouteSeo'
 import { requestPageBack } from '@/lib/backNavigation'
@@ -92,6 +91,19 @@ const nav = [
       { label: 'Psychological Assessment & Viva', to: '/psych-viva', icon: UserCheck },
       { label: 'Occupational Groups', to: '/services', icon: Landmark },
       { label: 'Success & Failure Analysis', to: '/analysis', icon: TrendingUp },
+    ],
+  },
+  {
+    label: 'Policies',
+    items: [
+      { label: 'Legal & Trust Centre', to: '/legal', icon: ShieldCheck },
+      { label: 'Privacy Policy', to: '/privacy-policy', icon: ShieldCheck },
+      { label: 'Cookie Policy', to: '/cookie-policy', icon: ShieldCheck },
+      { label: 'Terms & Conditions', to: '/terms-and-conditions', icon: FileCheck2 },
+      { label: 'Disclaimer', to: '/disclaimer', icon: FileText },
+      { label: 'Copyright Policy', to: '/copyright', icon: FileText },
+      { label: 'Editorial & Corrections Policy', to: '/editorial-policy', icon: FileCheck2 },
+      { label: 'Contact CSS Vista', to: '/contact', icon: MessageCircle },
     ],
   },
   { label: 'About Us', to: '/mentors' },
@@ -897,7 +909,11 @@ export default function Layout() {
               <UserCheck className="h-4 w-4 text-emerald-800" />
               <span>About Us</span>
             </Link>
-            <SocialLinks />
+            <Link to="/legal" className="flex h-9 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/70 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-emerald-100" aria-label="Open CSS Vista policies and legal information">
+              <ShieldCheck className="h-4 w-4 text-emerald-800" />
+              <span>Policies</span>
+            </Link>
+            <div className="hidden 2xl:block"><SocialLinks /></div>
           </div>
 
           <button
@@ -988,6 +1004,11 @@ export default function Layout() {
           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Follow CSS Vista</span>
           <SocialLinks compact />
         </div>
+        <nav className="grid grid-cols-3 border-b bg-emerald-50/45 px-3 py-2 text-center text-[11px] font-semibold text-emerald-900" aria-label="Privacy and policy shortcuts">
+          <NavLink to="/privacy-policy" onClick={() => setMobileOpen(false)} className="rounded-md px-2 py-2 hover:bg-white">Privacy</NavLink>
+          <NavLink to="/cookie-policy" onClick={() => setMobileOpen(false)} className="rounded-md px-2 py-2 hover:bg-white">Cookies</NavLink>
+          <NavLink to="/legal" onClick={() => setMobileOpen(false)} className="rounded-md px-2 py-2 hover:bg-white">All policies</NavLink>
+        </nav>
         <nav className="flex-1 overflow-y-auto px-3 py-3" aria-label="Mobile">
           <div className="flex items-center justify-between px-2 pb-2">
             <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
@@ -1066,7 +1087,6 @@ export default function Layout() {
         >
           <Outlet />
         </div>
-        <ManagedContentAd />
       </main>
 
       <DeferredVistaShortcut />

@@ -22,7 +22,7 @@ const homeFirstPaint = `<div data-cssv-home-first-paint aria-busy="true">
     <div class="cssv-fp-header-inner">
       <span class="cssv-fp-menu" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
       <a class="cssv-fp-logo" href="/" aria-label="CSS Vista home"><img src="/images/logo.webp?v=20260909" alt="CSS Vista - official logo" width="480" height="157" decoding="async" /></a>
-      <nav class="cssv-fp-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/css-mcqs">Subject MCQs</a><a href="/gk">GK World</a><a href="/mpt">MPT Practice</a><a href="/past-papers">Past Papers</a></nav>
+      <nav class="cssv-fp-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/css-mcqs">Subject MCQs</a><a href="/gk">GK World</a><a href="/mpt">MPT Practice</a><a href="/past-papers">Past Papers</a><a href="/legal">Policies</a></nav>
     </div>
   </header>
   <div class="cssv-fp-content">

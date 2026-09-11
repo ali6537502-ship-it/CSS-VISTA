@@ -42,13 +42,16 @@ export function getAdRoutePolicy(pathname: string, search = ''): AdRoutePolicy {
     }
   }
 
-  const eligible = route.adMode === 'content'
+  const autoEligible = route.adMode === 'content'
+  const manualEligible = autoEligible && route.manualAdPlacement === true
   return {
-    autoAdsEnabled: eligible,
-    manualAdsEnabled: eligible,
-    reason: eligible ? 'Substantial public content' : 'Protected route',
+    autoAdsEnabled: autoEligible,
+    manualAdsEnabled: manualEligible,
+    reason: autoEligible
+      ? (manualEligible ? 'Substantial public content with an audited manual placement' : 'Substantial public content; Auto Ads only')
+      : 'Protected route',
     placementType: route.placementType,
-    minimumHeight: eligible ? route.minimumHeight : 0,
+    minimumHeight: manualEligible ? route.minimumHeight : 0,
   }
 }
 

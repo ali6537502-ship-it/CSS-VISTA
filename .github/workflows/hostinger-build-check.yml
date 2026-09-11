@@ -37,6 +37,9 @@ jobs:
           node -e "console.log(require.resolve('react-router/package.json'))"
           test -f node_modules/react-router/dist/development/index.d.ts
 
+      - name: Verify AdSense route and policy safeguards
+        run: npm run test:ads
+
       - name: Build with default Hostinger command
         run: npm run build
 
@@ -129,3 +132,33 @@ jobs:
           done
           echo "::warning::The live Hostinger backend health endpoint could not be verified after retries."
           exit 0
+
+  live-adsense-readiness:
+    name: Live AdSense and crawler readiness
+    if: github.event_name == 'push'
+    needs:
+      - clean-lockfile-parity
+      - documented-hostinger-parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Wait for Hostinger and verify the deployed crawler surface
+        shell: bash
+        run: |
+          for attempt in $(seq 1 20); do
+            echo "AdSense production probe attempt ${attempt}"
+            if node scripts/check-adsense-production.mjs; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 20 ]; then sleep 15; fi
+          done
+          echo "::error::Hostinger did not expose the expected AdSense and crawler files within the verification window."
+          exit 1

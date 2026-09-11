@@ -44,8 +44,11 @@ function loadAdSenseOnce() {
   return adsenseLoadPromise
 }
 
-function protectVignetteLinks(currentPath: string, currentSearch: string) {
-  document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((anchor) => {
+function protectVignetteLinks(currentPath: string, currentSearch: string, root: ParentNode = document) {
+  const anchors = [...root.querySelectorAll<HTMLAnchorElement>('a[href]')]
+  if (root instanceof HTMLAnchorElement && root.matches('a[href]')) anchors.unshift(root)
+
+  anchors.forEach((anchor) => {
     let destination: URL
     try {
       destination = new URL(anchor.href, window.location.origin)
@@ -85,9 +88,30 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     protectVignetteLinks(location.pathname, location.search)
-    const observer = new MutationObserver(() => protectVignetteLinks(location.pathname, location.search))
+    const pendingRoots = new Set<ParentNode>()
+    let scheduled = false
+    let active = true
+    const flush = () => {
+      scheduled = false
+      if (!active) return
+      pendingRoots.forEach((root) => protectVignetteLinks(location.pathname, location.search, root))
+      pendingRoots.clear()
+    }
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
+        if (node instanceof HTMLElement) pendingRoots.add(node)
+      }))
+      if (pendingRoots.size && !scheduled) {
+        scheduled = true
+        queueMicrotask(flush)
+      }
+    })
     observer.observe(document.body, { childList: true, subtree: true })
-    return () => observer.disconnect()
+    return () => {
+      active = false
+      pendingRoots.clear()
+      observer.disconnect()
+    }
   }, [location.pathname, location.search])
 
   useEffect(() => {

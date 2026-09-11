@@ -9,14 +9,16 @@ const clientDir = process.env.CSSV_CLIENT_DIR
   : join(root, 'dist', 'client')
 const siteUrl = new URL(process.env.SITE_ORIGIN || 'https://www.css-vista.com')
 const siteOrigin = siteUrl.origin
-const refreshDate = '2026-09-09'
+// This is the modification date of the generated child sitemap files, not a
+// blanket claim that every listed page changed on the same date.
+const sitemapBuildDate = new Date().toISOString().slice(0, 10)
 
 function xmlDocument(entries) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join('\n')}\n</urlset>\n`
 }
 
 function sitemapIndex(names) {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${names.map((name) => `  <sitemap><loc>${siteOrigin}/${name}</loc><lastmod>${refreshDate}</lastmod></sitemap>`).join('\n')}\n</sitemapindex>\n`
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${names.map((name) => `  <sitemap><loc>${siteOrigin}/${name}</loc><lastmod>${sitemapBuildDate}</lastmod></sitemap>`).join('\n')}\n</sitemapindex>\n`
 }
 
 const sitemapPath = join(clientDir, 'sitemap.xml')

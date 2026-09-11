@@ -11,6 +11,7 @@ export interface RouteDefinition {
   indexable: boolean
   schemaType: string
   adMode: AdMode
+  manualAdPlacement: boolean
   placementType: 'pre-footer' | 'article-break' | 'category-break' | 'publication-break'
   minimumHeight: number
 }

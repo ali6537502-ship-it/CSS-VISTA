@@ -12,7 +12,6 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
   throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${siteUrl.href}`)
 }
 const siteOrigin = siteUrl.origin
-const SEO_REFRESH_DATE = '2026-09-09'
 const organizationId = `${siteOrigin}/#organization`
 
 function escapeHtml(value) {
@@ -183,9 +182,5 @@ try {
   // Optional in non-production preview artifacts.
 }
 
-const sitemapPath = join(clientDir, 'sitemap.xml')
-let sitemap = await readFile(sitemapPath, 'utf8')
-// The public HTML surface was materially refreshed on this date. Keep this
-// stable across later builds until another real search/content refresh occurs.
-sitemap = sitemap.replace(/<url><loc>([^<]+)<\/loc>(?!<lastmod>)/g, `<url><loc>$1</loc><lastmod>${SEO_REFRESH_DATE}</lastmod>`)
-await writeFile(sitemapPath, sitemap)
+// Route-specific last-modified values are emitted only when a truthful source
+// date exists. Do not stamp every URL with a release date.

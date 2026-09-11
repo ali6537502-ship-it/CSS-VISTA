@@ -45,11 +45,13 @@ await Promise.all([
   access(join(dist, '404.html')),
 ])
 
-const [indexHtml, htaccess, robots, sitemapIndex, notesHtml, paperFiles, ...childXmls] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, notesHtml, paperFiles, ...childXmls] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
   readFile(join(dist, 'sitemap.xml'), 'utf8'),
+  readFile(join(dist, 'ads.txt'), 'utf8'),
+  readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
   readFile(join(dist, 'seo', 'routes', 'notes.html'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
   ...childSitemaps.map((name) => readFile(join(dist, name), 'utf8')),
@@ -104,6 +106,10 @@ assert(!indexHtml.includes('id="cssv-route-structured-data"'), 'Homepage must no
 assert(indexHtml.includes('href="/fonts/inter-latin-variable.woff2"'), 'Homepage does not preload the self-hosted primary font')
 assert(!indexHtml.includes('fonts.googleapis.com'), 'Homepage still depends on render-blocking Google Fonts CSS')
 assert(!indexHtml.includes('__SITE_ORIGIN__'), 'Homepage still contains an unresolved origin placeholder')
+assert(indexHtml.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"'), 'Homepage AdSense ownership meta tag is missing')
+assert(adsTxt.trim() === 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0', 'ads.txt publisher record is missing or altered')
+assert(!adsTxt.startsWith('\uFEFF'), 'ads.txt contains a byte-order mark')
+assert(verificationFile.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Search Console verification file is missing or altered')
 
 // The crawler-visible landing copy must remain in the production HTML, but the
 // first viewport should resemble the interactive homepage rather than exposing
@@ -113,6 +119,8 @@ assert(indexHtml.includes('id="cssv-home-first-paint-critical"'), 'Homepage firs
 assert(!indexHtml.includes('Preparing your study page'), 'Legacy visible prerender loading message leaked into the homepage')
 assert(indexHtml.includes('What you can do here'), 'Crawler-visible homepage preparation content was removed')
 assert(indexHtml.indexOf('data-cssv-home-first-paint') < indexHtml.indexOf('What you can do here'), 'Homepage first-paint shell must precede crawler-visible landing content')
+assert(indexHtml.includes('href="/legal"'), 'Homepage initial HTML does not expose the Legal & Trust Centre')
+assert(indexHtml.includes('href="/privacy-policy"'), 'Homepage initial HTML does not expose the Privacy Policy')
 
 assert(notesHtml.includes('data-cssv-brand-home-link'), 'Indexable internal pages are missing a visible CSS Vista home-brand link')
 assert(notesHtml.includes('href="/" rel="home"'), 'Internal brand link does not point to the homepage')

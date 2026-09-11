@@ -19,8 +19,10 @@ test('private, legal, viewer and active question routes are ad-free', () => {
   const protectedRoutes = [
     '/mpt', '/mpt/bank/everyday-science', '/gk', '/gk/cat/islamic-general-knowledge',
     '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
+    '/current-affairs',
     '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
-    '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy',
+    '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy-policy',
+    '/cookie-policy', '/terms-and-conditions', '/disclaimer', '/copyright', '/editorial-policy', '/legal', '/contact',
     '/mentors', '/handwritten-notes', '/lectures', '/not-a-real-route',
   ]
   for (const path of protectedRoutes) {
@@ -31,18 +33,18 @@ test('private, legal, viewer and active question routes are ad-free', () => {
   }
 })
 
-test('only substantial public content is fully monetization eligible', () => {
+test('only substantial public content is Auto Ads eligible and manual units stay off until a placement is audited', () => {
   const eligibleRoutes = [
     '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
-    '/current-affairs', '/fpsc-updates', '/fpsc-syllabus', '/book-summaries',
+    '/fpsc-updates', '/fpsc-syllabus', '/book-summaries',
     '/one-liner-gk', '/css-past-paper-analysis', '/opinions',
   ]
   for (const path of eligibleRoutes) {
     const policy = getAdRoutePolicy(path)
     assert.equal(policy.autoAdsEnabled, true, path)
-    assert.equal(policy.manualAdsEnabled, true, path)
-    assert.ok(policy.minimumHeight >= 250, path)
+    assert.equal(policy.manualAdsEnabled, false, path)
+    assert.equal(policy.minimumHeight, 0, path)
   }
 })
 
@@ -55,9 +57,9 @@ test('unfinished lecture placeholder is noindex, ad-free and absent from static 
   assert.equal(INDEXABLE_STATIC_ROUTES.some((entry) => entry.path === '/lectures'), false)
 })
 
-test('current-affairs MCQ state is protected while informational content remains eligible', () => {
+test('the mixed current-affairs page stays ad-free because it contains an active MCQ state', () => {
   assert.equal(getAdRoutePolicy('/current-affairs', '?tab=mcqs').autoAdsEnabled, false)
-  assert.equal(getAdRoutePolicy('/current-affairs', '?tab=magazine').autoAdsEnabled, true)
+  assert.equal(getAdRoutePolicy('/current-affairs', '?tab=magazine').autoAdsEnabled, false)
 })
 
 test('vignettes are blocked for protected destinations and sensitive controls', () => {
@@ -76,6 +78,15 @@ test('legacy artificial timing and page-count state is absent', async () => {
   }
   const componentSource = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Ads.tsx', import.meta.url), 'utf8'))
   assert.equal(componentSource.includes('dataset.cssVistaAdsense'), false)
+})
+
+test('privacy and policy pages are discoverable from the global header navigation', async () => {
+  const source = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Layout.tsx', import.meta.url), 'utf8'))
+  for (const path of ['/legal', '/privacy-policy', '/cookie-policy', '/terms-and-conditions', '/disclaimer', '/copyright', '/editorial-policy', '/contact']) {
+    assert.equal(source.includes(`to: '${path}'`) || source.includes(`to="${path}"`), true, path)
+  }
+  assert.equal(source.includes("label: 'Policies'"), true)
+  assert.equal(source.includes('<ManagedContentAd'), false)
 })
 
 test('indexable routes have unique crawlable metadata and unknown paths fail closed', () => {

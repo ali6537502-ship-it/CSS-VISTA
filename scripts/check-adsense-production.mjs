@@ -2,8 +2,9 @@ import { findRouteDefinition } from '../src/data/routeRegistry.mjs'
 
 const expectedRecord = 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0'
 const origin = (process.env.ADSENSE_SITE_ORIGIN || 'https://www.css-vista.com').replace(/\/$/, '')
-const routes = ['/', '/current-affairs', '/consultation', '/fpsc-syllabus', '/gk', '/past-papers']
+const routes = ['/', '/current-affairs', '/consultation', '/fpsc-syllabus', '/gk', '/past-papers', '/legal', '/privacy-policy']
 const userAgent = 'AdsBot-Google (+http://www.google.com/adsbot.html)'
+const adsTxtUserAgent = 'Mediapartners-Google'
 let failed = false
 
 function result(valid, label, details) {
@@ -21,15 +22,34 @@ function escapeHtml(value) {
 }
 
 async function fetchText(url, options = {}) {
-  const response = await fetch(url, { headers: { 'user-agent': userAgent }, ...options })
+  const headers = { 'user-agent': userAgent, ...(options.headers || {}) }
+  const response = await fetch(url, { ...options, headers })
   return { response, body: await response.text() }
 }
 
 try {
-  const { response, body } = await fetchText(`${origin}/ads.txt`)
-  result(response.status === 200 && body.trim() === expectedRecord && /text\/plain/i.test(response.headers.get('content-type') || ''), 'ads.txt', `${response.status} ${response.headers.get('content-type')} -> ${response.url}`)
+  const { response, body } = await fetchText(`${origin}/ads.txt`, { headers: { 'user-agent': adsTxtUserAgent } })
+  const exactPlainText = body.trim() === expectedRecord && !body.startsWith('\uFEFF')
+  result(response.status === 200 && exactPlainText && /text\/plain/i.test(response.headers.get('content-type') || ''), 'ads.txt', `${response.status} ${response.headers.get('content-type')} -> ${response.url}`)
 } catch (error) {
   result(false, 'ads.txt', error instanceof Error ? error.message : String(error))
+}
+
+for (const url of [
+  'https://css-vista.com/ads.txt',
+  'http://css-vista.com/ads.txt',
+  'http://www.css-vista.com/ads.txt',
+]) {
+  try {
+    const { response, body } = await fetchText(url, { headers: { 'user-agent': adsTxtUserAgent } })
+    const valid = response.status === 200
+      && response.url === `${origin}/ads.txt`
+      && body.trim() === expectedRecord
+      && /text\/plain/i.test(response.headers.get('content-type') || '')
+    result(valid, `ads.txt variant ${url}`, `${response.status} -> ${response.url}`)
+  } catch (error) {
+    result(false, `ads.txt variant ${url}`, error instanceof Error ? error.message : String(error))
+  }
 }
 
 try {
@@ -86,7 +106,7 @@ for (const path of routes) {
       && body.includes(route.h1)
       && body.includes('<h1')
       && body.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"')
-      && body.includes('cssv-prerender-shell')
+      && (body.includes('cssv-prerender-shell') || (path === '/' && body.includes('data-cssv-home-first-paint')))
       && !body.includes('__SITE_ORIGIN__')
       && (path !== '/' || !body.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'))
     result(valid, `initial HTML ${path}`, `${response.status}, canonical ${canonical}`)

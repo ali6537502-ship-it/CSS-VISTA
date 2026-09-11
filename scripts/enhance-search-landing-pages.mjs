@@ -12,7 +12,6 @@ if (siteUrl.protocol !== 'https:' || siteUrl.pathname !== '/' || siteUrl.search 
   throw new Error(`SITE_ORIGIN must be an HTTPS origin without a path: ${siteUrl.href}`)
 }
 const siteOrigin = siteUrl.origin
-const SEO_CONTENT_REFRESH = '2026-09-09'
 
 function escapeHtml(value) {
   return String(value)
@@ -193,7 +192,7 @@ const DETAILS = {
     guidance: 'A consultation is most useful when the student arrives with evidence: the subjects chosen, preparation completed, recent writing or mock performance and the exact decisions causing difficulty. List the highest-priority questions in advance and leave with a small number of concrete actions that can be tested during the following study period.',
     note: 'Consultation pages are informational and are kept free of site-managed advertising so inquiry and booking decisions are not mixed with ad interactions.',
   },
-  '/privacy': {
+  '/privacy-policy': {
     points: ['Read how CSS Vista handles browser-stored study preferences and signed-in progress.', 'Review the role of Google AdSense, advertising cookies and regional consent.', 'Understand which private or examination-focused areas are intentionally kept free of site-managed advertising.'],
     guidance: 'Use this page when you want to understand data handling, advertising technology, consent choices or the separation between public content and private study activity. CSS Vista’s advertising policy is designed so answers, scores, study plans and account details are not used by the site to decide when an advertisement is available.',
     note: 'Privacy and advertising practices can change as features or legal requirements change. Material changes should be reflected in the published policy rather than being left only in technical configuration.',
@@ -217,7 +216,7 @@ function relatedRoutes(route) {
   const preferred = [
     '/start-css', '/subjects/compulsory', '/subjects/optional', '/fpsc-syllabus', '/past-papers',
     '/css-mcqs', '/gk', '/mpt', '/current-affairs', '/essay', '/answer-writing', '/notes',
-    '/language-grammar', '/grammar-vocabulary', '/book-summaries', '/study-tools', '/mentors', '/privacy',
+    '/language-grammar', '/grammar-vocabulary', '/book-summaries', '/study-tools', '/mentors', '/privacy-policy',
   ]
   return [...preferred.map((path) => candidates.find((candidate) => candidate.path === path)).filter(Boolean), ...candidates]
     .filter((candidate, index, all) => all.findIndex((entry) => entry.path === candidate.path) === index)
@@ -231,7 +230,7 @@ function landingBody(route) {
     .map((candidate) => `<li><a href="${escapeHtml(candidate.path)}" class="font-semibold text-emerald-800 underline underline-offset-2">${escapeHtml(candidate.h1)}</a></li>`)
     .join('')
 
-  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista · Competitive examination preparation</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(route.h1)}</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(route.intro)}</p><section class="mt-9 rounded-xl border bg-white p-5"><h2 class="font-display text-2xl font-bold text-pine">What you can do here</h2><ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">${points}</ul></section><section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">How to use this resource for preparation</h2><p class="mt-3 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.guidance)}</p><p class="mt-4 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.note)}</p></section><nav class="mt-9 rounded-xl border bg-white p-5" aria-label="Related CSS Vista resources"><h2 class="font-display text-xl font-bold text-pine">Continue your preparation</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Move to a related subject, syllabus, practice or revision page when you are ready for the next step.</p><ul class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">${links}</ul></nav><aside class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50/60 p-5"><h2 class="font-display text-lg font-bold text-pine">About this platform</h2><p class="mt-2 text-sm leading-7 text-slate-700">CSS Vista is an independent competitive-examination preparation platform. Public study resources are organised for learning and revision; private account areas, personal progress and active timed practice are kept separate. For official rules, deadlines and notices, use the relevant examining authority.</p><p class="mt-3 text-sm"><a href="/mentors" class="font-semibold text-emerald-800 underline underline-offset-2">About CSS Vista and its mentors</a> · <a href="/privacy" class="font-semibold text-emerald-800 underline underline-offset-2">Privacy, cookies and advertising</a></p></aside></main>`
+  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista · Competitive examination preparation</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(route.h1)}</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(route.intro)}</p><section class="mt-9 rounded-xl border bg-white p-5"><h2 class="font-display text-2xl font-bold text-pine">What you can do here</h2><ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">${points}</ul></section><section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">How to use this resource for preparation</h2><p class="mt-3 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.guidance)}</p><p class="mt-4 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.note)}</p></section><nav class="mt-9 rounded-xl border bg-white p-5" aria-label="Related CSS Vista resources"><h2 class="font-display text-xl font-bold text-pine">Continue your preparation</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Move to a related subject, syllabus, practice or revision page when you are ready for the next step.</p><ul class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">${links}</ul></nav><aside class="mt-8 rounded-xl border border-emerald-200 bg-emerald-50/60 p-5"><h2 class="font-display text-lg font-bold text-pine">About this platform</h2><p class="mt-2 text-sm leading-7 text-slate-700">CSS Vista is an independent competitive-examination preparation platform. Public study resources are organised for learning and revision; private account areas, personal progress and active timed practice are kept separate. For official rules, deadlines and notices, use the relevant examining authority.</p><p class="mt-3 text-sm"><a href="/mentors" class="font-semibold text-emerald-800 underline underline-offset-2">About CSS Vista and its mentors</a> · <a href="/privacy-policy" class="font-semibold text-emerald-800 underline underline-offset-2">Privacy, cookies and advertising</a> · <a href="/legal" class="font-semibold text-emerald-800 underline underline-offset-2">All policies</a></p></aside></main>`
 }
 
 function wordCount(html) {
@@ -274,10 +273,6 @@ let sitemap = await readFile(sitemapPath, 'utf8')
 for (const route of INDEXABLE_STATIC_ROUTES) {
   const url = `${siteOrigin}${route.path === '/' ? '/' : route.path}`
   if (!sitemap.includes(`<loc>${url}</loc>`)) throw new Error(`Indexable public route missing from sitemap: ${route.path}`)
-  const plain = `<url><loc>${url}</loc></url>`
-  if (sitemap.includes(plain)) {
-    sitemap = sitemap.replace(plain, `<url><loc>${url}</loc><lastmod>${SEO_CONTENT_REFRESH}</lastmod></url>`)
-  }
 }
 for (const route of ROUTE_REGISTRY.filter((entry) => !entry.indexable && entry.match === 'exact')) {
   const url = `${siteOrigin}${route.path}`
