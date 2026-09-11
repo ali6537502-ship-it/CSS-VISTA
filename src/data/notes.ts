@@ -150,7 +150,7 @@ export const noteProducts: NoteProduct[] = [
     subject: 'Current Affairs and Pakistan Affairs',
     description: 'Issue-wise current-affairs analysis and broad Pakistan Affairs coverage with background, evidence, quotations and answer-writing angles.',
     topics: currentPakistanAffairsTopics,
-    pricing: { regularPrice: 7000, offerPrice: 4900 },
+    pricing: { regularPrice: 7000, offerPrice: 5250 },
     samples: [
       { id: 'cpec', title: 'China–Pakistan Economic Corridor (CPEC)', kind: 'docx', url: '/samples/cpec-css-notes-with-maps.docx', pages: 19, sizeBytes: 1608084 },
       { id: 'pakistan-india-relations-pages', title: 'Pakistan–India Relations and Kashmir', kind: 'pdf', url: '/samples/pakistan-india-relations-kashmir-ca-pa.pdf', pages: 36, sizeBytes: 274098 },
@@ -175,7 +175,7 @@ export const noteProducts: NoteProduct[] = [
     subject: 'Political Science',
     description: 'Paper I and II coverage, including Western and Muslim political thought, constitutions, political systems and comparative politics.',
     topics: politicalScienceTopics,
-    pricing: { regularPrice: 4000, offerPrice: 2800 },
+    pricing: { regularPrice: 4000, offerPrice: 3000 },
     samples: [
       { id: 'state-system-pages', title: 'The State System and Islamic State', kind: 'pdf', url: '/samples/state-system-political-science-sample.pdf', pages: 33, sizeBytes: 30000398 },
       { id: 'forms-of-government', title: 'Forms of Government', kind: 'pdf', url: '/samples/forms-of-government-political-science-sample.pdf', pages: 21, sizeBytes: 14829678 },
@@ -207,7 +207,8 @@ export const bundle = {
 // It restores itself at the next Pakistan midnight after this release, so this
 // temporary editorial change cannot accidentally become permanent.
 export const europeanHistoryHiddenUntil = Date.parse('2026-09-01T00:00:00+05:00')
-export const notesDiscountEndsAt = Date.parse('2026-09-01T00:00:00+05:00')
+export const notesDiscountEndsAt = Date.parse('2026-09-12T00:00:00+05:00')
+const discountedNoteProductIds = new Set(['ca-pa', 'political-science'])
 
 export function isNotesDiscountActive(now = Date.now()) {
   return now < notesDiscountEndsAt
@@ -231,7 +232,7 @@ export function getVisibleBundleIncludes(now = Date.now()) {
 
 export function getNoteDisplayPrice(product: NoteProduct, now = Date.now()) {
   const hasPrice = product.pricing.regularPrice > 0
-  const hasActiveOffer = hasPrice && isNotesDiscountActive(now)
+  const hasActiveOffer = hasPrice && discountedNoteProductIds.has(product.id) && isNotesDiscountActive(now)
   const price = hasActiveOffer ? product.pricing.offerPrice : product.pricing.regularPrice
   const discountPercent = hasActiveOffer
     ? Math.round((1 - product.pricing.offerPrice / product.pricing.regularPrice) * 100)
