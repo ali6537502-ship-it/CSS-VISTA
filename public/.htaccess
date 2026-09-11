@@ -46,9 +46,11 @@ ErrorDocument 404 /404.html
 # be cached immutably. Other public images/fonts/data use shorter safe lifetimes.
 <IfModule mod_setenvif.c>
   SetEnvIf Request_URI "^/assets/" cssv_hashed_asset=1
+  SetEnvIf Request_URI "^/(?:account(?:/|$)|api/)" cssv_private_account=1
 </IfModule>
 
 <IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow" env=cssv_private_account
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
@@ -98,6 +100,11 @@ ErrorDocument 404 /404.html
   RewriteEngine On
   RewriteBase /
 
+  # Preserve publisher Authorization on PHP/FastCGI deployments.
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  # Protected PHP release payloads and helpers can only be included server-side.
+  RewriteRule ^api/(?:_briefing_release(?:/|$)|_current_affairs[^/]*\\.php$) - [F,L,NC]
+
   # Consolidate every protocol and hostname variant on the canonical origin.
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\.css-vista\.com$ [NC]
@@ -135,6 +142,8 @@ ErrorDocument 404 /404.html
   RewriteRule ^past-papers/view/([A-Za-z0-9-]+)/?$ seo/past-papers/$1.html [L]
   RewriteRule ^past-papers/(css|pms|ppsc|mpt)/([0-9]{4})/?$ seo/past-paper-collections/$1/$2.html [L]
   RewriteRule ^(?:notes/view/[^/]+/[^/]+|mpt/bank/[^/]+|gk/cat/[^/]+)/?$ seo/routes/protected.html [L,NC]
+
+  RewriteRule ^account/current-affairs/[A-Za-z0-9_-]+/?$ seo/routes/protected.html [L,NC]
 
   # Keep real files and directories intact. Unknown clean URLs deliberately
   # return 404 instead of the SPA shell, preventing Search Console soft 404s.
