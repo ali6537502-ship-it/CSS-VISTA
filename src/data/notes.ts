@@ -164,7 +164,7 @@ export const noteProducts: NoteProduct[] = [
     subject: 'Criminology',
     description: 'Theories of crime, criminal justice, investigation, forensics, juvenile justice and examination-focused practice material.',
     topics: criminologyTopics,
-    pricing: { regularPrice: 3600, offerPrice: 2530 },
+    pricing: { regularPrice: 3600, offerPrice: 2700 },
     samples: [
       { id: 'psychological-theory-crime', title: 'Psychological Theory of Crime', kind: 'pdf', url: '/samples/psychological-theory-of-crime-criminology-sample.pdf', pages: 45, sizeBytes: 29760155 },
       { id: 'cybercrime', title: 'Cybercrime', kind: 'pdf', url: '/samples/cybercrime-criminology-sample.pdf', pages: 49, sizeBytes: 40115324 },
@@ -207,8 +207,8 @@ export const bundle = {
 // It restores itself at the next Pakistan midnight after this release, so this
 // temporary editorial change cannot accidentally become permanent.
 export const europeanHistoryHiddenUntil = Date.parse('2026-09-01T00:00:00+05:00')
-export const notesDiscountEndsAt = Date.parse('2026-09-12T00:00:00+05:00')
-const discountedNoteProductIds = new Set(['ca-pa', 'political-science'])
+export const notesDiscountEndsAt = Date.parse('2026-09-13T00:00:00+05:00')
+const discountedNoteProductIds = new Set(['ca-pa', 'criminology', 'political-science'])
 
 export function isNotesDiscountActive(now = Date.now()) {
   return now < notesDiscountEndsAt
