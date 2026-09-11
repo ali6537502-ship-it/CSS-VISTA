@@ -13,6 +13,7 @@ try {
         if ($cookie==='' || $token==='' || !hash_equals($cookie,$token) || !hash_equals($admin['csrf_hash'],cssv_hash_secret($token))) cssv_fail('Please refresh your admin session and try again.',403,'invalid_csrf');
     }
     ca_ensure_schema($pdo);
+    ca_sync_git_release($pdo);
     if ($_SERVER['REQUEST_METHOD']==='GET') {
         $date=ca_query_param('date',10);
         if ($date!=='') {

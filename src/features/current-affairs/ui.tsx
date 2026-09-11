@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { ArrowUpRight, Bookmark, Check, Copy, RotateCcw } from 'lucide-react'
 import { setReading, setSaved } from './api'
-import { briefingRoot, displayDate, displayUpdated, factText, type Fact, type Source, type StoryCard, type Summary } from './model'
+import { briefingRoot, displayDate, displayUpdated, factText, pakistanDate, type Fact, type Source, type StoryCard, type Summary } from './model'
 
 export function Loading() {
   return <div className="ca-loading" role="status" aria-label="Loading your briefing">
@@ -18,7 +18,7 @@ export function LoadError({ error, retry }: { error: string; retry: () => void }
 }
 export function Publication({ summary }: { summary: Summary }) {
   if (summary.published) return null
-  return <Empty title={summary.date === new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Karachi' }).format(new Date()) ? "Today's briefing is being prepared" : 'No briefing was published for this date'}
+  return <Empty title={summary.date === pakistanDate() ? "Today's briefing is being prepared" : 'No briefing was published for this date'}
     action={summary.latest_date && <Link className="ca-button" to={briefingRoot + '?range=custom&from=' + summary.latest_date + '&to=' + summary.latest_date}>Open the latest briefing <ArrowUpRight size={16} /></Link>}>
     Please check again shortly, or explore the archive.
   </Empty>
@@ -39,8 +39,9 @@ export function CategoryGlance({ summary, selected, select }: { summary: Summary
     </div>
   </section>
 }
-export function StoryActions({ item, onChange }: { item: StoryCard; onChange?: () => void }) {
-  const [state, setState] = useState({ saved: item.saved, reading_status: item.reading_status })
+export function StoryActions({ item, onChange, onStateChange }: { item: StoryCard; onChange?: () => void; onStateChange?: (state: Pick<StoryCard, 'saved' | 'reading_status'>) => void }) {
+  const [localState, setState] = useState({ saved: item.saved, reading_status: item.reading_status })
+  const state = onStateChange ? item : localState
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState('')
   async function change(kind: 'save' | 'read') {
@@ -48,6 +49,7 @@ export function StoryActions({ item, onChange }: { item: StoryCard; onChange?: (
     try {
       const result = kind === 'save' ? await setSaved(item.id, !state.saved) : await setReading(item.id, state.reading_status === 'read' ? 'unread' : 'read')
       setState(result)
+      onStateChange?.(result)
       setMessage(kind === 'save' ? (result.saved ? 'Saved to your account.' : 'Removed from saved items.') : (result.reading_status === 'read' ? 'Marked as read.' : 'Marked as unread.'))
       onChange?.()
     } catch (e) { setMessage(e instanceof Error ? e.message : 'Your change could not be saved. Please try again.') }
@@ -62,7 +64,8 @@ export function StoryActions({ item, onChange }: { item: StoryCard; onChange?: (
     </button>
   </div><span className="ca-feedback" role="status">{message}</span></div>
 }
-export function StoryCardView({ item, onChange }: { item: StoryCard; onChange?: () => void }) {
+export function StoryCardView({ item: initial, onChange }: { item: StoryCard; onChange?: () => void }) {
+  const [item, setItem] = useState(initial)
   return <article className={'ca-story-card ' + (item.reading_status === 'read' ? 'ca-read' : '')}>
     <div className="ca-card-meta"><span className="ca-category">{item.category}</span>{item.importance && <span>{item.importance}</span>}
       <span className="ca-status">{item.reading_status === 'unread' ? 'New' : item.reading_status === 'opened' ? 'In progress' : 'Read'}</span>
@@ -71,7 +74,7 @@ export function StoryCardView({ item, onChange }: { item: StoryCard; onChange?: 
     <p className="ca-card-summary">{item.summary}</p>
     <div className="ca-card-footer"><span>{displayDate(item.publication_date)} · {item.reading_minutes} min read</span>
       <Link className="ca-text-link" to={briefingRoot + '/' + item.id}>Open analysis <ArrowUpRight size={16} /></Link></div>
-    <StoryActions key={item.saved + item.reading_status} item={item} onChange={onChange} />
+    <StoryActions item={item} onChange={onChange} onStateChange={(state) => setItem((old) => ({ ...old, ...state }))} />
   </article>
 }
 export function Sources({ sources }: { sources: Source[] }) {

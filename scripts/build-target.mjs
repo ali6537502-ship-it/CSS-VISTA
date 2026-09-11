@@ -47,6 +47,7 @@ if (target === 'hostinger') {
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')
+  run('scripts/package-current-affairs.mjs')
   await import('./audit-hostinger-build-v2.mjs')
 }
 

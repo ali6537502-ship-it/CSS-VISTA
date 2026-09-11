@@ -13,6 +13,7 @@ try {
     if ($expected!=='' && !hash_equals($userId,$expected)) cssv_fail('Your account changed. Sign in again to continue.',401,'account_changed');
     if ($_SERVER['REQUEST_METHOD']==='POST') cssv_require_csrf($session);
     ca_ensure_schema($pdo);
+    ca_sync_git_release($pdo);
     if ($_SERVER['REQUEST_METHOD']==='POST') {
         $body=ca_request_json();
         if (array_key_exists('user_id',$body)) throw new InvalidArgumentException('Personal records always use the signed-in account.');
@@ -67,6 +68,8 @@ try {
         $reading=ca_query_items($pdo,$userId," AND u.status='opened'",[],4,0,'u.last_opened_at DESC,i.id');
         $saved=ca_query_items($pdo,$userId,' AND u.saved=1',[],4,0,'u.saved_at DESC,i.id');
         $today=ca_query_items($pdo,$userId,' AND i.publication_date=?',[$date],100);
+        $preferred=ca_preferences($pdo,$userId)['preferred_categories'];
+        usort($today,fn($a,$b)=>(int)in_array($b['category'],$preferred,true) <=> (int)in_array($a['category'],$preferred,true));
         $q=$pdo->prepare("SELECT COUNT(*) FROM current_affairs_user_items WHERE user_id=? AND status='read' AND completed_at>=DATE_SUB(UTC_TIMESTAMP(),INTERVAL 7 DAY)");
         $q->execute([$userId]);
         cssv_json(['ok'=>true,'summary'=>ca_summary($pdo,$userId,$date),'preferences'=>ca_preferences($pdo,$userId),

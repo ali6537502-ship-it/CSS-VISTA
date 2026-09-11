@@ -152,7 +152,10 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         }, 0)
       }
       if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
-      if (event === 'SIGNED_OUT') setPasswordRecovery(false)
+      if (event === 'SIGNED_OUT') {
+        setPasswordRecovery(false)
+        void logoutHostinger().catch(() => undefined)
+      }
       setLoading(false)
     })
     return () => {
@@ -263,7 +266,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
         try {
           await logoutHostinger()
         } catch {
-          // Continue so the retained Supabase session is always cleared.
+          return { error: 'We could not securely finish signing out. Please check your connection and try again.' }
         }
       }
       const { error } = await client.auth.signOut()

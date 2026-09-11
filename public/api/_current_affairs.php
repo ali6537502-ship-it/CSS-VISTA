@@ -47,6 +47,10 @@ CREATE TABLE IF NOT EXISTS current_affairs_publish_tokens (
  created_by CHAR(36) NOT NULL, created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
  expires_at DATETIME(6) NOT NULL, last_used_at DATETIME(6) NULL, revoked_at DATETIME(6) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS current_affairs_release_files (
+ file_key VARCHAR(80) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY,
+ file_hash CHAR(64) NOT NULL, applied_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 SQL;
 }
 function ca_ensure_schema(PDO $pdo): void
@@ -54,7 +58,7 @@ function ca_ensure_schema(PDO $pdo): void
     // The existing Hostinger APIs use idempotent runtime migrations. Cache a
     // successful migration outside the web root when private storage is set.
     $base = cssv_env('CSSV_PRIVATE_STORAGE_DIR');
-    $marker = $base ? rtrim($base, '/\\') . '/ca-schema-v1-' . substr(hash('sha256', (string)cssv_env('CSSV_DB_HOST') . ':' . (string)cssv_env('CSSV_DB_NAME')), 0, 16) : null;
+    $marker = $base ? rtrim($base, '/\\') . '/ca-schema-v2-' . substr(hash('sha256', (string)cssv_env('CSSV_DB_HOST') . ':' . (string)cssv_env('CSSV_DB_NAME')), 0, 16) : null;
     if ($marker && is_file($marker)) return;
     foreach (explode(';', ca_schema_sql()) as $sql) if (trim($sql) !== '') $pdo->exec($sql);
     if ($marker && is_dir(dirname($marker))) { @file_put_contents($marker, '1', LOCK_EX); @chmod($marker, 0600); }
@@ -162,8 +166,14 @@ function ca_filters(): array
     $search=ca_query_param('q');
     if ($search!=='') {
         $words=preg_split('/\s+/u',$search,-1,PREG_SPLIT_NO_EMPTY);
-        // Fulltext narrows long queries; LIKE ensures short acronyms and
-        // punctuation work without depending on MySQL's stop-word settings.
+        // Use indexed prefix terms when possible; retain LIKE for short
+        // acronyms and exact text matching. Exclude InnoDB stop words.
+        $stop=['about','after','also','from','have','into','some','than','that','them','then','there','these','they','this','were','what','when','where','which','will','with','your'];
+        $indexed=array_values(array_filter($words ?: [],fn($w)=>preg_match('/^[A-Za-z0-9]{4,}$/D',$w) && !in_array(strtolower($w),$stop,true)));
+        if ($indexed) {
+            $where.=' AND MATCH(i.search_text) AGAINST (? IN BOOLEAN MODE)';
+            $params[]=implode(' ',array_map(fn($w)=>'+'.$w.'*',$indexed));
+        }
         foreach (array_slice($words ?: [],0,12) as $word) {
             $where.=" AND i.search_text LIKE ? ESCAPE '!'";
             $params[]='%'.str_replace(['!','%','_'],['!!','!%','!_'],$word).'%';
@@ -190,4 +200,34 @@ function ca_request_json(): array
     catch (JsonException) { throw new InvalidArgumentException('The request must contain valid JSON.'); }
     if (!is_array($body) || array_is_list($body)) throw new InvalidArgumentException('The request must be a JSON object.');
     return $body;
+}
+
+function ca_sync_git_release(PDO $pdo): void
+{
+    $catalog=__DIR__.'/_briefing_release/catalog.php';
+    if (!is_file($catalog)) return;
+    if (!defined('CSSV_CA_RELEASE')) define('CSSV_CA_RELEASE', true);
+    $release=require $catalog;
+    if (!is_array($release) || !preg_match('/^[a-f0-9]{64}$/D',$release['id'] ?? '')) throw new RuntimeException('Invalid release catalog.');
+    $q=$pdo->prepare('SELECT file_hash FROM current_affairs_release_files WHERE file_key=?');
+    $q->execute(['@manifest']);
+    if ($q->fetchColumn()===$release['id']) return;
+    $lock='cssv_ca_'.substr(hash('sha256',(string)cssv_env('CSSV_DB_NAME')),0,40);
+    $q=$pdo->prepare('SELECT GET_LOCK(?,10)'); $q->execute([$lock]);
+    if ((int)$q->fetchColumn()!==1) throw new RuntimeException('The briefing release is still being applied.');
+    try {
+        foreach ($release['editions'] as $entry) {
+            $date=ca_date($entry['date'] ?? null);
+            if (($entry['file'] ?? '')!==$date.'.php' || !preg_match('/^[a-f0-9]{64}$/D',$entry['hash'] ?? '')) throw new RuntimeException('Invalid release entry.');
+            $q=$pdo->prepare('SELECT file_hash FROM current_affairs_release_files WHERE file_key=?'); $q->execute([$date]);
+            if ($q->fetchColumn()===$entry['hash']) continue;
+            $dataset=require __DIR__.'/_briefing_release/'.$entry['file'];
+            if (!is_array($dataset) || ($dataset['date'] ?? null)!==$date) throw new RuntimeException('Invalid release edition.');
+            ca_publish($pdo,$dataset);
+            $pdo->prepare('INSERT INTO current_affairs_release_files (file_key,file_hash) VALUES (?,?) ON DUPLICATE KEY UPDATE file_hash=VALUES(file_hash),applied_at=NOW(6)')->execute([$date,$entry['hash']]);
+        }
+        $pdo->prepare('INSERT INTO current_affairs_release_files (file_key,file_hash) VALUES (?,?) ON DUPLICATE KEY UPDATE file_hash=VALUES(file_hash),applied_at=NOW(6)')->execute(['@manifest',$release['id']]);
+    } finally {
+        $pdo->prepare('SELECT RELEASE_LOCK(?)')->execute([$lock]);
+    }
 }

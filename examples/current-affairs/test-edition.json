@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "test": true,
+  "date": "2099-01-01",
+  "published_at": "2099-01-01T00:00:00+05:00",
+  "edition": "TEST EDITION — NOT REAL NEWS",
+  "stories": [
+    {
+      "id": "test-reporting-framework",
+      "category": "Economy",
+      "headline": "TEST DATA — an example reporting framework",
+      "summary": "This is fictional test content for checking the reading interface. It describes no real event and must never appear in production.",
+      "what_happened": "TEST ONLY: a fictional institution introduced an example reporting framework.",
+      "explanation": "TEST ONLY: a reporting framework describes how information is collected and presented.",
+      "background": "TEST ONLY: this example provides background text to verify the full reading mode.",
+      "timeline": [
+        {
+          "date": "Example date",
+          "text": "TEST ONLY: an illustrative earlier step."
+        }
+      ],
+      "key_takeaways": [
+        "TEST ONLY: this is the first practice takeaway.",
+        "TEST ONLY: check the original sources before using a figure."
+      ],
+      "facts": [
+        {
+          "label": "Example organisation",
+          "value": "Fictional Reporting Office",
+          "type": "Organisations",
+          "topic": "Reporting standards"
+        },
+        "TEST ONLY: source metadata stays attached to the development."
+      ],
+      "statistics": [
+        {
+          "label": "Illustrative score",
+          "value": "42%",
+          "source": "Example Test Institution",
+          "year": "2099"
+        }
+      ],
+      "why_it_matters": "TEST ONLY: this paragraph checks how significance is displayed separately from the event.",
+      "pakistan_perspective": "TEST ONLY: this paragraph checks an optional Pakistan perspective.",
+      "regional_implications": "TEST ONLY: an example regional implication.",
+      "global_implications": "TEST ONLY: an example global implication.",
+      "what_to_watch": [
+        "TEST ONLY: a possible next step, not an established fact."
+      ],
+      "question_angles": [
+        "TEST ONLY: discuss the value and limits of consistent reporting."
+      ],
+      "quick_gk": [
+        {
+          "label": "Headquarters",
+          "value": "Fictional City"
+        }
+      ],
+      "topics": [
+        "Reporting standards"
+      ],
+      "countries": [
+        "Fictional Country"
+      ],
+      "organisations": [
+        "Fictional Reporting Office"
+      ],
+      "reports": [
+        "Fictional report"
+      ],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Example Test Institution",
+          "title": "TEST ONLY — sample source metadata",
+          "url": "https://example.invalid/test-report",
+          "published_at": "2099-01-01",
+          "source_type": "Primary Document"
+        }
+      ]
+    },
+    {
+      "id": "test-science-example",
+      "category": "Science & Technology",
+      "headline": "TEST DATA — a second example development",
+      "summary": "A second fictional item verifies filtering and missing optional sections. It is not a news report.",
+      "facts": [
+        "TEST ONLY: a compact revision fact."
+      ],
+      "sources": [
+        {
+          "publisher": "Example Test Institution",
+          "title": "TEST ONLY — second sample source",
+          "url": "https://example.invalid/test-science",
+          "source_type": "Official Source"
+        }
+      ]
+    }
+  ]
+}

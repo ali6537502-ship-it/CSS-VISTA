@@ -49,8 +49,8 @@ export async function ensureHostingerSession(client: SupabaseClient) {
   if (sessionBridge) await sessionBridge.promise.catch(() => false)
   const promise = (async () => {
     const current = await hostingerRequest<{ authenticated: boolean; user?: { id: string } }>('auth/session.php')
-    if (current.authenticated && current.user?.id === session.user.id) return true
-    if (current.authenticated) await logoutHostinger()
+    if (current.authenticated && current.user?.id === session.user.id && csrfToken()) return true
+    if (current.authenticated && csrfToken()) await hostingerRequest<{ ok: boolean }>('auth/logout.php', { method: 'POST', body: '{}' })
     const latest = await client.auth.getSession()
     if (latest.data.session?.user.id !== session.user.id) return false
     await hostingerRequest<{ ok: boolean }>('auth/supabase-session.php', {
@@ -65,6 +65,7 @@ export async function ensureHostingerSession(client: SupabaseClient) {
 }
 
 export async function logoutHostinger() {
+  if (sessionBridge) await sessionBridge.promise.catch(() => false)
   if (!hostingerAccountBackendEnabled || !csrfToken()) return
   await hostingerRequest<{ ok: boolean }>('auth/logout.php', { method: 'POST', body: '{}' })
 }

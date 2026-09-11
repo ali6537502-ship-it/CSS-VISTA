@@ -21,6 +21,7 @@ export default function Reader() {
   return <ReadingDesk key={result.data.story.id} story={result.data.story} preferences={result.data.preferences} />
 }
 function ReadingDesk({ story, preferences }: { story: Story; preferences: Preferences }) {
+  const [personal, setPersonal] = useState({ saved: story.saved, reading_status: story.reading_status })
   const [mode, setMode] = useState(preferences.reading_mode)
   const [savingMode, setSavingMode] = useState(false)
   const [notice, setNotice] = useState('')
@@ -54,7 +55,7 @@ function ReadingDesk({ story, preferences }: { story: Story; preferences: Prefer
     <header className="ca-reader-heading"><div className="ca-card-meta"><span className="ca-category">{story.category}</span>{story.importance && <span>{story.importance}</span>}</div>
       <h1>{story.headline}</h1><p className="ca-standfirst">{story.summary}</p>
       <div className="ca-edition-meta"><span>{displayDate(story.publication_date)}</span><span><Clock size={14} /> {story.reading_minutes} min read</span></div>
-      <StoryActions item={story} />
+      <StoryActions item={{ ...story, ...personal }} onStateChange={setPersonal} />
     </header>
     <div className="ca-mode" role="group" aria-label="Reading mode">
       <button aria-pressed={!full} disabled={savingMode} onClick={() => void changeMode('quick')}>Quick Read</button>
@@ -81,7 +82,7 @@ function ReadingDesk({ story, preferences }: { story: Story; preferences: Prefer
       {!full && <button className="ca-expand-analysis" disabled={savingMode} onClick={() => void changeMode('full')}>Read the background, implications and analytical angles <ArrowUp size={16} className="ca-rotate" /></button>}
       <Sources sources={story.sources} />
       {story.topics.length > 0 && <div className="ca-chips" aria-label="Explore related topics">{story.topics.map((topic) => <Link key={topic} to={'/account/search?q=' + encodeURIComponent(topic)}>{topic}</Link>)}</div>}
-      <div className="ca-reading-end"><Check size={20} /><p>Finished reading? Mark this development as read to keep your briefing organised.</p><StoryActions item={story} /><a className="ca-text-link" href="#reading-top"><ArrowUp size={15} /> Back to top</a></div>
+      <div className="ca-reading-end"><Check size={20} /><p>Finished reading? Mark this development as read to keep your briefing organised.</p><StoryActions item={{ ...story, ...personal }} onStateChange={setPersonal} /><a className="ca-text-link" href="#reading-top"><ArrowUp size={15} /> Back to top</a></div>
     </div><nav className="ca-contents" aria-label="On this page"><strong>In this development</strong>{contents.filter(([, , shown]) => shown).map(([id, title]) => <a key={id} href={'#' + id}>{title}</a>)}</nav></div>
   </article>
 }

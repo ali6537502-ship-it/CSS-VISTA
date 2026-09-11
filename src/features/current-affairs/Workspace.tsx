@@ -15,7 +15,7 @@ const links = [
   ['/account/saved', 'Saved Items'], ['/account/search', 'Search'], ['/account/settings', 'Account Settings'],
 ]
 function AccountNavigation() {
-  return <nav aria-label="Account navigation">{links.map(([to, label]) => <NavLink key={to} end to={to}>{label}</NavLink>)}</nav>
+  return <nav aria-label="Account navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
 }
 function SignedInWorkspace() {
   const { signOut } = useAccount()
