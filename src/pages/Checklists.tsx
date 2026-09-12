@@ -1,12 +1,14 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { ExternalLink, Printer, RotateCcw, Save } from 'lucide-react'
 import { PageHeader, OfficialNotice } from '@/components/shared'
 import { mptChecklist, writtenChecklist } from '@/data/checklists'
-import { getChecklist, recordActivity, setChecklist } from '@/lib/progress'
+import { migrateIndexedChecklist, recordActivity, resetChecklistItems, setChecklistItem } from '@/lib/progress'
 import { printPage } from '@/components/PrintMenu'
 
-const LAST_UPDATED = '17 July 2026'
+// Was a hardcoded string, dated in the future and with nothing keeping it
+// honest. The checklists carry no date of their own, so the page now points at
+// the official source rather than asserting a freshness it cannot verify.
 const FPSC_URL = 'https://www.fpsc.gov.pk/'
 
 export default function Checklists() {
@@ -42,22 +44,25 @@ export default function Checklists() {
 
 function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: string; steps: { id: string; label: string; hint?: string }[] }[]; title: string }) {
   const allSteps = useMemo(() => groups.flatMap((g) => g.steps), [groups])
-  const [checks, setChecks] = useState<boolean[]>(() => getChecklist(id, allSteps.length))
-  const [savedFlash, setSavedFlash] = useState(false)
-  const done = checks.filter(Boolean).length
+  const stepIds = useMemo(() => allSteps.map((step) => step.id), [allSteps])
+  const [checks, setChecks] = useState<Record<string, boolean>>({})
+  const done = stepIds.filter((stepId) => checks[stepId]).length
 
-  function toggle(i: number) {
-    const next = checks.map((c, j) => (j === i ? !c : c))
+  // Ticks are keyed by step id, so editing or reordering the checklist no
+  // longer shifts every saved tick onto the wrong step.
+  useEffect(() => { setChecks(migrateIndexedChecklist(id, stepIds)) }, [id, stepIds])
+
+  function toggle(stepId: string) {
+    const next = setChecklistItem(id, stepId, !checks[stepId])
     setChecks(next)
-    setChecklist(id, next)
-    recordActivity({ type: 'checklist', label: `${title} - ${next.filter(Boolean).length}/${allSteps.length} steps`, path: `/checklists?tab=${id}` })
+    const doneCount = stepIds.filter((key) => next[key]).length
+    recordActivity({ type: 'checklist', label: `${title} - ${doneCount}/${allSteps.length} steps`, path: `/checklists?tab=${id}` })
   }
 
   function reset() {
     if (!confirm('Reset all ticks on this checklist?')) return
-    const next = Array(allSteps.length).fill(false)
-    setChecks(next)
-    setChecklist(id, next)
+    resetChecklistItems(id)
+    setChecks({})
   }
 
   return (
@@ -76,18 +81,19 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
             <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{g.group}</p>
             <div className="mt-2 space-y-2">
               {g.steps.map((s) => {
-                const i = allSteps.findIndex((step) => step.id === s.id)
+                const on = !!checks[s.id]
                 return (
                   <button
                     key={s.id}
-                    onClick={() => toggle(i)}
-                    className={`flex w-full items-start gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${checks[i] ? 'border-emerald-500 bg-emerald-50/60' : 'bg-white hover:border-emerald-700/40'}`}
+                    onClick={() => toggle(s.id)}
+                    aria-pressed={on}
+                    className={`flex w-full items-start gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${on ? 'border-emerald-500 bg-emerald-50/60' : 'bg-white hover:border-emerald-700/40'}`}
                   >
-                    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 text-[11px] font-bold ${checks[i] ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-gray-300'}`}>
-                      {checks[i] ? '✓' : ''}
+                    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 text-[11px] font-bold ${on ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-gray-300'}`}>
+                      {on ? '✓' : ''}
                     </span>
                     <span>
-                      <span className={`font-medium ${checks[i] ? 'text-emerald-900 line-through' : ''}`}>{s.label}</span>
+                      <span className={`font-medium ${on ? 'text-emerald-900 line-through' : ''}`}>{s.label}</span>
                       {s.hint && <span className="block text-xs text-muted-foreground">{s.hint}</span>}
                     </span>
                   </button>
@@ -99,12 +105,9 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
       </div>
 
       <div className="no-print mt-4 flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => { setChecklist(id, checks); setSavedFlash(true); setTimeout(() => setSavedFlash(false), 1500) }}
-          className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50"
-        >
-          <Save className="h-4 w-4" /> {savedFlash ? 'Saved ✓' : 'Save progress'}
-        </button>
+        <span className="inline-flex h-10 items-center gap-1.5 rounded-md bg-emerald-50 px-4 text-sm font-semibold text-emerald-900">
+          <Save className="h-4 w-4" /> Saved automatically
+        </span>
         <button onClick={() => printPage(true, '.print-area')} className="inline-flex h-10 items-center gap-1.5 rounded-md border bg-white px-4 text-sm font-semibold text-pine">
           <Printer className="h-4 w-4" /> Print checklist
         </button>
@@ -114,7 +117,7 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
         <a href={FPSC_URL} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-md border border-emerald-700/40 bg-emerald-50 px-4 text-sm font-semibold text-emerald-900">
           <ExternalLink className="h-4 w-4" /> Official FPSC source
         </a>
-        <span className="ml-auto text-xs text-muted-foreground">Last updated: {LAST_UPDATED}</span>
+        <span className="ml-auto text-xs text-muted-foreground">Always confirm against the current FPSC advertisement</span>
       </div>
     </div>
   )

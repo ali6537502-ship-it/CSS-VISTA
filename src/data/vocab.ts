@@ -1,4 +1,3 @@
-import verifiedVocabulary from '../../data-archive/vocabulary_1500.json'
 
 export interface VocabWord {
   word: string
@@ -62,18 +61,49 @@ interface VerifiedVocabularyRow {
   source: string
 }
 
-const generatedVocabulary: VocabWord[] = (verifiedVocabulary as VerifiedVocabularyRow[]).map((row) => ({
-  word: row.word.charAt(0).toLocaleUpperCase() + row.word.slice(1),
-  pos: row.primary_part_of_speech,
-  meaning: row.primary_definition,
-  synonyms: row.synonyms.slice(0, 8),
-  antonyms: [],
-  sentence: row.examples[0] ?? '',
-  source: row.source,
-}))
+function normaliseGenerated(raw: unknown): VocabWord[] {
+  if (!Array.isArray(raw)) return []
+  return (raw as VerifiedVocabularyRow[]).map((row) => ({
+    word: row.word.charAt(0).toLocaleUpperCase() + row.word.slice(1),
+    pos: row.primary_part_of_speech,
+    meaning: row.primary_definition,
+    synonyms: (row.synonyms ?? []).slice(0, 8),
+    antonyms: [],
+    sentence: row.examples?.[0] ?? '',
+    source: row.source,
+  }))
+}
 
-const generatedWords = new Set(generatedVocabulary.map((row) => row.word.toLocaleLowerCase()))
-export const vocabulary: VocabWord[] = [
-  ...generatedVocabulary,
-  ...curatedVocabulary.filter((row) => !generatedWords.has(row.word.toLocaleLowerCase())),
-]
+/**
+ * The curated set ships in the bundle; the 1,500 verified entries are a 1.5 MB
+ * JSON file that was imported statically. Because src/lib/search.ts imports
+ * this module and search lives in the global header, that payload landed in
+ * the main bundle for every visitor. It now loads on demand.
+ */
+export const vocabulary: VocabWord[] = curatedVocabulary
+
+let fullRequest: Promise<VocabWord[]> | null = null
+let fullVocabulary: VocabWord[] | null = null
+
+export function getLoadedVocabulary(): VocabWord[] {
+  return fullVocabulary ?? curatedVocabulary
+}
+
+export function loadFullVocabulary(): Promise<VocabWord[]> {
+  if (fullVocabulary) return Promise.resolve(fullVocabulary)
+  fullRequest ??= import('../../data-archive/vocabulary_1500.json')
+    .then((module) => {
+      const generated = normaliseGenerated((module.default ?? module) as unknown)
+      const generatedWords = new Set(generated.map((row) => row.word.toLocaleLowerCase()))
+      fullVocabulary = [
+        ...generated,
+        ...curatedVocabulary.filter((row) => !generatedWords.has(row.word.toLocaleLowerCase())),
+      ]
+      return fullVocabulary
+    })
+    .catch(() => {
+      fullRequest = null
+      return curatedVocabulary
+    })
+  return fullRequest
+}

@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
-import { recordActivity, saveTimerSession } from '@/lib/progress'
+import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
+import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 
 const ALERTS = [
   { at: 5, text: '5 minutes: Outline should be ready.' },
@@ -189,8 +190,85 @@ function SingleTimer() {
           </div>
         </div>
       )}
+
+      <PastTimerSessions refreshKey={doneTimes.length} />
     </div>
   )
+}
+
+/**
+ * Every timing was saved to progress.timerSessions and never read back -
+ * getTimerSessions() had no callers, so a student's speed history existed but
+ * was invisible. This is that history.
+ */
+function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
+  const [sessions, setSessions] = useState<TimerSession[]>([])
+
+  useEffect(() => { setSessions(getTimerSessions()) }, [refreshKey])
+
+  const singles = sessions.filter((session) => session.mode === 'single')
+  if (!sessions.length) return null
+
+  const averageSingle = singles.length
+    ? Math.round(singles.reduce((total, session) => total + session.total, 0) / singles.length)
+    : 0
+
+  return (
+    <div className="rounded-xl border bg-white p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="text-sm font-semibold text-pine">Your timing history</p>
+        {averageSingle > 0 && (
+          <p className="text-xs text-muted-foreground">
+            Average single question: <span className="font-mono font-bold text-pine">{fmt(averageSingle)}</span> across {singles.length}
+          </p>
+        )}
+      </div>
+      <div className="mt-3 space-y-1.5">
+        {sessions.slice(0, 8).map((session) => {
+          const attempted = session.times.filter((value) => value >= 0).length
+          return (
+            <div key={session.id} className="flex flex-wrap items-center gap-2 rounded border bg-secondary/40 px-3 py-2 text-sm">
+              <span className="min-w-0 flex-1 truncate">
+                {session.mode === 'paper' ? 'Four-question paper' : session.questions[0] || 'Single question'}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {new Date(session.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
+                {session.mode === 'paper' ? ` · ${attempted}/4 attempted` : ''}
+              </span>
+              <span className="shrink-0 font-mono font-bold text-pine">{fmt(session.total)}</span>
+            </div>
+          )
+        })}
+      </div>
+      {sessions.length > 8 && (
+        <p className="mt-2 text-xs text-muted-foreground">Showing the 8 most recent of {sessions.length} saved attempts.</p>
+      )}
+    </div>
+  )
+}
+
+interface PaperSnapshot {
+  questions: string[]
+  current: number
+  paused: boolean
+  times: (number | null)[]
+  questionElapsedBase: number
+  totalLeftBase: number
+  runningStartedAt: number | null
+}
+
+const PAPER_RESUME_KEY = 'cssvista:paper-attempt'
+
+function readPaperSnapshot(): PaperSnapshot | null {
+  try {
+    const raw = localStorage.getItem(PAPER_RESUME_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as PaperSnapshot
+    if (!Array.isArray(parsed.questions) || !Array.isArray(parsed.times)) return null
+    return parsed
+  } catch {
+    return null
+  }
 }
 
 function PaperTimer() {
@@ -201,9 +279,73 @@ function PaperTimer() {
   const [totalLeft, setTotalLeft] = useState(3 * 3600)
   const [paused, setPaused] = useState(false)
   const [times, setTimes] = useState<(number | null)[]>([null, null, null, null])
+  const [resumable, setResumable] = useState<PaperSnapshot | null>(null)
   const runningStartedAtRef = useRef<number | null>(null)
   const questionElapsedBaseRef = useRef(0)
   const totalLeftBaseRef = useRef(3 * 3600)
+
+  // A three-hour attempt used to live only in memory, so one refresh destroyed
+  // it. The wall-clock anchors are persisted, so resuming accounts honestly for
+  // the time that passed while the tab was gone.
+  useEffect(() => {
+    const snapshot = readPaperSnapshot()
+    if (snapshot) setResumable(snapshot)
+  }, [])
+
+  const persistPaper = useCallback((snapshot: PaperSnapshot | null) => {
+    try {
+      if (snapshot) localStorage.setItem(PAPER_RESUME_KEY, JSON.stringify(snapshot))
+      else localStorage.removeItem(PAPER_RESUME_KEY)
+    } catch {
+      /* storage full or blocked */
+    }
+  }, [])
+
+  const snapshotNow = useCallback((): PaperSnapshot => ({
+    questions,
+    current,
+    paused,
+    times,
+    questionElapsedBase: questionElapsedBaseRef.current,
+    totalLeftBase: totalLeftBaseRef.current,
+    runningStartedAt: runningStartedAtRef.current,
+  }), [questions, current, paused, times])
+
+  useEffect(() => {
+    if (phase !== 'running') return
+    const persist = () => persistPaper(snapshotNow())
+    persist()
+    const interval = window.setInterval(persist, 5000)
+    document.addEventListener('visibilitychange', persist)
+    window.addEventListener('pagehide', persist)
+    return () => {
+      window.clearInterval(interval)
+      document.removeEventListener('visibilitychange', persist)
+      window.removeEventListener('pagehide', persist)
+      persist()
+    }
+  }, [phase, persistPaper, snapshotNow])
+
+  useUnsavedWorkGuard(phase === 'running')
+
+  function resumePaperAttempt() {
+    const snapshot = resumable
+    if (!snapshot) return
+    setQuestions(snapshot.questions)
+    setCurrent(snapshot.current)
+    setTimes(snapshot.times)
+    setPaused(snapshot.paused)
+    questionElapsedBaseRef.current = snapshot.questionElapsedBase
+    totalLeftBaseRef.current = snapshot.totalLeftBase
+    runningStartedAtRef.current = snapshot.runningStartedAt
+    setPhase('running')
+    setResumable(null)
+  }
+
+  function discardPaperAttempt() {
+    persistPaper(null)
+    setResumable(null)
+  }
 
   const clockSnapshot = useCallback(() => {
     const beganAt = runningStartedAtRef.current
@@ -240,6 +382,7 @@ function PaperTimer() {
   }, [totalLeft])
 
   function startPaper() {
+    setResumable(null)
     setPhase('running')
     setCurrent(0)
     setTimes([null, null, null, null])
@@ -290,6 +433,7 @@ function PaperTimer() {
   function finishPaper(finalTimes?: number[]) {
     const snapshot = clockSnapshot()
     runningStartedAtRef.current = null
+    persistPaper(null)
     const t = finalTimes ?? times.map((value, index) => (value ?? (index === current ? snapshot.questionElapsed : null)))
     const done = t.filter((x): x is number => x !== null)
     const total = done.reduce((a, b) => a + b, 0)
@@ -314,6 +458,16 @@ function PaperTimer() {
   if (phase === 'setup') {
     return (
       <div className="rounded-xl border bg-white p-5">
+        {resumable && (
+          <div className="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <p className="font-semibold">You have an unfinished paper attempt.</p>
+            <p className="mt-1 text-xs">Resuming continues the same three-hour clock, so any time that passed still counts.</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button onClick={resumePaperAttempt} className="inline-flex h-9 items-center rounded-md bg-amber-800 px-3 text-xs font-bold text-white">Resume attempt</button>
+              <button onClick={discardPaperAttempt} className="inline-flex h-9 items-center rounded-md border border-amber-400 px-3 text-xs font-bold text-amber-900">Discard</button>
+            </div>
+          </div>
+        )}
         <p className="flex items-center gap-2 text-sm font-semibold text-pine">
           <PenLine className="h-4 w-4" /> Enter your four questions
         </p>

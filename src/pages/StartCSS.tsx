@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ChevronDown, CheckCircle2, AlertCircle, ExternalLink, FileText } from 'lucide-react'
 import { PageHeader, Section, OfficialNotice, SourceNote, Badge } from '@/components/shared'
 import { examFacts, allocationQuotaNote, syllabusSource } from '@/data/syllabus'
 import { typicalCycle } from '@/data/updates'
 import { mptChecklist, writtenChecklist } from '@/data/checklists'
+import { migrateIndexedChecklist, setChecklistItem } from '@/lib/progress'
 import { mptFacts, mptOfficialSources, mptSyllabusSubjects } from '@/data/mptSyllabus'
 import ConsultationCard from '@/components/ConsultationCard'
 
@@ -75,10 +76,14 @@ const faqs = [
   { q: 'Where do I verify rules?', a: 'Only from FPSC (fpsc.gov.pk) and the current advertisement. CSS Vista links official sources but FPSC remains the final authority.' },
 ]
 
-function Checklist({ data, title, warning }: { data: typeof mptChecklist; title: string; warning: string }) {
+function Checklist({ data, title, warning, listId }: { data: typeof mptChecklist; title: string; warning: string; listId: string }) {
   const [ticks, setTicks] = useState<Record<string, boolean>>({})
-  const total = data.reduce((a, g) => a + g.steps.length, 0)
-  const done = Object.values(ticks).filter(Boolean).length
+  const stepIds = useMemo(() => data.flatMap((g) => g.steps.map((s) => s.id)), [data])
+  const total = stepIds.length
+  const done = stepIds.filter((id) => ticks[id]).length
+
+  // Shares storage with /checklists, so ticking here is not lost on navigation.
+  useEffect(() => { setTicks(migrateIndexedChecklist(listId, stepIds)) }, [listId, stepIds])
   return (
     <div className="rounded-lg border bg-white p-5">
       <div className="flex items-center justify-between">
@@ -96,11 +101,11 @@ function Checklist({ data, title, warning }: { data: typeof mptChecklist; title:
               {g.steps.map((s) => (
                 <li key={s.id}>
                   <button
-                    onClick={() => setTicks((t) => ({ ...t, [`${title}-${s.id}`]: !t[`${title}-${s.id}`] }))}
-                    className={`flex w-full items-start gap-2.5 rounded-md border px-3.5 py-2.5 text-left text-sm transition-colors ${ticks[`${title}-${s.id}`] ? 'border-emerald-700 bg-emerald-50 text-emerald-900' : 'bg-white hover:bg-secondary/60'}`}
-                    aria-pressed={!!ticks[`${title}-${s.id}`]}
+                    onClick={() => setTicks(setChecklistItem(listId, s.id, !ticks[s.id]))}
+                    className={`flex w-full items-start gap-2.5 rounded-md border px-3.5 py-2.5 text-left text-sm transition-colors ${ticks[s.id] ? 'border-emerald-700 bg-emerald-50 text-emerald-900' : 'bg-white hover:bg-secondary/60'}`}
+                    aria-pressed={!!ticks[s.id]}
                   >
-                    {ticks[`${title}-${s.id}`] ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border-2 border-muted-foreground/40" />}
+                    {ticks[s.id] ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border-2 border-muted-foreground/40" />}
                     {s.label}
                   </button>
                 </li>
@@ -329,12 +334,14 @@ export default function StartCSS() {
             {applyTab === 'mpt' ? (
               <Checklist
                 data={mptChecklist}
+                listId="mpt"
                 title="CSS MPT Application Checklist"
                 warning="Candidates must check the latest official FPSC advertisement before applying - requirements, fees and dates are binding only as published by FPSC."
               />
             ) : (
               <Checklist
                 data={writtenChecklist}
+                listId="written"
                 title="CSS Written Application & Documents Checklist"
                 warning="Document requirements may change. Follow the latest official FPSC advertisement for the exact list, attestation rules and submission method."
               />

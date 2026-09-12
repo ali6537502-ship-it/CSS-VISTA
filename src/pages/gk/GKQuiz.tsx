@@ -16,7 +16,7 @@ import {
 } from '@/lib/progress'
 import {
   completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
-  recordQuizResult, recordReview, recordScheduledMock,
+  recordQuizResult, recordScheduledMock,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import {
@@ -124,7 +124,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const paper = buildCompetitiveMock('pms-gk', mockSessionDateKey || getDailyMockStatus('gk').dateKey)
+        const paper = await buildCompetitiveMock('pms-gk', mockSessionDateKey || getDailyMockStatus('gk').dateKey)
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -147,7 +147,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const paper = buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
+        const paper = await buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -159,7 +159,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         break
       }
       case 'one-paper': {
-        const paper = buildCompetitiveMock('one-paper', currentPakistanDateKey())
+        const paper = await buildCompetitiveMock('one-paper', currentPakistanDateKey())
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -463,6 +463,38 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 }
 
 // ---------------- Runner ----------------
+interface QuizSnapshot {
+  signature: string
+  answers: Record<string, number>
+  revealed: Record<string, boolean>
+  page: number
+  startedAt: number
+  deadline: number | null
+}
+
+const QUIZ_SESSION_PREFIX = 'cssvista:quiz-session:'
+
+function readQuizSnapshot(key: string): QuizSnapshot | null {
+  try {
+    const raw = localStorage.getItem(QUIZ_SESSION_PREFIX + key)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as QuizSnapshot
+    if (!parsed || typeof parsed.signature !== 'string' || typeof parsed.answers !== 'object') return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null) {
+  try {
+    if (snapshot) localStorage.setItem(QUIZ_SESSION_PREFIX + key, JSON.stringify(snapshot))
+    else localStorage.removeItem(QUIZ_SESSION_PREFIX + key)
+  } catch {
+    /* storage full or blocked */
+  }
+}
+
 function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
   const { qs, title, exam, timeSec, blueprint, note } = resolved
   const [page, setPage] = useState(1)
@@ -477,6 +509,11 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   const deadlineRef = useRef(exam && timeSec > 0 ? startRef.current + timeSec * 1000 : null)
   const questionStartedAtRef = useRef<Record<string, number>>({})
   const finishedRef = useRef(false)
+  // Question ids already written to durable progress, so finish() never
+  // double-counts an attempt that was committed the moment it was answered.
+  const committedRef = useRef<Set<string>>(new Set())
+  const [resumeOffer, setResumeOffer] = useState<QuizSnapshot | null>(null)
+  const signature = useMemo(() => qs.map((question) => question.id).join('|'), [qs])
 
   const range = questionPageRange(page, qs.length)
   const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
@@ -516,6 +553,74 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     })
   }, [finished, pageQuestions])
 
+  // An interrupted session is offered back when the same question set is
+  // rebuilt - which is the case for the mocks and the daily challenge, where
+  // losing a part-finished attempt costs the most.
+  useEffect(() => {
+    const snapshot = readQuizSnapshot(mode)
+    if (snapshot && snapshot.signature === signature && Object.keys(snapshot.answers).length > 0) {
+      setResumeOffer(snapshot)
+    }
+  }, [mode, signature])
+
+  useEffect(() => {
+    if (finished || resumeOffer) return
+    if (Object.keys(answers).length === 0) return
+    const persist = () => writeQuizSnapshot(mode, {
+      signature,
+      answers,
+      revealed,
+      page,
+      startedAt: startRef.current,
+      deadline: deadlineRef.current,
+    })
+    persist()
+    document.addEventListener('visibilitychange', persist)
+    window.addEventListener('pagehide', persist)
+    return () => {
+      document.removeEventListener('visibilitychange', persist)
+      window.removeEventListener('pagehide', persist)
+    }
+  }, [answers, revealed, page, mode, signature, finished, resumeOffer])
+
+  function acceptResume() {
+    const snapshot = resumeOffer
+    if (!snapshot) return
+    setAnswers(snapshot.answers)
+    setRevealed(snapshot.revealed ?? {})
+    setPage(snapshot.page || 1)
+    startRef.current = snapshot.startedAt || Date.now()
+    deadlineRef.current = snapshot.deadline ?? null
+    // Answers restored from a practice session were already committed before
+    // the interruption; do not record them a second time.
+    if (!exam) Object.keys(snapshot.answers).forEach((id) => committedRef.current.add(id))
+    setResumeOffer(null)
+  }
+
+  function discardResume() {
+    writeQuizSnapshot(mode, null)
+    setResumeOffer(null)
+  }
+
+  // Practice answers lock on first tap, so they are recorded immediately.
+  // Previously nothing reached durable storage until "Finish & see result",
+  // which meant an abandoned session left no attempts, no mistakes and no
+  // revision scheduling behind.
+  function commitAnswer(question: BankQuestion, selected: number) {
+    if (question.id.startsWith('mock-')) return
+    if (committedRef.current.has(question.id)) return
+    committedRef.current.add(question.id)
+    const correct = selected === question.a
+    const category = question.id.replace(/-\d+$/, '')
+    recordAttempt(question.id, correct, category, {
+      selected,
+      topic: question.s,
+      difficulty: question.d,
+      mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
+    })
+    if (!correct) addMistake(question.id, selected, category)
+  }
+
   function choose(question: BankQuestion, i: number) {
     if (finished) return
     if (answers[question.id] === undefined) {
@@ -536,6 +641,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       if (answers[question.id] !== undefined) return
       setAnswers((a) => ({ ...a, [question.id]: i }))
       setRevealed((r) => ({ ...r, [question.id]: true }))
+      commitAnswer(question, i)
     }
   }
 
@@ -543,6 +649,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (finishedRef.current) return
     finishedRef.current = true
     deadlineRef.current = null
+    writeQuizSnapshot(mode, null)
     setFinished(true)
     setReviewPage(1)
     const secs = Math.round((Date.now() - startRef.current) / 1000)
@@ -556,14 +663,14 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
         weaknessCounts.set(area, (weaknessCounts.get(area) ?? 0) + 1)
       }
       if (sel === undefined) return
-      if (!x.id.startsWith('mock-')) {
+      if (!x.id.startsWith('mock-') && !committedRef.current.has(x.id)) {
+        committedRef.current.add(x.id)
         recordAttempt(x.id, correct, x.id.replace(/-\d+$/, ''), {
           selected: sel,
           topic: x.s,
           difficulty: x.d,
           mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
         })
-        recordReview(x.id, correct)
         if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
       }
     })
@@ -589,6 +696,16 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
   const mm = Math.floor(Math.max(0, left) / 60)
   const ss = Math.max(0, left) % 60
+  const timeAnnouncement = useMemo(() => {
+    if (!exam || finished) return ''
+    for (const milestone of [1800, 900, 600, 300, 60]) {
+      if (left <= milestone && left > milestone - 5) {
+        const minutes = Math.round(milestone / 60)
+        return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} remaining`
+      }
+    }
+    return ''
+  }, [exam, finished, left])
   const fiveDone = mode === 'five-minute' ? fiveMinToday() : null
 
   if (finished) {
@@ -726,6 +843,19 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-6">
+      {resumeOffer && (
+        <div className="no-print mb-4 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <p className="font-semibold">You have an unfinished attempt at this quiz.</p>
+          <p className="mt-1 text-xs">
+            {Object.keys(resumeOffer.answers).length} of {qs.length} questions were answered.
+            {resumeOffer.deadline !== null ? ' Resuming continues the original timer.' : ''}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button onClick={acceptResume} className="inline-flex h-9 items-center rounded-md bg-amber-800 px-3 text-xs font-bold text-white">Resume attempt</button>
+            <button onClick={discardResume} className="inline-flex h-9 items-center rounded-md border border-amber-400 px-3 text-xs font-bold text-amber-900">Start fresh</button>
+          </div>
+        </div>
+      )}
       {/* Status bar */}
       <div className="no-print sticky top-16 z-20 rounded-lg border bg-white/95 p-3 shadow-sm backdrop-blur">
         <div className="flex items-center justify-between gap-2 text-sm">
@@ -736,10 +866,16 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                 <Clock className="h-3.5 w-3.5" /> {mm}:{String(ss).padStart(2, '0')}
               </span>
             )}
+            {exam && (
+              // Announced only at milestones; a per-second live region would
+              // make the timer unusable with a screen reader.
+              <span role="status" aria-live="assertive" className="sr-only">{timeAnnouncement}</span>
+            )}
             <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-pine">
               Questions {range.start + 1}–{range.end}
             </span>
             <span className="text-xs text-muted-foreground">{answeredCount}/{qs.length} answered</span>
+            <span className="hidden text-[11px] text-muted-foreground sm:inline">Tip: press 1-4 or A-D to answer</span>
           </div>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
@@ -784,8 +920,23 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                   {savedMap[question.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
                 </button>
               </div>
-              <p dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`mt-2 text-base font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}>{question.q}</p>
-              <div className="mt-4 grid gap-2">
+              <p id={`gk-quiz-stem-${question.id}`} dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`mt-2 text-base font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}>{question.q}</p>
+              <div
+                className="mt-4 grid gap-2"
+                role="radiogroup"
+                aria-labelledby={`gk-quiz-stem-${question.id}`}
+                onKeyDown={(event) => {
+                  // 1-4 or A-D answers the question whose options have focus.
+                  if (event.altKey || event.ctrlKey || event.metaKey) return
+                  const key = event.key.toLowerCase()
+                  const byNumber = '1234'.indexOf(key)
+                  const byLetter = 'abcd'.indexOf(key)
+                  const index = byNumber >= 0 ? byNumber : byLetter
+                  if (index < 0 || index >= question.o.length) return
+                  event.preventDefault()
+                  choose(question, index)
+                }}
+              >
                 {question.o.map((option, optionIndex) => {
                   const optionRtl = isRtlText(option)
                   const selected = answers[question.id] === optionIndex
@@ -797,11 +948,25 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                     else if (selected) classes = 'border-red-400 bg-red-50'
                     else classes = 'border opacity-70'
                   }
-                  return <button key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} onClick={() => choose(question, optionIndex)} className={`flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${classes}`}><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold text-muted-foreground">{'ABCD'[optionIndex]}</span><span className={optionRtl ? 'urdu-text' : undefined}>{option}</span></button>
+                  return (
+                    <button
+                      key={optionIndex}
+                      role="radio"
+                      aria-checked={selected}
+                      aria-label={`Option ${'ABCD'[optionIndex]}: ${option}`}
+                      dir={optionRtl ? 'rtl' : undefined}
+                      lang={optionRtl ? 'ur' : undefined}
+                      onClick={() => choose(question, optionIndex)}
+                      className={`flex min-h-11 items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${classes}`}
+                    >
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold text-muted-foreground">{'ABCD'[optionIndex]}</span>
+                      <span className={optionRtl ? 'urdu-text' : undefined}>{option}</span>
+                    </button>
+                  )
                 })}
               </div>
               {!exam && revealed[question.id] && (
-                <div className="answer-block mt-3 rounded-md border-l-4 border-emerald-500 bg-emerald-50/60 px-3 py-2.5 text-sm">
+                <div role="status" aria-live="polite" className="answer-block mt-3 rounded-md border-l-4 border-emerald-500 bg-emerald-50/60 px-3 py-2.5 text-sm">
                   <p className="font-semibold text-pine">Correct answer: {'ABCD'[question.a]}) <span dir={isRtlText(question.o[question.a]) ? 'rtl' : undefined} lang={isRtlText(question.o[question.a]) ? 'ur' : undefined} className={isRtlText(question.o[question.a]) ? 'urdu-text inline-block' : undefined}>{question.o[question.a]}</span></p>
                   {question.e && <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{question.e}</p>}
                 </div>
@@ -820,7 +985,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
           {qs.map((question, index) => {
             const number = index + 1
             const currentPage = questionPageForIndex(index) === page
-            return <button key={question.id} onClick={() => { setPage(questionPageForIndex(index)); window.setTimeout(() => document.getElementById(`gk-quiz-question-${number}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0) }} aria-label={`Go to question ${number}`} className={`grid h-8 min-w-8 place-items-center rounded border px-1 text-[11px] font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-200 text-emerald-900' : currentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${savedMap[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
+            return <button key={question.id} onClick={() => { setPage(questionPageForIndex(index)); window.setTimeout(() => document.getElementById(`gk-quiz-question-${number}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 0) }} aria-label={`Go to question ${number}`} className={`grid h-11 min-w-11 place-items-center rounded border px-1 text-[11px] font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-200 text-emerald-900' : currentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${savedMap[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
           })}
         </div>
       </section>

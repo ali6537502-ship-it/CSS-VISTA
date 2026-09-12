@@ -43,6 +43,7 @@ export default function StudyPlanner() {
   )
   const completedCount = tasks.filter((task) => completed.includes(task.id)).length
   const examTime = new Date(`${settings.examDate}T00:00:00+05:00`).getTime()
+  const examDatePassed = Number.isFinite(examTime) && examTime < openedAt
   const daysLeft = Math.max(0, Math.ceil((examTime - openedAt) / 86400000))
 
   function saveSettings() {
@@ -71,8 +72,10 @@ export default function StudyPlanner() {
         <section className="grid gap-3 sm:grid-cols-3">
           <div className="vista-card p-4">
             <CalendarCheck2 className="h-5 w-5 text-emerald-800" />
-            <p className="mt-2 text-2xl font-bold text-pine">{daysLeft}</p>
-            <p className="text-xs text-muted-foreground">Days to selected exam date</p>
+            <p className="mt-2 text-2xl font-bold text-pine">{examDatePassed ? '--' : daysLeft}</p>
+            <p className="text-xs text-muted-foreground">
+              {examDatePassed ? 'Your exam date has passed - set a new one below' : 'Days to selected exam date'}
+            </p>
           </div>
           <div className="vista-card p-4">
             <Target className="h-5 w-5 text-emerald-800" />
@@ -97,6 +100,7 @@ export default function StudyPlanner() {
                 <input
                   type="date"
                   value={settings.examDate}
+                  min={new Date().toISOString().slice(0, 10)}
                   onChange={(event) => setSettings((current) => ({ ...current, examDate: event.target.value }))}
                   className="mt-1.5 h-10 w-full rounded-md border px-3 font-normal text-foreground"
                 />

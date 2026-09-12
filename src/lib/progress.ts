@@ -3,7 +3,7 @@
 // checklist progress, timer sessions, active study time, question response time
 // and notification preferences.
 
-import { notifyProgressChanged } from '@/lib/progressEvents'
+import { notifyProgressChanged, notifyStorageFailed } from '@/lib/progressEvents'
 
 const KEY = 'cssvista:progress:v1'
 
@@ -141,6 +141,14 @@ export interface ProgressState {
   mistakes: Mistake[]
   activities: Activity[]
   checklists: Record<string, boolean[]>
+  /**
+   * Checklist ticks keyed by a stable item key rather than by array index.
+   * Index-keyed `checklists` silently shifts every saved tick when the
+   * underlying content is edited or reordered; this does not.
+   */
+  checklistItems: Record<string, Record<string, boolean>>
+  /** Short free-text notes keyed by list id then stable item key. */
+  textNotes: Record<string, Record<string, string>>
   timerSessions: TimerSession[]
   notif: {
     asked: boolean
@@ -164,6 +172,8 @@ const empty: ProgressState = {
   mistakes: [],
   activities: [],
   checklists: {},
+  checklistItems: {},
+  textNotes: {},
   timerSessions: [],
   notif: { asked: false, enabled: false, tags: { Mentors: true, Opinions: true, 'Test Series': true, FPSC: true, General: true }, dismissed: false },
   seenUpdates: [],
@@ -193,12 +203,44 @@ export function getProgress(): ProgressState {
   }
 }
 
+// Read-only selectors run in render paths and in one-second timers, and each
+// call used to re-parse the whole progress record - on a large bank that meant
+// thousands of full JSON.parse calls of a multi-megabyte string per keystroke.
+// Reuse the parsed snapshot until storage actually changes. Mirrors the same
+// cache in store.ts. Never hand this object to a mutation path: callers that
+// write must use getProgress(), which always parses fresh.
+let cachedReadRaw: string | null | undefined
+let cachedReadState: ProgressState | null = null
+
+function getProgressCached(): ProgressState {
+  try {
+    const raw = localStorage.getItem(KEY)
+    if (raw === cachedReadRaw && cachedReadState) return cachedReadState
+    const state = getProgress()
+    cachedReadRaw = raw
+    cachedReadState = state
+    return state
+  } catch {
+    cachedReadRaw = undefined
+    cachedReadState = JSON.parse(JSON.stringify(empty))
+    return cachedReadState as ProgressState
+  }
+}
+
+function invalidateReadCache() {
+  cachedReadRaw = undefined
+  cachedReadState = null
+}
+
 function save(s: ProgressState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(s))
+    invalidateReadCache()
     notifyProgressChanged()
   } catch {
-    /* storage full */
+    // Quota exceeded, private browsing, or site data blocked. Announce it so
+    // the student is told rather than silently losing their work.
+    notifyStorageFailed()
   }
 }
 
@@ -325,22 +367,27 @@ export function recordAttemptBatch(
 }
 
 export function getAttempt(id: string): AttemptRecord | undefined {
-  return getProgress().attempts[id]
+  return getProgressCached().attempts[id]
+}
+
+/** The whole attempts map, for callers filtering many questions at once. */
+export function getAttempts(): Record<string, AttemptRecord> {
+  return getProgressCached().attempts
 }
 
 export function attemptedIds(): Set<string> {
-  return new Set(Object.keys(getProgress().attempts))
+  return new Set(Object.keys(getProgressCached().attempts))
 }
 
 export function wrongIds(): string[] {
-  const s = getProgress()
+  const s = getProgressCached()
   return Object.entries(s.attempts)
     .filter(([, v]) => !v.c)
     .map(([k]) => k)
 }
 
 export function getDueReviews(now = Date.now()): ReviewSchedule[] {
-  return Object.values(getProgress().reviews ?? {})
+  return Object.values(getProgressCached().reviews ?? {})
     .filter((review) => review.dueAt <= now)
     .sort((a, b) => a.dueAt - b.dueAt || b.lapses - a.lapses)
 }
@@ -350,7 +397,7 @@ export function dueRevisionIds(limit = 60): string[] {
 }
 
 export function getRevisionStats(now = Date.now()) {
-  const reviews = Object.values(getProgress().reviews ?? {})
+  const reviews = Object.values(getProgressCached().reviews ?? {})
   const due = reviews.filter((review) => review.dueAt <= now).length
   const learning = reviews.filter((review) => review.level < 2).length
   const strengthening = reviews.filter((review) => review.level >= 2 && review.level < 4).length
@@ -369,7 +416,7 @@ export function toggleSavedMcq(id: string): boolean {
 }
 
 export function savedMcqIds(): string[] {
-  return getProgress().savedMcqs
+  return getProgressCached().savedMcqs
 }
 
 // ---------- Mistake notebook ----------
@@ -406,7 +453,7 @@ export function toggleMistakeRevised(id: string) {
 }
 
 export function getMistakes(): Mistake[] {
-  return getProgress().mistakes
+  return getProgressCached().mistakes
 }
 
 // ---------- Exam Intelligence controls ----------
@@ -453,7 +500,7 @@ export function lastActivity(): Activity | null {
 }
 
 export function recentActivities(n = 4): Activity[] {
-  return getProgress().activities.slice(0, n)
+  return getProgressCached().activities.slice(0, n)
 }
 
 // ---------- Book-summary reading ----------
@@ -505,6 +552,76 @@ export function setChecklist(id: string, value: boolean[]) {
   save(s)
 }
 
+/**
+ * Stable-key checklist storage. `id` scopes the list (e.g. a subject slug),
+ * `key` identifies the item by its own content rather than its position, so
+ * editing or reordering the list never moves a student's saved ticks.
+ */
+export function getChecklistItems(id: string): Record<string, boolean> {
+  const s = getProgressCached()
+  const v = s.checklistItems[id]
+  return v && typeof v === 'object' ? v : {}
+}
+
+export function setChecklistItem(id: string, key: string, value: boolean) {
+  const s = getProgress()
+  const list = s.checklistItems[id] && typeof s.checklistItems[id] === 'object' ? s.checklistItems[id] : {}
+  if (value) list[key] = true
+  else delete list[key]
+  s.checklistItems[id] = list
+  save(s)
+  return list
+}
+
+// ---------- Short free-text notes ----------
+export function getTextNotes(id: string): Record<string, string> {
+  const s = getProgressCached()
+  const v = s.textNotes[id]
+  return v && typeof v === 'object' ? v : {}
+}
+
+export function setTextNote(id: string, key: string, value: string) {
+  const s = getProgress()
+  const list = s.textNotes[id] && typeof s.textNotes[id] === 'object' ? s.textNotes[id] : {}
+  const trimmed = value.slice(0, 500)
+  if (trimmed.trim()) list[key] = trimmed
+  else delete list[key]
+  s.textNotes[id] = list
+  save(s)
+  return list
+}
+
+export function countChecklistItems(id: string, keys: string[]) {
+  const list = getChecklistItems(id)
+  return keys.reduce((total, key) => total + (list[key] ? 1 : 0), 0)
+}
+
+/**
+ * One-time lift of a legacy index-keyed checklist onto stable keys, so ticks
+ * saved before this change are preserved. `keys` must be in the same order the
+ * legacy array used. Runs only when nothing is stored under the new shape yet.
+ */
+export function migrateIndexedChecklist(id: string, keys: string[]): Record<string, boolean> {
+  const s = getProgress()
+  const already = s.checklistItems[id]
+  if (already && typeof already === 'object') return already
+
+  const legacy = s.checklists[id]
+  const migrated: Record<string, boolean> = {}
+  if (Array.isArray(legacy) && legacy.length === keys.length) {
+    keys.forEach((key, index) => { if (legacy[index]) migrated[key] = true })
+  }
+  s.checklistItems[id] = migrated
+  save(s)
+  return migrated
+}
+
+export function resetChecklistItems(id: string) {
+  const s = getProgress()
+  s.checklistItems[id] = {}
+  save(s)
+}
+
 // ---------- Timer sessions ----------
 export function saveTimerSession(sess: Omit<TimerSession, 'id' | 'ts'>) {
   const s = getProgress()
@@ -514,7 +631,7 @@ export function saveTimerSession(sess: Omit<TimerSession, 'id' | 'ts'>) {
 }
 
 export function getTimerSessions(): TimerSession[] {
-  return getProgress().timerSessions
+  return getProgressCached().timerSessions
 }
 
 // ---------- Study-time and question-speed analytics ----------
@@ -563,7 +680,7 @@ export function recordQuestionTiming(
 }
 
 export function getStudyAnalytics(days = 7): StudyAnalytics {
-  const state = getProgress()
+  const state = getProgressCached()
   const todayKey = localDateKey()
   const dayCount = Math.max(1, days)
   const currentKeys = Array.from({ length: dayCount }, (_, index) => shiftedDateKey(todayKey, index - dayCount + 1))
@@ -687,6 +804,6 @@ export function recordFiveMin(score: number, total: number) {
 
 export function fiveMinToday(): { score: number; total: number } | null {
   const today = new Date().toISOString().slice(0, 10)
-  const r = getProgress().fiveMin.find((f) => f.date === today)
+  const r = getProgressCached().fiveMin.find((f) => f.date === today)
   return r ? { score: r.score, total: r.total } : null
 }
