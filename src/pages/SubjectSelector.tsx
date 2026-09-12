@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
-import { AlertTriangle, CheckCircle2, RotateCcw, Target } from 'lucide-react'
+import { Link } from 'react-router'
+import { AlertTriangle, CheckCircle2, RotateCcw, Save, Target } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import { optionalGroups, type OptionalSubject } from '@/data/syllabus'
+import { saveSelectedOptionals } from '@/lib/store'
 import { usePageBack } from '@/lib/backNavigation'
 
 const backgrounds = ['Commerce / Business', 'Computer Science / IT', 'Engineering', 'Natural Sciences (Bio/Chem/Physics)', 'Social Sciences / Arts', 'Law', 'Languages / Literature', 'Medical']
@@ -18,11 +20,13 @@ interface Wizard {
   statsComfort: 'Avoid numbers' | 'Comfortable with numbers'
   syllabusPref: 'Shorter syllabi' | 'No preference' | 'Depth over length'
   overlapPref: 'Maximise overlap' | 'No preference'
+  attempts: 'First attempt' | 'One previous attempt' | 'Multiple previous attempts'
 }
 
 const initial: Wizard = {
   background: '', prepMonths: 6, dailyHours: 4, readingSpeed: 'Average', writing: 'Average',
   interests: [], theoryComfort: 'Mixed', statsComfort: 'Comfortable with numbers',
+  attempts: 'First attempt',
   syllabusPref: 'No preference', overlapPref: 'Maximise overlap',
 }
 
@@ -77,6 +81,7 @@ function buildCombo(ranked: OptionalSubject[]): Combo {
 
 export default function SubjectSelector() {
   const [step, setStep] = useState(0)
+  const [savedCombo, setSavedCombo] = useState<string | null>(null)
   usePageBack(step > 0, () => setStep((value) => Math.max(0, value - 1)))
   const [w, setW] = useState<Wizard>(initial)
 
@@ -120,10 +125,14 @@ export default function SubjectSelector() {
                 </select>
               </label>
               <label className="block text-sm font-medium">Have you attempted CSS before?
-                <select className="mt-1.5 h-10 w-full rounded-md border border-input px-3 text-sm" defaultValue="No">
-                  <option>No - first attempt</option>
-                  <option>Yes - one attempt</option>
-                  <option>Yes - multiple attempts</option>
+                <select
+                  className="mt-1.5 h-11 w-full rounded-md border border-input px-3 text-sm"
+                  value={w.attempts}
+                  onChange={(event) => setW((current) => ({ ...current, attempts: event.target.value as Wizard['attempts'] }))}
+                >
+                  <option value="First attempt">No - first attempt</option>
+                  <option value="One previous attempt">Yes - one attempt</option>
+                  <option value="Multiple previous attempts">Yes - multiple attempts</option>
                 </select>
               </label>
             </div>
@@ -222,6 +231,25 @@ export default function SubjectSelector() {
                   <p className="mt-1.5 text-sm text-amber-800">
                     <strong>Risks:</strong> {c.subjects.filter((s) => s.difficulty !== 'Moderate').map((s) => `${s.name}: ${s.risks}`).join(' ') || 'Low structural risk; depth of preparation still decides the outcome.'}
                   </p>
+                  {c.valid && (
+                    <div className="mt-4 flex flex-wrap items-center gap-2 border-t pt-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          saveSelectedOptionals(c.subjects.map((subject) => subject.name))
+                          setSavedCombo(label)
+                        }}
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-bold text-emerald-50 hover:bg-emerald-900"
+                      >
+                        <Save className="h-4 w-4" /> Use these in my study planner
+                      </button>
+                      {savedCombo === label && (
+                        <span role="status" aria-live="polite" className="text-sm font-semibold text-emerald-800">
+                          Saved. <Link to="/study-planner" className="underline underline-offset-2">Open the planner</Link>
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

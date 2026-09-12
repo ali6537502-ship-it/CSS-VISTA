@@ -76,9 +76,21 @@ export function localDateKey(date = new Date()) {
   return `${year}-${month}-${day}`
 }
 
+/**
+ * The default exam date rolls forward instead of rotting. A hardcoded date
+ * silently becomes "0 days left" for every new student once it passes.
+ */
+export function nextDefaultExamDate(today = new Date()) {
+  const month = 0 // January
+  const day = 27
+  const candidate = new Date(today.getFullYear(), month, day)
+  const year = candidate >= today ? today.getFullYear() : today.getFullYear() + 1
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+}
+
 export function defaultStudyPlannerSettings(): Omit<StudyPlannerSettings, 'configuredAt'> {
   return {
-    examDate: '2027-01-27',
+    examDate: nextDefaultExamDate(),
     dailyHours: 4,
     restDay: 5,
     selectedOptionals: [],
@@ -126,7 +138,7 @@ export function buildDailyPlan(
       ? `/answer-evaluation?subject=${encodeURIComponent(subject.name)}`
       : subject.compulsory
         ? `/subjects/compulsory/${subject.slug}`
-        : '/lectures'
+        : `/lectures?course=${encodeURIComponent(subject.slug)}`
     return {
       id: `${dateKey}-${subject.slug}-${index}`,
       subject: subject.name,

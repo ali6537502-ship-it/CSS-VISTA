@@ -561,6 +561,23 @@ export function saveStudyPlanner(settings: Omit<StudyPlannerSettings, 'configure
   save(s)
 }
 
+/**
+ * Write only the chosen optional subjects, preserving the rest of the planner
+ * settings. The Subject Selector produced a recommendation that was never
+ * stored anywhere, so the wizard fed nothing.
+ */
+export function saveSelectedOptionals(names: string[]) {
+  const s = getState()
+  const existing = s.studyPlanner
+  s.studyPlanner = {
+    ...(existing ?? { examDate: '', dailyHours: 4, restDay: 5 }),
+    ...existing,
+    selectedOptionals: [...new Set(names)],
+    configuredAt: new Date().toISOString(),
+  } as typeof s.studyPlanner
+  save(s)
+}
+
 export function togglePlanTask(date: string, taskId: string): boolean {
   const s = getState()
   const current = new Set(s.planTaskCompletions?.[date] ?? [])

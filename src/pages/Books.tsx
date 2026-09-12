@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Bell, BellRing, BookOpen, Download, Eye, FileText, X } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { books, opinions, type Opinion } from '@/data/books'
@@ -56,9 +56,33 @@ export function BooksPage() {
 
 export function OpinionsPage() {
   const [active, setActive] = useState<Opinion | null>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   usePageBack(Boolean(active), () => setActive(null))
+
   const [pageIdx, setPageIdx] = useState(0)
   const [prefs, setPrefs] = useState(getNotifPrefs())
+
+  // Matches the BookSummaries reader: ESC closes, focus moves in, body scroll
+  // locks, and the arrow keys page. Previously none of this was here.
+  useEffect(() => {
+    if (!active) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setActive(null); return }
+      if (event.key === 'ArrowLeft') setPageIdx((p) => Math.max(0, p - 1))
+      if (event.key === 'ArrowRight') setPageIdx((p) => Math.min(active.pages.length - 1, p + 1))
+    }
+    window.addEventListener('keydown', onKey)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previousOverflow
+      previouslyFocused?.focus?.()
+    }
+  }, [active])
+
   const opinionsOn = prefs.enabled && (prefs.tags['Opinions'] ?? true)
 
   function toggleOpinionsNotif() {
@@ -122,13 +146,19 @@ export function OpinionsPage() {
 
       {/* Reader overlay */}
       {active && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-black/90" onClick={() => setActive(null)}>
+        <div
+          className="fixed inset-0 z-50 flex flex-col bg-black/90"
+          onClick={() => setActive(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${active.title} reader`}
+        >
           <div className="flex items-center justify-between px-4 py-3 text-white" onClick={(e) => e.stopPropagation()}>
             <div>
               <p className="font-display text-lg font-bold">{active.title}</p>
               <p className="text-xs text-emerald-300">{active.outlet} · {active.date} · Page {pageIdx + 1} of {active.pages.length}</p>
             </div>
-            <button onClick={() => setActive(null)} className="rounded-full bg-white/10 p-2 hover:bg-white/20" aria-label="Close">
+            <button ref={closeRef} onClick={() => setActive(null)} className="rounded-full bg-white/10 p-2 hover:bg-white/20" aria-label="Close">
               <X className="h-5 w-5" />
             </button>
           </div>

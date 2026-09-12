@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { compulsorySubjects } from '@/data/syllabus'
-import { vocabulary } from '@/data/vocab'
+import { loadFullVocabulary, vocabulary as curatedVocabulary, type VocabWord } from '@/data/vocab'
 import { getState, setSubjectProgress, setGoal, getStats, setVistaShortcut } from '@/lib/store'
 import { shippedMcqSummary } from '@/data/mcqMeta'
 import { notifyProgressChanged } from '@/lib/progressEvents'
@@ -160,6 +160,13 @@ export default function StudyTools() {
   const [goal, setGoalInput] = useState(state.goalText)
   const [wordIdx, setWordIdx] = useState(0)
   const [flipped, setFlipped] = useState(false)
+  // Flashcards use the full bank, which is fetched rather than bundled.
+  const [vocabulary, setVocabulary] = useState<VocabWord[]>(curatedVocabulary)
+  useEffect(() => {
+    let live = true
+    loadFullVocabulary().then((rows) => { if (live) setVocabulary(rows) })
+    return () => { live = false }
+  }, [])
   const stats = getStats()
   const [quoteIdx] = useState(() => new Date().getDate() % quotationsSeed.length)
   const [shortcutSettings, setShortcutSettings] = useState(state.vistaShortcut)

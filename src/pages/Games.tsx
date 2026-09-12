@@ -5,6 +5,7 @@ import { constitutionTimeline, pakistanMovementTimeline, matchConcepts, type Mat
 import { questions as mcqBank, quizCategories } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
 import { getState, recordGameScore } from '@/lib/store'
+import { addMistake, recordActivity, recordAttempt } from '@/lib/progress'
 import { usePageBack } from '@/lib/backNavigation'
 import {
   MATCHES_PER_GAME_SET,
@@ -36,7 +37,12 @@ function buildMcqMatchSets(bank: Question[]) {
       if (seenQuestions.has(questionKey) || seenAnswers.has(answerKey)) continue
       seenQuestions.add(questionKey)
       seenAnswers.add(answerKey)
-      pairs.push({ concept: question, match: correct })
+      pairs.push({
+        concept: question,
+        match: correct,
+        questionId: `q-${item.id}`,
+        category: mcqCategoryLabels.get(category) ?? category,
+      })
     }
 
     if (pairs.length < 4) return []
@@ -121,6 +127,7 @@ function MatchGame({ title, pairs, gameId, page, onPage }: { title: string; pair
   )
   const [currentIndex, setCurrentIndex] = useState(0)
   const [wrong, setWrong] = useState(0)
+  const recordedPairs = useRef<Set<string>>(new Set())
   const [best, setBest] = useState(() => getState().gameHighScores[gameId] ?? 0)
   const [feedback, setFeedback] = useState<null | { kind: 'correct' | 'wrong'; optionId: string }>(null)
   const advanceTimer = useRef<number | null>(null)
@@ -132,14 +139,28 @@ function MatchGame({ title, pairs, gameId, page, onPage }: { title: string; pair
     if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current)
   }, [])
 
+  // Matching pairs are drawn from the real MCQ bank, but nothing was ever
+  // recorded, so game practice was invisible to the dashboard, the mistake
+  // notebook and revision scheduling. Each pair is recorded once.
+  function recordPair(pair: MatchPair | undefined, correct: boolean) {
+    if (!pair?.questionId) return
+    if (recordedPairs.current.has(pair.questionId)) return
+    recordedPairs.current.add(pair.questionId)
+    const category = pair.category ?? 'Interactive practice'
+    recordAttempt(pair.questionId, correct, category, { mode: 'game', topic: pair.concept })
+    if (!correct) addMistake(pair.questionId, -1, category)
+  }
+
   function pickMatch(option: { id: string; pairIndex: number }) {
     if (!currentPair || feedback?.kind === 'correct' || option.pairIndex < currentIndex) return
     if (option.pairIndex !== currentIndex) {
       setWrong((value) => value + 1)
       setFeedback({ kind: 'wrong', optionId: option.id })
+      recordPair(currentPair, false)
       return
     }
 
+    recordPair(currentPair, true)
     setFeedback({ kind: 'correct', optionId: option.id })
     advanceTimer.current = window.setTimeout(() => {
       const nextIndex = currentIndex + 1
@@ -148,6 +169,7 @@ function MatchGame({ title, pairs, gameId, page, onPage }: { title: string; pair
       if (nextIndex >= roundPairs.length) {
         const finalScore = Math.max(0, roundPairs.length * 10 - wrong * 2)
         recordGameScore(gameId, finalScore)
+        recordActivity({ type: 'quiz', label: `${title} - scored ${finalScore}`, path: '/games' })
         setBest((value) => Math.max(value, finalScore))
       }
     }, 420)

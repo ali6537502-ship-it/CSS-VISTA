@@ -54,8 +54,42 @@ function McqCard({ item, number }: { item: AffairMcq; number: number }) {
     <article className="rounded-xl border bg-white p-4 sm:p-5">
       <p className="text-xs font-semibold text-muted-foreground">{item.date} · Question {number}</p>
       <h3 className="mt-2 font-semibold leading-relaxed text-pine">{item.question}</h3>
-      <div className="mt-3 grid gap-2">{item.options.map((option, index) => { const correct = submitted && index === item.answer; const wrong = submitted && selected === index && index !== item.answer; return <button key={`${index}-${option}`} type="button" disabled={submitted} onClick={() => answer(index)} className={`min-h-11 rounded-lg border px-3 py-2.5 text-left text-sm ${correct ? 'border-emerald-600 bg-emerald-50 text-emerald-950' : wrong ? 'border-red-400 bg-red-50 text-red-950' : 'hover:border-emerald-500 hover:bg-emerald-50/60'}`}><span className="mr-2 font-bold">{String.fromCharCode(65 + index)}.</span>{option}</button> })}</div>
-      {submitted && <div className="mt-3"><p className="flex items-center gap-2 text-sm font-semibold text-emerald-900"><CheckCircle2 className="h-4 w-4" /> Correct answer: {String.fromCharCode(65 + item.answer)}</p><button type="button" onClick={() => setDetails((value) => !value)} aria-expanded={details} className="mt-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-semibold text-pine hover:bg-secondary">Details <ChevronDown className={`h-4 w-4 transition-transform ${details ? 'rotate-180' : ''}`} /></button>{details && <div className="mt-3 space-y-2 rounded-lg bg-secondary/60 p-4 text-sm leading-relaxed">{item.explanation && <p><strong>Explanation:</strong> {item.explanation}</p>}{item.background && <p><strong>Background:</strong> {item.background}</p>}{item.whyItMatters && <p><strong>Why it matters:</strong> {item.whyItMatters}</p>}{item.source && <p className="text-xs text-muted-foreground"><strong>Source recorded in the supplied dossier:</strong> {item.source}</p>}</div>}</div>}
+      <div
+        className="mt-3 grid gap-2"
+        role="radiogroup"
+        aria-label={`Answer options for question ${number}`}
+        onKeyDown={(event) => {
+          if (submitted || event.altKey || event.ctrlKey || event.metaKey) return
+          const key = event.key.toLowerCase()
+          const byNumber = '1234'.indexOf(key)
+          const byLetter = 'abcd'.indexOf(key)
+          const index = byNumber >= 0 ? byNumber : byLetter
+          if (index < 0 || index >= item.options.length) return
+          event.preventDefault()
+          answer(index)
+        }}
+      >
+        {item.options.map((option, index) => {
+          const correct = submitted && index === item.answer
+          const wrong = submitted && selected === index && index !== item.answer
+          return (
+            <button
+              key={`${index}-${option}`}
+              type="button"
+              role="radio"
+              aria-checked={selected === index}
+              // aria-disabled rather than disabled: a disabled button leaves the
+              // tab order, so a keyboard user could not review their own answer.
+              aria-disabled={submitted}
+              onClick={() => answer(index)}
+              className={`min-h-11 rounded-lg border px-3 py-2.5 text-left text-sm ${correct ? 'border-emerald-600 bg-emerald-50 text-emerald-950' : wrong ? 'border-red-400 bg-red-50 text-red-950' : submitted ? 'opacity-70' : 'hover:border-emerald-500 hover:bg-emerald-50/60'}`}
+            >
+              <span className="mr-2 font-bold">{String.fromCharCode(65 + index)}.</span>{option}
+            </button>
+          )
+        })}
+      </div>
+      {submitted && <div className="mt-3" role="status" aria-live="polite"><p className="flex items-center gap-2 text-sm font-semibold text-emerald-900"><CheckCircle2 className="h-4 w-4" /> Correct answer: {String.fromCharCode(65 + item.answer)}</p><button type="button" onClick={() => setDetails((value) => !value)} aria-expanded={details} className="mt-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-sm font-semibold text-pine hover:bg-secondary">Details <ChevronDown className={`h-4 w-4 transition-transform ${details ? 'rotate-180' : ''}`} /></button>{details && <div className="mt-3 space-y-2 rounded-lg bg-secondary/60 p-4 text-sm leading-relaxed">{item.explanation && <p><strong>Explanation:</strong> {item.explanation}</p>}{item.background && <p><strong>Background:</strong> {item.background}</p>}{item.whyItMatters && <p><strong>Why it matters:</strong> {item.whyItMatters}</p>}{item.source && <p className="text-xs text-muted-foreground"><strong>Source recorded in the supplied dossier:</strong> {item.source}</p>}</div>}</div>}
     </article>
   )
 }
