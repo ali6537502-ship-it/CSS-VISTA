@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import {
   CheckCircle2, Clock3, FileCheck2, MessageCircle, Save, ShieldCheck, Trash2,
@@ -45,6 +45,7 @@ export default function AnswerEvaluation() {
   const [notes, setNotes] = useState('')
   const [savedRequest, setSavedRequest] = useState<EvaluationRequest | null>(null)
   const [restoreDismissed, setRestoreDismissed] = useState(false)
+  const [handedOff, setHandedOff] = useState(false)
   const [history, setHistory] = useState(() => getState().evaluationRequests ?? [])
   const { user, configured } = useAccount()
   const sadia = mentors.find((mentor) => mentor.id === 'sadia')!
@@ -52,6 +53,26 @@ export default function AnswerEvaluation() {
     () => answer.trim().split(/\s+/).filter(Boolean).length,
     [answer],
   )
+
+  // Accept a handoff from the writing desk. The answer is far too large for a
+  // URL parameter, so it travels through the draft the writing desk already
+  // autosaves - previously the student had to re-paste it by hand.
+  useEffect(() => {
+    if (searchParams.get('from') !== 'answer-writing') return
+    try {
+      const raw = localStorage.getItem('cssvista:draft:answer-writing')
+      if (!raw) return
+      const draft = JSON.parse(raw) as { subject?: string; question?: string; intro?: string; body?: string; conclusion?: string }
+      const composed = [draft.intro, draft.body, draft.conclusion].filter(Boolean).join('\n\n').trim()
+      if (!composed) return
+      setQuestion((current) => current || (draft.question ?? ''))
+      setAnswer((current) => current || composed)
+      if (draft.subject && supportedSubjects.includes(draft.subject)) setSubject(draft.subject)
+      setHandedOff(true)
+    } catch {
+      /* unreadable draft - the student can still paste manually */
+    }
+  }, [searchParams])
 
   // Autosave so a refresh no longer discards a long answer typed in the box.
   const draft = useMemo(() => ({ subject, question, answer, notes }), [subject, question, answer, notes])
@@ -211,6 +232,11 @@ export default function AnswerEvaluation() {
                 />
               </label>
 
+              {handedOff && (
+                <p role="status" aria-live="polite" className="mt-5 rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+                  Brought across from your answer-writing desk. Edit it here before sending.
+                </p>
+              )}
               {canRestore && (
                 <div className="mt-5 flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
                   <span className="flex-1">You have an unfinished answer from a previous session.</span>

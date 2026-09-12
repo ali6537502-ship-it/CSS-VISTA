@@ -6,7 +6,9 @@ import { mptChecklist, writtenChecklist } from '@/data/checklists'
 import { migrateIndexedChecklist, recordActivity, resetChecklistItems, setChecklistItem } from '@/lib/progress'
 import { printPage } from '@/components/PrintMenu'
 
-const LAST_UPDATED = '17 July 2026'
+// Was a hardcoded string, dated in the future and with nothing keeping it
+// honest. The checklists carry no date of their own, so the page now points at
+// the official source rather than asserting a freshness it cannot verify.
 const FPSC_URL = 'https://www.fpsc.gov.pk/'
 
 export default function Checklists() {
@@ -115,7 +117,7 @@ function ChecklistBlock({ id, groups, title }: { id: string; groups: { group: st
         <a href={FPSC_URL} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-1.5 rounded-md border border-emerald-700/40 bg-emerald-50 px-4 text-sm font-semibold text-emerald-900">
           <ExternalLink className="h-4 w-4" /> Official FPSC source
         </a>
-        <span className="ml-auto text-xs text-muted-foreground">Last updated: {LAST_UPDATED}</span>
+        <span className="ml-auto text-xs text-muted-foreground">Always confirm against the current FPSC advertisement</span>
       </div>
     </div>
   )

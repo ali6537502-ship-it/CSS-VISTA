@@ -3,7 +3,7 @@
 // checklist progress, timer sessions, active study time, question response time
 // and notification preferences.
 
-import { notifyProgressChanged } from '@/lib/progressEvents'
+import { notifyProgressChanged, notifyStorageFailed } from '@/lib/progressEvents'
 
 const KEY = 'cssvista:progress:v1'
 
@@ -238,7 +238,9 @@ function save(s: ProgressState) {
     invalidateReadCache()
     notifyProgressChanged()
   } catch {
-    /* storage full */
+    // Quota exceeded, private browsing, or site data blocked. Announce it so
+    // the student is told rather than silently losing their work.
+    notifyStorageFailed()
   }
 }
 

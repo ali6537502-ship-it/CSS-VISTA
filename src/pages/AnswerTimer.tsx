@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
-import { recordActivity, saveTimerSession } from '@/lib/progress'
+import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
@@ -189,6 +189,59 @@ function SingleTimer() {
             ))}
           </div>
         </div>
+      )}
+
+      <PastTimerSessions refreshKey={doneTimes.length} />
+    </div>
+  )
+}
+
+/**
+ * Every timing was saved to progress.timerSessions and never read back -
+ * getTimerSessions() had no callers, so a student's speed history existed but
+ * was invisible. This is that history.
+ */
+function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
+  const [sessions, setSessions] = useState<TimerSession[]>([])
+
+  useEffect(() => { setSessions(getTimerSessions()) }, [refreshKey])
+
+  const singles = sessions.filter((session) => session.mode === 'single')
+  if (!sessions.length) return null
+
+  const averageSingle = singles.length
+    ? Math.round(singles.reduce((total, session) => total + session.total, 0) / singles.length)
+    : 0
+
+  return (
+    <div className="rounded-xl border bg-white p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="text-sm font-semibold text-pine">Your timing history</p>
+        {averageSingle > 0 && (
+          <p className="text-xs text-muted-foreground">
+            Average single question: <span className="font-mono font-bold text-pine">{fmt(averageSingle)}</span> across {singles.length}
+          </p>
+        )}
+      </div>
+      <div className="mt-3 space-y-1.5">
+        {sessions.slice(0, 8).map((session) => {
+          const attempted = session.times.filter((value) => value >= 0).length
+          return (
+            <div key={session.id} className="flex flex-wrap items-center gap-2 rounded border bg-secondary/40 px-3 py-2 text-sm">
+              <span className="min-w-0 flex-1 truncate">
+                {session.mode === 'paper' ? 'Four-question paper' : session.questions[0] || 'Single question'}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {new Date(session.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
+                {session.mode === 'paper' ? ` · ${attempted}/4 attempted` : ''}
+              </span>
+              <span className="shrink-0 font-mono font-bold text-pine">{fmt(session.total)}</span>
+            </div>
+          )
+        })}
+      </div>
+      {sessions.length > 8 && (
+        <p className="mt-2 text-xs text-muted-foreground">Showing the 8 most recent of {sessions.length} saved attempts.</p>
       )}
     </div>
   )

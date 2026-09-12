@@ -7,6 +7,7 @@ import {
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
   NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, type LucideIcon,
 } from 'lucide-react'
+import { STORAGE_FAILED_EVENT } from '@/lib/progressEvents'
 import { site } from '@/data/site'
 import { css2026WrittenResult } from '@/data/css2026Result'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
@@ -172,6 +173,31 @@ const desktopMoreLinks = (() => {
     (item, index, all) => all.findIndex((candidate) => candidate.to === item.to) === index,
   )
 })()
+
+/**
+ * Saving progress can fail silently - a full quota, private browsing, or site
+ * data blocked. Students carried on believing their work was saved. This says
+ * so once, rather than letting them lose an evening's practice unaware.
+ */
+function StorageFailureNotice() {
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    const onFail = () => setFailed(true)
+    window.addEventListener(STORAGE_FAILED_EVENT, onFail)
+    return () => window.removeEventListener(STORAGE_FAILED_EVENT, onFail)
+  }, [])
+
+  if (!failed) return null
+
+  return (
+    <div role="alert" className="no-print border-b border-red-300 bg-red-50 px-4 py-2.5 text-center text-sm text-red-900">
+      <strong className="font-bold">Your progress is not being saved.</strong>{' '}
+      Your browser storage is full or blocked, so answers, notes and streaks will be lost when you leave.
+      Free up space or allow site data for this site, then reload.
+    </div>
+  )
+}
 
 function NotificationBar() {
   const [deviceTime, setDeviceTime] = useState(() => new Date())
@@ -821,6 +847,7 @@ export default function Layout() {
       <RouteSeo />
       <PrintBranding />
       <StudyActivityTracker />
+      <StorageFailureNotice />
       <NotificationBar />
       {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
       <header className="cssv-site-header sticky top-0 z-40 border-b backdrop-blur-xl">

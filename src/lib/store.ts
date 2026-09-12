@@ -1,5 +1,5 @@
 // Local-first persistence for CSS Vista. Signed-in students can sync this state.
-import { notifyProgressChanged } from '@/lib/progressEvents'
+import { notifyProgressChanged, notifyStorageFailed } from '@/lib/progressEvents'
 
 const KEY = 'cssvista:v1'
 
@@ -247,7 +247,9 @@ function save(s: VistaState) {
     invalidateReadCache()
     notifyProgressChanged()
   } catch {
-    /* storage full or unavailable */
+    // Quota exceeded, private browsing, or site data blocked. Announce it so
+    // the student is told rather than silently losing their work.
+    notifyStorageFailed()
   }
 }
 

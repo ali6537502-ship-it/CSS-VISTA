@@ -104,8 +104,6 @@ export default function PastPapers() {
       (!needle || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(needle))
   ), [papers, exam, subject, year, stype, optionalGroup, mode, savedOnly, bookmarkIds, needle])
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAPERS_PER_PAGE))
-  const pagedPapers = filtered.slice((currentPage - 1) * PAPERS_PER_PAGE, currentPage * PAPERS_PER_PAGE)
 
   useEffect(() => {
     if (!filtersMounted.current) {
@@ -114,10 +112,6 @@ export default function PastPapers() {
     }
     setCurrentPage(1)
   }, [exam, mode, optionalGroup, q, savedOnly, stype, subject, year])
-
-  useEffect(() => {
-    if (currentPage > pageCount) setCurrentPage(pageCount)
-  }, [currentPage, pageCount])
 
   useEffect(() => {
     const next = new URLSearchParams()
@@ -133,9 +127,12 @@ export default function PastPapers() {
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
   }, [currentPage, exam, mode, optionalGroup, q, savedOnly, searchParams, setSearchParams, stype, subject, year])
 
-  const grouped = useMemo(() => {
+  // Grouping runs over the whole filtered set, then pages are cut on group
+  // boundaries. Paginating first split a subject across two pages and repeated
+  // its heading on the next one.
+  const allGroups = useMemo(() => {
     const map = new Map<string, PastPaper[]>()
-    for (const p of pagedPapers) {
+    for (const p of filtered) {
       const group = p.subjectType === 'Optional' ? `Optional Group ${groupForPaper(p) ?? '-'}` : p.subjectType
       const key = `${p.examination} · ${group} · ${p.subject}`
       map.set(key, [...(map.get(key) ?? []), p])
@@ -157,7 +154,33 @@ export default function PastPapers() {
         )
         return groupDifference || first.subject.localeCompare(second.subject)
       })
-  }, [pagedPapers])
+  }, [filtered])
+
+  // Fill each page up to the paper budget without ever splitting a group. A
+  // group larger than the budget occupies a page of its own.
+  const pages = useMemo(() => {
+    const built: (readonly [string, PastPaper[]])[][] = []
+    let current: (readonly [string, PastPaper[]])[] = []
+    let count = 0
+    for (const entry of allGroups) {
+      if (current.length && count + entry[1].length > PAPERS_PER_PAGE) {
+        built.push(current)
+        current = []
+        count = 0
+      }
+      current.push(entry)
+      count += entry[1].length
+    }
+    if (current.length) built.push(current)
+    return built.length ? built : [[]]
+  }, [allGroups])
+
+  const pageCount = pages.length
+  const grouped = pages[Math.min(currentPage, pageCount) - 1] ?? []
+
+  useEffect(() => {
+    if (currentPage > pageCount) setCurrentPage(pageCount)
+  }, [currentPage, pageCount])
 
   const pagination = pageCount > 1 && (
     <nav aria-label="Past paper archive pages" className="no-print flex flex-wrap items-center justify-center gap-2 rounded-xl border bg-white p-3">

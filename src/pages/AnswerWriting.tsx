@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Download, Maximize2, Minimize2, Pause, Play, RotateCcw, Save, Trash2 } from 'lucide-react'
+import { Link } from 'react-router'
+import { Download, FileCheck2, Maximize2, Minimize2, Pause, Play, RotateCcw, Save, Trash2 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { analyticalQuestions } from '@/data/challenges'
 import { saveAnswer, getState, deleteAnswer } from '@/lib/store'
@@ -170,6 +171,14 @@ export default function AnswerWriting() {
                 <button onClick={downloadTxt} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary">
                   <Download className="h-4 w-4" /> Download as text
                 </button>
+                <Link
+                  to="/answer-evaluation?from=answer-writing"
+                  aria-disabled={!hasContent}
+                  onClick={(event) => { if (!hasContent) event.preventDefault() }}
+                  className={`inline-flex min-h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-medium ${hasContent ? 'text-pine hover:bg-secondary' : 'pointer-events-none opacity-50'}`}
+                >
+                  <FileCheck2 className="h-4 w-4" /> Send to evaluation
+                </Link>
               </div>
             </div>
           </div>
