@@ -935,7 +935,7 @@ export default function Layout() {
             About Us
           </Link>
           <Link
-            to="/account"
+            to={user ? "/account/dashboard" : "/account"}
             className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:flex"
             aria-label={user ? `Open account for ${user.email ?? 'signed-in student'}` : 'Open student account'}
             title={user ? user.email : accountsConfigured ? 'Sign in' : 'Account setup'}

@@ -43,6 +43,8 @@ const AnswerTimer = lazy(() => import('./pages/AnswerTimer'))
 const Checklists = lazy(() => import('./pages/Checklists'))
 const BooksPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.BooksPage })))
 const OpinionsPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.OpinionsPage })))
+const AccountWorkspace = lazy(() => import('./features/current-affairs/Workspace'))
+const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introduction'))
 const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
@@ -138,6 +140,8 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
+        <Route path="/account/*" element={<S><AccountWorkspace /></S>} />
+        <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<S><Factbook /></S>} />
         <Route path="/consultation" element={<S><Consultation /></S>} />
         <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />

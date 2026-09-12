@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router'
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router'
 import {
   Activity, CheckCircle2, Cloud, LoaderCircle, LockKeyhole, LogOut, Mail, RefreshCw,
   ShieldCheck, UserRound,
@@ -7,6 +7,8 @@ import {
 import { PageHeader } from '@/components/shared'
 import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { useAccount } from '@/lib/accountContext'
+
+import { safeReturnTo } from '@/features/current-affairs/model'
 
 type Mode = 'sign-in' | 'create'
 const googleAuthEnabled = import.meta.env.VITE_SUPABASE_GOOGLE_AUTH_ENABLED === 'true'
@@ -19,10 +21,11 @@ export default function Account() {
   } = useAccount()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [mode, setMode] = useState<Mode>('sign-in')
+  const [mode, setMode] = useState<Mode>(searchParams.get('mode') === 'create' ? 'create' : 'sign-in')
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [signupConfirmation, setSignupConfirmation] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -34,6 +37,8 @@ export default function Account() {
 
   async function submit(event: FormEvent) {
     event.preventDefault()
+    if (mode === 'create' && password !== signupConfirmation) { setError('The two password entries do not match.'); return }
+    if (mode === 'create' && !fullName.trim()) { setError('Please enter your full name.'); return }
     setSubmitting(true)
     setMessage('')
     setError('')
@@ -49,8 +54,7 @@ export default function Account() {
       setMessage('Check your email to confirm the account, then return here to sign in.')
       return
     }
-    const requestedReturn = searchParams.get('returnTo')
-    if (requestedReturn?.startsWith('/') && !requestedReturn.startsWith('//')) navigate(requestedReturn, { replace: true })
+    navigate(safeReturnTo(searchParams.get('returnTo')), { replace: true })
   }
 
   async function sendPasswordReset() {
@@ -99,6 +103,8 @@ export default function Account() {
     setMessage('Your password has been updated successfully.')
   }
 
+  if (!loading && user && !resetMode && searchParams.get('settings') !== '1') return <Navigate to={safeReturnTo(searchParams.get('returnTo'))} replace />
+
   const displayName = typeof user?.user_metadata?.full_name === 'string'
     ? user.user_metadata.full_name
     : user?.email?.split('@')[0]
@@ -107,7 +113,7 @@ export default function Account() {
     <div>
       <PageHeader
         title="Your CSS Vista Account"
-        description="Sign in to carry your study hours, question-speed history, quiz results, streaks, saved MCQs, mistake notebook and study tools across devices."
+        description="Your free account brings daily current affairs, saved developments, revision facts and study progress together across devices."
       />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:py-10">
         {loading ? (
@@ -186,6 +192,7 @@ export default function Account() {
               <h2 className="mt-1 text-2xl font-bold text-pine">{displayName || 'CSS aspirant'}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{user.email}</p>
               <div className="mt-6 flex flex-wrap gap-2">
+                <Link to="/account/dashboard" className="inline-flex h-11 items-center rounded-md bg-pine px-4 text-sm font-semibold text-white">My Daily Briefing</Link>
                 <Link
                   to="/dashboard"
                   className="inline-flex h-10 items-center gap-2 rounded-md bg-pine px-4 text-sm font-semibold text-white"
@@ -310,6 +317,7 @@ export default function Account() {
                     />
                   </div>
                 </label>
+                {mode === 'create' && <label className="block text-sm font-medium">Confirm password<input type="password" required minLength={8} maxLength={200} autoComplete="new-password" value={signupConfirmation} onChange={(event) => setSignupConfirmation(event.target.value)} className="mt-1.5 h-11 w-full rounded-md border bg-white px-3 outline-none focus:ring-2 focus:ring-ring" /></label>}
                 {error && <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
                 {message && <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">{message}</p>}
                 <button
@@ -318,7 +326,7 @@ export default function Account() {
                   className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-pine px-4 text-sm font-semibold text-white disabled:opacity-60"
                 >
                   {submitting && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                  {mode === 'sign-in' ? 'Sign in securely' : 'Create my account'}
+                  {mode === 'sign-in' ? 'Sign in securely' : 'Create my free account'}
                 </button>
                 {mode === 'sign-in' && (
                   <button
@@ -354,6 +362,8 @@ export default function Account() {
               </h2>
               <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
                 {[
+                  'Daily current affairs, original sources and revision facts',
+                  'Saved developments and reading history',
                   'Quiz attempts, scores and streak history',
                   'Daily study hours and question response-time trends',
                   'Saved MCQs and mistake notebook',
