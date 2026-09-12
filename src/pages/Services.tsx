@@ -1,10 +1,27 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router'
 import { PageHeader, SourceNote, Badge } from '@/components/shared'
 import { serviceGroups, servicesSource } from '@/data/services'
 
 export default function Services() {
-  const [active, setActive] = useState(serviceGroups[0].slug)
+  // The group lived in component state, so twelve content-rich profiles had no
+  // shareable link and no distinct surface for search engines.
+  const [searchParams, setSearchParams] = useSearchParams()
+  const requested = searchParams.get('group')
+  const active = serviceGroups.some((group) => group.slug === requested) ? requested! : serviceGroups[0].slug
   const svc = serviceGroups.find((s) => s.slug === active)!
+
+  function setActive(slug: string) {
+    const next = new URLSearchParams(searchParams)
+    next.set('group', slug)
+    setSearchParams(next, { replace: true })
+  }
+
+  useEffect(() => {
+    const previousTitle = document.title
+    document.title = `${svc.name} - CSS Occupational Groups | CSS Vista`
+    return () => { document.title = previousTitle }
+  }, [svc.name])
 
   return (
     <div>
@@ -41,7 +58,14 @@ export default function Services() {
               ))}
             </div>
             <div className="mt-5"><Badge tone="gold">Verify the current group structure from the official CSS Rules</Badge></div>
-            <SourceNote source={servicesSource.name} url={servicesSource.url} date={servicesSource.lastUpdated} />
+            <p className="mt-6 rounded-lg border bg-secondary/40 px-4 py-3 text-sm text-muted-foreground">
+          Preparing your service preferences for the interview?{' '}
+          <Link to="/psych-viva" className="font-semibold text-emerald-800 underline underline-offset-2">
+            Work through the service-group awareness worksheet
+          </Link>{' '}
+          on the Psychological Assessment &amp; Viva page.
+        </p>
+        <SourceNote source={servicesSource.name} url={servicesSource.url} date={servicesSource.lastUpdated} />
           </div>
         </div>
       </div>

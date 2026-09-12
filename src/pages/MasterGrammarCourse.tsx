@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router'
 import { Link } from 'react-router'
 import {
   ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, ChevronRight,
@@ -206,9 +207,25 @@ function FlowStrip({ current }: { current: CourseTab }) {
   )
 }
 
+const COURSE_TABS: CourseTab[] = ['lesson', 'practice', 'quiz', 'revision']
+
+function scrollToTop() {
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+}
+
 export default function MasterGrammarCourse() {
-  const [activeDayNumber, setActiveDayNumber] = useState(1)
-  const [tab, setTab] = useState<CourseTab>('lesson')
+  const [searchParams, setSearchParams] = useSearchParams()
+  // A thirty-day course that reset to Day 1 on every refresh, with no way to
+  // link to a day. Both now live in the URL.
+  const [activeDayNumber, setActiveDayNumber] = useState(() => {
+    const requested = Number.parseInt(searchParams.get('day') ?? '', 10)
+    return Number.isFinite(requested) && requested >= 1 && requested <= 30 ? requested : 1
+  })
+  const [tab, setTab] = useState<CourseTab>(() => {
+    const requested = searchParams.get('ctab') as CourseTab | null
+    return requested && COURSE_TABS.includes(requested) ? requested : 'lesson'
+  })
   const [progress, setProgress] = useState<ProgressState>(EMPTY_PROGRESS)
   const [revealedPractice, setRevealedPractice] = useState<number[]>([])
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({})
@@ -229,13 +246,21 @@ export default function MasterGrammarCourse() {
     setRevealedPractice([])
     setQuizAnswers({})
     setQuizSubmitted(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }
 
   function changeTab(next: CourseTab) {
     setTab(next)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }
+
+  useEffect(() => {
+    const next = new URLSearchParams(searchParams)
+    next.set('day', String(activeDayNumber))
+    if (tab === 'lesson') next.delete('ctab')
+    else next.set('ctab', tab)
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [activeDayNumber, tab, searchParams, setSearchParams])
 
   function updateProgress(next: ProgressState) {
     setProgress(next)

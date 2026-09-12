@@ -21,9 +21,9 @@ export default function LanguageGrammar() {
   const [language, setLanguage] = useState<Language>(initialLanguage)
   const [index, setIndex] = useState<GrammarIndex | null>(null)
   const [course, setCourse] = useState<GrammarCourse | null>(null)
-  const [topicSlug, setTopicSlug] = useState('')
-  const [query, setQuery] = useState('')
-  const [page, setPage] = useState(1)
+  const [topicSlug, setTopicSlug] = useState(() => searchParams.get('topic') ?? '')
+  const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
+  const [page, setPage] = useState(() => Math.max(1, Number.parseInt(searchParams.get('page') ?? '1', 10) || 1))
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -65,12 +65,30 @@ export default function LanguageGrammar() {
   const visible = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
   const resultStart = filtered.length ? (safePage - 1) * PAGE_SIZE + 1 : 0
   const resultEnd = Math.min(safePage * PAGE_SIZE, filtered.length)
+  useEffect(() => {
+    if (searchParams.get('view') === 'master-course') return
+    const next = new URLSearchParams(searchParams)
+    next.set('lang', language)
+    if (topicSlug) next.set('topic', topicSlug); else next.delete('topic')
+    if (query.trim()) next.set('q', query.trim()); else next.delete('q')
+    if (page > 1) next.set('page', String(page)); else next.delete('page')
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [language, topicSlug, query, page, searchParams, setSearchParams])
+
   const rtl = course?.direction === 'rtl'
   const showMasterCourse = language === 'english' && searchParams.get('view') === 'master-course'
 
   function selectLanguage(next: Language) {
     setLanguage(next)
-    setSearchParams({ lang: next })
+    // Switching language used to replace the whole param set, which silently
+    // dropped `view` and threw the student out of the 30-day course.
+    const params = new URLSearchParams(searchParams)
+    params.set('lang', next)
+    params.delete('topic')
+    params.delete('q')
+    params.delete('page')
+    if (next !== 'english') params.delete('view')
+    setSearchParams(params, { replace: true })
   }
 
   function selectTopic(slug: string) {
@@ -130,7 +148,7 @@ export default function LanguageGrammar() {
               </div>
               <button
                 type="button"
-                onClick={() => setSearchParams({ lang: 'english', view: 'master-course' })}
+                onClick={() => setSearchParams(new URLSearchParams({ lang: 'english', view: 'master-course' }))}
                 className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amber-300 px-4 py-2.5 text-sm font-bold text-emerald-950 hover:bg-amber-200"
               >
                 Start 30-day course <ChevronRight className="h-4 w-4" />

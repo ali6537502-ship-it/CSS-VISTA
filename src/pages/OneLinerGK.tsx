@@ -58,15 +58,26 @@ function OneLinerContent({ text }: { text: string }) {
 }
 
 export default function OneLinerGK() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [index, setIndex] = useState<OneLinerIndex | null>(null)
   const [category, setCategory] = useState<OneLinerCategory | null>(null)
   const [selectedSlug, setSelectedSlug] = useState(() => searchParams.get('category') ?? 'general-knowledge')
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
-  const [subcategory, setSubcategory] = useState('all')
-  const [freshness, setFreshness] = useState<FreshnessFilter>('all')
-  const [page, setPage] = useState(1)
+  // Filtering runs over up to 14,456 notes, so it follows a debounced copy of
+  // the query rather than every keystroke.
+  const [deferredQuery, setDeferredQuery] = useState(query)
+  const [subcategory, setSubcategory] = useState(() => searchParams.get('sub') ?? 'all')
+  const [freshness, setFreshness] = useState<FreshnessFilter>(() => {
+    const requested = searchParams.get('fresh')
+    return requested === 'stable' || requested === 'dated' ? requested : 'all'
+  })
+  const [page, setPage] = useState(() => Math.max(1, Number.parseInt(searchParams.get('page') ?? '1', 10) || 1))
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setDeferredQuery(query), 250)
+    return () => window.clearTimeout(timeout)
+  }, [query])
 
   useEffect(() => {
     let active = true
@@ -74,13 +85,14 @@ export default function OneLinerGK() {
       .then((data) => {
         if (!active) return
         setIndex(data)
-        if (!data.categories.some((item) => item.slug === selectedSlug) && data.categories[0]) {
-          setSelectedSlug(data.categories[0].slug)
-        }
+        // Only correct an unknown slug from the URL; never override a live choice.
+        setSelectedSlug((current) => (
+          data.categories.some((item) => item.slug === current) ? current : data.categories[0]?.slug ?? current
+        ))
       })
       .catch(() => active && setError('The One-Liner GK index could not be loaded. Please refresh and try again.'))
     return () => { active = false }
-  }, [selectedSlug])
+  }, [])
 
   useEffect(() => {
     let active = true
@@ -94,19 +106,31 @@ export default function OneLinerGK() {
 
   useEffect(() => {
     setPage(1)
-  }, [selectedSlug, query, subcategory, freshness])
+  }, [selectedSlug, deferredQuery, subcategory, freshness])
+
+  // Filters live in the URL, so a refresh, a shared link and the back button
+  // all restore the view. Previously they were read at mount and never written.
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (selectedSlug) next.set('category', selectedSlug)
+    if (deferredQuery.trim()) next.set('search', deferredQuery.trim())
+    if (subcategory !== 'all') next.set('sub', subcategory)
+    if (freshness !== 'all') next.set('fresh', freshness)
+    if (page > 1) next.set('page', String(page))
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [selectedSlug, deferredQuery, subcategory, freshness, page, searchParams, setSearchParams])
 
   const selectedSummary = index?.categories.find((item) => item.slug === selectedSlug)
   const filteredNotes = useMemo(() => {
     if (!category) return []
-    const normalizedQuery = query.trim().toLocaleLowerCase()
+    const normalizedQuery = deferredQuery.trim().toLocaleLowerCase()
     return category.notes.filter((note) => {
       if (subcategory !== 'all' && note.subcategory !== subcategory) return false
       if (freshness === 'stable' && note.timeSensitive) return false
       if (freshness === 'dated' && !note.timeSensitive) return false
       return !normalizedQuery || note.text.toLocaleLowerCase().includes(normalizedQuery)
     })
-  }, [category, freshness, query, subcategory])
+  }, [category, freshness, deferredQuery, subcategory])
 
   const totalPages = Math.max(1, Math.ceil(filteredNotes.length / PAGE_SIZE))
   const safePage = Math.min(page, totalPages)
@@ -116,9 +140,9 @@ export default function OneLinerGK() {
 
   function chooseCategory(slug: string) {
     setSelectedSlug(slug)
+    // Subcategories belong to a category, so they reset. The search term does
+    // not, and wiping it lost the student's intent mid-search.
     setSubcategory('all')
-    setFreshness('all')
-    setQuery('')
   }
 
   return (
