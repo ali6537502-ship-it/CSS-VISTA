@@ -53,7 +53,7 @@ test('all competitive mock formats still build complete, non-repeating papers', 
   try {
     const { buildCompetitiveMock } = await server.ssrLoadModule('/src/data/mockPapers.ts')
     for (const kind of Object.keys(expected) as Array<keyof typeof expected>) {
-      const paper = buildCompetitiveMock(kind, '2026-09-04')
+      const paper = await buildCompetitiveMock(kind, '2026-09-04')
       assert.equal(paper.questions.length, expected[kind], kind)
       assert.equal(new Set(paper.questions.map((question: { id: string }) => question.id)).size, expected[kind], `${kind} IDs`)
       assert.equal(new Set(paper.questions.map((question: { q: string }) => question.q.toLocaleLowerCase())).size, expected[kind], `${kind} stems`)
