@@ -39,7 +39,7 @@ const protectedPage = (path, title, description, options = {}) => ({
  * server routing and advertising eligibility. Unknown routes fail closed.
  */
 export const ROUTE_REGISTRY = [
-  publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista', { title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', adMode: 'none', minimumHeight: 0, schemaType: 'WebSite' }),
+  publicPage('/', 'Free CSS, PMS and One-Paper Exam Preparation', 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.', 'CSS Vista', { title: 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform', minimumHeight: 0, schemaType: 'WebSite' }),
   publicPage('/start-css', 'How to Start CSS Preparation', 'A practical guide to CSS eligibility, examination stages, subject selection and an effective preparation roadmap.', 'How to start CSS preparation'),
   publicPage('/subjects/compulsory', 'CSS Compulsory Subjects', 'Explore the compulsory CSS subjects, syllabus coverage and study resources for the written examination.', 'CSS compulsory subjects'),
   publicPage('/subjects/compulsory/essay', 'CSS English Essay', 'Study the CSS English Essay syllabus, preparation approach and relevant learning resources.', 'CSS English Essay'),
@@ -67,13 +67,13 @@ export const ROUTE_REGISTRY = [
   publicPage('/games', 'Interactive Practice', 'Use academic matching activities and interactive practice tools for quick revision and recall.', 'Interactive academic practice', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/psych-viva', 'CSS Psychological Assessment and Viva Guidance', 'Prepare for the CSS psychological assessment and viva with structured guidance and resources.', 'CSS psychological assessment and viva guidance'),
   publicPage('/fpsc-updates', 'FPSC Updates and CSS Results', 'Read important FPSC notices, CSS examination updates and result information.', 'FPSC updates and CSS results'),
-  publicPage('/mentors', 'About CSS Vista and Its Mentors', 'Learn about CSS Vista and the mentors behind its free competitive-examination preparation resources.', 'About CSS Vista', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/mentors', 'About CSS Vista and Its Mentors', 'Learn about CSS Vista and the mentors behind its free competitive-examination preparation resources.', 'About CSS Vista'),
   publicPage('/services', 'CSS Occupational Groups and Services', 'Explore CSS occupational groups, service profiles and career information.', 'CSS occupational groups and services'),
   publicPage('/analysis', 'CSS Exam Analysis', 'Read examination-focused analysis and preparation insights for CSS aspirants.', 'CSS exam analysis'),
   publicPage('/grammar-vocabulary', 'Grammar and Vocabulary Practice', 'Study source-backed vocabulary, commonly confused words, phrasal verbs, idioms, substitutions, grammar lessons, quizzes and a daily challenge.', 'Grammar and vocabulary practice', { adMode: 'none', minimumHeight: 0 }),
   protectedPage('/dashboard', 'Student Dashboard', 'Private CSS Vista study dashboard.'),
   protectedPage('/daily-challenge', 'Daily Challenge', 'Interactive daily question challenge.'),
-  publicPage('/gk', 'General Knowledge and PMS Preparation', 'Explore general-knowledge subject banks, reference material and PMS mock information.', 'General knowledge preparation', { adMode: 'none', minimumHeight: 0 }),
+  publicPage('/gk', 'General Knowledge and PMS Preparation', 'Explore general-knowledge subject banks, reference material and PMS mock information.', 'General knowledge preparation'),
   publicPage('/one-liner-gk', '30,491 One-Liner GK Questions', 'Browse searchable general-knowledge fact cards organised by subject and topic for quick revision.', '30,491 one-liner GK questions'),
   publicPage('/language-grammar', 'Urdu and English Grammar Resources', 'Browse Urdu and English grammar reference material for competitive examinations.', 'Urdu and English grammar resources'),
   publicPage('/book-summaries', '100 Book Summaries for CSS Aspirants', 'Browse searchable book summaries and reading guidance for CSS and competitive-examination preparation.', 'Book summaries for CSS aspirants'),
@@ -104,7 +104,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/disclaimer', 'Disclaimer', 'Read CSS Vista\'s independent educational disclaimer and guidance on verifying official examination information.', 'Disclaimer', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/copyright', 'Copyright Policy', 'Read how CSS Vista distinguishes its original material from official, public and third-party works.', 'Copyright & Intellectual Property', { adMode: 'none', minimumHeight: 0 }),
   publicPage('/editorial-policy', 'Editorial & Corrections Policy', 'Read CSS Vista standards for accuracy, sourcing, updates, corrections and official examination information.', 'Editorial & Corrections Policy', { adMode: 'none', minimumHeight: 0 }),
-  publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { title: 'About CSS Vista', adMode: 'none', minimumHeight: 0 }),
+  publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { title: 'About CSS Vista' }),
   publicPage('/contact', 'Contact CSS Vista', 'Use CSS Vista verified public channels for general enquiries, technical issues, corrections, privacy and copyright concerns.', 'Contact CSS Vista', { title: 'Contact CSS Vista', adMode: 'none', minimumHeight: 0 }),
   protectedPage('/admin', 'Administration', 'Private administration area.', { robots: 'noindex, nofollow' }),
   protectedPage('/admin/login', 'Administration Sign In', 'Private administration sign-in page.', { robots: 'noindex, nofollow' }),

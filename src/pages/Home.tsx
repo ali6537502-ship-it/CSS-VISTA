@@ -565,19 +565,21 @@ export default function Home() {
   return (
     <div className="cssv-home min-h-screen pb-4 text-slate-900">
       <div className="mx-auto max-w-[1240px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-7">
-        <button
-          type="button"
-          onClick={openSearch}
-          className="cssv-glass-panel cssv-home-search cssv-reveal cssv-tap flex h-11 w-full items-center gap-2.5 rounded-xl border px-3 text-left"
-          style={{ '--cssv-delay': '40ms' } as CSSProperties}
-          aria-label="Search notes, MCQs, subjects, past papers and more"
-        >
-          <Search className="h-4 w-4 shrink-0 text-emerald-700" />
-          <span className="min-w-0 flex-1 truncate text-[13px] text-slate-400">Search notes, MCQs, subjects, past papers…</span>
-          <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
-        </button>
+        <div id="cssv-home-ad-free-top" data-cssv-auto-ad-exclusion="home-top">
+          <button
+            type="button"
+            onClick={openSearch}
+            className="cssv-glass-panel cssv-home-search cssv-reveal cssv-tap flex h-11 w-full items-center gap-2.5 rounded-xl border px-3 text-left"
+            style={{ '--cssv-delay': '40ms' } as CSSProperties}
+            aria-label="Search notes, MCQs, subjects, past papers and more"
+          >
+            <Search className="h-4 w-4 shrink-0 text-emerald-700" />
+            <span className="min-w-0 flex-1 truncate text-[13px] text-slate-400">Search notes, MCQs, subjects, past papers…</span>
+            <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
+          </button>
 
-        <HomeHero />
+          <HomeHero />
+        </div>
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 

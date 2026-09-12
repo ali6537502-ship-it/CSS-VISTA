@@ -7,23 +7,33 @@ test('publisher ID is the verified CSS Vista publisher', () => {
   assert.equal(ADSENSE_PUBLISHER_ID, 'ca-pub-6131271603014611')
 })
 
-test('homepage is completely ad-free while ownership remains verifiable by meta tag and ads.txt', () => {
+test('homepage allows Auto Ads below its protected top while manual units stay disabled', () => {
   const policy = getAdRoutePolicy('/')
-  assert.equal(policy.autoAdsEnabled, false)
+  assert.equal(policy.autoAdsEnabled, true)
   assert.equal(policy.manualAdsEnabled, false)
   assert.equal(policy.placementType, 'pre-footer')
   assert.equal(policy.minimumHeight, 0)
 })
 
+test('homepage exposes a stable Auto Ads excluded-area boundary around search and hero', async () => {
+  const source = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/pages/Home.tsx', import.meta.url), 'utf8'))
+  const topBoundary = source.indexOf('id="cssv-home-ad-free-top"')
+  const hero = source.indexOf('<HomeHero />', topBoundary)
+  const lowerContent = source.indexOf('<TimerHub', hero)
+  assert.ok(topBoundary >= 0)
+  assert.ok(hero > topBoundary)
+  assert.ok(lowerContent > hero)
+})
+
 test('private, legal, viewer and active question routes are ad-free', () => {
   const protectedRoutes = [
-    '/mpt', '/mpt/bank/everyday-science', '/gk', '/gk/cat/islamic-general-knowledge',
+    '/mpt', '/mpt/bank/everyday-science', '/gk/cat/islamic-general-knowledge',
     '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
     '/current-affairs',
     '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
     '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy-policy',
     '/cookie-policy', '/terms-and-conditions', '/disclaimer', '/copyright', '/editorial-policy', '/legal', '/contact',
-    '/mentors', '/handwritten-notes', '/lectures', '/not-a-real-route',
+    '/answer-timer', '/handwritten-notes', '/lectures', '/not-a-real-route',
   ]
   for (const path of protectedRoutes) {
     const policy = getAdRoutePolicy(path)
@@ -35,9 +45,9 @@ test('private, legal, viewer and active question routes are ad-free', () => {
 
 test('only substantial public content is Auto Ads eligible and manual units stay off until a placement is audited', () => {
   const eligibleRoutes = [
-    '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
+    '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
-    '/fpsc-updates', '/fpsc-syllabus', '/book-summaries',
+    '/fpsc-updates', '/fpsc-syllabus', '/book-summaries', '/gk', '/mentors', '/about',
     '/one-liner-gk', '/css-past-paper-analysis', '/opinions',
   ]
   for (const path of eligibleRoutes) {
@@ -68,7 +78,10 @@ test('vignettes are blocked for protected destinations and sensitive controls', 
   assert.equal(shouldProtectVignetteLink({ currentPath: '/notes', destinationPath: '/past-papers', download: true }), true)
   assert.equal(shouldProtectVignetteLink({ currentPath: '/notes', external: true }), true)
   assert.equal(shouldProtectVignetteLink({ currentPath: '/notes', destinationPath: '/past-papers', navigationControl: true }), true)
-  assert.equal(shouldProtectVignetteLink({ currentPath: '/', destinationPath: '/notes' }), true)
+  assert.equal(shouldProtectVignetteLink({ currentPath: '/', destinationPath: '/notes' }), false)
+  assert.equal(shouldProtectVignetteLink({ currentPath: '/', destinationPath: '/gk/quiz' }), true)
+  assert.equal(shouldProtectVignetteLink({ currentPath: '/answer-timer', destinationPath: '/notes' }), true)
+  assert.equal(shouldProtectVignetteLink({ currentPath: '/gk/quiz', destinationPath: '/notes' }), true)
 })
 
 test('legacy artificial timing and page-count state is absent', async () => {

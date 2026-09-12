@@ -56,7 +56,7 @@ function protectVignetteLinks(currentPath: string, currentSearch: string, root: 
       return
     }
 
-    const navigationControl = Boolean(anchor.closest('header, nav, footer, [role="navigation"]'))
+    const navigationControl = Boolean(anchor.closest('header, nav, footer, [role="navigation"], [data-cssv-auto-ad-exclusion]'))
     const protectedLink = shouldProtectVignetteLink({
       currentPath,
       currentSearch,
