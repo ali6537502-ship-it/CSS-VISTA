@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
-// Public verification key only. The offline private signing key is never deployed.
-return ['expires_at' => '2026-09-12T14:00:00Z', 'scope' => 'hostinger-account-cutover-2026-09-12', 'public_key' => <<<'PEM'
+// Public verification key only. Offline private key is never deployed.
+return ['expires_at' => '2026-09-13T01:00:00Z', 'scope' => 'hostinger-account-cutover-2026-09-12-v2', 'public_key' => <<<'PEM'
 -----BEGIN PUBLIC KEY-----
-MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA3Y6bWdQ6kT8T/r2qqRN3
-REAFu2CK3HMlcpJvX35/TgH+Gj5qQzreoTJMjKPTinZ951nfPv/kC1YQQIiHOtsB
-XfZciK33hR7iVJQs6676xd7eMeFSYsl7tBzaN4/dgchumMkqbnk0McLhd6s+gKEp
-4vy3iyWnvCfOv6csb09g16ZRRXj2czC8/yjFS1v36O9gFvRVO6u2mDIFjyDPf3/a
-PvFCvdAOFE921e2ny/k7b1MhooByWkWdDftfmZIwtReW3iy2nRFkQiOg88nO7KsC
-rvbMh544biNy8amtHHDN7NeLIifiXlnf8v1tjnmGLDW17LUcdN1Z4TFp5Hi94eLQ
-EDecJ2d5eCpzFSlSREqOdhzNOVkdXJvG67j7gOS7ZeVJr2YFJpJXhReWtDgMOIBR
-IoUdvkQmQUcvcepFXzQI3Q4dZsic+MSvlxiBOzzY67T6zyk/VXfZxuZVqvMucyyD
-EWbzDf8xErzyY9EpMI7+4y6OrjfJ6aEZNVj8QuACLGzDAgMBAAE=
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAx+2s+IpALhTwrxpgVl1y
+lVBaXeKZPH82FvSMSFyHj5ipclEHDN25VnzNmpU4Bas4R08/KwNFumrS8WYIYSEj
+hIyNTmUUHRfSh9bc19qZgtV49Etupkq3QfihrvalCYeO570unWn1s+AuKXmP0pS4
+N6BZxUK3Hsi+gJVtvtiXx3CTOtqR1sqpIY2ByL68LLnS3bBo2pjVZGSgZafl5fyT
+tGuAlAmduo1OfNO1Y9E12Cye1iALlPveh9OKtJQtkeIORK//dWVxYFAAQTZRkjJh
+Fd47MoikgL3oCJg6WZdpu0DyGeHy4tIID/RPy34MPweRw8UIiM/YOZdTTBmNgFho
+yfonktxJMc6Z+174yxF+Hce4qh2/ZEaCMEZP2ILG8bhuqyeBTemhFyQiTW5nDPI7
+OYtZFUu335h9K/5J4+u/HKDMophrNMAu9QJVlK/imjslS7wW78QCLOrnCgFv8qyn
+ghS18SupBpD+n99DDQSZRCoOkrlWC4kQQac/CY1/4Xn/AgMBAAE=
 -----END PUBLIC KEY-----
 PEM
 ];
