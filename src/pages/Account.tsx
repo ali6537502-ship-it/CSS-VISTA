@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { StudentProfilePanel } from '@/components/StudentProfilePanel'
+import { AuthenticatedAccountAd } from '@/components/Ads'
 import { useAccount } from '@/lib/accountContext'
 
 import { safeReturnTo } from '@/features/current-affairs/model'
@@ -250,6 +251,7 @@ export default function Account() {
               </section>
             </div>
             <StudentProfilePanel email={user.email ?? ''} />
+            <AuthenticatedAccountAd sensitiveControlsVisible={resetMode || changePasswordOpen} />
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-[1fr_.85fr]">

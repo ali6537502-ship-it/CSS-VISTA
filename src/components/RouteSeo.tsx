@@ -2,6 +2,16 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { CANONICAL_ORIGIN, canonicalForPath, findRouteDefinition } from '@/data/routeRegistry.mjs'
 
+const TRACKING_QUERY_KEYS = new Set([
+  'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_id',
+  'gclid', 'dclid', 'fbclid', 'msclkid',
+])
+
+function hasIndexableTrackingQueryOnly(search: string) {
+  const keys = [...new URLSearchParams(search).keys()]
+  return keys.length > 0 && keys.every((key) => TRACKING_QUERY_KEYS.has(key.toLowerCase()))
+}
+
 function setMeta(selector: string, attribute: string, value: string) {
   const node = document.querySelector<HTMLMetaElement>(selector)
   if (node) node.setAttribute(attribute, value)
@@ -15,7 +25,9 @@ export default function RouteSeo() {
     const unknown = !route
     const title = route?.title || 'Page Not Found | CSS Vista'
     const description = route?.description || 'The requested CSS Vista page could not be found.'
-    const robots = location.search ? 'noindex, follow' : (route?.robots || 'noindex, nofollow')
+    const robots = location.search && !hasIndexableTrackingQueryOnly(location.search)
+      ? 'noindex, follow'
+      : (route?.robots || 'noindex, nofollow')
     const canonical = unknown ? `${CANONICAL_ORIGIN}/404` : canonicalForPath(location.pathname)
     const routeSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
 
@@ -25,7 +37,9 @@ export default function RouteSeo() {
     // page components own. Avoid replacing it with a generic route definition.
     if (
       location.pathname.startsWith('/past-papers/view/')
+      || /^\/past-papers\/(?:css|pms|ppsc|mpt)\/\d{4}\/?$/.test(location.pathname)
       || location.pathname.startsWith('/gk/cat/')
+      || location.pathname.startsWith('/book-summaries/')
       || location.pathname === '/css-2026-written-result'
     ) {
       setMeta('meta[name="robots"]', 'content', robots)

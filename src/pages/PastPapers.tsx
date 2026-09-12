@@ -26,6 +26,12 @@ function groupForPaper(paper: PastPaper) {
   return paper.optionalGroup ?? optionalGroupBySubject.get(paper.subject)
 }
 
+function collectionPaperTitle(paper: PastPaper) {
+  if (paper.examination === 'MPT') return `CSS MPT ${paper.year} Screening Test Past Paper`
+  const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
+  return `${paper.examination} ${paper.year} ${paper.subject}${part} Past Paper`
+}
+
 export default function PastPapers() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -45,9 +51,15 @@ export default function PastPapers() {
   const filtersMounted = useRef(false)
   const [, forceRefresh] = useState(0)
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
+  const routeCollectionPapers = useMemo(
+    () => isYearCollection
+      ? papers.filter((paper) => paper.examination === routeExam && paper.year === Number(routeYear))
+      : [],
+    [isYearCollection, papers, routeExam, routeYear],
+  )
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse ${routeExam} ${routeYear} past-paper PDFs by subject.`
+    ? `Browse ${routeCollectionPapers.length} ${routeExam} ${routeYear} past-paper PDFs in this verified collection.`
     : 'CSS, PMS, PPSC and MPT past-paper PDFs organised by examination, subject and year.'
 
   useEffect(() => {
@@ -60,17 +72,63 @@ export default function PastPapers() {
   }, [])
 
   useEffect(() => {
-    const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
     const title = isYearCollection ? `${pageTitle} — All Subjects | CSS Vista` : 'CSS, PMS, PPSC & MPT Past Papers | CSS Vista'
+    const canonical = isYearCollection
+      ? `https://www.css-vista.com/past-papers/${routeExam.toLowerCase()}/${routeYear}`
+      : 'https://www.css-vista.com/past-papers'
+    const updates: Array<[string, string]> = [
+      ['meta[name="description"]', pageDescription],
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', pageDescription],
+      ['meta[property="og:url"]', canonical],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', pageDescription],
+    ]
+    const previousTitle = document.title
+    const previousMeta = updates.map(([selector]) => document.querySelector<HTMLMetaElement>(selector)?.content ?? null)
+    const canonicalNode = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    const previousCanonical = canonicalNode?.href ?? null
+    const existingSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+    const previousSchema = existingSchema?.textContent ?? null
+
     document.title = title
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    const previousDescription = description?.content
-    if (description) description.content = pageDescription
-    return () => {
-      document.title = defaultTitle
-      if (description && previousDescription) description.content = previousDescription
+    updates.forEach(([selector, content]) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content))
+    canonicalNode?.setAttribute('href', canonical)
+    if (isYearCollection) {
+      const schema = existingSchema || document.createElement('script')
+      schema.id = 'cssv-route-structured-data'
+      schema.type = 'application/ld+json'
+      schema.text = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: pageTitle,
+        description: pageDescription,
+        url: canonical,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: routeCollectionPapers.length,
+          itemListElement: routeCollectionPapers.map((paper, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: collectionPaperTitle(paper),
+            url: `https://www.css-vista.com/past-papers/view/${paper.id}`,
+          })),
+        },
+      })
+      if (!existingSchema) document.head.appendChild(schema)
     }
-  }, [isYearCollection, pageDescription, pageTitle])
+    return () => {
+      document.title = previousTitle
+      updates.forEach(([selector], index) => {
+        const node = document.querySelector<HTMLMetaElement>(selector)
+        if (node && previousMeta[index] !== null) node.content = previousMeta[index]!
+      })
+      if (canonicalNode && previousCanonical) canonicalNode.href = previousCanonical
+      const schema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+      if (!existingSchema) schema?.remove()
+      else if (schema) schema.text = previousSchema ?? ''
+    }
+  }, [isYearCollection, pageDescription, pageTitle, routeCollectionPapers, routeExam, routeYear])
 
   const papersForSelectedExam = papers.filter((paper) => exam === 'All' || paper.examination === exam)
   const years = [...new Set(papersForSelectedExam.map((p) => p.year))].sort((a, b) => b - a)

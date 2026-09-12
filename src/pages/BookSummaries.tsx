@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router'
 import {
   ArrowLeft, ArrowRight, BookOpen, Bookmark, BookmarkCheck, CheckCircle2, Clock3, Copy,
   LibraryBig, Minus, Plus, Printer, Search, Sparkles, X,
@@ -346,13 +346,14 @@ function BookReader({
 
 export default function BookSummaries() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const { slug: routeBookSlug } = useParams<{ slug?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
   const [library, setLibrary] = useState<BookSummaryLibrary | null>(null)
   const [error, setError] = useState('')
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [category, setCategory] = useState(() => searchParams.get('category') ?? 'all')
   const [loadAttempt, setLoadAttempt] = useState(0)
-  const openedFromListRef = useRef(false)
   const [readingStates, setReadingStates] = useState(() => getAllBookSummaryProgress())
 
   useEffect(() => {
@@ -395,7 +396,7 @@ export default function BookSummaries() {
     [library],
   )
 
-  const requestedBookSlug = searchParams.get('book')
+  const requestedBookSlug = routeBookSlug ?? searchParams.get('book')
   const activeBook = useMemo(
     () => requestedBookSlug && library
       ? library.books.find((book) => book.slug === requestedBookSlug) ?? null
@@ -422,27 +423,95 @@ export default function BookSummaries() {
   }
 
   function openBook(book: BookSummary, replace = false) {
-    if (!replace) openedFromListRef.current = true
-    const next = new URLSearchParams(searchParams)
-    next.set('book', book.slug)
-    setSearchParams(next, { replace })
+    navigate(`/book-summaries/${book.slug}`, {
+      replace,
+      state: replace ? location.state : { fromBookSummaries: true },
+    })
     recordActivity({ type: 'page', label: `Book summary: ${book.title}`, path: '/book-summaries' })
   }
 
   const closeBook = useCallback(() => {
-    if (openedFromListRef.current) {
-      openedFromListRef.current = false
+    const fromBookSummaries = Boolean((location.state as { fromBookSummaries?: boolean } | null)?.fromBookSummaries)
+    if (routeBookSlug && fromBookSummaries) {
       navigate(-1)
+      return
+    }
+    if (routeBookSlug) {
+      navigate('/book-summaries', { replace: true })
       return
     }
     const next = new URLSearchParams(searchParams)
     next.delete('book')
     setSearchParams(next, { replace: true })
-  }, [navigate, searchParams, setSearchParams])
+  }, [location.state, navigate, routeBookSlug, searchParams, setSearchParams])
 
   usePageBack(Boolean(activeBook), closeBook)
 
   const activeBookIndex = activeBook ? filteredBooks.findIndex((book) => book.slug === activeBook.slug) : -1
+
+  useEffect(() => {
+    if (!activeBook || !routeBookSlug) return
+    const canonical = `https://www.css-vista.com/book-summaries/${activeBook.slug}`
+    const title = `${activeBook.title} by ${activeBook.author} — Book Summary | CSS Vista`
+    const description = `${activeBook.title} by ${activeBook.author}: ${activeBook.excerpt}`.slice(0, 158).trim()
+    const metaUpdates: Array<[string, string]> = [
+      ['meta[name="description"]', description],
+      ['meta[name="robots"]', 'index, follow, max-image-preview:large'],
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', description],
+      ['meta[property="og:url"]', canonical],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', description],
+    ]
+    const previousTitle = document.title
+    const previousMeta = metaUpdates.map(([selector]) => document.querySelector<HTMLMetaElement>(selector)?.content ?? null)
+    const canonicalNode = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    const previousCanonical = canonicalNode?.href ?? null
+    const existingSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+    const schema = existingSchema || document.createElement('script')
+    const previousSchema = existingSchema?.textContent ?? null
+
+    document.title = title
+    metaUpdates.forEach(([selector, content]) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content))
+    canonicalNode?.setAttribute('href', canonical)
+    schema.id = 'cssv-route-structured-data'
+    schema.type = 'application/ld+json'
+    schema.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: `${activeBook.title} summary`,
+          description,
+          url: canonical,
+          mainEntityOfPage: canonical,
+          inLanguage: 'en',
+          about: { '@type': 'Book', name: activeBook.title, author: { '@type': 'Person', name: activeBook.author } },
+          publisher: { '@type': 'Organization', name: 'CSS Vista', url: 'https://www.css-vista.com/' },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.css-vista.com/' },
+            { '@type': 'ListItem', position: 2, name: 'Book Summaries', item: 'https://www.css-vista.com/book-summaries' },
+            { '@type': 'ListItem', position: 3, name: activeBook.title, item: canonical },
+          ],
+        },
+      ],
+    })
+    if (!existingSchema) document.head.appendChild(schema)
+
+    return () => {
+      document.title = previousTitle
+      metaUpdates.forEach(([selector], index) => {
+        const node = document.querySelector<HTMLMetaElement>(selector)
+        if (node && previousMeta[index] !== null) node.content = previousMeta[index]!
+      })
+      if (canonicalNode && previousCanonical) canonicalNode.href = previousCanonical
+      if (!existingSchema) schema.remove()
+      else schema.text = previousSchema ?? ''
+    }
+  }, [activeBook, routeBookSlug])
 
   return (
     <div>
@@ -588,15 +657,16 @@ export default function BookSummaries() {
                         <p className="text-[10px] font-bold uppercase tracking-wide text-amber-700">Book summary</p>
                         <p className="book-summary-excerpt mt-1 text-sm leading-6 text-muted-foreground">{book.excerpt}</p>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => openBook(book)}
+                      <Link
+                        to={`/book-summaries/${book.slug}`}
+                        state={{ fromBookSummaries: true }}
+                        onClick={() => recordActivity({ type: 'page', label: `Book summary: ${book.title}`, path: `/book-summaries/${book.slug}` })}
                         className="mt-auto inline-flex items-center justify-between gap-2 pt-4 text-sm font-bold text-emerald-800"
                         aria-label={`Open summary of ${book.title}`}
                       >
                         Open summary
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </button>
+                      </Link>
                       {(readingStates[book.slug]?.progress ?? 0) > 0 && !readingStates[book.slug]?.completed && (
                         <span className="mt-2 h-1 overflow-hidden rounded-full bg-slate-100" aria-label={`${readingStates[book.slug].progress}% read`}>
                           <span className="cssv-progress block h-full rounded-full bg-amber-400" style={{ width: `${readingStates[book.slug].progress}%` }} />

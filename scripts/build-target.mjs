@@ -44,6 +44,7 @@ if (target === 'hostinger') {
   await import('./enrich-past-paper-collections-before-validation.mjs')
   if (strictContentValidation) await import('./strengthen-longtail-search-pages.mjs')
   else await import('./safe-longtail-enrichment.mjs')
+  await import('./expand-book-summary-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')

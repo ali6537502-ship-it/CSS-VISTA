@@ -2,10 +2,13 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import {
   ADSENSE_PUBLISHER_ID,
+  ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID,
+  canShowAuthenticatedAccountAd,
   getAdRoutePolicy,
   shouldProtectVignetteLink,
   type AdRoutePolicy,
 } from '@/lib/ads'
+import { useAccount } from '@/lib/accountContext'
 
 declare global {
   interface Window {
@@ -237,6 +240,43 @@ export function ManagedContentAd() {
         placementType={policy.placementType}
         routeEligible={policy.manualAdsEnabled}
         minimumReservedHeight={policy.minimumHeight}
+      />
+    </section>
+  )
+}
+
+/**
+ * A deliberately placed signed-in account unit. Auto Ads remain disabled on
+ * the private route; this component renders only for an authenticated,
+ * non-sensitive state and uses the genuine responsive unit created in AdSense.
+ */
+export function AuthenticatedAccountAd({
+  sensitiveControlsVisible = false,
+}: {
+  sensitiveControlsVisible?: boolean
+}) {
+  const location = useLocation()
+  const { loading, user, passwordRecovery } = useAccount()
+  const eligible = canShowAuthenticatedAccountAd(location.pathname, location.search, {
+    authenticated: Boolean(user),
+    authLoading: loading,
+    passwordRecovery,
+    sensitiveControlsVisible,
+  })
+
+  if (!eligible) return null
+
+  return (
+    <section
+      className="no-print clear-both border-t border-border/70 pt-8"
+      aria-label="Advertisement"
+      data-css-vista-authenticated-account-ad="true"
+    >
+      <AdSlot
+        slot={ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID}
+        placementType="pre-footer"
+        routeEligible={eligible}
+        minimumReservedHeight={250}
       />
     </section>
   )
