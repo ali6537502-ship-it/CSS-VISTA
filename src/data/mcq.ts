@@ -66,23 +66,40 @@ export function getBankIndex(): Promise<BankIndex> {
   return indexPromise
 }
 
-// All indexed question shards are bundled as lazy chunks, so every indexed category
-// retains a network-independent fallback. Vite code-splits each shard and loads
-// it only when the corresponding category is requested.
-const shardLoaders = import.meta.glob<{ default: BankQuestion[] }>('./mcq-shards/*.json')
-
+// Shards are served as JSON from public/mcq and fetched on demand.
+//
+// They used to ALSO be bundled through import.meta.glob, on the stated grounds
+// that this gave every category "a network-independent fallback". It did not:
+// public/sw.js unregisters itself and deletes every css-vista-* cache, so the
+// app has no offline capability for the bundled copy to serve. The bundling
+// therefore duplicated 9.4 MB of question data into the JS output - shipped
+// once as JSON in public/mcq and again as ~130 JS chunks - for no benefit.
+//
+// src/data/mcq-shards remains the authoring source of truth that the audit and
+// cleaning scripts read; it is simply no longer compiled into the bundle.
 const chunkCache = new Map<string, Promise<BankQuestion[]>>()
+
+async function fetchShard(slug: string, chunk: number): Promise<BankQuestion[]> {
+  const url = `/mcq/cat-${slug}-${chunk}.json`
+  // One retry, because a transient failure previously produced a silently
+  // shorter quiz with no indication that questions were missing.
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const response = await fetch(url, attempt === 0 ? undefined : { cache: 'reload' })
+      if (response.ok) return (await response.json()) as BankQuestion[]
+    } catch {
+      /* retry once, then give up */
+    }
+  }
+  return []
+}
+
 export function getChunk(slug: string, chunk: number): Promise<BankQuestion[]> {
   const key = `${slug}:${chunk}`
   if (!chunkCache.has(key)) {
-    const path = `./mcq-shards/cat-${slug}-${chunk}.json`
-    const loader = shardLoaders[path]
-    const promise: Promise<BankQuestion[]> = loader
-      ? loader().then((m) => applyMcqCorrections(m.default)).catch(() => [])
-      : fetch(`/mcq/cat-${slug}-${chunk}.json`)
-          .then((r) => (r.ok ? r.json() : []))
-          .then((qs: BankQuestion[]) => applyMcqCorrections(qs))
-          .catch(() => [])
+    const promise = fetchShard(slug, chunk)
+      .then((questions) => applyMcqCorrections(questions))
+      .catch(() => [])
     chunkCache.set(key, promise)
   }
   return chunkCache.get(key)!
