@@ -287,11 +287,26 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
               </div>
               <div className="p-4 sm:p-5">
                 <p dir={rtl ? 'rtl' : undefined} lang={rtl ? 'ur' : undefined} className={`text-[15px] font-medium leading-relaxed ${rtl ? 'urdu-text text-right' : ''}`}>{question.question}</p>
-                <div className="mt-4 grid gap-2" role="radiogroup" aria-label={`Answer options for question ${questionNumber}`}>
+                <div
+                  className="mt-4 grid gap-2"
+                  role="radiogroup"
+                  aria-label={`Answer options for question ${questionNumber}`}
+                  onKeyDown={(event) => {
+                    // 1-4 or A-D answers while focus is inside the option group.
+                    if (event.altKey || event.ctrlKey || event.metaKey) return
+                    const key = event.key.toLowerCase()
+                    const byNumber = '1234'.indexOf(key)
+                    const byLetter = 'abcd'.indexOf(key)
+                    const index = byNumber >= 0 ? byNumber : byLetter
+                    if (index < 0 || index >= question.options.length) return
+                    event.preventDefault()
+                    chooseAnswer(question, index)
+                  }}
+                >
                   {question.options.map((option, optionIndex) => {
                     const optionRtl = isRtlText(option)
                     const selected = answers[question.id] === optionIndex
-                    return <button key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} role="radio" aria-checked={selected} onClick={() => chooseAnswer(question, optionIndex)} className={`rounded-md border px-4 py-3 text-sm transition-all duration-150 ${optionRtl ? 'text-right' : 'text-left'} ${selected ? 'border-emerald-700 bg-emerald-50 font-medium text-emerald-900' : 'hover:border-emerald-800/40 hover:bg-secondary/60'}`}><span className="mr-2 font-semibold text-muted-foreground">{String.fromCharCode(65 + optionIndex)}.</span> <span className={optionRtl ? 'urdu-text' : undefined}>{option}</span></button>
+                    return <button key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} role="radio" aria-checked={selected} onClick={() => chooseAnswer(question, optionIndex)} className={`min-h-11 rounded-md border px-4 py-3 text-sm transition-all duration-150 ${optionRtl ? 'text-right' : 'text-left'} ${selected ? 'border-emerald-700 bg-emerald-50 font-medium text-emerald-900' : 'hover:border-emerald-800/40 hover:bg-secondary/60'}`}><span className="mr-2 font-semibold text-muted-foreground">{String.fromCharCode(65 + optionIndex)}.</span> <span className={optionRtl ? 'urdu-text' : undefined}>{option}</span></button>
                   })}
                 </div>
               </div>
@@ -308,7 +323,7 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
           {qs.map((question, index) => {
             const number = index + 1
             const onCurrentPage = questionPageForIndex(index) === page
-            return <button key={question.id} type="button" onClick={() => goToQuestion(index)} aria-label={`Go to question ${number}`} className={`grid h-9 min-w-9 place-items-center rounded-md border px-1 text-xs font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-100 text-emerald-900' : onCurrentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${bookmarked[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
+            return <button key={question.id} type="button" onClick={() => goToQuestion(index)} aria-label={`Go to question ${number}`} className={`grid h-11 min-w-11 place-items-center rounded-md border px-1 text-xs font-bold ${answers[question.id] !== undefined ? 'border-emerald-600 bg-emerald-100 text-emerald-900' : onCurrentPage ? 'border-pine bg-secondary text-pine' : 'bg-white text-muted-foreground'} ${bookmarked[question.id] ? 'ring-2 ring-amber-400 ring-offset-1' : ''}`}>{number}</button>
           })}
         </div>
       </section>

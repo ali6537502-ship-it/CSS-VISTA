@@ -134,6 +134,7 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
       </div>
 
       <p
+        id={`${cardId}-stem`}
         dir={rtl ? 'rtl' : undefined}
         lang={rtl ? 'ur' : undefined}
         className={`mt-2 text-[15px] font-medium leading-relaxed text-foreground ${rtl ? 'urdu-text text-right' : ''}`}
@@ -141,7 +142,23 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
         {q.q}
       </p>
 
-      <div className="mt-3 grid gap-2">
+      <div
+        className="mt-3 grid gap-2"
+        role="radiogroup"
+        aria-labelledby={`${cardId}-stem`}
+        onKeyDown={(event) => {
+          // 1-4 or A-D answers while focus is inside the option group.
+          if (event.altKey || event.ctrlKey || event.metaKey) return
+          if (selected !== null) return
+          const key = event.key.toLowerCase()
+          const byNumber = '1234'.indexOf(key)
+          const byLetter = 'abcd'.indexOf(key)
+          const index = byNumber >= 0 ? byNumber : byLetter
+          if (index < 0 || index >= q.o.length) return
+          event.preventDefault()
+          choose(index)
+        }}
+      >
         {q.o.map((opt, i) => {
           const optionRtl = isRtlText(opt)
           const isAns = i === q.a
@@ -155,13 +172,18 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
           return (
             <button
               key={i}
-              onClick={() => choose(i)}
-              disabled={selected !== null}
+              role="radio"
+              aria-checked={isSel}
+              aria-label={`Option ${'ABCD'[i]}: ${opt}`}
+              onClick={() => { if (selected === null) choose(i) }}
+              // aria-disabled rather than disabled: an answered option must stay
+              // focusable so a keyboard user can still review their own answer.
+              aria-disabled={selected !== null}
               dir={optionRtl ? 'rtl' : undefined}
               lang={optionRtl ? 'ur' : undefined}
-              className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${cls}`}
+              className={`flex min-h-11 items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${optionRtl ? 'text-right' : 'text-left'} ${cls}`}
             >
-              <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${showAnswer && isAns ? 'border-emerald-600 bg-emerald-600 text-white' : 'text-muted-foreground'}`}>
+              <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${showAnswer && isAns ? 'border-emerald-600 bg-emerald-600 text-white' : 'text-muted-foreground'}`}>
                 {showAnswer && isAns ? <Check className="h-3 w-3" /> : showAnswer && isSel && !isAns ? <X className="h-3 w-3" /> : 'ABCD'[i]}
               </span>
               <span className={optionRtl ? 'urdu-text' : 'leading-snug'}>{opt}</span>
@@ -171,7 +193,7 @@ export default function McqCard({ q, num, catName, onAction }: Props) {
       </div>
 
       {showAnswer && (
-        <div className="answer-block mt-3 overflow-hidden">
+        <div role="status" aria-live="polite" className="answer-block mt-3 overflow-hidden">
           <div className={`rounded-md border-l-4 px-3 py-2.5 text-sm ${selected !== null && selected !== q.a ? 'border-red-400 bg-red-50/60' : 'border-emerald-500 bg-emerald-50/60'}`}>
             <p className="font-semibold text-pine">
               Correct answer: {'ABCD'[q.a]}){' '}
