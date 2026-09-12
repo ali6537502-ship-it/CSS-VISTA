@@ -122,7 +122,8 @@ function cssv_request_json(int $maxBytes = 65536): array
     if ($length > $maxBytes) {
         cssv_fail('Request is too large.', 413, 'request_too_large');
     }
-    $raw = file_get_contents('php://input');
+    $raw = file_get_contents('php://input', false, null, 0, $maxBytes + 1);
+    if (is_string($raw) && strlen($raw) > $maxBytes) cssv_fail('Request is too large.', 413, 'request_too_large');
     if ($raw === false || $raw === '') {
         return [];
     }
@@ -131,7 +132,7 @@ function cssv_request_json(int $maxBytes = 65536): array
     } catch (JsonException) {
         cssv_fail('Invalid JSON request.', 400, 'invalid_json');
     }
-    if (!is_array($decoded)) {
+    if (!is_array($decoded) || !str_starts_with(ltrim($raw), '{')) {
         cssv_fail('Invalid request body.', 400, 'invalid_body');
     }
     return $decoded;
@@ -287,6 +288,8 @@ function cssv_require_user(PDO $pdo): array
     if (!$session) {
         cssv_fail('Sign in to continue.', 401, 'authentication_required');
     }
+    $expected = (string)($_SERVER['HTTP_X_CSSV_USER'] ?? '');
+    if ($expected !== '' && !hash_equals($session['user_id'], $expected)) cssv_fail('Your account changed. Please refresh this page.', 409, 'account_changed');
     return $session;
 }
 
@@ -381,43 +384,6 @@ function cssv_parse_timestamp(?string $value): ?string
     }
 }
 
-function cssv_supabase_password_login(string $email, string $password): ?array
-{
-    $url = rtrim((string)cssv_env('CSSV_SUPABASE_URL', ''), '/');
-    $key = cssv_env('CSSV_SUPABASE_PUBLISHABLE_KEY');
-    if ($url === '' || !$key || !function_exists('curl_init')) {
-        return null;
-    }
-
-    $ch = curl_init($url . '/auth/v1/token?grant_type=password');
-    if ($ch === false) {
-        return null;
-    }
-    curl_setopt_array($ch, [
-        CURLOPT_POST => true,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CONNECTTIMEOUT => 5,
-        CURLOPT_TIMEOUT => 12,
-        CURLOPT_HTTPHEADER => [
-            'apikey: ' . $key,
-            'Authorization: Bearer ' . $key,
-            'Content-Type: application/json',
-        ],
-        CURLOPT_POSTFIELDS => json_encode(['email' => $email, 'password' => $password], JSON_UNESCAPED_SLASHES),
-    ]);
-    $body = curl_exec($ch);
-    $status = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-    curl_close($ch);
-    if ($status < 200 || $status >= 300 || !is_string($body)) {
-        return null;
-    }
-    $decoded = json_decode($body, true);
-    $user = is_array($decoded) ? ($decoded['user'] ?? null) : null;
-    if (!is_array($user) || !isset($user['id'], $user['email'])) {
-        return null;
-    }
-    return $user;
-}
 
 function cssv_private_storage_dir(string $child = ''): string
 {
@@ -532,13 +498,16 @@ function cssv_send_mail(string $to, string $subject, string $text): bool
     $port = (int)(cssv_env('CSSV_SMTP_PORT', '587') ?? '587');
     $encryption = strtolower((string)cssv_env('CSSV_SMTP_ENCRYPTION', 'tls'));
 
+    if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !filter_var($from, FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/', $to . $from . $fromName . $subject)) return false;
+    if ($host && (!in_array($encryption, ['ssl', 'tls'], true) || !preg_match('/^[a-z0-9.-]+$/i', $host) || $port < 1 || $port > 65535)) return false;
+
     if (!$host || !$user || $pass === null) {
         $headers = [
             'From: ' . $fromName . ' <' . $from . '>',
             'Content-Type: text/plain; charset=UTF-8',
             'Content-Transfer-Encoding: 8bit',
         ];
-        return @mail($to, $subject, $text, implode("\r\n", $headers));
+        return function_exists('mail') && @mail($to, $subject, $text, implode("\r\n", $headers));
     }
 
     $remote = ($encryption === 'ssl' ? 'ssl://' : '') . $host . ':' . $port;
@@ -566,7 +535,7 @@ function cssv_send_mail(string $to, string $subject, string $text): bool
     if ($ok) {
         $safeSubject = str_replace(["\r", "\n"], '', $subject);
         $safeFromName = str_replace(["\r", "\n"], '', (string)$fromName);
-        $body = str_replace("\n.", "\n..", str_replace("\r\n", "\n", $text));
+        $body = preg_replace('/^\./m', '..', str_replace(["\r\n", "\r"], "\n", $text));
         $headers = [
             'From: ' . $safeFromName . ' <' . $from . '>',
             'To: <' . $to . '>',

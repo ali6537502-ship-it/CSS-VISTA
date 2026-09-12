@@ -1,5 +1,4 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
-import { getSupabaseClient } from '@/lib/supabase'
+import { type HostingerDataClient, getHostingerDataClient, factbookAction, factbookMediaUrl } from '@/lib/hostingerData'
 import { createEmptyContent } from './entryTypes'
 import { safeWebUrl, sanitizePlainText, sanitizeRichText } from './safety'
 import type {
@@ -41,8 +40,8 @@ export function isFactbookSchemaUnavailable(error: unknown) {
   return /schema cache|PGRST205|could not find (?:the )?table.*factbook_|relation .*factbook_.*does not exist/i.test(message)
 }
 
-async function requireClient(): Promise<SupabaseClient> {
-  const client = await getSupabaseClient()
+async function requireClient(): Promise<HostingerDataClient> {
+  const client = await getHostingerDataClient()
   if (!client) throw new Error('Factbook cloud storage is not configured.')
   return client
 }
@@ -187,7 +186,7 @@ export async function restoreFactbookCategoryTree(userId: string, rootId: string
   if (categoryError || entryError) throw new Error(messageFrom(categoryError ?? entryError, 'The category tree could not be restored.'))
 }
 
-async function hydrateEntries(client: SupabaseClient, rows: DatabaseRow[]): Promise<FactbookEntry[]> {
+async function hydrateEntries(client: HostingerDataClient, rows: DatabaseRow[]): Promise<FactbookEntry[]> {
   const ids = rows.map((row) => String(row.id)).filter(Boolean)
   if (!ids.length) return []
   const [sourceResult, tagResult, mediaResult] = await Promise.all([
@@ -213,12 +212,6 @@ async function hydrateEntries(client: SupabaseClient, rows: DatabaseRow[]): Prom
     tags.set(entryId, [...(tags.get(entryId) ?? []), String(tag.name)])
   })
   const rawMedia = asRows(mediaResult.data)
-  const paths = rawMedia.map((row) => String(row.storage_path)).filter(Boolean)
-  const signedByPath = new Map<string, string>()
-  if (paths.length) {
-    const { data } = await client.storage.from('factbook-media').createSignedUrls(paths, 60 * 60)
-    data?.forEach((item) => { if (item.path && item.signedUrl) signedByPath.set(item.path, item.signedUrl) })
-  }
   const media = new Map<string, FactbookMedia[]>()
   rawMedia.forEach((row) => {
     const entryId = String(row.entry_id ?? '')
@@ -227,7 +220,7 @@ async function hydrateEntries(client: SupabaseClient, rows: DatabaseRow[]): Prom
       file_name: String(row.file_name), mime_type: String(row.mime_type), byte_size: Number(row.byte_size),
       width: row.width === null ? null : Number(row.width), height: row.height === null ? null : Number(row.height),
       caption: String(row.caption ?? ''), alt_text: String(row.alt_text ?? ''), source: String(row.source ?? ''),
-      signed_url: signedByPath.get(String(row.storage_path)),
+      signed_url: factbookMediaUrl(String(row.id)),
     }
     media.set(entryId, [...(media.get(entryId) ?? []), item])
   })
@@ -295,7 +288,7 @@ export async function createFactbookSubject(userId: string, input: Partial<Factb
     target_date: input.target_date || null, position: input.position ?? 0,
   }).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The subject could not be created.'))
-  return data as FactbookSubject
+  return data as unknown as FactbookSubject
 }
 
 export async function updateFactbookSubject(userId: string, id: string, patch: Partial<FactbookSubject>) {
@@ -308,7 +301,7 @@ export async function updateFactbookSubject(userId: string, id: string, patch: P
   }
   const { data, error } = await client.from('factbook_subjects').update(safePatch).eq('user_id', userId).eq('id', id).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The subject could not be updated.'))
-  return data as FactbookSubject
+  return data as unknown as FactbookSubject
 }
 
 export async function createFactbookCategory(userId: string, subjectId: string, input: Partial<FactbookCategory>) {
@@ -320,7 +313,7 @@ export async function createFactbookCategory(userId: string, subjectId: string, 
     icon: sanitizePlainText(input.icon ?? 'folder', 40), color: input.color ?? '#0f6b4f', position: input.position ?? 0,
   }).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The category could not be created.'))
-  return data as FactbookCategory
+  return data as unknown as FactbookCategory
 }
 
 export async function updateFactbookCategory(userId: string, id: string, patch: Partial<FactbookCategory>) {
@@ -332,7 +325,7 @@ export async function updateFactbookCategory(userId: string, id: string, patch: 
   }
   const { data, error } = await client.from('factbook_categories').update(safePatch).eq('user_id', userId).eq('id', id).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The category could not be updated.'))
-  return data as FactbookCategory
+  return data as unknown as FactbookCategory
 }
 
 export async function duplicateFactbookSubject(userId: string, subject: FactbookSubject) {
@@ -409,41 +402,6 @@ export async function duplicateFactbookCategory(userId: string, category: Factbo
   return categoryMap.get(category.id) ?? null
 }
 
-async function replaceEntrySources(client: SupabaseClient, userId: string, entryId: string, sources: FactbookSource[]) {
-  const { error: deleteError } = await client.from('factbook_sources').delete().eq('user_id', userId).eq('entry_id', entryId)
-  if (deleteError) throw deleteError
-  const rows = sources.map(cleanSource).filter((source) => Object.values(source).some(Boolean))
-  if (!rows.length) return
-  const { error } = await client.from('factbook_sources').insert(rows.map((source) => ({ ...source, user_id: userId, entry_id: entryId })))
-  if (error) throw error
-}
-
-async function ensureTag(client: SupabaseClient, userId: string, rawName: string) {
-  const name = sanitizePlainText(rawName.trim().replace(/^#/, ''), 60)
-  if (!name) return null
-  const { data: existing } = await client.from('factbook_tags').select('id').eq('user_id', userId).ilike('name', name).limit(1)
-  const existingId = asRows(existing)[0]?.id
-  if (existingId) return String(existingId)
-  const { data, error } = await client.from('factbook_tags').insert({ user_id: userId, name }).select('id').single()
-  if (error) {
-    const { data: raced } = await client.from('factbook_tags').select('id').eq('user_id', userId).ilike('name', name).limit(1)
-    const racedId = asRows(raced)[0]?.id
-    if (racedId) return String(racedId)
-    throw error
-  }
-  return String(data.id)
-}
-
-async function replaceEntryTags(client: SupabaseClient, userId: string, entryId: string, tags: string[]) {
-  const { error: deleteError } = await client.from('factbook_entry_tags').delete().eq('user_id', userId).eq('entry_id', entryId)
-  if (deleteError) throw deleteError
-  const normalized = [...new Set(tags.map((tag) => tag.trim()).filter(Boolean))].slice(0, 40)
-  const tagIds = (await Promise.all(normalized.map((tag) => ensureTag(client, userId, tag)))).filter((id): id is string => Boolean(id))
-  if (!tagIds.length) return
-  const { error } = await client.from('factbook_entry_tags').insert(tagIds.map((tagId) => ({ user_id: userId, entry_id: entryId, tag_id: tagId })))
-  if (error) throw error
-}
-
 export async function saveFactbookEntry(userId: string, draft: FactbookEntryDraft) {
   const client = await requireClient()
   const title = sanitizePlainText(draft.title.trim(), 220)
@@ -455,20 +413,10 @@ export async function saveFactbookEntry(userId: string, draft: FactbookEntryDraf
     revision_status: draft.revision_status, bookmarked: draft.bookmarked,
     personal_remarks: sanitizePlainText(draft.personal_remarks, 10_000), position: draft.position ?? 0,
   }
-  const response = draft.id
-    ? await client.from('factbook_entries').update(payload).eq('user_id', userId).eq('id', draft.id).select('*').single()
-    : await client.from('factbook_entries').insert(payload).select('*').single()
-  if (response.error) throw new Error(messageFrom(response.error, 'The entry could not be saved.'))
-  const entryId = String(response.data.id)
-  try {
-    await Promise.all([
-      replaceEntrySources(client, userId, entryId, draft.sources),
-      replaceEntryTags(client, userId, entryId, draft.tags),
-    ])
-  } catch (error) {
-    throw new Error(messageFrom(error, 'The entry was saved, but its sources or tags could not be updated.'))
-  }
-  const [entry] = await hydrateEntries(client, [response.data as DatabaseRow])
+  const response = await factbookAction<{ data: DatabaseRow }>('save_entry', {
+    entry: { ...payload, id: draft.id }, sources: draft.sources.map(cleanSource), tags: draft.tags,
+  }, userId)
+  const [entry] = await hydrateEntries(client, [response.data])
   return entry
 }
 
@@ -529,7 +477,7 @@ export async function createFactbookCollection(userId: string, name: string) {
   if (!cleanName) throw new Error('Enter a collection name.')
   const { data, error } = await client.from('factbook_collections').insert({ user_id: userId, name: cleanName }).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The collection could not be created.'))
-  return { ...data, entry_ids: [] } as FactbookCollection
+  return { ...data, entry_ids: [] } as unknown as FactbookCollection
 }
 
 export async function updateFactbookCollection(userId: string, id: string, patch: Partial<FactbookCollection>) {
@@ -542,31 +490,25 @@ export async function updateFactbookCollection(userId: string, id: string, patch
   }
   const { data, error } = await client.from('factbook_collections').update(safePatch).eq('user_id', userId).eq('id', id).select('*').single()
   if (error) throw new Error(messageFrom(error, 'The collection could not be updated.'))
-  return data as FactbookCollection
+  return data as unknown as FactbookCollection
 }
 
 export async function setCollectionEntries(userId: string, collectionId: string, entryIds: string[]) {
-  const client = await requireClient()
-  const { error: deleteError } = await client.from('factbook_collection_entries').delete().eq('user_id', userId).eq('collection_id', collectionId)
-  if (deleteError) throw new Error(messageFrom(deleteError, 'The collection could not be updated.'))
-  const unique = [...new Set(entryIds)]
-  if (!unique.length) return
-  const { error } = await client.from('factbook_collection_entries').insert(unique.map((entryId, position) => ({ user_id: userId, collection_id: collectionId, entry_id: entryId, position })))
-  if (error) throw new Error(messageFrom(error, 'The collection could not be updated.'))
+  await factbookAction('collection_entries', { collection_id: collectionId, entry_ids: [...new Set(entryIds)] }, userId)
 }
 
 export async function loadFactbookPreferences(userId: string): Promise<FactbookPreferences> {
   const client = await requireClient()
   const { data, error } = await client.from('factbook_preferences').select('*').eq('user_id', userId).maybeSingle()
   if (error) throw new Error(messageFrom(error, 'Factbook settings could not be loaded.'))
-  return data ? data as FactbookPreferences : { user_id: userId, ...DEFAULT_PREFERENCES }
+  return data ? data as unknown as FactbookPreferences : { user_id: userId, ...DEFAULT_PREFERENCES }
 }
 
 export async function saveFactbookPreferences(userId: string, preferences: FactbookPreferences) {
   const client = await requireClient()
   const { data, error } = await client.from('factbook_preferences').upsert({ ...preferences, user_id: userId }, { onConflict: 'user_id' }).select('*').single()
   if (error) throw new Error(messageFrom(error, 'Factbook settings could not be saved.'))
-  return data as FactbookPreferences
+  return data as unknown as FactbookPreferences
 }
 
 export async function loadEntryRevisions(userId: string, entryId: string) {
@@ -712,17 +654,8 @@ export async function importFactbookBackup(userId: string, backup: FactbookBacku
       if (!media.backup_data_url || !/^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(media.backup_data_url)) continue
       const blob = await fetch(media.backup_data_url).then((response) => response.blob())
       if (blob.size <= 0 || blob.size > 5 * 1024 * 1024) continue
-      const extension = media.mime_type === 'image/jpeg' ? 'jpg' : media.mime_type.split('/')[1] || 'bin'
-      const path = `${userId}/${saved.id}/${crypto.randomUUID()}.${extension}`
-      const client = await requireClient()
-      const { error: uploadError } = await client.storage.from('factbook-media').upload(path, blob, { contentType: media.mime_type, cacheControl: '3600', upsert: false })
-      if (uploadError) continue
-      const { error: mediaError } = await client.from('factbook_media').insert({
-        user_id: userId, entry_id: saved.id, storage_path: path, file_name: sanitizePlainText(media.file_name, 240),
-        mime_type: media.mime_type, byte_size: blob.size, width: media.width, height: media.height,
-        caption: sanitizePlainText(media.caption, 1000), alt_text: sanitizePlainText(media.alt_text, 500), source: sanitizePlainText(media.source, 1000),
-      })
-      if (mediaError) await client.storage.from('factbook-media').remove([path])
+      const { uploadFactbookImage } = await import('./media')
+      await uploadFactbookImage({ userId, entryId: saved.id, file: new File([blob], media.file_name, { type: blob.type }), caption: media.caption, altText: media.alt_text || media.file_name || 'Imported factbook image', source: media.source })
     }
     importedEntries += 1
   }
@@ -730,18 +663,5 @@ export async function importFactbookBackup(userId: string, backup: FactbookBacku
 }
 
 export async function deleteAllFactbookData(userId: string, confirmation: string) {
-  const client = await requireClient()
-  const { data: entryFolders } = await client.storage.from('factbook-media').list(userId, { limit: 1000 })
-  const paths: string[] = []
-  for (const folder of entryFolders ?? []) {
-    const prefix = `${userId}/${folder.name}`
-    const { data: files } = await client.storage.from('factbook-media').list(prefix, { limit: 1000 })
-    for (const file of files ?? []) paths.push(`${prefix}/${file.name}`)
-  }
-  for (let index = 0; index < paths.length; index += 100) {
-    const { error: storageError } = await client.storage.from('factbook-media').remove(paths.slice(index, index + 100))
-    if (storageError) throw new Error('Factbook images could not be removed. No database records were deleted.')
-  }
-  const { error } = await client.rpc('delete_my_factbook_data', { confirm_text: confirmation })
-  if (error) throw new Error(messageFrom(error, 'Factbook data could not be deleted.'))
+  await factbookAction('delete_all', { confirmation }, userId)
 }

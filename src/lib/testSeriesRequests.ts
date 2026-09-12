@@ -1,5 +1,5 @@
-import type { User } from '@supabase/supabase-js'
-import { getSupabaseClient } from '@/lib/supabase'
+import type { AccountUser } from '@/lib/accountContext'
+import { hostingerRequest, ownerRequest } from '@/lib/hostingerApi'
 import type { CustomTestSeriesRequest } from '@/lib/store'
 
 export interface CloudTestSeriesRequest {
@@ -22,10 +22,8 @@ export interface CloudTestSeriesRequest {
   updated_at: string
 }
 
-export async function submitTestSeriesRequest(user: User, request: CustomTestSeriesRequest) {
-  const client = await getSupabaseClient()
-  if (!client) throw new Error('Account service is unavailable.')
-  const { error } = await client.from('custom_test_series_requests').upsert({
+export async function submitTestSeriesRequest(user: AccountUser, request: CustomTestSeriesRequest) {
+  await hostingerRequest('student/test-series.php', { method: 'POST', headers: { 'X-CSSV-User': user.id }, body: JSON.stringify({
     request_id: request.id,
     user_id: user.id,
     student_name: request.studentName,
@@ -41,30 +39,17 @@ export async function submitTestSeriesRequest(user: User, request: CustomTestSer
     unit_price: request.unitPrice,
     total_fee: request.totalFee,
     status: 'submitted',
-  }, { onConflict: 'request_id' })
-  if (error) throw error
+  }) })
 }
 
 export async function getAdminTestSeriesRequests(): Promise<CloudTestSeriesRequest[]> {
-  const client = await getSupabaseClient()
-  if (!client) return []
-  const { data, error } = await client
-    .from('custom_test_series_requests')
-    .select('*')
-    .order('created_at', { ascending: false })
-  if (error) throw error
-  return (data ?? []) as CloudTestSeriesRequest[]
+  const result = await ownerRequest<{ requests: CloudTestSeriesRequest[] }>('admin/test-series.php')
+  return result.requests
 }
 
 export async function updateTestSeriesRequestStatus(
   requestId: string,
   status: CloudTestSeriesRequest['status'],
 ) {
-  const client = await getSupabaseClient()
-  if (!client) throw new Error('Account service is unavailable.')
-  const { error } = await client
-    .from('custom_test_series_requests')
-    .update({ status })
-    .eq('request_id', requestId)
-  if (error) throw error
+  await ownerRequest('admin/test-series.php', { method: 'PATCH', body: JSON.stringify({ request_id: requestId, status }) })
 }

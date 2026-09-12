@@ -9,7 +9,7 @@ for (let attempt = 1; attempt <= 18; attempt++) {
   try {
     const api = await get('/api/current-affairs.php')
     const data = await api.json().catch(() => ({}))
-    if (api.status === 401 && data.ok === false) { ready = true; break }
+    if (api.status === 401 && data.ok === false) { const session = await (await get('/api/auth/session.php')).json(); if (session.provider === 'hostinger') { ready = true; break } }
     console.log('Waiting for the production briefing endpoint: HTTP ' + api.status)
   } catch { console.log('Waiting for the production briefing endpoint to respond.') }
   if (attempt < 18) await new Promise((resolve) => setTimeout(resolve, 10000))
@@ -18,7 +18,7 @@ assert.ok(ready, 'Hostinger has not exposed the authenticated briefing endpoint.
 const health = await (await get('/api/health.php')).json()
 assert.equal(health.database?.reachable, true, 'Production database is not reachable')
 assert.equal(health.database?.schema_ready, true, 'Existing account schema is not ready')
-assert.equal(health.configured?.supabase_bridge, true, 'Existing Supabase session bridge is not configured')
+assert.equal(health.configured?.native_accounts, true, 'Native Hostinger accounts are not deployed')
 for (const path of ['/daily-briefing','/account','/account/dashboard','/account/current-affairs','/account/current-affairs/archive','/account/factbook','/account/saved','/account/search','/account/settings']) {
   const response = await get(path)
   const html = await response.text()

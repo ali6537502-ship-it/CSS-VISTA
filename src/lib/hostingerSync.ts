@@ -1,41 +1,12 @@
-import type { SupabaseClient } from '@supabase/supabase-js'
-import {
-  applyProgressSnapshot,
-  captureProgressSnapshot,
-  mergeProgressSnapshots,
-  type ProgressSnapshot,
-} from '@/lib/accountSync'
-import {
-  clearHostingerProgress,
-  ensureHostingerSession,
-  loadHostingerProgress,
-  saveHostingerProgress,
-} from '@/lib/hostingerApi'
-
-function isRecord(value: unknown): value is ProgressSnapshot {
-  return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
-}
-
-export async function syncStudentProgressToHostinger(
-  client: SupabaseClient,
-  userId: string,
-) {
-  if (!await ensureHostingerSession(client)) throw new Error('Sign in again to connect progress sync.')
+import { applyProgressSnapshot, captureProgressSnapshot, mergeProgressSnapshots } from './accountSync'
+import { clearHostingerProgress, currentHostingerAccountUser, loadHostingerProgress, saveHostingerProgress } from './hostingerApi'
+export async function syncStudentProgressToHostinger(userId: string) {
   const local = captureProgressSnapshot()
-  const [hostinger, legacy] = await Promise.all([
-    loadHostingerProgress(),
-    client.from('student_progress').select('payload').eq('user_id', userId).maybeSingle(),
-  ])
-  if (legacy.error) throw legacy.error
-  const target = isRecord(hostinger.payload) ? hostinger.payload : {}
-  const source = isRecord(legacy.data?.payload) ? legacy.data.payload : {}
-  const merged = mergeProgressSnapshots(mergeProgressSnapshots(target, source), local)
-  await saveHostingerProgress(merged)
-  applyProgressSnapshot(merged)
+  const remote = await loadHostingerProgress(userId)
+  if (currentHostingerAccountUser() !== userId) throw new Error('Your account changed. Please sign in again.')
+  const merged = mergeProgressSnapshots(remote.payload || {}, local)
+  await saveHostingerProgress(merged, userId)
+  if (currentHostingerAccountUser() === userId) applyProgressSnapshot(merged)
   return merged
 }
-
-export async function clearHostingerStudentProgress(client: SupabaseClient) {
-  if (!await ensureHostingerSession(client)) throw new Error('Sign in again to reset progress.')
-  await clearHostingerProgress()
-}
+export async function clearHostingerStudentProgress(userId: string) { await clearHostingerProgress(userId) }

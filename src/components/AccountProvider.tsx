@@ -1,306 +1,161 @@
-import {
-  useCallback, useEffect, useMemo, useRef, useState,
-  type ReactNode,
-} from 'react'
-import type { SupabaseClient, User } from '@supabase/supabase-js'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
-import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
-import {
-  ensureHostingerSession,
-  hostingerAccountBackendEnabled,
-  logoutHostinger,
-} from '@/lib/hostingerApi'
-import {
-  AccountContext,
-  type AccountContextValue,
-  type ActionResult,
-  type SyncBackend,
-  type SyncStatus,
-} from '@/lib/accountContext'
+import { AccountContext, type AccountContextValue, type AccountUser, type ActionResult, type SyncStatus } from '@/lib/accountContext'
+import { ACCOUNT_EXPIRED_EVENT, csrfToken, hostingerRequest, loadAccountSession, logoutHostinger, setHostingerAccountUser } from '@/lib/hostingerApi'
+import { applyProgressSnapshot, captureProgressSnapshot, clearLocalStudentProgress } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
-import { scheduleIdleWork } from '@/lib/idle'
 
-// Batch active-study writes so question taps and planner edits do not create a
-// database request every few seconds. Pending progress still flushes on hide.
-const CLOUD_SYNC_DEBOUNCE_MS = 60_000
-const AUTH_APP_ORIGIN = 'https://www.css-vista.com'
-
-function authRedirect(path: string) {
-  return new URL(path, AUTH_APP_ORIGIN).toString()
+const ACCOUNT_CHANGE_KEY = 'cssvista:account-change'
+const PROGRESS_OWNER_KEY = 'cssvista:progress-owner'
+const SYNC_DELAY = 60_000
+function errorMessage(error: unknown) { return error instanceof Error ? error.message : 'The account service is temporarily unavailable. Please try again.' }
+function stashProgress(id: string) {
+  try { localStorage.setItem(`cssvista:account-progress:${id}`, JSON.stringify(captureProgressSnapshot())) } catch { /* The server retains previously synced progress. */ }
 }
-
-function hasPersistedSupabaseSession() {
-  try {
-    for (let index = 0; index < window.localStorage.length; index += 1) {
-      const key = window.localStorage.key(index)
-      if (!key?.startsWith('sb-') || !key.endsWith('-auth-token')) continue
-      if (window.localStorage.getItem(key)) return true
-    }
-  } catch {
-    // Storage can be unavailable in strict/private browser modes.
+function moveProgress(nextId: string | null) {
+  const oldId = localStorage.getItem(PROGRESS_OWNER_KEY)
+  if (oldId && oldId !== nextId) { stashProgress(oldId); clearLocalStudentProgress() }
+  if (nextId && nextId !== oldId) {
+    const saved = localStorage.getItem(`cssvista:account-progress:${nextId}`)
+    if (saved) { try { applyProgressSnapshot(JSON.parse(saved)) } catch { /* Ignore a malformed device cache. */ } }
   }
-  return false
+  if (nextId) localStorage.setItem(PROGRESS_OWNER_KEY, nextId)
+  else localStorage.removeItem(PROGRESS_OWNER_KEY)
 }
-
-function isAuthCriticalRoute(pathname: string, search: string) {
-  return /^\/(?:account|factbook|admin)(?:\/|$)/.test(pathname)
-    || new URLSearchParams(search).has('reset')
-}
-
 export function AccountProvider({ children }: { children: ReactNode }) {
   const location = useLocation()
-  const shouldHydrateInitially = accountServiceConfigured
-    && (isAuthCriticalRoute(location.pathname, location.search) || hasPersistedSupabaseSession())
-  const [loading, setLoading] = useState(shouldHydrateInitially)
-  const [client, setClient] = useState<SupabaseClient | null>(null)
-  const [user, setUser] = useState<User | null>(null)
-  const [passwordRecovery, setPasswordRecovery] = useState(() => new URLSearchParams(window.location.search).get('reset') === '1')
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<AccountUser | null>(null)
+  const [passwordRecovery, setPasswordRecovery] = useState(new URLSearchParams(window.location.search).get('reset') === '1')
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('idle')
-  const [syncBackend, setSyncBackend] = useState<SyncBackend>(null)
   const [syncError, setSyncError] = useState('')
   const [lastSyncedAt, setLastSyncedAt] = useState<Date | null>(null)
-  const syncTimer = useRef<number | null>(null)
-  const syncInFlight = useRef(false)
-
-  const syncNow = useCallback(async (): Promise<ActionResult> => {
-    if (!client || !user) return { error: 'Sign in to sync progress.' }
-    if (syncInFlight.current) return {}
-    syncInFlight.current = true
-    setSyncStatus('syncing')
-    setSyncError('')
+  const userRef = useRef<AccountUser | null>(null)
+  const sessionRequest = useRef<AbortController | null>(null)
+  const authVersion = useRef(0)
+  const hydrated = useRef(false)
+  const syncInFlight = useRef<string | null>(null)
+  const applyUser = useCallback((next: AccountUser | null) => {
+    if (userRef.current?.id !== next?.id || !next) {
+      try { moveProgress(next?.id ?? null) } catch { /* Browsers may disable local storage. */ }
+      setSyncStatus('idle'); setSyncError(''); setLastSyncedAt(null)
+    }
+    userRef.current = next
+    setHostingerAccountUser(next?.id ?? null)
+    setUser(next)
+  }, [])
+  const refreshSession = useCallback(async () => {
+    sessionRequest.current?.abort()
+    const controller = new AbortController()
+    sessionRequest.current = controller
+    const version = ++authVersion.current
     try {
-      if (hostingerAccountBackendEnabled) {
-        try {
-          const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
-          await syncStudentProgressToHostinger(client, user.id)
-          setSyncBackend('hostinger')
-        } catch {
-          // Keep the existing cloud path as an immediate rollback while the
-          // Hostinger cutover is being verified in production.
-          const { syncStudentProgress } = await import('@/lib/accountSync')
-          await syncStudentProgress(client, user.id)
-          setSyncBackend('supabase')
-        }
-      } else {
-        const { syncStudentProgress } = await import('@/lib/accountSync')
-        await syncStudentProgress(client, user.id)
-        setSyncBackend('supabase')
-      }
-      setLastSyncedAt(new Date())
-      setSyncStatus('synced')
+      const session = await loadAccountSession(controller.signal)
+      if (version === authVersion.current) applyUser(session.authenticated ? session.user ?? null : null)
+    } catch (error) {
+      if (!controller.signal.aborted && version === authVersion.current) setSyncError(errorMessage(error))
+    } finally { if (version === authVersion.current) setLoading(false) }
+  }, [applyUser])
+  useEffect(() => {
+    const critical = /^\/(?:account|factbook|admin)(?:\/|$)/.test(location.pathname)
+    if (!hydrated.current && (critical || csrfToken())) { hydrated.current = true; void refreshSession() }
+    else if (!hydrated.current) setLoading(false)
+  }, [location.pathname, refreshSession])
+  useEffect(() => {
+    const expire = () => { ++authVersion.current; sessionRequest.current?.abort(); applyUser(null); setSyncError('Your session has ended. Please sign in again.') }
+    const check = () => { if (hydrated.current) void refreshSession() }
+    const visibility = () => { if (document.visibilityState === 'visible') check() }
+    const storage = (event: StorageEvent) => { if (event.key === ACCOUNT_CHANGE_KEY) check() }
+    window.addEventListener(ACCOUNT_EXPIRED_EVENT, expire)
+    window.addEventListener('focus', check)
+    window.addEventListener('storage', storage)
+    document.addEventListener('visibilitychange', visibility)
+    return () => { sessionRequest.current?.abort(); window.removeEventListener(ACCOUNT_EXPIRED_EVENT, expire); window.removeEventListener('focus', check); window.removeEventListener('storage', storage); document.removeEventListener('visibilitychange', visibility) }
+  }, [applyUser, refreshSession])
+  const syncNow = useCallback(async (): Promise<ActionResult> => {
+    const id = userRef.current?.id
+    if (!id) return { error: 'Sign in to sync progress.' }
+    if (syncInFlight.current === id) return {}
+    syncInFlight.current = id
+    setSyncStatus('syncing'); setSyncError('')
+    try {
+      const { syncStudentProgressToHostinger } = await import('@/lib/hostingerSync')
+      await syncStudentProgressToHostinger(id)
+      if (userRef.current?.id === id) { setSyncStatus('synced'); setLastSyncedAt(new Date()) }
       return {}
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Progress could not be synced.'
-      setSyncStatus('error')
-      setSyncError(message)
+      const message = errorMessage(error)
+      if (userRef.current?.id === id) { setSyncStatus('error'); setSyncError(message) }
       return { error: message }
-    } finally {
-      syncInFlight.current = false
-    }
-  }, [client, user])
-
+    } finally { if (syncInFlight.current === id) syncInFlight.current = null }
+  }, [])
+  const userId = user?.id
+  useEffect(() => { if (userId) void syncNow() }, [userId, syncNow])
   useEffect(() => {
-    if (!accountServiceConfigured || client) return
-
-    const authCriticalRoute = isAuthCriticalRoute(location.pathname, location.search)
-    const shouldLoadAccountRuntime = authCriticalRoute || hasPersistedSupabaseSession()
-    if (!shouldLoadAccountRuntime) {
-      setLoading(false)
-      return
-    }
-
-    if (authCriticalRoute) setLoading(true)
-    let active = true
-    const cancel = scheduleIdleWork(() => {
-      void getSupabaseClient().then((nextClient) => {
-        if (!active) return
-        setClient(nextClient)
-        if (!nextClient) setLoading(false)
-      })
-    }, {
-      timeout: authCriticalRoute ? 1_500 : 6_000,
-      fallbackDelay: authCriticalRoute ? 0 : 2_500,
-      immediate: authCriticalRoute,
-    })
-    return () => {
-      active = false
-      cancel()
-    }
-  }, [client, location.pathname, location.search])
-
-  useEffect(() => {
-    if (!client) return
-    let active = true
-    client.auth.getSession().then(async ({ data }) => {
-      if (!active) return
-      if (data.session?.user && hostingerAccountBackendEnabled) {
-        try {
-          await ensureHostingerSession(client)
-        } catch {
-          // The existing Supabase session remains a safe login fallback.
-        }
-      }
-      if (!active) return
-      setUser(data.session?.user ?? null)
-      setLoading(false)
-    })
-    const { data } = client.auth.onAuthStateChange((event, session) => {
-      setUser(session?.user ?? null)
-      if (session?.user && hostingerAccountBackendEnabled) {
-        window.setTimeout(() => {
-          void ensureHostingerSession(client).catch(() => undefined)
-        }, 0)
-      }
-      if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
-      if (event === 'SIGNED_OUT') {
-        setPasswordRecovery(false)
-        void logoutHostinger().catch(() => undefined)
-      }
-      setLoading(false)
-    })
-    return () => {
-      active = false
-      data.subscription.unsubscribe()
-    }
-  }, [client])
-
-  useEffect(() => {
-    if (!user) return
-    const timer = window.setTimeout(() => void syncNow(), 0)
-    return () => window.clearTimeout(timer)
-  }, [user, syncNow])
-
-  useEffect(() => {
-    const scheduleSync = () => {
-      if (!user || !client) return
-      if (syncTimer.current !== null) window.clearTimeout(syncTimer.current)
-      syncTimer.current = window.setTimeout(() => {
-        syncTimer.current = null
-        void syncNow()
-      }, CLOUD_SYNC_DEBOUNCE_MS)
-    }
-    const flushPendingSync = () => {
-      if (!user || !client) return
-      if (syncTimer.current !== null) {
-        window.clearTimeout(syncTimer.current)
-        syncTimer.current = null
-      }
-      void syncNow()
-    }
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') flushPendingSync()
-    }
-    window.addEventListener(PROGRESS_CHANGED_EVENT, scheduleSync)
-    window.addEventListener('online', flushPendingSync)
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-    return () => {
-      window.removeEventListener(PROGRESS_CHANGED_EVENT, scheduleSync)
-      window.removeEventListener('online', flushPendingSync)
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-      if (syncTimer.current !== null) window.clearTimeout(syncTimer.current)
-    }
-  }, [client, syncNow, user])
-
+    if (!userId) return
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const schedule = () => { if (syncInFlight.current === userId) return; clearTimeout(timer); timer = setTimeout(() => void syncNow(), SYNC_DELAY) }
+    const flush = () => { clearTimeout(timer); void syncNow() }
+    const visibility = () => { if (document.visibilityState === 'hidden') flush() }
+    window.addEventListener(PROGRESS_CHANGED_EVENT, schedule)
+    window.addEventListener('online', flush)
+    document.addEventListener('visibilitychange', visibility)
+    return () => { clearTimeout(timer); window.removeEventListener(PROGRESS_CHANGED_EVENT, schedule); window.removeEventListener('online', flush); document.removeEventListener('visibilitychange', visibility) }
+  }, [userId, syncNow])
+  const broadcast = () => { try { localStorage.setItem(ACCOUNT_CHANGE_KEY, String(Date.now())) } catch { /* Focus checks also refresh the session. */ } }
   const value = useMemo<AccountContextValue>(() => ({
-    configured: accountServiceConfigured,
-    loading,
-    user,
-    passwordRecovery,
-    syncStatus,
-    syncBackend,
-    syncError,
-    lastSyncedAt,
+    configured: true, loading, user, passwordRecovery, syncStatus, syncBackend: user ? 'hostinger' : null, syncError, lastSyncedAt,
     async signIn(email, password) {
-      if (!client) return { error: 'Account service is not configured yet.' }
-      const { error } = await client.auth.signInWithPassword({ email, password })
-      if (error) return { error: error.message }
-      if (hostingerAccountBackendEnabled) {
-        try {
-          await ensureHostingerSession(client)
-        } catch {
-          // Login still succeeds through the retained Supabase rollback path.
-        }
-      }
-      return {}
+      sessionRequest.current?.abort(); const version = ++authVersion.current
+      try {
+        const response = await hostingerRequest<{ user: AccountUser }>('auth/login.php', { method: 'POST', body: JSON.stringify({ email, password }) })
+        if (version === authVersion.current) { applyUser(response.user); hydrated.current = true; setLoading(false); broadcast() }
+        return {}
+      } catch (error) { return { error: errorMessage(error) } }
     },
     async signUp(email, password, fullName) {
-      if (!client) return { error: 'Account service is not configured yet.' }
-      const { data, error } = await client.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { full_name: fullName.trim() },
-          emailRedirectTo: authRedirect('/account'),
-        },
-      })
-      if (error) return { error: error.message }
-      return { confirmationRequired: !data.session }
-    },
-    async signInWithGoogle() {
-      if (!client) return { error: 'Account service is not configured yet.' }
-      const { error } = await client.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: authRedirect('/account') },
-      })
-      return error ? { error: error.message } : {}
+      try {
+        const result = await hostingerRequest<{ confirmation_required: boolean }>('auth/register.php', { method: 'POST', body: JSON.stringify({ email, password, full_name: fullName.trim() }) })
+        return { confirmationRequired: result.confirmation_required }
+      } catch (error) { return { error: errorMessage(error) } }
     },
     async requestPasswordReset(email) {
-      if (!client) return { error: 'Account service is not configured yet.' }
-      const { error } = await client.auth.resetPasswordForEmail(email, {
-        redirectTo: authRedirect('/account?reset=1'),
-      })
-      return error ? { error: error.message } : {}
+      try { await hostingerRequest('auth/forgot-password.php', { method: 'POST', body: JSON.stringify({ email }) }); return {} }
+      catch (error) { return { error: errorMessage(error) } }
     },
-    async updatePassword(password) {
-      if (!client || !user) return { error: 'Open the password-reset link from your email first.' }
-      const { error } = await client.auth.updateUser({ password })
-      if (!error) setPasswordRecovery(false)
-      return error ? { error: error.message } : {}
+    async resendVerification(email) {
+      try { await hostingerRequest('auth/resend-verification.php', { method: 'POST', body: JSON.stringify({ email }) }); return {} }
+      catch (error) { return { error: errorMessage(error) } }
     },
-    clearPasswordRecovery() {
-      setPasswordRecovery(false)
+    async verifyEmail(token) {
+      try { await hostingerRequest('auth/verify-email.php', { method: 'POST', body: JSON.stringify({ token }) }); return {} }
+      catch (error) { return { error: errorMessage(error) } }
     },
+    async updatePassword(password, currentPassword, resetToken) {
+      try {
+        await hostingerRequest(resetToken ? 'auth/reset-password.php' : 'auth/change-password.php', { method: 'POST', body: JSON.stringify(resetToken ? { password, token: resetToken } : { password, current_password: currentPassword }) })
+        setPasswordRecovery(false)
+        if (resetToken) applyUser(null)
+        broadcast()
+        return {}
+      } catch (error) { return { error: errorMessage(error) } }
+    },
+    clearPasswordRecovery() { setPasswordRecovery(false) },
     async signOut() {
-      if (!client) return {}
-      if (hostingerAccountBackendEnabled) {
-        try {
-          await logoutHostinger()
-        } catch {
-          return { error: 'We could not securely finish signing out. Please check your connection and try again.' }
-        }
-      }
-      const { error } = await client.auth.signOut()
-      return error ? { error: error.message } : {}
+      if (userRef.current) { stashProgress(userRef.current.id); await syncNow() }
+      sessionRequest.current?.abort(); ++authVersion.current
+      try { await logoutHostinger(); applyUser(null); setPasswordRecovery(false); broadcast(); return {} }
+      catch { return { error: 'We could not securely finish signing out. Please check your connection and try again.' } }
     },
     syncNow,
     async resetProgress() {
+      const id = userRef.current?.id
       try {
-        const {
-          clearCloudStudentProgress,
-          clearLocalStudentProgress,
-        } = await import('@/lib/accountSync')
-        clearLocalStudentProgress()
-        if (client && user) {
-          if (hostingerAccountBackendEnabled) {
-            try {
-              const { clearHostingerStudentProgress } = await import('@/lib/hostingerSync')
-              await clearHostingerStudentProgress(client)
-            } catch {
-              // Continue with the rollback store so reset remains reliable.
-            }
-          }
-          await clearCloudStudentProgress(client, user.id)
-        }
-        setSyncStatus(user ? 'synced' : 'idle')
-        setLastSyncedAt(user ? new Date() : null)
+        if (id) { const { clearHostingerStudentProgress } = await import('@/lib/hostingerSync'); await clearHostingerStudentProgress(id) }
+        if (id === userRef.current?.id) { clearLocalStudentProgress(); if (id) localStorage.removeItem(`cssvista:account-progress:${id}`); setSyncStatus(id ? 'synced' : 'idle') }
         return {}
-      } catch (error) {
-        return {
-          error: error instanceof Error ? error.message : 'Progress could not be reset.',
-        }
-      }
+      } catch (error) { return { error: errorMessage(error) } }
     },
-  }), [client, lastSyncedAt, loading, passwordRecovery, syncBackend, syncError, syncNow, syncStatus, user])
-
+  }), [applyUser, lastSyncedAt, loading, passwordRecovery, syncError, syncNow, syncStatus, user])
   return <AccountContext.Provider value={value}>{children}</AccountContext.Provider>
 }

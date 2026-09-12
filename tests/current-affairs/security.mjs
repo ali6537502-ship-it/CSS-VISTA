@@ -18,11 +18,12 @@ async function call(path, body, jar = new Map(), extra = {}) {
   return { status: response.status, data, headers: response.headers }
 }
 async function user(email) {
-  const token = await fetch('http://127.0.0.1:54321/test/create', { method: 'POST', body: JSON.stringify({ email }) }).then((r) => r.json())
+  const id = execFileSync('php', ['tests/current-affairs/setup.php', 'user', email], { encoding: 'utf8' }).trim()
   const jar = new Map()
-  const result = await call('auth/supabase-session.php', { access_token: token.access_token }, jar)
+  const result = await call('auth/login.php', { email, password: 'TEST ONLY native fixture password' }, jar)
   assert.equal(result.status, 200, JSON.stringify(result.data))
-  return { jar, token: token.access_token, id: token.user.id }
+  return { jar, email, id }
+
 }
 assert.equal((await call('current-affairs.php')).status, 401)
 assert.equal((await call('admin/current-affairs.php')).status, 401)
@@ -56,7 +57,7 @@ assert.equal((await call('current-affairs.php', { action: 'reading', id, status:
 assert.equal((await call('current-affairs.php', { action: 'reading', id, status: 'opened' }, b.jar)).data.reading_status, 'opened')
 assert.equal((await call('current-affairs.php?reading=read', undefined, a.jar)).data.items.length, 1)
 assert.equal((await call('current-affairs.php?reading=read', undefined, b.jar)).data.items.length, 0)
-assert.equal((await call('current-affairs.php', undefined, a.jar, { 'X-CSSV-User': b.id })).status, 401)
+assert.equal((await call('current-affairs.php', undefined, a.jar, { 'X-CSSV-User': b.id })).status, 409)
 assert.equal((await call('admin/current-affairs.php', { action: 'unpublish', date: edition.date }, a.jar)).status, 401)
 const owner = new Map([['cssv_owner_session', admin.token], ['cssv_owner_csrf', admin.csrf]])
 assert.equal((await call('admin/current-affairs.php', { action: 'publish', dataset: edition }, owner)).data.status, 'unchanged')
@@ -77,7 +78,7 @@ await call('admin/current-affairs.php', { action: 'revoke_token', id: publisher.
 assert.equal((await call('current-affairs/publish.php', edition, new Map(), { Authorization: 'Bearer ' + publisher.data.token })).status, 401)
 assert.equal((await call('auth/logout.php', {}, a.jar)).status, 200)
 assert.equal((await call('current-affairs.php', undefined, a.jar)).status, 401)
-await call('auth/supabase-session.php', { access_token: a.token }, a.jar)
+await call('auth/login.php', { email: a.email, password: 'TEST ONLY native fixture password' }, a.jar)
 assert.equal((await call('current-affairs.php?saved=1', undefined, a.jar)).data.items.length, 1)
 execFileSync('php', ['tests/current-affairs/setup.php', 'expire', a.id])
 assert.equal((await call('current-affairs.php', undefined, a.jar)).status, 401, 'Expired session accepted')

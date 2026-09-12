@@ -43,17 +43,15 @@ if ($relativePath !== '' && !str_contains($relativePath, '..')) {
 }
 
 // Legacy/migrated accounts may still carry their original HTTPS avatar URL.
-// Proxy only the configured Supabase host or Google-hosted account avatars;
+// Proxy only existing Google-hosted account avatars;
 // never allow this endpoint to become an arbitrary server-side URL fetcher.
 $avatarUrl = trim((string)($row['avatar_url'] ?? ''));
 if ($avatarUrl !== '' && function_exists('curl_init')) {
     $parts = parse_url($avatarUrl);
     $scheme = strtolower((string)($parts['scheme'] ?? ''));
     $host = strtolower((string)($parts['host'] ?? ''));
-    $supabaseHost = strtolower((string)(parse_url((string)cssv_env('CSSV_SUPABASE_URL', ''), PHP_URL_HOST) ?: ''));
     $allowedHost = $scheme === 'https' && $host !== '' && (
-        ($supabaseHost !== '' && hash_equals($supabaseHost, $host))
-        || $host === 'googleusercontent.com'
+        $host === 'googleusercontent.com'
         || str_ends_with($host, '.googleusercontent.com')
     );
 

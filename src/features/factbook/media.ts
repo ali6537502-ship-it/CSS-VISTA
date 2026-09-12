@@ -1,5 +1,5 @@
-import { getSupabaseClient } from '@/lib/supabase'
-import { sanitizePlainText } from './safety'
+import { hostingerRequest, currentHostingerAccountUser } from '@/lib/hostingerApi'
+import { factbookMediaUrl } from '@/lib/hostingerData'
 import type { FactbookMedia } from './types'
 
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
@@ -54,36 +54,18 @@ export async function uploadFactbookImage(input: {
   source: string
 }): Promise<FactbookMedia> {
   if (!input.altText.trim()) throw new Error('Add alternative text before uploading the image.')
-  const client = await getSupabaseClient()
-  if (!client) throw new Error('Factbook cloud storage is not configured.')
+  if (input.userId !== currentHostingerAccountUser()) throw new Error('Sign in again to upload an image.')
   const prepared = await prepareFactbookImage(input.file)
-  const extension = prepared.mimeType === 'image/webp' ? 'webp' : prepared.mimeType.split('/')[1]
-  const path = `${input.userId}/${input.entryId}/${crypto.randomUUID()}.${extension}`
-  const { error: uploadError } = await client.storage.from('factbook-media').upload(path, prepared.blob, {
-    contentType: prepared.mimeType,
-    cacheControl: '3600',
-    upsert: false,
-  })
-  if (uploadError) throw new Error('The image upload failed. Check your connection and try again.')
-  const { data, error } = await client.from('factbook_media').insert({
-    user_id: input.userId, entry_id: input.entryId, storage_path: path,
-    file_name: sanitizePlainText(input.file.name, 240), mime_type: prepared.mimeType,
-    byte_size: prepared.blob.size, width: prepared.width, height: prepared.height,
-    caption: sanitizePlainText(input.caption, 1000), alt_text: sanitizePlainText(input.altText, 500),
-    source: sanitizePlainText(input.source, 1000),
-  }).select('*').single()
-  if (error) {
-    await client.storage.from('factbook-media').remove([path])
-    throw new Error('The uploaded image could not be linked to this entry.')
-  }
-  const { data: signed } = await client.storage.from('factbook-media').createSignedUrl(path, 60 * 60)
-  return { ...data, signed_url: signed?.signedUrl } as FactbookMedia
+  const body = new FormData()
+  body.set('image', prepared.blob, input.file.name)
+  body.set('entry_id', input.entryId)
+  body.set('caption', input.caption)
+  body.set('alt_text', input.altText)
+  body.set('source', input.source)
+  const result = await hostingerRequest<{ media: FactbookMedia }>('factbook/media.php', { method: 'POST', headers: { 'X-CSSV-User': input.userId }, body })
+  return { ...result.media, signed_url: factbookMediaUrl(result.media.id) }
 }
 
 export async function deleteFactbookImage(userId: string, media: FactbookMedia) {
-  const client = await getSupabaseClient()
-  if (!client) throw new Error('Factbook cloud storage is not configured.')
-  const { error } = await client.from('factbook_media').delete().eq('user_id', userId).eq('id', media.id)
-  if (error) throw new Error('The image could not be removed from the entry.')
-  await client.storage.from('factbook-media').remove([media.storage_path])
+  await hostingerRequest('factbook/media.php', { method: 'DELETE', headers: { 'X-CSSV-User': userId }, body: JSON.stringify({ id: media.id }) })
 }

@@ -1,5 +1,14 @@
 import { createContext, useContext } from 'react'
-import type { User } from '@supabase/supabase-js'
+export interface AccountUser {
+  id: string
+  email: string
+  created_at: string
+  email_confirmed_at: string | null
+  display_name: string
+  user_metadata: { full_name: string }
+  profile_complete?: boolean
+  photo_complete?: boolean
+}
 
 export type ActionResult = {
   error?: string
@@ -7,12 +16,12 @@ export type ActionResult = {
 }
 
 export type SyncStatus = 'idle' | 'syncing' | 'synced' | 'error'
-export type SyncBackend = 'hostinger' | 'supabase' | null
+export type SyncBackend = 'hostinger' | null
 
 export interface AccountContextValue {
   configured: boolean
   loading: boolean
-  user: User | null
+  user: AccountUser | null
   passwordRecovery: boolean
   syncStatus: SyncStatus
   syncBackend: SyncBackend
@@ -20,9 +29,10 @@ export interface AccountContextValue {
   lastSyncedAt: Date | null
   signIn(email: string, password: string): Promise<ActionResult>
   signUp(email: string, password: string, fullName: string): Promise<ActionResult>
-  signInWithGoogle(): Promise<ActionResult>
+  resendVerification(email: string): Promise<ActionResult>
+  verifyEmail(token: string): Promise<ActionResult>
   requestPasswordReset(email: string): Promise<ActionResult>
-  updatePassword(password: string): Promise<ActionResult>
+  updatePassword(password: string, currentPassword?: string, resetToken?: string): Promise<ActionResult>
   clearPasswordRecovery(): void
   signOut(): Promise<ActionResult>
   syncNow(): Promise<ActionResult>

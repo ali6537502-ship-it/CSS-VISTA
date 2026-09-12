@@ -1,11 +1,11 @@
-// CSS Vista content management. Published content is stored in Supabase and cached
+// CSS Vista content management. Published content is stored on Hostinger and cached
 // locally so the public site remains fast and resilient during brief network outages.
 
 import type { Question } from '@/data/quiz'
 import type { PastPaper } from '@/data/pastPapers'
 import type { FpscNotification2027, CssDate } from '@/data/css2027'
 import type { TestSeriesAnnouncement } from '@/data/testSeries'
-import { accountServiceConfigured, getSupabaseClient } from '@/lib/supabase'
+import { accountServiceConfigured, currentHostingerAccountUser, hostingerRequest, ownerRequest } from '@/lib/hostingerApi'
 
 const AUTH_KEY = 'cssvista:admin:auth'
 const PASS_KEY = 'cssvista:admin:pass'
@@ -55,21 +55,14 @@ function cacheAdminContent(content: AdminContent) {
 }
 
 async function publishAdminContent(content: AdminContent): Promise<void> {
-  const client = await getSupabaseClient()
-  if (!client) return
   dispatchCloudStatus({ state: 'saving', message: 'Publishing changes…' })
-  const { data, error } = await client.rpc('publish_css_vista_content', {
-    next_content: content,
-  })
-  if (error) {
-    dispatchCloudStatus({ state: 'error', message: error.message })
+  try {
+    const result = await ownerRequest<{ updated_at: string }>('admin/content.php', { method: 'POST', body: JSON.stringify({ content }) })
+    dispatchCloudStatus({ state: 'saved', message: 'Published for all visitors', updatedAt: result.updated_at })
+  } catch (error) {
+    dispatchCloudStatus({ state: 'error', message: error instanceof Error ? error.message : 'Publishing failed. Please try again.' })
     throw error
   }
-  dispatchCloudStatus({
-    state: 'saved',
-    message: 'Published for all visitors',
-    updatedAt: typeof data === 'string' ? data : new Date().toISOString(),
-  })
 }
 
 function scheduleCloudSave(content: AdminContent) {
@@ -92,60 +85,23 @@ export function initialiseCloudAdminContent(): Promise<void> {
   if (cloudInitialisePromise) return cloudInitialisePromise
 
   cloudInitialisePromise = (async () => {
-    const client = await getSupabaseClient()
-    if (!client) return
-    const { data, error } = await client
-      .from('site_content')
-      .select('content, updated_at')
-      .eq('id', 'published')
-      .maybeSingle()
-    if (error) {
-      dispatchCloudStatus({ state: 'error', message: 'Cloud content is temporarily unavailable.' })
-      return
+    const { data } = await hostingerRequest<{ data: { content: Partial<AdminContent>; updated_at: string } | null }>('content.php')
+    if (data?.content && hasContent({ ...emptyContent, ...data.content })) {
+      cacheAdminContent({ ...emptyContent, ...data.content })
+      dispatchCloudStatus({ state: 'saved', message: 'Published content loaded', updatedAt: data.updated_at })
+    } else if (hasContent(getAdminContent())) {
+      const session = await ownerRequest<{ authenticated: boolean }>('admin-auth/session.php')
+      if (session.authenticated) await publishAdminContent(getAdminContent())
     }
-
-    const local = getAdminContent()
-    const remote = data?.content && typeof data.content === 'object'
-      ? { ...emptyContent, ...(data.content as Partial<AdminContent>) }
-      : null
-
-    if (remote && hasContent(remote)) {
-      cacheAdminContent(remote)
-      dispatchCloudStatus({ state: 'saved', message: 'Cloud content loaded', updatedAt: data?.updated_at })
-      return
-    }
-
-    // Safely migrate genuine owner edits already present in this browser.
-    if (hasContent(local)) {
-      const { data: isAdmin } = await client.rpc('is_css_vista_admin')
-      if (isAdmin === true) await publishAdminContent(local)
-    }
-  })().catch(() => {
-    dispatchCloudStatus({ state: 'error', message: 'Using the safe local content cache.' })
-  })
-
+  })().catch(() => { dispatchCloudStatus({ state: 'error', message: 'Using the saved content cache. Please retry publishing from the admin panel.' }); cloudInitialisePromise = null })
   return cloudInitialisePromise
 }
 
 export async function refreshCloudAdminContent(): Promise<void> {
-  if (!accountServiceConfigured) return
-  const client = await getSupabaseClient()
-  if (!client) return
-  const { data, error } = await client
-    .from('site_content')
-    .select('content, updated_at')
-    .eq('id', 'published')
-    .maybeSingle()
-  if (error) {
-    dispatchCloudStatus({ state: 'error', message: 'Cloud content is temporarily unavailable.' })
-    return
-  }
-  const remote = data?.content && typeof data.content === 'object'
-    ? { ...emptyContent, ...(data.content as Partial<AdminContent>) }
-    : null
-  if (!remote) return
-  cacheAdminContent(remote)
-  dispatchCloudStatus({ state: 'saved', message: 'Cloud content updated', updatedAt: data?.updated_at })
+  const { data } = await hostingerRequest<{ data: { content: Partial<AdminContent>; updated_at: string } | null }>('content.php')
+  if (!data?.content) return
+  cacheAdminContent({ ...emptyContent, ...data.content })
+  dispatchCloudStatus({ state: 'saved', message: 'Published content updated', updatedAt: data.updated_at })
 }
 
 export function flushAdminContentSave(): Promise<void> {
@@ -568,47 +524,21 @@ export function addReport(r: Omit<ErrorReport, 'id' | 'date'>) {
   } catch {
     /* ignore */
   }
-  if (accountServiceConfigured) {
-    void getSupabaseClient().then(async (client) => {
-      if (!client) return
-      const { data: auth } = await client.auth.getUser()
-      if (!auth.user) return
-      await client.from('mcq_error_reports').insert({
-        user_id: auth.user.id,
-        question_id: r.questionId,
-        note: r.note,
-      })
-    })
+  if (currentHostingerAccountUser()) {
+    void hostingerRequest('student/reports.php', { method: 'POST', body: JSON.stringify({ question_id: r.questionId, note: r.note }) }).catch(() => { /* The report remains available in this browser for retry. */ })
   }
 }
 export function deleteReport(id: string) {
-  try {
-    localStorage.setItem(REPORTS_KEY, JSON.stringify(getReports().filter((r) => r.id !== id)))
-  } catch {
-    /* ignore */
+  if (/^[a-f0-9-]{36}$/i.test(id)) {
+    void ownerRequest('admin/reports.php', { method: 'DELETE', body: JSON.stringify({ id }) }).catch((error: unknown) => dispatchCloudStatus({ state: 'error', message: error instanceof Error ? error.message : 'The report could not be deleted.' }))
   }
-  if (accountServiceConfigured) {
-    void getSupabaseClient().then((client) => client?.from('mcq_error_reports').delete().eq('id', id))
-  }
+  try { localStorage.setItem(REPORTS_KEY, JSON.stringify(getReports().filter((r) => r.id !== id))) } catch { /* Device storage may be unavailable. */ }
 }
-
 export async function getCloudReports(): Promise<ErrorReport[]> {
-  if (!accountServiceConfigured) return getReports()
-  const client = await getSupabaseClient()
-  if (!client) return getReports()
-  const { data, error } = await client
-    .from('mcq_error_reports')
-    .select('id, question_id, note, created_at')
-    .eq('status', 'open')
-    .order('created_at', { ascending: false })
-    .limit(500)
-  if (error) return getReports()
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    questionId: row.question_id,
-    note: row.note,
-    date: String(row.created_at).slice(0, 10),
-  }))
+  try {
+    const { reports } = await ownerRequest<{ reports: { id: string; question_id: string; note: string; created_at: string }[] }>('admin/reports.php')
+    return reports.map((row) => ({ id: row.id, questionId: row.question_id, note: row.note, date: row.created_at.slice(0, 10) }))
+  } catch { return getReports() }
 }
 
 export function getMentorOverride(id: string): MentorOverride | undefined {
