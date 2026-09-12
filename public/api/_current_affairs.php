@@ -186,7 +186,7 @@ function ca_problem(Throwable $error, ?PDO $pdo = null, bool $ingestion = false)
     if ($pdo && $pdo->inTransaction()) $pdo->rollBack();
     $code=$error instanceof InvalidArgumentException ? 'invalid_dataset' : ($error instanceof DomainException ? 'story_id_conflict' : 'briefing_unavailable');
     if ($pdo && $ingestion) { try { ca_log_run($pdo,null,'failed',0,$code); } catch (Throwable) {} }
-    error_log('CSSV current affairs: '.$code.' ['.get_class($error).']');
+    error_log('CSSV current affairs: '.$code.' ['.get_class($error).':'.$error->getCode().']');
     if ($error instanceof InvalidArgumentException) cssv_fail($error->getMessage(),422,$code);
     if ($error instanceof DomainException) cssv_fail($error->getMessage(),409,$code);
     cssv_fail('The briefing service is temporarily unavailable. Please try again shortly.',503,$code);
@@ -216,6 +216,10 @@ function ca_sync_git_release(PDO $pdo): void
     $q=$pdo->prepare('SELECT GET_LOCK(?,10)'); $q->execute([$lock]);
     if ((int)$q->fetchColumn()!==1) throw new RuntimeException('The briefing release is still being applied.');
     try {
+        // Another request may have completed the release while this one waited.
+        $q=$pdo->prepare('SELECT file_hash FROM current_affairs_release_files WHERE file_key=?');
+        $q->execute(['@manifest']);
+        if ($q->fetchColumn()===$release['id']) return;
         foreach ($release['editions'] as $entry) {
             $date=ca_date($entry['date'] ?? null);
             if (($entry['file'] ?? '')!==$date.'.php' || !preg_match('/^[a-f0-9]{64}$/D',$entry['hash'] ?? '')) throw new RuntimeException('Invalid release entry.');

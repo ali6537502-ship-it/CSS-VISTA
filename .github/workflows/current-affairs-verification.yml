@@ -81,6 +81,11 @@ jobs:
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
       - name: Verify real PHP session bridge, ownership and publishing
         run: node tests/current-affairs/security.mjs
+      - name: Report isolated service failures
+        if: failure()
+        run: |
+          if [ -f test-artifacts/php-service.log ]; then tail -n 100 test-artifacts/php-service.log; fi
+          if [ -f test-artifacts/auth-service.log ]; then tail -n 30 test-artifacts/auth-service.log; fi
       - name: Preserve diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -93,3 +98,16 @@ jobs:
             test-artifacts/baseline-tests.log
           if-no-files-found: ignore
           retention-days: 7
+
+  production-readiness:
+    name: Verify deployed briefing routes and protection
+    if: github.event_name == 'push'
+    needs: account-and-publishing
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tests/current-affairs
+      - name: Verify the existing Hostinger production deployment
+        run: node tests/current-affairs/production.mjs
