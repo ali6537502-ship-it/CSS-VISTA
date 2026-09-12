@@ -385,7 +385,15 @@ export function toggleBookmark(id: string): boolean {
 }
 
 export function isBookmarked(id: string): boolean {
-  return getState().bookmarks.includes(id)
+  return getCachedReadState().bookmarks.includes(id)
+}
+
+/**
+ * All bookmark ids as a Set, for callers testing many rows at once.
+ * `isBookmarked` per row is a linear scan plus a record read each time.
+ */
+export function getBookmarkSet(): Set<string> {
+  return new Set(getCachedReadState().bookmarks)
 }
 
 export function completeChallenge(day: string) {

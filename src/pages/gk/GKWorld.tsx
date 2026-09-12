@@ -64,8 +64,15 @@ export default function GKWorld() {
   }, [])
 
   useEffect(() => {
-    const timer = window.setInterval(() => setNow(new Date()), 1000)
-    return () => window.clearInterval(timer)
+    // `now` only gates mock availability and a minute-precision "opens at"
+    // label, so a one-second tick re-rendered the whole page for nothing.
+    const timer = window.setInterval(() => setNow(new Date()), 30000)
+    const resync = () => setNow(new Date())
+    document.addEventListener('visibilitychange', resync)
+    return () => {
+      window.clearInterval(timer)
+      document.removeEventListener('visibilitychange', resync)
+    }
   }, [])
 
   useEffect(() => {

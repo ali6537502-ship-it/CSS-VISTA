@@ -12,7 +12,7 @@ import {
   type CssSubjectMcqIndex, type CssSubjectMcqSummary, type CssSubjectQuestion,
 } from '@/data/cssSubjectMcqs'
 import type { BankQuestion } from '@/data/mcq'
-import { getAttempt, savedMcqIds } from '@/lib/progress'
+import { getAttempts, savedMcqIds } from '@/lib/progress'
 import { usePageBack } from '@/lib/backNavigation'
 import { clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
 
@@ -103,25 +103,40 @@ export default function CssSubjectMcqs() {
     })
   }, [directory, group, query, view])
 
-  const visibleQuestions = useMemo(() => {
+  // Read the attempts map once per pass. Calling getAttempt() per question
+  // re-parsed the whole progress record for every row, which on the largest
+  // subject banks meant thousands of full parses per keystroke.
+  const attempts = useMemo(() => {
     void progressVersion
+    return getAttempts()
+  }, [progressVersion])
+
+  const visibleQuestions = useMemo(() => {
     const saved = new Set(savedMcqIds())
     const needle = withinQuery.trim().toLocaleLowerCase()
     return bank.filter((question) => {
       if (topic !== 'All topics' && question.s !== topic) return false
-      const attempt = getAttempt(question.id)
+      const attempt = attempts[question.id]
       if (mode === 'unanswered' && attempt) return false
       if (mode === 'incorrect' && attempt?.c !== false) return false
       if (mode === 'saved' && !saved.has(question.id)) return false
       return !needle || `${question.q} ${question.o.join(' ')}`.toLocaleLowerCase().includes(needle)
     })
-    // progressVersion refreshes the filters after answers, saves and mistake actions.
-  }, [bank, mode, progressVersion, topic, withinQuery])
+  }, [attempts, bank, mode, topic, withinQuery])
 
   const range = questionPageRange(page, visibleQuestions.length)
   const pageQuestions = visibleQuestions.slice(range.start, range.end)
-  const answeredCount = bank.filter((question) => Boolean(getAttempt(question.id))).length
-  const correctCount = bank.filter((question) => getAttempt(question.id)?.c).length
+  const { answeredCount, correctCount } = useMemo(() => {
+    let answered = 0
+    let correct = 0
+    for (const question of bank) {
+      const attempt = attempts[question.id]
+      if (!attempt) continue
+      answered += 1
+      if (attempt.c) correct += 1
+    }
+    return { answeredCount: answered, correctCount: correct }
+  }, [attempts, bank])
 
   useEffect(() => setPage(1), [mode, topic, withinQuery])
   useEffect(() => {

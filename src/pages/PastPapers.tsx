@@ -6,7 +6,7 @@ import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
-import { toggleBookmark, isBookmarked } from '@/lib/store'
+import { toggleBookmark, getBookmarkSet } from '@/lib/store'
 import { recordActivity } from '@/lib/progress'
 import { optionalGroups } from '@/data/syllabus'
 import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
@@ -43,7 +43,6 @@ export default function PastPapers() {
   const [currentPage, setCurrentPage] = useState(() => Math.max(1, Number(searchParams.get('page')) || 1))
   const [pdfIndex, setPdfIndex] = useState<Record<string, PdfFileMetadata>>({})
   const filtersMounted = useRef(false)
-  const [, forceRefresh] = useState(0)
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
@@ -87,7 +86,13 @@ export default function PastPapers() {
     ),
   ].sort((a, b) => String(a).localeCompare(String(b), undefined, { numeric: true }))
 
-  const filtered = papers.filter(
+  // The bookmark set is read once rather than per row: isBookmarked() reads
+  // the whole student record and scans an array, and this predicate runs over
+  // every paper on each keystroke.
+  const [bookmarkIds, setBookmarkIds] = useState<Set<string>>(() => getBookmarkSet())
+  const needle = q.trim().toLowerCase()
+
+  const filtered = useMemo(() => papers.filter(
     (p) =>
       (exam === 'All' || p.examination === exam) &&
       (subject === 'All' || p.subject === subject) &&
@@ -95,9 +100,9 @@ export default function PastPapers() {
       (stype === 'All' || p.subjectType === stype) &&
       (optionalGroup === 'All' || (p.subjectType === 'Optional' && String(groupForPaper(p)) === optionalGroup)) &&
       (mode === 'All' || p.mode === mode) &&
-      (!savedOnly || isBookmarked(`pp-${p.id}`)) &&
-      (!q || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(q.toLowerCase()))
-  )
+      (!savedOnly || bookmarkIds.has(`pp-${p.id}`)) &&
+      (!needle || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(needle))
+  ), [papers, exam, subject, year, stype, optionalGroup, mode, savedOnly, bookmarkIds, needle])
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAPERS_PER_PAGE))
   const pagedPapers = filtered.slice((currentPage - 1) * PAPERS_PER_PAGE, currentPage * PAPERS_PER_PAGE)
@@ -279,11 +284,12 @@ export default function PastPapers() {
                         </div>
                       </div>
                       <button
-                        onClick={() => { toggleBookmark(`pp-${p.id}`); forceRefresh((f) => f + 1) }}
+                        onClick={() => { toggleBookmark(`pp-${p.id}`); setBookmarkIds(getBookmarkSet()) }}
                         className="no-print rounded-md p-2 text-muted-foreground hover:bg-secondary"
-                        aria-label={isBookmarked(`pp-${p.id}`) ? 'Remove from saved papers' : 'Save paper'}
+                        aria-pressed={bookmarkIds.has(`pp-${p.id}`)}
+                        aria-label={bookmarkIds.has(`pp-${p.id}`) ? 'Remove from saved papers' : 'Save paper'}
                       >
-                        {isBookmarked(`pp-${p.id}`) ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
+                        {bookmarkIds.has(`pp-${p.id}`) ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
                       </button>
                       {p.fileUrl ? (
                         <div className="flex gap-2">

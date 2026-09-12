@@ -71,12 +71,19 @@ export default function CurrentAffairs() {
   const [viewer, setViewer] = useState(false)
   usePageBack(viewer, () => setViewer(false))
 
+  // The dossier is ~740 KB and only the one-liner and MCQ tabs read it, so a
+  // visitor who came for the magazine no longer pays for it.
+  const needsBatch = tab === 'one-liners' || tab === 'mcqs'
+
   useEffect(() => {
+    if (!needsBatch) return
+    let active = true
     fetch('/recent-affairs/batch-2026-07-11_2026-08-16.json')
       .then((response) => { if (!response.ok) throw new Error('Batch unavailable'); return response.json() as Promise<AffairsBatch> })
-      .then(setBatch)
-      .catch(() => setLoadError(true))
-  }, [])
+      .then((value) => { if (active) setBatch(value) })
+      .catch(() => { if (active) setLoadError(true) })
+    return () => { active = false }
+  }, [needsBatch])
 
   useEffect(() => {
     const next = new URLSearchParams()

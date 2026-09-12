@@ -1,4 +1,3 @@
-import mockBankData from './mock-bank.json'
 import {
   curatedAbilityQuestions, curatedCurrentAffairsQuestions, curatedEnglishQuestions, curatedUrduTranslationQuestions,
 } from './mockCurated'
@@ -29,7 +28,24 @@ type SectionSpec = {
   seedCap?: number
 }
 
-const mockBank = mockBankData as Record<string, BankQuestion[]>
+// The mock bank is ~600 KB and only the three competitive mocks need it.
+// Importing it statically put it in the chunk every quiz mode loads, so it is
+// fetched on demand and cached for the rest of the session instead.
+let mockBank: Record<string, BankQuestion[]> = {}
+let mockBankRequest: Promise<Record<string, BankQuestion[]>> | null = null
+
+export function loadMockBank(): Promise<Record<string, BankQuestion[]>> {
+  mockBankRequest ??= import('./mock-bank.json')
+    .then((module) => {
+      mockBank = (module.default ?? module) as unknown as Record<string, BankQuestion[]>
+      return mockBank
+    })
+    .catch(() => {
+      mockBankRequest = null
+      return {}
+    })
+  return mockBankRequest
+}
 
 const normalise = (value: string) => value
   .toLocaleLowerCase('en')

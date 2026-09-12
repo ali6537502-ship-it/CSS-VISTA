@@ -20,7 +20,7 @@ import {
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import {
-  buildCompetitiveMock, currentPakistanDateKey, MOCK_BLUEPRINTS, type MockSection,
+  buildCompetitiveMock, currentPakistanDateKey, loadMockBank, MOCK_BLUEPRINTS, type MockSection,
 } from '@/data/mockPapers'
 import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
@@ -124,6 +124,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
+        await loadMockBank()
         const paper = buildCompetitiveMock('pms-gk', mockSessionDateKey || getDailyMockStatus('gk').dateKey)
         r = {
           title: paper.title,
@@ -147,6 +148,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
+        await loadMockBank()
         const paper = buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
         r = {
           title: paper.title,
@@ -159,6 +161,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         break
       }
       case 'one-paper': {
+        await loadMockBank()
         const paper = buildCompetitiveMock('one-paper', currentPakistanDateKey())
         r = {
           title: paper.title,
