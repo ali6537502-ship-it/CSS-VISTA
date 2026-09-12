@@ -100,7 +100,7 @@ Supabase Auth remains the login provider. The existing backend validates its ses
 
 MySQL has no Supabase-style RLS. Protection comes from prepared server queries and authenticated endpoints; browsers never connect to MySQL. Tables cover days/items, combined private bookmarks and reading history, preferences, ingestion runs, limited tokens and Git release bookkeeping. Existing student profiles are reused.
 
-Private responses use no-store headers. Account routes are noindex and absent from sitemaps. No protected stories are embedded in React bundles or static HTML. Account deletion still requires the existing cross-system account-removal process; no unsafe partial-deletion button is exposed.
+Private responses use no-store headers. Account routes are noindex and absent from sitemaps. No protected stories are embedded in React bundles or static HTML. Self-service account deletion is not exposed: it requires coordinated removal from Supabase Auth and the existing Hostinger student records, including revocation of both sessions.
 
 ## Verification
 

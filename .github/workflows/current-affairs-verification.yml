@@ -72,9 +72,7 @@ jobs:
           node tests/current-affairs/prepare.mjs
       - name: Package test edition with real application code
         run: |
-          node node_modules/typescript/bin/tsc -b
-          node node_modules/vite/bin/vite.js build
-          node scripts/package-current-affairs.mjs
+          npm run build
           php tests/current-affairs/setup.php
       - name: Start isolated HTTP services
         run: |

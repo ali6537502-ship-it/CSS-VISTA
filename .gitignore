@@ -1,5 +1,6 @@
 node_modules/
 dist/
+test-artifacts/
 .sites-runtime/
 *.local
 .DS_Store
