@@ -66,7 +66,12 @@ export async function ensureHostingerSession(client: SupabaseClient) {
 
 export async function logoutHostinger() {
   if (sessionBridge) await sessionBridge.promise.catch(() => false)
-  if (!hostingerAccountBackendEnabled || !csrfToken()) return
+  if (!hostingerAccountBackendEnabled) return
+  if (!csrfToken()) {
+    const current = await hostingerRequest<{ authenticated: boolean }>('auth/session.php')
+    if (!current.authenticated) return
+    throw new HostingerApiError('Refresh your account page before signing out securely.', 403)
+  }
   await hostingerRequest<{ ok: boolean }>('auth/logout.php', { method: 'POST', body: '{}' })
 }
 
