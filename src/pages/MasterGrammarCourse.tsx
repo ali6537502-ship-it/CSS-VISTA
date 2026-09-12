@@ -503,7 +503,11 @@ export default function MasterGrammarCourse() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h3 className="font-display text-xl font-bold text-pine">4. Test yourself</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">28 questions from the rules and exercises you have just studied.</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {quiz.length > 0
+                        ? `${quiz.length} questions from the rules and exercises you have just studied.`
+                        : 'This day does not yet carry enough rules and exercises to generate a test.'}
+                    </p>
                   </div>
                   {savedScore !== undefined && (
                     <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-900">
@@ -556,7 +560,7 @@ export default function MasterGrammarCourse() {
                   {!quizSubmitted ? (
                     <button
                       type="button"
-                      disabled={quizAnswered !== quiz.length}
+                      disabled={quiz.length === 0 || quizAnswered !== quiz.length}
                       onClick={submitQuiz}
                       className="inline-flex items-center gap-2 rounded-lg bg-pine px-4 py-2.5 text-sm font-bold text-white disabled:opacity-40"
                     >

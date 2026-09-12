@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router'
 import { BookOpen, CheckCircle2, ChevronDown, Download, ExternalLink, FileText, Loader2, Newspaper, Printer, Search, X } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import { caIssues } from '@/data/currentAffairs'
-import { weeklyMagazine } from '@/data/weeklyMagazine'
+import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { mergedCaTopics, type CaTopic } from '@/lib/admin'
 import { addMistake, getAttempt, getMistakes, recordAttempt, recordQuestionTiming } from '@/lib/progress'
 import { printPdfFile } from '@/components/PrintMenu'
@@ -76,6 +76,18 @@ export default function CurrentAffairs() {
   const needsBatch = tab === 'one-liners' || tab === 'mcqs'
 
   useEffect(() => {
+    if (!viewer) return
+    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setViewer(false) }
+    window.addEventListener('keydown', onKey)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [viewer])
+
+  useEffect(() => {
     if (!needsBatch) return
     let active = true
     fetch('/recent-affairs/batch-2026-07-11_2026-08-16.json')
@@ -135,6 +147,41 @@ export default function CurrentAffairs() {
         {tab !== 'mcqs' && tab !== 'magazine' && currentCount > pageSize && <nav className="mt-6 flex items-center justify-center gap-3" aria-label="Collection pages"><button type="button" disabled={safePage <= 1} onClick={() => setPage((value) => value - 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Previous</button><span className="text-sm text-muted-foreground">Page {safePage} of {pages}</span><button type="button" disabled={safePage >= pages} onClick={() => setPage((value) => value + 1)} className="rounded-lg border bg-white px-4 py-2 text-sm font-semibold disabled:opacity-40">Next</button></nav>}
 
         {tab === 'magazine' && <section className="mt-6 rounded-2xl border bg-white p-5 sm:p-7"><div className="grid gap-5 sm:grid-cols-[150px_1fr] sm:items-center">{weeklyMagazine.coverUrl ? <img src={weeklyMagazine.coverUrl} alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`} className="aspect-[3/4] w-full rounded-xl border object-cover object-top shadow-md" /> : <div className="grid aspect-[3/4] place-items-center rounded-xl bg-pine text-white"><Newspaper className="h-8 w-8" /></div>}<div><p className="text-xs font-bold uppercase tracking-[.15em] text-amber-700">Free weekly issue</p><h2 className="mt-2 font-display text-2xl font-bold text-pine">{weeklyMagazine.title}</h2><p className="mt-1 text-sm font-semibold text-emerald-800">{weeklyMagazine.issue}</p><p className="mt-2 text-sm text-muted-foreground">{weeklyMagazine.description} {weeklyMagazine.pageCount ? `${weeklyMagazine.pageCount} pages.` : ''}</p><div className="mt-4 flex flex-wrap gap-2"><button type="button" onClick={() => setViewer(true)} disabled={!weeklyMagazine.pdfUrl} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white disabled:opacity-50"><FileText className="h-4 w-4" /> View magazine</button>{weeklyMagazine.pdfUrl && <a href={weeklyMagazine.pdfUrl} download className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary"><Download className="h-4 w-4" /> Free PDF</a>}<button type="button" onClick={() => weeklyMagazine.pdfUrl && printPdfFile(weeklyMagazine.pdfUrl)} disabled={!weeklyMagazine.pdfUrl} className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 text-sm font-bold text-pine hover:bg-secondary disabled:opacity-50"><Printer className="h-4 w-4" /> Print</button></div></div></div></section>}
+
+        {tab === 'magazine' && weeklyMagazines.length > 1 && (
+          <section className="mt-5 rounded-2xl border bg-white p-5 sm:p-7">
+            <h2 className="font-display text-lg font-bold text-pine">Previous issues</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Earlier weekly issues stay available to read and download.</p>
+            <ul className="mt-4 space-y-2">
+              {weeklyMagazines.slice(1).map((issue) => (
+                <li key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-lg border bg-secondary/30 px-3 py-2.5">
+                  <div className="mr-auto min-w-0">
+                    <p className="truncate text-sm font-semibold text-pine">{issue.issue}</p>
+                    <p className="text-xs text-muted-foreground">
+                      <time dateTime={issue.publishedDate}>
+                        {new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </time>
+                      {issue.pageCount ? ` · ${issue.pageCount} pages` : ''}
+                    </p>
+                  </div>
+                  {issue.pdfUrl && (
+                    <>
+                      <a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border bg-white px-3 text-xs font-bold text-emerald-800">
+                        <FileText className="h-3.5 w-3.5" /> View
+                      </a>
+                      <a href={issue.pdfUrl} download className="inline-flex min-h-11 items-center gap-1.5 rounded-md border bg-white px-3 text-xs font-bold text-emerald-800">
+                        <Download className="h-3.5 w-3.5" /> PDF
+                      </a>
+                      <button type="button" onClick={() => issue.pdfUrl && printPdfFile(issue.pdfUrl)} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border bg-white px-3 text-xs font-bold text-emerald-800">
+                        <Printer className="h-3.5 w-3.5" /> Print
+                      </button>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
 
       {viewer && weeklyMagazine.pdfUrl && <div className="fixed inset-0 z-[100] flex flex-col bg-slate-950 text-white print:hidden" role="dialog" aria-modal="true" aria-label="Weekly magazine viewer"><div className="flex items-center justify-between gap-3 border-b border-white/15 p-3"><p className="truncate text-sm font-semibold">{weeklyMagazine.title} · {weeklyMagazine.issue}</p><button type="button" onClick={() => setViewer(false)} className="grid h-10 w-10 place-items-center rounded-lg border border-white/25" aria-label="Close magazine"><X className="h-5 w-5" /></button></div><object data={weeklyMagazine.pdfUrl} type="application/pdf" className="min-h-0 flex-1 bg-white"><p className="p-6">Your browser cannot display this PDF inline. <a href={weeklyMagazine.pdfUrl} className="underline">Open the magazine</a>.</p></object></div>}
