@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import {
-  ArrowRight, BarChart3, BookOpenCheck, ChevronDown,
+  AlertTriangle, ArrowRight, BarChart3, BookOpenCheck, ChevronDown,
   FileSearch, Loader2, Search,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import QuestionPagination from '@/components/QuestionPagination'
 import {
-  loadPastPaperAnalysis,
-  type PastPaperAnalysisData,
+  loadPastPaperAnalysisIndex,
+  loadPastPaperAnalysisSubject,
+  type PastPaperAnalysisIndex,
+  type PastPaperAnalysisSubject,
   type PastPaperAnalysisTopic,
   type PastPaperQuestion,
 } from '@/lib/pastPaperAnalysis'
@@ -55,7 +57,12 @@ function PastPaperQuestionPage({ questions }: { questions: PastPaperQuestion[] }
 
 export default function CssPastPaperAnalysis() {
   const [params, setParams] = useSearchParams()
-  const [data, setData] = useState<PastPaperAnalysisData | null>(null)
+  // The compact index paints the page; a single subject file carries the
+  // question text. Previously the whole 1.8 MB payload was fetched on every
+  // visit to read one subject.
+  const [index, setIndex] = useState<PastPaperAnalysisIndex | null>(null)
+  const [selected, setSelected] = useState<PastPaperAnalysisSubject | null>(null)
+  const [subjectLoading, setSubjectLoading] = useState(false)
   const [error, setError] = useState('')
   const [selectedSlug, setSelectedSlug] = useState(params.get('subject') ?? '')
   const [query, setQuery] = useState(params.get('search') ?? '')
@@ -66,9 +73,9 @@ export default function CssPastPaperAnalysis() {
   })
 
   useEffect(() => {
-    loadPastPaperAnalysis()
+    loadPastPaperAnalysisIndex()
       .then((value) => {
-        setData(value)
+        setIndex(value)
         const initialSearch = new URLSearchParams(window.location.search)
         const requestedSubject = initialSearch.get('subject')
         setSelectedSlug(value.subjects.some((subject) => subject.slug === requestedSubject)
@@ -81,16 +88,26 @@ export default function CssPastPaperAnalysis() {
   }, []) // URL parameters seed the first view; filters then stay responsive in-place.
 
   useEffect(() => {
-    if (!data) return
+    if (!selectedSlug) return
+    let live = true
+    setSubjectLoading(true)
+    loadPastPaperAnalysisSubject(selectedSlug)
+      .then((subject) => { if (live) { setSelected(subject); setError('') } })
+      .catch(() => { if (live) setError('This subject could not be loaded. Please try again.') })
+      .finally(() => { if (live) setSubjectLoading(false) })
+    return () => { live = false }
+  }, [selectedSlug])
+
+  useEffect(() => {
+    if (!selected) return
     const requestedTopic = new URLSearchParams(window.location.search).get('topic')
     if (!requestedTopic) return
     const timeout = window.setTimeout(() => {
       document.getElementById(requestedTopic)?.scrollIntoView({ block: 'center', behavior: 'auto' })
     }, 420)
     return () => window.clearTimeout(timeout)
-  }, [data, selectedSlug])
+  }, [selected, selectedSlug])
 
-  const selected = data?.subjects.find((subject) => subject.slug === selectedSlug) ?? data?.subjects[0] ?? null
   const requestedSection = params.get('section')
   const visibleSections = useMemo(() => {
     if (!selected) return []
@@ -145,9 +162,9 @@ export default function CssPastPaperAnalysis() {
       />
       <main className="mx-auto max-w-7xl px-4 py-8">
         {error && <p className="rounded-xl border border-red-200 bg-red-50 p-5 text-sm text-red-800">{error}</p>}
-        {!data && !error && <div className="grid min-h-72 place-items-center rounded-2xl border bg-white"><Loader2 className="h-7 w-7 animate-spin text-pine" /></div>}
+        {!index && !error && <div className="grid min-h-72 place-items-center rounded-2xl border bg-white"><Loader2 className="h-7 w-7 animate-spin text-pine" /></div>}
 
-        {data && <>
+        {index && <>
           <section className="overflow-hidden rounded-2xl bg-pine text-white" aria-labelledby="analysis-overview-title">
             <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_28rem] lg:items-end">
               <div>
@@ -157,10 +174,10 @@ export default function CssPastPaperAnalysis() {
               </div>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
                 {[
-                  [data.stats.questions.toLocaleString(), 'Questions'],
-                  [data.stats.topics.toLocaleString(), 'Topic groups'],
-                  [data.stats.subjects.toLocaleString(), 'Subjects'],
-                  [`${data.stats.years[0]}–${data.stats.years.at(-1)}`, 'Coverage years'],
+                  [index.stats.questions.toLocaleString(), 'Questions'],
+                  [index.stats.topics.toLocaleString(), 'Topic groups'],
+                  [index.stats.subjects.toLocaleString(), 'Subjects'],
+                  [`${index.stats.years[0]}–${index.stats.years.at(-1)}`, 'Coverage years'],
                 ].map(([value, label]) => <div key={label} className="rounded-xl bg-white/10 p-3 text-center ring-1 ring-white/10"><strong className="block text-xl">{value}</strong><span className="text-[10px] text-emerald-100">{label}</span></div>)}
               </div>
             </div>
@@ -170,10 +187,10 @@ export default function CssPastPaperAnalysis() {
             <aside className="rounded-xl border bg-white p-3 lg:sticky lg:top-24 lg:self-start" aria-label="Past-paper analysis subjects">
               <label className="relative block"><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><span className="sr-only">Search this subject analysis</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search topic or question…" className="h-11 w-full rounded-lg border pl-9 pr-3 text-sm" /></label>
               <div className="mt-2 grid grid-cols-[minmax(0,1fr)_8rem] gap-2 lg:grid-cols-1">
-                <select value={selected?.slug ?? ''} onChange={(event) => chooseSubject(event.target.value)} className="h-11 min-w-0 rounded-lg border bg-white px-3 text-sm lg:hidden" aria-label="Choose a CSS subject">{data.subjects.map((subject) => <option key={subject.slug} value={subject.slug}>{subject.name}</option>)}</select>
-                <select value={year} onChange={(event) => setYear(event.target.value)} className="h-11 rounded-lg border bg-white px-3 text-sm" aria-label="Filter by year"><option value="all">All years</option>{data.stats.years.map((value) => <option key={value} value={value}>{value}</option>)}</select>
+                <select value={selected?.slug ?? ''} onChange={(event) => chooseSubject(event.target.value)} className="h-11 min-w-0 rounded-lg border bg-white px-3 text-sm lg:hidden" aria-label="Choose a CSS subject">{index.subjects.map((subject) => <option key={subject.slug} value={subject.slug}>{subject.name}</option>)}</select>
+                <select value={year} onChange={(event) => setYear(event.target.value)} className="h-11 rounded-lg border bg-white px-3 text-sm" aria-label="Filter by year"><option value="all">All years</option>{index.stats.years.map((value) => <option key={value} value={value}>{value}</option>)}</select>
               </div>
-              <div className="mt-2 hidden max-h-[40rem] space-y-1 overflow-y-auto pr-1 lg:block">{data.subjects.map((subject) => <button key={subject.slug} type="button" onClick={() => chooseSubject(subject.slug)} className={`w-full rounded-lg px-3 py-2.5 text-left ${selected?.slug === subject.slug ? 'bg-emerald-50 text-emerald-950' : 'hover:bg-secondary/60'}`}><span className="block text-xs font-bold">{subject.name}</span><span className="mt-0.5 flex justify-between text-[10px] text-muted-foreground"><span>{subject.topicCount} topics</span><span>{subject.questionCount} questions</span></span></button>)}</div>
+              <div className="mt-2 hidden max-h-[40rem] space-y-1 overflow-y-auto pr-1 lg:block">{index.subjects.map((subject) => <button key={subject.slug} type="button" onClick={() => chooseSubject(subject.slug)} className={`w-full rounded-lg px-3 py-2.5 text-left ${selected?.slug === subject.slug ? 'bg-emerald-50 text-emerald-950' : 'hover:bg-secondary/60'}`}><span className="block text-xs font-bold">{subject.name}</span><span className="mt-0.5 flex justify-between text-[10px] text-muted-foreground"><span>{subject.topicCount} topics</span><span>{subject.questionCount} questions</span></span></button>)}</div>
             </aside>
 
             <div className="min-w-0 space-y-4">
@@ -183,6 +200,16 @@ export default function CssPastPaperAnalysis() {
                   <Link to={`/fpsc-syllabus?subject=${encodeURIComponent(selected.slug)}`} className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-pine px-3 text-xs font-bold text-white">Open official syllabus <ArrowRight className="h-4 w-4" /></Link>
                 </div>
                 <p className="mt-3 rounded-lg bg-secondary/50 px-3 py-2 text-xs leading-relaxed text-muted-foreground">{selected.frequentTopics}</p>
+                {index.stats.sourceLimitations > 0 && (
+                  <p className="mt-2 flex gap-2 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      The supplied analysis records {index.stats.sourceLimitations} coverage limitations across subjects and
+                      years. Where a paper was unavailable or partly legible, its questions are not represented here -
+                      always confirm against the official paper.
+                    </span>
+                  </p>
+                )}
               </section>}
 
               <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border bg-white px-4 py-3 text-xs">
@@ -205,7 +232,15 @@ export default function CssPastPaperAnalysis() {
                 })}</div>
               </section>)}
 
-              {!visibleSections.length && <div className="rounded-xl border border-dashed bg-white px-6 py-14 text-center"><FileSearch className="mx-auto h-8 w-8 text-muted-foreground/50" /><p className="mt-3 text-sm font-bold text-pine">No questions match these filters.</p><button type="button" onClick={() => { setQuery(''); setYear('all') }} className="mt-3 text-xs font-bold text-emerald-800 underline underline-offset-2">Clear search and year</button></div>}
+              {subjectLoading && !selected && (
+                <div className="grid min-h-56 place-items-center rounded-xl border bg-white" role="status" aria-live="polite">
+                  <div className="text-center">
+                    <Loader2 className="mx-auto h-6 w-6 animate-spin text-pine" />
+                    <p className="mt-2 text-xs font-semibold text-muted-foreground">Loading this subject&rsquo;s questions&hellip;</p>
+                  </div>
+                </div>
+              )}
+              {!subjectLoading && selected && !visibleSections.length && <div className="rounded-xl border border-dashed bg-white px-6 py-14 text-center"><FileSearch className="mx-auto h-8 w-8 text-muted-foreground/50" /><p className="mt-3 text-sm font-bold text-pine">No questions match these filters.</p><button type="button" onClick={() => { setQuery(''); setYear('all') }} className="mt-3 text-xs font-bold text-emerald-800 underline underline-offset-2">Clear search and year</button></div>}
             </div>
           </div>
         </>}

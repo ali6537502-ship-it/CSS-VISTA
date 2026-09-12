@@ -25,6 +25,7 @@
     "check:adsense": "node scripts/check-adsense-production.mjs",
     "check:production-data": "node scripts/check-production-assets.mjs",
     "generate:past-papers": "node scripts/generate-supplemental-past-papers.mjs",
+    "split:analysis": "node scripts/split-past-paper-analysis.mjs",
     "sync:resources": "node scripts/sync-resource-manifests.mjs",
     "audit:resources": "node scripts/audit-resource-integrity.mjs",
     "audit:fonts": "node scripts/audit-font-system.mjs",
