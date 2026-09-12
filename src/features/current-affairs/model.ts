@@ -105,7 +105,7 @@ export function factText(fact: Fact): string {
   return typeof fact === 'string' ? fact : fact.label + ': ' + fact.value
 }
 export function safeReturnTo(value: string | null): string {
-  return value && value.startsWith('/') && !value.startsWith('//') && !/[\\\u0000-\u0020]/.test(value) ? value : '/account/dashboard'
+  return value && value.startsWith('/') && !value.startsWith('//') && !value.includes('\\') && !Array.from(value).some((char) => char.charCodeAt(0) <= 32) ? value : '/account/dashboard'
 }
 export function dateFilters(params: URLSearchParams, defaultRange = 'today'): URLSearchParams {
   const result = new URLSearchParams(params)

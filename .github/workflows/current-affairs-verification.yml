@@ -1,0 +1,93 @@
+name: Current affairs verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: current-affairs-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  account-and-publishing:
+    name: Protected accounts and automatic Git publishing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: cssvista_briefing_test
+          MYSQL_ROOT_PASSWORD: cssvista_ci_only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pcssvista_ci_only"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      CI: 'true'
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_PORT: '3306'
+      CSSV_DB_NAME: cssvista_briefing_test
+      CSSV_DB_USER: root
+      CSSV_DB_PASSWORD: cssvista_ci_only
+      CSSV_SUPABASE_URL: http://127.0.0.1:54321
+      CSSV_SUPABASE_PUBLISHABLE_KEY: sb_publishable_isolated_ci_fixture
+      CSSV_CLIENT_DIR: dist
+      CSSV_EMIT_WORKER: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, curl, mbstring
+      - run: npm ci --no-audit --no-fund
+      - name: Validate content and source integrity
+        run: |
+          node scripts/package-current-affairs.mjs --check
+          php tests/current-affairs-validation.php
+          node --test tests/currentAffairs.test.ts
+      - name: Lint account feature
+        run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/pages/Account.tsx src/components/AccountProvider.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
+      - name: Existing test suite
+        run: node --test tests/*.test.ts
+      - name: Existing repository lint report
+        continue-on-error: true
+        run: npm run lint
+      - name: Prepare disposable runtime
+        run: |
+          node -e "console.log('CSSV_APP_SECRET=' + require('node:crypto').randomBytes(48).toString('hex'))" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/cssv-briefing-private"
+          echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/cssv-briefing-private" >> "$GITHUB_ENV"
+          node tests/current-affairs/prepare.mjs
+      - name: Package test edition with real application code
+        run: |
+          node node_modules/typescript/bin/tsc -b
+          node node_modules/vite/bin/vite.js build
+          node scripts/package-current-affairs.mjs
+          php tests/current-affairs/setup.php
+      - name: Start isolated HTTP services
+        run: |
+          node tests/current-affairs/auth-fixture.mjs > test-artifacts/auth-service.log 2>&1 &
+          php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
+          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+      - name: Verify real PHP session bridge, ownership and publishing
+        run: node tests/current-affairs/security.mjs
+      - name: Preserve diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-affairs-diagnostics
+          path: |
+            test-artifacts/php-service.log
+            test-artifacts/auth-service.log
+          if-no-files-found: ignore
+          retention-days: 7
