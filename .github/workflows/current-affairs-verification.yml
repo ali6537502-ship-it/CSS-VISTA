@@ -81,6 +81,8 @@ jobs:
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
       - name: Verify real PHP session bridge, ownership and publishing
         run: node tests/current-affairs/security.mjs
+      - name: Verify signed account migration in the disposable database
+        run: node tests/account-migration/security.mjs
       - name: Report isolated service failures
         if: failure()
         run: |
