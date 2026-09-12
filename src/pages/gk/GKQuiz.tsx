@@ -16,7 +16,7 @@ import {
 } from '@/lib/progress'
 import {
   completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
-  recordQuizResult, recordReview, recordScheduledMock,
+  recordQuizResult, recordScheduledMock,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import {
@@ -621,7 +621,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       difficulty: question.d,
       mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
     })
-    recordReview(question.id, correct)
     if (!correct) addMistake(question.id, selected, category)
   }
 
@@ -675,7 +674,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
           difficulty: x.d,
           mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
         })
-        recordReview(x.id, correct)
         if (!correct) addMistake(x.id, sel, x.id.replace(/-\d+$/, ''))
       }
     })
