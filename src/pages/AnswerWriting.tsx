@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Download, Maximize2, Minimize2, Pause, Play, RotateCcw, Save, Trash2 } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { analyticalQuestions } from '@/data/challenges'
@@ -6,6 +6,21 @@ import { saveAnswer, getState, deleteAnswer } from '@/lib/store'
 import { essayRubric } from '@/data/essay'
 import { usePageBack } from '@/lib/backNavigation'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
+import { useAutosavedDraft } from '@/hooks/useAutosavedDraft'
+import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
+import { getChecklistItems, setChecklistItem } from '@/lib/progress'
+
+const RUBRIC_ID = 'answer-writing:rubric'
+
+interface AnswerDraft {
+  question: string
+  subject: string
+  minutes: number
+  outline: string
+  intro: string
+  body: string
+  conclusion: string
+}
 
 export default function AnswerWriting() {
   const [question, setQuestion] = useState(analyticalQuestions[0].question)
@@ -25,6 +40,34 @@ export default function AnswerWriting() {
   const wordCount = [intro, body, conclusion].join(' ').trim().split(/\s+/).filter(Boolean).length
   const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
+  useEffect(() => { setRubric(getChecklistItems(RUBRIC_ID)) }, [])
+
+  // Autosave the desk so a refresh mid-answer no longer destroys the work.
+  const draft = useMemo<AnswerDraft>(
+    () => ({ question, subject, minutes, outline, intro, body, conclusion }),
+    [question, subject, minutes, outline, intro, body, conclusion],
+  )
+  const hasContent = Boolean(outline.trim() || intro.trim() || body.trim() || conclusion.trim())
+  const { status: draftStatus, restored, clearDraft } = useAutosavedDraft<AnswerDraft>('answer-writing', draft, { enabled: hasContent })
+  const [restoreDismissed, setRestoreDismissed] = useState(false)
+  const canRestore = !hasContent && !restoreDismissed && Boolean(
+    restored && (restored.outline?.trim() || restored.intro?.trim() || restored.body?.trim() || restored.conclusion?.trim()),
+  )
+
+  useUnsavedWorkGuard(hasContent && !saved)
+
+  function restoreDraft() {
+    if (!restored) return
+    setQuestion(restored.question ?? question)
+    setSubject(restored.subject ?? subject)
+    setMinutes(restored.minutes ?? minutes)
+    setOutline(restored.outline ?? '')
+    setIntro(restored.intro ?? '')
+    setBody(restored.body ?? '')
+    setConclusion(restored.conclusion ?? '')
+    setRestoreDismissed(true)
+  }
+
   function resetTimer(m: number) {
     setMinutes(m)
     timer.reset(m * 60)
@@ -33,6 +76,8 @@ export default function AnswerWriting() {
   function handleSave() {
     saveAnswer({ question, subject, outline, intro, text: body, conclusion, minutes })
     setHistory(getState().savedAnswers)
+    clearDraft()
+    setRestoreDismissed(true)
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
   }
@@ -52,6 +97,13 @@ export default function AnswerWriting() {
       <PageHeader title="Answer-Writing Practice" description="Timed, structured answer practice with an outline area, word counter, local saving and a twelve-point self-assessment rubric." />
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-10">
         <Section title="Writing desk">
+          {canRestore && (
+            <div className="mb-4 flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              <span className="flex-1">You have an unfinished answer from a previous session.</span>
+              <button onClick={restoreDraft} className="inline-flex h-9 items-center rounded-md bg-amber-800 px-3 text-xs font-bold text-white">Restore it</button>
+              <button onClick={() => { clearDraft(); setRestoreDismissed(true) }} className="inline-flex h-9 items-center rounded-md border border-amber-400 px-3 text-xs font-bold text-amber-900">Discard</button>
+            </div>
+          )}
           <div className={`${fullscreen ? 'fixed inset-0 z-50 overflow-y-auto bg-white p-4 sm:p-8' : ''}`}>
             <div className="rounded-lg border bg-white">
               <div className="flex flex-wrap items-center gap-3 border-b px-4 py-3">
@@ -110,6 +162,11 @@ export default function AnswerWriting() {
                 <button onClick={handleSave} className="inline-flex items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
                   <Save className="h-4 w-4" /> {saved ? 'Saved ✓' : 'Save in browser'}
                 </button>
+                {hasContent && !saved && (
+                  <span role="status" aria-live="polite" className="text-xs font-medium text-muted-foreground">
+                    {draftStatus === 'error' ? 'Could not autosave - your browser storage may be full' : draftStatus === 'saved' ? 'Draft autosaved' : 'Autosaving…'}
+                  </span>
+                )}
                 <button onClick={downloadTxt} className="inline-flex items-center gap-1.5 rounded-md border px-4 py-2 text-sm font-medium hover:bg-secondary">
                   <Download className="h-4 w-4" /> Download as text
                 </button>
@@ -123,7 +180,7 @@ export default function AnswerWriting() {
             <div className="grid gap-1.5 sm:grid-cols-2">
               {essayRubric.map((r) => (
                 <label key={r} className={`flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm transition-colors ${rubric[r] ? 'border-emerald-700 bg-emerald-50' : 'hover:bg-secondary/60'}`}>
-                  <input type="checkbox" checked={!!rubric[r]} onChange={(e) => setRubric((x) => ({ ...x, [r]: e.target.checked }))} className="h-4 w-4 accent-emerald-800" />
+                  <input type="checkbox" checked={!!rubric[r]} onChange={(e) => setRubric(setChecklistItem(RUBRIC_ID, r, e.target.checked))} className="h-4 w-4 accent-emerald-800" />
                   {r}
                 </label>
               ))}
@@ -133,7 +190,7 @@ export default function AnswerWriting() {
             </p>
           </Section>
 
-          <Section title="Attempt history" description="Saved locally; export from the dashboard.">
+          <Section title="Attempt history" description="Saved on this device. Use “Download as text” above to keep a copy of the answer you are writing.">
             {history.length === 0 ? (
               <p className="rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">No saved answers yet. Write above and press “Save in browser”.</p>
             ) : (

@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router'
 import { PageHeader, Section, OfficialNotice } from '@/components/shared'
 import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageRange } from '@/lib/questionPagination'
+import { getTextNotes, setTextNote } from '@/lib/progress'
+
+const SERVICE_NOTES_ID = 'psych-viva:service-prefs'
 
 const sections = [
   {
@@ -45,6 +49,9 @@ const servicePrefs = ['Pakistan Administrative Service', 'Police Service of Paki
 
 export default function PsychViva() {
   const [questionPage, setQuestionPage] = useState(1)
+  const [serviceNotes, setServiceNotes] = useState<Record<string, string>>({})
+
+  useEffect(() => { setServiceNotes(getTextNotes(SERVICE_NOTES_ID)) }, [])
   const questionRange = questionPageRange(questionPage, mockQuestions.length)
   const visibleMockQuestions = mockQuestions.slice(questionRange.start, questionRange.end)
 
@@ -79,12 +86,23 @@ export default function PsychViva() {
           <QuestionPagination currentPage={questionPage} totalItems={mockQuestions.length} onPageChange={setQuestionPage} itemLabel="Mock interview questions" className="mt-5" />
         </Section>
 
-        <Section title="Service-group awareness worksheet" description="For your top three preferences, write one line each: role, first posting, one skill you bring.">
+        <Section title="Service-group awareness worksheet" description="For your top three preferences, write one line each: role, first posting, one skill you bring. Saved in your browser as you type.">
+          <p className="mb-3 text-sm text-muted-foreground">
+            Read the full profile of each group - nature of work, postings, training and common misconceptions - on{' '}
+            <Link to="/services" className="font-semibold text-emerald-800 underline underline-offset-2">Occupational Groups</Link>.
+          </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {servicePrefs.map((s) => (
               <div key={s} className="rounded-md border bg-white p-3.5">
                 <div className="text-sm font-medium">{s}</div>
-                <input className="mt-2 h-9 w-full rounded-md border border-input px-2 text-sm" placeholder="Your one-line note…" aria-label={`Note for ${s}`} />
+                <input
+                  className="mt-2 h-11 w-full rounded-md border border-input px-2 text-sm"
+                  placeholder="Your one-line note…"
+                  aria-label={`Note for ${s}`}
+                  value={serviceNotes[s] ?? ''}
+                  maxLength={500}
+                  onChange={(event) => setServiceNotes(setTextNote(SERVICE_NOTES_ID, s, event.target.value))}
+                />
               </div>
             ))}
           </div>

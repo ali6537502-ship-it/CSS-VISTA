@@ -131,8 +131,11 @@ export default function PastPaperOpen() {
     if (pdfUrl) {
       fetch(pdfUrl, { method: 'HEAD' })
         .then((response) => {
-          const contentType = response.headers.get('content-type') ?? ''
-          if (active) setPdfAvailable(response.ok && contentType.toLowerCase().includes('pdf'))
+          const contentType = (response.headers.get('content-type') ?? '').toLowerCase()
+          // Some hosts serve PDFs as octet-stream or omit the header entirely.
+          // Treat those as available rather than hiding a paper that works.
+          const looksLikePdf = contentType === '' || contentType.includes('pdf') || contentType.includes('octet-stream')
+          if (active) setPdfAvailable(response.ok && looksLikePdf)
         })
         .catch(() => active && setPdfAvailable(false))
     } else {
@@ -181,7 +184,19 @@ export default function PastPaperOpen() {
           </div>
         )}
 
-        {pdfAvailable && pdfUrl ? (
+        {pdfAvailable === null && pdfUrl ? (
+          <section
+            aria-label={`Loading ${paper.title}`}
+            role="status"
+            aria-live="polite"
+            className="grid h-[72vh] min-h-[520px] w-full place-items-center rounded-xl border bg-white"
+          >
+            <div className="text-center">
+              <span className="mx-auto block h-8 w-8 animate-spin rounded-full border-2 border-emerald-200 border-t-emerald-700" aria-hidden="true" />
+              <p className="mt-3 text-sm font-medium text-muted-foreground">Opening this paper&hellip;</p>
+            </div>
+          </section>
+        ) : pdfAvailable && pdfUrl ? (
           <section aria-label={`${paper.title} PDF viewer`} className="overflow-hidden rounded-xl border bg-white">
             <iframe src={pdfUrl} title={paper.title} className="h-[72vh] min-h-[520px] w-full" />
           </section>

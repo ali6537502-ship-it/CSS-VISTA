@@ -244,6 +244,12 @@ export default function QuizEngine({ questions, mode, category, timePerQuestion 
                         return <div key={optionIndex} dir={optionRtl ? 'rtl' : undefined} lang={optionRtl ? 'ur' : undefined} className={`rounded px-2.5 py-1.5 text-[13px] ${optionRtl ? 'urdu-text text-right' : ''} ${optionIndex === question.answer ? 'bg-emerald-100 font-medium text-emerald-900' : optionIndex === given ? 'bg-red-100 text-red-900' : 'bg-secondary/60 text-muted-foreground'}`}>{option}</div>
                       })}
                     </div>
+                    {question.explanation && (
+                      <div className="mt-2.5 rounded-md border border-emerald-200 bg-emerald-50/70 px-3 py-2">
+                        <p className="text-[11px] font-bold uppercase tracking-wide text-emerald-800">Why this is the answer</p>
+                        <p className="mt-1 text-[13px] leading-relaxed text-emerald-950">{question.explanation}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

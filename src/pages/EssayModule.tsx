@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { MessageCircle, PenLine, Award } from 'lucide-react'
 import { PageHeader, Section, Badge } from '@/components/shared'
 import { essayThemes, essayGuides, essayRubric, practiceTopics } from '@/data/essay'
 import { mentors, waLink } from '@/data/site'
+import { getChecklistItems, setChecklistItem } from '@/lib/progress'
+
+const ESSAY_RUBRIC_ID = 'essay:rubric'
 
 export default function EssayModule() {
   const [guide, setGuide] = useState(essayGuides[0].slug)
   const [theme, setTheme] = useState(essayThemes[0].slug)
   const [checked, setChecked] = useState<Record<string, boolean>>({})
+
+  useEffect(() => { setChecked(getChecklistItems(ESSAY_RUBRIC_ID)) }, [])
+
   const activeGuide = essayGuides.find((g) => g.slug === guide)!
   const activeTheme = essayThemes.find((t) => t.slug === theme)!
   const progress = Math.round((Object.values(checked).filter(Boolean).length / essayRubric.length) * 100)
@@ -126,7 +132,7 @@ export default function EssayModule() {
             <div className="space-y-1.5">
               {essayRubric.map((r) => (
                 <label key={r} className={`flex cursor-pointer items-center gap-2.5 rounded-md border px-3.5 py-2.5 text-sm transition-colors ${checked[r] ? 'border-emerald-700 bg-emerald-50' : 'hover:bg-secondary/60'}`}>
-                  <input type="checkbox" checked={!!checked[r]} onChange={(e) => setChecked((c) => ({ ...c, [r]: e.target.checked }))} className="h-4 w-4 accent-emerald-800" />
+                  <input type="checkbox" checked={!!checked[r]} onChange={(e) => setChecked(setChecklistItem(ESSAY_RUBRIC_ID, r, e.target.checked))} className="h-4 w-4 accent-emerald-800" />
                   I can consistently demonstrate: <strong>{r}</strong>
                 </label>
               ))}

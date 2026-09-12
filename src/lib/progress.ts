@@ -141,6 +141,14 @@ export interface ProgressState {
   mistakes: Mistake[]
   activities: Activity[]
   checklists: Record<string, boolean[]>
+  /**
+   * Checklist ticks keyed by a stable item key rather than by array index.
+   * Index-keyed `checklists` silently shifts every saved tick when the
+   * underlying content is edited or reordered; this does not.
+   */
+  checklistItems: Record<string, Record<string, boolean>>
+  /** Short free-text notes keyed by list id then stable item key. */
+  textNotes: Record<string, Record<string, string>>
   timerSessions: TimerSession[]
   notif: {
     asked: boolean
@@ -164,6 +172,8 @@ const empty: ProgressState = {
   mistakes: [],
   activities: [],
   checklists: {},
+  checklistItems: {},
+  textNotes: {},
   timerSessions: [],
   notif: { asked: false, enabled: false, tags: { Mentors: true, Opinions: true, 'Test Series': true, FPSC: true, General: true }, dismissed: false },
   seenUpdates: [],
@@ -502,6 +512,76 @@ export function getChecklist(id: string, len: number): boolean[] {
 export function setChecklist(id: string, value: boolean[]) {
   const s = getProgress()
   s.checklists[id] = value
+  save(s)
+}
+
+/**
+ * Stable-key checklist storage. `id` scopes the list (e.g. a subject slug),
+ * `key` identifies the item by its own content rather than its position, so
+ * editing or reordering the list never moves a student's saved ticks.
+ */
+export function getChecklistItems(id: string): Record<string, boolean> {
+  const s = getProgress()
+  const v = s.checklistItems[id]
+  return v && typeof v === 'object' ? v : {}
+}
+
+export function setChecklistItem(id: string, key: string, value: boolean) {
+  const s = getProgress()
+  const list = s.checklistItems[id] && typeof s.checklistItems[id] === 'object' ? s.checklistItems[id] : {}
+  if (value) list[key] = true
+  else delete list[key]
+  s.checklistItems[id] = list
+  save(s)
+  return list
+}
+
+// ---------- Short free-text notes ----------
+export function getTextNotes(id: string): Record<string, string> {
+  const s = getProgress()
+  const v = s.textNotes[id]
+  return v && typeof v === 'object' ? v : {}
+}
+
+export function setTextNote(id: string, key: string, value: string) {
+  const s = getProgress()
+  const list = s.textNotes[id] && typeof s.textNotes[id] === 'object' ? s.textNotes[id] : {}
+  const trimmed = value.slice(0, 500)
+  if (trimmed.trim()) list[key] = trimmed
+  else delete list[key]
+  s.textNotes[id] = list
+  save(s)
+  return list
+}
+
+export function countChecklistItems(id: string, keys: string[]) {
+  const list = getChecklistItems(id)
+  return keys.reduce((total, key) => total + (list[key] ? 1 : 0), 0)
+}
+
+/**
+ * One-time lift of a legacy index-keyed checklist onto stable keys, so ticks
+ * saved before this change are preserved. `keys` must be in the same order the
+ * legacy array used. Runs only when nothing is stored under the new shape yet.
+ */
+export function migrateIndexedChecklist(id: string, keys: string[]): Record<string, boolean> {
+  const s = getProgress()
+  const already = s.checklistItems[id]
+  if (already && typeof already === 'object') return already
+
+  const legacy = s.checklists[id]
+  const migrated: Record<string, boolean> = {}
+  if (Array.isArray(legacy) && legacy.length === keys.length) {
+    keys.forEach((key, index) => { if (legacy[index]) migrated[key] = true })
+  }
+  s.checklistItems[id] = migrated
+  save(s)
+  return migrated
+}
+
+export function resetChecklistItems(id: string) {
+  const s = getProgress()
+  s.checklistItems[id] = {}
   save(s)
 }
 

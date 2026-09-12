@@ -1,15 +1,25 @@
 import { useParams, Link } from 'react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, BookMarked, CheckSquare, Square, Award, Clock, Target } from 'lucide-react'
 import { PageHeader, Section, SourceNote, Badge } from '@/components/shared'
 import { compulsorySubjects, syllabusSource } from '@/data/syllabus'
+import { getChecklistItems, setChecklistItem } from '@/lib/progress'
 import NotFound from './NotFound'
 
 export default function SubjectDetail() {
   const { slug } = useParams()
   const subject = compulsorySubjects.find((s) => s.slug === slug)
+  const checklistId = `subject:${slug ?? ''}`
   const [checked, setChecked] = useState<Record<string, boolean>>({})
+
+  useEffect(() => {
+    if (slug) setChecked(getChecklistItems(`subject:${slug}`))
+  }, [slug])
+
   if (!subject) return <NotFound />
+
+  const toggle = (key: string) => setChecked(setChecklistItem(checklistId, key, !checked[key]))
+  const doneCount = subject.checklist.filter((c) => checked[c]).length
 
   return (
     <div>
@@ -96,14 +106,14 @@ export default function SubjectDetail() {
         </Section>
 
         <Section title="Revision checklist" description="Tick items off as you prepare - stored in your browser.">
+          <p className="mb-3 text-sm font-semibold text-emerald-800">{doneCount} of {subject.checklist.length} done</p>
           <ul className="space-y-2">
             {subject.checklist.map((c) => {
-              const key = `${subject.slug}:${c}`
-              const on = !!checked[key]
+              const on = !!checked[c]
               return (
                 <li key={c}>
                   <button
-                    onClick={() => setChecked((s) => ({ ...s, [key]: !s[key] }))}
+                    onClick={() => toggle(c)}
                     className={`flex w-full items-center gap-3 rounded-md border px-4 py-3 text-left text-sm transition-colors ${on ? 'border-emerald-700 bg-emerald-50 text-emerald-900' : 'bg-white hover:bg-secondary/60'}`}
                     aria-pressed={on}
                   >
