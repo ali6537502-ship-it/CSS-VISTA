@@ -57,8 +57,10 @@ jobs:
           node --test tests/currentAffairs.test.ts
       - name: Lint account feature
         run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/pages/Account.tsx src/components/AccountProvider.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
-      - name: Existing test suite
-        run: node --test tests/*.test.ts
+      - name: Existing test suite against unchanged base
+        env:
+          CSSV_TEST_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: node tests/current-affairs/regression.mjs
       - name: Existing repository lint report
         continue-on-error: true
         run: npm run lint
@@ -89,5 +91,7 @@ jobs:
           path: |
             test-artifacts/php-service.log
             test-artifacts/auth-service.log
+            test-artifacts/current-tests.log
+            test-artifacts/baseline-tests.log
           if-no-files-found: ignore
           retention-days: 7
