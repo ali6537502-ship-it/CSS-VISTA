@@ -227,6 +227,10 @@ function ca_sync_git_release(PDO $pdo): void
             $pdo->prepare('INSERT INTO current_affairs_release_files (file_key,file_hash) VALUES (?,?) ON DUPLICATE KEY UPDATE file_hash=VALUES(file_hash),applied_at=NOW(6)')->execute([$date,$entry['hash']]);
         }
         $pdo->prepare('INSERT INTO current_affairs_release_files (file_key,file_hash) VALUES (?,?) ON DUPLICATE KEY UPDATE file_hash=VALUES(file_hash),applied_at=NOW(6)')->execute(['@manifest',$release['id']]);
+    } catch (Throwable $error) {
+        $code=$error instanceof InvalidArgumentException ? 'invalid_git_edition' : ($error instanceof DomainException ? 'story_id_conflict' : 'git_release_failed');
+        try { ca_log_run($pdo,$date ?? null,'failed',0,$code); } catch (Throwable) {}
+        throw $error;
     } finally {
         $pdo->prepare('SELECT RELEASE_LOCK(?)')->execute([$lock]);
     }

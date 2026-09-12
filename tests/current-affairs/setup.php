@@ -8,7 +8,12 @@ if (($argv[1] ?? '')==='expire') {
     $pdo->prepare('UPDATE auth_sessions SET expires_at=DATE_SUB(NOW(6),INTERVAL 1 DAY) WHERE user_id=?')->execute([$argv[2] ?? '']);
     exit;
 }
-$pdo->exec(file_get_contents(dirname(__DIR__,2).'/server/sql/001_hostinger_core_schema.sql'));
+// Use the existing account tables verbatim. Unrelated legacy file-storage
+// indexes target MariaDB and are not needed by this MySQL isolation suite.
+$core=file_get_contents(dirname(__DIR__,2).'/server/sql/001_hostinger_core_schema.sql');
+preg_match_all('/CREATE TABLE IF NOT EXISTS (\w+)\s*\([\s\S]*?;/',$core,$tables,PREG_SET_ORDER);
+$required=['users','admin_users','student_profiles','auth_sessions','login_security_events'];
+foreach ($tables as $table) if (in_array($table[1],$required,true)) $pdo->exec($table[0]);
 cssv_admin_ensure_schema($pdo);
 $id=cssv_uuid_v4();
 $pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher,totp_enabled_at) VALUES (?,?,?,?,NOW(6))')->execute([$id,'fixture-admin@example.invalid',password_hash(bin2hex(random_bytes(32)),PASSWORD_DEFAULT),'isolated-test-unused']);

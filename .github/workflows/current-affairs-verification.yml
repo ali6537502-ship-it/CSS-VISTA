@@ -66,7 +66,7 @@ jobs:
         run: npm run lint
       - name: Prepare disposable runtime
         run: |
-          node -e "console.log('CSSV_APP_SECRET=' + require('node:crypto').randomBytes(48).toString('hex'))" >> "$GITHUB_ENV"
+          node -e "const value=require('node:crypto').randomBytes(48).toString('hex'); console.log('::add-mask::'+value); require('node:fs').appendFileSync(process.env.GITHUB_ENV,'CSSV_APP_SECRET='+value+'\n')"
           mkdir -p "$RUNNER_TEMP/cssv-briefing-private"
           echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/cssv-briefing-private" >> "$GITHUB_ENV"
           node tests/current-affairs/prepare.mjs

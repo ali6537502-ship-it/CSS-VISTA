@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Isolated CI database required')
 const base = 'http://localhost:4173/api/'
@@ -34,6 +34,18 @@ assert.equal(first.data.items.length, 2, 'Deployed Git edition did not import au
 assert.match(first.headers.get('cache-control'), /no-store/)
 assert.equal((await call('current-affairs.php?view=feed', undefined, b.jar)).data.items.length, 2, 'Shared edition missing for second student')
 const id = edition.stories[0].id
+const byCategory=await call('current-affairs.php?category='+encodeURIComponent(edition.stories[0].category),undefined,a.jar)
+assert.ok(byCategory.data.items.every((item)=>item.category===edition.stories[0].category))
+assert.ok((await call('current-affairs.php?q=TEST',undefined,a.jar)).data.items.length>0,'Archive search did not find sourced test stories')
+assert.equal((await call('current-affairs.php?from=2000-01-01&to=2000-01-01',undefined,a.jar)).data.items.length,0)
+assert.equal((await call('current-affairs.php?view=archive',undefined,a.jar)).data.days[0].publication_date,edition.date)
+assert.equal((await call('current-affairs.php?view=story&id='+id,undefined,a.jar)).data.story.sources[0].title,edition.stories[0].sources[0].title)
+assert.equal((await call('current-affairs.php?view=factbook',undefined,a.jar)).data.items[0].statistics[0].value,edition.stories[0].statistics[0].value)
+assert.equal((await call('current-affairs.php',{action:'preferences',reading_mode:'full',preferred_categories:[edition.stories[0].category],display_name:'Fixture Reader'},a.jar)).status,200)
+const preferences=await call('current-affairs.php?view=preferences',undefined,a.jar)
+assert.equal(preferences.data.preferences.reading_mode,'full')
+assert.equal(preferences.data.display_name,'Fixture Reader')
+assert.equal((await call('current-affairs.php?view=preferences',undefined,b.jar)).data.preferences.reading_mode,'quick')
 assert.equal((await call('current-affairs.php', { action: 'bookmark', id, saved: true }, a.jar, { 'X-CSRF-Token': 'wrong' })).status, 403)
 assert.equal((await call('current-affairs.php', { action: 'bookmark', id, saved: true, user_id: a.id }, b.jar)).status, 422)
 assert.equal((await call('current-affairs.php', { action: 'bookmark', id, saved: true }, a.jar)).status, 200)
@@ -70,4 +82,9 @@ assert.equal((await call('current-affairs.php?saved=1', undefined, a.jar)).data.
 execFileSync('php', ['tests/current-affairs/setup.php', 'expire', a.id])
 assert.equal((await call('current-affairs.php', undefined, a.jar)).status, 401, 'Expired session accepted')
 for (const path of ['_briefing_release/catalog.php', '_briefing_release/' + edition.date + '.php']) assert.equal((await call(path)).status, 404)
+for (const file of await readdir('dist/assets')) if (file.endsWith('.js')) {
+  const source=await readFile('dist/assets/'+file,'utf8')
+  assert.equal(source.includes(process.env.CSSV_APP_SECRET),false,'Server secret found in browser bundle')
+  assert.equal(source.includes(edition.stories[0].headline),false,'Protected edition found in browser bundle')
+}
 console.log('PASS: automatic Git release ingestion, shared editions, source validation, rollback, per-user isolation, CSRF, expiry, logout persistence, admin access and token revocation.')

@@ -84,7 +84,7 @@ function Dashboard() {
     <header className="ca-heading"><p className="ca-eyebrow">YOUR DAILY READING DESK</p><h1>{greeting}{name ? ', ' + name : ''}</h1><p>Your Current Affairs Briefing</p><EditionMeta summary={data.summary} /></header>
     <CategoryGlance summary={data.summary} select={(category) => navigate(briefingRoot + (category ? '?category=' + encodeURIComponent(category) : ''))} />
     <Publication summary={data.summary} />
-    {stories.length > 0 && <section><SectionHeading title="Today's Briefing" to={briefingRoot}>Complete edition</SectionHeading><div className="ca-card-grid">{stories.map((s) => <StoryCardView key={s.id} item={s} />)}</div></section>}
+    {stories.length > 0 && <section><SectionHeading title="Today's Briefing" to={briefingRoot}>Complete edition</SectionHeading><div className="ca-card-grid">{stories.map((s) => <StoryCardView key={s.id + s.saved + s.reading_status} item={s} onChange={result.retry} />)}</div></section>}
     {facts.length > 0 && <section><SectionHeading title="Quick Facts Today" to="/account/factbook" /><div className="ca-fact-grid">{facts.map(({ fact, story }, n) => <div key={story.id + n}><FactCard fact={fact} /><Link className="ca-fact-context" to={briefingRoot + '/' + story.id}>Read in context <ArrowRight size={13} /></Link></div>)}</div></section>}
     <div className="ca-two-columns">
       <section><SectionHeading title="Continue Reading" />{data.continue_reading.length ? data.continue_reading.map((s) => <MiniStory key={s.id} item={s} />) : <p className="ca-muted">Opened developments will appear here until you mark them as read.</p>}</section>
@@ -147,7 +147,7 @@ function Feed({ mode }: { mode: 'briefing' | 'facts' | 'saved' | 'search' }) {
         !result.data.summary.published && !filters.params.get('q') && !filters.params.get('category') && ['today', 'yesterday', 'custom'].includes(filters.params.get('range') || defaultRange) && mode !== 'saved'
           ? <Publication summary={result.data.summary} />
           : <Empty title={mode === 'saved' && filters.params.size === 0 ? 'No saved items yet' : 'No results'}>{mode === 'saved' && filters.params.size === 0 ? "You haven't saved any developments yet. Use Save on a briefing to keep it here." : 'No developments matched your search. Try another date, category or search term.'}</Empty>
-      ) : mode === 'facts' ? <Factbook items={result.data.items} /> : <div className="ca-card-grid">{result.data.items.map((item) => <StoryCardView key={item.id + item.saved + item.reading_status} item={item} onChange={mode === 'saved' ? result.retry : undefined} />)}</div>}
+      ) : mode === 'facts' ? <Factbook items={result.data.items} /> : <div className="ca-card-grid">{result.data.items.map((item) => <StoryCardView key={item.id + item.saved + item.reading_status} item={item} onChange={result.retry} />)}</div>}
       <Pager page={filters.page} more={result.data.has_more} change={filters.setPage} />
     </>}
   </>
