@@ -125,7 +125,8 @@ function Filters({ params, update, categories, defaultRange, savedOnly = false }
 function useFilters(defaultRange: string) {
   const [params, setParams] = useSearchParams()
   const update: UpdateFilter = (key, value) => {
-    const next = new URLSearchParams(params); next.delete('page')
+    // Read the committed URL: React may still be rendering the previous filter state.
+    const next = new URLSearchParams(window.location.search); next.delete('page')
     if (key === 'clear') { setParams({ range: defaultRange }); return }
     if (value) next.set(key, value); else next.delete(key)
     if (key === 'range') {
@@ -136,7 +137,7 @@ function useFilters(defaultRange: string) {
     setParams(next)
   }
   const page = Math.max(1, Number(params.get('page')) || 1)
-  return { params, update, page, setPage: (n: number) => { const next = new URLSearchParams(params); next.set('page', String(n)); setParams(next); window.scrollTo({ top: 0, behavior: 'instant' }) } }
+  return { params, update, page, setPage: (n: number) => { const next = new URLSearchParams(window.location.search); next.set('page', String(n)); setParams(next); window.scrollTo({ top: 0, behavior: 'instant' }) } }
 }
 function Feed({ mode }: { mode: 'briefing' | 'facts' | 'saved' | 'search' }) {
   const defaultRange = mode === 'saved' || mode === 'search' ? 'all' : 'today'
