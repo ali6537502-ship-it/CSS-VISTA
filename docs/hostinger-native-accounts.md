@@ -1,6 +1,6 @@
 # Native Hostinger accounts
 
-The account runtime uses the existing Hostinger PHP API and MySQL/MariaDB database. No Supabase browser package, API requests or authentication bridge are required. Existing account UUIDs and password hashes must be transferred and reconciled before this release is activated. The owner administrator continues using the existing separate password/TOTP session.
+The account runtime uses the existing Hostinger PHP API and MySQL/MariaDB database. No Supabase browser package, API requests or authentication bridge are required. The approved transfer is complete: 202 account UUIDs and password hashes were preserved and reconciled before activation. The owner administrator continues using the existing separate password/TOTP session.
 
 ## Authentication and private data
 
@@ -30,9 +30,9 @@ The CLI file is outside the webroot. Pass the actual deployed public directory a
 
 ## Deployment and migration
 
-Use the repository's existing main-branch Hostinger deployment. The native release must not be merged until the signed source transfer has copied the existing accounts and reconciled every copied field. Transfer records travel directly over HTTPS from the source database to the bounded Hostinger importer; only digests/counts are returned to the operator. An offline RSA private key signs the exact body digest. Destination overwrites are backed up encrypted outside the webroot. Stable row keys make retries idempotent, newer native records are preserved, and ownership conflicts abort a batch.
+The native release was deployed through PR #21 on 13 September 2026. All 202 accounts and their copied private study records were reconciled in 42 initial batches plus four final delta batches. Newer native records were preserved. The importer was permanently sealed; a repeated signed request returned HTTP 410.
 
-After cutover, perform the final source delta, reconcile and seal the importer permanently. Remove its temporary verification grant and implementation, clear source-side temporary payloads and the temporary HTTP extension, and retain the original source backup until the owner is satisfied with migration verification. Do not delete the source project as part of deploying this feature.
+The production migration route now always returns HTTP 410, with no public verification grant or importer implementation. Historical code is retained under server/migration only for disposable CI tests. Source-side temporary payloads, schema and HTTP extension were removed. The original source remains intact as a backup; do not delete it as part of this feature. See [hostinger-account-cutover.md](hostinger-account-cutover.md) for deployment evidence and remaining verification limits.
 
 Daily briefing publishing remains documented in `docs/current-affairs-publishing.md`: push validated dated JSON to the private repository; the deployed server imports it automatically for all authenticated accounts.
 
