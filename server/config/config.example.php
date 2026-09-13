@@ -14,13 +14,6 @@ return [
     'CSSV_APP_SECRET' => 'replace_with_at_least_64_random_characters',
     'CSSV_PRIVATE_STORAGE_DIR' => '/home/replace_me/cssv-private/uploads',
 
-    // Temporary only while existing accounts are being bridged.
-    'CSSV_SUPABASE_URL' => 'https://your-project.supabase.co',
-    'CSSV_SUPABASE_PUBLISHABLE_KEY' => 'sb_publishable_replace_me',
-
-    // Private migration runner only. Never expose this in browser code.
-    'CSSV_SUPABASE_SECRET_KEY' => 'sb_secret_replace_me',
-
     // Optional one-time schema bootstrap endpoint token. Store the same value
     // as a GitHub Actions repository secret, never in a committed workflow.
     'CSSV_BOOTSTRAP_TOKEN' => 'replace_with_a_unique_random_value',
@@ -33,5 +26,5 @@ return [
     'CSSV_SMTP_PASSWORD' => 'replace_me',
     'CSSV_MAIL_FROM' => 'noreply@css-vista.com',
     'CSSV_MAIL_FROM_NAME' => 'CSS Vista',
-    'CSSV_PASSWORD_RESET_URL' => 'https://www.css-vista.com/account/reset-password',
+    'CSSV_SITE_ORIGIN' => 'https://www.css-vista.com',
 ];

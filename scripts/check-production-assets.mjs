@@ -67,16 +67,13 @@ const entries = [
 ]
 const failures = await checkInParallel(entries)
 
-const [adsResponse, verificationResponse, homeResponse, productionEnv] = await Promise.all([
+const [adsResponse, verificationResponse] = await Promise.all([
   fetch(new URL('/ads.txt', origin), { signal: AbortSignal.timeout(20_000) }),
   fetch(new URL('/googlec96e2248070e0570.html', origin), { signal: AbortSignal.timeout(20_000) }),
-  fetch(origin, { signal: AbortSignal.timeout(20_000) }),
-  readFile(join(root, '.env.production'), 'utf8'),
 ])
-const [adsTxt, verification, homeHtml] = await Promise.all([
+const [adsTxt, verification] = await Promise.all([
   adsResponse.text(),
   verificationResponse.text(),
-  homeResponse.text(),
 ])
 
 if (adsTxt.trim() !== 'google.com, pub-6131271603014611, DIRECT, f08c47fec0942fa0') {
@@ -86,14 +83,9 @@ if (verification.trim() !== 'google-site-verification: googlec96e2248070e0570.ht
   failures.push('/googlec96e2248070e0570.html: verification response is missing or malformed')
 }
 
-const supabaseUrl = productionEnv.match(/^VITE_SUPABASE_URL=(.+)$/m)?.[1].trim()
-const entryScripts = [...homeHtml.matchAll(/<script[^>]+src="([^"]+\.js)"/g)].map((match) => match[1])
-const entrySources = await Promise.all(entryScripts.map(async (path) => (
-  await fetch(new URL(path, origin), { signal: AbortSignal.timeout(20_000) })
-).text()))
-if (!supabaseUrl || !entrySources.some((source) => source.includes(supabaseUrl))) {
-  failures.push('/: deployed JavaScript is missing the configured Supabase project URL')
-}
+const sessionResponse = await fetch(new URL('/api/auth/session.php', origin), { signal: AbortSignal.timeout(20_000) })
+const session = await sessionResponse.json().catch(() => ({}))
+if (!sessionResponse.ok || session.provider !== 'hostinger' || session.authenticated !== false) failures.push('/api/auth/session.php: native Hostinger session service is unavailable')
 
 for (const route of ['/book-summaries', '/books', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
   const response = await fetch(new URL(route, origin), { signal: AbortSignal.timeout(20_000) })
@@ -109,5 +101,5 @@ if (failures.length > 0) {
   for (const failure of failures) console.error(`  ${failure}`)
   process.exitCode = 1
 } else {
-  console.log(`Production asset audit passed: ${papers.length} registered PDFs, ${jsonPaths.length} JSON files, Supabase, ads.txt and Search Console verification are live.`)
+  console.log(`Production asset audit passed: ${papers.length} registered PDFs, ${jsonPaths.length} JSON files, Hostinger accounts, ads.txt and Search Console verification are live.`)
 }

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Navigate, Routes, Route } from 'react-router'
+import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
@@ -117,13 +118,12 @@ export default function App() {
         <Route path="/services" element={<S><Services /></S>} />
         <Route path="/analysis" element={<S><Analysis /></S>} />
         <Route path="/grammar-vocabulary" element={<S><GrammarVocab /></S>} />
-        <Route path="/dashboard" element={<S><Dashboard /></S>} />
+        <Route path="/dashboard" element={<ProfileGate><S><Dashboard /></S></ProfileGate>} />
         <Route path="/daily-challenge" element={<S><GrammarVocab /></S>} />
         <Route path="/gk" element={<S><GKWorld /></S>} />
         <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
-        <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
@@ -141,9 +141,9 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
-        <Route path="/account/*" element={<S><AccountWorkspace /></S>} />
+        <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
-        <Route path="/factbook" element={<S><Factbook /></S>} />
+        <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
         <Route path="/consultation" element={<S><Consultation /></S>} />
         <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />
         <Route path="/css-2026-written-result" element={<S><Css2026Result /></S>} />

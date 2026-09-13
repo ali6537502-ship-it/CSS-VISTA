@@ -35,8 +35,7 @@ jobs:
       CSSV_DB_NAME: cssvista_briefing_test
       CSSV_DB_USER: root
       CSSV_DB_PASSWORD: cssvista_ci_only
-      CSSV_SUPABASE_URL: http://127.0.0.1:54321
-      CSSV_SUPABASE_PUBLISHABLE_KEY: sb_publishable_isolated_ci_fixture
+      CSSV_SITE_ORIGIN: http://localhost:4173
       CSSV_CLIENT_DIR: dist
       CSSV_EMIT_WORKER: 'false'
     steps:
@@ -56,7 +55,7 @@ jobs:
           php tests/current-affairs-validation.php
           node --test tests/currentAffairs.test.ts
       - name: Lint account feature
-        run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/pages/Account.tsx src/components/AccountProvider.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
+        run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/lib/hostingerData.ts src/features/factbook src/lib/admin.ts src/lib/testSeriesRequests.ts src/components/SiteContentProvider.tsx src/pages/Account.tsx src/components/AccountProvider.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
       - name: Existing test suite against unchanged base
         env:
           CSSV_TEST_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
@@ -76,11 +75,12 @@ jobs:
           php tests/current-affairs/setup.php
       - name: Start isolated HTTP services
         run: |
-          node tests/current-affairs/auth-fixture.mjs > test-artifacts/auth-service.log 2>&1 &
-          php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
+          php -d "sendmail_path=php $GITHUB_WORKSPACE/tests/account-native/mail-capture.php" -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
-      - name: Verify real PHP session bridge, ownership and publishing
+      - name: Verify native PHP accounts, ownership and publishing
         run: node tests/current-affairs/security.mjs
+      - name: Verify account recovery and the complete personal factbook
+        run: node tests/account-native/security.mjs
       - name: Verify signed account migration in the disposable database
         run: node tests/account-migration/security.mjs
       - name: Report isolated service failures

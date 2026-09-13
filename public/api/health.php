@@ -18,7 +18,8 @@ $configured = [
     'database' => (bool)cssv_env('CSSV_DB_HOST') && (bool)cssv_env('CSSV_DB_NAME') && (bool)cssv_env('CSSV_DB_USER') && cssv_env('CSSV_DB_PASSWORD') !== null,
     'app_secret' => strlen((string)cssv_env('CSSV_APP_SECRET', '')) >= 32,
     'private_storage' => (bool)cssv_env('CSSV_PRIVATE_STORAGE_DIR'),
-    'supabase_bridge' => (bool)cssv_env('CSSV_SUPABASE_URL') && (bool)cssv_env('CSSV_SUPABASE_PUBLISHABLE_KEY'),
+    'native_accounts' => true,
+    'php_mail' => function_exists('mail'),
     'smtp' => (bool)cssv_env('CSSV_SMTP_HOST') && (bool)cssv_env('CSSV_SMTP_USER') && cssv_env('CSSV_SMTP_PASSWORD') !== null,
 ];
 

@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router'
-import { ArrowRight, BookOpen, LogOut, Search } from 'lucide-react'
+import { ArrowRight, BookOpen, LogOut, Search, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { archiveSchema, briefingRoot, dateFilters, displayDate, factText, feedSchema, overviewSchema, pakistanDate, shiftDate, type Fact, type StoryCard } from './model'
 import { useBriefing } from './useBriefing'
@@ -69,6 +69,10 @@ function SectionHeading({ title, to, children }: { title: string; to?: string; c
 }
 function Dashboard() {
   const { user } = useAccount()
+  const [selection, setSelection] = useState('all')
+  const [query, setQuery] = useState('')
+  const [revision, setRevision] = useState(false)
+  const [revealed, setRevealed] = useState<string[]>([])
   const result = useBriefing('view=overview', overviewSchema)
   const navigate = useNavigate()
   if (result.loading) return <Loading />
@@ -82,10 +86,15 @@ function Dashboard() {
   const stories = [...data.stories].sort((a, b) => Number(preferred.has(b.category)) - Number(preferred.has(a.category)))
   return <>
     <header className="ca-heading"><p className="ca-eyebrow">YOUR DAILY READING DESK</p><h1>{greeting}{name ? ', ' + name : ''}</h1><p>Your Current Affairs Briefing</p><EditionMeta summary={data.summary} /></header>
+    <div className="ca-desk-tools">
+      <Link to="/account?settings=1" className="ca-profile-shortcut">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="Your profile" /> : <UserRound size={25} />}<span><strong>{user?.display_name || 'Your profile'}</strong><small>Edit your study profile</small></span><ArrowRight size={16} /></Link>
+      <form className="ca-search" role="search" onSubmit={e => { e.preventDefault(); navigate('/account/search?q=' + encodeURIComponent(query.trim())) }}><label className="sr-only" htmlFor="desk-search">Search your briefing archive</label><Search size={18} /><input id="desk-search" value={query} onChange={e => setQuery(e.target.value)} maxLength={200} placeholder="Find a topic, report or key fact…" /><button>Search</button></form>
+    </div>
+    <div className="ca-desk-actions"><Link to={briefingRoot + '?reading=unread'}><strong>{data.summary.unread}</strong><span>Unread today</span></Link><Link to="/account/saved"><BookOpen size={22} /><span>Saved for revision</span></Link><Link to="/account/factbook"><Search size={22} /><span>Explore today's facts</span></Link></div>
     <CategoryGlance summary={data.summary} select={(category) => navigate(briefingRoot + (category ? '?category=' + encodeURIComponent(category) : ''))} />
     <Publication summary={data.summary} />
-    {stories.length > 0 && <section><SectionHeading title="Today's Briefing" to={briefingRoot}>Complete edition</SectionHeading><div className="ca-card-grid">{stories.map((s) => <StoryCardView key={s.id + s.saved + s.reading_status} item={s} onChange={result.retry} />)}</div></section>}
-    {facts.length > 0 && <section><SectionHeading title="Quick Facts Today" to="/account/factbook" /><div className="ca-fact-grid">{facts.map(({ fact, story }, n) => <div key={story.id + n}><FactCard fact={fact} /><Link className="ca-fact-context" to={briefingRoot + '/' + story.id}>Read in context <ArrowRight size={13} /></Link></div>)}</div></section>}
+    {stories.length > 0 && <section><SectionHeading title="Today's Briefing" to={briefingRoot}>Complete edition</SectionHeading><div className="ca-chips ca-desk-tabs" role="group" aria-label="Filter displayed developments">{[['all','All shown'],['unread','Unread'],['saved','Saved']].map(([value,label]) => <button key={value} aria-pressed={selection === value} onClick={() => setSelection(value)}>{label}</button>)}</div>{!stories.some(s => selection === 'all' || (selection === 'saved' ? s.saved : s.reading_status !== 'read')) && <p className="ca-muted">No displayed developments match this filter. Open the complete edition to explore more.</p>}<div className="ca-card-grid">{stories.filter(s => selection === 'all' || (selection === 'saved' ? s.saved : s.reading_status !== 'read')).map((s) => <StoryCardView key={s.id + s.saved + s.reading_status} item={s} onChange={result.retry} />)}</div></section>}
+    {facts.length > 0 && <section><SectionHeading title="Quick Facts Today" to="/account/factbook" /><button className="ca-button ca-button-light ca-revision-toggle" aria-pressed={revision} onClick={() => { setRevision(v => !v); setRevealed([]) }}>{revision ? 'Show all facts' : 'Practise recall'}</button><div className="ca-fact-grid">{facts.map(({ fact, story }, n) => <div key={story.id + n}>{revision && !revealed.includes(story.id + n) ? <button className="ca-recall-card" onClick={() => setRevealed(v => [...v, story.id + n])}><small>{story.category}</small><strong>{typeof fact === 'string' ? 'Recall a key fact from this development' : fact.label}</strong><span>Tap to reveal</span></button> : <FactCard fact={fact} />}<Link className="ca-fact-context" to={briefingRoot + '/' + story.id}>Read in context <ArrowRight size={13} /></Link></div>)}</div></section>}
     <div className="ca-two-columns">
       <section><SectionHeading title="Continue Reading" />{data.continue_reading.length ? data.continue_reading.map((s) => <MiniStory key={s.id} item={s} />) : <p className="ca-muted">Opened developments will appear here until you mark them as read.</p>}</section>
       <section><SectionHeading title="Recently Saved" to="/account/saved" />{data.saved.length ? data.saved.map((s) => <MiniStory key={s.id} item={s} />) : <p className="ca-muted">Use Save on a development to keep it for revision.</p>}</section>

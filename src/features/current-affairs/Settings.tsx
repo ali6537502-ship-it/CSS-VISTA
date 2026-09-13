@@ -1,3 +1,4 @@
+import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { z } from 'zod'
@@ -21,6 +22,7 @@ function SettingsForm({ initial }: { initial: z.infer<typeof settingsSchema> }) 
   const [categories, setCategories] = useState(initial.preferences.preferred_categories)
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
   const [passwordBusy, setPasswordBusy] = useState(false)
@@ -36,14 +38,15 @@ function SettingsForm({ initial }: { initial: z.infer<typeof settingsSchema> }) 
     if (password !== confirmation) { setPasswordMessage('Passwords do not match.'); return }
     setPasswordBusy(true)
     try {
-      const result = await updatePassword(password)
+      const result = await updatePassword(password, currentPassword)
       if (result.error) setPasswordMessage(result.error)
-      else { setPassword(''); setConfirmation(''); setPasswordMessage('Your password has been updated.') }
+      else { setCurrentPassword(''); setPassword(''); setConfirmation(''); setPasswordMessage('Your password has been updated.') }
     } catch { setPasswordMessage('Your password could not be changed. Please try again.') }
     finally { setPasswordBusy(false) }
   }
   return <>
     <header className="ca-heading"><p className="ca-eyebrow">YOUR ACCOUNT</p><h1>Account Settings</h1><p>A few useful preferences for your daily reading.</p></header>
+    <StudentProfilePanel email={initial.email} />
     <form className="ca-settings-panel" onSubmit={(e) => void save(e)}><h2>Profile & reading preferences</h2>
       <label>Display name<input required autoComplete="name" maxLength={160} value={name} onChange={(e) => setName(e.target.value)} /></label>
       <label>Email<input type="email" value={initial.email} readOnly aria-describedby="ca-email-note" /></label><small id="ca-email-note">Your account email.</small>
@@ -52,6 +55,7 @@ function SettingsForm({ initial }: { initial: z.infer<typeof settingsSchema> }) 
       <button className="ca-button" disabled={busy}>{busy ? 'Saving…' : 'Save preferences'}</button><p role="status">{message}</p>
     </form>
     <form className="ca-settings-panel" onSubmit={(e) => void changePassword(e)}><h2>Change password</h2>
+      <label>Current password<input type="password" autoComplete="current-password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label>
       <label>New password<input type="password" autoComplete="new-password" required minLength={8} maxLength={200} value={password} onChange={(e) => setPassword(e.target.value)} /></label>
       <label>Confirm new password<input type="password" autoComplete="new-password" required minLength={8} maxLength={200} value={confirmation} onChange={(e) => setConfirmation(e.target.value)} /></label>
       <button className="ca-button" disabled={passwordBusy}>{passwordBusy ? 'Updating…' : 'Update password'}</button><p role="status">{passwordMessage}</p>

@@ -87,5 +87,5 @@ try {
     ]);
 } catch (Throwable $error) {
     error_log('CSSV one-time schema bootstrap failed: ' . $error->getMessage());
-    cssv_fail('Schema bootstrap failed safely. Existing Supabase production remains unchanged.', 500, 'bootstrap_failed');
+    cssv_fail('Schema bootstrap failed safely. Existing data has been preserved.', 500, 'bootstrap_failed');
 }
