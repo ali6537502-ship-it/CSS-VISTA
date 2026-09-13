@@ -17,7 +17,7 @@ The complete existing repository suite has two inherited failures: the MPT reaso
 
 ## Browser verification limits
 
-The existing production homepage, account screen and current-affairs route were inspected before deployment. The local preview could not be reached from the browser because the execution environment isolates its server; exposing it was rejected by the environment's approval policy. No authenticated dashboard browser journey or exact mobile-width visual pass has been claimed.
+The existing production homepage, account screen and current-affairs route were inspected before deployment. The local preview could not be reached from the browser because the execution environment isolates its server; exposing it was rejected by the environment's approval policy. On 13 September the live recovery-code screen was inspected visually after deployment, including email/code/new-password/confirmation controls and navigation. No application console error was observed (an unrelated browser-extension error was present). No authenticated dashboard browser journey or exact mobile-width visual pass has been claimed.
 
 The test-only UI entry at `tests/current-affairs/ui.html` can be run with `npx vite --config tests/current-affairs/vite.config.ts`. It uses labelled fixtures and is excluded from the production build. It supports reviewing the dashboard, reader, filters, archive, saved state and settings presentation; it is not an authentication or persistence test.
 
