@@ -20,7 +20,7 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
   const headers = new Headers(init.headers)
   headers.set('Accept', 'application/json')
   if (init.body && !(init.body instanceof FormData)) headers.set('Content-Type', 'application/json')
-  if (accountUserId && !headers.has('X-CSSV-User') && !path.startsWith('auth/')) headers.set('X-CSSV-User', accountUserId)
+  if (accountUserId && !headers.has('X-CSSV-User') && (!path.startsWith('auth/') || ['auth/change-password.php', 'auth/logout.php'].includes(path))) headers.set('X-CSSV-User', accountUserId)
   if (!['GET', 'HEAD', 'OPTIONS'].includes(method)) {
     const token = csrfToken()
     if (token) headers.set('X-CSRF-Token', token)
@@ -28,7 +28,7 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
   const response = await fetch(`/api/${path}`, { ...init, method, headers, credentials: 'same-origin', cache: 'no-store' })
   const data = await response.json().catch(() => ({})) as T & ApiFailure
   if (!response.ok) {
-    if (response.status === 401 && !path.startsWith('auth/')) window.dispatchEvent(new Event(ACCOUNT_EXPIRED_EVENT))
+    if (response.status === 401 && !path.startsWith('auth/')) window.dispatchEvent(new CustomEvent(ACCOUNT_EXPIRED_EVENT, { detail: { userId: headers.get('X-CSSV-User') } }))
     throw new HostingerApiError(data.message || 'The account service could not complete this request. Please try again.', response.status, data.error)
   }
   return data

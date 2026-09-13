@@ -33,6 +33,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const userRef = useRef<AccountUser | null>(null)
   const sessionRequest = useRef<AbortController | null>(null)
   const authVersion = useRef(0)
+  const authTransition = useRef(false)
   const hydrated = useRef(false)
   const syncInFlight = useRef<string | null>(null)
   const applyUser = useCallback((next: AccountUser | null) => {
@@ -45,6 +46,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     setUser(next)
   }, [])
   const refreshSession = useCallback(async () => {
+    if (authTransition.current) return
     sessionRequest.current?.abort()
     const controller = new AbortController()
     sessionRequest.current = controller
@@ -62,7 +64,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     else if (!hydrated.current) setLoading(false)
   }, [location.pathname, refreshSession])
   useEffect(() => {
-    const expire = () => { ++authVersion.current; sessionRequest.current?.abort(); applyUser(null); setSyncError('Your session has ended. Please sign in again.') }
+    const expire = (event: Event) => { const expected = (event as CustomEvent<{ userId?: string }>).detail?.userId; if (expected && expected !== userRef.current?.id) return; ++authVersion.current; sessionRequest.current?.abort(); applyUser(null); setSyncError('Your session has ended. Please sign in again.') }
     const check = () => { if (hydrated.current) void refreshSession() }
     const visibility = () => { if (document.visibilityState === 'visible') check() }
     const storage = (event: StorageEvent) => { if (event.key === ACCOUNT_CHANGE_KEY) check() }
@@ -106,12 +108,14 @@ export function AccountProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AccountContextValue>(() => ({
     configured: true, loading, user, passwordRecovery, syncStatus, syncBackend: user ? 'hostinger' : null, syncError, lastSyncedAt,
     async signIn(email, password) {
+      authTransition.current = true
       sessionRequest.current?.abort(); const version = ++authVersion.current
       try {
         const response = await hostingerRequest<{ user: AccountUser }>('auth/login.php', { method: 'POST', body: JSON.stringify({ email, password }) })
         if (version === authVersion.current) { applyUser(response.user); hydrated.current = true; setLoading(false); broadcast() }
         return {}
       } catch (error) { return { error: errorMessage(error) } }
+      finally { authTransition.current = false }
     },
     async signUp(email, password, fullName) {
       try {
