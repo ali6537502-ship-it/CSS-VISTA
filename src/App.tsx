@@ -55,6 +55,7 @@ const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
+const DesignSystem = lazy(() => import('./pages/DesignSystem'))
 const FpscSyllabus = lazy(() => import('./pages/FpscSyllabus'))
 const CssPastPaperAnalysis = lazy(() => import('./pages/CssPastPaperAnalysis'))
 const Factbook = lazy(() => import('./pages/Factbook'))
@@ -130,6 +131,7 @@ export default function App() {
         <Route path="/answer-evaluation" element={<S><AnswerEvaluation /></S>} />
         <Route path="/past-papers/view/:id" element={<S><PastPaperOpen /></S>} />
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
+        <Route path="/design-system" element={<S><DesignSystem /></S>} />
         <Route path="/fpsc-syllabus" element={<S><FpscSyllabus /></S>} />
         <Route path="/css-past-paper-analysis" element={<S><CssPastPaperAnalysis /></S>} />
         <Route path="/gk/cat/:slug" element={<S><GKCategory /></S>} />

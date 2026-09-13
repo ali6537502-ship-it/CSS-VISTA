@@ -1,0 +1,409 @@
+/* ============================================================================
+   CSS VISTA COMPONENT LAYER
+   ----------------------------------------------------------------------------
+   Every value here resolves to a token from tokens.css. No literal colour,
+   shadow, radius, blur, spacing or type value appears below - that is the
+   Phase 1 Definition of Done, and it is what lets the whole platform be
+   retuned from one file.
+
+   Scoped under .cv-* so nothing here can collide with the existing Tailwind
+   and shadcn/ui styling that the live pages still depend on.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- glass ---
+   Five tiers, per §5.1. Opacity drops and blur lifts as a surface moves from
+   decorative (T1) to readable (T4); T5 is reserved for floating chrome.
+   -------------------------------------------------------------------------- */
+
+.cv-surface {
+  border-radius: var(--cv-r-md);
+  box-shadow: var(--cv-shadow-1);
+  border: var(--cv-border-fine);
+  background: var(--cv-glass-3);
+}
+
+.cv-surface--t1 {
+  background: var(--cv-glass-1);
+  backdrop-filter: var(--cv-blur-md);
+  -webkit-backdrop-filter: var(--cv-blur-md);
+  border: var(--cv-border-icy);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-top);
+}
+
+.cv-surface--t2 {
+  background: var(--cv-glass-2);
+  backdrop-filter: var(--cv-blur-sm);
+  -webkit-backdrop-filter: var(--cv-blur-sm);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-top);
+}
+
+.cv-surface--t3 {
+  background: var(--cv-glass-3);
+  backdrop-filter: var(--cv-blur-none);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-soft);
+}
+
+.cv-surface--t4 {
+  background: var(--cv-glass-4);
+  backdrop-filter: var(--cv-blur-none);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-soft);
+}
+
+.cv-surface--t5 {
+  background: var(--cv-glass-nav);
+  backdrop-filter: var(--cv-blur-lg);
+  -webkit-backdrop-filter: var(--cv-blur-lg);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-3), var(--cv-highlight-top);
+}
+
+.cv-surface--r-sm { border-radius: var(--cv-r-sm); }
+.cv-surface--r-lg { border-radius: var(--cv-r-lg); }
+.cv-surface--r-xl { border-radius: var(--cv-r-xl); }
+
+.cv-surface--e2 { box-shadow: var(--cv-shadow-2), var(--cv-highlight-soft); }
+.cv-surface--e3 { box-shadow: var(--cv-shadow-3), var(--cv-highlight-soft); }
+.cv-surface--flat { box-shadow: none; }
+
+/* Hover lift is the only card motion in the system. §6. */
+.cv-surface--lift {
+  transition: transform var(--cv-dur-hover) var(--cv-ease),
+              box-shadow var(--cv-dur-hover) var(--cv-ease);
+}
+.cv-surface--lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--cv-shadow-2), var(--cv-highlight-soft);
+}
+
+/* --------------------------------------------------------------- type ---- */
+
+.cv-title {
+  font-family: var(--cv-font-title);
+  font-weight: var(--cv-weight-title);
+  font-size: var(--cv-display);
+  line-height: var(--cv-lh-title);
+  letter-spacing: var(--cv-track-tight);
+  color: var(--cv-ink-900);
+  margin: 0;
+  text-wrap: balance;
+}
+.cv-title--h1 { font-size: var(--cv-h1); }
+
+.cv-head {
+  font-family: var(--cv-font-head);
+  font-weight: var(--cv-weight-head);
+  font-size: var(--cv-h2);
+  line-height: var(--cv-lh-head);
+  letter-spacing: var(--cv-track-tight);
+  color: var(--cv-ink-900);
+  margin: 0;
+  text-wrap: balance;
+}
+.cv-head--h3 { font-size: var(--cv-h3); }
+.cv-head--h4 { font-size: var(--cv-h4); }
+
+.cv-label {
+  font-family: var(--cv-font-head);
+  font-weight: var(--cv-weight-label);
+  font-size: var(--cv-meta);
+  letter-spacing: var(--cv-track-label);
+  text-transform: uppercase;
+  color: var(--cv-green-600);
+  margin: 0;
+}
+
+.cv-body {
+  font-family: var(--cv-font-body);
+  font-weight: var(--cv-weight-body);
+  font-size: var(--cv-body);
+  line-height: var(--cv-lh-body);
+  color: var(--cv-ink-700);
+  margin: 0;
+}
+.cv-body--lg { font-size: var(--cv-body-lg); }
+.cv-body--sm { font-size: var(--cv-small); }
+.cv-prose { max-width: var(--cv-measure); }
+
+.cv-caption {
+  font-family: var(--cv-font-head);
+  font-style: italic;
+  font-weight: var(--cv-weight-caption);
+  font-size: var(--cv-meta);
+  color: var(--cv-ink-500);
+  margin: 0;
+}
+
+.cv-num {
+  font-family: var(--cv-font-body);
+  font-weight: var(--cv-weight-emph);
+  font-variant-numeric: tabular-nums;
+  color: var(--cv-green-600);
+  line-height: var(--cv-lh-title);
+}
+
+.cv-urdu {
+  font-family: var(--cv-font-urdu);
+  line-height: var(--cv-lh-urdu);
+  direction: rtl;
+}
+
+/* ------------------------------------------------------------- buttons ---
+   Not every action is a filled button. §6. */
+
+.cv-btn {
+  font-family: var(--cv-font-body);
+  font-weight: var(--cv-weight-emph);
+  font-size: var(--cv-small);
+  line-height: var(--cv-lh-head);
+  border-radius: var(--cv-r-pill);
+  padding: var(--cv-s-2) var(--cv-s-5);
+  border: var(--cv-border-fine);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cv-s-2);
+  transition: transform var(--cv-dur-press) var(--cv-ease),
+              box-shadow var(--cv-dur-hover) var(--cv-ease),
+              background-color var(--cv-dur-hover) var(--cv-ease);
+}
+.cv-btn:focus-visible {
+  outline: var(--cv-s-1) solid var(--cv-blue-500);
+  outline-offset: calc(var(--cv-s-1) / 2);
+}
+.cv-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+
+.cv-btn--primary {
+  background: var(--cv-ink-900);
+  color: var(--cv-white);
+  border-color: transparent;
+  box-shadow: var(--cv-shadow-1);
+}
+.cv-btn--primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--cv-shadow-2); }
+.cv-btn--primary:active:not(:disabled) { transform: translateY(1px); box-shadow: var(--cv-shadow-inset-press); }
+
+.cv-btn--brand {
+  background: var(--cv-green-600);
+  color: var(--cv-white);
+  border-color: transparent;
+  box-shadow: var(--cv-shadow-1);
+}
+.cv-btn--brand:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--cv-shadow-2); }
+.cv-btn--brand:active:not(:disabled) { transform: translateY(1px); box-shadow: var(--cv-shadow-inset-press); }
+
+.cv-btn--secondary {
+  background: var(--cv-glass-2);
+  backdrop-filter: var(--cv-blur-sm);
+  -webkit-backdrop-filter: var(--cv-blur-sm);
+  color: var(--cv-ink-800);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-top);
+}
+.cv-btn--secondary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--cv-shadow-2); }
+.cv-btn--secondary:active:not(:disabled) { transform: translateY(1px); box-shadow: var(--cv-shadow-inset-press); }
+
+.cv-btn--tertiary {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--cv-green-600);
+  padding-inline: 0;
+}
+.cv-btn--tertiary:hover:not(:disabled) { text-decoration: underline; text-underline-offset: var(--cv-s-1); }
+
+.cv-btn--sq { border-radius: var(--cv-r-sm); }
+
+/* ------------------------------------------------------- inputs & select ---
+   Font-size stays at 16px on mobile so iOS does not zoom the viewport. §6. */
+
+.cv-field {
+  font-family: var(--cv-font-body);
+  font-weight: var(--cv-weight-body);
+  font-size: var(--cv-body);
+  line-height: var(--cv-lh-body);
+  color: var(--cv-ink-800);
+  background: var(--cv-glass-3);
+  border: var(--cv-border-fine);
+  border-radius: var(--cv-r-sm);
+  padding: var(--cv-s-2) var(--cv-s-4);
+  width: 100%;
+  transition: border-color var(--cv-dur-hover) var(--cv-ease),
+              box-shadow var(--cv-dur-hover) var(--cv-ease);
+}
+.cv-field::placeholder { color: var(--cv-ink-400); }
+.cv-field:focus {
+  outline: none;
+  border-color: var(--cv-blue-500);
+  box-shadow: 0 0 0 var(--cv-s-1) var(--cv-blue-050);
+}
+.cv-field:disabled { opacity: 0.5; cursor: not-allowed; }
+.cv-field--invalid { border-color: var(--cv-bad-600); }
+
+.cv-field-wrap { display: flex; flex-direction: column; gap: var(--cv-s-2); }
+.cv-field-label {
+  font-family: var(--cv-font-head);
+  font-weight: var(--cv-weight-label);
+  font-size: var(--cv-meta);
+  letter-spacing: var(--cv-track-label);
+  text-transform: uppercase;
+  color: var(--cv-ink-500);
+}
+.cv-field-hint { font-family: var(--cv-font-body); font-size: var(--cv-meta); color: var(--cv-ink-500); }
+.cv-field-error { font-family: var(--cv-font-body); font-size: var(--cv-meta); color: var(--cv-bad-600); }
+
+/* ---------------------------------------------------------------- chip ---- */
+
+.cv-chip {
+  font-family: var(--cv-font-body);
+  font-weight: var(--cv-weight-emph);
+  font-size: var(--cv-meta);
+  border-radius: var(--cv-r-pill);
+  padding: var(--cv-s-1) var(--cv-s-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cv-s-1);
+  border: var(--cv-border-fine);
+  background: var(--cv-icy);
+  color: var(--cv-ink-700);
+  white-space: nowrap;
+}
+.cv-chip--brand { background: var(--cv-green-050); color: var(--cv-green-600); }
+.cv-chip--info  { background: var(--cv-blue-050);  color: var(--cv-blue-600); }
+.cv-chip--good  { background: var(--cv-good-050);  color: var(--cv-good-600); }
+.cv-chip--warn  { background: var(--cv-warn-050);  color: var(--cv-warn-600); }
+.cv-chip--bad   { background: var(--cv-bad-050);   color: var(--cv-bad-600); }
+.cv-chip--gold  { background: var(--cv-gold-050);  color: var(--cv-gold-500); }
+
+/* --------------------------------------------------------------- tabs ----- */
+
+.cv-tabs { display: flex; gap: var(--cv-s-1); flex-wrap: wrap; }
+.cv-tab {
+  font-family: var(--cv-font-head);
+  font-weight: var(--cv-weight-head);
+  font-size: var(--cv-small);
+  border-radius: var(--cv-r-pill);
+  padding: var(--cv-s-2) var(--cv-s-4);
+  border: var(--cv-border-fine);
+  background: var(--cv-icy);
+  color: var(--cv-ink-500);
+  cursor: pointer;
+  transition: background-color var(--cv-dur-hover) var(--cv-ease),
+              color var(--cv-dur-hover) var(--cv-ease);
+}
+.cv-tab:focus-visible { outline: var(--cv-s-1) solid var(--cv-blue-500); outline-offset: calc(var(--cv-s-1) / 2); }
+.cv-tab[aria-selected="true"] {
+  background: var(--cv-ink-900);
+  color: var(--cv-white);
+  border-color: transparent;
+}
+
+/* ---------------------------------------------------------- filter bar ---- */
+
+.cv-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cv-s-3);
+  padding: var(--cv-s-3) var(--cv-s-4);
+  border-radius: var(--cv-r-md);
+  background: var(--cv-glass-3);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-soft);
+}
+.cv-filterbar > * { flex: 0 1 auto; }
+.cv-filterbar-spacer { flex: 1 1 auto; }
+
+/* -------------------------------------------------------------- avatar ---- */
+
+.cv-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--cv-r-pill);
+  background: var(--cv-glass-2);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-top);
+  color: var(--cv-ink-800);
+  font-family: var(--cv-font-head);
+  font-weight: var(--cv-weight-head);
+  font-size: var(--cv-small);
+  width: var(--cv-s-10);
+  height: var(--cv-s-10);
+  overflow: hidden;
+  flex: none;
+}
+.cv-avatar--sm { width: var(--cv-s-8); height: var(--cv-s-8); font-size: var(--cv-meta); }
+.cv-avatar--lg { width: var(--cv-s-16); height: var(--cv-s-16); font-size: var(--cv-h3); }
+.cv-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* -------------------------------------------------------- icon capsule ---- */
+
+.cv-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cv-s-10);
+  height: var(--cv-s-10);
+  border-radius: var(--cv-r-sm);
+  background: var(--cv-glass-2);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-shadow-1), var(--cv-highlight-top);
+  color: var(--cv-green-600);
+  flex: none;
+}
+.cv-capsule--sm { width: var(--cv-s-8); height: var(--cv-s-8); }
+.cv-capsule svg { width: var(--cv-s-5); height: var(--cv-s-5); }
+
+/* --------------------------------------------------------- empty state ---- */
+
+.cv-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--cv-s-3);
+  padding: var(--cv-s-12) var(--cv-s-6);
+  border-radius: var(--cv-r-md);
+  background: var(--cv-glass-3);
+  border: var(--cv-border-fine);
+  box-shadow: var(--cv-highlight-soft);
+}
+
+/* ------------------------------------------------------------ skeleton ---- */
+
+.cv-skeleton {
+  background: var(--cv-icy);
+  border-radius: var(--cv-r-sm);
+  position: relative;
+  overflow: hidden;
+}
+.cv-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--cv-white), transparent);
+  transform: translateX(-100%);
+  animation: cv-shimmer 1.4s infinite;
+}
+@keyframes cv-shimmer { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .cv-skeleton::after { animation: none; opacity: 0; }
+}
+
+/* ------------------------------------------------- atmospheric backdrop ---
+   Almost invisible by intent. Gradient falloff only - never filter: blur(),
+   which would cost a composited layer for nothing. §5.3. */
+
+.cv-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side at 18% 12%, var(--cv-atmo-a), transparent),
+    radial-gradient(closest-side at 88% 68%, var(--cv-atmo-b), transparent);
+}
+:root {
+  --cv-atmo-a: rgba(15, 107, 74, 0.055);
+  --cv-atmo-b: rgba(59, 116, 240, 0.040);
+}

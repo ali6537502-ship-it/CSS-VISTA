@@ -1,0 +1,240 @@
+/* ============================================================================
+   CSS VISTA DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   The only place design values are defined. Every component consumes tokens;
+   no hard-coded colour, shadow, radius, blur or opacity belongs anywhere else.
+
+   Reconciled against the Master Build Command §5 after the Phase 0 audit:
+
+   - Ink is green-biased, not navy. §5 proposed navy #0B1B33 as primary ink;
+     the approved direction keeps CSS Vista's green identity, so the ink ramp
+     is built on the brand hue instead. Navy survives only as a cool neutral
+     influence in the hairlines and shadows.
+   - Brand green is #0F6B4A ("Field"), lifted from the live #063D2B, which was
+     too dark to carry the white-first direction in §4.
+   - Gold is #C79E23, sampled from the existing theme and near-identical to the
+     #C9A227 proposed in §5. Featured and award markers only.
+   - Blue is retained from §5 as an informational accent only. It must never
+     become a second brand colour.
+   - Light only. There is no dark tier by decision; see §9.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- fonts ---
+   Self-hosted, matching how Inter is already served. Loading these from
+   Google would reintroduce the render-blocking stylesheet request that
+   src/index.css deliberately removed, and cost us the 1,316ms LCP baseline.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Alata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/alata-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Commissioner";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("/fonts/commissioner-variable-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/sansation-300-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/sansation-300-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/sansation-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/sansation-400-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Sansation";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/sansation-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* -------------------------------------------------------------- canvas --- */
+  --cv-white:      #FFFFFF;
+  --cv-canvas:     #F9FBFA;   /* page background */
+  --cv-icy:        #EFF4F1;   /* subtle fills, inactive tabs */
+  --cv-hairline:   #E0E7E3;
+
+  /* ----------------------------------------------------------------- ink ---
+     Green-biased, never pure black. Carries typography and primary actions. */
+  --cv-ink-900:    #102C21;   /* headings, primary button fill */
+  --cv-ink-800:    #1B3A2C;
+  --cv-ink-700:    #3F4D47;   /* body copy */
+  --cv-ink-500:    #77837C;   /* metadata, captions */
+  --cv-ink-400:    #9AA5A0;   /* placeholders, disabled */
+
+  /* ------------------------------------------------------------- accents ---
+     Restrained. Green leads; blue is informational only and must never become
+     a second brand colour; gold is reserved for featured and award markers. */
+  --cv-green-600:  #0F6B4A;   /* CSS Vista green - primary */
+  --cv-green-500:  #14855C;
+  --cv-green-050:  #E8F5EE;
+  --cv-blue-600:   #1B4DD8;
+  --cv-blue-500:   #3B74F0;
+  --cv-blue-050:   #EEF3FE;
+  --cv-gold-500:   #C79E23;
+  --cv-gold-050:   #FAF3DF;
+
+  /* -------------------------------------------------------- semantic ------
+     Separate from the accent hue. Not brand colour. */
+  --cv-good-600:   #0F8A5F;
+  --cv-good-050:   #E8F6EF;
+  --cv-warn-600:   #9A5B08;
+  --cv-warn-050:   #FDF3E3;
+  --cv-bad-600:    #A33A2A;
+  --cv-bad-050:    #FBEEEC;
+
+  /* -------------------------------------------- glass opacity tiers -------
+     White base. See §5.1 for the tier-to-surface mapping. */
+  --cv-glass-1:    rgba(255, 255, 255, 0.55);  /* feature panels, hero surfaces */
+  --cv-glass-2:    rgba(255, 255, 255, 0.68);  /* standard cards, gateway tiles */
+  --cv-glass-3:    rgba(255, 255, 255, 0.78);  /* info-dense, dashboards, rows */
+  --cv-glass-4:    rgba(255, 255, 255, 0.94);  /* reading, tables, mock questions */
+  --cv-glass-nav:  rgba(255, 255, 255, 0.82);  /* header, menus, overlays */
+
+  /* ---------------------------------------------------------- blur budget ---
+     Hard ceiling of three composited backdrop-filter layers per viewport. */
+  --cv-blur-sm:    blur(8px);
+  --cv-blur-md:    blur(16px);
+  --cv-blur-lg:    blur(24px);
+  --cv-blur-none:  none;
+
+  /* ------------------------------------------- borders & inner highlight ---
+     Hairlines keep a cool navy-green cast so edges read as glass, not grey. */
+  --cv-border-fine:   1px solid rgba(16, 45, 34, 0.08);
+  --cv-border-icy:    1px solid rgba(150, 185, 170, 0.34);
+  --cv-highlight-top:  inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  --cv-highlight-soft: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  /* -------------------------------------------------------------- shadows ---
+     Broad ambient plus tight contact, always paired. Green-biased so they
+     never read as the grey drop shadows §9 rejects. */
+  --cv-shadow-1: 0 1px 2px rgba(16, 45, 34, 0.04), 0 8px 24px -8px rgba(16, 45, 34, 0.06);
+  --cv-shadow-2: 0 2px 4px rgba(16, 45, 34, 0.05), 0 16px 40px -12px rgba(16, 45, 34, 0.10);
+  --cv-shadow-3: 0 2px 6px rgba(16, 45, 34, 0.06), 0 24px 64px -16px rgba(16, 45, 34, 0.14);
+  --cv-shadow-inset-press: inset 0 1px 2px rgba(16, 45, 34, 0.10);
+
+  /* --------------------------------------------------------------- radii --- */
+  --cv-r-sm:   10px;
+  --cv-r-md:   14px;
+  --cv-r-lg:   20px;
+  --cv-r-xl:   28px;
+  --cv-r-pill: 999px;
+
+  /* ------------------------------------------------------------- spacing ---
+     4px base. */
+  --cv-s-1:  4px;   --cv-s-2:  8px;   --cv-s-3:  12px;  --cv-s-4:  16px;
+  --cv-s-5:  20px;  --cv-s-6:  24px;  --cv-s-8:  32px;  --cv-s-10: 40px;
+  --cv-s-12: 48px;  --cv-s-16: 64px;  --cv-s-20: 80px;  --cv-s-24: 96px;
+  --cv-s-32: 128px;
+
+  /* ---------------------------------------------------------------- type ---
+     Three faces, three jobs. Alata ships a single weight and is therefore
+     restricted to page titles, where 400 at size reads as deliberate. It is
+     never set bold: the browser would synthesise it and smear the outlines.
+     Sansation carries section headings and labels at a true 700, and supplies
+     the only real italics in the system. Commissioner carries reading. */
+  --cv-font-title:  "Alata", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --cv-font-head:   "Sansation", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --cv-font-body:   "Commissioner", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --cv-font-urdu:   "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+
+  --cv-weight-title:   400;  /* the only weight Alata has */
+  --cv-weight-head:    700;
+  --cv-weight-label:   700;
+  --cv-weight-body:    350;
+  --cv-weight-emph:    500;
+  --cv-weight-caption: 300;
+
+  --cv-display:  clamp(32px, 4.4vw, 46px);  /* line-height 1.12, tracking -0.006em */
+  --cv-h1:       clamp(27px, 3.2vw, 36px);
+  --cv-h2:       clamp(21px, 2.4vw, 26px);
+  --cv-h3:       19px;
+  --cv-h4:       16px;
+  --cv-body-lg:  17px;
+  --cv-body:     16px;
+  --cv-small:    14px;
+  --cv-meta:     13px;
+
+  --cv-lh-title:   1.12;
+  --cv-lh-head:    1.26;
+  --cv-lh-body:    1.62;
+  --cv-lh-urdu:    2.05;   /* Nastaliq needs far more vertical room than Latin */
+  --cv-measure:    68ch;
+  --cv-track-tight: -0.014em;
+  --cv-track-label:  0.1em;
+
+  /* -------------------------------------------------------------- motion --- */
+  --cv-dur-press: 110ms;
+  --cv-dur-hover: 180ms;
+  --cv-dur-enter: 240ms;
+  --cv-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ------------------------------------------------------- blur fallback ---
+   Where backdrop-filter is unsupported, raise every surface opacity by 0.12
+   and drop the blur, so translucent surfaces stay readable instead of
+   turning into muddy washes. §5.2. */
+@supports not (backdrop-filter: blur(1px)) {
+  :root {
+    --cv-glass-1:   rgba(255, 255, 255, 0.67);
+    --cv-glass-2:   rgba(255, 255, 255, 0.80);
+    --cv-glass-3:   rgba(255, 255, 255, 0.90);
+    --cv-glass-4:   rgba(255, 255, 255, 1.00);
+    --cv-glass-nav: rgba(255, 255, 255, 0.94);
+    --cv-blur-sm:   none;
+    --cv-blur-md:   none;
+    --cv-blur-lg:   none;
+  }
+}
+
+/* --------------------------------------------------- reduced motion ------
+   §6: honour the preference. Hover lift and enter transitions are the only
+   motion in the system, and both are suppressed here. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cv-dur-press: 0ms;
+    --cv-dur-hover: 0ms;
+    --cv-dur-enter: 0ms;
+  }
+}

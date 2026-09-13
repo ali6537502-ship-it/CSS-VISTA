@@ -83,6 +83,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/study-planner', 'Study Planner', 'Private interactive study planner.'),
   protectedPage('/answer-evaluation', 'Answer Evaluation', 'Private answer-evaluation request workflow.'),
   protectedPage('/live-theme-demos', 'Theme Preview', 'Development theme preview.', { robots: 'noindex, nofollow' }),
+  protectedPage('/design-system', 'Design System', 'Internal design system preview for the platform redesign.', { robots: 'noindex, nofollow' }),
   publicPage('/fpsc-syllabus', 'FPSC CSS Syllabus and Topic Planner', 'Browse the official CSS syllabus by subject and organise topic-wise preparation.', 'FPSC CSS syllabus'),
   publicPage('/css-past-paper-analysis', 'CSS Past Paper Analysis', 'Explore topic-wise CSS past-paper trends mapped to the FPSC syllabus.', 'CSS past-paper analysis'),
   publicPage('/gk/cat/:slug', 'GK Question Bank', 'Browse a complete general-knowledge category bank with searchable questions, topic filters and answer review.', 'General knowledge question bank', { match: 'pattern', adMode: 'none', minimumHeight: 0 }),

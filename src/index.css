@@ -1,3 +1,6 @@
+@import "./styles/tokens.css";
+@import "./styles/vista.css";
+
 /* Official Google Fonts builds, self-hosted under the SIL Open Font License.
    This removes the render-blocking Google Fonts stylesheet request while
    preserving the established typography and an immediate system fallback. */
