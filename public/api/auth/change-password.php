@@ -2,7 +2,7 @@
 declare(strict_types=1);
 require_once dirname(__DIR__).'/_account_auth.php';
 cssv_require_method('POST'); account_require_json_origin();
-$pdo=cssv_db(); $session=cssv_require_user($pdo); cssv_require_csrf($session);
+$pdo=cssv_db(); $session=cssv_require_user($pdo, false); cssv_require_csrf($session);
 $body=cssv_request_json(16384); $password=account_password($body['password']??null);
 $current=$body['current_password']??'';
 cssv_enforce_rate_limit($pdo,'password-change-failed',$session['email'],8,900);

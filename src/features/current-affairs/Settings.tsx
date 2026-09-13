@@ -1,3 +1,4 @@
+import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { z } from 'zod'
@@ -45,6 +46,7 @@ function SettingsForm({ initial }: { initial: z.infer<typeof settingsSchema> }) 
   }
   return <>
     <header className="ca-heading"><p className="ca-eyebrow">YOUR ACCOUNT</p><h1>Account Settings</h1><p>A few useful preferences for your daily reading.</p></header>
+    <StudentProfilePanel email={initial.email} />
     <form className="ca-settings-panel" onSubmit={(e) => void save(e)}><h2>Profile & reading preferences</h2>
       <label>Display name<input required autoComplete="name" maxLength={160} value={name} onChange={(e) => setName(e.target.value)} /></label>
       <label>Email<input type="email" value={initial.email} readOnly aria-describedby="ca-email-note" /></label><small id="ca-email-note">Your account email.</small>

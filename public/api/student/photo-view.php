@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once dirname(__DIR__) . '/_bootstrap.php';
 cssv_require_method('GET');
 $pdo = cssv_db();
-$session = cssv_require_user($pdo);
+$session = cssv_require_user($pdo, false);
 $requested = trim((string)($_GET['user_id'] ?? $session['user_id']));
 if ($requested !== (string)$session['user_id'] && !cssv_is_admin($pdo, (string)$session['user_id'])) {
     cssv_fail('You cannot view this photo.', 403, 'forbidden');
@@ -22,7 +22,7 @@ if ($path === '' || !is_file($path)) {
 header_remove('Content-Type');
 header('Content-Type: ' . (string)$row['profile_photo_mime']);
 header('Content-Length: ' . (string)filesize($path));
-header('Cache-Control: private, max-age=300');
+header('Cache-Control: private, no-store');
 header('X-Content-Type-Options: nosniff');
 readfile($path);
 exit;

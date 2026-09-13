@@ -21,7 +21,7 @@ if (($argv[1] ?? '')==='user') {
     $q=$pdo->prepare('SELECT id FROM users WHERE email=?');$q->execute([$email]);$existing=$q->fetchColumn();
     if($existing){echo $existing;exit;}
     $pdo->prepare("INSERT INTO users(id,email,password_hash,auth_source,email_verified_at,created_at) VALUES(?,?,?,'local',NOW(6),NOW(6))")->execute([$id,$email,password_hash('TEST ONLY native fixture password',PASSWORD_BCRYPT)]);
-    $pdo->prepare('INSERT INTO student_profiles(user_id,display_name) VALUES(?,?)')->execute([$id,'TEST ONLY']);echo $id;exit;
+    $pdo->prepare("INSERT INTO student_profiles(user_id,display_name,phone,date_of_birth,gender,city,province_region,country,css_attempt_year,preparation_level,optional_subjects,education,profile_photo_path,profile_photo_bytes) VALUES(?,'TEST ONLY','+923001234567','2000-01-01','Other','TEST ONLY','TEST ONLY','Pakistan',2027,'Starting out','[\"TEST ONLY\"]','TEST ONLY','test-only-fixture.jpg',1024)")->execute([$id]);echo $id;exit;
 }
 $id=cssv_uuid_v4();
 $pdo->prepare('INSERT INTO admin_accounts (id,email,password_hash,totp_secret_cipher,totp_enabled_at) VALUES (?,?,?,?,NOW(6))')->execute([$id,'fixture-admin@example.invalid',password_hash(bin2hex(random_bytes(32)),PASSWORD_DEFAULT),'isolated-test-unused']);

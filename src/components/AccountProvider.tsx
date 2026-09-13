@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import { AccountContext, type AccountContextValue, type AccountUser, type ActionResult, type SyncStatus } from '@/lib/accountContext'
-import { ACCOUNT_EXPIRED_EVENT, csrfToken, hostingerRequest, loadAccountSession, logoutHostinger, setHostingerAccountUser } from '@/lib/hostingerApi'
+import { ACCOUNT_EXPIRED_EVENT, PROFILE_UPDATED_EVENT, csrfToken, hostingerRequest, loadAccountSession, logoutHostinger, setHostingerAccountUser } from '@/lib/hostingerApi'
 import { applyProgressSnapshot, captureProgressSnapshot, clearLocalStudentProgress } from '@/lib/accountSync'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 
@@ -70,13 +70,15 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     const storage = (event: StorageEvent) => { if (event.key === ACCOUNT_CHANGE_KEY) check() }
     window.addEventListener(ACCOUNT_EXPIRED_EVENT, expire)
     window.addEventListener('focus', check)
+    window.addEventListener(PROFILE_UPDATED_EVENT, check)
     window.addEventListener('storage', storage)
     document.addEventListener('visibilitychange', visibility)
-    return () => { sessionRequest.current?.abort(); window.removeEventListener(ACCOUNT_EXPIRED_EVENT, expire); window.removeEventListener('focus', check); window.removeEventListener('storage', storage); document.removeEventListener('visibilitychange', visibility) }
+    return () => { sessionRequest.current?.abort(); window.removeEventListener(ACCOUNT_EXPIRED_EVENT, expire); window.removeEventListener('focus', check); window.removeEventListener(PROFILE_UPDATED_EVENT, check); window.removeEventListener('storage', storage); document.removeEventListener('visibilitychange', visibility) }
   }, [applyUser, refreshSession])
   const syncNow = useCallback(async (): Promise<ActionResult> => {
     const id = userRef.current?.id
     if (!id) return { error: 'Sign in to sync progress.' }
+    if (!userRef.current?.profile_complete) return { error: 'Complete all 12 profile checks to unlock account sync.' }
     if (syncInFlight.current === id) return {}
     syncInFlight.current = id
     setSyncStatus('syncing'); setSyncError('')
@@ -91,7 +93,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       return { error: message }
     } finally { if (syncInFlight.current === id) syncInFlight.current = null }
   }, [])
-  const userId = user?.id
+  const userId = user?.profile_complete ? user.id : undefined
   useEffect(() => { if (userId) void syncNow() }, [userId, syncNow])
   useEffect(() => {
     if (!userId) return

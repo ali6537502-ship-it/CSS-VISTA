@@ -36,13 +36,15 @@ function account_hash_password(string $password): string {
     return password_hash($password, defined('PASSWORD_ARGON2ID') ? PASSWORD_ARGON2ID : PASSWORD_BCRYPT);
 }
 function account_user(PDO $pdo, string $id): array {
+    require_once __DIR__ . '/_profile.php';
+    $profileStatus=cssv_profile_status(cssv_profile_for_user($pdo, $id));
     $query=$pdo->prepare('SELECT u.id,u.email,u.created_at,u.email_verified_at,p.display_name,p.profile_completed_at,p.profile_photo_path FROM users u LEFT JOIN student_profiles p ON p.user_id=u.id WHERE u.id=?');
     $query->execute([$id]); $row=$query->fetch();
     if (!$row) cssv_fail('Sign in again to continue.',401,'authentication_required');
     return ['id'=>$row['id'],'email'=>$row['email'],'created_at'=>$row['created_at'],
         'email_confirmed_at'=>$row['email_verified_at'],'display_name'=>(string)($row['display_name']??''),
         'user_metadata'=>['full_name'=>(string)($row['display_name']??'')],
-        'profile_complete'=>!empty($row['profile_completed_at']),'photo_complete'=>!empty($row['profile_photo_path'])];
+        'profile_complete'=>$profileStatus['complete'],'profile_completion'=>$profileStatus,'photo_complete'=>!empty($row['profile_photo_path'])];
 }
 function account_encrypt_mail(array $message): string {
     $iv=random_bytes(12); $tag='';

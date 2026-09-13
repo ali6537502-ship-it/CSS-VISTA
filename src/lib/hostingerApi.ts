@@ -1,5 +1,6 @@
 import type { AccountUser } from './accountContext'
 type ApiFailure = { error?: string; message?: string }
+export const PROFILE_UPDATED_EVENT = 'cssvista:profile-updated'
 export const ACCOUNT_EXPIRED_EVENT = 'cssvista:account-expired'
 export const accountServiceConfigured = true
 export const hostingerAccountBackendEnabled = true
@@ -29,6 +30,7 @@ export async function hostingerRequest<T>(path: string, init: RequestInit = {}):
   const data = await response.json().catch(() => ({})) as T & ApiFailure
   if (!response.ok) {
     if (response.status === 401 && !path.startsWith('auth/')) window.dispatchEvent(new CustomEvent(ACCOUNT_EXPIRED_EVENT, { detail: { userId: headers.get('X-CSSV-User') } }))
+    if (data.error === 'profile_incomplete') window.dispatchEvent(new CustomEvent(PROFILE_UPDATED_EVENT))
     throw new HostingerApiError(data.message || 'The account service could not complete this request. Please try again.', response.status, data.error)
   }
   return data

@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router'
 import { CheckCircle2, LoaderCircle, ShieldCheck } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
+import { ProfileGate } from '@/components/ProfileGate'
 import { StudentProfilePanel } from '@/components/StudentProfilePanel'
 import { AuthenticatedAccountAd } from '@/components/Ads'
 import { useAccount } from '@/lib/accountContext'
@@ -69,6 +70,7 @@ export default function Account() {
     try { const result = await account.signOut(); if (result.error) setError(result.error) }
     finally { setBusy(false) }
   }
+  if (!loading && user && !user.profile_complete && !reset && !verify) return <ProfileGate>{null}</ProfileGate>
   if (!loading && user && !reset && !verify && params.get('settings') !== '1') return <Navigate to={safeReturnTo(params.get('returnTo'))} replace />
   const notices = <div aria-live="polite">{error && <p role="alert" className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-800">{error}</p>}{message && <p role="status" className="mb-4 rounded-md bg-emerald-50 p-3 text-sm text-emerald-900">{message}</p>}</div>
   return <div>

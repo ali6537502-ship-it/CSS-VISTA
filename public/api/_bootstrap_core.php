@@ -282,7 +282,7 @@ function cssv_current_session(PDO $pdo): ?array
     return $row;
 }
 
-function cssv_require_user(PDO $pdo): array
+function cssv_require_user(PDO $pdo, bool $requireCompleteProfile = true): array
 {
     $session = cssv_current_session($pdo);
     if (!$session) {
@@ -290,6 +290,10 @@ function cssv_require_user(PDO $pdo): array
     }
     $expected = (string)($_SERVER['HTTP_X_CSSV_USER'] ?? '');
     if ($expected !== '' && !hash_equals($session['user_id'], $expected)) cssv_fail('Your account changed. Please refresh this page.', 409, 'account_changed');
+    if ($requireCompleteProfile) {
+        require_once __DIR__ . '/_profile.php';
+        if (!cssv_profile_status(cssv_profile_for_user($pdo, (string)$session['user_id']))['complete']) cssv_fail('Complete all 12 profile checks to unlock your account services.', 403, 'profile_incomplete');
+    }
     return $session;
 }
 
@@ -341,7 +345,7 @@ function cssv_issue_admin_mfa(array $session): void
 
 function cssv_require_admin(PDO $pdo): array
 {
-    $session = cssv_require_user($pdo);
+    $session = cssv_require_user($pdo, false);
     if (!cssv_is_admin($pdo, (string)$session['user_id'])) {
         cssv_fail('Administrator access required.', 403, 'administrator_required');
     }

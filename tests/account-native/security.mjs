@@ -53,6 +53,30 @@ assert.equal((await call('auth/forgot-password.php', { email }, a)).status, 202)
 const expiredReset = await mailToken(email, 'reset', reset)
 execFileSync('php', ['tests/account-native/expire.php', email])
 assert.equal((await call('auth/reset-password.php', { token: expiredReset, password: next })).status, 400, 'Expired recovery token accepted')
+// All twelve saved profile checks are enforced by the real API.
+assert.equal((await call('auth/session.php', undefined, a)).data.user.profile_complete, false)
+for (const [path, body] of [['current-affairs.php',undefined],['student/progress.php',undefined],['factbook/data.php',{table:'factbook_subjects',operation:'select'}],['student/test-series.php',{}],['student/reports.php',{}]]) {
+  const blocked = await call(path, body, a)
+  assert.equal(blocked.status,403,path); assert.equal(blocked.data.error,'profile_incomplete',path)
+}
+const completeProfile={display_name:'TEST ONLY Reader',phone:'+923001234567',whatsapp:'',date_of_birth:'2000-01-01',gender:'Other',city:'TEST ONLY City',province_region:'TEST ONLY Region',country:'Pakistan',css_attempt_year:2027,preparation_level:'Starting out',optional_subjects:['TEST ONLY Subject'],education:'TEST ONLY Degree'}
+assert.equal((await call('student/profile.php',{...completeProfile,education:['malformed']},a)).status,422)
+const details = await call('student/profile.php',completeProfile,a)
+assert.equal(details.status,200,JSON.stringify(details.data));assert.equal(details.data.completion.completed,11)
+assert.equal((await call('current-affairs.php',undefined,a)).status,403,'Missing photo unlocked services')
+const profilePhoto = new FormData(); profilePhoto.append('photo',new Blob([Buffer.from('/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACgAKADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDhqKKKk8kKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//9k=','base64')],{type:'image/jpeg'}),'test-only.jpg')
+const photoSaved = await call('student/photo.php',profilePhoto,a)
+assert.equal(photoSaved.status,200,JSON.stringify(photoSaved.data));assert.equal(photoSaved.data.completion.completed,12)
+assert.equal((await call('auth/session.php',undefined,a)).data.user.profile_complete,true)
+for (const key of ['display_name','phone','date_of_birth','gender','city','province_region','country','css_attempt_year','preparation_level','optional_subjects','education']) {
+  if(key==='display_name') { assert.equal((await call('student/profile.php',{...completeProfile,display_name:''},a)).status,422);continue }
+  const partial={...completeProfile,[key]:key==='optional_subjects'?[]:key==='css_attempt_year'?null:''}
+  const saved=await call('student/profile.php',partial,a)
+  assert.equal(saved.status,200,JSON.stringify(saved.data));assert.equal(saved.data.completion.complete,false,key)
+  assert.equal((await call('current-affairs.php',undefined,a)).data.error,'profile_incomplete',key)
+  assert.equal((await call('student/profile.php',completeProfile,a)).data.completion.complete,true)
+}
+assert.equal((await call('auth/session.php',undefined,a)).data.user.profile_complete,true)
 assert.equal((await call('student/progress.php', { payload: {} }, a, {}, 'PUT')).status, 200, 'New account progress could not sync')
 const otherEmail = 'native-second@example.invalid'
 const otherId = execFileSync('php', ['tests/current-affairs/setup.php', 'user', otherEmail], { encoding: 'utf8' }).trim()
@@ -118,4 +142,4 @@ assert.equal((await db({ action: 'delete_all', confirmation: 'DELETE MY FACTBOOK
 assert.equal((await db(query('factbook_subjects', 'select'))).data.data.length, 0)
 assert.equal((await call('factbook/media.php?id=' + mediaId, undefined, a)).status, 404)
 for (const file of await readdir('dist/assets')) if (file.endsWith('.js')) assert.doesNotMatch(await readFile('dist/assets/' + file, 'utf8'), /supabase\.co|sb_publishable_|@supabase/)
-console.log('PASS: native registration, email verification, password recovery, single-use tokens, old-session revocation, password change, cookie security, private factbook CRUD/search/revisions/media/collections, cross-user isolation, rollback, owner CMS and persistence.')
+console.log('PASS: native registration, email verification, password recovery, single-use tokens, old-session revocation, password change, cookie security, all 12 mandatory profile checks and unlock/relock, private factbook CRUD/search/revisions/media/collections, cross-user isolation, rollback, owner CMS and persistence.')
