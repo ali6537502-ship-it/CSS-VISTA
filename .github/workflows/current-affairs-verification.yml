@@ -75,7 +75,7 @@ jobs:
           php tests/current-affairs/setup.php
       - name: Start isolated HTTP services
         run: |
-          php -d 'sendmail_path=php tests/account-native/mail-capture.php' -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
+          php -d "sendmail_path=php $GITHUB_WORKSPACE/tests/account-native/mail-capture.php" -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/php-service.log 2>&1 &
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
       - name: Verify native PHP accounts, ownership and publishing
         run: node tests/current-affairs/security.mjs
