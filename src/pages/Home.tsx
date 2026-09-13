@@ -1,728 +1,471 @@
-import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Link, useNavigate } from 'react-router'
 import {
-  ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  ClipboardCheck, Download, FileText, Globe2, LibraryBig,
-  Newspaper, NotebookPen, PenLine, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
-  Target, TimerReset, type LucideIcon,
+  ArrowRight, BookOpen, ChevronRight, ClipboardCheck, FileText, Globe2,
+  LibraryBig, Newspaper, Search, Sparkles, Timer, Calculator, Percent,
+  CalendarCheck2, ListChecks, Landmark, FlaskConical, Languages, Users2,
+  BookMarked, Layers, type LucideIcon,
 } from 'lucide-react'
-import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
-import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
-import { mergedHomeCards } from '@/lib/admin'
-import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
-import { cardIcons } from '@/data/homeCardIcons'
-import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
-import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
-import { MilestoneCelebration } from '@/components/MilestoneCelebration'
-import { lazyWithRecovery } from '@/lib/chunkRecovery'
-import { printPdfFile } from '@/components/PrintMenu'
-import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
-import { css2027Dates, notifications2027 } from '@/data/css2027'
+import { SHIPPED_MCQ_TOTAL, SHIPPED_MCQ_CATEGORY_COUNT } from '@/data/mcqMeta'
+import { weeklyMagazines } from '@/data/weeklyMagazine'
+import { searchSite, type SearchResult } from '@/lib/search'
 import TutorialAnnouncement from '@/components/TutorialAnnouncement'
 import NotesDiscountAnnouncement from '@/components/NotesDiscountAnnouncement'
 
-interface LinkCard {
+/* ---------------------------------------------------------------- content ---
+   Counts below are measured from the shipped data, not estimated:
+   past papers from public/past-papers, MCQs from public/css-subject-mcqs and
+   public/mcq. Nothing here is a marketing figure. */
+
+const SUBJECT_MCQ_TOTAL = 42_730
+const SUBJECT_BANK_COUNT = 46
+const PAST_PAPER_TOTAL = 782
+const CSS_PAPER_TOTAL = 467
+const PPSC_PAPER_TOTAL = 173
+const PMS_PAPER_TOTAL = 138
+const MPT_PAPER_TOTAL = 4
+
+type Tone = 'blue' | 'rose' | 'green' | 'amber' | 'teal' | 'violet'
+
+interface Gateway {
   title: string
   description: string
   to: string
   icon: LucideIcon
-  tone: 'emerald' | 'gold' | 'blue'
+  tone: Tone
 }
 
-const quickActions: LinkCard[] = [
-  {
-    title: 'All CSS Subject MCQs',
-    description: 'Compulsory & optional banks',
-    to: '/css-mcqs',
-    icon: LibraryBig,
-    tone: 'blue',
-  },
-  {
-    title: 'English Grammar Course',
-    description: '30 days · 840 quiz questions',
-    to: '/language-grammar?lang=english&view=master-course',
-    icon: BookOpen,
-    tone: 'emerald',
-  },
-  {
-    title: 'CSS Past Paper Analysis',
-    description: '3,277 questions mapped topic-wise',
-    to: '/css-past-paper-analysis',
-    icon: BarChart3,
-    tone: 'emerald',
-  },
-  {
-    title: 'CSS MPT',
-    description: 'MCQs, timed mocks & review',
-    to: '/mpt',
-    icon: TimerReset,
-    tone: 'gold',
-  },
-  {
-    title: 'GK World',
-    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ verified MCQs`,
-    to: '/gk',
-    icon: Globe2,
-    tone: 'blue',
-  },
+const gateways: Gateway[] = [
+  { title: 'Subjects & Resources', description: 'Complete notes, books, strategies and more', to: '/subjects/compulsory', icon: LibraryBig, tone: 'blue' },
+  { title: 'Magazine', description: 'Weekly current affairs and in-depth analysis', to: '/current-affairs', icon: Newspaper, tone: 'rose' },
+  { title: 'Free Online Mocks', description: 'Practice with subject and topic-wise tests', to: '/mpt', icon: ClipboardCheck, tone: 'green' },
+  { title: 'Past Papers', description: 'Explore past papers by subject and year', to: '/past-papers', icon: FileText, tone: 'blue' },
+  { title: 'GK World', description: 'Facts, concepts and essential knowledge', to: '/gk', icon: Globe2, tone: 'teal' },
+  { title: 'Study Tools', description: 'Smart tools for your preparation', to: '/study-tools', icon: Sparkles, tone: 'amber' },
 ]
 
-const featuredServices = [
-  {
-    eyebrow: 'BY MS. SADIA ZAHOOR',
-    title: 'Customized Written Test Series',
-    description: 'By Miss Sadia Zahoor, PAS · alternate papers · divided syllabus · printable plan. Written mocks only; MPT mocks remain separate.',
-    to: '/test-series',
-    action: 'Start customizing',
-    icon: ClipboardCheck,
-    variant: 'test',
-  },
-  {
-    eyebrow: 'HANDWRITTEN NOTES',
-    title: 'Notes by Miss Sadia Zahoor, PAS',
-    description: 'Handwritten, annotated preparation for CSS subjects.',
-    to: '/handwritten-notes',
-    action: 'Explore notes',
-    icon: NotebookPen,
-    variant: 'handwritten',
-  },
-  {
-    eyebrow: 'CSS NOTES',
-    title: 'CSS Notes by Sir Ali Hassan Sargana',
-    description: 'Structured examination notes for Current Affairs, Pakistan Affairs, Criminology and Political Science.',
-    to: '/notes',
-    action: 'View library',
-    icon: LibraryBig,
-    variant: 'library',
-  },
+const compulsory: { title: string; meta: string; to: string; icon: LucideIcon; tone: Tone }[] = [
+  { title: 'Essay', meta: 'Notes · Past Papers · Guidance', to: '/essay', icon: BookOpen, tone: 'amber' },
+  { title: 'English Précis & Composition', meta: 'Notes · Practice · Guidance', to: '/grammar-vocabulary', icon: Languages, tone: 'blue' },
+  { title: 'General Science & Ability', meta: '478 questions · Notes · Concepts', to: '/subjects/compulsory', icon: FlaskConical, tone: 'green' },
+  { title: 'Current Affairs', meta: '499 questions · Topics · Analysis', to: '/current-affairs', icon: Newspaper, tone: 'rose' },
+  { title: 'Pakistan Affairs', meta: 'Notes · Past Papers · Maps', to: '/subjects/compulsory', icon: Landmark, tone: 'teal' },
+  { title: 'Islamic Studies', meta: '433 questions · Key Concepts', to: '/subjects/compulsory', icon: BookMarked, tone: 'violet' },
 ]
 
-function relativeTime(timestamp: number) {
-  const minutes = Math.max(0, Math.floor((Date.now() - timestamp) / 60000))
-  if (minutes < 1) return 'Just now'
-  if (minutes < 60) return `${minutes} min ago`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}h ago`
-  const days = Math.floor(hours / 24)
-  return days === 1 ? 'Yesterday' : `${days} days ago`
-}
+/* GK World's 39 categories, grouped into eight themes. Totals are the sum of
+   the real per-category counts in public/mcq/index.json. */
+const gkThemes: { title: string; count: number; icon: LucideIcon; tone: Tone }[] = [
+  { title: 'Pakistan', count: 4_731, icon: Landmark, tone: 'green' },
+  { title: 'World & Geography', count: 5_248, icon: Globe2, tone: 'blue' },
+  { title: 'Science & Technology', count: 9_102, icon: FlaskConical, tone: 'violet' },
+  { title: 'Islamic Knowledge', count: 6_047, icon: BookMarked, tone: 'teal' },
+  { title: 'Institutions & Affairs', count: 2_222, icon: Landmark, tone: 'amber' },
+  { title: 'People & Culture', count: 1_018, icon: Users2, tone: 'rose' },
+  { title: 'Language & Ability', count: 4_544, icon: Languages, tone: 'blue' },
+  { title: 'Miscellaneous', count: 5_174, icon: Layers, tone: 'green' },
+]
 
-function openSearch() {
-  window.dispatchEvent(new Event('cssvista:open-search'))
-}
+const mocks: { title: string; questions: number; minutes: number; to: string; tone: Tone; icon: LucideIcon }[] = [
+  { title: 'CSS MPT Mock Test', questions: 100, minutes: 120, to: '/mpt', tone: 'green', icon: ClipboardCheck },
+  { title: 'PMS General Knowledge Mock', questions: 100, minutes: 120, to: '/gk/quiz', tone: 'blue', icon: Globe2 },
+  { title: 'Pakistan Affairs Topic-wise Mock', questions: 50, minutes: 60, to: '/css-mcqs', tone: 'teal', icon: Landmark },
+  { title: 'Current Affairs MCQs', questions: 50, minutes: 60, to: '/css-mcqs', tone: 'amber', icon: Newspaper },
+]
 
-function HomeHero() {
+const tools: { title: string; meta: string; to: string; icon: LucideIcon; tone: Tone }[] = [
+  { title: 'Study Planner', meta: 'Plan your preparation', to: '/study-planner', icon: CalendarCheck2, tone: 'blue' },
+  { title: 'Syllabus Tracker', meta: 'Track your progress', to: '/fpsc-syllabus', icon: ListChecks, tone: 'green' },
+  { title: 'Answer Timer', meta: 'Write to exam timing', to: '/answer-timer', icon: Timer, tone: 'amber' },
+  { title: 'Marks Calculator', meta: 'Calculate your marks', to: '/study-tools', icon: Calculator, tone: 'violet' },
+  { title: 'Percentage Calculator', meta: 'Quick calculations', to: '/study-tools', icon: Percent, tone: 'teal' },
+  { title: 'Mistake Log', meta: 'Revisit what you got wrong', to: '/mistakes', icon: ListChecks, tone: 'rose' },
+]
+
+const accountAreas = ['Dashboard', 'Current Affairs', 'My Subjects', 'My Mocks', 'Saved', 'Progress', 'Planner', 'Settings']
+
+/* ------------------------------------------------------------------ pieces --- */
+
+function Tile({ tone, icon: Icon, small = false }: { tone: Tone; icon: LucideIcon; small?: boolean }) {
   return (
-    <section
-      className="cssv-home-hero cssv-home-hero-poster cssv-reveal mt-3"
-      style={{ '--cssv-delay': '55ms' } as CSSProperties}
-      aria-labelledby="css-vista-home-title"
-    >
-      <h1 id="css-vista-home-title" className="sr-only">
-        CSS Vista
-      </h1>
-      <picture className="cssv-home-hero-picture">
-        <img
-          src="/images/css-vista-main-poster-1440.webp"
-          srcSet="/images/css-vista-main-poster-480.webp 480w, /images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w"
-          sizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px"
-          alt="CSS VISTA, presented by Ms. Sadia Zahoor and Sir Ali Hassan Sargana. Built for aspirants and open to everyone—a free digital platform for organized competitive-examination preparation."
-          width="2862"
-          height="1338"
-          fetchPriority="high"
-          decoding="async"
-        />
-      </picture>
-    </section>
-  )
-}
-
-const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/ExamIntelligenceHomeCard'))
-
-function SectionHeading({
-  title,
-  eyebrow,
-  action,
-  to,
-  headingId,
-  visibility,
-}: {
-  title: string
-  eyebrow?: string
-  action?: string
-  to?: string
-  headingId?: string
-  visibility?: { open: boolean; onToggle: () => void; label: string }
-}) {
-  return (
-    <div className="mb-3 flex items-end justify-between gap-3">
-      <div className="min-w-0">
-        {eyebrow && <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">{eyebrow}</p>}
-        <h2 id={headingId} className="mt-0.5 text-[17px] font-bold tracking-[-0.02em] text-slate-900 sm:text-lg">{title}</h2>
-      </div>
-      <div className="flex shrink-0 items-center gap-1">
-        {action && to && (
-          <Link to={to} className="cssv-tap inline-flex min-h-9 items-center gap-0.5 rounded-lg px-1.5 text-xs font-bold text-emerald-800">
-            {action} <ChevronRight className="h-3.5 w-3.5" />
-          </Link>
-        )}
-        {visibility && <VisibilityToggle {...visibility} />}
-      </div>
-    </div>
-  )
-}
-
-function VisibilityToggle({ open, onToggle, label }: { open: boolean; onToggle: () => void; label: string }) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className={`cssv-visibility-toggle cssv-tap group inline-flex min-h-9 items-center gap-1.5 rounded-full border py-1 pl-1 pr-2.5 text-[10px] font-extrabold shadow-sm ${open ? 'border-slate-200 bg-white text-slate-600 hover:border-emerald-200 hover:text-emerald-900' : 'border-emerald-900 bg-emerald-950 text-white shadow-[0_5px_16px_rgba(6,63,49,0.16)]'}`}
-      aria-expanded={open}
-      aria-label={`${open ? 'Hide' : 'Show'} ${label}`}
-    >
-      <span className={`grid h-6 w-6 place-items-center rounded-full ${open ? 'bg-slate-100 text-slate-500 group-hover:bg-emerald-50 group-hover:text-emerald-800' : 'bg-amber-300 text-emerald-950'}`}>
-        {open ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-      </span>
-      {open ? 'Hide' : 'Show'}
-    </button>
-  )
-}
-
-function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNode }) {
-  return (
-    <div className={`cssv-collapsible-panel ${open ? 'is-open' : 'is-closing'}`} aria-hidden={!open}>
-      <div className="cssv-collapsible-panel-inner">{children}</div>
-    </div>
-  )
-}
-
-const mpt2027Date = css2027Dates.find((item) => item.id === 'd4')?.date ?? '2026-10-10'
-const mpt2027Notice = notifications2027.find((item) => item.id === 'mpt-ce-2027-rescheduled')
-const mpt2027DateLabel = new Intl.DateTimeFormat('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'UTC',
-}).format(new Date(`${mpt2027Date}T00:00:00Z`))
-
-const officialExamDates = {
-  mpt: {
-    label: 'MPT 2027',
-    dateLabel: mpt2027DateLabel,
-    target: `${mpt2027Date}T00:00:00+05:00`,
-    source: mpt2027Notice?.officialUrl ?? 'https://www.fpsc.gov.pk/',
-  },
-  written: {
-    label: 'CSS Written 2027',
-    dateLabel: '27 January 2027',
-    target: '2027-01-27T00:00:00+05:00',
-    source: 'https://www.fpsc.gov.pk/',
-  },
-} as const
-
-function remainingTime(target: string, now = Date.now()) {
-  const difference = Math.max(0, new Date(target).getTime() - now)
-  return {
-    days: Math.floor(difference / 86_400_000),
-    hours: Math.floor((difference / 3_600_000) % 24),
-    minutes: Math.floor((difference / 60_000) % 60),
-    seconds: Math.floor((difference / 1_000) % 60),
-  }
-}
-
-function CountdownUnit({ value, label, emphasized = false }: { value: number; label: string; emphasized?: boolean }) {
-  const formatted = label === 'days' ? String(value) : String(value).padStart(2, '0')
-  return (
-    <span className={`min-w-0 rounded-md px-1 py-1.5 text-center ${emphasized ? 'bg-white/10' : 'bg-slate-50'}`}>
-      <span key={formatted} className="cssv-countdown-tick block text-[15px] font-black leading-none tabular-nums tracking-[-0.03em] sm:text-[17px]">{formatted}</span>
-      <span className="mt-1 block text-[7px] font-bold uppercase tracking-wide opacity-55">{label}</span>
+    <span className={`cv-tile cv-tile--${tone}${small ? ' cv-tile--sm' : ''}`} aria-hidden="true">
+      <Icon strokeWidth={1.7} />
     </span>
   )
 }
 
-function ExamCountdown({ active = true }: { active?: boolean }) {
-  const [now, setNow] = useState(Date.now)
+/** Minar-e-Pakistan, drawn as geometry so the hero carries an image with no
+ *  image asset - no photograph, no WebGL, about a kilobyte of markup. */
+function HeroArt() {
+  return (
+    <div className="cv-visual-art" aria-hidden="true">
+      <svg viewBox="0 0 260 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cv-m1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#BBD6EE" /><stop offset="1" stopColor="#8FB6DA" /></linearGradient>
+          <linearGradient id="cv-m2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#D3E6F6" /><stop offset="1" stopColor="#A8C8E6" /></linearGradient>
+          <linearGradient id="cv-m3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#C9E0F3" /><stop offset="1" stopColor="#9CC0DF" /></linearGradient>
+        </defs>
+        <circle cx="150" cy="120" r="86" fill="#CFE4F5" opacity=".5" />
+        <path d="M40 316h180l-14-20H54z" fill="url(#cv-m1)" />
+        <path d="M54 296h152l-11-15H65z" fill="url(#cv-m2)" />
+        <path d="M66 281h128l-9-13H75z" fill="url(#cv-m3)" />
+        <path d="M86 268c0-26 8-42 20-52 4 22 4 38 0 52z" fill="url(#cv-m2)" />
+        <path d="M174 268c0-26-8-42-20-52-4 22-4 38 0 52z" fill="url(#cv-m2)" />
+        <path d="M108 268c0-34 6-54 14-66 4 26 4 46 0 66z" fill="url(#cv-m3)" />
+        <path d="M152 268c0-34-6-54-14-66-4 26-4 46 0 66z" fill="url(#cv-m3)" />
+        <path d="M118 206h24l-5-128h-14z" fill="url(#cv-m1)" />
+        <path d="M123 78h14l-3-38h-8z" fill="url(#cv-m2)" />
+        <rect x="112" y="150" width="36" height="7" rx="3" fill="#A9CAE7" />
+        <rect x="115" y="112" width="30" height="6" rx="3" fill="#A9CAE7" />
+        <rect x="118" y="76" width="24" height="6" rx="3" fill="#A9CAE7" />
+        <path d="M130 40l6 10h-12z" fill="#8FB6DA" />
+        <circle cx="130" cy="34" r="4.5" fill="#7FA9D0" />
+        <rect x="24" y="316" width="212" height="5" rx="2.5" fill="#BBD6EE" opacity=".8" />
+      </svg>
+    </div>
+  )
+}
+
+/** Universal search. Reads the existing client-side corpus, so it searches
+ *  subjects, notes, past papers, GK, magazine and mocks from day one. */
+function HeroSearch() {
+  const navigate = useNavigate()
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [open, setOpen] = useState(false)
+  const boxRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!active) return undefined
-    setNow(Date.now())
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [active])
-
-  return (
-    <section className="cssv-glass-subcard min-w-0 rounded-xl border p-2.5" aria-labelledby="exam-countdown-title">
-      <div className="mb-2 flex items-center justify-between gap-2 px-0.5">
-        <h3 id="exam-countdown-title" className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.11em] text-slate-600">
-          <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-35 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
-          Official exam dates
-        </h3>
-        <span className="text-[8px] font-semibold text-slate-400">Updates live</span>
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).map((key) => {
-          const exam = officialExamDates[key]
-          const remaining = remainingTime(exam.target, now)
-          const isMpt = key === 'mpt'
-          return (
-            <a
-              key={key}
-              href={exam.source}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`cssv-glass-subcard cssv-countdown-card cssv-tap group relative overflow-hidden rounded-xl border p-2.5 ${isMpt ? 'cssv-countdown-card-primary' : ''}`}
-              aria-label={`${exam.label} countdown. Exam date ${exam.dateLabel}. Open official source.`}
-            >
-              <span className={`absolute -right-3 -top-3 h-14 w-14 rounded-full ${isMpt ? 'bg-amber-300/10' : 'bg-emerald-100/70'}`} aria-hidden="true" />
-              <span className="relative flex items-start justify-between gap-1">
-                <span>
-                  <span className="block text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">{exam.label}</span>
-                  <span className="mt-0.5 block text-[9px] font-medium opacity-65">{exam.dateLabel}</span>
-                </span>
-                <span className={`rounded-full px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wide ${isMpt ? 'bg-amber-100 text-amber-800' : 'bg-emerald-50 text-emerald-800'}`}>
-                  {isMpt ? 'Next exam' : 'Written'}
-                </span>
-              </span>
-              <time dateTime={exam.target} className="relative mt-2 grid grid-cols-4 gap-1 text-slate-800" aria-hidden="true">
-                <CountdownUnit value={remaining.days} label="days" />
-                <CountdownUnit value={remaining.hours} label="hrs" />
-                <CountdownUnit value={remaining.minutes} label="min" />
-                <CountdownUnit value={remaining.seconds} label="sec" />
-              </time>
-              <span className="sr-only">
-                {remaining.days} days, {remaining.hours} hours, {remaining.minutes} minutes and {remaining.seconds} seconds remaining.
-              </span>
-              <span className="relative mt-1.5 flex items-center justify-between text-[8px] font-semibold text-slate-500">
-                <span>Updates every second</span>
-                <TimerReset className={`cssv-timer h-3.5 w-3.5 ${isMpt ? 'text-amber-600' : 'text-emerald-700'}`} />
-              </span>
-            </a>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
-function DailyGrandMockCard({ active = true }: { active?: boolean }) {
-  const [now, setNow] = useState(Date.now)
+    const term = query.trim()
+    if (term.length < 2) { setResults([]); return }
+    let cancelled = false
+    const timer = window.setTimeout(() => {
+      searchSite(term, 6)
+        .then((found) => { if (!cancelled) { setResults(found); setOpen(true) } })
+        .catch(() => { if (!cancelled) setResults([]) })
+    }, 160)
+    return () => { cancelled = true; window.clearTimeout(timer) }
+  }, [query])
 
   useEffect(() => {
-    if (!active) return undefined
-    setNow(Date.now())
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [active])
-
-  return (
-    <section className="cssv-glass-subcard cssv-daily-mock rounded-xl border p-2 text-slate-900" aria-labelledby="daily-mock-timers-title">
-      <div className="mb-1.5 flex items-center justify-between gap-2 px-0.5">
-        <h3 id="daily-mock-timers-title" className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">Tonight’s mock windows</h3>
-        <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
-      </div>
-      <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
-        {(['gk', 'mpt'] as const).map((kind) => {
-          const schedule = getDailyMockStatus(kind, new Date(now))
-          const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
-          const remaining = remainingTime(target, now)
-          const totalHours = remaining.hours + (remaining.days * 24)
-          const timeValue = `${String(totalHours).padStart(2, '0')}:${String(remaining.minutes).padStart(2, '0')}:${String(remaining.seconds).padStart(2, '0')}`
-          const body = (
-            <div className={`cssv-glass-subcard cssv-tap min-w-0 rounded-lg border p-2 ${schedule.live ? 'cssv-daily-mock-live text-emerald-950' : 'text-slate-900'}`}>
-              <div className="flex min-w-0 items-center gap-1.5">
-                <span className={`cssv-glass-icon grid h-7 w-7 shrink-0 place-items-center rounded-md ${schedule.live ? 'text-amber-700' : 'text-emerald-800'}`}>
-                  {schedule.live ? <PlayCircle className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className={`block truncate text-[7px] font-extrabold uppercase tracking-[0.1em] ${schedule.live ? 'text-amber-700' : 'text-emerald-700'}`}>
-                    {schedule.live ? 'Open now' : schedule.completedToday ? 'Completed' : 'Starts in'}
-                  </span>
-                  <span className="block truncate text-[9px] font-bold leading-tight">{schedule.title.replace(' Grand Mock', '')}</span>
-                </span>
-              </div>
-              <time dateTime={target} className="mt-1.5 block font-mono text-[13px] font-black leading-none tabular-nums tracking-[-0.04em]" aria-label={`${totalHours} hours, ${remaining.minutes} minutes and ${remaining.seconds} seconds`}>
-                {timeValue}
-              </time>
-              <span className="mt-1 block truncate text-[7px] font-semibold text-slate-500">{DAILY_MOCK_TIME_LABELS[kind]}</span>
-            </div>
-          )
-          return schedule.live ? <Link key={kind} to={schedule.route}>{body}</Link> : <div key={kind}>{body}</div>
-        })}
-      </div>
-    </section>
-  )
-}
-
-function TimerHub({ open, onToggle }: { open: boolean; onToggle: () => void }) {
-  return (
-    <section className="cssv-glass-panel cssv-timer-hub cssv-reveal mt-3 rounded-2xl border p-2.5" style={{ '--cssv-delay': '70ms' } as CSSProperties} aria-labelledby="all-countdowns-title">
-      <div className="flex items-center justify-between gap-3 px-0.5">
-        <div className="min-w-0">
-          <h2 id="all-countdowns-title" className="flex items-center gap-1.5 text-[12px] font-bold text-slate-800">
-            <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-30 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
-            Live preparation timers
-          </h2>
-          <p className="mt-0.5 text-[8px] font-medium text-slate-400">{open ? 'Daily mock windows and official exam countdowns' : 'All countdowns are hidden for this view'}</p>
-        </div>
-        <VisibilityToggle open={open} onToggle={onToggle} label="all preparation timers" />
-      </div>
-      <AnimatedCollapse open={open}>
-        <div className="mt-2 grid items-start gap-2 md:grid-cols-[minmax(190px,0.62fr)_minmax(0,1.38fr)] lg:grid-cols-[minmax(210px,0.55fr)_minmax(0,1.45fr)]">
-          <DailyGrandMockCard active={open} />
-          <ExamCountdown active={open} />
-        </div>
-      </AnimatedCollapse>
-    </section>
-  )
-}
-
-const resourceTabs = {
-  study: [
-    { title: 'Past Papers', detail: 'CSS & provincial papers', to: '/past-papers', icon: FileText },
-    { title: 'Notes Library', detail: 'Structured study material', to: '/notes', icon: LibraryBig },
-    { title: 'Customize Mock Series', detail: 'Written tests by Ms. Sadia', to: '/test-series', icon: ClipboardCheck },
-    { title: '100 Book Summaries', detail: 'Essential books made simple', to: '/book-summaries', icon: BookOpen },
-  ],
-  practice: [
-    { title: 'Study Tools', detail: 'Planners, timers & revision', to: '/study-tools', icon: Target },
-    { title: 'Answer Writing', detail: 'Daily structured practice', to: '/answer-writing', icon: PenLine },
-    { title: '5-Minute Test', detail: 'Quick daily challenge', to: '/five-minute', icon: TimerReset },
-    { title: 'Mistake Book', detail: 'Revise weak areas', to: '/mistakes', icon: ClipboardCheck },
-  ],
-} as const
-
-function ResourceToggle() {
-  const [tab, setTab] = useState<keyof typeof resourceTabs>('study')
-  return (
-    <section className="cssv-glass-panel cssv-reveal mt-5 rounded-2xl border p-3" aria-labelledby="home-resource-switch">
-      <div className="flex items-center justify-between gap-3">
-        <h2 id="home-resource-switch" className="text-[15px] font-bold tracking-[-0.02em] text-slate-900">Browse by goal</h2>
-        <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-0.5">
-          <button type="button" onClick={() => setTab('study')} className={`cssv-tap min-h-8 rounded-md px-3 text-[10px] font-bold ${tab === 'study' ? 'bg-white text-emerald-900 shadow-sm' : 'text-slate-500'}`} aria-pressed={tab === 'study'}>Study</button>
-          <button type="button" onClick={() => setTab('practice')} className={`cssv-tap min-h-8 rounded-md px-3 text-[10px] font-bold ${tab === 'practice' ? 'bg-white text-emerald-900 shadow-sm' : 'text-slate-500'}`} aria-pressed={tab === 'practice'}>Practice</button>
-        </div>
-      </div>
-      <div key={tab} className="cssv-content-swap mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
-        {resourceTabs[tab].map((item) => (
-          <Link key={item.title} to={item.to} className="cssv-glass-subcard cssv-tap flex min-h-[60px] items-center gap-2.5 rounded-xl p-2.5">
-            <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800"><item.icon className="h-4 w-4" /></span>
-            <span className="min-w-0"><span className="block text-[11px] font-bold text-slate-800">{item.title}</span><span className="mt-0.5 line-clamp-1 block text-[9px] leading-snug text-slate-500">{item.detail}</span></span>
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function WeeklyMagazineCard() {
-  const available = Boolean(weeklyMagazine.pdfUrl)
-
-  return (
-    <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
-      <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
-      <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
-        <div className="grid gap-0 min-[360px]:grid-cols-[minmax(0,1fr)_118px] sm:grid-cols-[minmax(0,1fr)_190px] lg:grid-cols-[minmax(0,1fr)_210px]">
-          <div className="min-w-0 p-3.5 pr-2 sm:p-5">
-            <div className="flex items-start gap-3">
-              <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800">
-                <Newspaper className="h-5 w-5" />
-              </span>
-              <div className="min-w-0">
-                <p className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{weeklyMagazine.issue}</p>
-                <h3 id="weekly-magazine-title" className="mt-0.5 text-[16px] font-bold tracking-[-0.02em] text-slate-900">{weeklyMagazine.title}</h3>
-                <p className="mt-1 max-w-2xl text-[11px] leading-relaxed text-slate-500 sm:text-xs">{weeklyMagazine.description}</p>
-                {weeklyMagazine.pageCount && <span className="mt-1.5 inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-[8px] font-bold text-emerald-800">{weeklyMagazine.pageCount} pages · Free issue</span>}
-              </div>
-            </div>
-            <ul className="mt-3 hidden gap-1.5 text-[10px] text-slate-600 min-[390px]:grid sm:grid-cols-3">
-              {weeklyMagazine.coverage.map((item) => (
-                <li key={item} className="flex items-start gap-1.5"><span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />{item}</li>
-              ))}
-            </ul>
-            <div className="no-print mt-4 flex flex-wrap gap-2">
-              {available && weeklyMagazine.pdfUrl ? (
-                <a href={weeklyMagazine.pdfUrl} download className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg bg-emerald-900 px-3 text-[10px] font-bold text-white">
-                  <Download className="h-3.5 w-3.5" /> Free PDF download
-                </a>
-              ) : (
-                <button type="button" disabled className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-slate-100 px-3 text-[10px] font-bold text-slate-400">
-                  <Download className="h-3.5 w-3.5" /> Free PDF · Coming soon
-                </button>
-              )}
-              {available && weeklyMagazine.pdfUrl && <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900"><Eye className="h-3.5 w-3.5" /> View</a>}
-              <button
-                type="button"
-                disabled={!available || !weeklyMagazine.pdfUrl}
-                onClick={() => weeklyMagazine.pdfUrl && printPdfFile(weeklyMagazine.pdfUrl)}
-                className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900 disabled:cursor-not-allowed disabled:text-slate-400"
-              >
-                <Printer className="h-3.5 w-3.5" /> Print magazine
-              </button>
-            </div>
-            <details className="no-print mt-3 rounded-lg border bg-white/70 p-2.5">
-              <summary className="cursor-pointer text-[10px] font-bold text-emerald-900">Past weeks magazine archive</summary>
-              <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printPdfFile(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
-            </details>
-          </div>
-          <div className="relative min-h-[168px] overflow-hidden bg-emerald-950 p-2.5 min-[360px]:min-h-0 sm:min-h-[230px] sm:p-4">
-            <span className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-amber-300/25" aria-hidden="true" />
-            <span className="absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-emerald-700/35" aria-hidden="true" />
-            {available && weeklyMagazine.pdfUrl && weeklyMagazine.coverUrl ? (
-              <a href={weeklyMagazine.pdfUrl} target="_blank" rel="noopener noreferrer" className="cssv-tap relative grid h-full min-h-[146px] place-items-center overflow-hidden rounded-lg border border-white/20 bg-white shadow-xl min-[360px]:min-h-[176px] sm:min-h-[198px]" aria-label="Open the weekly current affairs journal">
-                <img
-                  src={weeklyMagazine.coverUrl}
-                  srcSet={weeklyMagazine.coverUrl.includes('03-september-2026') ? '/magazines/css-vista-current-affairs-weekly-03-september-2026-240.webp 240w, /magazines/css-vista-current-affairs-weekly-03-september-2026-320.webp 320w, /magazines/css-vista-current-affairs-weekly-03-september-2026-480.webp 480w, /magazines/css-vista-current-affairs-weekly-03-september-2026.webp 900w' : undefined}
-                  sizes="(max-width: 639px) 24vw, (max-width: 1023px) 34vw, 320px"
-                  alt={`${weeklyMagazine.title}, ${weeklyMagazine.issue} cover`}
-                  width="900"
-                  height="1273"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto max-h-[168px] w-full object-contain object-center min-[360px]:max-h-[210px] sm:max-h-full"
-                />
-              </a>
-            ) : (
-              <span className="relative grid h-full place-items-center rounded-lg border border-white/15 bg-white/10 text-[9px] font-black uppercase tracking-[0.18em] text-white">Weekly briefing</span>
-            )}
-          </div>
-        </div>
-      </article>
-    </section>
-  )
-}
-
-function getContinueProgress(activity: Activity | undefined, stats: ReturnType<typeof getStats>, state: ReturnType<typeof getState>) {
-  if (!activity) return 0
-  if (/mpt|gk|quiz|five-minute/.test(activity.path)) return stats.accuracy
-  const slug = activity.path.split('?')[0].split('/').filter(Boolean).at(-1) ?? ''
-  return state.subjectProgress[slug] ?? 0
-}
-
-export default function Home() {
-  const location = useLocation()
-  const [showTimers, setShowTimers] = useState(true)
-  const [showContinueStudy, setShowContinueStudy] = useState(true)
-  const stats = useMemo(() => getStats(), [])
-  const activity = useMemo(() => recentActivities(4)[0], [])
-  const initialState = useMemo(() => getState(), [])
-  const revisionStats = useMemo(() => getRevisionStats(), [])
-  const today = useMemo(() => localDateKey(), [])
-  const completed = initialState.planTaskCompletions?.[today] ?? []
-  const plannerSettings = initialState.studyPlanner
-  const hasPlanner = Boolean(plannerSettings)
-  const todayTasks = useMemo(
-    () => plannerSettings
-      ? buildDailyPlan(plannerSettings, initialState.subjectProgress, today, revisionStats.due).slice(0, 4)
-      : [],
-    [initialState.subjectProgress, plannerSettings, revisionStats.due, today],
-  )
-  const completedCount = todayTasks.filter((task) => completed.includes(task.id)).length
-  const [showDailyCelebration, setShowDailyCelebration] = useState(() => {
-    if (!todayTasks.length || completedCount !== todayTasks.length) return false
-    const milestoneKey = `cssvista:celebrated:daily-plan:${today}`
-    if (localStorage.getItem(milestoneKey)) return false
-    localStorage.setItem(milestoneKey, '1')
-    return true
-  })
-  const continueProgress = getContinueProgress(activity, stats, initialState)
-  const allFeatures = useMemo(
-    () => sortHomeCardsByPriority(mergedHomeCards(defaultHomeCards)
-      .filter((card) => (
-        card.visible
-        && card.id !== 'current-affairs'
-        && !card.to.includes('/current-affairs')
-        && card.id !== 'pakistan-affairs'
-        && !card.to.includes('/pakistan-affairs')
-        && card.id !== 'trend-analyzer'
-        && !card.to.includes('/trend-analyzer')
-        && card.id !== 'downloads'
-        && !card.to.includes('/downloads')
-        && (hasPlanner || card.id !== 'study-planner')
-      )))
-      .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
-    [hasPlanner],
-  )
-
-  useEffect(() => {
-    setShowTimers(true)
-    setShowContinueStudy(true)
-  }, [location.key])
-
-  useEffect(() => {
-    const restoreDismissedPanels = () => {
-      setShowTimers(true)
-      setShowContinueStudy(true)
+    const onDown = (event: MouseEvent) => {
+      if (boxRef.current && !boxRef.current.contains(event.target as Node)) setOpen(false)
     }
-    window.addEventListener('pageshow', restoreDismissedPanels)
-    window.addEventListener('popstate', restoreDismissedPanels)
-    return () => {
-      window.removeEventListener('pageshow', restoreDismissedPanels)
-      window.removeEventListener('popstate', restoreDismissedPanels)
-    }
+    document.addEventListener('mousedown', onDown)
+    return () => document.removeEventListener('mousedown', onDown)
   }, [])
 
-  return (
-    <div className="cssv-home min-h-screen pb-4 text-slate-900">
-      <div className="mx-auto max-w-[1240px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-7">
-        <div id="cssv-home-ad-free-top" data-cssv-auto-ad-exclusion="home-top">
-          <button
-            type="button"
-            onClick={openSearch}
-            className="cssv-glass-panel cssv-home-search cssv-reveal cssv-tap flex h-11 w-full items-center gap-2.5 rounded-xl border px-3 text-left"
-            style={{ '--cssv-delay': '40ms' } as CSSProperties}
-            aria-label="Search notes, MCQs, subjects, past papers and more"
-          >
-            <Search className="h-4 w-4 shrink-0 text-emerald-700" />
-            <span className="min-w-0 flex-1 truncate text-[13px] text-slate-400">Search notes, MCQs, subjects, past papers…</span>
-            <span className="hidden rounded-md bg-slate-100 px-1.5 py-1 text-[9px] font-bold text-slate-500 sm:block">⌘ K</span>
-          </button>
+  const submit = useCallback((event: React.FormEvent) => {
+    event.preventDefault()
+    if (results[0]) navigate(results[0].link)
+  }, [navigate, results])
 
-          <HomeHero />
+  return (
+    <div ref={boxRef} style={{ position: 'relative', maxWidth: 530, marginTop: 'var(--cv-s-6)' }}>
+      <form className="cv-search" onSubmit={submit} role="search">
+        <Search aria-hidden="true" />
+        <input
+          id="cv-home-search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          onFocus={() => { if (results.length) setOpen(true) }}
+          placeholder="Search subjects, topics, past papers, GK, magazine, mocks…"
+          aria-label="Search CSS Vista"
+          autoComplete="off"
+        />
+        <span className="cv-kbd">Ctrl K</span>
+        <button className="cv-search-go" type="submit" aria-label="Search"><Search aria-hidden="true" /></button>
+      </form>
+
+      {open && results.length > 0 && (
+        <div
+          style={{
+            position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, zIndex: 30,
+            background: 'var(--cv-white)', border: '1px solid var(--cv-hairline)',
+            borderRadius: 'var(--cv-r-md)', boxShadow: 'var(--cv-shadow-3)', overflow: 'hidden',
+          }}
+        >
+          {results.map((result) => (
+            <Link key={result.link + result.title} to={result.link} className="cv-listrow" onClick={() => setOpen(false)}>
+              <Tile tone="blue" icon={Search} small />
+              <span style={{ minWidth: 0 }}>
+                <span className="cv-listrow-t" style={{ display: 'block' }}>{result.title}</span>
+                <span className="cv-listrow-m">{result.category}</span>
+              </span>
+              <ChevronRight style={{ marginLeft: 'auto', width: 15, height: 15, color: 'var(--cv-ink-400)', flex: 'none' }} aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function SectionHead({ title, sub, children }: { title: string; sub?: string; children?: ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--cv-s-2)', marginBottom: 'var(--cv-s-6)', maxWidth: '62ch' }}>
+      <h2 className="cv-head">{title}</h2>
+      {sub ? <p className="cv-body cv-body--sm">{sub}</p> : null}
+      {children}
+    </div>
+  )
+}
+
+function Block({ children, style }: { children: ReactNode; style?: React.CSSProperties }) {
+  return <section style={{ paddingBlock: 'var(--cv-s-16)', ...style }}>{children}</section>
+}
+
+/* -------------------------------------------------------------------- page --- */
+
+export default function Home() {
+  const latestIssue = useMemo(() => weeklyMagazines[0], [])
+  const [mockTab, setMockTab] = useState('mpt')
+
+  return (
+    <>
+      <TutorialAnnouncement />
+      <NotesDiscountAnnouncement />
+
+      {/* ---------------- hero ---------------- */}
+      <div className="cv-hero">
+        <div className="mx-auto w-full max-w-[1200px] px-6">
+          <div className="cv-hero-in">
+            <div>
+              <p className="cv-eyebrow">Prepare · Practice · Progress · Succeed</p>
+              <h1 className="cv-hero-title" style={{ marginTop: 'var(--cv-s-4)' }}>
+                CSS Vista<span>Your Preparation Partner.</span>
+              </h1>
+              <p className="cv-body cv-body--lg" style={{ marginTop: 'var(--cv-s-4)', maxWidth: '44ch' }}>
+                Everything you need to prepare — organised in one place. Completely free.
+              </p>
+              <HeroSearch />
+            </div>
+
+            <div className="cv-visual">
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <p className="cv-visual-title">Same<br />Aspirations<br />A Brighter<br />Tomorrow</p>
+                <div style={{ marginTop: 'var(--cv-s-5)', display: 'flex', flexDirection: 'column', gap: 'var(--cv-s-2)' }}>
+                  {['Knowledge', 'Preparation', 'Progress'].map((item) => (
+                    <span key={item} style={{ display: 'flex', alignItems: 'center', gap: 'var(--cv-s-2)', fontSize: 'var(--cv-small)', color: 'var(--cv-ink-700)' }}>
+                      <i style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cv-blue-600)', flex: 'none' }} />{item}
+                    </span>
+                  ))}
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--cv-s-2)', fontSize: 'var(--cv-small)', color: 'var(--cv-brand)', fontFamily: 'var(--cv-font-head)', fontWeight: 700 }}>
+                    <i style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--cv-brand)', flex: 'none' }} />A Better Pakistan
+                  </span>
+                </div>
+              </div>
+              <HeroArt />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto w-full max-w-[1200px] px-6">
+        {/* ---------------- gateway ---------------- */}
+        <div className="cv-cards">
+          {gateways.map((item) => (
+            <Link key={item.title} to={item.to} className="cv-card">
+              <Tile tone={item.tone} icon={item.icon} />
+              <span className="cv-card-t">{item.title}</span>
+              <span className="cv-card-d">{item.description}</span>
+              <span className="cv-card-arrow"><ArrowRight aria-hidden="true" /></span>
+            </Link>
+          ))}
         </div>
 
-        <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 'var(--cv-s-6)', flexWrap: 'wrap', paddingBlock: 'var(--cv-s-12) var(--cv-s-2)' }}>
+          <div>
+            <p className="cv-head" style={{ fontSize: 'clamp(22px, 2.8vw, 30px)' }}>Discover. Learn. Practice. Grow.</p>
+            <p className="cv-body cv-body--sm" style={{ marginTop: 'var(--cv-s-1)' }}>A complete ecosystem for CSS and PMS preparation.</p>
+          </div>
+        </div>
 
-        <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
-          <SectionHeading
-            title="Continue studying"
-            headingId="continue-studying"
-            action="History"
-            to="/dashboard"
-            visibility={{ open: showContinueStudy, onToggle: () => setShowContinueStudy((current) => !current), label: 'Continue studying panel' }}
-          />
-          <AnimatedCollapse open={showContinueStudy}>
-            <article className="cssv-glass-panel cssv-continue-panel overflow-hidden rounded-2xl border text-slate-900">
-              <div className="relative flex min-h-[96px] items-center gap-3 overflow-hidden p-3 sm:p-3.5">
-                <div className="cssv-continue-grid absolute inset-0 opacity-40" aria-hidden="true" />
-                <div className="cssv-glass-icon relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-emerald-800">
-                  {activity?.type === 'past-paper' ? <FileText className="h-5 w-5" /> : <PlayCircle className="h-5 w-5" />}
-                </div>
-                <div className="relative min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">
-                    {activity ? 'Pick up where you stopped' : 'Your first step'}
-                  </p>
-                  <h3 className="mt-0.5 line-clamp-1 text-[14px] font-bold">
-                    {activity?.label || 'Build your CSS preparation roadmap'}
-                  </h3>
-                  <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-500">
-                    {activity ? relativeTime(activity.ts) : 'Choose subjects, understand the exam and begin with confidence.'}
-                  </p>
-                  {continueProgress > 0 && (
-                    <div className="mt-1.5 flex items-center gap-2">
-                      <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-emerald-950/10">
-                        <span className="cssv-progress block h-full rounded-full bg-amber-400" style={{ width: `${continueProgress}%` }} />
-                      </span>
-                      <span className="text-[10px] font-bold text-emerald-800">{continueProgress}%</span>
-                    </div>
-                  )}
-                </div>
-                <Link
-                  to={activity?.path || '/start-css'}
-                  className="cssv-tap relative inline-flex h-9 shrink-0 items-center gap-1 rounded-lg bg-emerald-900 px-2.5 text-[10px] font-bold text-white shadow-[0_8px_20px_rgba(4,78,52,0.18)]"
-                >
-                  {activity ? 'Resume' : <>Start<span className="sr-only"> CSS preparation</span></>} <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+        {/* This slot keeps the homepage's top region free of automatic ad
+            placement; the advertising policy reads the data attribute. */}
+        <div id="cssv-home-ad-free-top" data-cssv-auto-ad-exclusion="home-top" />
+
+        {/* ---------------- subjects ---------------- */}
+        <Block>
+          <SectionHead title="Subjects & Resources" sub="Comprehensive study material, notes, books and guidance for CSS and PMS." />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(232px, 1fr))', gap: 'var(--cv-s-3)' }}>
+            {compulsory.map((subject) => (
+              <Link key={subject.title} to={subject.to} className="cv-card" style={{ minHeight: 0, flexDirection: 'row', alignItems: 'flex-start', gap: 'var(--cv-s-3)' }}>
+                <Tile tone={subject.tone} icon={subject.icon} small />
+                <span style={{ minWidth: 0 }}>
+                  <span className="cv-card-t" style={{ display: 'block' }}>{subject.title}</span>
+                  <span className="cv-listrow-m">{subject.meta}</span>
+                </span>
+                <ChevronRight style={{ marginLeft: 'auto', width: 15, height: 15, color: 'var(--cv-ink-400)', alignSelf: 'center', flex: 'none' }} aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+          <p className="cv-body cv-body--sm" style={{ marginTop: 'var(--cv-s-4)', color: 'var(--cv-ink-500)' }}>
+            Optional subjects follow the seven official FPSC groups — Group I selects one 200-mark subject,
+            Group II one of 200 or two of 100, and Groups III–VII one of 100 each.
+          </p>
+          <div style={{ display: 'flex', gap: 'var(--cv-s-3)', flexWrap: 'wrap', marginTop: 'var(--cv-s-4)' }}>
+            <Link to="/subjects/optional" className="cv-btn cv-btn--primary">All optional subjects</Link>
+            <Link to="/fpsc-syllabus" className="cv-btn cv-btn--secondary">Official FPSC syllabus</Link>
+          </div>
+        </Block>
+
+        {/* ---------------- mocks + past papers ---------------- */}
+        <Block style={{ paddingTop: 0 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.25fr) minmax(0, .75fr)', gap: 'var(--cv-s-5)' }} className="cv-split">
+            <div>
+              <SectionHead title="CSS Vista Free Online Mocks" sub="Practice smarter. Build confidence. Track your progress." />
+              <div className="cv-rtabs" role="tablist" aria-label="Mock type" style={{ marginBottom: 'var(--cv-s-4)' }}>
+                {[['mpt', 'CSS MPT Mocks'], ['pms', 'PMS GK Mocks'], ['subject', 'Subject-wise'], ['topic', 'Topic-wise'], ['daily', 'Daily MCQs']].map(([id, label]) => (
+                  <button key={id} type="button" role="tab" aria-selected={mockTab === id} className="cv-rtab" onClick={() => setMockTab(id)}>{label}</button>
+                ))}
               </div>
-            </article>
-          </AnimatedCollapse>
-        </section>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--cv-s-3)' }}>
+                {mocks.map((mock) => (
+                  <div key={mock.title} className="cv-card" style={{ minHeight: 0, flexDirection: 'row', alignItems: 'center', gap: 'var(--cv-s-3)' }}>
+                    <Tile tone={mock.tone} icon={mock.icon} small />
+                    <span style={{ minWidth: 0 }}>
+                      <span className="cv-card-t" style={{ display: 'block' }}>{mock.title}</span>
+                      <span className="cv-listrow-m">{mock.questions} questions · {mock.minutes} minutes</span>
+                    </span>
+                    <Link to={mock.to} className="cv-btn cv-btn--primary" style={{ marginLeft: 'auto', flex: 'none' }}>Start Mock</Link>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        <Suspense fallback={null}><ExamIntelligenceHomeCard /></Suspense>
-
-        {hasPlanner && (
-          <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '35ms' } as CSSProperties} aria-labelledby="planner-home-card">
-            <Link to="/study-planner" className="cssv-glass-panel cssv-tap flex min-h-[68px] items-center gap-3 rounded-xl border p-3">
-              <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800"><CalendarCheck2 className="h-[18px] w-[18px]" /></span>
-              <span className="min-w-0 flex-1">
-                <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-700">My study planner</span>
-                <span id="planner-home-card" className="mt-0.5 block text-[13px] font-bold text-slate-900">{completedCount} of {todayTasks.length} tasks completed today</span>
-                <span className="mt-0.5 block truncate text-[9px] text-slate-500">Open today’s syllabus-based plan</span>
-              </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-emerald-700" />
-            </Link>
-          </section>
-        )}
-
-        <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
-          <SectionHeading title="Start preparing" eyebrow="Quick access" />
-          <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-2.5">
-            {quickActions.map((item) => (
-              <Link
-                key={item.title}
-                to={item.to}
-                className={`cssv-glass-panel cssv-quick-card cssv-quick-${item.tone} cssv-tap group flex min-h-[80px] min-w-0 flex-col items-start gap-1.5 rounded-xl border p-2.5 sm:flex-row sm:items-center sm:gap-2.5 sm:p-3`}
-              >
-                <span className="cssv-glass-icon cssv-quick-icon flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9">
-                  <item.icon className={`h-4 w-4 sm:h-[18px] sm:w-[18px] ${item.title === 'GK World' ? 'cssv-globe' : item.title === 'CSS MPT' ? 'cssv-timer' : ''}`} />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-[11px] font-bold leading-tight text-slate-900 sm:text-[13px]">{item.title}</span>
-                  <span className="mt-0.5 block line-clamp-1 text-[8px] leading-tight text-slate-500 sm:text-[10px]">{item.description}</span>
-                </span>
-              </Link>
-            ))}
+            <div className="cv-card" style={{ minHeight: 0, gap: 'var(--cv-s-4)', padding: 'var(--cv-s-6)' }}>
+              <div>
+                <h2 className="cv-head cv-head--h3">Past Papers</h2>
+                <p className="cv-body cv-body--sm" style={{ marginTop: 'var(--cv-s-1)' }}>Search. Solve. Learn. Repeat.</p>
+              </div>
+              <div style={{ border: '1px solid var(--cv-hairline)', borderRadius: 'var(--cv-r-md)', overflow: 'hidden' }}>
+                <Link to="/past-papers" className="cv-listrow"><Tile tone="blue" icon={FileText} small />
+                  <span><span className="cv-listrow-t" style={{ display: 'block' }}>CSS · by year</span><span className="cv-listrow-m">2016–2026 · {CSS_PAPER_TOTAL} papers</span></span></Link>
+                <Link to="/past-papers" className="cv-listrow"><Tile tone="green" icon={FileText} small />
+                  <span><span className="cv-listrow-t" style={{ display: 'block' }}>PPSC</span><span className="cv-listrow-m">{PPSC_PAPER_TOTAL} papers</span></span></Link>
+                <Link to="/past-papers" className="cv-listrow"><Tile tone="amber" icon={FileText} small />
+                  <span><span className="cv-listrow-t" style={{ display: 'block' }}>PMS · Groups A–D</span><span className="cv-listrow-m">{PMS_PAPER_TOTAL} papers</span></span></Link>
+                <Link to="/past-papers" className="cv-listrow"><Tile tone="rose" icon={FileText} small />
+                  <span><span className="cv-listrow-t" style={{ display: 'block' }}>MPT screening</span><span className="cv-listrow-m">{MPT_PAPER_TOTAL} papers</span></span></Link>
+              </div>
+              <p className="cv-caption">{PAST_PAPER_TOTAL} papers in total. No CSS examination was held in 2020.</p>
+              <Link to="/past-papers" className="cv-btn cv-btn--secondary" style={{ justifyContent: 'center' }}>Browse all papers</Link>
+            </div>
           </div>
-        </section>
+        </Block>
 
-        <NotesDiscountAnnouncement />
-
-        <TutorialAnnouncement />
-
-        <ResourceToggle />
-
-        <WeeklyMagazineCard />
-
-        <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
-          <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
-          <div id="featured-services" className="cssv-feature-track -mx-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2 sm:-mx-5 sm:px-5 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
-            {featuredServices.map((service) => (
-              <Link
-                key={service.eyebrow}
-                to={service.to}
-                className="cssv-glass-panel cssv-feature-card cssv-tap group min-w-[70%] snap-center overflow-hidden rounded-2xl border sm:min-w-[42%] lg:min-w-0"
-              >
-                <span className="flex min-w-0 flex-col p-4">
-                  <span className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{service.eyebrow}</span>
-                  <span className={`mt-2 font-bold leading-snug text-slate-900 ${service.variant === 'test' ? 'text-[19px] tracking-[-0.025em]' : 'text-[15px]'}`}>{service.title}</span>
-                  <span className={`mt-1 line-clamp-2 leading-relaxed text-slate-500 ${service.variant === 'test' ? 'text-[10px]' : 'text-[11px]'}`}>{service.description}</span>
-                  <span className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800">
-                    {service.action} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                  </span>
+        {/* ---------------- GK World ---------------- */}
+        <Block style={{ paddingTop: 0 }}>
+          <SectionHead
+            title="GK World"
+            sub={`Explore. Learn. Remember. ${SHIPPED_MCQ_TOTAL.toLocaleString('en-US')} verified questions across ${SHIPPED_MCQ_CATEGORY_COUNT} categories.`}
+          />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(178px, 1fr))', gap: 'var(--cv-s-3)' }}>
+            {gkThemes.map((theme) => (
+              <Link key={theme.title} to="/gk" className="cv-card" style={{ minHeight: 0, flexDirection: 'row', alignItems: 'center', gap: 'var(--cv-s-3)' }}>
+                <Tile tone={theme.tone} icon={theme.icon} small />
+                <span style={{ minWidth: 0 }}>
+                  <span className="cv-card-t" style={{ display: 'block' }}>{theme.title}</span>
+                  <span className="cv-listrow-m" style={{ fontVariantNumeric: 'tabular-nums' }}>{theme.count.toLocaleString('en-US')}</span>
                 </span>
               </Link>
             ))}
           </div>
-        </section>
+        </Block>
 
-        <section className="cssv-reveal mt-6" aria-labelledby="all-css-vista-features">
-          <SectionHeading title="All CSS Vista features" eyebrow="Everything in one place" />
-          <div id="all-css-vista-features" className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-            {allFeatures.map((feature) => {
-              const FeatureIcon = cardIcons[feature.icon] ?? BookOpen
-              return (
-                <Link key={feature.id} to={feature.to} className="cssv-glass-panel cssv-feature-link cssv-tap group flex min-h-[58px] min-w-0 items-center gap-2.5 rounded-xl border p-2.5">
-                  <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800">
-                    <FeatureIcon className="h-4 w-4" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="line-clamp-2 block text-[10px] font-bold leading-tight text-slate-800 sm:text-[11px]">{feature.title}</span>
-                    <span className="mt-0.5 line-clamp-1 block text-[8px] text-slate-400 sm:text-[9px]">{feature.desc}</span>
-                  </span>
-                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-slate-300" />
-                </Link>
-              )
-            })}
+        {/* ---------------- magazine + tools ---------------- */}
+        <Block style={{ paddingTop: 0 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, .85fr) minmax(0, 1.15fr)', gap: 'var(--cv-s-5)' }} className="cv-split">
+            <div className="cv-card" style={{ minHeight: 0, gap: 'var(--cv-s-4)', padding: 'var(--cv-s-6)' }}>
+              <div>
+                <h2 className="cv-head cv-head--h3">CSS Vista Magazine</h2>
+                <p className="cv-body cv-body--sm" style={{ marginTop: 'var(--cv-s-1)' }}>In-depth analysis. A wider perspective. A more informed you.</p>
+              </div>
+              <div style={{ border: '1px solid var(--cv-hairline)', borderRadius: 'var(--cv-r-md)', overflow: 'hidden' }}>
+                {weeklyMagazines.slice(0, 3).map((issue, index) => (
+                  <Link key={issue.issue} to="/current-affairs" className="cv-listrow">
+                    <Tile tone={index === 0 ? 'rose' : 'blue'} icon={Newspaper} small />
+                    <span style={{ minWidth: 0 }}>
+                      <span className="cv-listrow-t" style={{ display: 'block' }}>{issue.issue}</span>
+                      <span className="cv-listrow-m">
+                        {index === 0 ? 'Latest' : 'Archive'}
+                        {issue.pageCount ? ` · ${issue.pageCount} pages` : ''}
+                      </span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+              <Link to="/current-affairs" className="cv-btn cv-btn--primary" style={{ justifyContent: 'center' }}>
+                {latestIssue ? 'Read latest issue' : 'Open the magazine'}
+              </Link>
+            </div>
+
+            <div>
+              <SectionHead title="Study Tools" sub="Smart study helpers designed to make your preparation easier." />
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(198px, 1fr))', gap: 'var(--cv-s-3)' }}>
+                {tools.map((tool) => (
+                  <Link key={tool.title} to={tool.to} className="cv-card" style={{ minHeight: 0, flexDirection: 'row', alignItems: 'flex-start', gap: 'var(--cv-s-3)' }}>
+                    <Tile tone={tool.tone} icon={tool.icon} small />
+                    <span style={{ minWidth: 0 }}>
+                      <span className="cv-card-t" style={{ display: 'block' }}>{tool.title}</span>
+                      <span className="cv-listrow-m">{tool.meta}</span>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
+        </Block>
 
+        {/* ---------------- My CSS Vista ---------------- */}
+        <Block style={{ paddingTop: 0 }}>
+          <div
+            style={{
+              background: 'linear-gradient(150deg, #16375C 0%, #12294A 55%, #0F3B32 100%)',
+              borderRadius: 'var(--cv-r-xl)', padding: 'var(--cv-s-10) var(--cv-s-8)',
+              display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: 'var(--cv-s-8)',
+              alignItems: 'center', boxShadow: 'var(--cv-shadow-3)',
+            }}
+            className="cv-split"
+          >
+            <div>
+              <p className="cv-eyebrow" style={{ color: '#6FE3B0' }}>My CSS Vista</p>
+              <h2 className="cv-head" style={{ color: 'var(--cv-white)', marginTop: 'var(--cv-s-3)' }}>Your preparation, kept in one place</h2>
+              <p className="cv-body" style={{ color: '#B7C9DC', marginTop: 'var(--cv-s-3)', maxWidth: '52ch' }}>
+                Everything works signed out. Create an account and your mock results, saved questions,
+                syllabus progress and planner follow you between devices.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(112px, 1fr))', gap: 'var(--cv-s-2)', marginTop: 'var(--cv-s-4)', maxWidth: 540 }}>
+                {accountAreas.map((area) => (
+                  <span key={area} style={{ background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.14)', borderRadius: 'var(--cv-r-sm)', padding: 'var(--cv-s-2) var(--cv-s-3)', fontFamily: 'var(--cv-font-head)', fontWeight: 700, fontSize: 'var(--cv-meta)', color: '#E6EEF6' }}>{area}</span>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--cv-s-2)', minWidth: 200 }}>
+              <Link to="/account" className="cv-btn" style={{ background: 'var(--cv-white)', color: 'var(--cv-ink-deep)', borderColor: 'transparent', justifyContent: 'center' }}>Create a free account</Link>
+              <Link to="/account" className="cv-btn" style={{ background: 'rgba(255,255,255,.1)', borderColor: 'rgba(255,255,255,.26)', color: 'var(--cv-white)', justifyContent: 'center' }}>Sign in</Link>
+            </div>
+          </div>
+        </Block>
+
+        {/* Crawler-visible summary. The static SEO layer renders its own copy of
+            this for no-JavaScript clients; this keeps parity once React mounts. */}
+        <Block style={{ paddingTop: 0 }}>
+          <div style={{ maxWidth: '62ch' }}>
+            <p className="cv-eyebrow">About this platform</p>
+            <p className="cv-body" style={{ marginTop: 'var(--cv-s-3)' }}>
+              CSS Vista is a free preparation platform for the CSS, PMS and one-paper competitive
+              examinations in Pakistan, offering {PAST_PAPER_TOTAL} past papers,
+              {' '}{SUBJECT_MCQ_TOTAL.toLocaleString('en-US')} subject questions across {SUBJECT_BANK_COUNT} banks,
+              {' '}{SHIPPED_MCQ_TOTAL.toLocaleString('en-US')} general-knowledge questions, notes, a weekly
+              current-affairs magazine and study tools. It is independent of the FPSC and every provincial
+              commission; official rules, deadlines and notices should be verified with the relevant
+              examining authority.
+            </p>
+          </div>
+        </Block>
       </div>
-      <MilestoneCelebration
-        open={showDailyCelebration}
-        title="Today’s preparation is complete"
-        description="You finished every task in today’s study plan. Keep the rhythm going tomorrow."
-        onClose={() => setShowDailyCelebration(false)}
-      />
-    </div>
+    </>
   )
 }

@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck,
 } from 'lucide-react'
 import { STORAGE_FAILED_EVENT } from '@/lib/progressEvents'
 import { site } from '@/data/site'
@@ -32,103 +32,105 @@ import {
 } from '@/lib/navigationState'
 
 const nav = [
-  { label: 'Home', to: '/' },
-  { label: 'GK World', to: '/gk' },
-  { label: 'Past Papers', to: '/past-papers' },
-  { label: 'Books by Sir Ali', to: '/books' },
-  { label: 'Opinions', to: '/opinions' },
   {
-    label: 'Subjects',
+    label: 'Subjects & Resources',
     items: [
-      { label: 'Start CSS', to: '/start-css', icon: GraduationCap },
+      { label: 'New to CSS? Start here', to: '/start-css', icon: GraduationCap },
       { label: 'Compulsory Subjects', to: '/subjects/compulsory', icon: BookOpen },
       { label: 'Optional Subjects', to: '/subjects/optional', icon: BookOpen },
       { label: 'Subject Selection Tool', to: '/subjects/selector', icon: Target },
-    ],
-  },
-  {
-    label: 'Practice',
-    items: [
-      { label: 'MPT Preparation', to: '/mpt', icon: ClipboardList },
-      { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
-      { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
-      { label: 'Essay - Miss Sadia Zahoor, PAS', to: '/essay', icon: PenLine },
-      { label: 'Answer Timer', to: '/answer-timer', icon: ClipboardList },
-      { label: 'Answer-Writing Practice', to: '/answer-writing', icon: PenLine },
-      { label: 'Answer Evaluation by Miss Sadia Zahoor, PAS', to: '/answer-evaluation', icon: FileCheck2 },
-      { label: 'Vocabulary and Daily Challenge', to: '/grammar-vocabulary', icon: Languages },
-      { label: 'Current Affairs', to: '/current-affairs', icon: Newspaper },
-    ],
-  },
-  {
-    label: 'Library',
-    items: [
       { label: 'Notes Library', to: '/notes', icon: FileText },
       { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: NotebookPen },
+      { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
+      { label: 'Books by Sir Ali', to: '/books', icon: BookMarked },
       { label: 'Free CSS Vista Lectures', to: '/lectures', icon: Video },
-      { label: '30,491 One-Liner GK Questions', to: '/one-liner-gk', icon: BookOpen },
-      { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
+      { label: 'Essay - Miss Sadia Zahoor, PAS', to: '/essay', icon: PenLine },
+      { label: 'Answer-Writing Practice', to: '/answer-writing', icon: PenLine },
+      { label: 'Answer Evaluation by Miss Sadia Zahoor, PAS', to: '/answer-evaluation', icon: FileCheck2 },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: '30-Day Master Grammar Course', to: '/language-grammar?lang=english&view=master-course', icon: Languages },
-      { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
+      { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: CalendarRange },
     ],
   },
   {
-    label: 'Tools',
+    label: 'Magazine',
     items: [
-      { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
-      { label: 'Study Tools', to: '/study-tools', icon: Wrench },
-      { label: 'My Factbook', to: '/factbook', icon: BookMarked },
-      { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },
-      { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
-      { label: 'Application Checklists', to: '/checklists', icon: ClipboardList },
-      { label: 'Application Photo Compressor', to: '/photo-compressor', icon: Wrench },
+      { label: 'Weekly Current Affairs Magazine', to: '/current-affairs', icon: Newspaper },
+      { label: 'Opinions & Analysis', to: '/opinions', icon: FileText },
+    ],
+  },
+  {
+    label: 'Free Online Mocks',
+    items: [
+      { label: 'CSS MPT Mocks', to: '/mpt', icon: ClipboardList },
+      { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
+      { label: 'PMS GK Mocks', to: '/gk/quiz', icon: Globe2 },
+      { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
+      { label: 'Customized Test Series', to: '/test-series', icon: FileCheck2 },
+      { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
       { label: 'Interactive Practice', to: '/games', icon: Gamepad2 },
-      { label: 'Performance Dashboard', to: '/dashboard', icon: LayoutDashboard },
+    ],
+  },
+  { label: 'Past Papers', to: '/past-papers' },
+  {
+    label: 'GK World',
+    items: [
+      { label: 'GK World', to: '/gk', icon: Globe2 },
+      { label: '30,491 One-Liner GK Questions', to: '/one-liner-gk', icon: BookOpen },
+      { label: 'My Factbook', to: '/factbook', icon: BookMarked },
+      { label: 'Vocabulary and Daily Challenge', to: '/grammar-vocabulary', icon: Languages },
+    ],
+  },
+  {
+    label: 'Study Tools',
+    items: [
+      { label: 'All Study Tools', to: '/study-tools', icon: Wrench },
       { label: 'My CSS Study Planner', to: '/study-planner', icon: CalendarRange },
+      { label: 'Answer Timer', to: '/answer-timer', icon: ClipboardList },
+      { label: 'Application Checklists', to: '/checklists', icon: FileCheck2 },
+      { label: 'Application Photo Compressor', to: '/photo-compressor', icon: Wrench },
+      { label: 'Performance Dashboard', to: '/dashboard', icon: LayoutDashboard },
+      { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },
+      { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
     ],
   },
   {
-    label: 'Guidance',
+    label: 'Explore',
     items: [
-      { label: 'Psychological Assessment & Viva', to: '/psych-viva', icon: UserCheck },
+      { label: 'About CSS Vista and Its Mentors', to: '/mentors', icon: UserCheck },
       { label: 'Occupational Groups', to: '/services', icon: Landmark },
+      { label: 'Psychological Assessment & Viva', to: '/psych-viva', icon: BrainCircuit },
       { label: 'Success & Failure Analysis', to: '/analysis', icon: TrendingUp },
-      { label: 'FPSC Updates & Important Dates', to: '/fpsc-updates', icon: Megaphone },
+      { label: 'FPSC Updates & Important Dates', to: '/fpsc-updates', icon: CalendarRange },
       { label: 'One-on-One Consultation', to: '/consultation', icon: MessageCircle },
-    ],
-  },
-  {
-    label: 'Policies',
-    items: [
+      { label: 'Contact CSS Vista', to: '/contact', icon: MessageCircle },
       { label: 'Legal & Trust Centre', to: '/legal', icon: ShieldCheck },
       { label: 'Privacy Policy', to: '/privacy-policy', icon: ShieldCheck },
       { label: 'Cookie Policy', to: '/cookie-policy', icon: ShieldCheck },
-      { label: 'Terms & Conditions', to: '/terms-and-conditions', icon: FileCheck2 },
-      { label: 'Disclaimer', to: '/disclaimer', icon: FileText },
-      { label: 'Copyright Policy', to: '/copyright', icon: FileText },
-      { label: 'Editorial & Corrections Policy', to: '/editorial-policy', icon: FileCheck2 },
-      { label: 'Contact CSS Vista', to: '/contact', icon: MessageCircle },
+      { label: 'Terms & Conditions', to: '/terms-and-conditions', icon: ShieldCheck },
+      { label: 'Disclaimer', to: '/disclaimer', icon: ShieldCheck },
+      { label: 'Copyright Policy', to: '/copyright', icon: ShieldCheck },
+      { label: 'Editorial & Corrections Policy', to: '/editorial-policy', icon: FileText },
     ],
   },
-  { label: 'About Us', to: '/mentors' },
-  { label: 'Account', to: '/account' },
 ]
 
 const primaryNav = [
-  { label: 'Home', to: '/', icon: HomeIcon },
-  { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
-  { label: 'GK World', to: '/gk', icon: Globe2 },
-  { label: 'MPT Practice', to: '/mpt', icon: PenLine },
+  { label: 'Subjects & Resources', to: '/subjects/compulsory', icon: BookOpen },
+  { label: 'Magazine', to: '/current-affairs', icon: Newspaper },
+  { label: 'Free Online Mocks', to: '/mpt', icon: ClipboardList },
   { label: 'Past Papers', to: '/past-papers', icon: FileText },
+  { label: 'GK World', to: '/gk', icon: Globe2 },
+  { label: 'Study Tools', to: '/study-tools', icon: Wrench },
+  { label: 'Explore', to: '/explore', icon: Grid2X2 },
 ]
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
-  { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
-  { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
+  { label: 'Resources', to: '/subjects/compulsory', icon: BookOpen, paths: ['/subjects', '/notes', '/handwritten-notes', '/books', '/book-summaries', '/lectures', '/essay', '/answer-writing', '/language-grammar', '/fpsc-syllabus', '/start-css'] },
+  { label: 'Mocks', to: '/mpt', icon: ClipboardList, paths: ['/mpt', '/css-mcqs', '/test-series', '/five-minute', '/gk/quiz', '/mistakes', '/games', '/answer-timer'] },
+  { label: 'Explore', to: '/explore', icon: Grid2X2, paths: ['/explore', '/gk', '/past-papers', '/current-affairs', '/study-tools', '/mentors', '/services'] },
+  { label: 'My CSS Vista', to: '/account', icon: UserRound, paths: ['/account', '/dashboard'] },
 ]
 
 const mobileQuickLinks = [
@@ -153,26 +155,6 @@ function DeferredVistaShortcut() {
   if (!ready) return null
   return <Suspense fallback={null}><VistaShortcut /></Suspense>
 }
-
-interface FlatNavigationLink {
-  label: string
-  to: string
-  icon: LucideIcon
-}
-
-const desktopMoreLinks = (() => {
-  const collected: FlatNavigationLink[] = [...mobileQuickLinks]
-  nav.forEach((item) => {
-    if ('items' in item && item.items) {
-      item.items.forEach((sub) => collected.push(sub))
-    } else if ('to' in item && item.to) {
-      collected.push({ label: item.label, to: item.to, icon: Grid2X2 })
-    }
-  })
-  return collected.filter(
-    (item, index, all) => all.findIndex((candidate) => candidate.to === item.to) === index,
-  )
-})()
 
 /**
  * Saving progress can fail silently - a full quota, private browsing, or site
@@ -610,7 +592,6 @@ function fallbackRoute(pathname: string) {
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [openDrop, setOpenDrop] = useState<string | null>(null)
   const [searchOpen, setSearchOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -639,7 +620,6 @@ export default function Layout() {
 
   useLayoutEffect(() => {
     setMobileOpen(false)
-    setOpenDrop(null)
     setSearchOpen(false)
   }, [location.key])
   useLayoutEffect(() => {
@@ -873,79 +853,18 @@ export default function Layout() {
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `relative flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-medium transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:transition-colors ${
+                  `relative flex items-center whitespace-nowrap rounded-lg px-3 py-2.5 text-[13.5px] font-medium transition-colors after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:transition-colors ${
                     isActive
-                      ? 'bg-emerald-50/70 text-pine after:bg-emerald-700'
-                      : 'text-foreground/80 after:bg-transparent hover:bg-secondary hover:text-pine'
+                      ? 'font-bold text-[color:var(--cv-ink-900)] after:bg-[color:var(--cv-brand)]'
+                      : 'text-[color:var(--cv-ink-700)] after:bg-transparent hover:bg-[color:var(--cv-canvas-2)] hover:text-[color:var(--cv-ink-900)]'
                   }`
                 }
               >
-                <item.icon className="h-4 w-4" />
                 {item.label}
               </NavLink>
             ))}
 
-            <div className="relative" onMouseLeave={() => setOpenDrop(null)}>
-              <button
-                className={`flex h-full items-center gap-2 rounded-lg px-3 py-3 text-sm font-medium transition-colors ${
-                  openDrop === 'More' ? 'bg-secondary text-pine' : 'text-foreground/80 hover:bg-secondary hover:text-pine'
-                }`}
-                onMouseEnter={() => setOpenDrop('More')}
-                onClick={() => setOpenDrop(openDrop === 'More' ? null : 'More')}
-                aria-expanded={openDrop === 'More'}
-              >
-                <Grid2X2 className="h-4 w-4" />
-                More
-                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDrop === 'More' ? 'rotate-180' : ''}`} />
-              </button>
-              <div
-                className={`absolute right-0 top-full z-50 mt-1 max-h-[76vh] w-[min(90vw,390px)] origin-top-right overflow-y-auto rounded-xl border bg-white p-2 shadow-xl transition-all duration-150 ${
-                  openDrop === 'More' ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0'
-                }`}
-              >
-                <div className="sticky top-0 z-10 mb-1 flex items-center justify-between rounded-lg bg-white px-3 py-2 shadow-sm">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-pine">All sections</p>
-                  <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                    {desktopMoreLinks.length}
-                  </span>
-                </div>
-                <div className="space-y-0.5">
-                  {desktopMoreLinks.map((item) => (
-                    <NavLink
-                      key={item.to}
-                      to={item.to}
-                      end={item.to === '/'}
-                      onClick={() => setOpenDrop(null)}
-                      className={({ isActive }) =>
-                        `flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
-                          isActive
-                            ? 'bg-emerald-50 font-semibold text-pine'
-                            : 'text-foreground/80 hover:bg-secondary hover:text-pine'
-                        }`
-                      }
-                    >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-pine text-white">
-                        <item.icon className="h-3.5 w-3.5" />
-                      </span>
-                      <span>{item.label}</span>
-                    </NavLink>
-                  ))}
-                </div>
-              </div>
-            </div>
           </nav>
-
-          <div className="hidden xl:flex xl:items-center xl:gap-2">
-            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="About CSS Vista and its mentors">
-              <UserCheck className="h-4 w-4 text-emerald-800" />
-              <span>About Us</span>
-            </Link>
-            <Link to="/legal" className="flex h-9 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/70 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-emerald-100" aria-label="Open CSS Vista policies and legal information">
-              <ShieldCheck className="h-4 w-4 text-emerald-800" />
-              <span>Policies</span>
-            </Link>
-            <div className="hidden 2xl:block"><SocialLinks /></div>
-          </div>
 
           <button
             onClick={() => setSearchOpen(true)}
@@ -959,11 +878,10 @@ export default function Layout() {
 
           <NotificationCenter />
           <Link
-            to="/mentors"
-            className="cssv-tap flex h-9 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50/70 px-2 text-[9px] font-extrabold text-emerald-950 transition-colors hover:bg-emerald-100 sm:px-2.5 sm:text-[10px] xl:hidden"
-            aria-label="About CSS Vista and its mentors"
+            to={user ? "/account/dashboard" : "/account"}
+            className="cssv-tap hidden h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[color:var(--cv-ink-deep)] px-4 text-[13.5px] font-medium text-white transition-colors hover:bg-[#183459] xl:flex"
           >
-            About Us
+            {user ? 'My CSS Vista' : 'Create Account'}
           </Link>
           <Link
             to={user ? "/account/dashboard" : "/account"}

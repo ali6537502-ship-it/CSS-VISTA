@@ -57,8 +57,25 @@ export default function TutorialAnnouncement() {
     if (isNotesDiscountActive()) return
     if (readStorage(window.localStorage, TUTORIAL_SEEN_KEY)) return
     if (readStorage(window.sessionStorage, TUTORIAL_DISMISSED_KEY)) return
-    const timer = window.setTimeout(() => setMode('introduction'), 1200)
-    return () => window.clearTimeout(timer)
+
+    // Wait until the visitor has scrolled past the hero before interrupting
+    // them. Opening on a timer meant a first-time visitor met a modal instead
+    // of the page, and it locks body scroll while it is open.
+    const HERO_SCROLL_THRESHOLD = 600
+    const offer = () => {
+      window.removeEventListener('scroll', onScroll)
+      setMode('introduction')
+    }
+    const onScroll = () => { if (window.scrollY > HERO_SCROLL_THRESHOLD) offer() }
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // Someone who reads the hero without scrolling still gets the offer, but
+    // late enough that the page has had its first impression.
+    const fallback = window.setTimeout(offer, 25_000)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.clearTimeout(fallback)
+    }
   }, [])
 
   useEffect(() => {

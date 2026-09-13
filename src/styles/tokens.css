@@ -4,18 +4,18 @@
    The only place design values are defined. Every component consumes tokens;
    no hard-coded colour, shadow, radius, blur or opacity belongs anywhere else.
 
-   Reconciled against the Master Build Command §5 after the Phase 0 audit:
+   Reconciled against the Master Build Command §5 and the approved reference
+   mockups. Where the two disagree, the mockups win - they are the more recent
+   and more concrete instruction:
 
-   - Ink is green-biased, not navy. §5 proposed navy #0B1B33 as primary ink;
-     the approved direction keeps CSS Vista's green identity, so the ink ramp
-     is built on the brand hue instead. Navy survives only as a cool neutral
-     influence in the hairlines and shadows.
-   - Brand green is #0F6B4A ("Field"), lifted from the live #063D2B, which was
-     too dark to carry the white-first direction in §4.
-   - Gold is #C79E23, sampled from the existing theme and near-identical to the
-     #C9A227 proposed in §5. Featured and award markers only.
-   - Blue is retained from §5 as an informational accent only. It must never
-     become a second brand colour.
+   - Ink is navy (#1B3A5F), as the mockups show. §5 proposed navy too; an
+     earlier green-ink direction was tried and rejected on sight.
+   - Each product area owns an accent colour - blue, rose, green, amber, teal,
+     violet - carried by the icon tile on its cards. This, not tinted section
+     bands, is what separates sections and keeps the page from reading white.
+   - CSS Vista green (#0F6B4A) is the logo and brand mark. It no longer carries
+     typography, and is one accent among several.
+   - Gold #C79E23 is sampled from the live theme; featured and award markers.
    - Light only. There is no dark tier by decision; see §9.
    ========================================================================== */
 
@@ -89,40 +89,46 @@
 }
 
 :root {
-  /* -------------------------------------------------------------- canvas --- */
+  /* -------------------------------------------------------------- canvas ---
+     Cool, blue-leaning near-whites. The reference mockups sit on a soft blue
+     wash rather than paper white, which is what stops the page reading flat. */
   --cv-white:      #FFFFFF;
-  --cv-canvas:     #F9FBFA;   /* page background */
-  --cv-icy:        #EFF4F1;   /* subtle fills, inactive tabs */
-  --cv-hairline:   #E0E7E3;
+  --cv-canvas:     #FBFDFE;
+  --cv-canvas-2:   #F2F7FB;
+  --cv-icy:        #EFF4F8;
+  --cv-hairline:   #E4EAF1;
+  --cv-hairline-2: #EDF2F7;
 
   /* ----------------------------------------------------------------- ink ---
-     Green-biased, never pure black. Carries typography and primary actions. */
-  --cv-ink-900:    #102C21;   /* headings, primary button fill */
-  --cv-ink-800:    #1B3A2C;
-  --cv-ink-700:    #3F4D47;   /* body copy */
-  --cv-ink-500:    #77837C;   /* metadata, captions */
-  --cv-ink-400:    #9AA5A0;   /* placeholders, disabled */
+     Navy, per the reference mockups. Green stays the brand mark and one accent
+     among several rather than carrying the typography. */
+  --cv-ink-900:    #1B3A5F;   /* headings */
+  --cv-ink-800:    #254B78;   /* secondary headings */
+  --cv-ink-deep:   #12294A;   /* primary button fill, deepest type */
+  --cv-ink-700:    #5A6B7D;   /* body copy */
+  --cv-ink-500:    #7E8DA0;   /* metadata */
+  --cv-ink-400:    #A6B2C0;   /* placeholders, disabled, arrows */
 
-  /* ------------------------------------------------------------- accents ---
-     Restrained. Green leads; blue is informational only and must never become
-     a second brand colour; gold is reserved for featured and award markers. */
-  --cv-green-600:  #0F6B4A;   /* CSS Vista green - primary */
-  --cv-green-500:  #14855C;
-  --cv-green-050:  #E8F5EE;
-  --cv-blue-600:   #1B4DD8;
-  --cv-blue-500:   #3B74F0;
-  --cv-blue-050:   #EEF3FE;
+  /* ------------------------------------------------- section accent tiles ---
+     Each product area owns a colour. This is what carries the page - not
+     tinted bands - so a student can tell sections apart at a glance. */
+  --cv-blue-600:   #3B82F6;  --cv-blue-050:   #EFF6FF;
+  --cv-rose-600:   #E5484D;  --cv-rose-050:   #FFF1F2;
+  --cv-green-600:  #0F9D63;  --cv-green-050:  #ECFDF4;
+  --cv-amber-600:  #E19B12;  --cv-amber-050:  #FFF9EC;
+  --cv-teal-600:   #0E9BA6;  --cv-teal-050:   #ECFBFC;
+  --cv-violet-600: #6366F1;  --cv-violet-050: #EEF0FE;
+
+  /* brand green - logo, brand moments, success only */
+  --cv-brand:      #0F6B4A;
+  --cv-brand-050:  #E9F6EF;
   --cv-gold-500:   #C79E23;
-  --cv-gold-050:   #FAF3DF;
+  --cv-gold-050:   #FBF4E0;
 
-  /* -------------------------------------------------------- semantic ------
-     Separate from the accent hue. Not brand colour. */
-  --cv-good-600:   #0F8A5F;
-  --cv-good-050:   #E8F6EF;
-  --cv-warn-600:   #9A5B08;
-  --cv-warn-050:   #FDF3E3;
-  --cv-bad-600:    #A33A2A;
-  --cv-bad-050:    #FBEEEC;
+  /* -------------------------------------------------------- semantic ------ */
+  --cv-good-600:   #0F9D63;  --cv-good-050:   #ECFDF4;
+  --cv-warn-600:   #9A5B08;  --cv-warn-050:   #FDF3E3;
+  --cv-bad-600:    #E5484D;  --cv-bad-050:    #FFF1F2;
 
   /* -------------------------------------------- glass opacity tiers -------
      White base. See §5.1 for the tier-to-surface mapping. */
@@ -141,18 +147,18 @@
 
   /* ------------------------------------------- borders & inner highlight ---
      Hairlines keep a cool navy-green cast so edges read as glass, not grey. */
-  --cv-border-fine:   1px solid rgba(16, 45, 34, 0.08);
-  --cv-border-icy:    1px solid rgba(150, 185, 170, 0.34);
+  --cv-border-fine:   1px solid rgba(27, 58, 95, 0.08);
+  --cv-border-icy:    1px solid rgba(180, 205, 230, 0.42);
   --cv-highlight-top:  inset 0 1px 0 rgba(255, 255, 255, 0.92);
   --cv-highlight-soft: inset 0 1px 0 rgba(255, 255, 255, 0.65);
 
   /* -------------------------------------------------------------- shadows ---
      Broad ambient plus tight contact, always paired. Green-biased so they
      never read as the grey drop shadows §9 rejects. */
-  --cv-shadow-1: 0 1px 2px rgba(16, 45, 34, 0.04), 0 8px 24px -8px rgba(16, 45, 34, 0.06);
-  --cv-shadow-2: 0 2px 4px rgba(16, 45, 34, 0.05), 0 16px 40px -12px rgba(16, 45, 34, 0.10);
-  --cv-shadow-3: 0 2px 6px rgba(16, 45, 34, 0.06), 0 24px 64px -16px rgba(16, 45, 34, 0.14);
-  --cv-shadow-inset-press: inset 0 1px 2px rgba(16, 45, 34, 0.10);
+  --cv-shadow-1: 0 1px 2px rgba(27, 58, 95, 0.04), 0 8px 24px -8px rgba(27, 58, 95, 0.06);
+  --cv-shadow-2: 0 2px 4px rgba(27, 58, 95, 0.05), 0 16px 40px -12px rgba(27, 58, 95, 0.10);
+  --cv-shadow-3: 0 2px 6px rgba(27, 58, 95, 0.06), 0 24px 64px -16px rgba(27, 58, 95, 0.14);
+  --cv-shadow-inset-press: inset 0 1px 2px rgba(27, 58, 95, 0.10);
 
   /* --------------------------------------------------------------- radii --- */
   --cv-r-sm:   10px;
