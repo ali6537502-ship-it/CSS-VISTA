@@ -137,11 +137,11 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       try { await hostingerRequest('auth/verify-email.php', { method: 'POST', body: JSON.stringify({ token }) }); return {} }
       catch (error) { return { error: errorMessage(error) } }
     },
-    async updatePassword(password, currentPassword, resetToken) {
+    async updatePassword(password, currentPassword, resetToken, recovery) {
       try {
-        await hostingerRequest(resetToken ? 'auth/reset-password.php' : 'auth/change-password.php', { method: 'POST', body: JSON.stringify(resetToken ? { password, token: resetToken } : { password, current_password: currentPassword }) })
+        await hostingerRequest(resetToken || recovery ? 'auth/reset-password.php' : 'auth/change-password.php', { method: 'POST', body: JSON.stringify(recovery ? { password, ...recovery } : resetToken ? { password, token: resetToken } : { password, current_password: currentPassword }) })
         setPasswordRecovery(false)
-        if (resetToken) applyUser(null)
+        if (resetToken || recovery) applyUser(null)
         broadcast()
         return {}
       } catch (error) { return { error: errorMessage(error) } }

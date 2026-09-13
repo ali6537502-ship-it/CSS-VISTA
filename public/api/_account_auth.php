@@ -20,6 +20,11 @@ function account_auth_schema(PDO $pdo): void {
         KEY account_mail_queue_idx(status,next_attempt_at),
         FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS account_reset_codes (
+    user_id CHAR(36) PRIMARY KEY, code_hash CHAR(64) NOT NULL,
+    attempts INT NOT NULL DEFAULT 0, expires_at DATETIME(6) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $ready = true;
 }
 function account_require_json_origin(): void {
@@ -69,8 +74,11 @@ function account_queue_link(PDO $pdo, array $user, string $purpose): void {
     $pdo->prepare("UPDATE account_mail_outbox SET status='cancelled',message_cipher=NULL WHERE user_id=? AND purpose=? AND status IN ('pending','failed')")->execute([$user['id'],$purpose]);
     $base=rtrim((string)cssv_env('CSSV_SITE_ORIGIN','https://www.css-vista.com'),'/');
     $link=$base.'/account?'.($verification?'verify=1':'reset=1').'#token='.rawurlencode($token);
+    $code = $verification ? null : str_pad((string)random_int(0,999999),6,'0',STR_PAD_LEFT);
+    if ($code !== null) $pdo->prepare('INSERT INTO account_reset_codes(user_id,code_hash,attempts,expires_at) VALUES(?,?,0,DATE_ADD(NOW(6),INTERVAL 10 MINUTE)) ON DUPLICATE KEY UPDATE code_hash=VALUES(code_hash),attempts=0,expires_at=VALUES(expires_at)')->execute([$user['id'],cssv_hash_secret($user['id'].':'.$code)]);
     $subject=$verification?'Confirm your free CSS Vista account':'Reset your CSS Vista password';
     $text=$verification?"Confirm your email to start using your free CSS Vista account:\n\n":"A password reset was requested for your CSS Vista account. Choose a new password here:\n\n";
+    if ($code !== null) $text.="Your password reset code: ".$code."\n\nEnter this code with your email at ".$base."/account?recovery=code\nThe code expires in 10 minutes and allows five attempts.\n\nOr use this reset link:\n";
     $text.=$link."\n\nThis link can be used once and expires in ".($verification?'24 hours':'30 minutes').". If you did not request this, you can ignore this email.\n\nCSS Vista";
     $pdo->prepare('INSERT INTO account_mail_outbox(id,user_id,purpose,message_cipher,expires_at) VALUES(?,?,?,?,?)')->execute([cssv_uuid_v4(),$user['id'],$purpose,account_encrypt_mail(['to'=>$user['email'],'subject'=>$subject,'text'=>$text]),$expires]);
 }

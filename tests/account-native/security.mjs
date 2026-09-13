@@ -142,4 +142,30 @@ assert.equal((await db({ action: 'delete_all', confirmation: 'DELETE MY FACTBOOK
 assert.equal((await db(query('factbook_subjects', 'select'))).data.data.length, 0)
 assert.equal((await call('factbook/media.php?id=' + mediaId, undefined, a)).status, 404)
 for (const file of await readdir('dist/assets')) if (file.endsWith('.js')) assert.doesNotMatch(await readFile('dist/assets/' + file, 'utf8'), /supabase\.co|sb_publishable_|@supabase/)
+execFileSync('php',['tests/account-native/expire.php',otherEmail,'clear-test-rate'])
+// Hostinger recovery codes are one-use, expire and allow at most five guesses.
+async function latestCode(email) {
+  for (const file of (await readdir('test-artifacts/account-mail')).reverse()) {
+    const raw=await readFile('test-artifacts/account-mail/'+file,'utf8')
+    if(raw.includes(email)) { const code=raw.match(/password reset code: ([0-9]{6})/)?.[1]; if(code)return code }
+  }
+  throw new Error('No native reset code captured')
+}
+assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
+const firstCode=await latestCode(otherEmail)
+const linkedToken=await mailToken(otherEmail,'reset')
+assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:firstCode,password:next})).status,200)
+assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:firstCode,password})).status,400)
+assert.equal((await call('auth/reset-password.php',{token:linkedToken,password})).status,400,'Code reset left old link usable')
+assert.equal((await call('auth/session.php',undefined,b)).data.authenticated,false)
+assert.equal((await call('auth/login.php',{email:otherEmail,password:next},b)).status,200)
+assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
+const guessedCode=await latestCode(otherEmail)
+const wrongCode=guessedCode==='000000'?'000001':'000000'
+for(let i=0;i<5;i++)assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:wrongCode,password})).status,400)
+assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:guessedCode,password})).status,400,'Five-guess limit was bypassed')
+assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
+const expiredCode=await latestCode(otherEmail)
+execFileSync('php',['tests/account-native/expire.php',otherEmail])
+assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:expiredCode,password})).status,400,'Expired code accepted')
 console.log('PASS: native registration, email verification, password recovery, single-use tokens, old-session revocation, password change, cookie security, all 12 mandatory profile checks and unlock/relock, private factbook CRUD/search/revisions/media/collections, cross-user isolation, rollback, owner CMS and persistence.')

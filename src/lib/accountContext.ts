@@ -32,7 +32,7 @@ export interface AccountContextValue {
   resendVerification(email: string): Promise<ActionResult>
   verifyEmail(token: string): Promise<ActionResult>
   requestPasswordReset(email: string): Promise<ActionResult>
-  updatePassword(password: string, currentPassword?: string, resetToken?: string): Promise<ActionResult>
+  updatePassword(password: string, currentPassword?: string, resetToken?: string, recovery?: { email: string; code: string }): Promise<ActionResult>
   clearPasswordRecovery(): void
   signOut(): Promise<ActionResult>
   syncNow(): Promise<ActionResult>

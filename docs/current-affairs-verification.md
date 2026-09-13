@@ -25,7 +25,9 @@ Live sign-up, email confirmation, password recovery and the authenticated browse
 
 ## Deployment verification
 
-The daily briefing feature is already deployed through PR #18. The native Hostinger replacement is held in draft PR #21 and is not deployed. Automatic approval review rejected the first live transfer because it includes existing students' password hashes and personal data and requires explicit user approval. No source account data was sent. Temporary source snapshots and their helper schema/HTTP extension were removed. The original source remains intact. Transfer approval, a fresh bounded signing grant, a fresh source snapshot and successful reconciliation must precede the native release; the expired grant must not be reused.
+The daily briefing feature is already deployed through PR #18. The native Hostinger replacement is held in draft PR #21 and is not deployed. The owner explicitly approved the account/password-hash/private-study-data transfer on 13 September 2026. The bounded public grant was renewed in PR #23, and the first 202 account records transferred with field reconciliation. Native cutover follows completion of all dataset batches and CI; the original source remains intact.
+
+The mandatory-profile implementation at `5b85d89c1b18477dcbfff6a4598fbafb4b91ba72` passed both Hostinger build paths ([run 34753986514](https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/34753986514)) and integration ([run 34753986522](https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/34753986522)). The tests validate all 12 required fields, missing-photo denial, successful private photo upload, service unlocking and relocking, and unchanged personal-data isolation. Reset-code coverage is added to the same disposable suite.
 
 After a push to main, the workflow checks the existing production backend and every new account route. It verifies that anonymous requests cannot read current-affairs content or internal release files. GitHub build success alone is not treated as proof that Hostinger deployed the change.
 
