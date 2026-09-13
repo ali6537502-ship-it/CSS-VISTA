@@ -168,4 +168,6 @@ assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).statu
 const expiredCode=await latestCode(otherEmail)
 execFileSync('php',['tests/account-native/expire.php',otherEmail])
 assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:expiredCode,password})).status,400,'Expired code accepted')
+assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
+assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,429,'Recovery request limit was not enforced')
 console.log('PASS: native registration, email verification, password recovery, single-use tokens, old-session revocation, password change, cookie security, all 12 mandatory profile checks and unlock/relock, private factbook CRUD/search/revisions/media/collections, cross-user isolation, rollback, owner CMS and persistence.')
