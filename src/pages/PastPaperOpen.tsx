@@ -23,7 +23,17 @@ function paperPageTitle(paper: Paper) {
 }
 
 function paperPageDescription(paper: Paper) {
-  return `Open and download the ${paperPageTitle(paper)} on CSS Vista.`
+  return `Open and download the ${paperPageTitle(paper)} on CSS Vista, with paper details and related ${paper.subject} past papers.`
+}
+
+function relatedPastPapers(paper: Paper, allPapers: Paper[]) {
+  const sameSubject = allPapers
+    .filter((candidate) => candidate.id !== paper.id && candidate.examination === paper.examination && candidate.subject === paper.subject)
+    .sort((left, right) => right.year - left.year)
+  if (sameSubject.length) return sameSubject.slice(0, 10)
+  return allPapers
+    .filter((candidate) => candidate.id !== paper.id && candidate.examination === paper.examination && candidate.year === paper.year)
+    .slice(0, 10)
 }
 
 export default function PastPaperOpen() {
@@ -34,6 +44,8 @@ export default function PastPaperOpen() {
   )
   const [pdfAvailable, setPdfAvailable] = useState<boolean | null>(null)
   const pdfUrl = paper?.fileUrl ? versionedPaperUrl(paper.fileUrl) : ''
+  const allPapers = useMemo(() => mergedPastPapers(seedPapers), [])
+  const related = useMemo(() => (paper ? relatedPastPapers(paper, allPapers) : []), [paper, allPapers])
 
   useEffect(() => {
     if (!paper) {
@@ -95,7 +107,14 @@ export default function PastPaperOpen() {
           contentUrl: paper.fileUrl ? `${SITE_ORIGIN}${paper.fileUrl}` : undefined,
           encodingFormat: 'application/pdf',
           inLanguage: 'en',
+          about: { '@type': 'Thing', name: paper.subject },
+          educationalLevel: 'Competitive examination',
           learningResourceType: 'Past examination paper',
+          isPartOf: {
+            '@type': 'CollectionPage',
+            name: `${paper.examination} ${paper.year} Past Papers`,
+            url: `${SITE_ORIGIN}/past-papers/${paper.examination.toLowerCase()}/${paper.year}`,
+          },
           provider: { '@id': `${SITE_ORIGIN}/#organization` },
         },
         {
@@ -103,7 +122,8 @@ export default function PastPaperOpen() {
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'CSS Vista', item: `${SITE_ORIGIN}/` },
             { '@type': 'ListItem', position: 2, name: 'Past Papers', item: `${SITE_ORIGIN}/past-papers` },
-            { '@type': 'ListItem', position: 3, name: paperPageTitle(paper), item: canonicalUrl },
+            { '@type': 'ListItem', position: 3, name: `${paper.examination} ${paper.year}`, item: `${SITE_ORIGIN}/past-papers/${paper.examination.toLowerCase()}/${paper.year}` },
+            { '@type': 'ListItem', position: 4, name: paperPageTitle(paper), item: canonicalUrl },
           ],
         },
       ],
@@ -207,6 +227,77 @@ export default function PastPaperOpen() {
               <Link to="/past-papers" className="text-sm font-bold text-emerald-800 underline underline-offset-2">Return to Past Papers</Link>
             </div>
           </section>
+        )}
+
+        <section className="rounded-xl border bg-white p-5">
+          <h2 className="font-display text-xl font-bold text-pine">Paper details</h2>
+          <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div>
+              <dt className="text-xs text-muted-foreground">Examination</dt>
+              <dd className="font-bold text-pine">{paper.examination}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">Year</dt>
+              <dd className="font-bold text-pine">{paper.year}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">Subject</dt>
+              <dd className="font-bold text-pine">{paper.subject}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">Paper</dt>
+              <dd className="font-bold text-pine">{paper.paper}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">Subject type</dt>
+              <dd className="font-bold text-pine">{paper.subjectType}</dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">Mode</dt>
+              <dd className="font-bold text-pine">{paper.mode}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section>
+          <h2 className="font-display text-xl font-bold text-pine">How to use this past paper</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            This archive page identifies the examination, year, subject, paper designation and mode recorded for this
+            paper and links directly to the stored PDF. Review the wording and structure of the questions, then
+            compare the same subject across other available years to identify recurring areas and changes in
+            emphasis. Past papers show what was previously examined; they do not guarantee the content of a future
+            paper.
+          </p>
+        </section>
+
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to={`/past-papers/${paper.examination.toLowerCase()}/${paper.year}`}
+            className="rounded-lg border px-4 py-3 text-sm font-bold text-pine hover:bg-secondary"
+          >
+            All {paper.examination} {paper.year} papers
+          </Link>
+          <Link to="/past-papers" className="rounded-lg border px-4 py-3 text-sm font-bold text-pine hover:bg-secondary">
+            Browse the complete CSS Vista past-paper archive
+          </Link>
+        </div>
+
+        {related.length > 0 && (
+          <nav aria-label="Related past papers" className="rounded-xl border bg-white p-5">
+            <h2 className="font-display text-xl font-bold text-pine">Related past papers</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {related.map((candidate) => (
+                <li key={candidate.id}>
+                  <Link
+                    to={`/past-papers/view/${candidate.id}`}
+                    className="font-semibold text-emerald-800 underline underline-offset-2"
+                  >
+                    {paperPageTitle(candidate)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         )}
 
       </div>

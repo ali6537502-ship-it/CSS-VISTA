@@ -50,7 +50,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/subjects/compulsory/islamic-studies', 'CSS Islamic Studies', 'Study the CSS Islamic Studies syllabus, core themes and preparation resources.', 'CSS Islamic Studies'),
   publicPage('/subjects/optional', 'CSS Optional Subjects', 'Browse CSS optional subjects and subject-selection information organised by FPSC groups.', 'CSS optional subjects'),
   publicPage('/subjects/selector', 'CSS Subject Selection Tool', 'Compare CSS optional subjects by FPSC group and use the interactive selection tool to build a valid subject combination.', 'CSS subject selection tool', { adMode: 'none', minimumHeight: 0 }),
-  publicPage('/notes', 'CSS Notes by Sir Ali Hassan Sargana', 'Browse CSS notes topics, authorised samples and subject packages for Current Affairs, Pakistan Affairs, Political Science and Criminology.' , 'CSS notes by Sir Ali Hassan Sargana'),
+  publicPage('/notes', 'Free CSS Notes (PDF) by Sir Ali Hassan Sargana', 'Browse CSS notes topics, authorised samples and subject packages for Current Affairs, Pakistan Affairs, Political Science and Criminology.' , 'CSS notes by Sir Ali Hassan Sargana'),
   protectedPage('/notes/view/:productId/:documentId', 'CSS Notes Viewer', 'View an authorised CSS notes sample.', { match: 'pattern' }),
   publicPage('/past-papers', 'CSS Past Papers 2016–2026', 'Browse CSS past papers from 2016 to 2026 by year and subject, with downloadable FPSC paper PDFs plus related PMS, PPSC and MPT archives.', 'CSS past papers 2016–2026'),
   publicPage('/past-papers/:exam/:year', 'Past Papers by Year', 'Browse the available past-paper collection for this examination and year.', 'Past papers by year', { match: 'pattern' }),
