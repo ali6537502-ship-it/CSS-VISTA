@@ -34,6 +34,10 @@ if (target === 'hostinger') {
   process.env.SITE_ORIGIN ||= 'https://css-vista.ali6537.chatgpt.site'
 }
 
+// Keep the per-subject analysis files in step with the generated payload
+// before anything copies public/ into the build output.
+run('scripts/split-past-paper-analysis.mjs')
+
 run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])
 await import(`./prepare-sites-build.mjs?target=${target}`)
@@ -44,6 +48,7 @@ if (target === 'hostinger') {
   await import('./enrich-past-paper-collections-before-validation.mjs')
   if (strictContentValidation) await import('./strengthen-longtail-search-pages.mjs')
   else await import('./safe-longtail-enrichment.mjs')
+  await import('./expand-book-summary-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')

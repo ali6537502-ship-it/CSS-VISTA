@@ -1,4 +1,3 @@
-import mockBankData from './mock-bank.json'
 import {
   curatedAbilityQuestions, curatedCurrentAffairsQuestions, curatedEnglishQuestions, curatedUrduTranslationQuestions,
 } from './mockCurated'
@@ -29,7 +28,24 @@ type SectionSpec = {
   seedCap?: number
 }
 
-const mockBank = mockBankData as Record<string, BankQuestion[]>
+// The mock bank is ~600 KB and only the three competitive mocks need it.
+// Importing it statically put it in the chunk every quiz mode loads, so it is
+// fetched on demand and cached for the rest of the session instead.
+let mockBank: Record<string, BankQuestion[]> = {}
+let mockBankRequest: Promise<Record<string, BankQuestion[]>> | null = null
+
+export function loadMockBank(): Promise<Record<string, BankQuestion[]>> {
+  mockBankRequest ??= import('./mock-bank.json')
+    .then((module) => {
+      mockBank = (module.default ?? module) as unknown as Record<string, BankQuestion[]>
+      return mockBank
+    })
+    .catch(() => {
+      mockBankRequest = null
+      return {}
+    })
+  return mockBankRequest
+}
 
 const normalise = (value: string) => value
   .toLocaleLowerCase('en')
@@ -107,39 +123,77 @@ function fromBank(...categories: string[]) {
   return categories.flatMap((category) => mockBank[category] ?? [])
 }
 
-const islamicPool = [...mapSeed(['islamiat']), ...fromBank('islamic-gk')]
-const urduGeneralPool = [...mapSeed(['urdu']), ...fromBank('urdu-language')]
-const urduPool = [...curatedUrduTranslationQuestions, ...urduGeneralPool]
-const englishComprehensionPool = curatedEnglishQuestions.filter((question) => question.s === 'Comprehension')
-const englishGeneralPool = [...curatedEnglishQuestions.filter((question) => question.s !== 'Comprehension'), ...mapSeed(['english'])]
-const englishPool = [...englishGeneralPool, ...englishComprehensionPool]
-const abilityPool = [...curatedAbilityQuestions, ...auditedMptAbilityAdditions, ...mapSeed(['abilities', 'reasoning'])]
-const currentPool = [...curatedCurrentAffairsQuestions, ...mapSeed(['current'])]
+/**
+ * Pools are built after the bank has loaded, not at module load.
+ *
+ * They used to be module-level constants. Once the bank became a fetch rather
+ * than a static import, every fromBank() call ran against an empty object and
+ * the pools were permanently frozen without their bank questions - so the mocks
+ * silently built short papers. Building them on first use, behind the same
+ * memoised load, keeps the payload saving without that trap.
+ */
+interface MockPools {
+  islamicPool: BankQuestion[]
+  urduGeneralPool: BankQuestion[]
+  urduPool: BankQuestion[]
+  englishComprehensionPool: BankQuestion[]
+  englishGeneralPool: BankQuestion[]
+  englishPool: BankQuestion[]
+  abilityPool: BankQuestion[]
+  currentPool: BankQuestion[]
+  pakistanPool: BankQuestion[]
+  sciencePool: BankQuestion[]
+  organisationsPool: BankQuestion[]
+  geographyPool: BankQuestion[]
+  worldPool: BankQuestion[]
+  computerPool: BankQuestion[]
+  economyPool: BankQuestion[]
+  generalPool: BankQuestion[]
+}
 
-const pakistanBank = fromBank('pakistan-affairs').filter((question) => (
-  !question.s
-  || /Pakistan Movement|British Rule|Ideological|Reform|Constitution of Pakistan|Population|Economy|Foreign Policy|State Formation/i.test(question.s)
-))
-const pakistanHistorySeed = mapSeed(['history']).filter((question) => /Pakistan/i.test(question.s || ''))
-const pakistanPool = [...mapSeed(['pakistan']), ...pakistanHistorySeed, ...pakistanBank]
-const sciencePool = [
-  ...mapSeed(['science']),
-  ...fromBank('science', 'everyday-science', 'environment', 'solar-system'),
-]
-const organisationsPool = [...mapSeed(['organisations']), ...fromBank('international-organisations', 'united-nations')]
-const geographyPool = [
-  ...mapSeed(['geography']),
-  ...fromBank('capitals', 'currencies', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'famous-places', 'international-borders'),
-]
-const worldPool = [...mapSeed(['gk']), ...geographyPool]
-const computerPool = fromBank('computer-basics')
-const economyPool = fromBank('economics')
-const generalPool = [
-  ...mapSeed(['gk', 'geography', 'organisations']),
-  ...organisationsPool,
-  ...worldPool,
-  ...fromBank('discoveries-inventions', 'awards-honours', 'important-days', 'national-symbols'),
-]
+let cachedPools: MockPools | null = null
+
+function buildPools(): MockPools {
+  const islamicPool = [...mapSeed(['islamiat']), ...fromBank('islamic-gk')]
+  const urduGeneralPool = [...mapSeed(['urdu']), ...fromBank('urdu-language')]
+  const urduPool = [...curatedUrduTranslationQuestions, ...urduGeneralPool]
+  const englishComprehensionPool = curatedEnglishQuestions.filter((question) => question.s === 'Comprehension')
+  const englishGeneralPool = [...curatedEnglishQuestions.filter((question) => question.s !== 'Comprehension'), ...mapSeed(['english'])]
+  const englishPool = [...englishGeneralPool, ...englishComprehensionPool]
+  const abilityPool = [...curatedAbilityQuestions, ...auditedMptAbilityAdditions, ...mapSeed(['abilities', 'reasoning'])]
+  const currentPool = [...curatedCurrentAffairsQuestions, ...mapSeed(['current'])]
+
+  const pakistanBank = fromBank('pakistan-affairs').filter((question) => (
+    !question.s
+    || /Pakistan Movement|British Rule|Ideological|Reform|Constitution of Pakistan|Population|Economy|Foreign Policy|State Formation/i.test(question.s)
+  ))
+  const pakistanHistorySeed = mapSeed(['history']).filter((question) => /Pakistan/i.test(question.s || ''))
+  const pakistanPool = [...mapSeed(['pakistan']), ...pakistanHistorySeed, ...pakistanBank]
+  const sciencePool = [
+    ...mapSeed(['science']),
+    ...fromBank('science', 'everyday-science', 'environment', 'solar-system'),
+  ]
+  const organisationsPool = [...mapSeed(['organisations']), ...fromBank('international-organisations', 'united-nations')]
+  const geographyPool = [
+    ...mapSeed(['geography']),
+    ...fromBank('capitals', 'currencies', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'famous-places', 'international-borders'),
+  ]
+  const worldPool = [...mapSeed(['gk']), ...geographyPool]
+  const computerPool = fromBank('computer-basics')
+  const economyPool = fromBank('economics')
+  const generalPool = [
+    ...mapSeed(['gk', 'geography', 'organisations']),
+    ...organisationsPool,
+    ...worldPool,
+    ...fromBank('discoveries-inventions', 'awards-honours', 'important-days', 'national-symbols'),
+  ]
+
+  return {
+    islamicPool, urduGeneralPool, urduPool, englishComprehensionPool, englishGeneralPool,
+    englishPool, abilityPool, currentPool, pakistanPool, sciencePool, organisationsPool,
+    geographyPool, worldPool, computerPool, economyPool, generalPool,
+  }
+}
 
 const rejectedQuestion = /Reuters|publication date|news agency published|GeoNames|ISO alpha|ISO 4217|UN M49|demonym|boiling point in kelvin|capital designated by Israel|In the Important Personalities section|Choose the option that correctly completes|Which answer correctly identifies|Which statement about the capital|Select the correct association concerning|which value is correctly recorded under|standard Kufan numbering used by Quran\.com|Which name matches both|Which actor-description pair|principal location connected with|Who or which body is chiefly identified|Which description fits|Which institution or personality is correctly connected|Choose the accurate person-and-description match|\[Parallel drill/i
 const rejectedOption = /all of the above|none of (?:the above|these)|both a and b/i
@@ -270,7 +324,12 @@ export const MOCK_BLUEPRINTS: Record<CompetitiveMockKind, MockSection[]> = {
   'one-paper': onePaperBlueprint,
 }
 
-function sectionsFor(kind: CompetitiveMockKind): SectionSpec[] {
+function sectionsFor(kind: CompetitiveMockKind, pools: MockPools): SectionSpec[] {
+  const {
+    islamicPool, urduGeneralPool, urduPool, englishComprehensionPool, englishGeneralPool,
+    englishPool, abilityPool, currentPool, pakistanPool, sciencePool, organisationsPool,
+    geographyPool, worldPool, computerPool, economyPool, generalPool,
+  } = pools
   if (kind === 'mpt') {
     return [
       { label: 'Islamic Studies', count: 20, pool: islamicPool, seedCap: 8 },
@@ -333,12 +392,23 @@ export function currentPakistanDateKey(date = new Date()) {
   }).format(date)
 }
 
-export function buildCompetitiveMock(kind: CompetitiveMockKind, sessionDateKey = currentPakistanDateKey()): BuiltMockPaper {
+/**
+ * Async because the mock bank is fetched rather than bundled. It awaits the
+ * load itself: a synchronous version silently returned a short paper whenever a
+ * caller forgot to load the bank first, which is exactly the trap the CI mock
+ * test fell into.
+ */
+export async function buildCompetitiveMock(
+  kind: CompetitiveMockKind,
+  sessionDateKey = currentPakistanDateKey(),
+): Promise<BuiltMockPaper> {
+  await loadMockBank()
+  cachedPools ??= buildPools()
   const blueprint = MOCK_BLUEPRINTS[kind]
   const usedIds = new Set<string>()
   const usedStems = new Set<string>()
   const selectedAcrossPaper: BankQuestion[] = []
-  const questions = sectionsFor(kind).flatMap((spec) => (
+  const questions = sectionsFor(kind, cachedPools).flatMap((spec) => (
     selectSection(spec, `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper)
   ))
   validatePaper(questions, blueprint)

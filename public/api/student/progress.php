@@ -31,7 +31,7 @@ if ($method === 'DELETE') {
         $pdo->commit();
     } catch (Throwable $error) {
         $pdo->rollBack();
-        error_log('CSSV progress reset failed: ' . $error->getMessage());
+        error_log('CSSV progress reset failed: ' . get_class($error) . ' ' . $error->getCode());
         cssv_fail('Progress could not be reset.', 503, 'progress_reset_failed');
     }
     cssv_json(['ok' => true]);
@@ -39,7 +39,7 @@ if ($method === 'DELETE') {
 
 $body = cssv_request_json(4 * 1024 * 1024);
 $payload = $body['payload'] ?? null;
-if (!is_array($payload) || array_is_list($payload)) {
+if (!is_array($payload) || ($payload !== [] && array_is_list($payload))) {
     cssv_fail('Progress data is invalid.', 422, 'invalid_progress');
 }
 $encoded = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

@@ -1,5 +1,12 @@
 // Fact-checked game data for the CSS Games centre
-export interface MatchPair { concept: string; match: string }
+export interface MatchPair {
+  concept: string
+  match: string
+  /** Set when the pair came from a real MCQ, so attempts can be recorded. */
+  questionId?: string
+  /** Category the question belongs to, for attempt records. */
+  category?: string
+}
 export interface TimelineItem { event: string; year: number }
 export interface CountryFact { country: string; clue: string }
 

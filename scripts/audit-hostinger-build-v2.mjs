@@ -23,6 +23,8 @@ function extractLocs(xml) {
 }
 
 const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
+const bookLibrary = JSON.parse(await readFile(join(root, 'public', 'book-summaries', 'index.json'), 'utf8'))
+const registeredBooks = Array.isArray(bookLibrary.books) ? bookLibrary.books : []
 
 await Promise.all([
   access(join(dist, 'index.html')),
@@ -42,10 +44,11 @@ await Promise.all([
   access(join(dist, 'googlec96e2248070e0570.html')),
   access(join(dist, 'seo', 'routes', 'notes.html')),
   access(join(dist, 'seo', 'past-papers')),
+  access(join(dist, 'seo', 'book-summaries')),
   access(join(dist, '404.html')),
 ])
 
-const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, notesHtml, paperFiles, ...childXmls] = await Promise.all([
+const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, notesHtml, paperFiles, bookFiles, ...childXmls] = await Promise.all([
   readFile(join(dist, 'index.html'), 'utf8'),
   readFile(join(dist, '.htaccess'), 'utf8'),
   readFile(join(dist, 'robots.txt'), 'utf8'),
@@ -54,6 +57,7 @@ const [indexHtml, htaccess, robots, sitemapIndex, adsTxt, verificationFile, note
   readFile(join(dist, 'googlec96e2248070e0570.html'), 'utf8'),
   readFile(join(dist, 'seo', 'routes', 'notes.html'), 'utf8'),
   readdir(join(dist, 'seo', 'past-papers')),
+  readdir(join(dist, 'seo', 'book-summaries')),
   ...childSitemaps.map((name) => readFile(join(dist, name), 'utf8')),
 ])
 
@@ -68,9 +72,13 @@ const allLocs = [...coreLocs, ...gkLocs, ...collectionLocs, ...paperLocs]
 const uniqueLocs = new Set(allLocs)
 const collectionCount = new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size
 
-assert(coreLocs.length === INDEXABLE_STATIC_ROUTES.length, `Expected ${INDEXABLE_STATIC_ROUTES.length} core sitemap URLs, found ${coreLocs.length}`)
+const expectedCoreCount = INDEXABLE_STATIC_ROUTES.length + registeredBooks.length
+assert(coreLocs.length === expectedCoreCount, `Expected ${expectedCoreCount} core sitemap URLs, found ${coreLocs.length}`)
 for (const route of INDEXABLE_STATIC_ROUTES) {
   assert(coreLocs.includes(`${siteOrigin}${route.path}`), `Core sitemap is missing ${route.path}`)
+}
+for (const book of registeredBooks) {
+  assert(coreLocs.includes(`${siteOrigin}/book-summaries/${book.slug}`), `Core sitemap is missing book summary ${book.slug}`)
 }
 assert(gkLocs.length > 0, 'GK sitemap must contain at least one category URL')
 assert(gkLocs.every((url) => /^https:\/\/www\.css-vista\.com\/gk\/cat\/[^/?#]+\/?$/.test(url)), 'GK sitemap contains a non-category URL')
@@ -132,7 +140,9 @@ assert(htaccess.includes('sitemap(?:-[A-Za-z0-9-]+)?'), 'Crawler-file rules do n
 assert(robots.includes(`${siteOrigin}/sitemap.xml`), 'robots.txt does not advertise the canonical sitemap index')
 
 assert(paperFiles.filter((name) => name.endsWith('.html')).length === registeredPapers.length, `Expected ${registeredPapers.length} direct past-paper SEO pages`)
+assert(bookFiles.filter((name) => name.endsWith('.html')).length === registeredBooks.length, `Expected ${registeredBooks.length} direct book-summary SEO pages`)
 assert(registeredPapers.length > 0, 'Past-paper registry must not be empty')
+assert(registeredBooks.length > 0, 'Book-summary registry must not be empty')
 
 const optimizedLogo = await stat(join(dist, 'images', 'logo.webp'))
 assert(optimizedLogo.size < 50_000, `Optimized header logo is unexpectedly large: ${optimizedLogo.size} bytes`)
@@ -147,4 +157,4 @@ try {
   await handle.close()
 }
 
-console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length}, gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)
+console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length} (${registeredBooks.length} books), gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)

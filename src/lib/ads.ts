@@ -1,6 +1,7 @@
 import { findRouteDefinition, normalizeRoutePath } from '../data/routeRegistry.mjs'
 
 export const ADSENSE_PUBLISHER_ID = 'ca-pub-6131271603014611'
+export const ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID = '1618565899'
 
 export interface AdRoutePolicy {
   autoAdsEnabled: boolean
@@ -10,12 +11,19 @@ export interface AdRoutePolicy {
   minimumHeight: number
 }
 
+export interface AuthenticatedAccountAdState {
+  authenticated: boolean
+  authLoading?: boolean
+  passwordRecovery?: boolean
+  sensitiveControlsVisible?: boolean
+}
+
 /**
  * Advertising is fail-closed: only a substantial route explicitly marked as
  * content in the shared route registry may load Auto ads or render a manual
- * slot. The homepage has no advertising exception: its registry policy keeps
- * both Auto ads and manual placements disabled. Google, not application
- * timers, controls vignette frequency.
+ * slot. Account and dashboard routes stay excluded from Auto ads; a separate
+ * authenticated-only predicate controls their deliberately placed manual
+ * opportunity. Google, not application timers, controls vignette frequency.
  */
 export function getAdRoutePolicy(pathname: string, search = ''): AdRoutePolicy {
   const route = findRouteDefinition(pathname)
@@ -53,6 +61,28 @@ export function getAdRoutePolicy(pathname: string, search = ''): AdRoutePolicy {
     placementType: route.placementType,
     minimumHeight: manualEligible ? route.minimumHeight : 0,
   }
+}
+
+/**
+ * Account advertising is manual-placement only. It must never become eligible
+ * while authentication, registration, recovery or destructive account
+ * controls are being shown. Keeping this separate from the route registry also
+ * prevents server-rendered/private URLs from becoming generally ad eligible.
+ */
+export function canShowAuthenticatedAccountAd(
+  pathname: string,
+  search: string,
+  state: AuthenticatedAccountAdState,
+) {
+  const path = normalizeRoutePath(pathname)
+  if (path !== '/account') return false
+
+  const resetRequested = new URLSearchParams(search).get('reset') === '1'
+  return state.authenticated
+    && !state.authLoading
+    && !state.passwordRecovery
+    && !state.sensitiveControlsVisible
+    && !resetRequested
 }
 
 export function isAdFreePath(pathname: string, search = '') {

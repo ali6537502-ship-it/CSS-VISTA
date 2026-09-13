@@ -6,7 +6,7 @@ import PrintMenu from '@/components/PrintMenu'
 import { examinations, subjectTypes, paperModes, type PastPaper } from '@/data/pastPapers'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
-import { toggleBookmark, isBookmarked } from '@/lib/store'
+import { toggleBookmark, getBookmarkSet } from '@/lib/store'
 import { recordActivity } from '@/lib/progress'
 import { optionalGroups } from '@/data/syllabus'
 import { formatFileSize, safeDownloadName } from '@/lib/resourceFiles'
@@ -26,6 +26,12 @@ function groupForPaper(paper: PastPaper) {
   return paper.optionalGroup ?? optionalGroupBySubject.get(paper.subject)
 }
 
+function collectionPaperTitle(paper: PastPaper) {
+  if (paper.examination === 'MPT') return `CSS MPT ${paper.year} Screening Test Past Paper`
+  const part = paper.paper === 'Single Paper' ? '' : ` ${paper.paper.replace('One', 'I').replace('Two', 'II')}`
+  return `${paper.examination} ${paper.year} ${paper.subject}${part} Past Paper`
+}
+
 export default function PastPapers() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -43,11 +49,16 @@ export default function PastPapers() {
   const [currentPage, setCurrentPage] = useState(() => Math.max(1, Number(searchParams.get('page')) || 1))
   const [pdfIndex, setPdfIndex] = useState<Record<string, PdfFileMetadata>>({})
   const filtersMounted = useRef(false)
-  const [, forceRefresh] = useState(0)
   const isYearCollection = routeExam !== 'All' && routeYear !== 'All'
+  const routeCollectionPapers = useMemo(
+    () => isYearCollection
+      ? papers.filter((paper) => paper.examination === routeExam && paper.year === Number(routeYear))
+      : [],
+    [isYearCollection, papers, routeExam, routeYear],
+  )
   const pageTitle = isYearCollection ? `${routeExam} ${routeYear} Past Papers` : 'Past Papers'
   const pageDescription = isYearCollection
-    ? `Browse ${routeExam} ${routeYear} past-paper PDFs by subject.`
+    ? `Browse ${routeCollectionPapers.length} ${routeExam} ${routeYear} past-paper PDFs in this verified collection.`
     : 'CSS, PMS, PPSC and MPT past-paper PDFs organised by examination, subject and year.'
 
   useEffect(() => {
@@ -60,17 +71,63 @@ export default function PastPapers() {
   }, [])
 
   useEffect(() => {
-    const defaultTitle = 'CSS Vista - CSS Exam Preparation Platform'
     const title = isYearCollection ? `${pageTitle} — All Subjects | CSS Vista` : 'CSS, PMS, PPSC & MPT Past Papers | CSS Vista'
+    const canonical = isYearCollection
+      ? `https://www.css-vista.com/past-papers/${routeExam.toLowerCase()}/${routeYear}`
+      : 'https://www.css-vista.com/past-papers'
+    const updates: Array<[string, string]> = [
+      ['meta[name="description"]', pageDescription],
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', pageDescription],
+      ['meta[property="og:url"]', canonical],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', pageDescription],
+    ]
+    const previousTitle = document.title
+    const previousMeta = updates.map(([selector]) => document.querySelector<HTMLMetaElement>(selector)?.content ?? null)
+    const canonicalNode = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    const previousCanonical = canonicalNode?.href ?? null
+    const existingSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+    const previousSchema = existingSchema?.textContent ?? null
+
     document.title = title
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    const previousDescription = description?.content
-    if (description) description.content = pageDescription
-    return () => {
-      document.title = defaultTitle
-      if (description && previousDescription) description.content = previousDescription
+    updates.forEach(([selector, content]) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content))
+    canonicalNode?.setAttribute('href', canonical)
+    if (isYearCollection) {
+      const schema = existingSchema || document.createElement('script')
+      schema.id = 'cssv-route-structured-data'
+      schema.type = 'application/ld+json'
+      schema.text = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: pageTitle,
+        description: pageDescription,
+        url: canonical,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: routeCollectionPapers.length,
+          itemListElement: routeCollectionPapers.map((paper, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: collectionPaperTitle(paper),
+            url: `https://www.css-vista.com/past-papers/view/${paper.id}`,
+          })),
+        },
+      })
+      if (!existingSchema) document.head.appendChild(schema)
     }
-  }, [isYearCollection, pageDescription, pageTitle])
+    return () => {
+      document.title = previousTitle
+      updates.forEach(([selector], index) => {
+        const node = document.querySelector<HTMLMetaElement>(selector)
+        if (node && previousMeta[index] !== null) node.content = previousMeta[index]!
+      })
+      if (canonicalNode && previousCanonical) canonicalNode.href = previousCanonical
+      const schema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
+      if (!existingSchema) schema?.remove()
+      else if (schema) schema.text = previousSchema ?? ''
+    }
+  }, [isYearCollection, pageDescription, pageTitle, routeCollectionPapers, routeExam, routeYear])
 
   const papersForSelectedExam = papers.filter((paper) => exam === 'All' || paper.examination === exam)
   const years = [...new Set(papersForSelectedExam.map((p) => p.year))].sort((a, b) => b - a)
@@ -87,7 +144,13 @@ export default function PastPapers() {
     ),
   ].sort((a, b) => String(a).localeCompare(String(b), undefined, { numeric: true }))
 
-  const filtered = papers.filter(
+  // The bookmark set is read once rather than per row: isBookmarked() reads
+  // the whole student record and scans an array, and this predicate runs over
+  // every paper on each keystroke.
+  const [bookmarkIds, setBookmarkIds] = useState<Set<string>>(() => getBookmarkSet())
+  const needle = q.trim().toLowerCase()
+
+  const filtered = useMemo(() => papers.filter(
     (p) =>
       (exam === 'All' || p.examination === exam) &&
       (subject === 'All' || p.subject === subject) &&
@@ -95,12 +158,10 @@ export default function PastPapers() {
       (stype === 'All' || p.subjectType === stype) &&
       (optionalGroup === 'All' || (p.subjectType === 'Optional' && String(groupForPaper(p)) === optionalGroup)) &&
       (mode === 'All' || p.mode === mode) &&
-      (!savedOnly || isBookmarked(`pp-${p.id}`)) &&
-      (!q || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(q.toLowerCase()))
-  )
+      (!savedOnly || bookmarkIds.has(`pp-${p.id}`)) &&
+      (!needle || `${p.examination} ${p.year} ${p.title} ${p.subject} past paper`.toLowerCase().includes(needle))
+  ), [papers, exam, subject, year, stype, optionalGroup, mode, savedOnly, bookmarkIds, needle])
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAPERS_PER_PAGE))
-  const pagedPapers = filtered.slice((currentPage - 1) * PAPERS_PER_PAGE, currentPage * PAPERS_PER_PAGE)
 
   useEffect(() => {
     if (!filtersMounted.current) {
@@ -109,10 +170,6 @@ export default function PastPapers() {
     }
     setCurrentPage(1)
   }, [exam, mode, optionalGroup, q, savedOnly, stype, subject, year])
-
-  useEffect(() => {
-    if (currentPage > pageCount) setCurrentPage(pageCount)
-  }, [currentPage, pageCount])
 
   useEffect(() => {
     const next = new URLSearchParams()
@@ -128,9 +185,12 @@ export default function PastPapers() {
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
   }, [currentPage, exam, mode, optionalGroup, q, savedOnly, searchParams, setSearchParams, stype, subject, year])
 
-  const grouped = useMemo(() => {
+  // Grouping runs over the whole filtered set, then pages are cut on group
+  // boundaries. Paginating first split a subject across two pages and repeated
+  // its heading on the next one.
+  const allGroups = useMemo(() => {
     const map = new Map<string, PastPaper[]>()
-    for (const p of pagedPapers) {
+    for (const p of filtered) {
       const group = p.subjectType === 'Optional' ? `Optional Group ${groupForPaper(p) ?? '-'}` : p.subjectType
       const key = `${p.examination} · ${group} · ${p.subject}`
       map.set(key, [...(map.get(key) ?? []), p])
@@ -152,7 +212,33 @@ export default function PastPapers() {
         )
         return groupDifference || first.subject.localeCompare(second.subject)
       })
-  }, [pagedPapers])
+  }, [filtered])
+
+  // Fill each page up to the paper budget without ever splitting a group. A
+  // group larger than the budget occupies a page of its own.
+  const pages = useMemo(() => {
+    const built: (readonly [string, PastPaper[]])[][] = []
+    let current: (readonly [string, PastPaper[]])[] = []
+    let count = 0
+    for (const entry of allGroups) {
+      if (current.length && count + entry[1].length > PAPERS_PER_PAGE) {
+        built.push(current)
+        current = []
+        count = 0
+      }
+      current.push(entry)
+      count += entry[1].length
+    }
+    if (current.length) built.push(current)
+    return built.length ? built : [[]]
+  }, [allGroups])
+
+  const pageCount = pages.length
+  const grouped = pages[Math.min(currentPage, pageCount) - 1] ?? []
+
+  useEffect(() => {
+    if (currentPage > pageCount) setCurrentPage(pageCount)
+  }, [currentPage, pageCount])
 
   const pagination = pageCount > 1 && (
     <nav aria-label="Past paper archive pages" className="no-print flex flex-wrap items-center justify-center gap-2 rounded-xl border bg-white p-3">
@@ -279,11 +365,12 @@ export default function PastPapers() {
                         </div>
                       </div>
                       <button
-                        onClick={() => { toggleBookmark(`pp-${p.id}`); forceRefresh((f) => f + 1) }}
+                        onClick={() => { toggleBookmark(`pp-${p.id}`); setBookmarkIds(getBookmarkSet()) }}
                         className="no-print rounded-md p-2 text-muted-foreground hover:bg-secondary"
-                        aria-label={isBookmarked(`pp-${p.id}`) ? 'Remove from saved papers' : 'Save paper'}
+                        aria-pressed={bookmarkIds.has(`pp-${p.id}`)}
+                        aria-label={bookmarkIds.has(`pp-${p.id}`) ? 'Remove from saved papers' : 'Save paper'}
                       >
-                        {isBookmarked(`pp-${p.id}`) ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
+                        {bookmarkIds.has(`pp-${p.id}`) ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}
                       </button>
                       {p.fileUrl ? (
                         <div className="flex gap-2">

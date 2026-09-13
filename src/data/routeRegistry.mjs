@@ -77,6 +77,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/one-liner-gk', '30,491 One-Liner GK Questions', 'Browse searchable general-knowledge fact cards organised by subject and topic for quick revision.', '30,491 one-liner GK questions'),
   publicPage('/language-grammar', 'Urdu and English Grammar Resources', 'Browse Urdu and English grammar reference material for competitive examinations.', 'Urdu and English grammar resources'),
   publicPage('/book-summaries', '100 Book Summaries for CSS Aspirants', 'Browse searchable book summaries and reading guidance for CSS and competitive-examination preparation.', 'Book summaries for CSS aspirants'),
+  publicPage('/book-summaries/:slug', 'Book Summary for CSS Aspirants', 'Read a complete exam-focused book summary with key ideas, lessons and quotations for CSS preparation.', 'Book summary for CSS aspirants', { match: 'pattern', schemaType: 'Article' }),
   protectedPage('/lectures', 'Free CSS Lectures', 'The CSS Vista lecture library is still in preparation and is not yet an indexable content resource.'),
   publicPage('/handwritten-notes', 'CSS Handwritten Notes', 'Browse information about CSS handwritten notes and authorised study resources.', 'CSS handwritten notes', { adMode: 'none', minimumHeight: 0 }),
   protectedPage('/study-planner', 'Study Planner', 'Private interactive study planner.'),

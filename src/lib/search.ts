@@ -158,14 +158,14 @@ const localCorpus: SearchDocument[] = [
       title: `${course.title} Lectures`,
       category: 'Free CSS Vista Lectures',
       snippet: `${course.kind}, ${course.marks} marks, ${course.paperLabel}.`,
-      link: '/lectures',
+      link: `/lectures?course=${course.slug}`,
     },
     ...course.topics.map((topic) => ({
       id: `lecture-topic-${course.slug}-${topic.slug}`,
       title: `${course.title}: ${topic.title}`,
       category: 'Lecture Topic',
       snippet: topic.summary,
-      link: '/lectures',
+      link: `/lectures?course=${course.slug}`,
     })),
   ]),
   ...handwrittenNoteSubjects.map((subject) => ({

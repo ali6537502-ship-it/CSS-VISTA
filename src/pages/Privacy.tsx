@@ -14,14 +14,14 @@ export default function Privacy() {
             <ShieldCheck className="mt-0.5 h-6 w-6 shrink-0 text-emerald-800" />
             <div>
               <h2 className="font-display text-xl font-bold text-pine">Content and examinations come first</h2>
-              <p className="mt-2">CSS Vista does not place site-managed advertising on the homepage, mocks, timed examinations, question screens, results, account areas, private study dashboards, payment or inquiry workflows, error pages, loading screens, or legal pages including this one.</p>
+              <p className="mt-2">CSS Vista does not place advertising on login, registration, password-reset or password-change screens, mocks, timed examinations, question screens, results, private study dashboards, payment or inquiry workflows, error pages, loading screens, or legal pages including this one. A signed-in account overview may contain one clearly separated manual in-page unit.</p>
             </div>
           </div>
         </section>
 
         <section className="rounded-2xl border bg-white p-5 sm:p-6">
           <h2 className="font-display text-xl font-bold text-pine">Information used by CSS Vista</h2>
-          <p className="mt-2">Guest study preferences and progress may be kept in browser storage so features work on the current device. If you choose to sign in, account and study-progress information may be synchronised through CSS Vista&apos;s account service. Advertising logic does not read or transmit answers, scores, study plans, account details, or other private academic information.</p>
+          <p className="mt-2">Guest study preferences and progress may be kept in browser storage so features work on the current device. If you choose to sign in, account and study-progress information may be synchronised through CSS Vista&apos;s account service. CSS Vista does not pass answers, scores, study plans, profile fields, account details or other private academic information as advertising parameters.</p>
           <p className="mt-3">VISTA Exam Intelligence uses only the student&apos;s own recorded study activity—such as question outcomes, subjects, topics, revision schedules, mock results and measured study sessions—to calculate private preparation summaries and recommendations. It does not manufacture marks or readiness data. Signed-in records are restricted to their owner through database access policies; guest records remain on the current device. This private analysis is excluded from site-managed advertising.</p>
         </section>
 

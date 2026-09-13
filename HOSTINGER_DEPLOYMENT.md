@@ -30,13 +30,7 @@ SITE_ORIGIN=https://www.css-vista.com
 CSSV_STRICT_CONTENT_VALIDATION=false
 ```
 
-Account-backed features use these browser-safe Supabase variables:
-
-```text
-VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
-VITE_SUPABASE_GOOGLE_AUTH_ENABLED=false
-```
+Accounts use the same-origin Hostinger PHP API. Configure database, private storage and email credentials in the existing private server config described in `docs/hostinger-native-accounts.md`. No browser authentication keys are required. Complete and reconcile the account-data migration before merging the native-authentication release.
 
 Optional AdSense manual in-content unit:
 
@@ -46,15 +40,9 @@ VITE_ADSENSE_SLOT_CONTENT=
 
 Never place `sb_secret_...`, `service_role`, private API keys, server credentials, or database passwords in a `VITE_` variable. Vite exposes `VITE_` values to browser JavaScript.
 
-## Supabase authentication URLs
+## Account verification and recovery
 
-In Supabase **Authentication → URL Configuration**, set:
-
-- Site URL: `https://www.css-vista.com`
-- Redirect URL: `https://www.css-vista.com/account`
-- Redirect URL: `https://www.css-vista.com/account?reset=1`
-
-Do not leave the production Site URL as localhost.
+Set `CSSV_SITE_ORIGIN=https://www.css-vista.com` in the private server configuration. Native email verification uses `/account?verify=1#token=…`; password recovery uses `/account?reset=1#token=…`. Tokens are carried in the fragment, consumed once, and never placed in public data files. Configure the Hostinger mail transport and inspect **Admin → Account emails** for failures. Actual inbox delivery must be verified separately from transport acceptance.
 
 ## Deployment-safe build design
 

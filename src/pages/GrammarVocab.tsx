@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { CheckCircle2, Flame, Zap } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import { grammarTopics, pairOfWords, idioms, oneWordSubstitutions } from '@/data/grammar'
-import { vocabulary } from '@/data/vocab'
+import { loadFullVocabulary, vocabulary as curatedVocabulary, type VocabWord } from '@/data/vocab'
 import { getDailyChallenge } from '@/data/challenges'
 import { questions } from '@/data/quiz'
 import type { Question } from '@/data/quiz'
@@ -53,13 +53,21 @@ export default function GrammarVocab() {
   const challenge = useMemo(() => getDailyChallenge(new Date()), [])
   const mcq = questions.find((q) => q.id === challenge.mcqId) ?? questions[0]
   const mcqRtl = isRtlText(mcq.question)
-  const word = vocabulary[challenge.vocabIndex]
+  const word = curatedVocabulary[challenge.vocabIndex % curatedVocabulary.length]
   const [selected, setSelected] = useState<number | null>(null)
   const [done, setDone] = useState(() => getState().completedChallenges.includes(today))
   const streak = getState().streakDays
 
-  const partsOfSpeech = useMemo(() => ['All', ...new Set(vocabulary.map((word) => word.pos).filter(Boolean))].sort(), [])
-  const filteredVocab = vocabulary.filter((v) => (partOfSpeech === 'All' || v.pos === partOfSpeech) && (!search || v.word.toLowerCase().includes(search.toLowerCase()) || v.meaning.toLowerCase().includes(search.toLowerCase())))
+  // The 1,500-entry bank is fetched on demand rather than bundled.
+  const [vocabulary, setVocabulary] = useState<VocabWord[]>(curatedVocabulary)
+  useEffect(() => { let live = true; loadFullVocabulary().then((rows) => { if (live) setVocabulary(rows) }); return () => { live = false } }, [])
+
+  const partsOfSpeech = useMemo(() => ['All', ...new Set(vocabulary.map((word) => word.pos).filter(Boolean))].sort(), [vocabulary])
+  const filteredVocab = useMemo(() => {
+    const needle = search.trim().toLowerCase()
+    return vocabulary.filter((v) => (partOfSpeech === 'All' || v.pos === partOfSpeech)
+      && (!needle || v.word.toLowerCase().includes(needle) || v.meaning.toLowerCase().includes(needle)))
+  }, [vocabulary, partOfSpeech, search])
   const wordPageCount = Math.max(1, Math.ceil(filteredVocab.length / 60))
   const visibleVocab = filteredVocab.slice(wordPage * 60, wordPage * 60 + 60)
   const englishQs = questions.filter((q) => q.category === 'english')
@@ -76,7 +84,7 @@ export default function GrammarVocab() {
     <div>
       <PageHeader
         title="Vocabulary and Daily Challenge"
-        description={`${vocabulary.length.toLocaleString()} source-backed vocabulary records with usage, confused words, idioms, phrasal verbs, substitutions, grammar lessons and quizzes.`}
+        description={`1,500+ source-backed vocabulary records with usage, confused words, idioms, phrasal verbs, substitutions, grammar lessons and quizzes.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-wrap gap-1.5 border-b pb-3">

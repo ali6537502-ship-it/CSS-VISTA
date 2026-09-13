@@ -1,10 +1,18 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { ADSENSE_PUBLISHER_ID, getAdRoutePolicy, shouldProtectVignetteLink } from '../src/lib/ads.ts'
+import {
+  ADSENSE_PUBLISHER_ID,
+  ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID,
+  canShowAuthenticatedAccountAd,
+  getAdRoutePolicy,
+  shouldProtectVignetteLink,
+} from '../src/lib/ads.ts'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 test('publisher ID is the verified CSS Vista publisher', () => {
   assert.equal(ADSENSE_PUBLISHER_ID, 'ca-pub-6131271603014611')
+  assert.equal(ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID, '1618565899')
+  assert.match(ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID, /^\d+$/)
 })
 
 test('homepage allows Auto Ads below its protected top while manual units stay disabled', () => {
@@ -82,6 +90,20 @@ test('vignettes are blocked for protected destinations and sensitive controls', 
   assert.equal(shouldProtectVignetteLink({ currentPath: '/', destinationPath: '/gk/quiz' }), true)
   assert.equal(shouldProtectVignetteLink({ currentPath: '/answer-timer', destinationPath: '/notes' }), true)
   assert.equal(shouldProtectVignetteLink({ currentPath: '/gk/quiz', destinationPath: '/notes' }), true)
+})
+
+test('the account manual ad requires a settled, non-sensitive authenticated state', () => {
+  const authenticated = { authenticated: true }
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', authenticated), true)
+  assert.equal(canShowAuthenticatedAccountAd('/dashboard', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/notes', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: false }), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, authLoading: true }), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '?reset=1', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, passwordRecovery: true }), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, sensitiveControlsVisible: true }), false)
+  assert.equal(getAdRoutePolicy('/account').autoAdsEnabled, false)
+  assert.equal(getAdRoutePolicy('/account').manualAdsEnabled, false)
 })
 
 test('legacy artificial timing and page-count state is absent', async () => {

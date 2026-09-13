@@ -15,7 +15,7 @@ export default function Mentors() {
         description="A CSS position holder for complete mentorship, and an advocate-mentor for subject specialisation and notes. Contact either mentor directly on WhatsApp or Instagram."
       />
       <div className="mx-auto max-w-5xl space-y-6 px-2 py-6 sm:px-4 sm:py-10">
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:gap-6">
           {/* Miss Sadia Zahoor, PAS */}
           <MentorCard
             id={sadia.id as ConsultationMentorId}
@@ -30,22 +30,22 @@ export default function Mentors() {
           >
             <div className="mt-3 flex flex-wrap gap-1 sm:gap-1.5">
               {sadia.credentials.map((c) => (
-                <span key={c} className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-[9px] font-semibold text-amber-900 sm:px-3 sm:text-xs">
+                <span key={c} className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-1 text-[11px] font-semibold text-amber-900 sm:px-3 sm:text-xs">
                   <Award className="h-3 w-3" /> {c}
                 </span>
               ))}
             </div>
             <div className="mt-4">
-              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Her optional subjects in CSS</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Her optional subjects in CSS</p>
               <div className="mt-1.5 flex flex-wrap gap-1 sm:gap-1.5">
                 {sadia.optionalSubjects.map((s) => (
-                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-medium text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
+                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[11px] font-medium text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
                 ))}
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Services</p>
-              <ul className="mt-1.5 grid gap-x-4 gap-y-1 text-[10px] leading-relaxed text-foreground/85 sm:text-sm lg:grid-cols-2">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Services</p>
+              <ul className="mt-1.5 grid gap-x-4 gap-y-1 text-xs leading-relaxed text-foreground/85 sm:text-sm lg:grid-cols-2">
                 {sadia.services.map((s) => <li key={s}>· {s}</li>)}
               </ul>
             </div>
@@ -64,16 +64,16 @@ export default function Mentors() {
             instagram={ali.instagram}
           >
             <div className="mt-4">
-              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Areas of specialisation</p>
+              <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Areas of specialisation</p>
               <div className="mt-1.5 flex flex-wrap gap-1 sm:gap-1.5">
                 {(ali.specialisations ?? []).map((s) => (
-                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-semibold text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
+                  <span key={s} className="rounded-full bg-emerald-50 px-2 py-1 text-[11px] font-semibold text-emerald-900 sm:px-3 sm:text-xs">{s}</span>
                 ))}
               </div>
             </div>
             <div className="mt-4">
-              <p className="text-[9px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Also provides</p>
-              <ul className="mt-1.5 space-y-1 text-[10px] leading-relaxed text-foreground/85 sm:text-sm">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground sm:text-xs">Also provides</p>
+              <ul className="mt-1.5 space-y-1 text-xs leading-relaxed text-foreground/85 sm:text-sm">
                 {ali.services.slice(4).map((s) => <li key={s}>· {s}</li>)}
               </ul>
             </div>
@@ -141,8 +141,8 @@ function MentorCard({
           <img src={finalPhoto} alt={finalName} className="aspect-[4/5] w-full object-cover" />
         </div>
         <h2 className="mt-3 font-display text-sm font-bold leading-tight text-pine sm:mt-4 sm:text-lg lg:text-xl">{finalName}</h2>
-        <p className="mt-1 text-[10px] font-semibold leading-tight text-emerald-800 sm:text-sm">{finalRole}</p>
-        <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground sm:text-sm">{finalBio}</p>
+        <p className="mt-1 text-xs font-semibold leading-tight text-emerald-800 sm:text-sm">{finalRole}</p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{finalBio}</p>
       </div>
       <div className="flex-1 px-2.5 pb-2 text-left sm:px-4 lg:px-6">{children}</div>
       <div className="px-2.5 pb-2 sm:px-4 lg:px-6">
@@ -152,14 +152,14 @@ function MentorCard({
         <a
           href={waLink(finalWa, message)}
           target="_blank" rel="noopener noreferrer"
-          className="flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-emerald-600 px-2 text-[10px] font-bold text-white hover:bg-emerald-700 sm:text-sm"
+          className="flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-md bg-emerald-600 px-2 text-xs font-bold text-white hover:bg-emerald-700 sm:text-sm"
         >
           <MessageCircle className="h-4 w-4 shrink-0" /> WhatsApp <span className="hidden lg:inline">- {finalWaDisplay}</span>
         </a>
         <a
           href={instagram}
           target="_blank" rel="noopener noreferrer"
-          className="flex h-10 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-2 text-[10px] font-bold text-white hover:opacity-90 sm:text-sm lg:px-4"
+          className="flex h-10 items-center justify-center gap-1.5 rounded-md bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 px-2 text-xs font-bold text-white hover:opacity-90 sm:text-sm lg:px-4"
           aria-label={`${finalName} on Instagram`}
         >
           <Instagram className="h-4 w-4" /> Instagram

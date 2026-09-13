@@ -67,6 +67,7 @@ function homeBody() {
     ['/mpt', 'CSS MPT preparation'],
     ['/gk', 'GK World'],
     ['/past-papers', 'CSS, PMS and PPSC past papers'],
+    ['/css-2026-written-result', 'CSS 2026 written result'],
     ['/current-affairs', 'Current affairs'],
     ['/notes', 'CSS notes'],
     ['/fpsc-syllabus', 'FPSC CSS syllabus'],

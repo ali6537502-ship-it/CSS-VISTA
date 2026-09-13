@@ -14,11 +14,11 @@ async function call(path, body, jar = new Map(), extra = {}, method = body === u
   const data = await response.json().catch(() => ({}))
   return { status: response.status, data, headers: response.headers }
 }
-async function mailToken(email, kind) {
+async function mailToken(email, kind, previous = null) {
   const files = await readdir('test-artifacts/account-mail')
   for (const file of files.reverse()) {
     const raw = await readFile('test-artifacts/account-mail/' + file, 'utf8')
-    if (raw.includes(email) && raw.includes(`?${kind}=1#token=`)) return raw.match(/#token=([A-Za-z0-9_-]{64})/)?.[1]
+    if (raw.includes(email) && raw.includes(`?${kind}=1#token=`)) { const token = raw.match(/#token=([A-Za-z0-9_-]{64})/)?.[1]; if (token && token !== previous) return token }
   }
   throw new Error('Expected test email was not accepted by the local mail transport')
 }
@@ -49,9 +49,17 @@ assert.equal((await call('auth/login.php', { email, password: next }, a)).status
 assert.equal((await call('auth/change-password.php', { current_password: next, password }, a, { 'X-CSRF-Token': 'wrong' })).status, 403)
 assert.equal((await call('auth/change-password.php', { current_password: 'wrong', password }, a)).status, 422)
 assert.equal((await call('auth/change-password.php', { current_password: next, password }, a)).status, 200)
+assert.equal((await call('auth/forgot-password.php', { email }, a)).status, 202)
+const expiredReset = await mailToken(email, 'reset', reset)
+execFileSync('php', ['tests/account-native/expire.php', email])
+assert.equal((await call('auth/reset-password.php', { token: expiredReset, password: next })).status, 400, 'Expired recovery token accepted')
+assert.equal((await call('student/progress.php', { payload: {} }, a, {}, 'PUT')).status, 200, 'New account progress could not sync')
 const otherEmail = 'native-second@example.invalid'
 const otherId = execFileSync('php', ['tests/current-affairs/setup.php', 'user', otherEmail], { encoding: 'utf8' }).trim()
 assert.equal((await call('auth/login.php', { email: otherEmail, password: 'TEST ONLY native fixture password' }, b)).status, 200)
+assert.equal((await call('student/progress.php', { payload: { 'cssvista:v1': { test: 'private progress' } } }, a, {}, 'PUT')).status, 200)
+assert.notDeepEqual((await call('student/progress.php', undefined, b)).data.payload, { 'cssvista:v1': { test: 'private progress' } })
+assert.equal((await call('student/progress.php', { payload: {} }, b, { 'X-CSSV-User': id }, 'PUT')).status, 409)
 const query = (table, operation, values, filters = []) => ({ table, operation, values, filters })
 const eq = (column, value) => ({ column, operator: 'eq', value })
 async function db(body, jar = a) { return call('factbook/data.php', body, jar) }

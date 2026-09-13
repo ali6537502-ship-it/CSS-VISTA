@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router'
 import { Link } from 'react-router'
 import {
   ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, ChevronRight,
@@ -206,9 +207,25 @@ function FlowStrip({ current }: { current: CourseTab }) {
   )
 }
 
+const COURSE_TABS: CourseTab[] = ['lesson', 'practice', 'quiz', 'revision']
+
+function scrollToTop() {
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+}
+
 export default function MasterGrammarCourse() {
-  const [activeDayNumber, setActiveDayNumber] = useState(1)
-  const [tab, setTab] = useState<CourseTab>('lesson')
+  const [searchParams, setSearchParams] = useSearchParams()
+  // A thirty-day course that reset to Day 1 on every refresh, with no way to
+  // link to a day. Both now live in the URL.
+  const [activeDayNumber, setActiveDayNumber] = useState(() => {
+    const requested = Number.parseInt(searchParams.get('day') ?? '', 10)
+    return Number.isFinite(requested) && requested >= 1 && requested <= 30 ? requested : 1
+  })
+  const [tab, setTab] = useState<CourseTab>(() => {
+    const requested = searchParams.get('ctab') as CourseTab | null
+    return requested && COURSE_TABS.includes(requested) ? requested : 'lesson'
+  })
   const [progress, setProgress] = useState<ProgressState>(EMPTY_PROGRESS)
   const [revealedPractice, setRevealedPractice] = useState<number[]>([])
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({})
@@ -229,13 +246,21 @@ export default function MasterGrammarCourse() {
     setRevealedPractice([])
     setQuizAnswers({})
     setQuizSubmitted(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }
 
   function changeTab(next: CourseTab) {
     setTab(next)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    scrollToTop()
   }
+
+  useEffect(() => {
+    const next = new URLSearchParams(searchParams)
+    next.set('day', String(activeDayNumber))
+    if (tab === 'lesson') next.delete('ctab')
+    else next.set('ctab', tab)
+    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
+  }, [activeDayNumber, tab, searchParams, setSearchParams])
 
   function updateProgress(next: ProgressState) {
     setProgress(next)
@@ -503,7 +528,11 @@ export default function MasterGrammarCourse() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h3 className="font-display text-xl font-bold text-pine">4. Test yourself</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">28 questions from the rules and exercises you have just studied.</p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {quiz.length > 0
+                        ? `${quiz.length} questions from the rules and exercises you have just studied.`
+                        : 'This day does not yet carry enough rules and exercises to generate a test.'}
+                    </p>
                   </div>
                   {savedScore !== undefined && (
                     <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-900">
@@ -556,7 +585,7 @@ export default function MasterGrammarCourse() {
                   {!quizSubmitted ? (
                     <button
                       type="button"
-                      disabled={quizAnswered !== quiz.length}
+                      disabled={quiz.length === 0 || quizAnswered !== quiz.length}
                       onClick={submitQuiz}
                       className="inline-flex items-center gap-2 rounded-lg bg-pine px-4 py-2.5 text-sm font-bold text-white disabled:opacity-40"
                     >

@@ -54,6 +54,21 @@ const ppscPapers = ppscFiles.map((path) => {
   }
 })
 
+// Some archive folders contain distinct source PDFs with the same subject and
+// year. Keep both records, but make their user-facing/search metadata unique.
+const duplicatePpscKeys = new Set(
+  ppscPapers
+    .map((paper) => `${paper.year}:${paper.subject}`)
+    .filter((key, index, keys) => keys.indexOf(key) !== index),
+)
+for (const paper of ppscPapers) {
+  if (!duplicatePpscKeys.has(`${paper.year}:${paper.subject}`)) continue
+  const archiveSequence = basename(paper.fileUrl).match(/^(\d+)_/)?.[1]
+  if (!archiveSequence) continue
+  paper.subject = `${paper.subject} (Archive File ${archiveSequence})`
+  paper.title = `${paper.subject} — ${paper.year}`
+}
+
 const mptFiles = (await readdir(join(publicDir, 'past-papers', 'mpt')))
   .filter((name) => name.toLowerCase().endsWith('.pdf'))
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))

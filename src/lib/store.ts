@@ -1,5 +1,5 @@
 // Local-first persistence for CSS Vista. Signed-in students can sync this state.
-import { notifyProgressChanged } from '@/lib/progressEvents'
+import { notifyProgressChanged, notifyStorageFailed } from '@/lib/progressEvents'
 
 const KEY = 'cssvista:v1'
 
@@ -129,14 +129,6 @@ export interface VistaState {
   vistaShortcut: VistaShortcutSettings
   evaluationRequests: EvaluationRequest[]
   customTestSeriesRequests: CustomTestSeriesRequest[]
-  reviews: Record<string, ReviewEntry> // MCQ id -> spaced-repetition state
-}
-
-export interface ReviewEntry {
-  id: string
-  dueAt: number // epoch ms
-  level: number
-  lapses: number
 }
 
 const empty: VistaState = {
@@ -165,14 +157,39 @@ const empty: VistaState = {
   },
   evaluationRequests: [],
   customTestSeriesRequests: [],
-  reviews: {},
+}
+
+// Written by a removed second spaced-repetition table. progress.reviews holds
+// the real schedule, so the stored field is pruned once to reclaim the quota it
+// occupied - hydrating alone only drops it in memory, leaving it on disk until
+// something happened to save.
+const legacyReviewKeys = ['reviews'] as const
+
+let legacyPruned = false
+
+function pruneLegacyFields() {
+  if (legacyPruned) return
+  legacyPruned = true
+  try {
+    const raw = localStorage.getItem(KEY)
+    if (!raw) return
+    const parsed = JSON.parse(raw) as Record<string, unknown>
+    if (!legacyReviewKeys.some((key) => key in parsed)) return
+    for (const key of legacyReviewKeys) delete parsed[key]
+    localStorage.setItem(KEY, JSON.stringify(parsed))
+    invalidateReadCache()
+  } catch {
+    /* no storage, or unreadable - hydrateState still ignores the field */
+  }
 }
 
 function hydrateState(saved: Partial<VistaState>): VistaState {
   const savedShortcut = saved.vistaShortcut
+  const cleaned = { ...saved } as Partial<VistaState> & Record<string, unknown>
+  for (const key of legacyReviewKeys) delete cleaned[key]
   return {
     ...empty,
-    ...saved,
+    ...cleaned,
     vistaShortcut: {
       enabled: typeof savedShortcut?.enabled === 'boolean' ? savedShortcut.enabled : empty.vistaShortcut.enabled,
       shortcutIds: Array.isArray(savedShortcut?.shortcutIds)
@@ -187,6 +204,7 @@ function hydrateState(saved: Partial<VistaState>): VistaState {
 }
 
 export function getState(): VistaState {
+  pruneLegacyFields()
   try {
     const raw = localStorage.getItem(KEY)
     if (!raw) return { ...empty }
@@ -203,6 +221,7 @@ let cachedReadRaw: string | null | undefined
 let cachedReadState: VistaState | null = null
 
 function getCachedReadState(): VistaState {
+  pruneLegacyFields()
   try {
     const raw = localStorage.getItem(KEY)
     if (raw === cachedReadRaw && cachedReadState) return cachedReadState
@@ -228,7 +247,9 @@ function save(s: VistaState) {
     invalidateReadCache()
     notifyProgressChanged()
   } catch {
-    /* storage full or unavailable */
+    // Quota exceeded, private browsing, or site data blocked. Announce it so
+    // the student is told rather than silently losing their work.
+    notifyStorageFailed()
   }
 }
 
@@ -385,7 +406,15 @@ export function toggleBookmark(id: string): boolean {
 }
 
 export function isBookmarked(id: string): boolean {
-  return getState().bookmarks.includes(id)
+  return getCachedReadState().bookmarks.includes(id)
+}
+
+/**
+ * All bookmark ids as a Set, for callers testing many rows at once.
+ * `isBookmarked` per row is a linear scan plus a record read each time.
+ */
+export function getBookmarkSet(): Set<string> {
+  return new Set(getCachedReadState().bookmarks)
 }
 
 export function completeChallenge(day: string) {
@@ -550,6 +579,23 @@ export function saveStudyPlanner(settings: Omit<StudyPlannerSettings, 'configure
     selectedOptionals: [...new Set(settings.selectedOptionals)],
     configuredAt: new Date().toISOString(),
   }
+  save(s)
+}
+
+/**
+ * Write only the chosen optional subjects, preserving the rest of the planner
+ * settings. The Subject Selector produced a recommendation that was never
+ * stored anywhere, so the wizard fed nothing.
+ */
+export function saveSelectedOptionals(names: string[]) {
+  const s = getState()
+  const existing = s.studyPlanner
+  s.studyPlanner = {
+    ...(existing ?? { examDate: '', dailyHours: 4, restDay: 5 }),
+    ...existing,
+    selectedOptionals: [...new Set(names)],
+    configuredAt: new Date().toISOString(),
+  } as typeof s.studyPlanner
   save(s)
 }
 
@@ -748,46 +794,16 @@ export function getStats() {
 
   return { totalQuizzes, avgScore, accuracy, attempted, categories, weak, strong, savedAnswers: s.savedAnswers.length, bookmarks: s.bookmarks.length, streak: streakSnapshot(s).current, challenges: s.completedChallenges.length }
 }
-// ---- Smart revision (spaced repetition for MCQs) ----
-
-// Intervals in days: questions come back after 1, 3, 7, 14, 30 and 60 days.
-const REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
-
-export function recordReview(questionId: string, correct: boolean) {
-  const s = getState()
-  const entry = s.reviews[questionId] ?? { id: questionId, dueAt: 0, level: 0, lapses: 0 }
-  if (correct) {
-    entry.level = Math.min(entry.level + 1, REVIEW_INTERVALS.length - 1)
-  } else {
-    entry.level = 0
-    entry.lapses += 1
-  }
-  entry.dueAt = Date.now() + REVIEW_INTERVALS[entry.level] * 86400000
-  s.reviews[questionId] = entry
-  // keep the table bounded
-  const ids = Object.keys(s.reviews)
-  if (ids.length > 5000) {
-    ids.sort((a, b) => s.reviews[a].dueAt - s.reviews[b].dueAt)
-    for (const id of ids.slice(0, ids.length - 5000)) delete s.reviews[id]
-  }
-  save(s)
-}
-
-export function getDueReviewIds(limit = 60, now = Date.now()): string[] {
-  return Object.values(getCachedReadState().reviews)
-    .filter((r) => r.dueAt <= now)
-    .sort((a, b) => a.dueAt - b.dueAt || b.lapses - a.lapses)
-    .slice(0, limit)
-    .map((r) => r.id)
-}
-
-export function getRevisionStats(now = Date.now()) {
-  const reviews = Object.values(getCachedReadState().reviews)
-  return {
-    total: reviews.length,
-    due: reviews.filter((r) => r.dueAt <= now).length,
-    learning: reviews.filter((r) => r.level < 2).length,
-    strengthening: reviews.filter((r) => r.level >= 2 && r.level < 4).length,
-    mature: reviews.filter((r) => r.level >= 4).length,
-  }
-}
+// ---- Smart revision ----
+//
+// Spaced repetition lives in progress.ts, in `progress.reviews`. This module
+// used to keep a second, parallel table that permanently disagreed with it:
+// GKQuiz wrote to both, McqCard wrote only to progress.ts, and the readers here
+// (getDueReviewIds, getRevisionStats) had no callers at all - the revision
+// queue, Home, StudyPlanner and GKWorld all read progress.ts.
+//
+// So this copy was written, capped at 5,000 entries, and never read. It is
+// removed rather than kept in sync: progress.reviews is a superset, because
+// every recordAttempt from any of the three answering engines feeds it.
+// `legacyReviewKeys` prunes the stored field so existing students reclaim the
+// localStorage quota it was occupying.

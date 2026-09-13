@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import {
   CheckCircle2, Clock3, FileCheck2, MessageCircle, Save, ShieldCheck, Trash2,
@@ -11,6 +11,8 @@ import {
 } from '@/lib/store'
 import { useAccount } from '@/lib/accountContext'
 import ConsultationCard from '@/components/ConsultationCard'
+import { useAutosavedDraft } from '@/hooks/useAutosavedDraft'
+import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 
 const compulsorySubjects = [
   'English Essay',
@@ -42,6 +44,8 @@ export default function AnswerEvaluation() {
   const [answer, setAnswer] = useState('')
   const [notes, setNotes] = useState('')
   const [savedRequest, setSavedRequest] = useState<EvaluationRequest | null>(null)
+  const [restoreDismissed, setRestoreDismissed] = useState(false)
+  const [handedOff, setHandedOff] = useState(false)
   const [history, setHistory] = useState(() => getState().evaluationRequests ?? [])
   const { user, configured } = useAccount()
   const sadia = mentors.find((mentor) => mentor.id === 'sadia')!
@@ -49,6 +53,43 @@ export default function AnswerEvaluation() {
     () => answer.trim().split(/\s+/).filter(Boolean).length,
     [answer],
   )
+
+  // Accept a handoff from the writing desk. The answer is far too large for a
+  // URL parameter, so it travels through the draft the writing desk already
+  // autosaves - previously the student had to re-paste it by hand.
+  useEffect(() => {
+    if (searchParams.get('from') !== 'answer-writing') return
+    try {
+      const raw = localStorage.getItem('cssvista:draft:answer-writing')
+      if (!raw) return
+      const draft = JSON.parse(raw) as { subject?: string; question?: string; intro?: string; body?: string; conclusion?: string }
+      const composed = [draft.intro, draft.body, draft.conclusion].filter(Boolean).join('\n\n').trim()
+      if (!composed) return
+      setQuestion((current) => current || (draft.question ?? ''))
+      setAnswer((current) => current || composed)
+      if (draft.subject && supportedSubjects.includes(draft.subject)) setSubject(draft.subject)
+      setHandedOff(true)
+    } catch {
+      /* unreadable draft - the student can still paste manually */
+    }
+  }, [searchParams])
+
+  // Autosave so a refresh no longer discards a long answer typed in the box.
+  const draft = useMemo(() => ({ subject, question, answer, notes }), [subject, question, answer, notes])
+  const hasContent = Boolean(question.trim() || answer.trim() || notes.trim())
+  const { status: draftStatus, restored, clearDraft } = useAutosavedDraft<typeof draft>('answer-evaluation', draft, { enabled: hasContent })
+  const canRestore = !hasContent && !restoreDismissed && Boolean(restored && (restored.question?.trim() || restored.answer?.trim()))
+
+  useUnsavedWorkGuard(hasContent && !savedRequest)
+
+  function restoreDraft() {
+    if (!restored) return
+    setSubject(restored.subject ?? subject)
+    setQuestion(restored.question ?? '')
+    setAnswer(restored.answer ?? '')
+    setNotes(restored.notes ?? '')
+    setRestoreDismissed(true)
+  }
 
   function saveDraft() {
     if (!question.trim() || !answer.trim()) return
@@ -61,6 +102,8 @@ export default function AnswerEvaluation() {
     })
     setSavedRequest(request)
     setHistory(getState().evaluationRequests ?? [])
+    clearDraft()
+    setRestoreDismissed(true)
   }
 
   function requestEvaluation() {
@@ -189,6 +232,19 @@ export default function AnswerEvaluation() {
                 />
               </label>
 
+              {handedOff && (
+                <p role="status" aria-live="polite" className="mt-5 rounded-lg border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
+                  Brought across from your answer-writing desk. Edit it here before sending.
+                </p>
+              )}
+              {canRestore && (
+                <div className="mt-5 flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                  <span className="flex-1">You have an unfinished answer from a previous session.</span>
+                  <button type="button" onClick={restoreDraft} className="inline-flex h-9 items-center rounded-md bg-amber-800 px-3 text-xs font-bold text-white">Restore it</button>
+                  <button type="button" onClick={() => { clearDraft(); setRestoreDismissed(true) }} className="inline-flex h-9 items-center rounded-md border border-amber-400 px-3 text-xs font-bold text-amber-900">Discard</button>
+                </div>
+              )}
+
               <div className="mt-5 flex flex-wrap gap-2">
                 <button
                   type="button"
@@ -206,7 +262,17 @@ export default function AnswerEvaluation() {
                 >
                   <MessageCircle className="h-4 w-4" /> Request evaluation
                 </button>
+                {hasContent && (
+                  <span role="status" aria-live="polite" className="inline-flex h-10 items-center text-xs font-medium text-muted-foreground">
+                    {draftStatus === 'error' ? 'Could not autosave - your browser storage may be full' : draftStatus === 'saved' ? 'Draft autosaved' : 'Autosaving…'}
+                  </span>
+                )}
               </div>
+              {!canSubmit && hasContent && (
+                <p className="mt-3 text-xs font-medium text-amber-800">
+                  To enable the buttons, the question needs at least 10 characters and the answer at least 50.
+                </p>
+              )}
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                 Clicking “Request evaluation” opens WhatsApp with the subject and question details. Availability,
                 turnaround time and any evaluation fee are confirmed directly by the mentor.

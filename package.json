@@ -36,7 +36,8 @@
     "test:css-2026-result": "node --test tests/css2026Result.test.ts",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "validate:artifact": "bash scripts/validate-artifact.sh"
+    "validate:artifact": "bash scripts/validate-artifact.sh",
+    "split:analysis": "node scripts/split-past-paper-analysis.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

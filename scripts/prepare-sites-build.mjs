@@ -188,7 +188,6 @@ for (const paper of pastPapers) {
     description,
     url: canonical,
     inLanguage: 'en',
-    datePublished: `${paper.year}-01-01`,
     about: { '@type': 'Thing', name: paper.subject },
     educationalLevel: 'Competitive examination',
     learningResourceType: 'Past examination paper',
