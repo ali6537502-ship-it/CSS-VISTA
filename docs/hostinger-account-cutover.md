@@ -62,5 +62,11 @@ Live health confirmed native accounts, database/schema, private storage and
 application secret ready. PHP mail is available; SMTP is not configured.
 Actual delivery to a real inbox has not been verified. Automatic mail retries
 can additionally use the documented Hostinger cron; this cron has not been
-configured remotely. No authenticated browser journey or full mobile-width
-visual pass is claimed. No fabricated current-affairs edition is published.
+configured remotely. Live desktop sign-in, profile checklist/tabs/photo, dashboard, search, filters,
+archive, saved-items and factbook empty states, and session refresh were verified.
+A full mobile-width visual pass and article interactions on real published content
+remain outstanding. No fabricated current-affairs edition is published.
+
+Cleanup PR #25 deployed at eaf6b7a8cd7369770eab0aa408d1587080cb46d9.
+Main workflows 34770686272 and 34770686268 passed, including the live
+permanently-closed migration endpoint and all protected account routes.
