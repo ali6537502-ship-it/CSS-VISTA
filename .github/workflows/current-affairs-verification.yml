@@ -55,7 +55,7 @@ jobs:
           php tests/current-affairs-validation.php
           node --test tests/currentAffairs.test.ts
       - name: Lint account feature
-        run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/lib/hostingerData.ts src/features/factbook src/lib/admin.ts src/lib/testSeriesRequests.ts src/components/SiteContentProvider.tsx src/pages/Account.tsx src/components/AccountProvider.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
+        run: npx eslint src/features/current-affairs src/lib/hostingerApi.ts src/lib/hostingerData.ts src/features/factbook src/lib/admin.ts src/lib/testSeriesRequests.ts src/components/SiteContentProvider.tsx src/pages/Account.tsx src/components/AccountProvider.tsx src/components/StudentProfilePanel.tsx src/components/ProfileGate.tsx src/pages/admin/Admin.tsx tests/currentAffairs.test.ts
       - name: Existing test suite against unchanged base
         env:
           CSSV_TEST_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}

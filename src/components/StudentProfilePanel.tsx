@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, ArrowRight, Camera, CheckCircle2, Circle, LoaderCircle, Save, UserRound } from 'lucide-react'
 import { hostingerRequest, PROFILE_UPDATED_EVENT } from '@/lib/hostingerApi'
@@ -60,6 +60,11 @@ async function preparePhoto(file: File): Promise<File> {
 }
 export function StudentProfilePanel({ email }: { email: string }) {
   const { user } = useAccount()
+  const request = useCallback(<T,>(path: string, init: RequestInit = {}) => {
+    const headers = new Headers(init.headers)
+    headers.set('X-CSSV-User', user?.id || '')
+    return hostingerRequest<T>(path, { ...init, headers })
+  }, [user?.id])
   const [profile, setProfile] = useState<Profile | null>(null)
   const [form, setForm] = useState<Record<string, string>>({})
   const [step, setStep] = useState(0)
@@ -75,17 +80,17 @@ export function StudentProfilePanel({ email }: { email: string }) {
   useEffect(() => {
     let active = true
     const jobs = photoJob
-    hostingerRequest<{ profile: Profile }>('student/profile.php').then(({ profile: p }) => { if (active) { setProfile(p); setForm(asForm(p)); setError('') } }).catch(() => { if (active) setError('Your profile could not be loaded. Please retry.') })
+    request<{ profile: Profile }>('student/profile.php').then(({ profile: p }) => { if (active) { setProfile(p); setForm(asForm(p)); setError('') } }).catch(() => { if (active) setError('Your profile could not be loaded. Please retry.') })
     return () => { active = false; ++jobs.current }
-  }, [user?.id, retry])
+  }, [request, retry])
   useEffect(() => { if (!photo) return; const url = URL.createObjectURL(photo); setPreview(url); return () => URL.revokeObjectURL(url) }, [photo])
   const dirty = useMemo(() => profile && JSON.stringify(form) !== JSON.stringify(asForm(profile)), [form, profile])
   function notify() { window.dispatchEvent(new CustomEvent(PROFILE_UPDATED_EVENT)) }
   async function save(event: FormEvent, advance = false) {
     event.preventDefault(); setBusy(true); setError(''); setMessage('')
     try {
-      await hostingerRequest('student/profile.php', { method: 'POST', body: JSON.stringify({ ...form, date_of_birth: form.date_of_birth || null, css_attempt_year: form.css_attempt_year ? Number(form.css_attempt_year) : null, optional_subjects: (form.optional_subjects || '').split(',').map(s => s.trim()).filter(Boolean) }) })
-      const { profile: p } = await hostingerRequest<{ profile: Profile }>('student/profile.php')
+      await request('student/profile.php', { method: 'POST', body: JSON.stringify({ ...form, date_of_birth: form.date_of_birth || null, css_attempt_year: form.css_attempt_year ? Number(form.css_attempt_year) : null, optional_subjects: (form.optional_subjects || '').split(',').map(s => s.trim()).filter(Boolean) }) })
+      const { profile: p } = await request<{ profile: Profile }>('student/profile.php')
       setProfile(p); setForm(asForm(p)); setMessage(p.completion.complete ? 'All 12 checks complete. Your account services are unlocked.' : `Saved. ${p.completion.completed} of 12 checks complete.`); notify()
       if (advance) setStep(s => Math.min(2, s + 1))
     } catch (e) { setError(e instanceof Error ? e.message : 'Your profile could not be saved.') }
@@ -104,8 +109,8 @@ export function StudentProfilePanel({ email }: { email: string }) {
     setBusy(true); setError(''); setMessage('')
     try {
       const body = new FormData(); body.append('photo', photo)
-      await hostingerRequest('student/photo.php', { method: 'POST', body })
-      const { profile: p } = await hostingerRequest<{ profile: Profile }>('student/profile.php')
+      await request('student/photo.php', { method: 'POST', body })
+      const { profile: p } = await request<{ profile: Profile }>('student/profile.php')
       setProfile(p); setPhoto(null); setPreview(''); setVersion(v => v + 1); notify()
       setMessage(p.completion.complete ? 'Profile complete. Your account services are unlocked.' : 'Photo saved. Complete the remaining checks to unlock your account.')
     } catch (e) { setError(e instanceof Error ? e.message : 'Your photo could not be uploaded.') }

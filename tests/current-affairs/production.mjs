@@ -9,7 +9,7 @@ for (let attempt = 1; attempt <= 18; attempt++) {
   try {
     const api = await get('/api/current-affairs.php')
     const data = await api.json().catch(() => ({}))
-    if (api.status === 401 && data.ok === false) { const session = await (await get('/api/auth/session.php')).json(); if (session.provider === 'hostinger') { ready = true; break } }
+    if (api.status === 401 && data.ok === false) { const session = await (await get('/api/auth/session.php')).json(); if (session.provider === 'hostinger') { const retired = await get('/api/account-migration.php'); if (retired.status === 410 && (await retired.json()).error === 'migration_closed') { ready = true; break } } }
     console.log('Waiting for the production briefing endpoint: HTTP ' + api.status)
   } catch { console.log('Waiting for the production briefing endpoint to respond.') }
   if (attempt < 18) await new Promise((resolve) => setTimeout(resolve, 10000))
