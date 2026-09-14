@@ -15,14 +15,15 @@ $hash=account_hash_password($password);
 try {
     $pdo->beginTransaction();
     $query=$pdo->prepare('SELECT id,email FROM users WHERE email=? FOR UPDATE'); $query->execute([$email]);
+    $outboxId=null;
     if (!$query->fetch()) {
         $id=cssv_uuid_v4();
         $pdo->prepare("INSERT INTO users(id,email,password_hash,auth_source,raw_metadata,created_at) VALUES(?,?,?,'local',?,NOW(6))")->execute([$id,$email,$hash,json_encode(['full_name'=>$name],JSON_THROW_ON_ERROR)]);
         $pdo->prepare('INSERT INTO student_profiles(user_id,display_name) VALUES(?,?)')->execute([$id,$name]);
-        account_queue_link($pdo,['id'=>$id,'email'=>$email],'verify');
+        $outboxId=account_queue_link($pdo,['id'=>$id,'email'=>$email],'verify');
     }
     $pdo->commit();
-    account_deliver_mail($pdo);
+    if ($outboxId!==null) account_deliver_mail($pdo,1,$outboxId);
     cssv_json(['ok'=>true,'confirmation_required'=>true,'message'=>'Check your email to confirm your account. If you already have an account, sign in or request a password reset.'],202);
 } catch (Throwable $error) {
     if ($pdo->inTransaction()) $pdo->rollBack();

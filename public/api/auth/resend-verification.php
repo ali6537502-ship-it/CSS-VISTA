@@ -10,7 +10,9 @@ cssv_log_security_event($pdo,'verification-request',null,$email);
 try {
     $pdo->beginTransaction();
     $query=$pdo->prepare('SELECT id,email FROM users WHERE email=? AND disabled_at IS NULL AND email_verified_at IS NULL FOR UPDATE'); $query->execute([$email]);
-    if ($user=$query->fetch()) account_queue_link($pdo,$user,'verify');
-    $pdo->commit(); account_deliver_mail($pdo);
+    $outboxId=null;
+    if ($user=$query->fetch()) $outboxId=account_queue_link($pdo,$user,'verify');
+    $pdo->commit();
+    if ($outboxId!==null) account_deliver_mail($pdo,1,$outboxId);
     cssv_json(['ok'=>true,'message'=>'If your account needs confirmation, a new link will be sent.'],202);
 } catch (Throwable $error) { if ($pdo->inTransaction()) $pdo->rollBack(); account_log_failure($error,'email confirmation'); }

@@ -10,7 +10,9 @@ cssv_log_security_event($pdo,'reset-request',null,$email);
 try {
     $pdo->beginTransaction();
     $query=$pdo->prepare('SELECT id,email FROM users WHERE email=? AND disabled_at IS NULL FOR UPDATE'); $query->execute([$email]);
-    if ($user=$query->fetch()) account_queue_link($pdo,$user,'reset');
-    $pdo->commit(); account_deliver_mail($pdo);
+    $outboxId=null;
+    if ($user=$query->fetch()) $outboxId=account_queue_link($pdo,$user,'reset');
+    $pdo->commit();
+    if ($outboxId!==null) account_deliver_mail($pdo,1,$outboxId);
     cssv_json(['ok'=>true,'message'=>'If an account exists for this email, a password-reset email will be sent.'],202);
 } catch (Throwable $error) { if ($pdo->inTransaction()) $pdo->rollBack(); account_log_failure($error,'password recovery'); }

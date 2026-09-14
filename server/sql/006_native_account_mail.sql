@@ -18,7 +18,11 @@ CREATE TABLE IF NOT EXISTS account_mail_outbox (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS account_reset_codes (
-    user_id CHAR(36) PRIMARY KEY, code_hash CHAR(64) NOT NULL,
-    attempts INT NOT NULL DEFAULT 0, expires_at DATETIME(6) NOT NULL,
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+        user_id CHAR(36) PRIMARY KEY,
+        code_hash CHAR(64) NOT NULL,
+        code_fingerprint CHAR(64) NULL,
+        attempts INT NOT NULL DEFAULT 0,
+        expires_at DATETIME(6) NOT NULL,
+        UNIQUE KEY account_reset_code_fingerprint_uidx(code_fingerprint),
+        FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

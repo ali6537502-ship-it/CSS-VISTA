@@ -4,6 +4,10 @@ require_once __DIR__ . '/_bootstrap.php';
 function account_auth_schema(PDO $pdo): void {
     static $ready = false;
     if ($ready) return;
+    if ((int)$pdo->query("SELECT GET_LOCK('cssvista-account-auth-schema',5)")->fetchColumn()!==1) {
+        throw new RuntimeException('account_auth_schema_lock_failed');
+    }
+    try {
     $pdo->exec("CREATE TABLE IF NOT EXISTS account_verification_tokens (
         id CHAR(36) PRIMARY KEY, user_id CHAR(36) NOT NULL, token_hash CHAR(64) NOT NULL UNIQUE,
         expires_at DATETIME(6) NOT NULL, used_at DATETIME(6) NULL,
@@ -21,11 +25,21 @@ function account_auth_schema(PDO $pdo): void {
         FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     $pdo->exec("CREATE TABLE IF NOT EXISTS account_reset_codes (
-    user_id CHAR(36) PRIMARY KEY, code_hash CHAR(64) NOT NULL,
+    user_id CHAR(36) PRIMARY KEY, code_hash CHAR(64) NOT NULL, code_fingerprint CHAR(64) NULL,
     attempts INT NOT NULL DEFAULT 0, expires_at DATETIME(6) NOT NULL,
+    UNIQUE KEY account_reset_code_fingerprint_uidx(code_fingerprint),
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+    $column=$pdo->prepare("SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='account_reset_codes' AND column_name='code_fingerprint'");
+    $column->execute();
+    if ((int)$column->fetchColumn()===0) $pdo->exec('ALTER TABLE account_reset_codes ADD code_fingerprint CHAR(64) NULL AFTER code_hash');
+    $index=$pdo->prepare("SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema=DATABASE() AND table_name='account_reset_codes' AND index_name='account_reset_code_fingerprint_uidx'");
+    $index->execute();
+    if ((int)$index->fetchColumn()===0) $pdo->exec('ALTER TABLE account_reset_codes ADD UNIQUE KEY account_reset_code_fingerprint_uidx(code_fingerprint)');
     $ready = true;
+    } finally {
+        $pdo->query("SELECT RELEASE_LOCK('cssvista-account-auth-schema')");
+    }
 }
 function account_require_json_origin(): void {
     $origin = rtrim((string)($_SERVER['HTTP_ORIGIN'] ?? ''), '/');
@@ -69,7 +83,22 @@ function account_decrypt_mail(string $encoded): ?array {
     $value=is_string($plain)?json_decode($plain,true):null;
     return is_array($value)?$value:null;
 }
-function account_queue_link(PDO $pdo, array $user, string $purpose): void {
+function account_issue_reset_code(PDO $pdo, string $userId): string {
+    $pdo->exec('DELETE FROM account_reset_codes WHERE expires_at<=NOW(6)');
+    $pdo->prepare('DELETE FROM account_reset_codes WHERE user_id=?')->execute([$userId]);
+    for ($attempt=0;$attempt<20;$attempt++) {
+        $code=str_pad((string)random_int(0,999999),6,'0',STR_PAD_LEFT);
+        try {
+            $pdo->prepare('INSERT INTO account_reset_codes(user_id,code_hash,code_fingerprint,attempts,expires_at) VALUES(?,?,?,0,DATE_ADD(NOW(6),INTERVAL 10 MINUTE))')
+                ->execute([$userId,cssv_hash_secret($userId.':'.$code),cssv_hash_secret('account-reset-code:'.$code)]);
+            return $code;
+        } catch (PDOException $error) {
+            if ((string)$error->getCode()!=='23000') throw $error;
+        }
+    }
+    throw new RuntimeException('unique_reset_code_generation_failed');
+}
+function account_queue_link(PDO $pdo, array $user, string $purpose): string {
     $verification=$purpose==='verify';
     $table=$verification?'account_verification_tokens':'password_reset_tokens';
     $token=rtrim(strtr(base64_encode(random_bytes(48)),'+/','-_'),'=');
@@ -79,22 +108,28 @@ function account_queue_link(PDO $pdo, array $user, string $purpose): void {
     $pdo->prepare("UPDATE account_mail_outbox SET status='cancelled',message_cipher=NULL WHERE user_id=? AND purpose=? AND status IN ('pending','failed')")->execute([$user['id'],$purpose]);
     $base=rtrim((string)cssv_env('CSSV_SITE_ORIGIN','https://www.css-vista.com'),'/');
     $link=$base.'/account?'.($verification?'verify=1':'reset=1').'#token='.rawurlencode($token);
-    $code = $verification ? null : str_pad((string)random_int(0,999999),6,'0',STR_PAD_LEFT);
-    if ($code !== null) $pdo->prepare('INSERT INTO account_reset_codes(user_id,code_hash,attempts,expires_at) VALUES(?,?,0,DATE_ADD(NOW(6),INTERVAL 10 MINUTE)) ON DUPLICATE KEY UPDATE code_hash=VALUES(code_hash),attempts=0,expires_at=VALUES(expires_at)')->execute([$user['id'],cssv_hash_secret($user['id'].':'.$code)]);
+    $code = $verification ? null : account_issue_reset_code($pdo,(string)$user['id']);
     $subject=$verification?'Confirm your CSS Vista account':'Reset your CSS Vista password';
     $text=$verification?"Confirm your email to start using your free CSS Vista account:\n\n":"A password reset was requested for your CSS Vista account. Choose a new password here:\n\n";
-    if ($code !== null) $text.="Your password reset code: ".$code."\n\nEnter this code with your email at ".$base."/account?recovery=code\nThe code expires in 10 minutes and allows five attempts.\n\nOr use this reset link:\n";
+    if ($code !== null) $text.="Your password reset code: ".$code."\nFor account: ".$user['email']."\n\nEnter this code with the same email address at ".$base."/account?recovery=code\nThe code expires in 10 minutes and allows five attempts. It will not work for another account.\n\nOr use this reset link:\n";
     $text.=$link."\n\nThis link can be used once and expires in ".($verification?'24 hours':'30 minutes').". If you did not request this, you can ignore this email.\n\nCSS Vista";
-    $pdo->prepare('INSERT INTO account_mail_outbox(id,user_id,purpose,message_cipher,expires_at) VALUES(?,?,?,?,?)')->execute([cssv_uuid_v4(),$user['id'],$purpose,account_encrypt_mail(['to'=>$user['email'],'subject'=>$subject,'text'=>$text]),$expires]);
+    $outboxId=cssv_uuid_v4();
+    $pdo->prepare('INSERT INTO account_mail_outbox(id,user_id,purpose,message_cipher,expires_at) VALUES(?,?,?,?,?)')->execute([$outboxId,$user['id'],$purpose,account_encrypt_mail(['to'=>$user['email'],'subject'=>$subject,'text'=>$text]),$expires]);
+    return $outboxId;
 }
-function account_deliver_mail(PDO $pdo, int $limit=1): array {
+function account_deliver_mail(PDO $pdo, int $limit=1, ?string $outboxId=null): array {
     $result=['accepted'=>0,'failed'=>0,'transport_ready'=>cssv_mail_transport_status()['ready']];
     if (!$result['transport_ready']) return $result;
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-account-mail',0)")->fetchColumn()!==1) return $result;
     try {
         $pdo->exec("UPDATE account_mail_outbox SET status='expired',message_cipher=NULL WHERE expires_at<=NOW(6) AND message_cipher IS NOT NULL");
-        $query=$pdo->prepare("SELECT id,message_cipher FROM account_mail_outbox WHERE status IN ('pending','failed') AND attempts<5 AND next_attempt_at<=NOW(6) AND expires_at>NOW(6) ORDER BY created_at LIMIT ?");
-        $query->bindValue(1,max(1,min(10,$limit)),PDO::PARAM_INT); $query->execute();
+        $sql="SELECT id,message_cipher FROM account_mail_outbox WHERE status IN ('pending','failed') AND attempts<5 AND next_attempt_at<=NOW(6) AND expires_at>NOW(6)";
+        if ($outboxId!==null) $sql.=' AND id=?';
+        $sql.=' ORDER BY created_at LIMIT ?';
+        $query=$pdo->prepare($sql);
+        $position=1;
+        if ($outboxId!==null) $query->bindValue($position++,$outboxId,PDO::PARAM_STR);
+        $query->bindValue($position,max(1,min(10,$limit)),PDO::PARAM_INT); $query->execute();
         foreach ($query->fetchAll() as $row) {
             $message=account_decrypt_mail((string)$row['message_cipher']);
             $accepted=$message && cssv_send_mail($message['to'],$message['subject'],$message['text']);

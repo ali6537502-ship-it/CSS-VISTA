@@ -16,7 +16,10 @@ try {
     if ($usingCode) {
         $query=$pdo->prepare('SELECT id FROM users WHERE email=? AND disabled_at IS NULL FOR UPDATE'); $query->execute([$email]); $id=$query->fetchColumn();
         $query=$pdo->prepare('SELECT * FROM account_reset_codes WHERE user_id=? FOR UPDATE'); $query->execute([$id ?: '']); $challenge=$query->fetch();
-        $valid=$challenge && (int)$challenge['attempts']<5 && strtotime($challenge['expires_at'].' UTC')>time() && hash_equals($challenge['code_hash'],cssv_hash_secret($id.':'.$code));
+        $fingerprint=cssv_hash_secret('account-reset-code:'.$code);
+        $valid=$challenge && (int)$challenge['attempts']<5 && strtotime($challenge['expires_at'].' UTC')>time()
+            && hash_equals($challenge['code_hash'],cssv_hash_secret($id.':'.$code))
+            && ($challenge['code_fingerprint']===null || hash_equals($challenge['code_fingerprint'],$fingerprint));
         if (!$valid) {
             if ($challenge) $pdo->prepare('UPDATE account_reset_codes SET attempts=LEAST(attempts+1,5) WHERE user_id=?')->execute([$id]);
             $pdo->commit(); cssv_log_security_event($pdo,'reset-failed'); cssv_fail('This code is invalid or expired. Request a new recovery email.',400,'invalid_reset_code');
