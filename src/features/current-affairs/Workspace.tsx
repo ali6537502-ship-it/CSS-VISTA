@@ -11,12 +11,12 @@ import WorkspaceTabs, { useWorkspaceSection } from './WorkspaceTabs'
 import './current-affairs.css'
 
 const links = [
-  ['/account/dashboard', 'Home'], ['/account/tasks', 'My Tasks'], ['/account/progress', 'My Progress'],
-  ['/account/english', 'Daily English'], [briefingRoot, 'Daily Affairs Brief'], ['/account/library', 'My Library'],
-  ['/account/settings', 'Profile & Settings'],
+  ['/account/dashboard', 'Back to My CSS Vista'], [briefingRoot, 'Daily Affairs Brief'],
+  ['/account/factbook', 'Daily Factbook'], [briefingRoot + '/archive', 'Archive'],
+  ['/account/saved', 'Saved Items'], ['/account/search', 'Search'], ['/account/settings', 'Profile & Settings'],
 ]
 function AccountNavigation() {
-  return <nav aria-label="My CSS Vista navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
+  return <nav aria-label="Daily Affairs Brief navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
 }
 function SignedInWorkspace() {
   const { signOut, user } = useAccount()
@@ -45,7 +45,7 @@ function SignedInWorkspace() {
       </div>
     </aside>
     <div className="ca-main">
-      <details className="ca-mobile-nav"><summary>My CSS Vista · Menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
+      <details className="ca-mobile-nav"><summary>Daily Affairs Brief · Menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
       {error && <p className="ca-error" role="alert">{error}</p>}
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
