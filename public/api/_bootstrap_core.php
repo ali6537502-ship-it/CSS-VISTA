@@ -15,6 +15,7 @@ if ($configPath && is_file($configPath)) {
     $loadedConfig = require $configPath;
     if (is_array($loadedConfig)) {
         $GLOBALS['CSSV_RUNTIME_CONFIG'] = $loadedConfig;
+        $GLOBALS['CSSV_RUNTIME_CONFIG_PATH'] = $configPath;
     }
 }
 
@@ -474,7 +475,49 @@ function cssv_remove_private_file(?string $relativePath): void
     }
 }
 
-function cssv_smtp_read($stream, int $expected): bool
+function cssv_mail_settings(?array $override = null): array
+{
+    $read = static function (string $name, ?string $default = null) use ($override): ?string {
+        if (is_array($override) && array_key_exists($name, $override)) {
+            $value = trim((string)$override[$name]);
+            return $value !== '' ? $value : $default;
+        }
+        return cssv_env($name, $default);
+    };
+    $user = $read('CSSV_SMTP_USER');
+    return [
+        'host' => $read('CSSV_SMTP_HOST'),
+        'user' => $user,
+        'password' => $read('CSSV_SMTP_PASSWORD'),
+        'port' => (int)($read('CSSV_SMTP_PORT', '465') ?? '465'),
+        'encryption' => strtolower((string)$read('CSSV_SMTP_ENCRYPTION', 'ssl')),
+        'from' => $read('CSSV_MAIL_FROM', $user ?: 'noreply@css-vista.com'),
+        'from_name' => $read('CSSV_MAIL_FROM_NAME', 'CSS Vista'),
+    ];
+}
+
+function cssv_mail_transport_status(?array $override = null): array
+{
+    $settings = cssv_mail_settings($override);
+    $smtpConfigured = (bool)$settings['host'] && (bool)$settings['user'] && $settings['password'] !== null
+        && (bool)$settings['from'] && filter_var($settings['user'], FILTER_VALIDATE_EMAIL)
+        && filter_var($settings['from'], FILTER_VALIDATE_EMAIL)
+        && in_array($settings['encryption'], ['ssl', 'tls'], true)
+        && $settings['port'] >= 1 && $settings['port'] <= 65535;
+    $testPhpMail = cssv_env('CI') === 'true' && cssv_env('CSSV_MAIL_TRANSPORT') === 'php-test' && function_exists('mail');
+    return [
+        'ready' => $smtpConfigured || $testPhpMail,
+        'transport' => $smtpConfigured ? 'smtp' : ($testPhpMail ? 'php-test' : 'unconfigured'),
+        'host' => (string)($settings['host'] ?? ''),
+        'port' => $settings['port'],
+        'encryption' => $settings['encryption'],
+        'user' => (string)($settings['user'] ?? ''),
+        'from' => (string)($settings['from'] ?? ''),
+        'from_name' => (string)($settings['from_name'] ?? 'CSS Vista'),
+    ];
+}
+
+function cssv_smtp_read($stream, int $expected, ?string &$response = null): bool
 {
     $response = '';
     while (($line = fgets($stream, 515)) !== false) {
@@ -486,32 +529,41 @@ function cssv_smtp_read($stream, int $expected): bool
     return (int)substr($response, 0, 3) === $expected;
 }
 
-function cssv_smtp_command($stream, string $command, int $expected): bool
+function cssv_smtp_command($stream, string $command, int $expected, string $stage): bool
 {
     fwrite($stream, $command . "\r\n");
-    return cssv_smtp_read($stream, $expected);
+    $response = '';
+    $ok = cssv_smtp_read($stream, $expected, $response);
+    if (!$ok) error_log('CSSV SMTP rejected stage ' . $stage . ' with response code ' . substr($response, 0, 3));
+    return $ok;
 }
 
-function cssv_send_mail(string $to, string $subject, string $text): bool
+function cssv_send_mail(string $to, string $subject, string $text, ?array $override = null): bool
 {
-    $from = cssv_env('CSSV_MAIL_FROM', 'noreply@css-vista.com');
-    $fromName = cssv_env('CSSV_MAIL_FROM_NAME', 'CSS Vista');
-    $host = cssv_env('CSSV_SMTP_HOST');
-    $user = cssv_env('CSSV_SMTP_USER');
-    $pass = cssv_env('CSSV_SMTP_PASSWORD');
-    $port = (int)(cssv_env('CSSV_SMTP_PORT', '587') ?? '587');
-    $encryption = strtolower((string)cssv_env('CSSV_SMTP_ENCRYPTION', 'tls'));
+    $settings = cssv_mail_settings($override);
+    $status = cssv_mail_transport_status($override);
+    $from = (string)($settings['from'] ?? '');
+    $fromName = (string)$settings['from_name'];
+    $host = (string)($settings['host'] ?? '');
+    $user = (string)($settings['user'] ?? '');
+    $pass = $settings['password'];
+    $port = (int)$settings['port'];
+    $encryption = (string)$settings['encryption'];
 
     if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !filter_var($from, FILTER_VALIDATE_EMAIL) || preg_match('/[\r\n]/', $to . $from . $fromName . $subject)) return false;
-    if ($host && (!in_array($encryption, ['ssl', 'tls'], true) || !preg_match('/^[a-z0-9.-]+$/i', $host) || $port < 1 || $port > 65535)) return false;
+    if ($host && !preg_match('/^[a-z0-9.-]+$/i', $host)) return false;
 
-    if (!$host || !$user || $pass === null) {
+    if ($status['transport'] === 'php-test') {
         $headers = [
             'From: ' . $fromName . ' <' . $from . '>',
             'Content-Type: text/plain; charset=UTF-8',
             'Content-Transfer-Encoding: 8bit',
         ];
         return function_exists('mail') && @mail($to, $subject, $text, implode("\r\n", $headers));
+    }
+    if (!$status['ready']) {
+        error_log('CSSV mail rejected: authenticated SMTP is not configured.');
+        return false;
     }
 
     $remote = ($encryption === 'ssl' ? 'ssl://' : '') . $host . ':' . $port;
@@ -521,20 +573,22 @@ function cssv_send_mail(string $to, string $subject, string $text): bool
         return false;
     }
     stream_set_timeout($stream, 10);
-    $ok = cssv_smtp_read($stream, 220)
-        && cssv_smtp_command($stream, 'EHLO css-vista.com', 250);
+    $greeting = '';
+    $ok = cssv_smtp_read($stream, 220, $greeting);
+    if (!$ok) error_log('CSSV SMTP rejected stage greeting with response code ' . substr($greeting, 0, 3));
+    $ok = $ok && cssv_smtp_command($stream, 'EHLO css-vista.com', 250, 'ehlo');
     if ($ok && $encryption === 'tls') {
-        $ok = cssv_smtp_command($stream, 'STARTTLS', 220)
+        $ok = cssv_smtp_command($stream, 'STARTTLS', 220, 'starttls')
             && stream_socket_enable_crypto($stream, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)
-            && cssv_smtp_command($stream, 'EHLO css-vista.com', 250);
+            && cssv_smtp_command($stream, 'EHLO css-vista.com', 250, 'secure-ehlo');
     }
     if ($ok) {
-        $ok = cssv_smtp_command($stream, 'AUTH LOGIN', 334)
-            && cssv_smtp_command($stream, base64_encode($user), 334)
-            && cssv_smtp_command($stream, base64_encode($pass), 235)
-            && cssv_smtp_command($stream, 'MAIL FROM:<' . $from . '>', 250)
-            && cssv_smtp_command($stream, 'RCPT TO:<' . $to . '>', 250)
-            && cssv_smtp_command($stream, 'DATA', 354);
+        $ok = cssv_smtp_command($stream, 'AUTH LOGIN', 334, 'auth')
+            && cssv_smtp_command($stream, base64_encode($user), 334, 'auth-user')
+            && cssv_smtp_command($stream, base64_encode((string)$pass), 235, 'auth-password')
+            && cssv_smtp_command($stream, 'MAIL FROM:<' . $from . '>', 250, 'mail-from')
+            && cssv_smtp_command($stream, 'RCPT TO:<' . $to . '>', 250, 'recipient')
+            && cssv_smtp_command($stream, 'DATA', 354, 'data');
     }
     if ($ok) {
         $safeSubject = str_replace(["\r", "\n"], '', $subject);
@@ -551,7 +605,7 @@ function cssv_send_mail(string $to, string $subject, string $text): bool
         fwrite($stream, implode("\r\n", $headers) . "\r\n\r\n" . str_replace("\n", "\r\n", $body) . "\r\n.\r\n");
         $ok = cssv_smtp_read($stream, 250);
     }
-    @cssv_smtp_command($stream, 'QUIT', 221);
+    @cssv_smtp_command($stream, 'QUIT', 221, 'quit');
     fclose($stream);
     return $ok;
 }

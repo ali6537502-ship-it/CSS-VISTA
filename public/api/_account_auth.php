@@ -33,6 +33,11 @@ function account_require_json_origin(): void {
     if ($origin !== '' && !hash_equals($allowed, $origin)) cssv_fail('This request must come from CSS Vista.', 403, 'invalid_origin');
     if (!preg_match('~^application/json(?:\s*;|$)~i', (string)($_SERVER['CONTENT_TYPE'] ?? ''))) cssv_fail('A JSON request is required.', 415, 'invalid_content_type');
 }
+function account_require_mail_transport(): void {
+    if (!cssv_mail_transport_status()['ready']) {
+        cssv_fail('Account email is temporarily unavailable. The website administrator has been notified.',503,'email_service_unavailable');
+    }
+}
 function account_password(mixed $value): string {
     if (!is_string($value) || strlen($value)<8 || strlen($value)>72 || str_contains($value,"\0")) cssv_fail('Use a password between 8 and 72 bytes long.',422,'invalid_password');
     return $value;
@@ -83,7 +88,8 @@ function account_queue_link(PDO $pdo, array $user, string $purpose): void {
     $pdo->prepare('INSERT INTO account_mail_outbox(id,user_id,purpose,message_cipher,expires_at) VALUES(?,?,?,?,?)')->execute([cssv_uuid_v4(),$user['id'],$purpose,account_encrypt_mail(['to'=>$user['email'],'subject'=>$subject,'text'=>$text]),$expires]);
 }
 function account_deliver_mail(PDO $pdo, int $limit=1): array {
-    $result=['accepted'=>0,'failed'=>0];
+    $result=['accepted'=>0,'failed'=>0,'transport_ready'=>cssv_mail_transport_status()['ready']];
+    if (!$result['transport_ready']) return $result;
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-account-mail',0)")->fetchColumn()!==1) return $result;
     try {
         $pdo->exec("UPDATE account_mail_outbox SET status='expired',message_cipher=NULL WHERE expires_at<=NOW(6) AND message_cipher IS NOT NULL");

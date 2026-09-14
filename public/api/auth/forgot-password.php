@@ -4,6 +4,7 @@ require_once dirname(__DIR__).'/_account_auth.php';
 cssv_require_method('POST'); account_require_json_origin();
 $pdo=cssv_db(); account_auth_schema($pdo); $body=cssv_request_json(8192);
 $email=cssv_normalize_email($body['email']??'');
+account_require_mail_transport();
 cssv_enforce_rate_limit($pdo,'reset-request',$email,4,3600);
 cssv_log_security_event($pdo,'reset-request',null,$email);
 try {
