@@ -7,6 +7,7 @@ import { useBriefing } from './useBriefing'
 import { CategoryGlance, CopyButton, EditionMeta, Empty, FactCard, LoadError, Loading, Pager, Publication, StoryCardView } from './ui'
 import Reader from './Reader'
 import Settings from './Settings'
+import WorkspaceTabs, { useWorkspaceSection } from './WorkspaceTabs'
 import './current-affairs.css'
 
 const links = [
@@ -40,7 +41,7 @@ function SignedInWorkspace() {
       </div>
     </aside>
     <div className="ca-main">
-      <details className="ca-mobile-nav"><summary>My CSS Vista · Account menu</summary><AccountNavigation /><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
+      <details className="ca-mobile-nav"><summary>My CSS Vista · Account menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/dashboard">Study progress</Link><Link to="/factbook">My personal factbook</Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
       {error && <p className="ca-error" role="alert">{error}</p>}
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
@@ -67,12 +68,12 @@ export default function Workspace() {
 function SectionHeading({ title, to, children }: { title: string; to?: string; children?: ReactNode }) {
   return <div className="ca-section-heading"><h2>{title}</h2>{to && <Link to={to}>{children || 'View all'} <ArrowRight size={15} /></Link>}</div>
 }
+const deskSections = [{ value: 'today', label: 'Today' }, { value: 'revision', label: 'Quick revision' }, { value: 'library', label: 'My library' }]
 function Dashboard() {
   const { user } = useAccount()
+  const [panel, setPanel] = useWorkspaceSection('panel', ['today', 'revision', 'library'], 'today')
   const [selection, setSelection] = useState('all')
   const [query, setQuery] = useState('')
-  const [revision, setRevision] = useState(false)
-  const [revealed, setRevealed] = useState<string[]>([])
   const result = useBriefing('view=overview', overviewSchema)
   const navigate = useNavigate()
   if (result.loading) return <Loading />
@@ -80,27 +81,65 @@ function Dashboard() {
   const data = result.data
   const hour = Number(new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hourCycle: 'h23', timeZone: 'Asia/Karachi' }).format(new Date()))
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
-  const name = (data.display_name || user?.user_metadata?.full_name || '').trim().split(/\s+/)[0]
-  const facts = data.facts.flatMap((s) => s.facts.map((fact) => ({ fact, story: s }))).slice(0, 6)
+  const name = (data.display_name || user?.display_name || '').trim().split(/\s+/)[0]
+  const facts = data.facts.flatMap(story => story.facts.map(fact => ({ fact, story }))).slice(0, 10)
   const preferred = new Set(data.preferences.preferred_categories)
   const stories = [...data.stories].sort((a, b) => Number(preferred.has(b.category)) - Number(preferred.has(a.category)))
+  const shown = stories.filter(s => selection === 'all' || s.reading_status !== 'read')
+  const completed = Math.max(0, data.summary.total - data.summary.unread)
   return <>
-    <header className="ca-heading"><p className="ca-eyebrow">YOUR DAILY READING DESK</p><h1>{greeting}{name ? ', ' + name : ''}</h1><p>Your Current Affairs Briefing</p><EditionMeta summary={data.summary} /></header>
-    <div className="ca-desk-tools">
-      <Link to="/account?settings=1" className="ca-profile-shortcut">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="Your profile" /> : <UserRound size={25} />}<span><strong>{user?.display_name || 'Your profile'}</strong><small>Edit your study profile</small></span><ArrowRight size={16} /></Link>
-      <form className="ca-search" role="search" onSubmit={e => { e.preventDefault(); navigate('/account/search?q=' + encodeURIComponent(query.trim())) }}><label className="sr-only" htmlFor="desk-search">Search your briefing archive</label><Search size={18} /><input id="desk-search" value={query} onChange={e => setQuery(e.target.value)} maxLength={200} placeholder="Find a topic, report or key fact…" /><button>Search</button></form>
-    </div>
-    <div className="ca-desk-actions"><Link to={briefingRoot + '?reading=unread'}><strong>{data.summary.unread}</strong><span>Unread today</span></Link><Link to="/account/saved"><BookOpen size={22} /><span>Saved for revision</span></Link><Link to="/account/factbook"><Search size={22} /><span>Explore today's facts</span></Link></div>
-    <CategoryGlance summary={data.summary} select={(category) => navigate(briefingRoot + (category ? '?category=' + encodeURIComponent(category) : ''))} />
-    <Publication summary={data.summary} />
-    {stories.length > 0 && <section><SectionHeading title="Today's Briefing" to={briefingRoot}>Complete edition</SectionHeading><div className="ca-chips ca-desk-tabs" role="group" aria-label="Filter displayed developments">{[['all','All shown'],['unread','Unread'],['saved','Saved']].map(([value,label]) => <button key={value} aria-pressed={selection === value} onClick={() => setSelection(value)}>{label}</button>)}</div>{!stories.some(s => selection === 'all' || (selection === 'saved' ? s.saved : s.reading_status !== 'read')) && <p className="ca-muted">No displayed developments match this filter. Open the complete edition to explore more.</p>}<div className="ca-card-grid">{stories.filter(s => selection === 'all' || (selection === 'saved' ? s.saved : s.reading_status !== 'read')).map((s) => <StoryCardView key={s.id + s.saved + s.reading_status} item={s} onChange={result.retry} />)}</div></section>}
-    {facts.length > 0 && <section><SectionHeading title="Quick Facts Today" to="/account/factbook" /><button className="ca-button ca-button-light ca-revision-toggle" aria-pressed={revision} onClick={() => { setRevision(v => !v); setRevealed([]) }}>{revision ? 'Show all facts' : 'Practise recall'}</button><div className="ca-fact-grid">{facts.map(({ fact, story }, n) => <div key={story.id + n}>{revision && !revealed.includes(story.id + n) ? <button className="ca-recall-card" onClick={() => setRevealed(v => [...v, story.id + n])}><small>{story.category}</small><strong>{typeof fact === 'string' ? 'Recall a key fact from this development' : fact.label}</strong><span>Tap to reveal</span></button> : <FactCard fact={fact} />}<Link className="ca-fact-context" to={briefingRoot + '/' + story.id}>Read in context <ArrowRight size={13} /></Link></div>)}</div></section>}
-    <div className="ca-two-columns">
-      <section><SectionHeading title="Continue Reading" />{data.continue_reading.length ? data.continue_reading.map((s) => <MiniStory key={s.id} item={s} />) : <p className="ca-muted">Opened developments will appear here until you mark them as read.</p>}</section>
-      <section><SectionHeading title="Recently Saved" to="/account/saved" />{data.saved.length ? data.saved.map((s) => <MiniStory key={s.id} item={s} />) : <p className="ca-muted">Use Save on a development to keep it for revision.</p>}</section>
-    </div>
-    <div className="ca-archive-banner"><div><h2>Connect today with the bigger picture</h2><p>Revisit earlier editions and follow a topic over time.</p>{data.weekly_read > 0 && <small>{data.weekly_read} developments read in the last 7 days</small>}</div><Link className="ca-button ca-button-light" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link></div>
+    <header className="ca-desk-header">
+      <div><p className="ca-eyebrow">YOUR DAILY READING DESK</p><h1>{greeting}{name ? ', ' + name : ''}</h1><EditionMeta summary={data.summary} /></div>
+      <Link to="/account/settings" className="ca-profile-chip" aria-label="Open your profile settings">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={21} />}<span>My profile</span></Link>
+    </header>
+    <WorkspaceTabs id="desk" label="Your workspace" items={deskSections} value={panel} onChange={setPanel} />
+    <section id="desk-today" role="tabpanel" aria-labelledby="desk-today-tab" hidden={panel !== 'today'} tabIndex={0}>
+      <div className="ca-edition-hero">
+        <div><p className="ca-eyebrow">{data.summary.published ? 'TODAY’S EDITION' : 'YOUR NEXT BRIEFING'}</p><h2>{data.summary.published ? 'Make sense of today.' : 'A clear place to start your day.'}</h2><p>{data.summary.published ? 'Read the headlines, explore the context, and keep the facts that matter.' : 'Your briefing will appear here once it is published. Your saved reading and revision space are always one tab away.'}</p>
+          <div className="ca-hero-actions">{data.summary.published ? <Link className="ca-button" to={briefingRoot}>Open today’s briefing <ArrowRight size={16} /></Link> : <Link className="ca-button" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link>}
+          <button className="ca-button ca-button-light" onClick={() => setPanel('library')}>Open my library</button></div>
+        </div>
+        {data.summary.total > 0 && <div className="ca-reading-progress"><strong>{completed}<span> / {data.summary.total}</span></strong><p>developments read today</p><progress value={completed} max={data.summary.total} aria-label="Today's reading progress" /><Link to={briefingRoot + '?reading=unread'}>{data.summary.unread} left to explore <ArrowRight size={14} /></Link></div>}
+      </div>
+      {data.continue_reading.length > 0 && <div className="ca-resume-strip"><span>Pick up where you left off</span><MiniStory item={data.continue_reading[0]} /></div>}
+      <CategoryGlance summary={data.summary} select={category => navigate(briefingRoot + (category ? '?category=' + encodeURIComponent(category) : ''))} />
+      {stories.length > 0 && <section><SectionHeading title="Headlines to explore" to={briefingRoot}>Complete edition</SectionHeading>
+        <div className="ca-chips ca-desk-tabs" role="group" aria-label="Filter displayed developments">{[['all','All shown'],['unread','Unread']].map(([value,label]) => <button key={value} aria-pressed={selection === value} onClick={() => setSelection(value)}>{label}</button>)}</div>
+        {shown.length ? <div className="ca-card-grid">{shown.map(story => <StoryCardView key={story.id + story.saved + story.reading_status} item={story} onChange={result.retry} />)}</div> : <Empty title="You’re caught up with these headlines">Open the complete edition to explore more developments.</Empty>}
+      </section>}
+    </section>
+    <section id="desk-revision" role="tabpanel" aria-labelledby="desk-revision-tab" hidden={panel !== 'revision'} tabIndex={0}>
+      <div className="ca-panel-heading"><h2>A few facts. A stronger recall.</h2><p>Take one fact at a time. Think of the answer, reveal it, then read it in context.</p></div>
+      {facts.length ? <RecallDeck facts={facts} /> : <Empty title="Your revision cards are being prepared" action={<Link className="ca-button" to="/account/factbook">Open Daily Factbook</Link>}>Facts from published developments will appear here automatically.</Empty>}
+      <Link className="ca-text-link" to="/account/factbook">Explore facts, statistics and Quick GK <ArrowRight size={16} /></Link>
+    </section>
+    <section id="desk-library" role="tabpanel" aria-labelledby="desk-library-tab" hidden={panel !== 'library'} tabIndex={0}>
+      <div className="ca-panel-heading"><h2>Your reading, in one place.</h2><p>Continue an analysis, revisit a saved development, or find an earlier edition.</p></div>
+      <form className="ca-search ca-library-search" role="search" onSubmit={event => { event.preventDefault(); navigate('/account/search?q=' + encodeURIComponent(query.trim())) }}>
+        <label className="sr-only" htmlFor="desk-search">Search your briefing archive</label><Search size={18} /><input id="desk-search" type="search" value={query} onChange={event => setQuery(event.target.value)} maxLength={200} placeholder="Find a topic, report or key fact…" /><button>Search</button>
+      </form>
+      <div className="ca-library-grid">
+        <section className="ca-library-card"><SectionHeading title="Continue reading" />{data.continue_reading.length ? data.continue_reading.map(story => <MiniStory key={story.id} item={story} />) : <><p className="ca-muted">Open a development and you can pick it up here later.</p><Link className="ca-text-link" to={briefingRoot}>Explore the briefing <ArrowRight size={15} /></Link></>}</section>
+        <section className="ca-library-card"><SectionHeading title="Saved for revision" to="/account/saved" />{data.saved.length ? data.saved.map(story => <MiniStory key={story.id} item={story} />) : <><p className="ca-muted">Use Save on any development to keep it in your personal collection.</p><Link className="ca-text-link" to="/account/saved">Open saved items <ArrowRight size={15} /></Link></>}</section>
+      </div>
+      <div className="ca-archive-banner"><div><h2>Follow the bigger picture</h2><p>Return to a complete day’s briefing or follow a topic over time.</p></div><Link className="ca-button ca-button-light" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link></div>
+    </section>
   </>
+}
+function RecallDeck({ facts }: { facts: { fact: Fact; story: StoryCard }[] }) {
+  const [position, setPosition] = useState(0)
+  const [revealed, setRevealed] = useState(false)
+  const index = Math.min(position, facts.length - 1)
+  const { fact, story } = facts[index]
+  function move(next: number) { setPosition(next); setRevealed(false) }
+  return <div className="ca-recall-deck">
+    <div className="ca-recall-meta"><span>{story.category}</span><span aria-live="polite">Fact {index + 1} of {facts.length}</span></div>
+    <h3>{typeof fact === 'string' ? 'What key fact do you remember from this development?' : fact.label}</h3>
+    <p className="ca-muted">{story.headline}</p>
+    <button className="ca-button ca-button-light" aria-expanded={revealed} aria-controls="recall-answer" onClick={() => setRevealed(value => !value)}>{revealed ? 'Hide answer' : 'Reveal answer'}</button>
+    <div id="recall-answer" hidden={!revealed} className="ca-recall-answer"><FactCard fact={fact} /><Link className="ca-text-link" to={briefingRoot + '/' + story.id}>Read in context <ArrowRight size={15} /></Link></div>
+    <div className="ca-recall-controls"><button className="ca-button ca-button-light" disabled={index === 0} onClick={() => move(index - 1)}>Previous fact</button><button className="ca-button" disabled={index === facts.length - 1} onClick={() => move(index + 1)}>Next fact <ArrowRight size={15} /></button></div>
+  </div>
 }
 function MiniStory({ item }: { item: StoryCard }) {
   return <Link className="ca-mini-story" to={briefingRoot + '/' + item.id}><span>{item.category} · {displayDate(item.publication_date)}</span><strong>{item.headline}</strong><ArrowRight size={15} /></Link>
