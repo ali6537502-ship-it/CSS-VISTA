@@ -1,16 +1,15 @@
 import { useMemo, useState, type FormEvent } from 'react'
-import { Archive, CalendarPlus, CalendarRange, Check, Clock3, Copy, MoveRight, Plus, RotateCcw } from 'lucide-react'
+import { Archive, CalendarPlus, CalendarRange, Check, Clock3, Copy, MoveRight, Plus, RotateCcw, Upload } from 'lucide-react'
 import PrintMenu from '@/components/PrintMenu'
 import {
   addStudyScheduleTasks, getState, updateStudyScheduleTask,
   type StudyScheduleTask, type SyllabusItemStatus,
 } from '@/lib/store'
-import { notifyProgressChanged } from '@/lib/progressEvents'
-
-const ARCHIVE_KEY = 'cssvista:tool:my-tasks-archive:v1'
-
-type ArchiveEntry = { archivedAt?: string; restoredAt?: string }
-type ArchiveState = Record<string, ArchiveEntry>
+import {
+  AI_SCHEDULE_PROMPT, activeStudyTasks, aiScheduleTaskId, archiveTaskState,
+  isTaskArchived, localTaskDateKey, parseCssVistaSchedule, readTaskArchiveState,
+  restoreTaskState, type TaskArchiveState,
+} from '@/lib/myTasks'
 
 const statusLabels: Record<SyllabusItemStatus, string> = {
   'not-started': 'Not Started',
@@ -18,46 +17,11 @@ const statusLabels: Record<SyllabusItemStatus, string> = {
   completed: 'Completed',
 }
 
-function dateKey(date = new Date()) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-}
-
 function readableDate(value: string) {
   const date = new Date(`${value}T12:00:00`)
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString(undefined, {
     weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
   })
-}
-
-function readArchiveState(): ArchiveState {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(ARCHIVE_KEY) || '{}') as unknown
-    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as ArchiveState : {}
-  } catch {
-    return {}
-  }
-}
-
-function archiveTime(entry?: ArchiveEntry) {
-  return entry?.archivedAt ? Date.parse(entry.archivedAt) || 0 : 0
-}
-
-function restoreTime(entry?: ArchiveEntry) {
-  return entry?.restoredAt ? Date.parse(entry.restoredAt) || 0 : 0
-}
-
-function archived(id: string, state: ArchiveState) {
-  const entry = state[id]
-  return archiveTime(entry) > restoreTime(entry)
-}
-
-function saveArchiveState(state: ArchiveState) {
-  try {
-    localStorage.setItem(ARCHIVE_KEY, JSON.stringify(state))
-    notifyProgressChanged()
-  } catch {
-    // The task itself is still preserved in the main CSS Vista progress record.
-  }
 }
 
 function manualTaskId() {
@@ -69,32 +33,41 @@ function manualTaskId() {
 
 export default function ScheduledSyllabusBoard({ compact = false }: { compact?: boolean }) {
   const [tasks, setTasks] = useState<StudyScheduleTask[]>(() => getState().studyScheduleTasks ?? [])
-  const [archiveState, setArchiveState] = useState<ArchiveState>(() => readArchiveState())
+  const [archiveState, setArchiveState] = useState<TaskArchiveState>(() => readTaskArchiveState())
   const [title, setTitle] = useState('')
   const [subject, setSubject] = useState('')
-  const [taskDate, setTaskDate] = useState(dateKey())
+  const [taskDate, setTaskDate] = useState(localTaskDateKey())
   const [taskTime, setTaskTime] = useState('')
   const [taskMinutes, setTaskMinutes] = useState(30)
+  const [aiText, setAiText] = useState('')
   const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
-  const activeTasks = useMemo(
-    () => tasks.filter((task) => !archived(task.id, archiveState)),
-    [archiveState, tasks],
-  )
+  const activeTasks = useMemo(() => activeStudyTasks(tasks, archiveState), [archiveState, tasks])
   const archivedTasks = useMemo(
-    () => tasks.filter((task) => archived(task.id, archiveState)),
+    () => tasks.filter((task) => isTaskArchived(task.id, archiveState)),
     [archiveState, tasks],
   )
   const grouped = useMemo(() => {
     const groups = new Map<string, StudyScheduleTask[]>()
-    ;[...activeTasks].sort((left, right) => left.date.localeCompare(right.date)).forEach((task) => {
+    ;[...activeTasks].sort((left, right) => `${left.date} ${left.time ?? ''}`.localeCompare(`${right.date} ${right.time ?? ''}`)).forEach((task) => {
       if (!groups.has(task.date)) groups.set(task.date, [])
       groups.get(task.date)!.push(task)
     })
     return [...groups.entries()]
   }, [activeTasks])
 
-  const today = dateKey()
+  const aiPreview = useMemo(() => {
+    if (!aiText.trim()) return null
+    try {
+      const parsed = parseCssVistaSchedule(aiText)
+      return { parsed, error: '' }
+    } catch (caught) {
+      return { parsed: null, error: caught instanceof Error ? caught.message : 'This schedule could not be read.' }
+    }
+  }, [aiText])
+
+  const today = localTaskDateKey()
   const completed = activeTasks.filter((task) => task.status === 'completed').length
   const todayCount = activeTasks.filter((task) => task.status !== 'completed' && task.date === today).length
   const overdueCount = activeTasks.filter((task) => task.status !== 'completed' && task.date < today).length
@@ -110,26 +83,14 @@ export default function ScheduledSyllabusBoard({ compact = false }: { compact?: 
   }
 
   function archiveTask(id: string) {
-    setArchiveState((current) => {
-      const next = {
-        ...current,
-        [id]: { ...current[id], archivedAt: new Date().toISOString() },
-      }
-      saveArchiveState(next)
-      return next
-    })
+    setArchiveState((current) => archiveTaskState(id, current))
+    setError('')
     setMessage('Task moved to Archive. It has not been deleted.')
   }
 
   function restoreTask(id: string) {
-    setArchiveState((current) => {
-      const next = {
-        ...current,
-        [id]: { ...current[id], restoredAt: new Date().toISOString() },
-      }
-      saveArchiveState(next)
-      return next
-    })
+    setArchiveState((current) => restoreTaskState(id, current))
+    setError('')
     setMessage('Task restored.')
   }
 
@@ -152,17 +113,58 @@ export default function ScheduledSyllabusBoard({ compact = false }: { compact?: 
     setSubject('')
     setTaskTime('')
     setTaskMinutes(30)
+    setError('')
     setMessage('Task added to your schedule.')
   }
 
+  async function copyAiPrompt() {
+    try {
+      await navigator.clipboard.writeText(AI_SCHEDULE_PROMPT)
+      setError('')
+      setMessage('AI schedule command copied. Paste it into ChatGPT or another AI, then tell it your routine and requirements.')
+    } catch {
+      setError('The prompt could not be copied automatically. Please try again.')
+    }
+  }
+
+  function importAiSchedule() {
+    setError('')
+    setMessage('')
+    try {
+      const parsed = parseCssVistaSchedule(aiText)
+      const additions = addStudyScheduleTasks(parsed.tasks.map((task, index) => ({
+        syllabusItemId: aiScheduleTaskId(task, index),
+        subject: task.subject,
+        paper: task.activity,
+        section: `AI schedule · ${task.priority} priority`,
+        topic: task.topic,
+        date: task.date,
+        time: task.time,
+        minutes: task.minutes,
+      })))
+      refreshTasks()
+      setAiText('')
+      setMessage(additions.length
+        ? `${parsed.title} imported: ${additions.length} task${additions.length === 1 ? '' : 's'} across ${parsed.dayCount} day${parsed.dayCount === 1 ? '' : 's'}.`
+        : 'This exact schedule is already in My Tasks, so no duplicates were created.')
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'The AI schedule could not be imported.')
+    }
+  }
+
   async function copyPlan() {
-    const text = grouped.flatMap(([date, rows]) => [
-      readableDate(date),
-      ...rows.map((task) => `- [${task.status === 'completed' ? 'x' : ' '}] ${task.subject}: ${task.topic}${task.time ? ` at ${task.time}` : ''} (${task.minutes} min)`),
-      '',
-    ]).join('\n')
-    await navigator.clipboard.writeText(text || 'No active tasks scheduled yet.')
-    setMessage('Active task plan copied.')
+    try {
+      const text = grouped.flatMap(([date, rows]) => [
+        readableDate(date),
+        ...rows.map((task) => `- [${task.status === 'completed' ? 'x' : ' '}] ${task.subject}: ${task.topic}${task.time ? ` at ${task.time}` : ''} (${task.minutes} min)`),
+        '',
+      ]).join('\n')
+      await navigator.clipboard.writeText(text || 'No active tasks scheduled yet.')
+      setError('')
+      setMessage('Active task plan copied.')
+    } catch {
+      setError('The plan could not be copied automatically.')
+    }
   }
 
   return (
@@ -171,7 +173,7 @@ export default function ScheduledSyllabusBoard({ compact = false }: { compact?: 
         <div>
           <p className="text-[10px] font-extrabold uppercase tracking-[.15em] text-amber-700">My CSS Vista</p>
           <h3 className="mt-1 font-display text-xl font-bold text-pine">My Tasks</h3>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Keep personal tasks and scheduled syllabus topics in one simple list. Unfinished past tasks remain visible, and archived tasks can always be restored.</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Your daily schedule in one place. Create a complete plan with AI in a few minutes, tick tasks as you finish them, and restore anything you archive.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={() => void copyPlan()} className="inline-flex min-h-10 items-center gap-2 rounded-lg border px-3 text-xs font-bold text-pine"><Copy className="h-4 w-4" /> Copy plan</button>
@@ -180,27 +182,58 @@ export default function ScheduledSyllabusBoard({ compact = false }: { compact?: 
       </div>
 
       {!compact && (
-        <form onSubmit={addPersonalTask} className="mt-5 rounded-xl border border-emerald-100 bg-emerald-50/40 p-4">
-          <div className="flex items-center gap-2 text-sm font-bold text-pine"><CalendarPlus className="h-4 w-4 text-emerald-800" /> Add a task</div>
-          <div className="mt-3 grid gap-3 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_9rem_7.5rem_6.5rem_auto] md:items-end">
-            <label className="text-xs font-semibold text-pine">Task
-              <input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={240} required placeholder="e.g. Revise sovereignty" className="mt-1 h-10 w-full rounded-lg border bg-white px-3 text-sm font-normal text-foreground" />
-            </label>
-            <label className="text-xs font-semibold text-pine">Subject
-              <input value={subject} onChange={(event) => setSubject(event.target.value)} maxLength={120} placeholder="Optional" className="mt-1 h-10 w-full rounded-lg border bg-white px-3 text-sm font-normal text-foreground" />
-            </label>
-            <label className="text-xs font-semibold text-pine">Date
-              <input type="date" value={taskDate} onChange={(event) => setTaskDate(event.target.value)} required className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
-            </label>
-            <label className="text-xs font-semibold text-pine">Time
-              <input type="time" value={taskTime} onChange={(event) => setTaskTime(event.target.value)} className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
-            </label>
-            <label className="text-xs font-semibold text-pine">Minutes
-              <input type="number" min={5} max={600} step={5} value={taskMinutes} onChange={(event) => setTaskMinutes(Math.max(5, Number(event.target.value) || 30))} className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
-            </label>
-            <button type="submit" className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-xs font-bold text-white hover:bg-emerald-900"><Plus className="h-4 w-4" /> Add</button>
+        <div className="mt-5 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50/90 to-white p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-[10px] font-extrabold uppercase tracking-[.15em] text-emerald-700">Fastest way</p>
+              <h4 className="mt-1 text-base font-bold text-pine">Create your whole schedule with AI</h4>
+              <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Copy the CSS Vista command, paste it into ChatGPT or another AI, tell it your routine, syllabus, priorities and available time, then paste its final CSS Vista block here.</p>
+            </div>
+            <button type="button" onClick={() => void copyAiPrompt()} className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-xs font-bold text-white"><Copy className="h-4 w-4" /> Copy AI command</button>
           </div>
-        </form>
+          <textarea
+            value={aiText}
+            onChange={(event) => { setAiText(event.target.value); setError(''); setMessage('') }}
+            rows={7}
+            spellCheck={false}
+            placeholder="Paste the AI output here. CSS Vista will detect CSSV_SCHEDULE_V1 automatically…"
+            className="mt-4 w-full rounded-xl border bg-white p-3 font-mono text-xs leading-5 text-foreground"
+          />
+          {aiPreview?.parsed && (
+            <p className="mt-2 rounded-lg bg-emerald-100/70 px-3 py-2 text-xs font-semibold text-emerald-950">Schedule detected: {aiPreview.parsed.tasks.length} tasks across {aiPreview.parsed.dayCount} days · {aiPreview.parsed.title}</p>
+          )}
+          {aiPreview?.error && aiText.includes('CSSV_SCHEDULE_V1') && (
+            <p className="mt-2 text-xs text-amber-800">{aiPreview.error}</p>
+          )}
+          <button type="button" onClick={importAiSchedule} disabled={!aiPreview?.parsed} className="mt-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-emerald-800 px-5 text-xs font-bold text-white disabled:cursor-not-allowed disabled:opacity-40"><Upload className="h-4 w-4" /> Import and create my schedule</button>
+        </div>
+      )}
+
+      {!compact && (
+        <details className="mt-4 rounded-xl border bg-white p-4">
+          <summary className="cursor-pointer text-sm font-bold text-pine">Or add one task manually</summary>
+          <form onSubmit={addPersonalTask} className="mt-4">
+            <div className="flex items-center gap-2 text-sm font-bold text-pine"><CalendarPlus className="h-4 w-4 text-emerald-800" /> Quick task</div>
+            <div className="mt-3 grid gap-3 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_9rem_7.5rem_6.5rem_auto] md:items-end">
+              <label className="text-xs font-semibold text-pine">Task
+                <input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={240} required placeholder="e.g. Revise sovereignty" className="mt-1 h-10 w-full rounded-lg border bg-white px-3 text-sm font-normal text-foreground" />
+              </label>
+              <label className="text-xs font-semibold text-pine">Subject
+                <input value={subject} onChange={(event) => setSubject(event.target.value)} maxLength={120} placeholder="Optional" className="mt-1 h-10 w-full rounded-lg border bg-white px-3 text-sm font-normal text-foreground" />
+              </label>
+              <label className="text-xs font-semibold text-pine">Date
+                <input type="date" value={taskDate} onChange={(event) => setTaskDate(event.target.value)} required className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
+              </label>
+              <label className="text-xs font-semibold text-pine">Time
+                <input type="time" value={taskTime} onChange={(event) => setTaskTime(event.target.value)} className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
+              </label>
+              <label className="text-xs font-semibold text-pine">Minutes
+                <input type="number" min={5} max={600} step={5} value={taskMinutes} onChange={(event) => setTaskMinutes(Math.max(5, Number(event.target.value) || 30))} className="mt-1 h-10 w-full rounded-lg border bg-white px-2 text-xs font-normal text-foreground" />
+              </label>
+              <button type="submit" className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-xs font-bold text-white hover:bg-emerald-900"><Plus className="h-4 w-4" /> Add</button>
+            </div>
+          </form>
+        </details>
       )}
 
       <div className="mt-4 grid gap-2 sm:grid-cols-4">
@@ -210,13 +243,14 @@ export default function ScheduledSyllabusBoard({ compact = false }: { compact?: 
         <div className="rounded-lg border bg-white px-3 py-2"><p className="text-[10px] font-bold uppercase tracking-wide text-muted-foreground">Completed</p><p className="mt-1 text-lg font-bold text-emerald-800">{completed}</p></div>
       </div>
 
-      {message && <p role="status" className="mt-3 rounded-lg bg-secondary/50 px-3 py-2 text-xs text-pine">{message}</p>}
+      {message && <p role="status" className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-xs text-emerald-950">{message}</p>}
+      {error && <p role="alert" className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-xs text-red-800">{error}</p>}
 
       {!activeTasks.length ? (
         <div className="mt-4 rounded-lg border border-dashed bg-secondary/30 px-4 py-8 text-center">
           <CalendarRange className="mx-auto h-6 w-6 text-emerald-800" />
           <p className="mt-2 text-sm font-semibold text-pine">No active tasks yet</p>
-          <p className="mt-1 text-xs text-muted-foreground">Add a personal task above or schedule a topic from the FPSC syllabus.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Use the AI schedule importer above or schedule a topic from the FPSC syllabus.</p>
         </div>
       ) : (
         <div className={`mt-4 space-y-4 ${compact ? 'max-h-[28rem] overflow-y-auto pr-1' : ''}`}>
