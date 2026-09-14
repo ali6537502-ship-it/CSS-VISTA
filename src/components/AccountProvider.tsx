@@ -120,10 +120,14 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       finally { authTransition.current = false }
     },
     async signUp(email, password, fullName) {
+      authTransition.current = true
+      sessionRequest.current?.abort(); const version = ++authVersion.current
       try {
-        const result = await hostingerRequest<{ confirmation_required: boolean }>('auth/register.php', { method: 'POST', body: JSON.stringify({ email, password, full_name: fullName.trim() }) })
-        return { confirmationRequired: result.confirmation_required }
+        const response = await hostingerRequest<{ user: AccountUser }>('auth/register.php', { method: 'POST', body: JSON.stringify({ email, password, full_name: fullName.trim() }) })
+        if (version === authVersion.current) { applyUser(response.user); hydrated.current = true; setLoading(false); broadcast() }
+        return {}
       } catch (error) { return { error: errorMessage(error) } }
+      finally { authTransition.current = false }
     },
     async requestPasswordReset(email) {
       try { await hostingerRequest('auth/forgot-password.php', { method: 'POST', body: JSON.stringify({ email }) }); return {} }
