@@ -265,7 +265,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
                 <p>{error}</p>
                 {showPhotoCompressor && (
                   <Link to="/photo-compressor" className="mt-2 inline-flex min-h-10 items-center rounded-lg border border-red-200 bg-white px-3 font-semibold text-pine hover:bg-red-50">
-                    Open Photo Compressor
+                    Resize photo to 60 KB
                   </Link>
                 )}
               </div>
@@ -318,6 +318,9 @@ export function StudentProfilePanel({ email }: { email: string }) {
             <div>
               <h3 className="text-lg font-bold text-pine">Add your profile photo</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">Choose a clear JPG, PNG or WebP photo that is 60 KB or smaller. Photos above 60 KB are not accepted.</p>
+              <Link to="/photo-compressor" className="mt-3 inline-flex min-h-10 items-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 text-sm font-semibold text-pine hover:bg-emerald-100">
+                Photo larger than 60 KB? Resize it here
+              </Link>
               <div className="mt-5 flex flex-wrap items-center gap-5">
                 <div className="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl border bg-emerald-50">
                   {photoUrl ? <img src={photoUrl} alt="Your profile photo preview" className="h-full w-full object-cover" /> : <UserRound size={48} className="text-emerald-700" />}
