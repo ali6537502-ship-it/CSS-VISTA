@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import { AccountProvider } from './components/AccountProvider.tsx'
 import { SiteContentProvider } from './components/SiteContentProvider.tsx'
+import TaskReminderOverlay from './components/TaskReminderOverlay.tsx'
 import { installChunkRecovery } from './lib/chunkRecovery.ts'
 
 installChunkRecovery()
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
       <AccountProvider>
         <SiteContentProvider>
           <App />
+          <TaskReminderOverlay />
         </SiteContentProvider>
       </AccountProvider>
     </BrowserRouter>
