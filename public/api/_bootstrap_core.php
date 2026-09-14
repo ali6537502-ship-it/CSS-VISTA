@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-const CSSV_MAX_PROFILE_PHOTO_BYTES = 25600; // 25 KiB hard server limit.
+const CSSV_MAX_PROFILE_PHOTO_BYTES = 61440; // 60 KiB hard server limit.
 const CSSV_MAX_PROFILE_PHOTO_PIXELS = 16000000;
 const CSSV_SESSION_COOKIE = 'cssv_session';
 const CSSV_CSRF_COOKIE = 'cssv_csrf';
@@ -413,7 +413,7 @@ function cssv_store_profile_photo(array $file, string $folder = 'student-photos'
     }
     $size = (int)$file['size'];
     if ($size < 512 || $size > CSSV_MAX_PROFILE_PHOTO_BYTES) {
-        cssv_fail('Profile photo must be 25 KB or smaller.', 422, 'photo_size_invalid');
+        cssv_fail('Profile photo must be 60 KB or smaller.', 422, 'photo_size_invalid');
     }
     $tmp = (string)$file['tmp_name'];
     if (!is_uploaded_file($tmp)) {
