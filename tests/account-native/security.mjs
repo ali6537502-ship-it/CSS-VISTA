@@ -165,6 +165,7 @@ async function latestCode(email) {
 }
 assert.equal((await call('auth/forgot-password.php',{email},a)).status,202)
 const primaryCode=await latestCode(email)
+execFileSync('php',['tests/account-native/expire.php',otherEmail,'clear-test-rate'])
 execFileSync('php',['tests/account-native/seed-stale-mail.php',email])
 const capturedBefore=new Set(await readdir('test-artifacts/account-mail'))
 assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
