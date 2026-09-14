@@ -61,7 +61,7 @@ function ActionCard({ to, icon: Icon, title, description, status, tone = 'plain'
 
 export default function MyCssVistaAccountHome() {
   const { user } = useAccount()
-  const [, setVersion] = useState(0)
+  const [version, setVersion] = useState(0)
   const briefing = useBriefing('view=overview', overviewSchema)
 
   useEffect(() => {
@@ -75,6 +75,7 @@ export default function MyCssVistaAccountHome() {
   }, [])
 
   const snapshot = useMemo(() => {
+    void version
     const state = getState()
     const stats = getStats()
     const revision = getRevisionStats()
@@ -84,7 +85,7 @@ export default function MyCssVistaAccountHome() {
     const syllabusDone = syllabusStatuses.filter((status) => status === 'completed').length
     const syllabusStarted = syllabusStatuses.filter((status) => status === 'in-progress').length
     return { stats, revision, due, syllabusDone, syllabusStarted, englishDone: dailyEnglishDoneCount() }
-  }, [user?.id])
+  }, [user?.id, version])
 
   const firstName = (user?.display_name || '').trim().split(/\s+/)[0]
   const unfinishedToday = snapshot.due.today.filter((task) => task.status !== 'completed').length
