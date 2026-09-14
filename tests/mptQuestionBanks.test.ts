@@ -42,7 +42,30 @@ test('reasoning bank accepts only its mapped General Science and Ability topics'
   assert.equal(matchesMptBankTopic('Deductive reasoning', definition), true)
   assert.equal(matchesMptBankTopic('Universe and astronomy', definition), false)
 
+  // The reasoning bank filters the CSS subject file, so the guard that the file
+  // is complete has to be against that file's own declared count. It used to
+  // compare it against the abilities bank's expectedCount, which counts the
+  // central general-ability shard instead - two unrelated sources, 478 against
+  // 900, so the test had been failing rather than checking anything.
+  const subjectIndex = JSON.parse(readFileSync(new URL('../public/css-subject-mcqs/index.json', import.meta.url), 'utf8')) as {
+    subjects: Array<{ slug: string; count: number }>
+  }
+  const declared = subjectIndex.subjects.find((subject) => subject.slug === definition.cssSubjectSlug)
+  assert.ok(declared, 'the reasoning bank points at a published CSS subject file')
+
   const source = JSON.parse(readFileSync(new URL('../public/css-subject-mcqs/general-science-and-ability.json', import.meta.url), 'utf8')) as Array<{ topic?: string }>
-  assert.equal(source.length, mptQuestionBanks.abilities?.expectedCount)
+  assert.equal(source.length, declared.count)
   assert.equal(source.filter((question) => matchesMptBankTopic(question.topic, definition)).length, definition.expectedCount)
+})
+
+test('the abilities bank expects the full central General Ability shard', () => {
+  const index = JSON.parse(readFileSync(new URL('../public/mcq/index.json', import.meta.url), 'utf8')) as {
+    categories: Array<{ slug: string; count: number }>
+  }
+  const definition = mptQuestionBanks.abilities!
+  for (const slug of definition.centralSlugs ?? []) {
+    const category = index.categories.find((entry) => entry.slug === slug)
+    assert.ok(category, `${slug} is published in the central bank index`)
+    assert.equal(category.count, definition.expectedCount, slug)
+  }
 })
