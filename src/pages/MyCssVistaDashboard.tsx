@@ -192,7 +192,7 @@ export default function MyCssVistaDashboard() {
         <section className="grid gap-4 xl:grid-cols-2">
           <article id="affairs" className="rounded-2xl border border-slate-200 bg-white p-5 scroll-mt-24">
             <div className="flex items-center gap-2 text-emerald-800"><Newspaper className="h-5 w-5" /><p className="text-[10px] font-extrabold uppercase tracking-[.15em]">Current Affairs</p></div>
-            <h2 className="mt-2 text-xl font-bold text-slate-950">Daily Affairs Brief</h2>
+            <h2 className="mt-2 text-xl font-bold text-slate-950">Current Affairs</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">Read today’s Pakistan and international developments, reports, facts and saved current-affairs material inside your account.</p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link to={briefingRoot} className="inline-flex min-h-10 items-center gap-1 rounded-lg bg-emerald-900 px-4 text-xs font-bold text-white">Open Current Affairs <ArrowRight className="h-4 w-4" /></Link>
