@@ -9,9 +9,8 @@ type Completion = { checks: Check[]; completed: number; total: number; percent: 
 type Profile = Record<string, unknown> & { completion: Completion; has_photo: boolean; email: string }
 type Field = { key: string; label: string; type?: string; max?: number; options?: string[]; hint?: string }
 
-const MAX_SOURCE_PHOTO_BYTES = 4 * 1024 * 1024
-const MAX_SAVED_PHOTO_BYTES = 60 * 1024
-const OVERSIZE_PHOTO_ERROR = 'This photo is larger than 4 MB. Resize it first, then upload it again.'
+const MAX_PROFILE_PHOTO_BYTES = 60 * 1024
+const OVERSIZE_PHOTO_ERROR = 'Profile photo must be 60 KB or smaller. Please resize the photo and upload it again.'
 
 const groups: { title: string; fields: Field[] }[] = [
   {
@@ -56,55 +55,17 @@ function asForm(p: Profile): Record<string, string> {
   }))
 }
 
-async function preparePhoto(file: File): Promise<File> {
+function preparePhoto(file: File): File {
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
     throw new Error('Choose a JPG, PNG or WebP photo.')
   }
-  if (file.size > MAX_SOURCE_PHOTO_BYTES) {
+  if (file.size < 512) {
+    throw new Error('Choose a valid photo file.')
+  }
+  if (file.size > MAX_PROFILE_PHOTO_BYTES) {
     throw new Error(OVERSIZE_PHOTO_ERROR)
   }
-
-  const bitmap = await createImageBitmap(file)
-  try {
-    if (bitmap.width < 120 || bitmap.height < 120) {
-      throw new Error('Choose a photo at least 120 × 120 pixels.')
-    }
-
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    if (!ctx) {
-      throw new Error('This browser could not prepare the photo. Try a smaller JPG.')
-    }
-
-    const side = Math.min(bitmap.width, bitmap.height)
-    for (const size of [480, 400, 320, 240, 160]) {
-      canvas.width = canvas.height = size
-      ctx.fillStyle = '#ffffff'
-      ctx.fillRect(0, 0, size, size)
-      ctx.drawImage(
-        bitmap,
-        (bitmap.width - side) / 2,
-        (bitmap.height - side) / 2,
-        side,
-        side,
-        0,
-        0,
-        size,
-        size,
-      )
-
-      for (const quality of [0.92, 0.85, 0.75, 0.65, 0.5, 0.35]) {
-        const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve, 'image/jpeg', quality))
-        if (blob && blob.size >= 512 && blob.size <= MAX_SAVED_PHOTO_BYTES) {
-          return new File([blob], 'profile.jpg', { type: 'image/jpeg' })
-        }
-      }
-    }
-
-    throw new Error('This photo could not be compressed to 60 KB. Please resize it and try again.')
-  } finally {
-    bitmap.close()
-  }
+  return file
 }
 
 export function StudentProfilePanel({ email }: { email: string }) {
@@ -156,7 +117,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
   }, [photo])
 
   const dirty = useMemo(() => profile && JSON.stringify(form) !== JSON.stringify(asForm(profile)), [form, profile])
-  const showPhotoCompressor = step === 2 && (error === OVERSIZE_PHOTO_ERROR || error.includes('compressed to 60 KB'))
+  const showPhotoCompressor = step === 2 && (error === OVERSIZE_PHOTO_ERROR || error.includes('60 KB'))
 
   function notify() {
     window.dispatchEvent(new CustomEvent(PROFILE_UPDATED_EVENT))
@@ -199,11 +160,11 @@ export function StudentProfilePanel({ email }: { email: string }) {
     setPhoto(null)
     setPreview('')
     try {
-      const next = await preparePhoto(file)
+      const next = preparePhoto(file)
       if (job === photoJob.current) setPhoto(next)
     } catch (e) {
       if (job === photoJob.current) {
-        setError(e instanceof Error ? e.message : 'The photo could not be prepared.')
+        setError(e instanceof Error ? e.message : 'The photo could not be checked.')
       }
     } finally {
       if (job === photoJob.current) setBusy(false)
@@ -212,6 +173,13 @@ export function StudentProfilePanel({ email }: { email: string }) {
 
   async function upload() {
     if (!photo) return
+    if (photo.size > MAX_PROFILE_PHOTO_BYTES) {
+      setPhoto(null)
+      setPreview('')
+      setError(OVERSIZE_PHOTO_ERROR)
+      return
+    }
+
     setBusy(true)
     setError('')
     setMessage('')
@@ -349,7 +317,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
           ) : (
             <div>
               <h3 className="text-lg font-bold text-pine">Add your profile photo</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">Choose a clear photo up to 4 MB. The website automatically crops it to a square and compresses it to 60 KB or less before upload. Check the preview before saving.</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">Choose a clear JPG, PNG or WebP photo that is 60 KB or smaller. Photos above 60 KB are not accepted.</p>
               <div className="mt-5 flex flex-wrap items-center gap-5">
                 <div className="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl border bg-emerald-50">
                   {photoUrl ? <img src={photoUrl} alt="Your profile photo preview" className="h-full w-full object-cover" /> : <UserRound size={48} className="text-emerald-700" />}
@@ -359,7 +327,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
                     <Camera size={17} />Choose photo
                     <input className="sr-only" name="photo" type="file" accept="image/jpeg,image/png,image/webp" disabled={busy} onChange={e => { void choosePhoto(e.target.files?.[0]); e.target.value = '' }} />
                   </label>
-                  <p className="mt-2 text-xs text-muted-foreground">JPG, PNG or WebP · source photo up to 4 MB · saved at 60 KB or less</p>
+                  <p className="mt-2 text-xs text-muted-foreground">JPG, PNG or WebP · maximum file size 60 KB</p>
                 </div>
               </div>
               {photo && (
@@ -367,7 +335,7 @@ export function StudentProfilePanel({ email }: { email: string }) {
                   <Save size={16} />Save photo
                 </button>
               )}
-              {busy && <p role="status" className="mt-3 flex gap-2 text-sm"><LoaderCircle size={17} className="animate-spin" />Preparing or saving your photo…</p>}
+              {busy && <p role="status" className="mt-3 flex gap-2 text-sm"><LoaderCircle size={17} className="animate-spin" />Checking or saving your photo…</p>}
               <button onClick={() => setStep(1)} className="mt-6 flex min-h-11 items-center gap-2 text-sm font-semibold text-pine"><ArrowLeft size={16} />Back to study details</button>
             </div>
           )}
