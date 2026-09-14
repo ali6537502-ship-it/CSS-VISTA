@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
-  ArrowRight, BookOpen, Bookmark, CalendarCheck2, Check, CheckCircle2, Clock3,
+  ArrowRight, BookOpen, Bookmark, CalendarCheck2, Check, CheckCircle2,
   History, LayoutDashboard, Newspaper, Settings, Target, Trophy, UserRound,
 } from 'lucide-react'
 import DailyEnglishPanel from '@/components/DailyEnglishPanel'
