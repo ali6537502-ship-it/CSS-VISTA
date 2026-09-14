@@ -19,7 +19,7 @@ function AccountNavigation() {
   return <nav aria-label="Account navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
 }
 function SignedInWorkspace() {
-  const { signOut } = useAccount()
+  const { signOut, user } = useAccount()
   const navigate = useNavigate()
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -35,13 +35,17 @@ function SignedInWorkspace() {
   return <div className="ca-workspace">
     <aside className="ca-sidebar">
       <Link to="/account/dashboard" className="ca-brand"><BookOpen size={21} /><span>My CSS Vista<small>Read. Understand. Remember.</small></span></Link>
+      <Link to="/account/settings" className="ca-sidebar-profile" aria-label="Open your profile settings">
+        {user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={20} aria-hidden="true" />}
+        <span><strong>{user?.display_name || 'My profile'}</strong><small>Account settings</small></span>
+      </Link>
       <AccountNavigation />
       <div className="ca-sidebar-footer"><Link to="/dashboard">Study progress <ArrowRight size={15} /></Link><Link to="/factbook">My personal factbook <ArrowRight size={15} /></Link>
         <button onClick={() => void logout()} disabled={busy}><LogOut size={16} /> {busy ? 'Signing out…' : 'Log out'}</button>
       </div>
     </aside>
     <div className="ca-main">
-      <details className="ca-mobile-nav"><summary>My CSS Vista · Account menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/dashboard">Study progress</Link><Link to="/factbook">My personal factbook</Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
+      <details className="ca-mobile-nav"><summary>My CSS Vista · Account menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link><Link to="/dashboard">Study progress</Link><Link to="/factbook">My personal factbook</Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
       {error && <p className="ca-error" role="alert">{error}</p>}
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
