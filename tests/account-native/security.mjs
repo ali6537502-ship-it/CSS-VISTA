@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile, readdir, stat } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable CI database required')
 const base = 'http://localhost:4173/api/'
@@ -151,14 +151,30 @@ for (const file of await readdir('dist/assets')) if (file.endsWith('.js')) asser
 execFileSync('php',['tests/account-native/expire.php',otherEmail,'clear-test-rate'])
 // Hostinger recovery codes are one-use, expire and allow at most five guesses.
 async function latestCode(email) {
-  for (const file of (await readdir('test-artifacts/account-mail')).reverse()) {
+  const directory='test-artifacts/account-mail'
+  const files=await Promise.all((await readdir(directory)).map(async file=>({file,modified:(await stat(directory+'/'+file)).mtimeMs})))
+  files.sort((left,right)=>right.modified-left.modified)
+  for (const {file} of files) {
     const raw=await readFile('test-artifacts/account-mail/'+file,'utf8')
-    if(raw.includes(email)) { const code=raw.match(/password reset code: ([0-9]{6})/)?.[1]; if(code)return code }
+    if(raw.includes(email)) {
+      const code=raw.match(/password reset code: ([0-9]{6})/)?.[1]
+      if(code){assert.match(raw,new RegExp(`For account: ${email.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}`));return code}
+    }
   }
   throw new Error('No native reset code captured')
 }
+assert.equal((await call('auth/forgot-password.php',{email},a)).status,202)
+const primaryCode=await latestCode(email)
+execFileSync('php',['tests/account-native/expire.php',otherEmail,'clear-test-rate'])
+execFileSync('php',['tests/account-native/seed-stale-mail.php',email])
+const capturedBefore=new Set(await readdir('test-artifacts/account-mail'))
 assert.equal((await call('auth/forgot-password.php',{email:otherEmail},b)).status,202)
+const newlyCaptured=(await readdir('test-artifacts/account-mail')).filter(file=>!capturedBefore.has(file))
+assert.equal(newlyCaptured.length,1,'A reset request delivered an unrelated queued message')
+assert.match(await readFile('test-artifacts/account-mail/'+newlyCaptured[0],'utf8'),new RegExp(`To: ${otherEmail}`))
 const firstCode=await latestCode(otherEmail)
+assert.notEqual(primaryCode,firstCode,'Two accounts received the same active reset code')
+assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:primaryCode,password:next})).status,400,'Another account code was accepted')
 const linkedToken=await mailToken(otherEmail,'reset')
 assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:firstCode,password:next})).status,200)
 assert.equal((await call('auth/reset-password.php',{email:otherEmail,code:firstCode,password})).status,400)
