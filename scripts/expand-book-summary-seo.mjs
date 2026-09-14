@@ -9,6 +9,10 @@ const clientDir = process.env.CSSV_CLIENT_DIR
 const siteOrigin = new URL(process.env.SITE_ORIGIN || 'https://www.css-vista.com').origin
 const library = JSON.parse(await readFile(join(root, 'public', 'book-summaries', 'index.json'), 'utf8'))
 const books = Array.isArray(library.books) ? library.books : []
+/* The library groups its titles, and each group carries its own description.
+   Saying which group a book sits in, and why that group exists, tells a reader
+   what the book is for here rather than leaving it as an isolated summary. */
+const categoriesBySlug = new Map((Array.isArray(library.categories) ? library.categories : []).map((entry) => [entry.slug, entry]))
 
 if (!books.length) throw new Error('Book-summary library is empty; refusing to generate SEO pages.')
 if (new Set(books.map((book) => book.slug)).size !== books.length) throw new Error('Book-summary slugs must be unique.')
@@ -54,13 +58,24 @@ function summaryHtml(body) {
   }).join('')
 }
 
+function readingContext(book) {
+  const category = categoriesBySlug.get(book.category)
+  if (!category) return ''
+  const facts = [
+    category.total ? `${category.total} titles in this group` : '',
+    book.wordCount ? `${Number(book.wordCount).toLocaleString('en-US')}-word summary` : '',
+    book.priority ? `priority ${book.priority}` : '',
+  ].filter(Boolean).join(' · ')
+  return `<section class="mt-10 rounded-xl border bg-white p-5"><h2 class="font-display text-2xl font-bold text-pine">Where this book fits</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">CSS Vista groups its reading list by the kind of preparation each book serves. <span class="font-semibold text-pine">${escapeHtml(book.title)}</span> sits in <a class="font-semibold text-emerald-800 underline underline-offset-2" href="/book-summaries">${escapeHtml(category.name)}</a>${facts ? ` — ${escapeHtml(facts)}` : ''}.</p>${category.description ? `<p class="mt-2 text-sm leading-relaxed text-slate-700">${escapeHtml(category.description)}</p>` : ''}<p class="mt-3 text-sm leading-relaxed text-slate-700">A summary is a way into a book, not a replacement for it. Use it to decide whether the argument is worth your reading time, and to recall the author&rsquo;s position and evidence when you need them in an essay or an answer.</p></section>`
+}
+
 function pageBody(book) {
   const related = books
     .filter((candidate) => candidate.category === book.category && candidate.slug !== book.slug)
     .slice(0, 6)
     .map((candidate) => `<li><a href="/book-summaries/${escapeHtml(candidate.slug)}">${escapeHtml(candidate.title)} by ${escapeHtml(candidate.author)}</a></li>`)
     .join('')
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">by ${escapeHtml(book.author)}</p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(book.body)}</section></article>${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">by ${escapeHtml(book.author)}</p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(book.body)}</section></article>${readingContext(book)}${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
 }
 
 function jsonLd(book, canonical, description) {
