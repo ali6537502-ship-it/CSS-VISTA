@@ -120,8 +120,6 @@ function readState(today: string): DailyEnglishState {
         legacySeeded: parsed.legacySeeded !== false,
       }
     }
-    // Migrate the original calendar-slice format. The legacy history is seeded
-    // after the banks load so previously exposed days are not shown again.
     return {
       version: 2,
       startedOn: parsed.startedOn,
@@ -169,6 +167,7 @@ export default function DailyEnglishPanel() {
   const today = dateKey()
   const { user, syncStatus } = useAccount()
   const [state, setState] = useState<DailyEnglishState>(() => readState(today))
+  const [historyLoaded, setHistoryLoaded] = useState(!user)
   const [vocabulary, setVocabulary] = useState<VocabWord[]>([])
   const syncReady = !user || syncStatus === 'synced' || syncStatus === 'error'
 
@@ -182,8 +181,18 @@ export default function DailyEnglishPanel() {
     return () => { active = false }
   }, [])
 
-  // Account sync can replace localStorage after this component mounts. Always
-  // re-read the synced record instead of continuing with an old device copy.
+  // Initial account sync applies its merged snapshot directly to localStorage.
+  // Re-read only after that sync settles, before assigning any unseen items.
+  useEffect(() => {
+    if (!syncReady) {
+      setHistoryLoaded(false)
+      return
+    }
+    const stored = readState(today)
+    setState((current) => sameState(current, stored) ? current : stored)
+    setHistoryLoaded(true)
+  }, [syncReady, today, user?.id])
+
   useEffect(() => {
     const refresh = () => {
       const stored = readState(today)
@@ -198,12 +207,12 @@ export default function DailyEnglishPanel() {
   }, [today])
 
   useEffect(() => {
-    if (!syncReady) return
+    if (!syncReady || !historyLoaded) return
     writeState(state)
-  }, [state, syncReady])
+  }, [historyLoaded, state, syncReady])
 
   useEffect(() => {
-    if (!syncReady || vocabBank.length === 0) return
+    if (!syncReady || !historyLoaded || vocabBank.length === 0) return
     setState((current) => {
       const seen: Record<EnglishSection, string[]> = {
         vocab: [...current.seen.vocab],
@@ -248,7 +257,7 @@ export default function DailyEnglishPanel() {
       const next: DailyEnglishState = { ...current, version: 2, assignments, seen, legacySeeded }
       return sameState(current, next) ? current : next
     })
-  }, [idiomBank, pairBank, syncReady, today, vocabBank])
+  }, [historyLoaded, idiomBank, pairBank, syncReady, today, vocabBank])
 
   const vocabMap = useMemo(() => new Map(vocabBank.map((item) => [vocabId(item), item])), [vocabBank])
   const idiomMap = useMemo(() => new Map(idiomBank.map((item) => [idiomId(item), item])), [idiomBank])
@@ -278,7 +287,7 @@ export default function DailyEnglishPanel() {
         <div className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700"><Languages className="h-4 w-4 text-emerald-800" />{completedCount}/3 tasks done</div>
       </div>
 
-      {!syncReady ? <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700">Syncing your Daily English history before assigning today&apos;s unseen items…</div> : <>
+      {!syncReady || !historyLoaded ? <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700">Syncing your Daily English history before assigning today&apos;s unseen items…</div> : <>
         <div className="mt-5 rounded-xl border border-slate-200 p-4">
           <div className="flex flex-wrap items-center justify-between gap-3"><div><h3 className="text-base font-bold text-slate-950">20 Vocabulary Words</h3><p className="text-xs text-slate-500">Day {dayIndex + 1} · unseen words from the CSS Vista English bank</p></div><SectionTick done={Boolean(completed.vocab)} label="Mark vocabulary done" onClick={() => toggle('vocab')} /></div>
           {dailyWords.length > 0 ? <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">{dailyWords.map((item, index) => <VocabCard key={vocabId(item)} item={item} index={index} />)}</div> : <p className="mt-4 rounded-lg bg-slate-50 p-4 text-xs font-semibold text-slate-600">You have reached the end of the current vocabulary bank. CSS Vista will not repeat earlier words.</p>}
