@@ -94,7 +94,7 @@ export default function MyCssVistaDashboard() {
   useEffect(() => {
     fetch('/fpsc-syllabus.json')
       .then((response) => response.ok ? response.json() as Promise<FpscSyllabusPayload> : Promise.reject())
-      .then((data) => setSyllabusTotal((data.subjects ?? []).reduce((total, subject) => total + (subject.sections ?? []).reduce((sum, section) => sum + (section.items?.length ?? 0), 0, 0), 0)))
+      .then((data) => setSyllabusTotal((data.subjects ?? []).reduce((total, subject) => total + (subject.sections ?? []).reduce((sum, section) => sum + (section.items?.length ?? 0), 0), 0)))
       .catch(() => setSyllabusTotal(0))
   }, [])
 
