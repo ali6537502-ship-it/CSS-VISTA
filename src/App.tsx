@@ -54,6 +54,10 @@ const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
 const MyCssVistaDashboard = lazy(() => import('./pages/MyCssVistaAccountHome'))
+const MyCssVistaTasksPage = lazy(() => import('./pages/MyCssVistaTasksPage'))
+const MyCssVistaProgressPage = lazy(() => import('./pages/MyCssVistaProgressPage'))
+const MyCssVistaEnglishPage = lazy(() => import('./pages/MyCssVistaEnglishPage'))
+const MyCssVistaLibraryPage = lazy(() => import('./pages/MyCssVistaLibraryPage'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -143,6 +147,10 @@ export default function App() {
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
         <Route path="/account/dashboard" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
+        <Route path="/account/tasks" element={<ProfileGate><S><MyCssVistaTasksPage /></S></ProfileGate>} />
+        <Route path="/account/progress" element={<ProfileGate><S><MyCssVistaProgressPage /></S></ProfileGate>} />
+        <Route path="/account/english" element={<ProfileGate><S><MyCssVistaEnglishPage /></S></ProfileGate>} />
+        <Route path="/account/library" element={<ProfileGate><S><MyCssVistaLibraryPage /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
