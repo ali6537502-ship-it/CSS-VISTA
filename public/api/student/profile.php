@@ -7,36 +7,6 @@ $pdo = cssv_db();
 $session = cssv_require_user($pdo, false);
 $userId = (string)$session['user_id'];
 
-function cssv_ensure_previous_student_history_schema(PDO $pdo): void
-{
-    static $ready = false;
-    if ($ready) return;
-
-    if ((int)$pdo->query("SELECT GET_LOCK('cssvista-previous-student-history',5)")->fetchColumn() !== 1) {
-        throw new RuntimeException('previous_student_history_schema_lock_failed');
-    }
-
-    try {
-        $columns = [
-            'previous_css_vista_student' => "VARCHAR(64) NOT NULL DEFAULT '' AFTER previous_academy_mentor",
-            'previous_css_vista_services' => 'JSON NULL AFTER previous_css_vista_student',
-            'previous_css_vista_details' => "VARCHAR(500) NOT NULL DEFAULT '' AFTER previous_css_vista_services",
-        ];
-        $exists = $pdo->prepare(
-            "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='student_profiles' AND column_name=?"
-        );
-        foreach ($columns as $name => $definition) {
-            $exists->execute([$name]);
-            if ((int)$exists->fetchColumn() === 0) {
-                $pdo->exec('ALTER TABLE student_profiles ADD COLUMN `' . $name . '` ' . $definition);
-            }
-        }
-        $ready = true;
-    } finally {
-        $pdo->query("SELECT RELEASE_LOCK('cssvista-previous-student-history')");
-    }
-}
-
 try {
     cssv_ensure_previous_student_history_schema($pdo);
 } catch (Throwable $error) {
