@@ -1,0 +1,65 @@
+name: One-time Current Affairs core rename
+
+on:
+  push:
+    branches:
+      - chatgpt-current-affairs-core-rename
+
+permissions:
+  contents: write
+
+jobs:
+  rename:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt-current-affairs-core-rename
+          fetch-depth: 0
+      - name: Rename feature at source
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          targets = [
+              Path('src/features/current-affairs/Introduction.tsx'),
+              Path('src/features/current-affairs/Workspace.tsx'),
+              Path('src/data/routeRegistry.mjs'),
+              Path('src/pages/Account.tsx'),
+              Path('src/pages/MyCssVistaDashboard.tsx'),
+          ]
+
+          for path in targets:
+              text = path.read_text(encoding='utf-8')
+              text = text.replace('DAILY AFFAIRS ARCHIVE', 'CURRENT AFFAIRS ARCHIVE')
+              text = text.replace('Daily Affairs Archive', 'Current Affairs Archive')
+              text = text.replace('DAILY AFFAIRS BRIEF', 'CURRENT AFFAIRS')
+              text = text.replace('Daily Affairs Brief', 'Current Affairs')
+              text = text.replace('Your Current Affairs will appear here once it is published.', 'Your Current Affairs edition will appear here once it is published.')
+              text = text.replace('return to a day&apos;s complete Current Affairs.', 'return to a day&apos;s complete Current Affairs edition.')
+              path.write_text(text, encoding='utf-8')
+
+          leftovers = []
+          for path in targets:
+              text = path.read_text(encoding='utf-8')
+              if 'Daily Affairs' in text or 'DAILY AFFAIRS' in text:
+                  leftovers.append(str(path))
+          if leftovers:
+              raise SystemExit('Old feature name remains in: ' + ', '.join(leftovers))
+          PY
+      - name: Remove one-time workflow and commit
+        shell: bash
+        run: |
+          rm .github/workflows/chatgpt-current-affairs-core-rename.yml
+          git config user.name "CSS Vista automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/features/current-affairs/Introduction.tsx \
+                  src/features/current-affairs/Workspace.tsx \
+                  src/data/routeRegistry.mjs \
+                  src/pages/Account.tsx \
+                  src/pages/MyCssVistaDashboard.tsx \
+                  .github/workflows/chatgpt-current-affairs-core-rename.yml
+          git commit -m "Rename Daily Affairs to Current Affairs at source"
+          git push origin HEAD:chatgpt-current-affairs-core-rename
