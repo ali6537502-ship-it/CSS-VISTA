@@ -8,6 +8,7 @@ $email=cssv_normalize_email($body['email']??'');
 $password=account_password($body['password']??null);
 $name=trim((string)($body['full_name']??''));
 if ($name===''||mb_strlen($name)>180||preg_match('/[\x00-\x1F]/',$name)) cssv_fail('Enter your full name, up to 180 characters.',422,'invalid_name');
+account_require_mail_transport();
 cssv_enforce_rate_limit($pdo,'account-register',$email,6,3600);
 cssv_log_security_event($pdo,'account-register',null,$email);
 $hash=account_hash_password($password);

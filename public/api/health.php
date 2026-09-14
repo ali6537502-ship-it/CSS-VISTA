@@ -14,13 +14,14 @@ $checks = [
     'secure_random' => function_exists('random_bytes'),
 ];
 
+$mailStatus = cssv_mail_transport_status();
 $configured = [
     'database' => (bool)cssv_env('CSSV_DB_HOST') && (bool)cssv_env('CSSV_DB_NAME') && (bool)cssv_env('CSSV_DB_USER') && cssv_env('CSSV_DB_PASSWORD') !== null,
     'app_secret' => strlen((string)cssv_env('CSSV_APP_SECRET', '')) >= 32,
     'private_storage' => (bool)cssv_env('CSSV_PRIVATE_STORAGE_DIR'),
     'native_accounts' => true,
-    'php_mail' => function_exists('mail'),
-    'smtp' => (bool)cssv_env('CSSV_SMTP_HOST') && (bool)cssv_env('CSSV_SMTP_USER') && cssv_env('CSSV_SMTP_PASSWORD') !== null,
+    'mail_ready' => $mailStatus['ready'],
+    'smtp' => $mailStatus['transport'] === 'smtp',
 ];
 
 $db = ['configured' => $configured['database'], 'reachable' => false, 'schema_ready' => false];
