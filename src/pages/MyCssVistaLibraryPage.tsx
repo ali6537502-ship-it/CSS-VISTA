@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { Archive, ArrowRight, Bookmark, BookOpenCheck, Search } from 'lucide-react'
+import { Archive, ArrowRight, Bookmark, BookOpen, Search } from 'lucide-react'
 import MyCssVistaNav from '@/components/MyCssVistaNav'
 
 const items = [
@@ -13,7 +13,7 @@ const items = [
     to: '/account/factbook',
     title: 'Daily Factbook',
     description: 'Revise facts, statistics and Quick GK from Daily Affairs Brief.',
-    icon: BookOpenCheck,
+    icon: BookOpen,
   },
   {
     to: '/account/current-affairs/archive',
