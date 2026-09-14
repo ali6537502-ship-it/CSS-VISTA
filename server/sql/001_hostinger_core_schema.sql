@@ -51,6 +51,9 @@ CREATE TABLE IF NOT EXISTS student_profiles (
   optional_subjects JSON NULL,
   education VARCHAR(240) NOT NULL DEFAULT '',
   previous_academy_mentor VARCHAR(240) NOT NULL DEFAULT '',
+  previous_css_vista_student VARCHAR(64) NOT NULL DEFAULT '',
+  previous_css_vista_services JSON NULL,
+  previous_css_vista_details VARCHAR(500) NOT NULL DEFAULT '',
   avatar_url VARCHAR(1000) NULL,
   profile_photo_path VARCHAR(900) NULL,
   profile_photo_mime VARCHAR(80) NULL,
@@ -69,7 +72,7 @@ CREATE TABLE IF NOT EXISTS student_profiles (
   KEY student_profiles_attempt_idx (css_attempt_year),
   KEY student_profiles_last_seen_idx (last_seen_at),
   CONSTRAINT student_profiles_user_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  CONSTRAINT student_profiles_photo_size_chk CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 25600)
+  CONSTRAINT student_profiles_photo_size_chk CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 61440)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS student_progress (
@@ -290,7 +293,7 @@ CREATE TABLE IF NOT EXISTS batch_registrations (
   KEY batch_registrations_dob_idx (date_of_birth),
   CONSTRAINT batch_registrations_batch_fk FOREIGN KEY (batch_id) REFERENCES batches(id) ON DELETE RESTRICT,
   CONSTRAINT batch_registrations_user_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
-  CONSTRAINT batch_registrations_photo_size_chk CHECK (photo_bytes <= 25600),
+  CONSTRAINT batch_registrations_photo_size_chk CHECK (photo_bytes <= 61440),
   CONSTRAINT batch_registrations_status_chk CHECK (status IN ('new','contacted','confirmed','payment-pending','paid','enrolled','waitlisted','rejected','withdrawn')),
   CONSTRAINT batch_registrations_payment_chk CHECK (payment_status IN ('unpaid','pending','partial','paid','refunded','waived'))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
