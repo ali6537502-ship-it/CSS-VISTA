@@ -541,10 +541,313 @@ function languageGrammarSection() {
   return html
 }
 
+/* ------------------------------------------- sections from app data modules */
+
+function definitionList(entries) {
+  const rows = entries
+    .filter(([, value]) => value)
+    .map(([label, value]) => `<li><span class="font-semibold text-pine">${escapeHtml(label)}:</span> ${escapeHtml(cleanText(value))}</li>`)
+    .join('')
+  return rows ? `<ul class="mt-2 space-y-1 text-sm leading-relaxed text-slate-700">${rows}</ul>` : ''
+}
+
+function mentorsSection(context) {
+  const mentors = context.app?.site?.mentors
+  if (!Array.isArray(mentors) || !mentors.length) return ''
+  const cards = mentors.map((mentor) => {
+    const facts = definitionList([
+      ['Role', mentor.role],
+      ['Credentials', Array.isArray(mentor.credentials) ? mentor.credentials.join(' · ') : ''],
+      ['Optional subjects', Array.isArray(mentor.optionalSubjects) ? mentor.optionalSubjects.join(', ') : ''],
+      ['Mentoring', Array.isArray(mentor.services) ? mentor.services.join(', ') : ''],
+    ])
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(mentor.name)}</h3>${mentor.bio ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(cleanText(mentor.bio))}</p>` : ''}${facts}</div>`
+  }).join('')
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Who teaches on CSS Vista</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">The people published on the platform, with the credentials and subjects they actually mentor. CSS Vista does not list unverified partnerships, awards or student-result claims.</p><div class="mt-4 rounded-xl border bg-white p-5">${cards}</div></section>`
+}
+
+function servicesSection(context) {
+  const groups = context.app?.services?.serviceGroups
+  if (!Array.isArray(groups) || !groups.length) return ''
+  const cards = groups.map((group) => {
+    const facts = definitionList([
+      ['Nature of work', group.work],
+      ['Typical postings', group.postings],
+      ['Training', group.training],
+      ['Skills that matter', group.skills],
+      ['Challenges', group.challenges],
+    ])
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(group.name)}</h3>${group.role ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(cleanText(group.role))}</p>` : ''}${facts}</div>`
+  }).join('')
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">The occupational groups, one by one</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`All ${groups.length} CSS occupational groups with the work each does, where its officers are posted, the training that follows selection and the demands of the job.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${cards}</div></section>`
+}
+
+function essaySection(context) {
+  const essay = context.app?.essay
+  const themes = Array.isArray(essay?.essayThemes) ? essay.essayThemes : []
+  if (!themes.length) return ''
+
+  const themeBlocks = themes.map((theme) => {
+    const angles = Array.isArray(theme.angles) && theme.angles.length
+      ? `<p class="mt-1 text-sm text-slate-700"><span class="font-semibold text-pine">Angles:</span> ${escapeHtml(theme.angles.join(' · '))}</p>`
+      : ''
+    const samples = Array.isArray(theme.sampleTopics) && theme.sampleTopics.length
+      ? `<ul class="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${theme.sampleTopics.map((topic) => `<li>${escapeHtml(cleanText(topic))}</li>`).join('')}</ul>`
+      : ''
+    return `<div class="mt-4"><h3 class="font-semibold text-pine">${escapeHtml(theme.name)}</h3>${angles}${samples}</div>`
+  }).join('')
+
+  let html = `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Essay themes and the angles they are set from</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${themes.length} recurring essay themes, each with the angles examiners tend to use and topics that have been set on them.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${themeBlocks}</div></section>`
+
+  const rubric = Array.isArray(essay?.essayRubric) ? essay.essayRubric : []
+  if (rubric.length) {
+    const rows = rubric.map((item) => {
+      const label = typeof item === 'string' ? item : item.label || item.title || item.name
+      const detail = typeof item === 'string' ? '' : item.detail || item.description || item.help
+      if (!label) return ''
+      return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(label))}</span>${detail ? ` — ${escapeHtml(cleanText(detail))}` : ''}</li>`
+    }).filter(Boolean).join('')
+    if (rows) html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Self-assessment checklist</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">What to check in your own essay after writing it, before comparing it with anyone else&rsquo;s.</p><ul class="mt-4 list-disc space-y-1 rounded-xl border bg-white p-5 pl-9 text-sm leading-relaxed text-slate-700">${rows}</ul></section>`
+  }
+  return html
+}
+
+function vocabularySection(context) {
+  const words = context.app?.vocab?.vocabulary
+  if (!Array.isArray(words) || !words.length) return ''
+  const rows = spread(words, 24).map((entry) => {
+    const parts = [
+      entry.meaning ? `<span class="font-semibold text-pine">${escapeHtml(entry.word)}</span>${entry.pos ? ` <em class="text-slate-600">(${escapeHtml(entry.pos)})</em>` : ''} — ${escapeHtml(cleanText(entry.meaning))}` : '',
+      Array.isArray(entry.synonyms) && entry.synonyms.length ? `<br /><span class="text-slate-600">Synonyms: ${escapeHtml(entry.synonyms.join(', '))}</span>` : '',
+      Array.isArray(entry.antonyms) && entry.antonyms.length ? `<span class="text-slate-600"> · Antonyms: ${escapeHtml(entry.antonyms.join(', '))}</span>` : '',
+      entry.sentence ? `<br /><span class="italic text-slate-700">${escapeHtml(cleanText(entry.sentence))}</span>` : '',
+    ].filter(Boolean).join('')
+    return parts ? `<li>${parts}</li>` : ''
+  }).filter(Boolean).join('')
+  if (!rows) return ''
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Vocabulary with meanings and usage</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Each entry gives the part of speech, meaning, synonyms, antonyms and a sentence showing the word in use, because recognising a word is not the same as being able to write it.</p><ul class="mt-4 space-y-3 rounded-xl border bg-white p-5 text-sm leading-relaxed text-slate-700">${rows}</ul></section>`
+}
+
+function listSection(heading, intro, items) {
+  const rows = items.filter(Boolean).join('')
+  if (!rows) return ''
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">${escapeHtml(heading)}</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(intro)}</p><ul class="mt-4 space-y-2 rounded-xl border bg-white p-5 text-sm leading-relaxed text-slate-700">${rows}</ul></section>`
+}
+
+function handwrittenNotesSection(context) {
+  const subjects = context.app?.handwrittenNotes?.handwrittenNoteSubjects
+  if (!Array.isArray(subjects) || !subjects.length) return ''
+  return listSection(
+    'Subjects covered by the handwritten notes',
+    `${subjects.length} subjects are available as handwritten note sets, split between compulsory and optional papers.`,
+    subjects.map((subject) => {
+      if (!subject?.title) return ''
+      return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(subject.title))}</span>${subject.kind ? ` <span class="text-slate-600">— ${escapeHtml(cleanText(subject.kind))}</span>` : ''}${subject.description ? `<br />${escapeHtml(cleanText(subject.description))}` : ''}</li>`
+    }),
+  )
+}
+
+function booksSection(context) {
+  const data = context.app?.books
+  const books = Array.isArray(data?.books) ? data.books : []
+  const opinions = Array.isArray(data?.opinions) ? data.opinions : []
+  let html = listSection(
+    'Books published on CSS Vista',
+    'Original titles written for competitive-examination preparation, readable in full on the platform.',
+    books.map((book) => {
+      if (!book?.title) return ''
+      return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(book.title))}</span>${book.subtitle ? ` <span class="text-slate-600">— ${escapeHtml(cleanText(book.subtitle))}</span>` : ''}${book.pages ? ` <span class="text-slate-600">· ${number(book.pages)} pages</span>` : ''}${book.description ? `<br />${escapeHtml(cleanText(book.description))}` : ''}</li>`
+    }),
+  )
+  html += listSection(
+    'Published opinion writing',
+    'Opinion pieces available on the platform, usable as models for argument and structure in essay preparation.',
+    opinions.map((opinion) => {
+      const title = opinion?.title || opinion?.name
+      if (!title) return ''
+      const detail = opinion.description || opinion.subtitle || opinion.publication || ''
+      return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(title))}</span>${detail ? `<br />${escapeHtml(cleanText(detail))}` : ''}</li>`
+    }),
+  )
+  return html
+}
+
+function consultationSection(context) {
+  const data = context.app?.consultations
+  const topics = Array.isArray(data?.consultationTopics) ? data.consultationTopics : []
+  if (!topics.length) return ''
+  const settings = data.consultationSettings || {}
+  const facts = definitionList([
+    ['Session length', data.consultationDurationLabel || settings.durationLabel],
+    ['Fee', data.consultationFeeLabel || settings.feeLabel],
+  ])
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">What a consultation covers</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${topics.length} topics can be taken to a session.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${facts}<ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${topics.map((topic) => `<li>${escapeHtml(cleanText(typeof topic === 'string' ? topic : topic.title || topic.name || ''))}</li>`).join('')}</ul>${data.consultationDisclaimer ? `<p class="mt-3 text-xs leading-relaxed text-slate-600">${escapeHtml(cleanText(data.consultationDisclaimer))}</p>` : ''}</div></section>`
+}
+
+function checklistSection(context, heading, intro, key) {
+  const groups = context.app?.checklists?.[key]
+  if (!Array.isArray(groups) || !groups.length) return ''
+  const blocks = groups.map((entry) => {
+    const steps = (Array.isArray(entry.steps) ? entry.steps : [])
+      .map((step) => {
+        const label = typeof step === 'string' ? step : step.label
+        return label ? `<li>${escapeHtml(cleanText(label))}</li>` : ''
+      })
+      .filter(Boolean).join('')
+    const title = entry.group || entry.title
+    if (!title || !steps) return ''
+    return `<div class="mt-4"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(title))}</h3><ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${steps}</ul></div>`
+  }).filter(Boolean).join('')
+  if (!blocks) return ''
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">${escapeHtml(heading)}</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(intro)}</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+}
+
+function startCssSection(context) {
+  const syllabusData = context.app?.syllabus
+  const compulsory = Array.isArray(syllabusData?.compulsorySubjects) ? syllabusData.compulsorySubjects : []
+  const optionalGroups = Array.isArray(syllabusData?.optionalGroups) ? syllabusData.optionalGroups : []
+  if (!compulsory.length && !optionalGroups.length) return ''
+
+  let html = ''
+  if (compulsory.length) {
+    const blocks = compulsory.map((subject) => {
+      if (!subject?.name) return ''
+      const facts = definitionList([
+        ['Marks', subject.marks],
+        ['Time', subject.time],
+        ['Pass requirement', subject.passMarks],
+      ])
+      const structure = (Array.isArray(subject.structure) ? subject.structure : [])
+        .map((part) => (part?.part ? `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(part.part))}:</span> ${escapeHtml(cleanText(part.detail || ''))}</li>` : ''))
+        .filter(Boolean).join('')
+      return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(subject.name))}</h3>${subject.overview ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(cleanText(subject.overview))}</p>` : ''}${facts}${structure ? `<ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${structure}</ul>` : ''}</div>`
+    }).filter(Boolean).join('')
+    if (blocks) {
+      html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">The compulsory papers you must take</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`Every CSS candidate sits these ${compulsory.length} papers. Each is shown with its marks, duration, pass requirement and how the paper is structured.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+    }
+  }
+
+  if (optionalGroups.length) {
+    const blocks = optionalGroups.map((group) => {
+      const subjects = (Array.isArray(group.subjects) ? group.subjects : [])
+        .map((subject) => {
+          if (!subject?.name) return ''
+          const notes = [
+            subject.nature && `Nature: ${subject.nature}`,
+            subject.background && `Background: ${subject.background}`,
+            subject.overlap && `Overlap: ${subject.overlap}`,
+            subject.difficulty && `Difficulty: ${subject.difficulty}`,
+            subject.prepTime && `Preparation: ${subject.prepTime}`,
+            subject.risks && `Risks: ${subject.risks}`,
+          ].filter(Boolean).map((note) => escapeHtml(cleanText(note))).join(' · ')
+          return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(subject.name))}</span>${subject.marks ? ` <span class="text-slate-600">— ${number(subject.marks)} marks</span>` : ''}${notes ? `<br /><span class="text-slate-600">${notes}</span>` : ''}</li>`
+        })
+        .filter(Boolean).join('')
+      if (!subjects) return ''
+      return `<div class="mt-5"><h3 class="font-semibold text-pine">Group ${escapeHtml(String(group.group ?? ''))}${group.rule ? ` — ${escapeHtml(cleanText(group.rule))}` : ''}</h3><ul class="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">${subjects}</ul></div>`
+    }).filter(Boolean).join('')
+    if (blocks) {
+      html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Optional subject groups</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`Optional subjects are chosen from ${optionalGroups.length} FPSC groups under each group's own selection rule. Every subject is shown with what preparing it actually demands.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+    }
+  }
+  return html
+}
+
+function notesSection(context) {
+  const data = context.app?.notes
+  const products = Array.isArray(data?.noteProducts) ? data.noteProducts : []
+  if (!products.length) return ''
+  const blocks = products.map((product) => {
+    if (!product?.subject) return ''
+    const topics = (Array.isArray(product.topics) ? product.topics : [])
+      .map((topic) => cleanText(typeof topic === 'string' ? topic : topic.title || topic.name || ''))
+      .filter(Boolean)
+    const list = topics.length
+      ? `<ul class="mt-2 grid list-disc gap-1 pl-5 text-sm leading-relaxed text-slate-700 sm:grid-cols-2">${topics.map((topic) => `<li>${escapeHtml(topic)}</li>`).join('')}</ul>`
+      : ''
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(product.subject))}${topics.length ? ` <span class="text-sm font-normal text-slate-600">— ${topics.length} topics</span>` : ''}</h3>${product.description ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(cleanText(product.description))}</p>` : ''}${list}</div>`
+  }).filter(Boolean).join('')
+  if (!blocks) return ''
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">What the notes actually cover</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(data.notesCoverageStatement ? cleanText(data.notesCoverageStatement) : `The ${products.length} published note sets, listed with every topic each one covers.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+}
+
+function currentAffairsSection(context) {
+  const data = context.app?.currentAffairs
+  const issues = Array.isArray(data?.caIssues) ? data.caIssues : []
+  const categories = Array.isArray(data?.caCategories) ? data.caCategories : []
+  if (!issues.length) return ''
+
+  const blocks = issues.map((issue) => {
+    if (!issue?.title) return ''
+    const actors = Array.isArray(issue.actors) && issue.actors.length
+      ? `<p class="mt-1 text-sm text-slate-700"><span class="font-semibold text-pine">Actors:</span> ${escapeHtml(issue.actors.map((actor) => cleanText(actor)).join(' · '))}</p>`
+      : ''
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(issue.title))}${issue.category ? ` <span class="text-sm font-normal text-slate-600">— ${escapeHtml(cleanText(issue.category))}</span>` : ''}</h3>${issue.background ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(cleanText(issue.background))}</p>` : ''}${actors}</div>`
+  }).filter(Boolean).join('')
+  if (!blocks) return ''
+
+  const categoryLine = categories.length
+    ? `<p class="mt-2 text-sm leading-relaxed text-muted-foreground">Coverage is organised into ${categories.length} categories: ${escapeHtml(categories.map((category) => cleanText(typeof category === 'string' ? category : category.name || category.title || '')).filter(Boolean).join(', '))}.</p>`
+    : ''
+
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Issue files currently maintained</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${issues.length} issues are maintained as structured files with background and the actors involved, rather than as a feed of headlines.`)}</p>${categoryLine}<div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+}
+
+function gamesSection(context) {
+  const data = context.app?.games
+  const concepts = Array.isArray(data?.matchConcepts) ? data.matchConcepts : []
+  const timelines = [
+    ['Constitutional timeline', data?.constitutionTimeline],
+    ['Pakistan Movement timeline', data?.pakistanMovementTimeline],
+  ].filter(([, value]) => Array.isArray(value) && value.length)
+  if (!concepts.length && !timelines.length) return ''
+
+  let html = ''
+  const conceptBlocks = spread(concepts, 8).map((set) => {
+    const pairs = (Array.isArray(set.pairs) ? set.pairs : [])
+      .map((pair) => (pair?.concept ? `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(pair.concept))}</span> — ${escapeHtml(cleanText(pair.match || ''))}</li>` : ''))
+      .filter(Boolean).join('')
+    return set.title && pairs
+      ? `<div class="mt-4"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(set.title))}</h3><ul class="mt-2 grid list-disc gap-1 pl-5 text-sm leading-relaxed text-slate-700 sm:grid-cols-2">${pairs}</ul></div>`
+      : ''
+  }).filter(Boolean).join('')
+  if (conceptBlocks) {
+    html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Facts the matching games drill</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${concepts.length} concept sets are used by the matching games. The pairings below are the reference material behind them.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${conceptBlocks}</div></section>`
+  }
+
+  const timelineBlocks = timelines.map(([label, entries]) => {
+    const rows = entries
+      .slice()
+      .sort((a, b) => Number(a.year || 0) - Number(b.year || 0))
+      .map((entry) => (entry?.event ? `<li><span class="font-semibold text-emerald-800">${escapeHtml(String(entry.year ?? ''))}</span> — ${escapeHtml(cleanText(entry.event))}</li>` : ''))
+      .filter(Boolean).join('')
+    return rows ? `<div class="mt-4"><h3 class="font-semibold text-pine">${escapeHtml(label)}</h3><ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${rows}</ul></div>` : ''
+  }).filter(Boolean).join('')
+  if (timelineBlocks) {
+    html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Timelines used by the ordering games</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">The dated events the sequencing games are built from, listed in order.</p><div class="mt-4 rounded-xl border bg-white p-5">${timelineBlocks}</div></section>`
+  }
+  return html
+}
+
 const BUILDERS = {
   '/css-mcqs': cssMcqSection,
+  '/notes': notesSection,
+  '/current-affairs': currentAffairsSection,
+  '/games': gamesSection,
+  '/answer-writing': (context) => essaySection(context),
   '/css-past-paper-analysis': analysisHubSection,
   '/language-grammar': languageGrammarSection,
+  '/mentors': mentorsSection,
+  '/services': servicesSection,
+  '/essay': (context) => essaySection(context) || compulsorySubjectSection('/essay'),
+  '/grammar-vocabulary': vocabularySection,
+  '/handwritten-notes': handwrittenNotesSection,
+  '/books': booksSection,
+  '/consultation': consultationSection,
+  '/start-css': startCssSection,
+  '/subjects/selector': startCssSection,
+  '/study-tools': (context) => checklistSection(context, 'Written-examination preparation checklist', 'The concrete steps a written-paper plan should cover, grouped by stage.', 'writtenChecklist'),
+  '/test-series': (context) => checklistSection(context, 'What a written test series should cover', 'The stages a test plan should work through before full-length mocks become useful.', 'writtenChecklist'),
   '/gk': gkSection,
   '/one-liner-gk': oneLinerSection,
   '/fpsc-syllabus': syllabusHubSection,
@@ -555,13 +858,34 @@ const BUILDERS = {
   '/mpt': mptSection,
 }
 
+/** App data modules the sections above read from. */
+const APP_DATA_MODULES = ['site', 'services', 'essay', 'vocab', 'handwrittenNotes', 'books', 'consultations', 'checklists', 'syllabus', 'notes', 'currentAffairs', 'games']
+
+/**
+ * Loads everything the section builders need. Call once per build and pass the
+ * result to every buildRealContentSection() call; loading is asynchronous but
+ * rendering stays synchronous.
+ */
+export async function loadRealContentContext(options = {}) {
+  const app = {}
+  try {
+    const { loadAppData } = await import('./app-data.mjs')
+    await Promise.all(APP_DATA_MODULES.map(async (name) => {
+      app[name] = await loadAppData(name)
+    }))
+  } catch (error) {
+    console.warn(`Application data unavailable for landing pages: ${error instanceof Error ? error.message : error}`)
+  }
+  return { ...options, app }
+}
+
 /**
  * Returns published-data-backed HTML for a route, or an empty string when the
  * route has no extractable collection behind it. Never throws: a landing page
  * must still build if a data file is absent.
  *
  * `context.pastPapers` supplies the generated past-paper registry for routes
- * that report archive coverage.
+ * that report archive coverage, and `context.app` the loaded app data modules.
  */
 export function buildRealContentSection(routePath, context = {}) {
   try {

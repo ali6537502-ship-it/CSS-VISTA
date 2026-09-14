@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
-import { buildRealContentSection } from './lib/real-content-sections.mjs'
+import { buildRealContentSection, loadRealContentContext } from './lib/real-content-sections.mjs'
 import { renderLegalPageHtml } from '../src/data/legalContent.mjs'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
 
@@ -24,6 +24,7 @@ try {
 } catch (error) {
   console.warn(`Past-paper registry unavailable for landing pages: ${error instanceof Error ? error.message : error}`)
 }
+const realContentContext = await loadRealContentContext({ pastPapers })
 
 function escapeHtml(value) {
   return String(value)
@@ -255,7 +256,7 @@ function landingBody(route) {
   /* The material itself comes before the guidance about it: a visitor who
      cannot run the application should still reach real questions, syllabus
      sections and archive coverage on the page they landed on. */
-  const realContent = buildRealContentSection(route.path, { pastPapers })
+  const realContent = buildRealContentSection(route.path, realContentContext)
 
   return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista · Competitive examination preparation</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(route.h1)}</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(route.intro)}</p><section class="mt-9 rounded-xl border bg-white p-5"><h2 class="font-display text-2xl font-bold text-pine">What you can do here</h2><ul class="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">${points}</ul></section>${realContent}<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">How to use this resource for preparation</h2><p class="mt-3 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.guidance)}</p><p class="mt-4 max-w-4xl text-sm leading-7 text-slate-700">${escapeHtml(details.note)}</p></section><nav class="mt-9 rounded-xl border bg-white p-5" aria-label="Related CSS Vista resources"><h2 class="font-display text-xl font-bold text-pine">Continue your preparation</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Move to a related subject, syllabus, practice or revision page when you are ready for the next step.</p><ul class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">${links}</ul></nav>${PLATFORM_ASIDE}</main>`
 }
