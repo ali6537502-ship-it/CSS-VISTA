@@ -11,12 +11,12 @@ import WorkspaceTabs, { useWorkspaceSection } from './WorkspaceTabs'
 import './current-affairs.css'
 
 const links = [
-  ['/account/dashboard', 'Dashboard'], [briefingRoot, "Today's Briefing"],
-  ['/account/factbook', 'Daily Factbook'], [briefingRoot + '/archive', 'Archive'],
-  ['/account/saved', 'Saved Items'], ['/account/search', 'Search'], ['/account/settings', 'Account Settings'],
+  ['/account/dashboard', 'Home'], ['/account/tasks', 'My Tasks'], ['/account/progress', 'My Progress'],
+  ['/account/english', 'Daily English'], [briefingRoot, 'Daily Affairs Brief'], ['/account/library', 'My Library'],
+  ['/account/settings', 'Profile & Settings'],
 ]
 function AccountNavigation() {
-  return <nav aria-label="Account navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
+  return <nav aria-label="My CSS Vista navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
 }
 function SignedInWorkspace() {
   const { signOut, user } = useAccount()
@@ -34,18 +34,18 @@ function SignedInWorkspace() {
   }
   return <div className="ca-workspace">
     <aside className="ca-sidebar">
-      <Link to="/account/dashboard" className="ca-brand"><BookOpen size={21} /><span>My CSS Vista<small>Read. Understand. Remember.</small></span></Link>
+      <Link to="/account/dashboard" className="ca-brand"><BookOpen size={21} /><span>My CSS Vista<small>Your preparation space</small></span></Link>
       <Link to="/account/settings" className="ca-sidebar-profile" aria-label="Open your profile settings">
         {user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={20} aria-hidden="true" />}
-        <span><strong>{user?.display_name || 'My profile'}</strong><small>Account settings</small></span>
+        <span><strong>{user?.display_name || 'My profile'}</strong><small>Profile & settings</small></span>
       </Link>
       <AccountNavigation />
-      <div className="ca-sidebar-footer"><Link to="/dashboard">Study progress <ArrowRight size={15} /></Link><Link to="/factbook">My personal factbook <ArrowRight size={15} /></Link>
+      <div className="ca-sidebar-footer">
         <button onClick={() => void logout()} disabled={busy}><LogOut size={16} /> {busy ? 'Signing out…' : 'Log out'}</button>
       </div>
     </aside>
     <div className="ca-main">
-      <details className="ca-mobile-nav"><summary>My CSS Vista · Account menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link><Link to="/dashboard">Study progress</Link><Link to="/factbook">My personal factbook</Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
+      <details className="ca-mobile-nav"><summary>My CSS Vista · Menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
       {error && <p className="ca-error" role="alert">{error}</p>}
       <Routes>
         <Route path="dashboard" element={<Dashboard />} />
@@ -56,7 +56,7 @@ function SignedInWorkspace() {
         <Route path="saved" element={<Feed mode="saved" />} />
         <Route path="search" element={<Feed mode="search" />} />
         <Route path="settings" element={<Settings />} />
-        <Route path="*" element={<Empty title="This account page could not be found" action={<Link className="ca-button" to="/account/dashboard">Open dashboard</Link>} />} />
+        <Route path="*" element={<Empty title="This account page could not be found" action={<Link className="ca-button" to="/account/dashboard">Open My CSS Vista</Link>} />} />
       </Routes>
     </div>
   </div>
@@ -93,14 +93,14 @@ function Dashboard() {
   const completed = Math.max(0, data.summary.total - data.summary.unread)
   return <>
     <header className="ca-desk-header">
-      <div><p className="ca-eyebrow">YOUR DAILY READING DESK</p><h1>{greeting}{name ? ', ' + name : ''}</h1><EditionMeta summary={data.summary} /></div>
+      <div><p className="ca-eyebrow">DAILY AFFAIRS BRIEF</p><h1>{greeting}{name ? ', ' + name : ''}</h1><EditionMeta summary={data.summary} /></div>
       <Link to="/account/settings" className="ca-profile-chip" aria-label="Open your profile settings">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={21} />}<span>My profile</span></Link>
     </header>
     <WorkspaceTabs id="desk" label="Your workspace" items={deskSections} value={panel} onChange={setPanel} />
     <section id="desk-today" role="tabpanel" aria-labelledby="desk-today-tab" hidden={panel !== 'today'} tabIndex={0}>
       <div className="ca-edition-hero">
-        <div><p className="ca-eyebrow">{data.summary.published ? 'TODAY’S EDITION' : 'YOUR NEXT BRIEFING'}</p><h2>{data.summary.published ? 'Make sense of today.' : 'A clear place to start your day.'}</h2><p>{data.summary.published ? 'Read the headlines, explore the context, and keep the facts that matter.' : 'Your briefing will appear here once it is published. Your saved reading and revision space are always one tab away.'}</p>
-          <div className="ca-hero-actions">{data.summary.published ? <Link className="ca-button" to={briefingRoot}>Open today’s briefing <ArrowRight size={16} /></Link> : <Link className="ca-button" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link>}
+        <div><p className="ca-eyebrow">{data.summary.published ? 'TODAY’S EDITION' : 'YOUR NEXT EDITION'}</p><h2>{data.summary.published ? 'Make sense of today.' : 'Your Current Affairs desk is ready.'}</h2><p>{data.summary.published ? 'Read the headlines, explore the context, and keep the facts that matter.' : 'Your Daily Affairs Brief will appear here once it is published. Your saved reading and revision space remain available.'}</p>
+          <div className="ca-hero-actions">{data.summary.published ? <Link className="ca-button" to={briefingRoot}>Open Daily Affairs Brief <ArrowRight size={16} /></Link> : <Link className="ca-button" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link>}
           <button className="ca-button ca-button-light" onClick={() => setPanel('library')}>Open my library</button></div>
         </div>
         {data.summary.total > 0 && <div className="ca-reading-progress"><strong>{completed}<span> / {data.summary.total}</span></strong><p>developments read today</p><progress value={completed} max={data.summary.total} aria-label="Today's reading progress" /><Link to={briefingRoot + '?reading=unread'}>{data.summary.unread} left to explore <ArrowRight size={14} /></Link></div>}
@@ -120,13 +120,13 @@ function Dashboard() {
     <section id="desk-library" role="tabpanel" aria-labelledby="desk-library-tab" hidden={panel !== 'library'} tabIndex={0}>
       <div className="ca-panel-heading"><h2>Your reading, in one place.</h2><p>Continue an analysis, revisit a saved development, or find an earlier edition.</p></div>
       <form className="ca-search ca-library-search" role="search" onSubmit={event => { event.preventDefault(); navigate('/account/search?q=' + encodeURIComponent(query.trim())) }}>
-        <label className="sr-only" htmlFor="desk-search">Search your briefing archive</label><Search size={18} /><input id="desk-search" type="search" value={query} onChange={event => setQuery(event.target.value)} maxLength={200} placeholder="Find a topic, report or key fact…" /><button>Search</button>
+        <label className="sr-only" htmlFor="desk-search">Search your Daily Affairs Brief archive</label><Search size={18} /><input id="desk-search" type="search" value={query} onChange={event => setQuery(event.target.value)} maxLength={200} placeholder="Find a topic, report or key fact…" /><button>Search</button>
       </form>
       <div className="ca-library-grid">
-        <section className="ca-library-card"><SectionHeading title="Continue reading" />{data.continue_reading.length ? data.continue_reading.map(story => <MiniStory key={story.id} item={story} />) : <><p className="ca-muted">Open a development and you can pick it up here later.</p><Link className="ca-text-link" to={briefingRoot}>Explore the briefing <ArrowRight size={15} /></Link></>}</section>
+        <section className="ca-library-card"><SectionHeading title="Continue reading" />{data.continue_reading.length ? data.continue_reading.map(story => <MiniStory key={story.id} item={story} />) : <><p className="ca-muted">Open a development and you can pick it up here later.</p><Link className="ca-text-link" to={briefingRoot}>Explore Daily Affairs Brief <ArrowRight size={15} /></Link></>}</section>
         <section className="ca-library-card"><SectionHeading title="Saved for revision" to="/account/saved" />{data.saved.length ? data.saved.map(story => <MiniStory key={story.id} item={story} />) : <><p className="ca-muted">Use Save on any development to keep it in your personal collection.</p><Link className="ca-text-link" to="/account/saved">Open saved items <ArrowRight size={15} /></Link></>}</section>
       </div>
-      <div className="ca-archive-banner"><div><h2>Follow the bigger picture</h2><p>Return to a complete day’s briefing or follow a topic over time.</p></div><Link className="ca-button ca-button-light" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link></div>
+      <div className="ca-archive-banner"><div><h2>Follow the bigger picture</h2><p>Return to a complete day’s edition or follow a topic over time.</p></div><Link className="ca-button ca-button-light" to={briefingRoot + '/archive'}>Explore the archive <ArrowRight size={16} /></Link></div>
     </section>
   </>
 }
@@ -168,7 +168,6 @@ function Filters({ params, update, categories, defaultRange, savedOnly = false }
 function useFilters(defaultRange: string) {
   const [params, setParams] = useSearchParams()
   const update: UpdateFilter = (key, value) => {
-    // Read the committed URL: React may still be rendering the previous filter state.
     const next = new URLSearchParams(window.location.search); next.delete('page')
     if (key === 'clear') { setParams({ range: defaultRange }); return }
     if (value) next.set(key, value); else next.delete(key)
@@ -189,17 +188,17 @@ function Feed({ mode }: { mode: 'briefing' | 'facts' | 'saved' | 'search' }) {
   query.set('view', mode === 'facts' ? 'factbook' : 'feed')
   if (mode === 'saved') query.set('saved', '1')
   const result = useBriefing(query.toString(), feedSchema)
-  const title = { briefing: "Today's Briefing", facts: 'Daily Factbook', saved: 'My Saved Items', search: 'Search the Archive' }[mode]
-  const subtitle = { briefing: 'The developments that matter, one clear explanation at a time.', facts: 'Facts, figures and quick GK, ready for revision.', saved: 'Your personal collection of developments worth revisiting.', search: 'Find a topic across headlines, explanations, institutions, facts and original sources.' }[mode]
+  const title = { briefing: 'Daily Affairs Brief', facts: 'Daily Factbook', saved: 'My Saved Items', search: 'Search the Archive' }[mode]
+  const subtitle = { briefing: 'The Current Affairs developments that matter, one clear explanation at a time.', facts: 'Facts, figures and quick GK, ready for revision.', saved: 'Your personal collection of developments worth revisiting.', search: 'Find a topic across headlines, explanations, institutions, facts and original sources.' }[mode]
   return <>
-    <header className="ca-heading"><p className="ca-eyebrow">DAILY CURRENT AFFAIRS</p><h1>{title}</h1><p>{subtitle}</p>{result.data && mode === 'briefing' && <EditionMeta summary={result.data.summary} />}</header>
+    <header className="ca-heading"><p className="ca-eyebrow">CSS VISTA CURRENT AFFAIRS</p><h1>{title}</h1><p>{subtitle}</p>{result.data && mode === 'briefing' && <EditionMeta summary={result.data.summary} />}</header>
     <Filters key={mode + (filters.params.get('q') || '')} params={filters.params} update={filters.update} categories={result.data?.categories || []} defaultRange={defaultRange} savedOnly={mode === 'saved'} />
     {result.loading ? <Loading /> : result.error || !result.data ? <LoadError error={result.error || 'Please try again.'} retry={result.retry} /> : <>
       {mode === 'briefing' && <CategoryGlance summary={result.data.summary} selected={filters.params.get('category') || ''} select={(category) => filters.update('category', category)} />}
       {!result.data.items.length ? (
         !result.data.summary.published && !filters.params.get('q') && !filters.params.get('category') && ['today', 'yesterday', 'custom'].includes(filters.params.get('range') || defaultRange) && mode !== 'saved'
           ? <Publication summary={result.data.summary} />
-          : <Empty title={mode === 'saved' && filters.params.size === 0 ? 'No saved items yet' : 'No results'}>{mode === 'saved' && filters.params.size === 0 ? "You haven't saved any developments yet. Use Save on a briefing to keep it here." : 'No developments matched your search. Try another date, category or search term.'}</Empty>
+          : <Empty title={mode === 'saved' && filters.params.size === 0 ? 'No saved items yet' : 'No results'}>{mode === 'saved' && filters.params.size === 0 ? "You haven't saved any developments yet. Use Save on a development to keep it here." : 'No developments matched your search. Try another date, category or search term.'}</Empty>
       ) : mode === 'facts' ? <Factbook items={result.data.items} /> : <div className="ca-card-grid">{result.data.items.map((item) => <StoryCardView key={item.id + item.saved + item.reading_status} item={item} onChange={result.retry} />)}</div>}
       <Pager page={filters.page} more={result.data.has_more} change={filters.setPage} />
     </>}
@@ -239,7 +238,7 @@ function Archive() {
   }
   const navigate = useNavigate()
   return <>
-    <header className="ca-heading"><p className="ca-eyebrow">THE DAILY ARCHIVE</p><h1>Every edition, within reach</h1><p>Follow an issue over time or return to a day's complete briefing.</p></header>
+    <header className="ca-heading"><p className="ca-eyebrow">DAILY AFFAIRS ARCHIVE</p><h1>Every edition, within reach</h1><p>Follow an issue over time or return to a day&apos;s complete Daily Affairs Brief.</p></header>
     <div className="ca-month"><label>Jump to month <input type="month" value={filters.params.get('month') || ''} onChange={(e) => month(e.target.value)} /></label></div>
     <Filters key={filters.params.get('q') || ''} {...filters} categories={result.data?.categories || []} defaultRange="all" />
     {result.loading ? <Loading /> : result.error || !result.data ? <LoadError error={result.error || 'Please try again.'} retry={result.retry} /> : <>
