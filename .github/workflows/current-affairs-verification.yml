@@ -67,7 +67,7 @@ jobs:
       - name: Prepare disposable runtime
         run: |
           node -e "const value=require('node:crypto').randomBytes(48).toString('hex'); console.log('::add-mask::'+value); require('node:fs').appendFileSync(process.env.GITHUB_ENV,'CSSV_APP_SECRET='+value+'\n')"
-          mkdir -p "$RUNNER_TEMP/cssv-briefing-private"
+          mkdir -p "$RUNNER_TEMP/cssv-briefing-private" test-artifacts/account-mail
           echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/cssv-briefing-private" >> "$GITHUB_ENV"
           node tests/current-affairs/prepare.mjs
       - name: Package test edition with real application code
