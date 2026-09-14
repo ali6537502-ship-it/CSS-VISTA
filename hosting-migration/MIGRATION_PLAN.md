@@ -7,8 +7,8 @@
 3. No destructive Supabase change is permitted before cutover verification and rollback readiness.
 4. Existing Supabase UUIDs are preserved as the primary user IDs in the Hostinger database.
 5. Existing bcrypt password hashes are migrated securely; plaintext passwords are never exported, logged or displayed.
-6. New registrations require a student profile photo. Server-side hard limit: 25 KB. Existing students may continue signing in without a photo and are asked to complete the new profile later; they are never locked out because legacy data lacks a photo.
-7. Profile photos are stored as files, not database blobs. The database stores only path, MIME type and byte size.
+6. New registrations require a student profile photo. Server-side hard limit: 60 KB (61,440 bytes). Existing students may continue signing in without a photo and are asked to complete the new profile later; they are never locked out because legacy data lacks a photo.
+7. Profile photos are stored as files, not database blobs. The database stores only path, MIME type, byte size, dimensions and integrity metadata.
 8. Every migrated table must pass row-count and ownership reconciliation before cutover.
 
 ## Production source inventory captured 2026-09-07
@@ -56,22 +56,26 @@ The Hostinger profile expands the current record without changing existing user 
 - date of birth (age is derived, not permanently stored)
 - gender
 - city
+- province / region
 - country
 - CSS attempt year
 - preparation level
 - optional subjects
 - education
-- profile photo path / MIME type / byte size
+- structured previous CSS Vista history: Miss Sadia Zahoor / Sir Ali Hassan Sargana / both / neither
+- previous CSS Vista services: Batch / Test Series / Purchased Notes
+- optional previous-study details and other previous academy / mentor
+- profile photo path / MIME type / byte size / dimensions / integrity hash
 - last seen / profile completion timestamps
 
-Admin filters will use indexed fields such as city, gender, CSS attempt year, batch and registration status.
+Admin filters will use indexed fields such as city, gender, CSS attempt year, batch and registration status. The protected student directory also exposes and exports the structured previous CSS Vista history.
 
 ## Photo policy
 
 - New student registration: photo required.
 - Accepted web image types are validated by the backend, not by filename alone.
-- Final stored photo must be no larger than 25 KB.
-- Recommended student target: 20–25 KB.
+- Final stored profile photo must be no larger than 60 KB (61,440 bytes).
+- The profile UI, shared backend helper, database constraint and photo endpoint must all use the same 60 KB ceiling.
 - Browser-side compression may help the student, but the backend independently verifies the uploaded file size and decoded image type.
 - Uploaded names are never trusted; files receive randomized server filenames.
 - Photos are stored outside database tables and served only through the controlled application path.
@@ -85,7 +89,7 @@ Deploy `/api/health.php` with no secrets. It reports only whether PHP, PDO MySQL
 
 ### Phase 1 — Target database and private configuration
 
-Create the Hostinger MySQL database and apply `hosting-migration/mysql-schema.sql`.
+Create the Hostinger MySQL database and apply `hosting-migration/mysql-schema.sql`. Existing installations must also apply the additive schema updates in `server/sql/007_student_profile_photo_60kb.sql` and `server/sql/008_previous_student_history.sql`; the live profile/photo endpoints perform the same upgrades idempotently as a safety net.
 Database credentials must remain outside Git and outside all `VITE_` variables. Configure them only in a server-side secret/configuration location.
 
 ### Phase 2 — Backend security foundation
@@ -162,8 +166,9 @@ Before Supabase is removed, verify:
 - Factbook data is preserved
 - owner/admin account works
 - admin student directory and filters work
-- new registration requires a <=25 KB photo
-- existing users without a photo are not blocked
+- new registration/profile photo flow enforces a <=60 KB profile-photo limit consistently
+- structured previous CSS Vista history saves, reloads, filters and exports correctly
+- existing users without a photo are not blocked merely because legacy data lacks a photo
 - batch registration, statuses, payments and exports work
 - server rejects oversized/invalid image uploads even if browser validation is bypassed
 - session/CSRF/rate-limit tests pass
