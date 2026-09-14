@@ -829,8 +829,144 @@ function gamesSection(context) {
   return html
 }
 
+function fpscUpdatesSection(context) {
+  const data = context.app?.css2027
+  const dates = Array.isArray(data?.css2027Dates) ? data.css2027Dates : []
+  const notifications = Array.isArray(data?.notifications2027) ? data.notifications2027 : []
+  if (!dates.length && !notifications.length) return ''
+
+  let html = ''
+  if (dates.length) {
+    const rows = dates.map((entry) => {
+      if (!entry?.item) return ''
+      return `<tr class="border-t"><td class="py-2 pr-4 text-slate-700">${escapeHtml(cleanText(entry.date || '—'))}</td><td class="py-2 pr-4 font-semibold text-pine">${escapeHtml(cleanText(entry.item))}</td><td class="py-2 text-slate-700">${escapeHtml(cleanText(entry.status || ''))}</td></tr>`
+    }).filter(Boolean).join('')
+    if (rows) {
+      html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Published examination schedule</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${dates.length} scheduled items, each marked with whether the date is official, tentative or still to be announced. Confirm any date that affects an application against the official FPSC notice.`)}</p><div class="mt-4 overflow-x-auto rounded-xl border bg-white p-5"><table class="w-full text-sm"><thead><tr class="text-left text-xs uppercase tracking-wide text-emerald-700"><th class="pb-2 pr-4">Date</th><th class="pb-2 pr-4">Item</th><th class="pb-2">Status</th></tr></thead><tbody>${rows}</tbody></table></div>${data.css2027ScheduleSource ? `<p class="mt-3 text-xs text-slate-600">Source: ${escapeHtml(cleanText(data.css2027ScheduleSource))}</p>` : ''}</section>`
+    }
+  }
+
+  const items = notifications.map((entry) => {
+    const title = entry?.title || entry?.item
+    if (!title) return ''
+    const detail = entry.description || entry.detail || entry.summary || ''
+    return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(title))}</span>${entry.category ? ` <span class="text-slate-600">— ${escapeHtml(cleanText(entry.category))}</span>` : ''}${entry.date ? ` <span class="text-slate-600">· ${escapeHtml(cleanText(entry.date))}</span>` : ''}${detail ? `<br />${escapeHtml(cleanText(detail))}` : ''}</li>`
+  })
+  html += listSection('Notifications being tracked', 'Official notices currently followed for the examination cycle.', items)
+  return html
+}
+
+function opinionsSection(context) {
+  const opinions = context.app?.books?.opinions
+  if (!Array.isArray(opinions) || !opinions.length) return ''
+  return listSection(
+    'Published opinion pieces',
+    `${opinions.length} opinion articles published on the platform, usable as models for argument, structure and evidence in essay preparation.`,
+    opinions.map((opinion) => {
+      if (!opinion?.title) return ''
+      const meta = [opinion.outlet, opinion.date].filter(Boolean).map((value) => cleanText(value)).join(' · ')
+      const pages = Array.isArray(opinion.pages) ? opinion.pages.length : 0
+      return `<li><span class="font-semibold text-pine">${escapeHtml(cleanText(opinion.title))}</span>${meta ? ` <span class="text-slate-600">— ${escapeHtml(meta)}</span>` : ''}${pages ? ` <span class="text-slate-600">· ${pages} page${pages === 1 ? '' : 's'}</span>` : ''}</li>`
+    }),
+  )
+}
+
+function analysisFailureSection(context) {
+  const data = context.app?.examAnalysis
+  const analyses = Array.isArray(data?.examAnalyses) ? data.examAnalyses : []
+  if (!analyses.length) return ''
+
+  const blocks = analyses.map((entry) => {
+    if (!entry?.title) return ''
+    const causes = (Array.isArray(entry.causes) ? entry.causes : [])
+      .map((cause) => `<li>${escapeHtml(cleanText(cause))}</li>`).join('')
+    const fixes = (Array.isArray(entry.fixes) ? entry.fixes : [])
+      .map((fix) => `<li>${escapeHtml(cleanText(fix))}</li>`).join('')
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(entry.title))}</h3>${causes ? `<p class="mt-2 text-sm font-semibold text-pine">What goes wrong</p><ul class="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${causes}</ul>` : ''}${fixes ? `<p class="mt-2 text-sm font-semibold text-pine">What to do instead</p><ul class="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${fixes}</ul>` : ''}</div>`
+  }).filter(Boolean).join('')
+
+  let html = blocks
+    ? `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Where candidates actually lose marks</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${analyses.length} recurring failure patterns, each paired with the correction that addresses it.`)}</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+    : ''
+
+  const habits = Array.isArray(data?.successHabits) ? data.successHabits : []
+  html += listSection(
+    'What candidates who clear it do differently',
+    'Habits that separate successful preparation from time spent reading.',
+    habits.map((habit) => `<li>${escapeHtml(cleanText(habit))}</li>`),
+  )
+  return html
+}
+
+function psychVivaSection(context) {
+  const data = context.app?.psychViva
+  const sections = Array.isArray(data?.psychVivaSections) ? data.psychVivaSections : []
+  if (!sections.length) return ''
+
+  const blocks = sections.map((entry) => {
+    if (!entry?.title) return ''
+    const body = (Array.isArray(entry.body) ? entry.body : [])
+      .map((line) => `<li>${escapeHtml(cleanText(line))}</li>`).join('')
+    return `<div class="mt-5"><h3 class="font-semibold text-pine">${escapeHtml(cleanText(entry.title))}</h3>${body ? `<ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${body}</ul>` : ''}</div>`
+  }).filter(Boolean).join('')
+
+  let html = blocks
+    ? `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">What the assessment involves</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">The stages of the psychological assessment and viva, what each one is looking for, and the mistakes that recur.</p><div class="mt-4 rounded-xl border bg-white p-5">${blocks}</div></section>`
+    : ''
+
+  const questions = Array.isArray(data?.psychVivaMockQuestions) ? data.psychVivaMockQuestions : []
+  html += listSection(
+    'Practice interview questions',
+    'Questions of the kind panels actually ask. Prepare an honest, specific answer to each rather than a memorised one.',
+    questions.map((question) => `<li>${escapeHtml(cleanText(question))}</li>`),
+  )
+
+  const preferences = Array.isArray(data?.psychVivaServicePreferences) ? data.psychVivaServicePreferences : []
+  if (preferences.length) {
+    html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Service preferences you may be questioned on</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`Know the actual work of your top choices among these ${preferences.length} occupational groups.`)}</p><ul class="mt-4 grid list-disc gap-1 rounded-xl border bg-white p-5 pl-9 text-sm leading-relaxed text-slate-700 sm:grid-cols-2">${preferences.map((preference) => `<li>${escapeHtml(cleanText(preference))}</li>`).join('')}</ul></section>`
+  }
+  return html
+}
+
+/**
+ * The homepage is the page a reviewer or a first-time visitor lands on, so it
+ * states what the platform actually holds — counted from the published data,
+ * not asserted — and links each figure to the section that holds it.
+ */
+function homeSection(context) {
+  const subjects = subjectMcqIndex()
+  const gk = gkIndex()
+  const oneLiner = loadJson('one-liner-gk', 'index.json')
+  const analysis = loadJson('css-past-paper-analysis.json')
+  const books = loadJson('book-summaries', 'index.json')
+  const syllabusCount = syllabusSubjects().length
+  const papers = Array.isArray(context?.pastPapers) ? context.pastPapers : []
+
+  const stats = [
+    subjects && ['CSS subject question banks', `${number(subjects.total)} questions across ${subjects.subjects.length} compulsory and optional papers`, '/css-mcqs'],
+    gk && ['General knowledge', `${number(gk.total)} questions in ${gk.categories.length} categories, each published with its answer`, '/gk'],
+    oneLiner && ['One-liner facts', `${number(oneLiner.total)} compiled facts across ${oneLiner.categories?.length || 0} categories for rapid revision`, '/one-liner-gk'],
+    papers.length && ['Past-paper archive', `${number(papers.length)} CSS, PMS, PPSC and MPT papers`, '/past-papers'],
+    analysis && ['Topic-wise past-paper analysis', `${number(analysis.subjects?.length || 0)} CSS subjects read and grouped by recurring topic`, '/css-past-paper-analysis'],
+    syllabusCount && ['FPSC syllabus', `${syllabusCount} papers published section by section`, '/fpsc-syllabus'],
+    books && ['Book summaries', `${number(books.total || books.books?.length || 0)} books summarised for competitive-examination reading`, '/book-summaries'],
+  ].filter(Boolean)
+  if (!stats.length) return ''
+
+  const rows = stats
+    .map(([label, detail, href]) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="${href}">${escapeHtml(label)}</a><br /><span class="text-slate-700">${escapeHtml(detail)}</span></li>`)
+    .join('')
+
+  return `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">What CSS Vista holds</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">Every figure below is counted from the material published on the site. All of it is free and none of it requires an account.</p><ul class="mt-4 grid gap-3 rounded-xl border bg-white p-5 text-sm sm:grid-cols-2">${rows}</ul></section><section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">How the sections fit together</h2><p class="mt-3 max-w-4xl text-sm leading-7 text-slate-700">Preparation for CSS moves through the same stages for most candidates: understand the examination and choose subjects, study each syllabus heading, check what the papers have actually asked, practise under time, then revise what the practice exposed. The sections above map onto those stages rather than sitting as unrelated tools — the syllabus pages state what a paper covers, the past-paper analysis shows how each area has been examined, the question banks test recall, and the notes and book summaries supply the depth an answer needs.</p><p class="mt-3 max-w-4xl text-sm leading-7 text-slate-700">CSS Vista is an independent platform and not the Federal Public Service Commission. Examination rules, dates and eligibility are published by FPSC and should be confirmed there before any application or other time-sensitive decision.</p></section>`
+}
+
 const BUILDERS = {
+  '/': homeSection,
   '/css-mcqs': cssMcqSection,
+  '/analysis': analysisFailureSection,
+  '/psych-viva': psychVivaSection,
+  '/fpsc-updates': fpscUpdatesSection,
+  '/opinions': opinionsSection,
   '/notes': notesSection,
   '/current-affairs': currentAffairsSection,
   '/games': gamesSection,
@@ -859,7 +995,7 @@ const BUILDERS = {
 }
 
 /** App data modules the sections above read from. */
-const APP_DATA_MODULES = ['site', 'services', 'essay', 'vocab', 'handwrittenNotes', 'books', 'consultations', 'checklists', 'syllabus', 'notes', 'currentAffairs', 'games']
+const APP_DATA_MODULES = ['site', 'services', 'essay', 'vocab', 'handwrittenNotes', 'books', 'consultations', 'checklists', 'syllabus', 'notes', 'currentAffairs', 'games', 'css2027', 'examAnalysis', 'psychViva']
 
 /**
  * Loads everything the section builders need. Call once per build and pass the
