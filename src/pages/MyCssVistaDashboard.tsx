@@ -234,7 +234,7 @@ export default function MyCssVistaDashboard() {
               {snapshot.activities.length ? snapshot.activities.slice(0, 5).map((activity, index) => (
                 <div key={`${activity.label}-${index}`} className="border-b border-slate-100 pb-3 last:border-0 last:pb-0">
                   <p className="text-sm font-semibold text-slate-900">{activity.label}</p>
-                  <p className="mt-1 text-xs text-slate-500">{new Date(activity.at).toLocaleString('en-PK')}</p>
+                  <p className="mt-1 text-xs text-slate-500">{new Date(activity.ts).toLocaleString('en-PK')}</p>
                 </div>
               )) : <p className="text-sm text-slate-500">Your recent study activity will appear here.</p>}
             </div>
