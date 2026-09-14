@@ -1,0 +1,601 @@
+{
+  "generatedBy": "scripts/extract-paper-provenance.py",
+  "note": "Documents that state on their own first page that they are not official examination booklets. Read out of the PDFs; never authored by hand.",
+  "scanned": 782,
+  "papers": {
+    "ppsc-2024-01-01-08-06-2024-assistant-director-communication-and-works-gk-portion": {
+      "official": false,
+      "examinationDate": "08-06-2024",
+      "department": "Communication and Works",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-02-02-08-06-2024-clubbed-case-76-evening": {
+      "official": false,
+      "examinationDate": "08-06-2024",
+      "department": "Planning and Development - Clubbed Case 76",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-03-03-08-06-2024-clubbed-case-85-morning": {
+      "official": false,
+      "examinationDate": "08-06-2024",
+      "department": "Education - Clubbed Case 85",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-04-04-09-06-2024-instructor-lecturer-male-english-gk-portion": {
+      "official": false,
+      "examinationDate": "09-06-2024",
+      "department": "Education - Lecturer English GK portion",
+      "recoveredQuestions": "42",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-05-05-09-06-2024-medical-officer-bs-17-gk-portion": {
+      "official": false,
+      "examinationDate": "09-06-2024",
+      "department": "Labour and Human Resource",
+      "recoveredQuestions": "19",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-06-06-25-06-2024-accounts-officer-bs-17": {
+      "official": false,
+      "examinationDate": "25-06-2024",
+      "department": "Transport",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-07-07-13-07-2024-assistant-director-farms-procurement": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Punjab Seed Corporation / Agriculture",
+      "recoveredQuestions": "26",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-08-08-13-07-2024-clubbed-case-75-evening": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Education - Clubbed Case 75",
+      "recoveredQuestions": "19",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-09-09-13-07-2024-clubbed-case-97-evening": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Punjab Food Authority - Clubbed Case 97",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-10-10-13-07-2024-inspector-tourist-services-bs-16": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Tourist Services, Punjab",
+      "recoveredQuestions": "52",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-11-11-13-07-2024-lecturer-punjabi-bs-17-gk-portion": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Special Education - Lecturer Punjabi GK portion",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-12-12-13-07-2024-planning-officer-assistant-director-planning": {
+      "official": false,
+      "examinationDate": "13-07-2024",
+      "department": "Planning and Development",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-13-13-14-07-2024-assistant-director-accounts-fda-gk-portion": {
+      "official": false,
+      "examinationDate": "14-07-2024",
+      "department": "Faisalabad Development Authority",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-14-14-14-07-2024-computer-instructor-bs-17-gk-portion": {
+      "official": false,
+      "examinationDate": "14-07-2024",
+      "department": "Special Education - Computer Instructor GK portion",
+      "recoveredQuestions": "30",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-15-15-26-07-2024-program-officer-it-punjab-revenue-authority": {
+      "official": false,
+      "examinationDate": "26-07-2024",
+      "department": "Punjab Revenue Authority",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-16-16-27-07-2024-clubbed-case-id-96": {
+      "official": false,
+      "examinationDate": "27-07-2024",
+      "department": "Punjab Council of the Arts / Information and Culture",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-17-17-10-08-2024-biomedical-engineer-gk-portion": {
+      "official": false,
+      "examinationDate": "10-08-2024",
+      "department": "Labour and Human Resource - Biomedical Engineer GK portion",
+      "recoveredQuestions": "40",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-18-18-10-08-2024-clubbed-case-91-morning": {
+      "official": false,
+      "examinationDate": "10-08-2024",
+      "department": "Special Education - Clubbed Case 91",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-19-19-10-08-2024-inspector-cooperative": {
+      "official": false,
+      "examinationDate": "10-08-2024",
+      "department": "Cooperatives",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-20-20-10-08-2024-lecturer-urdu-gk-portion": {
+      "official": false,
+      "examinationDate": "10-08-2024",
+      "department": "Special Education - Lecturer Urdu GK portion",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-21-21-10-08-2024-physiotherapist-gk-portion": {
+      "official": false,
+      "examinationDate": "10-08-2024",
+      "department": "Special Education - Physiotherapist GK portion",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-22-22-11-08-2024-chief-officer-municipal-officer-regulations": {
+      "official": false,
+      "examinationDate": "11-08-2024",
+      "department": "Local Government",
+      "recoveredQuestions": "69",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-23-23-11-08-2024-corporal-counter-terrorism-department": {
+      "official": false,
+      "examinationDate": "11-08-2024",
+      "department": "Punjab Police - CTD",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-24-24-24-08-2024-assistant-director-legal": {
+      "official": false,
+      "examinationDate": "24-08-2024",
+      "department": "Transport",
+      "recoveredQuestions": "20",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-25-25-25-08-2024-clubbed-posts-labour-inspector-officer-assistant": {
+      "official": false,
+      "examinationDate": "25-08-2024",
+      "department": "Miscellaneous clubbed posts",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-26-26-25-08-2024-intelligence-officer-special-branch": {
+      "official": false,
+      "examinationDate": "25-08-2024",
+      "department": "Punjab Police - Special Branch",
+      "recoveredQuestions": "94",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-27-27-08-09-2024-excise-inspector-evening": {
+      "official": false,
+      "examinationDate": "08-09-2024",
+      "department": "Excise and Taxation",
+      "recoveredQuestions": "99",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-28-28-08-09-2024-excise-inspector-morning": {
+      "official": false,
+      "examinationDate": "08-09-2024",
+      "department": "Excise and Taxation",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-29-29-28-09-2024-assistant-director-labour-morning": {
+      "official": false,
+      "examinationDate": "28-09-2024",
+      "department": "Labour and Human Resource",
+      "recoveredQuestions": "50",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-30-30-28-09-2024-assistant-director-local-government-evening": {
+      "official": false,
+      "examinationDate": "28-09-2024",
+      "department": "Local Government",
+      "recoveredQuestions": "99",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-31-31-29-09-2024-clubbed-case-id-49-junior-computer-operator-bps-12": {
+      "official": false,
+      "examinationDate": "29-09-2024",
+      "department": "Clubbed JCO - different departments",
+      "recoveredQuestions": "75",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-32-32-29-09-2024-junior-computer-operator-morning-irrigation": {
+      "official": false,
+      "examinationDate": "29-09-2024",
+      "department": "Irrigation / clubbed JCO stream",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-33-33-13-10-2024-account-and-audit-officer-morning": {
+      "official": false,
+      "examinationDate": "13-10-2024",
+      "department": "Labour and Human Resource",
+      "recoveredQuestions": "19",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-34-34-23-11-2024-assistant-controller-morning": {
+      "official": false,
+      "examinationDate": "23-11-2024",
+      "department": "Sargodha Board",
+      "recoveredQuestions": "30",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-35-35-23-11-2024-assistant-director-lda-evening": {
+      "official": false,
+      "examinationDate": "23-11-2024",
+      "department": "Lahore Development Authority",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-36-36-23-11-2024-junior-computer-operator-bs-11-anti-corruption-establishment": {
+      "official": false,
+      "examinationDate": "23-11-2024",
+      "department": "Anti-Corruption Establishment",
+      "recoveredQuestions": "21",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-37-37-23-11-2024-nutritionist-morning": {
+      "official": false,
+      "examinationDate": "23-11-2024",
+      "department": "Punjab Food Authority",
+      "recoveredQuestions": "20",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-38-38-24-11-2024-assistant-sandgad-evening": {
+      "official": false,
+      "examinationDate": "24-11-2024",
+      "department": "Services and General Administration",
+      "recoveredQuestions": "98",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-39-39-24-11-2024-assistant-sandgad-morning": {
+      "official": false,
+      "examinationDate": "24-11-2024",
+      "department": "Services and General Administration",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-40-40-30-11-2024-horticulture-officer-gk-portion": {
+      "official": false,
+      "examinationDate": "30-11-2024",
+      "department": "Miscellaneous - GK portion",
+      "recoveredQuestions": "15",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-41-41-30-11-2024-junior-computer-operator-morning": {
+      "official": false,
+      "examinationDate": "30-11-2024",
+      "department": "PPSC",
+      "recoveredQuestions": "20",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-42-42-30-11-2024-sub-engineer-civil-bs-14-gk-portion": {
+      "official": false,
+      "examinationDate": "30-11-2024",
+      "department": "Miscellaneous - GK portion",
+      "recoveredQuestions": "17",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-43-43-30-11-2024-sub-engineer-mechanical-bs-14-gk-portion": {
+      "official": false,
+      "examinationDate": "30-11-2024",
+      "department": "HUD and PHED - GK portion",
+      "recoveredQuestions": "10",
+      "verificationClass": "HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-44-44-01-12-2024-assistant-sandgad-evening": {
+      "official": false,
+      "examinationDate": "01-12-2024",
+      "department": "Services and General Administration",
+      "recoveredQuestions": "99",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-45-45-01-12-2024-assistant-sandgad-morning": {
+      "official": false,
+      "examinationDate": "01-12-2024",
+      "department": "Services and General Administration",
+      "recoveredQuestions": "99",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-46-46-15-12-2024-pms-general-knowledge": {
+      "official": false,
+      "examinationDate": "15-12-2024",
+      "department": "Provincial Management Service",
+      "recoveredQuestions": "100",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2024-47-47-15-12-2024-tehsildar-consolidation-officer-hill-torrent-officer-gk-screening": {
+      "official": false,
+      "examinationDate": "15-12-2024",
+      "department": "Board of Revenue - Ministerial Quota",
+      "recoveredQuestions": "96",
+      "verificationClass": "VERY HIGH",
+      "primarySource": "PACE GK Academy - Model Papers 2024",
+      "independentChecks": "TestPoint PPSC Past Papers index; Punjab Public Service Commission planner/scheduling records"
+    },
+    "ppsc-2025-01-01-assistant-director-wildlife-bs-17-23-02-2025": {
+      "official": false
+    },
+    "ppsc-2025-02-02-accountant-auditor-24-02-2025": {
+      "official": false
+    },
+    "ppsc-2025-03-03-statistical-officer-bs-17-24-02-2025": {
+      "official": false
+    },
+    "ppsc-2025-04-04-junior-traffic-warden-bs-11-09-03-2025": {
+      "official": false
+    },
+    "ppsc-2025-05-05-assistant-sub-inspector-punjab-highway-patrol-09-03-2025": {
+      "official": false
+    },
+    "ppsc-2025-06-06-enforcement-officer-pera-16-03-2025": {
+      "official": false
+    },
+    "ppsc-2025-07-07-computer-operator-bs-15-clubbed-cases-3j2025-51j2024-12-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-08-08-municipal-officer-general-knowledge-portion-12-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-09-09-assistant-director-research-40-gk-portion-12-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-10-10-pms-ministerial-service-quota-13-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-11-11-asi-service-quota-13-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-12-12-social-welfare-paper-20-gk-portion-26-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-13-13-assistant-director-district-development-officer-assistant-secretary-economist-manager-26-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-14-14-assistant-director-lda-27-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-15-15-assistant-board-of-revenue-clubbed-27-04-2025": {
+      "official": false
+    },
+    "ppsc-2025-16-16-internal-audit-specialist-bs-16-31-05-2025": {
+      "official": false
+    },
+    "ppsc-2025-17-17-data-entry-operator-bs-12-31-05-2025": {
+      "official": false
+    },
+    "ppsc-2025-18-18-junior-clerk-bs-11-board-of-revenue-01-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-19-19-assistant-director-fisheries-bs-17-01-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-20-20-junior-clerk-bs-11-clubbed-case-id-125-01-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-21-21-planning-officer-bs-17-advertisement-15-case-7d2025-22-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-22-22-planning-officer-bs-17-20-gk-portion-28-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-23-23-zilladar-morning-29-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-24-24-zilladar-evening-29-06-2025": {
+      "official": false
+    },
+    "ppsc-2025-25-25-assistant-director-bs-17-hud-and-phed-12-07-2025": {
+      "official": false
+    },
+    "ppsc-2025-26-26-assistant-director-tepa-bs-17-13-07-2025": {
+      "official": false
+    },
+    "ppsc-2025-27-27-assistant-pessi-13-07-2025": {
+      "official": false
+    },
+    "ppsc-2025-28-28-assistant-director-statistics-bs-17-morning-21-09-2025": {
+      "official": false
+    },
+    "ppsc-2025-29-29-assistant-director-statistics-bs-17-evening-20-gk-21-09-2025": {
+      "official": false
+    },
+    "ppsc-2025-30-30-junior-clerk-bs-11-ppsc-case-28c2025-27-09-2025": {
+      "official": false
+    },
+    "ppsc-2025-31-31-assistant-registrar-cooperative-societies-gk-28-09-2025": {
+      "official": false
+    },
+    "ppsc-2025-32-32-sub-inspector-bs-14-19-10-2025": {
+      "official": false
+    },
+    "ppsc-2025-33-33-assistant-pessi-19-10-2025": {
+      "official": false
+    },
+    "ppsc-2025-34-34-labour-officer-16-11-2025": {
+      "official": false
+    },
+    "ppsc-2025-35-35-assistant-clubbed-case-id-163-16-11-2025": {
+      "official": false
+    },
+    "ppsc-2025-36-36-assistant-board-of-revenue-07-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-37-37-technical-inspector-bs-12-07-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-38-38-assistant-deputy-superintendent-jail-gk-13-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-39-39-junior-clerk-punjab-police-morning-14-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-40-40-junior-clerk-punjab-police-evening-14-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-41-41-junior-clerk-board-of-revenue-20-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-42-42-junior-clerk-bs-11-clubbed-case-id-169-20-12-2025": {
+      "official": false
+    },
+    "ppsc-2025-43-43-sub-divisional-enforcement-officer-pera-gk-21-12-2025": {
+      "official": false
+    },
+    "ppsc-2026-01-01-assistant-clubbed-24-01-2026": {
+      "official": false
+    },
+    "ppsc-2026-01-01-pms-gk-phase-i-25-01-2026": {
+      "official": false
+    },
+    "ppsc-2026-02-02-ese-urdu-24-01-2026": {
+      "official": false
+    },
+    "ppsc-2026-02-02-pms-gk-phase-ii-25-01-2026": {
+      "official": false
+    },
+    "ppsc-2026-03-03-ese-pti-01-02-2026": {
+      "official": false
+    },
+    "ppsc-2026-04-04-superintendent-01-02-2026": {
+      "official": false
+    },
+    "ppsc-2026-05-05-computer-system-operator-14-02-2026": {
+      "official": false
+    },
+    "ppsc-2026-06-06-ese-general-15-02-2026": {
+      "official": false
+    },
+    "ppsc-2026-07-07-pera-enforcement-investigation-officer-15-03-2026": {
+      "official": false
+    },
+    "ppsc-2026-08-08-assistant-bor-05-04-2026": {
+      "official": false
+    },
+    "ppsc-2026-09-09-sergeant-pera-19-04-2026": {
+      "official": false
+    },
+    "ppsc-2026-10-10-senior-inspector-assistant-director-19-04-2026": {
+      "official": false
+    },
+    "ppsc-2026-11-11-audit-officer-06-06-2026": {
+      "official": false
+    },
+    "ppsc-2026-12-12-enforcement-officer-07-06-2026": {
+      "official": false
+    }
+  }
+}

@@ -86,6 +86,17 @@ for (const subject of syllabus?.subjects || []) {
   syllabusBySlug.set(subject.slug, subject)
 }
 
+/* What each document says about its own status. Some archived files state on
+   their first page that they are candidate-recalled reconstructions rather
+   than official booklets; a page must not present those as official papers. */
+let paperProvenance = {}
+try {
+  const record = JSON.parse(await readFile(join(root, 'src', 'data', 'paperProvenance.json'), 'utf8'))
+  paperProvenance = record.papers || {}
+} catch {
+  paperProvenance = {}
+}
+
 let pdfPageCounts = {}
 try {
   pdfPageCounts = JSON.parse(await readFile(join(publicDir, 'pdf-page-counts.json'), 'utf8')) || {}
@@ -180,6 +191,30 @@ function relatedExaminationTopicsSection(paper) {
   const years = Array.isArray(subject.years) && subject.years.length ? subject.years.join(', ') : ''
 
   return `<section class="mt-8 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">How ${escapeHtml(paper.subject)} is examined in CSS</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`The questions in this ${paper.examination} paper are not yet transcribed. The topics below come from the CSS ${paper.subject} papers CSS Vista has read${years ? ` (${years})` : ''} — a different examination, but largely the same subject, so they indicate which areas repay preparation.`)}</p><ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${listed}</ul><p class="mt-4 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}">Open the complete topic-wise CSS ${escapeHtml(paper.subject)} analysis</a></p></section>`
+}
+
+/**
+ * A document that disclaims official status has to say so on the page, not
+ * only inside the PDF. The notice repeats what the file itself states — who
+ * compiled it, how it was checked, and that recalled wording can be wrong —
+ * so a reader can judge the source before relying on it.
+ */
+function provenanceSection(paper) {
+  const record = paperProvenance[paper.id]
+  if (!record || record.official !== false) return ''
+
+  const facts = [
+    ['Examination date', record.examinationDate],
+    ['Department or stream', record.department],
+    ['Questions recovered', record.recoveredQuestions],
+    ['Verification class', record.verificationClass],
+    ['Compiled from', record.primarySource],
+    ['Independently checked against', record.independentChecks],
+  ].filter(([, value]) => value)
+    .map(([label, value]) => `<div><dt class="text-xs text-muted-foreground">${escapeHtml(label)}</dt><dd class="font-semibold text-pine">${escapeHtml(cleanSource(String(value)))}</dd></div>`)
+    .join('')
+
+  return `<section class="mt-8 rounded-xl border border-amber-300 bg-amber-50/70 p-5"><h2 class="font-display text-xl font-bold text-pine">This document is a reconstruction, not an official paper</h2><p class="mt-2 text-sm leading-relaxed text-foreground/80">${escapeHtml(`The stored file states on its own first page that it is an unofficial candidate-recalled or model-paper reconstruction, not a booklet issued by the ${paper.examination}. It is published here because the paper's identity and date could be checked, not because the wording is official.`)}</p>${facts ? `<dl class="mt-4 grid gap-3 sm:grid-cols-2">${facts}</dl>` : ''}<p class="mt-4 text-sm leading-relaxed text-foreground/80">Recalled wording can carry spelling, option or memory errors, and a recovered paper may be incomplete. Use it to see the level and spread of what was asked; do not treat any individual question or option as the verbatim official text.</p></section>`
 }
 
 /** Real, checkable detail about the stored document itself. */
@@ -294,7 +329,7 @@ function paperQualitySection(paper, subject, questions, siblingYears) {
     ? `<section class="mt-8 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">Questions recorded from this paper</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">These question wordings come from CSS Vista’s structured past-paper analysis for ${escapeHtml(paper.subject)}. Use them to identify the paper’s actual demand before opening the complete PDF.</p><ol class="mt-4 space-y-3">${questions.map((question) => `<li class="rounded-lg bg-secondary/40 p-3 text-sm leading-relaxed"><span class="font-bold text-emerald-800">${escapeHtml(question.number || '')}${question.topic ? ` · ${escapeHtml(question.topic)}` : ''}</span><span class="mt-1 block">${escapeHtml(shorten(question.text, 600))}</span></li>`).join('')}</ol>${subject?.slug ? `<p class="mt-4 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}">Explore the complete topic-wise ${escapeHtml(paper.subject)} past-paper analysis</a>.</p>` : ''}</section>`
     : ''
 
-  return `${paperSpecificGuidance(paper, subject, questions, siblingYears)}${documentFactsSection(paper)}${questionList}${subjectProfileSection(paper, subject, questions)}${relatedExaminationTopicsSection(paper)}${syllabusContextSection(paper)}`
+  return `${provenanceSection(paper)}${paperSpecificGuidance(paper, subject, questions, siblingYears)}${documentFactsSection(paper)}${questionList}${subjectProfileSection(paper, subject, questions)}${relatedExaminationTopicsSection(paper)}${syllabusContextSection(paper)}`
 }
 
 /**
@@ -358,7 +393,9 @@ for (const paper of pastPapers) {
   const section = paperQualitySection(paper, subject, questions, siblingYears)
   const next = html.replace('</main>', `${section}</main>`)
   if (next === html) throw new Error(`Could not strengthen past-paper page ${paper.id}`)
-  const description = `Review the ${paper.year} ${paper.examination} ${paper.subject} past paper with PDF access, paper details, related years and focused study guidance${questions.length ? ', plus authentic question samples' : ''}.`
+  const description = paperProvenance[paper.id]?.official === false
+    ? `An unofficial candidate-recalled reconstruction of the ${paper.year} ${paper.examination} ${paper.subject} paper, with its source, verification level and document access.`
+    : `Review the ${paper.year} ${paper.examination} ${paper.subject} past paper with PDF access, paper details, related years and focused study guidance${questions.length ? ', plus authentic question samples' : ''}.`
   html = replaceDescription(next, description)
   await writeFile(path, html)
   strengthenedPapers += 1
@@ -367,7 +404,7 @@ for (const paper of pastPapers) {
      document, which is what a visitor searching for that paper wants. Pages
      that gained no material beyond their metadata are still counted, so the
      figure is visible after each build rather than silently accumulating. */
-  if (!questions.length && !subjectProfileSection(paper, subject, questions) && !relatedExaminationTopicsSection(paper) && !syllabusContextSection(paper)) {
+  if (!questions.length && !provenanceSection(paper) && !subjectProfileSection(paper, subject, questions) && !relatedExaminationTopicsSection(paper) && !syllabusContextSection(paper)) {
     metadataOnlyPapers.push(paper.id)
   }
 }
