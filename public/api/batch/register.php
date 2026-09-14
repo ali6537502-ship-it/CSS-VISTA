@@ -56,8 +56,8 @@ if ($existing = $dup->fetchColumn()) {
 }
 
 $photoUpload = $_FILES['photo'] ?? [];
-if (isset($photoUpload['size']) && (int)$photoUpload['size'] > 15360) {
-    cssv_fail('Profile photo must be 15 KB or smaller.', 422, 'photo_size_invalid');
+if (isset($photoUpload['size']) && (int)$photoUpload['size'] > CSSV_MAX_PROFILE_PHOTO_BYTES) {
+    cssv_fail('Profile photo must be 60 KB or smaller.', 422, 'photo_size_invalid');
 }
 $photo = cssv_store_profile_photo($photoUpload, 'batch-photos');
 $userStmt = $pdo->prepare('SELECT id FROM users WHERE email=? LIMIT 1');
