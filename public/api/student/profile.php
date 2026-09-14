@@ -80,6 +80,8 @@ foreach ($previousServices as $service) {
 if ($previousStudent === 'No') {
     $cleanServices = [];
     $previousDetails = '';
+} elseif (count($cleanServices) === 0) {
+    cssv_fail('Please select at least one previous service: Batch, Test Series, or Purchased Notes.', 422, 'previous_student_service_required');
 }
 
 if ($dob !== '') {
