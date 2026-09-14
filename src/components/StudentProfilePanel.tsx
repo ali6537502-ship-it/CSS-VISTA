@@ -316,8 +316,32 @@ export function StudentProfilePanel({ email }: { email: string }) {
                   const priorStudent = form.previous_css_vista_student || ''
                   const priorDetailField = f.key === 'previous_css_vista_services' || f.key === 'previous_css_vista_details'
                   if (priorDetailField && (!priorStudent || priorStudent === 'No')) return null
+
+                  if (f.multiOptions) {
+                    return (
+                      <fieldset key={f.key} className="min-w-0 sm:col-span-2">
+                        <legend className="text-sm font-medium">{f.label}</legend>
+                        <div className="mt-2 grid gap-2 rounded-lg border border-pine/15 bg-white/70 p-3 sm:grid-cols-3">
+                          {f.multiOptions.map(option => (
+                            <label key={option} className="flex min-h-10 cursor-pointer items-center gap-2 rounded-md px-2 text-sm font-normal hover:bg-emerald-50">
+                              <input
+                                type="checkbox"
+                                name={`${f.key}-${option}`}
+                                checked={values(form[f.key] || '').includes(option)}
+                                onChange={e => toggleMulti(f.key, option, e.target.checked)}
+                                className="h-4 w-4 rounded border-pine/30"
+                              />
+                              <span>{option}</span>
+                            </label>
+                          ))}
+                        </div>
+                        {f.hint && <span className="mt-1 block text-xs font-normal leading-5 text-muted-foreground">{f.hint}</span>}
+                      </fieldset>
+                    )
+                  }
+
                   return (
-                    <label key={f.key} className={`min-w-0 text-sm font-medium ${f.multiOptions || f.textarea ? 'sm:col-span-2' : ''}`}>
+                    <label key={f.key} className={`min-w-0 text-sm font-medium ${f.textarea ? 'sm:col-span-2' : ''}`}>
                       {f.label}
                       {f.options ? (
                         <select
@@ -335,21 +359,6 @@ export function StudentProfilePanel({ email }: { email: string }) {
                           {form[f.key] && !f.options.includes(form[f.key]) && <option>{form[f.key]}</option>}
                           {f.options.map(o => <option key={o}>{o}</option>)}
                         </select>
-                      ) : f.multiOptions ? (
-                        <div className="mt-2 grid gap-2 rounded-lg border border-pine/15 bg-white/70 p-3 sm:grid-cols-3">
-                          {f.multiOptions.map(option => (
-                            <span key={option} className="flex min-h-10 items-center gap-2 rounded-md px-2 text-sm font-normal">
-                              <input
-                                type="checkbox"
-                                name={`${f.key}-${option}`}
-                                checked={values(form[f.key] || '').includes(option)}
-                                onChange={e => toggleMulti(f.key, option, e.target.checked)}
-                                className="h-4 w-4 rounded border-pine/30"
-                              />
-                              {option}
-                            </span>
-                          ))}
-                        </div>
                       ) : f.textarea ? (
                         <textarea
                           name={f.key}
