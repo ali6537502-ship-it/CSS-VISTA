@@ -1,0 +1,279 @@
+name: One-time publish Current Affairs 2026-09-14
+
+on:
+  push:
+    branches:
+      - chatgpt-current-affairs-2026-09-14
+
+permissions:
+  contents: write
+
+jobs:
+  publish-derived-data:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt-current-affairs-2026-09-14
+          fetch-depth: 0
+
+      - name: Update Current Affairs one-liners and MCQs
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from collections import Counter
+          from pathlib import Path
+
+          DATE = '2026-09-14'
+          GENERAL_SUB = 'Current Affairs 2026'
+          PAK_SUB = 'Pakistan Current Affairs 2026'
+
+          general_facts = [
+            ('current-affairs-archive-20260914-01', 'Date: 14 September 2026; Pakistan monetary policy: The State Bank of Pakistan kept the policy rate unchanged at 11.5%.'),
+            ('current-affairs-archive-20260914-02', 'Date: 14 September 2026; Pakistan fuel relief: The ECC approved Rs500 per week for two- and three-wheelers and Rs1,000 for ten days for non-commercial cars up to 800cc under the Fuel Relief Scheme.'),
+            ('current-affairs-archive-20260914-03', 'Date: 14 September 2026; Pakistan law: The Islamabad High Court directed that state resources and government personnel must not be used for political protests and that Islamabad roads cannot lawfully be blocked by political actors.'),
+            ('current-affairs-archive-20260914-04', 'Date: 14 September 2026; Pakistan power sector: The first meeting of the Steering Committee on Power Sector Regulatory Regime – Improvement & Reforms focused on regulatory predictability, investment, efficiency and competition.'),
+            ('current-affairs-archive-20260914-05', 'Date: 14 September 2026; Pakistan SOEs: The Cabinet Committee on State-Owned Enterprises reviewed federal SOE performance for the first half of FY2025-26.'),
+            ('current-affairs-archive-20260914-06', 'Date: 14 September 2026; SCO digital economy: Pakistan called for stronger SCO cooperation on digital economy and AI at the SCO Digital Economy Forum 2026 in Urumqi, China.'),
+            ('current-affairs-archive-20260914-07', 'Date: 14 September 2026; Pakistan–Lebanon relations: The two countries signed an MoU on the Transfer of Sentenced Persons during the Lebanese interior minister’s visit.'),
+            ('current-affairs-archive-20260914-08', 'Date: 14 September 2026; Frontier debt: JPMorgan said its GBI-EM Edge local-currency government bond index would include Pakistan at the maximum 8% country weighting.'),
+            ('current-affairs-archive-20260914-09', 'Date: 14 September 2026; Energy security: Saudi Arabia’s East-West oil pipeline was temporarily shut after a drone attack as shipping risks around the Strait of Hormuz intensified.'),
+            ('current-affairs-archive-20260914-10', 'Date: 14 September 2026; Global monetary conditions: The US 10-year Treasury yield crossed 5% for the first time since October 2023 as markets prepared for a possible Federal Reserve rate hike.'),
+            ('current-affairs-archive-20260914-11', 'Date: 14 September 2026; AI governance: Microsoft released a draft AI code requiring its systems not to resist correction or shutdown, while the US debate over frontier-AI regulation intensified.'),
+            ('current-affairs-archive-20260914-12', 'Date: 14 September 2026; Sudan: The World Food Programme reported a funding gap of just under $300 million as nearly 20 million people in Sudan faced hunger.'),
+            ('current-affairs-archive-20260914-13', 'Date: 14 September 2026; US climate policy: The US Environmental Protection Agency repealed federal greenhouse-gas limits for coal- and natural-gas power plants.'),
+          ]
+
+          pakistan_facts = [
+            ('pakistan-current-affairs-20260914-01', general_facts[0][1]),
+            ('pakistan-current-affairs-20260914-02', general_facts[1][1]),
+            ('pakistan-current-affairs-20260914-03', general_facts[2][1]),
+            ('pakistan-current-affairs-20260914-04', general_facts[3][1]),
+            ('pakistan-current-affairs-20260914-05', general_facts[4][1]),
+            ('pakistan-current-affairs-20260914-06', general_facts[5][1]),
+            ('pakistan-current-affairs-20260914-07', general_facts[6][1]),
+            ('pakistan-current-affairs-20260914-08', general_facts[7][1]),
+          ]
+
+          mcqs = [
+            {
+              'id':'css-current-affairs-daily-20260914-01','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'At its meeting on 14 September 2026, what did the State Bank of Pakistan’s Monetary Policy Committee do with the policy rate?',
+              'options':['Raised it to 12.5%','Cut it to 10.5%','Kept it unchanged at 11.5%','Introduced a fixed 9% rate'],'answer':2,
+              'explanation':'The MPC kept the policy rate unchanged at 11.5% on 14 September 2026.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-02','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Under Pakistan’s Fuel Relief Scheme approved by the ECC on 14 September 2026, what weekly relief was specified for two- and three-wheelers?',
+              'options':['Rs250','Rs500','Rs750','Rs1,000'],'answer':1,
+              'explanation':'The ECC approved Rs500 per week for two- and three-wheelers, equivalent to five litres at Rs100 per litre.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-03','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Which court directed on 14 September 2026 that state resources and government personnel must not be used for political protests?',
+              'options':['Islamabad High Court','Lahore High Court','Federal Constitutional Court','Supreme Court of Pakistan'],'answer':0,
+              'explanation':'The Islamabad High Court issued the directions while disposing of a petition concerning the planned 27 September protest.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-04','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'The steering committee whose first meeting was held on 14 September 2026 was created to review reforms in which sectoral regime?',
+              'options':['Telecommunications licensing','Agricultural price supports','Civil aviation safety','Power-sector regulation'],'answer':3,
+              'explanation':'The Steering Committee on Power Sector Regulatory Regime – Improvement & Reforms reviewed the electricity-sector regulatory framework.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-05','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'The CCoSOEs review reported on 14 September 2026 covered federal state-owned enterprises for which period?',
+              'options':['Full FY2024-25','Second half of FY2025-26','First half of FY2025-26','First quarter of FY2026-27'],'answer':2,
+              'explanation':'The Cabinet Committee on State-Owned Enterprises reviewed the first half of FY2025-26.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-06','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Where was the SCO Digital Economy Forum 2026 at which Pakistan called for stronger cooperation on AI and the digital economy?',
+              'options':['Astana','Urumqi','Tashkent','Baku'],'answer':1,
+              'explanation':'The forum was held in Urumqi, Xinjiang, China.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-07','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Pakistan and Lebanon signed which legal-cooperation instrument on 14 September 2026?',
+              'options':['MoU on the Transfer of Sentenced Persons','Free Trade Agreement','Double Taxation Treaty','Mutual Defence Pact'],'answer':0,
+              'explanation':'The respective interior ministers signed an MoU on the Transfer of Sentenced Persons.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-08','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'What maximum country weighting is Pakistan expected to carry in JPMorgan’s new GBI-EM Edge frontier local-currency bond index?',
+              'options':['3%','5%','6%','8%'],'answer':3,
+              'explanation':'Reuters reported that Pakistan and several other Frontier Asian markets are expected to carry the index’s maximum 8% country weighting.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-09','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Which maritime chokepoint was reported on 14 September 2026 to have commodity-vessel traffic well below recent averages amid Middle East tensions?',
+              'options':['Strait of Malacca','Bosporus Strait','Strait of Hormuz','Danish Straits'],'answer':2,
+              'explanation':'Reuters reported sharply reduced commodity-vessel traffic through the Strait of Hormuz.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-10','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'Which threshold did the benchmark US 10-year Treasury yield cross on 14 September 2026 for the first time since October 2023?',
+              'options':['4%','5%','6%','7%'],'answer':1,
+              'explanation':'The US 10-year Treasury yield moved above 5%.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-11','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'How long a public-feedback period did Microsoft open for its draft AI code of conduct announced on 14 September 2026?',
+              'options':['Six weeks','Two weeks','Three months','One year'],'answer':0,
+              'explanation':'Microsoft opened the draft code for six weeks of public feedback.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-12','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'About how large was the World Food Programme’s reported funding gap for sustaining its Sudan operations on 14 September 2026?',
+              'options':['$50 million','$100 million','$1 billion','Just under $300 million'],'answer':3,
+              'explanation':'WFP’s acting head said the gap was just under $300 million.'
+            },
+            {
+              'id':'css-current-affairs-daily-20260914-13','subject':'Current Affairs','topic':'Daily Current Affairs — 14 September 2026',
+              'question':'The US EPA rollback announced on 14 September 2026 repealed greenhouse-gas limits applying principally to which facilities?',
+              'options':['Commercial airports','Passenger railways','Coal- and natural-gas power plants','Municipal water systems'],'answer':2,
+              'explanation':'The EPA repealed federal greenhouse-gas limits for coal- and natural-gas power plants.'
+            },
+          ]
+
+          for q in mcqs:
+              q['sourceDocument'] = 'CSS Vista Current Affairs — 14 September 2026'
+              q['source'] = 'Verified daily edition · content/current-affairs/2026/09/2026-09-14.json'
+              q['verification'] = 'Cross-checked against the cited primary and major-wire sources in the 14 September 2026 Current Affairs edition.'
+
+          def load(path):
+              return json.loads(Path(path).read_text(encoding='utf-8'))
+
+          def dump_compact(path, obj):
+              Path(path).write_text(json.dumps(obj, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+
+          def append_notes(path, additions, subcategory):
+              data = load(path)
+              ids = {n.get('id') for n in data.get('notes', [])}
+              texts = {re.sub(r'\s+', ' ', n.get('text','')).strip().casefold() for n in data.get('notes', [])}
+              for note_id, text in additions:
+                  norm = re.sub(r'\s+', ' ', text).strip().casefold()
+                  if note_id in ids:
+                      continue
+                  if norm in texts:
+                      raise SystemExit(f'duplicate one-liner text in {path}: {text}')
+                  data['notes'].append({
+                      'id': note_id,
+                      'text': text,
+                      'subcategory': subcategory,
+                      'sourcePage': 0,
+                      'timeSensitive': True,
+                  })
+                  ids.add(note_id); texts.add(norm)
+              data['count'] = len(data['notes'])
+              dump_compact(path, data)
+              return data
+
+          ca_src = append_notes('src/data/bundled/current-affairs-archive.json', general_facts, GENERAL_SUB)
+          ca_pub = append_notes('public/one-liner-gk/current-affairs-archive.json', general_facts, GENERAL_SUB)
+          pk_src = append_notes('src/data/bundled/pakistan-current-affairs.json', pakistan_facts, PAK_SUB)
+          pk_pub = append_notes('public/one-liner-gk/pakistan-current-affairs.json', pakistan_facts, PAK_SUB)
+          if ca_src != ca_pub:
+              raise SystemExit('Current Affairs bundled/public one-liner mirrors diverged')
+          if pk_src != pk_pub:
+              raise SystemExit('Pakistan Current Affairs bundled/public one-liner mirrors diverged')
+
+          def refresh_one_liner_index(path):
+              idx = load(path)
+              data_by_slug = {
+                  'current-affairs-archive': ca_src,
+                  'pakistan-current-affairs': pk_src,
+              }
+              for category in idx.get('categories', []):
+                  data = data_by_slug.get(category.get('slug'))
+                  if not data:
+                      continue
+                  category['count'] = len(data['notes'])
+                  category['timeSensitiveCount'] = sum(1 for n in data['notes'] if n.get('timeSensitive'))
+                  counts = Counter(n.get('subcategory','Uncategorised') for n in data['notes'])
+                  category['subcategories'] = [{'name': name, 'count': count} for name, count in sorted(counts.items())]
+              idx['generatedAt'] = DATE
+              idx['total'] = sum(int(c.get('count',0)) for c in idx.get('categories', []))
+              dump_compact(path, idx)
+              return idx
+
+          src_idx = refresh_one_liner_index('src/data/bundled/index.json')
+          pub_idx = refresh_one_liner_index('public/one-liner-gk/index.json')
+          if src_idx != pub_idx:
+              raise SystemExit('Bundled/public One-Liner GK indexes diverged')
+
+          bank_path = Path('public/css-subject-mcqs/current-affairs.json')
+          bank = load(bank_path)
+          ids = {q.get('id') for q in bank}
+          stems = {re.sub(r'[^a-z0-9]+',' ',q.get('question','').casefold()).strip() for q in bank}
+          for q in mcqs:
+              norm = re.sub(r'[^a-z0-9]+',' ',q['question'].casefold()).strip()
+              if q['id'] in ids:
+                  continue
+              if norm in stems:
+                  raise SystemExit(f'duplicate MCQ stem: {q["question"]}')
+              if len(q['options']) != 4 or len({x.strip().casefold() for x in q['options']}) != 4:
+                  raise SystemExit(f'invalid options: {q["id"]}')
+              if q['answer'] not in range(4):
+                  raise SystemExit(f'invalid answer: {q["id"]}')
+              bank.append(q); ids.add(q['id']); stems.add(norm)
+          dump_compact(bank_path, bank)
+
+          idx_path = Path('public/css-subject-mcqs/index.json')
+          mcq_idx = load(idx_path)
+          matched = False
+          for subject in mcq_idx.get('subjects', []):
+              if subject.get('slug') == 'current-affairs':
+                  matched = True
+                  subject['count'] = len(bank)
+                  subject['sourceCount'] = max(int(subject.get('sourceCount',0)), len(bank))
+                  if 'Daily Current Affairs — 14 September 2026' not in subject.setdefault('topics', []):
+                      subject['topics'].append('Daily Current Affairs — 14 September 2026')
+                  if 'CSS Vista Current Affairs — 14 September 2026' not in subject.setdefault('sourceDocuments', []):
+                      subject['sourceDocuments'].append('CSS Vista Current Affairs — 14 September 2026')
+          if not matched:
+              raise SystemExit('current-affairs subject not found in MCQ index')
+          mcq_idx['generatedAt'] = '2026-09-14T18:55:00.000Z'
+          mcq_idx['total'] = sum(int(s.get('count',0)) for s in mcq_idx.get('subjects', []))
+          idx_path.write_text(json.dumps(mcq_idx, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          edition = load('content/current-affairs/2026/09/2026-09-14.json')
+          if edition.get('date') != DATE or len(edition.get('stories',[])) != 13:
+              raise SystemExit('Daily Current Affairs edition date/story count mismatch')
+          if len({s['id'] for s in edition['stories']}) != 13:
+              raise SystemExit('Duplicate story IDs in edition')
+          if len(ca_src['notes']) != ca_src['count'] or len(pk_src['notes']) != pk_src['count']:
+              raise SystemExit('One-liner count mismatch')
+          if len({q['id'] for q in bank}) != len(bank):
+              raise SystemExit('Duplicate MCQ IDs after update')
+          PY
+
+      - name: Validate Current Affairs publication schema
+        run: |
+          node scripts/package-current-affairs.mjs --check
+          php tests/current-affairs-validation.php
+
+      - name: Validate integrated MCQ bank
+        run: node scripts/audit-integrated-academics.mjs
+
+      - name: Remove one-time workflow and commit derived data
+        shell: bash
+        run: |
+          rm .github/workflows/chatgpt-publish-current-affairs-2026-09-14.yml
+          git config user.name "CSS Vista automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add content/current-affairs/2026/09/2026-09-14.json \
+                  src/data/bundled/current-affairs-archive.json \
+                  public/one-liner-gk/current-affairs-archive.json \
+                  src/data/bundled/pakistan-current-affairs.json \
+                  public/one-liner-gk/pakistan-current-affairs.json \
+                  src/data/bundled/index.json \
+                  public/one-liner-gk/index.json \
+                  public/css-subject-mcqs/current-affairs.json \
+                  public/css-subject-mcqs/index.json \
+                  .github/workflows/chatgpt-publish-current-affairs-2026-09-14.yml
+          git commit -m "Publish Current Affairs for 14 September 2026"
+          git push origin HEAD:chatgpt-current-affairs-2026-09-14
