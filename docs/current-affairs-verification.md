@@ -11,7 +11,7 @@ The integration run uses the actual native PHP login endpoint with disposable te
 
 Both JSON validators and all five frontend model tests pass. The edited account components pass ESLint and the application passes TypeScript checking.
 
-The same integration run passes native registration, captured verification email, login, captured password-recovery email, reset, single-use and expired tokens, old-session revocation, password change, cookie security, personal Factbook CRUD/search/revisions/media/collections, cross-user isolation, transaction rollback, owner CMS and persistence. A separate signed-migration test verifies preserved test-account IDs/passwords, field reconciliation, replay safety, ownership-conflict rollback and permanent sealing. All accounts and email messages in these tests belong to the disposable CI database; this does not verify delivery to a real inbox or migrate production students.
+The account integration now validates immediate native registration with an authenticated session and **no signup verification email**, duplicate-account rejection, login, optional legacy verification-link replay protection, captured password-recovery email, reset, single-use and expired recovery tokens, old-session revocation, password change, cookie security, personal Factbook CRUD/search/revisions/media/collections, cross-user isolation, transaction rollback, owner CMS and persistence. A separate signed-migration test verifies preserved test-account IDs/passwords, field reconciliation, replay safety, ownership-conflict rollback and permanent sealing. All accounts and email messages in these tests belong to the disposable CI database; this does not verify delivery to a real inbox or migrate production students.
 
 The complete existing repository suite has two inherited failures: the MPT reasoning-bank count and the notes-price expectations. The workflow reproduces them on the exact unchanged base commit, records both logs, and rejects any new failed test. This feature does not alter those data or prices.
 
@@ -21,7 +21,7 @@ The existing production homepage, account screen and current-affairs route were 
 
 The test-only UI entry at `tests/current-affairs/ui.html` can be run with `npx vite --config tests/current-affairs/vite.config.ts`. It uses labelled fixtures and is excluded from the production build. It supports reviewing the dashboard, reader, filters, archive, saved state and settings presentation; it is not an authentication or persistence test.
 
-Live new-account signup, email confirmation and recovery delivery still require a real test inbox. The existing-account browser checks above do not establish email delivery. Production student identities are not changed by the automated suite. No fictional edition is committed to the production content directory.
+Live new-account signup no longer requires email confirmation or a code. A real inbox is only required to verify production password-recovery delivery or legacy verification resend. Production student identities are not changed by the automated suite. No fictional edition is committed to the production content directory.
 
 ## Deployment verification
 
