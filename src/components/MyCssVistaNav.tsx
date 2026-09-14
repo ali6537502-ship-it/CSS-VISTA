@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router'
-import { BookOpen, ChartNoAxesColumnIncreasing, CheckSquare2, FolderHeart, Home, Languages, Settings } from 'lucide-react'
+import { BarChart3, BookOpen, CheckSquare2, FolderOpen, Home, Languages, Settings } from 'lucide-react'
 
 const items = [
   { to: '/account/dashboard', label: 'Home', icon: Home },
   { to: '/account/tasks', label: 'My Tasks', icon: CheckSquare2 },
-  { to: '/account/progress', label: 'My Progress', icon: ChartNoAxesColumnIncreasing },
+  { to: '/account/progress', label: 'My Progress', icon: BarChart3 },
   { to: '/account/english', label: 'Daily English', icon: Languages },
   { to: '/account/current-affairs', label: 'Daily Affairs Brief', icon: BookOpen },
-  { to: '/account/library', label: 'My Library', icon: FolderHeart },
+  { to: '/account/library', label: 'My Library', icon: FolderOpen },
   { to: '/account/settings', label: 'Profile & Settings', icon: Settings },
 ]
 
