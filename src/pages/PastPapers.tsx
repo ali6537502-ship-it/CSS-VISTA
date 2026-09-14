@@ -306,25 +306,25 @@ export default function PastPapers() {
               setSubject('All')
               setYear('All')
             }}
-            className="h-10 rounded-md border border-input px-2 text-sm"
+            className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm"
             aria-label="Examination"
           >
             <option value="All">Examination</option>{examinations.map((e) => <option key={e}>{e}</option>)}
           </select>
-          <select value={subject} onChange={(e) => setSubject(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Subject">
+          <select value={subject} onChange={(e) => setSubject(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm" aria-label="Subject">
             <option value="All">Subject</option>{subjects.map((s) => <option key={s}>{s}</option>)}
           </select>
-          <select value={stype} onChange={(e) => setStype(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Compulsory or optional">
+          <select value={stype} onChange={(e) => setStype(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm" aria-label="Compulsory or optional">
             <option value="All">Subject type</option>{subjectTypes.map((s) => <option key={s}>{s}</option>)}
           </select>
-          <select value={optionalGroup} onChange={(e) => setOptionalGroup(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Optional subject group">
+          <select value={optionalGroup} onChange={(e) => setOptionalGroup(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm" aria-label="Optional subject group">
             <option value="All">Optional group</option>{optionalGroupOptions.map((group) => <option key={group} value={group}>Group {group}</option>)}
           </select>
           <div className="grid grid-cols-2 gap-2.5">
-            <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Year">
+            <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm" aria-label="Year">
               <option value="All">Year</option>{years.map((y) => <option key={y}>{y}</option>)}
             </select>
-            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Objective or subjective">
+            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-10 w-full min-w-0 rounded-md border border-input px-2 text-sm" aria-label="Objective or subjective">
               <option value="All">Paper type</option>{paperModes.map((m) => <option key={m}>{m}</option>)}
             </select>
           </div>

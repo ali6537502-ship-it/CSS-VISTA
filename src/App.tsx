@@ -124,6 +124,11 @@ export default function App() {
         <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
+        {/* The library opens a summary at its own address, and 100 of them are
+            published and listed in the sitemap. Without this route the page
+            renders the summary from the prerendered HTML and then replaces it
+            with "Page not found" as soon as the router takes over. */}
+        <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />

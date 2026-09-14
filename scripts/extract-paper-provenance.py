@@ -33,10 +33,15 @@ OUTPUT = ROOT / "src" / "data" / "paperProvenance.json"
 
 # Phrases a document uses to disclaim official status. Matching any of them
 # means the page must not present the document as an official paper.
+#
+# Each phrase names the document's own status, so it cannot be tripped by
+# ordinary examination text. A bare "not an official" was deliberately dropped:
+# it reads as a disclaimer but would also match a question or a note about
+# something else being unofficial, and every document currently in the archive
+# matches on one of the specific phrases below without it.
 UNOFFICIAL_MARKERS = (
     "unofficial candidate-recalled",
     "candidate-recalled/model-paper reconstruction",
-    "not an official",
     "mcq reconstruction",
     "candidate-recalled reconstruction",
 )
