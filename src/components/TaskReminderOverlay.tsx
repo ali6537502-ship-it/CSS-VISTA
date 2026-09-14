@@ -85,7 +85,11 @@ export default function TaskReminderOverlay() {
       setOpen(false)
       return
     }
-    if (location.pathname === '/account' || location.pathname === '/account/settings' || location.pathname.startsWith('/admin')) return
+    const insideAccount = location.pathname === '/account' || location.pathname.startsWith('/account/')
+    if (insideAccount || location.pathname.startsWith('/admin')) {
+      setOpen(false)
+      return
+    }
     const slot = reminderSlot(clock)
     if (!slot) return
     const today = localTaskDateKey(clock)
@@ -155,7 +159,7 @@ export default function TaskReminderOverlay() {
       </div>
 
       <div className="grid grid-cols-2 gap-2 border-t p-3">
-        <button type="button" onClick={dismiss} className="min-h-10 rounded-lg border text-xs font-bold text-pine">Remind me later</button>
+        <button type="button" onClick={dismiss} className="min-h-10 rounded-lg border text-xs font-bold text-pine">Dismiss</button>
         <button type="button" onClick={openTasks} className="min-h-10 rounded-lg bg-pine px-3 text-xs font-bold text-white">Open My Tasks</button>
       </div>
     </aside>
