@@ -57,19 +57,49 @@ function replaceCategoryMeta(html, category, canonical) {
     .replace('</head>', `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n  </head>`)
 }
 
-function categoryBody(category, sampleQuestions, categories) {
-  const sample = sampleQuestions.slice(0, 12).map((question, index) => {
-    const options = Array.isArray(question.o)
-      ? question.o.map((option) => `<li>${escapeHtml(option)}</li>`).join('')
-      : ''
-    return `<li><h3 class="font-semibold text-pine">${index + 1}. ${escapeHtml(question.q)}</h3><ol class="mt-2 list-[upper-alpha] space-y-1 pl-6 text-sm text-slate-700">${options}</ol></li>`
+const OPTION_LABELS = ['A', 'B', 'C', 'D', 'E', 'F']
+
+/**
+ * A published sample is only useful to a reader if it answers the question it
+ * asks. Every rendered item therefore marks the correct option and, where the
+ * source bank supplies one, the explanation behind it, so the static page is a
+ * complete reference on its own rather than a teaser for the interactive bank.
+ */
+function renderSampleQuestion(question, index) {
+  if (!question || typeof question.q !== 'string') return ''
+  const options = Array.isArray(question.o) ? question.o : []
+  if (!options.length) return ''
+
+  const answerIndex = Number.isInteger(question.a) && question.a >= 0 && question.a < options.length
+    ? question.a
+    : -1
+  const renderedOptions = options.map((option, optionIndex) => {
+    const correct = optionIndex === answerIndex
+    return `<li${correct ? ' class="font-semibold text-emerald-800"' : ''}>${escapeHtml(option)}${correct ? ' <span class="text-xs uppercase tracking-wide">(correct)</span>' : ''}</li>`
   }).join('')
+
+  const answerLine = answerIndex >= 0
+    ? `<p class="mt-2 text-sm font-semibold text-emerald-800">Answer: ${OPTION_LABELS[answerIndex] ?? answerIndex + 1}. ${escapeHtml(options[answerIndex])}</p>`
+    : ''
+  const explanation = typeof question.e === 'string' && question.e.trim()
+    ? `<p class="mt-1 text-sm leading-relaxed text-slate-700">${escapeHtml(question.e.trim())}</p>`
+    : ''
+
+  return `<li><h3 class="font-semibold text-pine">${index + 1}. ${escapeHtml(question.q)}</h3><ol class="mt-2 list-[upper-alpha] space-y-1 pl-6 text-sm text-slate-700">${renderedOptions}</ol>${answerLine}${explanation}</li>`
+}
+
+function categoryBody(category, sampleQuestions, categories) {
+  const sample = sampleQuestions
+    .slice(0, 25)
+    .map((question, index) => renderSampleQuestion(question, index))
+    .filter(Boolean)
+    .join('')
   const categoryLinks = categories
     .filter((candidate) => candidate.slug !== category.slug)
     .map((candidate) => `<li><a href="/gk/cat/${escapeHtml(candidate.slug)}">${escapeHtml(candidate.name)} MCQs</a></li>`)
     .join('')
 
-  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">GK World · ${Number(category.count).toLocaleString('en-US')} questions</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(category.name)} MCQs</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(categoryDescription(category))}</p><div class="mt-6 flex flex-wrap gap-3"><a href="/gk/cat/${escapeHtml(category.slug)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open complete question bank</a><a href="/gk" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Browse GK World</a></div>${sample ? `<section class="mt-10"><h2 class="font-display text-2xl font-bold text-pine">Sample ${escapeHtml(category.name)} questions</h2><p class="mt-2 text-sm text-muted-foreground">A sample from the full interactive bank. Open the complete bank to attempt questions and review answers.</p><ol class="mt-5 space-y-5 rounded-xl border bg-white p-5">${sample}</ol></section>` : ''}<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Other GK categories"><h2 class="font-display text-xl font-bold text-pine">Explore other GK categories</h2><ul class="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">${categoryLinks}</ul></nav></main>`
+  return `<main class="mx-auto max-w-5xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">GK World · ${Number(category.count).toLocaleString('en-US')} questions</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(category.name)} MCQs</h1><p class="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">${escapeHtml(categoryDescription(category))}</p><div class="mt-6 flex flex-wrap gap-3"><a href="/gk/cat/${escapeHtml(category.slug)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open complete question bank</a><a href="/gk" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Browse GK World</a></div>${sample ? `<section class="mt-10"><h2 class="font-display text-2xl font-bold text-pine">${escapeHtml(category.name)} questions with answers</h2><p class="mt-2 text-sm text-muted-foreground">Each question below shows the correct option and, where available, the reasoning behind it. The complete bank of ${Number(category.count).toLocaleString('en-US')} questions adds topic filters, bookmarks and progress tracking.</p><ol class="mt-5 space-y-5 rounded-xl border bg-white p-5">${sample}</ol></section>` : ''}<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Other GK categories"><h2 class="font-display text-xl font-bold text-pine">Explore other GK categories</h2><ul class="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">${categoryLinks}</ul></nav></main>`
 }
 
 const indexData = JSON.parse(await readFile(join(publicDir, 'mcq', 'index.json'), 'utf8'))

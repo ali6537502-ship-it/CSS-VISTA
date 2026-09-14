@@ -25,7 +25,26 @@ const sitemapPath = join(clientDir, 'sitemap.xml')
 const flat = await readFile(sitemapPath, 'utf8')
 if (!flat.includes('<urlset ')) throw new Error('Expected a flat URL sitemap before sitemap-index splitting.')
 
-const blocks = [...flat.matchAll(/<url>[\s\S]*?<\/url>/g)].map((match) => match[0])
+/* Paper pages that carry no content beyond a link to the stored document are
+   published as noindex by the enrichment step. A noindex page must not be
+   advertised in the sitemap, so the same list is honoured here. */
+let noindexPaperPaths = new Set()
+try {
+  const record = JSON.parse(await readFile(join(clientDir, 'seo', 'noindex-past-papers.json'), 'utf8'))
+  for (const id of record.ids || []) noindexPaperPaths.add(`/past-papers/view/${id}`)
+} catch { /* nothing withheld */ }
+try {
+  const record = JSON.parse(await readFile(join(clientDir, 'seo', 'noindex-past-paper-collections.json'), 'utf8'))
+  for (const path of record.paths || []) noindexPaperPaths.add(path)
+} catch { /* nothing withheld */ }
+
+const blocks = [...flat.matchAll(/<url>[\s\S]*?<\/url>/g)]
+  .map((match) => match[0])
+  .filter((block) => {
+    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1]
+    if (!loc) return true
+    return !noindexPaperPaths.has(new URL(loc).pathname.replace(/\/$/, ''))
+  })
 if (!blocks.length) throw new Error('The generated sitemap contains no URL entries.')
 
 const groups = { core: [], gk: [], collections: [], papers: [] }

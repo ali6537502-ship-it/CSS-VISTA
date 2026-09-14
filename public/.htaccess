@@ -47,6 +47,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_setenvif.c>
   SetEnvIf Request_URI "^/assets/" cssv_hashed_asset=1
   SetEnvIf Request_URI "^/(?:account(?:/|$)|api/)" cssv_private_account=1
+  # Dynamic study views resolve inside the application and answer any slug,
+  # including ones that do not exist. They already carry a noindex meta tag;
+  # the header repeats it for fetches that never parse the document.
+  SetEnvIf Request_URI "^/(?:notes/view/|mpt/bank/)" cssv_private_account=1
 </IfModule>
 
 <IfModule mod_headers.c>

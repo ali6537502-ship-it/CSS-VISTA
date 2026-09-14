@@ -82,9 +82,35 @@ for (const book of registeredBooks) {
 }
 assert(gkLocs.length > 0, 'GK sitemap must contain at least one category URL')
 assert(gkLocs.every((url) => /^https:\/\/www\.css-vista\.com\/gk\/cat\/[^/?#]+\/?$/.test(url)), 'GK sitemap contains a non-category URL')
-assert(collectionLocs.length === collectionCount, `Expected ${collectionCount} collection sitemap URLs, found ${collectionLocs.length}`)
+let noindexCollectionPaths = []
+try {
+  noindexCollectionPaths = JSON.parse(await readFile(join(dist, 'seo', 'noindex-past-paper-collections.json'), 'utf8')).paths || []
+} catch {
+  noindexCollectionPaths = []
+}
+const expectedCollectionCount = collectionCount - noindexCollectionPaths.length
+assert(collectionLocs.length === expectedCollectionCount, `Expected ${expectedCollectionCount} collection sitemap URLs (${collectionCount} years less ${noindexCollectionPaths.length} withheld as noindex), found ${collectionLocs.length}`)
+for (const path of noindexCollectionPaths) {
+  assert(!collectionLocs.includes(`${siteOrigin}${path}`), `Noindex collection page leaked into the sitemap: ${path}`)
+}
 assert(collectionLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/(?:css|pms|ppsc|mpt)\/\d{4}\/?$/.test(url)), 'Collection sitemap contains an invalid URL')
-assert(paperLocs.length === registeredPapers.length, `Expected ${registeredPapers.length} past-paper sitemap URLs, found ${paperLocs.length}`)
+/* Paper pages with no content beyond a link to the stored document are
+   published as noindex and deliberately withheld from the sitemap, so the
+   expected count is the registry minus that recorded set — and the two must
+   agree exactly, in both directions. */
+let noindexPaperIds = []
+try {
+  noindexPaperIds = JSON.parse(await readFile(join(dist, 'seo', 'noindex-past-papers.json'), 'utf8')).ids || []
+} catch {
+  noindexPaperIds = []
+}
+const expectedPaperCount = registeredPapers.length - noindexPaperIds.length
+assert(paperLocs.length === expectedPaperCount, `Expected ${expectedPaperCount} past-paper sitemap URLs (${registeredPapers.length} registered less ${noindexPaperIds.length} withheld as noindex), found ${paperLocs.length}`)
+for (const id of noindexPaperIds) {
+  assert(!paperLocs.includes(`${siteOrigin}/past-papers/view/${id}`), `Noindex past-paper page leaked into the sitemap: ${id}`)
+  const noindexHtml = await readFile(join(dist, 'seo', 'past-papers', `${id}.html`), 'utf8')
+  assert(/<meta name="robots" content="noindex[^"]*" \/>/.test(noindexHtml), `Withheld past-paper page is not marked noindex: ${id}`)
+}
 assert(paperLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/view\/[A-Za-z0-9-]+\/?$/.test(url)), 'Past-paper sitemap contains an invalid URL')
 
 assert(uniqueLocs.size === allLocs.length, 'Child sitemaps contain duplicate URLs')

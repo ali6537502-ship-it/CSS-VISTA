@@ -147,13 +147,21 @@ const notFoundHtml = replaceMeta(clientIndex, {
   body: '<main class="mx-auto max-w-3xl px-4 py-16"><h1 class="font-display text-4xl font-bold text-pine">Page not found</h1><p class="mt-4 text-muted-foreground">The requested page does not exist or has moved.</p><a class="mt-6 inline-block font-bold text-emerald-800 underline" href="/">Return to CSS Vista</a></main>',
 })
 await writeFile(join(clientDir, '404.html'), notFoundHtml)
+/**
+ * Dynamic study URLs (a notes viewer, an MPT bank) resolve inside the
+ * application, so this shell answers every one of them, including slugs that
+ * do not exist. It stays noindex, but it must not be a dead end: anyone who
+ * reaches it without the application running — a reader with scripting off, or
+ * a reviewer following a link — needs to understand what the page is and be
+ * able to reach the public material from here.
+ */
 const protectedRouteHtml = replaceMeta(clientIndex, {
   title: 'CSS Vista Interactive Study Page',
-  description: 'Interactive CSS Vista study session.',
+  description: 'This CSS Vista study page opens inside the interactive application. Browse the public MCQ banks, past-paper archive, syllabus and notes library instead.',
   canonical: `${siteOrigin}/`,
   robots: 'noindex, follow',
   structuredData: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'CSS Vista interactive study page' },
-  body: '<main class="mx-auto max-w-3xl px-4 py-12"><h1 class="font-display text-3xl font-bold text-pine">CSS Vista interactive study page</h1><p class="mt-3 text-muted-foreground">The interactive application is loading.</p></main>',
+  body: '<main class="mx-auto max-w-3xl px-4 py-12"><h1 class="font-display text-3xl font-bold text-pine">CSS Vista interactive study page</h1><p class="mt-3 text-base leading-relaxed text-muted-foreground">This address opens a study view — a notes document or a question bank — inside the CSS Vista application. It needs JavaScript, and some views additionally require a signed-in account. If the view does not appear, the link may also point to material that has been moved or withdrawn.</p><p class="mt-3 text-base leading-relaxed text-muted-foreground">The pages below are public and need no account. They hold the same material in a form that can be read directly.</p><ul class="mt-5 grid gap-2 rounded-xl border bg-white p-5 text-sm sm:grid-cols-2"><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-mcqs">CSS subject MCQ banks</a> — questions with answers by subject</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/gk">GK World categories</a> — general-knowledge questions with answers</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers">Past-paper archive</a> — CSS, PMS, PPSC and MPT papers by year</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis">Topic-wise past-paper analysis</a> — what each subject has actually asked</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/fpsc-syllabus">FPSC syllabus</a> — section-by-section for every paper</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/notes">Notes library</a> — topics and authorised samples</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/book-summaries">Book summaries</a> — recommended reading, summarised</li><li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/mpt">MPT preparation</a> — screening-test practice</li></ul><p class="mt-5 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/">Return to the CSS Vista home page</a></p></main>',
 })
 await writeFile(join(routeSeoDir, 'protected.html'), protectedRouteHtml)
 
