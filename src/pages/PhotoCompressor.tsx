@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Download, ImageDown, ShieldCheck, Upload } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 
-const TARGET_SIZES = Array.from({ length: 51 }, (_, index) => index + 10)
+const TARGET_SIZES = Array.from({ length: 191 }, (_, index) => index + 10)
 const MAX_INPUT_BYTES = 20 * 1024 * 1024
 const MIN_JPEG_QUALITY = 0.6
 const MAX_JPEG_QUALITY = 0.82
@@ -242,7 +242,7 @@ export default function PhotoCompressor() {
     <div>
       <PageHeader
         title="Photo Size Reducer"
-        description="Reduce a student photo to a selected size from 10 KB to 60 KB. Processing happens on your device; the photo is not uploaded to CSS Vista."
+        description="Reduce a student photo to a selected size from 10 KB to 200 KB. Processing happens on your device; the photo is not uploaded to CSS Vista."
       />
 
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
