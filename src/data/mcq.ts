@@ -15,6 +15,7 @@ export interface BankQuestion {
   s?: string // subcategory
   d?: 'Basic' | 'Intermediate' | 'Advanced'
   paperSection?: string // ordered section used by competitive mock papers
+  paperTopic?: string // syllabus topic within that section, shown in the answer review
   sourceUrl?: string // shown only with post-paper answer review
 }
 

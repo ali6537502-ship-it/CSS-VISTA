@@ -20,11 +20,47 @@ import {
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import {
-  buildCompetitiveMock, currentPakistanDateKey, MOCK_BLUEPRINTS, type MockSection,
+  buildCompetitiveMock, MOCK_BLUEPRINTS,
+  type CompetitiveMockKind, type MockSection,
 } from '@/data/mockPapers'
+import { EXAM_BLUEPRINTS } from '@/data/examBlueprints'
+import {
+  activeAttemptSeed, clearAttemptSeed, recentlyServedIds, rememberAttemptSeed, rememberServedIds,
+} from '@/lib/mockRotation'
 import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 import { remainingSeconds } from '@/hooks/useAccurateCountdown'
+
+/** The mock format behind a quiz mode, or null for the ordinary practice modes. */
+function mockKindForMode(mode: string): CompetitiveMockKind | null {
+  if (mode === 'mpt-mock') return 'mpt'
+  if (mode === 'mock' || mode === 'pms-mock') return 'pms-gk'
+  if (mode === 'one-paper') return 'one-paper'
+  return null
+}
+
+/**
+ * One brand-new paper per attempt - but the same paper for the duration of that
+ * attempt.
+ *
+ * A fresh attempt passes no seed, so the builder picks a random one, and the
+ * questions this device has already been served are handed in as a soft
+ * exclusion so a candidate sitting the same format twice does not meet the same
+ * items. An attempt that is still open reuses its stored seed instead, which
+ * rebuilds it question for question: without that, a refresh mid-paper would
+ * quietly replace a part-finished 200-minute mock with a different one.
+ */
+async function buildFreshMock(kind: CompetitiveMockKind) {
+  const openSeed = activeAttemptSeed(kind)
+  const paper = await buildCompetitiveMock(kind, openSeed
+    ? { seed: openSeed }
+    : { avoidIds: recentlyServedIds(kind) })
+  if (!openSeed) {
+    rememberServedIds(kind, paper.questions.map((question) => question.id))
+    rememberAttemptSeed(kind, paper.seed)
+  }
+  return paper
+}
 
 interface Resolved {
   title: string
@@ -33,6 +69,9 @@ interface Resolved {
   timeSec: number
   note?: string
   blueprint?: MockSection[]
+  /** Marks deducted per wrong answer; 0 where the commission does not deduct. */
+  negativeMarkPerWrong?: number
+  passPercentage?: number
 }
 
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
@@ -124,7 +163,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const paper = await buildCompetitiveMock('pms-gk', mockSessionDateKey || getDailyMockStatus('gk').dateKey)
+        const paper = await buildFreshMock('pms-gk')
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -132,6 +171,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           timeSec: paper.timeSec,
           note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS.gk}. Once entered, you may finish after registration closes.`,
           blueprint: paper.blueprint,
+          negativeMarkPerWrong: paper.negativeMarkPerWrong,
+          passPercentage: paper.passPercentage,
         }
         break
       }
@@ -147,7 +188,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const paper = await buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
+        const paper = await buildFreshMock('mpt')
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -155,11 +196,13 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           timeSec: paper.timeSec,
           note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}. Once entered, you may finish after registration closes.`,
           blueprint: paper.blueprint,
+          negativeMarkPerWrong: paper.negativeMarkPerWrong,
+          passPercentage: paper.passPercentage,
         }
         break
       }
       case 'one-paper': {
-        const paper = await buildCompetitiveMock('one-paper', currentPakistanDateKey())
+        const paper = await buildFreshMock('one-paper')
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -167,6 +210,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           timeSec: paper.timeSec,
           note: paper.note,
           blueprint: paper.blueprint,
+          negativeMarkPerWrong: paper.negativeMarkPerWrong,
+          passPercentage: paper.passPercentage,
         }
         break
       }
@@ -316,7 +361,9 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   if (scheduledKind && !mockRegistered) {
     const status = getDailyMockStatus(scheduledKind)
     const label = DAILY_MOCK_TIME_LABELS[scheduledKind]
-    const registrationBlueprint = MOCK_BLUEPRINTS[scheduledKind === 'mpt' ? 'mpt' : 'pms-gk']
+    const registrationKind: CompetitiveMockKind = scheduledKind === 'mpt' ? 'mpt' : 'pms-gk'
+    const registrationBlueprint = MOCK_BLUEPRINTS[registrationKind]
+    const registrationPattern = EXAM_BLUEPRINTS[registrationKind]
     return (
       <div>
         <PageHeader title={status.title} description={`Daily supervised entry window: ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
@@ -335,11 +382,24 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
             </p>
             <div className="mt-4 rounded-xl border bg-secondary/35 p-3">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-extrabold uppercase tracking-[.12em] text-pine">Paper sequence</p>
+                <p className="text-xs font-extrabold uppercase tracking-[.12em] text-pine">Official paper pattern</p>
                 <span className="text-[11px] font-semibold text-muted-foreground">
-                  {registrationBlueprint.reduce((total, section) => total + section.count, 0)} questions
+                  {registrationPattern.authority}
                 </span>
               </div>
+              <ul className="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold text-emerald-950">
+                <li className="rounded-full bg-white px-2.5 py-1">{registrationPattern.totalQuestions} MCQs · {registrationPattern.totalQuestions} marks</li>
+                <li className="rounded-full bg-white px-2.5 py-1">{registrationPattern.timeSec / 60} minutes</li>
+                <li className="rounded-full bg-white px-2.5 py-1">
+                  {registrationPattern.negativeMarkPerWrong > 0
+                    ? `−${registrationPattern.negativeMarkPerWrong} per wrong answer`
+                    : 'No negative marking'}
+                </li>
+                {registrationPattern.passPercentage !== undefined && (
+                  <li className="rounded-full bg-white px-2.5 py-1">{registrationPattern.passPercentage}% qualifying</li>
+                )}
+              </ul>
+              <p className="mt-2 text-[11px] font-semibold uppercase tracking-[.12em] text-pine">Section marks</p>
               <ol className="mt-2 grid gap-1.5 sm:grid-cols-2">
                 {registrationBlueprint.map((section, index) => (
                   <li key={section.label} className="flex items-center justify-between gap-2 rounded-lg bg-white px-2.5 py-2 text-xs">
@@ -496,7 +556,7 @@ function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null) {
 }
 
 function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
-  const { qs, title, exam, timeSec, blueprint, note } = resolved
+  const { qs, title, exam, timeSec, blueprint, note, negativeMarkPerWrong = 0, passPercentage } = resolved
   const [page, setPage] = useState(1)
   const [reviewPage, setReviewPage] = useState(1)
   const [answers, setAnswers] = useState<Record<string, number>>({})
@@ -599,6 +659,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
   function discardResume() {
     writeQuizSnapshot(mode, null)
+    const attemptKind = mockKindForMode(mode)
+    if (attemptKind) clearAttemptSeed(attemptKind)
     setResumeOffer(null)
   }
 
@@ -650,6 +712,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     finishedRef.current = true
     deadlineRef.current = null
     writeQuizSnapshot(mode, null)
+    const attemptKind = mockKindForMode(mode)
+    if (attemptKind) clearAttemptSeed(attemptKind)
     setFinished(true)
     setReviewPage(1)
     const secs = Math.round((Date.now() - startRef.current) / 1000)
@@ -710,6 +774,12 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
 
   if (finished) {
     const pct = Math.round((score / qs.length) * 100)
+    // Commissions that deduct for a wrong answer score the paper on attempted
+    // questions only - an unanswered question costs nothing - so the net figure
+    // is reported alongside the raw count rather than replacing it.
+    const wrongCount = qs.filter((item) => answers[item.id] !== undefined && answers[item.id] !== item.a).length
+    const netMarks = Math.max(0, score - wrongCount * negativeMarkPerWrong)
+    const qualified = passPercentage !== undefined ? (netMarks / qs.length) * 100 >= passPercentage : null
     const reviewRange = questionPageRange(reviewPage, qs.length)
     const reviewQuestions = qs.slice(reviewRange.start, reviewRange.end)
     const weaknessCounts = new Map<string, number>()
@@ -738,6 +808,17 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
           <p className="mt-1 text-sm text-muted-foreground">
             Accuracy {pct}% · Time {Math.floor(resultTimeSeconds / 60)}m {resultTimeSeconds % 60}s
           </p>
+          {negativeMarkPerWrong > 0 && (
+            <p className="mt-1 text-sm font-semibold text-amber-800">
+              Net marks after negative marking: {Number(netMarks.toFixed(2))} / {qs.length}
+              <span className="font-normal text-muted-foreground"> ({wrongCount} wrong × −{negativeMarkPerWrong})</span>
+            </p>
+          )}
+          {qualified !== null && (
+            <p className={`mt-1 text-sm font-bold ${qualified ? 'text-emerald-700' : 'text-rose-700'}`}>
+              {qualified ? 'Above' : 'Below'} the {passPercentage}% qualifying mark
+            </p>
+          )}
           {(mockKind || sectionResults.length > 0) && (
             <div className="mt-5 grid gap-3 text-left sm:grid-cols-2">
               <div className="rounded-lg bg-amber-50 p-3">
@@ -915,6 +996,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
                 <div className="flex min-w-0 items-center gap-2">
                   <span className="shrink-0 text-xs font-bold text-muted-foreground">Question {questionNumber} of {qs.length}</span>
                   {question.paperSection && <span className="truncate rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-800">{question.paperSection}</span>}
+                  {question.paperTopic && <span className="truncate rounded bg-sky-50 px-2 py-0.5 text-[10px] font-semibold text-sky-900">{question.paperTopic}</span>}
                 </div>
                 <button onClick={() => setSavedMap((current) => ({ ...current, [question.id]: toggleSavedMcq(question.id) }))} className="no-print rounded p-1.5 text-muted-foreground hover:bg-secondary" aria-label={`Save question ${questionNumber}`}>
                   {savedMap[question.id] ? <BookmarkCheck className="h-4 w-4 text-emerald-700" /> : <Bookmark className="h-4 w-4" />}

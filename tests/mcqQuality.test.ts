@@ -41,24 +41,6 @@ test('all CSS subject-bank counts match the public index', () => {
   assert.equal(total, index.total)
 })
 
-test('all competitive mock formats still build complete, non-repeating papers', async () => {
-  const server = await createServer({
-    root,
-    appType: 'custom',
-    logLevel: 'silent',
-    optimizeDeps: { noDiscovery: true },
-    server: { middlewareMode: true },
-  })
-  const expected = { mpt: 200, 'pms-gk': 100, 'one-paper': 100 } as const
-  try {
-    const { buildCompetitiveMock } = await server.ssrLoadModule('/src/data/mockPapers.ts')
-    for (const kind of Object.keys(expected) as Array<keyof typeof expected>) {
-      const paper = await buildCompetitiveMock(kind, '2026-09-04')
-      assert.equal(paper.questions.length, expected[kind], kind)
-      assert.equal(new Set(paper.questions.map((question: { id: string }) => question.id)).size, expected[kind], `${kind} IDs`)
-      assert.equal(new Set(paper.questions.map((question: { q: string }) => question.q.toLocaleLowerCase())).size, expected[kind], `${kind} stems`)
-    }
-  } finally {
-    await server.close()
-  }
-})
+// Blueprint conformance, per-attempt uniqueness and the generated-question
+// audit live in tests/mockPapers.test.ts and tests/questionForge.test.ts, which
+// feed the builder its shards from disk. This file stays with the shipped data.
