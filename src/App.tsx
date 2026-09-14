@@ -53,6 +53,7 @@ const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
+const MyCssVistaDashboard = lazy(() => import('./pages/MyCssVistaDashboard'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -141,6 +142,7 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
+        <Route path="/account/dashboard" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
