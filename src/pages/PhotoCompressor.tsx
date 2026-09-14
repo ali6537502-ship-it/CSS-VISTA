@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Download, ImageDown, ShieldCheck, Upload } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 
-const TARGET_SIZES = Array.from({ length: 51 }, (_, index) => index + 10)
+const TARGET_SIZES = Array.from({ length: 191 }, (_, index) => index + 10)
 const MAX_INPUT_BYTES = 20 * 1024 * 1024
 const MIN_JPEG_QUALITY = 0.6
 const MAX_JPEG_QUALITY = 0.82
@@ -242,7 +242,7 @@ export default function PhotoCompressor() {
     <div>
       <PageHeader
         title="Photo Size Reducer"
-        description="Reduce a student photo to a profile-ready size from 10 KB to 60 KB. Processing happens on your device; the photo is not uploaded to CSS Vista."
+        description="Reduce a student photo to a selected size from 10 KB to 200 KB. Processing happens on your device; the photo is not uploaded to CSS Vista."
       />
 
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-10">
@@ -334,6 +334,7 @@ export default function PhotoCompressor() {
                   <div>
                     <p className="text-sm font-bold text-emerald-950">Ready to download</p>
                     <p className="mt-0.5 text-xs text-emerald-800">Final size: {formatBytes(outputBlob.size)} · Limit: {targetKb} KB</p>
+                    {targetKb > 60 && <p className="mt-1 text-xs text-amber-800">For a My CSS Vista profile photo, choose 60 KB or lower.</p>}
                     {outputMeta && <p className="mt-0.5 text-xs text-emerald-800">Dimensions: {outputMeta.width} × {outputMeta.height}px · JPEG quality: {Math.round(outputMeta.quality * 100)}%</p>}
                   </div>
                   <span className="rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-900">JPG</span>
@@ -349,7 +350,7 @@ export default function PhotoCompressor() {
             )}
 
             <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-              Targets such as 10–14 KB always require some loss. CSS Vista searches several resolution-and-quality combinations and chooses the best balanced result within the 60 KB profile-photo limit.
+              Targets such as 10–14 KB always require some loss. CSS Vista searches several resolution-and-quality combinations and chooses the best balanced result instead of producing an extremely blurry or heavily pixelated photo.
             </p>
           </section>
         </div>
