@@ -34,6 +34,8 @@ requireText(
   "['Batch','Test Series','Purchased Notes']",
   'previous_css_vista_services',
   'previous_css_vista_details',
+  'previous_student_service_required',
+  'Please select at least one previous service: Batch, Test Series, or Purchased Notes.',
 )
 
 requireText(
