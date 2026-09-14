@@ -54,6 +54,22 @@ requireText(
 
 requireText('public/api/_bootstrap_core.php', 'const CSSV_MAX_PROFILE_PHOTO_BYTES = 61440', 'Profile photo must be 60 KB or smaller.')
 requireText('public/api/student/photo.php', 'const CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES = 60 * 1024', '61440')
+requireText('public/api/batch/register.php', 'CSSV_MAX_PROFILE_PHOTO_BYTES', 'Profile photo must be 60 KB or smaller.')
+requireText(
+  'public/api/bootstrap-schema.php',
+  'student_profiles_photo_size_chk',
+  'batch_registrations_photo_size_chk',
+  '61440',
+)
+requireText(
+  'server/sql/007_student_profile_photo_60kb.sql',
+  'student_profiles_photo_size_chk',
+  'batch_registrations_photo_size_chk',
+  'student_profiles_photo_size_15k_chk',
+  'batch_registrations_photo_size_15k_chk',
+  '61440',
+)
+requireText('server/sql/003_profile_photo_15kb.sql', 'intentionally a no-op', 'SELECT 1;')
 
 for (const path of [
   'server/sql/001_hostinger_core_schema.sql',
@@ -68,17 +84,20 @@ for (const path of [
     'previous_css_vista_details',
     '61440',
   )
-  forbid(path, '25600', '25 KB', '25KB')
+  forbid(path, '25600', '15360', '25 KB', '25KB')
 }
 
 for (const path of [
   'public/api/_bootstrap_core.php',
   'public/api/student/photo.php',
+  'public/api/batch/register.php',
+  'public/api/bootstrap-schema.php',
   'src/components/StudentProfilePanel.tsx',
+  'server/sql/003_profile_photo_15kb.sql',
   'docs/hostinger-native-accounts.md',
   'hosting-migration/MIGRATION_PLAN.md',
 ]) {
-  forbid(path, '25600', '25 KB', '25KB')
+  forbid(path, '25600', '15360', '25 KB', '25KB')
 }
 
 if (failures.length) {
@@ -86,4 +105,4 @@ if (failures.length) {
   process.exit(1)
 }
 
-console.log('CSS Vista profile contract OK: 60 KB photo limit and previous-student history are aligned across UI, API, admin and schemas.')
+console.log('CSS Vista profile contract OK: 60 KB photo limit and previous-student history are aligned across UI, API, admin, bootstrap and schemas.')
