@@ -1,0 +1,112 @@
+name: Commit validated Current Affairs 2026-09-14
+
+on:
+  push:
+    branches:
+      - chatgpt-current-affairs-2026-09-14
+
+permissions:
+  contents: write
+
+jobs:
+  commit-publication:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt-current-affairs-2026-09-14
+          fetch-depth: 0
+
+      - name: Install repository dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Generate verified Current Affairs derived data
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('.github/workflows/chatgpt-publish-current-affairs-2026-09-14.yml').read_text(encoding='utf-8')
+          marker = "          python - <<'PY'\n"
+          start = source.index(marker) + len(marker)
+          end = source.index("\n          PY\n", start)
+          block = source[start:end]
+          script = '\n'.join(line[10:] if line.startswith('          ') else line for line in block.splitlines()) + '\n'
+          script = script.replace('Daily Current Affairs — 14 September 2026', 'Current Affairs — 14 September 2026')
+          script = script.replace('Daily Current Affairs edition date/story count mismatch', 'Current Affairs edition date/story count mismatch')
+          Path('/tmp/update_current_affairs.py').write_text(script, encoding='utf-8')
+          PY
+          python /tmp/update_current_affairs.py
+
+      - name: Validate production edition and complete academic bank
+        shell: bash
+        run: |
+          node scripts/package-current-affairs.mjs --check
+          php -r 'require "public/api/_current_affairs_model.php"; $d=json_decode(file_get_contents("content/current-affairs/2026/09/2026-09-14.json"),true,64,JSON_THROW_ON_ERROR); ca_validate_dataset($d,false); echo "Current Affairs production edition passed PHP model validation.\n";'
+          node scripts/audit-integrated-academics.mjs
+
+      - name: Verify exact dated additions and repository-derived counts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def load(p): return json.loads(Path(p).read_text(encoding='utf-8'))
+          ca_a=load('src/data/bundled/current-affairs-archive.json')
+          ca_b=load('public/one-liner-gk/current-affairs-archive.json')
+          pk_a=load('src/data/bundled/pakistan-current-affairs.json')
+          pk_b=load('public/one-liner-gk/pakistan-current-affairs.json')
+          idx_a=load('src/data/bundled/index.json')
+          idx_b=load('public/one-liner-gk/index.json')
+          bank=load('public/css-subject-mcqs/current-affairs.json')
+          bank_idx=load('public/css-subject-mcqs/index.json')
+          edition=load('content/current-affairs/2026/09/2026-09-14.json')
+
+          assert ca_a==ca_b, 'Current Affairs one-liner mirrors differ'
+          assert pk_a==pk_b, 'Pakistan Current Affairs one-liner mirrors differ'
+          assert idx_a==idx_b, 'One-liner indexes differ'
+          assert len(edition['stories'])==13 and len({s['id'] for s in edition['stories']})==13
+          general_today=[n for n in ca_a['notes'] if str(n.get('id','')).startswith('current-affairs-archive-20260914-')]
+          pakistan_today=[n for n in pk_a['notes'] if str(n.get('id','')).startswith('pakistan-current-affairs-20260914-')]
+          todays=[q for q in bank if str(q.get('id','')).startswith('css-current-affairs-daily-20260914-')]
+          assert len(general_today)==13
+          assert len(pakistan_today)==8
+          assert len(todays)==13
+          assert all(n.get('timeSensitive') is True for n in general_today+pakistan_today)
+          assert len({q['question'].strip().casefold() for q in todays})==13
+          assert all(q.get('topic')=='Current Affairs — 14 September 2026' for q in todays)
+          assert all(len(q.get('options',[]))==4 and len({x.strip().casefold() for x in q['options']})==4 for q in todays)
+          assert ca_a['count']==len(ca_a['notes'])
+          assert pk_a['count']==len(pk_a['notes'])
+          assert idx_a['total']==sum(int(c.get('count',0)) for c in idx_a['categories'])
+          subject=next(s for s in bank_idx['subjects'] if s['slug']=='current-affairs')
+          assert subject['count']==len(bank)
+          assert bank_idx['total']==sum(int(s.get('count',0)) for s in bank_idx['subjects'])
+          print(f"Verified publication: {len(edition['stories'])} stories; {len(general_today)+len(pakistan_today)} one-liner placements; {len(todays)} MCQs; bank count {len(bank)}.")
+          PY
+
+      - name: Commit validated publication data
+        shell: bash
+        run: |
+          rm -f .github/workflows/chatgpt-publish-current-affairs-2026-09-14.yml
+          rm -f .github/workflows/chatgpt-current-affairs-validation-fix.yml
+          rm -f .github/workflows/chatgpt-current-affairs-finalize.yml
+          rm -f .github/workflows/chatgpt-current-affairs-commit.yml
+          git config user.name "CSS Vista automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add content/current-affairs/2026/09/2026-09-14.json \
+                  src/data/bundled/current-affairs-archive.json \
+                  public/one-liner-gk/current-affairs-archive.json \
+                  src/data/bundled/pakistan-current-affairs.json \
+                  public/one-liner-gk/pakistan-current-affairs.json \
+                  src/data/bundled/index.json \
+                  public/one-liner-gk/index.json \
+                  public/css-subject-mcqs/current-affairs.json \
+                  public/css-subject-mcqs/index.json \
+                  .github/workflows/chatgpt-publish-current-affairs-2026-09-14.yml \
+                  .github/workflows/chatgpt-current-affairs-validation-fix.yml \
+                  .github/workflows/chatgpt-current-affairs-finalize.yml \
+                  .github/workflows/chatgpt-current-affairs-commit.yml
+          git commit -m "Publish Current Affairs for 14 September 2026"
+          git push origin HEAD:chatgpt-current-affairs-2026-09-14
