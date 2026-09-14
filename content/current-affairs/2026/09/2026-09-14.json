@@ -1,0 +1,1249 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-14",
+  "published_at": "2026-09-14T23:55:00+05:00",
+  "edition": "Current Affairs — 14 September 2026",
+  "stories": [
+    {
+      "id": "pk-sbp-policy-rate-2026-09-14",
+      "category": "Pakistan Economy",
+      "headline": "SBP keeps the policy rate unchanged at 11.5% as inflation and energy risks stay elevated",
+      "summary": "The State Bank of Pakistan's Monetary Policy Committee kept the policy rate at 11.5% on 14 September 2026. The decision came as higher global energy prices and supply-chain risks complicated the inflation outlook.",
+      "what_happened": "The Monetary Policy Committee maintained the policy rate at 11.5%. Recent reporting citing the SBP noted that consumer inflation rose to 11.1% in August from 9.2% in July, while the central bank's medium-term inflation target remains 5–7%.",
+      "explanation": "A policy-rate hold means the central bank is neither adding further monetary tightening nor easing financial conditions. The decision reflects a balance between controlling inflation and avoiding unnecessary pressure on credit, investment and growth.",
+      "background": "The SBP raised the policy rate by 100 basis points to 11.5% in April 2026 after the prolonged Middle East conflict intensified risks from energy prices, freight costs and supply-chain disruptions. The September decision left that tighter stance in place.",
+      "why_it_matters": "The policy rate affects borrowing costs, investment, government debt servicing and inflation expectations. Its continuation at 11.5% shows that external energy shocks remain a central constraint on Pakistan's monetary-policy space.",
+      "pakistan_perspective": "For Pakistan, a net energy importer, higher oil and freight costs can feed into domestic prices and the external account. The SBP's stance therefore links domestic monetary policy closely to Middle East energy and shipping risks.",
+      "regional_implications": "Other energy-importing South Asian economies also face pressure from higher fuel and transport costs, though their monetary responses depend on domestic inflation and exchange-rate conditions.",
+      "global_implications": "The decision illustrates how conflict-driven energy shocks can transmit into monetary policy in import-dependent emerging markets.",
+      "key_takeaways": [
+        "The SBP policy rate remained 11.5% on 14 September 2026.",
+        "Inflation and global energy prices remain key constraints on monetary easing.",
+        "The medium-term inflation target is 5–7%."
+      ],
+      "facts": [
+        {
+          "label": "SBP policy rate",
+          "value": "11.5%",
+          "type": "Economy",
+          "topic": "Monetary policy"
+        },
+        {
+          "label": "Medium-term inflation target",
+          "value": "5–7%",
+          "type": "Economy",
+          "topic": "Inflation"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Policy rate",
+          "value": "11.5%",
+          "source": "State Bank of Pakistan",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "Pakistan CPI inflation in August 2026",
+          "value": "11.1%",
+          "source": "Arab News Pakistan",
+          "year": "2026"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "27 April 2026",
+          "text": "SBP raised the policy rate by 100 basis points to 11.5%."
+        },
+        {
+          "date": "14 September 2026",
+          "text": "MPC kept the policy rate unchanged at 11.5%."
+        }
+      ],
+      "what_to_watch": [
+        "Future inflation readings, oil prices, exchange-rate pressures and the next MPC meeting."
+      ],
+      "question_angles": [
+        "How do external energy shocks constrain monetary policy in Pakistan?",
+        "Assess the trade-off between inflation control and growth under a tight monetary stance."
+      ],
+      "quick_gk": [
+        {
+          "label": "Central bank",
+          "value": "State Bank of Pakistan"
+        },
+        {
+          "label": "Policy rate on 14 September 2026",
+          "value": "11.5%"
+        }
+      ],
+      "topics": [
+        "Monetary policy",
+        "Inflation",
+        "Energy prices",
+        "Pakistan economy"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "State Bank of Pakistan"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "State Bank of Pakistan"
+      ],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "State Bank of Pakistan",
+          "title": "Monetary Policy",
+          "url": "https://www.sbp.org.pk/our-operations/monetary-policy",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        },
+        {
+          "publisher": "Arab News Pakistan",
+          "title": "Pakistan central bank holds key rate at 11.5% as US-Iran war clouds economic outlook",
+          "url": "https://www.arabnews.pk/pakistan/pakistan-central-bank-holds-key-rate-at-115-as-us-iran-war-clouds-economic-outlook-3001231",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "pk-ecc-fuel-relief-2026-09-14",
+      "category": "Pakistan Economy",
+      "headline": "ECC approves targeted Fuel Relief Scheme for motorcycles, three-wheelers and small cars",
+      "summary": "The Economic Coordination Committee approved the Prime Minister's Fuel Relief Scheme, using a digital Fuel Pass System to target non-commercial lower-income vehicle users after petroleum-price increases.",
+      "what_happened": "The ECC approved relief of Rs500 per week for two- and three-wheelers, equivalent to five litres at Rs100 per litre, and Rs1,000 for ten days for cars up to 800cc, based on 30 litres per month at Rs100 per litre. Relief is limited to one non-commercial vehicle per user or owner.",
+      "explanation": "The scheme replaces a broad fuel subsidy with a targeted transfer linked to vehicle eligibility. The Ministry of IT & Telecom is to deploy and manage the Fuel Pass System for digital delivery and monitoring.",
+      "background": "Pakistan has faced renewed petroleum-price pressure as Middle East conflict and shipping disruptions pushed global oil prices higher. Targeting is intended to contain fiscal leakage while cushioning smaller vehicle users.",
+      "why_it_matters": "Targeted energy support can reduce the fiscal cost of relief compared with universal price suppression, while digital verification can improve traceability and eligibility controls.",
+      "pakistan_perspective": "Implementation quality will determine whether the scheme protects vulnerable users without creating exclusion errors, fraud or new fiscal pressures.",
+      "regional_implications": "The scheme is an example of how energy-importing states can use targeted digital transfers instead of blanket fuel subsidies during external price shocks.",
+      "global_implications": "It reflects a broader policy trend toward digitally administered, targeted social protection during commodity-price shocks.",
+      "key_takeaways": [
+        "Two- and three-wheelers are eligible for Rs500 per week.",
+        "Cars up to 800cc are eligible for Rs1,000 for ten days.",
+        "The scheme is for non-commercial users and limits relief to one vehicle per user or owner.",
+        "The Ministry of IT & Telecom will manage the Fuel Pass System."
+      ],
+      "facts": [
+        {
+          "label": "Two- and three-wheeler relief",
+          "value": "Rs500 per week",
+          "type": "Policy",
+          "topic": "Fuel relief"
+        },
+        {
+          "label": "Small-car eligibility",
+          "value": "Cars up to 800cc",
+          "type": "Policy",
+          "topic": "Fuel relief"
+        },
+        {
+          "label": "Fuel Pass System manager",
+          "value": "Ministry of IT & Telecom",
+          "type": "Institution",
+          "topic": "Digital delivery"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Two- and three-wheeler weekly relief",
+          "value": "Rs500",
+          "source": "Press Information Department",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "Eligible small-car relief",
+          "value": "Rs1,000 for ten days",
+          "source": "Press Information Department",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "ECC approved the Prime Minister's targeted Fuel Relief Scheme."
+        }
+      ],
+      "what_to_watch": [
+        "Eligibility verification, launch of the Fuel Pass System, fiscal cost and actual beneficiary coverage."
+      ],
+      "question_angles": [
+        "Evaluate targeted subsidies versus universal price controls in Pakistan.",
+        "How can digital public infrastructure improve social-protection delivery?"
+      ],
+      "quick_gk": [
+        {
+          "label": "Approving body",
+          "value": "Economic Coordination Committee (ECC)"
+        },
+        {
+          "label": "Digital mechanism",
+          "value": "Fuel Pass System (FPS)"
+        }
+      ],
+      "topics": [
+        "Fuel subsidy",
+        "Social protection",
+        "Digital governance",
+        "Petroleum prices"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Economic Coordination Committee",
+        "Ministry of IT & Telecom",
+        "Finance Division"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "Economic Coordination Committee"
+      ],
+      "people": [
+        "Muhammad Aurangzeb"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "Finance Minister Chairs ECC Meeting, Approves PM’s Fuel Relief Package",
+          "url": "https://pid.gov.pk/site/press_detail/33920",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        }
+      ]
+    },
+    {
+      "id": "pk-ihc-protest-roads-state-resources-2026-09-14",
+      "category": "Law & Governance",
+      "headline": "IHC bars road blockades and use of state machinery for political protests",
+      "summary": "The Islamabad High Court disposed of a petition concerning PTI's planned 27 September protest with directions that political actors cannot block Islamabad roads and that public resources and government personnel must not be used for political protests.",
+      "what_happened": "A three-member larger bench directed chief ministers to ensure that state resources, public funds, government officers and personnel are not deployed for political rallies, marches or protests. The court also held that political parties or public office holders have no legal authority to block Islamabad roads and access routes.",
+      "explanation": "The ruling addresses two governance questions at once: citizens' freedom of movement during protests and the separation between public resources and partisan political activity.",
+      "background": "The petition was filed in anticipation of a planned PTI protest and long march in Islamabad on 27 September 2026.",
+      "why_it_matters": "The decision has broader significance for protest regulation, administrative neutrality and the constitutional balance between political assembly and the rights of other citizens.",
+      "pakistan_perspective": "Its practical importance will depend on even-handed enforcement across political parties and provincial governments and on how authorities reconcile protest rights with public order.",
+      "regional_implications": "The case reflects a wider South Asian challenge of regulating mass political mobilisation without converting administrative power into partisan advantage.",
+      "global_implications": "It contributes to comparative debates over peaceful assembly, public-order restrictions and misuse of state resources.",
+      "key_takeaways": [
+        "The IHC disposed of the petition with directions rather than banning political activity outright.",
+        "State resources and government personnel cannot be used for political protests.",
+        "Political actors cannot lawfully block Islamabad roads or access routes."
+      ],
+      "facts": [
+        {
+          "label": "Court",
+          "value": "Islamabad High Court",
+          "type": "Law",
+          "topic": "Political protests"
+        },
+        {
+          "label": "Planned protest date",
+          "value": "27 September 2026",
+          "type": "Date",
+          "topic": "Political protests"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "IHC issued directions on the planned 27 September protest."
+        }
+      ],
+      "what_to_watch": [
+        "Implementation by federal and provincial authorities ahead of the planned protest."
+      ],
+      "question_angles": [
+        "Discuss the constitutional balance between freedom of assembly and freedom of movement.",
+        "How does the misuse of state resources affect democratic competition and administrative neutrality?"
+      ],
+      "quick_gk": [
+        {
+          "label": "Court",
+          "value": "Islamabad High Court"
+        },
+        {
+          "label": "Bench type",
+          "value": "Three-member larger bench"
+        }
+      ],
+      "topics": [
+        "Freedom of assembly",
+        "Public order",
+        "Administrative neutrality",
+        "Political protests"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Islamabad High Court"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "IHC reserves verdict on plea against PTI's Sept 27 march",
+          "url": "https://www.dawn.com/news/2029849/ihc-reserves-verdict-on-plea-against-ptis-sept-27-march",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        },
+        {
+          "publisher": "The Express Tribune",
+          "title": "PTI Sept 27 protest: IHC rules no political party, public office holder can block Islamabad",
+          "url": "https://tribune.com.pk/story/2629240/pti-sept-27-protest-case-ihc-rules-no-political-party-public-office-holder-can-block-islamabad",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "pk-power-sector-regulatory-reform-2026-09-14",
+      "category": "Energy & Governance",
+      "headline": "Government opens power-sector regulatory reform review focused on predictability, investment and competition",
+      "summary": "The first meeting of the Prime Minister-constituted Steering Committee on Power Sector Regulatory Regime – Improvement & Reforms reviewed Pakistan's power-sector regulatory framework and discussed measures to strengthen efficiency, investment and competition.",
+      "what_happened": "The committee reviewed the existing regulatory regime and emphasised a clear, predictable and consistent framework to facilitate private-sector participation, long-term investment, efficiency and competition.",
+      "explanation": "Power-sector reform is not only about tariffs or generation capacity. Regulatory predictability affects investment decisions, market entry, financing costs and the credibility of sector restructuring.",
+      "background": "Pakistan's power sector has long faced financial, governance and efficiency challenges. The new steering committee is tasked with reviewing and advancing regulatory improvements.",
+      "why_it_matters": "Regulatory reform can shape investment, competition and the sector's ability to reduce chronic financial and operational weaknesses.",
+      "pakistan_perspective": "The credibility of reforms will depend on translating committee recommendations into consistent rules, stronger institutions and commercially workable market arrangements.",
+      "regional_implications": "Pakistan's experience is relevant to South Asian economies trying to attract private investment while reforming legacy electricity systems.",
+      "global_implications": "International investors typically price regulatory certainty into long-term infrastructure decisions, making governance quality central to energy investment.",
+      "key_takeaways": [
+        "The steering committee held its first meeting on 14 September 2026.",
+        "Its stated focus includes regulatory predictability, efficiency, investment and competition."
+      ],
+      "facts": [
+        {
+          "label": "Committee",
+          "value": "Steering Committee on Power Sector Regulatory Regime – Improvement & Reforms",
+          "type": "Institution",
+          "topic": "Power sector"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "First steering-committee meeting reviewed the power-sector regulatory regime."
+        }
+      ],
+      "what_to_watch": [
+        "Specific regulatory proposals, implementation timelines and changes affecting private-sector participation."
+      ],
+      "question_angles": [
+        "Why is regulatory predictability important for Pakistan's power-sector reform?",
+        "Assess governance and investment constraints in Pakistan's electricity sector."
+      ],
+      "quick_gk": [
+        {
+          "label": "Chair",
+          "value": "Finance Minister Muhammad Aurangzeb"
+        }
+      ],
+      "topics": [
+        "Power sector",
+        "Regulation",
+        "Energy reform",
+        "Private investment"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Finance Division"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [],
+      "people": [
+        "Muhammad Aurangzeb"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "Finance Minister Chairs First Meeting of Steering Committee on Power Sector Regulatory Regime – Improvement & Reforms",
+          "url": "https://pid.gov.pk/site/press_detail/33928",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        }
+      ]
+    },
+    {
+      "id": "pk-soe-biannual-review-2026-09-14",
+      "category": "Governance & Economy",
+      "headline": "Cabinet committee reviews federal SOE performance for first half of FY2025-26",
+      "summary": "The Cabinet Committee on State-Owned Enterprises reviewed the bi-annual performance of federal SOEs for the first half of FY2025-26, focusing on financial and operational performance, fiscal flows, governance, reporting and progress against business plans.",
+      "what_happened": "The Central Monitoring Unit presented an assessment of profitability and losses, fiscal flows, business-plan implementation, governance, financial reporting and key performance targets across the federal SOE portfolio.",
+      "explanation": "Regular portfolio-level review is intended to make SOE oversight more transparent and to identify entities that create fiscal risk or require restructuring.",
+      "background": "State-owned enterprise reform is part of Pakistan's broader effort to reduce fiscal risks, improve public-sector governance and strengthen commercial discipline.",
+      "why_it_matters": "SOE losses, subsidies, guarantees and weak governance can create significant contingent liabilities for the federal budget.",
+      "pakistan_perspective": "The value of the review depends on whether performance information leads to timely restructuring, governance changes, accountability and transparent fiscal reporting.",
+      "regional_implications": "SOE reform is a common governance challenge across South Asia, where public enterprises often combine commercial and policy mandates.",
+      "global_implications": "Transparent SOE monitoring aligns with international public-finance practice aimed at identifying fiscal risks outside the core budget.",
+      "key_takeaways": [
+        "The review covered the first half of FY2025-26.",
+        "The Central Monitoring Unit assessed financial, operational and governance performance."
+      ],
+      "facts": [
+        {
+          "label": "Reviewing body",
+          "value": "Cabinet Committee on State-Owned Enterprises (CCoSOEs)",
+          "type": "Institution",
+          "topic": "SOE reform"
+        },
+        {
+          "label": "Review period",
+          "value": "First half of FY2025-26",
+          "type": "Period",
+          "topic": "SOE reform"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "CCoSOEs reviewed the bi-annual performance of federal SOEs."
+        }
+      ],
+      "what_to_watch": [
+        "Follow-up decisions on restructuring, governance changes, divestment and fiscal-risk disclosure."
+      ],
+      "question_angles": [
+        "How do state-owned enterprises create fiscal risks for Pakistan?",
+        "Evaluate governance reforms needed to improve SOE performance."
+      ],
+      "quick_gk": [
+        {
+          "label": "Monitoring unit",
+          "value": "Central Monitoring Unit (CMU), Finance Division"
+        }
+      ],
+      "topics": [
+        "State-owned enterprises",
+        "Fiscal risk",
+        "Public-sector governance"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Cabinet Committee on State-Owned Enterprises",
+        "Central Monitoring Unit",
+        "Finance Division"
+      ],
+      "reports": [
+        "Bi-Annual Performance of Federal State-Owned Enterprises"
+      ],
+      "treaties": [],
+      "organisations": [],
+      "people": [
+        "Muhammad Aurangzeb"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "CCoSOEs Reviews Bi-Annual Performance of Federal SOEs, Emphasizes Stronger Governance, Transparency and Financial Discipline",
+          "url": "https://pid.gov.pk/site/press_detail/33927",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        }
+      ]
+    },
+    {
+      "id": "pk-sco-digital-economy-ai-2026-09-14",
+      "category": "Technology & Foreign Relations",
+      "headline": "Pakistan calls for stronger SCO cooperation on digital economy and artificial intelligence",
+      "summary": "At the SCO Digital Economy Forum 2026 in Urumqi, Planning Minister Ahsan Iqbal called for deeper regional cooperation on digital transformation and AI and highlighted Pakistan's Digital Nation Pakistan Act 2025, Pakistan Digital Authority and National AI Policy.",
+      "what_happened": "Ahsan Iqbal addressed the ministerial-level closed-door meeting on SCO Digital Economy Cooperation and presented E-Pakistan as one of the five principal pillars of URAAN Pakistan.",
+      "explanation": "Digital-economy cooperation within the SCO can involve digital public infrastructure, data governance, AI policy, skills, connectivity and cross-border commercial standards.",
+      "background": "Pakistan has placed digital transformation within its national development agenda while the SCO increasingly treats technology and connectivity as areas of regional cooperation.",
+      "why_it_matters": "Digital governance and AI are becoming instruments of economic competitiveness as well as foreign policy. Regional standards and cooperation can influence investment, trade and technological dependence.",
+      "pakistan_perspective": "Pakistan's opportunity is to convert policy frameworks into interoperable public services, AI capacity, digital skills and exportable technology while protecting data and cyber security.",
+      "regional_implications": "SCO members include major technology and market powers, making cooperation potentially significant for Eurasian digital standards and connectivity.",
+      "global_implications": "Competing digital ecosystems and AI governance models are increasingly part of wider geopolitical competition.",
+      "key_takeaways": [
+        "Pakistan advocated stronger SCO cooperation in digital economy and AI.",
+        "E-Pakistan is one of the five principal pillars of URAAN Pakistan.",
+        "Pakistan highlighted the Digital Nation Pakistan Act 2025, Pakistan Digital Authority and National AI Policy."
+      ],
+      "facts": [
+        {
+          "label": "Forum",
+          "value": "SCO Digital Economy Forum 2026",
+          "type": "Event",
+          "topic": "Digital economy"
+        },
+        {
+          "label": "Venue",
+          "value": "Urumqi, Xinjiang, China",
+          "type": "Location",
+          "topic": "SCO"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "Pakistan presented its digital-transformation agenda at the SCO Digital Economy Forum in Urumqi."
+        }
+      ],
+      "what_to_watch": [
+        "Concrete SCO projects on AI, digital connectivity, standards, skills and data governance."
+      ],
+      "question_angles": [
+        "How can Pakistan use regional digital cooperation to improve economic competitiveness?",
+        "Discuss AI governance as an emerging dimension of foreign policy."
+      ],
+      "quick_gk": [
+        {
+          "label": "Forum venue",
+          "value": "Urumqi, Xinjiang, China"
+        },
+        {
+          "label": "Pakistan's digital development pillar",
+          "value": "E-Pakistan"
+        }
+      ],
+      "topics": [
+        "Artificial intelligence",
+        "Digital economy",
+        "SCO",
+        "Digital governance"
+      ],
+      "countries": [
+        "Pakistan",
+        "China"
+      ],
+      "institutions": [
+        "Ministry of Planning, Development and Special Initiatives",
+        "Pakistan Digital Authority"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "Shanghai Cooperation Organisation"
+      ],
+      "people": [
+        "Ahsan Iqbal"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "Ahsan Iqbal Calls for Stronger SCO Cooperation in Digital Economy and AI",
+          "url": "https://pid.gov.pk/site/press_detail/33915",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        }
+      ]
+    },
+    {
+      "id": "pk-lebanon-security-prisoner-transfer-mou-2026-09-14",
+      "category": "Pakistan Foreign Relations",
+      "headline": "Pakistan and Lebanon deepen security cooperation and sign prisoner-transfer MoU",
+      "summary": "Pakistan and Lebanon reviewed cooperation in internal security and law enforcement, while their interior ministers signed an MoU creating a framework for convicted nationals to serve the remainder of sentences in their home countries.",
+      "what_happened": "During the Lebanese interior minister's visit, Pakistani leaders discussed law enforcement, counter-narcotics, extradition, mutual legal assistance, disaster preparedness and emergency response. Prime Minister Shehbaz Sharif witnessed the signing of the MoU on the Transfer of Sentenced Persons.",
+      "explanation": "Prisoner-transfer arrangements are forms of legal cooperation that allow eligible convicted nationals to complete sentences in their home states under agreed procedures.",
+      "background": "The visit took place amid instability and conflict in the wider Middle East. Pakistan also reiterated support for Lebanon's sovereignty and territorial integrity.",
+      "why_it_matters": "The engagement broadens bilateral relations from diplomacy into practical legal, security and humanitarian cooperation.",
+      "pakistan_perspective": "For Pakistan, formal legal-cooperation mechanisms can improve consular protection, law-enforcement coordination and management of transnational criminal matters.",
+      "regional_implications": "Pakistan's engagement with Lebanon also reflects its diplomatic interest in de-escalation and state sovereignty in the Middle East.",
+      "global_implications": "Cross-border legal assistance and prisoner-transfer mechanisms are increasingly important as migration and transnational crime expand.",
+      "key_takeaways": [
+        "Pakistan and Lebanon discussed security and law-enforcement cooperation.",
+        "The interior ministers signed an MoU on the Transfer of Sentenced Persons."
+      ],
+      "facts": [
+        {
+          "label": "Agreement",
+          "value": "MoU on the Transfer of Sentenced Persons",
+          "type": "Agreement",
+          "topic": "Pakistan-Lebanon relations"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "The respective interior ministers signed an MoU on transfer of sentenced persons."
+        }
+      ],
+      "what_to_watch": [
+        "Implementation procedures for the MoU and follow-up on mutual legal assistance and extradition cooperation."
+      ],
+      "question_angles": [
+        "Assess Pakistan's evolving security diplomacy in the Middle East.",
+        "Why are mutual legal assistance and prisoner-transfer agreements important in bilateral relations?"
+      ],
+      "quick_gk": [
+        {
+          "label": "Lebanese official",
+          "value": "Interior and Municipalities Minister Ahmad Al Hajjar"
+        }
+      ],
+      "topics": [
+        "Pakistan-Lebanon relations",
+        "Law enforcement",
+        "Mutual legal assistance",
+        "Middle East"
+      ],
+      "countries": [
+        "Pakistan",
+        "Lebanon"
+      ],
+      "institutions": [
+        "Prime Minister's Office",
+        "Presidency of Pakistan"
+      ],
+      "reports": [],
+      "treaties": [
+        "MoU on the Transfer of Sentenced Persons"
+      ],
+      "organisations": [],
+      "people": [
+        "Shehbaz Sharif",
+        "Asif Ali Zardari",
+        "Ahmad Al Hajjar"
+      ],
+      "sources": [
+        {
+          "publisher": "Press Information Department",
+          "title": "INTERIOR MINISTER OF LEBANON CALLS ON PRIME MINISTER",
+          "url": "https://pid.gov.pk/site/press_detail/33923",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        },
+        {
+          "publisher": "Press Information Department",
+          "title": "President Zardari calls for stronger Pakistan-Lebanon cooperation in security, law enforcement",
+          "url": "https://pid.gov.pk/site/press_detail/33925",
+          "published_at": "2026-09-14",
+          "source_type": "Official Source"
+        }
+      ]
+    },
+    {
+      "id": "global-jpmorgan-frontier-bond-index-pakistan-2026-09-14",
+      "category": "Global Economy",
+      "headline": "JPMorgan's new frontier local-currency bond index gives Pakistan an 8% maximum-weight slot",
+      "summary": "JPMorgan is set to launch its GBI-EM Edge frontier-market local-currency government bond index by the end of September, covering nearly $330 billion of debt across 26 countries. Pakistan is among the markets expected to carry the maximum 8% country weight.",
+      "what_happened": "The new benchmark will cover 26 frontier economies. Eligible bonds must be at least $250 million equivalent and have at least 2.5 years remaining to maturity; country weights are capped at 8%. Pakistan, Vietnam, Kazakhstan and Bangladesh are among Frontier Asian markets expected to carry the maximum weight.",
+      "explanation": "Bond indexes matter because global asset managers use them as benchmarks. Inclusion can raise a country's visibility to international investors, though actual inflows depend on market access, liquidity, macroeconomic risk and investor mandates.",
+      "background": "The GBI-EM Edge follows JPMorgan's hard-currency NEXGEM frontier index and responds to investor appetite for higher-yielding local-currency debt.",
+      "why_it_matters": "A widely followed benchmark can influence portfolio allocation and deepen local-currency bond markets, potentially reducing over-reliance on foreign-currency borrowing.",
+      "pakistan_perspective": "Pakistan's inclusion could improve visibility of its local-currency government debt to global investors. Benefits, however, depend on macroeconomic credibility, market liquidity, currency risk and the accessibility of domestic debt markets.",
+      "regional_implications": "Frontier Asia—especially Vietnam, Kazakhstan, Pakistan and Bangladesh—will form a significant part of the index.",
+      "global_implications": "The benchmark expands institutional recognition of frontier local-currency debt as a distinct investable asset class.",
+      "key_takeaways": [
+        "The GBI-EM Edge is due to launch by the end of September 2026.",
+        "It will cover 26 countries and nearly $330 billion in local-currency government debt.",
+        "Pakistan is expected to carry the maximum 8% country weighting."
+      ],
+      "facts": [
+        {
+          "label": "Index",
+          "value": "GBI-EM Edge",
+          "type": "Finance",
+          "topic": "Frontier markets"
+        },
+        {
+          "label": "Countries covered",
+          "value": "26",
+          "type": "Finance",
+          "topic": "Frontier markets"
+        },
+        {
+          "label": "Pakistan weighting",
+          "value": "8% maximum weighting",
+          "type": "Finance",
+          "topic": "Pakistan debt market"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Debt tracked by the new index",
+          "value": "Nearly $330 billion",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "Maximum country weighting",
+          "value": "8%",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "Minimum eligible bond size",
+          "value": "$250 million equivalent",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "End of September 2026",
+          "text": "JPMorgan plans to launch the GBI-EM Edge index."
+        }
+      ],
+      "what_to_watch": [
+        "Actual launch, benchmark constituents, investor flows and any changes in foreign participation in Pakistan's local debt market."
+      ],
+      "question_angles": [
+        "What does inclusion in global bond indexes mean for emerging and frontier economies?",
+        "Assess opportunities and risks of attracting foreign portfolio investment into Pakistan's local-currency debt market."
+      ],
+      "quick_gk": [
+        {
+          "label": "New index",
+          "value": "JPMorgan GBI-EM Edge"
+        },
+        {
+          "label": "Pakistan's indicated weight",
+          "value": "8%"
+        }
+      ],
+      "topics": [
+        "Frontier markets",
+        "Government bonds",
+        "Portfolio investment",
+        "Pakistan economy"
+      ],
+      "countries": [
+        "Pakistan",
+        "Egypt",
+        "Vietnam",
+        "Morocco",
+        "Kazakhstan",
+        "Bangladesh",
+        "Nigeria",
+        "Sri Lanka"
+      ],
+      "institutions": [
+        "JPMorgan"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "JPMorgan"
+      ],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "JPMorgan to launch long-awaited 'frontier' local currency debt index",
+          "url": "https://www.reuters.com/world/asia-pacific/jpmorgan-launch-frontier-market-local-currency-debt-index-by-month-end-source-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "global-middle-east-oil-shipping-risks-2026-09-14",
+      "category": "Geopolitics & Energy",
+      "headline": "Middle East attacks squeeze oil routes as Saudi pipeline shutdown and Hormuz disruption lift supply risks",
+      "summary": "Energy-market risks intensified after attacks affected Saudi Arabia's East-West pipeline and maritime security around the Strait of Hormuz. Reuters reported Brent back above $107 per barrel and commodity-vessel traffic through Hormuz well below recent averages.",
+      "what_happened": "Saudi Arabia's East-West pipeline was temporarily shut after a drone attack, while Gulf states postponed a planned meeting with Iran and maritime tensions persisted around Hormuz. Reuters ship-tracking data showed commodity-vessel transits through Hormuz at the weekend in single digits per day, below the recent ten-day average.",
+      "explanation": "The East-West pipeline provides Saudi Arabia an alternative route to the Red Sea when Gulf shipping is constrained. Simultaneous pressure on pipelines and maritime chokepoints raises freight, insurance and supply-risk premiums.",
+      "background": "The Strait of Hormuz is one of the world's most important energy chokepoints. Before the Iran war began on 28 February, Reuters reported that it handled about 125 large commercial vessel transits per day and around 20% of global daily crude oil and LNG supply.",
+      "why_it_matters": "Disruption in Gulf energy routes affects oil prices, inflation, shipping costs and monetary policy worldwide.",
+      "pakistan_perspective": "Pakistan is highly exposed through imported petroleum and LNG. Sustained high prices can raise the import bill, domestic fuel prices, inflation and pressure on the current account and fiscal support measures.",
+      "regional_implications": "Gulf energy infrastructure and Red Sea/Hormuz security are becoming interconnected theatres of the wider conflict.",
+      "global_implications": "A prolonged disruption can transmit quickly into global inflation and interest-rate expectations.",
+      "key_takeaways": [
+        "Saudi Arabia's East-West pipeline was temporarily shut after a drone attack.",
+        "Hormuz commodity-vessel traffic fell well below recent averages.",
+        "Brent crude moved back above $107 per barrel."
+      ],
+      "facts": [
+        {
+          "label": "Key chokepoint",
+          "value": "Strait of Hormuz",
+          "type": "Geography",
+          "topic": "Energy security"
+        },
+        {
+          "label": "Saudi alternative route",
+          "value": "East-West oil pipeline to the Red Sea",
+          "type": "Infrastructure",
+          "topic": "Energy security"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Approximate share of global daily crude oil and LNG supply normally linked to Hormuz before the war",
+          "value": "About 20%",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "Brent crude level reported in Reuters Morning Bid",
+          "value": "Above $107 per barrel",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "Shipping and energy-route risks intensified as the Saudi East-West pipeline remained disrupted and Gulf diplomacy faltered."
+        }
+      ],
+      "what_to_watch": [
+        "Repair of the Saudi pipeline, Hormuz vessel traffic, Houthi operations, Gulf-Iran diplomacy and oil prices."
+      ],
+      "question_angles": [
+        "How do maritime chokepoints shape global energy security?",
+        "Assess the economic implications of Middle East conflict for Pakistan."
+      ],
+      "quick_gk": [
+        {
+          "label": "Saudi bypass route",
+          "value": "East-West oil pipeline"
+        },
+        {
+          "label": "Major Gulf chokepoint",
+          "value": "Strait of Hormuz"
+        }
+      ],
+      "topics": [
+        "Oil prices",
+        "Strait of Hormuz",
+        "Bab el-Mandeb",
+        "Energy security",
+        "Middle East conflict"
+      ],
+      "countries": [
+        "Saudi Arabia",
+        "Iran",
+        "Yemen",
+        "Pakistan"
+      ],
+      "institutions": [],
+      "reports": [],
+      "treaties": [],
+      "organisations": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Morning Bid: Shipping oil gets ever harder, costlier",
+          "url": "https://www.reuters.com/markets/europe/global-markets-view-europe-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Analysis"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Hormuz shipping traffic remains below 10-day average at weekend, data shows",
+          "url": "https://www.reuters.com/business/hormuz-shipping-traffic-remains-below-10-day-average-weekend-data-shows-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Gulf states call off meeting with Iran; Houthis launch new attack on Saudi",
+          "url": "https://www.reuters.com/business/energy/diplomacy-stumbles-with-postponement-meeting-strait-hormuz-proposal-2026-09-13/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "global-us-fed-hike-yields-2026-09-14",
+      "category": "Global Economy",
+      "headline": "Fed hike expectations rise as US 10-year Treasury yield crosses 5%",
+      "summary": "A Reuters poll found a majority of economists expected the Federal Reserve to raise rates at its 16 September decision, while the US 10-year Treasury yield moved above 5% for the first time since October 2023 amid renewed inflation and oil-price concerns.",
+      "what_happened": "Economists shifted toward expecting a Federal Reserve rate increase this week and at least one more by the end of March. Separately, the benchmark 10-year Treasury yield rose above 5%, with Reuters reporting it at about 5.01% during Monday trading.",
+      "explanation": "Higher oil prices can revive inflation pressure, while higher bond yields tighten financial conditions even before a central bank changes its policy rate.",
+      "background": "The Fed is operating under Chair Kevin Warsh without regular forward rate guidance, increasing the importance of incoming inflation, growth and market data.",
+      "why_it_matters": "US rates influence global borrowing costs, the dollar, capital flows and asset valuations. A renewed tightening cycle would affect emerging-market financing conditions.",
+      "pakistan_perspective": "Higher US yields can strengthen the dollar and raise the relative return on safe US assets, potentially making external financing and portfolio flows more difficult for emerging markets including Pakistan.",
+      "regional_implications": "South Asian economies with external financing needs may face tighter global liquidity and exchange-rate pressure if US monetary conditions remain restrictive.",
+      "global_implications": "A return to rate hikes would mark a significant shift in the global monetary cycle and could weigh on risk assets and debt sustainability.",
+      "key_takeaways": [
+        "US 10-year Treasury yields crossed 5% for the first time since October 2023.",
+        "A Reuters poll showed economists moving toward a Fed rate hike at the 16 September meeting.",
+        "Oil-driven inflation concerns are an important part of the shift."
+      ],
+      "facts": [
+        {
+          "label": "US 10-year yield threshold",
+          "value": "Above 5%",
+          "type": "Markets",
+          "topic": "US monetary conditions"
+        },
+        {
+          "label": "Fed decision date",
+          "value": "16 September 2026",
+          "type": "Date",
+          "topic": "Federal Reserve"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "US 10-year Treasury yield reported by Reuters",
+          "value": "5.01%",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "US 10-year Treasury yields rose above 5% and Reuters economists shifted toward expecting a Fed hike."
+        }
+      ],
+      "what_to_watch": [
+        "Federal Reserve decision on 16 September, oil prices, inflation data and Treasury-market reaction."
+      ],
+      "question_angles": [
+        "How do US interest-rate changes affect capital flows to developing economies?",
+        "Explain the link between oil shocks, inflation expectations and bond yields."
+      ],
+      "quick_gk": [
+        {
+          "label": "Benchmark US government bond",
+          "value": "10-year Treasury note"
+        },
+        {
+          "label": "Yield threshold crossed",
+          "value": "5%"
+        }
+      ],
+      "topics": [
+        "Federal Reserve",
+        "US Treasury yields",
+        "Global inflation",
+        "Capital flows"
+      ],
+      "countries": [
+        "United States",
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Reserve"
+      ],
+      "reports": [
+        "Reuters Poll"
+      ],
+      "treaties": [],
+      "organisations": [
+        "Federal Reserve"
+      ],
+      "people": [
+        "Kevin Warsh"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Fed rate hike on Wednesday now likely, say economists, and at least one more to follow: Reuters Poll",
+          "url": "https://www.reuters.com/business/fed-rate-hike-wednesday-now-likely-say-economists-least-one-more-follow-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "US 10-year yields reach 5%, highest since 2023",
+          "url": "https://www.reuters.com/business/us-10-year-yields-reach-5-highest-since-2023-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "global-ai-safety-regulation-debate-2026-09-14",
+      "category": "Science, Technology & AI",
+      "headline": "AI safety debate intensifies as US political leaders resist new rules and Microsoft proposes human-control code",
+      "summary": "The debate over frontier-AI governance escalated after industry leaders called for stronger safety measures, President Donald Trump argued existing US powers were sufficient, and Microsoft released a draft code requiring its AI systems to accept correction and shutdown.",
+      "what_happened": "Anthropic CEO Dario Amodei proposed independent audits for advanced frontier models, a proposal endorsed by several major AI executives. President Trump and Vice President JD Vance expressed skepticism about additional regulation. Microsoft separately unveiled a draft model code and opened it for six weeks of public feedback.",
+      "explanation": "The dispute is not about whether AI poses risks, but about who should set safeguards, whether controls should be voluntary or mandatory, and how to balance safety with innovation and geopolitical competition.",
+      "background": "AI capability has advanced rapidly while lawmakers and companies debate audits, model evaluations, shutdown behaviour, cybersecurity and the risk of misuse or loss of control.",
+      "why_it_matters": "Rules adopted by major AI-producing states and companies can become de facto global standards because the underlying models and infrastructure are used internationally.",
+      "pakistan_perspective": "Pakistan's National AI Policy and emerging digital-governance framework will need to address model safety, accountability, data protection, cyber risk and access to global AI systems without simply copying foreign regulation.",
+      "regional_implications": "The US-China technology rivalry makes AI safety rules part of a broader contest over standards, market leadership and strategic advantage.",
+      "global_implications": "The episode highlights a growing split between voluntary corporate governance and calls for legally enforceable oversight of frontier AI.",
+      "key_takeaways": [
+        "Anthropic's CEO called for independent audits of advanced AI models.",
+        "Trump argued existing US criminal and regulatory powers were sufficient.",
+        "Microsoft's draft code would require its AI not to resist correction or shutdown and is open for six weeks of feedback."
+      ],
+      "facts": [
+        {
+          "label": "Microsoft feedback period",
+          "value": "Six weeks",
+          "type": "Technology",
+          "topic": "AI governance"
+        },
+        {
+          "label": "Proposed frontier-model safeguard",
+          "value": "Independent audits",
+          "type": "Policy",
+          "topic": "AI governance"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "US political and industry responses sharpened the debate over frontier-AI regulation; Microsoft released a draft human-control code."
+        }
+      ],
+      "what_to_watch": [
+        "US legislative proposals, the Microsoft consultation, US-China AI-risk talks and whether major labs adopt common safety commitments."
+      ],
+      "question_angles": [
+        "Should frontier AI be governed primarily through law, independent audits or voluntary corporate codes?",
+        "How can Pakistan design AI governance suited to its own institutional capacity?"
+      ],
+      "quick_gk": [
+        {
+          "label": "Microsoft AI chief",
+          "value": "Mustafa Suleyman"
+        },
+        {
+          "label": "Anthropic CEO",
+          "value": "Dario Amodei"
+        }
+      ],
+      "topics": [
+        "Artificial intelligence",
+        "AI safety",
+        "Technology regulation",
+        "US-China technology competition"
+      ],
+      "countries": [
+        "United States",
+        "China",
+        "Pakistan"
+      ],
+      "institutions": [
+        "Microsoft",
+        "Anthropic"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "Microsoft",
+        "Anthropic"
+      ],
+      "people": [
+        "Donald Trump",
+        "JD Vance",
+        "Dario Amodei",
+        "Mustafa Suleyman",
+        "Sam Altman",
+        "Elon Musk"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Trump dismisses AI safety alarm, says US already has tools to police industry",
+          "url": "https://www.reuters.com/world/trump-says-there-is-sick-conspiracy-against-ai-data-centers-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        },
+        {
+          "publisher": "Reuters",
+          "title": "Microsoft drafts code of conduct to keep its AI under human control",
+          "url": "https://www.reuters.com/legal/litigation/microsoft-drafts-code-conduct-keep-its-ai-under-human-control-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "global-sudan-wfp-funding-crisis-2026-09-14",
+      "category": "Humanitarian Affairs",
+      "headline": "WFP warns Sudan operation faces nearly $300 million funding gap as hunger deepens",
+      "summary": "The World Food Programme said funding for Sudan has fallen sharply, leaving a gap of just under $300 million to sustain operations as nearly 20 million people face hunger and millions remain displaced by war.",
+      "what_happened": "WFP acting Executive Director Carl Skau said the agency had received about $206 million almost three-quarters into 2026, compared with $645 million in 2025. The agency is focusing on the five million people judged most in need and has recently reached four million, often with partial rations.",
+      "explanation": "Humanitarian access alone does not guarantee assistance. Funding determines whether agencies can purchase, transport and distribute food even when they are physically able to reach affected areas.",
+      "background": "War between Sudan's army and the Rapid Support Forces has devastated livelihoods, displaced millions and created what WFP describes as the world's largest hunger crisis.",
+      "why_it_matters": "The gap shows how donor retrenchment can turn an access improvement into an operational failure and deepen famine risk.",
+      "pakistan_perspective": "Sudan is relevant to Pakistan's wider engagement with the Muslim world, UN humanitarian diplomacy and debates over burden-sharing during protracted conflicts.",
+      "regional_implications": "Sudan's conflict drives displacement into neighbouring states and strains already fragile humanitarian systems across northeast Africa.",
+      "global_implications": "The funding squeeze illustrates the growing gap between humanitarian needs and donor resources as governments reallocate budgets toward domestic and defence priorities.",
+      "key_takeaways": [
+        "WFP reported a funding gap just under $300 million for Sudan operations.",
+        "Funding stood at about $206 million versus $645 million in 2025.",
+        "Nearly 20 million people face hunger in Sudan."
+      ],
+      "facts": [
+        {
+          "label": "WFP funding received in 2026 by mid-September",
+          "value": "About $206 million",
+          "type": "Humanitarian",
+          "topic": "Sudan"
+        },
+        {
+          "label": "People facing hunger",
+          "value": "Nearly 20 million",
+          "type": "Humanitarian",
+          "topic": "Sudan"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "WFP Sudan funding in 2026 by mid-September",
+          "value": "About $206 million",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        },
+        {
+          "label": "WFP Sudan funding in 2025",
+          "value": "$645 million",
+          "source": "Reuters",
+          "year": "2025"
+        },
+        {
+          "label": "Funding gap to sustain current operations",
+          "value": "Just under $300 million",
+          "source": "Reuters",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "WFP warned that falling funding was limiting its ability to use newly available humanitarian access in Sudan."
+        }
+      ],
+      "what_to_watch": [
+        "Donor pledges, WFP ration levels, access to Darfur and displacement trends."
+      ],
+      "question_angles": [
+        "Why do protracted conflicts create persistent humanitarian-financing gaps?",
+        "Assess the role and limitations of UN agencies in civil-war humanitarian crises."
+      ],
+      "quick_gk": [
+        {
+          "label": "UN food agency",
+          "value": "World Food Programme (WFP)"
+        },
+        {
+          "label": "Conflict parties",
+          "value": "Sudanese Armed Forces and Rapid Support Forces"
+        }
+      ],
+      "topics": [
+        "Sudan conflict",
+        "Food security",
+        "Humanitarian aid",
+        "UN agencies"
+      ],
+      "countries": [
+        "Sudan"
+      ],
+      "institutions": [
+        "World Food Programme",
+        "International Organization for Migration"
+      ],
+      "reports": [],
+      "treaties": [],
+      "organisations": [
+        "World Food Programme",
+        "International Organization for Migration"
+      ],
+      "people": [
+        "Carl Skau"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "World Food Programme funding for Sudan plummets as more go hungry, head says",
+          "url": "https://www.reuters.com/world/africa/world-food-programme-funding-sudan-plummets-more-go-hungry-head-says-2026-09-14/",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    },
+    {
+      "id": "global-us-epa-power-plant-ghg-rule-repeal-2026-09-14",
+      "category": "Climate & Environment",
+      "headline": "US EPA repeals federal greenhouse-gas limits for coal and gas power plants",
+      "summary": "The US Environmental Protection Agency announced the repeal of rules limiting greenhouse-gas emissions from coal- and natural-gas power plants, marking a major reversal in federal climate regulation.",
+      "what_happened": "EPA said the repeal would remove more than $300 billion in industry costs. Environmental and public-health groups opposed the move and said they would challenge it in court.",
+      "explanation": "Power-plant rules are central to climate policy because electricity generation is a major source of carbon dioxide emissions. Repeal shifts the US regulatory approach toward energy production and away from federal emissions limits.",
+      "background": "The rules being undone grew out of earlier federal efforts under the Biden and Obama administrations. The Trump administration has pursued a broader rollback of climate and environmental regulation.",
+      "why_it_matters": "US climate policy affects global emissions, energy investment, technology markets and international climate diplomacy.",
+      "pakistan_perspective": "Pakistan contributes a small share of global emissions but is highly vulnerable to climate impacts. Weaker mitigation by major emitters complicates arguments for burden-sharing, climate finance and global emissions reduction.",
+      "regional_implications": "Developing countries may face a wider gap between climate-adaptation needs and the pace of global mitigation if large emitters loosen domestic rules.",
+      "global_implications": "The rollback may increase legal and diplomatic conflict over climate action and could influence investment in coal, gas and clean-energy technologies.",
+      "key_takeaways": [
+        "EPA repealed greenhouse-gas limits for coal and natural-gas power plants.",
+        "The agency said the rollback would remove more than $300 billion in industry costs.",
+        "Legal challenges are expected."
+      ],
+      "facts": [
+        {
+          "label": "US regulator",
+          "value": "Environmental Protection Agency (EPA)",
+          "type": "Institution",
+          "topic": "Climate policy"
+        }
+      ],
+      "statistics": [
+        {
+          "label": "Industry costs EPA says the rollback would remove",
+          "value": "More than $300 billion",
+          "source": "Associated Press",
+          "date": "2026-09-14"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "14 September 2026",
+          "text": "EPA announced repeal of federal greenhouse-gas limits for coal and gas power plants."
+        }
+      ],
+      "what_to_watch": [
+        "Court challenges, implementation of the repeal and effects on US power-sector investment and emissions."
+      ],
+      "question_angles": [
+        "How do changes in US climate regulation affect global climate governance?",
+        "What are the implications for climate-vulnerable developing states when major emitters weaken mitigation rules?"
+      ],
+      "quick_gk": [
+        {
+          "label": "Agency",
+          "value": "US Environmental Protection Agency (EPA)"
+        }
+      ],
+      "topics": [
+        "Climate policy",
+        "Greenhouse gases",
+        "Power plants",
+        "US environmental regulation"
+      ],
+      "countries": [
+        "United States",
+        "Pakistan"
+      ],
+      "institutions": [
+        "US Environmental Protection Agency"
+      ],
+      "reports": [],
+      "treaties": [
+        "Paris Agreement"
+      ],
+      "organisations": [
+        "US Environmental Protection Agency"
+      ],
+      "people": [
+        "Donald Trump",
+        "Lee Zeldin"
+      ],
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "title": "EPA eliminates rule that limits planet-warming greenhouse gas emissions from power plants",
+          "url": "https://apnews.com/article/epa-power-plants-trump-coal-gas-climate-cac1c2c75f8656d8eaf5f0a240edae15",
+          "published_at": "2026-09-14",
+          "source_type": "News Report"
+        }
+      ]
+    }
+  ]
+}
