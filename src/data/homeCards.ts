@@ -5,11 +5,11 @@ import { shippedMcqSummary } from '@/data/mcqMeta'
 // Student-facing priority: core preparation first, supporting and occasional
 // tools later. This intentionally wins over stale locally saved card order.
 export const homeFeaturePriority = [
+  'study-planner',
   'css-subject-mcqs',
   'css-past-paper-analysis',
   'past-papers',
   'fpsc-syllabus',
-  'study-planner',
   'factbook',
   'mpt',
   'test-series',
@@ -98,5 +98,5 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'answer-writing', title: 'Answer-Writing Practice', desc: 'Plan, structure and improve answers', to: '/answer-writing', icon: 'FilePenLine', visible: true, order: 32 },
   { id: 'subject-selector', title: 'Subject Selection Tool', desc: 'Compare optional subjects smartly', to: '/subjects/selector', icon: 'SlidersHorizontal', visible: true, order: 35 },
   { id: 'dashboard', title: 'Performance Dashboard', desc: 'Study time, accuracy and improvement', to: '/dashboard', icon: 'ChartNoAxesCombined', visible: true, order: 36 },
-  { id: 'study-planner', title: 'My CSS Study Planner', desc: 'A personal daily plan that adapts to your progress', to: '/study-planner', icon: 'CalendarRange', visible: true, order: 0 },
+  { id: 'study-planner', title: 'My Study Dashboard', desc: 'Today, overdue, completed and upcoming tasks with editable schedule controls', to: '/study-planner', icon: 'CalendarRange', visible: true, order: 0 },
 ]
