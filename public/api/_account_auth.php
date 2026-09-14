@@ -81,7 +81,7 @@ function account_queue_link(PDO $pdo, array $user, string $purpose): void {
     $link=$base.'/account?'.($verification?'verify=1':'reset=1').'#token='.rawurlencode($token);
     $code = $verification ? null : str_pad((string)random_int(0,999999),6,'0',STR_PAD_LEFT);
     if ($code !== null) $pdo->prepare('INSERT INTO account_reset_codes(user_id,code_hash,attempts,expires_at) VALUES(?,?,0,DATE_ADD(NOW(6),INTERVAL 10 MINUTE)) ON DUPLICATE KEY UPDATE code_hash=VALUES(code_hash),attempts=0,expires_at=VALUES(expires_at)')->execute([$user['id'],cssv_hash_secret($user['id'].':'.$code)]);
-    $subject=$verification?'Confirm your free CSS Vista account':'Reset your CSS Vista password';
+    $subject=$verification?'Confirm your CSS Vista account':'Reset your CSS Vista password';
     $text=$verification?"Confirm your email to start using your free CSS Vista account:\n\n":"A password reset was requested for your CSS Vista account. Choose a new password here:\n\n";
     if ($code !== null) $text.="Your password reset code: ".$code."\n\nEnter this code with your email at ".$base."/account?recovery=code\nThe code expires in 10 minutes and allows five attempts.\n\nOr use this reset link:\n";
     $text.=$link."\n\nThis link can be used once and expires in ".($verification?'24 hours':'30 minutes').". If you did not request this, you can ignore this email.\n\nCSS Vista";

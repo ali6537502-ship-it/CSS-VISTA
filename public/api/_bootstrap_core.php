@@ -594,13 +594,22 @@ function cssv_send_mail(string $to, string $subject, string $text, ?array $overr
         $safeSubject = str_replace(["\r", "\n"], '', $subject);
         $safeFromName = str_replace(["\r", "\n"], '', (string)$fromName);
         $body = preg_replace('/^\./m', '..', str_replace(["\r\n", "\r"], "\n", $text));
+        try {
+            $messageId = bin2hex(random_bytes(16));
+        } catch (Throwable) {
+            $messageId = hash('sha256', microtime(true) . ':' . $to . ':' . $subject);
+        }
         $headers = [
+            'Date: ' . gmdate('D, d M Y H:i:s') . ' +0000',
+            'Message-ID: <' . $messageId . '@css-vista.com>',
             'From: ' . $safeFromName . ' <' . $from . '>',
             'To: <' . $to . '>',
+            'Reply-To: ' . $from,
             'Subject: ' . $safeSubject,
             'MIME-Version: 1.0',
             'Content-Type: text/plain; charset=UTF-8',
             'Content-Transfer-Encoding: 8bit',
+            'Auto-Submitted: auto-generated',
         ];
         fwrite($stream, implode("\r\n", $headers) . "\r\n\r\n" . str_replace("\n", "\r\n", $body) . "\r\n.\r\n");
         $ok = cssv_smtp_read($stream, 250);
