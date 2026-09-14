@@ -11,6 +11,54 @@ $userId = (string)$session['user_id'];
 
 const CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES = 60 * 1024;
 
+function cssv_ensure_student_photo_60kb_schema(PDO $pdo): void
+{
+    static $ready = false;
+    if ($ready) {
+        return;
+    }
+
+    if ((int)$pdo->query("SELECT GET_LOCK('cssvista-student-photo-60kb',5)")->fetchColumn() !== 1) {
+        throw new RuntimeException('student_photo_schema_lock_failed');
+    }
+
+    try {
+        $constraint = $pdo->prepare(
+            "SELECT cc.CHECK_CLAUSE
+             FROM information_schema.TABLE_CONSTRAINTS tc
+             JOIN information_schema.CHECK_CONSTRAINTS cc
+               ON cc.CONSTRAINT_SCHEMA=tc.CONSTRAINT_SCHEMA
+              AND cc.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
+             WHERE tc.CONSTRAINT_SCHEMA=DATABASE()
+               AND tc.TABLE_NAME='student_profiles'
+               AND tc.CONSTRAINT_NAME='student_profiles_photo_size_chk'
+               AND tc.CONSTRAINT_TYPE='CHECK'
+             LIMIT 1"
+        );
+        $constraint->execute();
+        $clause = $constraint->fetchColumn();
+
+        if (!is_string($clause) || !preg_match('/(?:^|[^0-9])61440(?:[^0-9]|$)/', $clause)) {
+            if (is_string($clause)) {
+                $version = (string)$pdo->query('SELECT VERSION()')->fetchColumn();
+                if (stripos($version, 'MariaDB') !== false) {
+                    $pdo->exec('ALTER TABLE student_profiles DROP CONSTRAINT student_profiles_photo_size_chk');
+                } else {
+                    $pdo->exec('ALTER TABLE student_profiles DROP CHECK student_profiles_photo_size_chk');
+                }
+            }
+            $pdo->exec(
+                'ALTER TABLE student_profiles ADD CONSTRAINT student_profiles_photo_size_chk '
+                . 'CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 61440)'
+            );
+        }
+
+        $ready = true;
+    } finally {
+        $pdo->query("SELECT RELEASE_LOCK('cssvista-student-photo-60kb')");
+    }
+}
+
 $photoUpload = $_FILES['photo'] ?? null;
 if (!is_array($photoUpload) || !isset($photoUpload['error'], $photoUpload['tmp_name'], $photoUpload['size'])) {
     cssv_fail('Choose a profile photo and try again.', 422, 'photo_required');
@@ -72,6 +120,8 @@ if (!is_string($sha256) || $sha256 === '') {
 $absolutePath = null;
 $relativePath = null;
 try {
+    cssv_ensure_student_photo_60kb_schema($pdo);
+
     $name = bin2hex(random_bytes(24)) . '.' . $extensions[$mime];
     $dir = cssv_private_storage_dir('student-photos');
     $absolutePath = $dir . DIRECTORY_SEPARATOR . $name;
