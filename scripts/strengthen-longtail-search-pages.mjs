@@ -152,6 +152,36 @@ function subjectProfileSection(paper, subject, recordedForThisPaper) {
   return `<section class="mt-8 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">Recurring ${escapeHtml(paper.subject)} topics across the archive</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`The individual questions from this year's paper are not yet transcribed. These are the topics ${paper.subject} has most often been examined on in the years CSS Vista has read${years ? ` (${years})` : ''}, from ${subject.questionCount} recorded questions.`)}</p><ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${listed}</ul><p class="mt-4 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}">Open the complete topic-wise ${escapeHtml(paper.subject)} analysis</a></p></section>`
 }
 
+/**
+ * A PMS paper sits outside the CSS analysis, but many PMS subjects are the
+ * same subject examined by a different commission. Where CSS Vista has read
+ * the CSS paper in that subject, the recurring topics are worth showing — as
+ * long as the page says plainly that they come from the CSS paper and not from
+ * this one, which is why this is kept separate from the CSS topic profile.
+ */
+function relatedExaminationTopicsSection(paper) {
+  if (paper.examination === 'CSS') return ''
+  const subject = analysisSubjectFor(paper)
+  if (!subject) return ''
+
+  const topics = []
+  for (const section of subject.sections || []) {
+    for (const topic of section.topics || []) {
+      if (Array.isArray(topic.questions) && topic.questions.length) {
+        topics.push({ title: cleanSource(topic.title), count: topic.questions.length })
+      }
+    }
+  }
+  if (!topics.length) return ''
+  topics.sort((a, b) => b.count - a.count)
+  const listed = topics.slice(0, 12)
+    .map((topic) => `<li><span class="font-semibold text-pine">${escapeHtml(topic.title)}</span> <span class="text-slate-600">— ${topic.count} recorded question${topic.count === 1 ? '' : 's'}</span></li>`)
+    .join('')
+  const years = Array.isArray(subject.years) && subject.years.length ? subject.years.join(', ') : ''
+
+  return `<section class="mt-8 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">How ${escapeHtml(paper.subject)} is examined in CSS</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`The questions in this ${paper.examination} paper are not yet transcribed. The topics below come from the CSS ${paper.subject} papers CSS Vista has read${years ? ` (${years})` : ''} — a different examination, but largely the same subject, so they indicate which areas repay preparation.`)}</p><ul class="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-700">${listed}</ul><p class="mt-4 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}">Open the complete topic-wise CSS ${escapeHtml(paper.subject)} analysis</a></p></section>`
+}
+
 /** Real, checkable detail about the stored document itself. */
 function documentFactsSection(paper) {
   const record = pdfPageCounts[paper.fileUrl]
@@ -250,7 +280,11 @@ function paperSpecificGuidance(paper, subject, questions, siblingYears) {
   if (!sentences.length) {
     sentences.push(`This page records the examination, year, subject, paper designation and mode for the ${escapeHtml(title)} and links to the stored document.`)
   }
-  sentences.push(`Read the paper once before attempting any answer, mark the command words, and check each question against the ${escapeHtml(paper.subject)} syllabus to see which areas your revision already covers.`)
+  /* A subjective paper and an objective screening paper are not worked the
+     same way, so the closing instruction follows the mode on record. */
+  sentences.push(normalize(paper.mode) === 'objective'
+    ? `Attempt the paper under its own time limit before checking anything, then review every item you guessed as carefully as the ones you got wrong — on an objective paper a lucky answer hides the same gap as a wrong one.`
+    : `Read the paper once before attempting any answer, mark the command words, and check each question against the ${escapeHtml(paper.subject)} syllabus to see which areas your revision already covers.`)
 
   return `<section data-cssv-longtail-quality="paper" class="mt-8 rounded-xl border border-emerald-900/10 bg-emerald-50/40 p-5"><h2 class="font-display text-xl font-bold text-pine">Studying the ${escapeHtml(title)}</h2><p class="mt-2 text-sm leading-relaxed text-foreground/80">${sentences.join(' ')}</p><p class="mt-3 text-xs leading-relaxed text-foreground/70">An archived paper is evidence of what was previously examined, not a prediction of a future paper. Confirm current examination rules and dates with the relevant official authority.</p></section>`
 }
@@ -260,31 +294,40 @@ function paperQualitySection(paper, subject, questions, siblingYears) {
     ? `<section class="mt-8 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">Questions recorded from this paper</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">These question wordings come from CSS Vista’s structured past-paper analysis for ${escapeHtml(paper.subject)}. Use them to identify the paper’s actual demand before opening the complete PDF.</p><ol class="mt-4 space-y-3">${questions.map((question) => `<li class="rounded-lg bg-secondary/40 p-3 text-sm leading-relaxed"><span class="font-bold text-emerald-800">${escapeHtml(question.number || '')}${question.topic ? ` · ${escapeHtml(question.topic)}` : ''}</span><span class="mt-1 block">${escapeHtml(shorten(question.text, 600))}</span></li>`).join('')}</ol>${subject?.slug ? `<p class="mt-4 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis?subject=${encodeURIComponent(subject.slug)}">Explore the complete topic-wise ${escapeHtml(paper.subject)} past-paper analysis</a>.</p>` : ''}</section>`
     : ''
 
-  return `${paperSpecificGuidance(paper, subject, questions, siblingYears)}${documentFactsSection(paper)}${questionList}${subjectProfileSection(paper, subject, questions)}${syllabusContextSection(paper)}`
+  return `${paperSpecificGuidance(paper, subject, questions, siblingYears)}${documentFactsSection(paper)}${questionList}${subjectProfileSection(paper, subject, questions)}${relatedExaminationTopicsSection(paper)}${syllabusContextSection(paper)}`
 }
 
 /**
- * A year collection is distinguished by the papers it actually contains, so it
- * lists them — compulsory and optional separated, each linked — instead of
- * repeating the same three paragraphs of advice on all twenty-four pages.
+ * The collection page already lists every paper in the year above this
+ * section, so repeating those names adds nothing. What the listing cannot say
+ * is which of those papers have had their questions transcribed, how the year
+ * is split between compulsory and optional papers, and which other years of
+ * the same examination the archive holds — so that is what goes here.
  */
-function collectionQualitySection(examination, year, papers) {
-  const subjects = [...new Set(papers.map((paper) => paper.subject))]
-  const compulsory = papers.filter((paper) => paper.designation === 'compulsory')
-  const optional = papers.filter((paper) => paper.designation !== 'compulsory')
+function collectionQualitySection(examination, year, papers, siblingYears) {
+  const compulsory = papers.filter((paper) => normalize(paper.subjectType) === 'compulsory')
+  const optional = papers.filter((paper) => normalize(paper.subjectType) !== 'compulsory')
 
-  const list = (entries) => entries
-    .slice()
-    .sort((a, b) => String(a.subject).localeCompare(String(b.subject), 'en'))
-    .map((paper) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${escapeHtml(paper.id)}">${escapeHtml(paper.subject)}</a>${paper.paper && paper.paper !== 'Single Paper' ? ` <span class="text-slate-600">— ${escapeHtml(paper.paper)}</span>` : ''}</li>`)
-    .join('')
+  const withQuestions = papers
+    .map((paper) => ({ paper, questions: sourceQuestionsForPaper(paper).questions }))
+    .filter((entry) => entry.questions.length)
+    .sort((a, b) => String(a.paper.subject).localeCompare(String(b.paper.subject), 'en'))
 
-  const blocks = [
-    compulsory.length ? `<div class="mt-4"><h3 class="font-semibold text-pine">Compulsory papers (${compulsory.length})</h3><ul class="mt-2 grid list-disc gap-1 pl-5 text-sm text-slate-700 sm:grid-cols-2">${list(compulsory)}</ul></div>` : '',
-    optional.length ? `<div class="mt-4"><h3 class="font-semibold text-pine">Optional papers (${optional.length})</h3><ul class="mt-2 grid list-disc gap-1 pl-5 text-sm text-slate-700 sm:grid-cols-2">${list(optional)}</ul></div>` : '',
-  ].filter(Boolean).join('')
+  const composition = [
+    compulsory.length ? `${compulsory.length} compulsory` : '',
+    optional.length ? `${optional.length} optional` : '',
+  ].filter(Boolean).join(' and ')
 
-  return `<section data-cssv-longtail-quality="collection" class="mt-8 rounded-xl border border-emerald-900/10 bg-emerald-50/40 p-5"><h2 class="font-display text-xl font-bold text-pine">Papers in the ${escapeHtml(examination)} ${escapeHtml(year)} collection</h2><p class="mt-2 text-sm leading-relaxed text-foreground/80">This collection holds ${papers.length} archived ${escapeHtml(examination)} ${escapeHtml(year)} paper${papers.length === 1 ? '' : 's'} across ${subjects.length} subject${subjects.length === 1 ? '' : 's'}. Each one links to its own page with the stored document, the recorded questions where available, and the same subject in other years.</p>${blocks}<div class="mt-5 flex flex-wrap gap-3 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers">Complete past-paper archive</a><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/fpsc-syllabus">FPSC syllabus &amp; topic planner</a>${examination === 'CSS' ? '<a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis">CSS topic-wise past-paper analysis</a>' : ''}</div><p class="mt-4 text-xs leading-relaxed text-foreground/70">Archived papers show what was previously examined. They do not guarantee the content of a later paper, and current examination rules or dates should be confirmed with the relevant official authority.</p></section>`
+  const transcribed = withQuestions.length
+    ? `<div class="mt-4"><h3 class="font-semibold text-pine">Papers whose questions are already transcribed (${withQuestions.length})</h3><p class="mt-1 text-sm leading-relaxed text-muted-foreground">These pages show the wording of the questions themselves, not only a link to the document.</p><ul class="mt-2 grid list-disc gap-1 pl-5 text-sm text-slate-700 sm:grid-cols-2">${withQuestions.map(({ paper, questions }) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${escapeHtml(paper.id)}">${escapeHtml(paper.subject)}</a> <span class="text-slate-600">— ${questions.length} question${questions.length === 1 ? '' : 's'}</span></li>`).join('')}</ul></div>`
+    : ''
+
+  const others = siblingYears.filter((entry) => Number(entry) !== Number(year))
+  const neighbours = others.length
+    ? `<div class="mt-4"><h3 class="font-semibold text-pine">Other ${escapeHtml(examination)} years in the archive</h3><p class="mt-1 text-sm leading-relaxed text-muted-foreground">Comparing a subject across years is what separates a recurring area from a question asked once.</p><ul class="mt-2 flex flex-wrap gap-2 text-sm">${others.map((entry) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/${escapeHtml(examination.toLowerCase())}/${entry}">${escapeHtml(examination)} ${entry}</a></li>`).join('')}</ul></div>`
+    : ''
+
+  return `<section data-cssv-longtail-quality="collection" class="mt-8 rounded-xl border border-emerald-900/10 bg-emerald-50/40 p-5"><h2 class="font-display text-xl font-bold text-pine">How the ${escapeHtml(examination)} ${escapeHtml(year)} collection is made up</h2><p class="mt-2 text-sm leading-relaxed text-foreground/80">${escapeHtml(`This year holds ${papers.length} archived paper${papers.length === 1 ? '' : 's'}${composition ? `, ${composition}` : ''}. Every paper above links to its own page with the stored document and the same subject in other years.`)}</p>${transcribed}${neighbours}<div class="mt-5 flex flex-wrap gap-3 text-sm"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers">Complete past-paper archive</a><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/fpsc-syllabus">FPSC syllabus &amp; topic planner</a>${examination === 'CSS' ? '<a class="font-semibold text-emerald-800 underline underline-offset-2" href="/css-past-paper-analysis">CSS topic-wise past-paper analysis</a>' : ''}</div><p class="mt-4 text-xs leading-relaxed text-foreground/70">Archived papers show what was previously examined. They do not guarantee the content of a later paper, and current examination rules or dates should be confirmed with the relevant official authority.</p></section>`
 }
 
 const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
@@ -300,22 +343,7 @@ for (const paper of pastPapers) {
 
 let strengthenedPapers = 0
 let papersWithQuestions = 0
-
-/**
- * A paper page whose only distinct content is a link to a stored document adds
- * nothing to the index, and a large set of them reads as mass-produced pages
- * rather than a library. Those pages stay published and reachable — the
- * document is still what a visitor came for — but they are marked noindex and
- * withheld from the sitemap so the site is judged on the pages that carry
- * genuine material. The threshold is applied after every enrichment above, so
- * a page only lands here when no real content could be found for it.
- */
-const THIN_PAPER_WORD_FLOOR = 320
-const thinPaperIds = []
-
-function markNoindex(html) {
-  return html.replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="noindex, follow" />')
-}
+const metadataOnlyPapers = []
 
 for (const paper of pastPapers) {
   const path = join(clientDir, 'seo', 'past-papers', `${paper.id}.html`)
@@ -332,20 +360,17 @@ for (const paper of pastPapers) {
   if (next === html) throw new Error(`Could not strengthen past-paper page ${paper.id}`)
   const description = `Review the ${paper.year} ${paper.examination} ${paper.subject} past paper with PDF access, paper details, related years and focused study guidance${questions.length ? ', plus authentic question samples' : ''}.`
   html = replaceDescription(next, description)
-  if (wordCount(html) < THIN_PAPER_WORD_FLOOR) {
-    html = markNoindex(html)
-    thinPaperIds.push(paper.id)
-  }
   await writeFile(path, html)
   strengthenedPapers += 1
   if (questions.length) papersWithQuestions += 1
+  /* Every archived paper stays indexable: each maps to a distinct real
+     document, which is what a visitor searching for that paper wants. Pages
+     that gained no material beyond their metadata are still counted, so the
+     figure is visible after each build rather than silently accumulating. */
+  if (!questions.length && !subjectProfileSection(paper, subject, questions) && !relatedExaminationTopicsSection(paper) && !syllabusContextSection(paper)) {
+    metadataOnlyPapers.push(paper.id)
+  }
 }
-
-/* Hand the withheld URLs to the sitemap step so the two never disagree. */
-await writeFile(
-  join(clientDir, 'seo', 'noindex-past-papers.json'),
-  JSON.stringify({ generatedAt: new Date().toISOString().slice(0, 10), wordFloor: THIN_PAPER_WORD_FLOOR, ids: thinPaperIds }, null, 2),
-)
 
 const groups = new Map()
 for (const paper of pastPapers) {
@@ -355,36 +380,26 @@ for (const paper of pastPapers) {
 }
 
 let strengthenedCollections = 0
-const thinCollectionPaths = []
 for (const [key, papers] of groups) {
   const [examination, year] = key.split('|')
   const path = join(clientDir, 'seo', 'past-paper-collections', examination.toLowerCase(), `${year}.html`)
   let html
   try { html = await readFile(path, 'utf8') } catch { continue }
   if (html.includes('data-cssv-longtail-quality="collection"')) continue
-  const section = collectionQualitySection(examination, year, papers)
+  const collectionYears = [...new Set(pastPapers.filter((entry) => entry.examination === examination).map((entry) => Number(entry.year)))]
+    .filter((entry) => Number.isFinite(entry))
+    .sort((a, b) => a - b)
+  const section = collectionQualitySection(examination, year, papers, collectionYears)
   const next = html.replace('</main>', `${section}</main>`)
   if (next === html) throw new Error(`Could not strengthen collection page ${examination} ${year}`)
   const uniqueSubjects = new Set(papers.map((paper) => paper.subject)).size
   const description = `Browse ${papers.length} ${examination} ${year} past papers across ${uniqueSubjects} subject${uniqueSubjects === 1 ? '' : 's'}, with direct paper links, archive context and practical preparation guidance.`
   html = replaceDescription(next, description)
-  /* A year that holds only one or two papers cannot carry more than a listing.
-     It stays reachable for navigation but, like a thin paper page, is not
-     offered to the index. */
-  if (wordCount(html) < THIN_PAPER_WORD_FLOOR) {
-    html = markNoindex(html)
-    thinCollectionPaths.push(`/past-papers/${examination.toLowerCase()}/${year}`)
-  }
   await writeFile(path, html)
   strengthenedCollections += 1
 }
 
-await writeFile(
-  join(clientDir, 'seo', 'noindex-past-paper-collections.json'),
-  JSON.stringify({ generatedAt: new Date().toISOString().slice(0, 10), wordFloor: THIN_PAPER_WORD_FLOOR, paths: thinCollectionPaths }, null, 2),
-)
-
 console.log(`Strengthened ${strengthenedPapers} individual past-paper pages and ${strengthenedCollections} collection pages; ${papersWithQuestions} CSS paper pages received source-backed question samples.`)
-if (thinPaperIds.length || thinCollectionPaths.length) {
-  console.log(`${thinPaperIds.length} archive-only paper pages and ${thinCollectionPaths.length} sparse year collections stayed under ${THIN_PAPER_WORD_FLOOR} words; they are published as noindex and withheld from the sitemap.`)
+if (metadataOnlyPapers.length) {
+  console.log(`${metadataOnlyPapers.length} archived papers still carry only their metadata and the stored document — no transcribed questions, subject topic profile or published syllabus is available for them yet. They remain indexable; transcribing their questions is what would deepen them.`)
 }

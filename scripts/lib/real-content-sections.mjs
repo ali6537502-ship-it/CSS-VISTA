@@ -829,6 +829,23 @@ function gamesSection(context) {
   return html
 }
 
+/**
+ * The schedule source is a record, not a string — it carries the notice title,
+ * its URL and when it was last verified. Citing a date-sensitive schedule is
+ * only useful if the reader can open the notice it came from.
+ */
+function renderScheduleSource(source) {
+  if (!source) return ''
+  if (typeof source === 'string') return `<p class="mt-3 text-xs text-slate-600">Source: ${escapeHtml(cleanText(source))}</p>`
+  const title = cleanText(source.title)
+  if (!title) return ''
+  const label = source.url
+    ? `<a class="font-semibold text-emerald-800 underline underline-offset-2" href="${escapeHtml(source.url)}" rel="noopener noreferrer" target="_blank">${escapeHtml(title)}</a>`
+    : escapeHtml(title)
+  const verified = cleanText(source.lastVerified || source.published)
+  return `<p class="mt-3 text-xs text-slate-600">Source: ${label}${verified ? ` — last verified ${escapeHtml(verified)}` : ''}</p>`
+}
+
 function fpscUpdatesSection(context) {
   const data = context.app?.css2027
   const dates = Array.isArray(data?.css2027Dates) ? data.css2027Dates : []
@@ -842,7 +859,7 @@ function fpscUpdatesSection(context) {
       return `<tr class="border-t"><td class="py-2 pr-4 text-slate-700">${escapeHtml(cleanText(entry.date || '—'))}</td><td class="py-2 pr-4 font-semibold text-pine">${escapeHtml(cleanText(entry.item))}</td><td class="py-2 text-slate-700">${escapeHtml(cleanText(entry.status || ''))}</td></tr>`
     }).filter(Boolean).join('')
     if (rows) {
-      html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Published examination schedule</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${dates.length} scheduled items, each marked with whether the date is official, tentative or still to be announced. Confirm any date that affects an application against the official FPSC notice.`)}</p><div class="mt-4 overflow-x-auto rounded-xl border bg-white p-5"><table class="w-full text-sm"><thead><tr class="text-left text-xs uppercase tracking-wide text-emerald-700"><th class="pb-2 pr-4">Date</th><th class="pb-2 pr-4">Item</th><th class="pb-2">Status</th></tr></thead><tbody>${rows}</tbody></table></div>${data.css2027ScheduleSource ? `<p class="mt-3 text-xs text-slate-600">Source: ${escapeHtml(cleanText(data.css2027ScheduleSource))}</p>` : ''}</section>`
+      html += `<section class="mt-9"><h2 class="font-display text-2xl font-bold text-pine">Published examination schedule</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">${escapeHtml(`${dates.length} scheduled items, each marked with whether the date is official, tentative or still to be announced. Confirm any date that affects an application against the official FPSC notice.`)}</p><div class="mt-4 overflow-x-auto rounded-xl border bg-white p-5"><table class="w-full text-sm"><thead><tr class="text-left text-xs uppercase tracking-wide text-emerald-700"><th class="pb-2 pr-4">Date</th><th class="pb-2 pr-4">Item</th><th class="pb-2">Status</th></tr></thead><tbody>${rows}</tbody></table></div>${renderScheduleSource(data.css2027ScheduleSource)}</section>`
     }
   }
 
