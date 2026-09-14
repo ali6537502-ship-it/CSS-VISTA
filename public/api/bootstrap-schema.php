@@ -66,11 +66,11 @@ try {
         $stmt->execute([$table, $constraint]);
         return (int)$stmt->fetchColumn() > 0;
     };
-    if (!$constraintExists($pdo, 'student_profiles', 'student_profiles_photo_size_15k_chk')) {
-        $pdo->exec('ALTER TABLE student_profiles ADD CONSTRAINT student_profiles_photo_size_15k_chk CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 15360)');
+    if (!$constraintExists($pdo, 'student_profiles', 'student_profiles_photo_size_chk')) {
+        $pdo->exec('ALTER TABLE student_profiles ADD CONSTRAINT student_profiles_photo_size_chk CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 61440)');
     }
-    if (!$constraintExists($pdo, 'batch_registrations', 'batch_registrations_photo_size_15k_chk')) {
-        $pdo->exec('ALTER TABLE batch_registrations ADD CONSTRAINT batch_registrations_photo_size_15k_chk CHECK (photo_bytes <= 15360)');
+    if (!$constraintExists($pdo, 'batch_registrations', 'batch_registrations_photo_size_chk')) {
+        $pdo->exec('ALTER TABLE batch_registrations ADD CONSTRAINT batch_registrations_photo_size_chk CHECK (photo_bytes <= 61440)');
     }
 
     $coreStmt->execute($coreNames);
