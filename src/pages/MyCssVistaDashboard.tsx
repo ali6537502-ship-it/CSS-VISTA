@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
   AlertTriangle, ArrowRight, BarChart3, BookOpen, Bookmark, Brain, CalendarCheck2,
-  Check, CheckCircle2, Clock3, FilePenLine, Flame, Gauge, History, ListChecks,
+  Check, CheckCircle2, Clock3, FilePenLine, Gauge, History, ListChecks,
   RotateCcw, Search, Target, UserRound,
 } from 'lucide-react'
 import DailyEnglishPanel from '@/components/DailyEnglishPanel'
@@ -94,7 +94,7 @@ export default function MyCssVistaDashboard() {
   useEffect(() => {
     fetch('/fpsc-syllabus.json')
       .then((response) => response.ok ? response.json() as Promise<FpscSyllabusPayload> : Promise.reject())
-      .then((data) => setSyllabusTotal((data.subjects ?? []).reduce((total, subject) => total + (subject.sections ?? []).reduce((sum, section) => sum + (section.items?.length ?? 0), 0), 0)))
+      .then((data) => setSyllabusTotal((data.subjects ?? []).reduce((total, subject) => total + (subject.sections ?? []).reduce((sum, section) => sum + (section.items?.length ?? 0), 0, 0), 0)))
       .catch(() => setSyllabusTotal(0))
   }, [])
 
