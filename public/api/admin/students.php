@@ -1,10 +1,18 @@
 <?php
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/_bootstrap.php';
+require_once dirname(__DIR__) . '/_profile.php';
 require_once dirname(__DIR__) . '/_admin_auth.php';
 cssv_require_method('GET');
 $pdo = cssv_db();
 cssv_require_separate_admin($pdo);
+
+try {
+    cssv_ensure_previous_student_history_schema($pdo);
+} catch (Throwable $error) {
+    error_log('CSSV admin previous student history schema upgrade failed: ' . $error->getMessage());
+    cssv_fail('Student profile history is temporarily unavailable.', 503, 'profile_schema_upgrade_required');
+}
 
 $limit = max(1, min(100, (int)($_GET['limit'] ?? 50)));
 $offset = max(0, (int)($_GET['offset'] ?? 0));
@@ -13,9 +21,9 @@ $params = [];
 
 $q = trim((string)($_GET['q'] ?? ''));
 if ($q !== '') {
-    $conditions[] = '(u.email LIKE ? OR p.display_name LIKE ? OR p.phone LIKE ? OR p.whatsapp LIKE ?)';
+    $conditions[] = '(u.email LIKE ? OR p.display_name LIKE ? OR p.phone LIKE ? OR p.whatsapp LIKE ? OR p.previous_css_vista_student LIKE ? OR p.previous_css_vista_details LIKE ?)';
     $like = '%' . str_replace(['%', '_'], ['\\%', '\\_'], $q) . '%';
-    array_push($params, $like, $like, $like, $like);
+    array_push($params, $like, $like, $like, $like, $like, $like);
 }
 $gender = trim((string)($_GET['gender'] ?? ''));
 if ($gender !== '') { $conditions[] = 'p.gender = ?'; $params[] = $gender; }
@@ -40,13 +48,16 @@ $countStmt = $pdo->prepare('SELECT COUNT(*)' . $join . ' WHERE ' . $where);
 $countStmt->execute($params);
 $total = (int)$countStmt->fetchColumn();
 
-$sql = 'SELECT u.id user_id,u.email,u.auth_source,u.created_at,u.last_sign_in_at,u.last_seen_at,p.display_name,p.phone,p.whatsapp,p.date_of_birth,CASE WHEN p.date_of_birth IS NULL THEN NULL ELSE TIMESTAMPDIFF(YEAR,p.date_of_birth,CURDATE()) END age,p.gender,p.city,p.province_region,p.country,p.css_attempt_year,p.preparation_level,p.optional_subjects,p.education,p.previous_academy_mentor,p.profile_photo_bytes,p.profile_completed_at,CASE WHEN (p.profile_photo_path IS NOT NULL AND p.profile_photo_path <> "") OR (p.avatar_url IS NOT NULL AND p.avatar_url <> "") THEN 1 ELSE 0 END has_photo,br.id registration_id,br.registration_code,br.status registration_status,br.payment_status,br.submitted_at,b.id batch_id,b.title batch_title,(SELECT MAX(sp.updated_at) FROM student_progress sp WHERE sp.user_id=u.id) progress_updated_at,(SELECT COUNT(*) FROM student_activity sa WHERE sa.user_id=u.id) activity_count,(SELECT COUNT(*) FROM quiz_attempts qa WHERE qa.user_id=u.id) quiz_attempt_count' . $join . ' WHERE ' . $where . ' ORDER BY COALESCE(p.last_seen_at,u.last_seen_at,u.last_sign_in_at,u.created_at) DESC LIMIT ' . $limit . ' OFFSET ' . $offset;
+$sql = 'SELECT u.id user_id,u.email,u.auth_source,u.created_at,u.last_sign_in_at,u.last_seen_at,p.display_name,p.phone,p.whatsapp,p.date_of_birth,CASE WHEN p.date_of_birth IS NULL THEN NULL ELSE TIMESTAMPDIFF(YEAR,p.date_of_birth,CURDATE()) END age,p.gender,p.city,p.province_region,p.country,p.css_attempt_year,p.preparation_level,p.optional_subjects,p.education,p.previous_academy_mentor,p.previous_css_vista_student,p.previous_css_vista_services,p.previous_css_vista_details,p.profile_photo_bytes,p.profile_completed_at,CASE WHEN (p.profile_photo_path IS NOT NULL AND p.profile_photo_path <> "") OR (p.avatar_url IS NOT NULL AND p.avatar_url <> "") THEN 1 ELSE 0 END has_photo,br.id registration_id,br.registration_code,br.status registration_status,br.payment_status,br.submitted_at,b.id batch_id,b.title batch_title,(SELECT MAX(sp.updated_at) FROM student_progress sp WHERE sp.user_id=u.id) progress_updated_at,(SELECT COUNT(*) FROM student_activity sa WHERE sa.user_id=u.id) activity_count,(SELECT COUNT(*) FROM quiz_attempts qa WHERE qa.user_id=u.id) quiz_attempt_count' . $join . ' WHERE ' . $where . ' ORDER BY COALESCE(p.last_seen_at,u.last_seen_at,u.last_sign_in_at,u.created_at) DESC LIMIT ' . $limit . ' OFFSET ' . $offset;
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $rows = $stmt->fetchAll();
 foreach ($rows as &$row) {
     if (is_string($row['optional_subjects'] ?? null)) {
         $row['optional_subjects'] = json_decode((string)$row['optional_subjects'], true) ?: [];
+    }
+    if (is_string($row['previous_css_vista_services'] ?? null)) {
+        $row['previous_css_vista_services'] = json_decode((string)$row['previous_css_vista_services'], true) ?: [];
     }
     $row['has_photo'] = (bool)($row['has_photo'] ?? false);
 }
