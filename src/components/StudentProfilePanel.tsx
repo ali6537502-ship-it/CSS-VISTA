@@ -7,7 +7,7 @@ import { useAccount } from '@/lib/accountContext'
 type Check = { key: string; label: string; complete: boolean }
 type Completion = { checks: Check[]; completed: number; total: number; percent: number; complete: boolean }
 type Profile = Record<string, unknown> & { completion: Completion; has_photo: boolean; email: string }
-type Field = { key: string; label: string; type?: string; max?: number; options?: string[]; hint?: string }
+type Field = { key: string; label: string; type?: string; max?: number; options?: string[]; multiOptions?: string[]; hint?: string; textarea?: boolean }
 
 const MAX_PROFILE_PHOTO_BYTES = 60 * 1024
 const OVERSIZE_PHOTO_ERROR = 'Profile photo must be 60 KB or smaller. Please resize the photo and upload it again.'
@@ -33,7 +33,26 @@ const groups: { title: string; fields: Field[] }[] = [
       { key: 'preparation_level', label: 'Preparation level', options: ['Starting out', 'Building foundations', 'Covering the syllabus', 'Revision and practice', 'Ready for the examination'] },
       { key: 'optional_subjects', label: 'Optional subjects', max: 2400, hint: 'Separate subject names with commas.' },
       { key: 'education', label: 'Education', max: 240, hint: 'Your current or completed qualification.' },
-      { key: 'previous_academy_mentor', label: 'Previous academy / mentor (optional)', max: 240 },
+      {
+        key: 'previous_css_vista_student',
+        label: 'Have you previously studied with Miss Sadia Zahoor or Sir Ali Hassan Sargana?',
+        options: ['No', 'Miss Sadia Zahoor', 'Sir Ali Hassan Sargana', 'Both'],
+        hint: 'This answer is required so your previous CSS Vista learning history can be identified correctly.',
+      },
+      {
+        key: 'previous_css_vista_services',
+        label: 'What did you previously join or purchase?',
+        multiOptions: ['Batch', 'Test Series', 'Purchased Notes'],
+        hint: 'Select every option that applies to you.',
+      },
+      {
+        key: 'previous_css_vista_details',
+        label: 'Previous study details (optional)',
+        max: 500,
+        textarea: true,
+        hint: 'You may mention the batch name/year, test series or notes if you remember the details.',
+      },
+      { key: 'previous_academy_mentor', label: 'Other previous academy / mentor (optional)', max: 240 },
     ],
   },
   { title: 'Your photo', fields: [] },
@@ -44,7 +63,7 @@ const inputClass = 'mt-2 min-h-11 w-full min-w-0 rounded-lg border border-pine/2
 function asForm(p: Profile): Record<string, string> {
   return Object.fromEntries(groups.flatMap(g => g.fields).map(f => {
     let value = p[f.key]
-    if (f.key === 'optional_subjects' && typeof value === 'string') {
+    if ((f.key === 'optional_subjects' || f.key === 'previous_css_vista_services') && typeof value === 'string') {
       try {
         value = JSON.parse(value)
       } catch {
@@ -53,6 +72,10 @@ function asForm(p: Profile): Record<string, string> {
     }
     return [f.key, Array.isArray(value) ? value.join(', ') : String(value ?? '')]
   }))
+}
+
+function values(value: string): string[] {
+  return value.split(',').map(item => item.trim()).filter(Boolean)
 }
 
 function preparePhoto(file: File): File {
@@ -123,6 +146,16 @@ export function StudentProfilePanel({ email }: { email: string }) {
     window.dispatchEvent(new CustomEvent(PROFILE_UPDATED_EVENT))
   }
 
+  function toggleMulti(key: string, option: string, checked: boolean) {
+    setForm(current => {
+      const selected = values(current[key] || '')
+      const next = checked
+        ? [...selected.filter(item => item !== option), option]
+        : selected.filter(item => item !== option)
+      return { ...current, [key]: next.join(', ') }
+    })
+  }
+
   async function save(event: FormEvent, advance = false) {
     event.preventDefault()
     setBusy(true)
@@ -135,7 +168,8 @@ export function StudentProfilePanel({ email }: { email: string }) {
           ...form,
           date_of_birth: form.date_of_birth || null,
           css_attempt_year: form.css_attempt_year ? Number(form.css_attempt_year) : null,
-          optional_subjects: (form.optional_subjects || '').split(',').map(s => s.trim()).filter(Boolean),
+          optional_subjects: values(form.optional_subjects || ''),
+          previous_css_vista_services: values(form.previous_css_vista_services || ''),
         }),
       })
       const { profile: p } = await request<{ profile: Profile }>('student/profile.php')
@@ -278,31 +312,69 @@ export function StudentProfilePanel({ email }: { email: string }) {
               <h3 className="text-lg font-bold text-pine">{groups[step].title}</h3>
               {step === 0 && <p className="mt-2 break-all text-sm text-muted-foreground">Verified email: {email}</p>}
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {groups[step].fields.map(f => (
-                  <label key={f.key} className="min-w-0 text-sm font-medium">
-                    {f.label}
-                    {f.options ? (
-                      <select name={f.key} className={inputClass} value={form[f.key] || ''} onChange={e => setForm(v => ({ ...v, [f.key]: e.target.value }))}>
-                        <option value="">Choose…</option>
-                        {form[f.key] && !f.options.includes(form[f.key]) && <option>{form[f.key]}</option>}
-                        {f.options.map(o => <option key={o}>{o}</option>)}
-                      </select>
-                    ) : (
-                      <input
-                        name={f.key}
-                        className={inputClass}
-                        type={f.type || 'text'}
-                        maxLength={f.max}
-                        min={f.type === 'number' ? 2020 : undefined}
-                        max={f.type === 'number' ? 2040 : f.type === 'date' ? new Date().toISOString().slice(0, 10) : undefined}
-                        autoComplete={f.key === 'display_name' ? 'name' : f.type === 'tel' ? 'tel' : undefined}
-                        value={form[f.key] || ''}
-                        onChange={e => setForm(v => ({ ...v, [f.key]: e.target.value }))}
-                      />
-                    )}
-                    {f.hint && <span className="mt-1 block text-xs font-normal leading-5 text-muted-foreground">{f.hint}</span>}
-                  </label>
-                ))}
+                {groups[step].fields.map(f => {
+                  const priorStudent = form.previous_css_vista_student || ''
+                  const priorDetailField = f.key === 'previous_css_vista_services' || f.key === 'previous_css_vista_details'
+                  if (priorDetailField && (!priorStudent || priorStudent === 'No')) return null
+                  return (
+                    <label key={f.key} className={`min-w-0 text-sm font-medium ${f.multiOptions || f.textarea ? 'sm:col-span-2' : ''}`}>
+                      {f.label}
+                      {f.options ? (
+                        <select
+                          name={f.key}
+                          className={inputClass}
+                          value={form[f.key] || ''}
+                          onChange={e => {
+                            const next = e.target.value
+                            setForm(current => f.key === 'previous_css_vista_student' && (next === 'No' || next === '')
+                              ? { ...current, [f.key]: next, previous_css_vista_services: '', previous_css_vista_details: '' }
+                              : { ...current, [f.key]: next })
+                          }}
+                        >
+                          <option value="">Choose…</option>
+                          {form[f.key] && !f.options.includes(form[f.key]) && <option>{form[f.key]}</option>}
+                          {f.options.map(o => <option key={o}>{o}</option>)}
+                        </select>
+                      ) : f.multiOptions ? (
+                        <div className="mt-2 grid gap-2 rounded-lg border border-pine/15 bg-white/70 p-3 sm:grid-cols-3">
+                          {f.multiOptions.map(option => (
+                            <span key={option} className="flex min-h-10 items-center gap-2 rounded-md px-2 text-sm font-normal">
+                              <input
+                                type="checkbox"
+                                name={`${f.key}-${option}`}
+                                checked={values(form[f.key] || '').includes(option)}
+                                onChange={e => toggleMulti(f.key, option, e.target.checked)}
+                                className="h-4 w-4 rounded border-pine/30"
+                              />
+                              {option}
+                            </span>
+                          ))}
+                        </div>
+                      ) : f.textarea ? (
+                        <textarea
+                          name={f.key}
+                          className={`${inputClass} min-h-24 resize-y`}
+                          maxLength={f.max}
+                          value={form[f.key] || ''}
+                          onChange={e => setForm(v => ({ ...v, [f.key]: e.target.value }))}
+                        />
+                      ) : (
+                        <input
+                          name={f.key}
+                          className={inputClass}
+                          type={f.type || 'text'}
+                          maxLength={f.max}
+                          min={f.type === 'number' ? 2020 : undefined}
+                          max={f.type === 'number' ? 2040 : f.type === 'date' ? new Date().toISOString().slice(0, 10) : undefined}
+                          autoComplete={f.key === 'display_name' ? 'name' : f.type === 'tel' ? 'tel' : undefined}
+                          value={form[f.key] || ''}
+                          onChange={e => setForm(v => ({ ...v, [f.key]: e.target.value }))}
+                        />
+                      )}
+                      {f.hint && <span className="mt-1 block text-xs font-normal leading-5 text-muted-foreground">{f.hint}</span>}
+                    </label>
+                  )
+                })}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 border-t pt-4">
                 <button disabled={busy || !dirty} className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-4 text-sm font-semibold disabled:opacity-50">
