@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/_bootstrap.php';
 require_once dirname(__DIR__) . '/_profile.php';
+
 cssv_require_method('POST');
 $pdo = cssv_db();
 $session = cssv_require_user($pdo, false);
@@ -10,81 +11,114 @@ $userId = (string)$session['user_id'];
 
 const CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES = 60 * 1024;
 
-function cssv_store_student_profile_photo(array $file, string $folder = 'student-photos'): array
-{
-    if (!isset($file['error'], $file['tmp_name'], $file['size']) || (int)$file['error'] !== UPLOAD_ERR_OK) {
-        cssv_fail('Upload a valid profile photo.', 422, 'photo_required');
-    }
+$photoUpload = $_FILES['photo'] ?? null;
+if (!is_array($photoUpload) || !isset($photoUpload['error'], $photoUpload['tmp_name'], $photoUpload['size'])) {
+    cssv_fail('Choose a profile photo and try again.', 422, 'photo_required');
+}
 
-    $size = (int)$file['size'];
-    if ($size < 512 || $size > CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES) {
+$uploadError = (int)$photoUpload['error'];
+if ($uploadError !== UPLOAD_ERR_OK) {
+    if (in_array($uploadError, [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE], true)) {
         cssv_fail('Profile photo must be 60 KB or smaller.', 422, 'photo_size_invalid');
     }
-
-    $tmp = (string)$file['tmp_name'];
-    if (!is_uploaded_file($tmp)) {
-        cssv_fail('Invalid uploaded file.', 422, 'invalid_upload');
-    }
-
-    $finfo = new finfo(FILEINFO_MIME_TYPE);
-    $mime = (string)$finfo->file($tmp);
-    $extensions = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-    if (!isset($extensions[$mime])) {
-        cssv_fail('Profile photo must be JPG, PNG, or WebP.', 422, 'photo_type_invalid');
-    }
-
-    $dimensions = @getimagesize($tmp);
-    if (!is_array($dimensions) || !isset($dimensions[0], $dimensions[1])) {
-        cssv_fail('The uploaded file is not a valid image.', 422, 'photo_decode_failed');
-    }
-    $width = (int)$dimensions[0];
-    $height = (int)$dimensions[1];
-    if ($width < 120 || $height < 120 || $width > 4000 || $height > 4000 || ($width * $height) > CSSV_MAX_PROFILE_PHOTO_PIXELS) {
-        cssv_fail('Profile photo dimensions are not suitable.', 422, 'photo_dimensions_invalid');
-    }
-
-    $sha256 = hash_file('sha256', $tmp);
-    if (!is_string($sha256)) {
-        cssv_fail('Could not validate the uploaded image.', 422, 'photo_hash_failed');
-    }
-
-    $name = bin2hex(random_bytes(24)) . '.' . $extensions[$mime];
-    $dir = cssv_private_storage_dir($folder);
-    $destination = $dir . DIRECTORY_SEPARATOR . $name;
-    if (!move_uploaded_file($tmp, $destination)) {
-        cssv_fail('Could not store the uploaded image.', 503, 'photo_storage_failed');
-    }
-    @chmod($destination, 0600);
-
-    return [
-        'path' => $folder . '/' . $name,
-        'absolute_path' => $destination,
-        'mime' => $mime,
-        'bytes' => $size,
-        'width' => $width,
-        'height' => $height,
-        'sha256' => $sha256,
-    ];
+    error_log('CSSV student photo upload failed before validation. PHP upload error=' . $uploadError);
+    cssv_fail('The photo upload did not complete. Please choose the photo again and retry.', 422, 'photo_upload_failed');
 }
 
-$photoUpload = $_FILES['photo'] ?? [];
-if (isset($photoUpload['size']) && (int)$photoUpload['size'] > CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES) {
+$tmp = (string)$photoUpload['tmp_name'];
+if ($tmp === '' || !is_uploaded_file($tmp)) {
+    cssv_fail('The selected photo could not be validated. Please choose it again.', 422, 'invalid_upload');
+}
+
+$actualSize = @filesize($tmp);
+if (!is_int($actualSize) || $actualSize < 512 || $actualSize > CSSV_MAX_STUDENT_PROFILE_PHOTO_BYTES) {
     cssv_fail('Profile photo must be 60 KB or smaller.', 422, 'photo_size_invalid');
 }
-$photo = cssv_store_student_profile_photo($photoUpload, 'student-photos');
-$oldStmt = $pdo->prepare('SELECT profile_photo_path FROM student_profiles WHERE user_id=?');
-$oldStmt->execute([$userId]);
-$oldPath = $oldStmt->fetchColumn();
 
+$dimensions = @getimagesize($tmp);
+if (!is_array($dimensions) || !isset($dimensions[0], $dimensions[1])) {
+    cssv_fail('The uploaded file is not a valid image.', 422, 'photo_decode_failed');
+}
+
+$width = (int)$dimensions[0];
+$height = (int)$dimensions[1];
+if ($width < 120 || $height < 120 || $width > 4000 || $height > 4000 || ($width * $height) > CSSV_MAX_PROFILE_PHOTO_PIXELS) {
+    cssv_fail('Profile photo dimensions are not suitable. Use a photo between 120 and 4000 pixels on each side.', 422, 'photo_dimensions_invalid');
+}
+
+$mime = '';
+if (class_exists('finfo')) {
+    try {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $mime = (string)$finfo->file($tmp);
+    } catch (Throwable $error) {
+        error_log('CSSV photo MIME inspection fallback: ' . $error->getMessage());
+    }
+}
+if ($mime === '' && isset($dimensions['mime'])) {
+    $mime = (string)$dimensions['mime'];
+}
+
+$extensions = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+if (!isset($extensions[$mime])) {
+    cssv_fail('Profile photo must be JPG, PNG, or WebP.', 422, 'photo_type_invalid');
+}
+
+$sha256 = @hash_file('sha256', $tmp);
+if (!is_string($sha256) || $sha256 === '') {
+    cssv_fail('The photo could not be validated. Please try again.', 422, 'photo_hash_failed');
+}
+
+$absolutePath = null;
+$relativePath = null;
 try {
+    $name = bin2hex(random_bytes(24)) . '.' . $extensions[$mime];
+    $dir = cssv_private_storage_dir('student-photos');
+    $absolutePath = $dir . DIRECTORY_SEPARATOR . $name;
+    $relativePath = 'student-photos/' . $name;
+
+    if (!move_uploaded_file($tmp, $absolutePath)) {
+        cssv_fail('The photo could not be stored. Please try again.', 503, 'photo_storage_failed');
+    }
+    @chmod($absolutePath, 0600);
+
+    $oldStmt = $pdo->prepare('SELECT profile_photo_path FROM student_profiles WHERE user_id=? LIMIT 1');
+    $oldStmt->execute([$userId]);
+    $oldPath = $oldStmt->fetchColumn();
+
     $stmt = $pdo->prepare('UPDATE student_profiles SET profile_photo_path=?,profile_photo_mime=?,profile_photo_bytes=?,profile_photo_width=?,profile_photo_height=?,profile_photo_sha256=?,profile_photo_updated_at=NOW(6) WHERE user_id=?');
-    $stmt->execute([$photo['path'],$photo['mime'],$photo['bytes'],$photo['width'],$photo['height'],$photo['sha256'],$userId]);
+    $stmt->execute([$relativePath, $mime, $actualSize, $width, $height, $sha256, $userId]);
+
+    if ($stmt->rowCount() < 1) {
+        @unlink($absolutePath);
+        cssv_fail('Your profile could not be updated. Refresh the page and try again.', 409, 'profile_update_failed');
+    }
+
+    if (is_string($oldPath) && $oldPath !== '' && $oldPath !== $relativePath) {
+        cssv_remove_private_file($oldPath);
+    }
+
+    try {
+        $completion = cssv_refresh_profile_completion($pdo, $userId);
+    } catch (Throwable $refreshError) {
+        error_log('CSSV profile completion refresh failed after photo save: ' . $refreshError->getMessage());
+        $completion = null;
+    }
+
+    cssv_json([
+        'ok' => true,
+        'completion' => $completion,
+        'photo' => [
+            'bytes' => $actualSize,
+            'width' => $width,
+            'height' => $height,
+            'mime' => $mime,
+        ],
+    ]);
 } catch (Throwable $error) {
-    @unlink((string)$photo['absolute_path']);
-    throw $error;
+    if (is_string($absolutePath) && $absolutePath !== '' && is_file($absolutePath)) {
+        @unlink($absolutePath);
+    }
+    error_log('CSSV student photo save failed: ' . $error->getMessage());
+    cssv_fail('Your photo could not be saved right now. Please try again.', 500, 'photo_save_failed');
 }
-if (is_string($oldPath) && $oldPath !== '' && $oldPath !== $photo['path']) {
-    cssv_remove_private_file($oldPath);
-}
-$completion=cssv_refresh_profile_completion($pdo,$userId);
-cssv_json(['completion'=>$completion,'ok' => true, 'photo' => ['bytes' => $photo['bytes'], 'width' => $photo['width'], 'height' => $photo['height'], 'mime' => $photo['mime']]]);
