@@ -46,17 +46,23 @@ jobs:
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 
+      - name: Verify exact deployment fingerprint artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/deployment-fingerprint.json
+          jq -e --arg sha "$GITHUB_SHA" '.schemaVersion == 1 and .gitSha == $sha and .source == "git-rev-parse-head" and .buildTarget == "hostinger"' dist/deployment-fingerprint.json >/dev/null
+
       - name: Verify Book Summaries build artifact
         shell: bash
         run: |
           set -euo pipefail
           test -s dist/book-summaries/index.json
           jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
-          slug="$(jq -r '.books[0].slug' dist/book-summaries/index.json)"
-          title="$(jq -r '.books[0].title' dist/book-summaries/index.json)"
-          test -n "$slug"
-          test -s "dist/seo/book-summaries/${slug}.html"
-          grep -Fq "${title} Summary" "dist/seo/book-summaries/${slug}.html"
+          jq -e '.books[] | select(.slug == "why-nations-fail" and .title == "Why Nations Fail")' dist/book-summaries/index.json >/dev/null
+          test -s dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'The authors argue that the main difference lies in institutions' dist/seo/book-summaries/why-nations-fail.html
           grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
 
       - name: Lint Hostinger PHP backend
@@ -100,17 +106,23 @@ jobs:
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 
+      - name: Verify exact deployment fingerprint artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/deployment-fingerprint.json
+          jq -e --arg sha "$GITHUB_SHA" '.schemaVersion == 1 and .gitSha == $sha and .source == "git-rev-parse-head" and .buildTarget == "hostinger"' dist/deployment-fingerprint.json >/dev/null
+
       - name: Verify Book Summaries build artifact
         shell: bash
         run: |
           set -euo pipefail
           test -s dist/book-summaries/index.json
           jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
-          slug="$(jq -r '.books[0].slug' dist/book-summaries/index.json)"
-          title="$(jq -r '.books[0].title' dist/book-summaries/index.json)"
-          test -n "$slug"
-          test -s "dist/seo/book-summaries/${slug}.html"
-          grep -Fq "${title} Summary" "dist/seo/book-summaries/${slug}.html"
+          jq -e '.books[] | select(.slug == "why-nations-fail" and .title == "Why Nations Fail")' dist/book-summaries/index.json >/dev/null
+          test -s dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'The authors argue that the main difference lies in institutions' dist/seo/book-summaries/why-nations-fail.html
           grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
 
       - name: Lint Hostinger PHP backend
@@ -124,12 +136,45 @@ jobs:
           CSSV_STRICT_CONTENT_VALIDATION: 'true'
         run: npm run build:hostinger:strict
 
-  live-backend-readiness:
-    name: Live Hostinger backend readiness
+  live-deployment-fingerprint:
+    name: Live exact deployment fingerprint
     if: github.event_name == 'push'
     needs:
       - clean-lockfile-parity
       - documented-hostinger-parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for Hostinger to expose this exact Git SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 30); do
+            echo "Exact deployment fingerprint probe ${attempt}: expecting ${GITHUB_SHA}"
+            body="$(mktemp)"
+            code="$(curl -sS --connect-timeout 10 --max-time 20 -H 'Cache-Control: no-cache' -o "$body" -w '%{http_code}' "${SITE_ORIGIN}/deployment-fingerprint.json?expected=${GITHUB_SHA}&attempt=${attempt}&ts=$(date +%s)")" || code=000
+            if [ "$code" = "200" ]; then
+              live_sha="$(jq -r '.gitSha // empty' "$body" 2>/dev/null || true)"
+              echo "Live fingerprint SHA: ${live_sha:-missing}"
+              if jq -e --arg sha "$GITHUB_SHA" '.schemaVersion == 1 and .gitSha == $sha and .source == "git-rev-parse-head" and .buildTarget == "hostinger"' "$body" >/dev/null 2>&1; then
+                echo "::notice::Hostinger live fingerprint matches exact pushed SHA ${GITHUB_SHA}."
+                rm -f "$body"
+                exit 0
+              fi
+            else
+              echo "Fingerprint endpoint HTTP ${code}."
+            fi
+            rm -f "$body"
+            if [ "$attempt" -lt 30 ]; then sleep 15; fi
+          done
+          echo "::error::Hostinger never exposed deployment fingerprint for exact SHA ${GITHUB_SHA}. A 200 response from other routes is not accepted as proof of deployment."
+          exit 1
+
+  live-backend-readiness:
+    name: Live Hostinger backend readiness
+    if: github.event_name == 'push'
+    needs:
+      - live-deployment-fingerprint
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
@@ -163,44 +208,41 @@ jobs:
     name: Live Book Summaries readiness
     if: github.event_name == 'push'
     needs:
-      - clean-lockfile-parity
-      - documented-hostinger-parity
+      - live-deployment-fingerprint
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Wait for Hostinger and verify Book Summaries deployment
+      - name: Verify current Book Summaries library and full stable reader
         shell: bash
         run: |
           set -euo pipefail
           expected="$(mktemp)"
           jq -S . public/book-summaries/index.json > "$expected"
           expected_hash="$(sha256sum "$expected" | awk '{print $1}')"
-          slug="$(jq -r '.books[0].slug' public/book-summaries/index.json)"
-          title="$(jq -r '.books[0].title' public/book-summaries/index.json)"
 
           for attempt in $(seq 1 20); do
             echo "Book Summaries production probe attempt ${attempt}"
             library="$(mktemp)"
             page="$(mktemp)"
-            library_code="$(curl -sS --connect-timeout 10 --max-time 20 -o "$library" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/index.json?build=${GITHUB_SHA}")" || library_code=000
+            library_code="$(curl -sS --connect-timeout 10 --max-time 20 -H 'Cache-Control: no-cache' -o "$library" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/index.json?build=${GITHUB_SHA}&ts=$(date +%s)")" || library_code=000
             if [ "$library_code" = "200" ] && jq -e '.total > 0 and (.books | length) == .total' "$library" >/dev/null 2>&1; then
               normalized="$(mktemp)"
               jq -S . "$library" > "$normalized"
               live_hash="$(sha256sum "$normalized" | awk '{print $1}')"
               rm -f "$normalized"
               if [ "$live_hash" = "$expected_hash" ]; then
-                page_code="$(curl -sS --connect-timeout 10 --max-time 20 -o "$page" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/${slug}?build=${GITHUB_SHA}")" || page_code=000
-                if [ "$page_code" = "200" ] && grep -Fq "${title} Summary" "$page"; then
-                  echo "::notice::Book Summaries library and detail route are live on Hostinger for this repository state."
+                page_code="$(curl -sS --connect-timeout 10 --max-time 20 -L -H 'Cache-Control: no-cache' -o "$page" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/why-nations-fail?build=${GITHUB_SHA}&ts=$(date +%s)")" || page_code=000
+                if [ "$page_code" = "200" ] && grep -Fq 'Why Nations Fail Summary' "$page" && grep -Fq 'The authors argue that the main difference lies in institutions' "$page"; then
+                  echo "::notice::Why Nations Fail stable reader is live with the correct full-summary content."
                   rm -f "$library" "$page" "$expected"
                   exit 0
                 fi
-                echo "Detail route ${slug}: HTTP ${page_code}; expected title not yet visible."
+                echo "Why Nations Fail reader: HTTP ${page_code}; full expected summary not yet visible."
               else
-                echo "Book Summaries index is live but does not yet match this repository revision."
+                echo "Book Summaries index is live but does not match this repository revision."
               fi
             else
               echo "Book Summaries index: HTTP ${library_code} or invalid JSON."
@@ -209,15 +251,14 @@ jobs:
             if [ "$attempt" -lt 20 ]; then sleep 15; fi
           done
           rm -f "$expected"
-          echo "::error::Hostinger did not expose the current Book Summaries library and detail route within the verification window."
+          echo "::error::Hostinger did not expose the current Book Summaries library and full Why Nations Fail reader within the verification window."
           exit 1
 
   live-adsense-readiness:
     name: Live AdSense and crawler readiness
     if: github.event_name == 'push'
     needs:
-      - clean-lockfile-parity
-      - documented-hostinger-parity
+      - live-deployment-fingerprint
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:

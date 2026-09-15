@@ -53,6 +53,7 @@ if (target === 'hostinger') {
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')
   run('scripts/package-current-affairs.mjs')
+  run('scripts/write-deployment-fingerprint.mjs')
   await import('./audit-hostinger-build-v2.mjs')
 }
 

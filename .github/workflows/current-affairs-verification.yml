@@ -105,14 +105,16 @@ jobs:
           retention-days: 7
 
   production-readiness:
-    name: Verify deployed briefing routes and protection
+    name: Verify exact deployed SHA, briefing routes and protection
     if: github.event_name == 'push'
     needs: account-and-publishing
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
+    env:
+      EXPECTED_DEPLOY_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: tests/current-affairs
-      - name: Verify the existing Hostinger production deployment
+      - name: Verify exact Hostinger deployment and briefing routes
         run: node tests/current-affairs/production.mjs
