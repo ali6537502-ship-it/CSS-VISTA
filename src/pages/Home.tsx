@@ -121,22 +121,8 @@ function HomeHero() {
       style={{ '--cssv-delay': '55ms' } as CSSProperties}
       aria-labelledby="css-vista-home-title"
     >
-      <div className="cssv-home-account-column">
-        <span className="cssv-home-account-icon" aria-hidden="true"><UserPlus className="h-5 w-5" /></span>
-        <p className="cssv-home-hero-kicker">Free student account</p>
-        <h2 className="cssv-home-account-title">Keep your preparation connected.</h2>
-        <ul className="cssv-home-account-benefits" aria-label="Free account benefits">
-          <li><CheckCircle2 /> Save progress and continue where you stopped</li>
-          <li><CheckCircle2 /> Sync bookmarks, mistakes and your Factbook</li>
-          <li><CheckCircle2 /> Organise daily tasks in one study dashboard</li>
-        </ul>
-        <Link to={user ? '/account/dashboard' : '/account'} className="cssv-home-hero-primary">
-          {user ? 'Open my dashboard' : 'Create free account'} <ArrowRight className="h-4 w-4" />
-        </Link>
-        {!user && <span className="cssv-home-account-note">Free to create. Your study data stays private.</span>}
-      </div>
       <div className="cssv-home-hero-copy">
-        <p className="cssv-home-hero-kicker">CSS Vista</p>
+        <p className="cssv-home-hero-kicker"><span aria-hidden="true" /> Pakistan’s free preparation ecosystem</p>
         <h1 id="css-vista-home-title" className="cssv-home-hero-title">
           Your sincere <span>preparation partner.</span>
         </h1>
@@ -144,13 +130,31 @@ function HomeHero() {
           Everything you need for CSS, PMS and one-paper preparation—structured in one free, dependable platform.
         </p>
         <div className="cssv-home-hero-proof" aria-label="CSS Vista platform highlights">
-          <span>Free learning resources</span>
-          <span>Serious exam preparation</span>
-          <span>Progress that stays with you</span>
+          <span><strong>46K+</strong> verified MCQs</span>
+          <span><strong>100</strong> book summaries</span>
+          <span><strong>Free</strong> preparation resources</span>
         </div>
         <div className="cssv-home-hero-actions">
-          <Link to="/start-css" className="cssv-home-hero-secondary">Explore preparation <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/start-css" className="cssv-home-hero-primary">Start preparing <ArrowRight className="h-4 w-4" /></Link>
+          <Link to="/mentors" className="cssv-home-hero-secondary">Why CSS Vista?</Link>
         </div>
+      </div>
+      <div className="cssv-home-account-column">
+        <div className="cssv-home-account-heading">
+          <span className="cssv-home-account-icon" aria-hidden="true"><UserPlus className="h-5 w-5" /></span>
+          <span className="cssv-home-account-status"><i /> Always free</span>
+        </div>
+        <p className="cssv-home-hero-kicker">Your preparation, remembered</p>
+        <h2 className="cssv-home-account-title">One free account. Your complete study journey.</h2>
+        <ul className="cssv-home-account-benefits" aria-label="Free account benefits">
+          <li><CheckCircle2 /><span><strong>Continue instantly</strong> from your last question or resource</span></li>
+          <li><CheckCircle2 /><span><strong>Keep everything together</strong>—progress, bookmarks and mistakes</span></li>
+          <li><CheckCircle2 /><span><strong>Study with direction</strong> using your planner and private Factbook</span></li>
+        </ul>
+        <Link to={user ? '/account/dashboard' : '/account'} className="cssv-home-account-cta">
+          {user ? 'Open my dashboard' : 'Create my free account'} <ArrowRight className="h-4 w-4" />
+        </Link>
+        {!user && <span className="cssv-home-account-note">No payment required · Private study data</span>}
       </div>
     </section>
   )

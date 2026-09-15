@@ -2372,8 +2372,9 @@
   min-height: 0;
   border-color: rgb(255 255 255 / 0.92);
   background:
-    radial-gradient(circle at 88% 18%, rgb(174 223 199 / 0.38), transparent 34%),
-    linear-gradient(135deg, #fbfcf8 0%, #f4f9f5 56%, #e8f4ed 100%);
+    radial-gradient(circle at 6% 10%, rgb(234 194 92 / 0.18), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgb(122 207 166 / 0.34), transparent 34%),
+    linear-gradient(135deg, #fffefa 0%, #f2faf5 54%, #dff1e7 100%);
 }
 
 .cssv-home-hero.cssv-home-hero-poster::before {
@@ -2386,12 +2387,22 @@
 .cssv-home-account-column {
   position: relative;
   z-index: 2;
-  margin: 0.85rem;
-  border: 1px solid rgb(5 87 60 / 0.14);
+  margin: 0 0.85rem 0.85rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
   border-radius: 1rem;
   padding: 1.1rem;
-  background: rgb(255 255 255 / 0.76);
-  box-shadow: 0 18px 42px -34px rgb(4 78 52 / 0.66), inset 0 1px rgb(255 255 255 / 0.95);
+  color: white;
+  background:
+    radial-gradient(circle at 96% 0%, rgb(46 152 111 / 0.72), transparent 43%),
+    linear-gradient(145deg, #0b5f45, #063d2e 76%);
+  box-shadow: 0 24px 55px -30px rgb(3 54 39 / 0.8), inset 0 1px rgb(255 255 255 / 0.16);
+}
+
+.cssv-home-account-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .cssv-home-account-icon {
@@ -2400,8 +2411,30 @@
   height: 2.5rem;
   place-items: center;
   border-radius: 0.8rem;
-  color: #07573d;
-  background: #e6f6ed;
+  color: #064732;
+  background: #dff7ea;
+  box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.7);
+}
+
+.cssv-home-account-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+  padding: 0.35rem 0.55rem;
+  color: #e8fff3;
+  background: rgb(255 255 255 / 0.08);
+  font-size: 0.58rem;
+  font-weight: 750;
+}
+
+.cssv-home-account-status i {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #ffd265;
+  box-shadow: 0 0 0 3px rgb(255 210 101 / 0.14);
 }
 
 .cssv-home-account-column .cssv-home-hero-kicker,
@@ -2411,10 +2444,24 @@
   letter-spacing: 0.15em;
 }
 
+.cssv-home-account-column .cssv-home-hero-kicker {
+  color: #f2c75c;
+}
+
+.cssv-home-hero-copy .cssv-home-hero-kicker {
+  gap: 0.5rem;
+}
+
+.cssv-home-hero-copy .cssv-home-hero-kicker > span {
+  width: 1.4rem;
+  height: 1px;
+  background: #b4861f;
+}
+
 .cssv-home-account-title {
   max-width: 20ch;
   margin-top: 0.35rem;
-  color: #0b2d22;
+  color: white;
   font-size: clamp(1.25rem, 5.2vw, 1.75rem);
   font-weight: 800;
   letter-spacing: -0.035em;
@@ -2425,7 +2472,7 @@
   display: grid;
   gap: 0.6rem;
   margin: 1rem 0;
-  color: #52645e;
+  color: rgb(231 247 239 / 0.82);
   font-size: 0.72rem;
   line-height: 1.45;
 }
@@ -2441,13 +2488,41 @@
   height: 0.95rem;
   flex: 0 0 auto;
   margin-top: 0.1rem;
-  color: #07805a;
+  color: #f2cb68;
+}
+
+.cssv-home-account-benefits strong {
+  color: white;
+  font-weight: 750;
+}
+
+.cssv-home-account-cta {
+  display: inline-flex;
+  min-height: 2.75rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 0.75rem;
+  padding: 0.7rem 1rem;
+  color: #073d2d;
+  background: linear-gradient(135deg, #ffe18e, #f4c858);
+  box-shadow: 0 15px 28px -18px rgb(0 0 0 / 0.75), inset 0 1px rgb(255 255 255 / 0.55);
+  font-size: 0.72rem;
+  font-weight: 850;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.cssv-home-account-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px -18px rgb(0 0 0 / 0.82), inset 0 1px rgb(255 255 255 / 0.6);
 }
 
 .cssv-home-account-note {
   display: block;
   margin-top: 0.55rem;
-  color: #6a7873;
+  color: rgb(222 242 232 / 0.65);
+  text-align: center;
   font-size: 0.6rem;
 }
 
@@ -2465,20 +2540,41 @@
   max-width: 35rem;
 }
 
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-proof {
+  gap: 0.55rem;
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-proof > span {
+  gap: 0.28rem;
+  border: 1px solid rgb(5 92 64 / 0.1);
+  border-radius: 999px;
+  padding: 0.42rem 0.62rem;
+  background: rgb(255 255 255 / 0.55);
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-proof > span::before {
+  display: none;
+}
+
+.cssv-home-hero-proof strong {
+  color: #07573d;
+  font-size: 0.72rem;
+}
+
 @media (min-width: 700px) {
   .cssv-home-hero.cssv-home-hero-poster {
-    grid-template-columns: minmax(250px, 0.78fr) minmax(0, 1.22fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
     min-height: 400px;
   }
 
   .cssv-home-account-column {
     align-self: stretch;
-    margin: 1.25rem 0 1.25rem 1.25rem;
+    margin: 1.25rem 1.25rem 1.25rem 0;
     padding: 1.45rem;
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-copy {
-    padding: 2rem 2.2rem;
+    padding: 2.4rem 2.2rem 2.4rem 2.6rem;
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
