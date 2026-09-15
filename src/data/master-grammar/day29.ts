@@ -1,0 +1,281 @@
+import type { GrammarDay } from './types'
+import { stageOf } from './types'
+
+export const day29: GrammarDay = {
+  day: 29,
+  ...stageOf(29),
+  title: 'Error Detection and Correction',
+  isReview: true,
+  whatYouWillLearn:
+    'You will learn how to handle the classic error-spotting exam format — a sentence broken into labelled segments where you must find which one (if any) contains the mistake.',
+  simpleExplanation: [
+    'You have already trained your eye to find a hidden error in a full sentence. Error-spotting questions test the same skill, but present the sentence in a slightly different shape: it is broken into labelled parts, usually (A), (B), (C), and (D), followed by the option "No error".',
+    'The grammar you need is nothing new — it is everything from earlier in this course. What is new is the format: you now have to decide which single labelled chunk holds the problem, or confirm that the whole sentence is genuinely correct.',
+    'Two habits matter most here. First, read the whole sentence for meaning before checking each segment, so you know what it is trying to say. Second, do not assume every sentence is broken — a fair number of these questions use a completely correct sentence just to test whether you can recognise one.',
+  ],
+  rules: [
+    {
+      rule: 'Check whether the verb agrees with the true subject, even when the segments separate them.',
+      explanation: 'In error-spotting questions, the subject and its verb are often placed in different labelled segments, so check them together rather than in isolation.',
+      correct: '(A) Each of the members / (B) has paid / (C) the membership fee / (D) for this year / No error — Answer: No error.',
+      wrong: '(A) Each of the members / (B) have paid / (C) the membership fee / (D) for this year / No error',
+      correction: 'The subject “each” is singular, so segment (B) should read “has paid”, not “have paid”. The error is in (B).',
+    },
+    {
+      rule: 'Check the tense against any time word, even if they sit in different segments.',
+      explanation: 'A specific finished time word never pairs with the Present Perfect, no matter which segment it appears in.',
+      correct: '(A) She completed / (B) the assignment / (C) before the deadline / (D) last week / No error — Answer: No error.',
+      wrong: '(A) She has completed / (B) the assignment / (C) before the deadline / (D) last week / No error',
+      correction: '“Last week” is a finished, stated time, so segment (A) should use the Past Simple (“completed”), not the Present Perfect. The error is in (A).',
+    },
+    {
+      rule: 'Check articles and countable/uncountable nouns segment by segment.',
+      explanation: 'Confirm a singular countable noun has the right article, chosen by sound, not spelling.',
+      correct: '(A) He is / (B) an honest / (C) and hardworking / (D) employee / No error — Answer: No error.',
+      wrong: '(A) He is / (B) a honest / (C) and hardworking / (D) employee / No error',
+      correction: '“Honest” begins with a vowel sound, so segment (B) needs “an”, not “a”. The error is in (B).',
+    },
+    {
+      rule: 'Check fixed prepositions carefully — the wrong one is a very common hidden error.',
+      explanation: 'Many verbs and adjectives always pair with one particular preposition, and error-spotting questions often swap it for a similar-sounding one.',
+      correct: '(A) The company / (B) is known / (C) for its / (D) excellent service / No error — Answer: No error.',
+      wrong: '(A) The company / (B) is known / (C) with its / (D) excellent service / No error',
+      correction: 'The fixed pattern is “known for”, not “known with”. The error is in (C).',
+    },
+    {
+      rule: 'Check that a list of actions stays parallel across segments.',
+      explanation: 'If earlier segments use one grammatical form, a later segment should not switch to a different one.',
+      correct: '(A) The coach asked / (B) the players / (C) to warm up, stretch, / (D) and run twice around the field / No error — Answer: No error.',
+      wrong: '(A) The coach asked / (B) the players / (C) to warm up, stretch, / (D) and running twice around the field / No error',
+      correction: 'Segment (D) breaks parallel structure — it should match the infinitive forms in (C): “and run twice around the field”. The error is in (D).',
+    },
+    {
+      rule: 'When you cannot find any error after checking every segment carefully, choose "No error" rather than guessing.',
+      explanation: 'Not every sentence is broken — recognising a genuinely correct sentence is as important a skill as finding a real mistake.',
+      correct: '(A) The museum / (B) opens at nine / (C) and closes at five / (D) every day except Monday / No error — Answer: No error.',
+    },
+  ],
+  easyExamples: [
+    'Ali walks to school every day.',
+    'She has already finished her homework.',
+    'The keys are on the table.',
+    'He is an honest man.',
+  ],
+  practicalExamples: [
+    'Each employee has submitted the required documents.',
+    'The company is known for its reliable customer service.',
+    'The coach asked the players to warm up, stretch, and run around the field.',
+  ],
+  examExamples: [
+    'The tribunal, having reviewed the evidence carefully, upheld the earlier decision.',
+    'Despite repeated assurances, the delivery schedule remained unpredictable.',
+    'The findings, though preliminary, point to a clear pattern across the regions surveyed.',
+  ],
+  commonMistakes: [
+    {
+      wrong: 'Each of the members have paid the fee.',
+      right: 'Each of the members has paid the fee.',
+      why: '“Each” is singular, so it takes “has”, not “have”.',
+    },
+    {
+      wrong: 'She has completed the task last week.',
+      right: 'She completed the task last week.',
+      why: '“Last week” is a stated finished time, so it needs the Past Simple, not the Present Perfect.',
+    },
+    {
+      wrong: 'He is a honest man.',
+      right: 'He is an honest man.',
+      why: '“Honest” begins with a vowel sound, so it takes “an”.',
+    },
+    {
+      wrong: 'The company is known with its service.',
+      right: 'The company is known for its service.',
+      why: 'The fixed pattern is “known for”, not “known with”.',
+    },
+    {
+      wrong: 'The coach asked the players to warm up, stretch, and running around the field.',
+      right: 'The coach asked the players to warm up, stretch, and run around the field.',
+      why: 'All three items in the list should share the same infinitive form.',
+    },
+  ],
+  memoryTip:
+    'Check the segments in this order: subject and verb, tense and time word, articles, fixed prepositions, and parallel structure. If none of these five checks turns up a problem, the honest answer is “No error”.',
+  practice: [
+    {
+      stage: 'Exam-style',
+      prompt: '(A) Each of the students / (B) have submitted / (C) his assignment / (D) on time / No error',
+      answer: 'B',
+      reason: '“Each” is singular, so segment (B) should read “has submitted”, not “have submitted”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The number of applicants / (B) have increased / (C) significantly / (D) this year / No error',
+      answer: 'B',
+      reason: '“The number of” takes a singular verb, so segment (B) should read “has increased”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) She has visited / (B) her grandmother / (C) last Sunday / (D) after a long gap / No error',
+      answer: 'A',
+      reason: '“Last Sunday” is a finished, stated time, so segment (A) should use the Past Simple: “visited”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) He gave me / (B) an useless piece / (C) of advice / (D) about the interview / No error',
+      answer: 'B',
+      reason: '“Useless” begins with a consonant sound, so segment (B) should read “a useless piece”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The bakery / (B) is famous / (C) of / (D) its fresh bread / No error',
+      answer: 'C',
+      reason: 'The fixed pattern is “famous for”, not “famous of”, so the error is in segment (C).',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) Neither of the two proposals / (B) were approved / (C) by the board / (D) at the last meeting / No error',
+      answer: 'B',
+      reason: '“Neither” is singular, so segment (B) should read “was approved”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The coach told / (B) the players / (C) to warm up, stretch, / (D) and jogging around the field / No error',
+      answer: 'D',
+      reason: 'Segment (D) breaks the parallel structure set up by (C); it should read “and jog around the field”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) By the time / (B) the guests arrived / (C) Sara had already / (D) finish cooking dinner / No error',
+      answer: 'D',
+      reason: 'After “had already”, the past participle is needed, so segment (D) should read “finished cooking dinner”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The teacher explained / (B) the new topic / (C) clearly / (D) to the students / No error',
+      answer: 'No error',
+      reason: 'Every segment is grammatically correct: the verb agrees with its subject, “explained … to” is used correctly, and the adverb “clearly” is placed appropriately.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) If the weather improves / (B) tomorrow, / (C) the match will / (D) definitely be held / No error',
+      answer: 'No error',
+      reason: 'This is a correctly formed first conditional: the if-clause uses the present tense (“improves”), and the main clause correctly uses “will”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The company / (B) is known / (C) for it’s reliability / (D) across the industry / No error',
+      answer: 'C',
+      reason: '“Its” (belonging to it) is needed here, not the contraction “it’s” (it is); the error is in segment (C).',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) Despite of / (B) the heavy traffic / (C) she arrived / (D) at the office on time / No error',
+      answer: 'A',
+      reason: '“Despite” is followed directly by a noun and is never followed by “of”; the error is in segment (A).',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: '(A) The findings of the study / (B) is likely / (C) to influence / (D) future policy decisions / No error',
+      answer: 'B',
+      reason: 'The subject “findings” is plural, so segment (B) should read “are likely”, not “is likely”.',
+    },
+  ],
+  quiz: [
+    {
+      question: 'Identify the segment with the error: (A) Each of the workers / (B) have received / (C) his wages / (D) for the month.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 1,
+      explanation: '“Each” is singular, so segment (B) should read “has received”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) The list of complaints / (B) submitted by residents / (C) were reviewed / (D) by the council.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 2,
+      explanation: 'The subject is “list” (singular), so segment (C) should read “was reviewed”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) He has finished / (B) the report / (C) yesterday / (D) before the deadline.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 0,
+      explanation: '“Yesterday” is a stated finished time, so segment (A) should use the Past Simple: “finished”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) She is / (B) a honest / (C) and reliable / (D) colleague.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 1,
+      explanation: '“Honest” begins with a vowel sound, so segment (B) should read “an honest”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) The team / (B) is capable / (C) of achieve / (D) excellent results.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 2,
+      explanation: '“Capable of” is followed by an -ing form, so segment (C) should read “of achieving”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) Neither of the answers / (B) are correct / (C) according to / (D) the answer key.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 1,
+      explanation: '“Neither” is singular, so segment (B) should read “is correct”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) The professor asked / (B) the students / (C) to read the chapter / (D) and answering the questions.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 3,
+      explanation: 'Segment (D) breaks parallel structure with (C); it should read “and answer the questions”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) By the time / (B) the film ended / (C) most viewers / (D) already left.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 3,
+      explanation: 'The leaving happened before the film ended, so segment (D) needs the Past Perfect: “had already left”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) The bridge / (B) was constructed / (C) by engineers / (D) in the record time.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 3,
+      explanation: '“Record time” is a fixed expression that does not take “the”; segment (D) should read “in record time”.',
+    },
+    {
+      question: 'Which sentence is completely correct?',
+      options: [
+        'Each of the members have paid their dues.',
+        'The number of members are increasing.',
+        'Neither of the two candidates was selected.',
+        'The committee are meeting tomorrow to discussing the budget.',
+      ],
+      correct: 2,
+      explanation: '“Neither” is singular, so “was selected” is correct; the other three options each contain an agreement or grammar error.',
+    },
+    {
+      question: 'Which sentence is completely correct?',
+      options: [
+        'He is responsible of the mistake.',
+        'She gave me an useful advice.',
+        'The manager explained the new rule to the staff.',
+        'The staff was explained the new rule.',
+      ],
+      correct: 2,
+      explanation: '“Explain” needs “to” before the person receiving the information, which the third option does correctly; the others contain preposition, article, or verb-pattern errors.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) The government’s policy / (B) aim to reduce / (C) unemployment / (D) among young graduates.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 1,
+      explanation: 'The subject “policy” is singular, so segment (B) should read “aims to reduce”.',
+    },
+    {
+      question: 'Identify the segment with the error: (A) Despite / (B) of the heavy workload / (C) she completed / (D) the project on time.',
+      options: ['A', 'B', 'C', 'D'],
+      correct: 1,
+      explanation: '“Despite” is never followed by “of”; segment (B) should read simply “the heavy workload”.',
+    },
+  ],
+  quickRevision: [
+    'In an error-spotting question, exactly one labelled segment usually contains the mistake — or none at all.',
+    'Always check subject-verb agreement first, remembering that words like each, neither, and the number of are singular.',
+    'A stated finished time word (yesterday, last week) always takes the Past Simple, never the Present Perfect.',
+    'Choose articles by the sound that follows them, and watch for fixed prepositions such as known for, famous for, capable of.',
+    'Check that a list of actions after "to" stays parallel: all infinitives or all matching forms, not a mix.',
+    'If you check every segment carefully and still cannot find an error, "No error" is a genuine and often correct answer.',
+  ],
+}

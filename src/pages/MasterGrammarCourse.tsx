@@ -217,16 +217,14 @@ export default function MasterGrammarCourse() {
   const quizAnswered = quiz.filter((_, index) => quizAnswers[index] !== undefined).length
   const quizScore = quiz.reduce((score, question, index) => score + (quizAnswers[index] === question.correct ? 1 : 0), 0)
   const savedScore = progress.scores[String(activeDay.day)]
-  const practiceByStage = useMemo(() => {
-    const groups = new Map<PracticeStage, Array<GrammarDay['practice'][number]>>()
-    for (const item of activeDay.practice) {
-      if (!groups.has(item.stage)) groups.set(item.stage, [])
-      groups.get(item.stage)!.push(item)
-    }
-    return PRACTICE_STAGE_ORDER
-      .map((stage) => ({ stage, items: groups.get(stage) ?? [] }))
-      .filter((group) => group.items.length > 0)
-  }, [activeDay])
+  const practiceGroups = new Map<PracticeStage, Array<GrammarDay['practice'][number]>>()
+  for (const item of activeDay.practice) {
+    if (!practiceGroups.has(item.stage)) practiceGroups.set(item.stage, [])
+    practiceGroups.get(item.stage)!.push(item)
+  }
+  const practiceByStage = PRACTICE_STAGE_ORDER
+    .map((stage) => ({ stage, items: practiceGroups.get(stage) ?? [] }))
+    .filter((group) => group.items.length > 0)
 
   function selectDay(day: number) {
     setActiveDayNumber(day)
