@@ -124,10 +124,10 @@ function HomeHero() {
       <div className="cssv-home-hero-copy">
         <p className="cssv-home-hero-kicker"><span aria-hidden="true" /> CSS Vista</p>
         <h1 id="css-vista-home-title" className="cssv-home-hero-title">
-          Free preparation for <span>CSS, PMS &amp; one-paper exams.</span>
+          Everything you need to prepare. <span>One platform. Completely free.</span>
         </h1>
         <p className="cssv-home-hero-description">
-          Your sincere preparation partner for Current Affairs, verified MCQs, past papers, notes, book summaries, mocks and structured daily study—all in one place.
+          Your sincere preparation partner for daily Current Affairs, MCQs, past papers, notes, book summaries, mock exams and structured study—all in one place.
         </p>
       </div>
       <div className="cssv-home-account-column">
