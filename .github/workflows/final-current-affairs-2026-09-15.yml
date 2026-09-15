@@ -1,0 +1,36 @@
+name: Finalize Current Affairs 2026-09-15
+on: push
+permissions:
+  contents: write
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22', cache: 'npm'}
+      - run: npm ci
+      - name: Rebuild reviewed edition
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('.github/workflows/publish-current-affairs-2026-09-15.yml').read_text(); marker="          python3 - <<'PY'"; a=s.index(marker)+len(marker)+1; b=s.index("\n          PY",a)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in s[a:b].splitlines()); exec(compile(code,'publisher','exec'))
+          PY
+      - name: Validate schema and integrated bank
+        run: |
+          node scripts/package-current-affairs.mjs --check
+          node scripts/audit-integrated-academics.mjs
+          python3 -m json.tool content/current-affairs/2026/09/2026-09-15.json >/dev/null
+          cmp public/one-liner-gk/current-affairs-archive.json src/data/bundled/current-affairs-archive.json
+          cmp public/one-liner-gk/pakistan-current-affairs.json src/data/bundled/pakistan-current-affairs.json
+      - name: Commit publication
+        run: |
+          rm .github/workflows/publish-current-affairs-2026-09-15.yml .github/workflows/retry-current-affairs-2026-09-15.yml .github/workflows/final-current-affairs-2026-09-15.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Publish current affairs 2026-09-15'
+          git push origin HEAD:main
