@@ -31,7 +31,6 @@ const catIcons: Record<string, LucideIcon> = {
 }
 
 const modes = [
-  { id: 'one-liner', icon: BookOpen, title: '30,491 One-Liner GK Questions', desc: 'Clear fact cards organised by subject', to: '/one-liner-gk' },
   { id: 'daily', icon: CalendarDays, title: 'Daily GK Challenge', desc: '10 fresh questions every day', to: '/gk/quiz?mode=daily' },
   { id: 'five', icon: Zap, title: 'Five-Minute Challenge', desc: '10 questions against the clock', to: '/five-minute' },
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },
@@ -105,8 +104,27 @@ export default function GKWorld() {
         description={`A complete general-knowledge practice portal - ${idx ? idx.total.toLocaleString() : '…'} verified MCQs across ${cats.length} categories, with daily challenges, timed quizzes, a mistake notebook and smart practice modes.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
+        <section aria-labelledby="choose-gk-path">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Choose how you want to study</p>
+          <h2 id="choose-gk-path" className="mt-1 font-display text-2xl font-bold text-pine">Two complete GK resources</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <Link to="/one-liner-gk" className="group rounded-2xl border border-emerald-800/20 bg-white p-5 shadow-sm transition hover:border-emerald-700/50 hover:shadow-md">
+              <BookOpen className="h-6 w-6 text-emerald-800" />
+              <h3 className="mt-3 text-lg font-bold text-pine">30,491 One-Liner GK Questions</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Readable fact cards arranged by subject for quick recall and revision.</p>
+              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Open one-liner questions →</span>
+            </Link>
+            <a href="#gk-mcq-bank" className="group rounded-2xl border border-amber-600/25 bg-amber-50/50 p-5 shadow-sm transition hover:border-amber-700/50 hover:shadow-md">
+              <Layers className="h-6 w-6 text-amber-700" />
+              <h3 className="mt-3 text-lg font-bold text-pine">General Knowledge MCQs</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Open the verified central question bank by category, then practise the real MCQ data.</p>
+              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Browse MCQ categories ↓</span>
+            </a>
+          </div>
+        </section>
+
         {/* Practice modes */}
-        <h2 className="font-display text-xl font-bold text-pine">Practice modes</h2>
+        <h2 className="mt-10 font-display text-xl font-bold text-pine">Practice modes</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {modes.map((m) => {
             if (m.id === 'pms-mock' && !pmsMock.available) {
@@ -150,8 +168,8 @@ export default function GKWorld() {
         </div>
 
         {/* Category browser */}
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
-          <h2 className="font-display text-xl font-bold text-pine">Browse by category</h2>
+        <div id="gk-mcq-bank" className="mt-10 flex scroll-mt-24 flex-wrap items-center justify-between gap-3">
+          <h2 className="font-display text-xl font-bold text-pine">General Knowledge MCQ bank</h2>
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input

@@ -2365,39 +2365,130 @@
   }
 }
 
-/* Main homepage poster: preserve the complete artwork at every viewport size. */
+/* Homepage redesign review: account invitation plus a clear platform promise. */
 .cssv-home-hero.cssv-home-hero-poster {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
   min-height: 0;
   border-color: rgb(255 255 255 / 0.92);
-  background: #f7f6f2;
+  background:
+    radial-gradient(circle at 88% 18%, rgb(174 223 199 / 0.38), transparent 34%),
+    linear-gradient(135deg, #fbfcf8 0%, #f4f9f5 56%, #e8f4ed 100%);
 }
 
 .cssv-home-hero.cssv-home-hero-poster::before {
-  display: none;
-}
-
-.cssv-home-hero-picture,
-.cssv-home-hero-picture img {
   display: block;
-  width: 100%;
+  right: -10rem;
+  bottom: -14rem;
+  opacity: 0.75;
 }
 
-.cssv-home-hero-picture img {
-  height: auto;
-  object-fit: contain;
+.cssv-home-account-column {
+  position: relative;
+  z-index: 2;
+  margin: 0.85rem;
+  border: 1px solid rgb(5 87 60 / 0.14);
+  border-radius: 1rem;
+  padding: 1.1rem;
+  background: rgb(255 255 255 / 0.76);
+  box-shadow: 0 18px 42px -34px rgb(4 78 52 / 0.66), inset 0 1px rgb(255 255 255 / 0.95);
+}
+
+.cssv-home-account-icon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 0.8rem;
+  color: #07573d;
+  background: #e6f6ed;
+}
+
+.cssv-home-account-column .cssv-home-hero-kicker,
+.cssv-home-hero-copy .cssv-home-hero-kicker {
+  margin-top: 0.8rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+}
+
+.cssv-home-account-title {
+  max-width: 20ch;
+  margin-top: 0.35rem;
+  color: #0b2d22;
+  font-size: clamp(1.25rem, 5.2vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.cssv-home-account-benefits {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+  color: #52645e;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.cssv-home-account-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.cssv-home-account-benefits svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: #07805a;
+}
+
+.cssv-home-account-note {
+  display: block;
+  margin-top: 0.55rem;
+  color: #6a7873;
+  font-size: 0.6rem;
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-copy {
+  align-self: center;
+  padding: 1.25rem 1.15rem 1.5rem;
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
+  max-width: 13ch;
+  font-size: clamp(2rem, 10vw, 3rem);
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-description {
+  max-width: 35rem;
 }
 
 @media (min-width: 700px) {
   .cssv-home-hero.cssv-home-hero-poster {
-    grid-template-columns: none;
-    min-height: 0;
+    grid-template-columns: minmax(250px, 0.78fr) minmax(0, 1.22fr);
+    min-height: 400px;
+  }
+
+  .cssv-home-account-column {
+    align-self: stretch;
+    margin: 1.25rem 0 1.25rem 1.25rem;
+    padding: 1.45rem;
+  }
+
+  .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-copy {
+    padding: 2rem 2.2rem;
+  }
+
+  .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
+    font-size: clamp(2.7rem, 5vw, 4.25rem);
   }
 }
 
 @media (min-width: 1024px) {
   .cssv-home-hero.cssv-home-hero-poster {
-    min-height: 0;
+    min-height: 440px;
   }
 }
 

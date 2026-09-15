@@ -2,9 +2,9 @@ import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactN
 import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
-  ClipboardCheck, Download, FileText, Globe2, LibraryBig,
-  Newspaper, NotebookPen, PenLine, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
-  Target, TimerReset, type LucideIcon,
+  CheckCircle2, ClipboardCheck, Download, FileText, Globe2, LibraryBig,
+  Newspaper, NotebookPen, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
+  TimerReset, UserPlus, type LucideIcon,
 } from 'lucide-react'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
 import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
@@ -20,6 +20,7 @@ import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
 import TutorialAnnouncement from '@/components/TutorialAnnouncement'
 import NotesDiscountAnnouncement from '@/components/NotesDiscountAnnouncement'
+import { useAccount } from '@/lib/accountContext'
 
 interface LinkCard {
   title: string
@@ -112,27 +113,45 @@ function openSearch() {
 }
 
 function HomeHero() {
+  const { user } = useAccount()
+
   return (
     <section
       className="cssv-home-hero cssv-home-hero-poster cssv-reveal mt-3"
       style={{ '--cssv-delay': '55ms' } as CSSProperties}
       aria-labelledby="css-vista-home-title"
     >
-      <h1 id="css-vista-home-title" className="sr-only">
-        CSS Vista
-      </h1>
-      <picture className="cssv-home-hero-picture">
-        <img
-          src="/images/css-vista-main-poster-1440.webp"
-          srcSet="/images/css-vista-main-poster-480.webp 480w, /images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w"
-          sizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px"
-          alt="CSS VISTA, presented by Ms. Sadia Zahoor and Sir Ali Hassan Sargana. Built for aspirants and open to everyone—a free digital platform for organized competitive-examination preparation."
-          width="2862"
-          height="1338"
-          fetchPriority="high"
-          decoding="async"
-        />
-      </picture>
+      <div className="cssv-home-account-column">
+        <span className="cssv-home-account-icon" aria-hidden="true"><UserPlus className="h-5 w-5" /></span>
+        <p className="cssv-home-hero-kicker">Free student account</p>
+        <h2 className="cssv-home-account-title">Keep your preparation connected.</h2>
+        <ul className="cssv-home-account-benefits" aria-label="Free account benefits">
+          <li><CheckCircle2 /> Save progress and continue where you stopped</li>
+          <li><CheckCircle2 /> Sync bookmarks, mistakes and your Factbook</li>
+          <li><CheckCircle2 /> Organise daily tasks in one study dashboard</li>
+        </ul>
+        <Link to={user ? '/account/dashboard' : '/account'} className="cssv-home-hero-primary">
+          {user ? 'Open my dashboard' : 'Create free account'} <ArrowRight className="h-4 w-4" />
+        </Link>
+        {!user && <span className="cssv-home-account-note">Free to create. Your study data stays private.</span>}
+      </div>
+      <div className="cssv-home-hero-copy">
+        <p className="cssv-home-hero-kicker">CSS Vista</p>
+        <h1 id="css-vista-home-title" className="cssv-home-hero-title">
+          Your sincere <span>preparation partner.</span>
+        </h1>
+        <p className="cssv-home-hero-description">
+          Everything you need for CSS, PMS and one-paper preparation—structured in one free, dependable platform.
+        </p>
+        <div className="cssv-home-hero-proof" aria-label="CSS Vista platform highlights">
+          <span>Free learning resources</span>
+          <span>Serious exam preparation</span>
+          <span>Progress that stays with you</span>
+        </div>
+        <div className="cssv-home-hero-actions">
+          <Link to="/start-css" className="cssv-home-hero-secondary">Explore preparation <ArrowRight className="h-4 w-4" /></Link>
+        </div>
+      </div>
     </section>
   )
 }
@@ -377,44 +396,6 @@ function TimerHub({ open, onToggle }: { open: boolean; onToggle: () => void }) {
   )
 }
 
-const resourceTabs = {
-  study: [
-    { title: 'Past Papers', detail: 'CSS & provincial papers', to: '/past-papers', icon: FileText },
-    { title: 'Notes Library', detail: 'Structured study material', to: '/notes', icon: LibraryBig },
-    { title: 'Customize Mock Series', detail: 'Written tests by Ms. Sadia', to: '/test-series', icon: ClipboardCheck },
-    { title: '100 Book Summaries', detail: 'Essential books made simple', to: '/book-summaries', icon: BookOpen },
-  ],
-  practice: [
-    { title: 'Study Tools', detail: 'Planners, timers & revision', to: '/study-tools', icon: Target },
-    { title: 'Answer Writing', detail: 'Daily structured practice', to: '/answer-writing', icon: PenLine },
-    { title: '5-Minute Test', detail: 'Quick daily challenge', to: '/five-minute', icon: TimerReset },
-    { title: 'Mistake Book', detail: 'Revise weak areas', to: '/mistakes', icon: ClipboardCheck },
-  ],
-} as const
-
-function ResourceToggle() {
-  const [tab, setTab] = useState<keyof typeof resourceTabs>('study')
-  return (
-    <section className="cssv-glass-panel cssv-reveal mt-5 rounded-2xl border p-3" aria-labelledby="home-resource-switch">
-      <div className="flex items-center justify-between gap-3">
-        <h2 id="home-resource-switch" className="text-[15px] font-bold tracking-[-0.02em] text-slate-900">Browse by goal</h2>
-        <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-0.5">
-          <button type="button" onClick={() => setTab('study')} className={`cssv-tap min-h-8 rounded-md px-3 text-[10px] font-bold ${tab === 'study' ? 'bg-white text-emerald-900 shadow-sm' : 'text-slate-500'}`} aria-pressed={tab === 'study'}>Study</button>
-          <button type="button" onClick={() => setTab('practice')} className={`cssv-tap min-h-8 rounded-md px-3 text-[10px] font-bold ${tab === 'practice' ? 'bg-white text-emerald-900 shadow-sm' : 'text-slate-500'}`} aria-pressed={tab === 'practice'}>Practice</button>
-        </div>
-      </div>
-      <div key={tab} className="cssv-content-swap mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
-        {resourceTabs[tab].map((item) => (
-          <Link key={item.title} to={item.to} className="cssv-glass-subcard cssv-tap flex min-h-[60px] items-center gap-2.5 rounded-xl p-2.5">
-            <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800"><item.icon className="h-4 w-4" /></span>
-            <span className="min-w-0"><span className="block text-[11px] font-bold text-slate-800">{item.title}</span><span className="mt-0.5 line-clamp-1 block text-[9px] leading-snug text-slate-500">{item.detail}</span></span>
-          </Link>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function WeeklyMagazineCard() {
   const available = Boolean(weeklyMagazine.pdfUrl)
 
@@ -538,6 +519,7 @@ export default function Home() {
         && !card.to.includes('/trend-analyzer')
         && card.id !== 'downloads'
         && !card.to.includes('/downloads')
+        && card.id !== 'one-liner-gk'
         && (hasPlanner || card.id !== 'study-planner')
       )))
       .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
@@ -582,6 +564,8 @@ export default function Home() {
         </div>
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
+
+        <WeeklyMagazineCard />
 
         <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
           <SectionHeading
@@ -669,18 +653,14 @@ export default function Home() {
 
         <TutorialAnnouncement />
 
-        <ResourceToggle />
-
-        <WeeklyMagazineCard />
-
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
           <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
-          <div id="featured-services" className="cssv-feature-track -mx-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2 sm:-mx-5 sm:px-5 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
+          <div id="featured-services" className="grid gap-3 md:grid-cols-3">
             {featuredServices.map((service) => (
               <Link
                 key={service.eyebrow}
                 to={service.to}
-                className="cssv-glass-panel cssv-feature-card cssv-tap group min-w-[70%] snap-center overflow-hidden rounded-2xl border sm:min-w-[42%] lg:min-w-0"
+                className="cssv-glass-panel cssv-feature-card cssv-tap group min-w-0 overflow-hidden rounded-2xl border"
               >
                 <span className="flex min-w-0 flex-col p-4">
                   <span className="text-[9px] font-extrabold uppercase tracking-[0.15em] text-emerald-700">{service.eyebrow}</span>
