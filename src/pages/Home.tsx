@@ -140,7 +140,7 @@ function HomeHero() {
         <p className="cssv-home-account-intro">Turn CSS Vista into your own connected preparation dashboard.</p>
         <ul className="cssv-home-account-benefits" aria-label="Free account benefits">
           <li><CheckCircle2 /><span><strong>Continue instantly</strong> from your last question or resource</span></li>
-          <li><CheckCircle2 /><span><strong>Follow Current Affairs</strong> alongside MCQs and study resources</span></li>
+          <li><CheckCircle2 /><span><strong>Access daily Current Affairs</strong> alongside MCQs and study resources</span></li>
           <li><CheckCircle2 /><span><strong>Keep everything together</strong>—planner, progress, bookmarks and mistakes</span></li>
         </ul>
         <Link to={user ? '/account/dashboard' : '/account'} className="cssv-home-account-cta">
