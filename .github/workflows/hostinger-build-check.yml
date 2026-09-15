@@ -46,6 +46,19 @@ jobs:
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 
+      - name: Verify Book Summaries build artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/book-summaries/index.json
+          jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
+          slug="$(jq -r '.books[0].slug' dist/book-summaries/index.json)"
+          title="$(jq -r '.books[0].title' dist/book-summaries/index.json)"
+          test -n "$slug"
+          test -s "dist/seo/book-summaries/${slug}.html"
+          grep -Fq "${title} Summary" "dist/seo/book-summaries/${slug}.html"
+          grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
+
       - name: Lint Hostinger PHP backend
         run: |
           test -f dist/api/health.php
@@ -86,6 +99,19 @@ jobs:
 
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
+
+      - name: Verify Book Summaries build artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/book-summaries/index.json
+          jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
+          slug="$(jq -r '.books[0].slug' dist/book-summaries/index.json)"
+          title="$(jq -r '.books[0].title' dist/book-summaries/index.json)"
+          test -n "$slug"
+          test -s "dist/seo/book-summaries/${slug}.html"
+          grep -Fq "${title} Summary" "dist/seo/book-summaries/${slug}.html"
+          grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
 
       - name: Lint Hostinger PHP backend
         run: |
@@ -132,6 +158,59 @@ jobs:
           done
           echo "::warning::The live Hostinger backend health endpoint could not be verified after retries."
           exit 0
+
+  live-book-summaries-readiness:
+    name: Live Book Summaries readiness
+    if: github.event_name == 'push'
+    needs:
+      - clean-lockfile-parity
+      - documented-hostinger-parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for Hostinger and verify Book Summaries deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(mktemp)"
+          jq -S . public/book-summaries/index.json > "$expected"
+          expected_hash="$(sha256sum "$expected" | awk '{print $1}')"
+          slug="$(jq -r '.books[0].slug' public/book-summaries/index.json)"
+          title="$(jq -r '.books[0].title' public/book-summaries/index.json)"
+
+          for attempt in $(seq 1 20); do
+            echo "Book Summaries production probe attempt ${attempt}"
+            library="$(mktemp)"
+            page="$(mktemp)"
+            library_code="$(curl -sS --connect-timeout 10 --max-time 20 -o "$library" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/index.json?build=${GITHUB_SHA}")" || library_code=000
+            if [ "$library_code" = "200" ] && jq -e '.total > 0 and (.books | length) == .total' "$library" >/dev/null 2>&1; then
+              normalized="$(mktemp)"
+              jq -S . "$library" > "$normalized"
+              live_hash="$(sha256sum "$normalized" | awk '{print $1}')"
+              rm -f "$normalized"
+              if [ "$live_hash" = "$expected_hash" ]; then
+                page_code="$(curl -sS --connect-timeout 10 --max-time 20 -o "$page" -w '%{http_code}' "${SITE_ORIGIN}/book-summaries/${slug}?build=${GITHUB_SHA}")" || page_code=000
+                if [ "$page_code" = "200" ] && grep -Fq "${title} Summary" "$page"; then
+                  echo "::notice::Book Summaries library and detail route are live on Hostinger for this repository state."
+                  rm -f "$library" "$page" "$expected"
+                  exit 0
+                fi
+                echo "Detail route ${slug}: HTTP ${page_code}; expected title not yet visible."
+              else
+                echo "Book Summaries index is live but does not yet match this repository revision."
+              fi
+            else
+              echo "Book Summaries index: HTTP ${library_code} or invalid JSON."
+            fi
+            rm -f "$library" "$page"
+            if [ "$attempt" -lt 20 ]; then sleep 15; fi
+          done
+          rm -f "$expected"
+          echo "::error::Hostinger did not expose the current Book Summaries library and detail route within the verification window."
+          exit 1
 
   live-adsense-readiness:
     name: Live AdSense and crawler readiness
