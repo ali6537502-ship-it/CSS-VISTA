@@ -1,5 +1,4 @@
 // Site-wide configuration and owner-provided details
-import { shippedMcqSummary } from '@/data/mcqMeta'
 
 export const site = {
   name: 'CSS Vista',
@@ -79,7 +78,7 @@ export const notifications: Notification[] = [
   {
     id: 'n1',
     kind: 'platform',
-    text: `GK World is live - ${shippedMcqSummary} with daily challenges and a mistake notebook.`,
+    text: 'GK World is live with one-liner revision, category-wise MCQs, daily challenges and a mistake notebook.',
     link: '/gk',
   },
   {
@@ -166,7 +165,7 @@ export const featureAnnouncements: Notification[] = [
   {
     id: 'feature-library',
     kind: 'platform',
-    text: 'Search 30,491 One-Liner GK Questions, book summaries, grammar courses and study resources in one place.',
+    text: 'Search One-Liner GK, book summaries, grammar courses and study resources in one place.',
     link: '/one-liner-gk',
   },
 ]

@@ -136,7 +136,6 @@ export default function OneLinerGK() {
   const safePage = Math.min(page, totalPages)
   const visibleNotes = filteredNotes.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
   const resultStart = filteredNotes.length ? (safePage - 1) * PAGE_SIZE + 1 : 0
-  const resultEnd = Math.min(safePage * PAGE_SIZE, filteredNotes.length)
 
   function chooseCategory(slug: string) {
     setSelectedSlug(slug)
@@ -167,7 +166,7 @@ export default function OneLinerGK() {
             <div className="min-w-0">
               <h2 id="quick-revision-controls" className="font-display text-lg font-bold text-pine">Find the facts you need</h2>
               <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
-                {index ? `${index.total.toLocaleString()} revision facts across ${index.categories.length} subjects` : 'Loading revision library…'}
+                {index ? 'Subject-wise revision facts with search and topic filters' : 'Loading revision library…'}
               </p>
             </div>
           </div>
@@ -181,7 +180,7 @@ export default function OneLinerGK() {
                 className="h-11 w-full rounded-xl border bg-white px-3 text-sm font-semibold text-slate-800"
               >
                 {index?.categories.map((item) => (
-                  <option key={item.slug} value={item.slug}>{item.name} ({item.count.toLocaleString()})</option>
+                  <option key={item.slug} value={item.slug}>{item.name}</option>
                 ))}
               </select>
             </label>
@@ -206,7 +205,7 @@ export default function OneLinerGK() {
               >
                 <option value="all">All topics</option>
                 {selectedSummary?.subcategories.map((item) => (
-                  <option key={item.name} value={item.name}>{item.name} ({item.count})</option>
+                  <option key={item.name} value={item.name}>{item.name}</option>
                 ))}
               </select>
             </label>
@@ -233,7 +232,7 @@ export default function OneLinerGK() {
                 {category?.name ?? selectedSummary?.name ?? 'Loading subject…'}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                {category ? `${filteredNotes.length.toLocaleString()} matching facts · 20 per page` : 'Loading facts…'}
+                {category ? 'Focused revision cards · 20 per page' : 'Loading facts…'}
               </p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -277,9 +276,7 @@ export default function OneLinerGK() {
 
           {category && filteredNotes.length > 0 && (
             <nav aria-label="One-Liner GK pages" className="mt-5 flex flex-wrap items-center justify-between gap-3">
-              <p className="text-xs text-muted-foreground">
-                Showing {resultStart.toLocaleString()}–{resultEnd.toLocaleString()} of {filteredNotes.length.toLocaleString()}
-              </p>
+              <p className="text-xs text-muted-foreground">Browse this subject page by page</p>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -290,7 +287,7 @@ export default function OneLinerGK() {
                   <ChevronLeft className="h-4 w-4" /> Previous
                 </button>
                 <span className="min-w-20 text-center text-xs font-medium text-muted-foreground">
-                  {safePage} / {totalPages}
+                  Page {safePage}
                 </span>
                 <button
                   type="button"

@@ -1,6 +1,5 @@
 // Default homepage dashboard cards - the admin can hide, reorder or add cards.
 import type { HomeCard } from '@/lib/admin'
-import { shippedMcqSummary } from '@/data/mcqMeta'
 
 // Student-facing priority: core preparation first, supporting and occasional
 // tools later. This intentionally wins over stale locally saved card order.
@@ -62,7 +61,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
   { id: 'mpt', title: 'CSS MPT', desc: 'Timed MCQ tests and mocks', to: '/mpt', icon: 'ClipboardList', visible: true, order: 2 },
-  { id: 'gk', title: 'GK World', desc: shippedMcqSummary, to: '/gk', icon: 'Globe', visible: true, order: 3 },
+  { id: 'gk', title: 'GK World', desc: 'One-liners and category-wise MCQ practice', to: '/gk', icon: 'Globe', visible: true, order: 3 },
   { id: 'css-subject-mcqs', title: 'All CSS Subject MCQs', desc: 'Compulsory and optional subject banks', to: '/css-mcqs', icon: 'LibraryBig', visible: true, order: 5 },
   { id: 'pms-grand-mock', title: 'PMS GK Grand Mock', desc: 'Daily entry · 8:00–10:00 PM', to: '/gk/quiz?mode=pms-mock', icon: 'ClipboardList', visible: true, order: 4 },
   { id: 'mpt-grand-mock', title: 'CSS MPT Grand Mock', desc: 'Daily entry · 10:30 PM–midnight', to: '/gk/quiz?mode=mpt-mock', icon: 'Target', visible: true, order: 6 },
@@ -93,7 +92,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'games', title: 'Interactive Practice', desc: 'Academic matching and timelines', to: '/games', icon: 'Gamepad2', visible: true, order: 27 },
   { id: 'answer-timer', title: 'Answer Timer', desc: 'Practice answers against the clock', to: '/answer-timer', icon: 'Timer', visible: true, order: 28 },
   { id: 'mistakes', title: 'Mistake Notebook', desc: 'Revisit weak areas and wrong answers', to: '/mistakes', icon: 'TriangleAlert', visible: true, order: 29 },
-  { id: 'one-liner-gk', title: '30,491 One-Liner GK Questions', desc: 'Clear fact cards for rapid revision', to: '/one-liner-gk', icon: 'ListTree', visible: true, order: 30 },
+  { id: 'one-liner-gk', title: 'One-Liner GK', desc: 'Clear fact cards for rapid revision', to: '/one-liner-gk', icon: 'ListTree', visible: true, order: 30 },
   { id: 'language-grammar', title: 'Urdu & English Grammar', desc: 'Grammar practice and language rules', to: '/language-grammar', icon: 'Languages', visible: true, order: 31 },
   { id: 'answer-writing', title: 'Answer-Writing Practice', desc: 'Plan, structure and improve answers', to: '/answer-writing', icon: 'FilePenLine', visible: true, order: 32 },
   { id: 'subject-selector', title: 'Subject Selection Tool', desc: 'Compare optional subjects smartly', to: '/subjects/selector', icon: 'SlidersHorizontal', visible: true, order: 35 },

@@ -11,7 +11,6 @@ import { getRevisionStats, recentActivities, type Activity } from '@/lib/progres
 import { mergedHomeCards } from '@/lib/admin'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
-import { SHIPPED_MCQ_TOTAL } from '@/data/mcqMeta'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
@@ -61,7 +60,7 @@ const quickActions: LinkCard[] = [
   },
   {
     title: 'GK World',
-    description: `${Math.round(SHIPPED_MCQ_TOTAL / 1000)}K+ verified MCQs`,
+    description: 'One-liners and category-wise MCQs',
     to: '/gk',
     icon: Globe2,
     tone: 'blue',

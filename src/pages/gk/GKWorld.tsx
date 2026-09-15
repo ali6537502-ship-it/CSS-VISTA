@@ -96,32 +96,40 @@ export default function GKWorld() {
     const q = query.toLowerCase()
     return cats.filter((c) => c.name.toLowerCase().includes(q))
   }, [cats, query])
+  const showMcqLibrary = searchParams.get('view') === 'mcqs' || Boolean(searchParams.get('q'))
 
   return (
     <div>
       <PageHeader
-        title="GK World"
-        description={`A complete general-knowledge practice portal - ${idx ? idx.total.toLocaleString() : '…'} verified MCQs across ${cats.length} categories, with daily challenges, timed quizzes, a mistake notebook and smart practice modes.`}
+        title={showMcqLibrary ? 'General Knowledge MCQs' : 'GK World'}
+        description={showMcqLibrary
+          ? 'Practise the central general-knowledge question bank by category or choose a focused practice mode.'
+          : 'One organised home for rapid one-liner revision and the complete General Knowledge MCQ library.'}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
+        {!showMcqLibrary ? (
         <section aria-labelledby="choose-gk-path">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Choose how you want to study</p>
-          <h2 id="choose-gk-path" className="mt-1 font-display text-2xl font-bold text-pine">Two complete GK resources</h2>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">General Knowledge library</p>
+          <h2 id="choose-gk-path" className="mt-1 font-display text-2xl font-bold text-pine">Choose a folder</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">Open quick fact-based revision or enter the complete MCQ practice area. Each resource has its own focused workspace.</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <Link to="/one-liner-gk" className="group rounded-2xl border border-emerald-800/20 bg-white p-5 shadow-sm transition hover:border-emerald-700/50 hover:shadow-md">
               <BookOpen className="h-6 w-6 text-emerald-800" />
-              <h3 className="mt-3 text-lg font-bold text-pine">30,491 One-Liner GK Questions</h3>
+              <h3 className="mt-3 text-lg font-bold text-pine">One-Liner GK</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Readable fact cards arranged by subject for quick recall and revision.</p>
-              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Open one-liner questions →</span>
+              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Open folder →</span>
             </Link>
-            <a href="#gk-mcq-bank" className="group rounded-2xl border border-amber-600/25 bg-amber-50/50 p-5 shadow-sm transition hover:border-amber-700/50 hover:shadow-md">
+            <Link to="/gk?view=mcqs" className="group rounded-2xl border border-amber-600/25 bg-amber-50/50 p-5 shadow-sm transition hover:border-amber-700/50 hover:shadow-md">
               <Layers className="h-6 w-6 text-amber-700" />
               <h3 className="mt-3 text-lg font-bold text-pine">General Knowledge MCQs</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Open the verified central question bank by category, then practise the real MCQ data.</p>
-              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Browse MCQ categories ↓</span>
-            </a>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Browse the real question bank by category, or use a focused practice mode.</p>
+              <span className="mt-4 inline-flex items-center text-sm font-bold text-emerald-800">Open folder →</span>
+            </Link>
           </div>
         </section>
+        ) : (
+        <>
+        <Link to="/gk" className="inline-flex min-h-10 items-center rounded-lg border bg-white px-3 text-sm font-semibold text-emerald-900">← Back to GK World</Link>
 
         {/* Practice modes */}
         <h2 className="mt-10 font-display text-xl font-bold text-pine">Practice modes</h2>
@@ -192,7 +200,6 @@ export default function GKWorld() {
               >
                 <div className="flex items-center justify-between">
                   <Icon className="h-5 w-5 text-emerald-800" />
-                  <span className="rounded-full bg-secondary px-2 py-0.5 text-[11px] font-bold text-pine">{c.count.toLocaleString()}</span>
                 </div>
                 <p className="mt-2 text-sm font-bold leading-snug text-foreground group-hover:text-pine">{c.name}</p>
               </Link>
@@ -208,6 +215,8 @@ export default function GKWorld() {
           performance reports - the same question is never duplicated across features. Answers stay hidden until you
           attempt a question or choose “Reveal Answer”.
         </p>
+        </>
+        )}
       </div>
     </div>
   )

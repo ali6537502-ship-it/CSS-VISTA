@@ -9,7 +9,6 @@ import { PageHeader, Section, Badge } from '@/components/shared'
 import { compulsorySubjects } from '@/data/syllabus'
 import { loadFullVocabulary, vocabulary as curatedVocabulary, type VocabWord } from '@/data/vocab'
 import { getState, setSubjectProgress, setGoal, getStats, setVistaShortcut } from '@/lib/store'
-import { shippedMcqSummary } from '@/data/mcqMeta'
 import { notifyProgressChanged } from '@/lib/progressEvents'
 import { printPage } from '@/components/PrintMenu'
 import ScheduledSyllabusBoard from '@/components/ScheduledSyllabusBoard'
@@ -192,7 +191,7 @@ export default function StudyTools() {
             { to: '/answer-timer', icon: PenLine, t: 'Handwritten Answer Timer', d: '5/10/20/35-minute structure alerts' },
             { to: '/five-minute', icon: Zap, t: 'Daily Five-Minute Challenge', d: 'A quick mixed quiz against the clock' },
             { to: '/mistakes', icon: AlertTriangle, t: 'Mistake Notebook', d: 'Every wrong answer, ready to revise' },
-            { to: '/gk', icon: Globe, t: 'GK World', d: shippedMcqSummary },
+            { to: '/gk', icon: Globe, t: 'GK World', d: 'One-liners and category-wise MCQ practice' },
             { to: '/css-past-paper-analysis', icon: FileText, t: 'CSS Past Paper Analysis', d: 'Topic-wise questions linked to the official syllabus' },
           ].map((c) => (
             <Link key={c.to} to={c.to} className="group rounded-xl border bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-emerald-700/40 hover:shadow-md">

@@ -9,8 +9,6 @@ import { questions as seedQuestions, quizCategories } from '@/data/quiz'
 import QuizEngine from '@/components/QuizEngine'
 import { DAILY_MOCK_TIME_LABELS, getMockAvailability, getState } from '@/lib/store'
 import { mergedMcqs } from '@/lib/admin'
-import { shippedMcqSummary } from '@/data/mcqMeta'
-import { getBankIndex, type BankIndex } from '@/data/mcq'
 import { usePageBack } from '@/lib/backNavigation'
 import { mptQuestionBanks, mptQuestionBankPath } from '@/data/mptQuestionBanks'
 
@@ -82,7 +80,6 @@ const mptStudyAreas: MptStudyArea[] = [
 
 export default function MPTPrep() {
   const allQuestions = useMemo(() => mergedMcqs(seedQuestions), [])
-  const [bankIndex, setBankIndex] = useState<BankIndex | null>(null)
   const [mode, setMode] = useState<Mode>(null)
   usePageBack(Boolean(mode), () => setMode(null))
   const [category, setCategory] = useState('mixed')
@@ -95,10 +92,6 @@ export default function MPTPrep() {
   const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
-    getBankIndex().then(setBankIndex)
-  }, [])
-
-  useEffect(() => {
     // `now` only gates mock availability and a minute-precision "opens at"
     // label, so a one-second tick re-rendered the whole page for nothing.
     const timer = window.setInterval(() => setNow(new Date()), 30000)
@@ -109,12 +102,6 @@ export default function MPTPrep() {
       document.removeEventListener('visibilitychange', resync)
     }
   }, [])
-
-  const bankCount = (slugs: string[]) => (
-    bankIndex?.categories
-      .filter((bankCategory) => slugs.includes(bankCategory.slug))
-      .reduce((total, bankCategory) => total + bankCategory.count, 0) ?? 0
-  )
 
   const topicsForCategory = useMemo(() => {
     const pool = category === 'mixed' ? allQuestions : allQuestions.filter((q) => q.category === category)
@@ -149,7 +136,7 @@ export default function MPTPrep() {
     <div>
       <PageHeader
         title="MPT Preparation"
-        description={`Subject-wise and topic-wise MCQ practice, timed quizzes and full mock tests. The curated MPT bank contains ${allQuestions.length} hand-checked questions, and every subject below also draws from the central GK World bank of ${shippedMcqSummary} wherever the FPSC MPT syllabus reaches.`}
+        description="Subject-wise and topic-wise MCQ practice, timed quizzes and full mock tests connected to the central GK World bank wherever the FPSC MPT syllabus reaches."
       />
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-10">
         <OfficialNotice />
@@ -206,16 +193,11 @@ export default function MPTPrep() {
             {/* Official MPT paper areas backed by the central GK bank */}
             <Section
               title="Prepare MPT"
-              description={`Study only the five official MPT paper areas. Available MCQs are fetched from the same central GK World bank of ${shippedMcqSummary}, so progress and corrections stay consistent across both sections.`}
+              description="Study only the five official MPT paper areas. Available MCQs use the same central GK World bank, so progress and corrections stay consistent across both sections."
             >
               <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 {mptStudyAreas.map((area) => {
                   const Icon = area.icon
-                  const allSlugs = area.units.flatMap((unit) => unit.slugs)
-                  const total = area.curatedCategories
-                    ? allQuestions.filter((question) => area.curatedCategories?.includes(question.category)).length
-                    : bankCount(allSlugs)
-
                   return (
                     <article key={area.title} className="flex min-h-full flex-col rounded-xl border bg-white p-5">
                       <div className="flex items-start justify-between gap-3">
@@ -231,21 +213,16 @@ export default function MPTPrep() {
 
                       {area.units.length > 0 ? (
                         <div className="mt-4 space-y-2">
-                          {area.units.map((unit) => {
-                            const countForUnit = bankCount(unit.slugs)
-                            return (
+                          {area.units.map((unit) => (
                               <Link
                                 key={unit.label}
                                 to={mptQuestionBankPath(unit.bankId)}
                                 className="flex items-center justify-between gap-3 rounded-lg border bg-secondary/35 px-3 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-emerald-700/40 hover:bg-emerald-50"
                               >
                                 <span>{unit.label}</span>
-                                <span className="shrink-0 text-xs font-bold text-emerald-800">
-                                  {bankIndex ? `${countForUnit.toLocaleString()} MCQs` : 'Loading…'}
-                                </span>
+                                <span className="shrink-0 text-xs font-bold text-emerald-800">Open bank →</span>
                               </Link>
-                            )
-                          })}
+                          ))}
                         </div>
                       ) : (
                         <div className="mt-4 grid grid-cols-2 gap-2">
@@ -254,8 +231,6 @@ export default function MPTPrep() {
                             { label: 'Logical & Analytical', category: 'reasoning', icon: Brain },
                           ].map((unit) => {
                             const UnitIcon = unit.icon
-                            const unitCount = mptQuestionBanks[unit.category]?.expectedCount
-                              ?? allQuestions.filter((question) => question.category === unit.category).length
                             return (
                               <Link
                                 key={unit.category}
@@ -264,7 +239,7 @@ export default function MPTPrep() {
                               >
                                 <UnitIcon className="h-4 w-4 text-emerald-800" />
                                 <span className="mt-2 block text-xs font-semibold leading-snug">{unit.label}</span>
-                                <span className="mt-1 block text-[11px] font-bold text-emerald-800">{unitCount} MCQs</span>
+                                <span className="mt-1 block text-[11px] font-bold text-emerald-800">Open question bank</span>
                               </Link>
                             )
                           })}
@@ -294,11 +269,6 @@ export default function MPTPrep() {
                             )}
                           </div>
                         )}
-                        <p className="mt-2 text-[11px] text-muted-foreground">
-                          {!area.curatedCategories && !bankIndex
-                            ? 'Loading available question count…'
-                            : `${total.toLocaleString()} available question${total === 1 ? '' : 's'}`}
-                        </p>
                       </div>
                     </article>
                   )
@@ -324,14 +294,11 @@ export default function MPTPrep() {
               </div>
             </Section>
 
-            {/* Category counts */}
-            <Section title="Question bank by subject" description={`Open the complete source question bank for each subject—not a short random quiz. Central categories use the shipped ${shippedMcqSummary} bank, while General Science & Ability uses its verified owner-supplied bank.`}>
+            <Section title="Question bank by subject" description="Open the complete source question bank for each subject—not a short random quiz. Central categories use the GK World bank, while General Science & Ability uses its verified owner-supplied bank.">
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {quizCategories.map((c) => {
                   const definition = mptQuestionBanks[c.id]
                   if (!definition) return null
-                  const centralCount = bankCount(definition.centralSlugs ?? [])
-                  const n = definition.expectedCount || centralCount || allQuestions.filter((q) => q.category === c.id).length
                   return (
                     <Link
                       key={c.id}
@@ -339,7 +306,7 @@ export default function MPTPrep() {
                       className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/60"
                     >
                       <span>{c.icon} {c.name}</span>
-                      <Badge tone="gray">{definition.centralSlugs && !bankIndex ? '…' : n.toLocaleString()}</Badge>
+                      <span className="text-xs font-bold text-emerald-800">Open bank →</span>
                     </Link>
                   )
                 })}
