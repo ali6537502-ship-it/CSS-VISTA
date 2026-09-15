@@ -2570,6 +2570,15 @@
 
 .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-description {
   max-width: 35rem;
+  border-left: 3px solid #d2a642;
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 0.8rem 0.9rem;
+  color: #334a42;
+  background: rgb(255 255 255 / 0.58);
+  box-shadow: 0 12px 30px -26px rgb(4 78 52 / 0.65);
+  font-size: 0.9rem;
+  font-weight: 620;
+  line-height: 1.65;
 }
 
 .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-proof {
@@ -2610,7 +2619,11 @@
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
-    font-size: clamp(3rem, 5.6vw, 4.85rem);
+    font-size: clamp(2.75rem, 4.8vw, 4.1rem);
+  }
+
+  .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-description {
+    font-size: 1rem;
   }
 }
 
