@@ -38,8 +38,6 @@ export const day04: GrammarDay = {
       rule: 'Collective nouns such as team, government, committee, family, and jury are usually treated as singular when the group acts as one unit, especially in formal writing.',
       explanation: 'Since the group is being described as a single body making one decision or acting together, the singular verb is generally preferred in formal English. In some British usage, a plural verb can be used instead when the writer wants to emphasise the individual members acting separately, but this is a matter of choice, not a fixed rule.',
       correct: 'The jury has reached its verdict.',
-      wrong: 'The jury have reached their verdict, but each juror was thinking something different.',
-      correction: 'When the whole group is acting as a single unit, the singular form is the safer, more standard choice in formal writing.',
     },
     {
       rule: 'When two subjects are joined by “and”, the verb is usually plural.',
@@ -106,7 +104,7 @@ export const day04: GrammarDay = {
     {
       wrong: 'The staff is arguing among themselves about the new schedule.',
       right: 'The staff are arguing among themselves about the new schedule.',
-      why: 'Here the group is clearly acting as separate individuals disagreeing with one another, so the plural verb fits the meaning better.',
+      why: 'The reflexive pronoun “themselves” already treats the group as separate individuals disagreeing with one another, so the plural verb “are” fits the sentence more consistently than “is”.',
     },
     {
       wrong: 'Either the teacher or the students has to inform the office.',
