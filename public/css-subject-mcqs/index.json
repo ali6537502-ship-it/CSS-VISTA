@@ -1,8 +1,8 @@
 {
   "batch": "2026-08-24-owner-supplied-complete-import",
-  "generatedAt": "2026-09-14T18:55:00.000Z",
+  "generatedAt": "2026-09-15T14:55:00.000Z",
   "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
-  "total": 42743,
+  "total": 42749,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -411,7 +411,7 @@
       "name": "Current Affairs",
       "designation": "compulsory",
       "group": null,
-      "count": 512,
+      "count": 518,
       "topics": [
         "D1 IMF Programme, Stabilisation and Climate Resilience",
         "D2 Monetary Policy, Inflation and the 2026 Economic Setting",
@@ -446,10 +446,11 @@
         "Current Affairs — 14 September 2026"
       ],
       "file": "current-affairs.json",
-      "sourceCount": 512,
+      "sourceCount": 518,
       "sourceDocuments": [
         "Current_Affairs_500_Premium_MCQs_Expanded_15_Aug_2026.docx",
-        "CSS Vista Current Affairs — 14 September 2026"
+        "CSS Vista Current Affairs — 14 September 2026",
+        "Daily Current Affairs 2026-09-15"
       ],
       "audit": "four distinct options, recoverable answer, stable ID, source attribution and high-confidence duplicate facts checked"
     },
