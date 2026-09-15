@@ -1,0 +1,40 @@
+name: Profile photo database regression
+on:
+  push:
+    branches: [main]
+    paths: ['public/api/student/photo.php', 'tests/profile-photo-schema.php', '.github/workflows/profile-photo-regression.yml']
+  pull_request:
+    paths: ['public/api/student/photo.php', 'tests/profile-photo-schema.php', '.github/workflows/profile-photo-regression.yml']
+permissions:
+  contents: read
+jobs:
+  photo-size:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        database: ['mysql:8.0', 'mariadb:10.11']
+    services:
+      database:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_ROOT_PASSWORD: photo_ci_only
+          MYSQL_DATABASE: cssvista_photo_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pphoto_ci_only"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql
+      - name: Reproduce and fix legacy photo constraints
+        env:
+          CSSV_PHOTO_TEST_DB: cssvista_photo_test
+        run: |
+          php -l public/api/student/photo.php
+          for scenario in old25 old15 both current_and_legacy current missing; do
+            php tests/profile-photo-schema.php "$scenario"
+          done

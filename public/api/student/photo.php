@@ -24,33 +24,40 @@ function cssv_ensure_student_photo_60kb_schema(PDO $pdo): void
 
     try {
         $constraint = $pdo->prepare(
-            "SELECT cc.CHECK_CLAUSE
+            "SELECT tc.CONSTRAINT_NAME,cc.CHECK_CLAUSE
              FROM information_schema.TABLE_CONSTRAINTS tc
              JOIN information_schema.CHECK_CONSTRAINTS cc
                ON cc.CONSTRAINT_SCHEMA=tc.CONSTRAINT_SCHEMA
               AND cc.CONSTRAINT_NAME=tc.CONSTRAINT_NAME
              WHERE tc.CONSTRAINT_SCHEMA=DATABASE()
                AND tc.TABLE_NAME='student_profiles'
-               AND tc.CONSTRAINT_NAME='student_profiles_photo_size_chk'
-               AND tc.CONSTRAINT_TYPE='CHECK'
-             LIMIT 1"
+               AND tc.CONSTRAINT_NAME IN ('student_profiles_photo_size_chk','student_profiles_photo_size_15k_chk')
+               AND tc.CONSTRAINT_TYPE='CHECK'"
         );
         $constraint->execute();
-        $clause = $constraint->fetchColumn();
+        $checks = $constraint->fetchAll(PDO::FETCH_KEY_PAIR);
+        $clause = $checks['student_profiles_photo_size_chk'] ?? null;
+        $legacyExists = array_key_exists('student_profiles_photo_size_15k_chk', $checks);
+        $replaceCanonical = !is_string($clause) || !preg_match('/(?:^|[^0-9])61440(?:[^0-9]|$)/', $clause);
 
-        if (!is_string($clause) || !preg_match('/(?:^|[^0-9])61440(?:[^0-9]|$)/', $clause)) {
-            if (is_string($clause)) {
-                $version = (string)$pdo->query('SELECT VERSION()')->fetchColumn();
-                if (stripos($version, 'MariaDB') !== false) {
-                    $pdo->exec('ALTER TABLE student_profiles DROP CONSTRAINT student_profiles_photo_size_chk');
-                } else {
-                    $pdo->exec('ALTER TABLE student_profiles DROP CHECK student_profiles_photo_size_chk');
-                }
+        if ($legacyExists || $replaceCanonical) {
+            $version = (string)$pdo->query('SELECT VERSION()')->fetchColumn();
+            $drop = stripos($version, 'MariaDB') !== false ? 'DROP CONSTRAINT ' : 'DROP CHECK ';
+            $changes = [];
+            // The old migration added a SECOND check. Updating only the canonical
+            // check leaves the 15 KiB limit active, even when it already says 60 KiB.
+            if ($legacyExists) {
+                $changes[] = $drop . 'student_profiles_photo_size_15k_chk';
             }
-            $pdo->exec(
-                'ALTER TABLE student_profiles ADD CONSTRAINT student_profiles_photo_size_chk '
-                . 'CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 61440)'
-            );
+            if ($replaceCanonical) {
+                if (is_string($clause)) {
+                    $changes[] = $drop . 'student_profiles_photo_size_chk';
+                }
+                $changes[] = 'ADD CONSTRAINT student_profiles_photo_size_chk '
+                    . 'CHECK (profile_photo_bytes IS NULL OR profile_photo_bytes <= 61440)';
+            }
+            // Replace the checks together, without an intermediate unconstrained table.
+            $pdo->exec('ALTER TABLE student_profiles ' . implode(', ', $changes));
         }
 
         $ready = true;
