@@ -76,6 +76,7 @@ export default function GKWorld() {
 
   useEffect(() => {
     const next = new URLSearchParams()
+    if (searchParams.get('view') === 'mcqs') next.set('view', 'mcqs')
     if (query.trim()) next.set('q', query.trim())
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
   }, [query, searchParams, setSearchParams])
