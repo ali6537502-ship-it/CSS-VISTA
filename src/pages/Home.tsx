@@ -122,22 +122,13 @@ function HomeHero() {
       aria-labelledby="css-vista-home-title"
     >
       <div className="cssv-home-hero-copy">
-        <p className="cssv-home-hero-kicker"><span aria-hidden="true" /> Pakistan’s free preparation ecosystem</p>
+        <p className="cssv-home-hero-kicker"><span aria-hidden="true" /> CSS Vista</p>
         <h1 id="css-vista-home-title" className="cssv-home-hero-title">
-          Your sincere<br /><span>preparation partner.</span>
+          Free preparation for <span>CSS, PMS &amp; one-paper exams.</span>
         </h1>
         <p className="cssv-home-hero-description">
-          Everything you need for CSS, PMS and one-paper preparation—serious resources, daily guidance and measurable progress in one place.
+          Your sincere preparation partner for Current Affairs, verified MCQs, past papers, notes, book summaries, mocks and structured daily study—all in one place.
         </p>
-        <div className="cssv-home-hero-proof" aria-label="CSS Vista platform highlights">
-          <span><strong>46K+</strong> verified MCQs</span>
-          <span><strong>Daily</strong> current affairs</span>
-          <span><strong>Free</strong> preparation resources</span>
-        </div>
-        <div className="cssv-home-hero-actions">
-          <Link to="/start-css" className="cssv-home-hero-primary">Start preparing <ArrowRight className="h-4 w-4" /></Link>
-          <Link to="/mentors" className="cssv-home-hero-secondary">Why CSS Vista?</Link>
-        </div>
       </div>
       <div className="cssv-home-account-column">
         <div className="cssv-home-account-heading">
