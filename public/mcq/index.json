@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-09-11",
- "total": 38086,
+ "generatedAt": "2026-09-15",
+ "total": 35609,
  "categories": [
   {"slug":"pakistan-geography","name":"Pakistan Geography","count":282,"chunks":1,"mpt":true},
   {"slug":"mountains","name":"Mountains","count":209,"chunks":2,"mpt":true},
@@ -30,12 +30,12 @@
   {"slug":"economics","name":"Economics","count":150,"chunks":2,"mpt":true},
   {"slug":"national-symbols","name":"National Symbols","count":435,"chunks":1,"mpt":true},
   {"slug":"important-days","name":"Important Days","count":74,"chunks":1,"mpt":true},
-  {"slug":"islamic-gk","name":"Islamic General Knowledge","count":6047,"chunks":14,"mpt":true},
+  {"slug":"islamic-gk","name":"Islamic General Knowledge","count":3790,"chunks":14,"mpt":true},
   {"slug":"computer-basics","name":"Computer Basics","count":2399,"chunks":4,"mpt":true},
   {"slug":"misc-gk","name":"Miscellaneous General Knowledge","count":5174,"chunks":16,"mpt":true},
   {"slug":"general-ability","name":"General Ability","count":900,"chunks":10,"mpt":true},
   {"slug":"current-affairs","name":"Current Affairs","count":750,"chunks":10,"mpt":true},
-  {"slug":"english-grammar","name":"English Grammar","count":2819,"chunks":10,"mpt":true},
+  {"slug":"english-grammar","name":"English Grammar","count":2599,"chunks":10,"mpt":true},
   {"slug":"urdu-language","name":"Urdu Language","count":825,"chunks":2,"mpt":true},
   {"slug":"books-authors","name":"Books and Authors","count":216,"chunks":1,"mpt":true},
   {"slug":"politics-government","name":"Politics and Government","count":378,"chunks":1,"mpt":true},

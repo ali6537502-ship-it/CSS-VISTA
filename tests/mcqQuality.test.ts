@@ -15,6 +15,14 @@ test('the shipped CSS and GK banks contain no deterministic duplicate facts', ()
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`)
 })
 
+test('English and Islamiyat reject corrupted or contradictory workbook imports', () => {
+  const result = spawnSync(process.execPath, ['scripts/clean-english-islamiyat-mcqs.mjs', '--check'], {
+    cwd: root,
+    encoding: 'utf8',
+  })
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`)
+})
+
 test('all GK shard counts match the public index', () => {
   const index = JSON.parse(readFileSync(path.join(root, 'public', 'mcq', 'index.json'), 'utf8'))
   let total = 0
