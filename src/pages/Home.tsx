@@ -124,14 +124,14 @@ function HomeHero() {
       <div className="cssv-home-hero-copy">
         <p className="cssv-home-hero-kicker"><span aria-hidden="true" /> Pakistan’s free preparation ecosystem</p>
         <h1 id="css-vista-home-title" className="cssv-home-hero-title">
-          Your sincere <span>preparation partner.</span>
+          Your sincere<br /><span>preparation partner.</span>
         </h1>
         <p className="cssv-home-hero-description">
-          Everything you need for CSS, PMS and one-paper preparation—structured in one free, dependable platform.
+          Everything you need for CSS, PMS and one-paper preparation—serious resources, daily guidance and measurable progress in one place.
         </p>
         <div className="cssv-home-hero-proof" aria-label="CSS Vista platform highlights">
           <span><strong>46K+</strong> verified MCQs</span>
-          <span><strong>100</strong> book summaries</span>
+          <span><strong>Daily</strong> current affairs</span>
           <span><strong>Free</strong> preparation resources</span>
         </div>
         <div className="cssv-home-hero-actions">
@@ -144,12 +144,13 @@ function HomeHero() {
           <span className="cssv-home-account-icon" aria-hidden="true"><UserPlus className="h-5 w-5" /></span>
           <span className="cssv-home-account-status"><i /> Always free</span>
         </div>
-        <p className="cssv-home-hero-kicker">Your preparation, remembered</p>
-        <h2 className="cssv-home-account-title">One free account. Your complete study journey.</h2>
+        <p className="cssv-home-account-overline">Start your personal workspace</p>
+        <h2 className="cssv-home-account-title"><span>Free</span> student account</h2>
+        <p className="cssv-home-account-intro">Turn CSS Vista into your own connected preparation dashboard.</p>
         <ul className="cssv-home-account-benefits" aria-label="Free account benefits">
           <li><CheckCircle2 /><span><strong>Continue instantly</strong> from your last question or resource</span></li>
-          <li><CheckCircle2 /><span><strong>Keep everything together</strong>—progress, bookmarks and mistakes</span></li>
-          <li><CheckCircle2 /><span><strong>Study with direction</strong> using your planner and private Factbook</span></li>
+          <li><CheckCircle2 /><span><strong>Follow Current Affairs</strong> alongside MCQs and study resources</span></li>
+          <li><CheckCircle2 /><span><strong>Keep everything together</strong>—planner, progress, bookmarks and mistakes</span></li>
         </ul>
         <Link to={user ? '/account/dashboard' : '/account'} className="cssv-home-account-cta">
           {user ? 'Open my dashboard' : 'Create my free account'} <ArrowRight className="h-4 w-4" />

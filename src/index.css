@@ -2374,7 +2374,10 @@
   background:
     radial-gradient(circle at 6% 10%, rgb(234 194 92 / 0.18), transparent 28%),
     radial-gradient(circle at 88% 18%, rgb(122 207 166 / 0.34), transparent 34%),
+    linear-gradient(rgb(7 87 61 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(7 87 61 / 0.025) 1px, transparent 1px),
     linear-gradient(135deg, #fffefa 0%, #f2faf5 54%, #dff1e7 100%);
+  background-size: auto, auto, 28px 28px, 28px 28px, auto;
 }
 
 .cssv-home-hero.cssv-home-hero-poster::before {
@@ -2389,13 +2392,13 @@
   z-index: 2;
   margin: 0 0.85rem 0.85rem;
   border: 1px solid rgb(255 255 255 / 0.16);
-  border-radius: 1rem;
-  padding: 1.1rem;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
   color: white;
   background:
     radial-gradient(circle at 96% 0%, rgb(46 152 111 / 0.72), transparent 43%),
     linear-gradient(145deg, #0b5f45, #063d2e 76%);
-  box-shadow: 0 24px 55px -30px rgb(3 54 39 / 0.8), inset 0 1px rgb(255 255 255 / 0.16);
+  box-shadow: 0 30px 65px -30px rgb(3 54 39 / 0.88), inset 0 1px rgb(255 255 255 / 0.18);
 }
 
 .cssv-home-account-heading {
@@ -2429,6 +2432,15 @@
   font-weight: 750;
 }
 
+.cssv-home-account-overline {
+  margin-top: 1.2rem;
+  color: rgb(226 247 236 / 0.68);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
 .cssv-home-account-status i {
   width: 0.38rem;
   height: 0.38rem;
@@ -2459,13 +2471,26 @@
 }
 
 .cssv-home-account-title {
-  max-width: 20ch;
-  margin-top: 0.35rem;
+  max-width: 16ch;
+  margin-top: 0.4rem;
   color: white;
-  font-size: clamp(1.25rem, 5.2vw, 1.75rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-size: clamp(1.75rem, 6.4vw, 2.45rem);
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.cssv-home-account-title span {
+  color: #ffd66f;
+}
+
+.cssv-home-account-intro {
+  max-width: 31ch;
+  margin-top: 0.8rem;
+  color: rgb(231 247 239 / 0.76);
+  font-size: 0.72rem;
+  line-height: 1.55;
 }
 
 .cssv-home-account-benefits {
@@ -2473,7 +2498,7 @@
   gap: 0.6rem;
   margin: 1rem 0;
   color: rgb(231 247 239 / 0.82);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   line-height: 1.45;
 }
 
@@ -2534,6 +2559,13 @@
 .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
   max-width: 13ch;
   font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 760;
+  line-height: 0.92;
+}
+
+.cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title span {
+  display: inline-block;
+  color: #087452;
 }
 
 .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-description {
@@ -2563,22 +2595,22 @@
 
 @media (min-width: 700px) {
   .cssv-home-hero.cssv-home-hero-poster {
-    grid-template-columns: minmax(0, 1.25fr) minmax(290px, 0.75fr);
-    min-height: 400px;
+    grid-template-columns: minmax(0, 1.34fr) minmax(310px, 0.66fr);
+    min-height: 440px;
   }
 
   .cssv-home-account-column {
     align-self: stretch;
     margin: 1.25rem 1.25rem 1.25rem 0;
-    padding: 1.45rem;
+    padding: 1.6rem;
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-copy {
-    padding: 2.4rem 2.2rem 2.4rem 2.6rem;
+    padding: 2.8rem 2.5rem 2.8rem 3rem;
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
-    font-size: clamp(2.7rem, 5vw, 4.25rem);
+    font-size: clamp(3rem, 5.6vw, 4.85rem);
   }
 }
 
