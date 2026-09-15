@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Navigate, Routes, Route } from 'react-router'
+import { Navigate, Routes, Route, useParams } from 'react-router'
 import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -89,6 +89,11 @@ function S({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<PageLoader />}>{children}</Suspense>
 }
 
+function BookSummarySlugRedirect() {
+  const { slug } = useParams<{ slug?: string }>()
+  return <Navigate to={slug ? `/book-summaries?book=${encodeURIComponent(slug)}` : '/book-summaries'} replace />
+}
+
 export default function App() {
   return (
     <Routes>
@@ -125,7 +130,7 @@ export default function App() {
         <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
-        <Route path="/book-summaries/:slug" element={<S><BookSummaries /></S>} />
+        <Route path="/book-summaries/:slug" element={<BookSummarySlugRedirect />} />
         <Route path="/lectures" element={<S><Lectures /></S>} />
         <Route path="/handwritten-notes" element={<S><HandwrittenNotes /></S>} />
         <Route path="/study-planner" element={<S><StudyPlanner /></S>} />
