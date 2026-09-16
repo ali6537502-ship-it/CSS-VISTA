@@ -169,10 +169,10 @@ function SectionHeading({
   visibility?: { open: boolean; onToggle: () => void; label: string }
 }) {
   return (
-    <div className="mb-3 flex items-end justify-between gap-3">
+    <div className="mb-3 flex items-end justify-between gap-3 sm:mb-4">
       <div className="min-w-0">
-        {eyebrow && <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">{eyebrow}</p>}
-        <h2 id={headingId} className="mt-0.5 text-[17px] font-bold tracking-[-0.02em] text-slate-900 sm:text-lg">{title}</h2>
+        {eyebrow && <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700 sm:text-[11px]">{eyebrow}</p>}
+        <h2 id={headingId} className="mt-0.5 text-[17px] font-extrabold tracking-[-0.025em] text-slate-900 sm:text-xl lg:text-[22px]">{title}</h2>
       </div>
       <div className="flex shrink-0 items-center gap-1">
         {action && to && (
@@ -395,7 +395,7 @@ function WeeklyMagazineCard() {
   const available = Boolean(weeklyMagazine.pdfUrl)
 
   return (
-    <section className="cssv-reveal mt-6" aria-labelledby="weekly-magazine-title">
+    <section className="cssv-reveal mt-6 sm:mt-9 lg:mt-14" aria-labelledby="weekly-magazine-title">
       <SectionHeading title="Weekly Current Affairs Magazine" eyebrow="Read · revise · retain" />
       <article className="cssv-glass-panel relative overflow-hidden rounded-2xl border">
         <div className="grid gap-0 min-[360px]:grid-cols-[minmax(0,1fr)_118px] sm:grid-cols-[minmax(0,1fr)_190px] lg:grid-cols-[minmax(0,1fr)_210px]">
@@ -623,7 +623,7 @@ export default function Home() {
           </section>
         )}
 
-        <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
+        <section className="cssv-reveal mt-6 sm:mt-9 lg:mt-14" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
           <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-2.5">
             {quickActions.map((item) => (
@@ -648,7 +648,7 @@ export default function Home() {
 
         <TutorialAnnouncement />
 
-        <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
+        <section className="cssv-reveal mt-6 sm:mt-9 lg:mt-14" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
           <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
           <div id="featured-services" className="grid gap-3 md:grid-cols-3">
             {featuredServices.map((service) => (
@@ -670,21 +670,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="cssv-reveal mt-6" aria-labelledby="all-css-vista-features">
+        <section className="cssv-reveal mt-6 sm:mt-9 lg:mt-14" aria-labelledby="all-css-vista-features">
           <SectionHeading title="All CSS Vista features" eyebrow="Everything in one place" />
-          <div id="all-css-vista-features" className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          <div id="all-css-vista-features" className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
             {allFeatures.map((feature) => {
               const FeatureIcon = cardIcons[feature.icon] ?? BookOpen
               return (
-                <Link key={feature.id} to={feature.to} className="cssv-glass-panel cssv-feature-link cssv-tap group flex min-h-[58px] min-w-0 items-center gap-2.5 rounded-xl border p-2.5">
-                  <span className="cssv-glass-icon grid h-8 w-8 shrink-0 place-items-center rounded-lg text-emerald-800">
-                    <FeatureIcon className="h-4 w-4" />
+                <Link key={feature.id} to={feature.to} className="cssv-glass-panel cssv-feature-link cssv-tap group flex min-h-[66px] min-w-0 items-center gap-3 rounded-2xl border p-3">
+                  <span className="cssv-glass-icon grid h-10 w-10 shrink-0 place-items-center rounded-xl text-emerald-800 transition-transform duration-300 group-hover:scale-105">
+                    <FeatureIcon className="h-[18px] w-[18px]" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="line-clamp-2 block text-[10px] font-bold leading-tight text-slate-800 sm:text-[11px]">{feature.title}</span>
-                    <span className="mt-0.5 line-clamp-1 block text-[8px] text-slate-400 sm:text-[9px]">{feature.desc}</span>
+                    <span className="line-clamp-2 block text-[11px] font-bold leading-tight text-slate-800 sm:text-[12px]">{feature.title}</span>
+                    <span className="mt-0.5 line-clamp-1 block text-[9px] text-slate-400 sm:text-[10px]">{feature.desc}</span>
                   </span>
-                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-slate-300" />
+                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-slate-300 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-emerald-600" />
                 </Link>
               )
             })}

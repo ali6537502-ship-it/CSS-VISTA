@@ -507,7 +507,7 @@
     --border: 150 15% 88%;
     --input: 150 15% 85%;
     --ring: 153 63% 15%;
-    --radius: 0.625rem;
+    --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 153 63% 15%;
@@ -2188,6 +2188,15 @@
 .cssv-glass-subcard:hover {
   border-color: rgb(145 201 175 / 0.7) !important;
   background: rgb(255 255 255 / 0.68) !important;
+}
+
+@media (hover: hover) {
+  .cssv-feature-link:hover {
+    box-shadow:
+      0 20px 40px -26px rgb(5 65 43 / 0.32),
+      inset 0 1px rgb(255 255 255 / 0.96) !important;
+    transform: translateY(-2px);
+  }
 }
 
 .cssv-feature-visual {
