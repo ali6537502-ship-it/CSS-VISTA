@@ -319,7 +319,6 @@ function NotificationBar() {
           {syncLabel && <><span>{syncLabel}</span><span className="text-emerald-200/50">·</span></>}
           <time dateTime={deviceTime.toISOString()}>{timeLabel}</time>
         </div>
-        <SocialLinks compact />
       </div>
     </div>
   )
@@ -635,7 +634,7 @@ export default function Layout() {
       ? Math.ceil(renderSavedPosition + window.innerHeight)
       : undefined
   const routeDirection = resolveRouteDirection(location.key, location.pathname, navigationType)
-  const { user, configured: accountsConfigured } = useAccount()
+  const { user } = useAccount()
 
   useLayoutEffect(() => {
     setMobileOpen(false)
@@ -818,7 +817,10 @@ export default function Layout() {
         event.preventDefault()
         setSearchOpen(true)
       }
-      if (event.key === 'Escape') setSearchOpen(false)
+      if (event.key === 'Escape') {
+        setSearchOpen(false)
+        setOpenDrop(null)
+      }
     }
     const openSearchFromPage = () => setSearchOpen(true)
     window.addEventListener('keydown', openSearch)
@@ -852,8 +854,6 @@ export default function Layout() {
       {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
       <header className="cssv-site-header sticky top-0 z-40 border-b backdrop-blur-xl">
         <div className="cssv-site-header-inner mx-auto flex h-14 max-w-[1520px] items-center gap-1 px-2.5 sm:h-[68px] sm:gap-3 sm:px-6 xl:h-[82px] xl:px-6">
-          <div className="hidden xl:block"><SocialLinks compact /></div>
-
           <button
             className="grid h-9 w-9 place-items-center rounded-lg transition duration-150 ease-out hover:bg-secondary active:scale-95 xl:hidden"
             onClick={() => setMobileOpen(true)}
@@ -935,18 +935,6 @@ export default function Layout() {
             </div>
           </nav>
 
-          <div className="hidden xl:flex xl:items-center xl:gap-2">
-            <Link to="/mentors" className="flex h-9 items-center gap-2 rounded-full border bg-amber-50/60 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-amber-50" aria-label="About CSS Vista and its mentors">
-              <UserCheck className="h-4 w-4 text-emerald-800" />
-              <span>About Us</span>
-            </Link>
-            <Link to="/legal" className="flex h-9 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/70 px-2.5 text-[10px] font-bold text-emerald-950 hover:bg-emerald-100" aria-label="Open CSS Vista policies and legal information">
-              <ShieldCheck className="h-4 w-4 text-emerald-800" />
-              <span>Policies</span>
-            </Link>
-            <div className="hidden 2xl:block"><SocialLinks /></div>
-          </div>
-
           <button
             onClick={() => setSearchOpen(true)}
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:h-10 sm:w-10"
@@ -958,21 +946,51 @@ export default function Layout() {
           </button>
 
           <NotificationCenter />
-          <Link
-            to="/mentors"
-            className="cssv-tap flex h-9 shrink-0 items-center justify-center rounded-full border border-emerald-200 bg-emerald-50/70 px-2 text-[9px] font-extrabold text-emerald-950 transition-colors hover:bg-emerald-100 sm:px-2.5 sm:text-[10px] xl:hidden"
-            aria-label="About CSS Vista and its mentors"
+          <div
+            className="relative shrink-0"
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenDrop(null)
+            }}
           >
-            About Us
-          </Link>
-          <Link
-            to={user ? "/account/dashboard" : "/account"}
-            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-white text-pine transition-colors hover:bg-secondary sm:flex"
-            aria-label={user ? `Open account for ${user.email ?? 'signed-in student'}` : 'Open student account'}
-            title={user ? user.email : accountsConfigured ? 'Sign in' : 'Account setup'}
-          >
-            <UserRound className="h-5 w-5" />
-          </Link>
+            <button
+              type="button"
+              onClick={() => setOpenDrop(openDrop === 'Account' ? null : 'Account')}
+              className={`cssv-tap flex h-9 items-center justify-center gap-1.5 rounded-full border px-2 text-[9px] font-extrabold transition-colors sm:h-10 sm:px-3 sm:text-[10px] ${
+                openDrop === 'Account' ? 'border-emerald-300 bg-emerald-100 text-emerald-950' : 'border-emerald-200 bg-white text-pine hover:bg-emerald-50'
+              }`}
+              aria-label={user ? `Open account menu for ${user.email}` : 'Open My Account menu'}
+              aria-expanded={openDrop === 'Account'}
+              aria-haspopup="menu"
+            >
+              <UserRound className="h-4 w-4" />
+              <span className="hidden min-[430px]:inline">My Account</span>
+              <ChevronDown className={`hidden h-3 w-3 transition-transform sm:block ${openDrop === 'Account' ? 'rotate-180' : ''}`} />
+            </button>
+            <div
+              className={`absolute right-0 top-full z-50 mt-2 w-[min(86vw,270px)] origin-top-right rounded-xl border bg-white p-2 shadow-xl transition-all duration-150 ${
+                openDrop === 'Account' ? 'visible scale-100 opacity-100' : 'invisible scale-95 opacity-0'
+              }`}
+              role="menu"
+              aria-label="My Account and CSS Vista links"
+            >
+              <p className="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground">Student &amp; trust centre</p>
+              <Link to={user ? '/account/dashboard' : '/account'} onClick={() => setOpenDrop(null)} role="menuitem" className="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-pine hover:bg-emerald-50">
+                <UserRound className="h-4 w-4" /> {user ? 'Open My Account' : 'Sign in or create account'}
+              </Link>
+              <Link to="/privacy-policy" onClick={() => setOpenDrop(null)} role="menuitem" className="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-pine hover:bg-emerald-50">
+                <ShieldCheck className="h-4 w-4" /> Privacy Policy
+              </Link>
+              <Link to="/mentors" onClick={() => setOpenDrop(null)} role="menuitem" className="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-pine hover:bg-emerald-50">
+                <UserCheck className="h-4 w-4" /> About CSS Vista
+              </Link>
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer" role="menuitem" className="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-pine hover:bg-emerald-50">
+                <Instagram className="h-4 w-4" /> CSS Vista on Instagram <ExternalLink className="ml-auto h-3.5 w-3.5" />
+              </a>
+              <a href={site.cssGroupLink} target="_blank" rel="noopener noreferrer" role="menuitem" className="flex min-h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold text-pine hover:bg-emerald-50">
+                <WhatsAppIcon className="h-4 w-4" /> Join WhatsApp group <ExternalLink className="ml-auto h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
         </div>
         {searchOpen && (
           <div

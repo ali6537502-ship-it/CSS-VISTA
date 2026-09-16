@@ -75,7 +75,7 @@ export default function Account() {
   if (!loading && user && !reset && !verify && params.get('settings') !== '1') return <Navigate to={safeReturnTo(params.get('returnTo'))} replace />
   const notices = <div aria-live="polite">{error && <p role="alert" className="mb-4 rounded-md bg-red-50 p-3 text-sm text-red-800">{error}</p>}{message && <p role="status" className="mb-4 rounded-md bg-emerald-50 p-3 text-sm text-emerald-900">{message}</p>}</div>
   return <div>
-    <PageHeader title="Your CSS Vista Account" description="Your free account keeps tasks, schedules, Daily English, Current Affairs and study progress together across devices." />
+    <PageHeader title="Your CSS Vista Account" description="Create your free student account, complete your profile and keep your preparation connected across devices." />
     <div className="mx-auto max-w-4xl px-4 py-8 sm:py-10">
       {loading ? <div className="vista-card flex items-center justify-center gap-2 p-10 text-sm text-muted-foreground" role="status"><LoaderCircle className="h-5 w-5 animate-spin" />Checking your account…</div>
         : verify ? <section className="vista-card mx-auto max-w-lg p-6"><h2 className="mb-3 text-xl font-bold text-pine">Verify your email</h2>{notices}{token ? <><p className="mb-5 text-sm text-muted-foreground">This is a legacy confirmation link. New CSS Vista accounts no longer require email verification.</p><button className={button} disabled={busy} onClick={() => void verifyAddress()}>{busy ? 'Verifying…' : 'Verify my email'}</button></> : <p>This verification link is incomplete. <Link className="font-semibold underline" to="/account">Return to sign in.</Link></p>}</section>
@@ -83,6 +83,17 @@ export default function Account() {
         : <div className="grid gap-5 md:grid-cols-[1.05fr_.95fr]"><section className="vista-card p-5 sm:p-6">
           {reset ? <h2 className="mb-5 text-xl font-bold text-pine">Choose a new password</h2> : <div className="mb-5 grid grid-cols-2 gap-2 rounded-lg bg-secondary p-1" role="group" aria-label="Account action">{(['sign-in', 'create'] as const).map((value) => <button key={value} type="button" aria-pressed={mode === value} onClick={() => { setMode(value); clear() }} className={`min-h-11 rounded-md px-3 text-sm font-semibold ${mode === value ? 'bg-white text-pine shadow-sm' : 'text-muted-foreground'}`}>{value === 'sign-in' ? 'Sign in' : 'Create account'}</button>)}</div>}
           {notices}
+          {mode === 'create' && !reset && (
+            <aside className="mb-5 rounded-xl border border-amber-300 bg-amber-50/80 p-4" role="note" aria-label="Profile completion requirement">
+              <div className="flex items-start gap-3">
+                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
+                <div>
+                  <h3 className="font-bold text-amber-950">Complete your profile after registration</h3>
+                  <p className="mt-1 text-sm leading-6 text-amber-900">Your student profile must reach 100% before Daily Current Affairs, cloud progress and connected account features are unlocked. CSS Vista guides you through all 12 checks immediately after account creation.</p>
+                </div>
+              </div>
+            </aside>
+          )}
           {reset && !token && !codeRecovery ? <p className="text-sm">This reset link is incomplete. <Link className="font-semibold underline" to="/account">Request a new password-reset email.</Link></p> : <form onSubmit={(event) => void submit(event)} className="space-y-4">
             {codeRecovery && <><label className="block text-sm font-medium">Account email<input className={field} type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} /></label><label className="block text-sm font-medium">Six-digit reset code<input className={field} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required value={resetCode} onChange={e => setResetCode(e.target.value.replace(/\D/g, ''))} /></label></>}
             {!reset && mode === 'create' && <label className="block text-sm font-medium">Full name<input className={field} required maxLength={160} autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} /></label>}

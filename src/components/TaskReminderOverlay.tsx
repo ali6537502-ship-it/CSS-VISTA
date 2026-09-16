@@ -73,7 +73,10 @@ export default function TaskReminderOverlay() {
     return () => window.clearInterval(interval)
   }, [])
 
-  const activeTasks = useMemo(() => activeStudyTasks(getState().studyScheduleTasks ?? []), [version])
+  const activeTasks = useMemo(() => {
+    void version
+    return activeStudyTasks(getState().studyScheduleTasks ?? [])
+  }, [version])
   const due = useMemo(() => dueStudyTasks(activeTasks), [activeTasks])
   const todayRemaining = useMemo(() => due.today.filter((task) => task.status !== 'completed'), [due.today])
   const carriedForward = due.overdue
@@ -97,7 +100,7 @@ export default function TaskReminderOverlay() {
     if (seen) return
     setActiveSlot(slot)
     setOpen(true)
-  }, [clock, location.pathname, remaining, user?.id, version])
+  }, [clock, location.pathname, remaining, user, version])
 
   function dismiss() {
     if (activeSlot) markReminderSeen(activeSlot)

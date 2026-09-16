@@ -41,8 +41,9 @@ requireText(globalCss, `--font-primary: ${primaryStack};`, 'global Google Sans h
 requireText(globalCss, `font-family: ${primaryStack} !important;`, 'print Google Sans hierarchy')
 requireText(globalCss, 'input::placeholder,', 'placeholder inheritance rule')
 requireText(globalCss, '*::before,', 'pseudo-element global font rule')
-requireText(indexHtml, 'family=Inter:wght@100..900', 'licensed Inter fallback preload')
-requireText(indexHtml, 'family=Noto+Nastaliq+Urdu:wght@400..700', 'Urdu glyph fallback preload')
+requireText(indexHtml, 'href="/fonts/inter-latin-variable.woff2"', 'self-hosted Inter fallback preload')
+requireText(globalCss, 'url("/fonts/inter-latin-variable.woff2")', 'self-hosted Inter font face')
+requireText(globalCss, 'url("/fonts/noto-nastaliq-urdu-arabic-variable.woff2")', 'self-hosted Urdu font face')
 requireText(tailwindConfig, 'sans: googleSansStack', 'Tailwind sans mapping')
 requireText(tailwindConfig, 'serif: googleSansStack', 'Tailwind serif mapping')
 requireText(tailwindConfig, 'mono: googleSansStack', 'Tailwind mono mapping')
@@ -51,7 +52,8 @@ requireText(tailwindConfig, 'display: googleSansStack', 'Tailwind display mappin
 for (const relativePath of files) {
   const source = await readFile(path.join(root, relativePath), 'utf8')
   if (relativePath === 'scripts/audit-font-system.mjs' || relativePath === 'tailwind.config.js') continue
-  if (/Playfair Display|\bGeorgia\b|font-family:\s*['"]Inter['"]|font-family:\s*[^;]*system-ui/i.test(source)) {
+  const sourceWithoutFontFaces = source.replace(/@font-face\s*{[\s\S]*?}/gi, '')
+  if (/Playfair Display|\bGeorgia\b|font-family:\s*['"]Inter['"]|font-family:\s*[^;]*system-ui/i.test(sourceWithoutFontFaces)) {
     failures.push(`Legacy font declaration remains in ${relativePath}`)
   }
   if (/fontFamily\s*[:=]/.test(source)) failures.push(`Inline or component fontFamily override remains in ${relativePath}`)

@@ -2462,6 +2462,9 @@
 
 .cssv-home-hero-copy .cssv-home-hero-kicker {
   gap: 0.5rem;
+  color: #8b651a;
+  font-size: 0.76rem;
+  font-weight: 850;
 }
 
 .cssv-home-hero-copy .cssv-home-hero-kicker > span {
@@ -2558,7 +2561,7 @@
 
 .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
   max-width: 13ch;
-  font-size: clamp(2rem, 10vw, 3rem);
+  font-size: clamp(1.82rem, 8.8vw, 2.65rem);
   font-weight: 760;
   line-height: 0.92;
 }
@@ -2573,11 +2576,11 @@
   border-left: 3px solid #d2a642;
   border-radius: 0 0.75rem 0.75rem 0;
   padding: 0.8rem 0.9rem;
-  color: #334a42;
+  color: #29483d;
   background: rgb(255 255 255 / 0.58);
   box-shadow: 0 12px 30px -26px rgb(4 78 52 / 0.65);
-  font-size: 0.9rem;
-  font-weight: 620;
+  font-size: 0.98rem;
+  font-weight: 680;
   line-height: 1.65;
 }
 
@@ -2619,11 +2622,11 @@
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-title {
-    font-size: clamp(2.75rem, 4.8vw, 4.1rem);
+    font-size: clamp(2.55rem, 4.35vw, 3.8rem);
   }
 
   .cssv-home-hero.cssv-home-hero-poster .cssv-home-hero-description {
-    font-size: 1rem;
+    font-size: 1.06rem;
   }
 }
 

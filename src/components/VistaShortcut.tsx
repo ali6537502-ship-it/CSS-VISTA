@@ -84,7 +84,7 @@ export default function VistaShortcut() {
     accountEntryUser.current = user.id
     const due = dueStudyTasks(getState().studyScheduleTasks ?? [])
     if (due.today.length > 0 || due.overdue.length > 0) setDailyPopupOpen(true)
-  }, [location.pathname, user?.id])
+  }, [location.pathname, user])
 
   useEffect(() => {
     if (!timerRunning) return

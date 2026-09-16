@@ -51,8 +51,8 @@ const modes = [
 export default function GKWorld() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [idx, setIdx] = useState<BankIndex | null>(null)
-  const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
   const [now, setNow] = useState(() => new Date())
+  const query = searchParams.get('q') ?? ''
   const mistakes = getMistakes().length
   const saved = savedMcqIds().length
   const revisionStats = getRevisionStats()
@@ -73,13 +73,6 @@ export default function GKWorld() {
       document.removeEventListener('visibilitychange', resync)
     }
   }, [])
-
-  useEffect(() => {
-    const next = new URLSearchParams()
-    if (searchParams.get('view') === 'mcqs') next.set('view', 'mcqs')
-    if (query.trim()) next.set('q', query.trim())
-    if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
-  }, [query, searchParams, setSearchParams])
 
   const cats = useMemo(() => {
     if (!idx) return []
@@ -183,7 +176,14 @@ export default function GKWorld() {
             <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(event) => {
+                const next = new URLSearchParams(searchParams)
+                const value = event.target.value.trimStart()
+                if (value) next.set('q', value)
+                else next.delete('q')
+                next.set('view', 'mcqs')
+                setSearchParams(next, { replace: true })
+              }}
               placeholder="Search categories…"
               className="h-9 w-56 rounded-md border bg-white pl-8 pr-3 text-sm"
             />

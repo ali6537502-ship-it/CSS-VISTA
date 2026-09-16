@@ -95,8 +95,8 @@ export default function GKCategory() {
       }
     }
     const canonicalUrl = `${SITE_ORIGIN}/gk/cat/${slug}`
-    const title = `${name} MCQs - ${total.toLocaleString('en-US')} Questions | CSS Vista`
-    const description = `Practice ${total.toLocaleString('en-US')} ${name} MCQs for competitive-examination preparation, with four-option questions, answer review and topic filters.`
+    const title = `${name} MCQs | CSS Vista`
+    const description = `Practice ${name} MCQs for competitive-examination preparation, with four-option questions, answer review and topic filters.`
     const previousTitle = document.title
     const metaUpdates = [
       ['meta[name="description"]', description],
@@ -184,7 +184,7 @@ export default function GKCategory() {
     <div>
       <PageHeader
         title={name}
-        description={`${total.toLocaleString()} questions in this category. Select an option to check yourself - the correct answer appears after you attempt, or when you choose Reveal Answer.`}
+        description="Select an option to check yourself—the correct answer appears after you attempt, or when you choose Reveal Answer."
       >
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <Link

@@ -505,8 +505,9 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   const [finished, setFinished] = useState(false)
   const [left, setLeft] = useState(timeSec)
   const [resultTimeSeconds, setResultTimeSeconds] = useState(0)
-  const startRef = useRef(Date.now())
-  const deadlineRef = useRef(exam && timeSec > 0 ? startRef.current + timeSec * 1000 : null)
+  const [initialStartedAt] = useState(() => Date.now())
+  const startRef = useRef(initialStartedAt)
+  const deadlineRef = useRef(exam && timeSec > 0 ? initialStartedAt + timeSec * 1000 : null)
   const questionStartedAtRef = useRef<Record<string, number>>({})
   const finishedRef = useRef(false)
   // Question ids already written to durable progress, so finish() never
@@ -539,11 +540,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       window.removeEventListener('pageshow', updateRemaining)
     }
   }, [exam, finished])
-
-  useEffect(() => {
-    if (exam && left <= 0 && !finished) finish()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [left])
 
   useEffect(() => {
     if (finished) return
@@ -589,6 +585,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     setAnswers(snapshot.answers)
     setRevealed(snapshot.revealed ?? {})
     setPage(snapshot.page || 1)
+    // Event-handler wall-clock access is intentional when restoring a session.
+    // eslint-disable-next-line react-hooks/purity
     startRef.current = snapshot.startedAt || Date.now()
     deadlineRef.current = snapshot.deadline ?? null
     // Answers restored from a practice session were already committed before
@@ -624,11 +622,15 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   function choose(question: BankQuestion, i: number) {
     if (finished) return
     if (answers[question.id] === undefined) {
+      const questionStartedAt = questionStartedAtRef.current[question.id]
+      // Event-handler wall-clock access is intentional for response timing.
+      // eslint-disable-next-line react-hooks/purity
+      const answeredAt = Date.now()
       recordQuestionTiming({
         questionId: question.id,
         category: title,
         mode: mode.includes('mpt') ? 'mpt' : mode === 'daily' || mode === 'five-minute' ? 'challenge' : 'gk',
-        seconds: Math.max(1, Math.round((Date.now() - (questionStartedAtRef.current[question.id] ?? Date.now())) / 1000)),
+        seconds: Math.max(1, Math.round((answeredAt - (questionStartedAt ?? answeredAt)) / 1000)),
         correct: i === question.a,
         selected: i,
         topic: question.s,
@@ -652,6 +654,8 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     writeQuizSnapshot(mode, null)
     setFinished(true)
     setReviewPage(1)
+    // Event-handler wall-clock access is intentional for total attempt time.
+    // eslint-disable-next-line react-hooks/purity
     const secs = Math.round((Date.now() - startRef.current) / 1000)
     setResultTimeSeconds(secs)
     const weaknessCounts = new Map<string, number>()
@@ -693,6 +697,12 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (mode === 'mpt-mock') recordScheduledMock('mpt', sessionDateKey)
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
+
+  useEffect(() => {
+    if (exam && left <= 0 && !finished) finish()
+    // finish is intentionally evaluated only when the countdown changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exam, finished, left])
 
   const mm = Math.floor(Math.max(0, left) / 60)
   const ss = Math.max(0, left) % 60

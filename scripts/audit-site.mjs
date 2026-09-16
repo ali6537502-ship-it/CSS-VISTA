@@ -34,7 +34,11 @@ async function collectFiles(directory) {
 function matchesRoute(pathname) {
   if (pathname === '/') return routePatterns.includes('/')
   return routePatterns.some((pattern) => {
-    const regex = new RegExp(`^${pattern.replace(/:[^/]+/g, '[^/]+')}$`)
+    const regexPattern = pattern
+      .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/:[^/]+/g, '[^/]+')
+      .replace(/\/\*$/, '(?:/.*)?')
+    const regex = new RegExp(`^${regexPattern}$`)
     return regex.test(pathname)
   })
 }

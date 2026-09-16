@@ -9,6 +9,13 @@ const ACCOUNT_CHANGE_KEY = 'cssvista:account-change'
 const PROGRESS_OWNER_KEY = 'cssvista:progress-owner'
 const SYNC_DELAY = 60_000
 function errorMessage(error: unknown) { return error instanceof Error ? error.message : 'The account service is temporarily unavailable. Please try again.' }
+function validAccountUser(value: unknown): value is AccountUser {
+  if (!value || typeof value !== 'object') return false
+  const candidate = value as Partial<AccountUser>
+  return typeof candidate.id === 'string' && candidate.id.length > 0
+    && typeof candidate.email === 'string' && candidate.email.includes('@')
+    && typeof candidate.display_name === 'string'
+}
 function stashProgress(id: string) {
   try { localStorage.setItem(`cssvista:account-progress:${id}`, JSON.stringify(captureProgressSnapshot())) } catch { /* The server retains previously synced progress. */ }
 }
@@ -59,7 +66,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     } finally { if (version === authVersion.current) setLoading(false) }
   }, [applyUser])
   useEffect(() => {
-    const critical = /^\/(?:account|factbook|admin)(?:\/|$)/.test(location.pathname)
+    const critical = /^\/(?:account|dashboard|factbook|admin)(?:\/|$)/.test(location.pathname)
     if (!hydrated.current && (critical || csrfToken())) { hydrated.current = true; void refreshSession() }
     else if (!hydrated.current) setLoading(false)
   }, [location.pathname, refreshSession])
@@ -114,6 +121,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       sessionRequest.current?.abort(); const version = ++authVersion.current
       try {
         const response = await hostingerRequest<{ user: AccountUser }>('auth/login.php', { method: 'POST', body: JSON.stringify({ email, password }) })
+        if (!validAccountUser(response.user)) return { error: 'The account service returned an invalid response. Please refresh and try again.' }
         if (version === authVersion.current) { applyUser(response.user); hydrated.current = true; setLoading(false); broadcast() }
         return {}
       } catch (error) { return { error: errorMessage(error) } }
@@ -124,6 +132,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       sessionRequest.current?.abort(); const version = ++authVersion.current
       try {
         const response = await hostingerRequest<{ user: AccountUser }>('auth/register.php', { method: 'POST', body: JSON.stringify({ email, password, full_name: fullName.trim() }) })
+        if (!validAccountUser(response.user)) return { error: 'Account creation could not be confirmed. Please refresh and try again.' }
         if (version === authVersion.current) { applyUser(response.user); hydrated.current = true; setLoading(false); broadcast() }
         return {}
       } catch (error) { return { error: errorMessage(error) } }

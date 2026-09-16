@@ -100,7 +100,7 @@ export default function MPTQuestionBank() {
         title={`${title} MCQ Bank`}
         description={questions === null
           ? 'Loading the complete verified question bank…'
-          : `${questions.length.toLocaleString()} source questions available in a full, searchable bank. Similar templates are spaced apart for clearer study.`}
+          : 'Open the full, searchable source question bank. Similar templates are spaced apart for clearer study.'}
       />
       <main className="mx-auto max-w-5xl px-4 py-6">
         {questions === null && (
@@ -121,7 +121,7 @@ export default function MPTQuestionBank() {
           <>
             <section className="no-print rounded-xl border bg-white p-3" aria-label="Question bank filters">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-800">
-                <BookOpenCheck className="h-4 w-4" /> Full question bank · {questions.length.toLocaleString()} questions
+                <BookOpenCheck className="h-4 w-4" /> Full question bank
               </div>
               <div className="mt-3 grid gap-2 sm:grid-cols-3">
                 <label className="relative block sm:col-span-3">
@@ -137,7 +137,7 @@ export default function MPTQuestionBank() {
                   <option value="all">All levels</option>
                   <option>Basic</option><option>Intermediate</option><option>Advanced</option>
                 </select>
-                <span className="flex h-10 items-center text-xs text-muted-foreground">{filtered.length.toLocaleString()} matching questions</span>
+                <span className="flex h-10 items-center text-xs text-muted-foreground">Filters apply instantly</span>
               </div>
             </section>
 

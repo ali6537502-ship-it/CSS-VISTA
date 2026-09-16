@@ -14,7 +14,6 @@ const siteOrigin = siteUrl.origin
 const homeCanonical = `${siteOrigin}/`
 const homeTitle = 'CSS Vista | Free CSS, PMS & One-Paper Preparation Platform'
 const homeDescription = 'CSS Vista is a free CSS, PMS and one-paper competitive exam preparation platform in Pakistan with MCQs, past papers, notes, current affairs and study tools.'
-const homePosterPreload = '<link rel="preload" as="image" href="/images/css-vista-main-poster-480.webp" imagesrcset="/images/css-vista-main-poster-480.webp 480w, /images/css-vista-main-poster-720.webp 720w, /images/css-vista-main-poster-1440.webp 1440w, /images/css-vista-main-poster-2400.webp 2400w" imagesizes="(max-width: 640px) calc(100vw - 1.5rem), (max-width: 1280px) calc(100vw - 2rem), 1280px" fetchpriority="high" />'
 
 function escapeHtml(value) {
   return String(value)
@@ -35,16 +34,13 @@ function reinforceHomepage(html) {
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(homeTitle)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(homeDescription)}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${homeCanonical}" />`)
-    .replace(/(<h1\b[^>]*>)[\s\S]*?(<\/h1>)/, '$1CSS Vista$2')
+    .replace(/\s*<link rel="preload" as="image"[^>]*css-vista-main-poster[^>]*\/>\s*/g, '\n')
 
   if (!next.includes('name="application-name"')) {
     next = next.replace('<meta name="theme-color"', '<meta name="application-name" content="CSS Vista" />\n    <meta name="theme-color"')
   }
   if (!next.includes('rel="home"')) {
     next = next.replace('<link rel="canonical"', `<link rel="home" href="${homeCanonical}" title="CSS Vista" />\n    <link rel="canonical"`)
-  }
-  if (!next.includes('css-vista-main-poster-480.webp" imagesrcset=')) {
-    next = next.replace('</head>', `    ${homePosterPreload}\n  </head>`)
   }
   return next
 }
@@ -70,8 +66,8 @@ function reinforceInternalPage(html) {
 const homePath = join(clientDir, 'index.html')
 const originalHome = await readFile(homePath, 'utf8')
 const reinforcedHome = reinforceHomepage(originalHome)
-if (!reinforcedHome.includes('<h1') || !reinforcedHome.includes('>CSS Vista</h1>')) {
-  throw new Error('Could not enforce the exact CSS Vista homepage H1.')
+if (!reinforcedHome.includes('<h1') || !reinforcedHome.includes('Everything you need to prepare.')) {
+  throw new Error('Could not preserve the descriptive CSS Vista homepage H1.')
 }
 if (!reinforcedHome.includes(`rel="canonical" href="${homeCanonical}"`)) {
   throw new Error('Homepage canonical was not preserved.')

@@ -128,7 +128,10 @@ export default function PlannerDashboard() {
     return () => window.removeEventListener(PROGRESS_CHANGED_EVENT, refresh)
   }, [])
 
-  const tasks = useMemo(() => activeStudyTasks(getState().studyScheduleTasks ?? [], readTaskArchiveState()), [version])
+  const tasks = useMemo(() => {
+    void version
+    return activeStudyTasks(getState().studyScheduleTasks ?? [], readTaskArchiveState())
+  }, [version])
   const sorted = useMemo(() => [...tasks].sort((left, right) => `${left.date} ${left.time ?? ''}`.localeCompare(`${right.date} ${right.time ?? ''}`)), [tasks])
   const todayTasks = sorted.filter((task) => task.date === today)
   const todayDone = todayTasks.filter((task) => task.status === 'completed')
