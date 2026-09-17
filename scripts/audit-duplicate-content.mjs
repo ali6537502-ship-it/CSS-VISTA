@@ -11,14 +11,15 @@
  * noindex. Padding it with filler is not a remedy.
  */
 import { readFile, readdir } from 'node:fs/promises'
-import { join, resolve, relative } from 'node:path'
+import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { resolveClientDir } from './lib/client-dir.mjs'
 import {
   contentFingerprint, extractRootHtml, isPlaceholderContent, primaryContentText, shingles, similarity,
 } from './lib/content-quality.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const clientDir = process.env.CSSV_CLIENT_DIR ? resolve(root, process.env.CSSV_CLIENT_DIR) : join(root, 'dist', 'client')
+const clientDir = resolveClientDir(root)
 const strict = process.env.CSSV_STRICT_CONTENT_VALIDATION === 'true'
 
 /** Near-duplicate threshold for two indexable pages' primary content. */

@@ -12,16 +12,18 @@
  * still produces a genuine not-found response instead of a homepage soft 404.
  */
 import { readFile } from 'node:fs/promises'
-import { join, resolve } from 'node:path'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseHtaccess, resolveRequest } from './lib/htaccess-resolver.mjs'
 import { loadPastPaperContent } from './lib/past-paper-content.mjs'
+import { loadTsData } from './lib/load-ts-data.mjs'
+import { resolveClientDir } from './lib/client-dir.mjs'
 import {
-  CANONICAL_ORIGIN, ROUTE_REGISTRY, ROUTE_REDIRECTS, findRouteDefinition,
+  CANONICAL_ORIGIN, ROUTE_REGISTRY, ROUTE_REDIRECTS, findRedirect, findRouteDefinition,
 } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const clientDir = process.env.CSSV_CLIENT_DIR ? resolve(root, process.env.CSSV_CLIENT_DIR) : join(root, 'dist', 'client')
+const clientDir = resolveClientDir(root)
 
 const rules = parseHtaccess(await readFile(join(clientDir, '.htaccess'), 'utf8'))
 const failures = []
@@ -61,6 +63,65 @@ async function check(path, expectation) {
     failures.push(`${path}: non-indexable route served with robots "${robots}"`)
   }
   return { html, canonical, robots, file: result.file }
+}
+
+// --- Router and registry must agree ---------------------------------------
+// A route that exists in the client router but not in the registry has no
+// policy and, more importantly, no server rewrite rule: it 404s the moment a
+// visitor pastes the URL or refreshes. This is the check that stops a new page
+// from silently becoming a dead page.
+function routerPaths(source, prefix = '') {
+  return [...source.matchAll(/<Route\s+path="([^"]+)"/g)]
+    .map((match) => match[1])
+    .filter((path) => path !== '*' && !path.endsWith('/*'))
+    .map((path) => (path.startsWith('/') ? path : `${prefix}/${path}`.replace(/\/+/g, '/')))
+}
+
+const appRoutes = routerPaths(await readFile(join(root, 'src', 'App.tsx'), 'utf8'))
+const accountRoutes = routerPaths(
+  await readFile(join(root, 'src', 'features', 'current-affairs', 'Workspace.tsx'), 'utf8'),
+  '/account',
+)
+
+/**
+ * Router pattern routes whose concrete instances are enumerated from data and
+ * verified below instead of by a registry pattern entry. An unknown slug under
+ * one of these must 404 — the page itself renders not-found — so a catch-all
+ * registry entry would be wrong. The named check is what keeps every REAL slug
+ * registered and reachable.
+ */
+const PATTERN_ROUTES_VERIFIED_FROM_DATA = new Map([
+  ['/subjects/compulsory/:slug', 'every compulsorySubjects slug is checked below'],
+])
+
+for (const path of [...appRoutes, ...accountRoutes]) {
+  if (PATTERN_ROUTES_VERIFIED_FROM_DATA.has(path)) continue
+  // A concrete probe path, so pattern routes are matched by shape.
+  const probe = path.replace(/:[^/]+/g, 'probe')
+  if (findRouteDefinition(probe) || findRedirect(probe)) continue
+  failures.push(`router route ${path} has no entry in the route registry, so it has no policy and no server rewrite rule`)
+}
+
+// --- Data-driven families must be fully covered ----------------------------
+// Compulsory subject pages are generated from the syllabus data. A subject
+// added there without a matching registry entry would 404 on direct
+// navigation, which no other check would notice.
+const { compulsorySubjects } = await loadTsData(join(root, 'src', 'data', 'syllabus.ts'))
+for (const subject of compulsorySubjects) {
+  const path = `/subjects/compulsory/${subject.slug}`
+  if (!findRouteDefinition(path)) {
+    failures.push(`compulsory subject "${subject.name}" has no registry entry for ${path}`)
+    continue
+  }
+  const result = resolveRequest(rules, clientDir, path)
+  if (result.status !== 200) failures.push(`${path} returned HTTP ${result.status} on direct navigation`)
+}
+
+// An unregistered subject slug must be a genuine 404, not a silently served
+// shell — the page component itself renders not-found for it.
+const unknownSubject = resolveRequest(rules, clientDir, '/subjects/compulsory/not-a-real-subject')
+if (unknownSubject.status !== 404) {
+  failures.push(`an unknown compulsory subject slug returned HTTP ${unknownSubject.status} instead of 404`)
 }
 
 // --- Registry routes -------------------------------------------------------
