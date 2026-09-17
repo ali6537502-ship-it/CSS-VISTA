@@ -4,6 +4,7 @@ import {
   ADSENSE_PUBLISHER_ID,
   ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID,
   canShowAuthenticatedAccountAd,
+  deriveAdPageState,
   getAdRoutePolicy,
   isAdSuppressedState,
   shouldProtectVignetteLink,
@@ -223,5 +224,61 @@ test('indexability fails closed for every content class that is not publishable'
   assert.deepEqual(
     { known: unknown.known, indexable: unknown.indexable, sitemap: unknown.sitemap, adMode: unknown.adMode },
     { known: false, indexable: false, sitemap: false, adMode: 'disabled' },
+  )
+})
+
+// ---------------------------------------------------------------------------
+// The provider derives its page state from this function, so these assertions
+// cover what production actually does rather than a copy of the logic.
+// ---------------------------------------------------------------------------
+
+/** Auto Ads eligibility exactly as AdSenseProvider computes it. */
+function autoAdsFor(pathname: string, search: string, session: {
+  user?: unknown
+  loading?: boolean
+  passwordRecovery?: boolean
+}) {
+  const state = deriveAdPageState({ pathname, search, user: session.user ?? null, ...session })
+  return getAdRoutePolicy(pathname, search, state).autoAdsEnabled
+}
+
+test('Auto Ads never load over a sign-in, registration or password form', () => {
+  const signedOut = { user: null }
+  const signedIn = { user: { id: 'student' } }
+
+  // The account route hosts both the credential form and the signed-in
+  // overview. Signed out it is a transaction and must carry no advertising.
+  assert.equal(autoAdsFor('/account', '', signedOut), false)
+  assert.equal(autoAdsFor('/account', '', { ...signedIn, passwordRecovery: true }), false)
+  assert.equal(autoAdsFor('/account', '?reset=1', signedIn), false)
+  assert.equal(autoAdsFor('/account', '', { ...signedOut, loading: true }), false)
+  assert.equal(autoAdsFor('/account', '', signedIn), true)
+
+  // Every other authenticated route behaves the same way.
+  for (const path of ['/account/dashboard', '/dashboard', '/factbook', '/exam-intelligence']) {
+    assert.equal(autoAdsFor(path, '', signedOut), false, `${path} signed out`)
+    assert.equal(autoAdsFor(path, '', signedIn), true, `${path} signed in`)
+  }
+
+  // Admin stays ad-free in every state.
+  for (const session of [signedOut, signedIn]) {
+    assert.equal(autoAdsFor('/admin', '', session), false)
+    assert.equal(autoAdsFor('/admin/login', '', session), false)
+  }
+
+  // Public content is unaffected by whether anyone is signed in.
+  for (const session of [signedOut, signedIn]) {
+    assert.equal(autoAdsFor('/notes', '', session), true)
+    assert.equal(autoAdsFor('/privacy-policy', '', session), false)
+  }
+})
+
+test('the provider supplies the page state, so suppression is not inert', async () => {
+  const source = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Ads.tsx', import.meta.url), 'utf8'))
+  const provider = source.slice(source.indexOf('export function AdSenseProvider'))
+  assert.ok(provider.includes('deriveAdPageState('), 'AdSenseProvider must derive the live page state')
+  assert.ok(
+    /getAdRoutePolicy\(\s*location\.pathname,\s*location\.search,\s*pageState/.test(provider),
+    'AdSenseProvider must pass the page state into the policy',
   )
 })

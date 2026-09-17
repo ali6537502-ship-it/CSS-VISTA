@@ -14,10 +14,11 @@
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { join, resolve, dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { spawnSync } from 'node:child_process'
 import { installDomShim } from './lib/dom-shim.mjs'
 import { primaryContentText, isPlaceholderContent } from './lib/content-quality.mjs'
+import { servedFileFor } from './lib/served-paths.mjs'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -25,11 +26,6 @@ const clientDir = process.env.CSSV_CLIENT_DIR
   ? resolve(root, process.env.CSSV_CLIENT_DIR)
   : join(root, 'dist', 'client')
 const ssrDir = join(root, 'dist-ssr')
-
-function staticRouteFile(routePath) {
-  const name = routePath.replace(/^\/+|\/+$/g, '').replaceAll('/', '--') || 'home'
-  return `${name}.html`
-}
 
 /** Build the SSR bundle from the real application source. */
 function buildSsrBundle() {
@@ -44,7 +40,7 @@ function buildSsrBundle() {
 
 buildSsrBundle()
 installDomShim()
-const { renderAll } = await import(new URL(`file://${join(ssrDir, 'entry.js')}`).href)
+const { renderAll } = await import(pathToFileURL(join(ssrDir, 'entry.js')).href)
 
 const rendered = new Map()
 const failures = []
@@ -79,9 +75,7 @@ for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
   const html = rendered.get(route.path)
   if (!html) continue
 
-  const target = route.path === '/'
-    ? join(clientDir, 'index.html')
-    : join(clientDir, 'seo', 'routes', staticRouteFile(route.path))
+  const target = join(clientDir, servedFileFor(route.path))
 
   let shell
   try {

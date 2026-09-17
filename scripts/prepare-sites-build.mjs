@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadPastPaperContent } from './lib/past-paper-content.mjs'
+import { SERVED_FILE_OVERRIDES } from './lib/served-paths.mjs'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -63,7 +64,7 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta property="og:type" content="[^"]*" \/>/, `<meta property="og:type" content="${escapeHtml(ogType)}" />`)
     .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeHtml(description)}" />`)
-    .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
+    .replace(/\s*<meta property="og:url" content="[^"]*" \/>/, canonical ? `\n    <meta property="og:url" content="${canonical}" />` : '')
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
     .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${escapeHtml(robots)}" />`)
@@ -125,6 +126,9 @@ function css2026ResultBody() {
 const routeSeoDir = join(clientDir, 'seo', 'routes')
 await mkdir(routeSeoDir, { recursive: true })
 for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
+  // The result page is written by its own generator below, at the same served
+  // path. Emitting a stub here too would ship an unreachable duplicate.
+  if (SERVED_FILE_OVERRIDES.has(route.path)) continue
   const canonical = `${siteOrigin}${route.path}`
   const html = replaceMeta(clientIndex, {
     title: route.title,

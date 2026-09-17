@@ -111,6 +111,32 @@ export function getAdRoutePolicy(pathname: string, search = '', state: AdPageSta
 }
 
 /**
+ * The live page state for a request, derived from the route and the account
+ * session.
+ *
+ * This is the single place that decides "is this an authentication
+ * transaction?", so the provider and the tests cannot drift apart. An
+ * authenticated route with nobody signed in is showing its sign-in,
+ * registration or recovery form, which is never an ad surface whatever the
+ * route's own adMode says.
+ */
+export function deriveAdPageState(input: {
+  pathname: string
+  search?: string
+  user: unknown
+  loading?: boolean
+  passwordRecovery?: boolean
+}): AdPageState {
+  const route = findRouteDefinition(input.pathname)
+  return {
+    loadingState: Boolean(input.loading),
+    authTransaction: (route?.access === 'authenticated' && !input.user)
+      || Boolean(input.passwordRecovery)
+      || new URLSearchParams(input.search ?? '').get('reset') === '1',
+  }
+}
+
+/**
  * The deliberately placed signed-in account unit.
  *
  * Eligibility comes from the route's own `adMode`, so any authenticated route

@@ -185,7 +185,9 @@ function BookReader({
       reader.scrollTop = ((reader.scrollHeight - reader.clientHeight) * saved.progress) / 100
     })
     return () => window.cancelAnimationFrame(frame)
-  }, [book.slug])
+    // Also re-runs when the summary text arrives: restoring against the
+    // body-less catalogue would measure an empty article and lose the position.
+  }, [book.slug, bodyPending])
 
   function persist(patch: Partial<Omit<BookSummaryProgress, 'updatedAt'>>) {
     const next = updateBookSummaryProgress(book.slug, patch)

@@ -88,9 +88,9 @@ for (const group of byFingerprint.values()) {
   }
 }
 
-// Near-duplicates, compared inside each family so the pass stays linear enough
-// to run on every build. Pages in the same directory are the ones generated
-// from a common template, which is exactly where reuse hides.
+// Near-duplicates, compared within each family. Pages in the same directory
+// are the ones generated from a common template, which is exactly where reuse
+// hides, and every pair in a family is compared.
 const families = new Map()
 for (const page of pages) {
   const family = page.file.includes('/') ? page.file.slice(0, page.file.lastIndexOf('/')) : '.'
@@ -99,13 +99,14 @@ for (const page of pages) {
 
 for (const [family, group] of families) {
   if (group.length < 2) continue
-  const sample = group.length > 80 ? group.filter((_, index) => index % Math.ceil(group.length / 80) === 0) : group
+  // Every pair, with no sub-sampling: skipping pages is how a reused template
+  // slips through a duplicate gate.
   let worst = null
-  for (let i = 0; i < sample.length; i += 1) {
-    for (let j = i + 1; j < sample.length; j += 1) {
-      const score = similarity(sample[i].shingles, sample[j].shingles)
+  for (let i = 0; i < group.length; i += 1) {
+    for (let j = i + 1; j < group.length; j += 1) {
+      const score = similarity(group[i].shingles, group[j].shingles)
       if (score > SIMILARITY_LIMIT && (!worst || score > worst.score)) {
-        worst = { score, left: sample[i].file, right: sample[j].file }
+        worst = { score, left: group[i].file, right: group[j].file }
       }
     }
   }

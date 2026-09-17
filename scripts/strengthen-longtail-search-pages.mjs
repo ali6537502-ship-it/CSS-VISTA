@@ -7,7 +7,6 @@ const root = fileURLToPath(new URL('..', import.meta.url))
 const clientDir = process.env.CSSV_CLIENT_DIR
   ? resolve(root, process.env.CSSV_CLIENT_DIR)
   : join(root, 'dist', 'client')
-const publicDir = join(root, 'public')
 
 function escapeHtml(value) {
   return String(value)
@@ -16,18 +15,6 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
-}
-
-function normalize(value) {
-  return String(value || '')
-    .normalize('NFKC')
-    .toLocaleLowerCase()
-    .replaceAll('&', ' and ')
-    .replace(/\bpaper\s+one\b/g, 'paper i')
-    .replace(/\bpaper\s+two\b/g, 'paper ii')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
 }
 
 function shorten(value, max = 156) {

@@ -4,6 +4,7 @@ import {
   ADSENSE_PUBLISHER_ID,
   ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID,
   canShowAuthenticatedAccountAd,
+  deriveAdPageState,
   getAdRoutePolicy,
   shouldProtectVignetteLink,
   type AdRoutePolicy,
@@ -87,7 +88,18 @@ function protectVignetteLinks(currentPath: string, currentSearch: string, root: 
  */
 export function AdSenseProvider({ children }: { children: ReactNode }) {
   const location = useLocation()
-  const policy = getAdRoutePolicy(location.pathname, location.search)
+  const { loading, user, passwordRecovery } = useAccount()
+
+  // The live page state, so the suppression rules actually apply in production
+  // rather than only in tests.
+  const pageState = deriveAdPageState({
+    pathname: location.pathname,
+    search: location.search,
+    user,
+    loading,
+    passwordRecovery,
+  })
+  const policy = getAdRoutePolicy(location.pathname, location.search, pageState)
 
   useEffect(() => {
     protectVignetteLinks(location.pathname, location.search)

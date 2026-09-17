@@ -66,7 +66,13 @@ function conditionsPass(conditions, docRoot, path) {
       // host-normalisation conditions are written to let through.
       value = false
     } else {
-      value = false
+      // Silently treating an unknown variable as false would let a rule guarded
+      // by it be skipped, and the gate would report a pass for a URL it never
+      // actually resolved. Fail loudly so the resolver is extended instead.
+      throw new Error(
+        `htaccess-resolver does not understand RewriteCond ${condition.test} ${condition.pattern}. `
+        + 'Add support for it rather than letting the route audit silently skip the rule.',
+      )
     }
     const isOr = conditions[index - 1]?.flags.includes('OR')
     result = result === null ? value : (isOr ? result || value : result && value)
