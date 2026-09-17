@@ -1,0 +1,120 @@
+name: Stage Current Affairs 2026-09-17
+
+on:
+  push:
+    branches:
+      - current-affairs-2026-09-17-stage
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage-current-affairs-2026-09-17
+  cancel-in-progress: false
+
+jobs:
+  prepare-and-validate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v4
+        with:
+          ref: current-affairs-2026-09-17-stage
+          fetch-depth: 0
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Generate coordinated daily release
+        run: python3 scripts/stage-current-affairs-2026-09-17.py
+
+      - name: Validate dated Current Affairs edition
+        run: node scripts/package-current-affairs.mjs --check
+
+      - name: Validate Current Affairs PHP contract
+        run: php tests/current-affairs-validation.php
+
+      - name: Verify JSON mirrors, counts and daily IDs
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('.')
+          pairs=[
+            ('public/one-liner-gk/current-affairs-archive.json','src/data/bundled/current-affairs-archive.json'),
+            ('public/one-liner-gk/pakistan-current-affairs.json','src/data/bundled/pakistan-current-affairs.json'),
+            ('public/one-liner-gk/index.json','src/data/bundled/index.json'),
+          ]
+          for a,b in pairs:
+            aa=json.loads((root/a).read_text()); bb=json.loads((root/b).read_text())
+            assert aa==bb, f'mirror mismatch: {a} vs {b}'
+          ca=json.loads((root/'public/one-liner-gk/current-affairs-archive.json').read_text())
+          pk=json.loads((root/'public/one-liner-gk/pakistan-current-affairs.json').read_text())
+          assert ca['count']==len(ca['notes'])
+          assert pk['count']==len(pk['notes'])
+          ca_ids=[n['id'] for n in ca['notes']]; pk_ids=[n['id'] for n in pk['notes']]
+          assert len(ca_ids)==len(set(ca_ids)); assert len(pk_ids)==len(set(pk_ids))
+          assert sum(i.startswith('current-affairs-archive-20260917-') for i in ca_ids)==9
+          assert sum(i.startswith('pakistan-current-affairs-20260917-') for i in pk_ids)==6
+          bank=json.loads((root/'public/css-subject-mcqs/current-affairs.json').read_text())
+          ids=[q.get('id') for q in bank]; stems=[q.get('question','').strip().casefold() for q in bank]
+          assert len(ids)==len(set(ids)), 'duplicate MCQ IDs'
+          assert len(stems)==len(set(stems)), 'duplicate MCQ stems'
+          assert sum(str(i).startswith('ca-daily-20260917-') for i in ids)==9
+          release=json.loads((root/'current-affairs-release-2026-09-17.json').read_text())
+          assert release['stories']==9 and release['general_one_liners_added']==9 and release['pakistan_placements_added']==6 and release['mcqs_added']==9
+          print(release)
+          PY
+
+      - name: Audit MCQ data and integrated academics
+        run: |
+          node scripts/audit-mcq-data.mjs
+          node scripts/audit-integrated-academics.mjs
+
+      - name: Build normal Hostinger production artifact
+        env:
+          SITE_ORIGIN: https://www.css-vista.com
+          CSSV_STRICT_CONTENT_VALIDATION: 'false'
+        run: npm run build:hostinger
+
+      - name: Audit Hostinger artifact
+        run: npm run audit:hostinger
+
+      - name: Verify Book Summaries artifact remains intact
+        run: |
+          test -f dist/book-summaries/index.json
+          test -f dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'book-summaries/([A-Za-z0-9-]+)' dist/.htaccess
+
+      - name: Commit only validated coordinated data to staging
+        run: |
+          rm -f current-affairs-release-2026-09-17.json
+          git rm -f scripts/stage-current-affairs-2026-09-17.py .github/workflows/current-affairs-2026-09-17-stage.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            content/current-affairs/2026/09/2026-09-17.json \
+            public/one-liner-gk/current-affairs-archive.json \
+            src/data/bundled/current-affairs-archive.json \
+            public/one-liner-gk/pakistan-current-affairs.json \
+            src/data/bundled/pakistan-current-affairs.json \
+            public/one-liner-gk/index.json \
+            src/data/bundled/index.json \
+            public/css-subject-mcqs/current-affairs.json
+          git diff --cached --check
+          git commit -m 'Stage validated Current Affairs 2026-09-17'
+          git push origin HEAD:current-affairs-2026-09-17-stage
