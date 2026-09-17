@@ -10,6 +10,7 @@ import {
   getGrammarIndex,
   type GrammarCourse,
   type GrammarIndex,
+  grammarIndexNow,
 } from '@/data/languageGrammar'
 
 const PAGE_SIZE = 30
@@ -19,7 +20,9 @@ export default function LanguageGrammar() {
   const [searchParams, setSearchParams] = useSearchParams()
   const initialLanguage: Language = searchParams.get('lang') === 'english' ? 'english' : 'urdu'
   const [language, setLanguage] = useState<Language>(initialLanguage)
-  const [index, setIndex] = useState<GrammarIndex | null>(null)
+  // The index is bundled, so it renders on first paint rather than after an
+  // effect. The effect below still runs and keeps the refresh behaviour.
+  const [index, setIndex] = useState<GrammarIndex | null>(() => grammarIndexNow())
   const [course, setCourse] = useState<GrammarCourse | null>(null)
   const [topicSlug, setTopicSlug] = useState(() => searchParams.get('topic') ?? '')
   const [query, setQuery] = useState(() => searchParams.get('q') ?? '')

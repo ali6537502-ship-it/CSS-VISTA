@@ -9,7 +9,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
-import { getBankIndex, type BankIndex } from '@/data/mcq'
+import { bankIndexNow, getBankIndex, type BankIndex } from '@/data/mcq'
 import { getMistakes, getRevisionStats, savedMcqIds } from '@/lib/progress'
 import { mergedCategoryOverrides } from '@/lib/admin'
 import { DAILY_MOCK_TIME_LABELS, getMockAvailability } from '@/lib/store'
@@ -50,7 +50,9 @@ const modes = [
 
 export default function GKWorld() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [idx, setIdx] = useState<BankIndex | null>(null)
+  // The bundled index renders immediately; getBankIndex() then refreshes it
+  // from the live shard. No visitor and no crawler sees a loading state.
+  const [idx, setIdx] = useState<BankIndex | null>(() => bankIndexNow())
   const [now, setNow] = useState(() => new Date())
   const query = searchParams.get('q') ?? ''
   const mistakes = getMistakes().length

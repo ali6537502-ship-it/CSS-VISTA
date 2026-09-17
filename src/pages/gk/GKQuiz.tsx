@@ -586,7 +586,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     setRevealed(snapshot.revealed ?? {})
     setPage(snapshot.page || 1)
     // Event-handler wall-clock access is intentional when restoring a session.
-    // eslint-disable-next-line react-hooks/purity
     startRef.current = snapshot.startedAt || Date.now()
     deadlineRef.current = snapshot.deadline ?? null
     // Answers restored from a practice session were already committed before
@@ -624,7 +623,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (answers[question.id] === undefined) {
       const questionStartedAt = questionStartedAtRef.current[question.id]
       // Event-handler wall-clock access is intentional for response timing.
-      // eslint-disable-next-line react-hooks/purity
       const answeredAt = Date.now()
       recordQuestionTiming({
         questionId: question.id,
@@ -655,7 +653,6 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     setFinished(true)
     setReviewPage(1)
     // Event-handler wall-clock access is intentional for total attempt time.
-    // eslint-disable-next-line react-hooks/purity
     const secs = Math.round((Date.now() - startRef.current) / 1000)
     setResultTimeSeconds(secs)
     const weaknessCounts = new Map<string, number>()

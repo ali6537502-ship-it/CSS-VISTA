@@ -58,6 +58,14 @@ async function fetchJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>
 }
 
+/**
+ * The grammar index, available synchronously. It is compiled into the bundle,
+ * so neither a visitor nor the build-time prerender needs a loading state.
+ */
+export function grammarIndexNow(): GrammarIndex {
+  return bundledIndex
+}
+
 export function getGrammarIndex(): Promise<GrammarIndex> {
   if (!indexRequest) {
     indexRequest = Promise.resolve(bundledIndex).catch(() => fetchJson<GrammarIndex>('/language-grammar/index.json'))

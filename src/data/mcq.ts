@@ -55,6 +55,15 @@ export function dedupeBankQuestions<T extends { q: string; o?: string[]; a?: num
 }
 
 let indexPromise: Promise<BankIndex> | null = null
+/**
+ * The bundled bank index, available synchronously. `getBankIndex()` still
+ * fetches the live shard so content can be updated without a rebuild; this is
+ * the immediate value to render first instead of a loading state.
+ */
+export function bankIndexNow(): BankIndex {
+  return bundledBankIndex
+}
+
 export function getBankIndex(): Promise<BankIndex> {
   if (!indexPromise) {
     // Try the live shard first (allows future content updates without rebuild),

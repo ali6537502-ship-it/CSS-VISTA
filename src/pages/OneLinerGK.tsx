@@ -10,6 +10,7 @@ import {
   getOneLinerIndex,
   type OneLinerCategory,
   type OneLinerIndex,
+  oneLinerIndexNow,
 } from '@/data/oneLinerGk'
 import { formatOneLiner } from '@/lib/oneLinerFormat'
 
@@ -59,7 +60,9 @@ function OneLinerContent({ text }: { text: string }) {
 
 export default function OneLinerGK() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [index, setIndex] = useState<OneLinerIndex | null>(null)
+  // The index is bundled, so it renders on first paint rather than after an
+  // effect. The effect below still runs and keeps the refresh behaviour.
+  const [index, setIndex] = useState<OneLinerIndex | null>(() => oneLinerIndexNow())
   const [category, setCategory] = useState<OneLinerCategory | null>(null)
   const [selectedSlug, setSelectedSlug] = useState(() => searchParams.get('category') ?? 'general-knowledge')
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')

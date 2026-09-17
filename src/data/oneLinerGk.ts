@@ -55,6 +55,17 @@ async function fetchJson<T>(url: string): Promise<T> {
   return response.json() as Promise<T>
 }
 
+/**
+ * The index, available synchronously.
+ *
+ * It is compiled into the bundle, so there is no reason for a visitor (or the
+ * build-time prerender) to see a loading state before it appears. The promise
+ * form below is kept for callers that also want the runtime refresh.
+ */
+export function oneLinerIndexNow(): OneLinerIndex {
+  return bundledIndex
+}
+
 export function getOneLinerIndex(): Promise<OneLinerIndex> {
   if (!indexRequest) {
     indexRequest = Promise.resolve(bundledIndex).catch(() => fetchJson<OneLinerIndex>('/one-liner-gk/index.json'))
