@@ -39,7 +39,12 @@
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
     "validate:artifact": "bash scripts/validate-artifact.sh",
-    "split:analysis": "node scripts/split-past-paper-analysis.mjs"
+    "split:analysis": "node scripts/split-past-paper-analysis.mjs",
+    "test:routes": "node --test tests/productionRoutes.test.ts",
+    "audit:routes": "node scripts/audit-route-integrity.mjs",
+    "audit:links": "node scripts/audit-internal-links.mjs",
+    "audit:duplicates": "node scripts/audit-duplicate-content.mjs",
+    "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:routes"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

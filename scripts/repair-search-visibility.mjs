@@ -1,7 +1,7 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { loadPastPaperContent } from './lib/past-paper-content.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const clientDir = process.env.CSSV_CLIENT_DIR
@@ -27,7 +27,7 @@ function jsonLd(value) {
   return JSON.stringify(value).replaceAll('<', '\u003c')
 }
 
-function replaceSearchMeta(html, { title, description, canonical, structuredData }) {
+function replaceSearchMeta(html, { title, description, canonical, structuredData, robots = 'index, follow, max-image-preview:large' }) {
   const routeSchema = structuredData
     ? `    <script id="cssv-route-structured-data" type="application/ld+json">${jsonLd(structuredData)}</script>\n`
     : ''
@@ -39,7 +39,7 @@ function replaceSearchMeta(html, { title, description, canonical, structuredData
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
-    .replace(/<meta name="robots" content="[^"]*" \/>/, '<meta name="robots" content="index, follow, max-image-preview:large" />')
+    .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${escapeHtml(robots)}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/\s*<script id="cssv-route-structured-data"[^>]*>[\s\S]*?<\/script>/, '')
     .replace('</head>', `${routeSchema}  </head>`)
@@ -102,7 +102,7 @@ function paperBody(paper, allPapers) {
   const related = relatedPaperLinks(paper, allPapers)
   const relatedLinks = related.map((candidate) => `<li><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers/view/${escapeHtml(candidate.id)}">${escapeHtml(paperTitle(candidate))}</a></li>`).join('')
   const yearPath = `/past-papers/${paper.examination.toLowerCase()}/${paper.year}`
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><section class="mt-7 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">Paper details</h2><dl class="mt-4 grid gap-3 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Examination</dt><dd class="font-bold text-pine">${escapeHtml(paper.examination)}</dd></div><div><dt class="text-xs text-muted-foreground">Year</dt><dd class="font-bold text-pine">${paper.year}</dd></div><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl></section><section class="mt-7"><h2 class="font-display text-xl font-bold text-pine">How to use this past paper</h2><p class="mt-2 text-sm leading-relaxed text-muted-foreground">This archive page identifies the examination, year, subject, paper designation and mode recorded for this paper and links directly to the stored PDF. Review the wording and structure of the questions, then compare the same subject across other available years to identify recurring areas and changes in emphasis. Past papers show what was previously examined; they do not guarantee the content of a future paper.</p></section><div class="mt-6 flex flex-wrap gap-3"><a href="${escapeHtml(paper.fileUrl)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open PDF</a><a href="${escapeHtml(paper.fileUrl)}" download class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Download PDF</a><a href="${yearPath}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${escapeHtml(paper.examination)} ${paper.year} papers</a></div>${relatedLinks ? `<nav class="mt-9 rounded-xl border bg-white p-5" aria-label="Related past papers"><h2 class="font-display text-xl font-bold text-pine">Related past papers</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${relatedLinks}</ul></nav>` : ''}<p class="mt-7 text-sm text-muted-foreground"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete CSS Vista past-paper archive</a>.</p></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">${escapeHtml(paper.examination)} past papers · ${paper.year}</p><h1 class="mt-2 font-display text-3xl font-bold text-pine">${escapeHtml(title)}</h1><p class="mt-3 text-sm leading-relaxed text-muted-foreground">${escapeHtml(paperDescription(paper))}</p><section class="mt-7 rounded-xl border bg-white p-5"><h2 class="font-display text-xl font-bold text-pine">Paper details</h2><dl class="mt-4 grid gap-3 sm:grid-cols-2"><div><dt class="text-xs text-muted-foreground">Examination</dt><dd class="font-bold text-pine">${escapeHtml(paper.examination)}</dd></div><div><dt class="text-xs text-muted-foreground">Year</dt><dd class="font-bold text-pine">${paper.year}</dd></div><div><dt class="text-xs text-muted-foreground">Subject</dt><dd class="font-bold text-pine">${escapeHtml(paper.subject)}</dd></div><div><dt class="text-xs text-muted-foreground">Paper</dt><dd class="font-bold text-pine">${escapeHtml(paper.paper)}</dd></div><div><dt class="text-xs text-muted-foreground">Subject type</dt><dd class="font-bold text-pine">${escapeHtml(paper.subjectType)}</dd></div><div><dt class="text-xs text-muted-foreground">Mode</dt><dd class="font-bold text-pine">${escapeHtml(paper.mode)}</dd></div></dl></section><div class="mt-6 flex flex-wrap gap-3"><a href="${escapeHtml(paper.fileUrl)}" class="rounded-lg bg-pine px-4 py-3 text-sm font-bold text-white">Open PDF</a><a href="${escapeHtml(paper.fileUrl)}" download class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">Download PDF</a><a href="${yearPath}" class="rounded-lg border px-4 py-3 text-sm font-bold text-pine">All ${escapeHtml(paper.examination)} ${paper.year} papers</a></div>${relatedLinks ? `<nav class="mt-9 rounded-xl border bg-white p-5" aria-label="Related past papers"><h2 class="font-display text-xl font-bold text-pine">Related past papers</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${relatedLinks}</ul></nav>` : ''}<p class="mt-7 text-sm text-muted-foreground"><a class="font-semibold text-emerald-800 underline underline-offset-2" href="/past-papers">Browse the complete CSS Vista past-paper archive</a>.</p></main>`
 }
 
 function paperStructuredData(paper, canonical) {
@@ -159,9 +159,10 @@ for (const entry of await readdir(routeSeoDir, { withFileTypes: true })) {
   await writeFile(path, patchOrganizationReferences(html))
 }
 
-const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
+const paperContent = await loadPastPaperContent(root)
+const pastPapers = paperContent.map((entry) => entry.paper)
 const paperSeoDir = join(clientDir, 'seo', 'past-papers')
-for (const paper of pastPapers) {
+for (const { paper, indexable } of paperContent) {
   const path = join(paperSeoDir, `${paper.id}.html`)
   const canonical = `${siteOrigin}/past-papers/view/${paper.id}`
   let html = await readFile(path, 'utf8')
@@ -170,6 +171,9 @@ for (const paper of pastPapers) {
     description: paperDescription(paper),
     canonical,
     structuredData: paperStructuredData(paper, canonical),
+    // A paper page without its recorded questions is a document page: served,
+    // linked and downloadable, but deliberately not published to search.
+    robots: indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow',
   })
   html = replaceRootBody(html, paperBody(paper, pastPapers), `past paper ${paper.id}`)
   await writeFile(path, html)

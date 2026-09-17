@@ -5,6 +5,7 @@ import { ENTRY_TYPE_DEFINITIONS, createEmptyContent } from '../src/features/fact
 import { FACTBOOK_ENTRY_TYPES } from '../src/features/factbook/types.ts'
 import { safeWebUrl, sanitizePlainText, searchableText } from '../src/features/factbook/safety.ts'
 import { getAdRoutePolicy } from '../src/lib/ads.ts'
+import { findRouteDefinition } from '../src/data/routeRegistry.mjs'
 
 test('every supported Factbook entry type has a functional definition', () => {
   assert.equal(FACTBOOK_ENTRY_TYPES.length, 17)
@@ -56,9 +57,20 @@ test('database migration enforces private ownership on every Factbook entity', (
   assert.match(sql, /storage\.foldername\(name\)/i)
 })
 
-test('Factbook route is centrally denied advertising', () => {
+test('Factbook advertising follows the route policy, not the fact that it is private', () => {
+  // The factbook is an ordinary signed-in content page: it stays noindex, and
+  // advertising is decided separately by the route registry's adMode.
+  const route = findRouteDefinition('/factbook')
+  assert.equal(route?.access, 'authenticated')
+  assert.equal(route?.indexable, false)
+  assert.equal(route?.adMode, 'enabled')
+
   const policy = getAdRoutePolicy('/factbook')
-  assert.equal(policy.autoAdsEnabled, false)
+  assert.equal(policy.autoAdsEnabled, true)
   assert.equal(policy.manualAdsEnabled, false)
-  assert.equal(policy.minimumHeight, 0)
+
+  // Transaction, assessment, error and loading states still suppress it.
+  assert.equal(getAdRoutePolicy('/factbook', '', { authTransaction: true }).autoAdsEnabled, false)
+  assert.equal(getAdRoutePolicy('/factbook', '', { activeAssessment: true }).autoAdsEnabled, false)
+  assert.equal(getAdRoutePolicy('/factbook', '', { errorState: true }).autoAdsEnabled, false)
 })

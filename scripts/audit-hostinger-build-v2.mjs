@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
+import { loadPastPaperContent } from './lib/past-paper-content.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -23,6 +24,10 @@ function extractLocs(xml) {
 }
 
 const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
+// Every registered paper still gets a served page; only those with authentic
+// recorded questions are published to search.
+const paperContent = await loadPastPaperContent(root)
+const indexablePapers = paperContent.filter((entry) => entry.indexable)
 const bookLibrary = JSON.parse(await readFile(join(root, 'public', 'book-summaries', 'index.json'), 'utf8'))
 const registeredBooks = Array.isArray(bookLibrary.books) ? bookLibrary.books : []
 
@@ -84,7 +89,11 @@ assert(gkLocs.length > 0, 'GK sitemap must contain at least one category URL')
 assert(gkLocs.every((url) => /^https:\/\/www\.css-vista\.com\/gk\/cat\/[^/?#]+\/?$/.test(url)), 'GK sitemap contains a non-category URL')
 assert(collectionLocs.length === collectionCount, `Expected ${collectionCount} collection sitemap URLs, found ${collectionLocs.length}`)
 assert(collectionLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/(?:css|pms|ppsc|mpt)\/\d{4}\/?$/.test(url)), 'Collection sitemap contains an invalid URL')
-assert(paperLocs.length === registeredPapers.length, `Expected ${registeredPapers.length} past-paper sitemap URLs, found ${paperLocs.length}`)
+// The sitemap follows real content readiness: only papers whose recorded
+// questions CSS Vista actually holds are published to search. The remaining
+// document-only papers stay served, linked and downloadable.
+assert(indexablePapers.length > 0, 'No past-paper page qualified for indexing')
+assert(paperLocs.length === indexablePapers.length, `Expected ${indexablePapers.length} indexable past-paper sitemap URLs, found ${paperLocs.length}`)
 assert(paperLocs.every((url) => /^https:\/\/www\.css-vista\.com\/past-papers\/view\/[A-Za-z0-9-]+\/?$/.test(url)), 'Past-paper sitemap contains an invalid URL')
 
 assert(uniqueLocs.size === allLocs.length, 'Child sitemaps contain duplicate URLs')
@@ -120,19 +129,22 @@ assert(adsTxt.trim() === 'google.com, pub-6131271603014611, DIRECT, f08c47fec094
 assert(!adsTxt.startsWith('\uFEFF'), 'ads.txt contains a byte-order mark')
 assert(verificationFile.trim() === 'google-site-verification: googlec96e2248070e0570.html', 'Search Console verification file is missing or altered')
 
-// The crawler-visible landing copy must remain in the production HTML, but the
-// first viewport should resemble the interactive homepage rather than exposing
-// the separate SEO article while React is starting.
-assert(indexHtml.includes('data-cssv-home-first-paint'), 'Homepage first-paint shell is missing')
-assert(indexHtml.includes('id="cssv-home-first-paint-critical"'), 'Homepage first-paint critical styling is missing')
+// The crawler now receives the real homepage. There is no separate SEO article
+// to hide behind a substitute first-paint shell, so the initial HTML and the
+// hydrated page must describe the same thing.
+assert(!indexHtml.includes('data-cssv-home-first-paint'), 'The retired homepage first-paint shell is back in the production HTML')
 assert(!indexHtml.includes('Preparing your study page'), 'Legacy visible prerender loading message leaked into the homepage')
-assert(indexHtml.includes('What you can do here'), 'Crawler-visible homepage preparation content was removed')
-assert(indexHtml.indexOf('data-cssv-home-first-paint') < indexHtml.indexOf('What you can do here'), 'Homepage first-paint shell must precede crawler-visible landing content')
+assert(!indexHtml.includes('What you can do here'), 'The retired generic SEO landing template is back in the production HTML')
+assert(!/Use .* as the main entry point/.test(indexHtml), 'Generic route-name SEO copy is back in the production HTML')
+assert(indexHtml.includes('Your sincere preparation partner'), 'Homepage initial HTML does not contain the real homepage content')
 assert(indexHtml.includes('href="/legal"'), 'Homepage initial HTML does not expose the Legal & Trust Centre')
 assert(indexHtml.includes('href="/privacy-policy"'), 'Homepage initial HTML does not expose the Privacy Policy')
 
-assert(notesHtml.includes('data-cssv-brand-home-link'), 'Indexable internal pages are missing a visible CSS Vista home-brand link')
-assert(notesHtml.includes('href="/" rel="home"'), 'Internal brand link does not point to the homepage')
+// Server-rendered routes carry the real site header, so the brand link and the
+// primary navigation are present exactly as a visitor sees them.
+assert(/<a[^>]*href="\/"[^>]*>/.test(notesHtml), 'Indexable internal pages are missing a link back to the homepage')
+assert(notesHtml.includes('<nav'), 'Indexable internal pages are missing the real site navigation')
+assert(!/Use .* as the main entry point/.test(notesHtml), 'Generic route-name SEO copy is back on an internal page')
 assert(!notesHtml.includes('__SITE_ORIGIN__'), 'Internal SEO page still contains an unresolved origin placeholder')
 
 assert(htaccess.includes('https://www.css-vista.com%{REQUEST_URI} [R=301'), 'Canonical www/HTTPS redirect is missing')

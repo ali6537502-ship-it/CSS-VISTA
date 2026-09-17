@@ -1,7 +1,7 @@
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { loadPastPaperContent } from './lib/past-paper-content.mjs'
 import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -67,7 +67,7 @@ function replaceMeta(html, { title, description, canonical, body, structuredData
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeHtml(description)}" />`)
     .replace(/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${escapeHtml(robots)}" />`)
-    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${canonical}" />`)
+    .replace(/\s*<link rel="canonical" href="[^"]*" \/>/, canonical ? `\n    <link rel="canonical" href="${canonical}" />` : '')
     .replace('</head>', `${headAdditions ? `${headAdditions}\n` : ''}  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
     .replaceAll('__SITE_ORIGIN__', siteOrigin)
@@ -138,12 +138,16 @@ for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
   else await writeFile(join(routeSeoDir, staticRouteFile(route.path)), html)
 }
 
+// The not-found document is served under the requested (nonexistent) URL, so it
+// must not claim a canonical of its own: `/404` is not a real page, and
+// canonicalising it to `/` would turn every unknown URL into a homepage soft
+// 404. It carries no structured data for the same reason.
 const notFoundHtml = replaceMeta(clientIndex, {
   title: 'Page Not Found | CSS Vista',
   description: 'The requested CSS Vista page could not be found.',
-  canonical: `${siteOrigin}/404`,
+  canonical: null,
   robots: 'noindex, nofollow',
-  structuredData: { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Page not found', url: `${siteOrigin}/404` },
+  structuredData: null,
   body: '<main class="mx-auto max-w-3xl px-4 py-16"><h1 class="font-display text-4xl font-bold text-pine">Page not found</h1><p class="mt-4 text-muted-foreground">The requested page does not exist or has moved.</p><a class="mt-6 inline-block font-bold text-emerald-800 underline" href="/">Return to CSS Vista</a></main>',
 })
 await writeFile(join(clientDir, '404.html'), notFoundHtml)
@@ -171,7 +175,11 @@ await writeFile(htaccessPath, htaccess.replace(
   `  # CSSV_GENERATED_ROUTE_RULES_START\n${routeRules}\n  # CSSV_GENERATED_ROUTE_RULES_END`,
 ))
 
-const pastPapers = (await loadGeneratedPastPapers(root)).filter((paper) => paper.fileUrl)
+// Paper pages are indexable only when CSS Vista holds the paper's real
+// recorded questions. The rest stay served, linked and downloadable.
+const paperContent = await loadPastPaperContent(root)
+const paperIndexable = new Map(paperContent.map((entry) => [entry.paper.id, entry.indexable]))
+const pastPapers = paperContent.map((entry) => entry.paper)
 const paperSeoDir = join(clientDir, 'seo', 'past-papers')
 const collectionSeoDir = join(clientDir, 'seo', 'past-paper-collections')
 await mkdir(paperSeoDir, { recursive: true })
@@ -196,6 +204,7 @@ for (const paper of pastPapers) {
   }
   await writeFile(join(paperSeoDir, `${paper.id}.html`), replaceMeta(clientIndex, {
     title, description, canonical, structuredData, body: paperBody(paper),
+    robots: paperIndexable.get(paper.id) ? 'index, follow' : 'noindex, follow',
   }))
 }
 
@@ -276,10 +285,11 @@ await writeFile(join(clientDir, 'seo', 'css-2026-written-result.html'), replaceM
   additionalMeta: `<meta property="article:published_time" content="${escapeHtml(css2026Result.announcedDate)}" />`,
 }))
 
+// The sitemap follows real content readiness, never route existence.
 const sitemapUrls = [
   ...INDEXABLE_STATIC_ROUTES.map((route) => `${siteOrigin}${route.path}`),
   ...[...collections.keys()].map((key) => `${siteOrigin}/past-papers/${key}`),
-  ...pastPapers.map((paper) => `${siteOrigin}/past-papers/view/${paper.id}`),
+  ...pastPapers.filter((paper) => paperIndexable.get(paper.id)).map((paper) => `${siteOrigin}/past-papers/view/${paper.id}`),
 ]
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => url === css2026ResultCanonical
   ? `  <url><loc>${escapeHtml(url)}</loc><lastmod>${escapeHtml(css2026Result.announcedDate)}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>`

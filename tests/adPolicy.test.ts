@@ -5,9 +5,15 @@ import {
   ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID,
   canShowAuthenticatedAccountAd,
   getAdRoutePolicy,
+  isAdSuppressedState,
   shouldProtectVignetteLink,
 } from '../src/lib/ads.ts'
-import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
+import {
+  FUNCTIONAL_NOINDEX_ROUTES,
+  INDEXABLE_STATIC_ROUTES,
+  ROUTE_REGISTRY,
+  getRoutePolicy,
+} from '../src/data/routeRegistry.mjs'
 
 test('publisher ID is the verified CSS Vista publisher', () => {
   assert.equal(ADSENSE_PUBLISHER_ID, 'ca-pub-6131271603014611')
@@ -33,17 +39,53 @@ test('homepage exposes a stable Auto Ads excluded-area boundary around search an
   assert.ok(lowerContent > hero)
 })
 
-test('private, legal, viewer and active question routes are ad-free', () => {
-  const protectedRoutes = [
-    '/mpt', '/mpt/bank/everyday-science', '/gk/cat/islamic-general-knowledge',
-    '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
-    '/current-affairs',
-    '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
-    '/account', '/dashboard', '/study-planner', '/factbook', '/admin', '/privacy-policy',
-    '/cookie-policy', '/terms-and-conditions', '/disclaimer', '/copyright', '/editorial-policy', '/legal', '/contact',
-    '/answer-timer', '/handwritten-notes', '/lectures', '/not-a-real-route',
+// ---------------------------------------------------------------------------
+// The five policy dimensions are independent. These tests exist specifically to
+// stop "authenticated implies no ads" and "noindex implies no ads" from being
+// reintroduced.
+// ---------------------------------------------------------------------------
+
+test('advertising is independent of indexability', () => {
+  // Indexable public content that deliberately carries no advertising.
+  for (const path of ['/privacy-policy', '/cookie-policy', '/terms-and-conditions', '/contact']) {
+    const policy = getRoutePolicy(path)
+    assert.equal(policy.indexable, true, path)
+    assert.equal(getAdRoutePolicy(path).autoAdsEnabled, false, path)
+  }
+  // Noindex public utility pages that remain ad-eligible.
+  for (const path of ['/gk', '/one-liner-gk', '/book-summaries', '/css-past-paper-analysis']) {
+    const policy = getRoutePolicy(path)
+    assert.equal(policy.indexable, false, path)
+    assert.equal(getAdRoutePolicy(path).autoAdsEnabled, true, path)
+  }
+})
+
+test('advertising is independent of authentication', () => {
+  // Authenticated content pages stay noindex but are ad-eligible by design.
+  const authenticatedContent = [
+    '/account', '/account/dashboard', '/account/current-affairs', '/account/factbook',
+    '/account/saved', '/dashboard', '/factbook', '/exam-intelligence', '/study-planner',
   ]
-  for (const path of protectedRoutes) {
+  for (const path of authenticatedContent) {
+    const policy = getRoutePolicy(path)
+    assert.equal(policy.access, 'authenticated', path)
+    assert.equal(policy.indexable, false, path)
+    assert.equal(policy.adMode, 'enabled', path)
+    assert.equal(getAdRoutePolicy(path).autoAdsEnabled, true, path)
+  }
+})
+
+test('authentication transactions, admin, assessments and viewers stay ad-free', () => {
+  const adFree = [
+    '/account/settings', '/account/search', '/admin', '/admin/login',
+    '/gk/quiz', '/five-minute', '/daily-challenge', '/mpt/bank/everyday-science',
+    '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
+    '/answer-evaluation', '/live-theme-demos',
+    '/css-mcqs', '/test-series', '/answer-timer', '/current-affairs',
+    '/legal', '/disclaimer', '/copyright', '/editorial-policy',
+    '/not-a-real-route',
+  ]
+  for (const path of adFree) {
     const policy = getAdRoutePolicy(path)
     assert.equal(policy.autoAdsEnabled, false, path)
     assert.equal(policy.manualAdsEnabled, false, path)
@@ -51,12 +93,26 @@ test('private, legal, viewer and active question routes are ad-free', () => {
   }
 })
 
-test('only substantial public content is Auto Ads eligible and manual units stay off until a placement is audited', () => {
+test('transaction, error and loading states suppress ads on an otherwise eligible route', () => {
+  assert.equal(getAdRoutePolicy('/account/dashboard').autoAdsEnabled, true)
+  for (const state of [
+    { authTransaction: true },
+    { sensitiveControlsVisible: true },
+    { activeAssessment: true },
+    { errorState: true },
+    { loadingState: true },
+  ]) {
+    assert.ok(isAdSuppressedState(state))
+    assert.equal(getAdRoutePolicy('/account/dashboard', '', state).autoAdsEnabled, false, JSON.stringify(state))
+  }
+  assert.equal(isAdSuppressedState({}), null)
+})
+
+test('substantial public content is Auto Ads eligible and manual units stay off until audited', () => {
   const eligibleRoutes = [
     '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
-    '/fpsc-updates', '/fpsc-syllabus', '/book-summaries', '/gk', '/mentors', '/about',
-    '/one-liner-gk', '/css-past-paper-analysis', '/opinions',
+    '/fpsc-updates', '/fpsc-syllabus', '/mentors', '/about', '/opinions', '/services',
   ]
   for (const path of eligibleRoutes) {
     const policy = getAdRoutePolicy(path)
@@ -66,13 +122,15 @@ test('only substantial public content is Auto Ads eligible and manual units stay
   }
 })
 
-test('unfinished lecture placeholder is noindex, ad-free and absent from static sitemap routes', () => {
+test('the unfinished lecture route is noindex and out of the sitemap but remains usable', () => {
   const route = ROUTE_REGISTRY.find((entry) => entry.path === '/lectures')
   assert.ok(route)
   assert.equal(route.indexable, false)
+  assert.equal(route.sitemap, false)
   assert.equal(route.robots, 'noindex, follow')
-  assert.equal(route.adMode, 'none')
   assert.equal(INDEXABLE_STATIC_ROUTES.some((entry) => entry.path === '/lectures'), false)
+  // Being unindexed must never remove it from the site.
+  assert.equal(FUNCTIONAL_NOINDEX_ROUTES.some((entry) => entry.path === '/lectures'), true)
 })
 
 test('the mixed current-affairs page stays ad-free because it contains an active MCQ state', () => {
@@ -92,18 +150,24 @@ test('vignettes are blocked for protected destinations and sensitive controls', 
   assert.equal(shouldProtectVignetteLink({ currentPath: '/gk/quiz', destinationPath: '/notes' }), true)
 })
 
-test('the account manual ad requires a settled, non-sensitive authenticated state', () => {
+test('the signed-in account unit follows the route policy, not the fact of authentication', () => {
   const authenticated = { authenticated: true }
+  // Ad-eligible authenticated routes.
   assert.equal(canShowAuthenticatedAccountAd('/account', '', authenticated), true)
-  assert.equal(canShowAuthenticatedAccountAd('/dashboard', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account/dashboard', '', authenticated), true)
+  assert.equal(canShowAuthenticatedAccountAd('/dashboard', '', authenticated), true)
+  // Authenticated routes the owner keeps ad-free.
+  assert.equal(canShowAuthenticatedAccountAd('/account/settings', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/admin', '', authenticated), false)
+  // Public routes never use the authenticated unit.
   assert.equal(canShowAuthenticatedAccountAd('/notes', '', authenticated), false)
+  // Unsettled or sensitive states.
   assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: false }), false)
   assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, authLoading: true }), false)
   assert.equal(canShowAuthenticatedAccountAd('/account', '?reset=1', authenticated), false)
   assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, passwordRecovery: true }), false)
   assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, sensitiveControlsVisible: true }), false)
-  assert.equal(getAdRoutePolicy('/account').autoAdsEnabled, false)
-  assert.equal(getAdRoutePolicy('/account').manualAdsEnabled, false)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, authTransaction: true }), false)
 })
 
 test('legacy artificial timing and page-count state is absent', async () => {
@@ -113,6 +177,14 @@ test('legacy artificial timing and page-count state is absent', async () => {
   }
   const componentSource = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Ads.tsx', import.meta.url), 'utf8'))
   assert.equal(componentSource.includes('dataset.cssVistaAdsense'), false)
+})
+
+test('the advertising layer never derives eligibility from indexability or access', async () => {
+  const source = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/lib/ads.ts', import.meta.url), 'utf8'))
+  const eligibility = source.slice(source.indexOf('export function getAdRoutePolicy'))
+  assert.equal(/route\.indexable/.test(eligibility), false, 'ad eligibility must not read route.indexable')
+  assert.equal(/route\.robots/.test(eligibility), false, 'ad eligibility must not read route.robots')
+  assert.equal(/route\.access\b/.test(eligibility.slice(0, eligibility.indexOf('canShowAuthenticatedAccountAd'))), false)
 })
 
 test('privacy and policy pages are discoverable from the global header navigation', async () => {
@@ -131,8 +203,24 @@ test('indexable routes have unique crawlable metadata and unknown paths fail clo
   assert.equal(new Set(INDEXABLE_STATIC_ROUTES.map((route) => route.description)).size, INDEXABLE_STATIC_ROUTES.length)
   for (const route of INDEXABLE_STATIC_ROUTES) {
     assert.match(route.robots, /^index, follow$/)
+    assert.equal(route.sitemap, true, route.path)
     assert.ok(route.h1.length > 8)
     assert.ok(route.description.length > 50)
   }
   assert.equal(getAdRoutePolicy('/made-up-page').autoAdsEnabled, false)
+})
+
+test('indexability fails closed for every content class that is not publishable', () => {
+  for (const route of ROUTE_REGISTRY) {
+    if (['interactive', 'utility', 'private', 'incomplete'].includes(route.contentQuality)) {
+      assert.equal(route.indexable, false, route.path)
+      assert.equal(route.sitemap, false, route.path)
+    }
+    if (route.access !== 'public') assert.equal(route.indexable, false, route.path)
+  }
+  const unknown = getRoutePolicy('/totally/made/up')
+  assert.deepEqual(
+    { known: unknown.known, indexable: unknown.indexable, sitemap: unknown.sitemap, adMode: unknown.adMode },
+    { known: false, indexable: false, sitemap: false, adMode: 'disabled' },
+  )
 })

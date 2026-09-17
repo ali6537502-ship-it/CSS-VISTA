@@ -11,6 +11,7 @@ import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/pro
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { briefingRoot } from '@/features/current-affairs/model'
+import { AuthenticatedAccountAd } from '@/components/Ads'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -294,6 +295,10 @@ export default function MyCssVistaDashboard() {
         </section>
 
         <div className="sr-only"><LayoutDashboard /></div>
+
+        {/* The dashboard is a normal signed-in content page. It stays noindex,
+            but advertising is a separate decision made by the route registry. */}
+        <AuthenticatedAccountAd />
       </div>
     </main>
   )

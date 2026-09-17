@@ -246,14 +246,24 @@ export function ManagedContentAd() {
 }
 
 /**
- * A deliberately placed signed-in account unit. Auto Ads remain disabled on
- * the private route; this component renders only for an authenticated,
- * non-sensitive state and uses the genuine responsive unit created in AdSense.
+ * A deliberately placed signed-in account unit.
+ *
+ * Eligibility comes from the route's own `adMode`, so authentication by itself
+ * never disables advertising. Authentication transactions, sensitive controls,
+ * active assessments, error and loading states still suppress it.
  */
 export function AuthenticatedAccountAd({
   sensitiveControlsVisible = false,
+  authTransaction = false,
+  activeAssessment = false,
+  errorState = false,
+  loadingState = false,
 }: {
   sensitiveControlsVisible?: boolean
+  authTransaction?: boolean
+  activeAssessment?: boolean
+  errorState?: boolean
+  loadingState?: boolean
 }) {
   const location = useLocation()
   const { loading, user, passwordRecovery } = useAccount()
@@ -262,6 +272,10 @@ export function AuthenticatedAccountAd({
     authLoading: loading,
     passwordRecovery,
     sensitiveControlsVisible,
+    authTransaction,
+    activeAssessment,
+    errorState,
+    loadingState,
   })
 
   if (!eligible) return null

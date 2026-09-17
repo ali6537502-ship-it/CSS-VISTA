@@ -44,10 +44,12 @@ await import(`./prepare-sites-build.mjs?target=${target}`)
 if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
   await import('./repair-search-visibility.mjs')
-  await import('./enhance-search-landing-pages.mjs')
+  // Real application content replaces the former route-name SEO templates.
+  run('scripts/prerender-real-content.mjs')
   await import('./enrich-past-paper-collections-before-validation.mjs')
-  if (strictContentValidation) await import('./strengthen-longtail-search-pages.mjs')
-  else await import('./safe-longtail-enrichment.mjs')
+  // Thin-content thresholds are enforced on the normal production path. There
+  // is no permissive variant: a known content defect must not ship.
+  await import('./strengthen-longtail-search-pages.mjs')
   await import('./expand-book-summary-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
@@ -55,6 +57,10 @@ if (target === 'hostinger') {
   run('scripts/package-current-affairs.mjs')
   run('scripts/write-deployment-fingerprint.mjs')
   await import('./audit-hostinger-build-v2.mjs')
+  // Production-integrity gates. These fail the normal build.
+  run('scripts/audit-route-integrity.mjs')
+  run('scripts/audit-internal-links.mjs')
+  run('scripts/audit-duplicate-content.mjs')
 }
 
 if (target === 'sites') {
