@@ -52,15 +52,15 @@ test('owner-supplied topic coverage and today prices are preserved exactly', () 
   const currentPakistan = products.find((product) => product.id === 'ca-pa')!
   const politicalScience = products.find((product) => product.id === 'political-science')!
   const criminology = products.find((product) => product.id === 'criminology')!
-  const duringOffer = Date.parse('2026-08-31T12:00:00+05:00')
-  const afterOffer = Date.parse('2026-09-01T00:00:01+05:00')
+  const duringOffer = Date.parse('2026-09-12T23:59:59+05:00')
+  const afterOffer = Date.parse('2026-09-13T00:00:00+05:00')
 
   assert.equal(currentPakistan.topics.length, 86)
   assert.equal(politicalScience.topics.length, 42)
   assert.equal(criminology.topics.length, 23)
   assert.deepEqual(
     [currentPakistan, politicalScience, criminology].map((product) => getNoteDisplayPrice(product, duringOffer).price),
-    [4900, 2800, 2530],
+    [5250, 3000, 2700],
   )
   assert.equal(isNotesDiscountActive(duringOffer), true)
   assert.equal(isNotesDiscountActive(afterOffer), false)

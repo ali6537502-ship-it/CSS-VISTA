@@ -14,7 +14,14 @@ export interface RouteDefinition {
   manualAdPlacement: boolean
   placementType: 'pre-footer' | 'article-break' | 'category-break' | 'publication-break'
   minimumHeight: number
+  accountAdPlacement?: boolean
+  access: 'public' | 'authenticated' | 'admin'
+  contentQuality: string
+  contentSource?: string | null
+  active: boolean
+  expectedStatus: number
 }
+export const ACCOUNT_AD_ROUTES: Set<string>
 export const CANONICAL_ORIGIN: string
 export const ROUTE_REGISTRY: readonly RouteDefinition[]
 export const INDEXABLE_STATIC_ROUTES: readonly RouteDefinition[]

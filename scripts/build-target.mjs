@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const target = process.argv[2] || 'hostinger'
-const strictContentValidation = process.argv.includes('--strict') || process.env.CSSV_STRICT_CONTENT_VALIDATION === 'true'
+const strictContentValidation = true
 
 if (!['hostinger', 'sites'].includes(target)) {
   throw new Error(`Unknown build target: ${target}`)
@@ -43,18 +43,13 @@ run('node_modules/vite/bin/vite.js', ['build'])
 await import(`./prepare-sites-build.mjs?target=${target}`)
 if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
-  await import('./repair-search-visibility.mjs')
-  await import('./enhance-search-landing-pages.mjs')
-  await import('./enrich-past-paper-collections-before-validation.mjs')
-  if (strictContentValidation) await import('./strengthen-longtail-search-pages.mjs')
-  else await import('./safe-longtail-enrichment.mjs')
   await import('./expand-book-summary-seo.mjs')
-  await import('./polish-prerender-shells.mjs')
-  await import('./reinforce-brand-homepage.mjs')
+  await import('./render-authentic-pages.mjs')
+  await import('./finalize-hostinger-routes.mjs')
   await import('./split-sitemap-index.mjs')
   run('scripts/package-current-affairs.mjs')
   run('scripts/write-deployment-fingerprint.mjs')
-  await import('./audit-hostinger-build-v2.mjs')
+  await import('./audit-production-integrity.mjs')
 }
 
 if (target === 'sites') {

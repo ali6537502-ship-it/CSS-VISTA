@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUp, Check, Clock } from 'lucide-react'
 import { briefingRequest, preferencesBody, setReading } from './api'
 import { briefingRoot, displayDate, preferencesSchema, storySchema, type Preferences, type Story } from './model'
 import { useBriefing } from './useBriefing'
+import { AuthenticatedAccountAd } from '@/components/Ads'
 import { CopyButton, FactCard, LoadError, Loading, Sources, StoryActions } from './ui'
 
 const readerSchema = z.object({ story: storySchema, preferences: preferencesSchema })
@@ -84,5 +85,6 @@ function ReadingDesk({ story, preferences }: { story: Story; preferences: Prefer
       {story.topics.length > 0 && <div className="ca-chips" aria-label="Explore related topics">{story.topics.map((topic) => <Link key={topic} to={'/account/search?q=' + encodeURIComponent(topic)}>{topic}</Link>)}</div>}
       <div className="ca-reading-end"><Check size={20} /><p>Finished reading? Mark this development as read to keep your briefing organised.</p><StoryActions item={{ ...story, ...personal }} onStateChange={setPersonal} /><a className="ca-text-link" href="#reading-top"><ArrowUp size={15} /> Back to top</a></div>
     </div><nav className="ca-contents" aria-label="On this page"><strong>In this development</strong>{contents.filter(([, , shown]) => shown).map(([id, title]) => <a key={id} href={'#' + id}>{title}</a>)}</nav></div>
+    <AuthenticatedAccountAd />
   </article>
 }

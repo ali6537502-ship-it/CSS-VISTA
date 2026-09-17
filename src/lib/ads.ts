@@ -16,6 +16,8 @@ export interface AuthenticatedAccountAdState {
   authLoading?: boolean
   passwordRecovery?: boolean
   sensitiveControlsVisible?: boolean
+  contentLoading?: boolean
+  contentError?: boolean
 }
 
 /**
@@ -74,14 +76,16 @@ export function canShowAuthenticatedAccountAd(
   search: string,
   state: AuthenticatedAccountAdState,
 ) {
-  const path = normalizeRoutePath(pathname)
-  if (path !== '/account') return false
+  const route = findRouteDefinition(pathname)
+  if (!route?.accountAdPlacement) return false
 
   const resetRequested = new URLSearchParams(search).get('reset') === '1'
   return state.authenticated
     && !state.authLoading
     && !state.passwordRecovery
     && !state.sensitiveControlsVisible
+    && !state.contentLoading
+    && !state.contentError
     && !resetRequested
 }
 

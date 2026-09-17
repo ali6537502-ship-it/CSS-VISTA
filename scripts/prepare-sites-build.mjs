@@ -131,7 +131,7 @@ for (const route of ROUTE_REGISTRY.filter((entry) => entry.match === 'exact')) {
     description: route.description,
     canonical,
     robots: route.robots,
-    structuredData: route.path === '/' ? null : routeStructuredData(route, canonical),
+    structuredData: route.path === '/' || !route.indexable ? null : routeStructuredData(route, canonical),
     body: routeBody(route),
   })
   if (route.path === '/') await writeFile(indexPath, html)
@@ -195,7 +195,7 @@ for (const paper of pastPapers) {
     provider: { '@type': 'Organization', name: 'CSS Vista', url: siteOrigin },
   }
   await writeFile(join(paperSeoDir, `${paper.id}.html`), replaceMeta(clientIndex, {
-    title, description, canonical, structuredData, body: paperBody(paper),
+    title, description, canonical, structuredData, body: paperBody(paper).replace(`href="/past-papers/view/${paper.id}"`, `href="${escapeHtml(paper.fileUrl)}"`),
   }))
 }
 
@@ -270,6 +270,7 @@ await writeFile(join(clientDir, 'seo', 'css-2026-written-result.html'), replaceM
   title: css2026ResultTitle,
   description: css2026Result.description,
   canonical: css2026ResultCanonical,
+  robots: ROUTE_REGISTRY.find(route => route.path === css2026Result.pagePath).robots,
   structuredData: css2026ResultStructuredData,
   body: css2026ResultBody(),
   ogType: 'article',

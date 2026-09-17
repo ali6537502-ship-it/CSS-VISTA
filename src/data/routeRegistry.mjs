@@ -1,4 +1,11 @@
+import { CONTENT_RENDERERS } from './contentRenderers.mjs'
 export const CANONICAL_ORIGIN = 'https://www.css-vista.com'
+const RECORD_RENDERERS = new Set(['/past-papers/:exam/:year', '/past-papers/view/:id', '/gk/cat/:slug', '/book-summaries/:slug'])
+export const ACCOUNT_AD_ROUTES = new Set([
+  '/account', '/account/dashboard', '/account/current-affairs',
+  '/account/current-affairs/archive', '/account/current-affairs/:storyId',
+  '/account/factbook', '/account/saved', '/account/search',
+])
 
 const publicPage = (path, title, description, h1, options = {}) => ({
   path,
@@ -7,8 +14,13 @@ const publicPage = (path, title, description, h1, options = {}) => ({
   description,
   h1,
   intro: description,
-  robots: 'index, follow',
-  indexable: true,
+  robots: CONTENT_RENDERERS[path] || RECORD_RENDERERS.has(path) ? 'index, follow' : 'noindex, follow',
+  indexable: Boolean(CONTENT_RENDERERS[path]) || RECORD_RENDERERS.has(path),
+  contentSource: CONTENT_RENDERERS[path]?.[0] || null,
+  contentQuality: CONTENT_RENDERERS[path] ? 'substantial' : RECORD_RENDERERS.has(path) ? 'record' : 'incomplete',
+  access: 'public',
+  active: true,
+  expectedStatus: 200,
   schemaType: 'WebPage',
   adMode: 'content',
   manualAdPlacement: false,
@@ -26,12 +38,17 @@ const protectedPage = (path, title, description, options = {}) => ({
   intro: description,
   robots: 'noindex, follow',
   indexable: false,
+  contentQuality: 'utility',
+  access: path.startsWith('/admin') ? 'admin' : /^\/(?:account|dashboard|factbook)(?:\/|$)/.test(path) ? 'authenticated' : 'public',
+  active: true,
+  expectedStatus: 200,
   schemaType: 'WebPage',
   adMode: 'none',
   manualAdPlacement: false,
   placementType: 'pre-footer',
   minimumHeight: 0,
   ...options,
+  accountAdPlacement: ACCOUNT_AD_ROUTES.has(path),
 })
 
 /**

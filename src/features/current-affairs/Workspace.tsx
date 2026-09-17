@@ -6,6 +6,7 @@ import { archiveSchema, briefingRoot, dateFilters, displayDate, factText, feedSc
 import { useBriefing } from './useBriefing'
 import { CategoryGlance, CopyButton, EditionMeta, Empty, FactCard, LoadError, Loading, Pager, Publication, StoryCardView } from './ui'
 import Reader from './Reader'
+import { AuthenticatedAccountAd } from '@/components/Ads'
 import Settings from './Settings'
 import WorkspaceTabs, { useWorkspaceSection } from './WorkspaceTabs'
 import './current-affairs.css'
@@ -201,6 +202,7 @@ function Feed({ mode }: { mode: 'briefing' | 'facts' | 'saved' | 'search' }) {
           : <Empty title={mode === 'saved' && filters.params.size === 0 ? 'No saved items yet' : 'No results'}>{mode === 'saved' && filters.params.size === 0 ? "You haven't saved any developments yet. Use Save on a development to keep it here." : 'No developments matched your search. Try another date, category or search term.'}</Empty>
       ) : mode === 'facts' ? <Factbook items={result.data.items} /> : <div className="ca-card-grid">{result.data.items.map((item) => <StoryCardView key={item.id + item.saved + item.reading_status} item={item} onChange={result.retry} />)}</div>}
       <Pager page={filters.page} more={result.data.has_more} change={filters.setPage} />
+      {result.data.items.length > 0 && <AuthenticatedAccountAd />}
     </>}
   </>
 }

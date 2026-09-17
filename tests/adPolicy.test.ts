@@ -33,7 +33,7 @@ test('homepage exposes a stable Auto Ads excluded-area boundary around search an
   assert.ok(lowerContent > hero)
 })
 
-test('private, legal, viewer and active question routes are ad-free', () => {
+test('transaction, legal, viewer and configured practice routes do not request automatic ads', () => {
   const protectedRoutes = [
     '/mpt', '/mpt/bank/everyday-science', '/gk/cat/islamic-general-knowledge',
     '/gk/quiz', '/five-minute', '/daily-challenge', '/css-mcqs', '/test-series',
@@ -51,7 +51,7 @@ test('private, legal, viewer and active question routes are ad-free', () => {
   }
 })
 
-test('only substantial public content is Auto Ads eligible and manual units stay off until a placement is audited', () => {
+test('explicit public ad policy is independent of indexability', () => {
   const eligibleRoutes = [
     '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
@@ -113,6 +113,19 @@ test('legacy artificial timing and page-count state is absent', async () => {
   }
   const componentSource = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/components/Ads.tsx', import.meta.url), 'utf8'))
   assert.equal(componentSource.includes('dataset.cssVistaAdsense'), false)
+})
+
+test('authenticated content placements are independent of noindex', () => {
+  for (const path of ['/account/dashboard', '/account/current-affairs', '/account/current-affairs/archive', '/account/current-affairs/example', '/account/factbook', '/account/saved']) {
+    assert.equal(canShowAuthenticatedAccountAd(path, '', { authenticated: true }), true, path)
+    for (const blocked of ['authLoading', 'passwordRecovery', 'sensitiveControlsVisible', 'contentLoading', 'contentError']) {
+      assert.equal(canShowAuthenticatedAccountAd(path, '', { authenticated: true, [blocked]: true }), false, path + blocked)
+    }
+    assert.equal(canShowAuthenticatedAccountAd(path, '', { authenticated: false }), false)
+  }
+  for (const path of ['/account/settings', '/account/unknown', '/admin/login', '/missing']) {
+    assert.equal(canShowAuthenticatedAccountAd(path, '', { authenticated: true }), false, path)
+  }
 })
 
 test('privacy and policy pages are discoverable from the global header navigation', async () => {
