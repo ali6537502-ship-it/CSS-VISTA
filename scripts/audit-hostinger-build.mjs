@@ -1,1 +1,1 @@
-await import('./audit-hostinger-build-v2.mjs')
+await import('./audit-production-integrity.mjs')

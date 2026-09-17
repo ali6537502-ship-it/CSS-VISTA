@@ -43,6 +43,13 @@ test('reasoning bank accepts only its mapped General Science and Ability topics'
   assert.equal(matchesMptBankTopic('Universe and astronomy', definition), false)
 
   const source = JSON.parse(readFileSync(new URL('../public/css-subject-mcqs/general-science-and-ability.json', import.meta.url), 'utf8')) as Array<{ topic?: string }>
-  assert.equal(source.length, mptQuestionBanks.abilities?.expectedCount)
   assert.equal(source.filter((question) => matchesMptBankTopic(question.topic, definition)).length, definition.expectedCount)
+})
+
+test('general abilities count is checked against its dedicated central bank', () => {
+  assert.deepEqual(mptQuestionBanks.abilities.centralSlugs, ['general-ability'])
+  const index = JSON.parse(readFileSync(new URL('../public/mcq/index.json', import.meta.url), 'utf8'))
+  const category = index.categories.find((item: { slug: string }) => item.slug === 'general-ability')
+  assert.ok(category)
+  assert.equal(category.count, mptQuestionBanks.abilities.expectedCount)
 })

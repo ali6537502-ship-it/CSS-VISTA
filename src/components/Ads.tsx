@@ -161,7 +161,6 @@ export function AdSlot({
 
     const initialize = async () => {
       if (!node.isConnected || initializedSlots.has(node)) return
-      initializedSlots.add(node)
       const loaded = await loadAdSenseOnce()
       if (cancelled || !node.isConnected || !loaded) {
         collapse()
@@ -179,6 +178,8 @@ export function AdSlot({
       }, 20_000)
 
       try {
+        if (initializedSlots.has(node)) return
+        initializedSlots.add(node)
         window.adsbygoogle = window.adsbygoogle || []
         window.adsbygoogle.push({})
       } catch {
