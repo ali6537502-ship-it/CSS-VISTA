@@ -94,11 +94,42 @@ try {
   result(false, 'Search Console verification', error instanceof Error ? error.message : String(error))
 }
 
+/**
+ * The primary content a crawler receives, measured inside `<main>` so the
+ * shared header, announcement ticker and footer cannot stand in for a page
+ * that has nothing of its own.
+ */
+function primaryContentWords(body) {
+  const mains = [...body.matchAll(/<main\b[^>]*>([\s\S]*?)<\/main>/gi)].map((match) => match[1])
+  if (!mains.length) return 0
+  const text = mains.join(' ')
+    .replace(/<(script|style|svg)[^>]*>[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z0-9#]+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return text ? text.split(' ').length : 0
+}
+
 for (const path of routes) {
   try {
     const { response, body } = await fetchText(`${origin}${path}`)
     const route = findRouteDefinition(path)
     const canonical = `${origin}${path}`
+    // The deployed page must carry the REAL page content, not an SPA shell and
+    // not a separately authored SEO template. This replaces an older check for
+    // a styling marker that only existed on the retired template pages.
+    const words = primaryContentWords(body)
+    const robots = /<meta name="robots" content="([^"]*)"/.exec(body)?.[1] ?? ''
+
+    // Every deployed page must be the real page. The content threshold applies
+    // to routes the registry publishes to search; a route deliberately kept out
+    // of search is allowed to be a short chooser, but it must actually say so
+    // in its robots directive rather than quietly being thin AND indexable.
+    const contentIsRight = route?.indexable
+      ? words >= 120 && /^index, follow/.test(robots)
+      : /noindex/.test(robots)
+
     const valid = response.status === 200
       && Boolean(route)
       && body.includes(`<title>${escapeHtml(route.title)}</title>`)
@@ -106,10 +137,17 @@ for (const path of routes) {
       && body.includes(route.h1)
       && body.includes('<h1')
       && body.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"')
-      && (body.includes('cssv-prerender-shell') || (path === '/' && body.includes('data-cssv-home-first-paint')))
+      && !body.includes('<div id="root"></div>')
+      && contentIsRight
+      && !/Use .* as the main entry point/.test(body)
+      && !body.includes('What you can do here')
       && !body.includes('__SITE_ORIGIN__')
       && (path !== '/' || !body.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'))
-    result(valid, `initial HTML ${path}`, `${response.status}, canonical ${canonical}`)
+    result(
+      valid,
+      `initial HTML ${path}`,
+      `${response.status}, ${route?.indexable ? 'indexable' : 'noindex'}, ${words} words of primary content, canonical ${canonical}`,
+    )
   } catch (error) {
     result(false, `initial HTML ${path}`, error instanceof Error ? error.message : String(error))
   }
