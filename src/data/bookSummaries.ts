@@ -43,6 +43,25 @@ function isBookSummaryLibrary(value: unknown): value is BookSummaryLibrary {
     ))
 }
 
+import catalogueJson from './bookSummariesCatalogue.generated.json'
+
+/**
+ * The catalogue: every book's identity, cover, category and excerpt, WITHOUT
+ * the summary bodies. It is bundled, so the library renders on first paint
+ * instead of behind a 314 KB fetch, and the build can prerender it.
+ *
+ * Generated from the same source as the full library by
+ * scripts/generate-book-catalogue.mjs, so the two cannot drift.
+ */
+export function bookCatalogueNow(): BookSummaryLibrary {
+  return catalogueJson as BookSummaryLibrary
+}
+
+/** Whether a library carries the summary bodies, or is the catalogue alone. */
+export function hasSummaryBodies(library: BookSummaryLibrary | null): boolean {
+  return Boolean(library) && (library as BookSummaryLibrary & { bodiesIncluded?: boolean }).bodiesIncluded !== false
+}
+
 // This file is a public, version-independent asset. Fetching it directly avoids
 // coupling the library to a content-hashed JavaScript chunk during deployments.
 export async function loadBookSummaries(signal?: AbortSignal): Promise<BookSummaryLibrary> {

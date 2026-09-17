@@ -77,11 +77,12 @@ const INDEXABLE = [
   '/handwritten-notes', '/books', '/opinions', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
   '/copyright', '/editorial-policy', '/contact', '/disclaimer',
+  '/book-summaries',
 ]
 
 /** Routes deliberately kept out of search that must still be fully served. */
 const FUNCTIONAL_NOINDEX = [
-  '/legal', '/gk', '/one-liner-gk', '/language-grammar', '/book-summaries',
+  '/legal', '/gk', '/one-liner-gk', '/language-grammar',
   '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing',
   '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
@@ -111,6 +112,18 @@ test('indexable routes are served with real content, self-canonical and indexabl
     assert.equal(/Use .* as the main entry point/.test(body), false, `${path} contains retired template copy`)
     assert.equal(/What you can do here/.test(body), false, `${path} contains retired template copy`)
     assert.equal(/\b(Loading|under construction|coming soon)\b/i.test(body), false, `${path} shows a placeholder state`)
+  }
+})
+
+test('the book-summary hub lists its real catalogue, not a loading shell', { skip: !built }, () => {
+  const html = served('/book-summaries')
+  const body = text(html)
+  assert.ok(body.split(/\s+/).length > 2000, 'the hub should render the whole shelf')
+  const links = new Set([...html.matchAll(/href="\/book-summaries\/([a-z0-9-]+)"/g)].map((m) => m[1]))
+  assert.ok(links.size >= 100, `expected every book linked from the hub, found ${links.size}`)
+  // Every book it links to must itself be a served, indexable page.
+  for (const slug of [...links].slice(0, 10)) {
+    assert.match(metaRobots(served(`/book-summaries/${slug}`)), /^index, follow/, slug)
   }
 })
 

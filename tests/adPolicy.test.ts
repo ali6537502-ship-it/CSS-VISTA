@@ -53,7 +53,7 @@ test('advertising is independent of indexability', () => {
     assert.equal(getAdRoutePolicy(path).autoAdsEnabled, false, path)
   }
   // Noindex public utility pages that remain ad-eligible.
-  for (const path of ['/gk', '/one-liner-gk', '/book-summaries', '/css-past-paper-analysis']) {
+  for (const path of ['/gk', '/one-liner-gk', '/language-grammar', '/css-past-paper-analysis']) {
     const policy = getRoutePolicy(path)
     assert.equal(policy.indexable, false, path)
     assert.equal(getAdRoutePolicy(path).autoAdsEnabled, true, path)
@@ -113,6 +113,7 @@ test('substantial public content is Auto Ads eligible and manual units stay off 
     '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
     '/fpsc-updates', '/fpsc-syllabus', '/mentors', '/about', '/opinions', '/services',
+    '/book-summaries',
   ]
   for (const path of eligibleRoutes) {
     const policy = getAdRoutePolicy(path)

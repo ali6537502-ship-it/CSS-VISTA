@@ -6,6 +6,8 @@ import {
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import {
+  bookCatalogueNow,
+  hasSummaryBodies,
   loadBookSummaries,
   type BookSummary,
   type BookSummaryLibrary,
@@ -136,6 +138,7 @@ function BookReader({
   onOpenBook,
   readingState,
   onReadingStateChange,
+  bodyPending = false,
 }: {
   book: BookSummary
   categoryName: string
@@ -145,6 +148,8 @@ function BookReader({
   onOpenBook: (book: BookSummary) => void
   readingState: BookSummaryProgress
   onReadingStateChange: (slug: string, state: BookSummaryProgress) => void
+  /** The catalogue is on screen but this summary's text has not arrived yet. */
+  bodyPending?: boolean
 }) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -304,7 +309,15 @@ function BookReader({
               <p className="mt-2 leading-7 text-foreground/85">{book.excerpt}</p>
             </div>
             <div className={`book-summary-reading-copy ${fontSize === 0 ? 'book-text-small' : fontSize === 2 ? 'book-text-large' : ''}`}>
-              <SummaryBody body={book.body} />
+              {bodyPending ? (
+                <div className="space-y-3 py-6" role="status" aria-label="Opening the full summary">
+                  {[1, 2, 3, 4, 5].map((line) => (
+                    <div key={line} className="h-4 animate-pulse rounded bg-secondary" style={{ width: `${100 - line * 7}%` }} />
+                  ))}
+                </div>
+              ) : (
+                <SummaryBody body={book.body} />
+              )}
             </div>
             {book.coverSource && (
               <p className="mt-9 border-t pt-4 text-xs text-muted-foreground">
@@ -349,7 +362,9 @@ export default function BookSummaries() {
   const location = useLocation()
   const { slug: routeBookSlug } = useParams<{ slug?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [library, setLibrary] = useState<BookSummaryLibrary | null>(null)
+  // The bundled catalogue renders the complete shelf immediately; the effect
+  // below replaces it with the full library once the summary bodies arrive.
+  const [library, setLibrary] = useState<BookSummaryLibrary | null>(() => bookCatalogueNow())
   const [error, setError] = useState('')
   const [query, setQuery] = useState(() => searchParams.get('search') ?? '')
   const [category, setCategory] = useState(() => searchParams.get('category') ?? 'all')
@@ -364,7 +379,8 @@ export default function BookSummaries() {
   useEffect(() => {
     const controller = new AbortController()
     setError('')
-    setLibrary(null)
+    // Deliberately not cleared: the catalogue already on screen stays visible
+    // while the bodies load, so there is no flash back to a skeleton.
     loadBookSummaries(controller.signal)
       .then(setLibrary)
       .catch((reason: unknown) => {
@@ -698,6 +714,7 @@ export default function BookSummaries() {
           onOpenBook={(book) => openBook(book, true)}
           readingState={readingStates[activeBook.slug] ?? getBookSummaryProgress(activeBook.slug)}
           onReadingStateChange={(slug, state) => setReadingStates((current) => ({ ...current, [slug]: state }))}
+          bodyPending={!hasSummaryBodies(library)}
         />
       )}
     </div>
