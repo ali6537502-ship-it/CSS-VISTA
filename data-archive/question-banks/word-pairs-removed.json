@@ -1,0 +1,326 @@
+[
+ {
+  "serial_no": 1368,
+  "term": "Accuse / Blame",
+  "file_says": "Blame: Forbid",
+  "correction": "Blame = to hold responsible. \"Forbid\" is unrelated."
+ },
+ {
+  "serial_no": 1370,
+  "term": "Acquitted from / of",
+  "file_says": "\"The preferred phrase\"",
+  "correction": "No distinction is actually given; the entry is empty of content."
+ },
+ {
+  "serial_no": 1383,
+  "term": "Advice / Advise",
+  "file_says": "Advise(V): A piece of one's opinion",
+  "correction": "That defines the NOUN. Advise (v) = to give advice; advice (n) = the opinion."
+ },
+ {
+  "serial_no": 1388,
+  "term": "Affection / Affectation",
+  "file_says": "Affection (adj)",
+  "correction": "Affection is a noun, not an adjective."
+ },
+ {
+  "serial_no": 1412,
+  "term": "Alternate / Alternative",
+  "file_says": "Alternative: Chaise between two things",
+  "correction": "\"Chaise\" should be \"Choice\"."
+ },
+ {
+  "serial_no": 1444,
+  "term": "Attenuate / Extenuate",
+  "file_says": "attenuate: reduce; Extenuate: Make weak and thin",
+  "correction": "SWAPPED. Attenuate = make thin/weaken. Extenuate = to lessen the seriousness of."
+ },
+ {
+  "serial_no": 1471,
+  "term": "Beatles / Betel / Beetle",
+  "file_says": "Beatles: Beat and music",
+  "correction": "Not a definition. The Beatles were a band."
+ },
+ {
+  "serial_no": 1472,
+  "term": "Been / Bean",
+  "file_says": "Been: Occur; Bean: A cereal",
+  "correction": "Been = past participle of \"be\". A bean is a legume, not a cereal."
+ },
+ {
+  "serial_no": 1484,
+  "term": "Blunder / Error / Mistake",
+  "file_says": "definitions run across each other",
+  "correction": "The Error and Mistake definitions are scrambled together and unreadable."
+ },
+ {
+  "serial_no": 1511,
+  "term": "Cain / Cane",
+  "file_says": "Cain: Book of Abrahamic religion",
+  "correction": "Cain is a person in Genesis, not a book."
+ },
+ {
+  "serial_no": 1535,
+  "term": "Cent / Scent / Sent",
+  "file_says": "Sent: The second form of sent",
+  "correction": "Circular. Sent is the past form of SEND."
+ },
+ {
+  "serial_no": 1548,
+  "term": "Choral / Coral",
+  "file_says": "Coral: Hand, red, pink",
+  "correction": "\"Hand\" should be \"Hard\"."
+ },
+ {
+  "serial_no": 1573,
+  "term": "Complement / Complaisant",
+  "file_says": "Complement: Self-satisfied",
+  "correction": "Wrong headword. \"Self-satisfied\" is COMPLACENT; this duplicates row 1571."
+ },
+ {
+  "serial_no": 1591,
+  "term": "Continual / Continuous",
+  "file_says": "Continual: Not interrupted; Continuous: Frequent",
+  "correction": "SWAPPED. Continuous = uninterrupted; continual = repeated with breaks."
+ },
+ {
+  "serial_no": 1594,
+  "term": "Corporal / Corporeal",
+  "file_says": "Corporeal: Having abode",
+  "correction": "Corporeal = bodily, physical."
+ },
+ {
+  "serial_no": 1622,
+  "term": "Defend / Protect",
+  "file_says": "Protect: Approaching danger",
+  "correction": "Garbled. Protect = to keep safe from danger."
+ },
+ {
+  "serial_no": 1654,
+  "term": "Disinterested / Uninterested",
+  "file_says": "Uninterested: Boring",
+  "correction": "Uninterested = not interested. \"Boring\" is uninteresting."
+ },
+ {
+  "serial_no": 1691,
+  "term": "Errand / Errant",
+  "file_says": "Errant: Guilty",
+  "correction": "Errant = straying or wandering — and row 1436 defines it correctly, so the file contradicts itself."
+ },
+ {
+  "serial_no": 1697,
+  "term": "Euphemism / Euphuism",
+  "file_says": "Euphemism: Less relevant word",
+  "correction": "SWAPPED. A euphemism softens an offensive expression; euphuism is an ornate style."
+ },
+ {
+  "serial_no": 1706,
+  "term": "Exhausting / Exhaustive",
+  "file_says": "Exhaustive: Through",
+  "correction": "\"Through\" should be \"Thorough\"."
+ },
+ {
+  "serial_no": 1713,
+  "term": "Factious / Factious / Factitious",
+  "file_says": "headword repeated; \"Factious: Humorous\"",
+  "correction": "Should be FACETIOUS (humorous) / Factious / Factitious."
+ },
+ {
+  "serial_no": 1722,
+  "term": "Fashionable / Fissionable",
+  "file_says": "Fissionable: The nuclei which can combine",
+  "correction": "Backwards. Fission splits nuclei; combining is fusion."
+ },
+ {
+  "serial_no": 1727,
+  "term": "Feat / Feet / Fete",
+  "file_says": "Feat: Magical; Fete: Invitation",
+  "correction": "Feat = an achievement. Fete = a festival or party."
+ },
+ {
+  "serial_no": 1741,
+  "term": "Flounder / Founder",
+  "file_says": "Founder: One who finds",
+  "correction": "Founder = one who establishes something (or, as a verb, to sink)."
+ },
+ {
+  "serial_no": 1743,
+  "term": "Follow / Fellow",
+  "file_says": "Follow: Grasp",
+  "correction": "Follow = to come after or go behind."
+ },
+ {
+  "serial_no": 1763,
+  "term": "Gamble / Gambol",
+  "file_says": "Gambol: Quick/Yum",
+  "correction": "Not a definition. Gambol = to leap or frisk playfully."
+ },
+ {
+  "serial_no": 1766,
+  "term": "Gay / Guy",
+  "file_says": "\"in some contents\"",
+  "correction": "\"contents\" should be \"contexts\"."
+ },
+ {
+  "serial_no": 1819,
+  "term": "Ice / Snow",
+  "file_says": "Ice: Artificial; Snow: Natural",
+  "correction": "Ice is not artificial; both occur naturally."
+ },
+ {
+  "serial_no": 1826,
+  "term": "Imperial / ... / Impunity",
+  "file_says": "Impunity: Disapproving",
+  "correction": "Impunity = exemption from punishment."
+ },
+ {
+  "serial_no": 1852,
+  "term": "Itch / Etch",
+  "file_says": "Etch: attached",
+  "correction": "Etch = to engrave a surface."
+ },
+ {
+  "serial_no": 1861,
+  "term": "Knead / Need",
+  "file_says": "Knead: To make into a slurry",
+  "correction": "Knead = to work dough with the hands."
+ },
+ {
+  "serial_no": 1882,
+  "term": "Loath / Loathe",
+  "file_says": "Loath(N)",
+  "correction": "Loath is an adjective, not a noun."
+ },
+ {
+  "serial_no": 1883,
+  "term": "Loot / Lute",
+  "file_says": "Lute: Flute",
+  "correction": "A lute is a plucked string instrument, not a flute."
+ },
+ {
+  "serial_no": 1886,
+  "term": "Luxuriant / Luxurious",
+  "file_says": "Luxurious: Happy",
+  "correction": "Luxurious = richly comfortable."
+ },
+ {
+  "serial_no": 1927,
+  "term": "Naval / Navel",
+  "file_says": "Navel: The mark of scare",
+  "correction": "\"scare\" should be \"scar\"."
+ },
+ {
+  "serial_no": 1933,
+  "term": "Noose",
+  "file_says": "single entry, no pair",
+  "correction": "Not a word pair; nothing to contrast."
+ },
+ {
+  "serial_no": 1935,
+  "term": "Nous",
+  "file_says": "single entry, no pair",
+  "correction": "Not a word pair; nothing to contrast."
+ },
+ {
+  "serial_no": 1938,
+  "term": "Official / Officious",
+  "file_says": "Official: Government investigation",
+  "correction": "Official = relating to an office or authority."
+ },
+ {
+  "serial_no": 1946,
+  "term": "Pale / Pail",
+  "file_says": "Pail: Basket",
+  "correction": "A pail is a bucket."
+ },
+ {
+  "serial_no": 1958,
+  "term": "Peddle / Pedal / Paddle",
+  "file_says": "Pedal: A leaver worked by the food",
+  "correction": "\"leaver\"->lever, \"food\"->foot."
+ },
+ {
+  "serial_no": 1960,
+  "term": "Perfect / Perfect",
+  "file_says": "headword repeated",
+  "correction": "The second should be PREFECT (a senior pupil)."
+ },
+ {
+  "serial_no": 1980,
+  "term": "Practice / Practise",
+  "file_says": "Practice: Regular exercise; Practise: Work to do",
+  "correction": "Misses the real distinction: practice is the noun, practise the verb (British usage)."
+ },
+ {
+  "serial_no": 2017,
+  "term": "Rob / Steal",
+  "file_says": "Rob: Steal; Steal: Secretly",
+  "correction": "Circular and incomplete."
+ },
+ {
+  "serial_no": 2021,
+  "term": "Rue / Row / Roe",
+  "file_says": "Roe: Ripe testes of male fish",
+  "correction": "Roe normally means the eggs of a female fish."
+ },
+ {
+  "serial_no": 2041,
+  "term": "Sextan / Sexton",
+  "file_says": "Sextan: after an interval of five days",
+  "correction": "Sextan means recurring every sixth day."
+ },
+ {
+  "serial_no": 2046,
+  "term": "Slime / Slim",
+  "file_says": "Slime: Poisonous",
+  "correction": "Slime = a slippery, viscous substance."
+ },
+ {
+  "serial_no": 2057,
+  "term": "Spacious / Specious",
+  "file_says": "Specious: Seeing right",
+  "correction": "\"Seeing\" should be \"Seeming\" — specious = plausible but false."
+ },
+ {
+  "serial_no": 2063,
+  "term": "Stark / Stork",
+  "file_says": "Stark: Dark",
+  "correction": "Stark = bleak, severe or utter."
+ },
+ {
+  "serial_no": 2109,
+  "term": "Vice / Vice / Voice",
+  "file_says": "headword repeated",
+  "correction": "The second should be VISE (a gripping tool)."
+ },
+ {
+  "serial_no": 2110,
+  "term": "Virtual / Virtuous",
+  "file_says": "Virtual: Factual/practical",
+  "correction": "Virtual = in effect though not in name."
+ },
+ {
+  "serial_no": 2115,
+  "term": "Waive / Wave",
+  "file_says": "Wave: Move to and for",
+  "correction": "\"to and fro\"."
+ },
+ {
+  "serial_no": 2134,
+  "term": "Wrath / Wroth",
+  "file_says": "Wroth: Cruel",
+  "correction": "Wroth = angry."
+ },
+ {
+  "serial_no": 1836,
+  "term": "Incipient / Insipid",
+  "file_says": "Incipient: Emerging, developing, or vital",
+  "correction": "\"vital\" does not belong; incipient = just beginning."
+ },
+ {
+  "serial_no": 2003,
+  "term": "Rebellion / Revolution",
+  "file_says": "Revolution: Positive complete change",
+  "correction": "\"Positive\" is editorial; revolutions are not inherently positive."
+ }
+]

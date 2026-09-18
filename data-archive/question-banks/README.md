@@ -72,6 +72,31 @@ Errors already corrected:
 | 1495 | Earth is 4th largest | 5th |
 | 66 | Biotype = same phenotype | same genotype |
 
+## English word pairs
+
+`english-word-pairs.json` — 741 entries, each checked by reading the definition.
+
+All 795 source entries were read. **54 were removed** because their definitions were
+wrong, not merely awkward: Continual/Continuous were swapped, as were
+Euphemism/Euphuism and Attenuate/Extenuate; "Fissionable" was defined as nuclei
+combining (that is fusion); "Lute" as a flute; "Pail" as a basket; "Founder" as
+"one who finds"; "Uninterested" as "boring"; "Cain" as a book. Two entries
+(Noose, Nous) were not word pairs at all, and three repeated a headword instead
+of giving its partner (Perfect/Perfect for Prefect, Vice/Vice for Vise,
+Factious/Factious for Facetious).
+
+`word-pairs-removed.json` lists every removal with the reason, so the decision
+can be reviewed and any entry restored once its definition is fixed.
+
+`english-idioms-UNVERIFIED.json` — 1,253 idioms, **not checked**. Same standing as
+Everyday Science: usable as raw material, not fit to publish unread.
+
+`maths-and-reference.json` — 173 rows. The 60 MCQs include 10 that were solved by
+computation and all 10 were correct.
+
+`urdu-mpt-master.json` — 167 rows of definitions and study notes. Not MCQs, no
+answer key, nothing to verify against.
+
 ## Not covered
 
 - The 1,768 unchecked Everyday Science rows
