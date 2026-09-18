@@ -107,6 +107,24 @@ function ca_publish(PDO $pdo, array $dataset): array
 }
 function ca_today(): string { return (new DateTimeImmutable('now', new DateTimeZone('Asia/Karachi')))->format('Y-m-d'); }
 function ca_visible(): string { return 'i.active=1 AND d.is_published=1 AND d.published_at<=UTC_TIMESTAMP(6)'; }
+// The newest edition a reader can actually open. Editions are published in the
+// evening, so a reader who arrives during the day must land on this date rather
+// than on an empty "today".
+function ca_latest_date(PDO $pdo): ?string
+{
+    static $cached = false; static $value = null;
+    if ($cached) return $value;
+    $cached = true;
+    $result=$pdo->query('SELECT MAX(publication_date) FROM current_affairs_days WHERE is_published=1 AND published_at<=UTC_TIMESTAMP(6)')->fetchColumn();
+    $value = $result ?: null;
+    return $value;
+}
+// 'latest' means the newest published edition; every other value is a real date.
+function ca_resolve_date(PDO $pdo, string $value): string
+{
+    if ($value === 'latest') return ca_latest_date($pdo) ?? ca_today();
+    return ca_date($value);
+}
 function ca_preferences(PDO $pdo, string $userId): array
 {
     $q=$pdo->prepare('SELECT reading_mode,preferred_categories FROM current_affairs_preferences WHERE user_id=?');
@@ -121,11 +139,11 @@ function ca_summary(PDO $pdo, string $userId, string $date): array
 {
     $q=$pdo->prepare('SELECT edition,published_at,updated_at FROM current_affairs_days WHERE publication_date=? AND is_published=1 AND published_at<=UTC_TIMESTAMP(6)');
     $q->execute([$date]); $day=$q->fetch();
-    $latest=$pdo->query('SELECT MAX(publication_date) FROM current_affairs_days WHERE is_published=1 AND published_at<=UTC_TIMESTAMP(6)')->fetchColumn();
+    $latest=ca_latest_date($pdo);
     $q=$pdo->prepare("SELECT i.category,COUNT(*) count,SUM(COALESCE(u.status,'unread')<>'read') unread FROM current_affairs_items i JOIN current_affairs_days d ON d.publication_date=i.publication_date LEFT JOIN current_affairs_user_items u ON u.item_id=i.id AND u.user_id=? WHERE ".ca_visible().' AND i.publication_date=? GROUP BY i.category ORDER BY i.category');
     $q->execute([$userId,$date]);
     $categories=array_map(fn($r)=>['category'=>$r['category'],'count'=>(int)$r['count'],'unread'=>(int)$r['unread']], $q->fetchAll());
-    return ['date'=>$date,'published'=>(bool)$day,'latest_date'=>$latest ?: null,'edition'=>$day['edition'] ?? 'Daily Current Affairs',
+    return ['date'=>$date,'published'=>(bool)$day,'latest_date'=>$latest,'edition'=>$day['edition'] ?? 'Daily Current Affairs',
         'published_at'=>$day ? str_replace(' ','T',$day['published_at']).'Z' : null,
         'updated_at'=>$day ? str_replace(' ','T',$day['updated_at']).'Z' : null,
         'categories'=>$categories,'total'=>array_sum(array_column($categories,'count')),'unread'=>array_sum(array_column($categories,'unread'))];
@@ -149,12 +167,12 @@ function ca_query_param(string $key, int $max = 200): string
     if (!is_string($value) || strlen($value)>$max) throw new InvalidArgumentException('Invalid '.$key.' filter.');
     return trim($value);
 }
-function ca_filters(): array
+function ca_filters(?PDO $pdo = null): array
 {
     $where=''; $params=[];
     foreach (['from'=>'>=','to'=>'<='] as $key=>$op) {
         $value=ca_query_param($key,10);
-        if ($value!=='') { $where.=' AND i.publication_date'.$op.'?'; $params[]=ca_date($value); }
+        if ($value!=='') { $where.=' AND i.publication_date'.$op.'?'; $params[]=$pdo ? ca_resolve_date($pdo,$value) : ca_date($value); }
     }
     if (($category=ca_query_param('category',120))!=='') { $where.=' AND i.category=?'; $params[]=$category; }
     if (ca_query_param('saved',1)==='1') $where.=' AND u.saved=1';

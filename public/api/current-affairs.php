@@ -63,7 +63,7 @@ try {
         if (!$rows) cssv_fail('This development is no longer available.',404,'story_not_found');
         cssv_json(['ok'=>true,'story'=>ca_card($rows[0],true),'preferences'=>ca_preferences($pdo,$userId)]);
     }
-    $date=ca_query_param('date',10); $date=$date!=='' ? ca_date($date) : ca_today();
+    $date=ca_query_param('date',10); $date=$date!=='' ? ca_resolve_date($pdo,$date) : ca_today();
     if ($view==='overview') {
         $reading=ca_query_items($pdo,$userId," AND u.status='opened'",[],4,0,'u.last_opened_at DESC,i.id');
         $saved=ca_query_items($pdo,$userId,' AND u.saved=1',[],4,0,'u.saved_at DESC,i.id');
@@ -77,7 +77,7 @@ try {
             'stories'=>array_map('ca_card',array_slice($today,0,6)),'facts'=>array_map(fn($r)=>ca_card($r,false,true),$today),'weekly_read'=>(int)$q->fetchColumn()]);
     }
     if (!in_array($view,['feed','factbook','archive'],true)) throw new InvalidArgumentException('Unknown briefing view.');
-    [$where,$params]=ca_filters();
+    [$where,$params]=ca_filters($pdo);
     $page=ca_query_param('page',6) ?: '1';
     if (!ctype_digit($page) || (int)$page<1 || (int)$page>10000) throw new InvalidArgumentException('Invalid results page.');
     $offset=((int)$page-1)*20;

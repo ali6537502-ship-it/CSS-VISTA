@@ -18,14 +18,14 @@ export function LoadError({ error, retry }: { error: string; retry: () => void }
 }
 export function Publication({ summary }: { summary: Summary }) {
   if (summary.published) return null
-  return <Empty title={summary.date === pakistanDate() ? "Today's briefing is being prepared" : 'No briefing was published for this date'}
-    action={summary.latest_date && <Link className="ca-button" to={briefingRoot + '?range=custom&from=' + summary.latest_date + '&to=' + summary.latest_date}>Open the latest briefing <ArrowUpRight size={16} /></Link>}>
-    Please check again shortly, or explore the archive.
+  return <Empty title={summary.date === pakistanDate() ? "Today's briefing is being prepared" : 'No briefing was published for ' + displayDate(summary.date)}
+    action={summary.latest_date && <Link className="ca-button" to={briefingRoot + '?range=custom&from=' + summary.latest_date + '&to=' + summary.latest_date}>Open the {displayDate(summary.latest_date)} briefing <ArrowUpRight size={16} /></Link>}>
+    {summary.latest_date ? 'Editions are published in the evening. The most recent one is ready for you now.' : 'Please check again shortly, or explore the archive.'}
   </Empty>
 }
 export function EditionMeta({ summary }: { summary: Summary }) {
   return <div className="ca-edition-meta">
-    <span>{displayDate(summary.date)}</span>
+    <span>{summary.date === pakistanDate() ? 'Today · ' + displayDate(summary.date) : 'Edition of ' + displayDate(summary.date)}</span>
     {summary.updated_at && <span>Last updated: {displayUpdated(summary.updated_at)}</span>}
     {summary.published && <span>{summary.total} developments · {summary.unread} unfinished</span>}
   </div>
