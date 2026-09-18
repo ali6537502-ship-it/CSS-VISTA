@@ -1,6 +1,8 @@
 import { Link } from 'react-router'
 import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
-import { briefingRoot } from '@/features/current-affairs/model'
+import { briefingRoot, latestRange, overviewSchema } from '@/features/current-affairs/model'
+import { useBriefing } from '@/features/current-affairs/useBriefing'
+import RecallDeck from '@/features/current-affairs/RecallDeck'
 import { AccountPage, SectionTitle, useAccountSnapshot } from './shared'
 
 const destinations = [
@@ -12,6 +14,11 @@ const destinations = [
 
 export default function AccountLibrary() {
   const { snapshot } = useAccountSnapshot()
+  // Revision cards are built from the facts in the latest published edition.
+  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema)
+  const facts = (briefing.data?.facts ?? [])
+    .flatMap((story) => story.facts.map((fact) => ({ fact, story })))
+    .slice(0, 10)
 
   return (
     <AccountPage
@@ -28,6 +35,14 @@ export default function AccountLibrary() {
         <p className="mt-2 text-3xl font-bold text-slate-950">{snapshot.savedResources}</p>
         <p className="mt-1 text-sm text-slate-500">Bookmarks and saved answers from across CSS Vista.</p>
       </div>
+
+      {facts.length > 0 && (
+        <section className="mt-12">
+          <SectionTitle>Quick revision</SectionTitle>
+          <p className="mt-2 text-sm text-slate-500">One fact at a time. Recall the answer, reveal it, then read it in context.</p>
+          <div className="mt-4"><RecallDeck facts={facts} /></div>
+        </section>
+      )}
 
       <section className="mt-12">
         <SectionTitle>Open your library</SectionTitle>
