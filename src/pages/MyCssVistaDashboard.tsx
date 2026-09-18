@@ -143,9 +143,9 @@ export default function MyCssVistaDashboard() {
     { label: 'Dashboard', to: '/account/dashboard' },
     { label: 'Current Affairs', to: briefingRoot },
     { label: 'My Subjects', to: '/fpsc-syllabus' },
-    { label: 'My Mocks', to: '/account/dashboard#mocks' },
+    { label: 'My Mocks', to: '/account/progress#mocks' },
     { label: 'Saved', to: '/account/saved' },
-    { label: 'Progress', to: '/account/dashboard#progress' },
+    { label: 'Progress', to: '/account/progress' },
     { label: 'Planner', to: '/study-planner' },
     { label: 'Settings', to: '/account/settings' },
   ]

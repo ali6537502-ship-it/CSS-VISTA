@@ -54,6 +54,7 @@ const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
 const StudyPlanner = lazy(() => import('./pages/StudyPlanner'))
 const MyCssVistaDashboard = lazy(() => import('./pages/MyCssVistaAccountHome'))
+const AccountHome = lazy(() => import('./pages/AccountHome'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -145,11 +146,15 @@ export default function App() {
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/opinions" element={<S><OpinionsPage /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
-        <Route path="/account/dashboard" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
-        <Route path="/account/tasks" element={<Navigate to="/account/dashboard#tasks" replace />} />
-        <Route path="/account/progress" element={<Navigate to="/account/dashboard#progress" replace />} />
-        <Route path="/account/english" element={<Navigate to="/account/dashboard#english" replace />} />
-        <Route path="/account/library" element={<Navigate to="/account/dashboard#affairs" replace />} />
+        {/* The account home is the chooser. Tasks, progress, English and the
+            library are declared routes in their own right, so they render a
+            page instead of bouncing to an anchor; each gets its own focused
+            page in the next phase of the account redesign. */}
+        <Route path="/account/dashboard" element={<ProfileGate><S><AccountHome /></S></ProfileGate>} />
+        <Route path="/account/tasks" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
+        <Route path="/account/progress" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
+        <Route path="/account/english" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
+        <Route path="/account/library" element={<ProfileGate><S><MyCssVistaDashboard /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
