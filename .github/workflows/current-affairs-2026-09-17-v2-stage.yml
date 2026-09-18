@@ -1,0 +1,124 @@
+name: Stage Current Affairs 2026-09-17 v2
+
+on:
+  push:
+    branches:
+      - current-affairs-2026-09-17-verify2
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage-current-affairs-2026-09-17-v2
+  cancel-in-progress: false
+
+jobs:
+  generate-validate-and-stage:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact staging branch
+        uses: actions/checkout@v4
+        with:
+          ref: current-affairs-2026-09-17-verify2
+          fetch-depth: 0
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Generate coordinated 17 September release
+        run: python3 scripts/stage-current-affairs-2026-09-17-v2.py
+
+      - name: Validate dated Current Affairs edition
+        run: |
+          node scripts/package-current-affairs.mjs --check
+          php tests/current-affairs-validation.php
+          node --test tests/currentAffairs.test.ts
+
+      - name: Verify mirrors, counts, IDs and derived layers
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('.')
+          pairs=[
+            ('public/one-liner-gk/current-affairs-archive.json','src/data/bundled/current-affairs-archive.json'),
+            ('public/one-liner-gk/pakistan-current-affairs.json','src/data/bundled/pakistan-current-affairs.json'),
+            ('public/one-liner-gk/index.json','src/data/bundled/index.json'),
+            ('public/mcq/cat-current-affairs-9.json','src/data/mcq-shards/cat-current-affairs-9.json'),
+          ]
+          for a,b in pairs:
+              assert json.loads((root/a).read_text()) == json.loads((root/b).read_text()), f'mirror mismatch: {a} vs {b}'
+          edition=json.loads((root/'content/current-affairs/2026/09/2026-09-17.json').read_text())
+          assert edition['date']=='2026-09-17' and len(edition['stories'])==20
+          assert len({s['id'] for s in edition['stories']})==20
+          ca=json.loads((root/'public/one-liner-gk/current-affairs-archive.json').read_text())
+          pk=json.loads((root/'public/one-liner-gk/pakistan-current-affairs.json').read_text())
+          assert ca['count']==389==len(ca['notes'])
+          assert pk['count']==142==len(pk['notes'])
+          assert sum(n['id'].startswith('current-affairs-archive-20260917-') for n in ca['notes'])==20
+          assert sum(n['id'].startswith('pakistan-current-affairs-20260917-') for n in pk['notes'])==11
+          allq=[]
+          for i in range(10):
+              allq += json.loads((root/f'src/data/mcq-shards/cat-current-affairs-{i}.json').read_text())
+          ids=[q['id'] for q in allq]; stems=[q['q'].strip().casefold() for q in allq]
+          assert len(ids)==len(set(ids))
+          assert len(stems)==len(set(stems))
+          assert sum(i.startswith('current-affairs-7') and int(i.rsplit('-',1)[1])>=7501 for i in ids)==20
+          idx=json.loads((root/'public/mcq/index.json').read_text())
+          cat=next(c for c in idx['categories'] if c['slug']=='current-affairs')
+          assert idx['total']==35629 and cat['count']==770 and cat['chunks']==10
+          release=json.loads((root/'current-affairs-release-2026-09-17.json').read_text())
+          assert release['stories']==20 and release['general_one_liners_added']==20
+          assert release['pakistan_placements_added']==11 and release['mcqs_added']==20
+          print(release)
+          PY
+
+      - name: Audit MCQ and integrated academic data
+        run: |
+          node scripts/audit-mcq-data.mjs
+          node scripts/audit-integrated-academics.mjs
+
+      - name: Build normal Hostinger production artifact
+        env:
+          SITE_ORIGIN: https://www.css-vista.com
+          CSSV_STRICT_CONTENT_VALIDATION: 'false'
+        run: npm run build:hostinger
+
+      - name: Audit Hostinger artifact
+        run: npm run audit:hostinger
+
+      - name: Verify Book Summaries build safeguard
+        run: |
+          set -euo pipefail
+          test -s dist/book-summaries/index.json
+          jq -e '.total > 0 and (.books | length) == .total' dist/book-summaries/index.json >/dev/null
+          jq -e '.books[] | select(.slug == "why-nations-fail" and .title == "Why Nations Fail")' dist/book-summaries/index.json >/dev/null
+          test -s dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'Why Nations Fail Summary' dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'The authors argue that the main difference lies in institutions' dist/seo/book-summaries/why-nations-fail.html
+          grep -Fq 'RewriteRule ^book-summaries/' dist/.htaccess
+
+      - name: Commit validated data only to staging
+        run: |
+          set -euo pipefail
+          rm -f current-affairs-release-2026-09-17.json
+          git rm -f scripts/stage-current-affairs-2026-09-17-v2.py .github/workflows/current-affairs-2026-09-17-v2-stage.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add             content/current-affairs/2026/09/2026-09-17.json             public/one-liner-gk/current-affairs-archive.json             src/data/bundled/current-affairs-archive.json             public/one-liner-gk/pakistan-current-affairs.json             src/data/bundled/pakistan-current-affairs.json             public/one-liner-gk/index.json             src/data/bundled/index.json             public/mcq/cat-current-affairs-9.json             src/data/mcq-shards/cat-current-affairs-9.json             public/mcq/index.json             src/data/mcqIndex.ts
+          git diff --cached --check
+          git commit -m 'Stage validated Current Affairs — 17 September 2026'
+          git push origin HEAD:current-affairs-2026-09-17-verify2
