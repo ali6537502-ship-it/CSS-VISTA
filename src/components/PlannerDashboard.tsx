@@ -152,11 +152,9 @@ export default function PlannerDashboard() {
 
   if (!tasks.length) {
     return (
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
-        <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-emerald-800">My CSS Vista</p>
-        <h2 className="mt-2 text-2xl font-bold text-slate-950">Your study dashboard will appear here after planning</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Create or import a schedule below. Once tasks exist, this area becomes your daily dashboard for what is due, completed, overdue and coming next.</p>
-        <a href="#plan-management" className="mt-4 inline-flex min-h-10 items-center rounded-lg bg-emerald-800 px-4 text-xs font-bold text-white">Create my plan</a>
+      <section className="rounded-2xl border border-dashed border-slate-200 bg-white p-5 text-center sm:p-7">
+        <h2 className="text-lg font-bold text-slate-950">No tasks scheduled yet</h2>
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">Open <strong>Add topics to your schedule</strong> below to choose syllabus topics and place them on your calendar. They will appear here as your daily list.</p>
       </section>
     )
   }
@@ -164,14 +162,8 @@ export default function PlannerDashboard() {
   return (
     <section aria-label="Study plan dashboard" className="space-y-4">
       <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-emerald-800">My CSS Vista · Study dashboard</p>
-            <h1 className="mt-1 text-2xl font-bold text-slate-950 sm:text-3xl">Here is what you need to do.</h1>
-            <p className="mt-2 text-sm text-slate-600">Tick work as you finish it. Edit any task without rebuilding the full schedule.</p>
-          </div>
-          <a href="#plan-management" className="inline-flex min-h-10 items-center justify-center rounded-lg border border-slate-300 bg-white px-4 text-xs font-bold text-slate-800 hover:border-emerald-700">Manage full plan</a>
-        </div>
+        <h2 className="text-lg font-bold text-slate-950">Your schedule</h2>
+        <p className="mt-1 text-sm text-slate-500">Tick work as you finish it. Edit any task without rebuilding the plan.</p>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-4"><div className="flex items-center gap-2 text-slate-600"><ListChecks className="h-4 w-4" /><span className="text-[10px] font-extrabold uppercase tracking-wide">To do today</span></div><p className="mt-2 text-2xl font-bold text-slate-950">{todayPending.length}</p><p className="text-xs text-slate-500">{todayDone.length} already done</p></div>

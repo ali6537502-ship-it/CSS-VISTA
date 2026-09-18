@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, Newspaper, Target, UserRound } from 'lucide-react'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardList, Languages, Newspaper, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
@@ -103,6 +103,7 @@ export default function AccountHome() {
     const mocks = state.quizResults.filter((result) => result.mockKind === 'gk' || result.mockKind === 'mpt')
     return {
       stats,
+      plan: state.studyPlanner,
       examDate: state.studyPlanner?.examDate,
       remaining,
       todayMinutes: todayTasks.reduce((sum, task) => sum + task.minutes, 0),
@@ -136,7 +137,7 @@ export default function AccountHome() {
   const choices = [
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
     {
-      to: '/account/tasks', icon: CalendarCheck2, title: 'Today’s Plan',
+      to: '/account/tasks', icon: CalendarCheck2, title: 'Today’s Tasks',
       status: snapshot.remaining.length
         ? `${snapshot.remaining.length} task${snapshot.remaining.length === 1 ? '' : 's'} · ${formatMinutes(snapshot.todayMinutes)} planned`
         : 'Nothing left for today',
@@ -164,6 +165,11 @@ export default function AccountHome() {
   ]
 
   const continueReading = briefing.data?.continue_reading?.[0]
+  const plan = snapshot.plan
+  const restDay = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][plan?.restDay ?? 5]
+  const planSummary = plan
+    ? [examYear ? `CSS ${examYear}` : null, `${plan.dailyHours} hour${plan.dailyHours === 1 ? '' : 's'} a day`, `${restDay} is your light day`].filter(Boolean).join(' · ')
+    : 'Set your exam date and study hours, and CSS Vista builds the schedule with you.'
 
   return (
     <main className="min-h-screen bg-white">
@@ -183,6 +189,25 @@ export default function AccountHome() {
             My profile
           </Link>
         </header>
+
+        <section className="mt-10" aria-label="Your study plan">
+          <Link
+            to="/study-planner"
+            className="cssv-choice flex flex-wrap items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 sm:p-6"
+            style={{ '--cssv-choice-index': '0' } as CSSProperties}
+          >
+            <span className="cssv-choice-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
+              <ClipboardList className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="cssv-choice-title block text-lg font-bold text-slate-950">{plan ? 'My Study Plan' : 'Create your study plan'}</span>
+              <span className="mt-1 block text-sm text-slate-500">{planSummary}</span>
+            </span>
+            <span className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white">
+              {plan ? 'Edit plan' : 'Start'} <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
+        </section>
 
         <h2 className="mt-10 text-sm font-semibold uppercase tracking-[.14em] text-slate-400">What would you like to do today?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
