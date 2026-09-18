@@ -88,8 +88,8 @@ export default function Account() {
               <div className="flex items-start gap-3">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
                 <div>
-                  <h3 className="font-bold text-amber-950">Complete your profile after registration</h3>
-                  <p className="mt-1 text-sm leading-6 text-amber-900">Your student profile must reach 100% before Daily Current Affairs, cloud progress and connected account features are unlocked. CSS Vista guides you through all 12 checks immediately after account creation.</p>
+                  <h3 className="font-bold text-amber-950">Dear aspirant, one easy step after this</h3>
+                  <p className="mt-1 text-sm leading-6 text-amber-900">Please complete your profile 100% to get access to Current Affairs and all My CSS Vista features. It is quick and easy — CSS Vista guides you through every step right after your account is created.</p>
                 </div>
               </div>
             </aside>

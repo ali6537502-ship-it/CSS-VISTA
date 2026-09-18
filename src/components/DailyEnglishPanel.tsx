@@ -142,6 +142,15 @@ function writeState(state: DailyEnglishState) {
   }
 }
 
+// Today's completion, for the account home card. Reads the same stored state as
+// the panel so the two can never disagree.
+export function dailyEnglishStatus(): { completed: number; total: number } {
+  const today = dateKey()
+  const done = readState(today).completed[today] ?? {}
+  const sections: EnglishSection[] = ['vocab', 'idioms', 'pairs']
+  return { completed: sections.filter((section) => done[section]).length, total: sections.length }
+}
+
 function sameState(left: DailyEnglishState, right: DailyEnglishState) {
   return JSON.stringify(left) === JSON.stringify(right)
 }

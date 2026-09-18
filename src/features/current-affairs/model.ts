@@ -107,11 +107,18 @@ export function factText(fact: Fact): string {
 export function safeReturnTo(value: string | null): string {
   return value && value.startsWith('/') && !value.startsWith('//') && !value.includes('\\') && !Array.from(value).some((char) => char.charCodeAt(0) <= 32) ? value : '/account/dashboard'
 }
-export function dateFilters(params: URLSearchParams, defaultRange = 'today'): URLSearchParams {
+// The default period for a briefing view. Editions are published in the evening,
+// so the reader is shown the newest edition that actually exists rather than an
+// empty "today" for most of the day.
+export const latestRange = 'latest'
+export function dateFilters(params: URLSearchParams, defaultRange = latestRange): URLSearchParams {
   const result = new URLSearchParams(params)
   const range = result.get('range') || defaultRange
   const today = pakistanDate()
-  if (range === 'today' || range === 'yesterday') {
+  if (range === latestRange) {
+    // The server resolves 'latest' to the newest published publication_date.
+    result.set('from', latestRange); result.set('to', latestRange); result.set('date', latestRange)
+  } else if (range === 'today' || range === 'yesterday') {
     const day = range === 'today' ? today : shiftDate(today, -1)
     result.set('from', day); result.set('to', day); result.set('date', day)
   } else if (range === '7' || range === '30') {
