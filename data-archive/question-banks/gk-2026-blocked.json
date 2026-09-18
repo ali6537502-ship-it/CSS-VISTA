@@ -1,0 +1,191 @@
+[
+ {
+  "question_no": 2,
+  "question": "Alexander the great was the king of",
+  "reason": "Key says 'Ares' (a Greek god). Alexander the Great was king of MACEDONIA/GREECE (option A). Options B-D are gods scrambled in from another question.",
+  "correct": "Greece",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 10,
+  "question": "Which modern country occuples the area of the erstwhile(old) Sassanid Empire?",
+  "reason": "Key says Pakistan. The Sassanid Empire's territory is modern IRAN (option C).",
+  "correct": "Iran",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 36,
+  "question": "When did wr gain independence from France",
+  "reason": "Country name lost to OCR ('when did wr gain independence from France') - question cannot be read.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 57,
+  "question": "The Ottoman Empire was established in which year?",
+  "reason": "Key says 1399. The Ottoman Empire was founded in 1299.",
+  "correct": "1299",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 126,
+  "question": "Which event marked the end of the French Revolution?",
+  "reason": "Key says execution of Louis XVI (Jan 1793) marked the END of the French Revolution. It happened mid-Revolution; the end is normally Napoleon's 1799 coup.",
+  "correct": "Napoleon's coup, 1799",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 136,
+  "question": "In Germany, the head of state and government is called",
+  "reason": "Question asks for head of state AND government; key says Federal Chancellor. In Germany the President is head of state, the Chancellor head of government. Question is malformed.",
+  "correct": "",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 170,
+  "question": "Treaty of Paris ended which war?\"",
+  "reason": "Key says the Treaty of Paris ended the American Civil War. The 1783 Treaty of Paris ended the American Revolutionary War.",
+  "correct": "American Revolutionary War",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 172,
+  "question": "Ferdinand helped in the discovery of?",
+  "reason": "'Ferdinand helped in the discovery of?' - question fragment, context lost.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 177,
+  "question": "Black Panthers is a terrorist movement of",
+  "reason": "Uses the term 'American Negros' and frames the Black Panthers as a 'terrorist movement'. Offensive and editorially loaded - do not publish in this wording.",
+  "correct": "",
+  "kind": "editorial"
+ },
+ {
+  "question_no": 182,
+  "question": "in the populous state Which is the most USA? 4 — House the White",
+  "reason": "Key says Washington DC is the most populous US state. DC is not a state; the most populous is California. Row also has a White House question fused into it.",
+  "correct": "California",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 183,
+  "question": "\"Monroe Doctrine\" In ____- Abraham Lincoln was belonged to____!",
+  "reason": "Two questions fused: Monroe Doctrine + Abraham Lincoln's nationality.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 203,
+  "question": "On 14th December Which Country's President issued Executive Order to",
+  "reason": "Question truncated mid-sentence ('issued Executive Order to').",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 222,
+  "question": "'When World War I ended",
+  "reason": "Key says World War I ended in 1948. WWI ended in 1918. All four options are corrupt.",
+  "correct": "1918",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 243,
+  "question": "area said, the primary source of wa",
+  "reason": "Question text destroyed ('area said, the primary source of wa').",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 244,
+  "question": "Who is called the pioneer of Idealism —_§ The Socratic method is known a8 3",
+  "reason": "Two questions fused: 'pioneer of Idealism' + 'the Socratic method is known as'. Options drawn from both; key answers the second.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 245,
+  "question": "Emile Durkheim's influenced by which philosopher?",
+  "reason": "Question asks which philosopher influenced Durkheim; key says 'Treachery'. Options (Loyalty/Treachery/Long writing) belong to a different question entirely.",
+  "correct": "",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 251,
+  "question": "\"What does Demography analysis create the rate of?",
+  "reason": "Question garbled; options ('a Both') unreadable.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 285,
+  "question": "How many continents in the globalization concept",
+  "reason": "'How many continents in the globalization concept' with options P3/PS/P4/P6 - not a coherent question.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 291,
+  "question": "\"Robert Watson invented____ 2 The telephone was invented by?",
+  "reason": "Two questions fused: Robert Watson-Watt's invention + who invented the telephone.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 292,
+  "question": "Who invented the mobile phone",
+  "reason": "Key says Samuel Morse invented the mobile phone. Morse died in 1872; the mobile phone was Martin Cooper, 1973. No option is correct, and option A has two names fused.",
+  "correct": "Martin Cooper (not listed)",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 354,
+  "question": "Which is the most powerful organ of the GN (United Nations)?",
+  "reason": "Key says 'None of these' is the most powerful UN organ. The standard answer is the Security Council (option B).",
+  "correct": "Security Council",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 364,
+  "question": "United Nations Based the Population on Division estimates for 2018, the most populous city was",
+  "reason": "Correct-answer cell is 'meds' - unrecoverable. (2018 most populous city was Tokyo, not an option as stored.)",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 435,
+  "question": "What is the length of hockey ground side hoard? used to send",
+  "reason": "Hockey pitch dimension question fused with a card-penalty question; options mix cm measurements and card colours.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 436,
+  "question": "Shah Cup. Latest Azian runner up",
+  "reason": "'Shah Cup. Latest Azian runner up' - question unreadable.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 442,
+  "question": "Lionel Messi is famous footballer a of which country?",
+  "reason": "Question asks which COUNTRY Messi plays for; key says 'Football'. Correct answer is Argentina, which is not among the options.",
+  "correct": "Argentina (not listed)",
+  "kind": "wrong answer"
+ },
+ {
+  "question_no": 457,
+  "question": "How many feathers are fixed in the base ttlecock with respect to badminton fame? ball",
+  "reason": "Asks how many feathers in a shuttlecock; options are weights in grams. Mismatched.",
+  "correct": "",
+  "kind": "unusable"
+ },
+ {
+  "question_no": 460,
+  "question": "How many time Squash ball Jomp in each shot",
+  "reason": "Key is 'kas' - unrecoverable.",
+  "correct": "",
+  "kind": "unusable"
+ }
+]

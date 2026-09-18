@@ -1,0 +1,342 @@
+[
+ {
+  "question_no": 64,
+  "category": "Islamic General Knowledge",
+  "question": "The phrase \"Muhammad is the Messenger of Allah\" is stated in which Surah of the Holy Quran?",
+  "source_key": "D",
+  "source_answer": "Surah Fatiha",
+  "correct_key": "B",
+  "correct_answer": "Surah Muhammad",
+  "reason": "CORRECTION: the phrase is in Surah Al-Fath 48:29, NOT Surah Fatiha. Of the options, Surah Muhammad is the only defensible one."
+ },
+ {
+  "question_no": 82,
+  "category": "Pakistan Affairs",
+  "question": "What is the length of the Batura Glacier, making it one of the largest and longest glaciers outside the polar regions?",
+  "source_key": "C",
+  "source_answer": "64 kilometers",
+  "correct_key": "A",
+  "correct_answer": "57 kilometers",
+  "reason": "CONTESTED: Batura is most often given as 57 km; the source says 64 km"
+ },
+ {
+  "question_no": 87,
+  "category": "Pakistan Affairs",
+  "question": "In the Bogra formula, the proposed lower house of parliament was named as:",
+  "source_key": "A",
+  "source_answer": "The House of Commons",
+  "correct_key": "B",
+  "correct_answer": "The House of People",
+  "reason": "Bogra formula named the lower house the House of People"
+ },
+ {
+  "question_no": 95,
+  "category": "Pakistan Affairs",
+  "question": "Constitutionally, Gilgit-Baltistan has a _____ status.",
+  "source_key": "D",
+  "source_answer": "None of these",
+  "correct_key": "B",
+  "correct_answer": "Semi-provincial",
+  "reason": "commonly taught as semi-provincial; its constitutional status is still undefined"
+ },
+ {
+  "question_no": 99,
+  "category": "Pakistan Affairs",
+  "question": "The _____ constitutional amendment created military courts in Pakistan.",
+  "source_key": "B",
+  "source_answer": "22nd",
+  "correct_key": "A",
+  "correct_answer": "21st",
+  "reason": "the 21st Amendment created military courts, not the 22nd"
+ },
+ {
+  "question_no": 125,
+  "category": "Geography",
+  "question": "What information about an earthquake defines its size?",
+  "source_key": "D",
+  "source_answer": "All of these",
+  "correct_key": "A",
+  "correct_answer": "Magnitude",
+  "reason": "magnitude defines size; depth of epicentre does not"
+ },
+ {
+  "question_no": 215,
+  "category": "Current Affairs",
+  "question": "World Religion Day 2021 was celebrated on _____ January.",
+  "source_key": "B",
+  "source_answer": "14",
+  "correct_key": "D",
+  "correct_answer": "None of these",
+  "reason": "World Religion Day is the third Sunday of January - 17 January in 2021, not 13/14/15"
+ },
+ {
+  "question_no": 267,
+  "category": "Mathematics",
+  "question": "A jug contains 2 litres of a mixture of apple juice and orange juice in the ratio 3:5. We take out 400 ml of juice from the jug. How much more apple juice needs to be added so that the ratio becomes 7:5?",
+  "source_key": "B",
+  "source_answer": "1000 ml",
+  "correct_key": "A",
+  "correct_answer": "800 ml",
+  "reason": "600/1000 after removal; need 1400 apple -> add 800ml"
+ },
+ {
+  "question_no": 290,
+  "category": "Mathematics",
+  "question": "The thickness of one sheet of paper is 5 x 10^-2 mm. What is the thickness of a book having 400 sheets of paper?",
+  "source_key": "D",
+  "source_answer": "None of these",
+  "correct_key": "A",
+  "correct_answer": "2 cm",
+  "reason": "0.05mm x 400 = 20mm = 2cm"
+ },
+ {
+  "question_no": 299,
+  "category": "Mathematics",
+  "question": "Six years ago, the ratio of the ages of Ali and Babar was 6:5. Four years from now, the ratio of their ages will be 11:10. What is Babar's age at present?",
+  "source_key": "B",
+  "source_answer": "18 years",
+  "correct_key": "A",
+  "correct_answer": "16 years",
+  "reason": "Ali 18, Babar 16 -> Babar is 16"
+ },
+ {
+  "question_no": 368,
+  "category": "Reasoning",
+  "question": "Saleem walks 5 m towards west, takes a right turn and walks 5 m again. He then takes another right turn and walks 20 m. He then takes a final right turn and walks 5 m before stopping. How far is he from the starting point?",
+  "source_key": "D",
+  "source_answer": "None of these",
+  "correct_key": "B",
+  "correct_answer": "15 m",
+  "reason": "W5, N5, E20, S5 ends 15 m east of the start"
+ },
+ {
+  "question_no": 372,
+  "category": "Reasoning",
+  "question": "A family consists of a man and his wife, their two daughters, and three sons with their wives. Each son has three sons and one daughter. How many female members are there in the family?",
+  "source_key": "D",
+  "source_answer": "None of these",
+  "correct_key": "C",
+  "correct_answer": "9",
+  "reason": "wife + 2 daughters + 3 sons-wives + 3 granddaughters = 9"
+ },
+ {
+  "question_no": 373,
+  "category": "Reasoning",
+  "question": "If BAT is coded as 283, CAT is coded as 383 and ARE is coded as 801, then the code for BETTER is:",
+  "source_key": "C",
+  "source_answer": "123301",
+  "correct_key": "B",
+  "correct_answer": "213310",
+  "reason": "B=2 E=1 T=3 R=0, so BETTER = 213310"
+ },
+ {
+  "question_no": 396,
+  "category": "Reasoning",
+  "question": "Given: PQS, QRT, RSU, STV... What should follow?",
+  "source_key": "D",
+  "source_answer": "None of these",
+  "correct_key": "A",
+  "correct_answer": "TUW",
+  "reason": "P,Q,R,S->T; Q,R,S,T->U; S,T,U,V->W, giving TUW"
+ },
+ {
+  "question_no": 397,
+  "category": "Reasoning",
+  "question": "A clock is placed on a table such that at 6:00 pm the hour hand points to North-East. In which direction will the minute hand point at 9:15 pm?",
+  "source_key": "C",
+  "source_answer": "South-West",
+  "correct_key": "B",
+  "correct_answer": "North-West",
+  "reason": "if 6 points NE then 3 points NW"
+ },
+ {
+  "question_no": 408,
+  "category": "English",
+  "question": "Identify the antonym of Turpitude.",
+  "source_key": "A",
+  "source_answer": "Passion",
+  "correct_key": "C",
+  "correct_answer": "Virtue",
+  "reason": "turpitude = depravity; opposite VIRTUE"
+ },
+ {
+  "question_no": 409,
+  "category": "English",
+  "question": "Identify the antonym of Vituperate.",
+  "source_key": "D",
+  "source_answer": "Berate",
+  "correct_key": "A",
+  "correct_answer": "Praise",
+  "reason": "vituperate = to revile; opposite PRAISE. \"Berate\" is a synonym."
+ },
+ {
+  "question_no": 411,
+  "category": "English",
+  "question": "Identify the antonym of Vitriolic.",
+  "source_key": "B",
+  "source_answer": "Graceful",
+  "correct_key": "D",
+  "correct_answer": "Amiable",
+  "reason": "vitriolic = caustic; opposite AMIABLE"
+ },
+ {
+  "question_no": 413,
+  "category": "English",
+  "question": "Identify the antonym of Sibilant.",
+  "source_key": "B",
+  "source_answer": "Whispering",
+  "correct_key": "D",
+  "correct_answer": "Sonorous",
+  "reason": "sibilant = soft hissing; opposite SONOROUS. \"Whispering\" is a synonym."
+ },
+ {
+  "question_no": 424,
+  "category": "English",
+  "question": "_____ woman that we saw turned out to be our CEO.",
+  "source_key": "A",
+  "source_answer": "A",
+  "correct_key": "B",
+  "correct_answer": "The",
+  "reason": "a specific woman identified by a relative clause takes THE, not A"
+ },
+ {
+  "question_no": 467,
+  "category": "English",
+  "question": "I know both of them are short _____ money because of their extravagant nature.",
+  "source_key": "D",
+  "source_answer": "With",
+  "correct_key": "B",
+  "correct_answer": "Of",
+  "reason": "the idiom is \"short OF money\""
+ },
+ {
+  "question_no": 474,
+  "category": "English",
+  "question": "I didn't know whether you had to have one of these or not; if you _____ one, however, I would have given it to you freely.",
+  "source_key": "A",
+  "source_answer": "Had to have",
+  "correct_key": "B",
+  "correct_answer": "Had had to have",
+  "reason": "third conditional needs the past perfect: \"if you had had to have one\""
+ },
+ {
+  "question_no": 497,
+  "category": "English",
+  "question": "Which sentence uses the correct adjective form?",
+  "source_key": "A",
+  "source_answer": "The movie was more scarier than I expected",
+  "correct_key": "B",
+  "correct_answer": "The movie was scarier than I expected",
+  "reason": "\"scarier\" - \"more scarier\" is a double comparative and is wrong"
+ },
+ {
+  "question_no": 502,
+  "category": "English",
+  "question": "What does the idiom \"To read the riot act\" mean?",
+  "source_key": "D",
+  "source_answer": "To organize a protest or demonstration.",
+  "correct_key": "C",
+  "correct_answer": "To deliver a stern warning or reprimand.",
+  "reason": "read the riot act = deliver a stern reprimand"
+ },
+ {
+  "question_no": 510,
+  "category": "English",
+  "question": "The negotiations were marred _____ allegations of corruption that cast a shadow _____ the legitimacy of the entire process.",
+  "source_key": "B",
+  "source_answer": "with; against",
+  "correct_key": "A",
+  "correct_answer": "by; onto",
+  "reason": "\"marred BY\" is the correct collocation; \"marred with\" is not"
+ },
+ {
+  "question_no": 526,
+  "category": "English",
+  "question": "The underlined word 'convey', as used in this passage, most accurately means:",
+  "source_key": "B",
+  "source_answer": "Rationalize",
+  "correct_key": "D",
+  "correct_answer": "Explain",
+  "reason": "convey = to communicate or explain; \"rationalize\" is not a meaning of convey"
+ },
+ {
+  "question_no": 550,
+  "category": "English",
+  "question": "Synonym of Obdurate:",
+  "source_key": "B",
+  "source_answer": "Malleable",
+  "correct_key": "D",
+  "correct_answer": "None of these",
+  "reason": "obdurate = stubborn. Malleable and Amenable are OPPOSITES, so no option is a synonym."
+ },
+ {
+  "question_no": 555,
+  "category": "English",
+  "question": "Identify the synonym of Obstreperous.",
+  "source_key": "A",
+  "source_answer": "Angry",
+  "correct_key": "B",
+  "correct_answer": "Noisy",
+  "reason": "obstreperous = NOISY and unruly"
+ },
+ {
+  "question_no": 556,
+  "category": "English",
+  "question": "Identify the synonym of Effervescent.",
+  "source_key": "D",
+  "source_answer": "Quiet",
+  "correct_key": "B",
+  "correct_answer": "Lively",
+  "reason": "effervescent = LIVELY"
+ },
+ {
+  "question_no": 557,
+  "category": "English",
+  "question": "Identify the synonym of Penurious.",
+  "source_key": "C",
+  "source_answer": "False",
+  "correct_key": "B",
+  "correct_answer": "Impoverished",
+  "reason": "penurious = IMPOVERISHED"
+ },
+ {
+  "question_no": 558,
+  "category": "English",
+  "question": "Identify the synonym of Histrionic.",
+  "source_key": "D",
+  "source_answer": "Subdued",
+  "correct_key": "B",
+  "correct_answer": "Dramatic",
+  "reason": "histrionic = DRAMATIC"
+ },
+ {
+  "question_no": 559,
+  "category": "English",
+  "question": "Identify the synonym of Quiescent.",
+  "source_key": "D",
+  "source_answer": "Thoughtful",
+  "correct_key": "B",
+  "correct_answer": "Dormant",
+  "reason": "quiescent = DORMANT"
+ },
+ {
+  "question_no": 560,
+  "category": "English",
+  "question": "Identify the synonym of Scraggly.",
+  "source_key": "A",
+  "source_answer": "Gaunt",
+  "correct_key": "D",
+  "correct_answer": "Spindly",
+  "reason": "CONTESTED: scraggly = straggly/thin; Spindly fits better than Gaunt, which describes a drawn face"
+ },
+ {
+  "question_no": 596,
+  "category": "Urdu",
+  "question": "_____ وہ اسم ہے جو اعزاز کے طور پر حکومت، بادشاہ یا عوام الناس کی طرف سے ملتا ہے۔",
+  "source_key": "B",
+  "source_answer": "لقب",
+  "correct_key": "A",
+  "correct_answer": "خطاب",
+  "reason": "CONTESTED: a title conferred by a government or ruler is khitab; laqab is an epithet"
+ }
+]
