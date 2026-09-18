@@ -81,6 +81,16 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
     name: 'International Organisations',
     centralSlugs: ['international-organisations', 'united-nations'],
   },
+  // Recalled MPT past-paper questions. Every answer was verified against the
+  // question itself rather than taken from the source key, which was wrong in
+  // 34 places; questions that could not be answered are not in the bank.
+  'past-papers': {
+    id: 'past-papers',
+    name: 'MPT Past Papers',
+    directPath: '/gk/cat/mpt-past-papers',
+    centralSlugs: ['mpt-past-papers'],
+    expectedCount: 534,
+  },
 }
 
 export function mptQuestionBankPath(id: string) {

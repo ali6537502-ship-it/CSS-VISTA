@@ -39,9 +39,17 @@ have no option table in the .docx and were not extracted.
 
 Split by the `ready` field:
 
-- `ready: true` — 148 rows, clean text, safe to publish
+- `ready: true` — 148 rows
 - `ready: false` — 128 rows, answer verified correct but the question text still
   carries OCR damage. **Retype from the source PDF before publishing.**
+
+**Correction.** The `ready: true` flag is not a clean bill of health. It was set by
+an automated OCR-damage heuristic that proved far too weak: it passed answers like
+`Light Emitting ode`, `Amplitude Modulstion` and `hess Card`, and questions like
+`Battle of Trafalzar`, `KLFA World Cup` and `The Battle of Hastings was fought in
+which ear`. Reading all 148 by hand, only **64** are clean enough to publish, and
+those are the ones shipped as the `gk-2026-verified` category. Treat `ready: true`
+as "answer verified, text unchecked".
 
 ## Everyday Science — read this
 

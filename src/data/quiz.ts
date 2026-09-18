@@ -25,6 +25,7 @@ export const quizCategories = [
   { id: 'geography', name: 'Geography', icon: '🗺️', description: 'Pakistan, world & physical geography' },
   { id: 'history', name: 'History', icon: '🏛️', description: 'Pakistan movement & world history' },
   { id: 'organisations', name: 'International Organisations', icon: '🏢', description: 'UN, IMF, SCO, OIC, SAARC' },
+  { id: 'past-papers', name: 'MPT Past Papers', icon: '📜', description: 'Recalled MPT questions, answers verified' },
 ]
 
 export const questions: Question[] = [
