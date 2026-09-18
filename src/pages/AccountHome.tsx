@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ComponentType } from 'react'
+import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, Newspaper, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
@@ -27,21 +27,34 @@ function daysRemaining(examDate?: string) {
 /**
  * One destination. The status line is the only number on the card: it says
  * where the student stands without turning the page into a metrics wall.
+ *
+ * Motion lives in `.cssv-choice` (src/index.css): the cards rise in with a
+ * stagger, lift on hover and carry a sheen that follows the pointer. The
+ * stylesheet disables all of it under prefers-reduced-motion.
  */
-function ChoiceCard({ to, icon: Icon, title, status }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string }) {
+function ChoiceCard({ to, icon: Icon, title, status, index }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number }) {
+  // Hand the sheen the pointer position. Cheap enough to run inline: it only
+  // writes two custom properties and never triggers a React render.
+  function track(event: { currentTarget: HTMLElement; clientX: number; clientY: number }) {
+    const box = event.currentTarget.getBoundingClientRect()
+    event.currentTarget.style.setProperty('--cssv-choice-x', `${event.clientX - box.left}px`)
+    event.currentTarget.style.setProperty('--cssv-choice-y', `${event.clientY - box.top}px`)
+  }
   return (
     <Link
       to={to}
-      className="group flex min-h-[9.5rem] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 transition-colors hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 sm:p-6"
+      onPointerMove={track}
+      style={{ '--cssv-choice-index': String(index) } as CSSProperties}
+      className="cssv-choice flex min-h-[9.5rem] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 sm:p-6"
     >
-      <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
+      <span className="cssv-choice-icon grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
         <Icon className="h-5 w-5" />
       </span>
       <span className="mt-5">
-        <span className="block text-lg font-bold text-slate-950">{title}</span>
+        <span className="cssv-choice-title block text-lg font-bold text-slate-950">{title}</span>
         <span className="mt-1 flex items-center gap-1.5 text-sm text-slate-500">
           {status}
-          <ArrowRight className="h-4 w-4 shrink-0 text-emerald-700 opacity-0 transition-opacity group-hover:opacity-100" />
+          <ArrowRight className="cssv-choice-arrow h-4 w-4 shrink-0 text-emerald-700" />
         </span>
       </span>
     </Link>
@@ -173,7 +186,7 @@ export default function AccountHome() {
 
         <h2 className="mt-10 text-sm font-semibold uppercase tracking-[.14em] text-slate-400">What would you like to do today?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {choices.map((choice) => <ChoiceCard key={choice.title} {...choice} />)}
+          {choices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} />)}
         </div>
 
         {(continueReading || snapshot.remaining.length > 0) && (
