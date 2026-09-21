@@ -1,6 +1,12 @@
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
 
+# Directory URLs with no index file are denied by the host. Without these two
+# lines that denial renders the server's bare 403 screen instead of the site's
+# own error page, so /assets/, /fonts/ and /seo/ look like the site is down.
+Options -Indexes
+ErrorDocument 403 /404.html
+
 # Never allow the private runtime configuration to be downloaded over HTTP.
 # PHP can still include this file internally when present in the document root.
 <Files "config.php">
