@@ -2,9 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { Check, ChevronRight, Languages } from 'lucide-react'
 import { Link } from 'react-router'
 import { idioms, pairOfWords } from '@/data/grammar'
+import { installIdioms } from '@/data/installIdioms'
 import { loadFullVocabulary, type VocabWord } from '@/data/vocab'
 import { useAccount } from '@/lib/accountContext'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+
+installIdioms()
 
 const STORAGE_KEY = 'cssvista:tool:daily-english:v1'
 const VOCAB_PER_DAY = 20
