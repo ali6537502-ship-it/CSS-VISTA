@@ -55,3 +55,23 @@ export function useThemeCompletion(themeSlug: string, checkpointIds: string[], t
     [themeSlug, checkpointIds, ticked],
   )
 }
+
+/**
+ * Roadmap activity read from the id namespace alone.
+ *
+ * Deliberately avoids importing the theme index: this runs on the signed-in
+ * dashboard, which should not pull the roadmap's bundled catalogue into its
+ * chunk just to render one status line.
+ */
+export function essayThemeActivity(): { themesStarted: number; directionsDone: number } {
+  const prefix = `${THEME_AREA}:`
+  const slugs = new Set<string>()
+  let directionsDone = 0
+  for (const id of tickedIds()) {
+    if (!id.startsWith(prefix)) continue
+    directionsDone += 1
+    const slug = id.slice(prefix.length).split(':')[0]
+    if (slug) slugs.add(slug)
+  }
+  return { themesStarted: slugs.size, directionsDone }
+}

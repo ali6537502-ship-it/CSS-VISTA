@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, Newspaper, Target, UserRound } from 'lucide-react'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, ListTree, Newspaper, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { dailyEnglishStatus } from '@/components/DailyEnglishPanel'
+import { essayThemeActivity } from '@/features/essay-themes/progress'
 import { briefingRoot, displayDate, latestRange, overviewSchema, pakistanDate } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'
 import { AuthenticatedAccountAd } from '@/components/Ads'
@@ -110,6 +111,7 @@ export default function AccountHome() {
       mocks: mocks.length,
       saved: (state.bookmarks?.length ?? 0) + (state.savedAnswers?.length ?? 0),
       english: dailyEnglishStatus(),
+      essayThemes: essayThemeActivity(),
     }
   }, [version])
 
@@ -156,6 +158,12 @@ export default function AccountHome() {
     {
       to: '/fpsc-syllabus', icon: BookOpen, title: 'My Syllabus',
       status: syllabusPercent ? `${syllabusPercent}% complete` : 'Mark your first topic',
+    },
+    {
+      to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
+      status: snapshot.essayThemes.directionsDone
+        ? `${snapshot.essayThemes.themesStarted} theme${snapshot.essayThemes.themesStarted === 1 ? '' : 's'} started \u00b7 ${snapshot.essayThemes.directionsDone} direction${snapshot.essayThemes.directionsDone === 1 ? '' : 's'} done`
+        : 'Begin the 2027 research roadmap',
     },
     {
       to: '/account/library', icon: Bookmark, title: 'My Library',
