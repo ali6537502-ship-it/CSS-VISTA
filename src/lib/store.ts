@@ -767,8 +767,8 @@ export function resetData() {
   notifyProgressChanged()
 }
 
-export function getStats() {
-  const s = getCachedReadState()
+export function getStats(state?: VistaState) {
+  const s = state ?? getCachedReadState()
   const totalQuizzes = s.quizResults.length
   const avgScore = totalQuizzes
     ? Math.round((s.quizResults.reduce((a, r) => a + r.score / Math.max(1, r.total), 0) / totalQuizzes) * 100)

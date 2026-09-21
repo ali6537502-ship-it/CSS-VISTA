@@ -10,6 +10,7 @@ import {
   type AdRoutePolicy,
 } from '@/lib/ads'
 import { useAccount } from '@/lib/accountContext'
+import { scheduleIdleWork } from '@/lib/idle'
 
 declare global {
   interface Window {
@@ -130,7 +131,11 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
   }, [location.pathname, location.search])
 
   useEffect(() => {
-    if (policy.autoAdsEnabled) void loadAdSenseOnce()
+    if (!policy.autoAdsEnabled) return undefined
+    return scheduleIdleWork(
+      () => { void loadAdSenseOnce() },
+      { timeout: 2_500, fallbackDelay: 1_200 },
+    )
   }, [policy.autoAdsEnabled])
 
   return children

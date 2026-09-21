@@ -155,6 +155,38 @@ const TutorialAnnouncement = lazyWithRecovery(() => import('@/components/Tutoria
 const NotesDiscountAnnouncement = lazyWithRecovery(() => import('@/components/NotesDiscountAnnouncement'))
 const MilestoneCelebration = lazyWithRecovery(() => import('@/components/MilestoneCelebration').then((m) => ({ default: m.MilestoneCelebration })))
 
+function DeferredExamIntelligenceHomeCard({ enabled }: { enabled: boolean }) {
+  const markerRef = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if (!enabled || ready) return undefined
+    const marker = markerRef.current
+    if (!marker) return undefined
+
+    if (!('IntersectionObserver' in window)) {
+      return scheduleIdleWork(() => setReady(true), { timeout: 4_000, fallbackDelay: 2_000 })
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return
+      setReady(true)
+      observer.disconnect()
+    }, { rootMargin: '320px 0px' })
+
+    observer.observe(marker)
+    return () => observer.disconnect()
+  }, [enabled, ready])
+
+  if (!enabled) return null
+
+  return (
+    <div ref={markerRef} className="min-h-px">
+      {ready && <Suspense fallback={null}><ExamIntelligenceHomeCard /></Suspense>}
+    </div>
+  )
+}
+
 function DeferredHomeExtras() {
   const markerRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
@@ -514,12 +546,13 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 
 export default function Home() {
   const location = useLocation()
+  const { user } = useAccount()
   const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
   const [homeCards, setHomeCards] = useState(defaultHomeCards)
-  const stats = useMemo(() => getStats(), [])
-  const activity = useMemo(() => recentActivities(4)[0], [])
   const initialState = useMemo(() => getState(), [])
+  const stats = useMemo(() => getStats(initialState), [initialState])
+  const activity = useMemo(() => recentActivities(4)[0], [])
   const revisionStats = useMemo(() => getRevisionStats(), [])
   const today = useMemo(() => localDateKey(), [])
   const completed = initialState.planTaskCompletions?.[today] ?? []
@@ -653,7 +686,7 @@ export default function Home() {
           </AnimatedCollapse>
         </section>
 
-        <Suspense fallback={null}><ExamIntelligenceHomeCard /></Suspense>
+        <DeferredExamIntelligenceHomeCard enabled={Boolean(user)} />
 
         {hasPlanner && (
           <section className="cssv-reveal mt-3" style={{ '--cssv-delay': '35ms' } as CSSProperties} aria-labelledby="planner-home-card">
