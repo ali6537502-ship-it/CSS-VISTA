@@ -57,8 +57,34 @@ export default function TutorialAnnouncement() {
     if (isNotesDiscountActive()) return
     if (readStorage(window.localStorage, TUTORIAL_SEEN_KEY)) return
     if (readStorage(window.sessionStorage, TUTORIAL_DISMISSED_KEY)) return
-    const timer = window.setTimeout(() => setMode('introduction'), 1200)
-    return () => window.clearTimeout(timer)
+
+    let timer = 0
+    let armed = true
+    const events: Array<keyof WindowEventMap> = ['scroll', 'pointerdown', 'keydown', 'touchstart']
+
+    function removeInteractionListeners() {
+      events.forEach((event) => window.removeEventListener(event, handleInteraction))
+    }
+
+    function handleInteraction() {
+      if (!armed) return
+      armed = false
+      removeInteractionListeners()
+      timer = window.setTimeout(() => {
+        if (isNotesDiscountActive()) return
+        if (readStorage(window.localStorage, TUTORIAL_SEEN_KEY)) return
+        if (readStorage(window.sessionStorage, TUTORIAL_DISMISSED_KEY)) return
+        setMode('introduction')
+      }, 900)
+    }
+
+    events.forEach((event) => window.addEventListener(event, handleInteraction, { passive: true, once: true }))
+
+    return () => {
+      armed = false
+      removeInteractionListeners()
+      if (timer) window.clearTimeout(timer)
+    }
   }, [])
 
   useEffect(() => {
