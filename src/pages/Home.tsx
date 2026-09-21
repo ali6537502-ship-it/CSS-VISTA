@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
@@ -116,8 +116,7 @@ function HomeHero() {
 
   return (
     <section
-      className="cssv-home-hero cssv-home-hero-poster cssv-reveal mt-3"
-      style={{ '--cssv-delay': '55ms' } as CSSProperties}
+      className="cssv-home-hero cssv-home-hero-poster mt-3"
       aria-labelledby="css-vista-home-title"
     >
       <div className="cssv-home-hero-copy">
@@ -155,6 +154,41 @@ const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/Exa
 const TutorialAnnouncement = lazyWithRecovery(() => import('@/components/TutorialAnnouncement'))
 const NotesDiscountAnnouncement = lazyWithRecovery(() => import('@/components/NotesDiscountAnnouncement'))
 const MilestoneCelebration = lazyWithRecovery(() => import('@/components/MilestoneCelebration').then((m) => ({ default: m.MilestoneCelebration })))
+
+function DeferredHomeExtras() {
+  const markerRef = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if (ready) return undefined
+    const marker = markerRef.current
+    if (!marker) return undefined
+
+    if (!('IntersectionObserver' in window)) {
+      return scheduleIdleWork(() => setReady(true), { timeout: 5_000, fallbackDelay: 3_500 })
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return
+      setReady(true)
+      observer.disconnect()
+    }, { rootMargin: '900px 0px' })
+
+    observer.observe(marker)
+    return () => observer.disconnect()
+  }, [ready])
+
+  return (
+    <div ref={markerRef} className="min-h-px">
+      {ready && (
+        <Suspense fallback={null}>
+          <NotesDiscountAnnouncement />
+          <TutorialAnnouncement />
+        </Suspense>
+      )}
+    </div>
+  )
+}
 
 function SectionHeading({
   title,
@@ -482,7 +516,6 @@ export default function Home() {
   const location = useLocation()
   const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
-  const [loadHomeExtras, setLoadHomeExtras] = useState(false)
   const [homeCards, setHomeCards] = useState(defaultHomeCards)
   const stats = useMemo(() => getStats(), [])
   const activity = useMemo(() => recentActivities(4)[0], [])
@@ -538,11 +571,6 @@ export default function Home() {
         // The static homepage catalogue remains complete if optional admin content cannot load.
       })
   }, { timeout: 3_000, fallbackDelay: 900 }), [])
-
-  useEffect(
-    () => scheduleIdleWork(() => setLoadHomeExtras(true), { timeout: 1_500, fallbackDelay: 650 }),
-    [],
-  )
 
   useEffect(() => {
     const restoreDismissedPanels = () => {
@@ -662,12 +690,7 @@ export default function Home() {
           </div>
         </section>
 
-        {loadHomeExtras && (
-          <Suspense fallback={null}>
-            <NotesDiscountAnnouncement />
-            <TutorialAnnouncement />
-          </Suspense>
-        )}
+        <DeferredHomeExtras />
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
           <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
