@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { CheckCircle2, Flame, Zap } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
 import { grammarTopics, pairOfWords, idioms, oneWordSubstitutions } from '@/data/grammar'
+import { installIdioms } from '@/data/installIdioms'
 import { loadFullVocabulary, vocabulary as curatedVocabulary, type VocabWord } from '@/data/vocab'
 import { getDailyChallenge } from '@/data/challenges'
 import { questions } from '@/data/quiz'
@@ -11,6 +12,8 @@ import QuizEngine from '@/components/QuizEngine'
 import { completeChallenge, getState, recordQuizResult } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import { usePageBack } from '@/lib/backNavigation'
+
+installIdioms()
 
 const tabs = ['Daily Challenge', 'Word Bank', 'Commonly Confused', 'Phrasal Verbs', 'Idioms & Phrases', 'One-Word Substitutions', 'Grammar Lessons', 'Quizzes'] as const
 

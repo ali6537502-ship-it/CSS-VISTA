@@ -2,6 +2,7 @@
 import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 import { vocabulary } from '@/data/vocab'
 import { grammarTopics, idioms, pairOfWords } from '@/data/grammar'
+import { installIdioms } from '@/data/installIdioms'
 import { caIssues } from '@/data/currentAffairs'
 import { serviceGroups } from '@/data/services'
 import { libraryItems } from '@/data/library'
@@ -13,6 +14,8 @@ import { noteProducts } from '@/data/notes'
 import { lectureCourses } from '@/data/lectures'
 import { handwrittenNoteSubjects } from '@/data/handwrittenNotes'
 import { css2026WrittenResult } from '@/data/css2026Result'
+
+installIdioms()
 
 export interface SearchResult {
   id: string

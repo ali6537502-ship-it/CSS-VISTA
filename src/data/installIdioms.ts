@@ -29,31 +29,39 @@ const sourceFixes = new Map<string, IdiomEntry>([
   [idiomKey("Come hell or high water"), { idiom: "Come hell or high water", meaning: "despite any difficulty or obstacle", sentence: '' }],
 ])
 
-const merged = new Map<string, IdiomEntry>()
-const cleanedUploaded = uploadedIdioms.map((item) => sourceFixes.get(idiomKey(item.idiom)) ?? item)
+let idiomsInstalled = false
 
-// Curated CSS Vista entries take precedence where a source contains the same idiom.
-// A real example sentence from an uploaded source may still fill a missing central sentence.
-for (const item of [...centralIdioms, ...cleanedUploaded]) {
-  const key = idiomKey(item.idiom)
-  if (!key) continue
+export function installIdioms() {
+  if (idiomsInstalled) return
 
-  const existing = merged.get(key)
-  if (!existing) {
-    merged.set(key, item)
-    continue
+  const merged = new Map<string, IdiomEntry>()
+  const cleanedUploaded = uploadedIdioms.map((item) => sourceFixes.get(idiomKey(item.idiom)) ?? item)
+  
+  // Curated CSS Vista entries take precedence where a source contains the same idiom.
+  // A real example sentence from an uploaded source may still fill a missing central sentence.
+  for (const item of [...centralIdioms, ...cleanedUploaded]) {
+    const key = idiomKey(item.idiom)
+    if (!key) continue
+  
+    const existing = merged.get(key)
+    if (!existing) {
+      merged.set(key, item)
+      continue
+    }
+  
+    if (!existing.sentence && item.sentence) {
+      merged.set(key, { ...existing, sentence: item.sentence })
+    }
   }
+  
+  legacyIdioms.splice(
+    0,
+    legacyIdioms.length,
+    ...Array.from(merged.values()).map((item) => ({
+      ...item,
+      sentence: item.sentence || `Use this expression to mean: ${item.meaning}.`,
+    })),
+  )
 
-  if (!existing.sentence && item.sentence) {
-    merged.set(key, { ...existing, sentence: item.sentence })
-  }
+  idiomsInstalled = true
 }
-
-legacyIdioms.splice(
-  0,
-  legacyIdioms.length,
-  ...Array.from(merged.values()).map((item) => ({
-    ...item,
-    sentence: item.sentence || `Use this expression to mean: ${item.meaning}.`,
-  })),
-)

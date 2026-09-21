@@ -1,11 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { Bell, BellRing, Check, X } from 'lucide-react'
-import { ADMIN_CONTENT_EVENT, mergedUpdates, type SiteUpdate } from '@/lib/admin'
+import type { SiteUpdate } from '@/lib/admin'
 import { getNotifPrefs, markUpdatesSeen, setNotifPrefs, unseenUpdateIds } from '@/lib/progress'
 import { useAccount } from '@/lib/accountContext'
+import { scheduleIdleWork } from '@/lib/idle'
 
 export const UPDATE_TAGS = ['Mentors', 'Opinions', 'Test Series', 'FPSC', 'General']
+
+const ADMIN_CONTENT_EVENT = 'cssvista:admin-content'
+const ADMIN_CONTENT_KEY = 'cssvista:admin:content'
+
+function cachedUpdates(): SiteUpdate[] {
+  try {
+    const raw = localStorage.getItem(ADMIN_CONTENT_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as { updates?: SiteUpdate[] }
+    if (!Array.isArray(parsed.updates)) return []
+    return [...parsed.updates].sort((a, b) => b.date.localeCompare(a.date))
+  } catch {
+    return []
+  }
+}
 
 type NotificationFeedResponse = {
   ok?: boolean
@@ -23,13 +39,13 @@ function mergeNotificationFeeds(remote: SiteUpdate[], local: SiteUpdate[]) {
 }
 
 export function useUpdates() {
-  const [updates, setUpdates] = useState<SiteUpdate[]>(() => mergedUpdates())
+  const [updates, setUpdates] = useState<SiteUpdate[]>(() => cachedUpdates())
 
   useEffect(() => {
     let active = true
 
     async function refresh() {
-      const local = mergedUpdates()
+      const local = cachedUpdates()
       try {
         const response = await fetch('/api/notifications.php', {
           credentials: 'same-origin',
@@ -45,7 +61,10 @@ export function useUpdates() {
       }
     }
 
-    void refresh()
+    const cancelInitialRefresh = scheduleIdleWork(
+      () => { void refresh() },
+      { timeout: 2_500, fallbackDelay: 900 },
+    )
     const timer = window.setInterval(() => { void refresh() }, 15_000)
     const onFocus = () => { void refresh() }
     const onVisibility = () => { if (document.visibilityState === 'visible') void refresh() }
@@ -56,6 +75,7 @@ export function useUpdates() {
 
     return () => {
       active = false
+      cancelInitialRefresh()
       window.clearInterval(timer)
       window.removeEventListener('focus', onFocus)
       window.removeEventListener(ADMIN_CONTENT_EVENT, onContentChange)
