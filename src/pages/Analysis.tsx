@@ -17,7 +17,7 @@ const analyses: { title: string; causes: string[]; fixes: string[]; tools: Analy
     title: 'Why candidates fail Precis & Composition',
     causes: ['Unrepaired grammar fundamentals (tenses, articles, prepositions)', 'Precis that copies sentences instead of compressing ideas', 'Weak vocabulary repertoire - idioms and pairs guessed wrong', 'No timed practice of the full paper'],
     fixes: ['One precis daily from editorials; count words honestly', 'Work through a standard grammar reference topic-wise', 'Maintain idiom/pair lists and revise weekly'],
-    tools: [{ label: 'Grammar reference', to: '/language-grammar' }, { label: 'Vocabulary & idioms', to: '/grammar-vocabulary' }, { label: '30-day grammar course', to: '/language-grammar?lang=english&view=master-course' }],
+    tools: [{ label: 'Grammar reference', to: '/language-grammar' }, { label: 'Vocabulary & idioms', to: '/grammar-vocabulary' }, { label: '30-day grammar course', to: '/grammar-course' }],
   },
   {
     title: 'Why candidates underperform in General Science & Ability',
