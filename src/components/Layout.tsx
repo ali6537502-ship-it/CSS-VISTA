@@ -160,7 +160,7 @@ function DeferredRouteSeo() {
   useEffect(() => scheduleIdleWork(() => setReady(true), { timeout: 1_500, fallbackDelay: 650 }), [])
 
   if (!ready) return null
-  return <Suspense fallback={null}><DeferredRouteSeo /></Suspense>
+  return <Suspense fallback={null}><RouteSeo /></Suspense>
 }
 
 function DeferredStudyActivityTracker() {
@@ -864,7 +864,7 @@ export default function Layout() {
 
   return (
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
-      <RouteSeo />
+      <DeferredRouteSeo />
       <PrintBranding />
       <DeferredStudyActivityTracker />
       <StorageFailureNotice />
