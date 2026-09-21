@@ -1988,6 +1988,44 @@
   background: rgb(255 255 255 / 0.69) !important;
 }
 
+/* Smoothness-first homepage rendering.
+   Preserve the visual identity without continuous backdrop sampling/repaints. */
+.cssv-home .cssv-glass-panel,
+.cssv-home .cssv-glass-subcard,
+.cssv-home .cssv-glass-icon {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.cssv-home .cssv-glass-panel {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.96), rgb(246 252 248 / 0.91)) !important;
+}
+
+.cssv-home .cssv-glass-subcard {
+  background: rgb(255 255 255 / 0.9) !important;
+}
+
+.cssv-home .cssv-glass-icon {
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.96), rgb(225 242 233 / 0.88)) !important;
+}
+
+.cssv-home .cssv-reveal,
+.cssv-home .cssv-countdown-tick,
+.cssv-home .cssv-globe,
+.cssv-home .cssv-timer,
+.cssv-home .cssv-flame,
+.cssv-home .animate-ping {
+  animation: none !important;
+}
+
+@media (min-width: 768px) {
+  .cssv-site-header {
+    background: rgb(255 255 255 / 0.97);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 .cssv-home-hero {
   position: relative;
   display: grid;
@@ -2312,11 +2350,8 @@
   }
 }
 
-/* Keep long homepages cheap to render and mobile scrolling GPU-friendly. */
-.cssv-home > div > section:not(.cssv-home-hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 460px;
-}
+/* Smoothness-first: keep homepage section geometry real and stable.
+   Generic intrinsic heights caused visible size corrections while scrolling. */
 
 .cssv-tutorial-backdrop {
   animation: cssv-tutorial-fade 180ms ease-out both;
