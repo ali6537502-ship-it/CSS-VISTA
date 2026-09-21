@@ -172,7 +172,7 @@ function DeferredHomeExtras() {
       if (!entries.some((entry) => entry.isIntersecting)) return
       setReady(true)
       observer.disconnect()
-    }, { rootMargin: '900px 0px' })
+    }, { rootMargin: '120px 0px' })
 
     observer.observe(marker)
     return () => observer.disconnect()
