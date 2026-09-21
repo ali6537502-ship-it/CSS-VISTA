@@ -23,6 +23,9 @@ const EssayThemeDetail = lazy(() => import('./pages/EssayThemeDetail'))
 const IslamicReferences = lazy(() => import('./pages/IslamicReferences'))
 const IslamicReferenceChapter = lazy(() => import('./pages/IslamicReferenceChapter'))
 const IslamicReferenceTopic = lazy(() => import('./pages/IslamicReferenceTopic'))
+const OptionalNotes = lazy(() => import('./pages/OptionalNotes'))
+const OptionalSubjectNotes = lazy(() => import('./pages/OptionalSubjectNotes'))
+const OptionalTopicNotes = lazy(() => import('./pages/OptionalTopicNotes'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const MPTQuestionBank = lazy(() => import('./pages/MPTQuestionBank'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
@@ -119,6 +122,9 @@ export default function App() {
         <Route path="/study-material/islamic-studies" element={<S><IslamicReferences /></S>} />
         <Route path="/study-material/islamic-studies/:chapter" element={<S><IslamicReferenceChapter /></S>} />
         <Route path="/study-material/islamic-studies/:chapter/:topic" element={<S><IslamicReferenceTopic /></S>} />
+        <Route path="/study-material/optional" element={<S><OptionalNotes /></S>} />
+        <Route path="/study-material/optional/:subject" element={<S><OptionalSubjectNotes /></S>} />
+        <Route path="/study-material/optional/:subject/:topic" element={<S><OptionalTopicNotes /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
         <Route path="/mpt/bank/:bankId" element={<S><MPTQuestionBank /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />

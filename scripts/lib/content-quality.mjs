@@ -19,9 +19,18 @@ const SHARED_CHROME = [
   /<[^>]*\baria-label="(?:Advertisement|Breadcrumb)"[^>]*>[\s\S]*?<\/[a-z]+>/gi,
 ]
 
-/** Wording that means the page has nothing real to show yet. */
+/**
+ * Wording that means the page has nothing real to show yet.
+ *
+ * The loading patterns match a loading STATE, not the English word: real
+ * study content says "rate of loading" in geology and "loading the rifle"
+ * about the 1857 cartridges, and neither is a placeholder.
+ */
 const PLACEHOLDER_PATTERNS = [
-  /\bloading\b/i,
+  /\bloading\s*[.\u2026]{1,3}/i,
+  /\b(?:is|are|still)\s+loading\b/i,
+  /\bloading\s+(?:your|content|data|results|notes)\b/i,
+  /^\s*loading\b[\s.\u2026]*$/i,
   /\bunder construction\b/i,
   /\bcoming soon\b/i,
   /\bplaceholder\b/i,

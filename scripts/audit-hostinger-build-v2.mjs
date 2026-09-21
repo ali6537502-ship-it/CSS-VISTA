@@ -39,6 +39,34 @@ const islamicPaths = islamicIndex.chapters.flatMap((chapter) => [
   ...chapter.topics.map((topic) => `/study-material/islamic-studies/${chapter.slug}/${topic.slug}`),
 ])
 
+// The optional-subject notes publish one page per subject and one per topic.
+const optionalIndex = JSON.parse(await readFile(join(root, 'src', 'data', 'bundled', 'optional-notes-index.json'), 'utf8'))
+const optionalPaths = optionalIndex.groups.flatMap((group) => group.subjects.flatMap((subject) => [
+  `/study-material/optional/${subject.slug}`,
+  ...subject.topics.map((topic) => `/study-material/optional/${subject.slug}/${topic.slug}`),
+]))
+
+/**
+ * A generated section page belongs in the sitemap only when it was actually
+ * published as indexable. A page with too little of its own to say is served
+ * noindex instead of padded, so the sitemap follows the page, not the count.
+ */
+async function indexableSectionPaths(paths, directory, fileFor) {
+  const kept = []
+  for (const path of paths) {
+    const html = await readFile(join(dist, 'seo', directory, fileFor(path)), 'utf8')
+    const robots = /<meta name="robots" content="([^"]*)"/.exec(html)?.[1] ?? ''
+    assert(robots.length > 0, `${path} has no robots directive`)
+    if (!/noindex/i.test(robots)) kept.push(path)
+  }
+  return kept
+}
+
+const islamicFileFor = (path) => `${path.split('/').slice(3).join('--')}.html`
+const optionalFileFor = (path) => `${path.split('/').slice(3).join('--')}.html`
+const indexableIslamicPaths = await indexableSectionPaths(islamicPaths, 'islamic-studies', islamicFileFor)
+const indexableOptionalPaths = await indexableSectionPaths(optionalPaths, 'optional-notes', optionalFileFor)
+
 await Promise.all([
   access(join(dist, 'index.html')),
   access(join(dist, '.htaccess')),
@@ -85,7 +113,7 @@ const allLocs = [...coreLocs, ...gkLocs, ...collectionLocs, ...paperLocs]
 const uniqueLocs = new Set(allLocs)
 const collectionCount = new Set(registeredPapers.map((paper) => `${paper.examination.toLowerCase()}/${paper.year}`)).size
 
-const expectedCoreCount = INDEXABLE_STATIC_ROUTES.length + registeredBooks.length + islamicPaths.length
+const expectedCoreCount = INDEXABLE_STATIC_ROUTES.length + registeredBooks.length + indexableIslamicPaths.length + indexableOptionalPaths.length
 assert(coreLocs.length === expectedCoreCount, `Expected ${expectedCoreCount} core sitemap URLs, found ${coreLocs.length}`)
 for (const route of INDEXABLE_STATIC_ROUTES) {
   assert(coreLocs.includes(`${siteOrigin}${route.path}`), `Core sitemap is missing ${route.path}`)
@@ -93,8 +121,15 @@ for (const route of INDEXABLE_STATIC_ROUTES) {
 for (const book of registeredBooks) {
   assert(coreLocs.includes(`${siteOrigin}/book-summaries/${book.slug}`), `Core sitemap is missing book summary ${book.slug}`)
 }
-for (const path of islamicPaths) {
+for (const path of indexableIslamicPaths) {
   assert(coreLocs.includes(`${siteOrigin}${path}`), `Core sitemap is missing Islamic reference page ${path}`)
+}
+for (const path of indexableOptionalPaths) {
+  assert(coreLocs.includes(`${siteOrigin}${path}`), `Core sitemap is missing optional-notes page ${path}`)
+}
+// A noindex page must still be served and reachable, just not listed.
+for (const path of optionalPaths.filter((p) => !indexableOptionalPaths.includes(p))) {
+  assert(!coreLocs.includes(`${siteOrigin}${path}`), `${path} is noindex but listed in the sitemap`)
 }
 assert(gkLocs.length > 0, 'GK sitemap must contain at least one category URL')
 assert(gkLocs.every((url) => /^https:\/\/www\.css-vista\.com\/gk\/cat\/[^/?#]+\/?$/.test(url)), 'GK sitemap contains a non-category URL')
@@ -167,6 +202,8 @@ assert(paperFiles.filter((name) => name.endsWith('.html')).length === registered
 assert(bookFiles.filter((name) => name.endsWith('.html')).length === registeredBooks.length, `Expected ${registeredBooks.length} direct book-summary SEO pages`)
 const islamicFiles = await readdir(join(dist, 'seo', 'islamic-studies'))
 assert(islamicFiles.filter((name) => name.endsWith('.html')).length === islamicPaths.length, `Expected ${islamicPaths.length} Islamic Studies reference pages`)
+const optionalFiles = await readdir(join(dist, 'seo', 'optional-notes'))
+assert(optionalFiles.filter((name) => name.endsWith('.html')).length === optionalPaths.length, `Expected ${optionalPaths.length} optional-subject note pages`)
 assert(registeredPapers.length > 0, 'Past-paper registry must not be empty')
 assert(registeredBooks.length > 0, 'Book-summary registry must not be empty')
 
@@ -183,4 +220,4 @@ try {
   await handle.close()
 }
 
-console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length} (${registeredBooks.length} books, ${islamicPaths.length} Islamic reference pages), gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)
+console.log(`Hostinger SEO artifact audit passed: core=${coreLocs.length} (${registeredBooks.length} books, ${indexableIslamicPaths.length} Islamic reference pages, ${indexableOptionalPaths.length} of ${optionalPaths.length} optional-notes pages), gk=${gkLocs.length}, collections=${collectionLocs.length}, papers=${paperLocs.length}; reinforced CSS Vista homepage signals and canonical routing verified.`)

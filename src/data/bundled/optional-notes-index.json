@@ -1,0 +1,2015 @@
+{
+ "groups": [
+  {
+   "group": 1,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Accounting & Auditing",
+     "slug": "accounting-and-auditing",
+     "marks": 200,
+     "topicCount": 5,
+     "topics": [
+      {
+       "slug": "paper-i-financial-accounting-50-marks",
+       "title": "Paper I - Financial Accounting (50 Marks)",
+       "words": 2504
+      },
+      {
+       "slug": "paper-i-cost-and-managerial-accounting-50-marks",
+       "title": "Paper I - Cost & Managerial Accounting (50 Marks)",
+       "words": 2286
+      },
+      {
+       "slug": "paper-ii-auditing",
+       "title": "Paper II - Auditing",
+       "words": 1739
+      },
+      {
+       "slug": "paper-ii-business-taxation",
+       "title": "Paper II - Business Taxation",
+       "words": 1032
+      },
+      {
+       "slug": "paper-ii-business-studies-and-finance",
+       "title": "Paper II - Business Studies & Finance",
+       "words": 1533
+      }
+     ]
+    },
+    {
+     "subject": "Computer Science",
+     "slug": "computer-science",
+     "marks": 200,
+     "topicCount": 12,
+     "topics": [
+      {
+       "slug": "paper-i-computing-foundations",
+       "title": "Paper I - Computing Foundations",
+       "words": 1398
+      },
+      {
+       "slug": "programming-fundamentals",
+       "title": "Programming Fundamentals",
+       "words": 1140
+      },
+      {
+       "slug": "object-oriented-programming",
+       "title": "Object-Oriented Programming",
+       "words": 1273
+      },
+      {
+       "slug": "algorithms-and-data-structures",
+       "title": "Algorithms and Data Structures",
+       "words": 1500
+      },
+      {
+       "slug": "software-engineering",
+       "title": "Software Engineering",
+       "words": 992
+      },
+      {
+       "slug": "compilers",
+       "title": "Compilers",
+       "words": 1035
+      },
+      {
+       "slug": "paper-ii-computer-architecture",
+       "title": "Paper II - Computer Architecture",
+       "words": 952
+      },
+      {
+       "slug": "computer-networks",
+       "title": "Computer Networks",
+       "words": 1182
+      },
+      {
+       "slug": "operating-systems",
+       "title": "Operating Systems",
+       "words": 1088
+      },
+      {
+       "slug": "databases",
+       "title": "Databases",
+       "words": 1142
+      },
+      {
+       "slug": "image-processing-graphics-computer-vision-and-ai",
+       "title": "Image Processing, Graphics, Computer Vision and AI",
+       "words": 972
+      },
+      {
+       "slug": "web-technologies",
+       "title": "Web Technologies",
+       "words": 1219
+      }
+     ]
+    },
+    {
+     "subject": "Economics",
+     "slug": "economics",
+     "marks": 200,
+     "topicCount": 5,
+     "topics": [
+      {
+       "slug": "microeconomics",
+       "title": "Microeconomics",
+       "words": 1369
+      },
+      {
+       "slug": "macroeconomics",
+       "title": "Macroeconomics",
+       "words": 1591
+      },
+      {
+       "slug": "money-banking-and-monetary-policy",
+       "title": "Money, Banking and Monetary Policy",
+       "words": 1154
+      },
+      {
+       "slug": "public-finance-international-economics-and-growth-and",
+       "title": "Public Finance, International Economics, and Growth and Development",
+       "words": 1724
+      },
+      {
+       "slug": "paper-ii-economics-of-pakistan-100-marks",
+       "title": "Paper II - Economics of Pakistan (100 Marks)",
+       "words": 1909
+      }
+     ]
+    },
+    {
+     "subject": "International Relations",
+     "slug": "international-relations",
+     "marks": 200,
+     "topicCount": 6,
+     "topics": [
+      {
+       "slug": "paper-i-ir-theory-and-approaches",
+       "title": "Paper I - IR Theory and Approaches",
+       "words": 948
+      },
+      {
+       "slug": "security-power-and-strategy",
+       "title": "Security, Power, and Strategy",
+       "words": 978
+      },
+      {
+       "slug": "international-political-economy-diplomacy-law-and-institutions",
+       "title": "International Political Economy, Diplomacy, Law, and Institutions",
+       "words": 1179
+      },
+      {
+       "slug": "paper-ii-the-international-system-from-1917-to-the-present",
+       "title": "Paper II - The International System from 1917 to the Present",
+       "words": 1103
+      },
+      {
+       "slug": "regional-organizations-and-the-foreign-policies-of-major-powers",
+       "title": "Regional Organizations and the Foreign Policies of Major Powers",
+       "words": 1005
+      },
+      {
+       "slug": "south-asia-afghanistan-and-nuclear-and-contemporary-security",
+       "title": "South Asia, Afghanistan, and Nuclear and Contemporary Security",
+       "words": 1661
+      }
+     ]
+    },
+    {
+     "subject": "Political Science",
+     "slug": "political-science",
+     "marks": 200,
+     "topicCount": 8,
+     "topics": [
+      {
+       "slug": "paper-i-classical-and-enlightenment-political-thought",
+       "title": "Paper I - Classical and Enlightenment Political Thought",
+       "words": 813
+      },
+      {
+       "slug": "modern-critical-and-20th-century-political-thought",
+       "title": "Modern Critical and 20th-Century Political Thought",
+       "words": 856
+      },
+      {
+       "slug": "muslim-political-thought",
+       "title": "Muslim Political Thought",
+       "words": 686
+      },
+      {
+       "slug": "core-political-concepts",
+       "title": "Core Political Concepts",
+       "words": 821
+      },
+      {
+       "slug": "political-processes-and-society",
+       "title": "Political Processes and Society",
+       "words": 930
+      },
+      {
+       "slug": "political-institutions-forms-of-government-and-ideologies",
+       "title": "Political Institutions, Forms of Government, and Ideologies",
+       "words": 1446
+      },
+      {
+       "slug": "paper-ii-comparative-political-systems-and-global-integration",
+       "title": "Paper II - Comparative Political Systems and Global Integration",
+       "words": 1101
+      },
+      {
+       "slug": "paper-ii-government-and-politics-in-pakistan",
+       "title": "Paper II - Government and Politics in Pakistan",
+       "words": 1272
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 2,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Applied Mathematics",
+     "slug": "applied-mathematics",
+     "marks": 100,
+     "topicCount": 6,
+     "topics": [
+      {
+       "slug": "vector-calculus",
+       "title": "I. Vector Calculus",
+       "words": 703
+      },
+      {
+       "slug": "statics",
+       "title": "II. Statics",
+       "words": 586
+      },
+      {
+       "slug": "dynamics",
+       "title": "III. Dynamics",
+       "words": 581
+      },
+      {
+       "slug": "ordinary-differential-equations",
+       "title": "IV. Ordinary Differential Equations",
+       "words": 719
+      },
+      {
+       "slug": "fourier-series-and-partial-differential-equations",
+       "title": "V. Fourier Series and Partial Differential Equations",
+       "words": 668
+      },
+      {
+       "slug": "numerical-methods",
+       "title": "VI. Numerical Methods",
+       "words": 707
+      }
+     ]
+    },
+    {
+     "subject": "Chemistry",
+     "slug": "chemistry",
+     "marks": 200,
+     "topicCount": 20,
+     "topics": [
+      {
+       "slug": "atomic-structure-and-quantum-chemistry",
+       "title": "1. Atomic Structure and Quantum Chemistry",
+       "words": 569
+      },
+      {
+       "slug": "electrochemistry",
+       "title": "2. Electrochemistry",
+       "words": 534
+      },
+      {
+       "slug": "thermodynamics",
+       "title": "3. Thermodynamics",
+       "words": 534
+      },
+      {
+       "slug": "chemical-kinetics",
+       "title": "4. Chemical Kinetics",
+       "words": 557
+      },
+      {
+       "slug": "surface-chemistry-and-catalysis",
+       "title": "5. Surface Chemistry and Catalysis",
+       "words": 509
+      },
+      {
+       "slug": "fundamentals-of-chemometrics",
+       "title": "6. Fundamentals of Chemometrics",
+       "words": 452
+      },
+      {
+       "slug": "separation-methods",
+       "title": "7. Separation Methods",
+       "words": 465
+      },
+      {
+       "slug": "basic-inorganic-chemistry",
+       "title": "8. Basic Inorganic Chemistry",
+       "words": 490
+      },
+      {
+       "slug": "acids-and-bases",
+       "title": "9. Acids and Bases",
+       "words": 563
+      },
+      {
+       "slug": "chemistry-of-d-and-f-block-elements",
+       "title": "10. Chemistry of d- and f-Block Elements",
+       "words": 496
+      },
+      {
+       "slug": "basic-concepts-of-organic-chemistry-paper-ii",
+       "title": "1. Basic Concepts of Organic Chemistry (Paper II)",
+       "words": 616
+      },
+      {
+       "slug": "saturated-and-unsaturated-hydrocarbons",
+       "title": "2. Saturated and Unsaturated Hydrocarbons",
+       "words": 490
+      },
+      {
+       "slug": "aromatic-compounds",
+       "title": "3. Aromatic Compounds",
+       "words": 549
+      },
+      {
+       "slug": "functional-groups",
+       "title": "4. Functional Groups",
+       "words": 582
+      },
+      {
+       "slug": "aliphatic-nucleophilic-substitution-and-elimination",
+       "title": "5. Aliphatic Nucleophilic Substitution and Elimination",
+       "words": 644
+      },
+      {
+       "slug": "stereochemistry",
+       "title": "6. Stereochemistry",
+       "words": 605
+      },
+      {
+       "slug": "organic-spectroscopy",
+       "title": "7. Organic Spectroscopy",
+       "words": 554
+      },
+      {
+       "slug": "biomolecules",
+       "title": "8. Biomolecules",
+       "words": 534
+      },
+      {
+       "slug": "metabolism",
+       "title": "9. Metabolism",
+       "words": 582
+      },
+      {
+       "slug": "chemical-industries",
+       "title": "10. Chemical Industries",
+       "words": 648
+      }
+     ]
+    },
+    {
+     "subject": "Geology",
+     "slug": "geology",
+     "marks": 100,
+     "topicCount": 11,
+     "topics": [
+      {
+       "slug": "physical-geology",
+       "title": "1. Physical Geology",
+       "words": 741
+      },
+      {
+       "slug": "stratigraphy-and-paleontology",
+       "title": "2. Stratigraphy and Paleontology",
+       "words": 647
+      },
+      {
+       "slug": "mineralogy",
+       "title": "3. Mineralogy",
+       "words": 605
+      },
+      {
+       "slug": "structural-geology-and-tectonics",
+       "title": "4. Structural Geology and Tectonics",
+       "words": 822
+      },
+      {
+       "slug": "petrology-and-petrography",
+       "title": "5. Petrology and Petrography",
+       "words": 679
+      },
+      {
+       "slug": "introduction-to-geophysics",
+       "title": "6. Introduction to Geophysics",
+       "words": 553
+      },
+      {
+       "slug": "sequence-stratigraphy",
+       "title": "7. Sequence Stratigraphy",
+       "words": 591
+      },
+      {
+       "slug": "petroleum-geology",
+       "title": "8. Petroleum Geology",
+       "words": 793
+      },
+      {
+       "slug": "engineering-and-environmental-geology",
+       "title": "9. Engineering and Environmental Geology",
+       "words": 814
+      },
+      {
+       "slug": "mineral-and-energy-resources",
+       "title": "10. Mineral and Energy Resources",
+       "words": 846
+      },
+      {
+       "slug": "economic-and-applied-geology",
+       "title": "11. Economic and Applied Geology",
+       "words": 710
+      }
+     ]
+    },
+    {
+     "subject": "Physics",
+     "slug": "physics",
+     "marks": 200,
+     "topicCount": 8,
+     "topics": [
+      {
+       "slug": "mechanics",
+       "title": "I. Mechanics",
+       "words": 1856
+      },
+      {
+       "slug": "fluid-mechanics",
+       "title": "II. Fluid Mechanics",
+       "words": 807
+      },
+      {
+       "slug": "waves-oscillations-and-optics",
+       "title": "III. Waves, Oscillations and Optics",
+       "words": 1171
+      },
+      {
+       "slug": "heat-and-thermodynamics",
+       "title": "IV. Heat and Thermodynamics",
+       "words": 1084
+      },
+      {
+       "slug": "electricity-and-magnetism-paper-ii",
+       "title": "I. Electricity and Magnetism (Paper II)",
+       "words": 900
+      },
+      {
+       "slug": "modern-and-quantum-physics",
+       "title": "II. Modern and Quantum Physics",
+       "words": 1216
+      },
+      {
+       "slug": "solid-state-physics",
+       "title": "III. Solid State Physics",
+       "words": 939
+      },
+      {
+       "slug": "nuclear-physics",
+       "title": "IV. Nuclear Physics",
+       "words": 1110
+      }
+     ]
+    },
+    {
+     "subject": "Pure Mathematics",
+     "slug": "pure-mathematics",
+     "marks": 100,
+     "topicCount": 3,
+     "topics": [
+      {
+       "slug": "section-a-modern-algebra",
+       "title": "Section A. Modern Algebra",
+       "words": 980
+      },
+      {
+       "slug": "section-b-calculus-and-analytic-geometry",
+       "title": "Section B. Calculus and Analytic Geometry",
+       "words": 833
+      },
+      {
+       "slug": "section-c-complex-variables",
+       "title": "Section C. Complex Variables",
+       "words": 781
+      }
+     ]
+    },
+    {
+     "subject": "Statistics",
+     "slug": "statistics",
+     "marks": 100,
+     "topicCount": 9,
+     "topics": [
+      {
+       "slug": "descriptive-statistics",
+       "title": "1. Descriptive Statistics",
+       "words": 700
+      },
+      {
+       "slug": "basic-probability",
+       "title": "2. Basic Probability",
+       "words": 615
+      },
+      {
+       "slug": "probability-distributions",
+       "title": "3. Probability Distributions",
+       "words": 647
+      },
+      {
+       "slug": "regression-and-correlation",
+       "title": "4. Regression and Correlation",
+       "words": 662
+      },
+      {
+       "slug": "non-parametric-methods",
+       "title": "5. Non-Parametric Methods",
+       "words": 549
+      },
+      {
+       "slug": "sampling-and-sampling-distributions",
+       "title": "6. Sampling and Sampling Distributions",
+       "words": 745
+      },
+      {
+       "slug": "statistical-inference",
+       "title": "7. Statistical Inference",
+       "words": 824
+      },
+      {
+       "slug": "design-of-experiments",
+       "title": "8. Design of Experiments",
+       "words": 611
+      },
+      {
+       "slug": "population-analysis-and-vital-statistics",
+       "title": "9. Population Analysis and Vital Statistics",
+       "words": 727
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 3,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Business Administration",
+     "slug": "business-administration",
+     "marks": 100,
+     "topicCount": 5,
+     "topics": [
+      {
+       "slug": "management",
+       "title": "I. Management",
+       "words": 4758
+      },
+      {
+       "slug": "human-resource-management",
+       "title": "II. Human Resource Management",
+       "words": 2119
+      },
+      {
+       "slug": "financial-management",
+       "title": "III. Financial Management",
+       "words": 2891
+      },
+      {
+       "slug": "operations-and-supply-chain-management",
+       "title": "IV. Operations and Supply Chain Management",
+       "words": 2910
+      },
+      {
+       "slug": "marketing",
+       "title": "V. Marketing",
+       "words": 2228
+      }
+     ]
+    },
+    {
+     "subject": "Governance & Public Policies",
+     "slug": "governance-and-public-policies",
+     "marks": 100,
+     "topicCount": 11,
+     "topics": [
+      {
+       "slug": "basic-concepts-of-governance",
+       "title": "I. Basic Concepts of Governance",
+       "words": 811
+      },
+      {
+       "slug": "governance-theories",
+       "title": "II. Governance Theories",
+       "words": 850
+      },
+      {
+       "slug": "governance-indicators-and-their-application-in-pakistan",
+       "title": "III. Governance Indicators and Their Application in Pakistan",
+       "words": 562
+      },
+      {
+       "slug": "public-policy-and-planning-institutions-and-their-role-in",
+       "title": "IV. Public Policy and Planning Institutions and Their Role in Planning",
+       "words": 941
+      },
+      {
+       "slug": "accountability",
+       "title": "V. Accountability",
+       "words": 774
+      },
+      {
+       "slug": "bureaucracy",
+       "title": "VI. Bureaucracy",
+       "words": 1164
+      },
+      {
+       "slug": "public-policy-formulation-and-implementation",
+       "title": "VII. Public Policy Formulation and Implementation",
+       "words": 1106
+      },
+      {
+       "slug": "multi-level-governance-in-pakistan",
+       "title": "VIII. Multi-level Governance in Pakistan",
+       "words": 779
+      },
+      {
+       "slug": "federalism-devolution-and-decentralization",
+       "title": "IX. Federalism, Devolution, and Decentralization",
+       "words": 540
+      },
+      {
+       "slug": "the-role-of-citizens-in-governance",
+       "title": "X. The Role of Citizens in Governance",
+       "words": 763
+      },
+      {
+       "slug": "good-governance-in-islam",
+       "title": "XI. Good Governance in Islam",
+       "words": 580
+      }
+     ]
+    },
+    {
+     "subject": "Public Administration",
+     "slug": "public-administration",
+     "marks": 100,
+     "topicCount": 12,
+     "topics": [
+      {
+       "slug": "public-administration-concepts-approaches-and-context",
+       "title": "I. Public Administration: Concepts, Approaches, and Context",
+       "words": 1421
+      },
+      {
+       "slug": "classical-and-contemporary-theories-and-concepts",
+       "title": "II. Classical and Contemporary Theories and Concepts",
+       "words": 1487
+      },
+      {
+       "slug": "public-policy-planning-implementation-and-evaluation",
+       "title": "III. Public Policy: Planning, Implementation, and Evaluation",
+       "words": 1045
+      },
+      {
+       "slug": "budgeting-and-financial-management",
+       "title": "IV. Budgeting and Financial Management",
+       "words": 827
+      },
+      {
+       "slug": "managing-human-resources-in-the-public-sector",
+       "title": "V. Managing Human Resources in the Public Sector",
+       "words": 631
+      },
+      {
+       "slug": "administrative-law",
+       "title": "VI. Administrative Law",
+       "words": 712
+      },
+      {
+       "slug": "public-management-skills",
+       "title": "VII. Public Management Skills",
+       "words": 1283
+      },
+      {
+       "slug": "the-civil-service-of-pakistan",
+       "title": "VIII. The Civil Service of Pakistan",
+       "words": 738
+      },
+      {
+       "slug": "organization-of-provincial-and-local-government",
+       "title": "IX. Organization of Provincial and Local Government",
+       "words": 719
+      },
+      {
+       "slug": "governance-and-administrative-reforms",
+       "title": "X. Governance and Administrative Reforms",
+       "words": 1090
+      },
+      {
+       "slug": "public-administration-accountability-and-control",
+       "title": "XI. Public Administration Accountability and Control",
+       "words": 996
+      },
+      {
+       "slug": "public-administration-and-development",
+       "title": "XII. Public Administration and Development",
+       "words": 588
+      }
+     ]
+    },
+    {
+     "subject": "Town Planning & Urban Management",
+     "slug": "town-planning-and-urban-management",
+     "marks": 100,
+     "topicCount": 9,
+     "topics": [
+      {
+       "slug": "definition-goals-and-objectives-of-town-planning",
+       "title": "I. Definition, Goals, and Objectives of Town Planning",
+       "words": 568
+      },
+      {
+       "slug": "historical-perspective-of-urban-planning",
+       "title": "II. Historical Perspective of Urban Planning",
+       "words": 706
+      },
+      {
+       "slug": "urban-rural-differences-and-hierarchy-of-settlements",
+       "title": "III. Urban-Rural Differences and Hierarchy of Settlements",
+       "words": 520
+      },
+      {
+       "slug": "history-of-planning-in-pakistan",
+       "title": "IV. History of Planning in Pakistan",
+       "words": 471
+      },
+      {
+       "slug": "managing-urbanization",
+       "title": "V. Managing Urbanization",
+       "words": 762
+      },
+      {
+       "slug": "housing-community-and-economic-development",
+       "title": "VI. Housing, Community, and Economic Development",
+       "words": 576
+      },
+      {
+       "slug": "public-policy-and-urban-design-management",
+       "title": "VII. Public Policy and Urban Design Management",
+       "words": 571
+      },
+      {
+       "slug": "sustainability-environmental-policy-and-planning",
+       "title": "VIII. Sustainability, Environmental Policy, and Planning",
+       "words": 526
+      },
+      {
+       "slug": "urban-information-systems",
+       "title": "IX. Urban Information Systems",
+       "words": 744
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 4,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "British History",
+     "slug": "british-history",
+     "marks": 100,
+     "topicCount": 14,
+     "topics": [
+      {
+       "slug": "the-glorious-revolution-william-and-mary-and-queen-anne",
+       "title": "1. The Glorious Revolution, William and Mary, and Queen Anne",
+       "words": 664
+      },
+      {
+       "slug": "the-hanoverian-era-jacobites-walpole-and-american-independence",
+       "title": "2. The Hanoverian Era: Jacobites, Walpole and American Independence",
+       "words": 585
+      },
+      {
+       "slug": "union-of-england-and-scotland",
+       "title": "3. Union of England and Scotland",
+       "words": 488
+      },
+      {
+       "slug": "union-of-england-and-ireland",
+       "title": "4. Union of England and Ireland",
+       "words": 507
+      },
+      {
+       "slug": "the-old-colonial-system",
+       "title": "5. The Old Colonial System",
+       "words": 579
+      },
+      {
+       "slug": "french-revolution-and-napoleonic-wars-britains-role-and-impact",
+       "title": "6. French Revolution and Napoleonic Wars: Britain’s Role and Impact",
+       "words": 576
+      },
+      {
+       "slug": "industrial-and-agricultural-revolutions-and-their-political",
+       "title": "7. Industrial and Agricultural Revolutions and Their Political-Social Effects",
+       "words": 537
+      },
+      {
+       "slug": "robert-peel-and-the-return-of-the-tories",
+       "title": "8. Robert Peel and the Return of the Tories",
+       "words": 506
+      },
+      {
+       "slug": "the-victorian-era-reform-parties-empire-and-ireland",
+       "title": "9. The Victorian Era: Reform, Parties, Empire and Ireland",
+       "words": 470
+      },
+      {
+       "slug": "the-edwardian-era-and-rise-of-labour",
+       "title": "10. The Edwardian Era and Rise of Labour",
+       "words": 511
+      },
+      {
+       "slug": "britain-in-the-first-world-war-and-its-aftermath",
+       "title": "11. Britain in the First World War and Its Aftermath",
+       "words": 564
+      },
+      {
+       "slug": "britain-in-the-second-world-war-and-the-labour-settlement",
+       "title": "12. Britain in the Second World War and the Labour Settlement",
+       "words": 497
+      },
+      {
+       "slug": "britain-and-the-cold-war-commonwealth-nato-decolonization-and",
+       "title": "13. Britain and the Cold War: Commonwealth, NATO, Decolonization and Europe",
+       "words": 492
+      },
+      {
+       "slug": "thatcherism-to-cameron-1979-2012",
+       "title": "14. Thatcherism to Cameron (1979–2012)",
+       "words": 530
+      }
+     ]
+    },
+    {
+     "subject": "European History",
+     "slug": "european-history",
+     "marks": 100,
+     "topicCount": 13,
+     "topics": [
+      {
+       "slug": "the-french-revolution-and-napoleon",
+       "title": "1. The French Revolution and Napoleon",
+       "words": 598
+      },
+      {
+       "slug": "the-concert-of-europe-and-congress-of-vienna",
+       "title": "2. The Concert of Europe and Congress of Vienna",
+       "words": 550
+      },
+      {
+       "slug": "nationalism-liberalism-romanticism-socialism-industrialization",
+       "title": "3. Nationalism, Liberalism, Romanticism, Socialism, Industrialization and Colonialism",
+       "words": 574
+      },
+      {
+       "slug": "the-eastern-question-crimean-war-and-russo-turkish-war",
+       "title": "4. The Eastern Question, Crimean War and Russo-Turkish War",
+       "words": 530
+      },
+      {
+       "slug": "unification-of-italy",
+       "title": "5. Unification of Italy",
+       "words": 516
+      },
+      {
+       "slug": "unification-of-germany",
+       "title": "6. Unification of Germany",
+       "words": 489
+      },
+      {
+       "slug": "origins-of-the-first-world-war",
+       "title": "7. Origins of the First World War",
+       "words": 550
+      },
+      {
+       "slug": "first-world-war-peace-settlement-and-league-of-nations",
+       "title": "8. First World War, Peace Settlement and League of Nations",
+       "words": 595
+      },
+      {
+       "slug": "dictatorships-fascism-nazism-stalinism-depression-and",
+       "title": "9. Dictatorships: Fascism, Nazism, Stalinism, Depression and Appeasement",
+       "words": 554
+      },
+      {
+       "slug": "the-second-world-war-and-its-effects",
+       "title": "10. The Second World War and Its Effects",
+       "words": 570
+      },
+      {
+       "slug": "post-war-settlements-united-nations-marshall-plan-germany-nato",
+       "title": "11. Post-War Settlements, United Nations, Marshall Plan, Germany, NATO and Decolonization",
+       "words": 502
+      },
+      {
+       "slug": "europe-and-the-cold-war-1955-1991",
+       "title": "12. Europe and the Cold War (1955–1991)",
+       "words": 484
+      },
+      {
+       "slug": "europe-from-1991-to-2012",
+       "title": "13. Europe from 1991 to 2012",
+       "words": 552
+      }
+     ]
+    },
+    {
+     "subject": "History of Pakistan & India",
+     "slug": "history-of-pakistan-and-india",
+     "marks": 100,
+     "topicCount": 10,
+     "topics": [
+      {
+       "slug": "muslim-rule-and-heritage-in-india-712-1857",
+       "title": "1. Muslim Rule and Heritage in India (712–1857)",
+       "words": 4679
+      },
+      {
+       "slug": "british-rule-in-india-1857-1947",
+       "title": "2. British Rule in India (1857–1947)",
+       "words": 3036
+      },
+      {
+       "slug": "constitutional-and-political-reforms-under-the-british-1858-1947",
+       "title": "3. Constitutional and Political Reforms under the British (1858–1947)",
+       "words": 2883
+      },
+      {
+       "slug": "muslim-struggle-for-independence",
+       "title": "4. Muslim Struggle for Independence",
+       "words": 3619
+      },
+      {
+       "slug": "pakistan-movement",
+       "title": "5. Pakistan Movement",
+       "words": 3702
+      },
+      {
+       "slug": "history-of-pakistan-1947-to-date-early-challenges-and",
+       "title": "6. History of Pakistan (1947–to date): Early Challenges and Constitutional Development",
+       "words": 2607
+      },
+      {
+       "slug": "military-in-politics-and-civil-military-relations",
+       "title": "7. Military in Politics and Civil-Military Relations",
+       "words": 2436
+      },
+      {
+       "slug": "separation-of-east-pakistan-1971",
+       "title": "8. Separation of East Pakistan (1971)",
+       "words": 2614
+      },
+      {
+       "slug": "democracy-political-parties-and-constitutional-politics-in",
+       "title": "9. Democracy, Political Parties and Constitutional Politics in Pakistan",
+       "words": 2398
+      },
+      {
+       "slug": "foreign-policy-of-pakistan-1947-1999",
+       "title": "10. Foreign Policy of Pakistan (1947–1999)",
+       "words": 2676
+      }
+     ]
+    },
+    {
+     "subject": "History of USA",
+     "slug": "history-of-usa",
+     "marks": 100,
+     "topicCount": 21,
+     "topics": [
+      {
+       "slug": "america-before-1492-and-european-arrival",
+       "title": "1. America before 1492 and European Arrival",
+       "words": 457
+      },
+      {
+       "slug": "the-thirteen-colonies-and-the-american-revolution-1606-1783",
+       "title": "2. The Thirteen Colonies and the American Revolution (1606–1783)",
+       "words": 441
+      },
+      {
+       "slug": "the-early-independent-republic-1783-1819",
+       "title": "3. The Early Independent Republic (1783–1819)",
+       "words": 464
+      },
+      {
+       "slug": "territorial-expansion-and-growth-to-fifty-states",
+       "title": "4. Territorial Expansion and Growth to Fifty States",
+       "words": 451
+      },
+      {
+       "slug": "the-constitution-of-the-united-states",
+       "title": "5. The Constitution of the United States",
+       "words": 464
+      },
+      {
+       "slug": "civil-war-and-reconstruction-union-versus-confederacy",
+       "title": "6. Civil War and Reconstruction: Union versus Confederacy",
+       "words": 545
+      },
+      {
+       "slug": "industrialization-and-emergence-as-a-world-power-1870-1916",
+       "title": "7. Industrialization and Emergence as a World Power (1870–1916)",
+       "words": 393
+      },
+      {
+       "slug": "the-united-states-in-the-first-and-second-world-wars",
+       "title": "8. The United States in the First and Second World Wars",
+       "words": 442
+      },
+      {
+       "slug": "the-united-states-and-soviet-union-as-two-major-powers-after",
+       "title": "9. The United States and Soviet Union as Two Major Powers after 1945",
+       "words": 410
+      },
+      {
+       "slug": "role-of-the-usa-in-the-united-nations-and-international",
+       "title": "10. Role of the USA in the United Nations and International Organizations (1945–2012)",
+       "words": 443
+      },
+      {
+       "slug": "the-cold-war-and-the-usa-as-sole-superpower",
+       "title": "11. The Cold War and the USA as Sole Superpower",
+       "words": 421
+      },
+      {
+       "slug": "international-concerns-of-the-united-states",
+       "title": "12. International Concerns of the United States",
+       "words": 370
+      },
+      {
+       "slug": "war-on-terror-and-pakistan-usa-relations-2001-2012",
+       "title": "13. War on Terror and Pakistan-USA Relations (2001–2012)",
+       "words": 455
+      },
+      {
+       "slug": "global-perceptions-of-the-united-states",
+       "title": "14. Global Perceptions of the United States",
+       "words": 348
+      },
+      {
+       "slug": "the-progressive-era-theodore-roosevelt-and-woodrow-wilson",
+       "title": "15. The Progressive Era: Theodore Roosevelt and Woodrow Wilson",
+       "words": 427
+      },
+      {
+       "slug": "the-great-depression-and-new-deal",
+       "title": "16. The Great Depression and New Deal",
+       "words": 438
+      },
+      {
+       "slug": "the-civil-rights-movement",
+       "title": "17. The Civil Rights Movement",
+       "words": 449
+      },
+      {
+       "slug": "role-of-the-usa-in-international-conflicts",
+       "title": "18. Role of the USA in International Conflicts",
+       "words": 378
+      },
+      {
+       "slug": "presidential-election-in-the-united-states",
+       "title": "19. Presidential Election in the United States",
+       "words": 418
+      },
+      {
+       "slug": "the-united-states-congress",
+       "title": "20. The United States Congress",
+       "words": 390
+      },
+      {
+       "slug": "separation-of-powers-and-checks-and-balances",
+       "title": "21. Separation of Powers and Checks and Balances",
+       "words": 410
+      }
+     ]
+    },
+    {
+     "subject": "Islamic History & Culture",
+     "slug": "islamic-history-and-culture",
+     "marks": 100,
+     "topicCount": 12,
+     "topics": [
+      {
+       "slug": "pre-islamic-near-east-and-arabia",
+       "title": "1. Pre-Islamic Near East and Arabia",
+       "words": 915
+      },
+      {
+       "slug": "the-prophetic-age-570-632-ce",
+       "title": "2. The Prophetic Age (570–632 CE)",
+       "words": 916
+      },
+      {
+       "slug": "the-pious-caliphate",
+       "title": "3. The Pious Caliphate",
+       "words": 885
+      },
+      {
+       "slug": "political-system-of-islam",
+       "title": "4. Political System of Islam",
+       "words": 779
+      },
+      {
+       "slug": "institutional-development-in-the-muslim-state",
+       "title": "5. Institutional Development in the Muslim State",
+       "words": 810
+      },
+      {
+       "slug": "the-umayyads",
+       "title": "6. The Umayyads",
+       "words": 787
+      },
+      {
+       "slug": "the-abbasids",
+       "title": "7. The Abbasids",
+       "words": 694
+      },
+      {
+       "slug": "muslim-spain-al-andalus",
+       "title": "8. Muslim Spain (al-Andalus)",
+       "words": 697
+      },
+      {
+       "slug": "the-crusades",
+       "title": "9. The Crusades",
+       "words": 780
+      },
+      {
+       "slug": "the-ottoman-empire",
+       "title": "10. The Ottoman Empire",
+       "words": 815
+      },
+      {
+       "slug": "sufism-thought-institutions-and-social-role",
+       "title": "11. Sufism: Thought, Institutions and Social Role",
+       "words": 717
+      },
+      {
+       "slug": "islam-and-modernity",
+       "title": "12. Islam and Modernity",
+       "words": 760
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 5,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Botany",
+     "slug": "botany",
+     "marks": 100,
+     "topicCount": 10,
+     "topics": [
+      {
+       "slug": "algae-fungi-and-bryophytes",
+       "title": "I. Algae, Fungi and Bryophytes",
+       "words": 4534
+      },
+      {
+       "slug": "pteridophyta-and-gymnosperms",
+       "title": "II. Pteridophyta and Gymnosperms",
+       "words": 2741
+      },
+      {
+       "slug": "plant-anatomy-and-embryology",
+       "title": "III. Plant Anatomy and Embryology",
+       "words": 4585
+      },
+      {
+       "slug": "taxonomy-of-angiosperms",
+       "title": "IV. Taxonomy of Angiosperms",
+       "words": 3404
+      },
+      {
+       "slug": "plant-physiology",
+       "title": "V. Plant Physiology",
+       "words": 8308
+      },
+      {
+       "slug": "plant-ecology",
+       "title": "VI. Plant Ecology",
+       "words": 5823
+      },
+      {
+       "slug": "cytology",
+       "title": "VII. Cytology",
+       "words": 3451
+      },
+      {
+       "slug": "genetics",
+       "title": "VIII. Genetics",
+       "words": 4347
+      },
+      {
+       "slug": "evolution",
+       "title": "IX. Evolution",
+       "words": 2592
+      },
+      {
+       "slug": "molecular-biology",
+       "title": "X. Molecular Biology",
+       "words": 4474
+      }
+     ]
+    },
+    {
+     "subject": "English Literature",
+     "slug": "english-literature",
+     "marks": 100,
+     "topicCount": 11,
+     "topics": [
+      {
+       "slug": "essays",
+       "title": "I. Essays",
+       "words": 2139
+      },
+      {
+       "slug": "short-stories",
+       "title": "II. Short Stories",
+       "words": 1197
+      },
+      {
+       "slug": "poetry",
+       "title": "III. Poetry",
+       "words": 7886
+      },
+      {
+       "slug": "drama",
+       "title": "IV. Drama",
+       "words": 3002
+      },
+      {
+       "slug": "novels",
+       "title": "V. Novels",
+       "words": 2483
+      },
+      {
+       "slug": "literary-theory-and-criticism",
+       "title": "VI. Literary Theory and Criticism",
+       "words": 2592
+      },
+      {
+       "slug": "urdu-literature-urdu-adab",
+       "title": "VII. Urdu Literature (Urdu Adab)",
+       "words": 3903
+      },
+      {
+       "slug": "modern-urdu-poetry",
+       "title": "VIII. Modern Urdu Poetry",
+       "words": 1483
+      },
+      {
+       "slug": "urdu-prose",
+       "title": "IX. Urdu Prose",
+       "words": 759
+      },
+      {
+       "slug": "urdu-fiction-and-humorous-prose",
+       "title": "X. Urdu Fiction and Humorous Prose",
+       "words": 1203
+      },
+      {
+       "slug": "pr-cis-writing-and-essay-composition",
+       "title": "XI. Précis Writing and Essay Composition",
+       "words": 807
+      }
+     ]
+    },
+    {
+     "subject": "Gender Studies",
+     "slug": "gender-studies",
+     "marks": 100,
+     "topicCount": 9,
+     "topics": [
+      {
+       "slug": "introduction-to-gender-studies",
+       "title": "I. Introduction to Gender Studies",
+       "words": 2081
+      },
+      {
+       "slug": "social-construction-of-gender",
+       "title": "II. Social Construction of Gender",
+       "words": 2034
+      },
+      {
+       "slug": "feminist-theories-and-practice",
+       "title": "III. Feminist Theories and Practice",
+       "words": 2523
+      },
+      {
+       "slug": "feminist-movements",
+       "title": "IV. Feminist Movements",
+       "words": 2150
+      },
+      {
+       "slug": "gender-and-development",
+       "title": "V. Gender and Development",
+       "words": 3482
+      },
+      {
+       "slug": "status-of-women-in-pakistan",
+       "title": "VI. Status of Women in Pakistan",
+       "words": 1633
+      },
+      {
+       "slug": "gender-and-governance",
+       "title": "VII. Gender and Governance",
+       "words": 2140
+      },
+      {
+       "slug": "gender-based-violence",
+       "title": "VIII. Gender-Based Violence",
+       "words": 1536
+      },
+      {
+       "slug": "case-studies",
+       "title": "IX. Case Studies",
+       "words": 1277
+      }
+     ]
+    },
+    {
+     "subject": "Zoology",
+     "slug": "zoology",
+     "marks": 100,
+     "topicCount": 4,
+     "topics": [
+      {
+       "slug": "animal-diversity-invertebrates",
+       "title": "I. Animal Diversity — Invertebrates",
+       "words": 9837
+      },
+      {
+       "slug": "animal-diversity-chordates",
+       "title": "II. Animal Diversity — Chordates",
+       "words": 4224
+      },
+      {
+       "slug": "general-principles-of-zoology",
+       "title": "III. General Principles of Zoology",
+       "words": 9693
+      },
+      {
+       "slug": "animal-form-and-function",
+       "title": "IV. Animal Form and Function",
+       "words": 9991
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 6,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Constitutional Law",
+     "slug": "constitutional-law",
+     "marks": 100,
+     "topicCount": 7,
+     "topics": [
+      {
+       "slug": "definition-scope-and-basic-constitutional-concepts",
+       "title": "1. Definition, Scope and Basic Constitutional Concepts",
+       "words": 584
+      },
+      {
+       "slug": "constitutional-structures",
+       "title": "2. Constitutional Structures",
+       "words": 589
+      },
+      {
+       "slug": "judiciary-judicial-independence-and-judicial-review",
+       "title": "3. Judiciary, Judicial Independence and Judicial Review",
+       "words": 539
+      },
+      {
+       "slug": "fundamental-rights-and-civil-liberties",
+       "title": "4. Fundamental Rights and Civil Liberties",
+       "words": 551
+      },
+      {
+       "slug": "comparative-constitutional-law",
+       "title": "5. Comparative Constitutional Law",
+       "words": 565
+      },
+      {
+       "slug": "constitutional-history-of-pakistan",
+       "title": "6. Constitutional History of Pakistan",
+       "words": 635
+      },
+      {
+       "slug": "leading-constitutional-cases",
+       "title": "7. Leading Constitutional Cases",
+       "words": 648
+      }
+     ]
+    },
+    {
+     "subject": "Criminology",
+     "slug": "criminology",
+     "marks": 100,
+     "topicCount": 13,
+     "topics": [
+      {
+       "slug": "basic-concepts-of-crime-criminality-and-criminal-behaviour",
+       "title": "1. Basic Concepts of Crime, Criminality and Criminal Behaviour",
+       "words": 527
+      },
+      {
+       "slug": "understanding-criminology",
+       "title": "2. Understanding Criminology",
+       "words": 517
+      },
+      {
+       "slug": "crime-and-criminals",
+       "title": "3. Crime and Criminals",
+       "words": 483
+      },
+      {
+       "slug": "theoretical-perspectives-on-crime",
+       "title": "4. Theoretical Perspectives on Crime",
+       "words": 671
+      },
+      {
+       "slug": "juvenile-delinquency",
+       "title": "5. Juvenile Delinquency",
+       "words": 485
+      },
+      {
+       "slug": "juvenile-justice-system",
+       "title": "6. Juvenile Justice System",
+       "words": 492
+      },
+      {
+       "slug": "the-criminal-justice-system",
+       "title": "7. The Criminal Justice System",
+       "words": 475
+      },
+      {
+       "slug": "punitive-and-reformative-treatment-of-criminals",
+       "title": "8. Punitive and Reformative Treatment of Criminals",
+       "words": 418
+      },
+      {
+       "slug": "criminal-investigation",
+       "title": "9. Criminal Investigation",
+       "words": 484
+      },
+      {
+       "slug": "techniques-of-investigation",
+       "title": "10. Techniques of Investigation",
+       "words": 411
+      },
+      {
+       "slug": "legal-and-ethical-guidelines-for-investigators",
+       "title": "11. Legal and Ethical Guidelines for Investigators",
+       "words": 429
+      },
+      {
+       "slug": "international-policing-and-monitoring-organizations",
+       "title": "12. International Policing and Monitoring Organizations",
+       "words": 450
+      },
+      {
+       "slug": "modern-concepts-in-contemporary-criminology",
+       "title": "13. Modern Concepts in Contemporary Criminology",
+       "words": 612
+      }
+     ]
+    },
+    {
+     "subject": "International Law",
+     "slug": "international-law",
+     "marks": 100,
+     "topicCount": 17,
+     "topics": [
+      {
+       "slug": "nature-origin-and-basis-of-international-law",
+       "title": "1. Nature, Origin and Basis of International Law",
+       "words": 648
+      },
+      {
+       "slug": "international-law-and-state-law",
+       "title": "2. International Law and State Law",
+       "words": 678
+      },
+      {
+       "slug": "statehood-and-recognition",
+       "title": "3. Statehood and Recognition",
+       "words": 515
+      },
+      {
+       "slug": "law-of-treaties",
+       "title": "4. Law of Treaties",
+       "words": 656
+      },
+      {
+       "slug": "peaceful-settlement-of-international-disputes",
+       "title": "5. Peaceful Settlement of International Disputes",
+       "words": 560
+      },
+      {
+       "slug": "international-humanitarian-law-ihl",
+       "title": "6. International Humanitarian Law (IHL)",
+       "words": 676
+      },
+      {
+       "slug": "use-of-force",
+       "title": "7. Use of Force",
+       "words": 547
+      },
+      {
+       "slug": "international-institutions",
+       "title": "8. International Institutions",
+       "words": 491
+      },
+      {
+       "slug": "state-territorial-sovereignty",
+       "title": "9. State Territorial Sovereignty",
+       "words": 462
+      },
+      {
+       "slug": "state-responsibility",
+       "title": "10. State Responsibility",
+       "words": 523
+      },
+      {
+       "slug": "state-jurisdiction",
+       "title": "11. State Jurisdiction",
+       "words": 429
+      },
+      {
+       "slug": "succession-to-rights-and-obligations",
+       "title": "12. Succession to Rights and Obligations",
+       "words": 415
+      },
+      {
+       "slug": "the-state-and-the-individual",
+       "title": "13. The State and the Individual",
+       "words": 507
+      },
+      {
+       "slug": "the-state-and-economic-interests",
+       "title": "14. The State and Economic Interests",
+       "words": 439
+      },
+      {
+       "slug": "diplomatic-envoys-consuls-and-other-representatives",
+       "title": "15. Diplomatic Envoys, Consuls and Other Representatives",
+       "words": 450
+      },
+      {
+       "slug": "war-armed-conflicts-and-other-hostilities",
+       "title": "16. War, Armed Conflicts and Other Hostilities",
+       "words": 472
+      },
+      {
+       "slug": "neutrality",
+       "title": "17. Neutrality",
+       "words": 418
+      }
+     ]
+    },
+    {
+     "subject": "Law",
+     "slug": "law",
+     "marks": 100,
+     "topicCount": 7,
+     "topics": [
+      {
+       "slug": "definitions-of-crime",
+       "title": "1. Definitions of Crime",
+       "words": 876
+      },
+      {
+       "slug": "arbitration",
+       "title": "2. Arbitration",
+       "words": 730
+      },
+      {
+       "slug": "establishment-and-jurisdiction-of-civil-courts",
+       "title": "3. Establishment and Jurisdiction of Civil Courts",
+       "words": 614
+      },
+      {
+       "slug": "code-of-civil-procedure-1908-cpc",
+       "title": "4. Code of Civil Procedure, 1908 (CPC)",
+       "words": 871
+      },
+      {
+       "slug": "pakistan-penal-code-1860-ppc",
+       "title": "5. Pakistan Penal Code, 1860 (PPC)",
+       "words": 657
+      },
+      {
+       "slug": "qanun-e-shahadat-order-1984",
+       "title": "6. Qanun-e-Shahadat Order, 1984",
+       "words": 711
+      },
+      {
+       "slug": "code-of-criminal-procedure-1898-crpc",
+       "title": "7. Code of Criminal Procedure, 1898 (CrPC)",
+       "words": 706
+      }
+     ]
+    },
+    {
+     "subject": "Mercantile Law",
+     "slug": "mercantile-law",
+     "marks": 100,
+     "topicCount": 10,
+     "topics": [
+      {
+       "slug": "law-of-contract-1872",
+       "title": "1. Law of Contract, 1872",
+       "words": 633
+      },
+      {
+       "slug": "sale-of-goods-act-1930",
+       "title": "2. Sale of Goods Act, 1930",
+       "words": 574
+      },
+      {
+       "slug": "partnership-act-1932",
+       "title": "3. Partnership Act, 1932",
+       "words": 585
+      },
+      {
+       "slug": "negotiable-instruments-act-1881",
+       "title": "4. Negotiable Instruments Act, 1881",
+       "words": 519
+      },
+      {
+       "slug": "competition-act-2010",
+       "title": "5. Competition Act, 2010",
+       "words": 531
+      },
+      {
+       "slug": "electronic-transactions-ordinance-2002",
+       "title": "6. Electronic Transactions Ordinance, 2002",
+       "words": 493
+      },
+      {
+       "slug": "arbitration-law-in-pakistan",
+       "title": "7. Arbitration Law in Pakistan",
+       "words": 483
+      },
+      {
+       "slug": "consumer-protection",
+       "title": "8. Consumer Protection",
+       "words": 526
+      },
+      {
+       "slug": "company-law-fpsc-heading-companies-ordinance-1984",
+       "title": "9. Company Law — FPSC Heading: Companies Ordinance, 1984",
+       "words": 654
+      },
+      {
+       "slug": "electronic-fund-transfer-act-2007",
+       "title": "10. Electronic Fund Transfer Act, 2007",
+       "words": 512
+      }
+     ]
+    },
+    {
+     "subject": "Muslim Law & Jurisprudence",
+     "slug": "muslim-law-and-jurisprudence",
+     "marks": 100,
+     "topicCount": 10,
+     "topics": [
+      {
+       "slug": "sources-of-islamic-law",
+       "title": "1. Sources of Islamic Law",
+       "words": 754
+      },
+      {
+       "slug": "principles-of-islamic-jurisprudence",
+       "title": "2. Principles of Islamic Jurisprudence",
+       "words": 566
+      },
+      {
+       "slug": "islamic-criminal-law",
+       "title": "3. Islamic Criminal Law",
+       "words": 535
+      },
+      {
+       "slug": "islamic-family-law",
+       "title": "4. Islamic Family Law",
+       "words": 636
+      },
+      {
+       "slug": "islamic-law-of-contract",
+       "title": "5. Islamic Law of Contract",
+       "words": 536
+      },
+      {
+       "slug": "islamic-banking-and-insurance",
+       "title": "6. Islamic Banking and Insurance",
+       "words": 572
+      },
+      {
+       "slug": "islamic-international-law",
+       "title": "7. Islamic International Law",
+       "words": 486
+      },
+      {
+       "slug": "islamic-law-and-human-rights",
+       "title": "8. Islamic Law and Human Rights",
+       "words": 477
+      },
+      {
+       "slug": "dissolution-of-muslim-marriages-act-1939",
+       "title": "9. Dissolution of Muslim Marriages Act, 1939",
+       "words": 541
+      },
+      {
+       "slug": "muslim-family-laws-ordinance-1961",
+       "title": "10. Muslim Family Laws Ordinance, 1961",
+       "words": 489
+      }
+     ]
+    },
+    {
+     "subject": "Philosophy",
+     "slug": "philosophy",
+     "marks": 100,
+     "topicCount": 7,
+     "topics": [
+      {
+       "slug": "definition-nature-and-scope-of-philosophy",
+       "title": "1. Definition, Nature and Scope of Philosophy",
+       "words": 477
+      },
+      {
+       "slug": "philosophical-methods",
+       "title": "2. Philosophical Methods",
+       "words": 523
+      },
+      {
+       "slug": "epistemology",
+       "title": "3. Epistemology",
+       "words": 599
+      },
+      {
+       "slug": "ontology",
+       "title": "4. Ontology",
+       "words": 582
+      },
+      {
+       "slug": "ethics",
+       "title": "5. Ethics",
+       "words": 841
+      },
+      {
+       "slug": "muslim-thinkers",
+       "title": "6. Muslim Thinkers",
+       "words": 807
+      },
+      {
+       "slug": "contemporary-philosophical-movements",
+       "title": "7. Contemporary Philosophical Movements",
+       "words": 673
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "group": 7,
+   "rule": "",
+   "subjects": [
+    {
+     "subject": "Geography",
+     "slug": "geography",
+     "marks": 100,
+     "topicCount": 8,
+     "topics": [
+      {
+       "slug": "landform-development-and-geomorphology",
+       "title": "1. Landform Development and Geomorphology",
+       "words": 1982
+      },
+      {
+       "slug": "atmosphere-weather-and-climate",
+       "title": "2. Atmosphere, Weather and Climate",
+       "words": 1521
+      },
+      {
+       "slug": "oceans-and-seas",
+       "title": "3. Oceans and Seas",
+       "words": 1289
+      },
+      {
+       "slug": "climate-and-environmental-change-pollution-hazards-and",
+       "title": "4. Climate and Environmental Change, Pollution, Hazards and Conservation",
+       "words": 1280
+      },
+      {
+       "slug": "culture-language-religion-ethnicity-and-development",
+       "title": "5. Culture, Language, Religion, Ethnicity and Development",
+       "words": 1199
+      },
+      {
+       "slug": "agriculture-industry-and-resources",
+       "title": "6. Agriculture, Industry and Resources",
+       "words": 1281
+      },
+      {
+       "slug": "population-settlements-and-urban-geography",
+       "title": "7. Population, Settlements and Urban Geography",
+       "words": 1544
+      },
+      {
+       "slug": "political-geography-tourism-and-medical-geography",
+       "title": "8. Political Geography, Tourism and Medical Geography",
+       "words": 1310
+      }
+     ]
+    },
+    {
+     "subject": "Psychology",
+     "slug": "psychology",
+     "marks": 100,
+     "topicCount": 14,
+     "topics": [
+      {
+       "slug": "nature-and-scope-of-psychology",
+       "title": "1. Nature and Scope of Psychology",
+       "words": 1569
+      },
+      {
+       "slug": "biological-basis-of-behaviour",
+       "title": "2. Biological Basis of Behaviour",
+       "words": 1275
+      },
+      {
+       "slug": "sensation-and-perception",
+       "title": "3. Sensation and Perception",
+       "words": 1071
+      },
+      {
+       "slug": "learning-and-memory",
+       "title": "4. Learning and Memory",
+       "words": 1276
+      },
+      {
+       "slug": "motivation-and-emotion",
+       "title": "5. Motivation and Emotion",
+       "words": 1139
+      },
+      {
+       "slug": "psychological-assessment",
+       "title": "6. Psychological Assessment",
+       "words": 1228
+      },
+      {
+       "slug": "personality",
+       "title": "7. Personality",
+       "words": 979
+      },
+      {
+       "slug": "intelligence",
+       "title": "8. Intelligence",
+       "words": 1125
+      },
+      {
+       "slug": "social-influence-and-group-dynamics",
+       "title": "9. Social Influence and Group Dynamics",
+       "words": 1153
+      },
+      {
+       "slug": "developmental-psychology",
+       "title": "10. Developmental Psychology",
+       "words": 1040
+      },
+      {
+       "slug": "abnormal-and-clinical-psychology",
+       "title": "11. Abnormal and Clinical Psychology",
+       "words": 1276
+      },
+      {
+       "slug": "organizational-industrial-psychology",
+       "title": "12. Organizational / Industrial Psychology",
+       "words": 1139
+      },
+      {
+       "slug": "health-psychology",
+       "title": "13. Health Psychology",
+       "words": 942
+      },
+      {
+       "slug": "forensic-psychology",
+       "title": "14. Forensic Psychology",
+       "words": 1115
+      }
+     ]
+    },
+    {
+     "subject": "Sociology",
+     "slug": "sociology",
+     "marks": 100,
+     "topicCount": 12,
+     "topics": [
+      {
+       "slug": "individual-and-sociality-of-man",
+       "title": "1. Individual and Sociality of Man",
+       "words": 1196
+      },
+      {
+       "slug": "culture",
+       "title": "2. Culture",
+       "words": 1346
+      },
+      {
+       "slug": "society-community-and-social-evolution",
+       "title": "3. Society, Community and Social Evolution",
+       "words": 1105
+      },
+      {
+       "slug": "social-interaction-caste-class-and-social-mobility",
+       "title": "4. Social Interaction, Caste, Class and Social Mobility",
+       "words": 1239
+      },
+      {
+       "slug": "social-control-anomie-alienation-and-social-integration",
+       "title": "5. Social Control, Anomie, Alienation and Social Integration",
+       "words": 1092
+      },
+      {
+       "slug": "social-and-cultural-change-social-policy",
+       "title": "6. Social and Cultural Change; Social Policy",
+       "words": 1200
+      },
+      {
+       "slug": "public-opinion-and-opinion-leadership",
+       "title": "7. Public Opinion and Opinion Leadership",
+       "words": 1102
+      },
+      {
+       "slug": "rural-and-urban-community",
+       "title": "8. Rural and Urban Community",
+       "words": 1000
+      },
+      {
+       "slug": "social-institutions",
+       "title": "9. Social Institutions",
+       "words": 1136
+      },
+      {
+       "slug": "social-problems-of-pakistan",
+       "title": "10. Social Problems of Pakistan",
+       "words": 1681
+      },
+      {
+       "slug": "sociological-perspectives-and-major-thinkers",
+       "title": "11. Sociological Perspectives and Major Thinkers",
+       "words": 2304
+      },
+      {
+       "slug": "methods-of-sociological-research",
+       "title": "12. Methods of Sociological Research",
+       "words": 1749
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "subjectTotal": 34,
+ "topicTotal": 339
+}

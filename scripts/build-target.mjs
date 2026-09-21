@@ -55,6 +55,7 @@ if (target === 'hostinger') {
   await import('./strengthen-longtail-search-pages.mjs')
   await import('./expand-book-summary-seo.mjs')
   await import('./expand-islamic-references-seo.mjs')
+  await import('./expand-optional-notes-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')

@@ -35,6 +35,10 @@ import IslamicReferences from '@/pages/IslamicReferences'
 import IslamicReferenceChapter from '@/pages/IslamicReferenceChapter'
 import IslamicReferenceTopic from '@/pages/IslamicReferenceTopic'
 import { islamicChapters, primeChapter, primeTopic } from '@/data/islamicReferences'
+import OptionalNotes from '@/pages/OptionalNotes'
+import OptionalSubjectNotes from '@/pages/OptionalSubjectNotes'
+import OptionalTopicNotes from '@/pages/OptionalTopicNotes'
+import { allOptionalSubjects, primeOptionalSubject, primeOptionalTopic } from '@/data/optionalNotes'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
@@ -86,6 +90,31 @@ function islamicReferenceRoutes(): PrerenderRoute[] {
   return routes
 }
 
+/** The optional-subject notes, primed from `public/` exactly as above. */
+function optionalNoteRoutes(): PrerenderRoute[] {
+  const dataDir = join(process.cwd(), 'public', 'study-material', 'optional')
+  const read = (...parts: string[]) => JSON.parse(readFileSync(join(dataDir, ...parts), 'utf8'))
+  const routes: PrerenderRoute[] = []
+
+  for (const subject of allOptionalSubjects()) {
+    primeOptionalSubject(read(`${subject.slug}.json`))
+    routes.push(page(
+      `/study-material/optional/${subject.slug}`,
+      () => <OptionalSubjectNotes />,
+      '/study-material/optional/:subject',
+    ))
+    for (const topic of subject.topics) {
+      primeOptionalTopic(read(subject.slug, `${topic.slug}.json`))
+      routes.push(page(
+        `/study-material/optional/${subject.slug}/${topic.slug}`,
+        () => <OptionalTopicNotes />,
+        '/study-material/optional/:subject/:topic',
+      ))
+    }
+  }
+  return routes
+}
+
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
   page('/start-css', () => <StartCSS />),
@@ -120,6 +149,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/opinions', () => <OpinionsPage />),
   page('/consultation', () => <Consultation />),
   page('/study-material/islamic-studies', () => <IslamicReferences />),
+  page('/study-material/optional', () => <OptionalNotes />),
   page('/css-2026-written-result', () => <Css2026Result />),
   page('/legal', () => <LegalCentre />),
   page('/privacy-policy', () => <PrivacyPolicy />),
@@ -131,6 +161,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/about', () => <AboutCssVista />),
   page('/contact', () => <ContactCssVista />),
   ...islamicReferenceRoutes(),
+  ...optionalNoteRoutes(),
 ]
 
 export const PRERENDER_ROUTE_PATHS = PRERENDER_ROUTES.map((route) => route.path)

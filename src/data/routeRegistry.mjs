@@ -114,6 +114,10 @@ export const ROUTE_REGISTRY = [
   // ad-eligible: authentication does not disable advertising.
   protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.', { adMode: 'enabled' }),
   protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern', adMode: 'enabled' }),
+  // Topic-wise optional-subject notes. Real study content, so indexable.
+  publicPage('/study-material/optional', 'CSS Optional Subject Notes (All 7 Groups)', 'Topic-wise CSS optional subject notes across all seven FPSC groups, organised by group, subject and topic.', 'CSS optional subject notes', { contentQuality: 'substantial', adMode: 'enabled' }),
+  publicPage('/study-material/optional/:subject', 'CSS Optional Subject Notes', 'Topic-wise study notes for this CSS optional subject, following the FPSC syllabus.', 'CSS optional subject notes', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
+  publicPage('/study-material/optional/:subject/:topic', 'CSS Optional Subject Topic Notes', 'Detailed study notes for this CSS optional subject topic, following the FPSC syllabus.', 'CSS optional subject topic notes', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   // Public study material. Real, source-checked, bilingual content, so the
   // chapter and topic pages are indexable on their own merits.
   publicPage('/study-material/islamic-studies', 'CSS Islamic Studies Reference Bank (English & Urdu)', 'Browse source-checked Islamic Studies references for all seven CSS chapters, with Arabic source passages and parallel English and Urdu.', 'CSS Islamic Studies reference bank', { contentQuality: 'substantial', adMode: 'enabled' }),
