@@ -8,13 +8,12 @@ import {
 } from 'lucide-react'
 import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
 import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
-import { mergedHomeCards } from '@/lib/admin'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
-import { printPdfFile } from '@/components/PrintMenu'
+import { scheduleIdleWork } from '@/lib/idle'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
 import TutorialAnnouncement from '@/components/TutorialAnnouncement'
@@ -109,6 +108,10 @@ function relativeTime(timestamp: number) {
 
 function openSearch() {
   window.dispatchEvent(new Event('cssvista:open-search'))
+}
+
+function printMagazinePdf(pdfUrl: string) {
+  void import('@/components/PrintMenu').then(({ printPdfFile }) => printPdfFile(pdfUrl))
 }
 
 function HomeHero() {
@@ -430,7 +433,7 @@ function WeeklyMagazineCard() {
               <button
                 type="button"
                 disabled={!available || !weeklyMagazine.pdfUrl}
-                onClick={() => weeklyMagazine.pdfUrl && printPdfFile(weeklyMagazine.pdfUrl)}
+                onClick={() => weeklyMagazine.pdfUrl && printMagazinePdf(weeklyMagazine.pdfUrl)}
                 className="cssv-tap inline-flex h-9 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 text-[10px] font-bold text-emerald-900 disabled:cursor-not-allowed disabled:text-slate-400"
               >
                 <Printer className="h-3.5 w-3.5" /> Print magazine
@@ -438,7 +441,7 @@ function WeeklyMagazineCard() {
             </div>
             <details className="no-print mt-3 rounded-lg border bg-white/70 p-2.5">
               <summary className="cursor-pointer text-[10px] font-bold text-emerald-900">Past weeks magazine archive</summary>
-              <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printPdfFile(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
+              <div className="mt-2 space-y-2">{weeklyMagazines.map((issue) => <div key={issue.issue} className="flex flex-wrap items-center gap-2 rounded-md bg-secondary/50 p-2 text-[10px]"><time className="mr-auto font-bold text-slate-700" dateTime={issue.publishedDate}>{new Date(`${issue.publishedDate}T12:00:00`).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</time>{issue.pdfUrl && <><a href={issue.pdfUrl} target="_blank" rel="noopener noreferrer" className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">View</a><a href={issue.pdfUrl} download className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Download</a><button type="button" onClick={() => issue.pdfUrl && printMagazinePdf(issue.pdfUrl)} className="rounded-md border bg-white px-2 py-1 font-bold text-emerald-800">Print</button></>}</div>)}</div>
             </details>
           </div>
           <div className="relative min-h-[168px] overflow-hidden bg-emerald-950 p-2.5 min-[360px]:min-h-0 sm:min-h-[230px] sm:p-4">
@@ -479,6 +482,7 @@ export default function Home() {
   const location = useLocation()
   const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
+  const [homeCards, setHomeCards] = useState(defaultHomeCards)
   const stats = useMemo(() => getStats(), [])
   const activity = useMemo(() => recentActivities(4)[0], [])
   const initialState = useMemo(() => getState(), [])
@@ -503,7 +507,7 @@ export default function Home() {
   })
   const continueProgress = getContinueProgress(activity, stats, initialState)
   const allFeatures = useMemo(
-    () => sortHomeCardsByPriority(mergedHomeCards(defaultHomeCards)
+    () => sortHomeCardsByPriority(homeCards
       .filter((card) => (
         card.visible
         && card.id !== 'current-affairs'
@@ -518,13 +522,21 @@ export default function Home() {
         && (hasPlanner || card.id !== 'study-planner')
       )))
       .map((card) => card.id === 'book-summaries' ? { ...card, title: '100 Book Summaries' } : card),
-    [hasPlanner],
+    [hasPlanner, homeCards],
   )
 
   useEffect(() => {
     setShowTimers(true)
     setShowContinueStudy(true)
   }, [location.key])
+
+  useEffect(() => scheduleIdleWork(() => {
+    void import('@/lib/admin')
+      .then(({ mergedHomeCards }) => setHomeCards(mergedHomeCards(defaultHomeCards)))
+      .catch(() => {
+        // The static homepage catalogue remains complete if optional admin content cannot load.
+      })
+  }, { timeout: 3_000, fallbackDelay: 900 }), [])
 
   useEffect(() => {
     const restoreDismissedPanels = () => {
