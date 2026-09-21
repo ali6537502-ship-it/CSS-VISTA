@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
@@ -477,6 +477,7 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 
 export default function Home() {
   const location = useLocation()
+  const homeRef = useRef<HTMLDivElement>(null)
   const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
   const stats = useMemo(() => getStats(), [])
@@ -539,8 +540,39 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    const home = homeRef.current
+    if (!home) return undefined
+
+    const sections = Array.from(home.querySelectorAll<HTMLElement>('.cssv-reveal'))
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'))
+      return undefined
+    }
+
+    let entranceIndex = 0
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const section = entry.target as HTMLElement
+        section.style.setProperty('--cssv-entrance-delay', `${Math.min(entranceIndex * 55, 165)}ms`)
+        section.classList.add('is-visible')
+        entranceIndex += 1
+        observer.unobserve(section)
+      })
+    }, {
+      rootMargin: '0px 0px -7% 0px',
+      threshold: 0.06,
+    })
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [location.key])
+
   return (
-    <div className="cssv-home min-h-screen pb-4 text-slate-900">
+    <div ref={homeRef} className="cssv-home is-reveal-ready min-h-screen pb-4 text-slate-900">
       <div className="mx-auto max-w-[1240px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-7">
         <div id="cssv-home-ad-free-top" data-cssv-auto-ad-exclusion="home-top">
           <button
