@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, ListTree, type LucideIcon,
 } from 'lucide-react'
 import { STORAGE_FAILED_EVENT } from '@/lib/progressEvents'
 import { site } from '@/data/site'
@@ -52,6 +52,7 @@ const nav = [
       { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
       { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
       { label: 'Essay - Miss Sadia Zahoor, PAS', to: '/essay', icon: PenLine },
+      { label: 'Essay Themes 2027 Roadmap', to: '/study-material/essay-themes', icon: ListTree },
       { label: 'Answer Timer', to: '/answer-timer', icon: ClipboardList },
       { label: 'Answer-Writing Practice', to: '/answer-writing', icon: PenLine },
       { label: 'Answer Evaluation by Miss Sadia Zahoor, PAS', to: '/answer-evaluation', icon: FileCheck2 },

@@ -110,6 +110,10 @@ export const ROUTE_REGISTRY = [
   publicPage('/past-papers/:exam/:year', 'Past Papers by Year', 'Browse the available past-paper collection for this examination and year.', 'Past papers by year', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   publicPage('/past-papers/view/:id', 'Past Paper PDF Viewer', 'View and download an available past-paper PDF from the CSS Vista archive.', 'Past paper PDF viewer', { contentQuality: 'document', adMode: 'disabled', match: 'pattern', minimumHeight: 0, schemaType: 'DigitalDocument' }),
   publicPage('/css-mcqs', 'CSS Subject MCQs', 'Browse and practise compulsory and optional CSS subject MCQ banks with topic filters, answer review, bookmarks and progress tracking.', 'CSS subject MCQ banks', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
+  // Signed-in study material. Noindex because it is account content, but
+  // ad-eligible: authentication does not disable advertising.
+  protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.', { adMode: 'enabled' }),
+  protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern', adMode: 'enabled' }),
   publicPage('/essay', 'CSS Essay Preparation', 'Learn CSS English Essay through structured skill guides, theme-wise preparation, practice topics, thesis and outline guidance, and self-assessment.', 'CSS English Essay preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/mpt', 'CSS MPT Preparation', 'Explore CSS MPT preparation resources, question-bank subjects and mock-test information.', 'CSS MPT preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   protectedPage('/mpt/bank/:bankId', 'MPT Question Bank', 'Interactive CSS MPT question-bank practice.', { match: 'pattern' }),

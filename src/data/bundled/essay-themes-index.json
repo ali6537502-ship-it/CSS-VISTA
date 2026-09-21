@@ -1,0 +1,2205 @@
+{
+  "title": "Essay Themes 2027 — Research & Data-Collection Roadmap",
+  "themes": [
+    {
+      "number": 1,
+      "slug": "artificial-intelligence-automation-and-future-of-humanity",
+      "name": "Artificial Intelligence, Automation & Future of Humanity",
+      "tier": "A",
+      "brief": "Build the file from first principles: what AI is, how it developed, what it can and cannot do, how it changes work and institutions, and which governance, ethical, security and human questions follow from rapid adoption.",
+      "checkpointCount": 127,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 22
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 12
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 10
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 13
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 10
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "slug": "governance-institutional-reform-and-state-capacity",
+      "name": "Governance, Institutional Reform & State Capacity",
+      "tier": "A",
+      "brief": "Study why some states can make rules, raise resources, coordinate institutions and deliver services effectively while others struggle, and then translate that diagnosis into practical institutional reform directions.",
+      "checkpointCount": 112,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 12
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 10
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 9
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "slug": "democracy-constitutionalism-and-political-polarization",
+      "name": "Democracy, Constitutionalism & Political Polarization",
+      "tier": "A",
+      "brief": "Build a neutral, institution-focused file that explains democratic principles, constitutional restraints, electoral competition, rights, federalism and polarization without reducing the theme to party politics.",
+      "checkpointCount": 108,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 10
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "slug": "pakistans-economy-and-structural-economic-reforms",
+      "name": "Pakistan’s Economy & Structural Economic Reforms",
+      "tier": "A",
+      "brief": "Prepare an economy file that separates short-term stabilization from long-term structural transformation and explains how productivity, taxation, energy, exports, investment, human capital and institutions interact.",
+      "checkpointCount": 115,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 20
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 14
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 10
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "slug": "climate-change-climate-justice-and-resilience",
+      "name": "Climate Change, Climate Justice & Resilience",
+      "tier": "A",
+      "brief": "Build a science-grounded and policy-oriented file that separates hazards, exposure, vulnerability, adaptation, mitigation and climate justice, with Pakistan-specific resilience priorities.",
+      "checkpointCount": 109,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 20
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 9
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "slug": "education-knowledge-economy-and-human-capital",
+      "name": "Education, Knowledge Economy & Human Capital",
+      "tier": "A",
+      "brief": "Treat education as a lifelong system from foundational learning to research and innovation, linking access, quality, equity, skills and institutional governance to productivity and citizenship.",
+      "checkpointCount": 111,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 19
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 12
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 10
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "slug": "population-growth-youth-bulge-and-employment",
+      "name": "Population Growth, Youth Bulge & Employment",
+      "tier": "A",
+      "brief": "Connect demography to jobs, education, health, women’s participation, urbanization and migration; treat a youth bulge as an opportunity only when the conditions for a demographic dividend exist.",
+      "checkpointCount": 108,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 12
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "slug": "changing-world-order-multipolarity-and-pakistan",
+      "name": "Changing World Order, Multipolarity & Pakistan",
+      "tier": "A",
+      "brief": "Examine whether and where global power is diffusing across military, economic, technological, financial and institutional domains, and what diversified diplomacy means for Pakistan.",
+      "checkpointCount": 101,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 9
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 10
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 6
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "slug": "war-peace-nuclear-weapons-and-global-security",
+      "name": "War, Peace, Nuclear Weapons & Global Security",
+      "tier": "A",
+      "brief": "Prepare war and security through causes, deterrence, escalation, emerging technology, international law and peace mechanisms, with careful evidence and no unsupported strategic claims.",
+      "checkpointCount": 103,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 19
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "slug": "water-security-agriculture-and-food-security",
+      "name": "Water Security, Agriculture & Food Security",
+      "tier": "A",
+      "brief": "Treat water, agriculture and food as one resource-production-nutrition system, connecting supply, governance, climate, pricing, technology and transboundary dimensions.",
+      "checkpointCount": 108,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "slug": "social-media-misinformation-and-post-truth-politics",
+      "name": "Social Media, Misinformation & Post-Truth Politics",
+      "tier": "A",
+      "brief": "Study how platform design, algorithms, creators, political actors and AI-generated content shape information quality, trust, polarization and democratic/public-health outcomes while balancing regulation with expression.",
+      "checkpointCount": 104,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 10
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "slug": "palestine-international-law-and-crisis-of-global-governance",
+      "name": "Palestine, International Law & Crisis of Global Governance",
+      "tier": "A",
+      "brief": "Build a legal-institutional and humanitarian research file that clearly separates verified facts, legal questions, court findings or orders, state positions and contested political claims.",
+      "checkpointCount": 98,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 9
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 4
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 4
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "slug": "women-gender-equality-and-social-transformation",
+      "name": "Women, Gender Equality & Social Transformation",
+      "tier": "A",
+      "brief": "Study equality through capabilities, law, education, health, paid work, unpaid care, safety, property, representation and technology, with careful attention to regional and class differences.",
+      "checkpointCount": 104,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 17
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "slug": "energy-security-and-green-energy-transition",
+      "name": "Energy Security & Green Energy Transition",
+      "tier": "A",
+      "brief": "Study energy through availability, affordability, reliability and sustainability, linking fuel imports, power-sector governance, grids, renewables, finance and industrial competitiveness.",
+      "checkpointCount": 106,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 19
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "slug": "justice-leadership-knowledge-and-philosophical-essays",
+      "name": "Justice, Leadership, Knowledge & Philosophical Essays",
+      "tier": "A",
+      "brief": "Build reusable concept files for abstract essays: define the idea, trace major interpretations, connect it to real-world examples, test it against counterexamples and end with a nuanced thesis rather than quotation collection.",
+      "checkpointCount": 92,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 22
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 10
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 4
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 3
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 5
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 6
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 4
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 10
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "slug": "globalization-deglobalization-and-economic-nationalism",
+      "name": "Globalization, Deglobalization & Economic Nationalism",
+      "tier": "B",
+      "brief": "Separate trade, finance, technology, supply chains, migration and culture; then study how shocks, strategic rivalry and industrial policy are changing rather than simply ending globalization.",
+      "checkpointCount": 101,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 10
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "slug": "rule-of-law-human-rights-and-access-to-justice",
+      "name": "Rule of Law, Human Rights & Access to Justice",
+      "tier": "B",
+      "brief": "Connect constitutional and legal guarantees to actual enforcement and access, focusing on equality before law, independent adjudication, due process, policing, case delay, legal aid and institutional accountability.",
+      "checkpointCount": 99,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 17
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 7
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "slug": "digital-revolution-cybersecurity-and-digital-sovereignty",
+      "name": "Digital Revolution, Cybersecurity & Digital Sovereignty",
+      "tier": "B",
+      "brief": "Study digital transformation as infrastructure plus data, identity, payments, cloud and platforms, while mapping cybersecurity threats, privacy rights and strategic dependence on external technology.",
+      "checkpointCount": 104,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 19
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 7
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 10
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "slug": "poverty-inequality-and-inclusive-development",
+      "name": "Poverty, Inequality & Inclusive Development",
+      "tier": "B",
+      "brief": "Separate poverty, inequality, vulnerability and exclusion; connect income and consumption to health, education, assets, jobs and social protection; test whether growth is inclusive.",
+      "checkpointCount": 100,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 16
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 11
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 6
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "slug": "extremism-intolerance-and-social-cohesion",
+      "name": "Extremism, Intolerance & Social Cohesion",
+      "tier": "B",
+      "brief": "Use a multi-causal approach to radicalization, intolerance and violent extremism; distinguish ideology, networks, grievances, governance and online ecosystems, and separate prevention from policing.",
+      "checkpointCount": 98,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 8
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 6
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 6
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "slug": "urbanization-sustainable-cities-and-urban-governance",
+      "name": "Urbanization, Sustainable Cities & Urban Governance",
+      "tier": "B",
+      "brief": "Study cities as economic systems and governance systems: density, land, housing, transport, services, pollution, municipal finance and climate resilience.",
+      "checkpointCount": 102,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 7
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 10
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 6
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "slug": "science-technology-innovation-and-national-development",
+      "name": "Science, Technology, Innovation & National Development",
+      "tier": "B",
+      "brief": "Map the full innovation chain from basic science and universities to applied research, firms, finance, intellectual property, diffusion and national productivity.",
+      "checkpointCount": 101,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 17
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 7
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 10
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "slug": "migration-brain-drain-and-global-mobility",
+      "name": "Migration, Brain Drain & Global Mobility",
+      "tier": "B",
+      "brief": "Distinguish internal migration, labour emigration, skilled migration, refugees and displacement, and diaspora engagement; then evaluate costs and benefits across workers, households and the national economy.",
+      "checkpointCount": 100,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 11
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 6
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "slug": "media-freedom-of-expression-and-responsible-journalism",
+      "name": "Media, Freedom of Expression & Responsible Journalism",
+      "tier": "B",
+      "brief": "Balance the democratic value of free expression and independent journalism with professional responsibility, safety, media economics, ownership, regulation and the platform-driven information environment.",
+      "checkpointCount": 104,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 18
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 10
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 8
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 8
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 7
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 7
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "slug": "pakistans-foreign-policy-geo-economics-and-strategic",
+      "name": "Pakistan’s Foreign Policy, Geo-economics & Strategic Autonomy",
+      "tier": "B",
+      "brief": "Organize foreign policy around durable national interests, relationship-specific files, economic interdependence and issue-based diplomacy, using official statements and measurable outcomes.",
+      "checkpointCount": 104,
+      "sections": [
+        {
+          "letter": "A",
+          "title": "Scope & Conceptual Foundation",
+          "kind": "terms",
+          "count": 17
+        },
+        {
+          "letter": "B",
+          "title": "Origin, Evolution & Turning Points",
+          "kind": "directions",
+          "count": 5
+        },
+        {
+          "letter": "C",
+          "title": "Analytical Frameworks",
+          "kind": "frameworks",
+          "count": 8
+        },
+        {
+          "letter": "D",
+          "title": "Master Dimensions",
+          "kind": "dimensions",
+          "count": 12
+        },
+        {
+          "letter": "E",
+          "title": "Data & Evidence",
+          "kind": "indicators",
+          "count": 9
+        },
+        {
+          "letter": "F",
+          "title": "Pakistan Deep-Dive",
+          "kind": "directions",
+          "count": 9
+        },
+        {
+          "letter": "G",
+          "title": "Global & Comparative Case Bank",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "H",
+          "title": "Laws, Policies, Reports & Primary Documents",
+          "kind": "documents",
+          "count": 8
+        },
+        {
+          "letter": "I",
+          "title": "Priority Source Families",
+          "kind": "sources",
+          "count": 8
+        },
+        {
+          "letter": "J",
+          "title": "Counterarguments, Trade-Offs & Contested Questions",
+          "kind": "directions",
+          "count": 6
+        },
+        {
+          "letter": "K",
+          "title": "Reform & Solution Directions",
+          "kind": "directions",
+          "count": 7
+        },
+        {
+          "letter": "L",
+          "title": "Essay / Analytical Title Bank",
+          "kind": "titles",
+          "count": 8
+        },
+        {
+          "letter": "M",
+          "title": "Theme-Specific Search Seed",
+          "kind": "search",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
