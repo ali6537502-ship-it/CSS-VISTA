@@ -17,7 +17,6 @@ import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/st
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
-import RouteSeo from '@/components/RouteSeo'
 import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
@@ -143,6 +142,7 @@ const mobileQuickLinks = [
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
 const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
+const RouteSeo = lazyWithRecovery(() => import('@/components/RouteSeo'))
 const StudyActivityTracker = lazyWithRecovery(() => import('@/components/StudyActivityTracker'))
 
 function DeferredVistaShortcut() {
@@ -152,6 +152,15 @@ function DeferredVistaShortcut() {
 
   if (!ready) return null
   return <Suspense fallback={null}><VistaShortcut /></Suspense>
+}
+
+function DeferredRouteSeo() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => scheduleIdleWork(() => setReady(true), { timeout: 1_500, fallbackDelay: 650 }), [])
+
+  if (!ready) return null
+  return <Suspense fallback={null}><DeferredRouteSeo /></Suspense>
 }
 
 function DeferredStudyActivityTracker() {
