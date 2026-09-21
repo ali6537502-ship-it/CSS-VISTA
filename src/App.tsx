@@ -58,6 +58,7 @@ const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introdu
 const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
+const GrammarCourse = lazy(() => import('./pages/GrammarCourse'))
 const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))
@@ -146,6 +147,7 @@ export default function App() {
         <Route path="/gk" element={<S><GKWorld /></S>} />
         <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
+        <Route path="/grammar-course" element={<S><GrammarCourse /></S>} />
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
         {/* The summary page reads :slug itself, so the canonical URL renders the
             summary directly instead of bouncing to a query-string variant. */}

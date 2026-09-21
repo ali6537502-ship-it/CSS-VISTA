@@ -69,7 +69,7 @@ const nav = [
       { label: 'One-Liner GK', to: '/one-liner-gk', icon: BookOpen },
       { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
-      { label: '30-Day Master Grammar Course', to: '/language-grammar?lang=english&view=master-course', icon: Languages },
+      { label: '30-Day Grammar Course', to: '/grammar-course', icon: Languages },
       { label: 'CSS Study Material', to: '/study-material', icon: LibraryBig },
       { label: 'Optional Subject Notes', to: '/study-material/optional', icon: LibraryBig },
       { label: 'Islamic Studies Reference Bank', to: '/study-material/islamic-studies', icon: BookMarked },
