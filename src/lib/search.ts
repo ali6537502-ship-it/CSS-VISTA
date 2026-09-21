@@ -14,6 +14,9 @@ import { noteProducts } from '@/data/notes'
 import { lectureCourses } from '@/data/lectures'
 import { handwrittenNoteSubjects } from '@/data/handwrittenNotes'
 import { css2026WrittenResult } from '@/data/css2026Result'
+import { optionalGroupsWithNotes } from '@/data/optionalNotes'
+import { islamicChapters, chapterName } from '@/data/islamicReferences'
+import { essayThemeIndex } from '@/data/essayThemes'
 
 installIdioms()
 
@@ -155,6 +158,53 @@ const localCorpus: SearchDocument[] = [
       link: '/subjects/optional',
     })),
   ),
+  // Study material: a student searching "Psychology" or "Sirah" should reach
+  // the notes themselves, not only the subject-chooser page.
+  ...optionalGroupsWithNotes().flatMap((group) =>
+    group.subjects.flatMap((subject) => [
+      {
+        id: `optnotes-${subject.slug}`,
+        title: `${subject.subject} Notes (Group ${group.group})`,
+        category: 'Optional Subject Notes',
+        snippet: `${subject.topicCount} topics of CSS ${subject.subject} study notes following the FPSC syllabus.`,
+        keywords: subject.topics.map((topic) => topic.title).join(' '),
+        link: `/study-material/optional/${subject.slug}`,
+      },
+      ...subject.topics.map((topic) => ({
+        id: `optnotes-topic-${subject.slug}-${topic.slug}`,
+        title: `${subject.subject}: ${topic.title}`,
+        category: 'Optional Subject Topic',
+        snippet: `${topic.words.toLocaleString()} words · about ${Math.max(1, Math.round(topic.words / 200))} min read.`,
+        link: `/study-material/optional/${subject.slug}/${topic.slug}`,
+      })),
+    ]),
+  ),
+  ...islamicChapters().flatMap((chapter) => [
+    {
+      id: `islamref-${chapter.slug}`,
+      title: `${chapterName(chapter)} — Islamic Studies References`,
+      category: 'Islamic Studies Reference Bank',
+      snippet: `${chapter.referenceCount} source-checked references across ${chapter.topics.length} topics, in English and Urdu.`,
+      keywords: `${chapter.titleUr} ${chapter.topics.map((topic) => `${topic.titleEn} ${topic.titleUr}`).join(' ')}`,
+      link: `/study-material/islamic-studies/${chapter.slug}`,
+    },
+    ...chapter.topics.map((topic) => ({
+      id: `islamref-topic-${chapter.slug}-${topic.slug}`,
+      title: `${chapterName(chapter)}: ${topic.titleEn}`,
+      category: 'Islamic Studies Topic',
+      snippet: `${topic.count} references, numbered ${topic.first}–${topic.last}, with Arabic sources and parallel English and Urdu.`,
+      keywords: topic.titleUr,
+      link: `/study-material/islamic-studies/${chapter.slug}/${topic.slug}`,
+    })),
+  ]),
+  ...essayThemeIndex().map((theme) => ({
+    id: `essaytheme-${theme.slug}`,
+    title: `${theme.name} — Essay Theme Roadmap`,
+    category: 'Essay Themes 2027',
+    snippet: `Tier ${theme.tier} · ${theme.checkpointCount} research directions across 13 stages. Sign in to track your progress.`,
+    keywords: theme.sections.map((section) => section.title).join(' '),
+    link: `/study-material/essay-themes/${theme.slug}`,
+  })),
   ...lectureCourses.flatMap((course) => [
     {
       id: `lecture-${course.slug}`,
