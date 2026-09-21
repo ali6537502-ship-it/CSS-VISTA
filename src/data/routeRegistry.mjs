@@ -114,6 +114,11 @@ export const ROUTE_REGISTRY = [
   // ad-eligible: authentication does not disable advertising.
   protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.', { adMode: 'enabled' }),
   protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern', adMode: 'enabled' }),
+  // Public study material. Real, source-checked, bilingual content, so the
+  // chapter and topic pages are indexable on their own merits.
+  publicPage('/study-material/islamic-studies', 'CSS Islamic Studies Reference Bank (English & Urdu)', 'Browse source-checked Islamic Studies references for all seven CSS chapters, with Arabic source passages and parallel English and Urdu.', 'CSS Islamic Studies reference bank', { contentQuality: 'substantial', adMode: 'enabled' }),
+  publicPage('/study-material/islamic-studies/:chapter', 'Islamic Studies Chapter References', 'Browse the topics and source-checked references for this CSS Islamic Studies chapter in English and Urdu.', 'Islamic Studies chapter references', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
+  publicPage('/study-material/islamic-studies/:chapter/:topic', 'Islamic Studies Topic References', 'Source-checked Qur\'anic, Hadith and scholarly references for this CSS Islamic Studies topic, with Arabic passages and parallel English and Urdu.', 'Islamic Studies topic references', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   publicPage('/essay', 'CSS Essay Preparation', 'Learn CSS English Essay through structured skill guides, theme-wise preparation, practice topics, thesis and outline guidance, and self-assessment.', 'CSS English Essay preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/mpt', 'CSS MPT Preparation', 'Explore CSS MPT preparation resources, question-bank subjects and mock-test information.', 'CSS MPT preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   protectedPage('/mpt/bank/:bankId', 'MPT Question Bank', 'Interactive CSS MPT question-bank practice.', { match: 'pattern' }),

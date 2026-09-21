@@ -20,6 +20,9 @@ const CssSubjectMcqs = lazy(() => import('./pages/CssSubjectMcqs'))
 const EssayModule = lazy(() => import('./pages/EssayModule'))
 const EssayThemes = lazy(() => import('./pages/EssayThemes'))
 const EssayThemeDetail = lazy(() => import('./pages/EssayThemeDetail'))
+const IslamicReferences = lazy(() => import('./pages/IslamicReferences'))
+const IslamicReferenceChapter = lazy(() => import('./pages/IslamicReferenceChapter'))
+const IslamicReferenceTopic = lazy(() => import('./pages/IslamicReferenceTopic'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const MPTQuestionBank = lazy(() => import('./pages/MPTQuestionBank'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
@@ -113,6 +116,9 @@ export default function App() {
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/study-material/essay-themes" element={<ProfileGate><S><EssayThemes /></S></ProfileGate>} />
         <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><S><EssayThemeDetail /></S></ProfileGate>} />
+        <Route path="/study-material/islamic-studies" element={<S><IslamicReferences /></S>} />
+        <Route path="/study-material/islamic-studies/:chapter" element={<S><IslamicReferenceChapter /></S>} />
+        <Route path="/study-material/islamic-studies/:chapter/:topic" element={<S><IslamicReferenceTopic /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
         <Route path="/mpt/bank/:bankId" element={<S><MPTQuestionBank /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />

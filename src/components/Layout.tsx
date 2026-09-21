@@ -70,6 +70,7 @@ const nav = [
       { label: 'CSS Past Paper Analysis', to: '/css-past-paper-analysis', icon: TrendingUp },
       { label: 'Urdu & English Grammar', to: '/language-grammar', icon: Languages },
       { label: '30-Day Master Grammar Course', to: '/language-grammar?lang=english&view=master-course', icon: Languages },
+      { label: 'Islamic Studies Reference Bank', to: '/study-material/islamic-studies', icon: BookMarked },
       { label: 'Book Summaries', to: '/book-summaries', icon: BookOpen },
     ],
   },

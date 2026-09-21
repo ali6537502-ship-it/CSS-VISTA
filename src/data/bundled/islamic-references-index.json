@@ -1,0 +1,644 @@
+{
+ "chapters": [
+  {
+   "numeral": "I",
+   "slug": "introduction-to-islam",
+   "titleEn": "I. Introduction to Islam",
+   "titleUr": "باب اوّل: تعارفِ اسلام",
+   "referenceCount": 225,
+   "topics": [
+    {
+     "slug": "01-concept-of-islam-submission-faith-and-excellence",
+     "titleEn": "01 Concept of Islam: submission, faith and excellence",
+     "titleUr": "01 تصورِ اسلام: اطاعت، ایمان اور احسان",
+     "count": 12,
+     "first": 1,
+     "last": 12
+    },
+    {
+     "slug": "02-importance-of-din-in-human-life",
+     "titleEn": "02 Importance of Din in human life",
+     "titleUr": "02 انسانی زندگی میں دین کی اہمیت",
+     "count": 15,
+     "first": 13,
+     "last": 27
+    },
+    {
+     "slug": "03-din-and-religion-meanings-scope-and-comparison",
+     "titleEn": "03 Din and religion: meanings, scope and comparison",
+     "titleUr": "03 دین اور مذہب: مفہوم، دائرہ اور تقابل",
+     "count": 8,
+     "first": 28,
+     "last": 35
+    },
+    {
+     "slug": "04-distinctive-aspects-universality-mercy-justice-and",
+     "titleEn": "04 Distinctive aspects: universality, mercy, justice and balance",
+     "titleUr": "04 اسلام کی امتیازی خصوصیات: عالمگیریت، رحمت، عدل اور توازن",
+     "count": 20,
+     "first": 36,
+     "last": 55
+    },
+    {
+     "slug": "05-islamic-beliefs-and-their-individual-and-social",
+     "titleEn": "05 Islamic beliefs and their individual and social implications",
+     "titleUr": "05 اسلامی عقائد اور ان کے انفرادی و معاشرتی اثرات",
+     "count": 21,
+     "first": 56,
+     "last": 76
+    },
+    {
+     "slug": "06-fundamentals-of-islam-pillars-intention-and",
+     "titleEn": "06 Fundamentals of Islam: pillars, intention and responsibility",
+     "titleUr": "06 اسلام کے بنیادی ارکان: نیت اور ذمہ داری",
+     "count": 9,
+     "first": 77,
+     "last": 85
+    },
+    {
+     "slug": "07-prayer-purification-and-remembrance",
+     "titleEn": "07 Prayer, purification and remembrance",
+     "titleUr": "07 نماز، طہارت اور ذکر",
+     "count": 15,
+     "first": 86,
+     "last": 100
+    },
+    {
+     "slug": "08-fasting-spiritual-and-moral-formation",
+     "titleEn": "08 Fasting: spiritual and moral formation",
+     "titleUr": "08 روزہ: روحانی اور اخلاقی تربیت",
+     "count": 7,
+     "first": 101,
+     "last": 107
+    },
+    {
+     "slug": "09-zakat-and-charity-social-responsibility",
+     "titleEn": "09 Zakat and charity: social responsibility",
+     "titleUr": "09 زکوٰۃ اور صدقات: معاشرتی ذمہ داری",
+     "count": 12,
+     "first": 108,
+     "last": 119
+    },
+    {
+     "slug": "10-hajj-and-sacrifice-devotion-equality-and-community",
+     "titleEn": "10 Hajj and sacrifice: devotion, equality and community",
+     "titleUr": "10 حج اور قربانی: بندگی، مساوات اور اجتماعیت",
+     "count": 7,
+     "first": 120,
+     "last": 126
+    },
+    {
+     "slug": "11-worship-in-conduct-family-society-and-practical",
+     "titleEn": "11 Worship in conduct: family, society and practical precedents",
+     "titleUr": "11 عبادت کے عملی تقاضے: خاندان، معاشرہ اور واقعاتی شواہد",
+     "count": 24,
+     "first": 127,
+     "last": 150
+    },
+    {
+     "slug": "12-more-on-islam-din-and-purposeful-human-life",
+     "titleEn": "12 More on Islam, Din and purposeful human life",
+     "titleUr": "12 اسلام، دین اور بامقصد انسانی زندگی کی مزید بنیادیں",
+     "count": 14,
+     "first": 151,
+     "last": 164
+    },
+    {
+     "slug": "13-distinctive-values-knowledge-dignity-and-social-dealings",
+     "titleEn": "13 Distinctive values: knowledge, dignity and social dealings",
+     "titleUr": "13 امتیازی اقدار: علم، انسانی وقار اور معاشرتی معاملات",
+     "count": 13,
+     "first": 165,
+     "last": 177
+    },
+    {
+     "slug": "14-belief-accountability-and-intellectual-reflection",
+     "titleEn": "14 Belief, accountability and intellectual reflection",
+     "titleUr": "14 ایمان، جواب دہی اور فکری غور",
+     "count": 16,
+     "first": 178,
+     "last": 193
+    },
+    {
+     "slug": "15-fundamentals-expressed-in-sustained-conduct",
+     "titleEn": "15 Fundamentals expressed in sustained conduct",
+     "titleUr": "15 بنیادی تعلیمات کا مسلسل کردار میں اظہار",
+     "count": 10,
+     "first": 194,
+     "last": 203
+    },
+    {
+     "slug": "16-worship-in-practice-spiritual-moral-and-social-effects",
+     "titleEn": "16 Worship in practice: spiritual, moral and social effects",
+     "titleUr": "16 عبادات کا عملی اظہار: روحانی، اخلاقی اور سماجی اثرات",
+     "count": 22,
+     "first": 204,
+     "last": 225
+    }
+   ]
+  },
+  {
+   "numeral": "II",
+   "slug": "sirah-of-the-prophet",
+   "titleEn": "II. Study of Sirah of the Prophet Muhammad (PBUH) as Role Model",
+   "titleUr": "باب دوم: رسول اللہ محمد ﷺ کی سیرت کا مطالعہ بہ حیثیت نمونۂ عمل",
+   "referenceCount": 151,
+   "topics": [
+    {
+     "slug": "foundations",
+     "titleEn": "Foundations",
+     "titleUr": "اسوۂ نبوی کے بنیادی اصول | حوالے ‎001–008‎",
+     "count": 8,
+     "first": 1,
+     "last": 8
+    },
+    {
+     "slug": "individual",
+     "titleEn": "Individual",
+     "titleUr": "بہ حیثیت فرد | حوالے ‎009–038‎",
+     "count": 30,
+     "first": 9,
+     "last": 38
+    },
+    {
+     "slug": "diplomat",
+     "titleEn": "Diplomat",
+     "titleUr": "بہ حیثیت سفارت کار | حوالے ‎039–065‎",
+     "count": 27,
+     "first": 39,
+     "last": 65
+    },
+    {
+     "slug": "educator",
+     "titleEn": "Educator",
+     "titleUr": "بہ حیثیت معلم | حوالے ‎066–097‎",
+     "count": 32,
+     "first": 66,
+     "last": 97
+    },
+    {
+     "slug": "military-strategist",
+     "titleEn": "Military Strategist",
+     "titleUr": "بہ حیثیت عسکری مدبر | حوالے ‎098–125‎",
+     "count": 28,
+     "first": 98,
+     "last": 125
+    },
+    {
+     "slug": "peace-maker",
+     "titleEn": "Peace Maker",
+     "titleUr": "بہ حیثیت امن ساز | حوالے ‎126–151‎",
+     "count": 26,
+     "first": 126,
+     "last": 151
+    }
+   ]
+  },
+  {
+   "numeral": "III",
+   "slug": "human-rights-and-status-of-woman",
+   "titleEn": "III. Human Rights & Status of Woman in Islam",
+   "titleUr": "‎III‎۔ اسلام میں انسانی حقوق اور عورت کا مقام",
+   "referenceCount": 175,
+   "topics": [
+    {
+     "slug": "a-foundations-of-human-dignity",
+     "titleEn": "A. Foundations of human dignity",
+     "titleUr": "‎A‎۔ انسانی تکریم کی بنیادیں",
+     "count": 13,
+     "first": 1,
+     "last": 13
+    },
+    {
+     "slug": "b-spiritual-agency-and-accountability",
+     "titleEn": "B. Spiritual agency and accountability",
+     "titleUr": "‎B‎۔ روحانی اختیار اور جواب دہی",
+     "count": 10,
+     "first": 14,
+     "last": 23
+    },
+    {
+     "slug": "c-life-liberty-and-protection-from-abuse",
+     "titleEn": "C. Life, liberty and protection from abuse",
+     "titleUr": "‎C‎۔ جان، آزادی اور زیادتی سے تحفظ",
+     "count": 18,
+     "first": 24,
+     "last": 41
+    },
+    {
+     "slug": "d-justice-reputation-and-privacy",
+     "titleEn": "D. Justice, reputation and privacy",
+     "titleUr": "‎D‎۔ انصاف، آبرو اور نجی زندگی",
+     "count": 20,
+     "first": 42,
+     "last": 61
+    },
+    {
+     "slug": "e-property-earnings-and-inheritance",
+     "titleEn": "E. Property, earnings and inheritance",
+     "titleUr": "‎E‎۔ ملکیت، کمائی اور وراثت",
+     "count": 17,
+     "first": 62,
+     "last": 78
+    },
+    {
+     "slug": "f-marriage-consent-and-mutual-treatment",
+     "titleEn": "F. Marriage, consent and mutual treatment",
+     "titleUr": "‎F‎۔ نکاح، رضامندی اور باہمی برتاؤ",
+     "count": 26,
+     "first": 79,
+     "last": 104
+    },
+    {
+     "slug": "g-separation-maintenance-and-remedies",
+     "titleEn": "G. Separation, maintenance and remedies",
+     "titleUr": "‎G‎۔ علیحدگی، نفقہ اور تدارک",
+     "count": 17,
+     "first": 105,
+     "last": 121
+    },
+    {
+     "slug": "h-motherhood-children-and-social-care",
+     "titleEn": "H. Motherhood, children and social care",
+     "titleUr": "‎H‎۔ ماں، بچے اور سماجی نگہداشت",
+     "count": 18,
+     "first": 122,
+     "last": 139
+    },
+    {
+     "slug": "i-knowledge-worship-and-public-agency",
+     "titleEn": "I. Knowledge, worship and public agency",
+     "titleUr": "‎I‎۔ علم، عبادت اور اجتماعی کردار",
+     "count": 15,
+     "first": 140,
+     "last": 154
+    },
+    {
+     "slug": "j-context-sensitive-juristic-questions",
+     "titleEn": "J. Context-sensitive juristic questions",
+     "titleUr": "‎J‎۔ سیاق طلب فقہی مسائل",
+     "count": 8,
+     "first": 155,
+     "last": 162
+    },
+    {
+     "slug": "k-methodology-and-modern-comparisons",
+     "titleEn": "K. Methodology and modern comparisons",
+     "titleUr": "‎K‎۔ منہج اور جدید تقابلی مطالعہ",
+     "count": 13,
+     "first": 163,
+     "last": 175
+    }
+   ]
+  },
+  {
+   "numeral": "IV",
+   "slug": "islamic-civilization-and-culture",
+   "titleEn": "IV. Islamic Civilization and Culture",
+   "titleUr": "چہارم۔ اسلامی تہذیب و ثقافت",
+   "referenceCount": 196,
+   "topics": [
+    {
+     "slug": "01-meanings-vital-elements-and-the-culture-of-knowledge",
+     "titleEn": "01. Meanings, vital elements and the culture of knowledge",
+     "titleUr": "01۔ مفہوم، بنیادی عناصر اور علمی ثقافت",
+     "count": 21,
+     "first": 1,
+     "last": 21
+    },
+    {
+     "slug": "02-tawhid-purpose-unity-and-responsibility",
+     "titleEn": "02. Tawhid: purpose, unity and responsibility",
+     "titleUr": "02۔ توحید: مقصد، وحدت اور ذمہ داری",
+     "count": 10,
+     "first": 22,
+     "last": 31
+    },
+    {
+     "slug": "03-self-purification-and-development-of-personality",
+     "titleEn": "03. Self-purification and development of personality",
+     "titleUr": "03۔ تزکیۂ نفس اور شخصیت کی نشوونما",
+     "count": 17,
+     "first": 32,
+     "last": 48
+    },
+    {
+     "slug": "04-human-dignity-family-and-access-to-education",
+     "titleEn": "04. Human dignity, family and access to education",
+     "titleUr": "04۔ انسانی وقار، خاندان اور تعلیم تک رسائی",
+     "count": 10,
+     "first": 49,
+     "last": 58
+    },
+    {
+     "slug": "05-equality-and-reciprocal-social-standing",
+     "titleEn": "05. Equality and reciprocal social standing",
+     "titleUr": "05۔ مساوات اور باہمی سماجی احترام",
+     "count": 12,
+     "first": 59,
+     "last": 70
+    },
+    {
+     "slug": "06-social-justice-work-and-economic-responsibility",
+     "titleEn": "06. Social justice, work and economic responsibility",
+     "titleUr": "06۔ سماجی عدل، محنت اور معاشی ذمہ داری",
+     "count": 16,
+     "first": 71,
+     "last": 86
+    },
+    {
+     "slug": "07-moral-values-in-everyday-and-environmental-life",
+     "titleEn": "07. Moral values in everyday and environmental life",
+     "titleUr": "07۔ روزمرہ اور ماحولیاتی زندگی میں اخلاقی اقدار",
+     "count": 16,
+     "first": 87,
+     "last": 102
+    },
+    {
+     "slug": "08-tolerance-religious-difference-and-peaceful-relations",
+     "titleEn": "08. Tolerance, religious difference and peaceful relations",
+     "titleUr": "08۔ رواداری، مذہبی اختلاف اور پُرامن تعلقات",
+     "count": 17,
+     "first": 103,
+     "last": 119
+    },
+    {
+     "slug": "09-rule-of-law-trusts-and-accountable-authority",
+     "titleEn": "09. Rule of law, trusts and accountable authority",
+     "titleUr": "09۔ قانون کی حکمرانی، امانت اور جواب دہ اختیار",
+     "count": 17,
+     "first": 120,
+     "last": 136
+    },
+    {
+     "slug": "10-community-development-institutions-and-cultural-renewal",
+     "titleEn": "10. Community development, institutions and cultural renewal",
+     "titleUr": "10۔ اجتماعی ترقی، ادارے اور ثقافتی تجدید",
+     "count": 14,
+     "first": 137,
+     "last": 150
+    },
+    {
+     "slug": "11-knowledge-evidence-and-intellectual-formation",
+     "titleEn": "11. Knowledge, evidence and intellectual formation",
+     "titleUr": "11۔ علم، دلیل اور فکری تربیت",
+     "count": 5,
+     "first": 151,
+     "last": 155
+    },
+    {
+     "slug": "12-tawhid-family-service-and-character-formation",
+     "titleEn": "12. Tawhid, family service and character formation",
+     "titleUr": "12۔ توحید، خاندانی خدمت اور کردار سازی",
+     "count": 8,
+     "first": 156,
+     "last": 163
+    },
+    {
+     "slug": "13-dignity-privacy-and-fair-treatment",
+     "titleEn": "13. Dignity, privacy and fair treatment",
+     "titleUr": "13۔ وقار، نجی زندگی اور منصفانہ سلوک",
+     "count": 5,
+     "first": 164,
+     "last": 168
+    },
+    {
+     "slug": "14-care-social-welfare-and-charitable-institutions",
+     "titleEn": "14. Care, social welfare and charitable institutions",
+     "titleUr": "14۔ نگہداشت، سماجی بہبود اور خیراتی ادارے",
+     "count": 8,
+     "first": 169,
+     "last": 176
+    },
+    {
+     "slug": "15-common-spaces-and-the-foundations-of-social-order",
+     "titleEn": "15. Common spaces and the foundations of social order",
+     "titleUr": "15۔ مشترک مقامات اور اجتماعی نظم کی بنیادیں",
+     "count": 5,
+     "first": 177,
+     "last": 181
+    },
+    {
+     "slug": "16-religious-difference-protection-and-negotiation",
+     "titleEn": "16. Religious difference, protection and negotiation",
+     "titleUr": "16۔ مذہبی اختلاف، تحفظ اور گفت و شنید",
+     "count": 4,
+     "first": 182,
+     "last": 185
+    },
+    {
+     "slug": "17-accountability-adjudication-and-juristic-objectives",
+     "titleEn": "17. Accountability, adjudication and juristic objectives",
+     "titleUr": "17۔ جواب دہی، قضا اور فقہی مقاصد",
+     "count": 7,
+     "first": 186,
+     "last": 192
+    },
+    {
+     "slug": "18-cultural-practice-books-ornament-and-the-city",
+     "titleEn": "18. Cultural practice, books, ornament and the city",
+     "titleUr": "18۔ ثقافتی عمل، کتاب، تزئین اور شہر",
+     "count": 4,
+     "first": 193,
+     "last": 196
+    }
+   ]
+  },
+  {
+   "numeral": "V",
+   "slug": "islam-and-the-world",
+   "titleEn": "V. Islam and the World",
+   "titleUr": "پنجم۔ اسلام اور دنیا",
+   "referenceCount": 156,
+   "topics": [
+    {
+     "slug": "a-islamic-civilization-and-the-west-exchange-in-both",
+     "titleEn": "A. Islamic civilization and the West: exchange in both directions",
+     "titleUr": "الف۔ اسلامی تہذیب اور مغرب: دونوں سمتوں میں تبادلۂ اثرات",
+     "count": 43,
+     "first": 1,
+     "last": 43
+    },
+    {
+     "slug": "b-the-role-of-islam-in-the-modern-world",
+     "titleEn": "B. The role of Islam in the modern world",
+     "titleUr": "ب۔ جدید دنیا میں اسلام کا کردار",
+     "count": 34,
+     "first": 44,
+     "last": 77
+    },
+    {
+     "slug": "c-the-muslim-world-and-contemporary-challenges",
+     "titleEn": "C. The Muslim world and contemporary challenges",
+     "titleUr": "ج۔ عالمِ اسلام اور معاصر چیلنج",
+     "count": 37,
+     "first": 78,
+     "last": 114
+    },
+    {
+     "slug": "d-the-rise-of-extremism-evidence-causes-and-responses",
+     "titleEn": "D. The rise of extremism: evidence, causes and responses",
+     "titleUr": "د۔ انتہا پسندی کا عروج: شواہد، اسباب اور تدابیر",
+     "count": 42,
+     "first": 115,
+     "last": 156
+    }
+   ]
+  },
+  {
+   "numeral": "VI",
+   "slug": "public-administration-and-governance",
+   "titleEn": "VI. Public Administration and Governance in Islam",
+   "titleUr": "VI۔ اسلام میں نظمِ عامہ اور حکمرانی",
+   "referenceCount": 311,
+   "topics": [
+    {
+     "slug": "public-administration-trust-purpose-and-public-service",
+     "titleEn": "Public administration: trust, purpose and public service",
+     "titleUr": "نظمِ عامہ: امانت، مقصد اور خدمتِ خلق",
+     "count": 17,
+     "first": 1,
+     "last": 17
+    },
+    {
+     "slug": "justice-rights-and-the-rule-of-law",
+     "titleEn": "Justice, rights and the rule of law",
+     "titleUr": "عدل، حقوق اور قانون کی حکمرانی",
+     "count": 41,
+     "first": 18,
+     "last": 58
+    },
+    {
+     "slug": "shura-legal-sources-and-institutional-authority",
+     "titleEn": "Shura, legal sources and institutional authority",
+     "titleUr": "شوریٰ، مصادرِ قانون اور ادارہ جاتی اختیار",
+     "count": 41,
+     "first": 59,
+     "last": 99
+    },
+    {
+     "slug": "appointments-and-responsibilities-of-civil-servants",
+     "titleEn": "Appointments and responsibilities of civil servants",
+     "titleUr": "تقرریاں اور سرکاری ملازمین کی ذمہ داریاں",
+     "count": 40,
+     "first": 100,
+     "last": 139
+    },
+    {
+     "slug": "public-finance-welfare-and-economic-administration",
+     "titleEn": "Public finance, welfare and economic administration",
+     "titleUr": "بیت المال، بہبود اور معاشی نظم",
+     "count": 44,
+     "first": 140,
+     "last": 183
+    },
+    {
+     "slug": "records-evidence-and-responsible-communication",
+     "titleEn": "Records, evidence and responsible communication",
+     "titleUr": "ریکارڈ، شہادت اور ذمہ دارانہ ابلاغ",
+     "count": 28,
+     "first": 184,
+     "last": 211
+    },
+    {
+     "slug": "accountability-hisbah-and-prevention-of-abuse",
+     "titleEn": "Accountability, hisbah and prevention of abuse",
+     "titleUr": "احتساب، حسبہ اور اختیارات کے ناجائز استعمال کی روک تھام",
+     "count": 49,
+     "first": 212,
+     "last": 260
+    },
+    {
+     "slug": "prophetic-practice-and-the-rightly-guided-caliphate",
+     "titleEn": "Prophetic practice and the Rightly Guided Caliphate",
+     "titleUr": "عہدِ نبوی اور خلافتِ راشدہ میں عملی نظم",
+     "count": 18,
+     "first": 261,
+     "last": 278
+    },
+    {
+     "slug": "letters-attributed-to-umar-and-ali-texts-and-provenance",
+     "titleEn": "Letters attributed to Umar and Ali: texts and provenance",
+     "titleUr": "عمر اور علی رضی اللہ عنہما سے منسوب خطوط: متن اور ماخذ",
+     "count": 10,
+     "first": 279,
+     "last": 288
+    },
+    {
+     "slug": "contemporary-administrative-comparison-and-research",
+     "titleEn": "Contemporary administrative comparison and research",
+     "titleUr": "معاصر انتظامی تقابل اور تحقیق",
+     "count": 23,
+     "first": 289,
+     "last": 311
+    }
+   ]
+  },
+  {
+   "numeral": "VII",
+   "slug": "islamic-code-of-life",
+   "titleEn": "VII. Islamic Code of Life",
+   "titleUr": "ہفتم۔ اسلامی ضابطۂ حیات",
+   "referenceCount": 168,
+   "topics": [
+    {
+     "slug": "1-salient-features-of-the-islamic-system",
+     "titleEn": "1. Salient features of the Islamic system",
+     "titleUr": "1۔ اسلامی نظام کی نمایاں خصوصیات",
+     "count": 16,
+     "first": 1,
+     "last": 16
+    },
+    {
+     "slug": "2-social-system",
+     "titleEn": "2. Social system",
+     "titleUr": "2۔ معاشرتی نظام",
+     "count": 27,
+     "first": 17,
+     "last": 43
+    },
+    {
+     "slug": "3-political-system",
+     "titleEn": "3. Political system",
+     "titleUr": "3۔ سیاسی نظام",
+     "count": 15,
+     "first": 44,
+     "last": 58
+    },
+    {
+     "slug": "4-economic-system",
+     "titleEn": "4. Economic system",
+     "titleUr": "4۔ معاشی نظام",
+     "count": 29,
+     "first": 59,
+     "last": 87
+    },
+    {
+     "slug": "5-judicial-system",
+     "titleEn": "5. Judicial system",
+     "titleUr": "5۔ عدالتی نظام",
+     "count": 27,
+     "first": 88,
+     "last": 114
+    },
+    {
+     "slug": "6-administrative-system",
+     "titleEn": "6. Administrative system",
+     "titleUr": "6۔ انتظامی نظام",
+     "count": 27,
+     "first": 115,
+     "last": 141
+    },
+    {
+     "slug": "7-procedure-of-ijma-and-ijtihad",
+     "titleEn": "7. Procedure of Ijma and Ijtihad",
+     "titleUr": "7۔ اجماع اور اجتہاد کا طریقۂ کار",
+     "count": 27,
+     "first": 142,
+     "last": 168
+    }
+   ]
+  }
+ ],
+ "referenceTotal": 1382
+}

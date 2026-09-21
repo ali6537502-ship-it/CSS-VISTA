@@ -54,6 +54,7 @@ if (target === 'hostinger') {
   // is no permissive variant: a known content defect must not ship.
   await import('./strengthen-longtail-search-pages.mjs')
   await import('./expand-book-summary-seo.mjs')
+  await import('./expand-islamic-references-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   await import('./split-sitemap-index.mjs')

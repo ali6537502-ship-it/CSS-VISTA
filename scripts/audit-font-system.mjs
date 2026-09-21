@@ -5,7 +5,7 @@ import process from 'node:process'
 const root = process.cwd()
 const primaryStack = '"Google Sans", "Product Sans", "Inter", Arial, sans-serif'
 const sourceExtensions = new Set(['.css', '.html', '.js', '.mjs', '.ts', '.tsx'])
-const ignoredDirectories = new Set(['.git', 'dist', 'node_modules', 'public', 'src/data'])
+const ignoredDirectories = new Set(['.git', 'dist', 'dist-ssr', 'node_modules', 'public', 'src/data'])
 
 async function collectFiles(directory, relative = '') {
   const entries = await readdir(directory, { withFileTypes: true })

@@ -597,6 +597,15 @@
   .font-mono {
     font-family: var(--font-primary);
   }
+  /* Arabic source passages. Same Nastaliq hierarchy as the Urdu columns, with
+     extra leading because the passages are set larger than the commentary. */
+  html .arabic-text,
+  html .arabic-text * {
+    font-family: var(--font-urdu) !important;
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'liga' 1;
+    line-height: 2.4;
+    letter-spacing: 0;
+  }
   html .urdu-text,
   html .urdu-text * {
     font-family: var(--font-urdu) !important;

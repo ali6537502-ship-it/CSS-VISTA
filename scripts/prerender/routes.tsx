@@ -31,6 +31,12 @@ import HandwrittenNotes from '@/pages/HandwrittenNotes'
 import FpscSyllabus from '@/pages/FpscSyllabus'
 import CssPastPaperAnalysis from '@/pages/CssPastPaperAnalysis'
 import Consultation from '@/pages/Consultation'
+import IslamicReferences from '@/pages/IslamicReferences'
+import IslamicReferenceChapter from '@/pages/IslamicReferenceChapter'
+import IslamicReferenceTopic from '@/pages/IslamicReferenceTopic'
+import { islamicChapters, primeChapter, primeTopic } from '@/data/islamicReferences'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
 import { BooksPage, OpinionsPage } from '@/pages/Books'
 import {
@@ -48,6 +54,37 @@ export interface PrerenderRoute {
 
 const page = (path: string, render: () => React.ReactElement, pattern = path): PrerenderRoute =>
   ({ path, pattern, render })
+
+/**
+ * The Islamic Studies reference banks are published as data files rather than
+ * bundled, because the full set is several megabytes. The prerender runs in
+ * Node, so it reads each file straight from `public/` and primes the same
+ * cache the browser fills by fetch. The component then renders identically in
+ * both places, which is the whole point of prerendering the real page.
+ */
+function islamicReferenceRoutes(): PrerenderRoute[] {
+  const dataDir = join(process.cwd(), 'public', 'study-material', 'islamic-studies')
+  const read = (...parts: string[]) => JSON.parse(readFileSync(join(dataDir, ...parts), 'utf8'))
+  const routes: PrerenderRoute[] = []
+
+  for (const chapter of islamicChapters()) {
+    primeChapter(read(`${chapter.slug}.json`))
+    routes.push(page(
+      `/study-material/islamic-studies/${chapter.slug}`,
+      () => <IslamicReferenceChapter />,
+      '/study-material/islamic-studies/:chapter',
+    ))
+    for (const topic of chapter.topics) {
+      primeTopic(read(chapter.slug, `${topic.slug}.json`))
+      routes.push(page(
+        `/study-material/islamic-studies/${chapter.slug}/${topic.slug}`,
+        () => <IslamicReferenceTopic />,
+        '/study-material/islamic-studies/:chapter/:topic',
+      ))
+    }
+  }
+  return routes
+}
 
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
@@ -82,6 +119,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/books', () => <BooksPage />),
   page('/opinions', () => <OpinionsPage />),
   page('/consultation', () => <Consultation />),
+  page('/study-material/islamic-studies', () => <IslamicReferences />),
   page('/css-2026-written-result', () => <Css2026Result />),
   page('/legal', () => <LegalCentre />),
   page('/privacy-policy', () => <PrivacyPolicy />),
@@ -92,6 +130,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/editorial-policy', () => <EditorialPolicy />),
   page('/about', () => <AboutCssVista />),
   page('/contact', () => <ContactCssVista />),
+  ...islamicReferenceRoutes(),
 ]
 
 export const PRERENDER_ROUTE_PATHS = PRERENDER_ROUTES.map((route) => route.path)
