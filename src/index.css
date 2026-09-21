@@ -2313,7 +2313,7 @@
 }
 
 /* Keep long homepages cheap to render and mobile scrolling GPU-friendly. */
-.cssv-home > div > section {
+.cssv-home > div > section:not(.cssv-home-hero) {
   content-visibility: auto;
   contain-intrinsic-size: auto 460px;
 }
@@ -2371,6 +2371,8 @@
   grid-template-columns: 1fr;
   min-height: 0;
   border-color: rgb(255 255 255 / 0.92);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   background:
     radial-gradient(circle at 6% 10%, rgb(234 194 92 / 0.18), transparent 28%),
     radial-gradient(circle at 88% 18%, rgb(122 207 166 / 0.34), transparent 34%),
