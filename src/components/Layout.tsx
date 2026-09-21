@@ -208,14 +208,59 @@ function StorageFailureNotice() {
   )
 }
 
-function NotificationBar() {
+const liveClockFormatter = new Intl.DateTimeFormat(undefined, {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: true,
+})
+
+function LiveClock({
+  online,
+  syncLabel,
+  userConnected,
+  lastSyncedAt,
+}: {
+  online: boolean
+  syncLabel: string | null
+  userConnected: boolean
+  lastSyncedAt: Date | null
+}) {
   const [deviceTime, setDeviceTime] = useState(() => new Date())
+
+  useEffect(() => {
+    const update = () => setDeviceTime(new Date())
+    const clock = window.setInterval(update, 1000)
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === 'visible') update()
+    }
+    document.addEventListener('visibilitychange', refreshWhenVisible)
+    return () => {
+      window.clearInterval(clock)
+      document.removeEventListener('visibilitychange', refreshWhenVisible)
+    }
+  }, [])
+
+  return (
+    <div
+      className="hidden shrink-0 items-center gap-2 border-l border-white/15 pl-3 text-[10px] font-semibold text-emerald-100 md:flex"
+      title={userConnected && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Account sync status and local time'}
+    >
+      <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+      {syncLabel && <><span>{syncLabel}</span><span className="text-emerald-200/50">·</span></>}
+      <time dateTime={deviceTime.toISOString()}>{liveClockFormatter.format(deviceTime)}</time>
+    </div>
+  )
+}
+
+function NotificationBar() {
+  const [scheduleTime, setScheduleTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
   const [streak, setStreak] = useState(() => touchVisit())
-  const streakDayRef = useRef(deviceTime.toDateString())
+  const streakDayRef = useRef(scheduleTime.toDateString())
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mockNotices = (['gk', 'mpt'] as const).map((kind) => {
-    const status = getDailyMockStatus(kind, deviceTime)
+    const status = getDailyMockStatus(kind, scheduleTime)
     return {
       id: `daily-${kind}-mock-${status.dateKey}`,
       kind: 'platform' as const,
@@ -238,30 +283,33 @@ function NotificationBar() {
 
   useEffect(() => {
     const refreshStreak = () => setStreak(touchVisit())
-    const updateClock = () => {
+    const updateSchedule = () => {
       const now = new Date()
-      setDeviceTime(now)
+      setScheduleTime(now)
       const dateKey = now.toDateString()
       if (dateKey !== streakDayRef.current) {
         streakDayRef.current = dateKey
         refreshStreak()
       }
     }
-    const clock = window.setInterval(updateClock, 1000)
+    const scheduleClock = window.setInterval(updateSchedule, 15_000)
     const updateConnection = () => setOnline(navigator.onLine)
     const updateAfterVisibilityChange = () => {
-      if (document.visibilityState === 'visible') refreshStreak()
+      if (document.visibilityState === 'visible') {
+        updateSchedule()
+        refreshStreak()
+      }
     }
     window.addEventListener('online', updateConnection)
     window.addEventListener('offline', updateConnection)
-    window.addEventListener('focus', refreshStreak)
+    window.addEventListener('focus', updateSchedule)
     window.addEventListener('storage', refreshStreak)
     document.addEventListener('visibilitychange', updateAfterVisibilityChange)
     return () => {
-      window.clearInterval(clock)
+      window.clearInterval(scheduleClock)
       window.removeEventListener('online', updateConnection)
       window.removeEventListener('offline', updateConnection)
-      window.removeEventListener('focus', refreshStreak)
+      window.removeEventListener('focus', updateSchedule)
       window.removeEventListener('storage', refreshStreak)
       document.removeEventListener('visibilitychange', updateAfterVisibilityChange)
     }
@@ -280,13 +328,6 @@ function NotificationBar() {
             ? 'Progress synced'
             : 'Account connected'
       : null
-  const timeLabel = new Intl.DateTimeFormat(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true,
-  }).format(deviceTime)
-
   return (
     <div className="cssv-live-bar bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
@@ -320,14 +361,12 @@ function NotificationBar() {
             ))}
           </div>
         </div>
-        <div
-          className="hidden shrink-0 items-center gap-2 border-l border-white/15 pl-3 text-[10px] font-semibold text-emerald-100 md:flex"
-          title={user && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Account sync status and local time'}
-        >
-          <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-          {syncLabel && <><span>{syncLabel}</span><span className="text-emerald-200/50">·</span></>}
-          <time dateTime={deviceTime.toISOString()}>{timeLabel}</time>
-        </div>
+        <LiveClock
+          online={online}
+          syncLabel={syncLabel}
+          userConnected={Boolean(user)}
+          lastSyncedAt={lastSyncedAt}
+        />
       </div>
     </div>
   )
