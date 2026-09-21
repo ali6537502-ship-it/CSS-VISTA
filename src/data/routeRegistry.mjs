@@ -114,6 +114,9 @@ export const ROUTE_REGISTRY = [
   // ad-eligible: authentication does not disable advertising.
   protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.', { adMode: 'enabled' }),
   protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern', adMode: 'enabled' }),
+  // The study-material section root, so the parent URL resolves rather than
+  // 404ing when a student truncates a deeper link.
+  publicPage('/study-material', 'CSS Study Material — Notes, References and Essay Roadmap', 'Topic-wise CSS optional subject notes, the bilingual Islamic Studies reference bank and the essay theme research roadmap, in one place.', 'CSS study material', { contentQuality: 'substantial', adMode: 'enabled' }),
   // Topic-wise optional-subject notes. Real study content, so indexable.
   publicPage('/study-material/optional', 'CSS Optional Subject Notes (All 7 Groups)', 'Topic-wise CSS optional subject notes across all seven FPSC groups, organised by group, subject and topic.', 'CSS optional subject notes', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/study-material/optional/:subject', 'CSS Optional Subject Notes', 'Topic-wise study notes for this CSS optional subject, following the FPSC syllabus.', 'CSS optional subject notes', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),

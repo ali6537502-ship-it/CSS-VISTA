@@ -23,6 +23,7 @@ const EssayThemeDetail = lazy(() => import('./pages/EssayThemeDetail'))
 const IslamicReferences = lazy(() => import('./pages/IslamicReferences'))
 const IslamicReferenceChapter = lazy(() => import('./pages/IslamicReferenceChapter'))
 const IslamicReferenceTopic = lazy(() => import('./pages/IslamicReferenceTopic'))
+const StudyMaterial = lazy(() => import('./pages/StudyMaterial'))
 const OptionalNotes = lazy(() => import('./pages/OptionalNotes'))
 const OptionalSubjectNotes = lazy(() => import('./pages/OptionalSubjectNotes'))
 const OptionalTopicNotes = lazy(() => import('./pages/OptionalTopicNotes'))
@@ -117,6 +118,7 @@ export default function App() {
         <Route path="/past-papers/:exam/:year" element={<S><PastPapers /></S>} />
         <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
+        <Route path="/study-material" element={<S><StudyMaterial /></S>} />
         <Route path="/study-material/essay-themes" element={<ProfileGate><S><EssayThemes /></S></ProfileGate>} />
         <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><S><EssayThemeDetail /></S></ProfileGate>} />
         <Route path="/study-material/islamic-studies" element={<S><IslamicReferences /></S>} />

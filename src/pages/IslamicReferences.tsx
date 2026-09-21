@@ -12,6 +12,11 @@ export default function IslamicReferences() {
         description={`${islamicReferenceTotal()} source-checked references across the seven CSS Islamic Studies chapters, organised into ${islamicTopicTotal()} topics. Every entry carries its Arabic source passage with parallel English and Urdu — English on the left, Urdu on the right.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-6">
+      <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
+          <Link to="/study-material" className="font-medium text-emerald-800 hover:underline underline-offset-2">CSS Study Material</Link>
+          <span aria-hidden="true">/</span>
+          <span>Islamic Studies reference bank</span>
+        </nav>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {chapters.map((chapter) => (
             <Link

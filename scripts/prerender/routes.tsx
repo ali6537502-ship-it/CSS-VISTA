@@ -31,6 +31,7 @@ import HandwrittenNotes from '@/pages/HandwrittenNotes'
 import FpscSyllabus from '@/pages/FpscSyllabus'
 import CssPastPaperAnalysis from '@/pages/CssPastPaperAnalysis'
 import Consultation from '@/pages/Consultation'
+import StudyMaterial from '@/pages/StudyMaterial'
 import IslamicReferences from '@/pages/IslamicReferences'
 import IslamicReferenceChapter from '@/pages/IslamicReferenceChapter'
 import IslamicReferenceTopic from '@/pages/IslamicReferenceTopic'
@@ -148,6 +149,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/books', () => <BooksPage />),
   page('/opinions', () => <OpinionsPage />),
   page('/consultation', () => <Consultation />),
+  page('/study-material', () => <StudyMaterial />),
   page('/study-material/islamic-studies', () => <IslamicReferences />),
   page('/study-material/optional', () => <OptionalNotes />),
   page('/css-2026-written-result', () => <Css2026Result />),

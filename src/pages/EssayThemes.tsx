@@ -89,6 +89,11 @@ export default function EssayThemes() {
       />
 
       <div className="mx-auto max-w-7xl px-4 py-6">
+      <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
+          <Link to="/study-material" className="font-medium text-emerald-800 hover:underline underline-offset-2">CSS Study Material</Link>
+          <span aria-hidden="true">/</span>
+          <span>Essay Themes 2027</span>
+        </nav>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { label: 'Overall progress', value: formatPercent(overallPercent), hint: `${overallDone} of ${total} directions` },
