@@ -11,13 +11,10 @@ import { getRevisionStats, recentActivities, type Activity } from '@/lib/progres
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
 import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
-import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
-import TutorialAnnouncement from '@/components/TutorialAnnouncement'
-import NotesDiscountAnnouncement from '@/components/NotesDiscountAnnouncement'
 import { useAccount } from '@/lib/accountContext'
 
 interface LinkCard {
@@ -155,6 +152,9 @@ function HomeHero() {
 }
 
 const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/ExamIntelligenceHomeCard'))
+const TutorialAnnouncement = lazyWithRecovery(() => import('@/components/TutorialAnnouncement'))
+const NotesDiscountAnnouncement = lazyWithRecovery(() => import('@/components/NotesDiscountAnnouncement'))
+const MilestoneCelebration = lazyWithRecovery(() => import('@/components/MilestoneCelebration').then((m) => ({ default: m.MilestoneCelebration })))
 
 function SectionHeading({
   title,
@@ -482,6 +482,7 @@ export default function Home() {
   const location = useLocation()
   const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
+  const [loadHomeExtras, setLoadHomeExtras] = useState(false)
   const [homeCards, setHomeCards] = useState(defaultHomeCards)
   const stats = useMemo(() => getStats(), [])
   const activity = useMemo(() => recentActivities(4)[0], [])
@@ -537,6 +538,11 @@ export default function Home() {
         // The static homepage catalogue remains complete if optional admin content cannot load.
       })
   }, { timeout: 3_000, fallbackDelay: 900 }), [])
+
+  useEffect(
+    () => scheduleIdleWork(() => setLoadHomeExtras(true), { timeout: 1_500, fallbackDelay: 650 }),
+    [],
+  )
 
   useEffect(() => {
     const restoreDismissedPanels = () => {
@@ -656,9 +662,12 @@ export default function Home() {
           </div>
         </section>
 
-        <NotesDiscountAnnouncement />
-
-        <TutorialAnnouncement />
+        {loadHomeExtras && (
+          <Suspense fallback={null}>
+            <NotesDiscountAnnouncement />
+            <TutorialAnnouncement />
+          </Suspense>
+        )}
 
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '160ms' } as CSSProperties} aria-labelledby="featured-services">
           <SectionHeading title="Featured services" eyebrow="Built for serious preparation" />
@@ -704,12 +713,16 @@ export default function Home() {
         </section>
 
       </div>
-      <MilestoneCelebration
-        open={showDailyCelebration}
-        title="Today’s preparation is complete"
-        description="You finished every task in today’s study plan. Keep the rhythm going tomorrow."
-        onClose={() => setShowDailyCelebration(false)}
-      />
+      {showDailyCelebration && (
+        <Suspense fallback={null}>
+          <MilestoneCelebration
+            open
+            title="Today’s preparation is complete"
+            description="You finished every task in today’s study plan. Keep the rhythm going tomorrow."
+            onClose={() => setShowDailyCelebration(false)}
+          />
+        </Suspense>
+      )}
     </div>
   )
 }
