@@ -27,6 +27,13 @@ interface LinkCard {
 
 const quickActions: LinkCard[] = [
   {
+    title: 'CSS Study Material',
+    description: 'Optional notes, Islamic references & essay roadmap',
+    to: '/study-material',
+    icon: BookOpen,
+    tone: 'emerald',
+  },
+  {
     title: 'All CSS Subject MCQs',
     description: 'Compulsory & optional banks',
     to: '/css-mcqs',
