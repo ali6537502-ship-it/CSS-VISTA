@@ -17,7 +17,6 @@ import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, touchVisit } from '@/lib/st
 import WhatsAppIcon from '@/components/WhatsAppIcon'
 import NotificationCenter, { NotificationOptInBar } from '@/components/NotificationCenter'
 import { useAccount } from '@/lib/accountContext'
-import StudyActivityTracker from '@/components/StudyActivityTracker'
 import RouteSeo from '@/components/RouteSeo'
 import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
@@ -144,6 +143,7 @@ const mobileQuickLinks = [
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
 const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
+const StudyActivityTracker = lazyWithRecovery(() => import('@/components/StudyActivityTracker'))
 
 function DeferredVistaShortcut() {
   const [ready, setReady] = useState(false)
@@ -152,6 +152,15 @@ function DeferredVistaShortcut() {
 
   if (!ready) return null
   return <Suspense fallback={null}><VistaShortcut /></Suspense>
+}
+
+function DeferredStudyActivityTracker() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => scheduleIdleWork(() => setReady(true), { timeout: 2_000, fallbackDelay: 900 }), [])
+
+  if (!ready) return null
+  return <Suspense fallback={null}><StudyActivityTracker /></Suspense>
 }
 
 interface FlatNavigationLink {
@@ -848,7 +857,7 @@ export default function Layout() {
     <div className="cssv-site-shell flex min-h-screen flex-col bg-background">
       <RouteSeo />
       <PrintBranding />
-      <StudyActivityTracker />
+      <DeferredStudyActivityTracker />
       <StorageFailureNotice />
       <NotificationBar />
       {location.pathname !== '/' && <div className="hidden md:block"><NotificationOptInBar /></div>}
