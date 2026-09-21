@@ -15,7 +15,7 @@ const TaskReminderOverlay = lazy(() => import('./components/TaskReminderOverlay.
 function SignedInTaskReminderOverlay() {
   const { user } = useAccount()
   if (!user) return null
-  return <Suspense fallback={null}><SignedInTaskReminderOverlay /></Suspense>
+  return <Suspense fallback={null}><TaskReminderOverlay /></Suspense>
 }
 
 createRoot(document.getElementById('root')!).render(
@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
       <AccountProvider>
         <SiteContentProvider>
           <App />
-          <TaskReminderOverlay />
+          <SignedInTaskReminderOverlay />
         </SiteContentProvider>
       </AccountProvider>
     </BrowserRouter>
