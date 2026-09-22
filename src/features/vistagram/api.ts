@@ -23,7 +23,7 @@ function stringList(value: unknown) {
 
 function safeContentPath(value: unknown) {
   const path = text(value)
-  if (!path.startsWith('/vistagram-content/posts/') || !path.endsWith('.json')) return ''
+  if (!/^\/vistagram-content\/posts\/[a-z0-9]+(?:-[a-z0-9]+)*\.json$/.test(path)) return ''
   return path
 }
 
@@ -40,7 +40,7 @@ function parseSummary(value: unknown): VistagramPostSummary | null {
   const publishedAt = text(item.publishedAt)
   const contentPath = safeContentPath(item.contentPath)
   const readingMinutes = Math.max(1, Math.round(Number(item.readingMinutes) || 1))
-  if (!id || !slug || !title || !excerpt || !POST_TYPES.has(type) || !category || !topic || !publishedAt || !contentPath) return null
+  if (!id || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || !title || !excerpt || !POST_TYPES.has(type) || !category || !topic || !publishedAt || !contentPath) return null
 
   return {
     id,
