@@ -35,7 +35,7 @@ const nav = [
   { label: 'GK World', to: '/gk' },
   { label: 'Past Papers', to: '/past-papers' },
   { label: 'Books by Sir Ali', to: '/books' },
-  { label: 'Opinions', to: '/opinions' },
+  { label: 'VISTA Journal', to: '/journal' },
   {
     label: 'Subjects',
     items: [
@@ -1240,7 +1240,7 @@ export default function Layout() {
               <li><Link className="hover:text-pine transition-colors" to="/past-papers">Past Papers</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/books">Books by Sir Ali</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/book-summaries">Book Summaries</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/opinions">Opinions by Authors</Link></li>
+              <li><Link className="hover:text-pine transition-colors" to="/journal">VISTA Journal</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/test-series">Customized Written Mocks by Ms. Sadia Zahoor</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/dashboard">Performance Dashboard</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/study-planner">My CSS Study Planner</Link></li>
