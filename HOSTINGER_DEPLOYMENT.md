@@ -100,6 +100,10 @@ The final Hostinger build produces `dist/index.html`, canonical `www` metadata, 
 
 `.github/workflows/hostinger-build-check.yml` runs the same deployment build on pushes and pull requests to `main`. The deployment smoke build is blocking when it encounters a genuine build/artifact problem. The stricter content-quality pass is intentionally advisory so a thin page cannot prevent the production website from being generated.
 
+## Redeploy trigger
+
+Production redeploy re-triggered after the VISTA Journal route-integrity fix on 22 September 2026.
+
 ## Other deployment target
 
 The OpenAI Sites build remains separate and is available through:
