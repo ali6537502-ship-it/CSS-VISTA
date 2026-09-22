@@ -139,13 +139,14 @@ export function createVistagramCollection(name: string) {
       collection = existing
       return
     }
-    collection = {
+    const created: VistagramCollection = {
       id: `vistagram-collection-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       name: clean,
       postIds: [],
       createdAt: new Date().toISOString(),
     }
-    state.collections.unshift(collection)
+    collection = created
+    state.collections.unshift(created)
   })
   return collection
 }
