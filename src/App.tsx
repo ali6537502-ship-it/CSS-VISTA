@@ -52,7 +52,7 @@ const Mistakes = lazy(() => import('./pages/Mistakes'))
 const AnswerTimer = lazy(() => import('./pages/AnswerTimer'))
 const Checklists = lazy(() => import('./pages/Checklists'))
 const BooksPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.BooksPage })))
-const OpinionsPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.OpinionsPage })))
+const VistaJournal = lazy(() => import('./pages/VistaJournal'))
 const AccountWorkspace = lazy(() => import('./features/current-affairs/Workspace'))
 const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introduction'))
 const Account = lazy(() => import('./pages/Account'))
@@ -167,7 +167,7 @@ export default function App() {
         <Route path="/answer-timer" element={<S><AnswerTimer /></S>} />
         <Route path="/checklists" element={<S><Checklists /></S>} />
         <Route path="/books" element={<S><BooksPage /></S>} />
-        <Route path="/opinions" element={<S><OpinionsPage /></S>} />
+        <Route path="/journal" element={<S><VistaJournal /></S>} />\n        <Route path="/opinions" element={<S><VistaJournal /></S>} />
         <Route path="/account" element={<S><Account /></S>} />
         {/* The account home is the chooser; each declared account route renders
             its own focused page, so a bookmark or a refresh lands where the
