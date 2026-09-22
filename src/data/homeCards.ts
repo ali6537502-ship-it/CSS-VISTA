@@ -97,7 +97,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'psych-viva', title: 'Psychological Assessment & Viva', desc: 'The final stage explained', to: '/psych-viva', icon: 'Brain', visible: true, order: 24 },
   { id: 'consultation', title: '1-on-1 CSS Consultation', desc: 'Paid private guidance with Sir Ali Hassan or Ms. Sadia Zahoor', to: '/consultation', icon: 'Users', visible: true, order: 24.5 },
   { id: 'mentors', title: 'About Us', desc: 'Meet the CSS Vista mentors', to: '/mentors', icon: 'Users', visible: true, order: 25 },
-  { id: 'opinions', title: 'Opinions by Authors', desc: 'Published analyses and commentary', to: '/opinions', icon: 'ScrollText', visible: true, order: 26 },
+  { id: 'opinions', title: 'VISTA Journal', desc: 'Selected articles, analysis and perspectives', to: '/journal', icon: 'ScrollText', visible: true, order: 26 },
   { id: 'games', title: 'Interactive Practice', desc: 'Academic matching and timelines', to: '/games', icon: 'Gamepad2', visible: true, order: 27 },
   { id: 'answer-timer', title: 'Answer Timer', desc: 'Practice answers against the clock', to: '/answer-timer', icon: 'Timer', visible: true, order: 28 },
   { id: 'mistakes', title: 'Mistake Notebook', desc: 'Revisit weak areas and wrong answers', to: '/mistakes', icon: 'TriangleAlert', visible: true, order: 29 },
