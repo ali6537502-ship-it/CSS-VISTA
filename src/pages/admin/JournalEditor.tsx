@@ -185,8 +185,18 @@ export default function JournalEditor() {
       })
 
       try {
-        if (coverFile) await uploadJournalMedia(result.article.id, 'cover', coverFile)
-        if (authorPhotoFile) await uploadJournalMedia(result.article.id, 'author', authorPhotoFile)
+        if (coverFile) {
+          const url = await uploadJournalMedia(result.article.id, 'cover', coverFile)
+          setCoverFile(null)
+          setCoverPreview('')
+          setForm((current) => ({ ...current, id: result.article.id, cover_url: url }))
+        }
+        if (authorPhotoFile) {
+          const url = await uploadJournalMedia(result.article.id, 'author', authorPhotoFile)
+          setAuthorPhotoFile(null)
+          setAuthorPhotoPreview('')
+          setForm((current) => ({ ...current, id: result.article.id, author_photo_url: url }))
+        }
       } catch (mediaError) {
         setForm((current) => ({ ...current, id: result.article.id }))
         setNotice(published ? 'The article was published, but one image still needs to be uploaded.' : 'The draft was saved, but one image still needs to be uploaded.')
