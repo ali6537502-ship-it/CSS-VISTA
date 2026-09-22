@@ -69,7 +69,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'gk', title: 'GK World', desc: 'One-liners and category-wise MCQ practice', to: '/gk', icon: 'Globe', visible: true, order: 3 },
   { id: 'css-subject-mcqs', title: 'All CSS Subject MCQs', desc: 'Compulsory and optional subject banks', to: '/css-mcqs', icon: 'LibraryBig', visible: true, order: 5 },
   { id: 'pms-grand-mock', title: 'PMS GK Grand Mock', desc: 'Daily entry · 8:00–10:00 PM', to: '/gk/quiz?mode=pms-mock', icon: 'ClipboardList', visible: true, order: 4 },
-  { id: 'mpt-grand-mock', title: 'CSS MPT Grand Mock', desc: 'Daily entry · 10:30 PM–midnight', to: '/gk/quiz?mode=mpt-mock', icon: 'Target', visible: true, order: 6 },
+  { id: 'mpt-grand-mock', title: 'MPT Grand Mocks', desc: 'Two fresh papers daily · 3 PM & 10:30 PM', to: '/mpt', icon: 'Target', visible: true, order: 6 },
   { id: 'five-minute', title: 'Daily Five-Minute Challenge', desc: 'A quick mixed quiz - new every day', to: '/five-minute', icon: 'Zap', visible: true, order: 7 },
   { id: 'current-affairs', title: 'Current Affairs', desc: 'Structured, sourced issue files', to: '/current-affairs', icon: 'Newspaper', visible: true, order: 8 },
   { id: 'essay', title: 'Essay Preparation', desc: 'Learn with Miss Sadia Zahoor, PAS', to: '/essay', icon: 'PenLine', visible: true, order: 10 },

@@ -16,7 +16,7 @@ import {
 } from '@/lib/progress'
 import {
   completeChallenge, DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getMockAvailability, getState,
-  recordQuizResult, recordScheduledMock,
+  recordQuizResult, recordScheduledMock, type ScheduledMockKind,
 } from '@/lib/store'
 import { isRtlText } from '@/lib/utils'
 import {
@@ -38,11 +38,12 @@ interface Resolved {
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   const [sp] = useSearchParams()
   const mode = forceMode ?? sp.get('mode') ?? 'random'
+  const mptSlot = sp.get('slot') === 'afternoon' ? 'afternoon' : 'evening'
   const [idx, setIdx] = useState<BankIndex | null>(null)
   const [resolved, setResolved] = useState<Resolved | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-  const scheduledKind = mode === 'mpt-mock' ? 'mpt' : mode === 'pms-mock' || mode === 'mock' ? 'gk' : null
+  const scheduledKind: ScheduledMockKind | null = mode === 'mpt-mock' ? (mptSlot === 'afternoon' ? 'mpt-afternoon' : 'mpt') : mode === 'pms-mock' || mode === 'mock' ? 'gk' : null
   const [studentName, setStudentName] = useState(() => localStorage.getItem('cssvista:mock-student-name') ?? '')
   const [mockRegistered, setMockRegistered] = useState(false)
   const [mockSessionDateKey, setMockSessionDateKey] = useState('')
@@ -70,8 +71,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       setLoading(false)
       return // wait for user config
     }
-    resolve(mode).catch(() => {
-      setError('Could not load questions. Please try again.')
+    resolve(mode).catch((cause: unknown) => {
+      setError(cause instanceof Error ? cause.message : 'Could not load questions. Please try again.')
       setLoading(false)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,6 +80,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 
   async function resolve(m: string, custom?: { cats: string[]; n: number; diff: string; time: number; order: string; attempt: string }) {
     setLoading(true)
+    setError(null)
     const cats = idx!.categories
     const catSlugs = cats.map((c) => c.slug)
     const paramCats = (sp.get('cats') ?? '').split(',').filter(Boolean)
@@ -136,24 +138,25 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
         break
       }
       case 'mpt-mock': {
-        const availability = getMockAvailability('mpt')
+        const availability = getMockAvailability(scheduledKind === 'mpt-afternoon' ? 'mpt-afternoon' : 'mpt')
         if (!availability.available) {
           r = {
             title: 'Full CSS MPT Practice Mock',
             qs: [],
             exam: true,
             timeSec: 0,
-            note: `CSS MPT registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until midnight.`,
+            note: `CSS MPT registration opens ${new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })} and remains open until ${mptSlot === 'afternoon' ? '5:00 PM' : 'midnight'} Pakistan time.`,
           }
           break
         }
-        const paper = await buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
+        const sessionDate = mockSessionDateKey || getDailyMockStatus(scheduledKind === 'mpt-afternoon' ? 'mpt-afternoon' : 'mpt').dateKey
+        const paper = await buildCompetitiveMock('mpt', mptSlot === 'afternoon' ? `${sessionDate}-15` : sessionDate, studentName.trim())
         r = {
-          title: paper.title,
+          title: mptSlot === 'afternoon' ? 'MPT Afternoon Mock' : 'MPT Evening Mock',
           qs: paper.questions,
           exam: true,
           timeSec: paper.timeSec,
-          note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS.mpt}. Once entered, you may finish after registration closes.`,
+          note: `${paper.note} Daily registration: ${DAILY_MOCK_TIME_LABELS[scheduledKind === 'mpt-afternoon' ? 'mpt-afternoon' : 'mpt']}. Once entered, you may finish after registration closes.`,
           blueprint: paper.blueprint,
         }
         break
@@ -316,7 +319,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   if (scheduledKind && !mockRegistered) {
     const status = getDailyMockStatus(scheduledKind)
     const label = DAILY_MOCK_TIME_LABELS[scheduledKind]
-    const registrationBlueprint = MOCK_BLUEPRINTS[scheduledKind === 'mpt' ? 'mpt' : 'pms-gk']
+    const registrationBlueprint = MOCK_BLUEPRINTS[scheduledKind === 'gk' ? 'pms-gk' : 'mpt']
     return (
       <div>
         <PageHeader title={status.title} description={`Daily supervised entry window: ${label}. Enter your name to create a named, printable result and keep your mock history together.`} />
@@ -446,7 +449,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     )
   }
 
-  if (error) return <div className="mx-auto max-w-3xl px-4 py-16"><EmptyState title={error} /></div>
+  if (error) return <div className="mx-auto max-w-3xl px-4 py-16"><EmptyState title={mode === 'mpt-mock' ? 'MPT paper unavailable' : 'Questions unavailable'} hint={error} /><div className="mt-4 text-center"><Link to={mode === 'mpt-mock' ? '/mpt' : '/gk'} className="text-sm font-semibold text-emerald-800 underline">Return to preparation</Link></div></div>
   if (!resolved) return null
   if (resolved.qs.length === 0) {
     return (
@@ -459,7 +462,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     )
   }
 
-  return <QuizRun resolved={resolved} mode={mode} studentName={scheduledKind ? studentName.trim() : ''} sessionDateKey={mockSessionDateKey} onRestart={() => { setResolved(null); resolve(mode) }} />
+  return <QuizRun resolved={resolved} mode={mode} studentName={scheduledKind ? studentName.trim() : ''} sessionDateKey={mockSessionDateKey} scheduledKind={scheduledKind} onRestart={() => { setResolved(null); resolve(mode) }} />
 }
 
 // ---------------- Runner ----------------
@@ -495,7 +498,7 @@ function writeQuizSnapshot(key: string, snapshot: QuizSnapshot | null) {
   }
 }
 
-function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; onRestart: () => void }) {
+function QuizRun({ resolved, mode, studentName, sessionDateKey, scheduledKind, onRestart }: { resolved: Resolved; mode: string; studentName: string; sessionDateKey: string; scheduledKind: ScheduledMockKind | null; onRestart: () => void }) {
   const { qs, title, exam, timeSec, blueprint, note } = resolved
   const [page, setPage] = useState(1)
   const [reviewPage, setReviewPage] = useState(1)
@@ -515,6 +518,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   const committedRef = useRef<Set<string>>(new Set())
   const [resumeOffer, setResumeOffer] = useState<QuizSnapshot | null>(null)
   const signature = useMemo(() => qs.map((question) => question.id).join('|'), [qs])
+  const snapshotKey = scheduledKind ? `${mode}:${scheduledKind}:${sessionDateKey}` : mode
 
   const range = questionPageRange(page, qs.length)
   const pageQuestions = useMemo(() => qs.slice(range.start, range.end), [qs, range.end, range.start])
@@ -553,16 +557,16 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   // rebuilt - which is the case for the mocks and the daily challenge, where
   // losing a part-finished attempt costs the most.
   useEffect(() => {
-    const snapshot = readQuizSnapshot(mode)
+    const snapshot = readQuizSnapshot(snapshotKey)
     if (snapshot && snapshot.signature === signature && Object.keys(snapshot.answers).length > 0) {
       setResumeOffer(snapshot)
     }
-  }, [mode, signature])
+  }, [snapshotKey, signature])
 
   useEffect(() => {
     if (finished || resumeOffer) return
     if (Object.keys(answers).length === 0) return
-    const persist = () => writeQuizSnapshot(mode, {
+    const persist = () => writeQuizSnapshot(snapshotKey, {
       signature,
       answers,
       revealed,
@@ -577,7 +581,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
       document.removeEventListener('visibilitychange', persist)
       window.removeEventListener('pagehide', persist)
     }
-  }, [answers, revealed, page, mode, signature, finished, resumeOffer])
+  }, [answers, revealed, page, snapshotKey, signature, finished, resumeOffer])
 
   function acceptResume() {
     const snapshot = resumeOffer
@@ -595,7 +599,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
   }
 
   function discardResume() {
-    writeQuizSnapshot(mode, null)
+    writeQuizSnapshot(snapshotKey, null)
     setResumeOffer(null)
   }
 
@@ -649,7 +653,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (finishedRef.current) return
     finishedRef.current = true
     deadlineRef.current = null
-    writeQuizSnapshot(mode, null)
+    writeQuizSnapshot(snapshotKey, null)
     setFinished(true)
     setReviewPage(1)
     // Event-handler wall-clock access is intentional for total attempt time.
@@ -691,7 +695,7 @@ function QuizRun({ resolved, mode, studentName, sessionDateKey, onRestart }: { r
     if (mode === 'five-minute') recordFiveMin(score, qs.length)
     if (mode === 'daily') completeChallenge(new Date().toISOString().slice(0, 10))
     if (mode === 'mock' || mode === 'pms-mock') recordScheduledMock('gk', sessionDateKey)
-    if (mode === 'mpt-mock') recordScheduledMock('mpt', sessionDateKey)
+    if (mode === 'mpt-mock') recordScheduledMock(scheduledKind === 'mpt-afternoon' ? 'mpt-afternoon' : 'mpt', sessionDateKey)
     recordActivity({ type: 'quiz', label: `${title} - scored ${score}/${qs.length} in ${Math.floor(secs / 60)}m`, path: '/gk' })
   }
 

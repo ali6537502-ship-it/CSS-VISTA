@@ -30,11 +30,12 @@ export interface SavedAnswer {
   date: string
 }
 
-export type ScheduledMockKind = 'mpt' | 'gk'
+export type ScheduledMockKind = 'mpt' | 'mpt-afternoon' | 'gk'
 
 export const DAILY_MOCK_TIME_LABELS: Record<ScheduledMockKind, string> = {
   gk: '8:00–10:00 PM registration',
   mpt: '10:30 PM–12:00 midnight registration',
+  'mpt-afternoon': '3:00–5:00 PM registration',
 }
 
 const DAILY_MOCK_TIME_ZONE = 'Asia/Karachi'
@@ -467,7 +468,7 @@ function shiftDateKey(dateKey: string, amount: number): string {
 }
 
 function mockTitle(kind: ScheduledMockKind): string {
-  return kind === 'mpt' ? 'CSS MPT Grand Mock' : 'PMS GK Grand Mock'
+  return kind === 'mpt-afternoon' ? 'MPT Afternoon Mock' : kind === 'mpt' ? 'MPT Evening Mock' : 'PMS GK Grand Mock'
 }
 
 export interface DailyMockStatus {
@@ -488,9 +489,13 @@ export interface DailyMockStatus {
 function mockWindow(kind: ScheduledMockKind, dateKey: string) {
   const startAt = kind === 'gk'
     ? new Date(`${dateKey}T20:00:00+05:00`)
+    : kind === 'mpt-afternoon'
+      ? new Date(`${dateKey}T15:00:00+05:00`)
     : new Date(`${dateKey}T22:30:00+05:00`)
   const registrationClosesAt = kind === 'gk'
     ? new Date(`${dateKey}T22:00:00+05:00`)
+    : kind === 'mpt-afternoon'
+      ? new Date(`${dateKey}T17:00:00+05:00`)
     : new Date(`${shiftDateKey(dateKey, 1)}T00:00:00+05:00`)
   return { startAt, registrationClosesAt }
 }
@@ -517,7 +522,7 @@ export function getDailyMockStatus(kind: ScheduledMockKind, now = new Date()): D
     dateKey,
     kind,
     title: mockTitle(kind),
-    route: kind === 'mpt' ? '/gk/quiz?mode=mpt-mock' : '/gk/quiz?mode=pms-mock',
+    route: kind === 'mpt-afternoon' ? '/gk/quiz?mode=mpt-mock&slot=afternoon' : kind === 'mpt' ? '/gk/quiz?mode=mpt-mock&slot=evening' : '/gk/quiz?mode=pms-mock',
     startAt: startAt.toISOString(),
     registrationClosesAt: registrationClosesAt.toISOString(),
     state,
