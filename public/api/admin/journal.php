@@ -69,6 +69,11 @@ if ($method === 'POST') {
 
 $id = trim((string)($payload['id'] ?? ''));
 if (!preg_match('/^[a-f0-9-]{36}$/i', $id)) cssv_fail('Journal article ID is invalid.', 422, 'invalid_journal_id');
+$media = $pdo->prepare('SELECT cover_path,author_photo_path FROM journal_articles WHERE id=? LIMIT 1');
+$media->execute([$id]);
+$mediaRow = $media->fetch() ?: [];
 $stmt = $pdo->prepare('DELETE FROM journal_articles WHERE id=?');
 $stmt->execute([$id]);
+cssv_remove_private_file((string)($mediaRow['cover_path'] ?? ''));
+cssv_remove_private_file((string)($mediaRow['author_photo_path'] ?? ''));
 cssv_json(['ok' => true, 'deleted' => $id]);
