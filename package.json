@@ -55,7 +55,10 @@
     "audit:duplicates": "node scripts/audit-duplicate-content.mjs",
     "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes",
     "generate:book-catalogue": "node scripts/generate-book-catalogue.mjs",
-    "audit:book-catalogue": "node scripts/generate-book-catalogue.mjs --check"
+    "audit:book-catalogue": "node scripts/generate-book-catalogue.mjs --check",
+    "package:vistagram": "node scripts/package-vistagram.mjs",
+    "audit:vistagram": "node scripts/package-vistagram.mjs --check",
+    "test:vistagram": "node --test tests/vistagramPublishing.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

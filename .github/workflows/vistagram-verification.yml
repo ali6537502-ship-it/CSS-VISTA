@@ -1,0 +1,31 @@
+name: Vistagram verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: vistagram-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate-vistagram:
+    name: Validate daily Vistagram batches
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Validate complete Vistagram archive
+        run: node scripts/package-vistagram.mjs --check
+      - name: Test Vistagram publishing contract
+        run: node --test tests/vistagramPublishing.test.ts
