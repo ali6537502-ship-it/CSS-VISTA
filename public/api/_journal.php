@@ -13,6 +13,10 @@ function cssv_journal_ensure_schema(PDO $pdo): void
             author_role VARCHAR(180) NOT NULL DEFAULT '',
             excerpt VARCHAR(1200) NOT NULL,
             body LONGTEXT NOT NULL,
+            cover_path VARCHAR(500) NOT NULL DEFAULT '',
+            cover_mime VARCHAR(80) NOT NULL DEFAULT '',
+            author_photo_path VARCHAR(500) NOT NULL DEFAULT '',
+            author_photo_mime VARCHAR(80) NOT NULL DEFAULT '',
             published_on DATE NOT NULL,
             featured TINYINT(1) NOT NULL DEFAULT 0,
             published TINYINT(1) NOT NULL DEFAULT 1,
@@ -23,6 +27,22 @@ function cssv_journal_ensure_schema(PDO $pdo): void
             KEY journal_articles_publish_idx (published,published_on,updated_at),
             KEY journal_articles_featured_idx (featured,published)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+        $columns = [
+            'cover_path' => "VARCHAR(500) NOT NULL DEFAULT '' AFTER body",
+            'cover_mime' => "VARCHAR(80) NOT NULL DEFAULT '' AFTER cover_path",
+            'author_photo_path' => "VARCHAR(500) NOT NULL DEFAULT '' AFTER cover_mime",
+            'author_photo_mime' => "VARCHAR(80) NOT NULL DEFAULT '' AFTER author_photo_path",
+        ];
+        $exists = $pdo->prepare(
+            "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='journal_articles' AND column_name=?"
+        );
+        foreach ($columns as $name => $definition) {
+            $exists->execute([$name]);
+            if ((int)$exists->fetchColumn() === 0) {
+                $pdo->exec("ALTER TABLE journal_articles ADD COLUMN `$name` $definition");
+            }
+        }
     } catch (Throwable $error) {
         error_log('CSSV journal schema setup failed: ' . $error->getMessage());
         cssv_fail('VISTA Journal is temporarily unavailable.', 503, 'journal_unavailable');
@@ -34,7 +54,7 @@ function cssv_journal_rows(PDO $pdo, bool $includeDrafts = false, int $limit = 1
     $limit = max(1, min(500, $limit));
     $where = $includeDrafts ? '' : 'WHERE published=1';
     $rows = $pdo->query(
-        "SELECT id,slug,title,category,author,author_role,excerpt,body,published_on,featured,published,created_at,updated_at
+        "SELECT id,slug,title,category,author,author_role,excerpt,body,cover_path,cover_mime,author_photo_path,author_photo_mime,published_on,featured,published,created_at,updated_at
          FROM journal_articles
          $where
          ORDER BY featured DESC,published_on DESC,updated_at DESC
@@ -45,6 +65,15 @@ function cssv_journal_rows(PDO $pdo, bool $includeDrafts = false, int $limit = 1
         $row['featured'] = (bool)($row['featured'] ?? false);
         $row['published'] = (bool)($row['published'] ?? false);
         $row['published_on'] = substr((string)($row['published_on'] ?? ''), 0, 10);
+        $version = rawurlencode((string)($row['updated_at'] ?? ''));
+        $id = rawurlencode((string)($row['id'] ?? ''));
+        $row['cover_url'] = trim((string)($row['cover_path'] ?? '')) !== ''
+            ? '/api/journal-media.php?id=' . $id . '&kind=cover&v=' . $version
+            : '';
+        $row['author_photo_url'] = trim((string)($row['author_photo_path'] ?? '')) !== ''
+            ? '/api/journal-media.php?id=' . $id . '&kind=author&v=' . $version
+            : '';
+        unset($row['cover_path'], $row['cover_mime'], $row['author_photo_path'], $row['author_photo_mime']);
     }
     unset($row);
     return $rows;
