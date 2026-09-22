@@ -175,7 +175,7 @@ const empty: ProgressState = {
   checklistItems: {},
   textNotes: {},
   timerSessions: [],
-  notif: { asked: false, enabled: false, tags: { Mentors: true, Opinions: true, 'Test Series': true, FPSC: true, General: true }, dismissed: false },
+  notif: { asked: false, enabled: false, tags: { Mentors: true, Opinions: true, 'VISTA Journal': true, 'Test Series': true, FPSC: true, General: true }, dismissed: false },
   seenUpdates: [],
   fiveMin: [],
   bookSummaries: {},
