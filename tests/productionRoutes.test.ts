@@ -74,7 +74,7 @@ const INDEXABLE = [
   '/subjects/compulsory/pakistan-affairs', '/subjects/compulsory/islamic-studies',
   '/subjects/optional', '/fpsc-syllabus', '/past-papers', '/notes', '/essay', '/mpt',
   '/mentors', '/services', '/analysis', '/psych-viva', '/fpsc-updates',
-  '/handwritten-notes', '/books', '/journal', '/opinions', '/consultation',
+  '/handwritten-notes', '/books', '/journal', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
   '/copyright', '/editorial-policy', '/contact', '/disclaimer',
   '/book-summaries',
