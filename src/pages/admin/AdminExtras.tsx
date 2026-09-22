@@ -19,7 +19,7 @@ import { notesPurchaseActionLabel } from '@/data/notes'
 const uid = () => Math.random().toString(36).slice(2, 10)
 const input = 'h-10 w-full rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
 const textarea = 'w-full rounded-md border border-input p-3 text-sm outline-none focus:ring-2 focus:ring-ring'
-const UPDATE_TAGS = ['Mentors', 'Opinions', 'Test Series', 'FPSC', 'General']
+const UPDATE_TAGS = ['Mentors', 'VISTA Journal', 'Test Series', 'FPSC', 'General']
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -147,10 +147,10 @@ export function UpdatesEditor() {
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
           Updates appear in the bell icon at the top of the website. If “push notification” is on, visitors who enabled
           notifications also receive a browser notification for this update when they visit. Choose the audience tag
-          (e.g. “Opinions” reaches only those who subscribed to opinion alerts).
+          (e.g. “VISTA Journal” reaches readers who enabled journal alerts).
         </p>
         <div className="mt-4 grid gap-3">
-          <Field label="Title *"><input className={input} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. New opinion published: The Next 48 Hours" /></Field>
+          <Field label="Title *"><input className={input} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. New VISTA Journal article published" /></Field>
           <Field label="Message *"><textarea rows={3} className={textarea} value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} /></Field>
           <div className="flex flex-wrap items-center gap-4">
             <Field label="Audience tag">
