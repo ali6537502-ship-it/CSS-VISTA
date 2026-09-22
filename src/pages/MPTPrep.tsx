@@ -7,6 +7,7 @@ import {
 import { PageHeader, Section, OfficialNotice, Badge } from '@/components/shared'
 import { questions as seedQuestions, quizCategories } from '@/data/quiz'
 import QuizEngine from '@/components/QuizEngine'
+import MptPreparationPlan from '@/components/MptPreparationPlan'
 import { DAILY_MOCK_TIME_LABELS, getMockAvailability, getState } from '@/lib/store'
 import { mergedMcqs } from '@/lib/admin'
 import { usePageBack } from '@/lib/backNavigation'
@@ -143,6 +144,7 @@ export default function MPTPrep() {
 
         {!mode ? (
           <>
+            <MptPreparationPlan />
             {/* Mode cards */}
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[

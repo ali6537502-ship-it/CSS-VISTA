@@ -70,8 +70,8 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
       setLoading(false)
       return // wait for user config
     }
-    resolve(mode).catch(() => {
-      setError('Could not load questions. Please try again.')
+    resolve(mode).catch((cause: unknown) => {
+      setError(cause instanceof Error ? cause.message : 'Could not load questions. Please try again.')
       setLoading(false)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,6 +79,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
 
   async function resolve(m: string, custom?: { cats: string[]; n: number; diff: string; time: number; order: string; attempt: string }) {
     setLoading(true)
+    setError(null)
     const cats = idx!.categories
     const catSlugs = cats.map((c) => c.slug)
     const paramCats = (sp.get('cats') ?? '').split(',').filter(Boolean)
@@ -147,7 +148,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
           }
           break
         }
-        const paper = await buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey)
+        const paper = await buildCompetitiveMock('mpt', mockSessionDateKey || getDailyMockStatus('mpt').dateKey, studentName.trim())
         r = {
           title: paper.title,
           qs: paper.questions,
@@ -446,7 +447,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
     )
   }
 
-  if (error) return <div className="mx-auto max-w-3xl px-4 py-16"><EmptyState title={error} /></div>
+  if (error) return <div className="mx-auto max-w-3xl px-4 py-16"><EmptyState title={mode === 'mpt-mock' ? 'MPT paper unavailable' : 'Questions unavailable'} hint={error} /><div className="mt-4 text-center"><Link to={mode === 'mpt-mock' ? '/mpt' : '/gk'} className="text-sm font-semibold text-emerald-800 underline">Return to preparation</Link></div></div>
   if (!resolved) return null
   if (resolved.qs.length === 0) {
     return (
