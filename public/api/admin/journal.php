@@ -13,7 +13,7 @@ if ($method === 'GET') {
     cssv_json(['ok' => true, 'articles' => cssv_journal_rows($pdo, true, 500)]);
 }
 
-$payload = cssv_request_json(262144);
+$payload = cssv_request_json(1048576);
 
 if ($method === 'POST') {
     $article = cssv_journal_validate_article($payload['article'] ?? $payload);
