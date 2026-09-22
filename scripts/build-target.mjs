@@ -40,6 +40,9 @@ run('scripts/split-past-paper-analysis.mjs')
 // The bundled book catalogue is derived from the same source as the full
 // library, so the shelf renders on first paint without a 314 KB fetch.
 run('scripts/generate-book-catalogue.mjs')
+// Vistagram source batches are the canonical publication source. Validate the
+// full archive and generate the public feed before Vite copies public/.
+run('scripts/package-vistagram.mjs')
 
 run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])
