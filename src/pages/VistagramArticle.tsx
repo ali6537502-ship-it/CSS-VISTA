@@ -54,8 +54,43 @@ export default function VistagramArticle() {
 
   useEffect(() => {
     if (!post) return
-    document.title = `${post.title} | CSS Vistagram`
+
+    const canonical = `${window.location.origin}/vistagram/${encodeURIComponent(post.slug)}`
+    const title = `${post.title} | CSS Vistagram`
+    const description = post.excerpt.slice(0, 200)
+    const setMeta = (selector: string, attribute: string, value: string) => {
+      document.querySelector<HTMLMetaElement>(selector)?.setAttribute(attribute, value)
+    }
+
+    document.title = title
+    setMeta('meta[name="description"]', 'content', description)
+    setMeta('meta[name="robots"]', 'content', 'noindex, follow')
+    setMeta('meta[property="og:title"]', 'content', title)
+    setMeta('meta[property="og:description"]', 'content', description)
+    setMeta('meta[property="og:url"]', 'content', canonical)
+    setMeta('meta[name="twitter:title"]', 'content', title)
+    setMeta('meta[name="twitter:description"]', 'content', description)
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonical)
+
+    document.getElementById('cssv-vistagram-article-schema')?.remove()
+    const schema = document.createElement('script')
+    schema.id = 'cssv-vistagram-article-schema'
+    schema.type = 'application/ld+json'
+    schema.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt || post.publishedAt,
+      mainEntityOfPage: canonical,
+      publisher: { '@type': 'Organization', name: 'CSS Vista', url: window.location.origin },
+      about: [post.category, post.topic, ...post.tags],
+    })
+    document.head.appendChild(schema)
+
     if (user) recordVistagramView(post.id)
+    return () => { schema.remove() }
   }, [post, user])
 
   useEffect(() => {
