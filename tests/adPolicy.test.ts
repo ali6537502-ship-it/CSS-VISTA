@@ -113,7 +113,7 @@ test('substantial public content is Auto Ads eligible and manual units stay off 
   const eligibleRoutes = [
     '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/islamic-studies',
     '/subjects/optional', '/notes', '/past-papers', '/past-papers/css/2025',
-    '/fpsc-updates', '/fpsc-syllabus', '/mentors', '/about', '/opinions', '/services',
+    '/fpsc-updates', '/fpsc-syllabus', '/mentors', '/about', '/journal', '/services',
     '/book-summaries',
   ]
   for (const path of eligibleRoutes) {
