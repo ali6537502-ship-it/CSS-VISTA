@@ -811,6 +811,7 @@ function HelpGuide() {
   const items: [string, string][] = [
     ['Log in', 'Open /admin and sign in with the owner account. Access is checked against the protected administrator list. Always log out on a shared device.'],
     ['Add a Current Affairs update', 'Admin → Current Affairs → fill Title, Date, Short description and Full content → optionally attach a PDF/image and paste a source link → press Publish. “Save as draft” keeps it hidden until you publish.'],
+    ['Publish a VISTA Journal article', 'Admin → Website Tools → VISTA Journal → fill Title, Category, Author, Publication date, Short summary and Full article → optionally mark it Featured → press Publish article. New articles appear publicly as readable text; Save draft keeps the article private until you publish it.'],
     ['Edit an old update', 'Admin → Current Affairs → find the topic in “Your topics” → press Edit → change anything → Save & publish. The same pattern works for notifications, announcements and past papers.'],
     ['Upload a PDF or image', 'Small attachments can be added in an editor. Large notes and past papers belong in the permanent website file storage; ask Codex to import and classify them so every View and Download link remains stable.'],
     ['Remove an update', 'Press the red trash icon next to the item and confirm. Published content changes are synced to the cloud. Download a content backup before large deletions.'],
