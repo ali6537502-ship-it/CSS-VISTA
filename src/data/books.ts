@@ -32,12 +32,13 @@ export const books: Book[] = [
   },
 ]
 
-// Opinions by the author - displayed as readable page images (not PDF downloads).
+// VISTA Journal archive - existing published pieces displayed as readable page images.
 export interface Opinion {
   slug: string
   title: string
   outlet: string
   date: string
+  author?: string
   pages: string[]
 }
 
@@ -47,6 +48,7 @@ export const opinions: Opinion[] = [
     title: 'When the Pacific Breathes Fire, Pakistan Burns',
     outlet: 'Opinion',
     date: 'April 2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-ali-hassan-p1.jpg', '/opinions/opinion-ali-hassan-p2.jpg', '/opinions/opinion-ali-hassan-p3.jpg'],
   },
   {
@@ -54,6 +56,7 @@ export const opinions: Opinion[] = [
     title: 'When Eid Turns to Ash - the Chaman Phatak Bombing',
     outlet: 'Opinion',
     date: '2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-eid-eve-chaman-phatak-p1.jpg', '/opinions/opinion-eid-eve-chaman-phatak-p2.jpg'],
   },
   {
@@ -61,6 +64,7 @@ export const opinions: Opinion[] = [
     title: 'Machines at War: The AI Question Nobody in Islamabad Is Asking',
     outlet: 'Dawn - Opinion',
     date: '2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-machines-at-war-p1.jpg', '/opinions/opinion-machines-at-war-p2.jpg', '/opinions/opinion-machines-at-war-p3.jpg'],
   },
   {
@@ -68,6 +72,7 @@ export const opinions: Opinion[] = [
     title: 'Power Without Peace',
     outlet: 'Opinion',
     date: '20 April 2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-power-without-peace-p1.jpg'],
   },
   {
@@ -75,6 +80,7 @@ export const opinions: Opinion[] = [
     title: 'The Next 48 Hours - Between Blockade and Bargain',
     outlet: 'Opinion',
     date: '21 April 2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-the-next-48-hours-p1.jpg'],
   },
   {
@@ -82,6 +88,7 @@ export const opinions: Opinion[] = [
     title: 'Why Harassers Dare - the Harasser’s Calculus',
     outlet: 'Opinion',
     date: '2026',
+    author: 'Ali Hassan Sargana',
     pages: ['/opinions/opinion-harassers-calculus-p1.jpg'],
   },
 ]
