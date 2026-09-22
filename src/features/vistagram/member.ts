@@ -31,6 +31,9 @@ const empty: VistagramMemberState = {
   lastVisit: '',
 }
 
+let cachedRaw: string | null | undefined
+let cachedState: VistagramMemberState = empty
+
 function normalize(value: unknown): VistagramMemberState {
   if (!value || typeof value !== 'object') return { ...empty }
   const state = value as Partial<VistagramMemberState>
@@ -50,15 +53,22 @@ function normalize(value: unknown): VistagramMemberState {
 export function getVistagramMemberState(): VistagramMemberState {
   try {
     const raw = localStorage.getItem(KEY)
-    return raw ? normalize(JSON.parse(raw)) : { ...empty }
+    if (raw === cachedRaw) return cachedState
+    cachedRaw = raw
+    cachedState = raw ? normalize(JSON.parse(raw)) : empty
+    return cachedState
   } catch {
-    return { ...empty }
+    cachedRaw = undefined
+    cachedState = empty
+    return cachedState
   }
 }
 
 function write(next: VistagramMemberState) {
   try {
     localStorage.setItem(KEY, JSON.stringify(next))
+    cachedRaw = undefined
+    cachedState = next
     window.dispatchEvent(new Event(EVENT))
     notifyProgressChanged()
   } catch {
@@ -122,14 +132,20 @@ export function setVistagramNote(postId: string, note: string) {
 export function createVistagramCollection(name: string) {
   const clean = name.trim().replace(/\s+/g, ' ').slice(0, 80)
   if (!clean) return null
-  const collection: VistagramCollection = {
-    id: `vistagram-collection-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    name: clean,
-    postIds: [],
-    createdAt: new Date().toISOString(),
-  }
+  let collection: VistagramCollection | null = null
   updateVistagramMemberState((state) => {
-    if (!state.collections.some((item) => item.name.toLowerCase() === clean.toLowerCase())) state.collections.unshift(collection)
+    const existing = state.collections.find((item) => item.name.toLowerCase() === clean.toLowerCase())
+    if (existing) {
+      collection = existing
+      return
+    }
+    collection = {
+      id: `vistagram-collection-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      name: clean,
+      postIds: [],
+      createdAt: new Date().toISOString(),
+    }
+    state.collections.unshift(collection)
   })
   return collection
 }
