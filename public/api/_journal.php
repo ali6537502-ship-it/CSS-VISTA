@@ -53,8 +53,10 @@ function cssv_journal_rows(PDO $pdo, bool $includeDrafts = false, int $limit = 1
 function cssv_journal_slug_base(string $title): string
 {
     $value = trim($title);
-    $ascii = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value);
-    if (is_string($ascii) && $ascii !== '') $value = $ascii;
+    if (function_exists('iconv')) {
+        $ascii = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value);
+        if (is_string($ascii) && $ascii !== '') $value = $ascii;
+    }
     $value = strtolower($value);
     $value = preg_replace('/[^a-z0-9]+/', '-', $value) ?? '';
     $value = trim($value, '-');
