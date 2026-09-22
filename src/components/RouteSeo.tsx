@@ -40,6 +40,7 @@ export default function RouteSeo() {
       || /^\/past-papers\/(?:css|pms|ppsc|mpt)\/\d{4}\/?$/.test(location.pathname)
       || location.pathname.startsWith('/gk/cat/')
       || location.pathname.startsWith('/book-summaries/')
+      || location.pathname.startsWith('/vistagram/')
       || location.pathname === '/css-2026-written-result'
     ) {
       setMeta('meta[name="robots"]', 'content', robots)
