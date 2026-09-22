@@ -44,8 +44,8 @@ export default function VistaJournal() {
     }
   }, [active])
 
-  const featured = opinions[0]
-  const selected = opinions.slice(1)
+  const featured = opinions.find((article) => article.featured) ?? opinions[0]
+  const selected = opinions.filter((article) => article !== featured)
 
   const openArticle = (article: Opinion) => {
     setActive(article)
@@ -75,7 +75,7 @@ export default function VistaJournal() {
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:py-12">
         {featured && (
-          <section id="featured" aria-labelledby="featured-heading">
+          <section id="featured" className="scroll-mt-24" aria-labelledby="featured-heading">
             <div className="mb-5 flex items-end justify-between gap-4 border-b border-pine/10 pb-3">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-700">Editor’s Selection</p>
@@ -88,7 +88,7 @@ export default function VistaJournal() {
               onClick={() => openArticle(featured)}
               className={`group grid w-full overflow-hidden rounded-2xl border border-pine/10 bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg lg:grid-cols-[1.25fr_0.95fr] ${focusRing}`}
             >
-              <div className="relative flex min-h-[300px] items-center justify-center overflow-hidden bg-secondary/65 p-5 sm:min-h-[420px] sm:p-8">
+              <div className="relative flex min-h-[300px] items-center justify-center overflow-hidden bg-secondary/60 p-5 sm:min-h-[420px] sm:p-8">
                 <img
                   src={featured.pages[0]}
                   alt=""
@@ -112,7 +112,7 @@ export default function VistaJournal() {
           </section>
         )}
 
-        <section id="publications" className="mt-14" aria-labelledby="publications-heading">
+        <section id="publications" className="mt-14 scroll-mt-24" aria-labelledby="publications-heading">
           <div className="mb-5 border-b border-pine/10 pb-3">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-700">From the Archive</p>
             <h2 id="publications-heading" className="mt-1 font-display text-2xl font-bold text-pine">Selected Publications</h2>
@@ -126,7 +126,7 @@ export default function VistaJournal() {
                 onClick={() => openArticle(article)}
                 className={`group overflow-hidden rounded-xl border border-pine/10 bg-white text-left transition-all hover:-translate-y-0.5 hover:shadow-md ${focusRing}`}
               >
-                <div className="flex h-64 items-center justify-center overflow-hidden bg-secondary/55 p-4">
+                <div className="flex h-64 items-center justify-center overflow-hidden bg-secondary/50 p-4">
                   <img
                     src={article.pages[0]}
                     alt=""
@@ -151,7 +151,7 @@ export default function VistaJournal() {
           </div>
         </section>
 
-        <section id="areas" className="mt-14 border-y border-pine/10 py-8" aria-labelledby="areas-heading">
+        <section id="areas" className="mt-14 scroll-mt-24 border-y border-pine/10 py-8" aria-labelledby="areas-heading">
           <div className="grid gap-7 lg:grid-cols-[260px_1fr]">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-700">What We Cover</p>
@@ -167,7 +167,7 @@ export default function VistaJournal() {
           </div>
         </section>
 
-        <section id="write" className="mt-14 overflow-hidden rounded-2xl bg-pine text-white" aria-labelledby="write-heading">
+        <section id="write" className="mt-14 scroll-mt-24 overflow-hidden rounded-2xl bg-pine text-white" aria-labelledby="write-heading">
           <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300">Write for VISTA Journal</p>
@@ -182,7 +182,7 @@ export default function VistaJournal() {
               </p>
             </div>
 
-            <div className="rounded-xl border border-white/15 bg-white/10 p-5 backdrop-blur-sm">
+            <div className="rounded-xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-200">Article Submissions</p>
               <p className="mt-2 font-display text-2xl font-bold">03166050195</p>
               <a
@@ -259,7 +259,7 @@ export default function VistaJournal() {
             <img
               src={active.pages[pageIdx]}
               alt={`${active.title} — published page ${pageIdx + 1}`}
-              className="mx-auto max-h-full rounded-sm bg-white object-contain shadow-2xl"
+              className="mx-auto max-h-full max-w-full rounded-sm bg-white object-contain shadow-2xl"
             />
           </div>
 
