@@ -10,6 +10,8 @@ export type JournalArticle = {
   published_on: string
   featured: boolean
   published: boolean
+  cover_url?: string
+  author_photo_url?: string
   created_at?: string
   updated_at?: string
 }

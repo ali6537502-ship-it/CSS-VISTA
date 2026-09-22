@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Eye, EyeOff, Pencil, Save, Star, Trash2 } from 'lucide-react'
+import { Eye, EyeOff, ImagePlus, Pencil, Save, Star, Trash2, UserRound } from 'lucide-react'
 import { Badge } from '@/components/shared'
 import { ownerRequest } from '@/lib/hostingerApi'
 import { JOURNAL_CATEGORIES, type JournalArticle } from '@/lib/journal'
@@ -14,6 +14,8 @@ type ArticleForm = {
   body: string
   published_on: string
   featured: boolean
+  cover_url?: string
+  author_photo_url?: string
 }
 
 const input = 'h-10 w-full rounded-md border border-input bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
@@ -36,6 +38,8 @@ function emptyArticle(): ArticleForm {
     body: '',
     published_on: today(),
     featured: false,
+    cover_url: '',
+    author_photo_url: '',
   }
 }
 
@@ -48,9 +52,57 @@ function Field({ label, required = false, children }: { label: string; required?
   )
 }
 
+function ownerCsrfToken() {
+  const match = document.cookie.match(/(?:^|;\s*)cssv_owner_csrf=([^;]+)/)
+  return match ? decodeURIComponent(match[1]) : ''
+}
+
+async function uploadJournalMedia(articleId: string, kind: 'cover' | 'author', file: File) {
+  const token = ownerCsrfToken()
+  const body = new FormData()
+  body.set('article_id', articleId)
+  body.set('kind', kind)
+  body.set('image', file)
+
+  const response = await fetch('/api/admin/journal-media.php', {
+    method: 'POST',
+    credentials: 'same-origin',
+    cache: 'no-store',
+    headers: {
+      Accept: 'application/json',
+      ...(token ? { 'X-CSRF-Token': token } : {}),
+    },
+    body,
+  })
+  const data = await response.json().catch(() => ({})) as { message?: string; url?: string }
+  if (!response.ok) throw new Error(data.message || 'The image could not be uploaded.')
+  return data.url || ''
+}
+
+function filePreview(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onerror = () => reject(new Error('The selected image could not be previewed.'))
+    reader.onload = () => resolve(String(reader.result || ''))
+    reader.readAsDataURL(file)
+  })
+}
+
+function adminMediaUrl(article: JournalArticle | ArticleForm, kind: 'cover' | 'author') {
+  if (!article.id) return ''
+  const hasImage = kind === 'cover' ? Boolean(article.cover_url) : Boolean(article.author_photo_url)
+  if (!hasImage) return ''
+  const version = 'updated_at' in article ? String(article.updated_at || '') : String(Date.now())
+  return `/api/admin/journal-media.php?id=${encodeURIComponent(article.id)}&kind=${kind}&v=${encodeURIComponent(version)}`
+}
+
 export default function JournalEditor() {
   const [articles, setArticles] = useState<JournalArticle[]>([])
   const [form, setForm] = useState<ArticleForm>(() => emptyArticle())
+  const [coverFile, setCoverFile] = useState<File | null>(null)
+  const [authorPhotoFile, setAuthorPhotoFile] = useState<File | null>(null)
+  const [coverPreview, setCoverPreview] = useState('')
+  const [authorPhotoPreview, setAuthorPhotoPreview] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [notice, setNotice] = useState('')
@@ -70,6 +122,14 @@ export default function JournalEditor() {
 
   useEffect(() => { void load() }, [])
 
+  function resetEditor() {
+    setForm(emptyArticle())
+    setCoverFile(null)
+    setAuthorPhotoFile(null)
+    setCoverPreview('')
+    setAuthorPhotoPreview('')
+  }
+
   function validate() {
     if (!form.title.trim()) return 'Title is required.'
     if (!form.category.trim()) return 'Category is required.'
@@ -80,12 +140,41 @@ export default function JournalEditor() {
     return ''
   }
 
+  async function chooseImage(file: File | undefined, kind: 'cover' | 'author') {
+    if (!file) return
+    const allowed = ['image/jpeg', 'image/png', 'image/webp']
+    if (!allowed.includes(file.type)) {
+      setError('Use a JPG, PNG, or WebP image.')
+      return
+    }
+    const max = kind === 'cover' ? 5 * 1024 * 1024 : 2 * 1024 * 1024
+    if (file.size > max) {
+      setError(kind === 'cover' ? 'Cover image must be 5 MB or smaller.' : 'Author photo must be 2 MB or smaller.')
+      return
+    }
+
+    try {
+      const preview = await filePreview(file)
+      if (kind === 'cover') {
+        setCoverFile(file)
+        setCoverPreview(preview)
+      } else {
+        setAuthorPhotoFile(file)
+        setAuthorPhotoPreview(preview)
+      }
+      setError('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The image could not be previewed.')
+    }
+  }
+
   async function save(published: boolean) {
     const validation = validate()
     if (validation) { setError(validation); return }
     setSaving(true); setError(''); setNotice('')
+
     try {
-      await ownerRequest<{ article: JournalArticle }>('admin/journal.php', {
+      const result = await ownerRequest<{ article: JournalArticle }>('admin/journal.php', {
         method: 'POST',
         body: JSON.stringify({
           article: {
@@ -94,8 +183,30 @@ export default function JournalEditor() {
           },
         }),
       })
+
+      try {
+        if (coverFile) {
+          const url = await uploadJournalMedia(result.article.id, 'cover', coverFile)
+          setCoverFile(null)
+          setCoverPreview('')
+          setForm((current) => ({ ...current, id: result.article.id, cover_url: url }))
+        }
+        if (authorPhotoFile) {
+          const url = await uploadJournalMedia(result.article.id, 'author', authorPhotoFile)
+          setAuthorPhotoFile(null)
+          setAuthorPhotoPreview('')
+          setForm((current) => ({ ...current, id: result.article.id, author_photo_url: url }))
+        }
+      } catch (mediaError) {
+        setForm((current) => ({ ...current, id: result.article.id }))
+        setNotice(published ? 'The article was published, but one image still needs to be uploaded.' : 'The draft was saved, but one image still needs to be uploaded.')
+        setError(mediaError instanceof Error ? mediaError.message : 'One image could not be uploaded.')
+        await load()
+        return
+      }
+
       setNotice(published ? 'Article published successfully. It is now available in VISTA Journal.' : 'Draft saved successfully.')
-      setForm(emptyArticle())
+      resetEditor()
       await load()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'The article could not be saved.')
@@ -115,7 +226,13 @@ export default function JournalEditor() {
       body: article.body,
       published_on: article.published_on,
       featured: article.featured,
+      cover_url: article.cover_url || '',
+      author_photo_url: article.author_photo_url || '',
     })
+    setCoverFile(null)
+    setAuthorPhotoFile(null)
+    setCoverPreview('')
+    setAuthorPhotoPreview('')
     setNotice('')
     setError('')
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -137,6 +254,43 @@ export default function JournalEditor() {
     }
   }
 
+  async function removeMedia(kind: 'cover' | 'author') {
+    if (kind === 'cover' && coverPreview) {
+      setCoverFile(null)
+      setCoverPreview('')
+      return
+    }
+    if (kind === 'author' && authorPhotoPreview) {
+      setAuthorPhotoFile(null)
+      setAuthorPhotoPreview('')
+      return
+    }
+    if (!form.id) return
+
+    setSaving(true); setError(''); setNotice('')
+    try {
+      await ownerRequest<{ ok: boolean }>('admin/journal-media.php', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: form.id, kind }),
+      })
+      if (kind === 'cover') {
+        setCoverFile(null)
+        setCoverPreview('')
+        setForm((current) => ({ ...current, cover_url: '' }))
+      } else {
+        setAuthorPhotoFile(null)
+        setAuthorPhotoPreview('')
+        setForm((current) => ({ ...current, author_photo_url: '' }))
+      }
+      setNotice(kind === 'cover' ? 'Cover image removed.' : 'Author photo removed.')
+      await load()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'The image could not be removed.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   async function remove(article: JournalArticle) {
     if (!confirm(`Delete “${article.title}” permanently?`)) return
     setSaving(true); setError(''); setNotice('')
@@ -145,7 +299,7 @@ export default function JournalEditor() {
         method: 'DELETE',
         body: JSON.stringify({ id: article.id }),
       })
-      if (form.id === article.id) setForm(emptyArticle())
+      if (form.id === article.id) resetEditor()
       setNotice('Article deleted.')
       await load()
     } catch (err) {
@@ -155,6 +309,9 @@ export default function JournalEditor() {
     }
   }
 
+  const existingCover = form.cover_url ? adminMediaUrl(form, 'cover') : ''
+  const existingAuthorPhoto = form.author_photo_url ? adminMediaUrl(form, 'author') : ''
+
   return (
     <div className="space-y-6">
       <section className="rounded-xl border bg-white p-5 sm:p-6">
@@ -163,7 +320,7 @@ export default function JournalEditor() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">VISTA Journal Publisher</p>
             <h2 className="mt-1 font-display text-2xl font-bold text-pine">{form.id ? 'Edit article' : 'Publish a new article'}</h2>
             <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-              Fill the required fields and press Publish. No image is required. The article will appear publicly in text form.
+              Fill the required fields and press Publish. Cover image and author photo are optional.
             </p>
           </div>
           {form.id && <Badge tone="gold">Editing existing article</Badge>}
@@ -193,6 +350,60 @@ export default function JournalEditor() {
           <Field label="Author designation">
             <input className={input} maxLength={180} value={form.author_role} onChange={(e) => setForm({ ...form, author_role: e.target.value })} placeholder="Optional: PAS Officer, Researcher, Student, etc." />
           </Field>
+
+          <div className="sm:col-span-2 grid gap-4 lg:grid-cols-[1.6fr_0.8fr]">
+            <div className="rounded-xl border bg-secondary/20 p-4">
+              <div className="flex items-center gap-2">
+                <ImagePlus className="h-4 w-4 text-emerald-700" />
+                <h3 className="text-sm font-bold text-pine">Article cover image <span className="font-normal text-muted-foreground">(optional)</span></h3>
+              </div>
+              <p className="mt-1 text-xs text-muted-foreground">JPG, PNG or WebP · up to 5 MB. A wide editorial image works best.</p>
+              {(coverPreview || existingCover) && (
+                <div className="mt-3 overflow-hidden rounded-lg border bg-white">
+                  <img src={coverPreview || existingCover} alt="Article cover preview" className="h-52 w-full object-cover" />
+                </div>
+              )}
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-semibold hover:bg-secondary">
+                  <ImagePlus className="h-3.5 w-3.5" /> {coverPreview || existingCover ? 'Replace cover' : 'Choose cover'}
+                  <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(event) => void chooseImage(event.target.files?.[0], 'cover')} />
+                </label>
+                {(coverPreview || existingCover) && (
+                  <button type="button" disabled={saving} onClick={() => void removeMedia('cover')} className="rounded-md border border-red-200 px-3 py-2 text-xs font-semibold text-red-700 hover:bg-red-50 disabled:opacity-50">
+                    Remove cover
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-xl border bg-secondary/20 p-4">
+              <div className="flex items-center gap-2">
+                <UserRound className="h-4 w-4 text-emerald-700" />
+                <h3 className="text-sm font-bold text-pine">Author photo <span className="font-normal text-muted-foreground">(optional)</span></h3>
+              </div>
+              <p className="mt-1 text-xs text-muted-foreground">JPG, PNG or WebP · up to 2 MB. A clear portrait works best.</p>
+              <div className="mt-3 flex justify-center">
+                {(authorPhotoPreview || existingAuthorPhoto) ? (
+                  <img src={authorPhotoPreview || existingAuthorPhoto} alt="Author photo preview" className="h-28 w-28 rounded-full border-4 border-white object-cover shadow-sm" />
+                ) : (
+                  <div className="flex h-28 w-28 items-center justify-center rounded-full border bg-white text-muted-foreground">
+                    <UserRound className="h-10 w-10" />
+                  </div>
+                )}
+              </div>
+              <div className="mt-3 flex flex-wrap justify-center gap-2">
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border bg-white px-3 py-2 text-xs font-semibold hover:bg-secondary">
+                  <UserRound className="h-3.5 w-3.5" /> {authorPhotoPreview || existingAuthorPhoto ? 'Replace photo' : 'Choose photo'}
+                  <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(event) => void chooseImage(event.target.files?.[0], 'author')} />
+                </label>
+                {(authorPhotoPreview || existingAuthorPhoto) && (
+                  <button type="button" disabled={saving} onClick={() => void removeMedia('author')} className="rounded-md border border-red-200 px-3 py-2 text-xs font-semibold text-red-700 hover:bg-red-50 disabled:opacity-50">
+                    Remove photo
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
           <div className="sm:col-span-2">
             <Field label="Short summary" required>
@@ -250,7 +461,7 @@ export default function JournalEditor() {
             Save draft
           </button>
           {form.id && (
-            <button type="button" onClick={() => setForm(emptyArticle())} className="min-h-11 rounded-md border px-5 text-sm hover:bg-secondary">
+            <button type="button" onClick={resetEditor} className="min-h-11 rounded-md border px-5 text-sm hover:bg-secondary">
               Cancel editing
             </button>
           )}
@@ -276,14 +487,21 @@ export default function JournalEditor() {
           <div className="mt-4 divide-y">
             {articles.map((article) => (
               <article key={article.id} className="flex flex-col gap-3 py-4 lg:flex-row lg:items-center">
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-semibold text-pine">{article.title}</h3>
-                    {article.featured && <Badge tone="gold">Featured</Badge>}
-                    {article.published ? <Badge>Published</Badge> : <Badge tone="gray">Draft</Badge>}
+                <div className="flex min-w-0 flex-1 items-start gap-3">
+                  {article.author_photo_url ? (
+                    <img src={adminMediaUrl(article, 'author')} alt="" className="h-11 w-11 shrink-0 rounded-full border object-cover" />
+                  ) : article.cover_url ? (
+                    <img src={adminMediaUrl(article, 'cover')} alt="" className="h-11 w-16 shrink-0 rounded border object-cover" />
+                  ) : null}
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="font-semibold text-pine">{article.title}</h3>
+                      {article.featured && <Badge tone="gold">Featured</Badge>}
+                      {article.published ? <Badge>Published</Badge> : <Badge tone="gray">Draft</Badge>}
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground">{article.category} · {article.author} · {article.published_on}</p>
+                    <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{article.excerpt}</p>
                   </div>
-                  <p className="mt-1 text-xs text-muted-foreground">{article.category} · {article.author} · {article.published_on}</p>
-                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{article.excerpt}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button type="button" onClick={() => edit(article)} className="inline-flex items-center gap-1 rounded-md border px-3 py-2 text-xs font-semibold hover:bg-secondary">

@@ -178,23 +178,42 @@ export default function VistaJournal() {
               onClick={() => setActiveArticle(featuredArticle)}
               className={`group grid w-full overflow-hidden rounded-2xl border border-pine/10 bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg lg:grid-cols-[0.75fr_1.25fr] ${focusRing}`}
             >
-              <div className="flex min-h-[280px] items-center justify-center bg-pine p-8 text-white sm:min-h-[350px]">
-                <div className="max-w-sm">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300">{featuredArticle.category}</p>
-                  <p className="mt-5 font-display text-3xl font-bold leading-tight sm:text-4xl">VISTA Journal</p>
-                  <p className="mt-4 text-sm leading-6 text-emerald-50/80">Text Edition · {formatJournalDate(featuredArticle.published_on)}</p>
-                </div>
+              <div className="relative flex min-h-[280px] items-center justify-center overflow-hidden bg-pine text-white sm:min-h-[350px]">
+                {featuredArticle.cover_url ? (
+                  <img
+                    src={featuredArticle.cover_url}
+                    alt={featuredArticle.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+                  />
+                ) : (
+                  <div className="max-w-sm p-8">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300">{featuredArticle.category}</p>
+                    <p className="mt-5 font-display text-3xl font-bold leading-tight sm:text-4xl">VISTA Journal</p>
+                    <p className="mt-4 text-sm leading-6 text-emerald-50/80">Text Edition · {formatJournalDate(featuredArticle.published_on)}</p>
+                  </div>
+                )}
               </div>
               <div className="flex flex-col justify-center p-6 sm:p-10">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-700">{featuredArticle.category}</p>
                 <h3 className="mt-3 font-display text-2xl font-bold leading-tight text-pine sm:text-4xl">{featuredArticle.title}</h3>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">{featuredArticle.excerpt}</p>
-                <p className="mt-5 text-sm font-semibold text-pine">
-                  By {featuredArticle.author}{featuredArticle.author_role ? <span className="font-normal text-muted-foreground"> · {featuredArticle.author_role}</span> : null}
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  {formatJournalDate(featuredArticle.published_on)} · {journalReadingMinutes(featuredArticle.body)} min read
-                </p>
+                <div className="mt-5 flex items-center gap-3">
+                  {featuredArticle.author_photo_url && (
+                    <img
+                      src={featuredArticle.author_photo_url}
+                      alt={featuredArticle.author}
+                      className="h-11 w-11 shrink-0 rounded-full border border-pine/10 object-cover"
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-pine">
+                      By {featuredArticle.author}{featuredArticle.author_role ? <span className="font-normal text-muted-foreground"> · {featuredArticle.author_role}</span> : null}
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {formatJournalDate(featuredArticle.published_on)} · {journalReadingMinutes(featuredArticle.body)} min read
+                    </p>
+                  </div>
+                </div>
                 <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-pine">
                   Read full article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -242,12 +261,26 @@ export default function VistaJournal() {
                   onClick={() => setActiveArticle(article)}
                   className={`group flex min-h-[280px] flex-col rounded-xl border border-pine/10 bg-white p-6 text-left transition-all hover:-translate-y-0.5 hover:shadow-md ${focusRing}`}
                 >
+                  {article.cover_url && (
+                    <img
+                      src={article.cover_url}
+                      alt={article.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="-mx-6 -mt-6 mb-5 h-44 w-[calc(100%+3rem)] rounded-t-xl object-cover"
+                    />
+                  )}
                   <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-700">{article.category}</p>
                   <h3 className="mt-3 font-display text-xl font-bold leading-snug text-pine">{article.title}</h3>
                   <p className="mt-3 line-clamp-4 text-sm leading-6 text-muted-foreground">{article.excerpt}</p>
                   <div className="mt-auto border-t border-pine/10 pt-4">
-                    <p className="text-xs font-semibold text-pine">By {article.author}</p>
-                    <div className="mt-1 flex items-center justify-between gap-3 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      {article.author_photo_url && (
+                        <img src={article.author_photo_url} alt={article.author} loading="lazy" className="h-8 w-8 rounded-full border object-cover" />
+                      )}
+                      <p className="text-xs font-semibold text-pine">By {article.author}</p>
+                    </div>
+                    <div className="mt-2 flex items-center justify-between gap-3 text-xs text-muted-foreground">
                       <span>{formatJournalDate(article.published_on)}</span>
                       <span>{journalReadingMinutes(article.body)} min read</span>
                     </div>
@@ -393,12 +426,22 @@ export default function VistaJournal() {
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700">{activeArticle.category}</p>
                 <h1 className="mt-3 font-display text-3xl font-bold leading-tight text-pine sm:text-5xl">{activeArticle.title}</h1>
                 <p className="mt-5 text-base leading-7 text-muted-foreground sm:text-lg">{activeArticle.excerpt}</p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                  <span className="font-bold text-pine">By {activeArticle.author}</span>
-                  {activeArticle.author_role && <span className="text-muted-foreground">{activeArticle.author_role}</span>}
-                  <span className="text-muted-foreground">· {formatJournalDate(activeArticle.published_on)}</span>
+                <div className="mt-6 flex items-center gap-3">
+                  {activeArticle.author_photo_url && (
+                    <img src={activeArticle.author_photo_url} alt={activeArticle.author} className="h-12 w-12 shrink-0 rounded-full border border-pine/10 object-cover" />
+                  )}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                    <span className="font-bold text-pine">By {activeArticle.author}</span>
+                    {activeArticle.author_role && <span className="text-muted-foreground">{activeArticle.author_role}</span>}
+                    <span className="text-muted-foreground">· {formatJournalDate(activeArticle.published_on)}</span>
+                  </div>
                 </div>
               </header>
+              {activeArticle.cover_url && (
+                <figure className="mt-8 overflow-hidden rounded-xl border border-pine/10 bg-white">
+                  <img src={activeArticle.cover_url} alt={activeArticle.title} className="max-h-[520px] w-full object-cover" />
+                </figure>
+              )}
               <div className="mx-auto mt-8 max-w-3xl"><ArticleBody body={activeArticle.body} /></div>
             </div>
           </article>
