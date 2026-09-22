@@ -60,6 +60,19 @@ test('daily-six accepts exactly three Pakistan and three Global posts', () => {
   assert.equal(validateVistagramBatch(batch), batch)
 })
 
+test('launch-ten accepts exactly five Pakistan and five Global posts', () => {
+  const batch = validBatch()
+  batch.profile = 'launch-ten'
+  batch.posts = [
+    ...batch.posts,
+    article({ id: 'pk-regional-cooperation', slug: 'pk-regional-cooperation', dedupeKey: 'pk-regional-cooperation', scope: 'Pakistan', title: 'Pakistan and Regional Cooperation Institutions' }),
+    article({ id: 'pk-natural-resources', slug: 'pk-natural-resources', dedupeKey: 'pk-natural-resources', scope: 'Pakistan', title: 'Pakistan Natural Resources and Economic Geography' }),
+    article({ id: 'global-ai-fundamentals', slug: 'global-ai-fundamentals', dedupeKey: 'global-ai-fundamentals', scope: 'Global', title: 'Artificial Intelligence Fundamentals and Machine-Based Decisions' }),
+    article({ id: 'global-remote-sensing', slug: 'global-remote-sensing', dedupeKey: 'global-remote-sensing', scope: 'Global', title: 'Remote Sensing and Earth Observation in Environmental Science' }),
+  ]
+  assert.equal(validateVistagramBatch(batch), batch)
+})
+
 test('daily-six rejects the wrong geographic mix', () => {
   const batch = validBatch()
   batch.posts[0].scope = 'Global'
