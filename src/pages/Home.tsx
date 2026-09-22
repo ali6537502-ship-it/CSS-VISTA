@@ -630,6 +630,16 @@ export default function Home() {
     <div className="cssv-home min-h-screen pb-4 text-slate-900">
       <div className="mx-auto max-w-[1240px] px-3 py-4 sm:px-5 sm:py-5 lg:px-8 lg:py-7">
         <div id="cssv-home-ad-free-top" data-cssv-auto-ad-exclusion="home-top">
+          <div
+            className="cssv-reveal mb-2 flex w-full items-center justify-between gap-2 overflow-x-auto whitespace-nowrap text-center text-[11px] leading-tight text-emerald-800 sm:text-[12px]"
+            style={{ '--cssv-delay': '20ms' } as CSSProperties}
+            dir="rtl"
+            lang="ar"
+          >
+            <span className="flex-1 truncate">اَللّٰهُمَّ صَلِّ عَلٰی مُحَمَّدٍ وَّعَلٰی آلِ مُحَمَّدٍ</span>
+            <span className="flex-1 truncate">سُبْحَانَ اللهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضٰی نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ</span>
+            <span className="flex-1 truncate">رَبِّ زِدْنِیْ عِلْمًا</span>
+          </div>
           <button
             type="button"
             onClick={openSearch}
