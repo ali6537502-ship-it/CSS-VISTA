@@ -87,7 +87,7 @@ const sessionResponse = await fetch(new URL('/api/auth/session.php', origin), { 
 const session = await sessionResponse.json().catch(() => ({}))
 if (!sessionResponse.ok || session.provider !== 'hostinger' || session.authenticated !== false) failures.push('/api/auth/session.php: native Hostinger session service is unavailable')
 
-for (const route of ['/book-summaries', '/books', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
+for (const route of ['/book-summaries', '/books', '/journal', '/language-grammar', '/one-liner-gk', '/opinions', '/past-papers']) {
   const response = await fetch(new URL(route, origin), { signal: AbortSignal.timeout(20_000) })
   const contentType = response.headers.get('content-type') || ''
   const body = await response.text()
