@@ -121,9 +121,11 @@ export default function VistagramArticle() {
   const read = Boolean(memberState.read[post.id])
   const followed = memberState.followedTopics.includes(post.topic)
 
+  const activePost = post
+
   async function copy() {
     try {
-      await copyVistagramUrl(post.slug)
+      await copyVistagramUrl(activePost.slug)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1600)
     } catch { setCopied(false) }
@@ -132,7 +134,7 @@ export default function VistagramArticle() {
   function addCollection() {
     const created = createVistagramCollection(collectionName)
     if (!created) return
-    toggleVistagramCollectionPost(created.id, post.id)
+    toggleVistagramCollectionPost(created.id, activePost.id)
     setCollectionName('')
   }
 
