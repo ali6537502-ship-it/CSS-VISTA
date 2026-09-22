@@ -10,6 +10,7 @@ import {
   CountdownEditor, HomeCardsEditor, UpdatesEditor, CategoriesEditor, McqManager, MentorsEditor, PricesEditor,
 } from './AdminExtras'
 import { PageHeader, Badge } from '@/components/shared'
+import JournalEditor from './JournalEditor'
 import {
   getAdminContent, upsertCaTopic, deleteCaTopic, upsertDateRow,
   upsertNotification, deleteNotification, upsertAnnouncement, deleteAnnouncement,
@@ -35,6 +36,7 @@ const adminTabs = [
   { id: 'students', label: 'Students', icon: Activity },
   { id: 'series-requests', label: 'Customized Series', icon: ClipboardCheck },
   { id: 'ca', label: 'Current Affairs', icon: Newspaper },
+  { id: 'journal', label: 'VISTA Journal', icon: FileText },
   { id: 'updates', label: 'Updates & Notify', icon: BellRing },
   { id: 'dates', label: 'CSS 2027 Dates', icon: CalendarDays },
   { id: 'notifs', label: 'FPSC Notifications', icon: Bell },
@@ -933,6 +935,7 @@ export default function AdminPanel() {
         {tab === 'students' && <StudentsPanel />}
         {tab === 'series-requests' && <CustomizedSeriesPanel />}
         {tab === 'ca' && <CaEditor />}
+        {tab === 'journal' && <JournalEditor />}
         {tab === 'updates' && <UpdatesEditor />}
         {tab === 'dates' && <DatesEditor />}
         {tab === 'notifs' && <NotifsEditor />}
