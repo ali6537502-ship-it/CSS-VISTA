@@ -168,8 +168,7 @@ await writeFile(join(routeSeoDir, 'protected.html'), protectedRouteHtml)
 const htaccessPath = join(clientDir, '.htaccess')
 const redirectRules = ROUTE_REDIRECTS
   .map((redirect) => {
-    const pattern = redirect.from.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\const htaccessPath = join(clientDir, '.htaccess')
-const routeRules = ROUTE_REGISTRY')
+    const pattern = redirect.from.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     return `  RewriteRule ^${pattern}/?$ ${siteOrigin}${redirect.to} [R=${redirect.status},L,NE]`
   })
   .join('\n')
