@@ -43,7 +43,7 @@ import { allOptionalSubjects, primeOptionalSubject, primeOptionalTopic } from '@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
-import { BooksPage, OpinionsPage } from '@/pages/Books'
+import { BooksPage } from '@/pages/Books'\nimport VistaJournal from '@/pages/VistaJournal'
 import {
   LegalCentre, PrivacyPolicy, CookiePolicy, TermsConditions, Disclaimer,
   CopyrightPolicy, AboutCssVista, ContactCssVista, EditorialPolicy,
@@ -147,7 +147,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/fpsc-syllabus', () => <FpscSyllabus />),
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
   page('/books', () => <BooksPage />),
-  page('/opinions', () => <OpinionsPage />),
+  page('/journal', () => <VistaJournal />),\n  page('/opinions', () => <VistaJournal />),
   page('/consultation', () => <Consultation />),
   page('/study-material', () => <StudyMaterial />),
   page('/study-material/islamic-studies', () => <IslamicReferences />),
