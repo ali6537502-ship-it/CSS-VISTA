@@ -90,7 +90,7 @@ const post = z.object({
 export const batchSchema = z.object({
   schema_version: z.literal(1).optional(),
   test: z.boolean().optional(),
-  profile: z.literal('daily-six'),
+  profile: z.enum(['daily-six', 'launch-ten']),
   date,
   published_at: required(40)
     .regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/)
@@ -103,7 +103,7 @@ export const batchSchema = z.object({
     respectful_of_state_and_religion: z.literal(true),
     no_defamation_or_inflammatory_framing: z.literal(true),
   }),
-  posts: z.array(post).length(6),
+  posts: z.array(post).min(6).max(10),
 }).passthrough().superRefine((batch, ctx) => {
   const publicationDay = Number.isFinite(Date.parse(batch.published_at))
     ? new Intl.DateTimeFormat('en-CA', {
@@ -120,8 +120,17 @@ export const batchSchema = z.object({
 
   const pakistan = batch.posts.filter((item) => item.scope === 'Pakistan').length
   const global = batch.posts.filter((item) => item.scope === 'Global').length
-  if (pakistan !== 3 || global !== 3) {
-    ctx.addIssue({ code: 'custom', path: ['posts'], message: 'Daily batch must contain exactly 3 Pakistan and 3 Global posts' })
+  const expected = batch.profile === 'launch-ten'
+    ? { total: 10, pakistan: 5, global: 5 }
+    : { total: 6, pakistan: 3, global: 3 }
+  if (batch.posts.length !== expected.total || pakistan !== expected.pakistan || global !== expected.global) {
+    ctx.addIssue({
+      code: 'custom',
+      path: ['posts'],
+      message: batch.profile === 'launch-ten'
+        ? 'Launch batch must contain exactly 5 Pakistan and 5 Global posts'
+        : 'Daily batch must contain exactly 3 Pakistan and 3 Global posts',
+    })
   }
 
   for (const field of ['id', 'slug', 'dedupeKey']) {
