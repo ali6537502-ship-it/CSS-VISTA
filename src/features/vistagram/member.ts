@@ -129,26 +129,27 @@ export function setVistagramNote(postId: string, note: string) {
   })
 }
 
-export function createVistagramCollection(name: string) {
+export function createVistagramCollection(name: string): VistagramCollection | null {
   const clean = name.trim().replace(/\s+/g, ' ').slice(0, 80)
   if (!clean) return null
-  let collection: VistagramCollection | null = null
+
+  const existing = getVistagramMemberState().collections.find(
+    (item) => item.name.toLowerCase() === clean.toLowerCase(),
+  )
+  if (existing) return existing
+
+  const created: VistagramCollection = {
+    id: `vistagram-collection-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    name: clean,
+    postIds: [],
+    createdAt: new Date().toISOString(),
+  }
   updateVistagramMemberState((state) => {
-    const existing = state.collections.find((item) => item.name.toLowerCase() === clean.toLowerCase())
-    if (existing) {
-      collection = existing
-      return
+    if (!state.collections.some((item) => item.name.toLowerCase() === clean.toLowerCase())) {
+      state.collections.unshift(created)
     }
-    const created: VistagramCollection = {
-      id: `vistagram-collection-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      name: clean,
-      postIds: [],
-      createdAt: new Date().toISOString(),
-    }
-    collection = created
-    state.collections.unshift(created)
   })
-  return collection
+  return created
 }
 
 export function toggleVistagramCollectionPost(collectionId: string, postId: string) {
