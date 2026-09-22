@@ -56,11 +56,11 @@ export default function VistagramArticle() {
     if (!post) return
     document.title = `${post.title} | CSS Vistagram`
     if (user) recordVistagramView(post.id)
-  }, [post?.id, user?.id])
+  }, [post, user])
 
   useEffect(() => {
     if (post) setNote(memberState.notes[post.id] ?? '')
-  }, [memberState.notes, post?.id])
+  }, [memberState.notes, post])
 
   const related = useMemo(() => {
     if (!post) return []
