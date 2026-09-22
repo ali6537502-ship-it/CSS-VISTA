@@ -87,7 +87,7 @@ const FUNCTIONAL_NOINDEX = [
   '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
   '/account', '/account/dashboard', '/account/vistagram', '/account/settings', '/dashboard',
-  '/factbook', '/exam-intelligence', '/study-planner', '/admin', '/admin/login',
+  '/factbook', '/exam-intelligence', '/study-planner', '/sadiaali', '/sadiaali/login',
 ]
 
 test('the production build exists', { skip: built ? false : 'run npm run build:hostinger first' }, () => {
@@ -227,7 +227,7 @@ test('advertising state matches route policy across all nine page categories', {
     ['/account/dashboard', true],    // 3. authenticated content
     ['/factbook', true],
     ['/account/settings', false],    // 4. authentication / sensitive transaction
-    ['/admin', false],               // 5. admin
+    ['/sadiaali', false],            // 5. admin
     ['/gk/quiz', false],             // 7. interactive question / test state
     ['/five-minute', false],
     ['/privacy-policy', false],      // 9. legal

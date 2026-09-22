@@ -311,7 +311,7 @@ export default function StudentManagementPanel({ onOpenWebsiteTools }: { onOpenW
 
   async function signOutOwner() {
     await fetch('/api/admin-auth/logout.php', { method: 'POST', credentials: 'include', headers: { Accept: 'application/json' } }).catch(() => null)
-    navigate('/admin/login', { replace: true })
+    navigate('/sadiaali/login', { replace: true })
   }
 
   return (

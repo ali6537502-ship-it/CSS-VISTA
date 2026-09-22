@@ -78,7 +78,7 @@ test('advertising is independent of authentication', () => {
 
 test('authentication transactions, admin, assessments and viewers stay ad-free', () => {
   const adFree = [
-    '/account/settings', '/account/search', '/admin', '/admin/login',
+    '/account/settings', '/account/search', '/sadiaali', '/sadiaali/login',
     '/gk/quiz', '/five-minute', '/daily-challenge', '/mpt/bank/everyday-science',
     '/past-papers/view/css-2026-essay', '/notes/view/political-science/sample',
     '/answer-evaluation', '/live-theme-demos',
@@ -160,7 +160,7 @@ test('the signed-in account unit follows the route policy, not the fact of authe
   assert.equal(canShowAuthenticatedAccountAd('/dashboard', '', authenticated), true)
   // Authenticated routes the owner keeps ad-free.
   assert.equal(canShowAuthenticatedAccountAd('/account/settings', '', authenticated), false)
-  assert.equal(canShowAuthenticatedAccountAd('/admin', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/sadiaali', '', authenticated), false)
   // Public routes never use the authenticated unit.
   assert.equal(canShowAuthenticatedAccountAd('/notes', '', authenticated), false)
   // Unsettled or sensitive states.
@@ -262,8 +262,8 @@ test('Auto Ads never load over a sign-in, registration or password form', () => 
 
   // Admin stays ad-free in every state.
   for (const session of [signedOut, signedIn]) {
-    assert.equal(autoAdsFor('/admin', '', session), false)
-    assert.equal(autoAdsFor('/admin/login', '', session), false)
+    assert.equal(autoAdsFor('/sadiaali', '', session), false)
+    assert.equal(autoAdsFor('/sadiaali/login', '', session), false)
   }
 
   // Public content is unaffected by whether anyone is signed in.

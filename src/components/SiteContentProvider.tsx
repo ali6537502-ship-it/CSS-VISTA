@@ -49,7 +49,7 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
     // Public pages render from static/local content immediately. The cloud CMS
     // refresh is deliberately deferred so anonymous mobile visitors do not
     // wait for the account service during the critical first-load window.
-    const contentCriticalRoute = /^\/admin(?:\/|$)/.test(location.pathname)
+    const contentCriticalRoute = /^\/sadiaali(?:\/|$)/.test(location.pathname)
     return scheduleIdleWork(
       () => {
         if (contentInitialised.current) return
@@ -73,7 +73,7 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
     // The private owner admin now publishes bell announcements to Hostinger.
     // Keep the existing editor/local cache intact, but mirror only notification
     // changes into the central database so every student sees the same feed.
-    if (location.pathname !== '/admin') return
+    if (location.pathname !== '/sadiaali') return
     let active = true
     let syncing = false
     let queued = false
@@ -139,7 +139,7 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
   }, [location.pathname])
 
   useEffect(() => {
-    if (location.pathname !== '/admin') return
+    if (location.pathname !== '/sadiaali') return
     const refresh = () => {
       if (document.visibilityState === 'visible') void import('@/lib/admin').then(({ refreshCloudAdminContent }) => refreshCloudAdminContent()).catch(() => undefined)
     }
