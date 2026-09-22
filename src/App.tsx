@@ -200,8 +200,8 @@ export default function App() {
         <Route path="/contact" element={<S><ContactCssVista /></S>} />
         <Route path="/editorial-policy" element={<S><EditorialPolicy /></S>} />
         <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
-        <Route path="/admin" element={<S><Admin /></S>} />
-        <Route path="/admin/login" element={<S><AdminLogin /></S>} />
+        <Route path="/sadiaali" element={<S><Admin /></S>} />
+        <Route path="/sadiaali/login" element={<S><AdminLogin /></S>} />
         <Route path="*" element={<S><NotFound /></S>} />
       </Route>
     </Routes>

@@ -19,7 +19,7 @@ export default function TrustFooter() {
     navigate('/cookie-policy#managing-cookies')
   }
 
-  const isAdmin = location.pathname === '/admin' || location.pathname.startsWith('/admin/')
+  const isAdmin = location.pathname === '/sadiaali' || location.pathname.startsWith('/sadiaali/')
   const isFocusedStudy = location.pathname === '/gk/quiz'
     || location.pathname === '/five-minute'
     || location.pathname.startsWith('/mpt/bank/')

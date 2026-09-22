@@ -39,7 +39,7 @@ export default function AdminLogin() {
     void api('/api/admin-auth/status.php')
       .then((data) => {
         if (!active) return
-        if (data.authenticated) navigate('/admin', { replace: true })
+        if (data.authenticated) navigate('/sadiaali', { replace: true })
         else setStage(data.configured ? 'login' : 'setup-email')
       })
       .catch((reason) => { if (active) { setError(reason instanceof Error ? reason.message : 'Admin login is unavailable.'); setStage('login') } })
@@ -85,7 +85,7 @@ export default function AdminLogin() {
     await run(async () => {
       if (!/^\d{5,6}$/.test(totpCode)) throw new Error('Enter the current authenticator code.')
       await api('/api/admin-auth/verify-totp.php', { code: totpCode.padStart(6, '0') })
-      navigate('/admin', { replace: true })
+      navigate('/sadiaali', { replace: true })
     })
   }
 

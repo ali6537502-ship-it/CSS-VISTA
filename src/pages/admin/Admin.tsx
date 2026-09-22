@@ -19,7 +19,7 @@ export default function Admin() {
         if (active) setReady(true)
       })
       .catch(() => {
-        if (active) navigate('/admin/login', { replace: true })
+        if (active) navigate('/sadiaali/login', { replace: true })
       })
     return () => { active = false }
   }, [navigate])

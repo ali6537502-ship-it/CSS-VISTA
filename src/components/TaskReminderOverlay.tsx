@@ -89,7 +89,7 @@ export default function TaskReminderOverlay() {
       return
     }
     const insideAccount = location.pathname === '/account' || location.pathname.startsWith('/account/')
-    if (insideAccount || location.pathname.startsWith('/admin')) {
+    if (insideAccount || location.pathname.startsWith('/sadiaali')) {
       setOpen(false)
       return
     }
