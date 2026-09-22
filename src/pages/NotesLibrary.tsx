@@ -1,4 +1,4 @@
-import { BadgePercent, ChevronDown, Eye, FileImage, FileText, ListChecks, MessageCircle } from 'lucide-react'
+import { BadgePercent, ChevronDown, Eye, FileImage, FileText, ListChecks, MessageCircle, PlayCircle } from 'lucide-react'
 import { Link } from 'react-router'
 import { PageHeader } from '@/components/shared'
 import { bundle, getNoteDisplayPrice, getVisibleBundleIncludes, getVisibleNoteProducts, notesCoverageStatement, notesPurchaseActionLabel, type NoteProduct } from '@/data/notes'
@@ -30,11 +30,23 @@ export default function NotesLibrary() {
   const ali = mentors.find((mentor) => mentor.id === 'ali')!
   const visibleProducts = getVisibleNoteProducts()
   const visibleBundleIncludes = getVisibleBundleIncludes()
-  const contact = (subject: string) => waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${subject} notes available on CSS VISTA. Please share the price and purchase details.`)
+  const contact = (product: NoteProduct | string) => {
+    if (typeof product === 'string') {
+      return waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${product} available on CSS VISTA. Please share the price and purchase details.`)
+    }
+
+    const display = getNoteDisplayPrice(product)
+    return waLink(
+      ali.whatsapp,
+      display.hasPrice
+        ? `Assalam-o-Alaikum, I would like to purchase the ${product.subject} notes listed on CSS VISTA for PKR ${priceFormatter.format(display.price)}. Please share the purchase details.`
+        : `Assalam-o-Alaikum, I would like to inquire about the ${product.subject} notes available on CSS VISTA. Please share the price and purchase details.`,
+    )
+  }
 
   return (
     <div>
-      <PageHeader title="CSS Notes by Sir Ali Hassan Sargana" description="Explore complete topic coverage, available documents and today’s discounted prices for Current Affairs, Pakistan Affairs, Criminology and Political Science." />
+      <PageHeader title="CSS Notes by Sir Ali Hassan Sargana" description="Explore complete topic coverage, available samples and prices for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History." />
       <main className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <section className="grid gap-5 rounded-2xl bg-pine p-5 text-white shadow-lg sm:grid-cols-[112px_1fr] sm:items-center sm:p-7">
           <img src="/images/mentor-ali.jpg" alt="Ali Hassan Sargana" className="h-28 w-28 rounded-2xl border-2 border-white/25 object-cover object-top shadow-lg" />
@@ -51,6 +63,25 @@ export default function NotesLibrary() {
               <h2 className="font-display text-xl font-bold text-pine">{product.subject}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
               <NotePrice product={product} />
+              {product.previewVideoId && (
+                <section className="mt-4 overflow-hidden rounded-xl border bg-slate-950 shadow-sm" aria-label={`${product.subject} video preview`}>
+                  <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5 text-white">
+                    <PlayCircle className="h-4 w-4 shrink-0 text-amber-300" />
+                    <span className="text-sm font-bold">Video preview of the notes</span>
+                  </div>
+                  <div className="aspect-video w-full bg-black">
+                    <iframe
+                      className="h-full w-full"
+                      src={`https://www.youtube-nocookie.com/embed/${product.previewVideoId}?rel=0`}
+                      title={`${product.subject} notes preview`}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                </section>
+              )}
               {product.topics.length > 0 && (
                 <details className="group mt-4 overflow-hidden rounded-xl border bg-emerald-50/50">
                   <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-3 text-sm font-bold text-pine marker:hidden">
@@ -83,7 +114,7 @@ export default function NotesLibrary() {
                   ))}
                 </div>
               </details>
-              <a href={contact(product.subject)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
+              <a href={contact(product)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {product.id === 'european-history' ? 'Buy European History Notes — PKR 6,000' : notesPurchaseActionLabel}</a>
             </article>
           ))}
         </div>
