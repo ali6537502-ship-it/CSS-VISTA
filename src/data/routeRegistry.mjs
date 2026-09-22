@@ -164,7 +164,6 @@ export const ROUTE_REGISTRY = [
   protectedPage('/checklists', 'Study Checklists', 'Private interactive study checklists.', { adMode: 'enabled' }),
   publicPage('/books', 'CSS Books by Sir Ali Hassan Sargana', 'Explore CSS preparation books and publication information by Sir Ali Hassan Sargana.', 'CSS preparation books', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/journal', 'VISTA Journal - Articles, Analysis and Perspectives', 'Read selected original writing, informed analysis and serious perspectives on Pakistan and the wider world.', 'VISTA Journal', { contentQuality: 'substantial', adMode: 'enabled' }),
-  publicPage('/opinions', 'VISTA Journal - Articles, Analysis and Perspectives', 'Read selected original writing, informed analysis and serious perspectives on Pakistan and the wider world.', 'VISTA Journal', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/daily-briefing', 'CSS Vista Current Affairs', 'Read the daily CSS Vista Current Affairs brief with explanations, sourced facts, statistics, archives and personal bookmarks.', 'Understand the day. Remember what matters.', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
   protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
@@ -236,6 +235,7 @@ export function canonicalForPath(pathname) {
  */
 export const ROUTE_REDIRECTS = [
   { from: '/privacy', to: '/privacy-policy', status: 301, reason: 'Retired generic privacy URL consolidated on the published policy.' },
+  { from: '/opinions', to: '/journal', status: 301, reason: 'Opinions was replaced by the canonical VISTA Journal publication.' },
 ]
 
 export function findRedirect(pathname) {
