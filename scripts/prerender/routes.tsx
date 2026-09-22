@@ -43,7 +43,8 @@ import { allOptionalSubjects, primeOptionalSubject, primeOptionalTopic } from '@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
-import { BooksPage } from '@/pages/Books'\nimport VistaJournal from '@/pages/VistaJournal'
+import { BooksPage } from '@/pages/Books'
+import VistaJournal from '@/pages/VistaJournal'
 import {
   LegalCentre, PrivacyPolicy, CookiePolicy, TermsConditions, Disclaimer,
   CopyrightPolicy, AboutCssVista, ContactCssVista, EditorialPolicy,
