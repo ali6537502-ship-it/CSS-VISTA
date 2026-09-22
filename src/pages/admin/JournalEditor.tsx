@@ -245,11 +245,17 @@ export default function JournalEditor() {
   }
 
   async function removeMedia(kind: 'cover' | 'author') {
-    if (!form.id) {
-      if (kind === 'cover') { setCoverFile(null); setCoverPreview('') }
-      else { setAuthorPhotoFile(null); setAuthorPhotoPreview('') }
+    if (kind === 'cover' && coverPreview) {
+      setCoverFile(null)
+      setCoverPreview('')
       return
     }
+    if (kind === 'author' && authorPhotoPreview) {
+      setAuthorPhotoFile(null)
+      setAuthorPhotoPreview('')
+      return
+    }
+    if (!form.id) return
 
     setSaving(true); setError(''); setNotice('')
     try {
