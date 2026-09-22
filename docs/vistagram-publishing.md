@@ -11,6 +11,8 @@ The standard daily batch contains exactly **six unique posts**:
 
 Every post is a separate public Vistagram article. The six posts are generated and published together through one Git branch/merge so a daily run does not trigger six independent deployments.
 
+A one-time `launch-ten` profile is permitted for the initial 22 September 2026 launch batch only. It contains exactly **10 posts: 5 Pakistan + 5 Global**. Scheduled automation must continue to use `daily-six`.
+
 ## Editorial standard
 
 All automated Vistagram material must be:
@@ -48,7 +50,7 @@ Those generated assets are then copied into the production build by Vite.
 A production batch uses:
 
 - `schema_version: 1`
-- `profile: "daily-six"`
+- `profile: "daily-six"` for scheduled publishing; `launch-ten` only for the initial launch batch
 - `date`
 - `published_at` with an explicit timezone
 - `edition`
