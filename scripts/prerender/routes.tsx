@@ -149,7 +149,6 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
   page('/books', () => <BooksPage />),
   page('/journal', () => <VistaJournal />),
-  page('/opinions', () => <VistaJournal />),
   page('/consultation', () => <Consultation />),
   page('/study-material', () => <StudyMaterial />),
   page('/study-material/islamic-studies', () => <IslamicReferences />),
