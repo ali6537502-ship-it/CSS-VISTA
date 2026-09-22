@@ -168,7 +168,7 @@ export default function App() {
         <Route path="/checklists" element={<S><Checklists /></S>} />
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/journal" element={<S><VistaJournal /></S>} />
-        <Route path="/opinions" element={<S><VistaJournal /></S>} />
+        <Route path="/opinions" element={<Navigate to="/journal" replace />} />
         <Route path="/account" element={<S><Account /></S>} />
         {/* The account home is the chooser; each declared account route renders
             its own focused page, so a bookmark or a refresh lands where the
