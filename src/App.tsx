@@ -30,6 +30,8 @@ const OptionalTopicNotes = lazy(() => import('./pages/OptionalTopicNotes'))
 const MPTPrep = lazy(() => import('./pages/MPTPrep'))
 const MPTQuestionBank = lazy(() => import('./pages/MPTQuestionBank'))
 const CurrentAffairs = lazy(() => import('./pages/CurrentAffairs'))
+const Vistagram = lazy(() => import('./pages/Vistagram'))
+const VistagramArticle = lazy(() => import('./pages/VistagramArticle'))
 const AnswerWriting = lazy(() => import('./pages/AnswerWriting'))
 const TestSeries = lazy(() => import('./pages/TestSeries'))
 const StudyTools = lazy(() => import('./pages/StudyTools'))
@@ -68,6 +70,7 @@ const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
+const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -131,6 +134,8 @@ export default function App() {
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
         <Route path="/mpt/bank/:bankId" element={<S><MPTQuestionBank /></S>} />
         <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />
+        <Route path="/vistagram" element={<S><Vistagram /></S>} />
+        <Route path="/vistagram/:slug" element={<S><VistagramArticle /></S>} />
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />
         <Route path="/test-series" element={<S><TestSeries /></S>} />
         <Route path="/study-tools" element={<S><StudyTools /></S>} />
@@ -178,6 +183,7 @@ export default function App() {
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
+        <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
