@@ -30,7 +30,7 @@ function routeArea(pathname: string) {
 }
 
 function shouldTrack(pathname: string) {
-  return !pathname.startsWith('/admin')
+  return !pathname.startsWith('/sadiaali')
     && !pathname.startsWith('/account')
     && !pathname.startsWith('/live-theme-demos')
 }

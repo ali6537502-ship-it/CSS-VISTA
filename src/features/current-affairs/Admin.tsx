@@ -62,7 +62,7 @@ export default function CurrentAffairsAdmin() {
     <p className="ca-eyebrow">EXISTING PRIVATE ADMIN · CURRENT AFFAIRS</p><h1>Daily briefing publications</h1>
     <p>Add a dated JSON file under <code>content/current-affairs/YYYY/MM/</code> and push it through the existing production workflow. The deployed edition is imported for every student automatically when the briefing service is opened.</p>
     <div className="ca-admin-actions"><button className="ca-button ca-button-light" onClick={() => setRevision((n) => n + 1)}>Refresh publication status</button><Link className="ca-text-link" to="/account/dashboard">Open student dashboard</Link></div>
-    {error && <div className="ca-error" role="alert">{error} <Link to="/admin/login">Admin sign in</Link></div>}
+    {error && <div className="ca-error" role="alert">{error} <Link to="/sadiaali/login">Admin sign in</Link></div>}
     <p role="status">{notice}</p>
     {!health && !error && <p><LoaderCircle className="inline animate-spin" size={16} /> Loading publication status…</p>}
     {health && <>

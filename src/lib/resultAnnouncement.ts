@@ -22,7 +22,7 @@ const RESULT_ANNOUNCEMENT_HIDDEN_ROUTES = [
   '/factbook',
   '/study-planner',
   '/account',
-  '/admin',
+  '/sadiaali',
 ] as const
 
 function normalizePathname(pathname: string) {

@@ -197,8 +197,8 @@ export const ROUTE_REGISTRY = [
   publicPage('/editorial-policy', 'Editorial & Corrections Policy', 'Read CSS Vista standards for accuracy, sourcing, updates, corrections and official examination information.', 'Editorial & Corrections Policy', { contentQuality: 'legal', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { titleIsComplete: true, contentQuality: 'legal', adMode: 'enabled', title: 'About CSS Vista' }),
   publicPage('/contact', 'Contact CSS Vista', 'Use CSS Vista verified public channels for general enquiries, technical issues, corrections, privacy and copyright concerns.', 'Contact CSS Vista', { titleIsComplete: true, contentQuality: 'legal', adMode: 'disabled', title: 'Contact CSS Vista', minimumHeight: 0 }),
-  protectedPage('/admin', 'Administration', 'Private administration area.', { access: 'admin', robots: 'noindex, nofollow' }),
-  protectedPage('/admin/login', 'Administration Sign In', 'Private administration sign-in page.', { access: 'admin', robots: 'noindex, nofollow' }),
+  protectedPage('/sadiaali', 'Administration', 'Private administration area.', { access: 'admin', robots: 'noindex, nofollow' }),
+  protectedPage('/sadiaali/login', 'Administration Sign In', 'Private administration sign-in page.', { access: 'admin', robots: 'noindex, nofollow' }),
 ]
 
 export function normalizeRoutePath(pathname) {
@@ -239,6 +239,8 @@ export function canonicalForPath(pathname) {
 export const ROUTE_REDIRECTS = [
   { from: '/privacy', to: '/privacy-policy', status: 301, reason: 'Retired generic privacy URL consolidated on the published policy.' },
   { from: '/opinions', to: '/journal', status: 301, reason: 'Opinions was replaced by the canonical VISTA Journal publication.' },
+  { from: '/admin', to: '/sadiaali', status: 301, reason: 'Administration area moved off the guessable /admin path.' },
+  { from: '/admin/login', to: '/sadiaali/login', status: 301, reason: 'Administration sign-in moved off the guessable /admin path.' },
 ]
 
 export function findRedirect(pathname) {
