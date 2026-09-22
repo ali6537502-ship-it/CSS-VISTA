@@ -5,7 +5,7 @@ import {
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
-  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, ListTree, LibraryBig, type LucideIcon,
+  NotebookPen, Video, CalendarRange, FileCheck2, Instagram, Youtube, Flame, BookMarked, BrainCircuit, ShieldCheck, ListTree, LibraryBig, Sparkles, type LucideIcon,
 } from 'lucide-react'
 import { STORAGE_FAILED_EVENT } from '@/lib/progressEvents'
 import { site } from '@/data/site'
@@ -36,6 +36,7 @@ const nav = [
   { label: 'Past Papers', to: '/past-papers' },
   { label: 'Books by Sir Ali', to: '/books' },
   { label: 'VISTA Journal', to: '/journal' },
+  { label: 'Vistagram', to: '/vistagram' },
   {
     label: 'Subjects',
     items: [
@@ -120,6 +121,7 @@ const nav = [
 
 const primaryNav = [
   { label: 'Home', to: '/', icon: HomeIcon },
+  { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
   { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
   { label: 'GK World', to: '/gk', icon: Globe2 },
   { label: 'MPT Practice', to: '/mpt', icon: PenLine },
@@ -130,12 +132,13 @@ const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
   { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs', '/vistagram'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
 ]
 
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
+  { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
   ...sortHomeCardsByPriority(defaultHomeCards.filter((item) => item.visible))
     .map((item) => ({
       label: item.title,
@@ -651,6 +654,7 @@ function resolveRouteDirection(locationKey: string, pathname: string, navigation
 }
 
 function fallbackRoute(pathname: string) {
+  if (/^\/vistagram\/[^/]+\/?$/.test(pathname)) return '/vistagram'
   if (/^\/subjects\/compulsory\/[^/]+\/?$/.test(pathname)) return '/subjects/compulsory'
   if (/^\/past-papers\/view\/[^/]+\/?$/.test(pathname)) return '/past-papers'
   if (pathname === '/css-past-paper-analysis') return '/past-papers'

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, ListTree, Newspaper, Target, UserRound } from 'lucide-react'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
@@ -136,6 +136,7 @@ export default function AccountHome() {
   ].filter(Boolean).join(' · ')
 
   const choices = [
+    { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
     {
       to: '/account/tasks', icon: CalendarCheck2, title: 'Today’s Plan',

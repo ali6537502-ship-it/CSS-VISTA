@@ -158,6 +158,7 @@ function HomeHero() {
 }
 
 const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/ExamIntelligenceHomeCard'))
+const VistagramHomePreview = lazyWithRecovery(() => import('@/features/vistagram/HomePreview'))
 const TutorialAnnouncement = lazyWithRecovery(() => import('@/components/TutorialAnnouncement'))
 const NotesDiscountAnnouncement = lazyWithRecovery(() => import('@/components/NotesDiscountAnnouncement'))
 const MilestoneCelebration = lazyWithRecovery(() => import('@/components/MilestoneCelebration').then((m) => ({ default: m.MilestoneCelebration })))
@@ -647,6 +648,8 @@ export default function Home() {
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 
         <WeeklyMagazineCard />
+
+        <Suspense fallback={null}><VistagramHomePreview /></Suspense>
 
         <section className="cssv-reveal mt-5" style={{ '--cssv-delay': '80ms' } as CSSProperties} aria-labelledby="continue-studying">
           <SectionHeading

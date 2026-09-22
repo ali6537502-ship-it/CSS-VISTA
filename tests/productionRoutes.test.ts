@@ -83,10 +83,10 @@ const INDEXABLE = [
 /** Routes deliberately kept out of search that must still be fully served. */
 const FUNCTIONAL_NOINDEX = [
   '/legal', '/gk', '/one-liner-gk', '/language-grammar',
-  '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing',
+  '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing', '/vistagram',
   '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
-  '/account', '/account/dashboard', '/account/settings', '/dashboard',
+  '/account', '/account/dashboard', '/account/vistagram', '/account/settings', '/dashboard',
   '/factbook', '/exam-intelligence', '/study-planner', '/admin', '/admin/login',
 ]
 
