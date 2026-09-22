@@ -39,6 +39,7 @@ export interface Opinion {
   outlet: string
   date: string
   author?: string
+  featured?: boolean
   pages: string[]
 }
 
@@ -49,6 +50,7 @@ export const opinions: Opinion[] = [
     outlet: 'Opinion',
     date: 'April 2026',
     author: 'Ali Hassan Sargana',
+    featured: true,
     pages: ['/opinions/opinion-ali-hassan-p1.jpg', '/opinions/opinion-ali-hassan-p2.jpg', '/opinions/opinion-ali-hassan-p3.jpg'],
   },
   {
