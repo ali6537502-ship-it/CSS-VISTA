@@ -120,6 +120,12 @@ export default function MPTPrep() {
   const history = getState().quizResults.filter((r) => r.type === 'mpt' || r.type === 'quiz').slice(0, 8)
   const bookmarked = getState().bookmarks.filter((b) => b.startsWith('q-')).length
   const mptMock = getMockAvailability('mpt', now)
+  const afternoonMock = getMockAvailability('mpt-afternoon', now)
+  const activeMock = afternoonMock.available
+    ? { label: '3:00 PM', url: '/gk/quiz?mode=mpt-mock&slot=afternoon' }
+    : mptMock.available
+      ? { label: '10:30 PM', url: '/gk/quiz?mode=mpt-mock&slot=evening' }
+      : null
 
   function startMode(nextMode: Mode) {
     if (nextMode === 'random' || nextMode === 'mock') {
@@ -150,26 +156,28 @@ export default function MPTPrep() {
               {[
                 { id: 'subject' as Mode, icon: Layers, title: 'Subject / topic-wise quiz', desc: 'Choose a subject, then narrow to a topic' },
                 { id: 'random' as Mode, icon: Shuffle, title: 'Random quiz', desc: 'A shuffled mix from the whole bank' },
-                { id: 'mock' as Mode, icon: Clock, title: 'Full MPT mock test', desc: '200 questions in official section order' },
+                { id: 'mock' as Mode, slot: 'afternoon', icon: Clock, title: '3:00 PM MPT mock', desc: '200 fresh questions in official section order' },
+                { id: 'mock' as Mode, slot: 'evening', icon: Clock, title: '10:30 PM MPT mock', desc: 'A second fresh 200-question paper' },
               ].map((m) => {
                 if (m.id === 'mock') {
-                  return mptMock.available ? (
+                  const availability = m.slot === 'afternoon' ? afternoonMock : mptMock
+                  return availability.available ? (
                     <Link
                       key={m.title}
-                      to="/gk/quiz?mode=mpt-mock"
+                      to={`/gk/quiz?mode=mpt-mock&slot=${m.slot}`}
                       data-google-vignette="false"
                       className="group rounded-lg border bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-800/40 hover:shadow-md"
                     >
                       <m.icon className="h-5 w-5 text-emerald-800" />
                       <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
-                      <div className="mt-0.5 text-[13px] text-muted-foreground">200 questions · 200 minutes · official FPSC sequence. Daily entry from {DAILY_MOCK_TIME_LABELS.mpt}.</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">200 questions · 200 minutes · FPSC section sequence. {DAILY_MOCK_TIME_LABELS[m.slot === 'afternoon' ? 'mpt-afternoon' : 'mpt']}.</div>
                     </Link>
                   ) : (
                     <div key={m.title} className="rounded-lg border bg-secondary/45 p-4 text-left">
                       <LockKeyhole className="h-5 w-5 text-amber-700" />
                       <div className="mt-2 font-semibold">{m.title}</div>
                       <div className="mt-0.5 text-[13px] text-muted-foreground">
-                        Opens {new Date(mptMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
+                        Opens {new Date(availability.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
                       </div>
                     </div>
                   )
@@ -277,17 +285,17 @@ export default function MPTPrep() {
                 })}
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {mptMock.available ? (
+                {activeMock ? (
                   <Link
-                    to="/gk/quiz?mode=mpt-mock"
+                    to={activeMock.url}
                     data-google-vignette="false"
                     className="inline-flex h-9 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"
                   >
-                    <Clock className="h-4 w-4" /> Start the scheduled MPT mock
+                    <Clock className="h-4 w-4" /> Start the {activeMock.label} MPT mock
                   </Link>
                 ) : (
                   <span className="inline-flex h-9 items-center gap-1.5 rounded-md border bg-secondary px-4 text-sm font-semibold text-muted-foreground">
-                    <LockKeyhole className="h-4 w-4" /> MPT mock opens {new Date(mptMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
+                    <LockKeyhole className="h-4 w-4" /> Next MPT mock opens {new Date(Math.min(new Date(afternoonMock.nextAvailableAt!).getTime(), new Date(mptMock.nextAvailableAt!).getTime())).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
                   </span>
                 )}
                 <Link to="/gk" className="inline-flex h-9 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine hover:bg-secondary">
@@ -355,9 +363,9 @@ export default function MPTPrep() {
                     Start quiz ({pool.length} in pool)
                   </button>
                   <button onClick={() => startMode('random')} className="h-11 rounded-md border px-6 text-sm font-semibold hover:bg-secondary">Random quiz</button>
-                  {mptMock.available ? (
+                  {activeMock ? (
                     <Link
-                      to="/gk/quiz?mode=mpt-mock"
+                      to={activeMock.url}
                       data-google-vignette="false"
                       className="inline-flex h-11 items-center rounded-md border px-6 text-sm font-semibold hover:bg-secondary"
                     >

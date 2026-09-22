@@ -408,11 +408,11 @@ function DailyGrandMockCard({ active = true }: { active?: boolean }) {
   return (
     <section className="cssv-glass-subcard cssv-daily-mock rounded-xl border p-2 text-slate-900" aria-labelledby="daily-mock-timers-title">
       <div className="mb-1.5 flex items-center justify-between gap-2 px-0.5">
-        <h3 id="daily-mock-timers-title" className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">Tonight’s mock windows</h3>
+        <h3 id="daily-mock-timers-title" className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">Today’s mock windows</h3>
         <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
       </div>
       <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
-        {(['gk', 'mpt'] as const).map((kind) => {
+        {(['mpt-afternoon', 'gk', 'mpt'] as const).map((kind) => {
           const schedule = getDailyMockStatus(kind, new Date(now))
           const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
           const remaining = remainingTime(target, now)

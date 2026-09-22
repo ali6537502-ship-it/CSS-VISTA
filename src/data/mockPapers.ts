@@ -2,6 +2,8 @@ import {
   curatedAbilityQuestions, curatedCurrentAffairsQuestions, curatedEnglishQuestions, curatedUrduTranslationQuestions,
 } from './mockCurated'
 import { auditedMptAbilityAdditions } from './mptAbilityAdditions'
+import { calculatedMptAbilityQuestions } from './mptAbilityPractice'
+import { mptUrduTranslationQuestions } from './mptUrduTranslation'
 import { questions as seedQuestions } from './quiz'
 import { filterDisabled, getCategoryQuestions, type BankQuestion } from './mcq'
 import { toBankQuestion, type CssSubjectQuestion } from './cssSubjectMcqs'
@@ -183,9 +185,9 @@ function loadMptPools(): Promise<MockPools> {
     return {
       ...base,
       islamicPool: [...base.islamicPool, ...islamic],
-      urduPool: [...base.urduPool, ...urdu.filter((question) => /قواعد و زبان|الفاظ و معانی|محاورات و امثال/.test(question.s || ''))],
+      urduPool: [...base.urduPool, ...mptUrduTranslationQuestions, ...urdu.filter((question) => /قواعد و زبان|الفاظ و معانی|محاورات و امثال/.test(question.s || ''))],
       englishPool: [...base.englishPool, ...english],
-      abilityPool: [...base.abilityPool, ...ownerAbility, ...ability],
+      abilityPool: [...base.abilityPool, ...calculatedMptAbilityQuestions, ...ownerAbility, ...ability],
       currentPool: [...base.currentPool, ...current],
       pakistanPool: [...base.pakistanPool, ...pakistan, ...history],
       sciencePool: [...mapSeed(['science']), ...fromBank('everyday-science', 'environment', 'solar-system'), ...everyday],
@@ -239,7 +241,7 @@ function buildPools(): MockPools {
   }
 }
 
-const rejectedQuestion = /Reuters|publication date|news agency published|GeoNames|ISO alpha|ISO 4217|UN M49|demonym|boiling point in kelvin|capital designated by Israel|In the Important Personalities section|Choose the option that correctly completes|Which answer correctly identifies|Which statement about the capital|Select the correct association concerning|which value is correctly recorded under|standard Kufan numbering used by Quran\.com|Which name matches both|Which actor-description pair|principal location connected with|Who or which body is chiefly identified|Which description fits|Which institution or personality is correctly connected|Choose the accurate person-and-description match|\[Parallel drill/i
+const rejectedQuestion = /Reuters|publication date|news agency published|GeoNames|ISO alpha|ISO 4217|UN M49|demonym|boiling point in kelvin|capital designated by Israel|In the Important Personalities section|Choose the option that correctly completes|Which answer correctly identifies|Which option correctly identifies|Which period or date is correctly associated|Which statement about the capital|Select the correct association concerning|which value is correctly recorded under|standard Kufan numbering used by Quran\.com|Which name matches both|Which actor-description pair|principal location connected with|Who or which body is chiefly identified|Which description fits|Which institution or personality is correctly connected|Choose the accurate person-and-description match|\[Parallel drill/i
 const rejectedOption = /all of the above|none of (?:the above|these)|both a and b/i
 
 function isUsable(question: BankQuestion) {
@@ -381,8 +383,8 @@ function sectionsFor(kind: CompetitiveMockKind, pools: MockPools): SectionSpec[]
       { label: 'English', count: 50, pool: englishPool },
       { label: 'General Abilities', count: 60, pool: abilityPool },
       { label: 'General Knowledge', count: 20, pool: sciencePool, salt: 'gk-everyday-science', seedCap: 8 },
-      { label: 'General Knowledge', count: 4, pool: currentPool, salt: 'gk-current-affairs' },
-      { label: 'General Knowledge', count: 26, pool: pakistanPool, salt: 'gk-pakistan-affairs', seedCap: 12 },
+      { label: 'General Knowledge', count: 2, pool: currentPool, salt: 'gk-current-affairs' },
+      { label: 'General Knowledge', count: 28, pool: pakistanPool, salt: 'gk-pakistan-affairs', seedCap: 12 },
     ]
   }
   if (kind === 'pms-gk') {
@@ -444,7 +446,10 @@ export async function buildCompetitiveMock(
   sessionDateKey = currentPakistanDateKey(),
   studentName = '',
 ): Promise<BuiltMockPaper> {
-  const previousPaper = kind === 'mpt' ? readMptPaper(studentName, sessionDateKey) : null
+  // Named browser sessions reserve questions; anonymous programmatic callers
+  // retain the small offline bank used by the existing build integrity test.
+  const namedMptSession = kind === 'mpt' && studentName.trim().length >= 2
+  const previousPaper = namedMptSession ? readMptPaper(studentName, sessionDateKey) : null
   if (previousPaper) {
     validatePaper(previousPaper, mptBlueprint)
     return {
@@ -454,9 +459,9 @@ export async function buildCompetitiveMock(
   }
   await loadMockBank()
   cachedPools ??= buildPools()
-  const pools = kind === 'mpt' ? await loadMptPools() : cachedPools
+  const pools = namedMptSession ? await loadMptPools() : cachedPools
   const blueprint = MOCK_BLUEPRINTS[kind]
-  const previouslySeen = kind === 'mpt' ? previouslySeenMptQuestions(studentName) : new Set<string>()
+  const previouslySeen = namedMptSession ? previouslySeenMptQuestions(studentName) : new Set<string>()
   const usedIds = new Set<string>()
   const usedStems = new Set<string>()
   const selectedAcrossPaper: BankQuestion[] = []
@@ -464,7 +469,7 @@ export async function buildCompetitiveMock(
     selectSection(spec, `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper, previouslySeen)
   ))
   validatePaper(questions, blueprint)
-  if (kind === 'mpt') saveMptPaper(studentName, sessionDateKey, questions)
+  if (namedMptSession) saveMptPaper(studentName, sessionDateKey, questions)
 
   if (kind === 'mpt') {
     return {

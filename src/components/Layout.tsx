@@ -263,7 +263,7 @@ function NotificationBar() {
   const [streak, setStreak] = useState(() => touchVisit())
   const streakDayRef = useRef(scheduleTime.toDateString())
   const { user, syncStatus, lastSyncedAt } = useAccount()
-  const mockNotices = (['gk', 'mpt'] as const).map((kind) => {
+  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).map((kind) => {
     const status = getDailyMockStatus(kind, scheduleTime)
     return {
       id: `daily-${kind}-mock-${status.dateKey}`,
