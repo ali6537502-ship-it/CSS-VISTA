@@ -3,7 +3,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadPastPaperContent } from './lib/past-paper-content.mjs'
 import { SERVED_FILE_OVERRIDES } from './lib/served-paths.mjs'
-import { INDEXABLE_STATIC_ROUTES, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
+import { INDEXABLE_STATIC_ROUTES, ROUTE_REDIRECTS, ROUTE_REGISTRY } from '../src/data/routeRegistry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -166,6 +166,13 @@ const protectedRouteHtml = replaceMeta(clientIndex, {
 await writeFile(join(routeSeoDir, 'protected.html'), protectedRouteHtml)
 
 const htaccessPath = join(clientDir, '.htaccess')
+const redirectRules = ROUTE_REDIRECTS
+  .map((redirect) => {
+    const pattern = redirect.from.slice(1).replace(/[.*+?^${}()|[\]\\]/g, '\\const htaccessPath = join(clientDir, '.htaccess')
+const routeRules = ROUTE_REGISTRY')
+    return `  RewriteRule ^${pattern}/?$ ${siteOrigin}${redirect.to} [R=${redirect.status},L,NE]`
+  })
+  .join('\n')
 const routeRules = ROUTE_REGISTRY
   .filter((route) => route.match === 'exact' && route.path !== '/' && route.path !== css2026Result.pagePath)
   .map((route) => {
@@ -174,7 +181,11 @@ const routeRules = ROUTE_REGISTRY
   })
   .join('\n')
 const htaccess = await readFile(htaccessPath, 'utf8')
-await writeFile(htaccessPath, htaccess.replace(
+const withRedirects = htaccess.replace(
+  /  # CSSV_GENERATED_REDIRECT_RULES_START[\s\S]*?  # CSSV_GENERATED_REDIRECT_RULES_END/,
+  `  # CSSV_GENERATED_REDIRECT_RULES_START\n${redirectRules}\n  # CSSV_GENERATED_REDIRECT_RULES_END`,
+)
+await writeFile(htaccessPath, withRedirects.replace(
   /  # CSSV_GENERATED_ROUTE_RULES_START[\s\S]*?  # CSSV_GENERATED_ROUTE_RULES_END/,
   `  # CSSV_GENERATED_ROUTE_RULES_START\n${routeRules}\n  # CSSV_GENERATED_ROUTE_RULES_END`,
 ))
