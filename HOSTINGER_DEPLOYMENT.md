@@ -111,3 +111,4 @@ The OpenAI Sites build remains separate and is available through:
 ```sh
 npm run build:sites
 ```
+Deployment trigger: merged current main through a clean pull request after the VISTA Journal and CSS Vistagram release on 22 September 2026.
