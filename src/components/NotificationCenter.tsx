@@ -6,7 +6,7 @@ import { getNotifPrefs, markUpdatesSeen, setNotifPrefs, unseenUpdateIds } from '
 import { useAccount } from '@/lib/accountContext'
 import { scheduleIdleWork } from '@/lib/idle'
 
-export const UPDATE_TAGS = ['Mentors', 'Opinions', 'Test Series', 'FPSC', 'General']
+export const UPDATE_TAGS = ['Mentors', 'VISTA Journal', 'Test Series', 'FPSC', 'General']
 
 const ADMIN_CONTENT_EVENT = 'cssvista:admin-content'
 const ADMIN_CONTENT_KEY = 'cssvista:admin:content'
@@ -110,7 +110,7 @@ export function NotificationOptInBar() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2">
         <p className="flex items-center gap-2 text-xs sm:text-sm">
           <BellRing className="h-4 w-4 shrink-0 text-amber-300" />
-          Get a notification whenever the mentors announce something new - test series, opinions, FPSC dates.
+          Get a notification whenever the mentors announce something new - test series, VISTA Journal, FPSC dates.
         </p>
         <div className="flex items-center gap-2">
           <button onClick={enable} className="rounded bg-emerald-400 px-3 py-1 text-xs font-bold text-emerald-950 hover:bg-emerald-300">
