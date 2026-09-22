@@ -66,7 +66,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     } finally { if (version === authVersion.current) setLoading(false) }
   }, [applyUser])
   useEffect(() => {
-    const critical = /^\/(?:account|dashboard|factbook|admin)(?:\/|$)/.test(location.pathname)
+    const critical = /^\/(?:account|dashboard|factbook|admin|vistagram)(?:\/|$)/.test(location.pathname)
     if (!hydrated.current && (critical || csrfToken())) { hydrated.current = true; void refreshSession() }
     else if (!hydrated.current) setLoading(false)
   }, [location.pathname, refreshSession])
