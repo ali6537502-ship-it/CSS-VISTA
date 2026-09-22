@@ -20,6 +20,7 @@ export interface NoteProduct {
     regularPrice: number
     offerPrice: number
   }
+  previewVideoId?: string
 }
 
 const currentPakistanAffairsTopics = [
@@ -187,7 +188,8 @@ export const noteProducts: NoteProduct[] = [
     subject: 'European History',
     description: 'Structured European History material covering major events, personalities, ideologies and analytical examination themes.',
     topics: [],
-    pricing: { regularPrice: 0, offerPrice: 0 },
+    pricing: { regularPrice: 6000, offerPrice: 6000 },
+    previewVideoId: 'Rin64vnoMFQ',
     samples: [
       { id: 'french-revolution', title: 'Events of the French Revolution (1789–1799)', kind: 'image-pages', previewFolder: 'french-revolution', pages: 3, sizeBytes: 310490 },
       { id: 'metternich-era', title: 'Metternich’s Era', kind: 'image-pages', previewFolder: 'metternich-era', pages: 3, sizeBytes: 206526 },
