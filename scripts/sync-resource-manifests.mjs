@@ -24,7 +24,7 @@ const categoryNames = {
   mcq: 'MCQ Data',
   'note-previews': 'Notes Samples',
   'one-liner-gk': 'One-Liner GK',
-  opinions: 'Opinions',
+  opinions: 'VISTA Journal',
   'past-papers': 'Past Papers',
   'recent-affairs': 'Current Affairs',
   samples: 'Notes Samples',
