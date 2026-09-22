@@ -36,6 +36,7 @@ const nav = [
   { label: 'Past Papers', to: '/past-papers' },
   { label: 'Books by Sir Ali', to: '/books' },
   { label: 'VISTA Journal', to: '/journal' },
+  { label: 'Vistagram', to: '/vistagram' },
   {
     label: 'Subjects',
     items: [
@@ -130,7 +131,7 @@ const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
   { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs', '/vistagram'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
 ]
 
