@@ -690,6 +690,12 @@ export default function Layout() {
       ? Math.ceil(renderSavedPosition + window.innerHeight)
       : undefined
   const routeDirection = resolveRouteDirection(location.key, location.pathname, navigationType)
+  // Full-screen readers must remain viewport-fixed. A transformed ancestor
+  // becomes the containing block for position: fixed, so skip the route
+  // transition transform on individual Book Summary reader routes.
+  const routeTransition = location.pathname.startsWith('/book-summaries/')
+    ? 'none'
+    : routeDirection
   const { user } = useAccount()
 
   useLayoutEffect(() => {
@@ -1187,7 +1193,7 @@ export default function Layout() {
       <main className="flex-1 pb-[calc(200px+env(safe-area-inset-bottom))] md:pb-0">
         <div
           key={location.pathname}
-          className={`cssv-route-stage route-transition-${routeDirection}`}
+          className={`cssv-route-stage route-transition-${routeTransition}`}
           style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
           <Outlet />
