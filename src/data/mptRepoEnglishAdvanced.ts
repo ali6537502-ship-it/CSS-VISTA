@@ -2,7 +2,7 @@ import type { BankQuestion } from './mcq.ts'
 import { grammarPhase1 } from './grammar-course/phase1.ts'
 import { grammarPhase2 } from './grammar-course/phase2.ts'
 import { grammarPhase3 } from './grammar-course/phase3.ts'
-import { grammarPhase4 } from './grammar-course/phase4.ts'
+import { grammarPhase4 } from'./grammar-course/phase4.ts'
 import { grammarPhase5 } from './grammar-course/phase5.ts'
 import { masterGrammarP1A } from './master-grammar/p1a.ts'
 import { masterGrammarP1B } from './master-grammar/p1b.ts'
@@ -78,7 +78,7 @@ const correctionFacts: CorrectionFact[] = [
       id: `course-example-d${lesson.day}-${index + 1}`, original: item.wrong, correct: item.right, why: item.why, topic: lesson.title,
     })),
   ]),
-  ...masterDays.flatMap((day, dayIndex) => day.practice.map((item, itemIndex) => ({
+  ...masterDays.flatMap((day) => day.practice.map((item, itemIndex) => ({
     id: `master-d${day.day}-${itemIndex + 1}`,
     original: item.prompt,
     correct: stripNote(item.answer),
@@ -90,7 +90,7 @@ const correctionFacts: CorrectionFact[] = [
   .filter((item) => canonical(item.original) !== canonical(item.correct))
   .filter((item, index, rows) => rows.findIndex((candidate) => canonical(candidate.original) === canonical(item.original)) === index)
 
-const correctionQuestions: BankQuestion[] = correctionFacts.map((item, index) => {
+const correctionQuestions: BankQuestion[] = correctionFacts.map((item, index): BankQuestion => {
   const { options, answer } = makeCorrectionOptions(item.correct, item.original, index % 4)
   return {
     id: `mpt-repo-english-correction-${item.id}`,
