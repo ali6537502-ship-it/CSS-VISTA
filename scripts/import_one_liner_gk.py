@@ -577,8 +577,81 @@ def apply_verified_ahadith_one_liners(notes_by_category: dict[str, list[dict[str
         raise RuntimeError("Verified Hadith one-liners missing after import: " + ", ".join(sorted(missing)))
 
 
+
+# Verified repairs for Hadith-related one-liners that occur outside the dedicated
+# Ahadith subcategory. These also prevent legacy source rows from reintroducing
+# incorrect compiler data, terminology, or anachronistic claims.
+VERIFIED_HADITH_RELATED_REPAIRS: dict[str, str] = {
+  "islamiat-98": "Sahih al-Bukhari - Compiled by Imam Muhammad ibn Isma'il al-Bukhari; Sunnah.com lists about 7,563 Hadith numbers including repetitions.",
+  "islamiat-99": "Sahih Muslim - Compiled by Imam Muslim ibn al-Hajjaj al-Naysaburi; one of the two Sahih collections; roughly 7,500 Hadith with repetitions.",
+  "islamiat-101": "Imam Muslim - Full name: Muslim ibn al-Hajjaj al-Naysaburi; born 206 AH in Nishapur; died 261 AH.",
+  "islamiat-309": "Are the Sunnah acts of Wudu universally counted as exactly eight? - No. Their detailed enumeration varies among juristic schools and teaching manuals.",
+  "islamiat-311": "Are the Sunnah acts of Ghusl universally counted as exactly five? - No. Their detailed enumeration varies among juristic schools and teaching manuals.",
+  "islamiat-316": "Are all prayers universally classified into exactly five types? - No. Juristic classifications vary; obligatory, required in some schools, Sunnah, and voluntary prayers are distinguished in different ways.",
+  "islamiat-407": "Are the Sunnah and Wajib acts of Hajj universally fixed at one numerical count? - No. Detailed counts and classifications vary by juristic school.",
+  "islamiat-512": "What is a Hadith? - A transmitted report concerning the sayings, actions, tacit approvals, or descriptions attributed to Prophet Muhammad (PBUH).",
+  "islamiat-513": "What are the two principal parts of a Hadith report? - Isnad (or Sanad), the chain of transmitters, and Matn, the text/content.",
+  "islamiat-514": "What is Hadith Qudsi? - A Hadith in which Prophet Muhammad (PBUH) reports a message from Allah that is not part of the Quran.",
+  "islamiat-515": "What is Hadith Qauli? - A report conveying a saying of Prophet Muhammad (PBUH).",
+  "islamiat-516": "What is Hadith Fi'li? - A report describing an action or practice of Prophet Muhammad (PBUH).",
+  "islamiat-517": "What is Hadith Nabawi? - A Prophetic report attributed to Prophet Muhammad (PBUH), as distinct from a Hadith Qudsi in which he reports a message from Allah.",
+  "islamiat-518": "What is a Sahih Hadith? - A sound Hadith with connected transmission, reliable and accurate narrators, and no serious contradiction or hidden defect.",
+  "islamiat-519": "What is a Da'if Hadith? - A weak Hadith that fails one or more conditions required for Sahih or Hasan classification.",
+  "islamiat-520": "What is a Hasan Hadith? - An acceptable Hadith whose narrators are reliable but whose precision is generally below the level required for Sahih.",
+  "islamiat-521": "What is a Mawdu' Hadith? - A fabricated report falsely attributed to Prophet Muhammad (PBUH).",
+  "islamiat-522": "What is a Mutawatir Hadith? - A report transmitted by such numerous independent narrators at every level that deliberate collusion on a false report is conventionally considered impossible.",
+  "islamiat-523": "What is an Ahad Hadith? - A Hadith that does not reach the level of Mutawatir transmission.",
+  "islamiat-524": "What are three commonly taught numerical categories of Ahad Hadith? - Gharib, Aziz, and Mashhur.",
+  "islamiat-525": "What is a Gharib Hadith? - A Hadith with only one narrator at some stage of its chain.",
+  "islamiat-526": "What is an Aziz Hadith? - An Ahad Hadith whose chain does not fall below two narrators at the relevant levels.",
+  "islamiat-527": "What is a Mashhur Hadith in Hadith terminology? - An Ahad Hadith transmitted by three or more narrators at the relevant levels without reaching Mutawatir level.",
+  "islamiat-528": "What is a Taqriri Hadith? - A report of an act or statement in the Prophet's presence which he tacitly approved.",
+  "islamiat-529": "What is a Mu'allaq Hadith? - A report in which one or more transmitters are omitted from the beginning of the chain by the compiler.",
+  "islamiat-530": "What is a Munqati' Hadith? - A report whose chain of transmission is interrupted at some point.",
+  "islamiat-531": "What is Jarh wa Ta'dil? - The discipline of criticising and accrediting Hadith narrators in order to assess their reliability.",
+  "islamiat-532": "What is a Marfu' report? - A report attributed to Prophet Muhammad (PBUH), whether a saying, action, approval, or description.",
+  "islamiat-533": "What is a Mawquf report? - A report attributed to, or stopping at, a Companion rather than the Prophet (PBUH).",
+  "islamiat-534": "What is a Maqtu' report? - A report attributed to, or stopping at, a Tabi'i (Successor).",
+  "islamiat-535": "What is a Musnad Hadith? - In common Hadith terminology, a Marfu' report with a connected chain reaching the Prophet (PBUH).",
+  "islamiat-536": "What is a Mursal Hadith? - A report in which a Tabi'i attributes a statement directly to the Prophet (PBUH), omitting the Companion in the chain.",
+  "islamiat-537": "What is Tadlis in Hadith transmission? - Ambiguous transmission that conceals a defect or an intermediary in the chain; a report containing it may be called Mudallas.",
+  "islamiat-549": "Who was the first appointed Muslim commander martyred at the Battle of Mu'tah? - Zayd ibn Harithah (RA).",
+  "islamiat-572": "Which major Hadith-law work is directly associated with Imam Malik? - Al-Muwatta.",
+  "islamiat-1198": "What is the status of the report that a woman in Paradise will be with her last husband? - Its grading is disputed: some Hadith critics graded routes weak, while al-Albani judged it strong through its routes; it should not be presented as unanimously authenticated.",
+  "islamiat-1345": "Which major Hadith works are securely associated with Imam Ahmad ibn Hanbal? - Musnad Ahmad and Kitab al-Zuhd are among his best-known works.",
+  "islamiat-1346": "When was Imam Ahmad ibn Hanbal born? - 164 AH / 780 CE, in Baghdad.",
+  "islamiat-1347": "When did Imam Ahmad ibn Hanbal die? - 241 AH / 855 CE, in Baghdad.",
+  "islamiat-1348": "Which Sunni legal school is named after Imam Ahmad ibn Hanbal? - The Hanbali school.",
+  "islamiat-1349": "Which major work is directly authored and transmitted from Imam Malik? - Al-Muwatta; al-Mudawwana is a later foundational Maliki compilation transmitted through Ibn al-Qasim and Sahnun, not a book authored by Malik himself.",
+  "islamiat-1431": "Which mosque became the central teaching and community centre of the early Muslim community in Madinah? - Al-Masjid al-Nabawi; calling it a 'university' is a later analogy, not a formal historical title.",
+  "islamiat-1440": "Which Companion is traditionally associated with Al-Sahifah al-Sadiqah? - Abdullah ibn Amr ibn al-'As (RA), not Abdullah ibn Umar.",
+  "islamiat-1443": "What is Hadith? - A transmitted report concerning the Prophet's sayings, actions, tacit approvals, or descriptions.",
+  "islamiat-1444": "What is Sunnah? - The Prophetic way or normative practice; it is broader than merely the Prophet's physical actions.",
+  "islamiat-1446": "What is the purpose of Asma al-Rijal? - To study the identities, biographies, transmission histories, and reliability of Hadith narrators.",
+  "islamiat-1449": "Why is Umar ibn Abd al-Aziz sometimes called the 'fifth rightly guided caliph'? - It is an honorific used by later Muslim writers because of his reforming reputation; historically he was an Umayyad caliph.",
+  "islamiat-1477": "What are the four major Sunni schools of jurisprudence? - Hanafi, Maliki, Shafi'i, and Hanbali.",
+  "islamiat-1483": "What are four principal sources commonly listed in Sunni legal theory? - Quran, Sunnah, Ijma, and Qiyas; their scope and hierarchy are discussed differently among legal schools.",
+  "islamiat-1507": "Who is widely known by the title Mujaddid Alf Thani ('Renewer of the Second Millennium')? - Shaykh Ahmad Sirhindi.",
+  "islamiat-1557": "What role did Al-Masjid al-Nabawi play in early Islam? - It served as a central place of worship, teaching, consultation, and community life in Madinah; describing it as the 'first Muslim university' is anachronistic."
+}
+
+def apply_verified_hadith_related_repairs(notes_by_category: dict[str, list[dict[str, object]]]) -> None:
+    found: set[str] = set()
+    for note in notes_by_category.get("islamiat", []):
+        note_id = str(note.get("id", ""))
+        replacement = VERIFIED_HADITH_RELATED_REPAIRS.get(note_id)
+        if replacement is None:
+            continue
+        note["text"] = replacement
+        found.add(note_id)
+    missing = set(VERIFIED_HADITH_RELATED_REPAIRS) - found
+    if missing:
+        raise RuntimeError("Verified Hadith-related repairs missing after import: " + ", ".join(sorted(missing)))
+
+
 def write_output(notes_by_category: dict[str, list[dict[str, object]]], output_dir: Path) -> None:
     apply_verified_ahadith_one_liners(notes_by_category)
+    apply_verified_hadith_related_repairs(notes_by_category)
     output_dir.mkdir(parents=True, exist_ok=True)
     section_lookup = {section.slug: section for section in SECTIONS}
     categories = []
