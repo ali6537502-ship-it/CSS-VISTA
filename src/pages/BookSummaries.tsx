@@ -182,6 +182,11 @@ function BookReader({
     const frame = window.requestAnimationFrame(() => {
       const reader = scrollRef.current
       if (!reader || saved.progress <= 0) return
+      // Skip the forced jump once the reader has already been scrolled
+      // this session, since this effect also re-runs when the full summary
+      // body arrives (bodyPending flips) and would otherwise yank an
+      // in-progress read back to a stale saved position.
+      if (reader.scrollTop > 4) return
       reader.scrollTop = ((reader.scrollHeight - reader.clientHeight) * saved.progress) / 100
     })
     return () => window.cancelAnimationFrame(frame)
