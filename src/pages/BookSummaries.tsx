@@ -248,7 +248,7 @@ function BookReader({
 
   return (
     <div
-      className="book-summary-backdrop fixed inset-0 z-[120] flex bg-[#fcfdfc]"
+      className="book-summary-backdrop fixed inset-0 z-[120] flex h-[100dvh] max-h-[100dvh] min-h-0 overflow-hidden bg-[#fcfdfc]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="book-summary-title"
@@ -256,9 +256,9 @@ function BookReader({
         if (event.currentTarget === event.target) onClose()
       }}
     >
-      <article className="book-summary-reader relative flex h-full min-h-0 w-full flex-col overflow-hidden bg-[#fcfdfc]">
+      <article className="book-summary-reader relative flex h-[100dvh] max-h-[100dvh] min-h-0 w-full flex-col overflow-hidden bg-[#fcfdfc]">
         <span className="absolute inset-x-0 top-0 z-20 h-1 bg-slate-100"><span className="cssv-progress block h-full bg-amber-400" style={{ width: `${localReadingState.completed ? 100 : readingProgress}%` }} /></span>
-        <header className="flex items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
+        <header className="flex shrink-0 items-start gap-4 border-b bg-white px-4 py-4 sm:px-6">
           <img
             src={book.cover}
             alt={`Cover of ${book.title}`}
@@ -293,7 +293,7 @@ function BookReader({
           </button>
         </header>
 
-        <div className="no-print flex gap-1.5 overflow-x-auto border-b bg-white px-3 py-2 sm:px-6" aria-label="Book reading tools">
+        <div className="no-print flex shrink-0 gap-1.5 overflow-x-auto border-b bg-white px-3 py-2 sm:px-6" aria-label="Book reading tools">
           <button type="button" onClick={toggleSaved} aria-pressed={localReadingState.saved} className={`cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold ${localReadingState.saved ? 'border-amber-300 bg-amber-50 text-amber-900' : 'text-pine hover:bg-secondary'}`}>
             {localReadingState.saved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />} {localReadingState.saved ? 'Saved' : 'Save'}
           </button>
@@ -309,7 +309,7 @@ function BookReader({
           </span>
         </div>
 
-        <div ref={scrollRef} onScroll={handleReaderScroll} className="book-summary-scroll-area min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y">
+        <div ref={scrollRef} onScroll={handleReaderScroll} className="book-summary-scroll-area h-0 min-h-0 flex-1 overflow-y-auto overscroll-y-contain touch-pan-y">
           <div className="mx-auto max-w-4xl px-5 py-6 sm:px-8 sm:py-9">
             <div className="rounded-xl border border-amber-200 bg-amber-50/70 p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-amber-800">Book summary</p>
