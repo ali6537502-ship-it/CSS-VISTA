@@ -636,8 +636,8 @@ export default function Home() {
             dir="rtl"
             lang="ar"
           >
-            <span className="sm:flex-1 sm:truncate">اَللّٰهُمَّ صَلِّ عَلٰی مُحَمَّدٍ وَّعَلٰی آلِ مُحَمَّدٍ</span>
             <span className="sm:flex-1 sm:truncate">سُبْحَانَ اللهِ وَبِحَمْدِهِ عَدَدَ خَلْقِهِ وَرِضٰی نَفْسِهِ وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ</span>
+            <span className="sm:flex-1 sm:truncate">اَللّٰهُمَّ صَلِّ عَلٰی مُحَمَّدٍ وَّعَلٰی آلِ مُحَمَّدٍ</span>
             <span className="sm:flex-1 sm:truncate">رَبِّ زِدْنِیْ عِلْمًا</span>
           </div>
           <button
