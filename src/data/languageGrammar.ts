@@ -40,12 +40,15 @@ export interface GrammarIndex {
 }
 
 import bundledIndexJson from './bundled-grammar/index.json'
+import bundledEnglishJson from './bundled-grammar/english.json' with { type: 'json' }
+import bundledUrduJson from './bundled-grammar/urdu.json' with { type: 'json' }
 
-// Grammar courses are bundled as lazy chunks so they load without runtime fetches.
-const courseLoaders = import.meta.glob<{ default: GrammarCourse }>([
-  './bundled-grammar/*.json',
-  '!./bundled-grammar/index.json',
-])
+// The same checked repository records feed the grammar course and MPT banks.
+// Keeping one import form prevents the bundler from creating inconsistent JSON modules.
+const bundledCourses: Record<'english' | 'urdu', GrammarCourse> = {
+  english: bundledEnglishJson as GrammarCourse,
+  urdu: bundledUrduJson as GrammarCourse,
+}
 
 const bundledIndex = bundledIndexJson as GrammarIndex
 
@@ -76,10 +79,8 @@ export function getGrammarIndex(): Promise<GrammarIndex> {
 export function getGrammarCourse(language: 'urdu' | 'english'): Promise<GrammarCourse> {
   const existing = courseRequests.get(language)
   if (existing) return existing
-  const loader = courseLoaders[`./bundled-grammar/${language}.json`]
-  const request = loader
-    ? loader().then((m) => m.default).catch(() => fetchJson<GrammarCourse>(`/language-grammar/${language}.json`))
-    : fetchJson<GrammarCourse>(`/language-grammar/${language}.json`)
+  const request = Promise.resolve(bundledCourses[language])
+    .catch(() => fetchJson<GrammarCourse>(`/language-grammar/${language}.json`))
   courseRequests.set(language, request)
   return request
 }

@@ -143,7 +143,7 @@ export default function MPTPrep() {
     <div>
       <PageHeader
         title="MPT Preparation"
-        description="Subject-wise and topic-wise MCQ practice, timed quizzes and full mock tests connected to the central GK World bank wherever the FPSC MPT syllabus reaches."
+        description="Subject-wise practice and a release-audited bank of 40 full MPT papers, available twice daily in the official section sequence."
       />
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-10">
         <OfficialNotice />
@@ -170,7 +170,7 @@ export default function MPTPrep() {
                     >
                       <m.icon className="h-5 w-5 text-emerald-800" />
                       <div className="mt-2 font-semibold group-hover:text-pine">{m.title}</div>
-                      <div className="mt-0.5 text-[13px] text-muted-foreground">200 questions · 200 minutes · FPSC section sequence. {DAILY_MOCK_TIME_LABELS[m.slot === 'afternoon' ? 'mpt-afternoon' : 'mpt']}.</div>
+                      <div className="mt-0.5 text-[13px] text-muted-foreground">200 questions · 200 minutes · official section sequence · one of 40 no-repeat papers. {DAILY_MOCK_TIME_LABELS[m.slot === 'afternoon' ? 'mpt-afternoon' : 'mpt']}.</div>
                     </Link>
                   ) : (
                     <div key={m.title} className="rounded-lg border bg-secondary/45 p-4 text-left">

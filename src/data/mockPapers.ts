@@ -4,10 +4,29 @@ import {
 import { auditedMptAbilityAdditions } from './mptAbilityAdditions'
 import { calculatedMptAbilityQuestions } from './mptAbilityPractice'
 import { mptUrduTranslationQuestions } from './mptUrduTranslation'
+import { advancedMptUrduTranslationQuestions } from './mptUrduTranslationAdvanced'
+import { repositoryMptUrduGrammarQuestions } from './mptRepoUrduGrammar'
+import { repositoryMptEnglishQuestions } from './mptRepoEnglishAdvanced'
+import { appliedMptUrduQuestions } from './mptUrduApplied'
+import { extendedMptUrduQuestions } from './mptUrduExtended'
+import { verifiedMptCurrentQuestions } from './mptCurrentVerified'
+import { expandedVerifiedMptCurrentQuestions } from './mptCurrentVerifiedExpanded'
+import { mptComprehensionQuestions } from './mptEnglishComprehension'
+import { originalMptAbilityQuestions } from './mptOriginalAbility'
+import { reviewedMptPastAbilityQuestions } from './mptReviewedPastAbility'
+import { reviewedMptPastEnglishQuestions } from './mptReviewedPastEnglish'
+import { mptGrammarCourseEnglishQuestions } from './mptGrammarCourseEnglish'
+import { advancedMptAbilityQuestions } from './mptAdvancedAbility'
+import {
+  eligibleMptAbility, eligibleMptCurrent, eligibleMptEnglish, eligibleMptIslamic,
+  eligibleMptPakistan, eligibleMptScience, eligibleMptUrdu, eligibleMptUrduPastPaper,
+} from './mptQuality'
 import { questions as seedQuestions } from './quiz'
 import { filterDisabled, getCategoryQuestions, type BankQuestion } from './mcq'
 import { toBankQuestion, type CssSubjectQuestion } from './cssSubjectMcqs'
-import { readMptPaper, saveMptPaper, previouslySeenMptQuestions } from '@/lib/mptMockHistory'
+import {
+  readMptPaper, saveMptPaper, previouslySeenMptQuestions, previouslyUsedMptQuestionPatterns,
+} from '@/lib/mptMockHistory'
 
 export type CompetitiveMockKind = 'mpt' | 'pms-gk' | 'one-paper'
 
@@ -30,6 +49,7 @@ type SectionSpec = {
   pool: BankQuestion[]
   salt?: string
   seedCap?: number
+  mptEditorial?: boolean
 }
 
 // The mock bank is ~600 KB and only the three competitive mocks need it.
@@ -57,6 +77,11 @@ const normalise = (value: string) => value
   .replace(/[^\p{L}\p{N}\s]/gu, ' ')
   .replace(/\s+/g, ' ')
   .trim()
+
+function numericPattern(value: string) {
+  if (!/\d/.test(value) || /^[\d,.?\s\-–+]+$/.test(value)) return ''
+  return value.toLocaleLowerCase('en').replace(/\d+(?:[.,]\d+)*/g, '#').replace(/\s+/g, ' ').trim()
+}
 
 const stopWords = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'choose', 'correct', 'for', 'from', 'has', 'in', 'is',
@@ -137,6 +162,7 @@ function fromBank(...categories: string[]) {
  * memoised load, keeps the payload saving without that trap.
  */
 interface MockPools {
+  excludedMptIds?: Set<string>
   islamicPool: BankQuestion[]
   urduGeneralPool: BankQuestion[]
   urduPool: BankQuestion[]
@@ -171,26 +197,55 @@ async function loadOwnerAbilityQuestions(): Promise<BankQuestion[]> {
   return questions.filter((question) => abilityTopics.has(question.topic)).map(toBankQuestion)
 }
 
-// Draw scheduled papers from the larger existing subject banks. The quality
-// gate below excludes news publication dates and other unsuitable items.
+// Scheduled MPT papers use a separate syllabus gate. Other quiz modes retain
+// their own pools; broad practice categories are not automatically MPT-eligible.
 function loadMptPools(): Promise<MockPools> {
   expandedMptPools ??= Promise.all([
     getCategoryQuestions('islamic-gk'), getCategoryQuestions('urdu-language'),
     getCategoryQuestions('english-grammar'), getCategoryQuestions('general-ability'),
     getCategoryQuestions('everyday-science'),
     getCategoryQuestions('current-affairs'), getCategoryQuestions('pakistan-affairs'),
-    getCategoryQuestions('pakistan-history'), loadOwnerAbilityQuestions(),
-  ]).then(([islamic, urdu, english, ability, everyday, current, pakistan, history, ownerAbility]) => {
+    getCategoryQuestions('pakistan-history'), getCategoryQuestions('science'),
+    getCategoryQuestions('mpt-past-papers'), loadOwnerAbilityQuestions(),
+    import('./mptLegacyIds.json').then((module) => new Set(module.default)),
+  ]).then(([islamic, urdu, english, ability, everyday, current, pakistan, history, science, past, ownerAbility, previouslyPublished]) => {
     const base = cachedPools ??= buildPools()
     return {
       ...base,
-      islamicPool: [...base.islamicPool, ...islamic],
-      urduPool: [...base.urduPool, ...mptUrduTranslationQuestions, ...urdu.filter((question) => /قواعد و زبان|الفاظ و معانی|محاورات و امثال/.test(question.s || ''))],
-      englishPool: [...base.englishPool, ...english],
-      abilityPool: [...base.abilityPool, ...calculatedMptAbilityQuestions, ...ownerAbility, ...ability],
-      currentPool: [...base.currentPool, ...current],
-      pakistanPool: [...base.pakistanPool, ...pakistan, ...history],
-      sciencePool: [...mapSeed(['science']), ...fromBank('everyday-science', 'environment', 'solar-system'), ...everyday],
+      excludedMptIds: previouslyPublished,
+      islamicPool: islamic.filter((question) => eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
+      urduPool: [
+        ...advancedMptUrduTranslationQuestions, ...curatedUrduTranslationQuestions, ...mptUrduTranslationQuestions,
+        ...appliedMptUrduQuestions, ...extendedMptUrduQuestions, ...repositoryMptUrduGrammarQuestions,
+        ...urdu.filter((question) => eligibleMptUrdu(question) && !previouslyPublished.has(question.id)),
+        ...past.filter((question) => question.s === 'Urdu' && eligibleMptUrduPastPaper(question) && !previouslyPublished.has(question.id)),
+      ],
+      englishPool: [
+        ...curatedEnglishQuestions, ...mptGrammarCourseEnglishQuestions, ...repositoryMptEnglishQuestions,
+        ...reviewedMptPastEnglishQuestions(past).filter(eligibleMptEnglish),
+        ...english.filter((question) => eligibleMptEnglish(question) && !previouslyPublished.has(question.id)),
+      ],
+      abilityPool: [
+        ...advancedMptAbilityQuestions,
+        ...originalMptAbilityQuestions,
+        ...reviewedMptPastAbilityQuestions(past).filter(eligibleMptAbility),
+        ...curatedAbilityQuestions.filter(eligibleMptAbility),
+        ...auditedMptAbilityAdditions.filter(eligibleMptAbility),
+        ...calculatedMptAbilityQuestions.filter(eligibleMptAbility),
+        ...ownerAbility.filter((question) => eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
+        ...ability.filter((question) => eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
+        ...past.filter((question) => /^(Mathematics|Reasoning)$/.test(question.s ?? '') && eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
+      ],
+      currentPool: [
+        ...verifiedMptCurrentQuestions, ...expandedVerifiedMptCurrentQuestions, ...curatedCurrentAffairsQuestions,
+        ...current.filter((question) => eligibleMptCurrent(question) && !previouslyPublished.has(question.id)),
+      ],
+      pakistanPool: [
+        ...pakistan.filter((question) => eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
+        ...history.filter((question) => eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
+        ...past.filter((question) => question.s === 'Pakistan Affairs' && eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
+      ],
+      sciencePool: [...science.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)), ...everyday.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id))],
     }
   }).catch((error) => {
     expandedMptPools = null
@@ -245,7 +300,8 @@ const rejectedQuestion = /Reuters|publication date|news agency published|GeoName
 const rejectedOption = /all of the above|none of (?:the above|these)|both a and b/i
 
 function isUsable(question: BankQuestion) {
-  if (!question.q || question.q.length < 12 || question.q.length > 260) return false
+  const maxLength = question.s === 'Comprehension' ? 900 : 260
+  if (!question.q || question.q.length < 12 || question.q.length > maxLength) return false
   if (!Array.isArray(question.o) || question.o.length !== 4) return false
   if (!Number.isInteger(question.a) || question.a < 0 || question.a > 3) return false
   if (new Set(question.o.map(normalise)).size !== 4) return false
@@ -253,10 +309,15 @@ function isUsable(question: BankQuestion) {
   return !rejectedQuestion.test(question.q)
 }
 
-function qualityScore(question: BankQuestion) {
+function qualityScore(question: BankQuestion, mptEditorial = false) {
   let score = 0
-  if (question.id.startsWith('mock-')) score += 8
+  if (mptEditorial && question.id.startsWith('mpt-original-ability-')) score += 8
+  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-ability-')) score += 7
+  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-english-')) score += 7
+  if (question.id.startsWith('mock-')) score += mptEditorial ? 4 : 8
   if (question.e?.trim()) score += 3
+  if (mptEditorial && question.d === 'Advanced') score += 2
+  if (mptEditorial && question.d === 'Basic') score -= 4
   if (question.q.length <= 150) score += 2
   if (/^(Choose|Complete|How|The |What|When|Where|Which|Who)/i.test(question.q)) score += 1
   if (/best definition|correctly described|most closely associated/i.test(question.q)) score -= 1
@@ -281,32 +342,47 @@ function selectSection(
   usedStems: Set<string>,
   selectedAcrossPaper: BankQuestion[],
   previouslySeen: Set<string> = new Set(),
+  usedPatterns = new Map<string, number>(),
+  paperPatterns = new Set<string>(),
 ) {
   const sectionSeed = `${paperSeed}|${spec.salt || spec.label}`
   const candidates = filterDisabled(spec.pool)
     .filter(isUsable)
     .filter((question, index, rows) => rows.findIndex((candidate) => candidate.id === question.id) === index)
     .sort((left, right) => (
-      qualityScore(right) - qualityScore(left)
+      qualityScore(right, spec.mptEditorial) - qualityScore(left, spec.mptEditorial)
       || stableHash(`${sectionSeed}|${left.id}`) - stableHash(`${sectionSeed}|${right.id}`)
     ))
 
   const selected: BankQuestion[] = []
   let selectedSeeds = 0
   const topicCounts = new Map<string, number>()
+  const abilityFamilyCounts = new Map<string, number>()
   const topicCap = Math.max(2, Math.ceil(spec.count / 10))
 
   const consider = (question: BankQuestion, strict: boolean) => {
     if (selected.length >= spec.count || usedIds.has(question.id) || previouslySeen.has(question.id)) return
     if (spec.seedCap !== undefined && question.id.startsWith('mock-seed-') && selectedSeeds >= spec.seedCap) return
+    if (spec.mptEditorial && spec.label === 'English' && /\bsynonym\b/i.test(question.q)
+      && selectedAcrossPaper.filter((picked) => picked.paperSection === 'English' && /\bsynonym\b/i.test(picked.q)).length >= 15) return
     const stem = normalise(question.q)
     if (!stem || usedStems.has(stem) || previouslySeen.has(`stem:${stem}`)) return
+    const pattern = spec.mptEditorial ? numericPattern(question.q) : ''
+    if (pattern && (paperPatterns.has(pattern) || (usedPatterns.get(pattern) ?? 0) >= 8)) return
+    const abilityFamily = spec.label === 'General Abilities'
+      ? /^mpt-advanced-ability-(.+)-\d+$/.exec(question.id)?.[1] ?? ''
+      : ''
+    if (abilityFamily && (abilityFamilyCounts.get(abilityFamily) ?? 0) >= 2) return
     const topic = normalise(question.s || 'general')
     if (strict && !question.id.startsWith('mock-seed-') && (topicCounts.get(topic) ?? 0) >= topicCap) return
     const answer = answerConcept(question.o[question.a])
     const languageOrAbility = /abilities|reasoning|english|urdu|mathematics/i.test(spec.label)
     if (!languageOrAbility && answer.length > 3 && selectedAcrossPaper.some((picked) => answerConcept(picked.o[picked.a]) === answer)) return
     if (strict && selectedAcrossPaper.some((picked) => {
+      const pickedFamily = abilityFamily
+        ? /^mpt-advanced-ability-(.+)-\d+$/.exec(picked.id)?.[1] ?? ''
+        : ''
+      if (abilityFamily && pickedFamily === abilityFamily) return false
       const close = similarity(picked.q, question.q)
       if (close >= 0.78) return true
       if (similarity(`${picked.q} ${picked.o[picked.a]}`, `${question.q} ${question.o[question.a]}`) >= 0.7) return true
@@ -321,6 +397,11 @@ function selectSection(
     selectedAcrossPaper.push(prepared)
     usedIds.add(question.id)
     usedStems.add(stem)
+    if (pattern) {
+      paperPatterns.add(pattern)
+      usedPatterns.set(pattern, (usedPatterns.get(pattern) ?? 0) + 1)
+    }
+    if (abilityFamily) abilityFamilyCounts.set(abilityFamily, (abilityFamilyCounts.get(abilityFamily) ?? 0) + 1)
     topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1)
   }
 
@@ -371,20 +452,41 @@ export const MOCK_BLUEPRINTS: Record<CompetitiveMockKind, MockSection[]> = {
   'one-paper': onePaperBlueprint,
 }
 
-function sectionsFor(kind: CompetitiveMockKind, pools: MockPools): SectionSpec[] {
+function comprehensionIndex(sessionDateKey: string) {
+  const match = /^(\d{4}-\d{2}-\d{2})(-15)?$/.exec(sessionDateKey)
+  if (!match) throw new Error('The MPT paper session key is invalid.')
+  const day = Date.parse(`${match[1]}T00:00:00Z`)
+  if (!Number.isFinite(day)) throw new Error('The MPT paper date is invalid.')
+  const start = Date.parse('2026-09-20T00:00:00Z')
+  const dayWithinSeries = (((Math.round((day - start) / 86_400_000) % 20) + 20) % 20)
+  return dayWithinSeries * 2 + (match[2] ? 0 : 1)
+}
+
+function sectionsFor(kind: CompetitiveMockKind, pools: MockPools, mptEditorial = false, sessionDateKey = ''): SectionSpec[] {
   const {
     islamicPool, urduPool, englishPool, abilityPool, currentPool, pakistanPool, sciencePool, organisationsPool,
     geographyPool, worldPool, computerPool, economyPool, generalPool,
   } = pools
   if (kind === 'mpt') {
+    const freshComprehension = mptEditorial ? mptComprehensionQuestions[comprehensionIndex(sessionDateKey)] : null
     return [
-      { label: 'Islamic Studies', count: 20, pool: islamicPool, seedCap: 8 },
-      { label: 'Urdu', count: 20, pool: urduPool },
-      { label: 'English', count: 50, pool: englishPool },
-      { label: 'General Abilities', count: 60, pool: abilityPool },
-      { label: 'General Knowledge', count: 20, pool: sciencePool, salt: 'gk-everyday-science', seedCap: 8 },
-      { label: 'General Knowledge', count: 2, pool: currentPool, salt: 'gk-current-affairs' },
-      { label: 'General Knowledge', count: 28, pool: pakistanPool, salt: 'gk-pakistan-affairs', seedCap: 12 },
+      { label: 'Islamic Studies', count: 20, pool: islamicPool, mptEditorial, seedCap: mptEditorial ? undefined : 8 },
+      ...(mptEditorial
+        ? [
+          { label: 'Urdu', count: 3, pool: urduPool.filter((q) => q.s === 'ترجمہ'), salt: 'urdu-translation', mptEditorial },
+          { label: 'Urdu', count: 17, pool: urduPool.filter((q) => q.s !== 'ترجمہ'), salt: 'urdu-other', mptEditorial },
+        ]
+        : [{ label: 'Urdu', count: 20, pool: urduPool, mptEditorial }]),
+      ...(freshComprehension
+        ? [
+          { label: 'English', count: 2, pool: freshComprehension, salt: 'new-comprehension', mptEditorial },
+          { label: 'English', count: 48, pool: englishPool.filter((q) => q.s !== 'Comprehension'), salt: 'other-english', mptEditorial },
+        ]
+        : [{ label: 'English', count: 50, pool: englishPool, mptEditorial }]),
+      { label: 'General Abilities', count: 60, pool: abilityPool, mptEditorial },
+      { label: 'General Knowledge', count: 20, pool: sciencePool, salt: 'gk-everyday-science', mptEditorial, seedCap: mptEditorial ? undefined : 8 },
+      { label: 'General Knowledge', count: 2, pool: currentPool, salt: 'gk-current-affairs', mptEditorial },
+      { label: 'General Knowledge', count: 28, pool: pakistanPool, salt: 'gk-pakistan-affairs', mptEditorial, seedCap: mptEditorial ? undefined : 12 },
     ]
   }
   if (kind === 'pms-gk') {
@@ -462,11 +564,14 @@ export async function buildCompetitiveMock(
   const pools = namedMptSession ? await loadMptPools() : cachedPools
   const blueprint = MOCK_BLUEPRINTS[kind]
   const previouslySeen = namedMptSession ? previouslySeenMptQuestions(studentName) : new Set<string>()
+  if (namedMptSession) pools.excludedMptIds?.forEach((id) => previouslySeen.add(id))
   const usedIds = new Set<string>()
   const usedStems = new Set<string>()
   const selectedAcrossPaper: BankQuestion[] = []
-  const questions = sectionsFor(kind, pools).flatMap((spec) => (
-    selectSection(spec, `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper, previouslySeen)
+  const usedPatterns = namedMptSession ? previouslyUsedMptQuestionPatterns(studentName) : new Map<string, number>()
+  const paperPatterns = new Set<string>()
+  const questions = sectionsFor(kind, pools, namedMptSession, sessionDateKey).flatMap((spec) => (
+    selectSection(spec, `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper, previouslySeen, usedPatterns, paperPatterns)
   ))
   validatePaper(questions, blueprint)
   if (namedMptSession) saveMptPaper(studentName, sessionDateKey, questions)
