@@ -496,7 +496,89 @@ def extract_notes(pdf_path: Path) -> dict[str, list[dict[str, object]]]:
     return cleaned
 
 
+
+# Manually verified replacements for the Hadith one-liner section.
+# Keep this guard in the import path so regenerating from the legacy source PDF
+# cannot reintroduce known factual errors or ambiguous formulations.
+VERIFIED_AHADITH_ONE_LINERS: dict[str, str] = {
+  "islamiat-761": "What is Hadith in Islamic scholarship? - A report transmitting the sayings, actions, tacit approvals, or descriptions attributed to Prophet Muhammad (PBUH).",
+  "islamiat-762": "How are Hadith and Sunnah related? - Hadith are transmitted reports; Sunnah is the Prophetic way or normative practice conveyed through such reports and practice.",
+  "islamiat-763": "What are the two principal parts of a Hadith report? - Isnad (chain of transmission) and Matn (text/content).",
+  "islamiat-764": "What is Isnad? - The chain of transmitters through whom a Hadith is reported.",
+  "islamiat-765": "What is Matn? - The actual text or content of a Hadith report.",
+  "islamiat-766": "What is Hadith Qauli? - A report conveying a saying of Prophet Muhammad (PBUH).",
+  "islamiat-767": "What is Hadith Fi'li? - A report describing an action or practice of Prophet Muhammad (PBUH).",
+  "islamiat-768": "What is Hadith Taqriri? - A report of an act or statement done in the Prophet's presence which he tacitly approved.",
+  "islamiat-769": "What is Hadith Qudsi? - A Hadith in which Prophet Muhammad (PBUH) reports a message from Allah that is not part of the Quran.",
+  "islamiat-770": "What is a Sahih Hadith? - A sound Hadith meeting the classical conditions of connected transmission, reliable and accurate narrators, and freedom from serious contradiction and hidden defect.",
+  "islamiat-771": "What is a Hasan Hadith? - An acceptable Hadith whose transmitters are reliable but whose precision is generally below the level required for Sahih.",
+  "islamiat-772": "What is a Da'if Hadith? - A weak Hadith that fails one or more conditions required for Sahih or Hasan classification.",
+  "islamiat-773": "What is a Mawdu' Hadith? - A fabricated report falsely attributed to Prophet Muhammad (PBUH).",
+  "islamiat-774": "What is a Mutawatir Hadith? - A report transmitted through such numerous independent narrators at every level that deliberate collusion on a false report is conventionally considered impossible.",
+  "islamiat-775": "What is an Ahad Hadith? - A Hadith that does not reach the level of Mutawatir transmission.",
+  "islamiat-776": "What is a Gharib Hadith? - A Hadith with only one narrator at some stage of its chain of transmission.",
+  "islamiat-777": "What is an Aziz Hadith? - An Ahad Hadith transmitted by at least two narrators at the relevant levels of its chain.",
+  "islamiat-778": "What is a Mashhur Hadith in Hadith terminology? - An Ahad Hadith transmitted by three or more narrators at the relevant levels but not reaching Mutawatir level.",
+  "islamiat-779": "What is a Marfu' report? - A report attributed to Prophet Muhammad (PBUH), whether a saying, action, approval, or description.",
+  "islamiat-780": "What is a Mawquf report? - A report attributed to, or stopping at, a Companion rather than the Prophet (PBUH).",
+  "islamiat-781": "What is a Maqtu' report? - A report attributed to, or stopping at, a Tabi'i (Successor).",
+  "islamiat-782": "What is a Mursal Hadith? - A report in which a Tabi'i attributes a statement directly to the Prophet (PBUH), omitting the Companion in the chain.",
+  "islamiat-783": "What is a Musnad Hadith? - In common Hadith terminology, a Marfu' report with a connected chain reaching the Prophet (PBUH).",
+  "islamiat-784": "What is Tadlis in Hadith transmission? - A narrator reports in an ambiguous way that conceals a defect or an intermediary in the chain; a report containing it may be called Mudallas.",
+  "islamiat-785": "What is Asma al-Rijal? - The biographical study of Hadith transmitters used to identify narrators and assess their reliability and transmission history.",
+  "islamiat-786": "What is Jarh wa Ta'dil? - The discipline of criticising and accrediting Hadith narrators to assess their reliability.",
+  "islamiat-787": "What does Al-Kutub al-Sittah mean? - The six canonical Sunni Hadith collections; it does not mean that all six books are titled Sahih.",
+  "islamiat-788": "Which books are commonly called Al-Kutub al-Sittah? - Sahih al-Bukhari, Sahih Muslim, Sunan Abi Dawud, Jami' at-Tirmidhi, Sunan an-Nasa'i, and Sunan Ibn Majah.",
+  "islamiat-789": "What does Al-Sahihayn (the Two Sahihs) refer to? - Sahih al-Bukhari and Sahih Muslim.",
+  "islamiat-790": "Who compiled Sahih al-Bukhari? - Imam Muhammad ibn Isma'il al-Bukhari.",
+  "islamiat-791": "In which Hijri year did Imam al-Bukhari die? - 256 AH.",
+  "islamiat-792": "How many Hadith numbers are in the standard Sunnah.com numbering of Sahih al-Bukhari? - 7,563, including repetitions.",
+  "islamiat-793": "Who compiled Sahih Muslim? - Imam Muslim ibn al-Hajjaj al-Naysaburi.",
+  "islamiat-794": "In which Hijri year did Imam Muslim die? - 261 AH.",
+  "islamiat-795": "Approximately how many Hadith does Sahih Muslim contain when repetitions are counted? - About 7,500.",
+  "islamiat-796": "Who compiled Sunan Abi Dawud? - Imam Abu Dawud Sulayman ibn al-Ash'ath al-Sijistani.",
+  "islamiat-797": "Who compiled Jami' at-Tirmidhi? - Imam Abu 'Isa Muhammad ibn 'Isa at-Tirmidhi.",
+  "islamiat-798": "What is the full commonly cited name of Imam at-Tirmidhi? - Abu 'Isa Muhammad ibn 'Isa ibn Sawrah at-Tirmidhi.",
+  "islamiat-799": "Approximately how many Hadith does Jami' at-Tirmidhi contain with repetitions? - About 4,400.",
+  "islamiat-800": "Who compiled Sunan an-Nasa'i? - Imam Ahmad ibn Shu'ayb an-Nasa'i.",
+  "islamiat-801": "Who compiled Sunan Ibn Majah? - Imam Muhammad ibn Yazid Ibn Majah al-Qazwini.",
+  "islamiat-802": "How many Hadith does Sunan Ibn Majah contain in the standard Sunnah.com numbering? - 4,341.",
+  "islamiat-803": "Who compiled Al-Muwatta? - Imam Malik ibn Anas.",
+  "islamiat-804": "Who is the eponymous founder of the Maliki school of law? - Imam Malik ibn Anas.",
+  "islamiat-805": "What kind of work is Al-Muwatta of Imam Malik? - An early collection arranged largely by legal topics, containing Prophetic reports as well as reports from Companions and Successors.",
+  "islamiat-806": "Who compiled Musnad Ahmad? - Imam Ahmad ibn Hanbal.",
+  "islamiat-807": "In which Hijri year did Imam Ahmad ibn Hanbal die? - 241 AH.",
+  "islamiat-808": "Approximately how many reports are contained in the Sunnah.com edition of Musnad Ahmad? - 28,199.",
+  "islamiat-809": "Which Companion is explicitly described in Sahih al-Bukhari as having written Hadith? - Abdullah ibn Amr ibn al-'As (RA).",
+  "islamiat-810": "Which early Hadith sheet is traditionally associated with Abdullah ibn Amr ibn al-'As (RA)? - Al-Sahifah al-Sadiqah.",
+  "islamiat-811": "What does Sahih al-Bukhari 113 report about Abdullah ibn Amr (RA)? - Abu Huraira (RA) said Abdullah ibn Amr used to write Hadith, whereas he himself did not write them.",
+  "islamiat-812": "Which Companion is traditionally credited with the largest number of Hadith narrations? - Abu Huraira (RA), commonly counted at 5,374 narrations.",
+  "islamiat-813": "What does Muttafaq 'alayh mean in Hadith citation? - A report recorded by both Sahih al-Bukhari and Sahih Muslim.",
+  "islamiat-814": "Did the writing and preservation of Hadith begin only centuries after the Prophet (PBUH)? - No. Hadith were memorised and some were written during the Prophetic and Companion periods; later centuries saw larger systematic compilations.",
+  "islamiat-815": "Which Umayyad caliph is famous for ordering an official effort to collect Hadith? - Umar ibn Abd al-Aziz (Umar II).",
+  "islamiat-816": "Which Madinan scholar-governor was instructed by Umar ibn Abd al-Aziz to collect Hadith? - Abu Bakr ibn Muhammad ibn Amr ibn Hazm.",
+  "islamiat-817": "Which early scholar became especially important in the systematic collection and transmission of Hadith in the early second century AH? - Muhammad ibn Shihab al-Zuhri.",
+  "islamiat-818": "Why should al-Zuhri not simply be called the first person ever to write Hadith? - Written Hadith material existed earlier; al-Zuhri is more accurately associated with an early systematic or official compilation phase."
+}
+
+def apply_verified_ahadith_one_liners(notes_by_category: dict[str, list[dict[str, object]]]) -> None:
+    found: set[str] = set()
+    for note in notes_by_category.get("islamiat", []):
+        note_id = str(note.get("id", ""))
+        replacement = VERIFIED_AHADITH_ONE_LINERS.get(note_id)
+        if replacement is None:
+            continue
+        if str(note.get("subcategory")) != "Ahadith":
+            raise RuntimeError(f"Verified Hadith item {note_id} moved out of the Ahadith section")
+        note["text"] = replacement
+        found.add(note_id)
+    missing = set(VERIFIED_AHADITH_ONE_LINERS) - found
+    if missing:
+        raise RuntimeError("Verified Hadith one-liners missing after import: " + ", ".join(sorted(missing)))
+
+
 def write_output(notes_by_category: dict[str, list[dict[str, object]]], output_dir: Path) -> None:
+    apply_verified_ahadith_one_liners(notes_by_category)
     output_dir.mkdir(parents=True, exist_ok=True)
     section_lookup = {section.slug: section for section in SECTIONS}
     categories = []
