@@ -11,7 +11,7 @@ jobs:
   mpt-release:
     name: Forty-paper MPT release gate
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,19 +29,28 @@ jobs:
         run: node scripts/build-mpt-legacy-exclusions.mjs --check
 
       - name: Audit all 40 MPT papers
-        id: audit
         shell: bash
         run: |
           set +e
           node scripts/audit-mpt-40-papers.mjs 2>&1 | tee mpt-release-audit.json
           status=${PIPESTATUS[0]}
-          echo "status=${status}" >> "$GITHUB_OUTPUT"
           exit "${status}"
 
-      - name: Retain audit report
+      - name: Audit factual integrity and current-affairs provenance
+        shell: bash
+        run: |
+          set +e
+          node scripts/audit-mpt-factual-integrity.mjs 2>&1 | tee mpt-factual-audit.json
+          status=${PIPESTATUS[0]}
+          exit "${status}"
+
+      - name: Retain MPT audit reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mpt-release-audit-${{ github.sha }}
-          path: mpt-release-audit.json
+          path: |
+            mpt-release-audit.json
+            mpt-factual-audit.json
           if-no-files-found: error
+          retention-days: 90

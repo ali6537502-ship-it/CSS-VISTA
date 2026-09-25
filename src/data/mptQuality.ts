@@ -10,7 +10,7 @@ const brokenOption = /\b(?:and|or|the|of|from|at|for|in|to|with)\s*$/i
 
 export function eligibleMptIslamic(question: BankQuestion) {
   if (metaQuestion.test(question.q) || trivialQuestion.test(question.q)) return false
-  if (/How many verses are listed for Surah|standard Kufan numbering|source citation|source or historical basis/i.test(question.q)) return false
+  if (/How many verses are listed for Surah|standard Kufan numbering|source citation|source or historical basis|hadith\s*(?:number|no\.?|count)|how many ahadith|book\s*number.*(?:bukhari|muslim)/i.test(question.q)) return false
   // Neither literary history nor obscure source citations are part of the
   // Islamic Studies/Civics & Ethics section of the MPT rules.
   if (/^(?:Civilisation - (?:Architecture|Cities|Scholars)|Quran - Surah identification)/i.test(question.s ?? '')) return false
@@ -52,10 +52,25 @@ export function eligibleMptScience(question: BankQuestion) {
   return /^(?:Everyday Science|Human Body|Human Physiology|Genetics|Ecology|Solar System|The Sun|Earth Structure|Atmosphere|Climate|Hydrology|Pollution|Resources|Electricity|Work, Energy|Waves and Sound|Plant Biology|Microbiology|Cell Biology|Nutrition|Vitamins|Diseases|Biology|Chemistry|Physics|Units|Acids|Mechanics|Heat|Magnetism|Water|Solar|Earth–Moon|Energy|Elements & Chemical Properties|Optics)/i.test(question.s ?? '')
 }
 
+const primaryCurrentAffairsHosts = [
+  'weforum.org', 'imf.org', 'unfccc.int', 'who.int', 'fifa.com',
+  'olympics.com', 'un.org',
+]
+
+function hasPrimaryCurrentAffairsSource(sourceUrl: string | undefined) {
+  if (!sourceUrl) return false
+  try {
+    const host = new URL(sourceUrl).hostname.toLocaleLowerCase('en').replace(/^www\./, '')
+    return primaryCurrentAffairsHosts.some((domain) => host === domain || host.endsWith(`.${domain}`))
+  } catch {
+    return false
+  }
+}
+
 export function eligibleMptCurrent(question: BankQuestion) {
   if (metaQuestion.test(question.q)) return false
   if (/\b(?:scheduled|expected|hoped to|would|planned)\b/i.test(question.q)) return false
-  return /^https:\/\//.test(question.sourceUrl ?? '')
+  return hasPrimaryCurrentAffairsSource(question.sourceUrl)
 }
 
 export function eligibleMptPakistan(question: BankQuestion) {

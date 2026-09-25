@@ -2,10 +2,10 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { mptComprehensionQuestions } from '../src/data/mptEnglishComprehension.ts'
 
-test('a 34-session series has separate, complete comprehension question pairs', () => {
+test('a 40-session series has separate, complete comprehension question pairs', () => {
   const stems = new Set()
   const ids = new Set()
-  for (const pair of mptComprehensionQuestions.slice(0, 34)) {
+  for (const pair of mptComprehensionQuestions.slice(0, 40)) {
     assert.equal(pair.length, 2)
     assert.equal(pair[0].q.split('\n\n')[0], pair[1].q.split('\n\n')[0])
     for (const question of pair) {
@@ -20,5 +20,5 @@ test('a 34-session series has separate, complete comprehension question pairs', 
       assert(question.e?.trim(), `Missing explanation for ${question.id}`)
     }
   }
-  assert.equal(ids.size, 68)
+  assert.equal(ids.size, 80)
 })

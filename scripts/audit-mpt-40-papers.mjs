@@ -1,5 +1,6 @@
 // Release gate for the forty-paper MPT bank. This does not replace
 // editorial fact-checking; it rejects repeat patterns and obvious syllabus drift.
+import { execSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { build } from 'esbuild'
@@ -16,6 +17,9 @@ const hashStem = (stem) => createHash('sha256').update(stem).digest('hex')
 const numericPattern = (value) => value.toLocaleLowerCase('en')
   .replace(/\d+(?:[.,]\d+)*/g, '#').replace(/\s+/g, ' ').trim()
 const offSyllabus = /blackbody|radiative flux|hardy.weinberg|\brlc\b|induced emf|escape speed|\bp=p0e|\bq=\d|ste[f]an.boltzmann|\bexoplanet|lorentz factor|arrhenius equation|\bthermodynamic entropy|literary genres|اردو ادب|تصنیف کون سی|معروف شاعر/i
+const sourceSha = process.env.GITHUB_SHA || (() => {
+  try { return execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim() } catch { return 'unknown' }
+})()
 
 const bundle = await build({
   entryPoints: ['src/data/mockPapers.ts'], bundle: true, platform: 'node',
@@ -42,6 +46,12 @@ globalThis.fetch = async (url) => {
 const seenIds = new Set()
 const seenStems = new Set()
 const globalPatterns = new Map()
+const sectionTotals = Object.fromEntries(['Islamic Studies', 'Urdu', 'English', 'General Abilities', 'General Knowledge'].map((key) => [key, 0]))
+const gkComposition = { science: 0, currentAffairs: 0, pakistanAffairs: 0, unclassified: 0 }
+const support = {
+  islamicWithExplanation: 0, scienceWithExplanation: 0, pakistanWithExplanation: 0,
+  currentWithExplanation: 0, currentWithPrimarySource: 0,
+}
 const counts = {
   papers: 0, questions: 0, oldIds: 0, oldStems: 0, originalAbility: 0, reviewedPastAbility: 0,
   reviewedPastEnglish: 0, offSyllabus: 0, bareArithmetic: 0, papersWithoutComprehension: 0,
@@ -59,7 +69,9 @@ for (let day = 1; day <= 20; day += 1) {
     if (paper.questions.length !== 200) sample(`Paper ${key} has ${paper.questions.length}/200 questions`)
     const bySection = Object.groupBy(paper.questions, (question) => question.paperSection)
     for (const [section, size] of [['Islamic Studies', 20], ['Urdu', 20], ['English', 50], ['General Abilities', 60], ['General Knowledge', 50]]) {
-      if ((bySection[section]?.length ?? 0) !== size) sample(`${key}: ${section} has ${bySection[section]?.length ?? 0}/${size}`)
+      const actual = bySection[section]?.length ?? 0
+      sectionTotals[section] += actual
+      if (actual !== size) sample(`${key}: ${section} has ${actual}/${size}`)
     }
     const english = bySection.English ?? []
     const comprehension = english.filter((q) => /comprehension/i.test(q.s ?? ''))
@@ -80,6 +92,24 @@ for (let day = 1; day <= 20; day += 1) {
       if (oldStems.has(fingerprint)) { counts.oldStems += 1; sample(`${key}: previously served stem ${q.id}`) }
       if (offSyllabus.test(q.q)) { counts.offSyllabus += 1; sample(`${key}: off-syllabus ${q.id}: ${q.q}`) }
       if (/^A (?:vehicle travels|price of Rs)|^What is \d+% of \d+|^A rectangle is .* what is its area/i.test(q.q)) counts.bareArithmetic += 1
+
+      if (q.paperSection === 'Islamic Studies' && q.e?.trim()) support.islamicWithExplanation += 1
+      if (q.paperSection === 'General Knowledge') {
+        if (q.sourceUrl) {
+          gkComposition.currentAffairs += 1
+          if (q.e?.trim()) support.currentWithExplanation += 1
+          if (/^https:\/\//.test(q.sourceUrl)) support.currentWithPrimarySource += 1
+        } else if (/^(?:science|everyday-science)-/.test(q.id)) {
+          gkComposition.science += 1
+          if (q.e?.trim()) support.scienceWithExplanation += 1
+        } else if (/^(?:pakistan-affairs|pakistan-history)-/.test(q.id) || q.s === 'Pakistan Affairs') {
+          gkComposition.pakistanAffairs += 1
+          if (q.e?.trim()) support.pakistanWithExplanation += 1
+        } else {
+          gkComposition.unclassified += 1
+        }
+      }
+
       if (q.d === 'Basic') { counts.basic += 1; basicInPaper += 1 }
       else if (q.d === 'Intermediate') counts.intermediate += 1
       else if (q.d === 'Advanced') counts.advanced += 1
@@ -106,7 +136,20 @@ if (counts.oldIds || counts.oldStems) sample(`${counts.oldIds} prior-paper IDs a
 if (repeatedFamilies.length) sample(`${repeatedFamilies.length} numeric templates appear over 8 times across the series`)
 if (counts.bareArithmetic) sample(`${counts.bareArithmetic} one-step arithmetic drills remain`)
 if (counts.papersOverBasicLimit) sample(`${counts.papersOverBasicLimit} papers exceed the basic-question limit`)
-console.log(JSON.stringify({ status: failures.length || blockingErrors.length ? 'BLOCKED' : 'PASS', counts, blockingErrors,
+if (gkComposition.unclassified) sample(`${gkComposition.unclassified} General Knowledge questions could not be classified by source family`)
+
+const report = {
+  schemaVersion: 2,
+  status: failures.length || blockingErrors.length ? 'BLOCKED' : 'PASS',
+  auditedSourceSha: sourceSha,
+  series: { papers: 40, questionsPerPaper: 200, totalQuestions: 8000 },
+  sectionTotals,
+  gkComposition,
+  support,
+  counts,
+  blockingErrors,
   repeatedFamilies: repeatedFamilies.slice(0, 12).map(([pattern, count]) => ({ count, pattern })),
-  failures }, null, 2))
+  failures,
+}
+console.log(JSON.stringify(report, null, 2))
 if (failures.length || blockingErrors.length) process.exitCode = 1
