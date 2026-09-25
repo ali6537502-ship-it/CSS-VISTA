@@ -5,6 +5,7 @@ import { useAccount } from '@/lib/accountContext'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey } from '@/lib/myTasks'
 import { getState, updateStudyScheduleTask } from '@/lib/store'
 import { notifyProgressChanged, PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
+import { isNotesBundleExclusiveWindow } from '@/data/notesBundleOffer'
 
 const REMINDER_KEY = 'cssvista:tool:my-task-reminders:v1'
 
@@ -84,6 +85,10 @@ export default function TaskReminderOverlay() {
   const visibleTasks = useMemo(() => [...carriedForward, ...todayRemaining].slice(0, 6), [carriedForward, todayRemaining])
 
   useEffect(() => {
+    if (isNotesBundleExclusiveWindow(clock.getTime())) {
+      setOpen(false)
+      return
+    }
     if (!user || remaining === 0) {
       setOpen(false)
       return
@@ -118,7 +123,7 @@ export default function TaskReminderOverlay() {
     setVersion((value) => value + 1)
   }
 
-  if (!user || !open || !activeSlot || remaining === 0) return null
+  if (isNotesBundleExclusiveWindow(clock.getTime()) || !user || !open || !activeSlot || remaining === 0) return null
 
   const evening = activeSlot === 'evening'
   const hiddenCount = Math.max(0, remaining - visibleTasks.length)
