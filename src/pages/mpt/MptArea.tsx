@@ -9,6 +9,7 @@ import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { ScoreChart } from '@/components/mpt/ScoreChart'
 import { ErrorNote, MptGate, PageSkeleton, secondaryButton, useMptLoad } from './common'
 import { MockSlot } from '@/components/mpt/MockSlot'
+import { MptMenu } from '@/components/mpt/MptMenu'
 
 const fmt = (value: number | null, suffix = '') => (value === null ? '—' : `${Number.isInteger(value) ? value : value.toFixed(1)}${suffix}`)
 
@@ -85,6 +86,7 @@ function Area() {
   const { stats, trend, latest, history } = data
   return (
     <div className="space-y-10">
+      <MptMenu current="/account/mpt" />
       {current
         ? <MptHeroCard card={current} now={now} onBoundary={load.reload} />
         : <p className="rounded-2xl border border-dashed border-slate-300 p-6 text-sm text-slate-600">{copy.hub.noMocks}</p>}

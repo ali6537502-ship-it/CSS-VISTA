@@ -458,7 +458,7 @@ function mpt_state(PDO $pdo, array $mock, ?array $application, ?array $attempt, 
 
 function mpt_candidate_profile(PDO $pdo, array $session, bool $create = false): array
 {
-    $profile = $pdo->prepare('SELECT display_name,phone,whatsapp FROM student_profiles WHERE user_id=?');
+    $profile = $pdo->prepare('SELECT display_name,phone,whatsapp,profile_photo_path,profile_photo_bytes FROM student_profiles WHERE user_id=?');
     $profile->execute([$session['user_id']]);
     $row = $profile->fetch() ?: [];
     $code = $pdo->prepare('SELECT candidate_code FROM mpt_candidates WHERE user_id=?');
@@ -478,6 +478,8 @@ function mpt_candidate_profile(PDO $pdo, array $session, bool $create = false): 
         'email' => (string)$session['email'],
         'mobile' => ($row['phone'] ?? '') !== '' ? (string)$row['phone'] : (($row['whatsapp'] ?? '') !== '' ? (string)$row['whatsapp'] : null),
         'candidate_code' => $candidateCode,
+        // The account photo is shown on the Roll Number slip, from /api/student/photo-view.php.
+        'has_photo' => ($row['profile_photo_path'] ?? '') !== '' && (int)($row['profile_photo_bytes'] ?? 0) > 0,
     ];
 }
 
@@ -1133,11 +1135,26 @@ function mpt_review(PDO $pdo, array $session, mixed $code): array
 
 // ---------------------------------------------------------------- dashboard, history, performance (15)
 
-function mpt_relevant_mocks(PDO $pdo, int $nowMs): array
+/**
+ * D-49: students see one upcoming mock, the next to start, plus every mock they have
+ * already applied to that has not finished (so an applicant can still enter a running
+ * mock). Later mocks exist and keep their papers, but are not listed.
+ */
+function mpt_relevant_mocks(PDO $pdo, int $nowMs, ?string $userId = null): array
 {
-    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status IN ('PUBLISHED','CANCELLED') AND exam_end_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 40");
-    $stmt->execute([mpt_db_time($nowMs), mpt_db_time($nowMs + 86400000 * (CSSV_MPT_SCHEDULE_DAYS_AHEAD + 1))]);
-    return $stmt->fetchAll();
+    $now = mpt_db_time($nowMs);
+    $next = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status='PUBLISHED' AND exam_open_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 1");
+    $next->execute([$now, $now]);
+    $mocks = [];
+    foreach ($next->fetchAll() as $mock) $mocks[(string)$mock['id']] = $mock;
+    if ($userId !== null) {
+        $mine = $pdo->prepare("SELECT m.* FROM mpt_mocks m JOIN mpt_applications a ON a.mock_id=m.id WHERE a.user_id=? AND m.status IN ('PUBLISHED','CANCELLED') AND m.exam_end_at>? ORDER BY m.exam_open_at LIMIT 40");
+        $mine->execute([$userId, $now]);
+        foreach ($mine->fetchAll() as $mock) $mocks[(string)$mock['id']] = $mock;
+    }
+    $mocks = array_values($mocks);
+    usort($mocks, static fn($a, $b) => strcmp((string)$a['exam_open_at'], (string)$b['exam_open_at']));
+    return $mocks;
 }
 
 function mpt_dashboard(PDO $pdo, array $session): array
@@ -1145,7 +1162,7 @@ function mpt_dashboard(PDO $pdo, array $session): array
     $userId = (string)$session['user_id'];
     $now = mpt_now_ms();
     $cards = [];
-    foreach (mpt_relevant_mocks($pdo, $now) as $mock) {
+    foreach (mpt_relevant_mocks($pdo, $now, $userId) as $mock) {
         $cards[] = mpt_card($pdo, $mock, mpt_application_for($pdo, $userId, (string)$mock['id']), $now, true);
     }
     $stats = $pdo->prepare('SELECT * FROM mpt_user_stats WHERE user_id=?');
@@ -1354,7 +1371,7 @@ function mpt_public_listing(PDO $pdo, ?array $session): array
 {
     $now = mpt_now_ms();
     $out = [];
-    foreach (mpt_relevant_mocks($pdo, $now) as $mock) {
+    foreach (mpt_relevant_mocks($pdo, $now, $session ? (string)$session['user_id'] : null) as $mock) {
         $application = $session ? mpt_application_for($pdo, (string)$session['user_id'], (string)$mock['id']) : null;
         $card = mpt_card($pdo, $mock, $application, $now, $session !== null, false);
         $sessionRow = mpt_session_for($pdo, (string)$mock['id']);

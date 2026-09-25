@@ -101,7 +101,7 @@ export const copy = {
     declaration: 'I confirm I am applying through my own My CSS Vista account and understand that the Roll Number issued with this application is personal to me and required to enter the examination.',
     submit: 'Submit Application & Reserve Slot',
     submitting: 'Reserving your slot…',
-    closesAtStart: 'Applications close when the exam starts. You can apply for any upcoming mock at any time.',
+    closesAtStart: 'Applications close when the exam starts. You can apply any time before then.',
     alreadyApplied: 'You have already applied for this mock.',
   },
   confirmation: {
@@ -179,7 +179,7 @@ export const copy = {
     viewAll: 'View All History',
     viewPerformance: 'View Full Performance',
     viewResult: 'View Result Card',
-    mistakesTitle: 'My Wrong Answers',
+    mistakesTitle: 'My Wrong MCQs',
     mistakesIntro: 'Every question you answered incorrectly in your completed MPT Mocks, with the correct answer, so you can work on it.',
     mistakesEmpty: 'Your wrong answers appear here once a completed mock’s results are out (30 minutes after it ends).',
     mistakesLink: (n: number) => `${n} wrong answer${n === 1 ? '' : 's'} to review`,

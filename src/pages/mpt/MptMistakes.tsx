@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MptMenu } from '@/components/mpt/MptMenu'
 import { mptApi, type MptMistake } from '@/lib/mpt/api'
 import { copy, mockSlotLabel, pktDate } from '@/lib/mpt/copy'
 import { AccountPage } from '@/pages/account/shared'
@@ -61,6 +62,7 @@ function Mistakes() {
 export default function MptMistakes() {
   return (
     <AccountPage title={copy.dashboard.mistakesTitle} intro={copy.dashboard.mistakesIntro}>
+      <div className="mb-6"><MptMenu current="/account/mpt/mistakes" /></div>
       <MptGate><Mistakes /></MptGate>
     </AccountPage>
   )

@@ -55,7 +55,7 @@ export type MptCard = {
   slots_available?: number | null
 }
 
-export type MptCandidate = { name: string; email: string; mobile: string | null; candidate_code: string | null }
+export type MptCandidate = { name: string; email: string; mobile: string | null; candidate_code: string | null; has_photo?: boolean }
 
 export type MptSubjectScore = { subject: string; questions: number; attempted: number; correct: number; incorrect: number; score: number; accuracy: number | null }
 

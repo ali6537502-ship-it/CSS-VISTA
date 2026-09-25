@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router'
+import { MptMenu } from '@/components/mpt/MptMenu'
 import { mptApi } from '@/lib/mpt/api'
 import { copy, pktDate } from '@/lib/mpt/copy'
 import { AccountPage, SectionTitle } from '@/pages/account/shared'
@@ -8,13 +10,17 @@ import { ErrorNote, MptGate, PageSkeleton, secondaryButton, useMptLoad } from '.
 const FILTERS: Array<[string | null, string]> = [[null, 'All'], ['completed', 'Completed'], ['upcoming', 'Upcoming'], ['absent', 'Absent'], ['cancelled', 'Cancelled']]
 
 function History() {
+  const [params, setParams] = useSearchParams()
   const [page, setPage] = useState(1)
-  const [status, setStatus] = useState<string | null>(null)
+  const requested = params.get('status')
+  const status = FILTERS.some(([value]) => value === requested) ? requested : null
+  const setStatus = (value: string | null) => setParams(value ? { status: value } : {}, { replace: true })
   const load = useMptLoad((signal) => mptApi.history(page, status, signal), [page, status])
   const data = load.data
   const pages = data ? Math.max(1, Math.ceil(data.total / data.per_page)) : 1
   return (
     <div className="space-y-6">
+      <MptMenu current={status === 'completed' ? '/account/mpt/history?status=completed' : '/account/mpt/history'} />
       <div role="group" aria-label="Filter by status" className="flex flex-wrap gap-2">
         {FILTERS.map(([value, label]) => (
           <button key={label} type="button" aria-pressed={status === value} onClick={() => { setStatus(value); setPage(1) }}
@@ -52,9 +58,12 @@ function History() {
 }
 
 export default function MptHistory() {
+  const [params] = useSearchParams()
+  const results = params.get('status') === 'completed'
   return (
-    <AccountPage title="My MPT History" intro="Every MPT Mock you applied for, with its Roll Number, status and official score.">
-      <MptGate><History /></MptGate>
+    <AccountPage title={results ? 'My MPT Results' : 'My MPT Applications'}
+      intro={results ? 'Every MPT Mock you completed, with its official score. Open one to see its result card.' : 'Every MPT Mock you applied for, with its Roll Number, status and official score.'}>
+      <MptGate><History key={params.get('status') ?? 'all'} /></MptGate>
     </AccountPage>
   )
 }
