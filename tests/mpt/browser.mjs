@@ -49,9 +49,12 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   // Dashboard → Apply (direct URL load, not in-app navigation).
   await visit(page, `${origin}/account/dashboard`)
   await page.getByRole('link', { name: 'Apply Now' }).first().waitFor()
+  const slotPattern = /(Morning|Afternoon|Evening) MPT Mock · \d{1,2}:\d{2} (AM|PM) PKT/
+  assert.match(await page.textContent('body'), slotPattern, 'dashboard names the sitting and its time')
   await page.screenshot({ path: `${shots}/${label}-01-dashboard-apply.png`, fullPage: true })
   await page.getByRole('link', { name: 'Apply Now' }).first().click()
   await page.getByRole('heading', { name: /Application for MPT Mock/ }).waitFor()
+  assert.match(await page.textContent('body'), slotPattern, 'apply screen names the sitting and its time')
   await noHorizontalScroll(page, `${label} apply`)
   await page.screenshot({ path: `${shots}/${label}-02-apply.png`, fullPage: true })
   const submit = page.getByRole('button', { name: 'Submit Application & Reserve Slot' })
@@ -126,6 +129,7 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   await page.reload()
   await page.getByText('MPT MOCK RESULT CARD').waitFor({ timeout: 20_000 })
   await page.getByText(/Congratulations on completing CSS Vista MPT Mock/).waitFor()
+  assert.match(await page.textContent('body'), slotPattern, 'result card names the sitting and its time')
   assert.ok((await page.textContent('body')).includes(`${roll.slice(0, 3)} ${roll.slice(3)}`), 'roll number on the card')
   await noHorizontalScroll(page, `${label} result`)
   await page.screenshot({ path: `${shots}/${label}-07-result-card.png`, fullPage: true })

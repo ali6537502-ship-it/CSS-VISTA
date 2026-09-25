@@ -5,6 +5,7 @@ import { ACTION_LABEL, countdown, copy, pktDateTime, pktTime } from '@/lib/mpt/c
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useBoundary } from '@/lib/mpt/useServerClock'
 import { StatusBadge } from './StatusBadge'
+import { MockSlot } from './MockSlot'
 
 const PRIORITY: Record<string, number> = {
   IN_PROGRESS: 0, ENTRY_OPEN: 1, ROLL_NUMBER_PENDING: 2, SLOT_RESERVED: 3, SUBMITTED_PENDING_RESULT: 4,
@@ -64,7 +65,8 @@ export function MptHeroCard({ card, now, onBoundary }: { card: MptCard; now: num
         <StatusBadge phase={state.phase} />
       </div>
       <h3 id={`hero-${mock.slug}`} className="mt-2 text-xl font-bold text-slate-950">{mock.title}</h3>
-      <p className="mt-1 text-sm text-slate-600">{pktDateTime(mock.exam_open_at)} · {mock.duration_minutes} min · {mock.total_questions} MCQs · Free</p>
+      <div className="mt-1"><MockSlot mock={mock} withWindow /></div>
+      <p className="mt-1 text-sm text-slate-600">{mock.duration_minutes} min · {mock.total_questions} MCQs · Free</p>
       <p className={`mt-3 text-base font-semibold ${ready ? 'text-emerald-950' : 'text-slate-800'}`}><span className="tabular-nums">{line}</span></p>
       {href && state.primary_action && (
         <Link to={href} className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-900 px-5 text-base font-bold text-white hover:bg-emerald-950 sm:w-auto">

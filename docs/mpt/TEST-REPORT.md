@@ -33,6 +33,10 @@ MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10
   spaces.
 - The admin sees **Applied / Appeared / Absent** counts and filtered candidate lists. The
   CSV includes an Appeared column.
+- Every mock is labelled with its sitting and time, e.g. "Afternoon MPT Mock · 3:00 PM
+  PKT" or "Evening MPT Mock · 10:30 PM PKT", with the date and full time window. This
+  holds on the public page, dashboard, apply, application, entrance, exam, result card,
+  history, wrong answers and admin. It is asserted in the unit and browser tests.
 
 ## What the automated suites prove (Section 21)
 
@@ -128,6 +132,8 @@ MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10
 
 | | |
 |---|---|
+| **Sittings shown by name and time (real 3:00 PM / 10:30 PM mocks)** | ![](screens/sittings-mpt-page.png) |
+| My MPT Mocks listing both sittings | ![](screens/sittings-dashboard-mobile.png) |
 | Dashboard with Apply | ![](screens/mobile-01-dashboard-apply.png) |
 | Application screen | ![](screens/mobile-02-apply.png) |
 | Confirmation and Roll Number countdown | ![](screens/mobile-03-confirmation-countdown.png) |

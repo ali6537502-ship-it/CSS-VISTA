@@ -1,5 +1,5 @@
 import type { MptMock, MptResult } from '@/lib/mpt/api'
-import { copy, pktDate, pktTime } from '@/lib/mpt/copy'
+import { copy, mockSlot, mockSlotLabel, mockTimeWindow, pktDate } from '@/lib/mpt/copy'
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
 
 const num = (value: number) => (Number.isInteger(value) ? String(value) : value.toFixed(2))
@@ -24,6 +24,7 @@ export function ResultCard({ mock, result, candidate, rollNumber, applicationCod
         <div className="text-right">
           <p id="result-card-title" className="text-sm font-extrabold tracking-[.18em]">{copy.result.card}</p>
           <p className="text-xs text-emerald-100">{mock.title}</p>
+          <p className="text-xs font-bold text-amber-200">{mockSlotLabel(mock)}</p>
         </div>
       </header>
 
@@ -34,7 +35,8 @@ export function ResultCard({ mock, result, candidate, rollNumber, applicationCod
           <dt className="text-slate-500">Roll Number</dt><dd className="font-mono font-semibold">{rollNumber ? formatRollNumber(rollNumber) : '—'}</dd>
           <dt className="text-slate-500">Application ID</dt><dd className="break-all font-mono text-xs font-semibold">{applicationCode}</dd>
           <dt className="text-slate-500">Mock date</dt><dd className="font-semibold">{pktDate(startedAt)}</dd>
-          <dt className="text-slate-500">Mock time</dt><dd className="font-semibold">{pktTime(startedAt)} – {pktTime(mock.exam_end_at)}</dd>
+          <dt className="text-slate-500">Mock</dt><dd className="font-semibold">{mockSlot(mock.exam_open_at)} MPT Mock</dd>
+          <dt className="text-slate-500">Mock time</dt><dd className="font-semibold">{mockTimeWindow({ exam_open_at: startedAt, exam_end_at: mock.exam_end_at })}</dd>
         </dl>
         <div className="rounded-2xl border border-emerald-900/15 bg-emerald-50 px-6 py-4 text-center">
           <p className="text-xs font-bold uppercase tracking-[.16em] text-emerald-900">Score</p>

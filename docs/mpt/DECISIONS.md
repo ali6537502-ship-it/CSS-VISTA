@@ -402,3 +402,10 @@ It is linked from the dashboard card, the MPT area and the result page.
 - **Limit that remains:** Hostinger shared PHP is the ceiling. For very large simultaneous
   sittings (many thousands at once), watch hPanel resource usage in the first mocks and
   consider a higher Hostinger plan. The code has no per-mock or per-roll-number limit.
+
+**D-47 · Every mock is named by its sitting and time** — owner
+Wherever a mock appears, its name is followed by "Afternoon MPT Mock · 3:00 PM PKT" or
+"Evening MPT Mock · 10:30 PM PKT", plus the date and window (e.g. 3:00 PM – 6:20 PM PKT).
+The sitting is derived from the start time in Pakistan: before 12:00 is Morning, before
+17:00 is Afternoon, later is Evening. An admin-created mock at another time is therefore
+named correctly too. Times show as "3:00 PM".

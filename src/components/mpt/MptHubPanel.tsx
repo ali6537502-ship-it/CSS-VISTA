@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { mptApi, type MptCard } from '@/lib/mpt/api'
-import { ACTION_LABEL, copy, pktDate, pktTime } from '@/lib/mpt/copy'
+import { ACTION_LABEL, copy } from '@/lib/mpt/copy'
 import { useAccount } from '@/lib/accountContext'
 import { actionHref } from './MptHeroCard'
 import { StatusBadge } from './StatusBadge'
+import { MockSlot } from './MockSlot'
 
 /** Public MPT page panel: real mock cards with one state-driven CTA each (Section 11). */
 export function MptHubPanel() {
@@ -44,7 +45,8 @@ export function MptHubPanel() {
                 <h3 className="font-bold text-slate-950">{card.mock.title}</h3>
                 <StatusBadge phase={card.state.phase} />
               </div>
-              <p className="mt-1 text-sm text-slate-600">{pktDate(card.mock.exam_open_at)} · {pktTime(card.mock.exam_open_at)} · {card.mock.duration_minutes} min · {card.mock.total_questions} questions</p>
+              <div className="mt-1"><MockSlot mock={card.mock} withWindow /></div>
+              <p className="mt-1 text-sm text-slate-600">{card.mock.duration_minutes} min · {card.mock.total_questions} questions · Free</p>
               {(card.registered_count || card.slots_available !== null && card.slots_available !== undefined) && (
                 <p className="mt-1 text-xs text-slate-500">
                   {card.registered_count ? copy.hub.registered(card.registered_count) : ''}

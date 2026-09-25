@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { HostingerApiError } from '@/lib/hostingerApi'
 import { mptApi, type MptMock } from '@/lib/mpt/api'
-import { copy, pktDate, pktTime } from '@/lib/mpt/copy'
+import { copy, mockSlotLabel, mockTimeWindow, pktDate, pktTime } from '@/lib/mpt/copy'
 
 export type Loadable<T> = { data: T | null; error: HostingerApiError | null; loading: boolean; reload: () => void }
 
@@ -86,8 +86,9 @@ export function DetailList({ rows }: { rows: Array<[string, ReactNode]> }) {
 export function examDetailRows(mock: MptMock): Array<[string, ReactNode]> {
   return [
     ['Mock', mock.title],
+    ['Sitting', mockSlotLabel(mock)],
     ['Date', pktDate(mock.exam_open_at)],
-    ['Exam starts', pktTime(mock.exam_open_at)],
+    ['Exam time', mockTimeWindow(mock)],
     ['Duration', `${mock.duration_minutes} minutes`],
     ['Questions', `${mock.total_questions} MCQs`],
     ['Fee', copy.apply.fee],
@@ -104,7 +105,7 @@ export function downloadCalendar(mock: MptMock) {
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//CSS Vista//MPT Mock//EN', 'BEGIN:VEVENT',
     `UID:${mock.slug}@css-vista.com`, `DTSTAMP:${stamp(new Date().toISOString())}`,
     `DTSTART:${stamp(mock.exam_open_at)}`, `DTEND:${stamp(mock.exam_end_at)}`,
-    `SUMMARY:${mock.title} (CSS Vista)`,
+    `SUMMARY:${mock.title} · ${mockSlotLabel(mock)} (CSS Vista)`,
     `DESCRIPTION:The exam starts at ${pktTime(mock.exam_open_at)}. Open My CSS Vista and press Enter Exam.`,
     'URL:https://www.css-vista.com/account/mpt', 'END:VEVENT', 'END:VCALENDAR',
   ].join('\r\n')

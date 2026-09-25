@@ -44,3 +44,14 @@ test('roll number typo check matches the server Damm digit', () => {
   assert.equal(normaliseRollNumber(' 482 917 '), '482917')
   assert.equal(formatRollNumber('482917'), '482 917')
 })
+
+test('every mock names its sitting and time: Afternoon 3:00 PM, Evening 10:30 PM', async () => {
+  const { mockSlot, mockSlotLabel, mockTimeWindow } = await import('../src/lib/mpt/copy.ts')
+  // 15:00 and 22:30 PKT (UTC+5).
+  assert.equal(mockSlot('2026-10-01T10:00:00.000Z'), 'Afternoon')
+  assert.equal(mockSlot('2026-10-01T17:30:00.000Z'), 'Evening')
+  assert.equal(mockSlot('2026-10-01T04:00:00.000Z'), 'Morning')
+  assert.equal(mockSlotLabel({ exam_open_at: '2026-10-01T10:00:00.000Z' }), 'Afternoon MPT Mock · 3:00 PM PKT')
+  assert.equal(mockSlotLabel({ exam_open_at: '2026-10-01T17:30:00.000Z' }), 'Evening MPT Mock · 10:30 PM PKT')
+  assert.equal(mockTimeWindow({ exam_open_at: '2026-10-01T10:00:00.000Z', exam_end_at: '2026-10-01T13:20:00.000Z' }), '3:00 PM – 6:20 PM PKT')
+})

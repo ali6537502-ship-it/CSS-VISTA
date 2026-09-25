@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { mptApi, type MptCard, type MptHistoryRow } from '@/lib/mpt/api'
-import { ACTION_LABEL, copy, pktDate, pktDateTime } from '@/lib/mpt/copy'
+import { ACTION_LABEL, copy, mockSlotLabel, pktDate } from '@/lib/mpt/copy'
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useServerClock } from '@/lib/mpt/useServerClock'
 import { AccountPage, SectionTitle } from '@/pages/account/shared'
@@ -8,6 +8,7 @@ import { MptHeroCard, actionHref, pickCurrentCard } from '@/components/mpt/MptHe
 import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { ScoreChart } from '@/components/mpt/ScoreChart'
 import { ErrorNote, MptGate, PageSkeleton, secondaryButton, useMptLoad } from './common'
+import { MockSlot } from '@/components/mpt/MockSlot'
 
 const fmt = (value: number | null, suffix = '') => (value === null ? '—' : `${Number.isInteger(value) ? value : value.toFixed(1)}${suffix}`)
 
@@ -22,7 +23,7 @@ export function HistoryRows({ rows }: { rows: MptHistoryRow[] }) {
           <tbody className="divide-y divide-slate-100">
             {rows.map((row) => (
               <tr key={row.application_code}>
-                <th scope="row" className="px-3 py-2 font-semibold text-slate-900">{row.title}</th>
+                <th scope="row" className="px-3 py-2 font-semibold text-slate-900">{row.title}<span className="block text-xs font-bold text-emerald-900">{mockSlotLabel(row)}</span></th>
                 <td className="px-3 py-2 font-mono">{row.roll_number ? formatRollNumber(row.roll_number) : '—'}</td>
                 <td className="px-3 py-2">{pktDate(row.exam_open_at)}</td>
                 <td className="px-3 py-2"><StatusBadge phase={row.phase} /></td>
@@ -38,7 +39,7 @@ export function HistoryRows({ rows }: { rows: MptHistoryRow[] }) {
           <li key={row.application_code}>
             <Link to={row.phase === 'RESULT_AVAILABLE' || row.phase === 'SUBMITTED_PENDING_RESULT' ? `/account/mpt/results/${row.application_code}` : `/account/mpt/applications/${row.application_code}`}
               className="block rounded-2xl border border-slate-200 bg-white p-4">
-              <div className="flex items-start justify-between gap-2"><p className="font-semibold text-slate-900">{row.title}</p><StatusBadge phase={row.phase} /></div>
+              <div className="flex items-start justify-between gap-2"><div><p className="font-semibold text-slate-900">{row.title}</p><MockSlot mock={row} withDate={false} /></div><StatusBadge phase={row.phase} /></div>
               <p className="mt-1 text-sm text-slate-600">{pktDate(row.exam_open_at)}{row.roll_number ? ` · Roll ${formatRollNumber(row.roll_number)}` : ''}</p>
               {row.score !== null && <p className="mt-1 text-sm font-semibold tabular-nums">{fmt(row.score)} / {fmt(row.total_marks)}</p>}
             </Link>
@@ -58,7 +59,8 @@ function UpcomingList({ cards }: { cards: MptCard[] }) {
           <li key={card.mock.slug} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4">
             <div className="min-w-0">
               <p className="font-semibold text-slate-900">{card.mock.title}</p>
-              <p className="text-sm text-slate-600">{pktDateTime(card.mock.exam_open_at)}{card.application?.roll_number ? ` · Roll ${formatRollNumber(card.application.roll_number)}` : card.application ? ' · Applied ✓' : ''}</p>
+              <MockSlot mock={card.mock} withWindow />
+              <p className="text-sm text-slate-600">{card.mock.duration_minutes} min{card.application?.roll_number ? ` · Roll ${formatRollNumber(card.application.roll_number)}` : card.application ? ' · Applied ✓' : ''}</p>
             </div>
             <div className="flex items-center gap-2">
               <StatusBadge phase={card.state.phase} />
@@ -91,7 +93,8 @@ function Area() {
         <SectionTitle>{copy.dashboard.scoreTitle}</SectionTitle>
         {latest ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <p className="text-sm text-slate-500">{latest.mock.title} · {pktDate(latest.mock.exam_open_at)}</p>
+            <p className="text-sm text-slate-500">{latest.mock.title}</p>
+            <MockSlot mock={latest.mock} withWindow />
             <p className="mt-1 text-4xl font-bold tabular-nums text-slate-950">{fmt(latest.result.score)}<span className="text-xl text-slate-400"> / {fmt(latest.result.total_marks)}</span> <span className="text-lg font-semibold text-emerald-900">{fmt(latest.result.percentage, '%')}</span></p>
             <p className="mt-2 text-sm text-slate-700">Correct {latest.result.correct} · Incorrect {latest.result.incorrect} · Unattempted {latest.result.unanswered}
               {latest.result.rank ? ` · Rank ${latest.result.rank.position} of ${latest.result.rank.candidates}` : ''}</p>

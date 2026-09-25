@@ -6,6 +6,7 @@ import { copy, pktDateTime, pktTime } from '@/lib/mpt/copy'
 import { AccountPage } from '@/pages/account/shared'
 import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { DetailList, ErrorNote, MptGate, PageSkeleton, examDetailRows, primaryButton, useMptLoad, aboveMobileNav } from './common'
+import { MockSlot } from '@/components/mpt/MockSlot'
 
 function newIdempotencyKey() {
   return Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, '0')).join('')
@@ -53,6 +54,7 @@ function ApplyScreen({ slug }: { slug: string }) {
       <div>
         <p className="text-[11px] font-bold uppercase tracking-[.16em] text-emerald-800">{copy.apply.heading}</p>
         <h2 ref={headingRef} tabIndex={-1} className="mt-1 text-2xl font-bold text-slate-950 outline-none">{copy.apply.title(mock.mock_number)}</h2>
+        <div className="mt-2"><MockSlot mock={mock} withWindow /></div>
         <div className="mt-2"><StatusBadge phase={state.phase} /></div>
       </div>
 

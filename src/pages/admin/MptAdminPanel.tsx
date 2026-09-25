@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { ownerRequest, HostingerApiError } from '@/lib/hostingerApi'
 import type { MptMock } from '@/lib/mpt/api'
-import { pktDateTime, pktTime } from '@/lib/mpt/copy'
+import { mockSlotLabel, pktDateTime, pktTime } from '@/lib/mpt/copy'
 
 // Owner workspace for the MPT examination system (Section 18). Every rule is
 // enforced by /api/admin/mpt.php; this screen only collects input and reasons.
@@ -95,7 +95,7 @@ function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => voi
     <section className="rounded-xl border bg-white p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-pine">{mock.title} <span className="text-sm font-normal text-muted-foreground">({mock.slug}, {mock.status})</span></h3>
+          <h3 className="text-lg font-bold text-pine">{mock.title} · {mockSlotLabel(mock)} <span className="text-sm font-normal text-muted-foreground">({mock.slug}, {mock.status})</span></h3>
           <p className="text-sm text-muted-foreground">Exam {pktDateTime(mock.exam_open_at)} · applications close at start · late entry until {pktTime(mock.entry_close_at)} · ends {pktDateTime(mock.exam_end_at)}</p>
           {mock.cancel_reason && <p className="text-sm text-amber-800">Cancelled: {mock.cancel_reason}</p>}
         </div>
@@ -269,7 +269,7 @@ export default function MptAdminPanel() {
               <tbody className="divide-y">
                 {overview.mocks.map((mock) => (
                   <tr key={mock.slug} className={selected === mock.slug ? 'bg-emerald-50' : ''}>
-                    <td className="px-3 py-2 font-semibold">{mock.title}</td><td>{pktDateTime(mock.exam_open_at)}</td><td>{mock.status}</td>
+                    <td className="px-3 py-2 font-semibold">{mock.title}<span className="block text-xs font-bold text-emerald-900">{mockSlotLabel(mock)}</span></td><td>{pktDateTime(mock.exam_open_at)}</td><td>{mock.status}</td>
                     <td>{mock.stats.applications}{mock.capacity !== null ? ` / ${mock.capacity}` : ''}</td><td>{mock.stats.appeared}</td><td>{mock.stats.completed}</td><td>{mock.stats.average_score ?? '—'}</td>
                     <td className="pr-3 text-right"><button type="button" className={button} onClick={() => setSelected(mock.slug)}>Open</button></td>
                   </tr>

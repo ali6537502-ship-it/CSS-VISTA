@@ -9,6 +9,7 @@ import { AccountPage } from '@/pages/account/shared'
 import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { RollNumber } from '@/components/mpt/RollNumber'
 import { DetailList, ErrorNote, MptGate, PageSkeleton, downloadCalendar, examDetailRows, primaryButton, secondaryButton, useMptLoad } from './common'
+import { MockSlot } from '@/components/mpt/MockSlot'
 
 function RevealCountdown({ appliedAt, visibleAt, now }: { appliedAt: string; visibleAt: string; now: number }) {
   const start = Date.parse(appliedAt)
@@ -90,6 +91,10 @@ function ApplicationScreen({ code }: { code: string }) {
         </section>
       )}
 
+      <div>
+        <p className="text-lg font-bold text-slate-950">{mock.title}</p>
+        <MockSlot mock={mock} withWindow />
+      </div>
       <div className="flex flex-wrap items-center gap-3">
         <StatusBadge phase={phase} label={phase === 'ROLL_NUMBER_PENDING' || phase === 'SLOT_RESERVED' ? copy.confirmation.statusReserved : undefined} />
         <span className="text-sm text-slate-500">Application ID <span className="font-mono font-semibold text-slate-900">{application.application_code}</span></span>

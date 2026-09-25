@@ -5,7 +5,24 @@ export const PKT_ZONE = 'Asia/Karachi'
 
 export function pktTime(iso: string | null | undefined) {
   if (!iso) return ''
-  return `${new Intl.DateTimeFormat('en-PK', { timeZone: PKT_ZONE, hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(iso))} PKT`
+  return `${new Intl.DateTimeFormat('en-PK', { timeZone: PKT_ZONE, hour: 'numeric', minute: '2-digit', hour12: true }).format(new Date(iso)).toUpperCase()} PKT`
+}
+
+/**
+ * Which daily sitting a mock is, from its start time in Pakistan: the 3:00 PM mock
+ * is the Afternoon MPT Mock and the 10:30 PM mock the Evening MPT Mock.
+ */
+export function mockSlot(examOpenAt: string): 'Morning' | 'Afternoon' | 'Evening' {
+  const hour = Number(new Intl.DateTimeFormat('en-GB', { timeZone: PKT_ZONE, hour: '2-digit', hourCycle: 'h23' }).format(new Date(examOpenAt)))
+  return hour < 12 ? 'Morning' : hour < 17 ? 'Afternoon' : 'Evening'
+}
+/** "Afternoon MPT Mock · 3:00 PM PKT" */
+export function mockSlotLabel(mock: { exam_open_at: string }) {
+  return `${mockSlot(mock.exam_open_at)} MPT Mock · ${pktTime(mock.exam_open_at)}`
+}
+/** "3:00 PM – 6:20 PM PKT" */
+export function mockTimeWindow(mock: { exam_open_at: string; exam_end_at: string }) {
+  return `${pktTime(mock.exam_open_at).replace(' PKT', '')} – ${pktTime(mock.exam_end_at)}`
 }
 export function pktDate(iso: string | null | undefined) {
   if (!iso) return ''

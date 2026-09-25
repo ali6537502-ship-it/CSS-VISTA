@@ -8,6 +8,7 @@ import { takeRuntime } from '@/lib/mpt/runtimeCache'
 import { useServerClock } from '@/lib/mpt/useServerClock'
 import { QUESTIONS_PER_PAGE, questionPageCount, questionPageForIndex, sliceQuestionPage } from '@/lib/questionPagination'
 import { ErrorNote, MptGate, PageSkeleton, primaryButton, secondaryButton } from './common'
+import { MockSlot } from '@/components/mpt/MockSlot'
 
 // Tuned for many simultaneous candidates: batched saves every few seconds while
 // answering, and a heartbeat only when something is still waiting to sync.
@@ -212,6 +213,7 @@ function Runner({ slug, runtime }: { slug: string; runtime: MptRuntime }) {
     <div className="pb-40">
       <div className="mx-auto max-w-4xl pt-2">
         <p className="text-xs font-bold uppercase tracking-[.12em] text-slate-500">{runtime.mock.title}</p>
+        <MockSlot mock={runtime.mock} withWindow />
         <p className="sr-only" aria-live="polite">{announcement}</p>
       </div>
 

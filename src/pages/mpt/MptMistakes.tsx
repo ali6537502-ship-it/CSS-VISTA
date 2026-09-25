@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { mptApi, type MptMistake } from '@/lib/mpt/api'
-import { copy, pktDate } from '@/lib/mpt/copy'
+import { copy, mockSlotLabel, pktDate } from '@/lib/mpt/copy'
 import { AccountPage } from '@/pages/account/shared'
 import { ErrorNote, MptGate, PageSkeleton, secondaryButton, useMptLoad } from './common'
 
@@ -9,7 +9,7 @@ const LETTERS = ['A', 'B', 'C', 'D']
 function MistakeItem({ item }: { item: MptMistake }) {
   return (
     <li className="rounded-2xl border border-slate-200 bg-white p-4">
-      <p className="text-[11px] font-bold uppercase tracking-[.12em] text-slate-500">{item.section} · {item.title} · {pktDate(item.exam_open_at)} · Question {item.p}</p>
+      <p className="text-[11px] font-bold uppercase tracking-[.12em] text-slate-500">{item.section} · {item.title} · {mockSlotLabel(item)} · {pktDate(item.exam_open_at)} · Question {item.p}</p>
       <p className="mt-1 whitespace-pre-line text-base text-slate-950" dir="auto">{item.q}</p>
       <ul className="mt-2 space-y-1 text-sm">
         {item.o.map((option, index) => (

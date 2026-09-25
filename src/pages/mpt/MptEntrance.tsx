@@ -10,6 +10,7 @@ import { AccountPage } from '@/pages/account/shared'
 import { RollNumber } from '@/components/mpt/RollNumber'
 import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { DetailList, ErrorNote, MptGate, PageSkeleton, primaryButton, secondaryButton, useMptLoad } from './common'
+import { MockSlot } from '@/components/mpt/MockSlot'
 
 function VerifiedScreen({ slug, verification, onExpired }: { slug: string; verification: MptVerification; onExpired: (message: string) => void }) {
   const navigate = useNavigate()
@@ -47,6 +48,7 @@ function VerifiedScreen({ slug, verification, onExpired }: { slug: string; verif
         ['Name', candidate.name],
         ['Roll Number', <span className="font-mono">{formatRollNumber(candidate.roll_number)}</span>],
         ['MPT Mock', mock.title],
+        ['Sitting', <MockSlot mock={mock} withDate={false} withWindow />],
         ['Questions', `${mock.total_questions} MCQs · ${mock.total_marks} marks`],
         ['Time you will have', <strong className="text-base">{allowance}</strong>],
       ]} />
@@ -135,6 +137,7 @@ function Gate({ slug }: { slug: string }) {
     <div className="space-y-6">
       <div>
         <p className="text-[11px] font-bold uppercase tracking-[.16em] text-emerald-800">{card?.mock.title}</p>
+        {card && <MockSlot mock={card.mock} withWindow />}
         <h2 className="mt-1 text-2xl font-bold text-slate-950">{copy.entrance.heading}</h2>
         {card && <div className="mt-2"><StatusBadge phase={card.state.phase} /></div>}
       </div>

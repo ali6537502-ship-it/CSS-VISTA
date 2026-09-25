@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { Printer } from 'lucide-react'
 import { mptApi, type MptReviewQuestion } from '@/lib/mpt/api'
-import { copy, pktDate, pktDateTime } from '@/lib/mpt/copy'
+import { copy, mockSlotLabel, pktDate, pktDateTime } from '@/lib/mpt/copy'
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useBoundary, useServerClock } from '@/lib/mpt/useServerClock'
 import { AccountPage } from '@/pages/account/shared'
@@ -93,6 +93,7 @@ function ResultScreen({ code }: { code: string }) {
         ['Roll Number', application.roll_number ? <span className="font-mono">{formatRollNumber(application.roll_number)}</span> : '—'],
         ['Application ID', <span className="font-mono">{application.application_code}</span>],
         ['Mock', mock.title],
+        ['Sitting', mockSlotLabel(mock)],
         ['Date', pktDate(mock.exam_open_at)],
         ['Time taken', duration(result.time_taken_seconds)],
       ]} /></div>
