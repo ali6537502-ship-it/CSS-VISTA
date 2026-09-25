@@ -4,7 +4,7 @@ import { noteProducts } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
 import { notesBundleOfferEndsAt as OFFER_ENDS_AT, notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
 
-const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:' + OFFER_ENDS_AT
+const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:' + OFFER_ENDS_AT + ':' + OFFER_PRICE
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat('en-PK').format(value)
