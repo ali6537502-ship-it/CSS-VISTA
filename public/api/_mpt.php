@@ -10,7 +10,11 @@ require_once __DIR__ . '/_mpt_schema.php';
 const CSSV_MPT_PAPER_DIR = __DIR__ . '/_mpt_papers';
 const CSSV_MPT_DAILY_SLOTS = ['1500' => '15:00', '2230' => '22:30'];
 const CSSV_MPT_PKT = 'Asia/Karachi';
-const CSSV_MPT_SCHEDULE_DAYS_AHEAD = 7;
+// Upcoming mocks are always visible well ahead (owner: through 10 October and
+// beyond), limited only by the paper runway. A few are created per maintenance
+// run, nearest first, so no single request does heavy work.
+const CSSV_MPT_SCHEDULE_DAYS_AHEAD = 16;
+const CSSV_MPT_SCHEDULE_PER_RUN = 3;
 
 function mpt_now_ms(): int
 {
@@ -47,10 +51,14 @@ function mpt_ensure_schema(PDO $pdo): void
     }
 }
 
-/** off | pilot | on. Pilot admits only CSSV_MPT_PILOT_EMAILS (comma separated). */
+/**
+ * off | pilot | on. Live by default (owner decision D-48); the private config can
+ * still set 'off' (instant rollback) or 'pilot' (only CSSV_MPT_PILOT_EMAILS).
+ * An unrecognised value fails closed to 'off'.
+ */
 function mpt_flag_mode(): string
 {
-    $mode = strtolower((string)cssv_env('CSSV_MPT_APPLICATION_FLOW', 'off'));
+    $mode = strtolower((string)cssv_env('CSSV_MPT_APPLICATION_FLOW', 'on'));
     return in_array($mode, ['off', 'pilot', 'on'], true) ? $mode : 'off';
 }
 
@@ -179,7 +187,6 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
 {
     $manifest = mpt_paper_manifest();
     if ($manifest === null || empty($manifest['publishable'])) return false;
-    $used = $pdo->prepare('SELECT 1 FROM mpt_mock_questions WHERE question_id=? LIMIT 1');
     $refUsed = $pdo->prepare('SELECT 1 FROM mpt_mocks WHERE paper_ref=? LIMIT 1');
     foreach ($manifest['papers'] as $paper) {
         $ref = $manifest['series'] . ':' . $paper['index'];
@@ -187,21 +194,24 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
         if ($refUsed->fetchColumn()) continue;
         $questions = mpt_paper_questions((int)$paper['index']);
         if (!$questions || count($questions) !== (int)$paper['count']) continue;
-        $overlap = false;
-        foreach ($questions as $question) {
-            $used->execute([(string)$question['id']]);
-            if ($used->fetchColumn()) { $overlap = true; break; }
-        }
-        if ($overlap) continue;
-        $insert = $pdo->prepare('INSERT INTO mpt_mock_questions (mock_id,position,question_id,section,topic,difficulty,stem,options,correct_index,explanation) VALUES (?,?,?,?,?,?,?,?,?,?)');
-        foreach (array_values($questions) as $position => $question) {
-            $insert->execute([
-                $mock['id'], $position + 1, (string)$question['id'], (string)$question['section'],
-                isset($question['topic']) ? mb_substr((string)$question['topic'], 0, 191) : null,
-                isset($question['difficulty']) ? (string)$question['difficulty'] : null,
-                (string)$question['q'], json_encode(array_values($question['o']), JSON_UNESCAPED_UNICODE),
-                (int)$question['a'], isset($question['e']) ? (string)$question['e'] : null,
-            ]);
+        // One indexed query: does any of these questions already exist?
+        $ids = array_map(static fn($q) => (string)$q['id'], $questions);
+        $overlap = $pdo->prepare('SELECT 1 FROM mpt_mock_questions WHERE question_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') LIMIT 1');
+        $overlap->execute($ids);
+        if ($overlap->fetchColumn()) continue;
+        // Multi-row inserts, 50 questions per statement.
+        foreach (array_chunk(array_values($questions), 50, true) as $chunk) {
+            $values = [];
+            foreach ($chunk as $position => $question) {
+                array_push($values,
+                    $mock['id'], $position + 1, (string)$question['id'], (string)$question['section'],
+                    isset($question['topic']) ? mb_substr((string)$question['topic'], 0, 191) : null,
+                    isset($question['difficulty']) ? (string)$question['difficulty'] : null,
+                    (string)$question['q'], json_encode(array_values($question['o']), JSON_UNESCAPED_UNICODE),
+                    (int)$question['a'], isset($question['e']) ? (string)$question['e'] : null);
+            }
+            $pdo->prepare('INSERT INTO mpt_mock_questions (mock_id,position,question_id,section,topic,difficulty,stem,options,correct_index,explanation) VALUES ' . implode(',', array_fill(0, count($chunk), '(?,?,?,?,?,?,?,?,?,?)')))
+                ->execute($values);
         }
         $count = count($questions);
         $pdo->prepare('UPDATE mpt_mocks SET paper_ref=?,paper_series=?,paper_frozen_at=?,total_questions=?,total_marks=?*marks_per_question WHERE id=?')
@@ -276,8 +286,9 @@ function mpt_create_mock(PDO $pdo, array $spec): ?array
 }
 
 /** Ensures the next daily 15:00 / 22:30 PKT slots exist while papers remain. */
-function mpt_auto_schedule(PDO $pdo, int $nowMs): void
+function mpt_auto_schedule(PDO $pdo, int $nowMs, int $maxCreate = CSSV_MPT_SCHEDULE_PER_RUN): void
 {
+    $createdCount = 0;
     if (mpt_flag_mode() === 'off' || strtolower((string)cssv_env('CSSV_MPT_AUTO_SCHEDULE', 'on')) === 'off') return;
     $zone = new DateTimeZone(CSSV_MPT_PKT);
     $today = (new DateTimeImmutable('@' . intdiv($nowMs, 1000)))->setTimezone($zone)->setTime(0, 0);
@@ -286,8 +297,8 @@ function mpt_auto_schedule(PDO $pdo, int $nowMs): void
         foreach (CSSV_MPT_DAILY_SLOTS as $slot => $clock) {
             [$h, $m] = array_map('intval', explode(':', $clock));
             $open = (int)$today->modify("+$day day")->setTime($h, $m)->format('U') * 1000;
-            // Upcoming mocks for the next week are open for applications; an ongoing
-            // or past slot is never created.
+            // Every upcoming slot within the horizon is open for applications; an
+            // ongoing or past slot is never created.
             if ($open - $nowMs > CSSV_MPT_SCHEDULE_DAYS_AHEAD * 86400000 || $nowMs >= $open) continue;
             $key = 'daily-' . $today->modify("+$day day")->format('Y-m-d') . '-' . $slot;
             $exists->execute([$key]);
@@ -302,6 +313,7 @@ function mpt_auto_schedule(PDO $pdo, int $nowMs): void
                 mpt_meta_set($pdo, 'paper_runway_exhausted_at', mpt_db_time($nowMs));
                 return;
             }
+            if (++$createdCount >= $maxCreate) return;
         }
     }
 }
@@ -319,7 +331,7 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-mpt-maintain',0)")->fetchColumn() !== 1) return ['skipped' => true];
     try {
         mpt_meta_set($pdo, 'last_maintenance_at', mpt_db_time($now));
-        mpt_auto_schedule($pdo, $now);
+        mpt_auto_schedule($pdo, $now, $force ? 40 : CSSV_MPT_SCHEDULE_PER_RUN);
         return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0);
     } finally {
         $pdo->query("SELECT RELEASE_LOCK('cssvista-mpt-maintain')");
@@ -1123,7 +1135,7 @@ function mpt_review(PDO $pdo, array $session, mixed $code): array
 
 function mpt_relevant_mocks(PDO $pdo, int $nowMs): array
 {
-    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status IN ('PUBLISHED','CANCELLED') AND exam_end_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 20");
+    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status IN ('PUBLISHED','CANCELLED') AND exam_end_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 40");
     $stmt->execute([mpt_db_time($nowMs), mpt_db_time($nowMs + 86400000 * (CSSV_MPT_SCHEDULE_DAYS_AHEAD + 1))]);
     return $stmt->fetchAll();
 }

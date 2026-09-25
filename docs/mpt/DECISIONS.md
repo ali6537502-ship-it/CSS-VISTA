@@ -122,7 +122,7 @@ Raw database IDs never appear in URLs. Pattern routes get explicit `.htaccess` r
 The flag lives in private server config with values `off` (default), `pilot` or `on`.
 `pilot` admits only the accounts in `CSSV_MPT_PILOT_EMAILS`. That is how "enable for
 admins" works, because the owner admin is a separate login rather than a student account.
-`GET /api/mpt/config.php` exposes only `{enabled: bool}` for the current user. With the
+`GET /api/mpt/flow.php` exposes only `{enabled: bool}` for the current user. With the
 flag `off`, the site behaves exactly as today.
 
 ## Candidate identity & codes
@@ -409,3 +409,14 @@ Wherever a mock appears, its name is followed by "Afternoon MPT Mock · 3:00 PM 
 The sitting is derived from the start time in Pakistan: before 12:00 is Morning, before
 17:00 is Afternoon, later is Evening. An admin-created mock at another time is therefore
 named correctly too. Times show as "3:00 PM".
+
+**D-48 · Live for everyone by default, mocks always visible** — owner ("everyone should
+see the coming mock")
+- `CSSV_MPT_APPLICATION_FLOW` now defaults to `on`. The private config can still set
+  `off` (rollback) or `pilot`. D-10's staged rollout is superseded.
+- Automatic scheduling keeps the next **16 days** of 15:00 and 22:30 PKT mocks created,
+  so the next mock is always listed and open for applications. It runs until the audited
+  paper runway is used up (40 papers, about mid-October). New papers extend it.
+- A request-time maintenance run creates at most 3 mocks, so the first visitor after a
+  deploy never waits long. The cron sweeper creates up to 40 per run. Freezing a paper
+  uses one overlap query and multi-row inserts.

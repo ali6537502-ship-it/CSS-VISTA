@@ -31,10 +31,10 @@ const [A, B, C, D, E] = fixture('users', 5, 'mpt')
 // The service runs with CSSV_MPT_APPLICATION_FLOW=on here; off/pilot are covered by tests/mpt/flag.php.
 
 step('feature flag and authentication')
-assert.equal((await call(null, 'config.php')).data.enabled, true)
+assert.equal((await call(null, 'flow.php')).data.enabled, true)
 assert.equal((await call(null, 'dashboard.php')).status, 401)
 assert.equal((await call(null, 'apply.php', { mock: 'mpt-mock-001', declaration: true })).status, 401)
-assert.equal((await call(A, 'config.php')).data.enabled, true)
+assert.equal((await call(A, 'flow.php')).data.enabled, true)
 
 step('application window and atomic apply')
 const m1 = fixture('mock', 120)
@@ -356,6 +356,8 @@ assert.equal(afternoon.application_close_at.slice(0, 16), '2031-03-10 10:00', 'a
 assert.equal(afternoon.exam_end_at.slice(0, 16), '2031-03-10 13:20')
 assert.ok(afternoon.application_open_at <= afternoon.exam_open_at, 'applications are open straight away')
 assert.equal(afternoon.status, 'PUBLISHED')
-assert.ok(keys.every((key) => key >= 'daily-2031-03-10-1500' && key <= 'daily-2031-03-17-2230'), 'only upcoming slots, up to a week ahead')
+assert.ok(keys.every((key) => key >= 'daily-2031-03-10-1500' && key <= 'daily-2031-03-26-2230'), 'only upcoming slots, within the 16-day horizon')
+assert.ok(schedule.created <= 6, 'a few mocks per run, nearest first (two runs here)')
+assert.deepEqual(keys.slice(0, 2), ['daily-2031-03-10-1500', 'daily-2031-03-10-2230'], 'the next sitting is created first')
 
 console.log('MPT examination server rules verified.')

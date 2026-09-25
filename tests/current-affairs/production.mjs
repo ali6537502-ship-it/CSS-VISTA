@@ -68,4 +68,10 @@ for (const path of ['/api/admin/current-affairs.php','/api/current-affairs.php?v
   assert.match(response.headers.get('cache-control') || '', /no-store/)
 }
 for (const path of ['/api/_briefing_release/catalog.php','/api/_current_affairs.php','/api/_mpt_papers/manifest.php','/api/_mpt_papers/paper-001.php','/api/_mpt_core.php']) assert.ok([403,404].includes((await get(path)).status), 'Internal release material is accessible: ' + path)
+// The MPT flag endpoint must be reachable (an .htaccess <Files> rule once denied it).
+{
+  const response = await get('/api/mpt/flow.php')
+  assert.equal(response.status, 200, '/api/mpt/flow.php must be reachable on Hostinger')
+  assert.equal(typeof (await response.json()).enabled, 'boolean', '/api/mpt/flow.php must return the flag')
+}
 console.log(`PASS: exact deployment fingerprint ${expectedSha}, production routes, anonymous content protection, private response caching and backend readiness. Authenticated Current Affairs visibility must still be verified by the publishing workflow with an authorized account.`)
