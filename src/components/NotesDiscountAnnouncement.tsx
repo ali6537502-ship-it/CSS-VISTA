@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { BadgePercent, X } from 'lucide-react'
 import { Link } from 'react-router'
 import { isNotesDiscountActive, noteProducts, notesDiscountEndsAt } from '@/data/notes'
+import { isNotesBundleExclusiveWindow } from '@/data/notesBundleOffer'
 
 const DISCOUNT_SEEN_KEY = 'cssVistaNotesDiscountSeen:' + notesDiscountEndsAt
 const priceFormatter = new Intl.NumberFormat('en-PK')
@@ -35,6 +36,7 @@ export default function NotesDiscountAnnouncement() {
   const closeModal = useCallback(() => setOpen(false), [])
 
   useEffect(() => {
+    if (isNotesBundleExclusiveWindow()) return
     if (!isNotesDiscountActive() || readSessionFlag()) return
     const timer = window.setTimeout(() => {
       rememberPresentation()
@@ -80,7 +82,7 @@ export default function NotesDiscountAnnouncement() {
     }
   }, [closeModal, open])
 
-  if (!open || !isNotesDiscountActive()) return null
+  if (isNotesBundleExclusiveWindow() || !open || !isNotesDiscountActive()) return null
 
   return createPortal(
     <div
