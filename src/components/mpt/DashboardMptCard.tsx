@@ -6,6 +6,7 @@ import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { useServerClock } from '@/lib/mpt/useServerClock'
 import { MptHeroCard, pickCurrentCard } from './MptHeroCard'
 import { MptMenu } from './MptMenu'
+import { LiveMockBanner } from './LiveMockBanner'
 
 /**
  * The dashboard is the only notification channel (Section 1A #7): it shows the
@@ -29,6 +30,7 @@ export function DashboardMptCard() {
   const current = pickCurrentCard(data.cards)
   return (
     <div className="mt-8 space-y-2">
+      <LiveMockBanner cards={data.cards} />
       {current
         ? <MptHeroCard card={current} now={now} onBoundary={reload} />
         : <p className="rounded-2xl border border-dashed border-slate-300 p-5 text-sm text-slate-600">{copy.hub.noMocks}</p>}

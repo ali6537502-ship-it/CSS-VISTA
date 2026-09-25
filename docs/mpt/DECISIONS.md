@@ -436,3 +436,12 @@ still exist (D-48) but are not listed.
 - The application page's candidate block is now the **Roll Number Slip** and shows the
   photo from the student's own account (`/api/student/photo-view.php`, owner-only). The
   photo is printed with the slip. Without a photo it links to the profile to add one.
+
+**D-51 · A running mock is always visible** — owner ("where is the MPT mock being conducted?")
+- While a mock is running (start to end), every listing shows it to everyone. Students
+  who did not apply see a red **Live now** notice: when it started and ends, that only
+  applicants can take it, and that applicants enter with the Enter Exam button on their
+  dashboard. The next mock stays listed below it for applying.
+- The current-mock card shows three steps (apply, Roll Number, Enter Exam at the start
+  time), with the current step highlighted, so students know the exam is entered from
+  that same card.

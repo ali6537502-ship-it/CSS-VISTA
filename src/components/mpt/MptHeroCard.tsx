@@ -33,6 +33,29 @@ export function actionHref(card: MptCard) {
   }
 }
 
+const STEP_OF: Record<string, number> = { LOGIN_REQUIRED: 0, APPLICATIONS_OPEN: 0, ROLL_NUMBER_PENDING: 1, SLOT_RESERVED: 2 }
+
+/** Where the exam happens: the Enter Exam button appears on this same card at the start time. */
+function HowItWorks({ card }: { card: MptCard }) {
+  const current = STEP_OF[card.state.phase]
+  if (current === undefined) return null
+  const steps = [
+    'Apply now (free)',
+    'Your Roll Number appears here 10 minutes after you apply',
+    `At ${pktTime(card.mock.exam_open_at)} an Enter Exam button appears here. Type your Roll Number and the exam starts.`,
+  ]
+  return (
+    <ol className="mt-4 space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm" aria-label="How to take this MPT Mock">
+      {steps.map((text, index) => (
+        <li key={text} className={`flex items-start gap-2 ${index === current ? 'font-semibold text-slate-950' : index < current ? 'text-slate-500 line-through decoration-slate-300' : 'text-slate-700'}`}>
+          <span aria-hidden="true" className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${index <= current ? 'bg-emerald-900 text-white' : 'bg-slate-200 text-slate-700'}`}>{index + 1}</span>
+          <span>{index === current && <span className="sr-only">Current step: </span>}{text}</span>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
 export function MptHeroCard({ card, now, onBoundary }: { card: MptCard; now: number; onBoundary: () => void }) {
   const refresh = useCallback(() => onBoundary(), [onBoundary])
   useBoundary(card.state.next_transition_at, now, refresh)
@@ -68,6 +91,7 @@ export function MptHeroCard({ card, now, onBoundary }: { card: MptCard; now: num
       <div className="mt-1"><MockSlot mock={mock} withWindow /></div>
       <p className="mt-1 text-sm text-slate-600">{mock.duration_minutes} min · {mock.total_questions} MCQs · Free</p>
       <p className={`mt-3 text-base font-semibold ${ready ? 'text-emerald-950' : 'text-slate-800'}`}><span className="tabular-nums">{line}</span></p>
+      <HowItWorks card={card} />
       {href && state.primary_action && (
         <Link to={href} className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-900 px-5 text-base font-bold text-white hover:bg-emerald-950 sm:w-auto">
           {ACTION_LABEL[state.primary_action]}
