@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ArrowRight, Compass, Instagram, MessageCircle, PlayCircle, X, Youtube } from 'lucide-react'
 import { isNotesDiscountActive } from '@/data/notes'
+import { isNotesBundleExclusiveWindow, notesBundleOfferEndsAt } from '@/data/notesBundleOffer'
 
 const TUTORIAL_URL = 'https://youtu.be/RawGyL7BkEk?si=EiZ8EPo6oMKr-zW9'
 const TUTORIAL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/RawGyL7BkEk?autoplay=1&rel=0'
@@ -54,6 +55,11 @@ export default function TutorialAnnouncement() {
   }, [])
 
   useEffect(() => {
+    if (isNotesBundleExclusiveWindow()) {
+      const wait = Math.max(0, notesBundleOfferEndsAt - Date.now()) + 100
+      const timer = window.setTimeout(() => window.dispatchEvent(new Event('cssvista:exclusive-offer-ended')), wait)
+      return () => window.clearTimeout(timer)
+    }
     if (isNotesDiscountActive()) return
     if (readStorage(window.localStorage, TUTORIAL_SEEN_KEY)) return
     if (readStorage(window.sessionStorage, TUTORIAL_DISMISSED_KEY)) return
@@ -124,6 +130,8 @@ export default function TutorialAnnouncement() {
       window.requestAnimationFrame(() => focusTarget?.focus())
     }
   }, [closeModal, mode])
+
+  if (isNotesBundleExclusiveWindow()) return null
 
   const modal = mode === 'closed' ? null : createPortal(
     <div
