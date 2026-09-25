@@ -538,7 +538,7 @@ export default function GrammarCourse() {
               </article>
 
               <article className="rounded-xl border bg-white p-5 sm:p-7">
-                <StepHeading step={1} icon={Lightbulb} title="Learn the rules" hint="Plain language first, then the points you can apply while writing." />
+                <StepHeading step={1} icon={Lightbulb} title="Learn the rules" hint="Plain language first, then the points you can apply while writing. Every rule includes sentence examples immediately below it." />
                 <div className="mt-5 space-y-5">
                   {lesson.rules.map((rule, ruleIndex) => (
                     <div key={rule.heading} className="rounded-xl border p-4 sm:p-5">
@@ -576,13 +576,23 @@ export default function GrammarCourse() {
                         </div>
                       )}
                       {rule.models.length > 0 && (
-                        <div className="mt-4 space-y-2">
-                          {rule.models.map((model) => (
-                            <div key={model.sentence} className="rounded-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-3 py-2.5">
-                              <p className="text-sm font-semibold leading-7 text-emerald-950">{model.sentence}</p>
-                              <p className="mt-0.5 text-xs leading-6 text-emerald-900">{model.note}</p>
-                            </div>
-                          ))}
+                        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3.5 sm:p-4">
+                          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-800">
+                            Examples for this rule
+                          </p>
+                          <div className="mt-2.5 space-y-2.5">
+                            {rule.models.map((model, modelIndex) => (
+                              <div key={model.sentence} className="rounded-lg border bg-white px-3.5 py-3">
+                                <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                                  Example {modelIndex + 1}
+                                </p>
+                                <p className="mt-1 text-sm font-semibold leading-7 text-emerald-950">{model.sentence}</p>
+                                <p className="mt-1 text-xs leading-6 text-emerald-900">
+                                  <span className="font-semibold">Why it works: </span>{model.note}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
                     </div>
