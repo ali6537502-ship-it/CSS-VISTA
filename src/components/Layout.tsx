@@ -23,6 +23,8 @@ import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { shouldShowCss2026ResultAnnouncement } from '@/lib/resultAnnouncement'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { useMptSpotlight } from '@/lib/mpt/useMptSpotlight'
+import { spotlightMessage } from '@/components/mpt/MptMockStrip'
 import {
   getRouteScrollPosition,
   parseRouteScrollState,
@@ -269,6 +271,7 @@ function NotificationBar() {
   const streakDayRef = useRef(scheduleTime.toDateString())
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mptApplicationFlow = useMptFlowEnabled() === true
+  const mptSpotlight = useMptSpotlight()
   const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
     const status = getDailyMockStatus(kind, scheduleTime)
     return {
@@ -286,10 +289,14 @@ function NotificationBar() {
   // With the application flow on, official MPT mocks are entered only through an
   // application and Roll Number (docs/mpt), so the free-entry notices give way.
   if (mptApplicationFlow) {
+    // D-52: name the actual mock (live now, yours, or next) wherever the site shows notices.
+    const message = mptSpotlight ? spotlightMessage(mptSpotlight, Boolean(user)) : null
     mockNotices.unshift({
-      id: 'mpt-application-flow', kind: 'platform' as const,
-      text: 'CSS MPT Mocks · daily at 3:00 PM and 10:30 PM PKT · apply in My CSS Vista to receive your Roll Number',
-      link: '/account/mpt', expires: undefined,
+      id: message ? `mpt-${mptSpotlight?.kind}-${mptSpotlight?.card.mock.slug}` : 'mpt-application-flow', kind: 'platform' as const,
+      text: message
+        ? `${message.live ? 'LIVE NOW · ' : ''}${message.label}: ${message.text}`
+        : 'CSS MPT Mocks · daily at 3:00 PM and 10:30 PM PKT · apply in My CSS Vista to receive your Roll Number',
+      link: message?.to ?? '/account/mpt', expires: undefined,
     })
   }
   const active = [

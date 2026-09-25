@@ -12,6 +12,7 @@ import { matchesMptBankTopic, mptQuestionBanks } from '@/data/mptQuestionBanks'
 import { diversifyQuestions } from '@/lib/questionDiversity'
 import { recordActivity } from '@/lib/progress'
 import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
+import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 
 export default function MPTQuestionBank() {
   const { bankId = '' } = useParams()
@@ -103,6 +104,7 @@ export default function MPTQuestionBank() {
           : 'Open the full, searchable source question bank. Similar templates are spaced apart for clearer study.'}
       />
       <main className="mx-auto max-w-5xl px-4 py-6">
+        <MptMockStrip className="mb-6" />
         {questions === null && (
           <div className="grid place-items-center py-20" aria-live="polite">
             <Loader2 className="h-7 w-7 animate-spin text-pine" />

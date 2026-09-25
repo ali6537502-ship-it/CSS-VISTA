@@ -359,6 +359,13 @@ const mine = upcomingOf((await call(E, 'mocks.php')).data.mocks).map((card) => c
 assert.deepEqual(mine, [soon.data.mock.slug, later.data.mock.slug], 'an applicant still sees the mock they applied to')
 const dashE = upcomingOf((await call(E, 'dashboard.php')).data.cards).map((card) => card.mock.slug)
 assert.deepEqual(dashE, [soon.data.mock.slug, later.data.mock.slug])
+fixture('travel', soon.data.mock.slug, 100) // started 10 minutes ago
+const duringExam = (await call(null, 'mocks.php')).data.mocks
+const liveCard = duringExam.find((card) => card.mock.slug === soon.data.mock.slug)
+assert.ok(liveCard, 'a running mock stays listed for everyone, so the exam is never invisible')
+assert.equal(liveCard.state.exam_in_progress, true)
+assert.equal(liveCard.state.phase, 'APPLICATIONS_CLOSED', 'non-applicants see it running but cannot enter')
+assert.equal(upcomingOf(duringExam).length, 1, 'and the next mock is still the only upcoming one')
 
 step('daily schedule: 15:00 and 22:30 PKT, created idempotently')
 const schedule = fixture('autoschedule', '2031-03-10T09:30:00.000Z') // 14:30 PKT

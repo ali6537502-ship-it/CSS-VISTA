@@ -1139,6 +1139,8 @@ function mpt_review(PDO $pdo, array $session, mixed $code): array
  * D-49: students see one upcoming mock, the next to start, plus every mock they have
  * already applied to that has not finished (so an applicant can still enter a running
  * mock). Later mocks exist and keep their papers, but are not listed.
+ * D-51: a mock that is running now is listed for everyone, so the site always shows
+ * where the exam is being held, even to students who did not apply for it.
  */
 function mpt_relevant_mocks(PDO $pdo, int $nowMs, ?string $userId = null): array
 {
@@ -1147,6 +1149,9 @@ function mpt_relevant_mocks(PDO $pdo, int $nowMs, ?string $userId = null): array
     $next->execute([$now, $now]);
     $mocks = [];
     foreach ($next->fetchAll() as $mock) $mocks[(string)$mock['id']] = $mock;
+    $live = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status='PUBLISHED' AND exam_open_at<=? AND exam_end_at>? ORDER BY exam_open_at LIMIT 2");
+    $live->execute([$now, $now]);
+    foreach ($live->fetchAll() as $mock) $mocks[(string)$mock['id']] = $mock;
     if ($userId !== null) {
         $mine = $pdo->prepare("SELECT m.* FROM mpt_mocks m JOIN mpt_applications a ON a.mock_id=m.id WHERE a.user_id=? AND m.status IN ('PUBLISHED','CANCELLED') AND m.exam_end_at>? ORDER BY m.exam_open_at LIMIT 40");
         $mine->execute([$userId, $now]);

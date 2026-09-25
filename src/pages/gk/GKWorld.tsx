@@ -13,6 +13,7 @@ import { bankIndexNow, getBankIndex, type BankIndex } from '@/data/mcq'
 import { getMistakes, getRevisionStats, savedMcqIds } from '@/lib/progress'
 import { mergedCategoryOverrides } from '@/lib/admin'
 import { DAILY_MOCK_TIME_LABELS, getMockAvailability } from '@/lib/store'
+import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 
 const catIcons: Record<string, LucideIcon> = {
   'world-geography': Globe, 'pakistan-geography': MapPin, mountains: Mountain, rivers: Waves,
@@ -103,6 +104,7 @@ export default function GKWorld() {
           : 'One organised home for rapid one-liner revision and the complete General Knowledge MCQ library.'}
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
+        <MptMockStrip className="mb-6" />
         {!showMcqLibrary ? (
         <section aria-labelledby="choose-gk-path">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">General Knowledge library</p>

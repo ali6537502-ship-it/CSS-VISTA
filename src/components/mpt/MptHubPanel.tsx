@@ -6,6 +6,7 @@ import { useAccount } from '@/lib/accountContext'
 import { actionHref } from './MptHeroCard'
 import { StatusBadge } from './StatusBadge'
 import { MockSlot } from './MockSlot'
+import { LiveMockBanner, isLiveForOthers } from './LiveMockBanner'
 
 /** Public MPT page panel: real mock cards with one state-driven CTA each (Section 11). */
 export function MptHubPanel() {
@@ -33,10 +34,11 @@ export function MptHubPanel() {
       )}
       <p className="mt-2 text-sm text-slate-500">{copy.hub.free}</p>
 
+      {cards && <div className="mt-5 space-y-3"><LiveMockBanner cards={cards} /></div>}
       <div className="mt-5 grid gap-3 md:grid-cols-2">
         {cards === null && [0, 1].map((key) => <div key={key} className="h-32 animate-pulse rounded-xl bg-slate-100" />)}
-        {cards?.length === 0 && <p className="text-sm text-slate-600">{copy.hub.noMocks}</p>}
-        {cards?.slice(0, 4).map((card) => {
+        {cards?.filter((card) => !isLiveForOthers(card)).length === 0 && <p className="text-sm text-slate-600">{copy.hub.noMocks}</p>}
+        {cards?.filter((card) => !isLiveForOthers(card)).slice(0, 4).map((card) => {
           const href = actionHref(card)
           const loginNeeded = card.state.primary_action === 'login'
           return (

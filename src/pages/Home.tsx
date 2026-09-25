@@ -16,6 +16,8 @@ import { scheduleIdleWork } from '@/lib/idle'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
 import { useAccount } from '@/lib/accountContext'
+import { MptMockStrip } from '@/components/mpt/MptMockStrip'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 
 interface LinkCard {
   title: string
@@ -398,6 +400,8 @@ function ExamCountdown({ active = true }: { active?: boolean }) {
 
 function DailyGrandMockCard({ active = true }: { active?: boolean }) {
   const [now, setNow] = useState(Date.now)
+  // With the MPT application flow on, MPT mocks are shown by MptMockStrip (D-52), as in the site notice bar.
+  const mptApplicationFlow = useMptFlowEnabled() === true
 
   useEffect(() => {
     if (!active) return undefined
@@ -413,7 +417,7 @@ function DailyGrandMockCard({ active = true }: { active?: boolean }) {
         <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
       </div>
       <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
-        {(['mpt-afternoon', 'gk', 'mpt'] as const).map((kind) => {
+        {(['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
           const schedule = getDailyMockStatus(kind, new Date(now))
           const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
           const remaining = remainingTime(target, now)
@@ -458,6 +462,7 @@ function TimerHub({ open, onToggle }: { open: boolean; onToggle: () => void }) {
         </div>
         <VisibilityToggle open={open} onToggle={onToggle} label="all preparation timers" />
       </div>
+      <MptMockStrip className="mt-2" />
       <AnimatedCollapse open={open}>
         <div className="mt-2 grid items-start gap-2 md:grid-cols-[minmax(190px,0.62fr)_minmax(0,1.38fr)] lg:grid-cols-[minmax(210px,0.55fr)_minmax(0,1.45fr)]">
           <DailyGrandMockCard active={open} />

@@ -436,3 +436,23 @@ still exist (D-48) but are not listed.
 - The application page's candidate block is now the **Roll Number Slip** and shows the
   photo from the student's own account (`/api/student/photo-view.php`, owner-only). The
   photo is printed with the slip. Without a photo it links to the profile to add one.
+
+**D-51 · A running mock is always visible** — owner ("where is the MPT mock being conducted?")
+- While a mock is running (start to end), every listing shows it to everyone. Students
+  who did not apply see a red **Live now** notice: when it started and ends, that only
+  applicants can take it, and that applicants enter with the Enter Exam button on their
+  dashboard. The next mock stays listed below it for applying.
+- The current-mock card shows three steps (apply, Roll Number, Enter Exam at the start
+  time), with the current step highlighted, so students know the exam is entered from
+  that same card.
+
+**D-52 · The MPT Mock is named wherever the MPT is** — owner ("everywhere MPT is mentioned")
+- One shared lookup (`useMptSpotlight`, one request a minute while the tab is visible)
+  picks the mock to point at: the viewer's own mock when it is live, else a mock being
+  held now, else the viewer's reserved mock, else the next mock.
+- It appears in the site-wide notice bar on every page, and as a compact strip on the home
+  page timers, MPT question banks, Start CSS and GK World. The MPT page itself has the
+  full MPT panel with the same live notice. The strip
+  renders nothing until the server answers, so prerendered HTML is unchanged.
+- With the flow on, the home page's legacy free-start MPT windows give way to the strip,
+  as the notice bar already did.
