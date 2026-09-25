@@ -137,7 +137,7 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   await noHorizontalScroll(page, `${label} result`)
   await page.screenshot({ path: `${shots}/${label}-07-result-card.png`, fullPage: true })
   await page.goto(`${origin}/account/mpt/mistakes`)
-  await page.getByRole('heading', { name: 'My Wrong Answers' }).waitFor()
+  await page.getByRole('heading', { name: 'My Wrong MCQs' }).waitFor()
   await page.waitForLoadState('networkidle')
   await noHorizontalScroll(page, `${label} mistakes`)
   await page.screenshot({ path: `${shots}/${label}-07b-wrong-answers.png`, fullPage: true })

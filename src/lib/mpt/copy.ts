@@ -179,7 +179,7 @@ export const copy = {
     viewAll: 'View All History',
     viewPerformance: 'View Full Performance',
     viewResult: 'View Result Card',
-    mistakesTitle: 'My Wrong Answers',
+    mistakesTitle: 'My Wrong MCQs',
     mistakesIntro: 'Every question you answered incorrectly in your completed MPT Mocks, with the correct answer, so you can work on it.',
     mistakesEmpty: 'Your wrong answers appear here once a completed mock’s results are out (30 minutes after it ends).',
     mistakesLink: (n: number) => `${n} wrong answer${n === 1 ? '' : 's'} to review`,

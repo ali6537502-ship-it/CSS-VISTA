@@ -427,3 +427,12 @@ one to start. A student also keeps seeing every mock they have applied to until 
 ends, so an applicant can still enter a running mock and see its status. When a mock
 starts, the following one takes its place for new applications. Mocks further ahead
 still exist (D-48) but are not listed.
+
+**D-50 · Separate MPT options, and the photo on the Roll Number slip** — owner
+- The dashboard MPT card, My CSS Vista MPT area, history, wrong-MCQ and performance pages
+  share one options row: MPT Mocks, My Applications, My Results, My Wrong MCQs, My
+  Performance. Each opens its own page. My Results is the history filtered to completed
+  mocks (`/account/mpt/history?status=completed`), so no new route was needed.
+- The application page's candidate block is now the **Roll Number Slip** and shows the
+  photo from the student's own account (`/api/student/photo-view.php`, owner-only). The
+  photo is printed with the slip. Without a photo it links to the profile to add one.

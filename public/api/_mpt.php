@@ -458,7 +458,7 @@ function mpt_state(PDO $pdo, array $mock, ?array $application, ?array $attempt, 
 
 function mpt_candidate_profile(PDO $pdo, array $session, bool $create = false): array
 {
-    $profile = $pdo->prepare('SELECT display_name,phone,whatsapp FROM student_profiles WHERE user_id=?');
+    $profile = $pdo->prepare('SELECT display_name,phone,whatsapp,profile_photo_path,profile_photo_bytes FROM student_profiles WHERE user_id=?');
     $profile->execute([$session['user_id']]);
     $row = $profile->fetch() ?: [];
     $code = $pdo->prepare('SELECT candidate_code FROM mpt_candidates WHERE user_id=?');
@@ -478,6 +478,8 @@ function mpt_candidate_profile(PDO $pdo, array $session, bool $create = false): 
         'email' => (string)$session['email'],
         'mobile' => ($row['phone'] ?? '') !== '' ? (string)$row['phone'] : (($row['whatsapp'] ?? '') !== '' ? (string)$row['whatsapp'] : null),
         'candidate_code' => $candidateCode,
+        // The account photo is shown on the Roll Number slip, from /api/student/photo-view.php.
+        'has_photo' => ($row['profile_photo_path'] ?? '') !== '' && (int)($row['profile_photo_bytes'] ?? 0) > 0,
     ];
 }
 

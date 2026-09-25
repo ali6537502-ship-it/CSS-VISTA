@@ -32,6 +32,19 @@ function RevealCountdown({ appliedAt, visibleAt, now }: { appliedAt: string; vis
   )
 }
 
+/** The photo from the student's own account, as on an admit card. */
+function CandidatePhoto({ show, name }: { show: boolean; name: string }) {
+  const [failed, setFailed] = useState(false)
+  if (!show || failed) {
+    return (
+      <div className="flex h-36 w-28 shrink-0 items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 p-2 text-center text-xs text-slate-500">
+        <span>No photo. <Link to="/account/settings" className="font-semibold text-emerald-800 underline print:no-underline">Add one in your profile</Link></span>
+      </div>
+    )
+  }
+  return <img src="/api/student/photo-view.php" alt={`Photo of ${name}`} onError={() => setFailed(true)} className="h-36 w-28 shrink-0 rounded-lg border border-slate-300 object-cover" />
+}
+
 function ApplicationScreen({ code }: { code: string }) {
   const [params] = useSearchParams()
   const isNew = params.get('new') === '1'
@@ -120,7 +133,10 @@ function ApplicationScreen({ code }: { code: string }) {
       {application.status === 'WITHDRAWN' && <p className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">You withdrew this application. {state.phase === 'APPLICATIONS_OPEN' && <Link className="font-semibold text-emerald-800 underline" to={`/account/mpt/apply/${mock.slug}`}>Apply again</Link>}</p>}
 
       <section aria-labelledby="candidate-heading">
-        <h3 id="candidate-heading" className="mb-2 text-sm font-semibold uppercase tracking-[.14em] text-slate-500">Candidate</h3>
+        <h3 id="candidate-heading" className="mb-2 text-sm font-semibold uppercase tracking-[.14em] text-slate-500">Roll Number Slip</h3>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <CandidatePhoto show={Boolean(candidate.has_photo)} name={candidate.name} />
+          <div className="min-w-0 flex-1">
         <DetailList rows={[
           ['Name', candidate.name],
           ...(candidate.candidate_code ? [['Candidate ID', candidate.candidate_code] as [string, string]] : []),
@@ -128,6 +144,8 @@ function ApplicationScreen({ code }: { code: string }) {
           ['Application ID', <span className="font-mono">{application.application_code}</span>],
           ['Status', state.phase === 'ROLL_NUMBER_PENDING' || state.phase === 'SLOT_RESERVED' ? copy.confirmation.statusReserved : state.phase.replace(/_/g, ' ')],
         ]} />
+          </div>
+        </div>
       </section>
 
       <section aria-labelledby="exam-heading">
@@ -138,7 +156,7 @@ function ApplicationScreen({ code }: { code: string }) {
       <section className="rounded-2xl border border-slate-200 p-4 text-sm leading-6 text-slate-700">
         <h3 className="font-semibold text-slate-900">Instructions</h3>
         <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>Open My CSS Vista at exam time and press <strong>Enter Exam</strong>. Type your 6-digit Roll Number to verify.</li>
+          <li>Open My CSS Vista at exam time and press <strong>Enter Exam</strong>. Type your Roll Number to verify.</li>
           <li>The exam starts at {pktTime(mock.exam_open_at)} and ends for everyone at {pktTime(mock.exam_end_at)}. Starting late (until {pktTime(mock.entry_close_at)}) leaves only the time remaining.</li>
           <li>Your result card is available 30 minutes after the exam ends, on your dashboard.</li>
           <li>Your answers save automatically. A refresh or lost connection never costs you the attempt.</li>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { MptMenu } from '@/components/mpt/MptMenu'
 import { mptApi } from '@/lib/mpt/api'
 import { copy } from '@/lib/mpt/copy'
 import { AccountPage, SectionTitle } from '@/pages/account/shared'
@@ -59,6 +60,7 @@ function Performance() {
 export default function MptPerformance() {
   return (
     <AccountPage title="My MPT Performance" intro="Calculated only from your completed, server-scored MPT Mocks.">
+      <div className="mb-6"><MptMenu current="/account/mpt/performance" /></div>
       <MptGate><Performance /></MptGate>
     </AccountPage>
   )

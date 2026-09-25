@@ -5,6 +5,7 @@ import { copy } from '@/lib/mpt/copy'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { useServerClock } from '@/lib/mpt/useServerClock'
 import { MptHeroCard, pickCurrentCard } from './MptHeroCard'
+import { MptMenu } from './MptMenu'
 
 /**
  * The dashboard is the only notification channel (Section 1A #7): it shows the
@@ -31,11 +32,12 @@ export function DashboardMptCard() {
       {current
         ? <MptHeroCard card={current} now={now} onBoundary={reload} />
         : <p className="rounded-2xl border border-dashed border-slate-300 p-5 text-sm text-slate-600">{copy.hub.noMocks}</p>}
-      <div className="flex flex-wrap gap-x-4 text-sm font-semibold">
-        <Link to="/account/mpt" className="inline-flex min-h-11 items-center text-emerald-800 underline-offset-4 hover:underline">My MPT Mocks</Link>
-        {data.latest && <Link to={`/account/mpt/results/${data.latest.application_code}`} className="inline-flex min-h-11 items-center text-emerald-800 underline-offset-4 hover:underline">{copy.dashboard.viewResult}: {data.latest.result.score} / {data.latest.result.total_marks}</Link>}
-        {data.latest && <Link to="/account/mpt/mistakes" className="inline-flex min-h-11 items-center text-emerald-800 underline-offset-4 hover:underline">{copy.dashboard.mistakesTitle}</Link>}
-      </div>
+      {data.latest && (
+        <Link to={`/account/mpt/results/${data.latest.application_code}`} className="inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline-offset-4 hover:underline">
+          {copy.dashboard.viewResult}: {data.latest.result.score} / {data.latest.result.total_marks}
+        </Link>
+      )}
+      <MptMenu />
     </div>
   )
 }
