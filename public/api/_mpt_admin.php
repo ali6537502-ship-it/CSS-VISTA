@@ -68,6 +68,7 @@ function mpt_admin_mock_stats(PDO $pdo, array $mock): array
         'started' => $started,
         'in_progress' => $inProgress,
         'completed' => $completed,
+        'appeared' => $started,
         'absent' => $entryClosed ? max(0, $applications - $started) : null,
         'average_score' => $average === null ? null : round((float)$average, 2),
         'completion_rate' => $applications > 0 && $entryClosed ? round($completed / $applications * 100, 1) : null,
@@ -84,6 +85,7 @@ function mpt_admin_mock_row(PDO $pdo, array $mock, bool $withStats = true): arra
         'capacity' => $session && $session['capacity'] !== null ? (int)$session['capacity'] : null,
         'reserved_count' => $session ? (int)$session['reserved_count'] : 0,
         'rank_min_candidates' => (int)$mock['rank_min_candidates'],
+        'results_delay_minutes' => (int)$mock['results_delay_minutes'],
         'scoring_version' => (int)$mock['scoring_version'],
         'paper_ref' => $mock['paper_ref'],
         'ranks_computed_at' => mpt_iso(mpt_ms($mock['ranks_computed_at'])),
@@ -104,10 +106,13 @@ function mpt_admin_overview(PDO $pdo): array
     ] + mpt_server_clock();
 }
 
-function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page, int $perPage = 50): array
+function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page, int $perPage = 50, ?string $appeared = null): array
 {
     $where = 'a.mock_id=?';
     $params = [$mock['id']];
+    // Appeared = started an attempt that was not voided.
+    if ($appeared === 'yes') $where .= " AND EXISTS (SELECT 1 FROM mpt_attempts t WHERE t.application_id=a.id AND t.status<>'VOIDED')";
+    if ($appeared === 'no') $where .= " AND a.status='ACTIVE' AND NOT EXISTS (SELECT 1 FROM mpt_attempts t WHERE t.application_id=a.id AND t.status<>'VOIDED')";
     if ($search !== '') {
         $where .= ' AND (a.roll_number=? OR a.application_code=? OR u.email LIKE ? OR p.display_name LIKE ?)';
         $like = '%' . addcslashes($search, '%_\\') . '%';
@@ -133,6 +138,7 @@ function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page
             'status' => $row['status'],
             'attempt_allowance' => (int)$row['attempt_allowance'],
             'phase' => $state['phase'],
+            'appeared' => $attempt !== null && $attempt['status'] !== 'VOIDED',
             'score' => $attempt && in_array($attempt['status'], ['SUBMITTED', 'AUTO_SUBMITTED'], true) ? (float)$attempt['score'] : null,
         ];
     }
@@ -168,11 +174,11 @@ function mpt_admin_csv(array $rows): never
     header('Content-Type: text/csv; charset=UTF-8');
     header('Content-Disposition: attachment; filename="mpt-applications.csv"');
     $out = fopen('php://output', 'wb');
-    fputcsv($out, ['Candidate', 'Email', 'Candidate ID', 'Roll Number', 'Application ID', 'Applied at (UTC)', 'Application status', 'State', 'Score'], ',', '"', '\\');
+    fputcsv($out, ['Candidate', 'Email', 'Candidate ID', 'Roll Number', 'Application ID', 'Applied at (UTC)', 'Application status', 'Appeared', 'State', 'Score'], ',', '"', '\\');
     foreach ($rows as $row) {
         // Neutralise spreadsheet formulas in candidate-supplied text.
         $safe = static fn($v) => is_string($v) && preg_match('/^[=+\-@\t\r]/', $v) ? "'" . $v : $v;
-        fputcsv($out, array_map($safe, [$row['candidate'], $row['email'], $row['candidate_code'], $row['roll_number'], $row['application_code'], $row['applied_at'], $row['status'], $row['phase'], $row['score']]), ',', '"', '\\');
+        fputcsv($out, array_map($safe, [$row['candidate'], $row['email'], $row['candidate_code'], $row['roll_number'], $row['application_code'], $row['applied_at'], $row['status'], $row['appeared'] ? 'Yes' : 'No', $row['phase'], $row['score']]), ',', '"', '\\');
     }
     fclose($out);
     exit;
@@ -199,13 +205,15 @@ function mpt_admin_create(PDO $pdo, array $body): array
 {
     $open = mpt_admin_time($body['exam_open_at'] ?? null, 'exam start time');
     if ($open <= mpt_now_ms()) cssv_fail('The exam must start in the future.', 422, 'invalid_time');
-    $applicationOpen = isset($body['application_open_at']) && $body['application_open_at'] !== '' ? mpt_admin_time($body['application_open_at'], 'application opening time') : $open - 86400000;
+    // Default: applications open immediately and close when the exam starts.
+    $applicationOpen = isset($body['application_open_at']) && $body['application_open_at'] !== '' ? mpt_admin_time($body['application_open_at'], 'application opening time') : mpt_now_ms();
     if ($applicationOpen >= $open) cssv_fail('Applications must open before the exam starts.', 422, 'invalid_time');
     $mock = mpt_create_mock($pdo, [
         'exam_open_ms' => $open,
         'application_open_ms' => $applicationOpen,
         'duration_minutes' => mpt_admin_int($body, 'duration_minutes', 10, 600, 200),
-        'close_offset_minutes' => mpt_admin_int($body, 'close_offset_minutes', 0, 120, 10),
+        'close_offset_minutes' => mpt_admin_int($body, 'close_offset_minutes', 0, 120, 0),
+        'entry_close_offset_minutes' => mpt_admin_int($body, 'entry_close_offset_minutes', 0, 120, 10),
         'roll_issue_delay_minutes' => mpt_admin_int($body, 'roll_issue_delay_minutes', 0, 120, 10),
         'capacity' => mpt_admin_int($body, 'capacity', 1, 1000000),
         'title' => isset($body['title']) && trim((string)$body['title']) !== '' ? native_text($body['title'], 160) : null,
@@ -254,6 +262,7 @@ function mpt_admin_update(PDO $pdo, array $body): array
         $negative = array_key_exists('negative_marking', $body) ? (float)$body['negative_marking'] : (float)$mock['negative_marking'];
         if ($negative < 0 || $negative > 1) { $pdo->rollBack(); cssv_fail('Negative marking must be 0–1.', 422, 'invalid_field'); }
         if ($negative !== (float)$mock['negative_marking'] && $now >= $cur('exam_open_at')) { $pdo->rollBack(); cssv_fail('Negative marking can only change before the exam opens. Use rescore for key corrections.', 409, 'scoring_locked'); }
+        $pdo->prepare('UPDATE mpt_mocks SET results_delay_minutes=? WHERE id=?')->execute([mpt_admin_int($body, 'results_delay_minutes', 0, 1440, (int)$mock['results_delay_minutes']), $mock['id']]);
         $pdo->prepare('UPDATE mpt_mocks SET application_open_at=?,application_close_at=?,exam_open_at=?,entry_close_at=?,exam_end_at=?,duration_minutes=?,roll_issue_delay_minutes=?,results_release_policy=?,answer_review_policy=?,pass_percentage=?,negative_marking=?,rank_min_candidates=?,title=? WHERE id=?')
             ->execute([
                 mpt_db_time($next['application_open_at']), mpt_db_time($next['application_close_at']), mpt_db_time($next['exam_open_at']),

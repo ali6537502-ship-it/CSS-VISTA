@@ -10,6 +10,7 @@ require_once __DIR__ . '/_mpt_schema.php';
 const CSSV_MPT_PAPER_DIR = __DIR__ . '/_mpt_papers';
 const CSSV_MPT_DAILY_SLOTS = ['1500' => '15:00', '2230' => '22:30'];
 const CSSV_MPT_PKT = 'Asia/Karachi';
+const CSSV_MPT_SCHEDULE_DAYS_AHEAD = 7;
 
 function mpt_now_ms(): int
 {
@@ -70,18 +71,33 @@ function mpt_require_enabled(?array $session): void
 /** Standard bootstrap for a candidate endpoint. */
 function mpt_candidate_request(string ...$methods): array
 {
+    return mpt_request($methods, false);
+}
+
+/**
+ * Autosave/resume run every few seconds for every candidate during an exam, so
+ * they skip the profile re-check (the attempt was gated when it started) and the
+ * maintenance hook. Ownership, session, CSRF and the device lock still apply.
+ */
+function mpt_hot_request(string ...$methods): array
+{
+    return mpt_request($methods, true);
+}
+
+function mpt_request(array $methods, bool $hot): array
+{
     cssv_require_method(...$methods);
     header('Cache-Control: no-store, private, max-age=0');
     header('X-Robots-Tag: noindex, nofollow');
     $pdo = cssv_db();
-    $session = cssv_require_user($pdo);
+    $session = cssv_require_user($pdo, !$hot);
     mpt_require_enabled($session);
     if (!in_array(strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET')), ['GET', 'HEAD'], true)) {
         account_require_json_origin();
         cssv_require_csrf($session);
     }
     mpt_ensure_schema($pdo);
-    mpt_maintain($pdo);
+    if (!$hot) mpt_maintain($pdo);
     return [$pdo, $session];
 }
 
@@ -100,19 +116,36 @@ function mpt_event(PDO $pdo, string $type, ?string $userId, ?string $mockId = nu
         ]);
 }
 
-/** Per-account limit (D-20): a shared academy NAT must not lock out a whole room. */
-function mpt_rate_limit(PDO $pdo, string $eventType, string $userId, int $max, int $windowSeconds, string $message): void
+// Rate limits (D-20) live in their own indexed table (subject, bucket, time), so a
+// check is one index range scan however busy the site is. Per account, because a
+// shared academy NAT must not lock out a whole room; one loose per-IP flood guard.
+function mpt_rate_subject(string $kind, string $value): string
 {
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM login_security_events WHERE event_type=? AND user_id=? AND occurred_at>=?');
-    $stmt->execute([$eventType, $userId, gmdate('Y-m-d H:i:s', time() - $windowSeconds)]);
+    return hash('sha256', $kind . '|' . $value);
+}
+
+function mpt_rate_limit(PDO $pdo, string $bucket, string $userId, int $max, int $windowSeconds, string $message): void
+{
+    mpt_rate_check($pdo, mpt_rate_subject('u', $userId), $bucket, $max, $windowSeconds, $message);
+}
+
+function mpt_rate_check(PDO $pdo, string $subject, string $bucket, int $max, int $windowSeconds, string $message): void
+{
+    $stmt = $pdo->prepare('SELECT COUNT(*) FROM mpt_rate_hits WHERE subject_key=? AND bucket=? AND hit_at>=?');
+    $stmt->execute([$subject, $bucket, mpt_db_time(mpt_now_ms() - $windowSeconds * 1000)]);
     if ((int)$stmt->fetchColumn() >= $max) cssv_fail($message, 429, 'rate_limited');
 }
 
-function mpt_ip_flood_guard(PDO $pdo, string $eventType, int $max, int $windowSeconds): void
+function mpt_rate_hit(PDO $pdo, string $bucket, string $userId): void
 {
-    $stmt = $pdo->prepare('SELECT COUNT(*) FROM login_security_events WHERE event_type=? AND ip_prefix_hash=? AND occurred_at>=?');
-    $stmt->execute([$eventType, cssv_hash_secret(cssv_ip_prefix()), gmdate('Y-m-d H:i:s', time() - $windowSeconds)]);
-    if ((int)$stmt->fetchColumn() >= $max) cssv_fail('Too many requests. Please try again in a minute.', 429, 'rate_limited');
+    $pdo->prepare('INSERT INTO mpt_rate_hits (subject_key,bucket,hit_at) VALUES (?,?,?)')->execute([mpt_rate_subject('u', $userId), $bucket, mpt_db_time(mpt_now_ms())]);
+}
+
+function mpt_ip_flood_guard(PDO $pdo, string $bucket, int $max, int $windowSeconds): void
+{
+    $subject = mpt_rate_subject('ip', cssv_ip_prefix());
+    mpt_rate_check($pdo, $subject, $bucket, $max, $windowSeconds, 'Too many requests from this network. Please try again in a minute.');
+    $pdo->prepare('INSERT INTO mpt_rate_hits (subject_key,bucket,hit_at) VALUES (?,?,?)')->execute([$subject, $bucket, mpt_db_time(mpt_now_ms())]);
 }
 
 // ---------------------------------------------------------------- paper store
@@ -204,17 +237,20 @@ function mpt_create_mock(PDO $pdo, array $spec): ?array
         $id = cssv_uuid_v4();
         $open = (int)$spec['exam_open_ms'];
         $duration = (int)($spec['duration_minutes'] ?? 200);
-        $closeOffset = (int)($spec['close_offset_minutes'] ?? 10);
+        $closeOffset = (int)($spec['close_offset_minutes'] ?? 0);
         $mock = [
             'id' => $id,
             'public_slug' => mpt_mock_slug($number),
             'mock_number' => $number,
             'schedule_key' => $spec['schedule_key'] ?? null,
             'title' => $spec['title'] ?? ('CSS MPT Mock ' . $number),
-            'application_open_at' => mpt_db_time((int)($spec['application_open_ms'] ?? $open - 86400000)),
+            // Applications open as soon as the mock exists and close when it starts:
+            // a candidate can apply for any upcoming mock, never an ongoing one.
+            'application_open_at' => mpt_db_time(min($open - 60000, (int)($spec['application_open_ms'] ?? mpt_now_ms()))),
             'application_close_at' => mpt_db_time($open + $closeOffset * 60000),
             'exam_open_at' => mpt_db_time($open),
-            'entry_close_at' => mpt_db_time($open + (int)($spec['entry_close_offset_minutes'] ?? $closeOffset) * 60000),
+            // Applicants may still enter up to 10 minutes late (with the time left).
+            'entry_close_at' => mpt_db_time($open + (int)($spec['entry_close_offset_minutes'] ?? 10) * 60000),
             'exam_end_at' => mpt_db_time($open + $duration * 60000),
             'duration_minutes' => $duration,
             'roll_issue_delay_minutes' => (int)($spec['roll_issue_delay_minutes'] ?? 10),
@@ -246,12 +282,13 @@ function mpt_auto_schedule(PDO $pdo, int $nowMs): void
     $zone = new DateTimeZone(CSSV_MPT_PKT);
     $today = (new DateTimeImmutable('@' . intdiv($nowMs, 1000)))->setTimezone($zone)->setTime(0, 0);
     $exists = $pdo->prepare('SELECT 1 FROM mpt_mocks WHERE schedule_key=? LIMIT 1');
-    for ($day = 0; $day <= 2; $day++) {
+    for ($day = 0; $day <= CSSV_MPT_SCHEDULE_DAYS_AHEAD; $day++) {
         foreach (CSSV_MPT_DAILY_SLOTS as $slot => $clock) {
             [$h, $m] = array_map('intval', explode(':', $clock));
             $open = (int)$today->modify("+$day day")->setTime($h, $m)->format('U') * 1000;
-            // Applications open 24 h ahead; stop creating once applications would already be closed.
-            if ($open - $nowMs > 86400000 || $nowMs >= $open + 10 * 60000) continue;
+            // Upcoming mocks for the next week are open for applications; an ongoing
+            // or past slot is never created.
+            if ($open - $nowMs > CSSV_MPT_SCHEDULE_DAYS_AHEAD * 86400000 || $nowMs >= $open) continue;
             $key = 'daily-' . $today->modify("+$day day")->format('Y-m-d') . '-' . $slot;
             $exists->execute([$key]);
             if ($exists->fetchColumn()) continue;
@@ -283,21 +320,24 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
     try {
         mpt_meta_set($pdo, 'last_maintenance_at', mpt_db_time($now));
         mpt_auto_schedule($pdo, $now);
-        return mpt_sweep($pdo, $now, $force ? 500 : 50);
+        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0);
     } finally {
         $pdo->query("SELECT RELEASE_LOCK('cssvista-mpt-maintain')");
     }
 }
 
-function mpt_sweep(PDO $pdo, int $nowMs, int $limit): array
+function mpt_sweep(PDO $pdo, int $nowMs, int $limit, float $budgetSeconds = 2.0): array
 {
+    $started = microtime(true);
     $report = ['auto_submitted' => 0, 'absent_marked' => 0, 'ranked' => 0];
     $graceCutoff = mpt_db_time($nowMs - CSSV_MPT_SAVE_GRACE_SECONDS * 1000);
     $expired = $pdo->prepare("SELECT id FROM mpt_attempts WHERE status='IN_PROGRESS' AND expires_at<=? ORDER BY expires_at LIMIT " . (int)$limit);
     $expired->execute([$graceCutoff]);
     foreach ($expired->fetchAll(PDO::FETCH_COLUMN) as $attemptId) {
         if (mpt_finalize_attempt($pdo, (string)$attemptId, 'TIME_EXPIRED')['finalized_now'] ?? false) $report['auto_submitted']++;
+        if (microtime(true) - $started > $budgetSeconds) return $report + ['partial' => true];
     }
+    $pdo->prepare('DELETE FROM mpt_rate_hits WHERE hit_at<? LIMIT 5000')->execute([mpt_db_time($nowMs - 86400000)]);
 
     $closed = $pdo->prepare("SELECT id FROM mpt_mocks WHERE status='PUBLISHED' AND absent_marked_at IS NULL AND entry_close_at<=? LIMIT 20");
     $closed->execute([mpt_db_time($nowMs)]);
@@ -400,7 +440,7 @@ function mpt_attempts_used(PDO $pdo, string $applicationId): int
 function mpt_state(PDO $pdo, array $mock, ?array $application, ?array $attempt, int $nowMs, bool $signedIn, ?array $session = null): array
 {
     $session ??= mpt_session_for($pdo, (string)$mock['id']);
-    if ($application !== null) $application['attempts_used'] = mpt_attempts_used($pdo, (string)$application['id']);
+    if ($application !== null) $application['attempts_used'] = $attempt ? (int)$attempt['attempt_no'] : 0;
     return mpt_candidate_state($mock, $session, $application, $attempt, $nowMs, $signedIn);
 }
 
@@ -450,6 +490,7 @@ function mpt_public_mock(array $mock): array
         'negative_marking' => (float)$mock['negative_marking'],
         'pass_percentage' => $mock['pass_percentage'] === null ? null : (float)$mock['pass_percentage'],
         'results_release_policy' => $mock['results_release_policy'],
+        'results_delay_minutes' => (int)($mock['results_delay_minutes'] ?? 30),
         'answer_review_policy' => $mock['answer_review_policy'],
         'fee' => 'FREE',
     ];
@@ -518,9 +559,9 @@ function mpt_server_clock(): array
 function mpt_apply(PDO $pdo, array $session, mixed $slug, ?string $idempotencyKey): array
 {
     $userId = (string)$session['user_id'];
-    mpt_rate_limit($pdo, 'mpt-apply', $userId, 10, 60, 'Too many application requests. Please wait a minute.');
-    mpt_ip_flood_guard($pdo, 'mpt-apply', 120, 60);
-    cssv_log_security_event($pdo, 'mpt-apply', $userId);
+    mpt_rate_limit($pdo, 'apply', $userId, 10, 60, 'Too many application requests. Please wait a minute.');
+    mpt_ip_flood_guard($pdo, 'apply-ip', 600, 60);
+    mpt_rate_hit($pdo, 'apply', $userId);
     $candidate = mpt_candidate_profile($pdo, $session, true);
     if (trim($candidate['name']) === '') cssv_fail('Add your full name to your profile before applying.', 422, 'profile_name_required');
 
@@ -528,7 +569,11 @@ function mpt_apply(PDO $pdo, array $session, mixed $slug, ?string $idempotencyKe
     try {
         $mock = mpt_mock_by_slug($pdo, $slug);
         if (!$mock) { $pdo->rollBack(); cssv_fail('This MPT Mock was not found.', 404, 'mock_not_found'); }
-        $sessionRow = mpt_session_for($pdo, (string)$mock['id'], true); // serialises applies for this mock
+        // Only a capacity-limited mock serialises its applies on the session row;
+        // an unlimited mock (the default) takes no shared lock, so thousands of
+        // candidates can apply at once. Uniqueness is enforced by the indexes.
+        $sessionRow = mpt_session_for($pdo, (string)$mock['id']);
+        if ($sessionRow['capacity'] !== null) $sessionRow = mpt_session_for($pdo, (string)$mock['id'], true);
         $now = mpt_now_ms();
         $existing = mpt_application_for($pdo, $userId, (string)$mock['id'], true);
         if ($existing && $existing['status'] === 'ACTIVE') {
@@ -541,7 +586,7 @@ function mpt_apply(PDO $pdo, array $session, mixed $slug, ?string $idempotencyKe
         }
         if ($mock['status'] !== 'PUBLISHED') { $pdo->rollBack(); cssv_fail('Applications are not open for this MPT Mock.', 409, 'applications_closed'); }
         if ($now < mpt_ms($mock['application_open_at'])) { $pdo->rollBack(); cssv_fail('Applications for this MPT Mock open at ' . mpt_pkt((int)mpt_ms($mock['application_open_at']), 'j M, g:i A') . '.', 409, 'applications_not_open'); }
-        if ($now >= mpt_ms($mock['application_close_at'])) { $pdo->rollBack(); cssv_fail('Applications for this MPT Mock closed at ' . mpt_pkt((int)mpt_ms($mock['application_close_at'])) . '.', 409, 'applications_closed'); }
+        if ($now >= mpt_ms($mock['application_close_at'])) { $pdo->rollBack(); cssv_fail('Applications for this MPT Mock closed when it started at ' . mpt_pkt((int)mpt_ms($mock['application_close_at'])) . '. Please apply for an upcoming mock.', 409, 'applications_closed'); }
         if ($sessionRow['capacity'] !== null && (int)$sessionRow['reserved_count'] >= (int)$sessionRow['capacity']) {
             $pdo->rollBack();
             cssv_fail('All slots for this MPT Mock have been reserved.', 409, 'slots_full');
@@ -556,10 +601,14 @@ function mpt_apply(PDO $pdo, array $session, mixed $slug, ?string $idempotencyKe
         } else {
             $applicationId = cssv_uuid_v4();
             $inserted = false;
-            for ($try = 0; $try < 10 && !$inserted; $try++) {
+            // Roll length grows with the mock (no cap); after 10 collisions at one
+            // length, move to the next length rather than fail.
+            $digits = mpt_roll_digits_for((int)$sessionRow['reserved_count']);
+            for ($try = 0; $try < 30 && !$inserted; $try++) {
+                if ($try > 0 && $try % 10 === 0) $digits++;
                 try {
                     $pdo->prepare("INSERT INTO mpt_applications (id,application_code,user_id,mock_id,session_id,roll_number,status,applied_at,source) VALUES (?,?,?,?,?,?,'ACTIVE',?,'web')")
-                        ->execute([$applicationId, mpt_application_code((int)$mock['mock_number']), $userId, $mock['id'], $sessionRow['id'], mpt_generate_roll(), $appliedAt]);
+                        ->execute([$applicationId, mpt_application_code((int)$mock['mock_number']), $userId, $mock['id'], $sessionRow['id'], mpt_generate_roll($digits), $appliedAt]);
                     $inserted = true;
                 } catch (PDOException $error) {
                     if (($error->errorInfo[1] ?? 0) !== 1062) throw $error;
@@ -614,7 +663,7 @@ function mpt_withdraw(PDO $pdo, array $session, mixed $code): array
 
 function mpt_verify_fail(PDO $pdo, array $session, ?array $mock, string $code, string $message, int $status, bool $countsAsGuess, array $extra = []): never
 {
-    if ($countsAsGuess) cssv_log_security_event($pdo, 'mpt-verify-fail', (string)$session['user_id']);
+    if ($countsAsGuess) mpt_rate_hit($pdo, 'verify-fail', (string)$session['user_id']);
     mpt_event($pdo, 'ROLL_VERIFY_FAIL', (string)$session['user_id'], $mock['id'] ?? null, null, null, ['reason' => $code]);
     cssv_json(['ok' => false, 'error' => $code, 'message' => $message] + $extra, $status);
 }
@@ -622,14 +671,14 @@ function mpt_verify_fail(PDO $pdo, array $session, ?array $mock, string $code, s
 function mpt_verify(PDO $pdo, array $session, mixed $slug, mixed $rollInput): array
 {
     $userId = (string)$session['user_id'];
-    mpt_rate_limit($pdo, 'mpt-verify-fail', $userId, 5, 600, 'Too many incorrect attempts. Please wait a few minutes, then copy the Roll Number from your application.');
+    mpt_rate_limit($pdo, 'verify-fail', $userId, 5, 600, 'Too many incorrect attempts. Please wait a few minutes, then copy the Roll Number from your application.');
     $mock = mpt_mock_by_slug($pdo, $slug);
     if (!$mock) cssv_fail('This MPT Mock was not found.', 404, 'mock_not_found');
     $now = mpt_now_ms();
 
     // 1. Six digits with a valid check digit.
     if (!mpt_roll_is_well_formed($rollInput)) {
-        mpt_verify_fail($pdo, $session, $mock, 'roll_format', 'Please check your Roll Number — one digit looks wrong.', 422, true);
+        mpt_verify_fail($pdo, $session, $mock, 'roll_format', 'Please check your Roll Number — a digit looks wrong or missing.', 422, true);
     }
     $roll = (string)mpt_normalise_roll($rollInput);
     // 2-4. Exists, visible, owned by this user, for this mock. Not found and
@@ -669,7 +718,7 @@ function mpt_verify(PDO $pdo, array $session, mixed $slug, mixed $rollInput): ar
             mpt_verify_fail($pdo, $session, $mock, 'entry_not_open', 'Your slot is reserved. Entry opens at ' . mpt_pkt((int)mpt_ms($mock['exam_open_at'])) . '.', 409, false, ['entry_opens_at' => mpt_iso(mpt_ms($mock['exam_open_at']))]);
         }
         if ($now >= mpt_ms($mock['entry_close_at']) || $now >= mpt_ms($mock['exam_end_at'])) {
-            mpt_verify_fail($pdo, $session, $mock, 'entry_closed', 'Entry for this MPT Mock closed at ' . mpt_pkt((int)mpt_ms($mock['entry_close_at'])) . '.', 409, false);
+            mpt_verify_fail($pdo, $session, $mock, 'entry_closed', 'Late entry for this MPT Mock ended at ' . mpt_pkt((int)mpt_ms($mock['entry_close_at'])) . '.', 409, false);
         }
         // 9. Attempt allowance (voided attempts need an admin re-sit).
         if ($used >= (int)$application['attempt_allowance']) {
@@ -761,8 +810,8 @@ function mpt_start(PDO $pdo, array $session, mixed $token, mixed $clientIdInput)
     $clientId = mpt_client_id($clientIdInput);
     $claims = is_string($token) ? mpt_read_token($token, cssv_secret(), mpt_now_ms()) : null;
     if (!$claims || !hash_equals($userId, (string)$claims['u'])) cssv_fail('Please verify your Roll Number again to enter the examination.', 403, 'verification_required');
-    mpt_rate_limit($pdo, 'mpt-start', $userId, 20, 600, 'Too many start requests. Please wait a few minutes.');
-    cssv_log_security_event($pdo, 'mpt-start', $userId);
+    mpt_rate_limit($pdo, 'start', $userId, 20, 600, 'Too many start requests. Please wait a few minutes.');
+    mpt_rate_hit($pdo, 'start', $userId);
     $device = mpt_device_key($session, $clientId);
 
     $pdo->beginTransaction();
@@ -795,7 +844,7 @@ function mpt_start(PDO $pdo, array $session, mixed $token, mixed $clientIdInput)
             cssv_fail('You have already used your attempt for this mock.', 409, 'already_completed');
         }
         if ($now < mpt_ms($mock['exam_open_at'])) { $pdo->rollBack(); cssv_fail('Entry opens at ' . mpt_pkt((int)mpt_ms($mock['exam_open_at'])) . '.', 409, 'entry_not_open'); }
-        if ($now >= mpt_ms($mock['entry_close_at']) || $now >= mpt_ms($mock['exam_end_at'])) { $pdo->rollBack(); cssv_fail('Entry for this MPT Mock closed at ' . mpt_pkt((int)mpt_ms($mock['entry_close_at'])) . '.', 409, 'entry_closed'); }
+        if ($now >= mpt_ms($mock['entry_close_at']) || $now >= mpt_ms($mock['exam_end_at'])) { $pdo->rollBack(); cssv_fail('Late entry for this MPT Mock ended at ' . mpt_pkt((int)mpt_ms($mock['entry_close_at'])) . '.', 409, 'entry_closed'); }
         $visibleAt = mpt_roll_visible_at((int)mpt_ms($application['applied_at']), (int)mpt_ms($mock['exam_open_at']), (int)$mock['roll_issue_delay_minutes']);
         if ($now < $visibleAt) { $pdo->rollBack(); cssv_fail('Your Roll Number has not been issued yet.', 409, 'roll_not_issued'); }
 
@@ -864,19 +913,28 @@ function mpt_save(PDO $pdo, array $session, array $body): array
             $pdo->rollBack();
             cssv_json(['ok' => false, 'error' => 'stale_save', 'message' => 'Newer answers were already saved.', 'save_version' => (int)$attempt['save_version']] + mpt_server_clock(), 409);
         }
-        $lookup = $pdo->prepare('SELECT question_id FROM mpt_mock_questions WHERE mock_id=? AND position=?');
-        $upsert = $pdo->prepare('INSERT INTO mpt_attempt_answers (attempt_id,question_id,selected_option,answered_at) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE selected_option=VALUES(selected_option),answered_at=VALUES(answered_at)');
+        // One lookup and one multi-row upsert per save, however many answers changed.
+        $wanted = [];
         foreach ($changes as $change) {
             $position = filter_var($change['p'] ?? null, FILTER_VALIDATE_INT);
             $option = $change['o'] ?? null;
-            if ($position === false || ($option !== null && (!is_int($option) || $option < 0 || $option > 3))) {
+            if ($position === false || $position < 1 || ($option !== null && (!is_int($option) || $option < 0 || $option > 3))) {
                 $pdo->rollBack();
                 cssv_fail('Invalid answer.', 422, 'invalid_answer');
             }
-            $lookup->execute([$mock['id'], $position]);
-            $questionId = $lookup->fetchColumn();
-            if ($questionId === false) { $pdo->rollBack(); cssv_fail('Invalid answer.', 422, 'invalid_answer'); }
-            $upsert->execute([$attempt['id'], $questionId, $option, mpt_db_time($now)]);
+            $wanted[$position] = $option;
+        }
+        if ($wanted) {
+            $marks = implode(',', array_fill(0, count($wanted), '?'));
+            $lookup = $pdo->prepare("SELECT position,question_id FROM mpt_mock_questions WHERE mock_id=? AND position IN ($marks)");
+            $lookup->execute(array_merge([$mock['id']], array_keys($wanted)));
+            $ids = [];
+            foreach ($lookup->fetchAll() as $row) $ids[(int)$row['position']] = (string)$row['question_id'];
+            if (count($ids) !== count($wanted)) { $pdo->rollBack(); cssv_fail('Invalid answer.', 422, 'invalid_answer'); }
+            $values = [];
+            foreach ($wanted as $position => $option) array_push($values, $attempt['id'], $ids[$position], $option, mpt_db_time($now));
+            $pdo->prepare('INSERT INTO mpt_attempt_answers (attempt_id,question_id,selected_option,answered_at) VALUES ' . implode(',', array_fill(0, count($wanted), '(?,?,?,?)')) . ' ON DUPLICATE KEY UPDATE selected_option=VALUES(selected_option),answered_at=VALUES(answered_at)')
+                ->execute($values);
         }
         $current = filter_var($body['current_position'] ?? null, FILTER_VALIDATE_INT);
         $visibility = filter_var($body['visibility_changes'] ?? 0, FILTER_VALIDATE_INT);
@@ -966,8 +1024,8 @@ function mpt_submit(PDO $pdo, array $session, mixed $slug, mixed $clientIdInput)
 {
     $userId = (string)$session['user_id'];
     $clientId = mpt_client_id($clientIdInput);
-    mpt_rate_limit($pdo, 'mpt-submit', $userId, 20, 600, 'Too many submit requests. Please wait a moment.');
-    cssv_log_security_event($pdo, 'mpt-submit', $userId);
+    mpt_rate_limit($pdo, 'submit', $userId, 20, 600, 'Too many submit requests. Please wait a moment.');
+    mpt_rate_hit($pdo, 'submit', $userId);
     [$mock, $application, $attempt] = mpt_owned_attempt($pdo, $session, $slug, $clientId);
     if ($attempt['status'] === 'IN_PROGRESS') {
         $late = mpt_now_ms() >= mpt_ms($attempt['expires_at']);
@@ -1007,8 +1065,9 @@ function mpt_result(PDO $pdo, array $session, mixed $code): array
     $previous = $pdo->prepare("SELECT AVG(percentage) avg_pct,COUNT(*) n FROM mpt_attempts WHERE user_id=? AND id<>? AND status IN ('SUBMITTED','AUTO_SUBMITTED') AND voided_at IS NULL AND submitted_at<?");
     $previous->execute([$session['user_id'], $attempt['id'], $attempt['submitted_at']]);
     $prev = $previous->fetch();
-    $afterWindow = $now >= mpt_ms($mock['exam_end_at']);
-    $rankVisible = $afterWindow && $attempt['rank_position'] !== null;
+    $releaseAt = mpt_result_release_at($mock, (int)mpt_ms($attempt['submitted_at']), (int)mpt_ms($mock['exam_end_at']));
+    $afterWindow = $now >= (int)mpt_ms($mock['exam_end_at']) + (int)$mock['results_delay_minutes'] * 60000;
+    $rankVisible = $now >= $releaseAt && $now >= (int)mpt_ms($mock['exam_end_at']) && $attempt['rank_position'] !== null;
     $pass = $mock['pass_percentage'] === null ? null : ((float)$attempt['percentage'] >= (float)$mock['pass_percentage']);
     $reviewOpen = match ($mock['answer_review_policy']) {
         'IMMEDIATE' => true,
@@ -1037,7 +1096,8 @@ function mpt_result(PDO $pdo, array $session, mixed $code): array
         'previous_average_percentage' => (int)$prev['n'] >= 1 ? round((float)$prev['avg_pct'], 2) : null,
         'rescored_at' => mpt_iso(mpt_ms($attempt['rescored_at'])),
         'review_available' => $reviewOpen,
-        'review_available_at' => $mock['answer_review_policy'] === 'AFTER_WINDOW' && !$afterWindow ? mpt_iso(mpt_ms($mock['exam_end_at'])) : null,
+        'review_available_at' => $mock['answer_review_policy'] === 'AFTER_WINDOW' && !$afterWindow ? mpt_iso((int)mpt_ms($mock['exam_end_at']) + (int)$mock['results_delay_minutes'] * 60000) : null,
+        'mock_started_at' => mpt_iso(mpt_ms($mock['exam_open_at'])),
     ];
     return $base + ['result' => $result];
 }
@@ -1063,8 +1123,8 @@ function mpt_review(PDO $pdo, array $session, mixed $code): array
 
 function mpt_relevant_mocks(PDO $pdo, int $nowMs): array
 {
-    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status IN ('PUBLISHED','CANCELLED') AND exam_end_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 6");
-    $stmt->execute([mpt_db_time($nowMs), mpt_db_time($nowMs + 86400000 * 3)]);
+    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE status IN ('PUBLISHED','CANCELLED') AND exam_end_at>? AND application_open_at<=? ORDER BY exam_open_at LIMIT 20");
+    $stmt->execute([mpt_db_time($nowMs), mpt_db_time($nowMs + 86400000 * (CSSV_MPT_SCHEDULE_DAYS_AHEAD + 1))]);
     return $stmt->fetchAll();
 }
 
@@ -1137,15 +1197,21 @@ function mpt_history(PDO $pdo, array $session, int $page, ?string $filter, int $
 {
     $userId = (string)$session['user_id'];
     $page = max(1, $page);
-    $stmt = $pdo->prepare('SELECT a.*,m.public_slug,m.mock_number,m.title,m.exam_open_at,m.exam_end_at,m.status mock_status FROM mpt_applications a JOIN mpt_mocks m ON m.id=a.mock_id WHERE a.user_id=? ORDER BY m.exam_open_at DESC');
+    // One query for every application with its mock facts and latest attempt.
+    $stmt = $pdo->prepare("SELECT a.id,a.application_code,a.status,a.applied_at,a.roll_number,a.attempt_allowance,
+            m.public_slug,m.mock_number,m.title,m.status mock_status,m.application_open_at,m.application_close_at,m.exam_open_at,m.entry_close_at,m.exam_end_at,m.roll_issue_delay_minutes,m.results_release_policy,m.results_delay_minutes,
+            t.attempt_no,t.status attempt_status,t.expires_at,t.submitted_at,t.score,t.total_marks,t.percentage
+        FROM mpt_applications a JOIN mpt_mocks m ON m.id=a.mock_id
+        LEFT JOIN mpt_attempts t ON t.application_id=a.id AND t.attempt_no=(SELECT MAX(x.attempt_no) FROM mpt_attempts x WHERE x.application_id=a.id)
+        WHERE a.user_id=? AND a.status<>'WITHDRAWN' ORDER BY m.exam_open_at DESC");
     $stmt->execute([$userId]);
     $now = mpt_now_ms();
     $rows = [];
     foreach ($stmt->fetchAll() as $row) {
-        if ($row['status'] === 'WITHDRAWN') continue;
-        $mock = mpt_mock_by_id($pdo, (string)$row['mock_id']);
-        $attempt = mpt_latest_attempt($pdo, (string)$row['id']);
-        $state = mpt_state($pdo, $mock, $row, $attempt, $now, true);
+        $mock = ['status' => $row['mock_status']] + array_intersect_key($row, array_flip(['application_open_at', 'application_close_at', 'exam_open_at', 'entry_close_at', 'exam_end_at', 'roll_issue_delay_minutes', 'results_release_policy', 'results_delay_minutes']));
+        $attempt = $row['attempt_no'] === null ? null : ['status' => $row['attempt_status'], 'expires_at' => $row['expires_at'], 'submitted_at' => $row['submitted_at']];
+        $application = ['status' => $row['status'], 'applied_at' => $row['applied_at'], 'attempt_allowance' => $row['attempt_allowance'], 'attempts_used' => (int)($row['attempt_no'] ?? 0)];
+        $state = mpt_candidate_state($mock, null, $application, $attempt, $now, true);
         $final = $attempt && in_array($attempt['status'], ['SUBMITTED', 'AUTO_SUBMITTED'], true) && $state['phase'] === 'RESULT_AVAILABLE';
         $visible = $now >= (int)mpt_ms($state['timestamps']['roll_number_visible_at']);
         $rows[] = [
@@ -1156,9 +1222,9 @@ function mpt_history(PDO $pdo, array $session, int $page, ?string $filter, int $
             'exam_open_at' => mpt_iso(mpt_ms($row['exam_open_at'])),
             'roll_number' => $visible ? $row['roll_number'] : null,
             'phase' => $state['phase'],
-            'score' => $final ? (float)$attempt['score'] : null,
-            'total_marks' => $final ? (float)$attempt['total_marks'] : null,
-            'percentage' => $final ? (float)$attempt['percentage'] : null,
+            'score' => $final ? (float)$row['score'] : null,
+            'total_marks' => $final ? (float)$row['total_marks'] : null,
+            'percentage' => $final ? (float)$row['percentage'] : null,
         ];
     }
     $groups = ['completed' => ['RESULT_AVAILABLE', 'SUBMITTED_PENDING_RESULT'], 'absent' => ['ABSENT'], 'upcoming' => ['ROLL_NUMBER_PENDING', 'SLOT_RESERVED', 'ENTRY_OPEN', 'IN_PROGRESS'], 'cancelled' => ['CANCELLED']];
@@ -1220,19 +1286,68 @@ function mpt_performance(PDO $pdo, array $session): array
     ] + mpt_server_clock();
 }
 
+/**
+ * Wrong-answer bank: every question the candidate answered incorrectly in a
+ * completed official mock whose answer review is open (never before the result
+ * release, never for a mock whose review policy is NEVER).
+ */
+function mpt_mistakes(PDO $pdo, array $session, int $page, ?string $subject, int $perPage = 20): array
+{
+    $userId = (string)$session['user_id'];
+    $now = mpt_now_ms();
+    $stmt = $pdo->prepare("SELECT t.id,t.submitted_at,m.id mock_id,m.mock_number,m.title,m.exam_open_at,m.exam_end_at,m.results_delay_minutes,m.answer_review_policy FROM mpt_attempts t JOIN mpt_mocks m ON m.id=t.mock_id WHERE t.user_id=? AND t.status IN ('SUBMITTED','AUTO_SUBMITTED') AND t.voided_at IS NULL ORDER BY t.submitted_at DESC");
+    $stmt->execute([$userId]);
+    $open = [];
+    $meta = [];
+    foreach ($stmt->fetchAll() as $row) {
+        $reviewAt = match ($row['answer_review_policy']) {
+            'IMMEDIATE' => (int)mpt_ms($row['submitted_at']),
+            'AFTER_WINDOW' => (int)mpt_ms($row['exam_end_at']) + (int)$row['results_delay_minutes'] * 60000,
+            default => null,
+        };
+        if ($reviewAt === null || $now < $reviewAt) continue;
+        $open[] = (string)$row['id'];
+        $meta[(string)$row['id']] = ['mock_number' => (int)$row['mock_number'], 'title' => $row['title'], 'exam_open_at' => mpt_iso(mpt_ms($row['exam_open_at']))];
+    }
+    if (!$open) return ['questions' => [], 'total' => 0, 'page' => 1, 'per_page' => $perPage, 'subjects' => []];
+    $marks = implode(',', array_fill(0, count($open), '?'));
+    $base = "FROM mpt_attempt_answers a JOIN mpt_attempts t ON t.id=a.attempt_id JOIN mpt_mock_questions q ON q.mock_id=t.mock_id AND q.question_id=a.question_id WHERE a.attempt_id IN ($marks) AND a.is_correct=0";
+    $counts = $pdo->prepare("SELECT q.section,COUNT(*) n $base GROUP BY q.section ORDER BY MIN(q.position)");
+    $counts->execute($open);
+    $subjects = array_map(static fn($r) => ['subject' => $r['section'], 'count' => (int)$r['n']], $counts->fetchAll());
+    $params = $open;
+    $where = '';
+    if ($subject !== null && $subject !== '') { $where = ' AND q.section=?'; $params[] = $subject; }
+    $total = $pdo->prepare("SELECT COUNT(*) $base$where");
+    $total->execute($params);
+    $page = max(1, $page);
+    $list = $pdo->prepare("SELECT a.attempt_id,a.selected_option,q.position,q.section,q.stem,q.options,q.correct_index,q.explanation $base$where ORDER BY t.submitted_at DESC,q.position LIMIT " . (int)$perPage . ' OFFSET ' . (int)(($page - 1) * $perPage));
+    $list->execute($params);
+    return [
+        'questions' => array_map(static fn(array $r): array => $meta[(string)$r['attempt_id']] + [
+            'p' => (int)$r['position'], 'section' => $r['section'], 'q' => $r['stem'],
+            'o' => json_decode((string)$r['options'], true), 'selected' => (int)$r['selected_option'],
+            'correct' => (int)$r['correct_index'], 'explanation' => $r['explanation'],
+        ], $list->fetchAll()),
+        'total' => (int)$total->fetchColumn(),
+        'page' => $page,
+        'per_page' => $perPage,
+        'subjects' => $subjects,
+    ];
+}
+
 // ---------------------------------------------------------------- public listing
 
 function mpt_public_listing(PDO $pdo, ?array $session): array
 {
     $now = mpt_now_ms();
     $out = [];
-    $count = $pdo->prepare("SELECT COUNT(*) FROM mpt_applications WHERE mock_id=? AND status='ACTIVE'");
     foreach (mpt_relevant_mocks($pdo, $now) as $mock) {
         $application = $session ? mpt_application_for($pdo, (string)$session['user_id'], (string)$mock['id']) : null;
         $card = mpt_card($pdo, $mock, $application, $now, $session !== null, false);
         $sessionRow = mpt_session_for($pdo, (string)$mock['id']);
-        $count->execute([$mock['id']]);
-        $registered = (int)$count->fetchColumn();
+        // The maintained counter, not COUNT(*): constant cost under heavy load.
+        $registered = (int)$sessionRow['reserved_count'];
         // D-25: real counts only, above a threshold; capacity only when configured.
         $card['registered_count'] = $registered >= 25 ? $registered : null;
         $card['slots_available'] = $sessionRow['capacity'] === null ? null : max(0, (int)$sessionRow['capacity'] - (int)$sessionRow['reserved_count']);

@@ -59,7 +59,21 @@ foreach ($sample as $roll) {
 }
 check(mpt_normalise_roll(' 482 91 7 ') === '482917', 'spaces are ignored');
 check(mpt_normalise_roll('048291') === null, 'leading zero rejected');
-check(mpt_normalise_roll('48291') === null && mpt_normalise_roll('4829170') === null, 'length must be six');
+check(mpt_normalise_roll('48291') === null, 'at least six digits');
+check(mpt_normalise_roll('4829170') === '4829170' && mpt_normalise_roll('1234567890123') === null, 'longer roll numbers accepted up to twelve digits');
+
+// Unlimited roll numbers: the length grows with the mock, never a hard cap.
+check(mpt_roll_digits_for(0) === 6 && mpt_roll_digits_for(40499) === 6, 'six digits while a mock is under ~45% of 90,000');
+check(mpt_roll_digits_for(40500) === 7 && mpt_roll_digits_for(405000) === 8 && mpt_roll_digits_for(4050000) === 9, 'then seven, eight, nine digits');
+foreach ([7, 8, 10] as $len) {
+    for ($i = 0; $i < 200; $i++) {
+        $long = mpt_generate_roll($len);
+        check(strlen($long) === $len && (bool)preg_match('/^[1-9]\d+$/', $long) && mpt_roll_is_well_formed($long), "$len-digit roll $long");
+        $typo = substr_replace($long, (string)(((int)$long[3] + 1) % 10), 3, 1);
+        check(!mpt_roll_is_well_formed($typo), "$len-digit typo accepted $long -> $typo");
+    }
+}
+check(mpt_format_roll('48291735') === '482 917 35', 'long roll numbers group in threes');
 check(mpt_normalise_roll('48a917') === null, 'digits only');
 check(mpt_format_roll('482917') === '482 917', 'grouped display');
 
@@ -89,6 +103,12 @@ check($result['total_marks'] === 4.0 && $result['percentage'] === 50.0, 'percent
 check($result['accuracy'] === 66.67, 'accuracy is correct / attempted');
 check($result['subjects']['English']['correct'] === 1 && $result['subjects']['Urdu']['attempted'] === 1, 'subject breakdown');
 check($result['per_question'] === ['q1' => true, 'q2' => false, 'q3' => true, 'q4' => null], 'per-question correctness');
+// Result card 30 minutes after the mock (AFTER_WINDOW default).
+$end = (int)mpt_ms('2026-10-01T13:20:00Z');
+check(mpt_result_release_at(['results_release_policy' => 'AFTER_WINDOW', 'results_delay_minutes' => 30], $end - 3600000, $end) === $end + 1800000, 'result opens 30 minutes after the mock');
+check(mpt_result_release_at(['results_release_policy' => 'AFTER_WINDOW'], $end - 3600000, $end) === $end + 1800000, 'delay defaults to 30 minutes');
+check(mpt_result_release_at(['results_release_policy' => 'IMMEDIATE_SCORE'], $end - 3600000, $end) === $end - 3600000, 'immediate policy still supported');
+
 $negative = mpt_score($questions, ['q1' => 0, 'q2' => 1, 'q3' => 0, 'q4' => 3], 1.0, 0.25);
 check($negative['score'] === 0.25, 'negative marking when configured');
 check(mpt_score($questions, ['q1' => 0, 'q2' => 1, 'q3' => 0], 1.0, 0.5)['score'] === 0.0, 'score never below zero');

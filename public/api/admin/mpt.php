@@ -20,8 +20,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
         case 'applications':
             $mock = mpt_admin_mock($pdo, $_GET['slug'] ?? null);
             $search = mb_substr(trim((string)($_GET['q'] ?? '')), 0, 120);
-            if (($_GET['format'] ?? '') === 'csv') mpt_admin_csv(mpt_admin_applications($pdo, $mock, $search, 1, 0)['rows']);
-            cssv_json(['ok' => true] + mpt_admin_applications($pdo, $mock, $search, $page));
+            $appeared = in_array($_GET['appeared'] ?? '', ['yes', 'no'], true) ? (string)$_GET['appeared'] : null;
+            if (($_GET['format'] ?? '') === 'csv') mpt_admin_csv(mpt_admin_applications($pdo, $mock, $search, 1, 0, $appeared)['rows']);
+            cssv_json(['ok' => true] + mpt_admin_applications($pdo, $mock, $search, $page, 50, $appeared));
         case 'attempts':
             cssv_json(['ok' => true] + mpt_admin_attempts($pdo, mpt_admin_mock($pdo, $_GET['slug'] ?? null), $page));
     }

@@ -35,7 +35,8 @@ function cssv_mpt_schema_statements(): array
   total_marks DECIMAL(8,2) NOT NULL DEFAULT 0.00,
   negative_marking DECIMAL(5,2) NOT NULL DEFAULT 0.00,
   pass_percentage DECIMAL(5,2) NULL,
-  results_release_policy VARCHAR(20) NOT NULL DEFAULT 'IMMEDIATE_SCORE',
+  results_release_policy VARCHAR(20) NOT NULL DEFAULT 'AFTER_WINDOW',
+  results_delay_minutes SMALLINT UNSIGNED NOT NULL DEFAULT 30,
   answer_review_policy VARCHAR(20) NOT NULL DEFAULT 'AFTER_WINDOW',
   rank_min_candidates SMALLINT UNSIGNED NOT NULL DEFAULT 30,
   scoring_version INT UNSIGNED NOT NULL DEFAULT 1,
@@ -104,7 +105,7 @@ function cssv_mpt_schema_statements(): array
   user_id CHAR(36) NOT NULL,
   mock_id CHAR(36) NOT NULL,
   session_id CHAR(36) NOT NULL,
-  roll_number CHAR(6) NOT NULL,
+  roll_number VARCHAR(12) NOT NULL,
   roll_number_revealed_at DATETIME(3) NULL,
   status VARCHAR(16) NOT NULL DEFAULT 'ACTIVE',
   attempt_allowance TINYINT UNSIGNED NOT NULL DEFAULT 1,
@@ -211,6 +212,16 @@ function cssv_mpt_schema_statements(): array
   CONSTRAINT mpt_user_stats_user_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
 
+        "CREATE TABLE IF NOT EXISTS mpt_rate_hits (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  subject_key CHAR(64) NOT NULL,
+  bucket VARCHAR(24) NOT NULL,
+  hit_at DATETIME(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mpt_rate_hits_lookup_idx (subject_key,bucket,hit_at),
+  KEY mpt_rate_hits_time_idx (hit_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
         "CREATE TABLE IF NOT EXISTS mpt_events (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id CHAR(36) NULL,
@@ -234,6 +245,7 @@ function cssv_mpt_schema_drop_statements(): array
 {
     return [
         'DROP TABLE IF EXISTS mpt_events',
+        'DROP TABLE IF EXISTS mpt_rate_hits',
         'DROP TABLE IF EXISTS mpt_user_stats',
         'DROP TABLE IF EXISTS mpt_attempt_subject_scores',
         'DROP TABLE IF EXISTS mpt_attempt_answers',

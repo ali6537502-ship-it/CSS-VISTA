@@ -109,8 +109,8 @@ function ApplicationScreen({ code }: { code: string }) {
       {(phase === 'RESULT_AVAILABLE' || phase === 'SUBMITTED_PENDING_RESULT') && (
         <Link to={`/account/mpt/results/${application.application_code}`} className={`${primaryButton} w-full sm:w-auto print:hidden`}>{phase === 'RESULT_AVAILABLE' ? 'View Result' : 'View Submission'}</Link>
       )}
-      {phase === 'SLOT_RESERVED' && <p className="text-sm font-semibold text-slate-700">Entry opens at {pktDateTime(mock.exam_open_at)} and closes at {pktTime(mock.entry_close_at)}.</p>}
-      {phase === 'ABSENT' && <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">Entry for this MPT Mock closed at {pktTime(mock.entry_close_at)}. You were marked absent. Absences never count toward your scores.</p>}
+      {phase === 'SLOT_RESERVED' && <p className="text-sm font-semibold text-slate-700">The exam starts at {pktDateTime(mock.exam_open_at)}. Press Enter Exam then. If you are late, you can still enter until {pktTime(mock.entry_close_at)} with the time remaining.</p>}
+      {phase === 'ABSENT' && <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">Late entry for this MPT Mock ended at {pktTime(mock.entry_close_at)}. You were marked absent. Absences never count toward your scores.</p>}
       {application.status === 'CANCELLED' && <p className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">This application is no longer active.{application.cancel_reason ? ` ${application.cancel_reason}` : ''}</p>}
       {application.status === 'WITHDRAWN' && <p className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">You withdrew this application. {state.phase === 'APPLICATIONS_OPEN' && <Link className="font-semibold text-emerald-800 underline" to={`/account/mpt/apply/${mock.slug}`}>Apply again</Link>}</p>}
 
@@ -134,7 +134,8 @@ function ApplicationScreen({ code }: { code: string }) {
         <h3 className="font-semibold text-slate-900">Instructions</h3>
         <ul className="mt-2 list-disc space-y-1 pl-5">
           <li>Open My CSS Vista at exam time and press <strong>Enter Exam</strong>. Type your 6-digit Roll Number to verify.</li>
-          <li>Entry closes at {pktTime(mock.entry_close_at)}. Every attempt ends at {pktTime(mock.exam_end_at)}; starting late leaves only the time remaining.</li>
+          <li>The exam starts at {pktTime(mock.exam_open_at)} and ends for everyone at {pktTime(mock.exam_end_at)}. Starting late (until {pktTime(mock.entry_close_at)}) leaves only the time remaining.</li>
+          <li>Your result card is available 30 minutes after the exam ends, on your dashboard.</li>
           <li>Your answers save automatically. A refresh or lost connection never costs you the attempt.</li>
         </ul>
         <p className="mt-3 font-semibold text-slate-900">{copy.confirmation.personal}</p>

@@ -87,12 +87,13 @@ export function examDetailRows(mock: MptMock): Array<[string, ReactNode]> {
   return [
     ['Mock', mock.title],
     ['Date', pktDate(mock.exam_open_at)],
-    ['Time', pktTime(mock.exam_open_at)],
+    ['Exam starts', pktTime(mock.exam_open_at)],
     ['Duration', `${mock.duration_minutes} minutes`],
     ['Questions', `${mock.total_questions} MCQs`],
     ['Fee', copy.apply.fee],
-    ['Entry opens', pktTime(mock.exam_open_at)],
-    ['Entry closes', pktTime(mock.entry_close_at)],
+    ['Applications close', 'When the exam starts'],
+    ['Late entry until', `${pktTime(mock.entry_close_at)} (with the time left)`],
+    ['Result card', `${pktTime(new Date(Date.parse(mock.exam_end_at) + (mock.results_delay_minutes ?? 30) * 60_000).toISOString())}`],
   ]
 }
 
@@ -104,7 +105,7 @@ export function downloadCalendar(mock: MptMock) {
     `UID:${mock.slug}@css-vista.com`, `DTSTAMP:${stamp(new Date().toISOString())}`,
     `DTSTART:${stamp(mock.exam_open_at)}`, `DTEND:${stamp(mock.exam_end_at)}`,
     `SUMMARY:${mock.title} (CSS Vista)`,
-    `DESCRIPTION:Entry closes at ${pktTime(mock.entry_close_at)}. Open My CSS Vista and press Enter Exam.`,
+    `DESCRIPTION:The exam starts at ${pktTime(mock.exam_open_at)}. Open My CSS Vista and press Enter Exam.`,
     'URL:https://www.css-vista.com/account/mpt', 'END:VEVENT', 'END:VCALENDAR',
   ].join('\r\n')
   const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }))

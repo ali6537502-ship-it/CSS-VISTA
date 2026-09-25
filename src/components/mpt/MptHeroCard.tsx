@@ -40,21 +40,20 @@ export function MptHeroCard({ card, now, onBoundary }: { card: MptCard; now: num
   const roll = application?.roll_number
   const visibleAt = state.timestamps.roll_number_visible_at
   const toOpen = Date.parse(mock.exam_open_at) - now
-  const toClose = Date.parse(mock.application_close_at) - now
   const ready = state.phase === 'ENTRY_OPEN' || state.phase === 'IN_PROGRESS'
 
   let line: string
   switch (state.phase) {
     case 'ROLL_NUMBER_PENDING': line = `Slot reserved · Roll Number in ${countdown(Date.parse(visibleAt ?? '') - now)}`; break
     case 'SLOT_RESERVED': line = `Roll No. ${formatRollNumber(roll ?? '')} · Exam opens in ${countdown(toOpen)}`; break
-    case 'ENTRY_OPEN': line = `${copy.dashboard.ready} · Roll No. ${formatRollNumber(roll ?? '')} · Entry closes at ${pktTime(mock.entry_close_at)}`; break
+    case 'ENTRY_OPEN': line = `${copy.dashboard.ready} · Roll No. ${formatRollNumber(roll ?? '')} · late entry until ${pktTime(mock.entry_close_at)}`; break
     case 'IN_PROGRESS': line = `${copy.exam.inProgress} · ends at ${pktTime(mock.exam_end_at)}`; break
     case 'APPLICATIONS_OPEN':
-    case 'LOGIN_REQUIRED': line = state.exam_in_progress ? `Exam in progress — applications close in ${Math.max(1, Math.ceil(toClose / 60_000))} min` : `Exam ${pktDateTime(mock.exam_open_at)} · applications close ${pktTime(mock.application_close_at)}`; break
+    case 'LOGIN_REQUIRED': line = `Exam ${pktDateTime(mock.exam_open_at)} · apply any time before it starts`; break
     case 'NOT_YET_OPEN': line = `Applications open ${pktDateTime(mock.application_open_at)}`; break
-    case 'SUBMITTED_PENDING_RESULT': line = `Submitted · result at ${pktTime(state.timestamps.result_available_at)}`; break
+    case 'SUBMITTED_PENDING_RESULT': line = `Submitted · result card at ${pktTime(state.timestamps.result_available_at)}`; break
     case 'RESULT_AVAILABLE': line = card.attempt?.score !== null && card.attempt ? `Completed · ${card.attempt.score} / ${card.attempt.total_marks}` : 'Completed'; break
-    case 'ABSENT': line = `Entry closed at ${pktTime(mock.entry_close_at)}`; break
+    case 'ABSENT': line = `Late entry ended at ${pktTime(mock.entry_close_at)}`; break
     default: line = pktDateTime(mock.exam_open_at)
   }
 

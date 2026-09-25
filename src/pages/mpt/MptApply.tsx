@@ -3,7 +3,6 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import { HostingerApiError } from '@/lib/hostingerApi'
 import { mptApi } from '@/lib/mpt/api'
 import { copy, pktDateTime, pktTime } from '@/lib/mpt/copy'
-import { useServerClock } from '@/lib/mpt/useServerClock'
 import { AccountPage } from '@/pages/account/shared'
 import { StatusBadge } from '@/components/mpt/StatusBadge'
 import { DetailList, ErrorNote, MptGate, PageSkeleton, examDetailRows, primaryButton, useMptLoad, aboveMobileNav } from './common'
@@ -15,7 +14,6 @@ function newIdempotencyKey() {
 function ApplyScreen({ slug }: { slug: string }) {
   const navigate = useNavigate()
   const load = useMptLoad((signal) => mptApi.applicationForMock(slug, signal), [slug])
-  const now = useServerClock()
   const [declared, setDeclared] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<HostingerApiError | null>(null)
@@ -33,7 +31,6 @@ function ApplyScreen({ slug }: { slug: string }) {
   }
   const { mock, state, candidate } = card
   const open = state.phase === 'APPLICATIONS_OPEN'
-  const closesInMinutes = Math.max(0, Math.ceil((Date.parse(mock.application_close_at) - now) / 60_000))
 
   const submit = async () => {
     if (!declared || submitting) return
@@ -59,13 +56,11 @@ function ApplyScreen({ slug }: { slug: string }) {
         <div className="mt-2"><StatusBadge phase={state.phase} /></div>
       </div>
 
-      {state.exam_in_progress && open && (
-        <p className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm font-semibold text-amber-950">{copy.apply.examInProgress(closesInMinutes)}</p>
-      )}
+      {open && <p className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-950">{copy.apply.closesAtStart}</p>}
       {!open && (
         <p className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700">
           {state.phase === 'NOT_YET_OPEN' && `Applications open ${pktDateTime(mock.application_open_at)}.`}
-          {state.phase === 'APPLICATIONS_CLOSED' && `Applications for this MPT Mock closed at ${pktTime(mock.application_close_at)}.`}
+          {state.phase === 'APPLICATIONS_CLOSED' && <>Applications for this MPT Mock closed when it started at {pktTime(mock.application_close_at)}. <Link to="/account/mpt" className="font-semibold text-emerald-800 underline">Apply for an upcoming mock</Link></>}
           {state.phase === 'SLOTS_FULL' && 'All slots for this MPT Mock have been reserved.'}
           {state.phase === 'CANCELLED' && (card.application?.status === 'CANCELLED' ? 'This application is no longer active.' : 'This MPT Mock has been cancelled.')}
         </p>

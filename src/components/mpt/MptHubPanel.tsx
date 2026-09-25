@@ -35,7 +35,7 @@ export function MptHubPanel() {
       <div className="mt-5 grid gap-3 md:grid-cols-2">
         {cards === null && [0, 1].map((key) => <div key={key} className="h-32 animate-pulse rounded-xl bg-slate-100" />)}
         {cards?.length === 0 && <p className="text-sm text-slate-600">{copy.hub.noMocks}</p>}
-        {cards?.map((card) => {
+        {cards?.slice(0, 4).map((card) => {
           const href = actionHref(card)
           const loginNeeded = card.state.primary_action === 'login'
           return (
@@ -59,6 +59,8 @@ export function MptHubPanel() {
           )
         })}
       </div>
+
+      {cards && cards.length > 4 && <Link to="/account/mpt" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-emerald-800 underline-offset-4 hover:underline">{copy.hub.moreUpcoming}</Link>}
 
       {loginFor && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/40 p-4" onClick={() => setLoginFor(null)}>

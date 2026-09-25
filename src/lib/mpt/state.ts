@@ -21,6 +21,7 @@ export type MptMockFacts = {
   exam_end_at: string
   roll_issue_delay_minutes: number
   results_release_policy: string
+  results_delay_minutes?: number
 }
 export type MptSessionFacts = { capacity: number | null; reserved_count: number } | null
 export type MptApplicationFacts = { status: string; applied_at: string; attempt_allowance?: number; attempts_used?: number } | null
@@ -75,7 +76,13 @@ export function rollVisibleAt(appliedAtMs: number, examOpenAtMs: number, delayMi
 
 type Times = Record<keyof MptTimestamps, number | null>
 
-function phaseFor(status: string, releasePolicy: string, session: MptSessionFacts, application: MptApplicationFacts,
+/** Mirror of mpt_result_release_at(): AFTER_WINDOW opens results_delay_minutes after exam_end_at. */
+export function resultReleaseAt(mock: MptMockFacts, submittedMs: number, examEndMs: number) {
+  if ((mock.results_release_policy ?? 'AFTER_WINDOW') !== 'AFTER_WINDOW') return submittedMs
+  return Math.max(submittedMs, examEndMs + (mock.results_delay_minutes ?? 30) * 60_000)
+}
+
+function phaseFor(status: string, mock: MptMockFacts, session: MptSessionFacts, application: MptApplicationFacts,
   attempt: MptAttemptFacts, t: Times, now: number, signedIn: boolean): MptPhase {
   if (status === 'CANCELLED') return 'CANCELLED'
   if (attempt) {
@@ -83,8 +90,7 @@ function phaseFor(status: string, releasePolicy: string, session: MptSessionFact
     const expires = ms(attempt.expires_at) ?? 0
     if (attempt.status === 'IN_PROGRESS' && now < expires) return 'IN_PROGRESS'
     const submitted = ms(attempt.submitted_at) ?? expires
-    const releaseAt = releasePolicy === 'AFTER_WINDOW' ? Math.max(submitted, t.exam_end_at ?? 0) : submitted
-    return now >= releaseAt ? 'RESULT_AVAILABLE' : 'SUBMITTED_PENDING_RESULT'
+    return now >= resultReleaseAt(mock, submitted, t.exam_end_at ?? 0) ? 'RESULT_AVAILABLE' : 'SUBMITTED_PENDING_RESULT'
   }
   if (application) {
     if (application.status === 'CANCELLED') return 'CANCELLED'
@@ -121,13 +127,12 @@ export function getCandidateMockState(mock: MptMockFacts, session: MptSessionFac
   if (attempt && attempt.status === 'VOIDED' && application
     && (application.attempts_used ?? 1) < (application.attempt_allowance ?? 1)) attempt = null
 
-  const releasePolicy = mock.results_release_policy ?? 'IMMEDIATE_SCORE'
-  const phase = phaseFor(mock.status ?? 'DRAFT', releasePolicy, session, application, attempt, t, now, signedIn)
+  const phase = phaseFor(mock.status ?? 'DRAFT', mock, session, application, attempt, t, now, signedIn)
   if (attempt) {
     t.attempt_expires_at = ms(attempt.expires_at)
     const submitted = ms(attempt.submitted_at) ?? t.attempt_expires_at ?? 0
     if (phase === 'SUBMITTED_PENDING_RESULT' || phase === 'RESULT_AVAILABLE') {
-      t.result_available_at = releasePolicy === 'AFTER_WINDOW' ? Math.max(submitted, t.exam_end_at ?? 0) : submitted
+      t.result_available_at = resultReleaseAt(mock, submitted, t.exam_end_at ?? 0)
     }
   }
   let next: number | null = null

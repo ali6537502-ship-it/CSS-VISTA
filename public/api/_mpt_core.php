@@ -70,12 +70,18 @@ function mpt_damm_digit(string $digits): int
     return $interim;
 }
 
-/** Strips spaces; returns the 6 digits or null when the shape is wrong. */
+// Roll numbers have no upper limit (owner decision D-13): six digits while a mock
+// has room, then seven, eight… The first digit is 1-9 and the last is a Damm check
+// digit, so a longer number never collides with a shorter one.
+const CSSV_MPT_ROLL_MIN_DIGITS = 6;
+const CSSV_MPT_ROLL_MAX_DIGITS = 12;
+
+/** Strips spaces; returns the digits or null when the shape is wrong. */
 function mpt_normalise_roll(mixed $value): ?string
 {
     if (!is_string($value) && !is_int($value)) return null;
     $digits = preg_replace('/\s+/', '', (string)$value);
-    return preg_match('/^[1-9]\d{5}$/', (string)$digits) ? (string)$digits : null;
+    return preg_match('/^[1-9]\d{' . (CSSV_MPT_ROLL_MIN_DIGITS - 1) . ',' . (CSSV_MPT_ROLL_MAX_DIGITS - 1) . '}$/', (string)$digits) ? (string)$digits : null;
 }
 
 function mpt_roll_is_well_formed(mixed $value): bool
@@ -84,17 +90,31 @@ function mpt_roll_is_well_formed(mixed $value): bool
     return $roll !== null && mpt_damm_digit($roll) === 0;
 }
 
-/** Five CSPRNG digits (first 1-9) plus a Damm check digit. */
-function mpt_generate_roll(): string
+/**
+ * Length for the next roll number in a mock that already holds $issued numbers.
+ * Each length is used until it is at most ~45% full, which keeps random
+ * collisions (and retries) rare however many candidates apply.
+ */
+function mpt_roll_digits_for(int $issued): int
 {
+    $digits = CSSV_MPT_ROLL_MIN_DIGITS;
+    while ($digits < CSSV_MPT_ROLL_MAX_DIGITS && $issued >= (int)(0.45 * 9 * 10 ** ($digits - 2))) $digits++;
+    return $digits;
+}
+
+/** CSPRNG digits (first 1-9) plus a Damm check digit; $digits includes the check digit. */
+function mpt_generate_roll(int $digits = CSSV_MPT_ROLL_MIN_DIGITS): string
+{
+    $digits = max(CSSV_MPT_ROLL_MIN_DIGITS, min(CSSV_MPT_ROLL_MAX_DIGITS, $digits));
     $body = (string)random_int(1, 9);
-    for ($i = 0; $i < 4; $i++) $body .= (string)random_int(0, 9);
+    for ($i = 0; $i < $digits - 2; $i++) $body .= (string)random_int(0, 9);
     return $body . mpt_damm_digit($body);
 }
 
+/** Left-to-right groups of three: 482 917, 482 917 3. */
 function mpt_format_roll(string $roll): string
 {
-    return substr($roll, 0, 3) . ' ' . substr($roll, 3);
+    return trim(implode(' ', str_split($roll, 3)));
 }
 
 function mpt_random_code(int $length): string
@@ -158,14 +178,12 @@ function mpt_candidate_state(array $mock, ?array $session, ?array $application, 
         $attempt = null;
     }
 
-    $phase = mpt_state_phase($status, (string)($mock['results_release_policy'] ?? 'IMMEDIATE_SCORE'), $session, $application, $attempt, $t, $nowMs, $signedIn);
+    $phase = mpt_state_phase($status, $mock, $session, $application, $attempt, $t, $nowMs, $signedIn);
     if ($attempt !== null) {
         $t['attempt_expires_at'] = mpt_ms($attempt['expires_at'] ?? null);
         $submitted = mpt_ms($attempt['submitted_at'] ?? null) ?? $t['attempt_expires_at'];
         if (in_array($phase, ['SUBMITTED_PENDING_RESULT', 'RESULT_AVAILABLE'], true)) {
-            $t['result_available_at'] = ($mock['results_release_policy'] ?? 'IMMEDIATE_SCORE') === 'AFTER_WINDOW'
-                ? max((int)$submitted, (int)$t['exam_end_at'])
-                : $submitted;
+            $t['result_available_at'] = mpt_result_release_at($mock, (int)$submitted, (int)$t['exam_end_at']);
         }
     }
 
@@ -179,6 +197,17 @@ function mpt_candidate_state(array $mock, ?array $session, ?array $application, 
         'timestamps' => array_map('mpt_iso', $t),
         'next_transition_at' => mpt_iso($next),
     ];
+}
+
+/**
+ * When a submitted attempt's result (score card, answer review, rank) opens.
+ * AFTER_WINDOW (default): results_delay_minutes after exam_end_at, so every
+ * candidate has finished and every attempt is scored first (owner: 30 minutes).
+ */
+function mpt_result_release_at(array $mock, int $submittedMs, int $examEndMs): int
+{
+    if (($mock['results_release_policy'] ?? 'AFTER_WINDOW') !== 'AFTER_WINDOW') return $submittedMs;
+    return max($submittedMs, $examEndMs + (int)($mock['results_delay_minutes'] ?? 30) * 60000);
 }
 
 const CSSV_MPT_PRIMARY_ACTIONS = [
@@ -197,7 +226,7 @@ const CSSV_MPT_PRIMARY_ACTIONS = [
     'CANCELLED' => null,
 ];
 
-function mpt_state_phase(string $status, string $releasePolicy, ?array $session, ?array $application, ?array $attempt, array $t, int $now, bool $signedIn): string
+function mpt_state_phase(string $status, array $mock, ?array $session, ?array $application, ?array $attempt, array $t, int $now, bool $signedIn): string
 {
     if ($status === 'CANCELLED') return 'CANCELLED';
 
@@ -208,8 +237,7 @@ function mpt_state_phase(string $status, string $releasePolicy, ?array $session,
         if ($attemptStatus === 'IN_PROGRESS' && $now < $expires) return 'IN_PROGRESS';
         // Submitted, or expired and awaiting the sweeper (treated as submitted).
         $submitted = mpt_ms($attempt['submitted_at'] ?? null) ?? $expires;
-        $releaseAt = $releasePolicy === 'AFTER_WINDOW' ? max($submitted, (int)$t['exam_end_at']) : $submitted;
-        return $now >= $releaseAt ? 'RESULT_AVAILABLE' : 'SUBMITTED_PENDING_RESULT';
+        return $now >= mpt_result_release_at($mock, $submitted, (int)$t['exam_end_at']) ? 'RESULT_AVAILABLE' : 'SUBMITTED_PENDING_RESULT';
     }
 
     if ($application !== null) {

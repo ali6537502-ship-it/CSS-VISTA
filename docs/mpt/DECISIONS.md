@@ -1,7 +1,8 @@
 # MPT Examination System — Decisions
 
 Every default and trade-off chosen while building the MPT application flow. The
-Section 1A locked decisions in the master command override anything here.
+Section 1A locked decisions in the master command override anything here, **except where
+the owner later changed them explicitly** (see "Owner changes, round 2" at the end).
 Entries marked **OWNER** need the site owner's confirmation. Until they confirm,
 the stated default applies.
 
@@ -313,3 +314,91 @@ emerald-600 (`#059669`) on dark. Both pass the dataviz palette validator against
 surfaces. Lines are 2 px with 8 px markers and one 0–100 % axis. Each chart has a
 hover/focus tooltip and a table view. Subjects use small multiples, not a multi-hue
 legend.
+
+## Owner changes, round 2 (25 Sep 2026)
+
+These override Section 1A and the earlier entries where they differ.
+
+**D-40 · The official papers are the 40 release-audited papers, unchanged** — owner
+The optional selection salt (D-04) is removed and `buildCompetitiveMock` is byte-for-byte
+the original. The exporter emits exactly the series that `npm run audit:mpt-40`
+approves: same session keys, same order, same options. `CSSV_MPT_PAPER_SEED` is no
+longer used. Consequence, accepted by the owner: a technically skilled person could
+rebuild a paper from the public code before the mock (AUDIT C3). Server-held keys,
+server scoring and positions-not-ids (D-31) are unchanged.
+
+**D-41 · Roll numbers have no upper limit** — owner (replaces 1A #3 "6 digits")
+A roll number is 6 digits (5 random + Damm check digit) while the mock has fewer than
+40,500 applications. Beyond that it becomes 7 digits (up to 405,000), then 8, and so on,
+up to 12. Each length is used only while it is at most ~45 % full, so random collisions
+stay rare. After 10 collisions at one length the server moves to the next length instead
+of failing. The first digit is never 0, so a longer number can never equal a shorter one.
+The entrance gate accepts 6–12 digits, spaces ignored. Numbers are displayed in groups
+of three. Typical mocks keep 6-digit numbers.
+
+**D-42 · Apply any time for an upcoming mock; never for an ongoing one** — owner
+(replaces 1A #5)
+- Applications open **as soon as a mock exists** and close **when the exam starts**
+  (`application_close_at = exam_open_at`).
+- The daily 15:00 / 22:30 PKT mocks are created **a week ahead**, so a student can pick
+  any upcoming mock.
+- "Entry opens / entry closes" is gone from the candidate screens. They show "Exam
+  starts" and "Late entry until" (applicants may still enter up to 10 minutes late with
+  the time left, as before).
+- The Roll Number rule (1A #4) is unchanged. Because nobody can apply during an exam now,
+  the "instant roll number for late applicants" case can only arise if an admin extends
+  a window.
+
+**D-43 · Result card 30 minutes after the mock** — owner
+`results_release_policy` now defaults to `AFTER_WINDOW`, with a new per-mock
+`results_delay_minutes` (default 30). Score, result card, rank and answer review all open
+at `exam_end_at + 30 min`. This also gives the server time to finish every automatic
+submission first. The result card carries:
+- the CSS Vista logo;
+- candidate, candidate ID, roll number and application ID;
+- the mock date and time window;
+- score, percentage, correct / incorrect / unattempted and accuracy;
+- rank and pass mark where eligible;
+- "Congratulations on completing CSS Vista MPT Mock N".
+
+It prints, or saves as PDF, cleanly through the scoped print stylesheet. The
+congratulation line celebrates completion, not a pass, so it is never misleading.
+
+**D-44 · Wrong-answer bank** — owner
+`/account/mpt/mistakes` (and `GET /api/mpt/mistakes.php`) lists every question the
+student answered incorrectly in completed official mocks, with their answer, the
+correct answer and the explanation. It can be filtered by subject and is paginated. It
+opens with the result card, 30 minutes after the mock, never earlier, so answers cannot
+leak while others are still sitting. Mocks whose review policy is `NEVER` are excluded.
+It is linked from the dashboard card, the MPT area and the result page.
+
+**D-45 · Admin: who applied, who appeared** — owner request
+- The admin already had the per-mock candidate list and counts. It now labels them
+  **Applied / Appeared / In progress / Completed / Absent**.
+- The overview table has an Appeared column.
+- Each mock's candidate list has an **Appeared** column and filter buttons:
+  All applied / Appeared / Absent or not yet.
+- The CSV export follows the filter and includes an Appeared column.
+
+**D-46 · Load hardening** — owner request ("a lot of students")
+- **Apply:** no shared lock when capacity is unlimited (the default), so concurrent
+  applies don't queue behind one row. Uniqueness stays enforced by the database indexes.
+  A capacity-limited mock still serialises applies, which is what makes "exactly one
+  winner" correct.
+- **Rate limits:** a dedicated `mpt_rate_hits` table indexed by (subject, bucket, time),
+  so each check is one index range, pruned daily. They no longer share the site-wide
+  login-events table. The per-IP flood guard is 600 applies/min, so a whole academy on
+  one connection is never blocked.
+- **Autosave:** one batched lookup and one multi-row upsert per save. Save and resume
+  skip the profile re-check and the maintenance hook. The client batches answers every
+  4 s (was 2.5 s), saves nothing when nothing changed, and heartbeats every 60 s only
+  when changes are waiting (was every 30 s regardless).
+- **Reads:** history is one query instead of several per mock. Public "candidates
+  registered" uses the maintained counter instead of `COUNT(*)`. The state engine no
+  longer runs an extra query per card.
+- **Sweeper:** the cron run processes up to 5,000 expired attempts within a 45-second
+  budget. The 30-minute result delay leaves ample time to score every attempt before
+  results open.
+- **Limit that remains:** Hostinger shared PHP is the ceiling. For very large simultaneous
+  sittings (many thousands at once), watch hPanel resource usage in the first mocks and
+  consider a higher Hostinger plan. The code has no per-mock or per-roll-number limit.

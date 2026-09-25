@@ -72,6 +72,7 @@ function VerifiedScreen({ slug, verification, onExpired }: { slug: string; verif
         <ul className="mt-3 list-disc space-y-1 pl-5">
           <li>Each correct answer carries {mock.total_questions ? mock.total_marks / mock.total_questions : 1} mark{mock.negative_marking > 0 ? `; each incorrect answer deducts ${mock.negative_marking}` : '. There is no negative marking'}.</li>
           <li>Every attempt ends at {pktTime(mock.exam_end_at)}. Unsubmitted answers are submitted automatically at that time.</li>
+          <li>Your result card and wrong answers are available 30 minutes after the exam ends.</li>
           <li>Answers save automatically. If you lose your connection, keep going — they sync when you reconnect.</li>
           <li>{copy.entrance.timerNote}</li>
         </ul>
@@ -143,7 +144,7 @@ function Gate({ slug }: { slug: string }) {
           ref={inputRef}
           id={inputId}
           value={value}
-          onChange={(event) => { setValue(event.target.value.replace(/[^\d\s]/g, '').slice(0, 9)); setError(null) }}
+          onChange={(event) => { setValue(event.target.value.replace(/[^\d\s]/g, '').slice(0, 16)); setError(null) }}
           inputMode="numeric"
           autoComplete="off"
           autoCorrect="off"

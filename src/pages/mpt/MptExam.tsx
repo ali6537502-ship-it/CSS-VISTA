@@ -9,8 +9,10 @@ import { useServerClock } from '@/lib/mpt/useServerClock'
 import { QUESTIONS_PER_PAGE, questionPageCount, questionPageForIndex, sliceQuestionPage } from '@/lib/questionPagination'
 import { ErrorNote, MptGate, PageSkeleton, primaryButton, secondaryButton } from './common'
 
-const DEBOUNCE_MS = 2500
-const HEARTBEAT_MS = 30_000
+// Tuned for many simultaneous candidates: batched saves every few seconds while
+// answering, and a heartbeat only when something is still waiting to sync.
+const DEBOUNCE_MS = 4000
+const HEARTBEAT_MS = 60_000
 const OPTION_LETTERS = ['A', 'B', 'C', 'D']
 
 type Answers = Record<number, number>
@@ -70,6 +72,7 @@ function Runner({ slug, runtime }: { slug: string; runtime: MptRuntime }) {
   const flush = useCallback(async (): Promise<boolean> => {
     if (inFlight.current) return false
     const changes = Object.entries(pending.current).map(([p, o]) => ({ p: Number(p), o }))
+    if (changes.length === 0) { setSaveState('saved'); return true }
     inFlight.current = true
     setSaveState(changes.length ? 'saving' : 'saved')
     const sent = { ...pending.current }
@@ -123,7 +126,7 @@ function Runner({ slug, runtime }: { slug: string; runtime: MptRuntime }) {
 
   // Heartbeat, reconnect flush, integrity signal and last-chance flush.
   useEffect(() => {
-    const heartbeat = window.setInterval(() => { void flush() }, HEARTBEAT_MS)
+    const heartbeat = window.setInterval(() => { if (Object.keys(pending.current).length) void flush() }, HEARTBEAT_MS)
     const online = () => { void flush() }
     const visibility = () => {
       if (document.visibilityState === 'hidden') { visibilityChanges.current += 1; void flush() }

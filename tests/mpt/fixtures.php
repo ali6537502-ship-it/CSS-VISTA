@@ -6,6 +6,7 @@ declare(strict_types=1);
 //   mock <open-offset-min> [capacity]        a published mock with a frozen paper
 //   set <slug> <column> <value>              adjust a mock setting
 //   travel <slug> <minutes>                  move a mock (and its facts) into the past
+//   reserved <slug> <n>                      set the slot counter (roll-length tests)
 //   roll <slug> <user-id>                    the stored roll number (never via the API)
 //   key <slug>                               frozen answer key by position
 //   sweep                                    run the scheduler + sweeper once
@@ -61,6 +62,9 @@ switch ($command) {
         $shift('mpt_attempts', ['started_at', 'expires_at'], 'mock_id=?');
         $pdo->prepare("UPDATE mpt_attempts SET submitted_at=DATE_SUB(submitted_at, INTERVAL $seconds SECOND) WHERE mock_id=? AND submitted_at IS NOT NULL")->execute([$id]);
         $pdo->exec("DELETE FROM mpt_meta WHERE meta_key='last_maintenance_at'");
+        $out(['ok' => true]);
+    case 'reserved':
+        $pdo->prepare('UPDATE mpt_sessions s JOIN mpt_mocks m ON m.id=s.mock_id SET s.reserved_count=? WHERE m.public_slug=?')->execute([(int)$argv[3], $argv[2]]);
         $out(['ok' => true]);
     case 'roll':
         $stmt = $pdo->prepare('SELECT a.roll_number FROM mpt_applications a JOIN mpt_mocks m ON m.id=a.mock_id WHERE m.public_slug=? AND a.user_id=?');

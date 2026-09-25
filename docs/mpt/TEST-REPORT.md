@@ -5,19 +5,34 @@ Run date: 25 September 2026. Every result below comes from a local run against t
 MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10.11
 (`.github/workflows/mpt-exam-verification.yml`).
 
-## Summary
+## Summary (re-run after the owner's round-2 changes)
 
 | Suite | Command | Result |
 |---|---|---|
-| Production build and gates | `npm run build:hostinger` | ✅ pass — 86 registry routes; 1,018 sitemap URLs unchanged; link, duplicate and route-integrity audits pass; 40 official papers exported |
-| Release audit (existing engine unchanged) | `npm run audit:mpt-40` | ✅ output identical before and after the optional-salt change |
-| Repository tests | `npm run test:all` | ✅ 11 suites, 123 tests, 0 failures (includes the new MPT route test) |
-| Pure server rules | `php tests/mpt/unit.php` | ✅ ~23,700 checks, 0 failures |
-| Feature flag | `php tests/mpt/flag.php` | ✅ off / pilot / on / fail-closed |
-| State-engine mirror (TS) | `node --test tests/mptState.test.ts` | ✅ 35/35, same 32-case fixture table as PHP |
-| Server end to end (real HTTP, 8 PHP workers) | `node tests/mpt/security.mjs` | ✅ 16 scenario groups, 3 consecutive runs, no deadlocks |
-| Browser journey (Chromium, mobile and desktop) | `node tests/mpt/browser.mjs` | ✅ mobile 375 px, desktop 1280 px, width sweep 320/360/390/414 px, logged-out flow |
-| Lint (all changed files) | `eslint …` | ✅ 0 problems |
+| Production build and gates | `npm run build:hostinger` (no seed needed) | ✅ pass: 87 registry routes; 1,018 sitemap URLs unchanged; all audits pass; **40 audited papers** exported |
+| Papers unchanged | `git diff 0bbe72c -- src/data/mockPapers.ts` | ✅ 0 lines: the engine is byte-for-byte the original; `audit:mpt-40` passes |
+| Repository tests | `npm run test:all` | ✅ 11 suites, 124 tests, 0 failures |
+| Pure server rules | `php tests/mpt/unit.php` | ✅ ~24,900 checks, 0 failures (including 7-, 8- and 10-digit roll numbers) |
+| Feature flag | `php tests/mpt/flag.php` | ✅ |
+| State-engine mirror (TS) | `node --test tests/mptState.test.ts` | ✅ 36/36 on 33 shared cases |
+| Server end to end (8 PHP workers) | `node tests/mpt/security.mjs` | ✅ all scenario groups |
+| Browser journey (Chromium) | `node tests/mpt/browser.mjs` | ✅ mobile, desktop, 320–414 px sweep, admin panel, logged-out flow |
+| Lint | `eslint …` | ✅ 0 problems |
+
+### Round-2 behaviour, verified end to end
+- Applying to an **ongoing** mock is refused with "apply for an upcoming mock". Upcoming
+  mocks accept applications straight away. The scheduler creates only upcoming slots, a
+  week ahead.
+- An applicant who is late can still enter for 10 minutes and gets only the time left.
+- After submit the student sees "Your result card will be available at…". Nothing is
+  shown before exam end + 30 minutes, then the **result card** appears: logo, roll
+  number, date and time, score, congratulations.
+- The **wrong-answer bank** is empty until results open. Then it lists exactly the
+  incorrect questions with the correct answers. Absent candidates have none.
+- A mock with 40,500 applicants issues a **7-digit roll number**, which verifies with
+  spaces.
+- The admin sees **Applied / Appeared / Absent** counts and filtered candidate lists. The
+  CSV includes an Appeared column.
 
 ## What the automated suites prove (Section 21)
 
@@ -117,21 +132,27 @@ MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10
 | Application screen | ![](screens/mobile-02-apply.png) |
 | Confirmation and Roll Number countdown | ![](screens/mobile-03-confirmation-countdown.png) |
 | Roll Number revealed | ![](screens/mobile-04-roll-revealed.png) |
-| Candidate verified (late start) | ![](screens/mobile-05-verified.png) |
-| Exam (timer, save status, navigation) | ![](screens/mobile-06-exam.png) |
-| Result | ![](screens/mobile-07-result.png) |
+| Candidate verified | ![](screens/mobile-05-verified.png) |
+| Exam | ![](screens/mobile-06-exam.png) |
+| Submitted, result card pending | ![](screens/mobile-07a-submitted-pending.png) |
+| **Result card** | ![](screens/mobile-07-result-card.png) |
+| **Wrong answers** | ![](screens/mobile-07b-wrong-answers.png) |
 | History | ![](screens/mobile-08-history.png) |
 | Performance | ![](screens/mobile-09-performance.png) |
 | Public page, logged-out Apply | ![](screens/mobile-10-public-login-modal.png) |
-| Desktop: Roll Number | ![](screens/desktop-04-roll-revealed.png) |
-| Desktop: exam | ![](screens/desktop-06-exam.png) |
-| Desktop: result | ![](screens/desktop-07-result.png) |
+| Desktop: result card | ![](screens/desktop-07-result-card.png) |
+| Desktop: wrong answers | ![](screens/desktop-07b-wrong-answers.png) |
+| **Admin: applied / appeared** | ![](screens/admin-mpt-applied-appeared.png) |
 
 ## Not yet verified — needs the owner or production
 
-- **Hostinger production.** Nothing has been deployed. Setting `CSSV_MPT_PAPER_SEED`,
-  the cron job and the pilot flag, then a pilot mock on the live site (RUNBOOK §1), is
-  the remaining acceptance step. So is a Lighthouse before/after on `/mpt` and `/` on the
+- **Hostinger production.** Nothing has been deployed. Setting up the cron job and the
+  pilot flag, then running a pilot mock on the live site (RUNBOOK §1), is the remaining
+  acceptance step.
+- **Load at real scale.** The code has no per-mock or per-roll-number limits, and the hot
+  paths were reduced (DECISIONS D-46). The 50-way concurrency test passes. A load test of
+  thousands of simultaneous candidates against Hostinger itself has not been run. Watch
+  hPanel resource usage during the first large mocks. So is a Lighthouse before/after on `/mpt` and `/` on the
   live site: prerendered HTML is unchanged, and all new code is lazy-loaded behind routes
   and the flag.
 - **Offline for two minutes, and expiry while offline.** The client keeps an offline

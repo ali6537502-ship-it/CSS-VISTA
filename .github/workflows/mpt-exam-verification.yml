@@ -42,8 +42,6 @@ jobs:
       CSSV_SITE_ORIGIN: http://localhost:4173
       CSSV_MPT_APPLICATION_FLOW: 'on'
       CSSV_MPT_AUTO_SCHEDULE: 'off'
-      # Disposable test salt only; production uses a private Hostinger build variable.
-      CSSV_MPT_PAPER_SEED: ci-only-mpt-paper-seed-not-a-secret
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

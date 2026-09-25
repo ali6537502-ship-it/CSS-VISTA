@@ -21,6 +21,7 @@ export type MptMock = {
   negative_marking: number
   pass_percentage: number | null
   results_release_policy: string
+  results_delay_minutes: number
   answer_review_policy: string
   fee: 'FREE'
 }
@@ -77,6 +78,7 @@ export type MptResult = {
   rescored_at: string | null
   review_available: boolean
   review_available_at: string | null
+  mock_started_at: string
 }
 
 export type MptResultPayload = {
@@ -171,6 +173,9 @@ export type MptPerformance = {
 
 export type MptReviewQuestion = MptPaperQuestion & { correct: number; selected: number | null; explanation: string | null }
 
+export type MptMistake = MptPaperQuestion & { mock_number: number; title: string; exam_open_at: string; selected: number; correct: number; explanation: string | null }
+export type MptMistakes = { questions: MptMistake[]; total: number; page: number; per_page: number; subjects: Array<{ subject: string; count: number }>; server_time: string }
+
 // ---------------------------------------------------------------- server clock
 
 let clockOffsetMs = 0
@@ -206,6 +211,7 @@ export const mptApi = {
   dashboard: (signal?: AbortSignal) => get<MptDashboard>('dashboard.php', signal),
   history: (page: number, status: string | null, signal?: AbortSignal) => get<MptHistory & { server_time: string }>(`history.php?page=${page}${status ? `&status=${status}` : ''}`, signal),
   performance: (signal?: AbortSignal) => get<MptPerformance>('performance.php', signal),
+  mistakes: (page: number, subject: string | null, signal?: AbortSignal) => get<MptMistakes>(`mistakes.php?page=${page}${subject ? `&subject=${encodeURIComponent(subject)}` : ''}`, signal),
 }
 
 /** A per-tab id for the single-active-device lock (D-16). */

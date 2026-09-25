@@ -7,12 +7,9 @@ This runbook is for the site owner and admin. The admin workspace is at
 
 Complete these steps in order. Nothing is visible to students until step 4.
 
-1. **Build secret.** In Hostinger's build Environment Variables, add
-   `CSSV_MPT_PAPER_SEED` with 32+ random characters. It must **not** be a `VITE_`
-   variable. Redeploy. The build log should then contain
-   `MPT official series <id>: 40 paper(s)` without "NOT publishable". Without the seed the
-   papers are exported but the server refuses to use them. That is deliberate: the paper
-   would otherwise be rebuildable from public code.
+1. **Papers.** Nothing to configure. Every deploy exports the 40 release-audited MPT
+   papers exactly as they are. The build log shows
+   `MPT official series <id>: 40 audited paper(s)`.
 2. **Database.** Nothing to run. The API creates the MPT tables on first use, as it does
    for the other features. To do it by hand, run `server/sql/010_mpt_exam_system.sql` in
    phpMyAdmin.
@@ -39,17 +36,23 @@ Complete these steps in order. Nothing is visible to students until step 4.
 
 ## 2. Daily operation
 
-With automatic scheduling on, two official mocks are created every day, at
-**15:00 and 22:30 PKT**. Each one:
+With automatic scheduling on, the official mocks at **15:00 and 22:30 PKT** are
+created **a week ahead**. Each one:
 
-- opens for applications 24 h before the exam;
-- closes applications and entry 10 minutes after the exam starts;
+- **accepts applications from the moment it exists until the exam starts.** Students
+  can pick any upcoming mock at any time, but never one that is already running;
+- lets applicants who are late still **enter up to 10 minutes after the start**, with the
+  time remaining;
 - runs for 200 minutes (all attempts end at 18:20 or 01:50 PKT);
-- issues the Roll Number 10 minutes after applying, or at exam start if that is sooner,
-  or instantly for late applicants.
+- issues the Roll Number 10 minutes after applying, or at exam start if that is sooner.
+  Roll numbers are 6 digits, and move to 7 or more digits automatically only when a
+  single mock passes 40,500 applicants. There is no limit on the number of candidates;
+- publishes each student's **result card 30 minutes after the exam ends**. At the same
+  time their **wrong answers** appear in My CSS Vista → My Wrong Answers.
 
-**Paper runway.** The current question bank supports **40 unique official papers**,
-about 20 days at two a day. The admin overview shows "N of 40 papers left". When it
+**Paper runway.** The current question bank supports **40 unique official papers**
+(the audited set), about 20 days at two a day. Creating mocks a week ahead reserves
+their papers early, but does not use them up any faster. The admin overview shows "N of 40 papers left". When it
 reaches 0, no new mocks are created and the overview says so. No question is ever
 repeated to someone who sat an earlier official mock.
 
@@ -65,7 +68,11 @@ already used.
 ## 3. Scheduling or editing a mock by hand
 
 - **Create:** choose the exam start (PKT) and optional capacity, then press
-  **Create mock**. The mock is published immediately with a fresh paper.
+  **Create mock**. The mock is published immediately with the next audited paper, and
+  applications open straight away.
+- **Who applied / who appeared:** Open the mock. The tiles show Applied, Appeared, In
+  progress, Completed and Absent. The candidate list has an Appeared column and filters
+  (All applied / Appeared / Absent). **Export CSV** follows the filter.
 - **Edit** (Open → Settings) covers:
   - start time
   - application window
@@ -91,7 +98,9 @@ already used.
 |---|---|---|
 | "I can't see my Roll Number" | Search their email. "Applied" shows when they applied; the number appears 10 min later, or at exam start. | Explain the timing. The number is on their dashboard and application page. |
 | "My Roll Number is rejected" | The Roll Number column. Roll numbers only work for their owner, for that mock, inside the entry window. | Ask them to copy it from **their own** application page ("Where is my Roll Number?"). A cool-down applies after 5 wrong tries in 10 minutes. |
-| "Entry is closed" | Entry closes 10 minutes after the start. | This is the rule. They are marked Absent, which never counts as zero. |
+| "I can't apply" | Is the mock already running? | Applications close when the exam starts. They can apply for any upcoming mock. |
+| "Late entry has ended" | Late entry ends 10 minutes after the start. | This is the rule. They are marked Absent, which never counts as zero. |
+| "Where is my result?" | Result card time = exam end + 30 minutes. | It appears on their dashboard then, along with their wrong answers. |
 | "The exam is open on another device" | The attempt's Takeovers count. | They verify their Roll Number again on the device they want and press **Continue**. The timer never paused. |
 | "My connection dropped / the browser crashed" | Last save time on the attempt. | Answers are saved every few seconds and resume on refresh. Unsubmitted attempts are submitted automatically at the end. |
 | Genuine technical failure | Attempts tab: started, submitted, tab switches, takeovers. | **Void** the attempt (reason required), then **Grant re-sit**. A re-sit only works while entry is still open. |

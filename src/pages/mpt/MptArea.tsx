@@ -95,7 +95,10 @@ function Area() {
             <p className="mt-1 text-4xl font-bold tabular-nums text-slate-950">{fmt(latest.result.score)}<span className="text-xl text-slate-400"> / {fmt(latest.result.total_marks)}</span> <span className="text-lg font-semibold text-emerald-900">{fmt(latest.result.percentage, '%')}</span></p>
             <p className="mt-2 text-sm text-slate-700">Correct {latest.result.correct} · Incorrect {latest.result.incorrect} · Unattempted {latest.result.unanswered}
               {latest.result.rank ? ` · Rank ${latest.result.rank.position} of ${latest.result.rank.candidates}` : ''}</p>
-            <Link to={`/account/mpt/results/${latest.application_code}`} className={`${secondaryButton} mt-3`}>{copy.dashboard.viewResult}</Link>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link to={`/account/mpt/results/${latest.application_code}`} className={secondaryButton}>{copy.dashboard.viewResult}</Link>
+              <Link to="/account/mpt/mistakes" className={secondaryButton}>{copy.dashboard.mistakesTitle}</Link>
+            </div>
           </div>
         ) : <p className="rounded-2xl border border-dashed border-slate-300 p-5 text-sm text-slate-600">{copy.dashboard.scoreEmpty}</p>}
       </section>

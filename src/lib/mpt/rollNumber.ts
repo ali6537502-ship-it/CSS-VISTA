@@ -1,5 +1,6 @@
-// Client-side typo check for the 6-digit Roll Number. The server repeats every
-// check; this only lets the entrance gate say "one digit looks wrong" instantly.
+// Client-side typo check for the Roll Number (six digits, growing to seven or more
+// only for very large mocks). The server repeats every check; this only lets the
+// entrance gate say "a digit looks wrong" instantly.
 const DAMM = [
   [0, 3, 1, 7, 5, 9, 8, 6, 4, 2],
   [7, 0, 9, 2, 1, 5, 4, 8, 6, 3],
@@ -19,13 +20,13 @@ export function normaliseRollNumber(value: string) {
 
 export function isWellFormedRollNumber(value: string) {
   const digits = normaliseRollNumber(value)
-  if (!/^[1-9]\d{5}$/.test(digits)) return false
+  if (!/^[1-9]\d{5,11}$/.test(digits)) return false
   let interim = 0
   for (const digit of digits) interim = DAMM[interim][Number(digit)]
   return interim === 0
 }
 
+/** Left-to-right groups of three: 482 917, 482 917 3. */
 export function formatRollNumber(roll: string) {
-  const digits = normaliseRollNumber(roll)
-  return digits.length === 6 ? `${digits.slice(0, 3)} ${digits.slice(3)}` : digits
+  return normaliseRollNumber(roll).replace(/(\d{3})(?=\d)/g, '$1 ')
 }

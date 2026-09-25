@@ -182,6 +182,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/mistakes', 'My MPT Wrong Answers', 'Questions you answered incorrectly in completed MPT Mocks, with the correct answers.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/apply/:mock', 'Apply for MPT Mock', 'Reserve an MPT Mock slot.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/applications/:code', 'MPT Mock Application', 'Your MPT Mock application and Roll Number.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/entrance/:mock', 'MPT Mock Candidate Verification', 'Verify your Roll Number to enter the MPT Mock.', { match: 'pattern', robots: 'noindex, nofollow' }),

@@ -266,7 +266,7 @@ test('every sitemap URL resolves, is indexable and is self-canonical', { skip: !
 })
 
 test('MPT portal routes resolve on direct navigation, stay private and follow their ad policy', { skip: !built }, () => {
-  const exact = ['/account/mpt', '/account/mpt/history', '/account/mpt/performance']
+  const exact = ['/account/mpt', '/account/mpt/history', '/account/mpt/performance', '/account/mpt/mistakes']
   const patterns = [
     '/account/mpt/apply/mpt-mock-031', '/account/mpt/applications/MPTA-031-7H3K9Q',
     '/account/mpt/entrance/mpt-mock-031', '/account/mpt/exam/mpt-mock-031', '/account/mpt/results/MPTA-031-7H3K9Q',

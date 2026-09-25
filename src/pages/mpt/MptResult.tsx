@@ -1,11 +1,13 @@
 import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { Printer } from 'lucide-react'
 import { mptApi, type MptReviewQuestion } from '@/lib/mpt/api'
 import { copy, pktDate, pktDateTime } from '@/lib/mpt/copy'
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useBoundary, useServerClock } from '@/lib/mpt/useServerClock'
 import { AccountPage } from '@/pages/account/shared'
 import { StatusBadge } from '@/components/mpt/StatusBadge'
+import { ResultCard } from '@/components/mpt/ResultCard'
 import { DetailList, ErrorNote, MptGate, PageSkeleton, primaryButton, secondaryButton, useMptLoad } from './common'
 
 const LETTERS = ['A', 'B', 'C', 'D']
@@ -69,44 +71,34 @@ function ResultScreen({ code }: { code: string }) {
   }
   const attempted = result.correct + result.incorrect
   return (
-    <div className="space-y-6">
-      <section className="rounded-2xl border border-emerald-900/15 bg-white p-5 sm:p-6" aria-labelledby="score-heading">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <StatusBadge phase={data.state.phase} />
-          {result.submit_reason !== 'MANUAL' && <span className="text-xs font-semibold text-slate-500">Submitted automatically when time ended</span>}
-        </div>
-        <h2 id="score-heading" className="mt-3 text-sm font-semibold uppercase tracking-[.14em] text-slate-500">Score</h2>
-        <p className="mt-1 text-5xl font-bold tabular-nums text-slate-950">{num(result.score)}<span className="text-2xl text-slate-400"> / {num(result.total_marks)}</span></p>
-        <p className="mt-1 text-lg font-semibold text-emerald-900">{num(result.percentage)}%</p>
-        {result.passed !== null && <p className="mt-2 text-sm font-semibold">{result.passed ? 'Passed' : 'Not passed'} (pass mark {mock.pass_percentage}%)</p>}
-        {result.rank && <p className="mt-2 text-sm text-slate-700">Rank <strong>{result.rank.position}</strong> of {result.rank.candidates} · {num(result.rank.percentile)} percentile</p>}
-        {result.previous_average_percentage !== null && (
-          <p className="mt-2 text-sm text-slate-700">Your previous average: <strong>{num(result.previous_average_percentage)}%</strong> ({result.percentage >= result.previous_average_percentage ? '+' : ''}{num(result.percentage - result.previous_average_percentage)} points)</p>
-        )}
-        {result.rescored_at && <p className="mt-3 text-xs text-slate-500">{copy.result.rescored(pktDate(result.rescored_at))}</p>}
-      </section>
-
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[['Correct', result.correct], ['Incorrect', result.incorrect], ['Unattempted', result.unanswered], ['Accuracy', result.accuracy === null ? '—' : `${num(result.accuracy)}%`]].map(([label, value]) => (
-          <div key={label} className="rounded-2xl border border-slate-200 bg-white p-4">
-            <p className="text-xs font-semibold uppercase tracking-[.12em] text-slate-500">{label}</p>
-            <p className="mt-1 text-2xl font-bold tabular-nums text-slate-950">{value}</p>
-          </div>
-        ))}
+    <div className="mpt-print-root space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
+        <StatusBadge phase={data.state.phase} />
+        {result.submit_reason !== 'MANUAL' && <span className="text-xs font-semibold text-slate-500">Submitted automatically when time ended</span>}
       </div>
-      <p className="text-xs text-slate-500">Accuracy = correct ÷ attempted ({result.correct} ÷ {attempted}).</p>
+      <ResultCard mock={mock} result={result} candidate={candidate} rollNumber={application.roll_number} applicationCode={application.application_code} />
+      {result.previous_average_percentage !== null && (
+        <p className="text-sm text-slate-700 print:hidden">Your previous average: <strong>{num(result.previous_average_percentage)}%</strong> ({result.percentage >= result.previous_average_percentage ? '+' : ''}{num(result.percentage - result.previous_average_percentage)} points)</p>
+      )}
+      {result.rescored_at && <p className="text-xs text-slate-500">{copy.result.rescored(pktDate(result.rescored_at))}</p>}
+      <div className="flex flex-wrap gap-2 print:hidden">
+        <button type="button" onClick={() => window.print()} className={primaryButton}><Printer aria-hidden="true" className="h-5 w-5" /> {copy.result.printCard}</button>
+        <Link to="/account/mpt/mistakes" className={secondaryButton}>{copy.dashboard.mistakesTitle}</Link>
+      </div>
 
-      <DetailList rows={[
+      <p className="text-xs text-slate-500 print:hidden">Accuracy = correct ÷ attempted ({result.correct} ÷ {attempted}).</p>
+
+      <div className="print:hidden"><DetailList rows={[
         ['Candidate', candidate.name],
         ['Roll Number', application.roll_number ? <span className="font-mono">{formatRollNumber(application.roll_number)}</span> : '—'],
         ['Application ID', <span className="font-mono">{application.application_code}</span>],
         ['Mock', mock.title],
         ['Date', pktDate(mock.exam_open_at)],
         ['Time taken', duration(result.time_taken_seconds)],
-      ]} />
+      ]} /></div>
 
       {result.subjects.length > 0 && (
-        <section aria-labelledby="subject-heading">
+        <section aria-labelledby="subject-heading" className="print:hidden">
           <h3 id="subject-heading" className="mb-2 text-sm font-semibold uppercase tracking-[.14em] text-slate-500">Subject-wise</h3>
           <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
             <table className="w-full min-w-[480px] text-left text-sm">
@@ -129,8 +121,8 @@ function ResultScreen({ code }: { code: string }) {
         </section>
       )}
 
-      {!result.review_available && result.review_available_at && <p className="text-sm text-slate-600">{copy.result.reviewAt(pktDateTime(result.review_available_at))}</p>}
-      <div className="flex flex-wrap gap-2">
+      {!result.review_available && result.review_available_at && <p className="text-sm text-slate-600 print:hidden">{copy.result.reviewAt(pktDateTime(result.review_available_at))}</p>}
+      <div className="flex flex-wrap gap-2 print:hidden">
         <Link to="/account/mpt/performance" className={primaryButton}>{copy.result.viewPerformance}</Link>
         <Link to="/account/mpt" className={secondaryButton}>{copy.result.back}</Link>
         {result.review_available && <button type="button" onClick={() => setShowReview((open) => !open)} aria-expanded={showReview} className={secondaryButton}>{copy.result.review}</button>}
