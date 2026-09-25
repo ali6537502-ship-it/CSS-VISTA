@@ -13,18 +13,30 @@ The dedicated GitHub Actions workflow stores both JSON reports as a 90-day artif
 
 ## Current audited baseline
 
-The first full forty-paper release gate run on commit `e49b87b908859d96fee5856c317fc83568f94277` passed with:
+The complete structural and factual release gates passed on commit `c599b187c4f78618ec0663c415450a6463542255`.
+
+Structural result:
 
 - 40 papers and 8,000 questions.
-- 0 reused legacy IDs.
-- 0 reused legacy stems.
+- Exact section totals across the series: 800 Islamic Studies, 800 Urdu, 2,000 English, 2,400 General Abilities and 2,000 General Knowledge.
+- General Knowledge composition in this preparation series: 800 Everyday Science, 80 Current Affairs and 1,120 Pakistan Affairs. This is an internal preparation split, not an FPSC-prescribed sub-allocation.
+- 0 reused legacy IDs and 0 reused legacy stems.
 - 0 off-syllabus regex hits.
 - 0 bare one-step arithmetic drills.
 - 0 papers without English comprehension.
 - 0 repeated numeric families above the release threshold.
-- 13 Basic, 2,477 Intermediate, 4,793 Advanced and 717 unrated questions under the current bank labels.
+- 0 blocking errors and 0 release failures.
 
-That run predates the new factual-integrity gate added immediately afterward; every later production build must pass both gates.
+Factual-integrity result:
+
+- 2,800 factual-section questions scanned across all 40 papers.
+- 0 malformed answer structures.
+- 0 ambiguous catch-all choices.
+- 0 high-risk patterns remaining under the factual gate.
+- All 80 Current Affairs questions retain explanations and approved primary-source URLs.
+- The final factual gate reported no failures.
+
+The SHA-named GitHub Actions artifact retains both JSON reports for this audited release.
 
 ## Editorial rule
 
