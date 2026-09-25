@@ -6,6 +6,7 @@ import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useBoundary } from '@/lib/mpt/useServerClock'
 import { StatusBadge } from './StatusBadge'
 import { MockSlot } from './MockSlot'
+import { EnterExamButton } from './EnterExamButton'
 
 const PRIORITY: Record<string, number> = {
   IN_PROGRESS: 0, ENTRY_OPEN: 1, ROLL_NUMBER_PENDING: 2, SLOT_RESERVED: 3, SUBMITTED_PENDING_RESULT: 4,
@@ -92,11 +93,14 @@ export function MptHeroCard({ card, now, onBoundary }: { card: MptCard; now: num
       <p className="mt-1 text-sm text-slate-600">{mock.duration_minutes} min · {mock.total_questions} MCQs · Free</p>
       <p className={`mt-3 text-base font-semibold ${ready ? 'text-emerald-950' : 'text-slate-800'}`}><span className="tabular-nums">{line}</span></p>
       <HowItWorks card={card} />
-      {href && state.primary_action && (
-        <Link to={href} className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-900 px-5 text-base font-bold text-white hover:bg-emerald-950 sm:w-auto">
-          {ACTION_LABEL[state.primary_action]}
-        </Link>
-      )}
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-stretch">
+        {href && state.primary_action && state.primary_action !== 'enter_exam' && state.primary_action !== 'continue_exam' && (
+          <Link to={href} className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-900 px-5 text-base font-bold text-white hover:bg-emerald-950 sm:w-auto">
+            {ACTION_LABEL[state.primary_action]}
+          </Link>
+        )}
+        <EnterExamButton card={card} className="w-full sm:w-auto" />
+      </div>
     </section>
   )
 }

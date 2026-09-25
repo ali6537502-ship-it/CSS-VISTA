@@ -1,6 +1,7 @@
 import type { MptCard } from '@/lib/mpt/api'
 import { pktTime } from '@/lib/mpt/copy'
 import { MockSlot } from './MockSlot'
+import { EnterExamButton } from './EnterExamButton'
 
 /** A running mock the viewer did not apply for (D-51): shown so the exam is never invisible. */
 export function isLiveForOthers(card: MptCard) {
@@ -23,6 +24,7 @@ export function LiveMockBanner({ cards }: { cards: MptCard[] }) {
             It started at {pktTime(card.mock.exam_open_at)} and ends at {pktTime(card.mock.exam_end_at)}. Only candidates who applied before it started can take it. They enter with the <strong>Enter Exam</strong> button on their My CSS Vista dashboard.
           </p>
           <p className="mt-1 text-sm font-semibold text-slate-900">Didn't apply for this one? Apply for the next mock below.</p>
+          <EnterExamButton card={card} className="mt-3 w-full sm:w-auto" />
         </section>
       ))}
     </>

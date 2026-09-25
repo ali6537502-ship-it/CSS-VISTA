@@ -5,6 +5,7 @@ import { formatRollNumber } from '@/lib/mpt/rollNumber'
 import { useMptSpotlight, type MptSpotlight } from '@/lib/mpt/useMptSpotlight'
 import { actionHref } from './MptHeroCard'
 import { MockSlot } from './MockSlot'
+import { EnterExamButton } from './EnterExamButton'
 
 /** Text and link for the one mock to point at (shared by the strip and the site notice bar). */
 export function spotlightMessage(spotlight: MptSpotlight, signedIn: boolean) {
@@ -64,9 +65,14 @@ export function MptMockStrip({ className = '' }: { className?: string }) {
         <p className="mt-1 text-sm font-semibold text-slate-950">{message.text}</p>
         <div className="mt-0.5"><MockSlot mock={spotlight.card.mock} withDate={false} withWindow /></div>
       </div>
-      <Link to={message.to} className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-emerald-900 px-5 text-sm font-bold text-white hover:bg-emerald-950">
-        {message.cta}
-      </Link>
+      <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-stretch">
+        {spotlight.kind !== 'mine-live' && (
+          <Link to={message.to} className="inline-flex min-h-11 items-center justify-center rounded-xl bg-emerald-900 px-5 text-sm font-bold text-white hover:bg-emerald-950">
+            {message.cta}
+          </Link>
+        )}
+        <EnterExamButton card={spotlight.card} />
+      </div>
     </aside>
   )
 }
