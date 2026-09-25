@@ -445,3 +445,14 @@ still exist (D-48) but are not listed.
 - The current-mock card shows three steps (apply, Roll Number, Enter Exam at the start
   time), with the current step highlighted, so students know the exam is entered from
   that same card.
+
+**D-52 · The MPT Mock is named wherever the MPT is** — owner ("everywhere MPT is mentioned")
+- One shared lookup (`useMptSpotlight`, one request a minute while the tab is visible)
+  picks the mock to point at: the viewer's own mock when it is live, else a mock being
+  held now, else the viewer's reserved mock, else the next mock.
+- It appears in the site-wide notice bar on every page, and as a compact strip on the home
+  page timers, MPT question banks, Start CSS and GK World. The MPT page itself has the
+  full MPT panel with the same live notice. The strip
+  renders nothing until the server answers, so prerendered HTML is unchanged.
+- With the flow on, the home page's legacy free-start MPT windows give way to the strip,
+  as the notice bar already did.

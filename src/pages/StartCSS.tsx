@@ -7,6 +7,7 @@ import { mptChecklist, writtenChecklist } from '@/data/checklists'
 import { migrateIndexedChecklist, setChecklistItem } from '@/lib/progress'
 import { mptFacts, mptOfficialSources, mptSyllabusSubjects } from '@/data/mptSyllabus'
 import ConsultationCard from '@/components/ConsultationCard'
+import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 
 const stages = [
   { name: 'MPT - MCQ-based Preliminary Test', detail: 'A screening MCQ paper conducted before the written exam (introduced from CSS 2022). Only candidates who qualify the MPT may appear in the written examination. Qualifying threshold and pattern are set in the official notice.' },
@@ -135,6 +136,7 @@ export default function StartCSS() {
       />
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10">
         <OfficialNotice />
+        <MptMockStrip />
 
         <Section title="What is CSS?">
           <div className="max-w-3xl space-y-3 text-[15px] leading-relaxed text-foreground/90">
