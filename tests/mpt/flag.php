@@ -7,8 +7,9 @@ $check = static function (bool $ok, string $label) use (&$failures): void { if (
 $pilot = ['email' => 'Pilot@Example.invalid'];
 $other = ['email' => 'someone@example.invalid'];
 putenv('CSSV_MPT_APPLICATION_FLOW');
-$check(mpt_flag_mode() === 'off', 'defaults to off');
-$check(!mpt_enabled_for($pilot) && !mpt_enabled_for(null), 'off admits nobody');
+$check(mpt_flag_mode() === 'on', 'live by default (owner decision D-48)');
+putenv('CSSV_MPT_APPLICATION_FLOW=off');
+$check(mpt_flag_mode() === 'off' && !mpt_enabled_for($pilot) && !mpt_enabled_for(null), 'off admits nobody (rollback)');
 putenv('CSSV_MPT_APPLICATION_FLOW=pilot');
 putenv('CSSV_MPT_PILOT_EMAILS=pilot@example.invalid, owner@example.invalid');
 $check(mpt_enabled_for($pilot), 'pilot admits allowlisted accounts (case-insensitive)');

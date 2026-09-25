@@ -21,8 +21,8 @@ MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10
 
 ### Round-2 behaviour, verified end to end
 - Applying to an **ongoing** mock is refused with "apply for an upcoming mock". Upcoming
-  mocks accept applications straight away. The scheduler creates only upcoming slots, a
-  week ahead.
+  mocks accept applications straight away. The scheduler creates only upcoming slots, 16
+  days ahead, at most 3 per request-time run (D-48).
 - An applicant who is late can still enter for 10 minutes and gets only the time left.
 - After submit the student sees "Your result card will be available at…". Nothing is
   shown before exam end + 30 minutes, then the **result card** appears: logo, roll

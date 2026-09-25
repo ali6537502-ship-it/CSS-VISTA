@@ -20,24 +20,21 @@ Complete these steps in order. Nothing is visible to students until step 4.
    It creates the next daily mocks, auto-submits expired attempts, marks absences and
    computes ranks. Without cron the same work runs on each MPT API request, so results
    are never lost. Ranks may just appear later.
-4. **Turn the flow on in stages.** These settings go in the private server config
+4. **The flow is on by default (D-48).** No setting is needed: every student sees the
+   upcoming mocks and applies through My CSS Vista, and the old `/gk/quiz?mode=mpt-mock`
+   links hand over to the portal. Optional settings in the private server config
    (`cssv-private/config.php`, alongside `CSSV_DB_*`):
-   - `'CSSV_MPT_APPLICATION_FLOW' => 'pilot'` and
-     `'CSSV_MPT_PILOT_EMAILS' => 'you@example.com,colleague@example.com'`. Only those
-     student accounts see the new flow; everyone else keeps the old daily mocks.
-     During the pilot, also set `'CSSV_MPT_AUTO_SCHEDULE' => 'off'` and create one or two
-     test mocks by hand. Automatic daily mocks consume the limited paper runway (see §2),
-     even while only testers can apply.
-   - When the pilot looks right: `'CSSV_MPT_APPLICATION_FLOW' => 'on'`. Every student now
-     applies through My CSS Vista. The old `/gk/quiz?mode=mpt-mock` links hand over to
-     the portal.
-   - Optional: `'CSSV_MPT_AUTO_SCHEDULE' => 'off'` stops automatic daily mocks, so you
-     schedule each one by hand.
+   - `'CSSV_MPT_APPLICATION_FLOW' => 'off'` turns the new flow off (see §6).
+   - `'CSSV_MPT_APPLICATION_FLOW' => 'pilot'` with
+     `'CSSV_MPT_PILOT_EMAILS' => 'you@example.com,colleague@example.com'` limits it to
+     those accounts.
+   - `'CSSV_MPT_AUTO_SCHEDULE' => 'off'` stops automatic daily mocks, so you schedule
+     each one by hand.
 
 ## 2. Daily operation
 
 With automatic scheduling on, the official mocks at **15:00 and 22:30 PKT** are
-created **a week ahead**. Each one:
+created **16 days ahead**. Each one:
 
 - **accepts applications from the moment it exists until the exam starts.** Students
   can pick any upcoming mock at any time, but never one that is already running;
@@ -51,7 +48,7 @@ created **a week ahead**. Each one:
   time their **wrong answers** appear in My CSS Vista → My Wrong Answers.
 
 **Paper runway.** The current question bank supports **40 unique official papers**
-(the audited set), about 20 days at two a day. Creating mocks a week ahead reserves
+(the audited set), about 20 days at two a day. Creating mocks 16 days ahead reserves
 their papers early, but does not use them up any faster. The admin overview shows "N of 40 papers left". When it
 reaches 0, no new mocks are created and the overview says so. No question is ever
 repeated to someone who sat an earlier official mock.
