@@ -1001,8 +1001,9 @@ function mpt_result(PDO $pdo, array $session, mixed $code): array
         return $base + ['result' => null, 'submission' => ['submitted_at' => mpt_iso(mpt_ms($attempt['submitted_at'])), 'submit_reason' => $attempt['submit_reason'], 'result_available_at' => $state['timestamps']['result_available_at']]];
     }
 
-    $subjects = $pdo->prepare('SELECT subject_key,questions,attempted,correct,incorrect,score,accuracy FROM mpt_attempt_subject_scores WHERE attempt_id=? ORDER BY subject_key');
-    $subjects->execute([$attempt['id']]);
+    // Paper order (Islamic Studies first), not alphabetical.
+    $subjects = $pdo->prepare('SELECT s.subject_key,s.questions,s.attempted,s.correct,s.incorrect,s.score,s.accuracy FROM mpt_attempt_subject_scores s WHERE s.attempt_id=? ORDER BY (SELECT MIN(q.position) FROM mpt_mock_questions q WHERE q.mock_id=? AND q.section=s.subject_key)');
+    $subjects->execute([$attempt['id'], $mock['id']]);
     $previous = $pdo->prepare("SELECT AVG(percentage) avg_pct,COUNT(*) n FROM mpt_attempts WHERE user_id=? AND id<>? AND status IN ('SUBMITTED','AUTO_SUBMITTED') AND voided_at IS NULL AND submitted_at<?");
     $previous->execute([$session['user_id'], $attempt['id'], $attempt['submitted_at']]);
     $prev = $previous->fetch();

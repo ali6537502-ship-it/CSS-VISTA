@@ -51,15 +51,15 @@ switch ($command) {
         $pdo->prepare("UPDATE mpt_mocks SET `{$argv[3]}`=? WHERE public_slug=?")->execute([$argv[4] === 'NULL' ? null : $argv[4], $argv[2]]);
         $out(['ok' => true]);
     case 'travel':
-        $minutes = (int)$argv[3];
+        $seconds = (int)round((float)$argv[3] * 60);
         $mockId = $pdo->prepare('SELECT id FROM mpt_mocks WHERE public_slug=?');
         $mockId->execute([$argv[2]]);
         $id = (string)$mockId->fetchColumn();
-        $shift = static fn(string $table, array $columns, string $where) => $pdo->prepare("UPDATE $table SET " . implode(',', array_map(static fn($c) => "$c=DATE_SUB($c, INTERVAL $minutes MINUTE)", $columns)) . " WHERE $where")->execute([$id]);
+        $shift = static fn(string $table, array $columns, string $where) => $pdo->prepare("UPDATE $table SET " . implode(',', array_map(static fn($c) => "$c=DATE_SUB($c, INTERVAL $seconds SECOND)", $columns)) . " WHERE $where")->execute([$id]);
         $shift('mpt_mocks', ['application_open_at', 'application_close_at', 'exam_open_at', 'entry_close_at', 'exam_end_at'], 'id=?');
         $shift('mpt_applications', ['applied_at'], 'mock_id=?');
         $shift('mpt_attempts', ['started_at', 'expires_at'], 'mock_id=?');
-        $pdo->prepare("UPDATE mpt_attempts SET submitted_at=DATE_SUB(submitted_at, INTERVAL $minutes MINUTE) WHERE mock_id=? AND submitted_at IS NOT NULL")->execute([$id]);
+        $pdo->prepare("UPDATE mpt_attempts SET submitted_at=DATE_SUB(submitted_at, INTERVAL $seconds SECOND) WHERE mock_id=? AND submitted_at IS NOT NULL")->execute([$id]);
         $pdo->exec("DELETE FROM mpt_meta WHERE meta_key='last_maintenance_at'");
         $out(['ok' => true]);
     case 'roll':

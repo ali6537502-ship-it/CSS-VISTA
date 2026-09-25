@@ -22,6 +22,7 @@ import { requestPageBack } from '@/lib/backNavigation'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { shouldShowCss2026ResultAnnouncement } from '@/lib/resultAnnouncement'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import {
   getRouteScrollPosition,
   parseRouteScrollState,
@@ -150,6 +151,7 @@ const mobileQuickLinks = [
 const mobileQuickPaths = new Set(mobileQuickLinks.map((item) => item.to))
 
 const VistaShortcut = lazyWithRecovery(() => import('@/components/VistaShortcut'))
+const MPT_FOCUS_PATH = /^\/account\/mpt\/(?:exam|entrance)\//
 const StudyActivityTracker = lazyWithRecovery(() => import('@/components/StudyActivityTracker'))
 
 function DeferredVistaShortcut() {
@@ -266,7 +268,8 @@ function NotificationBar() {
   const [streak, setStreak] = useState(() => touchVisit())
   const streakDayRef = useRef(scheduleTime.toDateString())
   const { user, syncStatus, lastSyncedAt } = useAccount()
-  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).map((kind) => {
+  const mptApplicationFlow = useMptFlowEnabled() === true
+  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
     const status = getDailyMockStatus(kind, scheduleTime)
     return {
       id: `daily-${kind}-mock-${status.dateKey}`,
@@ -280,6 +283,15 @@ function NotificationBar() {
       expires: undefined,
     }
   })
+  // With the application flow on, official MPT mocks are entered only through an
+  // application and Roll Number (docs/mpt), so the free-entry notices give way.
+  if (mptApplicationFlow) {
+    mockNotices.unshift({
+      id: 'mpt-application-flow', kind: 'platform' as const,
+      text: 'CSS MPT Mocks · daily at 3:00 PM and 10:30 PM PKT · apply in My CSS Vista to receive your Roll Number',
+      link: '/account/mpt', expires: undefined,
+    })
+  }
   const active = [
     { id: 'css-2026-result', kind: 'platform' as const, text: `CSS 2026 written result announced · ${css2026WrittenResult.qualifiedCandidates} candidates qualified · View the complete result`, link: css2026WrittenResult.pagePath },
     ...mockNotices,
@@ -1200,9 +1212,11 @@ export default function Layout() {
         </div>
       </main>
 
-      <DeferredVistaShortcut />
+      {/* Exam focus mode (docs/mpt D-36): no floating shortcut or bottom bar over
+          an active MPT examination or its Roll Number gate. */}
+      {!MPT_FOCUS_PATH.test(location.pathname) && <DeferredVistaShortcut />}
 
-      <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
+      {!MPT_FOCUS_PATH.test(location.pathname) && <nav className="cssv-mobile-nav no-print fixed inset-x-0 bottom-0 z-50 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden" aria-label="Primary mobile navigation">
         <div className="mx-auto grid h-[62px] max-w-lg grid-cols-5 px-1.5">
           {mobileBottomNav.map((item) => {
             const active = item.paths.some((path) => (
@@ -1223,7 +1237,7 @@ export default function Layout() {
             )
           })}
         </div>
-      </nav>
+      </nav>}
 
       <footer className="cssv-site-footer hidden border-t md:block">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">

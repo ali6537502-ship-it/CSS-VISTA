@@ -10,6 +10,7 @@ import { essayThemeActivity } from '@/features/essay-themes/progress'
 import { briefingRoot, displayDate, latestRange, overviewSchema, pakistanDate } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'
 import { AuthenticatedAccountAd } from '@/components/Ads'
+import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -192,6 +193,8 @@ export default function AccountHome() {
             My profile
           </Link>
         </header>
+
+        <DashboardMptCard />
 
         <h2 className="mt-10 text-sm font-semibold uppercase tracking-[.14em] text-slate-400">What would you like to do today?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

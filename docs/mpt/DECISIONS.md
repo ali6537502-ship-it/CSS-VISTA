@@ -101,7 +101,7 @@ headers, `ProfileGate` and the My CSS Vista shell, so the private routes go ther
 | `/account/mpt/applications/:code` | confirmation + application detail + print | authenticated | private | no/no | disabled (sensitive: roll number) |
 | `/account/mpt/entrance/:mock` | roll-number gate + verified screen | authenticated | private | no/no | disabled (assessment) |
 | `/account/mpt/exam/:mock` | exam runner | authenticated | private | no/no | disabled (assessment) |
-| `/account/mpt/results/:code` | result | authenticated | private | no/no | enabled |
+| `/account/mpt/results/:code` | result | authenticated | private | no/no | disabled (a result screen is an assessment state in `isAdSuppressedState`) |
 | `/account/mpt/history` | history | authenticated | private | no/no | enabled |
 | `/account/mpt/performance` | performance | authenticated | private | no/no | enabled |
 
@@ -232,9 +232,11 @@ setting a new `applied_at`, so the reveal delay applies again.
 **D-27 · Legacy URL handling** — accepted
 `/gk/quiz?mode=mpt-mock…` differs from other modes of the same path only by its query
 string. `ROUTE_REDIRECTS` is path-based, and `/gk/quiz` must keep serving the other modes.
-So when the flag is on, `GKQuiz` replaces the `mpt-mock` mode with a `<Navigate replace>`
-to `/account/mpt`, with no chain. Internal links are updated directly. With the flag
-off, the legacy flow is unchanged.
+When the flag is on, `GKQuiz` therefore replaces the `mpt-mock` mode with one
+`<Navigate replace>` to `/account/mpt`, never to the exam. The `/mpt` tiles and buttons,
+the site notice bar and the dashboard link straight to the portal. Other links that still
+build the legacy URL (`Progress`, `ExamIntelligence`, Home's mock windows) reach the portal
+through that single hop. With the flag off, the legacy flow is unchanged.
 
 **D-28 · Time zones** — accepted
 Timestamps are stored in UTC `DATETIME(3)` and displayed in Asia/Karachi. The 22:30 slot
@@ -275,3 +277,39 @@ attempt of that mock is still `IN_PROGRESS`. They are shown only when at least
 `CSSV_MPT_APPLICATION_FLOW=on`. The off/pilot/fail-closed logic is covered separately by
 `tests/mpt/flag.php`. The PHP test server runs with `PHP_CLI_SERVER_WORKERS=8`, so the
 50-way capacity race and double-tap tests are genuinely concurrent.
+
+## Decisions made during the candidate UI (Phases 2–5)
+
+**D-35 · No promotional popup over the exam or the Roll Number gate** — accepted
+The site's once-per-session notes-bundle offer appeared on any first page, including
+`/account/mpt/exam/…` when a candidate opened a fresh tab to continue. It is now
+suppressed on `/account/mpt/exam/` and `/account/mpt/entrance/` only. It is not
+dismissed there, so it can still appear elsewhere later in the same session.
+
+**D-36 · Exam focus mode** — accepted
+On the same two routes the layout omits the floating VISTA SHORTCUT button and the mobile
+bottom navigation. Both covered the exam's page controls and Submit button on phones
+(found by the browser test at 375 px). The header stays, so the candidate can always
+leave. On every other page the layout is unchanged. The exam timer lives in the fixed
+bottom bar, which nothing overlaps, because the site's sticky header covered a sticky-top
+timer.
+
+**D-37 · Notice bar and `/mpt` with the flag on** — accepted
+The site-wide notice bar's two "LIVE REGISTRATION… finish your paper after entry"
+messages describe the old free-start rule. With the flag on they are replaced by one
+accurate notice linking to `/account/mpt`. On `/mpt` the two free-start mock tiles give way
+to the application panel. Prerendered HTML is unchanged, because the flag is only known
+client-side.
+
+**D-38 · Late-start wording** — accepted
+The verified screen shows whole minutes remaining, and "minutes late" as the rest of the
+duration. The two always add up to the paper length and never overstate the time
+available. For example, 2 min 30 s late on a 200-minute paper reads "3 minutes late … 197
+minutes".
+
+**D-39 · Charts** — accepted
+Each chart shows a single series in one validated hue: emerald-700 (`#047857`) on light,
+emerald-600 (`#059669`) on dark. Both pass the dataviz palette validator against their
+surfaces. Lines are 2 px with 8 px markers and one 0–100 % axis. Each chart has a
+hover/focus tooltip and a table view. Subjects use small multiples, not a multi-hue
+legend.

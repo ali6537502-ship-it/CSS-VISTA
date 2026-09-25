@@ -264,3 +264,29 @@ test('every sitemap URL resolves, is indexable and is self-canonical', { skip: !
     assert.equal(canonicalOf(html), url, `${url} is not self-canonical`)
   }
 })
+
+test('MPT portal routes resolve on direct navigation, stay private and follow their ad policy', { skip: !built }, () => {
+  const exact = ['/account/mpt', '/account/mpt/history', '/account/mpt/performance']
+  const patterns = [
+    '/account/mpt/apply/mpt-mock-031', '/account/mpt/applications/MPTA-031-7H3K9Q',
+    '/account/mpt/entrance/mpt-mock-031', '/account/mpt/exam/mpt-mock-031', '/account/mpt/results/MPTA-031-7H3K9Q',
+  ]
+  for (const path of [...exact, ...patterns]) {
+    const html = served(path)
+    assert.match(metaRobots(html), /noindex/, `${path} must be noindex`)
+    assert.ok(!sitemapUrls.has(`${CANONICAL_ORIGIN}${path}`), `${path} must stay out of the sitemap`)
+    const policy = getRoutePolicy(path)
+    assert.equal(policy.access, 'authenticated', path)
+    assert.equal(policy.indexable, false, path)
+  }
+  // Transactions, the roll-number gate, the exam and results never carry ads.
+  for (const path of patterns) assert.equal(getRoutePolicy(path).adMode, 'disabled', path)
+  for (const path of exact) assert.equal(getRoutePolicy(path).adMode, 'enabled', path)
+  // Unknown MPT URLs are genuine 404s, not the application shell.
+  assert.equal(request('/account/mpt/unknown/value').status, 404)
+  assert.equal(request('/account/mpt/exam').status, 404)
+  // Server-only paper data and helpers are never downloadable.
+  for (const path of ['/api/_mpt_papers/manifest.php', '/api/_mpt_papers/paper-001.php', '/api/_mpt_core.php', '/api/_mpt.php']) {
+    assert.equal(request(path).status, 403, `${path} must be forbidden`)
+  }
+})

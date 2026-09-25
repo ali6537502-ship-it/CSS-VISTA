@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { randomBytes } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable CI database required')
 
 const base = 'http://localhost:4173/api/mpt/'
@@ -254,6 +255,63 @@ for (let i = 0; i < 6; i += 1) {
   lastStatus = (await call(E, 'verify.php', { mock: m3.slug, roll_number: guess })).status
 }
 assert.equal(lastStatus, 429, 'sixth failed guess within ten minutes is rate limited')
+
+step('admin: overview, applications, CSV, void + re-sit, rescore')
+const owner = JSON.parse(readFileSync('test-artifacts/admin-session.json', 'utf8'))
+async function admin(query, body) {
+  const headers = { Accept: 'application/json', Cookie: `cssv_owner_session=${owner.token}; cssv_owner_csrf=${owner.csrf}` }
+  if (body !== undefined) Object.assign(headers, { 'Content-Type': 'application/json', 'X-CSRF-Token': owner.csrf })
+  const response = await fetch(`http://localhost:4173/api/admin/mpt.php${query}`, { method: body === undefined ? 'GET' : 'POST', headers, body: body === undefined ? undefined : JSON.stringify(body) })
+  const text = await response.text()
+  let data = {}
+  try { data = JSON.parse(text) } catch { /* CSV */ }
+  return { status: response.status, data, text, headers: response.headers }
+}
+assert.equal((await fetch('http://localhost:4173/api/admin/mpt.php')).status, 401, 'admin view requires the owner session')
+assert.equal((await call(A, '../admin/mpt.php')).status, 401, 'a student session is not an admin session')
+const overview = await admin('?view=overview')
+assert.equal(overview.status, 200, overview.text)
+assert.equal(overview.data.flag, 'on')
+const row1 = overview.data.mocks.find((m) => m.slug === m1.slug)
+assert.equal(row1.stats.completed, 2)
+assert.equal(row1.stats.absent, 2)
+assert.equal(row1.stats.distribution.reduce((sum, b) => sum + b.count, 0), 2)
+assert.ok(overview.data.runway.total >= 1)
+const apps = await admin(`?view=applications&slug=${m1.slug}&q=${rollA}`)
+assert.equal(apps.data.total, 1)
+assert.equal(apps.data.rows[0].application_code, codeA)
+const csv = await admin(`?view=applications&slug=${m1.slug}&format=csv`)
+assert.match(csv.headers.get('content-type'), /text\/csv/)
+assert.ok(csv.text.split('\n')[0].startsWith('Candidate,Email'))
+assert.ok(csv.text.includes(rollA))
+const attempts = await admin(`?view=attempts&slug=${m1.slug}`)
+assert.equal(attempts.data.rows.find((r) => r.application_code === codeA).device_takeovers, 1, 'integrity signals are visible to the admin')
+assert.equal((await admin('', { action: 'void_attempt', code: codeA })).data.error, 'reason_required')
+assert.equal((await admin('', { action: 'void_attempt', code: codeA, reason: 'TEST ONLY integrity review' })).status, 200)
+assert.equal((await call(A, `result.php?code=${codeA}`)).data.state.phase, 'CANCELLED', 'a voided attempt shows as cancelled')
+assert.equal((await call(A, 'dashboard.php')).data.stats.attempts_completed, 0, 'voided attempts leave the stats')
+assert.equal((await admin('', { action: 'grant_resit', code: codeA, reason: 'TEST ONLY re-sit granted' })).status, 200)
+assert.equal((await call(A, `result.php?code=${codeA}`)).data.state.phase, 'ABSENT', 'with a re-sit but entry closed, the candidate is outside the window')
+// Rescore C's paper: make question 3 correct for nobody who answered it, and question 1 wrong.
+const before = (await call(C, `result.php?code=${appliedC.data.application.application_code}`)).data.result
+const rescore = await admin('', { action: 'rescore', slug: m1.slug, reason: 'TEST ONLY answer key correction', corrections: [{ position: 1, correct_index: (key[1] + 1) % 4 }] })
+assert.equal(rescore.status, 200, rescore.text)
+assert.equal(rescore.data.remaining, 0)
+const afterRescore = (await call(C, `result.php?code=${appliedC.data.application.application_code}`)).data.result
+assert.equal(afterRescore.correct, before.correct - 1, 'rescore recalculates finalised attempts')
+assert.ok(afterRescore.rescored_at, 'candidates see that the result was updated')
+assert.equal(fixture('events', m1.slug, 'RESCORED').count, 1)
+const created = await admin('', { action: 'create_mock', exam_open_at: new Date(Date.now() + 3 * 3600_000).toISOString(), capacity: 10 })
+assert.equal(created.status, 200, created.text)
+assert.equal(created.data.mock.capacity, 10)
+const slug4 = created.data.mock.slug
+const moved = await admin('', { action: 'update_mock', slug: slug4, exam_open_at: new Date(Date.now() + 4 * 3600_000).toISOString(), reason: 'TEST ONLY reschedule' })
+assert.equal(moved.status, 200, moved.text)
+assert.equal((await admin('', { action: 'update_mock', slug: slug4, exam_open_at: new Date(Date.now() - 3600_000).toISOString(), reason: 'TEST ONLY invalid order' })).data.error, 'invalid_time')
+fixture('travel', slug4, 245) // running now
+assert.equal((await admin('', { action: 'update_mock', slug: slug4, duration_minutes: 30, reason: 'TEST ONLY shorten' })).data.error, 'confirm_required')
+assert.equal((await admin('', { action: 'cancel_mock', slug: slug4, reason: 'TEST ONLY cancelled' })).status, 200)
+assert.equal((await call(B, `application.php?mock=${slug4}`)).data.state.phase, 'CANCELLED')
 
 step('daily schedule: 15:00 and 22:30 PKT, created idempotently')
 const schedule = fixture('autoschedule', '2031-03-10T09:30:00.000Z') // 14:30 PKT
