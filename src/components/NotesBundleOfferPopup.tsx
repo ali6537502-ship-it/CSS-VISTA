@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CheckCircle2, Clock3, MessageCircle, Sparkles, X } from 'lucide-react'
+import { CheckCircle2, Clock3, MessageCircle, X } from 'lucide-react'
 import { noteProducts } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
 import { notesBundleOfferEndsAt as OFFER_ENDS_AT, notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
+
+const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:' + OFFER_ENDS_AT
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat('en-PK').format(value)
@@ -11,7 +13,6 @@ function formatPrice(value: number) {
 function getTimeLeft(now: number) {
   const remaining = Math.max(0, OFFER_ENDS_AT - now)
   const totalSeconds = Math.floor(remaining / 1000)
-
   return {
     hours: Math.floor(totalSeconds / 3600),
     minutes: Math.floor((totalSeconds % 3600) / 60),
@@ -20,8 +21,24 @@ function getTimeLeft(now: number) {
   }
 }
 
+function wasDismissedThisSession() {
+  try {
+    return window.sessionStorage.getItem(DISMISSED_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+function rememberDismissal() {
+  try {
+    window.sessionStorage.setItem(DISMISSED_KEY, '1')
+  } catch {
+    // The offer remains closable even when storage is unavailable.
+  }
+}
+
 export default function NotesBundleOfferPopup() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(() => !wasDismissedThisSession())
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
@@ -38,11 +55,16 @@ export default function NotesBundleOfferPopup() {
 
   if (!open || timeLeft.expired) return null
 
+  function closeOffer() {
+    rememberDismissal()
+    setOpen(false)
+  }
+
   const ali = mentors.find((mentor) => mentor.id === 'ali')
   const purchaseLink = ali
     ? waLink(
         ali.whatsapp,
-        `Assalam-o-Alaikum, I want to purchase the Complete Notes Bundle at today's PKR ${formatPrice(OFFER_PRICE)} offer before 11:00 PM PKT. Please share the purchase details.`,
+        `Assalam-o-Alaikum, I want to purchase the Complete Notes Bundle of Sir Ali Hassan Sargana at today's PKR ${formatPrice(OFFER_PRICE)} offer before 11:00 PM PKT. Please share the purchase details.`,
       )
     : '/notes'
 
@@ -54,136 +76,90 @@ export default function NotesBundleOfferPopup() {
     'European History',
   ]
 
-  const priceBreakdown = [
-    { label: 'Current Affairs + Pakistan Affairs', price: 7000 },
-    { label: 'Criminology', price: 3600 },
-    { label: 'Political Science', price: 4000 },
-    { label: 'European History', price: 6000 },
-  ]
-
   return (
     <div
-      className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-emerald-950/80 px-3 py-5 backdrop-blur-md sm:px-5"
+      className="fixed inset-0 z-[120] flex items-end justify-center bg-emerald-950/35 p-2 backdrop-blur-[2px] sm:items-center sm:overflow-y-auto sm:bg-emerald-950/75 sm:px-5 sm:py-5 sm:backdrop-blur-md"
       role="dialog"
       aria-modal="true"
       aria-labelledby="notes-bundle-offer-title"
+      onMouseDown={(event) => {
+        if (event.currentTarget === event.target) closeOffer()
+      }}
     >
-      <section className="relative w-full max-w-3xl overflow-hidden rounded-[28px] border border-amber-300/80 bg-[#fffdf7] shadow-2xl">
-        <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-300" />
-
+      <section className="relative w-full max-w-md overflow-hidden rounded-2xl border border-amber-300/80 bg-[#fffdf7] shadow-2xl sm:max-w-xl sm:rounded-[24px]">
         <button
           type="button"
-          onClick={() => setOpen(false)}
-          className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full border border-emerald-900/10 bg-white/90 text-emerald-950 shadow-sm transition hover:bg-emerald-50"
+          onClick={closeOffer}
+          className="absolute right-2.5 top-2.5 z-20 grid h-9 w-9 place-items-center rounded-full border border-white/30 bg-white text-emerald-950 shadow-md"
           aria-label="Close bundle offer"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4.5 w-4.5" />
         </button>
 
-        <div className="bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 px-5 pb-7 pt-8 text-white sm:px-8 sm:pb-8 sm:pt-9">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/40 bg-amber-300 px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-emerald-950">
-              <Sparkles className="h-3.5 w-3.5" />
-              One-Day Bundle Offer
-            </span>
-            <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-emerald-50">
-              Ends 11:00 PM PKT
-            </span>
-          </div>
-
-          <h2 id="notes-bundle-offer-title" className="mt-4 max-w-2xl font-display text-3xl font-black leading-tight sm:text-4xl">
-            Get the Complete Notes Bundle for <span className="text-amber-300">PKR {formatPrice(OFFER_PRICE)}</span>
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-emerald-50/85 sm:text-base">
-            Five core subjects in one complete package. Today only, the full bundle is available at a special price before the countdown ends.
+        <div className="bg-gradient-to-br from-emerald-950 to-emerald-800 px-4 pb-4 pt-4 text-white sm:px-6 sm:pb-5 sm:pt-5">
+          <p className="pr-11 text-[9px] font-black uppercase tracking-[0.16em] text-amber-300">
+            Today only · Ends 11:00 PM PKT
           </p>
 
-          <div className="mt-5">
-            <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-amber-200">
-              <Clock3 className="h-4 w-4" />
-              Offer ends in
+          <h2 id="notes-bundle-offer-title" className="mt-1.5 pr-10 font-display text-[21px] font-black leading-[1.08] sm:text-3xl">
+            Complete Notes Bundle of Sir Ali Hassan Sargana
+          </h2>
+
+          <div className="mt-3 flex items-center justify-between gap-3">
+            <div>
+              <span className="text-[11px] font-bold text-emerald-100/80">Regular value</span>
+              <div className="mt-0.5 flex items-baseline gap-2">
+                <span className="text-sm font-bold text-emerald-100/60 line-through">PKR {formatPrice(totalPrice)}</span>
+                <strong className="font-display text-3xl font-black text-amber-300">PKR {formatPrice(OFFER_PRICE)}</strong>
+              </div>
             </div>
-            <div className="grid max-w-md grid-cols-3 gap-2.5">
-              {[
-                ['Hours', timeLeft.hours],
-                ['Minutes', timeLeft.minutes],
-                ['Seconds', timeLeft.seconds],
-              ].map(([label, value]) => (
-                <div key={label} className="rounded-2xl border border-white/15 bg-white/10 px-3 py-3 text-center shadow-inner backdrop-blur">
-                  <div className="font-display text-2xl font-black tabular-nums text-white sm:text-3xl">
-                    {String(value).padStart(2, '0')}
-                  </div>
-                  <div className="mt-1 text-[9px] font-bold uppercase tracking-[0.15em] text-emerald-100/75">{label}</div>
-                </div>
-              ))}
+            <div className="rounded-xl border border-amber-300/35 bg-amber-300/10 px-2.5 py-2 text-center">
+              <div className="text-[9px] font-bold uppercase tracking-[.1em] text-amber-200">Save</div>
+              <div className="text-sm font-black text-white">PKR {formatPrice(savings)}</div>
             </div>
+          </div>
+
+          <div className="mt-3 flex items-center gap-2">
+            <Clock3 className="h-3.5 w-3.5 text-amber-300" />
+            <span className="text-[10px] font-bold uppercase tracking-[.1em] text-emerald-100/80">Offer ends in</span>
+            <span className="ml-auto font-mono text-base font-black tabular-nums text-white">
+              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            </span>
           </div>
         </div>
 
-        <div className="grid gap-5 px-5 py-6 sm:px-8 sm:py-7 lg:grid-cols-[1.05fr_.95fr]">
-          <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-emerald-800">All subjects included</p>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-              {subjects.map((subject) => (
-                <div key={subject} className="flex items-center gap-2.5 rounded-xl border border-emerald-100 bg-emerald-50/60 px-3 py-2.5 text-sm font-bold text-emerald-950">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-700" />
-                  {subject}
-                </div>
-              ))}
-            </div>
+        <div className="px-4 py-3.5 sm:px-6 sm:py-4">
+          <div className="flex flex-wrap gap-1.5" aria-label="Subjects included">
+            {subjects.map((subject) => (
+              <span key={subject} className="inline-flex items-center gap-1 rounded-full border border-emerald-100 bg-emerald-50 px-2 py-1 text-[10px] font-bold text-emerald-950 sm:text-[11px]">
+                <CheckCircle2 className="h-3 w-3 text-emerald-700" />
+                {subject}
+              </span>
+            ))}
           </div>
 
-          <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-emerald-50 p-4 sm:p-5">
-            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-emerald-800">Regular value</p>
-            <div className="mt-3 space-y-2.5">
-              {priceBreakdown.map((item) => (
-                <div key={item.label} className="flex items-start justify-between gap-4 text-sm">
-                  <span className="text-slate-600">{item.label}</span>
-                  <strong className="shrink-0 text-emerald-950">PKR {formatPrice(item.price)}</strong>
-                </div>
-              ))}
-            </div>
-
-            <div className="my-4 border-t border-dashed border-amber-300" />
-
-            <div className="flex items-end justify-between gap-3">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Total price</p>
-                <p className="mt-1 font-display text-xl font-black text-slate-500 line-through">PKR {formatPrice(totalPrice)}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">Today</p>
-                <p className="mt-1 font-display text-3xl font-black text-emerald-950">PKR {formatPrice(OFFER_PRICE)}</p>
-              </div>
-            </div>
-
-            <div className="mt-3 rounded-xl bg-amber-300 px-3 py-2.5 text-center text-sm font-black text-emerald-950">
-              You save PKR {formatPrice(savings)}
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t bg-white px-5 py-5 sm:px-8">
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
             <a
               href={purchaseLink}
               target={purchaseLink.startsWith('http') ? '_blank' : undefined}
               rel={purchaseLink.startsWith('http') ? 'noopener noreferrer' : undefined}
               data-google-vignette="false"
-              className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-900 px-5 text-sm font-black text-white shadow-lg transition hover:bg-emerald-800"
+              className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl bg-emerald-900 px-3 text-[11px] font-black text-white shadow-sm hover:bg-emerald-800 sm:text-sm"
             >
               <MessageCircle className="h-4 w-4" />
-              Get Complete Bundle — PKR {formatPrice(OFFER_PRICE)}
+              Get Bundle — PKR {formatPrice(OFFER_PRICE)}
             </a>
-            <a
-              href="/notes"
-              className="inline-flex min-h-12 items-center justify-center rounded-xl border-2 border-emerald-900 px-5 text-sm font-black text-emerald-950 transition hover:bg-emerald-50"
+            <button
+              type="button"
+              onClick={closeOffer}
+              className="min-h-10 rounded-xl border border-emerald-900/15 bg-white px-3 text-[11px] font-bold text-emerald-950 sm:text-xs"
             >
-              View Notes & Samples
-            </a>
+              Close
+            </button>
           </div>
-          <p className="mt-3 text-center text-[11px] leading-relaxed text-slate-500">
-            Special bundle price valid only until 11:00 PM Pakistan Standard Time on 25 September 2026.
+
+          <p className="mt-2 text-center text-[9px] leading-relaxed text-slate-500 sm:text-[10px]">
+            Close this offer to continue using the website. It will stay closed for this browsing session.
           </p>
         </div>
       </section>
