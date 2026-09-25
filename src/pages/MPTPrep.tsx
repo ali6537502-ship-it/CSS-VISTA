@@ -12,6 +12,8 @@ import { DAILY_MOCK_TIME_LABELS, getMockAvailability, getState } from '@/lib/sto
 import { mergedMcqs } from '@/lib/admin'
 import { usePageBack } from '@/lib/backNavigation'
 import { mptQuestionBanks, mptQuestionBankPath } from '@/data/mptQuestionBanks'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { MptHubPanel } from '@/components/mpt/MptHubPanel'
 
 type Mode = 'subject' | 'topic' | 'random' | 'mock' | null
 
@@ -119,6 +121,9 @@ export default function MPTPrep() {
 
   const history = getState().quizResults.filter((r) => r.type === 'mpt' || r.type === 'quiz').slice(0, 8)
   const bookmarked = getState().bookmarks.filter((b) => b.startsWith('q-')).length
+  // With the application flow on, official mocks are entered only through an
+  // application and Roll Number; the free-start tiles give way to the panel.
+  const applicationFlow = useMptFlowEnabled() === true
   const mptMock = getMockAvailability('mpt', now)
   const afternoonMock = getMockAvailability('mpt-afternoon', now)
   const activeMock = afternoonMock.available
@@ -150,6 +155,7 @@ export default function MPTPrep() {
 
         {!mode ? (
           <>
+            {applicationFlow && <MptHubPanel />}
             <MptPreparationPlan />
             {/* Mode cards */}
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -158,7 +164,7 @@ export default function MPTPrep() {
                 { id: 'random' as Mode, icon: Shuffle, title: 'Random quiz', desc: 'A shuffled mix from the whole bank' },
                 { id: 'mock' as Mode, slot: 'afternoon', icon: Clock, title: '3:00 PM MPT mock', desc: '200 fresh questions in official section order' },
                 { id: 'mock' as Mode, slot: 'evening', icon: Clock, title: '10:30 PM MPT mock', desc: 'A second fresh 200-question paper' },
-              ].map((m) => {
+              ].filter((m) => !(applicationFlow && m.id === 'mock')).map((m) => {
                 if (m.id === 'mock') {
                   const availability = m.slot === 'afternoon' ? afternoonMock : mptMock
                   return availability.available ? (
@@ -285,7 +291,11 @@ export default function MPTPrep() {
                 })}
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {activeMock ? (
+                {applicationFlow ? (
+                  <Link to="/account/mpt" className="inline-flex h-9 items-center gap-1.5 rounded-md bg-pine px-4 text-sm font-semibold text-emerald-50 hover:bg-emerald-900">
+                    <Clock className="h-4 w-4" /> Apply for MPT Mock
+                  </Link>
+                ) : activeMock ? (
                   <Link
                     to={activeMock.url}
                     data-google-vignette="false"
@@ -363,7 +373,11 @@ export default function MPTPrep() {
                     Start quiz ({pool.length} in pool)
                   </button>
                   <button onClick={() => startMode('random')} className="h-11 rounded-md border px-6 text-sm font-semibold hover:bg-secondary">Random quiz</button>
-                  {activeMock ? (
+                  {applicationFlow ? (
+                    <Link to="/account/mpt" className="inline-flex h-11 items-center rounded-md border px-6 text-sm font-semibold hover:bg-secondary">
+                      Apply for MPT Mock
+                    </Link>
+                  ) : activeMock ? (
                     <Link
                       to={activeMock.url}
                       data-google-vignette="false"

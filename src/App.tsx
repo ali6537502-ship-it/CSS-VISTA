@@ -72,6 +72,15 @@ const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
+const MptArea = lazy(() => import('./pages/mpt/MptArea'))
+const MptApply = lazy(() => import('./pages/mpt/MptApply'))
+const MptApplication = lazy(() => import('./pages/mpt/MptApplication'))
+const MptEntrance = lazy(() => import('./pages/mpt/MptEntrance'))
+const MptExam = lazy(() => import('./pages/mpt/MptExam'))
+const MptResult = lazy(() => import('./pages/mpt/MptResult'))
+const MptHistory = lazy(() => import('./pages/mpt/MptHistory'))
+const MptPerformance = lazy(() => import('./pages/mpt/MptPerformance'))
+const MptMistakes = lazy(() => import('./pages/mpt/MptMistakes'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -185,6 +194,17 @@ export default function App() {
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
+        {/* MPT examination portal (docs/mpt). The server enforces every rule;
+            these routes only render it, and stay inert while the flag is off. */}
+        <Route path="/account/mpt" element={<ProfileGate><S><MptArea /></S></ProfileGate>} />
+        <Route path="/account/mpt/history" element={<ProfileGate><S><MptHistory /></S></ProfileGate>} />
+        <Route path="/account/mpt/performance" element={<ProfileGate><S><MptPerformance /></S></ProfileGate>} />
+        <Route path="/account/mpt/mistakes" element={<ProfileGate><S><MptMistakes /></S></ProfileGate>} />
+        <Route path="/account/mpt/apply/:mock" element={<ProfileGate><S><MptApply /></S></ProfileGate>} />
+        <Route path="/account/mpt/applications/:code" element={<ProfileGate><S><MptApplication /></S></ProfileGate>} />
+        <Route path="/account/mpt/entrance/:mock" element={<ProfileGate><S><MptEntrance /></S></ProfileGate>} />
+        <Route path="/account/mpt/exam/:mock" element={<ProfileGate><S><MptExam /></S></ProfileGate>} />
+        <Route path="/account/mpt/results/:code" element={<ProfileGate><S><MptResult /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />

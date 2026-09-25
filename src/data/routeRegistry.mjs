@@ -176,6 +176,18 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs/archive', 'Current Affairs Archive', 'Browse protected Current Affairs editions by date and topic.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs/:storyId', 'Current Affairs Analysis', 'Read a sourced current affairs development.', { adMode: 'enabled', match: 'pattern', robots: 'noindex, nofollow' }),
+  // MPT examination portal (docs/mpt/DECISIONS.md D-08). Private, never indexed or
+  // prerendered. Transactions, the roll-number gate, the exam and results carry
+  // no advertising; the overview, history and performance are account content.
+  protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/mistakes', 'My MPT Wrong Answers', 'Questions you answered incorrectly in completed MPT Mocks, with the correct answers.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/apply/:mock', 'Apply for MPT Mock', 'Reserve an MPT Mock slot.', { match: 'pattern', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/applications/:code', 'MPT Mock Application', 'Your MPT Mock application and Roll Number.', { match: 'pattern', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/entrance/:mock', 'MPT Mock Candidate Verification', 'Verify your Roll Number to enter the MPT Mock.', { match: 'pattern', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/exam/:mock', 'MPT Mock Examination', 'Active MPT Mock examination.', { match: 'pattern', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/results/:code', 'MPT Mock Result', 'Your MPT Mock result.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/factbook', 'Daily Factbook', 'Revise the facts and statistics from daily developments.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/saved', 'My Saved Items', 'Your private saved reading.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/search', 'Search My Library', 'Search your protected Current Affairs and saved material.', { robots: 'noindex, nofollow' }),

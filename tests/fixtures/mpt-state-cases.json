@@ -1,0 +1,1021 @@
+{
+ "description": "Shared state-engine cases run by tests/mpt/unit.php (PHP, canonical) and tests/mptState.test.ts (TS mirror).",
+ "cases": [
+  {
+   "name": "logged out before applications open",
+   "now": "2026-09-30T09:59:59.999Z",
+   "signedIn": false,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "NOT_YET_OPEN",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "logged out while applications open",
+   "now": "2026-09-30T10:00:00.000Z",
+   "signedIn": false,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "LOGIN_REQUIRED",
+    "primary_action": "login"
+   }
+  },
+  {
+   "name": "logged out once the exam has started",
+   "now": "2026-10-01T10:00:00.000Z",
+   "signedIn": false,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_CLOSED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "one millisecond before applications open",
+   "now": "2026-09-30T09:59:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "NOT_YET_OPEN",
+    "primary_action": null,
+    "next_transition_at": "2026-09-30T10:00:00.000Z"
+   }
+  },
+  {
+   "name": "exactly when applications open",
+   "now": "2026-09-30T10:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_OPEN",
+    "primary_action": "apply",
+    "exam_in_progress": false
+   }
+  },
+  {
+   "name": "one millisecond before the exam starts: still open",
+   "now": "2026-10-01T09:59:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_OPEN",
+    "primary_action": "apply"
+   }
+  },
+  {
+   "name": "no applications for an ongoing mock",
+   "now": "2026-10-01T10:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_CLOSED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "no applications mid-exam",
+   "now": "2026-10-01T10:05:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_CLOSED",
+    "primary_action": null,
+    "exam_in_progress": true
+   }
+  },
+  {
+   "name": "capacity reached",
+   "now": "2026-09-30T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": 5,
+    "reserved_count": 5
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "SLOTS_FULL",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "capacity with one slot left",
+   "now": "2026-09-30T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": 5,
+    "reserved_count": 4
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_OPEN",
+    "primary_action": "apply"
+   }
+  },
+  {
+   "name": "draft mock",
+   "now": "2026-09-30T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "DRAFT",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "NOT_YET_OPEN",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "archived mock",
+   "now": "2026-09-30T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "ARCHIVED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": null,
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_CLOSED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "cancelled mock with application",
+   "now": "2026-09-30T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "CANCELLED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-09-30T11:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "CANCELLED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "reveal case A: applied 2h before, just before reveal",
+   "now": "2026-10-01T08:09:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ROLL_NUMBER_PENDING",
+    "primary_action": "view_application",
+    "roll_number_visible_at": "2026-10-01T08:10:00.000Z",
+    "next_transition_at": "2026-10-01T08:10:00.000Z"
+   }
+  },
+  {
+   "name": "reveal case A: applied 2h before, at reveal",
+   "now": "2026-10-01T08:10:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "SLOT_RESERVED",
+    "primary_action": "view_roll_number",
+    "roll_number_visible_at": "2026-10-01T08:10:00.000Z"
+   }
+  },
+  {
+   "name": "reveal case B: applied 5 min before, before exam open",
+   "now": "2026-10-01T09:59:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T09:55:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ROLL_NUMBER_PENDING",
+    "primary_action": "view_application",
+    "roll_number_visible_at": "2026-10-01T10:00:00.000Z"
+   }
+  },
+  {
+   "name": "reveal case B: applied 5 min before, at exam open",
+   "now": "2026-10-01T10:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T09:55:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ENTRY_OPEN",
+    "primary_action": "enter_exam",
+    "roll_number_visible_at": "2026-10-01T10:00:00.000Z"
+   }
+  },
+  {
+   "name": "reveal case C: admin-extended window, applied after start, instant",
+   "now": "2026-10-01T10:03:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T10:03:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ENTRY_OPEN",
+    "primary_action": "enter_exam",
+    "roll_number_visible_at": "2026-10-01T10:03:00.000Z"
+   }
+  },
+  {
+   "name": "reschedule moves the reveal",
+   "now": "2026-10-01T08:04:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T08:05:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ROLL_NUMBER_PENDING",
+    "primary_action": "view_application",
+    "roll_number_visible_at": "2026-10-01T08:05:00.000Z"
+   }
+  },
+  {
+   "name": "late entry one millisecond before it ends",
+   "now": "2026-10-01T10:09:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ENTRY_OPEN",
+    "primary_action": "enter_exam"
+   }
+  },
+  {
+   "name": "absent exactly when late entry ends",
+   "now": "2026-10-01T10:10:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "ABSENT",
+    "primary_action": "view_application"
+   }
+  },
+  {
+   "name": "cancelled application",
+   "now": "2026-10-01T09:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "CANCELLED",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "CANCELLED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "withdrawn application while open",
+   "now": "2026-10-01T09:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "WITHDRAWN",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 0
+   },
+   "attempt": null,
+   "expect": {
+    "phase": "APPLICATIONS_OPEN",
+    "primary_action": "apply"
+   }
+  },
+  {
+   "name": "attempt in progress",
+   "now": "2026-10-01T11:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "IN_PROGRESS",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": null
+   },
+   "expect": {
+    "phase": "IN_PROGRESS",
+    "primary_action": "continue_exam"
+   }
+  },
+  {
+   "name": "attempt in progress one millisecond before expiry",
+   "now": "2026-10-01T13:19:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "IN_PROGRESS",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": null
+   },
+   "expect": {
+    "phase": "IN_PROGRESS",
+    "primary_action": "continue_exam"
+   }
+  },
+  {
+   "name": "attempt expired awaiting sweeper (immediate policy)",
+   "now": "2026-10-01T13:20:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "IN_PROGRESS",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": null
+   },
+   "expect": {
+    "phase": "RESULT_AVAILABLE",
+    "primary_action": "view_result"
+   }
+  },
+  {
+   "name": "submitted, immediate score",
+   "now": "2026-10-01T12:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "SUBMITTED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": "2026-10-01T11:30:00.000Z"
+   },
+   "expect": {
+    "phase": "RESULT_AVAILABLE",
+    "primary_action": "view_result",
+    "result_available_at": "2026-10-01T11:30:00.000Z"
+   }
+  },
+  {
+   "name": "submitted, result card 30 min after the mock: at exam end",
+   "now": "2026-10-01T13:20:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "AFTER_WINDOW",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "SUBMITTED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": "2026-10-01T11:30:00.000Z"
+   },
+   "expect": {
+    "phase": "SUBMITTED_PENDING_RESULT",
+    "primary_action": "view_submission",
+    "result_available_at": "2026-10-01T13:50:00.000Z"
+   }
+  },
+  {
+   "name": "submitted, result card: one millisecond before release",
+   "now": "2026-10-01T13:49:59.999Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "AFTER_WINDOW",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "SUBMITTED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": "2026-10-01T11:30:00.000Z"
+   },
+   "expect": {
+    "phase": "SUBMITTED_PENDING_RESULT",
+    "primary_action": "view_submission",
+    "next_transition_at": "2026-10-01T13:50:00.000Z"
+   }
+  },
+  {
+   "name": "submitted, result card: released 30 minutes after the mock",
+   "now": "2026-10-01T13:50:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "AFTER_WINDOW",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "SUBMITTED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": "2026-10-01T11:30:00.000Z"
+   },
+   "expect": {
+    "phase": "RESULT_AVAILABLE",
+    "primary_action": "view_result"
+   }
+  },
+  {
+   "name": "auto-submitted, result card after release",
+   "now": "2026-10-01T14:00:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "AFTER_WINDOW",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "AUTO_SUBMITTED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": "2026-10-01T13:20:00.000Z"
+   },
+   "expect": {
+    "phase": "RESULT_AVAILABLE",
+    "primary_action": "view_result"
+   }
+  },
+  {
+   "name": "voided attempt without re-sit",
+   "now": "2026-10-01T10:05:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 1,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "VOIDED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": null
+   },
+   "expect": {
+    "phase": "CANCELLED",
+    "primary_action": null
+   }
+  },
+  {
+   "name": "voided attempt with re-sit granted",
+   "now": "2026-10-01T10:05:00.000Z",
+   "signedIn": true,
+   "mock": {
+    "status": "PUBLISHED",
+    "application_open_at": "2026-09-30T10:00:00.000Z",
+    "application_close_at": "2026-10-01T10:00:00.000Z",
+    "exam_open_at": "2026-10-01T10:00:00.000Z",
+    "entry_close_at": "2026-10-01T10:10:00.000Z",
+    "exam_end_at": "2026-10-01T13:20:00.000Z",
+    "roll_issue_delay_minutes": 10,
+    "results_release_policy": "IMMEDIATE_SCORE",
+    "results_delay_minutes": 30
+   },
+   "session": {
+    "capacity": null,
+    "reserved_count": 0
+   },
+   "application": {
+    "status": "ACTIVE",
+    "applied_at": "2026-10-01T08:00:00.000Z",
+    "attempt_allowance": 2,
+    "attempts_used": 1
+   },
+   "attempt": {
+    "status": "VOIDED",
+    "expires_at": "2026-10-01T13:20:00.000Z",
+    "submitted_at": null
+   },
+   "expect": {
+    "phase": "ENTRY_OPEN",
+    "primary_action": "enter_exam"
+   }
+  }
+ ]
+}

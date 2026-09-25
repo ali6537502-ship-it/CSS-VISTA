@@ -2811,3 +2811,18 @@
     display: none;
   }
 }
+
+/* MPT application "admit card" print (docs/mpt). Only affects pages that
+   contain an application; every other page prints as before. */
+@media print {
+  body:has(.mpt-print-root) header,
+  body:has(.mpt-print-root) footer,
+  body:has(.mpt-print-root) nav,
+  body:has(.mpt-print-root) [aria-label="Advertisement"],
+  body:has(.mpt-print-root) main > div > a:first-child {
+    display: none !important;
+  }
+  body:has(.mpt-print-root) .mpt-print-root {
+    color: #000;
+  }
+}

@@ -1,0 +1,78 @@
+name: MPT examination verification
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: mpt-exam-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  mpt-server-rules:
+    name: MPT application, roll number, attempt and scoring rules
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        database: ['mysql:8.0', 'mariadb:10.11']
+    services:
+      db:
+        image: ${{ matrix.database }}
+        env:
+          MYSQL_DATABASE: cssvista_briefing_test
+          MYSQL_ROOT_PASSWORD: cssvista_ci_only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pcssvista_ci_only"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      CI: 'true'
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_PORT: '3306'
+      CSSV_DB_NAME: cssvista_briefing_test
+      CSSV_DB_USER: root
+      CSSV_DB_PASSWORD: cssvista_ci_only
+      CSSV_SITE_ORIGIN: http://localhost:4173
+      CSSV_MPT_APPLICATION_FLOW: 'on'
+      CSSV_MPT_AUTO_SCHEDULE: 'off'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, mbstring
+      - run: npm ci --no-audit --no-fund
+      - name: Pure rules (state engine, roll numbers, scoring, flag, schema mirror)
+        run: |
+          php tests/mpt/unit.php
+          php tests/mpt/flag.php
+          node --test tests/mptState.test.ts
+      - name: Prepare disposable runtime with real API code and exported papers
+        run: |
+          node -e "const value=require('node:crypto').randomBytes(48).toString('hex'); console.log('::add-mask::'+value); require('node:fs').appendFileSync(process.env.GITHUB_ENV,'CSSV_APP_SECRET='+value+'\n')"
+          mkdir -p "$RUNNER_TEMP/cssv-mpt-private" test-artifacts dist
+          echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/cssv-mpt-private" >> "$GITHUB_ENV"
+          cp -r public/api dist/api
+          node scripts/export-mpt-papers.mjs --out dist/api/_mpt_papers --limit 8
+      - name: Create schema
+        run: php tests/current-affairs/setup.php
+      - name: Start isolated HTTP service (8 workers for real concurrency)
+        run: |
+          PHP_CLI_SERVER_WORKERS=8 php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/mpt-php.log 2>&1 &
+          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/mpt/config.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+      - name: Verify server rules end to end
+        run: node tests/mpt/security.mjs
+      - name: Report service failures
+        if: failure()
+        run: tail -n 100 test-artifacts/mpt-php.log || true

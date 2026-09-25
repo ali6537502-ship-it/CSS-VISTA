@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
@@ -10,6 +10,8 @@ import { essayThemeActivity } from '@/features/essay-themes/progress'
 import { briefingRoot, displayDate, latestRange, overviewSchema, pakistanDate } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'
 import { AuthenticatedAccountAd } from '@/components/Ads'
+import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -135,6 +137,7 @@ export default function AccountHome() {
     snapshot.stats.streak ? `${snapshot.stats.streak}-day streak` : null,
   ].filter(Boolean).join(' · ')
 
+  const mptFlow = useMptFlowEnabled() === true
   const choices = [
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
@@ -156,6 +159,9 @@ export default function AccountHome() {
         ? `${snapshot.stats.accuracy}% accuracy · ${snapshot.mocks} mock${snapshot.mocks === 1 ? '' : 's'}`
         : 'Start your first practice set',
     },
+    // Official MPT Mocks (docs/mpt). Shown only while the application flow is on,
+    // so the tile never leads to an unavailable page.
+    ...(mptFlow ? [{ to: '/account/mpt', icon: ClipboardCheck, title: 'MPT Mocks', status: '3:00 PM & 10:30 PM daily · apply, Roll Number, result card' }] : []),
     {
       to: '/fpsc-syllabus', icon: BookOpen, title: 'My Syllabus',
       status: syllabusPercent ? `${syllabusPercent}% complete` : 'Mark your first topic',
@@ -192,6 +198,8 @@ export default function AccountHome() {
             My profile
           </Link>
         </header>
+
+        <DashboardMptCard />
 
         <h2 className="mt-10 text-sm font-semibold uppercase tracking-[.14em] text-slate-400">What would you like to do today?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

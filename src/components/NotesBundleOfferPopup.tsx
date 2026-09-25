@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useLocation } from 'react-router'
 import { BookOpen, Clock3, FileText, Landmark, MessageCircle, Scale, X } from 'lucide-react'
 import { noteProducts } from '@/data/notes'
 import { notesBundleOfferEndsAt as OFFER_ENDS_AT, notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
@@ -43,7 +44,11 @@ const subjectRows = [
   { label: 'European History', price: 6000, icon: BookOpen },
 ] as const
 
+// Never over an active MPT examination or its Roll Number gate (docs/mpt D-35).
+const ASSESSMENT_PATH = /^\/account\/mpt\/(?:exam|entrance)\//
+
 export default function NotesBundleOfferPopup() {
+  const { pathname } = useLocation()
   const [open, setOpen] = useState(() => !wasDismissedThisSession())
   const [now, setNow] = useState(() => Date.now())
 
@@ -59,7 +64,7 @@ export default function NotesBundleOfferPopup() {
   const savings = totalPrice - OFFER_PRICE
   const timeLeft = getTimeLeft(now)
 
-  if (!open || timeLeft.expired) return null
+  if (!open || timeLeft.expired || ASSESSMENT_PATH.test(pathname)) return null
 
   function closeOffer() {
     rememberDismissal()

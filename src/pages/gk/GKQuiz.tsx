@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, Navigate, useSearchParams } from 'react-router'
 import {
   Bookmark, BookmarkCheck, Check, Clock, Flag, Loader2,
   RotateCcw, X, Zap,
@@ -25,6 +25,7 @@ import {
 import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 import { remainingSeconds } from '@/hooks/useAccurateCountdown'
+import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 
 interface Resolved {
   title: string
@@ -35,7 +36,21 @@ interface Resolved {
   blueprint?: MockSection[]
 }
 
+/**
+ * Legacy direct MPT links (/gk/quiz?mode=mpt-mock…) hand over to the application
+ * flow when it is enabled (docs/mpt/DECISIONS.md D-27): one replace, never to
+ * the exam itself. Every other mode, and the flag-off site, is unchanged.
+ */
 export default function GKQuiz({ forceMode }: { forceMode?: string }) {
+  const [sp] = useSearchParams()
+  const legacyMpt = !forceMode && sp.get('mode') === 'mpt-mock'
+  const applicationFlow = useMptFlowEnabled()
+  if (legacyMpt && applicationFlow === null) return <div className="mx-auto max-w-xl px-4 py-16 text-center text-sm text-muted-foreground" aria-busy="true">Loading…</div>
+  if (legacyMpt && applicationFlow) return <Navigate to="/account/mpt" replace />
+  return <LegacyGKQuiz forceMode={forceMode} />
+}
+
+function LegacyGKQuiz({ forceMode }: { forceMode?: string }) {
   const [sp] = useSearchParams()
   const mode = forceMode ?? sp.get('mode') ?? 'random'
   const mptSlot = sp.get('slot') === 'afternoon' ? 'afternoon' : 'evening'

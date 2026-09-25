@@ -5,11 +5,12 @@ import CurrentAffairsAdmin from '@/features/current-affairs/Admin'
 import AdminPanel from './AdminPanel'
 import AccountMailPanel from './AccountMailPanel'
 import StudentManagementPanelV2 from './StudentManagementPanelV2'
+import MptAdminPanel from './MptAdminPanel'
 
 export default function Admin() {
   const navigate = useNavigate()
   const [ready, setReady] = useState(false)
-  const [workspace, setWorkspace] = useState<'students' | 'website' | 'briefing' | 'mail'>('students')
+  const [workspace, setWorkspace] = useState<'students' | 'website' | 'briefing' | 'mail' | 'mpt'>('students')
 
   useEffect(() => {
     let active = true
@@ -36,7 +37,7 @@ export default function Admin() {
   }
 
   if (workspace === 'students') {
-    return <><div className="mx-auto max-w-7xl px-4 pt-5"><button type="button" onClick={() => setWorkspace('briefing')} className="min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Daily briefing publications</button><button type="button" onClick={() => setWorkspace('mail')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Account emails</button></div><StudentManagementPanelV2 onOpenWebsiteTools={() => setWorkspace('website')} /></>
+    return <><div className="mx-auto max-w-7xl px-4 pt-5"><button type="button" onClick={() => setWorkspace('briefing')} className="min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Daily briefing publications</button><button type="button" onClick={() => setWorkspace('mail')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Account emails</button><button type="button" onClick={() => setWorkspace('mpt')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">MPT examinations</button></div><StudentManagementPanelV2 onOpenWebsiteTools={() => setWorkspace('website')} /></>
   }
 
   return (
@@ -50,7 +51,7 @@ export default function Admin() {
           <ArrowLeft className="h-4 w-4" /> Student management
         </button>
       </div>
-      {workspace === 'briefing' ? <CurrentAffairsAdmin /> : workspace === 'mail' ? <AccountMailPanel /> : <AdminPanel />}
+      {workspace === 'briefing' ? <CurrentAffairsAdmin /> : workspace === 'mail' ? <AccountMailPanel /> : workspace === 'mpt' ? <MptAdminPanel /> : <AdminPanel />}
     </div>
   )
 }

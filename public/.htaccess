@@ -103,7 +103,7 @@ ErrorDocument 404 /404.html
   # Preserve publisher Authorization on PHP/FastCGI deployments.
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
   # Protected PHP release payloads and helpers can only be included server-side.
-  RewriteRule ^api/(?:_briefing_release(?:/|$)|_current_affairs[^/]*\.php$) - [F,L,NC]
+  RewriteRule ^api/(?:_briefing_release(?:/|$)|_current_affairs[^/]*\.php$|_mpt) - [F,L,NC]
 
   # Consolidate every protocol and hostname variant on the canonical origin.
   RewriteCond %{HTTPS} !=on [OR]
@@ -145,6 +145,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^(?:notes/view/[^/]+/[^/]+|mpt/bank/[^/]+|gk/cat/[^/]+)/?$ seo/routes/protected.html [L,NC]
 
   RewriteRule ^account/current-affairs/[A-Za-z0-9_-]+/?$ seo/routes/protected.html [L,NC]
+  RewriteRule ^account/mpt/(?:apply|applications|entrance|exam|results)/[A-Za-z0-9-]+/?$ seo/routes/protected.html [L,NC]
 
   # Keep real files and directories intact. Unknown clean URLs deliberately
   # return 404 instead of the SPA shell, preventing Search Console soft 404s.

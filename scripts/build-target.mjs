@@ -46,6 +46,9 @@ run('scripts/package-vistagram.mjs')
 
 run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])
+// Official MPT papers (with answer keys) for the PHP examination service. They
+// are server-only data under dist/api/_mpt_papers; see docs/mpt/DECISIONS.md D-04.
+if (target === 'hostinger') run('scripts/export-mpt-papers.mjs')
 await import(`./prepare-sites-build.mjs?target=${target}`)
 if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
