@@ -6,6 +6,7 @@ import { useAccount } from '@/lib/accountContext'
 import { actionHref } from './MptHeroCard'
 import { StatusBadge } from './StatusBadge'
 import { MockSlot } from './MockSlot'
+import { EnterExamButton } from './EnterExamButton'
 import { LiveMockBanner, isLiveForOthers } from './LiveMockBanner'
 
 /** Public MPT page panel: real mock cards with one state-driven CTA each (Section 11). */
@@ -56,9 +57,12 @@ export function MptHubPanel() {
                   {card.slots_available != null ? copy.hub.slots(card.slots_available) : ''}
                 </p>
               )}
-              {card.state.primary_action && (loginNeeded
-                ? <button type="button" onClick={() => setLoginFor(card.mock.slug)} className="mt-3 inline-flex min-h-11 items-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-800">{ACTION_LABEL.login}</button>
-                : href && <Link to={href} className="mt-3 inline-flex min-h-11 items-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-800 hover:border-emerald-700">{ACTION_LABEL[card.state.primary_action]}</Link>)}
+              <div className="mt-3 flex flex-wrap items-stretch gap-2">
+                {card.state.primary_action && card.state.primary_action !== 'enter_exam' && card.state.primary_action !== 'continue_exam' && (loginNeeded
+                  ? <button type="button" onClick={() => setLoginFor(card.mock.slug)} className="inline-flex min-h-11 items-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-800">{ACTION_LABEL.login}</button>
+                  : href && <Link to={href} className="inline-flex min-h-11 items-center rounded-lg border border-slate-200 px-4 text-sm font-semibold text-slate-800 hover:border-emerald-700">{ACTION_LABEL[card.state.primary_action]}</Link>)}
+                <EnterExamButton card={card} />
+              </div>
             </article>
           )
         })}

@@ -456,3 +456,12 @@ still exist (D-48) but are not listed.
   renders nothing until the server answers, so prerendered HTML is unchanged.
 - With the flow on, the home page's legacy free-start MPT windows give way to the strip,
   as the notice bar already did.
+
+**D-53 · The exam entrance is always visible** — owner ("nowhere does it show where to enter")
+- Every mock card, the Live now notice, the MPT page panel and the MPT Mock strip show an
+  **Enter Exam** button at all times, linking to that mock's entrance page. Before the
+  start it is shown locked with "Opens at 3:00 PM PKT" (and "for applicants" to anyone
+  who has not applied). At the start it becomes the solid Enter Exam button.
+- The entrance page says, before anyone types, whether it is open to them yet: "You have
+  not applied" with an Apply button, or "You are in the right place. Entry opens at…" with
+  a countdown. The server rules are unchanged.

@@ -2,8 +2,9 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
 import { CheckCircle2 } from 'lucide-react'
 import { HostingerApiError } from '@/lib/hostingerApi'
-import { examClientId, mptApi, type MptVerification } from '@/lib/mpt/api'
-import { copy, minutesText, pktTime } from '@/lib/mpt/copy'
+import { examClientId, mptApi, type MptCard, type MptVerification } from '@/lib/mpt/api'
+import { copy, countdown, minutesText, pktTime } from '@/lib/mpt/copy'
+import { useServerClock } from '@/lib/mpt/useServerClock'
 import { formatRollNumber, isWellFormedRollNumber, normaliseRollNumber } from '@/lib/mpt/rollNumber'
 import { stashRuntime } from '@/lib/mpt/runtimeCache'
 import { AccountPage } from '@/pages/account/shared'
@@ -90,6 +91,35 @@ function VerifiedScreen({ slug, verification, onExpired }: { slug: string; verif
   )
 }
 
+/** D-53: explains, before anyone types, whether this entrance is open to them yet. */
+function EntranceNotice({ card, now }: { card: MptCard | null | undefined; now: number }) {
+  if (!card) return null
+  const { mock, state, application } = card
+  const opensAt = Date.parse(mock.exam_open_at)
+  if (!application || application.status !== 'ACTIVE') {
+    return (
+      <div role="status" className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">
+        <p className="font-bold">You have not applied for this MPT Mock.</p>
+        <p className="mt-1">This is the exam entrance, but only candidates who applied before the start can enter, with the Roll Number from their application.</p>
+        <div className="mt-3">
+          {state.phase === 'APPLICATIONS_OPEN'
+            ? <Link to={`/account/mpt/apply/${mock.slug}`} className={primaryButton}>Apply Now</Link>
+            : <Link to="/account/mpt" className={secondaryButton}>Apply for the next mock</Link>}
+        </div>
+      </div>
+    )
+  }
+  if (now < opensAt) {
+    return (
+      <div role="status" className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-950">
+        <p className="font-bold">You are in the right place. Entry opens at {pktTime(mock.exam_open_at)} (in {countdown(opensAt - now)}).</p>
+        <p className="mt-1">Come back to this page at the start time, type your Roll Number and press {copy.entrance.submit}. You can also use the Enter Exam button on your dashboard.</p>
+      </div>
+    )
+  }
+  return null
+}
+
 function Gate({ slug }: { slug: string }) {
   const load = useMptLoad((signal) => mptApi.applicationForMock(slug, signal), [slug])
   const [value, setValue] = useState('')
@@ -98,6 +128,7 @@ function Gate({ slug }: { slug: string }) {
   const [errorCode, setErrorCode] = useState<string | null>(null)
   const [verification, setVerification] = useState<MptVerification | null>(null)
   const [showHelp, setShowHelp] = useState(false)
+  const now = useServerClock()
   const inputId = useId()
   const errorId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -141,6 +172,7 @@ function Gate({ slug }: { slug: string }) {
         <h2 className="mt-1 text-2xl font-bold text-slate-950">{copy.entrance.heading}</h2>
         {card && <div className="mt-2"><StatusBadge phase={card.state.phase} /></div>}
       </div>
+      <EntranceNotice card={card} now={now} />
       <form onSubmit={submit} noValidate className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
         <label htmlFor={inputId} className="block text-base font-semibold text-slate-900">{copy.entrance.label}</label>
         <input
