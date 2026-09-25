@@ -420,3 +420,10 @@ see the coming mock")
 - A request-time maintenance run creates at most 3 mocks, so the first visitor after a
   deploy never waits long. The cron sweeper creates up to 40 per run. Freezing a paper
   uses one overlap query and multi-row inserts.
+
+**D-49 · Only the next mock is listed** — owner ("only the next single MPT should be shown")
+The public MPT page, My CSS Vista and the dashboard card list one upcoming mock: the next
+one to start. A student also keeps seeing every mock they have applied to until its window
+ends, so an applicant can still enter a running mock and see its status. When a mock
+starts, the following one takes its place for new applications. Mocks further ahead
+still exist (D-48) but are not listed.

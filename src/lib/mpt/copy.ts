@@ -101,7 +101,7 @@ export const copy = {
     declaration: 'I confirm I am applying through my own My CSS Vista account and understand that the Roll Number issued with this application is personal to me and required to enter the examination.',
     submit: 'Submit Application & Reserve Slot',
     submitting: 'Reserving your slot…',
-    closesAtStart: 'Applications close when the exam starts. You can apply for any upcoming mock at any time.',
+    closesAtStart: 'Applications close when the exam starts. You can apply any time before then.',
     alreadyApplied: 'You have already applied for this mock.',
   },
   confirmation: {

@@ -344,6 +344,22 @@ assert.equal((await admin('', { action: 'update_mock', slug: slug4, duration_min
 assert.equal((await admin('', { action: 'cancel_mock', slug: slug4, reason: 'TEST ONLY cancelled' })).status, 200)
 assert.equal((await call(B, `application.php?mock=${slug4}`)).data.state.phase, 'CANCELLED')
 
+step('listing: only the next mock, plus the ones a student applied to')
+const soon = await admin('', { action: 'create_mock', exam_open_at: new Date(Date.now() + 90 * 60_000).toISOString() })
+const later = await admin('', { action: 'create_mock', exam_open_at: new Date(Date.now() + 6 * 3600_000).toISOString() })
+assert.equal(soon.status, 200, soon.text)
+assert.equal(later.status, 200, later.text)
+assert.equal((await call(E, 'apply.php', { mock: later.data.mock.slug, declaration: true }, { 'Idempotency-Key': 'listing-later' })).status, 201)
+const upcomingOf = (cards) => cards.filter((card) => Date.parse(card.mock.exam_open_at) > Date.now() && card.mock.status === 'PUBLISHED')
+const publicCards = upcomingOf((await call(null, 'mocks.php')).data.mocks)
+assert.equal(publicCards.length, 1, 'exactly one upcoming mock is listed')
+assert.equal(publicCards[0].mock.slug, soon.data.mock.slug, 'and it is the next one to start')
+assert.ok(!publicCards.some((card) => card.mock.slug === later.data.mock.slug), 'later mocks are not listed')
+const mine = upcomingOf((await call(E, 'mocks.php')).data.mocks).map((card) => card.mock.slug)
+assert.deepEqual(mine, [soon.data.mock.slug, later.data.mock.slug], 'an applicant still sees the mock they applied to')
+const dashE = upcomingOf((await call(E, 'dashboard.php')).data.cards).map((card) => card.mock.slug)
+assert.deepEqual(dashE, [soon.data.mock.slug, later.data.mock.slug])
+
 step('daily schedule: 15:00 and 22:30 PKT, created idempotently')
 const schedule = fixture('autoschedule', '2031-03-10T09:30:00.000Z') // 14:30 PKT
 const keys = schedule.mocks.map((m) => m.schedule_key)
