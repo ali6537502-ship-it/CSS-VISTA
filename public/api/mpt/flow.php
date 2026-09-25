@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 // Feature flag for the current visitor (D-10). Exposes nothing else.
+// Not named config.php: .htaccess denies every file of that name site-wide.
 require_once dirname(__DIR__) . '/_mpt.php';
 cssv_require_method('GET');
 header('X-Robots-Tag: noindex, nofollow');

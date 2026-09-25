@@ -290,3 +290,33 @@ test('MPT portal routes resolve on direct navigation, stay private and follow th
     assert.equal(request(path).status, 403, `${path} must be forbidden`)
   }
 })
+
+test('no public API endpoint is caught by an .htaccess <Files>/<FilesMatch> deny block', { skip: !built }, () => {
+  // Apache applies these by file name anywhere in the tree, which the rewrite
+  // resolver does not model: /api/mpt/config.php was once denied in production
+  // because the private-config rule protects every file called config.php.
+  const htaccess = readFileSync(join(dist, '.htaccess'), 'utf8')
+  const denies: Array<(name: string) => boolean> = []
+  for (const block of htaccess.matchAll(/<(Files|FilesMatch)\s+"([^"]+)">([\s\S]*?)<\/\1>/g)) {
+    if (!/Require all denied|Deny from all/.test(block[3])) continue
+    const pattern = block[2]
+    denies.push(block[1] === 'Files' ? (name) => name === pattern : (name) => new RegExp(pattern).test(name))
+  }
+  assert.ok(denies.length > 0, 'expected the private-config deny blocks to be present')
+  const endpoints: string[] = []
+  const walk = (dir: string) => {
+    for (const entry of readdirSync(join(dist, dir), { withFileTypes: true })) {
+      const rel = `${dir}/${entry.name}`
+      // Underscore files and folders are private includes/data by convention.
+      if (entry.name.startsWith('_')) continue
+      if (entry.isDirectory()) walk(rel)
+      else if (entry.name.endsWith('.php')) endpoints.push(rel)
+    }
+  }
+  walk('api')
+  assert.ok(endpoints.includes('api/mpt/flow.php'), 'the MPT flag endpoint is built')
+  for (const endpoint of endpoints) {
+    const name = endpoint.split('/').pop() as string
+    assert.ok(!denies.some((deny) => deny(name)), `${endpoint} would be denied by .htaccess on Hostinger`)
+  }
+})

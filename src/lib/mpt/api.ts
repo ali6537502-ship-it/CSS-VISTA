@@ -194,7 +194,7 @@ const get = <T,>(path: string, signal?: AbortSignal) => hostingerRequest<T>(`mpt
 const post = <T,>(path: string, body: unknown, headers?: HeadersInit) => hostingerRequest<T>(`mpt/${path}`, { method: 'POST', body: JSON.stringify(body), headers }).then(syncClock)
 
 export const mptApi = {
-  config: (signal?: AbortSignal) => get<{ enabled: boolean; server_time: string }>('config.php', signal),
+  config: (signal?: AbortSignal) => get<{ enabled: boolean; server_time: string }>('flow.php', signal),
   mocks: (signal?: AbortSignal) => get<{ enabled: boolean; signed_in?: boolean; mocks: MptCard[]; server_time: string }>('mocks.php', signal),
   applicationForMock: (slug: string, signal?: AbortSignal) => get<MptCard & { candidate: MptCandidate; server_time: string }>(`application.php?mock=${encodeURIComponent(slug)}`, signal),
   application: (code: string, signal?: AbortSignal) => get<MptCard & { candidate: MptCandidate; server_time: string }>(`application.php?code=${encodeURIComponent(code)}`, signal),

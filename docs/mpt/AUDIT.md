@@ -178,7 +178,7 @@ leaderboard exists server-side.
 | Mocks as records | Hardcoded daily windows | `mpt_mocks` + `mpt_sessions`; admin creates mocks, with a "generate from the existing daily schedule" helper. (D-01) |
 | One state engine for server + UI | Different languages | PHP is canonical; a TS mirror handles countdown transitions. Both run one shared JSON fixture table. (D-06) |
 | Scheduled jobs | Only the mail cron exists (and is not configured remotely) | CLI sweeper for Hostinger cron **plus** opportunistic sweeping on every MPT API call, so results exist without cron. (D-09) |
-| Feature flag | None | Server config `CSSV_MPT_APPLICATION_FLOW` = `off` / `pilot` / `on` + pilot allowlist, exposed by `GET /api/mpt/config.php`. (D-10) |
+| Feature flag | None | Server config `CSSV_MPT_APPLICATION_FLOW` = `off` / `pilot` / `on` + pilot allowlist, exposed by `GET /api/mpt/flow.php`. (D-10) |
 | Append-only audit log | None | New `mpt_events` table, insert-only. |
 
 ---

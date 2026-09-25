@@ -122,7 +122,7 @@ Raw database IDs never appear in URLs. Pattern routes get explicit `.htaccess` r
 The flag lives in private server config with values `off` (default), `pilot` or `on`.
 `pilot` admits only the accounts in `CSSV_MPT_PILOT_EMAILS`. That is how "enable for
 admins" works, because the owner admin is a separate login rather than a student account.
-`GET /api/mpt/config.php` exposes only `{enabled: bool}` for the current user. With the
+`GET /api/mpt/flow.php` exposes only `{enabled: bool}` for the current user. With the
 flag `off`, the site behaves exactly as today.
 
 ## Candidate identity & codes

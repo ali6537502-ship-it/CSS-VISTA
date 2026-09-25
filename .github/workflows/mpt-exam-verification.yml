@@ -70,7 +70,7 @@ jobs:
       - name: Start isolated HTTP service (8 workers for real concurrency)
         run: |
           PHP_CLI_SERVER_WORKERS=8 php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/mpt-php.log 2>&1 &
-          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/mpt/config.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/mpt/flow.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
       - name: Verify server rules end to end
         run: node tests/mpt/security.mjs
       - name: Report service failures

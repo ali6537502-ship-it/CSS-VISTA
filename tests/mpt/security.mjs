@@ -31,10 +31,10 @@ const [A, B, C, D, E] = fixture('users', 5, 'mpt')
 // The service runs with CSSV_MPT_APPLICATION_FLOW=on here; off/pilot are covered by tests/mpt/flag.php.
 
 step('feature flag and authentication')
-assert.equal((await call(null, 'config.php')).data.enabled, true)
+assert.equal((await call(null, 'flow.php')).data.enabled, true)
 assert.equal((await call(null, 'dashboard.php')).status, 401)
 assert.equal((await call(null, 'apply.php', { mock: 'mpt-mock-001', declaration: true })).status, 401)
-assert.equal((await call(A, 'config.php')).data.enabled, true)
+assert.equal((await call(A, 'flow.php')).data.enabled, true)
 
 step('application window and atomic apply')
 const m1 = fixture('mock', 120)
