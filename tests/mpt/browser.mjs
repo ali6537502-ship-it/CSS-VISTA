@@ -51,6 +51,9 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   await page.getByRole('link', { name: 'Apply Now' }).first().waitFor()
   const slotPattern = /(Morning|Afternoon|Evening) MPT Mock · \d{1,2}:\d{2} (AM|PM) PKT/
   assert.match(await page.textContent('body'), slotPattern, 'dashboard names the sitting and its time')
+  const tile = page.getByRole('link', { name: /MPT Mocks.*3:00 PM & 10:30 PM daily/ })
+  await tile.waitFor()
+  assert.equal(await tile.getAttribute('href'), '/account/mpt', 'the dashboard grid has an MPT Mocks tile')
   await page.screenshot({ path: `${shots}/${label}-01-dashboard-apply.png`, fullPage: true })
   await page.getByRole('link', { name: 'Apply Now' }).first().click()
   await page.getByRole('heading', { name: /Application for MPT Mock/ }).waitFor()

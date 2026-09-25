@@ -134,6 +134,7 @@ MariaDB 10.11 database. CI repeats the server suites on MySQL 8.0 and MariaDB 10
 |---|---|
 | **Sittings shown by name and time (real 3:00 PM / 10:30 PM mocks)** | ![](screens/sittings-mpt-page.png) |
 | My MPT Mocks listing both sittings | ![](screens/sittings-dashboard-mobile.png) |
+| Dashboard: MPT card and **MPT Mocks tile** in the grid | ![](screens/dashboard-tile-desktop.png) |
 | Dashboard with Apply | ![](screens/mobile-01-dashboard-apply.png) |
 | Application screen | ![](screens/mobile-02-apply.png) |
 | Confirmation and Roll Number countdown | ![](screens/mobile-03-confirmation-countdown.png) |
