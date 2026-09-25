@@ -37,6 +37,7 @@ jobs:
           exit "${status}"
 
       - name: Audit factual integrity and current-affairs provenance
+        if: always()
         shell: bash
         run: |
           set +e
