@@ -67,5 +67,5 @@ for (const path of ['/api/admin/current-affairs.php','/api/current-affairs.php?v
   assert.equal(response.status, 401, path + ' must require authentication')
   assert.match(response.headers.get('cache-control') || '', /no-store/)
 }
-for (const path of ['/api/_briefing_release/catalog.php','/api/_current_affairs.php']) assert.ok([403,404].includes((await get(path)).status), 'Internal release material is accessible: ' + path)
+for (const path of ['/api/_briefing_release/catalog.php','/api/_current_affairs.php','/api/_mpt_papers/manifest.php','/api/_mpt_papers/paper-001.php','/api/_mpt_core.php']) assert.ok([403,404].includes((await get(path)).status), 'Internal release material is accessible: ' + path)
 console.log(`PASS: exact deployment fingerprint ${expectedSha}, production routes, anonymous content protection, private response caching and backend readiness. Authenticated Current Affairs visibility must still be verified by the publishing workflow with an authorized account.`)

@@ -547,6 +547,10 @@ export async function buildCompetitiveMock(
   kind: CompetitiveMockKind,
   sessionDateKey = currentPakistanDateKey(),
   studentName = '',
+  // Official MPT papers (scripts/export-mpt-papers.mjs) pass a secret build salt
+  // so tie-breaks and option order cannot be rebuilt from public code. Empty
+  // keeps every existing paper byte-for-byte identical.
+  options: { selectionSalt?: string } = {},
 ): Promise<BuiltMockPaper> {
   // Named browser sessions reserve questions; anonymous programmatic callers
   // retain the small offline bank used by the existing build integrity test.
@@ -571,7 +575,7 @@ export async function buildCompetitiveMock(
   const usedPatterns = namedMptSession ? previouslyUsedMptQuestionPatterns(studentName) : new Map<string, number>()
   const paperPatterns = new Set<string>()
   const questions = sectionsFor(kind, pools, namedMptSession, sessionDateKey).flatMap((spec) => (
-    selectSection(spec, `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper, previouslySeen, usedPatterns, paperPatterns)
+    selectSection(spec, options.selectionSalt ? `${kind}|${sessionDateKey}|${options.selectionSalt}` : `${kind}|${sessionDateKey}`, usedIds, usedStems, selectedAcrossPaper, previouslySeen, usedPatterns, paperPatterns)
   ))
   validatePaper(questions, blueprint)
   if (namedMptSession) saveMptPaper(studentName, sessionDateKey, questions)

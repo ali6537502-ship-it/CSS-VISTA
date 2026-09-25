@@ -11,13 +11,21 @@ Status key: `accepted` (engineering default, reversible) · `OWNER` (awaiting co
 
 ## Architecture
 
-**D-01 · Mocks are database records, created by the admin** — OWNER (schedule)
-Today the schedule is hardcoded: two MPT windows every day, 15:00 and 22:30 PKT
-(`src/lib/store.ts:489-501`). Under the new system each official mock is an `mpt_mocks`
-row with its own application window. The admin screen offers **"Create from daily
-schedule"**, which fills in the existing 15:00 / 22:30 slots for a chosen date range. By
-default nothing is created automatically. *Owner question:* keep two official mocks a day,
-each needing its own application, or schedule fewer official mocks (for example weekly)?
+**D-01 · Two official mocks every day, created automatically** — confirmed by owner (25 Sep 2026)
+The existing daily slots stay: **15:00 and 22:30 PKT**. Each slot is its own official mock
+with its own application and roll number. The server creates the next slots automatically,
+idempotently via a unique `schedule_key` such as `daily-2026-09-26-1500`, from the cron
+sweeper and opportunistically from MPT API reads. Defaults for each auto-created mock:
+
+- applications open 24 h before `exam_open_at`
+- applications and entry close at `exam_open_at + 10 min`
+- 200 minutes; `exam_end_at = exam_open_at + 200 min` (18:20 and 01:50 PKT)
+- roll-number delay 10 min; capacity unlimited
+
+The admin can edit or cancel any mock, and auto-creation itself can be switched off
+(`CSSV_MPT_AUTO_SCHEDULE=off`). A mock is auto-created **only when a fresh official paper
+is available** (D-04). Otherwise nothing is created, and the admin screen shows that the
+paper runway is exhausted.
 
 **D-02 · Exam parameters come from the existing engine** — accepted
 Defaults: 200 questions, 200 minutes, 1 mark per correct answer, no negative marking
@@ -32,19 +40,34 @@ The old per-typed-name "no repeat" localStorage rule is not used for official mo
 existing engine has no per-candidate question shuffle, so `question_order` stays `NULL`.
 Option order is the engine's deterministic shuffle.
 
-**D-04 · Papers are exported at build time and frozen at publish** — accepted
-- A new build step reuses `buildCompetitiveMock` and passes the same release audit. It
-  exports upcoming papers to `dist/api/_mpt_papers/<paper_ref>.php`, each returning a PHP
-  array.
-- Those files are blocked by `.htaccess` (`[F]`). They also emit nothing if executed.
-- The selection seed mixes a build secret `CSSV_MPT_PAPER_SEED` (a Hostinger build
-  environment variable, **not** `VITE_`) with the date key, so the paper can no longer be
-  rebuilt from public code (fixes AUDIT C3).
-- Without the secret, the export produces papers marked `publishable: false`, and the
-  server refuses to publish them.
-- When the admin publishes a mock, PHP copies the paper and its key into
-  `mpt_mock_questions`. From then on, a later deploy or generator change cannot alter a
-  published paper.
+**D-04 · Official paper supply: a build-exported series, frozen at creation** — accepted
+- **Measured capacity:** the current pools yield **exactly 40 unique papers** in sequence.
+  The 41st fails because the 40 English comprehension passages are used up (measured
+  25 Sep 2026). At two mocks a day that is **20 days** of official mocks. Growing the bank,
+  above all with new comprehension passages, is the only honest way to extend it. Papers
+  are never recycled and questions are never repeated to candidates who sat earlier
+  official mocks.
+- **Export.** After `vite build`, `scripts/export-mpt-papers.mjs` runs the unchanged engine
+  (`buildCompetitiveMock`) over the same 40 audited session keys the release audit uses,
+  with one shared history. It writes `dist/api/_mpt_papers/manifest.php` and one
+  `<index>.php` per paper. Each file returns a base64 JSON string that includes the key.
+  - They are blocked by `.htaccess` (`^api/_mpt` → 403), and executing them outputs nothing.
+- **Secret selection salt.** `buildCompetitiveMock` gains an optional
+  `{selectionSalt}` argument. When it is empty, output is byte-for-byte what it is today,
+  and the release audit stays as it is. The exporter passes
+  `HMAC(CSSV_MPT_PAPER_SEED, 'official-series')`. That changes tie-breaks and option
+  order, so the official paper cannot be rebuilt from public code (AUDIT C3).
+  - `CSSV_MPT_PAPER_SEED` is a Hostinger **build** environment variable, never `VITE_`.
+  - Without it the manifest is marked `publishable: false`, and the server refuses to
+    create official mocks from it.
+  - If the salted series comes up short of 40, the exporter ships the papers it did build
+    and records the shortfall, rather than breaking the production build. The unsalted
+    release audit remains the build gate.
+- **Freeze.** When a mock is created, PHP copies the chosen paper, key included, into
+  `mpt_mock_questions`. From then on nothing at build time can change it. The chosen paper
+  is the first one in the current manifest that shares **no question id** with any
+  previously frozen official paper. After a deploy that changed the pools, overlapping
+  papers are therefore skipped automatically instead of being repeated.
 
 **D-05 · Scoring runs server-side in PHP** — accepted
 PHP port of `GKQuiz.tsx:527`: `score = count(selected === correct) − negative_marking ×
@@ -62,7 +85,7 @@ is TS, so:
 - Both run the same fixture table, `tests/fixtures/mpt-state-cases.json`. This covers
   every row, plus exact and ±1 s boundaries and the three reveal cases.
 
-**D-07 · Residual risk: answers in the public practice banks** — OWNER (accept for now)
+**D-07 · Residual risk: answers in the public practice banks** — accepted by owner for now (25 Sep 2026)
 Mock questions also appear, with answers, in public practice JSON (AUDIT C6). Removing
 them would change the practice features, so this is out of scope by default.
 
@@ -131,10 +154,15 @@ else.
 
 ## Exam runtime
 
-**D-16 · Single active device** — accepted
-`active_session_id` holds the HMAC of the auth session plus a per-tab client id. A write
-from any other id returns `409 device_conflict`. "Continue here" calls `takeover` and
-logs `DEVICE_TAKEOVER`. The timer never pauses.
+**D-16 · Single active device and resume** — accepted
+Each browser tab creates a random `client_id` and keeps it in `sessionStorage`.
+`active_session_id = HMAC(auth session id + client_id)`.
+- Resuming with the same browser session and the same client id (refresh, reconnect)
+  needs no re-verification.
+- Opening the attempt anywhere else returns `409 device_conflict`. "Continue here" then
+  goes through the roll-number gate again and calls `takeover`, which logs
+  `DEVICE_TAKEOVER`.
+- The timer never pauses.
 
 **D-17 · Autosave cadence** — accepted
 Debounce 2.5 s, heartbeat 30 s, server grace 30 s after `expires_at`. Only changes are
@@ -153,14 +181,19 @@ and stored.
 ## Abuse prevention
 
 **D-20 · Rate limits** — accepted
-Limits reuse `cssv_enforce_rate_limit` on `login_security_events`:
-- apply: 10 per minute per user or IP
-- verify: 5 failures per 10 minutes, then a friendly cool-down
+Limits are counted **per account** in `login_security_events.user_id`, not per IP. Many
+candidates sit behind one academy or hostel NAT, and an IP-wide lockout at exam time
+would be unfair.
+- apply: 10 per minute per user, plus 120 per minute per IP as a flood guard
+- verify: 5 failed attempts per 10 minutes per user, then the friendly message "Too many
+  incorrect attempts. Please wait a few minutes, then copy the Roll Number from your
+  application."
 - start: 20 per 10 minutes
 - submit: 20 per 10 minutes
+- takeover: 10 per 10 minutes
 
 Saves are not logged per request, to avoid table bloat. They are bounded by
-`save_version` and a minimum of 1 s between accepted saves per attempt.
+`save_version`, a 200-change cap per request, and the attempt deadline.
 
 **D-21 · Not-found and not-yours look identical** — accepted
 Wrong-owner reads of applications, attempts and results return 404. Verification gives
@@ -168,7 +201,7 @@ the same neutral message for "not found" and "belongs to someone else".
 
 ## Dashboard & analytics
 
-**D-22 · Legacy mock results** — OWNER
+**D-22 · Legacy mock results** — confirmed by owner (25 Sep 2026)
 Existing `quiz_attempts` rows with `mock_kind = 'mpt'` are linked to the account, but
 their scores were **calculated by the browser and not verified**, under different rules
 (free start, full 200 minutes). Default: show them in History labelled "Legacy attempt ·
@@ -212,3 +245,33 @@ ends after midnight PKT, which is fine because every comparison is in UTC.
 existing table. `010_mpt_exam_system.down.sql` drops them. There is no downtime and no
 existing data is touched. The API also creates the tables idempotently, following the
 repo's existing pattern.
+
+## Decisions made during Phase 1
+
+**D-30 · Signed-out visitors see the real window state** — accepted
+With no user, the state engine returns `LOGIN_REQUIRED` only while applications are open.
+Before or after the window it returns `NOT_YET_OPEN` or `APPLICATIONS_CLOSED`, because
+"Login to Apply" for a closed mock would be misleading.
+
+**D-31 · The paper API uses positions, never bank question ids** — accepted
+The public practice banks are keyed by the same ids, so shipping an id would let anyone
+look up the answer instantly. The candidate paper is `{p, section, q, o}`. Saves send
+`{p, o}`. The mapping from position to question id and key exists only in
+`mpt_mock_questions`.
+
+**D-32 · Which verification failures count toward the lockout** — accepted
+These count, because they indicate guessing: a bad check digit, a roll number that is
+unknown or belongs to someone else, and a roll number that is not yet revealed. These do
+not count, because they are honest timing mistakes: "Entry opens at…", "Entry closed",
+"already completed", and "belongs to a different mock of yours".
+
+**D-33 · Rank waits for every attempt of the mock to be final** — accepted
+Rank and percentile are computed once, after `exam_end_at + 30 s` grace, and only once no
+attempt of that mock is still `IN_PROGRESS`. They are shown only when at least
+`rank_min_candidates` completed attempts exist (default 30).
+
+**D-34 · Server tests run with the flag `on`** — accepted
+`tests/mpt/security.mjs` runs against a service started with
+`CSSV_MPT_APPLICATION_FLOW=on`. The off/pilot/fail-closed logic is covered separately by
+`tests/mpt/flag.php`. The PHP test server runs with `PHP_CLI_SERVER_WORKERS=8`, so the
+50-way capacity race and double-tap tests are genuinely concurrent.
