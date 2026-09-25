@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router'
 import { BookOpen, Clock3, FileText, Landmark, MessageCircle, Scale, X } from 'lucide-react'
 import { noteProducts } from '@/data/notes'
-import { mentors, waLink } from '@/data/site'
 import { notesBundleOfferEndsAt as OFFER_ENDS_AT, notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
 
 const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:' + OFFER_ENDS_AT + ':' + OFFER_PRICE
@@ -72,13 +71,9 @@ export default function NotesBundleOfferPopup() {
     setOpen(false)
   }
 
-  const ali = mentors.find((mentor) => mentor.id === 'ali')
-  const purchaseLink = ali
-    ? waLink(
-        ali.whatsapp,
-        `Assalam-o-Alaikum, I want to purchase Sir Ali Hassan Sargana's Complete Notes Bundle at today's PKR ${formatPrice(OFFER_PRICE)} offer before 11:00 PM PKT. Please share the purchase details.`,
-      )
-    : '/notes'
+  const purchaseLink = `https://wa.me/923166050195?text=${encodeURIComponent(
+    `Assalam-o-Alaikum, I want to purchase Sir Ali Hassan Sargana's Complete Notes Bundle at PKR ${formatPrice(OFFER_PRICE)}. Please share the purchase details.`,
+  )}`
 
   return (
     <div
@@ -119,10 +114,7 @@ export default function NotesBundleOfferPopup() {
           <div className="mt-2.5 flex items-center gap-2 rounded-xl border border-rose-100 bg-rose-50/75 px-2.5 py-2">
             <Clock3 className="h-3.5 w-3.5 shrink-0 text-rose-600" />
             <span className="min-w-0 flex-1 text-[9px] font-extrabold text-slate-700 sm:text-[10px]">
-              Ends 11:00 PM PKT
-            </span>
-            <span className="font-mono text-[13px] font-black tabular-nums text-emerald-950 sm:text-sm">
-              {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+              Avail offer before it ends
             </span>
           </div>
         </div>
