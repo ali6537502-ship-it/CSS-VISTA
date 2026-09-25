@@ -11,6 +11,7 @@ import {
 } from '@/lib/ads'
 import { useAccount } from '@/lib/accountContext'
 import { scheduleIdleWork } from '@/lib/idle'
+import { isNotesBundleExclusiveWindow } from '@/data/notesBundleOffer'
 
 declare global {
   interface Window {
@@ -131,6 +132,7 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
   }, [location.pathname, location.search])
 
   useEffect(() => {
+    if (isNotesBundleExclusiveWindow()) return undefined
     if (!policy.autoAdsEnabled) return undefined
     return scheduleIdleWork(
       () => { void loadAdSenseOnce() },
@@ -224,7 +226,7 @@ export function AdSlot({
     }
   }, [collapsed, routeEligible, slot])
 
-  if (!routeEligible || collapsed || !/^\d+$/.test(slot)) return null
+  if (isNotesBundleExclusiveWindow() || !routeEligible || collapsed || !/^\d+$/.test(slot)) return null
 
   return (
     <div className="ad-container w-full overflow-hidden text-center" style={{ minHeight: minimumReservedHeight }} data-ad-placement={placementType}>
