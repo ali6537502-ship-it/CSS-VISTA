@@ -75,7 +75,7 @@ export function eligibleMptCurrent(question: BankQuestion) {
 
 export function eligibleMptPakistan(question: BankQuestion) {
   if (metaQuestion.test(question.q) || trivialQuestion.test(question.q)) return false
-  if (/correct account of|accepted date of|leading role in|central purpose or significance|which person or institution|which city or region is linked/i.test(question.q)) return false
+  if (/correct account of|accepted date of|leading role in|central purpose or significance|which person or institution|which city or region is linked|actor-description combination/i.test(question.q)) return false
   if (question.o.some((answer) => brokenOption.test(answer.trim()))) return false
   return true
 }
