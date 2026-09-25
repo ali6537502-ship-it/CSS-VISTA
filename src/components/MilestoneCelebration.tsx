@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { CheckCircle2, Sparkles, X } from 'lucide-react'
+import { isNotesBundleExclusiveWindow } from '@/data/notesBundleOffer'
 
 export function MilestoneCelebration({
   open,
@@ -18,7 +19,7 @@ export function MilestoneCelebration({
     return () => window.clearTimeout(timer)
   }, [onClose, open])
 
-  if (!open) return null
+  if (!open || isNotesBundleExclusiveWindow()) return null
 
   return (
     <div className="cssv-milestone fixed inset-x-3 bottom-20 z-[90] mx-auto max-w-md overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-[0_22px_60px_rgba(6,63,49,0.2)] sm:bottom-6" role="status" aria-live="polite">
