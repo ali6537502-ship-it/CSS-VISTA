@@ -88,6 +88,9 @@ function add({ st, fam, concept, d, q, ans, wrong, exp, src = 'generated-verifie
   const key = frame ?? strictMask(q)
   if (frameSeen.has(key)) { dupErrors.push(`wording skeleton reused: "${q}" (also ${frameSeen.get(key)})`); return }
   frameSeen.set(key, concept)
+  const st2 = `surf|${surfaceTemplate(q)}`
+  if (frameSeen.has(st2)) { dupErrors.push(`masked wording repeats: "${q}" (also ${frameSeen.get(st2)})`); return }
+  frameSeen.set(st2, concept)
   items.push({ st, fam, concept: concept.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), d, q, ans: String(ans), wrong: wrong.map(String), exp, src, grade })
 }
 
@@ -338,7 +341,7 @@ function seriesItem({ fam, d, seq, hide = seq.length - 1, q, exp, letters = fals
   seriesItem({ fam: F, d: 2, seq: FN((n) => n ** 3 + 1, 5), q: 'The series {S} is based on cubes. What comes next?', exp: pw('one more than the cubes (n³ + 1)') })
   seriesItem({ fam: F, d: 3, seq: FN((n) => n ** 3 - n, 6), q: 'Find the next number of the sequence {S}.', exp: pw('n³ − n for n = 1, 2, 3, … (for example 5³ − 5 = 120)') })
   seriesItem({ fam: F, d: 1, seq: FN((n) => n * n, 5, 11), q: 'Which number comes after the last term of {S}?', exp: pw('the squares of 11, 12, 13, 14, 15') })
-  seriesItem({ fam: F, d: 2, seq: FN((n) => (2 * n) ** 2, 5), q: 'What is the next term in the series {S}?', exp: pw('the squares of the even numbers 2, 4, 6, 8, 10') })
+  seriesItem({ fam: F, d: 2, seq: FN((n) => (2 * n) ** 2, 5), q: 'Name the next term: {S}', exp: pw('the squares of the even numbers 2, 4, 6, 8, 10') })
   seriesItem({ fam: F, d: 2, seq: FN((n) => (2 * n - 1) ** 2, 5), q: 'Choose the number that follows {S}.', exp: pw('the squares of the odd numbers 1, 3, 5, 7, 9') })
   seriesItem({ fam: F, d: 2, seq: FN((n) => 3 * n * n, 5), q: 'Find the missing term at the end of {S}.', exp: pw('three times the squares (3n²)') })
   seriesItem({ fam: F, d: 3, seq: FN((n) => (2 * n - 1) ** 3, 5), q: 'Identify the next term: {S}', exp: pw('the cubes of the odd numbers 1, 3, 5, 7, 9') })
@@ -355,7 +358,7 @@ function seriesItem({ fam, d, seq, hide = seq.length - 1, q, exp, letters = fals
   const win = (s, n) => PRIMES.slice(s, s + n)
   const pe = (desc) => (s, a) => `The terms are ${desc}, so the missing term is ${a}.`
   seriesItem({ fam: F, d: 1, seq: win(0, 6), q: 'Which number continues the series {S}?', exp: pe('consecutive prime numbers') })
-  seriesItem({ fam: F, d: 1, seq: [13, 17, 19, 23, 29], q: 'What is the next number: {S}?', exp: pe('consecutive primes after 11') })
+  seriesItem({ fam: F, d: 1, seq: [13, 17, 19, 23, 29], q: 'Give the number that should come after the last term of {S}', exp: pe('consecutive primes after 11') })
   seriesItem({ fam: F, d: 2, seq: [53, 59, 61, 67], q: 'Find the term after the last one in {S}.', exp: pe('consecutive primes (there is no prime between 61 and 67)') })
   seriesItem({ fam: F, d: 2, seq: win(1, 5).map((p) => p * p), q: 'What comes next in {S}?', exp: pe('squares of consecutive primes: 2², 3², 5², 7², 11²') })
   seriesItem({ fam: F, d: 3, seq: win(1, 6).map((p) => p + 1), q: 'The numbers {S} are each one more than a special number. What comes next?', exp: pe('one more than consecutive primes 2, 3, 5, 7, 11, 13') })
@@ -375,7 +378,7 @@ function seriesItem({ fam, d, seq, hide = seq.length - 1, q, exp, letters = fals
   seriesItem({ fam: F, d: 2, seq: REC(4, (x) => 2 * x - 2, 6), q: 'The series {S} follows one rule. What comes next?', exp: lin(2, -2) })
   seriesItem({ fam: F, d: 2, seq: REC(2, (x, i) => (i % 2 ? 2 * x : x + 3), 7), q: 'Find the next number of the series {S}.', exp: alt('×2, +3, ×2, +3, …') })
   seriesItem({ fam: F, d: 2, seq: REC(5, (x, i) => (i % 2 ? 2 * x : x - 3), 7), q: 'Supply the missing term: {S}', exp: alt('×2, −3, ×2, −3, …') })
-  seriesItem({ fam: F, d: 3, seq: REC(100, (x, i) => (i % 2 ? x / 2 : x + 2), 6), q: 'Which number comes next in {S}?', exp: alt('÷2, +2, ÷2, +2, …') })
+  seriesItem({ fam: F, d: 3, seq: REC(100, (x, i) => (i % 2 ? x / 2 : x + 2), 6), q: 'Which value comes next in {S}?', exp: alt('÷2, +2, ÷2, +2, …') })
   seriesItem({ fam: F, d: 2, seq: REC(3, (x, i) => (i % 2 ? x + 1 : 2 * x), 7), q: 'What number should replace the question mark: {S}', exp: alt('+1, ×2, +1, ×2, …') })
   seriesItem({ fam: F, d: 2, seq: REC(1, (x, i) => x * (i + 1), 6), q: 'Find the next term of {S}.', exp: (s, a) => `The terms are multiplied by 2, 3, 4, 5 in turn; the next multiplier is 6, so the term is 120 × 6 = ${a}.` })
   seriesItem({ fam: F, d: 1, seq: REC(2, (x) => 2 * x - 1, 6), q: 'Name the term that follows {S}.', exp: lin(2, -1) })
@@ -391,7 +394,7 @@ function seriesItem({ fam, d, seq, hide = seq.length - 1, q, exp, letters = fals
 {
   const F = 'ga.series.fibonacci-type'
   const fe = (s, a) => `Each term is the sum of the two terms before it, so the missing term is ${a}.`
-  seriesItem({ fam: F, d: 1, seq: [1, 1, 2, 3, 5, 8, 13], q: 'Which number comes next: {S}?', exp: fe })
+  seriesItem({ fam: F, d: 1, seq: [1, 1, 2, 3, 5, 8, 13], q: 'State the next number of the sequence {S}', exp: fe })
   seriesItem({ fam: F, d: 1, seq: [2, 3, 5, 8, 13, 21], q: 'Each new term of {S} is built from earlier ones. Which number is next?', exp: fe })
   seriesItem({ fam: F, d: 2, seq: [4, 7, 11, 18, 29, 47], q: 'Find the term after the last in the sequence {S}', exp: fe })
   seriesItem({ fam: F, d: 2, seq: [3, 3, 6, 9, 15, 24], q: 'Continue the sequence {S}.', exp: fe })
@@ -567,7 +570,7 @@ function letterCodeItem({ fam, d, rule, ex, target, q, why }) {
   const m = Math.floor(ans.length / 2)
   const cand = [shiftW(1)(ans), oneLetter(ans, m, 1), shiftW(-1)(ans), rev(ans), oneLetter(ans, ans.length - 1, -1), oneLetter(ans, 0, 1), oneLetter(ans, 1, -1)]
   const wrong = [...new Set(cand)].filter((c) => c !== ans).slice(0, 3)
-  add({ st: 'ga.coding', fam, concept: `code-${ex.join('-')}-${target}`, d, q: q(codes), ans, wrong, exp: `${why}, so ${target} is written as ${ans}.` })
+  add({ st: 'ga.coding', fam, concept: `${fam.split(".").pop()}-${ex.join("-")}-${target}`, d, q: q(codes), ans, wrong, exp: `${why}, so ${target} is written as ${ans}.` })
 }
 function letterDecodeItem({ fam, d, rule, ex, word, others, q, why }) {
   const codes = ex.map(rule)
@@ -1500,7 +1503,7 @@ const nearNums = (ans, extra = []) => [...new Set([...extra, ans + 1, ans - 1, a
   }
   {
     const ds = ['0', '3', '5', '8'], k = []; for (const a of ds) for (const b of ds) for (const c of ds) if (a !== '0' && new Set([a, b, c]).size === 3) k.push(a + b + c)
-    CA(3, 'three-digit-from-0358', 'How many three-digit numbers can be formed from the digits 0, 3, 5 and 8 if no digit is repeated?', k.length, [24, 12, 27], `The first digit cannot be 0 (3 choices), then 3 choices for the second and 2 for the third: 3 × 3 × 2 = ${k.length}.`)
+    CA(3, 'three-digit-from-0358', 'Without repeating any digit, how many three-digit numbers can be made from 0, 3, 5 and 8?', k.length, [24, 12, 27], `The first digit cannot be 0 (3 choices), then 3 choices for the second and 2 for the third: 3 × 3 × 2 = ${k.length}.`)
   }
 }
 
@@ -1519,7 +1522,290 @@ const nearNums = (ans, extra = []) => [...new Set([...extra, ans + 1, ans - 1, a
   { const v = 1 + 2 + 3 + 4; CB(1, 'staircase-4-steps-blocks', 'A staircase is built from cubes: the first column has 1 cube, the second 2, the third 3 and the fourth 4. How many cubes are used?', v, [8, 12, 16], `1 + 2 + 3 + 4 = ${v}.`) }
 }
 
-// @@CONTINUE@@
+
+// ---------------------------------------------------------------------------
+// VERBAL REASONING (ga.verbal-reasoning) — hand-written, one defensible answer each
+// ---------------------------------------------------------------------------
+const VR = 'ga.verbal-reasoning'
+const V = (fam, d, concept, q, ans, wrong, exp) => add({ st: VR, fam, concept, d, q, ans, wrong, exp, src: 'authored', frame: `verbal|${canonical(q)}` })
+
+// ga.verbal.odd-one-out
+{
+  const F = 'ga.verbal.odd-one-out'
+  V(F, 1, 'odd-moon-among-planets', 'Which one of the following is the odd one out?', 'Moon', ['Mercury', 'Venus', 'Mars'], 'Mercury, Venus and Mars are planets; the Moon is a natural satellite of the Earth.')
+  V(F, 1, 'odd-flute-among-string-instruments', 'Three of these instruments are alike in one way. Which one is different?', 'Flute', ['Violin', 'Sitar', 'Guitar'], 'The violin, sitar and guitar are string instruments; the flute is a wind instrument.')
+  V(F, 1, 'odd-triangle-among-quadrilaterals', 'Find the odd one out: Square, Rectangle, Rhombus, Triangle.', 'Triangle', ['Square', 'Rectangle', 'Rhombus'], 'A square, rectangle and rhombus each have four sides; a triangle has three.')
+  V(F, 2, 'odd-tomato-among-root-vegetables', 'Which word does not fit with the others?', 'Tomato', ['Carrot', 'Radish', 'Turnip'], 'Carrot, radish and turnip are edible roots that grow underground; the tomato is a fruit that grows above ground.')
+  V(F, 2, 'odd-wolf-among-big-cats', 'Pick the one that does not belong to the group: Lion, Tiger, Leopard, Wolf.', 'Wolf', ['Lion', 'Tiger', 'Leopard'], 'The lion, tiger and leopard belong to the cat family; the wolf belongs to the dog family.')
+  V(F, 1, 'odd-bat-among-birds', 'Which of these animals is the odd one out?', 'Bat', ['Eagle', 'Sparrow', 'Crow'], 'The eagle, sparrow and crow are birds; the bat is a mammal even though it flies.')
+  V(F, 1, 'odd-water-among-elements', 'Select the odd one: Nitrogen, Oxygen, Hydrogen, Water.', 'Water', ['Nitrogen', 'Oxygen', 'Hydrogen'], 'Nitrogen, oxygen and hydrogen are elements; water is a compound of hydrogen and oxygen.')
+  V(F, 3, 'odd-parsimonious-among-generous', 'Which word is different in meaning from the other three?', 'Parsimonious', ['Benevolent', 'Magnanimous', 'Generous'], 'Benevolent, magnanimous and generous all describe giving freely; parsimonious means extremely unwilling to spend.')
+  V(F, 2, 'odd-mangla-among-rivers', 'Find the odd one out among Ravi, Chenab, Jhelum and Mangla.', 'Mangla', ['Ravi', 'Chenab', 'Jhelum'], 'Ravi, Chenab and Jhelum are rivers; Mangla is a dam (built on the Jhelum).')
+  V(F, 1, 'odd-multan-among-provincial-capitals', 'Which city is the odd one out?', 'Multan', ['Lahore', 'Karachi', 'Quetta'], 'Lahore, Karachi and Quetta are provincial capitals; Multan is not a provincial capital.')
+  V(F, 2, 'odd-geologist-among-doctors', 'Choose the odd one out: Cardiologist, Dermatologist, Neurologist, Geologist.', 'Geologist', ['Cardiologist', 'Dermatologist', 'Neurologist'], 'Cardiologists, dermatologists and neurologists are medical specialists; a geologist studies rocks and the Earth.')
+  V(F, 2, 'odd-femur-among-organs', 'Which of these does not belong with the rest?', 'Femur', ['Kidney', 'Liver', 'Lungs'], 'The kidney, liver and lungs are internal organs; the femur is a bone (the thigh bone).')
+  V(F, 2, 'odd-dictionary-among-literary-forms', 'Which one is unlike the others?', 'Dictionary', ['Novel', 'Short story', 'Drama'], 'The novel, short story and drama are forms of imaginative literature; a dictionary is a reference book.')
+  V(F, 2, 'odd-nylon-among-natural-fibres', 'Find the odd fibre out: Cotton, Silk, Wool, Nylon.', 'Nylon', ['Cotton', 'Silk', 'Wool'], 'Cotton, silk and wool are natural fibres; nylon is synthetic.')
+  V(F, 3, 'odd-friendly-among-adverbs', 'Three of these words belong to the same part of speech. Which one does not?', 'Friendly', ['Quickly', 'Slowly', 'Softly'], 'Quickly, slowly and softly are adverbs; friendly, despite ending in -ly, is an adjective.')
+  V(F, 2, 'odd-june-among-31-day-months', 'Which month is the odd one out: January, March, June, July?', 'June', ['January', 'March', 'July'], 'January, March and July have 31 days; June has 30.')
+  V(F, 2, 'odd-sydney-among-capitals', 'Which of these cities is the odd one out?', 'Sydney', ['Seoul', 'Tokyo', 'Beijing'], 'Seoul, Tokyo and Beijing are national capitals; Sydney is not the capital of Australia (Canberra is).')
+  V(F, 2, 'odd-telescope-among-weather-instruments', 'Pick the instrument that does not fit the group.', 'Telescope', ['Thermometer', 'Barometer', 'Hygrometer'], 'The thermometer, barometer and hygrometer measure temperature, pressure and humidity; a telescope is used for viewing distant objects.')
+  V(F, 2, 'odd-tabla-among-keyboard-instruments', 'Find the odd one out: Piano, Harmonium, Organ, Tabla.', 'Tabla', ['Piano', 'Harmonium', 'Organ'], 'The piano, harmonium and organ are keyboard instruments; the tabla is a pair of hand drums.')
+  V(F, 2, 'odd-brass-among-pure-metals', 'Which of the following is the odd one?', 'Brass', ['Aluminium', 'Zinc', 'Copper'], 'Aluminium, zinc and copper are elements; brass is an alloy of copper and zinc.')
+  V(F, 3, 'odd-chapter-among-poem-parts', 'Three words name parts of a poem. Which word is the exception?', 'Chapter', ['Stanza', 'Verse', 'Couplet'], 'Stanza, verse and couplet are units of a poem; a chapter is a division of a book of prose.')
+  V(F, 1, 'odd-ostrich-among-flying-birds', 'Which bird is the odd one out?', 'Ostrich', ['Sparrow', 'Pigeon', 'Parrot'], 'The sparrow, pigeon and parrot can fly; the ostrich cannot.')
+  V(F, 2, 'odd-frog-among-reptiles', 'Choose the animal that does not belong: Crocodile, Lizard, Snake, Frog.', 'Frog', ['Crocodile', 'Lizard', 'Snake'], 'The crocodile, lizard and snake are reptiles; the frog is an amphibian.')
+  V(F, 2, 'odd-shark-among-sea-mammals', 'Which sea creature is the odd one out?', 'Shark', ['Whale', 'Dolphin', 'Seal'], 'Whales, dolphins and seals are mammals that breathe air; the shark is a fish.')
+  V(F, 2, 'odd-monitor-among-input-devices', 'One of these computer devices differs from the others. Which is it?', 'Monitor', ['Keyboard', 'Mouse', 'Scanner'], 'The keyboard, mouse and scanner are input devices; the monitor is an output device.')
+  V(F, 3, 'odd-isotope-among-map-lines', 'Which term is the odd one out: Isobar, Isotherm, Isohyet, Isotope?', 'Isotope', ['Isobar', 'Isotherm', 'Isohyet'], 'Isobars, isotherms and isohyets are lines on a map joining places of equal pressure, temperature and rainfall; an isotope is a form of a chemical element.')
+  V(F, 3, 'odd-trapezium-among-parallelograms', 'Three of these figures always have two pairs of parallel sides. Which one does not?', 'Trapezium', ['Rhombus', 'Rectangle', 'Square'], 'A rhombus, rectangle and square are parallelograms with two pairs of parallel sides; a trapezium has only one pair.')
+  V(F, 2, 'odd-octopus-among-fish', 'Find the one that is not a fish.', 'Octopus', ['Tuna', 'Salmon', 'Trout'], 'Tuna, salmon and trout are fish; the octopus is a mollusc.')
+}
+
+// ga.verbal.analogy
+{
+  const F = 'ga.verbal.analogy'
+  V(F, 1, 'analogy-doctor-hospital-teacher-school', 'Doctor : Hospital :: Teacher : ?', 'School', ['Student', 'Book', 'Office'], 'A doctor works in a hospital, as a teacher works in a school.')
+  V(F, 1, 'analogy-pen-write-knife-cut', 'Pen is to write as knife is to:', 'Cut', ['Sharp', 'Kitchen', 'Steel'], 'A pen is used to write and a knife is used to cut: tool and its use.')
+  V(F, 1, 'analogy-bird-nest-lion-den', 'Bird : Nest :: Lion : ?', 'Den', ['Forest', 'Stable', 'Kennel'], 'A nest is the home of a bird; a den is the home of a lion (a stable is for horses and a kennel for dogs).')
+  V(F, 2, 'analogy-ancient-modern-scarce-abundant', 'Ancient is to modern as scarce is to:', 'Abundant', ['Rare', 'Costly', 'Limited'], 'Ancient and modern are opposites; the opposite of scarce is abundant.')
+  V(F, 2, 'analogy-author-book-composer-symphony', 'Complete the analogy — Author : Book :: Composer : ?', 'Symphony', ['Orchestra', 'Piano', 'Singer'], 'An author creates a book; a composer creates a symphony.')
+  V(F, 1, 'analogy-carpenter-wood-tailor-cloth', 'Carpenter : Wood :: Tailor : ?', 'Cloth', ['Needle', 'Shop', 'Scissors'], 'A carpenter works with wood as his material; a tailor works with cloth.')
+  V(F, 1, 'analogy-thermometer-temperature-barometer-pressure', 'A thermometer measures temperature; in the same way a barometer measures:', 'Pressure', ['Humidity', 'Rainfall', 'Wind speed'], 'A thermometer measures temperature; a barometer measures atmospheric pressure.')
+  V(F, 1, 'analogy-puppy-dog-calf-cow', 'Puppy : Dog :: Calf : ?', 'Cow', ['Goat', 'Horse', 'Sheep'], 'A puppy is a young dog; a calf is a young cow (the young of a goat is a kid, of a horse a foal, of a sheep a lamb).')
+  V(F, 1, 'analogy-petal-flower-page-book', 'Petal is to flower as page is to:', 'Book', ['Library', 'Ink', 'Letter'], 'A petal is part of a flower; a page is part of a book.')
+  V(F, 2, 'analogy-kilogram-mass-ampere-current', 'Kilogram : Mass :: Ampere : ?', 'Electric current', ['Voltage', 'Power', 'Resistance'], 'The kilogram is the SI unit of mass; the ampere is the SI unit of electric current.')
+  V(F, 2, 'analogy-ornithology-birds-entomology-insects', 'Ornithology is to birds as entomology is to:', 'Insects', ['Words', 'Fossils', 'Fish'], 'Ornithology is the study of birds; entomology is the study of insects (etymology is the study of word origins).')
+  V(F, 2, 'analogy-oasis-desert-island-sea', 'Oasis : Desert :: Island : ?', 'Sea', ['Beach', 'Land', 'Mountain'], 'An oasis is a patch of fertile land surrounded by desert; an island is land surrounded by sea.')
+  V(F, 2, 'analogy-drought-rain-famine-food', 'Drought is to rain as famine is to:', 'Food', ['Hunger', 'Death', 'Crop failure'], 'A drought is a severe shortage of rain; a famine is a severe shortage of food.')
+  V(F, 2, 'analogy-candid-frank-obstinate-stubborn', 'Candid : Frank :: Obstinate : ?', 'Stubborn', ['Humble', 'Timid', 'Careless'], 'Candid and frank are synonyms; obstinate means stubborn.')
+  V(F, 2, 'analogy-circle-circumference-square-perimeter', 'Circle is to circumference as square is to:', 'Perimeter', ['Area', 'Diagonal', 'Side'], 'The circumference is the boundary length of a circle; the perimeter is the boundary length of a square.')
+  V(F, 2, 'analogy-chapter-book-scene-play', 'Chapter : Book :: Scene : ?', 'Play', ['Actor', 'Stage', 'Audience'], 'A chapter is a division of a book; a scene is a division of a play.')
+  V(F, 1, 'analogy-rupee-pakistan-yen-japan', 'Rupee is to Pakistan as yen is to:', 'Japan', ['China', 'Korea', 'Thailand'], 'The rupee is Pakistan’s currency; the yen is Japan’s currency.')
+  V(F, 2, 'analogy-speedometer-speed-odometer-distance', 'Speedometer is to speed as odometer is to:', 'Distance', ['Fuel', 'Time', 'Direction'], 'A speedometer shows speed; an odometer records the distance travelled.')
+  V(F, 2, 'analogy-mason-wall-cobbler-shoes', 'Mason : Wall :: Cobbler : ?', 'Shoes', ['Leather', 'Needle', 'Shop'], 'A mason builds walls; a cobbler makes and mends shoes.')
+  V(F, 2, 'analogy-pakistan-islamabad-turkey-ankara', 'Pakistan : Islamabad :: Turkey : ?', 'Ankara', ['Istanbul', 'Izmir', 'Konya'], 'Islamabad is the capital of Pakistan; Ankara (not Istanbul) is the capital of Turkey.')
+  V(F, 3, 'analogy-nocturnal-night-diurnal-day', 'Nocturnal is to night as diurnal is to:', 'Day', ['Year', 'Dawn', 'Season'], 'Nocturnal animals are active at night; diurnal animals are active during the day.')
+  V(F, 3, 'analogy-cow-herd-fish-school', 'Cow : Herd :: Fish : ?', 'Shoal', ['Flock', 'Pack', 'Swarm'], 'A group of cows is a herd; a group of fish is a shoal (or school). Flock, pack and swarm are used for birds or sheep, wolves and insects.')
+  V(F, 3, 'analogy-philately-stamps-numismatics-coins', 'Philately : Stamps :: Numismatics : ?', 'Coins', ['Maps', 'Books', 'Stars'], 'Philately is the collection and study of stamps; numismatics is the study and collection of coins.')
+  V(F, 3, 'analogy-cartographer-maps-lexicographer-dictionaries', 'Cartographer is to maps as lexicographer is to:', 'Dictionaries', ['Laws', 'Coins', 'Letters'], 'A cartographer compiles maps; a lexicographer compiles dictionaries.')
+  V(F, 3, 'analogy-gregarious-sociable-taciturn-reserved', 'Gregarious : Sociable :: Taciturn : ?', 'Reserved', ['Talkative', 'Angry', 'Honest'], 'Gregarious means sociable; taciturn means reserved and saying little (talkative is its opposite).')
+  V(F, 2, 'analogy-pair-book-library-painting-gallery', 'Choose the pair related in the same way as Book : Library.', 'Painting : Gallery', ['Teacher : School', 'Pen : Ink', 'Leaf : Tree'], 'Books are kept and displayed in a library; paintings are kept and displayed in a gallery.')
+  V(F, 2, 'analogy-pair-wheat-flour-sugarcane-sugar', 'Which pair has the same relationship as Wheat : Flour?', 'Sugarcane : Sugar', ['Bread : Butter', 'Rice : Field', 'Tea : Cup'], 'Flour is made by processing wheat; sugar is made by processing sugarcane.')
+  V(F, 2, 'analogy-pair-cub-lion-foal-horse', 'Select the pair that matches Cub : Lion.', 'Foal : Horse', ['Hen : Egg', 'Cat : Kitten', 'Bee : Hive'], 'A cub is a young lion and a foal is a young horse; Cat : Kitten has the order reversed.')
+  V(F, 1, 'analogy-pair-generous-miserly-humble-arrogant', 'Which pair of words is related in the same way as Generous : Miserly?', 'Humble : Arrogant', ['Brave : Fearless', 'Quick : Fast', 'Rich : Wealthy'], 'Generous and miserly are opposites, as are humble and arrogant; the other pairs are synonyms.')
+}
+
+// ga.verbal.necessary-part
+{
+  const F = 'ga.verbal.necessary-part'
+  V(F, 1, 'necessary-part-library-books', 'Which of the following is a necessary part of a “library”?', 'Books', ['Computers', 'Chairs', 'Fees'], 'A library is by definition a collection of books (or other reading material); computers, chairs and fees are not essential.')
+  V(F, 1, 'necessary-part-election-voters', 'Which one is essential to an “election”?', 'Voters', ['Posters', 'Rallies', 'Television'], 'An election cannot take place without voters; posters, rallies and television coverage are optional.')
+  V(F, 2, 'necessary-part-shoe-sole', 'A “shoe” must always have:', 'A sole', ['Laces', 'A buckle', 'Leather'], 'Every shoe has a sole; many shoes have no laces or buckle and are not made of leather.')
+  V(F, 1, 'necessary-part-book-pages', 'Which of these is a necessary part of a “book”?', 'Pages', ['Pictures', 'An index', 'A glossary'], 'A book must have pages; pictures, an index and a glossary are found only in some books.')
+  V(F, 2, 'necessary-part-race-competitors', 'Which of the following is indispensable to a “race”?', 'Competitors', ['Spectators', 'Medals', 'A stadium'], 'A race needs competitors; spectators, medals and a stadium are not required.')
+  V(F, 3, 'necessary-part-desert-dryness', 'Which one of the following is a necessary feature of a “desert”?', 'Dryness', ['Sand', 'Camels', 'An oasis'], 'A desert is defined by very low rainfall; many deserts are rocky or icy and have no sand, camels or oases.')
+  V(F, 2, 'necessary-part-newspaper-news', 'Choose the necessary part of a “newspaper”.', 'News', ['Advertisements', 'Photographs', 'Cartoons'], 'A newspaper must carry news; advertisements, photographs and cartoons are common but not essential.')
+  V(F, 2, 'necessary-part-fire-oxygen', 'Which of these is always necessary for “fire”?', 'Oxygen', ['Wood', 'A matchstick', 'Petrol'], 'Burning needs oxygen; wood and petrol are only particular fuels and a matchstick only one way of lighting it.')
+  V(F, 2, 'necessary-part-contract-agreement', 'A “contract” cannot exist without:', 'Agreement', ['A lawyer', 'Stamp paper', 'A witness'], 'A contract is an agreement between parties; lawyers, stamp paper and witnesses are not always needed.')
+  V(F, 2, 'necessary-part-pendulum-bob', 'Which one is a necessary part of a “pendulum”?', 'A weight (bob)', ['A clock', 'A spring', 'A battery'], 'A pendulum is a weight hung so that it swings freely; it need not be part of a clock and needs no spring or battery.')
+  V(F, 1, 'necessary-part-guitar-strings', 'Which of the following must a “guitar” have?', 'Strings', ['An amplifier', 'A case', 'A pick'], 'A guitar is played by its strings; an amplifier, case and pick are accessories.')
+  V(F, 2, 'necessary-part-rain-clouds', 'Which is a necessary condition for “rain”?', 'Clouds', ['Thunder', 'Lightning', 'Wind'], 'Rain falls from clouds; thunder, lightning and wind often accompany it but are not needed.')
+  V(F, 1, 'necessary-part-island-water', 'An “island” always has:', 'Water around it', ['Trees', 'A beach', 'Mountains'], 'An island is land surrounded by water; trees, beaches and mountains are not essential.')
+  V(F, 3, 'necessary-part-examination-questions', 'Which of these is a necessary part of an “examination”?', 'Questions', ['An invigilator', 'An answer sheet', 'An examination hall'], 'An examination tests candidates by setting questions or tasks; oral and online tests need no hall, answer sheet or invigilator.')
+  V(F, 2, 'necessary-part-tree-roots', 'Which part is essential to a “tree”?', 'Roots', ['Fruit', 'Flowers', 'Birds'], 'Every tree has roots; not every tree bears flowers or fruit, and birds are not part of it.')
+  V(F, 1, 'necessary-part-cheese-milk', 'Which of the following is necessary to make “cheese”?', 'Milk', ['Bread', 'A knife', 'A refrigerator'], 'Cheese is made from milk; bread, knives and refrigerators are not needed to make it.')
+}
+
+// ga.verbal.does-not-belong (not a part of X)
+{
+  const F = 'ga.verbal.does-not-belong'
+  V(F, 1, 'not-part-of-tree-fin', 'Which of the following is not a part of a “tree”?', 'Fin', ['Trunk', 'Bark', 'Branch'], 'Trunk, bark and branches are parts of a tree; a fin is part of a fish.')
+  V(F, 1, 'not-part-of-ship-saddle', 'Which of these is not part of a “ship”?', 'Saddle', ['Hull', 'Deck', 'Anchor'], 'Hull, deck and anchor are parts of a ship; a saddle is used on a horse or bicycle.')
+  V(F, 2, 'not-part-of-eye-eardrum', 'Which of the following does not belong to the “eye”?', 'Eardrum', ['Retina', 'Pupil', 'Cornea'], 'The retina, pupil and cornea are parts of the eye; the eardrum is part of the ear.')
+  V(F, 2, 'not-part-of-flower-bark', 'Which one is not a part of a “flower”?', 'Bark', ['Petal', 'Sepal', 'Stamen'], 'Petals, sepals and stamens are parts of a flower; bark covers a tree’s trunk and branches.')
+  V(F, 2, 'not-part-of-formal-letter-chorus', 'Which of these does not belong to a “formal letter”?', 'Chorus', ['Salutation', 'Subject line', 'Signature'], 'A formal letter has a salutation, subject line and signature; a chorus is part of a song.')
+  V(F, 1, 'not-part-of-bicycle-rudder', 'Which of the following is not a part of a “bicycle”?', 'Rudder', ['Pedal', 'Chain', 'Handlebar'], 'Pedals, chain and handlebar are bicycle parts; a rudder steers a boat or aircraft.')
+  V(F, 3, 'not-part-of-cell-neuron', 'Which one does not belong inside a plant “cell”?', 'Neuron', ['Nucleus', 'Cytoplasm', 'Chloroplast'], 'The nucleus, cytoplasm and chloroplasts are found inside a plant cell; a neuron is itself a whole nerve cell of animals.')
+  V(F, 3, 'not-part-of-heart-alveolus', 'Which of these is not a part of the human “heart”?', 'Alveolus', ['Atrium', 'Ventricle', 'Valve'], 'Atria, ventricles and valves are parts of the heart; alveoli are air sacs in the lungs.')
+  V(F, 1, 'not-part-of-parliament-umpire', 'Which one does not belong to a “parliament”?', 'Umpire', ['Speaker', 'Members', 'Chamber'], 'A parliament has a Speaker, members and a chamber; an umpire officiates in games.')
+  V(F, 2, 'not-part-of-newspaper-stanza', 'Which of the following is not a part of a “newspaper”?', 'Stanza', ['Headline', 'Editorial', 'Masthead'], 'Headlines, the editorial and the masthead are parts of a newspaper; a stanza is a unit of a poem.')
+  V(F, 2, 'not-part-of-river-summit', 'Which one does not belong to a “river”?', 'Summit', ['Source', 'Tributary', 'Mouth'], 'A river has a source, tributaries and a mouth; a summit is the top of a mountain.')
+  V(F, 1, 'not-part-of-computer-carburettor', 'Which of these is not a part of a “computer”?', 'Carburettor', ['Processor', 'Memory', 'Motherboard'], 'Processor, memory and motherboard are computer parts; a carburettor is part of a petrol engine.')
+}
+
+// ga.verbal.odd-pair
+{
+  const F = 'ga.verbal.odd-pair'
+  V(F, 1, 'odd-pair-book-library-among-tool-use', 'Select the pair whose relationship is different from the others.', 'Book : Library', ['Pen : Write', 'Knife : Cut', 'Needle : Sew'], 'Pen, knife and needle are paired with what they are used for; a library is where books are kept.')
+  V(F, 1, 'odd-pair-lion-den-among-parent-young', 'Which pair does not follow the pattern of the rest?', 'Lion : Den', ['Cow : Calf', 'Dog : Puppy', 'Cat : Kitten'], 'The others pair an animal with its young; a den is a lion’s home.')
+  V(F, 1, 'odd-pair-big-large-among-antonyms', 'Find the odd pair: Hot : Cold, Tall : Short, Fast : Slow, Big : Large.', 'Big : Large', ['Hot : Cold', 'Tall : Short', 'Fast : Slow'], 'The other pairs are opposites; big and large mean the same.')
+  V(F, 2, 'odd-pair-turkey-istanbul-among-capitals', 'Which country–city pair is different from the others?', 'Turkey : Istanbul', ['Pakistan : Islamabad', 'India : New Delhi', 'Iran : Tehran'], 'The others pair a country with its capital; the capital of Turkey is Ankara, not Istanbul.')
+  V(F, 1, 'odd-pair-pilot-passenger-among-workplace', 'Choose the pair that has a different relationship.', 'Pilot : Passenger', ['Doctor : Hospital', 'Teacher : School', 'Farmer : Field'], 'The others pair a worker with the place of work; a passenger is a person, not a workplace.')
+  V(F, 3, 'odd-pair-milk-cow-among-part-whole', 'Pick the pair unlike the other three: Petal : Flower, Page : Book, Wheel : Car, Milk : Cow.', 'Milk : Cow', ['Petal : Flower', 'Page : Book', 'Wheel : Car'], 'The others pair a part with the whole it belongs to; milk is a product of a cow, not a part of it.')
+  V(F, 2, 'odd-pair-litre-petrol-among-unit-quantity', 'Which pair differs from the rest?', 'Litre : Petrol', ['Kilogram : Mass', 'Metre : Length', 'Second : Time'], 'The others pair a unit with the quantity it measures; petrol is a substance, not a quantity.')
+  V(F, 2, 'odd-pair-singer-stage-among-creator-work', 'Select the pair that does not share the relationship of the others.', 'Singer : Stage', ['Author : Novel', 'Painter : Painting', 'Poet : Poem'], 'The others pair a creator with what he creates; a stage is where a singer performs.')
+  V(F, 3, 'odd-pair-stethoscope-doctor-among-instrument-quantity', 'Which of these pairs is the exception: Barometer : Pressure, Ammeter : Current, Odometer : Distance, Stethoscope : Doctor?', 'Stethoscope : Doctor', ['Barometer : Pressure', 'Ammeter : Current', 'Odometer : Distance'], 'The others pair an instrument with what it measures; the stethoscope is paired with its user.')
+}
+
+// ga.verbal.statement-conclusion
+{
+  const F = 'ga.verbal.statement-conclusion'
+  const SCQ = (d, concept, st, ans, wrong, exp, ask = 'Which conclusion follows from the statement?') => V(F, d, concept, `Statement: ${st} ${ask}`, ans, wrong, exp)
+  SCQ(1, 'conclusion-library-closed-friday', 'The library will remain closed on Friday for its annual stock-taking.', 'Books cannot be borrowed from the library on Friday.', ['Stock-taking is done every week.', 'The library has lost many books.', 'The library will close permanently after Friday.'], 'A closed library cannot lend books that day; the statement says the stock-taking is annual and says nothing about losses or permanent closure.')
+  SCQ(1, 'conclusion-millennial-born-1990', 'People born between 1981 and 1996 are called millennials. Sana was born in 1990.', 'Sana is a millennial.', ['Sana’s parents are millennials.', 'People born in 1998 are also millennials.', 'Sana is older than every other millennial.'], '1990 lies within 1981–1996, so by the stated definition Sana is a millennial; nothing is said about her parents, and 1998 falls outside the range.', 'Which conclusion follows logically?')
+  SCQ(2, 'conclusion-only-40-percent-pass', 'Only candidates who score at least 40 per cent in every paper are declared successful. Hamid scored 38 per cent in English.', 'Hamid has not been declared successful.', ['Hamid scored less than 40 per cent in every paper.', 'Hamid will pass if he retakes English.', 'All the other candidates were successful.'], '“Only” makes 40 per cent in every paper a necessary condition; Hamid missed it in English, so he cannot be successful. The rest is not stated.')
+  SCQ(1, 'conclusion-no-shop-before-10-bakery', 'No shop in this market opens before 10 a.m. The bakery is a shop in this market.', 'The bakery does not open before 10 a.m.', ['The bakery opens exactly at 10 a.m.', 'All shops close at 10 p.m.', 'The bakery is the busiest shop in the market.'], 'What is true of every shop in the market is true of the bakery; the exact opening time is not given.')
+  SCQ(2, 'conclusion-factory-500-bicycles-six-days', 'A factory produces 500 bicycles a day and works six days a week.', 'The factory produces 3,000 bicycles in a working week.', ['The factory produces 3,500 bicycles a week.', 'The factory is closed on Sundays.', 'The demand for bicycles is rising.'], '500 × 6 = 3,000; the statement does not say which day is the holiday or anything about demand.')
+  SCQ(3, 'conclusion-flyover-average-travel-time', 'Since the new flyover opened, the average travel time between the two ends of the road has fallen from 40 minutes to 25 minutes.', 'On average, the journey along that road now takes less time than before.', ['Every driver now saves exactly 15 minutes.', 'The flyover was very costly to build.', 'Accidents on the road have stopped.'], 'The fall in the average supports only a general reduction; an average does not mean every driver saves the same time, and cost and accidents are not mentioned.')
+  SCQ(2, 'conclusion-some-trees-over-100-years', 'Some of the trees in the park are more than a hundred years old.', 'At least one tree in the park is over a hundred years old.', ['Most of the trees in the park are old.', 'All the trees in the park are over a hundred years old.', 'No tree in the park was planted recently.'], '“Some” guarantees at least one; it does not tell us about most or all of the trees.')
+  SCQ(3, 'conclusion-meeting-quorum-half-present', 'The meeting can begin only when at least half of the members are present. Today the meeting began at 11 a.m.', 'At least half of the members were present at 11 a.m.', ['All the members were present.', 'The meeting ended before noon.', 'The meeting usually begins at 11 a.m.'], 'Since the meeting began, the necessary condition (at least half present) must have been met; nothing more follows.')
+  SCQ(3, 'conclusion-survey-620-of-1000-households', 'A survey of 1,000 households in a city found that 620 of them own a motorcycle.', 'More than half of the surveyed households own a motorcycle.', ['Exactly 620 people in the city own motorcycles.', 'Motorcycles are cheaper than cars.', 'Most households in the country own a motorcycle.'], '620 out of 1,000 is more than half of the households surveyed; the survey counts households, not people, and covers only that city.')
+  SCQ(3, 'conclusion-unless-rains-match-not-played', 'Unless it rains, the match will be played today. The match was not played today.', 'It rained today.', ['It did not rain today.', 'The match will be played tomorrow.', 'The match was cancelled for lack of players.'], '“Unless it rains, the match is played” means that if it does not rain the match is played; since the match was not played, it must have rained.')
+  SCQ(1, 'conclusion-ten-years-service-medal', 'Every employee who has served the company for at least ten years receives a gold medal. Farah has served the company for twelve years.', 'Farah receives a gold medal.', ['Farah is the longest-serving employee.', 'Only Farah receives a gold medal.', 'Farah will retire soon.'], 'Twelve years is at least ten, so the rule applies to Farah; nothing is said about others or her retirement.')
+  SCQ(1, 'conclusion-museum-free-under-12', 'The museum charges no entry fee to children under twelve. Omar, who is nine, visited the museum yesterday.', 'Omar did not have to pay an entry fee.', ['Omar went to the museum with his parents.', 'Adults pay a very high fee.', 'Most visitors to the museum are children.'], 'Nine is under twelve, so the free-entry rule covers Omar; the other statements are not given.')
+  SCQ(2, 'conclusion-sleep-study-association', 'A study found that students who slept at least seven hours before an examination scored higher, on average, than those who slept less.', 'In that study, adequate sleep went together with better average scores.', ['Sleeping longer guarantees a higher score.', 'Every student who slept less failed.', 'The examination was easy for everyone.'], 'The finding is about averages in one study; it does not guarantee any individual result or say anyone failed.')
+  SCQ(1, 'conclusion-all-flights-skardu-cancelled', 'All flights to Skardu were cancelled today because of poor visibility.', 'No scheduled flight left for Skardu today.', ['Visibility at Skardu is always poor.', 'Flights to Skardu will also be cancelled tomorrow.', 'Road travel to Skardu was also stopped.'], 'If all flights were cancelled, none flew today; the statement says nothing about other days or about roads.')
+  SCQ(2, 'conclusion-seat-belt-fines-twice', 'Under a new rule, a driver caught without a seat belt is fined Rs 2,000 for the first offence and Rs 5,000 for each later offence. Zahid has been fined twice under this rule.', 'Zahid has been fined Rs 7,000 in all under this rule.', ['Zahid has been fined Rs 4,000 in all.', 'Zahid has been fined Rs 10,000 in all.', 'Zahid will lose his driving licence.'], 'His first fine was Rs 2,000 and his second Rs 5,000, a total of Rs 7,000; licences are not mentioned.')
+  SCQ(2, 'conclusion-either-extend-break-or-shorten-syllabus', 'The school will either extend the break or shorten the syllabus, but not both. It has decided to shorten the syllabus.', 'The break will not be extended.', ['The break will be extended.', 'The syllabus was too long for students.', 'The school will do both.'], '“Either … or …, but not both” means choosing one rules out the other.')
+  SCQ(3, 'conclusion-class-x-passed-some-cricket', 'Every student of Class X passed the mathematics test. Some students of Class X play cricket.', 'Some cricket players passed the mathematics test.', ['All cricket players passed the mathematics test.', 'No cricket player failed any test.', 'Only cricket players passed the test.'], 'The cricket players in Class X are students of Class X, and all of them passed; nothing follows about cricket players outside the class.')
+  SCQ(2, 'conclusion-shop-sells-only-fruit-veg', 'The shop sells only fruit and vegetables. Sadia bought something from the shop.', 'Sadia bought fruit or vegetables.', ['Sadia bought bread.', 'Sadia bought both fruit and vegetables.', 'Sadia goes to the shop every day.'], 'The shop sells nothing else, so whatever she bought was fruit or vegetables; it need not have been both.')
+}
+
+// ga.verbal.course-of-action
+{
+  const F = 'ga.verbal.course-of-action'
+  const CO = (d, concept, st, ans, wrong, exp, ask = 'Which course of action should be followed?') => V(F, d, concept, `Statement: ${st} ${ask}`, ans, wrong, exp)
+  CO(1, 'action-dengue-cases-spraying', 'Several cases of dengue fever have been reported in a residential area after the monsoon rains.', 'Local authorities should spray against mosquitoes and remove stagnant water in the area.', ['All residents should be made to leave the area permanently.', 'Hospitals in the area should be closed to stop the infection.', 'Nothing should be done because the monsoon will end.'], 'Dengue is spread by mosquitoes that breed in stagnant water; spraying and clearing water tackles the cause without extreme measures.')
+  CO(1, 'action-students-failing-maths-remedial', 'Many students in a school are failing mathematics because they cannot follow the lessons.', 'The school should arrange extra (remedial) classes for these students.', ['Mathematics should be removed from the syllabus.', 'The failing students should be expelled.', 'The pass mark should be abolished.'], 'Extra teaching addresses the stated cause; the other options avoid or punish the problem instead of solving it.')
+  CO(1, 'action-cracked-bridge-stop-heavy-traffic', 'A bridge on a busy highway has developed serious cracks.', 'Heavy traffic should be stopped on the bridge until it is inspected and repaired.', ['The highway should be closed permanently.', 'The cracks should simply be painted over.', 'No action is needed until the bridge actually fails.'], 'Stopping heavy loads and repairing the bridge protects lives while restoring the route; the others are either extreme or ignore the danger.')
+  CO(1, 'action-long-queues-identity-cards', 'Citizens complain that they have to wait for hours at an office to obtain their identity cards.', 'More counters should be opened and an appointment system introduced.', ['Identity cards should be abolished.', 'Citizens who complain should be fined.', 'The office should be shut down.'], 'More counters and appointments reduce waiting time directly; the others are unreasonable or make matters worse.')
+  CO(1, 'action-crop-loss-storage', 'Farmers in a district lose a large part of their harvest every year because they have no proper storage facilities.', 'Storage facilities such as warehouses should be built in the district.', ['Farmers should be told to grow less.', 'The import of food should be banned.', 'Farmers should be asked to sell their land.'], 'The loss is caused by lack of storage, so building storage is the practical remedy.')
+  CO(1, 'action-signals-broken-accidents', 'Road accidents at a busy crossing have risen sharply since its traffic signals stopped working.', 'The traffic signals should be repaired without delay.', ['The crossing should be closed to all traffic for good.', 'Drivers should be told to avoid the city.', 'Speed limits in the whole province should be halved.'], 'The rise followed the signal failure, so repairing the signals directly removes the cause.')
+  CO(2, 'action-landslides-hill-town', 'Several houses in a hill town were damaged by landslides after heavy rain.', 'Families living on unstable slopes should be moved to safer places and the slopes surveyed.', ['All construction in the country should be banned.', 'The town’s schools should be closed for a year.', 'Residents should rebuild at the same spots at once.'], 'Relocating those at risk and surveying the slopes addresses the danger; rebuilding immediately at the same spots repeats the risk.')
+  CO(1, 'action-blood-bank-shortage', 'A government hospital reports a shortage of blood in its blood bank.', 'The hospital should organise blood donation camps.', ['All operations should be stopped permanently.', 'Patients should bring blood from abroad.', 'The blood bank should be closed.'], 'Donation camps increase the supply of blood, which is exactly what is short.')
+  CO(2, 'action-expired-medicines-inspection', 'It has been found that several shops in a market sell expired medicines.', 'Drug inspectors should check the shops and take legal action against the offenders.', ['All medical stores in the country should be closed.', 'People should stop buying medicines altogether.', 'The authorities should wait for more complaints before acting.'], 'Inspection and legal action target the offenders; the others are extreme or leave a health risk unchecked.')
+  CO(2, 'action-reservoir-low-conserve-water', 'The water supply to a city is expected to fall short this summer because the reservoir level is low.', 'Citizens should be urged to save water and supply schedules should be announced.', ['Water should be supplied only to factories.', 'The remaining water should be released at once.', 'The shortage should be kept secret to avoid panic.'], 'Conservation and planned supply stretch the limited water fairly; the others waste it or leave people unprepared.')
+  CO(2, 'action-reading-at-home-parents', 'Research shows that children who read regularly at home do better at school.', 'Parents should be encouraged to build a reading habit at home.', ['Schools should stop giving homework.', 'Children who do not read should be kept out of school.', 'Public libraries should be closed during school hours.'], 'Encouraging home reading acts on the finding; the other options do not follow from it.')
+  CO(2, 'action-graduates-lack-skills-training', 'Many young graduates in a region remain unemployed because they lack the technical skills that local industries need.', 'Technical and vocational training should be expanded in the region.', ['Universities in the region should be closed.', 'Industries should be moved out of the region.', 'Graduates should be barred from applying for jobs.'], 'Training supplies the missing skills, which is the stated cause of unemployment.')
+  CO(2, 'action-brick-kiln-smog-cleaner-firing', 'Smoke from brick kilns is a major cause of winter smog around a city.', 'Kilns should be required to adopt cleaner firing methods and be inspected regularly.', ['All vehicles in the city should be banned permanently.', 'Citizens should stay indoors for the whole winter.', 'Brick production should be doubled to meet demand.'], 'Cleaner firing and inspection reduce the stated source of smog; the others ignore the kilns or are extreme.')
+  CO(2, 'action-audit-misuse-inquiry', 'An audit reveals that some officials of a department misused public funds.', 'An inquiry should be held and those found responsible should be punished.', ['The department should be abolished.', 'All employees of the department should be dismissed.', 'The audit report should be kept secret.'], 'An inquiry followed by punishment holds the guilty to account without harming the innocent or hiding the matter.')
+}
+
+// ga.verbal.assumption
+{
+  const F = 'ga.verbal.assumption'
+  const AS = (d, concept, st, ans, wrong, exp, ask = 'Which assumption is implicit in the statement?') => V(F, d, concept, `Statement: ${st} ${ask}`, ans, wrong, exp)
+  AS(1, 'assumption-use-stairs-lift-repair', '“Please use the stairs; the lift is under repair.”', 'The stairs are available for use.', ['The lift will never be repaired.', 'Everyone prefers the stairs.', 'The building has only one floor.'], 'Advising people to use the stairs takes for granted that the stairs can be used.')
+  AS(1, 'assumption-water-filter-advert', 'An advertisement says: “Buy our water filter to keep your family healthy.”', 'People want to keep their families healthy.', ['Unfiltered water is always poisonous.', 'Other filters do not work at all.', 'Every home already owns a filter.'], 'The advertisement appeals to the wish for a healthy family; it does not assume the extreme claims.')
+  AS(2, 'assumption-online-classes-smog', 'The school announced that classes will be held online during the smog emergency.', 'Students are able to attend classes online.', ['The smog will last all year.', 'Online teaching is better than classroom teaching in every way.', 'Teachers do not want to come to school.'], 'Moving classes online is sensible only if students can join them; the other ideas are not needed for the decision.')
+  AS(2, 'assumption-cigarette-tax-reduce-smoking', 'The government has raised the tax on cigarettes in order to reduce smoking.', 'A higher price will discourage some people from smoking.', ['All smokers will quit immediately.', 'Cigarettes are not harmful.', 'The government needs no other revenue.'], 'The policy works only if price affects smoking; it need not assume that everyone quits.')
+  AS(1, 'assumption-swimming-evening-classes', '“If you want to learn swimming, join the evening classes at the club.”', 'Swimming can be learnt in the evening classes at the club.', ['Only the club teaches swimming.', 'Everyone wants to learn swimming.', 'Morning classes are too expensive.'], 'The advice assumes the classes can teach swimming; it does not claim the club is the only place.')
+  AS(2, 'assumption-railway-online-booking', 'The railway has introduced online booking so that passengers need not queue at stations.', 'Many passengers are able to book tickets online.', ['Railway stations will be closed.', 'Queues at bus stations will disappear too.', 'Passengers enjoy standing in queues.'], 'The scheme reduces queues only if a good number of passengers can use it.')
+  AS(1, 'assumption-medicines-out-of-reach', 'A label reads: “Keep medicines out of the reach of children.”', 'Children could be harmed by taking medicines unsupervised.', ['Children never fall ill.', 'Medicines are useless for adults.', 'Adults never need medicines.'], 'The warning exists because children might swallow medicines and be harmed.')
+  AS(1, 'assumption-trees-reduce-pollution', 'The municipality has planted thousands of trees along main roads to reduce air pollution.', 'Trees help to improve air quality.', ['Air pollution will end within a month.', 'There were no trees in the city before.', 'Road traffic will stop.'], 'Planting trees for this purpose assumes they help clean the air, not that pollution will vanish.')
+  AS(2, 'assumption-new-branch-gwadar-customers', 'A company has decided to open a branch in Gwadar to serve its growing number of customers there.', 'The new branch will attract enough customers to be worthwhile.', ['The company’s other branches will be closed.', 'There are no other companies in Gwadar.', 'Customers in other cities are unhappy.'], 'Opening a branch presumes it will have enough business; the other points are not implied.')
+  AS(2, 'assumption-roll-number-every-page', 'An examination instruction says: “Write your roll number on every page of the answer book.”', 'Writing the roll number helps identify each page with the right candidate.', ['Candidates always forget their names.', 'The answer book has only one page.', 'Examiners do not read the answers.'], 'The instruction is useful only if roll numbers help match pages to candidates.')
+  AS(1, 'assumption-book-tickets-early', '“Book your tickets early to avoid disappointment.”', 'Tickets may sell out if one delays booking.', ['Tickets are free of charge.', 'Everyone books tickets late.', 'The event has been cancelled.'], 'The advice assumes that late bookers may find no tickets left.')
+  AS(2, 'assumption-dam-overcome-power-shortage', 'The minister said that the new dam will help overcome the power shortage.', 'The dam will be used to generate electricity.', ['The dam will be completed next month.', 'There is no other way to produce electricity.', 'The shortage is only temporary.'], 'A dam can ease a power shortage only if it produces electricity; nothing is assumed about timing or other sources.')
+  AS(1, 'assumption-exam-stress-counselling', 'The college has started a counselling service for students who feel stressed during examinations.', 'Some students experience stress during examinations.', ['All students fail because of stress.', 'Examinations will be abolished.', 'Teachers do not care about students.'], 'The service assumes there are stressed students who need it, not that all of them fail.')
+  AS(1, 'assumption-shift-patient-city-hospital', '“Shift the patient to the city hospital; the local clinic cannot handle such cases.”', 'The city hospital can treat such cases.', ['The local clinic will be closed.', 'The patient is not seriously ill.', 'The city hospital charges no fees.'], 'Advising the transfer assumes the city hospital has the facilities that the clinic lacks.')
+}
+
+// ga.verbal.word-formation (letters checked by code)
+{
+  const F = 'ga.verbal.word-formation'
+  const bag = (w) => { const m = {}; for (const c of w) m[c] = (m[c] ?? 0) + 1; return m }
+  const can = (src, w) => { const b = bag(src); for (const c of w) { if (!b[c]) return false; b[c]-- } return true }
+  const WF = (d, src, ans, wrong, mode, q) => {
+    if (mode === 'cannot') { assert(!can(src, ans) && wrong.every((w) => can(src, w)), `word formation ${src} ${ans}`) } else { assert(can(src, ans) && wrong.every((w) => !can(src, w)), `word formation ${src} ${ans}`) }
+    const missing = (w) => { const b = bag(src); const out = []; for (const c of w) { if (!b[c]) out.push(c); else b[c]-- } return [...new Set(out)].join(', ') }
+    const exp = mode === 'cannot' ? `${ans} needs ${missing(ans)} more often than ${src} provides; ${wrong.join(', ')} can all be made from its letters.` : `Only ${ans} uses letters available in ${src}; ${wrong.map((w) => `${w} needs an extra ${missing(w)}`).join('; ')}.`
+    add({ st: VR, fam: F, concept: `word-formation-${src}-${ans}`, d, q, ans, wrong, exp, frame: `verbal|${canonical(q)}` })
+  }
+  WF(1, 'CONSTITUTION', 'NATION', ['UNIT', 'TONIC', 'NOTION'], 'cannot', 'Which word cannot be made from the letters of CONSTITUTION, using each letter only as often as it appears?')
+  WF(2, 'EDUCATION', 'CONTINUE', ['CAUTION', 'AUCTION', 'NOTICE'], 'cannot', 'Using the letters of EDUCATION (each only as many times as it occurs), which of these words cannot be formed?')
+  WF(3, 'INTERNATIONAL', 'LATERAL', ['ORIENTAL', 'NATIONAL', 'RELATION'], 'cannot', 'Which word cannot be formed from the letters of INTERNATIONAL?')
+  WF(2, 'PARLIAMENT', 'PARTNER', ['LAMENT', 'PLANET', 'MARINE'], 'cannot', 'From the letters of PARLIAMENT, which of the following words cannot be spelt?')
+  WF(1, 'CHAIRMAN', 'MACHINE', ['CHAIN', 'MARCH', 'CHARM'], 'cannot', 'Which one of these words cannot be made out of CHAIRMAN?')
+  WF(2, 'DEMOCRACY', 'ACADEMY', ['CREAM', 'COMEDY', 'DECOY'], 'cannot', 'Taking letters only from DEMOCRACY, which word is impossible to form?')
+  WF(3, 'ENVIRONMENT', 'RETENTION', ['INVENT', 'MENTION', 'VERMIN'], 'cannot', 'Each letter of ENVIRONMENT may be used only as often as it appears. Which word cannot be formed?')
+  WF(1, 'GEOGRAPHY', 'PHOTO', ['GRAPH', 'HOPE', 'PAGE'], 'cannot', 'Which word is not formed from the letters of GEOGRAPHY?')
+  WF(2, 'KNOWLEDGE', 'KNOWN', ['LEDGE', 'WEDGE', 'KNEEL'], 'cannot', 'Out of the letters of KNOWLEDGE, which word cannot be made?')
+  WF(3, 'TEMPERATURE', 'RAPTURE', ['PAMPER', 'MATURITY', 'PERMIT'], 'can', 'Which of the following words CAN be formed from the letters of TEMPERATURE?')
+}
+
+// ---------------------------------------------------------------------------
+// Final checks and output
+// ---------------------------------------------------------------------------
 if (dupErrors.length) { console.error(dupErrors.join('\n')); process.exit(1) }
-console.log("items", items.length)
-if (process.env.DUMP) for (const it of items.filter((x) => x.st === process.env.DUMP)) console.log(`[${it.d}] ${it.q}\n   ✔ ${it.ans} | ✘ ${it.wrong.join(" | ")}\n   ${it.exp}`)
+
+// global checks: masked wording, served archive, concepts, family caps
+const served = loadServedArchive()
+const surf = new Map(), concepts = new Set(), stems = new Set()
+for (const it of items) {
+  if (served.stems.has(stemHash(it.q))) { dupErrors.push(`stem already served: ${it.q}`); continue }
+  const t = surfaceTemplate(it.q)
+  assert(!surf.has(t), `masked wording repeats: "${it.q}" / "${surf.get(t)}"`)
+  surf.set(t, it.q)
+  assert(!concepts.has(it.concept), `duplicate concept ${it.concept}`)
+  concepts.add(it.concept)
+  assert(!stems.has(canonical(it.q)), `duplicate stem ${it.q}`)
+  stems.add(canonical(it.q))
+}
+if (dupErrors.length) { console.error(dupErrors.join('\n')); process.exit(1) }
+const famCount = {}
+for (const it of items) famCount[it.fam] = (famCount[it.fam] ?? 0) + 1
+const famMax = Math.max(...Object.values(famCount))
+assert(Object.keys(famCount).length >= 35, `need ≥35 families, have ${Object.keys(famCount).length}`)
+assert(famMax <= 0.08 * items.length, `family above 8%: ${famMax}`)
+
+// balanced answer positions (deterministic)
+const positions = shuffle(items.map((_, i) => i % 4))
+const out = items.map((it, i) => {
+  const wrong = shuffle(it.wrong)
+  const a = positions[i]
+  const o = [...wrong]
+  o.splice(a, 0, it.ans)
+  return {
+    id: `${PREFIX}${String(i + 1).padStart(4, '0')}`,
+    section: SECTION,
+    subject: SUBJECT,
+    subtopic: it.st,
+    pattern_family: it.fam,
+    concept: it.concept,
+    difficulty: it.d,
+    source_type: it.src,
+    past_paper_year: null,
+    verified: true,
+    q: it.q,
+    o,
+    a,
+    explanation: it.exp,
+    source_url: null,
+    time_sensitive: false,
+    event_date: null,
+    last_verified: TODAY,
+    quality_grade: it.grade,
+    mpt_relevance: 'core',
+  }
+})
+for (const q of out) assert(q.o[q.a] === items[out.indexOf(q)].ans, 'answer index')
+
+mkdirSync(OUT_DIR, { recursive: true })
+for (const f of readdirSync(OUT_DIR)) if (f.startsWith(FILE_PREFIX) && f.endsWith('.json')) unlinkSync(join(OUT_DIR, f))
+const files = Math.ceil(out.length / 100)
+for (let i = 0; i < files; i++) {
+  const file = join(OUT_DIR, `${FILE_PREFIX}${String(i + 1).padStart(2, '0')}.json`)
+  writeFileSync(file, `${JSON.stringify(out.slice(i * 100, i * 100 + 100), null, 2)}\n`)
+}
+
+// report
+const by = {}
+for (const q of out) { const r = (by[q.subtopic] ??= { n: 0, 1: 0, 2: 0, 3: 0 }); r.n++; r[q.difficulty]++ }
+console.log(`wrote ${out.length} items in ${files} files; ${Object.keys(famCount).length} families (largest ${famMax} = ${(100 * famMax / out.length).toFixed(1)}%)`)
+for (const [k, r] of Object.entries(by)) console.log(`  ${k.padEnd(24)} ${String(r.n).padStart(4)}   d1 ${r[1]}  d2 ${r[2]}  d3 ${r[3]}`)
+const pos = [0, 1, 2, 3].map((k) => out.filter((q) => q.a === k).length)
+console.log(`  answer positions ${pos.join('/')}`)
+if (process.env.FAMILIES) for (const [k, v] of Object.entries(famCount)) console.log(`  ${k} ${v}`)
+if (process.env.DUMP) for (const it of items.filter((x) => x.st === process.env.DUMP)) console.log(`[${it.d}] ${it.q}\n   ✔ ${it.ans} | ✘ ${it.wrong.join(' | ')}\n   ${it.exp}`)

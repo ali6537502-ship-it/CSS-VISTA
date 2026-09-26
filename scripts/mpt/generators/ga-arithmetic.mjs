@@ -1076,7 +1076,8 @@ fam('ga.ratio.simplify-units', 'ga.ratio', [
       const ans = ratioLabel([x, Y]); const naive = ratioLabel([x, y])
       const half = gcd(x, Y) > 2 && (x / 2) % 1 === 0 && (Y / 2) % 1 === 0 ? `${x / 2}:${Y / 2}` : `${x}:${Y}`
       const opts = [ans, naive, ratioLabel([Y, x]), f === 1 ? half : ratioLabel([x, y * (f === 60 ? 100 : 10 * f)])].map((l) => ({ label: l, val: l }))
-      opts.push({ label: ratioLabel([x + 1, Y]), val: 'z' })
+      if (f === 1) opts.splice(3, 1, { label: ratioLabel([x + Y, Y]), val: 'p' })
+      opts.push({ label: ratioLabel([x, x + Y]), val: 'z' })
       return { v: { x, y }, opts, exp: f === 1 ? `Divide both terms by their HCF ${gcd(x, Y)}: ${x}:${Y} = ${ans}.` : `Use the same unit: ${y} = ${Y} in the smaller unit, so ${x}:${Y} = ${ans}.` }
     },
     T: [
@@ -1116,9 +1117,10 @@ fam('ga.average.simple-mean', 'ga.average', [
       { t: 'The ages of {n} children in a family are {list} years. What is their average age?§years', n: 4, r: [2, 18] },
       { t: 'Rainfall on the {n} days of a week was {list} mm. What was the average daily rainfall?§mm', n: 7, r: [0, 40] },
       { t: 'The heights of {n} saplings in a nursery are {list} cm. The mean height is:§cm', n: 5, r: [20, 80] },
-      { t: 'A taxi driver earned Rs {list} on {n} successive days. What were his average daily earnings?§rs', n: 4, r: [1500, 4000], pre: 'Rs ' },
+      { t: 'A taxi driver earned {list} on {n} successive days. What were his average daily earnings?§rs', n: 4, r: [1500, 4000], pre: 'Rs ' },
+      { t: 'The daily milk yield of a buffalo over {n} days was {list} litres. Find the average daily yield.§litres', n: 5, r: [6, 14] },
       { t: '{n} students scored {list} in a short quiz. What is the mean score?', n: 6, r: [3, 20] },
-      { t: 'The prices of {n} books on a shelf are Rs {list}. What is their average price?§rs', n: 5, r: [150, 900], pre: 'Rs ' },
+      { t: 'The prices of {n} books on a shelf are {list}. What is their average price?§rs', n: 5, r: [150, 900], pre: 'Rs ' },
     ],
   }),
   mode({
@@ -1147,6 +1149,7 @@ fam('ga.average.missing-value', 'ga.average', [
       { t: 'A batsman’s average over {n} innings is {m} runs. His scores in the first {n1} innings were {list}. How many runs did he make in the last innings?§runs', n: 6, r: [10, 110] },
       { t: 'The mean weight of {n} boxes is {m} kg. {n1} of them weigh {list} kg. What does the remaining box weigh?§kg', n: 5, r: [5, 40] },
       { t: '{F1} wants an average of {m} marks in {n} tests. Her marks in the first {n1} tests are {list}. What must she score in the last test?', n: 5, r: [55, 99] },
+      { t: 'The average number of patients seen by a doctor over {n} days was {m}. On the first {n1} days she saw {list} patients. How many did she see on the last day?', n: 5, r: [20, 60] },
       { t: 'The average temperature over {n} days was {m} °C. The first {n1} readings were {list} °C. What was the last reading?§°C', n: 5, r: [18, 40] },
     ],
   }),
@@ -1182,22 +1185,22 @@ fam('ga.average.member-joins-leaves', 'ga.average', [
   mode({ // joins
     d: 2,
     gen(tp) {
-      const n = ri(...(tp.nr ?? [5, 30])); const m = ri(...(tp.r ?? [10, 60])); const k = pick(tp.kset ?? [1, 2, 3]); const m2 = tp.dec ? m - k : m + k
-      const x = (n + 1) * m2 - n * m; if (x <= 0) return null
+      const n = ri(...(tp.nr ?? [5, 30])); const m = (tp.ms ?? 1) * ri(...(tp.r ?? [10, 60])); const k = pick(tp.kset ?? [1, 2, 3]); const m2 = tp.dec ? m - k : m + k
+      const x = (n + 1) * m2 - n * m; if (x <= 0 || (tp.xr && (x < tp.xr[0] || x > tp.xr[1]))) return null
       return { v: { n, m, m2, k }, ans: x, wrong: [m2, m + k * n, (n + 1) * m2, x + (tp.dec ? k : -k) * 2], exp: `New total = ${n + 1} × ${m2} = ${(n + 1) * m2}; old total = ${n} × ${m} = ${n * m}; the newcomer = ${(n + 1) * m2} − ${n * m} = ${x}.` }
     },
     T: [
-      { t: 'The average age of {n} students in a class is {m} years. When the teacher’s age is included, the average rises by {k} years. How old is the teacher?§years', nr: [20, 40], r: [10, 16], kset: [1, 2] },
-      { t: 'The mean weight of {n} players is {m} kg. A new player joins and the mean becomes {m2} kg. How much does the new player weigh?§kg', nr: [8, 15], r: [55, 75] },
-      { t: 'The average salary of {n} workers in a workshop is Rs {m}. When the manager’s salary is added, the average goes up by Rs {k}. What is the manager’s salary?§rs', nr: [9, 24], r: [25, 40], kset: [1000, 1500, 2000] },
+      { t: 'The average age of {n} students in a class is {m} years. When the teacher’s age is included, the average becomes {m2} years. How old is the teacher?§years', nr: [20, 40], r: [10, 16], kset: [1, 2], xr: [26, 60] },
+      { t: 'The mean weight of {n} players is {m} kg. A new player joins and the mean becomes {m2} kg. How much does the new player weigh?§kg', nr: [8, 15], r: [55, 75], xr: [50, 100] },
+      { t: 'The average salary of {n} workers in a workshop is Rs {m}. When the manager’s salary is added, the average goes up by Rs {k}. What is the manager’s salary?§rs', nr: [9, 24], r: [25, 40], ms: 1000, kset: [1000, 1500, 2000] },
       { t: 'The average of {n} numbers is {m}. When one more number is included, the average becomes {m2}. What number was included?' },
-      { t: 'A team of {n} has an average height of {m} cm. A new member joins and the average drops to {m2} cm. How tall is the new member?§cm', nr: [5, 12], r: [160, 180], dec: true },
+      { t: 'A team of {n} has an average height of {m} cm. A new member joins and the average drops to {m2} cm. How tall is the new member?§cm', nr: [5, 12], r: [160, 180], dec: true, xr: [140, 180] },
     ],
   }),
   mode({ // leaves
     d: 2,
     gen(tp) {
-      const n = ri(...(tp.nr ?? [5, 20])); const m = ri(...(tp.r ?? [10, 60])); const m2 = m + (tp.up ? 1 : -1) * pick([1, 2, 3])
+      const n = ri(...(tp.nr ?? [5, 20])); const ms = tp.ms ?? 1; const m = ms * ri(...(tp.r ?? [10, 60])); const m2 = m + (tp.up ? 1 : -1) * ms * pick([1, 2, 3])
       const x = n * m - (n - 1) * m2; if (x <= 0) return null
       return { v: { n, m, m2 }, ans: x, wrong: [m - m2 + m, n * m - m2, m2, x + 2 * (m - m2)], exp: `Old total = ${n} × ${m} = ${n * m}; remaining total = ${n - 1} × ${m2} = ${(n - 1) * m2}; the one removed = ${x}.` }
     },
@@ -1205,6 +1208,7 @@ fam('ga.average.member-joins-leaves', 'ga.average', [
       { t: 'The average age of the {n} members of a committee is {m} years. One member retires and the average age of the others becomes {m2} years. How old is the retiring member?§years', nr: [6, 12], r: [40, 55] },
       { t: 'The mean of {n} numbers is {m}. If one number is removed, the mean of the rest is {m2}. What number was removed?', up: true },
       { t: 'A family of {n} has an average age of {m} years. After the grandfather moves to another city, the average age of those left is {m2} years. How old is the grandfather?§years', nr: [5, 8], r: [26, 34] },
+      { t: 'The average pay of {n} employees is Rs {m}. When one of them resigns, the average pay of the others becomes Rs {m2}. What was the pay of the employee who resigned?§rs', nr: [6, 15], r: [30, 60], ms: 1000, up: true },
       { t: '{n} boxes have a mean mass of {m} kg. When one box is taken out, the mean mass of the rest is {m2} kg. What is the mass of the box taken out?§kg', nr: [5, 12], r: [15, 40] },
     ],
   }),
@@ -1237,6 +1241,7 @@ fam('ga.average.corrected-entry', 'ga.average', [
       'The average marks of {n} students were worked out as {m}. One student’s marks were entered as {y} instead of {x}. Find the correct average.',
       { t: 'A clerk found the average salary of {n} employees to be Rs {m} thousand, but he had typed one salary of Rs {x} thousand as Rs {y} thousand. What is the true average salary?§thousand', nr: [10, 30], r: [40, 90], xr: [40, 120] },
       { t: 'The average weight of {n} bags was noted as {m} kg. A bag weighing {x} kg was afterwards found to have been read as {y} kg. What is the actual average weight?§kg', nr: [10, 25], r: [40, 60], xr: [30, 70] },
+      { t: 'A teacher found the class average to be {m} for {n} pupils. On checking, she saw that a score of {x} had been read as {y}. The correct average is:', nr: [20, 40], r: [50, 70], xr: [40, 95] },
       { t: 'The mean temperature over {n} days was reported as {m} °C, but one day’s reading of {x} °C had been copied as {y} °C. What is the correct mean temperature?§°C', nr: [10, 15], r: [20, 32], xr: [15, 40] },
     ],
   }),
@@ -1244,8 +1249,8 @@ fam('ga.average.corrected-entry', 'ga.average', [
     d: 3,
     gen(tp) {
       const n = ri(...(tp.nr ?? [10, 40])); const m = ri(...(tp.r ?? [30, 80])); const diff = n * pick([1, 2, -1, -2])
-      const x1 = ri(20, 90); const x2 = ri(20, 90); const y1 = ri(20, 90); const y2 = x1 + x2 - y1 - diff
-      if (y2 <= 0 || y2 > 150 || x1 === y1 || x2 === y2) return null
+      const w = Math.max(10, Math.round(m / 3)); const x1 = m + ri(-w, w); const x2 = m + ri(-w, w); const y1 = m + ri(-w, w); const y2 = x1 + x2 - y1 - diff
+      if (y2 <= 0 || Math.abs(y2 - m) > w || x1 === y1 || x2 === y2) return null
       const c = m + diff / n
       return { v: { n, m, x1, x2, y1, y2 }, ans: c, wrong: [m - diff / n, m + diff, m, c + 2], exp: `The total must change by (${x1} + ${x2}) − (${y1} + ${y2}) = ${diff}; correct mean = ${m} ${diff < 0 ? '−' : '+'} ${Math.abs(diff)}/${n} = ${c}.` }
     },
@@ -1284,6 +1289,7 @@ fam('ga.average.combined-groups', 'ga.average', [
       { t: 'A shop sold {n1} shirts at an average price of Rs {m1} and {n2} shirts at an average price of Rs {m2}. What was the average price of all the shirts sold?§rs', step: 50, r: [10, 40] },
       { t: '{n1} workers earn Rs {m1} a day on average and {n2} others earn Rs {m2} a day on average. What is the average daily wage of all the workers?§rs', step: 50, r: [16, 40] },
       { t: 'A batsman averaged {m1} runs in his first {n1} matches and {m2} runs in the next {n2}. What is his average over all the matches?§runs', nr: [4, 20], r: [15, 70] },
+      { t: 'A school’s {n1} teachers have an average age of {m1} years and its {n2} other staff an average age of {m2} years. What is the average age of all the staff?§years', nr: [4, 30], r: [25, 55] },
       { t: 'A car covered an average of {m1} km a day for {n1} days and then {m2} km a day for {n2} days. What was its average daily distance?§km', nr: [2, 12], r: [40, 300] },
     ],
   }),
@@ -1329,6 +1335,7 @@ fam('ga.average.consecutive-and-ap', 'ga.average', [
       { t: 'The average of {k} consecutive integers is {m}. What is the largest of them?', step: 1, ask: 'max', k: 5 },
       { t: 'The mean of {k} consecutive even numbers is {m}. What is the smallest of them?', step: 2, par: 'even', ask: 'min' },
       { t: '{k} consecutive odd numbers have an average of {m}. Find the greatest of them.', step: 2, par: 'odd', ask: 'max' },
+      { t: 'The ages of {k} cousins are consecutive odd numbers whose average is {m} years. How old is the youngest cousin?§years', step: 2, par: 'odd', ask: 'min' },
       { t: 'The average of {k} consecutive multiples of 5 is {m}. What is the largest of these multiples?', step: 5, ask: 'max' },
     ],
   }),
@@ -1380,16 +1387,17 @@ fam('ga.average.shift-and-scale', 'ga.average', [
   mode({
     d: 1,
     gen(tp) {
-      const m = ri(...(tp.r ?? [10, 90])); const c = ri(...(tp.cr ?? [2, 12])); const op = tp.op
-      const f = { add: m + c, sub: m - c, mul: m * c, div: m / c, dbl: 2 * m + c, half: m / 2 + c }[op]
+      const m = (tp.ms ?? 1) * ri(...(tp.r ?? [10, 90])); const c = tp.cset ? pick(tp.cset) : (tp.cs ?? 1) * ri(...(tp.cr ?? [2, 12])); const op = tp.op
+      const f = { add: m + c, sub: m - c, mul: m * c, div: m / c, dbl: 2 * m + c, half: m / 2 + c, pct: (m * (100 + c)) / 100 }[op]
       if (!isInt(f) || f <= 0) return null
-      const alt = { add: [m, m + 2 * c, m * c], sub: [m, m + c, m - 2 * c], mul: [m, m + c, m * c * c], div: [m, m - c, m * c], dbl: [2 * m, m + c, 2 * (m + c)], half: [m / 2, m + c, (m + c) / 2] }[op]
-      return { v: { m, c, n: ri(10, 40) }, ans: f, wrong: alt, exp: { add: `Adding ${c} to every value adds ${c} to the mean: ${m} + ${c} = ${f}.`, sub: `Subtracting ${c} from every value lowers the mean by ${c}: ${m} − ${c} = ${f}.`, mul: `Multiplying every value by ${c} multiplies the mean by ${c}: ${m} × ${c} = ${f}.`, div: `Dividing every value by ${c} divides the mean by ${c}: ${m}/${c} = ${f}.`, dbl: `New mean = 2 × ${m} + ${c} = ${f}.`, half: `New mean = ${m}/2 + ${c} = ${f}.` }[op] }
+      const alt = { pct: [m + c, (m * c) / 100, (m * (100 + 2 * c)) / 100], add: [m, m + 2 * c, m - c], sub: [m, m + c, m - 2 * c], mul: [m, m + c, m * c * c], div: [m, m - c, m * c], dbl: [2 * m, m + c, 2 * (m + c)], half: [m / 2, m + c, (m + c) / 2] }[op]
+      return { v: { m, c, n: ri(10, 40) }, ans: f, wrong: alt, exp: { add: `Adding ${fmtNum(c)} to every value adds ${fmtNum(c)} to the mean: ${fmtNum(m)} + ${fmtNum(c)} = ${fmtNum(f)}.`, sub: `Subtracting ${c} from every value lowers the mean by ${c}: ${m} − ${c} = ${f}.`, mul: `Multiplying every value by ${c} multiplies the mean by ${c}: ${m} × ${c} = ${f}.`, div: `Dividing every value by ${c} divides the mean by ${c}: ${m}/${c} = ${f}.`, dbl: `New mean = 2 × ${m} + ${c} = ${f}.`, half: `New mean = ${m}/2 + ${c} = ${f}.`, pct: `Raising every value by ${c}% raises the mean by ${c}%: ${fmtNum(m)} × ${100 + c}/100 = ${fmtNum(f)}.` }[op] }
     },
     T: [
       { t: 'The mean of a set of numbers is {m}. If {c} is added to each number, what is the new mean?', op: 'add' },
       { t: 'The average age of a group of friends is {m} years. What will their average age be after {c} years?§years', op: 'add', r: [12, 40], cr: [2, 10] },
-      { t: 'Every employee in an office gets a raise of Rs {c}. If the average salary was Rs {m} before the raise, what is it now?§rs', op: 'add', r: [30000, 90000], cr: [1000, 5000] },
+      { t: 'Every employee in an office gets a raise of Rs {c}. If the average salary was Rs {m} before the raise, what is it now?§rs', op: 'add', r: [30, 90], ms: 1000, cr: [1, 5], cs: 1000 },
+      { t: 'Every price in a shop is raised by {c}%. If the average price of its goods was Rs {m}, what is the new average price?§rs', op: 'pct', r: [2, 20], ms: 100, cset: [10, 20, 25, 50], d: 2 },
       { t: 'The average of some numbers is {m}. If each number is multiplied by {c}, what is the new average?', op: 'mul', r: [4, 30], cr: [2, 6] },
       { t: 'The mean of a data set is {m}. If {c} is subtracted from each value, the new mean is:', op: 'sub' },
       { t: 'Each of the {n} marks in a test is reduced by {c} as a penalty for late submission. If the average mark was {m}, what is the new average?', op: 'sub', r: [40, 80], cr: [2, 5] },
@@ -1406,7 +1414,7 @@ fam('ga.average.overlapping-groups', 'ga.average', [
     gen(tp) {
       const k = tp.k ?? pick([4, 5, 6, 7]); const N = 2 * k - 1; const s = tp.step ?? 1; const M = s * ri(...(tp.r ?? [20, 60])); const a = s * ri(...(tp.r ?? [20, 60])); const b = s * ri(...(tp.r ?? [20, 60]))
       const mid = k * a + k * b - N * M; if (mid <= 0 || mid > 3 * Math.max(a, b, M) || a === b) return null
-      if (tp.tight && Math.abs(mid - M) > 3 * s) return null
+      if (tp.tight ? Math.abs(mid - M) > 3 * s : (mid < 0.5 * M || mid > 1.5 * M)) return null
       return { v: { N, k, M, a, b, ord: ORD(k) }, ans: mid, wrong: [(a + b) / 2 === mid ? null : (a + b) / 2, M, k * a + k * b - (N - 1) * M, mid + s * 2], exp: `First ${k} total + last ${k} total = ${k * a} + ${k * b} = ${k * a + k * b}; this counts the ${ORD(k)} value twice, and all ${N} total ${N * M}; so the ${ORD(k)} value = ${k * a + k * b} − ${N * M} = ${mid}.` }
     },
     T: [
@@ -1414,6 +1422,7 @@ fam('ga.average.overlapping-groups', 'ga.average', [
       { t: 'A cricketer’s average over {N} innings is {M}. His average in the first {k} innings was {a}, and in the last {k} it was {b}. How many runs did he make in the {ord} innings?§runs', r: [25, 60] },
       { t: 'Over {N} days a shop’s average daily sale was Rs {M}. The average for the first {k} days was Rs {a} and for the last {k} days Rs {b}. What was the sale on the {ord} day?§rs', step: 100, r: [20, 60] },
       { t: 'The average temperature for a week was {M} °C. The average of the first four days was {a} °C and that of the last four days was {b} °C. What was the temperature on the fourth day?§°C', k: 4, r: [24, 36], tight: true },
+      { t: 'A student’s average mark in {N} subjects is {M}. Her average in the first {k} subjects is {a} and in the last {k} subjects is {b}. What did she score in the {ord} subject?', r: [50, 90] },
       { t: 'The average age of the {N} members of a team is {M} years. The first {k} members on the list average {a} years and the last {k} average {b} years. How old is the member in the middle of the list?§years', r: [20, 34], tight: true },
     ],
   }),
@@ -1445,19 +1454,20 @@ fam('ga.average.target-average', 'ga.average', [
       { t: 'A batsman has an average of {m} runs after {n} innings. How many runs must he score in the next innings to raise his average to {m2}?§runs' },
       { t: '{F1}’s average in {n} tests is {m} marks. What must she score in the next test to lift her average to {m2}?', r: [50, 80] },
       { t: 'A salesman has averaged {m} sales a day for {n} days. How many sales must he make tomorrow to bring his average up to {m2}?', r: [8, 30] },
+      { t: 'A farmer’s wheat yield has averaged {m} maunds per acre over {n} acres. What yield must the next acre give to make the average {m2} maunds per acre?§maunds', r: [30, 50] },
     ],
   }),
   mode({ // score in (n+1)th raises average by k
     d: 2,
     gen(tp) {
-      const n = ri(5, 20); const k = pick([1, 2, 3, 4]); const before = ri(...(tp.r ?? [20, 50])); const x = before + (n + 1) * k
+      const n = ri(5, tp.nmax ?? 20); const k = pick(tp.kset ?? [2, 3, 4]); const before = ri(...(tp.r ?? [20, 50])); const x = before + (n + 1) * k
       const ans = tp.ask === 'before' ? before : before + k
       return { v: { x, k, ord: ORD(n + 1) }, ans, wrong: [tp.ask === 'before' ? before + k : before, x - n * k === ans ? null : x - n * k, x - k, ans + (n % 5) + 2], exp: `Let the new average be A. Then ${n}(A − ${k}) + ${x} = ${n + 1}A ⇒ A = ${x} − ${n} × ${k} = ${before + k}; the earlier average was ${before}.` }
     },
     T: [
       { t: 'A batsman scores {x} runs in his {ord} innings and thereby increases his average by {k}. What is his average after this innings?§runs' },
       { t: 'By scoring {x} in the {ord} match of the season, a player raised his average by {k} runs. What was his average before that match?§runs', ask: 'before' },
-      { t: 'A student’s average rose by {k} marks when she scored {x} in her {ord} test. What is her new average?', r: [50, 75] },
+      { t: 'A student’s average rose by {k} marks when she scored {x} in her {ord} test. What is her new average?', r: [50, 70], nmax: 11, kset: [1, 2] },
     ],
   }),
   mode({ // bowler
@@ -1476,16 +1486,427 @@ fam('ga.average.target-average', 'ga.average', [
   mode({ // average needed over the rest
     d: 2,
     gen(tp) {
-      const N = ri(...(tp.Nr ?? [5, 12])); const n = ri(2, N - 2); const s = tp.step ?? 1; const T = s * ri(...(tp.r ?? [40, 80])); const m = T - s * pick([2, 4, 5, 6, 10, -2, -4]); const need = (N * T - n * m) / (N - n)
+      const N = ri(...(tp.Nr ?? [5, 12])); const n = ri(2, N - 2); const s = tp.step ?? 1; const T = s * ri(...(tp.r ?? [40, 80])); const m = T - s * pick(tp.off ?? [2, 4, 5, 6, -2, -4]); const need = (N * T - n * m) / (N - n)
       if (!isInt(need) || need <= 0) return null
       return { v: { N, n, T, m }, ans: need, wrong: [2 * T - m, T, N * T - n * m, need + s], exp: `Needed total = ${N} × ${fmtNum(T)} = ${fmtNum(N * T)}; achieved = ${n} × ${fmtNum(m)} = ${fmtNum(n * m)}; the rest ${N - n} must average ${fmtNum(N * T - n * m)}/${N - n} = ${fmtNum(need)}.` }
     },
     T: [
       { t: 'A student needs an average of {T} marks over {N} papers to win a scholarship. In the first {n} papers she averaged {m}. What average does she need in the remaining papers?', r: [60, 85] },
       { t: 'A shop wants average daily sales of Rs {T} over {N} days. It averaged Rs {m} in the first {n} days. What must it average over the remaining days?§rs', step: 1000, r: [20, 80] },
-      { t: 'A team must score at an average of {T} runs per over in a {N}-over innings. In the first {n} overs it scored at {m} runs per over. What rate is needed in the remaining overs?§runs per over', Nr: [10, 20], r: [5, 9] },
+      { t: 'A team must score at an average of {T} runs per over in a {N}-over innings. In the first {n} overs it scored at {m} runs per over. What rate is needed in the remaining overs?§runs per over', Nr: [10, 20], r: [5, 9], off: [1] },
       { t: 'A factory must average {T} units a day over {N} days to meet an order. It averaged {m} units a day in the first {n} days. What daily average is needed for the rest of the period?§units', step: 10, r: [20, 80] },
-      { t: 'An athlete wants to average {T} km a day over {N} days of training. For the first {n} days she averaged {m} km. What must she average over the remaining days?§km', r: [8, 20] },
+      { t: 'An athlete wants to average {T} km a day over {N} days of training. For the first {n} days she averaged {m} km. What must she average over the remaining days?§km', r: [8, 20], off: [1, 2, -1] },
+    ],
+  }),
+])
+
+// ---- Profit, loss and discount -------------------------------------------------
+const rsIn = (tp, lo, hi, m) => mult(m, ...(tp.r ?? [lo, hi]))
+
+fam('ga.profit-loss.profit-loss-percent', 'ga.profit-loss', [
+  mode({
+    d: 1, u: 'pct',
+    gen(tp) {
+      const p = pick(tp.p ?? [5, 8, 10, 12, 15, 20, 25, 30, 40, 50]); const loss = !!tp.loss
+      const cp = rsIn(tp, 200, 50000, 100 / gcd(p, 100)); if (!cp) return null
+      const sp = (cp * (100 + (loss ? -p : p))) / 100; const diff = Math.abs(sp - cp)
+      return { v: { cp, sp }, ans: p, wrong: [(diff * 100) / sp, (sp * 100) / cp, p + 5, loss ? 100 - p : 2 * p], exp: `${loss ? 'Loss' : 'Profit'} = Rs ${fmtNum(diff)}; ${loss ? 'loss' : 'profit'} % = ${fmtNum(diff)}/${fmtNum(cp)} × 100 = ${p}% (always on cost price).` }
+    },
+    T: [
+      { t: 'A shopkeeper buys a table for Rs {cp} and sells it for Rs {sp}. What is his profit percentage?', r: [3000, 20000] },
+      { t: 'A dealer bought a motorcycle for Rs {cp} and sold it for Rs {sp}. His percentage gain is:', r: [100000, 300000] },
+      { t: 'Goods costing Rs {cp} were sold for Rs {sp}. Find the gain percent.' },
+      { t: 'A trader buys a bag of rice for Rs {cp} and sells it for Rs {sp}. What percentage profit does he earn?', r: [2000, 9000] },
+      { t: '{M1} bought a goat for Rs {cp} before Eid and sold it for Rs {sp}. What percentage profit did he make?', r: [40000, 150000] },
+      { t: 'A bookseller pays Rs {cp} for a dictionary and charges Rs {sp} for it. What is his profit as a percentage of cost?', r: [400, 2500] },
+      { t: 'A mobile phone bought for Rs {cp} was sold for Rs {sp}. What was the rate of profit?', r: [20000, 90000] },
+      { t: 'A used car bought for Rs {cp} was sold for Rs {sp}. What is the loss percentage?', loss: true, r: [500000, 3000000] },
+      { t: 'A trader sold a refrigerator for Rs {sp} that had cost him Rs {cp}. What was his percentage loss?', loss: true, r: [40000, 150000] },
+      { t: 'A farmer bought a buffalo for Rs {cp} but had to sell it for Rs {sp}. What percentage did he lose?', loss: true, r: [100000, 400000] },
+      { t: 'An article costing Rs {cp} is sold at Rs {sp}. The loss per cent is:', loss: true },
+      { t: 'A shopkeeper cleared old stock that had cost Rs {cp} by selling it for Rs {sp}. What was his loss as a percentage of cost?', loss: true, r: [10000, 90000] },
+      { t: 'A concert cost its organisers Rs {cp} to stage but brought in only Rs {sp}. What was the percentage loss?', loss: true, r: [200000, 900000] },
+    ],
+  }),
+  mode({ // selling price and amount of profit/loss known
+    d: 2, u: 'pct',
+    gen(tp) {
+      const p = pick([5, 10, 20, 25, 40, 50]); const loss = !!tp.loss; const cp = rsIn(tp, 1000, 90000, 100 / gcd(p, 100)); if (!cp) return null
+      const pr = (cp * p) / 100; const sp = loss ? cp - pr : cp + pr
+      return { v: { sp, pr }, ans: p, wrong: [(pr * 100) / sp, loss ? (pr * 100) / (sp - pr) : (pr * 100) / (sp + pr), p + 5, 2 * p], exp: `CP = ${fmtNum(sp)} ${loss ? '+' : '−'} ${fmtNum(pr)} = ${fmtNum(cp)}; ${loss ? 'loss' : 'profit'} % = ${fmtNum(pr)}/${fmtNum(cp)} × 100 = ${p}%.` }
+    },
+    T: [
+      { t: 'A man sold a horse for Rs {sp} and made a profit of Rs {pr}. What was his profit percentage?', r: [100000, 400000] },
+      { t: 'A shop sold a heater for Rs {sp} and lost Rs {pr} on the sale. What was the loss per cent?', loss: true, r: [8000, 30000] },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.selling-price', 'ga.profit-loss', [
+  mode({
+    d: 1, u: 'rs',
+    gen(tp) {
+      const p = pick(tp.p ?? [5, 10, 12, 15, 20, 25, 30, 40]); const loss = !!tp.loss
+      const cp = rsIn(tp, 200, 50000, 100 / gcd(p, 100)); if (!cp) return null
+      const ch = (cp * p) / 100; const sp = loss ? cp - ch : cp + ch
+      return { v: { cp, p }, ans: sp, wrong: [ch, loss ? cp + ch : cp - ch, cp + p, loss ? cp - 2 * ch : cp + 2 * ch], exp: `${p}% of ${fmtNum(cp)} = ${fmtNum(ch)}; SP = ${fmtNum(cp)} ${loss ? '−' : '+'} ${fmtNum(ch)} = Rs ${fmtNum(sp)}.` }
+    },
+    T: [
+      { t: 'A radio costs Rs {cp}. At what price should it be sold to gain {p}%?', r: [1000, 8000] },
+      { t: 'A shopkeeper buys shoes for Rs {cp} a pair and sells them at a profit of {p}%. What is the selling price of a pair?', r: [1000, 6000] },
+      { t: 'An item costing Rs {cp} is sold at a loss of {p}%. What is its selling price?', loss: true },
+      { t: 'A fruit seller buys oranges at Rs {cp} a dozen and wants a profit of {p}%. At what price should he sell a dozen?', r: [100, 400] },
+      { t: 'A bicycle bought for Rs {cp} is sold at a {p}% loss. For how much is it sold?', loss: true, r: [10000, 40000] },
+      { t: 'A contractor buys cement at Rs {cp} a bag and sells it at {p}% above cost. What does he charge per bag?', r: [1000, 2000] },
+      { t: 'A tailor spends Rs {cp} on making a suit and wants to earn {p}% profit on it. What should he charge?', r: [2000, 9000] },
+      { t: 'Because of water damage, a carpet costing Rs {cp} had to be sold at a loss of {p}%. What price did it fetch?', loss: true, r: [10000, 80000] },
+      { t: 'A wholesaler sells a TV set that cost him Rs {cp} to a retailer at a profit of {p}%. How much does the retailer pay?', r: [40000, 150000] },
+      { t: 'An old computer bought for Rs {cp} is sold at a loss of {p}%. The amount received is:', loss: true, r: [20000, 90000] },
+      { t: 'A plot bought for Rs {cp} lakh is sold at a gain of {p}%. What is its selling price?§lakh', r: [10, 200] },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.cost-price', 'ga.profit-loss', [
+  mode({
+    d: 2, u: 'rs',
+    gen(tp) {
+      const p = pick(tp.p ?? [5, 10, 20, 25, 40, 50]); const loss = !!tp.loss; const k = loss ? 100 - p : 100 + p
+      const cp = rsIn(tp, 200, 50000, 100 / gcd(k, 100)); if (!cp) return null
+      const sp = (cp * k) / 100
+      return { v: { sp, p }, ans: cp, wrong: [(sp * (loss ? 100 + p : 100 - p)) / 100, loss ? sp + p : sp - p, (sp * 100) / (loss ? 100 + p : 100 - p), loss ? sp + (sp * p) / 100 : sp - (sp * p) / 100], exp: `SP = ${k}% of CP, so CP = ${fmtNum(sp)} × 100/${k} = Rs ${fmtNum(cp)} (the percentage is on the cost, not on the selling price).` }
+    },
+    T: [
+      { t: 'By selling a watch for Rs {sp}, a shopkeeper gains {p}%. What did the watch cost him?', r: [1000, 10000] },
+      { t: 'A trader sold a cow for Rs {sp} at a profit of {p}%. What was its cost price?', r: [80000, 250000] },
+      { t: 'A book is sold for Rs {sp}, earning a profit of {p}% on cost. Find its cost price.', r: [200, 2000] },
+      { t: 'After making a profit of {p}%, a dealer sold a sofa set for Rs {sp}. At what price had he bought it?', r: [20000, 90000] },
+      { t: 'A retailer charges Rs {sp} for a jacket and makes {p}% profit. How much did the jacket cost the retailer?', r: [2000, 9000] },
+      { t: 'A property dealer sold a house for Rs {sp} lakh, making a profit of {p}%. What had the house cost him?§lakh', r: [40, 400] },
+      { t: 'A tailor charges Rs {sp} for a suit, which includes a profit of {p}% on his cost. What is his cost?', r: [3000, 12000] },
+      { t: 'A man sold his scooter for Rs {sp} at a loss of {p}%. What had he paid for it?', loss: true, r: [40000, 150000] },
+      { t: 'By selling a fan for Rs {sp}, a shopkeeper loses {p}%. What is the cost price of the fan?', loss: true, r: [3000, 12000] },
+      { t: 'A trader lost {p}% when he sold a consignment of cloth for Rs {sp}. What had the cloth cost him?', loss: true, r: [20000, 200000] },
+      { t: 'A camera was sold at a {p}% loss for Rs {sp}. How much had it cost?', loss: true, r: [20000, 90000] },
+      { t: 'Selling a laptop for Rs {sp} resulted in a loss of {p}%. What was the laptop’s cost price?', loss: true, r: [50000, 200000] },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.discount', 'ga.profit-loss', [
+  mode({ // SP from MP
+    d: 1, u: 'rs',
+    gen(tp) {
+      const d = pick([5, 10, 15, 20, 25, 30, 40, 50]); const mp = rsIn(tp, 500, 50000, 100 / gcd(d, 100)); if (!mp) return null
+      const disc = (mp * d) / 100
+      return { v: { mp, d }, ans: mp - disc, wrong: [disc, mp + disc, mp - d, mp - 2 * disc], exp: `Discount = ${d}% of ${fmtNum(mp)} = ${fmtNum(disc)}; price paid = ${fmtNum(mp)} − ${fmtNum(disc)} = Rs ${fmtNum(mp - disc)}.` }
+    },
+    T: [
+      { t: 'A shirt marked at Rs {mp} is sold at a discount of {d}%. What is the selling price?', r: [1000, 6000] },
+      { t: 'A shop offers {d}% off on all shoes. How much does a customer pay for shoes marked Rs {mp}?', r: [2000, 12000] },
+      { t: 'During a sale, a {d}% discount is given on a microwave oven marked at Rs {mp}. What is its sale price?', r: [20000, 60000] },
+      { t: 'A carpet with a price tag of Rs {mp} is sold after a discount of {d}%. Find the amount paid.', r: [10000, 90000] },
+      { t: 'The list price of a set of books is Rs {mp}. A student gets {d}% discount. How much does he pay?', r: [1000, 8000] },
+    ],
+  }),
+  mode({ // discount percent
+    d: 1, u: 'pct',
+    gen(tp) {
+      const d = pick([5, 10, 15, 20, 25, 30, 40]); const mp = rsIn(tp, 500, 50000, 100 / gcd(d, 100)); if (!mp) return null
+      const sp = (mp * (100 - d)) / 100
+      return { v: { mp, sp }, ans: d, wrong: [((mp - sp) * 100) / sp, 100 - d, d + 5, d * 2], exp: `Discount = ${fmtNum(mp - sp)}; ${fmtNum(mp - sp)}/${fmtNum(mp)} × 100 = ${d}% (discount is on the marked price).` }
+    },
+    T: [
+      { t: 'A jacket marked at Rs {mp} is sold for Rs {sp}. What percentage discount is given?', r: [2000, 12000] },
+      { t: 'A customer paid Rs {sp} for a lamp whose marked price was Rs {mp}. What was the rate of discount?', r: [1000, 8000] },
+      { t: 'A washing machine marked Rs {mp} was sold for Rs {sp} in a clearance sale. Find the discount percentage.', r: [40000, 120000] },
+    ],
+  }),
+  mode({ // MP from SP
+    d: 2, u: 'rs',
+    gen(tp) {
+      const d = pick([10, 20, 25, 40, 50]); const mp = rsIn(tp, 500, 50000, 100 / gcd(100 - d, 100)); if (!mp) return null
+      const sp = (mp * (100 - d)) / 100
+      return { v: { sp, d }, ans: mp, wrong: [(sp * (100 + d)) / 100, sp + d, (sp * 100) / d, sp + (sp * d) / 50], exp: `SP = ${100 - d}% of MP, so MP = ${fmtNum(sp)} × 100/${100 - d} = Rs ${fmtNum(mp)}.` }
+    },
+    T: [
+      { t: 'After a discount of {d}%, a bag is sold for Rs {sp}. What is its marked price?', r: [1000, 9000] },
+      { t: 'A customer paid Rs {sp} for a watch after getting {d}% off. What was the marked price of the watch?', r: [2000, 20000] },
+      { t: 'A heater is sold for Rs {sp} after a {d}% reduction on its label price. What was the label price?', r: [8000, 30000] },
+      { t: 'Buying a pair of shoes in a sale with {d}% off, {F1} paid Rs {sp}. What was the original price of the shoes?', r: [2000, 12000] },
+      { t: 'A sofa sold at a {d}% discount fetched Rs {sp}. What was its list price?', r: [40000, 150000] },
+    ],
+  }),
+  mode({ // from the discount amount
+    d: 2, u: 'rs',
+    gen(tp) {
+      const d = pick([5, 10, 15, 20, 25, 30]); const mp = rsIn(tp, 500, 20000, 100 / gcd(d, 100)); if (!mp) return null
+      const amt = (mp * d) / 100; const ans = tp.ask === 'sp' ? mp - amt : mp
+      return { v: { d, amt }, ans, wrong: [tp.ask === 'sp' ? mp : mp - amt, amt * d, (amt * 100) / (100 - d), mp + amt], exp: `${d}% of MP = ${fmtNum(amt)}, so MP = ${fmtNum(amt)} × 100/${d} = ${fmtNum(mp)}${tp.ask === 'sp' ? `; SP = ${fmtNum(mp)} − ${fmtNum(amt)} = Rs ${fmtNum(mp - amt)}` : ''}.` }
+    },
+    T: [
+      { t: 'A {d}% discount on a pair of trousers saves a customer Rs {amt}. What is the marked price?', r: [1500, 6000] },
+      { t: 'A shopkeeper allows a discount of {d}%, and the discount on a blanket comes to Rs {amt}. What is the selling price of the blanket?', ask: 'sp', r: [2000, 10000] },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.markup-and-discount', 'ga.profit-loss', [
+  mode({ // profit percent
+    d: 2, u: 'pl',
+    gen() {
+      const a = pick([10, 20, 25, 30, 40, 50, 60]); const b = pick([5, 10, 15, 20, 25, 30]); const r = ((100 + a) * (100 - b)) / 100 - 100
+      if (!isInt(r * 2) || a === b) return null
+      return { v: { a, b }, ans: r, allowNeg: true, wrong: [a - b, a + b, r + b / 5 === r ? null : a - b + 5, -r], exp: `Take CP = 100: MP = ${100 + a}, SP = ${100 - b}% of ${100 + a} = ${fmtNum(100 + r)}; ${r >= 0 ? 'profit' : 'loss'} = ${fmtNum(Math.abs(r))}%.` }
+    },
+    T: [
+      'A shopkeeper marks his goods {a}% above cost and allows a discount of {b}%. What is his profit or loss percentage?',
+      'A trader fixes the price of a fan {a}% above its cost and then gives a {b}% discount. His gain or loss is:',
+      'An article is marked at {a}% above the cost price and sold at a discount of {b}%. Find the percentage profit or loss.',
+      'A dealer puts the price of a cooler {a}% above cost but sells it at {b}% off the marked price. What is the result of the sale?',
+      'Goods are labelled at {a}% more than their cost, and a festival discount of {b}% is offered. What is the profit or loss per cent?',
+    ],
+  }),
+  mode({ // SP from CP
+    d: 2, u: 'rs',
+    gen(tp) {
+      const a = pick([10, 20, 25, 40, 50]); const b = pick([10, 20, 25]); const k = (100 + a) * (100 - b)
+      const cp = rsIn(tp, 1000, 20000, 10000 / gcd(k, 10000)); if (!cp) return null
+      const sp = (cp * k) / 10000
+      return { v: { cp, a, b }, ans: sp, wrong: [(cp * (100 + a - b)) / 100, (cp * (100 + a)) / 100, (cp * (100 - b)) / 100, sp + cp / 10], exp: `MP = ${fmtNum(cp)} × ${100 + a}/100 = ${fmtNum((cp * (100 + a)) / 100)}; SP = ${100 - b}% of that = Rs ${fmtNum(sp)}.` }
+    },
+    T: [
+      { t: 'A watch costs a retailer Rs {cp}. He marks it {a}% above cost and gives a discount of {b}%. At what price does he sell it?', r: [2000, 20000] },
+      { t: 'A shopkeeper buys a lamp for Rs {cp}, marks it {a}% above cost and allows {b}% off. What does the customer pay?', r: [1000, 6000] },
+      { t: 'An electric iron costing Rs {cp} is marked up by {a}% and then sold at a discount of {b}%. What is the selling price?', r: [2000, 9000] },
+    ],
+  }),
+  mode({ // CP from SP
+    d: 3, u: 'rs',
+    gen(tp) {
+      const a = pick([20, 25, 40, 50]); const b = pick([10, 20, 25]); const k = (100 + a) * (100 - b)
+      const cp = rsIn(tp, 1000, 20000, 10000 / gcd(k, 10000)); if (!cp) return null
+      const sp = (cp * k) / 10000
+      return { v: { sp, a, b }, ans: cp, wrong: [(sp * 100) / (100 + a - b), (sp * (100 - a) * (100 + b)) / 10000, (sp * 100) / (100 + a), sp], exp: `SP = CP × ${100 + a}/100 × ${100 - b}/100 = ${k / 10000} × CP, so CP = ${fmtNum(sp)}/${k / 10000} = Rs ${fmtNum(cp)}.` }
+    },
+    T: [
+      { t: 'A trader marks a table {a}% above cost and allows a {b}% discount, selling it for Rs {sp}. What was the cost price?', r: [5000, 40000] },
+      { t: 'A shopkeeper sells a heater for Rs {sp} after a discount of {b}% on a price marked {a}% above cost. Find the cost price.', r: [4000, 20000] },
+    ],
+  }),
+  mode({ // discount needed for target gain
+    d: 3, u: 'pct',
+    gen() {
+      const a = pick([20, 25, 30, 40, 50, 60, 75, 100]); const g = pick([4, 5, 8, 10, 12, 15, 20, 26, 35]); const d = 100 - (100 * (100 + g)) / (100 + a)
+      if (!isInt(d) || d <= 0) return null
+      return { v: { a, g }, ans: d, wrong: [a - g, ((a - g) * 100) / (100 + g), a + g, d + 5], exp: `Take CP = 100: MP = ${100 + a}, required SP = ${100 + g}. Discount = ${100 + a - 100 - g} on ${100 + a} = ${d}%.` }
+    },
+    T: [
+      'A shopkeeper marks his goods {a}% above cost. What discount should he allow so that he makes a profit of {g}%?',
+      'An item is marked at {a}% above its cost price. What percentage discount can be given if the seller still wants to gain {g}%?',
+    ],
+  }),
+  mode({ // markup needed
+    d: 3, u: 'pct',
+    gen() {
+      const b = pick([10, 20, 25, 40, 50]); const g = pick([8, 10, 12, 20, 26, 35, 50]); const m = (100 * (100 + g)) / (100 - b) - 100
+      if (!isInt(m) || m <= 0) return null
+      return { v: { b, g }, ans: m, wrong: [g + b, (g * 100) / (100 - b), m - 5, g + b + (g * b) / 100 === m ? m + 10 : g + b + (g * b) / 100], exp: `Take CP = 100; required SP = ${100 + g}, which is ${100 - b}% of MP, so MP = ${100 + g} × 100/${100 - b} = ${100 + m}, i.e. ${m}% above cost.` }
+    },
+    T: [
+      'By what percentage above cost must a trader mark his goods so that after allowing a {b}% discount he still gains {g}%?',
+      'A seller wants a {g}% profit after giving a discount of {b}%. How far above the cost price should he mark the goods?',
+    ],
+  }),
+])
+
+fam('ga.profit-loss.successive-discounts', 'ga.profit-loss', [
+  mode({ // final price
+    d: 2, u: 'rs',
+    gen(tp) {
+      const d1 = pick([10, 20, 25, 30, 40]); const d2 = pick([5, 10, 20, 25]); const k = (100 - d1) * (100 - d2)
+      const mp = rsIn(tp, 1000, 90000, 10000 / gcd(k, 10000)); if (!mp) return null
+      const sp = (mp * k) / 10000
+      return { v: { mp, d1, d2 }, ans: sp, wrong: [(mp * (100 - d1 - d2)) / 100, (mp * (100 - d1)) / 100, (mp * (d1 + d2)) / 100, sp - mp / 20], exp: `${fmtNum(mp)} × ${100 - d1}/100 × ${100 - d2}/100 = Rs ${fmtNum(sp)} (the second discount is on the reduced price).` }
+    },
+    T: [
+      { t: 'A television marked at Rs {mp} is sold after successive discounts of {d1}% and {d2}%. What is the selling price?', r: [40000, 150000] },
+      { t: 'A shop takes {d1}% off a dress marked Rs {mp} and then a further {d2}% off at the counter. What does the customer pay?', r: [2000, 15000] },
+      { t: 'Two successive discounts of {d1}% and {d2}% are allowed on a price of Rs {mp}. Find the net price.' },
+      { t: 'A dealer offers a {d1}% trade discount and then a {d2}% cash discount on goods listed at Rs {mp}. What is the cash price?', r: [10000, 90000] },
+      { t: 'A laptop listed at Rs {mp} gets a {d1}% festival discount followed by a {d2}% bank-card discount. How much is paid for it?', r: [80000, 250000] },
+    ],
+  }),
+  mode({ // single equivalent discount
+    d: 2, u: 'pct',
+    gen() {
+      const d1 = pick([10, 15, 20, 25, 30, 40, 50]); const d2 = pick([10, 15, 20, 25, 30]); const e = d1 + d2 - (d1 * d2) / 100
+      if (decimals(e) > 1) return null
+      return { v: { d1, d2 }, ans: e, wrong: [d1 + d2, (d1 + d2) / 2, d1 + d2 + (d1 * d2) / 100, e - 5], exp: `Equivalent discount = ${d1} + ${d2} − (${d1} × ${d2})/100 = ${fmtNum(e)}%.` }
+    },
+    T: [
+      'Successive discounts of {d1}% and {d2}% are equivalent to a single discount of:',
+      'A shopkeeper allows two discounts, {d1}% and then {d2}%. What single discount would have the same effect?',
+      'Which single discount is equal to a discount of {d1}% followed by another of {d2}%?',
+      'Instead of taking {d1}% and then {d2}% off, a store wants to give one discount with the same result. What should that discount be?',
+    ],
+  }),
+  mode({ // marked price from final
+    d: 3, u: 'rs',
+    gen(tp) {
+      const d1 = pick([10, 20, 25, 40]); const d2 = pick([10, 20, 25]); const k = (100 - d1) * (100 - d2)
+      const mp = rsIn(tp, 2000, 60000, 10000 / gcd(k, 10000)); if (!mp) return null
+      const sp = (mp * k) / 10000
+      return { v: { sp, d1, d2 }, ans: mp, wrong: [(sp * 100) / (100 - d1 - d2), (sp * (100 + d1) * (100 + d2)) / 10000, (sp * (100 + d1 + d2)) / 100, (sp * 100) / (100 - d1)], exp: `SP = MP × ${100 - d1}/100 × ${100 - d2}/100 = ${k / 10000} × MP, so MP = ${fmtNum(sp)}/${k / 10000} = Rs ${fmtNum(mp)}.` }
+    },
+    T: [
+      { t: 'After two successive discounts of {d1}% and {d2}%, a bicycle is sold for Rs {sp}. What is its marked price?', r: [10000, 50000] },
+      { t: 'A buyer paid Rs {sp} for a mixer after discounts of {d1}% and {d2}% one after the other. What was the list price?', r: [5000, 25000] },
+    ],
+  }),
+  mode({ // compare single vs successive
+    d: 2, u: 'rs',
+    gen(tp) {
+      const d1 = pick([10, 20, 25, 30]); const d2 = pick([10, 20]); const mp = rsIn(tp, 1000, 50000, 10000 / gcd(d1 * d2, 10000)); if (!mp) return null
+      const diff = (mp * d1 * d2) / 10000
+      return { v: { mp, d1, d2, ds: d1 + d2 }, ans: diff, wrong: [(mp * (d1 + d2)) / 100, (mp * d2) / 100, diff * 2, (mp * d1) / 100], exp: `A single ${d1 + d2}% discount takes ${fmtNum((mp * (d1 + d2)) / 100)}; successive ones take ${fmtNum(mp - (mp * (100 - d1) * (100 - d2)) / 10000)}; difference = ${fmtNum(diff)} (= ${d1}% × ${d2}% of the bill).` }
+    },
+    T: [{ t: 'On a bill of Rs {mp}, what is the difference between a single discount of {ds}% and two successive discounts of {d1}% and {d2}%?', r: [5000, 50000] }],
+  }),
+])
+
+fam('ga.profit-loss.article-count', 'ga.profit-loss', [
+  mode({ // CP of x = SP of y
+    d: 3, u: 'pct',
+    gen(tp) {
+      const x = ri(5, 40); const y = ri(5, 40); if (tp.loss ? y <= x : x <= y) return null
+      const r = (Math.abs(x - y) * 100) / y; if (decimals(r) > 1 || r > 100 || r < 5) return null
+      return { v: { x, y }, ans: r, wrong: [(Math.abs(x - y) * 100) / x, Math.abs(x - y), (y * 100) / x, r + 5], exp: `Let each article cost Rs 1: CP of ${y} articles = ${y}, their SP = ${x}. ${tp.loss ? 'Loss' : 'Gain'} = ${Math.abs(x - y)} on ${y}, i.e. ${fmtNum(r)}%.` }
+    },
+    T: [
+      'The cost price of {x} pens equals the selling price of {y} pens. What is the gain percent?',
+      'If the cost of {x} oranges is the same as the selling price of {y} oranges, the profit per cent is:',
+      'A shopkeeper finds that the selling price of {y} notebooks equals the cost price of {x} notebooks. Find his profit percentage.',
+      'By selling {y} mangoes a vendor recovers the cost of {x} mangoes. What is his gain per cent?',
+      { t: 'The cost price of {x} chairs is equal to the selling price of {y} chairs. What is the loss per cent?', loss: true },
+      { t: 'A trader sells {y} articles for the price at which he bought {x}. What is his percentage loss?', loss: true },
+    ],
+  }),
+  mode({ // gain equals SP of k
+    d: 3, u: 'pct',
+    gen(tp) {
+      const N = ri(10, 60); const k = ri(2, 20); if (k >= N) return null
+      const r = tp.kind === 'sp' ? (k * 100) / (N - k) : tp.kind === 'cp' ? (k * 100) / N : (k * 100) / (N + k)
+      if (decimals(r) > 1 || r > 100) return null
+      return { v: { N, k }, ans: r, wrong: [(k * 100) / N === r ? (k * 100) / (N - k) : (k * 100) / N, (k * 100) / (N + k) === r ? (k * 100) / (N - k) : (k * 100) / (N + k), k, r + 5], exp: tp.kind === 'sp' ? `Gain = SP of ${k}, so CP of ${N} = SP of ${N - k}; gain % = ${k}/${N - k} × 100 = ${fmtNum(r)}%.` : tp.kind === 'cp' ? `Gain = CP of ${k} on a cost of ${N} articles: ${k}/${N} × 100 = ${fmtNum(r)}%.` : `Loss = SP of ${k}, so CP of ${N} = SP of ${N + k}; loss % = ${k}/${N + k} × 100 = ${fmtNum(r)}%.` }
+    },
+    T: [
+      { t: 'By selling {N} metres of cloth, a shopkeeper gains the selling price of {k} metres. What is his gain percent?', kind: 'sp' },
+      { t: 'A vendor sells {N} eggs and gains the cost price of {k} eggs. What is his profit percentage?', kind: 'cp' },
+      { t: 'On selling {N} bags, a dealer loses the selling price of {k} bags. Find the loss per cent.', kind: 'loss' },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.two-prices', 'ga.profit-loss', [
+  mode({ // loss l% at s1 → price for gain g%
+    d: 2, u: 'rs',
+    gen(tp) {
+      const l = pick([5, 10, 20, 25]); const g = pick([5, 10, 15, 20, 25]); const cp = rsIn(tp, 400, 40000, 100 / gcd(gcd(l, g), 100))
+      if (!cp) return null
+      const s1 = (cp * (100 - l)) / 100; const s2 = (cp * (100 + g)) / 100; if (!isInt(s1) || !isInt(s2)) return null
+      return { v: { s1, l, g }, ans: s2, wrong: [(s1 * (100 + g + l)) / 100, (s1 * (100 + g)) / 100, cp, s2 + (s1 * l) / 100], exp: `CP = ${fmtNum(s1)} × 100/${100 - l} = ${fmtNum(cp)}; for ${g}% gain, SP = ${fmtNum(cp)} × ${100 + g}/100 = Rs ${fmtNum(s2)}.` }
+    },
+    T: [
+      { t: 'By selling a clock for Rs {s1}, a shopkeeper loses {l}%. At what price must he sell it to gain {g}%?', r: [1000, 8000] },
+      { t: 'A trader lost {l}% by selling a chair for Rs {s1}. What price would give him a {g}% profit?', r: [2000, 20000] },
+      { t: 'A shopkeeper lost {l}% on selling a lamp for Rs {s1}. For how much should he have sold it to earn {g}%?', r: [1000, 6000] },
+    ],
+  }),
+  mode({ // gain g1 at s1 → gain at s2
+    d: 2, u: 'pct',
+    gen(tp) {
+      const g1 = pick([10, 20, 25, 50]); const g2 = pick([5, 15, 30, 35, 40, 60]); const cp = rsIn(tp, 400, 40000, 100)
+      if (!cp || g1 === g2) return null
+      const s1 = (cp * (100 + g1)) / 100; const s2 = (cp * (100 + g2)) / 100
+      return { v: { s1, s2, g1 }, ans: g2, wrong: [g1 + ((s2 - s1) * 100) / s1, ((s2 - s1) * 100) / cp, g1 + (s2 - s1) / 100, g2 + 5], exp: `CP = ${fmtNum(s1)} × 100/${100 + g1} = ${fmtNum(cp)}; at Rs ${fmtNum(s2)} the gain is ${fmtNum(s2 - cp)} on ${fmtNum(cp)}, i.e. ${g2}%.` }
+    },
+    T: [
+      { t: 'A dealer gains {g1}% by selling a TV for Rs {s1}. What would his gain percent be if he sold it for Rs {s2}?', r: [40000, 120000] },
+      { t: 'Selling a sack of flour for Rs {s1} gives a profit of {g1}%. What would the profit percentage be at Rs {s2}?', r: [2000, 6000] },
+    ],
+  }),
+  mode({ // equal loss and gain
+    d: 2, u: 'rs',
+    gen(tp) {
+      const cp = rsIn(tp, 400, 40000, 10); const dlt = mult(10, cp / 20, cp / 4); if (!cp || !dlt) return null
+      const s1 = cp - dlt; const s2 = cp + dlt; const g = tp.g ? pick([10, 20, 25]) : 0; const ans = tp.g ? (cp * (100 + g)) / 100 : cp
+      if (!isInt(ans)) return null
+      return { v: { s1, s2, g }, ans, wrong: [s2 - s1, tp.g ? cp : (s1 * 100) / 90, (s1 + s2) / 2 + dlt / 2, tp.g ? (s2 * (100 + g)) / 100 : s1 + dlt / 2], exp: `Loss at ${fmtNum(s1)} equals gain at ${fmtNum(s2)}, so CP is midway: (${fmtNum(s1)} + ${fmtNum(s2)})/2 = ${fmtNum(cp)}${tp.g ? `; for ${g}% gain sell at ${fmtNum(ans)}` : ''}.` }
+    },
+    T: [
+      { t: 'The loss on selling an article for Rs {s1} is equal to the profit on selling it for Rs {s2}. What is its cost price?' },
+      { t: 'A vase sold for Rs {s2} earns the same amount of profit as the loss made when it is sold for Rs {s1}. What does the vase cost?', r: [1000, 8000] },
+      { t: 'The profit on selling a phone for Rs {s2} equals the loss on selling it for Rs {s1}. At what price should it be sold to make a {g}% profit?', r: [20000, 80000], g: true, d: 3 },
+    ],
+  }),
+  mode({ // difference of two rates of gain or loss
+    d: 3, u: 'rs',
+    gen(tp) {
+      const a = pick([5, 10, 12, 15, 20, 25]); const b = pick([5, 8, 10, 15]); const cp = rsIn(tp, 1000, 90000, 100); if (!cp) return null
+      const spread = tp.kind === 'gg' ? a - b : a + b; if (spread <= 0) return null
+      const x = (cp * spread) / 100; if (!isInt(x)) return null
+      return { v: { g1: a, g2: b, l: b, g: a, x }, ans: cp, wrong: [(x * 100) / (a + b) === cp ? (x * 100) / Math.abs(a - b || 1) : (x * 100) / (a + b), (x * 100) / a, cp - x, cp + x], exp: `The two outcomes differ by ${spread}% of CP, which is Rs ${fmtNum(x)}; so CP = ${fmtNum(x)} × 100/${spread} = Rs ${fmtNum(cp)}.` }
+    },
+    T: [
+      { t: 'If a mobile phone is sold at a gain of {g1}% instead of {g2}%, the seller gets Rs {x} more. What is the cost price?', kind: 'gg', r: [20000, 90000] },
+      { t: 'A shopkeeper would earn Rs {x} more by selling a rug at {g1}% profit rather than at {g2}% profit. What did the rug cost?', kind: 'gg', r: [5000, 50000] },
+      { t: 'Had a buffalo been sold at a profit of {g}% instead of a loss of {l}%, the farmer would have received Rs {x} more. What was its cost price?', kind: 'gl', r: [100000, 300000] },
+      { t: 'A man sold a motorbike at a loss of {l}%. Had he sold it for Rs {x} more, he would have gained {g}%. What was the cost price?', kind: 'gl', r: [80000, 250000] },
+    ],
+  }),
+])
+
+fam('ga.profit-loss.rates-and-weights', 'ga.profit-loss', [
+  mode({ // buy n1 for a, sell n2 for b
+    d: 2, u: 'pct',
+    gen(tp) {
+      const n1 = ri(2, 12); const n2 = ri(2, 12); const u = ri(2, 30); const g = pick(tp.loss ? [-10, -20, -25, -40] : [10, 20, 25, 50, 60, 100])
+      const a = n1 * u; const sUnit = (u * (100 + g)) / 100; const b = n2 * sUnit; if (!isInt(b) || n1 === n2) return null
+      return { v: { n1, n2, a, b }, ans: Math.abs(g), wrong: [Math.abs(((b - a) * 100) / a), Math.abs(((sUnit - u) * 100) / sUnit), Math.abs(g) + 10, Math.abs(g) / 2], exp: `Cost of one = ${a}/${n1} = Rs ${fmtNum(u)}; selling price of one = ${fmtNum(b)}/${n2} = Rs ${fmtNum(sUnit)}; ${g > 0 ? 'gain' : 'loss'} = ${fmtNum(Math.abs(sUnit - u))}/${fmtNum(u)} × 100 = ${Math.abs(g)}%.` }
+    },
+    T: [
+      'A vendor buys bananas at {n1} for Rs {a} and sells them at {n2} for Rs {b}. What is his gain percent?',
+      'Lemons are bought at {n1} for Rs {a} and sold at {n2} for Rs {b}. Find the profit percentage.',
+      'Eggs bought at Rs {a} for {n1} are sold at Rs {b} for {n2}. What is the percentage gain?',
+      'A boy buys toffees at {n1} for Rs {a} and sells them at {n2} for Rs {b}. What percentage profit does he make?',
+      { t: 'A man buys pencils at {n1} for Rs {a} and sells them at {n2} for Rs {b}. His loss per cent is:', loss: true },
+    ],
+  }),
+  mode({ // how many to sell for Rs b to gain g
+    d: 3, u: 'num',
+    gen() {
+      const n1 = ri(2, 20); const a = ri(10, 100); const g = pick([10, 20, 25, 50, 60, 100]); const b = pick([100, 200, 300, 500])
+      const n = (b * n1 * 100) / (a * (100 + g)); if (!isInt(n) || n < 2) return null
+      return { v: { n1, a, b, g }, ans: n, wrong: [(b * n1) / a, (b * n1 * (100 - g)) / (a * 100), n + 2, n - 1], exp: `Cost of one = ${a}/${n1}; required selling price of one = ${a}/${n1} × ${(100 + g) / 100} = ${fmtNum((a * (100 + g)) / (100 * n1))}; Rs ${b} buys ${n} at that rate.` }
+    },
+    T: [
+      'A fruit seller buys guavas at {n1} for Rs {a}. How many guavas should he sell for Rs {b} to gain {g}%?',
+      'Oranges are bought at {n1} for Rs {a}. How many must be sold for Rs {b} to make a profit of {g}%?',
+    ],
+  }),
+  mode({ // false weight / adulteration
+    d: 3, u: 'pct',
+    gen(tp) {
+      if (tp.kind === 'water') { const m = ri(2, 20); const w = ri(1, 5); const r = (w * 100) / m; if (decimals(r) > 1 || w >= m) return null; return { v: { m, w }, ans: r, wrong: [(w * 100) / (m + w), w * 10, r + 5, r / 2], exp: `He pays for ${m} litres of milk but sells ${m + w} litres at the same price: gain = ${w}/${m} × 100 = ${fmtNum(r)}%.` } }
+      const [x, g] = pick([[800, 25], [625, 60], [500, 100], [960, 4.1666], [750, 33.33], [900, 11.11]]); if (decimals(g) > 1) return null
+      return { v: { x }, ans: g, wrong: [((1000 - x) * 100) / 1000, g + 5, g * 2, 100 - g], exp: `He gives ${x} g but charges for 1000 g: gain = ${1000 - x}/${x} × 100 = ${g}%.` }
+    },
+    T: [
+      'A shopkeeper sells rice at cost price but uses a false weight of {x} g for a kilogram. What is his gain percent?',
+      'A grocer uses a weight of {x} g in place of a 1 kg weight and sells at cost price. What percentage does he gain?',
+      'A dishonest dealer claims to sell pulses at cost price but gives only {x} g for every kilogram. Find his profit percentage.',
+      { t: 'A milkman sells milk at the cost price of pure milk but mixes {w} litres of water with every {m} litres of milk. What is his gain percent?', kind: 'water' },
     ],
   }),
 ])

@@ -1507,6 +1507,478 @@ family('ga.sets.percentage-two-set', 'ga.sets', {
 })
 
 // ===========================================================================
+// ga.number-properties — 120
+// ===========================================================================
+const primesBetween = (a, b) => primesBelow(b).filter((p) => p > a)
+const nextPrime = (n) => { let v = n + 1; while (!isPrime(v)) v++; return v }
+const prevPrime = (n) => { let v = n - 1; while (!isPrime(v)) v--; return v }
+const primeFactors = (n) => { const out = []; let m = n; for (let p = 2; p * p <= m; p++) while (m % p === 0) { out.push(p); m /= p } if (m > 1) out.push(m); return out }
+const hcfAll = (...xs) => xs.reduce((g, v) => gcd(g, v))
+const lcmAll = (...xs) => xs.reduce((l, v) => lcm(l, v))
+const COMPOSITE_LOOKALIKES = [21, 27, 33, 39, 49, 51, 57, 63, 69, 77, 81, 87, 91, 93, 111, 117, 119, 121, 133, 143, 161, 169]
+
+family('ga.number-properties.sum-of-primes', 'ga.number-properties', {
+  gen: (r) => ({ N: r.int(12, 40), a: r.int(10, 40), k: r.int(4, 9), n: r.pick([30, 42, 60, 66, 70, 78, 84, 90, 102, 105, 110, 126, 130, 132, 140, 154, 165, 170, 182, 195, 210]) }),
+  key: (p) => `${p.m}-${({ below: p.N, between: p.a, first: p.k, factors: p.n, odd: p.N, twodigit: p.N + 30, around: p.N, fixed: 0 })[p.m]}`,
+  solve: (P) => {
+    const { N, a, k, n } = P
+    switch (P.m) {
+      case 'below': { const ps = primesBelow(N); const s = sum(ps); return { ans: s, wrong: [s + 1, s - 2, s - ps[ps.length - 1]], expl: `Primes below ${N}: ${ps.join(', ')}; their sum is ${s}.` } }
+      case 'between': { const b = a + 12; const ps = primesBetween(a, b); if (ps.length < 2) return null; P.b = b; const s = sum(ps); return { ans: s, wrong: [s - ps[0], s + nextPrime(b - 1), s - ps[ps.length - 1], s + 1].filter((v) => v !== s), expl: `The primes between ${a} and ${b} are ${ps.join(', ')}; their sum is ${s}.` } }
+      case 'first': { const ps = primesBelow(100).slice(0, k + 1); const s = sum(ps.slice(0, k)); return { ans: s, wrong: [1 + sum(ps.slice(0, k - 1)), s - 2 + ps[k], s + ps[k]], expl: `The first ${k} primes are ${ps.slice(0, k).join(', ')}; their sum is ${s}.` } }
+      case 'factors': { const f = primeFactors(n); const d = [...new Set(f)]; const s = sum(d); return { ans: s, wrong: [sum(f), Math.max(...d), s + 1].filter((v) => v !== s), expl: `${n} = ${f.join(' × ')}; the distinct prime factors ${d.join(', ')} add up to ${s}.` } }
+      case 'odd': { const ps = primesBelow(N).slice(1); const s = sum(ps); return { ans: s, wrong: [s + 2, s + 1, s - ps[ps.length - 1]], expl: `Odd primes below ${N}: ${ps.join(', ')} (2 is excluded); the sum is ${s}.` } }
+      case 'twodigit': { const M = N + 30; const ps = primesBelow(M).filter((p) => p >= 10); const s = sum(ps); return { ans: s, wrong: [s - 11, s + 7, s + nextPrime(M - 1)].filter((v) => v !== s), expl: `The two-digit primes below ${M} are ${ps.join(', ')}; their sum is ${s}.` } }
+      case 'around': { if (isPrime(N)) return null; const lp = prevPrime(N); const sp = nextPrime(N); return { ans: lp + sp, wrong: [2 * N, lp + sp + 2, lp + sp - 2], expl: `The largest prime below ${N} is ${lp} and the smallest above it is ${sp}; ${lp} + ${sp} = ${lp + sp}.` } }
+      default: return { ans: 77, wrong: [70, 99, 91], expl: `The smallest two-digit prime is 11 and the largest single-digit prime is 7; 11 × 7 = 77.` }
+    }
+  },
+  items: [
+    [2, (p) => `What is the sum of the prime numbers less than ${p.N}?`, { m: 'below' }],
+    [2, (p) => `Find the sum of all prime numbers between ${p.a} and ${p.b}.`, { m: 'between' }],
+    [2, (p) => `The sum of the first ${p.k} prime numbers is:`, { m: 'first' }],
+    [2, (p) => `What is the sum of the distinct prime factors of ${p.n}?`, { m: 'factors' }],
+    [2, (p) => `Add together all the odd prime numbers below ${p.N}. The total is:`, { m: 'odd' }],
+    [2, (p) => `What do the two-digit prime numbers less than ${p.N + 30} add up to?`, { m: 'twodigit' }],
+    [2, (p) => `The largest prime below ${p.N} is added to the smallest prime above ${p.N}. What is the result?`, { m: 'around' }],
+    [1, () => `What is the product of the smallest two-digit prime and the largest single-digit prime?`, { m: 'fixed' }],
+  ],
+})
+
+family('ga.number-properties.primes', 'ga.number-properties', {
+  gen: (r) => ({ a: r.int(10, 80), N: r.int(15, 60), d: r.pick([1, 3, 7, 9]), pick: r.int(0, 1000) }),
+  key: (p) => `${p.m}-${({ between: p.a, below: p.N, list: p.pick, which: p.pick, not: p.pick, units: p.d, next: p.N + 40, gap: p.a })[p.m]}`,
+  solve: (P) => {
+    const { a, N, d, pick } = P
+    const rr = makeRng(`primes-${P.m}-${pick}`)
+    switch (P.m) {
+      case 'between': { const b = a + 20; P.b = b; const c = primesBetween(a, b).length; return { ans: c, wrong: [c + 1, c - 1, c + 2].filter((v) => v > 0), expl: `The primes between ${a} and ${b} are ${primesBetween(a, b).join(', ')}: ${c} of them.` } }
+      case 'below': { const ps = primesBelow(N); return { ans: ps.length, wrong: [ps.length + 1, ps.length - 1, ps.length + 2], expl: `Primes below ${N}: ${ps.join(', ')} — ${ps.length} in all.` } }
+      case 'list': { const pr = rr.sample(primesBetween(10, 100), rr.int(2, 3)); const co = rr.sample(COMPOSITE_LOOKALIKES.filter((v) => v < 100), 6 - pr.length); const L = rr.shuffle([...pr, ...co]); P.L = L; return { ans: pr.length, wrong: [pr.length + 1, pr.length + 2, pr.length - 1, 6].filter((v) => v > 0 && v !== pr.length), expl: `Only ${pr.sort((x, y) => x - y).join(' and ')} are prime; the others (${co.sort((x, y) => x - y).map((v) => `${v} = ${primeFactors(v).join(' × ')}`).join(', ')}) are composite.` } }
+      case 'which': { const pr = rr.pick(primesBetween(40, 140)); const co = rr.sample(COMPOSITE_LOOKALIKES.filter((v) => v > 40), 3); return { ans: pr, wrong: co, expl: `${pr} has no divisor other than 1 and itself; ${co.map((v) => `${v} = ${primeFactors(v).join(' × ')}`).join(', ')}.` } }
+      case 'not': { const co = rr.pick(COMPOSITE_LOOKALIKES.filter((v) => v > 50)); const pr = rr.sample(primesBetween(50, 150), 3); return { ans: co, wrong: pr, expl: `${co} = ${primeFactors(co).join(' × ')}, so it is not prime; the other three are prime.` } }
+      case 'units': { const ps = primesBetween(9, 100).filter((p) => p % 10 === d); return { ans: ps.length, wrong: [ps.length + 1, ps.length - 1, 9], expl: `Two-digit primes ending in ${d}: ${ps.join(', ')} — ${ps.length} of them.` } }
+      case 'next': { const M = N + 40; if (isPrime(M)) return null; const np = nextPrime(M); return { ans: np, wrong: [M + 1 === np ? M + 3 : M + 1, np + 2, prevPrime(M)].filter((v) => v !== np), expl: `Checking ${M + 1}, ${M + 2}, …, the first prime is ${np}.` } }
+      default: { const b = a + 25; P.b = b; const ps = primesBetween(a, b); if (ps.length < 2) return null; const g = ps[ps.length - 1] - ps[0]; return { ans: g, wrong: [b - a, g + 2, g - 2].filter((v) => v > 0 && v !== g), expl: `Between ${a} and ${b} the smallest prime is ${ps[0]} and the largest is ${ps[ps.length - 1]}; the difference is ${g}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `How many prime numbers are there between ${p.a} and ${p.b}?`, { m: 'between' }],
+    [1, (p) => `How many prime numbers are less than ${p.N}?`, { m: 'below' }],
+    [1, (p) => `How many of the numbers ${p.L.slice(0, 5).join(', ')} and ${p.L[5]} are prime?`, { m: 'list' }],
+    [1, () => `Which of the following is a prime number?`, { m: 'which' }],
+    [1, () => `Which one of these numbers is NOT prime?`, { m: 'not' }],
+    [2, (p) => `How many two-digit prime numbers have ${p.d} as their units digit?`, { m: 'units' }],
+    [1, (p) => `What is the smallest prime number greater than ${p.N + 40}?`, { m: 'next' }],
+    [2, (p) => `What is the difference between the largest and the smallest prime numbers lying between ${p.a} and ${p.b}?`, { m: 'gap' }],
+  ],
+})
+
+family('ga.number-properties.hcf', 'ga.number-properties', {
+  gen: (r) => { const g = r.int(2, 18); let x = r.int(2, 9); let y = r.int(2, 11); if (gcd(x, y) !== 1 || x === y) y = x + 1; const z = r.int(2, 13); return { g, x, y, z, e1: r.int(1, 3), e2: r.int(2, 5), pick: r.int(0, 999) } },
+  key: (p) => `${p.m}-${p.g}-${p.x}-${p.y}${['three', 'largest', 'poly'].includes(p.m) ? `-${p.z}` : ''}${p.m === 'poly' ? `-${p.e1}-${p.e2}` : ''}${p.m === 'coprime' ? `-${p.pick}` : ''}`,
+  solve: (P) => {
+    const { g, x, y, z, e1, e2, pick } = P
+    const A = g * x; const B = g * y
+    const std = (ans, L) => [...new Set([L, ans * 2, ans / 2, gcd(A, B) === ans ? Math.min(A, B) : ans + 1].filter((v) => isInt(v) && v > 0 && v !== ans))]
+    switch (P.m) {
+      case 'two': case 'div': case 'gcd': case 'largediv': { const h = gcd(A, B); if (h !== g) return null; return { ans: h, wrong: std(h, lcm(A, B)), expl: `${A} = ${g} × ${x} and ${B} = ${g} × ${y}, with ${x} and ${y} sharing no factor, so the HCF is ${g}.` } }
+      case 'three': { const C = g * z; const h = hcfAll(A, B, C); if (h !== g) return null; P.C = C; return { ans: h, wrong: [gcd(A, B) !== h ? gcd(A, B) : h * 2, h / 2, lcmAll(x, y, z) * g, h + 1].filter((v) => isInt(v) && v > 0 && v !== h && v < 10000), expl: `${A} = ${g}×${x}, ${B} = ${g}×${y}, ${C} = ${g}×${z}; the HCF is ${g}.` } }
+      case 'largest': { const C = g * z; const h = hcfAll(A, B, C); if (h !== g) return null; P.C = C; return { ans: h, wrong: [2 * h, h / 2, gcd(A, B) !== h ? gcd(A, B) : h + 2, h - 1].filter((v) => isInt(v) && v > 0 && v !== h), expl: `The largest common factor is the HCF: ${A}, ${B} and ${C} are ${g} × ${x}, ${g} × ${y} and ${g} × ${z}, so it is ${g}.` } }
+      case 'const': return { ans: 2, wrong: [1, 4, 8], expl: `Two consecutive even numbers are 2k and 2k + 2; both are divisible by 2, and k and k + 1 share no factor, so the HCF is 2.` }
+      case 'lowest': { if (g < 2) return null; const d0 = primeFactors(g)[0]; const partial = d0 < g ? `${A / d0}/${B / d0}` : null; return { ans: `${x}/${y}`, wrong: [partial, `${y}/${x}`, `${x + 1}/${y + 1}`, `${x}/${B}`].filter((t) => t && t !== `${x}/${y}`), expl: `The HCF of ${A} and ${B} is ${g}; dividing both by ${g} gives ${x}/${y}.` } }
+      case 'coprime': {
+        const rr = makeRng(`cop-${pick}`)
+        const good = rr.pick([[8, 15], [9, 14], [14, 25], [16, 21], [12, 35], [15, 28], [20, 27], [18, 25], [21, 32], [22, 45], [26, 33], [35, 48]])
+        const bad = rr.sample([[12, 18], [14, 21], [15, 25], [16, 24], [18, 27], [21, 35], [22, 33], [24, 36], [26, 39], [28, 42], [33, 55], [34, 51]], 3)
+        return { ans: `${good[0]} and ${good[1]}`, wrong: bad.map(([u, v]) => `${u} and ${v}`), expl: `${good[0]} = ${primeFactors(good[0]).join(' × ')} and ${good[1]} = ${primeFactors(good[1]).join(' × ')} share no prime factor; each other pair has a common factor (${bad.map(([u, v]) => gcd(u, v)).join(', ')} respectively).` }
+      }
+      default: { const a = g; const b = g * x; if (x < 2) return null; const lo = Math.min(e1, e2); const ans = mono(gcd(a, b), [['x', lo]]); return { ans, wrong: [mono(lcm(a, b), [['x', Math.max(e1, e2)]]), mono(gcd(a, b), [['x', Math.max(e1, e2)]]), mono(1, [['x', lo]]), mono(a * b, [['x', e1 + e2]])].filter((t) => t !== ans), expl: `HCF of ${a} and ${b} is ${gcd(a, b)}; the lower power of x is x${lo === 1 ? '' : sup(lo)}; so the HCF is ${ans}.`, poly: [a, b] } }
+    }
+  },
+  items: [
+    [1, (p) => `What is the HCF of ${p.g * p.x} and ${p.g * p.y}?`, { m: 'two' }],
+    [1, (p) => `Find the highest common factor of ${p.g * p.x}, ${p.g * p.y} and ${p.C}.`, { m: 'three' }],
+    [1, (p) => `The greatest number that divides both ${p.g * p.x} and ${p.g * p.y} exactly is:`, { m: 'div' }],
+    [1, () => `The HCF of any two consecutive even numbers is:`, { m: 'const' }],
+    [1, (p) => `The greatest common divisor of ${p.g * p.x} and ${p.g * p.y} is:`, { m: 'gcd' }],
+    [1, (p) => `Express ${p.g * p.x}/${p.g * p.y} in its lowest terms.`, { m: 'lowest' }],
+    [1, (p) => `What is the largest number that is a factor of each of ${p.g * p.x}, ${p.g * p.y} and ${p.C}?`, { m: 'largest' }],
+    [1, () => `Which of the following pairs of numbers has an HCF of 1?`, { m: 'coprime' }],
+    [2, (p) => `Find the HCF of ${mono(p.g, [['x', p.e1]])} and ${mono(p.g * p.x, [['x', p.e2]])}.`, { m: 'poly' }],
+    [1, (p) => `By what largest number can both ${p.g * p.x} and ${p.g * p.y} be divided without leaving a remainder?`, { m: 'largediv' }],
+  ],
+})
+
+family('ga.number-properties.lcm', 'ga.number-properties', {
+  gen: (r) => ({ a: r.int(3, 18), b: r.int(4, 24), c: r.int(5, 16), pick: r.int(0, 999) }),
+  key: (p) => `${p.m}-${p.a}-${p.b}${['three', 'exact', 'four'].includes(p.m) ? `-${p.c}` : ''}`,
+  solve: (P) => {
+    const { a, b, c } = P
+    const L2 = lcm(a, b); const H2 = gcd(a, b)
+    switch (P.m) {
+      case 'two': { if (L2 === a * b || a === b || L2 === Math.max(a, b)) return null; return { ans: L2, wrong: [a * b, H2, L2 * 2, L2 / 2].filter((v) => isInt(v) && v !== L2), expl: `LCM = ${a} × ${b} ÷ HCF(${H2}) = ${L2}.` } }
+      case 'three': case 'exact': { const L = lcmAll(a, b, c); if (L > 800 || new Set([a, b, c]).size < 3 || L === a * b * c) return null; return { ans: L, wrong: [a * b * c, L * 2, L / 2, lcm(a, b)].filter((v) => isInt(v) && v !== L && v < 100000), expl: `The LCM of ${a}, ${b} and ${c} is ${L}; it is the smallest number all three divide.` } }
+      case 'poly': { if (a === b) return null; const ans = mono(L2, [['x', 2]]); return { ans, wrong: [mono(a * b, [['x', 3]]), mono(H2, [['x', 1]]), mono(L2, [['x', 3]]), mono(a * b, [['x', 2]])].filter((t) => t !== ans), expl: `LCM of ${a} and ${b} is ${L2}; the higher power of x is x²; so the LCM is ${ans}.` } }
+      case 'square': { const f = primeFactors(L2); const cnt = {}; f.forEach((p) => { cnt[p] = (cnt[p] ?? 0) + 1 }); let S = 1; for (const [p, e] of Object.entries(cnt)) S *= Number(p) ** (e % 2 ? e + 1 : e); if (S === L2 || S > 10000) return null; return { ans: S, wrong: [L2, L2 * L2 > 100000 ? L2 * 2 : L2 * L2, L2 * 2 === S ? L2 * 4 : L2 * 2].filter((v) => v !== S), expl: `LCM(${a}, ${b}) = ${L2} = ${f.join(' × ')}; making every prime power even gives ${S}.` } }
+      case 'four': { const L = lcmAll(a, b, c); if (L > 300 || L < 20) return null; const v = Math.ceil(1000 / L) * L; return { ans: v, wrong: [v - L, v + L, 1000 + L, L * 10].filter((w) => w !== v && w >= 1000 && w <= 9999), expl: `LCM(${a}, ${b}, ${c}) = ${L}; the first multiple of ${L} from 1000 upwards is ${v}.` } }
+      case 'coprime': { if (H2 !== 1) return null; return { ans: a * b, wrong: [a + b, 1, Math.max(a, b)], expl: `Co-prime numbers share no factor except 1, so their LCM is their product: ${a} × ${b} = ${a * b}.` } }
+      case 'fraction': { const n1 = a % 9 + 1; const n2 = b % 9 + 2; const d1 = c; const d2 = c + (a % 5) + 1; if (gcd(n1, d1) !== 1 || gcd(n2, d2) !== 1 || n1 === n2) return null; P.f = [n1, d1, n2, d2]; const ans = fr(lcm(n1, n2), gcd(d1, d2)); return { ans, wrong: [fr(lcm(n1, n2), lcm(d1, d2)), fr(gcd(n1, n2), lcm(d1, d2)), fr(n1 * n2, d1 * d2)].filter((t) => t !== ans), expl: `LCM of fractions = LCM of numerators ÷ HCF of denominators = ${lcm(n1, n2)}/${gcd(d1, d2)}${ans === `${lcm(n1, n2)}/${gcd(d1, d2)}` ? '' : ` = ${ans}`}.` } }
+      case 'largest3': { if (L2 > 300 || L2 < 12) return null; const v = Math.floor(999 / L2) * L2; return { ans: v, wrong: [v - L2, Math.floor(999 / (a * b)) * a * b, v - 2 * L2, 999 - (999 % Math.max(a, b))].filter((w) => w !== v && w >= 100 && w <= 999), expl: `LCM(${a}, ${b}) = ${L2}; the largest multiple of ${L2} below 1000 is ${v}.` } }
+      default: { if (H2 === 1 || L2 === Math.max(a, b)) return null; return { ans: L2 / H2, wrong: [L2, H2, (a * b) / H2 / 2].filter((v) => isInt(v) && v !== L2 / H2), expl: `LCM = ${L2} and HCF = ${H2}; ${L2} ÷ ${H2} = ${L2 / H2}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `What is the LCM of ${p.a} and ${p.b}?`, { m: 'two' }],
+    [1, (p) => `Find the lowest common multiple of ${p.a}, ${p.b} and ${p.c}.`, { m: 'three' }],
+    [1, (p) => `The smallest number that is exactly divisible by ${p.a}, ${p.b} and ${p.c} is:`, { m: 'exact' }],
+    [2, (p) => `What is the least common multiple of ${p.a}x and ${p.b}x²?`, { m: 'poly' }],
+    [3, (p) => `What is the smallest perfect square that is divisible by both ${p.a} and ${p.b}?`, { m: 'square' }],
+    [3, (p) => `What is the smallest four-digit number that is divisible by ${p.a}, ${p.b} and ${p.c}?`, { m: 'four' }],
+    [1, (p) => `The numbers ${p.a} and ${p.b} are co-prime. Their LCM is:`, { m: 'coprime' }],
+    [2, (p) => `Find the LCM of the fractions ${p.f[0]}/${p.f[1]} and ${p.f[2]}/${p.f[3]}.`, { m: 'fraction' }],
+    [2, (p) => `The largest three-digit number that is a multiple of both ${p.a} and ${p.b} is:`, { m: 'largest3' }],
+    [2, (p) => `The LCM of ${p.a} and ${p.b} is how many times their HCF?`, { m: 'ratio' }],
+  ],
+})
+const fmtTime = (h, m) => { const H = ((h + 11) % 12) + 1; return `${H}:${String(m).padStart(2, '0')} ${h < 12 ? 'a.m.' : 'p.m.'}` }
+family('ga.number-properties.lcm-word-problem', 'ga.number-properties', {
+  gen: (r) => ({ a: r.int(3, 20), b: r.int(4, 24), c: r.int(5, 18), r0: r.int(1, 5), k: r.int(1, 3), M: r.int(100, 600), nm: r.pick(NAMES), nm2: r.pick(NAMES) }),
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.c}-${p.r0}-${p.k}`,
+  fact: (p) => `${p.m}-${p.a}-${p.b}-${p.c}`,
+  solve: (P) => {
+    const { a, b, c, r0, k, M } = P
+    const L3 = lcmAll(a, b, c); const L2 = lcm(a, b)
+    const three = () => new Set([a, b, c]).size === 3 && L3 <= 400 && L3 !== a * b * c && L3 !== Math.max(a, b, c)
+    const two = () => a !== b && L2 !== a * b && L2 !== Math.max(a, b) && L2 <= 240
+    switch (P.m) {
+      case 'bells': if (!three()) return null; return { ans: L3, wrong: [a * b * c, a + b + c, L3 / 2, L3 * 2].filter((v) => isInt(v) && v !== L3 && v < 100000), expl: `They ring together again after LCM(${a}, ${b}, ${c}) = ${L3} minutes.` }
+      case 'lights': if (!two()) return null; return { ans: L2, wrong: [a * b, gcd(a, b), a + b, L2 * 2].filter((v) => v !== L2), expl: `The lights next change together after LCM(${a}, ${b}) = ${L2} seconds.` }
+      case 'rem': { if (!three() || r0 >= Math.min(a, b, c)) return null; return { ans: L3 + r0, wrong: [L3, L3 - r0, a * b * c + r0].filter((v) => v !== L3 + r0 && v < 100000), expl: `LCM(${a}, ${b}, ${c}) = ${L3}; adding the remainder ${r0} gives ${L3 + r0}.` } }
+      case 'bus': { if (!two() || L2 > 150) return null; const t = 7 * 60 + L2; return { ans: fmtTime(Math.floor(t / 60), t % 60), wrong: [7 * 60 + a * b, 7 * 60 + a + b, 7 * 60 + L2 * 2].filter((v) => v !== t && v < 24 * 60).map((v) => fmtTime(Math.floor(v / 60), v % 60)), expl: `They leave together every LCM(${a}, ${b}) = ${L2} minutes, so next at ${fmtTime(Math.floor(t / 60), t % 60)}.` } }
+      case 'track': { const A2 = a * 5 + 20; const B2 = b * 5 + 20; if (A2 === B2) return null; const L = lcm(A2, B2); if (L === A2 * B2 || L > 1500 || L === Math.max(A2, B2)) return null; P.A2 = A2; P.B2 = B2; return { ans: L, wrong: [A2 * B2, A2 + B2, L / 2, L * 2].filter((v) => isInt(v) && v !== L), expl: `They meet at the start after LCM(${A2}, ${B2}) = ${L} seconds.` } }
+      case 'sweets': if (!three()) return null; return { ans: L3, wrong: [a * b * c, a + b + c, L3 * 2, L3 / 2].filter((v) => isInt(v) && v !== L3 && v < 100000), expl: `The number must be a multiple of ${a}, ${b} and ${c}; the least is LCM = ${L3}.` }
+      case 'tiles': if (!two()) return null; return { ans: L2, wrong: [a * b, a + b, gcd(a, b), 2 * L2].filter((v) => v !== L2), expl: `The side must be a multiple of both ${a} and ${b}; the smallest is LCM = ${L2} cm.`, fmt: (v) => `${v} cm` }
+      case 'short': { if (!three() || k >= Math.min(a, b, c)) return null; return { ans: L3 - k, wrong: [L3 + k, L3, L3 - 2 * k].filter((v) => v !== L3 - k && v > 0), expl: `Each remainder is ${k} short of the divisor, so the number + ${k} is a common multiple: LCM(${a}, ${b}, ${c}) − ${k} = ${L3 - k}.` } }
+      case 'flash': { if (!three() || L3 > 300 || L3 < 20 || 3600 % L3 === 0) return null; const n = Math.floor(3600 / L3); return { ans: n, wrong: [n + 1, n - 1, Math.floor(3600 / (a + b + c))].filter((v) => v !== n && v > 0), expl: `They flash together every ${L3} seconds; 3600 ÷ ${L3} = ${num(3600 / L3)}, so ${n} times in an hour.` } }
+      default: { if (!three() || L3 > 200) return null; const v = (Math.floor(M / L3) + 1) * L3; P.M2 = v - L3 + Math.max(1, Math.floor(L3 / 3)); return { ans: v, wrong: [v - L3, v + L3, L3].filter((w) => w !== v && w > 0), expl: `The number must be a multiple of LCM(${a}, ${b}, ${c}) = ${L3}; the first such multiple above ${P.M2} is ${v}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `Three bells ring at intervals of ${p.a}, ${p.b} and ${p.c} minutes. If they ring together at 8:00 a.m., after how many minutes will they next ring together?`, { m: 'bells' }],
+    [2, (p) => `Two traffic signals change every ${p.a} and ${p.b} seconds. If they change together now, after how many seconds will they next change together?`, { m: 'lights' }],
+    [2, (p) => `Find the least number which, when divided by ${p.a}, ${p.b} and ${p.c}, leaves a remainder of ${p.r0} in each case.`, { m: 'rem' }],
+    [2, (p) => `Buses leave a terminal every ${p.a} minutes on route A and every ${p.b} minutes on route B. If both leave at 7:00 a.m., when do they next leave together?`, { m: 'bus' }],
+    [2, (p) => `${p.nm} and ${p.nm2} run round a circular track, taking ${p.A2} and ${p.B2} seconds per lap. Starting together, after how many seconds will they first be at the starting point together again?`, { m: 'track' }],
+    [2, (p) => `What is the least number of sweets that can be shared equally among ${p.a}, ${p.b} or ${p.c} children with none left over?`, { m: 'sweets' }],
+    [2, (p) => `Tiles measuring ${p.a} cm by ${p.b} cm are laid side by side, all the same way round, to form a square. What is the smallest possible side of the square?`, { m: 'tiles' }],
+    [3, (p) => `A number leaves remainders of ${p.a - p.k}, ${p.b - p.k} and ${p.c - p.k} when divided by ${p.a}, ${p.b} and ${p.c} respectively. What is the smallest such number?`, { m: 'short' }],
+    [3, (p) => `Three lighthouses flash every ${p.a}, ${p.b} and ${p.c} seconds. After flashing together once, how many more times will they flash together in the next hour?`, { m: 'flash' }],
+    [3, (p) => `A gardener can plant his saplings in rows of ${p.a}, ${p.b} or ${p.c} with none left over. If he has more than ${p.M2} saplings, what is the least number he can have?`, { m: 'garden' }],
+  ],
+})
+
+family('ga.number-properties.hcf-word-problem', 'ga.number-properties', {
+  gen: (r) => { const g = r.int(3, 25); let x = r.int(2, 9); let y = r.int(3, 12); if (gcd(x, y) !== 1 || x === y) y = x + 1; let z = r.int(2, 11); if (gcd(gcd(x, y), z) !== 1) z = 1; return { g, x, y, z, r1: r.int(1, 6), r2: r.int(1, 6) } },
+  key: (p) => `${p.m}-${p.g}-${p.x}-${p.y}-${p.z}-${p.r1}-${p.r2}`,
+  fact: (p) => `${p.m}-${p.g}-${p.x}-${p.y}`,
+  solve: (P) => {
+    const { g, x, y, z, r1, r2 } = P
+    const A = g * x; const B = g * y; const C = g * z
+    const std = [lcm(A, B), g * 2, g / 2, A - B > 0 ? A - B : B - A].filter((v) => isInt(v) && v > 0 && v !== g)
+    switch (P.m) {
+      case 'rope': return { ans: g, wrong: std, fmt: (v) => `${v} m`, expl: `The piece length must divide both ${A} and ${B}; the greatest is HCF = ${g} m.` }
+      case 'tile': return { ans: g, wrong: std, fmt: (v) => `${v} cm`, expl: `The tile side must divide ${A} and ${B}; the largest is HCF(${A}, ${B}) = ${g} cm.` }
+      case 'rem': { if (r1 >= g || r2 >= g || r1 === r2) return null; P.A1 = A + r1; P.B1 = B + r2; if (gcd(P.A1, P.B1) === g) return null; return { ans: g, wrong: [gcd(P.A1, P.B1), g + r1, std[0]].filter((v) => v !== g), expl: `Subtract the remainders: ${A + r1} − ${r1} = ${A} and ${B + r2} − ${r2} = ${B}; HCF(${A}, ${B}) = ${g}.` } }
+      case 'boxes': return { ans: g, wrong: [x + y, std[0], g * 2, x * y].filter((v) => v !== g), expl: `Each box gets the same number of pens and of pencils, so the number of boxes divides both ${A} and ${B}; the largest is HCF = ${g}.` }
+      case 'count': { const n = x * y; return { ans: n, wrong: [g, (A * B) / (g), x + y, n * 2].filter((v) => v !== n), expl: `Largest tile side = HCF(${A}, ${B}) = ${g}; tiles needed = (${A} ÷ ${g}) × (${B} ÷ ${g}) = ${x} × ${y} = ${n}.` } }
+      case 'same': { if (r1 >= g || z === x || z === y) return null; P.T = [A + r1, B + r1, C + r1]; if (hcfAll(...P.T) === g) return null; return { ans: g, wrong: [hcfAll(...P.T), g + r1, g * 2].filter((v) => v !== g), expl: `Subtract ${r1} from each: ${A}, ${B}, ${C}; their HCF is ${g}.` } }
+      case 'tanks': { if (z === x || z === y) return null; return { ans: g, wrong: [lcmAll(A, B, C) > 5000 ? g * 3 : lcmAll(A, B, C), g * 2, gcd(A, B) !== g ? gcd(A, B) : g + 1].filter((v) => v !== g), fmt: (v) => `${v} litres`, expl: `The bucket must divide ${A}, ${B} and ${C} exactly; the largest is HCF = ${g} litres.` } }
+      default: { const n = x + y; return { ans: n, wrong: [g, x * y, A + B].filter((v) => v !== n), expl: `The largest group size is HCF(${A}, ${B}) = ${g}; that gives ${A} ÷ ${g} + ${B} ÷ ${g} = ${x} + ${y} = ${n} groups.` } }
+    }
+  },
+  items: [
+    [2, (p) => `Two ropes of lengths ${p.g * p.x} m and ${p.g * p.y} m are to be cut into pieces of equal length with nothing left over. What is the greatest possible length of each piece?`, { m: 'rope' }],
+    [2, (p) => `A hall ${p.g * p.x} cm long and ${p.g * p.y} cm wide is to be paved with identical square tiles, without cutting any. What is the largest possible side of a tile?`, { m: 'tile' }],
+    [3, (p) => `What is the greatest number that divides ${p.A1} and ${p.B1} leaving remainders ${p.r1} and ${p.r2} respectively?`, { m: 'rem' }],
+    [2, (p) => `${p.g * p.x} pens and ${p.g * p.y} pencils are to be packed into identical gift boxes with nothing left over. What is the largest number of boxes that can be made?`, { m: 'boxes' }],
+    [3, (p) => `A floor ${p.g * p.x} dm by ${p.g * p.y} dm is covered with the largest possible identical square tiles. How many tiles are needed?`, { m: 'count' }],
+    [3, (p) => `Find the greatest number that divides ${p.T[0]}, ${p.T[1]} and ${p.T[2]} leaving the same remainder ${p.r1} each time.`, { m: 'same' }],
+    [2, (p) => `Three tanks hold ${p.g * p.x}, ${p.g * p.y} and ${p.g * p.z} litres of water. What is the capacity of the largest bucket that can empty each tank in a whole number of fillings?`, { m: 'tanks' }],
+    [3, (p) => `${p.g * p.x} boys and ${p.g * p.y} girls are to be split into groups of equal size, each group containing only boys or only girls. What is the least number of groups possible?`, { m: 'groups' }],
+  ],
+})
+
+family('ga.number-properties.hcf-lcm-product', 'ga.number-properties', {
+  gen: (r) => { const h = r.int(2, 15); let p = r.int(2, 9); let q = r.int(3, 11); if (gcd(p, q) !== 1 || p === q) q = p + 1; return { h, p, q } },
+  key: (p) => `${p.m}-${p.h}-${p.p}-${p.q}`,
+  solve: (P) => {
+    const { h, p, q } = P
+    const x = h * p; const y = h * q; const L = h * p * q; const Pr = x * y
+    switch (P.m) {
+      case 'other': case 'other2': return { ans: y, wrong: [L / h, (h * L) / (x * 2), L - x, x].filter((v) => isInt(v) && v !== y && v > 0), expl: `HCF × LCM = product of the numbers: ${h} × ${L} = ${x} × other, so the other is ${h * L} ÷ ${x} = ${y}.` }
+      case 'lcm': return { ans: L, wrong: [Pr * h, Pr - h, h * p + h * q].filter((v) => v !== L), expl: `LCM = product ÷ HCF = ${Pr} ÷ ${h} = ${L}.` }
+      case 'prod': return { ans: Pr, wrong: [L, L + h, L / h].filter((v) => isInt(v) && v !== Pr), expl: `For two numbers, product = HCF × LCM = ${h} × ${L} = ${Pr}.` }
+      case 'coprime': { const P2 = p * q; return { ans: P2, wrong: [1, p + q, Math.max(p, q)], expl: `Co-prime numbers have HCF 1, so LCM = product ÷ 1 = ${P2}.` } }
+      case 'ratiolcm': return { ans: L, wrong: [h * (p + q), x * y, h * p].filter((v) => v !== L), expl: `The numbers are ${h} × ${p} = ${x} and ${h} × ${q} = ${y}; with ${p} and ${q} co-prime, the LCM is ${h} × ${p} × ${q} = ${L}.` }
+      case 'ratiosmall': { const s = h * Math.min(p, q); return { ans: s, wrong: [h * Math.max(p, q), L, h, h * (p + q)].filter((v) => isInt(v) && v !== s), expl: `Numbers ${p}k and ${q}k have LCM ${p * q}k = ${L}, so k = ${h}; the smaller is ${s}.` } }
+      default: return { ans: h, wrong: [L / h, Pr / (L * 2), h * 2].filter((v) => isInt(v) && v !== h && v > 0), expl: `HCF = product ÷ LCM = ${Pr} ÷ ${L} = ${h}.` }
+    }
+  },
+  items: [
+    [2, (p) => `The HCF of two numbers is ${p.h} and their LCM is ${p.h * p.p * p.q}. If one of the numbers is ${p.h * p.p}, the other is:`, { m: 'other' }],
+    [2, (p) => `The product of two numbers is ${p.h * p.p * p.h * p.q} and their HCF is ${p.h}. What is their LCM?`, { m: 'lcm' }],
+    [1, (p) => `Two numbers have an LCM of ${p.h * p.p * p.q} and an HCF of ${p.h}. What is their product?`, { m: 'prod' }],
+    [2, (p) => `The LCM of two numbers is ${p.h * p.p * p.q}, their HCF is ${p.h}, and one of them is ${p.h * p.p}. Find the other number.`, { m: 'other2' }],
+    [1, (p) => `Two co-prime numbers have a product of ${p.p * p.q}. What is their LCM?`, { m: 'coprime' }],
+    [2, (p) => `The ratio of two numbers is ${p.p} : ${p.q} and their HCF is ${p.h}. What is their LCM?`, { m: 'ratiolcm' }],
+    [2, (p) => `Two numbers are in the ratio ${p.p} : ${p.q} and their LCM is ${p.h * p.p * p.q}. What is the smaller number?`, { m: 'ratiosmall' }],
+    [2, (p) => `The product of two numbers is ${p.h * p.p * p.h * p.q} and their LCM is ${p.h * p.p * p.q}. What is their HCF?`, { m: 'hcf' }],
+  ],
+})
+const digitsFit = (tpl, pred) => { const out = []; for (let d = 0; d <= 9; d++) { const s = tpl.replace('*', String(d)); if (s[0] !== '0' && pred(Number(s))) out.push(d) } return out }
+family('ga.number-properties.divisibility', 'ga.number-properties', {
+  gen: (r) => ({ n: r.int(100000, 999999), pick: r.int(0, 99999) }),
+  key: (p) => `${p.m}-${p.n}`,
+  solve: (P) => {
+    const rr = makeRng(`div-${P.m}-${P.n}`)
+    const ds = String(P.n)
+    const others = (fit, ans) => { const c = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((d) => !fit.includes(d) && d !== ans); return [ans + 1, ans - 1, ans + 3, ...rr.shuffle(c)].filter((d) => d >= 0 && d <= 9 && !fit.includes(d)) }
+    switch (P.m) {
+      case 'nine3': { const t = `${ds[0]}*${ds[1]}`; const fit = digitsFit(t, (v) => v % 9 === 0); if (fit.length !== 1) return null; P.t = t; const s3 = digitsFit(t, (v) => v % 3 === 0).filter((d) => d !== fit[0]); return { ans: fit[0], wrong: [...s3, ...others(fit, fit[0])], expl: `For divisibility by 9 the digit sum must be a multiple of 9: ${ds[0]} + * + ${ds[1]}, so * = ${fit[0]}.` } }
+      case 'three': { const t = `${ds[0]}*${ds[1]}${ds[2]}`; const fit = digitsFit(t, (v) => v % 3 === 0); if (fit[0] === 0 || fit.length < 2) return null; P.t = t; return { ans: fit[0], wrong: [...fit.slice(1), ...others(fit, fit[0])], expl: `The digit sum ${Number(ds[0]) + Number(ds[1]) + Number(ds[2])} + * must be a multiple of 3; the smallest * that works is ${fit[0]}.` } }
+      case 'eleven': { const t = `${ds[0]}*${ds[1]}`; const fit = digitsFit(t, (v) => v % 11 === 0); if (fit.length !== 1) return null; P.t = t; return { ans: fit[0], wrong: others(fit, fit[0]), expl: `For 11, (first digit + last digit) − middle digit must be 0 or a multiple of 11: ${ds[0]} + ${ds[1]} − * gives * = ${fit[0]}.` } }
+      case 'which4': { const base = Math.floor(P.n / 100) * 100; const ends = rr.shuffle([...Array(50)].map((_, i) => 2 * i)); const good = ends.find((e) => e % 4 === 0); const bad = ends.filter((e) => e % 4 !== 0).slice(0, 3); return { ans: base + good, wrong: bad.map((e) => base + e), expl: `A number is divisible by 4 when its last two digits are: ${String(good).padStart(2, '0')} is a multiple of 4, while ${bad.map((e) => String(e).padStart(2, '0')).join(', ')} are not.` } }
+      case 'which6': { const base = Math.floor(P.n / 1000) * 1000; const c = []; for (let v = base; v < base + 200; v++) c.push(v); const good = rr.pick(c.filter((v) => v % 6 === 0)); const odd3 = rr.pick(c.filter((v) => v % 3 === 0 && v % 2 === 1)); const even = rr.sample(c.filter((v) => v % 2 === 0 && v % 3 !== 0), 2); return { ans: good, wrong: [odd3, ...even], expl: `Divisible by 6 means divisible by both 2 and 3: ${good} is even and its digit sum is a multiple of 3; ${odd3} is odd, and ${even.join(' and ')} fail the test for 3.` } }
+      case 'largest4': { const c = Number(ds[5]) % 2 === 0 ? ds[5] : String((Number(ds[5]) + 1) % 10); const t = `${ds[0]}${ds[1]}*${c}`; const fit = digitsFit(t, (v) => v % 4 === 0); if (fit.length < 2) return null; P.t = t; const mx = Math.max(...fit); return { ans: mx, wrong: [9, ...fit.filter((d) => d !== mx).reverse(), ...others(fit, mx)].filter((d) => d !== mx && (d === 9 ? !fit.includes(9) : true)), expl: `The last two digits *${c} must form a multiple of 4; the possibilities are ${fit.map((d) => `${d}${c}`).join(', ')}, so the largest * is ${mx}.` } }
+      case 'nine6': { const t = `${ds.slice(0, 3)}*${ds.slice(4)}`; const fit = digitsFit(t, (v) => v % 9 === 0); if (fit.length !== 1) return null; P.t = t; const s3 = digitsFit(t, (v) => v % 3 === 0).filter((d) => d !== fit[0]); return { ans: fit[0], wrong: [...s3, ...others(fit, fit[0])], expl: `The digit sum must be a multiple of 9; the known digits add to ${sum(t.replace('*', '').split('').map(Number))}, so * = ${fit[0]}.` } }
+      case 'three5': { const base = Math.floor(P.n / 1000) * 10; const c = []; for (let v = base; v < base + 300; v += 5) c.push(v); const good = rr.pick(c.filter((v) => v % 15 === 0)); const five = rr.sample(c.filter((v) => v % 3 !== 0), 2); const three = rr.pick([...Array(40)].map((_, i) => base + 3 * i).filter((v) => v % 5 !== 0)); return { ans: good, wrong: [...five, three], expl: `${good} ends in ${good % 10} (so divisible by 5) and its digit sum is a multiple of 3; each other option fails one of the two tests.` } }
+      case 'twelve': { const t = `${ds[0]}${ds[1]}*${[0, 2, 4, 6, 8][Number(ds[2]) % 5]}`; const fit = digitsFit(t, (v) => v % 12 === 0); if (!fit.length || fit[0] === 0) return null; P.t = t; const mn = fit[0]; const by4 = digitsFit(t, (v) => v % 4 === 0).filter((d) => d !== mn && !fit.includes(d)); const by3 = digitsFit(t, (v) => v % 3 === 0).filter((d) => d !== mn && !fit.includes(d)); return { ans: mn, wrong: [...fit.slice(1), by3[0], by4[0], ...others(fit, mn)].filter((d) => d !== undefined), expl: `Divisible by 12 means divisible by 3 and by 4. Trying * = 0, 1, 2, …, the first digit passing both tests is ${mn} (${t.replace('*', mn)} = 12 × ${Number(t.replace('*', mn)) / 12}).` } }
+      default: { const ps = [7, 11, 13, 17, 19]; const p = rr.pick(ps); const k = rr.int(11, 70); const N = p * k; if (ps.some((q) => q !== p && N % q === 0)) return null; P.N = N; return { ans: p, wrong: ps.filter((q) => q !== p), expl: `${N} = ${p} × ${k}; it is not a multiple of any of the other options.` } }
+    }
+  },
+  items: [
+    [2, (p) => `What digit must replace * in ${p.t} so that the number is divisible by 9?`, { m: 'nine3' }],
+    [2, (p) => `What is the smallest digit that can replace * in ${p.t} to make the number divisible by 3?`, { m: 'three' }],
+    [2, (p) => `The number ${p.t} is divisible by 11. What is the missing digit *?`, { m: 'eleven' }],
+    [1, () => `Which of the following numbers is divisible by 4?`, { m: 'which4' }],
+    [2, () => `Which of these numbers is divisible by 6?`, { m: 'which6' }],
+    [2, (p) => `What is the largest digit that can replace * in ${p.t} so that the number is divisible by 4?`, { m: 'largest4' }],
+    [2, (p) => `If the six-digit number ${p.t} is divisible by 9, what digit does * stand for?`, { m: 'nine6' }],
+    [1, () => `Which of these numbers is divisible by both 3 and 5?`, { m: 'three5' }],
+    [2, (p) => `The number ${p.t} is divisible by 12. What is the smallest possible value of *?`, { m: 'twelve' }],
+    [2, (p) => `By which of the following is ${p.N} exactly divisible?`, { m: 'divisor' }],
+  ],
+})
+
+family('ga.number-properties.remainders', 'ga.number-properties', {
+  gen: (r) => ({ d: r.int(3, 13), q: r.int(12, 90), rr: r.int(1, 12), a: r.int(20, 99), b: r.int(20, 99), c: r.int(20, 99), k: r.int(2, 5), n: r.int(10, 60), base: r.pick([2, 3, 7, 8, 9]) }),
+  key: (p) => `${p.m}-${p.d}-${p.q}-${p.rr}${['prod', 'sum'].includes(p.m) ? `-${p.a}-${p.b}-${p.c}` : ''}${['mod7', 'units'].includes(p.m) ? `-${p.n}-${p.base}` : ''}${p.m === 'nested' ? `-${p.k}` : ''}`,
+  solve: (P) => {
+    const { d, q, rr, a, b, c, k, n, base } = P
+    if (rr >= d && !['mod7', 'units'].includes(P.m)) return null
+    const N = d * q + rr
+    const mods = (ans, m) => [...new Set([(ans + 1) % m, (ans + m - 1) % m, (ans + 2) % m, m - ans])].filter((v) => v !== ans)
+    switch (P.m) {
+      case 'basic': return { ans: rr, wrong: [q, d - rr, rr + 1, (rr + 2) % d], expl: `${N} = ${d} × ${q} + ${rr}, so the remainder is ${rr}.` }
+      case 'nested': { const M = d * k; const R = rr + d * ((q % k)); if (R >= M) return null; P.M = M; P.R = R; return { ans: rr, wrong: [R, R % k, M - R, (rr + 1) % d].filter((v) => v !== rr), expl: `The number is ${M}t + ${R}; since ${M} is a multiple of ${d}, the remainder on dividing by ${d} is ${R} mod ${d} = ${rr}.` } }
+      case 'double': { const ans = (2 * rr) % d; if (2 * rr < d) return null; return { ans, wrong: [2 * rr, rr, (ans + 1) % d].filter((v) => v !== ans), expl: `If n = ${d}q + ${rr}, then 2n = ${d}(2q) + ${2 * rr}, and ${2 * rr} leaves remainder ${ans} on division by ${d}.` } }
+      case 'prod': { const ans = (a * b) % d; return { ans, wrong: [((a % d) + (b % d)) % d, (a % d) * (b % d), ...mods(ans, d)].filter((v) => v !== ans), expl: `${a} leaves ${a % d} and ${b} leaves ${b % d}; ${a % d} × ${b % d} = ${(a % d) * (b % d)}, which leaves ${ans} on division by ${d}.` } }
+      case 'sum': { const ans = (a + b + c) % d; return { ans, wrong: [(a % d) + (b % d) + (c % d), ...mods(ans, d)].filter((v) => v !== ans), expl: `${a} + ${b} + ${c} = ${a + b + c} = ${d} × ${Math.floor((a + b + c) / d)} + ${ans}.` } }
+      case 'dividend': return { ans: N, wrong: [d * q, d * rr + q, (d + rr) * q], expl: `Number = divisor × quotient + remainder = ${d} × ${q} + ${rr} = ${N}.` }
+      case 'mod7': { const cyc = [1, 2, 4]; const ans = cyc[n % 3]; return { ans, wrong: [1, 2, 4, 3, 6].filter((v) => v !== ans), expl: `Powers of 2 leave remainders 2, 4, 1, 2, 4, 1, … on division by 7 (cycle of 3). ${n} = 3 × ${Math.floor(n / 3)} + ${n % 3}, so the remainder is ${ans}.` } }
+      case 'units': { const cyc = []; let v = base % 10; for (let i = 0; i < 4; i++) { cyc.push(v); v = (v * base) % 10 } const ans = cyc[(n - 1) % 4]; return { ans, wrong: [...new Set([...cyc, base % 10, (base * n) % 10, 1])].filter((w) => w !== ans), expl: `The units digits of powers of ${base} repeat in the cycle ${cyc.join(', ')}. The exponent ${n} is in position ${(n - 1) % 4 + 1} of that cycle (${n} ÷ 4 leaves ${n % 4}), so the units digit is ${ans}.` } }
+      case 'subtract': return { ans: rr, wrong: [d - rr, rr + 1, q].filter((v) => v !== rr), expl: `${N} ÷ ${d} leaves remainder ${rr}; subtracting ${rr} gives ${N - rr} = ${d} × ${q}.` }
+      default: return { ans: d - rr, wrong: [rr, d - rr + 1, d].filter((v) => v !== d - rr), expl: `${N} ÷ ${d} leaves remainder ${rr}; adding ${d} − ${rr} = ${d - rr} gives ${N + d - rr} = ${d} × ${q + 1}.` }
+    }
+  },
+  items: [
+    [1, (p) => `What is the remainder when ${p.d * p.q + p.rr} is divided by ${p.d}?`, { m: 'basic' }],
+    [2, (p) => `A number leaves a remainder of ${p.R} when divided by ${p.M}. What remainder does it leave when divided by ${p.d}?`, { m: 'nested' }],
+    [2, (p) => `When a number is divided by ${p.d}, the remainder is ${p.rr}. What is the remainder when twice the number is divided by ${p.d}?`, { m: 'double' }],
+    [2, (p) => `Without multiplying out, find the remainder when ${p.a} × ${p.b} is divided by ${p.d}.`, { m: 'prod' }],
+    [1, (p) => `The remainder on dividing ${p.a} + ${p.b} + ${p.c} by ${p.d} is:`, { m: 'sum' }],
+    [1, (p) => `On dividing a number by ${p.d}, the quotient is ${p.q} and the remainder is ${p.rr}. What is the number?`, { m: 'dividend' }],
+    [3, (p) => `When 2${sup(p.n)} is divided by 7, what remainder is left?`, { m: 'mod7' }],
+    [2, (p) => `What is the units digit of ${p.base}${sup(p.n)}?`, { m: 'units' }],
+    [1, (p) => `What is the least number that must be subtracted from ${p.d * p.q + p.rr} to make it exactly divisible by ${p.d}?`, { m: 'subtract' }],
+    [2, (p) => `What is the least number that must be added to ${p.d * p.q + p.rr} to make it exactly divisible by ${p.d}?`, { m: 'add' }],
+  ],
+})
+/** Round an integer-scaled value m / 10^k to j decimals (half up); returns a display string. */
+function roundStr(m, k, j) { const f = 10 ** (k - j); const q = Math.floor(m / f + 0.5); return (q / 10 ** j).toFixed(Math.max(j, 0)) }
+function truncStr(m, k, j) { const f = 10 ** (k - j); const q = Math.floor(m / f); return (q / 10 ** j).toFixed(Math.max(j, 0)) }
+const sigRound = (N, s) => { const e = String(N).length - s; const f = 10 ** e; return Math.floor(N / f + 0.5) * f }
+const numVal = (t) => Number(String(t).replace(/[^0-9.]/g, ''))
+family('ga.number-properties.rounding', 'ga.number-properties', {
+  post: (sol) => ({ ...sol, wrong: sol.wrong.filter((w) => numVal(w) !== numVal(sol.ans)) }),
+  fmt: (v) => (typeof v === 'number' ? v.toLocaleString('en-US') : v),
+  gen: (r) => ({ m: r.int(10000, 99999), N: r.int(10000, 999999) }),
+  key: (p) => `${p.s}-${p.m}-${p.N}`,
+  solve: (P) => {
+    const { m, N } = P
+    switch (P.s) {
+      case 'dp2': { const x = (m / 1000).toFixed(3); P.x = x; const ans = roundStr(m, 3, 2); return { ans, wrong: [truncStr(m, 3, 2) === ans ? roundStr(m + 10, 3, 2) : truncStr(m, 3, 2), roundStr(m, 3, 1), roundStr(m, 3, 0) + '.00', x].filter((t) => t !== ans), expl: `Look at the third decimal place of ${x}: it is ${x.slice(-1)}, so the second decimal ${Number(x.slice(-1)) >= 5 ? 'goes up' : 'stays'}; the answer is ${ans}.` } }
+      case 'hund': { const ans = Math.floor(N / 100 + 0.5) * 100; return { ans, wrong: [Math.floor(N / 100) * 100 === ans ? ans + 100 : Math.floor(N / 100) * 100, Math.floor(N / 10 + 0.5) * 10, Math.floor(N / 1000 + 0.5) * 1000].filter((v) => v !== ans), expl: `The tens digit of ${N.toLocaleString('en-US')} is ${Math.floor(N / 10) % 10}, so to the nearest hundred it is ${ans.toLocaleString('en-US')}.` } }
+      case 'dp1': { const x = (m / 100).toFixed(2); P.x = x; const ans = roundStr(m, 2, 1); return { ans, wrong: [truncStr(m, 2, 1) === ans ? roundStr(m + 10, 2, 1) : truncStr(m, 2, 1), roundStr(m, 2, 0), x, roundStr(m + 100, 2, 1)], expl: `The second decimal of ${x} is ${x.slice(-1)}, so ${x} ≈ ${ans} to one decimal place.` } }
+      case 'sig2': { const ans = sigRound(N, 2); return { ans, wrong: [sigRound(N, 3), sigRound(N, 1), Math.floor(N / 10 ** (String(N).length - 2)) * 10 ** (String(N).length - 2) === ans ? ans + 10 ** (String(N).length - 2) : Math.floor(N / 10 ** (String(N).length - 2)) * 10 ** (String(N).length - 2), Number(String(ans).slice(0, 2))].filter((v) => v !== ans), expl: `Keep the first two significant figures of ${N.toLocaleString('en-US')} and round using the third: ${ans.toLocaleString('en-US')}.` } }
+      case 'thou': { const ans = Math.floor(N / 1000 + 0.5) * 1000; return { ans, wrong: [Math.floor(N / 1000) * 1000 === ans ? ans + 1000 : Math.floor(N / 1000) * 1000, Math.floor(N / 100 + 0.5) * 100, Math.floor(N / 10000 + 0.5) * 10000].filter((v) => v !== ans), expl: `The hundreds digit of ${N.toLocaleString('en-US')} is ${Math.floor(N / 100) % 10}, so to the nearest thousand it is ${ans.toLocaleString('en-US')}.` } }
+      case 'whole': { const x = (m / 1000).toFixed(3); P.x = x; const ans = roundStr(m, 3, 0); return { ans, wrong: [truncStr(m, 3, 0) === ans ? String(Number(ans) + 1) : truncStr(m, 3, 0), roundStr(m, 3, 1), String(Number(ans) + 10)].filter((t) => t !== ans), expl: `The first decimal of ${x} is ${x.split('.')[1][0]}, so it rounds to ${ans}.` } }
+      case 'sig3': { const x = (m / 10000).toFixed(4); P.x = x; const ans = roundStr(m, 4, 2); return { ans, wrong: [roundStr(m, 4, 3), truncStr(m, 4, 2) === ans ? roundStr(m + 100, 4, 2) : truncStr(m, 4, 2), roundStr(m, 4, 1)].filter((t) => t !== ans), expl: `${x} has significant figures ${x.replace('.', '').split('').join(', ')}; keeping three and rounding with the fourth gives ${ans}.` } }
+      default: { const x = (m / 1000).toFixed(3); P.x = x; const ans = roundStr(m, 3, 1); return { ans: `${ans} m`, wrong: [`${truncStr(m, 3, 1) === ans ? roundStr(m + 100, 3, 1) : truncStr(m, 3, 1)} m`, `${roundStr(m, 3, 2)} m`, `${roundStr(m, 3, 0)} m`].filter((t) => t !== `${ans} m`), expl: `Ten centimetres is 0.1 m, so round ${x} m to one decimal place: ${ans} m.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Round ${p.x} to two decimal places.`, { s: 'dp2' }],
+    [1, (p) => `What is ${p.N.toLocaleString('en-US')} rounded to the nearest hundred?`, { s: 'hund' }],
+    [1, (p) => `${p.x} correct to one decimal place is:`, { s: 'dp1' }],
+    [2, (p) => `Write ${p.N.toLocaleString('en-US')} correct to 2 significant figures.`, { s: 'sig2' }],
+    [1, (p) => `Rounded to the nearest thousand, ${p.N.toLocaleString('en-US')} becomes:`, { s: 'thou' }],
+    [1, (p) => `What is ${p.x} correct to the nearest whole number?`, { s: 'whole' }],
+    [2, (p) => `${p.x} rounded to three significant figures is:`, { s: 'sig3' }],
+    [1, (p) => `A length is measured as ${p.x} m. What is it to the nearest ten centimetres?`, { s: 'tencm' }],
+  ],
+})
+
+family('ga.number-properties.estimation', 'ga.number-properties', {
+  fmt: (v) => (typeof v === 'number' ? v.toLocaleString('en-US') : v),
+  gen: (r) => ({ A: r.int(2, 9), B: r.int(2, 9), da: r.int(-4, 4), db: r.int(-2, 2), k: r.int(1, 3) }),
+  key: (p) => `${p.s}-${p.A}-${p.B}-${p.da}-${p.db}-${p.k}`,
+  solve: (P) => {
+    const { A, B, da, db, k } = P
+    switch (P.s) {
+      case 'mul': { const a = A * 100 + da; const b = B * 10 + db; P.a = a; P.b = b; const ans = A * B * 1000; return { ans, wrong: [ans * 10, ans / 10, (A + B) * 1000], expl: `${a} ≈ ${A * 100} and ${b} ≈ ${B * 10}; ${A * 100} × ${B * 10} = ${ans.toLocaleString('en-US')}.` } }
+      case 'div': { const q = A * 100; const b = B * 10; const a = q * b + da * 7; P.a = a; P.b = `${b - 1}.${7 + (k % 3)}`; return { ans: q, wrong: [q * 10, q / 10, q * 2].filter((v) => isInt(v)), expl: `${a.toLocaleString('en-US')} ≈ ${(q * b).toLocaleString('en-US')} and ${P.b} ≈ ${b}; ${(q * b).toLocaleString('en-US')} ÷ ${b} = ${q}.` } }
+      case 'shop': { const n = A * 10 + (da % 2); const pr = B * 100 - (5 - k); P.n = n; P.pr = pr; const ans = A * 10 * B * 100; return { ans, wrong: [ans * 10, ans / 10, (A * 10 + B * 100) * 10], expl: `${n} ≈ ${A * 10} and Rs ${pr} ≈ Rs ${B * 100}; ${A * 10} × ${B * 100} = Rs ${ans.toLocaleString('en-US')}.`, fmt: (v) => `Rs ${v.toLocaleString('en-US')}` } }
+      case 'sqrt': { const s = A * 3 + B; const N = s * s + da * 2 + (da === 0 ? 3 : 0); if (Math.abs(N - s * s) > s) return null; P.N = N; return { ans: s, wrong: [s + 1 === Math.round(Math.sqrt(N)) ? s + 2 : s + 1, s - 1, Math.round(N / 2)].filter((v) => v !== s), expl: `${s}² = ${s * s}, which is closest to ${N}; so √${N} ≈ ${s}.` } }
+      case 'hundreds': { const xs = [A * 100 + 30 + da, B * 100 + 60 - db, (A + B) * 100 - 20 + k]; P.xs = xs; const rd = xs.map((v) => Math.floor(v / 100 + 0.5) * 100); const ans = sum(rd); return { ans, wrong: [sum(xs.map((v) => Math.floor(v / 100) * 100)), sum(xs), ans + 100].filter((v) => v !== ans), expl: `Rounded: ${rd.join(' + ')} = ${ans.toLocaleString('en-US')}.` } }
+      default: { const pct = 25; const N = A * 400 + da; P.N = N; P.pc = `${pct - 1}.${8 - (k % 3)}`; const ans = A * 100; return { ans, wrong: [A * 1000, A * 10, A * 250], expl: `${P.pc}% ≈ 25% = one-quarter, and ${N} ≈ ${A * 400}; a quarter of ${A * 400} is ${ans}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Which is the best estimate of ${p.a} × ${p.b}?`, { s: 'mul' }],
+    [1, (p) => `Estimate the value of ${p.a.toLocaleString('en-US')} ÷ ${p.b} by rounding each number sensibly.`, { s: 'div' }],
+    [1, (p) => `A shopkeeper sells ${p.n} items at Rs ${p.pr} each. Roughly how much money does he receive?`, { s: 'shop' }],
+    [1, (p) => `Which whole number is closest to √${p.N}?`, { s: 'sqrt' }],
+    [1, (p) => `If ${p.xs[0]}, ${p.xs[1]} and ${p.xs[2]} are each rounded to the nearest hundred and then added, what total is obtained?`, { s: 'hundreds' }],
+    [1, (p) => `Approximately what is ${p.pc}% of ${p.N.toLocaleString('en-US')}?`, { s: 'pct' }],
+  ],
+})
+
+const PLACE = ['ones', 'tens', 'hundreds', 'thousands', 'ten thousands', 'hundred thousands', 'millions']
+family('ga.number-properties.place-value', 'ga.number-properties', {
+  fmt: (v) => (typeof v === 'number' ? v.toLocaleString('en-US') : v),
+  gen: (r) => ({ N: r.int(1000000, 9999999), pick: r.int(0, 9999) }),
+  key: (p) => `${p.s}-${p.N}`,
+  solve: (P) => {
+    const ds = String(P.N); const L = ds.length
+    const rr = makeRng(`pv-${P.s}-${P.N}`)
+    switch (P.s) {
+      case 'pv': { const i = rr.int(0, L - 3); const d = ds[i]; if (d === '0' || ds.indexOf(d) !== i || ds.lastIndexOf(d) !== i) return null; const pos = L - 1 - i; P.d = d; const ans = Number(d) * 10 ** pos; return { ans, wrong: [Number(d), Number(d) * 10 ** (pos - 1), Number(d) * 10 ** (pos + 1)], expl: `${d} is in the ${PLACE[pos]} place of ${P.N.toLocaleString('en-US')}, so its place value is ${ans.toLocaleString('en-US')}.` } }
+      case 'diff': { const i = rr.int(1, L - 3); const d = ds[i]; if (d === '0' || d === '1' || ds.indexOf(d) !== i || ds.lastIndexOf(d) !== i) return null; const pos = L - 1 - i; P.d = d; const pvv = Number(d) * 10 ** pos; const ans = pvv - Number(d); return { ans, wrong: [pvv, pvv + Number(d), Number(d) * 10 ** (pos - 1) - Number(d)], expl: `Place value ${pvv.toLocaleString('en-US')} − face value ${d} = ${ans.toLocaleString('en-US')}.` } }
+      case 'twice': { const d = String(rr.int(2, 9)); const pos1 = rr.int(3, 5); const pos2 = rr.int(0, 2); const arr = ds.split('').map((c) => (c === d ? String((Number(c) + 1) % 10 || 1) : c)); if (arr.includes(d)) return null; arr[L - 1 - pos1] = d; arr[L - 1 - pos2] = d; if (arr[0] === '0') return null; const N2 = Number(arr.join('')); if (arr.filter((c) => c === d).length !== 2) return null; P.N2 = N2; P.d = d; const ans = Number(d) * (10 ** pos1 + 10 ** pos2); return { ans, wrong: [Number(d) * 2, Number(d) * 10 ** pos1, Number(d) * 10 ** pos1 * 10 ** pos2 > 1e9 ? Number(d) * (10 ** pos1 - 10 ** pos2) : Number(d) * (10 ** pos1 - 10 ** pos2)], expl: `The ${d}s stand for ${(Number(d) * 10 ** pos1).toLocaleString('en-US')} and ${Number(d) * 10 ** pos2}; together ${ans.toLocaleString('en-US')}.` } }
+      case 'hundredths': { const x = `${ds.slice(0, 2)}.${ds.slice(2, 5)}`; P.x = x; const h = x.split('.')[1][1]; const t = x.split('.')[1][0]; const th = x.split('.')[1][2]; if (new Set([h, t, th, ds[1]]).size < 4) return null; return { ans: h, wrong: [t, th, ds[1]], expl: `In ${x} the digits after the point are tenths (${t}), hundredths (${h}) and thousandths (${th}).` } }
+      case 'decval': { const x = `${ds.slice(0, 1)}.${ds.slice(1, 5)}`; const j = rr.int(1, 3); const d = x.split('.')[1][j]; if (d === '0' || x.split('.')[1].indexOf(d) !== j || ds[0] === d) return null; P.x = x; P.d = d; const v = (e) => `${(Number(d) / 10 ** e).toFixed(e)}`; return { ans: v(j + 1), wrong: [v(j), v(j + 2), d], expl: `${d} is in decimal place ${j + 1} of ${x}, so it stands for ${v(j + 1)}.` } }
+      case 'swap': { const a = Number(ds[L - 2]); const b = Number(ds[L - 4]); if (a === b) return null; const ans = Math.abs(a - b) * (1000 - 10); return { ans, wrong: [Math.abs(a - b) * 1000, Math.abs(a - b) * 10, Math.abs(a - b) * 900], expl: `Swapping moves ${Math.abs(a - b)} between the thousands and the tens: ${Math.abs(a - b)} × 1000 − ${Math.abs(a - b)} × 10 = ${ans.toLocaleString('en-US')}.` } }
+      case 'smallest': { const dig = [...new Set(ds.split(''))].slice(0, 5); if (dig.length < 5) return null; const withZero = dig.includes('0') ? dig : [...dig.slice(0, 4), '0']; const s = [...withZero].sort(); const firstNZ = s.find((c) => c !== '0'); const rest = s.filter((c, i) => i !== s.indexOf(firstNZ)); const ans = Number(firstNZ + rest.join('')); P.dig = withZero; return { ans, wrong: [Number(s.join('')) || Number(s.slice(1).join('')), Number(s.slice().reverse().join('')), Number(firstNZ + rest.slice().reverse().join(''))].filter((v) => v !== ans && v >= 1000), expl: `Put the smallest non-zero digit first, then the rest in increasing order: ${ans}.` } }
+      default: { const dig = [...new Set(ds.split('').filter((c) => c !== '0'))].slice(0, 3); if (dig.length < 3) return null; P.dig = dig; const s = [...dig].sort(); const big = Number([...s].reverse().join('')); const small = Number(s.join('')); const ans = big - small; return { ans, wrong: [big + small, big - Number(s[0] + s[2] + s[1]), ans + 99].filter((v) => v !== ans), expl: `Largest ${big} − smallest ${small} = ${ans}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `What is the place value of ${p.d} in ${p.N.toLocaleString('en-US')}?`, { s: 'pv' }],
+    [2, (p) => `In the number ${p.N.toLocaleString('en-US')}, what is the difference between the place value and the face value of ${p.d}?`, { s: 'diff' }],
+    [2, (p) => `What is the sum of the place values of the two ${p.d}s in ${p.N2.toLocaleString('en-US')}?`, { s: 'twice' }],
+    [1, (p) => `Which digit is in the hundredths place of ${p.x}?`, { s: 'hundredths' }],
+    [1, (p) => `What value does the digit ${p.d} represent in ${p.x}?`, { s: 'decval' }],
+    [2, (p) => `If the tens digit and the thousands digit of ${p.N.toLocaleString('en-US')} are interchanged, by how much does the number change?`, { s: 'swap' }],
+    [1, (p) => `What is the smallest five-digit number that can be formed using each of the digits ${p.dig.slice(0, 4).join(', ')} and ${p.dig[4]} exactly once?`, { s: 'smallest' }],
+    [2, (p) => `What is the difference between the largest and the smallest three-digit numbers that can be formed using each of the digits ${p.dig[0]}, ${p.dig[1]} and ${p.dig[2]} once?`, { s: 'range3' }],
+  ],
+})
+
+family('ga.number-properties.count-multiples', 'ga.number-properties', {
+  gen: (r) => ({ k: r.int(3, 13), a: r.int(20, 150), N: 10 * r.int(5, 40), b2: r.pick([2, 3, 4, 5, 6]), c2: r.pick([3, 5, 7, 9]) }),
+  key: (p) => `${p.s}-${p.k}-${p.a}-${p.N}-${p.b2}-${p.c2}`,
+  fact: (p) => `${p.s}-${p.k}-${p.a}-${p.N}`,
+  solve: (P) => {
+    const { k, a, N, b2, c2 } = P
+    const cnt = (lo, hi, f) => { let c = 0; for (let v = lo; v <= hi; v++) if (f(v)) c++; return c }
+    switch (P.s) {
+      case 'between': { const b = a + 5 * k + 7; P.b = b; if (a % k === 0 || b % k === 0) return null; const c = cnt(a + 1, b - 1, (v) => v % k === 0); return { ans: c, wrong: [c + 1, c - 1, Math.round((b - a) / k) === c ? c + 2 : Math.round((b - a) / k)].filter((v) => v !== c && v > 0), expl: `The multiples of ${k} between ${a} and ${b} run from ${Math.ceil(a / k) * k} to ${Math.floor(b / k) * k}: ${c} numbers.` } }
+      case 'upto': { const c = Math.floor(N / k); return { ans: c, wrong: [c + 1, c - 1, Math.floor(N / (k + 1))].filter((v) => v !== c), expl: `${N} ÷ ${k} = ${num(N / k)}, so there are ${c} multiples of ${k} from 1 to ${N}.` } }
+      case 'neither': { if (b2 === c2 || gcd(b2, c2) !== 1) return null; const c = cnt(1, N, (v) => v % b2 !== 0 && v % c2 !== 0); return { ans: c, wrong: [N - Math.floor(N / b2) - Math.floor(N / c2), N - Math.floor(N / (b2 * c2)), c + Math.floor(N / (b2 * c2)) + 1].filter((v) => v !== c && v > 0), expl: `Divisible by ${b2}: ${Math.floor(N / b2)}; by ${c2}: ${Math.floor(N / c2)}; by both: ${Math.floor(N / (b2 * c2))}. At least one: ${Math.floor(N / b2) + Math.floor(N / c2) - Math.floor(N / (b2 * c2))}; neither: ${N} − that = ${c}.` } }
+      case 'even': { const b = a + 2 * k + 11; P.b = b; const c = cnt(a + 1, b - 1, (v) => v % 2 === 0); return { ans: c, wrong: [c + 1, c - 1, b - a - 1].filter((v) => v !== c), expl: `The even numbers strictly between ${a} and ${b} run from ${a % 2 ? a + 1 : a + 2} to ${b % 2 ? b - 1 : b - 2}: ${c} of them.` } }
+      case 'threedigit': { const c = Math.floor(999 / k) - Math.floor(99 / k); return { ans: c, wrong: [Math.floor(999 / k), Math.floor(900 / k) === c ? c + 1 : Math.floor(900 / k), c - 1].filter((v) => v !== c), expl: `Multiples of ${k} up to 999: ${Math.floor(999 / k)}; up to 99: ${Math.floor(99 / k)}; three-digit ones: ${c}.` } }
+      default: { if (b2 === c2 || lcm(b2, c2) === b2 * c2) return null; const L = lcm(b2, c2); const c = Math.floor(N / L); return { ans: c, wrong: [Math.floor(N / (b2 * c2)), Math.floor(N / b2) + Math.floor(N / c2), c + 1].filter((v) => v !== c), expl: `Divisible by both ${b2} and ${c2} means divisible by their LCM, ${L}: ${N} ÷ ${L} gives ${c}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `How many multiples of ${p.k} are there between ${p.a} and ${p.b}?`, { s: 'between' }],
+    [1, (p) => `How many numbers from 1 to ${p.N} are divisible by ${p.k}?`, { s: 'upto' }],
+    [3, (p) => `How many whole numbers from 1 to ${p.N} are divisible by neither ${p.b2} nor ${p.c2}?`, { s: 'neither' }],
+    [1, (p) => `How many even numbers lie between ${p.a} and ${p.b}?`, { s: 'even' }],
+    [2, (p) => `How many three-digit numbers are divisible by ${p.k}?`, { s: 'threedigit' }],
+    [2, (p) => `How many numbers between 1 and ${p.N} are divisible by both ${p.b2} and ${p.c2}?`, { s: 'both' }],
+  ],
+})
+
+family('ga.number-properties.parity', 'ga.number-properties', {
+  gen: (r) => ({ pick: r.int(0, 9999), k: r.int(5, 30) }),
+  key: (p) => `${p.s}-${p.s === 'oddsum' ? p.k : p.pick}`,
+  solve: (P) => {
+    const rr = makeRng(`par-${P.s}-${P.pick}`)
+    switch (P.s) {
+      case 'oddeven': {
+        const pool = [['n + 1', (n) => n + 1], ['3n + 5', (n) => 3 * n + 5], ['n² + n', (n) => n * n + n], ['5n − 1', (n) => 5 * n - 1], ['n + 2', (n) => n + 2], ['2n + 1', (n) => 2 * n + 1], ['n²', (n) => n * n], ['3n + 2', (n) => 3 * n + 2], ['n² + 2', (n) => n * n + 2], ['4n − 3', (n) => 4 * n - 3]]
+        const isEven = (f) => [1, 3, 5, 7, -1].every((n) => f(n) % 2 === 0); const isOdd = (f) => [1, 3, 5, 7, -1].every((n) => Math.abs(f(n) % 2) === 1)
+        const good = rr.pick(pool.filter(([, f]) => isEven(f))); const bad = rr.sample(pool.filter(([, f]) => isOdd(f)), 3)
+        return { ans: good[0], wrong: bad.map(([t]) => t), expl: `For odd n, ${good[0]} is always even (try n = 1: ${good[1](1)}; n = 3: ${good[1](3)}), while ${bad.map(([t]) => t).join(', ')} are always odd.` }
+      }
+      case 'mixed': {
+        const pool = [['m + n', (m, n) => m + n], ['mn + n', (m, n) => m * n + n], ['n² + m', (m, n) => n * n + m], ['3n + m', (m, n) => 3 * n + m], ['mn', (m, n) => m * n], ['m + 2n', (m, n) => m + 2 * n], ['m² + n² + 1', (m, n) => m * m + n * n + 1], ['n(n + 1)', (m, n) => n * (n + 1)], ['m + n + 1', (m, n) => m + n + 1]]
+        const test = (f, par) => [[2, 1], [4, 3], [6, 5], [0, 7], [8, -1]].every(([m, n]) => Math.abs(f(m, n) % 2) === par)
+        const good = rr.pick(pool.filter(([, f]) => test(f, 1))); const bad = rr.sample(pool.filter(([, f]) => test(f, 0)), 3)
+        return { ans: good[0], wrong: bad.map(([t]) => t), expl: `With m even and n odd, ${good[0]} is always odd, whereas ${bad.map(([t]) => t).join(', ')} are always even.` }
+      }
+      case 'oddsum': { const k = P.k; return { ans: k * k, wrong: [k * (k + 1), 2 * k * k, k * k + k - 1].filter((v) => v !== k * k), expl: `1 + 3 + 5 + … (${k} terms) = ${k}² = ${k * k}.` } }
+      default: return { ans: 'always even', wrong: ['always odd', 'always a multiple of 4', 'sometimes odd'], expl: `A product with at least one even factor is divisible by 2, so it is always even (it need not be a multiple of 4, e.g. 1 × 3 × 2 = 6).` }
+    }
+  },
+  items: [
+    [1, () => `If n is an odd integer, which of the following is always even?`, { s: 'oddeven' }],
+    [1, () => `If m is an even integer and n is an odd integer, which of these must be odd?`, { s: 'mixed' }],
+    [1, (p) => `What is the sum of the first ${p.k} odd natural numbers?`, { s: 'oddsum' }],
+    [1, () => `The product of two odd numbers and one even number is:`, { s: 'product' }],
+  ],
+})
+
+family('ga.number-properties.factors', 'ga.number-properties', {
+  gen: (r) => ({ N: r.pick([12, 18, 20, 24, 28, 30, 36, 40, 42, 45, 48, 50, 54, 56, 60, 63, 72, 75, 80, 84, 90, 96, 100, 108, 120, 126, 144, 150, 180, 200]), pick: r.int(0, 999) }),
+  key: (p) => `${p.s}-${p.s === 'three' ? p.pick : p.N}`,
+  fact: (p) => `${p.s === 'three' ? p.pick : p.N}`,
+  solve: (P) => {
+    const { N } = P
+    const D = divisors(N)
+    switch (P.s) {
+      case 'count': return { ans: D.length, wrong: [D.length - 2, D.length + 1, D.length / 2].filter((v) => isInt(v) && v !== D.length), expl: `${N} = ${primeFactors(N).join(' × ')}; its factors are ${D.join(', ')} — ${D.length} in all.` }
+      case 'sum': { const s = sum(D); return { ans: s, wrong: [s - N, s - 1, s - N - 1].filter((v) => v !== s), expl: `The factors of ${N} are ${D.join(', ')}; their sum is ${s}.` } }
+      case 'odd': { const o = D.filter((v) => v % 2 === 1); if (o.length < 2) return null; return { ans: o.length, wrong: [D.length - o.length, o.length + 1, o.length - 1].filter((v) => v > 0 && v !== o.length), expl: `The odd factors of ${N} are ${o.join(', ')}: ${o.length} of them.` } }
+      case 'three': { const rr = makeRng(`fac3-${P.pick}`); const p = rr.pick([2, 3, 5, 7, 11, 13]); const good = p * p; const bad = rr.sample([6, 8, 10, 12, 14, 15, 16, 18, 21, 27, 32, 35, 45].filter((v) => v !== good), 3); return { ans: good, wrong: bad, expl: `A number has exactly three factors only if it is the square of a prime: ${good} = ${p}², with factors 1, ${p} and ${good}.` } }
+      case 'largest': { const sp = primeFactors(N)[0]; const ans = N / sp; return { ans, wrong: [N / 2 === ans ? N / 3 : N / 2, N - 1, sp].filter((v) => isInt(v) && v !== ans), expl: `The largest proper factor is ${N} ÷ (its smallest prime factor ${sp}) = ${ans}.` } }
+      default: { const d = [...new Set(primeFactors(N))]; return { ans: d.length, wrong: [primeFactors(N).length, D.length, d.length + 1].filter((v) => v !== d.length), expl: `${N} = ${primeFactors(N).join(' × ')}, so its distinct prime factors are ${d.join(' and ')}: ${d.length}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `How many factors does ${p.N} have?`, { s: 'count' }],
+    [2, (p) => `What is the sum of all the factors of ${p.N}?`, { s: 'sum' }],
+    [2, (p) => `How many of the factors of ${p.N} are odd numbers?`, { s: 'odd' }],
+    [2, () => `Which of these numbers has exactly three factors?`, { s: 'three' }],
+    [1, (p) => `What is the largest factor of ${p.N} that is smaller than ${p.N} itself?`, { s: 'largest' }],
+    [1, (p) => `How many different prime numbers divide ${p.N} exactly?`, { s: 'distinct' }],
+  ],
+})
+
+// ===========================================================================
 // ENGINE — builds, verifies and writes the items
 // ===========================================================================
 const BAD_TEXT = /NaN|undefined|Infinity|null|\+ −|− −|\+ \+|\(\+|\b1x\b|\[object/
@@ -1536,7 +2008,8 @@ function buildItems() {
         if (usedKeys.has(key)) continue
         const factKey = fam.fact ? String(fam.fact(p)) : null
         if (factKey !== null && usedFacts.has(factKey)) continue
-        const sol = fam.solve(p)
+        const sol0 = fam.solve(p)
+        const sol = sol0 && fam.post ? fam.post(sol0, p) : sol0
         const dbg = process.env.GA_DEBUG === `${fam.id}#${idx}` && attempt < 5
         if (dbg) console.error('DEBUG', key, JSON.stringify(sol))
         if (!sol || isBadValue(sol.ans)) continue
