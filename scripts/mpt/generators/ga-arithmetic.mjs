@@ -1904,9 +1904,906 @@ fam('ga.profit-loss.rates-and-weights', 'ga.profit-loss', [
     },
     T: [
       'A shopkeeper sells rice at cost price but uses a false weight of {x} g for a kilogram. What is his gain percent?',
-      'A grocer uses a weight of {x} g in place of a 1 kg weight and sells at cost price. What percentage does he gain?',
       'A dishonest dealer claims to sell pulses at cost price but gives only {x} g for every kilogram. Find his profit percentage.',
       { t: 'A milkman sells milk at the cost price of pure milk but mixes {w} litres of water with every {m} litres of milk. What is his gain percent?', kind: 'water' },
+    ],
+  }),
+])
+
+// ---- Speed, time and distance --------------------------------------------------
+const kmh2ms = (v) => (v * 5) / 18
+fam('ga.speed-time.distance-speed-time', 'ga.speed-time', [
+  mode({ // speed
+    d: 1, u: 'km/h',
+    gen(tp) {
+      const s = (tp.ss ?? 5) * ri(...(tp.sr ?? [4, 18])); const t = ri(...(tp.tr ?? [2, 8])); const d = s * t
+      return { v: { d, t }, ans: s, wrong: [d * t, s + 10, (d / t) * 2, s - 5], exp: `Speed = distance/time = ${d}/${t} = ${s} km/h.` }
+    },
+    T: [
+      { t: 'A car covers {d} km in {t} hours. What is its average speed?' },
+      { t: 'A cyclist rides {d} km in {t} hours. At what average speed is he riding?', sr: [3, 5] },
+      { t: 'A bus leaves one city and reaches another, {d} km away, {t} hours later. What is its average speed?', sr: [8, 14] },
+      { t: 'A delivery rider covers {d} km in {t} hours on a motorway. At what average speed was he riding?', sr: [8, 16] },
+    ],
+  }),
+  mode({ // distance
+    d: 1, u: 'km',
+    gen(tp) {
+      const s = (tp.ss ?? 5) * ri(...(tp.sr ?? [4, 18])); const t = pick(tp.ts ?? [2, 3, 4, 5, 1.5, 2.5]); const d = s * t; if (!isInt(d)) return null
+      return { v: { s, t }, ans: d, wrong: [s + t, d / 2, s * (t + 1), s / t], exp: `Distance = speed × time = ${s} × ${fmtNum(t)} = ${fmtNum(d)} km.` }
+    },
+    T: [
+      { t: 'A train runs at {s} km/h. How far does it travel in {t} hours?', sr: [10, 24] },
+      { t: 'A motorcyclist rides at {s} km/h for {t} hours. How much distance does he cover?', sr: [8, 14] },
+      { t: 'A ship sails at {s} km/h. What distance does it cover in {t} hours?', sr: [4, 8] },
+      { t: 'Walking steadily at {s} km/h, how far will {A} go in {t} hours?', ss: 1, sr: [4, 6] },
+    ],
+  }),
+  mode({ // time
+    d: 1, u: 'hours',
+    gen(tp) {
+      const s = (tp.ss ?? 10) * ri(...(tp.sr ?? [4, 12])); const t = pick([2, 3, 4, 5, 6, 1.5, 2.5, 3.5]); const d = s * t; if (!isInt(d)) return null
+      return { v: { d, s }, ans: t, wrong: [s / d < 1 ? null : s / d, t + 1, t * 2, t - 0.5], exp: `Time = distance/speed = ${d}/${s} = ${fmtNum(t)} hours.` }
+    },
+    T: [
+      { t: 'How long will a truck take to cover {d} km at {s} km/h?' },
+      { t: 'A plane flies {d} km at {s} km/h. How many hours does the flight take?', ss: 50, sr: [8, 16] },
+      { t: 'At a steady {s} km/h, how many hours does a van need to travel {d} km?' },
+      { t: 'Travelling at {s} km/h, how long will a coach take for a journey of {d} km?', sr: [6, 10] },
+    ],
+  }),
+  mode({ // speed in km/h, time in minutes
+    d: 2, u: 'km',
+    gen(tp) {
+      const s = ri(...(tp.sr ?? [3, 72])); const m = pick([10, 15, 20, 24, 30, 36, 40, 45, 48, 50]); const d = (s * m) / 60; if (!isInt(d * 2)) return null
+      return { v: { s, m }, ans: d, wrong: [(s * m) / 100, s * m / 6, d * 2, (s * 60) / m], exp: `${m} minutes = ${m}/60 hour; distance = ${s} × ${m}/60 = ${fmtNum(d)} km.` }
+    },
+    T: [{ t: 'A man walks at {s} km/h. How far does he walk in {m} minutes?', sr: [3, 6] }, { t: 'A rickshaw moves at a steady {s} km/h. What distance does it cover in {m} minutes?', sr: [15, 40] }],
+  }),
+  mode({ // two legs, total time
+    d: 2, u: 'hours',
+    gen(tp) {
+      const s1 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 10])); const s2 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 10])); const t1 = pick([2, 3, 0.5, 1.5]); const t2 = pick([2, 3, 0.5, 1.5])
+      const d1 = s1 * t1; const d2 = s2 * t2; if (!isInt(d1) || !isInt(d2) || s1 === s2) return null
+      return { v: { d1, d2, s1, s2 }, ans: t1 + t2, wrong: [(d1 + d2) / ((s1 + s2) / 2), t1 * t2 === t1 + t2 ? null : t1 * t2 || null, t1 + t2 + 1, Math.abs(t1 - t2) || null], exp: `Time = ${d1}/${s1} + ${d2}/${s2} = ${fmtNum(t1)} + ${fmtNum(t2)} = ${fmtNum(t1 + t2)} hours.` }
+    },
+    T: [
+      { t: 'A car goes {d1} km at {s1} km/h and then {d2} km at {s2} km/h. What is the total travel time?' },
+      { t: 'A trekker walks {d1} km at {s1} km/h and then climbs {d2} km at {s2} km/h. How long does the trek take?', ss: 1, sr: [2, 6] },
+    ],
+  }),
+  mode({ // m/s
+    d: 1, u: 'm/s',
+    gen() {
+      const v = ri(4, 10); const t = pick([10, 12, 15, 20, 25, 50]); const d = v * t
+      return { v: { d, t }, ans: v, wrong: [d * t, (v * 18) / 5, v + 2, d / 10], exp: `Speed = ${d} m ÷ ${t} s = ${v} m/s.` }
+    },
+    T: ['A sprinter runs {d} m in {t} seconds. What is his speed in metres per second?'],
+  }),
+])
+
+fam('ga.speed-time.unit-conversion', 'ga.speed-time', [
+  mode({ // km/h → m/s
+    d: 1, u: 'm/s',
+    gen() {
+      const v = 18 * ri(1, 8); const ans = kmh2ms(v)
+      return { v: { v }, ans, wrong: [(v * 18) / 5, v / 10, (v * 1000) / 60 / 10, ans + 5], exp: `Multiply by 5/18: ${v} × 5/18 = ${ans} m/s.` }
+    },
+    T: [
+      'Express a speed of {v} km/h in metres per second.',
+      { t: 'A car moving at {v} km/h covers how many metres every second?§m' },
+      'The speed limit on a road is {v} km/h. What is this in m/s?',
+      'A cheetah can run at {v} km/h. What is its speed in metres per second?',
+    ],
+  }),
+  mode({ // m/s → km/h
+    d: 1, u: 'km/h',
+    gen() {
+      const v = 5 * ri(1, 8); const ans = (v * 18) / 5
+      return { v: { v }, ans, wrong: [(v * 5) / 18 * 18 === v * 5 ? v * 10 : v * 10, v * 60, ans / 2, ans + 18].map((x) => (isInt(x) ? x : null)), exp: `Multiply by 18/5: ${v} × 18/5 = ${ans} km/h.` }
+    },
+    T: [
+      'Convert a speed of {v} m/s into km/h.',
+      'A bird flies at {v} metres per second. What is its speed in kilometres per hour?',
+      'An athlete runs at {v} m/s. Express this speed in km/h.',
+    ],
+  }),
+  mode({ // m/min → km/h
+    d: 2, u: 'km/h',
+    gen() {
+      const v = 50 * ri(1, 10); const ans = (v * 60) / 1000; if (!isInt(ans * 10)) return null
+      return { v: { v }, ans, wrong: [v / 60, (v * 60) / 100, v / 10, ans * 2], exp: `${v} m per minute = ${v} × 60 = ${v * 60} m per hour = ${fmtNum(ans)} km/h.` }
+    },
+    T: ['A man walks {v} metres every minute. What is his speed in km/h?'],
+  }),
+])
+
+fam('ga.speed-time.train-passes-point', 'ga.speed-time', [
+  mode({ // speed from length and time
+    d: 1, u: 'km/h',
+    gen() {
+      const vs = 5 * ri(2, 8); const t = ri(4, 20); const L = vs * t; if (L < 60 || L > 600) return null
+      return { v: { L, t }, ans: (vs * 18) / 5, wrong: [vs, (vs * 18) / 5 + 18, L / t / 10 * 18 === (vs * 18) / 5 ? null : (L * 18) / (t * 10), (vs * 18) / 5 - 18], exp: `Speed = ${L}/${t} = ${vs} m/s = ${vs} × 18/5 = ${(vs * 18) / 5} km/h (a pole has no length).` }
+    },
+    T: [
+      'A train {L} m long passes an electric pole in {t} seconds. What is its speed in km/h?',
+      'A {L}-metre train crosses a signal post in {t} seconds. Find its speed in km/h.',
+      'A train of length {L} m goes past a man standing on the platform in {t} seconds. How fast is the train moving in km/h?',
+    ],
+  }),
+  mode({ // time
+    d: 2, u: 'seconds',
+    gen() {
+      const v = 18 * ri(2, 6); const vs = kmh2ms(v); const t = ri(4, 20); const L = vs * t; if (L < 60 || L > 600) return null
+      return { v: { L, v }, ans: t, wrong: [L / v, (L * 18) / (5 * v) === t ? t + 2 : (L * 18) / (5 * v), t * 2, t + 5].map((x) => (isInt(x) ? x : null)), exp: `${v} km/h = ${vs} m/s; time = ${L}/${vs} = ${t} seconds.` }
+    },
+    T: [
+      'How long will a train {L} m long, running at {v} km/h, take to pass a telegraph pole?',
+      'A train {L} m long moves at {v} km/h. In how many seconds will it cross a tree beside the track?',
+      'A goods train of length {L} m travels at {v} km/h. How many seconds does it take to pass a signalman?',
+    ],
+  }),
+  mode({ // length
+    d: 2, u: 'm',
+    gen() {
+      const v = 18 * ri(2, 6); const vs = kmh2ms(v); const t = ri(4, 20); const L = vs * t
+      return { v: { v, t }, ans: L, wrong: [v * t, L / 2, L + vs, (v * t * 18) / 5 > 2000 ? null : (v * t * 18) / 5], exp: `${v} km/h = ${vs} m/s; length = ${vs} × ${t} = ${L} m.` }
+    },
+    T: ['A train running at {v} km/h crosses a pole in {t} seconds. What is the length of the train?', 'An express train at {v} km/h passes a lamp post in {t} seconds. How long is the train?'],
+  }),
+  mode({ // moving person
+    d: 2,
+    gen(tp) {
+      const v = 18 * ri(2, 5); const w = pick([3, 6, 9, 18]); const rel = tp.same ? v - w : v + w; const rs = kmh2ms(rel); if (!isInt(rs)) return null
+      const t = ri(6, 20); const L = rs * t; if (L < 80 || L > 500) return null
+      if (tp.ask === 'L') return { u: 'm', v: { v, w, t }, ans: L, wrong: [kmh2ms(v) * t, kmh2ms(tp.same ? v + w : v - w) * t, L + 20, (rel * t)], exp: `Relative speed = ${v} ${tp.same ? '−' : '+'} ${w} = ${rel} km/h = ${rs} m/s; length = ${rs} × ${t} = ${L} m.` }
+      if (tp.ask === 't') return { u: 'seconds', v: { v, w, L }, ans: t, wrong: [L / kmh2ms(v), L / kmh2ms(tp.same ? v + w : v - w), t + 3, t - 2].map((x) => (isInt(x) && x > 0 ? x : null)), exp: `Relative speed = ${v} ${tp.same ? '−' : '+'} ${w} = ${rel} km/h = ${rs} m/s; time = ${L}/${rs} = ${t} s.` }
+      return { u: 'km/h', v: { w, t, L }, ans: v, wrong: [rel, tp.same ? rel - w : v + 2 * w, v + 9, (L / t) * 3.6 === v ? null : (L / t) * 3.6], exp: `Relative speed = ${L}/${t} = ${rs} m/s = ${rel} km/h; train speed = ${rel} ${tp.same ? '+' : '−'} ${w} = ${v} km/h.` }
+    },
+    T: [
+      { t: 'A train {L} m long passes a man walking at {w} km/h in the same direction in {t} seconds. What is the speed of the train?', same: true, ask: 'v', d: 3 },
+      { t: 'A train running at {v} km/h passes a man walking at {w} km/h in the opposite direction in {t} seconds. What is the length of the train?', ask: 'L' },
+      { t: 'A cyclist rides at {w} km/h beside a railway line. A train going the same way at {v} km/h takes {t} seconds to pass him. How long is the train?', same: true, ask: 'L' },
+      { t: 'How long does a {L} m train running at {v} km/h take to pass a man jogging towards it at {w} km/h?', ask: 't' },
+    ],
+  }),
+])
+
+fam('ga.speed-time.train-platform', 'ga.speed-time', [
+  mode({ // speed
+    d: 2, u: 'km/h',
+    gen() {
+      const vs = 5 * ri(2, 8); const t = ri(8, 40); const tot = vs * t; const L = mult(10, 60, tot - 40); if (!L || tot > 1200) return null
+      const P = tot - L
+      return { v: { L, P, t }, ans: (vs * 18) / 5, wrong: [((L * 18) / 5 / t) % 1 === 0 ? (L * 18) / 5 / t : null, vs, ((P * 18) / 5 / t) % 1 === 0 ? (P * 18) / 5 / t : null, (vs * 18) / 5 + 18], exp: `Distance = ${L} + ${P} = ${tot} m; speed = ${tot}/${t} = ${vs} m/s = ${(vs * 18) / 5} km/h.` }
+    },
+    T: [
+      'A {L} m long train clears a {P} m platform in {t} seconds. Find its speed in km/h.',
+      'A train {L} m long crosses a bridge {P} m long in {t} seconds. What is the speed of the train in km/h?',
+      'A goods train {L} m long takes {t} seconds to go completely through a tunnel {P} m long. How fast is it going in km/h?',
+    ],
+  }),
+  mode({ // time
+    d: 2, u: 'seconds',
+    gen() {
+      const v = 18 * ri(2, 6); const vs = kmh2ms(v); const t = ri(10, 50); const tot = vs * t; const L = mult(10, 80, tot - 50); if (!L) return null
+      const P = tot - L
+      return { v: { L, P, v }, ans: t, wrong: [L / vs, P / vs, tot / v, t + 5].map((x) => (isInt(x) ? x : null)), exp: `Distance = ${L} + ${P} = ${tot} m; ${v} km/h = ${vs} m/s; time = ${tot}/${vs} = ${t} s.` }
+    },
+    T: [
+      'How many seconds will a {L} m train running at {v} km/h take to cross a platform {P} m long?',
+      'A train {L} m long, moving at {v} km/h, has to cross a bridge of length {P} m. How long will it take?',
+      'At {v} km/h, how long does a train of length {L} m take to pass completely over a {P} m viaduct?',
+    ],
+  }),
+  mode({ // platform or train length
+    d: 3, u: 'm',
+    gen(tp) {
+      const v = 18 * ri(2, 6); const vs = kmh2ms(v); const t = ri(10, 50); const tot = vs * t; const L = mult(10, 80, tot - 50); if (!L) return null
+      const P = tot - L; const ans = tp.ask === 'L' ? L : P
+      return { v: { L, P, v, t }, ans, wrong: [tot, v * t - (tp.ask === 'L' ? P : L) > 0 ? v * t - (tp.ask === 'L' ? P : L) : null, tp.ask === 'L' ? P : L, ans + vs], exp: `${v} km/h = ${vs} m/s; distance in ${t} s = ${tot} m = train + ${tp.ask === 'L' ? 'bridge' : 'platform'}; so the answer is ${tot} − ${tp.ask === 'L' ? P : L} = ${ans} m.` }
+    },
+    T: [
+      'A train {L} m long running at {v} km/h crosses a platform in {t} seconds. What is the length of the platform?',
+      'A {L} m long train at {v} km/h takes {t} seconds to cross a bridge. How long is the bridge?',
+      'Travelling at {v} km/h, a {L}-metre train passes through a tunnel in {t} seconds. Find the length of the tunnel.',
+      { t: 'A train running at {v} km/h crosses a {P} m platform in {t} seconds. How long is the train?', ask: 'L', d: 2 },
+      { t: 'A train crosses a bridge {P} m long in {t} seconds at a speed of {v} km/h. Find the length of the train.', ask: 'L', d: 2 },
+    ],
+  }),
+  mode({ // pole and platform
+    d: 3,
+    gen(tp) {
+      const vs = 5 * ri(2, 6); const t1 = ri(5, 15); const L = vs * t1; const t2 = t1 + ri(4, 25); const P = vs * (t2 - t1)
+      if (tp.ask === 'v') return { u: 'km/h', v: { t1, t2, P }, ans: (vs * 18) / 5, wrong: [vs, (P * 18) / 5 / t2 % 1 === 0 ? (P * 18) / 5 / t2 : null, (vs * 18) / 5 + 18, (vs * 18) / 5 - 18], exp: `The extra ${t2 - t1} s are spent covering the ${P} m platform: speed = ${P}/${t2 - t1} = ${vs} m/s = ${(vs * 18) / 5} km/h.` }
+      return { u: 'm', v: { t1, t2, P }, ans: L, wrong: [P, (P * t1) / t2 % 1 === 0 ? (P * t1) / t2 : null, L + vs, P - L > 0 ? P - L : null], exp: `The extra ${t2 - t1} s cover the ${P} m platform, so speed = ${vs} m/s; train length = ${vs} × ${t1} = ${L} m.` }
+    },
+    T: [
+      'A train passes a pole in {t1} seconds and a platform {P} m long in {t2} seconds. What is the length of the train?',
+      { t: 'A train takes {t1} seconds to pass a signal and {t2} seconds to cross a bridge {P} m long. What is its speed in km/h?', ask: 'v' },
+      'A train crosses a man standing on a platform in {t1} seconds and the {P} m platform itself in {t2} seconds. What is the length of the train?',
+    ],
+  }),
+])
+
+fam('ga.speed-time.relative-motion', 'ga.speed-time', [
+  mode({ // towards: meeting time
+    d: 2, u: 'hours',
+    gen(tp) {
+      const s1 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const s2 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const t = pick([1, 2, 3, 4, 1.5, 2.5]); const D = (s1 + s2) * t
+      if (!isInt(D) || s1 === s2) return null
+      return { v: { s1, s2, D }, ans: t, wrong: [D / Math.abs(s1 - s2) > 20 ? null : D / Math.abs(s1 - s2), t * 2, D / s1 === t ? null : D / Math.max(s1, s2), t + 1], exp: `Moving towards each other, the gap closes at ${s1} + ${s2} = ${s1 + s2} km/h; time = ${D}/${s1 + s2} = ${fmtNum(t)} hours.` }
+    },
+    T: [
+      'Two cars start at the same time from towns {D} km apart and drive towards each other at {s1} km/h and {s2} km/h. After how many hours will they meet?',
+      'Two buses leave two cities {D} km apart at 8 a.m. and travel towards each other at {s1} km/h and {s2} km/h. How many hours after 8 a.m. do they meet?',
+      { t: 'Two cyclists {D} km apart ride towards each other at {s1} km/h and {s2} km/h. In how many hours will they meet?', ss: 2, sr: [5, 12] },
+    ],
+  }),
+  mode({ // meeting point distance
+    d: 2, u: 'km',
+    gen(tp) {
+      const s1 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const s2 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const t = pick([1, 2, 3, 4]); const D = (s1 + s2) * t
+      if (s1 === s2) return null
+      return { v: { s1, s2, D }, ans: s1 * t, wrong: [s2 * t, D / 2, D - s1, (s1 + s2) / 2 * t === s1 * t ? null : Math.abs(s1 - s2) * t], exp: `They meet after ${D}/${s1 + s2} = ${t} h; the first covers ${s1} × ${t} = ${s1 * t} km.` }
+    },
+    T: [
+      'Two trains start from stations {D} km apart and run towards each other at {s1} km/h and {s2} km/h. How far from the first station will they meet?',
+      { t: '{A} and {B} set off towards each other from points {D} km apart, walking at {s1} km/h and {s2} km/h. How far will {A} have walked when they meet?', ss: 1, sr: [3, 7] },
+    ],
+  }),
+  mode({ // catch-up
+    d: 2, u: 'seconds',
+    gen() {
+      const s2 = ri(3, 7); const s1 = s2 + ri(1, 3); const t = ri(10, 60); const D = (s1 - s2) * t
+      return { v: { s1, s2, D }, ans: t, wrong: [D / s1 % 1 === 0 ? D / s1 : null, D / (s1 + s2) % 1 === 0 ? D / (s1 + s2) : null, t * 2, t + 10], exp: `The gap closes at ${s1} − ${s2} = ${s1 - s2} m/s; time = ${D}/${s1 - s2} = ${t} s.` }
+    },
+    T: [
+      'A policeman spots a thief {D} m ahead of him. The thief runs at {s2} m/s and the policeman at {s1} m/s. In how many seconds will the thief be caught?',
+      'Two runners on a straight road are {D} m apart and run in the same direction, the faster one behind, at {s1} m/s and {s2} m/s. How long before the faster one draws level?',
+    ],
+  }),
+  mode({ // later start overtakes
+    d: 3, u: 'hours',
+    gen() {
+      const s2 = 10 * ri(3, 6); const s1 = s2 + 10 * ri(1, 3); const h = pick([1, 2, 3]); const t = (s2 * h) / (s1 - s2); if (!isInt(t * 2)) return null
+      return { v: { s1, s2, h }, ans: t, wrong: [t + h, (s2 * h) / s1 % 1 === 0 ? (s2 * h) / s1 : null, h, t * 2], exp: `Head start = ${s2} × ${h} = ${s2 * h} km, closed at ${s1} − ${s2} = ${s1 - s2} km/h: ${s2 * h}/${s1 - s2} = ${fmtNum(t)} hours after the second car starts.` }
+    },
+    T: ['A car leaves a town at {s2} km/h. {h} hours later a second car sets out from the same place along the same road at {s1} km/h. How long after starting will the second car overtake the first?'],
+  }),
+  mode({ // two trains crossing
+    d: 3,
+    gen(tp) {
+      const v1 = 18 * ri(2, 5); const v2 = 18 * ri(1, 4); if (v1 === v2) return null
+      const rel = tp.same ? v1 - v2 : v1 + v2; const rs = kmh2ms(rel); if (rs <= 0) return null
+      const t = ri(6, 30); const tot = rs * t; const L1 = mult(10, 60, tot - 60); if (!L1) return null
+      const L2 = tot - L1
+      if (tp.ask === 'L2') return { u: 'm', v: { v1, v2, t, L1 }, ans: L2, wrong: [tot, kmh2ms(tp.same ? v1 + v2 : Math.abs(v1 - v2)) * t - L1 > 0 ? kmh2ms(tp.same ? v1 + v2 : Math.abs(v1 - v2)) * t - L1 : null, L1, L2 + rs], exp: `Relative speed = ${v1} + ${v2} = ${rel} km/h = ${rs} m/s; together they cover ${rs} × ${t} = ${tot} m, so the other train is ${tot} − ${L1} = ${L2} m.` }
+      return { u: 'seconds', v: { v1, v2, L1, L2 }, ans: t, wrong: [tot / kmh2ms(tp.same ? v1 + v2 : Math.abs(v1 - v2)), L1 / rs, t + 4, (tot / rel)].map((x) => (isInt(x) && x > 0 ? x : null)), exp: `Relative speed = ${v1} ${tp.same ? '−' : '+'} ${v2} = ${rel} km/h = ${rs} m/s; distance = ${L1} + ${L2} = ${tot} m; time = ${t} s.` }
+    },
+    T: [
+      'Two trains {L1} m and {L2} m long run on parallel tracks in opposite directions at {v1} km/h and {v2} km/h. How long do they take to cross each other completely?',
+      { t: 'Two trains of lengths {L1} m and {L2} m are moving in the same direction on parallel tracks at {v1} km/h and {v2} km/h. How long will the faster train take to pass the slower one completely?', same: true },
+      { t: 'Two trains running in opposite directions at {v1} km/h and {v2} km/h cross each other in {t} seconds. If one train is {L1} m long, how long is the other?', ask: 'L2' },
+    ],
+  }),
+  mode({ // separation
+    d: 1, u: 'km',
+    gen(tp) {
+      const s1 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const s2 = (tp.ss ?? 10) * ri(...(tp.sr ?? [3, 9])); const t = pick([2, 3, 4, 5]); if (s1 === s2) return null
+      const ans = (tp.same ? Math.abs(s1 - s2) : s1 + s2) * t
+      return { v: { s1, s2, t }, ans, wrong: [(tp.same ? s1 + s2 : Math.abs(s1 - s2)) * t, s1 + s2, ans / 2, ans + 10], exp: `${tp.same ? 'Same direction: gap grows at ' + Math.abs(s1 - s2) : 'Opposite directions: gap grows at ' + (s1 + s2)} km/h; after ${t} h the distance is ${ans} km.` }
+    },
+    T: [
+      'Two cars leave the same petrol station at the same time and drive in opposite directions at {s1} km/h and {s2} km/h. How far apart are they after {t} hours?',
+      { t: 'Two boys start from the same point and cycle in the same direction at {s1} km/h and {s2} km/h. How far apart will they be after {t} hours?', same: true, ss: 1, sr: [8, 20] },
+    ],
+  }),
+])
+
+fam('ga.speed-time.average-speed', 'ga.speed-time', [
+  mode({ // equal distances
+    d: 2, u: 'km/h',
+    gen(tp) {
+      const a = (tp.ss ?? 5) * ri(...(tp.sr ?? [4, 16])); const b = (tp.ss ?? 5) * ri(...(tp.sr ?? [4, 16])); const v = (2 * a * b) / (a + b); if (!isInt(v) || a === b) return null
+      return { v: { a, b }, ans: v, wrong: [(a + b) / 2, a + b, v - 2, v + 5], exp: `For equal distances average speed = 2ab/(a + b) = 2 × ${a} × ${b}/${a + b} = ${v} km/h (not the simple mean ${fmtNum((a + b) / 2)}).` }
+    },
+    T: [
+      'A man drives to his office at {a} km/h and returns home by the same road at {b} km/h. What is his average speed for the whole journey?',
+      { t: 'A cyclist goes up a hill at {a} km/h and comes down the same road at {b} km/h. Find his average speed for the round trip.', ss: 1, sr: [4, 30] },
+      'A boat travels to an island at {a} km/h and comes back at {b} km/h. What is its average speed over the two trips?',
+      'A car covers the first half of a journey at {a} km/h and the second half at {b} km/h. What is its average speed for the journey?',
+      'A courier rides from Multan to a nearby village at {a} km/h and returns by the same route at {b} km/h. His average speed for the round trip is:',
+    ],
+  }),
+  mode({ // total distance / total time
+    d: 2, u: 'km/h',
+    gen() {
+      const s1 = 10 * ri(3, 10); const s2 = 10 * ri(3, 10); const t1 = ri(2, 5); const t2 = ri(2, 5); const v = (s1 * t1 + s2 * t2) / (t1 + t2); if (!isInt(v) || s1 === s2 || t1 === t2) return null
+      return { v: { s1, s2, t1, t2, d1: s1 * t1, d2: s2 * t2 }, ans: v, wrong: [(s1 + s2) / 2, (s1 * t2 + s2 * t1) / (t1 + t2), v + 5, s1 + s2].map((x) => (isInt(x) ? x : null)), exp: `Total distance = ${s1 * t1} + ${s2 * t2} = ${s1 * t1 + s2 * t2} km in ${t1 + t2} h; average speed = ${v} km/h.` }
+    },
+    T: [
+      'A bus travels {d1} km in {t1} hours and then {d2} km in {t2} hours. What is its average speed for the whole journey?',
+      'A train runs at {s1} km/h for {t1} hours and then at {s2} km/h for {t2} hours. What is its average speed?',
+      'A tractor moves along a road at {s1} km/h for {t1} hours and then along a motorway service lane at {s2} km/h for {t2} hours. What is its average speed?',
+    ],
+  }),
+  mode({ // return speed needed
+    d: 3, u: 'km/h',
+    gen() {
+      const a = 5 * ri(4, 16); const v = 5 * ri(4, 16); const b = (v * a) / (2 * a - v); if (!isInt(b) || b <= 0 || v === a || b > 150) return null
+      return { v: { a, v }, ans: b, wrong: [2 * v - a, v, (a + v) / 2, b + 10].map((x) => (x > 0 && isInt(x) ? x : null)), exp: `2ab/(a + b) = ${v} with a = ${a}: ${2 * a}b = ${v}(${a} + b) ⇒ b = ${v * a}/${2 * a - v} = ${b} km/h (not 2 × ${v} − ${a}).` }
+    },
+    T: [
+      'A man travels to a town at {a} km/h. At what speed must he return so that his average speed for the round trip is {v} km/h?',
+      'A van goes to a market at {a} km/h. How fast must it come back along the same road to average {v} km/h over the whole trip?',
+    ],
+  }),
+  mode({ // three equal distances
+    d: 3, u: 'km/h',
+    gen() {
+      const [a, b, c] = pick([[10, 20, 60], [20, 30, 60], [30, 60, 90], [12, 20, 30], [15, 30, 60], [20, 40, 80], [40, 60, 120], [30, 40, 60], [18, 30, 45]])
+      const v = 3 / (1 / a + 1 / b + 1 / c); if (!isInt(Math.round(v * 1e6) / 1e6)) return null
+      return { v: { a, b, c }, ans: r9(v), wrong: [(a + b + c) / 3, r9(v) + 5, a + b + c, r9(v) - 3].map((x) => (isInt(x) ? x : null)), exp: `Take each distance as ${a * b * c / gcd(gcd(a, b), c) / 1 > 0 ? 'D' : 'D'}: average speed = 3/(1/${a} + 1/${b} + 1/${c}) = ${fmtNum(r9(v))} km/h.` }
+    },
+    T: ['A person covers three equal distances at {a} km/h, {b} km/h and {c} km/h. What is his average speed for the whole distance?'],
+  }),
+  mode({ // distance-speed legs
+    d: 2, u: 'km/h',
+    gen() {
+      const s1 = 10 * ri(3, 9); const s2 = 10 * ri(3, 9); const t1 = pick([1, 2, 3]); const t2 = pick([1, 2, 3]); const d1 = s1 * t1; const d2 = s2 * t2; const v = (d1 + d2) / (t1 + t2)
+      if (!isInt(v) || s1 === s2) return null
+      return { v: { s1, s2, d1, d2 }, ans: v, wrong: [(s1 + s2) / 2, (2 * s1 * s2) / (s1 + s2), v + 5, v - 5].map((x) => (isInt(x) ? x : null)), exp: `Time = ${d1}/${s1} + ${d2}/${s2} = ${t1 + t2} h for ${d1 + d2} km; average speed = ${v} km/h.` }
+    },
+    T: ['A motorist covers {d1} km at {s1} km/h and the next {d2} km at {s2} km/h. What is his average speed over the whole distance?'],
+  }),
+])
+
+fam('ga.speed-time.race-lead', 'ga.speed-time', [
+  mode({ // beats by distance from times
+    d: 2, u: 'm',
+    gen(tp) {
+      const D = pick(tp.Ds ?? [100, 200, 400, 1000]); const ta = ri(Math.ceil(D / 9), Math.floor(D / 6)); const tb = ta + ri(1, Math.max(2, Math.floor(ta / 4))); const x = D - (D * ta) / tb; if (!isInt(x) || x <= 0) return null
+      return { v: { D, ta, tb }, ans: x, wrong: [(D * ta) / tb, tb - ta, (D * (tb - ta)) / ta % 1 === 0 ? (D * (tb - ta)) / ta : null, x + 5], exp: `In ${ta} s the slower runner covers ${D} × ${ta}/${tb} = ${fmtNum((D * ta) / tb)} m, so the winner leads by ${D} − ${fmtNum((D * ta) / tb)} = ${x} m.` }
+    },
+    T: [
+      'In a {D} m race, {A} finishes in {ta} seconds and {B} in {tb} seconds. By how many metres does {A} beat {B}?',
+      '{A} can run {D} m in {ta} s, and {B} can run the same distance in {tb} s. If they race over {D} m, by what distance does {A} win?',
+      'Two athletes run a {D} m race. One takes {ta} seconds and the other {tb} seconds. When the winner crosses the line, how far behind is the other?',
+    ],
+  }),
+  mode({ // loser's time or speed
+    d: 2,
+    gen(tp) {
+      const D = pick([100, 200, 400, 500, 1000]); const ta = ri(Math.ceil(D / 9), Math.floor(D / 5)); const x = pick([5, 10, 20, 25, 40, 50, 100]); if (x >= D / 5) return null
+      const vb = (D - x) / ta; const tb = D / vb; if (!isInt(tb)) return null
+      if (tp.ask === 'v') { if (decimals(vb) > 1) return null; return { u: 'm/s', v: { D, x, ta }, ans: vb, wrong: [D / ta, (D + x) / ta, x / ta, vb + 1].map((y) => (decimals(y) <= 1 ? y : null)), exp: `When the winner finishes in ${ta} s, the loser has run ${D - x} m; speed = ${D - x}/${ta} = ${fmtNum(vb)} m/s.` } }
+      return { u: 'seconds', v: { D, x, ta }, ans: tb, wrong: [ta + x, (ta * (D + x)) / D, (ta * D) / (D + x), tb + 5].map((y) => (isInt(y) ? y : null)), exp: `The loser runs ${D - x} m in ${ta} s, so the full ${D} m takes ${ta} × ${D}/${D - x} = ${tb} s.` }
+    },
+    T: [
+      { t: 'In a {D} m race, {A} beats {B} by {x} m. If {A} finishes in {ta} seconds, how long does {B} take to finish?' },
+      { t: '{A} beats {B} by {x} metres in a {D} m race and finishes in {ta} seconds. What is {B}’s speed?', ask: 'v' },
+      { t: 'A runner wins a {D} m race by {x} m, crossing the line in {ta} seconds. What is the loser’s time for the full distance?' },
+    ],
+  }),
+  mode({ // head start for dead heat
+    d: 2, u: 'm',
+    gen() {
+      const [p, q] = coprimePair(9); if (p <= q || 3 * q < 2 * p) return null
+      const D = pick([100, 200, 400, 500, 1000]); const st = (D * (p - q)) / p; if (!isInt(st)) return null
+      return { v: { p, q, D }, ans: st, wrong: [(D * (p - q)) / q % 1 === 0 ? (D * (p - q)) / q : null, (D * q) / p, st * 2, st + 10], exp: `While the faster runs ${D} m, the slower runs ${D} × ${q}/${p} = ${(D * q) / p} m; start needed = ${st} m.` }
+    },
+    T: [
+      '{A} runs faster than {B}, their speeds being in the ratio {p}:{q}. How many metres of start should {A} give {B} in a {D} m race so that they finish together?',
+      'The speeds of two swimmers are in the ratio {p}:{q}. In a {D} m race, how much of a head start must the faster give the slower for a dead heat?',
+    ],
+  }),
+  mode({ // beats by x m or t s
+    d: 2, u: 'seconds',
+    gen() {
+      const D = pick([100, 200, 400, 1000]); const x = pick([5, 10, 20, 25, 40, 50]); const t = ri(1, 10); const tb = (D * t) / x; const ta = tb - t; if (!isInt(tb) || ta < D / 9 || ta > D / 4) return null
+      return { v: { D, x, t }, ans: ta, wrong: [tb, ta - t, (D / x) * t / 2 === ta ? null : (D / x) * t / 2, ta + 2 * t].map((y) => (isInt(y) && y > 0 ? y : null)), exp: `The loser runs ${x} m in ${t} s, so he takes ${D} × ${t}/${x} = ${tb} s for the race; the winner takes ${tb} − ${t} = ${ta} s.` }
+    },
+    T: [
+      'In a {D} m race, {A} beats {B} by {x} m or {t} seconds. How long does {A} take to run the race?',
+      'A runner beats another by {x} metres or {t} seconds in a {D} m race. What is the winner’s time?',
+    ],
+  }),
+  mode({ // three runners
+    d: 3, u: 'm',
+    gen() {
+      const D = pick([100, 200, 500, 1000]); const x = pick([5, 10, 20, 25, 40, 50]); const y = pick([5, 10, 20, 25, 40, 50]); const z = D - ((D - x) * (D - y)) / D
+      if (!isInt(z * 2) || x >= D / 4 || y >= D / 4) return null
+      return { v: { D, x, y }, ans: z, wrong: [x + y, Math.abs(x - y) || null, x + y + 2, z + 5], exp: `When P finishes, Q has run ${D - x} m; R runs ${(D - y)}/${D} of that = ${fmtNum(((D - x) * (D - y)) / D)} m, so P beats R by ${fmtNum(z)} m (slightly less than ${x} + ${y}).` }
+    },
+    T: [
+      'In a {D} m race, {A} beats {B} by {x} m, and {B} beats {C} by {y} m. By how many metres does {A} beat {C}?',
+      'Over {D} m, P beats Q by {x} m and Q beats R by {y} m. By what distance would P beat R over the same course?',
+    ],
+  }),
+])
+
+fam('ga.speed-time.late-and-early', 'ga.speed-time', [
+  mode({ // late at s1, early at s2
+    d: 3, u: 'km',
+    gen(tp) {
+      const st = tp.st ?? 1; const s1 = st * ri(...(tp.sr ?? [3, 12])); const s2 = s1 + st * ri(1, 6); const t1 = pick([5, 6, 10, 12, 15, 20]); const t2 = pick([5, 6, 10, 12, 15])
+      const D = (s1 * s2 * (t1 + t2)) / 60 / (s2 - s1); if (!isInt(D * 2) || D <= 0 || D > (tp.dmax ?? 30)) return null
+      return { v: { s1, s2, t1, t2 }, ans: D, wrong: [(s1 * s2 * Math.abs(t1 - t2)) / 60 / (s2 - s1) || null, (s1 * s2 * (t1 + t2)) / (s2 - s1) / 100, D * 2, D + 1].map((x) => (x && isInt(x * 2) ? x : null)), exp: `The two times differ by ${t1 + t2} min = ${fmtNum((t1 + t2) / 60)} h: D/${s1} − D/${s2} = ${fmtNum((t1 + t2) / 60)} ⇒ D = ${fmtNum(D)} km.` }
+    },
+    T: [
+      'Walking at {s1} km/h, a student reaches school {t1} minutes late. At {s2} km/h he reaches {t2} minutes early. How far is the school from his home?',
+      { t: 'If a man cycles at {s1} km/h he is {t1} minutes late for work, but at {s2} km/h he is {t2} minutes early. What distance does he cycle to work?', sr: [8, 20], dmax: 40 },
+      { t: 'A bus running at {s1} km/h arrives {t1} minutes late; at {s2} km/h it would arrive {t2} minutes early. What is the length of the route?', sr: [6, 12], st: 5, dmax: 150 },
+      { t: 'Driving at {s1} km/h, {M1} misses a train by {t1} minutes. Had he driven at {s2} km/h, he would have reached the station {t2} minutes before the train left. How far is the station?', sr: [4, 10], st: 5, dmax: 80 },
+    ],
+  }),
+  mode({ // late at s1, on time at s2
+    d: 3, u: 'km',
+    gen(tp) {
+      const st = tp.st ?? 1; const s1 = st * ri(...(tp.sr ?? [3, 10])); const s2 = s1 + st * ri(1, 6); const t1 = pick([5, 6, 10, 12, 15, 20, 30])
+      const D = (s1 * s2 * t1) / 60 / (s2 - s1); if (!isInt(D * 2) || D > (tp.dmax ?? 20)) return null
+      return { v: { s1, s2, t1 }, ans: D, wrong: [(s1 * t1) / 60 % 0.5 === 0 ? (s1 * t1) / 60 : null, D * 2, D + 1, (s2 * t1) / 60 % 0.5 === 0 ? (s2 * t1) / 60 : null], exp: `D/${s1} − D/${s2} = ${t1}/60 h ⇒ D = ${s1} × ${s2} × ${t1}/(60 × ${s2 - s1}) = ${fmtNum(D)} km.` }
+    },
+    T: [
+      'A clerk walking at {s1} km/h reaches his office {t1} minutes late. If he walks at {s2} km/h he arrives exactly on time. How far is his office?',
+      { t: 'A van travelling at {s1} km/h reaches a village {t1} minutes late. At {s2} km/h it would have been on time. What is the distance to the village?', sr: [6, 12], st: 5, dmax: 120 },
+    ],
+  }),
+  mode({ // reduced speed
+    d: 3, u: 'minutes',
+    gen() {
+      const [p, q] = pick([[2, 3], [3, 4], [4, 5], [5, 6], [3, 5], [5, 7], [6, 7], [7, 8]])
+      const T = ri(10, 120); const t = (T * (q - p)) / p; if (!isInt(t) || t > 60) return null
+      return { v: { p, q, t }, ans: T, wrong: [(t * q) / (q - p) % 1 === 0 ? (t * q) / (q - p) : null, (t * p) / q % 1 === 0 ? (t * p) / q : null, T + t, t].map((x) => (x && x !== T ? x : null)), exp: `At ${p}/${q} of the speed the time is ${q}/${p} of usual, i.e. ${q - p}/${p} of the usual time extra = ${t} min, so the usual time = ${t} × ${p}/${q - p} = ${T} min.` }
+    },
+    T: [
+      'Walking at {p}/{q} of his usual speed, a man is {t} minutes late. What is his usual time for the journey?',
+      'A train running at {p}/{q} of its normal speed reaches its destination {t} minutes late. How long does the journey normally take?',
+      'By cycling at {p}/{q} of her usual speed, a girl reaches college {t} minutes late. How long does she usually take?',
+      'A car moving at {p}/{q} of its usual speed takes {t} minutes longer than usual to cover a certain distance. What is its usual time for that distance?',
+    ],
+  }),
+])
+
+fam('ga.speed-time.boats-and-streams', 'ga.speed-time', [
+  mode({ // from down/up speeds (given directly)
+    d: 1, u: 'km/h',
+    gen(tp) {
+      const b = ri(5, 20); const c = ri(1, 5); if (c >= b) return null
+      const dn = b + c; const up = b - c; const ans = tp.ask === 'c' ? c : b
+      return { v: { dn, up }, ans, wrong: [tp.ask === 'c' ? b : c, dn - up, dn + up, ans + 1].map((x) => (x > 0 ? x : null)), exp: tp.ask === 'c' ? `Stream speed = (downstream − upstream)/2 = (${dn} − ${up})/2 = ${c} km/h.` : `Still-water speed = (downstream + upstream)/2 = (${dn} + ${up})/2 = ${b} km/h.` }
+    },
+    T: [
+      'The downstream speed of a boat is {dn} km/h and its upstream speed is {up} km/h. What is its speed in still water?',
+      { t: 'A launch travels at {dn} km/h downstream and {up} km/h upstream. What is the speed of the river’s current?', ask: 'c' },
+      'A swimmer moves at {dn} km/h with the current and {up} km/h against it. How fast would the swimmer move in still water?',
+    ],
+  }),
+  mode({ // speed with or against the current
+    d: 1, u: 'km/h',
+    gen(tp) {
+      const b = ri(6, 20); const c = ri(1, 5); const ans = tp.up ? b - c : b + c
+      return { v: { b, c }, ans, wrong: [tp.up ? b + c : b - c, b, (b + c) / 2 % 1 === 0 ? (b + c) / 2 : null, b * c], exp: `Against the current the speeds subtract: ${b} − ${c} = ${ans} km/h.` }
+    },
+    T: [{ t: 'A boat’s speed in still water is {b} km/h and the river flows at {c} km/h. What is the boat’s speed when it goes upstream?', up: true }],
+  }),
+  mode({ // from distances and times
+    d: 2, u: 'km/h',
+    gen(tp) {
+      const b = ri(5, 20); const c = ri(1, 5); if (c >= b) return null
+      const t1 = ri(2, 5); const t2 = ri(2, 5); const d1 = (b + c) * t1; const d2 = (b - c) * t2; const ans = tp.ask === 'c' ? c : b
+      return { v: { d1, d2, t1, t2 }, ans, wrong: [tp.ask === 'c' ? b : c, b + c, b - c, (d1 + d2) / (t1 + t2) === ans ? null : (d1 + d2) / (t1 + t2)].map((x) => (x > 0 && decimals(x) <= 1 ? x : null)), exp: `Downstream = ${d1}/${t1} = ${b + c} km/h, upstream = ${d2}/${t2} = ${b - c} km/h; ${tp.ask === 'c' ? `stream = (${b + c} − ${b - c})/2 = ${c}` : `still water = (${b + c} + ${b - c})/2 = ${b}`} km/h.` }
+    },
+    T: [
+      'A boat goes {d1} km downstream in {t1} hours and {d2} km upstream in {t2} hours. What is the speed of the boat in still water?',
+      { t: 'A man rows {d1} km with the current in {t1} hours and {d2} km against it in {t2} hours. Find the speed of the current.', ask: 'c' },
+    ],
+  }),
+  mode({ // time one way
+    d: 2, u: 'hours',
+    gen(tp) {
+      const b = ri(6, 20); const c = ri(1, 5); const rel = tp.up ? b - c : b + c; const t = pick([2, 3, 4, 5, 1.5, 2.5]); const D = rel * t; if (!isInt(D)) return null
+      return { v: { b, c, D }, ans: t, wrong: [D / b, D / (tp.up ? b + c : b - c), t + 1, t * 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `${tp.up ? 'Upstream' : 'Downstream'} speed = ${b} ${tp.up ? '−' : '+'} ${c} = ${rel} km/h; time = ${D}/${rel} = ${fmtNum(t)} hours.` }
+    },
+    T: [
+      'A boat whose speed in still water is {b} km/h goes {D} km downstream in a river flowing at {c} km/h. How long does it take?',
+      { t: 'A motorboat travels at {b} km/h in still water. How long will it take to go {D} km upstream against a current of {c} km/h?', up: true },
+    ],
+  }),
+  mode({ // round trip
+    d: 3,
+    gen(tp) {
+      const b = ri(4, 15); const c = ri(1, 4); if (c >= b) return null
+      if (tp.ask === 'D') { const T = ri(2, 12); const D = (T * (b * b - c * c)) / (2 * b); if (!isInt(D)) return null; return { u: 'km', v: { b, c, T }, ans: D, wrong: [(T * b) / 2, (T * (b + c)) / 2, D + 2, (T * (b - c)) / 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `D/${b + c} + D/${b - c} = ${T} ⇒ D × ${2 * b}/${b * b - c * c} = ${T} ⇒ D = ${D} km.` } }
+      const D = lcm(b + c, b - c) * ri(1, 3); const T = D / (b + c) + D / (b - c); if (D > 120) return null
+      return { u: 'hours', v: { b, c, D }, ans: T, wrong: [(2 * D) / b, D / (b + c), D / (b - c), T + 1].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Time = ${D}/${b + c} + ${D}/${b - c} = ${D / (b + c)} + ${D / (b - c)} = ${T} hours.` }
+    },
+    T: [
+      'A boat with a speed of {b} km/h in still water goes {D} km downstream and comes back. If the river flows at {c} km/h, how long does the round trip take?',
+      'A fisherman rows {D} km up a river and back again. He rows at {b} km/h in still water and the river flows at {c} km/h. What is the total time taken?',
+      { t: 'A boat moving at {b} km/h in still water takes {T} hours to go to a place and come back. If the current flows at {c} km/h, how far away is the place?', ask: 'D' },
+    ],
+  }),
+  mode({ // upstream takes k times as long
+    d: 2, u: 'km/h',
+    gen() {
+      const k = pick([2, 3]); const c = ri(1, 6); const b = (c * (k + 1)) / (k - 1)
+      return { v: { b, kw: TIMES[k] }, ans: c, wrong: [b / k, b / (k + 1) % 1 === 0 ? b / (k + 1) : null, c + 1, b - c], exp: `(${b} + c)/(${b} − c) = ${k} ⇒ ${b}(${k} − 1) = c(${k} + 1) ⇒ c = ${c} km/h.` }
+    },
+    T: [
+      'A man rows at {b} km/h in still water. It takes him {kw} as long to row upstream as to row the same distance downstream. What is the speed of the stream?',
+      'It takes a boat {kw} as long to go up a stretch of river as to come down it. If the boat’s still-water speed is {b} km/h, find the speed of the current.',
+    ],
+  }),
+])
+
+fam('ga.speed-time.work-rates', 'ga.speed-time', [
+  mode({ // time from rate
+    d: 1, u: 'minutes',
+    gen(tp) {
+      const r = (tp.rs ?? 5) * ri(...(tp.rr ?? [4, 20])); const t = ri(5, 60); const Q = r * t
+      return { v: { r, Q }, ans: t, wrong: [Q / (r * 2) % 1 === 0 ? Q / (r * 2) : null, t + 10, t * 2, (Q / 60) % 1 === 0 && Q / 60 !== t ? Q / 60 : null], exp: `Time = ${fmtNum(Q)}/${r} = ${t} minutes.` }
+    },
+    T: [
+      'A machine prints {r} pages per minute. How long will it take to print {Q} pages?',
+      { t: 'A typist types {r} words a minute. How long does she need to type a {Q}-word report?', rr: [6, 16] },
+      { t: 'A pump lifts {r} litres of water per minute. How long will it take to lift {Q} litres?', rs: 10 },
+    ],
+  }),
+  mode({ // quantity from rate
+    d: 1,
+    gen(tp) {
+      const r = (tp.rs ?? 10) * ri(...(tp.rr ?? [5, 60])); const h = ri(2, 12)
+      if (tp.leak) { const ml = pick([5, 10, 20, 25, 50]); const L = (ml * 60 * h) / 1000; if (!isInt(L * 10)) return null; return { u: 'litres', d: 2, v: { r: ml, h }, ans: L, wrong: [(ml * h) / 1000 * 100, ml * h, L * 10, L / 60 * 1000 === ml * h ? null : L * 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `${ml} ml × 60 × ${h} = ${ml * 60 * h} ml = ${fmtNum(L)} litres.` } }
+      return { u: tp.unit, v: { r, h }, ans: r * h, wrong: [r + h, r * (h + 1), r * h * 60, (r * h) / 2], exp: `${r} per hour × ${h} hours = ${fmtNum(r * h)}.` }
+    },
+    T: [
+      { t: 'A bottling plant fills {r} bottles an hour. How many bottles does it fill in {h} hours?', unit: 'bottles', rs: 100 },
+      { t: 'Water drips from a leaking tap at {r} ml per minute. How much water is wasted in {h} hours?', leak: true },
+    ],
+  }),
+  mode({ // two machines together
+    d: 2, u: 'hours',
+    gen() {
+      const r1 = 10 * ri(2, 12); const r2 = 10 * ri(2, 12); const t = pick([2, 3, 4, 5, 6, 8]); const Q = (r1 + r2) * t
+      return { v: { r1, r2, Q }, ans: t, wrong: [Q / r1 % 1 === 0 ? Q / r1 : null, Q / (r1 + r2) / 2 % 1 === 0 ? Q / (r1 + r2) / 2 : null, t + 1, t * 2], exp: `Combined rate = ${r1} + ${r2} = ${r1 + r2} per hour; time = ${Q}/${r1 + r2} = ${t} hours.` }
+    },
+    T: [
+      'One machine packs {r1} boxes an hour and another packs {r2}. Working together, how long will they take to pack {Q} boxes?',
+      'Two clerks can check {r1} and {r2} forms an hour respectively. How many hours will they take together to check {Q} forms?',
+    ],
+  }),
+  mode({ // fuel
+    d: 2,
+    gen(tp) {
+      const k = ri(8, 20); const L = ri(5, 40); const D = k * L; const pr = 5 * ri(50, 64)
+      if (tp.ask === 'L') return { u: 'litres', d: 1, v: { k, D }, ans: L, wrong: [D / 10, L + k, (D * k) / 100 % 1 === 0 ? (D * k) / 100 : null, L * 2], exp: `Litres = ${D}/${k} = ${L}.` }
+      return { u: 'rs', v: { k, D, pr }, ans: L * pr, wrong: [D * pr, (D / k) + pr, L * pr + pr, k * pr], exp: `Petrol needed = ${D}/${k} = ${L} litres; cost = ${L} × ${pr} = Rs ${fmtNum(L * pr)}.` }
+    },
+    T: [
+      'A car runs {k} km on a litre of petrol, and petrol costs Rs {pr} a litre. What is the fuel cost of a {D} km trip?',
+      { t: 'A motorcycle gives {k} km per litre of petrol. How many litres does it need for a {D} km journey?', ask: 'L' },
+    ],
+  }),
+])
+
+// ---- Work and time --------------------------------------------------------------
+const fl = (f) => (f instanceof Fr ? f : Fr.of(f)).toString()
+const fOpts = (ans, wrongs) => [ans, ...wrongs].filter((f) => f && f.val > 0).map((f) => ({ label: f.mixed(), val: r9(f.val) }))
+const together = (...xs) => xs.reduce((acc, x) => acc.add(fr(1, x)), fr(0)).div(1) // combined rate
+
+fam('ga.work-time.combined-rate', 'ga.work-time', [
+  mode({ // two workers together
+    d: 2,
+    gen(tp) {
+      const a = ri(2, 40); const b = ri(2, 40); if (a === b) return null
+      const t = fr(1).div(together(a, b)); if (!isInt(t.val * 2)) return null
+      return { v: { a, b }, ans: t.val, u: tp.u ?? 'days', wrong: [(a + b) / 2, a + b, Math.abs(a - b), t.val + 1], exp: `Together they do 1/${a} + 1/${b} = ${together(a, b).toString()} of the work per ${tp.unitWord ?? 'day'}, so they need ${fmtNum(t.val)} ${tp.unitWord ?? 'day'}s.` }
+    },
+    T: [
+      { t: '{A} can finish a job in {a} days and {B} can finish it in {b} days. How long will they take working together?', u: 'days' },
+      { t: 'A mason can build a wall in {a} days, and his son can build it in {b} days. Working together, in how many days can they build it?', u: 'days' },
+      { t: 'Two printers can complete a print run in {a} hours and {b} hours respectively. How long do they take if both run at once?', u: 'hours', unitWord: 'hour' },
+      { t: '{A} can paint a room in {a} hours; {B} takes {b} hours. How long will they take to paint it together?', u: 'hours', unitWord: 'hour' },
+      { t: 'A new harvester reaps a field in {a} hours and an older one in {b} hours. If both work together, how long will the field take?', u: 'hours', unitWord: 'hour' },
+      { t: 'Two clerks can clear a pile of files in {a} and {b} days respectively. How many days will they take together?', u: 'days' },
+      { t: 'A farmer can plough his land in {a} days, and his brother can do it in {b} days. Together they will plough it in:', u: 'days' },
+    ],
+  }),
+  mode({ // three together
+    d: 2,
+    gen(tp) {
+      const a = ri(2, 30); const b = ri(2, 30); const c = ri(2, 30); if (new Set([a, b, c]).size < 3) return null
+      const t = fr(1).div(together(a, b, c)); if (!isInt(t.val * 2)) return null
+      return { v: { a, b, c }, ans: t.val, u: tp.u, wrong: [(a + b + c) / 3, Math.min(a, b, c), a + b + c, t.val + 1].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Combined rate = 1/${a} + 1/${b} + 1/${c} = ${together(a, b, c).toString()}, so the time is ${fmtNum(t.val)}.` }
+    },
+    T: [
+      { t: '{A}, {B} and {C} can do a piece of work in {a}, {b} and {c} days respectively. In how many days can they finish it together?', u: 'days' },
+      { t: 'Three pumps can empty a flooded basement in {a}, {b} and {c} hours respectively. How long will they take working together?', u: 'hours' },
+      { t: 'Three workers can dig a trench in {a}, {b} and {c} days when working alone. How long will they take if all three work together?', u: 'days' },
+    ],
+  }),
+  mode({ // fraction done / left
+    d: 2,
+    gen(tp) {
+      const a = ri(3, 30); const b = ri(3, 30); const t = tp.t1 ? 1 : ri(2, 6); if (a === b) return null
+      const done = together(a, b).mul(t); if (done.val >= 1 || done.d > 30) return null
+      const ans = tp.left ? fr(1).sub(done) : done
+      return { v: { a, b, t }, opts: fOpts(ans, [tp.left ? done : fr(1).sub(done), fr(t, a + b), fr(t, a).add(tp.left ? 0 : fr(0)), fr(2 * t, a + b), fr(t * 2, a * b)]), exp: `In one ${tp.t1 ? 'hour' : 'day'} they do 1/${a} + 1/${b} = ${together(a, b).toString()}; in ${t} they do ${done.toString()}${tp.left ? `, leaving ${ans.toString()}` : ''}.` }
+    },
+    T: [
+      { t: '{A} can do a job in {a} days and {B} in {b} days. What fraction of the job do they complete in {t} days working together?' },
+      { t: 'Two men can repair a road in {a} and {b} days respectively. If they work together for {t} days, what part of the road is still left to repair?', left: true },
+      { t: 'Two girls can knit a sweater in {a} hours and {b} hours respectively. What part of the sweater do they finish in one hour working together?', t1: true, d: 1 },
+    ],
+  }),
+])
+
+fam('ga.work-time.workers-and-days', 'ga.work-time', [
+  mode({ // constant man-days
+    d: 1,
+    gen(tp) {
+      const m1 = ri(4, 40); const d1 = ri(4, 40); const m2 = ri(3, 40); const d2 = (m1 * d1) / m2; if (!isInt(d2) || m1 === m2 || d2 > 60 || d2 < 2) return null
+      return { v: { m1, d1, m2, d2 }, ans: tp.ask === 'm' ? m2 : d2, u: tp.ask === 'm' ? 'num' : tp.uw ?? 'days', wrong: tp.ask === 'm' ? [(m1 * d2) / d1, m1 + d1 - d2, m2 + 2, m1] : [(m2 * d1) / m1, d1 + m1 - m2, d1, d2 + 3], exp: `Work = ${m1} × ${d1} = ${m1 * d1} man-${tp.uw === 'hours' ? 'hours' : 'days'}; ${tp.ask === 'm' ? `${m1 * d1}/${d2} = ${m2} workers` : `${m1 * d1}/${m2} = ${d2}`}.` }
+    },
+    T: [
+      { t: '{m1} men can build a wall in {d1} days. How many days will {m2} men take to build the same wall?' },
+      { t: 'If {m1} labourers can harvest a field in {d1} days, how many labourers are needed to harvest it in {d2} days?', ask: 'm' },
+      { t: '{m1} workers finish a job in {d1} days. In how many days would {m2} workers finish it?' },
+      { t: 'A contractor needs {m1} men to complete a road in {d1} days. How many men would he need to finish it in {d2} days?', ask: 'm' },
+      { t: '{m1} tailors take {d1} days to stitch a school’s uniforms. How long will {m2} tailors take?' },
+      { t: 'It takes {m1} painters {d1} hours to paint a hall. How many painters are needed to paint it in {d2} hours?', ask: 'm', uw: 'hours' },
+    ],
+  }),
+  mode({ // with hours per day
+    d: 2,
+    gen(tp) {
+      const m1 = ri(4, 30); const h1 = ri(5, 10); const d1 = ri(4, 30); const m2 = ri(4, 30); const h2 = ri(5, 10); const d2 = ri(4, 30)
+      const W = m1 * h1 * d1
+      if (tp.ask === 'h') { const h = W / (m2 * d2); if (!isInt(h) || h > 12 || h < 4) return null; return { u: 'hours', v: { m1, h1, d1, m2, d2 }, ans: h, wrong: [(m2 * d2) / (m1 * d1) * h1 % 1 === 0 ? (m2 * d2) / (m1 * d1) * h1 : null, h1, h + 2, h - 1], exp: `Work = ${m1} × ${h1} × ${d1} = ${W} man-hours; hours per day = ${W}/(${m2} × ${d2}) = ${h}.` } }
+      const d = W / (m2 * h2); if (!isInt(d) || m1 === m2) return null
+      return { u: 'days', v: { m1, h1, d1, m2, h2 }, ans: d, wrong: [(m1 * d1) / m2 % 1 === 0 ? (m1 * d1) / m2 : null, (m2 * h2 * d1) / (m1 * h1) % 1 === 0 ? (m2 * h2 * d1) / (m1 * h1) : null, d + 2, d1], exp: `Work = ${m1} × ${h1} × ${d1} = ${W} man-hours; days = ${W}/(${m2} × ${h2}) = ${d}.` }
+    },
+    T: [
+      '{m1} men working {h1} hours a day complete a job in {d1} days. How many days will {m2} men working {h2} hours a day take to complete it?',
+      { t: 'A factory with {m1} workers working {h1} hours daily finishes an order in {d1} days. How many hours a day must {m2} workers work to finish the same order in {d2} days?', ask: 'h' },
+    ],
+  }),
+  mode({ // more or less work
+    d: 2,
+    gen(tp) {
+      const m1 = ri(3, 12); const d1 = ri(2, 10); const w1 = m1 * d1 * ri(1, 4); const m2 = ri(3, 20)
+      if (tp.ask === 'w') { const d2 = ri(2, 20); const w2 = (w1 * m2 * d2) / (m1 * d1); if (!isInt(w2) || w2 > 2000) return null; return { u: 'm', v: { m1, w1, d1, m2, d2 }, ans: w2, wrong: [(w1 * m2) / m1 % 1 === 0 ? (w1 * m2) / m1 : null, (w1 * d2) / d1 % 1 === 0 ? (w1 * d2) / d1 : null, w2 + w1, w2 * 2], exp: `One worker lays ${w1}/(${m1} × ${d1}) m a day; ${m2} workers in ${d2} days lay ${w2} m.` } }
+      const w2 = ri(5, 90); const d2 = (w2 * m1 * d1) / (w1 * m2); if (!isInt(d2) || d2 < 2 || m1 === m2) return null
+      return { u: 'days', v: { m1, w1, d1, m2, w2 }, ans: d2, wrong: [(w2 * d1) / w1 % 1 === 0 ? (w2 * d1) / w1 : null, (m1 * d1) / m2 % 1 === 0 ? (m1 * d1) / m2 : null, d2 + 2, d2 * 2], exp: `Days = ${w2} × ${m1} × ${d1}/(${w1} × ${m2}) = ${d2}.` }
+    },
+    T: [
+      '{m1} carpenters can make {w1} chairs in {d1} days. How many days will {m2} carpenters take to make {w2} chairs?',
+      { t: 'If {m1} workers can lay {w1} metres of pipe in {d1} days, how many metres can {m2} workers lay in {d2} days?', ask: 'w' },
+    ],
+  }),
+  mode({ // men join or leave midway
+    d: 3, u: 'days',
+    gen(tp) {
+      const m = ri(6, 40); const D = ri(10, 60); const t = ri(2, D - 3); const k = ri(2, Math.floor(m / 2)); const m2 = tp.leave ? m - k : m + k
+      const r = (m * (D - t)) / m2; if (!isInt(r)) return null
+      return { v: { m1: m, d1: D, t, k }, ans: r, wrong: [(m * D) / m2 % 1 === 0 ? (m * D) / m2 : null, D - t, (m * (D - t)) / (tp.leave ? m + k : m - k) % 1 === 0 ? (m * (D - t)) / (tp.leave ? m + k : m - k) : null, r + t], exp: `Work left = ${m} × ${D - t} = ${m * (D - t)} man-days; with ${m2} men it takes ${r} days.` }
+    },
+    T: [
+      '{m1} men undertake to finish a job in {d1} days. After {t} days, {k} more men join them. In how many more days will the job be completed?',
+      { t: 'A team of {m1} workers was to complete a building in {d1} days. After {t} days, {k} workers left. How many more days will the rest take to finish the building?', leave: true },
+    ],
+  }),
+])
+
+fam('ga.work-time.mixed-workforce', 'ga.work-time', [
+  mode({ // 1 man = r women
+    d: 3, u: 'days',
+    gen(tp) {
+      const r = pick([2, 3]); const m = ri(2, 16); const w = ri(2, 16); const dd = ri(4, 30); const units = (m * r + w) * dd
+      const m2 = ri(2, 12); const w2 = tp.menOnly ? 0 : ri(2, 12); const rate = m2 * r + w2; const ans = units / rate; if (!isInt(ans) || ans === dd || ans > 60) return null
+      return { v: { m, w, dd, r, m2, w2 }, ans, wrong: [((m + w) * dd) / (m2 + w2) % 1 === 0 ? ((m + w) * dd) / (m2 + w2) : null, dd, ans + 4, (units / (m2 + r * w2)) % 1 === 0 ? units / (m2 + r * w2) : null], exp: `In woman-units: ${m} × ${r} + ${w} = ${m * r + w} units for ${dd} days = ${units}; new team = ${rate} units, so ${units}/${rate} = ${ans} days.` }
+    },
+    T: [
+      '{m} men and {w} women complete a piece of work in {dd} days. If one man does the work of {r} women, how many days will {m2} men and {w2} women take to do it?',
+      'A man works {r} times as fast as a boy. {m} men and {w} boys can finish a task in {dd} days. In how many days can {m2} men and {w2} boys finish it?',
+      { t: '{m} men and {w} women can reap a field in {dd} days. If a man does as much work as {r} women, how long will {m2} men alone take?', menOnly: true },
+    ],
+  }),
+  mode({ // a men or b women
+    d: 3, u: 'days',
+    gen() {
+      const a = ri(2, 12); const b = ri(2, 20); if (a === b) return null
+      const dd = ri(4, 30); const c = ri(2, 10); const e = ri(2, 12); const days = fr(b * dd).div(fr(c * b, a).add(e)); if (days.d !== 1) return null
+      return { v: { a, b, dd, c, e }, ans: days.val, wrong: [(a * dd) / (c + e) % 1 === 0 ? (a * dd) / (c + e) : null, dd, days.val + 2, ((a + b) * dd) / (c + e) % 1 === 0 ? ((a + b) * dd) / (c + e) : null], exp: `${a} men = ${b} women, so 1 man = ${fr(b, a).toString()} women; the job is ${b * dd} woman-days; ${c} men and ${e} women = ${fr(c * b, a).add(e).toString()} women, taking ${days.val} days.` }
+    },
+    T: [
+      '{a} men or {b} women can finish a job in {dd} days. How many days will {c} men and {e} women take working together?',
+      'A task can be done by {a} men in {dd} days or by {b} women in {dd} days. In how many days can {c} men and {e} women do it?',
+      'A field can be ploughed by {a} large tractors or by {b} small tractors in {dd} days. How long will {c} large and {e} small tractors take together?',
+    ],
+  }),
+  mode({ // how many needed
+    d: 3, u: 'num',
+    gen(tp) {
+      const r = pick([2, 3]); const m = ri(2, 16); const w = ri(2, 16); const dd = ri(4, 30); const units = (m * r + w) * dd; const d2 = ri(4, 40)
+      const ans = tp.men ? units / (r * d2) : units / d2; if (!isInt(ans) || d2 === dd) return null
+      return { v: { m, w, dd, r, d2 }, ans, wrong: [((m + w) * dd) / d2 % 1 === 0 ? ((m + w) * dd) / d2 : null, tp.men ? units / d2 : units / (r * d2), ans + 2, m + w].map((x) => (x && isInt(x) ? x : null)), exp: `Work = (${m} × ${r} + ${w}) × ${dd} = ${units} woman-days; in ${d2} days this needs ${tp.men ? `${units / d2} women = ${ans} men` : `${ans} women`}.` }
+    },
+    T: [
+      '{m} men and {w} women can complete a project in {dd} days. If a man works {r} times as fast as a woman, how many women working alone would be needed to finish it in {d2} days?',
+      { t: '{m} men and {w} women finish a job in {dd} days. Taking one man’s work as equal to that of {r} women, how many men alone could finish it in {d2} days?', men: true },
+    ],
+  }),
+])
+
+fam('ga.work-time.partial-work', 'ga.work-time', [
+  mode({ // together t, then one leaves
+    d: 3,
+    gen(tp) {
+      const a = ri(4, 30); const b = ri(4, 30); const t = ri(2, 8); if (a === b) return null
+      const left = fr(1).sub(together(a, b).mul(t)); if (left.val <= 0) return null
+      const r = left.mul(b); if (r.d !== 1) return null
+      return { v: { a, b, t }, ans: r.val, u: tp.u ?? 'days', wrong: [b - t, fr(1).sub(fr(t, b)).mul(b).val - r.val === 0 ? null : r.val + t, left.mul(a).d === 1 ? left.mul(a).val : null, r.val + 1], exp: `In ${t} together they finish ${together(a, b).mul(t).toString()}; the remaining ${left.toString()} takes the second worker ${left.toString()} × ${b} = ${r.val}.` }
+    },
+    T: [
+      '{A} and {B} can do a job in {a} and {b} days respectively. They work together for {t} days, after which {A} leaves. How many more days will {B} take to finish the job?',
+      'Two workers can finish a project alone in {a} days and {b} days. They start together, but the first worker quits after {t} days. How long does the second worker need to complete the rest?',
+      { t: 'Pipes P and Q can fill a tank in {a} and {b} minutes respectively. Both are opened together, and P is closed after {t} minutes. How much longer will Q take to fill the tank?', u: 'minutes' },
+    ],
+  }),
+  mode({ // A alone for t, then B
+    d: 2, u: 'days',
+    gen() {
+      const a = ri(4, 30); const b = ri(4, 30); const t = ri(2, a - 1); const r = fr(1).sub(fr(t, a)).mul(b); if (r.d !== 1 || a === b) return null
+      return { v: { a, b, t }, ans: r.val, wrong: [b - t, b - (t * b) / a === r.val ? r.val + 2 : null, fr(1).sub(fr(t, b)).mul(a).d === 1 ? fr(1).sub(fr(t, b)).mul(a).val : null, r.val + 1].map((x) => (x > 0 ? x : null)), exp: `In ${t} days the first does ${fr(t, a).toString()}; the remaining ${fr(1).sub(fr(t, a)).toString()} takes the second ${fr(1).sub(fr(t, a)).toString()} × ${b} = ${r.val} days.` }
+    },
+    T: [
+      '{A} can build a boundary wall in {a} days and {B} can build it in {b} days. {A} works alone for {t} days and then {B} finishes the wall. How many days does {B} work?',
+      'A tailor can finish an order in {a} days and his assistant in {b} days. The tailor works on it for {t} days and then hands it over to the assistant. How long does the assistant take to finish?',
+    ],
+  }),
+  mode({ // one leaves t days before completion
+    d: 3, u: 'days',
+    gen() {
+      const a = ri(4, 30); const b = ri(4, 30); const t = ri(2, 6); const T = fr(b * (a + t), a + b); if (T.d !== 1 || a === b || T.val <= t) return null
+      return { v: { a, b, t }, ans: T.val, wrong: [fr(a * b, a + b).d === 1 ? fr(a * b, a + b).val : null, T.val + t, fr(a * (b + t), a + b).d === 1 ? fr(a * (b + t), a + b).val : null, T.val - 1], exp: `The second works all T days, the first T − ${t}: T/${b} + (T − ${t})/${a} = 1 ⇒ T = ${T.val} days.` }
+    },
+    T: [
+      '{A} and {B} can do a piece of work in {a} and {b} days respectively. They start together, but {A} leaves {t} days before the work is finished. In how many days is the work completed?',
+      'Two masons can build a room in {a} and {b} days. They begin together, but the first mason leaves {t} days before the room is finished. How many days does the building take in all?',
+      'A job can be done by P in {a} days and by Q in {b} days. They start together, and P stops working {t} days before the job ends. What is the total time taken?',
+    ],
+  }),
+])
+
+fam('ga.work-time.pipes-and-leaks', 'ga.work-time', [
+  mode({ // fill and drain
+    d: 2,
+    gen(tp) {
+      const a = ri(2, 20); const b = ri(a + 1, 40); const t = fr(a * b, b - a); if (!isInt(t.val * 2) || t.val > 60) return null
+      return { v: { a, b }, ans: t.val, u: tp.u, wrong: [b - a, fr(a * b, a + b).val, (a + b) / 2, t.val + 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Net rate = 1/${a} − 1/${b} = ${fr(b - a, a * b).toString()}, so the tank fills in ${fmtNum(t.val)}.` }
+    },
+    T: [
+      { t: 'A pipe fills a tank in {a} hours and a leak empties the full tank in {b} hours. With the leak, how long does the pipe take to fill the tank?', u: 'hours' },
+      { t: 'An inlet can fill a cistern in {a} minutes while an outlet can empty it in {b} minutes. If both are open, how long will the empty cistern take to fill?', u: 'minutes' },
+      { t: 'A tap can fill a bath in {a} minutes, but the drain empties it in {b} minutes. If the plug is left out, how long does the bath take to fill?', u: 'minutes' },
+      { t: 'A swimming pool is filled by a pump in {a} hours and emptied by a drain in {b} hours. How long does filling take if the drain is accidentally left open?', u: 'hours' },
+    ],
+  }),
+  mode({ // leak alone
+    d: 2,
+    gen(tp) {
+      const a = ri(2, 20); const c = ri(a + 1, 30); const t = fr(a * c, c - a); if (!isInt(t.val * 2)) return null
+      return { v: { a, c }, ans: t.val, u: tp.u, wrong: [c - a, c + a, fr(a * c, a + c).val, t.val + 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Leak rate = 1/${a} − 1/${c} = ${fr(c - a, a * c).toString()}, so the leak alone empties it in ${fmtNum(t.val)}.` }
+    },
+    T: [
+      { t: 'A tank is normally filled in {a} hours, but because of a leak it takes {c} hours. How long would the leak take to empty the full tank?', u: 'hours' },
+      { t: 'A pipe fills a drum in {a} minutes. Owing to a hole in the bottom, it now takes {c} minutes. In what time would the hole empty the full drum?', u: 'minutes' },
+    ],
+  }),
+  mode({ // two fill, one drains
+    d: 2,
+    gen(tp) {
+      const a = ri(2, 20); const b = ri(2, 20); const c = ri(2, 40); const rate = fr(1, a).add(fr(1, b)).sub(fr(1, c)); if (rate.val <= 0 || a === b) return null
+      const t = fr(1).div(rate); if (!isInt(t.val * 2)) return null
+      return { v: { a, b, c }, ans: t.val, u: tp.u, wrong: [fr(1).div(together(a, b, c)).val, fr(1).div(together(a, b)).val, t.val + 2, (a + b) / 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Net rate = 1/${a} + 1/${b} − 1/${c} = ${rate.toString()}, so the time is ${fmtNum(t.val)}.` }
+    },
+    T: [
+      { t: 'Two pipes can fill a tank in {a} and {b} hours, and a third pipe can empty it in {c} hours. If all three are opened together, how long will the tank take to fill?', u: 'hours' },
+      { t: 'Taps X and Y fill a tank in {a} and {b} minutes, while tap Z empties it in {c} minutes. How long does the empty tank take to fill if all three are opened?', u: 'minutes' },
+    ],
+  }),
+  mode({ // single pipe basics
+    d: 1,
+    gen(tp) {
+      if (tp.cap) { const r = 5 * ri(2, 40); const t = ri(5, 60); return { u: 'minutes', v: { C: r * t, r }, ans: t, wrong: [(r * t) / 60 % 1 === 0 ? (r * t) / 60 : null, t + 10, t * 2, Math.round(t / 2)], exp: `Time = ${r * t}/${r} = ${t} minutes.` } }
+      if (tp.half) { const a = ri(2, 20); const b = ri(2, 20); const t = fr(a * b, 2 * (a + b)); if (!isInt(t.val * 2) || a === b) return null; return { u: 'hours', d: 2, v: { a, b }, ans: t.val, wrong: [fr(a * b, a + b).val, (a + b) / 4, t.val + 1, (a + b) / 2].map((x) => (decimals(x) <= 1 ? x : null)), exp: `Together they fill the tank in ${fmtNum(fr(a * b, a + b).val)} hours, so half the tank takes ${fmtNum(t.val)} hours.` } }
+      const a = ri(3, 20); const t = ri(2, a - 1); const f = tp.drain ? fr(a - t, a) : fr(t, a)
+      return { v: { a, t }, opts: fOpts(f, [tp.drain ? fr(t, a) : fr(a - t, a), fr(1, a), fr(t, a + t), fr(1, t).mul(fr(1, 1)).val < 1 ? fr(1, t) : null]), exp: `Each hour it ${tp.drain ? 'empties' : 'fills'} 1/${a} of the tank; after ${t} hours ${tp.drain ? `${fr(t, a).toString()} has gone and ${f.toString()} remains` : `${f.toString()} is full`}.` }
+    },
+    T: [
+      'A pipe fills a tank in {a} hours. What fraction of the tank does it fill in {t} hours?',
+      { t: 'A tap fills a {C}-litre tank at {r} litres a minute. How long will it take to fill the tank?', cap: true },
+      { t: 'A drain empties a full tank in {a} hours. What part of the water remains in the tank after {t} hours?', drain: true },
+      { t: 'Two pipes fill a tank in {a} and {b} hours respectively. How long will they take together to fill half the tank?', half: true },
+    ],
+  }),
+])
+
+fam('ga.work-time.rate-from-combined', 'ga.work-time', [
+  mode({ // B alone from together and A alone
+    d: 2,
+    gen(tp) {
+      const a = ri(3, 40); const b = ri(3, 40); if (a === b) return null
+      const T = fr(a * b, a + b); if (T.d !== 1) return null
+      return { v: { T: T.val, a }, ans: b, u: tp.u, wrong: [a - T.val, a + T.val, 2 * T.val, b + 2].map((x) => (x > 0 ? x : null)), exp: `Other’s rate = 1/${T.val} − 1/${a} = ${fr(1, b).toString()}, so alone it takes ${b}.` }
+    },
+    T: [
+      { t: '{A} and {B} together can finish a job in {T} days. {A} alone can finish it in {a} days. How long would {B} take alone?', u: 'days' },
+      { t: 'Two taps together fill a tank in {T} hours. One of them alone fills it in {a} hours. How long does the other tap take on its own?', u: 'hours' },
+      { t: 'A father and son together can mow a lawn in {T} hours. The father alone takes {a} hours. How long would the son take by himself?', u: 'hours' },
+      { t: 'Two machines working together finish an order in {T} days. The newer machine alone would take {a} days. How long would the older machine take on its own?', u: 'days' },
+      { t: 'Working together, two typists can type a thesis in {T} hours. If one of them can type it alone in {a} hours, the other alone would take:', u: 'hours' },
+    ],
+  }),
+  mode({ // pairs
+    d: 3,
+    gen(tp) {
+      const x = ri(3, 30); const y = ri(3, 30); const z = ri(3, 30); if (new Set([x, y, z]).size < 3) return null
+      const rate = together(x, y, z).div(2); const each = [fr(1, x).sub(rate.sub(fr(1, x))), 0]; void each
+      const t = fr(1).div(rate); if (!isInt(t.val * 2)) return null
+      const ra = rate.sub(fr(1, y)); const rb = rate.sub(fr(1, z)); const rc = rate.sub(fr(1, x)); if (ra.val <= 0 || rb.val <= 0 || rc.val <= 0) return null
+      return { v: { x, y, z }, ans: t.val, u: tp.u, wrong: [fr(1).div(together(x, y, z)).val, (x + y + z) / 3, 2 * fr(1).div(together(x, y, z)).val === t.val ? null : t.val * 2, t.val + 1].map((v2) => (decimals(v2) <= 1 ? v2 : null)), exp: `Adding the pair rates counts everyone twice: 1/${x} + 1/${y} + 1/${z} = ${together(x, y, z).toString()} = 2 × (all three); so all three take ${fmtNum(t.val)}.` }
+    },
+    T: [
+      { t: '{A} and {B} can do a job in {x} days, {B} and {C} in {y} days, and {A} and {C} in {z} days. How long will all three take working together?', u: 'days' },
+      { t: 'Pipes A and B fill a tank in {x} hours, B and C in {y} hours, and A and C in {z} hours. How long do all three take together?', u: 'hours' },
+    ],
+  }),
+  mode({ // efficiency ratio
+    d: 2,
+    gen(tp) {
+      const k = pick([2, 3, 4]); const T = ri(2, 20)
+      if (tp.ask === 'tog') { const a = ri(3, 30); const t = fr(k * a, k + 1); void t; const tt = fr(a * k, k + 1); if (!isInt(tt.val * 2)) return null; return { v: { a, kw: TIMES[k] }, ans: tt.val, u: 'days', wrong: [a / k % 1 === 0 ? a / k : null, (a + k * a) / 2, a * k, tt.val + 1].map((v2) => (v2 && decimals(v2) <= 1 ? v2 : null)), exp: `The slower one takes ${k} × ${a} = ${k * a} days; together 1/${a} + 1/${k * a} = ${fr(k + 1, k * a).toString()}, i.e. ${fmtNum(tt.val)} days.` } }
+      const slow = T * (k + 1); const fast = fr(T * (k + 1), k); if (fast.d !== 1) return null
+      const ans = tp.ask === 'fast' ? fast.val : slow
+      return { v: { T, kw: TIMES[k] }, ans, u: tp.u, wrong: [tp.ask === 'fast' ? slow : fast.val, T * k, T * (k - 1) || null, ans + T], exp: `Rates are in the ratio ${k}:1; together ${k + 1} parts finish in ${T}, so the slower (1 part) alone takes ${slow} and the faster takes ${fast.val}.` }
+    },
+    T: [
+      { t: '{A} works {kw} as fast as {B}. Together they finish a job in {T} days. How long would {B} take alone?', u: 'days' },
+      { t: 'A new machine works {kw} as fast as an old one. Together they complete an order in {T} hours. How long would the new machine take alone?', u: 'hours', ask: 'fast' },
+      { t: '{A} is {kw} as efficient as {B}, and {A} alone can finish a task in {a} days. How long will they take working together?', ask: 'tog' },
+    ],
+  }),
+])
+
+fam('ga.work-time.fraction-of-job', 'ga.work-time', [
+  mode({ // fraction done or left
+    d: 1,
+    gen(tp) {
+      const a = ri(4, 30); const t = ri(2, a - 1); const f = tp.left ? fr(a - t, a) : fr(t, a)
+      return { v: { a, t }, opts: fOpts(f, [tp.left ? fr(t, a) : fr(a - t, a), fr(1, a), fr(t, a + t), fr(1, t)]), exp: `Each ${tp.left ? 'week' : 'day'} does 1/${a}; after ${t}, ${fr(t, a).toString()} is done${tp.left ? ` and ${f.toString()} is left` : ''}.` }
+    },
+    T: [
+      '{M1} can finish a job in {a} days. What fraction of the job does he do in {t} days?',
+      '{F1} can type a report in {a} hours. What fraction of it does she type in {t} hours?',
+      { t: 'A builder completes a house in {a} weeks. What part of the house is still unfinished after {t} weeks?', left: true },
+    ],
+  }),
+  mode({ // whole from part
+    d: 1,
+    gen(tp) {
+      const den = ri(3, 9); const num = ri(1, den - 1); if (gcd(num, den) !== 1) return null
+      const k = ri(2, 8); const t = num * k; const whole = den * k; const ans = tp.more ? whole - t : whole
+      return { v: { num, den, t }, ans, u: tp.u ?? 'days', d: tp.more ? 2 : 1, wrong: [tp.more ? whole : whole - t, (t * num) / den % 1 === 0 ? (t * num) / den : null, t + den, ans + num].map((x) => (x && x > 0 ? x : null)), exp: `${num}/${den} of the job takes ${t}, so 1/${den} takes ${k} and the whole takes ${whole}${tp.more ? `; ${whole} − ${t} = ${ans} more` : ''}.` }
+    },
+    T: [
+      'If a man can do {num}/{den} of a job in {t} days, how long will he take to do the whole job?',
+      { t: 'A pipe fills {num}/{den} of a tank in {t} minutes. How long will it take to fill the whole tank?', u: 'minutes' },
+      '{F1} reads {num}/{den} of a novel in {t} days. At the same rate, how many days does she need for the whole novel?',
+      { t: 'A worker has done {num}/{den} of a job in {t} days. How many more days will he need to finish it?', more: true },
     ],
   }),
 ])

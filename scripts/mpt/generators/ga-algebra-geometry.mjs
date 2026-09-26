@@ -1979,6 +1979,763 @@ family('ga.number-properties.factors', 'ga.number-properties', {
 })
 
 // ===========================================================================
+// ga.geometry — 120
+// ===========================================================================
+const PNAME = { 3: 'triangle', 4: 'quadrilateral', 5: 'pentagon', 6: 'hexagon', 7: 'heptagon', 8: 'octagon', 9: 'nonagon', 10: 'decagon', 12: 'dodecagon' }
+const NAMED = [5, 6, 8, 9, 10, 12]
+const REG = [3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36]
+const degFmt = (v) => (typeof v === 'number' ? deg(v) : v)
+const cap = (t) => t[0].toUpperCase() + t.slice(1)
+const namesNear = (n) => NAMED.filter((m) => m !== n).sort((x, y) => Math.abs(x - n) - Math.abs(y - n)).map((m) => cap(PNAME[m]))
+
+family('ga.geometry.polygon-exterior-angle', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ n: r.pick(REG), n2: r.pick(REG), nn: r.pick(NAMED), a: r.int(50, 85), b: r.int(55, 90), c: r.int(60, 95), d: r.int(40, 80), q: r.pick([[1, 2, 3, 4], [2, 3, 4, 6], [1, 2, 2, 3], [3, 4, 5, 6], [1, 3, 5, 6]]) }),
+  key: (p) => `${p.m}-${({ name: p.nn, extnamed: p.nn, sides: p.n, fromint: p.n, sum: p.n + 3, exceed: p.n, fromsum: p.n, intfrom: p.n, fifth: [p.a, p.b, p.c, p.d].join('.'), quad: p.q.join(''), intsum: p.n, diff: [p.n, p.n2].join('.') })[p.m]}`,
+  solve: (P) => {
+    const { n, n2, nn, a, b, c, d, q } = P
+    const e = 360 / n; const E = 360 / nn
+    switch (P.m) {
+      case 'name': return { ans: cap(PNAME[nn]), wrong: namesNear(nn), expl: `Number of sides = 360 ÷ ${E} = ${nn}, so it is a regular ${PNAME[nn]}.` }
+      case 'extnamed': return { ans: E, wrong: [180 - E, 360 / (nn - 2), 180 / nn].filter((v) => isInt(v) && v !== E), expl: `Exterior angles of any polygon add up to 360°, so each is 360° ÷ ${nn} = ${E}°.` }
+      case 'sides': if (n < 5) return null; return { ans: n, wrong: [n + 2, n - 2, 180 / e === n ? n + 1 : 180 / e].filter((v) => isInt(v) && v > 2 && v !== n), fmt: num, expl: `Number of sides = 360 ÷ ${e} = ${n}.` }
+      case 'fromint': return { ans: e, wrong: [180 - e > 0 && 180 - e !== e ? 360 - (180 - e) : e + 10, e / 2, 2 * e].filter((v) => isInt(v) && v !== e), expl: `Interior + exterior = 180°, so each exterior angle is 180° − ${180 - e}° = ${e}°.` }
+      case 'sum': return { ans: 360, wrong: [(n + 3 - 2) * 180, 180, (n + 3) * 180].filter((v) => v !== 360), expl: `The exterior angles of any convex polygon, one at each vertex, always add up to 360°.` }
+      case 'exceed': { if (n < 5) return null; const i = 180 - e; return { ans: i - e, wrong: [i, e, i + e - 90].filter((v) => v > 0 && v !== i - e), expl: `Exterior = 360 ÷ ${n} = ${num(e)}°, interior = 180 − ${num(e)} = ${num(i)}°; difference = ${num(i - e)}°.` } }
+      case 'fromsum': { const S = (n - 2) * 180; P.S = S; return { ans: e, wrong: [180 - e, 360 / (n - 2), 2 * e, e / 2].filter((v) => isInt(v) && v !== e), expl: `(n − 2) × 180 = ${S} gives n = ${n}; each exterior angle = 360 ÷ ${n} = ${e}°.` } }
+      case 'intfrom': return { ans: 180 - e, wrong: [360 - e, e * 2, 90 + e].filter((v) => v !== 180 - e && v < 360), expl: `Each interior angle = 180° − ${e}° = ${180 - e}°.` }
+      case 'fifth': { const s = a + b + c + d - 100; const x = 360 - s; if (x <= 20 || x >= 150) return null; P.ex = [a, b, c, d - 100 + 60].map((v) => v); P.ex[3] = d - 40; const s2 = sum(P.ex); const x2 = 360 - s2; if (x2 <= 20 || x2 >= 150) return null; return { ans: x2, wrong: [540 - s2, 180 - x2, 360 - s2 + 20].filter((v) => v > 0 && v !== x2), expl: `Exterior angles add up to 360°: 360 − (${P.ex.join(' + ')}) = ${x2}°.` } }
+      case 'quad': { const t = sum(q); if (360 % t) return null; const k = 360 / t; const ans = k * Math.max(...q); return { ans, wrong: [(180 * Math.max(...q)) / t, k * Math.min(...q), (720 * Math.max(...q)) / t].filter((v) => isInt(v) && v !== ans && v < 360), expl: `x(${q.join(' + ')}) = 360°, so x = ${k}°; the largest is ${Math.max(...q)} × ${k} = ${ans}°.` } }
+      case 'intsum': { const S = (n - 2) * 180; return { ans: S, wrong: [n * 180, (n - 1) * 180, 360].filter((v) => v !== S), expl: `n = 360 ÷ ${e} = ${n}; sum of interior angles = (${n} − 2) × 180° = ${S}°.` } }
+      default: { if (n === n2) return null; const df = Math.abs(360 / n - 360 / n2); if (!isInt(df) || df === 0) return null; P.lo = Math.min(n, n2); P.hi = Math.max(n, n2); return { ans: df, wrong: [Math.abs(180 - 360 / n - (180 - 360 / n2)) + 10, 360 / P.lo, (P.hi - P.lo) * 10].filter((v) => isInt(v) && v !== df), expl: `Exterior angles: 360 ÷ ${P.lo} = ${360 / P.lo}° and 360 ÷ ${P.hi} = ${360 / P.hi}°; the difference is ${df}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Name the regular polygon with an exterior angle of ${360 / p.nn}°.`, { m: 'name' }],
+    [1, (p) => `Each exterior angle of a regular ${PNAME[p.nn]} measures:`, { m: 'extnamed' }],
+    [1, (p) => `How many sides does a regular polygon have if each exterior angle is ${360 / p.n}°?`, { m: 'sides' }],
+    [1, (p) => `Each interior angle of a regular polygon is ${180 - 360 / p.n}°. What is the size of each exterior angle?`, { m: 'fromint' }],
+    [1, (p) => `What is the sum of the exterior angles of a convex polygon with ${p.n + 3} sides?`, { m: 'sum' }],
+    [2, (p) => `In a regular polygon with ${p.n} sides, by how many degrees does each interior angle exceed each exterior angle?`, { m: 'exceed' }],
+    [2, (p) => `The interior angles of a regular polygon add up to ${p.S}°. What is each exterior angle?`, { m: 'fromsum' }],
+    [1, (p) => `A regular polygon has exterior angles of ${360 / p.n}° each. What is the size of each interior angle?`, { m: 'intfrom' }],
+    [2, (p) => `Four exterior angles of a pentagon are ${p.ex[0]}°, ${p.ex[1]}°, ${p.ex[2]}° and ${p.ex[3]}°. What is the fifth exterior angle?`, { m: 'fifth' }],
+    [2, (p) => `The exterior angles of a quadrilateral are in the ratio ${p.q.join(' : ')}. What is the largest exterior angle?`, { m: 'quad' }],
+    [2, (p) => `Each exterior angle of a regular polygon is ${360 / p.n}°. What is the sum of its interior angles?`, { m: 'intsum' }],
+    [2, (p) => `What is the difference between the exterior angle of ${art(p.lo)} regular ${p.lo}-sided polygon and that of ${art(p.hi)} regular ${p.hi}-sided polygon?`, { m: 'diff' }],
+  ],
+})
+
+family('ga.geometry.polygon-interior-angles', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ nn: r.pick([4, 5, 6, 7, 8, 9, 10, 12]), n: r.int(11, 20), a: r.int(80, 130), b: r.int(85, 135), c: r.int(90, 140), d: r.int(95, 125), k: r.int(2, 8), q: r.pick([[2, 3, 3, 4], [1, 2, 3, 4], [3, 4, 5, 6], [2, 3, 5, 5], [4, 5, 6, 9], [1, 1, 2, 2]]), reg: r.pick([5, 6, 8, 9, 10, 12, 15, 18, 20]) }),
+  key: (p) => `${p.m}-${({ sumnamed: p.nn, eachnamed: p.nn, sidesfromsum: p.n, fifth: [p.a, p.b, p.c, p.d].join('.'), fourth: [p.a, p.b, p.c].join('.'), ratio: p.q.join(''), hex: p.a, step: p.k, exceed: [p.nn, p.reg].join('.'), sumn: p.n + 1, abcd: [p.b, p.d].join('.'), regsum: p.reg })[p.m]}`,
+  solve: (P) => {
+    const { nn, n, a, b, c, d, k, q, reg } = P
+    const S = (x) => (x - 2) * 180
+    switch (P.m) {
+      case 'sumnamed': return { ans: S(nn), wrong: [nn * 180, S(nn) - 180, S(nn) + 180, 360].filter((v) => v !== S(nn)), expl: `Sum of interior angles = (n − 2) × 180° = (${nn} − 2) × 180° = ${S(nn)}°.` }
+      case 'eachnamed': { const e = S(nn) / nn; if (!isInt(e)) return null; return { ans: e, wrong: [360 / nn, ((nn - 1) * 180) / nn, e - 10, e + 10].filter((v) => isInt(v) && v !== e && v > 0), expl: `Each angle = (${nn} − 2) × 180° ÷ ${nn} = ${num(e)}°.` } }
+      case 'sidesfromsum': return { ans: n, wrong: [n - 2, n + 2, n + 1, n - 1].filter((v) => v !== n), fmt: num, expl: `(n − 2) × 180 = ${S(n)} gives n − 2 = ${n - 2}, so n = ${n}.` }
+      case 'fifth': { const x = 540 - (a + b + c + d); if (x <= 30 || x >= 180) return null; return { ans: x, wrong: [360 - (a + b + c + d) + 180 - 180 > 0 ? 720 - (a + b + c + d) : x + 20, x + 180, 180 - x].filter((v) => v > 0 && v !== x && v < 360), expl: `A pentagon's angles add up to 540°: 540 − (${a} + ${b} + ${c} + ${d}) = ${x}°.` } }
+      case 'fourth': { const x = 360 - (a - 20 + b - 20 + c - 30); if (x <= 30 || x >= 180) return null; P.t = [a - 20, b - 20, c - 30]; return { ans: x, wrong: [180 - x > 0 ? 540 - sum(P.t) : x + 10, 180 - x, x + 30].filter((v) => v > 0 && v !== x && v < 360), expl: `A quadrilateral's angles add up to 360°: 360 − (${P.t.join(' + ')}) = ${x}°.` } }
+      case 'ratio': { const t = sum(q); if (360 % t) return null; const u = 360 / t; const ans = u * Math.max(...q); return { ans, wrong: [(180 * Math.max(...q)) / t, u * Math.min(...q), (540 * Math.max(...q)) / t].filter((v) => isInt(v) && v !== ans), expl: `${t} parts = 360°, so one part = ${u}°; the largest angle is ${Math.max(...q)} × ${u} = ${ans}°.` } }
+      case 'hex': { const x = 720 - 5 * a; if (x <= 20 || x >= 300) return null; return { ans: x, wrong: [720 - 6 * a > 0 ? 720 - 6 * a : x + 30, 540 - 5 * a > 0 ? 540 - 5 * a : x + 60, a].filter((v) => v > 0 && v !== x), expl: `A hexagon's angles total 720°: 720 − 5 × ${a} = ${x}°.` } }
+      case 'step': { const kk = k * 5; const x = (540 - 10 * kk) / 5; return { ans: x, wrong: [540 / 5, x + kk, (360 - 10 * kk) / 5].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `5x + ${10 * kk} = 540, so 5x = ${540 - 10 * kk} and x = ${x}.`, kk } }
+      case 'exceed': { if (nn === reg) return null; const lo = Math.min(nn, reg); const hi = Math.max(nn, reg); P.lo = lo; P.hi = hi; const ans = (hi - lo) * 180; return { ans, wrong: [(hi - lo) * 90, (hi - lo) * 360, ans + 180], expl: `Each extra side adds 180°: (${hi} − ${lo}) × 180° = ${ans}°.` } }
+      case 'sumn': { const m = n + 1; return { ans: S(m), wrong: [m * 180, S(m) - 180, (m - 2) * 90].filter((v) => v !== S(m)), expl: `(${m} − 2) × 180° = ${S(m)}°.` } }
+      case 'abcd': { const x = (360 - b - d) / 2; if (!isInt(x) || x <= 20) return null; return { ans: x, wrong: [360 - b - d, 180 - x, (180 - b - d / 2 > 0 ? 180 - b : x + 10)].filter((v) => v > 0 && v !== x), expl: `∠A + ∠C = 360 − ${b} − ${d} = ${360 - b - d}°, and ∠A = ∠C, so ∠A = ${x}°.` } }
+      default: { const i = 180 - 360 / reg; const Ssum = reg * i; return { ans: Ssum, wrong: [reg * 180, 360, (reg - 1) * i].filter((v) => v !== Ssum), expl: `Exterior angle = 180 − ${i} = ${360 / reg}°, so n = 360 ÷ ${360 / reg} = ${reg}; total = ${reg} × ${i}° = ${Ssum}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `What is the sum of the interior angles of a ${PNAME[p.nn]}?`, { m: 'sumnamed' }],
+    [1, (p) => `Each interior angle of a regular ${PNAME[p.nn]} is:`, { m: 'eachnamed' }],
+    [2, (p) => `The interior angles of a polygon add up to ${(p.n - 2) * 180}°. How many sides does the polygon have?`, { m: 'sidesfromsum' }],
+    [2, (p) => `Four angles of a pentagon are ${p.a}°, ${p.b}°, ${p.c}° and ${p.d}°. What is the fifth angle?`, { m: 'fifth' }],
+    [1, (p) => `Three angles of a quadrilateral are ${p.t[0]}°, ${p.t[1]}° and ${p.t[2]}°. Find the fourth angle.`, { m: 'fourth' }],
+    [2, (p) => `The angles of a quadrilateral are in the ratio ${p.q.join(' : ')}. What is the largest angle?`, { m: 'ratio' }],
+    [2, (p) => `Five of the angles of a hexagon are ${p.a}° each. What is the sixth angle?`, { m: 'hex' }],
+    [2, (p) => { const kk = p.k * 5; return `The angles of a pentagon are x°, (x + ${kk})°, (x + ${2 * kk})°, (x + ${3 * kk})° and (x + ${4 * kk})°. What is x?` }, { m: 'step' }],
+    [2, (p) => `By how many degrees does the sum of the interior angles of ${art(p.hi)} ${p.hi}-sided polygon exceed that of ${art(p.lo)} ${p.lo}-sided polygon?`, { m: 'exceed' }],
+    [1, (p) => `What is the sum of the interior angles of a polygon with ${p.n + 1} sides?`, { m: 'sumn' }],
+    [2, (p) => `In quadrilateral ABCD, ∠A = ∠C, ∠B = ${p.b}° and ∠D = ${p.d}°. What is ∠A?`, { m: 'abcd' }],
+    [2, (p) => `Each interior angle of a regular polygon is ${180 - 360 / p.reg}°. What is the total of all its interior angles?`, { m: 'regsum' }],
+  ],
+})
+
+family('ga.geometry.regular-polygon-sides', 'ga.geometry', {
+  gen: (r) => ({ n: r.pick([5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36]), k: r.int(1, 8), nn: r.pick(NAMED) }),
+  key: (p) => `${p.m}-${({ fromint: p.n, nameint: p.nn, exceed: p.n, vertices: p.n, ratio: p.k, frac: p.k, right: p.k, times: p.k })[p.m]}`,
+  fact: (p) => (['ratio', 'frac'].includes(p.m) ? `ratio-${p.k}` : `${p.m}-${p.n}-${p.k}-${p.nn}`),
+  solve: (P) => {
+    const { n, k, nn } = P
+    const i = 180 - 360 / n
+    switch (P.m) {
+      case 'fromint': return { ans: n, wrong: [n + 2, n - 2, Math.round(360 / i)].filter((v) => v > 2 && v !== n), expl: `Exterior angle = 180 − ${num(i)} = ${360 / n}°; sides = 360 ÷ ${360 / n} = ${n}.` }
+      case 'nameint': return { ans: cap(PNAME[nn]), wrong: namesNear(nn), expl: `Exterior angle = 180 − ${180 - 360 / nn} = ${360 / nn}°; 360 ÷ ${360 / nn} = ${nn} sides, a ${PNAME[nn]}.` }
+      case 'exceed': { if (n < 5) return null; const e = 360 / n; const dd = i - e; if (dd <= 0) return null; P.dd = dd; return { ans: n, wrong: [n + 2, Math.round(360 / dd) === n ? n - 2 : Math.round(360 / dd), n + 4].filter((v) => v > 2 && v !== n), expl: `i + e = 180 and i − e = ${num(dd)}, so e = ${num(e)}°; sides = 360 ÷ ${num(e)} = ${n}.` } }
+      case 'vertices': return { ans: n, wrong: [n - 2, n + 1, n * 2].filter((v) => v !== n), expl: `Exterior angle = 180 − ${num(i)} = ${360 / n}°; a polygon has as many vertices as sides: 360 ÷ ${360 / n} = ${n}.` }
+      case 'ratio': case 'frac': { if (k > 5) return null; const N = 2 * (k + 1); return { ans: N, wrong: [k + 1, 2 * k, 2 * k + 4].filter((v) => v !== N && v > 2), expl: `Interior = ${k} × exterior and interior + exterior = 180°, so exterior = 180 ÷ ${k + 1} = ${180 / (k + 1)}°; sides = 360 ÷ ${180 / (k + 1)} = ${N}.` } }
+      case 'right': { const kk = [1, 2, 3, 5, 6][k % 5]; P.kk = kk; return { ans: 4 * kk, wrong: [kk, 2 * kk, 4 * kk + 2].filter((v) => v !== 4 * kk && v > 2), expl: `Exterior angle = 90° ÷ ${kk} = ${num(90 / kk)}°; sides = 360 ÷ ${num(90 / kk)} = ${4 * kk}.` } }
+      default: return { ans: 2 * k + 2, wrong: [2 * k, k + 2, 2 * k + 4], expl: `(n − 2) × 180 = ${k} × 360 gives n − 2 = ${2 * k}, so n = ${2 * k + 2}.` }
+    }
+  },
+  items: [
+    [2, (p) => `Each interior angle of a regular polygon is ${num(180 - 360 / p.n)}°. How many sides does it have?`, { m: 'fromint' }],
+    [2, (p) => `A regular polygon has interior angles of ${180 - 360 / p.nn}° each. Which polygon is it?`, { m: 'nameint' }],
+    [3, (p) => `The interior angle of a regular polygon is ${num(p.dd)}° more than its exterior angle. How many sides does it have?`, { m: 'exceed' }],
+    [2, (p) => `If each angle of a regular polygon is ${num(180 - 360 / p.n)}°, how many vertices does it have?`, { m: 'vertices' }],
+    [3, (p) => `In a regular polygon the ratio of an interior angle to an exterior angle is ${p.k} : 1. How many sides does the polygon have?`, { m: 'ratio' }],
+    [3, (p) => `Each exterior angle of a regular polygon is ${p.k === 1 ? 'equal to' : `one-${['', '', 'half', 'third', 'quarter', 'fifth'][p.k]} of`} its interior angle. How many sides does it have?`, { m: 'frac' }],
+    [2, (p) => `Each exterior angle of a regular polygon is ${p.kk === 1 ? 'a right angle' : `one-${['', '', 'half', 'third', '', 'fifth', 'sixth'][p.kk]} of a right angle`}. How many sides does it have?`, { m: 'right' }],
+    [2, (p) => `The sum of the interior angles of a polygon is ${p.k} times the sum of its exterior angles. How many sides does it have?`, { m: 'times' }],
+  ],
+})
+
+family('ga.geometry.triangle-angle-sum', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ a: r.int(25, 80), b: r.int(20, 75), k: r.int(2, 5), m2: r.int(2, 6), q: r.pick([[1, 2, 3], [2, 3, 4], [1, 3, 5], [2, 3, 5], [3, 4, 5], [1, 4, 7], [4, 5, 9], [2, 7, 9], [1, 2, 6]]), d: r.int(5, 40), pick: r.int(0, 999) }),
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.k}-${p.m2}-${p.q.join('')}-${p.d}-${p.pick}`,
+  solve: (P) => {
+    const { a, b, k, m2, q, d, pick } = P
+    switch (P.m) {
+      case 'third': { const c = 180 - a - b; if (c <= 10) return null; return { ans: c, wrong: [360 - a - b, 90 - (a + b) / 2 > 0 && isInt(90 - (a + b) / 2) ? 90 - (a + b) / 2 : c + 10, a + b].filter((v) => v !== c), expl: `Angles of a triangle add up to 180°: 180 − ${a} − ${b} = ${c}°.` } }
+      case 'ratio': { const t = sum(q); if (180 % t) return null; const u = 180 / t; return { ans: u * q[2], wrong: [u * q[1], (360 / t) * q[2], u * q[0]].filter((v) => isInt(v) && v !== u * q[2]), expl: `${t} parts = 180°, so one part = ${u}°; the largest angle is ${q[2]} × ${u} = ${u * q[2]}°.` } }
+      case 'right': return { ans: 90 - a, wrong: [180 - a, 90 + a, 180 - 2 * a].filter((v) => v > 0 && v !== 90 - a), expl: `The acute angles of a right-angled triangle add up to 90°: 90 − ${a} = ${90 - a}°.` }
+      case 'xs': { if (k === m2) return null; const t = 1 + k + m2; if (180 % t) return null; const x = 180 / t; return { ans: x, wrong: [x * k, 180 / (k + m2), 360 / t].filter((v) => isInt(v) && v !== x), fmt: num, expl: `x + ${k}x + ${m2}x = ${t}x = 180, so x = ${x}.` } }
+      case 'diff': { const c = b + 40; const A = (180 - c + d) / 2; if (!isInt(A) || A - d <= 5) return null; P.c = c; return { ans: A, wrong: [A - d, 180 - c, (180 - c) / 2].filter((v) => isInt(v) && v !== A), expl: `∠A + ∠B = 180 − ${c} = ${180 - c}° and ∠A − ∠B = ${d}°, so ∠A = (${180 - c} + ${d}) ÷ 2 = ${A}°.` } }
+      case 'lin': { const p1 = a % 20 + 1; const q1 = b % 15 + 1; const r1 = d; const x = (180 - p1 + q1 - r1) / 4; if (!isInt(x) || 2 * x - q1 <= 0) return null; P.pq = [p1, q1, r1]; return { ans: x, wrong: [(180 - p1 - q1 - r1) / 4, 180 / 4, x + q1].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `(x + ${p1}) + (2x − ${q1}) + (x + ${r1}) = 4x + ${p1 - q1 + r1} = 180, so x = ${x}.` } }
+      case 'largest': { const c = b + 30; const s = (180 - c) / (k + 1); if (!isInt(s) || k * s <= c) return null; P.c = c; return { ans: k * s, wrong: [s, c, 180 - c].filter((v) => v !== k * s), expl: `smallest + ${k} × smallest = 180 − ${c} = ${180 - c}°, so the smallest is ${s}° and the largest ${k * s}°.` } }
+      case 'which': { const rr = makeRng(`tri-${pick}`); const x = rr.int(30, 80); const y = rr.int(20, 90); const z = 180 - x - y; if (z <= 5) return null; const good = [x, y, z]; const bad = [[x, y, z + 10], [x + 5, y + 10, z], [x, y - 15, z]]; const t = (A) => A.map((v) => `${v}°`).join(', '); return { ans: t(good), wrong: bad.map(t), expl: `Only ${t(good)} add up to 180° (${x} + ${y} + ${z}); the other sets total ${bad.map((A) => sum(A)).join('°, ')}°.` } }
+      case 'rratio': { const [p1, p2] = [q[0], q[1]]; const t = p1 + p2; if (90 % t) return null; const s = (90 / t) * p1; return { ans: s, wrong: [(90 / t) * p2, (180 / t) * p1, 90 - s + 10].filter((v) => isInt(v) && v !== s), expl: `The acute angles total 90°: ${t} parts = 90°, one part = ${90 / t}°, so the smaller is ${s}°.` } }
+      case 'sumdiff': { const s = a + 70; const dd = d; if ((s + dd) % 2 || s >= 170 || dd >= s) return null; const x = (s + dd) / 2; const y = (s - dd) / 2; const z = 180 - s; const L = Math.max(x, y, z); return { ans: L, wrong: [x === L ? z : x, s, y].filter((v) => v !== L), expl: `The two angles are (${s} + ${dd}) ÷ 2 = ${x}° and ${y}°; the third is 180 − ${s} = ${z}°. The largest is ${L}°.` } }
+      case 'twoeq': { if (a >= 90) return null; return { ans: 180 - 2 * a, wrong: [180 - a, 90 - a, 2 * a].filter((v) => v > 0 && v !== 180 - 2 * a), expl: `180 − 2 × ${a} = ${180 - 2 * a}°.` } }
+      default: { const x = 180 / (k + 1); return { ans: x, wrong: [180 / k, 90 / k, 180 - x].filter((v) => isInt(v) && v !== x), expl: `If the angle is x, the other two total ${k}x, so x + ${k}x = 180 and x = ${num(x)}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Two angles of a triangle are ${p.a}° and ${p.b}°. What is the third angle?`, { m: 'third' }],
+    [2, (p) => `The angles of a triangle are in the ratio ${p.q.join(' : ')}. What is the largest angle?`, { m: 'ratio' }],
+    [1, (p) => `In a right-angled triangle one of the acute angles is ${p.a}°. What is the other acute angle?`, { m: 'right' }],
+    [2, (p) => `The angles of a triangle are x°, ${p.k}x° and ${p.m2}x°. What is the value of x?`, { m: 'xs' }],
+    [2, (p) => `In triangle ABC, ∠A is ${p.d}° more than ∠B and ∠C = ${p.c}°. Find ∠A.`, { m: 'diff' }],
+    [2, (p) => `The angles of a triangle are (x + ${p.pq[0]})°, (2x − ${p.pq[1]})° and (x + ${p.pq[2]})°. What is the value of x?`, { m: 'lin' }],
+    [2, (p) => `In a triangle, the largest angle is ${W_TIMES[p.k]} the smallest, and the third angle is ${p.c}°. What is the largest angle?`, { m: 'largest' }],
+    [1, () => `Which of the following sets of angles could be the angles of a triangle?`, { m: 'which' }],
+    [2, (p) => `The two acute angles of a right-angled triangle are in the ratio ${p.q[0]} : ${p.q[1]}. What is the smaller of them?`, { m: 'rratio' }],
+    [3, (p) => `Two angles of a triangle add up to ${p.a + 70}° and differ by ${p.d}°. What is the largest angle of the triangle?`, { m: 'sumdiff' }],
+    [1, (p) => `Two angles of a triangle are each ${p.a}°. What is the third angle?`, { m: 'twoeq' }],
+    [2, (p) => `One angle of a triangle is ${['', '', 'half', 'one-third', 'one-quarter', 'one-fifth'][p.k]} of the sum of the other two angles. What is that angle?`, { m: 'half' }],
+  ],
+})
+family('ga.geometry.isosceles-triangle', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ a: r.int(20, 85), v: r.int(20, 140), o: r.int(95, 160), k: r.pick([1, 2, 4, 7]), d: r.int(3, 60), e: r.int(95, 140), pick: r.int(0, 999) }),
+  key: (p) => `${p.m}-${({ base: p.a, vertex: p.v, obtuse: p.o, could: p.a * 1000 + p.pick, ktimes: p.k, more: p.d, pqr: p.a, right: 0, ext: p.e, gap: p.v })[p.m]}`,
+  solve: (P) => {
+    const { a, v, o, k, d, e, pick } = P
+    switch (P.m) {
+      case 'base': return { ans: 180 - 2 * a, wrong: [180 - a, (180 - a) / 2, 90 - a].filter((x) => isInt(x) && x > 0 && x !== 180 - 2 * a), expl: `180 − 2 × ${a} = ${180 - 2 * a}°.` }
+      case 'vertex': { if (v % 2) return null; const b = (180 - v) / 2; return { ans: b, wrong: [180 - v, 180 - 2 * v > 0 ? 180 - 2 * v : v / 2, (180 - v) / 3].filter((x) => isInt(x) && x > 0 && x !== b), expl: `The base angles are equal: (180 − ${v}) ÷ 2 = ${b}°.` } }
+      case 'obtuse': { if (o % 2) return null; const b = (180 - o) / 2; return { ans: `${b}° each`, wrong: [`${o}° and ${180 - 2 * o < 0 ? b + 10 : 180 - 2 * o}°`, `${180 - o}° each`, `${b + 5}° each`].filter((t) => t !== `${b}° each`), expl: `An obtuse angle can only be the vertex angle (two obtuse angles would exceed 180°), so the other two are (180 − ${o}) ÷ 2 = ${b}° each.` } }
+      case 'could': {
+        if (a === 60 || a % 2) return null
+        const valid = new Set([a, 180 - 2 * a, (180 - a) / 2])
+        const rr = makeRng(`iso-${a}-${pick}`); const ans = rr.pick([180 - 2 * a, (180 - a) / 2])
+        const bad = [90 - a, 180 - a, a + 10, a / 2, 2 * a].filter((x) => x > 0 && x < 180 && !valid.has(x))
+        return { ans, wrong: bad, expl: `If ${a}° is a base angle, the angles are ${a}°, ${a}°, ${180 - 2 * a}°; if it is the vertex angle, the others are ${(180 - a) / 2}° each. So ${ans}° is possible; the other options fit neither case.` }
+      }
+      case 'ktimes': { const x = 180 / (2 * k + 1); if (!isInt(x)) return null; return { ans: x, wrong: [k * x, 180 / (k + 2), 90 / k, 180 / (k + 1), 2 * x].filter((y) => isInt(y) && y !== x), expl: `If the vertex angle is v, each base angle is ${k}v, so v + ${2 * k}v = 180 and v = ${x}°.` } }
+      case 'more': { const b = (180 - d) / 3; if (!isInt(b)) return null; return { ans: b + d, wrong: [b, (180 + d) / 2, (180 - d) / 2].filter((y) => isInt(y) && y !== b + d), expl: `Base angles b, vertex b + ${d}: 3b + ${d} = 180, so b = ${b}° and the vertex angle is ${b + d}°.` } }
+      case 'pqr': return { ans: 180 - 2 * a, wrong: [a, (180 - a) / 2, 180 - a].filter((y) => isInt(y) && y !== 180 - 2 * a), expl: `PQ = PR makes ∠Q = ∠R = ${a}°, so ∠P = 180 − ${2 * a} = ${180 - 2 * a}°.` }
+      case 'right': return { ans: 45, wrong: [60, 90, 30], expl: `The right angle is the vertex angle; the other two are equal and share 90°, so each is 45°.` }
+      case 'ext': { const bA = 180 - e; const A = 180 - 2 * bA; return { ans: A, wrong: [bA, e - 90, 180 - A / 2 > 0 && isInt(180 - A / 2) ? 180 - A / 2 : A + 10].filter((y) => y > 0 && y !== A), expl: `∠C = 180 − ${e} = ${bA}°; ∠B = ∠C, so ∠A = 180 − 2 × ${bA} = ${A}°.` } }
+      default: { if (v % 2) return null; const b = (180 - v) / 2; const g = Math.abs(b - v); if (g === 0) return null; return { ans: g, wrong: [b, 180 - v, v - 2 * b > 0 ? g + 10 : Math.abs(v - (180 - v))].filter((y) => y !== g && y > 0), expl: `Each base angle is (180 − ${v}) ÷ 2 = ${b}°; the difference from ${v}° is ${g}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `The two equal angles of an isosceles triangle are ${p.a}° each. What is the third angle?`, { m: 'base' }],
+    [1, (p) => `The vertex angle of an isosceles triangle is ${p.v}°. What is each base angle?`, { m: 'vertex' }],
+    [2, (p) => `One angle of an isosceles triangle is ${p.o}°. What are the other two angles?`, { m: 'obtuse' }],
+    [2, (p) => `One angle of an isosceles triangle is ${p.a}°. Which of the following could be another of its angles?`, { m: 'could' }],
+    [2, (p) => `In an isosceles triangle each base angle is ${p.k === 1 ? 'equal to' : `${p.k} times`} the vertex angle. What is the vertex angle?`, { m: 'ktimes' }],
+    [2, (p) => `The vertex angle of an isosceles triangle is ${p.d}° more than each base angle. Find the vertex angle.`, { m: 'more' }],
+    [1, (p) => `In triangle PQR, PQ = PR and ∠Q = ${p.a}°. What is ∠P?`, { m: 'pqr' }],
+    [1, () => `In an isosceles right-angled triangle, each of the two equal angles measures:`, { m: 'right' }],
+    [3, (p) => `In triangle ABC, AB = AC. Side BC is extended beyond C, and the exterior angle formed at C is ${p.e}°. What is ∠A?`, { m: 'ext' }],
+    [2, (p) => `An isosceles triangle has a vertex angle of ${p.v}°. What is the difference between a base angle and the vertex angle?`, { m: 'gap' }],
+  ],
+})
+
+family('ga.geometry.triangle-exterior-angle', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ e: r.int(70, 160), a: r.int(20, 65), q: r.pick([[1, 3], [2, 3], [1, 2], [3, 5], [1, 4], [2, 7], [4, 5]]), q3: r.pick([[2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7], [2, 3, 3], [3, 3, 4]]), d: r.int(4, 40), k: r.pick([2, 3, 4, 5, 8, 9]), t: r.pick([[40, 60, 80], [35, 65, 80], [30, 70, 80], [45, 55, 80], [50, 60, 70], [25, 70, 85], [20, 75, 85]]) }),
+  key: (p) => `${p.m}-${p.e}-${p.a}-${p.q.join('')}-${p.q3.join('')}-${p.d}-${p.k}-${p.t.join('')}`,
+  fact: (p) => `${p.m}`,
+  solve: (P) => {
+    const { e, a, q, q3, d, k, t } = P
+    switch (P.m) {
+      case 'other': { if (e - a <= 10) return null; return { ans: e - a, wrong: [180 - e, 180 - a - e > 0 ? 180 - a - e : e + a - 90, e + a].filter((v) => v > 0 && v !== e - a && v < 180), expl: `An exterior angle equals the sum of the two interior opposite angles: ${e} − ${a} = ${e - a}°.` } }
+      case 'ratio': { const s = q[0] + q[1]; if (e % s) return null; const u = e / s; const t2 = (x, y) => `${x}° and ${y}°`; return { ans: t2(u * q[0], u * q[1]), wrong: [t2(((180 - e) / s) * q[0], ((180 - e) / s) * q[1]), t2(u * q[0] + 5, u * q[1] + 15), t2(u * q[0] - 5, u * q[1] - 15)].filter((x) => !/\.\d/.test(x) && !x.includes('−') && x !== t2(u * q[0], u * q[1])), expl: `The two interior opposite angles add up to ${e}°; ${s} parts = ${e}°, so they are ${u * q[0]}° and ${u * q[1]}°.` } }
+      case 'adj': return { ans: 180 - e, wrong: [360 - e, e - 90 > 0 ? e - 90 : e + 10, e / 2].filter((v) => isInt(v) && v !== 180 - e), expl: `An exterior angle and its adjacent interior angle form a straight line: 180 − ${e} = ${180 - e}°.` }
+      case 'abc': { if (e - a <= 10) return null; return { ans: e - a, wrong: [180 - e, 180 - (e - a), e + a - 90].filter((v) => v > 0 && v !== e - a && v < 180), expl: `∠ACD = ∠A + ∠B, so ∠B = ${e} − ${a} = ${e - a}°.` } }
+      case 'equal': { if (e % 2) return null; return { ans: e / 2, wrong: [180 - e, (180 - e) / 2, e].filter((v) => isInt(v) && v > 0 && v !== e / 2), expl: `∠A + ∠B = ∠ACD = ${e}°; with ∠A = ∠B, each is ${e / 2}°.` } }
+      case 'ext3': { const s = sum(q3); if (360 % s) return null; const u = 360 / s; const exts = q3.map((x) => x * u); const ints = exts.map((x) => 180 - x); if (ints.some((x) => x <= 0)) return null; const ans = Math.min(...ints); return { ans, wrong: [Math.min(...exts), 180 - Math.min(...exts), (180 / s) * q3[0]].filter((v) => isInt(v) && v !== ans), expl: `Exterior angles total 360°: they are ${exts.join('°, ')}°. The smallest interior angle is 180 − ${Math.max(...exts)} = ${ans}°.` } }
+      case 'differ': { if ((e + d) % 2 || d >= e) return null; return { ans: (e + d) / 2, wrong: [(e - d) / 2, (180 - e + d) / 2, e - d].filter((v) => isInt(v) && v > 0 && v !== (e + d) / 2), expl: `The two angles add up to ${e}° and differ by ${d}°, so the larger is (${e} + ${d}) ÷ 2 = ${(e + d) / 2}°.` } }
+      case 'largest': { const mn = Math.min(...t); return { ans: 180 - mn, wrong: [180 - Math.max(...t), Math.max(...t), 360 - mn].filter((v) => v !== 180 - mn), expl: `The largest exterior angle is next to the smallest interior angle: 180 − ${mn} = ${180 - mn}°.` } }
+      case 'pqr': { if ((e - d) % 2) return null; const x = (e - d) / 2; if (x <= 5) return null; return { ans: x, wrong: [(e + d) / 2, (180 - e - d) / 2, e - d].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `The exterior angle at R equals ∠P + ∠Q: x + (x + ${d}) = ${e}, so 2x = ${e - d} and x = ${x}.` } }
+      default: { const x = 180 / (k + 1); return { ans: x, wrong: [180 - x, 180 / k, 90 / (k + 1)].filter((v) => isInt(v) && v !== x), expl: `interior + ${k} × interior = 180°, so the interior angle is 180 ÷ ${k + 1} = ${x}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `An exterior angle of a triangle is ${p.e}° and one of the interior opposite angles is ${p.a}°. What is the other interior opposite angle?`, { m: 'other' }],
+    [2, (p) => `An exterior angle of a triangle is ${p.e}° and the interior opposite angles are in the ratio ${p.q.join(' : ')}. The interior opposite angles measure:`, { m: 'ratio' }],
+    [1, (p) => `An exterior angle of a triangle is ${p.e}°. What is the interior angle adjacent to it?`, { m: 'adj' }],
+    [1, (p) => `In triangle ABC, side BC is extended to D. If ∠ACD = ${p.e}° and ∠A = ${p.a}°, find ∠B.`, { m: 'abc' }],
+    [2, (p) => `In triangle ABC, BC is produced to D so that ∠ACD = ${p.e}°. If ∠A = ∠B, find ∠A.`, { m: 'equal' }],
+    [3, (p) => `The exterior angles of a triangle are in the ratio ${p.q3.join(' : ')}. What is the smallest interior angle?`, { m: 'ext3' }],
+    [2, (p) => `An exterior angle of a triangle is ${p.e}°, and the two interior opposite angles differ by ${p.d}°. What is the larger of them?`, { m: 'differ' }],
+    [2, (p) => `The interior angles of a triangle are ${p.t[0]}°, ${p.t[1]}° and ${p.t[2]}°. What is its largest exterior angle?`, { m: 'largest' }],
+    [2, (p) => `In triangle PQR, ∠P = x°, ∠Q = (x + ${p.d})° and the exterior angle at R is ${p.e}°. Find x.`, { m: 'pqr' }],
+    [2, (p) => `An exterior angle of a triangle is ${p.k} times the interior angle next to it. What is that interior angle?`, { m: 'ktimes' }],
+  ],
+})
+
+family('ga.geometry.complementary-supplementary', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ a: r.int(12, 88), b: r.int(20, 170), k: r.pick([2, 3, 4, 5, 8, 9]), d: 2 * r.int(5, 60), q: r.pick([[1, 2], [2, 3], [1, 5], [4, 5], [7, 8], [2, 7], [1, 8], [3, 7]]), ks: r.pick([3, 4, 6, 10]) }),
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.k}-${p.d}-${p.q.join('')}-${p.ks}`,
+  fact: (p) => `${p.m}`,
+  solve: (P) => {
+    const { a, b, k, d, q, ks } = P
+    switch (P.m) {
+      case 'comp': return { ans: 90 - a, wrong: [180 - a, 90 + a, 360 - a].filter((v) => v !== 90 - a), expl: `Complementary angles add up to 90°: 90 − ${a} = ${90 - a}°.` }
+      case 'supp': return { ans: 180 - b, wrong: [90 - b > 0 ? 90 - b : 270 - b, 360 - b, 180 + b].filter((v) => v !== 180 - b), expl: `Supplementary angles add up to 180°: 180 − ${b} = ${180 - b}°.` }
+      case 'self': return { ans: 45, wrong: [30, 90, 60], expl: `If x = 90 − x, then 2x = 90 and x = 45°.` }
+      case 'kcomp': { const x = (90 * k) / (k + 1); if (!isInt(x)) return null; return { ans: x, wrong: [90 / (k + 1), (180 * k) / (k + 1), 90 - x + 5].filter((v) => isInt(v) && v !== x), expl: `x = ${k}(90 − x) gives ${k + 1}x = ${90 * k}, so x = ${x}°.` } }
+      case 'moresupp': { if (d >= 180) return null; return { ans: (180 + d) / 2, wrong: [(180 - d) / 2, (90 + d) / 2, 180 - d].filter((v) => isInt(v) && v !== (180 + d) / 2), expl: `x − (180 − x) = ${d}, so 2x = ${180 + d} and x = ${(180 + d) / 2}°.` } }
+      case 'suppcomp': { const x = (90 * ks - 180) / (ks - 1); if (!isInt(x)) return null; return { ans: x, wrong: [90 - x, 180 - x, 180 / ks].filter((v) => isInt(v) && v !== x), expl: `180 − x = ${ks}(90 − x) gives ${ks - 1}x = ${90 * ks - 180}, so x = ${x}°.` } }
+      case 'cratio': { const s = q[0] + q[1]; if (90 % s) return null; const u = 90 / s; return { ans: u * q[1], wrong: [u * q[0], (180 / s) * q[1], 90 - u].filter((v) => v !== u * q[1]), expl: `${s} parts = 90°, so one part = ${u}° and the larger angle is ${q[1]} × ${u} = ${u * q[1]}°.` } }
+      case 'sdiff': { if (d >= 180) return null; return { ans: (180 - d) / 2, wrong: [(180 + d) / 2, (90 - d / 2) > 0 ? 90 - d / 2 : d, 180 - d, d].filter((v) => isInt(v) && v > 0 && v !== (180 - d) / 2), expl: `x + (x + ${d}) = 180, so x = (180 − ${d}) ÷ 2 = ${(180 - d) / 2}°.` } }
+      case 'gap': return { ans: 90, wrong: [180 - 2 * a, 2 * a, 180].filter((v) => v > 0 && v !== 90), expl: `(180 − ${a}) − (90 − ${a}) = 90°; the difference is always 90°.` }
+      default: { const x = 180 / (k + 1); if (!isInt(x)) return null; return { ans: x, wrong: [180 - x, 90 / (k + 1), 180 / k].filter((v) => isInt(v) && v !== x), expl: `x + ${k}x = 180, so x = ${x}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `What is the complement of an angle of ${p.a}°?`, { m: 'comp' }],
+    [1, (p) => `What is the supplement of an angle of ${p.b}°?`, { m: 'supp' }],
+    [1, () => `What is the measure of an angle that is equal to its own complement?`, { m: 'self' }],
+    [2, (p) => `An angle is ${W_TIMES[p.k] ?? `${p.k} times`} its complement. Find the angle.`, { m: 'kcomp' }],
+    [2, (p) => `An angle is ${p.d}° more than its supplement. What is the angle?`, { m: 'moresupp' }],
+    [3, (p) => `The supplement of an angle is ${p.ks} times its complement. What is the angle?`, { m: 'suppcomp' }],
+    [2, (p) => `Two complementary angles are in the ratio ${p.q.join(' : ')}. What is the larger angle?`, { m: 'cratio' }],
+    [2, (p) => `Two supplementary angles differ by ${p.d}°. What is the smaller angle?`, { m: 'sdiff' }],
+    [1, (p) => `By how much does the supplement of ${p.a}° exceed its complement?`, { m: 'gap' }],
+    [2, (p) => `Find the angle whose supplement is ${p.k} times the angle itself.`, { m: 'ksupp' }],
+  ],
+})
+family('ga.geometry.parallel-lines', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ a: r.int(35, 145), p1: r.int(2, 5), q1: r.int(5, 30), r1: r.int(1, 4), s1: r.int(5, 30), x: r.int(15, 40), q: r.pick([[1, 2], [2, 3], [1, 5], [4, 5], [2, 7], [1, 3], [3, 7], [7, 11]]) }),
+  key: (p) => `${p.m}-${p.a}-${p.p1}-${p.q1}-${p.r1}-${p.s1}-${p.x}-${p.q.join('')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { a, p1, q1, r1, s1, x, q } = P
+    switch (P.m) {
+      case 'corr': if (a === 90) return null; return { ans: a, wrong: [180 - a, Math.abs(90 - a), 360 - a], expl: `Corresponding angles on parallel lines are equal, so the other angle is also ${a}°.` }
+      case 'coint': if (a === 90) return null; return { ans: 180 - a, wrong: [a, Math.abs(90 - a), 360 - a], expl: `Co-interior (allied) angles add up to 180°: 180 − ${a} = ${180 - a}°.` }
+      case 'alt': if (a === 90) return null; return { ans: a, wrong: [180 - a, 360 - a, Math.abs(90 - a)], expl: `Alternate interior angles formed by a transversal across parallel lines are equal: ${a}°.` }
+      case 'cox': { if (p1 === r1) return null; const A1 = p1 * x + q1; const A2 = 180 - A1; const s = r1 * x - A2; if (s <= 0 || A2 <= 0) return null; P.s = s; return { ans: x, wrong: [(180 - q1 + s) / (p1 + r1) + 5, (q1 + s) / Math.abs(p1 - r1), x + 10].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `Co-interior angles add up to 180°: ${p1 + r1}x ${sg(q1 - s)} = 180, so x = ${x}.` } }
+      case 'altx': { if (p1 <= r1) return null; const A = r1 * x + s1; const q2 = p1 * x - A; if (q2 <= 0) return null; P.q2 = q2; return { ans: x, wrong: [(s1 + q2) / (p1 + r1), x + 5, (180 - s1 + q2) / (p1 + r1)].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `Alternate angles are equal: ${p1}x − ${q2} = ${r1 === 1 ? '' : r1}x + ${s1}, so ${p1 - r1}x = ${s1 + q2} and x = ${x}.` } }
+      case 'corrsize': { if (p1 <= r1) return null; const A = r1 * x + s1; const q2 = p1 * x - A; if (q2 <= 0 || A >= 180) return null; P.q2 = q2; return { ans: A, wrong: [x, 180 - A, A + 10].filter((v) => v !== A), expl: `Corresponding angles are equal: ${p1}x − ${q2} = ${r1 === 1 ? '' : r1}x + ${s1} gives x = ${x}, so each angle is ${A}°.` } }
+      case 'obtuse': { const acute = Math.min(a, 180 - a); if (acute === 90 || acute < 30) return null; P.ac = acute; return { ans: 4 * (180 - acute), wrong: [2 * (180 - acute), 4 * acute, 360].filter((v) => v !== 4 * (180 - acute)), expl: `The eight angles are four of ${acute}° and four of ${180 - acute}°; the obtuse ones total 4 × ${180 - acute} = ${4 * (180 - acute)}°.` } }
+      default: { const s = q[0] + q[1]; if (180 % s) return null; const u = 180 / s; return { ans: u * q[0], wrong: [u * q[1], (90 / s) * q[0], 180 - u].filter((v) => isInt(v) && v !== u * q[0]), expl: `Co-interior angles total 180°: ${s} parts = 180°, so the smaller is ${q[0]} × ${u} = ${u * q[0]}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Two parallel lines are cut by a transversal. One of a pair of corresponding angles is ${p.a}°. What is the other?`, { m: 'corr' }],
+    [1, (p) => `A transversal crosses two parallel lines. If one of a pair of co-interior angles is ${p.a}°, what is the other?`, { m: 'coint' }],
+    [1, (p) => `When a transversal cuts two parallel lines, one of a pair of alternate interior angles is ${p.a}°. The other angle of the pair is:`, { m: 'alt' }],
+    [2, (p) => `A transversal cuts two parallel lines, making co-interior angles of (${p.p1}x + ${p.q1})° and (${p.r1 === 1 ? '' : p.r1}x − ${p.s})°. What is x?`, { m: 'cox' }],
+    [2, (p) => `Two alternate angles formed by a transversal across parallel lines are (${p.p1}x − ${p.q2})° and (${p.r1 === 1 ? '' : p.r1}x + ${p.s1})°. Find x.`, { m: 'altx' }],
+    [3, (p) => `Corresponding angles formed by a transversal across two parallel lines are (${p.p1}x − ${p.q2})° and (${p.r1 === 1 ? '' : p.r1}x + ${p.s1})°. What is the size of each angle?`, { m: 'corrsize' }],
+    [3, (p) => `A transversal meets two parallel lines, and one of the eight angles formed is ${p.ac}°. What is the sum of all the obtuse angles formed?`, { m: 'obtuse' }],
+    [2, (p) => `Two co-interior angles between a pair of parallel lines are in the ratio ${p.q.join(' : ')}. What is the smaller angle?`, { m: 'ratio' }],
+  ],
+})
+
+family('ga.geometry.pythagoras', 'ga.geometry', {
+  gen: (r) => { const t = r.pick(PY); const s = r.pick([1, 1, 2, 3]); const [a, b, c] = t.map((v) => v * s); return { a, b, c, pick: r.int(0, 9999), h2: r.int(2, 10) } },
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.c}`,
+  fact: (p) => `${p.m}`,
+  solve: (P) => {
+    const { a, b, c, pick, h2 } = P
+    const U = (u) => ({ fmt: (v) => `${num(v)} ${u}` })
+    const std = (ans, x, y) => [x + y, Math.abs(y - x) || ans + 1, ans + 1, ans - 1].filter((v) => v > 0 && v !== ans)
+    switch (P.m) {
+      case 'hyp': return { ...U('cm'), ans: c, wrong: std(c, a, b), expl: `c² = ${a}² + ${b}² = ${a * a} + ${b * b} = ${c * c}, so c = ${c} cm.` }
+      case 'leg': return { ...U('cm'), ans: b, wrong: [c - a, c + a > 60 ? b + 1 : c + a, b + 2, b - 1].filter((v) => v > 0 && v !== b), expl: `${c}² − ${a}² = ${c * c} − ${a * a} = ${b * b}, so the third side is ${b} cm.` }
+      case 'ladder': return { ...U('m'), ans: b, wrong: [c - a, c + a, b + 1].filter((v) => v !== b), expl: `height² = ${c}² − ${a}² = ${c * c - a * a}, so the height is ${b} m.` }
+      case 'diag': return { ...U('cm'), ans: c, wrong: std(c, a, b), expl: `diagonal² = ${a}² + ${b}² = ${c * c}, so the diagonal is ${c} cm.` }
+      case 'walk': return { ...U('km'), ans: c, wrong: std(c, a, b), expl: `The paths are at right angles: √(${a}² + ${b}²) = √${c * c} = ${c} km.` }
+      case 'which': { const rr = makeRng(`py-${pick}`); const t = rr.pick(PY); const f = (x) => x.join(', '); const bad = [[t[0], t[1], t[2] + 1], [t[0] + 1, t[1], t[2]], [t[0], t[1] + 2, t[2] + 1]]; return { ans: f(t), wrong: bad.map(f), expl: `${t[0]}² + ${t[1]}² = ${t[0] ** 2 + t[1] ** 2} = ${t[2]}², so ${f(t)} is a right-angled triangle; the other sets fail this test.` } }
+      case 'square': { const s = a; return { ...U('cm'), ans: s, wrong: [2 * s, s * s, s + 2].filter((v) => v !== s), expl: `A square of side s has diagonal s√2, so s = ${s} cm.` } }
+      case 'kite': return { ...U('m'), ans: b, wrong: [c - a, a, b + 2].filter((v) => v !== b), expl: `The string is the hypotenuse: height² = ${c}² − ${a}² = ${b * b}, so the kite is ${b} m high.` }
+      case 'rhombus': return { ...U('cm'), ans: c, wrong: [a + b, 2 * c, c + 1].filter((v) => v !== c), expl: `The diagonals of a rhombus bisect each other at right angles, giving half-diagonals ${a} and ${b}; side = √(${a * a} + ${b * b}) = ${c} cm.` }
+      case 'isosceles': return { ...U('cm'), ans: b, wrong: [c - a, Math.round(Math.sqrt(c * c - 4 * a * a)) || b + 2, b + 1].filter((v) => v > 0 && v !== b), expl: `The height bisects the base: height² = ${c}² − ${a}² = ${b * b}, so the height is ${b} cm.` }
+      case 'area': return { fmt: (v) => `${num(v)} cm²`, ans: (a * b) / 2, wrong: [a * b, (c * c) / 2, a * b + c].filter((v) => isInt(v) && v !== (a * b) / 2), expl: `a + b = ${a + b} and a² + b² = ${c * c}; 2ab = ${(a + b) ** 2} − ${c * c} = ${2 * a * b}, so the area ab/2 = ${(a * b) / 2} cm².` }
+      case 'poles': { const hi = h2 + a; P.h1 = hi; return { ...U('m'), ans: c, wrong: [Math.round(Math.sqrt(b * b + hi * hi)) === c ? c + 2 : Math.round(Math.sqrt(b * b + hi * hi)), b + a, c + 1].filter((v) => v !== c), expl: `The height difference is ${hi} − ${h2} = ${a} m and the gap ${b} m: distance = √(${a * a} + ${b * b}) = ${c} m.` } }
+      case 'ship': return { ...U('km'), ans: c, wrong: std(c, a, b), expl: `Distance = √(${a}² + ${b}²) = √${c * c} = ${c} km.` }
+      default: { const d1 = b - a; const d2 = c - a; if (d1 <= 0) return null; P.d1 = d1; P.d2 = d2; return { ans: c, wrong: [a, b, c + d1].filter((v) => v !== c), expl: `x² + (x + ${d1})² = (x + ${d2})² is satisfied by x = ${a}: ${a * a} + ${b * b} = ${c * c}. The hypotenuse is ${c}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `The two shorter sides of a right-angled triangle are ${p.a} cm and ${p.b} cm. What is the length of the hypotenuse?`, { m: 'hyp' }],
+    [1, (p) => `The hypotenuse of a right-angled triangle is ${p.c} cm and one of the other sides is ${p.a} cm. Find the third side.`, { m: 'leg' }],
+    [2, (p) => `A ladder ${p.c} m long rests against a vertical wall with its foot ${p.a} m from the wall. How high up the wall does it reach?`, { m: 'ladder' }],
+    [2, (p) => `What is the length of the diagonal of a rectangle measuring ${p.a} cm by ${p.b} cm?`, { m: 'diag' }],
+    [2, (p) => `A man walks ${p.a} km due north and then ${p.b} km due east. How far is he from his starting point?`, { m: 'walk' }],
+    [1, () => `Which of the following sets of lengths can form a right-angled triangle?`, { m: 'which' }],
+    [1, (p) => `The diagonal of a square is ${p.a}√2 cm. What is the length of its side?`, { m: 'square' }],
+    [2, (p) => `A kite string ${p.c} m long is pulled tight and tied to the ground. The kite is directly above a point ${p.a} m from where the string is tied. How high is the kite?`, { m: 'kite' }],
+    [3, (p) => `The diagonals of a rhombus are ${2 * p.a} cm and ${2 * p.b} cm long. What is the length of each side?`, { m: 'rhombus' }],
+    [2, (p) => `An isosceles triangle has two equal sides of ${p.c} cm and a base of ${2 * p.a} cm. What is its height?`, { m: 'isosceles' }],
+    [3, (p) => `A right-angled triangle has a hypotenuse of ${p.c} cm and a perimeter of ${p.a + p.b + p.c} cm. What is its area?`, { m: 'area' }],
+    [3, (p) => `Two vertical poles ${p.h1} m and ${p.h2} m high stand ${p.b} m apart on level ground. What is the distance between their tops?`, { m: 'poles' }],
+    [2, (p) => `A ship sails ${p.a} km west from a port and then ${p.b} km south. How far is it from the port in a straight line?`, { m: 'ship' }],
+    [3, (p) => `The sides of a right-angled triangle are x, x + ${p.d1} and x + ${p.d2}, the last being the hypotenuse. What is the length of the hypotenuse?`, { m: 'alg' }],
+  ],
+})
+
+family('ga.geometry.circle-angles', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ a: r.int(20, 80), c: r.int(30, 150), p1: r.int(2, 4), q1: r.int(5, 30), r1: r.int(1, 3), x: r.int(15, 30) }),
+  key: (p) => `${p.m}-${p.a}-${p.c}-${p.p1}-${p.q1}-${p.r1}-${p.x}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { a, c, p1, q1, r1, x } = P
+    switch (P.m) {
+      case 'semi': return { ans: 90, wrong: [180, 60, 45], expl: `An angle inscribed in a semicircle (standing on a diameter) is always a right angle.` }
+      case 'centre': return { ans: a, wrong: [2 * a, 180 - 2 * a, 90 - a].filter((v) => v > 0 && v !== a), expl: `The angle at the circumference is half the angle at the centre: ${2 * a} ÷ 2 = ${a}°.` }
+      case 'double': return { ans: 2 * a, wrong: [a / 2, 180 - a, 90 + a].filter((v) => isInt(v) && v !== 2 * a), expl: `The angle at the centre is twice the angle at the circumference: 2 × ${a} = ${2 * a}°.` }
+      case 'tangent': return { ans: 90 - a, wrong: [180 - a, a, 90 + a].filter((v) => v !== 90 - a), expl: `The radius OT is perpendicular to the tangent, so ∠OTP = 90° and ∠TOP = 180 − 90 − ${a} = ${90 - a}°.` }
+      case 'cyclic': return { ans: 180 - c, wrong: [c, 360 - c, Math.abs(90 - c) || c + 10].filter((v) => v !== 180 - c), expl: `Opposite angles of a cyclic quadrilateral add up to 180°: 180 − ${c} = ${180 - c}°.` }
+      case 'diam': return { ans: 90 - a, wrong: [180 - a, a, 180 - 2 * a].filter((v) => v > 0 && v !== 90 - a), expl: `∠ACB = 90° (angle in a semicircle), so ∠CBA = 180 − 90 − ${a} = ${90 - a}°.` }
+      case 'radii': { if (c % 2) return null; return { ans: (180 - c) / 2, wrong: [180 - c, c / 2, 90 - c / 4].filter((v) => isInt(v) && v !== (180 - c) / 2), expl: `The two radii are equal, so the triangle is isosceles: (180 − ${c}) ÷ 2 = ${(180 - c) / 2}° each.` } }
+      default: { const A1 = p1 * x + q1; const A2 = 180 - A1; const s = A2 - r1 * x; if (A2 <= 0 || s <= 0) return null; P.s = s; return { ans: x, wrong: [(180 - q1 - s) / (p1 + r1) + 3, (360 - q1 - s) / (p1 + r1), x + 5].filter((v) => isInt(v) && v !== x), fmt: num, expl: `Opposite angles of a cyclic quadrilateral are supplementary: ${p1 + r1}x + ${q1 + s} = 180, so x = ${x}.` } }
+    }
+  },
+  items: [
+    [1, () => `What is the size of an angle in a semicircle?`, { m: 'semi' }],
+    [2, (p) => `An arc subtends an angle of ${2 * p.a}° at the centre of a circle. What angle does it subtend at a point on the remaining part of the circle?`, { m: 'centre' }],
+    [2, (p) => `A chord subtends an angle of ${p.a}° at a point on the major arc of a circle. What angle does it subtend at the centre?`, { m: 'double' }],
+    [2, (p) => `From an external point P, a tangent PT touches a circle with centre O at T. If ∠TPO = ${p.a}°, what is ∠TOP?`, { m: 'tangent' }],
+    [1, (p) => `One angle of a cyclic quadrilateral is ${p.c}°. What is the angle opposite to it?`, { m: 'cyclic' }],
+    [2, (p) => `AB is a diameter of a circle and C is another point on the circle. If ∠CAB = ${p.a}°, find ∠CBA.`, { m: 'diam' }],
+    [2, (p) => `Two radii of a circle make an angle of ${p.c}° at the centre. What is each of the other two angles of the triangle formed by the radii and the chord joining their ends?`, { m: 'radii' }],
+    [2, (p) => `Opposite angles of a cyclic quadrilateral are (${p.p1}x + ${p.q1})° and (${p.r1 === 1 ? '' : p.r1}x + ${p.s})°. Find x.`, { m: 'cyclicx' }],
+  ],
+})
+
+family('ga.geometry.polygon-diagonals', 'ga.geometry', {
+  gen: (r) => ({ nn: r.pick([5, 6, 7, 8, 9, 10, 12]), n: r.int(7, 20), n2: r.int(4, 15), reg: r.pick([5, 6, 8, 9, 10, 12, 15, 18, 20]) }),
+  key: (p) => `${p.m}-${p.nn}-${p.n}-${p.n2}-${p.reg}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { nn, n, n2, reg } = P
+    const D = (x) => (x * (x - 3)) / 2
+    switch (P.m) {
+      case 'named': return { ans: D(nn), wrong: [nn * (nn - 3), nn - 3, (nn * (nn - 1)) / 2].filter((v) => v !== D(nn)), expl: `Diagonals = n(n − 3)/2 = ${nn} × ${nn - 3} ÷ 2 = ${D(nn)}.` }
+      case 'rev': return { ans: n, wrong: [n + 1, n - 1, n + 3], expl: `n(n − 3)/2 = ${D(n)} gives n(n − 3) = ${2 * D(n)} = ${n} × ${n - 3}, so n = ${n}.` }
+      case 'vertex': return { ans: n - 3, wrong: [n - 2, n - 1, D(n)], expl: `From one vertex you cannot draw a diagonal to itself or its two neighbours: ${n} − 3 = ${n - 3}.` }
+      case 'tri': return { ans: nn - 2, wrong: [nn - 3, nn, nn - 1], expl: `The diagonals from one vertex split an n-gon into n − 2 triangles: ${nn} − 2 = ${nn - 2}.` }
+      case 'more': { if (n === n2) return null; const hi = Math.max(n, n2); const lo = Math.min(n, n2); P.hi = hi; P.lo = lo; const ans = D(hi) - D(lo); return { ans, wrong: [hi - lo, (hi - lo) * 3, D(hi)].filter((v) => v !== ans), expl: `${hi}-gon: ${D(hi)} diagonals; ${lo}-gon: ${D(lo)}; difference ${ans}.` } }
+      default: return { ans: D(reg), wrong: [reg - 3, reg * (reg - 3), D(reg) + reg].filter((v) => v !== D(reg)), expl: `Exterior angle = 180 − ${180 - 360 / reg} = ${360 / reg}°, so n = ${reg}; diagonals = ${reg} × ${reg - 3} ÷ 2 = ${D(reg)}.` }
+    }
+  },
+  items: [
+    [1, (p) => `How many diagonals does a ${PNAME[p.nn]} have?`, { m: 'named' }],
+    [2, (p) => `A polygon has ${p.n * (p.n - 3) / 2} diagonals. How many sides does it have?`, { m: 'rev' }],
+    [1, (p) => `How many diagonals can be drawn from one vertex of ${art(p.n)} ${p.n}-sided polygon?`, { m: 'vertex' }],
+    [1, (p) => `The diagonals drawn from one vertex divide a ${PNAME[p.nn]} into how many triangles?`, { m: 'tri' }],
+    [2, (p) => `How many more diagonals does ${art(p.hi)} ${p.hi}-sided polygon have than ${art(p.lo)} ${p.lo}-sided polygon?`, { m: 'more' }],
+    [3, (p) => `A regular polygon has interior angles of ${180 - 360 / p.reg}° each. How many diagonals does it have?`, { m: 'regdiag' }],
+  ],
+})
+
+family('ga.geometry.angles-at-a-point', 'ga.geometry', {
+  fmt: degFmt,
+  gen: (r) => ({ q: r.pick([[1, 2, 3], [2, 3, 4], [1, 3, 5], [3, 4, 5], [1, 4, 7], [2, 5, 11], [4, 5, 9]]), q4: r.pick([[1, 2, 3, 4], [2, 3, 3, 4], [1, 2, 4, 5], [3, 4, 5, 6], [2, 3, 5, 8]]), a: r.int(35, 145), b: r.int(40, 120), c: r.int(50, 110), k: r.pick([2, 3, 4, 5, 8, 9]), p1: r.int(1, 12), s1: r.int(5, 30), x: r.int(10, 30), st: 5 * r.int(1, 6) }),
+  key: (p) => `${p.m}-${p.q.join('')}-${p.q4.join('')}-${p.a}-${p.b}-${p.c}-${p.k}-${p.p1}-${p.s1}-${p.x}-${p.st}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { q, q4, a, b, c, k, p1, s1, x, st } = P
+    switch (P.m) {
+      case 'line': { const t = sum(q); if (180 % t) return null; return { ans: 180 / t, wrong: [360 / t, (180 / t) * q[2], 90 / t].filter((v) => isInt(v) && v !== 180 / t), fmt: num, expl: `Angles on a straight line add up to 180°: ${t}x = 180, so x = ${180 / t}.` } }
+      case 'point': { const aa = a; const bb = b; const cc = c; const xx = 360 - aa - bb - cc; if (xx <= 10 || xx >= 180) return null; return { ans: xx, wrong: [180 - xx, xx + 10, xx - 10, 540 - aa - bb - cc].filter((v) => v > 0 && v !== xx && v < 360), expl: `Angles at a point add up to 360°: 360 − (${aa} + ${bb} + ${cc}) = ${xx}°.` } }
+      case 'adjsum': { if (a === 90) return null; return { ans: 2 * (180 - a), wrong: [2 * a, 180 - a, 360 - a].filter((v) => v !== 2 * (180 - a)), expl: `Each angle adjacent to ${a}° is 180 − ${a} = ${180 - a}°; the two together make ${2 * (180 - a)}°.` } }
+      case 'kadj': { const s = 180 / (k + 1); if (!isInt(s)) return null; return { ans: s, wrong: [k * s, 90 / (k + 1), 360 / (k + 1)].filter((v) => isInt(v) && v !== s), expl: `Adjacent angles at an intersection add up to 180°: s + ${k}s = 180, so s = ${s}°.` } }
+      case 'pratio': { const t = sum(q4); if (360 % t) return null; const u = 360 / t; const ans = u * Math.max(...q4); return { ans, wrong: [(180 / t) * Math.max(...q4), u * Math.min(...q4), u].filter((v) => isInt(v) && v !== ans), expl: `${t} parts = 360°, so one part = ${u}° and the largest angle is ${Math.max(...q4)} × ${u} = ${ans}°.` } }
+      case 'linex': { const cc = c; const xx = (180 - cc - p1 + s1) / 3; if (!isInt(xx) || 2 * xx - s1 <= 0) return null; return { ans: xx, wrong: [(180 - cc) / 3, (180 - cc - p1 - s1) / 3, xx + 10].filter((v) => isInt(v) && v > 0 && v !== xx), fmt: num, expl: `(x + ${p1}) + (2x − ${s1}) + ${cc} = 180, so 3x = ${180 - cc - p1 + s1} and x = ${xx}.` } }
+      case 'reflex': return { ans: 360 - a, wrong: [180 - a, 180 + a, 360 + a].filter((v) => v > 0 && v !== 360 - a), expl: `The reflex angle is 360° − ${a}° = ${360 - a}°.` }
+      case 'vert': { const pp = 3; const rr = 1; const A = rr * x + s1; const qq = pp * x - A; if (qq <= 0) return null; P.qq = qq; return { ans: x, wrong: [(s1 + qq) / 4, (180 - s1 + qq) / 4, x + 5].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `Vertically opposite angles are equal: 3x − ${qq} = x + ${s1}, so 2x = ${s1 + qq} and x = ${x}.` } }
+      case 'step4': { const xx = (360 - 6 * st) / 4; if (!isInt(xx)) return null; return { ans: xx + 3 * st, wrong: [xx, 90, xx + 2 * st, xx + st].filter((v) => v !== xx + 3 * st), expl: `4x + ${6 * st} = 360, so x = ${xx}°; the largest is x + ${3 * st} = ${xx + 3 * st}°.` } }
+      default: { const S = 360 - a; const x4 = 360 - S; const sm = Math.min(x4, 180 - x4); if (x4 === 90) return null; P.S = S; return { ans: sm, wrong: [Math.max(x4, 180 - x4), S - 180, 360 - S + 10].filter((v) => v > 0 && v !== sm), expl: `The fourth angle is 360 − ${S} = ${x4}°. Its neighbours are 180 − ${x4} = ${180 - x4}°, so the smallest angle is ${sm}°.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Three angles on a straight line are ${p.q[0] === 1 ? '' : p.q[0]}x°, ${p.q[1]}x° and ${p.q[2]}x°. Find x.`, { m: 'line' }],
+    [1, (p) => `Four angles meet at a point: ${p.a}°, ${p.b}°, ${p.c}° and x°. Find x.`, { m: 'point' }],
+    [2, (p) => `Two straight lines intersect, and one of the four angles formed is ${p.a}°. What is the sum of the two angles next to it?`, { m: 'adjsum' }],
+    [2, (p) => `When two straight lines intersect, one angle is ${p.k} times an angle adjacent to it. What is the smaller angle?`, { m: 'kadj' }],
+    [2, (p) => `Four angles at a point are in the ratio ${p.q4.join(' : ')}. What is the largest angle?`, { m: 'pratio' }],
+    [2, (p) => `Three angles on a straight line are (x + ${p.p1})°, (2x − ${p.s1})° and ${p.c}°. Find x.`, { m: 'linex' }],
+    [1, (p) => `What is the reflex angle that goes with an angle of ${p.a}°?`, { m: 'reflex' }],
+    [2, (p) => `Two vertically opposite angles are (3x − ${p.qq})° and (x + ${p.s1})°. What is x?`, { m: 'vert' }],
+    [2, (p) => `Four angles around a point are x°, (x + ${p.st})°, (x + ${2 * p.st})° and (x + ${3 * p.st})°. What is the largest of them?`, { m: 'step4' }],
+    [3, (p) => `Two straight lines intersect, and three of the four angles formed add up to ${p.S}°. What is the smallest of the four angles?`, { m: 'three' }],
+  ],
+})
+
+// ===========================================================================
+// ga.mensuration — 90   (π = 22/7 with radii that give clean answers, or π = 3.14)
+// ===========================================================================
+const PI7 = 22 / 7
+const r2 = (v) => Math.round(v * 1e6) / 1e6
+const clean = (v) => Number.isFinite(v) && Math.abs(v * 2 - Math.round(v * 2)) < 1e-9 // integer or .5
+const unitF = (u) => (v) => (typeof v === 'number' ? `${num(r2(v))} ${u}` : v)
+const PIN = '(Take π = 22/7.)'
+
+family('ga.mensuration.circle', 'ga.mensuration', {
+  gen: (r) => ({ k: r.int(1, 6), n: r.int(2, 9) * 50, c: r.int(2, 9) * 10, pick: r.int(0, 999), r314: r.pick([5, 10, 20, 30]), half: r.f() < 0.4 }),
+  key: (p) => `${p.m}-${p.k}-${p.n}-${p.c}-${p.r314}-${p.half}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { k, n, c, r314, half } = P
+    const rad = half ? 3.5 * (2 * k - 1) : 7 * k
+    P.r = rad
+    const C = 2 * PI7 * rad; const A = PI7 * rad * rad
+    const cm = unitF('cm'); const cm2 = unitF('cm²')
+    const ok = (v) => clean(v)
+    switch (P.m) {
+      case 'circ': if (!ok(C) || !ok(A)) return null; return { fmt: cm, ans: r2(C), wrong: [r2(A), r2(C / 2), r2(2 * C)].filter(ok), expl: `C = 2πr = 2 × 22/7 × ${num(rad)} = ${num(r2(C))} cm.` }
+      case 'area': if (!ok(A)) return null; return { fmt: cm2, ans: r2(A), wrong: [r2(C), r2(4 * A), r2(A / 2)].filter(ok), expl: `A = πr² = 22/7 × ${num(rad)} × ${num(rad)} = ${num(r2(A))} cm².` }
+      case 'rad': if (half || !ok(C)) return null; P.C = r2(C); return { fmt: cm, ans: rad, wrong: [2 * rad, rad / 2, rad + 7].filter(ok), expl: `r = C ÷ 2π = ${num(r2(C))} × 7 ÷ 44 = ${num(rad)} cm.` }
+      case 'area2circ': if (half) return null; P.A = r2(A); return { fmt: cm, ans: r2(C), wrong: [rad, r2(C / 2), 2 * rad].filter(ok), expl: `πr² = ${num(r2(A))} gives r² = ${rad * rad}, r = ${rad} cm; C = 2πr = ${num(r2(C))} cm.` }
+      case 'wheel': { if (!ok(C)) return null; const dist = (C * n) / 100; if (!ok(dist)) return null; P.n2 = n; return { fmt: unitF('m'), ans: r2(dist), wrong: [r2((C / 2) * n / 100), r2((A * n) / 100), r2(dist * 10)].filter(ok), expl: `One revolution = 2πr = ${num(r2(C))} cm; ${n} revolutions = ${num(r2(C * n))} cm = ${num(r2(dist))} m.` } }
+      case 'revs': { if (half) return null; const d = 2 * rad; const D = (PI7 * d * n) / 100; if (!ok(D) || !isInt(D)) return null; P.d = d; P.D = D; return { fmt: num, ans: n, wrong: [n * 2, n / 2, Math.round((D * 100) / (PI7 * rad * rad)) || n + 50].filter((v) => isInt(v) && v !== n), expl: `Circumference = πd = 22/7 × ${d} = ${num(r2(PI7 * d))} cm; ${D} m = ${D * 100} cm; ${D * 100} ÷ ${num(r2(PI7 * d))} = ${n} revolutions.` } }
+      case 'pi314': { const a = 3.14 * r314 * r314; return { fmt: cm2, ans: r2(a), wrong: [r2(2 * 3.14 * r314), r2(3.14 * 2 * r314 * 2 * r314), r2(a / 2)], expl: `A = 3.14 × ${r314} × ${r314} = ${num(r2(a))} cm².` } }
+      case 'fence': { if (half) return null; const d = 2 * rad; const cost = C * c; P.d = d; return { fmt: (v) => `Rs ${num(r2(v))}`, ans: r2(cost), wrong: [r2(A * c), r2((C / 2) * c), r2(d * c)], expl: `Circumference = πd = 22/7 × ${d} = ${num(r2(C))} m; cost = ${num(r2(C))} × ${c} = Rs ${num(r2(cost))}.` } }
+      case 'diam': { if (half) return null; const d = 2 * rad; P.d = d; return { fmt: cm2, ans: r2(A), wrong: [r2(PI7 * d * d), r2(C), r2(A / 2)].filter(ok), expl: `r = ${d} ÷ 2 = ${rad} cm; A = 22/7 × ${rad}² = ${num(r2(A))} cm².` } }
+      case 'exceed': { if (half) return null; const d = 2 * rad; const X = (15 * d) / 7; P.X = X; return { fmt: cm, ans: rad, wrong: [d, rad / 2, rad + 7].filter(ok), expl: `πd − d = (22/7 − 1)d = 15d/7 = ${X}, so d = ${d} cm and r = ${rad} cm.` } }
+      case 'diamC': { if (half) return null; P.C = r2(C); return { fmt: cm, ans: 2 * rad, wrong: [rad, 4 * rad, 2 * rad + 7], expl: `d = C ÷ π = ${num(r2(C))} × 7 ÷ 22 = ${2 * rad} cm.` } }
+      default: { if (half) return null; const s = 11 * k; const rr = 7 * k; P.s = s; return { fmt: cm, ans: rr, wrong: [2 * rr, s, (4 * s) / 2].filter((v) => v !== rr), expl: `Perimeter of the square = 4 × ${s} = ${4 * s} cm = 2πr, so r = ${4 * s} × 7 ÷ 44 = ${rr} cm.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the circumference of a circle of radius ${num(p.r)} cm. ${PIN}`, { m: 'circ' }],
+    [1, (p) => `What is the area of a circle whose radius is ${num(p.r)} cm? ${PIN}`, { m: 'area' }],
+    [2, (p) => `The circumference of a circle is ${num(p.C)} cm. What is its radius? ${PIN}`, { m: 'rad' }],
+    [3, (p) => `The area of a circle is ${num(p.A)} cm². What is its circumference? ${PIN}`, { m: 'area2circ' }],
+    [2, (p) => `A wheel of radius ${num(p.r)} cm makes ${p.n2} revolutions. How far does it travel, in metres? ${PIN}`, { m: 'wheel' }],
+    [3, (p) => `How many revolutions will a wheel of diameter ${p.d} cm make in covering ${num(p.D)} m? ${PIN}`, { m: 'revs' }],
+    [1, (p) => `Using π = 3.14, find the area of a circle of radius ${p.r314} cm.`, { m: 'pi314' }],
+    [2, (p) => `A circular field has a diameter of ${p.d} m. What is the cost of fencing it at Rs ${p.c} per metre? ${PIN}`, { m: 'fence' }],
+    [2, (p) => `The diameter of a circular plate is ${p.d} cm. What is its area? ${PIN}`, { m: 'diam' }],
+    [3, (p) => `The circumference of a circle exceeds its diameter by ${p.X} cm. What is its radius? ${PIN}`, { m: 'exceed' }],
+    [1, (p) => `What is the diameter of a circle whose circumference is ${num(p.C)} cm? ${PIN}`, { m: 'diamC' }],
+    [3, (p) => `A wire bent into a square of side ${p.s} cm is reshaped into a circle. What is the radius of the circle? ${PIN}`, { m: 'wire' }],
+  ],
+})
+
+family('ga.mensuration.semicircle-sector', 'ga.mensuration', {
+  gen: (r) => ({ k: r.int(1, 6), L: r.int(5, 15) * 10, w: r.int(1, 4) * 14, h: r.int(3, 10) * 10, th: r.pick([30, 45, 60, 90, 120]) }),
+  key: (p) => `${p.m}-${p.k}-${p.L}-${p.w}-${p.h}-${p.th}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { k, L, w, h, th } = P
+    const m = unitF('m'); const cm = unitF('cm'); const cm2 = unitF('cm²')
+    switch (P.m) {
+      case 'lake': { const r0 = [7, 14, 21, 70, 140, 700][k - 1]; P.r = r0; const ans = PI7 * r0 + 2 * r0; return { fmt: m, ans: r2(ans), wrong: [r2(PI7 * r0), r2(2 * PI7 * r0), r2(PI7 * r0 + r0)].filter(clean), expl: `Perimeter = πr + 2r = ${num(r2(PI7 * r0))} + ${2 * r0} = ${num(r2(ans))} m.` } }
+      case 'area': { const r0 = 7 * k; P.r = r0; const A = (PI7 * r0 * r0) / 2; return { fmt: cm2, ans: r2(A), wrong: [r2(2 * A), r2(PI7 * r0), r2(A / 2)].filter(clean), expl: `Area = ½πr² = ½ × 22/7 × ${r0}² = ${num(r2(A))} cm².` } }
+      case 'quadA': { const r0 = 14 * k; P.r = r0; const A = (PI7 * r0 * r0) / 4; return { fmt: cm2, ans: r2(A), wrong: [r2(2 * A), r2(4 * A), r2((PI7 * r0) / 2)].filter(clean), expl: `A quadrant is a quarter circle: ¼ × 22/7 × ${r0}² = ${num(r2(A))} cm².` } }
+      case 'quadP': { const r0 = 14 * k; P.r = r0; const Pm = (PI7 * r0) / 2 + 2 * r0; return { fmt: cm, ans: r2(Pm), wrong: [r2((PI7 * r0) / 2), r2((PI7 * r0) / 2 + r0), r2(PI7 * r0 + 2 * r0)].filter(clean), expl: `Arc = ¼ × 2πr = ${num(r2((PI7 * r0) / 2))} cm; add two radii: ${num(r2(Pm))} cm.` } }
+      case 'track': { const r0 = 7 * k * 2; P.r = r0; const lap = 2 * L + 2 * PI7 * r0; return { fmt: m, ans: r2(lap), wrong: [r2(2 * L + PI7 * r0), r2(L + 2 * PI7 * r0), r2(2 * L + 4 * PI7 * r0)].filter(clean), expl: `Two straights: 2 × ${L} = ${2 * L} m; two semicircles make a full circle: 2π × ${r0} = ${num(r2(2 * PI7 * r0))} m; lap = ${num(r2(lap))} m.` } }
+      case 'window': { const rr = w / 2; const A = w * h + (PI7 * rr * rr) / 2; return { fmt: cm2, ans: r2(A), wrong: [r2(w * h + PI7 * rr * rr), r2(w * h), r2(w * h + (PI7 * w * w) / 2)].filter(clean), expl: `Rectangle ${w} × ${h} = ${w * h} cm²; semicircle ½ × 22/7 × ${rr}² = ${num(r2((PI7 * rr * rr) / 2))} cm²; total ${num(r2(A))} cm².` } }
+      case 'plate': { const r0 = 7 * k; const Pm = 36 * k; P.Pm = Pm; return { fmt: cm, ans: r0, wrong: [2 * r0, r2(Pm / PI7) !== r0 && clean(Pm / PI7) ? r2(Pm / PI7) : r0 + 7, Pm / 4].filter((v) => clean(v) && v !== r0), expl: `Perimeter = πr + 2r = r(22/7 + 2) = 36r/7 = ${Pm}, so r = ${r0} cm.` } }
+      default: { const r0 = 7 * k; P.r = r0; const A = (th / 360) * PI7 * r0 * r0; if (!clean(A)) return null; return { fmt: cm2, ans: r2(A), wrong: [r2((th / 180) * PI7 * r0 * r0), r2((th / 360) * 2 * PI7 * r0), r2(PI7 * r0 * r0)].filter((v) => clean(v) && v !== r2(A)), expl: `Sector area = (${th}/360) × πr² = ${fr(th, 360)} × 22/7 × ${r0}² = ${num(r2(A))} cm².` } }
+    }
+  },
+  items: [
+    [2, (p) => `Find the perimeter of a semicircular lake of radius ${p.r} m. ${PIN}`, { m: 'lake' }],
+    [2, (p) => `What is the area of a semicircle of radius ${p.r} cm? ${PIN}`, { m: 'area' }],
+    [2, (p) => `A quadrant (quarter of a circle) has a radius of ${p.r} cm. What is its area? ${PIN}`, { m: 'quadA' }],
+    [2, (p) => `What is the perimeter of a quadrant of radius ${p.r} cm? ${PIN}`, { m: 'quadP' }],
+    [2, (p) => `A running track has two straight sides of ${p.L} m and two semicircular ends of radius ${p.r} m. What is the length of one lap? ${PIN}`, { m: 'track' }],
+    [3, (p) => `A window is a rectangle ${p.w} cm wide and ${p.h} cm high, topped by a semicircle on its width. What is the total area of the window? ${PIN}`, { m: 'window' }],
+    [3, (p) => `The perimeter of a semicircular plate is ${p.Pm} cm. What is its radius? ${PIN}`, { m: 'plate' }],
+    [2, (p) => `A sector of a circle of radius ${p.r} cm has an angle of ${p.th}° at the centre. What is its area? ${PIN}`, { m: 'sector' }],
+  ],
+})
+
+family('ga.mensuration.rectangle-square', 'ga.mensuration', {
+  gen: (r) => ({ l: r.int(6, 40), b: r.int(3, 25), s: r.int(4, 30), t: r.pick([20, 25, 40, 50]), c: r.int(2, 9) * 50, g: r.int(2, 5), tri: r.pick(PY) }),
+  key: (p) => `${p.m}-${p.l}-${p.b}-${p.s}-${p.t}-${p.c}-${p.g}-${p.tri.join('')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { l, b, s, t, c, g, tri } = P
+    const cm = unitF('cm'); const cm2 = unitF('cm²'); const m2 = unitF('m²'); const m = unitF('m')
+    switch (P.m) {
+      case 'perim': if (l === b) return null; return { fmt: cm, ans: 2 * (l + b), wrong: [l + b, l * b, 2 * l + b], expl: `Perimeter = 2(l + b) = 2(${l} + ${b}) = ${2 * (l + b)} cm.` }
+      case 'sqarea': return { fmt: cm2, ans: s * s, wrong: [4 * s, 2 * s, s * s * 2], expl: `Area = side² = ${s}² = ${s * s} cm².` }
+      case 'sqP2A': return { fmt: cm2, ans: s * s, wrong: [4 * s, 16 * s * s, 4 * s * s], expl: `Side = ${4 * s} ÷ 4 = ${s} cm; area = ${s}² = ${s * s} cm².` }
+      case 'A2P': { if (l === b) return null; return { fmt: m, ans: 2 * (l + b), wrong: [l + b, l * b, 2 * l + b], expl: `Breadth = ${l * b} ÷ ${l} = ${b} m; perimeter = 2(${l} + ${b}) = ${2 * (l + b)} m.` } }
+      case 'equi': return { fmt: cm, ans: s, wrong: [3 * s, (3 * s) / 2, s + 3].filter((v) => isInt(v) && v !== s), expl: `An equilateral triangle has three equal sides: ${3 * s} ÷ 3 = ${s} cm.` }
+      case 'tiles': { const L = l % 9 + 2; const B = b % 6 + 2; const n = (L * 100 / t) * (B * 100 / t); if (!isInt(n)) return null; P.L = L; P.B = B; return { fmt: num, ans: n, wrong: [n / 10, n * 2, (L * 100 / t) + (B * 100 / t), n / 4].filter((v) => isInt(v) && v !== n && v > 0), expl: `Floor = ${L * 100} cm × ${B * 100} cm; tiles along each side: ${L * 100 / t} and ${B * 100 / t}; total ${n}.` } }
+      case 'carpet': return { fmt: (v) => `Rs ${num(v)}`, ans: l * b * c, wrong: [2 * (l + b) * c, (l + b) * c, l * b * c / 2].filter((v) => isInt(v)), expl: `Area = ${l} × ${b} = ${l * b} m²; cost = ${l * b} × ${c} = Rs ${num(l * b * c)}.` }
+      case 'samePerim': { if ((l + b) % 2 || l === b) return null; const side = (l + b) / 2; return { fmt: cm2, ans: side * side, wrong: [l * b, 4 * side, (l + b) ** 2].filter((v) => v !== side * side), expl: `Perimeter = 2(${l} + ${b}) = ${2 * (l + b)} cm, so the square's side is ${side} cm and its area ${side * side} cm².` } }
+      case 'sqA2P': return { fmt: cm, ans: 4 * s, wrong: [2 * s, s * s / 4 === Math.floor(s * s / 4) ? s * s / 4 : 8 * s, s].filter((v) => v !== 4 * s), expl: `Side = √${s * s} = ${s} cm; perimeter = 4 × ${s} = ${4 * s} cm.` }
+      case 'gate': { if (l === b) return null; return { fmt: m, ans: 2 * (l + b) - g, wrong: [2 * (l + b), 2 * (l + b) + g, l + b - g], expl: `Perimeter = 2(${l} + ${b}) = ${2 * (l + b)} m; less the ${g} m gate: ${2 * (l + b) - g} m.` } }
+      case 'diag': { const [x, y, z] = tri; return { fmt: cm2, ans: x * y, wrong: [x * z, (x * y) / 2, 2 * (x + y)].filter((v) => isInt(v) && v !== x * y), expl: `Breadth = √(${z}² − ${x}²) = ${y} cm; area = ${x} × ${y} = ${x * y} cm².` } }
+      default: { const bcm = b * 10; if (bcm % 100 === 0) return null; P.bcm = bcm; const ans = (l * bcm) / 100; return { fmt: m2, ans, wrong: [l * bcm, (l * bcm) / 10, (l * bcm) / 1000].filter((v) => v !== ans), expl: `${bcm} cm = ${num(bcm / 100)} m; area = ${l} × ${num(bcm / 100)} = ${num(ans)} m².` } }
+    }
+  },
+  items: [
+    [1, (p) => `A rectangle is ${p.l} cm long and ${p.b} cm wide. What is its perimeter?`, { m: 'perim' }],
+    [1, (p) => `Find the area of a square whose side is ${p.s} cm.`, { m: 'sqarea' }],
+    [2, (p) => `The perimeter of a square is ${4 * p.s} cm. What is its area?`, { m: 'sqP2A' }],
+    [2, (p) => `The area of a rectangle is ${p.l * p.b} m² and its length is ${p.l} m. What is its perimeter?`, { m: 'A2P' }],
+    [1, (p) => `The perimeter of an equilateral triangle is ${3 * p.s} cm. What is the length of one side?`, { m: 'equi' }],
+    [3, (p) => `How many square tiles of side ${p.t} cm are needed to cover a floor ${p.L} m by ${p.B} m?`, { m: 'tiles' }],
+    [2, (p) => `What is the cost of carpeting a room ${p.l} m long and ${p.b} m wide at Rs ${p.c} per square metre?`, { m: 'carpet' }],
+    [3, (p) => `A square has the same perimeter as a rectangle measuring ${p.l} cm by ${p.b} cm. What is the area of the square?`, { m: 'samePerim' }],
+    [2, (p) => `The area of a square is ${p.s * p.s} cm². What is its perimeter?`, { m: 'sqA2P' }],
+    [2, (p) => `A rectangular garden ${p.l} m by ${p.b} m is to be fenced all round, except for a gate ${p.g} m wide. How much fencing is needed?`, { m: 'gate' }],
+    [3, (p) => `The length of a rectangle is ${p.tri[0]} cm and its diagonal is ${p.tri[2]} cm. What is its area?`, { m: 'diag' }],
+    [2, (p) => `What is the area, in square metres, of a strip ${p.l} m long and ${p.bcm} cm wide?`, { m: 'units' }],
+  ],
+})
+
+const HERON = [[13, 14, 15, 84], [5, 5, 6, 12], [5, 5, 8, 12], [10, 13, 13, 60], [7, 15, 20, 42], [9, 10, 17, 36], [13, 20, 21, 126], [10, 17, 21, 84], [17, 25, 28, 210], [8, 15, 17, 60]]
+family('ga.mensuration.triangle-area', 'ga.mensuration', {
+  gen: (r) => ({ b: r.int(4, 30), h: r.int(3, 24), tri: r.pick(PY), her: r.pick(HERON), k: r.int(2, 4), c: r.int(2, 9) * 20 }),
+  key: (p) => `${p.m}-${p.b}-${p.h}-${p.tri.join('')}-${p.her.join('')}-${p.k}-${p.c}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { b, h, tri, her, k, c } = P
+    const cm2 = unitF('cm²'); const cm = unitF('cm')
+    switch (P.m) {
+      case 'bh': if ((b * h) % 2) return null; return { fmt: cm2, ans: (b * h) / 2, wrong: [b * h, b + h, (b * h) / 4].filter(isInt), expl: `Area = ½ × base × height = ½ × ${b} × ${h} = ${(b * h) / 2} cm².` }
+      case 'legs': { const [x, y] = tri; return { fmt: cm2, ans: (x * y) / 2, wrong: [x * y, (x * tri[2]) / 2, x + y].filter((v) => isInt(v) && v !== (x * y) / 2), expl: `The legs are base and height: ½ × ${x} × ${y} = ${(x * y) / 2} cm².` } }
+      case 'height': { if ((b * h) % 2) return null; P.A = (b * h) / 2; return { fmt: cm, ans: h, wrong: [h / 2, (b * h) / 2 / b * 4, b].filter((v) => isInt(v) && v !== h), expl: `h = 2A ÷ b = 2 × ${(b * h) / 2} ÷ ${b} = ${h} cm.` } }
+      case 'hyp': { const [x, y, z] = tri; return { fmt: cm2, ans: (x * y) / 2, wrong: [(x * z) / 2, x * y, (y * z) / 2].filter((v) => isInt(v) && v !== (x * y) / 2), expl: `Other leg = √(${z}² − ${x}²) = ${y} cm; area = ½ × ${x} × ${y} = ${(x * y) / 2} cm².` } }
+      case 'heron': { const [a, bb, cc, A] = her; const sp = (a + bb + cc) / 2; return { fmt: cm2, ans: A, wrong: [sp * 2 === a + bb + cc ? a * bb / 2 : A * 2, A * 2, sp * 3].filter((v) => isInt(v) && v !== A), expl: `s = (${a} + ${bb} + ${cc}) ÷ 2 = ${sp}; area = √(s(s − a)(s − b)(s − c)) = √(${sp} × ${sp - a} × ${sp - bb} × ${sp - cc}) = ${A} cm².` } }
+      case 'iso': { const [x, y, z] = tri; return { fmt: cm2, ans: x * y, wrong: [2 * x * y, x * z, (x * y) / 2].filter((v) => isInt(v) && v !== x * y), expl: `Half the base is ${x} cm, so the height is √(${z}² − ${x}²) = ${y} cm; area = ½ × ${2 * x} × ${y} = ${x * y} cm².` } }
+      case 'ratio': { const A = (k * h * h) / 2; if (!isInt(A)) return null; P.A = A; return { fmt: cm, ans: h, wrong: [k * h, h * 2, A / h].filter((v) => isInt(v) && v !== h), expl: `½ × ${k}h × h = ${A}, so h² = ${h * h} and h = ${h} cm.` } }
+      default: { if ((b * h) % 2) return null; const A = (b * h) / 2; return { fmt: (v) => `Rs ${num(v)}`, ans: A * c, wrong: [b * h * c, (b + h) * c, A * c / 2].filter(isInt), expl: `Area = ½ × ${b} × ${h} = ${A} m²; cost = ${A} × ${c} = Rs ${num(A * c)}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the area of a triangle with a base of ${p.b} cm and a height of ${p.h} cm.`, { m: 'bh' }],
+    [1, (p) => `The two shorter sides of a right-angled triangle are ${p.tri[0]} cm and ${p.tri[1]} cm. What is its area?`, { m: 'legs' }],
+    [2, (p) => `The area of a triangle is ${p.A} cm² and its base is ${p.b} cm. What is its height?`, { m: 'height' }],
+    [3, (p) => `A right-angled triangle has a hypotenuse of ${p.tri[2]} cm and one shorter side of ${p.tri[0]} cm. What is its area?`, { m: 'hyp' }],
+    [3, (p) => `Find the area of a triangle whose sides are ${p.her[0]} cm, ${p.her[1]} cm and ${p.her[2]} cm.`, { m: 'heron' }],
+    [3, (p) => `An isosceles triangle has two equal sides of ${p.tri[2]} cm and a base of ${2 * p.tri[0]} cm. What is its area?`, { m: 'iso' }],
+    [3, (p) => `The base of a triangle is ${p.k} times its height, and its area is ${p.A} cm². What is its height?`, { m: 'ratio' }],
+    [2, (p) => `A triangular plot has a base of ${p.b} m and a height of ${p.h} m. What does it cost to level it at Rs ${p.c} per square metre?`, { m: 'cost' }],
+  ],
+})
+family('ga.mensuration.cylinder', 'ga.mensuration', {
+  gen: (r) => ({ k: r.int(1, 4), half: r.f() < 0.4, h: r.int(2, 20), n: r.int(2, 10) * 50, r314: r.pick([5, 10, 20]) }),
+  key: (p) => `${p.m}-${p.k}-${p.half}-${p.h}-${p.n}-${p.r314}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { k, half, h, n, r314 } = P
+    const rad = half ? 3.5 * (2 * k - 1) : 7 * k
+    P.r = rad
+    const V = PI7 * rad * rad * h; const CSA = 2 * PI7 * rad * h; const TSA = 2 * PI7 * rad * (rad + h)
+    const cm3 = unitF('cm³'); const cm2 = unitF('cm²'); const cm = unitF('cm')
+    switch (P.m) {
+      case 'vol': if (!clean(V)) return null; return { fmt: cm3, ans: r2(V), wrong: [r2(CSA), r2(V / 2), r2(PI7 * 2 * rad * 2 * rad * h)].filter(clean), expl: `V = πr²h = 22/7 × ${num(rad)}² × ${h} = ${num(r2(V))} cm³.` }
+      case 'tsa': { const hh = h + 0.5; P.hh = hh; const T = 2 * PI7 * rad * (rad + hh); if (!clean(T)) return null; return { fmt: cm2, ans: r2(T), wrong: [r2(2 * PI7 * rad * hh), r2(PI7 * rad * (rad + hh)), r2(2 * PI7 * rad * (rad + hh) + PI7 * rad * rad)].filter(clean), expl: `TSA = 2πr(r + h) = 2 × 22/7 × ${num(rad)} × ${num(rad + hh)} = ${num(r2(T))} cm².` } }
+      case 'csa': if (!clean(CSA)) return null; return { fmt: cm2, ans: r2(CSA), wrong: [r2(TSA), r2(CSA / 2), r2(V)].filter(clean), expl: `CSA = 2πrh = 2 × 22/7 × ${num(rad)} × ${h} = ${num(r2(CSA))} cm².` }
+      case 'litres': { if (half) return null; const rm = rad / 7 * 0.7; const Vm = PI7 * rm * rm * h; const Lt = Vm * 1000; if (!isInt(Math.round(Lt * 1000) / 1000)) return null; P.rm = rm; return { fmt: (v) => `${num(r2(v))} litres`, ans: r2(Lt), wrong: [r2(Vm), r2(Lt * 10), r2(Lt / 2)], expl: `V = 22/7 × ${num(rm)}² × ${h} = ${num(r2(Vm))} m³, and 1 m³ = 1000 litres, so ${num(r2(Lt))} litres.` } }
+      case 'height': { if (!clean(V)) return null; P.V = r2(V); return { fmt: cm, ans: h, wrong: [h * 2, r2(V / (PI7 * rad)) === h ? h + 2 : r2(V / (PI7 * rad)), h + 1].filter((v) => clean(v) && v !== h && v < 1000), expl: `h = V ÷ πr² = ${num(r2(V))} ÷ (22/7 × ${num(rad)}²) = ${h} cm.` } }
+      case 'radius': { if (!clean(CSA)) return null; P.C = r2(CSA); return { fmt: cm, ans: rad, wrong: [2 * rad, rad + 7, rad / 2].filter((v) => clean(v) && v !== rad), expl: `r = CSA ÷ 2πh = ${num(r2(CSA))} ÷ (2 × 22/7 × ${h}) = ${num(rad)} cm.` } }
+      case 'tin': { if (half) return null; P.d = 2 * rad; if (!clean(TSA)) return null; return { fmt: cm2, ans: r2(TSA), wrong: [r2(CSA), r2(2 * PI7 * 2 * rad * (2 * rad + h)), r2(CSA + PI7 * rad * rad)].filter(clean), expl: `r = ${rad} cm; closed can = 2πr(r + h) = 2 × 22/7 × ${rad} × ${rad + h} = ${num(r2(TSA))} cm².` } }
+      case 'roller': { if (half) return null; const d = 2 * rad; const Lr = h * 10; const area = (PI7 * d * Lr * n) / 10000; if (!clean(area)) return null; P.d = d; P.Lr = Lr; P.n2 = n; return { fmt: unitF('m²'), ans: r2(area), wrong: [r2(area * 2), r2((PI7 * rad * rad * Lr * n) / 1000000), r2(area / 10)].filter((v) => clean(v) && v > 0), expl: `One revolution covers the curved surface: πdL = 22/7 × ${d} × ${Lr} = ${num(r2(PI7 * d * Lr))} cm²; × ${n} = ${num(r2(PI7 * d * Lr * n))} cm² = ${num(r2(area))} m².` } }
+      case 'equal': { if (half) return null; const d = 2 * rad; P.d = d; const Vd = PI7 * rad * rad * d; return { fmt: cm3, ans: r2(Vd), wrong: [r2(PI7 * d * d * d), r2(2 * PI7 * rad * d), r2(Vd / 2)].filter(clean), expl: `r = ${rad} cm and h = ${d} cm: V = 22/7 × ${rad}² × ${d} = ${num(r2(Vd))} cm³.` } }
+      default: { const v = 3.14 * r314 * r314 * h; return { fmt: cm3, ans: r2(v), wrong: [r2(2 * 3.14 * r314 * h), r2(3.14 * r314 * h), r2(v * 2)], expl: `V = 3.14 × ${r314}² × ${h} = ${num(r2(v))} cm³.` } }
+    }
+  },
+  items: [
+    [2, (p) => `Find the volume of a cylinder of radius ${num(p.r)} cm and height ${p.h} cm. ${PIN}`, { m: 'vol' }],
+    [2, (p) => `What is the total surface area of a closed cylinder with radius ${num(p.r)} cm and height ${num(p.hh)} cm? ${PIN}`, { m: 'tsa' }],
+    [2, (p) => `What is the curved surface area of a cylinder of radius ${num(p.r)} cm and height ${p.h} cm? ${PIN}`, { m: 'csa' }],
+    [3, (p) => `A cylindrical tank of radius ${num(p.rm)} m and height ${p.h} m is full of water. How many litres does it hold? ${PIN}`, { m: 'litres' }],
+    [2, (p) => `The volume of a cylinder is ${num(p.V)} cm³ and its radius is ${num(p.r)} cm. What is its height? ${PIN}`, { m: 'height' }],
+    [2, (p) => `The curved surface area of a cylinder is ${num(p.C)} cm² and its height is ${p.h} cm. What is its radius? ${PIN}`, { m: 'radius' }],
+    [3, (p) => `How much tin sheet is needed to make a closed cylindrical can of diameter ${p.d} cm and height ${p.h} cm? ${PIN}`, { m: 'tin' }],
+    [3, (p) => `A garden roller of diameter ${p.d} cm and length ${p.Lr} cm makes ${p.n2} revolutions. What area does it level, in square metres? ${PIN}`, { m: 'roller' }],
+    [2, (p) => `A cylinder has a diameter and a height of ${p.d} cm each. What is its volume? ${PIN}`, { m: 'equal' }],
+    [2, (p) => `Using π = 3.14, find the volume of a cylinder of radius ${p.r314} cm and height ${p.h} cm.`, { m: 'pi314' }],
+  ],
+})
+
+const QUAD = [[1, 2, 2, 3], [2, 3, 6, 7], [1, 4, 8, 9], [4, 4, 7, 9], [2, 6, 9, 11], [6, 6, 7, 11], [3, 4, 12, 13], [2, 10, 11, 15], [8, 9, 12, 17], [4, 13, 16, 21]]
+family('ga.mensuration.cuboid-cube', 'ga.mensuration', {
+  gen: (r) => ({ l: r.int(4, 20), b: r.int(3, 15), h: r.int(2, 12), a: r.int(2, 15), s: r.pick([2, 3, 4, 5]), q: r.pick(QUAD), sc: r.pick([1, 2, 3]) }),
+  key: (p) => `${p.m}-${p.l}-${p.b}-${p.h}-${p.a}-${p.s}-${p.q.join('')}-${p.sc}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { l, b, h, a, s, q, sc } = P
+    const cm3 = unitF('cm³'); const cm2 = unitF('cm²')
+    switch (P.m) {
+      case 'vol': return { fmt: cm3, ans: l * b * h, wrong: [2 * (l * b + b * h + h * l), l + b + h, l * b * h / 2].filter(isInt), expl: `V = l × b × h = ${l} × ${b} × ${h} = ${l * b * h} cm³.` }
+      case 'cube': return { fmt: cm3, ans: a ** 3, wrong: [6 * a * a, 3 * a, a * a], expl: `V = a³ = ${a}³ = ${a ** 3} cm³.` }
+      case 'cubeSA': return { fmt: cm2, ans: 6 * a * a, wrong: [4 * a * a, a ** 3, 6 * a], expl: `Six square faces: 6 × ${a}² = ${6 * a * a} cm².` }
+      case 'cuboidSA': { const T = 2 * (l * b + b * h + h * l); return { fmt: cm2, ans: T, wrong: [l * b + b * h + h * l, l * b * h, 2 * h * (l + b)].filter((v) => v !== T), expl: `TSA = 2(lb + bh + hl) = 2(${l * b} + ${b * h} + ${h * l}) = ${T} cm².` } }
+      case 'V2SA': return { fmt: cm2, ans: 6 * a * a, wrong: [a * a, 4 * a * a, 6 * a], expl: `Edge = ∛${a ** 3} = ${a} cm; surface area = 6 × ${a}² = ${6 * a * a} cm².` }
+      case 'cut': { const S = s * (a % 4 + 2); P.S = S; const n = (S / s) ** 3; return { fmt: num, ans: n, wrong: [(S / s) ** 2, (S / s), S * S * S / s].filter((v) => isInt(v) && v !== n), expl: `${S} ÷ ${s} = ${S / s} small cubes fit along each edge, so ${S / s}³ = ${n} cubes.` } }
+      case 'bricks': { const L = l % 5 + 4; const H = h % 3 + 2; const T = [20, 25, 30][b % 3]; const n = (L * 100 * H * 100 * T) / (25 * 12.5 * 7.5); if (!isInt(n)) return null; P.L = L; P.H = H; P.T = T; return { fmt: num, ans: n, wrong: [n / 10, n * 2, (L * H * T) / (25 * 12.5 * 7.5) * 1000].filter((v) => isInt(v) && v !== n && v > 0), expl: `Wall volume = ${L * 100} × ${H * 100} × ${T} cm³ = ${num(L * 100 * H * 100 * T)} cm³; each brick is 25 × 12.5 × 7.5 = ${num(25 * 12.5 * 7.5)} cm³; ${num(L * 100 * H * 100 * T)} ÷ ${num(25 * 12.5 * 7.5)} = ${num(n)}.` } }
+      case 'tank': { const L = l % 6 + 1; const B = b % 4 + 1; const H = h % 3 + 1; P.L = L; P.B = B; P.H = H; const Lt = L * B * H * 1000; return { fmt: (v) => `${num(v)} litres`, ans: Lt, wrong: [L * B * H, L * B * H * 100, L * B * H * 10000], expl: `Volume = ${L} × ${B} × ${H} = ${L * B * H} m³ = ${num(Lt)} litres (1 m³ = 1000 litres).` } }
+      case 'rod': { const [x, y, z, d] = q.map((v) => v * sc); P.box = [x, y, z]; return { fmt: unitF('cm'), ans: d, wrong: [x + y + z, Math.max(x, y, z), Math.round(Math.sqrt(y * y + z * z)) === d ? d + 1 : Math.round(Math.sqrt(y * y + z * z))].filter((v) => v !== d), expl: `Longest rod = space diagonal = √(${x}² + ${y}² + ${z}²) = √${d * d} = ${d} cm.` } }
+      default: { const W = 2 * h * (l + b); return { fmt: unitF('m²'), ans: W, wrong: [2 * (l * b + b * h + h * l), h * (l + b), l * b * h].filter((v) => v !== W), expl: `Area of four walls = 2h(l + b) = 2 × ${h} × (${l} + ${b}) = ${W} m².` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the volume of a cuboid measuring ${p.l} cm × ${p.b} cm × ${p.h} cm.`, { m: 'vol' }],
+    [1, (p) => `What is the volume of a cube with an edge of ${p.a} cm?`, { m: 'cube' }],
+    [1, (p) => `What is the total surface area of a cube of side ${p.a} cm?`, { m: 'cubeSA' }],
+    [2, (p) => `Find the total surface area of a closed box measuring ${p.l} cm by ${p.b} cm by ${p.h} cm.`, { m: 'cuboidSA' }],
+    [3, (p) => `The volume of a cube is ${p.a ** 3} cm³. What is its total surface area?`, { m: 'V2SA' }],
+    [2, (p) => `How many cubes of edge ${p.s} cm can be cut from a solid cube of edge ${p.S} cm?`, { m: 'cut' }],
+    [3, (p) => `How many bricks measuring 25 cm × 12.5 cm × 7.5 cm are needed to build a wall ${p.L} m long, ${p.H} m high and ${p.T} cm thick? (Ignore mortar.)`, { m: 'bricks' }],
+    [2, (p) => `A water tank measures ${p.L} m × ${p.B} m × ${p.H} m. How many litres does it hold when full?`, { m: 'tank' }],
+    [3, (p) => `What is the length of the longest rod that can be placed inside a box measuring ${p.box[0]} cm × ${p.box[1]} cm × ${p.box[2]} cm?`, { m: 'rod' }],
+    [2, (p) => `A room is ${p.l} m long, ${p.b} m wide and ${p.h} m high. What is the total area of its four walls?`, { m: 'walls' }],
+  ],
+})
+
+family('ga.mensuration.cone-sphere', 'ga.mensuration', {
+  gen: (r) => ({ k: r.int(1, 4), h: 3 * r.int(1, 8), l: r.int(10, 30), R: r.int(2, 5), rr: r.int(1, 2), tri: r.pick([[3, 4, 5], [6, 8, 10], [5, 12, 13], [7, 24, 25], [9, 12, 15], [21, 20, 29], [14, 48, 50]]) }),
+  key: (p) => `${p.m}-${p.k}-${p.h}-${p.l}-${p.R}-${p.rr}-${p.tri.join('')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { k, h, l, R, rr, tri } = P
+    const cm3 = unitF('cm³'); const cm2 = unitF('cm²')
+    switch (P.m) {
+      case 'conevol': { const rad = 7 * k; P.r = rad; const V = (PI7 * rad * rad * h) / 3; return { fmt: cm3, ans: r2(V), wrong: [r2(V * 3), r2(PI7 * rad * h / 3 * 2), r2(V / 2)].filter(clean), expl: `V = ⅓πr²h = ⅓ × 22/7 × ${rad}² × ${h} = ${num(r2(V))} cm³.` } }
+      case 'conecsa': { const rad = 7 * k; P.r = rad; const C = PI7 * rad * l; return { fmt: cm2, ans: r2(C), wrong: [r2(2 * C), r2(C + PI7 * rad * rad), r2(PI7 * rad * rad)].filter(clean), expl: `CSA = πrl = 22/7 × ${rad} × ${l} = ${num(r2(C))} cm².` } }
+      case 'sphvol': { const rad = [21, 10.5][k % 2]; P.r = rad; const V = (4 / 3) * PI7 * rad ** 3; return { fmt: cm3, ans: r2(V), wrong: [r2(4 * PI7 * rad * rad), r2(V / 2), r2(V * 3 / 4)].filter(clean), expl: `V = 4/3 πr³ = 4/3 × 22/7 × ${num(rad)}³ = ${num(r2(V))} cm³.` } }
+      case 'sphsa': { const rad = [3.5, 7, 14, 21][k - 1]; P.r = rad; const S = 4 * PI7 * rad * rad; return { fmt: cm2, ans: r2(S), wrong: [r2(PI7 * rad * rad), r2(2 * PI7 * rad * rad), r2(3 * PI7 * rad * rad)].filter(clean), expl: `Surface area = 4πr² = 4 × 22/7 × ${num(rad)}² = ${num(r2(S))} cm².` } }
+      case 'slant': { const [x, y, z] = tri; if (x % 7) return null; P.r = x; P.hh = y; const C = PI7 * x * z; return { fmt: cm2, ans: r2(C), wrong: [r2(PI7 * x * y), r2(PI7 * x * (x + z)), r2(2 * PI7 * x * z)].filter(clean), expl: `Slant height l = √(${x}² + ${y}²) = ${z} cm; CSA = πrl = 22/7 × ${x} × ${z} = ${num(r2(C))} cm².` } }
+      case 'hemi': { const rad = 21; P.r = rad; const V = (2 / 3) * PI7 * rad ** 3; return { fmt: cm3, ans: r2(V), wrong: [r2(2 * V), r2(2 * PI7 * rad * rad), r2(V / 2)].filter(clean), expl: `Hemisphere volume = ⅔πr³ = ⅔ × 22/7 × 21³ = ${num(r2(V))} cm³.` } }
+      case 'ratio': return { ans: '1 : 3', wrong: ['3 : 1', '1 : 2', '2 : 3'], expl: `Cone volume = ⅓πr²h and cylinder volume = πr²h, so cone : cylinder = 1 : 3.` }
+      default: { if (R <= rr) return null; const n = (R / rr) ** 3; P.Rb = R * 3; P.rb = rr * 3; return { fmt: num, ans: n, wrong: [(R / rr) ** 2, R / rr, n * 3].filter((v) => isInt(v) && v !== n), expl: `Volumes scale as the cube of the radius: (${R * 3} ÷ ${rr * 3})³ = ${R / rr}³ = ${n}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `Find the volume of a cone of radius ${p.r} cm and height ${p.h} cm. ${PIN}`, { m: 'conevol' }],
+    [2, (p) => `What is the curved surface area of a cone with base radius ${p.r} cm and slant height ${p.l} cm? ${PIN}`, { m: 'conecsa' }],
+    [2, (p) => `Find the volume of a sphere of radius ${num(p.r)} cm. ${PIN}`, { m: 'sphvol' }],
+    [2, (p) => `What is the surface area of a sphere of radius ${num(p.r)} cm? ${PIN}`, { m: 'sphsa' }],
+    [3, (p) => `A cone has a base radius of ${p.r} cm and a height of ${p.hh} cm. What is its curved surface area? ${PIN}`, { m: 'slant' }],
+    [2, (p) => `What is the volume of a hemisphere of radius ${p.r} cm? ${PIN}`, { m: 'hemi' }],
+    [1, () => `A cone and a cylinder have the same base radius and the same height. What is the ratio of the volume of the cone to that of the cylinder?`, { m: 'ratio' }],
+    [2, (p) => `A solid metal sphere of radius ${p.Rb} cm is melted and recast into small spheres of radius ${p.rb} cm. How many small spheres are made?`, { m: 'melt' }],
+  ],
+})
+family('ga.mensuration.path-border', 'ga.mensuration', {
+  gen: (r) => ({ l: r.int(10, 60), b: r.int(6, 40), w: r.int(1, 4), s: r.int(8, 40), k: r.int(1, 3) }),
+  key: (p) => `${p.m}-${p.l}-${p.b}-${p.w}-${p.s}-${p.k}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { l, b, w, s, k } = P
+    const m2 = unitF('m²'); const cm2 = unitF('cm²')
+    switch (P.m) {
+      case 'outside': { const A = (l + 2 * w) * (b + 2 * w) - l * b; return { fmt: m2, ans: A, wrong: [(l + w) * (b + w) - l * b, 2 * w * (l + b), A + 4 * w * w].filter((v) => v !== A), expl: `Outer rectangle ${l + 2 * w} × ${b + 2 * w} = ${(l + 2 * w) * (b + 2 * w)} m²; minus the park ${l * b} m² leaves ${A} m².` } }
+      case 'inside': { if (b <= 2 * w + 2) return null; const A = l * b - (l - 2 * w) * (b - 2 * w); return { fmt: m2, ans: A, wrong: [l * b - (l - w) * (b - w), 2 * w * (l + b), A + 4 * w * w].filter((v) => v !== A), expl: `Inner rectangle ${l - 2 * w} × ${b - 2 * w} = ${(l - 2 * w) * (b - 2 * w)} m²; path = ${l * b} − ${(l - 2 * w) * (b - 2 * w)} = ${A} m².` } }
+      case 'cross': { const A = w * (l + b) - w * w; return { fmt: m2, ans: A, wrong: [w * (l + b), w * (l + b) + w * w, 2 * w * (l + b)].filter((v) => v !== A), expl: `Roads: ${w} × ${l} + ${w} × ${b} = ${w * (l + b)} m², but the central square ${w} × ${w} is counted twice: ${A} m².` } }
+      case 'square': { const A = (s + 2 * w) ** 2 - s * s; return { fmt: m2, ans: A, wrong: [4 * w * s, (s + w) ** 2 - s * s, (s + 2 * w) ** 2].filter((v) => v !== A), expl: `(${s} + ${2 * w})² − ${s}² = ${(s + 2 * w) ** 2} − ${s * s} = ${A} m².` } }
+      case 'picture': { const A = (l + 2 * w) * (b + 2 * w) - l * b; return { fmt: cm2, ans: A, wrong: [2 * w * (l + b), (l + 2 * w) * (b + 2 * w), (l + w) * (b + w) - l * b].filter((v) => v !== A), expl: `Mounted size ${l + 2 * w} × ${b + 2 * w} = ${(l + 2 * w) * (b + 2 * w)} cm²; border = that − ${l * b} = ${A} cm².` } }
+      case 'pond': { const rr = 7 * k; const ww = 7 * (w % 2 + 1) / (w % 2 ? 2 : 1); const A = PI7 * ((rr + ww) ** 2 - rr * rr); if (!clean(A)) return null; P.rr = rr; P.ww = ww; return { fmt: m2, ans: r2(A), wrong: [r2(PI7 * ww * ww), r2(PI7 * (rr + ww) ** 2), r2(2 * PI7 * rr * ww)].filter((v) => clean(v) && v !== r2(A)), expl: `Path = π(R² − r²) = 22/7 × (${num(rr + ww)}² − ${rr}²) = ${num(r2(A))} m².` } }
+      case 'frame': { if (b <= 2 * w + 2) return null; const A = (l - 2 * w) * (b - 2 * w); return { fmt: cm2, ans: A, wrong: [(l - w) * (b - w), l * b - A, l * b].filter((v) => v !== A), expl: `The glass measures (${l} − ${2 * w}) × (${b} − ${2 * w}) = ${l - 2 * w} × ${b - 2 * w} = ${A} cm².` } }
+      default: { const A = 4 * w * s + 4 * w * w; P.A = A; return { fmt: unitF('m'), ans: s, wrong: [A / (4 * w), s + 2 * w, s - w].filter((v) => isInt(v) && v !== s && v > 0), expl: `(s + ${2 * w})² − s² = ${4 * w}s + ${4 * w * w} = ${A}, so ${4 * w}s = ${A - 4 * w * w} and s = ${s} m.` } }
+    }
+  },
+  items: [
+    [3, (p) => `A rectangular park ${p.l} m by ${p.b} m has a path ${p.w} m wide running round it on the outside. What is the area of the path?`, { m: 'outside' }],
+    [3, (p) => `A path ${p.w} m wide runs along the inside edges of a rectangular field ${p.l} m by ${p.b} m. What is the area of the path?`, { m: 'inside' }],
+    [3, (p) => `Two roads, each ${p.w} m wide, cross through the middle of a ${p.l} m by ${p.b} m field, parallel to its sides. What is the total area of the roads?`, { m: 'cross' }],
+    [3, (p) => `A square lawn of side ${p.s} m has a path ${p.w} m wide around it on the outside. What is the area of the path?`, { m: 'square' }],
+    [2, (p) => `A picture ${p.l} cm by ${p.b} cm is mounted with a border ${p.w} cm wide all round. What is the area of the border?`, { m: 'picture' }],
+    [3, (p) => `A circular pond of radius ${p.rr} m has a path ${num(p.ww)} m wide around it. What is the area of the path? ${PIN}`, { m: 'pond' }],
+    [2, (p) => `A picture frame measures ${p.l} cm by ${p.b} cm on the outside and the frame is ${p.w} cm wide. What is the area of the glass it holds?`, { m: 'frame' }],
+    [3, (p) => `A path ${p.w} m wide around the outside of a square garden has an area of ${p.A} m². What is the side of the garden?`, { m: 'garden' }],
+  ],
+})
+
+family('ga.mensuration.parallelogram-trapezium', 'ga.mensuration', {
+  gen: (r) => ({ a: r.int(5, 30), b: r.int(4, 25), h: r.int(3, 20), d1: 2 * r.int(3, 15), d2: 2 * r.int(2, 12), q: r.pick([[2, 3], [3, 5], [1, 2], [3, 4], [2, 5]]), c: r.int(2, 9) * 10 }),
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.h}-${p.d1}-${p.d2}-${p.q.join('')}-${p.c}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { a, b, h, d1, d2, q, c } = P
+    const cm2 = unitF('cm²'); const cm = unitF('cm')
+    const T = ((a + b) * h) / 2
+    switch (P.m) {
+      case 'para': return { fmt: cm2, ans: a * h, wrong: [(a * h) / 2, 2 * (a + h), a + h].filter(isInt), expl: `Area of a parallelogram = base × height = ${a} × ${h} = ${a * h} cm².` }
+      case 'trap': if (!isInt(T) || a === b) return null; return { fmt: cm2, ans: T, wrong: [(a + b) * h, a * b * h / 2, ((a + b) / 2) + h].filter((v) => isInt(v) && v !== T), expl: `Area = ½(a + b)h = ½ × (${a} + ${b}) × ${h} = ${T} cm².` }
+      case 'trapH': if (!isInt(T) || a === b) return null; P.T = T; return { fmt: cm, ans: h, wrong: [2 * h, T / (a + b) === h ? h + 2 : T / (a + b), h + 1].filter((v) => isInt(v) && v !== h), expl: `h = 2A ÷ (a + b) = ${2 * T} ÷ ${a + b} = ${h} cm.` }
+      case 'rhombus': return { fmt: cm2, ans: (d1 * d2) / 2, wrong: [d1 * d2, d1 + d2, (d1 * d2) / 4].filter(isInt), expl: `Area of a rhombus = ½ × d₁ × d₂ = ½ × ${d1} × ${d2} = ${(d1 * d2) / 2} cm².` }
+      case 'paraH': P.A = a * h; return { fmt: cm, ans: h, wrong: [2 * h, a, h + 2].filter((v) => v !== h), expl: `Height = area ÷ base = ${a * h} ÷ ${a} = ${h} cm.` }
+      case 'rhombusD': { if (d1 === d2) return null; P.A = (d1 * d2) / 2; return { fmt: cm, ans: d2, wrong: [d2 / 2, P.A / d1, 2 * d2].filter((v) => isInt(v) && v !== d2), expl: `½ × ${d1} × d = ${P.A}, so d = ${2 * P.A} ÷ ${d1} = ${d2} cm.` } }
+      case 'ratio': { const u = h % 5 + 2; const A1 = q[0] * u; const B1 = q[1] * u; const A = ((A1 + B1) * h) / 2; if (!isInt(A)) return null; P.A = A; return { fmt: cm, ans: B1, wrong: [A1, B1 * 2, (2 * A) / h].filter((v) => isInt(v) && v !== B1), expl: `½(${q[0]}k + ${q[1]}k) × ${h} = ${A} gives ${q[0] + q[1]}k = ${(2 * A) / h}, so k = ${u} and the longer side is ${B1} cm.` } }
+      default: { if (!isInt(T) || a === b) return null; return { fmt: (v) => `Rs ${num(v)}`, ans: T * c, wrong: [(a + b) * h * c, T * c / 2, (a + b + h) * c].filter(isInt), expl: `Area = ½(${a} + ${b}) × ${h} = ${T} m²; cost = ${T} × ${c} = Rs ${num(T * c)}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the area of a parallelogram with a base of ${p.a} cm and a height of ${p.h} cm.`, { m: 'para' }],
+    [2, (p) => `A trapezium has parallel sides of ${p.a} cm and ${p.b} cm, which are ${p.h} cm apart. What is its area?`, { m: 'trap' }],
+    [2, (p) => `The area of a trapezium is ${p.T} cm² and its parallel sides are ${p.a} cm and ${p.b} cm. What is the distance between them?`, { m: 'trapH' }],
+    [1, (p) => `The diagonals of a rhombus are ${p.d1} cm and ${p.d2} cm. What is its area?`, { m: 'rhombus' }],
+    [1, (p) => `A parallelogram has an area of ${p.A} cm² and a base of ${p.a} cm. What is its height?`, { m: 'paraH' }],
+    [2, (p) => `The area of a rhombus is ${p.A} cm² and one of its diagonals is ${p.d1} cm. How long is the other diagonal?`, { m: 'rhombusD' }],
+    [3, (p) => `The parallel sides of a trapezium are in the ratio ${p.q.join(' : ')}. Its height is ${p.h} cm and its area is ${p.A} cm². What is the longer parallel side?`, { m: 'ratio' }],
+    [2, (p) => `A field is a trapezium with parallel sides of ${p.a} m and ${p.b} m, ${p.h} m apart. What does it cost to plough it at Rs ${p.c} per square metre?`, { m: 'cost' }],
+  ],
+})
+
+family('ga.mensuration.scale-change', 'ga.mensuration', {
+  gen: (r) => ({ k: r.int(2, 5), p: 10 * r.int(1, 5), q: 10 * r.int(1, 4), r1: r.int(2, 7), pr: r.pick([[1, 2], [2, 3], [1, 3], [3, 4], [2, 5]]) }),
+  key: (p) => `${p.m}-${p.k}-${p.p}-${p.q}-${p.r1}-${p.pr.join('')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { k, p, q, r1, pr } = P
+    const wordsK = ['', '', 'doubled', 'tripled', 'made four times as long', 'made five times as long']
+    switch (P.m) {
+      case 'square': P.w = wordsK[k]; return { fmt: (v) => `${v} times`, ans: k * k, wrong: [k, 2 * k, k ** 3].filter((v) => v !== k * k), expl: `Area depends on side², so multiplying the side by ${k} multiplies the area by ${k}² = ${k * k}.` }
+      case 'sphere': P.w = wordsK[k]; return { fmt: (v) => `${v} times`, ans: k ** 3, wrong: [k, k * k, 3 * k].filter((v) => v !== k ** 3), expl: `Volume depends on r³, so it is multiplied by ${k}³ = ${k ** 3}.` }
+      case 'rect': { if (p === q) return null; const ch = ((100 + p) * (100 - q)) / 100 - 100; return { fmt: (v) => (v >= 0 ? `${num(v)}% increase` : `${num(-v)}% decrease`), ans: ch, wrong: [p - q, ch === 0 ? 5 : -ch, (p - q) + (p * q) / 100].filter((v) => v !== ch), expl: `New area = ${num(1 + p / 100)} × ${num(1 - q / 100)} = ${num(((100 + p) * (100 - q)) / 10000)} of the old, a ${ch >= 0 ? 'rise' : 'fall'} of ${num(Math.abs(ch))}%.` } }
+      case 'cube': { const inc = ((100 + p) ** 2) / 100 - 100; return { fmt: (v) => `${num(v)}%`, ans: inc, wrong: [2 * p, p, ((100 + p) ** 3) / 10000 - 100].filter((v) => v !== inc), expl: `Surface area ∝ edge²: ${num(1 + p / 100)}² = ${num(((100 + p) ** 2) / 10000)}, an increase of ${num(inc)}%.` } }
+      case 'circle': { const r2v = r1 * k; P.ra = r1; P.rb = r2v; return { fmt: (v) => `${v} times`, ans: k * k, wrong: [k, 2 * k, r2v - r1].filter((v) => v !== k * k), expl: `Area ∝ r²: (${r2v} ÷ ${r1})² = ${k}² = ${k * k}.` } }
+      default: { const [x, y] = pr; return { ans: `${x ** 3} : ${y ** 3}`, wrong: [`${x} : ${y}`, `${x * x} : ${y * y}`, `${3 * x} : ${3 * y}`].filter((t) => t !== `${x ** 3} : ${y ** 3}`), expl: `Volumes of cubes are in the ratio of the cubes of their edges: ${x}³ : ${y}³ = ${x ** 3} : ${y ** 3}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `If the side of a square is ${p.w}, its area becomes how many times as large?`, { m: 'square' }],
+    [2, (p) => `If the radius of a sphere is ${p.w}, its volume becomes how many times as large?`, { m: 'sphere' }],
+    [3, (p) => `The length of a rectangle is increased by ${p.p}% and its breadth is decreased by ${p.q}%. What is the effect on its area?`, { m: 'rect' }],
+    [3, (p) => `If each edge of a cube is increased by ${p.p}%, by what percentage does its surface area increase?`, { m: 'cube' }],
+    [2, (p) => `The radius of a circle is increased from ${p.ra} cm to ${p.rb} cm. How many times as large does its area become?`, { m: 'circle' }],
+    [2, (p) => `The edges of two cubes are in the ratio ${p.pr.join(' : ')}. What is the ratio of their volumes?`, { m: 'cubes' }],
+  ],
+})
+
+// ===========================================================================
 // ENGINE — builds, verifies and writes the items
 // ===========================================================================
 const BAD_TEXT = /NaN|undefined|Infinity|null|\+ −|− −|\+ \+|\(\+|\b1x\b|\[object/
