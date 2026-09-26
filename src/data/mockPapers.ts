@@ -647,3 +647,5 @@ export async function buildCompetitiveMock(
     note: '100 quality-gated MCQs · 90 minutes · structured by subject instead of randomly mixing the central bank.',
   }
 }
+
+export { mptEnglishFamily, mptAbilityFamily } from './mptEditorialProfile'
