@@ -523,6 +523,324 @@ groupItem({ d: 2, groups: ['C9', 'E25', 'G49', 'I81'], alts: ['I64', 'H81'], q: 
 groupItem({ d: 3, groups: ['KM5', 'IP8', 'GS11', 'EV14', 'CY17'], q: 'Find the term that comes next in {S}.', exp: 'The first letters go back two (K, I, G, E, C), the second letters go forward three (M, P, S, V, Y) and the numbers rise by 3 (5, 8, 11, 14, 17).' })
 groupItem({ d: 3, groups: ['AYB', 'CWD', 'EUF', 'GSH'], q: 'Which group should replace the question mark in {S}?', exp: 'The first and last letters run forward in pairs (A B, C D, E F, G H) while the middle letters go back two at a time (Y, W, U, S).' })
 groupItem({ d: 2, groups: ['XA', 'VC', 'TE', 'RG', 'PI'], q: 'What pair of letters comes next: {S}', exp: 'The first letters go back two places (X, V, T, R, P) and the second go forward two places (A, C, E, G, I).' })
+
+// ---------------------------------------------------------------------------
+// CODING (ga.coding)
+// ---------------------------------------------------------------------------
+const rev = (w) => [...w].reverse().join('')
+const mapW = (f) => (w) => [...w].map((c, i) => N2A(f(A2N(c), i))).join('')
+const shiftW = (k) => mapW((p) => p + k)
+const oppW = mapW((p) => 27 - p)
+const progW = (s, step) => mapW((p, i) => p + s + step * i)
+const altW = (a, b) => mapW((p, i) => p + (i % 2 ? b : a))
+const compose = (...fs) => (w) => fs.reduce((x, f) => f(x), w)
+const REARR = {
+  id: (w) => w,
+  rev,
+  halves: (w) => (w.length % 2 ? null : w.slice(w.length / 2) + w.slice(0, w.length / 2)),
+  pairs: (w) => (w.length % 2 ? null : w.replace(/(.)(.)/g, '$2$1')),
+  revHalves: (w) => (w.length % 2 ? null : rev(w.slice(0, w.length / 2)) + rev(w.slice(w.length / 2))),
+  ends: (w) => (w.length < 3 ? null : w.at(-1) + w.slice(1, -1) + w[0]),
+  rotL: (w) => w.slice(1) + w[0],
+  rotR: (w) => w.at(-1) + w.slice(0, -1),
+}
+const LETTER_RULES = (() => {
+  const out = []
+  const fixed = [...Array(26)].map((_, k) => shiftW(k)).concat([oppW, compose(oppW, shiftW(1)), compose(oppW, shiftW(-1))])
+  for (const r of Object.values(REARR)) for (const m of fixed) out.push((w) => { const x = r(w); return x == null ? null : m(x) })
+  const dep = []
+  for (let s = -6; s <= 6; s++) for (const st of [-2, -1, 1, 2]) dep.push(progW(s, st))
+  for (let a = -6; a <= 6; a++) for (let b = -6; b <= 6; b++) if (a !== b) dep.push(altW(a, b))
+  for (const m of dep) { out.push(m); out.push((w) => m(rev(w))); out.push((w) => rev(m(w))) }
+  return out
+})()
+function consistentLetterRules(examples) { return LETTER_RULES.filter((r) => examples.every(([w, c]) => r(w) === c)) }
+const oneLetter = (w, i, k) => [...w].map((c, j) => (j === i ? N2A(A2N(c) + k) : c)).join('')
+function letterCodeItem({ fam, d, rule, ex, target, q, why }) {
+  const codes = ex.map(rule)
+  const ans = rule(target)
+  if (ex.length) {
+    const cons = consistentLetterRules(ex.map((w, i) => [w, codes[i]]))
+    const outs = new Set(cons.map((r) => r(target)))
+    assert(outs.size === 1 && outs.has(ans), `letter code ${ex}→${codes} does not fix ${target} uniquely: ${[...outs].slice(0, 5)}`)
+  }
+  const m = Math.floor(ans.length / 2)
+  const cand = [shiftW(1)(ans), oneLetter(ans, m, 1), shiftW(-1)(ans), rev(ans), oneLetter(ans, ans.length - 1, -1), oneLetter(ans, 0, 1), target]
+  const wrong = [...new Set(cand)].filter((c) => c !== ans).slice(0, 3)
+  add({ st: 'ga.coding', fam, concept: `code-${ex.join('-')}-${target}`, d, q: q(codes), ans, wrong, exp: `${why}, so ${target} is written as ${ans}.` })
+}
+function letterDecodeItem({ fam, d, rule, ex, word, others, q, why }) {
+  const codes = ex.map(rule)
+  const code = rule(word)
+  const cons = ex.length ? consistentLetterRules(ex.map((w, i) => [w, codes[i]])) : [rule]
+  assert(cons.every((r) => r(word) === code), `decode ${word}`)
+  for (const o of others) assert(!cons.some((r) => r(o) === code), `decode distractor ${o} also fits`)
+  add({ st: 'ga.coding', fam, concept: `decode-${ex.join('-')}-${word}`, d, q: q(codes, code), ans: word, wrong: others, exp: `${why}; reversing the rule on ${code} gives ${word}.` })
+}
+const shiftWhy = (k, w, c) => `Each letter moves ${Math.abs(k)} place${Math.abs(k) > 1 ? 's' : ''} ${k > 0 ? 'forward' : 'back'} in the alphabet (${w} → ${c})`
+
+// ga.coding.letter-shift
+{
+  const F = 'ga.coding.letter-shift'
+  const L = (d, k, ex, target, q) => letterCodeItem({ fam: F, d, rule: shiftW(k), ex: [ex], target, q, why: shiftWhy(k, ex, shiftW(k)(ex)) })
+  L(1, 1, 'MANGO', 'APPLE', (c) => `In a certain code, MANGO is written as ${c[0]}. How is APPLE written in that code?`)
+  L(1, 2, 'TABLE', 'CHAIR', (c) => `If TABLE is coded as ${c[0]}, what is the code for CHAIR?`)
+  L(1, -1, 'LIGHT', 'SOUND', (c) => `A secret language writes LIGHT as ${c[0]}. In the same language, how would SOUND be written?`)
+  L(2, 3, 'FAST', 'SLOW', (c) => `When FAST is coded as ${c[0]}, which of the following is the code for SLOW?`)
+  L(2, -2, 'CLOUD', 'STORM', (c) => `CLOUD becomes ${c[0]} in a certain code. What does STORM become?`)
+  L(2, 4, 'BOOK', 'PAGE', (c) => `In a coding system BOOK is ${c[0]}. Using the same system, write PAGE.`)
+  L(2, -3, 'WATER', 'RIVER', (c) => `If the code for WATER is ${c[0]}, find the code for RIVER.`)
+  L(3, 5, 'CAT', 'DOG', (c) => `CAT is written as ${c[0]} in a code language. Following the same rule, DOG is written as:`)
+  L(3, 2, 'ZEBRA', 'YACHT', (c) => `In a code where ZEBRA is written ${c[0]}, how is YACHT written? (After Z the alphabet starts again at A.)`)
+  L(1, 3, 'PENCIL', 'INK', (c) => `PENCIL is coded as ${c[0]}. What is the code for INK?`)
+  L(2, -1, 'EARTH', 'MOON', (c) => `Suppose EARTH is written as ${c[0]}. How, then, is MOON written?`)
+  L(3, 6, 'GOLD', 'IRON', (c) => `A code turns GOLD into ${c[0]}. Into what does it turn IRON?`)
+  letterCodeItem({ fam: F, d: 1, rule: shiftW(1), ex: [], target: 'HOUSE', q: () => 'If each letter of HOUSE is replaced by the letter that follows it in the alphabet, what is obtained?', why: 'Each letter is replaced by the next letter (H → I, O → P, U → V, S → T, E → F)' })
+  letterCodeItem({ fam: F, d: 1, rule: shiftW(-2), ex: [], target: 'FIELD', q: () => 'Replace every letter of FIELD by the letter two places before it in the alphabet. What do you get?', why: 'Each letter moves two places back (F → D, I → G, E → C, L → J, D → B)' })
+}
+
+// ga.coding.rearrangement
+{
+  const F = 'ga.coding.rearrangement'
+  const R = (d, rule, ex, target, why, q) => letterCodeItem({ fam: F, d, rule, ex: [ex], target, q, why })
+  R(1, rev, 'LAMP', 'DESK', 'The letters are written in reverse order', (c) => `If LAMP is written as ${c[0]}, how is DESK written?`)
+  R(1, rev, 'FRIEND', 'CANDLE', 'The word is written backwards', (c) => `In a code, FRIEND is written as ${c[0]}. How will CANDLE be written?`)
+  R(3, compose(rev, shiftW(1)), 'FORM', 'WIND', 'The word is reversed and then each letter moves one place forward (FORM → MROF → NSPG)', (c) => `FORM is coded as ${c[0]}. Using the same method, what is the code for WIND?`)
+  R(2, REARR.halves, 'GARDEN', 'BRIGHT', 'The two halves of the word change places (GAR|DEN → DEN|GAR)', (c) => `The code for GARDEN is ${c[0]}. What is the code for BRIGHT?`)
+  R(2, REARR.pairs, 'PLANET', 'CASTLE', 'Each pair of neighbouring letters is swapped (PL→LP, AN→NA, ET→TE)', (c) => `If PLANET is written as ${c[0]} in a code, then CASTLE is written as:`)
+  R(2, REARR.revHalves, 'SILVER', 'GOLDEN', 'Each half of the word is reversed separately (SIL → LIS, VER → REV)', (c) => `SILVER is coded as ${c[0]}. What would GOLDEN be coded as?`)
+  letterCodeItem({ fam: F, d: 1, rule: rev, ex: [], target: 'GRASS', why: 'The rule stated is to write the word backwards', q: () => `A word is coded by writing it backwards: PLANT becomes ${rev('PLANT')}. What does GRASS become?` })
+  R(1, REARR.ends, 'TIGER', 'HORSE', 'The first and last letters change places', (c) => `If TIGER is coded ${c[0]}, what is the code for HORSE?`)
+  R(3, compose(rev, shiftW(-1)), 'CODE', 'BEAR', 'The word is reversed and each letter moves one place back (CODE → EDOC → DCNB)', (c) => `In a certain language CODE is written as ${c[0]}. How is BEAR written in that language?`)
+  R(2, REARR.rotL, 'STAMP', 'FRAME', 'The first letter is moved to the end', (c) => `STAMP is written as ${c[0]}. By the same rule, how is FRAME written?`)
+  R(2, REARR.rotR, 'CLEAR', 'WHITE', 'The last letter is moved to the front', (c) => `By a certain rule, CLEAR is changed to ${c[0]}. What does WHITE change to?`)
+  R(3, compose(rev, oppW), 'WORD', 'GAME', 'The word is reversed and each letter is replaced by its opposite letter (A↔Z, B↔Y, …)', (c) => `If WORD is written as ${c[0]}, how is GAME written?`)
+}
+
+// ga.coding.number-substitution
+const NUM_RULES = (() => {
+  const fs = []
+  for (let k = -3; k <= 3; k++) fs.push((p) => p + k)
+  for (let k = -2; k <= 2; k++) fs.push((p) => 27 - p + k)
+  fs.push((p) => 2 * p, (p) => 3 * p, (p) => p * p, (p) => 2 * p - 1, (p) => 2 * p + 1)
+  const out = []
+  for (const f of fs) { out.push((w) => [...w].map((c) => f(A2N(c))).join('-')); out.push((w) => [...rev(w)].map((c) => f(A2N(c))).join('-')) }
+  return out
+})()
+const numCode = (f, r = false) => (w) => [...(r ? rev(w) : w)].map((c) => f(A2N(c))).join('-')
+{
+  const F = 'ga.coding.number-substitution'
+  const N = ({ d, rule, ex, target, q, why }) => {
+    const codes = ex.map(rule), ans = rule(target)
+    if (ex.length) { const cons = NUM_RULES.filter((r) => ex.every((w, i) => r(w) === codes[i])); const outs = new Set(cons.map((r) => r(target))); assert(outs.size === 1 && outs.has(ans), `number code ${ex} ${target}`) }
+    const parts = ans.split('-').map(Number)
+    const cand = [parts.map((x) => x + 1).join('-'), [...parts].reverse().join('-'), parts.map((x, i) => (i === 1 ? x + 1 : x)).join('-'), parts.map((x) => x - 1).join('-'), parts.map((x, i) => (i === parts.length - 1 ? x + 2 : x)).join('-')]
+    const wrong = [...new Set(cand)].filter((c) => c !== ans).slice(0, 3)
+    add({ st: 'ga.coding', fam: F, concept: `numcode-${ex.join('-')}-${target}`, d, q: q(codes), ans, wrong, exp: `${why}, so ${target} is ${ans}.` })
+  }
+  const ND = ({ d, rule, ex, word, others, q, why }) => {
+    const codes = ex.map(rule), code = rule(word)
+    const cons = ex.length ? NUM_RULES.filter((r) => ex.every((w, i) => r(w) === codes[i])) : [rule]
+    assert(cons.length && cons.every((r) => r(word) === code), `numdecode ${word}`)
+    for (const o of others) assert(!cons.some((r) => r(o) === code), `numdecode distractor ${o}`)
+    add({ st: 'ga.coding', fam: F, concept: `numdecode-${ex.join('-')}-${word}`, d, q: q(codes, code), ans: word, wrong: others, exp: `${why}; ${code} therefore spells ${word}.` })
+  }
+  const pos = numCode((p) => p)
+  N({ d: 1, rule: pos, ex: ['CAB'], target: 'FACE', q: (c) => `If CAB is written as ${c[0]}, how is FACE written?`, why: 'Each letter is replaced by its position in the alphabet (C = 3, A = 1, B = 2)' })
+  N({ d: 1, rule: pos, ex: [], target: 'HEAD', q: () => 'If A = 1, B = 2, C = 3 and so on, how is HEAD written in numbers?', why: 'H, E, A, D are the 8th, 5th, 1st and 4th letters' })
+  ND({ d: 1, rule: pos, ex: ['CAT'], word: 'DOG', others: ['DIG', 'FOG', 'DOT'], q: (c, code) => `If ${c[0]} stands for CAT, which word does ${code} stand for?`, why: 'Each number is the position of a letter in the alphabet' })
+  N({ d: 2, rule: numCode((p) => 27 - p), ex: [], target: 'BOX', q: () => 'If A = 26, B = 25, C = 24, …, Z = 1, what is the code for BOX?', why: 'Each letter gets 27 minus its usual position (B = 25, O = 12, X = 3)' })
+  N({ d: 1, rule: numCode((p) => p + 1), ex: ['CAT'], target: 'RAT', q: (c) => `If CAT is written as ${c[0]}, how is RAT written?`, why: 'Each letter is written as one more than its position (C = 3 → 4, A = 1 → 2, T = 20 → 21)' })
+  N({ d: 1, rule: pos, ex: ['BIRD'], target: 'WING', q: (c) => `In a code, BIRD is ${c[0]}. How is WING written?`, why: 'Each letter is replaced by its position in the alphabet' })
+  N({ d: 2, rule: numCode((p) => 2 * p), ex: ['BAD'], target: 'FEED', q: (c) => `If BAD is written as ${c[0]}, what is the code for FEED?`, why: 'Each letter is written as twice its position (B = 2 → 4, A = 1 → 2, D = 4 → 8)' })
+  N({ d: 3, rule: numCode((p) => p * p), ex: ['ACE'], target: 'BED', q: (c) => `If ACE is written as ${c[0]}, how is BED written?`, why: 'Each letter is written as the square of its position (A = 1 → 1, C = 3 → 9, E = 5 → 25)' })
+  N({ d: 2, rule: numCode((p) => p, true), ex: ['CAT'], target: 'DOG', q: (c) => `If CAT is coded ${c[0]}, how is DOG coded?`, why: 'The letter positions are written in reverse order (T = 20, A = 1, C = 3)' })
+  ND({ d: 3, rule: numCode((p) => 27 - p), ex: [], word: 'SOLD', others: ['COLD', 'FOLD', 'SOLE'], q: (c, code) => `If 26 stands for A, 25 for B and so on down to 1 for Z, which word is written ${code}?`, why: 'Each number is 27 minus the letter’s position (27 − 8 = 19 = S, 27 − 12 = 15 = O, 27 − 15 = 12 = L, 27 − 23 = 4 = D)' })
+  N({ d: 2, rule: numCode((p) => p - 1), ex: ['DOG'], target: 'PIG', q: (c) => `If DOG is written as ${c[0]}, how is PIG written?`, why: 'Each letter is written as one less than its position (D = 4 → 3, O = 15 → 14, G = 7 → 6)' })
+  N({ d: 2, rule: numCode((p) => p + 3), ex: ['ARM'], target: 'LEG', q: (c) => `ARM is coded as ${c[0]}. What is the code for LEG?`, why: 'Each letter is written as its position plus 3 (A = 1 → 4, R = 18 → 21, M = 13 → 16)' })
+  ND({ d: 1, rule: pos, ex: [], word: 'MAP', others: ['MOP', 'NAP', 'MAT'], q: (c, code) => `If each letter is replaced by its position in the alphabet, which word gives ${code}?`, why: '13 = M, 1 = A, 16 = P' })
+  ND({ d: 1, rule: pos, ex: ['SUN'], word: 'STAR', others: ['STIR', 'SCAR', 'SOAR'], q: (c, code) => `In a code language, ${c[0]} means SUN. What does ${code} mean?`, why: 'The numbers are alphabet positions (S = 19, U = 21, N = 14)' })
+}
+
+// ga.coding.position-sum
+const SUM_RULES = [
+  (w) => sum([...w].map(A2N)), (w) => sum([...w].map((c) => 27 - A2N(c))), (w) => sum([...w].map(A2N)) + w.length,
+  (w) => sum([...w].map(A2N)) * w.length, (w) => 2 * sum([...w].map(A2N)), (w) => sum([...w].map(A2N)) - w.length,
+  (w) => sum([...w].map((c) => 27 - A2N(c))) + w.length, (w) => sum([...w].map((c) => A2N(c) ** 2)), (w) => [...w].reduce((s, c) => s * A2N(c), 1),
+]
+const sumF = SUM_RULES[0]
+{
+  const F = 'ga.coding.position-sum'
+  const S = ({ d, rule = sumF, ex, target, q, why }) => {
+    const v = ex.map(rule), ans = rule(target)
+    if (ex.length) { const outs = new Set(SUM_RULES.filter((r) => ex.every((w, i) => r(w) === v[i])).map((r) => r(target))); assert(outs.size === 1 && outs.has(ans), `sum code ${ex} ${target}`) }
+    const wrong = [ans + 1, ans - 2, ans + target.length, ans - target.length, ans + 3].filter((x, i, a) => x !== ans && a.indexOf(x) === i).slice(0, 3)
+    add({ st: 'ga.coding', fam: F, concept: `sumcode-${ex.join('-')}-${target}`, d, q: q(v), ans, wrong, exp: `${why}. For ${target}: ${[...target].map((c) => (rule === sumF ? A2N(c) : 27 - A2N(c))).join(' + ')}${rule === SUM_RULES[4] ? ', doubled,' : ''} gives ${ans}.` })
+  }
+  S({ d: 2, ex: ['CAT', 'BAG'], target: 'DOG', q: (v) => `If CAT = ${v[0]} and BAG = ${v[1]}, what is DOG?`, why: 'Each word is the sum of its letters’ positions (C 3 + A 1 + T 20 = 24)' })
+  S({ d: 1, ex: [], target: 'MPT', q: () => 'If the value of a word is the sum of the positions of its letters in the alphabet, what is the value of MPT?', why: 'Add the letter positions' })
+  S({ d: 2, ex: ['HEN', 'COW'], target: 'BULL', q: (v) => `In a code HEN is ${v[0]} and COW is ${v[1]}. What number is BULL?`, why: 'Each word is coded as the sum of its letter positions (H 8 + E 5 + N 14 = 27)' })
+  S({ d: 3, rule: SUM_RULES[1], ex: ['ACE', 'BED'], target: 'FIG', q: (v) => `If ACE = ${v[0]} and BED = ${v[1]}, then FIG = ?`, why: 'Letters are counted from the end of the alphabet (A = 26, B = 25, …) and added: ACE = 26 + 24 + 22 = 72' })
+  S({ d: 2, ex: ['ROSE'], target: 'LILY', q: (v) => `If ROSE is written as ${v[0]}, how is LILY written?`, why: 'The code is the total of the letter positions (R 18 + O 15 + S 19 + E 5 = 57)' })
+  S({ d: 2, ex: ['PEN', 'INK'], target: 'BOOK', q: (v) => `Given PEN = ${v[0]} and INK = ${v[1]}, find the code number of BOOK.`, why: 'The number is the sum of the letter positions (P 16 + E 5 + N 14 = 35)' })
+  S({ d: 3, rule: SUM_RULES[4], ex: ['AB', 'CD'], target: 'EF', q: (v) => `If AB = ${v[0]} and CD = ${v[1]}, what does EF equal?`, why: 'The letter positions are added and the total doubled (A 1 + B 2 = 3, × 2 = 6)' })
+  S({ d: 2, ex: ['FACE'], target: 'CAFE', q: (v) => `If FACE = ${v[0]} in a letter-value code, what is CAFE?`, why: 'The value is the sum of the letter positions, and CAFE uses exactly the same letters as FACE' })
+  S({ d: 2, ex: ['TEA', 'MILK'], target: 'COFFEE', q: (v) => `If TEA is coded ${v[0]} and MILK ${v[1]}, what is the code for COFFEE?`, why: 'Each code is the sum of the letter positions (T 20 + E 5 + A 1 = 26)' })
+  S({ d: 1, ex: ['BAT', 'CAT'], target: 'RAT', q: (v) => `If BAT = ${v[0]} and CAT = ${v[1]}, what is RAT?`, why: 'Each value is the sum of the letter positions (B 2 + A 1 + T 20 = 23)' })
+  {
+    const words = ['BIG', 'TOP', 'HUT', 'LAMP'], vals = words.map(sumF), best = Math.max(...vals)
+    assert(vals.filter((v) => v === best).length === 1, 'unique greatest')
+    const a = words[vals.indexOf(best)]
+    add({ st: 'ga.coding', fam: F, concept: 'letter-sum-greatest-big-top-hut-lamp', d: 2, q: 'Taking A = 1, B = 2, …, Z = 26 and adding the values of the letters, which of these words has the greatest total?', ans: a, wrong: words.filter((w) => w !== a), exp: `The totals are ${words.map((w, i) => `${w} ${vals[i]}`).join(', ')}, so ${a} is greatest.` })
+  }
+  {
+    const words = ['WIND', 'CLOUD', 'RAIN', 'MIST'], vals = words.map(sumF)
+    assert(vals.filter((v) => v === 50).length === 1, 'unique 50')
+    const a = words[vals.indexOf(50)]
+    add({ st: 'ga.coding', fam: F, concept: 'letter-sum-equal-50-wind', d: 2, q: 'With A = 1, B = 2 and so on, which word has letter values adding up to exactly 50?', ans: a, wrong: words.filter((w) => w !== a), exp: `The totals are ${words.map((w, i) => `${w} ${vals[i]}`).join(', ')}; only ${a} makes 50.` })
+  }
+}
+
+// ga.coding.decode (shift / reversal / progressive rules applied backwards)
+{
+  const F = 'ga.coding.decode'
+  const D = (d, rule, ex, word, others, why, q) => letterDecodeItem({ fam: F, d, rule, ex: [ex], word, others, q, why })
+  D(1, shiftW(1), 'CAT', 'DOG', ['DIG', 'FOG', 'DOT'], 'Each letter is moved one place forward', (c, code) => `In a certain code, CAT is written as ${c[0]}. Which word is written as ${code}?`)
+  D(1, shiftW(-1), 'BOOK', 'NOTE', ['VOTE', 'NOSE', 'TONE'], 'Each letter is moved one place back', (c, code) => `If BOOK is coded as ${c[0]}, what word does the code ${code} stand for?`)
+  D(2, rev, 'FLOWER', 'GARDEN', ['DANGER', 'GANDER', 'RANGED'], 'The word is written backwards', (c, code) => `FLOWER is coded as ${c[0]}. Which word is coded as ${code}?`)
+  D(2, shiftW(2), 'RAIN', 'SNOW', ['SHOW', 'STOW', 'SLOW'], 'Each letter is moved two places forward', (c, code) => `If RAIN is written ${c[0]}, which word is written ${code}?`)
+  D(3, compose(rev, shiftW(1)), 'LION', 'TIGER', ['TOWER', 'TAKER', 'TIMER'], 'The word is reversed and each letter moved one place forward', (c, code) => `If LION is coded as ${c[0]}, what does ${code} decode to?`)
+  D(3, progW(1, 1), 'BEAT', 'SHOE', ['SHOP', 'SHIP', 'SHOT'], 'The letters are moved forward by 1, 2, 3, 4 in turn', (c, code) => `If BEAT is coded as ${c[0]}, which word has the code ${code}?`)
+  D(3, altW(1, -1), 'SAND', 'LAMP', ['LIMP', 'LUMP', 'RAMP'], 'The letters are moved alternately one place forward and one place back', (c, code) => `In a code, SAND becomes ${c[0]}. Which word becomes ${code}?`)
+  D(2, shiftW(3), 'HOT', 'COLD', ['CORD', 'COLT', 'BOLD'], 'Each letter is moved three places forward', (c, code) => `In a code language HOT is written ${c[0]}. What does ${code} mean in that language?`)
+  D(2, shiftW(-2), 'FISH', 'WORM', ['WARM', 'WORN', 'FORM'], 'Each letter is moved two places back', (c, code) => `FISH is written as ${c[0]} in a code. Decode ${code}.`)
+  D(2, rev, 'KNIFE', 'SPOON', ['SNOOP', 'SPOOK', 'SWOON'], 'The word is written backwards', (c, code) => `KNIFE appears as ${c[0]} in a code. The code ${code} stands for which word?`)
+  D(2, shiftW(4), 'COW', 'GOAT', ['MOAT', 'BOAT', 'GOAD'], 'Each letter is moved four places forward', (c, code) => `If COW is written as ${c[0]}, which word is written as ${code}?`)
+  D(3, compose(rev, shiftW(-1)), 'MILK', 'SALT', ['SILT', 'SEAT', 'SLAT'], 'The word is reversed and each letter moved one place back', (c, code) => `If MILK is written as ${c[0]}, the word written as ${code} is:`)
+}
+
+// ga.coding.opposite-letter
+{
+  const F = 'ga.coding.opposite-letter'
+  const why = 'Each letter is replaced by its opposite letter, the pair adding up to 27 (A↔Z, B↔Y, C↔X, …)'
+  const O = (d, rule, ex, target, q, w = why) => letterCodeItem({ fam: F, d, rule, ex: ex ? [ex] : [], target, q, why: w })
+  O(2, oppW, 'GIRL', 'BOY', (c) => `GIRL is coded as ${c[0]} in a certain language. How is BOY coded in that language?`)
+  O(1, oppW, null, 'LOVE', () => 'In a code, each letter is replaced by the letter in the same position from the other end of the alphabet (A by Z, B by Y and so on). How is LOVE written?')
+  O(2, oppW, 'WORK', 'PLAY', (c) => `When WORK is coded as ${c[0]}, PLAY is coded as:`)
+  O(2, oppW, 'FLIGHT', 'POLE', (c) => `If FLIGHT is written as ${c[0]}, how would POLE be written?`)
+  O(2, oppW, 'SKY', 'SEA', (c) => `The code for SKY is ${c[0]}. The code for SEA will be:`)
+  O(3, compose(rev, oppW), 'TEAM', 'GAME', (c) => `If TEAM is coded as ${c[0]}, how is GAME coded?`, 'The word is reversed and each letter replaced by its opposite (A↔Z, B↔Y, …)')
+  O(3, oppW, 'MILK', 'BUTTER', (c) => `If MILK is written as ${c[0]}, what will BUTTER be written as?`)
+  letterDecodeItem({ fam: F, d: 2, rule: oppW, ex: ['TRAIN'], word: 'BUS', others: ['BUN', 'BUD', 'BUY'], why, q: (c, code) => `In a code, TRAIN = ${c[0]}. Which word is written as ${code}?` })
+  letterDecodeItem({ fam: F, d: 2, rule: oppW, ex: [], word: 'SOUND', others: ['ROUND', 'MOUND', 'SOUTH'], why, q: (c, code) => `In a code where A is written as Z, B as Y, C as X and so on, which word is written as ${code}?` })
+  {
+    const pairs = [['G', 'T'], ['H', 'R'], ['E', 'U'], ['J', 'P']]
+    const ok = pairs.filter(([a, b]) => A2N(a) + A2N(b) === 27)
+    assert(ok.length === 1, 'one opposite pair')
+    const fmtP = ([a, b]) => `${a} and ${b}`
+    add({ st: 'ga.coding', fam: F, concept: 'opposite-letter-pair-g-t', d: 2, q: 'Two letters are called opposite if their positions in the alphabet add up to 27 (A and Z, B and Y, …). Which of these is an opposite pair?', ans: fmtP(ok[0]), wrong: pairs.filter((p) => p !== ok[0]).map(fmtP), exp: `G is the 7th letter and T the 20th, and 7 + 20 = 27; each other pair adds up to 26.` })
+  }
+}
+
+// ga.coding.digit-substitution (letters stand for digits, inferred from examples)
+{
+  const F = 'ga.coding.digit-substitution'
+  const DG = (d, mapStr, ex, target, q) => {
+    const map = {}
+    for (const [, l, g] of mapStr.matchAll(/([A-Z])(\d)/g)) { assert(!(l in map), 'dup letter'); map[l] = g }
+    assert(new Set(Object.values(map)).size === Object.keys(map).length, `digit map injective ${mapStr}`)
+    const enc = (w) => [...w].map((c) => { assert(c in map, `letter ${c} unmapped`); return map[c] }).join('')
+    for (const c of target) assert(ex.some((w) => w.includes(c)), `letter ${c} of ${target} not shown in examples`)
+    const codes = ex.map(enc), ans = enc(target)
+    const sw = (s, i) => s.slice(0, i) + s[i + 1] + s[i] + s.slice(i + 2)
+    const cand = [sw(ans, 0), sw(ans, ans.length - 2), rev(ans), sw(ans, 1), ans.slice(0, -1) + ((Number(ans.at(-1)) + 1) % 10)]
+    const wrong = [...new Set(cand)].filter((c) => c !== ans && !codes.includes(c)).slice(0, 3)
+    const shown = [...new Set(target)].map((c) => `${c} = ${map[c]}`).join(', ')
+    add({ st: 'ga.coding', fam: F, concept: `digitcode-${ex.join('-')}-${target}`, d, q: q(codes), ans, wrong, exp: `Matching letters with digits in the examples gives ${shown}; so ${target} is ${ans}.` })
+  }
+  DG(1, 'P5E3N7T4', ['PEN', 'NET'], 'TEN', (c) => `If PEN is written as ${c[0]} and NET as ${c[1]}, how is TEN written?`)
+  DG(2, 'M4I9L2D6E1', ['MILD', 'LIME'], 'DIME', (c) => `In a code, MILD is ${c[0]} and LIME is ${c[1]}. What is the code for DIME?`)
+  DG(1, 'S1T2O3P4', ['STOP'], 'POST', (c) => `If STOP is coded as ${c[0]}, how is POST coded?`)
+  DG(2, 'C3O7D1E9V5', ['CODE', 'DOVE'], 'COVE', (c) => `CODE is written ${c[0]} and DOVE is written ${c[1]}. How is COVE written?`)
+  DG(2, 'L8A2T6E4M3', ['LATE', 'MEAL'], 'METAL', (c) => `Given that LATE = ${c[0]} and MEAL = ${c[1]}, what is METAL?`)
+  DG(2, 'R7A1T5E8', ['RATE', 'TEAR'], 'TREAT', (c) => `If RATE is ${c[0]} and TEAR is ${c[1]} in a code, find the code for TREAT.`)
+  DG(2, 'S9A2N6D3E5T8', ['SAND', 'DENT'], 'STAND', (c) => `SAND is coded ${c[0]} and DENT is coded ${c[1]}. Which number stands for STAND?`)
+  DG(2, 'G7A2M9E4K8', ['GAME', 'MAKE'], 'KEG', (c) => `If GAME = ${c[0]} and MAKE = ${c[1]}, then KEG = ?`)
+  DG(2, 'H1A5I3R8C6', ['HAIR', 'CHAIR'], 'RICH', (c) => `The words HAIR and CHAIR are coded ${c[0]} and ${c[1]}. What is the code for RICH?`)
+  DG(3, 'P4L9A0N1T2E7', ['PLANT', 'LATE'], 'PLATE', (c) => `In a certain code PLANT is written as ${c[0]} and LATE as ${c[1]}. How is PLATE written in that code?`)
+  DG(3, 'F3I6R1E8D5', ['FIRE', 'RIDE'], 'FRIED', (c) => `Using the code in which FIRE is ${c[0]} and RIDE is ${c[1]}, write FRIED.`)
+  DG(1, 'B2O7R4N9E1', ['BORN', 'ROBE'], 'BONE', (c) => `BORN has the code ${c[0]} and ROBE has the code ${c[1]}. What is the code of BONE?`)
+}
+
+// ga.coding.sentence-code (word codes found by comparing coded sentences)
+{
+  const F = 'ga.coding.sentence-code'
+  const POOL = ['ko', 'pi', 'ta', 'mu', 're', 'sa', 'ne', 'lo', 'zi', 'fa', 'du', 've', 'ri', 'ga', 'bo', 'se', 'nu', 'ja', 'po', 'wi']
+  function solve(sents, codeOf) {
+    const words = [...new Set(sents.flat())]
+    const cs = sents.map((s) => new Set(s.map((w) => codeOf[w])))
+    const cand = {}
+    for (const w of words) {
+      let c = null
+      sents.forEach((s, i) => { if (s.includes(w)) c = c ? new Set([...c].filter((x) => cs[i].has(x))) : new Set(cs[i]) })
+      sents.forEach((s, i) => { if (!s.includes(w)) for (const x of cs[i]) c.delete(x) })
+      cand[w] = c
+    }
+    let changed = true
+    while (changed) {
+      changed = false
+      for (const w of words) if (cand[w].size === 1) { const [x] = cand[w]; for (const v of words) if (v !== w && cand[v].delete(x)) changed = true }
+    }
+    return cand
+  }
+  const SC = (d, sentences, target, mode, qf) => {
+    const sents = sentences.map((s) => s.split(' '))
+    const words = [...new Set(sents.flat())]
+    const pool = shuffle(POOL)
+    const codeOf = Object.fromEntries(words.map((w, i) => [w, pool[i]]))
+    const cand = solve(sents, codeOf)
+    assert(cand[target].size === 1 && cand[target].has(codeOf[target]), `sentence code ${target} determined`)
+    const coded = sents.map((s) => shuffle(s.map((w) => codeOf[w])).join(' '))
+    const shownPairs = sentences.map((s, i) => `‘${s}’ is written as ‘${coded[i]}’`)
+    const inWith = sents.filter((s) => s.includes(target)).flat().filter((w) => w !== target)
+    const pickWords = [...new Set([...inWith, ...words])].filter((w) => w !== target).slice(0, 3)
+    const containing = sentences.filter((s) => s.split(' ').includes(target)).map((s) => `‘${s}’`).join(' and ')
+    const exp = `${target === target ? `‘${target}’` : ''} appears in ${containing}; the only code common to those sentences and absent from the others is ‘${codeOf[target]}’.`
+    if (mode === 'code') add({ st: 'ga.coding', fam: F, concept: `sentence-code-${sentences[0]}-${target}`, d, q: qf(shownPairs), ans: `‘${codeOf[target]}’`, wrong: pickWords.map((w) => `‘${codeOf[w]}’`), exp })
+    else add({ st: 'ga.coding', fam: F, concept: `sentence-code-${sentences[0]}-${target}`, d, q: qf(shownPairs, codeOf[target]), ans: `‘${target}’`, wrong: pickWords.map((w) => `‘${w}’`), exp })
+  }
+  SC(1, ['rain is heavy', 'heavy wind blows', 'wind is cold'], 'heavy', 'code', (p) => `In a certain code, ${p[0]}, ${p[1]} and ${p[2]}. What is the code for ‘heavy’?`)
+  SC(2, ['good students work hard', 'students read books', 'hard work pays'], 'students', 'code', (p) => `If ${p[0]}, ${p[1]} and ${p[2]}, which code stands for ‘students’?`)
+  SC(2, ['open the door', 'close the window', 'door is closed'], 'door', 'code', (p) => `In a code language ${p[0]}, ${p[1]} and ${p[2]}. Find the code for ‘door’.`)
+  SC(2, ['pakistan is beautiful', 'beautiful valleys attract tourists', 'tourists love pakistan'], 'tourists', 'word', (p, c) => `Suppose ${p[0]}, ${p[1]} and ${p[2]}. Which word is written as ‘${c}’?`)
+  SC(1, ['he plays cricket', 'cricket is popular', 'he is tall'], 'is', 'code', (p) => `A code is such that ${p[0]}, ${p[1]} and ${p[2]}. What is the code for ‘is’?`)
+  SC(2, ['sweet mango juice', 'mango is yellow', 'juice is fresh'], 'juice', 'word', (p, c) => `Given that ${p[0]}, ${p[1]} and ${p[2]}, what does ‘${c}’ mean?`)
+  SC(2, ['read the newspaper daily', 'newspaper gives news', 'daily news matters'], 'news', 'code', (p) => `In a secret language ${p[0]}, ${p[1]} and ${p[2]}. How is ‘news’ written?`)
+  SC(2, ['bright sun shines', 'sun rises early', 'early birds sing'], 'early', 'word', (p, c) => `If ${p[0]}, ${p[1]} and ${p[2]}, then ‘${c}’ stands for:`)
+  SC(1, ['green trees give shade', 'trees need water', 'water is life'], 'water', 'code', (p) => `Consider a code in which ${p[0]}, ${p[1]} and ${p[2]}. Which code means ‘water’?`)
+  SC(2, ['cats drink milk', 'milk is white', 'white clouds float'], 'white', 'word', (p, c) => `In a code, ${p[0]}, ${p[1]} and ${p[2]}. Which word has the code ‘${c}’?`)
+  SC(3, ['tall boys play football', 'boys like cricket', 'football is fun', 'cricket is played'], 'is', 'code', (p) => `In a code, ${p[0]}, ${p[1]}, ${p[2]} and ${p[3]}. What is the code for ‘is’ here?`)
+  SC(2, ['she writes letters', 'letters bring news', 'she reads news'], 'she', 'code', (p) => `If ${p[0]}, ${p[1]} and ${p[2]}, what is the code for ‘she’?`)
+}
+
+// ga.coding.progressive-shift (shift changes with position)
+{
+  const F = 'ga.coding.progressive-shift'
+  const P = (d, rule, ex, target, why, q) => letterCodeItem({ fam: F, d, rule, ex: ex ? [ex] : [], target, q, why })
+  P(2, progW(1, 1), 'COLD', 'WARM', 'The letters are moved forward by 1, 2, 3, 4 in turn (C+1, O+2, L+3, D+4)', (c) => `If COLD is written as ${c[0]}, how will WARM be written?`)
+  P(2, progW(1, 1), 'BAD', 'FEED', 'The letters move forward by 1, 2, 3, … in turn (B+1, A+2, D+3)', (c) => `BAD is coded as ${c[0]}. What is FEED coded as?`)
+  P(3, progW(-1, -1), 'MILK', 'HOPE', 'The letters move back by 1, 2, 3, 4 in turn (M−1, I−2, L−3, K−4)', (c) => `In a code MILK is written ${c[0]}. Write HOPE in the same code.`)
+  P(2, altW(1, -1), 'HELP', 'KIND', 'The letters move alternately one place forward and one place back', (c) => `If HELP is coded as ${c[0]}, then KIND is coded as:`)
+  P(2, altW(2, -2), 'BEST', 'GOLD', 'The letters move alternately two places forward and two places back', (c) => `A code changes BEST into ${c[0]}. What does it change GOLD into?`)
+  P(1, progW(1, 1), null, 'FARM', 'F moves 1, A moves 2, R moves 3 and M moves 4 places forward', () => 'Each letter of a word is moved forward by its position in the word (the 1st letter by 1, the 2nd by 2, and so on). What does FARM become?')
+  P(3, progW(2, 2), 'ACE', 'BIG', 'The letters move forward by 2, 4, 6 in turn (A+2, C+4, E+6)', (c) => `If ACE is coded ${c[0]}, what is the code for BIG?`)
+  P(2, altW(1, 2), 'LAMP', 'DESK', 'The letters move forward by 1 and 2 alternately (L+1, A+2, M+1, P+2)', (c) => `LAMP is written ${c[0]} in a certain code. How is DESK written?`)
+  P(3, progW(4, -1), 'FIRE', 'COAL', 'The letters move forward by 4, 3, 2, 1 in turn', (c) => `Under a coding rule FIRE is written ${c[0]}. Under the same rule COAL is written:`)
+  P(2, progW(1, 1), 'SUN', 'SKY', 'The letters move forward by 1, 2, 3 in turn', (c) => `If SUN is ${c[0]} in a code, what is SKY?`)
+  P(2, altW(-1, 1), 'RING', 'BELL', 'The letters move alternately one place back and one place forward', (c) => `RING is written as ${c[0]}. Following the same pattern, BELL is written as:`)
+  P(3, progW(3, -1), 'PARK', 'BOAT', 'The letters move forward by 3, 2, 1 and 0 places in turn', (c) => `A code writes PARK as ${c[0]}. How does it write BOAT?`)
+}
+
 // @@CONTINUE@@
 if (dupErrors.length) { console.error(dupErrors.join('\n')); process.exit(1) }
 console.log("items", items.length)

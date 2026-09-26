@@ -874,6 +874,437 @@ family('ga.equations.number-word-problem', 'ga.equations', {
   ],
 })
 
+const W_TIMES = ['', 'once', 'twice', 'three times', 'four times', 'five times', 'six times']
+
+family('ga.equations.consecutive-integers', 'ga.equations', {
+  gen: (r) => ({ n: r.int(5, 60), k: r.pick([3, 4, 5, 6, 7, 8, 9, 11, 12]), nm: r.pick(NAMES) }),
+  key: (p) => `${p.s}-${p.n}${['mult'].includes(p.s) ? `-${p.k}` : ''}`,
+  solve: (P) => {
+    const { n, k } = P
+    switch (P.s) {
+      case 'three': return { ans: n + 2, wrong: [n, n + 1, n + 3], expl: `n + (n + 1) + (n + 2) = 3n + 3 = ${3 * n + 3}, so n = ${n} and the largest is ${n + 2}.` }
+      case 'even2': { const m = 2 * Math.floor(n / 2); return { ans: m, wrong: [m + 1, m + 2, m - 2], expl: `n + (n + 2) = ${2 * m + 2}, so 2n = ${2 * m} and the smaller number is ${m}.` } }
+      case 'odd4': { if (n % 2 === 0) return null; return { ans: n, wrong: [n + 2, n + 3, n - 2], expl: `n + (n + 2) + (n + 4) + (n + 6) = 4n + 12 = ${4 * n + 12}, so n = ${n}.` } }
+      case 'mult': { const t = Math.floor(n / 4) + 1; return { ans: k * (t + 2), wrong: [k * (t + 1), k * t, k * (t + 3)], expl: `The middle multiple is ${3 * k * (t + 1)} ÷ 3 = ${k * (t + 1)}, so the three are ${k * t}, ${k * (t + 1)} and ${k * (t + 2)}.` } }
+      case 'prod': { const m = Math.floor(n / 3) + 4; return { ans: 2 * m + 1, wrong: [m + 1, 2 * m - 1, 2 * m + 3], expl: `${m} × ${m + 1} = ${m * (m + 1)}, so the integers are ${m} and ${m + 1}; their sum is ${2 * m + 1}.` } }
+      case 'five': return { ans: n - 2, wrong: [n, n - 1, n + 2], expl: `The middle integer is ${5 * n} ÷ 5 = ${n}, so the smallest is ${n} − 2 = ${n - 2}.` }
+      case 'twice': { const kk = 2 * Math.floor(n / 2) + 8; return { ans: kk - 2, wrong: [kk - 6, kk - 4, kk], expl: `n + (n + 2) + (n + 4) = 2n + ${kk}, so n = ${kk - 6}; the largest is ${kk - 6} + 4 = ${kk - 2}.` } }
+      case 'house': { const m = 2 * Math.floor(n / 2) + 1; return { ans: m + 2, wrong: [m, m + 1, m + 4], expl: `n + (n + 2) = ${2 * m + 2}, so n = ${m} and the larger number is ${m + 2}.` } }
+      case 'pages': { const m = n * 3 + 10; return { ans: m + 1, wrong: [m, m + 2, m - 1], expl: `Facing pages are consecutive: n + (n + 1) = ${2 * m + 1}, so n = ${m} and the larger is ${m + 1}.` } }
+      default: return { ans: n + 3, wrong: [n + 2, n + 4, n], expl: `2n = (n + 2) + ${n}, so n = ${n + 2} and the middle integer is ${n + 3}.` }
+    }
+  },
+  items: [
+    [1, (p) => `The sum of three consecutive integers is ${3 * p.n + 3}. What is the largest of them?`, { s: 'three' }],
+    [1, (p) => `Two consecutive even numbers add up to ${4 * Math.floor(p.n / 2) + 2}. The smaller number is:`, { s: 'even2' }],
+    [2, (p) => `The sum of four consecutive odd numbers is ${4 * p.n + 12}. What is the smallest of them?`, { s: 'odd4' }],
+    [2, (p) => { const t = Math.floor(p.n / 4) + 1; return `Three consecutive multiples of ${p.k} add up to ${3 * p.k * (t + 1)}. What is the largest of them?` }, { s: 'mult' }],
+    [2, (p) => { const m = Math.floor(p.n / 3) + 4; return `The product of two consecutive positive integers is ${m * (m + 1)}. What is their sum?` }, { s: 'prod' }],
+    [2, (p) => `The sum of five consecutive integers is ${5 * p.n}. What is the smallest of them?`, { s: 'five' }],
+    [3, (p) => `The sum of three consecutive even numbers is ${2 * Math.floor(p.n / 2) + 8} more than twice the smallest of them. What is the largest of the three?`, { s: 'twice' }],
+    [1, (p) => `${p.nm}'s house number and the next-door number are consecutive odd numbers whose sum is ${2 * (2 * Math.floor(p.n / 2) + 1) + 2}. What is the larger number?`, { s: 'house' }],
+    [1, (p) => `A book lies open at two facing pages whose numbers add up to ${2 * (p.n * 3 + 10) + 1}. What is the larger page number?`, { s: 'pages' }],
+    [2, (p) => `Of three consecutive integers, twice the smallest exceeds the largest by ${p.n}. What is the middle integer?`, { s: 'exceed' }],
+  ],
+})
+
+family('ga.equations.consecutive-squares', 'ga.equations', {
+  gen: (r) => ({ n: r.int(3, 14), off: r.int(3, 15) }),
+  key: (p) => `${p.s}-${p.n}`,
+  fact: (p) => `${p.n}`,
+  solve: (P) => {
+    const { n } = P
+    const T = n * n + (n + 1) ** 2
+    const cm = (v) => `${v} cm`
+    switch (P.s) {
+      case 'less': return { ans: n + 1, wrong: [n, n + 2, n - 1], expl: `n² + (n + 1)² = ${T} gives 2n² + 2n − ${T - 1} = 0, i.e. n² + n − ${(T - 1) / 2} = 0 = (n − ${n})(n + ${n + 1}); so the numbers are ${n} and ${n + 1}.` }
+      case 'small': return { ans: n, wrong: [n + 1, n - 1, n + 2], expl: `${n}² + ${n + 1}² = ${n * n} + ${(n + 1) ** 2} = ${T}, so the smaller integer is ${n}.` }
+      case 'odd': { if (n % 2 === 0) return null; return { ans: n + 2, wrong: [n, n + 4, n + 1], expl: `${n}² + ${n + 2}² = ${n * n} + ${(n + 2) ** 2} = ${n * n + (n + 2) ** 2}, so the larger is ${n + 2}.` } }
+      case 'evendiff': { const m = 2 * n; return { ans: m + 2, wrong: [m, m + 1, m + 4], expl: `(x + 2)² − x² = 4x + 4 = ${4 * m + 4}, so x = ${m} and the larger number is ${m + 2}.` } }
+      case 'diffsum': return { ans: 2 * n + 1, wrong: [n, n + 1, 2 * n - 1], expl: `(n + 1)² − n² = 2n + 1 = n + (n + 1), so the sum equals the difference, ${2 * n + 1}.` }
+      case 'oddprod': { if (n % 2 === 0) return null; return { ans: n, wrong: [n + 2, n - 2, n + 4], expl: `${n} × ${n + 2} = ${n * (n + 2)}, so the smaller number is ${n}.` } }
+      case 'tiles': return { ans: n + 1, wrong: [n, n + 2, n - 1], fmt: cm, expl: `s² + (s + 1)² = ${T} gives s = ${n} (${n * n} + ${(n + 1) ** 2} = ${T}), so the larger tile has side ${n + 1} cm.` }
+      default: return { ans: n + 1, wrong: [n, n + 2, n + 3], expl: `${n}² + ${n + 1}² = ${n * n} + ${(n + 1) ** 2} = ${T}, so the next integer is ${n + 1}.` }
+    }
+  },
+  items: [
+    [3, (p) => `Find two consecutive positive numbers such that the sum of their squares is ${p.off} less than ${p.n * p.n + (p.n + 1) ** 2 + p.off}. The larger number is:`, { s: 'less' }],
+    [3, (p) => `The squares of two consecutive positive integers add up to ${p.n * p.n + (p.n + 1) ** 2}. What is the smaller integer?`, { s: 'small' }],
+    [3, (p) => `Two consecutive odd positive integers have squares that total ${p.n * p.n + (p.n + 2) ** 2}. The larger integer is:`, { s: 'odd' }],
+    [2, (p) => `The squares of two consecutive even numbers differ by ${8 * p.n + 4}. What is the larger number?`, { s: 'evendiff' }],
+    [2, (p) => `The squares of two consecutive integers differ by ${2 * p.n + 1}. What do the two integers add up to?`, { s: 'diffsum' }],
+    [2, (p) => `The product of two consecutive odd positive numbers is ${p.n * (p.n + 2)}. The smaller number is:`, { s: 'oddprod' }],
+    [3, (p) => `Two square tiles have sides that differ by 1 cm, and their areas add up to ${p.n * p.n + (p.n + 1) ** 2} cm². What is the side of the larger tile?`, { s: 'tiles' }],
+    [3, (p) => `A positive integer is squared and added to the square of the next integer, giving ${p.n * p.n + (p.n + 1) ** 2}. What is the next integer?`, { s: 'next' }],
+  ],
+})
+
+family('ga.equations.quadratic-word-problem', 'ga.equations', {
+  gen: (r) => ({ n: r.int(3, 12), A: r.int(2, 3), B: r.int(1, 6), k: r.int(2, 7), d: r.int(2, 6) }),
+  key: (p) => `${p.s}-${p.n}${p.s === 'gen' ? `-${p.A}-${p.B}` : ''}${['exceed', 'five'].includes(p.s) ? `-${p.k}` : ''}${p.s === 'prod' ? `-${p.d}` : ''}`,
+  solve: (P) => {
+    const { n, A, B, k, d } = P
+    const base = [n + 1, n - 1, n + 2].filter((v) => v > 0)
+    switch (P.s) {
+      case 'gen': { const C = A * n * n - B * n; if (C <= 0) return null; const other = B / A - n; if (other > 0 && isInt(other)) return null; return { ans: n, wrong: base, expl: `${A}n² − ${B}n = ${C}. Trying n = ${n}: ${A * n * n} − ${B * n} = ${C}. The other root, ${fr(B - A * n, A)}, is not a positive integer.` } }
+      case 'sq20': return { ans: n, wrong: base, expl: `n² − n = ${n * n - n} gives (n − ${n})(n + ${n - 1}) = 0; the positive value is ${n}.` }
+      case 'exceed': { const C = n * n - k * n; if (C <= 0) return null; return { ans: n, wrong: [...base, n - k], expl: `n² − ${k}n = ${C} gives (n − ${n})(n + ${n - k}) = 0; the positive value is ${n}.` } }
+      case 'plus': return { ans: n, wrong: [n + 1, n - 1, n + 2], expl: `n² + n = ${n * n + n} gives (n − ${n})(n + ${n + 1}) = 0, so n = ${n}.` }
+      case 'five': return { ans: n, wrong: [n + k, n - 1, n + 1], expl: `n² + ${k}n = ${n * n + k * n} gives (n − ${n})(n + ${n + k}) = 0, so n = ${n}.` }
+      case 'prod': return { ans: n, wrong: [n + d, n - 1, n + 1], expl: `n(n + ${d}) = ${n * (n + d)} gives (n − ${n})(n + ${n + d}) = 0, so the smaller number is ${n}.` }
+      case 'half': { if (n % 2 !== 0 || n < 4) return null; const C = (n * n) / 2 - n; return { ans: n, wrong: [n + 2, n - 2, C], expl: `n²/2 − n = ${C} gives n² − 2n − ${2 * C} = 0 = (n − ${n})(n + ${n - 2}); so n = ${n}.` } }
+      default: return { ans: n, wrong: [n + 1, n - 1, n * n + 1], expl: `n + 1/n = ${fr(n * n + 1, n)} is satisfied by n = ${n} (the other solution, 1/${n}, is not an integer).` }
+    }
+  },
+  items: [
+    [3, (p) => `Find a positive integer such that ${['', 'the number', 'twice the number', 'three times the number', 'four times the number', 'five times the number', 'six times the number'][p.B]} subtracted from ${p.A === 2 ? 'two' : 'three'} times its square gives ${p.A * p.n * p.n - p.B * p.n}.`, { s: 'gen' }],
+    [3, (p) => `A positive number is ${p.n * p.n - p.n} less than its square. The number is:`, { s: 'sq20' }],
+    [3, (p) => `The square of a positive number exceeds ${p.k} times the number by ${p.n * p.n - p.k * p.n}. What is the number?`, { s: 'exceed' }],
+    [3, (p) => `When a positive number is added to its square, the result is ${p.n * p.n + p.n}. What is the number?`, { s: 'plus' }],
+    [3, (p) => `A positive integer squared, plus ${p.k} times the integer, equals ${p.n * p.n + p.k * p.n}. Find the integer.`, { s: 'five' }],
+    [2, (p) => `The product of a positive number and the number that is ${p.d} more than it is ${p.n * (p.n + p.d)}. What is the smaller number?`, { s: 'prod' }],
+    [3, (p) => `Half the square of a positive even number is ${(p.n * p.n) / 2 - p.n} more than the number. What is the number?`, { s: 'half' }],
+    [3, (p) => `A positive integer added to its reciprocal gives ${fr(p.n * p.n + 1, p.n)}. What is the integer?`, { s: 'recip' }],
+  ],
+})
+
+family('ga.equations.ages', 'ga.equations', {
+  gen: (r) => ({ s0: r.int(4, 20), t: r.int(2, 15), k: r.int(2, 5), m: r.int(2, 3), A: r.int(20, 60), pp: r.int(2, 9), nm: r.pick(NAMES.filter((x, i) => i % 2 === 0)), nm2: r.pick(NAMES) }),
+  key: (p) => keyOf(p, ['A', 'pp', 'm', 's0', 't', 'k']) + `-${p.s0}-${p.t}-${p.k}-${p.m}-${p.A}-${p.pp}`,
+  solve: (P) => {
+    const { s0, t, k, m, A, pp } = P
+    switch (P.s) {
+      case 'son': case 'mother': { if (k <= m) return null; const s = (t * (m - 1)) / (k - m); if (!isInt(s) || s < 3 || s > 20) return null; P.sv = s; if (P.s === 'son') return { ans: s, wrong: [k * s, s + t, t], expl: `${k}s + ${t} = ${m}(s + ${t}) gives ${k - m}s = ${t * (m - 1)}, so s = ${s}.` }; return { ans: k * s, wrong: [s, k * s + t, (k - 1) * s], expl: `If the child is c, then ${k}c + ${t} = ${m}(c + ${t}), so c = ${s} and the mother is ${k * s}.` } }
+      case 'ago': { const g = s0 + t; const b = k * s0 + t; P.bv = b; return { ans: g, wrong: [s0, Math.round(b / k), g + t].filter((v) => v !== g), expl: `${t} years ago he was ${b - t}, so his sister was ${b - t} ÷ ${k} = ${s0}; she is now ${s0} + ${t} = ${g}.` } }
+      case 'sumdiff': { const S = 2 * s0 + 2 * pp; return { ans: s0, wrong: [s0 + 2 * pp, S / 2, S - 2 * pp], expl: `Younger = (${S} − ${2 * pp}) ÷ 2 = ${s0}.` } }
+      case 'older': { const D = (k - 1) * (s0 + t); return { ans: s0, wrong: [s0 + t, D / k, D / (k - 1)].filter((v) => isInt(v)), expl: `d + ${D} + ${t} = ${k}(d + ${t}) gives ${k - 1}d = ${D + t - k * t}, so d = ${s0}.` } }
+      case 'combined': { if (s0 <= t) return null; const f = k * (s0 - t) + t; const S = f + s0; return { ans: s0, wrong: [f, s0 - t, S / (k + 1)].filter((v) => isInt(v) && v !== s0), expl: `If the son is s, the man is ${S} − s; then ${S} − s − ${t} = ${k}(s − ${t}), so ${k + 1}s = ${S - t + k * t} and s = ${s0}.` } }
+      case 'future': { const cur = A - t; return { ans: cur - pp, wrong: [A - pp, cur, cur + pp], expl: `He is ${A} − ${t} = ${cur} now, so ${pp} years ago he was ${cur - pp}.` } }
+      case 'double': { if (k > 3) return null; const x = (t * (k + 1)) / (k - 1); return { ans: x, wrong: [2 * t, t * (k + 1), t * k, x + t].filter((v) => v !== x), expl: `x + ${t} = ${k}(x − ${t}) gives ${k - 1}x = ${t * (k + 1)}, so x = ${x}.` } }
+      case 'when': { const g = s0; const y = t; const G = k * (g + y) - y; if (G > 90) return null; return { ans: y, wrong: [G - k * g, (G - g) / k, y * 2].filter((v) => isInt(v) && v > 0 && v !== y), expl: `${G} + y = ${k}(${g} + y) gives ${k - 1}y = ${G - k * g}, so y = ${y}.`, G } }
+      case 'siblings': { const a = pp; const b = t % 5 + 1; const S = 3 * s0 + 2 * a + b; return { ans: s0 + a + b, wrong: [s0, s0 + a, S / 3].filter((v) => isInt(v)), expl: `Youngest y: y + (y + ${a}) + (y + ${a + b}) = ${S}, so 3y = ${3 * s0} and y = ${s0}; the eldest is ${s0 + a + b}.` } }
+      case 'fraction': { const q = 3 + (pp % 3); const pr = q - 1 - (t % 2); if (pr < 1 || gcd(pr, q) !== 1) return null; const u = s0 % 7 + 3; return { ans: pr * u, wrong: [q * u, (q - pr) * u, pr * (q - pr) * u, (2 * q - pr) * u].filter((v) => v !== pr * u), expl: `If the brother is b, then b − ${pr}b/${q} = ${(q - pr) * u}, so b = ${q * u} and the younger is ${pr}/${q} × ${q * u} = ${pr * u}.` } }
+      default: { const S = s0 + 10; const y = t % 8 + 2; if (y >= S - 1) return null; const F = k * (S - y) + y; if (F > 75) return null; return { ans: y, wrong: [k * S - F, F - S, (F - S) / (k - 1)].filter((v) => isInt(v) && v > 0 && v !== y), expl: `${F} − y = ${k}(${S} − y) gives ${k - 1}y = ${k * S - F}, so y = ${y}.`, F, S } }
+    }
+  },
+  items: [
+    [2, (p) => `A father is ${W_TIMES[p.k]} as old as his son. In ${p.t} years he will be ${W_TIMES[p.m]} as old as the son. How old is the son now?`, { s: 'son' }],
+    [2, (p) => `${p.nm2}'s mother is ${W_TIMES[p.k]} as old as ${p.nm2}. After ${p.t} years she will be only ${W_TIMES[p.m]} as old. What is the mother's present age?`, { s: 'mother' }],
+    [2, (p) => `${p.t} years ago, ${p.nm} was ${W_TIMES[p.k]} as old as his sister. If ${p.nm} is ${p.k * p.s0 + p.t} now, how old is his sister now?`, { s: 'ago' }],
+    [1, (p) => `The ages of two brothers add up to ${2 * p.s0 + 2 * p.pp} years, and the elder is ${2 * p.pp} years older. How old is the younger brother?`, { s: 'sumdiff' }],
+    [2, (p) => `A mother is ${(p.k - 1) * (p.s0 + p.t)} years older than her daughter. In ${p.t} years, the mother will be ${W_TIMES[p.k]} as old as the daughter. What is the daughter's present age?`, { s: 'older' }],
+    [3, (p) => `The combined age of a man and his son is ${p.k * (p.s0 - p.t) + p.t + p.s0} years. ${p.t} years ago the man was ${W_TIMES[p.k]} as old as the son. How old is the son now?`, { s: 'combined' }],
+    [1, (p) => `In ${p.t} years ${p.nm2} will be ${p.A}. How old was ${p.nm2} ${p.pp} years ago?`, { s: 'future' }],
+    [2, (p) => `${p.t} years from now, a woman will be ${W_TIMES[p.k]} as old as she was ${p.t} years ago. What is her present age?`, { s: 'double' }],
+    [2, (p) => `A grandfather is ${p.k * (p.s0 + p.t) - p.t} and his grandson is ${p.s0}. After how many years will the grandfather be ${W_TIMES[p.k]} as old as the grandson?`, { s: 'when' }],
+    [3, (p) => `The ages of three siblings add up to ${3 * p.s0 + 2 * p.pp + (p.t % 5 + 1)} years. The middle child is ${p.pp} years older than the youngest and ${p.t % 5 + 1} years younger than the eldest. How old is the eldest?`, { s: 'siblings' }],
+    [2, (p) => { const q = 3 + (p.pp % 3); const pr = q - 1 - (p.t % 2); const u = p.s0 % 7 + 3; return `${p.nm}'s age is ${pr}/${q} of his brother's age, and the brother is ${(q - pr) * u} years older. How old is ${p.nm}?` }, { s: 'fraction' }],
+    [2, (p) => { const S = p.s0 + 10; const y = p.t % 8 + 2; const F = p.k * (S - y) + y; return `How many years ago was a father, now ${F}, exactly ${W_TIMES[p.k]} as old as his son, who is now ${S}?` }, { s: 'agoFind' }],
+  ],
+})
+// Ratio-of-ages helper: present ages A = p·x, B = q·x (optionally shifted), ratio after/before t years.
+function ratioAt(A, B, t) { const a = A + t; const b = B + t; if (a <= 0 || b <= 0) return null; const g = gcd(a, b); return [a / g, b / g] }
+const rs = (x, y) => `${x} : ${y}`
+
+family('ga.equations.ages-ratio', 'ga.equations', {
+  gen: (r) => { let p = r.int(2, 9); let q = r.int(1, 8); if (p === q) q = p - 1; if (gcd(p, q) !== 1) q = 1; return { p, q, x: r.int(2, 8), t: r.int(2, 12), t2: r.int(2, 10), nm: r.pick(NAMES), nm2: r.pick(NAMES) } },
+  key: (P) => `${P.s}-${P.p}-${P.q}-${P.x}-${P.t}${P.s === 'pastfuture' ? `-${P.t2}` : ''}`,
+  solve: (P) => {
+    const { p, q, x, t, t2 } = P
+    const A = p * x; const B = q * x
+    const ok = (R) => R && !(R[0] === p && R[1] === q) && R[0] <= 25 && R[1] <= 25
+    switch (P.s) {
+      case 'future': case 'mother': case 'father': {
+        const hi = P.s === 'father' ? [Math.min(p, q), Math.max(p, q)] : P.s === 'mother' ? [Math.max(p, q), Math.min(p, q)] : [p, q]
+        const a0 = hi[0] * x; const b0 = hi[1] * x; const R = ratioAt(a0, b0, t)
+        if (!ok(R) || (R[0] === hi[0] && R[1] === hi[1])) return null
+        P.R = R; P.hi = hi
+        const ask = P.s === 'mother' ? a0 : b0; const other = P.s === 'mother' ? b0 : a0
+        return { ans: ask, wrong: [other, ask + t, hi[P.s === 'mother' ? 0 : 1] * t].filter((v) => v !== ask), expl: `Let the ages be ${hi[0]}x and ${hi[1]}x. Then (${hi[0]}x + ${t}) : (${hi[1]}x + ${t}) = ${rs(R[0], R[1])} gives x = ${x}, so the ages are ${a0} and ${b0}.` }
+      }
+      case 'pastfuture': { const a1 = A + t; const b1 = B + t; const R = ratioAt(a1, b1, t2); if (!ok(R)) return null; P.R = R; return { ans: b1, wrong: [a1, B, b1 + t2], expl: `${t} years ago the ages were ${p}x and ${q}x; now they are ${p}x + ${t} and ${q}x + ${t}. The future ratio gives x = ${x}, so the present ages are ${a1} and ${b1}.` } }
+      case 'pastsum': { const R = ratioAt(A, B, -t); if (!ok(R)) return null; P.R = R; return { ans: A + B, wrong: [(p + q) * t, A + B - 2 * t, (R[0] + R[1]) * t].filter((v) => v !== A + B), expl: `Present ages ${p}x and ${q}x; (${p}x − ${t}) : (${q}x − ${t}) = ${rs(R[0], R[1])} gives x = ${x}, so the ages are ${A} and ${B}, totalling ${A + B}.` } }
+      case 'after': {
+        const R = ratioAt(A, B, t); if (!ok(R)) return null
+        const cands = [[p, q], [p + t, q + t], [R[1], R[0]], [R[0] + 1, R[1] + 1]].filter(([u, v]) => !near(u / v, R[0] / R[1]))
+        return { ans: rs(R[0], R[1]), wrong: cands.map(([u, v]) => rs(u, v)), expl: `The ages are ${A} and ${B}; after ${t} years they are ${A + t} and ${B + t}, i.e. ${rs(R[0], R[1])}.` }
+      }
+      case 'ago': { const R = ratioAt(A, B, -t); if (!ok(R)) return null; P.R = R; return { ans: A, wrong: [B, A - t, R[0] * t].filter((v) => v !== A), expl: `Now ${p}x and ${q}x; (${p}x − ${t}) : (${q}x − ${t}) = ${rs(R[0], R[1])} gives x = ${x}, so the age is ${A}.` } }
+      default: { if (p <= q) return null; const D = (p - q) * x; return { ans: B + t, wrong: [B, A + t, B - t].filter((v) => v > 0), expl: `${p}x − ${q}x = ${D} gives x = ${x}; the student is ${B} now and will be ${B + t} after ${t} years.`, D } }
+    }
+  },
+  items: [
+    [3, (P) => `The ages of ${P.nm} and ${P.nm2} are in the ratio ${rs(P.p, P.q)}. After ${P.t} years the ratio will be ${rs(...P.R)}. What is ${P.nm2}'s present age?`, { s: 'future' }],
+    [3, (P) => `${P.t} years ago, the ratio of the ages of ${P.nm} and ${P.nm2} was ${rs(P.p, P.q)}. ${P.t2} years from now it will be ${rs(...P.R)}. What is ${P.nm2}'s present age?`, { s: 'pastfuture' }],
+    [3, (P) => `The present ages of a mother and her daughter are in the ratio ${rs(...P.hi)}. In ${P.t} years the ratio will be ${rs(...P.R)}. What is the mother's present age?`, { s: 'mother' }],
+    [3, (P) => `The ratio of the present ages of two cousins is ${rs(P.p, P.q)}. ${P.t} years ago the ratio was ${rs(...P.R)}. What is the sum of their present ages?`, { s: 'pastsum' }],
+    [3, (P) => `The ages of two sisters are in the ratio ${rs(P.p, P.q)} and together they are ${(P.p + P.q) * P.x} years old. What will be the ratio of their ages after ${P.t} years?`, { s: 'after' }],
+    [3, (P) => `The ratio of ${P.nm}'s age to his father's age is ${rs(...P.hi)}. After ${P.t} years it will be ${rs(...P.R)}. How old is the father now?`, { s: 'father' }],
+    [3, (P) => `${P.t} years ago, the ratio of ${P.nm}'s age to ${P.nm2}'s age was ${rs(...P.R)}. Now it is ${rs(P.p, P.q)}. How old is ${P.nm} now?`, { s: 'ago' }],
+    [2, (P) => `The ages of a teacher and a student are in the ratio ${rs(P.p, P.q)}, and the teacher is ${(P.p - P.q) * P.x} years older. How old will the student be after ${P.t} years?`, { s: 'diff' }],
+  ],
+})
+
+// Two-digit number problems: every answer is confirmed unique by brute force over 10..99.
+function uniqueTwoDigit(pred) { const hits = []; for (let v = 10; v <= 99; v++) if (pred(Math.floor(v / 10), v % 10, v)) hits.push(v); return hits.length === 1 ? hits[0] : null }
+family('ga.equations.two-digit-number', 'ga.equations', {
+  gen: (r) => ({ t: r.int(1, 9), u: r.int(1, 9) }),
+  key: (p) => `${p.s}-${p.t}${p.u}`,
+  solve: (P) => {
+    const { t, u } = P
+    const N = 10 * t + u; const Rv = 10 * u + t
+    const mk = (pred, expl, extra = []) => {
+      const ans = uniqueTwoDigit(pred); if (ans !== N) return null
+      const cands = [Rv, N + 9, N - 9, N + 11, N - 11, ...extra].filter((v) => v >= 10 && v <= 99 && v !== N && !pred(Math.floor(v / 10), v % 10, v))
+      return { ans: N, wrong: cands, expl }
+    }
+    switch (P.s) {
+      case 'rev': if (u <= t) return null; return mk((a, b) => a + b === t + u && (10 * b + a) - (10 * a + b) === 9 * (u - t), `t + u = ${t + u} and reversing adds 9(u − t) = ${9 * (u - t)}, so u − t = ${u - t}; hence t = ${t}, u = ${u} and the number is ${N}.`)
+      case 'ktimes': { if (u <= t || N % (t + u) !== 0) return null; const k = N / (t + u); P.k = k; return mk((a, b, v) => v === k * (a + b) && b - a === u - t, `${N} = ${k} × (${t} + ${u}) and ${u} − ${t} = ${u - t}; no other two-digit number fits both conditions.`) }
+      case 'twice': { if (u === 0 || t % u !== 0 || t / u < 2) return null; P.m = t / u; return mk((a, b, v) => a === P.m * b && v - (10 * b + a) === 9 * (t - u), `With t = ${P.m}u, reversing reduces the number by 9(t − u) = ${9 * (t - u)}, so t − u = ${t - u}; this gives u = ${u}, t = ${t}: ${N}.`) }
+      case 'dec': if (t <= u) return null; return mk((a, b, v) => v - (10 * b + a) === 9 * (t - u) && a + b === t + u, `t − u = ${9 * (t - u)} ÷ 9 = ${t - u} and t + u = ${t + u}, so t = ${t}, u = ${u}: ${N}.`)
+      case 'units': { if (u % t !== 0 || u / t < 2) return null; P.m = u / t; return mk((a, b) => b === P.m * a && a + b === t + u, `u = ${P.m}t and t + u = ${t + u} give ${P.m + 1}t = ${t + u}, so t = ${t}, u = ${u}: ${N}.`) }
+      case 'sum11': return { ans: t + u, wrong: [11, 2 * (t + u), t + u + 1].filter((v) => v !== t + u), expl: `(10t + u) + (10u + t) = 11(t + u) = ${11 * (t + u)}, so t + u = ${t + u}.` }
+      case 'diff9': { const d = Math.abs(t - u); if (d === 0) return null; return { ans: d, wrong: [9, d + 1, d - 1].filter((v) => v > 0 && v !== d), expl: `(10t + u) − (10u + t) = 9(t − u) = ${9 * d}, so the digits differ by ${d}.` } }
+      default: { if (t <= u || N % (t + u) !== 0) return null; const k = N / (t + u); P.k = k; return mk((a, b, v) => v === k * (a + b) && b > 0 && v - 9 * (t - u) === 10 * b + a, `${N} = ${k} × ${t + u}, and ${N} − ${9 * (t - u)} = ${Rv}, which is ${N} reversed.`) }
+    }
+  },
+  items: [
+    [3, (p) => `The digits of a two-digit number add up to ${p.t + p.u}. When the digits are reversed, the number increases by ${9 * (p.u - p.t)}. Find the number.`, { s: 'rev' }],
+    [3, (p) => `A two-digit number is ${p.k} times the sum of its digits, and its units digit is ${p.u - p.t} more than its tens digit. What is the number?`, { s: 'ktimes' }],
+    [3, (p) => `In a two-digit number the tens digit is ${W_TIMES[p.m]} the units digit. Reversing the digits makes the number smaller by ${9 * (p.t - p.u)}. What is the number?`, { s: 'twice' }],
+    [3, (p) => `A two-digit number is ${9 * (p.t - p.u)} more than the number formed by reversing its digits, and the sum of its digits is ${p.t + p.u}. What is the number?`, { s: 'dec' }],
+    [2, (p) => `The units digit of a two-digit number is ${W_TIMES[p.m]} its tens digit, and the digits add up to ${p.t + p.u}. What is the number?`, { s: 'units' }],
+    [2, (p) => `A two-digit number and the number formed by reversing its digits add up to ${11 * (p.t + p.u)}. What is the sum of the digits?`, { s: 'sum11' }],
+    [2, (p) => `The difference between a two-digit number and the number with its digits reversed is ${9 * Math.abs(p.t - p.u)}. By how much do the two digits differ?`, { s: 'diff9' }],
+    [3, (p) => `A two-digit number is ${p.k} times the sum of its digits. If ${9 * (p.t - p.u)} is subtracted from the number, the digits are reversed. Find the number.`, { s: 'seven' }],
+  ],
+})
+
+family('ga.equations.simultaneous-linear', 'ga.equations', {
+  positive: false,
+  gen: (r) => ({ x0: r.int(1, 9), y0: r.int(1, 9), a: r.int(2, 5), b: r.int(1, 4), c: r.int(1, 4), k: r.int(2, 4), m: r.pick([2, 3, 4, 6]), n: r.pick([2, 3, 4, 6]), m1: r.int(1, 4), m2: r.int(-3, 0) }),
+  key: (p) => `${p.s}-${p.x0}-${p.y0}-${p.a}-${p.b}-${p.c}-${p.k}-${p.m}-${p.n}-${p.m1}-${p.m2}`,
+  fact: (p) => `${p.s}-${p.x0}-${p.y0}`,
+  solve: (P) => {
+    const { x0, y0, a, b, c, k, m, n, m1, m2 } = P
+    switch (P.s) {
+      case 'sd': if (x0 <= y0) return null; return { ans: x0, wrong: [y0, x0 + y0, x0 - y0], expl: `Adding the equations: 2x = ${2 * x0}, so x = ${x0}.` }
+      case 'fy': if (x0 <= y0) return null; return { ans: y0, wrong: [x0, x0 + y0, y0 + 1], expl: `Adding: 3x = ${3 * x0}, so x = ${x0}; then y = ${2 * x0 + y0} − ${2 * x0} = ${y0}.` }
+      case 'sum': return { ans: x0 + y0, wrong: [x0, y0, x0 * y0], expl: `Subtracting: ${a - 1}x = ${(a - 1) * x0}, so x = ${x0}; then ${b}y = ${b * y0}, y = ${y0}, and x + y = ${x0 + y0}.` }
+      case 'xy': { const R1 = a * x0 - b * y0; const R2 = c * x0 + y0; P.R1 = R1; P.R2 = R2; return { ans: x0 * y0, wrong: [x0 + y0, x0 * (y0 + 1), (x0 + 1) * y0], expl: `From the second, y = ${R2} − ${c === 1 ? '' : c}x; substituting gives x = ${x0} and y = ${y0}, so xy = ${x0 * y0}.` } }
+      case 'amb': if (x0 <= y0) return null; return { ans: x0 - y0, wrong: [x0 + y0, x0, y0], expl: `Doubling the second and adding to the first gives 5a = ${5 * x0}, so a = ${x0}, b = ${y0} and a − b = ${x0 - y0}.` }
+      case 'twice': return { ans: k * x0, wrong: [x0, (k + 1) * x0, k + x0], expl: `x + ${k}x = ${(k + 1) * x0}, so x = ${x0} and y = ${k * x0}.` }
+      case 'pq': { const R1 = a * x0 + b * y0; const R2 = a * x0 - b * y0; if (R2 <= 0) return null; return { ans: x0, wrong: [y0, (R1 + R2) / 2, x0 + y0].filter((v) => v !== x0), expl: `Adding: ${2 * a}p = ${R1 + R2}, so p = ${x0}.` } }
+      case 'fr': { if (m === n) return null; const v = (x0 * m * n) / (m + n); const kk = x0; const xx = (kk * m * n) / (m + n); if (!isInt(xx)) return null; return { ans: xx, wrong: [kk * m * n, kk * (m + n), 2 * xx].filter((w) => w !== xx), expl: `With x = y: x/${m} + x/${n} = ${m + n}x/${m * n} = ${kk}, so x = ${kk * m * n}/${m + n} = ${xx}.`, v } }
+      case 'lines': { if (m1 === m2) return null; const c1 = y0 - m1 * x0; const c2 = y0 - m2 * x0; if (c1 === 0 || c2 === 0) return null; P.c1 = c1; P.c2 = c2; return { ans: x0 + y0, wrong: [x0, y0, x0 * y0].filter((v) => v !== x0 + y0), expl: `${m1}x ${sg(c1)} = ${m2}x ${sg(c2)} gives x = ${x0}; then y = ${y0}, so a + b = ${x0 + y0}.`.replace(/ 0x/g, '') } }
+      case 'add': { const R1 = x0 + k * y0; const R2 = k * x0 + y0; return { ans: x0 + y0, wrong: [R1 + R2, (R1 + R2) / 2, Math.abs(x0 - y0)].filter((v) => isInt(v) && v !== x0 + y0), expl: `Adding the equations: ${k + 1}(x + y) = ${R1 + R2}, so x + y = ${x0 + y0}.` } }
+      case 'subtract': { const A = a + 2; if (x0 <= y0 || A === b) return null; const R1 = A * x0 + b * y0; const R2 = b * x0 + A * y0; return { ans: x0 - y0, wrong: [x0 + y0, R1 - R2, x0].filter((v) => v !== x0 - y0), expl: `Subtracting: ${A - b}(x − y) = ${R1 - R2}, so x − y = ${x0 - y0}.` } }
+      default: {
+        const X = [1, 2, 3, 4, 6][x0 % 5]; const Y = [1, 2, 3][y0 % 3]; const aa = X * a; const bb = Y * b; const cc = X * c
+        const R1 = aa / X + bb / Y; const R2 = cc / X - bb / Y; if (R2 <= 0) return null
+        P.X = X; P.aa = aa; P.bb = bb; P.cc = cc; P.R1 = R1; P.R2 = R2
+        return { ans: X, wrong: [Y, fr(1, X), X + Y, (aa + cc)].filter((v) => v !== X && v !== `${X}`), expl: `Adding the equations: ${aa + cc}/x = ${R1 + R2}, so x = ${X}.` }
+      }
+    }
+  },
+  items: [
+    [1, (p) => `Solve x + y = ${p.x0 + p.y0} and x − y = ${p.x0 - p.y0}. What is x?`, { s: 'sd' }],
+    [2, (p) => `If 2x + y = ${2 * p.x0 + p.y0} and x − y = ${p.x0 - p.y0}, find y.`, { s: 'fy' }],
+    [2, (p) => `If ${p.a}x + ${p.b === 1 ? '' : p.b}y = ${p.a * p.x0 + p.b * p.y0} and x + ${p.b === 1 ? '' : p.b}y = ${p.x0 + p.b * p.y0}, what is x + y?`, { s: 'sum' }],
+    [2, (p) => `The equations ${p.a}x − ${p.b === 1 ? '' : p.b}y = ${num(p.a * p.x0 - p.b * p.y0)} and ${p.c === 1 ? '' : p.c}x + y = ${p.c * p.x0 + p.y0} have one common solution. What is the value of xy?`, { s: 'xy' }],
+    [2, (p) => `For a + 2b = ${p.x0 + 2 * p.y0} and 2a − b = ${2 * p.x0 - p.y0}, the value of a − b is:`, { s: 'amb' }],
+    [1, (p) => `If y = ${p.k}x and x + y = ${(p.k + 1) * p.x0}, find y.`, { s: 'twice' }],
+    [2, (p) => `Given ${p.a}p + ${p.b === 1 ? '' : p.b}q = ${p.a * p.x0 + p.b * p.y0} and ${p.a}p − ${p.b === 1 ? '' : p.b}q = ${p.a * p.x0 - p.b * p.y0}, find p.`, { s: 'pq' }],
+    [2, (p) => `If x/${p.m} + y/${p.n} = ${p.x0} and x = y, what is x?`, { s: 'fr' }],
+    [3, (p) => `The lines y = ${poly([p.m1, p.c1])} and y = ${poly([p.m2, p.c2])} meet at the point (a, b). What is a + b?`, { s: 'lines' }],
+    [2, (p) => `If x + ${p.k}y = ${p.x0 + p.k * p.y0} and ${p.k}x + y = ${p.k * p.x0 + p.y0}, what is the value of x + y?`, { s: 'add' }],
+    [2, (p) => `If ${p.a + 2}x + ${p.b === 1 ? '' : p.b}y = ${(p.a + 2) * p.x0 + p.b * p.y0} and ${p.b === 1 ? '' : p.b}x + ${p.a + 2}y = ${p.b * p.x0 + (p.a + 2) * p.y0}, find x − y.`, { s: 'subtract' }],
+    [3, (p) => `If ${p.aa}/x + ${p.bb}/y = ${p.R1} and ${p.cc}/x − ${p.bb}/y = ${p.R2}, find x.`, { s: 'recip' }],
+  ],
+})
+const rs0 = (v) => `Rs ${num(v)}`
+family('ga.equations.two-item-prices', 'ga.equations', {
+  gen: (r) => ({ pA: 5 * r.int(4, 16), pB: 5 * r.int(1, 12), a: r.int(2, 5), b: r.int(1, 4), c: r.int(1, 4), d: r.int(2, 6), k: r.int(2, 4) }),
+  key: (p) => `${p.s}-${p.pA}-${p.pB}-${p.a}-${p.b}-${p.c}-${p.d}-${p.k}`,
+  fact: (p) => `${p.s}-${p.pA}-${p.pB}`,
+  solve: (P) => {
+    const { pA, pB, a, b, c, d, k } = P
+    const money = { fmt: rs0 }
+    switch (P.s) {
+      case 'pens': if (pA <= pB || a === b) return null; return { ...money, ans: pA, wrong: [pB, pA + pB, pA - pB], expl: `Adding: ${a + b}(pen + pencil) = ${(a + b) * (pA + pB)}, so pen + pencil = ${pA + pB}; subtracting: ${Math.abs(a - b)}(pen − pencil) = ${Math.abs(a - b) * (pA - pB)}, so pen − pencil = ${pA - pB}. A pen costs Rs ${pA}.` }
+      case 'fruit': { const A = pA * 4; const B = pB * 4; if (a * d - b * c === 0 || A === B) return null; P.T1 = a * A + b * B; P.T2 = c * A + d * B; return { ...money, ans: B, wrong: [A, (P.T1 - P.T2) / (a - c || 1), B + (A - B) / 2].filter((v) => isInt(v) && v > 0 && v !== B), expl: `Solving ${a}x + ${b}y = ${P.T1} and ${c}x + ${d}y = ${P.T2} gives x = ${A} (apples) and y = ${B} (bananas).` } }
+      case 'chairs': { const ch = pA * 20; const T = (a + b * k) * ch; P.T = T; return { ...money, ans: k * ch, wrong: [ch, T / (a + b), T / b].filter((v) => isInt(v) && v !== k * ch), expl: `Each table = ${k} chairs, so the cost equals ${a} + ${b * k} = ${a + b * k} chairs; one chair costs ${T} ÷ ${a + b * k} = ${ch}, and a table ${k * ch}.` } }
+      case 'fraction': {
+        const num0 = a + c; const den0 = num0 + d + b; if (gcd(num0, den0) !== 1) return null
+        const f1 = [num0 + 1, den0]; const f2 = [num0, den0 - 1]
+        if (gcd(...f1) === 1 && gcd(...f2) === 1) return null
+        P.f1 = fr(...f1); P.f2 = fr(...f2)
+        // Confirm uniqueness by brute force over small fractions
+        const hits = []
+        for (let x = 1; x < 60; x++) for (let y = x + 1; y < 80; y++) if (fr(x + 1, y) === P.f1 && fr(x, y - 1) === P.f2) hits.push(`${x}/${y}`)
+        if (hits.length !== 1) return null
+        const ans = `${num0}/${den0}`
+        const cands = [`${num0 + 1}/${den0}`, `${num0}/${den0 - 1}`, `${den0 - num0}/${den0}`, `${num0 - 1}/${den0 + 1}`].filter((t) => t !== ans)
+        return { ans, wrong: cands, expl: `With the fraction x/y: (x + 1)/y = ${P.f1} and x/(y − 1) = ${P.f2}; solving gives x = ${num0} and y = ${den0}.` }
+      }
+      case 'sumdiff': { const S = pA + pB; const D = pA - pB; if (D <= 0) return null; return { ans: pB, wrong: [pA, S / 2, S - D].filter((v) => isInt(v) && v !== pB), expl: `Smaller = (${S} − ${D}) ÷ 2 = ${pB}.` } }
+      case 'burger': { const dr = pB * 2; const k2 = pA * 2; const T = a * (dr + k2) + b * dr; P.T = T; P.k2 = k2; return { ...money, ans: dr, wrong: [dr + k2, T / (a + b), (T - k2) / (a + b)].filter((v) => isInt(v) && v !== dr), expl: `If a drink is d, then ${a}(d + ${k2}) + ${b}d = ${T}, so ${a + b}d = ${T - a * k2} and d = ${dr}.` } }
+      case 'taxi': { const F = pA * 5; const rate = pB + 10; const d1 = c + 4; const d2 = d1 + d; P.C1 = F + rate * d1; P.C2 = F + rate * d2; P.d1 = d1; P.d2 = d2; return { ...money, ans: F, wrong: [rate, P.C1 - rate, F + rate].filter((v) => v !== F), expl: `The extra ${d} km cost Rs ${P.C2 - P.C1}, so the rate is Rs ${rate} per km; the fixed charge is ${P.C1} − ${d1} × ${rate} = Rs ${F}.` } }
+      default: { if (a * d - b * c === 0 || pA === pB) return null; P.T1 = a * pA + b * pB; P.T2 = c * pA + d * pB; return { ...money, ans: pA + pB, wrong: [pA, pB, pA + pB + 5].filter((v) => v !== pA + pB), expl: `Solving ${a}s + ${b}p = ${P.T1} and ${c}s + ${d}p = ${P.T2} gives s = ${pA} and p = ${pB}, so together Rs ${pA + pB}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `${p.a} pens and ${p.b} pencils cost Rs ${p.a * p.pA + p.b * p.pB}, while ${p.b} pens and ${p.a} pencils cost Rs ${p.b * p.pA + p.a * p.pB}. What is the cost of one pen?`, { s: 'pens' }],
+    [2, (p) => `${p.a} kg of apples and ${p.b} kg of bananas cost Rs ${num(p.T1)}; ${p.c} kg of apples and ${p.d} kg of bananas cost Rs ${num(p.T2)}. What is the price of 1 kg of bananas?`, { s: 'fruit' }],
+    [2, (p) => `${p.a} chairs and ${p.b} table${p.b > 1 ? 's' : ''} cost Rs ${num(p.T)}. One table costs as much as ${p.k} chairs. What is the cost of one table?`, { s: 'chairs' }],
+    [3, (p) => `A fraction becomes ${p.f1} when 1 is added to its numerator, and becomes ${p.f2} when 1 is subtracted from its denominator. What is the fraction?`, { s: 'fraction' }],
+    [1, (p) => `The sum of two numbers is ${p.pA + p.pB} and their difference is ${p.pA - p.pB}. What is the smaller number?`, { s: 'sumdiff' }],
+    [2, (p) => `${p.a} burgers and ${p.b} drink${p.b > 1 ? 's' : ''} cost Rs ${num(p.T)}, and one burger costs Rs ${p.k2} more than one drink. What does one drink cost?`, { s: 'burger' }],
+    [2, (p) => `A taxi charges a fixed amount plus a set rate per kilometre. A ${p.d1} km ride costs Rs ${p.C1} and a ${p.d2} km ride costs Rs ${p.C2}. What is the fixed charge?`, { s: 'taxi' }],
+    [3, (p) => `${p.a} samosas and ${p.b} pakoras cost Rs ${p.T1}, while ${p.c} samosas and ${p.d} pakoras cost Rs ${p.T2}. What is the total cost of one samosa and one pakora?`, { s: 'samosa' }],
+  ],
+})
+
+const countInts = (lo, hi, pred) => { const out = []; for (let v = lo; v <= hi; v++) if (pred(v)) out.push(v); return out }
+family('ga.equations.inequalities', 'ga.equations', {
+  positive: false,
+  gen: (r) => ({ a: r.int(2, 6), b: r.int(1, 12), c: r.int(5, 30), d: r.int(1, 9), e: r.int(8, 25), lo: r.int(-12, -1), hi: r.int(3, 15), k: r.int(2, 5), nm: r.pick(NAMES) }),
+  key: (p) => `${p.s}-${p.a}-${p.b}-${p.c}-${p.d}-${p.e}-${p.lo}-${p.hi}-${p.k}`,
+  solve: (P) => {
+    const { a, b, c, d, e, lo, hi, k } = P
+    const near3 = (n) => [n + 1, n - 1, n + 2].filter((v) => v >= 0 && v !== n)
+    switch (P.s) {
+      case 'set': { const S = countInts(-50, 50, (n) => lo < k * n && k * n <= hi); if (S.length < 3 || S.length > 5) return null; const show = (arr) => arr.map(num).join(', '); const mn = S[0]; const mx = S[S.length - 1]; const cands = [[mn - 1, ...S], S.slice(0, -1), S.slice(1), [...S, mx + 1]].filter((X) => show(X) !== show(S)); return { ans: show(S), wrong: cands.map(show), expl: `Divide by ${k}: ${fr(lo, k)} < n ≤ ${fr(hi, k)}, so n can be ${show(S)}.` } }
+      case 'smallest': { const n = Math.floor((b + c) / a) + 1; return { ans: n, wrong: [n - 1, n + 1, b + c].filter((v) => v !== n), expl: `${a}x > ${b + c}, so x > ${fr(b + c, a)}; the smallest integer is ${n}.` } }
+      case 'count': { const S = countInts(-60, 60, (x) => lo <= 2 * x + d && 2 * x + d < hi); if (S.length < 3) return null; const n = S.length; return { ans: n, wrong: near3(n), expl: `Subtract ${d} and halve: ${fr(lo - d, 2)} ≤ x < ${fr(hi - d, 2)}, so x runs from ${S[0]} to ${S[n - 1]}: ${n} integers.` } }
+      case 'largest': { const S = countInts(-60, 60, (n) => c - a * n > -d); const n = S[S.length - 1]; return { ans: n, wrong: [n + 1, n + 2, n - 1], expl: `${c} + ${d} > ${a}n, so n < ${fr(c + d, a)}; the largest integer is ${n}.` } }
+      case 'posvals': { const S = countInts(1, 60, (x) => a * x + b < c + 10); if (S.length < 2) return null; const n = S.length; return { ans: n, wrong: [n + 1, n - 1, c + 10 - b].filter((v) => v > 0 && v !== n), expl: `${a}x < ${c + 10 - b}, so x < ${fr(c + 10 - b, a)}; x can be 1 to ${n}: ${n} values.` } }
+      case 'triple': { const S = countInts(0, 60, (x) => 3 * x - b < c); const n = S[S.length - 1]; return { ans: n, wrong: [n + 1, n - 1, c + b].filter((v) => v !== n), expl: `3x − ${b} < ${c} gives 3x < ${c + b}, x < ${fr(c + b, 3)}; the greatest whole number is ${n}.` } }
+      case 'taxi': { const F = 10 * (b + 5); const rate = 5 * (a + 2); const M = F + rate * (c % 12 + 4) + 5 * (d % 4); const n = Math.floor((M - F) / rate); P.F = F; P.rate = rate; P.M = M; return { ans: n, wrong: [n + 1, Math.floor(M / rate), n - 1].filter((v) => v !== n), expl: `${F} + ${rate}k ≤ ${M} gives k ≤ ${fr(M - F, rate)}, so at most ${n} km.` } }
+      case 'notes': { const v = [100, 500, 1000][d % 3]; const B = v * (a + 1) + 10 * (e + 3); const n = Math.ceil(B / v); P.v = v; P.B = B; return { ans: n, wrong: [n - 1, n + 1, n - 2].filter((x) => x > 0), expl: `${B} ÷ ${v} = ${num(B / v)}, so ${n - 1} notes are not enough and ${n} are needed.` } }
+      case 'both': { const S = countInts(-60, 60, (x) => a * x - b > d && x + d <= e); if (S.length < 2) return null; const n = S.length; return { ans: n, wrong: near3(n), expl: `x > ${fr(b + d, a)} and x ≤ ${e - d}; the integers ${S[0]} to ${S[n - 1]} give ${n} values.` } }
+      case 'sumvals': { const S = countInts(lo + 1, hi - 1, () => true); const s = sum(S); return { ans: s, wrong: [s + hi, s + lo, S.length].filter((v) => v !== s), expl: `x can be ${S[0]}, …, ${S[S.length - 1]}; the sum is ${num(s)}.` } }
+      case 'avg': { const A = 50 + 5 * (k + a); const s1 = A - 10 + b; const s2 = A - 4 - d; const s3 = A - 2 - (e % 7); const need = 4 * A - s1 - s2 - s3; if (need > 100 || need <= A) return null; P.A = A; P.sc = [s1, s2, s3]; return { ans: need, wrong: [A, 3 * A - s1 - s2 - s3, need - 1, need + 1].filter((v) => v > 0 && v !== need), expl: `She needs a total of 4 × ${A} = ${4 * A}; she has ${s1 + s2 + s3}, so she needs ${need}.` } }
+      default: { const A = a; const C = A + k; const S = countInts(-60, 200, (n) => A * n + b < C * n - d && A * n + b <= e + 20); if (S.length < 2 || S.length > 15) return null; const n = S.length; P.C = C; return { ans: n, wrong: near3(n), expl: `${A}n + ${b} < ${C}n − ${d} gives n > ${fr(b + d, C - A)}; ${A}n + ${b} ≤ ${e + 20} gives n ≤ ${fr(e + 20 - b, A)}; so n = ${S[0]}, …, ${S[n - 1]}: ${n} integers.` } }
+    }
+  },
+  items: [
+    [2, (p) => `What integer values can n have, given ${num(p.lo)} < ${p.k}n ≤ ${p.hi}?`, { s: 'set' }],
+    [1, (p) => `What is the smallest integer x that satisfies ${p.a}x − ${p.b} > ${p.c}?`, { s: 'smallest' }],
+    [2, (p) => `How many integers x satisfy ${num(p.lo)} ≤ 2x + ${p.d} < ${p.hi}?`, { s: 'count' }],
+    [2, (p) => `Find the largest integer n for which ${p.c} − ${p.a}n > −${p.d}.`, { s: 'largest' }],
+    [2, (p) => `If x is a positive integer and ${p.a}x + ${p.b} < ${p.c + 10}, how many values can x take?`, { s: 'posvals' }],
+    [2, (p) => `A number is tripled and then decreased by ${p.b}; the result is less than ${p.c}. What is the greatest whole number it could be?`, { s: 'triple' }],
+    [2, (p) => `A rickshaw fare is Rs ${p.F} plus Rs ${p.rate} per kilometre. ${p.nm} has Rs ${p.M}. What is the greatest whole number of kilometres ${p.nm} can afford?`, { s: 'taxi' }],
+    [1, (p) => `What is the least number of Rs ${p.v} notes needed to pay a bill of Rs ${num(p.B)}?`, { s: 'notes' }],
+    [3, (p) => `How many integers x satisfy both ${p.a}x − ${p.b} > ${p.d} and x + ${p.d} ≤ ${p.e}?`, { s: 'both' }],
+    [2, (p) => `If ${num(p.lo)} < x < ${p.hi} and x is an integer, what is the sum of all possible values of x?`, { s: 'sumvals' }],
+    [2, (p) => `A student needs an average of at least ${p.A} marks in four tests. Her first three scores are ${p.sc[0]}, ${p.sc[1]} and ${p.sc[2]}. What is the lowest score she needs in the fourth test?`, { s: 'avg' }],
+    [3, (p) => `How many integers n satisfy ${p.a}n + ${p.b} < ${p.C}n − ${p.d} and ${p.a}n + ${p.b} ≤ ${p.e + 20}?`, { s: 'mixed' }],
+  ],
+})
+family('ga.equations.two-type-count-value', 'ga.equations', {
+  gen: (r) => ({ N: r.int(12, 60), f: r.f(), nm: r.pick(NAMES), a: r.int(3, 4), b: r.int(1, 2), k: r.int(4, 25), p: r.int(1, 5), q: r.int(1, 4) }),
+  key: (p) => `${p.s}-${p.N}-${p.n2}${p.s === 'test' ? `-${p.a}-${p.b}` : ''}${p.s === 'ratio' ? `-${p.p}-${p.q}-${p.k}` : ''}${p.s === 'equal' ? `-${p.k}` : ''}`,
+  solve: (P) => {
+    const { N, f, a, b, k, p, q } = P
+    const V = { c510: [5, 10], n50: [50, 100], c25: [2, 5], n2050: [20, 50], tickets: [150, 300], hens: [2, 4], raffle: [50, 100], park: [2, 4], stamps: [8, 20] }[P.s]
+    if (V) {
+      const n2 = Math.max(1, Math.min(N - 1, Math.round(f * N))); if (n2 === N - n2) return null
+      const [v1, v2] = V; const T = v1 * (N - n2) + v2 * n2; P.n2 = n2; P.T = T; P.v1 = v1; P.v2 = v2
+      const askLow = ['n50', 'n2050', 'tickets', 'park'].includes(P.s)
+      const ans = askLow ? N - n2 : n2; const other = askLow ? n2 : N - n2
+      return { ans, wrong: [other, T / (askLow ? v1 : v2), ans + 2, ans - 2].filter((v) => isInt(v) && v > 0 && v !== ans), expl: `If all ${N} were worth ${v1}, the total would be ${v1 * N}; the extra ${T - v1 * N} comes from ${v2 - v1} more on each higher-value item, so there are ${n2} of those and ${N - n2} of the others.` }
+    }
+    if (P.s === 'test') { const c = Math.max(1, Math.min(N - 1, Math.round(0.5 * N + f * 0.45 * N))); const S = a * c - b * (N - c); if (S <= 0) return null; P.n2 = c; P.S = S; return { ans: c, wrong: [N - c, Math.round(S / a), c + 2].filter((v) => v > 0 && v !== c), expl: `If c are correct, ${a}c − ${b}(${N} − c) = ${S}, so ${a + b}c = ${S + b * N} and c = ${c}.` } }
+    if (P.s === 'equal') { P.n2 = 0; return { ans: 3 * k, wrong: [k, 2 * k, 4 * k], expl: `One note of each kind is worth 10 + 20 + 50 = Rs 80; ${80 * k} ÷ 80 = ${k} of each, so ${3 * k} notes in all.` } }
+    // ratio of Rs 1 and Rs 2 coins
+    if (gcd(p, q) !== 1 || p === q) return null
+    const x = k; const T = p * x + 2 * q * x; P.n2 = 0; P.T = T
+    return { ans: p * x, wrong: [q * x, (p + q) * x, Math.round((T * p) / (p + q))].filter((v) => v !== p * x), expl: `Take ${p}x one-rupee and ${q}x two-rupee coins: ${p}x + ${2 * q}x = ${p + 2 * q}x = ${T}, so x = ${x} and there are ${p * x} one-rupee coins.` }
+  },
+  items: [
+    [2, (p) => `${p.nm} has ${p.N} coins of Rs 5 and Rs 10 worth Rs ${num(p.T)} in total. How many Rs 10 coins are there?`, { s: 'c510' }],
+    [2, (p) => `A cashier has ${p.N} notes of Rs 50 and Rs 100 totalling Rs ${num(p.T)}. How many of them are Rs 50 notes?`, { s: 'n50' }],
+    [2, (p) => `A piggy bank holds only Rs 2 and Rs 5 coins: ${p.N} coins with a total value of Rs ${num(p.T)}. How many Rs 5 coins are there?`, { s: 'c25' }],
+    [2, (p) => `Rs ${num(p.T)} is paid using ${p.N} notes, some of Rs 20 and the rest of Rs 50. How many Rs 20 notes are used?`, { s: 'n2050' }],
+    [2, (p) => `Tickets for a show cost Rs 300 for adults and Rs 150 for children. ${p.N} tickets were sold for Rs ${num(p.T)}. How many children's tickets were sold?`, { s: 'tickets' }],
+    [2, (p) => `A farm has hens and goats. Together they have ${p.N} heads and ${p.T} legs. How many goats are there?`, { s: 'hens' }],
+    [2, (p) => `In a test of ${p.N} questions, ${p.a} marks are given for each correct answer and ${p.b} mark${p.b > 1 ? 's are' : ' is'} deducted for each wrong answer. A student attempts every question and scores ${p.S}. How many answers are correct?`, { s: 'test' }],
+    [2, (p) => `A school raised Rs ${num(p.T)} by selling ${p.N} raffle tickets priced at Rs 50 and Rs 100. How many Rs 100 tickets were sold?`, { s: 'raffle' }],
+    [2, (p) => `A car park holds only cars and motorbikes: ${p.N} vehicles with ${p.T} wheels in total. How many motorbikes are there?`, { s: 'park' }],
+    [2, (p) => `${p.nm} bought ${p.N} stamps, some at Rs 8 and the rest at Rs 20, paying Rs ${p.T} altogether. How many Rs 20 stamps were bought?`, { s: 'stamps' }],
+    [2, (p) => `A wallet contains an equal number of Rs 10, Rs 20 and Rs 50 notes, worth Rs ${num(80 * p.k)} in all. How many notes are there altogether?`, { s: 'equal' }],
+    [2, (p) => `A bag has Rs 1 and Rs 2 coins in the ratio ${p.p} : ${p.q}, worth Rs ${p.T} in total. How many Rs 1 coins are in the bag?`, { s: 'ratio' }],
+  ],
+})
+
+const PY = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [12, 16, 20], [20, 21, 29], [9, 40, 41], [15, 20, 25]]
+family('ga.equations.rectangle-dimensions', 'ga.equations', {
+  gen: (r) => ({ b: r.int(3, 20), d: r.int(2, 8), k: r.int(2, 3), tri: r.pick(PY), a: r.int(3, 12), bb: r.int(1, 6) }),
+  key: (p) => `${p.s}-${p.b}-${p.d}${['twice', 'breadth'].includes(p.s) ? `-${p.k}` : ''}${p.s === 'diag' ? `-${p.tri.join('')}` : ''}${p.s === 'equal' ? `-${p.a}-${p.bb}` : ''}`,
+  fmt: (v, p) => (typeof v === 'string' ? v : `${num(v)} ${p.u}`),
+  solve: (P) => {
+    const { b, d, k, tri, a, bb } = P
+    switch (P.s) {
+      case 'area': { P.u = 'cm²'; const l = b + d; const Pm = 2 * (l + b); P.Pm = Pm; return { ans: l * b, wrong: [l * l, b * b, (Pm / 4) ** 2].filter((v) => isInt(v) && v !== l * b), expl: `l + b = ${Pm / 2} and l − b = ${d}, so l = ${l} and b = ${b}; area = ${l} × ${b} = ${l * b} cm².` } }
+      case 'quad': P.u = 'cm'; return { ans: b, wrong: [b + d, b + 1, b - 1], expl: `w(w + ${d}) = ${b * (b + d)}; w = ${b} works (${b} × ${b + d} = ${b * (b + d)}), so the width is ${b} cm.` }
+      case 'twice': { P.u = 'm'; const Pm = 2 * (k + 1) * b; return { ans: k * b, wrong: [b, Pm / 4, 2 * k * b].filter((v) => isInt(v) && v !== k * b), expl: `2(${k}b + b) = ${Pm}, so b = ${b} m and the length is ${k * b} m.` } }
+      case 'breadth': { P.u = 'cm'; const Pm = 2 * (k + 1) * b; return { ans: b, wrong: [k * b, Pm / (k + 1), Pm / 4].filter((v) => isInt(v) && v !== b), expl: `2(${k}b + b) = ${2 * (k + 1)}b = ${Pm}, so b = ${b} cm.` } }
+      case 'diag': { P.u = 'cm²'; const [x, y, z] = tri; return { ans: x * y, wrong: [2 * x * y, x * y + z, ((x + y) ** 2) / 4].filter((v) => isInt(v)), expl: `l + b = ${x + y} and l² + b² = ${z * z}; since (l + b)² = l² + b² + 2lb, 2lb = ${(x + y) ** 2} − ${z * z} = ${2 * x * y}, so the area is ${x * y} cm².` } }
+      case 'squares': { P.u = 'cm'; const Pm = 8 * b + 4 * d; return { ans: b, wrong: [b + d, Pm / 8, (Pm - d) / 8].filter((v) => isInt(v) && v !== b), expl: `4s + 4(s + ${d}) = ${Pm} gives 8s = ${Pm - 4 * d}, so s = ${b} cm.` } }
+      case 'wire': { P.u = 'cm'; const l = b + d; const Pm = 2 * (l + b); return { ans: l, wrong: [b, (Pm / 2 + d), Pm / 4].filter((v) => isInt(v) && v !== l), expl: `l + b = ${Pm / 2} and l − b = ${d}, so l = (${Pm / 2} + ${d}) ÷ 2 = ${l} cm.` } }
+      default: { P.u = 'cm'; if (a <= bb) return null; const s = (a * bb) / (a - bb); if (!isInt(s) || s <= bb) return null; return { ans: s, wrong: [a + bb, a * bb, s + 1].filter((v) => v !== s), expl: `(s + ${a})(s − ${bb}) = s² gives ${a - bb}s − ${a * bb} = 0, so s = ${a * bb}/${a - bb} = ${s} cm.` } }
+    }
+  },
+  items: [
+    [3, (p) => `The length of a rectangle exceeds its breadth by ${p.d} cm and its perimeter is ${p.Pm} cm. What is its area?`, { s: 'area' }],
+    [3, (p) => `A rectangle's length is ${p.d} cm more than its width, and its area is ${p.b * (p.b + p.d)} cm². What is its width?`, { s: 'quad' }],
+    [2, (p) => `The length of a rectangular field is ${W_TIMES[p.k]} its breadth. If the perimeter is ${2 * (p.k + 1) * p.b} m, find the length.`, { s: 'twice' }],
+    [2, (p) => `A rectangle has a perimeter of ${2 * (p.k + 1) * p.b} cm and its length is ${p.k} times its breadth. What is its breadth?`, { s: 'breadth' }],
+    [3, (p) => `A rectangle has a perimeter of ${2 * (p.tri[0] + p.tri[1])} cm and a diagonal of ${p.tri[2]} cm. What is its area?`, { s: 'diag' }],
+    [2, (p) => `The side of one square is ${p.d} cm longer than the side of another, and their perimeters add up to ${8 * p.b + 4 * p.d} cm. What is the side of the smaller square?`, { s: 'squares' }],
+    [2, (p) => `A wire ${2 * (2 * p.b + p.d)} cm long is bent into a rectangle whose length is ${p.d} cm more than its breadth. What is the length?`, { s: 'wire' }],
+    [3, (p) => `One side of a square is increased by ${p.a} cm and the adjacent side is decreased by ${p.bb} cm. The rectangle formed has the same area as the square. What is the side of the square?`, { s: 'equal' }],
+  ],
+})
+
+family('ga.equations.quadratic-roots', 'ga.equations', {
+  positive: false,
+  gen: (r) => { const a = r.int(1, 9); let b = r.int(1, 9); if (b === a) b = a === 9 ? 7 : a + 1; return { a, b, A: r.int(2, 5), B: r.int(1, 13), C: r.int(1, 12), k: r.int(3, 9) } },
+  key: (p) => `${p.s}-${p.a}-${p.b}${['sum', 'prod'].includes(p.s) ? `-${p.A}-${p.B}-${p.C}` : ''}${p.s === 'shift' ? `-${p.k}` : ''}`,
+  fact: (p) => (['pos', 'other', 'p', 'gap'].includes(p.s) ? `pos-${Math.min(p.a, p.b)}-${Math.max(p.a, p.b)}` : `${p.s}-${p.a}-${p.b}-${p.A}-${p.B}-${p.C}-${p.k}`),
+  solve: (P) => {
+    const { a, b, A, B, C, k } = P
+    const pr = (u, v) => { const [x, y] = u <= v ? [u, v] : [v, u]; return `${num(x)} and ${num(y)}` }
+    switch (P.s) {
+      case 'pos': { const rr = makeRng(`qr-${a}-${b}`); const w = pairCands(-a, -b, rr).map(([u, v]) => pr(-u, -v)).filter((t) => !t.includes('−')); return { ans: pr(a, b), wrong: w, expl: `x² − ${a + b}x + ${a * b} = (x − ${a})(x − ${b}) = 0, so x = ${Math.min(a, b)} or x = ${Math.max(a, b)}.` } }
+      case 'mixed': { const rr = makeRng(`qm-${a}-${b}`); const w = pairCands(-a, b, rr).map(([u, v]) => pr(-u, -v)); return { ans: pr(a, -b), wrong: w, expl: `${poly([1, b - a, -a * b])} = (x − ${a})(x + ${b}) = 0, so x = ${a} or x = −${b}.` } }
+      case 'posroot': return { ans: a, wrong: [b, a + b, a * b], expl: `${poly([1, b - a, -a * b])} = (x − ${a})(x + ${b}), so the roots are ${a} and −${b}; the positive root is ${a}.` }
+      case 'sum': { if (B * B - 4 * A * C < 0) return null; return { ans: fr(B, A), wrong: [fr(C, A), `${B}`, fr(A, B)].filter((t) => t !== fr(B, A)), expl: `For ax² + bx + c = 0 the sum of the roots is −b/a = ${B}/${A} = ${fr(B, A)}.` } }
+      case 'prod': return { ans: fr(-C, A), wrong: [fr(-B, A), `−${C}`, fr(-A, C)].filter((t) => canonical(t) !== canonical(fr(-C, A))), expl: `For ax² + bx + c = 0 the product of the roots is c/a = −${C}/${A} = ${fr(-C, A)}.` }
+      case 'shift': { if (a >= k) return null; return { ans: a + k, wrong: [k - a, k, a + k * k], expl: `x − ${a} = ±${k}, so x = ${a + k} or x = ${a - k}; the positive value is ${a + k}.` } }
+      case 'equal': return { ans: a * a, wrong: [2 * a, 4 * a * a, a], expl: `Equal roots need b² = 4ac: ${4 * a * a} = 4k, so k = ${a * a}.` }
+      case 'other': return { ans: b, wrong: [a + b, a * b, 2 * a + b].filter((v) => v !== b), expl: `The roots add up to ${a + b}, so the other root is ${a + b} − ${a} = ${b}.` }
+      case 'p': return { ans: a + b, wrong: [a * b, Math.abs(a - b), 2 * (a + b)].filter((v) => v !== a + b), expl: `For x² − px + q = 0 the roots add up to p, so p = ${a} + ${b} = ${a + b}.` }
+      default: return { ans: Math.abs(a - b), wrong: [a + b, a * b, Math.min(a, b)].filter((v) => v !== Math.abs(a - b)), expl: `x² − ${a + b}x + ${a * b} = (x − ${a})(x − ${b}), so the roots are ${a} and ${b}, which differ by ${Math.abs(a - b)}.` }
+    }
+  },
+  items: [
+    [1, (p) => `Solve x² − ${p.a + p.b}x + ${p.a * p.b} = 0.`, { s: 'pos' }],
+    [2, (p) => `The roots of ${poly([1, p.b - p.a, -p.a * p.b])} = 0 are:`, { s: 'mixed' }],
+    [2, (p) => `What is the positive root of ${poly([1, p.b - p.a, -p.a * p.b])} = 0?`, { s: 'posroot' }],
+    [2, (p) => `What is the sum of the roots of ${p.A}x² − ${p.B}x + ${p.C} = 0?`, { s: 'sum' }],
+    [2, (p) => `The product of the roots of ${p.A}x² + ${p.B}x − ${p.C} = 0 is:`, { s: 'prod' }],
+    [2, (p) => `If (x − ${p.a})² = ${p.k * p.k} and x is positive, what is x?`, { s: 'shift' }],
+    [2, (p) => `For what value of k does x² − ${2 * p.a}x + k = 0 have equal roots?`, { s: 'equal' }],
+    [2, (p) => `One root of x² − ${p.a + p.b}x + ${p.a * p.b} = 0 is ${p.a}. What is the other root?`, { s: 'other' }],
+    [2, (p) => `If the roots of x² − px + ${p.a * p.b} = 0 are ${p.a} and ${p.b}, what is p?`, { s: 'p' }],
+    [2, (p) => `What is the difference between the roots of x² − ${p.a + p.b}x + ${p.a * p.b} = 0?`, { s: 'gap' }],
+  ],
+})
+
 // ===========================================================================
 // ENGINE — builds, verifies and writes the items
 // ===========================================================================
@@ -891,6 +1322,7 @@ function buildItems() {
   for (const fam of FAMILIES) {
     const r = makeRng(fam.id)
     const usedKeys = new Set()
+    const usedFacts = new Set()
     const short = fam.id.replace(/^ga\./, '').replace(/\./g, '-')
     fam.items.forEach(([difficulty, stemFn, extra0], idx) => {
       let made = null
@@ -901,6 +1333,8 @@ function buildItems() {
         if (p.reject) continue
         const key = String(fam.key(p)).replace(/--/g, '-m').replace(/^-/, 'm')
         if (usedKeys.has(key)) continue
+        const factKey = fam.fact ? String(fam.fact(p)) : null
+        if (factKey !== null && usedFacts.has(factKey)) continue
         const sol = fam.solve(p)
         if (!sol || isBadValue(sol.ans)) continue
         const fmt = sol.fmt ?? fam.fmt ?? defaultFmt
@@ -930,7 +1364,7 @@ function buildItems() {
         if (stemSeen.has(canonical(stem))) continue
         const concept = `${short}-${key}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
         if (conceptSeen.has(canonical(concept))) continue
-        usedKeys.add(key); conceptSeen.add(canonical(concept)); stemSeen.add(canonical(stem))
+        usedKeys.add(key); if (factKey !== null) usedFacts.add(factKey); conceptSeen.add(canonical(concept)); stemSeen.add(canonical(stem))
         if (!posQueue.length) posQueue = posR.shuffle([0, 1, 2, 3])
         const a = posQueue.pop()
         const opts = r.shuffle(wrong)
