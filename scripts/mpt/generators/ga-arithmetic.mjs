@@ -676,11 +676,11 @@ fam('ga.ratio.one-part-known', 'ga.ratio', [
   mode({ // other quantity
     d: 1,
     gen(tp) {
-      const [a, b] = coprimePair(tp.max ?? 9); const [lo, hi] = range(tp, 1, 100); const k = ri(lo, hi); const x = a * k
+      const [a, b] = tp.one ? [1, ri(15, 40)] : coprimePair(9); const [lo, hi] = range(tp, 1, 100); const k = ri(lo, hi); const x = a * k
       return { v: { a, b, x }, ans: b * k, wrong: [(a * x) / b, x + (b - a), (a + b) * k, x * b], exp: `${a} parts = ${fmtNum(x)}, so 1 part = ${fmtNum(k)} and ${b} parts = ${fmtNum(b * k)}.` }
     },
     T: [
-      { t: 'The ratio of teachers to students in a school is {a}:{b}. If there are {x} teachers, how many students are there?', r: [2, 12], max: 1 },
+      { t: 'The ratio of teachers to students in a school is {a}:{b}. If there are {x} teachers, how many students are there?', r: [2, 12], one: true },
       { t: 'Flour and sugar are used in the ratio {a}:{b} in a recipe. How much sugar goes with {x} g of flour?§g', r: [20, 100] },
       { t: 'The ratio of {A}’s income to {B}’s income is {a}:{b}. If {A} earns Rs {x}, how much does {B} earn?§rs', r: [2000, 9000] },
       { t: 'On a map, {a} cm represents {b} km. What actual distance is shown by {x} cm?§km', r: [2, 9] },
@@ -915,42 +915,42 @@ fam('ga.ratio.unitary-direct', 'ga.ratio', [
     d: 1,
     gen(tp) {
       const q1 = ri(tp.q ? tp.q[0] : 2, tp.q ? tp.q[1] : 12); let q2 = ri(tp.q ? tp.q[0] : 2, tp.q ? tp.q[1] * 2 : 25); if (q1 === q2) return null
-      const u = ri(...(tp.u ?? [5, 120])); const c1 = q1 * u
+      const u = ri(...(tp.uu ?? [5, 120])); const c1 = q1 * u
       return { v: { q1, q2, c1 }, ans: q2 * u, wrong: [(q1 * c1) / q2, c1 + (q2 - q1), c1 * q2, u * (q2 + 1)], exp: `One unit = ${fmtNum(c1)}/${q1} = ${fmtNum(u)}; for ${q2}: ${q2} × ${fmtNum(u)} = ${fmtNum(q2 * u)}.` }
     },
     T: [
       'If {q1} pens cost Rs {c1}, what is the cost of {q2} pens?§rs',
-      { t: 'A car uses {q1} litres of petrol to travel {c1} km. How far can it go on {q2} litres?§km', u: [10, 18] },
-      { t: 'A printer prints {c1} pages in {q1} minutes. How many pages does it print in {q2} minutes?§pages', u: [10, 40] },
-      { t: 'A tailor needs {c1} metres of cloth for {q1} suits. How much cloth is needed for {q2} suits?§m', u: [3, 5] },
-      { t: 'A labourer earns Rs {c1} for {q1} days of work. What will he earn for {q2} days?§rs', u: [800, 1500] },
-      { t: 'A mason lays {c1} bricks in {q1} hours. How many bricks will he lay in {q2} hours?§bricks', u: [50, 120], q: [2, 8] },
+      { t: 'A car uses {q1} litres of petrol to travel {c1} km. How far can it go on {q2} litres?§km', uu: [10, 18] },
+      { t: 'A printer prints {c1} pages in {q1} minutes. How many pages does it print in {q2} minutes?§pages', uu: [10, 40] },
+      { t: 'A tailor needs {c1} metres of cloth for {q1} suits. How much cloth is needed for {q2} suits?§m', uu: [3, 5] },
+      { t: 'A labourer earns Rs {c1} for {q1} days of work. What will he earn for {q2} days?§rs', uu: [800, 1500] },
+      { t: 'A mason lays {c1} bricks in {q1} hours. How many bricks will he lay in {q2} hours?§bricks', uu: [50, 120], q: [2, 8] },
     ],
   }),
   mode({ // quantity for given amount
     d: 1,
     gen(tp) {
       const q1 = ri(2, 10); const q2 = ri(2, 30); if (q1 === q2) return null
-      const u = ri(...(tp.u ?? [20, 300])); const c1 = q1 * u; const c2 = q2 * u
+      const u = ri(...(tp.uu ?? [20, 300])); const c1 = q1 * u; const c2 = q2 * u
       return { v: { q1, c1, c2 }, ans: q2, wrong: [(c2 * c1) / (q1 * 1000) > 1 ? null : null, (c2 * c1) / q1 / u / q1, q2 + q1, Math.round(c2 / c1)], exp: `Rate = ${fmtNum(c1)}/${q1} = ${fmtNum(u)} per unit; ${fmtNum(c2)}/${fmtNum(u)} = ${q2}.` }
     },
     T: [
-      { t: '{q1} kg of rice cost Rs {c1}. How much rice can be bought for Rs {c2}?§kg', u: [200, 400] },
-      { t: 'A machine fills {c1} bottles in {q1} minutes. How long will it take to fill {c2} bottles?§minutes', u: [20, 60] },
-      { t: 'A worker paints {c1} square metres of wall in {q1} hours. How many hours will he take to paint {c2} square metres?§hours', u: [6, 15] },
+      { t: '{q1} kg of rice cost Rs {c1}. How much rice can be bought for Rs {c2}?§kg', uu: [200, 400] },
+      { t: 'A machine fills {c1} bottles in {q1} minutes. How long will it take to fill {c2} bottles?§minutes', uu: [20, 60] },
+      { t: 'A worker paints {c1} square metres of wall in {q1} hours. How many hours will he take to paint {c2} square metres?§hours', uu: [6, 15] },
     ],
   }),
   mode({ // two variables
     d: 2,
     gen(tp) {
       const m1 = ri(2, 12); const m2 = ri(2, 20); const dd = ri(2, 10); if (m1 === m2) return null
-      const u = ri(...(tp.u ?? [2, 12])); const s1 = m1 * u
+      const u = ri(...(tp.uu ?? [2, 12])); const s1 = m1 * u
       return { v: { m1, m2, s1, dd }, ans: u * m2 * dd, wrong: [u * m2, s1 * dd, s1 * m2 * dd, u * (m2 + dd)], exp: `Per head per day = ${fmtNum(s1)}/${m1} = ${fmtNum(u)}; ${m2} × ${dd} × ${fmtNum(u)} = ${fmtNum(u * m2 * dd)}.` }
     },
     T: [
       'If {m1} tailors stitch {s1} shirts in a day, how many shirts will {m2} tailors stitch in {dd} days?',
-      { t: '{m1} cows eat {s1} kg of fodder in a day. How much fodder will {m2} cows eat in {dd} days?§kg', u: [8, 15] },
-      { t: 'Feeding {m1} guests at a wedding costs Rs {s1} a day. At the same rate, what does it cost to feed {m2} guests for {dd} days?§rs', u: [500, 1200] },
+      { t: '{m1} cows eat {s1} kg of fodder in a day. How much fodder will {m2} cows eat in {dd} days?§kg', uu: [8, 15] },
+      { t: 'Feeding {m1} guests at a wedding costs Rs {s1} a day. At the same rate, what does it cost to feed {m2} guests for {dd} days?§rs', uu: [500, 1200] },
     ],
   }),
 ])

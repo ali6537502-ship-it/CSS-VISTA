@@ -562,10 +562,10 @@ function letterCodeItem({ fam, d, rule, ex, target, q, why }) {
   if (ex.length) {
     const cons = consistentLetterRules(ex.map((w, i) => [w, codes[i]]))
     const outs = new Set(cons.map((r) => r(target)))
-    assert(outs.size === 1 && outs.has(ans), `letter code ${ex}→${codes} does not fix ${target} uniquely: ${[...outs].slice(0, 5)}`)
+    if (!(outs.size === 1 && outs.has(ans))) { dupErrors.push(`letter code ${ex}→${codes} does not fix ${target} uniquely: ${[...outs].slice(0, 5)}`); return }
   }
   const m = Math.floor(ans.length / 2)
-  const cand = [shiftW(1)(ans), oneLetter(ans, m, 1), shiftW(-1)(ans), rev(ans), oneLetter(ans, ans.length - 1, -1), oneLetter(ans, 0, 1), target]
+  const cand = [shiftW(1)(ans), oneLetter(ans, m, 1), shiftW(-1)(ans), rev(ans), oneLetter(ans, ans.length - 1, -1), oneLetter(ans, 0, 1), oneLetter(ans, 1, -1)]
   const wrong = [...new Set(cand)].filter((c) => c !== ans).slice(0, 3)
   add({ st: 'ga.coding', fam, concept: `code-${ex.join('-')}-${target}`, d, q: q(codes), ans, wrong, exp: `${why}, so ${target} is written as ${ans}.` })
 }
@@ -573,8 +573,8 @@ function letterDecodeItem({ fam, d, rule, ex, word, others, q, why }) {
   const codes = ex.map(rule)
   const code = rule(word)
   const cons = ex.length ? consistentLetterRules(ex.map((w, i) => [w, codes[i]])) : [rule]
-  assert(cons.every((r) => r(word) === code), `decode ${word}`)
-  for (const o of others) assert(!cons.some((r) => r(o) === code), `decode distractor ${o} also fits`)
+  if (!cons.every((r) => r(word) === code)) { dupErrors.push(`decode ${ex} ${word} ambiguous`); return }
+  for (const o of others) if (cons.some((r) => r(o) === code)) { dupErrors.push(`decode distractor ${o} also fits`); return }
   add({ st: 'ga.coding', fam, concept: `decode-${ex.join('-')}-${word}`, d, q: q(codes, code), ans: word, wrong: others, exp: `${why}; reversing the rule on ${code} gives ${word}.` })
 }
 const shiftWhy = (k, w, c) => `Each letter moves ${Math.abs(k)} place${Math.abs(k) > 1 ? 's' : ''} ${k > 0 ? 'forward' : 'back'} in the alphabet (${w} → ${c})`
@@ -614,7 +614,7 @@ const shiftWhy = (k, w, c) => `Each letter moves ${Math.abs(k)} place${Math.abs(
   R(3, compose(rev, shiftW(-1)), 'CODE', 'BEAR', 'The word is reversed and each letter moves one place back (CODE → EDOC → DCNB)', (c) => `In a certain language CODE is written as ${c[0]}. How is BEAR written in that language?`)
   R(2, REARR.rotL, 'STAMP', 'FRAME', 'The first letter is moved to the end', (c) => `STAMP is written as ${c[0]}. By the same rule, how is FRAME written?`)
   R(2, REARR.rotR, 'CLEAR', 'WHITE', 'The last letter is moved to the front', (c) => `By a certain rule, CLEAR is changed to ${c[0]}. What does WHITE change to?`)
-  R(3, compose(rev, oppW), 'WORD', 'GAME', 'The word is reversed and each letter is replaced by its opposite letter (A↔Z, B↔Y, …)', (c) => `If WORD is written as ${c[0]}, how is GAME written?`)
+  R(3, compose(rev, oppW), 'WORD', 'GAME', 'The word is reversed and each letter is replaced by its opposite letter (A↔Z, B↔Y, …)', (c) => `WORD is coded as ${c[0]}. How would GAME be coded by the same method?`)
 }
 
 // ga.coding.number-substitution
@@ -650,13 +650,13 @@ const numCode = (f, r = false) => (w) => [...(r ? rev(w) : w)].map((c) => f(A2N(
   N({ d: 1, rule: pos, ex: [], target: 'HEAD', q: () => 'If A = 1, B = 2, C = 3 and so on, how is HEAD written in numbers?', why: 'H, E, A, D are the 8th, 5th, 1st and 4th letters' })
   ND({ d: 1, rule: pos, ex: ['CAT'], word: 'DOG', others: ['DIG', 'FOG', 'DOT'], q: (c, code) => `If ${c[0]} stands for CAT, which word does ${code} stand for?`, why: 'Each number is the position of a letter in the alphabet' })
   N({ d: 2, rule: numCode((p) => 27 - p), ex: [], target: 'BOX', q: () => 'If A = 26, B = 25, C = 24, …, Z = 1, what is the code for BOX?', why: 'Each letter gets 27 minus its usual position (B = 25, O = 12, X = 3)' })
-  N({ d: 1, rule: numCode((p) => p + 1), ex: ['CAT'], target: 'RAT', q: (c) => `If CAT is written as ${c[0]}, how is RAT written?`, why: 'Each letter is written as one more than its position (C = 3 → 4, A = 1 → 2, T = 20 → 21)' })
+  N({ d: 1, rule: numCode((p) => p + 1), ex: ['CAT'], target: 'RAT', q: (c) => `CAT is coded as ${c[0]}. What will RAT be coded as?`, why: 'Each letter is written as one more than its position (C = 3 → 4, A = 1 → 2, T = 20 → 21)' })
   N({ d: 1, rule: pos, ex: ['BIRD'], target: 'WING', q: (c) => `In a code, BIRD is ${c[0]}. How is WING written?`, why: 'Each letter is replaced by its position in the alphabet' })
   N({ d: 2, rule: numCode((p) => 2 * p), ex: ['BAD'], target: 'FEED', q: (c) => `If BAD is written as ${c[0]}, what is the code for FEED?`, why: 'Each letter is written as twice its position (B = 2 → 4, A = 1 → 2, D = 4 → 8)' })
-  N({ d: 3, rule: numCode((p) => p * p), ex: ['ACE'], target: 'BED', q: (c) => `If ACE is written as ${c[0]}, how is BED written?`, why: 'Each letter is written as the square of its position (A = 1 → 1, C = 3 → 9, E = 5 → 25)' })
+  N({ d: 3, rule: numCode((p) => p * p), ex: ['ACE'], target: 'BED', q: (c) => `In a number code ACE appears as ${c[0]}. How does BED appear?`, why: 'Each letter is written as the square of its position (A = 1 → 1, C = 3 → 9, E = 5 → 25)' })
   N({ d: 2, rule: numCode((p) => p, true), ex: ['CAT'], target: 'DOG', q: (c) => `If CAT is coded ${c[0]}, how is DOG coded?`, why: 'The letter positions are written in reverse order (T = 20, A = 1, C = 3)' })
   ND({ d: 3, rule: numCode((p) => 27 - p), ex: [], word: 'SOLD', others: ['COLD', 'FOLD', 'SOLE'], q: (c, code) => `If 26 stands for A, 25 for B and so on down to 1 for Z, which word is written ${code}?`, why: 'Each number is 27 minus the letter’s position (27 − 8 = 19 = S, 27 − 12 = 15 = O, 27 − 15 = 12 = L, 27 − 23 = 4 = D)' })
-  N({ d: 2, rule: numCode((p) => p - 1), ex: ['DOG'], target: 'PIG', q: (c) => `If DOG is written as ${c[0]}, how is PIG written?`, why: 'Each letter is written as one less than its position (D = 4 → 3, O = 15 → 14, G = 7 → 6)' })
+  N({ d: 2, rule: numCode((p) => p - 1), ex: ['DOG'], target: 'PIG', q: (c) => `DOG has been coded ${c[0]}. Code PIG in the same way.`, why: 'Each letter is written as one less than its position (D = 4 → 3, O = 15 → 14, G = 7 → 6)' })
   N({ d: 2, rule: numCode((p) => p + 3), ex: ['ARM'], target: 'LEG', q: (c) => `ARM is coded as ${c[0]}. What is the code for LEG?`, why: 'Each letter is written as its position plus 3 (A = 1 → 4, R = 18 → 21, M = 13 → 16)' })
   ND({ d: 1, rule: pos, ex: [], word: 'MAP', others: ['MOP', 'NAP', 'MAT'], q: (c, code) => `If each letter is replaced by its position in the alphabet, which word gives ${code}?`, why: '13 = M, 1 = A, 16 = P' })
   ND({ d: 1, rule: pos, ex: ['SUN'], word: 'STAR', others: ['STIR', 'SCAR', 'SOAR'], q: (c, code) => `In a code language, ${c[0]} means SUN. What does ${code} mean?`, why: 'The numbers are alphabet positions (S = 19, U = 21, N = 14)' })
@@ -686,7 +686,7 @@ const sumF = SUM_RULES[0]
   S({ d: 3, rule: SUM_RULES[4], ex: ['AB', 'CD'], target: 'EF', q: (v) => `If AB = ${v[0]} and CD = ${v[1]}, what does EF equal?`, why: 'The letter positions are added and the total doubled (A 1 + B 2 = 3, × 2 = 6)' })
   S({ d: 2, ex: ['FACE'], target: 'CAFE', q: (v) => `If FACE = ${v[0]} in a letter-value code, what is CAFE?`, why: 'The value is the sum of the letter positions, and CAFE uses exactly the same letters as FACE' })
   S({ d: 2, ex: ['TEA', 'MILK'], target: 'COFFEE', q: (v) => `If TEA is coded ${v[0]} and MILK ${v[1]}, what is the code for COFFEE?`, why: 'Each code is the sum of the letter positions (T 20 + E 5 + A 1 = 26)' })
-  S({ d: 1, ex: ['BAT', 'CAT'], target: 'RAT', q: (v) => `If BAT = ${v[0]} and CAT = ${v[1]}, what is RAT?`, why: 'Each value is the sum of the letter positions (B 2 + A 1 + T 20 = 23)' })
+  S({ d: 1, ex: ['BAT', 'CAT'], target: 'RAT', q: (v) => `BAT scores ${v[0]} and CAT scores ${v[1]} in a letter code. What does RAT score?`, why: 'Each value is the sum of the letter positions (B 2 + A 1 + T 20 = 23)' })
   {
     const words = ['BIG', 'TOP', 'HUT', 'LAMP'], vals = words.map(sumF), best = Math.max(...vals)
     assert(vals.filter((v) => v === best).length === 1, 'unique greatest')
@@ -765,7 +765,7 @@ const sumF = SUM_RULES[0]
   DG(2, 'L8A2T6E4M3', ['LATE', 'MEAL'], 'METAL', (c) => `Given that LATE = ${c[0]} and MEAL = ${c[1]}, what is METAL?`)
   DG(2, 'R7A1T5E8', ['RATE', 'TEAR'], 'TREAT', (c) => `If RATE is ${c[0]} and TEAR is ${c[1]} in a code, find the code for TREAT.`)
   DG(2, 'S9A2N6D3E5T8', ['SAND', 'DENT'], 'STAND', (c) => `SAND is coded ${c[0]} and DENT is coded ${c[1]}. Which number stands for STAND?`)
-  DG(2, 'G7A2M9E4K8', ['GAME', 'MAKE'], 'KEG', (c) => `If GAME = ${c[0]} and MAKE = ${c[1]}, then KEG = ?`)
+  DG(2, 'G7A2M9E4K8', ['GAME', 'MAKE'], 'KEG', (c) => `With GAME coded ${c[0]} and MAKE coded ${c[1]}, how is KEG coded?`)
   DG(2, 'H1A5I3R8C6', ['HAIR', 'CHAIR'], 'RICH', (c) => `The words HAIR and CHAIR are coded ${c[0]} and ${c[1]}. What is the code for RICH?`)
   DG(3, 'P4L9A0N1T2E7', ['PLANT', 'LATE'], 'PLATE', (c) => `In a certain code PLANT is written as ${c[0]} and LATE as ${c[1]}. How is PLATE written in that code?`)
   DG(3, 'F3I6R1E8D5', ['FIRE', 'RIDE'], 'FRIED', (c) => `Using the code in which FIRE is ${c[0]} and RIDE is ${c[1]}, write FRIED.`)
@@ -827,18 +827,308 @@ const sumF = SUM_RULES[0]
 {
   const F = 'ga.coding.progressive-shift'
   const P = (d, rule, ex, target, why, q) => letterCodeItem({ fam: F, d, rule, ex: ex ? [ex] : [], target, q, why })
-  P(2, progW(1, 1), 'COLD', 'WARM', 'The letters are moved forward by 1, 2, 3, 4 in turn (C+1, O+2, L+3, D+4)', (c) => `If COLD is written as ${c[0]}, how will WARM be written?`)
+  P(2, progW(1, 1), 'COLDER', 'WARM', 'The letters are moved forward by 1, 2, 3, 4, … in turn (C+1, O+2, L+3, D+4, …)', (c) => `If COLDER is written as ${c[0]}, how will WARM be written?`)
   P(2, progW(1, 1), 'BAD', 'FEED', 'The letters move forward by 1, 2, 3, … in turn (B+1, A+2, D+3)', (c) => `BAD is coded as ${c[0]}. What is FEED coded as?`)
   P(3, progW(-1, -1), 'MILK', 'HOPE', 'The letters move back by 1, 2, 3, 4 in turn (M−1, I−2, L−3, K−4)', (c) => `In a code MILK is written ${c[0]}. Write HOPE in the same code.`)
   P(2, altW(1, -1), 'HELP', 'KIND', 'The letters move alternately one place forward and one place back', (c) => `If HELP is coded as ${c[0]}, then KIND is coded as:`)
   P(2, altW(2, -2), 'BEST', 'GOLD', 'The letters move alternately two places forward and two places back', (c) => `A code changes BEST into ${c[0]}. What does it change GOLD into?`)
   P(1, progW(1, 1), null, 'FARM', 'F moves 1, A moves 2, R moves 3 and M moves 4 places forward', () => 'Each letter of a word is moved forward by its position in the word (the 1st letter by 1, the 2nd by 2, and so on). What does FARM become?')
-  P(3, progW(2, 2), 'ACE', 'BIG', 'The letters move forward by 2, 4, 6 in turn (A+2, C+4, E+6)', (c) => `If ACE is coded ${c[0]}, what is the code for BIG?`)
+  P(3, progW(2, 2), 'ACE', 'BIG', 'The letters move forward by 2, 4, 6 in turn (A+2, C+4, E+6)', (c) => `ACE turns into ${c[0]} under a code. What does BIG turn into?`)
   P(2, altW(1, 2), 'LAMP', 'DESK', 'The letters move forward by 1 and 2 alternately (L+1, A+2, M+1, P+2)', (c) => `LAMP is written ${c[0]} in a certain code. How is DESK written?`)
   P(3, progW(4, -1), 'FIRE', 'COAL', 'The letters move forward by 4, 3, 2, 1 in turn', (c) => `Under a coding rule FIRE is written ${c[0]}. Under the same rule COAL is written:`)
   P(2, progW(1, 1), 'SUN', 'SKY', 'The letters move forward by 1, 2, 3 in turn', (c) => `If SUN is ${c[0]} in a code, what is SKY?`)
   P(2, altW(-1, 1), 'RING', 'BELL', 'The letters move alternately one place back and one place forward', (c) => `RING is written as ${c[0]}. Following the same pattern, BELL is written as:`)
   P(3, progW(3, -1), 'PARK', 'BOAT', 'The letters move forward by 3, 2, 1 and 0 places in turn', (c) => `A code writes PARK as ${c[0]}. How does it write BOAT?`)
+}
+
+
+// ---------------------------------------------------------------------------
+// CLOCKS AND CALENDARS (ga.clock-calendar)
+// ---------------------------------------------------------------------------
+const CC = 'ga.clock-calendar'
+const handAngle = (h, m) => { const a = Math.abs(30 * (h % 12) - 5.5 * m) % 360; return Math.min(a, 360 - a) }
+const deg = (x) => `${fmt(x)}°`
+const hm = (t) => { t = ((t % 720) + 720) % 720; let h = Math.floor(t / 60); const m = t % 60; if (h === 0) h = 12; return `${h}:${String(m).padStart(2, '0')}` }
+const toMin = (h, m) => (h % 12) * 60 + m
+/** Count times in [0, T) minutes after 12:00 at which the minute hand leads the hour hand by `sep` (mod 360). */
+function handEvents(T, seps) { let n = 0; for (const sep of seps) for (let k = 0; k < 1000; k++) { const t = (360 * k + sep) / 5.5; if (t >= T) break; n++ } return n }
+
+// ga.clock.hand-angle
+{
+  const F = 'ga.clock.hand-angle'
+  const A = (d, h, m, q, extra = []) => {
+    const a = handAngle(h, m)
+    const cand = [...extra, Math.abs(30 * h - 6 * m) % 360, a + 5, a - 5, a + 15, a + 10, 360 - a].map((x) => Math.min(x, 360 - x) === x ? x : x).filter((x) => x > 0 && x <= 360 && !near(x, a))
+    const wrong = [...new Set(cand.map((x) => fmt(x)))].slice(0, 3).map((x) => `${x}°`)
+    add({ st: CC, fam: F, concept: `clock-angle-${h}-${m}`, d, q, ans: deg(a), wrong, exp: `The hour hand is at ${fmt(30 * (h % 12) + 0.5 * m)}° from 12 and the minute hand at ${6 * m}°; the smaller angle between them is ${deg(a)}.` })
+  }
+  A(2, 3, 40, 'What is the angle between the hour and minute hands of a clock at 3:40?')
+  A(1, 9, 0, 'At exactly 9 o’clock, what angle do the hands of a clock make?', [270, 60])
+  A(2, 4, 20, 'Find the smaller angle between the hands of a clock at 4:20.')
+  A(2, 7, 30, 'How many degrees apart are the hands of a clock at half past seven?')
+  A(2, 2, 15, 'A wall clock shows 2:15. What is the angle between its hands?')
+  A(2, 12, 30, 'What is the angle between the two hands of a clock at 12:30?')
+  A(2, 10, 10, 'How many degrees separate the hands of a watch at ten past ten (the smaller angle)?')
+  A(1, 1, 20, 'At 1:20, what is the angle between the hands of a clock?')
+  {
+    const a = 3.5 * 30
+    add({ st: CC, fam: F, concept: 'hour-hand-turn-2-00-to-5-30', d: 2, q: 'Through how many degrees does the hour hand turn between 2:00 and 5:30?', ans: deg(a), wrong: [deg(90), deg(120), deg(a + 15)], exp: `The hour hand turns 30° per hour; in 3½ hours it turns 3.5 × 30° = ${deg(a)}.` })
+  }
+  {
+    const a = 25 * 6
+    add({ st: CC, fam: F, concept: 'minute-hand-turn-25-minutes', d: 1, q: 'How many degrees does the minute hand of a clock turn in 25 minutes?', ans: deg(a), wrong: [deg(125), deg(135), deg(165)], exp: `The minute hand turns 360° in 60 minutes, i.e. 6° per minute, so 25 × 6° = ${deg(a)}.` })
+  }
+  {
+    const a = 20 * 0.5
+    add({ st: CC, fam: F, concept: 'hour-hand-turn-20-minutes', d: 1, q: 'Through what angle does the hour hand move in 20 minutes?', ans: deg(a), wrong: [deg(20), deg(5), deg(120)], exp: `The hour hand moves 30° in 60 minutes, i.e. ½° per minute, so 20 minutes give ${deg(a)}.` })
+  }
+  {
+    const a = 360 - handAngle(8, 0)
+    add({ st: CC, fam: F, concept: 'reflex-angle-8-00', d: 2, q: 'When a clock shows 8:00, what is the reflex angle between its hands?', ans: deg(a), wrong: [deg(120), deg(210), deg(270)], exp: `At 8:00 the smaller angle is 8 × 30° − 0 = 240°, i.e. 120° the other way; the reflex angle is 360° − 120° = ${deg(a)}.` })
+  }
+  {
+    // coincidence between 3 and 4: t = 60h/11 minutes past h
+    const h = 3, num = 60 * h, den = 11, whole = Math.floor(num / den), rem = num % den
+    assert(near(handAngle(h, num / den), 0), 'coincide')
+    const f = (w, r) => `${w} ${r}/11 minutes past 3`
+    add({ st: CC, fam: F, concept: 'hands-coincide-between-3-and-4', d: 3, q: 'At what time between 3 and 4 o’clock are the two hands of a clock exactly together?', ans: f(whole, rem), wrong: ['15 minutes past 3', f(whole + 1, 4), f(whole, rem + 3)], exp: `The minute hand gains 5.5° per minute on the hour hand and must make up 90°, which takes 90 ÷ 5.5 = 180/11 = ${whole} ${rem}/11 minutes.` })
+  }
+  {
+    const n = handEvents(720, [0])
+    add({ st: CC, fam: F, concept: 'hands-coincide-count-12-hours', d: 2, q: 'How many times do the hour and minute hands of a clock coincide in 12 hours?', ans: n, wrong: [12, 10, 24], exp: `The minute hand overtakes the hour hand once every 720/11 minutes, so in 720 minutes they meet ${n} times (the meeting at 12:00 is counted once).` })
+  }
+  {
+    const n = handEvents(1440, [90, 270])
+    add({ st: CC, fam: F, concept: 'hands-right-angle-count-day', d: 3, q: 'How many times in a day (24 hours) are the hands of a clock at right angles?', ans: n, wrong: [48, 24, 22], exp: `In 12 hours the hands are at right angles 22 times (twice in each of the 11 overtaking cycles), so in 24 hours ${n} times.` })
+  }
+  {
+    const n = handEvents(1440, [180])
+    add({ st: CC, fam: F, concept: 'hands-opposite-count-day', d: 3, q: 'In 24 hours, how many times do the hands of a clock point in exactly opposite directions?', ans: n, wrong: [24, 11, 44], exp: `The hands are opposite once in each overtaking cycle: 11 times in 12 hours, so ${n} times in 24 hours.` })
+  }
+}
+
+// ga.clock.hand-direction (clock laid flat, compass directions)
+{
+  const F = 'ga.clock.hand-direction'
+  const DIRS = ['North', 'North-East', 'East', 'South-East', 'South', 'South-West', 'West', 'North-West']
+  const dirOf = (a) => { const x = ((a % 360) + 360) % 360; assert(x % 45 === 0, 'compass multiple of 45'); return DIRS[x / 45] }
+  const idx = (name) => DIRS.indexOf(name) * 45
+  // ref: at reference time a hand at clock-angle refAng points to refDir. Ask: hand at clock-angle ask.
+  const HD = (d, refAng, refDir, askAng, q, why) => {
+    const off = idx(refDir) - refAng
+    const ans = dirOf(askAng + off)
+    const k = DIRS.indexOf(ans)
+    const wrong = [DIRS[(k + 4) % 8], DIRS[(k + 2) % 8], DIRS[(k + 6) % 8]]
+    add({ st: CC, fam: F, concept: `clock-direction-${refAng}-${refDir}-${askAng}`, d, q, ans, wrong, exp: `${why} The hand then points ${ans}.` })
+  }
+  HD(1, 0, 'North', 90, 'A clock lies face up on a table so that at 3:00 its minute hand points North. In which direction does its hour hand point at 3:00?', 'The minute hand at 3:00 is on 12, so 12 faces North and 3 faces East.')
+  HD(2, 0, 'East', 45, 'A clock is placed so that at 12 noon its minute hand points East. In which direction will the hour hand point at 1:30 pm?', '12 faces East; at 1:30 the hour hand is halfway between 1 and 2, i.e. 45° clockwise from 12.')
+  HD(2, 270, 'South', 180, 'A clock is set so that at 9:00 am its hour hand points South. In which direction will its minute hand point at 3:30 pm?', 'At 9:00 the hour hand is on 9, so 9 faces South and 12 faces East; at half past, the minute hand is on 6, opposite 12.')
+  HD(2, 90, 'West', 270, 'A clock is kept so that at 3:00 the hour hand points West. In which direction does the minute hand point at 4:45?', '3 faces West, so 12 faces North… more precisely each number turns with the dial: 12 faces South and 9 faces East, where the minute hand is at 4:45.')
+  HD(3, 180, 'North-West', 270, 'A clock is placed so that at 6:00 the hour hand points North-West. In which direction will the minute hand point at 7:45?', 'At 6:00 the hour hand is on 6, so 6 faces North-West and 12 faces South-East; at 7:45 the minute hand is on 9, 90° anticlockwise from 12.')
+  HD(2, 0, 'South-East', 90, 'At noon the minute hand of a clock laid on the floor points South-East. In which direction does its hour hand point at 3:00 pm?', '12 faces South-East and 3 lies 90° clockwise from it.')
+  HD(1, 0, 'North', 225, 'If the minute hand of a flat clock points North at 5:00, in which direction does the hour hand point at 7:30?', '12 faces North; at 7:30 the hour hand is halfway between 7 and 8, i.e. 225° clockwise from 12.')
+  HD(3, 0, 'West', 135, 'A clock lies on a table with the 12 facing West. In which direction does the hour hand point at 4:30?', 'At 4:30 the hour hand is halfway between 4 and 5, 135° clockwise from 12.')
+}
+
+// ga.clock.mirror-image
+{
+  const F = 'ga.clock.mirror-image'
+  const mir = (t) => (720 - t) % 720
+  const M = (d, h, m, q, from) => {
+    const t = toMin(h, m), a = mir(t)
+    const wrong = [hm(a + 60), hm(a - 60), hm(t + 360)].filter((x) => x !== hm(a) && x !== hm(t))
+    while (wrong.length < 3) wrong.push(hm(a + 30 * wrong.length + 30))
+    add({ st: CC, fam: F, concept: `clock-mirror-${h}-${m}`, d, q, ans: hm(a), wrong: [...new Set(wrong)].slice(0, 3), exp: `A clock and its mirror image add up to 12:00 (11:60), so ${from ?? hm(t)} corresponds to 12:00 − ${hm(t)} = ${hm(a)}.` })
+  }
+  M(1, 3, 40, 'A clock seen in a mirror shows 3:40. What is the actual time?')
+  M(1, 2, 25, 'What will the mirror image of a clock show when the actual time is 2:25?')
+  M(2, 10, 10, 'The reflection of a clock in a mirror reads 10:10. What is the real time?')
+  M(1, 4, 15, 'In a mirror, a clock appears to show quarter past four. What time is it actually?')
+  M(2, 11, 5, 'The actual time is 11:05. How will the clock appear in a mirror?')
+  M(2, 12, 30, 'A clock’s mirror image shows 12:30. What time does the clock really show?')
+  M(2, 7, 52, 'If the mirror image of a clock reads 7:52, what is the correct time?')
+  {
+    const opts = [[6, 0], [3, 0], [9, 0], [4, 30]]
+    const ok = opts.filter(([h, m]) => mir(toMin(h, m)) === toMin(h, m))
+    assert(ok.length === 1, 'one self-mirror')
+    add({ st: CC, fam: F, concept: 'clock-mirror-same-as-actual', d: 2, q: 'At which of these times does a clock look exactly the same as its mirror image?', ans: hm(toMin(...ok[0])), wrong: opts.filter((o) => o !== ok[0]).map((o) => hm(toMin(...o))), exp: 'The mirror time is 12:00 minus the actual time; only 6:00 gives 12:00 − 6:00 = 6:00 again (3:00 appears as 9:00, 4:30 as 7:30).' })
+  }
+  {
+    const t = toMin(1, 15), a = mir(t), diff = (a - t + 720) % 720
+    const f = (x) => `${Math.floor(x / 60)} h ${x % 60} min`
+    add({ st: CC, fam: F, concept: 'clock-mirror-gap-1-15', d: 3, q: 'The actual time is 1:15. By how much is the time shown in a mirror ahead of the actual time?', ans: f(diff), wrong: [f(diff - 60), f(diff + 30), f(diff - 30)], exp: `The mirror shows 12:00 − 1:15 = ${hm(a)}; from 1:15 to ${hm(a)} is ${f(diff)}.` })
+  }
+  {
+    const t = toMin(5, 20) + 25, a = mir(t)
+    add({ st: CC, fam: F, concept: 'clock-mirror-after-25-minutes-5-20', d: 3, q: 'A clock shows 5:20. What will its mirror image show 25 minutes later?', ans: hm(a), wrong: [hm(mir(toMin(5, 20)) + 25), hm(a + 60), hm(t)], exp: `After 25 minutes the time is ${hm(t)}; its mirror image is 12:00 − ${hm(t)} = ${hm(a)}.` })
+  }
+}
+
+// ga.clock.gain-loss
+{
+  const F = 'ga.clock.gain-loss'
+  const ampm = (t) => { t = ((t % 1440) + 1440) % 1440; const pm = t >= 720; return `${hm(t % 720)} ${pm ? 'pm' : 'am'}` }
+  {
+    const shown = 17 * 60 - 8 * 3
+    add({ st: CC, fam: F, concept: 'clock-loses-3-per-hour-9am-5pm', d: 2, q: 'A clock loses 3 minutes every hour. It was set right at 9 am. What time will it show at 5 pm the same day?', ans: ampm(shown), wrong: [ampm(17 * 60 + 24), ampm(17 * 60 - 21), ampm(17 * 60 - 27)], exp: `From 9 am to 5 pm is 8 hours, so the clock loses 8 × 3 = 24 minutes and shows ${ampm(shown)}.` })
+  }
+  {
+    const g = (10 * 72) / 60
+    add({ st: CC, fam: F, concept: 'watch-gains-10-seconds-hour-3-days', d: 2, q: 'A watch gains 10 seconds every hour. How much will it gain in 3 days?', ans: `${g} minutes`, wrong: ['6 minutes', '30 minutes', '10 minutes'], exp: `3 days = 72 hours; 72 × 10 s = 720 s = ${g} minutes.` })
+  }
+  {
+    const shown = 12 * 60 + 6 * 4
+    add({ st: CC, fam: F, concept: 'clock-gains-4-per-hour-6am-noon', d: 1, q: 'A clock gains 4 minutes every hour. If it is set correctly at 6 am, what time will it show at noon?', ans: ampm(shown), wrong: [ampm(12 * 60 - 24), ampm(12 * 60 + 20), ampm(12 * 60 + 28)], exp: `In 6 hours it gains 6 × 4 = 24 minutes, so at noon it shows ${ampm(shown)}.` })
+  }
+  {
+    const v = 15 * 2
+    add({ st: CC, fam: F, concept: 'clock-loses-2-per-day-1-to-16-march', d: 2, q: 'A clock that loses 2 minutes a day is set right on the morning of 1 March. How many minutes slow will it be on the morning of 16 March?', ans: `${v} minutes`, wrong: ['32 minutes', '28 minutes', '16 minutes'], exp: `From 1 March to 16 March is 15 days, so it loses 15 × 2 = ${v} minutes.` })
+  }
+  {
+    const hrs = 30 / 5, set = 15 * 60 - hrs * 60
+    add({ st: CC, fam: F, concept: 'clock-gains-5-shows-3-30-when-3-00', d: 3, q: 'A clock gains 5 minutes every hour. It shows 3:30 pm when the correct time is 3:00 pm. At what time was it last set right?', ans: ampm(set), wrong: [ampm(set + 60), ampm(set - 60), ampm(set + 180)], exp: `It has gained 30 minutes at 5 minutes per hour, which takes 6 hours; 3:00 pm − 6 hours = ${ampm(set)}.` })
+  }
+  {
+    const v = 7 * 5
+    add({ st: CC, fam: F, concept: 'watch-5-slow-per-day-week', d: 1, q: 'A watch runs 5 minutes slow every day. By how much will it be behind after a week?', ans: `${v} minutes`, wrong: ['30 minutes', '40 minutes', '12 minutes'], exp: `7 days × 5 minutes = ${v} minutes.` })
+  }
+  {
+    const v = 8 * (2 + 1)
+    add({ st: CC, fam: F, concept: 'two-clocks-gain-2-lose-1-noon-8pm', d: 1, q: 'Two clocks are set right at noon. One gains 2 minutes per hour and the other loses 1 minute per hour. How far apart will they be at 8 pm?', ans: `${v} minutes`, wrong: ['8 minutes', '16 minutes', '32 minutes'], exp: `They drift apart by 2 + 1 = 3 minutes each hour; in 8 hours that is ${v} minutes.` })
+  }
+  {
+    // runs 63 clock-minutes per real hour; shows 7:00 + 6 h 18 min → real 6 h later
+    const realH = (6 * 60 + 18) / 63
+    assert(realH === 6, 'gain calc')
+    add({ st: CC, fam: F, concept: 'clock-gains-3-set-7am-shows-1-18', d: 3, q: 'A clock gains 3 minutes every hour. It was set right at 7:00 am. What is the correct time when it shows 1:18 pm?', ans: ampm(13 * 60), wrong: [ampm(13 * 60 + 18), ampm(12 * 60 + 42), ampm(12 * 60 + 60 - 6)], exp: 'The clock runs 63 minutes for every real hour. It shows 6 h 18 min = 378 minutes after 7:00, and 378 ÷ 63 = 6 real hours, so the correct time is 1:00 pm.' })
+  }
+}
+
+// ga.calendar.day-counting
+{
+  const F = 'ga.calendar.day-counting'
+  const W = (i) => WEEK[((i % 7) + 7) % 7]
+  const DC = (d, concept, q, ansIdx, why) => {
+    const wrong = [W(ansIdx + 1), W(ansIdx - 1), W(ansIdx + 3)]
+    add({ st: CC, fam: F, concept, d, q, ans: W(ansIdx), wrong, exp: `${why} The answer is ${W(ansIdx)}.` })
+  }
+  DC(1, 'weekday-tuesday-plus-45', 'If today is Tuesday, what day of the week will it be 45 days from today?', 2 + 45, '45 = 6 weeks + 3 days, so count 3 days on from Tuesday.')
+  DC(2, 'weekday-sunday-minus-100', 'If today is Sunday, what day of the week was it 100 days ago?', 0 - 100, '100 = 14 weeks + 2 days, so go back 2 days from Sunday.')
+  DC(2, 'weekday-day-after-tomorrow-sunday', 'If the day after tomorrow is a Sunday, what was the day before yesterday?', 0 - 2 - 2, 'Today is Friday (two days before Sunday), and two days before Friday is Wednesday.')
+  DC(2, 'weekday-three-days-ago-saturday', 'If three days ago it was Saturday, what day will it be four days after tomorrow?', 6 + 3 + 1 + 4, 'Today is Tuesday; tomorrow is Wednesday, and four days after Wednesday is Sunday.')
+  DC(1, 'weekday-5th-monday-28th', 'If the 5th of a month is a Monday, what day of the week is the 28th of that month?', 1 + 23, 'The 28th is 23 days later: 3 weeks and 2 days after Monday.')
+  DC(2, 'weekday-thursday-plus-62', 'An examination is to be held 62 days after a Thursday. On which day of the week will it fall?', 4 + 62, '62 = 8 weeks + 6 days; six days after Thursday is Wednesday.')
+  DC(3, 'weekday-friday-plus-1000', 'Today is Friday. What day of the week will it be 1000 days from today?', 5 + 1000, '1000 = 142 weeks + 6 days; six days after Friday is Thursday.')
+  DC(2, 'weekday-yesterday-wednesday-30-after-tomorrow', 'If yesterday was Wednesday, what day will it be 30 days after tomorrow?', 3 + 1 + 1 + 30, 'Today is Thursday and tomorrow Friday; 30 days = 4 weeks + 2 days, and two days after Friday is Sunday.')
+  DC(1, 'weekday-31-day-month-begins-wednesday-ends', 'The first day of a 31-day month is a Wednesday. On which day does the month end?', 3 + 30, 'The 31st is 30 days after the 1st: 4 weeks and 2 days after Wednesday.')
+  DC(1, 'weekday-18th-saturday-1st', 'If the 18th of a month falls on a Saturday, what day was the 1st of that month?', 6 - 17, 'The 1st is 17 days earlier: 2 weeks and 3 days before Saturday.')
+  DC(3, 'weekday-meeting-every-9-days-fifth', 'A meeting is held every 9 days. If one is held on a Monday, on what day will the fifth meeting after it fall?', 1 + 45, 'The fifth meeting after it is 5 × 9 = 45 days later: 6 weeks and 3 days after Monday.')
+  {
+    const hours = 3 * 36, start = 1 * 24 + 8, t = start + hours, day = Math.floor(t / 24)
+    DC(3, 'weekday-dose-every-36-hours-fourth', 'A patient takes a tablet every 36 hours, the first at 8 am on Monday. On which day is the fourth tablet taken?', day, 'The fourth tablet comes 3 × 36 = 108 hours = 4 days 12 hours after 8 am Monday, i.e. at 8 pm on Friday.')
+  }
+  DC(2, 'weekday-counting-today-20th-day-saturday', 'Counting today as the first day, the 20th day will be a Saturday. What day is today?', 6 - 19, 'The 20th day is 19 days after today; 19 = 2 weeks + 5 days, and five days before Saturday is Monday.')
+  {
+    // 3rd is Friday → first Monday is the 6th → third Monday is the 20th
+    const firstMon = 3 + ((1 - 5 + 7) % 7), third = firstMon + 14
+    add({ st: CC, fam: F, concept: 'date-third-monday-when-3rd-friday', d: 2, q: 'If the 3rd of a month is a Friday, on what date does the third Monday of that month fall?', ans: ord(third), wrong: [ord(third - 7), ord(third + 1), ord(third - 1)], exp: `The first Monday is the ${ord(firstMon)}, so the third Monday is ${firstMon} + 14 = the ${ord(third)}.` })
+  }
+}
+
+// ga.calendar.leap-year
+{
+  const F = 'ga.calendar.leap-year'
+  const leap = (y) => (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
+  const dow = (y, m, d) => new Date(Date.UTC(y, m - 1, d)).getUTCDay()
+  {
+    const opts = [2000, 1900, 2100, 1800], ok = opts.filter(leap)
+    assert(ok.length === 1, 'one leap')
+    add({ st: CC, fam: F, concept: 'leap-year-century-2000', d: 1, q: 'Which of the following years was or will be a leap year?', ans: ok[0], wrong: opts.filter((y) => !leap(y)), exp: 'A century year is a leap year only if it is divisible by 400; 2000 is, but 1800, 1900 and 2100 are not.' })
+  }
+  {
+    const opts = [1900, 1996, 2004, 2024], bad = opts.filter((y) => !leap(y))
+    assert(bad.length === 1, 'one non-leap')
+    add({ st: CC, fam: F, concept: 'not-leap-year-1900', d: 2, q: 'Which one of these years was NOT a leap year?', ans: bad[0], wrong: opts.filter(leap), exp: '1900 is divisible by 100 but not by 400, so it was an ordinary year; the others are divisible by 4 and are not century years.' })
+  }
+  {
+    let n = 0; for (let y = 2001; y <= 2100; y++) if (leap(y)) n++
+    add({ st: CC, fam: F, concept: 'leap-years-2001-2100-count', d: 2, q: 'How many leap years are there from 2001 to 2100, both years included?', ans: n, wrong: [25, 23, 26], exp: `The multiples of 4 from 2004 to 2100 number 25, but 2100 is not a leap year (not divisible by 400), leaving ${n}.` })
+  }
+  {
+    const n = (leap(2023) ? 366 : 365) + (leap(2024) ? 366 : 365)
+    add({ st: CC, fam: F, concept: 'days-in-2023-and-2024', d: 1, q: 'How many days are there in the years 2023 and 2024 taken together?', ans: n, wrong: [730, 732, 729], exp: `2023 has 365 days and 2024, a leap year, has 366: ${n} in all.` })
+  }
+  {
+    let n = 0; for (let y = 2009; y <= 2020; y++) if (leap(y)) n++
+    add({ st: CC, fam: F, concept: 'feb-29-occurrences-2009-2020', d: 2, q: 'A child was born on 29 February 2008. In how many of the years from 2009 to 2020 did the date 29 February occur?', ans: n, wrong: [2, 4, 12], exp: `29 February occurs only in leap years; between 2009 and 2020 these are 2012, 2016 and 2020, so ${n}.` })
+  }
+  add({ st: CC, fam: F, concept: 'ordinary-year-52-weeks-plus-days', d: 1, q: 'An ordinary (non-leap) year consists of 52 weeks and how many extra days?', ans: 365 - 52 * 7, wrong: [2, 0, 3], exp: '52 weeks make 364 days, and an ordinary year has 365 days, so there is 1 extra day.' })
+  {
+    // leap year beginning on Thursday: 2004
+    assert(leap(2004) && dow(2004, 1, 1) === 4, '2004 starts Thursday')
+    const cnt = Array(7).fill(0); for (let t = Date.UTC(2004, 0, 1); t < Date.UTC(2005, 0, 1); t += 864e5) cnt[new Date(t).getUTCDay()]++
+    const five3 = cnt.map((c, i) => (c === 53 ? WEEK[i] : null)).filter(Boolean)
+    assert(five3.join() === 'Thursday,Friday', 'thursday friday')
+    add({ st: CC, fam: F, concept: 'leap-year-starting-thursday-53-days', d: 3, q: 'A leap year begins on a Thursday. Which days of the week occur 53 times in that year?', ans: 'Thursday and Friday', wrong: ['Wednesday and Thursday', 'Friday and Saturday', 'Thursday and Saturday'], exp: 'A leap year has 52 weeks and 2 days; the two extra days are the first two days of the year, Thursday and Friday.' })
+  }
+  {
+    const seen = new Set(); for (let y = 1600; y <= 4000; y += 100) seen.add(WEEK[dow(y, 12, 31)])
+    const never = WEEK.filter((w) => !seen.has(w))
+    assert(never.includes('Tuesday') && ['Friday', 'Sunday', 'Monday'].every((w) => seen.has(w)), 'century end days')
+    add({ st: CC, fam: F, concept: 'last-day-of-century-never-tuesday', d: 3, q: 'The last day of a century (such as 31 December 2000) can never fall on which of these days?', ans: 'Tuesday', wrong: ['Friday', 'Sunday', 'Monday'], exp: `Over the 400-year Gregorian cycle, 31 December of a century year falls only on ${[...seen].join(', ')}; it is never a Tuesday, Thursday or Saturday.` })
+  }
+  {
+    const y = 2024, opts = ['July', 'October', 'March', 'May']
+    const same = opts.filter((m) => dow(y, MONTHS.indexOf(m) + 1, 1) === dow(y, 1, 1))
+    assert(same.length === 1 && same[0] === 'July', 'july same as january in leap year')
+    for (const yy of [2000, 2004, 2008, 2012, 2016, 2020]) assert(dow(yy, 7, 1) === dow(yy, 1, 1), 'leap july general')
+    add({ st: CC, fam: F, concept: 'leap-year-month-starts-same-as-january', d: 3, q: 'In a leap year, which of these months always begins on the same day of the week as January?', ans: 'July', wrong: opts.filter((m) => m !== 'July'), exp: 'From 1 January to 1 July in a leap year there are 31+29+31+30+31+30 = 182 days = exactly 26 weeks, so both months start on the same day.' })
+  }
+  {
+    let y = 2022; while (!(leap(y) === leap(2021) && dow(y, 1, 1) === dow(2021, 1, 1))) y++
+    add({ st: CC, fam: F, concept: 'calendar-2021-reused-2027', d: 2, q: 'The calendar of 2021 can be used again, without change, in which year?', ans: y, wrong: [2026, 2028, 2032], exp: `A calendar repeats when a year starts on the same weekday and has the same length; 2021 began on a Friday and so does ${y}, both ordinary years.` })
+  }
+}
+
+// ga.calendar.date-to-weekday (checked against the real calendar)
+{
+  const F = 'ga.calendar.date-to-weekday'
+  const dow = (y, m, d) => new Date(Date.UTC(y, m - 1, d)).getUTCDay()
+  const DW = (d, concept, given, asked, q, why) => {
+    const [gy, gm, gd] = given, [ay, am, ad] = asked
+    const ansI = dow(ay, am, ad)
+    const wrong = [WEEK[(ansI + 6) % 7], WEEK[(ansI + 1) % 7], WEEK[dow(gy, gm, gd)] === WEEK[ansI] ? WEEK[(ansI + 2) % 7] : WEEK[dow(gy, gm, gd)]]
+    add({ st: CC, fam: F, concept, d, q: q(WEEK[dow(gy, gm, gd)]), ans: WEEK[ansI], wrong: [...new Set(wrong)].length === 3 ? wrong : [WEEK[(ansI + 6) % 7], WEEK[(ansI + 1) % 7], WEEK[(ansI + 2) % 7]], exp: `${why} so the day is ${WEEK[ansI]}.` })
+  }
+  DW(3, 'weekday-14-aug-1948-from-1947', [1947, 8, 14], [1948, 8, 14], (g) => `14 August 1947 was a ${g}. What day of the week was 14 August 1948?`, 'The year between includes 29 February 1948, so it has 366 days = 52 weeks + 2 days;')
+  DW(1, 'weekday-1-jan-2026-from-2025', [2025, 1, 1], [2026, 1, 1], (g) => `1 January 2025 was a ${g}. On what day did 1 January 2026 fall?`, '2025 is an ordinary year of 365 days = 52 weeks + 1 day;')
+  DW(1, 'weekday-1-april-from-1-march', [2021, 3, 1], [2021, 4, 1], (g) => `If 1 March of a year is a ${g}, what day is 1 April of the same year?`, 'March has 31 days = 4 weeks + 3 days;')
+  DW(2, 'weekday-23-march-2025-from-2024', [2024, 3, 23], [2025, 3, 23], (g) => `23 March 2024 was a ${g}. What day of the week was 23 March 2025?`, 'No 29 February lies between these dates, so 365 days = 52 weeks + 1 day pass;')
+  DW(2, 'weekday-1-march-ordinary-year-jan-monday', [2018, 1, 1], [2018, 3, 1], (g) => `In an ordinary (non-leap) year, 1 January is a ${g}. What day is 1 March?`, 'January and February together have 31 + 28 = 59 days = 8 weeks + 3 days;')
+  DW(2, 'weekday-1-march-leap-year-jan-saturday', [2000, 1, 1], [2000, 3, 1], (g) => `In a leap year whose 1 January is a ${g}, what day is 1 March?`, 'January and February have 31 + 29 = 60 days = 8 weeks + 4 days;')
+  DW(2, 'weekday-1-jan-2001-from-2000', [2000, 1, 1], [2001, 1, 1], (g) => `If 1 January 2000 was a ${g}, what day was 1 January 2001?`, '2000 was a leap year (divisible by 400) of 366 days = 52 weeks + 2 days;')
+  DW(3, 'weekday-25-dec-from-14-aug-same-year', [2022, 8, 14], [2022, 12, 25], (g) => `In a certain year 14 August falls on a ${g}. On what day does 25 December fall in the same year?`, 'From 14 August to 25 December is 17 + 30 + 31 + 30 + 25 = 133 days = exactly 19 weeks;')
+  DW(3, 'weekday-14-aug-from-23-march-same-year', [2021, 3, 23], [2021, 8, 14], (g) => `If 23 March falls on a ${g} in some year, what day of the week is 14 August in that year?`, 'From 23 March to 14 August is 8 + 30 + 31 + 30 + 31 + 14 = 144 days = 20 weeks + 4 days;')
+  DW(3, 'weekday-5-june-2023-from-2024', [2024, 6, 5], [2023, 6, 5], (g) => `5 June 2024 was a ${g}. What day of the week was 5 June 2023?`, 'Going back a year crosses 29 February 2024, i.e. 366 days = 52 weeks + 2 days back;')
+  DW(1, 'weekday-15-feb-from-15-jan', [2019, 1, 15], [2019, 2, 15], (g) => `If 15 January is a ${g}, what day of the week is 15 February of that year?`, 'January has 31 days = 4 weeks + 3 days;')
+  {
+    // first Monday on the 3rd → Fridays on 7, 14, 21, 28
+    const fridays = []; for (let dd = 1; dd <= 31; dd++) if ((dd - 3 + 7 * 10 + 1) % 7 === 5) fridays.push(dd)
+    add({ st: CC, fam: F, concept: 'fourth-friday-when-first-monday-3rd', d: 2, q: 'The first Monday of a month falls on the 3rd. On what date is the fourth Friday of that month?', ans: ord(fridays[3]), wrong: [ord(fridays[3] - 7), ord(fridays[3] + 1), ord(fridays[3] + 3)], exp: `If the 3rd is a Monday, the Fridays are the ${fridays.map(ord).slice(0, 4).join(', ')}; the fourth is the ${ord(fridays[3])}.` })
+  }
+  {
+    const sundays = []; for (let dd = 1; dd <= 30; dd++) if (((dd - 10) % 7 + 7) % 7 === 4) sundays.push(dd)
+    add({ st: CC, fam: F, concept: 'sundays-in-30-day-month-10th-wednesday', d: 2, q: 'The 10th of a 30-day month is a Wednesday. How many Sundays does the month have?', ans: sundays.length, wrong: [5, 3, 6], exp: `If the 10th is a Wednesday, the Sundays are the ${sundays.map(ord).join(', ')}, so there are ${sundays.length}.` })
+  }
+  {
+    const cnt = Array(7).fill(0); for (let dd = 0; dd < 31; dd++) cnt[(5 + dd) % 7]++
+    const five = cnt.map((c, i) => (c === 5 ? WEEK[i] : null)).filter(Boolean)
+    const a = `${five[0]}, ${five[1]} and ${five[2]}`
+    assert(five.length === 3, 'three five-times days')
+    add({ st: CC, fam: F, concept: 'five-times-days-31-day-month-starting-friday', d: 2, q: 'A 31-day month begins on a Friday. Which days of the week occur five times in it?', ans: 'Friday, Saturday and Sunday', wrong: ['Thursday, Friday and Saturday', 'Friday, Sunday and Monday', 'Saturday, Sunday and Monday'], exp: `31 days = 4 weeks + 3 days, and the 3 extra days are the first three: ${a}.` })
+    assert(a === 'Sunday, Friday and Saturday' || five.sort().join() === ['Friday', 'Saturday', 'Sunday'].sort().join(), 'fri sat sun')
+  }
 }
 
 // @@CONTINUE@@

@@ -1087,8 +1087,8 @@
     "pattern_family": "urdu.gender.identify",
     "concept": "gender-sanskrit-feminine",
     "difficulty": 2,
-    "source_type": "past-paper-reviewed",
-    "past_paper_year": 2022,
+    "source_type": "authored",
+    "past_paper_year": null,
     "verified": true,
     "q": "مندرجہ ذیل الفاظ میں مؤنث لفظ کون سا ہے؟",
     "o": [
@@ -1114,8 +1114,8 @@
     "pattern_family": "urdu.gender.identify",
     "concept": "gender-aab-o-dana-masculine",
     "difficulty": 2,
-    "source_type": "past-paper-reviewed",
-    "past_paper_year": 2022,
+    "source_type": "authored",
+    "past_paper_year": null,
     "verified": true,
     "q": "درج ذیل الفاظ میں سے کون سا لفظ مذکر ہے؟",
     "o": [

@@ -94,6 +94,9 @@ function poly(coeffs, v = 'x') { // coeffs highest degree first
   return s || '0'
 }
 const deg = (v) => `${num(v)}°`
+const pl = (n, w, wp = `${w}s`) => `${n} ${n === 1 ? w : wp}`
+const art = (n) => (/^8/.test(String(n)) || ['11', '18'].includes(String(n)) ? 'an' : 'a')
+const cf = (c) => (c === 1 ? '' : c === -1 ? '−' : num(c))
 /** Number in brackets when negative, for worked solutions: 5 → 5, −3 → (−3). */
 const pn = (v) => (v < 0 ? `(${num(v)})` : num(v))
 const NAMES = ['Ali', 'Sara', 'Bilal', 'Ayesha', 'Hamza', 'Fatima', 'Usman', 'Zainab', 'Hassan', 'Maryam', 'Ahmed', 'Hina',
@@ -977,10 +980,10 @@ family('ga.equations.ages', 'ga.equations', {
       case 'son': case 'mother': { if (k <= m) return null; const s = (t * (m - 1)) / (k - m); if (!isInt(s) || s < 3 || s > 20) return null; P.sv = s; if (P.s === 'son') return { ans: s, wrong: [k * s, s + t, t], expl: `${k}s + ${t} = ${m}(s + ${t}) gives ${k - m}s = ${t * (m - 1)}, so s = ${s}.` }; return { ans: k * s, wrong: [s, k * s + t, (k - 1) * s], expl: `If the child is c, then ${k}c + ${t} = ${m}(c + ${t}), so c = ${s} and the mother is ${k * s}.` } }
       case 'ago': { const g = s0 + t; const b = k * s0 + t; P.bv = b; return { ans: g, wrong: [s0, Math.round(b / k), g + t].filter((v) => v !== g), expl: `${t} years ago he was ${b - t}, so his sister was ${b - t} ÷ ${k} = ${s0}; she is now ${s0} + ${t} = ${g}.` } }
       case 'sumdiff': { const S = 2 * s0 + 2 * pp; return { ans: s0, wrong: [s0 + 2 * pp, S / 2, S - 2 * pp], expl: `Younger = (${S} − ${2 * pp}) ÷ 2 = ${s0}.` } }
-      case 'older': { const D = (k - 1) * (s0 + t); return { ans: s0, wrong: [s0 + t, D / k, D / (k - 1)].filter((v) => isInt(v)), expl: `d + ${D} + ${t} = ${k}(d + ${t}) gives ${k - 1}d = ${D + t - k * t}, so d = ${s0}.` } }
+      case 'older': { const D = (k - 1) * (s0 + t); return { ans: s0, wrong: [s0 + t, D / k, D / (k - 1), D - t].filter((v) => isInt(v) && v > 0 && v !== s0), expl: `d + ${D} + ${t} = ${k}(d + ${t}) gives ${cf(k - 1)}d = ${D + t - k * t}, so d = ${s0}.` } }
       case 'combined': { if (s0 <= t) return null; const f = k * (s0 - t) + t; const S = f + s0; return { ans: s0, wrong: [f, s0 - t, S / (k + 1)].filter((v) => isInt(v) && v !== s0), expl: `If the son is s, the man is ${S} − s; then ${S} − s − ${t} = ${k}(s − ${t}), so ${k + 1}s = ${S - t + k * t} and s = ${s0}.` } }
       case 'future': { const cur = A - t; return { ans: cur - pp, wrong: [A - pp, cur, cur + pp], expl: `He is ${A} − ${t} = ${cur} now, so ${pp} years ago he was ${cur - pp}.` } }
-      case 'double': { if (k > 3) return null; const x = (t * (k + 1)) / (k - 1); return { ans: x, wrong: [2 * t, t * (k + 1), t * k, x + t].filter((v) => v !== x), expl: `x + ${t} = ${k}(x − ${t}) gives ${k - 1}x = ${t * (k + 1)}, so x = ${x}.` } }
+      case 'double': { if (k > 3) return null; const x = (t * (k + 1)) / (k - 1); return { ans: x, wrong: [2 * t, t * (k + 1), t * k, x + t, t].filter((v) => v !== x), expl: `x + ${t} = ${k}(x − ${t}) gives ${k - 1}x = ${t * (k + 1)}, so x = ${x}.` } }
       case 'when': { const g = s0; const y = t; const G = k * (g + y) - y; if (G > 90) return null; return { ans: y, wrong: [G - k * g, (G - g) / k, y * 2].filter((v) => isInt(v) && v > 0 && v !== y), expl: `${G} + y = ${k}(${g} + y) gives ${k - 1}y = ${G - k * g}, so y = ${y}.`, G } }
       case 'siblings': { const a = pp; const b = t % 5 + 1; const S = 3 * s0 + 2 * a + b; return { ans: s0 + a + b, wrong: [s0, s0 + a, S / 3].filter((v) => isInt(v)), expl: `Youngest y: y + (y + ${a}) + (y + ${a + b}) = ${S}, so 3y = ${3 * s0} and y = ${s0}; the eldest is ${s0 + a + b}.` } }
       case 'fraction': { const q = 3 + (pp % 3); const pr = q - 1 - (t % 2); if (pr < 1 || gcd(pr, q) !== 1) return null; const u = s0 % 7 + 3; return { ans: pr * u, wrong: [q * u, (q - pr) * u, pr * (q - pr) * u, (2 * q - pr) * u].filter((v) => v !== pr * u), expl: `If the brother is b, then b − ${pr}b/${q} = ${(q - pr) * u}, so b = ${q * u} and the younger is ${pr}/${q} × ${q * u} = ${pr * u}.` } }
@@ -1007,7 +1010,7 @@ function ratioAt(A, B, t) { const a = A + t; const b = B + t; if (a <= 0 || b <=
 const rs = (x, y) => `${x} : ${y}`
 
 family('ga.equations.ages-ratio', 'ga.equations', {
-  gen: (r) => { let p = r.int(2, 9); let q = r.int(1, 8); if (p === q) q = p - 1; if (gcd(p, q) !== 1) q = 1; return { p, q, x: r.int(2, 8), t: r.int(2, 12), t2: r.int(2, 10), nm: r.pick(NAMES), nm2: r.pick(NAMES) } },
+  gen: (r) => { let p = r.int(2, 9); let q = r.int(1, 8); if (p === q) q = p - 1; if (gcd(p, q) !== 1) q = 1; return { p, q, x: r.int(2, 8), t: r.int(2, 12), t2: r.int(2, 10), nm: r.pick(NAMES.filter((x, i) => i % 2 === 0)), nm2: r.pick(NAMES) } },
   key: (P) => `${P.s}-${P.p}-${P.q}-${P.x}-${P.t}${P.s === 'pastfuture' ? `-${P.t2}` : ''}`,
   solve: (P) => {
     const { p, q, x, t, t2 } = P
@@ -1083,7 +1086,7 @@ family('ga.equations.two-digit-number', 'ga.equations', {
 
 family('ga.equations.simultaneous-linear', 'ga.equations', {
   positive: false,
-  gen: (r) => ({ x0: r.int(1, 9), y0: r.int(1, 9), a: r.int(2, 5), b: r.int(1, 4), c: r.int(1, 4), k: r.int(2, 4), m: r.pick([2, 3, 4, 6]), n: r.pick([2, 3, 4, 6]), m1: r.int(1, 4), m2: r.int(-3, 0) }),
+  gen: (r) => ({ x0: r.int(1, 9), y0: r.int(1, 9), a: r.int(2, 5), b: r.int(1, 4), c: r.int(1, 4), k: r.int(2, 4), m: r.pick([2, 3, 4, 6]), n: r.pick([2, 3, 4, 6]), m1: r.int(1, 4), m2: r.int(-3, -1) }),
   key: (p) => `${p.s}-${p.x0}-${p.y0}-${p.a}-${p.b}-${p.c}-${p.k}-${p.m}-${p.n}-${p.m1}-${p.m2}`,
   fact: (p) => `${p.s}-${p.x0}-${p.y0}`,
   solve: (P) => {
@@ -1097,7 +1100,7 @@ family('ga.equations.simultaneous-linear', 'ga.equations', {
       case 'twice': return { ans: k * x0, wrong: [x0, (k + 1) * x0, k + x0], expl: `x + ${k}x = ${(k + 1) * x0}, so x = ${x0} and y = ${k * x0}.` }
       case 'pq': { const R1 = a * x0 + b * y0; const R2 = a * x0 - b * y0; if (R2 <= 0) return null; return { ans: x0, wrong: [y0, (R1 + R2) / 2, x0 + y0].filter((v) => v !== x0), expl: `Adding: ${2 * a}p = ${R1 + R2}, so p = ${x0}.` } }
       case 'fr': { if (m === n) return null; const v = (x0 * m * n) / (m + n); const kk = x0; const xx = (kk * m * n) / (m + n); if (!isInt(xx)) return null; return { ans: xx, wrong: [kk * m * n, kk * (m + n), 2 * xx].filter((w) => w !== xx), expl: `With x = y: x/${m} + x/${n} = ${m + n}x/${m * n} = ${kk}, so x = ${kk * m * n}/${m + n} = ${xx}.`, v } }
-      case 'lines': { if (m1 === m2) return null; const c1 = y0 - m1 * x0; const c2 = y0 - m2 * x0; if (c1 === 0 || c2 === 0) return null; P.c1 = c1; P.c2 = c2; return { ans: x0 + y0, wrong: [x0, y0, x0 * y0].filter((v) => v !== x0 + y0), expl: `${m1}x ${sg(c1)} = ${m2}x ${sg(c2)} gives x = ${x0}; then y = ${y0}, so a + b = ${x0 + y0}.`.replace(/ 0x/g, '') } }
+      case 'lines': { if (m1 === m2) return null; const c1 = y0 - m1 * x0; const c2 = y0 - m2 * x0; if (c1 === 0 || c2 === 0) return null; P.c1 = c1; P.c2 = c2; return { ans: x0 + y0, wrong: [x0, y0, x0 * y0].filter((v) => v !== x0 + y0), expl: `Setting ${poly([m1, c1])} = ${poly([m2, c2])} gives x = ${x0}; then y = ${y0}, so a + b = ${x0 + y0}.` } }
       case 'add': { const R1 = x0 + k * y0; const R2 = k * x0 + y0; return { ans: x0 + y0, wrong: [R1 + R2, (R1 + R2) / 2, Math.abs(x0 - y0)].filter((v) => isInt(v) && v !== x0 + y0), expl: `Adding the equations: ${k + 1}(x + y) = ${R1 + R2}, so x + y = ${x0 + y0}.` } }
       case 'subtract': { const A = a + 2; if (x0 <= y0 || A === b) return null; const R1 = A * x0 + b * y0; const R2 = b * x0 + A * y0; return { ans: x0 - y0, wrong: [x0 + y0, R1 - R2, x0].filter((v) => v !== x0 - y0), expl: `Subtracting: ${A - b}(x − y) = ${R1 - R2}, so x − y = ${x0 - y0}.` } }
       default: {
@@ -1155,14 +1158,14 @@ family('ga.equations.two-item-prices', 'ga.equations', {
     }
   },
   items: [
-    [2, (p) => `${p.a} pens and ${p.b} pencils cost Rs ${p.a * p.pA + p.b * p.pB}, while ${p.b} pens and ${p.a} pencils cost Rs ${p.b * p.pA + p.a * p.pB}. What is the cost of one pen?`, { s: 'pens' }],
+    [2, (p) => `${pl(p.a, 'pen')} and ${pl(p.b, 'pencil')} cost Rs ${p.a * p.pA + p.b * p.pB}, while ${pl(p.b, 'pen')} and ${pl(p.a, 'pencil')} cost Rs ${p.b * p.pA + p.a * p.pB}. What is the cost of one pen?`, { s: 'pens' }],
     [2, (p) => `${p.a} kg of apples and ${p.b} kg of bananas cost Rs ${num(p.T1)}; ${p.c} kg of apples and ${p.d} kg of bananas cost Rs ${num(p.T2)}. What is the price of 1 kg of bananas?`, { s: 'fruit' }],
     [2, (p) => `${p.a} chairs and ${p.b} table${p.b > 1 ? 's' : ''} cost Rs ${num(p.T)}. One table costs as much as ${p.k} chairs. What is the cost of one table?`, { s: 'chairs' }],
     [3, (p) => `A fraction becomes ${p.f1} when 1 is added to its numerator, and becomes ${p.f2} when 1 is subtracted from its denominator. What is the fraction?`, { s: 'fraction' }],
     [1, (p) => `The sum of two numbers is ${p.pA + p.pB} and their difference is ${p.pA - p.pB}. What is the smaller number?`, { s: 'sumdiff' }],
     [2, (p) => `${p.a} burgers and ${p.b} drink${p.b > 1 ? 's' : ''} cost Rs ${num(p.T)}, and one burger costs Rs ${p.k2} more than one drink. What does one drink cost?`, { s: 'burger' }],
-    [2, (p) => `A taxi charges a fixed amount plus a set rate per kilometre. A ${p.d1} km ride costs Rs ${p.C1} and a ${p.d2} km ride costs Rs ${p.C2}. What is the fixed charge?`, { s: 'taxi' }],
-    [3, (p) => `${p.a} samosas and ${p.b} pakoras cost Rs ${p.T1}, while ${p.c} samosas and ${p.d} pakoras cost Rs ${p.T2}. What is the total cost of one samosa and one pakora?`, { s: 'samosa' }],
+    [2, (p) => `A taxi charges a fixed amount plus a set rate per kilometre. ${art(p.d1).replace(/^a/, 'A')} ${p.d1} km ride costs Rs ${p.C1} and ${art(p.d2)} ${p.d2} km ride costs Rs ${p.C2}. What is the fixed charge?`, { s: 'taxi' }],
+    [3, (p) => `${pl(p.a, 'samosa')} and ${pl(p.b, 'pakora')} cost Rs ${p.T1}, while ${pl(p.c, 'samosa')} and ${pl(p.d, 'pakora')} cost Rs ${p.T2}. What is the total cost of one samosa and one pakora?`, { s: 'samosa' }],
   ],
 })
 
@@ -1177,14 +1180,14 @@ family('ga.equations.inequalities', 'ga.equations', {
     switch (P.s) {
       case 'set': { const S = countInts(-50, 50, (n) => lo < k * n && k * n <= hi); if (S.length < 3 || S.length > 5) return null; const show = (arr) => arr.map(num).join(', '); const mn = S[0]; const mx = S[S.length - 1]; const cands = [[mn - 1, ...S], S.slice(0, -1), S.slice(1), [...S, mx + 1]].filter((X) => show(X) !== show(S)); return { ans: show(S), wrong: cands.map(show), expl: `Divide by ${k}: ${fr(lo, k)} < n ≤ ${fr(hi, k)}, so n can be ${show(S)}.` } }
       case 'smallest': { const n = Math.floor((b + c) / a) + 1; return { ans: n, wrong: [n - 1, n + 1, b + c].filter((v) => v !== n), expl: `${a}x > ${b + c}, so x > ${fr(b + c, a)}; the smallest integer is ${n}.` } }
-      case 'count': { const S = countInts(-60, 60, (x) => lo <= 2 * x + d && 2 * x + d < hi); if (S.length < 3) return null; const n = S.length; return { ans: n, wrong: near3(n), expl: `Subtract ${d} and halve: ${fr(lo - d, 2)} ≤ x < ${fr(hi - d, 2)}, so x runs from ${S[0]} to ${S[n - 1]}: ${n} integers.` } }
+      case 'count': { const S = countInts(-60, 60, (x) => lo <= 2 * x + d && 2 * x + d < hi); if (S.length < 3) return null; const n = S.length; return { ans: n, wrong: near3(n), expl: `Subtract ${d} and halve: ${fr(lo - d, 2)} ≤ x < ${fr(hi - d, 2)}, so x runs from ${num(S[0])} to ${num(S[n - 1])}: ${n} integers.` } }
       case 'largest': { const S = countInts(-60, 60, (n) => c - a * n > -d); const n = S[S.length - 1]; return { ans: n, wrong: [n + 1, n + 2, n - 1], expl: `${c} + ${d} > ${a}n, so n < ${fr(c + d, a)}; the largest integer is ${n}.` } }
       case 'posvals': { const S = countInts(1, 60, (x) => a * x + b < c + 10); if (S.length < 2) return null; const n = S.length; return { ans: n, wrong: [n + 1, n - 1, c + 10 - b].filter((v) => v > 0 && v !== n), expl: `${a}x < ${c + 10 - b}, so x < ${fr(c + 10 - b, a)}; x can be 1 to ${n}: ${n} values.` } }
       case 'triple': { const S = countInts(0, 60, (x) => 3 * x - b < c); const n = S[S.length - 1]; return { ans: n, wrong: [n + 1, n - 1, c + b].filter((v) => v !== n), expl: `3x − ${b} < ${c} gives 3x < ${c + b}, x < ${fr(c + b, 3)}; the greatest whole number is ${n}.` } }
       case 'taxi': { const F = 10 * (b + 5); const rate = 5 * (a + 2); const M = F + rate * (c % 12 + 4) + 5 * (d % 4); const n = Math.floor((M - F) / rate); P.F = F; P.rate = rate; P.M = M; return { ans: n, wrong: [n + 1, Math.floor(M / rate), n - 1].filter((v) => v !== n), expl: `${F} + ${rate}k ≤ ${M} gives k ≤ ${fr(M - F, rate)}, so at most ${n} km.` } }
       case 'notes': { const v = [100, 500, 1000][d % 3]; const B = v * (a + 1) + 10 * (e + 3); const n = Math.ceil(B / v); P.v = v; P.B = B; return { ans: n, wrong: [n - 1, n + 1, n - 2].filter((x) => x > 0), expl: `${B} ÷ ${v} = ${num(B / v)}, so ${n - 1} notes are not enough and ${n} are needed.` } }
       case 'both': { const S = countInts(-60, 60, (x) => a * x - b > d && x + d <= e); if (S.length < 2) return null; const n = S.length; return { ans: n, wrong: near3(n), expl: `x > ${fr(b + d, a)} and x ≤ ${e - d}; the integers ${S[0]} to ${S[n - 1]} give ${n} values.` } }
-      case 'sumvals': { const S = countInts(lo + 1, hi - 1, () => true); const s = sum(S); return { ans: s, wrong: [s + hi, s + lo, S.length].filter((v) => v !== s), expl: `x can be ${S[0]}, …, ${S[S.length - 1]}; the sum is ${num(s)}.` } }
+      case 'sumvals': { const S = countInts(lo + 1, hi - 1, () => true); const s = sum(S); return { ans: s, wrong: [s + hi, s + lo, S.length].filter((v) => v !== s), expl: `x can be ${num(S[0])}, …, ${num(S[S.length - 1])}; the sum is ${num(s)}.` } }
       case 'avg': { const A = 50 + 5 * (k + a); const s1 = A - 10 + b; const s2 = A - 4 - d; const s3 = A - 2 - (e % 7); const need = 4 * A - s1 - s2 - s3; if (need > 100 || need <= A) return null; P.A = A; P.sc = [s1, s2, s3]; return { ans: need, wrong: [A, 3 * A - s1 - s2 - s3, need - 1, need + 1].filter((v) => v > 0 && v !== need), expl: `She needs a total of 4 × ${A} = ${4 * A}; she has ${s1 + s2 + s3}, so she needs ${need}.` } }
       default: { const A = a; const C = A + k; const S = countInts(-60, 200, (n) => A * n + b < C * n - d && A * n + b <= e + 20); if (S.length < 2 || S.length > 15) return null; const n = S.length; P.C = C; return { ans: n, wrong: near3(n), expl: `${A}n + ${b} < ${C}n − ${d} gives n > ${fr(b + d, C - A)}; ${A}n + ${b} ≤ ${e + 20} gives n ≤ ${fr(e + 20 - b, A)}; so n = ${S[0]}, …, ${S[n - 1]}: ${n} integers.` } }
     }
@@ -1205,7 +1208,7 @@ family('ga.equations.inequalities', 'ga.equations', {
   ],
 })
 family('ga.equations.two-type-count-value', 'ga.equations', {
-  gen: (r) => ({ N: r.int(12, 60), f: r.f(), nm: r.pick(NAMES), a: r.int(3, 4), b: r.int(1, 2), k: r.int(4, 25), p: r.int(1, 5), q: r.int(1, 4) }),
+  gen: (r) => ({ N: r.int(12, 60), f: 0.2 + 0.6 * r.f(), nm: r.pick(NAMES), a: r.int(3, 4), b: r.int(1, 2), k: r.int(4, 25), p: r.int(1, 5), q: r.int(1, 4) }),
   key: (p) => `${p.s}-${p.N}-${p.n2}${p.s === 'test' ? `-${p.a}-${p.b}` : ''}${p.s === 'ratio' ? `-${p.p}-${p.q}-${p.k}` : ''}${p.s === 'equal' ? `-${p.k}` : ''}`,
   solve: (P) => {
     const { N, f, a, b, k, p, q } = P
@@ -1251,7 +1254,7 @@ family('ga.equations.rectangle-dimensions', 'ga.equations', {
       case 'area': { P.u = 'cm²'; const l = b + d; const Pm = 2 * (l + b); P.Pm = Pm; return { ans: l * b, wrong: [l * l, b * b, (Pm / 4) ** 2].filter((v) => isInt(v) && v !== l * b), expl: `l + b = ${Pm / 2} and l − b = ${d}, so l = ${l} and b = ${b}; area = ${l} × ${b} = ${l * b} cm².` } }
       case 'quad': P.u = 'cm'; return { ans: b, wrong: [b + d, b + 1, b - 1], expl: `w(w + ${d}) = ${b * (b + d)}; w = ${b} works (${b} × ${b + d} = ${b * (b + d)}), so the width is ${b} cm.` }
       case 'twice': { P.u = 'm'; const Pm = 2 * (k + 1) * b; return { ans: k * b, wrong: [b, Pm / 4, 2 * k * b].filter((v) => isInt(v) && v !== k * b), expl: `2(${k}b + b) = ${Pm}, so b = ${b} m and the length is ${k * b} m.` } }
-      case 'breadth': { P.u = 'cm'; const Pm = 2 * (k + 1) * b; return { ans: b, wrong: [k * b, Pm / (k + 1), Pm / 4].filter((v) => isInt(v) && v !== b), expl: `2(${k}b + b) = ${2 * (k + 1)}b = ${Pm}, so b = ${b} cm.` } }
+      case 'breadth': { P.u = 'cm'; const Pm = 2 * (k + 1) * b; return { ans: b, wrong: [k * b, Pm / (k + 1), Pm / 4, Pm / k, 2 * b].filter((v) => isInt(v) && v !== b), expl: `2(${k}b + b) = ${2 * (k + 1)}b = ${Pm}, so b = ${b} cm.` } }
       case 'diag': { P.u = 'cm²'; const [x, y, z] = tri; return { ans: x * y, wrong: [2 * x * y, x * y + z, ((x + y) ** 2) / 4].filter((v) => isInt(v)), expl: `l + b = ${x + y} and l² + b² = ${z * z}; since (l + b)² = l² + b² + 2lb, 2lb = ${(x + y) ** 2} − ${z * z} = ${2 * x * y}, so the area is ${x * y} cm².` } }
       case 'squares': { P.u = 'cm'; const Pm = 8 * b + 4 * d; return { ans: b, wrong: [b + d, Pm / 8, (Pm - d) / 8].filter((v) => isInt(v) && v !== b), expl: `4s + 4(s + ${d}) = ${Pm} gives 8s = ${Pm - 4 * d}, so s = ${b} cm.` } }
       case 'wire': { P.u = 'cm'; const l = b + d; const Pm = 2 * (l + b); return { ans: l, wrong: [b, (Pm / 2 + d), Pm / 4].filter((v) => isInt(v) && v !== l), expl: `l + b = ${Pm / 2} and l − b = ${d}, so l = (${Pm / 2} + ${d}) ÷ 2 = ${l} cm.` } }
@@ -1282,9 +1285,9 @@ family('ga.equations.quadratic-roots', 'ga.equations', {
       case 'pos': { const rr = makeRng(`qr-${a}-${b}`); const w = pairCands(-a, -b, rr).map(([u, v]) => pr(-u, -v)).filter((t) => !t.includes('−')); return { ans: pr(a, b), wrong: w, expl: `x² − ${a + b}x + ${a * b} = (x − ${a})(x − ${b}) = 0, so x = ${Math.min(a, b)} or x = ${Math.max(a, b)}.` } }
       case 'mixed': { const rr = makeRng(`qm-${a}-${b}`); const w = pairCands(-a, b, rr).map(([u, v]) => pr(-u, -v)); return { ans: pr(a, -b), wrong: w, expl: `${poly([1, b - a, -a * b])} = (x − ${a})(x + ${b}) = 0, so x = ${a} or x = −${b}.` } }
       case 'posroot': return { ans: a, wrong: [b, a + b, a * b], expl: `${poly([1, b - a, -a * b])} = (x − ${a})(x + ${b}), so the roots are ${a} and −${b}; the positive root is ${a}.` }
-      case 'sum': { if (B * B - 4 * A * C < 0) return null; return { ans: fr(B, A), wrong: [fr(C, A), `${B}`, fr(A, B)].filter((t) => t !== fr(B, A)), expl: `For ax² + bx + c = 0 the sum of the roots is −b/a = ${B}/${A} = ${fr(B, A)}.` } }
-      case 'prod': return { ans: fr(-C, A), wrong: [fr(-B, A), `−${C}`, fr(-A, C)].filter((t) => canonical(t) !== canonical(fr(-C, A))), expl: `For ax² + bx + c = 0 the product of the roots is c/a = −${C}/${A} = ${fr(-C, A)}.` }
-      case 'shift': { if (a >= k) return null; return { ans: a + k, wrong: [k - a, k, a + k * k], expl: `x − ${a} = ±${k}, so x = ${a + k} or x = ${a - k}; the positive value is ${a + k}.` } }
+      case 'sum': { if (B * B - 4 * A * C <= 0) return null; return { ans: fr(B, A), wrong: [fr(C, A), `${B}`, fr(A, B)].filter((t) => t !== fr(B, A)), expl: `For ax² + bx + c = 0 the sum of the roots is −b/a = ${B}/${A} = ${fr(B, A)}.` } }
+      case 'prod': return { ans: fr(-C, A), wrong: [fr(-B, A), `−${C}`, fr(-A, C)].filter((t) => canonical(t) !== canonical(fr(-C, A))), expl: `For ax² + bx + c = 0 the product of the roots is c/a = −${C}/${A}${fr(-C, A) === `−${C}/${A}` ? '' : ` = ${fr(-C, A)}`}.` }
+      case 'shift': { if (a >= k) return null; return { ans: a + k, wrong: [k - a, k, a + k * k], expl: `x − ${a} = ±${k}, so x = ${a + k} or x = ${num(a - k)}; the positive value is ${a + k}.` } }
       case 'equal': return { ans: a * a, wrong: [2 * a, 4 * a * a, a], expl: `Equal roots need b² = 4ac: ${4 * a * a} = 4k, so k = ${a * a}.` }
       case 'other': return { ans: b, wrong: [a + b, a * b, 2 * a + b].filter((v) => v !== b), expl: `The roots add up to ${a + b}, so the other root is ${a + b} − ${a} = ${b}.` }
       case 'p': return { ans: a + b, wrong: [a * b, Math.abs(a - b), 2 * (a + b)].filter((v) => v !== a + b), expl: `For x² − px + q = 0 the roots add up to p, so p = ${a} + ${b} = ${a + b}.` }
@@ -1302,6 +1305,202 @@ family('ga.equations.quadratic-roots', 'ga.equations', {
     [2, (p) => `One root of x² − ${p.a + p.b}x + ${p.a * p.b} = 0 is ${p.a}. What is the other root?`, { s: 'other' }],
     [2, (p) => `If the roots of x² − px + ${p.a * p.b} = 0 are ${p.a} and ${p.b}, what is p?`, { s: 'p' }],
     [2, (p) => `What is the difference between the roots of x² − ${p.a + p.b}x + ${p.a * p.b} = 0?`, { s: 'gap' }],
+  ],
+})
+
+// ===========================================================================
+// ga.sets — 60
+// ===========================================================================
+function venn(r, { U0 = [40, 300], neither = true } = {}) {
+  for (;;) {
+    const U = r.int(U0[0] / 10, U0[1] / 10) * 10
+    const A = r.int(Math.round(U * 0.25), Math.round(U * 0.7))
+    const B = r.int(Math.round(U * 0.2), Math.round(U * 0.65))
+    const AB = r.int(Math.max(1, Math.round(Math.min(A, B) * 0.1)), Math.round(Math.min(A, B) * 0.7))
+    const N = U - (A + B - AB)
+    if (AB >= Math.min(A, B) || N < 0) continue
+    if (neither && N < 2) continue
+    if (!neither) return { U: A + B - AB, A, B, AB, N: 0 }
+    return { U, A, B, AB, N }
+  }
+}
+family('ga.sets.two-set-neither', 'ga.sets', {
+  gen: (r) => venn(r),
+  key: (p) => `${p.U}-${p.A}-${p.B}-${p.AB}`,
+  solve: ({ U, A, B, AB, N }) => ({ ans: N, wrong: [A + B - AB, U - A - B + 2 * AB, AB, U - A - B], expl: `At least one: ${A} + ${B} − ${AB} = ${A + B - AB}; neither: ${U} − ${A + B - AB} = ${N}.` }),
+  items: [
+    [2, (p) => `In a group of ${p.U} people, ${p.A} like tennis, ${p.B} like cricket and ${p.AB} like both. How many like neither?`],
+    [2, (p) => `Of the ${p.U} students in a class, ${p.A} study French, ${p.B} study Arabic and ${p.AB} study both languages. How many study neither language?`],
+    [2, (p) => `A survey of ${p.U} households found that ${p.A} own a car, ${p.B} own a motorcycle and ${p.AB} own both. How many households own neither?`],
+    [2, (p) => `In an office of ${p.U} employees, ${p.A} drink tea, ${p.B} drink coffee and ${p.AB} drink both. How many employees drink neither tea nor coffee?`],
+    [2, (p) => `${p.U} candidates appeared in an examination. ${p.A} passed in English, ${p.B} passed in Mathematics and ${p.AB} passed in both. How many failed in both subjects?`],
+    [2, (p) => `At a wedding with ${p.U} guests, ${p.A} ate biryani, ${p.B} ate korma and ${p.AB} ate both dishes. How many guests ate neither dish?`],
+    [2, (p) => `A library has ${p.U} members. ${p.A} borrow novels, ${p.B} borrow magazines and ${p.AB} borrow both. How many members borrow neither?`],
+    [2, (p) => `Out of ${p.U} villagers, ${p.A} keep goats, ${p.B} keep cows and ${p.AB} keep both. How many villagers keep neither goats nor cows?`],
+    [2, (p) => `In a batch of ${p.U} trainees, ${p.A} can drive, ${p.B} can swim and ${p.AB} can do both. How many trainees can do neither?`],
+    [2, (p) => `Among ${p.U} shoppers at a market, ${p.A} bought fruit, ${p.B} bought vegetables and ${p.AB} bought both. How many shoppers bought neither?`],
+  ],
+})
+
+family('ga.sets.two-set-both', 'ga.sets', {
+  gen: (r, x) => venn(r, { neither: !x.all }),
+  key: (p) => `${p.U}-${p.A}-${p.B}-${p.N}`,
+  solve: ({ U, A, B, AB, N }) => ({ ans: AB, wrong: [A + B - U, U - N - A, U - N - B, A + B - U + 2 * N, N].filter((v) => v > 0), expl: `n(A ∪ B) = ${U} − ${N} = ${U - N}; both = ${A} + ${B} − ${U - N} = ${AB}.` }),
+  items: [
+    [2, (p) => `In a class of ${p.U} students, ${p.A} play hockey and ${p.B} play football. Every student plays at least one of the two games. How many play both?`, { all: true }],
+    [2, (p) => `Of ${p.U} people surveyed, ${p.A} read an Urdu newspaper, ${p.B} read an English newspaper and ${p.N} read neither. How many read both?`],
+    [2, (p) => `${p.U} tourists visited a city: ${p.A} went to the fort, ${p.B} went to the museum and ${p.N} went to neither. How many visited both places?`],
+    [2, (p) => `Each of the ${p.U} members of a club plays chess or carrom or both. If ${p.A} play chess and ${p.B} play carrom, how many play both games?`, { all: true }],
+    [2, (p) => `In a hostel of ${p.U} students, ${p.A} take milk, ${p.B} take tea and ${p.N} take neither. How many take both milk and tea?`],
+    [2, (p) => `A company has ${p.U} staff. ${p.A} speak Punjabi, ${p.B} speak Pashto and ${p.N} speak neither language. How many speak both?`],
+    [1, (p) => `If n(A) = ${p.A}, n(B) = ${p.B} and n(A ∪ B) = ${p.U}, what is n(A ∩ B)?`, { all: true }],
+    [2, (p) => `On a school sports day ${p.U} students took part, and each entered at least one race. ${p.A} ran the 100 m and ${p.B} ran the relay. How many ran in both races?`, { all: true }],
+    [2, (p) => `A sample of ${p.U} phones was tested: ${p.A} had a screen fault, ${p.B} had a battery fault and ${p.N} had no fault. How many had both faults?`],
+    [2, (p) => `Out of ${p.U} farmers, ${p.A} grow wheat, ${p.B} grow rice and ${p.N} grow neither crop. How many grow both?`],
+  ],
+})
+
+family('ga.sets.two-set-only-one', 'ga.sets', {
+  gen: (r) => venn(r),
+  key: (p) => `${p.m}-${p.U}-${p.A}-${p.B}-${p.AB}`,
+  solve: (P) => {
+    const { A, B, AB, N, U } = P
+    switch (P.m) {
+      case 'onlyA': return { ans: A - AB, wrong: [A, AB, B - AB, A + B - AB], expl: `Only the first: ${A} − ${AB} = ${A - AB}.` }
+      case 'onlyB': return { ans: B - AB, wrong: [B, AB, A - AB, A + B - AB], expl: `Only the second: ${B} − ${AB} = ${B - AB}.` }
+      case 'exact': return { ans: A + B - 2 * AB, wrong: [A + B - AB, A + B, A - AB, AB], expl: `Exactly one: (${A} − ${AB}) + (${B} − ${AB}) = ${A + B - 2 * AB}.` }
+      case 'union': return { ans: A + B - AB, wrong: [A + B, A + B - 2 * AB, A + B + AB], expl: `At least one: ${A} + ${B} − ${AB} = ${A + B - AB}.` }
+      case 'fromOnly': return { ans: A, wrong: [A - AB, A - 2 * AB, A + B - AB, B], expl: `Everyone who speaks English: only English + both = ${A - AB} + ${AB} = ${A}.` }
+      case 'gymB': return { ans: B - AB, wrong: [B, AB, U - N - A, B - N].filter((v) => v !== B - AB), expl: `Both = ${A} + ${B} − (${U} − ${N}) = ${AB}; only the weights = ${B} − ${AB} = ${B - AB}.` }
+      default: return { ans: A + B - 2 * AB, wrong: [U - N, A + B - AB, AB, A + B - U], expl: `Both = ${A} + ${B} − (${U} − ${N}) = ${AB}; exactly one = ${U - N} − ${AB} = ${A + B - 2 * AB}.` }
+    }
+  },
+  items: [
+    [1, (p) => `In a group of ${p.U} people, ${p.A} like tea and ${p.B} like coffee, while ${p.AB} like both. How many like only tea?`, { m: 'onlyA' }],
+    [2, (p) => `${p.A} students take Physics and ${p.B} take Chemistry; ${p.AB} of them take both. How many take exactly one of the two subjects?`, { m: 'exact' }],
+    [1, (p) => `In a town, ${p.A} families own a television, ${p.B} own a computer and ${p.AB} own both. How many families own a computer but not a television?`, { m: 'onlyB' }],
+    [1, (p) => `n(A) = ${p.A}, n(B) = ${p.B} and n(A ∩ B) = ${p.AB}. What is n(A − B)?`, { m: 'onlyA' }],
+    [3, (p) => `Of the ${p.U} members of a gym, ${p.A} use the treadmill and ${p.B} use the weights, with ${p.N} using neither. How many use only the weights?`, { m: 'gymB' }],
+    [1, (p) => `A college has ${p.A} students in the debating society and ${p.B} in the drama club; ${p.AB} are in both. How many students belong to at least one of the two?`, { m: 'union' }],
+    [2, (p) => `In a survey, ${p.A} people liked mangoes, ${p.B} liked oranges and ${p.AB} liked both. How many liked just one of the two fruits?`, { m: 'exact' }],
+    [1, (p) => `On a bus of ${p.U} passengers, ${p.A} carried a bag, ${p.B} carried an umbrella and ${p.AB} carried both. How many carried an umbrella only?`, { m: 'onlyB' }],
+    [1, (p) => `In a group, ${p.A - p.AB} people speak only English, ${p.B - p.AB} speak only Urdu and ${p.AB} speak both. How many speak English?`, { m: 'fromOnly' }],
+    [3, (p) => `Among ${p.U} students, ${p.A} have a laptop and ${p.B} have a tablet, while ${p.N} have neither. How many have exactly one of the two devices?`, { m: 'exactN' }],
+  ],
+})
+
+const LET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+family('ga.sets.subsets-count', 'ga.sets', {
+  gen: (r) => ({ n: r.int(2, 7), k: r.int(2, 5) }),
+  key: (p) => `${p.m}-${p.n}${p.m === 'times' ? `-${p.k}` : ''}`,
+  fact: (p) => (['all', 'power'].includes(p.m) ? `all-${p.n}` : ['proper', 'nonempty'].includes(p.m) ? `m1-${p.n}` : `${p.m}-${p.n}-${p.k}`),
+  solve: (P) => {
+    const { n, k } = P
+    const T = 2 ** n
+    switch (P.m) {
+      case 'all': case 'power': return { ans: T, wrong: [2 * n, n * n, T - 1], expl: `A set with n elements has 2ⁿ subsets: 2${sup(n)} = ${T}.` }
+      case 'proper': case 'nonempty': return { ans: T - 1, wrong: [T, T - 2, 2 * n], expl: P.m === 'proper' ? `There are 2${sup(n)} = ${T} subsets; leaving out the set itself gives ${T - 1} proper subsets.` : `There are 2${sup(n)} = ${T} subsets; leaving out the empty set gives ${T - 1}.` }
+      case 'rev': return { ans: n, wrong: [T / 2, n + 1, n - 1, 2 * n].filter((v) => v !== n), expl: `2ⁿ = ${T} gives n = ${n}.` }
+      case 'contain': return { ans: T / 2, wrong: [T, n, T - 1], expl: `Fix the element in; each of the other ${n - 1} elements is in or out: 2${sup(n - 1)} = ${T / 2}.` }
+      case 'pairs': return { ans: (n * (n - 1)) / 2, wrong: [n * n, n * (n - 1), T].filter((v) => v !== (n * (n - 1)) / 2), expl: `Two-element subsets: n(n − 1)/2 = ${n} × ${n - 1} ÷ 2 = ${(n * (n - 1)) / 2}.` }
+      default: return { ans: 2 ** k, wrong: [k, 2 * k, k * k].filter((v) => v !== 2 ** k), expl: `Each extra element doubles the number of subsets, so ${k} more elements multiply it by 2${sup(k)} = ${2 ** k}.` }
+    }
+  },
+  items: [
+    [1, (p) => `How many subsets does a set with ${p.n} elements have?`, { m: 'all' }],
+    [1, (p) => `The number of proper subsets of {${LET.slice(0, p.n).join(', ')}} is:`, { m: 'proper' }],
+    [2, (p) => `A set has ${2 ** p.n} subsets. How many elements does it have?`, { m: 'rev' }],
+    [2, (p) => `How many subsets of {${Array.from({ length: p.n }, (_, i) => i + 1).join(', ')}} contain the element 1?`, { m: 'contain' }],
+    [1, (p) => `How many members does the power set of a ${p.n}-element set have?`, { m: 'power' }],
+    [2, (p) => `How many non-empty subsets does {${LET.slice(0, p.n).map((c) => c.toUpperCase()).join(', ')}} have?`, { m: 'nonempty' }],
+    [2, (p) => `How many two-element subsets can be formed from a set of ${p.n + 1} elements?`.replace(`${p.n + 1}`, `${p.n + 1}`), { m: 'pairs' }],
+    [2, (p) => `Set P has ${p.k} more elements than set Q. The number of subsets of P is how many times the number of subsets of Q?`, { m: 'times' }],
+  ],
+})
+
+const setStr = (arr) => `{${[...arr].sort((a, b) => a - b).join(', ')}}`
+const WORDS = ['PAKISTAN', 'ISLAMABAD', 'KARACHI', 'BALOCHISTAN', 'PESHAWAR', 'QUETTA', 'MULTAN', 'SIALKOT', 'HYDERABAD', 'LAHORE']
+family('ga.sets.set-operations', 'ga.sets', {
+  gen: (r) => {
+    const pool = Array.from({ length: 12 }, (_, i) => i + 1)
+    const A = r.sample(pool, r.int(4, 6)).sort((a, b) => a - b)
+    const shared = r.sample(A, r.int(1, 3))
+    const B = [...new Set([...shared, ...r.sample(pool.filter((v) => !A.includes(v)), r.int(2, 3))])].sort((a, b) => a - b)
+    return { A, B, N: r.int(12, 30), k1: r.pick([2, 3, 4, 5]), k2: r.pick([3, 4, 6]), a: r.int(3, 15), b: r.int(4, 20), w: r.pick(WORDS) }
+  },
+  key: (p) => `${p.m}-${['primeodd', 'multiples'].includes(p.m) ? `${p.N}-${p.k1}-${p.k2}` : ['disjoint', 'subsetU'].includes(p.m) ? `${p.a}-${p.b}` : p.m === 'word' ? p.w : `${p.A.join('.')}-${p.B.join('.')}`}`,
+  solve: (P) => {
+    const { A, B, N, k1, k2, a, b, w } = P
+    const I = A.filter((v) => B.includes(v)); const Un = [...new Set([...A, ...B])]; const AmB = A.filter((v) => !B.includes(v)); const BmA = B.filter((v) => !A.includes(v))
+    const sets = (ans, ...cands) => { if (!ans.length || cands.some((c) => !c.length)) return null; return { ans: setStr(ans), wrong: cands.map(setStr).filter((t) => t !== setStr(ans)) } }
+    switch (P.m) {
+      case 'inter': { const o = sets(I, Un, AmB, BmA); return o && { ...o, expl: `A ∩ B contains the elements common to both: ${setStr(I)}.` } }
+      case 'union': { const o = sets(Un, I, [...A, ...BmA.slice(1)], [...B, ...AmB.slice(1)]); return o && { ...o, expl: `A ∪ B contains every element of A or B: ${setStr(Un)}.` } }
+      case 'diff': { const o = sets(AmB, BmA, I, A); return o && { ...o, expl: `P − Q keeps the elements of P that are not in Q: ${setStr(AmB)}.` } }
+      case 'count': return { ans: Un.length, wrong: [A.length + B.length, I.length, A.length + B.length - 2 * I.length].filter((v) => v !== Un.length), expl: `A ∪ B = ${setStr(Un)}, which has ${Un.length} elements (${A.length} + ${B.length} − ${I.length}).` }
+      case 'comp': { const U10 = Array.from({ length: 10 }, (_, i) => i + 1); const A10 = A.filter((v) => v <= 10); if (A10.length < 3) return null; const C = U10.filter((v) => !A10.includes(v)); P.A10 = A10; const o = sets(C, A10, C.slice(1), [...C, 11].filter((v) => v <= 10 || true).slice(0, C.length).concat(C.length < 10 ? [] : [])); if (!o) return null; const alt = [...C.slice(0, -1), A10[0]]; o.wrong = [setStr(A10), setStr(C.slice(1)), setStr(alt)].filter((t) => t !== setStr(C)); return { ...o, expl: `A′ contains the elements of U not in A: ${setStr(C)}.` } }
+      case 'primeodd': { const pr = primesBelow(N); const od = []; for (let v = 1; v < N; v += 2) od.push(v); const In = pr.filter((v) => od.includes(v)); const o = sets(In, pr, od.filter((v) => !pr.includes(v)), [2, ...In]); return o && { ...o, expl: `The odd primes below ${N} are ${setStr(In)} (2 is prime but even).` } }
+      case 'multiples': { if (k1 === k2) return null; const L = lcm(k1, k2); const c = Math.floor(N / L); if (c < 1) return null; return { ans: c, wrong: [Math.floor(N / k1) + Math.floor(N / k2), Math.floor(N / (k1 * k2)), c + 1, Math.floor(N / k1)].filter((v) => v !== c && v > 0), expl: `A ∩ B holds the common multiples, i.e. multiples of ${L} up to ${N}: there are ${c}.` } }
+      case 'subset': { const S = A.slice(0, 3); const outside = Un.length < 12 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((v) => !A.includes(v)) : []; if (outside.length < 3) return null; return { ans: setStr(S.slice(0, 2)), wrong: [setStr([S[0], outside[0]]), setStr([outside[1], S[2]]), setStr([S[1], outside[2]])], expl: `Every element of ${setStr(S.slice(0, 2))} belongs to the given set; each other option contains an element that does not.` } }
+      case 'sym': { const Sd = [...AmB, ...BmA]; const o = sets(Sd, Un, I, AmB); return o && { ...o, expl: `(A ∪ B) − (A ∩ B) = ${setStr(Un)} − ${setStr(I)} = ${setStr(Sd)}.` } }
+      case 'disjoint': return { ans: a + b, wrong: [a * b, Math.abs(a - b), a + b - 1].filter((v) => v !== a + b && v > 0), expl: `Disjoint sets share no element, so n(A ∪ B) = ${a} + ${b} = ${a + b}.` }
+      case 'word': { const d = new Set(w.split('')).size; return { ans: d, wrong: [w.length, d + 1, d - 1].filter((v) => v !== d), expl: `A set lists each distinct letter once: ${[...new Set(w.split(''))].join(', ')} — ${d} elements.` } }
+      default: { const lo = Math.min(a, b); const hi = Math.max(a, b); if (lo === hi) return null; P.lo = lo; P.hi = hi; return { ans: hi, wrong: [lo + hi, lo, hi - lo], expl: `Since A ⊆ B, every element of A is already in B, so n(A ∪ B) = n(B) = ${hi}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `If A = ${setStr(p.A)} and B = ${setStr(p.B)}, then A ∩ B is:`, { m: 'inter' }],
+    [1, (p) => `A = ${setStr(p.A)} and B = ${setStr(p.B)}. What is A ∪ B?`, { m: 'union' }],
+    [1, (p) => `If P = ${setStr(p.A)} and Q = ${setStr(p.B)}, find P − Q.`, { m: 'diff' }],
+    [1, (p) => `How many elements are there in A ∪ B when A = ${setStr(p.A)} and B = ${setStr(p.B)}?`, { m: 'count' }],
+    [2, (p) => `Let U = {1, 2, 3, …, 10} and A = ${setStr(p.A10)}. What is A′, the complement of A?`, { m: 'comp' }],
+    [2, (p) => `If A = {x : x is a prime number less than ${p.N}} and B = {x : x is an odd number less than ${p.N}}, then A ∩ B is:`, { m: 'primeodd' }],
+    [2, (p) => `Let A be the set of multiples of ${p.k1} up to ${p.N} and B the set of multiples of ${p.k2} up to ${p.N}. How many elements does A ∩ B have?`, { m: 'multiples' }],
+    [1, (p) => `Which of the following is a subset of ${setStr(p.A)}?`, { m: 'subset' }],
+    [2, (p) => `If A = ${setStr(p.A)} and B = ${setStr(p.B)}, what is (A ∪ B) − (A ∩ B)?`, { m: 'sym' }],
+    [1, (p) => `If n(A) = ${p.a}, n(B) = ${p.b} and A and B are disjoint, what is n(A ∪ B)?`, { m: 'disjoint' }],
+    [1, (p) => `A is the set of letters of the word ${p.w}. How many elements does A have?`, { m: 'word' }],
+    [2, (p) => `If A ⊆ B, n(A) = ${p.lo} and n(B) = ${p.hi}, what is n(A ∪ B)?`, { m: 'subsetU' }],
+  ],
+})
+
+family('ga.sets.percentage-two-set', 'ga.sets', {
+  gen: (r) => {
+    for (;;) {
+      const pa = 5 * r.int(6, 16); const pb = 5 * r.int(5, 15); const pab = 5 * r.int(1, 8); const pn = 100 - (pa + pb - pab)
+      if (pab >= Math.min(pa, pb) || pn < 5) continue
+      return { pa, pb, pab, pn, U: 20 * r.int(5, 40), k: r.int(2, 12) }
+    }
+  },
+  key: (p) => `${p.m}-${p.pa}-${p.pb}-${p.pab}${['count', 'total', 'testboth'].includes(p.m) ? `-${p.U}-${p.k}` : ''}`,
+  fmt: (v, p) => (p.pct ? `${num(v)}%` : num(v)),
+  solve: (P) => {
+    const { pa, pb, pab, pn, U, k } = P
+    const pct = { pct: true }
+    switch (P.m) {
+      case 'passBoth': Object.assign(P, pct); return { ans: pn, wrong: [100 - pa - pb, pab, pa + pb - pab, 100 - pab].filter((v) => v > 0), expl: `Failed in at least one: ${pa} + ${pb} − ${pab} = ${pa + pb - pab}%; passed in both: 100 − ${pa + pb - pab} = ${pn}%.` }
+      case 'both': Object.assign(P, pct); return { ans: pab, wrong: [pa + pb - 100, pn, 100 - pn, pa + pb - pab].filter((v) => v > 0 && v !== pab), expl: `At least one: 100 − ${pn} = ${100 - pn}%; both = ${pa} + ${pb} − ${100 - pn} = ${pab}%.` }
+      case 'count': { const c = (U * pn) / 100; if (!isInt(c)) return null; return { ans: c, wrong: [(U * pab) / 100, (U * (100 - pn)) / 100, (U * (100 - pa - pb + 2 * pab)) / 100].filter((v) => isInt(v) && v > 0 && v !== c), expl: `Neither = 100 − (${pa} + ${pb} − ${pab}) = ${pn}% of ${U} = ${c}.` } }
+      case 'total': { const nb = k * pab; P.nb = nb; const T = (nb * 100) / pab; return { ans: T, wrong: [(nb * 100) / (100 - pn), nb * pab, (nb * 100) / pa].filter((v) => isInt(v) && v !== T), expl: `Both = ${pa} + ${pb} − (100 − ${pn}) = ${pab}%; ${nb} people are ${pab}%, so the total is ${nb} × 100 ÷ ${pab} = ${T}.` } }
+      case 'onlyB': Object.assign(P, pct); return { ans: pb - pab, wrong: [pb, pab, pa - pab].filter((v) => v !== pb - pab), expl: `Married but not graduates: ${pb} − ${pab} = ${pb - pab}%.` }
+      case 'union': Object.assign(P, pct); return { ans: pa + pb - pab, wrong: [pa + pb, pa + pb - 2 * pab, pn].filter((v) => v !== pa + pb - pab && v <= 100), expl: `At least one: ${pa} + ${pb} − ${pab} = ${pa + pb - pab}%.` }
+      case 'testboth': { const c = (U * pab) / 100; if (!isInt(c)) return null; return { ans: c, wrong: [(U * pn) / 100, (U * (pa + pb - 100)) / 100, (U * (100 - pn)) / 100].filter((v) => isInt(v) && v > 0 && v !== c), expl: `Passed at least one part: 100 − ${pn} = ${100 - pn}%; both = ${pa} + ${pb} − ${100 - pn} = ${pab}% of ${U} = ${c}.` } }
+      case 'every': { Object.assign(P, pct); const q = pa + pb - 100; if (q <= 0) return null; return { ans: q, wrong: [100 - pa, 100 - pb, (pa + pb) / 2].filter((v) => isInt(v) && v !== q), expl: `Everyone speaks at least one, so both = ${pa} + ${pb} − 100 = ${q}%.` } }
+      case 'exact': Object.assign(P, pct); return { ans: pa + pb - 2 * pab, wrong: [pa + pb - pab, pa + pb, 100 - pab].filter((v) => v !== pa + pb - 2 * pab && v <= 100), expl: `Exactly one: (${pa} − ${pab}) + (${pb} − ${pab}) = ${pa + pb - 2 * pab}%.` }
+      default: Object.assign(P, pct); return { ans: pa - pab, wrong: [pa, pab, 100 - pn - pb, pa - pn].filter((v) => v > 0 && v !== pa - pab), expl: `Both = ${pa} + ${pb} − (100 − ${pn}) = ${pab}%; only P = ${pa} − ${pab} = ${pa - pab}%.` }
+    }
+  },
+  items: [
+    [3, (p) => `In an examination, ${p.pa}% of candidates failed in English, ${p.pb}% failed in Mathematics and ${p.pab}% failed in both. What percentage passed in both subjects?`, { m: 'passBoth' }],
+    [3, (p) => `In a town, ${p.pa}% of people read newspaper X, ${p.pb}% read newspaper Y and ${p.pn}% read neither. What percentage read both?`, { m: 'both' }],
+    [3, (p) => `${p.pa}% of the ${p.U} students of a college play cricket and ${p.pb}% play hockey; ${p.pab}% play both. How many students play neither game?`, { m: 'count' }],
+    [3, (p) => `In a survey, ${p.pa}% of those asked liked tea, ${p.pb}% liked coffee and ${p.pn}% liked neither. If ${p.nb} people liked both, how many people were surveyed?`, { m: 'total' }],
+    [2, (p) => `Of the employees of a firm, ${p.pa}% are graduates, ${p.pb}% are married and ${p.pab}% are both. What percentage are married but not graduates?`, { m: 'onlyB' }],
+    [2, (p) => `In a village, ${p.pa}% of families have a buffalo, ${p.pb}% have a cow and ${p.pab}% have both. What percentage of families have at least one of these animals?`, { m: 'union' }],
+    [3, (p) => `A test was taken by ${p.U} students. ${p.pa}% passed Part A, ${p.pb}% passed Part B and ${p.pn}% failed both parts. How many students passed both parts?`, { m: 'testboth' }],
+    [2, (p) => `${p.pa}% of a group can speak English and ${p.pb}% can speak Arabic. Every member speaks at least one of the two. What percentage speak both?`, { m: 'every' }],
+    [2, (p) => `In a class, ${p.pa}% of students like science, ${p.pb}% like art and ${p.pab}% like both. What percentage like exactly one of the two?`, { m: 'exact' }],
+    [3, (p) => `Among the voters of a constituency, ${p.pa}% support scheme P and ${p.pb}% support scheme Q, while ${p.pn}% support neither. What percentage support only scheme P?`, { m: 'onlyP' }],
   ],
 })
 
