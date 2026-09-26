@@ -30,7 +30,7 @@ export function mptAbilityFamily(question: BankQuestion): MptAbilityFamily {
 export const mptEditorialMinimums = {
   englishNonComprehension: {
     grammar: 14,
-    vocabulary: 8,
+    vocabulary: 5,
     usage: 8,
   } satisfies Partial<Record<MptEnglishFamily, number>>,
   ability: {
