@@ -26,7 +26,7 @@ const bundle = await build({
   format: 'esm', write: false, alias: { '@': './src' },
 })
 const moduleUrl = `data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].contents).toString('base64')}`
-const { buildCompetitiveMock } = await import(moduleUrl)
+const { buildCompetitiveMock, mptEnglishFamily, mptAbilityFamily } = await import(moduleUrl)
 const storage = new Map()
 globalThis.localStorage = {
   getItem: (key) => storage.get(key) ?? null,
@@ -51,6 +51,13 @@ const gkComposition = { science: 0, currentAffairs: 0, pakistanAffairs: 0, uncla
 const support = {
   islamicWithExplanation: 0, scienceWithExplanation: 0, pakistanWithExplanation: 0,
   currentWithExplanation: 0, currentWithPrimarySource: 0,
+}
+const editorialBalance = {
+  englishGrammar: { min: Infinity, max: 0 },
+  englishVocabulary: { min: Infinity, max: 0 },
+  englishUsage: { min: Infinity, max: 0 },
+  abilityQuantitative: { min: Infinity, max: 0 },
+  abilityReasoning: { min: Infinity, max: 0 },
 }
 const counts = {
   papers: 0, questions: 0, oldIds: 0, oldStems: 0, originalAbility: 0, reviewedPastAbility: 0,
@@ -78,6 +85,25 @@ for (let day = 1; day <= 20; day += 1) {
     const comprehension = english.filter((q) => /comprehension/i.test(q.s ?? ''))
     if (!comprehension.length) { counts.papersWithoutComprehension += 1; sample(`${key}: no English comprehension questions`) }
     if (english.filter((q) => /\bsynonym\b/i.test(q.q)).length > 15) sample(`${key}: more than 15 English synonym prompts`)
+    const englishFamilies = { grammar: 0, vocabulary: 0, usage: 0 }
+    for (const q of english.filter((question) => mptEnglishFamily(question) !== 'comprehension')) {
+      const family = mptEnglishFamily(q)
+      if (Object.hasOwn(englishFamilies, family)) englishFamilies[family] += 1
+    }
+    const abilityFamilies = { quantitative: 0, reasoning: 0 }
+    for (const q of bySection['General Abilities'] ?? []) abilityFamilies[mptAbilityFamily(q)] += 1
+    for (const [value, bound] of [
+      [englishFamilies.grammar, editorialBalance.englishGrammar],
+      [englishFamilies.vocabulary, editorialBalance.englishVocabulary],
+      [englishFamilies.usage, editorialBalance.englishUsage],
+      [abilityFamilies.quantitative, editorialBalance.abilityQuantitative],
+      [abilityFamilies.reasoning, editorialBalance.abilityReasoning],
+    ]) { bound.min = Math.min(bound.min, value); bound.max = Math.max(bound.max, value) }
+    if (englishFamilies.grammar < 14) sample(`${key}: English grammar family has only ${englishFamilies.grammar}/14 minimum`)
+    if (englishFamilies.vocabulary < 8 || englishFamilies.vocabulary > 16) sample(`${key}: English vocabulary family has ${englishFamilies.vocabulary}; expected 8-16`)
+    if (englishFamilies.usage < 8) sample(`${key}: English usage family has only ${englishFamilies.usage}/8 minimum`)
+    if (abilityFamilies.quantitative < 34 || abilityFamilies.quantitative > 42) sample(`${key}: quantitative ability has ${abilityFamilies.quantitative}; expected 34-42`)
+    if (abilityFamilies.reasoning < 18 || abilityFamilies.reasoning > 26) sample(`${key}: reasoning ability has ${abilityFamilies.reasoning}; expected 18-26`)
     if ((bySection.Urdu ?? []).filter((q) => /ترجمہ/.test(q.s ?? '')).length < 3) sample(`${key}: fewer than three Urdu translations`)
     const patternsInPaper = new Map()
     let basicInPaper = 0
@@ -154,6 +180,7 @@ const report = {
   sectionTotals,
   gkComposition,
   support,
+  editorialBalance,
   counts,
   blockingErrors,
   repeatedFamilies: repeatedFamilies.slice(0, 12).map(([pattern, count]) => ({ count, pattern })),
