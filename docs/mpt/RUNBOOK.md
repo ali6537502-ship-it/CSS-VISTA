@@ -7,9 +7,11 @@ This runbook is for the site owner and admin. The admin workspace is at
 
 Complete these steps in order. Nothing is visible to students until step 4.
 
-1. **Papers.** Nothing to configure. Every deploy exports the 40 release-audited MPT
-   papers exactly as they are. The build log shows
-   `MPT official series <id>: 40 audited paper(s)`.
+1. **Papers.** Nothing to configure. Every deploy exports the 40 papers of the
+   audited editorial release (`src/data/mpt/release/series.json`, built only from the
+   reviewed bank in `src/data/mpt/bank/`). The build log shows
+   `MPT official series <id> (editorial release 2): exported 40 audited paper(s)` and
+   then `MPT release gate PASS` for the exported files.
 2. **Database.** Nothing to run. The API creates the MPT tables on first use, as it does
    for the other features. To do it by hand, run `server/sql/010_mpt_exam_system.sql` in
    phpMyAdmin.
@@ -53,14 +55,35 @@ their papers early, but does not use them up any faster. The admin overview show
 reaches 0, no new mocks are created and the overview says so. No question is ever
 repeated to someone who sat an earlier official mock.
 
-To extend the runway:
+To extend the runway or publish a corrected release:
 
-1. Add reviewed questions to the bank. English comprehension passages are the first
-   limit: one passage is needed per paper.
-2. Redeploy.
+1. Add reviewed questions to `src/data/mpt/bank/` following
+   `docs/mpt/editorial/BANK-GUIDE.md`, and check them with `npm run validate:mpt-bank`.
+2. Run `npm run build:mpt-release`. It rebuilds the series, and writes the private
+   paper-by-paper report to `data-archive/mpt-release-reports/release-report.md`.
+   Read the report before committing. The build fails rather than lower a standard.
+3. Commit the bank, `src/data/mpt/release/series.json` and the report, then redeploy.
 
 The server automatically skips any exported paper that shares a question with one
 already used.
+
+**Editorial releases and future mocks (D-54).** When a deploy carries a newer
+editorial release, the server re-freezes every mock that has **not started, has no
+attempt and opens more than 15 minutes later** from the new audited papers. The
+mock, its schedule, applications and Roll Numbers are untouched; the old paper is kept
+in `mpt_paper_backups` and each swap is logged in `mpt_paper_replacements` (old and new
+paper reference, fingerprint and reason) and in `mpt_events`. Mocks that have started,
+finished or been attempted are never modified. The swap runs on the first MPT requests
+after the deploy (four mocks per request) and in the cron sweeper (all of them).
+
+To see exactly what is frozen for upcoming mocks:
+
+```
+php server/bin/mpt-frozen-audit.php /home/<user>/public_html > frozen.json
+node scripts/mpt/audit-frozen.mjs frozen.json
+```
+
+`frozen.json` contains answer keys: keep it private and delete it afterwards.
 
 ## 3. Scheduling or editing a mock by hand
 
@@ -134,7 +157,13 @@ button again with no corrections to continue.
 | Admin API | `public/api/admin/mpt.php` |
 | Schema / rollback | `server/sql/010_mpt_exam_system.sql` / `.down.sql` |
 | Cron sweeper | `server/bin/mpt-sweep.php` |
+| Reviewed bank / contributor guide | `src/data/mpt/bank/` / `docs/mpt/editorial/BANK-GUIDE.md` |
+| Blueprint (enforced ranges) | `src/data/mpt/blueprint.ts`, rendered to `docs/mpt/editorial/BLUEPRINT.md` |
+| Pattern profile (recorded papers) | `src/data/mpt/patternProfile.ts`, `docs/mpt/editorial/pattern-profile.json` |
+| Release build / gate | `scripts/mpt/build-release.mjs` / `scripts/mpt/audit-release.mjs` |
 | Paper export | `scripts/export-mpt-papers.mjs` → `dist/api/_mpt_papers/` (never web-readable) |
+| Private editorial reports | `data-archive/mpt-release-reports/` (not deployed) |
+| Frozen-paper backups / swap log | tables `mpt_paper_backups`, `mpt_paper_replacements` |
 | Candidate UI | `src/pages/mpt/`, `src/components/mpt/`, strings in `src/lib/mpt/copy.ts` |
 | Admin UI | `src/pages/admin/MptAdminPanel.tsx` |
 | Audit log | table `mpt_events` (append-only) |

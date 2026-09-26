@@ -1,4 +1,4 @@
--- CSS Vista MPT examination system (schema version 1).
+-- CSS Vista MPT examination system (schema version 2).
 -- Mirrors public/api/_mpt_schema.php exactly; tests/mpt/unit.php enforces it.
 -- Adds new tables only. Rollback: 010_mpt_exam_system.down.sql
 SET NAMES utf8mb4;
@@ -231,4 +231,33 @@ CREATE TABLE IF NOT EXISTS mpt_events (
   KEY mpt_events_mock_type_idx (mock_id,event_type),
   KEY mpt_events_user_time_idx (user_id,created_at),
   KEY mpt_events_attempt_idx (attempt_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mpt_paper_backups (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  mock_id CHAR(36) NOT NULL,
+  paper_ref VARCHAR(96) NULL,
+  paper_series VARCHAR(40) NULL,
+  fingerprint CHAR(64) NOT NULL,
+  question_count SMALLINT UNSIGNED NOT NULL,
+  questions LONGTEXT NOT NULL,
+  backed_up_at DATETIME(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mpt_paper_backups_mock_idx (mock_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mpt_paper_replacements (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  mock_id CHAR(36) NOT NULL,
+  backup_id BIGINT UNSIGNED NOT NULL,
+  old_paper_ref VARCHAR(96) NULL,
+  old_series VARCHAR(40) NULL,
+  old_fingerprint CHAR(64) NOT NULL,
+  new_paper_ref VARCHAR(96) NOT NULL,
+  new_series VARCHAR(40) NOT NULL,
+  new_fingerprint CHAR(64) NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  replaced_at DATETIME(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mpt_paper_replacements_mock_idx (mock_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

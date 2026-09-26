@@ -67,6 +67,8 @@ jobs:
           node scripts/export-mpt-papers.mjs --out dist/api/_mpt_papers --limit 8
       - name: Create schema
         run: php tests/current-affairs/setup.php
+      - name: Re-freeze of unstarted mocks from a newer editorial release
+        run: php tests/mpt/refreeze.php
       - name: Start isolated HTTP service (8 workers for real concurrency)
         run: |
           PHP_CLI_SERVER_WORKERS=8 php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/mpt-php.log 2>&1 &

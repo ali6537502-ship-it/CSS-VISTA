@@ -7,7 +7,11 @@ require_once __DIR__ . '/_account_auth.php';
 require_once __DIR__ . '/_mpt_core.php';
 require_once __DIR__ . '/_mpt_schema.php';
 
-const CSSV_MPT_PAPER_DIR = __DIR__ . '/_mpt_papers';
+// The isolated CI suite (CI=true with the disposable test database) may point
+// at fixture papers; production always reads the exported _mpt_papers folder.
+define('CSSV_MPT_PAPER_DIR', (getenv('CI') === 'true' && getenv('CSSV_DB_NAME') === 'cssvista_briefing_test' && getenv('CSSV_MPT_TEST_PAPER_DIR'))
+    ? (string)getenv('CSSV_MPT_TEST_PAPER_DIR')
+    : __DIR__ . '/_mpt_papers');
 const CSSV_MPT_DAILY_SLOTS = ['1500' => '15:00', '2230' => '22:30'];
 const CSSV_MPT_PKT = 'Asia/Karachi';
 // Upcoming mocks are always visible well ahead (owner: through 10 October and
@@ -221,6 +225,103 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
     return false;
 }
 
+// ---------------------------------------------------------------- editorial release re-freeze (D-54)
+
+// A mock this close to its start is never touched: nobody can see a paper
+// before the start, and this margin keeps the swap far from any start request.
+const CSSV_MPT_REFREEZE_MARGIN_MS = 15 * 60000;
+
+/** Editorial release of a paper series; 0 for any series exported before releases were recorded. */
+function mpt_series_release(PDO $pdo, ?string $series): int
+{
+    if ($series === null || $series === '') return 0;
+    $value = mpt_meta_get($pdo, 'series_release:' . $series);
+    return $value === null ? 0 : (int)$value;
+}
+
+/** Records the current manifest's editorial release against its series hash (idempotent). */
+function mpt_register_manifest_release(PDO $pdo): ?array
+{
+    $manifest = mpt_paper_manifest();
+    if ($manifest === null || empty($manifest['publishable']) || empty($manifest['editorial_release'])) return null;
+    if (mpt_series_release($pdo, (string)$manifest['series']) !== (int)$manifest['editorial_release']) {
+        mpt_meta_set($pdo, 'series_release:' . $manifest['series'], (string)(int)$manifest['editorial_release']);
+    }
+    return $manifest;
+}
+
+/** Order-sensitive fingerprint of a frozen paper: question ids, options and keys. */
+function mpt_frozen_paper(PDO $pdo, string $mockId): array
+{
+    $stmt = $pdo->prepare('SELECT position,question_id,section,topic,difficulty,stem,options,correct_index,explanation FROM mpt_mock_questions WHERE mock_id=? ORDER BY position');
+    $stmt->execute([$mockId]);
+    $rows = $stmt->fetchAll();
+    $shape = array_map(static fn($r) => [(string)$r['question_id'], json_decode((string)$r['options'], true), (int)$r['correct_index']], $rows);
+    return ['rows' => $rows, 'fingerprint' => hash('sha256', json_encode($shape, JSON_UNESCAPED_UNICODE))];
+}
+
+/**
+ * Replaces the frozen paper of every mock that has not started, has no attempt,
+ * and was frozen from a series older than the manifest's
+ * replace_unstarted_below_release. Mock identity, schedule, sessions,
+ * applications and roll numbers are untouched; only mpt_mock_questions and the
+ * mock's paper columns change. Each swap is one transaction with a full backup
+ * and a replacement log row. Completed, running or attempted mocks are never
+ * modified. Returns the number of mocks re-frozen.
+ */
+function mpt_refreeze_unstarted(PDO $pdo, int $nowMs, int $maxReplace = 4): array
+{
+    $manifest = mpt_register_manifest_release($pdo);
+    $below = (int)($manifest['replace_unstarted_below_release'] ?? 0);
+    if ($manifest === null || $below <= 0) return ['replaced' => 0, 'pending' => 0];
+    $candidates = $pdo->prepare("SELECT id,paper_series FROM mpt_mocks WHERE status IN ('DRAFT','PUBLISHED') AND cancelled_at IS NULL AND paper_frozen_at IS NOT NULL AND exam_open_at > ? ORDER BY exam_open_at ASC");
+    $candidates->execute([mpt_db_time($nowMs + CSSV_MPT_REFREEZE_MARGIN_MS)]);
+    $stale = array_values(array_filter($candidates->fetchAll(), static fn($m) => mpt_series_release($pdo, $m['paper_series']) < $below));
+    $replaced = 0;
+    foreach ($stale as $candidate) {
+        if ($replaced >= $maxReplace) break;
+        $pdo->beginTransaction();
+        try {
+            $lock = $pdo->prepare('SELECT * FROM mpt_mocks WHERE id=? FOR UPDATE');
+            $lock->execute([$candidate['id']]);
+            $mock = $lock->fetch();
+            $stillSafe = $mock
+                && in_array($mock['status'], ['DRAFT', 'PUBLISHED'], true)
+                && $mock['cancelled_at'] === null
+                && mpt_ms((string)$mock['exam_open_at']) > mpt_now_ms() + CSSV_MPT_REFREEZE_MARGIN_MS
+                && mpt_series_release($pdo, $mock['paper_series']) < $below;
+            $attempts = $pdo->prepare('SELECT COUNT(*) FROM mpt_attempts WHERE mock_id=?');
+            $attempts->execute([$candidate['id']]);
+            if (!$stillSafe || (int)$attempts->fetchColumn() > 0) { $pdo->rollBack(); continue; }
+            $old = mpt_frozen_paper($pdo, (string)$mock['id']);
+            $pdo->prepare('INSERT INTO mpt_paper_backups (mock_id,paper_ref,paper_series,fingerprint,question_count,questions,backed_up_at) VALUES (?,?,?,?,?,?,?)')
+                ->execute([$mock['id'], $mock['paper_ref'], $mock['paper_series'], $old['fingerprint'], count($old['rows']), json_encode($old['rows'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR), mpt_db_time(mpt_now_ms())]);
+            $backupId = (int)$pdo->lastInsertId();
+            $pdo->prepare('DELETE FROM mpt_mock_questions WHERE mock_id=?')->execute([$mock['id']]);
+            if (!mpt_freeze_next_paper($pdo, $mock)) {
+                // No fresh audited paper: keep the old paper rather than leave the mock empty.
+                $pdo->rollBack();
+                mpt_meta_set($pdo, 'paper_runway_exhausted_at', mpt_db_time($nowMs));
+                break;
+            }
+            $fresh = $pdo->prepare('SELECT paper_ref,paper_series FROM mpt_mocks WHERE id=?');
+            $fresh->execute([$mock['id']]);
+            $now = $fresh->fetch();
+            $new = mpt_frozen_paper($pdo, (string)$mock['id']);
+            $reason = sprintf('Unstarted mock re-frozen from editorial release %d (paper series %s had release %d)', (int)$manifest['editorial_release'], (string)($mock['paper_series'] ?? 'none'), mpt_series_release($pdo, $mock['paper_series']));
+            $pdo->prepare('INSERT INTO mpt_paper_replacements (mock_id,backup_id,old_paper_ref,old_series,old_fingerprint,new_paper_ref,new_series,new_fingerprint,reason,replaced_at) VALUES (?,?,?,?,?,?,?,?,?,?)')
+                ->execute([$mock['id'], $backupId, $mock['paper_ref'], $mock['paper_series'], $old['fingerprint'], $now['paper_ref'], $now['paper_series'], $new['fingerprint'], $reason, mpt_db_time(mpt_now_ms())]);
+            mpt_event($pdo, 'ADMIN_ACTION', null, (string)$mock['id'], null, null, ['action' => 'paper_refrozen', 'old_ref' => $mock['paper_ref'], 'new_ref' => $now['paper_ref'], 'old_fingerprint' => $old['fingerprint'], 'new_fingerprint' => $new['fingerprint'], 'backup_id' => $backupId]);
+            $pdo->commit();
+            $replaced++;
+        } catch (Throwable $error) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            throw $error;
+        }
+    }
+    return ['replaced' => $replaced, 'pending' => max(0, count($stale) - $replaced)];
+}
+
 // ---------------------------------------------------------------- automatic schedule (D-01)
 
 function mpt_meta_set(PDO $pdo, string $key, string $value): void
@@ -331,8 +432,11 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-mpt-maintain',0)")->fetchColumn() !== 1) return ['skipped' => true];
     try {
         mpt_meta_set($pdo, 'last_maintenance_at', mpt_db_time($now));
+        // Re-freeze unstarted mocks from an older editorial release before any new
+        // mock takes a paper, so replacements have first claim on the audited runway.
+        $refrozen = mpt_refreeze_unstarted($pdo, $now, $force ? 60 : 4);
         mpt_auto_schedule($pdo, $now, $force ? 40 : CSSV_MPT_SCHEDULE_PER_RUN);
-        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0);
+        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0) + ['refrozen' => $refrozen];
     } finally {
         $pdo->query("SELECT RELEASE_LOCK('cssvista-mpt-maintain')");
     }

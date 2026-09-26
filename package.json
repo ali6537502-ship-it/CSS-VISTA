@@ -22,7 +22,6 @@
     "audit:english-islamiyat-mcqs": "node scripts/clean-english-islamiyat-mcqs.mjs --check",
     "clean:english-islamiyat-mcqs": "node scripts/clean-english-islamiyat-mcqs.mjs --apply",
     "audit:mcq-quality": "node scripts/clean-mcq-quality.mjs --check",
-    "audit:mpt-40": "node scripts/build-mpt-legacy-exclusions.mjs --check && node scripts/audit-mpt-40-papers.mjs",
     "audit:mpt-sources": "node scripts/audit-mpt-source-bank.mjs",
     "build:mpt-legacy-exclusions": "node scripts/build-mpt-legacy-exclusions.mjs",
     "clean:mcq-quality": "node scripts/clean-mcq-quality.mjs --apply",
@@ -58,7 +57,7 @@
     "audit:optional-notes": "python3 scripts/import_optional_notes.py --check",
     "audit:links": "node scripts/audit-internal-links.mjs",
     "audit:duplicates": "node scripts/audit-duplicate-content.mjs",
-    "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:mpt && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes",
+    "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes",
     "generate:book-catalogue": "node scripts/generate-book-catalogue.mjs",
     "audit:book-catalogue": "node scripts/generate-book-catalogue.mjs --check",
     "package:vistagram": "node scripts/package-vistagram.mjs",
@@ -67,8 +66,13 @@
     "prebuild": "npm run audit:mpt-release",
     "prebuild:hostinger": "npm run audit:mpt-release",
     "prebuild:hostinger:strict": "npm run audit:mpt-release",
-    "audit:mpt-facts": "node scripts/audit-mpt-factual-integrity.mjs",
-    "audit:mpt-release": "npm run audit:mpt-40 && npm run audit:mpt-facts"
+    "audit:mpt-release": "node scripts/mpt/audit-release.mjs",
+    "validate:mpt-bank": "node scripts/mpt/validate-bank.mjs",
+    "build:mpt-release": "node scripts/mpt/build-release.mjs",
+    "audit:mpt-frozen": "node scripts/mpt/audit-frozen.mjs",
+    "profile:mpt-patterns": "node scripts/mpt/derive-pattern-profile.mjs",
+    "test:mpt-release": "node --test tests/mptRelease.test.mjs",
+    "audit:mpt-legacy-engine": "node scripts/build-mpt-legacy-exclusions.mjs --check && node scripts/audit-mpt-40-papers.mjs && node scripts/audit-mpt-factual-integrity.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
