@@ -18,6 +18,9 @@ import { reviewedMptPastEnglishQuestions } from './mptReviewedPastEnglish'
 import { mptGrammarCourseEnglishQuestions } from './mptGrammarCourseEnglish'
 import { advancedMptAbilityQuestions } from './mptAdvancedAbility'
 import {
+  mptAbilityFamily, mptEditorialMaximums, mptEditorialMinimums, mptEnglishFamily,
+} from './mptEditorialProfile'
+import {
   eligibleMptAbility, eligibleMptCurrent, eligibleMptEnglish, eligibleMptIslamic,
   eligibleMptPakistan, eligibleMptScience, eligibleMptUrdu, eligibleMptUrduPastPaper,
 } from './mptQuality'
@@ -50,6 +53,9 @@ type SectionSpec = {
   salt?: string
   seedCap?: number
   mptEditorial?: boolean
+  family?: (question: BankQuestion) => string
+  familyMinimums?: Record<string, number>
+  familyMaximums?: Record<string, number>
 }
 
 // The mock bank is ~600 KB and only the three competitive mocks need it.
@@ -370,10 +376,14 @@ function selectSection(
   let selectedSeeds = 0
   const topicCounts = new Map<string, number>()
   const abilityFamilyCounts = new Map<string, number>()
+  const familyCounts = new Map<string, number>()
   const topicCap = Math.max(2, Math.ceil(spec.count / 10))
 
   const consider = (question: BankQuestion, strict: boolean) => {
     if (selected.length >= spec.count || usedIds.has(question.id) || previouslySeen.has(question.id)) return
+    const editorialFamily = spec.family?.(question) ?? ''
+    const familyMaximum = editorialFamily ? spec.familyMaximums?.[editorialFamily] : undefined
+    if (familyMaximum !== undefined && (familyCounts.get(editorialFamily) ?? 0) >= familyMaximum) return
     if (spec.seedCap !== undefined && question.id.startsWith('mock-seed-') && selectedSeeds >= spec.seedCap) return
     if (spec.mptEditorial && spec.label === 'English' && /\bsynonym\b/i.test(question.q)
       && selectedAcrossPaper.filter((picked) => picked.paperSection === 'English' && /\bsynonym\b/i.test(picked.q)).length >= 15) return
@@ -414,7 +424,20 @@ function selectSection(
       usedPatterns.set(pattern, (usedPatterns.get(pattern) ?? 0) + 1)
     }
     if (abilityFamily) abilityFamilyCounts.set(abilityFamily, (abilityFamilyCounts.get(abilityFamily) ?? 0) + 1)
+    if (editorialFamily) familyCounts.set(editorialFamily, (familyCounts.get(editorialFamily) ?? 0) + 1)
     topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1)
+  }
+
+  if (spec.family && spec.familyMinimums) {
+    for (const [family, minimum] of Object.entries(spec.familyMinimums)) {
+      candidates.filter((question) => spec.family?.(question) === family).forEach((question) => consider(question, true))
+      if ((familyCounts.get(family) ?? 0) < minimum) {
+        candidates.filter((question) => spec.family?.(question) === family).forEach((question) => consider(question, false))
+      }
+      if ((familyCounts.get(family) ?? 0) < minimum) {
+        throw new Error(`Fresh ${spec.label} ${family} questions are exhausted (${familyCounts.get(family) ?? 0}/${minimum} minimum available).`)
+      }
+    }
   }
 
   candidates.forEach((question) => consider(question, true))
@@ -492,10 +515,20 @@ function sectionsFor(kind: CompetitiveMockKind, pools: MockPools, mptEditorial =
       ...(freshComprehension
         ? [
           { label: 'English', count: 2, pool: freshComprehension, salt: 'new-comprehension', mptEditorial },
-          { label: 'English', count: 48, pool: englishPool.filter((q) => q.s !== 'Comprehension'), salt: 'other-english', mptEditorial },
+          {
+            label: 'English', count: 48, pool: englishPool.filter((q) => q.s !== 'Comprehension'), salt: 'other-english', mptEditorial,
+            family: mptEnglishFamily,
+            familyMinimums: mptEditorialMinimums.englishNonComprehension,
+            familyMaximums: mptEditorialMaximums.englishNonComprehension,
+          },
         ]
         : [{ label: 'English', count: 50, pool: englishPool, mptEditorial }]),
-      { label: 'General Abilities', count: 60, pool: abilityPool, mptEditorial },
+      {
+        label: 'General Abilities', count: 60, pool: abilityPool, mptEditorial,
+        family: mptAbilityFamily,
+        familyMinimums: mptEditorialMinimums.ability,
+        familyMaximums: mptEditorialMaximums.ability,
+      },
       { label: 'General Knowledge', count: 20, pool: sciencePool, salt: 'gk-everyday-science', mptEditorial, seedCap: mptEditorial ? undefined : 8 },
       { label: 'General Knowledge', count: 2, pool: currentPool, salt: 'gk-current-affairs', mptEditorial },
       { label: 'General Knowledge', count: 28, pool: pakistanPool, salt: 'gk-pakistan-affairs', mptEditorial, seedCap: mptEditorial ? undefined : 12 },
