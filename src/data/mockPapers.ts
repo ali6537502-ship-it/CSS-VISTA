@@ -673,4 +673,4 @@ export async function buildCompetitiveMock(
   }
 }
 
-export { mptEnglishFamily, mptAbilityFamily } from './mptEditorialProfile'
+export { mptEnglishFamily, mptAbilityFamily }
