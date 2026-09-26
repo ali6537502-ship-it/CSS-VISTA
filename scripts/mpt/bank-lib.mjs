@@ -161,6 +161,38 @@ export function checkPassage(p) {
 }
 
 /** Full-bank validation; returns a report and never throws on content problems. */
+// Past-paper year labels must be supported by the paper's text in the repository.
+const PAST_PAPER_TEXT = {
+  2022: 'data-archive/mpt-past-paper-text/CSS-MPT-2022.txt',
+  2023: 'data-archive/mpt-past-paper-text/CSS-MPT-2023-Special.txt',
+  2024: 'data-archive/mpt-past-paper-text/CSS-MPT-2024-questions-86-200.txt',
+}
+let pastPaperQuestions = null
+function pastPaperIndex() {
+  if (pastPaperQuestions) return pastPaperQuestions
+  pastPaperQuestions = {}
+  for (const [year, file] of Object.entries(PAST_PAPER_TEXT)) {
+    const text = readFileSync(file, 'utf8').replace(/\n/g, ' ')
+    pastPaperQuestions[year] = text.split(/\s(?=\d{1,3}\.\s)/).map((chunk) => tokenSet(chunk.slice(0, 500)))
+  }
+  return pastPaperQuestions
+}
+/** Best-matching year for a stem, or null when no repository paper text supports it. */
+export function pastPaperYearFor(stem, answer = '') {
+  const tokens = tokenSet(`${stem} ${answer}`)
+  if (tokens.size < 2) return null
+  let best = { year: null, score: 0 }
+  for (const [year, chunks] of Object.entries(pastPaperIndex())) {
+    for (const chunk of chunks) {
+      let inter = 0
+      for (const t of tokens) if (chunk.has(t)) inter += 1
+      const score = inter / tokens.size
+      if (score > best.score) best = { year: Number(year), score }
+    }
+  }
+  return best.score >= 0.45 ? best.year : null
+}
+
 export function validateBank(bank) {
   const passagesById = new Map(bank.passages.map((p) => [p.id, p]))
   const problems = []
@@ -173,6 +205,10 @@ export function validateBank(bank) {
     const { errors, warn } = checkQuestion(q, passagesById)
     errors.forEach((e) => problems.push(`${q.__file} ${q.id}: ${e}`))
     warn.forEach((w) => warnings.push(`${q.__file} ${q.id}: ${w}`))
+    if (q.source_type === 'past-paper-reviewed' && Number.isInteger(q.past_paper_year)) {
+      const supported = pastPaperYearFor(q.q, q.o?.[q.a] ?? '')
+      if (supported !== q.past_paper_year) problems.push(`${q.__file} ${q.id}: past_paper_year ${q.past_paper_year} is not supported by the repository's paper text (best match: ${supported ?? 'none'})`)
+    }
     if (ids.has(q.id)) problems.push(`${q.__file} ${q.id}: duplicate id (also in ${ids.get(q.id)})`)
     ids.set(q.id, q.__file)
     const stemKey = q.subtopic === 'eng.comprehension' ? `${q.passage_id}|${canonical(q.q)}` : canonical(q.q)

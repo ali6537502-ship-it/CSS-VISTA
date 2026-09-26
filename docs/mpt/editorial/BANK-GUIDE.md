@@ -61,7 +61,7 @@ passage objects). Write UTF-8, no comments, 2-space indent.
 | `concept` | The *specific fact or item* tested, kebab-case, e.g. `ghazwa-khandaq-alt-name-ahzab`, `synonym-obdurate`. Two questions testing the same fact (even worded differently) must have the same concept — then only one of them is ever used. Concepts must be unique within your file. |
 | `difficulty` | 1 accessible · 2 moderate · 3 challenging, for a prepared CSS candidate (see below). |
 | `source_type` | `past-paper-reviewed` (recalled MPT item, year known, answer re-verified), `bank-reviewed` (existing repo item you re-verified and corrected), `authored` (new), `generated-verified` (produced by code that computes the answer), `current-verified` (time-sensitive, source-backed). |
-| `past_paper_year` | Only with `past-paper-reviewed`, and only where provenance supports the year. Never call a reconstructed item an exact FPSC question. |
+| `past_paper_year` | Only with `past-paper-reviewed`, and only where the repository's paper text supports the year: the validator matches the item against `data-archive/mpt-past-paper-text/` (2022, 2023 Special, 2024 Q86–200). Unconfirmed recalled items are `bank-reviewed` with `null`. Never call a reconstructed item an exact FPSC question. |
 | `verified` | Always `true`. If you are not certain of the answer, do not include the item. |
 | `o`, `a` | Exactly four distinct options; `a` is the 0-based index of the single correct option. No “None of these”, “All of the above”, “Both A and B”. Replace such options in recalled items with a plausible wrong option. Vary the position of the correct answer. |
 | `explanation` | 1–2 sentences stating *why* the answer is right (not just repeating it). Shown to candidates after results. |

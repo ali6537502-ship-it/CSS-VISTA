@@ -520,8 +520,8 @@
     "pattern_family": "isl.modern.pakistan-institutions",
     "concept": "council-of-islamic-ideology-advisory-body",
     "difficulty": 1,
-    "source_type": "past-paper-reviewed",
-    "past_paper_year": 2022,
+    "source_type": "bank-reviewed",
+    "past_paper_year": null,
     "verified": true,
     "q": "What is the name of the constitutional body that advises Parliament and the Provincial Assemblies on whether laws conform to the injunctions of Islam?",
     "o": [

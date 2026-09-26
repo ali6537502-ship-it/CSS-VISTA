@@ -34,8 +34,8 @@
     "pattern_family": "isl.companions.badr",
     "concept": "uthman-missed-badr-wife-illness",
     "difficulty": 2,
-    "source_type": "past-paper-reviewed",
-    "past_paper_year": 2022,
+    "source_type": "bank-reviewed",
+    "past_paper_year": null,
     "verified": true,
     "q": "Hazrat Uthman (RA) did not take part in the Battle of Badr because of:",
     "o": [
@@ -224,7 +224,7 @@
     "concept": "first-umayyad-caliph-muawiyah",
     "difficulty": 1,
     "source_type": "past-paper-reviewed",
-    "past_paper_year": 2023,
+    "past_paper_year": 2022,
     "verified": true,
     "q": "Who was the first caliph of the Umayyad dynasty?",
     "o": [
