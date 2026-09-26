@@ -1,24 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useLocation } from 'react-router'
 import { BookOpen, Clock3, FileText, Landmark, MessageCircle, Scale, X } from 'lucide-react'
 import { noteProducts } from '@/data/notes'
-import { notesBundleOfferEndsAt as OFFER_ENDS_AT, notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
+import { notesBundleOfferPrice as OFFER_PRICE } from '@/data/notesBundleOffer'
 
-const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:' + OFFER_ENDS_AT + ':' + OFFER_PRICE
+const DISMISSED_KEY = 'cssvista:notes-bundle-offer-dismissed:homepage-reactivated-2026-09-26:' + OFFER_PRICE
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat('en-PK').format(value)
-}
-
-function getTimeLeft(now: number) {
-  const remaining = Math.max(0, OFFER_ENDS_AT - now)
-  const totalSeconds = Math.floor(remaining / 1000)
-  return {
-    hours: Math.floor(totalSeconds / 3600),
-    minutes: Math.floor((totalSeconds % 3600) / 60),
-    seconds: totalSeconds % 60,
-    expired: remaining <= 0,
-  }
 }
 
 function wasDismissedThisSession() {
@@ -50,21 +39,14 @@ const ASSESSMENT_PATH = /^\/account\/mpt\/(?:exam|entrance)\//
 export default function NotesBundleOfferPopup() {
   const { pathname } = useLocation()
   const [open, setOpen] = useState(() => !wasDismissedThisSession())
-  const [now, setNow] = useState(() => Date.now())
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [])
 
   const totalPrice = useMemo(
     () => noteProducts.reduce((sum, product) => sum + product.pricing.regularPrice, 0),
     [],
   )
   const savings = totalPrice - OFFER_PRICE
-  const timeLeft = getTimeLeft(now)
 
-  if (!open || timeLeft.expired || ASSESSMENT_PATH.test(pathname)) return null
+  if (!open || pathname !== '/' || ASSESSMENT_PATH.test(pathname)) return null
 
   function closeOffer() {
     rememberDismissal()
