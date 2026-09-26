@@ -872,7 +872,7 @@ function handEvents(T, seps) { let n = 0; for (const sep of seps) for (let k = 0
   A(1, 1, 20, 'At 1:20, what is the angle between the hands of a clock?')
   {
     const a = 3.5 * 30
-    add({ st: CC, fam: F, concept: 'hour-hand-turn-2-00-to-5-30', d: 2, q: 'Through how many degrees does the hour hand turn between 2:00 and 5:30?', ans: deg(a), wrong: [deg(90), deg(120), deg(a + 15)], exp: `The hour hand turns 30° per hour; in 3½ hours it turns 3.5 × 30° = ${deg(a)}.` })
+    add({ st: CC, fam: F, concept: 'hour-hand-turn-2-00-to-5-30', d: 2, q: 'Through how many degrees does the hour hand turn between 2:00 and 5:30?', ans: deg(a), wrong: [deg(90), deg(120), deg(75)], exp: `The hour hand turns 30° per hour; in 3½ hours it turns 3.5 × 30° = ${deg(a)}.` })
   }
   {
     const a = 25 * 6
@@ -924,7 +924,7 @@ function handEvents(T, seps) { let n = 0; for (const sep of seps) for (let k = 0
   HD(1, 0, 'North', 90, 'A clock lies face up on a table so that at 3:00 its minute hand points North. In which direction does its hour hand point at 3:00?', 'The minute hand at 3:00 is on 12, so 12 faces North and 3 faces East.')
   HD(2, 0, 'East', 45, 'A clock is placed so that at 12 noon its minute hand points East. In which direction will the hour hand point at 1:30 pm?', '12 faces East; at 1:30 the hour hand is halfway between 1 and 2, i.e. 45° clockwise from 12.')
   HD(2, 270, 'South', 180, 'A clock is set so that at 9:00 am its hour hand points South. In which direction will its minute hand point at 3:30 pm?', 'At 9:00 the hour hand is on 9, so 9 faces South and 12 faces East; at half past, the minute hand is on 6, opposite 12.')
-  HD(2, 90, 'West', 270, 'A clock is kept so that at 3:00 the hour hand points West. In which direction does the minute hand point at 4:45?', '3 faces West, so 12 faces North… more precisely each number turns with the dial: 12 faces South and 9 faces East, where the minute hand is at 4:45.')
+  HD(2, 90, 'West', 270, 'A clock is kept so that at 3:00 the hour hand points West. In which direction does the minute hand point at 4:45?', 'At 3:00 the hour hand is on 3, so 3 faces West, 12 faces South and 9 faces East; at 4:45 the minute hand is on 9.')
   HD(3, 180, 'North-West', 270, 'A clock is placed so that at 6:00 the hour hand points North-West. In which direction will the minute hand point at 7:45?', 'At 6:00 the hour hand is on 6, so 6 faces North-West and 12 faces South-East; at 7:45 the minute hand is on 9, 90° anticlockwise from 12.')
   HD(2, 0, 'South-East', 90, 'At noon the minute hand of a clock laid on the floor points South-East. In which direction does its hour hand point at 3:00 pm?', '12 faces South-East and 3 lies 90° clockwise from it.')
   HD(1, 0, 'North', 225, 'If the minute hand of a flat clock points North at 5:00, in which direction does the hour hand point at 7:30?', '12 faces North; at 7:30 the hour hand is halfway between 7 and 8, i.e. 225° clockwise from 12.')

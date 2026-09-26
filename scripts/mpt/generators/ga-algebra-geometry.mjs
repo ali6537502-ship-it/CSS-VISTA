@@ -1535,6 +1535,8 @@ function buildItems() {
         const factKey = fam.fact ? String(fam.fact(p)) : null
         if (factKey !== null && usedFacts.has(factKey)) continue
         const sol = fam.solve(p)
+        const dbg = process.env.GA_DEBUG === `${fam.id}#${idx}` && attempt < 5
+        if (dbg) console.error('DEBUG', key, JSON.stringify(sol))
         if (!sol || isBadValue(sol.ans)) continue
         const fmt = sol.fmt ?? fam.fmt ?? defaultFmt
         const ansText = fmt(sol.ans, p)
