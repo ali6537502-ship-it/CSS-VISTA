@@ -7,6 +7,8 @@ import type { BankQuestion } from './mcq'
 const metaQuestion = /(?:which|what) (?:source|basis|historical basis|source or historical basis)|historical identification|correct chronological placement|correctly placed\?|which (?:option|answer|statement|pair|description) (?:best |correctly |accurately )?(?:identifies|describes|matches|characterizes)|identify the (?:correctly matched|principal location|person or group)|most directly associated with|which term means|which option best defines|select the correct (?:association|period)|in the .* section|news agency|Reuters|publication date|report .* published|published .* report|on which date did Reuters|what date did Reuters/i
 const trivialQuestion = /^(?:What is \d+% of \d+|The (?:powerhouse of the cell|SI unit of force|chemical formula of common table salt)|Which surah is number \d+|How many Surahs are there)/i
 const brokenOption = /\b(?:and|or|the|of|from|at|for|in|to|with)\s*$/i
+const obscureIslamicNumberTrivia = /(?:how many|number of|total number of|exact number of).{0,45}(?:verses?|ayat|aayaat|rukus?|ruku|manazil|manzil|sajdahs?|prostrations?|words?|letters?|ahadith|hadiths?)|(?:surah|ayah|ayat|verse)\s*(?:no\.?|number)\s*\d+|which surah is (?:number|no\.?)/i
+const obscureIslamicSourceTrivia = /(?:hadith|hadees).{0,30}(?:serial|reference|book)\s*(?:no\.?|number)|(?:bukhari|muslim).{0,30}(?:book|hadith)\s*(?:no\.?|number)/i
 
 // These prompt families are on-topic in a literal sense but are poor MPT practice:
 // they mass-repackage one Pakistan Affairs fact into location/date/classification
@@ -26,6 +28,7 @@ function isCalculationHeavyScience(questionText: string) {
 
 export function eligibleMptIslamic(question: BankQuestion) {
   if (metaQuestion.test(question.q) || trivialQuestion.test(question.q)) return false
+  if (obscureIslamicNumberTrivia.test(question.q) || obscureIslamicSourceTrivia.test(question.q)) return false
   if (/How many verses are listed for Surah|standard Kufan numbering|source citation|source or historical basis|hadith\s*(?:number|no\.?|count)|how many ahadith|book\s*number.*(?:bukhari|muslim)/i.test(question.q)) return false
   // Neither literary history nor obscure source citations are part of the
   // Islamic Studies/Civics & Ethics section of the MPT rules.
