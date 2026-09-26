@@ -52,6 +52,7 @@ const counts = {
   currentPrimarySources: 0, currentWithExplanation: 0,
   islamicWithExplanation: 0, scienceWithExplanation: 0, pakistanWithExplanation: 0,
   malformedAnswers: 0, ambiguousChoices: 0, riskyPatterns: 0,
+  pastPaperQuestions: 0, pastPaperCurrentAffairs: 0,
 }
 
 for (let day = 1; day <= 20; day += 1) {
@@ -64,6 +65,14 @@ for (let day = 1; day <= 20; day += 1) {
     counts.papers += 1
 
     for (const q of paper.questions) {
+      if (q.id.startsWith('mpt-past-papers-') || q.id.startsWith('mpt-reviewed-past-')) {
+        counts.pastPaperQuestions += 1
+      }
+      if (q.id.startsWith('mpt-past-papers-') && q.s === 'Current Affairs') {
+        counts.pastPaperCurrentAffairs += 1
+        sample(`${key}: past-paper Current Affairs is prohibited in the refreshed series: ${q.id}`)
+      }
+
       const options = Array.isArray(q.o) ? q.o : []
       const malformed = options.length !== 4 || !Number.isInteger(q.a) || q.a < 0 || q.a > 3
         || !options[q.a]?.trim() || new Set(options.map((x) => x.trim().toLocaleLowerCase('en'))).size !== 4
@@ -92,7 +101,8 @@ for (let day = 1; day <= 20; day += 1) {
           if (q.e?.trim()) counts.currentWithExplanation += 1
           if (primarySource(q.sourceUrl)) counts.currentPrimarySources += 1
           else sample(`${key}: Current Affairs source is not an approved primary issuer for ${q.id}: ${q.sourceUrl}`)
-        } else if (/^(?:science|everyday-science)-/.test(q.id)) {
+        } else if (/^(?:science|everyday-science)-/.test(q.id)
+          || /^(?:Everyday Science|Physics|Chemistry|Biology)$/.test(q.s ?? '')) {
           counts.science += 1
           if (q.e?.trim()) counts.scienceWithExplanation += 1
           if (riskyScience.test(q.q)) {
@@ -115,6 +125,9 @@ for (let day = 1; day <= 20; day += 1) {
 }
 
 if (counts.papers !== 40) sample(`Only ${counts.papers}/40 papers were available to the factual audit`)
+if (counts.pastPaperCurrentAffairs) {
+  sample(`${counts.pastPaperCurrentAffairs} past-paper Current Affairs questions entered the refreshed series`)
+}
 if (counts.currentAffairs !== counts.currentPrimarySources) {
   sample(`Only ${counts.currentPrimarySources}/${counts.currentAffairs} Current Affairs questions use approved primary-source domains`)
 }
