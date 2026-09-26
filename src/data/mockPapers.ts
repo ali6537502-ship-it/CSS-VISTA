@@ -431,9 +431,16 @@ function selectSection(
 
   if (spec.family && spec.familyMinimums) {
     for (const [family, minimum] of Object.entries(spec.familyMinimums)) {
-      candidates.filter((question) => spec.family?.(question) === family).forEach((question) => consider(question, true))
+      const familyCandidates = candidates.filter((question) => spec.family?.(question) === family)
+      for (const question of familyCandidates) {
+        if ((familyCounts.get(family) ?? 0) >= minimum) break
+        consider(question, true)
+      }
       if ((familyCounts.get(family) ?? 0) < minimum) {
-        candidates.filter((question) => spec.family?.(question) === family).forEach((question) => consider(question, false))
+        for (const question of familyCandidates) {
+          if ((familyCounts.get(family) ?? 0) >= minimum) break
+          consider(question, false)
+        }
       }
       if ((familyCounts.get(family) ?? 0) < minimum) {
         throw new Error(`Fresh ${spec.label} ${family} questions are exhausted (${familyCounts.get(family) ?? 0}/${minimum} minimum available).`)
