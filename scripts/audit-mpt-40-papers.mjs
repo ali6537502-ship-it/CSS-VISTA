@@ -54,7 +54,8 @@ const support = {
 }
 const counts = {
   papers: 0, questions: 0, oldIds: 0, oldStems: 0, originalAbility: 0, reviewedPastAbility: 0,
-  reviewedPastEnglish: 0, offSyllabus: 0, bareArithmetic: 0, papersWithoutComprehension: 0,
+  reviewedPastEnglish: 0, pastPaperQuestions: 0, pastPaperCurrentAffairs: 0,
+  offSyllabus: 0, bareArithmetic: 0, papersWithoutComprehension: 0,
   basic: 0, intermediate: 0, advanced: 0, unrated: 0, papersOverBasicLimit: 0,
 }
 for (let day = 1; day <= 20; day += 1) {
@@ -88,6 +89,11 @@ for (let day = 1; day <= 20; day += 1) {
       if (q.id.startsWith('mpt-original-ability-')) counts.originalAbility += 1
       if (q.id.startsWith('mpt-reviewed-past-ability-')) counts.reviewedPastAbility += 1
       if (q.id.startsWith('mpt-reviewed-past-english-')) counts.reviewedPastEnglish += 1
+      if (q.id.startsWith('mpt-past-papers-') || q.id.startsWith('mpt-reviewed-past-')) counts.pastPaperQuestions += 1
+      if (q.id.startsWith('mpt-past-papers-') && q.s === 'Current Affairs') {
+        counts.pastPaperCurrentAffairs += 1
+        sample(`${key}: past-paper Current Affairs must not be used: ${q.id}`)
+      }
       if (oldIds.has(q.id)) counts.oldIds += 1
       if (oldStems.has(fingerprint)) { counts.oldStems += 1; sample(`${key}: previously served stem ${q.id}`) }
       if (offSyllabus.test(q.q)) { counts.offSyllabus += 1; sample(`${key}: off-syllabus ${q.id}: ${q.q}`) }
@@ -99,7 +105,8 @@ for (let day = 1; day <= 20; day += 1) {
           gkComposition.currentAffairs += 1
           if (q.e?.trim()) support.currentWithExplanation += 1
           if (/^https:\/\//.test(q.sourceUrl)) support.currentWithPrimarySource += 1
-        } else if (/^(?:science|everyday-science)-/.test(q.id)) {
+        } else if (/^(?:science|everyday-science)-/.test(q.id)
+          || /^(?:Everyday Science|Physics|Chemistry|Biology)$/.test(q.s ?? '')) {
           gkComposition.science += 1
           if (q.e?.trim()) support.scienceWithExplanation += 1
         } else if (/^(?:pakistan-affairs|pakistan-history)-/.test(q.id) || q.s === 'Pakistan Affairs') {
@@ -132,6 +139,7 @@ for (let day = 1; day <= 20; day += 1) {
 const repeatedFamilies = [...globalPatterns].filter(([, count]) => count > 8)
   .sort((a, b) => b[1] - a[1])
 if (counts.papers !== 40) sample(`Only ${counts.papers}/40 papers could be built`)
+if (counts.pastPaperCurrentAffairs) sample(`${counts.pastPaperCurrentAffairs} past-paper Current Affairs questions entered the release series`)
 if (counts.oldIds || counts.oldStems) sample(`${counts.oldIds} prior-paper IDs and ${counts.oldStems} prior-paper stems remain`)
 if (repeatedFamilies.length) sample(`${repeatedFamilies.length} numeric templates appear over 8 times across the series`)
 if (counts.bareArithmetic) sample(`${counts.bareArithmetic} one-step arithmetic drills remain`)
