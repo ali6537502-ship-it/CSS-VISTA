@@ -10,6 +10,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { installDomShim } from './lib/dom-shim.mjs'
 import { publishSection } from './lib/publish-section.mjs'
+import { optionalSubjectMeta, optionalTopicMeta } from '../src/data/studyMaterialMeta.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const clientDir = process.env.CSSV_CLIENT_DIR
@@ -27,20 +28,17 @@ const pages = []
 for (const group of index.groups) {
   for (const subject of group.subjects) {
     const subjectCrumb = { name: subject.subject, item: `${siteOrigin}${base}/${subject.slug}` }
-    const words = subject.topics.reduce((total, topic) => total + topic.words, 0)
     pages.push({
       path: `${base}/${subject.slug}`,
       file: `${subject.slug}.html`,
-      title: `${subject.subject} Notes for CSS — Topic-Wise Study Material | CSS Vista`,
-      description: `Topic-wise ${subject.subject} notes for the CSS optional paper: ${subject.topicCount} topics and ${words.toLocaleString()} words following the FPSC syllabus (Group ${group.group}, ${subject.marks} marks).`,
+      ...optionalSubjectMeta(group, subject),
       breadcrumb: [rootCrumb, subjectCrumb],
     })
     for (const topic of subject.topics) {
       pages.push({
         path: `${base}/${subject.slug}/${topic.slug}`,
         file: `${subject.slug}--${topic.slug}.html`,
-        title: `${topic.title} — CSS ${subject.subject} Notes | CSS Vista`,
-        description: `${topic.title}: detailed CSS ${subject.subject} study notes following the FPSC optional syllabus, about ${Math.max(1, Math.round(topic.words / 200))} minutes of reading.`,
+        ...optionalTopicMeta(subject, topic),
         breadcrumb: [rootCrumb, subjectCrumb,
           { name: topic.title, item: `${siteOrigin}${base}/${subject.slug}/${topic.slug}` }],
       })

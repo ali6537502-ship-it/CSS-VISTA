@@ -10,6 +10,7 @@ import { join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { installDomShim } from './lib/dom-shim.mjs'
 import { publishSection } from './lib/publish-section.mjs'
+import { islamicChapterMeta, islamicTopicMeta } from '../src/data/studyMaterialMeta.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const clientDir = process.env.CSSV_CLIENT_DIR
@@ -31,8 +32,7 @@ for (const chapter of index.chapters) {
   pages.push({
     path: `${base}/${chapter.slug}`,
     file: `${chapter.slug}.html`,
-    title: `${name} — CSS Islamic Studies References (English & Urdu) | CSS Vista`,
-    description: `${chapter.referenceCount} source-checked references for ${name}, across ${chapter.topics.length} topics, with Arabic source passages and parallel English and Urdu.`,
+    ...islamicChapterMeta(chapter),
     inLanguage: ['en', 'ur'],
     breadcrumb: [rootCrumb, chapterCrumb],
   })
@@ -40,8 +40,7 @@ for (const chapter of index.chapters) {
     pages.push({
       path: `${base}/${chapter.slug}/${topic.slug}`,
       file: `${chapter.slug}--${topic.slug}.html`,
-      title: `${topic.titleEn} — ${name} References | CSS Vista`,
-      description: `${topic.count} source-checked Qur'anic, Hadith and scholarly references on ${topic.titleEn.toLowerCase()} for CSS Islamic Studies, with Arabic passages and parallel English and Urdu.`,
+      ...islamicTopicMeta(chapter, topic),
       inLanguage: ['en', 'ur'],
       breadcrumb: [rootCrumb, chapterCrumb,
         { name: topic.titleEn, item: `${siteOrigin}${base}/${chapter.slug}/${topic.slug}` }],
