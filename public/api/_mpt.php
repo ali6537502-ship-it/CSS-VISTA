@@ -179,6 +179,23 @@ function mpt_paper_questions(int $index): ?array
     return is_array($decoded) ? $decoded : null;
 }
 
+function mpt_insert_frozen_questions(PDO $pdo, string $mockId, array $questions): void
+{
+    foreach (array_chunk(array_values($questions), 50, true) as $chunk) {
+        $values = [];
+        foreach ($chunk as $position => $question) {
+            array_push($values,
+                $mockId, $position + 1, (string)$question['id'], (string)$question['section'],
+                isset($question['topic']) ? mb_substr((string)$question['topic'], 0, 191) : null,
+                isset($question['difficulty']) ? (string)$question['difficulty'] : null,
+                (string)$question['q'], json_encode(array_values($question['o']), JSON_UNESCAPED_UNICODE),
+                (int)$question['a'], isset($question['e']) ? (string)$question['e'] : null);
+        }
+        $pdo->prepare('INSERT INTO mpt_mock_questions (mock_id,position,question_id,section,topic,difficulty,stem,options,correct_index,explanation) VALUES ' . implode(',', array_fill(0, count($chunk), '(?,?,?,?,?,?,?,?,?,?)')))
+            ->execute($values);
+    }
+}
+
 /**
  * Copies the first exported paper that shares no question with any previously
  * frozen paper into mpt_mock_questions. Returns false when the runway is empty.
@@ -199,26 +216,113 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
         $overlap = $pdo->prepare('SELECT 1 FROM mpt_mock_questions WHERE question_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') LIMIT 1');
         $overlap->execute($ids);
         if ($overlap->fetchColumn()) continue;
-        // Multi-row inserts, 50 questions per statement.
-        foreach (array_chunk(array_values($questions), 50, true) as $chunk) {
-            $values = [];
-            foreach ($chunk as $position => $question) {
-                array_push($values,
-                    $mock['id'], $position + 1, (string)$question['id'], (string)$question['section'],
-                    isset($question['topic']) ? mb_substr((string)$question['topic'], 0, 191) : null,
-                    isset($question['difficulty']) ? (string)$question['difficulty'] : null,
-                    (string)$question['q'], json_encode(array_values($question['o']), JSON_UNESCAPED_UNICODE),
-                    (int)$question['a'], isset($question['e']) ? (string)$question['e'] : null);
-            }
-            $pdo->prepare('INSERT INTO mpt_mock_questions (mock_id,position,question_id,section,topic,difficulty,stem,options,correct_index,explanation) VALUES ' . implode(',', array_fill(0, count($chunk), '(?,?,?,?,?,?,?,?,?,?)')))
-                ->execute($values);
-        }
+        mpt_insert_frozen_questions($pdo, (string)$mock['id'], $questions);
         $count = count($questions);
         $pdo->prepare('UPDATE mpt_mocks SET paper_ref=?,paper_series=?,paper_frozen_at=?,total_questions=?,total_marks=?*marks_per_question WHERE id=?')
             ->execute([$ref, $manifest['series'], mpt_db_time(mpt_now_ms()), $count, $count, $mock['id']]);
         return true;
     }
     return false;
+}
+
+/**
+ * When a deploy introduces a new audited paper series, replace only future
+ * papers that have not started and have no attempt row. Applications, sessions
+ * and roll numbers are preserved. The migration is all-or-nothing: if every
+ * affected mock cannot receive a non-overlapping paper, nothing is changed.
+ */
+function mpt_refresh_future_papers(PDO $pdo, int $nowMs): array
+{
+    $manifest = mpt_paper_manifest();
+    if ($manifest === null || empty($manifest['publishable']) || empty($manifest['series'])) {
+        return ['checked' => false, 'refreshed' => 0];
+    }
+    $series = (string)$manifest['series'];
+    if (mpt_meta_get($pdo, 'paper_refresh_checked_series') === $series) {
+        return ['checked' => false, 'refreshed' => 0];
+    }
+
+    $futureAt = mpt_db_time($nowMs);
+    $targetsStmt = $pdo->prepare("SELECT m.id,m.public_slug,m.paper_ref,m.paper_series
+        FROM mpt_mocks m
+        WHERE m.status='PUBLISHED' AND m.exam_open_at>?
+          AND (m.paper_series IS NULL OR m.paper_series<>?)
+          AND NOT EXISTS (SELECT 1 FROM mpt_attempts t WHERE t.mock_id=m.id)
+        ORDER BY m.exam_open_at,m.mock_number");
+    $targetsStmt->execute([$futureAt, $series]);
+    $targets = $targetsStmt->fetchAll();
+    if (!$targets) {
+        mpt_meta_set($pdo, 'paper_refresh_checked_series', $series);
+        return ['checked' => true, 'refreshed' => 0];
+    }
+
+    $targetIds = array_map(static fn(array $row) => (string)$row['id'], $targets);
+    $placeholders = implode(',', array_fill(0, count($targetIds), '?'));
+    $protected = [];
+    $usedStmt = $pdo->prepare("SELECT DISTINCT q.question_id
+        FROM mpt_mock_questions q
+        WHERE q.mock_id NOT IN ($placeholders)");
+    $usedStmt->execute($targetIds);
+    foreach ($usedStmt->fetchAll(PDO::FETCH_COLUMN) as $questionId) $protected[(string)$questionId] = true;
+
+    $protectedRefs = [];
+    $refStmt = $pdo->prepare("SELECT paper_ref FROM mpt_mocks
+        WHERE paper_ref IS NOT NULL AND id NOT IN ($placeholders)");
+    $refStmt->execute($targetIds);
+    foreach ($refStmt->fetchAll(PDO::FETCH_COLUMN) as $paperRef) $protectedRefs[(string)$paperRef] = true;
+
+    $assignments = [];
+    foreach ($targets as $target) {
+        $chosen = null;
+        foreach ($manifest['papers'] as $paper) {
+            $index = (int)$paper['index'];
+            $ref = $series . ':' . $index;
+            if (isset($protectedRefs[$ref])) continue;
+            $questions = mpt_paper_questions($index);
+            if (!$questions || count($questions) !== (int)$paper['count']) continue;
+            $overlap = false;
+            foreach ($questions as $question) {
+                if (isset($protected[(string)$question['id']])) { $overlap = true; break; }
+            }
+            if ($overlap) continue;
+            $chosen = ['ref' => $ref, 'questions' => $questions];
+            break;
+        }
+        if ($chosen === null) {
+            mpt_meta_set($pdo, 'paper_refresh_checked_series', $series);
+            mpt_meta_set($pdo, 'paper_refresh_blocked_at', mpt_db_time($nowMs));
+            return ['checked' => true, 'refreshed' => 0, 'blocked' => true];
+        }
+        $assignments[(string)$target['id']] = $chosen;
+        $protectedRefs[$chosen['ref']] = true;
+        foreach ($chosen['questions'] as $question) $protected[(string)$question['id']] = true;
+    }
+
+    $pdo->beginTransaction();
+    try {
+        foreach ($targets as $target) {
+            $mockId = (string)$target['id'];
+            $assignment = $assignments[$mockId];
+            $pdo->prepare('DELETE FROM mpt_mock_questions WHERE mock_id=?')->execute([$mockId]);
+            mpt_insert_frozen_questions($pdo, $mockId, $assignment['questions']);
+            $count = count($assignment['questions']);
+            $pdo->prepare('UPDATE mpt_mocks SET paper_ref=?,paper_series=?,paper_frozen_at=?,total_questions=?,total_marks=?*marks_per_question WHERE id=?')
+                ->execute([$assignment['ref'], $series, mpt_db_time($nowMs), $count, $count, $mockId]);
+            mpt_event($pdo, 'ADMIN_ACTION', null, $mockId, null, null, [
+                'action' => 'future_paper_refreshed',
+                'old_paper_ref' => $target['paper_ref'],
+                'new_paper_ref' => $assignment['ref'],
+                'old_series' => $target['paper_series'],
+                'new_series' => $series,
+            ]);
+        }
+        mpt_meta_set($pdo, 'paper_refresh_checked_series', $series);
+        $pdo->commit();
+        return ['checked' => true, 'refreshed' => count($targets)];
+    } catch (Throwable $error) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        throw $error;
+    }
 }
 
 // ---------------------------------------------------------------- automatic schedule (D-01)
@@ -331,8 +435,9 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
     if ((int)$pdo->query("SELECT GET_LOCK('cssvista-mpt-maintain',0)")->fetchColumn() !== 1) return ['skipped' => true];
     try {
         mpt_meta_set($pdo, 'last_maintenance_at', mpt_db_time($now));
+        $refresh = mpt_refresh_future_papers($pdo, $now);
         mpt_auto_schedule($pdo, $now, $force ? 40 : CSSV_MPT_SCHEDULE_PER_RUN);
-        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0);
+        return $refresh + mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0);
     } finally {
         $pdo->query("SELECT RELEASE_LOCK('cssvista-mpt-maintain')");
     }
