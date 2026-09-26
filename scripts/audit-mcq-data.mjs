@@ -7,6 +7,40 @@ const bundledDir = path.join(root, 'src', 'data', 'mcq-shards')
 const index = JSON.parse(fs.readFileSync(path.join(publicDir, 'index.json'), 'utf8'))
 const normalize = (value) => String(value ?? '').trim().replace(/\s+/g, ' ').toLocaleLowerCase()
 
+const lowValueCodeTrivia = (slug, question) => {
+  const text = `${question?.q ?? ''} ${question?.e ?? ''}`
+  if (slug === 'currencies') return /ISO 4217|currency code/i.test(String(question?.q ?? ''))
+  if (!['countries-continents', 'misc-gk', 'national-symbols'].includes(slug)) return false
+  return /ISO 3166|ISO alpha-[23]|UN M49|international calling code|calling code|ccTLD|country-code top-level domain|country-code internet domain|country-code domain suffix|country-code domain|domain suffix|generated from ISO|flag symbol/i.test(text)
+}
+
+const lowValueMiscTableTrivia = (slug, question) => slug === 'misc-gk' && (
+  /electron configuration|oxidation states|melting point|boiling point|atomic mass|discovered according to the PubChem table|PubChem periodic table lists .*discovery date/i
+    .test(`${question?.q ?? ''} ${question?.e ?? ''}`)
+)
+
+const countryRegionFact = (question) => {
+  const patterns = [
+    [/^On which continent is (.+?)(?: located)?\?$/i, 'continent'],
+    [/^(.+?) belongs to which world region\?$/i, 'region'],
+    [/^In which subregion is (.+?) located\?$/i, 'subregion'],
+    [/^Where is (.+?) placed in regional world geography\?$/i, 'region'],
+    [/^Select the world region in which (.+?) lies\.$/i, 'region'],
+  ]
+  for (const [pattern, type] of patterns) {
+    const match = String(question?.q ?? '').match(pattern)
+    if (match) return { country: match[1].trim(), type }
+  }
+  return null
+}
+
+const normalizePlace = (value) => String(value ?? '')
+  .normalize('NFKD')
+  .replace(/\p{Diacritic}/gu, '')
+  .toLocaleLowerCase()
+  .replace(/[^a-z0-9]+/g, ' ')
+  .trim()
+
 const currencyCountry = (question) => {
   const patterns = [
     /^What is the currency of (.+?)\?$/i,
@@ -53,6 +87,7 @@ for (const category of index.categories) {
   let categoryCount = 0
   const seenText = new Set()
   const seenCurrencyCountries = new Set()
+  const seenCountryRegionFacts = new Set()
   for (let chunk = 0; chunk < category.chunks; chunk += 1) {
     const filename = `cat-${category.slug}-${chunk}.json`
     const publicPath = path.join(publicDir, filename)
@@ -76,6 +111,17 @@ for (const category of index.categories) {
       const textKey = normalize(question.q)
       if (seenText.has(textKey)) errors.push(`${question.id}: repeated question text in ${category.slug}`)
       seenText.add(textKey)
+      if (lowValueCodeTrivia(category.slug, question)) errors.push(`${question.id}: low-value code/domain trivia is not allowed in ${category.slug}`)
+      if (lowValueMiscTableTrivia(category.slug, question)) errors.push(`${question.id}: generated chemistry-table trivia is not allowed in misc-gk`)
+      if (category.slug === 'countries-continents') {
+        const fact = countryRegionFact(question)
+        if (fact) {
+          const answer = Array.isArray(question.o) && Number.isInteger(question.a) ? question.o[question.a] : ''
+          const factKey = `${normalizePlace(fact.country)}|${normalizePlace(answer)}`
+          if (seenCountryRegionFacts.has(factKey)) errors.push(`${question.id}: repeated country-region/continent fact for ${fact.country}`)
+          seenCountryRegionFacts.add(factKey)
+        }
+      }
       if (category.slug === 'currencies') {
         const country = currencyCountry(question.q)
         if (country) {

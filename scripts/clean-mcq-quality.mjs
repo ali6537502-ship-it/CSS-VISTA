@@ -75,6 +75,63 @@ function isStatementCombination(value) {
   return /\bstatement\s+(?:i|ii)\b|بيان\s*(?:i|ii)/iu.test(String(value ?? ''))
 }
 
+const lowValueCodeTrivia = (slug, question) => {
+  const text = `${question?.q ?? ''} ${question?.e ?? ''}`
+  if (slug === 'currencies') return /ISO 4217|currency code/i.test(String(question?.q ?? ''))
+  if (!['countries-continents', 'misc-gk', 'national-symbols'].includes(slug)) return false
+  return /ISO 3166|ISO alpha-[23]|UN M49|international calling code|calling code|ccTLD|country-code top-level domain|country-code internet domain|country-code domain suffix|country-code domain|domain suffix|generated from ISO|flag symbol/i.test(text)
+}
+
+const lowValueMiscTableTrivia = (slug, question) => slug === 'misc-gk' && (
+  /electron configuration|oxidation states|melting point|boiling point|atomic mass|discovered according to the PubChem table|PubChem periodic table lists .*discovery date/i
+    .test(`${question?.q ?? ''} ${question?.e ?? ''}`)
+)
+
+function countryRegionFact(question) {
+  const patterns = [
+    [/^On which continent is (.+?)(?: located)?\?$/i, 'continent'],
+    [/^(.+?) belongs to which world region\?$/i, 'region'],
+    [/^In which subregion is (.+?) located\?$/i, 'subregion'],
+    [/^Where is (.+?) placed in regional world geography\?$/i, 'region'],
+    [/^Select the world region in which (.+?) lies\.$/i, 'region'],
+  ]
+  for (const [pattern, type] of patterns) {
+    const match = String(question?.q ?? '').match(pattern)
+    if (match) return { country: match[1].trim(), type }
+  }
+  return null
+}
+
+function markCountryRegionDuplicates(questions, removed) {
+  const priority = { continent: 0, subregion: 1, region: 2 }
+  const groups = new Map()
+  for (const question of questions) {
+    if (removed.has(question.id)) continue
+    const fact = countryRegionFact(question)
+    if (!fact) continue
+    const answer = gkAnswer(question)
+    const key = `${normalise(fact.country)}|${normalise(answer)}`
+    const group = groups.get(key) ?? []
+    group.push({ question, fact })
+    groups.set(key, group)
+  }
+  let count = 0
+  for (const group of groups.values()) {
+    if (group.length < 2) continue
+    group.sort((left, right) => (
+      (priority[left.fact.type] ?? 9) - (priority[right.fact.type] ?? 9) ||
+      left.question.q.length - right.question.q.length ||
+      String(left.question.id).localeCompare(String(right.question.id), 'en', { numeric: true })
+    ))
+    for (const duplicate of group.slice(1)) {
+      if (removed.has(duplicate.question.id)) continue
+      removed.set(duplicate.question.id, 'repeated country-region/continent fact')
+      count += 1
+    }
+  }
+  return count
+}
+
 const gkQuestion = (question) => question.q
 const gkAnswer = (question) => question.o[question.a]
 const cssQuestion = (question) => question.question
@@ -254,6 +311,23 @@ function cleanGkCategory(category, questions) {
   const getExplanation = (question) => question.e ?? ''
   const reasons = {}
   const record = (name, count) => { reasons[name] = count }
+
+  let lowValueCodeCount = 0
+  let lowValueTableCount = 0
+  for (const question of questions) {
+    if (lowValueCodeTrivia(category.slug, question)) {
+      removed.set(question.id, 'low-value code/domain trivia')
+      lowValueCodeCount += 1
+    } else if (lowValueMiscTableTrivia(category.slug, question)) {
+      removed.set(question.id, 'generated chemistry-table trivia')
+      lowValueTableCount += 1
+    }
+  }
+  record('low-value code/domain trivia', lowValueCodeCount)
+  record('generated chemistry-table trivia', lowValueTableCount)
+  if (category.slug === 'countries-continents') {
+    record('repeated country-region/continent fact', markCountryRegionDuplicates(questions, removed))
+  }
 
   record('exact repeated stem', markGroupedDuplicates({
     questions, removed, reason: 'exact repeated stem',
