@@ -782,6 +782,99 @@ family('ga.algebra.sum-product-to-cubes', 'ga.algebra', {
 })
 
 // ===========================================================================
+// ga.equations — 140
+// ===========================================================================
+const okInt = (arr, ans) => arr.filter((v) => typeof v === 'number' && isInt(v) && v !== ans)
+const keyOf = (p, skip = []) => `${p.s}-${Object.entries(p).filter(([k, v]) => k !== 's' && k !== 'nm' && k !== 'nm2' && !skip.includes(k) && typeof v !== 'object').map(([, v]) => v).join('-')}`
+
+family('ga.equations.linear-one-variable', 'ga.equations', {
+  positive: false,
+  gen: (r, x) => {
+    switch (x.s) {
+      case 'both': { const a = r.int(3, 9); const c = r.int(1, a - 1); const x0 = r.int(1, 12); const b = r.int(-9, 9); return { a, c, x0, b, d: (a - c) * x0 + b } }
+      case 'halves': { const [m, n] = r.pick([[2, 4], [2, 3], [3, 4], [3, 6], [4, 6], [2, 5], [4, 5]]); return { m, n, k: r.int(1, 6) } }
+      case 'bracket': { const b = r.int(2, 5); const a = b + r.int(1, 3); return { a, b, c: r.int(1, 9) } }
+      case 'cross': { const n = r.int(2, 5); const m = n + r.int(1, 3); return { m, n, p: r.int(1, 6), q: r.int(1, 6) } }
+      case 'swap': { const a = r.int(1, 5); const c = a + r.int(2, 5); const x0 = r.int(1, 6); const b = r.int(1, 15); return { a, c, x0, b, d: b + (c - a) * x0 } }
+      case 'expand': { const a = r.int(2, 4); const b = r.int(2, 4); const d = r.int(1, a * b - 1); return { a, b, c: r.int(1, 6), d, e: r.int(1, 6), x0: r.int(1, 8) } }
+      case 'decimal': { const a = r.int(2, 9); const x0 = r.int(2, 12); const b = r.int(1, 19); return { a, x0, b, c: a * x0 + b } }
+      case 'findk': { const a = r.int(3, 9); const c = r.int(1, a - 1); return { a, c, x0: r.int(1, 9), d: r.int(1, 30) } }
+      case 'frac': { const b = r.pick([2, 3, 4, 5]); const a = r.int(2, 7); const x0 = b * r.int(1, 6); return { a, b, x0 } }
+      case 'lcd': { for (;;) { const a = r.int(1, 3); const b = r.int(1, 5); const m = r.pick([2, 3, 5]); const n = r.pick([2, 3, 4]); const c = r.int(1, 6); const x0 = r.int(1, 20); if (m !== n && (a * x0 - b) % m === 0 && (x0 + c) % n === 0 && a * x0 - b > 0) return { a, b, m, n, c, x0, R: (a * x0 - b) / m + (x0 + c) / n } } }
+      case 'other': { const a = r.int(2, 5); const x0 = r.int(1, 8); const b = r.int(1, 9); return { a, x0, b, R: a * x0 + b } }
+      default: { const a = r.int(1, 4); const x0 = r.int(1, 7); const q = r.int(1, 9); const c = r.int(1, 9); return { a, x0, q, c, p: (a + 1) * x0 - q + c } } // minus-bracket
+    }
+  },
+  key: (p) => keyOf(p),
+  solve: (P) => {
+    switch (P.s) {
+      case 'both': { const { a, c, x0, b, d } = P; if (d === b) return null; return { ans: x0, wrong: okInt([(d + b) / (a - c), (d - b) / (a + c), -x0, x0 + 1], x0), expl: `${a}x − ${c}x = ${num(d)} − ${pn(b)}, so ${a - c}x = ${num(d - b)} and x = ${x0}.` } }
+      case 'halves': { const { m, n, k } = P; const x0 = (k * m * n) / (n - m); if (!isInt(x0)) return null; return { ans: x0, wrong: okInt([k * (n - m), k * m * n, (k * m * n) / (n + m), 2 * x0], x0), expl: `x/${m} − x/${n} = ${n - m}x/${m * n} = ${k}, so x = ${k} × ${m * n}/${n - m} = ${x0}.` } }
+      case 'bracket': { const { a, b, c } = P; const x0 = (b * c) / (a - b); if (!isInt(x0)) return null; return { ans: x0, wrong: okInt([(b * c) / (a + b), c, b * c, x0 + 1], x0), expl: `${a}x = ${b}x + ${b * c}, so ${a - b}x = ${b * c} and x = ${x0}.` } }
+      case 'cross': { const { m, n, p, q } = P; const x0 = (n * p + m * q) / (m - n); if (!isInt(x0)) return null; return { ans: x0, wrong: okInt([(n * p - m * q) / (m - n), p + q, (n * p + m * q) / (m + n), x0 + 2], x0), expl: `Cross-multiplying: ${n}(x + ${p}) = ${m}(x − ${q}), so ${n}x + ${n * p} = ${m}x − ${m * q} and x = ${n * p + m * q}/${m - n} = ${x0}.` } }
+      case 'swap': { const { a, c, x0, b, d } = P; return { ans: x0, wrong: okInt([(d + b) / (c - a), (d - b) / (c + a), (b + d) / (c + a), x0 + 1], x0), expl: `Move the y-terms together: ${c}y − ${a}y = ${d} − ${b}, so ${c - a}y = ${d - b} and y = ${x0}.` } }
+      case 'expand': { const { a, b, c, d, e, x0 } = P; const R = a * (b * x0 - c) - d * (x0 - e); const cf = a * b - d; const wrongX = (R + a * c + d * e) / cf; return { ans: x0, wrong: okInt([wrongX, (R + a * c - d * e) / cf, (R - a * c + d * e) / cf, x0 + 1], x0), expl: `${a * b}x − ${a * c} − ${d}x + ${d * e} = ${R}, so ${cf}x = ${R + a * c - d * e} and x = ${x0}.`, R } }
+      case 'decimal': { const { a, x0, b, c } = P; return { ans: x0, wrong: [(c + b) / a, x0 / 10, c - b].filter((v) => v !== x0), expl: `${num(a / 10)}x = ${num(c / 10)} − ${num(b / 10)} = ${num((c - b) / 10)}, so x = ${num((c - b) / 10)} ÷ ${num(a / 10)} = ${x0}.` } }
+      case 'findk': { const { a, c, x0, d } = P; const k = d - (a - c) * x0; if (k === 0) return null; return { ans: k, wrong: okInt([d + (a - c) * x0, (a - c) * x0, d - a * x0, d].filter((v) => v !== 0), k), expl: `Put x = ${x0}: ${a * x0} + k = ${c * x0} + ${d}, so k = ${c * x0 + d} − ${a * x0} = ${num(k)}.` } }
+      case 'frac': { const { a, b, x0 } = P; const c = (a * x0) / b; if (!isInt(c)) return null; return { ans: x0, wrong: okInt([(a * c) / b, c * b, c * a, c], x0), expl: `Multiply both sides by ${b}: ${a}x = ${c * b}, so x = ${x0}.` } }
+      case 'lcd': { const { a, b, m, n, c, x0, R } = P; return { ans: x0, wrong: okInt([(R + n * b - m * c) / (n * a + m), x0 + 2, x0 - 2, 2 * x0].filter((v) => v > 0), x0), expl: `Multiply by ${m * n}: ${n}(${a === 1 ? '' : a}x − ${b}) + ${m}(x + ${c}) = ${R * m * n}; this gives ${n * a + m}x = ${R * m * n + n * b - m * c}, so x = ${x0}.` } }
+      case 'other': { const { a, x0, b, R } = P; const ans = 2 * a * x0 - 1; return { ans, wrong: okInt([x0, 2 * R - 1, 2 * a * x0 + 1], ans), expl: `${a}x + ${b} = ${R} gives x = ${x0}; then ${2 * a}x − 1 = ${2 * a * x0} − 1 = ${ans}.` } }
+      default: { const { a, x0, q, c, p } = P; if (p <= 0) return null; return { ans: x0, wrong: okInt([(p - q - c) / (a + 1), (p + q - c) / (a - 1 || 1), (p + q + c) / (a + 1)], x0), expl: `${p} − x + ${q} = ${a === 1 ? '' : a}x + ${c}, so ${p + q - c} = ${a + 1}x and x = ${x0}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Solve ${p.a}x ${sg(p.b).trim()} = ${p.c === 1 ? '' : p.c}x ${sg(p.d).trim()}.`.replace('x + 0', 'x'), { s: 'both' }],
+    [1, (p) => `If x/${p.m} − x/${p.n} = ${p.k}, then x is:`, { s: 'halves' }],
+    [1, (p) => `Find x if ${p.a}x = ${p.b}(x + ${p.c}).`, { s: 'bracket' }],
+    [2, (p) => `Solve (x + ${p.p})/${p.m} = (x − ${p.q})/${p.n}.`, { s: 'cross' }],
+    [1, (p) => `What value of y makes ${p.b} + ${p.c}y = ${p.d} + ${p.a === 1 ? '' : p.a}y true?`, { s: 'swap' }],
+    [2, (p) => `The solution of ${p.a}(${p.b}x − ${p.c}) − ${p.d}(x − ${p.e}) = ${p.a * (p.b * p.x0 - p.c) - p.d * (p.x0 - p.e)} is:`, { s: 'expand' }],
+    [1, (p) => `If ${num(p.a / 10)}x + ${num(p.b / 10)} = ${num(p.c / 10)}, the value of x is:`, { s: 'decimal' }],
+    [2, (p) => `For what value of k does ${p.a}x + k = ${p.c === 1 ? '' : p.c}x + ${p.d} have the solution x = ${p.x0}?`, { s: 'findk' }],
+    [1, (p) => `Find the number x for which ${p.a}x/${p.b} = ${(p.a * p.x0) / p.b}.`, { s: 'frac' }],
+    [3, (p) => `Solve for x: (${p.a === 1 ? '' : p.a}x − ${p.b})/${p.m} + (x + ${p.c})/${p.n} = ${p.R}.`, { s: 'lcd' }],
+    [2, (p) => `Given that ${p.a}x + ${p.b} = ${p.R}, what is the value of ${2 * p.a}x − 1?`, { s: 'other' }],
+    [2, (p) => `Which value of x satisfies ${p.p} − (x − ${p.q}) = ${p.a === 1 ? '' : p.a}x + ${p.c}?`, { s: 'minus' }],
+  ],
+})
+
+family('ga.equations.number-word-problem', 'ga.equations', {
+  gen: (r, x) => ({ n: r.int(3, 30), a: r.int(2, 5), b: r.int(2, 20), c: r.int(2, 4), k: r.int(2, 5), nm: r.pick(NAMES), mn: r.pick([[3, 5], [2, 3], [3, 4], [4, 5], [2, 5], [4, 6]]), pq: r.pick([[3, 4], [2, 3], [2, 5], [3, 5], [1, 4], [1, 3]]) }),
+  key: (p) => `${p.s}-${p.n}-${['treble', 'sub', 'think', 'div', 'twice'].includes(p.s) ? `${p.a}-${p.b}` : ''}${['half', 'split', 'excess', 'rest'].includes(p.s) ? p.k : ''}${p.s === 'fifth' ? p.mn.join('') : ''}${p.s === 'less' ? p.pq.join('') : ''}${p.s === 'div' ? p.c : ''}`,
+  solve: (P) => {
+    const { n, a, b, c, k } = P
+    switch (P.s) {
+      case 'treble': { const R = 3 * (a * n + b); return { ans: n, wrong: okInt([R / 3 - b, (R - b) / (3 * a), (R / 3 + b) / a, n + 1].filter((v) => v > 0), n), expl: `3(${a}n + ${b}) = ${R}, so ${a}n + ${b} = ${R / 3}, ${a}n = ${R / 3 - b} and n = ${n}.`, R } }
+      case 'fifth': { const [m, q] = P.mn; const x0 = n * m * q; const d = x0 / m - x0 / q; return { ans: x0, wrong: okInt([d * (q - m), d * m * q, (d * m * q) / (q + m)], x0), expl: `x/${m} − x/${q} = ${q - m}x/${m * q} = ${d}, so x = ${d} × ${m * q}/${q - m} = ${x0}.`, d } }
+      case 'sub': { const cc = a + 2; const d = cc * n - b - a * n; if (d <= 0) return null; return { ans: n, wrong: okInt([(d - b) / 2, (b + d) / (cc + a), b + d, n + 2].filter((v) => v > 0), n), expl: `${cc}n − ${b} = ${a}n + ${d}, so ${cc - a}n = ${b + d} and n = ${n}.`, d } }
+      case 'think': { const mul = a + 2; const add = mul * n - b - n; if (add <= 0) return null; return { ans: n, wrong: okInt([(add - b) / (mul - 1), (add + b) / (mul + 1), (add + b) / mul, n + 1].filter((v) => v > 0), n), expl: `${mul}n − ${b} = n + ${add}, so ${mul - 1}n = ${add + b} and n = ${n}.`, add } }
+      case 'half': { const x0 = n * k; const S = x0 + x0 / k; return { ans: x0, wrong: okInt([S / 2, S - S / k, S / (k + 1)].filter((v) => v > 0), x0), expl: `x + x/${k} = ${(k + 1)}x/${k} = ${S}, so x = ${S} × ${k}/${k + 1} = ${x0}.`, S } }
+      case 'less': { const [p, q] = P.pq; const x0 = n * q; const d = x0 - (p * x0) / q; return { ans: x0, wrong: okInt([(d * q) / (q + p), d * p, (d * q) / p, d * q * p].filter((v) => v > 0), x0), expl: `x − ${p}x/${q} = ${q - p}x/${q} = ${d}, so x = ${d} × ${q}/${q - p} = ${x0}.`, d } }
+      case 'plus': { const R = a * (n + b); return { ans: n, wrong: okInt([R / a + b, R - a * b + 0 * n, (R - b) / a].filter((v) => v > 0), n), expl: `${a}(n + ${b}) = ${R}, so n + ${b} = ${R / a} and n = ${n}.`, R } }
+      case 'twice': { const R = 2 * n + b; return { ans: n, wrong: okInt([(R + b) / 2, R - b, R / 2].filter((v) => isInt(v)), n), expl: `2n + ${b} = ${R}, so 2n = ${R - b} and n = ${n}.`, R } }
+      case 'split': { const S = n * (k + 1); return { ans: k * n, wrong: okInt([n, S / k, S - S / k, S / 2].filter((v) => isInt(v) && v > 0), k * n), expl: `If the smaller part is x, the larger is ${k}x and ${k + 1}x = ${S}, so x = ${n} and the larger part is ${k * n}.`, S } }
+      case 'div': { const R = a * n - b; if (R <= 0 || R % c !== 0) return null; const Q = R / c; return { ans: n, wrong: okInt([(Q + b) / a, (Q * c - b) / a, Q * c + b, n + 2].filter((v) => v > 0), n), expl: `(${a}n − ${b}) ÷ ${c} = ${Q}, so ${a}n − ${b} = ${R}, ${a}n = ${R + b} and n = ${n}.`, Q } }
+      case 'rest': { const S = n * (k + 1); return { ans: n, wrong: okInt([S / k, S / (k - 1), S - k, n + k].filter((v) => isInt(v) && v > 0), n), expl: `${S} − n = ${k}n, so ${k + 1}n = ${S} and n = ${n}.`, S } }
+      default: { const lo = k; const hi = k + 1; const L = hi * n; return { ans: L, wrong: okInt([lo * n, L + n, hi * lo * n], L), expl: `Let the smaller be s, so the larger is s + ${n}: ${hi}s = ${lo}(s + ${n}) gives s = ${lo * n}, and the larger is ${lo * n} + ${n} = ${L}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `A number is doubled and ${p.b} is added. If the result is trebled, it becomes ${3 * (2 * p.n + p.b)}. What is the number?`, { s: 'treble', a: 2 }],
+    [2, (p) => `One-${['', '', 'half', 'third', 'quarter', 'fifth', 'sixth'][p.mn[0]]} of a number exceeds one-${['', '', 'half', 'third', 'quarter', 'fifth', 'sixth'][p.mn[1]]} of it by ${p.n * p.mn[1] - p.n * p.mn[0]}. The number is:`, { s: 'fifth' }],
+    [2, (p) => `When ${p.b} is subtracted from ${['', '', '', '', 'four', 'five', 'six', 'seven'][p.a + 2]} times a number, the result is ${(p.a + 2) * p.n - p.b - p.a * p.n} more than ${['', '', 'twice', 'three times', 'four times', 'five times'][p.a]} the number. Find the number.`, { s: 'sub' }],
+    [2, (p) => `${p.nm} thinks of a number, multiplies it by ${p.a + 2} and subtracts ${p.b}. The answer is the same as adding ${(p.a + 2) * p.n - p.b - p.n} to the original number. What was the number?`, { s: 'think' }],
+    [2, (p) => `The sum of a number and its ${['', '', 'half', 'third', 'quarter', 'fifth'][p.k]} is ${p.n * p.k + p.n}. What is the number?`, { s: 'half' }],
+    [2, (p) => `${['', 'One', 'Two', 'Three', 'Four'][p.pq[0]]}-${['', '', 'halves', 'thirds', 'quarters', 'fifths'][p.pq[1]].replace(/s$/, p.pq[0] === 1 ? '' : 's')} of a number is ${p.n * p.pq[1] - p.n * p.pq[0]} less than the number itself. What is the number?`, { s: 'less' }],
+    [2, (p) => `If ${p.b} is added to a number and the sum is multiplied by ${p.a}, the answer is ${p.a * (p.n + p.b)}. Find the number.`, { s: 'plus' }],
+    [1, (p) => `Twice a number increased by ${p.b} equals ${2 * p.n + p.b}. Find the number.`, { s: 'twice' }],
+    [1, (p) => `Divide ${p.n * (p.k + 1)} into two parts so that one part is ${['', '', 'twice', 'three times', 'four times', 'five times'][p.k]} the other. The larger part is:`, { s: 'split' }],
+    [3, (p) => `A number is multiplied by ${p.a} and then ${p.b} is subtracted. The result is divided by ${p.c}, giving ${(p.a * p.n - p.b) / p.c}. What is the number?`, { s: 'div' }],
+    [3, (p) => `Two numbers differ by ${p.n}. ${['', '', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'][p.k + 1]} times the smaller equals ${['', '', 'two', 'three', 'four', 'five', 'six'][p.k]} times the larger. What is the larger number?`, { s: 'excess' }],
+    [1, (p) => `If a number is subtracted from ${p.n * (p.k + 1)}, the result is ${['', '', 'twice', 'three times', 'four times', 'five times'][p.k]} the number. What is the number?`, { s: 'rest' }],
+  ],
+})
+
+// ===========================================================================
 // ENGINE — builds, verifies and writes the items
 // ===========================================================================
 const BAD_TEXT = /NaN|undefined|Infinity|null|\+ −|− −|\+ \+|\(\+|\b1x\b|\[object/
@@ -804,7 +897,7 @@ function buildItems() {
       for (let attempt = 0; attempt < 4000 && !made; attempt++) {
         const allowFallback = attempt > 3000
         const extra = typeof extra0 === 'function' ? extra0(r) : { ...(extra0 ?? {}) }
-        const p = { ...extra, ...fam.gen(r, extra) }
+        const p = { ...fam.gen(r, extra), ...extra }
         if (p.reject) continue
         const key = String(fam.key(p)).replace(/--/g, '-m').replace(/^-/, 'm')
         if (usedKeys.has(key)) continue
