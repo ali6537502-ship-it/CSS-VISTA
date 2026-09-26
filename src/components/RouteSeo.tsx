@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { CANONICAL_ORIGIN, canonicalForPath, findRouteDefinition } from '@/data/routeRegistry.mjs'
+import { studyMaterialMetaForPath } from '@/data/studyMaterialMeta.mjs'
+import { respectServerNoindex } from '@/lib/serverRobots'
 
 const TRACKING_QUERY_KEYS = new Set([
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_id',
@@ -23,11 +25,15 @@ export default function RouteSeo() {
   useEffect(() => {
     const route = findRouteDefinition(location.pathname)
     const unknown = !route
-    const title = route?.title || 'Page Not Found | CSS Vista'
-    const description = route?.description || 'The requested CSS Vista page could not be found.'
-    const robots = location.search && !hasIndexableTrackingQueryOnly(location.search)
+    // Study-material subject, chapter and topic pages share one route pattern
+    // each; use the same page-specific metadata the prerender shipped instead
+    // of the pattern's generic template.
+    const pageMeta = route && route.match === 'pattern' ? studyMaterialMetaForPath(location.pathname) : null
+    const title = pageMeta?.title || route?.title || 'Page Not Found | CSS Vista'
+    const description = pageMeta?.description || route?.description || 'The requested CSS Vista page could not be found.'
+    const robots = respectServerNoindex(location.pathname, location.search && !hasIndexableTrackingQueryOnly(location.search)
       ? 'noindex, follow'
-      : (route?.robots || 'noindex, nofollow')
+      : (route?.robots || 'noindex, nofollow'))
     const canonical = unknown ? `${CANONICAL_ORIGIN}/404` : canonicalForPath(location.pathname)
     const routeSchema = document.getElementById('cssv-route-structured-data') as HTMLScriptElement | null
 
