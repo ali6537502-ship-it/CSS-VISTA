@@ -19,6 +19,7 @@ import {
 import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPage } from '@/components/PrintMenu'
 import { usePageBack } from '@/lib/backNavigation'
+import { respectServerNoindex } from '@/lib/serverRobots'
 
 function InlineText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
@@ -479,7 +480,7 @@ export default function BookSummaries() {
     const description = `${activeBook.title} by ${activeBook.author}: ${activeBook.excerpt}`.slice(0, 158).trim()
     const metaUpdates: Array<[string, string]> = [
       ['meta[name="description"]', description],
-      ['meta[name="robots"]', 'index, follow, max-image-preview:large'],
+      ['meta[name="robots"]', respectServerNoindex(`/book-summaries/${activeBook.slug}`, 'index, follow, max-image-preview:large')],
       ['meta[property="og:title"]', title],
       ['meta[property="og:description"]', description],
       ['meta[property="og:url"]', canonical],

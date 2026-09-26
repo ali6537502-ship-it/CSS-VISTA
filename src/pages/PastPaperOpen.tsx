@@ -6,6 +6,7 @@ import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { mergedPastPapers } from '@/lib/admin'
 import { recordActivity } from '@/lib/progress'
 import { safeDownloadName } from '@/lib/resourceFiles'
+import { respectServerNoindex } from '@/lib/serverRobots'
 
 type Paper = (typeof seedPapers)[number]
 const PAST_PAPER_ASSET_VERSION = '20260824'
@@ -71,7 +72,7 @@ export default function PastPaperOpen() {
     const previousTitle = document.title
     const metaUpdates = [
       ['meta[name="description"]', 'content', descriptionText],
-      ['meta[name="robots"]', 'content', 'index, follow, max-image-preview:large'],
+      ['meta[name="robots"]', 'content', respectServerNoindex(`/past-papers/view/${paper.id}`, 'index, follow, max-image-preview:large')],
       ['meta[property="og:type"]', 'content', 'website'],
       ['meta[property="og:title"]', 'content', title],
       ['meta[property="og:description"]', 'content', descriptionText],
