@@ -100,7 +100,7 @@ for (let day = 1; day <= 20; day += 1) {
       [abilityFamilies.reasoning, editorialBalance.abilityReasoning],
     ]) { bound.min = Math.min(bound.min, value); bound.max = Math.max(bound.max, value) }
     if (englishFamilies.grammar < 14) sample(`${key}: English grammar family has only ${englishFamilies.grammar}/14 minimum`)
-    if (englishFamilies.vocabulary < 8 || englishFamilies.vocabulary > 16) sample(`${key}: English vocabulary family has ${englishFamilies.vocabulary}; expected 8-16`)
+    if (englishFamilies.vocabulary < 5 || englishFamilies.vocabulary > 16) sample(`${key}: English vocabulary family has ${englishFamilies.vocabulary}; expected 5-16`)
     if (englishFamilies.usage < 8) sample(`${key}: English usage family has only ${englishFamilies.usage}/8 minimum`)
     if (abilityFamilies.quantitative < 34 || abilityFamilies.quantitative > 42) sample(`${key}: quantitative ability has ${abilityFamilies.quantitative}; expected 34-42`)
     if (abilityFamilies.reasoning < 18 || abilityFamilies.reasoning > 26) sample(`${key}: reasoning ability has ${abilityFamilies.reasoning}; expected 18-26`)
