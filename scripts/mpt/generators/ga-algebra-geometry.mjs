@@ -1345,7 +1345,9 @@ family('ga.sets.two-set-neither', 'ga.sets', {
 family('ga.sets.two-set-both', 'ga.sets', {
   gen: (r, x) => venn(r, { neither: !x.all }),
   key: (p) => `${p.U}-${p.A}-${p.B}-${p.N}`,
-  solve: ({ U, A, B, AB, N }) => ({ ans: AB, wrong: [A + B - U, U - N - A, U - N - B, A + B - U + 2 * N, N].filter((v) => v > 0), expl: `n(A ∪ B) = ${U} − ${N} = ${U - N}; both = ${A} + ${B} − ${U - N} = ${AB}.` }),
+  solve: ({ U, A, B, AB, N }) => (N === 0
+    ? { ans: AB, wrong: [U - A, U - B, A + B, Math.max(A, B) - AB].filter((v) => v > 0 && v !== AB), expl: `Everyone is in at least one group, so both = ${A} + ${B} − ${U} = ${AB}.` }
+    : { ans: AB, wrong: [A + B - U, U - N - A, U - N - B, A + B - U + 2 * N, N].filter((v) => v > 0), expl: `n(A ∪ B) = ${U} − ${N} = ${U - N}; both = ${A} + ${B} − ${U - N} = ${AB}.` }),
   items: [
     [2, (p) => `In a class of ${p.U} students, ${p.A} play hockey and ${p.B} play football. Every student plays at least one of the two games. How many play both?`, { all: true }],
     [2, (p) => `Of ${p.U} people surveyed, ${p.A} read an Urdu newspaper, ${p.B} read an English newspaper and ${p.N} read neither. How many read both?`],
@@ -1413,7 +1415,7 @@ family('ga.sets.subsets-count', 'ga.sets', {
     [2, (p) => `How many subsets of {${Array.from({ length: p.n }, (_, i) => i + 1).join(', ')}} contain the element 1?`, { m: 'contain' }],
     [1, (p) => `How many members does the power set of a ${p.n}-element set have?`, { m: 'power' }],
     [2, (p) => `How many non-empty subsets does {${LET.slice(0, p.n).map((c) => c.toUpperCase()).join(', ')}} have?`, { m: 'nonempty' }],
-    [2, (p) => `How many two-element subsets can be formed from a set of ${p.n + 1} elements?`.replace(`${p.n + 1}`, `${p.n + 1}`), { m: 'pairs' }],
+    [2, (p) => `How many two-element subsets can be formed from a set of ${p.n} elements?`, { m: 'pairs' }],
     [2, (p) => `Set P has ${p.k} more elements than set Q. The number of subsets of P is how many times the number of subsets of Q?`, { m: 'times' }],
   ],
 })
@@ -1439,7 +1441,7 @@ family('ga.sets.set-operations', 'ga.sets', {
       case 'diff': { const o = sets(AmB, BmA, I, A); return o && { ...o, expl: `P − Q keeps the elements of P that are not in Q: ${setStr(AmB)}.` } }
       case 'count': return { ans: Un.length, wrong: [A.length + B.length, I.length, A.length + B.length - 2 * I.length].filter((v) => v !== Un.length), expl: `A ∪ B = ${setStr(Un)}, which has ${Un.length} elements (${A.length} + ${B.length} − ${I.length}).` }
       case 'comp': { const U10 = Array.from({ length: 10 }, (_, i) => i + 1); const A10 = A.filter((v) => v <= 10); if (A10.length < 3) return null; const C = U10.filter((v) => !A10.includes(v)); P.A10 = A10; const o = sets(C, A10, C.slice(1), [...C, 11].filter((v) => v <= 10 || true).slice(0, C.length).concat(C.length < 10 ? [] : [])); if (!o) return null; const alt = [...C.slice(0, -1), A10[0]]; o.wrong = [setStr(A10), setStr(C.slice(1)), setStr(alt)].filter((t) => t !== setStr(C)); return { ...o, expl: `A′ contains the elements of U not in A: ${setStr(C)}.` } }
-      case 'primeodd': { const pr = primesBelow(N); const od = []; for (let v = 1; v < N; v += 2) od.push(v); const In = pr.filter((v) => od.includes(v)); const o = sets(In, pr, od.filter((v) => !pr.includes(v)), [2, ...In]); return o && { ...o, expl: `The odd primes below ${N} are ${setStr(In)} (2 is prime but even).` } }
+      case 'primeodd': { const pr = primesBelow(N); const od = []; for (let v = 1; v < N; v += 2) od.push(v); const In = pr.filter((v) => od.includes(v)); const o = sets(In, pr, od.filter((v) => !pr.includes(v)), [1, ...In]); return o && { ...o, expl: `The odd primes below ${N} are ${setStr(In)} (2 is prime but even).` } }
       case 'multiples': { if (k1 === k2) return null; const L = lcm(k1, k2); const c = Math.floor(N / L); if (c < 1) return null; return { ans: c, wrong: [Math.floor(N / k1) + Math.floor(N / k2), Math.floor(N / (k1 * k2)), c + 1, Math.floor(N / k1)].filter((v) => v !== c && v > 0), expl: `A ∩ B holds the common multiples, i.e. multiples of ${L} up to ${N}: there are ${c}.` } }
       case 'subset': { const S = A.slice(0, 3); const outside = Un.length < 12 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((v) => !A.includes(v)) : []; if (outside.length < 3) return null; return { ans: setStr(S.slice(0, 2)), wrong: [setStr([S[0], outside[0]]), setStr([outside[1], S[2]]), setStr([S[1], outside[2]])], expl: `Every element of ${setStr(S.slice(0, 2))} belongs to the given set; each other option contains an element that does not.` } }
       case 'sym': { const Sd = [...AmB, ...BmA]; const o = sets(Sd, Un, I, AmB); return o && { ...o, expl: `(A ∪ B) − (A ∩ B) = ${setStr(Un)} − ${setStr(I)} = ${setStr(Sd)}.` } }

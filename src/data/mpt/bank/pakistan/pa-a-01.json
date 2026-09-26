@@ -567,33 +567,6 @@
     "mpt_relevance": "core"
   },
   {
-    "id": "mpt-pa-a-0022",
-    "section": "General Knowledge",
-    "subject": "Pakistan Affairs",
-    "subtopic": "pa.movement",
-    "pattern_family": "pa.movement.muslim-rule",
-    "concept": "fatawa-e-alamgiri-aurangzeb",
-    "difficulty": 2,
-    "source_type": "authored",
-    "past_paper_year": null,
-    "verified": true,
-    "q": "Fatawa-e-Alamgiri, a compilation of Hanafi law, was prepared under the patronage of:",
-    "o": [
-      "Akbar",
-      "Shah Jahan",
-      "Aurangzeb",
-      "Bahadur Shah Zafar"
-    ],
-    "a": 2,
-    "explanation": "Aurangzeb Alamgir commissioned a board of scholars to compile Fatawa-e-Alamgiri as a code of Islamic law for his empire.",
-    "source_url": null,
-    "time_sensitive": false,
-    "event_date": null,
-    "last_verified": "2026-09-26",
-    "quality_grade": "A",
-    "mpt_relevance": "core"
-  },
-  {
     "id": "mpt-pa-a-0023",
     "section": "General Knowledge",
     "subject": "Pakistan Affairs",

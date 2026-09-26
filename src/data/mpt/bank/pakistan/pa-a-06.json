@@ -81,33 +81,6 @@
     "mpt_relevance": "core"
   },
   {
-    "id": "mpt-pa-a-0404",
-    "section": "General Knowledge",
-    "subject": "Pakistan Affairs",
-    "subtopic": "pa.institutions",
-    "pattern_family": "pa.institutions.judiciary",
-    "concept": "fsc-appeals-shariat-appellate-bench",
-    "difficulty": 2,
-    "source_type": "authored",
-    "past_paper_year": null,
-    "verified": true,
-    "q": "Appeals against decisions of the Federal Shariat Court are heard by the:",
-    "o": [
-      "Council of Islamic Ideology",
-      "Islamabad High Court",
-      "Supreme Judicial Council",
-      "Shariat Appellate Bench of the Supreme Court"
-    ],
-    "a": 3,
-    "explanation": "The Shariat Appellate Bench, including ulema judges, hears appeals from the Federal Shariat Court.",
-    "source_url": null,
-    "time_sensitive": false,
-    "event_date": null,
-    "last_verified": "2026-09-26",
-    "quality_grade": "A",
-    "mpt_relevance": "core"
-  },
-  {
     "id": "mpt-pa-a-0405",
     "section": "General Knowledge",
     "subject": "Pakistan Affairs",

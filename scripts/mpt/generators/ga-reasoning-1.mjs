@@ -1131,6 +1131,394 @@ function handEvents(T, seps) { let n = 0; for (const sep of seps) for (let k = 0
   }
 }
 
+
+// ---------------------------------------------------------------------------
+// MENTAL ABILITY (ga.mental-ability)
+// ---------------------------------------------------------------------------
+const MA = 'ga.mental-ability'
+const nearNums = (ans, extra = []) => [...new Set([...extra, ans + 1, ans - 1, ans + 2, ans - 2, ans + 4].filter((x) => x !== ans && x >= 0))].slice(0, 3)
+
+// ga.mental.dictionary-order
+{
+  const F = 'ga.mental.dictionary-order'
+  const sorted = (w) => [...w].sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
+  const DO = (d, words, kind, q, arg) => {
+    const s = sorted(words)
+    const order = s.join(', ')
+    let ans, wrong
+    if (kind === 'order') {
+      const code = s.map((w) => words.indexOf(w) + 1)
+      ans = code.join(', ')
+      const perms = [[1, 0, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3], [3, 2, 1, 0], [1, 0, 3, 2]].map((pm) => pm.map((i) => code[i]).concat(code.slice(4)).join(', '))
+      wrong = [...new Set(perms)].filter((x) => x !== ans).slice(0, 3)
+    } else if (kind === 'pos') {
+      ans = s[arg]; wrong = words.filter((w) => w !== ans).slice(0, 3)
+    } else if (kind === 'count') {
+      const n = words.filter((w) => w !== arg && w.toLowerCase() < arg.toLowerCase()).length
+      ans = n; wrong = nearNums(n, [n - 1, n + 1]).slice(0, 3)
+    } else if (kind === 'middle') {
+      ans = `${s[1]} and ${s[2]}`
+      wrong = [`${s[0]} and ${s[1]}`, `${s[2]} and ${s[3]}`, `${s[0]} and ${s[3]}`]
+    } else if (kind === 'after') {
+      ans = s[s.indexOf(arg) + 1]; wrong = words.filter((w) => w !== ans && w !== arg).slice(0, 3)
+    } else if (kind === 'before') {
+      ans = s[s.indexOf(arg) - 1]; wrong = words.filter((w) => w !== ans && w !== arg).slice(0, 3)
+    } else if (kind === 'revfirst') {
+      ans = s[s.length - 1]; wrong = s.slice(0, 3)
+    }
+    add({ st: MA, fam: F, concept: `dictionary-${words.join('-')}-${kind}`, d, q: q(words), ans, wrong, exp: `In dictionary order the words run: ${order}.` })
+  }
+  const num = (w) => w.map((x, i) => `${i + 1}. ${x}`).join('  ')
+  DO(2, ['Pleasure', 'Pleasant', 'Pleading', 'Pleasing'], 'order', (w) => `Arrange the words in dictionary order: ${num(w)}`)
+  DO(2, ['Monarch', 'Monastery', 'Monetary', 'Monitor', 'Monolith'], 'pos', (w) => `Which word comes third in dictionary order: ${list(w)}?`, 2)
+  DO(1, ['Candid', 'Candle', 'Candour', 'Candidate'], 'pos', (w) => `Which of these words would appear first in a dictionary: ${list(w)}?`, 0)
+  DO(1, ['Parliament', 'Parallel', 'Paramount', 'Parasite'], 'pos', (w) => `Of ${list(w)}, which will come last in a dictionary?`, 3)
+  DO(2, ['Estimate', 'Esteem', 'Establish', 'Estuary'], 'pos', (w) => `If ${list(w)} are arranged as in a dictionary, which one is in the second position?`, 1)
+  DO(2, ['Liberty', 'Library', 'Literacy', 'Literal', 'Lithium'], 'count', (w) => `How many of the words ${list(w.filter((x) => x !== 'Literal'))} come before ‘Literal’ in a dictionary?`, 'Literal')
+  DO(3, ['Abstract', 'Absurd', 'Absorb', 'Absolute', 'Abstain'], 'order', (w) => `Which sequence puts these words in the order they appear in a dictionary? ${num(w)}`)
+  DO(2, ['Tribunal', 'Tributary', 'Tribute', 'Tribulation'], 'pos', (w) => `When ${list(w)} are listed alphabetically, which word is second?`, 1)
+  DO(1, ['Custom', 'Custody', 'Cushion', 'Cuisine'], 'pos', (w) => `Pick the word that comes first alphabetically: ${list(w)}.`, 0)
+  DO(2, ['Refuse', 'Refute', 'Refund', 'Refuge'], 'pos', (w) => `Put ${list(w)} in dictionary order. Which word is third?`, 2)
+  DO(3, ['Dialogue', 'Diagram', 'Diameter', 'Dialect'], 'middle', (w) => `When the words ${list(w)} are arranged alphabetically, which two occupy the middle positions?`)
+  DO(2, ['Station', 'Stationery', 'Statistics', 'Statue', 'Stature'], 'after', (w) => `In a dictionary, which of these comes immediately after ‘Statistics’: ${list(w.filter((x) => x !== 'Statistics'))}?`, 'Statistics')
+  DO(2, ['Premise', 'Premium', 'Prelude', 'Premier'], 'pos', (w) => `Which word is listed last when ${list(w)} are sorted as in a dictionary?`, 3)
+  DO(2, ['Consider', 'Consent', 'Consist', 'Console', 'Consort'], 'before', (w) => `Which word comes just before ‘Console’ in dictionary order: ${list(w.filter((x) => x !== 'Console'))}?`, 'Console')
+  DO(2, ['Federal', 'Feature', 'Feather', 'Feasible'], 'order', (w) => `Choose the correct alphabetical order of: ${num(w)}`)
+  DO(3, ['Govern', 'Gourmet', 'Gourd', 'Gown'], 'revfirst', (w) => `If ${list(w)} are arranged in reverse dictionary order (Z to A), which word comes first?`)
+}
+
+// ga.mental.digit-rearrangement
+{
+  const F = 'ga.mental.digit-rearrangement'
+  const DR = (d, concept, q, ans, wrong, exp) => add({ st: MA, fam: F, concept, d, q, ans, wrong, exp })
+  {
+    const n = '7294036158', a = [...n]
+    for (let i = 0; i < 5; i++) [a[i], a[i + 5]] = [a[i + 5], a[i]]
+    const r = a.join(''), ans = r.at(-3)
+    DR(3, 'digit-swap-halves-7294036158-third-right', `In the number ${n}, the first and sixth digits are interchanged, then the second and seventh, the third and eighth, the fourth and ninth, and the fifth and tenth. Which digit is then third from the right?`, ans, [n.at(-3), r[2], r.at(-2)].filter((x, i, arr) => x !== ans && arr.indexOf(x) === i).concat(['0', '9']).filter((x) => x !== ans).slice(0, 3), `The swaps exchange the two halves: ${n} becomes ${r}, whose third digit from the right is ${ans}.`)
+  }
+  {
+    const n = '7392841', srt = [...n].sort().join(''), k = [...n].filter((c, i) => srt[i] === c).length
+    DR(2, 'digits-ascending-same-position-7392841', `If the digits of ${n} are arranged in ascending order, how many digits will remain in their original positions?`, k, nearNums(k, [k + 1, k + 2, k === 0 ? 3 : 0]), `Ascending order gives ${srt}; comparing with ${n} position by position, ${k} digit${k === 1 ? '' : 's'} stay${k === 1 ? 's' : ''} in place.`)
+  }
+  {
+    const big = 9752, small = 2579, v = big - small
+    DR(2, 'largest-minus-smallest-9275', 'What is the difference between the largest and the smallest four-digit numbers that can be formed using each of the digits 9, 2, 7 and 5 exactly once?', v, [v - 90, v + 900, 7263], `The largest is ${big} and the smallest ${small}; ${big} − ${small} = ${v}.`)
+  }
+  {
+    const n = '8394627', r = rev(n)
+    DR(1, 'reverse-8394627-middle-digit', `If the digits of ${n} are written in reverse order, which digit will be in the middle?`, r[3], ['9', '6', '2'], `Reversing gives ${r}; the middle (4th) digit of a seven-digit number does not move, so it is ${r[3]}.`)
+  }
+  {
+    const n = '64891273', r = [...n].map((c) => 9 - Number(c)).join('')
+    DR(2, 'nines-complement-64891273-fourth-left', `Each digit of ${n} is replaced by its difference from 9. Which digit is now fourth from the left?`, r[3], [n[3], r[4], r[2]].filter((x, i, arr) => x !== r[3] && arr.indexOf(x) === i).concat(['5']).slice(0, 3), `${n} becomes ${r}; its fourth digit from the left is ${r[3]}.`)
+  }
+  {
+    const n = '473829', r = rev(n.slice(0, 3)) + rev(n.slice(3))
+    DR(1, 'reverse-each-half-473829', `In the number ${n}, the first three digits are reversed among themselves and so are the last three. What is the new number?`, r, [rev(n), n.slice(3) + n.slice(0, 3), rev(n.slice(0, 3)) + n.slice(3)], `Reversing 473 gives 374 and reversing 829 gives 928, so the number becomes ${r}.`)
+  }
+  {
+    const n = '5382716', r = [...n].map((c) => (Number(c) % 2 ? Number(c) + 1 : Number(c) - 1)).join(''), v = Number(r[0]) + Number(r.at(-1))
+    DR(2, 'odd-plus-even-minus-5382716-first-last-sum', `In ${n}, 1 is added to every odd digit and 1 is subtracted from every even digit. What is the sum of the first and last digits of the new number?`, v, nearNums(v, [Number(n[0]) + Number(n.at(-1)), v + 2]), `The number becomes ${r}; ${r[0]} + ${r.at(-1)} = ${v}.`)
+  }
+  {
+    const n = '60518', r = [...n].sort().reverse().join('')
+    DR(1, 'descending-60518-middle', `Arrange the digits of ${n} in descending order. Which digit is then in the middle?`, r[2], ['0', '6', '1'], `Descending order gives ${r}; the middle digit is ${r[2]}.`)
+  }
+  {
+    const nums = []; for (const a of '407') for (const b of '407') for (const c of '407') if (a !== b && b !== c && a !== c && a !== '0') nums.push(Number(a + b + c))
+    nums.sort((x, y) => y - x)
+    DR(2, 'second-largest-3-digit-from-4-0-7', 'Which is the second-largest three-digit number that can be made from the digits 4, 0 and 7, each used once?', nums[1], [nums[0], nums[2], 470 + 400], `The possible numbers in descending order are ${nums.join(', ')}; the second is ${nums[1]}.`)
+  }
+  {
+    const n = '918273', odd = [...n].filter((c) => c % 2).sort(), even = [...n].filter((c) => c % 2 === 0).sort(), r = [...odd, ...even].join('')
+    DR(2, 'odd-first-ascending-918273-fourth', `The digits of ${n} are rearranged so that the odd digits come first in ascending order, followed by the even digits in ascending order. What is the fourth digit?`, r[3], [r[2], r[4], n[3]].filter((x, i, arr) => x !== r[3] && arr.indexOf(x) === i).concat(['1']).slice(0, 3), `The rearranged number is ${r}; its fourth digit is ${r[3]}.`)
+  }
+  {
+    const n = '52947316', r = n.replace(/(.)(.)/g, '$2$1')
+    DR(2, 'pair-swap-52947316-fifth', `In ${n}, the 1st and 2nd digits are swapped, then the 3rd and 4th, the 5th and 6th, and the 7th and 8th. What is the fifth digit from the left?`, r[4], [n[4], r[5], r[3]].filter((x, i, arr) => x !== r[4] && arr.indexOf(x) === i).concat(['1']).slice(0, 3), `The number becomes ${r}; its fifth digit is ${r[4]}.`)
+  }
+  {
+    const n = 20493, r = Number(rev(String(n))), v = n + r
+    DR(2, 'number-plus-reverse-20493', `Reverse the digits of ${n}. What is the sum of the original number and the reversed number?`, v, [v - 100, v + 1000, v - 9], `${n} reversed is ${r}; ${n} + ${r} = ${v}.`)
+  }
+  {
+    const ds = [3, 0, 8, 1, 6].sort(), first = ds.find((x) => x > 0), rest = ds.filter((x, i) => i !== ds.indexOf(first)), v = Number([first, ...rest].join(''))
+    DR(1, 'smallest-5-digit-30816', 'What is the smallest five-digit number that uses each of the digits 3, 0, 8, 1 and 6 exactly once?', v, [10638, 10386, 13068], `A five-digit number cannot start with 0, so start with the smallest non-zero digit 1, then 0, 3, 6, 8: ${v}.`)
+  }
+  {
+    const n = '5831946', s = [...n].sort().join(''), v = Math.abs(Number(s[2]) - Number(s.at(-3)))
+    DR(3, 'ascending-5831946-third-left-minus-third-right', `The digits of ${n} are arranged in ascending order. What is the difference between the digit now third from the left and the digit now third from the right?`, v, nearNums(v, [v + 1, v + 3, 1]), `Ascending order gives ${s}; the third digit from the left is ${s[2]} and from the right ${s.at(-3)}, a difference of ${v}.`)
+  }
+}
+
+// ga.mental.subset-sum
+{
+  const F = 'ga.mental.subset-sum'
+  const sums = (w) => { const out = new Map(); const n = w.length; for (let m = 1; m < 1 << n; m++) { let t = 0; for (let i = 0; i < n; i++) if (m >> i & 1) t += w[i]; out.set(t, (out.get(t) ?? 0) + 1) } return out }
+  const NOT = (d, w, opts, q, unit) => {
+    const S = sums(w), bad = opts.filter((x) => !S.has(x))
+    assert(bad.length === 1, `exactly one unformable total among ${opts} for ${w}`)
+    const ok = opts.filter((x) => S.has(x))
+    add({ st: MA, fam: F, concept: `subset-not-formable-${w.join('-')}-${bad[0]}`, d, q, ans: `${bad[0]}${unit}`, wrong: ok.map((x) => `${x}${unit}`), exp: `${ok.map((x) => `${x} = ${decomp(w, x).join(' + ')}`).join('; ')}; no selection of ${list(w)} adds up to ${bad[0]}.` })
+  }
+  const decomp = (w, t) => { for (let m = 1; m < 1 << w.length; m++) { const pick = w.filter((_, i) => m >> i & 1); if (sum(pick) === t) return pick } return null }
+  NOT(2, [15, 25, 40, 60], [80, 100, 90, 115], 'Four boxes weigh 15 kg, 25 kg, 40 kg and 60 kg. Which total weight cannot be made by taking one or more of the boxes?', ' kg')
+  NOT(1, [1, 2, 5, 10], [8, 13, 9, 16], 'Sana has one coin each of Rs 1, Rs 2, Rs 5 and Rs 10. Which of these amounts can she NOT pay exactly?', '')
+  NOT(1, [10, 20, 50, 100], [130, 80, 90, 160], 'A wallet holds one note each of Rs 10, 20, 50 and 100. Which sum cannot be paid exactly using these notes?', '')
+  NOT(2, [1, 3, 9], [4, 10, 7, 12], 'Weights of 1 kg, 3 kg and 9 kg can be placed only on one pan of a balance. Which of these loads cannot be weighed exactly?', ' kg')
+  NOT(2, [12, 18, 25, 31], [43, 55, 50, 37], 'Four parcels weigh 12, 18, 25 and 31 kg. Which of the following totals cannot be obtained by combining some of the parcels?', ' kg')
+  NOT(2, [3, 5, 8, 12], [16, 18, 20, 25], 'A clerk has one postage stamp each of Rs 3, 5, 8 and 12. Which postage cannot be made exactly with these stamps?', '')
+  NOT(2, [4, 6, 9, 15], [19, 21, 23, 25], 'Four containers hold 4, 6, 9 and 15 litres when full. Which of these quantities cannot be made by emptying whole containers into a tank?', ' litres')
+  NOT(1, [120, 150, 210], [270, 330, 300, 480], 'Three books have 120, 150 and 210 pages. Which total number of pages cannot be obtained by choosing one or more of the books?', '')
+  {
+    const w = [2, 3, 7], n = sums(w).size
+    add({ st: MA, fam: F, concept: 'distinct-totals-2-3-7', d: 2, q: 'How many different totals can be made using one or more of three weights of 2 kg, 3 kg and 7 kg?', ans: n, wrong: nearNums(n, [8, 6, 3]), exp: `The totals are ${[...sums(w).keys()].sort((a, b) => a - b).join(', ')}, all different: ${n} in all.` })
+  }
+  {
+    const w = [5, 8, 13], S = sums(w), opts = [13, 18, 21, 26], two = opts.filter((x) => S.get(x) === 2)
+    assert(two.length === 1 && opts.every((x) => S.has(x)), 'two ways')
+    add({ st: MA, fam: F, concept: 'total-two-ways-5-8-13', d: 3, q: 'Bags of 5 kg, 8 kg and 13 kg (one of each) are available. Which of these totals can be made in two different ways?', ans: `${two[0]} kg`, wrong: opts.filter((x) => x !== two[0]).map((x) => `${x} kg`), exp: '13 kg can be made as 13 alone or as 5 + 8; 18, 21 and 26 each have only one make-up.' })
+  }
+  {
+    const can = (t) => { for (let a = 0; 3 * a <= t; a++) if ((t - 3 * a) % 5 === 0) return true; return false }
+    let big = 0; for (let t = 1; t < 100; t++) if (!can(t)) big = t
+    add({ st: MA, fam: F, concept: 'largest-unpayable-3-and-5-coins', d: 3, q: 'With an unlimited supply of Rs 3 and Rs 5 coins, what is the largest amount that cannot be paid exactly?', ans: `Rs ${big}`, wrong: ['Rs 8', 'Rs 4', 'Rs 11'], exp: `Rs ${big} cannot be made (7 − 5 = 2 and 7 − 3 = 4 are not payable), while 8 = 3 + 5, 9 = 3 + 3 + 3, 10 = 5 + 5 and every larger amount follows by adding 3s.` })
+  }
+  {
+    const can = (t) => { for (let b = 0; 7 * b <= t; b++) if ((t - 7 * b) % 4 === 0) return true; return false }
+    const opts = [17, 18, 22, 25], bad = opts.filter((t) => !can(t))
+    assert(bad.length === 1, 'one unmakeable')
+    add({ st: MA, fam: F, concept: 'unlimited-4-7-bags-which-not', d: 3, q: 'Rice is packed only in 4 kg and 7 kg bags, with plenty of each. Which of these orders cannot be met exactly?', ans: `${bad[0]} kg`, wrong: opts.filter((t) => t !== bad[0]).map((t) => `${t} kg`), exp: '18 = 4 + 7 + 7, 22 = 4 + 4 + 7 + 7 and 25 = 4 + 7 + 7 + 7, but 17, 10 and 3 (removing 0, 1 or 2 sevens) are not multiples of 4.' })
+  }
+}
+
+// ga.mental.cube-painting
+{
+  const F = 'ga.mental.cube-painting'
+  const count = (a, b, c, painted, pred) => { let n = 0; for (let x = 0; x < a; x++) for (let y = 0; y < b; y++) for (let z = 0; z < c; z++) { const f = { x0: x === 0, x1: x === a - 1, y0: y === 0, y1: y === b - 1, z0: z === 0, z1: z === c - 1 }; const faces = Object.keys(f).filter((k) => f[k] && painted.includes(k)); if (pred(faces)) n++ } return n }
+  const ALL = ['x0', 'x1', 'y0', 'y1', 'z0', 'z1']
+  const CP = (d, dims, painted, pred, q, why, concept) => {
+    const v = count(...dims, painted, pred)
+    add({ st: MA, fam: F, concept, d, q, ans: v, wrong: nearNums(v, [v + 4, v - 4, v * 2]), exp: `${why} This gives ${v}.` })
+  }
+  CP(1, [3, 3, 3], ALL, (f) => f.length === 2, 'A 3 cm cube painted on all faces is cut into 27 cubes of 1 cm. How many small cubes have exactly two faces painted?', 'Two-face cubes lie on the edges, one per edge (3 − 2 = 1) on each of 12 edges.', 'painted-cube-3-two-faces')
+  CP(2, [4, 4, 4], ALL, (f) => f.length === 1, 'A cube painted red on all faces is cut into 64 equal smaller cubes. How many of the small cubes have exactly one red face?', 'One-face cubes are in the middle of each face: (4 − 2)² = 4 per face × 6 faces.', 'painted-cube-4-one-face')
+  CP(2, [5, 5, 5], ALL, (f) => f.length === 0, 'A wooden cube of side 5 cm is painted all over and cut into 1 cm cubes. How many of these small cubes have no paint at all?', 'The unpainted cubes form the inner core of side 5 − 2 = 3: 3³.', 'painted-cube-5-no-face')
+  CP(1, [4, 4, 4], ALL, (f) => f.length === 3, 'After a painted 4 × 4 × 4 cube is cut into unit cubes, how many unit cubes have three painted faces?', 'Only the corner cubes have three painted faces, and a cube has 8 corners.', 'painted-cube-4-three-faces')
+  CP(1, [3, 3, 3], ALL, (f) => f.length === 0, 'A painted cube is cut into 27 identical cubes. How many of them are completely unpainted?', 'Only the single centre cube, (3 − 2)³, is hidden from every face.', 'painted-cube-3-no-face')
+  CP(3, [4, 3, 2], ALL, (f) => f.length === 2, 'A cuboid 4 cm × 3 cm × 2 cm is painted on all faces and cut into 1 cm cubes. How many of the small cubes have exactly two faces painted?', 'Counting the non-corner cubes along each edge: 4 edges of length 4 give 2 each, 4 edges of length 3 give 1 each, and the edges of length 2 give none.', 'painted-cuboid-4-3-2-two-faces')
+  CP(3, [4, 4, 4], ALL, (f) => f.some((k) => k.startsWith('z')) && f.some((k) => !k.startsWith('z')), 'A cube is painted red on its top and bottom faces and blue on the other four faces, then cut into 64 equal cubes. How many small cubes carry both red and blue?', 'They are the border cubes of the top and bottom layers (where red meets blue): 12 in each of the two layers.', 'painted-cube-4-red-blue-both')
+  CP(2, [6, 6, 6], ALL, (f) => f.length >= 1, 'A 6 × 6 × 6 cube painted on the outside is divided into unit cubes. How many unit cubes have at least one painted face?', 'All cubes except the inner 4 × 4 × 4 core are painted: 216 − 64.', 'painted-cube-6-at-least-one')
+  CP(2, [4, 4, 4], ALL, (f) => f.length <= 1, 'A painted cube of side 4 cm is cut into 1 cm cubes. How many of the small cubes have at most one painted face?', 'Cubes with no paint number 2³ = 8 and cubes with one painted face number 6 × 2² = 24.', 'painted-cube-4-at-most-one')
+  CP(2, [3, 3, 3], ['z0', 'z1'], (f) => f.length === 0, 'Only the top and bottom faces of a 3 × 3 × 3 cube are painted before it is cut into 27 unit cubes. How many unit cubes are unpainted?', 'Only the middle layer of 3 × 3 cubes escapes the paint.', 'painted-cube-3-top-bottom-unpainted')
+  CP(3, [3, 3, 3], ['x0', 'x1', 'y0', 'y1'], (f) => f.length === 2, 'The four side faces of a 3 × 3 × 3 cube are painted but the top and bottom are not. After cutting into 27 unit cubes, how many have exactly two painted faces?', 'Two painted faces occur only on the four vertical edges, 3 cubes on each.', 'painted-cube-3-sides-only-two-faces')
+  CP(2, [5, 4, 3], ALL, (f) => f.length === 0, 'A block 5 × 4 × 3 is painted on the outside and cut into unit cubes. How many unit cubes have no painted face?', 'The unpainted core measures (5 − 2) × (4 − 2) × (3 − 2) = 3 × 2 × 1.', 'painted-cuboid-5-4-3-no-face')
+  {
+    const v = (6 / 2) ** 3
+    add({ st: MA, fam: F, concept: 'cube-6cm-into-2cm-cubes', d: 1, q: 'A cube of side 6 cm is cut into small cubes of side 2 cm. How many small cubes are obtained?', ans: v, wrong: [9, 36, 216 / 4], exp: `Each edge is divided into 6 ÷ 2 = 3 parts, giving 3 × 3 × 3 = ${v} cubes.` })
+  }
+  {
+    const v = 3 * (3 - 1)
+    add({ st: MA, fam: F, concept: 'minimum-cuts-cube-into-27', d: 2, q: 'What is the least number of straight cuts needed to divide a cube into 27 identical smaller cubes?', ans: v, wrong: [9, 3, 26], exp: `Each of the three directions needs 3 − 1 = 2 cuts, so ${v} cuts in all.` })
+  }
+}
+
+// ga.mental.gears-pulleys
+{
+  const F = 'ga.mental.gears-pulleys'
+  // direction propagation: mesh flips, shared axle / open belt keeps, crossed belt flips
+  const propagate = (links, start) => { const dir = { [start]: 1 }; let ch = true; while (ch) { ch = false; for (const [a, b, t] of links) for (const [x, y] of [[a, b], [b, a]]) if (dir[x] && !dir[y]) { dir[y] = t === 'mesh' || t === 'cross' ? -dir[x] : dir[x]; ch = true } } return dir }
+  const cw = (v) => (v === 1 ? 'Clockwise' : 'Anticlockwise')
+  {
+    const links = [[1, 2, 'mesh'], [2, 3, 'mesh'], [3, 4, 'mesh'], [4, 5, 'mesh']]
+    const a = cw(propagate(links, 1)[5])
+    add({ st: MA, fam: F, concept: 'gear-chain-5-direction', d: 1, q: 'Five gears are arranged in a row, each meshing with the next. If the first gear turns clockwise, how does the fifth gear turn?', ans: a, wrong: ['Anticlockwise', 'It does not turn', 'Alternately both ways'], exp: 'Meshing gears turn in opposite directions, so the gears alternate: 1 clockwise, 2 anticlockwise, 3 clockwise, 4 anticlockwise, 5 clockwise.' })
+  }
+  {
+    const v = (24 * 10) / 40
+    add({ st: MA, fam: F, concept: 'gear-teeth-24-10rev-40', d: 2, q: 'A gear with 24 teeth drives a gear with 40 teeth. When the first gear makes 10 revolutions, how many does the second make?', ans: v, wrong: [16, 10, 4], exp: `The same number of teeth pass the contact point: 24 × 10 = 240 = 40 × n, so n = ${v}.` })
+  }
+  add({ st: MA, fam: F, concept: 'three-gears-mutually-meshing-jam', d: 2, q: 'Three gears are mounted so that each one meshes with both of the others. What happens when one of them is turned?', ans: 'The gears lock and cannot turn', wrong: ['All three turn clockwise', 'Two turn clockwise and one anticlockwise', 'They turn freely in alternate directions'], exp: 'Each pair of meshing gears must turn in opposite directions, which is impossible for three gears that all touch one another, so the set jams.' })
+  {
+    const a = cw(propagate([[1, 2, 'cross']], 1)[2])
+    add({ st: MA, fam: F, concept: 'crossed-belt-direction', d: 1, q: 'Two pulleys are joined by a crossed belt. If the first pulley turns clockwise, how does the second one turn?', ans: a, wrong: ['Clockwise', 'It stays still', 'It turns clockwise at double speed'], exp: 'A crossed belt reverses the direction of rotation, while an open belt keeps it the same.' })
+  }
+  {
+    const d = propagate([['A', 'B', 'mesh'], ['B', 'C', 'axle'], ['C', 'D', 'mesh']], 'A')
+    add({ st: MA, fam: F, concept: 'gear-a-b-axle-c-d-direction', d: 2, q: 'Gear A turns clockwise and meshes with gear B. Gear C is fixed on the same axle as B, and C meshes with gear D. In which direction does D turn?', ans: cw(d.D), wrong: [cw(-d.D), 'It cannot turn', 'It turns only half a revolution'], exp: 'A clockwise makes B anticlockwise; C shares B’s axle so it is also anticlockwise; C then turns D clockwise.' })
+  }
+  {
+    const v = (60 * 20) / 15
+    add({ st: MA, fam: F, concept: 'gear-60-teeth-20rpm-drives-15', d: 2, q: 'A gear of 60 teeth turning at 20 revolutions per minute drives a gear of 15 teeth. How fast does the smaller gear turn?', ans: `${v} revolutions per minute`, wrong: ['5 revolutions per minute', '20 revolutions per minute', '45 revolutions per minute'], exp: `60 × 20 = 15 × n gives n = ${v}: the smaller gear turns four times as fast.` })
+  }
+  {
+    const links = [1, 2, 3, 4, 5, 6].map((i) => [i, i + 1, 'mesh']), d = propagate(links, 1)
+    const n = Object.values(d).filter((x) => x === -1).length
+    add({ st: MA, fam: F, concept: 'gear-chain-7-count-anticlockwise', d: 2, q: 'Seven gears are placed in a line, each meshing with its neighbours. If the first gear turns clockwise, how many of the seven turn anticlockwise?', ans: n, wrong: [4, 6, 1], exp: `The 2nd, 4th and 6th gears turn anticlockwise, so ${n} gears.` })
+  }
+  {
+    const v = (20 * 30) / 40
+    add({ st: MA, fam: F, concept: 'idler-gear-20-10-40', d: 3, q: 'Gear A (20 teeth) drives gear C (40 teeth) through an idler gear B of 10 teeth placed between them. If A makes 30 revolutions, how many revolutions does C make?', ans: v, wrong: [60, 7.5, 30], exp: `An idler does not change the overall ratio: 20 × 30 = 40 × n, so C makes ${v} revolutions (in the same direction as A).` })
+  }
+  {
+    const v = (12 * 9) / 36
+    add({ st: MA, fam: F, concept: 'gear-36-and-12-q-9-turns', d: 2, q: 'Gear P has 36 teeth and meshes with gear Q, which has 12 teeth. For Q to make 9 turns, how many turns must P make?', ans: v, wrong: [27, 9, 4], exp: `12 × 9 = 108 teeth must pass, and 108 ÷ 36 = ${v}.` })
+  }
+  {
+    const v = (30 * 5) / 10
+    add({ st: MA, fam: F, concept: 'open-belt-pulleys-30-10-diameter', d: 3, q: 'Two pulleys of diameters 30 cm and 10 cm are connected by an open (uncrossed) belt. When the large pulley makes 5 revolutions, what does the small pulley do?', ans: `${v} revolutions in the same direction`, wrong: [`${v} revolutions in the opposite direction`, '5 revolutions in the same direction', '5/3 revolutions in the same direction'], exp: `The belt moves the same length on both rims: 30 × 5 = 10 × n gives n = ${v}, and an open belt keeps the direction the same.` })
+  }
+}
+
+// ga.mental.number-transformation
+{
+  const F = 'ga.mental.number-transformation'
+  const NT = (d, nums, tf, pick, q, desc) => {
+    const t = nums.map(tf)
+    const i = pick(t)
+    add({ st: MA, fam: F, concept: `number-transform-${nums.join('-')}`, d, q: q(list(nums)), ans: nums[i], wrong: nums.filter((_, j) => j !== i).slice(0, 3), exp: `${desc}: ${nums.map((n, j) => `${n} → ${fmt(t[j])}`).join(', ')}; the required one comes from ${nums[i]}.` })
+  }
+  const argmax = (a) => { const m = Math.max(...a); assert(a.filter((x) => x === m).length === 1, 'unique max'); return a.indexOf(m) }
+  const argmin = (a) => { const m = Math.min(...a); assert(a.filter((x) => x === m).length === 1, 'unique min'); return a.indexOf(m) }
+  const second = (a, desc) => { const s = [...a].sort((x, y) => (desc ? y - x : x - y)); assert(s[0] !== s[1] && s[1] !== s[2], 'distinct'); return a.indexOf(s[1]) }
+  const sw12 = (n) => Number(String(n)[1] + String(n)[0] + String(n).slice(2))
+  NT(2, [538, 267, 914, 725, 386], sw12, argmax, (l) => `If the first and second digits of each of the numbers ${l} are interchanged, which original number becomes the largest?`, 'Swapping the first two digits')
+  NT(2, [473, 829, 156, 692, 348], (n) => Number([...String(n)].sort().reverse().join('')), argmin, (l) => `The digits of each of ${l} are rearranged in descending order. Which original number gives the smallest result?`, 'Descending digits')
+  NT(2, [357, 274, 918, 463, 581], (n) => Number(rev(String(n))), (a) => second(a, false), (l) => `Each of the numbers ${l} is written backwards (357 becomes 753). Which original number then gives the second smallest value?`, 'Reversed')
+  NT(2, [426, 793, 518, 342, 685], (n) => (n % 10) - Math.floor(n / 100), argmax, (l) => `For each of ${l}, the first digit is subtracted from the last digit. Which number gives the largest result?`, 'Last digit minus first digit')
+  NT(2, [591, 928, 973, 862, 948], (n) => Number(String(n)[0] + String(n)[2] + String(n)[1]), argmax, (l) => `In each of ${l}, the last two digits change places. Which original number then becomes the largest?`, 'Swapping the last two digits')
+  NT(1, [4581, 3927, 6204, 5163], (n) => sum([...String(n)].map(Number)), argmax, (l) => `Which of ${l} has the greatest sum of digits?`, 'Digit sums')
+  NT(1, [234, 315, 126, 422], (n) => [...String(n)].reduce((p, c) => p * Number(c), 1), argmin, (l) => `Which of the numbers ${l} has the smallest product of its digits?`, 'Digit products')
+  NT(1, [385, 729, 461, 853, 297], (n) => Number(String(n)[0] + String(n)[2]), argmax, (l) => `If the middle digit of each of ${l} is removed, which original number leaves the largest two-digit number?`, 'Removing the middle digit')
+  {
+    const nums = [624, 381, 957, 213, 846], s = [...nums].sort((a, b) => b - a)
+    add({ st: MA, fam: F, concept: 'descending-624-381-957-213-846-fourth', d: 1, q: `When ${list(nums)} are arranged in descending order, which number is fourth?`, ans: s[3], wrong: [s[2], s[4], s[1]], exp: `In descending order: ${s.join(', ')}; the fourth is ${s[3]}.` })
+  }
+  {
+    const nums = [734, 473, 347, 743, 437], s = [...nums].sort((a, b) => a - b), v = s[3] - s[1]
+    add({ st: MA, fam: F, concept: 'second-largest-minus-second-smallest-347-set', d: 3, q: `What is the difference between the second largest and the second smallest of ${list(nums)}?`, ans: v, wrong: [s[4] - s[0], s[3] - s[0], s[4] - s[1]], exp: `In ascending order: ${s.join(', ')}; ${s[3]} − ${s[1]} = ${v}.` })
+  }
+  {
+    const nums = [146, 282, 355, 704, 919, 633], k = nums.filter((n) => Number(rev(String(n))) > n).length
+    add({ st: MA, fam: F, concept: 'reversed-larger-count-146-set', d: 2, q: `If each of ${list(nums)} is written in reverse, how many of them become larger than before?`, ans: k, wrong: nearNums(k, [k + 1, k + 2, 4]), exp: `146 → 641 and 355 → 553 grow; 282 and 919 stay the same; 704 → 407 and 633 → 336 shrink. So ${k}.` })
+  }
+  {
+    const nums = [612, 381, 948, 745, 457, 139], f = (n) => Number(String(n)[0] + (Number(String(n)[1]) + 1) % 10 + String(n)[2]), k = nums.map(f).filter((n) => [...String(n)].every((c) => c % 2 === 1)).length
+    add({ st: MA, fam: F, concept: 'middle-plus-one-all-odd-count', d: 3, q: `If 1 is added to the middle digit of each of ${list(nums)}, how many of the resulting numbers will have all three digits odd?`, ans: k, wrong: nearNums(k, [k + 1, k + 2, 0]), exp: `The numbers become ${nums.map(f).join(', ')}; those with only odd digits are ${nums.map(f).filter((n) => [...String(n)].every((c) => c % 2 === 1)).join(' and ')}, so ${k}.` })
+  }
+}
+
+// ga.mental.sequence-counting
+{
+  const F = 'ga.mental.sequence-counting'
+  const SQ = (d, concept, q, ans, exp, extra) => add({ st: MA, fam: F, concept, d, q, ans, wrong: nearNums(ans, extra), exp })
+  {
+    const s = [3, 7, 5, 7, 2, 7, 8, 3, 7, 5, 9, 7, 4, 7, 6, 7, 1]
+    const k = s.filter((x, i) => x === 7 && i + 1 < s.length && s[i + 1] % 2 === 1).length
+    SQ(2, 'count-7-followed-by-odd', `In the row ${s.join(' ')}, how many 7s are immediately followed by an odd number?`, k, `Only the 7s followed by ${s.map((x, i) => (x === 7 && s[i + 1] % 2 === 1 ? s[i + 1] : null)).filter((x) => x != null).join(', ')} qualify; there are ${k}.`, [k + 1, s.filter((x) => x === 7).length])
+  }
+  {
+    const s = 'M K P M T K M P K M R M K M'.split(' ')
+    const k = s.filter((x, i) => x === 'M' && s[i - 1] === 'K').length
+    SQ(2, 'count-m-preceded-by-k', `In the series ${s.join(' ')}, how many M’s are immediately preceded by K?`, k, `Scanning pairs, ‘K M’ occurs ${k} times.`, [k + 1, s.filter((x) => x === 'M').length])
+  }
+  {
+    const s = [5, 8, 3, 6, 2, 9, 4, 7, 1, 8, 6, 3, 2, 4]
+    const k = s.filter((x, i) => i > 0 && i + 1 < s.length && x % 2 === 0 && s[i - 1] % 2 === 1 && s[i + 1] % 2 === 0).length
+    SQ(3, 'count-even-preceded-odd-followed-even', `In ${s.join(' ')}, how many even numbers are immediately preceded by an odd number and immediately followed by an even number?`, k, `The qualifying even numbers are the ${s.map((x, i) => (i > 0 && i + 1 < s.length && x % 2 === 0 && s[i - 1] % 2 === 1 && s[i + 1] % 2 === 0 ? `${x} (after ${s[i - 1]}, before ${s[i + 1]})` : null)).filter(Boolean).join(' and ')}; so ${k}.`, [k + 1, k + 2])
+  }
+  {
+    const s = [3, 4, 5, 1, 3, 4, 2, 4, 3, 4, 5, 3, 4, 7]
+    const k = s.filter((x, i) => x === 4 && s[i - 1] === 3 && s[i + 1] !== 5).length
+    SQ(3, 'count-4-after-3-not-before-5', `In the row ${s.join(' ')}, count the 4s that are immediately preceded by 3 but not immediately followed by 5.`, k, `‘3 4’ occurs ${s.filter((x, i) => x === 4 && s[i - 1] === 3).length} times; excluding those followed by 5 leaves ${k}.`, [k + 1, s.filter((x, i) => x === 4 && s[i - 1] === 3).length])
+  }
+  {
+    const s = 'A B C A B A C B A B C A B'.split(' ')
+    const k = s.filter((x, i) => x === 'A' && s[i + 1] === 'B').length
+    SQ(1, 'count-ab-in-letter-string', `How many times does ‘A’ immediately followed by ‘B’ occur in ${s.join(' ')}?`, k, `Reading pair by pair, ‘A B’ appears ${k} times.`, [k + 1, s.filter((x) => x === 'A').length])
+  }
+  {
+    const w = 'COMMUNICATION', cnt = {}; for (const c of w) cnt[c] = (cnt[c] ?? 0) + 1
+    const k = Object.values(cnt).filter((x) => x > 1).length
+    SQ(2, 'communication-repeated-letters', `How many different letters occur more than once in the word ${w}?`, k, `${Object.entries(cnt).filter(([, x]) => x > 1).map(([c]) => c).join(', ')} each occur twice, so ${k}.`, [k + 1, k - 1])
+  }
+  {
+    let k = 0; for (let n = 1; n <= 50; n++) if (String(n).includes('3')) k++
+    SQ(2, 'numbers-1-50-containing-3', 'How many whole numbers from 1 to 50 contain the digit 3 at least once?', k, `3, 13, 23, 43 and the ten numbers 30–39 give ${k}.`, [k + 1, 15, 5])
+  }
+  {
+    let k = 0; for (let n = 1; n <= 30; n++) k += [...String(n)].filter((c) => c === '1').length
+    SQ(2, 'digit-1-count-writing-1-to-30', 'How many times is the digit 1 written when all the numbers from 1 to 30 are written down?', k, `1, 10, 12–19 and 21 have one 1 each and 11 has two: 1 + 1 + 2 + 8 + 1 = ${k}.`, [k - 1, 12, 11])
+  }
+  {
+    const s = [2, 9, 4, 1, 6, 3, 8, 5, 7]
+    const k = s.filter((x, i) => i > 0 && i + 1 < s.length && x > s[i - 1] && x > s[i + 1]).length
+    SQ(2, 'digits-greater-than-both-neighbours', `In the row ${s.join(' ')}, how many numbers are greater than both of their neighbours?`, k, `${s.filter((x, i) => i > 0 && i + 1 < s.length && x > s[i - 1] && x > s[i + 1]).join(', ')} are each larger than the numbers on both sides, so ${k}.`, [k + 1, k - 1])
+  }
+  {
+    const s = [21, 34, 47, 58, 63, 72, 85, 96], k = s.filter((x) => x % 2 && x > 50).length
+    SQ(1, 'odd-greater-than-50-count', `How many odd numbers greater than 50 are there in the list ${s.join(', ')}?`, k, `The odd numbers are 21, 47, 63 and 85; of these only 63 and 85 exceed 50, so ${k}.`, [4, 3, 1])
+  }
+  {
+    const back = [...Array(26)].map((_, i) => N2A(26 - i)), a = back[5 - 1 + 8]
+    add({ st: MA, fam: F, concept: 'reverse-alphabet-8th-right-of-5th', d: 2, q: 'The alphabet is written backwards from Z to A. Which letter is 8th to the right of the 5th letter from the left?', ans: a, wrong: [back[5 - 1 + 7], back[5 - 1 + 9], 'L'], exp: `The 5th letter is ${back[4]}; 8 places to its right is the 13th letter of the reversed alphabet, ${a}.` })
+  }
+  {
+    const back = [...Array(26)].map((_, i) => N2A(26 - i))
+    add({ st: MA, fam: F, concept: 'reverse-alphabet-10th-from-left', d: 1, q: 'If the English alphabet is written in reverse order, which letter will be 10th from the left?', ans: back[9], wrong: [back[8], back[10], 'J'], exp: `Z, Y, X, W, V, U, T, S, R, Q — the 10th is ${back[9]} (the 17th letter in normal order).` })
+  }
+}
+
+// ga.mental.counting-arrangements
+{
+  const F = 'ga.mental.counting-arrangements'
+  const C2 = (n) => (n * (n - 1)) / 2
+  const CA = (d, concept, q, ans, wrong, exp) => add({ st: MA, fam: F, concept, d, q, ans, wrong, exp })
+  CA(1, 'handshakes-10-people', 'At a meeting of 10 people, each person shakes hands once with every other person. How many handshakes take place?', C2(10), [90, 100, 50], `Each pair shakes hands once: 10 × 9 ÷ 2 = ${C2(10)}.`)
+  CA(2, 'round-robin-8-teams', 'In a tournament of 8 teams, each team plays every other team exactly once. How many matches are played?', C2(8), [56, 64, 16], `Number of pairs = 8 × 7 ÷ 2 = ${C2(8)}.`)
+  {
+    const ds = [4, 2, 7, 9, 1], k = []; for (const a of ds) for (const b of ds) if (a !== b && (a === 4 || b === 4)) k.push(10 * a + b)
+    CA(2, 'two-digit-with-4-from-42791', 'Using the digits 4, 2, 7, 9 and 1 without repeating a digit in a number, how many two-digit numbers containing the digit 4 can be formed?', k.length, [k.length / 2, k.length + 1, 20], `With 4 in the tens place there are 4 numbers and with 4 in the units place another 4: ${k.length}.`)
+  }
+  CA(1, 'three-digit-from-1-2-3', 'How many three-digit numbers can be formed from the digits 1, 2 and 3 if no digit is repeated?', 6, [9, 3, 27], 'The first digit can be chosen in 3 ways, the second in 2 and the third in 1: 3 × 2 × 1 = 6.')
+  CA(2, 'lines-through-6-points', 'Six points lie on a circle. How many different straight lines can be drawn, each joining two of the points?', C2(6), [30, 12, 36], `Each line is fixed by a pair of points: 6 × 5 ÷ 2 = ${C2(6)}.`)
+  {
+    let k = 0; for (let s = 1; s <= 3; s++) k += (3 - s + 1) ** 2
+    CA(2, 'squares-in-3-by-3-grid', 'How many squares of all sizes are there in a 3 × 3 grid of small squares?', k, [9, 13, 10], `9 small squares + 4 squares of size 2 × 2 + 1 square of size 3 × 3 = ${k}.`)
+  }
+  {
+    const k = C2(3) * C2(4)
+    CA(3, 'rectangles-in-2-by-3-grid', 'How many rectangles (squares included) can be seen in a grid of 2 rows and 3 columns of small squares?', k, [6, 12, 24], `A rectangle is fixed by choosing 2 of the 3 horizontal lines and 2 of the 4 vertical lines: 3 × 6 = ${k}.`)
+  }
+  CA(1, 'outfits-3-shirts-4-trousers', 'Ali has 3 shirts and 4 pairs of trousers. How many different shirt-and-trousers combinations can he wear?', 12, [7, 10, 16], 'Each of the 3 shirts can go with each of the 4 trousers: 3 × 4 = 12.')
+  CA(2, 'cards-5-friends-each-other', 'Each of 5 friends sends a greeting card to each of the other friends. How many cards are sent in all?', 20, [10, 25, 15], 'Each of the 5 sends 4 cards: 5 × 4 = 20 (a card from A to B differs from one from B to A).')
+  CA(1, 'two-letter-arrangements-abcd', 'How many different two-letter arrangements can be made from the letters A, B, C and D if no letter is repeated?', 12, [6, 16, 8], 'The first letter can be chosen in 4 ways and the second in 3: 4 × 3 = 12.')
+  {
+    let k = 0; for (let n = 100; n <= 999; n++) if (new Set(String(n)).size === 1) k++
+    CA(1, 'three-digit-all-digits-same', 'How many three-digit numbers have all three digits the same?', k, [10, 8, 27], `They are 111, 222, …, 999, i.e. ${k} numbers (000 is not a three-digit number).`)
+  }
+  {
+    const ds = ['0', '3', '5', '8'], k = []; for (const a of ds) for (const b of ds) for (const c of ds) if (a !== '0' && new Set([a, b, c]).size === 3) k.push(a + b + c)
+    CA(3, 'three-digit-from-0358', 'How many three-digit numbers can be formed from the digits 0, 3, 5 and 8 if no digit is repeated?', k.length, [24, 12, 27], `The first digit cannot be 0 (3 choices), then 3 choices for the second and 2 for the third: 3 × 3 × 2 = ${k.length}.`)
+  }
+}
+
+// ga.mental.cube-building
+{
+  const F = 'ga.mental.cube-building'
+  const cubes = [1, 8, 27, 64, 125, 216]
+  const CB = (d, concept, q, ans, wrong, exp) => add({ st: MA, fam: F, concept, d, q, ans, wrong, exp })
+  { const n = 40, c = Math.max(...cubes.filter((x) => x <= n)), v = n - c; CB(1, 'blocks-40-remove-for-solid-cube', `There are ${n} identical cubic blocks. What is the least number that must be removed so that the rest form a single solid cube?`, v, [n - 8, 64 - n, v + 1], `The largest cube that can be built is 3 × 3 × 3 = ${c}, so ${n} − ${c} = ${v} blocks must go.`) }
+  { const n = 50, c = cubes.find((x) => x >= n), v = c - n; CB(2, 'blocks-50-add-for-solid-cube', `A child has ${n} identical cubic blocks. What is the least number of extra blocks needed to build one solid cube using all of them?`, v, [50 - 27, v + 2, 75], `The next cube number after ${n} is 4 × 4 × 4 = ${c}, so ${c} − ${n} = ${v} more blocks are needed.`) }
+  { const n = 100, c = Math.max(...cubes.filter((x) => x <= n)), v = n - c; CB(2, 'blocks-100-largest-cube-left', `From ${n} unit cubes, the largest possible solid cube is built. How many unit cubes are left over?`, v, [100 - 27, 25, 64], `The largest cube is 4 × 4 × 4 = ${c}, leaving ${n} − ${c} = ${v}.`) }
+  { const v = 64 - 30; CB(1, 'blocks-30-more-for-4-cube', 'A mason has 30 cubic blocks and wants to build a solid 4 × 4 × 4 cube. How many more blocks does he need?', v, [30, 16, 36], `A 4 × 4 × 4 cube needs 64 blocks; 64 − 30 = ${v}.`) }
+  { const v = 5 ** 3 - 3 ** 3; CB(3, 'hollow-5-cube-shell-blocks', 'How many unit cubes are needed to build only the outer shell (one cube thick) of a 5 × 5 × 5 cube?', v, [125, 150, 60], `The full cube has 125 unit cubes and the hollow inside is 3 × 3 × 3 = 27, so the shell needs ${v}.`) }
+  { const v = (6 / 2) * (4 / 2) * (4 / 2); CB(2, 'box-6x4x4-fits-2cm-cubes', 'How many cubes of side 2 cm can be packed into a box measuring 6 cm × 4 cm × 4 cm?', v, [48, 24, 96 / 4 + 1], `Along the sides fit 3, 2 and 2 cubes: 3 × 2 × 2 = ${v}.`) }
+  { const v = (4 - 2) ** 3; CB(2, 'hidden-cubes-in-4-cube', 'A solid 4 × 4 × 4 cube is built from 64 unit cubes. How many unit cubes cannot be seen from outside at all?', v, [16, 27, 4], `The hidden cubes form the inner 2 × 2 × 2 block: ${v}.`) }
+  { const v = 1 + 2 + 3 + 4; CB(1, 'staircase-4-steps-blocks', 'A staircase is built from cubes: the first column has 1 cube, the second 2, the third 3 and the fourth 4. How many cubes are used?', v, [8, 12, 16], `1 + 2 + 3 + 4 = ${v}.`) }
+}
+
 // @@CONTINUE@@
 if (dupErrors.length) { console.error(dupErrors.join('\n')); process.exit(1) }
 console.log("items", items.length)

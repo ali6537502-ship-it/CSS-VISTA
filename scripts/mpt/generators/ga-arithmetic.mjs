@@ -107,7 +107,7 @@ const UNITS = {
   chg: (x) => (near(x, 0) ? 'No change' : x > 0 ? `${fmtNum(x)}% increase` : `${fmtNum(-x)}% decrease`),
   pl: (x) => (near(x, 0) ? 'No profit, no loss' : x > 0 ? `${fmtNum(x)}% profit` : `${fmtNum(-x)}% loss`),
 }
-const unitFmt = (u) => UNITS[u] ?? ((x) => `${fmtNum(x)} ${u}`)
+const unitFmt = (u) => UNITS[u] ?? ((x) => `${fmtNum(x)} ${near(x, 1) && /[a-z]s$/.test(u) && !/^(?:kg|mAh)$/.test(u) ? u.replace(/s$/, '') : u}`)
 
 const MALE = ['Ali', 'Bilal', 'Hamza', 'Usman', 'Omer', 'Faisal', 'Saad', 'Kamran', 'Tariq', 'Junaid', 'Imran', 'Waqas', 'Asad', 'Zeeshan', 'Naveed', 'Adeel', 'Haris', 'Salman']
 const FEMALE = ['Sana', 'Ayesha', 'Fatima', 'Zainab', 'Hira', 'Mehwish', 'Noreen', 'Rabia', 'Amna', 'Sadia', 'Maria', 'Iqra', 'Saba', 'Nida', 'Kiran', 'Farah', 'Mahnoor', 'Areeba']
@@ -595,7 +595,7 @@ fam('ga.percentage.concentration', 'ga.percentage', [
     d: 2,
     gen() {
       const c1 = pick([2, 3, 4, 5, 6, 8]); const c2 = pick([5, 6, 8, 10, 12, 15]); if (c2 <= c1) return null
-      const V = mult(10, 20, 300); const V2 = (V * c1) / c2; if (!isInt(V2)) return null
+      const V = mult(10, 20, 300); const V2 = (V * c1) / c2; if (!isInt(V2) || !isInt((V * c1) / 100)) return null
       return { v: { V, c1, c2 }, ans: V - V2, wrong: [V2, (V * (c2 - c1)) / 100, (V * c1) / 100, (V - V2) / 2], exp: `Salt = ${c1}% of ${V} = ${fmtNum((V * c1) / 100)}; this is ${c2}% of the final ${fmtNum(V2)} litres, so ${fmtNum(V - V2)} litres must evaporate.` }
     },
     T: ['{V} litres of sea water contain {c1}% salt. How much water must evaporate for the salt content to become {c2}%?§litres'],
@@ -631,7 +631,7 @@ fam('ga.ratio.divide-in-ratio', 'ga.ratio', [
     d: 1,
     gen(tp) {
       let [a, b] = coprimePair(9); if (a < b) [a, b] = [b, a]
-      const [lo, hi] = range(tp, 100, 5000); const T = mult(a + b, lo, hi); if (!T) return null
+      const [lo, hi] = range(tp, 100, 5000); const T = tp.Tset ? pick(tp.Tset.filter((x) => x % (a + b) === 0)) : mult(a + b, lo, hi); if (!T) return null
       const k = T / (a + b); const first = a * k; const second = b * k; const ans = tp.ask === 'b' ? second : first
       return { v: { a, b, T }, ans, wrong: [ans === first ? second : first, T / 2, T / (a + b), T - k], exp: `Total parts = ${a} + ${b} = ${a + b}; one part = ${fmtNum(T)}/${a + b} = ${fmtNum(k)}; required share = ${tp.ask === 'b' ? b : a} × ${fmtNum(k)} = ${fmtNum(ans)}.` }
     },
@@ -643,6 +643,7 @@ fam('ga.ratio.divide-in-ratio', 'ga.ratio', [
       { t: 'In a town of {T} voters, the ratio of men to women voters is {a}:{b}. How many voters are men?', r: [2000, 20000] },
       { t: 'A father leaves {T} kanals of land to his two sons in the ratio {a}:{b}. How much land does the son with the larger portion get?§kanals', r: [20, 200] },
       { t: 'A plot of {T} square feet is split between two heirs in the ratio {a}:{b}. What is the area of the larger part?§square feet', r: [900, 9000] },
+      { t: 'An angle of {T}° is divided into two parts in the ratio {a}:{b}. What is the larger part?§deg', Tset: [90, 180, 360] },
       { t: 'A sum of Rs {T} is shared by {F1} and {F2} in the ratio {a}:{b}. How much does {F2} get?§rs', r: [1000, 50000], ask: 'b' },
       { t: 'The ratio of boys to girls in a school of {T} students is {a}:{b}. How many girls are there?', r: [300, 3000], ask: 'b' },
     ],
@@ -684,6 +685,7 @@ fam('ga.ratio.one-part-known', 'ga.ratio', [
       { t: 'Flour and sugar are used in the ratio {a}:{b} in a recipe. How much sugar goes with {x} g of flour?§g', r: [20, 100] },
       { t: 'The ratio of {A}’s income to {B}’s income is {a}:{b}. If {A} earns Rs {x}, how much does {B} earn?§rs', r: [2000, 9000] },
       { t: 'On a map, {a} cm represents {b} km. What actual distance is shown by {x} cm?§km', r: [2, 9] },
+      { t: 'A recipe uses rice and water in the ratio {a}:{b} by cups. How many cups of water are needed for {x} cups of rice?§cups', r: [1, 6] },
       { t: 'Red and white roses in a garden are in the ratio {a}:{b}. If there are {x} red roses, the number of white roses is:', r: [5, 40] },
     ],
   }),
@@ -718,40 +720,40 @@ fam('ga.ratio.linked-shares', 'ga.ratio', [
   mode({ // A = B + k, C = m·B
     d: 2,
     gen(tp) {
-      const m = pick([2, 3]); const t = ri(tp.lo ?? 10, tp.hi ?? 200); const k = ri(2, Math.max(3, Math.floor(t / 2))); const T = (m + 2) * t + k
+      const st = tp.step ?? 1; const m = pick([2, 3]); const t = st * ri((tp.lo ?? 10) / st, (tp.hi ?? 200) / st); const k = st * ri(1, Math.max(2, Math.floor(t / 2 / st))); const T = (m + 2) * t + k
       const sh = { A: t + k, B: t, C: m * t }; const ans = sh[tp.ask]
       return { v: { T, k, mw: TIMES[m] }, ans, wrong: [...Object.values(sh).filter((x) => x !== ans), Math.round(T / 3)], exp: `Let the middle share be x: (x + ${k}) + x + ${m}x = ${fmtNum(T)} ⇒ ${m + 2}x = ${fmtNum(T - k)} ⇒ x = ${fmtNum(t)}; the required share is ${fmtNum(ans)}.` }
     },
     T: [
-      { t: '{A}, {B} and {C} share Rs {T}. {B} receives Rs {k} less than {A}, and {C} gets {mw} as much as {B}. How much does {C} get?§rs', ask: 'C' },
-      { t: 'Three brothers divide Rs {T}. The eldest gets Rs {k} more than the second, and the youngest gets {mw} as much as the second. What is the eldest brother’s share?§rs', ask: 'A', lo: 500, hi: 5000 },
-      { t: 'A prize of Rs {T} is split among three winners. The second winner gets Rs {k} less than the first, and the third gets {mw} the amount of the second. What does the second winner get?§rs', ask: 'B', lo: 1000, hi: 9000 },
+      { t: '{A}, {B} and {C} share Rs {T}. {B} receives Rs {k} less than {A}, and {C} gets {mw} as much as {B}. How much does {C} get?§rs', ask: 'C', step: 5 },
+      { t: 'Three brothers divide Rs {T}. The eldest gets Rs {k} more than the second, and the youngest gets {mw} as much as the second. What is the eldest brother’s share?§rs', ask: 'A', lo: 500, hi: 5000, step: 50 },
+      { t: 'A prize of Rs {T} is split among three winners. The second winner gets Rs {k} less than the first, and the third gets {mw} the amount of the second. What does the second winner get?§rs', ask: 'B', lo: 1000, hi: 9000, step: 100 },
       { t: '{T} books are given to three schools. School P gets {k} books more than school Q, and school R gets {mw} as many as Q. How many books does R get?', ask: 'C' },
     ],
   }),
   mode({ // A = p·B, B = q·C
     d: 2,
     gen(tp) {
-      const p = pick([2, 3, 4]); const q = pick([2, 3]); const t = ri(tp.lo ?? 10, tp.hi ?? 300); const T = (p * q + q + 1) * t
+      const st = tp.step ?? 1; const p = pick([2, 3, 4]); const q = pick([2, 3]); const t = st * ri((tp.lo ?? 10) / st, (tp.hi ?? 300) / st); const T = (p * q + q + 1) * t
       const sh = { A: p * q * t, B: q * t, C: t }; const ans = sh[tp.ask]
       return { v: { T, pw: TIMES[p], qw: TIMES[q] }, ans, wrong: [...Object.values(sh).filter((x) => x !== ans), Math.round(T / 3)], exp: `Shares are in the ratio ${p * q}:${q}:1 (total ${p * q + q + 1} parts); one part = ${fmtNum(t)}, so the required share is ${fmtNum(ans)}.` }
     },
     T: [
-      { t: 'Rs {T} is divided among {A}, {B} and {C} so that {A} gets {pw} as much as {B} and {B} gets {qw} as much as {C}. What is {A}’s share?§rs', ask: 'A', lo: 100, hi: 3000 },
+      { t: 'Rs {T} is divided among {A}, {B} and {C} so that {A} gets {pw} as much as {B} and {B} gets {qw} as much as {C}. What is {A}’s share?§rs', ask: 'A', lo: 100, hi: 3000, step: 50 },
       { t: 'Three tanks hold {T} litres in all. The first holds {pw} as much as the second, which holds {qw} as much as the third. How much does the third tank hold?§litres', ask: 'C' },
-      { t: 'A man divides Rs {T} among his wife, son and daughter. The wife gets {pw} the son’s share and the son gets {qw} the daughter’s share. What is the son’s share?§rs', ask: 'B', lo: 1000, hi: 9000 },
+      { t: 'A man divides Rs {T} among his wife, son and daughter. The wife gets {pw} the son’s share and the son gets {qw} the daughter’s share. What is the son’s share?§rs', ask: 'B', lo: 1000, hi: 9000, step: 100 },
       { t: 'In a basket of {T} fruits, apples are {pw} as many as oranges, and oranges are {qw} as many as bananas. How many bananas are there?', ask: 'C', lo: 3, hi: 20 },
     ],
   }),
   mode({ // A = B + k, B = C + j
     d: 2,
     gen(tp) {
-      const t = ri(tp.lo ?? 20, tp.hi ?? 500); const j = ri(2, 60); const k = ri(2, 60); const T = 3 * t + 2 * j + k
+      const st = tp.step ?? 1; const t = st * ri((tp.lo ?? 20) / st, (tp.hi ?? 500) / st); const j = st * ri(1, 12); const k = st * ri(1, 12); const T = 3 * t + 2 * j + k
       const sh = { A: t + j + k, B: t + j, C: t }; const ans = sh[tp.ask]
       return { v: { T, j, k }, ans, wrong: [...Object.values(sh).filter((x) => x !== ans), Math.round(T / 3)], exp: `Let the smallest be x: x + (x + ${j}) + (x + ${j} + ${k}) = ${fmtNum(T)} ⇒ 3x = ${fmtNum(3 * t)} ⇒ x = ${fmtNum(t)}; the required value is ${fmtNum(ans)}.` }
     },
     T: [
-      { t: '{A}, {B} and {C} together have Rs {T}. {A} has Rs {k} more than {B}, and {B} has Rs {j} more than {C}. How much does {C} have?§rs', ask: 'C' },
+      { t: '{A}, {B} and {C} together have Rs {T}. {A} has Rs {k} more than {B}, and {B} has Rs {j} more than {C}. How much does {C} have?§rs', ask: 'C', step: 10 },
       { t: 'Three stretches of a road total {T} km. The first is {k} km longer than the second, and the second is {j} km longer than the third. How long is the first stretch?§km', ask: 'A', lo: 5, hi: 60 },
     ],
   }),
@@ -760,11 +762,13 @@ fam('ga.ratio.linked-shares', 'ga.ratio', [
     gen(tp) {
       const [a, b] = coprimePair(6); const [c, d] = coprimePair(6); if (b === c) return null
       let x = a * c; let y = b * c; let z = b * d; const g = gcd(gcd(x, y), z); x /= g; y /= g; z /= g
-      const k = ri(10, 400); const T = (x + y + z) * k; const sh = { A: x * k, B: y * k, C: z * k }; const ans = sh[tp.ask]
+      const k = 10 * ri(1, 60); const T = (x + y + z) * k; const sh = { A: x * k, B: y * k, C: z * k }; const ans = sh[tp.ask]
       return { v: { a, b, c, d, T }, ans, wrong: [...Object.values(sh).filter((w) => w !== ans), (T * (tp.ask === 'C' ? d : a)) / (a + b + c + d)], exp: `A:B:C = ${a * c}:${b * c}:${b * d} = ${x}:${y}:${z}; one part = ${fmtNum(T)}/${x + y + z} = ${fmtNum(k)}, so the share is ${fmtNum(ans)}.` }
     },
     T: [
       { t: 'Rs {T} is divided among {A}, {B} and {C} such that {A}:{B} = {a}:{b} and {B}:{C} = {c}:{d}. What is {C}’s share?§rs', ask: 'C' },
+      { t: '{A}’s share to {B}’s is {a}:{b}, and {B}’s share to {C}’s is {c}:{d}. If the three receive Rs {T} in all, how much does {B} get?§rs', ask: 'B' },
+      { t: 'Three friends collect Rs {T} for a trip. The first and second contribute in the ratio {a}:{b}, and the second and third in the ratio {c}:{d}. How much does the third friend contribute?§rs', ask: 'C' },
       { t: 'A fund of Rs {T} is shared by three villages. The shares of the first and second are in the ratio {a}:{b}, and those of the second and third in the ratio {c}:{d}. What does the first village get?§rs', ask: 'A' },
     ],
   }),
@@ -805,6 +809,7 @@ fam('ga.ratio.mixture-change', 'ga.ratio', [
       'A bag of mixed pulses has lentils and chickpeas in the ratio {a}:{b}. After {x} kg of chickpeas are added, the ratio is {c}:{d}. How many kilograms of lentils are in the bag?§kg',
       'The ratio of boys to girls in a class is {a}:{b}. When {x} more girls join, the ratio becomes {c}:{d}. How many boys are in the class?',
       'A club has men and women members in the ratio {a}:{b}. After {x} women join, the ratio changes to {c}:{d}. How many men are members?',
+      'In a hostel, students from Punjab and from Sindh are in the ratio {a}:{b}. After {x} more students from Sindh are admitted, the ratio becomes {c}:{d}. How many students from Punjab are in the hostel?',
       'Wheat and rice stocks in a godown are in the ratio {a}:{b}. After {x} tonnes of rice arrive, the ratio is {c}:{d}. How many tonnes of wheat are in the godown?§tonnes',
     ],
   }),
@@ -829,6 +834,8 @@ fam('ga.ratio.same-number-both-terms', 'ga.ratio', [
       { t: 'Two tanks contain {a} and {b} litres of water. If the same amount is poured into each, their contents will be in the ratio {c}:{d}. How much must be poured into each?§litres', r: [10, 200] },
       { t: 'Two shelves hold {a} and {b} books. After the same number of books is taken off each shelf, the ratio becomes {c}:{d}. How many books were taken off each shelf?', op: 'sub' },
       { t: 'A number subtracted from both the numerator and the denominator of {a}/{b} turns it into {c}/{d}. Find the number.', op: 'sub' },
+      { t: '{A} has {a} marbles and {B} has {b}. How many marbles must each be given so that their marbles are in the ratio {c}:{d}?' },
+      { t: 'What number must be taken away from both {a} and {b} to leave two numbers in the ratio {c}:{d}?', op: 'sub' },
       'Two classes have {a} and {b} students. If an equal number of new students join each class, the ratio of their strengths becomes {c}:{d}. How many join each class?',
     ],
   }),
@@ -870,14 +877,14 @@ fam('ga.ratio.compound-chain', 'ga.ratio', [
     d: 2,
     gen(tp) {
       const [a, b] = coprimePair(9); const [c, d] = coprimePair(9); if (b === c) return null
-      const g = gcd(a * c, b * d); const P = (a * c) / g; const Q = (b * d) / g; const k = ri(tp.lo ?? 2, tp.hi ?? 40); const xa = P * k
+      const g = gcd(a * c, b * d); const P = (a * c) / g; const Q = (b * d) / g; const k = (tp.ks ?? 1) * ri(tp.lo ?? 2, tp.hi ?? 40); const xa = P * k; if (tp.max && (xa > tp.max || Q * k > tp.max)) return null
       return { v: { a, b, c, d, xa }, ans: Q * k, wrong: [(xa * d) / a, (xa * b) / a, (xa * c) / d, (xa * a) / d], exp: `A:C = ${a}×${c} : ${b}×${d} = ${P}:${Q}; with A = ${fmtNum(xa)}, C = ${fmtNum(xa)} × ${Q}/${P} = ${fmtNum(Q * k)}.` }
     },
     T: [
       'The ratio of apples to oranges in a crate is {a}:{b}, and of oranges to pears {c}:{d}. If there are {xa} apples, how many pears are there?',
-      { t: 'The salaries of an officer and a clerk are in the ratio {a}:{b}; those of the clerk and a driver are in the ratio {c}:{d}. If the officer earns Rs {xa}, what does the driver earn?§rs', lo: 500, hi: 3000 },
+      { t: 'The salaries of an officer and a clerk are in the ratio {a}:{b}; those of the clerk and a driver are in the ratio {c}:{d}. If the officer earns Rs {xa}, what does the driver earn?§rs', lo: 1, hi: 10, ks: 1000, max: 200000 },
       'If x:y = {a}:{b}, y:z = {c}:{d} and x = {xa}, what is z?',
-      { t: 'The population of a first village to a second is {a}:{b}, and of the second to a third is {c}:{d}. If the first village has {xa} people, how many live in the third?', lo: 50, hi: 400 },
+      { t: 'The population of a first village to a second is {a}:{b}, and of the second to a third is {c}:{d}. If the first village has {xa} people, how many live in the third?', lo: 5, hi: 40, ks: 10, max: 20000 },
     ],
   }),
 ])
@@ -889,7 +896,7 @@ fam('ga.ratio.proportionals', 'ga.ratio', [
       const a = ri(2, 15); const b = ri(2, 30); const c = ri(2, 30); const x = (b * c) / a; if (!isInt(x) || a === b || b === c) return null
       return { v: { a, b, c }, ans: x, wrong: [(a * c) / b, (a * b) / c, b + c - a, (a * x) / c + 1], exp: `${a}:${b} = ${c}:x ⇒ ${a}x = ${b} × ${c} ⇒ x = ${x}.` }
     },
-    T: ['Find the fourth proportional to {a}, {b} and {c}.', 'If {a}:{b} = {c}:x, what is x?', '{a} is to {b} as {c} is to what number?'],
+    T: ['Find the fourth proportional to {a}, {b} and {c}.', 'If {a}:{b} = {c}:x, what is x?', '{a} is to {b} as {c} is to what number?', 'Find x if {a}:{c} :: {b}:x.'],
   }),
   mode({ // third proportional
     d: 1,
@@ -915,7 +922,7 @@ fam('ga.ratio.unitary-direct', 'ga.ratio', [
     d: 1,
     gen(tp) {
       const q1 = ri(tp.q ? tp.q[0] : 2, tp.q ? tp.q[1] : 12); let q2 = ri(tp.q ? tp.q[0] : 2, tp.q ? tp.q[1] * 2 : 25); if (q1 === q2) return null
-      const u = ri(...(tp.uu ?? [5, 120])); const c1 = q1 * u
+      const u = (tp.us ?? 1) * ri(...(tp.uu ?? [5, 120])); const c1 = q1 * u
       return { v: { q1, q2, c1 }, ans: q2 * u, wrong: [(q1 * c1) / q2, c1 + (q2 - q1), c1 * q2, u * (q2 + 1)], exp: `One unit = ${fmtNum(c1)}/${q1} = ${fmtNum(u)}; for ${q2}: ${q2} × ${fmtNum(u)} = ${fmtNum(q2 * u)}.` }
     },
     T: [
@@ -923,7 +930,7 @@ fam('ga.ratio.unitary-direct', 'ga.ratio', [
       { t: 'A car uses {q1} litres of petrol to travel {c1} km. How far can it go on {q2} litres?§km', uu: [10, 18] },
       { t: 'A printer prints {c1} pages in {q1} minutes. How many pages does it print in {q2} minutes?§pages', uu: [10, 40] },
       { t: 'A tailor needs {c1} metres of cloth for {q1} suits. How much cloth is needed for {q2} suits?§m', uu: [3, 5] },
-      { t: 'A labourer earns Rs {c1} for {q1} days of work. What will he earn for {q2} days?§rs', uu: [800, 1500] },
+      { t: 'A labourer earns Rs {c1} for {q1} days of work. What will he earn for {q2} days?§rs', uu: [16, 30], us: 50 },
       { t: 'A mason lays {c1} bricks in {q1} hours. How many bricks will he lay in {q2} hours?§bricks', uu: [50, 120], q: [2, 8] },
     ],
   }),
@@ -944,13 +951,14 @@ fam('ga.ratio.unitary-direct', 'ga.ratio', [
     d: 2,
     gen(tp) {
       const m1 = ri(2, 12); const m2 = ri(2, 20); const dd = ri(2, 10); if (m1 === m2) return null
-      const u = ri(...(tp.uu ?? [2, 12])); const s1 = m1 * u
+      const u = (tp.us ?? 1) * ri(...(tp.uu ?? [2, 12])); const s1 = m1 * u
       return { v: { m1, m2, s1, dd }, ans: u * m2 * dd, wrong: [u * m2, s1 * dd, s1 * m2 * dd, u * (m2 + dd)], exp: `Per head per day = ${fmtNum(s1)}/${m1} = ${fmtNum(u)}; ${m2} × ${dd} × ${fmtNum(u)} = ${fmtNum(u * m2 * dd)}.` }
     },
     T: [
       'If {m1} tailors stitch {s1} shirts in a day, how many shirts will {m2} tailors stitch in {dd} days?',
       { t: '{m1} cows eat {s1} kg of fodder in a day. How much fodder will {m2} cows eat in {dd} days?§kg', uu: [8, 15] },
-      { t: 'Feeding {m1} guests at a wedding costs Rs {s1} a day. At the same rate, what does it cost to feed {m2} guests for {dd} days?§rs', uu: [500, 1200] },
+      { t: 'Feeding {m1} guests at a wedding costs Rs {s1} a day. At the same rate, what does it cost to feed {m2} guests for {dd} days?§rs', uu: [10, 24], us: 50 },
+      { t: '{m1} machines bottle {s1} litres of juice in an hour. How many litres will {m2} machines bottle in {dd} hours?§litres', uu: [50, 200] },
     ],
   }),
 ])
@@ -995,6 +1003,18 @@ fam('ga.ratio.inverse-proportion', 'ga.ratio', [
       'The fodder on a farm lasts its cows {D} days. If there were {k} fewer cows, it would last {e} days longer. How many cows are on the farm?',
       'A store of food can feed a group of workers for {D} days. If {k} workers left, it would last {e} days more. How many workers are there?',
       'A stock of grain feeds some horses for {D} days. With {k} fewer horses the same grain would last {e} days more. How many horses are there?',
+    ],
+  }),
+  mode({ // k more people: lasts e days less
+    d: 3,
+    gen() {
+      const e = pick([2, 4, 5, 6, 8, 10]); const k = pick([5, 10, 15, 20, 25, 30]); const D = ri(12, 60); const N = (k * (D - e)) / e
+      if (!isInt(N) || D <= e || N < 10 || N > 500) return null
+      return { v: { D, k, e, D2: D - e }, ans: N, wrong: [(k * D) / e, N + k, (k * (D + e)) / e, N - k], exp: `N × ${D} = (N + ${k}) × ${D - e} ⇒ ${e}N = ${k} × ${D - e} ⇒ N = ${N}.` }
+    },
+    T: [
+      'A village’s grain stock would feed its families for {D} days. If {k} more families settled there, it would last only {D2} days. How many families live in the village?',
+      'Rations in a camp would last {D} days for the people now there. If {k} more people joined, the rations would run out {e} days sooner. How many people are in the camp now?',
     ],
   }),
 ])
@@ -1043,6 +1063,429 @@ fam('ga.ratio.income-expenditure', 'ga.ratio', [
       { t: 'The salaries of two clerks are in the ratio {a}:{b}. Their spending is in the ratio {c}:{d}, and each saves Rs {S}. How much does the first clerk spend?', ask: 'e1' },
       { t: 'Two shops earn revenues in the ratio {a}:{b} and have costs in the ratio {c}:{d}. Each makes a profit of Rs {S}. What is the revenue of the second shop?', ask: 'i2' },
       { t: 'The monthly pay of a husband and wife is in the ratio {a}:{b}, and their spending in the ratio {c}:{d}. If each of them saves Rs {S}, what is the wife’s pay?', ask: 'i2' },
+    ],
+  }),
+])
+
+fam('ga.ratio.simplify-units', 'ga.ratio', [
+  mode({
+    d: 1,
+    gen(tp) {
+      const [x, y, f] = tp.kind === 'min' ? [5 * ri(3, 18), ri(1, 4), 60] : tp.kind === 'g' ? [50 * ri(1, 19), ri(1, 5), 1000] : tp.kind === 'cm' ? [5 * ri(1, 19), ri(1, 6), 100] : [10 * ri(2, 90), 10 * ri(2, 90), 1]
+      const Y = y * f; if (x === Y || gcd(x, Y) === 1 && f === 1) return null
+      const ans = ratioLabel([x, Y]); const naive = ratioLabel([x, y])
+      const half = gcd(x, Y) > 2 && (x / 2) % 1 === 0 && (Y / 2) % 1 === 0 ? `${x / 2}:${Y / 2}` : `${x}:${Y}`
+      const opts = [ans, naive, ratioLabel([Y, x]), f === 1 ? half : ratioLabel([x, y * (f === 60 ? 100 : 10 * f)])].map((l) => ({ label: l, val: l }))
+      opts.push({ label: ratioLabel([x + 1, Y]), val: 'z' })
+      return { v: { x, y }, opts, exp: f === 1 ? `Divide both terms by their HCF ${gcd(x, Y)}: ${x}:${Y} = ${ans}.` : `Use the same unit: ${y} = ${Y} in the smaller unit, so ${x}:${Y} = ${ans}.` }
+    },
+    T: [
+      { t: 'Express the ratio of {x} minutes to {y} hours in its simplest form.', kind: 'min' },
+      { t: 'The ratio of {x} grams to {y} kilograms, in its simplest form, is:', kind: 'g' },
+      { t: 'Write the ratio {x} cm : {y} m in its lowest terms.', kind: 'cm' },
+      { t: 'Reduce the ratio Rs {x} : Rs {y} to its lowest terms.', kind: 'rs', d: 1 },
+    ],
+  }),
+])
+
+// ---- Averages ----------------------------------------------------------------
+const listStr = (arr, pre = '') => `${arr.slice(0, -1).map((x) => pre + fmtNum(x)).join(', ')} and ${pre}${fmtNum(arr[arr.length - 1])}`
+/** n distinct-ish integers in [lo,hi] with integer mean. */
+function listWithMean(n, lo, hi) {
+  const m = ri(lo + Math.floor((hi - lo) / 4), hi - Math.floor((hi - lo) / 4)); const arr = []
+  for (let i = 0; i < n - 1; i += 1) arr.push(ri(lo, hi))
+  const last = n * m - arr.reduce((x, y) => x + y, 0); if (last < lo || last > hi) return null
+  arr.push(last); if (new Set(arr).size < n - 1) return null
+  return { arr: shuffle(arr), m, sum: n * m }
+}
+
+fam('ga.average.simple-mean', 'ga.average', [
+  mode({
+    d: 1,
+    gen(tp) {
+      const n = tp.n ?? 5; const [lo, hi] = tp.r ?? [10, 90]; const L = listWithMean(n, lo, hi); if (!L) return null
+      const sorted = [...L.arr].sort((a, b) => a - b)
+      return { v: { n, list: listStr(L.arr, tp.pre ?? '') }, ans: L.m, wrong: [L.sum, L.sum / (n - 1), sorted[Math.floor(n / 2)] !== L.m ? sorted[Math.floor(n / 2)] : null, L.m + 2, L.m - 2], exp: `Sum = ${fmtNum(L.sum)}; mean = ${fmtNum(L.sum)}/${n} = ${fmtNum(L.m)}.` }
+    },
+    T: [
+      { t: 'Find the average of {list}.', n: 5, r: [10, 99] },
+      { t: 'A batsman scored {list} runs in his last {n} innings. What is his average score?§runs', n: 5, r: [5, 120] },
+      { t: 'The maximum temperatures recorded in a town on {n} days were {list} °C. What was the mean maximum temperature?§°C', n: 5, r: [30, 48] },
+      { t: 'A student’s marks in {n} subjects are {list}. What is the average mark?', n: 6, r: [45, 95] },
+      { t: 'The weights of {n} parcels are {list} kg. Find their mean weight.§kg', n: 4, r: [2, 30] },
+      { t: 'The ages of {n} children in a family are {list} years. What is their average age?§years', n: 4, r: [2, 18] },
+      { t: 'Rainfall on the {n} days of a week was {list} mm. What was the average daily rainfall?§mm', n: 7, r: [0, 40] },
+      { t: 'The heights of {n} saplings in a nursery are {list} cm. The mean height is:§cm', n: 5, r: [20, 80] },
+      { t: 'A taxi driver earned Rs {list} on {n} successive days. What were his average daily earnings?§rs', n: 4, r: [1500, 4000], pre: 'Rs ' },
+      { t: '{n} students scored {list} in a short quiz. What is the mean score?', n: 6, r: [3, 20] },
+      { t: 'The prices of {n} books on a shelf are Rs {list}. What is their average price?§rs', n: 5, r: [150, 900], pre: 'Rs ' },
+    ],
+  }),
+  mode({
+    d: 1,
+    gen(tp) {
+      const n = ri(4, 20); const m = ri(...(tp.r ?? [2, 60])); const s = n * m
+      return { v: { n, s }, ans: m, wrong: [s - n, s / 2, m * 2, m + n], exp: `Mean = total/number = ${fmtNum(s)}/${n} = ${fmtNum(m)}.` }
+    },
+    T: [
+      'The sum of {n} observations is {s}. What is their mean?',
+      { t: '{n} friends pool Rs {s} for a picnic. What is the average contribution per friend?§rs', r: [200, 2000] },
+    ],
+  }),
+])
+
+fam('ga.average.missing-value', 'ga.average', [
+  mode({ // find the remaining value
+    d: 2,
+    gen(tp) {
+      const n = tp.n ?? 5; const [lo, hi] = tp.r ?? [10, 90]; const L = listWithMean(n, lo, hi); if (!L) return null
+      const miss = L.arr[n - 1]; const known = L.arr.slice(0, n - 1); const ks = known.reduce((x, y) => x + y, 0)
+      return { v: { n, n1: n - 1, m: L.m, list: listStr(known, tp.pre ?? '') }, ans: miss, wrong: [L.m, ks / (n - 1), L.sum, miss + n, miss - n], exp: `Total needed = ${n} × ${fmtNum(L.m)} = ${fmtNum(L.sum)}; known total = ${fmtNum(ks)}; missing value = ${fmtNum(L.sum)} − ${fmtNum(ks)} = ${fmtNum(miss)}.` }
+    },
+    T: [
+      { t: 'The average of {n} numbers is {m}. If {n1} of them are {list}, what is the remaining number?', n: 5 },
+      { t: 'A batsman’s average over {n} innings is {m} runs. His scores in the first {n1} innings were {list}. How many runs did he make in the last innings?§runs', n: 6, r: [10, 110] },
+      { t: 'The mean weight of {n} boxes is {m} kg. {n1} of them weigh {list} kg. What does the remaining box weigh?§kg', n: 5, r: [5, 40] },
+      { t: '{F1} wants an average of {m} marks in {n} tests. Her marks in the first {n1} tests are {list}. What must she score in the last test?', n: 5, r: [55, 99] },
+      { t: 'The average temperature over {n} days was {m} °C. The first {n1} readings were {list} °C. What was the last reading?§°C', n: 5, r: [18, 40] },
+    ],
+  }),
+  mode({ // add a value leaving the mean unchanged
+    d: 1,
+    gen(tp) {
+      const n = tp.n ?? 6; const L = listWithMean(n, ...(tp.r ?? [2, 30])); if (!L) return null
+      const sorted = [...L.arr].sort((a, b) => a - b)
+      return { v: { n, list: listStr(L.arr) }, ans: L.m, wrong: [L.sum / (n + 1), sorted[n - 1], L.m + 1, sorted[0]], exp: `The present mean is ${fmtNum(L.sum)}/${n} = ${fmtNum(L.m)}; adding a value equal to the mean leaves the mean unchanged.` }
+    },
+    T: [
+      { t: 'A new number is added to the list {list} so that the average does not change. What is the new number?', n: 6 },
+      { t: 'The ages of {n} players in a squad are {list} years. A new player joins and the average age stays the same. How old is the new player?§years', n: 5, r: [18, 34] },
+    ],
+  }),
+  mode({ // mean of n known, mean of n1 known → the rest (one value)
+    d: 2,
+    gen(tp) {
+      const n = tp.n ?? 3; const n1 = n - 1; const m2 = ri(...(tp.r ?? [10, 60])); const last = ri(...(tp.r ?? [10, 60])); const tot = n1 * m2 + last
+      if (tot % n || last === m2) return null
+      const m = tot / n
+      return { v: { m, m2 }, ans: last, wrong: [n * m - m2, m - m2 > 0 ? m - m2 : m2 - m, (m + m2) / 2 === last ? null : (m + m2) / 2, n * m], exp: `Total of all ${n} = ${n} × ${fmtNum(m)} = ${fmtNum(tot)}; total of ${n1} = ${n1} × ${m2} = ${n1 * m2}; the remaining one = ${fmtNum(last)}.` }
+    },
+    T: [
+      { t: 'The average of three numbers is {m}. The average of two of them is {m2}. What is the third number?', n: 3 },
+      { t: 'The average weight of {A}, {B} and {C} is {m} kg, and the average weight of {A} and {B} is {m2} kg. How much does {C} weigh?§kg', n: 3, r: [40, 80] },
+      { t: 'The mean of four numbers is {m} and the mean of three of them is {m2}. The fourth number is:', n: 4 },
+    ],
+  }),
+])
+
+fam('ga.average.member-joins-leaves', 'ga.average', [
+  mode({ // joins
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [5, 30])); const m = ri(...(tp.r ?? [10, 60])); const k = pick(tp.kset ?? [1, 2, 3]); const m2 = tp.dec ? m - k : m + k
+      const x = (n + 1) * m2 - n * m; if (x <= 0) return null
+      return { v: { n, m, m2, k }, ans: x, wrong: [m2, m + k * n, (n + 1) * m2, x + (tp.dec ? k : -k) * 2], exp: `New total = ${n + 1} × ${m2} = ${(n + 1) * m2}; old total = ${n} × ${m} = ${n * m}; the newcomer = ${(n + 1) * m2} − ${n * m} = ${x}.` }
+    },
+    T: [
+      { t: 'The average age of {n} students in a class is {m} years. When the teacher’s age is included, the average rises by {k} years. How old is the teacher?§years', nr: [20, 40], r: [10, 16], kset: [1, 2] },
+      { t: 'The mean weight of {n} players is {m} kg. A new player joins and the mean becomes {m2} kg. How much does the new player weigh?§kg', nr: [8, 15], r: [55, 75] },
+      { t: 'The average salary of {n} workers in a workshop is Rs {m}. When the manager’s salary is added, the average goes up by Rs {k}. What is the manager’s salary?§rs', nr: [9, 24], r: [25, 40], kset: [1000, 1500, 2000] },
+      { t: 'The average of {n} numbers is {m}. When one more number is included, the average becomes {m2}. What number was included?' },
+      { t: 'A team of {n} has an average height of {m} cm. A new member joins and the average drops to {m2} cm. How tall is the new member?§cm', nr: [5, 12], r: [160, 180], dec: true },
+    ],
+  }),
+  mode({ // leaves
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [5, 20])); const m = ri(...(tp.r ?? [10, 60])); const m2 = m + (tp.up ? 1 : -1) * pick([1, 2, 3])
+      const x = n * m - (n - 1) * m2; if (x <= 0) return null
+      return { v: { n, m, m2 }, ans: x, wrong: [m - m2 + m, n * m - m2, m2, x + 2 * (m - m2)], exp: `Old total = ${n} × ${m} = ${n * m}; remaining total = ${n - 1} × ${m2} = ${(n - 1) * m2}; the one removed = ${x}.` }
+    },
+    T: [
+      { t: 'The average age of the {n} members of a committee is {m} years. One member retires and the average age of the others becomes {m2} years. How old is the retiring member?§years', nr: [6, 12], r: [40, 55] },
+      { t: 'The mean of {n} numbers is {m}. If one number is removed, the mean of the rest is {m2}. What number was removed?', up: true },
+      { t: 'A family of {n} has an average age of {m} years. After the grandfather moves to another city, the average age of those left is {m2} years. How old is the grandfather?§years', nr: [5, 8], r: [26, 34] },
+      { t: '{n} boxes have a mean mass of {m} kg. When one box is taken out, the mean mass of the rest is {m2} kg. What is the mass of the box taken out?§kg', nr: [5, 12], r: [15, 40] },
+    ],
+  }),
+  mode({ // one replaced
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [5, 12])); const k = pick(tp.kset ?? [1, 2, 3]); const x = ri(...(tp.r ?? [40, 70])); const nw = tp.dec ? x - n * k : x + n * k
+      if (nw <= 0) return null
+      return { v: { n, k, x }, ans: nw, wrong: [tp.dec ? x - k : x + k, tp.dec ? x + n * k : x - n * k, x + (n + 1) * k * (tp.dec ? -1 : 1), nw + (tp.dec ? -1 : 1) * k], exp: `The total changes by ${n} × ${k} = ${n * k}, so the new value is ${x} ${tp.dec ? '−' : '+'} ${n * k} = ${nw}.` }
+    },
+    T: [
+      { t: 'The average weight of {n} men goes up by {k} kg when one of them, weighing {x} kg, is replaced by a new man. What does the new man weigh?§kg', r: [50, 70] },
+      { t: 'The average age of a panel of {n} judges falls by {k} years when a judge aged {x} years is replaced by a younger one. How old is the new judge?§years', r: [60, 75], dec: true, kset: [1, 2] },
+      { t: 'When a player who scored {x} goals in a season is replaced by another, the average goals of a {n}-player squad fall by {k}. How many goals did the new player score?', r: [30, 60], dec: true, nr: [5, 10] },
+    ],
+  }),
+])
+
+fam('ga.average.corrected-entry', 'ga.average', [
+  mode({ // single misread value
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [10, 50])); const m = ri(...(tp.r ?? [30, 80])); const diff = n * pick([1, 2, -1, -2]); const x = ri(...(tp.xr ?? [20, 90])); const y = x - diff
+      if (y <= 0 || y === x) return null
+      const c = m + diff / n
+      return { v: { n, m, x, y }, ans: c, wrong: [m - diff / n, m + diff, m, c + 1], exp: `Correct total = ${n} × ${m} − ${y} + ${x} = ${n * m + diff}; correct mean = ${n * m + diff}/${n} = ${c}.` }
+    },
+    T: [
+      'The mean of {n} observations was found to be {m}. Later it was discovered that {x} had been recorded as {y}. What is the correct mean?',
+      'The average marks of {n} students were worked out as {m}. One student’s marks were entered as {y} instead of {x}. Find the correct average.',
+      { t: 'A clerk found the average salary of {n} employees to be Rs {m} thousand, but he had typed one salary of Rs {x} thousand as Rs {y} thousand. What is the true average salary?§thousand', nr: [10, 30], r: [40, 90], xr: [40, 120] },
+      { t: 'The average weight of {n} bags was noted as {m} kg. A bag weighing {x} kg was afterwards found to have been read as {y} kg. What is the actual average weight?§kg', nr: [10, 25], r: [40, 60], xr: [30, 70] },
+      { t: 'The mean temperature over {n} days was reported as {m} °C, but one day’s reading of {x} °C had been copied as {y} °C. What is the correct mean temperature?§°C', nr: [10, 15], r: [20, 32], xr: [15, 40] },
+    ],
+  }),
+  mode({ // two misread values
+    d: 3,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [10, 40])); const m = ri(...(tp.r ?? [30, 80])); const diff = n * pick([1, 2, -1, -2])
+      const x1 = ri(20, 90); const x2 = ri(20, 90); const y1 = ri(20, 90); const y2 = x1 + x2 - y1 - diff
+      if (y2 <= 0 || y2 > 150 || x1 === y1 || x2 === y2) return null
+      const c = m + diff / n
+      return { v: { n, m, x1, x2, y1, y2 }, ans: c, wrong: [m - diff / n, m + diff, m, c + 2], exp: `The total must change by (${x1} + ${x2}) − (${y1} + ${y2}) = ${diff}; correct mean = ${m} ${diff < 0 ? '−' : '+'} ${Math.abs(diff)}/${n} = ${c}.` }
+    },
+    T: [
+      'The average of {n} numbers is {m}. Two of the numbers, {x1} and {x2}, were wrongly taken as {y1} and {y2}. What is the correct average?',
+      { t: 'The mean height of {n} trainees was calculated as {m} cm. Two heights, {x1} cm and {x2} cm, had been recorded as {y1} cm and {y2} cm. What is the correct mean height?§cm', r: [150, 175] },
+      { t: 'A scorer worked out the average runs of {n} batsmen as {m}, having entered {y1} for {x1} and {y2} for {x2}. What is the correct average?§runs', nr: [10, 20], r: [25, 50] },
+    ],
+  }),
+  mode({ // find the value wrongly used
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [10, 40])); const m = ri(...(tp.r ?? [30, 80])); const dm = pick([1, 2, -1, -2]); const m2 = m + dm; const x = ri(...(tp.xr ?? [20, 90])); const y = x - n * dm
+      if (y <= 0) return null
+      return { v: { n, m, m2, x }, ans: y, wrong: [x + n * dm, x - dm, n * m2 - x > 0 ? n * m2 - x : null, y + n], exp: `The correction changed the total by ${n} × (${m2} − ${m}) = ${n * dm}; so the wrong value was ${x} ${dm > 0 ? '−' : '+'} ${Math.abs(n * dm)} = ${y}.` }
+    },
+    T: [
+      { t: 'The average of {n} numbers was calculated as {m}. It was later found that the number {x} had been misread, and the correct average is {m2}. What value had been used by mistake?', xr: [80, 150] },
+      { t: '{n} parcels were said to have an average weight of {m} kg. A parcel actually weighing {x} kg had been recorded wrongly, and the true average is {m2} kg. What weight had been recorded for that parcel?§kg', nr: [10, 20], r: [20, 40], xr: [40, 80] },
+      { t: 'The average score of {n} players was announced as {m}. A score of {x} had been miscopied, and after correction the average is {m2}. What figure had been copied?', nr: [10, 20], xr: [50, 100] },
+    ],
+  }),
+])
+
+fam('ga.average.combined-groups', 'ga.average', [
+  mode({ // combined average
+    d: 2,
+    gen(tp) {
+      const n1 = ri(...(tp.nr ?? [5, 40])); const n2 = ri(...(tp.nr ?? [5, 40])); const s = tp.step ?? 1; const m1 = s * ri(...(tp.r ?? [30, 80])); const m2 = s * ri(...(tp.r ?? [30, 80]))
+      const c = (n1 * m1 + n2 * m2) / (n1 + n2); if (!isInt(c) || m1 === m2 || n1 === n2) return null
+      return { v: { n1, n2, m1, m2 }, ans: c, wrong: [(m1 + m2) / 2, (n1 * m2 + n2 * m1) / (n1 + n2), m1 + m2, c + s], exp: `Total = ${n1} × ${fmtNum(m1)} + ${n2} × ${fmtNum(m2)} = ${fmtNum(n1 * m1 + n2 * m2)} for ${n1 + n2}; average = ${fmtNum(c)} (not the simple mean of the two averages).` }
+    },
+    T: [
+      'In a class, the average marks of {n1} boys are {m1} and of {n2} girls are {m2}. What is the average for the whole class?',
+      { t: 'One section of {n1} students has a mean age of {m1} years and another of {n2} students has a mean age of {m2} years. Find the mean age of all the students.§years', r: [12, 18] },
+      { t: 'A shop sold {n1} shirts at an average price of Rs {m1} and {n2} shirts at an average price of Rs {m2}. What was the average price of all the shirts sold?§rs', step: 50, r: [10, 40] },
+      { t: '{n1} workers earn Rs {m1} a day on average and {n2} others earn Rs {m2} a day on average. What is the average daily wage of all the workers?§rs', step: 50, r: [16, 40] },
+      { t: 'A batsman averaged {m1} runs in his first {n1} matches and {m2} runs in the next {n2}. What is his average over all the matches?§runs', nr: [4, 20], r: [15, 70] },
+      { t: 'A car covered an average of {m1} km a day for {n1} days and then {m2} km a day for {n2} days. What was its average daily distance?§km', nr: [2, 12], r: [40, 300] },
+    ],
+  }),
+  mode({ // find the size of group 2
+    d: 3,
+    gen(tp) {
+      const n1 = ri(...(tp.nr ?? [4, 30])); const s = tp.step ?? 1; const m1 = s * ri(...(tp.r ?? [40, 90])); const m2 = s * ri(...(tp.r ?? [40, 90])); const M = s * ri(...(tp.r ?? [40, 90]))
+      if (!((m1 > M && M > m2) || (m1 < M && M < m2))) return null
+      const n2 = (n1 * (m1 - M)) / (M - m2); if (!isInt(n2) || n2 < 2 || n2 > 100 || n2 === n1) return null
+      return { v: { n1, m1, m2, M }, ans: n2, wrong: [n1, n1 + n2, (n1 * (M - m2)) / (m1 - M), n2 + 2], exp: `${n1}(${fmtNum(m1)} − ${fmtNum(M)}) = n(${fmtNum(M)} − ${fmtNum(m2)}) ⇒ n = ${n2}.` }
+    },
+    T: [
+      { t: 'The average salary of all the staff in an office is Rs {M}. The {n1} officers average Rs {m1} and the clerks average Rs {m2}. How many clerks are there?', step: 1000, r: [20, 90] },
+      'A class has an average score of {M}. The {n1} girls average {m1} and the boys average {m2}. How many boys are in the class?',
+      { t: 'In a factory the average wage is Rs {M} a day. The {n1} skilled workers get Rs {m1} on average and the unskilled workers Rs {m2}. How many unskilled workers are there?', step: 100, r: [8, 30] },
+    ],
+  }),
+  mode({ // average of the rest
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [8, 30])); const n1 = ri(2, n - 2); const M = ri(...(tp.r ?? [20, 60])); const m1 = ri(...(tp.r ?? [20, 60]))
+      const r = (n * M - n1 * m1) / (n - n1); if (!isInt(r) || r <= 0 || m1 === M) return null
+      return { v: { n, n1, M, m1 }, ans: r, wrong: [2 * M - m1, (n * M - m1) / (n - n1), M, r + 1], exp: `Total = ${n} × ${M} = ${n * M}; first ${n1} total = ${n1 * m1}; rest = ${n * M - n1 * m1} over ${n - n1}, average ${r}.` }
+    },
+    T: [
+      'The average of {n} numbers is {M}. The average of the first {n1} of them is {m1}. What is the average of the remaining numbers?',
+      { t: 'A team of {n} players has an average age of {M} years. If the {n1} senior players average {m1} years, what is the average age of the others?§years', nr: [11, 20], r: [18, 34] },
+    ],
+  }),
+])
+
+fam('ga.average.consecutive-and-ap', 'ga.average', [
+  mode({ // k consecutive of a kind, average given
+    d: 1,
+    gen(tp) {
+      const step = tp.step; const k = tp.k ?? pick([3, 5, 7]); let first = ri(2, 80)
+      if (tp.par === 'even' && first % 2) first += 1; if (tp.par === 'odd' && first % 2 === 0) first += 1; if (step === 5) first = 5 * ri(1, 30)
+      const last = first + step * (k - 1); const m = (first + last) / 2; if (!isInt(m)) return null
+      const ans = tp.ask === 'min' ? first : last
+      return { v: { k, m }, ans, wrong: [tp.ask === 'min' ? last : first, m + step * k / 2 === ans ? null : Math.round(m + (tp.ask === 'min' ? -1 : 1) * step * k / 2), m + (tp.ask === 'min' ? -1 : 1) * (k - 1), m], exp: `The average of equally spaced numbers is the middle value; with ${k} terms ${step} apart, the ${tp.ask === 'min' ? 'smallest' : 'largest'} is ${m} ${tp.ask === 'min' ? '−' : '+'} ${step * (k - 1) / 2} = ${ans}.` }
+    },
+    T: [
+      { t: 'The average of {k} consecutive integers is {m}. What is the largest of them?', step: 1, ask: 'max', k: 5 },
+      { t: 'The mean of {k} consecutive even numbers is {m}. What is the smallest of them?', step: 2, par: 'even', ask: 'min' },
+      { t: '{k} consecutive odd numbers have an average of {m}. Find the greatest of them.', step: 2, par: 'odd', ask: 'max' },
+      { t: 'The average of {k} consecutive multiples of 5 is {m}. What is the largest of these multiples?', step: 5, ask: 'max' },
+    ],
+  }),
+  mode({ // averages of simple sequences
+    d: 1,
+    gen(tp) {
+      if (tp.kind === 'nat') { const k = ri(7, 99); return { v: { k }, ans: (k + 1) / 2, wrong: [k / 2, k * (k + 1) / 2, (k - 1) / 2, k], exp: `Average of 1 to ${k} = (1 + ${k})/2 = ${fmtNum((k + 1) / 2)}.` } }
+      if (tp.kind === 'mult7') { const k = ri(5, 20); if ((k + 1) % 2) return null; return { v: { k }, ans: (7 * (k + 1)) / 2, wrong: [(7 * k) / 2, 7 * k, (k + 1) / 2, (7 * (k + 1)) / 2 + 7], exp: `Average of 7, 14, …, ${7 * k} = 7 × (1 + ${k})/2 = ${(7 * (k + 1)) / 2}.` } }
+      const lo = 2 * ri(1, 30); const hi = lo + 2 * ri(5, 40); const m = (lo + hi) / 2
+      return { v: { lo, hi }, ans: m, wrong: [m + 1, (hi - lo) / 2, hi - lo, m - 1], exp: tp.kind === 'even' ? `Equally spaced numbers: average = (${lo} + ${hi})/2 = ${m}.` : `The odd numbers run from ${lo + 1} to ${hi - 1}; average = (${lo + 1} + ${hi - 1})/2 = ${m}.` }
+    },
+    T: [
+      { t: 'What is the average of all the even numbers from {lo} to {hi}, both included?', kind: 'even' },
+      { t: 'Find the average of the first {k} natural numbers.', kind: 'nat' },
+      { t: 'What is the mean of all the odd numbers between {lo} and {hi}?', kind: 'odd' },
+      { t: 'The average of the first {k} multiples of 7 is:', kind: 'mult7' },
+    ],
+  }),
+  mode({ // born at intervals
+    d: 2,
+    gen(tp) {
+      const k = pick([3, 4, 5, 6]); const g = pick([2, 3, 4]); const m = ri(...(tp.r ?? [10, 30])); const half = (g * (k - 1)) / 2
+      if (!isInt(half) || m - half <= 0) return null
+      const ans = tp.ask === 'max' ? m + half : m - half
+      return { v: { k, g, m }, ans, wrong: [tp.ask === 'max' ? m - half : m + half, m - g, tp.ask === 'max' ? m + g * k : m - g * k, m], exp: `The ages are equally spaced, so the average is the middle age; the ${tp.ask === 'max' ? 'eldest' : 'youngest'} is ${m} ${tp.ask === 'max' ? '+' : '−'} (${k} − 1) × ${g}/2 = ${ans}.` }
+    },
+    T: [
+      { t: 'The average age of {k} children born at intervals of {g} years each is {m} years. How old is the youngest child?§years' },
+      { t: '{k} saplings were planted in a row, one every {g} days, and today their average age is {m} days. How old is the oldest sapling?§days', ask: 'max', r: [20, 60] },
+      { t: 'The average of {k} numbers in arithmetic progression with common difference {g} is {m}. What is the largest of them?', ask: 'max' },
+      { t: '{k} brothers were born at intervals of {g} years, and their average age today is {m} years. How old is the eldest brother?§years', ask: 'max' },
+    ],
+  }),
+  mode({ // sum of consecutive
+    d: 2,
+    gen(tp) {
+      const k = pick([3, 5, 7]); const step = 2; let first = ri(3, 60); if (tp.par === 'even' && first % 2) first += 1; if (tp.par === 'odd' && first % 2 === 0) first += 1
+      const m = first + (step * (k - 1)) / 2; const S = k * m; const ans = tp.ask === 'avg' ? m : first
+      return { v: { k, S }, ans, wrong: tp.ask === 'avg' ? [S / 2, m + 1, S - k, first] : [m, first + step * (k - 1), first - step, first + 1], exp: `Average = ${S}/${k} = ${m}, the middle number; ${tp.ask === 'avg' ? 'so the average is ' + m : `the smallest is ${m} − ${(step * (k - 1)) / 2} = ${first}`}.` }
+    },
+    T: [
+      { t: 'The sum of {k} consecutive odd numbers is {S}. Which is the smallest of them?', par: 'odd' },
+      { t: 'The total of {k} consecutive even numbers is {S}. What is their average?', par: 'even', ask: 'avg', d: 1 },
+    ],
+  }),
+])
+
+fam('ga.average.shift-and-scale', 'ga.average', [
+  mode({
+    d: 1,
+    gen(tp) {
+      const m = ri(...(tp.r ?? [10, 90])); const c = ri(...(tp.cr ?? [2, 12])); const op = tp.op
+      const f = { add: m + c, sub: m - c, mul: m * c, div: m / c, dbl: 2 * m + c, half: m / 2 + c }[op]
+      if (!isInt(f) || f <= 0) return null
+      const alt = { add: [m, m + 2 * c, m * c], sub: [m, m + c, m - 2 * c], mul: [m, m + c, m * c * c], div: [m, m - c, m * c], dbl: [2 * m, m + c, 2 * (m + c)], half: [m / 2, m + c, (m + c) / 2] }[op]
+      return { v: { m, c, n: ri(10, 40) }, ans: f, wrong: alt, exp: { add: `Adding ${c} to every value adds ${c} to the mean: ${m} + ${c} = ${f}.`, sub: `Subtracting ${c} from every value lowers the mean by ${c}: ${m} − ${c} = ${f}.`, mul: `Multiplying every value by ${c} multiplies the mean by ${c}: ${m} × ${c} = ${f}.`, div: `Dividing every value by ${c} divides the mean by ${c}: ${m}/${c} = ${f}.`, dbl: `New mean = 2 × ${m} + ${c} = ${f}.`, half: `New mean = ${m}/2 + ${c} = ${f}.` }[op] }
+    },
+    T: [
+      { t: 'The mean of a set of numbers is {m}. If {c} is added to each number, what is the new mean?', op: 'add' },
+      { t: 'The average age of a group of friends is {m} years. What will their average age be after {c} years?§years', op: 'add', r: [12, 40], cr: [2, 10] },
+      { t: 'Every employee in an office gets a raise of Rs {c}. If the average salary was Rs {m} before the raise, what is it now?§rs', op: 'add', r: [30000, 90000], cr: [1000, 5000] },
+      { t: 'The average of some numbers is {m}. If each number is multiplied by {c}, what is the new average?', op: 'mul', r: [4, 30], cr: [2, 6] },
+      { t: 'The mean of a data set is {m}. If {c} is subtracted from each value, the new mean is:', op: 'sub' },
+      { t: 'Each of the {n} marks in a test is reduced by {c} as a penalty for late submission. If the average mark was {m}, what is the new average?', op: 'sub', r: [40, 80], cr: [2, 5] },
+      { t: 'The average of a list of numbers is {m}. If every number is divided by {c}, what does the average become?', op: 'div', r: [20, 120], cr: [2, 5] },
+      { t: 'The mean of {n} numbers is {m}. If each number is doubled and then increased by {c}, what is the new mean?', op: 'dbl', d: 2 },
+      { t: 'The average of a set of scores is {m}. Each score is halved and then {c} is added to it. What is the new average?', op: 'half', d: 2, r: [20, 90] },
+    ],
+  }),
+])
+
+fam('ga.average.overlapping-groups', 'ga.average', [
+  mode({ // first k / last k of 2k−1
+    d: 3,
+    gen(tp) {
+      const k = tp.k ?? pick([4, 5, 6, 7]); const N = 2 * k - 1; const s = tp.step ?? 1; const M = s * ri(...(tp.r ?? [20, 60])); const a = s * ri(...(tp.r ?? [20, 60])); const b = s * ri(...(tp.r ?? [20, 60]))
+      const mid = k * a + k * b - N * M; if (mid <= 0 || mid > 3 * Math.max(a, b, M) || a === b) return null
+      if (tp.tight && Math.abs(mid - M) > 3 * s) return null
+      return { v: { N, k, M, a, b, ord: ORD(k) }, ans: mid, wrong: [(a + b) / 2 === mid ? null : (a + b) / 2, M, k * a + k * b - (N - 1) * M, mid + s * 2], exp: `First ${k} total + last ${k} total = ${k * a} + ${k * b} = ${k * a + k * b}; this counts the ${ORD(k)} value twice, and all ${N} total ${N * M}; so the ${ORD(k)} value = ${k * a + k * b} − ${N * M} = ${mid}.` }
+    },
+    T: [
+      'The average of {N} numbers is {M}. The average of the first {k} is {a} and that of the last {k} is {b}. What is the {ord} number?',
+      { t: 'A cricketer’s average over {N} innings is {M}. His average in the first {k} innings was {a}, and in the last {k} it was {b}. How many runs did he make in the {ord} innings?§runs', r: [25, 60] },
+      { t: 'Over {N} days a shop’s average daily sale was Rs {M}. The average for the first {k} days was Rs {a} and for the last {k} days Rs {b}. What was the sale on the {ord} day?§rs', step: 100, r: [20, 60] },
+      { t: 'The average temperature for a week was {M} °C. The average of the first four days was {a} °C and that of the last four days was {b} °C. What was the temperature on the fourth day?§°C', k: 4, r: [24, 36], tight: true },
+      { t: 'The average age of the {N} members of a team is {M} years. The first {k} members on the list average {a} years and the last {k} average {b} years. How old is the member in the middle of the list?§years', r: [20, 34], tight: true },
+    ],
+  }),
+  mode({ // pairwise averages
+    d: 3,
+    gen(tp) {
+      const s = tp.step ?? 1; const A = s * ri(...(tp.r ?? [30, 90])); const B = s * ri(...(tp.r ?? [30, 90])); const C = s * ri(...(tp.r ?? [30, 90]))
+      if ((A + B) % 2 || (B + C) % 2 || (A + C) % 2 || new Set([A, B, C]).size < 3) return null
+      const p = (A + B) / 2; const q = (B + C) / 2; const r = (A + C) / 2
+      const ans = { A, B, all: (A + B + C) / 3 }[tp.ask]; if (!isInt(ans)) return null
+      return { v: { p, q, r }, ans, wrong: tp.ask === 'all' ? [p + q + r, (p + q + r) / 2, ans + 1, 2 * ans] : [A === ans ? B : A, C, (p + q + r) / 3, p + q + r - ans], exp: tp.ask === 'all' ? `Adding the three pair averages gives (2x + 2y + 2z)/2 = x + y + z = ${p + q + r}; the average of the three = ${p + q + r}/3 = ${ans}.` : `Sum of all three = ${p} + ${q} + ${r} = ${p + q + r}; subtract twice the pair average that excludes the required one: ${p + q + r} − ${tp.ask === 'A' ? 2 * q : 2 * r} = ${ans}.` }
+    },
+    T: [
+      { t: 'The average weight of {A} and {B} is {p} kg, of {B} and {C} is {q} kg, and of {A} and {C} is {r} kg. How much does {A} weigh?§kg', ask: 'A', r: [40, 80] },
+      { t: 'The average of x and y is {p}, of y and z is {q}, and of x and z is {r}. What is the average of x, y and z?', ask: 'all' },
+      { t: 'The average monthly income of P and Q is Rs {p}, of Q and R is Rs {q}, and of P and R is Rs {r}. What is Q’s income?§rs', ask: 'B', step: 1000, r: [20, 90] },
+    ],
+  }),
+])
+
+fam('ga.average.target-average', 'ga.average', [
+  mode({ // raise average to m2 with next value
+    d: 2,
+    gen(tp) {
+      const n = ri(...(tp.nr ?? [4, 12])); const m = ri(...(tp.r ?? [20, 60])); const m2 = m + pick([1, 2, 3, 4, 5]); const x = (n + 1) * m2 - n * m
+      return { v: { n, m, m2 }, ans: x, wrong: [m2, m2 + (m2 - m), n * (m2 - m), x - (m2 - m)], exp: `Needed total = ${n + 1} × ${m2} = ${(n + 1) * m2}; present total = ${n} × ${m} = ${n * m}; next value = ${x}.` }
+    },
+    T: [
+      { t: 'A batsman has an average of {m} runs after {n} innings. How many runs must he score in the next innings to raise his average to {m2}?§runs' },
+      { t: '{F1}’s average in {n} tests is {m} marks. What must she score in the next test to lift her average to {m2}?', r: [50, 80] },
+      { t: 'A salesman has averaged {m} sales a day for {n} days. How many sales must he make tomorrow to bring his average up to {m2}?', r: [8, 30] },
+    ],
+  }),
+  mode({ // score in (n+1)th raises average by k
+    d: 2,
+    gen(tp) {
+      const n = ri(5, 20); const k = pick([1, 2, 3, 4]); const before = ri(...(tp.r ?? [20, 50])); const x = before + (n + 1) * k
+      const ans = tp.ask === 'before' ? before : before + k
+      return { v: { x, k, ord: ORD(n + 1) }, ans, wrong: [tp.ask === 'before' ? before + k : before, x - n * k === ans ? null : x - n * k, x - k, ans + (n % 5) + 2], exp: `Let the new average be A. Then ${n}(A − ${k}) + ${x} = ${n + 1}A ⇒ A = ${x} − ${n} × ${k} = ${before + k}; the earlier average was ${before}.` }
+    },
+    T: [
+      { t: 'A batsman scores {x} runs in his {ord} innings and thereby increases his average by {k}. What is his average after this innings?§runs' },
+      { t: 'By scoring {x} in the {ord} match of the season, a player raised his average by {k} runs. What was his average before that match?§runs', ask: 'before' },
+      { t: 'A student’s average rose by {k} marks when she scored {x} in her {ord} test. What is her new average?', r: [50, 75] },
+    ],
+  }),
+  mode({ // bowler
+    d: 3,
+    gen(tp) {
+      const a = ri(15, 30); const kk = pick([1, 2]); const t = ri(3, 6); const w = ri(20, 120); const r = a * t - kk * t - kk * w
+      if (r <= 0 || r >= (a - kk) * t) return null
+      const ans = tp.ask === 'total' ? w + t : w
+      return { v: { a, t, r, kk }, ans, wrong: [tp.ask === 'total' ? w : w + t, ans + t, ans - kk * 5, Math.round(r / kk)], exp: `If he had w wickets: (${a}w + ${r})/(w + ${t}) = ${a - kk} ⇒ ${kk}w = ${a * t} − ${kk * t} − ${r} ⇒ w = ${w}${tp.ask === 'total' ? `; now he has ${w + t}` : ''}.` }
+    },
+    T: [
+      'A bowler’s average is {a} runs per wicket. He takes {t} wickets for {r} runs in his next match, and his average falls by {kk}. How many wickets had he taken before this match?',
+      { t: 'A bowler who had been conceding {a} runs per wicket took {t} wickets for {r} runs in a match, which lowered his average by {kk}. How many wickets has he taken in all now?', ask: 'total' },
+    ],
+  }),
+  mode({ // average needed over the rest
+    d: 2,
+    gen(tp) {
+      const N = ri(...(tp.Nr ?? [5, 12])); const n = ri(2, N - 2); const s = tp.step ?? 1; const T = s * ri(...(tp.r ?? [40, 80])); const m = T - s * pick([2, 4, 5, 6, 10, -2, -4]); const need = (N * T - n * m) / (N - n)
+      if (!isInt(need) || need <= 0) return null
+      return { v: { N, n, T, m }, ans: need, wrong: [2 * T - m, T, N * T - n * m, need + s], exp: `Needed total = ${N} × ${fmtNum(T)} = ${fmtNum(N * T)}; achieved = ${n} × ${fmtNum(m)} = ${fmtNum(n * m)}; the rest ${N - n} must average ${fmtNum(N * T - n * m)}/${N - n} = ${fmtNum(need)}.` }
+    },
+    T: [
+      { t: 'A student needs an average of {T} marks over {N} papers to win a scholarship. In the first {n} papers she averaged {m}. What average does she need in the remaining papers?', r: [60, 85] },
+      { t: 'A shop wants average daily sales of Rs {T} over {N} days. It averaged Rs {m} in the first {n} days. What must it average over the remaining days?§rs', step: 1000, r: [20, 80] },
+      { t: 'A team must score at an average of {T} runs per over in a {N}-over innings. In the first {n} overs it scored at {m} runs per over. What rate is needed in the remaining overs?§runs per over', Nr: [10, 20], r: [5, 9] },
+      { t: 'A factory must average {T} units a day over {N} days to meet an order. It averaged {m} units a day in the first {n} days. What daily average is needed for the rest of the period?§units', step: 10, r: [20, 80] },
+      { t: 'An athlete wants to average {T} km a day over {N} days of training. For the first {n} days she averaged {m} km. What must she average over the remaining days?§km', r: [8, 20] },
     ],
   }),
 ])
