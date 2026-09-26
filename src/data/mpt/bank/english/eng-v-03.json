@@ -361,7 +361,7 @@
     "source_type": "authored",
     "past_paper_year": null,
     "verified": true,
-    "q": "Antonym of ‘hypocritical’ is:",
+    "q": "Choose the antonym of HYPOCRITICAL.",
     "o": [
       "two-faced",
       "hypothetical",
@@ -1684,7 +1684,7 @@
     "source_type": "authored",
     "past_paper_year": null,
     "verified": true,
-    "q": "Synonym of ‘capricious’ is:",
+    "q": "Choose the synonym of CAPRICIOUS.",
     "o": [
       "fickle",
       "constant",

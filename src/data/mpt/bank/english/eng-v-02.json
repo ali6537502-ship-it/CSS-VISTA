@@ -1495,7 +1495,7 @@
     "source_type": "authored",
     "past_paper_year": null,
     "verified": true,
-    "q": "Antonym of ‘facetious’ is:",
+    "q": "Choose the antonym of FACETIOUS.",
     "o": [
       "flippant",
       "factious",
@@ -1792,7 +1792,7 @@
     "source_type": "authored",
     "past_paper_year": null,
     "verified": true,
-    "q": "Synonym of ‘acumen’ is:",
+    "q": "Choose the synonym of ACUMEN.",
     "o": [
       "ignorance",
       "accuracy",

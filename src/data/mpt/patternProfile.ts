@@ -13,7 +13,13 @@
 //   General Ability items, Q95–180 interleave GK, Islamiat, vocabulary and
 //   history); General Ability is largely missing. Treat 2025 counts as weak
 //   evidence.
-// - No 2026 MPT paper is present in the repository, so none is profiled.
+// - CSS MPT 2026 (held 9 November 2025): the circulated "solved paper"
+//   (cssaspirants.pk, checked 26 Sep 2026) is not independent evidence. Its
+//   Islamic Studies items are the ones profiled below under 2025, its English
+//   passages, General Ability (Q91-150) and General Knowledge (Q151-200) repeat
+//   the 2024 paper verbatim, and the publisher states that its Urdu and English
+//   Q58-72 were written by the site. It confirms the unchanged 20/20/50/60/50
+//   structure and style but is not profiled separately, to avoid double counting.
 // - Difficulty (1 accessible · 2 moderate · 3 challenging) and mode are CSS
 //   Vista's editorial judgement, not FPSC data.
 //
