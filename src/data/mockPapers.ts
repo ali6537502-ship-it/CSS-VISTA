@@ -213,7 +213,11 @@ function loadMptPools(): Promise<MockPools> {
     return {
       ...base,
       excludedMptIds: previouslyPublished,
-      islamicPool: islamic.filter((question) => eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
+      islamicPool: [
+        ...past.filter((question) => question.s === 'Islamic General Knowledge'
+          && eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
+        ...islamic.filter((question) => eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
+      ],
       urduPool: [
         ...advancedMptUrduTranslationQuestions, ...curatedUrduTranslationQuestions, ...mptUrduTranslationQuestions,
         ...appliedMptUrduQuestions, ...extendedMptUrduQuestions, ...repositoryMptUrduGrammarQuestions,
@@ -223,6 +227,8 @@ function loadMptPools(): Promise<MockPools> {
       englishPool: [
         ...curatedEnglishQuestions, ...mptGrammarCourseEnglishQuestions, ...repositoryMptEnglishQuestions,
         ...reviewedMptPastEnglishQuestions(past).filter(eligibleMptEnglish),
+        ...past.filter((question) => question.s === 'English'
+          && eligibleMptEnglish(question) && !previouslyPublished.has(question.id)),
         ...english.filter((question) => eligibleMptEnglish(question) && !previouslyPublished.has(question.id)),
       ],
       abilityPool: [
@@ -245,7 +251,12 @@ function loadMptPools(): Promise<MockPools> {
         ...history.filter((question) => eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
         ...past.filter((question) => question.s === 'Pakistan Affairs' && eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
       ],
-      sciencePool: [...science.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)), ...everyday.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id))],
+      sciencePool: [
+        ...past.filter((question) => /^(?:Everyday Science|Physics|Chemistry|Biology)$/.test(question.s ?? '')
+          && eligibleMptScience(question) && !previouslyPublished.has(question.id)),
+        ...science.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)),
+        ...everyday.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)),
+      ],
     }
   }).catch((error) => {
     expandedMptPools = null
@@ -312,8 +323,9 @@ function isUsable(question: BankQuestion) {
 function qualityScore(question: BankQuestion, mptEditorial = false) {
   let score = 0
   if (mptEditorial && question.id.startsWith('mpt-original-ability-')) score += 8
-  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-ability-')) score += 7
-  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-english-')) score += 7
+  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-ability-')) score += 9
+  if (mptEditorial && question.id.startsWith('mpt-reviewed-past-english-')) score += 9
+  if (mptEditorial && question.id.startsWith('mpt-past-papers-')) score += 8
   if (question.id.startsWith('mock-')) score += mptEditorial ? 4 : 8
   if (question.e?.trim()) score += 3
   if (mptEditorial && question.d === 'Advanced') score += 2
