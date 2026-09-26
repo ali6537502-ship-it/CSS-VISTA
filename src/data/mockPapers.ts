@@ -334,8 +334,9 @@ function qualityScore(question: BankQuestion, mptEditorial = false) {
   if (mptEditorial && question.id.startsWith('mpt-past-papers-')) score += 8
   if (question.id.startsWith('mock-')) score += mptEditorial ? 4 : 8
   if (question.e?.trim()) score += 3
-  if (mptEditorial && question.d === 'Advanced') score += 2
-  if (mptEditorial && question.d === 'Basic') score -= 4
+  // Difficulty is balanced at paper level. Do not reward "Advanced" merely
+  // for being hard: that used to front-load punishing questions in MPT papers.
+  if (mptEditorial && question.d === 'Basic') score -= 1
   if (question.q.length <= 150) score += 2
   if (/^(Choose|Complete|How|The |What|When|Where|Which|Who)/i.test(question.q)) score += 1
   if (/best definition|correctly described|most closely associated/i.test(question.q)) score -= 1
@@ -445,7 +446,31 @@ function selectSection(
   if (selected.length !== spec.count) {
     throw new Error(`Fresh ${spec.label} questions are exhausted (${selected.length}/${spec.count} available). This paper was not started; revisit the subject bank while new questions are reviewed.`)
   }
-  return selected
+
+  const ordered = [...selected].sort((left, right) => (
+    stableHash(`${sectionSeed}|question-order|${left.id}`) - stableHash(`${sectionSeed}|question-order|${right.id}`)
+  ))
+  if (spec.mptEditorial && spec.label === 'Islamic Studies') {
+    // The opening should be representative rather than a wall of obscure/hard
+    // material. Permit at most one Advanced item in the first five where the
+    // selected section has enough non-Advanced questions to do so.
+    let advancedInOpening = 0
+    for (let index = 0; index < Math.min(5, ordered.length); index += 1) {
+      if (ordered[index].d !== 'Advanced') continue
+      advancedInOpening += 1
+      if (advancedInOpening <= 1) continue
+      const replacementIndex = ordered.findIndex((question, candidateIndex) => (
+        candidateIndex >= 5 && question.d !== 'Advanced'
+      ))
+      if (replacementIndex >= 5) {
+        const replacement = ordered[replacementIndex]
+        ordered[replacementIndex] = ordered[index]
+        ordered[index] = replacement
+        advancedInOpening -= 1
+      }
+    }
+  }
+  return ordered
 }
 
 const mptBlueprint: MockSection[] = [
