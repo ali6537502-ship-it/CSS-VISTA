@@ -9,6 +9,7 @@ import {
 } from '@/data/mcq'
 import { getCssSubjectMcqBank, getCssSubjectMcqIndex, toBankQuestion } from '@/data/cssSubjectMcqs'
 import { matchesMptBankTopic, mptQuestionBanks } from '@/data/mptQuestionBanks'
+import { eligibleMptIslamicBank } from '@/data/mptQuality'
 import { diversifyQuestions } from '@/lib/questionDiversity'
 import { recordActivity } from '@/lib/progress'
 import { QUESTIONS_PER_PAGE, clampQuestionPage, questionPageRange } from '@/lib/questionPagination'
@@ -45,6 +46,17 @@ export default function MPTQuestionBank() {
         const subject = index.subjects.find((item) => item.slug === definition.cssSubjectSlug)
         if (!subject) throw new Error('The verified source bank could not be found.')
         loaded = (await getCssSubjectMcqBank(subject)).map(toBankQuestion)
+      }
+
+      if (definition.id === 'islamiat') {
+        const pastPaperQuestions = await getCategoryQuestions('mpt-past-papers')
+        const reviewedIslamicPastPapers = pastPaperQuestions.filter(
+          (question) => question.s === 'Islamic General Knowledge',
+        )
+        loaded = filterDisabled(dedupeBankQuestions([
+          ...reviewedIslamicPastPapers,
+          ...loaded,
+        ])).filter(eligibleMptIslamicBank)
       }
 
       loaded = loaded.filter((question) => matchesMptBankTopic(question.s, definition))
@@ -101,7 +113,9 @@ export default function MPTQuestionBank() {
         title={`${title} MCQ Bank`}
         description={questions === null
           ? 'Loading the complete verified question bank…'
-          : 'Open the full, searchable source question bank. Similar templates are spaced apart for clearer study.'}
+          : definition?.id === 'islamiat'
+            ? 'Curated MPT-ready Islamic Studies questions, including reviewed past-paper items.'
+            : 'Open the full, searchable source question bank. Similar templates are spaced apart for clearer study.'}
       />
       <main className="mx-auto max-w-5xl px-4 py-6">
         <MptMockStrip className="mb-6" />

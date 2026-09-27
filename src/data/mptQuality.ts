@@ -33,6 +33,23 @@ export function eligibleMptIslamic(question: BankQuestion) {
   return true
 }
 
+
+const weakIslamicBankTemplate = /^(?:Which place or region is most|Which contribution or feature is correctly|Which person is correctly identified as|Which person is linked with the|Which Qur['’]?anic reference is especially associated|What was the principal location of|What was the central person or|What was the defining feature of|What was the time or chronological|What was the immediate chronological relationship|What was the principal result or|Which Qur['’]?anic or prophetic anchor is|What Qur['’]?anic or prophetic reference best|Which area of Islamic teaching chiefly|Select the person or group connected with|Select the textual basis most closely linked|Select the place most directly connected with|Which basis best supports the historical|Select the textual or historical basis|Select the Islamic teaching area most|Select the statement that best captures|Which term most precisely denotes|Which Usul or Fiqh term means|Identify the main significance associated with|Which textual anchor is most directly|Which Hadith-science term means|What principal place is associated with|Which person is identified by this|Hadith\s*-\s*What is the|Under which area of Islamic teaching|What is the key significance of|Which outcome or feature is most|Which fiscal or economic term means|Which institution or term is described|Which pairing correctly identifies|Which example best illustrates|Identify the person associated with this|What is the central theme of Nawawi Hadith|Which textual or historical basis is|Which period or date is correctly associated)/i
+
+const weakIslamicBankWording = /(?:is associated with which (?:period or date|person or group)|is important primarily because of which point|is principally associated with which (?:place|area)|belongs primarily to which area of Islamic teaching|is principally classified under which Islamic area|evidentiary pairing|complete the verified relationship|in a matching exercise|which value is correctly recorded under)/i
+const damagedIslamicBankText = /^(?:uran\b|uraysh\b)|�/i
+
+// The study bank is deliberately stricter than the scheduled mock pool. This
+// removes mass-generated prompt families from the MPT practice page without
+// changing the question selection rules used by any scheduled MPT paper.
+export function eligibleMptIslamicBank(question: BankQuestion) {
+  if (!eligibleMptIslamic(question)) return false
+  if (damagedIslamicBankText.test(question.q)) return false
+  if (weakIslamicBankTemplate.test(question.q.trim())) return false
+  if (weakIslamicBankWording.test(question.q)) return false
+  return true
+}
+
 export function eligibleMptUrdu(question: BankQuestion) {
   return /^(?:قواعد و زبان|الفاظ و معانی|محاورات و امثال|ترجمہ)$/.test(question.s ?? '')
     && !/تذکرہ|ادیب|شاعر|ناول|غزل|مرثیہ|مصنف|تصنیف/.test(question.q)
