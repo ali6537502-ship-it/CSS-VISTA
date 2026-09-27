@@ -7,7 +7,7 @@ const userAgent = 'AdsBot-Google (+http://www.google.com/adsbot.html)'
 const adsTxtUserAgent = 'Mediapartners-Google'
 let failed = false
 
-const officialLoader = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6131271603014611" crossorigin="anonymous"></script>'
+const officialLoaderPattern = /<script\s+async\s+src=["']https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-6131271603014611["']\s+crossorigin=["']anonymous["']\s*>\s*<\/script>/i
 
 function result(valid, label, details) {
   console.log(`${valid ? 'PASS' : 'FAIL'} ${label}: ${details}`)
@@ -126,7 +126,7 @@ for (const path of routes) {
     const shouldLoadAds = route?.access === 'public'
       && route.contentQuality === 'substantial'
       && route.adMode === 'enabled'
-    const hasLoader = body.includes(officialLoader)
+    const hasLoader = officialLoaderPattern.test(body)
 
     // Every deployed page must be the real page. The content threshold applies
     // to routes the registry publishes to search; a route deliberately kept out
