@@ -277,10 +277,11 @@ test('every sitemap URL resolves, is indexable and is self-canonical', { skip: !
 })
 
 test('MPT portal routes resolve on direct navigation, stay private and follow their ad policy', { skip: !built }, () => {
-  const exact = ['/account/mpt', '/account/mpt/history', '/account/mpt/performance', '/account/mpt/mistakes']
+  const exact = ['/account/mpt', '/account/mpt/history', '/account/mpt/performance', '/account/mpt/mistakes', '/account/mpt/question-bank']
   const patterns = [
     '/account/mpt/apply/mpt-mock-031', '/account/mpt/applications/MPTA-031-7H3K9Q',
     '/account/mpt/entrance/mpt-mock-031', '/account/mpt/exam/mpt-mock-031', '/account/mpt/results/MPTA-031-7H3K9Q',
+    '/account/mpt/question-bank/mpt-mock-031',
   ]
   for (const path of [...exact, ...patterns]) {
     const html = served(path)
@@ -298,7 +299,7 @@ test('MPT portal routes resolve on direct navigation, stay private and follow th
   assert.equal(request('/account/mpt/unknown/value').status, 404)
   assert.equal(request('/account/mpt/exam').status, 404)
   // Server-only paper data and helpers are never downloadable.
-  for (const path of ['/api/_mpt_papers/manifest.php', '/api/_mpt_papers/paper-001.php', '/api/_mpt_core.php', '/api/_mpt.php']) {
+  for (const path of ['/api/_mpt_papers/manifest.php', '/api/_mpt_papers/paper-001.php', '/api/_mpt_core.php', '/api/_mpt.php', '/api/_mpt_question_bank.php']) {
     assert.equal(request(path).status, 403, `${path} must be forbidden`)
   }
 })
