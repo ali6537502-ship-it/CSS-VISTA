@@ -32,6 +32,9 @@ Complete these steps in order. Nothing is visible to students until step 4.
      those accounts.
    - `'CSSV_MPT_AUTO_SCHEDULE' => 'off'` stops automatic daily mocks, so you schedule
      each one by hand.
+   - `'CSSV_MPT_PLANNED_MOCKS' => '40'` is the last mock number the scheduler creates
+     (default 40, the running series; `'0'` = no limit). To add mocks later, first
+     release papers for them from the reserve, then raise this number (D-55).
 
 ## 2. Daily operation
 
@@ -66,6 +69,11 @@ To extend the runway or publish a corrected release:
 
 The server automatically skips any exported paper that shares a question with one
 already used.
+
+**Release 3 (D-55).** The current release repairs the live papers for Mocks 5–40:
+kept questions are unchanged, defective ones are replaced from the reviewed bank. On
+deploy, each unstarted mock receives its own repaired paper (mock 5 → paper 1, …). A mock
+already held by then keeps its paper, and its repaired paper stays unused in reserve.
 
 **Editorial releases and future mocks (D-54).** When a deploy carries a newer
 editorial release, the server re-freezes every mock that has **not started, has no

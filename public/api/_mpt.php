@@ -386,7 +386,13 @@ function mpt_create_mock(PDO $pdo, array $spec): ?array
     }
 }
 
-/** Ensures the next daily 15:00 / 22:30 PKT slots exist while papers remain. */
+/** Planned mocks for the running series (CSSV_MPT_PLANNED_MOCKS; 0 = unlimited). */
+function mpt_planned_mocks(): int
+{
+    return mpt_planned_mocks_from(cssv_env('CSSV_MPT_PLANNED_MOCKS'));
+}
+
+/** Ensures the next daily 15:00 / 22:30 PKT slots exist while papers remain, up to the planned mock count. */
 function mpt_auto_schedule(PDO $pdo, int $nowMs, int $maxCreate = CSSV_MPT_SCHEDULE_PER_RUN): void
 {
     $createdCount = 0;
@@ -394,6 +400,7 @@ function mpt_auto_schedule(PDO $pdo, int $nowMs, int $maxCreate = CSSV_MPT_SCHED
     $zone = new DateTimeZone(CSSV_MPT_PKT);
     $today = (new DateTimeImmutable('@' . intdiv($nowMs, 1000)))->setTimezone($zone)->setTime(0, 0);
     $exists = $pdo->prepare('SELECT 1 FROM mpt_mocks WHERE schedule_key=? LIMIT 1');
+    $planned = mpt_planned_mocks();
     for ($day = 0; $day <= CSSV_MPT_SCHEDULE_DAYS_AHEAD; $day++) {
         foreach (CSSV_MPT_DAILY_SLOTS as $slot => $clock) {
             [$h, $m] = array_map('intval', explode(':', $clock));
@@ -404,6 +411,7 @@ function mpt_auto_schedule(PDO $pdo, int $nowMs, int $maxCreate = CSSV_MPT_SCHED
             $key = 'daily-' . $today->modify("+$day day")->format('Y-m-d') . '-' . $slot;
             $exists->execute([$key]);
             if ($exists->fetchColumn()) continue;
+            if ($planned > 0 && (int)$pdo->query('SELECT COALESCE(MAX(mock_number),0) FROM mpt_mocks')->fetchColumn() >= $planned) return;
             try {
                 $created = mpt_create_mock($pdo, ['exam_open_ms' => $open, 'schedule_key' => $key]);
             } catch (PDOException $error) {

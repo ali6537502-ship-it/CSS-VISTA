@@ -4,10 +4,12 @@
 // metadata carried alongside each question.
 import { createHash } from 'node:crypto'
 import {
-  MPT_SUBTOPIC_RANGES, MPT_GROUP_RANGES, MPT_DIFFICULTY_SHAPE, MPT_ORDER_RULES, MPT_REPETITION_LIMITS,
+  MPT_OFFICIAL_HEADINGS, MPT_PASSAGE_QUESTIONS, MPT_DIFFICULTY_SHAPE, MPT_ORDER_RULES, MPT_REPETITION_LIMITS,
 } from '../../src/data/mpt/blueprint.ts'
 import { MPT_SECTION_ORDER, MPT_SECTION_SIZE, MPT_SUBTOPICS } from '../../src/data/mpt/taxonomy.ts'
-import { canonicalText, tokenSet, jaccard, surfaceTemplate, formatFamilies, SAME_FACT_JACCARD } from '../../src/data/mpt/selector.ts'
+import {
+  canonicalText, tokenSet, jaccard, surfaceTemplate, formatFamilies, SAME_FACT_JACCARD, officialHeading, challengingCap,
+} from '../../src/data/mpt/selector.ts'
 import {
   CATCH_ALL_OPTION, ISLAMIC_TRIVIA, TEMPLATE_WORDING, URDU_LITERATURE, SCIENCE_TOO_ADVANCED, NEWS_TRIVIA,
 } from './bank-lib.mjs'
@@ -16,15 +18,7 @@ import { stemHash } from './served-archive.mjs'
 const count = (items, pick) => items.reduce((m, x) => { const k = pick(x); m[k] = (m[k] ?? 0) + 1; return m }, {})
 const bareStem = (q) => q.meta.passage_id ? q.q.slice(q.q.lastIndexOf('\nQuestion: ') + 11) : q.q
 
-function groupOf(meta) {
-  const def = MPT_SUBTOPICS[meta.subtopic]
-  if (!def) return 'unknown'
-  if (def.section === 'English') return def.group === 'comprehension' ? 'comprehension' : def.group === 'vocabulary' ? 'vocabulary' : 'grammar'
-  if (def.section === 'General Abilities') return def.subject === 'Reasoning' ? 'reasoning' : 'quant'
-  if (def.section === 'General Knowledge') return def.subject === 'Everyday Science' ? 'science' : def.subject === 'Current Affairs' ? 'current' : 'pakistan'
-  if (def.section === 'Urdu') return def.group === 'translation' ? 'translation' : 'other'
-  return 'all'
-}
+const headingOf = (q) => officialHeading({ section: q.section, subject: q.meta.subject, subtopic: q.meta.subtopic })
 
 // Human-style review heuristics: things a careful editor would notice on paper.
 function reviewFlags(q) {
@@ -73,36 +67,22 @@ export function auditPaper(paper, context) {
     if (bank.o[bank.a] !== q.o[q.a]) fail(`${q.id} exported answer does not match the verified bank answer`)
   }
 
-  // --- blueprint ranges
+  // --- official structure: FPSC sets no count for any topic inside a section, so the
+  // paper is checked only for its sections (above) and for every official heading being present.
   const subtopics = {}
+  const groups = {}
   for (const s of MPT_SECTION_ORDER) {
-    const dist = count(bySection[s], (q) => q.meta.subtopic)
-    subtopics[s] = dist
-    for (const [sub, range] of Object.entries(MPT_SUBTOPIC_RANGES[s])) {
-      const n = dist[sub] ?? 0
-      if (n < range.min || n > range.max) fail(`${s} ${sub} = ${n}, outside ${range.min}–${range.max}`)
-    }
-    for (const sub of Object.keys(dist)) if (!(sub in MPT_SUBTOPIC_RANGES[s])) fail(`${s} contains foreign subtopic ${sub}`)
-  }
-  const groups = {
-    english: count(bySection.English, (q) => groupOf(q.meta)),
-    abilities: count(bySection['General Abilities'], (q) => groupOf(q.meta)),
-    generalKnowledge: count(bySection['General Knowledge'], (q) => groupOf(q.meta)),
-    urdu: count(bySection.Urdu, (q) => groupOf(q.meta)),
-  }
-  groups.generalKnowledge.scienceIt = bySection['General Knowledge'].filter((q) => ['sci.it', 'sci.ai-digital'].includes(q.meta.subtopic)).length
-  for (const [area, ranges] of Object.entries(MPT_GROUP_RANGES)) {
-    for (const [g, range] of Object.entries(ranges)) {
-      const n = groups[area][g] ?? 0
-      if (n < range.min || n > range.max) fail(`${area} ${g} = ${n}, outside ${range.min}–${range.max}`)
-    }
+    subtopics[s] = count(bySection[s], (q) => q.meta.subtopic)
+    groups[s] = count(bySection[s], headingOf)
+    for (const heading of MPT_OFFICIAL_HEADINGS[s].headings) if (!groups[s][heading]) fail(`${s} has no item under the official heading "${heading}"`)
+    for (const q of bySection[s]) if (!MPT_SUBTOPICS[q.meta.subtopic] || MPT_SUBTOPICS[q.meta.subtopic].section !== s) fail(`${q.id} is not a ${s} item`)
   }
 
   // --- section-specific editorial rules
   const passages = new Set(bySection.English.filter((q) => q.meta.passage_id).map((q) => q.meta.passage_id))
   if (passages.size < 1) fail('no unseen comprehension passage')
-  const islamicSubtopics = Object.keys(subtopics['Islamic Studies']).length
-  if (islamicSubtopics < 6) fail(`Islamic Studies covers only ${islamicSubtopics} topics`)
+  const passageItems = bySection.English.filter((q) => q.meta.passage_id).length
+  if (passageItems < MPT_PASSAGE_QUESTIONS.min || passageItems > MPT_PASSAGE_QUESTIONS.max) fail(`comprehension has ${passageItems} questions`)
   for (const q of bySection['Islamic Studies']) {
     const text = `${q.q} ${q.o.join(' ')}`
     if (ISLAMIC_TRIVIA.some((re) => re.test(text))) fail(`${q.id} Islamic numbering/source trivia`)
@@ -142,8 +122,10 @@ export function auditPaper(paper, context) {
   for (const s of MPT_SECTION_ORDER) {
     const d = count(bySection[s], (q) => q.meta.difficulty)
     sectionDifficulty[s] = { 1: d[1] ?? 0, 2: d[2] ?? 0, 3: d[3] ?? 0 }
-    if ((d[3] ?? 0) / MPT_SECTION_SIZE[s] * 100 > MPT_DIFFICULTY_SHAPE.perSectionChallengingShare.max) fail(`${s} is more than 40% challenging`)
-    if ((d[1] ?? 0) / MPT_SECTION_SIZE[s] > 0.6) fail(`${s} is more than 60% accessible (too easy)`)
+    const hardCap = challengingCap(s, MPT_SECTION_SIZE[s])
+    const passageHard = s === 'English' ? bySection.English.filter((q) => q.meta.passage_id && q.meta.difficulty === 3).length : 0
+    if ((d[3] ?? 0) > Math.max(hardCap, passageHard)) fail(`${s} has ${d[3]} challenging items (limit ${hardCap})`)
+    if ((d[1] ?? 0) / MPT_SECTION_SIZE[s] > 0.75) fail(`${s} is more than 75% accessible (too easy)`)
   }
   const opening = questions.slice(0, MPT_ORDER_RULES.openingWindow)
   if (questions.slice(0, 5).some((q) => q.meta.difficulty === 3)) fail('a challenging question appears in the first five')
@@ -278,7 +260,7 @@ export function renderMarkdown(result, meta) {
   const lines = []
   lines.push(`# MPT release ${meta.release} — editorial report`, '')
   lines.push(`Generated from the exact exported paper representation. Series ${meta.series}; ${reports.length} papers; status **${result.failures.length ? 'BLOCKED' : 'PASS'}**.`, '')
-  lines.push('Ranges enforced are CSS Vista practice ranges (see src/data/mpt/blueprint.ts), not FPSC quotas. FPSC prescribes only the five broad sections.', '')
+  lines.push('Papers follow the official FPSC structure only: five sections with their official sizes, every official syllabus heading present, and no quota for any topic (src/data/mpt/blueprint.ts).', '')
   lines.push('## Series summary', '')
   const total = reports.length * 200
   const agg = (pick) => reports.reduce((s, r) => s + pick(r), 0)
@@ -288,12 +270,13 @@ export function renderMarkdown(result, meta) {
   lines.push(`- Time-sensitive items with source URL: ${agg((r) => r.timeSensitiveWithSource)}/${agg((r) => r.timeSensitive)}`)
   lines.push(`- Near-duplicate warnings (similarity 0.55–0.72): ${result.similar.length}; failures: ${result.failures.length}; warnings: ${result.warnings.length}`, '')
   lines.push('## Paper by paper', '')
-  lines.push('| Paper | Fingerprint | Diff 1/2/3 | Opening (Q1–10) | Eng vocab/grammar/comp | GA quant/reason | GK sci/CA/PA | CA recent (dates) | Past-paper | Flags |')
-  lines.push('|---|---|---|---|---|---|---|---|---|---|')
+  lines.push('| Paper | Fingerprint | Diff 1/2/3 | GA diff 1/2/3 | Opening (Q1–10) | Eng comp | GA quant/reason | GK sci/CA/PA | CA recent (dates) | Past-paper | Flags |')
+  lines.push('|---|---|---|---|---|---|---|---|---|---|---|')
   for (const r of reports) {
-    const e = r.groups.english; const g = r.groups.abilities; const k = r.groups.generalKnowledge
+    const e = r.groups.English; const g = r.groups['General Abilities']; const k = r.groups['General Knowledge']
+    const gd = r.sectionDifficulty['General Abilities']
     const dates = r.currentAffairs.map((c) => c.event_date.slice(2)).sort().join(', ')
-    lines.push(`| ${r.paper} | \`${r.fingerprint}\` | ${r.difficulty[1]}/${r.difficulty[2]}/${r.difficulty[3]} | ${r.opening.join('')} | ${e.vocabulary ?? 0}/${e.grammar ?? 0}/${e.comprehension ?? 0} | ${g.quant ?? 0}/${g.reasoning ?? 0} | ${k.science ?? 0}/${k.current ?? 0}/${k.pakistan ?? 0} | ${r.currentAffairs.length} (${dates}) | ${r.pastPaperDerived} | ${r.reviewFlags.length} |`)
+    lines.push(`| ${r.paper} | \`${r.fingerprint}\` | ${r.difficulty[1]}/${r.difficulty[2]}/${r.difficulty[3]} | ${gd[1]}/${gd[2]}/${gd[3]} | ${r.opening.join('')} | ${e.comprehension ?? 0} | ${g['Quantitative Ability'] ?? 0}/${g.Reasoning ?? 0} | ${k['Everyday Science'] ?? 0}/${k['Current Affairs'] ?? 0}/${k['Pakistan Affairs'] ?? 0} | ${r.currentAffairs.length} (${dates}) | ${r.pastPaperDerived} | ${r.reviewFlags.length} |`)
   }
   lines.push('')
   for (const r of reports) {

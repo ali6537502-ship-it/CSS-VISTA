@@ -1,69 +1,104 @@
-# MPT 40-paper release standard (editorial release 2)
+# MPT release standard (editorial release 3: the live series, repaired)
 
-The official CSS Vista MPT series is 40 papers of 200 MCQs, built only from the reviewed
-bank in `src/data/mpt/bank/` and checked in as `src/data/mpt/release/series.json`
-(series `38127f5f5c8dcb7c`). The broad structure is FPSC's: Islamic Studies / Civics &
-Ethics 20, Urdu 20, English 50, General Abilities 60, General Knowledge 50. Everything
-below that level is a CSS Vista practice range, labelled in `src/data/mpt/blueprint.ts`
-as *observed* (from the recorded 2022–2025 papers) or *internal*, and rendered in
-`docs/mpt/editorial/BLUEPRINT.md`. None of it is an FPSC quota.
+## What changed and why
+
+Students complained about the General Knowledge, General Abilities and Islamic Studies
+questions in the mocks. Editorial release 3 does not build a new series from scratch. It
+takes the papers already frozen for the remaining mocks and repairs them question by
+question:
+
+- the running series is 40 mocks (two a day, 15:00 and 22:30 PKT, from 25 Sep 2026);
+  Mocks 1–4 had been held by 27 Sep 2026, so **36 papers** are repaired, for Mocks 5–40;
+- a live question is **kept exactly as it is** unless it has a concrete defect
+  (`scripts/mpt/live-review-rules.mjs`); every rule names the defect;
+- only defective slots are **replaced, in place**, from the reviewed bank
+  (`src/data/mpt/bank/`) with an item from the same section and official heading that
+  most resembles the real FPSC papers (`scripts/mpt/resemblance.mjs`) at an accessible or
+  moderate level;
+- no extra papers and no new questions are created; every bank item not used stays in the
+  bank as **reserve** for any mock added later (nothing is deleted);
+- the scheduler stops at the planned 40th mock (`CSSV_MPT_PLANNED_MOCKS`, default 40), so
+  reserve papers never turn into unplanned mocks.
+
+The repair is deterministic (`scripts/mpt/repair-live-series.mjs`). The live series it
+starts from is archived in `data-archive/mpt-live-series-b054de7.json`; the kept
+questions are checked in verbatim at `src/data/mpt/release/live-kept.json`; the paper
+list is `src/data/mpt/release/series.json` (series `4b65e98fcd9c99e3`). Every replacement
+and its reason is in the private `data-archive/mpt-release-reports/replacements.json`.
+
+## Paper structure: the official FPSC one only
+
+Five sections with their official sizes (Islamic Studies / Civics & Ethics 20, Urdu 20,
+English 50, General Abilities 60, General Knowledge 50), each built from its official
+syllabus headings, every heading present in every paper. FPSC sets no count for any topic
+inside a section and CSS Vista imposes none (`src/data/mpt/blueprint.ts`,
+`docs/mpt/editorial/BLUEPRINT.md`). A slot keeps its heading where the bank allows; the
+headings of General Abilities and General Knowledge are paced so that the last paper is
+balanced like the first.
+
+## Difficulty
+
+The MPT is a screening test and General Abilities is SSC-level. Replacements are
+accessible or moderate: across the 36 papers, 2,488 accessible, 3,710 moderate and 37
+challenging (all 37 in English; none in General Abilities, Islamic Studies, Urdu or
+General Knowledge). General Abilities replacements per paper: 18–26 accessible, 31–42
+moderate, 0 challenging.
+
+## Measured result
+
+- 36 papers, 7,200 questions, 0 gate failures.
+- Kept from the live papers: **965** (Islamic Studies 212, Urdu 184, English 221,
+  General Abilities 19, General Knowledge 329).
+- Replaced from the reviewed bank: **6,235** (Islamic Studies 508, Urdu 536, English
+  1,579, General Abilities 2,141, General Knowledge 1,471). Main reasons: General
+  Abilities items from about 34 code templates repeated across every paper (1,858);
+  machine-template wording such as “Which date-place pair correctly matches…” (English
+  1,417, General Knowledge 858, Urdu 525, Islamic 465); calculation-heavy “science”
+  (280); verse-count / numbering trivia (61); Urdu literature and rhetoric (89);
+  catch-all options, stale or pop trivia, sports minutiae, repeats of Mocks 1–4.
+- Per paper: General Abilities quantitative 32–37 / reasoning 23–28; General Knowledge
+  Everyday Science 15–26, Current Affairs 9–14, Pakistan Affairs 14–22; one unseen
+  English passage of 5–6 questions.
+- Reserve left in the bank: General Abilities 719, General Knowledge 955, English 1,035,
+  Islamic Studies 438, Urdu 440.
+
+Known limitation: 566 kept live questions carry no explanation, exactly as they were
+frozen. Their question, options and key are unchanged.
 
 ## Gates (all fail closed)
 
 - `npm run audit:mpt-release` (prebuild): the bank validates; the checked-in series is
-  exactly what the bank rebuilds; every paper passes every paper-level check and the
-  series passes every series-level check.
+  exactly what repairing the archived live series against the bank rebuilds; every paper
+  and the series pass `scripts/mpt/repair-audit.mjs`.
 - `build:hostinger` exports the papers, then `audit-release.mjs --exported` decodes the
   PHP files the server freezes and proves they are identical to the audited papers.
-- `tests/mptRelease.test.mjs` (in `test:all`) repeats the gate, the served-question
-  check, answer-key parity and time-sensitive provenance.
-- `tests/mpt/refreeze.php` (CI, real database) proves unstarted mocks are re-frozen
-  safely and started or attempted mocks never change.
+- `tests/mptRelease.test.mjs` (in `test:all`): rebuild equality; 36 papers for Mocks 5–40
+  and a scheduler cap at 40; kept questions verbatim and defect-free, from their own paper;
+  every bank item fills a replaced slot of the same paper; nothing from Mocks 1–4; bank
+  answers match; General Abilities at most one challenging replacement per paper;
+  official headings present in every paper.
+- `tests/mpt/refreeze.php` (CI, real database) proves unstarted mocks are re-frozen safely
+  and started or attempted mocks never change.
 
-Paper-level checks: section counts and order; every subtopic and group range; one
-unseen passage; no Islamic numbering/source trivia; no Urdu literature; no
-calculation-heavy science; no news-publication trivia; no templated Pakistan Affairs
-wording; time-sensitive items sourced and inside the window; one use per General
-Ability skeleton; no repeated numbers-masked template; difficulty shape; opening rule
-(no challenging item in Q1–5, at most two in Q1–10); at most two challenging items in
-a row; human-style review flags (database prompts, template wording, punctuation
-defects, length giveaways, negative stems).
+Paper checks: section sizes and order; every official heading present; one passage of
+5–10 questions; kept items pass every defect rule; bank items verified, explained,
+never served in an earlier series, sourced and in date if time-sensitive; no catch-all
+option; no repeated question frame more than four times in a paper; one topic once per
+paper in the factual sections; no two answers alike in a factual section; General Ability
+skeleton at most once per paper. Series checks: no repeated id, text, numbers-masked
+template, same fact or near-duplicate; General Ability skeleton in at most 20 papers.
 
-Series-level checks: no repeated id, text, concept or fact (same fact across sections
-included); no near-duplicates (token-Jaccard ≥ 0.72 within a subtopic); no reuse of any
-question served in an earlier series (`data-archive/mpt-served-archive.json`); General
-Ability skeleton families in at most 20 of 40 papers.
+## On deployment
 
-## Measured result (this release)
-
-- 40 papers, 8,000 questions, 8,000 distinct ids and concepts; 0 gate failures.
-- Bank: 9,822 reviewed items and 48 original passages (Islamic 946, Urdu 976,
-  English 2,614, General Abilities 2,860, General Knowledge 2,426).
-- Series sources: 5,258 newly written, 2,278 generated with code-computed answers,
-  186 source-backed recent Current Affairs, 209 re-verified repository items, 69
-  re-verified past-paper items (2022: 39, 2023 Special: 24, 2024: 6 — each year
-  confirmed against the paper text in `data-archive/mpt-past-paper-text/`).
-- Difficulty: 2,482 accessible / 3,991 moderate / 1,527 challenging; per paper 51–69
-  accessible and 34–42 challenging.
-- General Knowledge per paper: Everyday Science 16–18, Current Affairs 14–17
-  (3–5 recent, dated 1 Sep 2025 – 25 Sep 2026, each with a source URL, event date and
-  verification date), Pakistan Affairs 15–19.
-- English per paper: 6 comprehension questions on one unseen passage, 4–6 synonyms,
-  4–6 antonyms, 5–7 sentence-correction items, plus prepositions, tenses, articles,
-  agreement, modifiers, punctuation, error identification and structure.
-
-Paper-by-paper figures are in the private report
-`data-archive/mpt-release-reports/release-report.md` (not deployed).
-
-## Current Affairs provenance
-
-Recent items come from pages that were fetched and state the fact (mainly Al Jazeera,
-Radio Pakistan, UN News, PID, Arab News and others). Reuters, AP, IMF and WEF pages
-could not be fetched from the build environment, so items relying only on them were
-dropped. Structural Current Affairs items state fixed facts and are not time-sensitive.
+The server re-freezes every mock that has not started (opening more than 15 minutes
+later, no attempts) from this release: mock 5 gets repaired paper 1, and so on. Each old
+paper is backed up first and every replacement is logged. Held, started or attempted mocks
+are never touched. If a mock was already held when the deploy happens, its repaired paper
+simply stays in reserve.
 
 ## Editorial rule
 
-Automated checks are a floor, not a substitute for subject review. A disputed item is
-corrected or removed in the bank, `npm run build:mpt-release` is re-run, and the report
-is read before committing. Never loosen a gate to make a paper build.
+Automated rules are a floor, not a substitute for subject review. A disputed live item is
+added to the review rules or a disputed bank item is corrected in the bank, `npm run
+build:mpt-release` is re-run, and the report is read before committing. Never loosen a
+gate to make a paper build.

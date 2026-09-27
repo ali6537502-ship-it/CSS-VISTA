@@ -1,6 +1,7 @@
 // Release gate for the official MPT series. Fails closed.
 //   node scripts/mpt/audit-release.mjs               source gate: bank valid, checked-in series is
-//                                                    exactly what the bank rebuilds, every paper passes
+//                                                    exactly what repairing the live series against the
+//                                                    bank rebuilds, every paper passes
 //   node scripts/mpt/audit-release.mjs --exported <dir>
 //                                                    exported gate: decodes the PHP paper files the server
 //                                                    freezes, proves they equal the audited papers and
@@ -25,12 +26,13 @@ if (!failures.length) {
   if (seriesHash(resolvedChecked) !== checked.series) failures.push('series.json hash does not match its resolved papers (bank changed after the release was built)')
   if (exportedIndex < 0) {
     const rebuilt = buildRelease(bank)
-    if (!isDeepStrictEqual(rebuilt.papers, checked.papers) || rebuilt.bank_fingerprint !== checked.bank_fingerprint) {
-      failures.push('the checked-in series is not what the reviewed bank rebuilds; run npm run build:mpt-release and review the report')
+    if (!isDeepStrictEqual(rebuilt.papers, checked.papers) || rebuilt.bank_fingerprint !== checked.bank_fingerprint
+      || rebuilt.live_fingerprint !== checked.live_fingerprint || !isDeepStrictEqual(rebuilt.kept, checked.kept)) {
+      failures.push('the checked-in series is not what repairing the live series against the reviewed bank rebuilds; run npm run build:mpt-release and review the report')
     }
     const result = auditResolved(resolvedChecked, bank)
     failures.push(...result.failures)
-    console.log(JSON.stringify({ gate: 'source', series: checked.series, papers: resolvedChecked.length, questions: resolvedChecked.flat().length, warnings: result.warnings.length, nearDuplicateWarnings: result.similar.length }, null, 2))
+    console.log(JSON.stringify({ gate: 'source', series: checked.series, papers: resolvedChecked.length, questions: resolvedChecked.flat().length, kept: Object.keys(checked.kept).length, warnings: result.warnings }, null, 2))
   } else {
     const dir = process.argv[exportedIndex + 1]
     const decode = (file) => JSON.parse(Buffer.from(/return '([A-Za-z0-9+/=]+)';/.exec(readFileSync(join(dir, file), 'utf8'))[1], 'base64').toString('utf8'))

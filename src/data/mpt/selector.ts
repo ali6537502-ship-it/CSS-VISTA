@@ -1,15 +1,19 @@
-// Blueprint-driven selector for the official CSS Vista MPT series.
+// Selector for the official CSS Vista MPT series.
 //
-// Pure and deterministic: the same bank, seed and exclusions always produce the
-// same series. It never lowers a standard to complete a paper — if a section
-// cannot be filled within the blueprint, the build fails with the reason.
+// A paper is partitioned only as FPSC partitions it: five sections with their official
+// sizes, each drawn at random from the whole reviewed bank for that section, with every
+// official syllabus heading present. There is no quota for any topic. Pure and
+// deterministic: the same bank, seed and exclusions always produce the same series. It
+// never lowers a standard to complete a paper — if a section cannot be filled, the build
+// fails with the reason.
 
 import {
   MPT_SECTION_ORDER, MPT_SECTION_SIZE, MPT_SUBTOPICS,
   type MptBankQuestion, type MptPassage, type MptSection,
 } from './taxonomy.ts'
 import {
-  MPT_GROUP_RANGES, MPT_ORDER_RULES, MPT_REPETITION_LIMITS, MPT_SUBTOPIC_RANGES, type Range,
+  MPT_DIFFICULTY_SHAPE, MPT_OFFICIAL_HEADINGS, MPT_ORDER_RULES, MPT_PASSAGE_QUESTIONS, MPT_PILEUP_FACTOR,
+  MPT_REPETITION_LIMITS,
 } from './blueprint.ts'
 
 export interface MptBank {
@@ -38,6 +42,8 @@ export interface SeriesOptions {
   isExcluded?: (question: MptBankQuestion) => boolean
   /** ca.recent items must fall inside this window (YYYY-MM-DD). */
   currentWindow: { from: string; to: string }
+  /** 0–1: how closely an item resembles the recorded FPSC papers; closer items are drawn first. */
+  resemblance?: (question: MptBankQuestion) => number
 }
 
 // ------------------------------------------------------------------ utilities
@@ -106,7 +112,7 @@ export const usesTemplateRule = (q: { section: MptSection; subtopic: string; q: 
 /**
  * A "format family" names a question format shared by most of its subtopic
  * (e.g. every headword synonym item). Repetition limits apply to skeleton
- * families only; format families are governed by subtopic ranges and concepts.
+ * families only; format families are governed by concept uniqueness and the pile-up limit.
  */
 export function formatFamilies(questions: Array<{ subtopic: string; pattern_family: string }>) {
   const bySub = new Map<string, number>()
@@ -121,30 +127,6 @@ export function formatFamilies(questions: Array<{ subtopic: string; pattern_fami
   for (const [family, { sub, n }] of byFamily) if (n >= 0.25 * (bySub.get(sub) ?? 1) && !sub.startsWith('ga.')) out.add(family)
   for (const q of questions) if (q.subtopic === 'eng.comprehension') out.add(q.pattern_family)
   return out
-}
-
-function groupKey(q: { section: MptSection; subtopic: string }) {
-  const def = MPT_SUBTOPICS[q.subtopic]
-  if (q.section === 'English') return def.group === 'comprehension' ? 'comprehension' : def.group === 'vocabulary' ? 'vocabulary' : 'grammar'
-  if (q.section === 'General Abilities') return def.subject === 'Reasoning' ? 'reasoning' : 'quant'
-  if (q.section === 'General Knowledge') {
-    if (def.subject === 'Everyday Science') return 'science'
-    if (def.subject === 'Current Affairs') return 'current'
-    return 'pakistan'
-  }
-  if (q.section === 'Urdu') return def.group === 'translation' ? 'translation' : 'other'
-  return 'all'
-}
-
-function groupRangesFor(section: MptSection): Record<string, Range> {
-  if (section === 'English') return MPT_GROUP_RANGES.english
-  if (section === 'General Abilities') return MPT_GROUP_RANGES.abilities
-  if (section === 'General Knowledge') {
-    const { science, current, pakistan } = MPT_GROUP_RANGES.generalKnowledge
-    return { science, current, pakistan }
-  }
-  if (section === 'Urdu') return MPT_GROUP_RANGES.urdu
-  return {}
 }
 
 // ------------------------------------------------------------------ series state
@@ -170,97 +152,13 @@ interface PaperState {
 
 export class ReleaseError extends Error {}
 
-// ------------------------------------------------------------------ planning
+// ------------------------------------------------------------------ official headings
 
-function planSection(
-  section: MptSection, size: number, supply: Map<string, number>, rng: () => number, papersLeft: number,
-  fixed: Record<string, number> = {},
-) {
-  const ranges = MPT_SUBTOPIC_RANGES[section]
-  const groups = groupRangesFor(section)
-  const counts = new Map<string, number>()
-  const subGroup = (sub: string) => groupKey({ section, subtopic: sub })
-  const groupSum = (g: string) => [...counts].filter(([s]) => subGroup(s) === g).reduce((n, [, c]) => n + c, 0)
-  const total = () => [...counts.values()].reduce((a, b) => a + b, 0)
-  for (const [sub, range] of Object.entries(ranges)) {
-    if (sub in fixed) { counts.set(sub, fixed[sub]); continue }
-    const available = supply.get(sub) ?? 0
-    if (available < range.min) {
-      throw new ReleaseError(`${section}: subtopic ${sub} needs at least ${range.min} but only ${available} eligible items remain`)
-    }
-    counts.set(sub, range.min)
-  }
-  // Pacing: a subtopic never takes more than the remaining papers can afford —
-  // it keeps enough for every later paper's minimum, and (first pass) grows no
-  // faster than its supply per remaining paper.
-  let paced = true
-  const canGrow = (sub: string) => {
-    if (sub in fixed) return false
-    const range = ranges[sub]
-    const g = subGroup(sub)
-    const c = counts.get(sub) ?? 0
-    const available = supply.get(sub) ?? 0
-    const reserve = available - range.min * Math.max(0, papersLeft - 1)
-    const pace = Math.max(range.min, Math.floor(available / Math.max(1, papersLeft)))
-    return c < range.max && c < available && c < Math.max(range.min, reserve) && (!paced || c < pace)
-      && (!groups[g] || groupSum(g) < groups[g].max)
-  }
-  const weight = (sub: string) => {
-    const range = ranges[sub]
-    const c = counts.get(sub) ?? 0
-    const perPaperSupply = (supply.get(sub) ?? 0) / Math.max(1, papersLeft)
-    const mid = (range.min + range.max) / 2
-    return Math.max(0.05, perPaperSupply) * (c < mid ? 1.6 : 0.6) * (0.75 + rng() * 0.5)
-  }
-  const grow = (pool: string[]) => {
-    const options = pool.filter(canGrow)
-    if (!options.length) return false
-    const weights = options.map(weight)
-    let pick = rng() * weights.reduce((a, b) => a + b, 0)
-    for (let i = 0; i < options.length; i += 1) {
-      pick -= weights[i]
-      if (pick <= 0) { counts.set(options[i], (counts.get(options[i]) ?? 0) + 1); return true }
-    }
-    counts.set(options[options.length - 1], (counts.get(options[options.length - 1]) ?? 0) + 1)
-    return true
-  }
-  for (const [g, range] of Object.entries(groups)) {
-    const members = Object.keys(ranges).filter((s) => subGroup(s) === g)
-    while (groupSum(g) < range.min) {
-      if (total() >= size) throw new ReleaseError(`${section}: cannot reach the ${g} minimum of ${range.min}`)
-      if (!grow(members)) {
-        if (paced) { paced = false; continue }
-        throw new ReleaseError(`${section}: cannot reach the ${g} minimum of ${range.min}`)
-      }
-    }
-  }
-  while (total() < size) {
-    if (grow(Object.keys(ranges))) continue
-    if (paced) { paced = false; continue }
-    throw new ReleaseError(`${section}: blueprint cannot be completed (${total()}/${size}) with the remaining eligible items`)
-  }
-  if (total() > size) throw new ReleaseError(`${section}: subtopic minimums exceed the section size`)
-  if (section === 'General Knowledge') {
-    // Everyday Science must include computing/IT (syllabus heading) within its sub-range.
-    const it = ['sci.it', 'sci.ai-digital']
-    const { min, max } = MPT_GROUP_RANGES.generalKnowledge.scienceIt
-    const itSum = () => it.reduce((n, k) => n + (counts.get(k) ?? 0), 0)
-    const donors = () => [...counts.keys()].filter((k) => k.startsWith('sci.') && !it.includes(k) && (counts.get(k) ?? 0) > ranges[k].min)
-    const takers = () => it.filter((k) => (counts.get(k) ?? 0) < ranges[k].max && (counts.get(k) ?? 0) < (supply.get(k) ?? 0))
-    while (itSum() < min && donors().length && takers().length) {
-      const d = donors()[Math.floor(rng() * donors().length)]
-      const t = takers()[Math.floor(rng() * takers().length)]
-      counts.set(d, counts.get(d)! - 1); counts.set(t, counts.get(t)! + 1)
-    }
-    while (itSum() > max) {
-      const from = it.filter((k) => (counts.get(k) ?? 0) > ranges[k].min)
-      const to = [...counts.keys()].filter((k) => k.startsWith('sci.') && !it.includes(k) && (counts.get(k) ?? 0) < ranges[k].max && (counts.get(k) ?? 0) < (supply.get(k) ?? 0))
-      if (!from.length || !to.length) break
-      counts.set(from[0], counts.get(from[0])! - 1); counts.set(to[0], counts.get(to[0])! + 1)
-    }
-    if (itSum() < min || itSum() > max) throw new ReleaseError(`General Knowledge: science-IT items ${itSum()} outside ${min}–${max}`)
-  }
-  return counts
+/** The official heading an item belongs to (FPSC MPT syllabus). */
+export function officialHeading(q: { section: MptSection; subject: string; subtopic: string }) {
+  const rule = MPT_OFFICIAL_HEADINGS[q.section]
+  if (rule.by === 'group') return MPT_SUBTOPICS[q.subtopic]?.group === 'comprehension' ? 'comprehension' : 'vocabulary and grammar'
+  return q.subject
 }
 
 // ------------------------------------------------------------------ selection
@@ -327,33 +225,48 @@ function record(q: MptBankQuestion, series: SeriesState, paper: PaperState) {
   paper.picked.push(q)
 }
 
-const DEFAULT_SHARE: Record<number, number> = { 1: 0.3, 2: 0.5, 3: 0.2 }
-
 /**
- * Difficulty target for a section: follows what the remaining pool can sustain
- * (so paper 40 is shaped like paper 1), clamped to the blueprint's shape.
+ * Difficulty the paper aims for. The MPT is a screening test: most items are
+ * accessible or moderate, and General Abilities in particular is SSC-level, not a
+ * puzzle contest (owner's instruction). Shares come from MPT_DIFFICULTY_SHAPE.
  */
-function difficultyTarget(pool: MptBankQuestion[], slotsLeft = pool.length): Record<number, number> {
-  if (!pool.length) return DEFAULT_SHARE
-  void slotsLeft
-  const share = [1, 2, 3].map((d) => pool.filter((q) => q.difficulty === d).length / pool.length)
-  const d1 = Math.min(0.38, Math.max(0.27, share[0]))
-  const d3 = Math.min(0.26, Math.max(0.19, share[2]))
-  return { 1: d1, 2: 1 - d1 - d3, 3: d3 }
+export function difficultyTarget(section: MptSection): Record<number, number> {
+  const shape = section === 'General Abilities' ? MPT_DIFFICULTY_SHAPE.abilitiesTarget : MPT_DIFFICULTY_SHAPE.target
+  return { 1: shape[1], 2: shape[2], 3: shape[3] }
 }
 
-function pickFromSubtopic(
+/** Most challenging items one section may hold. */
+export function challengingCap(section: MptSection, size: number) {
+  const share = section === 'General Abilities'
+    ? MPT_DIFFICULTY_SHAPE.abilitiesChallengingShare.max
+    : MPT_DIFFICULTY_SHAPE.perSectionChallengingShare.max
+  return Math.floor((size * share) / 100)
+}
+
+/** Pile-up limit: at most twice a topic's expected share of the slots, plus one. */
+function pileUpCaps(pool: MptBankQuestion[], slots: number) {
+  const bySub = new Map<string, number>()
+  for (const q of pool) bySub.set(q.subtopic, (bySub.get(q.subtopic) ?? 0) + 1)
+  const caps = new Map<string, number>()
+  for (const [sub, n] of bySub) caps.set(sub, Math.floor(MPT_PILEUP_FACTOR * slots * (n / Math.max(1, pool.length))) + 1)
+  return caps
+}
+
+function pickItems(
   candidates: MptBankQuestion[], count: number, section: MptSection, sectionPicked: MptBankQuestion[],
   series: SeriesState, paper: PaperState, rng: () => number, familyCap: number,
-  target: Record<number, number> = DEFAULT_SHARE,
+  caps: Map<string, number>, resemblance: (q: MptBankQuestion) => number,
 ) {
   const size = MPT_SECTION_SIZE[section]
+  const target = difficultyTarget(section)
+  const hardCap = challengingCap(section, size)
   // Draw evenly across families so late papers still find several distinct ones.
   const unusedPerFamily = new Map<string, number>()
   for (const q of candidates) if (!series.used.has(q.id)) unusedPerFamily.set(q.pattern_family, (unusedPerFamily.get(q.pattern_family) ?? 0) + 1)
-  const keyed = candidates.map((q) => ({
+  const keyed = candidates.filter((q) => !series.used.has(q.id)).map((q) => ({
     q,
     key: rng()
+      - resemblance(q) * 0.6
       - Math.min(0.6, (unusedPerFamily.get(q.pattern_family) ?? 0) * 0.04)
       + (q.quality_grade === 'B' ? 0.25 : 0)
       + (q.mpt_relevance === 'supporting' ? 0.15 : 0)
@@ -364,25 +277,21 @@ function pickFromSubtopic(
   while (chosen.length < count) {
     const inSection = [...sectionPicked, ...chosen]
     const deficit = (d: number) => target[d] * size - inSection.filter((q) => q.difficulty === d).length
-    const challengingFull = inSection.filter((q) => q.difficulty === 3).length >= Math.floor(size * 0.4)
+    const hardFull = inSection.filter((q) => q.difficulty === 3).length >= hardCap
+    const bySub = new Map<string, number>()
+    for (const q of inSection) bySub.set(q.subtopic, (bySub.get(q.subtopic) ?? 0) + 1)
     let best: MptBankQuestion | null = null
-    let fallback: MptBankQuestion | null = null
     let bestScore = -Infinity
     let scanned = 0
     for (const { q } of keyed) {
-      if (chosen.includes(q) || !eligibleFor(q, series, paper, familyCap)) continue
-      if (challengingFull && q.difficulty === 3) continue
-      // Avoid letting one subtopic block turn wholly challenging (a preference, not a hard stop).
-      if (q.difficulty === 3 && count > 1 && chosen.filter((x) => x.difficulty === 3).length >= Math.ceil(count / 2)) {
-        fallback ??= q
-        continue
-      }
+      if (chosen.includes(q) || (hardFull && q.difficulty === 3)) continue
+      if ((bySub.get(q.subtopic) ?? 0) >= (caps.get(q.subtopic) ?? Infinity)) continue
+      if (!eligibleFor(q, series, paper, familyCap)) continue
       const score = deficit(q.difficulty) - scanned * 0.02
       if (score > bestScore) { best = q; bestScore = score }
       scanned += 1
       if (scanned >= 25) break
     }
-    best ??= fallback
     if (!best) return chosen
     chosen.push(best)
     record(best, series, paper)
@@ -524,12 +433,12 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
     if (q.subtopic === 'eng.comprehension' && !passages.has(q.passage_id ?? '')) return false
     return true
   })
-  const bySubtopic = new Map<string, MptBankQuestion[]>()
+  const bySection = new Map<MptSection, MptBankQuestion[]>()
   for (const q of eligible) {
     if (q.subtopic === 'eng.comprehension') continue
-    const list = bySubtopic.get(q.subtopic) ?? []
+    const list = bySection.get(q.section) ?? []
     list.push(q)
-    bySubtopic.set(q.subtopic, list)
+    bySection.set(q.section, list)
   }
   const passageQuestions = new Map<string, MptBankQuestion[]>()
   for (const q of eligible.filter((x) => x.subtopic === 'eng.comprehension')) {
@@ -537,11 +446,11 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
     list.push(q)
     passageQuestions.set(q.passage_id!, list)
   }
-  const compRange = MPT_SUBTOPIC_RANGES.English['eng.comprehension']
   const passageIds = shuffle([...passageQuestions.keys()].filter((id) => {
     const n = passageQuestions.get(id)!.length
-    return n >= compRange.min && n <= compRange.max
+    return n >= MPT_PASSAGE_QUESTIONS.min && n <= MPT_PASSAGE_QUESTIONS.max
   }).sort(), rngFor(`${options.seed}|passages`))
+  const resemblance = options.resemblance ?? (() => 0)
 
   const familyCap = MPT_REPETITION_LIMITS.perSeriesFamily.max
   const series: SeriesState = {
@@ -559,7 +468,6 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
     let passageOrder: string[] = []
     for (const section of MPT_SECTION_ORDER) {
       const size = MPT_SECTION_SIZE[section]
-      const fixed: Record<string, number> = {}
       const sectionPicked: MptBankQuestion[] = []
       if (section === 'English') {
         passageId = passageIds.find((id) => !series.passages.has(id)) ?? null
@@ -568,69 +476,21 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
         const items = [...passageQuestions.get(passageId)!].sort((a, b) => a.id.localeCompare(b.id))
         passageOrder = items.map((q) => q.id)
         items.forEach((q) => { record(q, series, paper); sectionPicked.push(q) })
-        fixed['eng.comprehension'] = items.length
       }
-      const supply = new Map<string, number>()
-      for (const sub of Object.keys(MPT_SUBTOPIC_RANGES[section])) {
-        if (sub in fixed) continue
-        supply.set(sub, (bySubtopic.get(sub) ?? []).filter((q) => !series.used.has(q.id)
-          && !series.concepts.has(`${q.section}|${canonicalText(q.concept)}`)).length)
-      }
-      const papersLeft = options.papers - index
-      const remainingPool = Object.keys(MPT_SUBTOPIC_RANGES[section]).flatMap((sub) => (bySubtopic.get(sub) ?? [])
-        .filter((q) => !series.used.has(q.id)))
-      const base = difficultyTarget(remainingPool, papersLeft * size)
-      // Paper-level correction: make up any shortfall of challenging items from earlier sections.
-      const pickedSoFar = paper.picked.length - sectionPicked.length
-      const hardShortfall = Math.max(0, 0.19 * pickedSoFar - paper.picked.filter((q) => q.difficulty === 3 && !sectionPicked.includes(q)).length)
-      const d3 = Math.min(0.34, base[3] + hardShortfall / size)
-      const target = { 1: base[1], 2: Math.max(0.3, 1 - base[1] - d3), 3: d3 }
-      let plan: Map<string, number> | null = null
-      let lastError: unknown = null
-      for (let attempt = 0; attempt < 6 && !plan; attempt += 1) {
-        try {
-          plan = planSection(section, size, supply, rngFor(`${paperSeed}|${section}|plan|${attempt}`), papersLeft, fixed)
-        } catch (error) { lastError = error }
-      }
-      if (!plan) throw new ReleaseError(`Paper ${index + 1}: ${(lastError as Error).message}`)
-      // Scarcest subtopics first, so abundant ones absorb any shortfall.
-      const order = [...plan.entries()].filter(([sub, n]) => n > 0 && !(sub in fixed))
-        .sort((a, b) => (supply.get(a[0])! - a[1]) - (supply.get(b[0])! - b[1]))
-      const shortfall = new Map<string, number>()
-      for (const [sub, n] of order) {
-        const got = pickFromSubtopic(bySubtopic.get(sub) ?? [], n, section, sectionPicked, series, paper, rng, familyCap, target)
+      const pool = (bySection.get(section) ?? []).filter((q) => !series.used.has(q.id))
+      const slots = size - sectionPicked.length
+      const caps = pileUpCaps(pool, slots)
+      // Every official heading is present: one item from each first, then the rest from the whole section.
+      for (const heading of MPT_OFFICIAL_HEADINGS[section].headings) {
+        if (sectionPicked.some((q) => officialHeading(q) === heading)) continue
+        const got = pickItems(pool.filter((q) => officialHeading(q) === heading), 1, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance)
+        if (!got.length) throw new ReleaseError(`Paper ${index + 1}: ${section} has no fresh item under the official heading "${heading}"`)
         sectionPicked.push(...got)
-        if (got.length < n) shortfall.set(sub, n - got.length)
       }
-      // Re-home shortfalls within ranges; never below a subtopic minimum.
-      for (const [sub, missing] of shortfall) {
-        const min = MPT_SUBTOPIC_RANGES[section][sub].min
-        const have = sectionPicked.filter((q) => q.subtopic === sub).length
-        if (have < min) {
-          const unused = (bySubtopic.get(sub) ?? []).filter((q) => !series.used.has(q.id))
-          const blocked = unused.filter((q) => !eligibleFor(q, series, paper, familyCap)).length
-          throw new ReleaseError(`Paper ${index + 1}: ${section} ${sub} has ${have} fresh items after repetition checks; minimum is ${min} (${unused.length} unused, ${blocked} blocked by repetition rules)`)
-        }
-        let remaining = missing
-        const groups = groupRangesFor(section)
-        const others = Object.keys(MPT_SUBTOPIC_RANGES[section]).filter((s) => s !== sub && !(s in fixed)
-          && groupKey({ section, subtopic: s }) === groupKey({ section, subtopic: sub }))
-        const alternates = others.length ? others : Object.keys(MPT_SUBTOPIC_RANGES[section]).filter((s) => s !== sub && !(s in fixed))
-        for (const alt of shuffle(alternates, rng)) {
-          if (!remaining) break
-          const altHave = sectionPicked.filter((q) => q.subtopic === alt).length
-          const room = MPT_SUBTOPIC_RANGES[section][alt].max - altHave
-          const g = groupKey({ section, subtopic: alt })
-          const groupRoom = groups[g] ? groups[g].max - sectionPicked.filter((q) => groupKey(q) === g).length : Infinity
-          const take = Math.min(room, remaining, groupRoom)
-          if (take <= 0) continue
-          const got = pickFromSubtopic(bySubtopic.get(alt) ?? [], take, section, sectionPicked, series, paper, rng, familyCap, target)
-          sectionPicked.push(...got)
-          remaining -= got.length
-        }
-        if (remaining) throw new ReleaseError(`Paper ${index + 1}: ${section} is ${remaining} short after ${sub} ran out of fresh items`)
+      sectionPicked.push(...pickItems(pool, size - sectionPicked.length, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance))
+      if (sectionPicked.length !== size) {
+        throw new ReleaseError(`Paper ${index + 1}: ${section} has ${sectionPicked.length}/${size} after repetition checks (${pool.length} unused items left)`)
       }
-      if (sectionPicked.length !== size) throw new ReleaseError(`Paper ${index + 1}: ${section} has ${sectionPicked.length}/${size}`)
       ordered.push(...orderSection(section, sectionPicked, passageOrder, rng))
     }
     const finalOrder = repairPaperRuns(ordered)

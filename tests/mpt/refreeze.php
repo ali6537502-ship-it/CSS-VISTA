@@ -57,6 +57,7 @@ if ($phase === 'driver') {
     echo run_phase('seed', "$fixtures/legacy");
     echo run_phase('refreeze', "$fixtures/release2");
     echo run_phase('exhausted', "$fixtures/release3-empty");
+    echo run_phase('cleanup', "$fixtures/legacy");
     echo "MPT refreeze integration: done\n";
     exit(0);
 }
@@ -65,6 +66,14 @@ require_once __DIR__ . '/../../public/api/_mpt.php';
 $pdo = cssv_db();
 mpt_ensure_schema($pdo);
 $state = "$fixtures/state.json";
+
+if ($phase === 'cleanup') {
+    // Leave the disposable database as the next CI step expects it: no fixture mocks.
+    foreach (['mpt_paper_replacements', 'mpt_paper_backups', 'mpt_attempt_answers', 'mpt_attempts', 'mpt_applications', 'mpt_sessions', 'mpt_mock_questions', 'mpt_mocks', 'mpt_meta', 'mpt_candidates'] as $table) $pdo->exec("DELETE FROM $table");
+    $pdo->exec("DELETE FROM users WHERE email LIKE 'refreeze-%@example.invalid'");
+    echo "ok fixture mocks removed\n";
+    exit(0);
+}
 
 if ($phase === 'seed') {
     foreach (['mpt_paper_replacements', 'mpt_paper_backups', 'mpt_attempt_answers', 'mpt_attempts', 'mpt_applications', 'mpt_sessions', 'mpt_mock_questions', 'mpt_mocks', 'mpt_meta', 'mpt_candidates'] as $table) $pdo->exec("DELETE FROM $table");

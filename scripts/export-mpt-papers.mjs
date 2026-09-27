@@ -1,7 +1,8 @@
 // Exports the official MPT paper series for the server (docs/mpt/DECISIONS.md D-04, D-54).
 //
 // The papers are the audited editorial release checked in at
-// src/data/mpt/release/series.json, resolved against the reviewed bank
+// src/data/mpt/release/series.json: the live papers repaired in place, resolved from the
+// kept live questions (src/data/mpt/release/live-kept.json) and the reviewed bank
 // (src/data/mpt/bank). Nothing is selected here: the exporter only renders the
 // audited papers, then scripts/mpt/audit-release.mjs --exported proves the
 // written files equal them. Papers carry answer keys, so they are written as
@@ -14,7 +15,7 @@
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { loadReviewedBank, readCheckedInRelease, resolveRelease, seriesHash } from './mpt/release-lib.mjs'
-import { paperFingerprint } from './mpt/paper-audit.mjs'
+import { paperFingerprint } from './mpt/repair-audit.mjs'
 import { RELEASE } from './mpt/release-config.mjs'
 
 const argValue = (name, fallback) => {

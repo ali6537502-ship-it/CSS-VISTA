@@ -9,7 +9,7 @@ on:
 
 jobs:
   mpt-release:
-    name: Forty-paper MPT editorial release gate
+    name: MPT editorial release gate (repaired live series)
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -48,5 +48,6 @@ jobs:
             mpt-bank-validation.txt
             data-archive/mpt-release-reports/release-report.md
             data-archive/mpt-release-reports/release-report.json
+            data-archive/mpt-release-reports/replacements.json
           if-no-files-found: warn
           retention-days: 90

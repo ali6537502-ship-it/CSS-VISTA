@@ -494,3 +494,26 @@ still exist (D-48) but are not listed.
   exported from 25 September, some of which were sat) and in the older browser series
   is recorded in `data-archive/mpt-served-archive.json` and can never re-enter a paper.
 
+
+## Repair of the live series (27 Sep 2026)
+
+**D-55 · Editorial release 3 repairs the live papers instead of replacing them** — owner instruction
+- Owner: “do not build from scratch — analyse, keep the good and replace what needs to be
+  replaced”; “calculate how many papers are left, do not create extra papers or
+  questions”; “do not delete, reserve the questions”; “do not create subjects or
+  partitions — do as the official FPSC does”; “MPT ability is not tough”.
+- Only the 36 papers for the remaining Mocks 5–40 are released (Mocks 1–4 were held by
+  27 Sep 2026). Each is the live paper already frozen for that mock. A live question is
+  kept verbatim unless a named defect rule rejects it (`scripts/mpt/live-review-rules.mjs`);
+  each rejected slot is refilled in place from the reviewed bank, same section and
+  official heading, preferring the items that most resemble the recorded FPSC papers
+  (`scripts/mpt/resemblance.mjs`), accessible or moderate. The repair is deterministic
+  (`scripts/mpt/repair-live-series.mjs`) and gated (`scripts/mpt/repair-audit.mjs`).
+- The paper is partitioned only as FPSC partitions it: five sections with their official
+  sizes, every official syllabus heading present, no topic quotas. The per-topic practice
+  ranges of D-54 are withdrawn; `MPT_OFFICIAL_HEADINGS` replaces them.
+- General Abilities replacements are SSC-level: at most one challenging item per paper
+  (none in this release).
+- Nothing is deleted: unused bank items stay in reserve. The scheduler stops at the
+  planned last mock, `CSSV_MPT_PLANNED_MOCKS` (default 40), so reserve papers never become
+  unplanned mocks; raising it lets the owner add mocks later.
