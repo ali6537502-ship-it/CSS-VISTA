@@ -1,0 +1,68 @@
+{
+  "id": "udhr-foundation-international-human-rights",
+  "slug": "udhr-foundation-international-human-rights",
+  "title": "The Universal Declaration of Human Rights: Foundation of the Modern Rights Framework",
+  "excerpt": "A Current Affairs explainer on the 1948 Universal Declaration of Human Rights, its structure and principles, its relationship with later treaties, and how to use it accurately in human-rights answers.",
+  "type": "Explainer",
+  "category": "Current Affairs",
+  "topic": "Global Issues — Human Rights",
+  "tags": [
+    "Current Affairs",
+    "Human Rights",
+    "UDHR",
+    "United Nations",
+    "International Law"
+  ],
+  "publishedAt": "2026-09-23T12:00:00+05:00",
+  "readingMinutes": 3,
+  "evergreen": true,
+  "contentPath": "/vistagram-content/posts/udhr-foundation-international-human-rights.json",
+  "scope": "Global",
+  "dedupeKey": "udhr-foundation-international-human-rights",
+  "keyPoints": [],
+  "sections": [
+    {
+      "heading": "Origins and status",
+      "paragraphs": [
+        "The Universal Declaration of Human Rights is a foundational document of the modern international human-rights framework. The United Nations General Assembly proclaimed it in Paris on 10 December 1948 through Resolution 217 A (III), after the experience of the Second World War intensified demands for a common statement of rights and human dignity. The Declaration was drafted by representatives from different legal and cultural backgrounds. It is a declaration rather than a treaty, an important legal distinction for examination answers, but its political, normative and historical influence has been extensive."
+      ]
+    },
+    {
+      "heading": "Core principles",
+      "paragraphs": [
+        "The UDHR organizes civil, political, economic, social and cultural rights around the idea of inherent human dignity and equality. Its opening articles affirm that human beings are born free and equal in dignity and rights and prohibit discrimination on listed grounds. Other provisions address life and security, freedom from slavery and torture, recognition before the law, fair process, privacy, movement, nationality, family, property, thought and religion, expression, association, participation in government, social security, work, education and cultural life. Students do not need to recite every article to analyse the document; they should understand the breadth and interdependence of the rights framework."
+      ]
+    },
+    {
+      "heading": "From declaration to international law",
+      "paragraphs": [
+        "The United Nations describes the UDHR as a foundation of international human-rights law and notes that it inspired later legally binding treaties. Together with the International Covenant on Civil and Political Rights and the International Covenant on Economic, Social and Cultural Rights, it is commonly discussed within the broader International Bill of Human Rights framework. The distinction is useful: the Declaration states a common standard, while treaties create binding obligations for states that become parties according to international law. Regional human-rights systems and national constitutions have also developed rights protections in different legal forms."
+      ]
+    },
+    {
+      "heading": "Exam framework",
+      "paragraphs": [
+        "For Current Affairs, a strong answer should separate four questions: what the UDHR is, why it emerged, what categories of rights it recognizes, and how it influenced later legal development. Avoid saying that every UDHR provision is automatically enforced everywhere in exactly the same way. Human-rights implementation involves domestic constitutions and laws, treaty commitments, courts, institutions and international monitoring mechanisms. The analytical value of the UDHR lies in its universal language of dignity, equality and fundamental freedoms and in the architecture of rights that grew around it after 1948."
+      ]
+    }
+  ],
+  "examRelevance": [
+    "Current Affairs: Global Issues — Human Rights.",
+    "International Law and Political Science: international institutions, rights, constitutionalism and rule of law."
+  ],
+  "sources": [
+    {
+      "label": "United Nations — Universal Declaration of Human Rights",
+      "url": "https://www.un.org/en/node/124305"
+    },
+    {
+      "label": "United Nations — History of the Declaration",
+      "url": "https://www.un.org/en/about-us/udhr/history-of-the-declaration"
+    },
+    {
+      "label": "United Nations — Foundation of International Human Rights Law",
+      "url": "https://www.un.org/en/node/124593"
+    }
+  ],
+  "relatedSlugs": []
+}

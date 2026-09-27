@@ -1,0 +1,81 @@
+{
+  "id": "pakistan-agriculture-food-security",
+  "slug": "pakistan-agriculture-food-security",
+  "title": "Pakistan’s Agriculture: Structure, Irrigation and Food Security",
+  "excerpt": "A syllabus-linked guide to Pakistan’s agricultural economy, farm structure, irrigation, livestock, productivity, food security and the evidence students should organize in Pakistan Affairs answers.",
+  "type": "Explainer",
+  "category": "Pakistan Affairs",
+  "topic": "Agriculture and Economic Conditions of Pakistan",
+  "tags": [
+    "Pakistan Affairs",
+    "Agriculture",
+    "Food Security",
+    "Irrigation",
+    "Livestock",
+    "Economic Survey"
+  ],
+  "publishedAt": "2026-09-22T12:00:00+05:00",
+  "readingMinutes": 3,
+  "evergreen": false,
+  "contentPath": "/vistagram-content/posts/pakistan-agriculture-food-security.json",
+  "scope": "Pakistan",
+  "dedupeKey": "pakistan-agriculture-food-security",
+  "subtitle": "From farm structure to productivity: how to turn agriculture into an analytical CSS answer rather than a list of crops.",
+  "keyPoints": [
+    "The Pakistan Economic Survey 2025–26 reports agriculture growth of 2.89 percent and a 23.44 percent share in GDP for FY2025–26.",
+    "The 7th Integrated Agricultural Census provides a contemporary evidence base on farms, irrigation, livestock, machinery and rural agricultural structure.",
+    "Agriculture questions are strongest when organized around productivity, water, technology, value chains, resilience and farmer incentives."
+  ],
+  "sections": [
+    {
+      "heading": "Agriculture in the economy",
+      "paragraphs": [
+        "Agriculture remains a central CSS Pakistan Affairs topic because it connects economic growth, employment, food supply, exports, rural livelihoods and water use. The Pakistan Economic Survey 2025–26 reports that the agriculture sector grew by 2.89 percent in FY2025–26 and accounted for 23.44 percent of GDP. Those figures are useful, but an examination answer should not stop at sectoral shares. The stronger question is what determines sustainable agricultural productivity and how gains are transmitted through the wider economy.",
+        "The sector includes crops, livestock, forestry and fisheries. Livestock is especially important within agriculture, while major crops remain closely linked with irrigation, input availability, weather conditions, markets and processing industries."
+      ]
+    },
+    {
+      "heading": "Farm structure and irrigation",
+      "paragraphs": [
+        "The Pakistan Bureau of Statistics’ Integrated Agricultural Census is designed to capture farm size and tenure, land use, irrigation, crop and orchard area, machinery, livestock, agricultural labour and household characteristics. This matters for policy because agriculture is not one uniform production system. Small and large farms can face different constraints in access to technology, finance, storage, extension services and markets.",
+        "Irrigation is a defining feature of Pakistan’s agricultural geography. Water management therefore links agriculture with the Indus Basin, provincial irrigation systems and groundwater. For CSS analysis, water efficiency, maintenance of delivery systems and crop choices should be discussed alongside supply."
+      ]
+    },
+    {
+      "heading": "Productivity and food security",
+      "paragraphs": [
+        "Food security depends on more than producing a large quantity of grain. It also involves reliable availability, affordability, nutrition, storage, transport and resilience to shocks. Agricultural productivity can be supported by quality seed, appropriate fertilizer use, mechanization, research, extension, efficient irrigation, access to credit and better market information. Post-harvest losses and weak storage can reduce the value of production even when output is strong.",
+        "Climate variability adds another layer. Heat, floods, droughts and changing water conditions affect crops and livestock differently across regions. A resilient agricultural strategy therefore combines productivity with risk management, water conservation, crop diversification and stronger value chains."
+      ]
+    },
+    {
+      "heading": "A CSS answer framework",
+      "paragraphs": [
+        "For a 20-mark answer, begin with agriculture’s role in GDP and livelihoods, then divide the analysis into structural features, irrigation, crops and livestock, productivity constraints, food security and reforms. Use recent official data carefully and always state the reference year. Avoid presenting one season’s crop performance as a permanent trend.",
+        "A balanced conclusion can emphasize evidence-based modernization: better statistics, water efficiency, research, technology, farm services, storage, market access and value addition. This keeps the answer analytical and closely tied to the official syllabus."
+      ]
+    }
+  ],
+  "examRelevance": [
+    "Pakistan Affairs: Land and people of Pakistan — agriculture and its characteristics, trends and problems.",
+    "Pakistan Affairs: Economic conditions of Pakistan and performance of major sectors.",
+    "Current Affairs and Essay: food security, climate resilience, rural development and water management."
+  ],
+  "sources": [
+    {
+      "label": "Pakistan Economic Survey 2025–26 — Ministry of Finance",
+      "url": "https://finance.gov.pk/survey/chapter_26/Complete_PES2025_26.pdf",
+      "date": "2026"
+    },
+    {
+      "label": "Pakistan Bureau of Statistics — Agriculture Census",
+      "url": "https://www.pbs.gov.pk/agriculture-census/"
+    },
+    {
+      "label": "Pakistan Bureau of Statistics — Agricultural Census 2024 Report Launch",
+      "url": "https://www.pbs.gov.pk/agricultural-census-report-launch-2024-25/",
+      "date": "2026"
+    }
+  ],
+  "relatedSlugs": []
+}

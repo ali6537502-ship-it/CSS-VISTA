@@ -1,0 +1,79 @@
+{
+  "id": "greenhouse-effect-global-warming-kyoto",
+  "slug": "greenhouse-effect-global-warming-kyoto",
+  "title": "Greenhouse Effect, Global Warming and the Kyoto Protocol",
+  "excerpt": "A General Science & Ability explanation of the natural greenhouse effect, human-driven warming, major greenhouse gases and the institutional logic of the Kyoto Protocol.",
+  "type": "Explainer",
+  "category": "General Science & Ability",
+  "topic": "Atmospheric Pollution and Global Warming",
+  "tags": [
+    "GSA",
+    "Climate Change",
+    "Greenhouse Effect",
+    "Global Warming",
+    "Kyoto Protocol",
+    "UNFCCC"
+  ],
+  "publishedAt": "2026-09-22T12:00:00+05:00",
+  "readingMinutes": 3,
+  "evergreen": true,
+  "contentPath": "/vistagram-content/posts/greenhouse-effect-global-warming-kyoto.json",
+  "scope": "Global",
+  "dedupeKey": "greenhouse-effect-global-warming-kyoto",
+  "subtitle": "The natural greenhouse effect makes Earth habitable; additional greenhouse gases alter the planet’s energy balance.",
+  "keyPoints": [
+    "The greenhouse effect is a natural heat-trapping process involving gases such as carbon dioxide, methane, nitrous oxide, ozone and water vapour.",
+    "Human activities have increased concentrations of heat-trapping gases and intensified warming beyond the natural greenhouse effect.",
+    "The Kyoto Protocol was adopted in 1997 and created binding emission targets for specified industrialized countries under the UN climate regime."
+  ],
+  "sections": [
+    {
+      "heading": "The natural greenhouse effect",
+      "paragraphs": [
+        "Earth receives energy from the Sun, absorbs part of it at the surface and emits energy back as infrared radiation. Greenhouse gases in the atmosphere absorb and re-emit some of that outgoing heat, keeping the lower atmosphere and surface warmer than they would otherwise be. NASA explains that this natural greenhouse effect is essential to maintaining temperatures suitable for life.",
+        "Important greenhouse gases include carbon dioxide, methane, nitrous oxide, ozone, water vapour and some industrial gases. Water vapour mainly acts as a feedback: warmer air can hold more moisture, which can amplify an initial warming."
+      ]
+    },
+    {
+      "heading": "Why global warming occurs",
+      "paragraphs": [
+        "The climate problem is not the existence of the greenhouse effect; it is the strengthening of heat trapping as human activities add greenhouse gases to the atmosphere. Burning fossil fuels, land-use change and some industrial and agricultural processes increase concentrations of long-lived greenhouse gases. This changes Earth’s energy balance and raises average temperatures over time.",
+        "Global warming then influences wider climate processes, including heat extremes, precipitation patterns, ice loss and sea level. Individual weather events still depend on many factors, so climate analysis examines long-term trends and changes in probabilities rather than attributing every event to one cause."
+      ]
+    },
+    {
+      "heading": "Kyoto Protocol and climate governance",
+      "paragraphs": [
+        "The Kyoto Protocol was adopted on 11 December 1997 and entered into force on 16 February 2005. UNFCCC explains that it operationalized the climate convention by establishing binding emission-reduction commitments for specified industrialized countries and economies in transition. Its design reflected the principle of common but differentiated responsibilities and respective capabilities.",
+        "The Protocol also developed market-based mechanisms connected with emissions. Its first commitment period covered 2008–2012, and the Doha Amendment established a second period from 2013 to 2020. Later global climate cooperation developed further under the Paris Agreement, but Kyoto remains important for understanding the evolution of international climate law."
+      ]
+    },
+    {
+      "heading": "CSS answer structure",
+      "paragraphs": [
+        "A strong GSA answer should first draw the greenhouse mechanism, then distinguish natural and enhanced greenhouse effects, list major gases, explain human drivers and finally connect science with international cooperation. Avoid confusing ozone depletion with global warming: both involve atmospheric chemistry but have different primary mechanisms.",
+        "For analytical questions, discuss mitigation as reducing emissions or enhancing sinks, adaptation as managing unavoidable impacts, and international agreements as frameworks for collective action. This connects physical science with policy without losing scientific clarity."
+      ]
+    }
+  ],
+  "examRelevance": [
+    "General Science & Ability: atmospheric pollution, greenhouse effect, global warming and Kyoto Protocol.",
+    "Current Affairs: environment and international climate cooperation.",
+    "Environmental Science optional: UNFCCC, Kyoto mechanisms, mitigation and adaptation."
+  ],
+  "sources": [
+    {
+      "label": "NASA Science — What is the Greenhouse Effect?",
+      "url": "https://science.nasa.gov/climate-change/faq/what-is-the-greenhouse-effect/"
+    },
+    {
+      "label": "NASA Science — Causes of Climate Change",
+      "url": "https://science.nasa.gov/climate-change/causes/"
+    },
+    {
+      "label": "UNFCCC — The Kyoto Protocol",
+      "url": "https://www.unfccc.int/process-and-meetings/the-kyoto-protocol"
+    }
+  ],
+  "relatedSlugs": []
+}

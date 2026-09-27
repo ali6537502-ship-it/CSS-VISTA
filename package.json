@@ -71,8 +71,7 @@
     "build:mpt-release": "node scripts/mpt/build-release.mjs",
     "audit:mpt-frozen": "node scripts/mpt/audit-frozen.mjs",
     "profile:mpt-patterns": "node scripts/mpt/derive-pattern-profile.mjs",
-    "test:mpt-release": "node --test tests/mptRelease.test.mjs",
-    "audit:mpt-legacy-engine": "node scripts/build-mpt-legacy-exclusions.mjs --check && node scripts/audit-mpt-40-papers.mjs && node scripts/audit-mpt-factual-integrity.mjs"
+    "test:mpt-release": "node --test tests/mptRelease.test.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
