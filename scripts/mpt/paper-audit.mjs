@@ -7,7 +7,7 @@ import {
   MPT_SUBTOPIC_RANGES, MPT_GROUP_RANGES, MPT_DIFFICULTY_SHAPE, MPT_ORDER_RULES, MPT_REPETITION_LIMITS,
 } from '../../src/data/mpt/blueprint.ts'
 import { MPT_SECTION_ORDER, MPT_SECTION_SIZE, MPT_SUBTOPICS } from '../../src/data/mpt/taxonomy.ts'
-import { canonicalText, tokenSet, jaccard, surfaceTemplate, formatFamilies } from '../../src/data/mpt/selector.ts'
+import { canonicalText, tokenSet, jaccard, surfaceTemplate, formatFamilies, SAME_FACT_JACCARD } from '../../src/data/mpt/selector.ts'
 import {
   CATCH_ALL_OPTION, ISLAMIC_TRIVIA, TEMPLATE_WORDING, URDU_LITERATURE, SCIENCE_TOO_ADVANCED, NEWS_TRIVIA,
 } from './bank-lib.mjs'
@@ -249,6 +249,18 @@ export function auditSeries(papers, context) {
       }
     }
     for (const f of familiesHere) familyPapers.set(f, (familyPapers.get(f) ?? 0) + 1)
+  }
+  // Same fact tested twice anywhere in the series, even across sections.
+  const facts = new Map()
+  for (const paper of papers) for (const q of paper.questions) {
+    if (!['Islamic Studies', 'General Knowledge'].includes(q.section) || canonicalText(q.o[q.a]).length <= 3) continue
+    const key = canonicalText(q.o[q.a])
+    const tokens = tokenSet(`${q.q} ${q.o[q.a]}`)
+    const list = facts.get(key) ?? []
+    const twin = list.find((other) => jaccard(tokens, other.tokens) >= SAME_FACT_JACCARD)
+    if (twin) failures.push(`${q.id} tests the same fact as ${twin.id} (paper ${twin.paper})`)
+    list.push({ id: q.id, tokens, paper: paper.index })
+    facts.set(key, list)
   }
   for (const [f, n] of familyPapers) if (n > MPT_REPETITION_LIMITS.perSeriesFamily.max) failures.push(`pattern family ${f} appears in ${n} papers (limit ${MPT_REPETITION_LIMITS.perSeriesFamily.max})`)
   if (papers.length !== context.expectedPapers) failures.push(`series has ${papers.length}/${context.expectedPapers} papers`)

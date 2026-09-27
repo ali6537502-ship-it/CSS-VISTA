@@ -96,6 +96,8 @@ export function identityText(q: MptBankQuestion) {
 }
 
 const FACTUAL_SECTIONS = new Set<MptSection>(['Islamic Studies', 'General Knowledge'])
+/** Two items with the same correct answer and this similarity test one fact, in any sections. */
+export const SAME_FACT_JACCARD = 0.5
 
 /** Numbers-masked wording must be unique for computed items and any stem carrying numbers. */
 export const usesTemplateRule = (q: { section: MptSection; subtopic: string; q: string }) => q.subtopic !== 'eng.comprehension'
@@ -149,6 +151,8 @@ function groupRangesFor(section: MptSection): Record<string, Range> {
 
 interface SeriesState {
   formatFamilies: Set<string>
+  /** correct-answer text → identities, across every section (same fact in two sections). */
+  facts: Map<string, Array<Set<string>>>
   used: Set<string>
   concepts: Set<string>
   templates: Set<string>
@@ -289,6 +293,11 @@ function eligibleFor(
   }
   const identity = tokenSet(identityText(q))
   const seen = series.identity.get(q.subtopic) ?? []
+  if (FACTUAL_SECTIONS.has(q.section) && canonicalText(q.o[q.a]).length > 3) {
+    const facts = series.facts.get(canonicalText(q.o[q.a])) ?? []
+    const factIdentity = tokenSet(`${q.q} ${q.o[q.a]}`)
+    if (facts.some((other) => jaccard(factIdentity, other) >= SAME_FACT_JACCARD)) return false
+  }
   // General Ability repetition is governed by skeleton families and unique numbers-masked
   // templates; word-token similarity is meaningless for short symbolic stems.
   if (q.section !== 'General Abilities') {
@@ -305,6 +314,12 @@ function record(q: MptBankQuestion, series: SeriesState, paper: PaperState) {
   if (!paper.families.has(q.pattern_family)) series.familyPapers.set(q.pattern_family, (series.familyPapers.get(q.pattern_family) ?? 0) + 1)
   paper.families.set(q.pattern_family, (paper.families.get(q.pattern_family) ?? 0) + 1)
   if (FACTUAL_SECTIONS.has(q.section)) paper.answers.add(canonicalText(q.o[q.a]))
+  if (FACTUAL_SECTIONS.has(q.section) && canonicalText(q.o[q.a]).length > 3) {
+    const key = canonicalText(q.o[q.a])
+    const facts = series.facts.get(key) ?? []
+    facts.push(tokenSet(`${q.q} ${q.o[q.a]}`))
+    series.facts.set(key, facts)
+  }
   const list = series.identity.get(q.subtopic) ?? []
   list.push(tokenSet(identityText(q)))
   series.identity.set(q.subtopic, list)
@@ -531,6 +546,7 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
   const familyCap = MPT_REPETITION_LIMITS.perSeriesFamily.max
   const series: SeriesState = {
     formatFamilies: formatFamilies(eligible),
+    facts: new Map(),
     used: new Set(), concepts: new Set(), templates: new Set(), passages: new Set(), familyPapers: new Map(), identity: new Map(),
   }
   const papers: SelectedPaper[] = []
