@@ -12,7 +12,7 @@ const failures = []
 const sample = (message) => { if (failures.length < 40) failures.push(message) }
 const rejectedChoice = /all of the above|none of (?:the above|these)|both a and b/i
 const riskyScience = /blackbody|radiative flux|hardy.weinberg|\brlc\b|induced emf|lorentz factor|arrhenius equation|stefan.boltzmann|thermodynamic entropy|exoplanet/i
-const riskyIslamic = /standard Kufan numbering|source citation|hadith\s*(?:number|no\.?|count)|how many ahadith|book\s*number.*(?:bukhari|muslim)/i
+const riskyIslamic = /standard Kufan numbering|source citation|hadith\s*(?:number|no\.?|count)|how many ahadith|book\s*number.*(?:bukhari|muslim)|(?:how many|number of|total number of|exact number of).{0,45}(?:verses?|ayat|aayaat|rukus?|ruku|manazil|manzil|sajdahs?|prostrations?|words?|letters?|ahadith|hadiths?)|(?:surah|ayah|ayat|verse)\s*(?:no\.?|number)\s*\d+|which surah is (?:number|no\.?)/i
 const riskyPakistan = /correct account of|accepted date of|leading role in|central purpose or significance|which person or institution|which city or region is linked|actor-description combination/i
 const primaryDomains = ['weforum.org', 'imf.org', 'unfccc.int', 'who.int', 'fifa.com', 'olympics.com', 'un.org']
 
