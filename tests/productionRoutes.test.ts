@@ -222,10 +222,10 @@ test('advertising state matches route policy across all nine page categories', {
   const expectations: [string, boolean][] = [
     ['/', true],                     // 1. indexed public content
     ['/notes', true],
-    ['/gk', true],                   // 2. noindex public utility, still ad-eligible
+    ['/gk', false],                  // 2. noindex public utility
     ['/book-summaries', true],
-    ['/account/dashboard', true],    // 3. authenticated content
-    ['/factbook', true],
+    ['/account/dashboard', false],   // 3. authenticated content
+    ['/factbook', false],
     ['/account/settings', false],    // 4. authentication / sensitive transaction
     ['/sadiaali', false],            // 5. admin
     ['/gk/quiz', false],             // 7. interactive question / test state
@@ -240,6 +240,16 @@ test('advertising state matches route policy across all nine page categories', {
   assert.equal(getAdRoutePolicy('/notes', '', { loadingState: true }).autoAdsEnabled, false)
 })
 
+test('generated HTML keeps the loader only on substantial ad-eligible pages', { skip: !built }, () => {
+  const loader = 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6131271603014611'
+  for (const path of ['/', '/notes', '/book-summaries']) {
+    assert.equal(served(path).includes(loader), true, path)
+  }
+  for (const path of ['/gk', '/one-liner-gk', '/account', '/account/mpt', '/factbook', '/legal', '/privacy-policy']) {
+    assert.equal(served(path).includes(loader), false, path)
+  }
+})
+
 test('AdSense ownership, ads.txt and the publisher ID are intact in the build', { skip: !built }, () => {
   assert.equal(
     readFileSync(join(dist, 'ads.txt'), 'utf8').trim(),
@@ -247,6 +257,7 @@ test('AdSense ownership, ads.txt and the publisher ID are intact in the build', 
   )
   const index = readFileSync(join(dist, 'index.html'), 'utf8')
   assert.match(index, /<meta name="google-adsense-account" content="ca-pub-6131271603014611"/)
+  assert.match(index, /<script\s+async\s+src="https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-6131271603014611"\s+crossorigin="anonymous"\s*><\/script>/)
   assert.equal(
     readFileSync(join(dist, 'googlec96e2248070e0570.html'), 'utf8').trim(),
     'google-site-verification: googlec96e2248070e0570.html',
@@ -279,9 +290,10 @@ test('MPT portal routes resolve on direct navigation, stay private and follow th
     assert.equal(policy.access, 'authenticated', path)
     assert.equal(policy.indexable, false, path)
   }
-  // Transactions, the roll-number gate, the exam and results never carry ads.
+  // The complete private MPT portal, roll-number gate, exam and results never carry ads.
   for (const path of patterns) assert.equal(getRoutePolicy(path).adMode, 'disabled', path)
-  for (const path of exact) assert.equal(getRoutePolicy(path).adMode, 'enabled', path)
+  for (const path of exact.slice(0, 3)) assert.equal(getRoutePolicy(path).adMode, 'manual', path)
+  assert.equal(getRoutePolicy('/account/mpt/mistakes').adMode, 'disabled')
   // Unknown MPT URLs are genuine 404s, not the application shell.
   assert.equal(request('/account/mpt/unknown/value').status, 404)
   assert.equal(request('/account/mpt/exam').status, 404)

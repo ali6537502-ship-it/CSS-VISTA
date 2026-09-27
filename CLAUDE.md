@@ -14,6 +14,13 @@ AdSense publisher: `ca-pub-6131271603014611`.
    the `<meta name="google-adsense-account">` ownership tag, and the Search
    Console verification file `googlec96e2248070e0570.html`. These are verified
    by `npm run test:routes` and the production audits.
+3. **The official AdSense loader stays in the homepage document head.**
+   `index.html` must contain the publisher loader exactly once so AdSense can
+   verify the regularly visited homepage without waiting for React or idle
+   callbacks. The production build strips it from route-specific HTML whose
+   registry policy is ad-disabled. Page/state policy, protected vignette links
+   and matching AdSense page exclusions keep assessments and private tools
+   ad-free during client navigation too.
 
 ## Route policy is authoritative
 
@@ -26,15 +33,16 @@ five **independent** dimensions. Never collapse one into another:
 | `contentQuality` | `substantial` `legal` `document` `interactive` `utility` `private` `incomplete` | what its primary content actually is |
 | `indexable` | boolean | may search engines index it (**fails closed**) |
 | `sitemap` | boolean | does it belong in the sitemap |
-| `adMode` | `enabled` / `disabled` / `auto` | advertising eligibility |
+| `adMode` | `enabled` / `disabled` / `auto` / `manual` | advertising eligibility |
 
 Specifically:
 
-- **Authentication does not disable advertising.** Signed-in content pages
-  (dashboard, factbook, saved items, account current affairs) are `noindex` and
-  ad-eligible at the same time. That is intended.
-- **Indexability does not control advertising.** A legal page can be indexed
-  with no ads; a utility hub can be `noindex` and still carry ads.
+- **Private routes never use Auto Ads.** A small audited set of account overview
+  pages uses `manual`, which permits one separated bottom unit only. Credential
+  flows, active assessments, mistakes, error states and loading states remain
+  completely ad-free.
+- **Indexability does not control advertising.** A substantial public page may
+  be ad-free, and indexable legal or document pages carry no ads.
 - **Being `noindex` never means deleting a route.** Unindexed pages stay fully
   served, linked and usable. Removing a URL from the sitemap is not a reason to
   remove the page.

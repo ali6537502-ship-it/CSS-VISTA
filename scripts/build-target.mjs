@@ -64,6 +64,9 @@ if (target === 'hostinger') {
   await import('./expand-optional-notes-seo.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
+  // The homepage keeps Google's official loader for direct verification, while
+  // private, utility, interactive and other ad-disabled route HTML does not.
+  await import('./apply-adsense-html-policy.mjs')
   await import('./split-sitemap-index.mjs')
   run('scripts/package-current-affairs.mjs')
   run('scripts/write-deployment-fingerprint.mjs')

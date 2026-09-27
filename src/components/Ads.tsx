@@ -145,7 +145,7 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
 
 function configuredContentSlot() {
   const slot = (import.meta.env.VITE_ADSENSE_SLOT_CONTENT || '').trim()
-  return /^\d+$/.test(slot) ? slot : ''
+  return /^\d+$/.test(slot) ? slot : ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID
 }
 
 export function AdSlot({
@@ -244,8 +244,7 @@ export function AdSlot({
   )
 }
 
-/** A single, below-content manual placement. It renders nothing until a real
- * numeric slot created in the owner's AdSense account is configured. */
+/** A single, below-content manual placement using the verified content slot. */
 export function ManagedContentAd() {
   const location = useLocation()
   const policy = getAdRoutePolicy(location.pathname, location.search)
@@ -265,11 +264,8 @@ export function ManagedContentAd() {
 }
 
 /**
- * A deliberately placed signed-in account unit.
- *
- * Eligibility comes from the route's own `adMode`, so authentication by itself
- * never disables advertising. Authentication transactions, sensitive controls,
- * active assessments, error and loading states still suppress it.
+ * One audited bottom placement for signed-in account overview routes. It
+ * fails closed during authentication, recovery, assessment and error states.
  */
 export function AuthenticatedAccountAd({
   sensitiveControlsVisible = false,

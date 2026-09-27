@@ -16,11 +16,14 @@ export const CANONICAL_ORIGIN = 'https://www.css-vista.com'
  *                    incomplete   not ready to be published to search
  *   indexable      whether search engines may index it (FAIL-CLOSED)
  *   sitemap        whether it belongs in the sitemap
- *   adMode         advertising eligibility: enabled | disabled | auto
+ *   adMode         advertising eligibility: enabled | disabled | auto | manual
  *
- * `adMode` is deliberately NOT derived from `access` or `indexable`. An
- * authenticated content page may be `noindex` and still carry advertising; an
- * indexable legal page may carry none.
+ * `adMode` is deliberately NOT derived from `indexable`: a substantial public
+ * page may be indexable and ad-free, while an indexable legal page carries no
+ * advertising. Private, interactive, utility and incomplete surfaces fail
+ * closed for Auto Ads so account controls, quizzes and thin chooser pages are
+ * never unrestricted monetisation surfaces. A small audited set of overview
+ * pages may opt into one `manual` bottom placement.
  */
 
 export const CONTENT_QUALITY = /** @type {const} */ ([
@@ -82,8 +85,9 @@ const publicPage = (path, title, description, h1, options = {}) =>
   defineRoute({ path, title, description, h1, access: 'public', contentQuality: 'substantial', adMode: 'enabled', ...options })
 
 /**
- * An authenticated page. It is never indexable, but its advertising is decided
- * separately through `adMode`.
+ * An authenticated page. It is never indexable and defaults to ad-disabled.
+ * A route must explicitly opt into `manual` for one audited bottom placement;
+ * authenticated routes can never inherit Auto Ads implicitly.
  */
 const protectedPage = (path, title, description, options = {}) =>
   defineRoute({ path, title, description, access: 'authenticated', contentQuality: 'private', adMode: 'disabled', robots: 'noindex, follow', ...options })
@@ -110,10 +114,8 @@ export const ROUTE_REGISTRY = [
   publicPage('/past-papers/:exam/:year', 'Past Papers by Year', 'Browse the available past-paper collection for this examination and year.', 'Past papers by year', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   publicPage('/past-papers/view/:id', 'Past Paper PDF Viewer', 'View and download an available past-paper PDF from the CSS Vista archive.', 'Past paper PDF viewer', { contentQuality: 'document', adMode: 'disabled', match: 'pattern', minimumHeight: 0, schemaType: 'DigitalDocument' }),
   publicPage('/css-mcqs', 'CSS Subject MCQs', 'Browse and practise compulsory and optional CSS subject MCQ banks with topic filters, answer review, bookmarks and progress tracking.', 'CSS subject MCQ banks', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
-  // Signed-in study material. Noindex because it is account content, but
-  // ad-eligible: authentication does not disable advertising.
-  protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.', { adMode: 'enabled' }),
-  protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern', adMode: 'enabled' }),
+  protectedPage('/study-material/essay-themes', 'Essay Themes 2027 Research Roadmap', 'Track your research progress across the twenty-five priority CSS essay themes.'),
+  protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern' }),
   // The study-material section root, so the parent URL resolves rather than
   // 404ing when a student truncates a deeper link.
   publicPage('/study-material', 'CSS Study Material — Notes, References and Essay Roadmap', 'Topic-wise CSS optional subject notes, the bilingual Islamic Studies reference bank and the essay theme research roadmap, in one place.', 'CSS study material', { contentQuality: 'substantial', adMode: 'enabled' }),
@@ -127,15 +129,15 @@ export const ROUTE_REGISTRY = [
   publicPage('/study-material/islamic-studies/:chapter', 'Islamic Studies Chapter References', 'Browse the topics and source-checked references for this CSS Islamic Studies chapter in English and Urdu.', 'Islamic Studies chapter references', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   publicPage('/study-material/islamic-studies/:chapter/:topic', 'Islamic Studies Topic References', 'Source-checked Qur\'anic, Hadith and scholarly references for this CSS Islamic Studies topic, with Arabic passages and parallel English and Urdu.', 'Islamic Studies topic references', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern' }),
   publicPage('/essay', 'CSS Essay Preparation', 'Learn CSS English Essay through structured skill guides, theme-wise preparation, practice topics, thesis and outline guidance, and self-assessment.', 'CSS English Essay preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
-  publicPage('/mpt', 'CSS MPT Preparation', 'Explore CSS MPT preparation resources, question-bank subjects and mock-test information.', 'CSS MPT preparation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
+  publicPage('/mpt', 'CSS MPT Preparation', 'Explore CSS MPT preparation resources, question-bank subjects and mock-test information.', 'CSS MPT preparation', { contentQuality: 'substantial', adMode: 'manual', manualAdPlacement: true, minimumHeight: 250 }),
   protectedPage('/mpt/bank/:bankId', 'MPT Question Bank', 'Interactive CSS MPT question-bank practice.', { match: 'pattern' }),
   publicPage('/current-affairs', 'CSS Current Affairs', 'Read CSS-focused current-affairs analysis and access the CSS Vista Weekly current-affairs journal.', 'CSS current affairs', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
-  publicPage('/vistagram', 'CSS Vistagram — Concepts, Articles and Explainers', 'Explore the public CSS Vistagram learning feed with concepts, articles, explainers, data, case studies and exam-relevant ideas.', 'CSS Vistagram', { contentQuality: 'utility', adMode: 'enabled' }),
-  publicPage('/vistagram/:slug', 'CSS Vistagram Article', 'Read a complete CSS Vistagram concept, article or explainer with sources and related learning material.', 'CSS Vistagram article', { contentQuality: 'utility', adMode: 'enabled', match: 'pattern', schemaType: 'Article' }),
+  publicPage('/vistagram', 'CSS Vistagram — Concepts, Articles and Explainers', 'Explore the public CSS Vistagram learning feed with concepts, articles, explainers, data, case studies and exam-relevant ideas.', 'CSS Vistagram', { contentQuality: 'utility', adMode: 'disabled' }),
+  publicPage('/vistagram/:slug', 'CSS Vistagram Article', 'Read a complete CSS Vistagram concept, article or explainer with sources and related learning material.', 'CSS Vistagram article', { contentQuality: 'utility', adMode: 'disabled', match: 'pattern', schemaType: 'Article' }),
   publicPage('/answer-writing', 'Answer-Writing Practice', 'Practise timed competitive-examination answers with an outline, structured sections, word count, local saving and a self-assessment rubric.', 'Answer-writing practice', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/test-series', 'Customized Test Series', 'Build a personalised written-test schedule, divide selected syllabi across tests, review checked-paper samples and prepare a printable plan.', 'Customized written test series', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/study-tools', 'CSS Study Tools', 'Use planners, timers, trackers, revision organisers and preparation utilities designed for focused daily competitive-examination study.', 'CSS study tools', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/photo-compressor', 'Photo Compressor', 'Interactive photo-compression utility.', { adMode: 'enabled' }),
+  protectedPage('/photo-compressor', 'Photo Compressor', 'Interactive photo-compression utility.'),
   publicPage('/games', 'Interactive Practice', 'Use academic matching activities and interactive practice tools for quick revision and recall.', 'Interactive academic practice', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/psych-viva', 'CSS Psychological Assessment and Viva Guidance', 'Prepare for the CSS psychological assessment and viva with structured guidance and resources.', 'CSS psychological assessment and viva guidance', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/fpsc-updates', 'FPSC Updates and CSS Results', 'Read important FPSC notices, CSS examination updates and result information.', 'FPSC updates and CSS results', { contentQuality: 'substantial', adMode: 'enabled' }),
@@ -143,62 +145,62 @@ export const ROUTE_REGISTRY = [
   publicPage('/services', 'CSS Occupational Groups and Services', 'Explore CSS occupational groups, service profiles and career information.', 'CSS occupational groups and services', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/analysis', 'CSS Exam Analysis', 'Read examination-focused analysis and preparation insights for CSS aspirants.', 'CSS exam analysis', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/grammar-vocabulary', 'Grammar and Vocabulary Practice', 'Study source-backed vocabulary, commonly confused words, phrasal verbs, idioms, substitutions, grammar lessons, quizzes and a daily challenge.', 'Grammar and vocabulary practice', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/dashboard', 'Student Dashboard', 'Private CSS Vista study dashboard.', { adMode: 'enabled' }),
+  protectedPage('/dashboard', 'Student Dashboard', 'Private CSS Vista study dashboard.'),
   protectedPage('/daily-challenge', 'Daily Challenge', 'Interactive daily question challenge.'),
-  publicPage('/gk', 'General Knowledge and PMS Preparation', 'Explore general-knowledge subject banks, reference material and PMS mock information.', 'General knowledge preparation', { contentQuality: 'utility', adMode: 'enabled' }),
-  publicPage('/one-liner-gk', 'One-Liner GK', 'Browse searchable general-knowledge fact cards organised by subject and topic for quick revision.', 'one-liner GK questions', { contentQuality: 'utility', adMode: 'enabled' }),
-  publicPage('/language-grammar', 'Urdu and English Grammar Resources', 'Browse Urdu and English grammar reference material for competitive examinations.', 'Urdu and English grammar resources', { contentQuality: 'utility', adMode: 'enabled' }),
+  publicPage('/gk', 'General Knowledge and PMS Preparation', 'Explore general-knowledge subject banks, reference material and PMS mock information.', 'General knowledge preparation', { contentQuality: 'utility', adMode: 'disabled' }),
+  publicPage('/one-liner-gk', 'One-Liner GK', 'Browse searchable general-knowledge fact cards organised by subject and topic for quick revision.', 'one-liner GK questions', { contentQuality: 'utility', adMode: 'disabled' }),
+  publicPage('/language-grammar', 'Urdu and English Grammar Resources', 'Browse Urdu and English grammar reference material for competitive examinations.', 'Urdu and English grammar resources', { contentQuality: 'utility', adMode: 'disabled' }),
   publicPage('/grammar-course', '30-Day Grammar Course', 'Follow a beginner-first, practice-heavy 30-day grammar course with clear explanations, worked examples and daily drills.', '30-day grammar course', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/book-summaries', '100 Book Summaries for CSS Aspirants', 'Browse searchable book summaries and reading guidance for CSS and competitive-examination preparation.', 'Book summaries for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/book-summaries/:slug', 'Book Summary for CSS Aspirants', 'Read a complete exam-focused book summary with key ideas, lessons and quotations for CSS preparation.', 'Book summary for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern', schemaType: 'Article' }),
-  protectedPage('/lectures', 'Free CSS Lectures', 'The CSS Vista lecture library is still in preparation and is not yet an indexable content resource.', { adMode: 'enabled' }),
+  protectedPage('/lectures', 'Free CSS Lectures', 'The CSS Vista lecture library is still in preparation and is not yet an indexable content resource.'),
   publicPage('/handwritten-notes', 'CSS Handwritten Notes', 'Browse information about CSS handwritten notes and authorised study resources.', 'CSS handwritten notes', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/study-planner', 'Study Planner', 'Private interactive study planner.', { adMode: 'enabled' }),
+  protectedPage('/study-planner', 'Study Planner', 'Private interactive study planner.'),
   protectedPage('/answer-evaluation', 'Answer Evaluation', 'Private answer-evaluation request workflow.'),
   protectedPage('/live-theme-demos', 'Theme Preview', 'Development theme preview.', { robots: 'noindex, nofollow' }),
   publicPage('/fpsc-syllabus', 'FPSC CSS Syllabus and Topic Planner', 'Browse the official CSS syllabus by subject and organise topic-wise preparation.', 'FPSC CSS syllabus', { contentQuality: 'substantial', adMode: 'enabled' }),
-  publicPage('/css-past-paper-analysis', 'CSS Past Paper Analysis', 'Explore topic-wise CSS past-paper trends mapped to the FPSC syllabus.', 'CSS past-paper analysis', { contentQuality: 'utility', adMode: 'enabled' }),
+  publicPage('/css-past-paper-analysis', 'CSS Past Paper Analysis', 'Explore topic-wise CSS past-paper trends mapped to the FPSC syllabus.', 'CSS past-paper analysis', { contentQuality: 'utility', adMode: 'disabled' }),
   publicPage('/gk/cat/:slug', 'GK Question Bank', 'Browse a complete general-knowledge category bank with searchable questions, topic filters and answer review.', 'General knowledge question bank', { contentQuality: 'substantial', adMode: 'disabled', match: 'pattern', minimumHeight: 0 }),
   protectedPage('/gk/quiz', 'GK Quiz', 'Active general-knowledge quiz and mock-test questions.'),
   protectedPage('/five-minute', 'Five-Minute GK Challenge', 'Timed general-knowledge practice.'),
-  protectedPage('/mistakes', 'Mistake Notebook', 'Private saved-question review.', { adMode: 'enabled' }),
+  protectedPage('/mistakes', 'Mistake Notebook', 'Private saved-question review.'),
   publicPage('/answer-timer', 'Answer Timer', 'Use a structured answer-writing timer with timed alerts for competitive-examination practice.', 'Answer-writing timer', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/checklists', 'Study Checklists', 'Private interactive study checklists.', { adMode: 'enabled' }),
+  protectedPage('/checklists', 'Study Checklists', 'Private interactive study checklists.'),
   publicPage('/books', 'CSS Books by Sir Ali Hassan Sargana', 'Explore CSS preparation books and publication information by Sir Ali Hassan Sargana.', 'CSS preparation books', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/journal', 'VISTA Journal - Articles, Analysis and Perspectives', 'Read selected original writing, informed analysis and serious perspectives on Pakistan and the wider world.', 'VISTA Journal', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/daily-briefing', 'CSS Vista Current Affairs', 'Read the daily CSS Vista Current Affairs brief with explanations, sourced facts, statistics, archives and personal bookmarks.', 'Understand the day. Remember what matters.', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/current-affairs/archive', 'Current Affairs Archive', 'Browse protected Current Affairs editions by date and topic.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/current-affairs/:storyId', 'Current Affairs Analysis', 'Read a sourced current affairs development.', { adMode: 'enabled', match: 'pattern', robots: 'noindex, nofollow' }),
+  protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/current-affairs/archive', 'Current Affairs Archive', 'Browse protected Current Affairs editions by date and topic.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/current-affairs/:storyId', 'Current Affairs Analysis', 'Read a sourced current affairs development.', { match: 'pattern', robots: 'noindex, nofollow' }),
   // MPT examination portal (docs/mpt/DECISIONS.md D-08). Private, never indexed or
   // prerendered. Transactions, the roll-number gate, the exam and results carry
   // no advertising; the overview, history and performance are account content.
-  protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/mpt/mistakes', 'My MPT Wrong Answers', 'Questions you answered incorrectly in completed MPT Mocks, with the correct answers.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/mistakes', 'My MPT Wrong Answers', 'Questions you answered incorrectly in completed MPT Mocks, with the correct answers.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/apply/:mock', 'Apply for MPT Mock', 'Reserve an MPT Mock slot.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/applications/:code', 'MPT Mock Application', 'Your MPT Mock application and Roll Number.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/entrance/:mock', 'MPT Mock Candidate Verification', 'Verify your Roll Number to enter the MPT Mock.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/exam/:mock', 'MPT Mock Examination', 'Active MPT Mock examination.', { match: 'pattern', robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/results/:code', 'MPT Mock Result', 'Your MPT Mock result.', { match: 'pattern', robots: 'noindex, nofollow' }),
-  protectedPage('/account/factbook', 'Daily Factbook', 'Revise the facts and statistics from daily developments.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/account/saved', 'My Saved Items', 'Your private saved reading.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/factbook', 'Daily Factbook', 'Revise the facts and statistics from daily developments.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/saved', 'My Saved Items', 'Your private saved reading.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/search', 'Search My Library', 'Search your protected Current Affairs and saved material.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/settings', 'Profile & Settings', 'Manage your profile, preferences and account.', { robots: 'noindex, nofollow' }),
-  // The signed-in overview is ordinary account content. Advertising is allowed
-  // at route level; the sign-in, registration, reset and verification states are
-  // suppressed by the component through the shared ad-state flags.
-  protectedPage('/account', 'CSS Vista Account', 'Sign in, register or manage a CSS Vista account.', { adMode: 'enabled', robots: 'noindex, nofollow' }),
-  protectedPage('/factbook', 'My Factbook', 'Private personal knowledge library.', { adMode: 'enabled' }),
+  // The signed-in overview permits one bottom in-page unit. Sign-in,
+  // registration, reset and verification states are suppressed by the shared
+  // ad-state flags; Auto Ads and vignettes remain disabled on the route.
+  protectedPage('/account', 'CSS Vista Account', 'Sign in, register or manage a CSS Vista account.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/factbook', 'My Factbook', 'Private personal knowledge library.'),
   publicPage('/consultation', 'One-to-One CSS Consultation', 'Learn about one-to-one CSS consultation, preparation guidance and booking information.', 'One-to-one CSS consultation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/exam-intelligence', 'Vista Exam Intelligence', 'Private examination-planning and performance dashboard.', { adMode: 'enabled' }),
+  protectedPage('/exam-intelligence', 'Vista Exam Intelligence', 'Private examination-planning and performance dashboard.'),
   publicPage('/css-2026-written-result', 'CSS 2026 Written Result - Qualified Candidates List', 'View and download the CSS Competitive Examination 2026 written result and qualified-candidate list.', 'CSS 2026 written result', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0, schemaType: 'NewsArticle' }),
   publicPage('/legal', 'Legal & Trust Centre', 'Access CSS Vista privacy, cookie, terms, copyright, editorial, identity and contact information.', 'Legal & Trust Centre', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/privacy-policy', 'Privacy Policy', 'Read how CSS Vista handles account information, study progress, security data, browser storage, advertising and service providers.', 'Privacy Policy', { contentQuality: 'legal', adMode: 'disabled', minimumHeight: 0 }),
@@ -207,7 +209,7 @@ export const ROUTE_REGISTRY = [
   publicPage('/disclaimer', 'Disclaimer', 'Read CSS Vista\'s independent educational disclaimer and guidance on verifying official examination information.', 'Disclaimer', { contentQuality: 'legal', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/copyright', 'Copyright Policy', 'Read how CSS Vista distinguishes its original material from official, public and third-party works.', 'Copyright & Intellectual Property', { contentQuality: 'legal', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/editorial-policy', 'Editorial & Corrections Policy', 'Read CSS Vista standards for accuracy, sourcing, updates, corrections and official examination information.', 'Editorial & Corrections Policy', { contentQuality: 'legal', adMode: 'disabled', minimumHeight: 0 }),
-  publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { titleIsComplete: true, contentQuality: 'legal', adMode: 'enabled', title: 'About CSS Vista' }),
+  publicPage('/about', 'About CSS Vista', 'Learn what CSS Vista is, what it provides and its independent educational mission for competitive-examination preparation.', 'About CSS Vista', { titleIsComplete: true, contentQuality: 'legal', adMode: 'disabled', title: 'About CSS Vista' }),
   publicPage('/contact', 'Contact CSS Vista', 'Use CSS Vista verified public channels for general enquiries, technical issues, corrections, privacy and copyright concerns.', 'Contact CSS Vista', { titleIsComplete: true, contentQuality: 'legal', adMode: 'disabled', title: 'Contact CSS Vista', minimumHeight: 0 }),
   protectedPage('/sadiaali', 'Administration', 'Private administration area.', { access: 'admin', robots: 'noindex, nofollow' }),
   protectedPage('/sadiaali/login', 'Administration Sign In', 'Private administration sign-in page.', { access: 'admin', robots: 'noindex, nofollow' }),

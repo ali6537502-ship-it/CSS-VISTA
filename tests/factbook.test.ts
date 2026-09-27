@@ -57,16 +57,14 @@ test('database migration enforces private ownership on every Factbook entity', (
   assert.match(sql, /storage\.foldername\(name\)/i)
 })
 
-test('Factbook advertising follows the route policy, not the fact that it is private', () => {
-  // The factbook is an ordinary signed-in content page: it stays noindex, and
-  // advertising is decided separately by the route registry's adMode.
+test('Factbook remains a private, noindex and ad-free study tool', () => {
   const route = findRouteDefinition('/factbook')
   assert.equal(route?.access, 'authenticated')
   assert.equal(route?.indexable, false)
-  assert.equal(route?.adMode, 'enabled')
+  assert.equal(route?.adMode, 'disabled')
 
   const policy = getAdRoutePolicy('/factbook')
-  assert.equal(policy.autoAdsEnabled, true)
+  assert.equal(policy.autoAdsEnabled, false)
   assert.equal(policy.manualAdsEnabled, false)
 
   // Transaction, assessment, error and loading states still suppress it.

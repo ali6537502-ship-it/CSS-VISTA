@@ -94,15 +94,14 @@ test('universal research rules are stored once, not repeated per theme', () => {
   }
 })
 
-test('the section is signed-in only, noindex, and still ad-eligible', () => {
+test('the section is signed-in only, noindex, and ad-free', () => {
   for (const path of ['/study-material/essay-themes', '/study-material/essay-themes/climate-change-climate-justice-and-resilience']) {
     const policy = getRoutePolicy(path)
     assert.equal(policy.known, true, `${path} is not in the route registry`)
     assert.equal(policy.access, 'authenticated', path)
     assert.equal(policy.indexable, false, path)
     assert.equal(policy.sitemap, false, path)
-    // Authentication does not disable advertising.
-    assert.equal(policy.adMode, 'enabled', path)
+    assert.equal(policy.adMode, 'disabled', path)
   }
 })
 

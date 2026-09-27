@@ -38,6 +38,17 @@ Optional AdSense manual in-content unit:
 VITE_ADSENSE_SLOT_CONTENT=
 ```
 
+The official publisher loader is present once in the homepage `index.html` for
+AdSense verification and Auto Ads. Do not remove it or duplicate it in
+components. The production build removes the loader from route-specific HTML
+that is Auto-Ads-disabled, including private accounts, utilities and
+assessments. Routes marked `manual` receive only their audited bottom unit after
+React confirms the signed-in/content state; they never retain the Auto Ads
+loader in route HTML.
+Route-level application policy protects client-side navigation too; matching
+Auto Ads page exclusions must still remain configured in the AdSense dashboard
+for active exam, private account and authentication transaction URLs.
+
 Never place `sb_secret_...`, `service_role`, private API keys, server credentials, or database passwords in a `VITE_` variable. Vite exposes `VITE_` values to browser JavaScript.
 
 ## Account verification and recovery
