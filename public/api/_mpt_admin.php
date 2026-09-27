@@ -121,7 +121,7 @@ function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page
     $count = $pdo->prepare("SELECT COUNT(*) FROM mpt_applications a JOIN users u ON u.id=a.user_id LEFT JOIN student_profiles p ON p.user_id=a.user_id WHERE $where");
     $count->execute($params);
     $limit = $perPage > 0 ? ' LIMIT ' . (int)$perPage . ' OFFSET ' . (int)(($page - 1) * $perPage) : '';
-    $stmt = $pdo->prepare("SELECT a.*,u.email,p.display_name,c.candidate_code FROM mpt_applications a JOIN users u ON u.id=a.user_id LEFT JOIN student_profiles p ON p.user_id=a.user_id LEFT JOIN mpt_candidates c ON c.user_id=a.user_id WHERE $where ORDER BY a.applied_at$limit");
+    $stmt = $pdo->prepare("SELECT a.*,u.email,p.display_name,CASE WHEN (p.profile_photo_path IS NOT NULL AND p.profile_photo_path <> '') OR (p.avatar_url IS NOT NULL AND p.avatar_url <> '') THEN 1 ELSE 0 END has_photo,c.candidate_code FROM mpt_applications a JOIN users u ON u.id=a.user_id LEFT JOIN student_profiles p ON p.user_id=a.user_id LEFT JOIN mpt_candidates c ON c.user_id=a.user_id WHERE $where ORDER BY a.applied_at$limit");
     $stmt->execute($params);
     $now = mpt_now_ms();
     $rows = [];
@@ -129,8 +129,10 @@ function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page
         $attempt = mpt_latest_attempt($pdo, (string)$row['id']);
         $state = mpt_state($pdo, $mock, $row, $attempt, $now, true);
         $rows[] = [
+            'user_id' => (string)$row['user_id'],
             'candidate' => (string)($row['display_name'] ?? ''),
             'email' => $row['email'],
+            'has_photo' => (bool)($row['has_photo'] ?? false),
             'candidate_code' => $row['candidate_code'],
             'roll_number' => $row['roll_number'],
             'application_code' => $row['application_code'],
@@ -149,11 +151,13 @@ function mpt_admin_attempts(PDO $pdo, array $mock, int $page, int $perPage = 50)
 {
     $count = $pdo->prepare('SELECT COUNT(*) FROM mpt_attempts WHERE mock_id=?');
     $count->execute([$mock['id']]);
-    $stmt = $pdo->prepare('SELECT t.*,a.roll_number,a.application_code,p.display_name,u.email FROM mpt_attempts t JOIN mpt_applications a ON a.id=t.application_id JOIN users u ON u.id=t.user_id LEFT JOIN student_profiles p ON p.user_id=t.user_id WHERE t.mock_id=? ORDER BY t.started_at LIMIT ' . (int)$perPage . ' OFFSET ' . (int)(($page - 1) * $perPage));
+    $stmt = $pdo->prepare("SELECT t.*,a.roll_number,a.application_code,p.display_name,u.email,CASE WHEN (p.profile_photo_path IS NOT NULL AND p.profile_photo_path <> '') OR (p.avatar_url IS NOT NULL AND p.avatar_url <> '') THEN 1 ELSE 0 END has_photo FROM mpt_attempts t JOIN mpt_applications a ON a.id=t.application_id JOIN users u ON u.id=t.user_id LEFT JOIN student_profiles p ON p.user_id=t.user_id WHERE t.mock_id=? ORDER BY t.started_at LIMIT " . (int)$perPage . ' OFFSET ' . (int)(($page - 1) * $perPage));
     $stmt->execute([$mock['id']]);
     return ['rows' => array_map(static fn(array $row) => [
+        'user_id' => (string)$row['user_id'],
         'candidate' => (string)($row['display_name'] ?? ''),
         'email' => $row['email'],
+        'has_photo' => (bool)($row['has_photo'] ?? false),
         'roll_number' => $row['roll_number'],
         'application_code' => $row['application_code'],
         'attempt_no' => (int)$row['attempt_no'],

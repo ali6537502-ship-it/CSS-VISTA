@@ -1,10 +1,9 @@
 export type RouteMatch = 'exact' | 'prefix' | 'pattern'
 /**
- * Advertising eligibility. Deliberately independent of `access` and
- * `indexable`: an authenticated noindex page may be `enabled`, and an
- * indexable legal page may be `disabled`.
+ * Advertising eligibility. `manual` allows one audited in-page placement but
+ * never enables Auto Ads or vignettes for that route.
  */
-export type AdMode = 'enabled' | 'disabled' | 'auto'
+export type AdMode = 'enabled' | 'disabled' | 'auto' | 'manual'
 export type RouteAccess = 'public' | 'authenticated' | 'admin'
 export type ContentQuality =
   | 'substantial'

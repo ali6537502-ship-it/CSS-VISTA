@@ -2,7 +2,8 @@ import { findRouteDefinition, normalizeRoutePath } from '../data/routeRegistry.m
 import type { AdMode } from '../data/routeRegistry.mjs'
 
 export const ADSENSE_PUBLISHER_ID = 'ca-pub-6131271603014611'
-export const ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID = '1618565899'
+export const ADSENSE_OVERVIEW_SLOT_ID = '1618565899'
+export const ADSENSE_SIGNED_IN_ACCOUNT_SLOT_ID = ADSENSE_OVERVIEW_SLOT_ID
 
 export interface AdRoutePolicy {
   autoAdsEnabled: boolean
@@ -92,18 +93,21 @@ export function getAdRoutePolicy(pathname: string, search = '', state: AdPageSta
     }
   }
 
-  // 'auto' defers to the content class: a route only opts in implicitly when
-  // its primary content is substantial. 'enabled'/'disabled' are explicit.
-  const eligible = route.adMode === 'enabled'
+  // `manual` permits only one audited in-page placement. It deliberately does
+  // not opt the route into Auto Ads or vignettes.
+  const autoEligible = route.adMode === 'enabled'
     || (route.adMode === 'auto' && route.contentQuality === 'substantial')
-  const manualEligible = eligible && route.manualAdPlacement === true
+  const manualEligible = route.manualAdPlacement === true
+    && (route.adMode === 'manual' || autoEligible)
 
   return {
-    autoAdsEnabled: eligible,
+    autoAdsEnabled: autoEligible,
     manualAdsEnabled: manualEligible,
     adMode: route.adMode,
-    reason: eligible
+    reason: autoEligible
       ? (manualEligible ? 'Ad-eligible route with an audited manual placement' : 'Ad-eligible route; Auto Ads only')
+      : manualEligible
+        ? 'Audited manual in-page placement only; Auto Ads and vignettes disabled'
       : `Advertising is ${route.adMode} for this route`,
     placementType: route.placementType,
     minimumHeight: manualEligible ? route.minimumHeight : 0,
@@ -137,12 +141,8 @@ export function deriveAdPageState(input: {
 }
 
 /**
- * The deliberately placed signed-in account unit.
- *
- * Eligibility comes from the route's own `adMode`, so any authenticated route
- * the owner marks ad-eligible can carry it — authentication alone never
- * disables advertising. Authentication transactions and sensitive control
- * states still suppress it.
+ * Guard for the audited signed-in account overview placement. Only routes
+ * explicitly marked `manual` can pass; Auto Ads stay disabled there.
  */
 export function canShowAuthenticatedAccountAd(
   pathname: string,
@@ -155,7 +155,7 @@ export function canShowAuthenticatedAccountAd(
   const route = findRouteDefinition(pathname)
   if (!route || route.access !== 'authenticated') return false
 
-  return getAdRoutePolicy(pathname, search, state).autoAdsEnabled
+  return getAdRoutePolicy(pathname, search, state).manualAdsEnabled
 }
 
 export function isAdFreePath(pathname: string, search = '', state: AdPageState = {}) {
@@ -173,11 +173,14 @@ export function shouldProtectVignetteLink(input: {
   navigationControl?: boolean
 }) {
   const currentPolicy = getAdRoutePolicy(input.currentPath, input.currentSearch)
+  const destinationPolicy = input.destinationPath
+    ? getAdRoutePolicy(input.destinationPath, input.destinationSearch)
+    : null
   return Boolean(
     input.download
     || input.external
     || input.navigationControl
     || !currentPolicy.autoAdsEnabled
-    || (input.destinationPath && isAdFreePath(input.destinationPath, input.destinationSearch)),
+    || (destinationPolicy && !destinationPolicy.autoAdsEnabled),
   )
 }

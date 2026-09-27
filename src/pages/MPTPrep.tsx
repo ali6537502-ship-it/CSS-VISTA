@@ -14,6 +14,7 @@ import { usePageBack } from '@/lib/backNavigation'
 import { mptQuestionBanks, mptQuestionBankPath } from '@/data/mptQuestionBanks'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { MptHubPanel } from '@/components/mpt/MptHubPanel'
+import { ManagedContentAd } from '@/components/Ads'
 
 type Mode = 'subject' | 'topic' | 'random' | 'mock' | null
 
@@ -420,6 +421,7 @@ export default function MPTPrep() {
                 </div>
               </Section>
             )}
+            <ManagedContentAd />
           </>
         ) : (
           <div>

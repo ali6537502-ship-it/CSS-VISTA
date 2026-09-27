@@ -7,6 +7,8 @@ const userAgent = 'AdsBot-Google (+http://www.google.com/adsbot.html)'
 const adsTxtUserAgent = 'Mediapartners-Google'
 let failed = false
 
+const officialLoaderPattern = /<script\s+async\s+src=["']https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-6131271603014611["']\s+crossorigin=["']anonymous["']\s*>\s*<\/script>/i
+
 function result(valid, label, details) {
   console.log(`${valid ? 'PASS' : 'FAIL'} ${label}: ${details}`)
   if (!valid) failed = true
@@ -121,6 +123,10 @@ for (const path of routes) {
     // a styling marker that only existed on the retired template pages.
     const words = primaryContentWords(body)
     const robots = /<meta name="robots" content="([^"]*)"/.exec(body)?.[1] ?? ''
+    const shouldLoadAds = route?.access === 'public'
+      && route.contentQuality === 'substantial'
+      && route.adMode === 'enabled'
+    const hasLoader = officialLoaderPattern.test(body)
 
     // Every deployed page must be the real page. The content threshold applies
     // to routes the registry publishes to search; a route deliberately kept out
@@ -137,16 +143,16 @@ for (const path of routes) {
       && body.includes(route.h1)
       && body.includes('<h1')
       && body.includes('<meta name="google-adsense-account" content="ca-pub-6131271603014611"')
+      && hasLoader === shouldLoadAds
       && !body.includes('<div id="root"></div>')
       && contentIsRight
       && !/Use .* as the main entry point/.test(body)
       && !body.includes('What you can do here')
       && !body.includes('__SITE_ORIGIN__')
-      && (path !== '/' || !body.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'))
     result(
       valid,
       `initial HTML ${path}`,
-      `${response.status}, ${route?.indexable ? 'indexable' : 'noindex'}, ${words} words of primary content, canonical ${canonical}`,
+      `${response.status}, ${route?.indexable ? 'indexable' : 'noindex'}, ${shouldLoadAds ? 'ad eligible' : 'ad protected'}, ${words} words of primary content, canonical ${canonical}`,
     )
   } catch (error) {
     result(false, `initial HTML ${path}`, error instanceof Error ? error.message : String(error))

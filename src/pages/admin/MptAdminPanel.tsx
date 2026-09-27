@@ -9,8 +9,8 @@ import { mockSlotLabel, pktDateTime, pktTime } from '@/lib/mpt/copy'
 type Stats = { applications: number; appeared: number; started: number; in_progress: number; completed: number; absent: number | null; average_score: number | null; completion_rate: number | null; distribution: Array<{ from: number; to: number; count: number }> }
 type AdminMock = MptMock & { results_delay_minutes: number; id: string; schedule_key: string | null; capacity: number | null; reserved_count: number; rank_min_candidates: number; scoring_version: number; cancel_reason: string | null; created_by: string; stats: Stats }
 type Overview = { flag: string; auto_schedule: boolean; runway: { available: number; total: number; publishable: boolean; generated_at?: string | null; exhausted_at: string | null; daily_slots_remaining?: number }; last_maintenance_at: string | null; mocks: AdminMock[] }
-type AppRow = { candidate: string; email: string; candidate_code: string | null; roll_number: string; application_code: string; applied_at: string; status: string; phase: string; appeared: boolean; score: number | null }
-type AttemptRow = { candidate: string; email: string; roll_number: string; application_code: string; status: string; started_at: string; submitted_at: string | null; submit_reason: string | null; score: number | null; visibility_changes: number; device_takeovers: number; void_reason: string | null }
+type AppRow = { user_id: string; candidate: string; email: string; has_photo: boolean; candidate_code: string | null; roll_number: string; application_code: string; applied_at: string; status: string; phase: string; appeared: boolean; score: number | null }
+type AttemptRow = { user_id: string; candidate: string; email: string; has_photo: boolean; roll_number: string; application_code: string; status: string; started_at: string; submitted_at: string | null; submit_reason: string | null; score: number | null; visibility_changes: number; device_takeovers: number; void_reason: string | null }
 
 const post = <T,>(body: Record<string, unknown>) => ownerRequest<T>('admin/mpt.php', { method: 'POST', body: JSON.stringify(body) })
 const get = <T,>(query: string) => ownerRequest<T>(`admin/mpt.php${query}`)
@@ -21,6 +21,14 @@ const toLocalInput = (iso: string) => {
 }
 const fromPktInput = (value: string) => new Date(`${value}:00+05:00`).toISOString()
 const button = 'min-h-10 rounded-md border bg-white px-3 text-sm font-semibold text-pine hover:bg-secondary disabled:opacity-50'
+
+function CandidatePhoto({ userId, hasPhoto, name }: { userId: string; hasPhoto: boolean; name: string }) {
+  const [failed, setFailed] = useState(false)
+  if (!hasPhoto || failed) {
+    return <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border bg-secondary text-[9px] font-semibold text-muted-foreground">No photo</div>
+  }
+  return <img src={`/api/admin/student-photo.php?user_id=${encodeURIComponent(userId)}`} alt={`${name || 'Student'} profile`} className="h-11 w-11 shrink-0 rounded-full border object-cover" loading="lazy" onError={() => setFailed(true)} />
+}
 
 function useAction(onDone: () => void) {
   const [busy, setBusy] = useState(false)
@@ -137,7 +145,7 @@ function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => voi
               <tbody className="divide-y">
                 {apps?.rows.map((row) => (
                   <tr key={row.application_code}>
-                    <td className="py-1.5">{row.candidate}<br /><span className="text-xs text-muted-foreground">{row.email}</span></td>
+                    <td className="py-1.5"><div className="flex items-center gap-2"><CandidatePhoto userId={row.user_id} hasPhoto={row.has_photo} name={row.candidate} /><div className="min-w-0"><div className="font-medium">{row.candidate || 'Student'}</div><span className="break-all text-xs text-muted-foreground">{row.email}</span></div></div></td>
                     <td className="font-mono">{row.roll_number}</td><td className="font-mono text-xs">{row.application_code}</td>
                     <td className="text-xs">{pktDateTime(row.applied_at)}</td><td className="text-xs font-semibold">{row.appeared ? 'Yes' : 'No'}</td><td className="text-xs">{row.phase}</td><td>{row.score ?? '—'}</td>
                     <td className="space-x-1 whitespace-nowrap text-right">
@@ -159,7 +167,7 @@ function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => voi
             <tbody className="divide-y">
               {attempts?.rows.map((row) => (
                 <tr key={`${row.application_code}-${row.started_at}`}>
-                  <td className="py-1.5">{row.candidate}<br /><span className="text-xs text-muted-foreground">{row.status}{row.void_reason ? ` — ${row.void_reason}` : ''}</span></td>
+                  <td className="py-1.5"><div className="flex items-center gap-2"><CandidatePhoto userId={row.user_id} hasPhoto={row.has_photo} name={row.candidate} /><div className="min-w-0"><div className="font-medium">{row.candidate || 'Student'}</div><span className="text-xs text-muted-foreground">{row.status}{row.void_reason ? ` — ${row.void_reason}` : ''}</span></div></div></td>
                   <td className="font-mono">{row.roll_number}</td><td className="text-xs">{pktDateTime(row.started_at)}</td><td className="text-xs">{pktDateTime(row.submitted_at)}</td>
                   <td className="text-xs">{row.submit_reason ?? '—'}</td><td>{row.score ?? '—'}</td><td>{row.visibility_changes}</td><td>{row.device_takeovers}</td>
                   <td className="space-x-1 whitespace-nowrap text-right">

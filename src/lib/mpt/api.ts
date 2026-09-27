@@ -176,6 +176,39 @@ export type MptReviewQuestion = MptPaperQuestion & { correct: number; selected: 
 export type MptMistake = MptPaperQuestion & { mock_number: number; title: string; exam_open_at: string; selected: number; correct: number; explanation: string | null }
 export type MptMistakes = { questions: MptMistake[]; total: number; page: number; per_page: number; subjects: Array<{ subject: string; count: number }>; server_time: string }
 
+export type MptQuestionBankMock = {
+  slug: string
+  mock_number: number
+  title: string
+  exam_open_at: string
+  exam_end_at: string
+  question_count: number
+  status: 'COMPLETED'
+}
+
+export type MptQuestionBank = {
+  has_participation: boolean
+  mocks: MptQuestionBankMock[]
+  server_time: string
+}
+
+export type MptQuestionBankQuestion = {
+  p: number
+  section: string
+  q: string
+  o: string[]
+  correct: number | null
+  explanation: string | null
+}
+
+export type MptQuestionBankPaper = {
+  mock: MptQuestionBankMock
+  subjects: Array<{ subject: string; count: number }>
+  questions: MptQuestionBankQuestion[]
+  answers_available: boolean
+  server_time: string
+}
+
 // ---------------------------------------------------------------- server clock
 
 let clockOffsetMs = 0
@@ -212,6 +245,8 @@ export const mptApi = {
   history: (page: number, status: string | null, signal?: AbortSignal) => get<MptHistory & { server_time: string }>(`history.php?page=${page}${status ? `&status=${status}` : ''}`, signal),
   performance: (signal?: AbortSignal) => get<MptPerformance>('performance.php', signal),
   mistakes: (page: number, subject: string | null, signal?: AbortSignal) => get<MptMistakes>(`mistakes.php?page=${page}${subject ? `&subject=${encodeURIComponent(subject)}` : ''}`, signal),
+  questionBank: (signal?: AbortSignal) => get<MptQuestionBank>('question-bank.php', signal),
+  questionBankPaper: (slug: string, signal?: AbortSignal) => get<MptQuestionBankPaper>(`question-bank-paper.php?mock=${encodeURIComponent(slug)}`, signal),
 }
 
 /** A per-tab id for the single-active-device lock (D-16). */

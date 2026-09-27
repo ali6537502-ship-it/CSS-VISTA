@@ -45,6 +45,7 @@ type StudentRow = {
 type DirectoryResponse = { ok: boolean; total: number; students: StudentRow[]; message?: string }
 type Category = 'all' | 'complete' | 'incomplete' | 'photo' | 'no-photo' | 'active' | 'previous' | 'new'
 type PreviousStatus = '' | 'yes' | 'no'
+type SortOrder = 'latest-registered' | 'oldest-registered' | 'latest-completed' | 'oldest-completed'
 
 function hasText(value: unknown) {
   return typeof value === 'string' ? value.trim() !== '' : value !== null && value !== undefined && value !== ''
@@ -141,6 +142,7 @@ export default function StudentManagementPanelV2({ onOpenWebsiteTools }: { onOpe
   const [degree, setDegree] = useState('')
   const [previousStatus, setPreviousStatus] = useState<PreviousStatus>('')
   const [previousMentor, setPreviousMentor] = useState('')
+  const [sortOrder, setSortOrder] = useState<SortOrder>('latest-registered')
 
   async function load() {
     setLoading(true)
@@ -172,32 +174,46 @@ export default function StudentManagementPanelV2({ onOpenWebsiteTools }: { onOpe
   const degrees = useMemo(() => choices(rows.map((r) => r.education?.trim()).filter((v): v is string => Boolean(v))), [rows])
   const previousMentors = ['Miss Sadia Zahoor', 'Sir Ali Hassan Sargana', 'Both']
 
-  const visible = useMemo(() => rows.filter((row) => {
-    const c = completion(row)
-    const previous = isPreviousStudent(row)
-    if (category === 'complete' && !c.complete) return false
-    if (category === 'incomplete' && c.complete) return false
-    if (category === 'photo' && !row.has_photo) return false
-    if (category === 'no-photo' && row.has_photo) return false
-    if (category === 'active' && !(row.last_seen_at || row.last_sign_in_at)) return false
-    if (category === 'previous' && !previous) return false
-    if (category === 'new' && (row.previous_css_vista_student || '').trim() !== 'No') return false
-    if (attempt && String(row.css_attempt_year ?? '') !== attempt) return false
-    if (city && (row.city?.trim() || '') !== city) return false
-    if (preparation && (row.preparation_level?.trim() || '') !== preparation) return false
-    if (batch && (row.batch_title?.trim() || '') !== batch) return false
-    if (gender && (row.gender?.trim() || '') !== gender) return false
-    if (degree && (row.education?.trim() || '') !== degree) return false
-    if (previousStatus === 'yes' && !previous) return false
-    if (previousStatus === 'no' && (row.previous_css_vista_student || '').trim() !== 'No') return false
-    if (previousMentor && (row.previous_css_vista_student?.trim() || '') !== previousMentor) return false
-    const q = query.trim().toLowerCase()
-    return !q || [
-      row.display_name, row.email, row.phone, row.whatsapp, row.city, row.batch_title,
-      row.preparation_level, row.gender, row.education, row.previous_css_vista_student,
-      row.previous_css_vista_services?.join(' '), row.previous_css_vista_details,
-    ].some((value) => String(value ?? '').toLowerCase().includes(q))
-  }), [rows, category, attempt, city, preparation, batch, gender, degree, previousStatus, previousMentor, query])
+  const visible = useMemo(() => {
+    const filtered = rows.filter((row) => {
+      const c = completion(row)
+      const previous = isPreviousStudent(row)
+      if (category === 'complete' && !c.complete) return false
+      if (category === 'incomplete' && c.complete) return false
+      if (category === 'photo' && !row.has_photo) return false
+      if (category === 'no-photo' && row.has_photo) return false
+      if (category === 'active' && !(row.last_seen_at || row.last_sign_in_at)) return false
+      if (category === 'previous' && !previous) return false
+      if (category === 'new' && (row.previous_css_vista_student || '').trim() !== 'No') return false
+      if (attempt && String(row.css_attempt_year ?? '') !== attempt) return false
+      if (city && (row.city?.trim() || '') !== city) return false
+      if (preparation && (row.preparation_level?.trim() || '') !== preparation) return false
+      if (batch && (row.batch_title?.trim() || '') !== batch) return false
+      if (gender && (row.gender?.trim() || '') !== gender) return false
+      if (degree && (row.education?.trim() || '') !== degree) return false
+      if (previousStatus === 'yes' && !previous) return false
+      if (previousStatus === 'no' && (row.previous_css_vista_student || '').trim() !== 'No') return false
+      if (previousMentor && (row.previous_css_vista_student?.trim() || '') !== previousMentor) return false
+      const q = query.trim().toLowerCase()
+      return !q || [
+        row.display_name, row.email, row.phone, row.whatsapp, row.city, row.batch_title,
+        row.preparation_level, row.gender, row.education, row.previous_css_vista_student,
+        row.previous_css_vista_services?.join(' '), row.previous_css_vista_details,
+      ].some((value) => String(value ?? '').toLowerCase().includes(q))
+    })
+    const date = (value: string | null) => value ? Date.parse(value) : Number.NaN
+    filtered.sort((a, b) => {
+      if (sortOrder === 'latest-registered') return date(b.created_at) - date(a.created_at)
+      if (sortOrder === 'oldest-registered') return date(a.created_at) - date(b.created_at)
+      const aCompleted = date(a.profile_completed_at)
+      const bCompleted = date(b.profile_completed_at)
+      if (Number.isNaN(aCompleted) && Number.isNaN(bCompleted)) return date(b.created_at) - date(a.created_at)
+      if (Number.isNaN(aCompleted)) return 1
+      if (Number.isNaN(bCompleted)) return -1
+      return sortOrder === 'latest-completed' ? bCompleted - aCompleted : aCompleted - bCompleted
+    })
+    return filtered
+  }, [rows, category, attempt, city, preparation, batch, gender, degree, previousStatus, previousMentor, query, sortOrder])
 
   const shortcuts: { id: Category; label: string; value: number; note: string }[] = [
     { id: 'all', label: 'All students', value: counts.all, note: 'Every account' },
@@ -221,6 +237,7 @@ export default function StudentManagementPanelV2({ onOpenWebsiteTools }: { onOpe
     setDegree('')
     setPreviousStatus('')
     setPreviousMentor('')
+    setSortOrder('latest-registered')
   }
 
   function downloadCsv() {
@@ -298,6 +315,7 @@ export default function StudentManagementPanelV2({ onOpenWebsiteTools }: { onOpe
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           <label className="relative md:col-span-2 xl:col-span-4"><span className="mb-1 block text-xs font-bold uppercase tracking-wide text-muted-foreground">Search students</span><Search className="pointer-events-none absolute bottom-3 left-3 h-4 w-4 text-muted-foreground" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search name, email, phone, city, mentor, service, batch or preparation" className={input + ' pl-9'} /></label>
+          <label><span className="mb-1 block text-xs font-bold uppercase tracking-wide text-muted-foreground">Sort students</span><select value={sortOrder} onChange={(event) => setSortOrder(event.target.value as SortOrder)} className={input}><option value="latest-registered">Latest registered</option><option value="oldest-registered">Oldest registered</option><option value="latest-completed">Latest profile completed</option><option value="oldest-completed">Oldest profile completed</option></select></label>
           <label><span className="mb-1 block text-xs font-bold uppercase tracking-wide text-muted-foreground">Previously a student?</span><select value={previousStatus} onChange={(event) => setPreviousStatus(event.target.value as PreviousStatus)} className={input}><option value="">All</option><option value="yes">Yes</option><option value="no">No</option></select></label>
           <label><span className="mb-1 block text-xs font-bold uppercase tracking-wide text-muted-foreground">Previous CSS Vista mentor</span><select value={previousMentor} onChange={(event) => setPreviousMentor(event.target.value)} className={input}><option value="">All mentors</option>{previousMentors.map((mentor) => <option key={mentor}>{mentor}</option>)}</select></label>
           <label><span className="mb-1 block text-xs font-bold uppercase tracking-wide text-muted-foreground">Gender</span><select value={gender} onChange={(event) => setGender(event.target.value)} className={input}><option value="">All genders</option>{genders.map((value) => <option key={value}>{value}</option>)}</select></label>

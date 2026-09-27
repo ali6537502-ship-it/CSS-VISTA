@@ -4,8 +4,8 @@
 import type { BankIndex } from './mcq'
 
 export const bundledBankIndex: BankIndex = {
- "generatedAt": "2026-09-25",
- "total": 35853,
+ "generatedAt": "2026-09-27",
+ "total": 35864,
  "categories": [
   {
    "slug": "pakistan-geography",
@@ -234,7 +234,7 @@ export const bundledBankIndex: BankIndex = {
   {
    "slug": "current-affairs",
    "name": "Current Affairs",
-   "count": 795,
+   "count": 806,
    "chunks": 10,
    "mpt": true
   },

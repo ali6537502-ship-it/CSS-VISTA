@@ -142,11 +142,22 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   await noHorizontalScroll(page, `${label} mistakes`)
   await page.screenshot({ path: `${shots}/${label}-07b-wrong-answers.png`, fullPage: true })
 
+  await page.goto(`${origin}/account/mpt`)
+  await page.getByRole('heading', { name: 'Previous MPT Question Bank' }).waitFor()
+  await page.getByRole('link', { name: 'Open Question Bank' }).click()
+  await page.getByRole('heading', { level: 1, name: 'Previous MPT Question Bank' }).waitFor()
+  await page.getByRole('link', { name: 'View Questions' }).first().click()
+  await page.getByText('Question No. 1', { exact: true }).waitFor()
+  await page.getByPlaceholder('Search Questions').fill('the')
+  await page.getByPlaceholder('Search Questions').fill('')
+  await noHorizontalScroll(page, `${label} previous question bank`)
+  await page.screenshot({ path: `${shots}/${label}-07c-previous-question-bank.png`, fullPage: true })
+
   // Section 19 widths: no horizontal scroll on the candidate's pages.
   if (label === 'mobile') {
     for (const width of [320, 360, 390, 414]) {
       await page.setViewportSize({ width, height: 800 })
-      for (const path of [`/account/mpt/results/${code}`, `/account/mpt/applications/${code}`, '/account/mpt', '/account/mpt/history', '/account/mpt/performance', '/account/mpt/mistakes']) {
+      for (const path of [`/account/mpt/results/${code}`, `/account/mpt/applications/${code}`, '/account/mpt', '/account/mpt/history', '/account/mpt/performance', '/account/mpt/mistakes', '/account/mpt/question-bank', `/account/mpt/question-bank/${mock.slug}`]) {
         await page.goto(`${origin}${path}`)
         await page.getByRole('heading', { level: 1 }).first().waitFor()
         await page.waitForLoadState('networkidle')
