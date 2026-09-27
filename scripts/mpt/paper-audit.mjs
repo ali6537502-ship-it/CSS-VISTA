@@ -37,7 +37,7 @@ function reviewFlags(q) {
   const mean = others.reduce((a, b) => a + b, 0) / others.length
   if (correct > 40 && correct > mean * 1.9) flags.push('correct option conspicuously longer than distractors')
   if (/which of the following is not|which is not|is incorrect\?|except\b/i.test(stem)) flags.push('negative stem')
-  if (/\?\s*\?|\.\.\.\s*$|\bi\.e\.\s*$/.test(stem) || /^\W/.test(stem.trim())) flags.push('punctuation defect')
+  if (/\?\s*\?|\.\.\.\s*$|\bi\.e\.\s*$/.test(stem) || /^[^\p{L}\p{N}«“‘"'(\[_…]/u.test(stem.trim())) flags.push('punctuation defect')
   if (TEMPLATE_WORDING.some((re) => re.test(stem))) flags.push('machine-template wording')
   if (/\bin the english reference\b|\bwhich rule is associated\b/i.test(stem)) flags.push('database-style prompt')
   if (new Set(q.o.map((o) => canonicalText(o))).size < 4) flags.push('options not distinct')
@@ -235,14 +235,14 @@ export function auditSeries(papers, context) {
         if (templates.has(t)) failures.push(`${q.id} repeats the wording template of ${templates.get(t)} with changed numbers`)
         templates.set(t, q.id)
       }
-      if (!context.formatFamilies.has(q.meta.pattern_family)) familiesHere.add(q.meta.pattern_family)
-      const idText = q.meta.passage_id ? null : tokenSet(['eng.sentence-correction', 'eng.error-identification', 'eng.punctuation', 'eng.sentence-structure', 'eng.modifier', 'eng.sva', 'urdu.sentence', 'urdu.translation', 'urdu.usage'].includes(q.meta.subtopic) || tokenSet(stem).size < 4 ? `${stem} ${q.o.join(' ')}` : `${stem} ${q.o[q.a]}`)
+      if (q.section === 'General Abilities' && !context.formatFamilies.has(q.meta.pattern_family)) familiesHere.add(q.meta.pattern_family)
+      const idText = q.meta.passage_id || q.section === 'General Abilities' ? null : tokenSet(['eng.sentence-correction', 'eng.error-identification', 'eng.punctuation', 'eng.sentence-structure', 'eng.modifier', 'eng.sva', 'urdu.sentence', 'urdu.translation', 'urdu.usage'].includes(q.meta.subtopic) || tokenSet(stem).size < 4 ? `${stem} ${q.o.join(' ')}` : `${stem} ${q.o[q.a]}`)
       if (idText) {
         const list = identity.get(q.meta.subtopic) ?? []
         for (const other of list) {
           const sim = jaccard(idText, other.tokens)
           if (sim >= threshold) failures.push(`${q.id} near-duplicates ${other.id} (similarity ${sim.toFixed(2)})`)
-          else if (sim >= 0.55) similar.push({ a: other.id, b: q.id, similarity: Number(sim.toFixed(2)) })
+          else if (sim >= 0.55 && q.section !== 'General Abilities') similar.push({ a: other.id, b: q.id, similarity: Number(sim.toFixed(2)) })
         }
         list.push({ id: q.id, tokens: idText })
         identity.set(q.meta.subtopic, list)

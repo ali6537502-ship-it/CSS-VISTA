@@ -1655,12 +1655,12 @@ family('ga.number-properties.lcm-word-problem', 'ga.number-properties', {
       case 'bells': if (!three()) return null; return { ans: L3, wrong: [a * b * c, a + b + c, L3 / 2, L3 * 2].filter((v) => isInt(v) && v !== L3 && v < 100000), expl: `They ring together again after LCM(${a}, ${b}, ${c}) = ${L3} minutes.` }
       case 'lights': if (!two()) return null; return { ans: L2, wrong: [a * b, gcd(a, b), a + b, L2 * 2].filter((v) => v !== L2), expl: `The lights next change together after LCM(${a}, ${b}) = ${L2} seconds.` }
       case 'rem': { if (!three() || r0 >= Math.min(a, b, c)) return null; return { ans: L3 + r0, wrong: [L3, L3 - r0, a * b * c + r0].filter((v) => v !== L3 + r0 && v < 100000), expl: `LCM(${a}, ${b}, ${c}) = ${L3}; adding the remainder ${r0} gives ${L3 + r0}.` } }
-      case 'bus': { if (!two() || L2 > 150) return null; const t = 7 * 60 + L2; return { ans: fmtTime(Math.floor(t / 60), t % 60), wrong: [7 * 60 + a * b, 7 * 60 + a + b, 7 * 60 + L2 * 2].filter((v) => v !== t && v < 24 * 60).map((v) => fmtTime(Math.floor(v / 60), v % 60)), expl: `They leave together every LCM(${a}, ${b}) = ${L2} minutes, so next at ${fmtTime(Math.floor(t / 60), t % 60)}.` } }
+      case 'bus': { if (!two() || L2 > 150) return null; const t = 7 * 60 + L2; return { ans: fmtTime(Math.floor(t / 60), t % 60), wrong: [7 * 60 + a * b, 7 * 60 + a + b, 7 * 60 + L2 * 2].filter((v) => v !== t && v < 24 * 60).map((v) => fmtTime(Math.floor(v / 60), v % 60)), expl: `They leave together every LCM(${a}, ${b}) = ${L2} minutes, so the next joint departure is at ${fmtTime(Math.floor(t / 60), t % 60)}` } }
       case 'track': { const A2 = a * 5 + 20; const B2 = b * 5 + 20; if (A2 === B2) return null; const L = lcm(A2, B2); if (L === A2 * B2 || L > 1500 || L === Math.max(A2, B2)) return null; P.A2 = A2; P.B2 = B2; return { ans: L, wrong: [A2 * B2, A2 + B2, L / 2, L * 2].filter((v) => isInt(v) && v !== L), expl: `They meet at the start after LCM(${A2}, ${B2}) = ${L} seconds.` } }
       case 'sweets': if (!three()) return null; return { ans: L3, wrong: [a * b * c, a + b + c, L3 * 2, L3 / 2].filter((v) => isInt(v) && v !== L3 && v < 100000), expl: `The number must be a multiple of ${a}, ${b} and ${c}; the least is LCM = ${L3}.` }
       case 'tiles': if (!two()) return null; return { ans: L2, wrong: [a * b, a + b, gcd(a, b), 2 * L2].filter((v) => v !== L2), expl: `The side must be a multiple of both ${a} and ${b}; the smallest is LCM = ${L2} cm.`, fmt: (v) => `${v} cm` }
       case 'short': { if (!three() || k >= Math.min(a, b, c)) return null; return { ans: L3 - k, wrong: [L3 + k, L3, L3 - 2 * k].filter((v) => v !== L3 - k && v > 0), expl: `Each remainder is ${k} short of the divisor, so the number + ${k} is a common multiple: LCM(${a}, ${b}, ${c}) − ${k} = ${L3 - k}.` } }
-      case 'flash': { if (!three() || L3 > 300 || L3 < 20 || 3600 % L3 === 0) return null; const n = Math.floor(3600 / L3); return { ans: n, wrong: [n + 1, n - 1, Math.floor(3600 / (a + b + c))].filter((v) => v !== n && v > 0), expl: `They flash together every ${L3} seconds; 3600 ÷ ${L3} = ${num(3600 / L3)}, so ${n} times in an hour.` } }
+      case 'flash': { if (!three() || L3 > 300 || L3 < 20 || 3600 % L3 === 0) return null; const n = Math.floor(3600 / L3); return { ans: n, wrong: [n + 1, n - 1, Math.floor(3600 / (a + b + c))].filter((v) => v !== n && v > 0), expl: `They flash together every ${L3} seconds; 3600 ÷ ${L3} = ${n} remainder ${3600 % L3}, so ${n} more times within the hour.` } }
       default: { if (!three() || L3 > 200) return null; const v = (Math.floor(M / L3) + 1) * L3; P.M2 = v - L3 + Math.max(1, Math.floor(L3 / 3)); return { ans: v, wrong: [v - L3, v + L3, L3].filter((w) => w !== v && w > 0), expl: `The number must be a multiple of LCM(${a}, ${b}, ${c}) = ${L3}; the first such multiple above ${P.M2} is ${v}.` } }
     }
   },
@@ -1811,7 +1811,7 @@ function truncStr(m, k, j) { const f = 10 ** (k - j); const q = Math.floor(m / f
 const sigRound = (N, s) => { const e = String(N).length - s; const f = 10 ** e; return Math.floor(N / f + 0.5) * f }
 const numVal = (t) => Number(String(t).replace(/[^0-9.]/g, ''))
 family('ga.number-properties.rounding', 'ga.number-properties', {
-  post: (sol) => ({ ...sol, wrong: sol.wrong.filter((w) => numVal(w) !== numVal(sol.ans)) }),
+  post: (sol) => { const seen = new Set([numVal(sol.ans)]); return { ...sol, wrong: sol.wrong.filter((w) => { const v = numVal(w); if (seen.has(v)) return false; seen.add(v); return true }) } },
   fmt: (v) => (typeof v === 'number' ? v.toLocaleString('en-US') : v),
   gen: (r) => ({ m: r.int(10000, 99999), N: r.int(10000, 999999) }),
   key: (p) => `${p.s}-${p.m}-${p.N}`,
@@ -2381,7 +2381,7 @@ family('ga.geometry.angles-at-a-point', 'ga.geometry', {
       case 'reflex': return { ans: 360 - a, wrong: [180 - a, 180 + a, 360 + a].filter((v) => v > 0 && v !== 360 - a), expl: `The reflex angle is 360° − ${a}° = ${360 - a}°.` }
       case 'vert': { const pp = 3; const rr = 1; const A = rr * x + s1; const qq = pp * x - A; if (qq <= 0) return null; P.qq = qq; return { ans: x, wrong: [(s1 + qq) / 4, (180 - s1 + qq) / 4, x + 5].filter((v) => isInt(v) && v > 0 && v !== x), fmt: num, expl: `Vertically opposite angles are equal: 3x − ${qq} = x + ${s1}, so 2x = ${s1 + qq} and x = ${x}.` } }
       case 'step4': { const xx = (360 - 6 * st) / 4; if (!isInt(xx)) return null; return { ans: xx + 3 * st, wrong: [xx, 90, xx + 2 * st, xx + st].filter((v) => v !== xx + 3 * st), expl: `4x + ${6 * st} = 360, so x = ${xx}°; the largest is x + ${3 * st} = ${xx + 3 * st}°.` } }
-      default: { const S = 360 - a; const x4 = 360 - S; const sm = Math.min(x4, 180 - x4); if (x4 === 90) return null; P.S = S; return { ans: sm, wrong: [Math.max(x4, 180 - x4), S - 180, 360 - S + 10].filter((v) => v > 0 && v !== sm), expl: `The fourth angle is 360 − ${S} = ${x4}°. Its neighbours are 180 − ${x4} = ${180 - x4}°, so the smallest angle is ${sm}°.` } }
+      default: { const S = 360 - a; const x4 = 360 - S; const sm = Math.min(x4, 180 - x4); if (x4 === 90) return null; P.S = S; return { ans: sm, wrong: [Math.max(x4, 180 - x4), S - 180, 90, 360 - S + 10].filter((v) => v > 0 && v !== sm), expl: `The fourth angle is 360 − ${S} = ${x4}°. Its neighbours are 180 − ${x4} = ${180 - x4}°, so the smallest angle is ${sm}°.` } }
     }
   },
   items: [
@@ -2480,7 +2480,7 @@ family('ga.mensuration.semicircle-sector', 'ga.mensuration', {
 })
 
 family('ga.mensuration.rectangle-square', 'ga.mensuration', {
-  gen: (r) => ({ l: r.int(6, 40), b: r.int(3, 25), s: r.int(4, 30), t: r.pick([20, 25, 40, 50]), c: r.int(2, 9) * 50, g: r.int(2, 5), tri: r.pick(PY) }),
+  gen: (r) => ({ l: r.int(12, 40), b: r.int(3, 11), s: r.int(4, 30), t: r.pick([20, 25, 40, 50]), c: r.int(2, 9) * 50, g: r.int(2, 5), tri: r.pick(PY) }),
   key: (p) => `${p.m}-${p.l}-${p.b}-${p.s}-${p.t}-${p.c}-${p.g}-${p.tri.join('')}`,
   fact: (p) => p.m,
   solve: (P) => {
@@ -2565,7 +2565,7 @@ family('ga.mensuration.cylinder', 'ga.mensuration', {
       case 'height': { if (!clean(V)) return null; P.V = r2(V); return { fmt: cm, ans: h, wrong: [h * 2, r2(V / (PI7 * rad)) === h ? h + 2 : r2(V / (PI7 * rad)), h + 1].filter((v) => clean(v) && v !== h && v < 1000), expl: `h = V ÷ πr² = ${num(r2(V))} ÷ (22/7 × ${num(rad)}²) = ${h} cm.` } }
       case 'radius': { if (!clean(CSA)) return null; P.C = r2(CSA); return { fmt: cm, ans: rad, wrong: [2 * rad, rad + 7, rad / 2].filter((v) => clean(v) && v !== rad), expl: `r = CSA ÷ 2πh = ${num(r2(CSA))} ÷ (2 × 22/7 × ${h}) = ${num(rad)} cm.` } }
       case 'tin': { if (half) return null; P.d = 2 * rad; if (!clean(TSA)) return null; return { fmt: cm2, ans: r2(TSA), wrong: [r2(CSA), r2(2 * PI7 * 2 * rad * (2 * rad + h)), r2(CSA + PI7 * rad * rad)].filter(clean), expl: `r = ${rad} cm; closed can = 2πr(r + h) = 2 × 22/7 × ${rad} × ${rad + h} = ${num(r2(TSA))} cm².` } }
-      case 'roller': { if (half) return null; const d = 2 * rad; const Lr = h * 10; const area = (PI7 * d * Lr * n) / 10000; if (!clean(area)) return null; P.d = d; P.Lr = Lr; P.n2 = n; return { fmt: unitF('m²'), ans: r2(area), wrong: [r2(area * 2), r2((PI7 * rad * rad * Lr * n) / 1000000), r2(area / 10)].filter((v) => clean(v) && v > 0), expl: `One revolution covers the curved surface: πdL = 22/7 × ${d} × ${Lr} = ${num(r2(PI7 * d * Lr))} cm²; × ${n} = ${num(r2(PI7 * d * Lr * n))} cm² = ${num(r2(area))} m².` } }
+      case 'roller': { if (half) return null; const d = 2 * rad; const Lr = h * 10; const area = (PI7 * d * Lr * n) / 10000; if (!clean(area)) return null; P.d = d; P.Lr = Lr; P.n2 = n; return { fmt: unitF('m²'), ans: r2(area), wrong: [r2(area * 2), r2(area / 2), r2(area * 10)].filter((v) => v > 0), expl: `One revolution covers the curved surface: πdL = 22/7 × ${d} × ${Lr} = ${num(r2(PI7 * d * Lr))} cm²; × ${n} = ${num(r2(PI7 * d * Lr * n))} cm² = ${num(r2(area))} m².` } }
       case 'equal': { if (half) return null; const d = 2 * rad; P.d = d; const Vd = PI7 * rad * rad * d; return { fmt: cm3, ans: r2(Vd), wrong: [r2(PI7 * d * d * d), r2(2 * PI7 * rad * d), r2(Vd / 2)].filter(clean), expl: `r = ${rad} cm and h = ${d} cm: V = 22/7 × ${rad}² × ${d} = ${num(r2(Vd))} cm³.` } }
       default: { const v = 3.14 * r314 * r314 * h; return { fmt: cm3, ans: r2(v), wrong: [r2(2 * 3.14 * r314 * h), r2(3.14 * r314 * h), r2(v * 2)], expl: `V = 3.14 × ${r314}² × ${h} = ${num(r2(v))} cm³.` } }
     }
@@ -2599,7 +2599,7 @@ family('ga.mensuration.cuboid-cube', 'ga.mensuration', {
       case 'cuboidSA': { const T = 2 * (l * b + b * h + h * l); return { fmt: cm2, ans: T, wrong: [l * b + b * h + h * l, l * b * h, 2 * h * (l + b)].filter((v) => v !== T), expl: `TSA = 2(lb + bh + hl) = 2(${l * b} + ${b * h} + ${h * l}) = ${T} cm².` } }
       case 'V2SA': return { fmt: cm2, ans: 6 * a * a, wrong: [a * a, 4 * a * a, 6 * a], expl: `Edge = ∛${a ** 3} = ${a} cm; surface area = 6 × ${a}² = ${6 * a * a} cm².` }
       case 'cut': { const S = s * (a % 4 + 2); P.S = S; const n = (S / s) ** 3; return { fmt: num, ans: n, wrong: [(S / s) ** 2, (S / s), S * S * S / s].filter((v) => isInt(v) && v !== n), expl: `${S} ÷ ${s} = ${S / s} small cubes fit along each edge, so ${S / s}³ = ${n} cubes.` } }
-      case 'bricks': { const L = l % 5 + 4; const H = h % 3 + 2; const T = [20, 25, 30][b % 3]; const n = (L * 100 * H * 100 * T) / (25 * 12.5 * 7.5); if (!isInt(n)) return null; P.L = L; P.H = H; P.T = T; return { fmt: num, ans: n, wrong: [n / 10, n * 2, (L * H * T) / (25 * 12.5 * 7.5) * 1000].filter((v) => isInt(v) && v !== n && v > 0), expl: `Wall volume = ${L * 100} × ${H * 100} × ${T} cm³ = ${num(L * 100 * H * 100 * T)} cm³; each brick is 25 × 12.5 × 7.5 = ${num(25 * 12.5 * 7.5)} cm³; ${num(L * 100 * H * 100 * T)} ÷ ${num(25 * 12.5 * 7.5)} = ${num(n)}.` } }
+      case 'bricks': { const L = l % 5 + 4; const H = h % 3 + 2; const T = [20, 25, 30][b % 3]; const n = (L * 100 * H * 100 * T) / (25 * 12.5 * 7.5); if (!isInt(n)) return null; P.L = L; P.H = H; P.T = T; return { fmt: num, ans: n, wrong: [n / 10, n * 2, n / 2, n * 10].filter((v) => isInt(v) && v !== n && v > 0), expl: `Wall volume = ${L * 100} × ${H * 100} × ${T} cm³ = ${num(L * 100 * H * 100 * T)} cm³; each brick is 25 × 12.5 × 7.5 = ${num(25 * 12.5 * 7.5)} cm³; ${num(L * 100 * H * 100 * T)} ÷ ${num(25 * 12.5 * 7.5)} = ${num(n)}.` } }
       case 'tank': { const L = l % 6 + 1; const B = b % 4 + 1; const H = h % 3 + 1; P.L = L; P.B = B; P.H = H; const Lt = L * B * H * 1000; return { fmt: (v) => `${num(v)} litres`, ans: Lt, wrong: [L * B * H, L * B * H * 100, L * B * H * 10000], expl: `Volume = ${L} × ${B} × ${H} = ${L * B * H} m³ = ${num(Lt)} litres (1 m³ = 1000 litres).` } }
       case 'rod': { const [x, y, z, d] = q.map((v) => v * sc); P.box = [x, y, z]; return { fmt: unitF('cm'), ans: d, wrong: [x + y + z, Math.max(x, y, z), Math.round(Math.sqrt(y * y + z * z)) === d ? d + 1 : Math.round(Math.sqrt(y * y + z * z))].filter((v) => v !== d), expl: `Longest rod = space diagonal = √(${x}² + ${y}² + ${z}²) = √${d * d} = ${d} cm.` } }
       default: { const W = 2 * h * (l + b); return { fmt: unitF('m²'), ans: W, wrong: [2 * (l * b + b * h + h * l), h * (l + b), l * b * h].filter((v) => v !== W), expl: `Area of four walls = 2h(l + b) = 2 × ${h} × (${l} + ${b}) = ${W} m².` } }
@@ -2657,7 +2657,7 @@ family('ga.mensuration.path-border', 'ga.mensuration', {
     const m2 = unitF('m²'); const cm2 = unitF('cm²')
     switch (P.m) {
       case 'outside': { const A = (l + 2 * w) * (b + 2 * w) - l * b; return { fmt: m2, ans: A, wrong: [(l + w) * (b + w) - l * b, 2 * w * (l + b), A + 4 * w * w].filter((v) => v !== A), expl: `Outer rectangle ${l + 2 * w} × ${b + 2 * w} = ${(l + 2 * w) * (b + 2 * w)} m²; minus the park ${l * b} m² leaves ${A} m².` } }
-      case 'inside': { if (b <= 2 * w + 2) return null; const A = l * b - (l - 2 * w) * (b - 2 * w); return { fmt: m2, ans: A, wrong: [l * b - (l - w) * (b - w), 2 * w * (l + b), A + 4 * w * w].filter((v) => v !== A), expl: `Inner rectangle ${l - 2 * w} × ${b - 2 * w} = ${(l - 2 * w) * (b - 2 * w)} m²; path = ${l * b} − ${(l - 2 * w) * (b - 2 * w)} = ${A} m².` } }
+      case 'inside': { if (b <= 2 * w + 2) return null; const A = l * b - (l - 2 * w) * (b - 2 * w); return { fmt: m2, ans: A, wrong: [l * b - (l - w) * (b - w), 2 * w * (l + b), (l - 2 * w) * (b - 2 * w), A + 4 * w * w].filter((v) => v !== A), expl: `Inner rectangle ${l - 2 * w} × ${b - 2 * w} = ${(l - 2 * w) * (b - 2 * w)} m²; path = ${l * b} − ${(l - 2 * w) * (b - 2 * w)} = ${A} m².` } }
       case 'cross': { const A = w * (l + b) - w * w; return { fmt: m2, ans: A, wrong: [w * (l + b), w * (l + b) + w * w, 2 * w * (l + b)].filter((v) => v !== A), expl: `Roads: ${w} × ${l} + ${w} × ${b} = ${w * (l + b)} m², but the central square ${w} × ${w} is counted twice: ${A} m².` } }
       case 'square': { const A = (s + 2 * w) ** 2 - s * s; return { fmt: m2, ans: A, wrong: [4 * w * s, (s + w) ** 2 - s * s, (s + 2 * w) ** 2].filter((v) => v !== A), expl: `(${s} + ${2 * w})² − ${s}² = ${(s + 2 * w) ** 2} − ${s * s} = ${A} m².` } }
       case 'picture': { const A = (l + 2 * w) * (b + 2 * w) - l * b; return { fmt: cm2, ans: A, wrong: [2 * w * (l + b), (l + 2 * w) * (b + 2 * w), (l + w) * (b + w) - l * b].filter((v) => v !== A), expl: `Mounted size ${l + 2 * w} × ${b + 2 * w} = ${(l + 2 * w) * (b + 2 * w)} cm²; border = that − ${l * b} = ${A} cm².` } }
@@ -2692,7 +2692,7 @@ family('ga.mensuration.parallelogram-trapezium', 'ga.mensuration', {
       case 'trapH': if (!isInt(T) || a === b) return null; P.T = T; return { fmt: cm, ans: h, wrong: [2 * h, T / (a + b) === h ? h + 2 : T / (a + b), h + 1].filter((v) => isInt(v) && v !== h), expl: `h = 2A ÷ (a + b) = ${2 * T} ÷ ${a + b} = ${h} cm.` }
       case 'rhombus': return { fmt: cm2, ans: (d1 * d2) / 2, wrong: [d1 * d2, d1 + d2, (d1 * d2) / 4].filter(isInt), expl: `Area of a rhombus = ½ × d₁ × d₂ = ½ × ${d1} × ${d2} = ${(d1 * d2) / 2} cm².` }
       case 'paraH': P.A = a * h; return { fmt: cm, ans: h, wrong: [2 * h, a, h + 2].filter((v) => v !== h), expl: `Height = area ÷ base = ${a * h} ÷ ${a} = ${h} cm.` }
-      case 'rhombusD': { if (d1 === d2) return null; P.A = (d1 * d2) / 2; return { fmt: cm, ans: d2, wrong: [d2 / 2, P.A / d1, 2 * d2].filter((v) => isInt(v) && v !== d2), expl: `½ × ${d1} × d = ${P.A}, so d = ${2 * P.A} ÷ ${d1} = ${d2} cm.` } }
+      case 'rhombusD': { if (d1 === d2) return null; P.A = (d1 * d2) / 2; return { fmt: cm, ans: d2, wrong: [d2 / 2, P.A / d1, 2 * d2, d1, P.A - d1].filter((v) => isInt(v) && v > 0 && v !== d2), expl: `½ × ${d1} × d = ${P.A}, so d = ${2 * P.A} ÷ ${d1} = ${d2} cm.` } }
       case 'ratio': { const u = h % 5 + 2; const A1 = q[0] * u; const B1 = q[1] * u; const A = ((A1 + B1) * h) / 2; if (!isInt(A)) return null; P.A = A; return { fmt: cm, ans: B1, wrong: [A1, B1 * 2, (2 * A) / h].filter((v) => isInt(v) && v !== B1), expl: `½(${q[0]}k + ${q[1]}k) × ${h} = ${A} gives ${q[0] + q[1]}k = ${(2 * A) / h}, so k = ${u} and the longer side is ${B1} cm.` } }
       default: { if (!isInt(T) || a === b) return null; return { fmt: (v) => `Rs ${num(v)}`, ans: T * c, wrong: [(a + b) * h * c, T * c / 2, (a + b + h) * c].filter(isInt), expl: `Area = ½(${a} + ${b}) × ${h} = ${T} m²; cost = ${T} × ${c} = Rs ${num(T * c)}.` } }
     }
@@ -2732,6 +2732,530 @@ family('ga.mensuration.scale-change', 'ga.mensuration', {
     [3, (p) => `If each edge of a cube is increased by ${p.p}%, by what percentage does its surface area increase?`, { m: 'cube' }],
     [2, (p) => `The radius of a circle is increased from ${p.ra} cm to ${p.rb} cm. How many times as large does its area become?`, { m: 'circle' }],
     [2, (p) => `The edges of two cubes are in the ratio ${p.pr.join(' : ')}. What is the ratio of their volumes?`, { m: 'cubes' }],
+  ],
+})
+
+// ===========================================================================
+// ga.data — 90   (small inline tables and lists; answers computed here)
+// ===========================================================================
+function listMean(r, n, lo, hi) {
+  for (;;) { const v = Array.from({ length: n }, () => r.int(lo, hi)); const s = sum(v); const adj = v[n - 1] - (s % n); if (adj >= lo && adj <= hi) { v[n - 1] = adj; return v } }
+}
+const median = (arr) => { const s = [...arr].sort((a, b) => a - b); const n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2 }
+const meanOf = (arr) => sum(arr) / arr.length
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const tbl = (labels, vals, unit = '') => labels.map((l, i) => `${l} ${num(vals[i])}${unit}`).join(', ')
+const dec = (v) => r2(v)
+
+family('ga.data.mean', 'ga.data', {
+  gen: (r, x) => ({ v5: listMean(r, 5, 10, 30), s5: listMean(r, 5, 8, 36), runs: listMean(r, 5, 20, 90), temp: listMean(r, 6, 14, 38), n: r.int(5, 20), S: r.int(3, 30), k: r.int(5, 25), a: 2 * r.int(2, 20), vis: listMean(r, 4, 120, 480), rain: listMean(r, 5, 20, 140), ages: listMean(r, 5, 5, 60) }),
+  key: (p) => `${p.m}-${JSON.stringify(p[{ marks: 'v5', sales: 's5', runs: 'runs', temp: 'temp', sumn: 'S', ages: 'ages', weeks: 'vis', natural: 'k', even: 'a', rain: 'rain' }[p.m]])}${p.m === 'sumn' ? `-${p.n}` : ''}${p.m === 'even' ? `-${p.k}` : ''}`,
+  solve: (P) => {
+    const std = (arr) => { const m = meanOf(arr); const n = arr.length; return { ans: m, wrong: [median(arr), (Math.max(...arr) + Math.min(...arr)) / 2, sum(arr) / (n - 1), sum(arr) / (n + 1), m + 1, m - 1].filter((v) => clean(v) && v !== m), expl: `Mean = (${arr.join(' + ')}) ÷ ${n} = ${sum(arr)} ÷ ${n} = ${num(m)}.` } }
+    switch (P.m) {
+      case 'marks': return std(P.v5)
+      case 'sales': return std(P.s5)
+      case 'runs': return std(P.runs)
+      case 'temp': return { ...std(P.temp), fmt: (v) => `${num(v)}°C` }
+      case 'sumn': { const n = P.n; const S = n * P.S; P.Stot = S; return { ans: P.S, wrong: [S, n, S / 2].filter((v) => isInt(v) && v !== P.S), expl: `Mean = sum ÷ number of values = ${S} ÷ ${n} = ${P.S}.` } }
+      case 'ages': return { ...std(P.ages), fmt: (v) => `${num(v)} years` }
+      case 'weeks': return std(P.vis)
+      case 'natural': { const k = P.k; return { ans: (k + 1) / 2, wrong: [k / 2, (k * (k + 1)) / 2, (k - 1) / 2].filter((v) => v !== (k + 1) / 2), expl: `1 + 2 + … + ${k} = ${(k * (k + 1)) / 2}; divided by ${k} this gives ${num((k + 1) / 2)}.` } }
+      case 'even': { const a = P.a; const b = a + 2 * P.k; P.b = b; return { ans: (a + b) / 2, wrong: [(b - a) / 2, (a + b) / 2 + 1, b / 2].filter((v) => v !== (a + b) / 2), expl: `The even numbers from ${a} to ${b} are equally spaced, so their mean is the middle value (${a} + ${b}) ÷ 2 = ${(a + b) / 2}.` } }
+      default: return { ...std(P.rain), fmt: (v) => `${num(v)} mm` }
+    }
+  },
+  items: [
+    [1, (p) => `The marks of five students are ${p.v5.slice(0, 4).join(', ')} and ${p.v5[4]}. What is their mean?`, { m: 'marks' }],
+    [1, (p) => `Sales (units): ${tbl(DAYS.slice(0, 5), p.s5)}. What is the average number of units sold per day?`, { m: 'sales' }],
+    [1, (p) => `A cricketer scored ${p.runs.slice(0, 4).join(', ')} and ${p.runs[4]} runs in five innings. What was his average score?`, { m: 'runs' }],
+    [1, (p) => `The noon temperatures on six days were ${p.temp.map((v) => `${v}°C`).join(', ')}. Find the mean temperature.`, { m: 'temp' }],
+    [1, (p) => `If the sum of all ${p.n} values in a data set is ${p.Stot}, what is their mean?`, { m: 'sumn' }],
+    [1, (p) => `The ages of five members of a family are ${p.ages.slice(0, 4).join(', ')} and ${p.ages[4]} years. What is their mean age?`, { m: 'ages' }],
+    [2, (p) => `Visitors to a museum: ${tbl(['Week 1', 'Week 2', 'Week 3', 'Week 4'], p.vis)}. What was the average number of visitors per week?`, { m: 'weeks' }],
+    [1, (p) => `What is the mean of the first ${p.k} natural numbers?`, { m: 'natural' }],
+    [2, (p) => `What is the mean of all the even numbers from ${p.a} to ${p.b}, inclusive?`, { m: 'even' }],
+    [1, (p) => `Rainfall (mm): ${tbl(['May', 'Jun', 'Jul', 'Aug', 'Sep'], p.rain)}. What was the mean monthly rainfall?`, { m: 'rain' }],
+  ],
+})
+
+family('ga.data.median', 'ga.data', {
+  gen: (r) => ({ o5: r.sample([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 21], 5), e6: r.sample([4, 5, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 22, 25], 6), h7: r.sample([22, 25, 28, 30, 31, 34, 36, 38, 40, 42, 45], 7), w8: r.sample([12, 14, 15, 16, 18, 19, 20, 22, 24, 25, 27], 8), g8: Array.from({ length: 8 }, () => r.int(0, 6)), t: r.int(12, 40), step: r.int(2, 5), n: 2 * r.int(3, 12) + 1, v: r.int(1, 50) }),
+  key: (p) => `${p.m}-${JSON.stringify([p.o5, p.e6, p.h7, p.w8, p.g8][['odd', 'even', 'heights', 'wages', 'goals'].indexOf(p.m)] ?? [p.t, p.step, p.n, p.v])}`,
+  solve: (P) => {
+    const opts = (arr, extra = []) => { const md = median(arr); const mid = arr.length % 2 ? arr[(arr.length - 1) / 2] : (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2; return { ans: md, wrong: [mid, meanOf(arr), ...extra, md + 1, md - 1].filter((v) => clean(v) && v !== md) } }
+    const sorted = (a) => [...a].sort((x, y) => x - y)
+    switch (P.m) {
+      case 'odd': { const o = opts(P.o5); return { ...o, expl: `In order: ${sorted(P.o5).join(', ')}; the middle value is ${median(P.o5)}.` } }
+      case 'even': { const o = opts(P.e6, [sorted(P.e6)[2], sorted(P.e6)[3]]); return { ...o, expl: `In order: ${sorted(P.e6).join(', ')}; median = (${sorted(P.e6)[2]} + ${sorted(P.e6)[3]}) ÷ 2 = ${num(median(P.e6))}.` } }
+      case 'heights': { const o = opts(P.h7); return { ...o, fmt: (v) => `${num(v)} cm`, expl: `Arranged: ${sorted(P.h7).join(', ')}; the 4th value, ${median(P.h7)} cm, is the median.` } }
+      case 'wages': { const s = sorted(P.w8); const o = opts(P.w8, [s[3], s[4]]); return { ...o, expl: `Arranged: ${s.join(', ')}; median = (${s[3]} + ${s[4]}) ÷ 2 = ${num(median(P.w8))}.` } }
+      case 'goals': { const s = sorted(P.g8); if (s[3] === s[4]) return null; const o = opts(P.g8, [s[3], s[4]]); return { ...o, expl: `Arranged: ${s.join(', ')}; median = (${s[3]} + ${s[4]}) ÷ 2 = ${num(median(P.g8))}.` } }
+      case 'findx': { const { t, step } = P; const a = [t, t + step, t + 2 * step]; const x = t + 4 * step; const md = (a[2] + x) / 2; if (!isInt(md)) return null; P.seq = [...a, 'x', x + step, x + 2 * step]; P.md = md; return { ans: x, wrong: [md, 2 * md - a[1], x + step, a[2], x + 1].filter((v) => v !== x), expl: `With six values in order the median is (${a[2]} + x) ÷ 2 = ${md}, so x = ${2 * md} − ${a[2]} = ${x}.` } }
+      case 'add': { const base = sorted(P.o5); const v = P.v; if (base.includes(v)) return null; const nw = [...base, v]; const md = median(nw); P.base = base; return { ans: md, wrong: [median(base), meanOf(nw), v, md + 1].filter((w) => clean(w) && w !== md), expl: `The six values in order are ${sorted(nw).join(', ')}; the median is the mean of the 3rd and 4th: ${num(md)}.` } }
+      case 'oddn': { const n = P.n; return { ans: n, wrong: [n + 1, 2 * n - 1, (n + 1) / 2].filter((v) => v !== n), expl: `The first ${n} odd numbers run from 1 to ${2 * n - 1}; the middle one (the ${(n + 1) / 2}th) is ${n}.` } }
+      case 'meanmed': { const d = sorted(P.h7).slice(0, 5); const mn = meanOf(d); if (!isInt(mn)) return null; P.d5 = r0shuffle(d); const md = median(d); const g = Math.abs(mn - md); if (g === 0) return null; return { ans: g, wrong: [mn, md, g + 2].filter((v) => v !== g), expl: `Mean = ${sum(d)} ÷ 5 = ${mn}; median = ${md}; difference = ${g}.` } }
+      default: { const { t, step } = P; const a = t; const b = t + step; const c = t + 5 * step; const d = c + step; const x4 = a + b + c + d; if (x4 % 4) return null; const x = x4 / 4; if (x <= b || x >= c) return null; P.abcd = [a, b, c, d]; return { ans: x, wrong: [(a + b + c + d) / 5, x + 1, x - 1, x + 2].filter((v) => isInt(v) && v !== x), expl: `The median is x and the mean is (${a + b + c + d} + x) ÷ 5. Setting them equal: 5x = ${a + b + c + d} + x, so x = ${x}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the median of ${p.o5.join(', ')}.`, { m: 'odd' }],
+    [2, (p) => `What is the median of the data ${p.e6.join(', ')}?`, { m: 'even' }],
+    [1, (p) => `The heights of seven plants, in cm, are ${p.h7.join(', ')}. What is the median height?`, { m: 'heights' }],
+    [2, (p) => `Daily wages (Rs hundred) of eight workers: ${p.w8.join(', ')}. What is the median wage?`, { m: 'wages' }],
+    [2, (p) => `Goals scored by a team in eight matches: ${p.g8.join(', ')}. Find the median number of goals.`, { m: 'goals' }],
+    [2, (p) => `The six observations ${p.seq.join(', ')} are in increasing order and their median is ${p.md}. Find x.`, { m: 'findx' }],
+    [3, (p) => `If the value ${p.v} is added to the data ${p.base.join(', ')}, what is the new median?`, { m: 'add' }],
+    [2, (p) => `What is the median of the first ${p.n} odd natural numbers?`, { m: 'oddn' }],
+    [3, (p) => `For the data ${p.d5.join(', ')}, what is the difference between the mean and the median?`, { m: 'meanmed' }],
+    [3, (p) => `The numbers ${p.abcd[0]}, ${p.abcd[1]}, x, ${p.abcd[2]}, ${p.abcd[3]} are in increasing order, and their median equals their mean. Find x.`, { m: 'medmean' }],
+  ],
+})
+function r0shuffle(arr) { const c = [...arr]; return [c[2], c[0], c[4], c[1], c[3]] }
+
+family('ga.data.mode', 'ga.data', {
+  gen: (r) => ({ vals: r.sample([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 4), c: r.int(2, 9), pick: r.int(0, 999) }),
+  key: (p) => `${p.m}-${p.vals.join('.')}-${p.c}-${p.pick}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { vals, c, pick } = P
+    const rr = makeRng(`mode-${P.m}-${pick}`)
+    const [A, B, C, D] = vals
+    switch (P.m) {
+      case 'list': { const data = rr.shuffle([A, A, A, B, B, C, D]); P.data = data; return { ans: A, wrong: [B, meanOf(data), median(data), C, D].filter((v) => clean(v) && v !== A), expl: `${A} occurs three times, more often than any other value, so the mode is ${A}.` } }
+      case 'shoe': { const sz = [6, 7, 8, 9, 10]; const top = rr.pick(sz); const data = rr.shuffle([top, top, top, top, ...rr.sample(sz.filter((s) => s !== top), 3), ...rr.sample(sz.filter((s) => s !== top), 2)]); const cnt = {}; data.forEach((v) => { cnt[v] = (cnt[v] ?? 0) + 1 }); if (Object.entries(cnt).some(([k, v]) => Number(k) !== top && v >= 4)) return null; P.data = data; return { ans: top, wrong: sz.filter((s) => s !== top).sort((x, y) => (cnt[y] ?? 0) - (cnt[x] ?? 0)).slice(0, 3), expl: `Size ${top} appears ${cnt[top]} times, more than any other size.` } }
+      case 'findx': { const base = rr.shuffle([A, A, B, B, C, D]); P.data = base; return { ans: A, wrong: [B, C, D], expl: `${A} and ${B} each appear twice; only x = ${A} makes ${A} the single most frequent value.`, target: A } }
+      case 'freq': { const f = rr.shuffle([rr.int(2, 4), rr.int(5, 7), rr.int(8, 12), rr.int(3, 6)]); const vs = [1, 2, 3, 4]; if (new Set(f).size < 4) return null; const mx = vs[f.indexOf(Math.max(...f))]; P.f = f; return { ans: mx, wrong: [Math.max(...f), ...vs.filter((v) => v !== mx)].filter((v) => v !== mx), expl: `The value with the highest frequency (${Math.max(...f)}) is ${mx}, so the mode is ${mx}.` } }
+      case 'shift': { const data = rr.shuffle([A, A, A, B, B, C, D]); P.data = data; return { ans: A + c, wrong: [A, A * c, B + c].filter((v) => v !== A + c), expl: `Adding ${c} to every value shifts the mode by ${c}: ${A} + ${c} = ${A + c}.` } }
+      default: { const groups = ['A', 'B', 'AB', 'O']; const top = rr.pick(groups); const others = groups.filter((g) => g !== top); const data = rr.shuffle([top, top, top, top, top, others[0], others[0], others[0], others[1], others[1], others[2], others[1]]); const cnt = {}; data.forEach((g) => { cnt[g] = (cnt[g] ?? 0) + 1 }); P.data = data; return { ans: top, wrong: others, expl: `Group ${top} occurs ${cnt[top]} times, more than any other group.` } }
+    }
+  },
+  items: [
+    [1, (p) => `Find the mode of ${p.data.join(', ')}.`, { m: 'list' }],
+    [1, (p) => `Shoe sizes sold in a day: ${p.data.join(', ')}. What is the modal size?`, { m: 'shoe' }],
+    [2, (p) => `The mode of the data ${p.data.join(', ')}, x is ${p.vals[0]}. Which value must x take?`, { m: 'findx' }],
+    [1, (p) => `Value: 1, 2, 3, 4; Frequency: ${p.f.join(', ')}. What is the mode?`, { m: 'freq' }],
+    [2, (p) => `The data ${p.data.join(', ')} is changed by adding ${p.c} to every value. What is the mode of the new data?`, { m: 'shift' }],
+    [1, (p) => `The blood groups of twelve donors were ${p.data.join(', ')}. Which blood group is the mode?`, { m: 'blood' }],
+  ],
+})
+
+family('ga.data.range', 'ga.data', {
+  gen: (r) => ({ v6: r.sample([12, 18, 23, 29, 34, 41, 45, 52, 58, 67, 73, 81], 6), a: r.int(3, 40), R: r.int(10, 80), k: r.int(2, 5), c: r.int(3, 15), t7: Array.from({ length: 7 }, () => r.int(-6, 9)) }),
+  key: (p) => `${p.m}-${p.v6.join('.')}-${p.a}-${p.R}-${p.k}-${p.c}-${p.t7.join('.')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { v6, a, R, k, c, t7 } = P
+    switch (P.m) {
+      case 'list': { const mx = Math.max(...v6); const mn = Math.min(...v6); return { ans: mx - mn, wrong: [v6[v6.length - 1] - v6[0] > 0 && v6[v6.length - 1] - v6[0] !== mx - mn ? v6[v6.length - 1] - v6[0] : mx + mn, mx, mx + mn].filter((v) => v > 0 && v !== mx - mn), expl: `Range = largest − smallest = ${mx} − ${mn} = ${mx - mn}.` } }
+      case 'max': return { ans: a + R, wrong: [R - a > 0 ? R - a : 2 * R, R, a + 2 * R].filter((v) => v !== a + R), expl: `Range = max − min, so max = ${a} + ${R} = ${a + R}.` }
+      case 'min': { const M = a + R; P.M = M; return { ans: a, wrong: [M + R, R, Math.round(M / 2), a + 1].filter((v) => v !== a && v > 0), expl: `Smallest = largest − range = ${M} − ${R} = ${a}.` } }
+      case 'temps': { const mx = Math.max(...t7); const mn = Math.min(...t7); if (mn >= 0) return null; return { fmt: (v) => `${num(v)}°C`, ans: mx - mn, wrong: [mx + mn, mx, Math.abs(mn)].filter((v) => v > 0 && v !== mx - mn), expl: `Range = ${mx} − (${num(mn)}) = ${mx - mn}°C.` } }
+      case 'mult': return { ans: k * R, wrong: [R, R + k, k * R + k].filter((v) => v !== k * R), expl: `Multiplying every value by ${k} multiplies the gap between the largest and smallest by ${k}: ${k} × ${R} = ${k * R}.` }
+      default: return { ans: R, wrong: [R + c, R + 2 * c, R - c].filter((v) => v > 0 && v !== R), expl: `Adding ${c} to every value moves the largest and smallest by the same amount, so the range stays ${R}.` }
+    }
+  },
+  items: [
+    [1, (p) => `What is the range of ${p.v6.join(', ')}?`, { m: 'list' }],
+    [1, (p) => `If the minimum value in a set is ${p.a} and its range is ${p.R}, what is the maximum value?`, { m: 'max' }],
+    [1, (p) => `The range of a data set is ${p.R} and its largest value is ${p.M}. What is its smallest value?`, { m: 'min' }],
+    [2, (p) => `Minimum temperatures (°C) over a week were ${p.t7.map(num).join(', ')}. What is the range?`, { m: 'temps' }],
+    [2, (p) => `A data set has a range of ${p.R}. If every value is multiplied by ${p.k}, what is the new range?`, { m: 'mult' }],
+    [2, (p) => `A data set has a range of ${p.R}. If ${p.c} is added to every value, what is the new range?`, { m: 'add' }],
+  ],
+})
+/** Split `total` into k positive parts (multiples of `unit`) with the first part fixed. */
+function splitRest(r, rest, k, unit) { for (;;) { const cuts = Array.from({ length: k - 1 }, () => r.int(1, rest / unit - 1)).sort((a, b) => a - b); const parts = []; let prev = 0; for (const c of [...cuts, rest / unit]) { parts.push((c - prev) * unit); prev = c } if (parts.every((v) => v > 0) && new Set(parts).size === parts.length) return parts } }
+family('ga.data.table-percentage', 'ga.data', {
+  gen: (r) => { const T = r.pick([50, 80, 100, 120, 150, 200, 250, 400, 500]); const pct = r.pick([10, 15, 20, 25, 30, 35, 40, 45]); return { T, pct, u: r.pick([1, 10, 100, 1000]), pick: r.int(0, 99999) } },
+  key: (p) => `${p.m}-${p.T}-${p.pct}-${p.u}-${p.pick}`,
+  fact: (p) => p.m,
+  fmt: (v) => (typeof v === 'number' ? `${num(v)}%` : v),
+  solve: (P) => {
+    const { T, pct, u, pick } = P
+    const rr = makeRng(`tp-${P.m}-${pick}`)
+    const tgt = (T * pct) / 100
+    if (!isInt(tgt)) return null
+    const mk = (k, idx) => { const rest = splitRest(rr, T - tgt, k - 1, T % 10 === 0 && (T - tgt) % 5 === 0 ? 5 : 1); const vals = [...rest]; vals.splice(idx, 0, tgt); if (new Set(vals).size !== vals.length) return null; return vals }
+    const std = (vals, idx) => ({ ans: pct, wrong: [Math.round((vals[idx] / (T - vals[idx])) * 100) === pct ? pct + 5 : Math.round((vals[idx] / (T - vals[idx])) * 100), vals[idx] / u >= 100 ? pct + 10 : vals[idx], 100 - pct, pct / 2].filter((v) => isInt(v) && v > 0 && v !== pct) })
+    switch (P.m) {
+      case 'sales': { const v = mk(5, 3); if (!v) return null; P.v = v; return { ...std(v, 3), expl: `Total = ${T}; Thursday = ${tgt}; ${tgt} ÷ ${T} × 100 = ${pct}%.` } }
+      case 'faculty': { const v0 = mk(4, 1); if (!v0) return null; const v = v0.map((x) => x * 10); P.v = v; return { ...std(v.map((x) => x / 10), 1), expl: `Total = ${T * 10}; Science = ${tgt * 10}; ${tgt * 10} ÷ ${T * 10} × 100 = ${pct}%.` } }
+      case 'budget': { const v0 = mk(4, 1); if (!v0) return null; const v = v0.map((x) => x * 100); P.v = v; return { ...std(v.map((x) => x / 100), 1), expl: `Total spending = Rs ${num(T * 100)}; rent = Rs ${num(tgt * 100)}; share = ${pct}%.` } }
+      case 'votes': { const v0 = mk(4, 1); if (!v0) return null; const v = v0.map((x) => x * 20); P.v = v; return { ...std(v.map((x) => x / 20), 1), expl: `Total votes = ${num(T * 20)}; B received ${num(tgt * 20)}, i.e. ${pct}%.` } }
+      case 'pie': { const v = mk(4, 2); if (!v) return null; P.v = v; const ang = (pct * 360) / 100; return { fmt: degFmt, ans: ang, wrong: [pct, (pct * 180) / 100, ang + 18].filter((x) => isInt(x) && x !== ang), expl: `Education's share is ${tgt} ÷ ${T} = ${pct}%; its sector angle is ${pct}% of 360° = ${ang}°.` } }
+      case 'fruit': { const v = mk(3, 1); if (!v) return null; P.v = v; return { ...std(v, 1), expl: `Total = ${T} kg; mangoes = ${tgt} kg; ${tgt} ÷ ${T} × 100 = ${pct}%.` } }
+      case 'prod': { const v = mk(4, 3); if (!v) return null; P.v = v.map((x) => x * 5); return { ...std(v, 3), expl: `Total = ${T * 5} tonnes; 2024 = ${tgt * 5} tonnes; ${tgt * 5} ÷ ${T * 5} × 100 = ${pct}%.` } }
+      case 'grades': { const v = mk(4, 0); if (!v) return null; const ab = v[0] + v[1]; const pp = (ab / T) * 100; if (!isInt(pp)) return null; P.v = v; return { ans: pp, wrong: [pct, (v[1] / T) * 100, 100 - pp].filter((x) => isInt(x) && x !== pp), expl: `Grades A and B: ${v[0]} + ${v[1]} = ${ab} of ${T} students = ${pp}%.` } }
+      case 'sport': { const v = mk(4, 0); if (!v) return null; const d = v[0] - v[2]; if (d <= 0) return null; const pp = (d / T) * 100; if (!isInt(pp)) return null; P.v = v; return { ans: pp, wrong: [d, pct, ((v[2] / T) * 100)].filter((x) => isInt(x) && x !== pp), expl: `Cricket − football = ${v[0]} − ${v[2]} = ${d}; as a share of all ${T} respondents that is ${pp}%.` } }
+      default: { const v = mk(4, 2); if (!v) return null; P.v = v; const ans = fr(tgt, T); return { fmt: (x) => x, ans, wrong: [fr(tgt, T - tgt), fr(T - tgt, T), fr(v[0], T)].filter((t) => t !== ans), expl: `Transport ${tgt} out of a total of ${T}: ${tgt}/${T} = ${ans}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `Sales (units): ${tbl(DAYS.slice(0, 5), p.v)}. What percentage of the week's sales were made on Thursday?`, { m: 'sales' }],
+    [2, (p) => `Students by faculty: ${tbl(['Arts', 'Science', 'Commerce', 'Engineering'], p.v)}. What percentage of the students study Science?`, { m: 'faculty' }],
+    [2, (p) => `A family's monthly spending (Rs): ${tbl(['Food', 'Rent', 'Education', 'Other'], p.v)}. What percentage of the spending goes on rent?`, { m: 'budget' }],
+    [2, (p) => `Votes polled: ${tbl(['Candidate A', 'Candidate B', 'Candidate C', 'Candidate D'], p.v)}. What percentage of the votes did Candidate B receive?`, { m: 'votes' }],
+    [2, (p) => `A budget (Rs crore) is shown in a pie chart: ${tbl(['Health', 'Defence', 'Education', 'Other'], p.v)}. What is the central angle of the Education sector?`, { m: 'pie' }],
+    [2, (p) => `Fruit sold (kg): ${tbl(['Apples', 'Mangoes', 'Bananas'], p.v)}. Mangoes make up what percentage of the fruit sold?`, { m: 'fruit' }],
+    [3, (p) => `Production (tonnes): ${tbl(['2021', '2022', '2023', '2024'], p.v)}. What percentage of the four-year total was produced in 2024?`, { m: 'prod' }],
+    [2, (p) => `Grades in a class: ${tbl(['A', 'B', 'C', 'D'], p.v)}. What percentage of the students got grade A or B?`, { m: 'grades' }],
+    [3, (p) => `Favourite sport of respondents: ${tbl(['Cricket', 'Hockey', 'Football', 'Squash'], p.v)}. The number choosing cricket exceeds the number choosing football by what percentage of all respondents?`, { m: 'sport' }],
+    [2, (p) => `Monthly costs of a business (Rs thousand): ${tbl(['Salaries', 'Rent', 'Transport', 'Utilities'], p.v)}. What fraction of the total is spent on transport?`, { m: 'fraction' }],
+  ],
+})
+
+family('ga.data.table-change', 'ga.data', {
+  gen: (r) => ({ base: r.pick([20, 40, 50, 60, 80, 120, 160, 200, 250]), pct: r.pick([10, 15, 20, 25, 30, 40, 50, 60]), pick: r.int(0, 99999) }),
+  key: (p) => `${p.m}-${p.base}-${p.pct}-${p.pick}`,
+  fact: (p) => p.m,
+  fmt: (v) => (typeof v === 'number' ? `${num(v)}%` : v),
+  solve: (P) => {
+    const { base, pct, pick } = P
+    const rr = makeRng(`tc-${P.m}-${pick}`)
+    const up = (base * (100 + pct)) / 100; const down = (base * (100 - pct)) / 100
+    const wr = (a, b, ans) => [Math.round(((b - a) / b) * 1000) / 10, Math.abs(b - a), 100 + ans, ans + 5].filter((v) => v !== ans && v > 0)
+    switch (P.m) {
+      case 'inc': { if (!isInt(up)) return null; P.v = [base, up, up - rr.int(1, 5)]; return { ans: pct, wrong: wr(base, up, pct), expl: `Increase = ${up} − ${base} = ${up - base}; ${up - base} ÷ ${base} × 100 = ${pct}%.` } }
+      case 'pop': { const b = base * 1000; const u = (b * (100 + pct)) / 100; P.b = b; P.u = u; return { ans: pct, wrong: wr(b, u, pct).filter((v) => v < 1000), expl: `Increase = ${num(u - b)}; ${num(u - b)} ÷ ${num(b)} × 100 = ${pct}%.` } }
+      case 'dec': { if (!isInt(down)) return null; P.v = [base, down]; return { ans: pct, wrong: [Math.round(((base - down) / down) * 1000) / 10, base - down, 100 - pct].filter((v) => v !== pct && v > 0), expl: `Decrease = ${base} − ${down} = ${base - down}; ${base - down} ÷ ${base} × 100 = ${pct}%.` } }
+      case 'which': { const y = [2019, 2020, 2021, 2022, 2023]; const v = [base]; const incs = rr.shuffle([2, 4, 6, 9]).map((x) => x * (base / 20)); for (const d of incs) v.push(v[v.length - 1] + d); if (!v.every(isInt)) return null; P.v = v; const bi = incs.indexOf(Math.max(...incs)); const ans = String(y[bi + 1]); return { fmt: (x) => x, ans, wrong: y.slice(1).map(String).filter((t) => t !== ans), expl: `Year-on-year increases: ${incs.map((d, i) => `${y[i + 1]}: ${d}`).join(', ')}; the greatest is in ${ans}.` } }
+      case 'ratio': { const a = base; const b = up; if (!isInt(b)) return null; P.v = [a, b]; const g = gcd(a, b); return { fmt: (x) => x, ans: `${a / g} : ${b / g}`, wrong: [`${b / g} : ${a / g}`, `${a / g} : ${(a + b) / g}`, `${a / g + 1} : ${b / g + 1}`].filter((t) => t !== `${a / g} : ${b / g}`), expl: `${a} : ${b}; dividing by ${g} gives ${a / g} : ${b / g}.` } }
+      case 'terms': { const t1 = base > 100 ? base / 4 : base; const t3 = (t1 * (100 + pct)) / 100; if (!isInt(t3) || t3 > 100) return null; const t2 = Math.round((t1 + t3) / 2) + 1; P.v = [t1, t2, t3]; return { ans: pct, wrong: [t3 - t1, Math.round(((t3 - t1) / t3) * 1000) / 10, pct + 10].filter((v) => v !== pct), expl: `Rise from term 1 to term 3 = ${t3} − ${t1} = ${t3 - t1}; ${t3 - t1} ÷ ${t1} × 100 = ${pct}%.` } }
+      case 'drop': { const v = [base, base + rr.int(1, 4) * (base / 20)]; const dPct = pct; const last = (v[1] * (100 - dPct)) / 100; if (!isInt(last) || !v.every(isInt)) return null; const other = v[1] - Math.round(v[1] * 0.05) ; const seq = [v[0], v[1], last, Math.round(last * 1.1)]; if (!seq.every(isInt)) return null; P.v = seq; const months = ['Jan', 'Feb', 'Mar', 'Apr']; return { fmt: (x) => x, ans: 'Mar', wrong: ['Feb', 'Apr', 'Jan'], expl: `Only one month falls: March, from ${seq[1]} to ${seq[2]} (a ${dPct}% decrease); the others rise.`, other, months } }
+      case 'more': { if (!isInt(up)) return null; P.v = [base, base + rr.int(1, 3) * 2, up - 2, up]; if (!P.v.every(isInt) || new Set(P.v).size < 4) return null; return { ans: pct, wrong: wr(base, up, pct), expl: `(${up} − ${base}) ÷ ${base} × 100 = ${pct}%.` } }
+      case 'visitors': { const a = base * 10; const b = (a * (100 - pct)) / 100; P.a = a; P.b2 = b; return { ans: pct, wrong: [Math.round(((a - b) / b) * 1000) / 10, 100 - pct, (a - b) / 10].filter((v) => v !== pct && v > 0), expl: `Fall = ${a} − ${b} = ${a - b}; ${a - b} ÷ ${a} × 100 = ${pct}%.` } }
+      default: {
+        const cls = ['VI', 'VII', 'VIII', 'IX']; const boys = cls.map(() => rr.int(20, 30)); const girls = boys.map((b) => b + rr.int(-6, 8))
+        const ratios = girls.map((g, i) => g / boys[i]); const mx = Math.max(...ratios); if (ratios.filter((x) => Math.abs(x - mx) < 0.02).length > 1) return null
+        P.boys = boys; P.girls = girls; const ans = cls[ratios.indexOf(mx)]; const mostGirls = cls[girls.indexOf(Math.max(...girls))]
+        return { fmt: (x) => `Class ${x}`, ans, wrong: cls.filter((c) => c !== ans), expl: `Girls ÷ boys: ${cls.map((c, i) => `${c} ${girls[i]}/${boys[i]}`).join(', ')}; the largest ratio is in Class ${ans}.${mostGirls !== ans ? ` (Class ${mostGirls} has the most girls but not the highest ratio.)` : ''}` }
+      }
+    }
+  },
+  items: [
+    [2, (p) => `Sales of a shop (Rs lakh): ${tbl(['2021', '2022', '2023'], p.v)}. What was the percentage increase in sales from 2021 to 2022?`, { m: 'inc' }],
+    [2, (p) => `The population of a town was ${num(p.b)} in 2015 and ${num(p.u)} in 2025. What was the percentage increase?`, { m: 'pop' }],
+    [2, (p) => `A country's exports (US$ billion): ${tbl(['2023', '2024'], p.v)}. By what percentage did exports fall?`, { m: 'dec' }],
+    [2, (p) => `Enrolment at a school: ${tbl(['2019', '2020', '2021', '2022', '2023'], p.v)}. In which year was the increase over the previous year the greatest?`, { m: 'which' }],
+    [1, (p) => `Units sold: ${tbl(['Shop X', 'Shop Y'], p.v)}. What is the ratio of Shop X's sales to Shop Y's sales?`, { m: 'ratio' }],
+    [2, (p) => `A student's marks in Mathematics: ${tbl(['Term 1', 'Term 2', 'Term 3'], p.v)}. By what percentage of the Term 1 mark did the mark rise by Term 3?`, { m: 'terms' }],
+    [3, (p) => `Monthly profit (Rs thousand): ${tbl(['Jan', 'Feb', 'Mar', 'Apr'], p.v)}. In which month did profit fall compared with the previous month?`, { m: 'drop' }],
+    [2, (p) => `Wheat production (million tonnes): ${tbl(['2020', '2021', '2022', '2023'], p.v)}. By what percentage was the 2023 production greater than the 2020 production?`, { m: 'more' }],
+    [1, (p) => `The number of visitors to a park fell from ${p.a} in March to ${p.b2} in April. What was the percentage decrease?`, { m: 'visitors' }],
+    [3, (p) => `Students in a school — Boys: VI ${p.boys[0]}, VII ${p.boys[1]}, VIII ${p.boys[2]}, IX ${p.boys[3]}; Girls: VI ${p.girls[0]}, VII ${p.girls[1]}, VIII ${p.girls[2]}, IX ${p.girls[3]}. In which class is the ratio of girls to boys the highest?`, { m: 'gb' }],
+  ],
+})
+family('ga.data.missing-value', 'ga.data', {
+  gen: (r) => ({ m: r.int(12, 60), n: r.int(4, 9), k: r.int(2, 6), pick: r.int(0, 99999), q: r.pick([[2, 3, 5], [1, 2, 3], [3, 4, 5], [1, 3, 4], [2, 5, 8]]) }),
+  key: (p) => `${p.s}-${p.m}-${p.n}-${p.k}-${p.pick}-${p.q.join('')}`,
+  fact: (p) => p.s,
+  solve: (P) => {
+    const { m, n, k, pick, q } = P
+    const rr = makeRng(`mv-${P.s}-${pick}`)
+    switch (P.s) {
+      case 'fifth': { const known = Array.from({ length: 4 }, () => m + rr.int(-8, 8)); const x = 5 * m - sum(known); if (x <= 0 || known.includes(x)) return null; P.known = known; return { ans: x, wrong: [m, 4 * m - sum(known) + m > 0 ? Math.round(sum(known) / 4) : x + 5, x + 5].filter((v) => v !== x && v > 0), expl: `Total needed = 5 × ${m} = ${5 * m}; known total = ${sum(known)}; fifth = ${x}.` } }
+      case 'same': { const v = listMean(rr, 6, 2, 12); P.v = v; const mn = meanOf(v); return { ans: mn, wrong: [median(v) !== mn ? median(v) : mn + 1, sum(v) / 7 === mn ? mn - 1 : Math.round(sum(v) / 7), Math.max(...v)].filter((w) => w !== mn), expl: `Adding a number equal to the mean leaves the mean unchanged: the mean is ${sum(v)} ÷ 6 = ${mn}.` } }
+      case 'bat': { const a1 = m; const a2 = m + k; const need = (n + 1) * a2 - n * a1; P.a1 = a1; P.a2 = a2; return { ans: need, wrong: [a2, a2 + k, need - a2 + a1].filter((v) => v !== need), expl: `He needs ${n + 1} × ${a2} = ${(n + 1) * a2} runs in all; he has ${n} × ${a1} = ${n * a1}; so ${need} are needed.` } }
+      case 'step': { const x = m - 2 * k; if (x <= 0) return null; return { ans: x, wrong: [m, m - k, m + 2 * k].filter((v) => v !== x), fmt: num, expl: `The mean of x, x + ${k}, …, x + ${4 * k} is the middle term x + ${2 * k} = ${m}, so x = ${x}.` } }
+      case 'bills': { const avg = m * 50; const known = [avg + 150, avg - 300, avg + 250]; const x = 4 * avg - sum(known); P.avg = avg; P.known = known; return { fmt: (v) => `Rs ${num(v)}`, ans: x, wrong: [avg, x + 100, Math.round(sum(known) / 3), x - 100].filter((v) => v !== x), expl: `Four months at Rs ${num(avg)} total Rs ${num(4 * avg)}; the other three months total Rs ${num(sum(known))}; March = Rs ${num(x)}.` } }
+      case 'children': { const avg = m % 20 + 10; const gap = k % 3 + 1; const young = avg - 2 * gap; if (young <= 0) return null; P.avg = avg; P.gap = gap; return { fmt: (v) => `${v} years`, ans: young, wrong: [avg - gap, avg - 4 * gap > 0 ? avg - 4 * gap : avg + gap, avg].filter((v) => v !== young && v > 0), expl: `Five ages at ${gap}-year gaps are symmetric about the middle one, which equals the average ${avg}; the youngest is ${avg} − 2 × ${gap} = ${young}.` } }
+      case 'subject': { const known = Array.from({ length: 4 }, () => m + 10 + rr.int(-10, 10)); const tgt = m + 10; const x = 5 * tgt - sum(known); if (x <= 0 || x > 100) return null; P.known = known; P.tgt = tgt; return { ans: x, wrong: [tgt, Math.round(sum(known) / 4), x + 5].filter((v) => v !== x), expl: `She needs 5 × ${tgt} = ${5 * tgt} marks in all; she has ${sum(known)}; so she needs ${x}.` } }
+      case 'excluded': { const N = n + 3; const A = m; const B = m - k; const x = N * A - (N - 1) * B; P.N = N; P.A = A; P.B = B; return { ans: x, wrong: [A - B, A, (N - 1) * (A - B)].filter((v) => v !== x && v > 0), expl: `Total before = ${N} × ${A} = ${N * A}; after = ${N - 1} × ${B} = ${(N - 1) * B}; the excluded number is ${x}.` } }
+      case 'ratio': { const t = sum(q); const S = 3 * m; if (S % t) return null; const u = S / t; return { ans: u * q[2], wrong: [u * q[0], m, (m * q[2]) / t * 1 === u * q[2] ? u * q[1] : Math.round((m * q[2]) / t)].filter((v) => v !== u * q[2] && v > 0), expl: `Sum = 3 × ${m} = ${S}; ${t} parts = ${S}, one part = ${u}; the largest is ${q[2]} × ${u} = ${u * q[2]}.` } }
+      default: return { ans: m + 3, wrong: [m, m + 6, m + 7], expl: `Seven consecutive integers are centred on their mean ${m}, so they run from ${m - 3} to ${m + 3}.` }
+    }
+  },
+  items: [
+    [2, (p) => `The mean of five numbers is ${p.m}. Four of them are ${p.known.slice(0, 3).join(', ')} and ${p.known[3]}. What is the fifth number?`, { s: 'fifth' }],
+    [2, (p) => `A new number is added to the data ${p.v.join(', ')} so that the average does not change. What is the new number?`, { s: 'same' }],
+    [2, (p) => `A batsman's average over ${p.n} innings is ${p.a1}. How many runs must he score in the next innings to raise his average to ${p.a2}?`, { s: 'bat' }],
+    [2, (p) => `The mean of x, x + ${p.k}, x + ${2 * p.k}, x + ${3 * p.k} and x + ${4 * p.k} is ${p.m}. What is x?`, { s: 'step' }],
+    [2, (p) => `Electricity bills: Jan Rs ${num(p.known[0])}, Feb Rs ${num(p.known[1])}, Mar ?, Apr Rs ${num(p.known[2])}. The average bill for the four months is Rs ${num(p.avg)}. What was the March bill?`, { s: 'bills' }],
+    [2, (p) => `The average age of five children born at intervals of ${p.gap} year${p.gap > 1 ? 's' : ''} is ${p.avg} years. What is the age of the youngest child?`, { s: 'children' }],
+    [2, (p) => `A student scored ${p.known.slice(0, 3).join(', ')} and ${p.known[3]} in four subjects. What must she score in the fifth subject to average ${p.tgt}?`, { s: 'subject' }],
+    [3, (p) => `The mean of ${p.N} numbers is ${p.A}. When one number is removed, the mean of the rest is ${p.B}. What number was removed?`, { s: 'excluded' }],
+    [2, (p) => `Three numbers are in the ratio ${p.q.join(' : ')} and their average is ${p.m}. What is the largest of them?`, { s: 'ratio' }],
+    [2, (p) => `The mean of seven consecutive integers is ${p.m}. What is the largest of them?`, { s: 'consec' }],
+  ],
+})
+
+family('ga.data.mean-after-change', 'ga.data', {
+  gen: (r) => ({ m: r.int(10, 60), n: r.int(5, 30), c: r.int(2, 12), k: r.int(2, 5), a: r.int(2, 9), b: r.int(10, 60) }),
+  key: (p) => `${p.s}-${p.m}-${p.n}-${p.c}-${p.k}-${p.a}-${p.b}`,
+  fact: (p) => p.s,
+  solve: (P) => {
+    const { m, n, c, k, a, b } = P
+    switch (P.s) {
+      case 'addc': return { ans: m + c, wrong: [m, m * c, m + c * 2].filter((v) => v !== m + c), expl: `Adding ${c} to every observation adds ${c} to the mean: ${m} + ${c} = ${m + c}.` }
+      case 'newobs': { const N = n % 6 + 4; const v = m + (a + 1) * N; const nm = (N * m + v) / (N + 1); if (!isInt(nm)) return null; P.N = N; P.v = v; return { ans: nm, wrong: [m, (m + v) / 2, nm + 1].filter((w) => isInt(w) && w !== nm), expl: `Total = ${N} × ${m} + ${v} = ${N * m + v}; new mean = ${N * m + v} ÷ ${N + 1} = ${nm}.` } }
+      case 'mult': return { ans: k * m, wrong: [m + k, m, k * m + k], expl: `Multiplying every number by ${k} multiplies the average by ${k}: ${k} × ${m} = ${k * m}.` }
+      case 'wrong': { const N = 5 * (n % 5 + 3); const wv = b; const rv = b + 9 * (a); const cm = m + (rv - wv) / N; if (!clean(cm) || rv === wv) return null; P.N = N; P.wv = wv; P.rv = rv; return { ans: r2(cm), wrong: [r2(m - (rv - wv) / N), m, r2(m + (rv - wv) / (N - 1)), r2(m + (2 * (rv - wv)) / N)].filter((v) => clean(v) && v !== r2(cm)), expl: `Correct total = ${N} × ${m} − ${wv} + ${rv} = ${N * m - wv + rv}; correct mean = ${N * m - wv + rv} ÷ ${N} = ${num(r2(cm))}.` } }
+      case 'replace': { const N = n % 7 + 5; const rise = (a % 4 + 1) * 0.5; const old = b + 20; const nw = old + N * rise; if (!isInt(nw)) return null; P.N = N; P.rise = rise; P.old = old; return { fmt: (v) => `${num(v)} kg`, ans: nw, wrong: [old + rise, old - N * rise, nw + rise].filter((v) => v !== nw), expl: `The total rises by ${N} × ${num(rise)} = ${num(N * rise)} kg, so the newcomer weighs ${old} + ${num(N * rise)} = ${nw} kg.` } }
+      case 'remove': { const N = n % 6 + 5; const v = m + (a + 1) * (N - 1); const nm = (N * m - v) / (N - 1); if (!isInt(nm) || nm <= 0) return null; P.N = N; P.v = v; return { ans: nm, wrong: [m, (N * m - v) / N, m - 1].filter((w) => isInt(w) && w !== nm && w > 0), expl: `Total = ${N} × ${m} = ${N * m}; remove ${v}: ${N * m - v}; mean of ${N - 1} numbers = ${nm}.` } }
+      case 'teacher': { const N = 20 + n; const avg = 10 + (m % 6); const rise = 1; const T = (N + 1) * (avg + rise) - N * avg; P.N = N; P.avg = avg; return { fmt: (v) => `${v} years`, ans: T, wrong: [avg + rise, T - avg, N + avg].filter((v) => v !== T), expl: `New total = ${N + 1} × ${avg + rise} = ${(N + 1) * (avg + rise)}; old total = ${N} × ${avg} = ${N * avg}; teacher = ${T} years.` } }
+      case 'pct': { const mm = m * 10; const nm = (mm * (100 - c * 5)) / 100; if (!isInt(nm)) return null; P.mm = mm; P.p = c * 5; return { ans: nm, wrong: [mm - c * 5, mm, (mm * (100 + c * 5)) / 100].filter((v) => isInt(v) && v !== nm), expl: `Reducing every value by ${c * 5}% reduces the mean by ${c * 5}%: ${mm} × ${num((100 - c * 5) / 100)} = ${nm}.` } }
+      case 'lin': { const d = k + 3; const M = d * (a + 1) + c; const ans = (M - c) / d; P.M = M; P.d = d; return { ans, wrong: [M - c, M / d, (M + c) / d, ans + c, ans + 1].filter((v) => clean(v) && v !== ans), expl: `Subtracting ${c} makes the average ${M - c}; dividing by ${d} makes it ${ans}.` } }
+      default: { const N = n % 10 + 8; const avg = 1000 * (m % 20 + 15); const mg = avg + (N + 1) * 1000 * (a % 4 + 1); const nw = (N * avg + mg) / (N + 1); P.N = N; P.avg = avg; P.mg = mg; return { fmt: (v) => `Rs ${num(v)}`, ans: nw, wrong: [(avg + mg) / 2, avg, (N * avg + mg) / N].filter((v) => isInt(v) && v !== nw), expl: `Total = ${N} × ${num(avg)} + ${num(mg)} = ${num(N * avg + mg)}; ÷ ${N + 1} = Rs ${num(nw)}.` } }
+    }
+  },
+  items: [
+    [1, (p) => `If a constant ${p.c} is added to each observation of a data set whose mean is ${p.m}, the new mean is:`, { s: 'addc' }],
+    [2, (p) => `The mean of ${p.N} observations is ${p.m}. A new observation ${p.v} is added. What is the mean of the ${p.N + 1} observations?`, { s: 'newobs' }],
+    [1, (p) => `The average of ${p.n} numbers is ${p.m}. If each number is multiplied by ${p.k}, what is the new average?`, { s: 'mult' }],
+    [3, (p) => `The mean of ${p.N} observations was calculated as ${p.m}, but one value, ${p.rv}, had been wrongly recorded as ${p.wv}. What is the correct mean?`, { s: 'wrong' }],
+    [3, (p) => `The average weight of ${p.N} people rises by ${num(p.rise)} kg when one of them, weighing ${p.old} kg, is replaced by a new person. How much does the new person weigh?`, { s: 'replace' }],
+    [2, (p) => `The average of ${p.N} numbers is ${p.m}. If one number, ${p.v}, is removed, what is the average of the rest?`, { s: 'remove' }],
+    [3, (p) => `The average age of ${p.N} students in a class is ${p.avg} years. When the teacher's age is included, the average rises by 1 year. How old is the teacher?`, { s: 'teacher' }],
+    [2, (p) => `The mean of a set of prices is Rs ${p.mm}. If every price is reduced by ${p.p}%, what is the new mean?`, { s: 'pct' }],
+    [2, (p) => `The average of a set of numbers is ${p.M}. If ${p.c} is subtracted from each number and the result is divided by ${p.d}, what is the new average?`, { s: 'lin' }],
+    [2, (p) => `The average salary of ${p.N} workers is Rs ${num(p.avg)}. When the manager's salary of Rs ${num(p.mg)} is included, what is the new average?`, { s: 'manager' }],
+  ],
+})
+
+family('ga.data.combined-mean', 'ga.data', {
+  gen: (r) => ({ n1: r.int(2, 8) * 5, n2: r.int(2, 8) * 5, a: r.int(40, 70), d: r.int(2, 20), w: r.int(1, 4), pick: r.int(0, 999) }),
+  key: (p) => `${p.s}-${p.n1}-${p.n2}-${p.a}-${p.d}-${p.w}`,
+  fact: (p) => p.s,
+  solve: (P) => {
+    const { n1, n2, a, d, w } = P
+    const b = a + d
+    const cm = (n1 * a + n2 * b) / (n1 + n2)
+    const std = { wrong: [(a + b) / 2, cm + 1, cm - 1].filter((v) => v !== cm) }
+    switch (P.s) {
+      case 'class': if (!isInt(cm) || n1 === n2) return null; return { ans: cm, ...std, expl: `Total = ${n1} × ${a} + ${n2} × ${b} = ${n1 * a + n2 * b}; ÷ ${n1 + n2} = ${cm}.` }
+      case 'library': { const sun = 10 * (a + d + 20); const oth = 10 * a; const days = 30; const S = 5; const v = (S * sun + (days - S) * oth) / days; if (!isInt(v)) return null; P.sun = sun; P.oth = oth; return { ans: v, wrong: [(sun + oth) / 2, (4 * sun + 26 * oth) / 30, oth].filter((x) => isInt(x) && x !== v), expl: `A 30-day month starting on Sunday has 5 Sundays: (5 × ${sun} + 25 × ${oth}) ÷ 30 = ${v}.` } }
+      case 'sections': if (!isInt(cm) || n1 === n2) return null; return { ans: cm, ...std, expl: `(${n1} × ${a} + ${n2} × ${b}) ÷ ${n1 + n2} = ${cm}.` }
+      case 'shirts': { const A = a * 20; const B = b * 20 + 100; const c2 = (n1 * A + n2 * B) / (n1 + n2); if (!isInt(c2) || n1 === n2) return null; P.A = A; P.B = B; return { fmt: (v) => `Rs ${num(v)}`, ans: c2, wrong: [(A + B) / 2, c2 + 50, c2 - 50].filter((v) => isInt(v) && v !== c2), expl: `Total = ${n1} × ${A} + ${n2} × ${B} = ${num(n1 * A + n2 * B)}; ÷ ${n1 + n2} shirts = Rs ${num(c2)}.` } }
+      case 'rest': { const N = n1 + n2; const T = N * b; const firstAvg = a; const restAvg = (T - n1 * firstAvg) / n2; if (!isInt(restAvg)) return null; P.N = N; return { ans: restAvg, wrong: [b + (b - a), (T - n1 * a) / N, b].filter((v) => isInt(v) && v !== restAvg), expl: `Total = ${N} × ${b} = ${T}; first ${n1} total ${n1 * a}; remaining ${n2} total ${T - n1 * a}; average = ${restAvg}.` } }
+      case 'wages': { const A = a * 250; const B = b * 250; const c2 = (n1 * A + n2 * B) / (n1 + n2); if (!isInt(c2) || n1 === n2) return null; P.A = A; P.B = B; return { fmt: (v) => `Rs ${num(v)}`, ans: c2, wrong: [(A + B) / 2, c2 + 250, c2 - 250].filter((v) => isInt(v) && v !== c2), expl: `(${n1} × ${num(A)} + ${n2} × ${num(B)}) ÷ ${n1 + n2} = Rs ${num(c2)}.` } }
+      case 'howmany': { const N = (n1 + n2) / 5; const men = n1 / 5; const mw = b; const ww = a; const tot = men * mw + (N - men) * ww; const mix = tot / N; if (!isInt(mix) || men === N - men) return null; P.N = N; P.mix = mix; P.mw = mw; P.ww = ww; return { ans: men, wrong: [N - men, Math.round(N / 2), men + 1].filter((v) => v !== men && v > 0), fmt: num, expl: `${mw}m + ${ww}(${N} − m) = ${N} × ${mix} = ${tot}, so ${mw - ww}m = ${tot - ww * N} and m = ${men}.` } }
+      default: { const m1 = w + 3; const m2 = 10 - m1; const A = a + 20; const B = A + 2 * d; const v = (m1 * A + m2 * B) / 10; P.m1 = m1; P.m2 = m2; P.A = A; P.B = B; return { fmt: (x) => `${num(x)} mm`, ans: v, wrong: [(A + B) / 2, (A + B) / 10 * 5 === v ? v + 2 : (m2 * A + m1 * B) / 10, v + 4].filter((x) => x !== v), expl: `(${m1} × ${A} + ${m2} × ${B}) ÷ 10 = ${num(v)} mm.` } }
+    }
+  },
+  items: [
+    [3, (p) => `The mean mark of ${p.n1} boys is ${p.a} and that of ${p.n2} girls is ${p.a + p.d}. What is the mean mark of the whole class?`, { s: 'class' }],
+    [3, (p) => `A library has an average of ${p.sun} visitors on Sundays and ${p.oth} on other days. What is the average number of visitors per day in a month of 30 days that begins with a Sunday?`, { s: 'library' }],
+    [3, (p) => `Section A has ${p.n1} students with an average score of ${p.a}; Section B has ${p.n2} students averaging ${p.a + p.d}. What is the combined average?`, { s: 'sections' }],
+    [2, (p) => `A shop sold ${p.n1} shirts at an average price of Rs ${p.A} and ${p.n2} shirts at an average of Rs ${p.B}. What was the average price per shirt?`, { s: 'shirts' }],
+    [3, (p) => `The average of ${p.N} numbers is ${p.a + p.d}. The average of the first ${p.n1} of them is ${p.a}. What is the average of the remaining ${p.n2}?`, { s: 'rest' }],
+    [2, (p) => `In a factory, ${p.n1} workers earn an average of Rs ${num(p.A)} a month and ${p.n2} earn an average of Rs ${num(p.B)}. What is the average monthly wage of all the workers?`, { s: 'wages' }],
+    [3, (p) => `In a group of ${p.N} adults, the men average ${p.mw} kg and the women ${p.ww} kg, and the whole group averages ${p.mix} kg. How many men are in the group?`, { s: 'howmany' }],
+    [2, (p) => `The average rainfall was ${p.A} mm for the first ${p.m1} months of a period and ${p.B} mm for the next ${p.m2} months. What was the average monthly rainfall over the ten months?`, { s: 'rain' }],
+  ],
+})
+
+family('ga.data.frequency-table', 'ga.data', {
+  gen: (r) => ({ f: Array.from({ length: 5 }, () => r.int(1, 12)), k: r.int(1, 9), pick: r.int(0, 999) }),
+  key: (p) => `${p.s}-${p.f.join('.')}-${p.k}`,
+  fact: (p) => p.s,
+  solve: (P) => {
+    const { f, k } = P
+    const fm = (xs, fs) => sum(xs.map((x, i) => x * fs[i])) / sum(fs)
+    const medF = (xs, fs) => { const all = []; xs.forEach((x, i) => { for (let j = 0; j < fs[i]; j++) all.push(x) }); return median(all) }
+    const std = (xs, fs) => { const mn = fm(xs, fs); return { ans: r2(mn), wrong: [r2(sum(xs) / xs.length), r2(sum(xs.map((x, i) => x * fs[i])) / xs.length), medF(xs, fs), r2(mn + 0.5), r2(mn - 0.5)].filter((v) => v !== r2(mn) && clean(v * 2)) } }
+    switch (P.s) {
+      case 'basic': { const xs = [1, 2, 3, 4, 5]; const mn = fm(xs, f); if (!clean(mn * 2)) return null; P.xs = xs; return { ...std(xs, f), expl: `Σfx = ${xs.map((x, i) => `${x}×${f[i]}`).join(' + ')} = ${sum(xs.map((x, i) => x * f[i]))}; Σf = ${sum(f)}; mean = ${num(r2(mn))}.` } }
+      case 'marks': { const xs = [10, 20, 30, 40]; const fs = f.slice(0, 4); const mn = fm(xs, fs); if (!isInt(mn)) return null; P.xs = xs; P.fs = fs; return { ...std(xs, fs), expl: `Σfx = ${sum(xs.map((x, i) => x * fs[i]))}, Σf = ${sum(fs)}; mean = ${mn}.` } }
+      case 'sym': { const fs = [f[0], f[1], f[2] + 5, f[1], f[0]]; const xs = [0, 1, 2, 3, 4]; P.xs = xs; P.fs = fs; return { ans: 2, wrong: [fs[2] > 2 ? fs[2] : 3, r2(sum(fs) / 5), 2.5].filter((v) => v !== 2), expl: `The frequencies are symmetric about 2 children, so Σfx ÷ Σf = ${sum(xs.map((x, i) => x * fs[i]))} ÷ ${sum(fs)} = 2.` } }
+      case 'median': { const xs = [1, 2, 3, 4, 5]; const md = medF(xs, f); if (!isInt(md) || sum(f) % 2 === 0) return null; P.xs = xs; return { ans: md, wrong: [xs[f.indexOf(Math.max(...f))] !== md ? xs[f.indexOf(Math.max(...f))] : md + 1, 3 === md ? 2 : 3, r2(fm(xs, f)) !== md && clean(fm(xs, f)) ? r2(fm(xs, f)) : md - 1].filter((v) => v !== md && v > 0), expl: `There are ${sum(f)} observations; the median is the ${(sum(f) + 1) / 2}th, which is ${md} (cumulative frequencies ${f.map((_, i) => sum(f.slice(0, i + 1))).join(', ')}).` } }
+      case 'total': { const xs = [0, 1, 2, 3]; const fs = f.slice(0, 4); const T = sum(xs.map((x, i) => x * fs[i])); P.xs = xs; P.fs = fs; return { ans: T, wrong: [sum(fs), sum(xs), T + fs[3]].filter((v) => v !== T), expl: `Total goals = Σ(goals × matches) = ${xs.map((x, i) => `${x}×${fs[i]}`).join(' + ')} = ${T}.` } }
+      case 'wages': { const xs = [500, 600, 700, 800]; const fs = f.slice(0, 4); const mn = fm(xs, fs); if (!isInt(mn)) return null; P.xs = xs; P.fs = fs; return { fmt: (v) => `Rs ${num(v)}`, ...std(xs, fs), expl: `Σfx = ${num(sum(xs.map((x, i) => x * fs[i])))}, Σf = ${sum(fs)}; mean wage = Rs ${mn}.` } }
+      case 'shoe': { const xs = [6, 7, 8, 9]; const fs = f.slice(1, 5).map((v) => v * 5); const mn = fm(xs, fs); if (!clean(mn * 2)) return null; P.xs = xs; P.fs = fs; return { ...std(xs, fs), expl: `Σfx = ${sum(xs.map((x, i) => x * fs[i]))}, Σf = ${sum(fs)}; mean size = ${num(r2(mn))}.` } }
+      case 'median2': { const xs = [10, 20, 30, 40, 50]; const md = medF(xs, f); if (!isInt(md)) return null; P.xs = xs; return { ans: md, wrong: [xs[f.indexOf(Math.max(...f))] !== md ? xs[f.indexOf(Math.max(...f))] : md + 10, 30 === md ? 20 : 30, md + 5].filter((v) => v !== md), expl: `With ${sum(f)} observations, counting through the cumulative frequencies ${f.map((_, i) => sum(f.slice(0, i + 1))).join(', ')} shows the median is ${md}.` } }
+      case 'findk': { const xs = [1, 2, 3, 4]; const fs = [f[0], k, f[2], f[3]]; const mn = fm(xs, fs); if (!clean(mn * 4) || !isInt(mn * 2)) return null; P.xs = xs; P.fs = fs; P.mn = mn; return { fmt: num, ans: k, wrong: [k + 1, k - 1, k + 2].filter((v) => v > 0), expl: `Σfx = ${f[0]} + 2k + ${3 * f[2]} + ${4 * f[3]} and Σf = ${f[0] + f[2] + f[3]} + k; setting Σfx = ${num(mn)} × Σf gives k = ${k}.` } }
+      default: { const xs = [10, 20, 30, 40, 50]; const T = sum(f); const above = f[3] + f[4]; const pp = (above / T) * 100; if (!isInt(pp)) return null; return { fmt: (v) => `${num(v)}%`, ans: pp, wrong: [((above + f[2]) / T) * 100, above, 100 - pp].filter((v) => isInt(v) && v !== pp), expl: `Scores above 30 are 40 and 50: ${f[3]} + ${f[4]} = ${above} of ${T} students = ${pp}%.`, xs } }
+    }
+  },
+  items: [
+    [3, (p) => `Find the mean of the distribution — Value: ${p.xs.join(', ')}; Frequency: ${p.f.join(', ')}.`, { s: 'basic' }],
+    [3, (p) => `Marks (x): ${p.xs.join(', ')}; Number of students (f): ${p.fs.join(', ')}. What is the mean mark?`, { s: 'marks' }],
+    [2, (p) => `Children per family: ${p.xs.join(', ')}; Number of families: ${p.fs.join(', ')}. What is the mean number of children per family?`, { s: 'sym' }],
+    [3, (p) => `Value: ${p.xs.join(', ')}; Frequency: ${p.f.join(', ')}. What is the median of this distribution?`, { s: 'median' }],
+    [2, (p) => `Goals per match: ${p.xs.join(', ')}; Number of matches: ${p.fs.join(', ')}. How many goals were scored in all?`, { s: 'total' }],
+    [3, (p) => `Daily wage (Rs): ${p.xs.join(', ')}; Number of workers: ${p.fs.join(', ')}. What is the mean daily wage?`, { s: 'wages' }],
+    [3, (p) => `Shoe size: ${p.xs.join(', ')}; Pairs sold: ${p.fs.join(', ')}. What is the mean size sold?`, { s: 'shoe' }],
+    [3, (p) => `Score: ${p.xs.join(', ')}; Number of candidates: ${p.f.join(', ')}. What is the median score?`, { s: 'median2' }],
+    [3, (p) => `The mean of the distribution x: ${p.xs.join(', ')}; f: ${p.fs[0]}, k, ${p.fs[2]}, ${p.fs[3]} is ${num(p.mn)}. Find k.`, { s: 'findk' }],
+    [2, (p) => `Test score: 10, 20, 30, 40, 50; Students: ${p.f.join(', ')}. What percentage of the students scored more than 30?`, { s: 'pct' }],
+  ],
+})
+
+// ===========================================================================
+// ga.probability — 50
+// ===========================================================================
+const fracVal = (t) => { const m = String(t).match(/^(−?)(\d+)(?:\/(\d+))?$/); if (!m) return NaN; return (m[1] ? -1 : 1) * Number(m[2]) / Number(m[3] ?? 1) }
+/** Probability distractors: distinct from the answer and inside (0, 1]. */
+const fracs = (ans, cands) => cands.filter((t) => t && t !== ans && !t.includes('NaN') && fracVal(t) > 0 && fracVal(t) <= 1)
+family('ga.probability.single-draw', 'ga.probability', {
+  gen: (r) => ({ a: r.int(2, 12), b: r.int(2, 12), c: r.int(2, 12), pp: 5 * r.int(3, 9), k: r.int(3, 5), w: r.pick(['ISLAMABAD', 'PAKISTAN', 'PESHAWAR', 'KARACHI', 'RAWALPINDI', 'MARDAN']), q: r.pick([[1, 4], [3, 8], [2, 5], [3, 5], [1, 3], [5, 8]]) }),
+  key: (p) => `${p.m}-${p.a}-${p.b}-${p.c}-${p.pp}-${p.k}-${p.w}-${p.q.join('')}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { a, b, c, pp, k, w, q } = P
+    const T = a + b + c
+    switch (P.m) {
+      case 'neither': { const ans = fr(c, T); return { ans, wrong: fracs(ans, [fr(a + b, T), fr(c, a + b), fr(1, 3), fr(a, T)]), expl: `Neither red nor green means blue: ${c} of the ${T} toys, so ${c}/${T}${fr(c, T) === `${c}/${T}` ? '' : ` = ${fr(c, T)}`}.` } }
+      case 'red': { if (a === b) return null; const ans = fr(a, a + b); return { ans, wrong: fracs(ans, [fr(b, a + b), fr(a, b), fr(1, 2)]), expl: `${a} red out of ${a + b} balls: P(red) = ${ans}.` } }
+      case 'notblue': { const ans = fr(T - c, T); return { ans, wrong: fracs(ans, [fr(c, T), fr(T - c, c), fr(a, T)]), expl: `Not blue: ${T} − ${c} = ${T - c} of ${T} marbles, so ${ans}.` } }
+      case 'sweets': { const ans = fr(b + c, T); return { ans, wrong: fracs(ans, [fr(c, T), fr(b, T), fr(a, T), fr(b * c, T * T)]), expl: `Lemon or orange: ${c} + ${b} = ${b + c} of ${T} sweets, so ${ans}.` } }
+      case 'rain': { const p = pp / 100; const ans = num((100 - pp) / 100); return { ans, wrong: [num(p), '0.5', num(Math.min(0.95, p + 0.1)), num(1 - p / 2)].filter((t) => t !== ans), expl: `P(no rain) = 1 − P(rain) = 1 − ${num(p)} = ${ans}.` } }
+      case 'range': return { ans: 'Any value from 0 to 1, inclusive', wrong: ['Any value from −1 to 1', 'Any positive number', 'Any whole number from 0 to 100'], expl: `A probability is 0 for an impossible event, 1 for a certain event, and never outside this range.` }
+      case 'blue': { const [x, y] = q; const N = y * (a + 1); const red = (x * N) / y; P.N = N; return { fmt: num, ans: N - red, wrong: [red, N - x, y - x].filter((v) => v !== N - red && v > 0), expl: `Red = ${fr(x, y)} × ${N} = ${red}, so blue = ${N} − ${red} = ${N - red}.` } }
+      case 'addgreen': { const R = a; const B = b; const g = (R + B) / (k - 1); if (!isInt(g)) return null; return { fmt: num, ans: g, wrong: [(R + B) / k, R + B, g + 1].filter((v) => isInt(v) && v !== g), expl: `g ÷ (${R + B} + g) = 1/${k} gives ${k}g = ${R + B} + g, so g = ${g}.` } }
+      case 'total': { const [x, y] = q; const Wt = x * (b + 1); const N = (Wt * y) / x; P.Wt = Wt; return { fmt: num, ans: N, wrong: [Wt + y, Wt * y, N - Wt].filter((v) => v !== N), expl: `${Wt} is ${fr(x, y)} of the total, so the total is ${Wt} × ${y} ÷ ${x} = ${N}.` } }
+      case 'letter': { const cnt = w.split('').filter((ch) => ch === 'A').length; const ans = fr(cnt, w.length); return { ans, wrong: fracs(ans, [fr(1, new Set(w).size), fr(1, w.length), fr(cnt, w.length - cnt), fr(cnt, new Set(w).size)]), expl: `${w} has ${w.length} letters, of which ${cnt} are A: probability ${cnt}/${w.length}${ans === `${cnt}/${w.length}` ? '' : ` = ${ans}`}.` } }
+      case 'month': return { ans: '7/12', wrong: ['5/12', '1/2', '31/365'], expl: `Seven months (January, March, May, July, August, October, December) have 31 days: 7/12.` }
+      default: { const girls = 2 * a + 4; const boys = 2 * b + 6; if (girls === boys) return null; const N = girls + boys; P.N = N; P.girls = girls; const ans = fr(boys, N); return { ans, wrong: fracs(ans, [fr(girls, N), fr(Math.min(girls, boys), Math.max(girls, boys)), fr(1, 2), fr(Math.abs(boys - girls), N)]), expl: `Boys = ${N} − ${girls} = ${boys}; P(boy) = ${boys}/${N}${ans === `${boys}/${N}` ? '' : ` = ${ans}`}.` } }
+    }
+  },
+  items: [
+    [2, (p) => `A box contains ${p.a} red, ${p.b} green and ${p.c} blue toys. What is the probability that a toy picked at random is neither red nor green?`, { m: 'neither' }],
+    [1, (p) => `A bag holds ${p.a} red and ${p.b} white balls. One ball is drawn at random. What is the probability that it is red?`, { m: 'red' }],
+    [1, (p) => `A jar has ${p.a} red, ${p.b} green and ${p.c} blue marbles. If one marble is taken at random, what is the probability that it is not blue?`, { m: 'notblue' }],
+    [2, (p) => `A packet contains ${p.a} mint, ${p.b} orange and ${p.c} lemon sweets. A sweet is taken without looking. What is the probability that it is lemon or orange?`, { m: 'sweets' }],
+    [1, (p) => `The probability of rain tomorrow is ${num(p.pp / 100)}. What is the probability that it will not rain?`, { m: 'rain' }],
+    [1, () => `Which of the following describes all the values a probability can take?`, { m: 'range' }],
+    [2, (p) => `A bag contains ${p.N} marbles, each red or blue. The probability of drawing a red marble is ${fr(...p.q)}. How many blue marbles are there?`, { m: 'blue' }],
+    [3, (p) => `A bag has ${p.a} red and ${p.b} blue balls. How many green balls must be added so that the probability of drawing a green ball becomes 1/${p.k}?`, { m: 'addgreen' }],
+    [2, (p) => `The probability of drawing a white ball from a bag is ${fr(...p.q)}. If the bag contains ${p.Wt} white balls, how many balls are there altogether?`, { m: 'total' }],
+    [2, (p) => `A letter is chosen at random from the word ${p.w}. What is the probability that it is the letter A?`, { m: 'letter' }],
+    [2, () => `A month of the year is chosen at random. What is the probability that it has 31 days?`, { m: 'month' }],
+    [1, (p) => `A class of ${p.N} students has ${p.girls} girls. If one student is chosen at random, what is the probability that the student is a boy?`, { m: 'boy' }],
+  ],
+})
+
+family('ga.probability.die', 'ga.probability', {
+  gen: (r) => ({ k: r.int(1, 5) }),
+  key: (p) => `${p.m}-${['gt', 'oddor', 'evengt', 'not'].includes(p.m) ? p.k : 0}`,
+  solve: (P) => {
+    const { k } = P
+    const F = [1, 2, 3, 4, 5, 6]
+    const pr = (pred) => fr(F.filter(pred).length, 6)
+    switch (P.m) {
+      case 'prime': return { ans: '1/2', wrong: ['2/3', '1/3', '1/6'], expl: `The primes on a die are 2, 3 and 5: 3/6 = 1/2 (1 is not prime).` }
+      case 'gt': { const ans = pr((x) => x > k); return { ans, wrong: fracs(ans, [pr((x) => x >= k), fr(k, 6), fr(1, 6), pr((x) => x < k)]), expl: `Numbers greater than ${k}: ${F.filter((x) => x > k).join(', ')} — ${ans}.` } }
+      case 'mult3': return { ans: '1/3', wrong: ['1/2', '1/6', '2/3'], expl: `Multiples of 3 on a die are 3 and 6: 2/6 = 1/3.` }
+      case 'oddor': { if (k < 2) return null; const ans = pr((x) => x % 2 === 1 || x > k); const naive = fr(3 + F.filter((x) => x > k).length, 6); return { ans, wrong: fracs(ans, [naive === ans ? '1/6' : naive, '1/2', pr((x) => x % 2 === 1 && x > k)]), expl: `Odd numbers or numbers above ${k}: ${F.filter((x) => x % 2 === 1 || x > k).join(', ')} — ${ans}.` } }
+      case 'factor6': return { ans: '2/3', wrong: ['1/2', '1/3', '5/6'], expl: `The factors of 6 are 1, 2, 3 and 6: 4/6 = 2/3.` }
+      case 'not': { const kk = k + 1; P.kk = kk; return { ans: '5/6', wrong: ['1/6', '1/2', `${kk === 6 ? '1/5' : fr(6 - kk, 6)}`], expl: `Only one of the six equally likely faces shows ${kk}; so P(not ${kk}) = 1 − 1/6 = 5/6.` } }
+      case 'evengt': { if (k > 4) return null; const ans = pr((x) => x % 2 === 0 && x > k); return { ans, wrong: fracs(ans, [pr((x) => x % 2 === 0 || x > k), '1/2', pr((x) => x > k)]), expl: `Even and greater than ${k}: ${F.filter((x) => x % 2 === 0 && x > k).join(', ')} — ${ans}.` } }
+      default: return { ans: '1/3', wrong: ['1/6', '1/2', '2/3'], expl: `The perfect squares on a die are 1 and 4: 2/6 = 1/3.` }
+    }
+  },
+  items: [
+    [1, () => `A fair die is thrown once. What is the probability of getting a prime number?`, { m: 'prime' }],
+    [1, (p) => `A fair six-sided die is rolled. What is the probability that the number shown is greater than ${p.k}?`, { m: 'gt' }],
+    [1, () => `When an ordinary die is rolled, what is the probability of getting a multiple of 3?`, { m: 'mult3' }],
+    [2, (p) => `A die is rolled once. What is the probability that the number is odd or greater than ${p.k}?`, { m: 'oddor' }],
+    [1, () => `A fair die is tossed. What is the probability that the number obtained is a factor of 6?`, { m: 'factor6' }],
+    [1, (p) => `A fair die is rolled. What is the probability of not getting a ${p.kk}?`, { m: 'not' }],
+    [2, (p) => `A die numbered 1 to 6 is rolled. What is the probability of a number that is both even and greater than ${p.k}?`, { m: 'evengt' }],
+    [1, () => `An ordinary die is thrown. What is the probability that it shows a perfect square?`, { m: 'square' }],
+  ],
+})
+
+family('ga.probability.numbered-cards', 'ga.probability', {
+  gen: (r) => ({ N: r.pick([20, 25, 30, 40, 50, 60]), k: r.pick([3, 4, 5, 6, 7]), a: r.pick([2, 3]), b: r.pick([5, 7]), s: r.int(5, 9), d: r.int(1, 5) }),
+  key: (p) => `${p.m}-${p.N}-${p.k}-${p.a}-${p.b}-${p.s}-${p.d}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { N, k, a, b, s, d } = P
+    const cnt = (pred) => { let c = 0; for (let v = 1; v <= N; v++) if (pred(v)) c++; return c }
+    const mk = (c, expl) => { const ans = fr(c, N); return { ans, wrong: fracs(ans, [fr(N - c, N), fr(c, N - c), fr(c + 1, N), fr(c - 1, N)]), expl } }
+    switch (P.m) {
+      case 'mult': { const c = cnt((v) => v % k === 0); return mk(c, `There are ${c} multiples of ${k} from 1 to ${N}: ${c}/${N}${fr(c, N) === `${c}/${N}` ? '' : ` = ${fr(c, N)}`}.`) }
+      case 'prime': { const c = cnt(isPrime); return mk(c, `There are ${c} primes up to ${N} (${primesBelow(N + 1).join(', ')}), so ${fr(c, N)}.`) }
+      case 'square': { const c = cnt((v) => Number.isInteger(Math.sqrt(v))); return mk(c, `Perfect squares up to ${N}: ${Array.from({ length: c }, (_, i) => (i + 1) ** 2).join(', ')} — ${c} of ${N}, so ${fr(c, N)}.`) }
+      case 'either': { const c = cnt((v) => v % a === 0 || v % b === 0); const ca = Math.floor(N / a); const cb = Math.floor(N / b); const cab = Math.floor(N / (a * b)); const ans = fr(c, N); return { ans, wrong: fracs(ans, [fr(ca + cb, N), fr(N - c, N), fr(cab, N)]), expl: `Multiples of ${a}: ${ca}; of ${b}: ${cb}; of both: ${cab}. Either: ${ca} + ${cb} − ${cab} = ${c}, so ${ans}.` } }
+      case 'twodigit': { if (N < 20) return null; const c = N - 9 - (N >= 100 ? 1 : 0); return mk(c, `Numbers 10 to ${N} are two-digit: ${c} of ${N}, so ${fr(c, N)}.`) }
+      case 'evengt': { const kk = k * 2 + 1; P.kk = kk; const c = cnt((v) => v % 2 === 0 && v > kk); return mk(c, `Even numbers above ${kk} up to ${N}: ${c} of them, so ${fr(c, N)}.`) }
+      case 'digsum': { if (N > 60) return null; const c = cnt((v) => String(v).split('').map(Number).reduce((x, y) => x + y, 0) === s); if (c < 2) return null; return mk(c, `Numbers up to ${N} whose digits add to ${s}: ${Array.from({ length: N }, (_, i) => i + 1).filter((v) => String(v).split('').map(Number).reduce((x, y) => x + y, 0) === s).join(', ')} — ${fr(c, N)}.`) }
+      case 'odd': { const c = cnt((v) => v % 2 === 1); const ans = fr(c, N); return { ans, wrong: fracs(ans, [fr(c - 1, N), fr(1, N), fr(c + 1, N)]), expl: `Half of the numbers 1 to ${N} are odd: ${c}/${N} = ${ans}.` } }
+      case 'neither': { const c = cnt((v) => v % 2 !== 0 && v % 3 !== 0); const ans = fr(c, N); return { ans, wrong: fracs(ans, [fr(N - c, N), fr(N - Math.floor(N / 2) - Math.floor(N / 3), N), fr(Math.floor(N / 6), N)]), expl: `Multiples of 2 or 3: ${Math.floor(N / 2)} + ${Math.floor(N / 3)} − ${Math.floor(N / 6)} = ${N - c}; neither: ${c}, so ${ans}.` } }
+      default: { if (N > 60) return null; const c = cnt((v) => String(v).includes(String(d))); return mk(c, `Numbers from 1 to ${N} containing the digit ${d}: ${c} of them, so ${fr(c, N)}.`) }
+    }
+  },
+  items: [
+    [1, (p) => `Cards numbered 1 to ${p.N} are shuffled and one is drawn. What is the probability that its number is a multiple of ${p.k}?`, { m: 'mult' }],
+    [2, (p) => `A card is drawn at random from cards numbered 1 to ${p.N}. What is the probability that the number is prime?`, { m: 'prime' }],
+    [2, (p) => `Discs numbered 1 to ${p.N} are placed in a bag and one is picked. What is the probability that its number is a perfect square?`, { m: 'square' }],
+    [3, (p) => `A number is chosen at random from 1 to ${p.N}. What is the probability that it is divisible by ${p.a} or by ${p.b}?`, { m: 'either' }],
+    [2, (p) => `Raffle tickets are numbered 1 to ${p.N} and one is drawn. What is the probability that the winning number has two digits?`, { m: 'twodigit' }],
+    [2, (p) => `One of ${p.N} tokens numbered 1 to ${p.N} is picked at random. What is the probability that it shows an even number greater than ${p.kk}?`, { m: 'evengt' }],
+    [2, (p) => `A number is selected at random from 1 to ${p.N}. What is the probability that the sum of its digits is ${p.s}?`, { m: 'digsum' }],
+    [1, (p) => `Balls numbered 1 to ${p.N} are in a box. What is the probability that a ball drawn at random carries an odd number?`, { m: 'odd' }],
+    [3, (p) => `A card is chosen from cards numbered 1 to ${p.N}. What is the probability that its number is a multiple of neither 2 nor 3?`, { m: 'neither' }],
+    [2, (p) => `A whole number from 1 to ${p.N} is chosen at random. What is the probability that the digit ${p.d} appears in it?`, { m: 'digit' }],
+  ],
+})
+
+family('ga.probability.coins-dice', 'ga.probability', {
+  gen: (r) => ({ s: r.int(3, 11), t: r.int(7, 11), k: r.int(1, 4) }),
+  key: (p) => `${p.m}-${p.m === 'sum' ? p.s : p.m === 'atleast' ? p.t : p.m === 'diff' ? p.k : 0}`,
+  solve: (P) => {
+    const { s, t, k } = P
+    const pairs = []; for (let x = 1; x <= 6; x++) for (let y = 1; y <= 6; y++) pairs.push([x, y])
+    const pd = (pred) => fr(pairs.filter(pred).length, 36)
+    switch (P.m) {
+      case 'onehead': return { ans: '3/4', wrong: ['1/2', '1/4', '2/3'], expl: `Outcomes HH, HT, TH, TT; three contain a head: 3/4.` }
+      case 'exactly': return { ans: '1/2', wrong: ['1/4', '3/4', '1/3'], expl: `HT and TH out of HH, HT, TH, TT: 2/4 = 1/2.` }
+      case 'three': return { ans: '1/8', wrong: ['1/3', '1/6', '3/8'], expl: `Three coins give 2³ = 8 equally likely outcomes; only HHH is all heads: 1/8.` }
+      case 'twoplus': return { ans: '1/2', wrong: ['3/8', '1/4', '7/8'], expl: `HHT, HTH, THH and HHH: 4 of the 8 outcomes, so 1/2.` }
+      case 'sum': { const c = pairs.filter(([x, y]) => x + y === s).length; const ans = fr(c, 36); return { ans, wrong: fracs(ans, ['1/11', fr(c, 12), fr(c + 1, 36), fr(c - 1, 36)]), expl: `${c} of the 36 outcomes give a sum of ${s}: ${ans}.` } }
+      case 'doubles': return { ans: '1/6', wrong: ['1/36', '1/12', '1/3'], expl: `Six doubles (1,1) … (6,6) out of 36 outcomes: 6/36 = 1/6.` }
+      case 'atleast': { const c = pairs.filter(([x, y]) => x + y >= t).length; const ans = fr(c, 36); return { ans, wrong: fracs(ans, [fr(pairs.filter(([x, y]) => x + y > t).length, 36), fr(36 - c, 36), fr(13 - t, 11)]), expl: `Sums of ${t} or more occur in ${c} of 36 outcomes: ${ans}.` } }
+      case 'prodeven': return { ans: '3/4', wrong: ['1/2', '1/4', '2/3'], expl: `The product is odd only if both dice are odd: 3/6 × 3/6 = 1/4, so P(even) = 1 − 1/4 = 3/4.` }
+      case 'sumprime': return { ans: pd(([x, y]) => isPrime(x + y)), wrong: ['1/2', '7/18', '1/3'], expl: `Prime sums 2, 3, 5, 7, 11 occur 1 + 2 + 4 + 6 + 2 = 15 times out of 36: 15/36 = 5/12.` }
+      default: { const c = pairs.filter(([x, y]) => Math.abs(x - y) === k).length; const ans = fr(c, 36); return { ans, wrong: fracs(ans, [fr(c, 18), fr(c + 2, 36), fr(1, 6) === ans ? '1/9' : '1/6']), expl: `Pairs whose numbers differ by ${k}: ${c} of 36, so ${ans}.` } }
+    }
+  },
+  items: [
+    [1, () => `Two fair coins are tossed together. What is the probability of getting at least one head?`, { m: 'onehead' }],
+    [1, () => `Two coins are tossed. What is the probability of getting exactly one head?`, { m: 'exactly' }],
+    [2, () => `Three fair coins are tossed at the same time. What is the probability that all three show heads?`, { m: 'three' }],
+    [2, () => `When three coins are tossed, what is the probability of getting at least two heads?`, { m: 'twoplus' }],
+    [2, (p) => `Two fair dice are thrown. What is the probability that the total is ${p.s}?`, { m: 'sum' }],
+    [2, () => `Two dice are rolled together. What is the probability of getting a double (the same number on both)?`, { m: 'doubles' }],
+    [2, (p) => `Two ordinary dice are rolled. What is the probability that the sum is ${p.t} or more?`, { m: 'atleast' }],
+    [3, () => `Two dice are thrown and the numbers are multiplied. What is the probability that the product is even?`, { m: 'prodeven' }],
+    [3, () => `Two dice are rolled and the scores added. What is the probability that the total is a prime number?`, { m: 'sumprime' }],
+    [2, (p) => `Two dice are rolled. What is the probability that the two numbers differ by ${p.k}?`, { m: 'diff' }],
+  ],
+})
+
+family('ga.probability.two-draws', 'ga.probability', {
+  gen: (r) => ({ r0: r.int(2, 7), b0: r.int(2, 7), N: r.pick([6, 8, 10, 12]) }),
+  key: (p) => `${p.m}-${p.r0}-${p.b0}-${p.N}`,
+  fact: (p) => p.m,
+  solve: (P) => {
+    const { r0, b0, N } = P
+    const T = r0 + b0
+    const both = fr(r0 * (r0 - 1), T * (T - 1)); const withR = fr(r0 * r0, T * T)
+    switch (P.m) {
+      case 'bothred': return { ans: both, wrong: fracs(both, [withR, fr(r0, T), fr(r0 * (r0 - 1), T * T), fr(2 * r0, T)]), expl: `P = ${r0}/${T} × ${r0 - 1}/${T - 1} = ${fr(r0 * (r0 - 1), T * (T - 1))}.` }
+      case 'mixed': { const ans = fr(2 * r0 * b0, T * (T - 1)); return { ans, wrong: fracs(ans, [fr(r0 * b0, T * (T - 1)), fr(2 * r0 * b0, T * T), fr(1, 2)]), expl: `Red then blue or blue then red: 2 × ${r0}/${T} × ${b0}/${T - 1} = ${ans}.` } }
+      case 'same': { const ans = fr(r0 * (r0 - 1) + b0 * (b0 - 1), T * (T - 1)); return { ans, wrong: fracs(ans, [fr(r0 * r0 + b0 * b0, T * T), fr(r0 * (r0 - 1), T * (T - 1)), fr(1, 2)]), expl: `Both red: ${fr(r0 * (r0 - 1), T * (T - 1))}; both blue: ${fr(b0 * (b0 - 1), T * (T - 1))}; total ${ans}.` } }
+      case 'withrep': return { ans: withR, wrong: fracs(withR, [both, fr(r0, T), fr(2 * r0, 2 * T + 1)]), expl: `With replacement the draws are independent: (${r0}/${T})² = ${withR}.` }
+      case 'atleastone': { const ans = fr(T * (T - 1) - r0 * (r0 - 1), T * (T - 1)); return { ans, wrong: fracs(ans, [fr(b0, T), both, fr(b0 * (b0 - 1), T * (T - 1))]), expl: `P(at least one blue) = 1 − P(both red) = 1 − ${both} = ${ans}.` } }
+      case 'second': { const ans = fr(r0 - 1, T - 1); return { ans, wrong: fracs(ans, [fr(r0, T), fr(r0 - 1, T), both]), expl: `After one red ball is removed, ${r0 - 1} red remain among ${T - 1}: ${ans}.` } }
+      case 'cards': { const e = Math.floor(N / 2); const ans = fr(e * (e - 1), N * (N - 1)); return { ans, wrong: fracs(ans, [fr(e * e, N * N), fr(1, 2), fr(e - 1, N - 1)]), expl: `${e} of the ${N} cards are even: ${e}/${N} × ${e - 1}/${N - 1} = ${ans}.` } }
+      case 'girls': { const ans = fr(b0 * (b0 - 1), T * (T - 1)); return { ans, wrong: fracs(ans, [fr(b0 * b0, T * T), fr(b0, T), fr(r0 * (r0 - 1), T * (T - 1))]), expl: `P = ${b0}/${T} × ${b0 - 1}/${T - 1} = ${ans}.` } }
+      case 'pens': { const d = Math.min(r0, 3); const good = N - d; P.d = d; const ans = fr(good * (good - 1), N * (N - 1)); return { ans, wrong: fracs(ans, [fr(good * good, N * N), fr(good, N), fr(d * (d - 1), N * (N - 1))]), expl: `${good} good pens out of ${N}: ${good}/${N} × ${good - 1}/${N - 1} = ${ans}.` } }
+      default: { const ans = fr(r0 * (r0 - 1) + b0 * (b0 - 1), T * (T - 1)); return { ans, wrong: fracs(ans, [fr(1, 2), fr(r0 * r0 + b0 * b0, T * T), fr(2 * r0 * b0, T * (T - 1))]), expl: `A matching pair is two black or two white: (${r0 * (r0 - 1)} + ${b0 * (b0 - 1)}) ÷ ${T * (T - 1)} = ${ans}.` } }
+    }
+  },
+  items: [
+    [3, (p) => `A bag contains ${p.r0} red and ${p.b0} blue balls. Two balls are drawn one after the other without replacement. What is the probability that both are red?`, { m: 'bothred' }],
+    [3, (p) => `A box holds ${p.r0} red and ${p.b0} blue counters. Two counters are taken out together at random. What is the probability of getting one of each colour?`, { m: 'mixed' }],
+    [3, (p) => `From a bag of ${p.r0} red and ${p.b0} blue beads, two beads are removed at random without replacement. What is the probability that they are the same colour?`, { m: 'same' }],
+    [2, (p) => `A bag has ${p.r0} red and ${p.b0} blue balls. A ball is drawn, replaced, and a second ball is drawn. What is the probability that both are red?`, { m: 'withrep' }],
+    [3, (p) => `Two marbles are drawn without replacement from a jar containing ${p.r0} red and ${p.b0} blue marbles. What is the probability that at least one is blue?`, { m: 'atleastone' }],
+    [2, (p) => `A bag has ${p.r0} red and ${p.b0} blue balls. The first ball drawn is red and is not replaced. What is the probability that the second ball is also red?`, { m: 'second' }],
+    [3, (p) => `Two cards are drawn without replacement from ${p.N} cards numbered 1 to ${p.N}. What is the probability that both numbers are even?`, { m: 'cards' }],
+    [3, (p) => `Two students are chosen at random from a group of ${p.r0} boys and ${p.b0} girls. What is the probability that both are girls?`, { m: 'girls' }],
+    [3, (p) => `A box contains ${p.N} pens, of which ${p.d} are faulty. If two pens are taken at random, what is the probability that neither is faulty?`, { m: 'pens' }],
+    [3, (p) => `A drawer holds ${p.r0} black and ${p.b0} white socks. Two socks are pulled out at random in the dark. What is the probability that they form a matching pair?`, { m: 'socks' }],
   ],
 })
 

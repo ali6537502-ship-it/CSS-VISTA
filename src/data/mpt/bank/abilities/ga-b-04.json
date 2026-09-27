@@ -2691,7 +2691,7 @@
       "9:40 a.m."
     ],
     "a": 2,
-    "explanation": "They leave together every LCM(8, 20) = 40 minutes, so next at 7:40 a.m..",
+    "explanation": "They leave together every LCM(8, 20) = 40 minutes, so the next joint departure is at 7:40 a.m.",
     "source_url": null,
     "time_sensitive": false,
     "event_date": null,

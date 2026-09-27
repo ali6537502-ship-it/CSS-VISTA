@@ -843,7 +843,7 @@ function genPhotograph(d) {
         const rz = fam.relation(Z, S)
         const first = special
           ? `With no ${sg === 'm' ? 'brother' : 'sister'}, “${desc}” is ${sp} ${sg === 'm' ? 'himself' : 'herself'}`
-          : steps.length > 1 ? `“${desc}” is ${rz ? `${sp}'s ${relTerm(rz)}` : `${sp}'s ${steps.map((s) => STEP_WORD[s]).join("'s ")}`}` : `The person meant is ${sp}'s ${STEP_WORD[steps[0]]}`
+          : steps.length > 1 && rz ? `“${desc}” is ${sp}'s ${relTerm(rz)}` : `The person meant is ${sp}'s ${steps.map((s) => STEP_WORD[s]).join("'s ")}`
         return `${first}, who is the ${noun}'s ${prel}; so the ${noun} is ${sp}'s ${term}.`
       })(),
     }
@@ -1208,7 +1208,7 @@ function genOrderMustBeTrue(d) {
 const RANK_CTX = [
   { grp: 'class', unit: 'student', units: 'students', top: 'top', bot: 'bottom', place: (x) => `in a class` },
   { grp: 'merit list', unit: 'candidate', units: 'candidates', top: 'top', bot: 'bottom', place: () => 'in a merit list' },
-  { grp: 'row', unit: 'boy', units: 'boys', top: 'left', bot: 'right', place: () => 'in a row of boys', line: true },
+  { grp: 'row', unit: 'student', units: 'students', top: 'left', bot: 'right', place: () => 'in a row of students', line: true },
   { grp: 'queue', unit: 'person', units: 'people', top: 'front', bot: 'back', place: () => 'in a queue at a bank', line: true },
   { grp: 'shelf', unit: 'book', units: 'books', top: 'left', bot: 'right', place: () => 'on a shelf', book: true },
   { grp: 'line', unit: 'car', units: 'cars', top: 'front', bot: 'back', place: () => 'in a line of cars at a toll plaza', car: true },
@@ -1223,6 +1223,7 @@ function subjectFor(c) {
   if (c.tree) return pick(['a neem tree', 'a mango tree', 'a banyan tree'])
   return pick(personNames(1).concat(mixedNames(1)))
 }
+const placeWith = (c, place, n) => place.replace(/^in a (\w+(?: list)?)(?: of \w+)?/, (m, nn) => `in a ${nn} of ${n} ${c.units}`)
 const fromTxt = (c, k, side) => `${ordinal(k)} from the ${side}`
 function genRankTopBottom(d) {
   const c = pick(RANK_CTX)
@@ -1238,7 +1239,7 @@ function genRankTopBottom(d) {
     expl = `${t - 1} ${c.units} are on one side and ${b - 1} on the other, plus ${X}: ${t - 1} + ${b - 1} + 1 = ${ans}.`
   } else if (tmpl === 'R1b') {
     ans = t + b - 1; cands = [t + b, t + b - 2, t + b + 1]
-    q = `${cap(place)}, ${X} is ${ordinal(t)} counted from the ${c.top}. Counting from the ${c.bot}, ${X} is ${ordinal(b)}. What is the total number of ${c.units}?`
+    q = `${cap(place)}, ${X} is ${ordinal(t)} counted from the ${c.top}. Counting from the ${c.bot}, ${c.book || c.car || c.tree ? `the ${X.replace(/^an? /, '')}` : X} is ${ordinal(b)}. What is the total number of ${c.units}?`
     expl = `Total = ${t} + ${b} − 1 = ${ans}, because ${X} is counted twice.`
   } else if (tmpl === 'R2') {
     const n = t + b + ri(0, 10)
@@ -1248,7 +1249,7 @@ function genRankTopBottom(d) {
   } else if (tmpl === 'R3' || tmpl === 'R3b') {
     const m = ri(4, 30)
     if (tmpl === 'R3') { ans = t + m; cands = [t + m - 1, t + m + 1, m - t > 0 ? m - t : t + m + 2]; q = `${Xc} is ${fromTxt(c, t, c.top)} ${place}, and ${m} ${c.units} come after ${c.book || c.car || c.tree ? 'it' : X} towards the ${c.bot}. How many ${c.units} are there in all?`; expl = `${t} (up to and including ${X}) + ${m} = ${ans}.` }
-    else { const n = t + m; ans = n - t + 1; cands = [n - t, n - t + 2, t]; q = `${cap(place)} of ${n} ${c.units}, exactly ${t - 1} ${c.units} are ahead of ${X} counting from the ${c.top}. What is ${X}'s position from the ${c.bot}?`; expl = `${X} is ${ordinal(t)} from the ${c.top}, so from the ${c.bot}: ${n} − ${t} + 1 = ${ans}.` }
+    else { const n = t + m; ans = n - t + 1; cands = [n - t, n - t + 2, t]; q = `${cap(placeWith(c, place, n))}, exactly ${t - 1} ${c.units} are ahead of ${X} counting from the ${c.top}. What is ${X}'s position from the ${c.bot}?`; expl = `${X} is ${ordinal(t)} from the ${c.top}, so from the ${c.bot}: ${n} − ${t} + 1 = ${ans}.` }
   } else if (tmpl === 'R5' || tmpl === 'R5b') {
     if (!(c.grp === 'class' || c.grp === 'merit list')) return null
     const f = ri(3, 12)
@@ -1269,7 +1270,7 @@ function genRankTopBottom(d) {
     ans = t + g + b - 1; cands = [t + g + b, t + b - 1, t + g + b - 2]
     q = tmpl === 'R7'
       ? `${cap(place)}, ${X} is ${fromTxt(c, t, c.top)}. ${Y} is ${g} places behind ${X} and ${fromTxt(c, b, c.bot)}. How many ${c.units} are there?`
-      : `${Xc} ranks ${ordinal(t)} from the ${c.top} ${place}. ${Y}, who is ${ordinal(b)} from the ${c.bot}, is exactly ${g} ranks below ${X}. Find the total number of ${c.units}.`
+      : `${Xc} ${c.line ? 'is' : 'ranks'} ${ordinal(t)} from the ${c.top} ${place}. ${Y}, who is ${ordinal(b)} from the ${c.bot}, is exactly ${g} ${c.line ? 'places behind' : 'ranks below'} ${X}. Find the total number of ${c.units}.`
     expl = `${Y} is ${ordinal(t + g)} from the ${c.top} and ${ordinal(b)} from the ${c.bot}: ${t + g} + ${b} − 1 = ${ans}.`
     if (c.book || c.car || c.tree) return null
   }
@@ -1297,14 +1298,14 @@ function genQueueBetween(d) {
     ans = n - (p + m) + 1; cands = [n - (p + m), n - p - m + 2, n - p + 1]
     q = tmpl === 'Q4'
       ? `There are ${n} ${c.units} ${place.replace(/^in a \w+ of \w+/, 'in a line').replace(/^in a queue at a bank/, 'in a queue at a bank')}. ${A} is ${ordinal(p)} from the ${front}, and ${B} stands ${m} places behind ${A}. What is ${B}'s position from the ${back}?`
-      : `${cap(place)} of ${n} ${c.units}, ${A} is ${ordinal(p)} from the ${front}. ${B} is ${m} places further back than ${A}. Counting from the ${back}, where does ${B} stand?`
+      : `${cap(placeWith(c, place, n))}, ${A} is ${ordinal(p)} from the ${front}. ${B} is ${m} places further back than ${A}. Counting from the ${back}, where does ${B} stand?`
     expl = `${B} is ${ordinal(p + m)} from the ${front}, so ${n} − ${p + m} + 1 = ${ans} from the ${back}.`
   } else if (tmpl === 'Q2') {
     const n = ri(25, 45), p = ri(4, 12), qb = ri(4, 12)
     const posB = n - qb + 1
     if (posB <= p + 2) return null
     ans = posB - p - 1; cands = [posB - p, n - p - qb, posB - p + 1]
-    q = `${cap(place)} of ${n} ${c.units}, ${A} is ${ordinal(p)} from the ${front} and ${B} is ${ordinal(qb)} from the ${back}. How many ${c.units} stand between ${A} and ${B}?`
+    q = `${cap(placeWith(c, place, n))}, ${A} is ${ordinal(p)} from the ${front} and ${B} is ${ordinal(qb)} from the ${back}. How many ${c.units} stand between ${A} and ${B}?`
     expl = `${B} is ${ordinal(posB)} from the ${front} (${n} − ${qb} + 1), so ${posB} − ${p} − 1 = ${ans} stand between.`
   } else if (tmpl === 'Q3' || tmpl === 'Q3b') {
     const p = ri(4, 14), qb = ri(4, 14), m = ri(2, 9)
@@ -1319,14 +1320,14 @@ function genQueueBetween(d) {
     const p = posB + ri(3, 8)
     if (p > n) return null
     ans = p - posB - 1; cands = [p - posB, n - p - qb, p - posB + 1]
-    q = `${cap(place)} of ${n} ${c.units}, ${A} is ${ordinal(n - p + 1)} from the ${back}, while ${B} is ${ordinal(qb)} from the ${back}. How many ${c.units} are there between them?`
+    q = `${cap(placeWith(c, place, n))}, ${A} is ${ordinal(n - p + 1)} from the ${back}, while ${B} is ${ordinal(qb)} from the ${back}. How many ${c.units} are there between them?`
     expl = `From the ${back}, ${B} is ${ordinal(qb)} and ${A} is ${ordinal(n - p + 1)}, so ${n - p + 1 > qb ? `${n - p + 1} − ${qb}` : `${qb} − ${n - p + 1}`} − 1 = ${ans} stand between.`
     if (n - p + 1 <= qb) { ans = qb - (n - p + 1) - 1 }
     if (ans <= 0) return null
   } else {
     const n = 2 * ri(9, 20) + 1, mid = (n + 1) / 2, p = ri(2, mid - 3)
     ans = mid - p - 1; cands = [mid - p, mid - p + 1, n - p]
-    q = `${cap(place)} of ${n} ${c.units}, ${B} stands exactly in the middle and ${A} is ${ordinal(p)} from the ${front}. How many ${c.units} are between ${A} and ${B}?`
+    q = `${cap(placeWith(c, place, n))}, ${B} stands exactly in the middle and ${A} is ${ordinal(p)} from the ${front}. How many ${c.units} are between ${A} and ${B}?`
     expl = `The middle position of ${n} is ${mid}; between positions ${p} and ${mid} there are ${mid} − ${p} − 1 = ${ans}.`
   }
   return {
@@ -1346,7 +1347,7 @@ function genRankInterchange(d) {
   const tmpl = d === 1 ? 'I4' : d === 2 ? pick(['I1', 'I2']) : 'I3'
   if (tmpl === 'I4') {
     ans = n - r + 1; cands = [n - r, n - l + 1, r]
-    q = `${cap(place)} of ${n} ${c.units}, ${A} is ${ordinal(l)} from the ${L} and ${B} is ${ordinal(r)} from the ${Rt}. If ${A} and ${B} interchange their places, what will be ${A}'s new position from the ${L}?`
+    q = `${cap(placeWith(c, place, n))}, ${A} is ${ordinal(l)} from the ${L} and ${B} is ${ordinal(r)} from the ${Rt}. If ${A} and ${B} interchange their places, what will be ${A}'s new position from the ${L}?`
     expl = `${A} moves to ${B}'s place, which is ${n} − ${r} + 1 = ${ans} from the ${L}.`
   } else if (tmpl === 'I1') {
     ans = n; cands = [n - 1, n + 1, n - 2]

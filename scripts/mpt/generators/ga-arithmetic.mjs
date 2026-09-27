@@ -2808,6 +2808,556 @@ fam('ga.work-time.fraction-of-job', 'ga.work-time', [
   }),
 ])
 
+// ---- Fractions, decimals, indices, standard form, surds ----------------------------
+const properFr = (maxD = 12, minD = 2) => { for (;;) { const d = ri(minD, maxD); const n = ri(1, d - 1); if (gcd(n, d) === 1) return fr(n, d) } }
+const mixedFr = (maxW = 4, maxD = 9) => fr(ri(1, maxW)).add(properFr(maxD))
+const numOpts = (ans, wrongs, fmt = fmtNum) => [ans, ...wrongs].filter((x) => x !== null && x !== undefined && Number.isFinite(x)).map((x) => ({ label: fmt(r9(x)), val: r9(x) }))
+
+fam('ga.fractions.fraction-operations', 'ga.fractions', [
+  mode({ // add
+    d: 1,
+    gen(tp) {
+      const f1 = properFr(12); const f2 = properFr(12); if (f1.d === f2.d || f1.eq(f2)) return null
+      const s = f1.add(f2); if (tp.lt1 && s.val >= 1) return null
+      return { v: { f1: fl(f1), f2: fl(f2) }, opts: fOpts(s, [fr(f1.n + f2.n, f1.d + f2.d), f1.mul(f2), f1.sub(f2).val > 0 ? f1.sub(f2) : f2.sub(f1), s.add(fr(1, lcm(f1.d, f2.d)))]), exp: `LCM of ${f1.d} and ${f2.d} is ${lcm(f1.d, f2.d)}: ${fl(f1)} + ${fl(f2)} = ${s.mixed()}.` }
+    },
+    T: [
+      'Simplify: {f1} + {f2}',
+      { t: '{A} ate {f1} of a pizza and {B} ate {f2} of it. What fraction of the pizza did they eat between them?', lt1: true },
+    ],
+  }),
+  mode({ // subtract
+    d: 1,
+    gen() {
+      let f1 = properFr(12); let f2 = properFr(12); if (f1.d === f2.d || f1.eq(f2)) return null
+      if (f1.val < f2.val) [f1, f2] = [f2, f1]
+      const s = f1.sub(f2); const naive = f1.d - f2.d > 0 && f1.n - f2.n > 0 ? fr(f1.n - f2.n, f1.d - f2.d) : null
+      return { v: { f1: fl(f1), f2: fl(f2) }, opts: fOpts(s, [naive, f1.add(f2), s.add(fr(1, lcm(f1.d, f2.d))), fr(f1.n - f2.n > 0 ? f1.n - f2.n : 1, lcm(f1.d, f2.d))]), exp: `Using the LCM ${lcm(f1.d, f2.d)}: ${fl(f1)} − ${fl(f2)} = ${s.toString()}.` }
+    },
+    T: [
+      'Find the value of {f1} − {f2}.',
+      'A tank is {f1} full. After water equal to {f2} of its capacity is drawn off, what fraction of the tank is full?',
+      'By how much does {f1} exceed {f2}?',
+    ],
+  }),
+  mode({ // multiply
+    d: 1,
+    gen() {
+      const f1 = properFr(12); const f2 = properFr(12); if (f1.eq(f2)) return null
+      const p = f1.mul(f2)
+      return { v: { f1: fl(f1), f2: fl(f2) }, opts: fOpts(p, [f1.div(f2), fr(f1.n + f2.n, f1.d + f2.d), fr(f1.n * f2.n, f1.d + f2.d), f1.add(f2)]), exp: `Multiply numerators and denominators: ${fl(f1)} × ${fl(f2)} = ${p.toString()}.` }
+    },
+    T: ['Find the value of {f1} of {f2}.', 'Evaluate: {f1} × {f2}'],
+  }),
+  mode({ // divide
+    d: 1,
+    gen(tp) {
+      const f1 = properFr(10); const f2 = properFr(10); if (f1.eq(f2)) return null
+      const q = tp.inv ? f2.div(f1) : f1.div(f2)
+      return { v: { f1: fl(f1), f2: fl(f2) }, opts: fOpts(q, [tp.inv ? f1.div(f2) : f2.div(f1), f1.mul(f2), q.add(1), fr(q.n + 1, q.d)]), exp: tp.inv ? `The number is ${fl(f2)} ÷ ${fl(f1)} = ${fl(f2)} × ${fr(f1.d, f1.n).toString()} = ${q.mixed()}.` : `Dividing by ${fl(f2)} means multiplying by ${fr(f2.d, f2.n).toString()}: ${q.mixed()}.` }
+    },
+    T: ['Divide {f1} by {f2}.', { t: 'Which number, when multiplied by {f1}, gives {f2}?', inv: true }],
+  }),
+  mode({ // pieces
+    d: 2, u: 'num',
+    gen() {
+      const f2 = properFr(8); const k = ri(3, 30); const L = f2.mul(k); if (L.val < 1) return null
+      return { v: { f2: fl(f2), m1: L.mixed() }, ans: k, wrong: [Math.round(L.val * f2.val) || null, k - 1, k + 2, Math.floor(L.val * f2.d)].map((x) => (x && x !== k ? x : null)), exp: `${L.mixed()} ÷ ${fl(f2)} = ${L.toString()} × ${fr(f2.d, f2.n).toString()} = ${k}.` }
+    },
+    T: ['How many pieces, each {f2} m long, can be cut from a rod {m1} m long?'],
+  }),
+  mode({ // mixed numbers
+    d: 2,
+    gen(tp) {
+      let m1 = mixedFr(5, 9); let m2 = mixedFr(4, 9); if (m1.eq(m2)) return null
+      if (tp.sub && m1.val < m2.val) [m1, m2] = [m2, m1]
+      const r = tp.sub ? m1.sub(m2) : m1.add(m2); const suf = tp.unit ? ' m' : ''
+      const w = [tp.sub ? m1.add(m2) : m1.sub(m2).val > 0 ? m1.sub(m2) : m2.sub(m1), r.add(1), r.sub(fr(1, 2)).val > 0 ? r.sub(fr(1, 2)) : r.add(fr(1, 3)), r.add(fr(1, lcm(m1.d, m2.d)))]
+      return { v: { m1: m1.mixed(), m2: m2.mixed() }, opts: fOpts(r, w).map((o) => ({ label: o.label + suf, val: o.val })), exp: `${m1.mixed()} = ${m1.toString()}, ${m2.mixed()} = ${m2.toString()}; ${tp.sub ? 'difference' : 'sum'} = ${r.toString()} = ${r.mixed()}${suf}.` }
+    },
+    T: [
+      'Add {m1} and {m2}.',
+      { t: 'A tailor used {m1} metres of cloth for a shirt and {m2} metres for a pair of trousers. How much cloth did he use in all?', unit: true },
+      { t: 'Subtract {m2} from {m1}.', sub: true },
+    ],
+  }),
+  mode({ // reciprocal of mixed
+    d: 1,
+    gen() {
+      const m = mixedFr(4, 9); const r = fr(m.d, m.n); const w = Math.trunc(m.n / m.d); const fp = m.sub(w)
+      return { v: { m1: m.mixed() }, opts: fOpts(r, [fr(fp.d, fp.n).add(w), m, fr(1, w).add(fp), fr(m.n, m.d + 1)]), exp: `${m.mixed()} = ${m.toString()}, so its reciprocal is ${r.toString()}.` }
+    },
+    T: ['What is the reciprocal of {m1}?'],
+  }),
+])
+
+const DEC = (a, p) => a / 10 ** p
+fam('ga.fractions.decimal-operations', 'ga.fractions', [
+  mode({ // multiply
+    d: 1,
+    gen() {
+      const a = ri(2, 15); const p = ri(1, 3); const b = ri(2, 12); const q = ri(1, 2); const x = DEC(a, p); const y = DEC(b, q); if (a % 10 === 0 || b % 10 === 0) return null
+      const ans = r9(x * y)
+      return { v: { x, y }, opts: numOpts(ans, [ans * 10, ans / 10, ans * 100]), exp: `${a} × ${b} = ${a * b}; there are ${p + q} decimal places in all, so the product is ${fmtNum(ans)}.` }
+    },
+    T: ['Multiply {x} by {y}.', 'The product of {x} and {y} is:'],
+  }),
+  mode({ // divide
+    d: 1,
+    gen() {
+      const y = DEC(ri(2, 12), ri(1, 2)); const qv = pick([4, 5, 6, 8, 12, 20, 25, 40, 0.5, 0.2, 1.5, 0.05]); const x = r9(y * qv); if (decimals(x) > 4) return null
+      return { v: { x, y }, opts: numOpts(qv, [qv * 10, qv / 10, qv * 100]), exp: `Multiply both by a power of ten to clear the divisor’s decimals: ${fmtNum(x)} ÷ ${fmtNum(y)} = ${fmtNum(qv)}.` }
+    },
+    T: ['Work out the quotient {x} ÷ {y}.', '{x} is divided by {y}. What is the quotient?'],
+  }),
+  mode({ // add / subtract
+    d: 1,
+    gen(tp) {
+      const x = DEC(ri(11, 99), ri(1, 2)); const y = DEC(ri(2, 99), ri(1, 3)); const z = ri(2, 20)
+      if (tp.op === 'sub') { if (x <= y) return null; const ans = r9(x - y); return { v: { x, y }, opts: numOpts(ans, [r9(x - y / 10), r9(x - y * 10) > 0 ? r9(x - y * 10) : r9(ans + 1), r9(ans + 0.1)]), exp: `Line up the decimal points: ${fmtNum(x)} − ${fmtNum(y)} = ${fmtNum(ans)}.` } }
+      if (tp.op === 'two') { const ans = r9(x + y); return { u: 'kg', v: { x, y }, opts: numOpts(ans, [r9(x + y / 10), r9(x / 10 + y), r9(ans + 1)]).map((o) => ({ label: `${o.label} kg`, val: o.val })), exp: `Line up the decimal points: ${fmtNum(x)} + ${fmtNum(y)} = ${fmtNum(ans)} kg.` } }
+      const ans = r9(x + y + z)
+      return { v: { x, y, z }, opts: numOpts(ans, [r9(x + y + z / 10), r9(x + y / 10 + z), r9(ans + 1)]), exp: `Line up the decimal points (${z} = ${z}.0): ${fmtNum(x)} + ${fmtNum(y)} + ${z} = ${fmtNum(ans)}.` }
+    },
+    T: [
+      'What is {x} + {y} + {z}?',
+      { t: 'Take {y} away from {x}. What remains?', op: 'sub' },
+      { t: 'A bag of flour weighs {x} kg and a bag of sugar weighs {y} kg. What is their total weight?', op: 'two' },
+    ],
+  }),
+  mode({ // fraction ↔ decimal
+    d: 1,
+    gen(tp) {
+      const [n, d] = pick([[3, 8], [5, 8], [7, 8], [1, 16], [3, 16], [7, 20], [9, 25], [3, 40], [11, 20], [7, 25], [13, 40], [1, 8], [3, 4], [2, 5]])
+      const x = n / d
+      if (tp.to === 'fr') { const f = fr(n, d); return { v: { x }, opts: fOpts(f, [fr(1, Math.round(1 / x)) .eq(f) ? fr(n + 1, d) : fr(1, Math.round(1 / x)), fr(d, n * 10).val !== x ? fr(n, d * 10) : fr(n + 2, d), fr(n, d + 1), fr(Math.round(x * 100) + 1, 100)]), exp: `${fmtNum(x)} = ${Math.round(x * 1000)}/1000 = ${f.toString()} in lowest terms.` } }
+      const dotted = Number(`0.${n}${d}`)
+      return { v: { f: `${n}/${d}` }, opts: numOpts(x, [x * 10, x / 10, dotted]), exp: `${n} ÷ ${d} = ${fmtNum(x)}.` }
+    },
+    T: ['Express {f} as a decimal.', { t: 'Write {x} as a fraction in its lowest terms.', to: 'fr' }],
+  }),
+  mode({ // word uses
+    d: 1,
+    gen(tp) {
+      if (tp.kind === 'pieces') { const y = DEC(ri(2, 9), 1); const k = ri(4, 30); const x = r9(y * k); return { d: 2, u: 'num', v: { x, y }, ans: k, wrong: [k * 10, Math.round(k / 10) || null, k + 1, k - 2], exp: `${fmtNum(x)} ÷ ${fmtNum(y)} = ${x * 10}/${y * 10} = ${k} pieces.` } }
+      if (tp.kind === 'oil') { const x = DEC(ri(80, 95), 2); const n = ri(3, 20); const ans = r9(x * n); return { u: 'kg', v: { x, n }, ans, wrong: [ans * 10, ans / 10, r9(x + n)], exp: `${fmtNum(x)} × ${n} = ${fmtNum(ans)} kg.` } }
+      const x = DEC(ri(2, 9), 1); const y = DEC(ri(2, 9), 1); const z = pick([0.02, 0.04, 0.05, 0.2, 0.3, 0.6]); const ans = r9((x * y) / z); if (decimals(ans) > 1) return null
+      return { d: 2, v: { x, y, z }, ans, wrong: [ans * 10, ans / 10, r9(x * (y / z) / 100)], exp: `${fmtNum(x)} × ${fmtNum(y)} = ${fmtNum(r9(x * y))}; ÷ ${fmtNum(z)} gives ${fmtNum(ans)}.` }
+    },
+    T: [
+      { t: 'How many pieces of ribbon, each {y} m long, can be cut from a ribbon {x} m long?', kind: 'pieces' },
+      { t: 'If one litre of cooking oil weighs {x} kg, how much do {n} litres weigh?', kind: 'oil' },
+      { t: 'Calculate the decimal value of ({x} × {y}) ÷ {z}.', kind: 'mixed' },
+    ],
+  }),
+])
+
+const recurLabel = (kind, a, b) => (kind === 1 ? `0.${a}${a}${a}…` : kind === 2 ? `0.${a}${b}${a}${b}${a}${b}…` : `0.${a}${b}${b}${b}…`)
+fam('ga.fractions.recurring-decimals', 'ga.fractions', [
+  mode({
+    d: 2,
+    gen(tp) {
+      const kind = tp.kind; const a = ri(1, 8); const b = ri(0, 9); if (kind !== 1 && a === b) return null
+      const f = kind === 1 ? fr(a, 9) : kind === 2 ? fr(10 * a + b, 99) : fr(10 * a + b - a, 90)
+      if (kind === 2 && b === 0) return null
+      const wr = kind === 1 ? [fr(a, 10), fr(a, 99), fr(a, 100), fr(a + 1, 9)] : kind === 2 ? [fr(10 * a + b, 100), fr(10 * a + b, 90), fr(a, 9), fr(10 * a + b, 999)] : [fr(10 * a + b, 90), fr(10 * a + b, 99), fr(10 * a + b, 100), fr(a, 9)]
+      return { v: { r: recurLabel(kind, a, b) }, opts: fOpts(f, wr), exp: kind === 1 ? `One recurring digit: 0.${a}${a}… = ${a}/9${gcd(a, 9) > 1 ? ` = ${f.toString()}` : ''}.` : kind === 2 ? `Two recurring digits: ${10 * a + b}/99${f.d !== 99 ? ` = ${f.toString()}` : ''}.` : `(${10 * a + b} − ${a})/90 = ${10 * a + b - a}/90 = ${f.toString()}.` }
+    },
+    T: [
+      { t: 'The recurring decimal {r} is equal to:', kind: 1 },
+      { t: 'Which fraction is equal to {r}?', kind: 1 },
+      { t: 'Express the recurring decimal {r} as a fraction in its lowest terms.', kind: 2 },
+      { t: 'Convert {r} into a common fraction.', kind: 2 },
+      { t: 'What is {r} written as a fraction in its simplest form?', kind: 3 },
+      { t: 'Find the vulgar fraction equal to {r}.', kind: 3, d: 3 },
+    ],
+  }),
+  mode({
+    d: 3,
+    gen(tp) {
+      if (tp.kind === 'sum') { const a = ri(1, 8); const b = ri(1, 8); const s = fr(a + b, 9); if (a === b) return null; return { v: { r1: recurLabel(1, a), r2: recurLabel(1, b) }, opts: fOpts(s, [fr(a + b, 10), fr(a + b, 99), s.add(fr(1, 9)), fr(a * b, 9)]), exp: `${a}/9 + ${b}/9 = ${a + b}/9${s.d !== 9 ? ` = ${s.mixed()}` : ''}.` } }
+      const a = ri(1, 9); const b = ri(0, 9); if (a === b && b === 0) return null
+      const f = fr(10 * a + b, 99); if (f.d === 99 && b === 0) return null
+      return { u: 'num', v: { r: recurLabel(2, a, b) }, ans: f.n + f.d, wrong: [10 * a + b + 99, f.n + f.d + 1, 10 * a + b + 100, f.d - f.n].filter((x) => x !== f.n + f.d), exp: `${recurLabel(2, a, b)} = ${10 * a + b}/99 = ${f.toString()}, so p + q = ${f.n} + ${f.d} = ${f.n + f.d}.` }
+    },
+    T: [
+      { t: 'What is the value of {r1} + {r2}?', kind: 'sum' },
+      { t: 'If {r} is written as p/q in its lowest terms, what is p + q?', kind: 'pq' },
+    ],
+  }),
+])
+
+const sup = (e) => (typeof e === 'number' && e < 0 ? `(−${-e})` : e instanceof Fr ? `(${e.n < 0 ? '−' : ''}${Math.abs(e.n)}/${e.d})` : `${e}`)
+fam('ga.fractions.indices', 'ga.fractions', [
+  mode({ // numeric law of indices
+    d: 1,
+    gen(tp) {
+      const b = pick([2, 3, 5, 10]); const m = ri(2, 9); const n = ri(2, 9)
+      if (tp.pp) { const p = ri(1, m * n); const e = m * n - p; const ans = b ** e; if (e < 1 || ans > 1000 || e === 1 && b === 10) return null; return { v: { b, m, n, p }, opts: numOpts(ans, [b ** (m + n - p) > 0 && m + n - p >= 0 ? b ** (m + n - p) : null, b ** (e + 1), b * e, b ** Math.max(0, e - 1)]), exp: `(${b}^${m})^${n} = ${b}^${m * n}; ÷ ${b}^${p} gives ${b}^${e} = ${ans}.` } }
+      const p = ri(1, m + n); const e = m + n - p; const ans = b ** e; if (e < 1 || ans > 1000) return null
+      return { v: { b, m, n, p }, opts: numOpts(ans, [b ** (m * n - p) <= 1e6 && m * n - p > 0 ? b ** (m * n - p) : null, b ** (e + 1), b * e, b ** Math.max(0, e - 1)]), exp: `Add powers when multiplying and subtract when dividing: ${b}^(${m} + ${n} − ${p}) = ${b}^${e} = ${ans}.` }
+    },
+    T: ['Using the laws of indices, find the value of {b}^{m} × {b}^{n} ÷ {b}^{p}.', { t: 'Applying the power-of-a-power rule, work out ({b}^{m})^{n} ÷ {b}^{p}.', pp: true }],
+  }),
+  mode({ // fractional exponents
+    d: 2,
+    gen(tp) {
+      const r = pick([2, 3, 4, 5]); const [p, q] = pick([[2, 3], [3, 2], [1, 2], [1, 3], [2, 5], [3, 4], [4, 3], [5, 2]])
+      if (tp.solve) { const N = r ** p; const x = r ** q; if (x > 1024 || N > 1024 || N === x) return null; return { v: { N, p, q }, opts: numOpts(x, [r, (N * q) / p % 1 === 0 ? (N * q) / p : null, N * N, r ** (q + 1)]), exp: `x = ${N}^(${q}/${p}) = (${N}^(1/${p}))^${q} = ${r}^${q} = ${x}.` } }
+      const N = r ** q; if (N > 1024) return null
+      if (tp.neg) { const f = fr(1, r ** p); return { v: { N, p, q }, opts: fOpts(f, [fr(r ** p), fr(1, r ** q), fr(1, r * p), fr(p, q * r)]), exp: `${N}^(1/${q}) = ${r}, so ${N}^(${p}/${q}) = ${r ** p} and the negative power gives 1/${r ** p}.` } }
+      const ans = r ** p; if (ans === N) return null
+      return { v: { N, p, q }, opts: numOpts(ans, [(N * p) / q % 1 === 0 ? (N * p) / q : null, r, N ** 2 > 5000 ? r ** (p + 1) : N ** 2, r ** (p + 1)]), exp: `${N}^(1/${q}) = ${r}; raising to the power ${p} gives ${ans}.` }
+    },
+    T: [
+      { t: 'If x^({p}/{q}) = {N}, what is x?', solve: true },
+      'Compute {N}^({p}/{q}) without a calculator.',
+      { t: 'With a negative fractional index, what is {N}^(−{p}/{q})?', neg: true },
+    ],
+  }),
+  mode({ // negative exponents
+    d: 1,
+    gen(tp) {
+      if (tp.frac) { const f = properFr(5); const n = pick([2, 3]); const ans = fr(f.d ** n, f.n ** n); return { d: 2, v: { f: fl(f), n }, opts: fOpts(ans, [fr(f.n ** n, f.d ** n), fr(f.d * n, f.n), fr(f.d ** n, f.n), fr(f.n * n, f.d)]), exp: `A negative power inverts the fraction: (${fl(f)})^(−${n}) = (${f.d}/${f.n})^${n} = ${ans.mixed()}.` } }
+      const b = pick([2, 3, 4, 5, 10]); const n = pick([2, 3]); const f = fr(1, b ** n)
+      return { v: { b, n }, opts: [...fOpts(f, [fr(1, b * n), fr(b ** n)]), { label: `−${b ** n}`, val: -(b ** n) }, { label: `−${b * n}`, val: -(b * n) }], exp: `${b}^(−${n}) = 1/${b}^${n} = 1/${b ** n}.` }
+    },
+    T: ['Written as a fraction, {b}^(−{n}) equals:', { t: 'Raise the fraction {f} to the power −{n}. The result is:', frac: true }],
+  }),
+  mode({ // algebraic laws
+    d: 1,
+    gen(tp) {
+      if (tp.kind === 'cube') { const k = pick([2, 3, 4, 5]); const ans = `−${k ** 3}x^3`; return { v: { k }, opts: [ans, `−${3 * k}x^3`, `−${k ** 3}x`, `−${k}x^3`, `${k ** 3}x^9`].map((l) => ({ label: l, val: l })), exp: `(−${k}x)^3 = (−${k})^3 × x^3 = −${k ** 3}x^3 (an odd power keeps the minus sign).` } }
+      if (tp.kind === 'inv') { const [p, q] = pick([[1, 2], [2, 3], [3, 4], [1, 3]]); return { v: { p, q }, opts: ['1', '0', 'x', `x^${2 * p}/${q}`].map((l) => ({ label: l, val: l })), exp: `x^(${p}/${q}) × x^(−${p}/${q}) = x^0 = 1.` } }
+      const a = ri(2, 9); const b = ri(2, 9)
+      if (tp.kind === 'pow') { const e = a * b; return { v: { a, b }, opts: [`x^${e}`, `x^${a + b}`, `x^${a ** b > 99 ? a + b + 1 : a ** b}`, `${a}x^${b}`, `x^${e + 1}`].map((l) => ({ label: l, val: l })), exp: `A power of a power multiplies the indices: (x^${a})^${b} = x^${e}.` } }
+      const c = ri(1, a + b - 1); const e = a + b - c
+      return { v: { a, b, c }, opts: [`x^${e}`, `x^${a * b - c > 0 ? a * b - c : a * b + c}`, `x^${a + b + c}`, `x^${e + 1}`, `x^${Math.abs(e - 1) || 11}`].map((l) => ({ label: l, val: l })), exp: `x^(${a} + ${b} − ${c}) = x^${e}.` }
+    },
+    T: [
+      'Simplify: x^{a} × x^{b} ÷ x^{c}',
+      { t: 'What is (x^{a})^{b} in simplest form?', kind: 'pow' },
+      { t: 'Simplify: (−{k}x)^3', kind: 'cube' },
+      { t: 'Simplify: x^({p}/{q}) × x^(−{p}/{q})', kind: 'inv' },
+    ],
+  }),
+  mode({ // solve exponential equations and roots
+    d: 1, u: 'num',
+    gen(tp) {
+      const b = pick([2, 3, 5]); const x = ri(2, b === 2 ? 9 : 5)
+      if (tp.kind === 'shift') { const c = ri(1, 3); const N = b ** (x + c); if (N > 3000) return null; return { d: 2, v: { b, c, N }, ans: x, wrong: [x + c, x + 2 * c, N / b % 1 === 0 && N / b < 20 ? N / b : null, x - 1 || null], exp: `${fmtNum(N)} = ${b}^${x + c}, so x + ${c} = ${x + c} and x = ${x}.` } }
+      if (tp.kind === 'roots') { const [N, q, M, q2] = pick([[8, 3, 16, 4], [27, 3, 16, 2], [32, 5, 81, 4], [64, 3, 25, 2], [125, 3, 36, 2], [16, 4, 8, 3], [81, 4, 27, 3], [64, 6, 9, 2]]); const ans = Math.round(N ** (1 / q)) * Math.round(M ** (1 / q2)); return { d: 2, v: { N, q, M, q2 }, ans, wrong: [Math.round(N ** (1 / q)) + Math.round(M ** (1 / q2)), (N * M) / (q * q2) % 1 === 0 ? (N * M) / (q * q2) : null, ans * 2, ans + 1], exp: `${N}^(1/${q}) = ${Math.round(N ** (1 / q))} and ${M}^(1/${q2}) = ${Math.round(M ** (1 / q2))}; product = ${ans}.` } }
+      const N = b ** x
+      return { v: { b, N }, ans: x, wrong: [N / b, N / 2 % 1 === 0 ? N / 2 : null, x + 1, x - 1].map((y) => (y && y > 0 ? y : null)), exp: `${fmtNum(N)} = ${b}^${x}, so x = ${x}.` }
+    },
+    T: [
+      'If {b}^x = {N}, find x.',
+      { t: 'If {b}^(x + {c}) = {N}, what is x?', kind: 'shift' },
+      { t: 'Multiply the roots {N}^(1/{q}) and {M}^(1/{q2}). What is the product?', kind: 'roots' },
+    ],
+  }),
+])
+
+const stdLabel = (m, e) => `${fmtNum(r9(m))} × 10^${e < 0 ? `−${-e}` : e}`
+const std = (x) => { const e = Math.floor(Math.log10(x) + 1e-9); return [r9(x / 10 ** e), e] }
+const stdOpts = (m, e) => [[m, e], [m, e - 1], [m, e + 1], [r9(m * 10), e + 1], [m, e - 2]].map(([mm, ee]) => ({ label: stdLabel(mm, ee), val: r9(Math.log10(mm) + ee) }))
+fam('ga.fractions.standard-form', 'ga.fractions', [
+  mode({ // write in standard form
+    d: 1,
+    gen(tp) {
+      const m = r9(pick([ri(11, 99) / 10, ri(101, 999) / 100])); if (m % 1 === 0) return null
+      const e = tp.big ? ri(4, 9) : -ri(3, 7); const x = r9(m * 10 ** e); if (!tp.big && decimals(x) > 9) return null
+      return { v: { x: tp.big ? x.toLocaleString('en-US') : x.toFixed(-e + 2).replace(/0+$/, '') }, opts: stdOpts(m, e), exp: `Move the decimal point ${Math.abs(e)} places ${tp.big ? 'left' : 'right'} to get a number between 1 and 10: ${stdLabel(m, e)}.` }
+    },
+    T: [
+      'Writing {x} in standard form gives:',
+      { t: 'Express {x} in scientific notation.', big: true },
+      { t: 'A city supplies {x} litres of water a day. Written in standard form this is:', big: true },
+      'A strand of fibre is {x} m thick. Write this thickness in standard form.',
+      'Which of the following is {x} written in standard form?',
+    ],
+  }),
+  mode({ // standard form to ordinary
+    d: 1,
+    gen(tp) {
+      const m = ri(11, 99) / 10; const e = tp.neg ? -ri(2, 5) : ri(3, 6); const x = r9(m * 10 ** e)
+      const f = (y) => (y >= 1000 ? y.toLocaleString('en-US') : fmtNum(y))
+      return { v: { s: stdLabel(m, e) }, opts: [x, x * 10, x / 10, x * 100].map((y) => ({ label: f(r9(y)), val: r9(y) })), exp: `Move the decimal point ${Math.abs(e)} places to the ${e < 0 ? 'left' : 'right'}: ${f(x)}.` }
+    },
+    T: ['Write {s} as an ordinary number.', { t: '{s} is equal to:', neg: true }],
+  }),
+  mode({ // totals using standard form
+    d: 2,
+    gen(tp) {
+      const a = pick([1.5, 2, 2.5, 4, 5, 8, 1.2]); const e = ri(1, 3); const n = pick([200, 400, 500, 800, 1000, 250]); const total = r9(a * 10 ** -e * n)
+      if (decimals(total) > 2) return null
+      return { u: tp.unit, v: { s: stdLabel(a, -e), n }, ans: total, wrong: [total * 10, total / 10, total * 100], exp: `${n} × ${stdLabel(a, -e)} = ${fmtNum(total)} ${tp.unit}.` }
+    },
+    T: [
+      { t: 'The thickness of one sheet of paper is {s} mm. What is the thickness of a stack of {n} sheets?', unit: 'mm' },
+      { t: 'A grain of sand weighs {s} g. What is the mass of {n} such grains?', unit: 'g' },
+    ],
+  }),
+  mode({ // multiply / divide in standard form
+    d: 2,
+    gen(tp) {
+      const a = pick([1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8]); const b = pick([1.5, 2, 3, 4, 5, 6]); const m = ri(-5, 8); const n = ri(-4, 6)
+      if (tp.factory) { const k = pick([20, 30, 40, 50, 300]); const x = a * 10 ** Math.abs(m) * k; const [mm, ee] = std(x); if (decimals(mm) > 2) return null; return { v: { s: stdLabel(a, Math.abs(m)), n: k }, opts: stdOpts(mm, ee), exp: `${stdLabel(a, Math.abs(m))} × ${k} = ${stdLabel(mm, ee)}.` } }
+      const val = tp.div ? (a / b) * 10 ** (m - n) : a * b * 10 ** (m + n); const [mm, ee] = std(val); if (decimals(mm) > 2) return null
+      return { v: { a, b, m: sup(m), n: sup(n) }, opts: stdOpts(mm, ee), exp: tp.div ? `${a}/${b} = ${fmtNum(r9(a / b))} and 10^(${m} − ${n < 0 ? `(${n})` : n}) = 10^${m - n}; in standard form ${stdLabel(mm, ee)}.` : `${a} × ${b} = ${fmtNum(a * b)} and 10^(${m} + ${n < 0 ? `(${n})` : n}) = 10^${m + n}; in standard form ${stdLabel(mm, ee)}.` }
+    },
+    T: [
+      'Calculate ({a} × 10^{m}) × ({b} × 10^{n}) and give the answer in standard form.',
+      { t: 'Find ({a} × 10^{m}) ÷ ({b} × 10^{n}) in standard form.', div: true },
+      { t: 'A factory makes {s} screws a day. How many does it make in {n} days? Give the answer in standard form.', factory: true },
+    ],
+  }),
+])
+
+const bod = (f) => ({ d: 1, gen(tp) { return tp.g() }, T: f })
+const rr = ri
+fam('ga.fractions.order-of-operations', 'ga.fractions', [
+  mode(bod([
+    { t: 'Using the correct order of operations, evaluate {a} + {b} × {c} − {d}.', g() { const a = rr(2, 20); const b = rr(2, 12); const c = rr(2, 9); const d = rr(1, 20); const ans = a + b * c - d; if (ans <= 0) return null; return { v: { a, b, c, d }, ans, wrong: [(a + b) * c - d, a + b * (c - d), a + b + c - d], allowNeg: true, exp: `Multiplication first: ${b} × ${c} = ${b * c}; then ${a} + ${b * c} − ${d} = ${ans}.` } } },
+    { t: 'Following BODMAS, {a} − {b} ÷ {c} + {d} equals:', g() { const c = rr(2, 9); const b = c * rr(2, 9); const a = rr(b / c + 1, 40); const d = rr(1, 15); const ans = a - b / c + d; return { v: { a, b, c, d }, ans, wrong: [(a - b) / c + d, a - b / (c + d), a - b / c - d], allowNeg: true, exp: `Division first: ${b} ÷ ${c} = ${b / c}; then ${a} − ${b / c} + ${d} = ${ans}.` } } },
+    { t: 'Work out {a} × ({b} + {c}) − {d} ÷ {e}, taking the bracket first.', d: 2, g() { const a = rr(2, 9); const b = rr(1, 9); const c = rr(1, 9); const e = rr(2, 6); const d = e * rr(1, 9); const ans = a * (b + c) - d / e; if (ans <= 0) return null; return { v: { a, b, c, d, e }, ans, wrong: [a * b + c - d / e, (a * (b + c) - d) / e, a * (b + c) - d * e], allowNeg: true, exp: `Brackets: ${b} + ${c} = ${b + c}; ${a} × ${b + c} = ${a * (b + c)}; ${d} ÷ ${e} = ${d / e}; ${a * (b + c)} − ${d / e} = ${ans}.` } } },
+    { t: 'Working from left to right, what is {a} ÷ {b} × {c}?', g() { const b = rr(2, 9); const a = b * rr(2, 12); const c = rr(2, 9); const ans = (a / b) * c; return { v: { a, b, c }, opts: fOpts(fr(ans), [fr(a, b * c), fr(a / b + c), fr(a * b, c)]), exp: `Division and multiplication are done left to right: ${a} ÷ ${b} = ${a / b}, then × ${c} = ${ans}.` } } },
+    { t: 'Squaring the bracket first, find ({a} + {b})² − {c} × {d}.', d: 2, g() { const a = rr(1, 9); const b = rr(1, 9); const c = rr(2, 9); const d = rr(2, 9); const ans = (a + b) ** 2 - c * d; if (ans <= 0) return null; return { v: { a, b, c, d }, ans, wrong: [a * a + b * b - c * d, ((a + b) ** 2 - c) * d, (a + b) * 2 - c * d], allowNeg: true, exp: `(${a + b})² = ${(a + b) ** 2}; ${c} × ${d} = ${c * d}; ${(a + b) ** 2} − ${c * d} = ${ans}.` } } },
+    { t: 'Remove the brackets and simplify {a} − [{b} − ({c} − {d})].', d: 2, g() { const a = rr(20, 60); const b = rr(10, 30); const c = rr(5, 20); const d = rr(1, c - 1); const ans = a - (b - (c - d)); return { v: { a, b, c, d }, ans, wrong: [a - b - c + d, a - (b - c) - d, a - b + c + d], allowNeg: true, exp: `Innermost first: ${c} − ${d} = ${c - d}; ${b} − ${c - d} = ${b - c + d}; ${a} − ${b - c + d} = ${ans}.` } } },
+    { t: 'Evaluate: {f} of {n} + {m}', g() { const f = properFr(8); const n = f.d * rr(2, 9); const m = rr(2, 20); const ans = f.mul(n).val + m; return { v: { f: fl(f), n, m }, ans, wrong: [f.mul(n + m).val, n + f.mul(m).val, f.mul(n).val * m], exp: `“Of” means multiply and is done first: ${fl(f)} × ${n} = ${f.mul(n).val}; + ${m} = ${ans}.` } } },
+    { t: 'Squares first, then division: find {a}² − {b}² ÷ {c}.', d: 2, g() { const b = rr(2, 9); const c = pick([2, 4, b]); if ((b * b) % c) return null; const a = rr(b, 15); const ans = a * a - (b * b) / c; if (ans <= 0) return null; return { v: { a, b, c }, ans, wrong: [(a * a - b * b) / c, (a - b) ** 2 / c, a * a - b / c * b * b], allowNeg: true, exp: `Powers first, then division: ${a * a} − ${b * b} ÷ ${c} = ${a * a} − ${(b * b) / c} = ${ans}.` } } },
+    { t: 'Give the value of {a} + {b} ÷ {c} × {d}.', g() { const c = rr(2, 8); const b = c * rr(2, 9); const a = rr(1, 30); const d = rr(2, 9); const ans = a + (b / c) * d; return { v: { a, b, c, d }, opts: fOpts(fr(ans), [fr(a + b, c).mul(d), fr(b, c * d).add(a), fr(a + b / c + d)]), exp: `${b} ÷ ${c} = ${b / c}; × ${d} = ${(b / c) * d}; + ${a} = ${ans}.` } } },
+    { t: 'Dividing the whole bracket, what is ({a} × {b} − {c}) ÷ {d}?', d: 2, g() { const d = rr(2, 9); const a = rr(2, 12); const b = rr(2, 12); const c = rr(1, a * b - 1); if ((a * b - c) % d) return null; const ans = (a * b - c) / d; return { v: { a, b, c, d }, opts: fOpts(fr(ans), [fr(a * b).sub(fr(c, d)), fr(a * (b - c), d).val > 0 ? fr(a * (b - c), d) : null, fr(ans + 1), fr(a * b + c, d)]), exp: `Inside the bracket: ${a * b} − ${c} = ${a * b - c}; ÷ ${d} = ${ans}.` } } },
+    { t: 'Calculate {a} − {b} × ({c} − {d}).', d: 2, g() { const c = rr(5, 15); const d = rr(1, c - 1); const b = rr(2, 6); const a = rr(b * (c - d) + 1, b * (c - d) + 30); const ans = a - b * (c - d); return { v: { a, b, c, d }, ans, wrong: [(a - b) * (c - d), a - b * c - d, a - b * c + d > 0 ? a - b * c + d : null], exp: `Bracket: ${c} − ${d} = ${c - d}; × ${b} = ${b * (c - d)}; ${a} − ${b * (c - d)} = ${ans}.` } } },
+    { t: 'Remembering the rule of signs, find (−{a}) × (−{b}) + {c}.', g() { const a = rr(2, 9); const b = rr(2, 9); const c = rr(1, 20); const ans = a * b + c; if (a * b <= c) return null; return { v: { a, b, c }, opts: [ans, a * b - c, a * (b + c), ans + 1].map((x) => ({ label: fmtNum(x), val: x })).concat([{ label: `−${a * b - c}`, val: c - a * b }]), exp: `(−${a}) × (−${b}) = +${a * b} (two negatives give a positive); ${a * b} + ${c} = ${ans}.` } } },
+    { t: 'Dividing by a bracket: what is {a} ÷ ({b} ÷ {c})?', g() { const c = rr(2, 9); const b = c * rr(2, 6); const a = rr(2, 40); const ans = fr(a * c, b); return { v: { a, b, c }, opts: fOpts(ans, [fr(a, b * c), fr(a, b).add(c), fr(b, a * c)]), exp: `${b} ÷ ${c} = ${b / c}; ${a} ÷ ${b / c} = ${ans.mixed()}.` } } },
+    { t: 'Determine the value of {a} × {b} ÷ {c} + {d} − {e}.', d: 2, g() { const c = rr(2, 9); const a = c * rr(1, 6); const b = rr(2, 9); const d = rr(1, 20); const e = rr(1, 20); const ans = (a * b) / c + d - e; if (ans <= 0) return null; return { v: { a, b, c, d, e }, ans, wrong: [(a * b) / (c + d) - e > 0 && isInt((a * b) / (c + d)) ? (a * b) / (c + d) - e : null, (a * b) / c + d + e, (a * b) / c - d - e > 0 ? (a * b) / c - d - e : null], allowNeg: true, exp: `${a} × ${b} = ${a * b}; ÷ ${c} = ${(a * b) / c}; + ${d} − ${e} = ${ans}.` } } },
+  ])),
+])
+
+const surd = (a, k) => (a === 1 ? `√${k}` : `${a}√${k}`)
+const SQF = [2, 3, 5, 6, 7, 10, 11]
+const sOpt = (a, k) => ({ label: surd(a, k), val: r9(a * Math.sqrt(k)) })
+fam('ga.fractions.surds', 'ga.fractions', [
+  mode({
+    d: 2,
+    gen(tp) {
+      const k = pick(SQF); const a = ri(1, 6); const b = ri(1, 6); if (a === b) return null
+      const x = a * a * k; const y = b * b * k
+      switch (tp.kind) {
+        case 'add': return { v: { x, y }, opts: [sOpt(a + b, k), { label: `√${x + y}`, val: r9(Math.sqrt(x + y)) }, sOpt(a * b, k), sOpt(a + b + 1, k), sOpt(a + b, 2 * k)], exp: `√${x} = ${surd(a, k)} and √${y} = ${surd(b, k)}; sum = ${surd(a + b, k)}.` }
+        case 'sub': { if (a <= b) return null; return { v: { x, y }, opts: [sOpt(a - b, k), { label: `√${x - y}`, val: r9(Math.sqrt(x - y)) }, sOpt(a + b, k), sOpt(a - b + 1, k)], exp: `√${x} = ${surd(a, k)}, √${y} = ${surd(b, k)}; difference = ${surd(a - b, k)}.` } }
+        case 'mul': { const c = a * b * k; return { u: 'num', v: { x: a * k, y: b * b * k * (a === 1 ? 1 : 1) / (1) }, opts: numOpts(a * b * k * 1, []).concat([]), exp: '' , skip: c } }
+        default: return null
+      }
+    },
+    T: [{ t: 'Express √{x} + √{y} as a single surd.', kind: 'add' }, { t: 'Reduce √{x} − √{y} to its simplest form.', kind: 'sub' }],
+  }),
+  mode({
+    d: 2,
+    gen(tp) {
+      const k = pick(SQF)
+      if (tp.kind === 'mul') { const a = ri(1, 5); const b = ri(1, 5); const x = a * a * k * 1; const y = b * b * k; void x; const X = a * k; const Y = b * b * k * a; void X; void Y
+        const p = ri(2, 6); const q = ri(2, 18); const m1 = p * k; const m2 = q * k; const ans = k * Math.sqrt(p * q); if (!isInt(ans) || p === q) return null
+        return { u: 'num', v: { x: m1, y: m2 }, ans, wrong: [m1 * m2, Math.sqrt(m1) + Math.sqrt(m2) > 0 ? Math.round(Math.sqrt(m1 + m2)) : null, ans * 2, m1 + m2], exp: `√${m1} × √${m2} = √${m1 * m2} = ${ans}.` } }
+      if (tp.kind === 'div') { const n = ri(2, 9); const y = pick([2, 3, 5, 6, 7]); const x = n * n * y; return { u: 'num', v: { x, y }, ans: n, wrong: [x / y, n * n === x / y ? n + 1 : null, Math.round(Math.sqrt(x - y)) === n ? null : Math.round(Math.sqrt(x - y)), n + 2], exp: `√${x} ÷ √${y} = √(${x}/${y}) = √${n * n} = ${n}.` } }
+      if (tp.kind === 'simp') { const a = ri(2, 9); const x = a * a * k; return { d: 1, v: { x }, opts: [sOpt(a, k), sOpt(k, a * a > 11 ? 2 : a), sOpt(a * a, k), sOpt(a, 2 * k), sOpt(a + 1, k)], exp: `${x} = ${a * a} × ${k}, so √${x} = ${surd(a, k)}.` } }
+      if (tp.kind === 'rat') { const m = ri(2, 9); const n = m * k; return { v: { n, k }, opts: [sOpt(m, k), sOpt(n, k), { label: `${m}/√${k}`, val: r9(m / Math.sqrt(k)) }, sOpt(m + 1, k), sOpt(1, n)], exp: `${n}/√${k} × √${k}/√${k} = ${n}√${k}/${k} = ${surd(m, k)}.` } }
+      if (tp.kind === 'conj') { const a = ri(2, 9); const kk = pick(SQF); const ans = a * a - kk; return { u: 'num', v: { a, k: kk }, ans, allowNeg: true, wrong: [a * a + kk, a - kk, a * a - kk * kk, 2 * a - kk], exp: `(a + √b)(a − √b) = a² − b = ${a * a} − ${kk} = ${ans}.` } }
+      if (tp.kind === 'sq') { const m = ri(1, 4); const n = ri(1, 4); if (m === n) return null; const x = k * m * m; const y = k * n * n; const ans = x + y + 2 * k * m * n; return { u: 'num', v: { x, y }, ans, wrong: [x + y, x + y + k * m * n, (x + y) * 2, ans + k], exp: `(√${x} + √${y})² = ${x} + ${y} + 2√${x * y} = ${x + y} + ${2 * k * m * n} = ${ans}.` } }
+      if (tp.kind === 'combo') { const a = ri(1, 4); const b = ri(1, 4); const c = ri(1, 4); const x = a * a * k; const y = b * b * k; const z = c * c * k; const coef = 2 * a + 3 * b - c; if (coef <= 0 || new Set([x, y, z]).size < 3) return null; return { d: 3, v: { x, y, z }, opts: [sOpt(coef, k), sOpt(2 * a + 3 * b + c, k), sOpt(coef + 1, k), sOpt(a + b - c > 0 ? a + b - c : a + b + c + 5, k), { label: `${4}√${x + y - z > 0 ? x + y - z : x + y + z}`, val: -1 }], exp: `√${x} = ${surd(a, k)}, √${y} = ${surd(b, k)}, √${z} = ${surd(c, k)}; ${2 * a} + ${3 * b} − ${c} = ${coef}, so the result is ${surd(coef, k)}.` } }
+      if (tp.kind === 'asq') { const a = ri(2, 9); return { d: 1, u: 'num', v: { a, k }, ans: a * a * k, wrong: [a * k, a * a + k, 2 * a * k, a * k * k], exp: `(${a}√${k})² = ${a * a} × ${k} = ${a * a * k}.` } }
+      if (tp.kind === 'md') { const x = k * ri(2, 6); const y = k * ri(2, 6); const z = pick([2, 3, 5, 6, 7]); const inside = (x * y) / z; const root = Math.sqrt(inside); if (!isInt(inside) || !isInt(root) || x === y) return null; return { u: 'num', v: { x, y, z }, ans: root, wrong: [inside, root * 2, root + 1, Math.round(Math.sqrt(x * y))  === root ? root + 3 : Math.round(Math.sqrt(x * y))], exp: `√${x} × √${y} ÷ √${z} = √(${x} × ${y}/${z}) = √${inside} = ${root}.` } }
+      if (tp.kind === 'single') { const a = ri(2, 9); return { d: 1, v: { a, k }, opts: [{ label: `√${a * a * k}`, val: r9(a * Math.sqrt(k)) }, { label: `√${a * k}`, val: r9(Math.sqrt(a * k)) }, { label: `√${a * a + k}`, val: r9(Math.sqrt(a * a + k)) }, { label: `√${2 * a * k}`, val: r9(Math.sqrt(2 * a * k)) }], exp: `${a}√${k} = √(${a}² × ${k}) = √${a * a * k}.` } }
+      return null
+    },
+    T: [
+      { t: 'Multiply the surds √{x} and √{y}.', kind: 'mul' },
+      { t: 'Find the quotient when √{x} is divided by √{y}.', kind: 'div' },
+      { t: 'Express √{x} in its simplest surd form.', kind: 'simp' },
+      { t: 'Rationalise the denominator of {n}/√{k}.', kind: 'rat' },
+      { t: 'Expand and simplify ({a} + √{k})({a} − √{k}).', kind: 'conj' },
+      { t: 'Expand (√{x} + √{y})² and give its value.', kind: 'sq' },
+      { t: 'Combine the like surds in 2√{x} + 3√{y} − √{z}.', kind: 'combo' },
+      { t: 'Square the surd {a}√{k}.', kind: 'asq' },
+      { t: 'Write √{x} × √{y} ÷ √{z} as a whole number.', kind: 'md' },
+      { t: 'Write {a}√{k} as the square root of a single number.', kind: 'single' },
+    ],
+  }),
+])
+
+fam('ga.fractions.fraction-word-problems', 'ga.fractions', [
+  mode({ // 1/p, then 1/q of the remainder
+    d: 2,
+    gen(tp) {
+      const p = ri(2, 6); const q = ri(2, 6); const unit = p * q; const k = (tp.scale ?? 1) * ri(...(tp.kr ?? [1, 30])); const T = unit * k; const L = (p - 1) * (q - 1) * k
+      return { u: tp.u ?? 'rs', v: { p, q, L }, ans: T, wrong: [(L * p * q) / ((p - 1) * q), L + T / p, (L * (p + q)) / (p + q - 2) % 1 === 0 ? (L * (p + q)) / (p + q - 2) : null, T / 2].map((x) => (x && isInt(x) ? x : null)), exp: `After spending 1/${p}, ${p - 1}/${p} is left; after 1/${q} of that, ${(p - 1)}/${p} × ${q - 1}/${q} = ${fr((p - 1) * (q - 1), p * q).toString()} of the whole = ${fmtNum(L)}, so the whole = ${fmtNum(T)}.` }
+    },
+    T: [
+      { t: '{M1} spends 1/{p} of his salary on rent and 1/{q} of the remainder on food. If he is left with Rs {L}, what is his salary?', scale: 1000, kr: [1, 10] },
+      { t: 'A girl gave 1/{p} of her pocket money to charity and spent 1/{q} of the rest on books. She had Rs {L} left. How much pocket money did she have?', scale: 50, kr: [1, 20] },
+      { t: 'A farmer sold 1/{p} of his wheat and then 1/{q} of what remained, and still had {L} maunds. How much wheat did he have at first?', u: 'maunds' },
+      { t: '1/{p} of a rope was used for a tent and then 1/{q} of the remaining piece for a swing, leaving {L} m. How long was the rope?', u: 'm' },
+    ],
+  }),
+  mode({ // two fractions of the whole, remainder known
+    d: 2,
+    gen(tp) {
+      const f1 = properFr(8); const f2 = properFr(8); const rest = fr(1).sub(f1).sub(f2); if (rest.val <= 0 || f1.eq(f2)) return null
+      const k = (tp.scale ?? 1) * ri(1, 20); const T = lcm(f1.d, f2.d) * k; const L = rest.mul(T); if (L.d !== 1) return null
+      return { u: tp.u ?? 'num', v: { f1: fl(f1), f2: fl(f2), L: L.val }, ans: T, wrong: [f1.add(f2).val > 0 ? r9(L.val / f1.add(f2).val) : null, L.val * (f1.d + f2.d) / 2, T + L.val, T / 2].map((x) => (x && isInt(x) ? x : null)), exp: `Remaining part = 1 − ${fl(f1)} − ${fl(f2)} = ${rest.toString()}; ${rest.toString()} of the whole = ${L.val}, so the whole = ${fmtNum(T)}.` }
+    },
+    T: [
+      { t: '{F1} spends {f1} of her income on food and {f2} on rent, and saves Rs {L}. What is her income?', u: 'rs', scale: 1000 },
+      { t: 'In a school, {f1} of the students walk to school, {f2} come by bus and the remaining {L} come by car. How many students are there?', scale: 10 },
+      { t: 'Of the trees in an orchard, {f1} are mango, {f2} are guava, and the remaining {L} are citrus. How many trees are there in the orchard?' },
+      { t: '{f1} of a journey is made by train, {f2} by bus and the remaining {L} km on foot. How long is the whole journey?', u: 'km' },
+    ],
+  }),
+  mode({ // part to whole, fraction of
+    d: 1,
+    gen(tp) {
+      const f = properFr(9); const X = f.d * (tp.scale ?? 1) * ri(...(tp.kr ?? [2, 40])); const N = f.mul(X).val
+      if (tp.of) return { u: tp.u ?? 'num', v: { f1: fl(f), X }, ans: N, wrong: [X - N, X / f.n % 1 === 0 ? X / f.n : null, (X * f.d) / f.n % 1 === 0 && (X * f.d) / f.n < 10 * X ? (X * f.d) / f.n : null, N + f.n], exp: `${fl(f)} of ${fmtNum(X)} = ${fmtNum(X)} ÷ ${f.d} × ${f.n} = ${fmtNum(N)}.` }
+      return { u: tp.u ?? 'num', v: { f1: fl(f), N }, ans: X, wrong: [f.mul(N).d === 1 ? f.mul(N).val : null, N + f.d, (N * f.d) / (f.d - f.n) % 1 === 0 ? (N * f.d) / (f.d - f.n) : null, X * 2], exp: `${fl(f)} of the whole = ${fmtNum(N)}, so 1/${f.d} = ${fmtNum(N / f.n)} and the whole = ${fmtNum(X)}.` }
+    },
+    T: [
+      'If {f1} of a certain number equals {N}, find that number.',
+      { t: 'A car’s tank holds {N} litres of fuel when it is {f1} full. What is its full capacity?', u: 'litres', kr: [5, 12] },
+      '{f1} of the pupils in a class, that is {N} pupils, are girls. How many pupils are in the class?',
+      { t: 'What is {f1} of Rs {X}?', of: true, u: 'rs', scale: 100 },
+      { t: 'A factory has {X} employees, and {f1} of them work night shifts. How many work night shifts?', of: true, scale: 10 },
+    ],
+  }),
+  mode({ // difference of fractions of a number
+    d: 2, u: 'num',
+    gen() {
+      const f1 = properFr(9); const f2 = properFr(9); if (f1.val <= f2.val) return null
+      const diff = f1.sub(f2); const X = diff.d * ri(1, 12) * (lcm(f1.d, f2.d) / gcd(lcm(f1.d, f2.d), diff.d)); const N = diff.mul(X); if (N.d !== 1 || X > 500) return null
+      return { v: { f1: fl(f1), f2: fl(f2), N: N.val }, ans: X, wrong: [f1.add(f2).mul(N).d === 1 ? f1.add(f2).mul(N).val : null, N.val * (f1.d - f2.d || 2), X / 2 % 1 === 0 ? X / 2 : null, X + N.val], exp: `${fl(f1)} − ${fl(f2)} = ${diff.toString()} of the number = ${N.val}, so the number = ${X}.` }
+    },
+    T: ['{f1} of a number exceeds {f2} of it by {N}. What is the number?'],
+  }),
+])
+
+fam('ga.fractions.compare-and-order', 'ga.fractions', [
+  mode({
+    d: 1,
+    gen(tp) {
+      let fs
+      if (tp.kind === 'dec') { const base = ri(2, 8); fs = [base / 10, (base * 11) / 100, (base * 101) / 1000, base / 100].map((x) => ({ label: fmtNum(r9(x)), val: r9(x) })) }
+      else if (tp.kind === 'mix') { const f1 = properFr(9); const f2 = properFr(9); fs = [{ label: fl(f1), val: f1.val }, { label: fl(f2), val: f2.val }, { label: fmtNum(r9(Math.round(f1.val * 100) / 100 + 0.01)), val: r9(Math.round(f1.val * 100) / 100 + 0.01) }, { label: fmtNum(r9(Math.round(f2.val * 10) / 10)), val: r9(Math.round(f2.val * 10) / 10) }] }
+      else { const set = new Map(); for (let i = 0; i < 20 && set.size < 4; i += 1) { const f = properFr(tp.maxD ?? 9, 3); set.set(f.toString(), f) } if (set.size < 4) return null; fs = [...set.values()].slice(0, 4).map((f) => ({ label: fl(f), val: f.val })) }
+      if (new Set(fs.map((f) => f.val)).size < 4) return null
+      const vals = fs.map((f) => f.val); const sorted = [...vals].sort((a, b) => a - b); if (tp.kind !== 'dec' && sorted.some((v, i) => i && Math.abs(v - sorted[i - 1]) < 0.01)) return null
+      let target
+      if (tp.ask === 'min') target = Math.min(...vals)
+      else if (tp.ask === 'half') { const dist = vals.map((v) => Math.abs(v - 0.5)); const md = Math.min(...dist); if (dist.filter((d) => Math.abs(d - md) < 0.005).length > 1) return null; target = vals[dist.indexOf(md)] }
+      else target = Math.max(...vals)
+      const ansIdx = vals.indexOf(target); const ordered = [fs[ansIdx], ...fs.filter((_, i) => i !== ansIdx)]
+      return { v: { list: listStr(fs.map((f) => f.label)).replace(/,/g, ',') }, opts: ordered, exp: tp.ask === 'half' ? `Compare each with 0.5: ${fs.map((f) => `${f.label} ≈ ${fmtNum(Math.round(f.val * 1000) / 1000)}`).join(', ')}; ${fs[ansIdx].label} is nearest.` : `As decimals: ${fs.map((f) => `${f.label} ≈ ${fmtNum(Math.round(f.val * 1000) / 1000)}`).join(', ')}; the ${tp.ask === 'min' ? 'smallest' : 'largest'} is ${fs[ansIdx].label}.` }
+    },
+    T: [
+      'Which is the largest of the fractions {list}?',
+      { t: 'Which of the fractions {list} is the smallest?', ask: 'min' },
+      { t: 'Which of these numbers is the greatest: {list}?', kind: 'mix' },
+      { t: 'Which is the least of {list}?', kind: 'dec', ask: 'min' },
+      { t: 'Which of {list} is closest to 1/2?', ask: 'half', d: 2, maxD: 12 },
+    ],
+  }),
+  mode({
+    d: 2,
+    gen(tp) {
+      const set = new Map(); for (let i = 0; i < 30 && set.size < 3; i += 1) { const f = properFr(9, 3); set.set(f.toString(), f) } if (set.size < 3) return null
+      const fs = [...set.values()]; const sortedA = [...fs].sort((a, b) => a.val - b.val); if (sortedA[1].val - sortedA[0].val < 0.02 || sortedA[2].val - sortedA[1].val < 0.02) return null
+      if (tp.kind === 'between' || tp.kind === 'gt' || tp.kind === 'lt') {
+        const f0 = sortedA[1]
+        if (tp.kind === 'between') { const lo = sortedA[0]; const hi = sortedA[2]; const inside = properFr(12, 3); if (!(inside.val > lo.val + 0.01 && inside.val < hi.val - 0.01)) return null; const outs = []; for (let i = 0; i < 40 && outs.length < 3; i += 1) { const o = properFr(12, 2); if ((o.val < lo.val - 0.01 || o.val > hi.val + 0.01) && !outs.some((z) => z.eq(o))) outs.push(o) } if (outs.length < 3) return null; return { v: { f1: fl(lo), f2: fl(hi) }, opts: [inside, ...outs].map((f) => ({ label: fl(f), val: f.val })), exp: `${fl(lo)} ≈ ${fmtNum(Math.round(lo.val * 1000) / 1000)}, ${fl(hi)} ≈ ${fmtNum(Math.round(hi.val * 1000) / 1000)}; only ${fl(inside)} ≈ ${fmtNum(Math.round(inside.val * 1000) / 1000)} lies between them.` } }
+        const gt = tp.kind === 'gt'; const good = []; const bad = []
+        for (let i = 0; i < 60 && (good.length < 1 || bad.length < 3); i += 1) { const o = properFr(12, 2); if (Math.abs(o.val - f0.val) < 0.02) continue; if ((o.val > f0.val) === gt) { if (!good.length) good.push(o) } else if (bad.length < 3 && !bad.some((z) => z.eq(o))) bad.push(o) }
+        if (good.length < 1 || bad.length < 3) return null
+        return { v: { f0: fl(f0) }, opts: [good[0], ...bad].map((f) => ({ label: fl(f), val: f.val })), exp: `${fl(f0)} ≈ ${fmtNum(Math.round(f0.val * 1000) / 1000)}; only ${fl(good[0])} ≈ ${fmtNum(Math.round(good[0].val * 1000) / 1000)} is ${gt ? 'greater' : 'smaller'}.` }
+      }
+      const asc = tp.kind === 'asc'; const order = asc ? sortedA : [...sortedA].reverse(); const lab = (arr) => arr.map(fl).join(', ')
+      const perms = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]].map((p) => p.map((i) => order[i]))
+      return { v: { f1: fl(fs[0]), f2: fl(fs[1]), f3: fl(fs[2]) }, opts: [perms[0], perms[5], perms[1], perms[2], perms[3]].map((p) => ({ label: lab(p), val: lab(p) })), exp: `As decimals ${sortedA.map((f) => `${fl(f)} ≈ ${fmtNum(Math.round(f.val * 1000) / 1000)}`).join(', ')}; so the ${asc ? 'ascending' : 'descending'} order is ${lab(order)}.` }
+    },
+    T: [
+      { t: 'Arrange {f1}, {f2} and {f3} in ascending order.', kind: 'asc' },
+      { t: 'Which shows {f1}, {f2} and {f3} in descending order?', kind: 'desc' },
+      { t: 'Which of the following lies between {f1} and {f2}?', kind: 'between' },
+      { t: 'Which of the following fractions is greater than {f0}?', kind: 'gt' },
+      { t: 'Which of the following fractions is smaller than {f0}?', kind: 'lt' },
+    ],
+  }),
+])
+
+fam('ga.fractions.roots', 'ga.fractions', [
+  mode({
+    d: 1,
+    gen(tp) {
+      switch (tp.kind) {
+        case 'sqd': { const r = pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.11, 0.12, 0.13, 0.14, 0.15, 1.1, 1.2, 1.3, 1.5, 0.02, 0.03, 0.04]); const x = r9(r * r); return { v: { x: fmtNum(x) }, opts: numOpts(r, [r9(r * 10), r9(r / 10), r9(x / 2)]), exp: `${fmtNum(r)} × ${fmtNum(r)} = ${fmtNum(x)}, so √${fmtNum(x)} = ${fmtNum(r)}.` } }
+        case 'sqm': { const [n, d] = pick([[5, 4], [7, 4], [5, 3], [7, 5], [9, 4], [8, 5], [7, 6], [11, 4], [9, 5], [10, 7]]); const f = fr(n * n, d * d); const ans = fr(n, d); const w = Math.trunc(f.val); const part = f.sub(w); const naive = fr(Math.round(Math.sqrt(part.n)) ** 2 === part.n && Math.round(Math.sqrt(part.d)) ** 2 === part.d ? Math.round(Math.sqrt(part.n)) : part.n, Math.round(Math.sqrt(part.d)) ** 2 === part.d ? Math.round(Math.sqrt(part.d)) : part.d).add(Math.round(Math.sqrt(w)) ** 2 === w ? Math.sqrt(w) : w); return { v: { x: f.mixed() }, opts: fOpts(ans, [naive, fr(n * n, d), fr(d, n), fr(n, d * d)]), exp: `${f.mixed()} = ${f.toString()} = (${n}/${d})², so the square root is ${ans.mixed()}.` } }
+        case 'cbd': { const r = pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.1, 1.1, 1.2]); const x = r9(r ** 3); return { v: { x: fmtNum(x) }, opts: numOpts(r, [r9(r * 10), r9(r / 10), r9(x / 3) === r ? null : r9(x / 3), r9(r * r)]), exp: `${fmtNum(r)}³ = ${fmtNum(x)}, so ∛${fmtNum(x)} = ${fmtNum(r)}.` } }
+        case 'cbf': { const [n, d] = pick([[2, 3], [3, 4], [2, 5], [3, 5], [4, 5], [1, 4], [5, 6], [3, 7]]); const x = fr(n ** 3, d ** 3); const ans = fr(n, d); return { v: { x: fl(x) }, opts: fOpts(ans, [fr(n * n, d * d), fr(n ** 3, d * 3).val !== ans.val ? fr(n ** 3, 3 * d ** 3) : null, fr(n, d * 3), fr(d, n)]), exp: `${n ** 3} = ${n}³ and ${d ** 3} = ${d}³, so ∛(${fl(x)}) = ${fl(ans)}.` } }
+        case 'sum': { const a = ri(2, 15); const b = ri(2, 15); if (a === b) return null; return { u: 'num', v: { x: a * a, y: b * b }, ans: a + b, wrong: [Math.round(Math.sqrt(a * a + b * b)), a * b, a * a + b * b > 300 ? a + b + 2 : Math.sqrt(a * a + b * b) % 1 === 0 ? a + b + 1 : a * a + b * b, a + b - 1], exp: `√${a * a} = ${a} and √${b * b} = ${b}; sum = ${a + b} (not √(${a * a} + ${b * b})).` } }
+        case 'prod': { const [x, y] = pick([[12, 27], [8, 18], [20, 45], [2, 32], [3, 27], [5, 45], [6, 24], [12, 75], [18, 50], [7, 28], [10, 40]]); const ans = Math.sqrt(x * y); return { d: 2, u: 'num', v: { x, y }, ans, wrong: [x * y / 2, ans * 2, ans + 2, x + y], exp: `${x} × ${y} = ${x * y} = ${ans}², so the root is ${ans}.` } }
+        case 'inv': { const r = pick([1.2, 1.1, 0.9, 0.7, 2.5, 1.5, 0.6, 0.12, 1.3, 0.8]); const x = r9(r * r); return { v: { r }, opts: numOpts(x, [r9(r * 2), r9(x * 10), r9(x / 10)]), exp: `x = ${fmtNum(r)}² = ${fmtNum(x)}.` } }
+        case 'div': { const f1 = fr(ri(1, 9) ** 2, ri(2, 9) ** 2); const f2 = fr(ri(1, 6) ** 2, ri(2, 7) ** 2); if (f1.eq(f2) || f1.val >= 1 || f2.val >= 1) return null; const s1 = fr(Math.round(Math.sqrt(f1.n)), Math.round(Math.sqrt(f1.d))); const s2 = fr(Math.round(Math.sqrt(f2.n)), Math.round(Math.sqrt(f2.d))); if (s1.n ** 2 !== f1.n || s1.d ** 2 !== f1.d || s2.n ** 2 !== f2.n || s2.d ** 2 !== f2.d) return null; const ans = s1.div(s2); return { d: 2, v: { x: fl(f1), y: fl(f2) }, opts: fOpts(ans, [f1.div(f2), s1.mul(s2), s2.div(s1)]), exp: `√(${fl(f1)}) = ${fl(s1)} and √(${fl(f2)}) = ${fl(s2)}; ${fl(s1)} ÷ ${fl(s2)} = ${ans.mixed()}.` } }
+        case 'plot': { const s = ri(12, 60); return { u: 'm', v: { x: (s * s).toLocaleString('en-US') }, ans: s, wrong: [(s * s) / 4, s * 2, s + 2, s - 2].map((y) => (isInt(y) ? y : null)), exp: `Side = √${(s * s).toLocaleString('en-US')} = ${s} m.` } }
+        case 'mix': { const a = ri(2, 12); const b = ri(2, 6); const ans = a * b; return { d: 2, u: 'num', v: { x: a * a, y: b ** 3 }, ans, wrong: [a + b, a * a * b, ans * 2, a * b * b], exp: `√${a * a} = ${a}, ∛${b ** 3} = ${b}; ${a} × ${b} = ${ans}.` } }
+        default: return null
+      }
+    },
+    T: [
+      { t: 'What is the square root of {x}?', kind: 'sqd' },
+      { t: 'Take the square root of the mixed number {x}.', kind: 'sqm' },
+      { t: 'The cube root of {x} is:', kind: 'cbd' },
+      { t: 'What is the cube root of the fraction {x}?', kind: 'cbf' },
+      { t: 'Add the square roots of {x} and {y}.', kind: 'sum' },
+      { t: 'Find the square root of the product {x} × {y}.', kind: 'prod' },
+      { t: 'The square root of a number is {r}. What is the number?', kind: 'inv' },
+      { t: 'Divide the square root of {x} by the square root of {y}.', kind: 'div' },
+      { t: 'A square plot has an area of {x} square metres. How long is each side?', kind: 'plot' },
+      { t: 'Multiply the square root of {x} by the cube root of {y}.', kind: 'mix' },
+    ],
+  }),
+])
+
+fam('ga.fractions.compound-fractions', 'ga.fractions', [
+  mode({
+    d: 2,
+    gen(tp) {
+      switch (tp.kind) {
+        case 'cf1': { const a = ri(2, 9); const ans = fr(1).add(fr(1).div(fr(1).add(fr(1, a)))); return { d: 3, v: { a }, opts: fOpts(ans, [fr(1).add(fr(1, a + 1)), fr(a + 1, a), fr(1).add(fr(a + 1, a)), fr(2 * a + 1, a)]), exp: `1 + 1/${a} = ${fr(a + 1, a).toString()}; its reciprocal is ${fr(a, a + 1).toString()}; 1 + ${fr(a, a + 1).toString()} = ${ans.mixed()}.` } }
+        case 'cf2': { const a = ri(2, 9); const inner = fr(1).add(fr(1).div(fr(1).add(fr(1, a)))); const ans = fr(1).div(inner); return { d: 3, v: { a }, opts: fOpts(ans, [inner, fr(a, a + 1), fr(a + 1, a + 2), fr(a, 2 * a + 1)]), exp: `1 + 1/${a} = ${fr(a + 1, a).toString()}; 1 + ${fr(a, a + 1).toString()} = ${inner.toString()}; reciprocal = ${ans.toString()}.` } }
+        case 'ab': { const a = ri(2, 9); const b = ri(2, 12); if (a >= b) return null; const ans = fr(1, a).add(fr(1, b)).div(fr(1, a).sub(fr(1, b))); return { v: { a, b }, opts: fOpts(ans, [fr(b - a, b + a), fr(a + b, 1), fr(2, 1).add(fr(1, b)).val === ans.val ? null : fr(1, a).add(fr(1, b)), ans.add(1)]), exp: `(1/${a} + 1/${b}) = ${fr(a + b, a * b).toString()}, (1/${a} − 1/${b}) = ${fr(b - a, a * b).toString()}; ratio = ${ans.mixed()}.` } }
+        case 'sumdiv': { const f1 = properFr(8); const f2 = properFr(8); const f3 = properFr(8); if (f1.eq(f2)) return null; const ans = f1.add(f2).div(f3); if (ans.d > 40 || ans.n > 60) return null; return { v: { f1: fl(f1), f2: fl(f2), f3: fl(f3) }, opts: fOpts(ans, [f1.add(f2).mul(f3), f1.add(f2.div(f3)), f3.div(f1.add(f2)), ans.add(1)]), exp: `${fl(f1)} + ${fl(f2)} = ${f1.add(f2).toString()}; ÷ ${fl(f3)} = ${f1.add(f2).toString()} × ${fr(f3.d, f3.n).toString()} = ${ans.mixed()}.` } }
+        case 'ofdiv': { const f1 = properFr(8); const f2 = properFr(8); const f3 = properFr(8); const ans = f1.mul(f2).div(f3); if (ans.d > 40 || ans.n > 60) return null; return { v: { f1: fl(f1), f2: fl(f2), f3: fl(f3) }, opts: fOpts(ans, [f1.mul(f2).mul(f3), f1.mul(f2.div(f3)).eq(ans) ? f1.div(f2).div(f3) : f1.mul(f2.div(f3)), f3.div(f1.mul(f2)), f1.add(f2).div(f3)]), exp: `“Of” first: ${fl(f1)} × ${fl(f2)} = ${f1.mul(f2).toString()}; ÷ ${fl(f3)} = ${ans.mixed()}.` } }
+        case 'subn': { let f1 = properFr(9); let f2 = properFr(9); if (f1.val < f2.val) [f1, f2] = [f2, f1]; if (f1.eq(f2)) return null; const dd = f1.sub(f2); const n = dd.d * ri(1, 6); const ans = dd.mul(n); return { d: 1, v: { f1: fl(f1), f2: fl(f2), n }, opts: fOpts(ans, [f1.sub(f2.mul(n)).val > 0 ? f1.sub(f2.mul(n)) : f1.add(f2).mul(n), f1.mul(n).sub(f2).val > 0 ? f1.mul(n).sub(f2) : null, ans.add(1), fr(f1.n - f2.n > 0 ? f1.n - f2.n : 1, Math.abs(f1.d - f2.d) || 1).mul(n)]), exp: `${fl(f1)} − ${fl(f2)} = ${dd.toString()}; × ${n} = ${ans.mixed()}.` } }
+        case 'diffsum': { const f1 = properFr(8); const f2 = properFr(8); const f3 = properFr(8); const f4 = properFr(8); if (f1.val <= f2.val) return null; const ans = f1.sub(f2).div(f3.add(f4)); if (ans.d > 40 || ans.n > 40) return null; return { v: { f1: fl(f1), f2: fl(f2), f3: fl(f3), f4: fl(f4) }, opts: fOpts(ans, [f1.sub(f2).mul(f3.add(f4)), f3.add(f4).div(f1.sub(f2)), f1.sub(f2.div(f3)).val > 0 ? f1.sub(f2.div(f3)).add(f4) : null, ans.add(fr(1, 2))]), exp: `${fl(f1)} − ${fl(f2)} = ${f1.sub(f2).toString()}; ${fl(f3)} + ${fl(f4)} = ${f3.add(f4).toString()}; quotient = ${ans.mixed()}.` } }
+        case 'tele1': { const a = ri(2, 6); const c = a + ri(3, 12); const ans = fr(a - 1, c); return { v: { a, a1: a + 1, c }, opts: fOpts(ans, [fr(1, c), fr(a, c), fr(a - 1, c + 1), fr(1, a)]), exp: `Each bracket is (n − 1)/n: ${a - 1}/${a} × ${a}/${a + 1} × … × ${c - 1}/${c}; everything cancels except ${a - 1}/${c}${ans.toString() !== `${a - 1}/${c}` ? ` = ${ans.toString()}` : ''}.` } }
+        case 'tele2': { const a = ri(2, 6); const z = a + ri(3, 15); const ans = fr(z + 1, a); return { d: 3, v: { a, a1: a + 1, z }, opts: fOpts(ans, [fr(z, a), fr(z + 1, a + 1), fr(z + 1, z), fr(z - a + 1, 1)]), exp: `Each bracket is (n + 1)/n: ${a + 1}/${a} × ${a + 2}/${a + 1} × … × ${z + 1}/${z} = ${z + 1}/${a}${ans.toString() !== `${z + 1}/${a}` ? ` = ${ans.mixed()}` : ''}.` } }
+        case 'minus': { const a = ri(2, 9); const b = ri(2, 9); const inner = fr(1).sub(fr(1, b)); const ans = fr(a).sub(fr(1).div(inner)); if (ans.val <= 0) return null; return { v: { a, b }, opts: fOpts(ans, [fr(a).sub(inner), fr(a).sub(fr(b - 1, b)).add(fr(1, b)), fr(a - 1), ans.add(fr(1, b - 1))]), exp: `1 − 1/${b} = ${inner.toString()}; 1 ÷ ${inner.toString()} = ${fr(b, b - 1).toString()}; ${a} − ${fr(b, b - 1).toString()} = ${ans.mixed()}.` } }
+        default: return null
+      }
+    },
+    T: [
+      { t: 'Reduce the continued fraction 1 + 1/(1 + 1/{a}) to a single fraction.', kind: 'cf1' },
+      { t: 'What single fraction equals 1/(1 + 1/(1 + 1/{a}))?', kind: 'cf2' },
+      { t: 'Evaluate the complex fraction (1/{a} + 1/{b}) ÷ (1/{a} − 1/{b}).', kind: 'ab' },
+      { t: 'Add {f1} and {f2}, then divide the sum by {f3}. What is the result?', kind: 'sumdiv' },
+      { t: 'Simplify: ({f1} of {f2}) ÷ {f3}', kind: 'ofdiv' },
+      { t: 'Multiply the difference of {f1} and {f2} by {n}.', kind: 'subn' },
+      { t: 'Simplify the quotient of ({f1} − {f2}) and ({f3} + {f4}).', kind: 'diffsum' },
+      { t: 'Evaluate the product (1 − 1/{a})(1 − 1/{a1}) … (1 − 1/{c}).', kind: 'tele1' },
+      { t: 'What is the value of the product (1 + 1/{a})(1 + 1/{a1}) … (1 + 1/{z})?', kind: 'tele2' },
+      { t: 'Work out {a} − 1/(1 − 1/{b}) as a fraction.', kind: 'minus' },
+    ],
+  }),
+])
+
 // ==== END FAMILIES ====
 
 // ---------------------------------------------------------------------------
@@ -2869,6 +3419,8 @@ function listOptions(r) {
   return out.length === 4 ? out : null
 }
 
+const dupTemplates = []
+const failed = []
 function build() {
   const items = []
   const templatesSeen = new Map()
@@ -2877,8 +3429,8 @@ function build() {
       for (const raw of M.T) {
         const tp = normT(raw)
         const tKey = surfaceTemplate(tp.t.replace(/\{\w+\}/g, '9'))
-        if (templatesSeen.has(tKey)) throw new Error(`template reused: ${tp.t}`)
-        templatesSeen.set(tKey, F.family)
+        if (templatesSeen.has(tKey)) { dupTemplates.push(`${tp.t}  <>  ${templatesSeen.get(tKey)}`); continue }
+        templatesSeen.set(tKey, tp.t)
         let made = null
         for (let attempt = 0; attempt < 3000 && !made; attempt += 1) {
           const nm = names()
@@ -2897,7 +3449,7 @@ function build() {
             o: order.map((i) => opts[i].label), a: order.indexOf(0), explanation: exp, template: tp.t,
           }
         }
-        if (!made) throw new Error(`could not generate: ${tp.t}`)
+        if (!made) { failed.push(tp.t); continue }
         items.push(made)
       }
     }
@@ -2910,6 +3462,7 @@ const TARGETS = { 'ga.percentage': 130, 'ga.ratio': 130, 'ga.average': 110, 'ga.
 
 function main() {
   const raw = build()
+  if (dupTemplates.length || failed.length) { console.error('DUPLICATE TEMPLATES:\n' + dupTemplates.join('\n') + '\nFAILED:\n' + failed.join('\n')); process.exit(1) }
   raw.sort((x, y) => SUBTOPIC_ORDER.indexOf(x.subtopic) - SUBTOPIC_ORDER.indexOf(y.subtopic))
   const rows = raw.map((it, i) => {
     const serial = String(i + 1).padStart(4, '0')

@@ -175,7 +175,7 @@ export const MPT_ORDER_RULES = {
 export const MPT_REPETITION_LIMITS = {
   perPaperFamily: r(0, 2, 'internal', 'At most two items from one pattern family in a paper (one for GA computation families)'),
   perPaperFamilyGa: r(0, 1, 'internal', 'A General Ability skeleton appears at most once per paper'),
-  perSeriesFamily: r(0, 12, 'internal', 'A pattern family appears in at most 12 of the 40 papers'),
+  perSeriesFamily: r(0, 20, 'internal', 'A General Ability skeleton family appears in at most half of the 40 papers, never twice in one paper, and its numbers-masked wording never repeats (factual and language sections are governed by concept uniqueness and near-duplicate checks instead)'),
   perSeriesTemplate: r(0, 1, 'internal', 'The same wording with only numbers or names changed never repeats across the series'),
   nearDuplicateJaccard: r(0, 0.72, 'internal', 'Stems with token-Jaccard ≥ 0.72 in one subtopic are treated as duplicates across the series'),
 }
