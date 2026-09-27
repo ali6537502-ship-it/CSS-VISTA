@@ -81,6 +81,8 @@ const MptResult = lazy(() => import('./pages/mpt/MptResult'))
 const MptHistory = lazy(() => import('./pages/mpt/MptHistory'))
 const MptPerformance = lazy(() => import('./pages/mpt/MptPerformance'))
 const MptMistakes = lazy(() => import('./pages/mpt/MptMistakes'))
+const MptQuestionBank = lazy(() => import('./pages/mpt/MptQuestionBank'))
+const MptQuestionBankPaper = lazy(() => import('./pages/mpt/MptQuestionBankPaper'))
 const AnswerEvaluation = lazy(() => import('./pages/AnswerEvaluation'))
 const PastPaperOpen = lazy(() => import('./pages/PastPaperOpen'))
 const LiveThemeDemos = lazy(() => import('./pages/LiveThemeDemos'))
@@ -200,6 +202,8 @@ export default function App() {
         <Route path="/account/mpt/history" element={<ProfileGate><S><MptHistory /></S></ProfileGate>} />
         <Route path="/account/mpt/performance" element={<ProfileGate><S><MptPerformance /></S></ProfileGate>} />
         <Route path="/account/mpt/mistakes" element={<ProfileGate><S><MptMistakes /></S></ProfileGate>} />
+        <Route path="/account/mpt/question-bank" element={<ProfileGate><S><MptQuestionBank /></S></ProfileGate>} />
+        <Route path="/account/mpt/question-bank/:mock" element={<ProfileGate><S><MptQuestionBankPaper /></S></ProfileGate>} />
         <Route path="/account/mpt/apply/:mock" element={<ProfileGate><S><MptApply /></S></ProfileGate>} />
         <Route path="/account/mpt/applications/:code" element={<ProfileGate><S><MptApplication /></S></ProfileGate>} />
         <Route path="/account/mpt/entrance/:mock" element={<ProfileGate><S><MptEntrance /></S></ProfileGate>} />
