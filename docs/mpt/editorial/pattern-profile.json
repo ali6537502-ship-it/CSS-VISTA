@@ -1,0 +1,1180 @@
+{
+ "sources": [
+  {
+   "year": 2022,
+   "label": "CSS MPT 2022 (20 February 2022)",
+   "file": "public/past-papers/mpt/CSS-MPT-2022.pdf",
+   "reliability": "high"
+  },
+  {
+   "year": 2023,
+   "label": "CSS MPT 2023 Special (21 May 2023), 125 recalled items",
+   "file": "public/past-papers/mpt/CSS-MPT-2023-Special.pdf",
+   "reliability": "medium"
+  },
+  {
+   "year": 2024,
+   "label": "CSS MPT 2024 (19 November 2023)",
+   "file": "public/past-papers/mpt/CSS-MPT-2024.pdf",
+   "reliability": "high"
+  },
+  {
+   "year": 2025,
+   "label": "CSS MPT 2025 (solved compilation, sections interleaved)",
+   "file": "public/past-papers/mpt/CSS-MPT-2025.pdf",
+   "reliability": "low"
+  }
+ ],
+ "byYear": {
+  "2022": {
+   "recorded": 200,
+   "sections": {
+    "Islamic Studies": {
+     "recorded": 20,
+     "subtopics": {
+      "isl.quran": 4,
+      "isl.law": 3,
+      "isl.economy": 1,
+      "isl.seerah-makkah": 2,
+      "isl.personalities": 1,
+      "isl.worship": 2,
+      "isl.seerah-madinah": 4,
+      "isl.social": 1,
+      "isl.governance": 1,
+      "isl.civilization": 1
+     },
+     "groups": {
+      "isl": 20
+     },
+     "difficulty": {
+      "1": 11,
+      "2": 7,
+      "3": 2
+     },
+     "modes": {
+      "R": 17,
+      "C": 3,
+      "A": 0
+     },
+     "flags": {
+      "nt": 20,
+      "tr": 2
+     }
+    },
+    "Urdu": {
+     "recorded": 20,
+     "subtopics": {
+      "urdu.grammar": 3,
+      "urdu.usage": 1,
+      "urdu.gender": 2,
+      "urdu.plural": 1,
+      "urdu.antonym": 2,
+      "urdu.synonym": 2,
+      "urdu.sentence": 2,
+      "urdu.office-terms": 7
+     },
+     "groups": {
+      "grammar": 8,
+      "vocabulary": 5,
+      "translation": 7
+     },
+     "difficulty": {
+      "1": 10,
+      "2": 10,
+      "3": 0
+     },
+     "modes": {
+      "R": 18,
+      "C": 2,
+      "A": 0
+     },
+     "flags": {
+      "nt": 3
+     }
+    },
+    "English": {
+     "recorded": 50,
+     "subtopics": {
+      "eng.vocab-context": 5,
+      "eng.comprehension": 6,
+      "eng.sentence-correction": 13,
+      "eng.parts-of-speech": 7,
+      "eng.preposition": 4,
+      "eng.analogy": 5,
+      "eng.synonym": 5,
+      "eng.antonym": 5
+     },
+     "groups": {
+      "vocabulary": 15,
+      "comprehension": 6,
+      "grammar": 24,
+      "profile-only": 5
+     },
+     "difficulty": {
+      "1": 11,
+      "2": 25,
+      "3": 14
+     },
+     "modes": {
+      "R": 12,
+      "C": 38,
+      "A": 0
+     },
+     "flags": {
+      "nt": 3
+     }
+    },
+    "General Abilities": {
+     "recorded": 57,
+     "subtopics": {
+      "ga.fractions": 3,
+      "ga.equations": 2,
+      "ga.average": 2,
+      "ga.algebra": 3,
+      "ga.geometry": 9,
+      "ga.deduction": 4,
+      "ga.psychometrics": 14,
+      "ga.mental-ability": 3,
+      "ga.series": 2,
+      "ga.verbal-reasoning": 4,
+      "sci.it": 1,
+      "sci.environment": 1,
+      "ga.blood-relations": 1,
+      "ga.data": 7,
+      "ga.probability": 1
+     },
+     "groups": {
+      "quant": 27,
+      "reasoning": 14,
+      "ga": 14,
+      "science-it": 1,
+      "science": 1
+     },
+     "difficulty": {
+      "1": 32,
+      "2": 18,
+      "3": 7
+     },
+     "modes": {
+      "R": 30,
+      "C": 6,
+      "A": 21
+     },
+     "flags": {
+      "nt": 57,
+      "fl": 1,
+      "ps": 13,
+      "gk": 3
+     }
+    },
+    "General Knowledge": {
+     "recorded": 53,
+     "subtopics": {
+      "sci.chemistry": 2,
+      "sci.earth-space": 3,
+      "sci.human-body": 2,
+      "sci.nutrition": 4,
+      "sci.physics": 2,
+      "sci.units": 3,
+      "gk.world": 7,
+      "sci.plants-ecology": 1,
+      "ca.global-issues": 3,
+      "ca.organisations": 3,
+      "ca.recent": 6,
+      "gk.books": 1,
+      "pa.constitution": 2,
+      "pa.political-history": 5,
+      "pa.institutions": 1,
+      "pa.resources": 1,
+      "pa.movement": 1,
+      "pa.geography": 3,
+      "pa.foreign-policy": 1,
+      "pa.society": 2
+     },
+     "groups": {
+      "sci": 17,
+      "gk": 8,
+      "ca": 12,
+      "pa": 16
+     },
+     "difficulty": {
+      "1": 32,
+      "2": 15,
+      "3": 6
+     },
+     "modes": {
+      "R": 53,
+      "C": 0,
+      "A": 0
+     },
+     "flags": {
+      "nt": 53,
+      "fl": 4,
+      "gk": 8,
+      "tr": 3,
+      "sp": 1
+     }
+    }
+   }
+  },
+  "2023": {
+   "recorded": 125,
+   "sections": {
+    "Islamic Studies": {
+     "recorded": 19,
+     "subtopics": {
+      "isl.personalities": 3,
+      "isl.seerah-madinah": 6,
+      "isl.caliphate": 1,
+      "isl.hadith": 1,
+      "isl.quran": 3,
+      "isl.civilization": 2,
+      "isl.seerah-makkah": 1,
+      "isl.economy": 2
+     },
+     "groups": {
+      "isl": 19
+     },
+     "difficulty": {
+      "1": 6,
+      "2": 7,
+      "3": 6
+     },
+     "modes": {
+      "R": 19,
+      "C": 0,
+      "A": 0
+     },
+     "flags": {
+      "nt": 8,
+      "fl": 1,
+      "tr": 4
+     }
+    },
+    "English": {
+     "recorded": 40,
+     "subtopics": {
+      "eng.article": 1,
+      "eng.phrasal-verb": 1,
+      "eng.preposition": 6,
+      "eng.tense": 3,
+      "eng.punctuation": 1,
+      "eng.vocab-context": 9,
+      "eng.synonym": 6,
+      "eng.antonym": 4,
+      "eng.analogy": 1,
+      "eng.pronoun": 1,
+      "eng.sentence-structure": 2,
+      "eng.sentence-correction": 4,
+      "eng.idiom": 1
+     },
+     "groups": {
+      "grammar": 18,
+      "vocabulary": 21,
+      "profile-only": 1
+     },
+     "difficulty": {
+      "1": 13,
+      "2": 22,
+      "3": 5
+     },
+     "modes": {
+      "R": 12,
+      "C": 28,
+      "A": 0
+     },
+     "flags": {
+      "nt": 7,
+      "fl": 1
+     }
+    },
+    "General Abilities": {
+     "recorded": 22,
+     "subtopics": {
+      "ga.fractions": 2,
+      "ga.ratio": 2,
+      "ga.mental-ability": 1,
+      "ga.series": 2,
+      "ga.average": 2,
+      "ga.geometry": 2,
+      "ga.percentage": 2,
+      "ga.equations": 3,
+      "ga.directions": 1,
+      "ga.ordering": 1,
+      "ga.seating": 1,
+      "ga.verbal-reasoning": 1,
+      "ga.blood-relations": 1,
+      "ga.coding": 1
+     },
+     "groups": {
+      "quant": 13,
+      "reasoning": 9
+     },
+     "difficulty": {
+      "1": 6,
+      "2": 13,
+      "3": 3
+     },
+     "modes": {
+      "R": 0,
+      "C": 1,
+      "A": 21
+     },
+     "flags": {
+      "nt": 19
+     }
+    },
+    "General Knowledge": {
+     "recorded": 44,
+     "subtopics": {
+      "sci.earth-space": 2,
+      "sci.physics": 1,
+      "sci.chemistry": 2,
+      "sci.climate": 1,
+      "sci.plants-ecology": 1,
+      "sci.health": 1,
+      "sci.it": 2,
+      "sci.human-body": 1,
+      "ca.recent": 4,
+      "ca.global-issues": 5,
+      "ca.organisations": 4,
+      "gk.world": 2,
+      "pa.resources": 2,
+      "ca.pakistan-external": 1,
+      "pa.foreign-policy": 7,
+      "pa.political-history": 1,
+      "pa.constitution": 2,
+      "pa.security": 3,
+      "pa.movement": 1,
+      "pa.economy": 1
+     },
+     "groups": {
+      "sci": 11,
+      "ca": 14,
+      "gk": 2,
+      "pa": 17
+     },
+     "difficulty": {
+      "1": 21,
+      "2": 17,
+      "3": 6
+     },
+     "modes": {
+      "R": 37,
+      "C": 7,
+      "A": 0
+     },
+     "flags": {
+      "nt": 44,
+      "fl": 4,
+      "tr": 2,
+      "gk": 2,
+      "sp": 2
+     }
+    }
+   }
+  },
+  "2024": {
+   "recorded": 188,
+   "sections": {
+    "Islamic Studies": {
+     "recorded": 10,
+     "subtopics": {
+      "isl.quran": 2,
+      "isl.seerah-makkah": 2,
+      "isl.seerah-madinah": 1,
+      "isl.hadith": 1,
+      "isl.worship": 1,
+      "isl.economy": 1,
+      "isl.personalities": 1,
+      "isl.civilization": 1
+     },
+     "groups": {
+      "isl": 10
+     },
+     "difficulty": {
+      "1": 4,
+      "2": 6,
+      "3": 0
+     },
+     "modes": {
+      "R": 8,
+      "C": 2,
+      "A": 0
+     },
+     "flags": {
+      "nt": 8
+     }
+    },
+    "Urdu": {
+     "recorded": 20,
+     "subtopics": {
+      "urdu.comprehension": 5,
+      "urdu.literature": 5,
+      "urdu.grammar": 5,
+      "urdu.plural": 2,
+      "urdu.translation": 2,
+      "urdu.idiom": 1
+     },
+     "groups": {
+      "urdu": 10,
+      "grammar": 7,
+      "translation": 2,
+      "vocabulary": 1
+     },
+     "difficulty": {
+      "1": 2,
+      "2": 17,
+      "3": 1
+     },
+     "modes": {
+      "R": 15,
+      "C": 5,
+      "A": 0
+     },
+     "flags": {
+      "lit": 5,
+      "nt": 1
+     }
+    },
+    "English": {
+     "recorded": 50,
+     "subtopics": {
+      "eng.synonym": 6,
+      "eng.antonym": 6,
+      "eng.idiom": 7,
+      "eng.preposition": 7,
+      "eng.sentence-correction": 8,
+      "eng.error-identification": 3,
+      "eng.punctuation": 3,
+      "eng.comprehension": 10
+     },
+     "groups": {
+      "vocabulary": 19,
+      "grammar": 21,
+      "comprehension": 10
+     },
+     "difficulty": {
+      "1": 4,
+      "2": 30,
+      "3": 16
+     },
+     "modes": {
+      "R": 19,
+      "C": 31,
+      "A": 0
+     },
+     "flags": {
+      "nt": 1
+     }
+    },
+    "General Abilities": {
+     "recorded": 59,
+     "subtopics": {
+      "ga.fractions": 4,
+      "ga.algebra": 5,
+      "ga.work-time": 3,
+      "ga.speed-time": 2,
+      "ga.equations": 11,
+      "ga.percentage": 2,
+      "ga.series": 4,
+      "ga.geometry": 2,
+      "ga.mensuration": 5,
+      "ga.sets": 2,
+      "ga.average": 1,
+      "ga.blood-relations": 3,
+      "ga.clock-calendar": 2,
+      "ga.ordering": 3,
+      "ga.directions": 1,
+      "ga.analytical": 1,
+      "ga.seating": 1,
+      "ga.number-properties": 1,
+      "ga.verbal-reasoning": 2,
+      "ga.probability": 1,
+      "ga.mental-ability": 3
+     },
+     "groups": {
+      "quant": 39,
+      "reasoning": 20
+     },
+     "difficulty": {
+      "1": 10,
+      "2": 39,
+      "3": 10
+     },
+     "modes": {
+      "R": 0,
+      "C": 4,
+      "A": 55
+     },
+     "flags": {
+      "nt": 55
+     }
+    },
+    "General Knowledge": {
+     "recorded": 49,
+     "subtopics": {
+      "sci.physics": 4,
+      "sci.climate": 1,
+      "sci.energy": 2,
+      "sci.biology": 1,
+      "sci.nutrition": 2,
+      "sci.chemistry": 2,
+      "sci.it": 1,
+      "sci.ai-digital": 1,
+      "sci.earth-space": 1,
+      "sci.plants-ecology": 1,
+      "ca.global-issues": 11,
+      "ca.organisations": 4,
+      "ca.recent": 3,
+      "pa.security": 2,
+      "pa.geography": 3,
+      "pa.foreign-policy": 2,
+      "pa.constitution": 3,
+      "pa.movement": 1,
+      "gk.books": 1,
+      "pa.society": 1,
+      "gk.history": 1,
+      "pa.political-history": 1
+     },
+     "groups": {
+      "sci": 16,
+      "ca": 18,
+      "pa": 13,
+      "gk": 2
+     },
+     "difficulty": {
+      "1": 15,
+      "2": 26,
+      "3": 8
+     },
+     "modes": {
+      "R": 38,
+      "C": 11,
+      "A": 0
+     },
+     "flags": {
+      "nt": 47,
+      "tr": 2,
+      "gk": 2
+     }
+    }
+   }
+  },
+  "2025": {
+   "recorded": 179,
+   "sections": {
+    "Islamic Studies": {
+     "recorded": 29,
+     "subtopics": {
+      "isl.quran": 7,
+      "isl.civilization": 5,
+      "isl.hadith": 2,
+      "isl.social": 1,
+      "isl.seerah-madinah": 4,
+      "isl.personalities": 3,
+      "isl.caliphate": 2,
+      "isl.law": 4,
+      "isl.seerah-makkah": 1
+     },
+     "groups": {
+      "isl": 29
+     },
+     "difficulty": {
+      "1": 4,
+      "2": 14,
+      "3": 11
+     },
+     "modes": {
+      "R": 29,
+      "C": 0,
+      "A": 0
+     },
+     "flags": {
+      "tr": 5,
+      "nt": 5,
+      "fl": 1
+     }
+    },
+    "Urdu": {
+     "recorded": 19,
+     "subtopics": {
+      "urdu.literature": 5,
+      "urdu.usage": 1,
+      "urdu.grammar": 3,
+      "urdu.plural": 1,
+      "urdu.sentence": 3,
+      "urdu.idiom": 2,
+      "urdu.translation": 4
+     },
+     "groups": {
+      "urdu": 5,
+      "vocabulary": 3,
+      "grammar": 7,
+      "translation": 4
+     },
+     "difficulty": {
+      "1": 2,
+      "2": 9,
+      "3": 8
+     },
+     "modes": {
+      "R": 16,
+      "C": 3,
+      "A": 0
+     },
+     "flags": {
+      "lit": 5,
+      "nt": 1
+     }
+    },
+    "English": {
+     "recorded": 48,
+     "subtopics": {
+      "eng.synonym": 6,
+      "eng.antonym": 4,
+      "eng.sentence-correction": 5,
+      "eng.modifier": 1,
+      "eng.punctuation": 4,
+      "eng.error-identification": 7,
+      "eng.sentence-structure": 1,
+      "eng.preposition": 3,
+      "eng.idiom": 5,
+      "eng.comprehension": 10,
+      "eng.vocab-context": 2
+     },
+     "groups": {
+      "vocabulary": 17,
+      "grammar": 21,
+      "comprehension": 10
+     },
+     "difficulty": {
+      "1": 5,
+      "2": 17,
+      "3": 26
+     },
+     "modes": {
+      "R": 18,
+      "C": 30,
+      "A": 0
+     },
+     "flags": {
+      "fl": 12,
+      "nt": 2
+     }
+    },
+    "General Abilities": {
+     "recorded": 9,
+     "subtopics": {
+      "ga.fractions": 1,
+      "ga.equations": 3,
+      "ga.average": 1,
+      "ga.algebra": 1,
+      "ga.ratio": 3
+     },
+     "groups": {
+      "quant": 9
+     },
+     "difficulty": {
+      "1": 4,
+      "2": 3,
+      "3": 2
+     },
+     "modes": {
+      "R": 0,
+      "C": 1,
+      "A": 8
+     },
+     "flags": {
+      "nt": 7,
+      "fl": 2
+     }
+    },
+    "General Knowledge": {
+     "recorded": 74,
+     "subtopics": {
+      "ca.recent": 21,
+      "ca.organisations": 3,
+      "pa.geography": 4,
+      "sci.earth-space": 5,
+      "pa.institutions": 1,
+      "pa.foreign-policy": 3,
+      "sci.energy": 1,
+      "gk.books": 2,
+      "sci.physics": 2,
+      "sci.it": 2,
+      "pa.society": 4,
+      "gk.history": 7,
+      "pa.movement": 3,
+      "sci.biology": 1,
+      "pa.resources": 2,
+      "ca.global-issues": 1,
+      "sci.climate": 2,
+      "pa.economy": 5,
+      "sci.ai-digital": 1,
+      "pa.security": 1,
+      "sci.chemistry": 2,
+      "sci.units": 1
+     },
+     "groups": {
+      "ca": 25,
+      "pa": 23,
+      "sci": 17,
+      "gk": 9
+     },
+     "difficulty": {
+      "1": 23,
+      "2": 31,
+      "3": 20
+     },
+     "modes": {
+      "R": 67,
+      "C": 7,
+      "A": 0
+     },
+     "flags": {
+      "nt": 40,
+      "fl": 5,
+      "tr": 8,
+      "lit": 1,
+      "gk": 9,
+      "sp": 5
+     }
+    }
+   }
+  }
+ },
+ "recurringSubtopics": {
+  "isl.quran": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "isl.law": [
+   2022,
+   2025
+  ],
+  "isl.economy": [
+   2022,
+   2023,
+   2024
+  ],
+  "isl.seerah-makkah": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "isl.personalities": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "isl.worship": [
+   2022,
+   2024
+  ],
+  "isl.seerah-madinah": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "isl.social": [
+   2022,
+   2025
+  ],
+  "isl.governance": [
+   2022
+  ],
+  "isl.civilization": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "urdu.grammar": [
+   2022,
+   2024,
+   2025
+  ],
+  "urdu.usage": [
+   2022,
+   2025
+  ],
+  "urdu.gender": [
+   2022
+  ],
+  "urdu.plural": [
+   2022,
+   2024,
+   2025
+  ],
+  "urdu.antonym": [
+   2022
+  ],
+  "urdu.synonym": [
+   2022
+  ],
+  "urdu.sentence": [
+   2022,
+   2025
+  ],
+  "urdu.office-terms": [
+   2022
+  ],
+  "eng.vocab-context": [
+   2022,
+   2023,
+   2025
+  ],
+  "eng.comprehension": [
+   2022,
+   2024,
+   2025
+  ],
+  "eng.sentence-correction": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "eng.parts-of-speech": [
+   2022
+  ],
+  "eng.preposition": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "eng.analogy": [
+   2022,
+   2023
+  ],
+  "eng.synonym": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "eng.antonym": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ga.fractions": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ga.equations": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ga.average": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ga.algebra": [
+   2022,
+   2024,
+   2025
+  ],
+  "ga.geometry": [
+   2022,
+   2023,
+   2024
+  ],
+  "ga.deduction": [
+   2022
+  ],
+  "ga.psychometrics": [
+   2022
+  ],
+  "ga.mental-ability": [
+   2022,
+   2023,
+   2024
+  ],
+  "ga.series": [
+   2022,
+   2023,
+   2024
+  ],
+  "ga.verbal-reasoning": [
+   2022,
+   2023,
+   2024
+  ],
+  "sci.it": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "sci.environment": [
+   2022
+  ],
+  "ga.blood-relations": [
+   2022,
+   2023,
+   2024
+  ],
+  "ga.data": [
+   2022
+  ],
+  "ga.probability": [
+   2022,
+   2024
+  ],
+  "sci.chemistry": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "sci.earth-space": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "sci.human-body": [
+   2022,
+   2023
+  ],
+  "sci.nutrition": [
+   2022,
+   2024
+  ],
+  "sci.physics": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "sci.units": [
+   2022,
+   2025
+  ],
+  "gk.world": [
+   2022,
+   2023
+  ],
+  "sci.plants-ecology": [
+   2022,
+   2023,
+   2024
+  ],
+  "ca.global-issues": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ca.organisations": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "ca.recent": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "gk.books": [
+   2022,
+   2024,
+   2025
+  ],
+  "pa.constitution": [
+   2022,
+   2023,
+   2024
+  ],
+  "pa.political-history": [
+   2022,
+   2023,
+   2024
+  ],
+  "pa.institutions": [
+   2022,
+   2025
+  ],
+  "pa.resources": [
+   2022,
+   2023,
+   2025
+  ],
+  "pa.movement": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "pa.geography": [
+   2022,
+   2024,
+   2025
+  ],
+  "pa.foreign-policy": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "pa.society": [
+   2022,
+   2024,
+   2025
+  ],
+  "isl.caliphate": [
+   2023,
+   2025
+  ],
+  "isl.hadith": [
+   2023,
+   2024,
+   2025
+  ],
+  "eng.article": [
+   2023
+  ],
+  "eng.phrasal-verb": [
+   2023
+  ],
+  "eng.tense": [
+   2023
+  ],
+  "eng.punctuation": [
+   2023,
+   2024,
+   2025
+  ],
+  "eng.pronoun": [
+   2023
+  ],
+  "eng.sentence-structure": [
+   2023,
+   2025
+  ],
+  "eng.idiom": [
+   2023,
+   2024,
+   2025
+  ],
+  "ga.ratio": [
+   2023,
+   2025
+  ],
+  "ga.percentage": [
+   2023,
+   2024
+  ],
+  "ga.directions": [
+   2023,
+   2024
+  ],
+  "ga.ordering": [
+   2023,
+   2024
+  ],
+  "ga.seating": [
+   2023,
+   2024
+  ],
+  "ga.coding": [
+   2023
+  ],
+  "sci.climate": [
+   2023,
+   2024,
+   2025
+  ],
+  "sci.health": [
+   2023
+  ],
+  "ca.pakistan-external": [
+   2023
+  ],
+  "pa.security": [
+   2023,
+   2024,
+   2025
+  ],
+  "pa.economy": [
+   2023,
+   2025
+  ],
+  "urdu.comprehension": [
+   2024
+  ],
+  "urdu.literature": [
+   2024,
+   2025
+  ],
+  "urdu.translation": [
+   2024,
+   2025
+  ],
+  "urdu.idiom": [
+   2024,
+   2025
+  ],
+  "eng.error-identification": [
+   2024,
+   2025
+  ],
+  "ga.work-time": [
+   2024
+  ],
+  "ga.speed-time": [
+   2024
+  ],
+  "ga.mensuration": [
+   2024
+  ],
+  "ga.sets": [
+   2024
+  ],
+  "ga.clock-calendar": [
+   2024
+  ],
+  "ga.analytical": [
+   2024
+  ],
+  "ga.number-properties": [
+   2024
+  ],
+  "sci.energy": [
+   2024,
+   2025
+  ],
+  "sci.biology": [
+   2024,
+   2025
+  ],
+  "sci.ai-digital": [
+   2024,
+   2025
+  ],
+  "gk.history": [
+   2024,
+   2025
+  ],
+  "eng.modifier": [
+   2025
+  ]
+ }
+}

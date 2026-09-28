@@ -1,4 +1,6 @@
 -- Rollback for 010_mpt_exam_system.sql. Destroys all MPT application, attempt and result data.
+DROP TABLE IF EXISTS mpt_paper_replacements;
+DROP TABLE IF EXISTS mpt_paper_backups;
 DROP TABLE IF EXISTS mpt_events;
 DROP TABLE IF EXISTS mpt_rate_hits;
 DROP TABLE IF EXISTS mpt_user_stats;

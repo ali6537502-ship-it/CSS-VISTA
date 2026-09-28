@@ -9,7 +9,7 @@ on:
 
 jobs:
   mpt-release:
-    name: Forty-paper MPT release gate
+    name: MPT editorial release gate (repaired live series)
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -25,25 +25,19 @@ jobs:
       - name: Install exactly from lockfile
         run: npm ci --no-audit --no-fund
 
-      - name: Verify legacy exclusion manifest
-        run: node scripts/build-mpt-legacy-exclusions.mjs --check
+      - name: Validate the reviewed MPT bank
+        run: node scripts/mpt/validate-bank.mjs | tee mpt-bank-validation.txt
 
-      - name: Audit all 40 MPT papers
-        shell: bash
-        run: |
-          set +e
-          node scripts/audit-mpt-40-papers.mjs 2>&1 | tee mpt-release-audit.json
-          status=${PIPESTATUS[0]}
-          exit "${status}"
+      - name: Source gate (series rebuilds exactly and every paper passes)
+        run: node scripts/mpt/audit-release.mjs
 
-      - name: Audit factual integrity and current-affairs provenance
-        if: always()
-        shell: bash
+      - name: Export and prove the exported papers equal the audited papers
         run: |
-          set +e
-          node scripts/audit-mpt-factual-integrity.mjs 2>&1 | tee mpt-factual-audit.json
-          status=${PIPESTATUS[0]}
-          exit "${status}"
+          node scripts/export-mpt-papers.mjs --out dist/api/_mpt_papers
+          node scripts/mpt/audit-release.mjs --exported dist/api/_mpt_papers
+
+      - name: Release tests
+        run: node --test tests/mptRelease.test.mjs
 
       - name: Retain MPT audit reports
         if: always()
@@ -51,7 +45,9 @@ jobs:
         with:
           name: mpt-release-audit-${{ github.sha }}
           path: |
-            mpt-release-audit.json
-            mpt-factual-audit.json
-          if-no-files-found: error
+            mpt-bank-validation.txt
+            data-archive/mpt-release-reports/release-report.md
+            data-archive/mpt-release-reports/release-report.json
+            data-archive/mpt-release-reports/replacements.json
+          if-no-files-found: warn
           retention-days: 90

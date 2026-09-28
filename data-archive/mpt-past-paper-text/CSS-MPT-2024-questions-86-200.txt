@@ -1,0 +1,672 @@
+Source: questions 86-200 of the circulated 'CSS MPT 2026 Solved Past Paper' (cssaspirants.pk), which reproduce questions 86-200 of the scanned CSS MPT 2024 booklet (public/past-papers/mpt/CSS-MPT-2024.pdf, held 19 November 2023) verbatim. Used only to verify past-paper year labels for 2024.
+
+86. If you go to lunch at Dilly's Deli, you could expect to see:
+(a) Couples dining together
+(b) The fire marshal
+(c) A long line of customers
+(d) Homemade pie
+87. The passage suggests that if you eat lunch at Dilly's Deli, you should expect to:
+(a) To be called out by the restaurant's staff
+(b) Place your order with the waiter who comes to your table
+(c) Dress warmly
+(d) Carry your own food to your table
+88. Which of the following illustrates the restaurant critic's opinion of the food at Dilly's Deli?
+(a) "At Dilly's, you sit at one of four long tables."
+(b) "At lunchtime, Dilly's Deli is so crowded, I wondered when the
+(c) "After I had tasted all of the food on my plate, I rose to leave, whereupon one of the people working behind the counter y
+(d) "Throwing away that plate of food was the most enjoyable 
+89. The main purpose of the restaurant review is to:
+(a) Tell people about the presence of truck drivers at Dilly's Deli.
+(b) Make fun of couples who argue in public.
+(c) Recommend the hamburger steak special.
+(d) Warn people that Dilly's Deli tends to be crowded.
+90. Role of the 'fire marshal' (underlined), as mentioned in the passage, appears to be:
+(a) Checking the hygienic condition in the restaurant.
+(b) Checking overcrowding at public places
+(c) Ensuring disciplined conduct of restaurant's staff
+(d) None of these
+GENERAL ABILITIES  (Marks = 60)
+91. Evaluate: 4^(1/2) x 4^2 - 4^0.
+(a) 24
+(b) 28
+(c) 31
+(d) None of these
+92. What is k, given that 27^k = 9?
+(a) 1/3
+(b) 2/3
+(c) 4/3
+(d) None of these
+93. Several number of cows on a farm consume the food in 150 days. If we reduce the number of cows by
+10, then the food lasts for 160 days. How many cows were there on the farm in the beginning?
+(a) 150
+(b) 160
+(c) 100
+(d) None of these
+94. A train of length 99m takes 11 seconds to pass completely through a station of length 231m. What is
+the speed of the train in km/h?
+(a) 108
+(b) 75.6
+(c) 30
+(d) None of these
+95. A, B and C share $112. B receives $12 less than A and C gets twice as much as B. How much does C
+get?
+(a) 34
+(b) 44
+(c) 50
+(d) None of these
+96. Find an integer such that four times the number subtracted from two times the square of the number
+gives 15.
+(a) 3
+(b) -3
+(c) -5/3
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 11 of 19
+FPSC MPT CSS-2026  (SOLVED)
+97. Zaid is six times as old as his daughter Zoya. How old was Zaid when Zoya was born if the sum of
+their ages will be 49 in 7 years?
+(a) 25
+(b) 35
+(c) 42
+(d) None of these
+98. Find two consecutive positive numbers such that the sum of their squares is 7 less than 120.
+(a) 7, 8
+(b) 8, 9
+(c) 7, 9
+(d) None of these
+99. A light shop sells lights; they sold 25 percent of the lights and still had 1500 lights left. How many
+lights were there in the beginning?
+(a) 2500
+(b) 2250
+(c) 2000
+(d) None of these
+100. Given x^2 - 11x + 10 = 0, then x is:
+(a) -1, -10
+(b) -1, +10
+(c) +1, -10
+(d) None of these
+101. Total cost of 5 markers and 1 pencil is Rs. 245 and total cost of 3 markers and 3 pencils is Rs. 327.
+What is the cost of one marker?
+(a) Rs. 32
+(b) Rs. 34
+(c) Rs. 74
+(d) None of these
+102. The first term in a sequence is 1 and the second term is 5. From the third term onwards, each term is
+the average (arithmetic mean) of all preceding terms. What is the 27th term in the sequence?
+(a) 2.5
+(b) 3
+(c) 5.5
+(d) None of these
+103. A baker sells different types of cakes in his shop. Every small cake costs $x and every large cake costs
+$(2x + 3). The cost of 3 small lemon cakes and 2 large lemon cakes is $16.36. What is the cost of one small
+lemon cake?
+(a) $1.91
+(b) $1.48
+(c) $2.34
+(d) None of these
+104. If one angle of an isosceles triangle is 68 degrees, then possible values of the second angle are:
+(a) Any value between 68 and 180 degrees
+(b) Any value between 68 and 112 degrees
+(c) Any value between 1 and 112 degrees
+(d) None of these
+105. The total perimeter of a semicircle is 20.6 cm. What is the approximate radius of the semi-circle?
+(a) 4 cm
+(b) 5 cm
+(c) 6.6 cm
+(d) None of these
+106. A water tank in the shape of a cuboid has length 1.5 metres and width 1.0 metre. How many litres of
+water are in the tank if the water is 60 centimetres deep?
+(a) 9000 litres
+(b) 900 litres
+(c) 90 litres
+(d) None of these
+107. The inner circumference of a circular race track is 440m. If the width of the track is 14m, what is the
+radius of the outer circle?
+(a) 70m
+(b) 77m
+(c) 84m
+(d) None of these
+108. In a group of 200 people, 90 like tennis, while 108 like cricket and 46 people like both tennis and
+cricket. How many people like neither tennis nor cricket?
+(a) 44
+(b) 48
+(c) 62
+(d) None of these
+109. 450 visitors visit a museum on each Monday, while only 120 visit on each of the remaining six days of
+the week. How many visitors are there on a daily average basis in a month of 30 days beginning on a
+Monday?
+(a) 164
+(b) 160
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 12 of 19
+FPSC MPT CSS-2026  (SOLVED)
+(c) 175
+(d) None of these
+110. A is B's daughter, C is B's mother, D is B's sister and E is D's son. Then how is A related to E?
+(a) Uncle
+(b) Grand daughter
+(c) Cousin
+(d) None of these
+111. Pointing to a photograph, a man said, "I have no brother, and that girl's father is my father's son."
+Whose photograph was it?
+(a) His father
+(b) His own
+(c) His daughter
+(d) None of these
+112. A bus for Islamabad leaves after every fifty two minutes from a bus stand. An enquiry officer told a
+passenger that the bus had already left sixteen minutes ago and the next bus will leave at 08:15 pm. At
+what time did the enquiry officer give the information to the passenger?
+(a) 07:23 pm
+(b) 07:39 pm
+(c) 07:49 pm
+(d) None of these
+113. Pearl Tower is taller than Sky Tower but shorter than Ocean Tower. Ocean Tower and MCB Tower
+are of same height. Pearl Tower is shorter than Bahria Tower. Which one is the second shortest among all
+the buildings?
+(a) Pearl Tower
+(b) Sky Tower
+(c) Ocean Tower
+(d) None of these
+114. Peter is in the East of Tom and Tom is in the North of John. Mike is in the South of John, then in
+which direction of Peter is Mike?
+(a) South-East
+(b) South-West
+(c) South
+(d) None of these
+115. On a particular school day, a student will take classes of six subjects - Geography, History,
+Jurisprudence, Kinetics, Literature, and Mechanics. Each class will be taken only once on that day and
+their order is subject to the following conditions: (A) Geography has to be immediately after History. (B)
+Kinetics has to be earlier than Geography. (C) Mechanics has to be earlier than Literature. (D) Mechanics
+has to be either immediately before or immediately after Jurisprudence. If Literature is earlier than
+Kinetics, then History must be in the following position:
+(a) First
+(b) Third
+(c) Fifth
+(d) None of these
+116. Six girls are sitting in a circle facing towards the centre of the circle. R is between N and S. P is next
+to the left of V. R is 4th to the right of P. What is the position of T?
+(a) To the immediate right of V
+(b) Second to the left of P
+(c) Second to the right of R
+(d) None of these
+117. Roni and Willy had a 100m race. Roni covered the distance in 45 secs and Willy covered the distance
+in 36 secs. Willy beats Roni by how much distance?
+(a) 20m
+(b) 22.5m
+(c) 25m
+(d) None of these
+118. What is a and b in the given sequence: a, 13, 9, 3, -5, -15, b?
+(a) 15, -25
+(b) 15, -27
+(c) 16, -28
+(d) None of these
+119. What is the sum of prime numbers less than 21?
+(a) 58
+(b) 64
+(c) 77
+(d) None of these
+120. Old generation people were born between 1965 and 1981. They can do most tasks independently.
+Some people call them the Entrepreneurial generation. The conclusion which follows logically from the
+above statements is:
+(a) They have a natural tendency of being self-employed(b) They work harder than any recent generation
+(c) They require some assistance to do tasks
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 13 of 19
+FPSC MPT CSS-2026  (SOLVED)
+121. The expression 3(-4 x 5 - 6) would be equal to:
+(a) 12
+(b) -78
+(c) -15
+(d) None of these
+122. Arrange in order of size, smallest to largest: (i) 0.5^2 (ii) 0.5 (iii) 0.5^3 (iv) cube root of 0.5
+(a) iv, ii, i, iii
+(b) iii, i, ii, iv
+(c) ii, i, iii, iv
+(d) None of these
+123. The forest workers plant 200 trees in one month (30 days). When 20 workers were sent away, 200
+trees were planted in 40 days by this second group. How many workers were there in the first group?
+(a) 60
+(b) 70
+(c) 80
+(d) None of these
+124. The temperature measured in Murree at noon was 16.6 degrees C. At midnight temperature was 20.4
+degrees C lower. What was the temperature at midnight?
+(a) -4.8 degrees C
+(b) -4.2 degrees C
+(c) -3.8 degrees C
+(d) None of these
+125. Roni has 25 sweets and Tony has 55 sweets. How many sweets should Roni give to Tony so that Tony
+has four times as many sweets as Roni?
+(a) 5
+(b) 7
+(c) 9
+(d) None of these
+126. How can the number 45 be divided into two parts such that four times one part is 9 less than 5 times
+the other?
+(a) 20, 25
+(b) 21, 24
+(c) 19, 26
+(d) None of these
+127. A man is 5 times as old as his son now. Four years ago, the product of their ages was 52. What are
+their present ages?
+(a) 8 and 40
+(b) 7 and 35
+(c) 6 and 30
+(d) None of these
+128. John is 4 years older than David and Joe is 2 years younger than David. If the sum of their ages is 44,
+how old will John be in 8 years' time?
+(a) 24
+(b) 25
+(c) 17
+(d) None of these
+129. What integer values can n have, given the inequality -7 < 4n <= 8?
+(a) -1, 0, 1, 2
+(b) -2, -1, 0, 1, 2
+(c) -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8
+(d) None of these
+130. A student spends 15% of his scholarship grant on food and 45% on tuition. After spending 50% of
+the remaining grant on his hostel fee, he is left with Rs 8,000 only. How much is his scholarship grant?
+(a) 32,000
+(b) 40,000
+(c) 45,000
+(d) None of these
+131. Find the value of a^2 + b^2, when a + b = 5 and ab = 6.
+(a) 37
+(b) 25
+(c) 13
+(d) None of these
+132. When the equation y = x^2 + 8x - 5 is written in the form (x + a)^2 + b, then a is:
+(a) 8
+(b) 5
+(c) 4
+(d) None of these
+133. Find the value of x, where A = (2pi + y)x^2, where A = 36 and y = 2.77.
+(a) 3
+(b) 4
+(c) 2
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 14 of 19
+FPSC MPT CSS-2026  (SOLVED)
+134. At a football match, the price of child ticket is Rs. 240 less than the adult ticket. There are 18,500
+adults and 2500 children attending the match. Total amount paid for tickets is Rs. 41,400,000. What is the
+price of one adult ticket?
+(a) Rs. 2460
+(b) Rs. 1940
+(c) Rs. 2000
+(d) None of these
+135. Name the regular polygon that has an exterior angle of 36 degrees.
+(a) Pentagon
+(b) Hexagon
+(c) Decagon
+(d) None of these
+136. What is the perimeter of a semi-circle lake having a radius of 700m?
+(a) 127.4 km
+(b) 3.6 km
+(c) 2.9 km
+(d) None of these
+137. What is the total surface area of a cylinder having a radius of 3.5 cm and height 5.5 cm?
+(a) 211.5 sq cm
+(b) 198 sq cm
+(c) 121 sq cm
+(d) None of these
+138. The lights and brakes of 30 bicycles were tested. 27 bicycles passed the lights and 21 passed the
+brakes test. The lights and brakes both failed on one bicycle. How many bicycles passed both tests?
+(a) 19
+(b) 21
+(c) 20
+(d) None of these
+139. A box contains 8 red, 6 green and 7 blue toys. One of the toys is randomly picked; what is the
+probability that the toy picked is neither red nor green?
+(a) 7/21
+(b) 14/21
+(c) 7/14
+(d) None of these
+140. P is the brother of Q and R. S is mother of R, and T is father of P. Which of the following statements
+is not exactly true?
+(a) T is Q's father
+(b) P is S's son
+(c) S is P's mother
+(d) Q is T's son
+141. Arrange the given words in the order that they occur in dictionary: 1. Apparent 2. Apostate 3.
+Appoint 4. Apparel
+(a) 2, 1, 4, 3
+(b) 2, 3, 4, 1
+(c) 1, 4, 3, 2
+(d) 2, 4, 1, 3
+142. Adil, Badar, Saima, Dawood and Mehak each have different amount of money. Saima has more
+money than only Mehak; Badar has more money than Dawood but less than Adil. Who among them has
+the highest amount of money?
+(a) Badar
+(b) Dawood
+(c) Adil
+(d) None of these
+143. A got more points than B but less than C. D got less points than C but more than A. If C gets less
+than D, then who gets the highest points?
+(a) D
+(b) E
+(c) C
+(d) None of these
+144. Given: PQS, QRT, RSU, STV... What should follow?
+(a) TUW
+(b) SUV
+(c) STU
+(d) None of these
+145. A clock is placed on a table such that at 6:00 pm the hour hand points to North-East. In which
+direction will the minute hand point at 9:15 pm?
+(a) South-East
+(b) North-West
+(c) South-West
+(d) None of these
+146. The weights of 4 boxes are 20 kg, 30 kg, 50 kg and 70 kg. If a combination of boxes is made using
+each box only once then the total weight of the combination cannot be:
+(a) 170 kg
+(b) 160 kg
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 15 of 19
+FPSC MPT CSS-2026  (SOLVED)
+(c) 150 kg
+(d) None of these
+147. The positions of the first and sixth digits in the number 5109238674 are interchanged. Similarly, the
+positions of second and seventh digits are interchanged and so on. Which one of the following will be the
+third digit from the right end after the rearrangement?
+(a) 9
+(b) 0
+(c) 6
+(d) None of these
+148. 16 men and 12 women can complete a work in 20 days. 18 women can complete the same work in 40
+days. In how many days will 12 men and 27 women complete the same work?
+(a) 16
+(b) 18
+(c) 21
+(d) None of these
+149. Statement: "Research reports that though Vitamin C present in fresh fruits and vegetables is
+beneficial for human body, capsule Vitamin C does not have the same effect on human body". Which of
+the following sentence would logically come next? (i) The sale of capsule Vitamin C should be banned. (ii)
+People should be encouraged to take fresh fruits and vegetables to meet the body's requirement of
+Vitamin C.
+(a) Only (i) follows
+(b) Only (ii) follows
+(c) Neither (i) nor (ii) follows
+(d) Both (i) and (ii) follow
+150. What is the next term in the series: 11, 20, 38, 56, 83?
+(a) 108
+(b) 116
+(c) 122
+(d) None of these
+151. If output voltage is greater than input voltage, then transformer is:
+(a) Step up
+(b) Step down
+(c) Faulty
+(d) None of these
+152. The voltage signal which is generated by microphone is called:
+(a) Digital
+(b) Analogue
+(c) Hybrid
+(d) None of these
+153. Third most common gas that is found in the air we breathe is called:
+(a) Hydrogen
+(b) Neon
+(c) Argon
+(d) None of these
+154. Electromagnetic radiation with maximum wavelength is:
+(a) Ultraviolet
+(b) Radio waves
+(c) Infrared
+(d) None of these
+155. The most dangerous type of radiation is:
+(a) Alpha radiation
+(b) Beta radiation
+(c) Gamma radiation
+(d) None of these
+156. The solar energy is radiated in the form of:
+(a) Electromagnetic waves
+(b) Transverse waves
+(c) Infrared waves
+(d) None of these
+157. The study of human body cells is called:
+(a) Physiology
+(b) Cytology
+(c) Mycology
+(d) None of these
+158. Excessive bleeding during an injury is a deficiency of:
+(a) Vitamin B
+(b) Vitamin K
+(c) Vitamin E
+(d) None of these
+159. Which fuel is used in gas welding?
+(a) Acetylene
+(b) Methane
+(c) Ethylene
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 16 of 19
+FPSC MPT CSS-2026  (SOLVED)
+160. Drum printers belong to which of the following category?
+(a) Ink jet printer
+(b) Laser printer
+(c) Line printer
+(d) None of these
+161. Machine learning is sub area of:
+(a) Hardware Engineering
+(b) Artificial intelligence
+(c) Cyber forensics
+(d) None of these
+162. Which of the following can be classified as renewable energy source?
+(a) Geothermal energy
+(b) Tidal energy
+(c) Biomass energy
+(d) All of these
+163. How do scientists know that the Earth's core is made up of metal?
+(a) The density of the surface layer of Earth is much less than its average density.
+(b) The Earth's rotation speed indicates its core structure.
+(c) The density of surface layer of Earth is greater than its total density.
+(d) None of these
+164. Maintenance of soil fertility without addition of extra nutrition is due to:
+(a) Floods
+(b) Crop residue
+(c) Microbial activity
+(d) None of these
+165. Nanocomposite materials are useful in food industry as they prevent packaged food from damage
+due to:
+(a) Oxygen
+(b) Carbon dioxide
+(c) Moisture
+(d) All of these
+166. Which of the following statement is true?
+(a) Water-soluble vitamins cannot be stored in the body
+(b) Fat-soluble vitamins can be stored in the body
+(c) Body can absorb more of fat-soluble vitamins than required
+(d) All of these
+GENERAL KNOWLEDGE (Current Affairs / Pakistan Affairs)  (Marks = 50)
+167. What global agreement, signed in 2015, aimed to limit global warming to well below 2 degrees
+Celsius above pre-industrial levels?
+(a) Kyoto Protocol
+(b) Paris Agreement
+(c) Copenhagen Accord
+(d) None of these
+168. Which international organization or group is responsible for the implementation of the B3W
+Initiative?
+(a) United Nations (UN)
+(b) Group of Seven (G7)
+(c) NATO
+(d) None of these
+169. China gave a Peace Plan for the Ukraine war in 2023. How many points were included in China's
+peace plan?
+(a) 6
+(b) 10
+(c) 12
+(d) None of these
+170. What term describes the use of information warfare, disinformation, and other means to manipulate
+and undermine the influence of other countries?
+(a) Soft power
+(b) Sharp power
+(c) Smart power
+(d) None of these
+171. The Regional Comprehensive and Economic Partnership (RCEP) is a free trade agreement among
+the nations of:
+(a) North America
+(b) Europe
+(c) Asia-Pacific
+(d) None of these
+172. The AIIB (Asian Infrastructure Investment Bank) was established by:
+(a) Asian Development Bank
+(b) ASEAN
+(c) Group of Seven (G7) countries
+(d) China and some other Asian countries
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 17 of 19
+FPSC MPT CSS-2026  (SOLVED)
+173. What does the "I2-U2" alliance stand for?
+(a) India-Israel-Ukraine-US
+(b) India-Israel-US-UAE
+(c) Italy-Israel-Ukraine-UK
+(d) None of these
+174. "G-2 or Group of Two" is an informal diplomacy between:
+(a) Germany and Greece
+(b) US and China
+(c) Germany and Ghana
+(d) None of these
+175. Which country hosted the regular meeting of the SCO Foreign Ministers Council in 2023?
+(a) China
+(b) India
+(c) Uzbekistan
+(d) None of these
+176. The Belt and Road Initiative (BRI) consists of two main components: the Silk Road Economic Belt
+and:
+(a) The Desert Oasis Corridor
+(b) The Himalayan Trade Route
+(c) The 21st Century Maritime Silk Road
+(d) None of these
+177. When was the "Made in China 2025" strategic plan initiated?
+(a) 2010
+(b) 2015
+(c) 2020
+(d) None of these
+178. Djibouti is strategically located at the mouth of which sea?
+(a) Mediterranean Sea
+(b) South China Sea
+(c) Red Sea
+(d) None of these
+179. The Horn of Africa (HoA) is located in which part of the African continent?
+(a) Eastern Africa
+(b) Western Africa
+(c) Northern Africa
+(d) None of these
+180. The Southeast Asia Treaty Organization (SEATO) formally came to an end in:
+(a) 1977
+(b) 1988
+(c) 1991
+(d) None of These
+181. What does "CARICOM" stand for?
+(a) Canada, Austria, Romania, India-Community
+(b) Caribbean Community
+(c) Canada, Argentina, Russia, Italy-Community
+(d) None of these
+182. What does BECA stand for?
+(a) Basic Exchange and Cooperation Agreement
+(b) Bilateral Exchange and Cooperation Accord
+(c) Basic Economic and Cultural Agreement
+(d) None of these
+183. Which nation holds the distinction of being the top investor in Africa by 2023?
+(a) United States
+(b) China
+(c) Russia
+(d) None of these
+184. Which important shipping lane, connecting the Arabian Sea to the Persian Gulf, passes through
+Pakistani waters and is vital for international trade?
+(a) Strait of Hormuz
+(b) Gulf of Aden
+(c) The Bab-el-Mandeb
+(d) None of these
+185. Which U.S. military operation in 2011 resulted in the death of Osama bin Laden in Pakistan?
+(a) Operation Enduring Freedom
+(b) Operation Eradicating Terrorism
+(c) Operation Neptune Spear
+(d) None of these
+186. The world's highest battlefield, the Siachen Glacier, is located in which mountain range?
+(a) Himalayas
+(b) Karakoram
+(c) Hindu Kush
+(d) None of these
+187. In 2017, Pakistan became a full member of the Shanghai Cooperation Organization (SCO). What is
+the primary purpose of the SCO?
+(a) To facilitate trade amongst member countries
+(b) To establish a common currency for member states
+(c) To promote regional cooperation and stability in Eurasia
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 18 of 19
+FPSC MPT CSS-2026  (SOLVED)
+188. Which Pakistani diplomat served as the President of the United Nations (UN) General Assembly?
+(a) Feroz Khan Noon
+(b) Zulfikar Ali Bhutto
+(c) Muhammad Zafrulla Khan
+(d) None of these
+189. What is the length of the Batura Glacier, making it one of the largest and longest glaciers outside the
+polar regions?
+(a) 57 kilometers
+(b) 61 kilometers
+(c) 64 kilometers
+(d) None of these
+190. Which island is known as Pakistan's largest island and is sometimes referred to as "Jazira Haft
+Talar," meaning the island of seven mountains?
+(a) Manora Island
+(b) Astola Island
+(c) Churna Island
+(d) None of these
+191. How many members of the National Assembly must sign the notice of no confidence for it to be
+valid?
+(a) At least five percent (5%)
+(b) At least ten percent (10%)
+(c) At least twenty percent (20%)
+(d) None of these
+192. Pakistan's position on the Fissile Material Cut-off Treaty (FMCT) is that:
+(a) Pre-existing stockpiles should be included in the draft of the FMCT before negotiations
+(b) Ban on nuclear testing be lifted before signing of the draft
+(c) A criteria-based approach be applied to the NSG before finalizing the FMCT
+(d) None of these
+193. As of 2023, Pakistan is included in the roster of FATF.
+(a) Black
+(b) Grey
+(c) White
+(d) None of these
+194. The Muslim League observed "Direct Action Day" on August 16, 1946, which led to communal
+violence in:
+(a) Delhi
+(b) Lahore
+(c) Kolkata
+(d) Mumbai
+195. Who wrote the book "Train to Pakistan", which is set during the Partition of India in 1947?
+(a) Bapsi Sidhwa
+(b) Amrita Pritam
+(c) Khushwant Singh
+(d) None of these
+196. In the Bogra formula, the proposed lower house of parliament was named as:
+(a) The House of Commons
+(b) The House of People
+(c) National Assembly
+(d) None of these
+197. Lenin prize was awarded to:
+(a) Habib Jalib
+(b) Ahmed Faraz
+(c) Faiz Ahmed Faiz
+(d) None of these
+198. After India's Independence, Moulana Abdul Kalam Azad was appointed as:
+(a) Minister of Education
+(b) Speaker of the Lok Sabha
+(c) Minister of Finance
+(d) None of these
+199. Mujeeb-ur-Rehman presented his six points in:
+(a) 1966
+(b) 1959
+(c) 1968
+(d) None of these
+200. The Chief Justice of Supreme Court of Pakistan is appointed by the:
+(a) President
+(b) Prime Minister
+(c) Majority vote in the Parliament
+(d) None of these
+www.cssaspirants.pk  |  100% MPT MCQs Practice  |  WhatsApp 0316 4047600
+Page 19 of 19

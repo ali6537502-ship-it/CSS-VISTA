@@ -4,7 +4,7 @@ declare(strict_types=1);
 // Canonical MPT examination schema. server/sql/010_mpt_exam_system.sql mirrors
 // these statements exactly (tests/mpt/unit.php enforces that). New tables only:
 // no existing table is altered. All timestamps are UTC.
-const CSSV_MPT_SCHEMA_VERSION = 1;
+const CSSV_MPT_SCHEMA_VERSION = 2;
 
 function cssv_mpt_schema_statements(): array
 {
@@ -238,12 +238,43 @@ function cssv_mpt_schema_statements(): array
   KEY mpt_events_user_time_idx (user_id,created_at),
   KEY mpt_events_attempt_idx (attempt_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
+        "CREATE TABLE IF NOT EXISTS mpt_paper_backups (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  mock_id CHAR(36) NOT NULL,
+  paper_ref VARCHAR(96) NULL,
+  paper_series VARCHAR(40) NULL,
+  fingerprint CHAR(64) NOT NULL,
+  question_count SMALLINT UNSIGNED NOT NULL,
+  questions LONGTEXT NOT NULL,
+  backed_up_at DATETIME(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mpt_paper_backups_mock_idx (mock_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+
+        "CREATE TABLE IF NOT EXISTS mpt_paper_replacements (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  mock_id CHAR(36) NOT NULL,
+  backup_id BIGINT UNSIGNED NOT NULL,
+  old_paper_ref VARCHAR(96) NULL,
+  old_series VARCHAR(40) NULL,
+  old_fingerprint CHAR(64) NOT NULL,
+  new_paper_ref VARCHAR(96) NOT NULL,
+  new_series VARCHAR(40) NOT NULL,
+  new_fingerprint CHAR(64) NOT NULL,
+  reason VARCHAR(255) NOT NULL,
+  replaced_at DATETIME(3) NOT NULL,
+  PRIMARY KEY (id),
+  KEY mpt_paper_replacements_mock_idx (mock_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
     ];
 }
 
 function cssv_mpt_schema_drop_statements(): array
 {
     return [
+        'DROP TABLE IF EXISTS mpt_paper_replacements',
+        'DROP TABLE IF EXISTS mpt_paper_backups',
         'DROP TABLE IF EXISTS mpt_events',
         'DROP TABLE IF EXISTS mpt_rate_hits',
         'DROP TABLE IF EXISTS mpt_user_stats',
