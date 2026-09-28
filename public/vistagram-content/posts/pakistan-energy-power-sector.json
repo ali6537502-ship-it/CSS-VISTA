@@ -1,0 +1,77 @@
+{
+  "id": "pakistan-energy-power-sector",
+  "slug": "pakistan-energy-power-sector",
+  "title": "Pakistan’s Energy Challenge: Power Mix, Regulation and Sustainable Transition",
+  "excerpt": "A clear Pakistan Affairs framework for understanding installed capacity, electricity generation, regulation, affordability, efficiency and the transition toward a more resilient energy system.",
+  "type": "Explainer",
+  "category": "Pakistan Affairs",
+  "topic": "Pakistan’s Energy Problems and their Effects",
+  "tags": [
+    "Pakistan Affairs",
+    "Energy",
+    "Power Sector",
+    "NEPRA",
+    "Renewable Energy",
+    "Economic Survey"
+  ],
+  "publishedAt": "2026-09-22T12:00:00+05:00",
+  "readingMinutes": 3,
+  "evergreen": false,
+  "contentPath": "/vistagram-content/posts/pakistan-energy-power-sector.json",
+  "scope": "Pakistan",
+  "dedupeKey": "pakistan-energy-power-sector",
+  "subtitle": "Energy is not only a generation question; it is also a governance, cost, transmission, demand and sustainability question.",
+  "keyPoints": [
+    "The Pakistan Economic Survey 2025–26 reports total installed electricity capacity of 49,651 MW at end-March FY2026.",
+    "Generation capacity, actual generation, transmission capability, distribution performance and affordability are different policy variables and should not be confused.",
+    "NEPRA’s sector reporting emphasizes financial, operational, regulatory and sustainability dimensions of the power system."
+  ],
+  "sections": [
+    {
+      "heading": "Understanding the energy system",
+      "paragraphs": [
+        "Pakistan Affairs lists energy problems as a dedicated syllabus area because energy affects households, industry, agriculture, public finances and investment. A useful starting point is to separate the electricity system into generation, transmission, distribution and consumption. Installed capacity tells us how much generating equipment exists, but it does not by itself show how much electricity can be delivered reliably or affordably at a particular time.",
+        "The Pakistan Economic Survey 2025–26 reports 49,651 MW of total installed electricity capacity at the end of March FY2026 and 92,835 GWh of electricity generation during July–March FY2026. These figures should be cited with their period because capacity and generation change over time."
+      ]
+    },
+    {
+      "heading": "Power mix and system performance",
+      "paragraphs": [
+        "Pakistan uses a mix of hydropower, thermal generation, nuclear power and renewable sources. The composition matters because each source has different fuel, financing, reliability and environmental characteristics. Hydropower can provide low operating-cost electricity but depends on hydrology and storage. Thermal generation may depend on domestic or imported fuels. Nuclear plants provide firm generation, while solar and wind can diversify the mix but require grid planning and balancing.",
+        "System performance also depends on transmission networks and distribution companies. Electricity that can be generated still has to move through the grid, be metered, billed and collected efficiently. Therefore, an exam answer should distinguish generation shortages from network bottlenecks, losses, financial imbalances and demand-management problems."
+      ]
+    },
+    {
+      "heading": "Regulation, affordability and transition",
+      "paragraphs": [
+        "NEPRA regulates important parts of the power sector and publishes sector assessments that examine operational, financial and regulatory conditions. A sustainable energy transition requires more than simply adding renewable capacity. Planning must consider grid flexibility, storage, local technical capability, long-term contracts, investment incentives and the ability of consumers and the economy to bear costs.",
+        "Energy efficiency is another policy tool. Efficient appliances, industrial processes, buildings and transmission systems can reduce the amount of generation needed for a given level of economic activity. That makes conservation and efficiency part of energy security rather than merely environmental policy."
+      ]
+    },
+    {
+      "heading": "How to frame a CSS answer",
+      "paragraphs": [
+        "A strong answer can organize the issue around five headings: energy mix, infrastructure, financial sustainability, regulation and future transition. Add a sixth heading on demand-side efficiency if space allows. Use current official numbers as evidence, but focus analysis on relationships among capacity, generation, networks, costs and governance.",
+        "The conclusion should emphasize a diversified and resilient system: reliable domestic and imported energy planning, efficient grids, transparent regulation, investment in renewables where technically suitable, and better demand management. This keeps the discussion constructive and policy-oriented."
+      ]
+    }
+  ],
+  "examRelevance": [
+    "Pakistan Affairs: Pakistan’s energy problems and their effects.",
+    "Pakistan Affairs: Economic challenges and performance of major sectors.",
+    "Current Affairs and Essay: energy security, sustainable development, industry and climate transition."
+  ],
+  "sources": [
+    {
+      "label": "Pakistan Economic Survey 2025–26 Highlights — Ministry of Finance",
+      "url": "https://www.finance.gov.pk/survey/chapter_26/Highlights_of_the_PES_2026.pdf",
+      "date": "2026"
+    },
+    {
+      "label": "NEPRA State of the Industry Report 2024",
+      "url": "https://www.nepra.org.pk/publications/State%20of%20Industry%20Reports/State%20of%20Industry%20Report%202024.pdf",
+      "date": "2024"
+    }
+  ],
+  "relatedSlugs": []
+}

@@ -1,0 +1,76 @@
+{
+  "id": "artificial-intelligence-fundamentals",
+  "slug": "artificial-intelligence-fundamentals",
+  "title": "Artificial Intelligence Fundamentals: From Data to Machine-Based Decisions",
+  "excerpt": "A beginner-friendly GSA explanation of artificial intelligence, machine learning, model training, inference, limitations and responsible evaluation.",
+  "type": "Concept",
+  "category": "General Science & Ability",
+  "topic": "Fundamentals of Artificial Intelligence",
+  "tags": [
+    "GSA",
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Information Technology",
+    "Algorithms",
+    "Data"
+  ],
+  "publishedAt": "2026-09-22T12:00:00+05:00",
+  "readingMinutes": 3,
+  "featured": true,
+  "evergreen": true,
+  "contentPath": "/vistagram-content/posts/artificial-intelligence-fundamentals.json",
+  "scope": "Global",
+  "dedupeKey": "artificial-intelligence-fundamentals",
+  "subtitle": "AI becomes easier when it is separated into objectives, data, models, learning and outputs.",
+  "keyPoints": [
+    "NIST describes AI systems as machine-based systems that can make predictions, recommendations or decisions for human-defined objectives.",
+    "Machine learning is one family of techniques within AI; not every AI system works in exactly the same way.",
+    "Good CSS preparation requires both the basic mechanism of AI and awareness of reliability, bias, security, privacy and human oversight."
+  ],
+  "sections": [
+    {
+      "heading": "What artificial intelligence means",
+      "paragraphs": [
+        "Artificial intelligence is an umbrella term for machine-based systems designed to perform tasks associated with perception, prediction, classification, language, planning, recommendation or decision support. NIST definitions emphasize systems that operate toward human-defined objectives and can influence real or virtual environments through predictions, recommendations or decisions. This is useful for GSA because it avoids the vague idea that AI simply means a computer that ‘thinks like a human.’",
+        "AI includes many techniques. Rule-based systems, search and optimization, machine learning, neural networks and generative models can all fall under the broader AI field depending on how the system is designed."
+      ]
+    },
+    {
+      "heading": "Data, training and inference",
+      "paragraphs": [
+        "In machine learning, a model learns patterns from data rather than receiving an explicit rule for every possible case. During training, an algorithm adjusts internal parameters so the model performs a task better according to an objective or loss function. In supervised learning, examples include target labels; in unsupervised learning, the system seeks structure in unlabeled data; reinforcement learning uses feedback linked with actions and outcomes.",
+        "After training, the model enters inference: it receives new input and produces an output. A classifier may assign a category, a forecasting model may estimate a future value, and a generative model may produce text, images, audio or other content."
+      ]
+    },
+    {
+      "heading": "Why AI can make mistakes",
+      "paragraphs": [
+        "AI performance depends on the problem definition, data quality, model design, evaluation method and operating environment. A model can fail when new data differ from its training conditions, when important groups are poorly represented, or when users ask it to perform beyond its intended purpose. High accuracy on a test set therefore does not guarantee perfect real-world performance.",
+        "Responsible evaluation considers reliability, safety, privacy, security, transparency, bias and human oversight. NIST’s AI work emphasizes measurements, evaluations, benchmarks, terminology and risk-management approaches because AI capability must be understood together with limitations."
+      ]
+    },
+    {
+      "heading": "CSS use and examples",
+      "paragraphs": [
+        "For GSA, remember the sequence: objective → data → algorithm/model → training → evaluation → inference → monitoring. Then connect it with examples such as medical image classification, fraud detection, translation, recommendation systems, robotics or generative tools. Distinguish AI from automation: automation follows a process, while AI may use learned or reasoning-oriented techniques to handle variable inputs.",
+        "In essays and Current Affairs, AI can be discussed as a general-purpose technology affecting productivity, education, public services, employment, security and information ecosystems. Keep claims proportional to evidence and separate present capabilities from speculative future possibilities."
+      ]
+    }
+  ],
+  "examRelevance": [
+    "General Science & Ability: Information Technology — fundamentals of artificial intelligence.",
+    "Current Affairs and Essay: technology, AI, social media, employment and governance.",
+    "Computer Science optional: intelligent systems and computational methods."
+  ],
+  "sources": [
+    {
+      "label": "NIST Computer Security Resource Center — Artificial Intelligence Glossary",
+      "url": "https://csrc.nist.gov/glossary/term/artificial_intelligence"
+    },
+    {
+      "label": "National Institute of Standards and Technology — Fundamental AI",
+      "url": "https://www.nist.gov/fundamental-ai"
+    }
+  ],
+  "relatedSlugs": []
+}

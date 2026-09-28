@@ -56,7 +56,7 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
   gk: {
     id: 'gk',
     name: 'General Knowledge',
-    centralSlugs: ['capitals', 'currencies', 'countries-continents', 'first-world', 'largest-longest', 'important-personalities', 'discoveries-inventions', 'awards-honours'],
+    centralSlugs: ['capitals', 'currencies', 'countries-continents', 'world-geography', 'first-world', 'largest-longest', 'important-personalities', 'discoveries-inventions', 'awards-honours'],
   },
   current: { id: 'current', name: 'Current Affairs', centralSlugs: ['current-affairs'] },
   pakistan: {
@@ -69,7 +69,7 @@ export const mptQuestionBanks: Record<string, MptQuestionBankDefinition> = {
   geography: {
     id: 'geography',
     name: 'Geography',
-    centralSlugs: ['pakistan-geography', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'countries-continents'],
+    centralSlugs: ['pakistan-geography', 'mountains', 'rivers', 'oceans-seas', 'deserts', 'straits-canals', 'countries-continents', 'world-geography'],
   },
   history: {
     id: 'history',
