@@ -357,3 +357,15 @@ function mpt_read_token(string $token, string $secret, int $nowMs): ?array
     if ((int)$claims['e'] <= intdiv($nowMs, 1000)) return null;
     return $claims;
 }
+
+// The planned number of mocks in the running series. The scheduler never creates a
+// mock numbered above it; papers left over in the manifest stay in reserve until the
+// owner raises CSSV_MPT_PLANNED_MOCKS (0 = no limit).
+const CSSV_MPT_PLANNED_MOCKS_DEFAULT = 40;
+
+/** CSSV_MPT_PLANNED_MOCKS as a mock count: digits only, anything else is the default. */
+function mpt_planned_mocks_from(?string $raw): int
+{
+    $value = trim((string)($raw ?? ''));
+    return $value !== '' && ctype_digit($value) ? (int)$value : CSSV_MPT_PLANNED_MOCKS_DEFAULT;
+}

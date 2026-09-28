@@ -465,3 +465,55 @@ still exist (D-48) but are not listed.
 - The entrance page says, before anyone types, whether it is open to them yet: "You have
   not applied" with an Apply button, or "You are in the right place. Entry opens at…" with
   a countdown. The server rules are unchanged.
+
+## Editorial rebuild (26 Sep 2026)
+
+**D-54 · Official papers come only from a reviewed editorial bank; unstarted mocks are re-frozen** — owner instruction
+- The exported series is no longer selected at build time from the public practice
+  banks. It is the checked-in editorial release `src/data/mpt/release/series.json`,
+  built by `scripts/mpt/build-release.mjs` from the reviewed bank `src/data/mpt/bank/`
+  (every item verified, explained and classified: subject, subtopic, pattern family,
+  concept, difficulty, source type, past-paper year, time sensitivity, source URL,
+  verification date, quality grade, relevance).
+- `npm run audit:mpt-release` (prebuild) fails unless the bank is valid, the checked-in
+  series is exactly what the bank rebuilds, and every paper passes the paper-level and
+  series-level gates. After export, `audit-release.mjs --exported` decodes the PHP files
+  the server freezes and proves they are identical to the audited papers.
+- The blueprint (`src/data/mpt/blueprint.ts`) separates FPSC's official requirements
+  (200 MCQs, 200 minutes, five broad sections) from ranges observed in the recorded
+  papers and from CSS Vista's internal choices. The former 20/2/28 GK split was an
+  internal choice that matched no recorded paper; it is withdrawn.
+- The manifest carries `editorial_release` and `replace_unstarted_below_release`.
+  `mpt_refreeze_unstarted()` replaces the frozen paper of any mock that has not
+  started, has no attempt and opens more than 15 minutes later, when its paper came
+  from an older release. One transaction per mock; full backup in `mpt_paper_backups`;
+  log in `mpt_paper_replacements` and `mpt_events`. Schema version 2 adds only these two
+  tables. Mock identity, schedule, sessions, applications and Roll Numbers are never
+  changed. `tests/mpt/refreeze.php` covers the rules against a real database.
+- Every question text in the previous official series (all 40 papers of the series
+  exported from 25 September, some of which were sat) and in the older browser series
+  is recorded in `data-archive/mpt-served-archive.json` and can never re-enter a paper.
+
+
+## Repair of the live series (27 Sep 2026)
+
+**D-55 · Editorial release 3 repairs the live papers instead of replacing them** — owner instruction
+- Owner: “do not build from scratch — analyse, keep the good and replace what needs to be
+  replaced”; “calculate how many papers are left, do not create extra papers or
+  questions”; “do not delete, reserve the questions”; “do not create subjects or
+  partitions — do as the official FPSC does”; “MPT ability is not tough”.
+- Only the 36 papers for the remaining Mocks 5–40 are released (Mocks 1–4 were held by
+  27 Sep 2026). Each is the live paper already frozen for that mock. A live question is
+  kept verbatim unless a named defect rule rejects it (`scripts/mpt/live-review-rules.mjs`);
+  each rejected slot is refilled in place from the reviewed bank, same section and
+  official heading, preferring the items that most resemble the recorded FPSC papers
+  (`scripts/mpt/resemblance.mjs`), accessible or moderate. The repair is deterministic
+  (`scripts/mpt/repair-live-series.mjs`) and gated (`scripts/mpt/repair-audit.mjs`).
+- The paper is partitioned only as FPSC partitions it: five sections with their official
+  sizes, every official syllabus heading present, no topic quotas. The per-topic practice
+  ranges of D-54 are withdrawn; `MPT_OFFICIAL_HEADINGS` replaces them.
+- General Abilities replacements are SSC-level: at most one challenging item per paper
+  (none in this release).
+- Nothing is deleted: unused bank items stay in reserve. The scheduler stops at the
+  planned last mock, `CSSV_MPT_PLANNED_MOCKS` (default 40), so reserve papers never become
+  unplanned mocks; raising it lets the owner add mocks later.

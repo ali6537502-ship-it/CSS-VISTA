@@ -2,28 +2,9 @@ import {
   curatedAbilityQuestions, curatedCurrentAffairsQuestions, curatedEnglishQuestions, curatedUrduTranslationQuestions,
 } from './mockCurated'
 import { auditedMptAbilityAdditions } from './mptAbilityAdditions'
-import { calculatedMptAbilityQuestions } from './mptAbilityPractice'
-import { mptUrduTranslationQuestions } from './mptUrduTranslation'
-import { advancedMptUrduTranslationQuestions } from './mptUrduTranslationAdvanced'
-import { repositoryMptUrduGrammarQuestions } from './mptRepoUrduGrammar'
-import { repositoryMptEnglishQuestions } from './mptRepoEnglishAdvanced'
-import { appliedMptUrduQuestions } from './mptUrduApplied'
-import { extendedMptUrduQuestions } from './mptUrduExtended'
-import { verifiedMptCurrentQuestions } from './mptCurrentVerified'
-import { expandedVerifiedMptCurrentQuestions } from './mptCurrentVerifiedExpanded'
 import { mptComprehensionQuestions } from './mptEnglishComprehension'
-import { originalMptAbilityQuestions } from './mptOriginalAbility'
-import { reviewedMptPastAbilityQuestions } from './mptReviewedPastAbility'
-import { reviewedMptPastEnglishQuestions } from './mptReviewedPastEnglish'
-import { mptGrammarCourseEnglishQuestions } from './mptGrammarCourseEnglish'
-import { advancedMptAbilityQuestions } from './mptAdvancedAbility'
-import {
-  eligibleMptAbility, eligibleMptCurrent, eligibleMptEnglish, eligibleMptIslamic,
-  eligibleMptPakistan, eligibleMptScience, eligibleMptUrdu, eligibleMptUrduPastPaper,
-} from './mptQuality'
 import { questions as seedQuestions } from './quiz'
-import { filterDisabled, getCategoryQuestions, type BankQuestion } from './mcq'
-import { toBankQuestion, type CssSubjectQuestion } from './cssSubjectMcqs'
+import { filterDisabled, type BankQuestion } from './mcq'
 import {
   readMptPaper, saveMptPaper, previouslySeenMptQuestions, previouslyUsedMptQuestionPatterns,
 } from '@/lib/mptMockHistory'
@@ -182,89 +163,6 @@ interface MockPools {
 }
 
 let cachedPools: MockPools | null = null
-let expandedMptPools: Promise<MockPools> | null = null
-const abilityTopics = new Set([
-  'Arithmetic and percentages', 'Basic arithmetic', 'Sets and probability', 'Random sampling',
-  'Number patterns', 'Deductive reasoning', 'Relations and directions', 'Calendar reasoning',
-  'Clock reasoning', 'Analytical constraints', 'Data interpretation', 'Decision analysis',
-  'Verbal ability', 'Numerical ability',
-])
-
-async function loadOwnerAbilityQuestions(): Promise<BankQuestion[]> {
-  const response = await fetch('/css-subject-mcqs/general-science-and-ability.json')
-  if (!response.ok) throw new Error('The General Ability question bank could not be loaded.')
-  const questions = await response.json() as CssSubjectQuestion[]
-  return questions.filter((question) => abilityTopics.has(question.topic)).map(toBankQuestion)
-}
-
-// Scheduled MPT papers use a separate syllabus gate. Other quiz modes retain
-// their own pools; broad practice categories are not automatically MPT-eligible.
-function loadMptPools(): Promise<MockPools> {
-  expandedMptPools ??= Promise.all([
-    getCategoryQuestions('islamic-gk'), getCategoryQuestions('urdu-language'),
-    getCategoryQuestions('english-grammar'), getCategoryQuestions('general-ability'),
-    getCategoryQuestions('everyday-science'),
-    getCategoryQuestions('current-affairs'), getCategoryQuestions('pakistan-affairs'),
-    getCategoryQuestions('pakistan-history'), getCategoryQuestions('science'),
-    getCategoryQuestions('mpt-past-papers'), loadOwnerAbilityQuestions(),
-    import('./mptLegacyIds.json').then((module) => new Set(module.default)),
-  ]).then(([islamic, urdu, english, ability, everyday, current, pakistan, history, science, past, ownerAbility, previouslyPublished]) => {
-    const base = cachedPools ??= buildPools()
-    return {
-      ...base,
-      excludedMptIds: previouslyPublished,
-      islamicPool: [
-        ...past.filter((question) => question.s === 'Islamic General Knowledge'
-          && eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
-        ...islamic.filter((question) => eligibleMptIslamic(question) && !previouslyPublished.has(question.id)),
-      ],
-      urduPool: [
-        ...advancedMptUrduTranslationQuestions, ...curatedUrduTranslationQuestions, ...mptUrduTranslationQuestions,
-        ...appliedMptUrduQuestions, ...extendedMptUrduQuestions, ...repositoryMptUrduGrammarQuestions,
-        ...urdu.filter((question) => eligibleMptUrdu(question) && !previouslyPublished.has(question.id)),
-        ...past.filter((question) => question.s === 'Urdu' && eligibleMptUrduPastPaper(question) && !previouslyPublished.has(question.id)),
-      ],
-      englishPool: [
-        ...curatedEnglishQuestions, ...mptGrammarCourseEnglishQuestions, ...repositoryMptEnglishQuestions,
-        ...reviewedMptPastEnglishQuestions(past).filter(eligibleMptEnglish),
-        ...past.filter((question) => question.s === 'English'
-          && eligibleMptEnglish(question) && !previouslyPublished.has(question.id)),
-        ...english.filter((question) => eligibleMptEnglish(question) && !previouslyPublished.has(question.id)),
-      ],
-      abilityPool: [
-        ...advancedMptAbilityQuestions,
-        ...originalMptAbilityQuestions,
-        ...reviewedMptPastAbilityQuestions(past).filter(eligibleMptAbility),
-        ...curatedAbilityQuestions.filter(eligibleMptAbility),
-        ...auditedMptAbilityAdditions.filter(eligibleMptAbility),
-        ...calculatedMptAbilityQuestions.filter(eligibleMptAbility),
-        ...ownerAbility.filter((question) => eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
-        ...ability.filter((question) => eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
-        ...past.filter((question) => /^(Mathematics|Reasoning)$/.test(question.s ?? '') && eligibleMptAbility(question) && !previouslyPublished.has(question.id)),
-      ],
-      currentPool: [
-        ...verifiedMptCurrentQuestions, ...expandedVerifiedMptCurrentQuestions, ...curatedCurrentAffairsQuestions,
-        ...current.filter((question) => eligibleMptCurrent(question) && !previouslyPublished.has(question.id)),
-      ],
-      pakistanPool: [
-        ...pakistan.filter((question) => eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
-        ...history.filter((question) => eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
-        ...past.filter((question) => question.s === 'Pakistan Affairs' && eligibleMptPakistan(question) && !previouslyPublished.has(question.id)),
-      ],
-      sciencePool: [
-        ...past.filter((question) => /^(?:Everyday Science|Physics|Chemistry|Biology)$/.test(question.s ?? '')
-          && eligibleMptScience(question) && !previouslyPublished.has(question.id)),
-        ...science.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)),
-        ...everyday.filter((question) => eligibleMptScience(question) && !previouslyPublished.has(question.id)),
-      ],
-    }
-  }).catch((error) => {
-    expandedMptPools = null
-    throw error
-  })
-  return expandedMptPools
-}
-
 function buildPools(): MockPools {
   const islamicPool = [...mapSeed(['islamiat']), ...fromBank('islamic-gk')]
   const urduGeneralPool = [...mapSeed(['urdu']), ...fromBank('urdu-language')]
@@ -571,9 +469,15 @@ export async function buildCompetitiveMock(
       timeSec: 200 * 60, note: '200 MCQs · 200 minutes · your saved paper for this session.',
     }
   }
+  if (namedMptSession) {
+    // The CSS MPT Mock is now only the audited official series held through the
+    // application flow (docs/mpt/DECISIONS.md D-54). The former browser-built
+    // paper drew on unreviewed practice pools and is no longer served.
+    throw new Error('The CSS MPT Mock is now held as a scheduled official paper. Apply for the next MPT Mock in My CSS Vista → MPT.')
+  }
   await loadMockBank()
   cachedPools ??= buildPools()
-  const pools = namedMptSession ? await loadMptPools() : cachedPools
+  const pools = cachedPools
   const blueprint = MOCK_BLUEPRINTS[kind]
   const previouslySeen = namedMptSession ? previouslySeenMptQuestions(studentName) : new Set<string>()
   if (namedMptSession) pools.excludedMptIds?.forEach((id) => previouslySeen.add(id))
@@ -594,7 +498,7 @@ export async function buildCompetitiveMock(
       questions,
       blueprint,
       timeSec: 200 * 60,
-      note: '200 MCQs · 200 minutes · FPSC section sequence. Fresh question stems are reserved across your saved mock sessions in this browser.',
+      note: '200 MCQs · 200 minutes · the five FPSC MPT sections in order.',
     }
   }
   if (kind === 'pms-gk') {

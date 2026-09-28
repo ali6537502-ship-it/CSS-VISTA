@@ -48,7 +48,11 @@ run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])
 // Official MPT papers (with answer keys) for the PHP examination service. They
 // are server-only data under dist/api/_mpt_papers; see docs/mpt/DECISIONS.md D-04.
-if (target === 'hostinger') run('scripts/export-mpt-papers.mjs')
+if (target === 'hostinger') {
+  run('scripts/export-mpt-papers.mjs')
+  // Prove the files the server will freeze are exactly the audited papers.
+  run('scripts/mpt/audit-release.mjs', ['--exported', 'dist/api/_mpt_papers'])
+}
 await import(`./prepare-sites-build.mjs?target=${target}`)
 if (target === 'hostinger') {
   await import('./expand-hostinger-seo.mjs')
