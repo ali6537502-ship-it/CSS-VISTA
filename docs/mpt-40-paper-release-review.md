@@ -1,4 +1,13 @@
-# MPT release standard (editorial release 3: the live series, repaired)
+# MPT release standard (editorial release 4: the live series, repaired and editor-reviewed)
+
+**Release 4 (28 Sep 2026).** Mocks 1–8 have been held; the 32 papers for Mocks 9–40 are the
+live papers repaired as below, and in addition every kept live question was read one by one by
+an editor (`src/data/mpt/release/live-review.json`): 238 rejected and replaced (wrong or
+doubtful keys, two correct options, time-bound facts, obscure or off-syllabus material, broken
+wording), 621 kept, every one with an explanation. No bank question already sat in Mocks 5–8
+is reused. Series `5dca7458d1ef1fa8`; per paper: General Abilities 32–34 quantitative / 26–28
+reasoning, no challenging item; General Knowledge Everyday Science 17–26, Current Affairs 10–14,
+Pakistan Affairs 14–19. The figures below describe release 3, which this release refines.
 
 ## What changed and why
 
