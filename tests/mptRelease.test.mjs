@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { isDeepStrictEqual } from 'node:util'
-import { loadReviewedBank, buildRelease, readCheckedInRelease, resolveRelease, auditResolved, seriesHash } from '../scripts/mpt/release-lib.mjs'
+import { loadReviewedBank, buildRelease, readCheckedInRelease, resolveRelease, auditResolved, seriesHash, heldBankIds, loadLiveReview } from '../scripts/mpt/release-lib.mjs'
 import { loadLiveSeries } from '../scripts/mpt/repair-live-series.mjs'
 import { liveDefects } from '../scripts/mpt/live-review-rules.mjs'
 import { loadServedArchive, stemHash } from '../scripts/mpt/served-archive.mjs'
@@ -31,7 +31,7 @@ test('the checked-in series is exactly what repairing the live series rebuilds',
   assert.equal(seriesHash(resolved), release.series)
 })
 
-test('only the remaining mocks get papers: 36 repaired papers for Mocks 5–40, none extra', () => {
+test('only the remaining mocks get papers, none extra', () => {
   assert.equal(RELEASE.papers, RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1)
   assert.equal(resolved.length, RELEASE.papers)
   const planned = /CSSV_MPT_PLANNED_MOCKS_DEFAULT = (\d+);/.exec(readFileSync('public/api/_mpt_core.php', 'utf8'))
@@ -68,13 +68,16 @@ test('kept questions are the live questions verbatim, in their own paper, and de
   })
 })
 
-test('nothing from Mocks 1–4 and no earlier-served bank question is reused', () => {
+test('nothing from a held mock and no earlier-served bank question is reused', () => {
   const served = loadServedArchive()
   const held = live.papers.slice(0, RELEASE.firstLivePaper - 1).flatMap((p) => p.questions)
   const heldIds = new Set(held.map((q) => q.id))
   const heldStems = new Set(held.map((q) => canonical(q.q)))
+  const heldBank = heldBankIds()
+  assert.ok(heldBank.size > 0, 'bank questions sat in Mocks 5–8 are known')
   for (const q of resolved.flat()) {
     assert.equal(heldIds.has(q.id), false, q.id)
+    assert.equal(heldBank.has(q.id), false, `${q.id} was already sat in a held mock`)
     if (!q.meta.passage_id) assert.equal(heldStems.has(canonical(q.q)), false, q.id)
     if (q.meta.origin === 'reviewed-bank') {
       const stem = q.meta.passage_id ? q.q.slice(q.q.lastIndexOf('\nQuestion: ') + 11) : q.q
@@ -82,6 +85,16 @@ test('nothing from Mocks 1–4 and no earlier-served bank question is reused', (
       assert.equal(served.ids.has(q.id), false, q.id)
     }
   }
+})
+
+test('every kept live question was read and passed by the editor review and is explained', () => {
+  const review = loadLiveReview()
+  for (const q of resolved.flat().filter((x) => x.meta.origin === 'live-series')) {
+    assert.ok(review.explain[q.id], `${q.id} was not passed by the editor review`)
+    assert.equal(review.reject[q.id], undefined, q.id)
+    assert.ok(q.e.trim().length >= 12, `${q.id} has no explanation`)
+  }
+  for (const id of Object.keys(review.reject)) assert.equal(release.kept[id], undefined, `${id} was rejected but is still kept`)
 })
 
 test('every bank answer matches the verified bank and every bank item is explained', () => {

@@ -4,10 +4,10 @@
 // frozen for the remaining mocks keep every sound question, and only defective slots are
 // refilled from the reviewed bank (scripts/mpt/repair-live-series.mjs).
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { loadBank, validateBank, canonical } from './bank-lib.mjs'
 import { loadServedArchive } from './served-archive.mjs'
-import { RELEASE, SERIES_PATH, KEPT_PATH } from './release-config.mjs'
+import { RELEASE, SERIES_PATH, KEPT_PATH, REVIEW_PATH } from './release-config.mjs'
 import { loadLiveSeries, repairLiveSeries, resolveRepairedPaper } from './repair-live-series.mjs'
 import { auditRepairedSeries } from './repair-audit.mjs'
 
@@ -22,10 +22,25 @@ export function liveFingerprint(live) {
   return createHash('sha256').update(JSON.stringify(live.papers.map((p) => p.questions.map((q) => [q.id, q.q, q.o, q.a])))).digest('hex').slice(0, 16)
 }
 
+export function loadLiveReview() {
+  return existsSync(REVIEW_PATH) ? JSON.parse(readFileSync(REVIEW_PATH, 'utf8')) : { reject: {}, explain: {} }
+}
+
+/** Bank questions already sat in held mocks of earlier releases. */
+export function heldBankIds() {
+  const ids = new Set()
+  for (const { path, papers } of RELEASE.heldReleases ?? []) {
+    const earlier = JSON.parse(readFileSync(path, 'utf8'))
+    for (const paper of earlier.papers.slice(0, papers)) for (const q of paper.questions) if (q.src === 'bank') ids.add(q.id)
+  }
+  return ids
+}
+
 /** The repaired series: { release fields, papers, kept (id → live question), log }. */
 export function buildRelease(bank, live = loadLiveSeries()) {
   const { papers, kept, log } = repairLiveSeries({
     live, bank, seed: RELEASE.seed, firstPaper: RELEASE.firstLivePaper, lastPaper: RELEASE.lastLivePaper,
+    review: loadLiveReview(), heldBankIds: heldBankIds(),
   })
   return {
     editorial_release: RELEASE.editorialRelease,
@@ -66,8 +81,9 @@ export function auditResolved(resolvedPapers, bank, served = loadServedArchive()
     bankById: new Map(bank.questions.map((q) => [q.id, q])),
     served,
     heldStems: new Set(held.flatMap((p) => p.questions.map((q) => canonical(q.q)))),
-    heldIds: new Set(held.flatMap((p) => p.questions.map((q) => q.id))),
+    heldIds: new Set([...held.flatMap((p) => p.questions.map((q) => q.id)), ...heldBankIds()]),
     currentWindow: RELEASE.currentWindow,
     expectedPapers: RELEASE.papers,
+    reviewedKeep: new Set(Object.keys(loadLiveReview().explain ?? {})),
   })
 }

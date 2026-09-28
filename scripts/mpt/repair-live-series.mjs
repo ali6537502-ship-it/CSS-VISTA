@@ -43,7 +43,9 @@ const ENGLISH_TOPIC = [
 const bankHeading = (q) => officialHeading(q)
 const factKey = (section, stem, answer) => (FACTUAL.has(section) && canonical(answer).length > 3 ? canonical(answer) : null)
 
-export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper }) {
+export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper, review = {}, heldBankIds = new Set() }) {
+  const rejected = review.reject ?? {}
+  const explained = review.explain ?? {}
   const { scores } = resemblanceScores(bank.questions)
   const passages = new Map(bank.passages.map((p) => [p.id, p]))
   const passageItems = new Map()
@@ -96,6 +98,17 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper }) {
     return null
   }
 
+  // Bank questions already sat in a held mock (an earlier release) are never reused.
+  const bankById = new Map(bank.questions.map((q) => [q.id, q]))
+  for (const id of heldBankIds) {
+    const q = bankById.get(id)
+    if (!q) continue
+    state.usedIds.add(id)
+    state.concepts.add(`${q.section}|${canonical(q.concept)}`)
+    if (q.subtopic !== 'eng.comprehension') remember(q.section, q.q, q.o[q.a], q.o)
+    else if (q.passage_id) state.passages.add(q.passage_id)
+  }
+
   const papers = []
   const kept = new Map()
   const log = []
@@ -124,6 +137,9 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper }) {
     const slots = livePaper.questions.map((q, position) => {
       const reasons = liveDefects(q, { servedStems: state.servedStems, seenStems: new Set(), gaTemplates: new Set() })
       if (state.servedIds.has(q.id)) reasons.push('already used in an earlier mock')
+      if (rejected[q.id]) reasons.push(`editor review: ${rejected[q.id]}`)
+      // Once an editor review exists, only questions the editor has read and passed may stay.
+      else if (Object.keys(explained).length && !explained[q.id]) reasons.push('not passed by the editor review')
       const again = repeats(q.paperSection, q.q, q.o[q.a], q.o)
       if (again) reasons.push(again)
       const answer = canonical(q.o[q.a])
@@ -183,7 +199,10 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper }) {
     for (const slot of slots) {
       if (slot.reasons.length) continue
       out[slot.position] = { src: 'live', id: slot.live.id, section: slot.live.paperSection }
-      kept.set(slot.live.id, slot.live)
+      // An editor's explanation is added where the live question carried none; the
+      // question, options and key stay exactly as frozen.
+      const note = explained[slot.live.id]
+      kept.set(slot.live.id, !String(slot.live.e ?? '').trim() && note ? { ...slot.live, e: note, e_added: 'editor' } : slot.live)
     }
     for (const slot of slots) {
       if (!slot.reasons.length || passageSlots.has(slot.position)) continue
