@@ -57,6 +57,16 @@ if ($phase === 'driver') {
     echo run_phase('seed', "$fixtures/legacy");
     echo run_phase('refreeze', "$fixtures/release2");
     echo run_phase('exhausted', "$fixtures/release3-empty");
+    // Release 4 shares bank questions with release 2 (as real releases do): its first paper
+    // overlaps the started mock and must never be used; the other two overlap only the
+    // unstarted mocks being replaced and must be installed.
+    // Each release-4 paper takes half its questions from each release-2 paper, so it overlaps
+    // BOTH pending mocks (the real case: two releases drawn from one bank).
+    [$r21, $r22] = [fixture_paper('r2', 1), fixture_paper('r2', 2)];
+    $cross = [array_merge(array_slice($r21, 0, 100), array_slice($r22, 100)), array_merge(array_slice($r22, 0, 100), array_slice($r21, 100))];
+    write_manifest("$fixtures/release4-overlap", ['series' => 'release4series001', 'editorial_release' => 4, 'replace_unstarted_below_release' => 4, 'publishable' => true],
+        [fixture_paper('legacy', 3), ...$cross]);
+    echo run_phase('overlap', "$fixtures/release4-overlap");
     echo run_phase('cleanup', "$fixtures/legacy");
     echo "MPT refreeze integration: done\n";
     exit(0);
@@ -148,6 +158,22 @@ if ($phase === 'refreeze') {
     check($again['replaced'] === 0, 're-running is idempotent');
     $overlap = $pdo->query('SELECT question_id, COUNT(DISTINCT mock_id) c FROM mpt_mock_questions GROUP BY question_id HAVING c > 1')->fetchAll();
     check(count($overlap) === 0, 'no question is frozen into two mocks');
+    exit($failures ? 1 : 0);
+}
+
+if ($phase === 'overlap') {
+    $startedBefore = mpt_frozen_paper($pdo, $seed['mocks']['started'])['fingerprint'];
+    $soonBefore = mpt_frozen_paper($pdo, $seed['mocks']['soon'])['fingerprint'];
+    $result = mpt_refreeze_unstarted($pdo, mpt_now_ms(), 60);
+    check($result['replaced'] === 2, 'a release sharing questions with the pending mocks still replaces both of them');
+    foreach (['future', 'future_no_apps'] as $label) {
+        check($mock($seed['mocks'][$label])['paper_series'] === 'release4series001', "$label now uses release 4");
+        check($mock($seed['mocks'][$label])['paper_ref'] !== 'release4series001:1', "$label never receives the paper that overlaps the started mock");
+    }
+    check(mpt_frozen_paper($pdo, $seed['mocks']['started'])['fingerprint'] === $startedBefore, 'the started mock is untouched');
+    check(mpt_frozen_paper($pdo, $seed['mocks']['soon'])['fingerprint'] === $soonBefore, 'the mock inside the margin is untouched');
+    $overlap = $pdo->query('SELECT question_id, COUNT(DISTINCT mock_id) c FROM mpt_mock_questions GROUP BY question_id HAVING c > 1')->fetchAll();
+    check(count($overlap) === 0, 'still no question is frozen into two mocks');
     exit($failures ? 1 : 0);
 }
 
