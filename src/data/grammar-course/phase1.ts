@@ -9,6 +9,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'What every word is doing',
     goal: 'Name the job each word performs in a sentence, so that you can see why an error is an error.',
     why: 'Error-correction questions never tell you which rule is broken. You are shown a sentence and asked to find the fault. That is only possible if you can see that in “he speaks English fluent”, the word fluent is an adjective standing in an adverb’s place.',
+    examTip: 'Day 1 material is tested almost entirely through error-spotting (four underlined segments, occasionally with a “no error” option) and single-gap vocabulary-style fill-ins — never as “define this word class”. The favourite trap is planting the fault in a linking-verb-plus-adjective/adverb pattern (seems weakly, tastes deliciously), because the adverb sounds more “grammatical” to a candidate scanning quickly. A second trap is a decoy segment that looks like a countable/uncountable slip but is actually correct (“a great deal of research”), meant to catch anyone who flags every noun-plus-of phrase as suspicious.',
     minutes: 45,
     terms: [
       { term: 'Word class (part of speech)', meaning: 'The job a word is doing in a particular sentence — not a permanent label stuck to the word.' },
@@ -21,30 +22,38 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'A word class is a job, not a name',
-        plain: 'The same word can belong to different classes in different sentences. Do not ask “what is this word?” Ask “what is this word doing here?” That single change of question solves most correction questions.',
+        plain: 'The same word can belong to different classes in different sentences. Do not ask “what is this word?” Ask “what is this word doing here?” That single change of question solves most correction questions. Students get this wrong because school teaching often presents word classes as fixed labels — “fund is a noun” — memorised in isolation from any sentence. CSS error-correction questions exploit exactly that habit: they place a familiar word in an unfamiliar job and expect the candidate to notice the mismatch. The reliable method is mechanical, not intuitive: look at the word immediately before and after the word in question, decide what function it is filling in that slot, and only then judge whether the ending or form fits that function.',
         points: [
           'In “the government will fund the project”, fund is a verb.',
           'In “the fund was misused”, fund is a noun.',
           'In “the police report is late”, police describes report, so it works like an adjective.',
           'Decide the class by the job, then apply the rule that belongs to that job.',
+          'A word directly after a determiner (the, a, this) or before a verb is almost always a noun; a word directly after a subject or auxiliary is almost always a verb.',
+          'When the same spelling can be two classes, check whether it takes an object (verb) or an article (noun): “they review the policy” versus “under review”.',
         ],
         models: [
           { sentence: 'The committee will chair the session.', note: 'chair = verb (it carries the action).' },
           { sentence: 'The chair of the committee resigned.', note: 'chair = noun (it names a position).' },
+          { sentence: 'The court will hear the appeal on Monday.', note: 'hear = verb, carrying the action after the modal will.' },
+          { sentence: 'The province plans to increase the budget for education.', note: 'increase = verb (it takes an object, the budget); contrast with “an increase in the budget”, where increase is a noun.' },
         ],
       },
       {
         heading: 'Nouns and pronouns: the things you are talking about',
-        plain: 'A noun names something. A pronoun stands in for a noun you have already mentioned, so that you do not repeat it. Countable nouns can be counted one by one (a report, three reports). Uncountable nouns cannot (information, advice, equipment, machinery, furniture, progress).',
+        plain: 'A noun names something. A pronoun stands in for a noun you have already mentioned, so that you do not repeat it. Countable nouns can be counted one by one (a report, three reports). Uncountable nouns cannot (information, advice, equipment, machinery, furniture, progress). The confusion is not really about vocabulary; it is about whether English treats the thing as a set of separate units or as one continuous mass. Urdu and many other languages do not draw this line at the same words, which is why a fluent speaker still writes “informations” — the concept feels plural even though the English noun has no plural form. The fix is to memorise the noun, not to reason from meaning: “equipment” names a whole category (machines, tools, instruments together), so English treats it as one undivided mass, however many individual items are inside it.',
         points: [
           'Uncountable nouns take no a/an and no plural -s: an information and informations are both wrong.',
           'Use much, little, amount with uncountable nouns; many, few, number with countable nouns.',
           'A collective noun (committee, government, team, public) is singular in Pakistani and American usage: the committee has decided.',
           'A pronoun must clearly point back to one specific noun, or the sentence becomes ambiguous.',
+          'Some nouns are countable in one sense and uncountable in another: “the paper” (a newspaper, countable) versus “paper” (the material, uncountable); “a work” (an artistic piece) versus “work” (labour in general).',
+          'A pronoun should agree in number and gender with the noun it replaces: “the ministry announced its decision”, not “their decision”, because ministry is singular.',
         ],
         models: [
           { sentence: 'The minister gave useful advice on the proposal.', note: 'advice is uncountable — no “advices”, no “an advice”.' },
           { sentence: 'A large number of applicants were rejected; the amount of paperwork was enormous.', note: 'number with countable applicants, amount with uncountable paperwork.' },
+          { sentence: 'The bench heard little evidence to support the claim.', note: 'evidence is uncountable, so little is correct, not few.' },
+          { sentence: 'The authority replaced its outdated machinery before the harvest season.', note: 'its (singular) points back to the authority; machinery stays unmarked for plural.' },
         ],
         table: {
           caption: 'Uncountable nouns students most often pluralise by mistake',
@@ -63,43 +72,55 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'Verbs: every sentence needs one that carries tense',
-        plain: 'A finite verb is a verb that shows tense and agrees with a subject: writes, wrote, has written. Non-finite forms — writing, to write, written — cannot hold a sentence up on their own. A group of words with no finite verb is not a sentence.',
+        plain: 'A finite verb is a verb that shows tense and agrees with a subject: writes, wrote, has written. Non-finite forms — writing, to write, written — cannot hold a sentence up on their own. A group of words with no finite verb is not a sentence. The trap is that non-finite forms look like verbs and often sit exactly where a verb belongs, so a sentence such as “The committee, having reviewed the file” feels finished to the ear even though nothing in it is anchored to a time. Test any candidate verb by putting “yesterday” or “tomorrow” in front of the sentence: if the verb form cannot change to match (having reviewed stays having reviewed whatever the time), it is non-finite and cannot be the sentence’s main verb.',
         points: [
           'Action verbs: reject, increase, investigate.',
           'Linking verbs: be, seem, become, appear, remain. They join the subject to a description, not to an object.',
           'Helping (auxiliary) verbs: be, have, do, and the modals (can, may, must, should, will).',
           'After a linking verb use an adjective, not an adverb: the argument seems weak, not seems weakly.',
+          'A small set of verbs can be linking or action depending on the sentence — look, taste, smell, feel, grow, turn — so test them the same way: does a description follow (linking) or an object (action)?',
+          'A sentence needs at least one finite verb even if it also contains several non-finite ones: “Having reviewed the file, the officer, wanting more evidence, decided to wait” has one finite verb, decided.',
         ],
         models: [
           { sentence: 'The report appears incomplete.', note: 'appears is linking, so the adjective incomplete follows.' },
           { sentence: 'The auditors examined the accounts carefully.', note: 'examined is an action verb, so the adverb carefully describes it.' },
+          { sentence: 'The tribunal grew impatient with the delay.', note: 'grew is linking here (it joins tribunal to impatient), not an action of physically growing.' },
+          { sentence: 'The economy turned volatile after the announcement.', note: 'turned is linking, followed by the adjective volatile, not an adverb.' },
         ],
       },
       {
         heading: 'Adjectives describe things; adverbs describe actions',
-        plain: 'If the word you are describing is a noun, you need an adjective. If it is a verb, an adjective or another adverb, you need an adverb. Many adverbs end in -ly, but not all: fast, hard, late, well and early are adverbs without -ly.',
+        plain: 'If the word you are describing is a noun, you need an adjective. If it is a verb, an adjective or another adverb, you need an adverb. Many adverbs end in -ly, but not all: fast, hard, late, well and early are adverbs without -ly. Candidates default to adjectives when they are unsure, because the adjective form is usually shorter and more familiar (quick versus quickly), and this happens most often after a verb, where the ear cannot tell whether the verb is linking or action. The safe habit is to identify the verb’s type first — is it be/seem/appear/look/sound/taste/feel (linking) or does it describe a real action (walk, decide, respond)? — and only then choose adjective or adverb.',
         points: [
           'Adjective before a noun: a serious delay.',
           'Adverb with a verb: the case was decided quickly.',
           'Adverb with an adjective: a deeply flawed policy.',
           'Watch the pairs good / well and hard / hardly — well is the adverb of good, and hardly means “almost not”.',
+          'Also watch late / lately (lately means “recently”, not “not on time”) and near / nearly (nearly means “almost”, not physical closeness).',
+          'When two adjectives could both fit a slot, comparative and superlative forms follow the same class: happier and happiest are adjectives; more happily is the adverb form.',
         ],
         models: [
           { sentence: 'She writes well, and her handwriting is good.', note: 'well describes writes; good describes handwriting.' },
           { sentence: 'He worked hard, but he hardly slept.', note: 'hard = with effort; hardly = almost not. They are not variants of one word.' },
+          { sentence: 'The bench arrived late, but it had lately relaxed its dress code for lawyers.', note: 'late = not on time; lately = recently. Different meanings, not spelling variants.' },
+          { sentence: 'The verdict was nearly unanimous, though two judges sat near the door.', note: 'nearly = almost; near = physically close. Do not swap them.' },
         ],
       },
       {
         heading: 'Function words hold the structure together',
-        plain: 'Determiners (a, an, the, this, some, every) point at nouns. Prepositions (in, on, of, for, with) show relationships. Conjunctions (and, but, because, although) join. These small words carry no picture of their own, which is exactly why they are tested: you cannot guess them from meaning.',
+        plain: 'Determiners (a, an, the, this, some, every) point at nouns. Prepositions (in, on, of, for, with) show relationships. Conjunctions (and, but, because, although) join. These small words carry no picture of their own, which is exactly why they are tested: you cannot guess them from meaning. Content words (nouns, verbs, adjectives, most adverbs) can often be translated one-to-one across languages, but function words rarely map that way — a single Urdu preposition may correspond to three different English ones depending on the verb it follows. That is why prepositions after verbs and adjectives (insist on, interested in, responsible for, good at) have to be learned as fixed pairs, the way vocabulary is learned, rather than reasoned out from the dictionary meaning of the preposition alone.',
         points: [
           'A determiner comes before a singular countable noun: a decision, the decision — never just “decision” standing alone as a subject.',
           'A preposition is followed by a noun, pronoun or -ing form: interested in reform, good at drafting.',
           'A conjunction joins two elements of the same kind; it does not describe anything.',
+          'Learn verb–preposition and adjective–preposition pairs together, as single units: depend on, comply with, responsible for, capable of — the preposition is fixed and does not change with context.',
+          'Do not drop the determiner before a countable noun in formal writing even when the noun is abstract: write “the government took a decision”, not “government took decision”.',
         ],
         models: [
           { sentence: 'The delegation insisted on a written assurance.', note: 'insist is always followed by the preposition on.' },
           { sentence: 'Although the policy was announced, it was never funded.', note: 'Although joins a dependent idea to a main one.' },
+          { sentence: 'The court is not competent to decide on matters outside its jurisdiction.', note: 'competent takes to + verb here, while a related adjective, capable, takes of + -ing (capable of deciding).' },
+          { sentence: 'The province complied with the federal directive despite its objections.', note: 'comply always takes with, never to or on.' },
         ],
       },
     ],
@@ -110,6 +131,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'She did not attend because of she was ill.', right: 'She did not attend because she was ill.', why: 'Because of is a preposition and needs a noun; because is a conjunction and takes a clause.' },
       { wrong: 'A large amount of students failed the paper.', right: 'A large number of students failed the paper.', why: 'Students are countable, so number is required, not amount.' },
       { wrong: 'He is one of the most hardly working officers in the department.', right: 'He is one of the hardest-working officers in the department.', why: 'Hardly means “almost not”. The adverb of effort is hard.' },
+      { wrong: 'The court found the witness statement convincingly.', right: 'The court found the witness statement convincing.', why: 'Find here means “judge to be”, a linking sense, so the adjective convincing follows, not the adverb.' },
+      { wrong: 'The bench arrived lately for the hearing.', right: 'The bench arrived late for the hearing.', why: 'Late means not on time; lately means recently, and cannot describe when someone arrived on a given day.' },
+      { wrong: 'She has done much researches on climate migration.', right: 'She has done a great deal of research on climate migration.', why: 'Research is uncountable, so it takes no plural -s, and much pairs oddly with a formal register — a great deal of is the safer collocation.' },
+      { wrong: 'The province took decision to increase the education budget.', right: 'The province took a decision to increase the education budget.', why: 'A singular countable noun needs a determiner; decision cannot stand bare after took.' },
     ],
     pitfalls: [
       'Adding -s to information, advice, equipment, furniture, machinery, research, luggage or scenery.',
@@ -135,6 +160,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd1q8', kind: 'choice', prompt: 'Which sentence is correct?', options: ['The evidence appears convincingly.', 'The evidence appears convincing.', 'The evidence appears convincedly.', 'The evidence appears convince.'], answer: 1, why: 'Appear is a linking verb, so the adjective convincing follows it.' },
       { id: 'd1q9', kind: 'gap', prompt: 'The candidate worked ____ throughout the year but ____ took a day of leave.', options: ['hardly … hard', 'hard … hardly', 'hardly … hardly', 'hard … hard'], answer: 1, why: 'Hard means with effort; hardly means almost not. The sentence needs one of each, in that order.' },
       { id: 'd1q10', kind: 'spot', prompt: 'Find the error: “Decision (A) to postpone the examination (B) was announced (C) on Friday (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'A singular countable noun cannot stand alone as a subject. Write “The decision”.' },
+      { id: 'd1q11', kind: 'spot', prompt: 'Find the error: “The officer said (A) he was capable of (B) handle (C) the additional workload without complaint (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Capable is always followed by of plus an -ing form: capable of handling, not capable of handle.' },
+      { id: 'd1q12', kind: 'gap', prompt: 'The verdict was ____ unanimous; only one judge dissented.', options: ['near', 'nearly', 'nearer', 'nearness'], answer: 1, why: 'Nearly means “almost”, describing how close to unanimous the verdict was. Near means physically close and cannot fit here.' },
     ],
     corrections: [
       { id: 'd1c1', task: 'The research findings was presented very clear to the audience.', model: 'The research findings were presented very clearly to the audience.', note: 'Two faults: findings is plural, so it takes were; and clear describes the verb presented, so it becomes clearly.' },
@@ -142,6 +169,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd1c3', task: 'The government have issued many advices regarding the new tax.', model: 'The government has issued a great deal of advice regarding the new tax.', note: 'Treat government as singular; advice is uncountable and cannot take many or a plural -s.' },
       { id: 'd1c4', task: 'Because of the roads were blocked, the convoy arrived lately.', model: 'Because the roads were blocked, the convoy arrived late.', note: 'Because introduces the clause. Late is the adverb of time; lately means “recently”.' },
       { id: 'd1c5', task: 'The proposal looks attractively but its financial implications are serious.', model: 'The proposal looks attractive, but its financial implications are serious.', note: 'Look is a linking verb here, so the adjective attractive follows; a comma precedes but joining two main clauses.' },
+      { id: 'd1c6', task: 'The officer is responsible of collecting informations and he performed his duty efficient.', model: 'The officer is responsible for collecting information, and he performed his duty efficiently.', note: 'Responsible takes for, not of; information is uncountable and takes no plural -s; and efficient describes the verb performed, so it must become the adverb efficiently.' },
     ],
     transfer: 'Write five sentences about any public issue you follow — inflation, policing, education, climate. In each sentence, underline the finite verb once and circle every adverb. Then check: does each adverb describe a verb, an adjective or another adverb? If any of them is sitting next to a noun, replace it with an adjective.',
     checklist: [
@@ -158,6 +186,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'The backbone: subject, verb, object',
     goal: 'Find the true subject and the finite verb of any sentence, however long, before you judge whether it is correct.',
     why: 'Almost every agreement error, dangling modifier and fragment in a CSS paper survives because the candidate never located the backbone. Once you can strip a thirty-word sentence down to three words, the error becomes visible.',
+    examTip: 'Day 2 rules surface mainly as long-subject error-spotting (four segments, the fault usually sitting in the verb) and as “which sentence is correctly formed” items built around dangling modifiers. The signature CSS trap is opening a sentence with a participle phrase and then hiding the true doer inside a later by-phrase, so the wrong option still names a doer somewhere — just not immediately after the comma — which is exactly what a fast reader’s eye accepts and a careful reader’s eye rejects.',
     minutes: 50,
     terms: [
       { term: 'Subject', meaning: 'The person or thing the sentence is about — the one doing or being.' },
@@ -169,45 +198,57 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'Strip the sentence to three words',
-        plain: 'Every correct English sentence contains at least a subject and a finite verb. Long sentences hide this backbone behind prepositional phrases and relative clauses. Your first move, always, is to cross those out and read what remains.',
+        plain: 'Every correct English sentence contains at least a subject and a finite verb. Long sentences hide this backbone behind prepositional phrases and relative clauses. Your first move, always, is to cross those out and read what remains. Examiners write long subjects deliberately, because the further the true subject sits from the verb, the more the writer’s ear is tempted to agree with whatever noun happens to sit just before the verb — usually the last noun of a prepositional phrase. This is not carelessness on the student’s part; it is how the eye and ear naturally process a sentence, moving left to right and grabbing the nearest available noun. The only reliable defence is the mechanical strip-down: physically cross out (on paper, or mentally in an exam) every phrase that starts with a preposition, and read only what is left.',
         points: [
           'Find the finite verb first — it is easier to spot than the subject.',
           'Then ask “who or what + verb?” The answer is the subject.',
           'Cross out every phrase beginning with of, in, on, for, with, between, along with, as well as.',
           'Whatever remains before the verb is the head noun, and the verb must agree with it.',
+          'A relative clause (who/which/that …) attached to the subject is also a phrase to strip out for this purpose, even though it contains its own verb.',
+          'If stripping the phrases leaves nothing readable before the verb, the sentence has no real subject and is faulty, not just oddly worded.',
         ],
         models: [
           { sentence: 'The impact of weak institutions on ordinary citizens is severe.', note: 'Strip the phrases: impact … is severe. The head noun is impact, not citizens.' },
           { sentence: 'A list of the candidates who qualified was published.', note: 'Strip it: list … was published. Singular list, singular verb.' },
+          { sentence: 'The pattern of delays in provincial disbursements has worried the auditors.', note: 'Strip it: pattern … has worried. Delays and disbursements are both inside phrases.' },
+          { sentence: 'The set of reforms proposed by the commission remains unimplemented.', note: 'Strip it: set … remains. Reforms and commission cannot control the verb.' },
         ],
       },
       {
         heading: 'What the subject can be',
-        plain: 'A subject is usually a noun or pronoun, but it can also be a phrase or a whole clause. When it is, treat the entire unit as one singular thing.',
+        plain: 'A subject is usually a noun or pronoun, but it can also be a phrase or a whole clause. When it is, treat the entire unit as one singular thing. Students who correctly identify simple noun subjects often still fail when the subject is an -ing phrase, an infinitive phrase or a whole clause, because they instinctively look for a plural-looking noun somewhere inside that phrase and agree with it instead of treating the phrase as one packaged idea. The test is to ask what single activity or fact the sentence is actually about: “reforming the police” names one project, however many plural nouns (police, officers, stations) sit inside the wording.',
         points: [
           'A noun: Corruption weakens the state.',
           'A pronoun: It weakens the state.',
           'An -ing phrase: Reforming the police requires political will. (one idea = singular verb)',
           'An infinitive phrase: To reform the police requires political will.',
           'A clause: What the report recommends is unrealistic.',
+          'Two -ing phrases joined by and name two separate ideas and take a plural verb: Cutting subsidies and raising taxes were both proposed.',
+          'A clause beginning with that, what, whether or how, used as a subject, always takes a singular verb, regardless of any plural nouns it contains.',
         ],
         models: [
           { sentence: 'Collecting reliable data on migration remains difficult.', note: 'The whole -ing phrase is the subject, so the verb is singular: remains.' },
           { sentence: 'Whether the reforms succeed depends on enforcement.', note: 'A whether-clause as subject takes a singular verb.' },
+          { sentence: 'To restore investor confidence requires consistent policy, not fresh announcements.', note: 'The infinitive phrase is one goal, so the verb stays singular: requires.' },
+          { sentence: 'How the provinces will share the water remains the central dispute.', note: 'The how-clause is the subject and takes a singular verb, remains.' },
         ],
       },
       {
         heading: 'Objects and complements are not the same thing',
-        plain: 'An action verb can take an object — something that receives the action. A linking verb takes a complement — something that describes the subject. Confusing the two produces wrong pronoun forms and wrong word classes.',
+        plain: 'An action verb can take an object — something that receives the action. A linking verb takes a complement — something that describes the subject. Confusing the two produces wrong pronoun forms and wrong word classes. The confusion usually surfaces in two places: choosing between subject and object pronoun forms after be (it is he / it is him), and choosing between a noun and an adjective after a verb that could go either way. The underlying test is always the same question — does this element receive an action, or does it describe the subject? An object can be replaced by him, her, it or them; a complement cannot, because it is not a separate entity, only a description of the subject itself.',
         points: [
           'Action verb + object: The tribunal summoned him. (object pronoun him)',
           'Linking verb + complement: The chairman is he who signed the order. (subject form after be, in formal usage)',
           'Some verbs take two objects: The registrar sent the applicant a notice.',
           'Some verbs take an object plus a complement: The board declared the contract void.',
+          'A complement can also be a noun, not only an adjective: The officer became the acting secretary — secretary describes officer, it does not receive an action.',
+          'When in doubt, try replacing the disputed word with a pronoun: if him/her/it fits naturally, it is an object; if only he/she/it (subject form) fits after be, it is a complement.',
         ],
         models: [
           { sentence: 'The court found the argument unconvincing.', note: 'argument = object, unconvincing = object complement describing it.' },
           { sentence: 'The delay made the situation worse.', note: 'Same pattern: object + complement.' },
+          { sentence: 'The commission appointed her the interim chairperson.', note: 'her = indirect object-like recipient, chairperson = complement describing her, not a second object.' },
+          { sentence: 'The assembly considers the amendment necessary.', note: 'amendment = object, necessary = object complement, not a separate thing being acted on.' },
         ],
         table: {
           caption: 'Five sentence patterns you will meet all month',
@@ -223,29 +264,37 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'There, it and inverted subjects',
-        plain: 'In some sentences the word before the verb is not the subject at all. In “There are several reasons”, the real subject is reasons, and there is only a placeholder. Questions and some literary sentences also put the verb first.',
+        plain: 'In some sentences the word before the verb is not the subject at all. In “There are several reasons”, the real subject is reasons, and there is only a placeholder. Questions and some literary sentences also put the verb first. This matters because the natural instinct is to treat the word immediately before the verb as the subject, and there sits in exactly that position without being one. The same trap catches it in sentences like “It was the ministers who resigned” — it is a placeholder holding the sentence’s opening slot so that the real information (who resigned) can be emphasised later in the sentence, a construction called a cleft sentence.',
         points: [
           'There is / There are: the verb agrees with the noun that follows it.',
           'It is / It was in an introductory sentence is a placeholder: It is clear that the policy failed.',
           'After a negative or restrictive opening, the sentence inverts: Never has the economy been weaker.',
           'In a question, the subject sits between the auxiliary and the main verb: Has the committee reported?',
+          'A cleft sentence with it is … who/that keeps the verb singular after it, whatever the emphasised noun’s number: It is the provinces that resist the amendment.',
+          'After hardly, scarcely, rarely, seldom and no sooner placed at the start of a sentence, the auxiliary moves before the subject exactly as in a question.',
         ],
         models: [
           { sentence: 'There are three flaws in the argument.', note: 'flaws is plural, so are is correct.' },
           { sentence: 'There remains a single objection.', note: 'objection is singular, so remains is correct.' },
+          { sentence: 'Rarely has the assembly passed a budget without amendment.', note: 'Rarely at the start forces inversion: has moves before the subject assembly.' },
+          { sentence: 'It was the finance division that blocked the release of funds.', note: 'It was … that is a cleft construction; the verb after it stays singular regardless of the emphasised noun.' },
         ],
       },
       {
         heading: 'The opening phrase must describe the subject',
-        plain: 'When a sentence begins with a phrase such as “Having reviewed the file …” or “After examining the evidence …”, the very next thing must be the person or body that did it. If it is not, the sentence says something absurd, and this is one of the commonest errors in CSS answer scripts.',
+        plain: 'When a sentence begins with a phrase such as “Having reviewed the file …” or “After examining the evidence …”, the very next thing must be the person or body that did it. If it is not, the sentence says something absurd, and this is one of the commonest errors in CSS answer scripts. It happens because writers plan the opening phrase and the main clause separately in their heads — they know who did the reviewing, and they know what happened next — but when the sentence is written down, the main clause is drafted in the passive voice out of habit (“the claim was rejected” rather than “the officer rejected the claim”), and the doer silently disappears from the sentence altogether, leaving the opening phrase attached to whatever noun happens to come first instead.',
         points: [
           'Opening -ing or -ed phrase + comma + the doer.',
           'Test: read the opening phrase, then ask “who did that?” The answer must be the word that follows the comma.',
           'A passive main clause almost always breaks this rule.',
+          'The same rule applies to opening infinitive phrases: “To qualify for the grant, applicants must submit three documents” — applicants is who must qualify.',
+          'If the true doer cannot be named as the subject, rewrite the opening phrase itself into a full clause with its own subject: “Having reviewed the file” becomes “After the officer had reviewed the file”.',
         ],
         models: [
           { sentence: 'Having reviewed the file, the officer rejected the claim.', note: 'The officer reviewed the file — the phrase and the subject match.' },
           { sentence: 'Written in haste, the summary contained three factual errors.', note: 'The summary was written in haste — correct match.' },
+          { sentence: 'To reduce the backlog, the registrar extended court hours.', note: 'The registrar is who intends to reduce the backlog — correct match.' },
+          { sentence: 'Alarmed by the flood forecast, the district administration ordered an evacuation.', note: 'The administration was alarmed — the opening participle correctly describes the subject that follows.' },
         ],
       },
     ],
@@ -256,6 +305,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'Reforming the tax system and the customs regime are overdue.', right: 'Reforming the tax system and the customs regime is overdue.', why: 'One -ing phrase names one project, so the verb stays singular.' },
       { wrong: 'The registrar sent to the applicant a notice of the hearing was late.', right: 'The notice of the hearing that the registrar sent to the applicant was late.', why: 'The original has two competing backbones. Decide which clause is the main one.' },
       { wrong: 'Being a public document, you may inspect the register freely.', right: 'Being a public document, the register may be inspected freely.', why: 'You are not a public document. The opening phrase must describe the subject.' },
+      { wrong: 'The set of instructions issued to the field staff were unclear.', right: 'The set of instructions issued to the field staff was unclear.', why: 'Strip the phrases: set … was unclear. Instructions and staff sit inside prepositional and participial phrases.' },
+      { wrong: 'It were the auditors who raised the objection.', right: 'It was the auditors who raised the objection.', why: 'In a cleft sentence, it is/was stays singular regardless of the plural noun emphasised afterward.' },
+      { wrong: 'To improve enforcement require more inspectors, not more laws.', right: 'To improve enforcement requires more inspectors, not more laws.', why: 'An infinitive phrase functioning as the subject is one idea and takes a singular verb.' },
+      { wrong: 'Rarely the committee meets without a quorum problem.', right: 'Rarely does the committee meet without a quorum problem.', why: 'Rarely at the start of a sentence forces inversion: the auxiliary does moves before the subject.' },
     ],
     pitfalls: [
       'Letting the last noun before the verb decide agreement instead of the head noun.',
@@ -281,6 +334,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd2q8', kind: 'choice', prompt: 'In “The board declared the contract void”, what is void?', options: ['the subject', 'the direct object', 'an object complement', 'an adverb'], answer: 2, why: 'Void describes the object contract, so it is an object complement.' },
       { id: 'd2q9', kind: 'gap', prompt: 'Neither the chairman nor the members ____ willing to sign.', options: ['was', 'were', 'has been', 'is'], answer: 1, why: 'With neither … nor, the verb agrees with the nearer subject, members.' },
       { id: 'd2q10', kind: 'spot', prompt: 'Find the error: “Having examined the accounts (A), a number of irregularities (B) were detected (C) by the auditors (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'The irregularities did not examine the accounts. The auditors did, so the auditors must follow the comma.' },
+      { id: 'd2q11', kind: 'spot', prompt: 'Find the error: “The set of proposals drafted (A) by the working group (B) were rejected (C) unanimously by the board (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'The head noun is set, which is singular: “was rejected”. Proposals and group sit inside attached phrases.' },
+      { id: 'd2q12', kind: 'choice', prompt: 'Which sentence keeps the doer immediately after the opening participle phrase?', options: ['Encouraged by the results, further trials were commissioned.', 'Encouraged by the results, the team commissioned further trials.', 'Encouraged by the results, it was decided to commission further trials.', 'Encouraged by the results, there were further trials commissioned.'], answer: 1, why: 'The team is who was encouraged, so the team must be the subject that follows the comma; the other options bury or omit the true doer.' },
     ],
     corrections: [
       { id: 'd2c1', task: 'The behaviour of the officials during the protests were widely criticised.', model: 'The behaviour of the officials during the protests was widely criticised.', note: 'Strip the phrases: behaviour … was criticised. Officials is inside a prepositional phrase and cannot control the verb.' },
@@ -288,6 +343,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd2c3', task: 'There is, according to the survey, three main causes of rural poverty.', model: 'There are, according to the survey, three main causes of rural poverty.', note: 'The subject is causes; the inserted phrase does not affect agreement.' },
       { id: 'd2c4', task: 'Reading widely and making notes regularly improves a candidate’s recall, and are essential habits.', model: 'Reading widely and making notes regularly improve a candidate’s recall; they are essential habits.', note: 'Two separate -ing activities are joined by and, so the subject is plural. The second half needs its own subject.' },
       { id: 'd2c5', task: 'Written by a committee of five, the policy contain contradictions on every page.', model: 'Written by a committee of five, the policy contains contradictions on every page.', note: 'The opening phrase correctly describes policy; the only fault is agreement — singular policy takes contains.' },
+      { id: 'd2c6', task: 'Analyzing the annual report, several errors was found by the reviewers, and it were sent back for correction.', model: 'After analyzing the annual report, the reviewers found several errors, which were sent back for correction.', note: 'The report cannot analyze itself, so the doer (the reviewers) must follow the opening phrase; errors is plural and takes were, not was; and the vague it is replaced with which, pointing clearly back to errors.' },
     ],
     transfer: 'Take any paragraph from a newspaper editorial. Copy out its three longest sentences. Under each one, write only its backbone — subject, finite verb, object or complement — in no more than five words. If you cannot reduce a sentence to a backbone, it is faulty, and you have just found a real example to study.',
     checklist: [
@@ -304,6 +360,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'Phrases and clauses',
     goal: 'Tell a phrase from a clause, and an independent clause from a dependent one, so you can join ideas without breaking the sentence.',
     why: 'Every complex sentence you write in an essay is built from clauses. If you cannot see where one clause ends and the next begins, you will punctuate by guesswork, and the examiner will see it immediately.',
+    examTip: 'Day 3 rules are tested through gap-fill connector-choice items (Despite vs Although vs Because of) and through defining/non-defining relative-clause error-spotting, where the trap is a single pair of commas that silently changes the sentence’s factual claim. CSS setters exploit this by making both the punctuated and unpunctuated version grammatically valid on their own — the “error” is really a logic error dressed up as a punctuation one, so you must ask what the sentence is claiming, not just whether it is comma-correct.',
     minutes: 50,
     terms: [
       { term: 'Phrase', meaning: 'A group of words with no subject–verb pair of its own: in the morning, having signed the order.' },
@@ -315,30 +372,37 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'Phrase or clause? Look for a finite verb',
-        plain: 'If the group of words contains a subject and a verb that carries tense, it is a clause. If it does not, it is a phrase, no matter how long it is. This one test decides most punctuation questions.',
+        plain: 'If the group of words contains a subject and a verb that carries tense, it is a clause. If it does not, it is a phrase, no matter how long it is. This one test decides most punctuation questions. The confusion arises because length has nothing to do with the distinction — a ten-word phrase (“in view of the escalating cost of imported fuel”) is still a phrase, and a three-word clause (“prices rose sharply”) is still a clause. Candidates who judge by length rather than by the presence of a finite verb tend to punctuate long phrases as if they were independent sentences, and to fuse short clauses together without any joining word at all.',
         points: [
           'Phrase: after the meeting — no verb.',
           'Phrase: having left the meeting — having left carries no tense of its own.',
           'Clause: after the meeting ended — ended is finite.',
           'A phrase can never be punctuated as a sentence.',
+          'Prepositional phrases (despite, in spite of, because of, in view of, due to) are always followed by a noun or -ing form, never by a full clause with its own subject and finite verb.',
+          'If you can insert “which/who/that + is/was” before the group of words without changing the meaning, it was probably a phrase all along, since that test converts it into a clause.',
         ],
         models: [
           { sentence: 'Despite the heavy rain, polling continued.', note: 'Despite the heavy rain is a phrase; polling continued is a clause.' },
           { sentence: 'Although it rained heavily, polling continued.', note: 'Although it rained heavily is a dependent clause — it has the finite verb rained.' },
+          { sentence: 'Due to the shortage of foreign exchange, imports were curtailed.', note: 'Due to the shortage of foreign exchange is a phrase — no finite verb of its own.' },
+          { sentence: 'Because foreign exchange reserves fell sharply, imports were curtailed.', note: 'Because foreign exchange reserves fell sharply is a clause — fell is finite.' },
         ],
       },
       {
         heading: 'Independent clauses can stand alone; dependent ones cannot',
-        plain: 'Put a subordinator in front of a perfectly good sentence and it stops being a sentence. “The assembly adjourned” is complete. “Because the assembly adjourned” leaves the reader waiting. That waiting feeling is the test.',
+        plain: 'Put a subordinator in front of a perfectly good sentence and it stops being a sentence. “The assembly adjourned” is complete. “Because the assembly adjourned” leaves the reader waiting. That waiting feeling is the test. It works because a subordinator is a signal word that promises the reader a second piece of information is coming — because promises a result, although promises a contrast, when promises a main event. Once that promise is made, the sentence cannot end until it is kept, which is exactly why a dependent clause standing alone reads as unfinished, however grammatically formed the clause itself is.',
         points: [
           'Read the clause aloud. If the listener would say “yes, and?”, it is dependent.',
           'A dependent clause must be attached to an independent one.',
           'A sentence may contain one independent clause and any number of dependent clauses.',
           'A sentence may never consist only of dependent clauses.',
+          'The same clause can be independent or dependent depending only on whether a subordinator is attached to it — nothing else about the clause changes.',
+          'A very short independent clause (“It failed.”) is still complete; a very long dependent clause is still incomplete. Completeness is about the subordinator, not the word count.',
         ],
         models: [
           { sentence: 'Because the assembly adjourned, the bill lapsed.', note: 'Dependent clause first, comma, then the independent clause.' },
           { sentence: 'The bill lapsed because the assembly adjourned.', note: 'Independent clause first — normally no comma before because.' },
+          { sentence: 'Since the drought persisted, the province declared an emergency.', note: 'Since the drought persisted is dependent; the province declared an emergency stands alone.' },
         ],
         table: {
           caption: 'The four sentence types you will use in an essay',
@@ -353,44 +417,54 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'The three jobs a dependent clause can do',
-        plain: 'A dependent clause works as an adverb, an adjective or a noun. Knowing which job it is doing tells you whether it needs a comma.',
+        plain: 'A dependent clause works as an adverb, an adjective or a noun. Knowing which job it is doing tells you whether it needs a comma. This classification matters for a second reason too: a noun clause can be moved around the sentence like any other noun (as subject, object or complement), an adjective clause is always glued to the noun it describes and cannot be moved, and an adverb clause is the most mobile of the three, able to sit at the front, in the middle or at the end of the sentence with only its comma placement changing.',
         points: [
           'Adverb clause — tells when, why, how or under what condition: When the audit ended, the file was closed.',
           'Adjective (relative) clause — describes a noun: The officer who signed the order has retired.',
           'Noun clause — acts as a subject or object: The report shows that enforcement failed.',
           'An adverb clause takes a comma when it comes first, and usually none when it comes last.',
+          'A noun clause never takes a comma to separate it from the verb it is the subject or object of, however long it is.',
+          'To identify the job quickly: try replacing the clause with it (noun clause), with a single adjective (adjective clause), or with then/there/because of that (adverb clause) — whichever replacement keeps the sentence sensible names the job.',
         ],
         models: [
           { sentence: 'If the appeal is rejected, the petitioner may approach the high court.', note: 'Adverb clause of condition, placed first, so a comma follows it.' },
           { sentence: 'The petitioner may approach the high court if the appeal is rejected.', note: 'Same clause at the end — no comma.' },
+          { sentence: 'What the inquiry uncovered shocked the entire province.', note: 'Noun clause functioning as the subject of shocked — no comma before the verb.' },
+          { sentence: 'The clerk who lost the file has been suspended.', note: 'Adjective clause identifying which clerk — glued directly to clerk, no comma because it is defining.' },
         ],
       },
       {
         heading: 'Defining and non-defining relative clauses',
-        plain: 'A defining relative clause tells the reader which one you mean, so it must not be cut off by commas. A non-defining clause only adds extra information about something already identified, so it is enclosed in commas. Removing the commas changes the meaning of the sentence.',
+        plain: 'A defining relative clause tells the reader which one you mean, so it must not be cut off by commas. A non-defining clause only adds extra information about something already identified, so it is enclosed in commas. Removing the commas changes the meaning of the sentence. This is the single relative-clause rule examiners test most, because the two versions look almost identical on the page — the only signal is a pair of commas — yet they make completely different factual claims. Before punctuating any relative clause, ask: does the reader need this clause to know which one is meant, or does the reader already know, and this clause is just adding a bonus fact? The answer decides everything.',
         points: [
           'Defining — no commas: The candidates who failed the paper may reappear. (only those candidates)',
           'Non-defining — commas: The candidates, who failed the paper, may reappear. (all of them failed)',
           'Use that only for defining clauses; use which freely for non-defining ones.',
           'Never place a comma before a defining that-clause.',
+          'A proper noun or a noun already made specific by the (the president, my brother) is normally followed by a non-defining clause, because it is already fully identified.',
+          'In careful formal writing, which is also acceptable for defining clauses, but that is never acceptable for non-defining ones — so when in doubt about which comma pattern to use, that is the safer defining marker.',
         ],
         models: [
           { sentence: 'The policy that the cabinet approved in May has been withdrawn.', note: 'Defining: it identifies which policy.' },
           { sentence: 'The policy, which the cabinet approved in May, has been withdrawn.', note: 'Non-defining: the policy is already known; the clause is an aside.' },
+          { sentence: 'The chief justice, who took oath last year, has ordered a full bench.', note: 'Non-defining: there is only one chief justice, so the clause is extra information, not identification.' },
         ],
       },
       {
         heading: 'One joining word per join',
-        plain: 'English uses one connector for one join. Urdu-influenced writing often doubles them — “Although he was ill, but he attended.” In English, either although or but must go.',
+        plain: 'English uses one connector for one join. Urdu-influenced writing often doubles them — “Although he was ill, but he attended.” In English, either although or but must go. The doubling happens because in the source structure the two halves of a contrast are marked symmetrically (roughly, “although X, then/but Y”), so translating the sentence word by word produces a pair that feels balanced in the original language but reads as redundant in English, where the subordinator alone already carries the whole logical relationship — the second word adds nothing but repetition.',
         points: [
           'Although X, Y. — correct.',
           'X, but Y. — correct.',
           'Although X, but Y. — wrong.',
           'The same rule kills “Because … therefore …” and “As … so …”.',
+          'It also affects “Though … yet …” and “Since … hence …” — pick one member of each pair, never both.',
+          'If you want to keep both the subordinator and the linking adverb for emphasis, split the sentence into two: Although funds were released late. The project, nonetheless, finished on time.',
         ],
         models: [
           { sentence: 'Although the funds were released late, the project finished on time.', note: 'One connector: although.' },
           { sentence: 'The funds were released late, but the project finished on time.', note: 'One connector: but.' },
+          { sentence: 'Though the harvest failed, farmers avoided mass migration.', note: 'One connector: though. No yet is needed before farmers.' },
         ],
       },
     ],
@@ -401,6 +475,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'Students, who cheat in the examination, will be disqualified.', right: 'Students who cheat in the examination will be disqualified.', why: 'The clause identifies which students, so it is defining and takes no commas.' },
       { wrong: 'As the weather was bad, so the match was cancelled.', right: 'As the weather was bad, the match was cancelled.', why: 'As and so both mark cause; only one may stay.' },
       { wrong: 'The proposal, that was tabled yesterday, is controversial.', right: 'The proposal that was tabled yesterday is controversial.', why: 'That introduces defining clauses only, and defining clauses take no commas.' },
+      { wrong: 'Since the target was missed, hence the manager was transferred.', right: 'Since the target was missed, the manager was transferred.', why: 'Since already marks the cause; hence duplicates it, so one connector must be dropped.' },
+      { wrong: 'The report, which recommends privatisation is thirty pages long.', right: 'The report, which recommends privatisation, is thirty pages long.', why: 'A non-defining clause needs a matched pair of commas, one before and one after.' },
+      { wrong: 'When the inquiry began. Officials were reluctant to testify.', right: 'When the inquiry began, officials were reluctant to testify.', why: 'A dependent clause cannot be punctuated as a full sentence; it must be attached with a comma.' },
+      { wrong: 'The witnesses, whom the defence called, that supported the alibi were dismissed.', right: 'The witnesses whom the defence called to support the alibi were dismissed.', why: 'The sentence tries to run a relative clause and a that-clause together on the same noun; only one relative structure is needed.' },
     ],
     pitfalls: [
       'Doubling connectors: although … but, because … therefore, as … so.',
@@ -426,6 +504,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd3q8', kind: 'gap', prompt: '____ the tribunal reserved its judgement, the parties waited outside.', options: ['While', 'During', 'Despite', 'In spite of'], answer: 0, why: 'A clause follows, so a subordinator is needed; during and despite take nouns.' },
       { id: 'd3q9', kind: 'choice', prompt: 'Which sentence is punctuated correctly?', options: ['If the appeal succeeds the sentence will be reduced.', 'If the appeal succeeds, the sentence will be reduced.', 'The sentence will be reduced, if the appeal succeeds.', 'If, the appeal succeeds the sentence will be reduced.'], answer: 1, why: 'An adverb clause placed first is followed by a comma; placed last it normally takes none.' },
       { id: 'd3q10', kind: 'spot', prompt: 'Find the error: “As the survey was incomplete (A), so the conclusions (B) drawn from it (C) are unreliable (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'As already marks the cause, so so must be deleted.' },
+      { id: 'd3q11', kind: 'choice', prompt: 'Which sentence correctly uses only one connector?', options: ['Even though the results were positive, yet the funding was cut.', 'Even though the results were positive, the funding was cut.', 'Even though the results were positive, but the funding was cut.', 'Even the results were positive though, the funding was cut.'], answer: 1, why: 'Even though already marks the contrast; yet and but both duplicate it, and only option B uses a single connector.' },
+      { id: 'd3q12', kind: 'choice', prompt: 'In “What the committee recommends will determine the policy”, the opening clause functions as', options: ['an adjective clause modifying committee', 'a noun clause acting as the subject', 'an adverb clause of condition', 'an independent clause'], answer: 1, why: 'The whole what-clause is the one thing that “will determine the policy”, so it is a noun clause standing as the subject, not a description of committee.' },
     ],
     corrections: [
       { id: 'd3c1', task: 'Although the policy looks attractive on paper, but its implementation has failed.', model: 'Although the policy looks attractive on paper, its implementation has failed.', note: 'One connector for one join. Keep although and delete but.' },
@@ -433,6 +513,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd3c3', task: 'While the committee was still deliberating. The press published the recommendations.', model: 'While the committee was still deliberating, the press published the recommendations.', note: 'The first group is a dependent clause and must be joined, not full-stopped.' },
       { id: 'd3c4', task: 'The reform, that was announced in January, has yet to be notified.', model: 'The reform that was announced in January has yet to be notified.', note: 'That takes no commas. If you want the aside, write “The reform, which was announced in January, …”.' },
       { id: 'd3c5', task: 'Because the data was outdated, therefore the projections were wrong.', model: 'Because the data was outdated, the projections were wrong.', note: 'Because already supplies the cause; therefore duplicates it.' },
+      { id: 'd3c6', task: 'The minister, that announced the reform yesterday, said that although the timeline is tight, yet the project will finish on schedule.', model: 'The minister, who announced the reform yesterday, said that although the timeline is tight, the project will finish on schedule.', note: 'That never follows a comma — use who for the non-defining aside; and although already marks the contrast, so the duplicate yet must be dropped.' },
     ],
     transfer: 'Write one paragraph of six sentences on a topic you know well. Use each sentence type at least once: simple, compound, complex, compound-complex. Then mark every dependent clause in brackets and check that each one is attached to an independent clause and carries only one connector.',
     checklist: [
@@ -449,6 +530,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'Fragments, run-ons and comma splices',
     goal: 'Recognise and repair the three ways a sentence boundary goes wrong, using four different corrections for each.',
     why: 'These three errors do more damage to an examiner’s impression than any vocabulary weakness, because they suggest the candidate cannot control a sentence. They are also the easiest errors to eliminate permanently.',
+    examTip: 'Day 4 is tested as “identify the punctuation error” (four segments, one of them a comma that should be a semicolon or full stop) and as full-sentence correction items joining two or three clauses. The signature CSS trap is a conjunctive adverb (however, moreover, meanwhile, consequently) sitting after a single comma between two complete clauses — the sentence reads fluently aloud, so it survives a fast read, and only a deliberate clause-by-clause count catches the missing semicolon.',
     minutes: 45,
     terms: [
       { term: 'Fragment', meaning: 'An incomplete sentence punctuated as though it were complete.' },
@@ -460,31 +542,37 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'Fragments: what is missing',
-        plain: 'A fragment fails for one of three reasons — it has no subject, it has no finite verb, or it is a dependent clause standing alone. Name the reason before you repair it, because the reason decides the repair.',
+        plain: 'A fragment fails for one of three reasons — it has no subject, it has no finite verb, or it is a dependent clause standing alone. Name the reason before you repair it, because the reason decides the repair. Fragments are dangerous precisely because they often read as complete to their own writer: the writer already knows what they meant, so the missing piece is supplied silently in the writer’s own head while reading it back, and the gap is invisible to them even though it is glaring to an examiner encountering the sentence cold, with no access to that missing context.',
         points: [
           'No finite verb: “The report submitted by the inquiry committee last week.” Add one: “was submitted”.',
           'No subject: “Investigated the matter thoroughly.” Add one: “The team investigated …”.',
           'Dependent clause alone: “Because funds were short.” Attach it to a main clause.',
           'A list or an afterthought is also a fragment: “Three reasons. Cost, delay and poor design.”',
+          'A comparison fragment is common too: “Better than the previous scheme.” It needs its own subject and verb: “This scheme performs better than the previous one.”',
+          'To test any suspected fragment, read only that group of words in isolation and ask whether it makes a complete, standalone statement — if it needs the previous sentence to make sense, it is a fragment.',
         ],
         models: [
           { sentence: 'The report submitted by the inquiry committee was ignored.', note: 'A finite verb, was ignored, now holds the sentence up.' },
           { sentence: 'Because funds were short, the project stalled.', note: 'The dependent clause is attached to an independent one.' },
+          { sentence: 'The team investigated the matter thoroughly.', note: 'A subject, the team, has been added to hold up the verb investigated.' },
+          { sentence: 'This proposal performs better than the previous scheme on cost grounds.', note: 'A subject and finite verb now complete what was a bare comparison.' },
         ],
       },
       {
         heading: 'Run-ons and comma splices: what is between the clauses',
-        plain: 'If you have two independent clauses, you have exactly five legitimate ways to join them. Nothing at all is a run-on. A bare comma is a comma splice. Both are marked as errors.',
+        plain: 'If you have two independent clauses, you have exactly five legitimate ways to join them. Nothing at all is a run-on. A bare comma is a comma splice. Both are marked as errors. The comma splice is by far the more common of the two in CSS scripts, because a comma feels like enough of a pause to the writer’s ear — it is, after all, a genuine punctuation mark, unlike the nothing of a run-on — but English reserves the comma alone for joining unequal or shorter elements, not two complete, independently standing statements. The five repairs below are not stylistic alternatives to memorise separately; they are the only five grammatically legal options, and choosing among them is a matter of how tightly related the two ideas are, not which one “sounds better”.',
         points: [
           'Full stop: The audit failed. The contract was cancelled.',
           'Semicolon: The audit failed; the contract was cancelled.',
           'Comma + coordinating conjunction: The audit failed, so the contract was cancelled.',
           'Semicolon + conjunctive adverb + comma: The audit failed; therefore, the contract was cancelled.',
           'Make one clause dependent: Because the audit failed, the contract was cancelled.',
+          'A colon is a sixth option when the second clause explains or illustrates the first: The audit failed: three ledgers could not be reconciled.',
         ],
         models: [
           { sentence: 'Inflation eased; however, unemployment rose.', note: 'However needs a semicolon before it, not a comma.' },
           { sentence: 'Inflation eased, but unemployment rose.', note: 'But is a coordinating conjunction, so a comma is correct.' },
+          { sentence: 'The bench reserved judgement: the case raised a constitutional question.', note: 'A colon links two closely related independent clauses, the second explaining the first.' },
         ],
         table: {
           caption: 'Five legal repairs for two independent clauses',
@@ -500,28 +588,33 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'However is not but',
-        plain: 'This single confusion produces more comma splices in CSS scripts than any other cause. However, therefore, moreover, nevertheless and consequently are adverbs. They tell the reader how the next sentence relates to the last one, but they have no power to join two clauses.',
+        plain: 'This single confusion produces more comma splices in CSS scripts than any other cause. However, therefore, moreover, nevertheless and consequently are adverbs. They tell the reader how the next sentence relates to the last one, but they have no power to join two clauses. The reason the confusion is so persistent is that however and but occupy the same meaning-slot in a sentence — both signal contrast — so a writer who has learned that a comma goes before but naturally assumes the same comma works before however. But these words belong to different grammatical categories: but is a conjunction, built to join; however is an adverb, built only to modify or comment, never to connect two independent clauses on its own.',
         points: [
           'Wrong: The scheme was funded, however it was never launched.',
           'Right: The scheme was funded; however, it was never launched.',
           'Right: The scheme was funded. However, it was never launched.',
           'Right: The scheme was funded, but it was never launched.',
+          'The same rule applies to moreover, furthermore, consequently, meanwhile, otherwise and instead — all are conjunctive adverbs, none can join clauses after a lone comma.',
+          'A conjunctive adverb can also appear mid-clause, set off by its own commas, without affecting the punctuation between the two main clauses: The scheme was funded; it was, however, never launched.',
         ],
         models: [
           { sentence: 'The data were incomplete; nevertheless, the conclusions were published.', note: 'Semicolon before, comma after.' },
           { sentence: 'The data were incomplete. Nevertheless, the conclusions were published.', note: 'A full stop works just as well.' },
+          { sentence: 'The pilot project succeeded; consequently, the ministry expanded it nationwide.', note: 'Consequently is a conjunctive adverb: semicolon before, comma after.' },
         ],
       },
       {
         heading: 'A deliberate fragment is still a risk',
-        plain: 'Journalists use fragments for effect. In a formal examination answer you gain nothing by it and risk being marked down, because the examiner cannot tell a deliberate fragment from an accident. Write complete sentences throughout.',
+        plain: 'Journalists use fragments for effect. In a formal examination answer you gain nothing by it and risk being marked down, because the examiner cannot tell a deliberate fragment from an accident. Write complete sentences throughout. A CSS answer script is assessed for control, not style, and an examiner scanning forty scripts a day has no way of knowing whether a bare fragment at the end of your paragraph was a rhetorical flourish you intended or a sentence you simply lost control of midway through — so it is marked as the latter by default, and you lose the very credit you were hoping the effect would earn.',
         points: [
           'Keep every sentence in an answer script complete.',
           'If a short punch is needed, use a short complete sentence instead.',
           'Check the last sentence of each paragraph — fragments hide there.',
+          'Also check the first sentence after a heading or a bullet list — writers often drop the subject there, assuming the heading supplies it.',
         ],
         models: [
           { sentence: 'The cost is the real obstacle.', note: 'Short and complete — the effect without the risk.' },
+          { sentence: 'Enforcement, not legislation, remains the weak link.', note: 'A short, complete sentence that still lands with emphasis.' },
         ],
       },
     ],
@@ -532,6 +625,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'Having considered all the evidence and heard both parties at length.', right: 'Having considered all the evidence and heard both parties at length, the tribunal reserved its judgement.', why: 'A participle phrase is not a sentence; attach a main clause.' },
       { wrong: 'The policy failed, the reasons were structural.', right: 'The policy failed; the reasons were structural.', why: 'A semicolon shows the close relationship a comma cannot carry.' },
       { wrong: 'Three problems remain. Funding, staffing and legal cover.', right: 'Three problems remain: funding, staffing and legal cover.', why: 'A colon attaches the list to the sentence that introduces it.' },
+      { wrong: 'The board approved the merger, meanwhile the regulator raised concerns.', right: 'The board approved the merger; meanwhile, the regulator raised concerns.', why: 'Meanwhile is a conjunctive adverb and cannot join two clauses after a bare comma.' },
+      { wrong: 'Better than the earlier draft in every respect.', right: 'This draft is better than the earlier one in every respect.', why: 'A comparison with no subject and no finite verb is a fragment; both must be supplied.' },
+      { wrong: 'The witness changed her statement the lawyers objected immediately.', right: 'The witness changed her statement, and the lawyers objected immediately.', why: 'A run-on. Two independent clauses need a comma plus a coordinating conjunction, or another legal join.' },
+      { wrong: 'Because the evidence was tampered with.', right: 'Because the evidence was tampered with, the case was dismissed.', why: 'A because-clause is dependent and cannot be punctuated as a stand-alone sentence.' },
     ],
     pitfalls: [
       'Joining clauses with however, therefore or moreover after a comma.',
@@ -557,6 +654,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd4q8', kind: 'spot', prompt: 'Find the error: “The department denied the allegation (A) the press (B) published the documents (C) the next morning (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Two independent clauses are fused. Put a full stop or semicolon after allegation.' },
       { id: 'd4q9', kind: 'choice', prompt: 'Which correction keeps both ideas in one sentence and shows cause?', options: ['The audit failed. The contract was cancelled.', 'The audit failed; the contract was cancelled.', 'Because the audit failed, the contract was cancelled.', 'The audit failed, the contract was cancelled.'], answer: 2, why: 'Subordinating one clause with because states the cause explicitly within a single sentence.' },
       { id: 'd4q10', kind: 'choice', prompt: 'Which sentence is punctuated correctly?', options: ['Three issues remain, funding, staffing and legal cover.', 'Three issues remain: funding, staffing and legal cover.', 'Three issues remain. Funding, staffing and legal cover.', 'Three issues remain; funding, staffing and legal cover;'], answer: 1, why: 'A colon introduces a list that completes the sentence before it.' },
+      { id: 'd4q11', kind: 'spot', prompt: 'Find the error: “The pilot scheme succeeded (A), meanwhile (B) the control group (C) showed no measurable improvement (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'A conjunctive adverb cannot join two independent clauses after a bare comma. The comma at A should be a semicolon: “succeeded; meanwhile, …”.' },
+      { id: 'd4q12', kind: 'choice', prompt: 'Which sentence correctly uses a colon?', options: ['The report identified one flaw: outdated equipment.', 'The report identified: one flaw, outdated equipment.', 'The report identified one flaw, outdated equipment:', 'The report identified one flaw: was outdated equipment.'], answer: 0, why: 'A colon follows a complete independent clause and introduces the explanation; option A is the only one where the words before the colon already form a full sentence.' },
     ],
     corrections: [
       { id: 'd4c1', task: 'The results were delayed, students protested outside the controller’s office.', model: 'The results were delayed, so students protested outside the controller’s office.', note: 'A comma splice. Adding so supplies the missing conjunction and the causal link.' },
@@ -564,6 +663,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd4c3', task: 'Since the provincial government failed to release the matching grant. The scheme was shelved.', model: 'Since the provincial government failed to release the matching grant, the scheme was shelved.', note: 'A dependent clause must be attached, not full-stopped.' },
       { id: 'd4c4', task: 'The report running to four hundred pages and containing eleven annexures.', model: 'The report ran to four hundred pages and contained eleven annexures.', note: 'The participles carry no tense. Convert them into finite verbs.' },
       { id: 'd4c5', task: 'The economy is stabilising inflation has fallen for three consecutive months.', model: 'The economy is stabilising: inflation has fallen for three consecutive months.', note: 'A run-on. A colon works well because the second clause explains the first; a semicolon or full stop is equally correct.' },
+      { id: 'd4c6', task: 'The audit revealed several discrepancies, moreover the report was submitted late the board rejected it outright.', model: 'The audit revealed several discrepancies; moreover, the report was submitted late, so the board rejected it outright.', note: 'Moreover cannot join clauses after a bare comma — semicolon before, comma after; and the fused clause “the report was submitted late the board rejected it” needed a comma plus so (or a semicolon) to join the two independent clauses legally.' },
     ],
     transfer: 'Find the last piece of writing you produced — an essay, an answer, even a long message. Read it one sentence at a time and mark every boundary error you find. For each one, write out two different repairs, then choose the better and say in a few words why it is better.',
     checklist: [
@@ -580,6 +680,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'Subject–verb agreement',
     goal: 'Make the verb agree with the real subject in every structure the examiners use to disguise it.',
     why: 'Agreement is the single most tested grammar point in FPSC English papers, and it is also the error that survives longest in a candidate’s own writing, because the ear does not catch it.',
+    examTip: 'Subject–verb agreement is the single most repeated grammar point on the actual paper, almost always as four-segment error-spotting with a long, distracting phrase sitting between the head noun and the verb. The sharpest recurring trap is the “one of the (few/only) X who” construction: inserting the word only silently switches who’s antecedent from the plural group to the single word one, flipping the required verb from plural to singular without changing anything else visible in the sentence.',
     minutes: 55,
     terms: [
       { term: 'Agreement', meaning: 'The verb changing its form to match a singular or plural subject: the file is / the files are.' },
@@ -590,45 +691,56 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'The verb agrees with the head noun, not the nearest noun',
-        plain: 'This is the whole topic in one line. Remove every phrase that sits between the subject and the verb, then decide. Examiners build questions precisely by putting a plural noun just before a singular verb.',
+        plain: 'This is the whole topic in one line. Remove every phrase that sits between the subject and the verb, then decide. Examiners build questions precisely by putting a plural noun just before a singular verb. This works on the ear because spoken English is processed in real time, word by word, and by the time a listener or reader reaches the verb, the most recently heard noun is the one still active in working memory — even though it is grammatically irrelevant. Written English gives you the advantage spoken English does not: time to stop, strip the sentence back to its head noun, and check deliberately instead of trusting the ear.',
         points: [
           'Cross out of …, in …, with …, along with …, as well as …, together with …, including …, besides ….',
           'These phrases never change the number of the subject.',
           'The minister, along with his advisers, is attending. — minister is the subject.',
           'The problems in the sector remain unresolved. — problems is the subject.',
+          'A parenthetical aside in commas or brackets is also invisible to agreement: The verdict (unlike earlier rulings on the same point) was unanimous.',
+          'When the head noun itself is a collective or measurement word (a set, a batch, a series, a pair), it stays singular even though the phrase after it names many individual items.',
         ],
         models: [
           { sentence: 'The quality of the submissions was poor.', note: 'quality … was. Submissions is inside a prepositional phrase.' },
           { sentence: 'The candidates for the post were interviewed.', note: 'candidates … were. Post is inside the phrase.' },
+          { sentence: 'The series of hearings scheduled for next month has been postponed.', note: 'series … has been postponed. Hearings and month are both inside phrases.' },
+          { sentence: 'The chairman, together with the two vice-chairmen, was summoned by the committee.', note: 'chairman … was summoned. The together-with phrase does not make the subject plural.' },
         ],
       },
       {
         heading: 'Joined subjects: and, or, nor',
-        plain: 'And normally makes a subject plural. Or and nor do not join subjects at all — they offer alternatives, so the verb agrees with whichever subject stands nearer to it.',
+        plain: 'And normally makes a subject plural. Or and nor do not join subjects at all — they offer alternatives, so the verb agrees with whichever subject stands nearer to it. This is the point students resist most, because it feels inconsistent for the same word (nor) sometimes to behave like a plural marker and sometimes like a singular one — but or/nor never actually add the two subjects together the way and does; they present a choice between them, one at a time, so grammatically only one of the two subjects is ever truly “active”, and it is always the nearer one that the verb has to agree with, since that is the one the reader’s mind is on as the verb arrives.',
         points: [
           'The chairman and the secretary were present. — two people, plural verb.',
           'But: Bread and butter is a cheap breakfast. — one combined idea, singular verb.',
           'Neither the officers nor the director was informed. — nearer subject director is singular.',
           'Neither the director nor the officers were informed. — nearer subject officers is plural.',
           'When each or every precedes joined subjects, the verb is singular: Every file and every register was checked.',
+          'The same proximity logic governs pronoun choice after or/nor: Either the minister or the officials submit their explanation, not his explanation, since officials is nearer.',
+          'When the choice of order feels awkward (a singular verb sounding odd), reorder the sentence so the plural subject sits nearer the verb: Neither the director nor the officers were informed reads more naturally than the reverse.',
         ],
         models: [
           { sentence: 'Either the province or the federal agencies have to fund it.', note: 'agencies is nearer, so the verb is plural.' },
           { sentence: 'Research and development is expensive.', note: 'One recognised activity, so singular.' },
+          { sentence: 'Neither the applicant nor his referees were available for verification.', note: 'referees is nearer, so the verb is plural.' },
+          { sentence: 'Law and order remains the province’s primary responsibility.', note: 'Law and order names one combined concept, so the verb stays singular.' },
         ],
       },
       {
         heading: 'Indefinite pronouns and quantity words',
-        plain: 'Some words are always singular, some always plural, and some change according to the noun they refer to. Learning the three lists takes twenty minutes and removes an entire category of error.',
+        plain: 'Some words are always singular, some always plural, and some change according to the noun they refer to. Learning the three lists takes twenty minutes and removes an entire category of error. The always-singular words feel wrong to many candidates because they name a group in real life — “each of the officers” obviously refers to more than one officer — but grammatically each isolates the group into one member at a time, and it is that isolated single member the verb agrees with, not the group as a whole. The depends-on-the-noun category is the trickiest, because the same quantity word (some, most, all) must be checked against whatever noun follows of, every single time, with no shortcut.',
         points: [
           'Always singular: each, every, either, neither, everyone, everybody, someone, somebody, anyone, anybody, no one, nobody, nothing, much, one.',
           'Always plural: both, few, several, many, others.',
           'Depends on the noun: some, any, all, most, none, half, the rest, a lot, percentages and fractions.',
           'Some of the water is polluted. / Some of the wells are polluted.',
+          'None can take a singular or plural verb depending on formality and meaning: none of the funds was released (formal, emphasising “not one”) or none of the funds were released (common usage, emphasising the whole amount).',
+          'A percentage or fraction takes its number from the noun that follows of: Forty percent of the staff was retrained. / Forty percent of the employees were retrained.',
         ],
         models: [
           { sentence: 'Each of the candidates was interviewed separately.', note: 'each is singular, whatever follows it.' },
           { sentence: 'Two-thirds of the budget has been spent.', note: 'budget is uncountable and singular, so the verb follows it.' },
+          { sentence: 'Half of the applicants were disqualified on technical grounds.', note: 'applicants is countable and plural, so half takes its number from it.' },
         ],
         table: {
           caption: 'Agreement in structures that look plural but are not',
@@ -649,29 +761,35 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'Relative clauses: find what who or which stands for',
-        plain: 'The verb in a relative clause agrees with the noun the relative pronoun replaces. In “one of the officers who were promoted”, who stands for officers, so the verb is plural. In “the only one of the officers who was promoted”, who stands for one.',
+        plain: 'The verb in a relative clause agrees with the noun the relative pronoun replaces. In “one of the officers who were promoted”, who stands for officers, so the verb is plural. In “the only one of the officers who was promoted”, who stands for one. The word only is doing all the work here: it narrows the group from “many officers” down to a single one before the relative clause even begins, so who suddenly has a singular antecedent instead of a plural one. Students who memorise “one of the … who + plural” as a fixed template get caught out precisely on this only-variant, because they apply the template without checking whether only has silently changed what who refers back to.',
         points: [
           'He is one of those candidates who always arrive late. — who = candidates.',
           'He is the only one of the candidates who arrives on time. — who = one.',
           'Read the sentence backwards from who to find its antecedent.',
+          'The same logic applies to which and that in place of who: This is one of the schemes that have failed (that = schemes) versus This is the only scheme that has failed (that = scheme).',
+          'A superlative before one of also keeps the plural pattern: She is one of the best officers who have ever served in the department — who still equals officers, not she.',
         ],
         models: [
           { sentence: 'This is one of the reports that have been withdrawn.', note: 'that = reports, so have.' },
           { sentence: 'This is the only report that has been withdrawn.', note: 'that = report, so has.' },
+          { sentence: 'He is one of the few ministers who have visited the flood zone personally.', note: 'who = ministers (plural), despite the singular-feeling he at the start.' },
         ],
       },
       {
         heading: 'Inverted and delayed subjects',
-        plain: 'When the subject comes after the verb, students often agree with whatever came first. Look forward to find the subject before choosing the verb.',
+        plain: 'When the subject comes after the verb, students often agree with whatever came first. Look forward to find the subject before choosing the verb. This structure is common in formal and bureaucratic English precisely because it lets a writer front-load location or circumstance (there, here, attached to the letter, among the papers) before the main information, which reads as more formal and more suspenseful than starting directly with the subject — but the cost of that style choice is that agreement has to be worked out by looking ahead, not by habit.',
         points: [
           'There are three objections. / There is one objection.',
           'Here come the results. / Here comes the result.',
           'Among the papers was a sealed envelope. — envelope is the subject.',
           'In questions: Do the members agree? / Does the member agree?',
+          'The same forward-look applies after so and neither in short responses: So does the deputy commissioner. / So do the district officers.',
+          'In a sentence beginning with a place or time phrase (In the annexure, On the agenda), the subject still follows the verb and must be located the same way: On the agenda were three unresolved items.',
         ],
         models: [
           { sentence: 'Attached to the letter are two annexures.', note: 'annexures is the subject, so the verb is plural.' },
           { sentence: 'There remains one unresolved issue.', note: 'issue is singular.' },
+          { sentence: 'On the agenda was a single controversial item.', note: 'item is the subject, following the verb, and is singular.' },
         ],
       },
     ],
@@ -682,6 +800,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'The number of accidents have increased.', right: 'The number of accidents has increased.', why: 'The number of means one figure and is singular; a number of means many and is plural.' },
       { wrong: 'He is one of those officers who never admits a mistake.', right: 'He is one of those officers who never admit a mistake.', why: 'Who stands for officers, so the verb is plural.' },
       { wrong: 'Mathematics are a difficult subject for many candidates.', right: 'Mathematics is a difficult subject for many candidates.', why: 'As the name of a discipline, mathematics is singular.' },
+      { wrong: 'The series of reforms announced last year has not was implemented.', right: 'The series of reforms announced last year has not been implemented.', why: 'The head noun series is singular and controls the verb, whatever plural noun follows it.' },
+      { wrong: 'Either the commissioner or his staff is responsible for the delay.', right: 'Either the commissioner or his staff are responsible for the delay.', why: 'With either … or, the verb agrees with the nearer subject, staff (plural in this sense).' },
+      { wrong: 'Forty percent of the crop were destroyed by the floods.', right: 'Forty percent of the crop was destroyed by the floods.', why: 'Crop is uncountable and singular here, so the percentage takes a singular verb.' },
+      { wrong: 'On the table was several unsigned documents.', right: 'On the table were several unsigned documents.', why: 'The subject, documents, follows the verb and is plural.' },
     ],
     pitfalls: [
       'Agreeing with the noun immediately before the verb instead of the head noun.',
@@ -707,6 +829,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd5q8', kind: 'spot', prompt: 'Find the error: “The number of vacancies advertised (A) this year (B) are lower (C) than last year (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'The number of is a single figure and takes is.' },
       { id: 'd5q9', kind: 'gap', prompt: 'Either the secretary or his deputies ____ to attend the briefing.', options: ['has', 'have', 'is', 'was'], answer: 1, why: 'The nearer subject, deputies, is plural.' },
       { id: 'd5q10', kind: 'spot', prompt: 'Find the error: “The scissors used in the laboratory (A) is kept (B) in the second drawer (C) of the cupboard (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Scissors is a two-part noun and takes a plural verb: are kept. Write “a pair of scissors is” if you need the singular.' },
+      { id: 'd5q11', kind: 'spot', prompt: 'Find the error: “The pair of shoes displayed (A) in the shop window (B) were priced (C) beyond most customers’ budgets (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'The head noun is pair, which is singular: “was priced”. Shoes and window sit inside attached phrases and cannot control the verb.' },
+      { id: 'd5q12', kind: 'gap', prompt: 'He is the only one of the officers who ____ been recommended for the award.', options: ['has', 'have', 'having', 'had have'], answer: 0, why: 'The only narrows the group to a single officer, so who now stands for one, not officers, and the verb becomes singular.' },
     ],
     corrections: [
       { id: 'd5c1', task: 'The quality of the roads in the northern districts have deteriorated sharply.', model: 'The quality of the roads in the northern districts has deteriorated sharply.', note: 'Head noun quality is singular; the two prepositional phrases are irrelevant to agreement.' },
@@ -714,6 +838,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd5c3', task: 'There is several reasons why the scheme did not attract applicants.', model: 'There are several reasons why the scheme did not attract applicants.', note: 'The subject is reasons, which comes after the verb.' },
       { id: 'd5c4', task: 'He is one of those officers who always takes responsibility for his team.', model: 'He is one of those officers who always take responsibility for their team.', note: 'Who refers to officers, so both the verb and the following pronoun become plural.' },
       { id: 'd5c5', task: 'Fifty thousand rupees were recovered from the accused, and the news were reported widely.', model: 'Fifty thousand rupees was recovered from the accused, and the news was reported widely.', note: 'A single sum of money is singular, and news is singular despite the final -s.' },
+      { id: 'd5c6', task: 'He is the only one of the applicants who have submitted their documents on time, and the number of exceptions are surprising.', model: 'He is the only one of the applicants who has submitted his documents on time, and the number of exceptions is surprising.', note: 'Only narrows who to the single one, so the verb and pronoun both turn singular; and the number of means one figure, so it takes is, not are.' },
     ],
     transfer: 'Write eight sentences, each using one of these subjects: the number of, a number of, each of, neither … nor, there + plural noun, a collective noun, a fraction with an uncountable noun, and one of those … who. Read each one aloud and name the head noun before you check your verb.',
     checklist: [
@@ -730,6 +855,7 @@ export const grammarPhase1: GrammarLesson[] = [
     title: 'Capital letters, full stops and the everyday comma',
     goal: 'Use the punctuation marks that appear in every sentence you write, correctly and without hesitation.',
     why: 'Basic punctuation errors are visible on every line of an answer script. They are also the cheapest marks to protect, because the rules are few and they never change.',
+    examTip: 'This material is tested as straightforward error-spotting on capitals, apostrophes and comma placement, usually with a mix of segments where at least one is deliberately correct, to punish over-correction. The recurring trap is joint versus separate possession (the husband’s and wife’s vs the husband and wife’s) and the indirect question, which keeps question-word vocabulary but statement word order — both are chosen because they look wrong to a fast ear even when the form given is the correct one, or the reverse.',
     minutes: 45,
     terms: [
       { term: 'Proper noun', meaning: 'The name of a particular person, place, body or title: Karachi, the Supreme Court, Ramadan.' },
@@ -740,46 +866,56 @@ export const grammarPhase1: GrammarLesson[] = [
     rules: [
       {
         heading: 'Capital letters: names, not importance',
-        plain: 'Capitalise a word because it names one particular thing, not because it feels important. Students capitalise Government, Country and Education for emphasis; examiners read that as uncertainty about the rule.',
+        plain: 'Capitalise a word because it names one particular thing, not because it feels important. Students capitalise Government, Country and Education for emphasis; examiners read that as uncertainty about the rule. This habit usually comes from formal Urdu and Persian-influenced writing conventions, where capitalisation (or its typographic equivalent, larger or bolder script) is sometimes used to show respect or seriousness. English capitalisation carries no such function: it is a purely referential device that marks a word as pointing to one specific, nameable entity, never a mark of how significant the writer considers the idea to be.',
         points: [
           'Capitalise the first word of a sentence and the pronoun I.',
           'Capitalise proper nouns: Pakistan, the Punjab Assembly, the Ministry of Finance, Islam, Urdu, January, Tuesday.',
           'Capitalise a title before a name: President Mandela, Justice Cornelius. Lower-case it when it stands alone: the president signed the order.',
           'Do not capitalise seasons, directions used generally, subjects of study (except languages), or common nouns for emphasis.',
           'In a book or article title, capitalise the first, last and all main words.',
+          'Directions are capitalised only when they name a fixed region: South Asia, the North-West Frontier (historic name), but not when used generally: the delegation travelled south.',
+          'A common noun followed by a number acts like a proper noun and is capitalised: Chapter 4, Article 25, Section 144 — but only in that specific numbered form, not generally (the chapter was long).',
         ],
         models: [
           { sentence: 'The federal government announced relief; the Government of Punjab followed.', note: 'Lower case when general, capital when it is the name of a specific body.' },
           { sentence: 'She studies economics and English at Government College University.', note: 'English is a language, so it keeps its capital; economics does not.' },
+          { sentence: 'The petitioner cited Article 199 before the high court.', note: 'Article 199 is a specific numbered provision and is capitalised; a general reference to “the article” is not.' },
+          { sentence: 'Justice Farooq wrote the dissenting note; the justice later clarified his reasoning.', note: 'Capitalised before the name, lower case when the title stands alone.' },
         ],
       },
       {
         heading: 'Ending a sentence',
-        plain: 'A statement ends with a full stop, a direct question with a question mark, and a genuine exclamation with an exclamation mark — which you should almost never need in formal writing.',
+        plain: 'A statement ends with a full stop, a direct question with a question mark, and a genuine exclamation with an exclamation mark — which you should almost never need in formal writing. The rule that trips candidates up most is the indirect question: it contains question words (whether, what, why, when) and reports the content of a question, so it feels like a question, but grammatically it has become a statement about a question, and statements end with full stops. The test is simple — has the word order actually inverted into a question (has the file …?) or stayed in statement order (the file had been …)? Statement order always takes a full stop, however question-like the vocabulary sounds.',
         points: [
           'An indirect question ends with a full stop: He asked whether the file had been moved.',
           'A polite request in question form takes a full stop: Kindly confirm receipt.',
           'Never use more than one exclamation or question mark.',
           'Abbreviations that end in a full stop absorb the sentence-ending stop: … at 9 a.m.',
+          'A tag question keeps its own question mark even inside a longer sentence: The file was closed, wasn’t it?',
+          'A direct quotation of a question inside a statement keeps the question mark inside the quotation marks: He asked, “Has the file been closed?”',
         ],
         models: [
           { sentence: 'Has the notification been issued?', note: 'A direct question — question mark.' },
           { sentence: 'He asked whether the notification had been issued.', note: 'An indirect question — full stop.' },
+          { sentence: 'Kindly indicate whether the extension has been approved.', note: 'A formal indirect request — statement word order, full stop.' },
         ],
       },
       {
         heading: 'Four comma jobs you use constantly',
-        plain: 'Most comma errors come from using commas for breathing rather than for structure. Commas do four regular jobs. If a comma is not doing one of them, delete it.',
+        plain: 'Most comma errors come from using commas for breathing rather than for structure. Commas do four regular jobs. If a comma is not doing one of them, delete it. Treating the comma as a breathing mark is a habit carried over from reading aloud, where a slight pause naturally falls wherever the voice needs a rest — but written punctuation is a structural signal for a silent reader, not a performance instruction, and a pause that “feels right” when spoken often lands in a place, such as between the subject and the verb, where a comma is never grammatically permitted.',
         points: [
           'Job 1 — separate items in a list: rice, wheat, cotton and sugar cane.',
           'Job 2 — join two independent clauses before and, but, or, so, yet, for, nor.',
           'Job 3 — mark off an introductory phrase or clause: In the long run, the cost will fall.',
           'Job 4 — enclose non-essential information: The DC, who arrived late, apologised.',
           'Never place a comma between a subject and its verb.',
+          'A fifth minor job: separating two or more adjectives that each independently describe the same noun: a slow, cumbersome process (but not a bright red flag, since bright describes red, not flag, directly).',
+          'A short introductory word (however, meanwhile, first, next) still takes a comma even when it is only one word long: First, the tribunal heard the petitioner.',
         ],
         models: [
           { sentence: 'After the audit, the department revised its procedures.', note: 'Job 3: introductory phrase.' },
           { sentence: 'The scheme was expensive, but it worked.', note: 'Job 2: two independent clauses.' },
+          { sentence: 'The province procured wheat, fertiliser, seed and machinery before the sowing season.', note: 'Job 1: four items in a list, joined at the end by and.' },
         ],
         table: {
           caption: 'Comma or no comma?',
@@ -796,17 +932,21 @@ export const grammarPhase1: GrammarLesson[] = [
       },
       {
         heading: 'The apostrophe',
-        plain: 'An apostrophe shows possession or a missing letter. It never makes a plural. “The 1990s” and “three MPs” need no apostrophe at all.',
+        plain: 'An apostrophe shows possession or a missing letter. It never makes a plural. “The 1990s” and “three MPs” need no apostrophe at all. Confusion arises because the possessive -s and the plural -s sound identical when spoken (officer’s and officers both end in the same /-s/ or /-z/ sound), so the ear gives no clue about which one a written sentence needs — this is one of the few English rules that must be learned visually, by checking meaning (does this word own something, or is it simply more than one?) rather than by ear.',
         points: [
           'Singular owner: the officer’s file.',
           'Plural owner ending in -s: the officers’ files.',
           'Irregular plural: the children’s school.',
           'It’s = it is. Its = belonging to it. There is no word its’.',
           'Never write apostrophes in plurals: potato’s, MNA’s, 1980’s are all wrong.',
+          'Joint ownership of one thing takes one apostrophe on the last name only: the husband and wife’s property; separate ownership of separate things takes an apostrophe on each: the husband’s and wife’s separate accounts.',
+          'A compound noun takes the apostrophe on its last word: the attorney general’s opinion, not the attorney’s general opinion.',
         ],
         models: [
           { sentence: 'The witness’s statement contradicted the witnesses’ accounts.', note: 'One witness, then several witnesses.' },
           { sentence: 'It’s clear that the department has lost its file.', note: 'It’s = it is; its = possession.' },
+          { sentence: 'The commissioner and the registrar’s joint report was submitted on time.', note: 'One shared report, so the apostrophe sits only on the last name, registrar.' },
+          { sentence: 'The director general’s decision overruled the committee’s recommendation.', note: 'The apostrophe attaches to the last word of the title, general, not to director.' },
         ],
       },
     ],
@@ -817,6 +957,10 @@ export const grammarPhase1: GrammarLesson[] = [
       { wrong: 'The Ministry issued three notification’s in one week.', right: 'The ministry issued three notifications in one week.', why: 'An apostrophe never forms a plural.' },
       { wrong: 'Its important to note that the committee submitted it’s report late.', right: 'It’s important to note that the committee submitted its report late.', why: 'It’s = it is; its = belonging to it. The sentence has them the wrong way round.' },
       { wrong: 'In the Winter of 2021 the Northern areas received record Snowfall.', right: 'In the winter of 2021, the northern areas received record snowfall.', why: 'Seasons, general directions and common nouns take no capital; the introductory phrase takes a comma.' },
+      { wrong: 'The petitioner cited article 199 of the Constitution.', right: 'The petitioner cited Article 199 of the Constitution.', why: 'A common noun followed by a specific number acts like a proper noun and is capitalised.' },
+      { wrong: 'Do you know that when the audit will be completed?', right: 'Do you know when the audit will be completed?', why: 'An embedded question keeps statement word order and drops that; a question mark is correct here because the whole sentence is a direct question.' },
+      { wrong: 'The three MP’s who voted against the bill were suspended.', right: 'The three MPs who voted against the bill were suspended.', why: 'A plural abbreviation takes a plain -s; an apostrophe never marks a plural.' },
+      { wrong: 'The chairman and secretarys signatures were both required.', right: 'The chairman’s and the secretary’s signatures were both required.', why: 'Two people each owning a separate signature each need their own apostrophe.' },
     ],
     pitfalls: [
       'Capitalising government, country, nation or education for emphasis.',
@@ -842,6 +986,8 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd6q8', kind: 'spot', prompt: 'Find the error: “The childrens (A) school reopened (B) after the floods (C) had receded (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Children is already plural, so the possessive is children’s.' },
       { id: 'd6q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['Do you know that when the results will be announced?', 'Do you know when the results will be announced?', 'Do you know when will the results be announced?', 'Do you know that when will the results be announced?'], answer: 1, why: 'An embedded question keeps statement word order and takes no that.' },
       { id: 'd6q10', kind: 'spot', prompt: 'Find the error: “The Summer of 2022 (A) brought record flooding (B) to southern Punjab (C) and Sindh (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Seasons are not capitalised: “The summer of 2022”.' },
+      { id: 'd6q11', kind: 'spot', prompt: 'Find the error: “The husband’s and wife’s (A) joint account (B) was frozen (C) pending the inquiry (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'One account jointly owned takes one apostrophe on the last name only: “the husband and wife’s joint account”.' },
+      { id: 'd6q12', kind: 'choice', prompt: 'Which sentence is punctuated correctly?', options: ['She wondered whether the notice had been posted?', 'She wondered whether the notice had been posted.', 'She wondered, whether the notice had been posted.', 'She wondered that whether the notice had been posted.'], answer: 1, why: 'An indirect question keeps statement word order, drops that and takes no comma before whether; it ends with a full stop, not a question mark.' },
     ],
     corrections: [
       { id: 'd6c1', task: 'the Chief Secretary asked that why the file had not been moved?', model: 'The chief secretary asked why the file had not been moved.', note: 'Capital at the start of the sentence, no capital for a title without a name, no that, statement word order, full stop.' },
@@ -849,6 +995,7 @@ export const grammarPhase1: GrammarLesson[] = [
       { id: 'd6c3', task: 'Its clear that the committee submitted it’s report after the deadline.', model: 'It’s clear that the committee submitted its report after the deadline.', note: 'It’s = it is; its = belonging to it.' },
       { id: 'd6c4', task: 'In the Spring of 2020 many School’s in the Province were closed.', model: 'In the spring of 2020, many schools in the province were closed.', note: 'Seasons and common nouns take no capital; plurals take no apostrophe; the introductory phrase takes a comma.' },
       { id: 'd6c5', task: 'The Deputy Commissioner who chaired the meeting, announced three measures, and left early.', model: 'The deputy commissioner, who chaired the meeting, announced three measures and left early.', note: 'The aside needs a matched pair of commas; and left early shares the same subject, so it takes no comma.' },
+      { id: 'd6c6', task: 'He asked that whether the manager’s and clerks’ separate reports had been merged, and if the summarys were accurate?', model: 'He asked whether the manager’s and the clerks’ separate reports had been merged, and if the summaries were accurate.', note: 'An indirect question drops that and ends with a full stop, not a question mark; separate ownership needs an apostrophe on each name; and summary becomes summaries in the plural, never summarys.' },
     ],
     transfer: 'Write a short formal paragraph of six sentences announcing a decision — a scholarship, a transfer, a new rule. Use at least one list, one introductory phrase, one non-essential clause in a pair of commas, and one possessive apostrophe. Then read it back and delete every comma that is not doing one of the four jobs.',
     checklist: [

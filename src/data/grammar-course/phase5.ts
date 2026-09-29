@@ -9,6 +9,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'Words that are constantly confused',
     goal: 'Distinguish the word pairs and near-pairs that appear most often in error-correction and vocabulary questions.',
     why: 'These are free marks. Each pair is a fixed fact, and unlike a rule of syntax it cannot be reasoned out in the hall. Learning fifty pairs properly is worth more than a thousand memorised synonyms.',
+    examTip: 'This topic is tested as a fill-in-the-blank vocabulary item or as an error-spotting sentence with one pair swapped, almost never as a full-sentence rewrite. The examiner\'s favourite trap is to plant the rarer but correct word — judicious, elicit, flout — as the option that "looks wrong", banking on candidates who only half-know it to talk themselves out of the right answer.',
     minutes: 50,
     terms: [
       { term: 'Homophone', meaning: 'Words that sound alike but differ in meaning and spelling: principal / principle.' },
@@ -18,7 +19,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'Pairs tested every year',
-        plain: 'Learn each pair inside a sentence, not as a definition. A sentence fixes the grammar as well as the meaning.',
+        plain: 'Learn each pair inside a sentence, not as a definition. A sentence fixes the grammar as well as the meaning: affect and effect, for instance, are not simply two spellings of one idea but two different parts of speech, and a student who memorises only the meaning still writes the wrong one under pressure because the definition never told them which word takes a subject and which takes an article. Most of these pairs share a Latin root, which is exactly why the eye slides past the difference — principal and principle both descend from the same idea of "first" or "chief", so the spelling looks almost interchangeable unless you have drilled which one is a person and which is an idea. Examiners choose these pairs precisely because no rule of syntax will rescue you in the hall: you either know the sentence or you guess, and guessing is wrong about half the time, which is worse than leaving the item blank in a paper with negative marking.',
         points: [
           'affect (verb) / effect (noun): The duty affected prices; its effect was immediate.',
           'principal (main; head of a college) / principle (a rule).',
@@ -35,10 +36,15 @@ export const grammarPhase5: GrammarLesson[] = [
           'access (entry) / excess (too much).',
           'assure (a person) / ensure (a thing happens) / insure (against loss).',
           'eminent (distinguished) / imminent (about to happen).',
+          'elicit (to draw out) / illicit (unlawful).',
+          'adapt (to adjust) / adopt (to take up formally).',
+          'compliment (praise) / complementary (completing each other, as with complementary skills).',
         ],
         models: [
           { sentence: 'The principal advised the students on a principle of fairness.', note: 'Three of the commonest pairs in one sentence.' },
           { sentence: 'The department must ensure delivery, assure the public and insure the consignment.', note: 'Three verbs, three different jobs.' },
+          { sentence: 'The court could not accept an illicit confession elicited under duress.', note: 'A near-pair distinguished by one letter and a very different meaning.' },
+          { sentence: 'The province had to adapt its curriculum before the federal board would adopt it.', note: 'Adjust versus formally accept — two verbs students routinely swap.' },
         ],
         table: {
           caption: 'More pairs worth memorising',
@@ -60,12 +66,15 @@ export const grammarPhase5: GrammarLesson[] = [
             ['sensible', 'showing sense', 'sensitive', 'easily affected'],
             ['imply', 'the speaker suggests', 'infer', 'the listener concludes'],
             ['emigrate', 'to leave a country', 'immigrate', 'to enter a country'],
+            ['flout', 'to disobey openly', 'flaunt', 'to show off'],
+            ['moral', 'concerned with right and wrong', 'morale', 'confidence and spirit'],
+            ['statue', 'a carved figure', 'stature', 'reputation or height'],
           ],
         },
       },
       {
         heading: 'Words used differently in local English',
-        plain: 'Some expressions are standard in Pakistani speech but are not standard written English. They are marked wrong in an examination, so learn the written form.',
+        plain: 'Some expressions are standard in Pakistani speech, in office files and even in local newspapers, but they are not standard written English anywhere else, and an examiner trained on international usage marks them as errors rather than as regional colour. This is the hardest category for a strong candidate to fix, because these phrases do not feel foreign — you have read them in official correspondence your whole life, so your ear accepts them as correct. The only reliable fix is to replace the habit at the level of the phrase, not the single word: read the local version, say the standard version aloud, and use only the standard version in every practice answer until it becomes the automatic choice.',
         points: [
           'Do the needful → take the necessary action.',
           'Revert back → reply.',
@@ -75,15 +84,18 @@ export const grammarPhase5: GrammarLesson[] = [
           'Discuss about → discuss. Order for → order. Marry with → marry.',
           'Out of station → away from the city, on tour.',
           'Passing out (from a college) → graduating.',
+          'Good name → name (good name is a literal translation and is never used by native speakers of English).',
+          'Since morning / since two hours → since morning is fine for a point in time, but a duration takes for: for two hours, not since two hours.',
         ],
         models: [
           { sentence: 'Kindly take the necessary action and inform this office.', note: 'The standard written form of a familiar sentence.' },
           { sentence: 'The meeting has been brought forward to Monday.', note: 'Prepone is not standard written English.' },
+          { sentence: 'Please state your name for the record.', note: '"Good name" is a direct translation and never appears in standard written English.' },
         ],
       },
       {
         heading: 'Spelling traps',
-        plain: 'A handful of spellings account for most spelling errors in examination scripts. Learn these and check them deliberately when you proofread.',
+        plain: 'A handful of spellings account for most spelling errors in examination scripts, and they recur for a reason: each one contains a silent letter, a doubled consonant, or a vowel that is pronounced one way and written another, so the ear gives no clue at all. Learn these as shapes, not as sounds, and check them deliberately when you proofread rather than trusting that a wrong spelling will look wrong — a familiar wrong spelling looks perfectly normal to a tired eye in the last ten minutes of a paper.',
         points: [
           'accommodation, occurrence, recommend, embarrass, necessary, privilege.',
           'separate, definitely, government, environment, maintenance, argument.',
@@ -91,10 +103,13 @@ export const grammarPhase5: GrammarLesson[] = [
           'committee, occasion, possession, profession, professor.',
           'British forms for a Pakistani paper: organise, realise, analyse, programme, defence, offence, labour, behaviour, centre.',
           'Keep one system throughout; do not mix British and American spellings.',
+          'Doubled consonants that trip most candidates: occurred, occurrence, referred, preferred, transferred, committed, embarrassed.',
+          'Silent or unexpected letters: conscience, foreign, February, Wednesday, restaurant, forty (not fourty).',
         ],
         models: [
           { sentence: 'The committee recommended separate accommodation.', note: 'Three of the most frequently misspelt words.' },
           { sentence: 'The government will analyse the programme’s performance.', note: 'Consistent British spelling.' },
+          { sentence: 'The officer occurred, occurrence, referred: the tribunal referred the matter after the second occurrence.', note: 'The doubled consonant survives every added ending: refer, referred, referring.' },
         ],
       },
     ],
@@ -105,6 +120,10 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'Kindly do the needful and revert back at the earliest.', right: 'Kindly take the necessary action and reply as soon as possible.', why: 'Neither expression is standard written English.' },
       { wrong: 'He is a very industrial student who works hard.', right: 'He is a very industrious student who works hard.', why: 'Industrious means hardworking; industrial relates to industry.' },
       { wrong: 'The minister implied from the report that enforcement had failed.', right: 'The minister inferred from the report that enforcement had failed.', why: 'You infer from evidence; you imply in what you say.' },
+      { wrong: 'The judge showed a judicial approach by consulting both parties before ruling.', right: 'The judge showed a judicious approach by consulting both parties before ruling.', why: 'Judicious means showing good sense; judicial only means relating to a court, so it cannot itself describe wise conduct.' },
+      { wrong: 'The province decided to loose the restriction on inter-district travel.', right: 'The province decided to loosen the restriction on inter-district travel.', why: 'Loose is the adjective (not tight); the verb meaning to make less strict is loosen, and lose (to misplace) is a third word again.' },
+      { wrong: 'The council will discuss about the new water tariff on Monday.', right: 'The council will discuss the new water tariff on Monday.', why: 'Discuss already means "to talk about"; adding about is a redundant local usage.' },
+      { wrong: 'The report’s complementary remarks on the ministry were widely quoted.', right: 'The report’s complimentary remarks on the ministry were widely quoted.', why: 'Complimentary (praising) is meant here, not complementary (completing something else).' },
     ],
     pitfalls: [
       'Using effect as a verb when you mean influence.',
@@ -130,6 +149,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd25q8', kind: 'gap', prompt: 'The two candidates differed on many points; the ____ was better prepared.', options: ['later', 'latter', 'last', 'lately'], answer: 1, why: 'Latter means the second of two; later refers to time.' },
       { id: 'd25q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['Everyone was present accept the treasurer.', 'Everyone was present except the treasurer.', 'Everyone was present excepting of the treasurer.', 'Everyone was present accepting the treasurer.'], answer: 1, why: 'Except means apart from; accept means to receive.' },
       { id: 'd25q10', kind: 'spot', prompt: 'Find the error: “The government will analyze (A) the programme (B) and publish (C) its defence (D) of the policy.”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'The rest of the sentence uses British spelling, so analyse is required. Keep one system throughout.' },
+      { id: 'd25q11', kind: 'gap', prompt: 'The minister accused the contractor of ____ the safety regulations.', options: ['flaunting', 'flouting', 'flouted', 'flout'], answer: 1, why: 'Flout means to disobey openly; flaunt means to show off. The two are frequently swapped.' },
+      { id: 'd25q12', kind: 'spot', prompt: 'Find the error: “The general’s high moral (A) among the troops (B) was credited (C) for the victory (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Morale is confidence and spirit; moral concerns right and wrong. The context needs morale.' },
     ],
     corrections: [
       { id: 'd25c1', task: 'The principle reason for the delay was that less officers were available than required.', model: 'The principal reason for the delay was that fewer officers were available than required.', note: 'Principal means main; officers are countable, so fewer.' },
@@ -137,6 +158,7 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd25c3', task: 'The eminent collapse of the bridge was a historical moment for the district administration.', model: 'The imminent collapse of the bridge was a historic moment for the district administration.', note: 'Imminent means about to happen; historic means important in history.' },
       { id: 'd25c4', task: 'The amount of complaints has risen, and the funds were divided between the six districts.', model: 'The number of complaints has risen, and the funds were divided among the six districts.', note: 'Complaints are countable; among is used for more than two.' },
       { id: 'd25c5', task: 'He advice me to practice grammar daily and to analyze my mistakes seperately.', model: 'He advised me to practise grammar daily and to analyse my mistakes separately.', note: 'Verb forms advise and practise, British spelling analyse, and the correct spelling of separately.' },
+      { id: 'd25c6', task: 'The councel advised the accused to except the plea bargain, but he decided to insure his own defense rather than loose the case on a technicality.', model: 'The counsel advised the accused to accept the plea bargain, but he decided to ensure his own defence rather than lose the case on a technicality.', note: 'Four pairs restored: counsel (a lawyer) not council, accept not except, ensure not insure, British spelling defence, and lose (to fail to win) not loose.' },
     ],
     transfer: 'Make a page of twenty confused pairs. Beside each one, write a single sentence of your own that uses both words correctly. Sentences fix these pairs far better than definitions, because they carry the grammar with the meaning.',
     checklist: [
@@ -153,6 +175,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'The minimum-correction method',
     goal: 'Correct only the actual error in a sentence, exactly as the FPSC sentence-correction question requires.',
     why: 'Candidates lose marks by rewriting a sentence they were asked to correct. The instruction is to remove the fault, not to improve the style. A rewritten sentence is marked wrong even when it is better English.',
+    examTip: 'This is always a four-option "select the corrected sentence" item. The trap option fixes the real fault but also rewrites an unrelated correct phrase, and that option is marked wrong for touching more than the fault. A second trap offers a genuinely better rewrite that changes meaning or voice — correct answer discipline means resisting exactly the option a strong writer\'s instinct prefers.',
     minutes: 50,
     terms: [
       { term: 'Minimum correction', meaning: 'Changing the smallest number of words needed to make the sentence grammatical.' },
@@ -162,7 +185,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'The six-pass scan',
-        plain: 'Do not read a sentence hoping the error will jump out. Scan it in a fixed order, and stop at the first genuine fault. In an examination this order takes about twenty seconds per sentence.',
+        plain: 'Do not read a sentence hoping the error will jump out. A sentence read as a whole gives you meaning, and meaning is exactly what stops you noticing grammar — you understand what the writer intended, so your mind quietly repairs the fault as you read and you finish the sentence convinced nothing is wrong. Scanning in a fixed order defeats this: you are no longer reading for sense, you are testing one narrow thing at a time, so a fault that your comprehension smoothed over cannot hide from a targeted question. Stop at the first genuine fault you can name, because FPSC sentence-correction items are built around exactly one error type; hunting for a second, subtler fault after you have already found a clear one usually means talking yourself out of the correct answer. In an examination this order takes about twenty seconds per sentence once it is automatic, which is the entire reason to drill it now rather than to invent an order during the paper.',
         points: [
           'Pass 1 — subject and verb: find the head noun, check agreement.',
           'Pass 2 — tense: is every verb form consistent with the time markers?',
@@ -174,11 +197,12 @@ export const grammarPhase5: GrammarLesson[] = [
         models: [
           { sentence: 'Each of the officers have submitted their report. → Each of the officers has submitted his report.', note: 'Pass 1 finds the agreement error; pass 4 finds the pronoun.' },
           { sentence: 'He is senior than me by two years. → He is senior to me by two years.', note: 'Pass 5 finds it: one word changed.' },
+          { sentence: 'The number of pending cases have doubled since 2019. → The number of pending cases has doubled since 2019.', note: 'Pass 1 stops here: the head noun is number, not cases.' },
         ],
       },
       {
         heading: 'Change as little as possible',
-        plain: 'Once you have found the fault, ask how few words you can change to remove it. Keep the original vocabulary, the original word order and the original meaning.',
+        plain: 'Once you have found the fault, ask how few words you can change to remove it. Keep the original vocabulary, the original word order and the original meaning — the question is testing whether you can identify and repair a single grammatical fault, not whether you can produce better prose, and examiners specifically build a wrong-but-tempting "improved" option into the choices to catch candidates who cannot resist rewriting. This is the single most common reason a genuinely strong writer loses marks on this question type: good instincts for style actively work against you here, because a stylistic improvement that touches words the examiner did not question is marked exactly as wrong as leaving the real error untouched.',
         points: [
           'Do not replace the writer’s vocabulary with your own.',
           'Do not convert active into passive or the reverse unless the voice is the error.',
@@ -204,12 +228,14 @@ export const grammarPhase5: GrammarLesson[] = [
             ['modifier', 'move one word or phrase'],
             ['parallelism', 'change the odd item to match the others'],
             ['dangling participle', 'change the subject of the main clause'],
+            ['faulty comparison', 'insert that of / those of, or other'],
+            ['redundancy', 'delete the repeated word or phrase'],
           ],
         },
       },
       {
         heading: 'Do not correct what is not wrong',
-        plain: 'Examiners include parts that look unusual but are correct. Changing them costs marks. Before you alter anything, be able to name the rule it breaks.',
+        plain: 'Examiners include parts that look unusual but are correct, precisely to catch the candidate who assumes anything unfamiliar must be an error. Changing them costs marks in two ways: you have introduced a new fault into a sentence that was already correct, and you have used up time you needed for the item that actually had a fault. Before you alter anything, be able to name the rule it breaks in one short phrase — "singular head noun", "comma pair round a non-defining clause", "correct inversion after an adverbial". If you cannot produce that phrase in under fifteen seconds, the part is very likely correct and simply unfamiliar, because formal written English regularly uses constructions — inversion, the semicolon, the long non-defining clause — that spoken English avoids.',
         points: [
           'A long sentence is not automatically a run-on.',
           'The passive is not automatically an error.',
@@ -220,11 +246,12 @@ export const grammarPhase5: GrammarLesson[] = [
         models: [
           { sentence: 'The report, which ran to four hundred pages, was never read.', note: 'A correctly punctuated non-defining clause. Leave it.' },
           { sentence: 'Attached to the letter are two annexures.', note: 'Correct inversion, correct plural verb. Leave it.' },
+          { sentence: 'Not a single objection was raised at the hearing.', note: 'Fronted negative with correct inversion of subject and verb. Leave it.' },
         ],
       },
       {
         heading: 'Working an error-spotting question',
-        plain: 'When the sentence is divided into lettered parts, the fault is inside one of them. Test each part against the six passes and eliminate.',
+        plain: 'When the sentence is divided into lettered parts, the fault is inside exactly one of them, and the other three parts exist only to consume your attention. Test each part against the six passes in order and eliminate the parts you can clear quickly, rather than reading all four with equal suspicion — an efficient candidate typically clears three parts within the first ten seconds and spends the remaining time confirming the fourth.',
         points: [
           'Read the whole sentence once at normal speed before looking at the parts.',
           'Then check each part in the six-pass order.',
@@ -234,6 +261,7 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'The number of applications (A) received this year (B) have exceeded (C) all expectations (D).', note: 'Pass 1: head noun number is singular, so C is the answer.' },
+          { sentence: 'The high court (A), having heard both sides (B), reserve (C) its judgement until Friday (D).', note: 'Pass 1: court is a singular collective noun here, so C is the fault, not B.' },
         ],
       },
     ],
@@ -243,6 +271,10 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'Correct “The scheme was launched in 2019 and it is still not funded” → “Launched in 2019, the scheme remains unfunded.”', right: 'The scheme was launched in 2019 and is still not funded.', why: 'Style improvements are not corrections. Only the faulty repetition of the subject needed attention.' },
       { wrong: 'Correct “Although he was ill, but he attended” → “He attended despite his illness.”', right: 'Although he was ill, he attended.', why: 'Deleting one word removes the fault; the rewrite is unnecessary.' },
       { wrong: 'Correct “The quality of the answers were poor” → “The answers were of poor quality.”', right: 'The quality of the answers was poor.', why: 'One verb form is wrong; nothing else should move.' },
+      { wrong: 'Correct “The province has less resources than it requires” → “The province is short of resources.”', right: 'The province has fewer resources than it requires.', why: 'Only less needs to become fewer; resources is countable, and everything else in the sentence stays.' },
+      { wrong: 'Correct “Neither the officers nor the director were informed” → “Nobody was told, neither the officers nor the director.”', right: 'Neither the officers nor the director was informed.', why: 'The rewrite reorders the whole sentence; the fault was a single verb agreeing with the nearer subject.' },
+      { wrong: 'Correct “The report was submitted by him and it was rejected by the board” → “He submitted the report, but the board threw it out.”', right: 'The report was submitted by him and was rejected by the board.', why: 'Nothing was ungrammatical about the passive voice or the repeated subject; only the redundant "it" before "was rejected" needed removing.' },
+      { wrong: 'Correct “The bridge is more safer since the repairs were completed” → “The bridge has become completely safe since the repairs.”', right: 'The bridge is safer since the repairs were completed.', why: 'One double comparative is the entire fault; the rest of the sentence, including since, is correct as it stands.' },
     ],
     pitfalls: [
       'Rewriting the sentence instead of repairing it.',
@@ -268,6 +300,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd26q8', kind: 'choice', prompt: 'Which sentence needs no correction?', options: ['The report, which ran to four hundred pages, was never read.', 'The report which ran to four hundred pages, was never read.', 'The report, which ran to four hundred pages was never read.', 'The report which, ran to four hundred pages, was never read.'], answer: 0, why: 'A non-defining clause enclosed in a matched pair of commas.' },
       { id: 'd26q9', kind: 'spot', prompt: 'Find the error: “Having reviewed the file (A), a decision (B) was taken (C) to close the case (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'A decision did not review the file. The minimum repair names the doer: “the officer took a decision”.' },
       { id: 'd26q10', kind: 'choice', prompt: 'Two corrections are possible for “If I would have known, I would have informed you.” Which changes fewer words?', options: ['Had I known, I would have informed you.', 'If I had known, I would have informed you.', 'I would have informed you if I had been aware.', 'Knowing that, I would have informed you.'], answer: 1, why: 'Replacing would have with had changes two words and keeps the structure.' },
+      { id: 'd26q11', kind: 'spot', prompt: 'Find the error: “The board (A), after considering all the objections (B), reserve (C) the right to reject any bid (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Board is a singular collective noun here, so the verb is reserves. Only one word changes.' },
+      { id: 'd26q12', kind: 'choice', prompt: 'Which is the minimum correction of “The report highlight the fact that funds were misused”?', options: ['The report highlights that funds were misused.', 'The report highlights the fact that funds were misused.', 'The report was highlighting the fact that funds were misused.', 'The report has highlighted that the funds were misused, showing misuse.'], answer: 1, why: 'One verb form is wrong; deleting "the fact that" would be a style improvement, not a required correction.' },
     ],
     corrections: [
       { id: 'd26c1', task: 'Correct with the fewest changes: “One of my friend have gone to abroad for higher studies.”', model: 'One of my friends has gone abroad for higher studies.', note: 'Three minimal changes: plural after one of, singular verb, and abroad takes no preposition.' },
@@ -275,6 +309,7 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd26c3', task: 'Correct with the fewest changes: “He was so tired that he could not hardly walk.”', model: 'He was so tired that he could hardly walk.', note: 'Hardly is already negative; deleting not removes the double negative.' },
       { id: 'd26c4', task: 'Correct with the fewest changes: “She is living in Lahore since 2015 and is working with a bank.”', model: 'She has been living in Lahore since 2015 and has been working with a bank.', note: 'Since requires the present perfect continuous; the vocabulary is untouched.' },
       { id: 'd26c5', task: 'Correct with the fewest changes: “Despite of his illness, he attended the meeting and discussed about the agenda.”', model: 'Despite his illness, he attended the meeting and discussed the agenda.', note: 'Two deletions. Nothing is added, and the sentence keeps its shape.' },
+      { id: 'd26c6', task: 'Correct with the fewest changes: “The board of directors have took a decision to which the shareholders is objecting strongly.”', model: 'The board of directors has taken a decision to which the shareholders are objecting strongly.', note: 'Three minimal changes: singular verb for board, correct participle taken, and plural verb for shareholders — nothing else moves.' },
     ],
     transfer: 'Take ten sentences from any error-correction exercise. For each one, write the letter of the faulty part, the name of the rule, and the corrected words only — not the whole sentence. If you cannot name the rule, mark the item and come back to the relevant day of this course.',
     checklist: [
@@ -291,6 +326,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'Grammar inside précis writing',
     goal: 'Compress a passage to a third of its length without breaking grammar, losing a qualification or distorting the logic.',
     why: 'Précis carries twenty marks and is lost more often to grammar than to comprehension. A candidate who understands the passage perfectly can still fail by producing ungrammatical compressed sentences.',
+    examTip: 'Précis grammar is tested through the marking scheme itself rather than through discrete questions: examiners deduct marks for fragments, comma splices, tense or person drift and lost qualifications inside your own compressed prose, so the "question format" is your own paragraph read back to you. Within auto-marked practice items, the trap is an option that compresses correctly but silently drops a qualifying phrase — it reads perfectly grammatical while quietly changing what the passage said.',
     minutes: 55,
     terms: [
       { term: 'Précis', meaning: 'A compressed version of a passage, usually about one third of its length, in your own words.' },
@@ -300,7 +336,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'Six ways to compress a sentence grammatically',
-        plain: 'Compression is a set of techniques, not a matter of deleting words at random. Each technique preserves the grammar while removing length.',
+        plain: 'Compression is a set of techniques, not a matter of deleting words at random. Each technique preserves the grammar while removing length, which is exactly what separates a précis from a summary written from memory: a summary can drop a qualification because the writer no longer remembers it mattered, but a técnique-driven compression only ever removes the words that carried no information, never the words that carried a fact. Candidates who compress by instinct tend to delete whichever clause looks longest, which is dangerous because length and importance are unrelated — a six-word qualifying phrase (in rural districts, since the 2019 reforms) often carries more of the marks than a fifteen-word illustration. Learn the six techniques as a checklist, not as a feeling, and apply them in the same order every time so that what you cut is always decided by its grammatical function, not by its size on the page.',
         points: [
           'Reduce a relative clause to a phrase: the officer who was appointed in May → the officer appointed in May.',
           'Turn a clause into a participle phrase: Because he had failed twice, he withdrew → Having failed twice, he withdrew.',
@@ -312,6 +348,8 @@ export const grammarPhase5: GrammarLesson[] = [
         models: [
           { sentence: 'Original: The scheme, which had been announced in 2019, failed because the funds that had been promised were never released.', note: '22 words.' },
           { sentence: 'Compressed: The scheme announced in 2019 failed because the promised funds were never released.', note: '13 words, every fact intact.' },
+          { sentence: 'Original: The court, which had reserved its judgement for six months, finally ruled that the provincial law was unconstitutional.', note: '20 words.' },
+          { sentence: 'Compressed: The court, after reserving judgement for six months, ruled the provincial law unconstitutional.', note: '14 words; the relative clause becomes a phrase and the nominalisation a plain adjective.' },
         ],
         table: {
           caption: 'What to keep and what to cut',
@@ -328,7 +366,7 @@ export const grammarPhase5: GrammarLesson[] = [
       },
       {
         heading: 'Keep the frame consistent',
-        plain: 'A précis is a report. Choose the third person and a consistent tense at the start and hold both to the end. Mixed frames are the commonest grammatical failure in précis answers.',
+        plain: 'A précis is a report of what the passage says, not a conversation with the reader and not a restatement in your own voice. Choose the third person and a consistent tense at the start and hold both to the end, because the moment you slip into "I think" or "we can see", you have stopped reporting and started arguing — and the examiner is marking whether you can compress and reproduce an argument, not whether you agree with it. Mixed frames are the commonest grammatical failure in précis answers precisely because a précis is written under time pressure sentence by sentence, so a candidate who starts confidently in "the writer argues" often drifts into "the writer argued" by the third sentence simply because the original passage used the past tense somewhere and the eye copies what it just read.',
         points: [
           'Use the third person throughout: the writer argues, the passage shows.',
           'Do not switch between I, we, you and one.',
@@ -339,11 +377,12 @@ export const grammarPhase5: GrammarLesson[] = [
         models: [
           { sentence: 'The writer argues that enforcement, rather than legislation, is the binding constraint.', note: 'Third person, present simple, no quotation.' },
           { sentence: 'The passage shows that the scheme failed for three reasons.', note: 'Same frame, maintained.' },
+          { sentence: 'The essay contends that provincial autonomy has weakened, not strengthened, federal coordination on climate policy.', note: 'Present simple, third person, throughout one sentence — a model for holding the frame across a longer claim.' },
         ],
       },
       {
         heading: 'Do not break the sentence while shortening it',
-        plain: 'Under time pressure, candidates cut a sentence in half and leave a fragment, or join two compressed sentences with a comma. Every compression must still be a complete sentence.',
+        plain: 'Under time pressure, candidates cut a sentence in half and leave a fragment, or join two compressed sentences with a comma because a full stop feels like it interrupts the flow of the argument. Both faults come from the same cause: compressing at the level of individual words instead of at the level of the clause. Every compression must still be a complete sentence — a subject and a finite verb, correctly connected to whatever comes before and after it — because a précis with a grammatical fault is marked down twice: once for the fault itself, and once because the examiner can no longer be certain you understood the relationship between the ideas you have joined.',
         points: [
           'Check that every compressed sentence has a subject and a finite verb.',
           'Check that participle phrases attach to the right subject.',
@@ -379,6 +418,9 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'The passage shows that the policy failed, the reasons were structural.', right: 'The passage shows that the policy failed for structural reasons.', why: 'Compression had produced a comma splice.' },
       { wrong: 'The writer argued that enforcement is weak and he says the law is adequate.', right: 'The writer argues that enforcement is weak although the law is adequate.', why: 'The tense frame must be held steady, and the contrast must be shown.' },
       { wrong: 'The scheme failed.', right: 'The scheme, launched in 2019, failed in most districts within two years.', why: 'Over-compression has removed three qualifications that the passage supplied.' },
+      { wrong: 'The essay says courts are slow, judges are careless and lawyers delay cases on purpose.', right: 'The essay argues that delay in the courts results from procedural backlog rather than the conduct of judges or lawyers.', why: 'A list of separate complaints is not the same claim as the passage’s actual causal argument; compression must preserve the logic, not just the topics.' },
+      { wrong: 'The passage discuss that literacy rates has improved in some provinces.', right: 'The passage shows that literacy rates have improved in some provinces.', why: 'Two agreement errors survive into the précis; compression is not an excuse to stop checking grammar.' },
+      { wrong: 'The writer states that, as everybody knows, climate change is affecting agriculture badly.', right: 'The writer states that climate change is affecting agricultural output.', why: '"As everybody knows" is the writer’s own aside and the candidate’s addition of agreement; a précis reports the claim without endorsing it.' },
     ],
     pitfalls: [
       'Adding your own opinion or outside information.',
@@ -404,6 +446,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd27q8', kind: 'choice', prompt: 'Which sentence avoids a comma splice after compression?', options: ['The policy failed, the reasons were structural.', 'The policy failed for structural reasons.', 'The policy failed, structural reasons.', 'Failing for structural reasons, the policy.'], answer: 1, why: 'One clause, one finite verb, no splice.' },
       { id: 'd27q9', kind: 'choice', prompt: 'Which opening is correct for a précis?', options: ['In this passage, I will explain that …', 'The writer argues that …', 'As we all know, …', 'This passage is very interesting because …'], answer: 1, why: 'A précis reports the passage in the third person and adds nothing.' },
       { id: 'd27q10', kind: 'choice', prompt: 'Original: “Funding stopped in 2019, and the scheme lapsed in most districts.” Which compression loses nothing?', options: ['The scheme lapsed when funding stopped.', 'The scheme lapsed in most districts after funding stopped in 2019.', 'Funding stopped and the scheme lapsed everywhere.', 'The 2019 scheme lapsed.'], answer: 1, why: 'Only option B keeps both the year and the qualification in most districts. A drops both; C changes the fact; D distorts it.' },
+      { id: 'd27q11', kind: 'choice', prompt: 'Compress without losing a qualification: “The scheme, which had succeeded mostly in urban centres, was extended nationwide.”', options: ['The scheme was extended nationwide.', 'The scheme, successful mostly in urban centres, was extended nationwide.', 'Succeeding, the scheme was extended nationwide.', 'The urban scheme was extended nationwide.'], answer: 1, why: 'Option A drops "mostly in urban centres"; only B reduces the relative clause to a phrase while keeping the qualification.' },
+      { id: 'd27q12', kind: 'choice', prompt: 'Which sentence is a complete compressed sentence, not a fragment?', options: ['Reversing two years of policy without consultation.', 'The circular, issued without consultation, reversing two years of policy.', 'The circular reversed two years of policy without consultation.', 'Reversing, without consultation, two years of policy.'], answer: 2, why: 'Only option C has a finite verb, reversed, attached to a subject; the others are participle fragments.' },
     ],
     corrections: [
       { id: 'd27c1', task: 'Compress without loss: “The government, which had been under considerable pressure from several quarters, finally decided to reverse the decision that it had taken earlier.”', model: 'Under pressure from several quarters, the government finally reversed its earlier decision.', note: 'The relative clause becomes a phrase and the nominalisation becomes a verb; every fact survives.' },
@@ -411,6 +455,7 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd27c3', task: 'Repair the frame: “The writer argued that enforcement is weak, and I agree that we must do something about it.”', model: 'The writer argues that enforcement is weak and that it must be strengthened.', note: 'One tense, third person throughout, and no opinion of your own.' },
       { id: 'd27c4', task: 'Repair the boundary: “The scheme lapsed, funding had stopped in 2019, most districts were affected.”', model: 'The scheme lapsed in most districts after funding stopped in 2019.', note: 'Two comma splices become one grammatical sentence with every fact intact.' },
       { id: 'd27c5', task: 'Compress without loss: “Because the data that had been collected were incomplete and because the method that was used had never been tested, the conclusion that the report reached was overstated.”', model: 'Because the data were incomplete and the method untested, the report’s conclusion was overstated.', note: 'Three relative clauses reduced; the causal logic and all three facts survive.' },
+      { id: 'd27c6', task: 'Compress without loss: “The committee, which had studied the issue for a very long period of time and which had held numerous meetings, at long last reached the conclusion that the scheme should be abandoned entirely.”', model: 'The committee, after prolonged study and numerous meetings, concluded that the scheme should be abandoned.', note: 'Two relative clauses reduce to one phrase, "reached the conclusion" becomes the verb concluded, and "entirely" is cut as redundant emphasis — no fact is lost.' },
     ],
     transfer: 'Take any editorial of about 400 words. Write a précis of about 130 words following the six-step method. Then check it three times, once each for boundaries, for tense and person, and for lost qualifications. Count the words and give it a title.',
     checklist: [
@@ -427,6 +472,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'Editing a paragraph under pressure',
     goal: 'Find and repair several different errors in a connected paragraph, which is how they actually appear in your own writing.',
     why: 'Single-sentence exercises train recognition. Paragraph editing trains the skill you actually use — proofreading your own answer in the last ten minutes of a paper, when errors are mixed and nothing is underlined.',
+    examTip: 'Paragraph-editing questions present four or five numbered sentences and ask which one is faulty — never which word — so the trap is that most of the sentences are flawless and deliberately unremarkable, tempting candidates to keep hunting past the actual answer. The planted error tends to sit in the first or last sentence, exactly where attention is weakest, so check those two positions before reading the set in order.',
     minutes: 55,
     terms: [
       { term: 'Proofreading', meaning: 'Reading specifically to find errors, not to judge content.' },
@@ -436,7 +482,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'Proofread in targeted passes, not all at once',
-        plain: 'You cannot look for eight kinds of error at the same time. Read the paragraph several times, each time hunting for one thing. Each pass is fast because you are ignoring everything else.',
+        plain: 'You cannot look for eight kinds of error at the same time, because attention genuinely does not divide that way: a mind primed to notice verb agreement will let an article error sail past in the same sentence, and a mind primed to notice articles will do the same to a preposition. This is not a character flaw to overcome with more concentration; it is how attention works, and the only real answer is to stop asking for divided attention at all. Read the paragraph several times, each time hunting for exactly one thing, and each pass becomes fast precisely because you are deliberately ignoring everything else — you are not reading more carefully overall, you are reading narrowly, which is a different and much more reliable skill.',
         points: [
           'Pass 1 — verbs: agreement and tense consistency.',
           'Pass 2 — articles: every singular countable noun.',
@@ -447,11 +493,12 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Six quick passes take less time than one slow reading and find far more.', note: 'Speed comes from narrowing what you are looking for.' },
+          { sentence: 'A verbs-only pass over a 200-word answer takes under a minute once it is practised.', note: 'Narrow attention is fast attention; this is the whole justification for passes over one careful read.' },
         ],
       },
       {
         heading: 'Where errors hide',
-        plain: 'Errors are not evenly distributed. They cluster in predictable places, so look there first when time is short.',
+        plain: 'Errors are not evenly distributed across a piece of writing. They cluster in predictable places because those places are exactly where your attention is on something other than grammar — planning what to say next, hurrying to finish, or holding a complicated structure in mind. Knowing the pattern lets you spend your scarcest resource, time, where it earns the most marks: look there first when the clock is short rather than reading the whole answer with equal care from the first word to the last.',
         points: [
           'The first sentence of a paragraph, written while you were still planning.',
           'The last sentence, written in a hurry.',
@@ -462,6 +509,7 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Check the first and last sentence of every paragraph before anything else.', note: 'Two sentences per paragraph, and you will catch a third of your errors.' },
+          { sentence: 'A sentence beginning "Having reviewed the evidence" is worth a second look every single time.', note: 'Participle openings are the single highest-yield place to check for a dangling modifier.' },
         ],
         table: {
           caption: 'A ten-minute proofreading plan for a three-hour paper',
@@ -477,7 +525,7 @@ export const grammarPhase5: GrammarLesson[] = [
       },
       {
         heading: 'Correct cleanly on the script',
-        plain: 'How a correction looks on the page matters. A neat correction reads as control; a scribbled one reads as confusion.',
+        plain: 'How a correction looks on the page matters more than candidates assume, because an examiner marking hundreds of scripts forms an impression of your control of language within the first paragraph, and a page full of scribbled-out words and overwritten letters reads as uncertainty even when the underlying grammar is now correct. A neat correction reads as control — the candidate saw the error and fixed it precisely; a scribbled one reads as confusion, as if the candidate is still unsure which version is right. This is not merely cosmetic: examiners report that illegible corrections are sometimes marked as if the error were never fixed at all, simply because neither version can be read with confidence.',
         points: [
           'Draw one straight line through the wrong word and write the correction above it.',
           'Never overwrite letters or scribble a word out.',
@@ -487,11 +535,12 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'One line, one correction above it.', note: 'Legible, and it costs no time.' },
+          { sentence: 'A caret under the gap, the missing word above it, nothing else touched.', note: 'The fastest and cleanest way to insert a dropped article or preposition.' },
         ],
       },
       {
         heading: 'Know your own three errors',
-        plain: 'Every candidate repeats the same small set of mistakes. Identify yours from your practice work and proofread for those first; this is the highest-value ten minutes in your whole preparation.',
+        plain: 'Every candidate repeats the same small set of mistakes, because errors are not random — they come from gaps in how a particular student was taught, or from patterns carried over from Urdu or another first language, and both kinds of gap produce the same handful of mistakes again and again rather than a fresh error each time. Identify yours from your practice work rather than assuming you know them from memory, because candidates are consistently poor at guessing their own error profile: the mistake that embarrasses you most in memory is rarely the one that actually costs the most marks across a full script. Proofread for those three first; this is the highest-value ten minutes in your whole preparation because it converts a general skill (grammar) into a targeted one (your own three weaknesses), and targeted skills improve far faster than general ones.',
         points: [
           'Go through your last five practice answers and list every error.',
           'Count the types. Three will dominate.',
@@ -509,6 +558,9 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'Although the scheme was well designed, but it failed. Because the funds were never released.', right: 'Although the scheme was well designed, it failed, because the funds were never released.', why: 'A double connector and a fragment in two consecutive sentences.' },
       { wrong: 'Each of the provinces have their own plan, which are not coordinated with each other.', right: 'Each of the provinces has its own plan, and these plans are not coordinated with one another.', why: 'Agreement, pronoun number, and a relative clause with an unclear antecedent.' },
       { wrong: 'The report was submitted by the committee and the minister has rejected it yesterday.', right: 'The committee submitted the report, and the minister rejected it yesterday.', why: 'A pointless shift of voice and a present perfect with a finished time.' },
+      { wrong: 'The tribunal, having heard both parties, the appeal was dismissed by three votes to two.', right: 'The tribunal, having heard both parties, dismissed the appeal by three votes to two.', why: 'The participle phrase attaches to no subject in the wrong version, and the passive shift buries who actually decided.' },
+      { wrong: 'There is many reasons why the project were delayed, firstly the funds and secondly the weather.', right: 'There are several reasons why the project was delayed: the funds and the weather.', why: 'A there-sentence agreement error, a subject-verb error inside the clause, and an unnecessary firstly/secondly that hides the logical connection.' },
+      { wrong: 'The province has requested for additional funds, and its expecting a response within a week.', right: 'The province has requested additional funds, and it is expecting a response within a week.', why: 'Request takes no preposition, and its (possessive) has been confused with it is.' },
     ],
     pitfalls: [
       'Reading for meaning when you meant to read for errors.',
@@ -534,6 +586,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd28q8', kind: 'spot', prompt: 'Paragraph: “(A) Two provinces raised objections. (B) The ministry discussed about them at length. (C) No agreement was reached. (D) The matter went to the council.” Which sentence is faulty?', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Discuss takes no preposition.' },
       { id: 'd28q9', kind: 'spot', prompt: 'Paragraph: “(A) The audit found three irregularities. (B) The department responded to two. (C) The third, which was the most serious it ignored. (D) A fresh audit has been ordered.” Which sentence is faulty?', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'The inserted clause needs a closing comma: “The third, which was the most serious, it ignored.”' },
       { id: 'd28q10', kind: 'spot', prompt: 'Paragraph: “(A) Enforcement remains weak. (B) The law is adequate. (C) This is the problem. (D) Further legislation would change nothing.” Which sentence should be repaired for vague reference?', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'This could mean the weakness, the law or the gap between them. Write “This gap is the problem.”' },
+      { id: 'd28q11', kind: 'spot', prompt: 'Paragraph: “(A) The audit team visited five districts. (B) Two districts was found non-compliant. (C) A report was submitted to the ministry. (D) Action has been promised.” Which sentence is faulty?', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Two districts is plural: were found.' },
+      { id: 'd28q12', kind: 'spot', prompt: 'Paragraph: “(A) The minister addressed the assembly. (B) He spoke about the reforms who had been delayed. (C) Members raised several questions. (D) The session ended peacefully.” Which sentence is faulty?', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Who refers to people; reforms needs which or that: “the reforms that had been delayed”.' },
     ],
     corrections: [
       { id: 'd28c1', task: 'Edit this paragraph: “The government have announced a new policy last week. It is aimed to reduce the poverty in the rural areas. Although the intention is good, but the funding is not clear.”', model: 'The government announced a new policy last week. It is aimed at reducing poverty in rural areas. Although the intention is good, the funding is not clear.', note: 'Five errors: agreement, tense with a finished time, the collocation aim at + -ing, two unnecessary articles, and a double connector.' },
@@ -541,6 +595,7 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd28c3', task: 'Edit this paragraph: “Having reviewed the file, a decision was taken to close the case, the complainant was not informed, he came to know from the press.”', model: 'Having reviewed the file, the officer decided to close the case. The complainant was not informed and learnt of the decision from the press.', note: 'A dangling participle and two comma splices, plus a non-standard expression.' },
       { id: 'd28c4', task: 'Edit this paragraph: “The report was submitted by the committee and the minister has rejected it yesterday. He said that he is not satisfied with the recommendations, moreover he ordered a fresh inquiry.”', model: 'The committee submitted the report, and the minister rejected it yesterday. He said that he was not satisfied with the recommendations; moreover, he ordered a fresh inquiry.', note: 'A pointless shift of voice, a present perfect with yesterday, a missing backshift and a comma splice before moreover.' },
       { id: 'd28c5', task: 'Edit this paragraph: “There is many reasons for the failure. Firstly, the data was incomplete. Secondly, the method were untested. Thirdly, therefore the conclusion is overstated.”', model: 'There are several reasons for the failure. The data were incomplete and the method untested; the conclusion is therefore overstated.', note: 'Agreement in a there-sentence, two further agreement errors, and numbering that hides the real logical relationship.' },
+      { id: 'd28c6', task: 'Edit this paragraph: “The audit team visit five districts last month. Two districts was found non compliant with the rules. A report have been submitted to the ministry, however no action was taken yet.”', model: 'The audit team visited five districts last month. Two districts were found non-compliant with the rules. A report has been submitted to the ministry; however, no action has yet been taken.', note: 'Past tense for a finished visit, plural agreement for districts, singular agreement for report, and however joining two clauses needs a semicolon before it and a comma after.' },
     ],
     transfer: 'Take your last full practice answer. Proofread it in the six targeted passes, timing each one. Write down every error you find and sort it by type. Then write your personal top three at the top of a card and keep the card with your practice material.',
     checklist: [
@@ -557,6 +612,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'Timed simulation across the whole syllabus',
     goal: 'Apply everything from Days 1 to 28 accurately at examination speed.',
     why: 'Accuracy that only appears when you have unlimited time is not accuracy. Today measures what survives when the clock is running, which is the only figure that predicts your paper.',
+    examTip: 'Mixed-topic sections like this one carry no label telling you which day\'s rule an item is testing, exactly as the real paper does, so the mechanics trap is not in any single item but in the order you attempt them: a candidate who solves items strictly in sequence burns time on a hard agreement item before reaching an easy preposition item worth the identical one mark. Skim the whole set first, answer everything you can name a rule for immediately, and mark the rest for a single review pass.',
     minutes: 60,
     terms: [
       { term: 'Time per item', meaning: 'Roughly forty seconds for an error-correction item; fifteen for a gap.' },
@@ -566,7 +622,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'How to work a grammar section under time',
-        plain: 'Speed on grammar comes from method, not from rushing. A fixed procedure per item removes the hesitation that actually consumes the minutes.',
+        plain: 'Speed on grammar comes from method, not from rushing, and confusing the two is the most common way candidates lose time rather than save it: rushing means reading faster and thinking less, which produces more wrong answers that then have to be reconsidered at review, costing double the time. A fixed procedure per item removes the hesitation that actually consumes the minutes — hesitation is not thinking, it is the absence of a next step, and a candidate without a fixed procedure re-invents one under pressure on every single item, which is far slower than following a drilled routine on autopilot.',
         points: [
           'Read the whole sentence once at normal speed.',
           'Run the six-pass scan and stop at the first genuine fault.',
@@ -577,11 +633,12 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Name the rule, mark the answer, move on.', note: 'Three steps, about forty seconds.' },
+          { sentence: 'Read once, scan the six passes, name the rule silently, mark, move — every item, no exceptions.', note: 'The value of a routine is that it never varies, so the mind never has to decide whether to use it.' },
         ],
       },
       {
         heading: 'Trust a trained ear, and check it',
-        plain: 'After four weeks of deliberate practice, your first instinct on a grammar item is usually right. The exception is the small set of rules where correct English sounds wrong to a South Asian ear. Those you check consciously.',
+        plain: 'After four weeks of deliberate practice, your first instinct on a grammar item is usually right, because deliberate practice trains exactly this: recognising a correct pattern faster than you can consciously analyse it. The exception is the small set of rules where correct English sounds wrong to a South Asian ear, because the pattern that sounds natural in Urdu-influenced spoken English is a different pattern from the one standard written English requires, and your ear has spent far more hours on the spoken pattern than on the written one. Those specific rules you check consciously, every time, because instinct will actively mislead you on them; everywhere else, checking consciously only slows you down and increases the risk of talking yourself into a wrong answer.',
         points: [
           'Check consciously: neither … nor agreement, one of those who, the number of, between you and me.',
           'Check consciously: present perfect with since and for.',
@@ -592,6 +649,7 @@ export const grammarPhase5: GrammarLesson[] = [
         models: [
           { sentence: 'Neither the officers nor the director was informed.', note: 'Sounds odd, is correct — the proximity rule.' },
           { sentence: 'He is one of those officers who never admit a mistake.', note: 'Sounds odd, is correct — who stands for officers.' },
+          { sentence: 'The number of complaints has fallen, though the amount of paperwork has risen.', note: 'Sounds odd because the ear expects a plural after "of" — the head noun is what governs the verb.' },
         ],
         table: {
           caption: 'A thirty-item grammar section in thirty minutes',
@@ -605,16 +663,17 @@ export const grammarPhase5: GrammarLesson[] = [
       },
       {
         heading: 'Today’s simulation',
-        plain: 'The warm-up, drill and corrections below are drawn from the whole twenty-eight days. Work them in one sitting, timed, with no notes. Then count your errors by topic, not by number.',
+        plain: 'The warm-up, drill and corrections below are drawn from the whole twenty-eight days, deliberately mixed rather than grouped by topic, because a real examination never tells you in advance which rule an item is testing. Work them in one sitting, timed, with no notes, because the value of the exercise is diagnostic: it tells you what survives under the exact conditions of the paper, not what you can produce with unlimited time and a reference to hand. Then count your errors by topic, not by number, because a raw score of nine out of sixteen tells you almost nothing about what to do next, while knowing that five of your seven errors were agreement errors tells you exactly which day to revise tonight.',
         points: [
-          'Set a timer for twenty minutes for the fourteen auto-marked items.',
-          'Then take fifteen minutes for the five corrections, writing them out in full.',
+          'Set a timer for twenty minutes for the sixteen auto-marked items.',
+          'Then take fifteen minutes for the six corrections, writing them out in full.',
           'Do not look anything up until you have finished.',
           'Record your score, and record which day of the course each error belongs to.',
           'Any topic with two or more errors goes back into your revision for tomorrow.',
         ],
         models: [
           { sentence: 'Count errors by topic, not by number.', note: 'Six scattered errors are a different problem from six agreement errors.' },
+          { sentence: 'A score sheet with a topic column beside each wrong item turns one test into a revision plan.', note: 'The number tells you how you did; the topic column tells you what to do next.' },
         ],
       },
     ],
@@ -623,6 +682,9 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'He is working in this department since 2016 and has joined a training course last month.', right: 'He has been working in this department since 2016 and joined a training course last month.', why: 'Since with a continuing activity, and a finished time with the past simple.' },
       { wrong: 'Despite of the warnings, the committee suggested to postpone the decision.', right: 'Despite the warnings, the committee suggested postponing the decision.', why: 'Despite takes no of, and suggest takes the gerund.' },
       { wrong: 'The population of Lahore is greater than Karachi, although Karachi is more bigger in area.', right: 'The population of Lahore is greater than that of Karachi, although Karachi is bigger in area.', why: 'Faulty comparison and a double comparative.' },
+      { wrong: 'If the court would grant bail, the accused will surrender his passport immediately.', right: 'If the court grants bail, the accused will surrender his passport immediately.', why: 'A first-conditional if-clause takes the present simple, not would; would in the if-clause is one of the commonest instinct-overriding errors.' },
+      { wrong: 'Neither the auditors nor the finance secretary were available for comment.', right: 'Neither the auditors nor the finance secretary was available for comment.', why: 'The nearer subject, secretary, is singular, so the verb agrees with it even though it sounds odd after a plural noun.' },
+      { wrong: 'The literacy rate of Sindh is lower than Punjab, which have invested more in schools.', right: 'The literacy rate of Sindh is lower than that of Punjab, which has invested more in schools.', why: 'A rate must be compared with a rate, and Punjab as the antecedent of which is singular.' },
     ],
     pitfalls: [
       'Spending three minutes on one item and running out of time.',
@@ -648,6 +710,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd29q8', kind: 'gap', prompt: 'The literacy rate of Punjab is higher than ____ of Balochistan.', options: ['those', 'that', 'it', 'which'], answer: 1, why: 'Day 18: compare a rate with a rate.' },
       { id: 'd29q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['I am looking forward to meet you.', 'I am looking forward to meeting you.', 'I look forward to meet you.', 'I am looking forward for meeting you.'], answer: 1, why: 'Day 16: to here is a preposition and takes -ing.' },
       { id: 'd29q10', kind: 'spot', prompt: 'Find the error: “If the tribunal would have examined (A) the evidence (B), it would have reached (C) a different conclusion (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Day 10: a third-conditional if-clause takes the past perfect.' },
+      { id: 'd29q11', kind: 'gap', prompt: 'By the time the auditors arrived, the clerk ____ the missing files.', options: ['destroyed', 'had destroyed', 'has destroyed', 'was destroying'], answer: 1, why: 'Day 8: an action completed before another past action takes the past perfect.' },
+      { id: 'd29q12', kind: 'choice', prompt: 'Which sentence is correct?', options: ['The committee is comprised of five members.', 'The committee comprises five members.', 'The committee is comprised by five members.', 'The committee comprises of five members.'], answer: 1, why: 'Day 17: comprise means "to consist of" and takes no preposition; "is comprised of", though common, is not the formal register construction.' },
     ],
     corrections: [
       { id: 'd29c1', task: 'Each of the provinces have submitted their plan, but the number of plans that has been examined are very small.', model: 'Each of the provinces has submitted its plan, but the number of plans that have been examined is very small.', note: 'Three agreement decisions: each is singular, that refers to plans, and the number of is singular.' },
@@ -655,8 +719,9 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd29c3', task: 'Despite of the objections, the committee suggested to postpone the decision and asked that the file is re-examined.', model: 'Despite the objections, the committee suggested postponing the decision and asked that the file be re-examined.', note: 'Despite takes no of, suggest takes the gerund, and ask that takes the subjunctive.' },
       { id: 'd29c4', task: 'Having reviewed the accounts, three irregularities were found, which was reported to the secretary who ordered an inquiry.', model: 'Having reviewed the accounts, the auditors found three irregularities and reported them to the secretary, who ordered an inquiry.', note: 'A dangling participle, a pronoun with no clear antecedent, and an agreement error.' },
       { id: 'd29c5', task: 'The population of Karachi is more bigger than Lahore, and it has less facilities than any city of Pakistan.', model: 'The population of Karachi is bigger than that of Lahore, and the city has fewer facilities than any other city in Pakistan.', note: 'A double comparative, a faulty comparison, less with a countable noun, and a missing other.' },
+      { id: 'd29c6', task: 'The number of applicants have increased since the fee were reduced last year, and each of them are hopeful for the interview which are scheduled next week.', model: 'The number of applicants has increased since the fee was reduced last year, and each of them is hopeful for the interview, which is scheduled next week.', note: 'Four agreement decisions in one sentence: the number of takes a singular verb, fee is singular, each is singular, and which refers to interview (singular).' },
     ],
-    transfer: 'Set a timer and complete the fourteen auto-marked items above in twenty minutes with no notes. Then write out the five corrections in fifteen minutes. Score yourself, and beside each error write the day number it belongs to. Spend tomorrow morning on any day that appears twice.',
+    transfer: 'Set a timer and complete the sixteen auto-marked items above in twenty minutes with no notes. Then write out the six corrections in fifteen minutes. Score yourself, and beside each error write the day number it belongs to. Spend tomorrow morning on any day that appears twice.',
     checklist: [
       'I finished the auto-marked items inside twenty minutes.',
       'I named a rule for every answer I gave.',
@@ -671,6 +736,7 @@ export const grammarPhase5: GrammarLesson[] = [
     title: 'Mastery and a maintenance plan',
     goal: 'Measure what you have gained and build a routine that keeps it through the months before the paper.',
     why: 'Grammar decays without use. A candidate who finishes a course in March and writes nothing until October will lose most of it. Fifteen minutes a day protects a month of work.',
+    examTip: 'On the day itself, work the grammar and error-spotting section before the composition and précis: it gives the fastest return per minute, and finishing it first leaves the rest of the paper for slower writing. Inside the section, answer in two passes — everything you can name a rule for immediately, then return only to marked items — rather than moving strictly left to right, since one hard item held too long costs you three easy ones elsewhere.',
     minutes: 50,
     terms: [
       { term: 'Maintenance', meaning: 'The small regular effort that preserves a skill already learned.' },
@@ -681,7 +747,7 @@ export const grammarPhase5: GrammarLesson[] = [
     rules: [
       {
         heading: 'What you should now be able to do',
-        plain: 'Check yourself honestly against this list. Any item you cannot do belongs in this week’s revision, not in a vague plan for later.',
+        plain: 'Check yourself honestly against this list, and check it by doing each item, not by reading it and feeling that it sounds familiar — familiarity is recognition, and recognition is the weakest form of knowledge, the one most likely to collapse the moment you need to produce an answer rather than approve one. Any item you cannot do under time, without a reference, belongs in this week’s revision, not in a vague plan for later, because "later" in an unstructured plan almost always means "never" — a specific day and a specific task is the only form a real revision plan takes.',
         points: [
           'Find the subject and finite verb of a thirty-word sentence in five seconds.',
           'Name the rule behind any agreement error.',
@@ -696,11 +762,12 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Ten abilities, each of which you have practised deliberately this month.', note: 'Recognition is not the test; production under time is.' },
+          { sentence: 'Set a five-minute timer and write one sentence for each of the ten abilities, from memory, with no notes open.', note: 'A single honest self-test is worth more than reading the list three times.' },
         ],
       },
       {
         heading: 'The fifteen-minute daily routine',
-        plain: 'Short and daily beats long and occasional. This routine takes fifteen minutes and preserves everything you have built.',
+        plain: 'Short and daily beats long and occasional, because a skill like grammar decays through disuse in small increments, and small daily use arrests that decay far more efficiently than an occasional long session that tries to reverse a month of drift in one sitting. This routine takes fifteen minutes and preserves everything you have built by touching all three components a skill needs to survive: fresh input (reading), active production (writing), and correction of your own errors — drop any one of the three for long enough and the other two will not compensate for it.',
         points: [
           'Five minutes — read one editorial and mark three collocations you did not know.',
           'Five minutes — write three sentences using a rule from this course, chosen at random.',
@@ -726,7 +793,7 @@ export const grammarPhase5: GrammarLesson[] = [
       },
       {
         heading: 'Keep an error log that works',
-        plain: 'A list of mistakes is useless. A log sorted by rule, with your own corrected sentence beside each entry, is the single most valuable document in your preparation.',
+        plain: 'A list of mistakes sorted by date is useless for revision, because it forces you to reread every entry to find the ones that matter, and by the time you have reread a hundred scattered entries you have lost the will to revise at all. A log sorted by rule, with your own corrected sentence beside each entry, is the single most valuable document in your preparation, because it turns your own errors — the most personally relevant material available to you — into a revision tool organised the same way this course is organised, by rule, so five minutes with the log is five minutes of targeted practice on your actual weaknesses rather than a generic topic.',
         points: [
           'One page per error type, not one page per date.',
           'Write the wrong sentence, the correction, and the rule in your own words.',
@@ -736,11 +803,12 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Agreement — “The quality of the answers were poor.” → was. Rule: the head noun controls the verb.', note: 'Three lines, and it never needs rewriting.' },
+          { sentence: 'Prepositions — “insisted for a written order” → insisted on. Rule: insist takes on, never for.', note: 'The same three-line format for every entry, whatever the rule.' },
         ],
       },
       {
         heading: 'Read like a writer',
-        plain: 'Nothing you can study replaces reading good English attentively. Twenty minutes a day of careful reading will teach you more collocations and rhythms than any list.',
+        plain: 'Nothing you can study replaces reading good English attentively, because rules teach you what is permitted, while reading teaches you what is natural, and the gap between the two is exactly where fluency lives. Twenty minutes a day of careful reading will teach you more collocations and rhythms than any list, because a collocation learned from a list is an isolated fact you must recall on demand, while a collocation met repeatedly in real sentences becomes something you reach for without noticing — which is the only speed a three-hour paper actually rewards.',
         points: [
           'Read one serious editorial or essay a day, slowly.',
           'Mark one sentence whose structure you admire and copy it out.',
@@ -750,6 +818,7 @@ export const grammarPhase5: GrammarLesson[] = [
         ],
         models: [
           { sentence: 'Copy the structure, change the content — the oldest and best writing exercise there is.', note: 'It trains rhythm, which no rule can teach.' },
+          { sentence: 'Admired sentence: "The reform succeeded not because the law changed, but because enforcement did." Imitation: "The scheme failed not because funds were short, but because oversight was absent."', note: 'The same contrastive structure, carrying entirely new content the same day.' },
         ],
       },
     ],
@@ -757,6 +826,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { wrong: 'I will revise grammar thoroughly before the examination.', right: 'I will spend fifteen minutes each morning on the daily routine, and redo the Day 29 simulation on the first of every month.', why: 'A plan with a time, a task and a date is a plan. Everything else is an intention.' },
       { wrong: 'Keeping a list of all my mistakes from every test.', right: 'Keeping one page per error type, with the rule written in my own words.', why: 'A log sorted by rule can be revised; a chronological list cannot.' },
       { wrong: 'Memorising a list of two hundred collocations.', right: 'Collecting ten collocations a day from real reading, in whole phrases.', why: 'Collocations learned in context survive; lists do not.' },
+      { wrong: 'I have finished the grammar course, so I am done preparing my English.', right: 'I have finished the grammar course, so I am starting the fifteen-minute maintenance routine from tomorrow.', why: 'A finished course is a beginning for maintenance, not an ending; grammar decays without deliberate, if brief, continued use.' },
+      { wrong: 'I will reread my notes the week before the paper to refresh my grammar.', right: 'I will redo the Day 29 simulation the week before the paper and correct only the errors it reveals.', why: 'Rereading tests recognition; a timed simulation tests production, which is the skill the examination actually demands.' },
     ],
     pitfalls: [
       'Finishing a course and stopping entirely.',
@@ -782,6 +853,8 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd30q8', kind: 'gap', prompt: 'There ____ several objections to the draft, and none has been answered.', options: ['is', 'was', 'are', 'has been'], answer: 2, why: 'In a there-sentence the verb agrees with the noun that follows it.' },
       { id: 'd30q9', kind: 'choice', prompt: 'Which is the minimum correction of “The quality of the answers were poor”?', options: ['The answers were of poor quality.', 'The quality of the answers was poor.', 'Answer quality was poor.', 'The answers were poor in quality.'], answer: 1, why: 'One verb form is at fault; nothing else should move.' },
       { id: 'd30q10', kind: 'spot', prompt: 'Find the error: “Due to the fact that (A) the funds lapsed (B), the department made a decision (C) to abandon the scheme (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Due to the fact that always reduces to because. The nominalisation at C is also worth repairing, but the wordy connector is the clearer fault.' },
+      { id: 'd30q11', kind: 'spot', prompt: 'Find the error: “The chairman, along with the two directors (A), were present (B) at the inaugural session (C), which lasted an hour (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'A phrase introduced by along with does not make the subject plural; the verb agrees with chairman: was present.' },
+      { id: 'd30q12', kind: 'choice', prompt: 'Which sentence is correct?', options: ['Not only was the report late but also incomplete.', 'Not only was the report late but it was also incomplete.', 'The report was not only late, but also it incomplete.', 'Not only the report was late but also incomplete.'], answer: 1, why: 'Not only … but also needs matching grammatical structures on both sides; only B keeps parallel clauses with the required inversion after not only.' },
     ],
     corrections: [
       { id: 'd30c1', task: 'Each of the officers have been informed about their transfer, which were notified last week.', model: 'Each of the officers has been informed of his transfer, which was notified last week.', note: 'Agreement, pronoun number, the collocation inform of, and agreement inside the relative clause.' },
@@ -789,6 +862,7 @@ export const grammarPhase5: GrammarLesson[] = [
       { id: 'd30c3', task: 'He said that he is not aware of the irregularities and will cooperate with the inquiry fully.', model: 'He said that he was not aware of the irregularities and would cooperate fully with the inquiry.', note: 'Two backshifts and a more natural adverb position.' },
       { id: 'd30c4', task: 'Due to the fact that there was less officers available, the department made a decision to postpone each and every hearing.', model: 'Because fewer officers were available, the department decided to postpone every hearing.', note: 'A wordy connector, less with a countable noun, a nominalisation and a redundancy.' },
       { id: 'd30c5', task: 'Having examined the file, a decision was taken by the committee that the case is closed and no further action is required.', model: 'Having examined the file, the committee decided that the case be closed and that no further action was required.', note: 'A dangling participle, a nominalisation, and the subjunctive after a verb of deciding.' },
+      { id: 'd30c6', task: 'Neither of the proposals were accepted, and the board has took a decision that no further action are required until the review is complete.', model: 'Neither of the proposals was accepted, and the board has taken a decision that no further action is required until the review is complete.', note: 'Three final-review agreement checks in one sentence: neither is singular, taken is the correct participle, and action is singular — exactly the trio of errors examiners recycle most across the whole syllabus.' },
     ],
     transfer: 'Write your maintenance plan on a single card: the fifteen-minute daily routine, the weekly paragraph, the fortnightly précis and the monthly simulation, each with the time of day you will do it. Then rewrite one paragraph you produced in Week 1 of this course and count the errors that have disappeared. Keep both versions.',
     checklist: [

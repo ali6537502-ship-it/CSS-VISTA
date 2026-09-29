@@ -9,6 +9,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Present and past: the four forms of each',
     goal: 'Choose between simple, continuous, perfect and perfect continuous in the present and the past, using time rather than feeling.',
     why: 'Tense errors are the loudest errors in an answer script because they repeat. One wrong habit — using the present continuous for permanent facts — can appear forty times in a single essay.',
+    examTip: 'This rule is tested mostly as fill-in-the-blank or four-option "choose the correct sentence" items built around a single time marker (nowadays, since 2018, when the inspector arrived) rather than as full error-spotting. The standard trap is a distractor that swaps a stative verb into the continuous specifically because the sentence sounds more "in progress" or formal — expect at least one option built on is knowing- or is containing-style bait, next to a correct option that looks plain only because the verb is genuinely stative or the fact genuinely permanent.',
     minutes: 55,
     terms: [
       { term: 'Simple', meaning: 'The plain form: writes, wrote. Used for facts, habits and completed past events.' },
@@ -20,32 +21,38 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'Present simple: facts, habits and permanent truths',
-        plain: 'Use the present simple for anything that is generally true, repeated or permanent. This is the tense of definitions, arguments and analysis — so it is the tense most of an essay is written in.',
+        plain: 'Use the present simple for anything that is generally true, repeated or permanent. This is the tense of definitions, arguments and analysis — so it is the tense most of an essay is written in. Students who write mostly in the continuous are usually translating from a language where the progressive doubles as the everyday present; in English that produces sentences that sound like a live commentary on facts that never change, such as "the constitution is guaranteeing rights" for something the constitution simply does, permanently. The test is not whether something is happening at this second but whether it is true as a rule: a habit is a fact about a person or institution repeated over time, and a definition is a fact about the world regardless of time, so both take the same plain form of the verb.',
         points: [
           'Permanent facts: Water boils at 100 degrees Celsius.',
           'Habits and routines: The commission meets every Monday.',
           'Analysis and commentary: The author argues that reform is inevitable.',
           'Third person singular takes -s: he argues, it contains, she believes.',
           'Time markers: always, usually, often, seldom, every day, nowadays, generally.',
+          'Instructions, rules and step-by-step processes: The examiner first checks the roll number, then verifies the signature.',
+          'A statement of what a document or institution does as its function, not as a one-off act: The ombudsman investigates complaints against federal agencies.',
         ],
         models: [
           { sentence: 'Pakistan imports most of its edible oil.', note: 'A continuing fact, not an action happening at this instant.' },
           { sentence: 'The constitution guarantees freedom of movement.', note: 'A permanent legal fact.' },
+          { sentence: 'The Federal Public Service Commission conducts the CSS examination every year.', note: 'A routine that repeats, not a one-time event.' },
+          { sentence: 'The Indus flows from the Tibetan plateau to the Arabian Sea.', note: 'A geographical fact that does not change with the day.' },
         ],
       },
       {
         heading: 'Present continuous: happening now or changing now',
-        plain: 'Use the present continuous only for an action in progress at this moment, a temporary arrangement, or a trend that is changing. It is not a more polite or more formal present simple.',
+        plain: 'Use the present continuous only for an action in progress at this moment, a temporary arrangement, or a trend that is changing. It is not a more polite or more formal present simple, and it is not a way to make a sentence sound more "in progress" or academic — that instinct is exactly what produces errors such as "the government is believing" or "prices are containing subsidies". The deciding question is duration and boundaries: does the action have a visible start and a visible end that the speaker is aware of right now, or is it a state with no such edges? A trend such as urbanisation genuinely is changing week by week, so the continuous captures that motion, whereas a fact such as a river’s course has no edges to be caught mid-way through.',
         points: [
           'In progress now: The committee is hearing evidence this week.',
           'Temporary: He is working in Multan until June.',
           'Changing trend: Urban populations are growing rapidly.',
           'Fixed future arrangement: The delegation is arriving on Sunday.',
           'Not with stative verbs: I am knowing, she is having a car and it is belonging to him are all wrong.',
+          'Repeated irritation with always: He is always missing the deadline. (a complaint about a habit, not a simple habit statement)',
         ],
         models: [
           { sentence: 'Literacy rates are improving, but they remain low.', note: 'Continuous for the changing trend, simple for the permanent state.' },
           { sentence: 'I know the answer.', note: 'Know is stative, so no continuous form.' },
+          { sentence: 'The provincial government is piloting a new curriculum this term.', note: 'A temporary, bounded arrangement, not a permanent policy fact.' },
         ],
         table: {
           caption: 'Stative verbs that resist the continuous',
@@ -61,43 +68,49 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'Past simple: finished action at a finished time',
-        plain: 'Use the past simple when the action is over and the time is over too. If the sentence contains yesterday, last year, in 1998, two days ago or when I was a student, the past simple is almost always correct.',
+        plain: 'Use the past simple when the action is over and the time is over too. If the sentence contains yesterday, last year, in 1998, two days ago or when I was a student, the past simple is almost always correct. The common mistake is not choosing the wrong tense in isolation but drifting into the present perfect because the event feels psychologically close — writers often reach for "has happened" when describing something recent, forgetting that the present perfect is barred the moment a specific past time is named. If you can answer the question "when?" with a date, a year or a named past occasion, the sentence has already declared itself finished, and only the past simple can carry it.',
         points: [
           'The assembly passed the bill in March.',
           'Regular verbs add -ed; irregular verbs change form: go → went, write → wrote, lead → led.',
           'In questions and negatives, did takes the tense and the main verb returns to its base form: Did he submit? / He did not submit.',
           'Never write did not submitted or did he submitted.',
+          'A sequence of finished past actions is normally told in a chain of past simple verbs: He entered, read the notice and left.',
         ],
         models: [
           { sentence: 'The government devalued the currency in 2019.', note: 'Finished action, finished time.' },
           { sentence: 'She did not attend the hearing.', note: 'did carries the tense; attend stays in the base form.' },
+          { sentence: 'The Supreme Court delivered its verdict last Thursday.', note: 'A named past occasion forces the past simple, never the present perfect.' },
         ],
       },
       {
         heading: 'Past continuous: the background action',
-        plain: 'The past continuous sets a scene that was already going on when something else happened. It almost always appears alongside a past simple verb.',
+        plain: 'The past continuous sets a scene that was already going on when something else happened. It almost always appears alongside a past simple verb, and the pairing is not accidental: the continuous verb paints the ongoing situation, and the simple verb marks the single point that cuts across it. Students often reverse this, putting the interrupting action into the continuous, which changes the meaning: "he was arriving when the officer left" implies his arrival dragged on, which is rarely what is meant. Think of the past continuous as the wide-angle shot and the past simple as the moment the shutter clicks.',
         points: [
           'Interrupted action: He was reviewing the file when the notification arrived.',
           'Two parallel actions: While the committee was deliberating, the press was speculating.',
           'Background description: It was raining heavily, and the roads were flooding.',
           'The shorter, completed action takes the past simple; the longer background takes the past continuous.',
+          'Politeness and softening in narrative reports: I was wondering whether the deadline could be extended.',
         ],
         models: [
           { sentence: 'The students were protesting when the vice-chancellor arrived.', note: 'Long background + short interruption.' },
           { sentence: 'While I was preparing for the paper, my notes were stolen.', note: 'while + continuous for the background.' },
+          { sentence: 'The auditors were examining the accounts when the fraud came to light.', note: 'Ongoing review interrupted by a single discovery.' },
         ],
       },
       {
         heading: 'Keep one tense unless time actually changes',
-        plain: 'Within a paragraph, shift tense only when the time genuinely shifts. Random shifting between present and past is one of the fastest ways to lose an examiner’s confidence.',
+        plain: 'Within a paragraph, shift tense only when the time genuinely shifts. Random shifting between present and past is one of the fastest ways to lose an examiner’s confidence, because it signals that the writer is not tracking time at all, only reaching for whichever verb form comes to mind next. The fix is to decide, before writing a paragraph, which single time frame it belongs to — narration of past events, or analysis of a still-true argument — and to treat any change of tense mid-paragraph as something that must be justified by an actual change in when the thing is true, never by variety for its own sake.',
         points: [
           'Narrating a past event? Stay in the past.',
           'Analysing a text or an argument? Stay in the present: the author argues, the poem suggests.',
           'Moving from a historical fact to its present consequence is a real shift and is correct.',
+          'Check the last verb of a paragraph against the first: if the time frame has not changed, the tense should not have either.',
         ],
         models: [
           { sentence: 'Iqbal argues in his lectures that the self is dynamic.', note: 'Literary present — use it throughout the discussion.' },
           { sentence: 'The state nationalised the banks in 1974; the sector still bears the effects.', note: 'A genuine shift from past event to present consequence.' },
+          { sentence: 'The commission investigated the complaint last year and its findings still guide current policy.', note: 'Past investigation, present-tense consequence — both justified by real time change.' },
         ],
       },
     ],
@@ -108,6 +121,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'I am having two brothers and one sister.', right: 'I have two brothers and one sister.', why: 'Have meaning “possess” is stative and has no continuous form.' },
       { wrong: 'The author is arguing in chapter three that democracy is fragile.', right: 'The author argues in chapter three that democracy is fragile.', why: 'Discussion of a text uses the literary present simple.' },
       { wrong: 'Last year the rupee is depreciating by thirty per cent.', right: 'Last year the rupee depreciated by thirty per cent.', why: 'Last year is a finished time, so the past simple is required.' },
+      { wrong: 'The province is containing fourteen districts.', right: 'The province contains fourteen districts.', why: 'Contain is stative and describes a fixed administrative fact, so the present simple is required.' },
+      { wrong: 'The court was announcing its verdict when the lawyers were leaving the room.', right: 'The court was announcing its verdict when the lawyers left the room.', why: 'The short, completed departure takes the past simple against the ongoing announcement.' },
+      { wrong: 'Every winter the smog is returning to Lahore.', right: 'Every winter the smog returns to Lahore.', why: 'A yearly recurring pattern is a habit, so the present simple is used, not the continuous.' },
+      { wrong: 'She is knowing three languages fluently.', right: 'She knows three languages fluently.', why: 'Know is a stative verb of the mind and never takes the continuous form.' },
     ],
     pitfalls: [
       'Using the present continuous for permanent facts or general habits.',
@@ -133,6 +150,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd7q8', kind: 'spot', prompt: 'Find the error: “The chairman said that he (A) did not knew (B) about the transfer (C) until yesterday (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'After did, the base form is required: did not know.' },
       { id: 'd7q9', kind: 'choice', prompt: 'Which sentence keeps a consistent tense?', options: ['He entered the hall, sees the notice and leaves immediately.', 'He entered the hall, saw the notice and left immediately.', 'He enters the hall, saw the notice and leaves immediately.', 'He enters the hall, sees the notice and left immediately.'], answer: 1, why: 'A completed past narrative stays in the past simple throughout.' },
       { id: 'd7q10', kind: 'gap', prompt: 'The file ____ four annexures and a covering note.', options: ['is containing', 'contains', 'has been containing', 'was containing'], answer: 1, why: 'Contain is stative and takes the simple form.' },
+      { id: 'd7q11', kind: 'spot', prompt: 'Find the error: “The magistrate (A) is presiding (B) over the case, which he is finding (C) unusually complex (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Find meaning “consider” is stative here, so it stays in the simple form: which he finds unusually complex.' },
+      { id: 'd7q12', kind: 'gap', prompt: 'While the assembly ____ the bill, the opposition ____ outside the building.', options: ['debated … protested', 'was debating … was protesting', 'debates … protests', 'has debated … has protested'], answer: 1, why: 'Two genuinely parallel background actions both take the past continuous; neither interrupts the other.' },
     ],
     corrections: [
       { id: 'd7c1', task: 'Nowadays the youth is spending too much time on social media and are neglecting their studies.', model: 'Nowadays young people spend too much time on social media and neglect their studies.', note: 'A general habit takes the present simple, and the plural subject young people keeps the agreement consistent.' },
@@ -140,6 +159,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd7c3', task: 'Did the committee submitted its findings before the deadline?', model: 'Did the committee submit its findings before the deadline?', note: 'Did carries the past tense; the main verb reverts to the base form.' },
       { id: 'd7c4', task: 'In his essay, Orwell was arguing that political language is designed to conceal.', model: 'In his essay, Orwell argues that political language is designed to conceal.', note: 'Use the literary present when discussing what a writer says in a text.' },
       { id: 'd7c5', task: 'She is belonging to a family that is owning several factories in Faisalabad.', model: 'She belongs to a family that owns several factories in Faisalabad.', note: 'Belong and own are stative verbs with no continuous form.' },
+      { id: 'd7c6', task: 'Nowadays, the government is providing housing subsidies to the poor, and last year it was building fifty thousand units before the funds were running out.', model: 'Nowadays, the government provides housing subsidies to the poor, and last year it built fifty thousand units before the funds ran out.', note: 'Nowadays signals a general policy fact, so the present simple is needed, not the continuous; building the units and running out of funds are both single completed past actions, not backgrounds, so both take the past simple.' },
     ],
     transfer: 'Write two short paragraphs about the same event — a flood, an election, an examination. Write the first as a past narrative and the second as a present-tense analysis. Then check that neither paragraph contains a single verb from the other tense.',
     checklist: [
@@ -156,6 +176,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Perfect tenses: connecting two times',
     goal: 'Use the present perfect, past perfect and their continuous forms to show how one time relates to another.',
     why: 'The present perfect is the tense South Asian candidates most often replace with the past simple, and the past perfect is the one they most often forget. Both are tested directly, and both change the meaning of a sentence.',
+    examTip: 'This topic is examined almost entirely through error-spotting with four underlined segments, one of which pairs a perfect tense with a finished-time marker (yesterday, last year, in 2020) or drops the required past perfect where two past events collide in one sentence. The classic trap is to underline a perfectly correct perfect-tense verb and mark a nearby time phrase as the real fault, or the reverse — so check the time expression first, not just the verb form, before you commit to an answer.',
     minutes: 55,
     terms: [
       { term: 'Present perfect', meaning: 'have/has + past participle: has resigned. A past event with present relevance, or an unfinished period.' },
@@ -166,17 +187,19 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'Present perfect: the past that still matters',
-        plain: 'Use the present perfect when the exact time is not stated and the result is still relevant now, or when the period of time has not finished. Never use it with a finished time expression.',
+        plain: 'Use the present perfect when the exact time is not stated and the result is still relevant now, or when the period of time has not finished. Never use it with a finished time expression. The reason this tense confuses candidates is that Urdu and several other South Asian languages do not force a choice between "an event happened at a stated time" and "an event happened at some unstated time whose effect continues" — both often come out the same way in translation. English insists on the split: the moment you name when something happened, you have moved the sentence out of the present and into the finished past, even if the result still matters emotionally. So the test is mechanical, not a matter of feeling: scan the sentence for a date, a named day, or a word like "yesterday" or "ago" — if one is present, the present perfect is automatically wrong, whatever the meaning.',
         points: [
           'Result matters now: The minister has resigned. (so the post is vacant)',
           'Unfinished period: The commission has held four meetings this year.',
           'Experience with no specific time: She has visited Geneva twice.',
           'Just, already, yet, ever, never, so far, recently, lately: He has just left.',
           'Wrong with a finished time: I have seen him yesterday is always wrong — use I saw him yesterday.',
+          'News and reports typically open in the present perfect and then move to the past simple for detail: The authority has confirmed the outbreak. It reported the first case on Tuesday.',
         ],
         models: [
           { sentence: 'The court has reserved its judgement.', note: 'No time given; the present consequence matters.' },
           { sentence: 'The court reserved its judgement on Monday.', note: 'A stated finished time, so the past simple.' },
+          { sentence: 'The province has recorded its lowest rainfall in a decade.', note: 'No date given; the current, still-relevant record is what matters.' },
         ],
         table: {
           caption: 'Present perfect or past simple?',
@@ -193,61 +216,69 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'Since and for',
-        plain: 'Since marks the point at which something started. For marks how long it has lasted. Both usually pull the present perfect, not the present simple.',
+        plain: 'Since marks the point at which something started. For marks how long it has lasted. Both usually pull the present perfect, not the present simple, because both describe a span that reaches from a past point up to now — and "up to now" is exactly what the present perfect is for. A quick way to tell them apart when editing your own writing: if the word after the preposition names a moment (a year, a month, an event), it is since; if it names a length of time (a number of years, months, hours), it is for. Mixing them up — "for 2015" or "since six years" — is a common surface slip that examiners notice immediately because it signals the underlying tense choice is also shaky.',
         points: [
           'since 2015, since March, since he joined — a starting point.',
           'for six years, for three months, for a long time — a duration.',
           'I am working here since 2015 is wrong. Write I have been working here since 2015.',
           'With since, the clause that follows takes the past simple: since he joined the service.',
+          'It is + present perfect + since is a common formal pattern: It is three years since the policy was launched.',
         ],
         models: [
           { sentence: 'The policy has been under review since January.', note: 'Started in January, still under review.' },
           { sentence: 'They have lived in Quetta for twelve years.', note: 'Duration reaching up to now.' },
+          { sentence: 'The tribunal has heard the matter for over a year without a final ruling.', note: 'For + duration reaching up to the present moment.' },
         ],
       },
       {
         heading: 'Present perfect continuous: how long the activity has run',
-        plain: 'Use has/have been + -ing when you want to stress the duration of an activity that is still going on, or has only just stopped and left visible results.',
+        plain: 'Use has/have been + -ing when you want to stress the duration of an activity that is still going on, or has only just stopped and left visible results. The contrast with the simple perfect is really a contrast between product and process: the simple perfect reports what now exists because of the action (three chapters, a signed order, a completed audit), while the continuous reports the activity itself, often unfinished or still leaving traces. When a sentence is really about how something looks or feels right now as a consequence of recent activity — wet roads, tired eyes, a messy desk — the continuous usually explains it better than the simple form.',
         points: [
           'She has been preparing for the examination for eight months.',
           'The roads are wet because it has been raining.',
           'Perfect simple stresses the completed result; perfect continuous stresses the ongoing activity.',
           'He has written three chapters. (result) / He has been writing all night. (activity)',
           'Stative verbs stay in the simple perfect: I have known him for years, not I have been knowing him.',
+          'Repeated recent activity without an exact count: The committee has been meeting frequently this quarter.',
         ],
         models: [
           { sentence: 'The department has been considering the proposal since June.', note: 'Still considering it.' },
           { sentence: 'The department has considered the proposal and rejected it.', note: 'Finished, with a result.' },
+          { sentence: 'Farmers have been protesting outside the assembly all week.', note: 'Ongoing activity, stressed for its duration rather than its outcome.' },
         ],
       },
       {
         heading: 'Past perfect: the earlier of two past events',
-        plain: 'When two things both happened in the past and you need to show which came first, the earlier one takes had + past participle. Use it only when the order genuinely needs marking.',
+        plain: 'When two things both happened in the past and you need to show which came first, the earlier one takes had + past participle. Use it only when the order genuinely needs marking — the past perfect exists purely to prevent ambiguity about sequence, so if a connector such as before, after or by the time already tells the reader which event came first, forcing the past perfect onto every past-in-a-past clause is over-correction, not accuracy. The habit to build is asking, every time two past events sit in one sentence: could a reader reasonably think these happened in the order I wrote them, when they actually happened in the reverse order? If yes, the earlier action needs had.',
         points: [
           'The train had left before we reached the station.',
           'By the time the relief arrived, the water had receded.',
           'After the committee had submitted its report, the minister resigned.',
           'If the order is already clear from before or after, the past simple is acceptable: After the committee submitted its report …',
           'Past perfect continuous shows the earlier activity’s duration: He had been waiting for two hours when the notice appeared.',
+          'Do not use the past perfect for a simple, single past narrative with no second past event to compare it to.',
         ],
         models: [
           { sentence: 'The candidate realised that he had misread the question.', note: 'The misreading happened before the realisation.' },
           { sentence: 'By 2020 the scheme had already been abandoned.', note: 'By + past time is a strong signal for the past perfect.' },
+          { sentence: 'The audit found that the contractor had inflated the invoices for three years.', note: 'The inflation predates the discovery described by the audit.' },
         ],
       },
       {
         heading: 'Irregular participles you must not get wrong',
-        plain: 'The perfect tenses are built on the third form of the verb. Using the second form instead — “has went”, “had wrote” — is treated as a serious error.',
+        plain: 'The perfect tenses are built on the third form of the verb. Using the second form instead — “has went”, “had wrote” — is treated as a serious error, because it shows the writer does not distinguish the past simple from the perfect at all, only the surface look of a "past-sounding" verb. Many of the worst offenders are verbs whose second and third forms happen to look alike for some verbs but not others (said/said is fine, but went/gone is not), so students overgeneralise from the regular pattern. The only reliable fix is rote memorisation of the short list of high-frequency irregular verbs that appear constantly in exam writing: go, write, take, begin, break, rise, see, do, come, give.',
         points: [
           'go → went → gone. He has gone, not he has went.',
           'write → wrote → written. He had written, not he had wrote.',
           'take → took → taken. begin → began → begun. break → broke → broken.',
           'lie (recline) → lay → lain. lay (place) → laid → laid.',
           'rise → rose → risen. raise → raised → raised.',
+          'see → saw → seen. do → did → done. Never write has saw or has did.',
         ],
         models: [
           { sentence: 'Prices have risen sharply since the budget.', note: 'rise is intransitive: risen, never raised.' },
           { sentence: 'The government has raised the support price.', note: 'raise takes an object.' },
+          { sentence: 'The bench has seen no precedent quite like this case.', note: 'The participle is seen, never saw, after has.' },
         ],
       },
     ],
@@ -258,6 +289,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'The prices have raised considerably this year.', right: 'The prices have risen considerably this year.', why: 'Rise is intransitive; raise needs an object.' },
       { wrong: 'She has went to Lahore for the interview.', right: 'She has gone to Lahore for the interview.', why: 'The perfect tense takes the past participle gone, not the past simple went.' },
       { wrong: 'I am knowing him since our college days.', right: 'I have known him since our college days.', why: 'Know is stative, so the simple present perfect is used with since.' },
+      { wrong: 'The board has met last week to discuss the audit.', right: 'The board met last week to discuss the audit.', why: 'Last week names a finished time, so the past simple is required, not the present perfect.' },
+      { wrong: 'The flood waters have received by the time the relief teams arrived.', right: 'The flood waters had receded by the time the relief teams arrived.', why: 'The receding happened before the arrival, so the earlier event needs the past perfect, and recede is the correct verb.' },
+      { wrong: 'She has been knowing the minister for over a decade.', right: 'She has known the minister for over a decade.', why: 'Know is stative and never takes the continuous, even in the perfect continuous form.' },
+      { wrong: 'The exports have raised by twelve per cent last quarter.', right: 'Exports rose by twelve per cent last quarter.', why: 'Rise is intransitive and takes no object; last quarter also fixes a finished time, ruling out the present perfect.' },
     ],
     pitfalls: [
       'Using the present perfect with yesterday, last year or a date.',
@@ -283,6 +318,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd8q8', kind: 'spot', prompt: 'Find the error: “The department is reviewing (A) the eligibility rules (B) since the last recruitment cycle (C) ended (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Since requires the present perfect continuous: has been reviewing.' },
       { id: 'd8q9', kind: 'gap', prompt: 'The file ____ on the table where the clerk had left it.', options: ['lay', 'laid', 'lied', 'was laid down'], answer: 0, why: 'Lie (to rest) has the past form lay; laid belongs to lay (to place something).' },
       { id: 'd8q10', kind: 'choice', prompt: 'Which sentence uses the present perfect correctly?', options: ['The commission has met three times this month.', 'The commission has met three times last month.', 'The commission has met three times in 2019.', 'The commission has met three times yesterday.'], answer: 0, why: 'This month is an unfinished period, so the present perfect fits.' },
+      { id: 'd8q11', kind: 'spot', prompt: 'Find the error: “By the time the results were declared (A), most candidates (B) already appeared (C) for their next attempt (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'The reappearing for the next attempt came before the declaration was even noticed as finished, so it needs the past perfect: had already appeared.' },
+      { id: 'd8q12', kind: 'gap', prompt: 'He ____ for two hours when the notice finally appeared on the board.', options: ['waited', 'was waiting', 'had been waiting', 'has been waiting'], answer: 2, why: 'The past perfect continuous marks the duration of an earlier action running up to another past event.' },
     ],
     corrections: [
       { id: 'd8c1', task: 'I have completed my graduation in 2019 and I am preparing for CSS since then.', model: 'I completed my graduation in 2019 and have been preparing for CSS since then.', note: 'A dated event takes the past simple; since then with a continuing activity takes the present perfect continuous.' },
@@ -290,6 +327,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd8c3', task: 'The cost of living has raised sharply, and many families has reduced their spending.', model: 'The cost of living has risen sharply, and many families have reduced their spending.', note: 'Rise is intransitive; families is plural and takes have.' },
       { id: 'd8c4', task: 'He is living in Islamabad for the last ten years and has bought a house there last year.', model: 'He has been living in Islamabad for the last ten years and bought a house there last year.', note: 'For + duration to now takes the present perfect continuous; last year is finished and takes the past simple.' },
       { id: 'd8c5', task: 'By the time the notification issued, most candidates already had submitted their applications.', model: 'By the time the notification was issued, most candidates had already submitted their applications.', note: 'The notification needs a passive verb, and already sits between had and the participle.' },
+      { id: 'd8c6', task: 'The auditors found that the contractor inflated invoices for three years before the ministry has noticed the discrepancy.', model: 'The auditors found that the contractor had inflated invoices for three years before the ministry noticed the discrepancy.', note: 'The inflating happened earliest of the three past events, so it takes the past perfect; noticed stays past simple as the next event in the sequence, since has noticed would wrongly pull the discovery into unfinished present time.' },
     ],
     transfer: 'Write six sentences about your own preparation: two with since, two with for, and two using the past perfect to show which of two events came first. Underline every participle and check that none of them is a past simple form in disguise.',
     checklist: [
@@ -306,6 +344,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Future forms and the sequence of tenses',
     goal: 'Choose between will, going to, the present continuous and the present simple for future time, and keep tenses consistent across a complex sentence.',
     why: 'English has no single future tense; it has four common ways of talking about the future, and each carries a different meaning. Choosing at random makes writing sound uncertain.',
+    examTip: 'This rule shows up as sentence-correction and rewrite items built around a time or condition clause (when, if, until, by the time) that keeps a wrongly placed will or would. The standard trap pairs a correct will in the main clause with an incorrect will in the subordinate clause so the sentence sounds parallel and "balanced" — which is exactly why students accept it; isolate the connector\'s own clause and check it on its own before choosing.',
     minutes: 50,
     terms: [
       { term: 'Prediction', meaning: 'A statement about what you expect will happen.' },
@@ -317,17 +356,20 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'Four ways to talk about the future',
-        plain: 'Decide what kind of future you mean, then pick the form. This is a decision about meaning, not about formality.',
+        plain: 'Decide what kind of future you mean, then pick the form. This is a decision about meaning, not about formality: will, going to, the present continuous and the present simple all point forward in time, but each one tells the reader something different about how certain, planned or scheduled the event is. Will is the least committed of the four — a bare prediction or a decision made on the spot, with no evidence required. Going to claims either a decision already made before this moment or visible present evidence pointing to the outcome. The present continuous claims an actual diary entry: a time, and usually other people already informed. The present simple claims something fixed by an external timetable, not by anyone’s will at all — which is why you cannot use it for a personal plan ("I finish my degree next year" sounds wrong precisely because a degree is not a train schedule).',
         points: [
           'will — prediction, instant decision, promise, offer: The results will be announced in June.',
           'going to — an intention already formed, or evidence visible now: She is going to apply next year. / Look at those clouds: it is going to rain.',
           'present continuous — a fixed arrangement with a time: The delegation is leaving on Tuesday.',
           'present simple — a timetable or schedule: The train leaves at 6:40.',
           'Formal writing prefers will and the passive: the policy will be reviewed.',
+          'shall is largely restricted to formal offers and suggestions in modern usage: Shall I forward the file?',
         ],
         models: [
           { sentence: 'The commission will publish its findings next month.', note: 'A neutral prediction or official statement — will.' },
           { sentence: 'I am meeting the registrar at eleven.', note: 'A fixed arrangement — present continuous.' },
+          { sentence: 'The provincial assembly session begins on the fourth of next month.', note: 'A published schedule fixed by an external calendar — present simple.' },
+          { sentence: 'Given the falling reserves, the currency is going to weaken further.', note: 'Visible present evidence supporting the prediction — going to, not will.' },
         ],
         table: {
           caption: 'Which future form?',
@@ -346,46 +388,52 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'Never use will in a time or condition clause',
-        plain: 'After when, before, after, until, as soon as, if and unless, English uses a present tense to talk about the future. The will belongs in the other half of the sentence only.',
+        plain: 'After when, before, after, until, as soon as, if and unless, English uses a present tense to talk about the future. The will belongs in the other half of the sentence only. The logic is that these connectors already announce that we are talking about the future — the word "when" or "if" itself does that job — so marking the future a second time with will inside the same clause is redundant in English grammar, even though it feels natural to a writer translating directly from a language that does mark the future twice. Treat the connector as a signal that switches that clause into "timetable mode": whatever verb follows behaves as if it were describing something scheduled, not something willed.',
         points: [
           'When the results are announced, we will celebrate. — not when the results will be announced.',
           'If it rains, the match will be postponed. — not if it will rain.',
           'As soon as the file arrives, I will forward it.',
           'The present perfect is also allowed: After I have finished, I will call you.',
           'The exception is a polite request or a question about willingness: I will be grateful if you will confirm.',
+          'The same rule applies to before, once, while and every time in a future sense: Once the audit closes, the findings will be published.',
         ],
         models: [
           { sentence: 'Unless the funds are released, the work will stop.', note: 'Present simple in the condition, will in the result.' },
           { sentence: 'We will review the policy after the audit has been completed.', note: 'Present perfect in the time clause.' },
+          { sentence: 'The bench will reserve its order until both parties have filed their replies.', note: 'Present perfect in the until-clause, will in the main clause.' },
         ],
       },
       {
         heading: 'Future perfect and future continuous',
-        plain: 'Use the future perfect for something completed before a stated future point, and the future continuous for something in progress at a stated future point. Both need that stated point to make sense.',
+        plain: 'Use the future perfect for something completed before a stated future point, and the future continuous for something in progress at a stated future point. Both need that stated point to make sense — remove the future time phrase (by 2030, at this time next week) and the sentence collapses into an ordinary will-future, because the whole reason for the extra complexity is to place the action precisely against a future marker. Candidates tend to default to the plain future ("by 2030 the population will cross three hundred million") when the sense actually demands completion before that point, which subtly changes the claim from "it will happen at that point" to "it will already be finished by then".',
         points: [
           'By 2030, the population will have crossed three hundred million.',
           'At this time next week, the candidates will be writing the essay paper.',
           'By the time you return, I will have submitted the draft.',
           'Both are formal and precise; use them when the question mentions a deadline.',
+          'The future perfect continuous stresses duration up to a future point: By June, she will have been teaching for twenty years.',
         ],
         models: [
           { sentence: 'By the end of the financial year, the department will have spent the entire allocation.', note: 'Completed before a future point.' },
           { sentence: 'Next Monday the tribunal will be hearing the final arguments.', note: 'In progress at a future point.' },
+          { sentence: 'By the time the results are declared, most candidates will have started their next attempt.', note: 'Completion before a future point marked by a time clause.' },
         ],
       },
       {
         heading: 'Sequence of tenses',
-        plain: 'When the main verb is in the past, the verb in the subordinate clause normally moves into the past too. When the main verb is in the present or future, the subordinate clause is free.',
+        plain: 'When the main verb is in the past, the verb in the subordinate clause normally moves into the past too. When the main verb is in the present or future, the subordinate clause is free. This backshift exists because a past main verb places the whole sentence inside a past frame of reference: everything reported from within that frame is described as it looked at that past moment, not as it looks now, so the tense in the subordinate clause has to agree with the frame even though the fact reported might still be true. Recognising the exceptions matters as much as the rule itself — a permanent scientific or geographical truth is true regardless of any frame, so pulling it into the past actually misrepresents it as no longer true, which is why examiners keep such clauses in the present.',
         points: [
           'He says that he is ready. → He said that he was ready.',
           'She thinks the plan will work. → She thought the plan would work.',
           'Exception — a universal truth stays in the present: The teacher said that water boils at 100 degrees.',
           'Exception — a fact still true may stay present: He told me that he lives in Multan.',
           'After as if / as though and wish, use the past form for an unreal present: He behaves as if he were the owner.',
+          'A past perfect in the subordinate clause never shifts further back, since English has no tense further back than the past perfect: He said that he had already left.',
         ],
         models: [
           { sentence: 'The report concluded that the scheme had failed.', note: 'Past main verb pulls the subordinate clause back to the past perfect.' },
           { sentence: 'The report concludes that the scheme has failed.', note: 'Present main verb leaves the subordinate clause free.' },
+          { sentence: 'The geography textbook stated that Pakistan lies at the crossroads of South and Central Asia.', note: 'A permanent geographical fact resists backshift even after a past reporting verb.' },
         ],
       },
     ],
@@ -396,6 +444,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'By next month we will complete the survey.', right: 'By next month we will have completed the survey.', why: 'By + a future point marks completion, so the future perfect is required.' },
       { wrong: 'The train will leave at 6:40 every morning.', right: 'The train leaves at 6:40 every morning.', why: 'A timetable takes the present simple.' },
       { wrong: 'The teacher said that the earth revolved around the sun.', right: 'The teacher said that the earth revolves around the sun.', why: 'A permanent truth keeps the present tense even after a past reporting verb.' },
+      { wrong: 'Once the tribunal will announce its decision, the appeal window will open.', right: 'Once the tribunal announces its decision, the appeal window will open.', why: 'Once introduces a future time clause, which takes the present simple, not will.' },
+      { wrong: 'By the time the census finishes, the population will cross two hundred and forty million.', right: 'By the time the census finishes, the population will have crossed two hundred and forty million.', why: 'By the time marks completion before a future point, which needs the future perfect.' },
+      { wrong: 'The minister announced that the subsidy will continue next year.', right: 'The minister announced that the subsidy would continue next year.', why: 'A past reporting verb backshifts will to would.' },
+      { wrong: 'The bus leaves at 6 a.m. tomorrow if the weather will be clear.', right: 'The bus leaves at 6 a.m. tomorrow if the weather is clear.', why: 'The if-clause of a future condition takes the present simple, never will.' },
     ],
     pitfalls: [
       'Putting will into a when-, if-, until- or as-soon-as clause.',
@@ -421,6 +473,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd9q8', kind: 'spot', prompt: 'Find the error: “By the time the inquiry concludes (A), the officer (B) will retire (C) from service (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'By the time + a future point requires the future perfect: will have retired.' },
       { id: 'd9q9', kind: 'choice', prompt: 'Which sentence shows an intention formed before speaking?', options: ['I will apply for the post.', 'I am going to apply for the post.', 'I apply for the post.', 'I would apply for the post.'], answer: 1, why: 'Going to signals a plan already decided.' },
       { id: 'd9q10', kind: 'gap', prompt: 'She promised that she ____ the documents the following day.', options: ['will send', 'sends', 'would send', 'has sent'], answer: 2, why: 'Will backshifts to would after a past reporting verb.' },
+      { id: 'd9q11', kind: 'spot', prompt: 'Find the error: “Once the audit will close (A), the findings (B) will be published (C) within a month (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Once introduces a future time clause, which takes the present simple: once the audit closes.' },
+      { id: 'd9q12', kind: 'gap', prompt: 'By June, she ____ for twenty years at the same institute.', options: ['will teach', 'will have taught', 'will have been teaching', 'is teaching'], answer: 2, why: 'The future perfect continuous stresses the duration of an activity running up to a stated future point.' },
     ],
     corrections: [
       { id: 'd9c1', task: 'When the commission will announce the result, thousands of candidates will check the list.', model: 'When the commission announces the result, thousands of candidates will check the list.', note: 'A when-clause about the future uses the present simple.' },
@@ -428,6 +482,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd9c3', task: 'He told the committee that he is not aware of the irregularities and will cooperate fully.', model: 'He told the committee that he was not aware of the irregularities and would cooperate fully.', note: 'Both reported verbs backshift after told.' },
       { id: 'd9c4', task: 'Unless the funds will be released, the contractor will stop the work.', model: 'Unless the funds are released, the contractor will stop the work.', note: 'Unless introduces a condition clause and takes a present tense.' },
       { id: 'd9c5', task: 'The professor said that the Indus river flowed through four provinces, and that the seminar will start at nine.', model: 'The professor said that the Indus flows through four provinces and that the seminar would start at nine.', note: 'A permanent geographical fact stays present; the arrangement backshifts to would.' },
+      { id: 'd9c6', task: 'If the tribunal will announce its verdict tomorrow, the lawyers are going to holding a press conference.', model: 'If the tribunal announces its verdict tomorrow, the lawyers are going to hold a press conference.', note: 'The if-clause of a first conditional never takes will; and going to must be followed by the bare infinitive, not the -ing form.' },
     ],
     transfer: 'Write a short plan for the next six months of your preparation. Use will once, going to once, the present continuous for an arrangement once, and the future perfect once. Then rewrite the whole plan as reported speech beginning “Last month I said that …” and check every backshift.',
     checklist: [
@@ -444,6 +499,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Modals and conditionals',
     goal: 'Express obligation, permission, ability, probability and unreal situations with the right modal and the right conditional pattern.',
     why: 'Policy writing, argument and recommendation all run on modals. “The government should have acted” and “the government must act” carry completely different claims, and examiners read the difference.',
+    examTip: 'Expect a mix of error-spotting on conditional shape — if + would have is the single most repeated trap, since it sounds "more polite" but is simply wrong in the if-clause — and full-sentence rewrite items asking you to turn a given fact into should have, must have or need not have. Examiners also plant a decoy swapping must not and need not, since both look like negatives of obligation but claim opposite things: prohibition against an absence of requirement.',
     minutes: 60,
     terms: [
       { term: 'Modal verb', meaning: 'can, could, may, might, will, would, shall, should, must, ought to — a helping verb that adds attitude.' },
@@ -454,21 +510,23 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'A modal is always followed by the bare infinitive',
-        plain: 'No -s, no to, no -ed. This is the single most mechanical rule in the topic and the one most often broken.',
+        plain: 'No -s, no to, no -ed. This is the single most mechanical rule in the topic and the one most often broken, largely because modals look and behave like ordinary verbs in every other respect — they take a subject, they can be negated, they can form questions — so writers instinctively conjugate them the way they would conjugate "want to" or "need to", both of which do take to. A modal, however, has already done its grammatical work simply by existing in the sentence; it needs nothing more from the verb that follows than its plainest, most stripped-down form.',
         points: [
           'He must attend. — not must to attend, not must attends.',
           'Two modals cannot sit together: will can is wrong; write will be able to.',
           'For the past, use modal + have + past participle: should have attended.',
           'Ought is the exception that keeps to: he ought to attend.',
+          'A modal never changes for person or number: he must, not he musts; she can, not she cans.',
         ],
         models: [
           { sentence: 'The department should review the policy.', note: 'Bare infinitive after should.' },
           { sentence: 'The department should have reviewed the policy last year.', note: 'Perfect modal for a past obligation that was not met.' },
+          { sentence: 'The commissioner must not delay the disbursement any further.', note: 'Negation attaches to the modal itself, and the bare infinitive still follows.' },
         ],
       },
       {
         heading: 'What each modal actually claims',
-        plain: 'Modals are not interchangeable politeness markers. Each one makes a different claim about necessity or likelihood, and choosing the wrong one changes your argument.',
+        plain: 'Modals are not interchangeable politeness markers. Each one makes a different claim about necessity or likelihood, and choosing the wrong one changes your argument — this matters especially in policy and essay writing, where "the state should intervene" is a mild recommendation but "the state must intervene" asserts a non-negotiable duty, and swapping one for the other misrepresents how strongly you actually believe the claim. The must/have to distinction is subtler still: must signals that the obligation comes from the speaker’s own judgement or authority, while have to signals an obligation imposed by something external — a law, a rule, a circumstance — which is why official notifications almost always use have to or is required to rather than must when describing a citizen’s duty under a rule.',
         points: [
           'must — strong obligation from the speaker, or near-certainty: He must be the new director.',
           'have to — obligation from outside, from a rule or circumstance.',
@@ -476,10 +534,12 @@ export const grammarPhase2: GrammarLesson[] = [
           'can — ability or general possibility. could — past ability, or a weaker present possibility.',
           'may / might — permission, or genuine uncertainty. might is the more tentative of the two.',
           'need not — no obligation. must not — prohibition. These are opposites, not variants.',
+          'shall in formal legal and regulatory drafting expresses a binding obligation, stronger and more impersonal than must: The contractor shall complete the work within ninety days.',
         ],
         models: [
           { sentence: 'Candidates must submit the affidavit; they need not attach a photograph.', note: 'Obligation contrasted with absence of obligation.' },
           { sentence: 'The figures may be revised, but they might not change materially.', note: 'may = possible; might not = less likely.' },
+          { sentence: 'Under the new rules, importers have to declare the exact quantity at the port.', note: 'An externally imposed rule, best expressed with have to rather than must.' },
         ],
         table: {
           caption: 'Perfect modals: talking about the past',
@@ -496,45 +556,51 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'The three standard conditionals',
-        plain: 'A conditional has two halves, and each type fixes the tense of both. Learn the shape, not the label.',
+        plain: 'A conditional has two halves, and each type fixes the tense of both. Learn the shape, not the label — the numbers first, second, third are only labels for the same underlying scale, which is how likely or how real the speaker believes the condition to be. First conditionals describe something the writer thinks could genuinely happen; second conditionals describe something contrary to present fact or judged unlikely; third conditionals describe something that definitely did not happen, because the past cannot be changed. Once you see the shapes as points on a "how real is this" scale, choosing between them becomes a judgement about the situation, not a memory test.',
         points: [
           'First (real future): If + present simple, … will + bare infinitive. If the funds arrive, the work will resume.',
           'Second (unreal present or improbable future): If + past simple, … would + bare infinitive. If I had more time, I would revise the whole syllabus.',
           'Third (unreal past): If + past perfect, … would have + participle. If she had studied, she would have passed.',
           'Zero (general truth): If + present, … present. If water is heated, it evaporates.',
           'Never write will or would inside the if-clause of a first or second conditional.',
+          'Could and might can replace would in any conditional to soften the claim from certainty to possibility: If the bill passes, the reform could take effect within a year.',
         ],
         models: [
           { sentence: 'If the appeal is allowed, the penalty will be set aside.', note: 'First conditional — a realistic future.' },
           { sentence: 'If the appeal had been allowed, the penalty would have been set aside.', note: 'Third conditional — it was not allowed.' },
+          { sentence: 'If the provinces cooperated more closely, water disputes would be far fewer.', note: 'Second conditional — describes an unlikely or currently absent state of affairs.' },
         ],
       },
       {
         heading: 'Mixed conditionals and were',
-        plain: 'A past condition can have a present result, and a present condition can have a past result. English also uses were for all persons in unreal conditions.',
+        plain: 'A past condition can have a present result, and a present condition can have a past result. English also uses were for all persons in unreal conditions. Mixed conditionals exist because real life rarely respects the tidy boundaries of the three standard patterns: a decision made in the past can still be shaping the present moment, and a person’s present character can explain something that did or did not happen in the past. Recognise a mixed conditional by asking which half of the sentence is actually about now and which is about then, and build each half exactly as that standard conditional would require on its own.',
         points: [
           'Past condition, present result: If she had taken the job, she would be in Islamabad now.',
           'Present condition, past result: If he were more careful, he would not have lost the file.',
           'Use were, not was, after if in unreal conditions: If I were the chief secretary …',
           'Formal inversion drops if: Were the funds available, the work would resume. / Had she studied, she would have passed.',
+          'If only and I wish follow the same unreal patterns as second and third conditionals: If only the roads were better maintained.',
         ],
         models: [
           { sentence: 'Had the warning been heeded, the loss would have been smaller.', note: 'Inverted third conditional — formal and compact.' },
           { sentence: 'If I were in his position, I would resign.', note: 'were for an unreal present, whatever the subject.' },
+          { sentence: 'If the dam had been built on schedule, the region would not be facing water shortages today.', note: 'Mixed conditional — past condition, present result.' },
         ],
       },
       {
         heading: 'The subjunctive after demand, suggest, insist, propose',
-        plain: 'After verbs of demanding and recommending, the that-clause takes the bare form of the verb, with no -s and no should in formal writing.',
+        plain: 'After verbs of demanding and recommending, the that-clause takes the bare form of the verb, with no -s and no should in formal writing. This form survives in English almost exclusively in this one context, which is why it feels unfamiliar: it is a fossil of an older verb system that marked commands and wishes differently from statements of fact, and formal and administrative English has kept it precisely because it sounds more authoritative and impersonal than the ordinary present tense would. Informal speech often replaces it with should + bare infinitive (the committee recommended that the officer should be suspended), which is acceptable in speech but weaker in formal written English, where the bare subjunctive is preferred.',
         points: [
           'The committee recommended that the officer be suspended.',
           'I suggest that he submit the form immediately.',
           'It is essential that every candidate carry a valid identity card.',
           'The same applies to it is necessary / important / vital / imperative that …',
+          'The subjunctive is unaffected by the tense of the main verb: whether recommends or recommended, the that-clause stays in the bare form.',
         ],
         models: [
           { sentence: 'The court ordered that the record be produced.', note: 'be, not is or should be, in formal usage.' },
           { sentence: 'It is imperative that the state protect minority rights.', note: 'protect, not protects.' },
+          { sentence: 'The inquiry demanded that the officials appear before it within a week.', note: 'appear, not appears, regardless of the past tense of demanded.' },
         ],
       },
     ],
@@ -545,6 +611,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'If he will come, we will start the meeting.', right: 'If he comes, we will start the meeting.', why: 'The if-clause of a first conditional takes the present simple.' },
       { wrong: 'The board recommended that he is transferred immediately.', right: 'The board recommended that he be transferred immediately.', why: 'Recommend takes the subjunctive bare form in a that-clause.' },
       { wrong: 'You must not bring your identity card if you have already registered.', right: 'You need not bring your identity card if you have already registered.', why: 'Must not is a prohibition; the sentence means there is no obligation, which is need not.' },
+      { wrong: 'If the funds would arrive on time, the project will finish within budget.', right: 'If the funds arrive on time, the project will finish within budget.', why: 'The if-clause of a first conditional never takes would or will; it takes the present simple.' },
+      { wrong: 'She insisted that the report was revised before submission.', right: 'She insisted that the report be revised before submission.', why: 'Insist takes the bare subjunctive in the that-clause, not the ordinary past tense.' },
+      { wrong: 'If he was the finance secretary, he would restructure the tax system.', right: 'If he were the finance secretary, he would restructure the tax system.', why: 'Unreal conditions use were for every subject, not was.' },
+      { wrong: 'The auditors can have missed the discrepancy; the report looks clean.', right: 'The auditors might have missed the discrepancy; the report looks clean.', why: 'A tentative guess about a past possibility uses might have, not can have, which is not a standard perfect modal in this sense.' },
     ],
     pitfalls: [
       'Writing must to, can to, should to, or must attends.',
@@ -570,6 +640,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd10q8', kind: 'spot', prompt: 'Find the error: “It is essential that every candidate carries (A) a valid identity card (B) and reports (C) an hour early (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'It is essential that takes the subjunctive: carry, and correspondingly report.' },
       { id: 'd10q9', kind: 'gap', prompt: '____ the funds been released on time, the project would have finished within budget.', options: ['If', 'Had', 'Would', 'Were'], answer: 1, why: 'Inverting had replaces if in a formal third conditional.' },
       { id: 'd10q10', kind: 'choice', prompt: 'Which sentence expresses an outside obligation rather than the speaker’s own?', options: ['You must submit the form by Friday.', 'You have to submit the form by Friday; it is a departmental rule.', 'You should submit the form by Friday.', 'You may submit the form by Friday.'], answer: 1, why: 'Have to points to an external rule; must usually carries the speaker’s own authority.' },
+      { id: 'd10q11', kind: 'choice', prompt: 'Which sentence is correct?', options: ['He ought attend the hearing.', 'He ought to attend the hearing.', 'He oughts to attend the hearing.', 'He ought to attends the hearing.'], answer: 1, why: 'Ought is the one modal that keeps to before the bare infinitive.' },
+      { id: 'd10q12', kind: 'gap', prompt: 'He speaks as if he ____ the final decision, though he has no such authority.', options: ['makes', 'made', 'has made', 'will make'], answer: 1, why: 'As if / as though for an unreal present situation takes the past form, even though the meaning is present.' },
     ],
     corrections: [
       { id: 'd10c1', task: 'If the government would have invested in primary education, literacy rates would be higher today.', model: 'If the government had invested in primary education, literacy rates would be higher today.', note: 'Third-conditional if-clause takes the past perfect; the present result keeps would + bare infinitive.' },
@@ -577,6 +649,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd10c3', task: 'He must to inform the office in advance, otherwise he will can lose his allowance.', model: 'He must inform the office in advance; otherwise he may lose his allowance.', note: 'A modal takes the bare infinitive, so must to becomes must. Two modals cannot combine, and the meaning here is possibility, so will can becomes may.' },
       { id: 'd10c4', task: 'You must not submit the medical certificate because the rule was withdrawn last year.', model: 'You need not submit the medical certificate because the rule was withdrawn last year.', note: 'The sentence means there is no obligation, which is need not, not a prohibition.' },
       { id: 'd10c5', task: 'The authorities should took notice earlier; the damage can have been avoided.', model: 'The authorities should have taken notice earlier; the damage could have been avoided.', note: 'Past obligation and past unrealised possibility both take modal + have + participle.' },
+      { id: 'd10c6', task: 'It is necessary that every officer submits the affidavit, and he must not bring the original if he has already emailed a scanned copy.', model: 'It is necessary that every officer submit the affidavit, and he need not bring the original if he has already emailed a scanned copy.', note: 'It is necessary that takes the bare subjunctive, submit rather than submits; the second clause states an absence of obligation, which is need not, not the prohibition must not.' },
     ],
     transfer: 'Write a six-sentence recommendation on any policy failure you know about. Use must once, should have once, could have once, and one third conditional. Then underline every modal and check that a bare infinitive or have + participle follows it.',
     checklist: [
@@ -593,6 +666,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Active, passive and causative',
     goal: 'Convert between active and passive without losing tense, meaning or the object relationship, and know when each voice is the better choice.',
     why: 'Voice conversion is a standing FPSC question type, and the passive is the default register of official writing. Candidates lose marks both by converting mechanically and by overusing the passive in essays.',
+    examTip: 'FPSC\'s classic format here is direct voice conversion — "change the voice" given a full active or passive sentence to rewrite, not just spot-the-error — so you must reproduce the exact auxiliary for the tense, not merely recognise it. The examiner\'s favourite trap is an intransitive verb (occur, happen, arrive, consist) dressed up in a passive-sounding sentence, which has no correct passive at all: the only "correction" is to leave it active.',
     minutes: 55,
     terms: [
       { term: 'Active voice', meaning: 'The subject performs the action: the committee approved the plan.' },
@@ -604,7 +678,7 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'The mechanics of conversion',
-        plain: 'Three moves, in order: the object becomes the subject, the verb becomes the matching form of be plus the past participle, and the old subject becomes by + agent, or disappears. The tense never changes.',
+        plain: 'Three moves, in order: the object becomes the subject, the verb becomes the matching form of be plus the past participle, and the old subject becomes by + agent, or disappears. The tense never changes — the single most common error in conversion questions is a student who correctly identifies the passive shape but then, under time pressure, defaults to a generic "was + participle" regardless of what tense the active sentence actually was in. The safest method is mechanical: name the active tense out loud first (present perfect, past continuous, modal), find that exact tense’s own form of be in the table below, and only then attach the participle — never guess the passive form from the meaning alone.',
         points: [
           'Present simple: writes → is written.',
           'Past simple: wrote → was written.',
@@ -612,10 +686,12 @@ export const grammarPhase2: GrammarLesson[] = [
           'Past perfect: had written → had been written.',
           'Future: will write → will be written. Modal: must write → must be written.',
           'Continuous: is writing → is being written; was writing → was being written.',
+          'The indirect object of a two-object verb can also become the passive subject: gave her a certificate → she was given a certificate.',
         ],
         models: [
           { sentence: 'The tribunal is hearing the appeal. → The appeal is being heard by the tribunal.', note: 'Present continuous keeps its continuous form in the passive.' },
           { sentence: 'The assembly has passed the bill. → The bill has been passed by the assembly.', note: 'Present perfect becomes has been + participle.' },
+          { sentence: 'The board will finalise the budget by Friday. → The budget will be finalised by the board by Friday.', note: 'Future simple: will be + participle, tense unchanged.' },
         ],
         table: {
           caption: 'Every tense in the passive',
@@ -636,61 +712,69 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'Only transitive verbs have a passive',
-        plain: 'If a verb takes no object, it cannot be made passive. Sentences such as “He was slept” or “The accident was happened” are impossible in English.',
+        plain: 'If a verb takes no object, it cannot be made passive. Sentences such as “He was slept” or “The accident was happened” are impossible in English, because the passive is fundamentally a way of promoting an existing object into subject position — with no object to promote, there is nothing for the passive construction to act on. The confusion usually starts with verbs that can be transitive in one sense and intransitive in another, such as rise (never takes an object) versus raise (always needs one); getting these two confused is what produces the ungrammatical "prices were rose" almost as often as the reverse "the government raised" being replaced with "the government rose the prices".',
         points: [
           'Intransitive: happen, occur, arrive, sleep, die, rise, appear, disappear, consist, belong.',
           'The accident happened at noon. — never was happened.',
           'The scheme consists of three parts. — never is consisted of.',
           'A few verbs have both uses: The prices rose. (intransitive) / The government raised the prices. → The prices were raised.',
+          'A verb that is transitive but has no clear agent still resists a natural passive: it is unidiomatic to passivise resemble, have (possession), lack or suit.',
         ],
         models: [
           { sentence: 'The meeting occurred without the chairman.', note: 'Occur has no object and therefore no passive.' },
           { sentence: 'The decision was taken without the chairman.', note: 'Take has an object, so the passive works.' },
+          { sentence: 'The landslide occurred after three days of continuous rain.', note: 'Occur is intransitive; there is no passive equivalent to reach for here.' },
         ],
       },
       {
         heading: 'Verbs with two objects, and special patterns',
-        plain: 'A verb with two objects yields two possible passives, and the one that begins with the person is usually the natural choice. Imperatives, questions and reporting verbs each have their own passive shape.',
+        plain: 'A verb with two objects yields two possible passives, and the one that begins with the person is usually the natural choice. Imperatives, questions and reporting verbs each have their own passive shape, and these are exactly the patterns FPSC tends to test because they cannot be produced by mechanically applying the be + participle formula alone — each needs its own small adjustment (let for the imperative, question-word inversion for the question, an impersonal it or a raised subject for the reporting verb). Learning these as fixed patterns, rather than trying to derive them fresh each time from the basic rule, saves time under examination pressure.',
         points: [
           'The registrar sent the applicant a notice. → The applicant was sent a notice. / A notice was sent to the applicant.',
           'Imperative: Close the door. → Let the door be closed. / The door should be closed.',
           'Question: Did he sign it? → Was it signed by him?',
           'Who wrote this? → By whom was this written?',
           'Reporting: People say that he is honest. → It is said that he is honest. / He is said to be honest.',
+          'Verb + object + infinitive: They asked him to leave. → He was asked to leave.',
         ],
         models: [
           { sentence: 'They believe that the report is incomplete. → It is believed that the report is incomplete.', note: 'The impersonal passive is standard in formal analysis.' },
           { sentence: 'They believe him to be dishonest. → He is believed to be dishonest.', note: 'The personal passive of a reporting verb.' },
+          { sentence: 'The committee awarded her the scholarship. → She was awarded the scholarship.', note: 'The person, not the scholarship, becomes the natural passive subject.' },
         ],
       },
       {
         heading: 'When to choose the passive',
-        plain: 'The passive is a tool, not a sign of formality. Use it when the doer is unknown, unimportant or obvious, when the receiver is the real topic, or when official distance is required. Otherwise the active is shorter and clearer.',
+        plain: 'The passive is a tool, not a sign of formality. Use it when the doer is unknown, unimportant or obvious, when the receiver is the real topic, or when official distance is required. Otherwise the active is shorter and clearer. The mistake candidates make is opposite to the mistake they make with tenses: instead of avoiding the passive, many overuse it because they associate it with academic seriousness, producing essays where every sentence is passive and the writer’s own voice disappears entirely. A useful discipline is to write the first draft entirely in the active voice and only convert a sentence to the passive afterward, and only if you can name a specific reason from the list above for doing so.',
         points: [
           'Doer unknown: The files were removed overnight.',
           'Doer obvious: The accused was convicted. (by the court)',
           'Receiver is the topic: The bill was debated for three days.',
           'Official distance: Applications received after the deadline will not be entertained.',
           'In essays, prefer the active for your own arguments: “Iqbal argues”, not “it is argued by Iqbal”.',
+          'The passive lets you avoid naming a person when tact or fairness requires it: Mistakes were made in the initial assessment.',
         ],
         models: [
           { sentence: 'The committee rejected the proposal.', note: 'Active: shorter, and the doer matters.' },
           { sentence: 'The proposal was rejected on technical grounds.', note: 'Passive: the reason matters more than the doer.' },
+          { sentence: 'Three hundred candidates were shortlisted for the interview stage.', note: 'The candidates, not the shortlisting authority, are the real topic of the sentence.' },
         ],
       },
       {
         heading: 'Causative: have and get something done',
-        plain: 'When you arrange for someone else to do something, use have or get + object + past participle. This is not the passive, although it looks similar.',
+        plain: 'When you arrange for someone else to do something, use have or get + object + past participle. This is not the passive, although it looks similar, because the subject of a causative sentence is still, in a real sense, the one making things happen — just through an agent rather than with their own hands. The test that separates it from a true passive is whether the subject arranged, paid for or caused the action: "I had my documents attested" implies I went to the notary and set the process in motion, whereas a plain passive "my documents were attested" only reports what happened to them, with no implication that the subject caused it.',
         points: [
           'I had the documents attested. — someone else attested them for me.',
           'She got her degree verified by the university.',
           'Compare: I attested the documents. (I did it myself)',
           'For an unpleasant experience: He had his wallet stolen.',
           'have someone do something (no to) and get someone to do something (with to) are the person-focused versions.',
+          'The negative and question forms follow ordinary have/get patterns: Did you get the report typed? / He has not had the car serviced yet.',
         ],
         models: [
           { sentence: 'The department had the accounts audited externally.', note: 'The department arranged it; the auditors did it.' },
           { sentence: 'We should get the notification published before Friday.', note: 'get + object + participle.' },
+          { sentence: 'The ministry got the feasibility study reviewed by an independent panel.', note: 'The ministry arranged it; the panel carried out the review.' },
         ],
       },
     ],
@@ -701,6 +785,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'Who broke the window? → By whom the window was broken?', right: 'Who broke the window? → By whom was the window broken?', why: 'A passive question keeps question word order: auxiliary before the subject.' },
       { wrong: 'I got attested my documents from the notary.', right: 'I had my documents attested by the notary.', why: 'The causative pattern is have/get + object + past participle, in that order.' },
       { wrong: 'It is believed by many people that the scheme has failed.', right: 'Many people believe that the scheme has failed.', why: 'The passive adds nothing here; the active is shorter and clearer.' },
+      { wrong: 'The prices of essential goods were rose sharply last month.', right: 'The prices of essential goods rose sharply last month.', why: 'Rise is intransitive and has no passive form; only raise, which takes an object, can be made passive.' },
+      { wrong: 'The scholarship was awarded to she by the university.', right: 'The scholarship was awarded to her by the university.', why: 'The passive still requires the object form of the pronoun after to, not the subject form.' },
+      { wrong: 'The letter was wrote by the section officer yesterday.', right: 'The letter was written by the section officer yesterday.', why: 'The passive always ends in the past participle, written, not the past simple form wrote.' },
+      { wrong: 'She had cut her hair by the beautician.', right: 'She had her hair cut by the beautician.', why: 'The causative pattern is have + object + past participle; the object must sit between have and the participle.' },
     ],
     pitfalls: [
       'Making intransitive verbs passive: was happened, was occurred, was arrived.',
@@ -726,6 +814,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd11q8', kind: 'spot', prompt: 'Find the error: “The scheme is consisted of (A) three components (B), each funded (C) from a different source (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Consist is intransitive: “The scheme consists of three components.”' },
       { id: 'd11q9', kind: 'choice', prompt: 'Which version is better in an essay paragraph about your own argument?', options: ['It is argued by this writer that reform is necessary.', 'Reform is argued to be necessary by this writer.', 'Reform, it is argued, is necessary.', 'Reform is necessary for three reasons.'], answer: 3, why: 'State the claim directly. Passive self-reference wastes words and weakens the argument.' },
       { id: 'd11q10', kind: 'gap', prompt: 'The accounts ____ externally every year, as the rules require.', options: ['audit', 'are audited', 'are auditing', 'have auditing'], answer: 1, why: 'Present simple passive: are + participle.' },
+      { id: 'd11q11', kind: 'choice', prompt: 'Which sentence correctly asks about a causative arrangement?', options: ['Did you get the car service?', 'Did you get the car serviced?', 'Did you get serviced the car?', 'Did you got the car serviced?'], answer: 1, why: 'The causative question keeps get + object + past participle; did alone carries the tense.' },
+      { id: 'd11q12', kind: 'spot', prompt: 'Find the error: “The discrepancy (A) must have noticed (B) by the internal auditor (C) months ago (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'A passive modal perfect needs must have been noticed, not must have noticed.' },
     ],
     corrections: [
       { id: 'd11c1', task: 'A new policy has introduced by the ministry last month.', model: 'A new policy was introduced by the ministry last month.', note: 'The policy did not introduce anything, so the passive is right; last month is a finished time, so the tense is the past simple.' },
@@ -733,6 +823,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd11c3', task: 'I got attested my documents and then I submitted them.', model: 'I had my documents attested and then submitted them.', note: 'Causative word order is have/get + object + past participle.' },
       { id: 'd11c4', task: 'The proposal is being consider by the finance division at present.', model: 'The proposal is being considered by the finance division at present.', note: 'Every passive ends in a past participle.' },
       { id: 'd11c5', task: 'It was said by the spokesperson that the inquiry will be completed by June.', model: 'The spokesperson said that the inquiry would be completed by June.', note: 'The agent is known and relevant, so the active is better; the reported clause backshifts to would.' },
+      { id: 'd11c6', task: 'The incident was occurred near the checkpoint, and it is believing that the guard was negligent, though no report has submitted yet.', model: 'The incident occurred near the checkpoint, and it is believed that the guard was negligent, though no report has been submitted yet.', note: 'Occur is intransitive and has no passive; believe is stative and does not take the continuous, so the impersonal passive is is believed; and the perfect passive needs been before the participle.' },
     ],
     transfer: 'Take a paragraph of your own writing and convert every passive sentence into the active. Then decide, one sentence at a time, which version you prefer and write one line saying why. Keep only the passives that earn their place.',
     checklist: [
@@ -749,6 +840,7 @@ export const grammarPhase2: GrammarLesson[] = [
     title: 'Reported speech',
     goal: 'Report statements, questions, commands and requests with the correct tense, pronoun, word order and time reference.',
     why: 'Narration is a guaranteed question type, and reported speech is also how you paraphrase a source in an essay without quoting it. Getting the word order of a reported question wrong is the commonest single error in this topic.',
+    examTip: 'Reported speech dominates the "Narration" section as full-sentence conversion questions, not spot-the-error — you are given direct speech in quotation marks and four candidate reported versions. The reliable trap is an option that gets the tense backshift exactly right but leaves a pronoun, or here/tomorrow, unconverted, or the reverse: correct time words riding on the wrong tense, banking on candidates checking only the verb.',
     minutes: 55,
     terms: [
       { term: 'Reporting verb', meaning: 'said, told, asked, advised, warned, suggested — the verb that introduces the report.' },
@@ -759,16 +851,18 @@ export const grammarPhase2: GrammarLesson[] = [
     rules: [
       {
         heading: 'Four things change when you report',
-        plain: 'Tense, pronouns, time and place words, and — in questions and commands — the structure itself. Change all four, or the sentence will be half-reported.',
+        plain: 'Tense, pronouns, time and place words, and — in questions and commands — the structure itself. Change all four, or the sentence will be half-reported. Students usually remember to backshift the tense because it is the rule they were drilled on, but then forget that a report is also a change of speaker and place: the original "I" is no longer the person talking, and "here" no longer means where the reporter now stands. A useful test after writing a reported sentence is to imagine reading it aloud a week later, in a different room, to someone who never heard the original words — if any pronoun, time word or place word still points back to the original speaker’s moment, it has not been converted properly.',
         points: [
           'Tense: present → past, past → past perfect, will → would, can → could, may → might, must → had to.',
           'Pronouns shift to the reporter’s point of view: “I will help you” → he said that he would help me.',
           'Time and place: now → then, today → that day, tomorrow → the next day, yesterday → the previous day, here → there, this → that, ago → before.',
           'Quotation marks and the comma disappear.',
+          'Possessive and demonstrative words shift the same way as pronouns: "my file" → his file; "these documents" → those documents.',
         ],
         models: [
           { sentence: '“I am leaving tomorrow,” she said. → She said that she was leaving the next day.', note: 'Tense, pronoun and time word all change.' },
           { sentence: '“We have finished the work,” they said. → They said that they had finished the work.', note: 'Present perfect backshifts to past perfect.' },
+          { sentence: '“This is my last attempt,” he said. → He said that that was his last attempt.', note: 'Both the demonstrative and the possessive pronoun shift with the point of view.' },
         ],
         table: {
           caption: 'Backshift table',
@@ -789,61 +883,69 @@ export const grammarPhase2: GrammarLesson[] = [
       },
       {
         heading: 'Say, tell, ask — and what follows each',
-        plain: 'These reporting verbs are not interchangeable. Tell needs a person straight after it; say does not take one without to; ask is used for questions and requests.',
+        plain: 'These reporting verbs are not interchangeable. Tell needs a person straight after it; say does not take one without to; ask is used for questions and requests. The underlying distinction is that tell is inherently a verb of communicating to someone — it is grammatically incomplete without naming who was addressed, in the same way "give" needs a recipient — whereas say focuses purely on the content of what was spoken and treats the listener as optional background information. Confusing the two is one of the most frequent errors in narration questions precisely because both verbs translate to a single word in many candidates’ first languages.',
         points: [
           'He said that he was tired. — say + that-clause, no person.',
           'He told me that he was tired. — tell + person + that-clause.',
           'He said to me that he was tired. — correct but heavier.',
           'Never: he told that … or he said me that ….',
           'ask + person + if/whether for a yes-or-no question; ask + person + to + infinitive for a request.',
+          'Tell also works without a that-clause, as tell + person + fact: He told me the news. / He told her his name.',
         ],
         models: [
           { sentence: 'The chairman told the members that the meeting was postponed.', note: 'tell + person.' },
           { sentence: 'The chairman said that the meeting was postponed.', note: 'say without a person.' },
+          { sentence: 'The clerk told the applicant to collect the receipt the next morning.', note: 'tell + person + to + infinitive for an instruction.' },
         ],
       },
       {
         heading: 'Reported questions keep statement word order',
-        plain: 'This is the rule students break most often. Once a question is reported, it stops behaving like a question: no inversion, no do/does/did, and no question mark.',
+        plain: 'This is the rule students break most often. Once a question is reported, it stops behaving like a question: no inversion, no do/does/did, and no question mark. The reason is that a reported question is grammatically a noun clause functioning as the object of asked — and an ordinary noun clause never inverts its subject and verb, whatever the original sentence looked like before it was folded into the report. Thinking of the reported clause as a plain statement wearing a question word at the front (where instead of what, whether instead of if a subject-verb inversion happened) removes the temptation to carry the inversion across.',
         points: [
           'Yes-or-no question → if or whether: “Have you submitted it?” → He asked whether I had submitted it.',
           'Wh-question → keep the question word: “Where is the file?” → She asked where the file was.',
           'Never: she asked where was the file.',
           'Never: he asked that where I was going.',
           'Delete do, does and did: “Where did he go?” → She asked where he had gone.',
+          'A question tag or an embedded question inside a longer sentence follows the same rule: I wonder what time the office opens, never what time does the office open.',
         ],
         models: [
           { sentence: '“When will the results be announced?” → He asked when the results would be announced.', note: 'Statement order, will → would, no question mark.' },
           { sentence: '“Do you know the rule?” → She asked whether I knew the rule.', note: 'do disappears; know backshifts to knew.' },
+          { sentence: '“Why has the flight been delayed?” → The passenger asked why the flight had been delayed.', note: 'Wh-question word kept; auxiliary has backshifts to had, no inversion.' },
         ],
       },
       {
         heading: 'Commands, requests and advice',
-        plain: 'An imperative becomes an infinitive, and the reporting verb carries the force — order, tell, ask, request, advise, warn, forbid.',
+        plain: 'An imperative becomes an infinitive, and the reporting verb carries the force — order, tell, ask, request, advise, warn, forbid. This is a much bigger structural change than backshifting a statement, because the original sentence has no subject and no finite verb at all (an imperative such as "Submit the form" simply gives an instruction), so the reporter must supply the missing subject as the object of the reporting verb and convert the bare command into a to-infinitive. Choosing the right reporting verb also communicates tone: order and command suggest authority, request and ask suggest politeness, and advise suggests recommendation rather than instruction — so the choice is part of accurately representing what was actually said.',
         points: [
           '“Submit the form.” → He told me to submit the form.',
           '“Please help me.” → He requested me to help him.',
           '“Do not enter.” → He warned us not to enter.',
           '“You should rest.” → He advised me to rest.',
           '“Let us begin.” → He suggested that we should begin. / He suggested beginning.',
+          '“Would you mind opening the window?” → He asked me to open the window. (a polite request reported plainly)',
         ],
         models: [
           { sentence: 'The officer ordered the constable to seal the room.', note: 'Command → to + infinitive.' },
           { sentence: 'The doctor advised him not to travel for a week.', note: 'Negative command → not to + infinitive.' },
+          { sentence: 'The invigilator instructed the candidates to stop writing immediately.', note: 'A formal command reported with instruct + person + to + infinitive.' },
         ],
       },
       {
         heading: 'When not to backshift',
-        plain: 'Backshifting is not automatic. If the reporting verb is present, or if the statement is still true, the original tense may stay.',
+        plain: 'Backshifting is not automatic. If the reporting verb is present, or if the statement is still true, the original tense may stay. This exception matters most in essay writing and précis, where you are frequently reporting a source’s claim that is still current: reporting the constitution’s guarantees, a scientific principle, or a person’s ongoing residence in the past tense would misleadingly suggest the fact has since changed, so English allows — and formal writing often prefers — keeping such clauses in the present even directly after a past reporting verb like said or told.',
         points: [
           'Present reporting verb: He says that he is ready. — no change.',
           'Permanent truth: The teacher said that the earth revolves around the sun.',
           'Still true now: She told me that she lives in Sukkur.',
           'A past perfect cannot shift further back, so it stays.',
+          'A habit or characteristic that continues into the present may also stay unshifted: He mentioned that he cycles to the office every day.',
         ],
         models: [
           { sentence: 'The report states that corruption remains the principal obstacle.', note: 'Present reporting verb, no backshift.' },
           { sentence: 'He explained that the constitution guarantees free movement.', note: 'A legal fact still in force may stay present.' },
+          { sentence: 'She mentioned that her brother works for the forest department.', note: 'A currently true fact about someone kept in the present despite the past reporting verb.' },
         ],
       },
     ],
@@ -854,6 +956,10 @@ export const grammarPhase2: GrammarLesson[] = [
       { wrong: 'The teacher ordered the students that they should stand up.', right: 'The teacher ordered the students to stand up.', why: 'A command is reported with to + infinitive.' },
       { wrong: 'He said that he will submit the report tomorrow.', right: 'He said that he would submit the report the next day.', why: 'Will backshifts to would, and tomorrow becomes the next day.' },
       { wrong: 'She asked whether did I need any help.', right: 'She asked whether I needed any help.', why: 'Did disappears and the main verb carries the backshifted tense.' },
+      { wrong: 'The clerk told to me that the file had been misplaced.', right: 'The clerk told me that the file had been misplaced.', why: 'Tell takes the person directly, with no to in between.' },
+      { wrong: 'He requested to submit his documents earlier since he was travelling.', right: 'He requested that his documents be submitted earlier since he was travelling.', why: 'Requested that takes the subjunctive bare form in formal reporting, not a plain infinitive without a subject.' },
+      { wrong: 'The inspector asked the guard where was the key kept.', right: 'The inspector asked the guard where the key was kept.', why: 'A reported question keeps statement word order; there is no inversion of was.' },
+      { wrong: 'She said that she will be here tomorrow to collect the certificate.', right: 'She said that she would be there the next day to collect the certificate.', why: 'Will backshifts to would, and both here and tomorrow must shift to match the reporter’s different time and place.' },
     ],
     pitfalls: [
       'Keeping question word order in a reported question.',
@@ -879,6 +985,8 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd12q8', kind: 'choice', prompt: 'Report: “Please lend me your notes,” he said to her.', options: ['He said her to lend him her notes.', 'He requested her to lend him her notes.', 'He requested her that she lends him her notes.', 'He told her that please lend him her notes.'], answer: 1, why: 'A polite request becomes request/ask + person + to + infinitive.' },
       { id: 'd12q9', kind: 'spot', prompt: 'Find the error: “The witness said (A) that he had seen (B) the accused here (C) the previous evening (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Here becomes there when the report is made elsewhere.' },
       { id: 'd12q10', kind: 'choice', prompt: 'Which sentence correctly reports “Let us postpone the meeting”?', options: ['He said let us postpone the meeting.', 'He suggested that the meeting should be postponed.', 'He told that they postpone the meeting.', 'He asked to postpone the meeting that.'], answer: 1, why: 'Let us is reported with suggest + that-clause or suggest + -ing.' },
+      { id: 'd12q11', kind: 'gap', prompt: 'I wonder ____ time the office opens tomorrow.', options: ['what', 'what does', 'that what', 'what will'], answer: 0, why: 'An embedded question follows statement word order with no do-support, exactly like a formally reported question.' },
+      { id: 'd12q12', kind: 'choice', prompt: 'Report: “I wish I had studied harder,” she said.', options: ['She said that she wishes she studied harder.', 'She said that she wished she had studied harder.', 'She said that she wishes that she had study harder.', 'She wished that she has studied harder.'], answer: 1, why: 'Wish + past perfect for a past regret keeps that same unreal pattern when reported; only the reporting frame is added, since wish itself is not further backshifted.' },
     ],
     corrections: [
       { id: 'd12c1', task: 'He asked me that where had I kept the file?', model: 'He asked me where I had kept the file.', note: 'Delete that, restore statement order, remove the question mark.' },
@@ -886,6 +994,7 @@ export const grammarPhase2: GrammarLesson[] = [
       { id: 'd12c3', task: 'She said me that she is preparing for the examination since January.', model: 'She told me that she had been preparing for the examination since January.', note: 'Say does not take a person; the present perfect continuous backshifts to the past perfect continuous.' },
       { id: 'd12c4', task: 'The teacher ordered the class that they should not make noise.', model: 'The teacher ordered the class not to make any noise.', note: 'A command is reported with to + infinitive, not a that-clause.' },
       { id: 'd12c5', task: 'The guide explained that the Indus flowed through four provinces and asked us that did we want a map.', model: 'The guide explained that the Indus flows through four provinces and asked whether we wanted a map.', note: 'A permanent geographical fact stays present; the reported question drops that and did.' },
+      { id: 'd12c6', task: 'He said me that he will be there tomorrow and asked that did I want him to bring anything.', model: 'He told me that he would be there the next day and asked whether I wanted him to bring anything.', note: 'Say does not take a person directly, so told is needed; will backshifts to would and tomorrow to the next day; and a reported yes-or-no question drops that and the inversion did, taking whether with statement order instead.' },
     ],
     transfer: 'Find a short interview or a set of quoted remarks in a newspaper. Report five of the statements and three of the questions in your own words. Check each one against four things: tense, pronoun, time word, and word order.',
     checklist: [

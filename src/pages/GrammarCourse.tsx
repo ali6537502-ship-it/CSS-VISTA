@@ -306,7 +306,7 @@ export default function GrammarCourse() {
     <div>
       <PageHeader
         title="30-Day Grammar Course"
-        description="Start from zero and finish able to write accurate, formal English. Each day explains one skill in plain language, shows worked examples, gives you a warm-up, a ten-question drill and five sentence corrections, and ends with a short piece of writing of your own."
+        description="Start from zero and finish able to write accurate, formal English. Each day explains one skill in plain language, shows worked examples, gives you a warm-up, a twelve-question drill and six sentence corrections, and ends with a short piece of writing of your own."
       >
         <div className="mt-4 flex flex-wrap gap-2">
           <button type="button" onClick={() => setView('toolkit')} className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
@@ -516,7 +516,7 @@ export default function GrammarCourse() {
                       <li>2. Cover the right-hand column of the examples and predict.</li>
                       <li>3. Do the warm-up; if you miss one, reread that rule.</li>
                       <li>4. Attempt the whole drill before checking anything.</li>
-                      <li>5. Write the five corrections out by hand.</li>
+                      <li>5. Write the six corrections out by hand.</li>
                       <li>6. Finish with the writing task in your own words.</li>
                     </ol>
                   </div>
@@ -655,8 +655,12 @@ export default function GrammarCourse() {
               </article>
 
               <article className="rounded-xl border bg-white p-5 sm:p-7">
+                <div className="mb-5 rounded-xl border border-sky-200 bg-sky-50 p-4 sm:p-5">
+                  <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-sky-800"><Target className="h-4 w-4" /> How examiners actually test this</h4>
+                  <p className="mt-1.5 text-sm leading-7 text-sky-950">{lesson.examTip}</p>
+                </div>
                 <div className="flex flex-wrap items-start justify-between gap-3">
-                  <StepHeading step={4} icon={ListChecks} title="Daily drill" hint="Ten questions at examination difficulty, all on today’s topic. Anything you miss goes into your notebook." />
+                  <StepHeading step={4} icon={ListChecks} title="Daily drill" hint="Twelve questions at examination difficulty, all on today’s topic. Anything you miss goes into your notebook." />
                   {drillAnswered > 0 && (
                     <button type="button" onClick={resetDrill} className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border px-3 text-xs font-semibold text-pine hover:bg-secondary">
                       <RotateCcw className="h-3.5 w-3.5" /> Start the drill again

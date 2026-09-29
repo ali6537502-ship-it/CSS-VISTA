@@ -73,6 +73,8 @@ export interface GrammarLesson {
   goal: string
   /** Why this matters for the paper, in the student's own terms. */
   why: string
+  /** How examiners actually dress this rule up in a question — the format and the trap, not the rule again. */
+  examTip: string
   minutes: number
   terms: GrammarTerm[]
   rules: GrammarRule[]
@@ -81,9 +83,9 @@ export interface GrammarLesson {
   pitfalls: string[]
   /** Four easy items that check the rule was understood. */
   warmUp: GrammarQuestion[]
-  /** Ten mixed items at examination difficulty. */
+  /** Twelve mixed items at examination difficulty. */
   drill: GrammarQuestion[]
-  /** Five write-then-check sentence corrections. */
+  /** Six write-then-check sentence corrections. */
   corrections: GrammarCorrection[]
   /** A short piece of writing that forces the rule into the student's own prose. */
   transfer: string
