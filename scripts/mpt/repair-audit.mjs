@@ -6,6 +6,7 @@ import { MPT_SECTION_ORDER, MPT_SECTION_SIZE } from '../../src/data/mpt/taxonomy
 import { tokenSet, jaccard, SAME_FACT_JACCARD } from '../../src/data/mpt/selector.ts'
 import { CATCH_ALL_OPTION, canonical, surfaceTemplate } from './bank-lib.mjs'
 import { liveDefects, questionFrame, MAX_FRAME_PER_PAPER } from './live-review-rules.mjs'
+import { challengingLimit } from './repair-live-series.mjs'
 import { stemHash } from './served-archive.mjs'
 
 const count = (items, pick) => items.reduce((m, x) => { const k = pick(x); m[k] = (m[k] ?? 0) + 1; return m }, {})
@@ -111,7 +112,7 @@ export function auditRepairedSeries(papers, context) {
         identities.set(q.section, list)
       }
     }
-    if (gaHard > 1) fail(`General Abilities has ${gaHard} challenging replacements (limit 1)`)
+    if (gaHard > challengingLimit('General Abilities')) fail(`General Abilities has ${gaHard} challenging replacements (limit ${challengingLimit('General Abilities')})`)
     for (const [f, n] of gaFamilies) {
       if (n > MPT_REPETITION_LIMITS.perPaperFamilyGa.max) fail(`GA pattern family ${f} appears ${n} times`)
       familyPapers.set(f, (familyPapers.get(f) ?? 0) + 1)
