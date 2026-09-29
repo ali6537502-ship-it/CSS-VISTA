@@ -20,7 +20,7 @@ export function auditRepairedSeries(papers, context) {
   const failures = []
   const warnings = []
   const reports = []
-  const { bankById, served, heldStems, heldIds, currentWindow, expectedPapers } = context
+  const { bankById, served, heldStems, heldIds, currentWindow, expectedPapers, reviewedKeep } = context
   if (papers.length !== expectedPapers) failures.push(`series has ${papers.length}/${expectedPapers} papers`)
   const seenIds = new Map()
   const seenStems = new Map()
@@ -58,7 +58,10 @@ export function auditRepairedSeries(papers, context) {
       if (q.meta.origin === 'live-series') {
         const defects = liveDefects({ ...q, paperSection: q.section, sourceUrl: q.meta.source_url }, { servedStems: heldStems, seenStems: new Set(), gaTemplates: new Set() })
         if (defects.length) fail(`kept ${q.id}: ${defects.join('; ')}`)
-        if (heldIds.has(q.id)) fail(`kept ${q.id} was already used in Mocks 1–4`)
+        if (heldIds.has(q.id)) fail(`kept ${q.id} was already used in a held mock`)
+        // Release 4: every kept live question has been read and passed by an editor, and is explained.
+        if (reviewedKeep && !reviewedKeep.has(q.id)) fail(`kept ${q.id} was not passed by the editor review`)
+        if (!String(q.e ?? '').trim()) fail(`kept ${q.id} has no explanation`)
       } else {
         const bank = bankById.get(q.id)
         if (!bank) { fail(`${q.id} is not in the reviewed bank`); continue }
@@ -66,6 +69,7 @@ export function auditRepairedSeries(papers, context) {
         if (bank.o[bank.a] !== q.o[q.a]) fail(`${q.id} answer does not match the verified bank answer`)
         if (!q.e || q.e.trim().length < 12) fail(`${q.id} has no explanation`)
         if (served.stems.has(stemHash(bank.q)) || served.ids.has(bank.id)) fail(`${q.id} was served in an earlier series`)
+        if (heldIds.has(q.id)) fail(`${q.id} was already sat in a held mock`)
         if (bank.time_sensitive) {
           if (!/^https:\/\//.test(bank.source_url ?? '') || !bank.event_date) fail(`${q.id} time-sensitive without source/date`)
           if (bank.subtopic === 'ca.recent' && (bank.event_date < currentWindow.from || bank.event_date > currentWindow.to)) fail(`${q.id} stale Current Affairs (${bank.event_date})`)
@@ -82,7 +86,7 @@ export function auditRepairedSeries(papers, context) {
       if (!q.meta.passage_id) {
         if (seenStems.has(stem)) fail(`${q.id} repeats the question text of paper ${seenStems.get(stem)}`)
         seenStems.set(stem, index)
-        if (heldStems.has(stem)) fail(`${q.id} repeats a question used in Mocks 1–4`)
+        if (heldStems.has(stem)) fail(`${q.id} repeats a question used in a held mock`)
         if (q.section === 'General Abilities' || /\d/.test(stem)) {
           const t = `${q.section}|${surfaceTemplate(bareStem(q))}`
           if (templates.has(t)) fail(`${q.id} is ${templates.get(t)} with numbers changed`)

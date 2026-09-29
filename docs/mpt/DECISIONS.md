@@ -517,3 +517,13 @@ still exist (D-48) but are not listed.
 - Nothing is deleted: unused bank items stay in reserve. The scheduler stops at the
   planned last mock, `CSSV_MPT_PLANNED_MOCKS` (default 40), so reserve papers never become
   unplanned mocks; raising it lets the owner add mocks later.
+
+**D-56 · Release 4: every kept live question read by an editor (28 Sep 2026)** — owner instruction
+- Mocks 1–8 had been held, so release 4 covers the 32 remaining Mocks 9–40, and never reuses a
+  bank question already sat in Mocks 5–8 (release 3 papers 1–4, archived in
+  `data-archive/mpt-release-3-series.json`).
+- Every live question the rules would keep (860) was read one by one: answer key checked;
+  rejected if wrong, doubtful, ambiguous, time-bound, obscure, badly worded or off-syllabus
+  (238 rejected); every kept question received a factual explanation (none is left without one).
+  The verdicts are `src/data/mpt/release/live-review.json`; the repair keeps only questions the
+  editor passed, and the gate and tests fail otherwise. Question, options and key are unchanged.
