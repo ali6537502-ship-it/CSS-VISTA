@@ -48,8 +48,8 @@ test('new Urdu items have distinct stems and four distinct, explained answers', 
 })
 
 test('MPT English imports only the examination-level, auto-marked grammar-course drills', () => {
-  assert.equal(mptGrammarCourseEnglishQuestions.length, 231)
-  assert.equal(new Set(mptGrammarCourseEnglishQuestions.map((question) => question.q)).size, 231)
+  assert.equal(mptGrammarCourseEnglishQuestions.length, 281)
+  assert.equal(new Set(mptGrammarCourseEnglishQuestions.map((question) => question.q)).size, 281)
   for (const question of mptGrammarCourseEnglishQuestions) {
     assert.equal(question.o.length, 4, question.id)
     assert.equal(new Set(question.o).size, 4, question.id)
@@ -109,8 +109,8 @@ test('repository Urdu grammar conversion stays inside language topics and preser
 })
 
 test('repository English conversion is large, unique and answer-keyed', () => {
-  assert.equal(repositoryMptEnglishQuestions.length, 1567)
-  assert.equal(new Set(repositoryMptEnglishQuestions.map((question) => question.q)).size, 1567)
+  assert.equal(repositoryMptEnglishQuestions.length, 1702)
+  assert.equal(new Set(repositoryMptEnglishQuestions.map((question) => question.q)).size, 1702)
   assert.equal(repositoryMptEnglishQuestions.filter((question) => question.id.includes('correction')).length >= 500, true)
   assert.equal(repositoryMptEnglishQuestions.filter((question) => question.id.includes('reference')).length >= 1000, true)
   for (const question of repositoryMptEnglishQuestions) {
