@@ -9,6 +9,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Articles and determiners',
     goal: 'Decide between a, an, the and no article by asking what the noun is doing, not by translating from Urdu.',
     why: 'Urdu has no articles, so this is the single most persistent error in Pakistani candidates’ English. It appears in every line of an essay and is impossible for an examiner to overlook.',
+    examTip: 'Articles are tested as a two-blank fill-in-the-blank item across one sentence, and as error-spotting with four underlined parts where one article is wrong (a genuine "no error" option is sometimes present). The favourite trap pairs a correct sound-based a/an choice with a wrong "the" before a general abstract noun, so a candidate who checks only the article they were already suspicious of waves the whole sentence through.',
     minutes: 55,
     terms: [
       { term: 'Indefinite article', meaning: 'a / an — one of many, mentioned for the first time.' },
@@ -139,6 +140,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd13q8', kind: 'spot', prompt: 'Find the error: “The unemployment (A) among young graduates (B) has risen (C) sharply since 2019 (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Unemployment here is a general abstract noun and takes no article.' },
       { id: 'd13q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['She plays the cricket and the violin.', 'She plays cricket and the violin.', 'She plays the cricket and violin.', 'She plays cricket and violin.'], answer: 1, why: 'Games take no article; musical instruments take the.' },
       { id: 'd13q10', kind: 'gap', prompt: 'Only ____ few candidates attempted ____ last question.', options: ['a … a', 'a … the', 'the … a', 'no article … the'], answer: 1, why: 'A few means some; the last question is identified by the ordinal.' },
+      { id: 'd13q11', kind: 'gap', prompt: 'The report ____ was submitted last month has been approved; ____ new report is now with the committee.', options: ['the … a', 'a … the', 'the … the', 'a … a'], answer: 0, why: 'A following relative clause identifies which report, so the; the second report is a fresh first mention, so a.' },
+      { id: 'd13q12', kind: 'spot', prompt: 'Find the error: “He was admitted to the hospital (A) as a patient (B) after an accident (C) on the motorway (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Hospital used for its institutional purpose (as a patient) takes no article; adding the wrongly names the building instead.' },
     ],
     corrections: [
       { id: 'd13c1', task: 'The education in Pakistan needs a urgent reform because the quality is poor.', model: 'Education in Pakistan needs urgent reform because the quality is poor.', note: 'Two abstract general nouns drop the article; reform here is uncountable, so a is wrong.' },
@@ -146,6 +149,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd13c3', task: 'Poverty and the illiteracy are the two biggest problem facing the country.', model: 'Poverty and illiteracy are the two biggest problems facing the country.', note: 'General abstract nouns take no article, and two requires a plural noun.' },
       { id: 'd13c4', task: 'The my elder brother was admitted in hospital on the last Monday.', model: 'My elder brother was admitted to hospital last Monday.', note: 'A possessive is already a determiner; admit takes to; last Monday needs no article.' },
       { id: 'd13c5', task: 'He returned to the home after the school and played the football till the evening.', model: 'He returned home after school and played football till the evening.', note: 'Home, school and games take no article; in the evening keeps it.' },
+      { id: 'd13c6', task: 'The corruption in a public sector remains one of biggest challenge facing a government, and the education in rural areas needs an urgent reform.', model: 'Corruption in the public sector remains one of the biggest challenges facing the government, and education in rural areas needs urgent reform.', note: 'Corruption in a general statement drops the article; the public sector is a specific, identifiable institution and needs the; one of the + superlative needs the and a plural noun; general education and uncountable reform take no article.' },
     ],
     transfer: 'Copy any four sentences from an English newspaper editorial. Delete every article, then put them back from memory and compare with the original. Where you differ, write one line explaining which of the three questions — countable, identifiable, general — you answered wrongly.',
     checklist: [
@@ -162,6 +166,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Pronouns and clear reference',
     goal: 'Choose the right pronoun form and make sure every pronoun points unmistakably to one noun.',
     why: 'An unclear pronoun forces the examiner to guess your meaning. Wrong pronoun forms — “between you and I”, “myself will attend” — are also classic error-correction items.',
+    examTip: 'Pronoun questions are set as error-spotting (four underlined parts, one a wrong form or a mismatched antecedent) and as full-sentence rewrites that force you to remove an ambiguous reference by naming the noun again. The trap is a decoy: examiners underline "and I" or "their" in a spot that already sounds fluent, so a candidate trusting their ear over the delete-the-other-person or singular-antecedent test picks the natural-sounding wrong option.',
     minutes: 50,
     terms: [
       { term: 'Antecedent', meaning: 'The noun a pronoun stands for.' },
@@ -289,6 +294,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd14q8', kind: 'choice', prompt: 'Which sentence uses the reflexive correctly?', options: ['Please forward the file to myself.', 'The minister himself reviewed the file.', 'Myself reviewed the file.', 'The officers reviewed the file theirselves.'], answer: 1, why: 'A reflexive may be used for emphasis beside the subject it echoes.' },
       { id: 'd14q9', kind: 'spot', prompt: 'Find the error: “In Iqbal’s poetry (A), he argues (B) that the self (C) is dynamic (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'He cannot refer back to the possessive Iqbal’s. Write “In his poetry, Iqbal argues …”.' },
       { id: 'd14q10', kind: 'choice', prompt: 'Which sentence has a clear reference for This?', options: ['The department delayed the audit for two years. This is unacceptable.', 'The department delayed the audit for two years. This delay is unacceptable.', 'This is why the department delayed the audit.', 'This, however, remains unacceptable.'], answer: 1, why: 'This + a noun names exactly what is being criticised.' },
+      { id: 'd14q11', kind: 'choice', prompt: 'Which sentence correctly distinguishes exactly two people from a larger group?', options: ['The two officers on the panel respect each other.', 'The two officers on the panel respect one another.', 'All the members of the board respect each other.', 'The candidates in the hall greeted each other.'], answer: 0, why: 'Traditional usage reserves each other for exactly two and one another for more than two; exam-standard prose still tests the distinction.' },
+      { id: 'd14q12', kind: 'spot', prompt: 'Find the error: “The report was leaked to the press (A) before the ministry (B) could clarify their (C) position on the matter (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Ministry is a collective noun acting as one body here and takes its, not their.' },
     ],
     corrections: [
       { id: 'd14c1', task: 'Between you and I, the committee has already made their decision.', model: 'Between you and me, the committee has already made its decision.', note: 'Object form after between; a collective noun takes its.' },
@@ -296,6 +303,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd14c3', task: 'The officer who we had recommended did not accept the posting, which surprised everybody.', model: 'The officer whom we had recommended did not accept the posting, and his refusal surprised everybody.', note: 'Whom as the object of recommended; which had no clear antecedent, so name it.' },
       { id: 'd14c4', task: 'Myself and the deputy director has prepared the summary for the minister.', model: 'The deputy director and I have prepared the summary for the minister.', note: 'A reflexive cannot be a subject, and a joined plural subject takes have.' },
       { id: 'd14c5', task: 'When the SHO met the complainant, he refused to register the case, and this caused a protest.', model: 'When the SHO met the complainant, the SHO refused to register the case, and this refusal caused a protest.', note: 'He was ambiguous and this was empty; naming both removes the guesswork.' },
+      { id: 'd14c6', task: 'Between him and I, the committee have finalized their report, and each of the members have signed it themself.', model: 'Between him and me, the committee has finalized its report, and each of the members has signed it.', note: 'Object form after between; the collective noun committee takes a singular verb and its; each is singular, so has, and themself is not a standard word so the reflexive is dropped altogether.' },
     ],
     transfer: 'Take one page of your own writing and circle every pronoun. Draw an arrow from each one to the exact noun it replaces. Any pronoun with two possible arrows, or with none, must be rewritten.',
     checklist: [
@@ -312,6 +320,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Modifiers: put the describing words where they belong',
     goal: 'Place every modifier next to the word it describes, and repair dangling and squinting modifiers.',
     why: 'A misplaced modifier does not merely read badly: it states something the candidate did not mean. Examiners treat it as a failure of logic, not of style.',
+    examTip: 'Modifier questions are almost always error-spotting, and the underlined part is often not the misplaced word itself but a neighbouring phrase, forcing the candidate to notice that the true fault is a word\'s position rather than any single word\'s form. The trap is a dangling participle in an otherwise flawless sentence, so a candidate scanning for verb or article mistakes sails straight past it.',
     minutes: 50,
     terms: [
       { term: 'Modifier', meaning: 'Any word, phrase or clause that describes something else.' },
@@ -438,6 +447,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd15q8', kind: 'spot', prompt: 'Find the error: “The scheme, after several years of delay and three separate inquiries into its finances (A), was (B) finally (C) abandoned (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'The long insertion separates the subject from its verb. Move it: “After several years of delay and three separate inquiries into its finances, the scheme was finally abandoned.”' },
       { id: 'd15q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['The plan is more complete than the earlier one.', 'The plan is more nearly complete than the earlier one.', 'The plan is most complete of all.', 'The plan is very complete.'], answer: 1, why: 'Complete is absolute; degree is expressed with more nearly.' },
       { id: 'd15q10', kind: 'spot', prompt: 'Find the error: “He said he would (A) only sign the file (B) after the legal branch (C) had cleared it (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'The limit is on the timing, not the act: “he would sign the file only after the legal branch had cleared it”.' },
+      { id: 'd15q11', kind: 'choice', prompt: 'Which sentence means that another person, besides the minister, signed the order?', options: ['The minister also signed the order.', 'The minister signed the order also.', 'The minister signed also the order.', 'Also the minister signed the order.'], answer: 0, why: 'Also placed before the verb signals that someone else did the same action as well.' },
+      { id: 'd15q12', kind: 'spot', prompt: 'Find the error: “The report briefly summarised (A) findings that alarmed (B) the entire steering committee in the annex (C) attached to the minutes (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: '“In the annex” sits ambiguously at the end — unclear whether the findings appear in the annex or the alarm occurred there. Move it beside findings: “findings, contained in the annex, that alarmed …”.' },
     ],
     corrections: [
       { id: 'd15c1', task: 'Being a public holiday, the office was closed and we could not submit the form.', model: 'Because it was a public holiday, the office was closed and we could not submit the form.', note: 'The office is not a public holiday. Turning the phrase into a full clause supplies the missing subject.' },
@@ -445,6 +456,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd15c3', task: 'While travelling to Peshawar, the luggage of the delegation was stolen.', model: 'While the delegation was travelling to Peshawar, its luggage was stolen.', note: 'The luggage was not travelling on its own; make the opening a full clause.' },
       { id: 'd15c4', task: 'We interviewed the officer in the corridor who had signed the order.', model: 'We interviewed the officer who had signed the order in the corridor.', note: 'Better still: “In the corridor, we interviewed the officer who had signed the order,” if the corridor is where the interview happened.' },
       { id: 'd15c5', task: 'Having been delayed by three years, the minister finally inaugurated the project.', model: 'Having been delayed by three years, the project was finally inaugurated by the minister.', note: 'The minister was not delayed by three years; the project was.' },
+      { id: 'd15c6', task: 'Reviewing the file quickly, several errors were noticed and the officer only fixed two of the five mistakes before the deadline.', model: 'Reviewing the file quickly, the officer noticed several errors and fixed only two of the five mistakes before the deadline.', note: 'The opening participle needs the officer, not the errors, as its doer; and only must sit beside two, the thing it limits, not before the verb fixed.' },
     ],
     transfer: 'Write five sentences that each contain the word only, placing it in a different position each time. Beside each sentence, write in a few words exactly what it now claims. Then find a paragraph in your own work and check every opening phrase for a dangling modifier.',
     checklist: [
@@ -461,6 +473,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Prepositions and word partnerships',
     goal: 'Use the preposition that English attaches to a particular verb, noun or adjective, instead of translating from Urdu.',
     why: 'Prepositions cannot be reasoned out; they are fixed partnerships. They appear in almost every error-correction question because they expose directly how much real English a candidate has read.',
+    examTip: 'Prepositions are tested as a pure fill-in-the-blank vocabulary item on one fixed collocation, or as error-spotting where a wrong preposition is grafted onto an otherwise flawless sentence. The favourite trap is a verb that takes no preposition in English at all but does under Urdu influence (discuss about, request for, reach at) — it sounds natural precisely because the Urdu equivalent needs that word, which is why intuition fails here more than anywhere else in the course.',
     minutes: 55,
     terms: [
       { term: 'Collocation', meaning: 'A word partnership fixed by usage: interested in, depend on, capable of.' },
@@ -597,6 +610,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd16q8', kind: 'gap', prompt: 'He arrived ____ time for the interview but not ____ time to revise his notes.', options: ['in … on', 'on … in', 'at … in', 'on … at'], answer: 1, why: 'On time = punctual; in time = early enough for something.' },
       { id: 'd16q9', kind: 'choice', prompt: 'Which sentence is correct?', options: ['This model is superior than the previous one.', 'This model is superior to the previous one.', 'This model is more superior than the previous one.', 'This model is superior from the previous one.'], answer: 1, why: 'Superior, inferior, senior and junior all take to.' },
       { id: 'd16q10', kind: 'spot', prompt: 'Find the error: “The delegation reached at Islamabad (A) on Sunday evening (B) and left for Murree (C) the next morning (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Reach takes a direct object: reached Islamabad. Use arrive in or arrive at if you want a preposition.' },
+      { id: 'd16q11', kind: 'gap', prompt: 'He apologised ____ the delay and thanked the panel ____ its patience.', options: ['for … for', 'to … for', 'for … to', 'to … to'], answer: 0, why: 'Apologise for a mistake or action, and thank someone for something — both partnerships take for.' },
+      { id: 'd16q12', kind: 'spot', prompt: 'Find the error: “The candidate succeeded (A) to clear (B) the written test (C) on his first attempt (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Succeed takes in + the gerund, not a to-infinitive: succeeded in clearing.' },
     ],
     corrections: [
       { id: 'd16c1', task: 'I am looking forward to meet you and to discuss about the proposal.', model: 'I am looking forward to meeting you and discussing the proposal.', note: 'Look forward to takes -ing; discuss takes no preposition.' },
@@ -604,6 +619,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd16c3', task: 'He was deprived from his rights and was not eligible to the allowance.', model: 'He was deprived of his rights and was not eligible for the allowance.', note: 'Deprived of, eligible for — fixed partnerships.' },
       { id: 'd16c4', task: 'We reached at the office in Monday at the morning.', model: 'We reached the office on Monday morning.', note: 'Reach takes no preposition; on for a day; morning after a day name needs no in.' },
       { id: 'd16c5', task: 'She is used to work under pressure and she insists for a written order every time.', model: 'She is used to working under pressure, and she insists on a written order every time.', note: 'Be used to + -ing; insist on.' },
+      { id: 'd16c6', task: 'She congratulated him for his success and insisted for celebrating with sweets, though he was indifferent with the whole idea.', model: 'She congratulated him on his success and insisted on celebrating with sweets, though he was indifferent to the whole idea.', note: 'Congratulate on, insist on and indifferent to are all fixed partnerships; the draft substitutes for and with throughout.' },
     ],
     transfer: 'Start a two-column page in your notebook headed “verb + preposition”. Read one editorial and record every partnership you meet, in a full phrase rather than a bare pair. Add ten entries a day for the rest of this course; by Day 30 you will have three hundred real examples, which is worth more than any list you memorise.',
     checklist: [
@@ -620,6 +636,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Gerunds, infinitives and participles',
     goal: 'Choose between -ing and to + verb after any verb, adjective or preposition, and use participles without creating danglers.',
     why: 'These three non-finite forms appear in every complex sentence you write. Choosing the wrong one after a verb — “he suggested to postpone” — is an error examiners spot instantly.',
+    examTip: 'This topic is tested with fill-in-the-blank items offering four verb forms (bare infinitive, to-infinitive, gerund, past participle) for one blank, and with error-spotting where the wrong non-finite form follows a verb that looks similar to one taking the opposite pattern. The sharpest trap pairs two near-synonyms that take different forms in the same sentence, so fixing the one fault you notice first can make you assume the sentence is now correct and miss the second.',
     minutes: 55,
     terms: [
       { term: 'Gerund', meaning: 'The -ing form used as a noun: Reading improves vocabulary.' },
@@ -747,6 +764,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd17q8', kind: 'spot', prompt: 'Find the error: “We objected to him (A) leaving the meeting (B) before the vote (C) had been taken (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Formal usage puts a possessive before a gerund: “objected to his leaving”.' },
       { id: 'd17q9', kind: 'choice', prompt: 'Which sentence uses the participle correctly?', options: ['Written in haste, the officer signed the note.', 'Written in haste, the note contained three errors.', 'Writing in haste, the note contained three errors.', 'Having written in haste, the note was unclear.'], answer: 1, why: 'The note was written in haste, so the past participle correctly describes the note.' },
       { id: 'd17q10', kind: 'gap', prompt: 'She managed ____ the file before the office closed.', options: ['submitting', 'to submit', 'submit', 'in submitting'], answer: 1, why: 'Manage takes a to-infinitive.' },
+      { id: 'd17q11', kind: 'choice', prompt: 'Which sentence means that he did not forget to lock the safe?', options: ['He forgot locking the safe.', 'He forgot to lock the safe.', 'He remembered to lock the safe.', 'He remembered locking the safe.'], answer: 2, why: 'Remember + to-infinitive means the duty was not forgotten; remember + gerund recalls a past act already completed.' },
+      { id: 'd17q12', kind: 'spot', prompt: 'Find the error: “The inspector saw the workers to load (A) the truck (B) hurriedly (C) before the shift ended (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'A perception verb like see takes a bare infinitive or -ing after its object, never a to-infinitive: saw the workers load / loading.' },
     ],
     corrections: [
       { id: 'd17c1', task: 'The principal suggested to hold the examination in the afternoon and agreed extending the time limit.', model: 'The principal suggested holding the examination in the afternoon and agreed to extend the time limit.', note: 'Suggest takes -ing; agree takes to.' },
@@ -754,6 +773,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd17c3', task: 'The magistrate made the accused to appear and let the counsel to speak.', model: 'The magistrate made the accused appear and let the counsel speak.', note: 'Make and let take the bare infinitive in the active voice.' },
       { id: 'd17c4', task: 'Having completed the inspection, the report was signed by the team leader.', model: 'Having completed the inspection, the team leader signed the report.', note: 'The report did not complete the inspection; the participle must attach to its real doer.' },
       { id: 'd17c5', task: 'She avoided to comment on the issue and denied to know anything about the file.', model: 'She avoided commenting on the issue and denied knowing anything about the file.', note: 'Both avoid and deny take the gerund.' },
+      { id: 'd17c6', task: 'He avoided to discuss the matter, kept to insisting on his version, and finally agreed postponing the hearing.', model: 'He avoided discussing the matter, kept insisting on his version, and finally agreed to postpone the hearing.', note: 'Avoid and keep both take the gerund; agree takes a to-infinitive — the draft has all three reversed.' },
     ],
     transfer: 'Write ten sentences using these verbs: suggest, recommend, avoid, deny, decide, agree, refuse, manage, stop, remember. Then rewrite three pairs of your own short sentences as single sentences using participle phrases, and check each one for a dangling modifier.',
     checklist: [
@@ -770,6 +790,7 @@ export const grammarPhase3: GrammarLesson[] = [
     title: 'Comparison, and a mixed-precision review',
     goal: 'Compare like with like, form degrees correctly, and clear several small errors from a single sentence.',
     why: 'Faulty comparison is the classic “sounds fine, is wrong” error: “the population of Lahore is greater than Karachi” compares a population with a city. Today also consolidates everything from Day 13 onwards.',
+    examTip: 'Comparison faults appear as error-spotting where the flawed sentence sounds perfectly smooth (a rate or salary compared directly with a place name), and as rewrite items in the mixed-precision section that stack a comparison fault with an agreement or preposition fault from an earlier day. The favourite trap is a double comparative hidden inside a form that already looks irregular (more worse, most best), because a candidate checking the comparison logic assumes an odd-looking irregular form is already above suspicion.',
     minutes: 55,
     terms: [
       { term: 'Comparative', meaning: 'The -er or more form used for two things: larger, more complex.' },
@@ -902,6 +923,8 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd18q8', kind: 'spot', prompt: 'Find the error: “The committee, after discussing about the issue (A) for two hours (B), decided to postpone (C) the decision (D).”', options: ['A', 'B', 'C', 'D'], answer: 0, why: 'Discuss takes no preposition: “after discussing the issue”.' },
       { id: 'd18q9', kind: 'gap', prompt: 'The Indus is longer than ____ river in South Asia.', options: ['any', 'any other', 'all other', 'some'], answer: 1, why: 'The Indus is a South Asian river, so it must be excluded from the group.' },
       { id: 'd18q10', kind: 'spot', prompt: 'Find the error: “An honest officer (A) who refuses (B) bribes is more rarer (C) than we admit (D).”', options: ['A', 'B', 'C', 'D'], answer: 2, why: 'Rarer is already comparative; more is a double marker.' },
+      { id: 'd18q11', kind: 'gap', prompt: 'The province received ____ funds this year than it did last year, though ____ officers were deployed to utilise them.', options: ['less … fewer', 'fewer … less', 'less … less', 'fewer … fewer'], answer: 0, why: 'Funds, treated as an uncountable amount of money, takes less; officers, a countable plural noun, takes fewer.' },
+      { id: 'd18q12', kind: 'spot', prompt: 'Find the error: “The new syllabus is twice as difficult (A) than the old one (B) and covers as many topics (C) as the previous course (D).”', options: ['A', 'B', 'C', 'D'], answer: 1, why: 'Twice as … as is the fixed pattern; than cannot follow as, so it should read “twice as difficult as the old one”.' },
     ],
     corrections: [
       { id: 'd18c1', task: 'The literacy rate of Sindh is lower than Punjab, and its budget is also more smaller.', model: 'The literacy rate of Sindh is lower than that of Punjab, and its budget is also smaller.', note: 'Compare rate with rate, and never double the comparative.' },
@@ -909,6 +932,7 @@ export const grammarPhase3: GrammarLesson[] = [
       { id: 'd18c3', task: 'Karachi is more bigger than any city of Pakistan and it is also the most busiest.', model: 'Karachi is bigger than any other city in Pakistan, and it is also the busiest.', note: 'Remove both double markers and exclude Karachi from the group with other.' },
       { id: 'd18c4', task: 'Each of the candidate have been informed about their result by the commission.', model: 'Each of the candidates has been informed of the result by the commission.', note: 'Each of + plural noun, singular verb and singular reference; inform takes of before a thing.' },
       { id: 'd18c5', task: 'This scheme is superior than the previous one because it costs lesser and covers more districts.', model: 'This scheme is superior to the previous one because it costs less and covers more districts.', note: 'Superior takes to, and less is already comparative.' },
+      { id: 'd18c6', task: 'The unemployment rate of Sindh is more higher than Punjab, and it has less job opportunities than any province.', model: 'The unemployment rate of Sindh is higher than that of Punjab, and it has fewer job opportunities than any other province.', note: 'A rate must be compared with a rate (that of); higher is already comparative, so more is dropped; job opportunities are countable, so fewer, not less; and Sindh is itself a province, so it needs any other.' },
     ],
     transfer: 'Write five comparison sentences about two provinces, two policies or two examinations. Each must compare a quality with the same quality, not a quality with a whole thing. Then take any three sentences from your last practice answer and run the six-step mixed-precision check on each.',
     checklist: [
