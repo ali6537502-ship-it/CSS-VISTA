@@ -534,3 +534,17 @@ still exist (D-48) but are not listed.
   challenging (General Abilities 30/55/15, at most 9 challenging items — SSC two- and
   three-step problems of the 2024-paper kind, never university work). Measured across the
   32 papers: 31/50/19.
+
+**D-58 · Re-freeze no longer blocked by the release it replaces (29 Sep 2026)**
+- Releases 4 and 5 never reached a mock. The re-freeze skipped any new paper that shared a
+  question with another frozen mock — including the unstarted mocks about to be re-frozen.
+  Release 3 and its successors draw from the same reviewed bank, so every new paper overlapped
+  some pending mock and all 31 swaps were refused (the old papers were kept; no harm, no gain).
+- `mpt_freeze_next_paper()` now exempts mocks pending the same re-freeze pass (unstarted, more
+  than 15 minutes away, no attempt); held, started or attempted mocks still block, so no
+  candidate can see a question twice. One pass re-freezes every pending mock (up to 40), so the
+  schedule is never left half on an old release. `tests/mpt/refreeze.php` has an
+  overlapping-release phase that fails on the old code and passes on the new.
+- Release 6 covers Mocks 11–40 (Mocks 1–10 held; release 3 papers sat in Mocks 8–10 excluded).
+  Simulated against the live state: 30/30 mocks re-frozen, no question in two mocks, none
+  repeating a held mock.

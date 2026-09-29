@@ -187,7 +187,15 @@ function mpt_paper_questions(int $index): ?array
  * Copies the first exported paper that shares no question with any previously
  * frozen paper into mpt_mock_questions. Returns false when the runway is empty.
  */
-function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
+/**
+ * Freezes the next unused audited paper into $mock. A paper is skipped if any of its
+ * questions is already frozen in another mock, except mocks listed in $pendingReplacement:
+ * unstarted mocks whose own older paper is about to be replaced in the same re-freeze pass
+ * (their questions are released as they are re-frozen, so a new release that shares bank
+ * questions with the old one can still be installed). Held, started or attempted mocks are
+ * never in that list, so no candidate ever sees a question twice.
+ */
+function mpt_freeze_next_paper(PDO $pdo, array $mock, array $pendingReplacement = []): bool
 {
     $manifest = mpt_paper_manifest();
     if ($manifest === null || empty($manifest['publishable'])) return false;
@@ -200,8 +208,10 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock): bool
         if (!$questions || count($questions) !== (int)$paper['count']) continue;
         // One indexed query: does any of these questions already exist?
         $ids = array_map(static fn($q) => (string)$q['id'], $questions);
-        $overlap = $pdo->prepare('SELECT 1 FROM mpt_mock_questions WHERE question_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') LIMIT 1');
-        $overlap->execute($ids);
+        $exempt = array_values(array_diff(array_map('strval', $pendingReplacement), [(string)$mock['id']]));
+        $overlap = $pdo->prepare('SELECT 1 FROM mpt_mock_questions WHERE question_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')'
+            . ($exempt ? ' AND mock_id NOT IN (' . implode(',', array_fill(0, count($exempt), '?')) . ')' : '') . ' LIMIT 1');
+        $overlap->execute([...$ids, ...$exempt]);
         if ($overlap->fetchColumn()) continue;
         // Multi-row inserts, 50 questions per statement.
         foreach (array_chunk(array_values($questions), 50, true) as $chunk) {
@@ -277,6 +287,14 @@ function mpt_refreeze_unstarted(PDO $pdo, int $nowMs, int $maxReplace = 4): arra
     $candidates = $pdo->prepare("SELECT id,paper_series FROM mpt_mocks WHERE status IN ('DRAFT','PUBLISHED') AND cancelled_at IS NULL AND paper_frozen_at IS NOT NULL AND exam_open_at > ? ORDER BY exam_open_at ASC");
     $candidates->execute([mpt_db_time($nowMs + CSSV_MPT_REFREEZE_MARGIN_MS)]);
     $stale = array_values(array_filter($candidates->fetchAll(), static fn($m) => mpt_series_release($pdo, $m['paper_series']) < $below));
+    // Unstarted, unattempted mocks awaiting this release: their old questions do not block
+    // the new papers (see mpt_freeze_next_paper). A mock with any attempt is never listed.
+    $attemptsOf = $pdo->prepare('SELECT COUNT(*) FROM mpt_attempts WHERE mock_id=?');
+    $pending = [];
+    foreach ($stale as $m) {
+        $attemptsOf->execute([$m['id']]);
+        if ((int)$attemptsOf->fetchColumn() === 0) $pending[] = (string)$m['id'];
+    }
     $replaced = 0;
     foreach ($stale as $candidate) {
         if ($replaced >= $maxReplace) break;
@@ -298,7 +316,7 @@ function mpt_refreeze_unstarted(PDO $pdo, int $nowMs, int $maxReplace = 4): arra
                 ->execute([$mock['id'], $mock['paper_ref'], $mock['paper_series'], $old['fingerprint'], count($old['rows']), json_encode($old['rows'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR), mpt_db_time(mpt_now_ms())]);
             $backupId = (int)$pdo->lastInsertId();
             $pdo->prepare('DELETE FROM mpt_mock_questions WHERE mock_id=?')->execute([$mock['id']]);
-            if (!mpt_freeze_next_paper($pdo, $mock)) {
+            if (!mpt_freeze_next_paper($pdo, $mock, $pending)) {
                 // No fresh audited paper: keep the old paper rather than leave the mock empty.
                 $pdo->rollBack();
                 mpt_meta_set($pdo, 'paper_runway_exhausted_at', mpt_db_time($nowMs));
@@ -313,6 +331,7 @@ function mpt_refreeze_unstarted(PDO $pdo, int $nowMs, int $maxReplace = 4): arra
                 ->execute([$mock['id'], $backupId, $mock['paper_ref'], $mock['paper_series'], $old['fingerprint'], $now['paper_ref'], $now['paper_series'], $new['fingerprint'], $reason, mpt_db_time(mpt_now_ms())]);
             mpt_event($pdo, 'ADMIN_ACTION', null, (string)$mock['id'], null, null, ['action' => 'paper_refrozen', 'old_ref' => $mock['paper_ref'], 'new_ref' => $now['paper_ref'], 'old_fingerprint' => $old['fingerprint'], 'new_fingerprint' => $new['fingerprint'], 'backup_id' => $backupId]);
             $pdo->commit();
+            $pending = array_values(array_diff($pending, [(string)$mock['id']]));
             $replaced++;
         } catch (Throwable $error) {
             if ($pdo->inTransaction()) $pdo->rollBack();
@@ -442,7 +461,8 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
         mpt_meta_set($pdo, 'last_maintenance_at', mpt_db_time($now));
         // Re-freeze unstarted mocks from an older editorial release before any new
         // mock takes a paper, so replacements have first claim on the audited runway.
-        $refrozen = mpt_refreeze_unstarted($pdo, $now, $force ? 60 : 4);
+        // All pending mocks in one pass, so the schedule is never left half on an old release.
+        $refrozen = mpt_refreeze_unstarted($pdo, $now, $force ? 60 : 40);
         mpt_auto_schedule($pdo, $now, $force ? 40 : CSSV_MPT_SCHEDULE_PER_RUN);
         return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0) + ['refrozen' => $refrozen];
     } finally {

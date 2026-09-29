@@ -1,61 +1,59 @@
-# MPT editorial release 5 — repaired live series
+# MPT editorial release 6 — repaired live series
 
-Series fafa5f1ca0d16eaf; 32 papers (live papers 9–40 of b054de7, i.e. Mocks 9–40); status **PASS**.
+Series bcc868d124be35cd; 30 papers (live papers 11–40 of b054de7, i.e. Mocks 11–40); status **PASS**.
 
 Each paper is the live paper already frozen for that mock. A live question was kept unless it had a concrete defect; only defective slots were refilled, in place, from the reviewed bank with an item from the same section and heading. Papers follow the official FPSC structure only (five sections with their official sizes, every official heading present, no topic quotas).
 
 ## Series summary
 
-- Kept live questions: 621; replaced from the reviewed bank: 5779
-  - Islamic Studies: kept 152, replaced 488
-  - Urdu: kept 147, replaced 493
-  - English: kept 154, replaced 1446
-  - General Abilities: kept 4, replaced 1916
-  - General Knowledge: kept 164, replaced 1436
+- Kept live questions: 594; replaced from the reviewed bank: 5406
+  - Islamic Studies: kept 148, replaced 452
+  - Urdu: kept 131, replaced 469
+  - English: kept 151, replaced 1349
+  - General Abilities: kept 4, replaced 1796
+  - General Knowledge: kept 160, replaced 1340
 
 ### Why questions were replaced
 
-- General Abilities: not passed by the editor review: 1916
-- General Abilities: code-generated template repeated across every paper: 1634
-- English: not passed by the editor review: 1409
-- General Abilities: artificial case-study wording: 1376
-- General Knowledge: not passed by the editor review: 1288
-- English: machine-template wording: 1255
-- General Knowledge: machine-template wording: 768
-- General Abilities: awkward numbers (calculator arithmetic): 538
-- Urdu: not passed by the editor review: 492
-- Urdu: machine-template wording: 481
-- Islamic Studies: not passed by the editor review: 435
-- Islamic Studies: machine-template wording: 396
+- General Abilities: not passed by the editor review: 1796
+- General Abilities: code-generated template repeated across every paper: 1514
+- English: not passed by the editor review: 1312
+- General Abilities: artificial case-study wording: 1273
+- General Knowledge: not passed by the editor review: 1200
+- English: machine-template wording: 1162
+- General Knowledge: machine-template wording: 725
+- General Abilities: awkward numbers (calculator arithmetic): 501
+- Urdu: not passed by the editor review: 468
+- Urdu: machine-template wording: 459
+- Islamic Studies: not passed by the editor review: 403
+- Islamic Studies: machine-template wording: 367
 - General Abilities: same question with numbers changed: 281
-- General Knowledge: calculation / university-level science: 205
+- General Knowledge: calculation / university-level science: 170
 - General Knowledge: garbled or broken stem: 158
-- General Knowledge: arithmetic inside a GK question: 115
-- English: garbled or broken stem: 106
-- Urdu: Urdu literature/rhetoric, not language: 81
-- General Abilities: machine-template wording: 53
-- Islamic Studies: Qur’an numbering / verse-count trivia: 37
-- General Knowledge: sports minutiae: 34
+- English: garbled or broken stem: 102
+- General Knowledge: arithmetic inside a GK question: 94
+- Urdu: Urdu literature/rhetoric, not language: 73
+- General Abilities: machine-template wording: 49
 - English: more than 4 questions of the same frame in this paper: 34
-- General Knowledge: news or index minutiae: 33
-- General Knowledge: time-bound fact that may be out of date: 18
-- General Knowledge: tests the same fact as an earlier question: 18
+- Islamic Studies: Qur’an numbering / verse-count trivia: 32
+- General Knowledge: news or index minutiae: 32
+- General Knowledge: sports minutiae: 31
+- General Knowledge: time-bound fact that may be out of date: 17
+- General Knowledge: tests the same fact as an earlier question: 17
 - General Knowledge: celebrity or pop trivia, not MPT General Knowledge: 15
-- General Knowledge: catch-all option (None/All of these): 13
-- General Knowledge: same question with numbers changed: 13
+- General Knowledge: catch-all option (None/All of these): 12
+- General Knowledge: same question with numbers changed: 8
 - Islamic Studies: obscure dating trivia: 7
 - Urdu: more than 4 questions of the same frame in this paper: 6
 - Islamic Studies: editor review: machine-template wording ('Which person is identified by this role:'): 5
 - General Knowledge: editor review: Machine-template wording/options; not a sensible MPT item; incoherent association options: 4
-- General Knowledge: editor review: Garbled stem mixing two questions: 3
 - Islamic Studies: editor review: specialist Arabic legal maxim beyond MPT level: 3
 - General Knowledge: same topic as another question in this paper: 3
 - General Knowledge: editor review: Machine-template wording/options; not a sensible MPT item ('How should X be classified'); trivially self-answering: 3
 - General Knowledge: editor review: Obscure trivia: 3
 - Islamic Studies: same topic as another question in this paper: 3
 - General Knowledge: ordinal-number trivia: 3
-- Islamic Studies: editor review: garbled template wording: asks for a Qur'anic/Prophetic 'reference' but options are definitions: 2
-- General Knowledge: editor review: Machine-template wording/options; not a sensible MPT item ('How should X be classified'): 2
+- General Knowledge: editor review: Garbled stem mixing two questions: 2
 - Islamic Studies: editor review: Machine-template stem ('Which institution or term is described as...'): 2
 - General Knowledge: editor review: Winter sports event minutiae; not MPT GK material: 2
 - General Knowledge: editor review: Obscure date trivia: 2
@@ -68,15 +66,6 @@ Each paper is the live paper already frozen for that mock. A live question was k
 - Islamic Studies: editor review: obscure envoy detail beyond MPT level: 2
 - Islamic Studies: editor review: North African dynastic trivia beyond MPT level: 2
 - General Knowledge: editor review: Machine-template category question: 2
-- Islamic Studies: editor review: Machine-template distractor options that do not fit the stem (broken options) ('Angry'): 1
-- Islamic Studies: editor review: Obscure trivia (Visigothic king) beyond MPT level: 1
-- General Knowledge: editor review: Numerical collision problem (momentum conservation and KE loss) is beyond the everyday-science level of the MPT GK paper.: 1
-- General Knowledge: editor review: Time-bound wording ('incoming COP31 presidency') that goes stale after November 2026: 1
-- General Knowledge: editor review: Doubtful/disputed biographical figure; not reliable MPT material: 1
-- Islamic Studies: editor review: machine-template wording; duplicates the Abu Ayyub hosting question: 1
-- General Knowledge: editor review: Very recent constitutional provision; exact heading cannot be verified with certainty: 1
-- General Knowledge: editor review: Time-bound count that changes: 1
-- General Knowledge: editor review: Machine-template wording/options; not a sensible MPT item ('When did ... take place'); privatisation began before 1991, so key is doubtful: 1
 - Islamic Studies: editor review: machine-template and vague wording ('belonging to his household'): 1
 - Islamic Studies: editor review: Machine-template stem; Al-Azhar is also an institution of formal learning, so more than one option fits: 1
 - Islamic Studies: editor review: Machine-template distractor options that do not fit the stem (broken options) ('Other people and groups', garbled 'Retaliatory insult against Allah'): 1
@@ -183,6 +172,7 @@ Each paper is the live paper already frozen for that mock. A live question was k
 - General Knowledge: editor review: Tongue-map myth; taste receptors for sour are spread over the tongue: 1
 - General Knowledge: editor review: Broken options (motto split across options): 1
 - Islamic Studies: editor review: Obscure trivia beyond MPT Islamic Studies level: 1
+- Islamic Studies: editor review: garbled template wording: asks for a Qur'anic/Prophetic 'reference' but options are definitions: 1
 - Islamic Studies: editor review: Machine-template distractor options that do not fit the stem (broken options) ('Better as charity', 'Allah and His Messenger'): 1
 - Islamic Studies: editor review: Machine-template distractor options that do not fit the stem (broken options) ('Those employed to collect it', 'Prophets, the truthful and martyrs'): 1
 - Islamic Studies: editor review: obscure extinct school beyond MPT level: 1
@@ -193,6 +183,7 @@ Each paper is the live paper already frozen for that mock. A live question was k
 - General Knowledge: editor review: Doubtful/incorrect key: 1
 - General Knowledge: editor review: Awkward wording with an outdated/unusual figure (fats give ~9 kcal/g): 1
 - General Knowledge: editor review: More than one option can be correct: hard (potash) glass is also described as heat resistant, not only Pyrex (borosilicate) glass.: 1
+- General Knowledge: editor review: Machine-template wording/options; not a sensible MPT item ('How should X be classified'): 1
 - General Knowledge: editor review: Keyed denomination doubtful: 1
 - General Knowledge: editor review: Doubtful; Mullah Do Piyaza is largely a folk figure: 1
 - Islamic Studies: editor review: Specialist history-of-medicine trivia beyond MPT level; odd distractors: 1
@@ -268,35 +259,33 @@ Warnings: none
 
 | Paper (mock) | Fingerprint | Kept | Replaced | GA new diff 1/2/3 | GK sci/CA/PA | Passage |
 |---|---|---|---|---|---|---|
-| 1 (9) | `8d2cbcdf6d3acaf5` | 17 | 183 | 20/31/9 | 17/13/20 | mpt-psg-a05 |
-| 2 (10) | `dbf52496a1d066fa` | 10 | 190 | 17/34/9 | 19/13/18 | mpt-psg-a06 |
-| 3 (11) | `7e1a7234586ed2de` | 17 | 183 | 18/33/9 | 19/13/18 | mpt-psg-a07 |
-| 4 (12) | `c278bc128fc0e24a` | 27 | 173 | 19/32/9 | 21/11/18 | mpt-psg-a08 |
-| 5 (13) | `59f9a21c174a0a5c` | 15 | 185 | 19/32/9 | 20/12/18 | mpt-psg-a09 |
-| 6 (14) | `a6815101a6460b88` | 24 | 176 | 16/35/9 | 20/11/19 | mpt-psg-a10 |
-| 7 (15) | `b2fa7e47cef4b238` | 18 | 182 | 18/33/9 | 20/12/18 | mpt-psg-a11 |
-| 8 (16) | `c1b51d5c14cf5c7a` | 21 | 179 | 16/35/9 | 20/12/18 | mpt-psg-a12 |
-| 9 (17) | `9acfb91b15acdee1` | 11 | 189 | 17/34/9 | 20/12/18 | mpt-psg-a13 |
-| 10 (18) | `61d800b3acfa05b3` | 23 | 177 | 19/32/9 | 19/11/20 | mpt-psg-a14 |
-| 11 (19) | `1f5a290c0c28b572` | 19 | 181 | 16/35/9 | 19/12/19 | mpt-psg-a15 |
-| 12 (20) | `544b1683953f8db1` | 26 | 174 | 18/33/9 | 20/13/17 | mpt-psg-a16 |
-| 13 (21) | `330d33b97dd25d01` | 19 | 181 | 18/33/9 | 18/13/19 | mpt-psg-a17 |
-| 14 (22) | `d880499970e4939b` | 20 | 180 | 15/36/9 | 19/13/18 | mpt-psg-a18 |
-| 15 (23) | `8f420f3a82d52d0f` | 15 | 185 | 17/34/9 | 19/13/18 | mpt-psg-a19 |
-| 16 (24) | `844a37afc9ee01a9` | 19 | 181 | 17/34/9 | 18/12/20 | mpt-psg-a20 |
-| 17 (25) | `4d871636a18135f8` | 18 | 182 | 16/35/9 | 18/12/20 | mpt-psg-a21 |
-| 18 (26) | `dcd15f258b8a194d` | 18 | 182 | 17/34/9 | 18/12/20 | mpt-psg-a22 |
-| 19 (27) | `80a622ff097c1240` | 14 | 186 | 21/30/9 | 18/12/20 | mpt-psg-a23 |
-| 20 (28) | `c4cceef665ae79c3` | 18 | 182 | 17/34/9 | 21/11/18 | mpt-psg-a24 |
-| 21 (29) | `db66e45b2f9c2e3c` | 20 | 180 | 20/31/9 | 21/11/18 | mpt-psg-b01 |
-| 22 (30) | `e7e27f0871b291fe` | 23 | 177 | 17/34/9 | 26/9/15 | mpt-psg-b02 |
-| 23 (31) | `6707da5ca8b04780` | 17 | 183 | 21/30/9 | 24/10/16 | mpt-psg-b03 |
-| 24 (32) | `2dcc0ad0391a2f71` | 21 | 179 | 18/33/9 | 24/10/16 | mpt-psg-b04 |
-| 25 (33) | `33fd1285eabc269a` | 14 | 186 | 18/33/9 | 22/10/18 | mpt-psg-b05 |
-| 26 (34) | `a1e3893f1e634d0d` | 24 | 176 | 17/30/9 | 23/9/18 | mpt-psg-b06 |
-| 27 (35) | `26e1f88d59312013` | 18 | 182 | 20/31/9 | 22/11/17 | mpt-psg-b07 |
-| 28 (36) | `c6b02e23f0313ca3` | 19 | 181 | 19/32/9 | 21/11/18 | mpt-psg-b08 |
-| 29 (37) | `f4010a9b22ae94b2` | 24 | 176 | 18/33/9 | 22/11/17 | mpt-psg-b09 |
-| 30 (38) | `46f82d95543e76cf` | 19 | 181 | 21/30/9 | 22/10/18 | mpt-psg-b10 |
-| 31 (39) | `886f88885f116cfc` | 20 | 180 | 17/34/9 | 23/11/16 | mpt-psg-b11 |
-| 32 (40) | `6305f2d648b29468` | 33 | 167 | 20/31/9 | 23/10/17 | mpt-psg-b12 |
+| 1 (11) | `cafdcedcb69ad254` | 17 | 183 | 16/35/9 | 18/13/19 | mpt-psg-a07 |
+| 2 (12) | `a0988acb2fd596cc` | 27 | 173 | 17/34/9 | 20/11/19 | mpt-psg-a08 |
+| 3 (13) | `a998e54438eb604b` | 15 | 185 | 17/34/9 | 19/12/19 | mpt-psg-a09 |
+| 4 (14) | `baf83997119746d1` | 24 | 176 | 20/31/9 | 19/11/20 | mpt-psg-a10 |
+| 5 (15) | `2d973ec5d50d0d8e` | 18 | 182 | 16/35/9 | 19/12/19 | mpt-psg-a11 |
+| 6 (16) | `cd87f494a434476b` | 21 | 179 | 16/35/9 | 20/11/19 | mpt-psg-a12 |
+| 7 (17) | `8ed1c8f48219056d` | 11 | 189 | 16/35/9 | 20/12/18 | mpt-psg-a13 |
+| 8 (18) | `d563fcca392072b4` | 23 | 177 | 16/35/9 | 19/10/21 | mpt-psg-a14 |
+| 9 (19) | `b80f421041a0379c` | 19 | 181 | 17/34/9 | 18/12/20 | mpt-psg-a15 |
+| 10 (20) | `fb478fd5093a9e8a` | 26 | 174 | 19/32/9 | 20/12/18 | mpt-psg-a16 |
+| 11 (21) | `48b5dd99fa9f776e` | 19 | 181 | 18/33/9 | 18/12/20 | mpt-psg-a17 |
+| 12 (22) | `f7e6d731df1f7124` | 20 | 180 | 18/33/9 | 18/13/19 | mpt-psg-a18 |
+| 13 (23) | `3bc7f5afd591f03e` | 15 | 185 | 19/32/9 | 18/13/19 | mpt-psg-a19 |
+| 14 (24) | `97b2587e1fbf1800` | 19 | 181 | 20/31/9 | 17/12/21 | mpt-psg-a20 |
+| 15 (25) | `85793b5bb67c57d9` | 18 | 182 | 20/31/9 | 17/12/21 | mpt-psg-a21 |
+| 16 (26) | `570c9dcebd671e1d` | 18 | 182 | 19/32/9 | 17/12/21 | mpt-psg-a22 |
+| 17 (27) | `5bcf2fa55fb42c18` | 14 | 186 | 18/33/9 | 18/12/20 | mpt-psg-a23 |
+| 18 (28) | `6a3bc1c72bc44569` | 18 | 182 | 18/33/9 | 21/11/18 | mpt-psg-a24 |
+| 19 (29) | `ebb070ad1ce07be3` | 20 | 180 | 15/36/9 | 20/11/19 | mpt-psg-b01 |
+| 20 (30) | `c65212898a6176a2` | 23 | 177 | 17/34/9 | 25/9/16 | mpt-psg-b02 |
+| 21 (31) | `13d6b1f236b05fd8` | 17 | 183 | 18/33/9 | 24/9/17 | mpt-psg-b03 |
+| 22 (32) | `d2ee6207442c082a` | 21 | 179 | 17/34/9 | 24/10/16 | mpt-psg-b04 |
+| 23 (33) | `bfd2e2e482a2c147` | 14 | 186 | 16/35/9 | 22/10/18 | mpt-psg-b05 |
+| 24 (34) | `4f81cbc9ad184cf8` | 24 | 176 | 17/30/9 | 23/9/18 | mpt-psg-b06 |
+| 25 (35) | `3b8535b469abdaf6` | 18 | 182 | 18/33/9 | 22/10/18 | mpt-psg-b07 |
+| 26 (36) | `26bfc237543e92c0` | 19 | 181 | 21/30/9 | 21/11/18 | mpt-psg-b08 |
+| 27 (37) | `2250e7a61769fc6b` | 24 | 176 | 21/30/9 | 22/10/18 | mpt-psg-b09 |
+| 28 (38) | `2097970c7b17762b` | 19 | 181 | 16/35/9 | 22/9/19 | mpt-psg-b10 |
+| 29 (39) | `0192bdf829f087c3` | 20 | 180 | 21/30/9 | 23/10/17 | mpt-psg-b11 |
+| 30 (40) | `83da7f0bb9c51fb8` | 33 | 167 | 17/34/9 | 22/10/18 | mpt-psg-b12 |
