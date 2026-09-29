@@ -19,21 +19,24 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'A or an is decided by sound, not by spelling',
-        plain: 'Use an before a vowel sound and a before a consonant sound. Listen to the first sound of the word as you say it aloud; the letter on the page can mislead you.',
+        plain: 'Use an before a vowel sound and a before a consonant sound. Listen to the first sound of the word as you say it aloud; the letter on the page can mislead you. This single habit — say it before you write it — clears up almost every article error involving abbreviations, because Pakistani candidates read acronyms letter by letter in their heads and then write the article to match the spelling instead of the sound they actually pronounce. The confusion is worst with letters that are consonants in the alphabet but vowel sounds when spoken as letter-names (F, H, L, M, N, R, S, X) and with letters that are vowels but sound like consonants when spoken (U, sometimes O). A student who never says the abbreviation aloud will keep getting it wrong no matter how many rules they memorise.',
         points: [
           'a university, a European country, a one-rupee coin — these begin with the consonant sounds y and w.',
           'an hour, an honest officer, an heir, an honour — the h is silent, so the sound is a vowel.',
           'an MA, an MNA, an FIR, an SHO — the letter names begin with vowel sounds.',
           'a UN resolution, a NATO decision — pronounced as words beginning with consonant sounds.',
+          'a historic occasion is now more common than an historic occasion in Pakistani formal English, because the h is sounded; reserve an historic only if you actually drop the h when you speak.',
+          'an X-ray, an FBR notice, an LLB degree — say the letter name first to hear the true sound.',
         ],
         models: [
           { sentence: 'He completed an MPhil after a university degree.', note: 'an before the sound “em”, a before the sound “yoo”.' },
           { sentence: 'It was an honest mistake but a useful lesson.', note: 'Silent h takes an; the y-sound of useful takes a.' },
+          { sentence: 'The FIA registered an FIR after a one-day inquiry into an NGO’s accounts.', note: 'FIR and NGO begin with vowel-letter sounds; one-day begins with the consonant sound w.' },
         ],
       },
       {
         heading: 'The three questions that decide the article',
-        plain: 'Ask them in order. Is the noun countable and singular? Then it must have some determiner. Can the reader tell which one you mean? Then use the. If not, use a or an.',
+        plain: 'Ask them in order. Is the noun countable and singular? Then it must have some determiner. Can the reader tell which one you mean? Then use the. If not, use a or an. The order matters because students who skip straight to “does the reader know which one” often forget the first question entirely and leave a bare singular noun standing with no determiner at all — “Committee was formed” — which is a more basic error than choosing the wrong article. Treat the three questions as a checkpoint you pass through every time a singular countable noun appears, not as a rule you apply only when you already suspect trouble. Note also that identifiability is not about whether you, the writer, know which one you mean — it is about whether the reader, from context already given or from general knowledge, can identify it too; that is why first mention takes a and second mention takes the, even though the writer knew exactly which committee was meant both times.',
         points: [
           'First mention: A committee was formed to examine the issue.',
           'Second mention: The committee met twice.',
@@ -41,10 +44,13 @@ export const grammarPhase3: GrammarLesson[] = [
           'Unique in the world: the sun, the earth, the equator.',
           'Superlatives and ordinals: the best answer, the first attempt, the only option.',
           'Made specific by what follows: the policy that was announced in May.',
+          'Shared knowledge without prior mention: the traffic was heavy — both writer and reader know which traffic is meant, the city’s traffic that day.',
+          'A noun can be made specific by a preceding phrase too: in the aftermath of the flood, the government announced relief.',
         ],
         models: [
           { sentence: 'A candidate approached the tribunal; the candidate withdrew the petition a week later.', note: 'First mention a, later mention the.' },
           { sentence: 'The reforms announced in 2019 were never implemented.', note: 'The following phrase identifies which reforms.' },
+          { sentence: 'A drought struck three provinces last year; the drought pushed food prices to a record high.', note: 'First mention a, second mention the, and record high stays article-free as a fixed phrase.' },
         ],
         table: {
           caption: 'The or no article?',
@@ -62,32 +68,38 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'Zero article for general statements',
-        plain: 'When you make a statement about a whole category, use a plural or an uncountable noun with no article at all. Adding the narrows it to a particular group, which usually is not what you mean.',
+        plain: 'When you make a statement about a whole category, use a plural or an uncountable noun with no article at all. Adding the narrows it to a particular group, which usually is not what you mean. This is where the essay-writing habit of translating Urdu word for word does the most damage, because Urdu marks definiteness through word order and context rather than a separate word, so a candidate’s instinct is to add “the” to almost every abstract noun for emphasis or formality. In English, the appears only when something limits or identifies the noun — a following phrase, a previous mention, or a context that narrows it to one instance. If nothing in the sentence does that narrowing work, the noun must stand alone. This is also why the same noun can be right both with and without the article in two consecutive sentences: the rule follows the grammar of that particular sentence, not the topic.',
         points: [
           'Corruption weakens institutions. — a general claim.',
           'The corruption in that department weakens it. — one particular case.',
           'Women are under-represented in the civil service. — all women.',
           'The women who appeared before the commission were under-represented. — a specific group.',
           'Abstract nouns in general statements take no article: justice, democracy, education, poverty.',
+          'A plural noun used generically also drops the: Bureaucrats resist reform. — bureaucrats as a class, not one identified group.',
+          'Test yourself by asking “which one(s)?” — if the sentence itself cannot answer that question, the noun is general and takes no article.',
         ],
         models: [
           { sentence: 'Education is the surest route out of poverty.', note: 'Two abstract nouns in a general claim, no articles.' },
           { sentence: 'The education provided in rural schools is inadequate.', note: 'The following phrase makes it specific.' },
+          { sentence: 'Democracy requires accountable institutions, but the democracy Pakistan practises today still lacks them.', note: 'A general claim, then the same noun narrowed by a following clause.' },
         ],
       },
       {
         heading: 'Fixed expressions you must simply learn',
-        plain: 'Some phrases keep or drop the article for historical reasons. Learning the common ones removes a whole class of error.',
+        plain: 'Some phrases keep or drop the article for historical reasons that no rule will recover; the noun in them is not being used in its ordinary countable sense but as part of an idiomatic pairing with a preposition, so trying to reason out the article from the countable/identifiable test will mislead you. The only reliable method is to learn the phrase as a whole unit, exactly as native usage fixed it, and to notice that the same noun changes article depending on whether it names a building/place or the function that building serves. School, court, prison, hospital and church all follow this pattern: with the article, you mean the physical structure; without it, you mean the institutional purpose a person goes there for.',
         points: [
           'No article: at home, at work, in bed, by car, on foot, at night, in hospital (as a patient), in prison, go to school/college/university/court/church.',
           'With the: in the morning, in the afternoon, in the evening, on the whole, in the end, at the moment, the day after tomorrow.',
           'No article with meals: after breakfast, before lunch.',
           'Compare: in the end (finally) with at the end (of something).',
           'Compare: in future (from now on) with in the future (at some later time).',
+          'By + means of transport drops the article: by bus, by train, by air; but in the bus, on the train name the physical vehicle you are inside.',
+          'Institutions used for their purpose also include go to bed (to sleep), go to sea (become a sailor), be sent to prison (as a convict).',
         ],
         models: [
           { sentence: 'He goes to court every Tuesday as a lawyer; the accused was taken to the court in a van.', note: 'Purpose vs building.' },
           { sentence: 'In the end the appeal succeeded, at the end of a four-year litigation.', note: 'Two different fixed phrases.' },
+          { sentence: 'She travels to Islamabad by air twice a month, but yesterday the delay on the aircraft cost her a connecting flight.', note: 'By air names the means; the aircraft names the physical object.' },
         ],
       },
     ],
@@ -98,6 +110,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'She was admitted in the hospital after accident.', right: 'She was admitted to hospital after an accident.', why: 'In hospital as a patient takes no article; accident is countable and needs one.' },
       { wrong: 'He plays cricket and also the chess.', right: 'He plays cricket and also chess.', why: 'Games take no article. Only musical instruments take the.' },
       { wrong: 'The honest officer is an rare thing in the today’s environment.', right: 'An honest officer is a rare thing in today’s environment.', why: 'Silent h takes an; rare begins with a consonant sound; today’s already determines the noun.' },
+      { wrong: 'The Supreme Court of the Pakistan reserved the judgment in an landmark case.', right: 'The Supreme Court of Pakistan reserved judgment in a landmark case.', why: 'Country name after of still takes no article; reserve judgment is a fixed phrase with no article; landmark begins with a consonant sound.' },
+      { wrong: 'The teachers are one of most respected profession in the society.', right: 'Teachers are one of the most respected professions in society.', why: 'A general plural drops the article; one of the + superlative needs a plural noun; society in a general sense takes no article.' },
+      { wrong: 'An European Union delegation visited an NGO working on the education in Sindh.', right: 'A European Union delegation visited an NGO working on education in Sindh.', why: 'European begins with the consonant sound y; NGO begins with a vowel-letter sound; education here is general.' },
+      { wrong: 'He was sent to the prison for the theft of a government property.', right: 'He was sent to prison for the theft of government property.', why: 'Prison as an institution one is committed to takes no article; government property here is a general uncountable idea.' },
     ],
     pitfalls: [
       'Deciding a/an from the written letter instead of the spoken sound.',
@@ -156,28 +172,32 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'Subject form or object form? Remove the other person',
-        plain: 'When a pronoun is joined to a noun by and, delete the noun and read the sentence again. Your ear will give you the right form immediately.',
+        plain: 'When a pronoun is joined to a noun by and, delete the noun and read the sentence again. Your ear will give you the right form immediately. The error happens almost exclusively in compound subjects and objects because a candidate who would never write “Invited I” or “Me attended” loses that instinct the moment a second person is added, and then reaches for whichever form sounds more formal — which is usually I, because school English drilled “always say I, not me” without explaining when. That half-remembered rule is precisely what produces “between you and I”: the speaker believes I is the polite, correct-sounding choice in every context, when in fact the correct form depends entirely on the pronoun’s grammatical role, not on how formal the sentence needs to sound.',
         points: [
           'The director invited my colleague and me. — “invited me”, so the object form.',
           'My colleague and I attended. — “I attended”, so the subject form.',
           'After every preposition, use the object form: between you and me, for him and me.',
           '“Between you and I” is always wrong, however formal it sounds.',
           'After than and as, complete the comparison in your head: He is taller than I (am).',
+          'The same test works with three names or pronouns joined together: delete all but the one you are unsure of.',
+          'A pronoun following a preposition stays in the object form even when it is far from the preposition: for both the deputy commissioner and me.',
         ],
         models: [
           { sentence: 'The letter was addressed to the registrar and me.', note: 'to me — object form after the preposition.' },
           { sentence: 'The registrar and I signed the letter.', note: 'I signed — subject form.' },
+          { sentence: 'The chief secretary sent the summary to the finance secretary and him.', note: 'Delete “the finance secretary and”: “sent it to him” confirms the object form.' },
         ],
       },
       {
         heading: 'Who and whom',
-        plain: 'Who does the action; whom receives it. Test by replacing with he or him: if he fits, use who; if him fits, use whom.',
+        plain: 'Who does the action; whom receives it. Test by replacing with he or him: if he fits, use who; if him fits, use whom. Whom is disappearing from everyday spoken English, which is exactly why examiners keep testing it: a candidate who has stopped hearing the distinction in daily speech has no ear left to fall back on, and must apply the he/him test consciously every time. The most reliable version of the test rearranges the clause into a normal statement first — take “the officer ___ we consulted”, turn it into “we consulted ___”, and the answer (him) tells you the pronoun is an object, so whom is correct. Students go wrong most often in long sentences where several words separate the pronoun from the verb that governs it; isolate the clause first, then apply the test.',
         points: [
           'The officer who signed the order — he signed, so who.',
           'The officer whom we consulted — we consulted him, so whom.',
           'After a preposition, always whom: to whom, with whom, for whom.',
           'Whose shows possession, for people and things alike: the report whose conclusions were leaked.',
           'Do not confuse whose with who’s (= who is).',
+          'In modern formal writing, who is increasingly accepted even as an object at the start of a question (Who did you consult?), but whom remains required directly after a preposition and in relative clauses in exam-standard prose.',
         ],
         models: [
           { sentence: 'The candidate whom the board recommended has declined.', note: 'The board recommended him — object form.' },
@@ -198,32 +218,38 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'Agreement with the antecedent',
-        plain: 'A pronoun matches the noun it replaces in number and person. Most errors come from indefinite pronouns, which look plural but are singular.',
+        plain: 'A pronoun matches the noun it replaces in number and person. Most errors come from indefinite pronouns, which look plural but are singular. The confusion has a real linguistic root: words like everyone, everybody, each, either, neither and anyone describe a group in meaning — you picture many people — but they are grammatically singular in form, built from a singular noun (one, body) plus a quantifier. The eye sees a crowd; the grammar sees one unit at a time. The same split-personality problem affects collective nouns such as committee, government, team and family: they name a group of people but are treated as one singular body when the group acts together, and only as plural when the writing genuinely means the individual members disagreeing or acting separately, which examiners rarely intend.',
         points: [
           'Everyone must submit his or her form. — everyone is singular.',
           'Modern usage also accepts the singular they: Everyone must submit their form.',
           'Choose one convention and keep it through the whole answer.',
           'A collective noun takes it and its, not they and their: The committee has announced its decision.',
           'Neither of the officers has submitted his report. — neither is singular.',
+          'Somebody, anybody, nobody, no one and each of the + plural noun all take a singular verb and a singular pronoun.',
+          'A collective noun may take a plural verb only when the sentence stresses the members acting as separate individuals: The staff are divided over the new roster.',
         ],
         models: [
           { sentence: 'Each province must prepare its own plan.', note: 'each + singular pronoun.' },
           { sentence: 'The organisation revised its constitution.', note: 'A collective noun takes it.' },
+          { sentence: 'Neither of the two departments has finalised its budget for the coming year.', note: 'Neither is singular, and the collective noun department stays singular too.' },
         ],
       },
       {
         heading: 'Ambiguous and empty reference',
-        plain: 'A pronoun must have exactly one possible antecedent. If a reader can reasonably attach it to two nouns, the sentence is defective even though every word in it is a correct form.',
+        plain: 'A pronoun must have exactly one possible antecedent. If a reader can reasonably attach it to two nouns, the sentence is defective even though every word in it is a correct form. This is a comprehension failure disguised as a grammar failure: nothing is technically wrong with any individual word, but the sentence fails at its one job, which is to transfer a single unambiguous meaning from writer to reader. Examiners flag it hardest in error-correction and précis work because it cannot be fixed by changing one word — the repair almost always means naming the noun again, even at the cost of a little repetition. Prefer a small, deliberate repetition to any pronoun a reader has to guess at; clarity outranks elegance in every exam answer.',
         points: [
           'Ambiguous: The DC told the AC that he had been transferred. — who was transferred?',
           'Repair by naming: The DC told the AC that the AC had been transferred.',
           'Empty this: “This shows the policy failed.” — this what? Write “This pattern shows …”.',
           'Vague it and they: “They say the rules will change.” — who are they?',
           'A pronoun cannot refer to a possessive: “In Iqbal’s poetry, he argues …” — name him: “In his poetry, Iqbal argues …”.',
+          'A pronoun cannot refer to an idea buried inside an adjective either: “The educational reforms failed because it was underfunded” — it has no noun to attach to; write “because the reforms were underfunded”.',
+          'When two singular nouns of the same gender appear in one sentence, assume ambiguity and rename rather than trust the reader to guess correctly.',
         ],
         models: [
           { sentence: 'The report criticised the department; this criticism was widely reported.', note: 'This + a noun removes all doubt.' },
           { sentence: 'When the secretary met the minister, the minister was already aware of the file.', note: 'Repetition is better than ambiguity.' },
+          { sentence: 'The commission questioned the contractor after the auditor filed his report; the contractor denied the allegations the next day.', note: 'Naming the contractor again removes any doubt about who denied what.' },
         ],
       },
     ],
@@ -234,6 +260,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'The teacher told the student that he had made a mistake.', right: 'The teacher told the student that the student had made a mistake.', why: 'He could refer to either person; repetition removes the ambiguity.' },
       { wrong: 'He is the officer who we recommended for the post.', right: 'He is the officer whom we recommended for the post.', why: 'We recommended him, so the object form whom is required.' },
       { wrong: 'The committee announced their decision and published their report.', right: 'The committee announced its decision and published its report.', why: 'A collective noun acting as one body takes it and its.' },
+      { wrong: 'The finance secretary and me attended the budget meeting.', right: 'The finance secretary and I attended the budget meeting.', why: 'Delete “the finance secretary and”: “I attended” confirms the subject form.' },
+      { wrong: 'The commission published its findings, but they have not yet been acted upon by the government.', right: 'The commission published its findings, but these have not yet been acted upon by the government.', why: 'They can drift toward meaning the commission itself; renaming with these keeps the antecedent unmistakably the findings.' },
+      { wrong: 'Each of the applicants must bring their own documents and sign for themself.', right: 'Each of the applicants must bring their own documents and sign for themselves.', why: 'Themself is not a standard English word; themselves is the correct reflexive to pair with the singular-they convention.' },
+      { wrong: 'In Jinnah’s speeches, he consistently stressed unity, faith and discipline.', right: 'In his speeches, Jinnah consistently stressed unity, faith and discipline.', why: 'He cannot refer back to the possessive Jinnah’s; the noun must be restated after the pronoun, not before it.' },
     ],
     pitfalls: [
       'Writing between you and I, or for he and I.',
@@ -292,17 +322,20 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'The proximity rule',
-        plain: 'Place a modifier as close as possible to the word it describes. English carries much of its meaning through word order, so moving a single word changes what the sentence claims.',
+        plain: 'Place a modifier as close as possible to the word it describes. English carries much of its meaning through word order, so moving a single word changes what the sentence claims. This matters more in English than in Urdu because English has almost no case endings to signal a word’s grammatical role — position is the main signal left, so a limiting word like only latches onto whatever sits next to it, not onto whatever the writer had in mind while composing the sentence. In speech, tone of voice repairs the ambiguity; in writing, only the position of the word can. This is why examiners treat a misplaced only, just or even as a genuine error of meaning, not a stylistic preference: the sentence now asserts something the writer did not intend.',
         points: [
           'Only I signed the file. — nobody else signed it.',
           'I only signed the file. — I did nothing else to it.',
           'I signed only the file. — I signed nothing else.',
           'The same applies to just, almost, nearly, even, merely and hardly.',
           'Place only immediately before the word it limits.',
+          'Read the sentence back and ask what exactly is being restricted — the person, the action, the object, or the time — before deciding where only belongs.',
+          'The same care applies to also and too: He also signed the report means someone else signed it as well; He signed the report also means he did something else to it as well.',
         ],
         models: [
           { sentence: 'The scheme benefited only the landowners.', note: 'only limits landowners.' },
           { sentence: 'Only the scheme benefited the landowners.', note: 'A different claim entirely.' },
+          { sentence: 'The tribunal even heard the case on a public holiday.', note: 'Even sits directly before heard, stressing how unusual the sitting was, not who attended.' },
         ],
         table: {
           caption: 'Where only changes the meaning',
@@ -317,46 +350,55 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'Dangling modifiers: name the doer',
-        plain: 'An opening phrase that begins with -ing, -ed, to, or a word like while or after has no subject of its own. It borrows the subject of the main clause. If that subject did not perform the action, the sentence is broken.',
+        plain: 'An opening phrase that begins with -ing, -ed, to, or a word like while or after has no subject of its own. It borrows the subject of the main clause. If that subject did not perform the action, the sentence is broken. This is the single most common structural error in composition papers because candidates open a sentence with a participle phrase to sound fluent and impressive, then forget that the phrase has made a silent promise: whatever comes immediately after the comma must be the thing that did the action described in the phrase. Writing in the passive voice for the main clause is the usual trigger, because the passive hides the true doer (“the notice was seen” rather than “I saw the notice”), and once the doer is hidden there is nothing left for the opening phrase to attach to except whatever noun happens to be sitting there.',
         points: [
           'Read the opening phrase, then ask “who did that?”',
           'The answer must be the first thing after the comma.',
           'Repair 1 — change the main clause: Walking to the office, I saw the notice.',
           'Repair 2 — turn the phrase into a full clause: While I was walking to the office, the notice caught my eye.',
           'A passive main clause almost always creates a dangler.',
+          'The same test applies to phrases without a verb at all, such as “As a young officer, discipline mattered greatly to him” — discipline was never a young officer, so recast it as “As a young officer, he cared greatly about discipline.”',
+          'Check every sentence that opens with a comma-separated phrase before you move on; do not wait until the whole paragraph is written to check for danglers.',
         ],
         models: [
           { sentence: 'Having reviewed the accounts, the auditors raised three objections.', note: 'The auditors reviewed the accounts — correct.' },
           { sentence: 'To qualify for the allowance, an officer must serve in a hard area.', note: 'The officer qualifies — correct.' },
+          { sentence: 'Having studied the drought pattern for a decade, the researcher recommended a change in cropping policy.', note: 'The researcher studied the pattern — the doer matches the subject that follows.' },
         ],
       },
       {
         heading: 'Squinting modifiers and split constructions',
-        plain: 'If a modifier sits between two elements it could describe, move it so that only one reading is possible. Do not leave the reader to choose.',
+        plain: 'If a modifier sits between two elements it could describe, move it so that only one reading is possible. Do not leave the reader to choose. A squinting modifier is subtler than a dangler because the sentence is grammatically complete either way — nothing is missing, and no rule of form is broken — yet the reader genuinely cannot tell which of the two neighbouring words the modifier belongs to. The fix is nearly always the same: move the word so it sits unambiguously on one side, or, if that still feels awkward, add a small word (that, which) to force the reading you intend. A long inserted phrase creates a related problem even without a genuine double meaning: it separates the subject from its verb by so much that the reader loses track of what the sentence is actually about, and has to reread it once decoded.',
         points: [
           'Squinting: Reading the notice quickly convinced him. — did he read quickly, or was he quickly convinced?',
           'Repair: Reading the notice convinced him quickly. / A quick reading of the notice convinced him.',
           'Keep the subject next to its verb; do not bury a long phrase between them.',
           'Adverbs of frequency go before the main verb but after be: He often attends. / He is often late.',
+          'When an inserted phrase must appear, set it off cleanly with a pair of commas or dashes rather than letting it drift unmarked between subject and verb.',
+          'If moving the modifier still leaves two readings possible, rewrite the sentence as two shorter ones rather than force a single crowded sentence to carry both ideas.',
         ],
         models: [
           { sentence: 'The committee decided unanimously to reject the appeal.', note: 'Unanimously clearly describes decided.' },
           { sentence: 'He has frequently been criticised for the delay.', note: 'Frequency adverb after the first auxiliary.' },
+          { sentence: 'The court, after hearing both sides at length, unanimously upheld the earlier verdict.', note: 'The long inserted phrase is fenced off with commas so the subject-verb link (court … upheld) stays clear.' },
         ],
       },
       {
         heading: 'Order of adjectives, and adjectives that cannot be compared',
-        plain: 'When several adjectives stand before a noun, English follows a settled order. And some adjectives describe absolute states and take no comparative form.',
+        plain: 'When several adjectives stand before a noun, English follows a settled order, and native speakers apply it unconsciously — which is exactly why it needs to be taught explicitly to a second-language writer, who has no instinct to fall back on and will otherwise order adjectives by translated word order or by whichever seems most important. And some adjectives describe absolute, all-or-nothing states rather than a point on a scale, so they logically cannot take more, most, very or any other degree marker: a thing is either unique or it is not, either complete or it is not, and no amount of additional uniqueness is possible once uniqueness itself is an absolute claim.',
         points: [
           'Order: opinion → size → age → shape → colour → origin → material → purpose → noun.',
           'An excellent large old rectangular brown Pakistani wooden filing cabinet.',
           'In practice, keep to two or three adjectives before a noun.',
           'Absolute adjectives: unique, perfect, complete, final, impossible, fatal, empty. Do not write more unique or most perfect.',
           'Use more nearly unique or almost complete if you need degree.',
+          'When adjectives from the same category are joined, use and: a red and white flag, not a red white flag.',
+          'Fact-based adjectives (origin, material) never take an intensifier: very Pakistani or very wooden are both wrong, since origin and material are categories, not qualities of degree.',
         ],
         models: [
           { sentence: 'A small red plastic seal was attached to the bag.', note: 'size, colour, material — the natural order.' },
           { sentence: 'The manuscript is unique.', note: 'Not “very unique” or “more unique”.' },
+          { sentence: 'A tall old stone government building overlooks the canal.', note: 'size → age → material → purpose, the settled sequence before the noun.' },
         ],
       },
     ],
@@ -367,6 +409,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'This is the most unique document in the archive.', right: 'This is the only document of its kind in the archive.', why: 'Unique is absolute and takes no comparative or superlative.' },
       { wrong: 'To pass the examination, hard work is necessary.', right: 'To pass the examination, a candidate must work hard.', why: 'Hard work does not pass an examination; a candidate does.' },
       { wrong: 'She nearly drove her children to school every day.', right: 'She drove her children to school nearly every day.', why: 'Nearly describes the frequency, not the driving.' },
+      { wrong: 'Having failed to meet the deadline twice, the contract was cancelled by the department.', right: 'Having failed to meet the deadline twice, the department cancelled the contract.', why: 'The contract did not fail to meet the deadline; the participle must attach to the department, its true doer.' },
+      { wrong: 'The report recommended changes to the syllabus for the board which had never been reviewed.', right: 'The report recommended changes to the syllabus, which had never been reviewed, for the board.', why: 'The relative clause describes the syllabus, not the board; it must sit next to the noun it modifies.' },
+      { wrong: 'The minister almost promised to release the funds within a week.', right: 'The minister promised to release the funds within almost a week.', why: 'Almost was describing the promise itself, wrongly suggesting he nearly promised; it belongs beside the quantity of time.' },
+      { wrong: 'He explained briefly the reasons why the flight was delayed to the passengers.', right: 'He briefly explained to the passengers the reasons why the flight was delayed.', why: 'Briefly was stranded between explained and its object; moving it beside the verb it modifies removes the ambiguity.' },
     ],
     pitfalls: [
       'Putting only before the verb by habit.',
@@ -424,30 +470,36 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'A preposition is followed by a noun, pronoun or -ing form',
-        plain: 'Never an infinitive. “Look forward to hear from you” is wrong because to here is a preposition, not part of an infinitive.',
+        plain: 'Never an infinitive. “Look forward to hear from you” is wrong because to here is a preposition, not part of an infinitive. The trap is that to is one of the few English words that does two entirely unrelated jobs: it marks the infinitive (to go, to write) and it also functions as an ordinary preposition of direction (to Lahore, to the office). A handful of set phrases — look forward to, be used to, object to, be accustomed to, in addition to, with a view to — happen to end in this second, prepositional to, and a preposition can never be followed by a bare or to-infinitive verb, only by a noun or the -ing form that behaves like one. Because the surface word “to” looks identical in both jobs, a student cannot tell which one it is by sight; the only safe method is to memorise the phrase as a fixed unit and never analyse to in isolation.',
         points: [
           'I look forward to hearing from you.',
           'She is used to working late. / She used to work late. — different structures entirely.',
           'He objected to being questioned.',
           'In addition to, with a view to, committed to, opposed to — all take -ing.',
+          'Test it: if you can replace the phrase after to with a plain noun (look forward to the results) and it still makes sense, that to is a preposition and needs -ing, not the base verb.',
+          'Prior to and subsequent to follow the same prepositional pattern: prior to submitting the report, not prior to submit the report.',
         ],
         models: [
           { sentence: 'The department is committed to improving service delivery.', note: 'to + -ing after committed.' },
           { sentence: 'He is accustomed to working under pressure.', note: 'Same pattern after accustomed.' },
+          { sentence: 'With a view to reducing the fiscal deficit, the government raised the sales tax.', note: 'With a view to takes -ing, not a to-infinitive, despite the presence of to twice.' },
         ],
       },
       {
         heading: 'Time and place: in, on, at',
-        plain: 'Move from the largest unit to the smallest: in for large, on for a surface or a date, at for a point.',
+        plain: 'Move from the largest unit to the smallest: in for large, on for a surface or a date, at for a point. The three prepositions actually encode a single spatial logic applied to both space and time: in describes something contained within a larger area or period, on describes something resting on a surface or falling on a specific day, and at names an exact point with no size at all — a dot on a map or a single moment on a clock. Once a student sees that the three words follow the same logic whether describing a city, a wall or a calendar, the choice stops being a memorised list and becomes a single mental picture: zoom out to the whole enclosing space (in), find the flat surface or the named day (on), then land on the precise point (at).',
         points: [
           'Time: in 2024, in March, in the morning; on Monday, on 14 August, on the morning of the strike; at 6 p.m., at night, at noon.',
           'Place: in Pakistan, in Lahore, in the room; on the wall, on the road, on the third floor; at the gate, at the bus stop, at 21 Mall Road.',
           'in time = early enough; on time = punctual.',
           'at the end = at a point; in the end = finally.',
+          'A named event that spans time uses at: at the conference, at the hearing, at the ceremony — treat the whole event as a single point in your timeline.',
+          'A small enclosed place is in even if it feels like a point: in the queue, in the elevator, in the corner of the room.',
         ],
         models: [
           { sentence: 'The hearing is fixed for 10 a.m. on Thursday in the district court.', note: 'at a point, on a date, in a place.' },
           { sentence: 'He arrived on time but not in time to sign the register.', note: 'Two different meanings.' },
+          { sentence: 'At the ceremony held in Islamabad on Republic Day, the president addressed the nation.', note: 'at a single event, in a city, on a named day — all three logics in one sentence.' },
         ],
         table: {
           caption: 'Verb + preposition partnerships most often confused',
@@ -474,7 +526,7 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'Adjective and noun partnerships',
-        plain: 'Adjectives and nouns carry their own prepositions, and the partner sometimes changes with the meaning.',
+        plain: 'Adjectives and nouns carry their own prepositions, and the partner sometimes changes with the meaning. These pairs cannot be derived from logic at all — of, in, for and to do not each carry one fixed sense that would let you predict which noun or adjective takes which preposition, so guessing by meaning fails as often as it succeeds. Two very similar-looking adjectives can take two different prepositions for reasons buried in the history of the word, which is why fond of and keen on both mean roughly “liking something” yet cannot be swapped. The only durable fix is wide reading: meeting each partnership several times in real sentences until the pairing feels automatic, the same way a native speaker acquired it without ever learning a rule.',
         points: [
           'afraid of, aware of, capable of, guilty of, fond of, short of.',
           'interested in, involved in, engaged in, successful in, deficient in.',
@@ -482,24 +534,30 @@ export const grammarPhase3: GrammarLesson[] = [
           'similar to, opposed to, accustomed to, indifferent to, sensitive to.',
           'angry with a person, angry at a thing, angry about a situation.',
           'the reason for, the need for, the solution to, an answer to, an effect on, an increase in.',
+          'a decrease/rise/fall/increase in a quantity, but a decrease/rise/fall/increase of a specific amount: an increase in tax revenue of fifteen per cent.',
+          'confident of/about success, but confident in a person or an ability; keen on an activity, but keen to do something.',
         ],
         models: [
           { sentence: 'There is no simple solution to the water crisis.', note: 'solution takes to, not of.' },
           { sentence: 'The policy had little effect on rural incomes.', note: 'effect takes on; affect is the verb.' },
+          { sentence: 'The province is eligible for federal support but remains short of trained staff to use it.', note: 'eligible for and short of, two adjective partnerships in one sentence.' },
         ],
       },
       {
         heading: 'Phrasal verbs in formal writing',
-        plain: 'A phrasal verb often has a single-word formal equivalent. In an examination answer, the single word is usually better — but you must know both.',
+        plain: 'A phrasal verb often has a single-word formal equivalent. In an examination answer, the single word is usually better — but you must know both, because a phrasal verb is not automatically wrong; it is only out of register for the formal essay and précis sections of the paper, while it remains entirely correct in comprehension passages, letters and everyday description. The real danger is not choosing the phrasal verb over the formal one, but inventing a phrasal verb that does not exist in English, or attaching the wrong particle to a verb, which produces a sentence that sounds fluent to the writer’s own ear but means nothing to a reader — because the particle is what carries the idiomatic meaning, and a wrong particle changes or destroys it entirely.',
         points: [
           'call off → cancel; put off → postpone; look into → investigate; carry out → conduct.',
           'give up → abandon; bring about → cause; set up → establish; cut down → reduce.',
           'The meaning of a phrasal verb is rarely the sum of its parts: put off means postpone, not place.',
           'Do not invent them. Write “discuss the matter”, never “discuss about the matter”.',
+          'come up with → propose/devise; do away with → abolish; go through with → complete; hold up → delay.',
+          'A phrasal verb can be transitive or intransitive with different particles for different meanings: look into (investigate) versus look after (take care of) versus look up (improve, or search for).',
         ],
         models: [
           { sentence: 'The government postponed the census.', note: 'Formal single verb, better in an essay.' },
           { sentence: 'The government put off the census.', note: 'Correct, but less formal.' },
+          { sentence: 'The committee was asked to look into the delay and come up with a workable timeline.', note: 'Two correct phrasal verbs, acceptable even in fairly formal writing where no exact single-word substitute exists.' },
         ],
       },
     ],
@@ -510,6 +568,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'The report comprises of five chapters.', right: 'The report comprises five chapters.', why: 'Comprise takes no of; consist does.' },
       { wrong: 'His approach is different than mine.', right: 'His approach is different from mine.', why: 'Standard British usage is different from.' },
       { wrong: 'We reached at the venue before the guests.', right: 'We reached the venue before the guests.', why: 'Reach is transitive; arrive takes at or in.' },
+      { wrong: 'The board is confident about his ability to handle the assignment.', right: 'The board is confident of his ability to handle the assignment.', why: 'Confident of an ability or an outcome; confident about is used for a general situation, not a specific capability.' },
+      { wrong: 'The province witnessed an increase of literacy over the past decade.', right: 'The province witnessed an increase in literacy over the past decade.', why: 'An increase in a quantity that is changing; of is reserved for stating a specific amount, as in an increase of ten per cent.' },
+      { wrong: 'He is keen to cricket and plays every weekend.', right: 'He is keen on cricket and plays every weekend.', why: 'Keen on an activity or interest; keen to takes a verb, as in keen to improve.' },
+      { wrong: 'The committee will look into the matter and do away the outdated rule.', right: 'The committee will look into the matter and do away with the outdated rule.', why: 'Do away with is the fixed phrasal verb meaning abolish; dropping with breaks the idiom.' },
     ],
     pitfalls: [
       'Adding a preposition after discuss, investigate, emphasise, request, reach or enter.',
@@ -568,17 +630,20 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'Verbs that take -ing, and verbs that take to',
-        plain: 'There is no rule of meaning here; the pattern belongs to the verb. Learn the two lists, and learn the short third list of verbs that take both with different meanings.',
+        plain: 'There is no rule of meaning here; the pattern belongs to the verb. Learn the two lists, and learn the short third list of verbs that take both with different meanings. A useful rough tendency, though not a guarantee, is that verbs describing something already completed or ongoing (enjoy, avoid, finish, admit, deny — all looking back at, or resisting, an action already in progress) tend to take the gerund, while verbs describing something not yet done, still hoped for or intended (agree, decide, hope, want, promise — all looking forward to an action yet to happen) tend to take the infinitive. Treat this only as a memory aid, never as a substitute for knowing the actual verb, because plenty of common verbs break the pattern (finish, for instance, looks backward and correctly takes -ing, while fail, which also looks backward in a sense, takes to).',
         points: [
           '-ing: enjoy, avoid, mind, suggest, recommend, consider, admit, deny, postpone, finish, risk, practise, imagine, keep, involve, appreciate.',
           'to: agree, decide, hope, want, refuse, promise, manage, offer, afford, fail, learn, seem, pretend, expect, arrange, intend.',
           'Both, same meaning: begin, start, continue, like, love, hate, prefer.',
           'Both, different meanings: stop, remember, forget, regret, try, go on, mean.',
           'After a preposition, always -ing: without asking, before leaving, by improving.',
+          'Cannot help, cannot resist, cannot face and be worth all take -ing: the report is worth reading, he could not resist commenting.',
+          'A few verbs of preference plus object take an infinitive with a different subject: I would like him to attend, not I would like him attending.',
         ],
         models: [
           { sentence: 'The committee recommended postponing the examination.', note: 'recommend + -ing.' },
           { sentence: 'The committee decided to postpone the examination.', note: 'decide + to.' },
+          { sentence: 'The report is worth reading before you attempt tomorrow’s paper.', note: 'Worth is always followed by -ing, never by a to-infinitive.' },
         ],
         table: {
           caption: 'Same verb, two meanings',
@@ -595,47 +660,54 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'The bare infinitive',
-        plain: 'A few verbs are followed by an object and then the base form with no to. Adding to is a common and visible error.',
+        plain: 'A few verbs are followed by an object and then the base form with no to. Adding to is a common and visible error. The reason candidates keep adding to is that the bare infinitive looks incomplete on the page — every other infinitive they have met carries to, so a verb sitting there without it feels like a typo. But make, let, have (in the causative sense of getting something done) and the perception verbs (see, hear, watch, feel, notice) form a small closed class that historically never took to in the active voice, and no amount of “it looks unfinished” intuition should override that. The single exception, and the one examiners like to test, is that the passive of make restores to — He made him sign becomes He was made to sign — because once the object of make becomes the subject of a passive sentence, English needs the to back to hold the construction together.',
         points: [
           'make, let, have (causative): The officer made him sign. / Let the record be produced.',
           'Verbs of perception: see, hear, watch, feel, notice + object + bare infinitive or -ing.',
           'I saw him leave. (the whole action) / I saw him leaving. (in progress)',
           'In the passive, make takes to: He was made to sign.',
           'had better, would rather: You had better submit it today. / I would rather wait.',
+          'Help is unusual: it accepts both forms almost interchangeably, help him sign or help him to sign, with no real change in meaning.',
         ],
         models: [
           { sentence: 'The chairman let the members speak freely.', note: 'let + object + bare infinitive.' },
           { sentence: 'The witnesses were made to wait for three hours.', note: 'The passive of make restores to.' },
+          { sentence: 'The inspector heard the two clerks arguing over the missing file.', note: 'A perception verb with -ing stresses the argument in progress, not the whole finished event.' },
         ],
       },
       {
         heading: 'Gerund as subject and after possessives',
-        plain: 'An -ing form can head a subject, and it counts as one singular idea. In formal writing, a possessive stands before a gerund.',
+        plain: 'An -ing form can head a subject, and it counts as one singular idea. In formal writing, a possessive stands before a gerund. The logic is that the gerund itself, not the person mentioned before it, is the true subject of the sentence — “his leaving early” is really about the leaving, treated as a single thing, with his simply marking whose leaving it was, in exactly the way my in “my book” marks whose book it is. Writing “him leaving” instead treats leaving almost like a participle describing him, which blurs the emphasis and, in a formal register, reads as slightly careless. Candidates should also remember that once a gerund phrase becomes the subject of a sentence, it takes a singular verb no matter how many nouns sit inside that phrase.',
         points: [
           'Reading widely improves both vocabulary and judgement. — singular verb.',
           'Formal: We objected to his leaving early.',
           'Informal: We objected to him leaving early.',
           'Both are used, but the possessive is safer in an examination.',
           'Do not mix an -ing subject with a to-infinitive subject in the same list.',
+          'A long gerund subject still takes a singular verb: Collecting evidence, interviewing witnesses and drafting the report takes weeks, not take.',
         ],
         models: [
           { sentence: 'Drafting clear rules is harder than enforcing them.', note: 'Gerund subject, singular verb, and a parallel gerund after than.' },
           { sentence: 'His insisting on a written order delayed the operation.', note: 'Possessive before the gerund.' },
+          { sentence: 'The board’s postponing the hearing frustrated both parties.', note: 'A possessive noun, not just a possessive pronoun, can also precede a gerund in formal prose.' },
         ],
       },
       {
         heading: 'Participles: compress without dangling',
-        plain: 'A participle phrase lets you pack two ideas into one sentence. It borrows the subject of the main clause, so the doer must match — the same test you learned on Day 2.',
+        plain: 'A participle phrase lets you pack two ideas into one sentence. It borrows the subject of the main clause, so the doer must match — the same test you learned on Day 2. Choosing which participle to use is itself a small decision about meaning: the present participle (-ing) signals that the subject actively did or is doing something, the past participle signals that something was done to the subject, and the perfect participle (having + past participle) explicitly marks that the participle’s action happened before the main clause’s action, which is useful whenever the order of two events matters to the sentence’s logic and a simple present participle would leave the sequence ambiguous.',
         points: [
           'Two sentences: The officer reviewed the file. He rejected the claim.',
           'Compressed: Having reviewed the file, the officer rejected the claim.',
           'Present participle for an active meaning: The committee, meeting in camera, took four decisions.',
           'Past participle for a passive meaning: Written in haste, the note contained errors.',
           'Perfect participle for an earlier action: Having submitted the form, she left.',
+          'A participle phrase can also sit at the end of a sentence to add a closely following result: The flood destroyed the bridge, cutting off the village for a week.',
+          'Do not stack more than two participle phrases in one sentence; beyond that the reader loses track of which subject each one belongs to.',
         ],
         models: [
           { sentence: 'Faced with mounting criticism, the department withdrew the notification.', note: 'Past participle — the department was faced with criticism.' },
           { sentence: 'Believing the file to be complete, the clerk forwarded it.', note: 'Present participle — the clerk believed.' },
+          { sentence: 'The dam burst without warning, flooding three villages downstream within an hour.', note: 'A trailing present participle phrase adds the immediate result of the main clause.' },
         ],
       },
     ],
@@ -646,6 +718,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'I am looking forward to work with your team.', right: 'I am looking forward to working with your team.', why: 'To in this phrase is a preposition, so the -ing form follows.' },
       { wrong: 'After to complete the form, he submitted it.', right: 'After completing the form, he submitted it.', why: 'Every preposition, after included, takes the -ing form.' },
       { wrong: 'He denied to have taken the bribe.', right: 'He denied having taken the bribe.', why: 'Deny takes the gerund, and the perfect gerund marks the earlier time.' },
+      { wrong: 'The board risks to lose credibility if it delays the decision further.', right: 'The board risks losing credibility if it delays the decision further.', why: 'Risk is followed by the gerund, never by a to-infinitive.' },
+      { wrong: 'Finding out the fraud, the manager was suspended by the head office.', right: 'Having found out the fraud, the head office suspended the manager.', why: 'The head office, not the manager, found out the fraud; the perfect participle also marks that the discovery came first.' },
+      { wrong: 'She remembered to have submitted the report last week.', right: 'She remembered submitting the report last week.', why: 'Remember + gerund recalls a past action; remember + to-infinitive is for not forgetting a future duty.' },
+      { wrong: 'The clerk kept to ask the same question repeatedly.', right: 'The clerk kept asking the same question repeatedly.', why: 'Keep, meaning to continue doing something, takes the gerund.' },
     ],
     pitfalls: [
       'Using to after suggest, recommend, avoid, deny, enjoy, consider or postpone.',
@@ -704,32 +780,38 @@ export const grammarPhase3: GrammarLesson[] = [
     rules: [
       {
         heading: 'Forming the degrees',
-        plain: 'One-syllable words take -er and -est. Words of three or more syllables take more and most. Two-syllable words vary, but never take both.',
+        plain: 'One-syllable words take -er and -est. Words of three or more syllables take more and most. Two-syllable words vary, but never take both. Two-syllable adjectives are the genuinely uncertain zone: those ending in -y, -er, -ow, -le or -some usually take -er/-est (happier, narrower, simpler), while most others, especially those ending in -ful, -less, -ing or -ed, take more/most (more careful, more tiring). When in doubt with a two-syllable word, more/most is the safer default and is never actually wrong, whereas guessing wrongly with -er/-est risks producing a form that does not exist in English at all. The absolute rule that must never be broken, regardless of syllable count, is that a word takes one degree marker or the other, never both at once.',
         points: [
           'tall → taller → tallest; happy → happier → happiest.',
           'difficult → more difficult → most difficult.',
           'Irregular: good/better/best, bad/worse/worst, little/less/least, many-much/more/most, far/farther or further/farthest or furthest.',
           'Never more better, most best, more easier, most unique.',
           'Use the comparative for two, the superlative for three or more: the better of the two, the best of the five.',
+          'Two-syllable adjectives ending in -y, -er, -ow or -le usually take -er/-est: narrower, simpler, gentler.',
+          'When genuinely unsure which pattern a two-syllable word follows, use more/most; it is always acceptable even where -er/-est also exists.',
         ],
         models: [
           { sentence: 'Of the two proposals, the second is the better.', note: 'Two items take the comparative.' },
           { sentence: 'Of the five proposals, the second is the best.', note: 'Three or more take the superlative.' },
+          { sentence: 'The new policy is simpler and narrower in scope than the one it replaced.', note: 'Both two-syllable adjectives correctly take -er, not more.' },
         ],
       },
       {
         heading: 'Compare like with like',
-        plain: 'Both sides of a comparison must be the same kind of thing. Add that of, those of or a possessive to make the second side match the first.',
+        plain: 'Both sides of a comparison must be the same kind of thing. Add that of, those of or a possessive to make the second side match the first. The error survives in fluent-sounding writing because “The climate of Karachi is hotter than Murree” reads perfectly smoothly — nothing jars the ear — even though, taken literally, it compares a climate to a city, which cannot logically be hotter or colder than anything. The repair works by inserting a stand-in noun (that / those) that silently repeats the first noun so the two sides are grammatically and logically parallel again; use that for a singular noun (that of Murree) and those for a plural noun (those of the other candidates), and check which one you need by asking what noun you are actually replacing.',
         points: [
           'Wrong: The climate of Karachi is hotter than Murree.',
           'Right: The climate of Karachi is hotter than that of Murree.',
           'Wrong: His answers were better than the other candidates.',
           'Right: His answers were better than those of the other candidates.',
           'Right: The salary of a section officer is lower than a deputy secretary’s.',
+          'A possessive is often the neatest fix when the first noun is itself possessive: Pakistan’s GDP growth was slower than Bangladesh’s.',
+          'Check the number carefully: a plural first noun (exports, results, marks) needs those, never that.',
         ],
         models: [
           { sentence: 'The literacy rate of Punjab is higher than that of Balochistan.', note: 'that of makes both sides rates.' },
           { sentence: 'Pakistan’s exports grew faster than India’s.', note: 'The possessive carries the second side.' },
+          { sentence: 'The verdicts of the trial court were harsher than those of the appellate bench.', note: 'A plural first noun (verdicts) correctly takes those, not that.' },
         ],
         table: {
           caption: 'Comparison patterns that are tested',
@@ -749,21 +831,23 @@ export const grammarPhase3: GrammarLesson[] = [
       },
       {
         heading: 'Any and any other',
-        plain: 'When the thing you are comparing belongs to the group, you must write any other. When it does not, plain any is correct.',
+        plain: 'When the thing you are comparing belongs to the group, you must write any other. When it does not, plain any is correct. The logic is straightforward once stated: a thing cannot sensibly be compared with itself, so if Karachi is being measured against every city in Pakistan and Karachi is itself one of those cities, the sentence must exclude Karachi from its own comparison set with other; otherwise the sentence claims Karachi is bigger than Karachi, which is meaningless. If the comparison group genuinely excludes the subject — Karachi against cities in another country entirely — no exclusion is needed, because the subject was never inside the group in the first place.',
         points: [
           'Karachi is larger than any other city in Pakistan. — Karachi is in Pakistan.',
           'Karachi is larger than any city in Sri Lanka. — Karachi is not in Sri Lanka.',
           'The same applies to all: larger than all the other cities.',
           'With the superlative, use one of the best, not one of the better.',
+          'The test question to ask every time: is the subject itself a member of the group named after than? If yes, other is required.',
         ],
         models: [
           { sentence: 'He scored higher than any other candidate in his group.', note: 'He is in the group, so any other.' },
           { sentence: 'The Indus is longer than any river in Europe.', note: 'The Indus is not in Europe, so plain any.' },
+          { sentence: 'This is one of the best-performing districts in the province, ahead of all the other districts on every indicator.', note: 'one of the + superlative, and other correctly excludes the district from the group it is compared with.' },
         ],
       },
       {
         heading: 'Mixed precision: clearing several errors at once',
-        plain: 'In a real paper a single sentence often carries three errors from three different topics. Work through it in a fixed order so that you never miss one.',
+        plain: 'In a real paper a single sentence often carries three errors from three different topics. Work through it in a fixed order so that you never miss one. The reason a fixed order matters, rather than fixing whichever error you notice first, is that errors interact: changing a verb’s number can force you to reread the subject, and fixing a pronoun can reveal that the noun it depended on was itself missing an article. Reading in a set sequence — backbone, tense, articles, pronouns, prepositions and comparisons, then modifiers — means each pass only has to look for one category of fault, so nothing gets missed because your attention was absorbed by a different one. This is exactly the discipline error-correction and précis sections reward: examiners deliberately compress several separate faults from Days 1 through 18 into one sentence to see whether a candidate can find all of them, not just the most obvious one.',
         points: [
           'Step 1 — find the backbone and check agreement.',
           'Step 2 — check the tense and the verb forms.',
@@ -771,10 +855,14 @@ export const grammarPhase3: GrammarLesson[] = [
           'Step 4 — check pronouns and their antecedents.',
           'Step 5 — check prepositions and comparisons.',
           'Step 6 — read it once more for modifier placement.',
+          'Do not stop checking once you find the first error; a sentence in a real paper rarely carries only one.',
+          'If a correction changes the subject’s number, immediately recheck the verb and any pronoun that depends on it.',
         ],
         models: [
           { sentence: 'Wrong: Each of the officers have submitted their report to the higher authority than last year.', note: 'Agreement, pronoun, and a comparison with nothing to compare.' },
           { sentence: 'Right: Each of the officers has submitted his report earlier than last year.', note: 'All three repaired in one pass.' },
+          { sentence: 'Wrong: The government is looking forward to reduce the burden of poor and improve the education.', note: 'A to-infinitive after a prepositional to, a missing determiner before poor, and an abstract noun wrongly narrowed by the.' },
+          { sentence: 'Right: The government is looking forward to reducing the burden on the poor and improving education.', note: 'All three repaired: -ing after the preposition, the restored before poor as a class of people, the dropped before the general noun education.' },
         ],
       },
     ],
@@ -785,6 +873,10 @@ export const grammarPhase3: GrammarLesson[] = [
       { wrong: 'This is one of the better essays I have read this year.', right: 'This is one of the best essays I have read this year.', why: 'One of the + superlative + plural noun is the fixed pattern.' },
       { wrong: 'Of the two candidates, he is the best.', right: 'Of the two candidates, he is the better.', why: 'Two items take the comparative.' },
       { wrong: 'Her handwriting is not so good like her sister.', right: 'Her handwriting is not so good as her sister’s.', why: 'Not so … as is the pattern, and the possessive makes both sides handwriting.' },
+      { wrong: 'The GDP growth rate of Pakistan is more slower than Bangladesh.', right: 'The GDP growth rate of Pakistan is slower than that of Bangladesh.', why: 'A double comparative and a comparison of a rate with a country in one sentence; both faults need repair.' },
+      { wrong: 'This year’s results are more worse than the previous batch results.', right: 'This year’s results are worse than the previous batch’s.', why: 'Worse is already the irregular comparative of bad; more worse doubles the marker, and the possessive keeps both sides results.' },
+      { wrong: 'He is the most senior of the two officers in the department.', right: 'He is the more senior of the two officers in the department.', why: 'Only two officers are compared, so the comparative, not the superlative, is required.' },
+      { wrong: 'The new bridge is more longer and stronger than any bridge in the district.', right: 'The new bridge is longer and stronger than any other bridge in the district.', why: 'Longer is already comparative; and the bridge, being in the district, must be excluded from its own comparison group with other.' },
     ],
     pitfalls: [
       'Comparing a quality in one thing with the whole of another thing.',

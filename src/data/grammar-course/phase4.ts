@@ -19,17 +19,21 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'Three kinds of connector, three kinds of punctuation',
-        plain: 'The punctuation follows from the type of connector, not from the length of the sentence. Learn the three shapes and you will never punctuate a joined sentence by guesswork again.',
+        plain: 'The punctuation follows from the type of connector, not from the length of the sentence. Learn the three shapes and you will never punctuate a joined sentence by guesswork again. Students usually get this wrong because they punctuate by ear, copying whatever pause feels natural when reading aloud — but English punctuation before a connector is decided by grammar, not rhythm. A coordinating conjunction (and, but, so) joins two clauses that could each stand alone, so it takes a comma before it, never a semicolon and never nothing. A conjunctive adverb (however, therefore) is not a conjunction at all — it is an adverb wearing a conjunction\'s clothing — so it cannot join two clauses on its own; the semicolon is doing the actual joining, and the adverb is only commenting on the second clause. A subordinating conjunction (although, because) creates a dependent clause that cannot stand alone, and English marks that dependency with a comma only when the dependent clause comes first, because the reader needs a signal that the main clause is still to come; when the dependent clause follows, the sentence is already unambiguous and the comma becomes unnecessary decoration.',
         points: [
           'Coordinating: X, but Y. — comma before the conjunction when both sides are independent clauses.',
           'Subordinating at the front: Although X, Y. — comma after the dependent clause.',
           'Subordinating at the end: Y although X. — usually no comma.',
           'Conjunctive adverb: X; however, Y. — semicolon before, comma after.',
           'One join takes one connector. Never although … but, never because … therefore.',
+          'A conjunctive adverb can also sit mid-clause, set off by commas: The scheme, however, was never funded.',
+          'If you cannot decide whether a word is a conjunction or a conjunctive adverb, try moving it: however can move inside the clause; but cannot. That mobility test settles the punctuation.',
         ],
         models: [
           { sentence: 'The funds were released, but the work did not begin.', note: 'Coordinating — comma before but.' },
           { sentence: 'The funds were released; nevertheless, the work did not begin.', note: 'Conjunctive adverb — semicolon and comma.' },
+          { sentence: 'Because the audit was delayed, the report missed its deadline.', note: 'Subordinating clause first — comma after it.' },
+          { sentence: 'The report missed its deadline because the audit was delayed.', note: 'Same subordinating clause, now second — no comma needed.' },
         ],
         table: {
           caption: 'Choose the connector by the logic you mean',
@@ -48,47 +52,59 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Conjunction or preposition? Look at what follows',
-        plain: 'Several pairs mean the same thing but take different structures. Because takes a clause; because of takes a noun. Despite takes a noun; although takes a clause. This single distinction fixes a large family of errors.',
+        plain: 'Several pairs mean the same thing but take different structures. Because takes a clause; because of takes a noun. Despite takes a noun; although takes a clause. This single distinction fixes a large family of errors. The reason students confuse these pairs is that both members of each pair translate the same way in everyday speech and in most first languages, so the grammar has to be learned as a structural fact rather than felt intuitively: before choosing the word, look one step ahead at what actually follows it. If a full subject-plus-verb clause follows, you need the conjunction (because, although, while); if only a noun, pronoun or -ing phrase follows, you need the preposition (because of, despite, during). Writers who get this wrong nearly always do so in one direction — bolting a preposition onto a clause — because the preposition form often feels shorter and more "efficient", but efficiency never overrides the grammatical requirement of what comes after the word.',
         points: [
           'because + subject + verb / because of + noun phrase.',
           'although + subject + verb / despite + noun or -ing.',
           'while + subject + verb / during + noun.',
           'Despite the fact that … is grammatical but clumsy: write although.',
           'Due to is best used after a form of be: The delay was due to flooding. Otherwise prefer because of.',
+          'The same test applies to since (clause) versus since (preposition of time, meaning "from a point"): Since the ordinance lapsed, no fresh appointments were made / There have been three amendments since 2015.',
+          'Notwithstanding behaves like despite: it takes a noun phrase, not a clause — Notwithstanding the court\'s order, the eviction proceeded.',
         ],
         models: [
           { sentence: 'Despite the heavy rain, polling continued.', note: 'Despite + noun phrase.' },
           { sentence: 'Although it rained heavily, polling continued.', note: 'Although + clause.' },
+          { sentence: 'The tribunal proceeded despite the lawyers\' boycott.', note: 'Despite + noun phrase, no clause.' },
+          { sentence: 'The tribunal proceeded although the lawyers had called a boycott.', note: 'Although + full clause with its own subject and verb.' },
         ],
       },
       {
         heading: 'Correlative pairs must be complete and parallel',
-        plain: 'Each pair is fixed: either goes with or, neither with nor, not only with but also. What follows the first half must be the same grammatical kind as what follows the second.',
+        plain: 'Each pair is fixed: either goes with or, neither with nor, not only with but also. What follows the first half must be the same grammatical kind as what follows the second. The reason this rule is tested so heavily is that a correlative pair sets up an expectation in the reader\'s mind the instant the first word appears — hearing either, the reader is already waiting for a matching or, and hearing not only, the reader expects a matching but also introducing an item of the same weight and shape. Break that expectation by switching from a preposition phrase to a bare noun, or from a clause to a phrase, and the sentence reads as unbalanced even to a reader who cannot name the grammatical fault. This is also why the position of not only matters so much: placed at the very start of a clause, it forces the same subject–auxiliary inversion that a question does (Not only did he submit late …), because English treats a fronted negative-like element as needing that inversion; placed after the subject, no inversion is needed (He not only submitted late but also omitted …).',
         points: [
           'Not: neither … or. Not: either … nor.',
           'Not only did he submit late, but he also omitted two annexures. — note the inversion after not only at the start.',
           'Parallel: He is responsible not only for revenue but also for excise. — preposition on both sides.',
           'Not parallel: He is not only responsible for revenue but also excise.',
           'Agreement with either/or and neither/nor follows the nearer subject.',
+          'Both … and never inverts and never takes a comma before and: The province is both under-resourced and over-mandated.',
+          'Test a correlative pair by covering the first half and reading only the second: if the leftover phrase is not grammatical on its own, the pair is not balanced.',
         ],
         models: [
           { sentence: 'The scheme is neither well designed nor adequately funded.', note: 'Two adverb–adjective pairs balance.' },
           { sentence: 'She wants either a transfer or a formal explanation.', note: 'Two noun phrases balance.' },
+          { sentence: 'The court held that the order was both arbitrary and without lawful authority.', note: 'Both … and joining two adjective phrases.' },
+          { sentence: 'Either the ministry restores the subsidy, or the mills will shut before the season ends.', note: 'Either … or joining two full clauses, each with its own subject and verb.' },
         ],
       },
       {
         heading: 'Do not decorate; signal',
-        plain: 'A connector is a claim about the relationship between two ideas. Using moreover where you mean however, or therefore where no conclusion follows, misleads the reader about your own argument.',
+        plain: 'A connector is a claim about the relationship between two ideas. Using moreover where you mean however, or therefore where no conclusion follows, misleads the reader about your own argument. Weaker writers reach for connectors as furniture — a way of making a paragraph look joined-up and academic — and drop them in at the start of a sentence almost at random. An examiner reads a connector as a promise: therefore promises that what follows is genuinely entailed by what came before, and if the promise is not kept, the reader loses trust in every connector you use afterwards, even the correct ones. The fix is to draft the content first, in plain unlinked sentences, and only then ask what the actual logical relationship between each pair of sentences is — addition, contrast, cause, concession, restatement — before choosing the single word that names it.',
         points: [
           'therefore, hence, consequently — a conclusion genuinely follows.',
           'moreover, furthermore — you are adding a point of the same kind.',
           'however, nevertheless — you are conceding something that cuts against you.',
           'in fact, indeed — you are strengthening what you just said.',
           'Do not open three consecutive sentences with connectors. One signal per relationship is enough.',
+          'that is, in other words — you are restating the same point more precisely, not adding a new one.',
+          'for instance, for example — the sentence that follows must be a specific case of the general claim, not another general claim.',
         ],
         models: [
           { sentence: 'The policy was never funded. It therefore remained a statement of intent.', note: 'A real conclusion follows.' },
           { sentence: 'The policy was never funded. It was, moreover, never notified.', note: 'A second fact of the same kind.' },
+          { sentence: 'The commission has wide powers of inquiry. In practice, however, it has never summoned a serving secretary.', note: 'However signals a genuine concession against the first claim.' },
+          { sentence: 'Provincial governments resisted the transfer of the subject. Sindh, for instance, has yet to notify the rules three years after the amendment.', note: 'For instance introduces a specific case of the general resistance just claimed.' },
         ],
       },
     ],
@@ -99,6 +115,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'He is neither qualified or experienced.', right: 'He is neither qualified nor experienced.', why: 'Neither pairs only with nor.' },
       { wrong: 'The report is not only lengthy but also it is repetitive.', right: 'The report is not only lengthy but also repetitive.', why: 'Both halves must be the same kind of element — here, two adjectives.' },
       { wrong: 'The audit was delayed, however the report was submitted on time.', right: 'The audit was delayed; however, the report was submitted on time.', why: 'However cannot join two clauses after a comma.' },
+      { wrong: 'Since the ordinance lapsed, so no fresh appointments could be made.', right: 'Since the ordinance lapsed, no fresh appointments could be made.', why: 'Since already introduces the cause; a second connector doubles the join.' },
+      { wrong: 'Notwithstanding the court had issued a stay order, the demolition proceeded.', right: 'Notwithstanding the stay order the court had issued, the demolition proceeded.', why: 'Notwithstanding takes a noun phrase, not a clause with its own subject and verb.' },
+      { wrong: 'The mills will shut before the season ends, either the ministry restores the subsidy.', right: 'Either the ministry restores the subsidy, or the mills will shut before the season ends.', why: 'Either must be answered by or, and both halves must be complete clauses in the same order the logic requires.' },
+      { wrong: 'The board raised the tariff; because the exchange rate had fallen sharply.', right: 'The board raised the tariff because the exchange rate had fallen sharply.', why: 'A semicolon cannot precede a dependent clause introduced by because; no punctuation is needed at all here.' },
     ],
     pitfalls: [
       'Doubling connectors: although … but, because … so, as … therefore.',
@@ -156,32 +176,40 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'The test: read each item after the stem',
-        plain: 'Take the words before the list and read them separately with each item. If any combination is ungrammatical, the list is not parallel.',
+        plain: 'Take the words before the list and read them separately with each item. If any combination is ungrammatical, the list is not parallel. Faulty parallelism happens because a writer builds a list in real time, thinking of one idea at a time rather than planning the whole list in advance, and the grammatical form of the first item quietly changes by the third or fourth item without the writer noticing — the ear stops policing form once the meaning is clear. This is why the mechanical stem test works better than reading the sentence as a whole: reading the whole sentence, your brain fills the gaps and the sentence sounds fine even when it is not, but splitting it into stem-plus-item pairs exposes exactly where the grammar breaks, because each pair must stand alone as a complete, ordinary sentence.',
         points: [
           'Faulty: The course improves reading, writing and to speak.',
           'Test: improves reading ✓ / improves writing ✓ / improves to speak ✗.',
           'Repaired: The course improves reading, writing and speaking.',
           'Choose one form — all gerunds, all infinitives, all nouns, all clauses — and keep it.',
           'Where an infinitive list is long, either repeat to before every item or use it only once.',
+          'The test also catches a mismatched preposition: attention to detail, to accuracy and in punctuality fails the test on the third item; write and punctuality, or repeat to before all three.',
+          'Apply the same stem test to headings and bullet points, not only to sentences: read the page title with each bullet in turn.',
         ],
         models: [
           { sentence: 'The reform aims to widen the tax base, to simplify filing and to reduce litigation.', note: 'to repeated before each item.' },
           { sentence: 'The reform aims to widen the tax base, simplify filing and reduce litigation.', note: 'to used once and understood throughout.' },
+          { sentence: 'The syllabus tests grammar, comprehension and précis writing.', note: 'Three nouns after tests, all passing the stem test.' },
+          { sentence: 'The board is examining efficiency, transparency and accountability in procurement.', note: 'Three abstract nouns of the same kind, sharing one preposition phrase.' },
         ],
       },
       {
         heading: 'Parallelism after correlatives and comparisons',
-        plain: 'Whatever follows the first half of a pair must be matched in kind by what follows the second half. The same applies on both sides of than and as.',
+        plain: 'Whatever follows the first half of a pair must be matched in kind by what follows the second half. The same applies on both sides of than and as. Comparisons are easy to get wrong because the two halves are often separated by several words, so by the time the writer reaches the second half, the grammatical shape of the first half has been forgotten. The safest habit is to write the second half of the comparison immediately after finishing the first, before adding any further qualification, and only then insert extra material — because inserting material in the middle is exactly where mismatches creep in, as in “Writing an essay well, with proper structure and evidence, is harder than to write a précis”, where the long insertion has caused the writer to lose track of the gerund started at the beginning.',
         points: [
           'not only X but also Y — X and Y the same kind.',
           'either X or Y, neither X nor Y, both X and Y.',
           'Comparison: Writing an essay is harder than writing a précis.',
           'Faulty: Writing an essay is harder than to write a précis.',
           'Faulty: He prefers reading to write. → He prefers reading to writing.',
+          'As … as takes the same form on both sides, exactly like than: The scheme is as poorly monitored as it is generously funded.',
+          'A comparison of nouns needs a noun on both sides, not a noun against a clause: The province\'s revenue is smaller than that of Punjab, not smaller than Punjab collects.',
         ],
         models: [
           { sentence: 'The policy is both economically unsound and administratively impossible.', note: 'Two adverb–adjective pairs.' },
           { sentence: 'She is respected less for her seniority than for her judgement.', note: 'for + noun on both sides.' },
+          { sentence: 'The tribunal\'s caseload this year is as heavy as it was last year.', note: 'As … as balanced across two clauses of the same shape.' },
+          { sentence: 'Balochistan\'s share of federal transfers is smaller than that of any other province.', note: 'Noun compared with noun (that of), not with a clause.' },
         ],
         table: {
           caption: 'Faulty and parallel, side by side',
@@ -198,12 +226,13 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Parallelism across a whole paragraph',
-        plain: 'Parallel structure is not only a sentence-level device. Headings, bullet points, the topic sentences of successive paragraphs and the points of an argument all read better when they share a shape.',
+        plain: 'Parallel structure is not only a sentence-level device. Headings, bullet points, the topic sentences of successive paragraphs and the points of an argument all read better when they share a shape. This works because a reader unconsciously uses the shape of a sentence to predict what kind of information is coming, and matching shapes across a paragraph or a list lets the reader process each new point faster, since the grammatical pattern has already been learned from the first item. This is the same principle examiners reward when they praise "structure" in an essay: it is very often nothing more than consistent parallel form applied at the level of the whole answer, not just within single sentences.',
         points: [
           'Keep bullet points in one grammatical form throughout.',
           'If your first reason begins “Because …”, let the others do the same.',
           'Repetition of structure is a rhetorical strength, not a weakness.',
           'Do not, however, force parallelism where the ideas are genuinely different in kind.',
+          'In a comparison essay, keep the same order of aspects in both halves: if you discuss the economy, then governance, then society for one side, follow the same order for the other side.',
         ],
         models: [
           { sentence: 'The state failed to plan, failed to fund and failed to monitor.', note: 'Deliberate repetition for force.' },
@@ -218,6 +247,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'He is interested in politics, history and to study law.', right: 'He is interested in politics, history and law.', why: 'After in, all three items must be nouns.' },
       { wrong: 'Teaching is more demanding than to administer.', right: 'Teaching is more demanding than administering.', why: 'Both sides of a comparison take the same form.' },
       { wrong: 'The report recommends reducing subsidies, that tariffs be raised and to widen the tax net.', right: 'The report recommends reducing subsidies, raising tariffs and widening the tax net.', why: 'Three gerunds after recommends.' },
+      { wrong: 'Balochistan\'s revenue is smaller than what Punjab collects.', right: 'Balochistan\'s revenue is smaller than that of Punjab.', why: 'A noun (revenue) must be compared with a noun (that of Punjab), not with a clause.' },
+      { wrong: 'The scheme is as poorly monitored as its funding is generous.', right: 'The scheme is as poorly monitored as it is generously funded.', why: 'As … as needs the same clause shape on both sides: adjective after is, both times.' },
+      { wrong: 'The board is examining efficiency, transparency and being accountable.', right: 'The board is examining efficiency, transparency and accountability.', why: 'The third item switches to a gerund phrase where two abstract nouns came before it.' },
+      { wrong: 'The essay should discuss the economy, then society, and governance is covered last.', right: 'The essay should discuss the economy, then society, and then governance.', why: 'The third item drops the pattern “then + noun” that the first two items set up.' },
     ],
     pitfalls: [
       'Mixing gerunds and infinitives in one list.',
@@ -276,32 +309,36 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'The semicolon',
-        plain: 'A semicolon joins two independent clauses whose relationship is so close that a full stop would break it. It is also used to separate list items that already contain commas.',
+        plain: 'A semicolon joins two independent clauses whose relationship is so close that a full stop would break it. It is also used to separate list items that already contain commas. Students avoid the semicolon almost entirely, or else scatter it wherever a comma "feels too weak", because no one has told them the one test that governs it: cover everything from the semicolon onward, and what remains before it must be a complete sentence on its own; then cover everything up to the semicolon, and what remains after it must also be a complete sentence on its own. If either half fails that test, the mark is wrong — a comma splice waiting to happen, or a comma that should have been used instead. The closeness of relationship a semicolon signals is a judgement call, not a rule: two clauses that state a cause and its direct consequence, or a claim and its immediate qualification, are the classic candidates, because a full stop between them would make the reader supply the connection that the semicolon supplies for free.',
         points: [
           'Both sides must be complete sentences: The policy was announced; it was never funded.',
           'Before a conjunctive adverb: The policy was announced; however, it was never funded.',
           'In a complicated list: The delegates came from Lahore, Punjab; Quetta, Balochistan; and Gilgit.',
           'Never use a semicolon where a comma or colon is needed, and never before a dependent clause.',
           'One or two semicolons in an essay show control; a dozen show mannerism.',
+          'A semicolon can also replace and or but between two closely balanced clauses when you want to suggest the link without naming it: The north received above-average rainfall; the south recorded its driest season in a decade.',
         ],
         models: [
           { sentence: 'The commission has the power to summon; it has never used it.', note: 'Two complete clauses, closely linked.' },
           { sentence: 'Three officers attended: the DC, who chaired; the AC, who recorded; and the tehsildar.', note: 'A list whose items contain commas.' },
+          { sentence: 'The bench reserved judgement; the parties were informed only through a one-line notice.', note: 'Two complete clauses standing side by side, the second qualifying the first.' },
         ],
       },
       {
         heading: 'The colon',
-        plain: 'A colon says “here it comes”. What stands before it must be a complete statement; what follows may be a list, an explanation, an example or a quotation.',
+        plain: 'A colon says “here it comes”. What stands before it must be a complete statement; what follows may be a list, an explanation, an example or a quotation. The error students make most often is treating the colon as a substitute for "namely" or "which are" and inserting it directly after a verb or a preposition — “The paper covers: grammar, comprehension and précis” — but a colon can only follow something that is already grammatically finished. The test is identical to the semicolon\'s first half: read only the words before the colon; if they do not form a complete sentence without the colon, the colon is wrong and should simply be deleted, with the sentence continuing as ordinary prose.',
         points: [
           'Introducing a list: The syllabus covers three areas: grammar, précis and composition.',
           'Introducing an explanation: The reason was simple: nobody had read the file.',
           'Introducing a quotation: The report was blunt: “The scheme has failed.”',
           'Never write a colon after a preposition or a verb: “The syllabus covers: grammar, précis …” is wrong.',
           'Do not use a colon and the word namely or such as together.',
+          'A colon can also introduce a single dramatic word or short phrase for emphasis: The verdict left one question unanswered: why.',
         ],
         models: [
           { sentence: 'The failure had one cause: chronic underfunding.', note: 'Complete statement, then the explanation.' },
           { sentence: 'The paper has four sections: précis, comprehension, grammar and composition.', note: 'Complete statement, then the list.' },
+          { sentence: 'The bench asked the same question twice: where were the missing files?', note: 'Complete statement, then a short emphasised phrase.' },
         ],
         table: {
           caption: 'Which mark, and why',
@@ -319,13 +356,14 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Dashes and brackets',
-        plain: 'A pair of dashes makes an interruption loud; a pair of brackets makes it quiet; a pair of commas makes it neutral. Choose by the emphasis you want, and always use a matched pair.',
+        plain: 'A pair of dashes makes an interruption loud; a pair of brackets makes it quiet; a pair of commas makes it neutral. Choose by the emphasis you want, and always use a matched pair. The three marks carry the same grammatical information — this is extra, removable content — but they carry different weight, and confusing that weight is itself a small stylistic error even when the punctuation is technically matched. Commas are the default for a non-essential clause; dashes are reserved for content you actively want the reader to notice, often because it is surprising or damaging to the main claim; brackets are for content you want present but almost invisible, such as a figure, a date or a cross-reference the reader can skip without losing the sentence\'s thread. Mixing an opening mark with a different closing mark — starting with a dash and ending with a comma, or opening a bracket and never closing it — is one of the commonest silent errors in student writing, because the eye tracks the opening mark and stops policing the closing one.',
         points: [
           'Dashes for emphasis or an abrupt break: Only one province — Balochistan — was excluded.',
           'Brackets for a quiet aside, a reference or a gloss: The rate (7.4 per cent) was the lowest since 2016.',
           'A single dash before a final phrase draws a conclusion: The result was predictable — nothing changed.',
           'Do not mix: never open with a dash and close with a comma.',
           'In formal examination writing, use dashes sparingly.',
+          'A single dash can also introduce an afterthought at the very end of a sentence, functioning like a colon but less formal: The scheme had one flaw — nobody had costed it.',
         ],
         models: [
           { sentence: 'The committee — three of whose members had resigned — met only twice.', note: 'Matched pair of dashes.' },
@@ -334,7 +372,7 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Quotation marks and the apostrophe, precisely',
-        plain: 'A quotation must reproduce the source exactly, and the punctuation around it follows settled conventions. The possessive apostrophe follows the shape of the owner, not the sound of the word.',
+        plain: 'A quotation must reproduce the source exactly, and the punctuation around it follows settled conventions. The possessive apostrophe follows the shape of the owner, not the sound of the word. Students who write “the witness’ statement” or “the childrens’ books” are usually guessing from how the word sounds spoken aloud rather than looking at its written shape: the rule is mechanical, not phonetic. First identify the owner as written — singular (witness), plural ending in -s (witnesses), or plural not ending in -s (children) — and only then add the apostrophe: ’s after a singular or an irregular plural, and just an apostrophe after a regular plural that already ends in -s. The same mechanical approach settles joint versus separate ownership: mark only the last name for one shared thing, and mark both names for two separate things, because the apostrophe\'s job is to show where the "belongs to" relationship attaches, not to decorate every proper noun in sight.',
         points: [
           'A quotation inside a sentence begins with a capital when it is a complete sentence: He said, “The file is closed.”',
           'A partial quotation runs on: He called the decision “indefensible”.',
@@ -342,6 +380,8 @@ export const grammarPhase4: GrammarLesson[] = [
           'Singular owner: the witness’s statement. Plural owner: the witnesses’ statements.',
           'Joint ownership: Ali and Sara’s report. Separate ownership: Ali’s and Sara’s reports.',
           'Compound noun: the Chief Secretary’s office; someone else’s file.',
+          'An irregular plural that does not end in -s takes ’s exactly like a singular: the children’s books, the people’s verdict.',
+          'A name that already ends in -s may take just the apostrophe in formal style: Justice Iqbal’s ruling but Cervantes’ novel — follow one convention consistently within a single piece of writing.',
         ],
         models: [
           { sentence: 'The tribunal described the delay as “wholly unexplained”.', note: 'Partial quotation, no comma, no capital.' },
@@ -356,6 +396,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'He described the delay as, “unexplained”.', right: 'He described the delay as “unexplained”.', why: 'A partial quotation running on from as takes no comma.' },
       { wrong: 'The witness’ statement contradicted the witnesses statements.', right: 'The witness’s statement contradicted the witnesses’ statements.', why: 'Singular owner takes ’s; plural owner ending in -s takes the apostrophe after the s.' },
       { wrong: 'Three issues remain; funding, staffing and legal cover.', right: 'Three issues remain: funding, staffing and legal cover.', why: 'A list following a complete statement is introduced by a colon.' },
+      { wrong: 'The childrens books had been left, in the corridor for months.', right: 'The children’s books had been left in the corridor for months.', why: 'Children is an irregular plural, so the possessive takes ’s; the stray comma before in is also removed.' },
+      { wrong: 'The scheme had one flaw, — nobody had costed it.', right: 'The scheme had one flaw — nobody had costed it.', why: 'A dash used for emphasis is not preceded by a comma; choose one mark.' },
+      { wrong: 'Justice Iqbals ruling overturned the earlier judgment.', right: 'Justice Iqbal’s ruling overturned the earlier judgment.', why: 'A singular name always takes the possessive apostrophe before the s.' },
+      { wrong: 'He said the file is closed, but no order was issued.', right: 'He said, “The file is closed,” but no order was issued.', why: 'A reported statement quoted directly needs quotation marks and a comma to introduce it.' },
     ],
     pitfalls: [
       'Placing a colon after a verb or a preposition.',
@@ -414,17 +458,20 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'Delete what repeats itself',
-        plain: 'A redundancy states the same thing twice. Delete one half. This costs no content at all and is the safest cut you can make.',
+        plain: 'A redundancy states the same thing twice. Delete one half. This costs no content at all and is the safest cut you can make. Redundancies survive in writing because each half feels like it is adding emphasis — "true facts" sounds more emphatic than "facts" — but emphasis achieved by repeating meaning is not real emphasis at all; it is padding dressed as strength, and a trained reader notices the padding before the emphasis. The reliable test is to ask whether the second word could be true without the first, or the first without the second: a fact that is not true is not a fact, so "true" adds nothing; a conclusion reached partway through an argument is not yet a conclusion, so "final" adds nothing once you already have "conclusion". Where you genuinely want emphasis, choose a stronger single word instead of doubling a weaker one — not "very excellent" but "outstanding".',
         points: [
           'Common pairs: true facts, past history, final conclusion, basic fundamentals, advance planning, free gift, new innovation.',
           'Double meaning: return back, repeat again, revert back, join together, cooperate together, mutual cooperation.',
           'Padded phrases: in colour, in size, in shape, in number — red in colour is simply red.',
           'Doubled negatives of degree: more preferable, most unique, very excellent.',
           'Doubled quantifiers: each and every, one and the same, first and foremost.',
+          'Also watch for redundant modifiers on absolute words: unique, perfect, complete and essential do not take more, most or very in front of them.',
+          'Test any suspect pair by deleting one word: if the sentence loses no information, the deleted word was redundant.',
         ],
         models: [
           { sentence: 'The conclusion was that the scheme had failed.', note: 'Not “the final conclusion”.' },
           { sentence: 'He returned the file on Monday.', note: 'Not “returned back”.' },
+          { sentence: 'The proposal is unique among the province’s irrigation schemes.', note: 'Not “most unique” — unique admits no degree.' },
         ],
         table: {
           caption: 'Long phrase → one word',
@@ -453,7 +500,7 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Turn weak nouns back into verbs',
-        plain: 'English is strongest when the action sits in the verb. When you write made an application, the action has been hidden inside a noun and the verb left doing nothing.',
+        plain: 'English is strongest when the action sits in the verb. When you write made an application, the action has been hidden inside a noun and the verb left doing nothing. This construction — called a nominalisation — is common in bureaucratic writing precisely because it feels safe and formal, since turning a verb into a noun lets a writer avoid naming who did the acting: "a decision was made" hides the decision-maker, while "the committee decided" names it. That is sometimes deliberate and defensible, but where you do want to name the actor, nominalisation is simply weaker prose: it adds a weak carrier verb (make, take, give, conduct, have) in front of a noun that is doing the real semantic work, and every added carrier verb is a word your reader has to process for no informational gain. Reversing a nominalisation almost always shortens the sentence and sharpens who is doing what.',
         points: [
           'made a decision → decided.',
           'conducted an investigation into → investigated.',
@@ -461,15 +508,17 @@ export const grammarPhase4: GrammarLesson[] = [
           'reached an agreement → agreed.',
           'is in agreement with → agrees with.',
           'Look for -tion, -ment, -ance and -ity nouns beside weak verbs like make, take, give, do, have, conduct.',
+          'came to the realisation that → realised; put forward a proposal → proposed; carried out a review of → reviewed.',
         ],
         models: [
           { sentence: 'The committee decided to postpone the hearing.', note: 'Seven words instead of eleven.' },
           { sentence: 'The department investigated the complaint.', note: 'Not “conducted an investigation into”.' },
+          { sentence: 'The auditor reviewed the accounts within a week.', note: 'Not “carried out a review of the accounts”.' },
         ],
       },
       {
         heading: 'Cut the opening throat-clearing',
-        plain: 'Many sentences begin with words that announce a sentence is coming rather than saying anything. Delete them and start with the content.',
+        plain: 'Many sentences begin with words that announce a sentence is coming rather than saying anything. Delete them and start with the content. Throat-clearing phrases exist because they feel like a safe way to ease into a claim, giving the writer a run-up before committing to something definite — but the reader gains nothing from the run-up and has to read further before reaching any actual information, which is exactly the opposite of what an examiner wants under time pressure. The there is / there are construction is a special case worth understanding separately: it exists in English precisely to introduce brand-new information whose subject has not been mentioned before ("There is a rumour that…"), so it is not always wrong — but where the real subject is already known or nameable, delaying it behind there is only wastes words and weakens the sentence\'s opening, which is a position of natural emphasis second only to its end.',
         points: [
           'It is important to note that the scheme failed. → The scheme failed.',
           'There are many people who believe that … → Many people believe that ….',
@@ -477,21 +526,24 @@ export const grammarPhase4: GrammarLesson[] = [
           'In my opinion, I think that … → I think that ….',
           'As far as X is concerned, … → As for X, … or rewrite.',
           'There is / There are constructions often hide a stronger subject.',
+          'What must be understood is that … → Understand that … or delete and state the point directly.',
         ],
         models: [
           { sentence: 'Three factors explain the failure.', note: 'Not “There are three factors which explain the failure.”' },
           { sentence: 'Many economists disagree.', note: 'Not “There are many economists who disagree.”' },
+          { sentence: 'A persistent rumour links the minister to the contract.', note: 'A genuinely new subject named directly, instead of “There is a rumour that…”.' },
         ],
       },
       {
         heading: 'Concision is not compression at any cost',
-        plain: 'Cutting must never remove content, qualification or accuracy. A précis that loses a condition or a limiting word has lost marks, not gained them.',
+        plain: 'Cutting must never remove content, qualification or accuracy. A précis that loses a condition or a limiting word has lost marks, not gained them. Students who are told to "write concisely" often overcorrect once they learn a few cutting techniques, and start deleting words that look expendable but actually carry the argument\'s logic or its precision — a since 2019 that tells the reader how long a problem has persisted, or a in most districts that stops a local failure being read as a national one. The discipline to hold onto is this: concision removes words that carry no information (padding, doubled meaning, weak carrier verbs), never words that carry some information, however small. When in doubt about whether a phrase is padding or content, ask whether removing it changes what a careful reader would believe about the world — if it does, it was content.',
         points: [
           'Keep every qualification: mostly, usually, in some districts, since 2019.',
           'Keep the logical connectors that carry the argument.',
           'Keep technical terms; replace only the padding around them.',
           'Never merge two distinct facts into one to save words.',
           'Test each cut by asking: has any information disappeared?',
+          'In a précis specifically, a dropped qualifier such as usually or in some districts can turn a true statement into a false or overstated one — treat that as a factual error, not a style choice.',
         ],
         models: [
           { sentence: 'Because funding was withdrawn in 2019, the scheme lapsed in most districts.', note: 'Every qualification survives the cut.' },
@@ -506,6 +558,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'It is important to note that the report was submitted late.', right: 'The report was submitted late.', why: 'The opening phrase adds no information.' },
       { wrong: 'He repeated the instruction again and asked them to revert back.', right: 'He repeated the instruction and asked them to reply.', why: 'Repeat already contains again; revert already contains back, and reply is the word actually meant.' },
       { wrong: 'In my personal opinion, I believe that each and every candidate should be informed.', right: 'I believe that every candidate should be informed.', why: 'Opinion is already personal, and each and every says one thing twice.' },
+      { wrong: 'The proposal is the most unique solution the department has put forward.', right: 'The proposal is the most original solution the department has proposed.', why: 'Unique admits no degree; put forward is a nominalisation that reduces to proposed.' },
+      { wrong: 'What must be understood is that the exchange rate is basically the fundamental cause of the price rise.', right: 'The exchange rate is the fundamental cause of the price rise.', why: 'Both the opening phrase and basically add nothing once fundamental is already there.' },
+      { wrong: 'The scheme, which works well, failed last year.', right: 'The scheme, which usually works well in most districts, failed everywhere last year.', why: 'Usually and in most districts are genuine qualifications, not padding; cutting them turns a limited, ordinary claim into an absolute one that is no longer accurate.' },
+      { wrong: 'There is a possibility that the ministry may reconsider the decision at some point in the near future.', right: 'The ministry may reconsider the decision soon.', why: 'The there-construction, the doubled modal possibility/may and the wordy phrase in the near future all collapse without losing the claim.' },
     ],
     pitfalls: [
       'Cutting a qualification along with the padding.',
@@ -564,7 +620,7 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'What formal writing avoids',
-        plain: 'Formal register is not difficult vocabulary; it is the absence of casual habits. Remove these six things and your writing rises a level without a single new word.',
+        plain: 'Formal register is not difficult vocabulary; it is the absence of casual habits. Remove these six things and your writing rises a level without a single new word. Students often respond to "write formally" by reaching for longer, rarer words, but that overcorrection produces stiff, sometimes wrong prose, while the actual gap between an average answer and a strong one is almost always these six habits, none of which requires a bigger vocabulary. A contraction is a spoken-language shortcut that has no place in writing meant to be read carefully rather than heard; a rhetorical question used as filler asks the reader to do the writer\'s work of stating a conclusion; and an exclamation mark tells the reader how to feel about a fact instead of trusting the fact, stated plainly, to carry its own weight — which is precisely what formal argument is supposed to do.',
         points: [
           'Contractions: don’t, can’t, isn’t, it’s → do not, cannot, is not, it is.',
           'Slang and conversational fillers: a lot of, stuff, things, kind of, sort of, you know.',
@@ -572,10 +628,13 @@ export const grammarPhase4: GrammarLesson[] = [
           'Direct address of the reader: “as you can see”, “let me tell you”.',
           'Rhetorical questions used as filler: “Is this justice?” Use one only where it genuinely carries weight.',
           'Exclamation marks, in almost every case.',
+          'Vague intensifiers: really, very, pretty much, quite a bit — replace with a precise adjective or a figure.',
+          'Clichés and idioms borrowed from speech: at the end of the day, when push comes to shove, in a nutshell.',
         ],
         models: [
           { sentence: 'The government has not addressed the underlying problem.', note: 'Not “The govt hasn’t dealt with the real issue.”' },
           { sentence: 'Several factors contributed to the failure.', note: 'Not “There were a lot of things behind the failure.”' },
+          { sentence: 'The finding raises a serious question about oversight.', note: 'Not “This is a pretty big deal, if you think about it.”' },
         ],
         table: {
           caption: 'Casual → formal',
@@ -601,22 +660,24 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'Do not overstate',
-        plain: 'Strong words weaken an argument when the evidence does not support them. Replace absolute claims with claims you could defend if challenged.',
+        plain: 'Strong words weaken an argument when the evidence does not support them. Replace absolute claims with claims you could defend if challenged. An overstatement is a promise the writer cannot keep: once you write "always" or "everyone knows", a single counter-example is enough to demolish the whole claim, and an examiner trained to look for exceptions will usually find one. A hedged claim is not a weaker claim — it is a more accurate one, because it states exactly the strength of evidence behind it, and a reader who trusts your hedges will also trust your unhedged claims elsewhere. The opposite failure, stacking several hedges together, is just as damaging: "it may possibly perhaps be the case that" no longer commits to anything at all, and a claim that commits to nothing earns no marks for analysis.',
         points: [
           'Avoid: everyone knows, nobody can deny, totally, completely, always, never, the worst in the world.',
           'Prefer: widely accepted, it is generally held, largely, in most cases, rarely.',
           'Hedge with verbs: appears to, tends to, suggests, indicates.',
           'Hedge with modals: may, might, is likely to.',
           'One qualification is enough; do not stack them: “it may possibly perhaps be the case”.',
+          'A precise figure or a named source is a stronger hedge than any adverb: not “inflation has risen a lot” but “inflation rose by over eleven per cent”.',
         ],
         models: [
           { sentence: 'The data suggest that enforcement has weakened since 2019.', note: 'Defensible, and still a clear claim.' },
           { sentence: 'Enforcement has weakened in most districts.', note: 'Qualified without becoming vague.' },
+          { sentence: 'Enrolment fell by nine per cent in the districts affected by flooding.', note: 'A precise figure and a named scope replace a vague intensifier.' },
         ],
       },
       {
         heading: 'Choose the exact word',
-        plain: 'Most diction errors are near-misses: a word that shares a root or a sound with the right one. Learn the pairs that are tested, and never use a word from a thesaurus that you have not seen in a real sentence.',
+        plain: 'Most diction errors are near-misses: a word that shares a root or a sound with the right one. Learn the pairs that are tested, and never use a word from a thesaurus that you have not seen in a real sentence. These pairs are confused not because the words are rare but because they look and sound almost identical, so the eye and the ear cannot always tell them apart, and the difference has to be memorised as a fact rather than deduced from spelling. Notice, too, that the confusion usually runs in a predictable direction: affect is far commoner than effect as a verb, so writers default to it even where the noun effect is meant; imply is commoner than infer, so writers say "imply" when they mean the listener drew a conclusion, when it is in fact the listener who infers and the speaker who implies. Knowing which direction the error usually runs helps you catch your own writing before an examiner does.',
         points: [
           'affect (verb, to influence) / effect (noun, a result; verb, to bring about).',
           'principal (main, or a head of college) / principle (a rule).',
@@ -626,21 +687,25 @@ export const grammarPhase4: GrammarLesson[] = [
           'historic (important in history) / historical (relating to history).',
           'continual (repeated) / continuous (unbroken).',
           'practice (noun) / practise (verb) in British usage.',
+          'stationary (not moving) / stationery (paper and pens) — unrelated meanings hidden behind near-identical spelling.',
+          'complement (something that completes) / compliment (praise) — check the surrounding meaning, not the sound.',
         ],
         models: [
           { sentence: 'The new duty affected import volumes; its effect was immediate.', note: 'Verb, then noun.' },
           { sentence: 'The principal objection rests on a principle of natural justice.', note: 'Adjective, then noun.' },
+          { sentence: 'The minister’s silence implied consent; the opposition inferred as much.', note: 'The speaker implies, the listener infers.' },
         ],
       },
       {
         heading: 'Impersonal but not lifeless',
-        plain: 'Formal writing usually avoids I and you, but it should not therefore become a wall of passive constructions. Make ideas, evidence and institutions the subjects of your sentences.',
+        plain: 'Formal writing usually avoids I and you, but it should not therefore become a wall of passive constructions. Make ideas, evidence and institutions the subjects of your sentences. This is where many students overcorrect a second time: having learned that "I" is discouraged, they retreat into the passive voice for every sentence — "it is believed that", "it can be seen that" — which removes the personal pronoun but also removes any subject at all, leaving the reader unsure who or what is doing anything. The better move is to promote the evidence, the institution or the idea itself to the grammatical subject: not "I believe the policy failed" and not "it is believed that the policy failed", but "the policy failed", or, where a source matters, "the report concludes that the policy failed" — active, impersonal and specific all at once.',
         points: [
           'Instead of “I think the policy failed”, write “The policy failed for three reasons”.',
           'Instead of “you can see from the table”, write “The table shows”.',
           'Let evidence act: The figures indicate … / The report concludes … / This pattern suggests ….',
           'Some examiners accept a measured first person in an essay; keep it rare and deliberate.',
           'Never mix registers inside one paragraph.',
+          'Avoid stacking passives for their own sake: “it can be seen that it was found that” buries the subject twice over. One active verb usually replaces both.',
         ],
         models: [
           { sentence: 'The survey indicates a sharp fall in rural enrolment.', note: 'Impersonal and active at once.' },
@@ -655,6 +720,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'Let me tell you that this policy is totally useless.', right: 'This policy achieves none of its stated objectives.', why: 'Direct address and overstatement replaced by a specific claim.' },
       { wrong: 'The committee comprises of five members who compose the report.', right: 'The committee comprises five members, who compose the report.', why: 'Comprise takes no of, and the parts compose the whole.' },
       { wrong: 'There has been continuous load-shedding every evening for a month.', right: 'There has been continual load-shedding every evening for a month.', why: 'Repeated interruptions are continual; unbroken ones are continuous.' },
+      { wrong: 'It is believed that it can be said that the policy has, at the end of the day, failed.', right: 'The policy has failed.', why: 'Two stacked passive constructions and a spoken-language cliché all vanish once the real claim is stated directly.' },
+      { wrong: 'From his tone, the minister implied that the department had lied to him.', right: 'From his tone, the minister inferred that the department had lied to him.', why: 'The minister is the listener here, drawing a conclusion, so infer is the correct verb.' },
+      { wrong: 'The office needs new stationary and a photocopier that actually works!', right: 'The office needs new stationery and a working photocopier.', why: 'Stationery (paper and supplies) is confused with stationary (not moving), and the exclamation mark is removed for formal register.' },
+      { wrong: 'The rate was really high, like way higher than last year, if you think about it.', right: 'The rate rose sharply compared with last year.', why: 'Vague intensifiers and a conversational filler are replaced by one precise, formal claim.' },
     ],
     pitfalls: [
       'Using contractions and abbreviations in a formal answer.',
@@ -713,28 +782,31 @@ export const grammarPhase4: GrammarLesson[] = [
     rules: [
       {
         heading: 'Given before new',
-        plain: 'A reader absorbs a sentence most easily when it starts with something already familiar and ends with the new information. Reordering a sentence so that the familiar part comes first is the single most powerful cohesion technique there is.',
+        plain: 'A reader absorbs a sentence most easily when it starts with something already familiar and ends with the new information. Reordering a sentence so that the familiar part comes first is the single most powerful cohesion technique there is. The reason it works is about how attention operates while reading: a sentence that opens with unfamiliar information forces the reader to hold that information in suspense while working out how it connects to anything already said, whereas a sentence that opens with the familiar element lets the reader recognise it instantly and then attend fully to whatever is new at the end. Two sentences that are individually correct can therefore still read as disconnected if each one buries its link to the previous sentence in the middle or at the start instead of the end — this is the single most common reason a factually accurate paragraph is marked down for "poor flow" when nothing is grammatically wrong with any one sentence in it.',
         points: [
           'End one sentence with an idea, then begin the next with it.',
           'Weak: A new scheme was launched in 2019. Rural credit was its target.',
           'Strong: In 2019 the government launched a new scheme. Its target was rural credit.',
           'The end of a sentence is its position of emphasis: put the point there.',
           'Do not begin three consecutive sentences with the same subject; vary the opening while keeping the link.',
+          'When two sentences share no obvious word to link on, look for a summary noun or pronoun that can stand for the whole of the first sentence and open the second.',
         ],
         models: [
           { sentence: 'The tribunal reserved its judgement. That judgement, delivered six months later, changed the law.', note: 'The new information at the end becomes the given at the start of the next sentence.' },
           { sentence: 'Enforcement remains the weak point. Without it, the best-drafted law is a statement of intent.', note: 'The link is carried by it.' },
+          { sentence: 'The tribunal ordered fresh recruitment within six months. That deadline passed without a single appointment being made.', note: 'The new information (a deadline) at the end of the first sentence becomes the given subject of the second.' },
         ],
       },
       {
         heading: 'Four tools of cohesion',
-        plain: 'Connectors are only one of four. Use all four and your paragraph will hold together even where no connector appears.',
+        plain: 'Connectors are only one of four. Use all four and your paragraph will hold together even where no connector appears. Relying on connectors alone produces the paragraph examiners describe as "mechanical": every sentence is correctly joined by therefore or however, yet the paragraph still reads as a list because nothing else ties the sentences together at the level of meaning. Reference, substitution and lexical repetition work silently, without announcing themselves the way a connector does, which is exactly why skilled writing feels smoother rather than more signposted — the four tools are used together, so that even removing every explicit connector would leave a paragraph whose sentences still visibly belong to each other through shared and echoing vocabulary.',
         points: [
           'Reference: pronouns and demonstratives pointing back — it, they, this reform, such measures.',
           'Substitution and ellipsis: “The first proposal was costly; the second, less so.”',
           'Lexical links: repeating the key term, or using a synonym or a summary noun — the scheme, the programme, this initiative.',
           'Connectors: however, therefore, moreover — used where the logic genuinely turns.',
           'Summary nouns are especially useful: this failure, that decision, such delays.',
+          'A synonym chain across a paragraph (the reform … the measure … the initiative … the policy) keeps the topic visible without the monotony of repeating one word every time.',
         ],
         models: [
           { sentence: 'Three districts refused to implement the order. This refusal was never formally recorded.', note: 'A summary noun carries the link and adds a judgement.' },
@@ -755,27 +827,30 @@ export const grammarPhase4: GrammarLesson[] = [
       },
       {
         heading: 'The shape of a paragraph',
-        plain: 'A paragraph in an examination answer should do one job and be visibly built. The simplest reliable shape has four moves.',
+        plain: 'A paragraph in an examination answer should do one job and be visibly built. The simplest reliable shape has four moves. An examiner reading quickly under time pressure looks first for the topic sentence, because it tells them what to expect from everything that follows, and a paragraph without one forces the examiner to reconstruct the claim themselves from scattered evidence — work that should have been done by the writer. The four-move shape also disciplines the writer: if you cannot state the paragraph\'s single claim in one sentence before writing the rest, the paragraph probably does not yet have one, and drafting that sentence first, even in rough form, is the fastest way to prevent a paragraph drifting across two or three unrelated points.',
         points: [
           'Topic sentence: state the single claim this paragraph will support.',
           'Explanation: say what the claim means, in your own words.',
           'Evidence or example: one concrete instance, figure or case.',
           'Link: say why it matters, or turn towards the next paragraph.',
           'One paragraph, one claim. If you find a second claim, start a new paragraph.',
+          'The evidence sentence should be the most concrete sentence in the paragraph: a date, a figure, a named case, not a further generalisation.',
         ],
         models: [
           { sentence: 'Enforcement, not legislation, is the binding constraint. Pakistan has ample law on environmental protection; what it lacks is the capacity to apply it. The 2019 smog emergency, declared under existing rules, produced no prosecutions. Until that capacity is built, further legislation will change nothing.', note: 'Claim, explanation, evidence, link — four sentences, one job.' },
+          { sentence: 'Judicial delay, not judicial independence, is the more pressing constitutional problem. Courts that take a decade to decide a property dispute deny justice as surely as courts that decide unfairly. In 2023 the average civil suit in the district courts remained pending for over seven years. Reform must therefore begin with case management, not with further guarantees of independence that the system already possesses.', note: 'The same four-move shape applied to a different claim.' },
         ],
       },
       {
         heading: 'Keep the grammar steady',
-        plain: 'Unnecessary shifts of tense, voice, person or number break cohesion even when the connectors are correct. Hold them steady unless the meaning requires a change.',
+        plain: 'Unnecessary shifts of tense, voice, person or number break cohesion even when the connectors are correct. Hold them steady unless the meaning requires a change. These shifts are especially easy to miss in your own writing because each sentence, read alone, is grammatically fine — the fault only shows up when two or three sentences are read consecutively and the reader has to silently readjust who "you" now refers to, or whether the action is still happening now or already happened. A reader who has to keep re-orienting to these small shifts spends attention on tracking the grammar instead of following the argument, which is exactly the cost cohesion is meant to eliminate. The fix is mechanical: pick one tense for the whole passage unless a real change of time is being described, one voice unless you deliberately want to background an actor, and one person (usually the impersonal third person, or "the candidate") and hold it for the whole paragraph.',
         points: [
           'Do not shift from the present to the past without a reason.',
           'Do not shift from active to passive in the middle of a comparison.',
           'Do not shift from one to you to we within a paragraph.',
           'Do not shift a recurring subject between singular and plural.',
           'When you do shift, the shift itself becomes a signal — so make it deliberate.',
+          'Check pronoun number as carefully as verb tense: a singular subject like the government or the committee should keep it, not they, throughout a passage, unless you have deliberately switched to referring to its members.',
         ],
         models: [
           { sentence: 'When a candidate prepares systematically, he retains more and revises faster.', note: 'One subject, one person, throughout.' },
@@ -789,6 +864,10 @@ export const grammarPhase4: GrammarLesson[] = [
       { wrong: 'When one prepares systematically, you retain more and we revise faster.', right: 'When candidates prepare systematically, they retain more and revise faster.', why: 'Three shifts of person inside one sentence.' },
       { wrong: 'The policy was announced in March. The provinces were not consulted by the ministry. Implementation began in June.', right: 'The policy was announced in March without consulting the provinces. Implementation nevertheless began in June.', why: 'Voice held steady and the logical turn signalled.' },
       { wrong: 'Firstly, the data are incomplete. Secondly, the method was untested. Thirdly, the conclusion is overstated. Fourthly, the annexures are missing.', right: 'The data are incomplete and the method untested; the conclusion is therefore overstated.', why: 'Numbering is not cohesion. Show the relationship instead of counting.' },
+      { wrong: 'The government announced a new tax. It said it will help revenue and they hope it worked.', right: 'The government announced a new tax, saying it would help revenue and expressing hope that it would work.', why: 'The pronoun stays singular, and the tense stays consistently past throughout.' },
+      { wrong: 'Judicial delay is the real problem. Courts take a decade. In 2023 the average case took seven years. Independence is already guaranteed.', right: 'Judicial delay, not judicial independence, is the more pressing constitutional problem. Courts that take a decade to decide a dispute deny justice as surely as courts that decide unfairly. In 2023 the average civil suit remained pending for over seven years. Reform must therefore begin with case management.', why: 'Four bare statements are rebuilt into claim, explanation, evidence and link.' },
+      { wrong: 'The bench reserved its judgement on the petition. This was expected by lawyers following the case.', right: 'The bench reserved its judgement on the petition. Lawyers following the case had expected exactly this.', why: 'Given–new order restores the flow: the reserved judgement (already given) opens the second sentence instead of trailing at its end.' },
+      { wrong: 'The committee recommends reform. They also recommend that funding is increased and the committee wants oversight strengthened.', right: 'The committee recommends reform, increased funding and strengthened oversight.', why: 'A singular committee should keep it, not they, and three recommendations belong in one parallel list rather than three shifting sentences.' },
     ],
     pitfalls: [
       'Starting a sentence with a bare This, It or These that refers to nothing precise.',
