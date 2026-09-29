@@ -48,18 +48,19 @@ export const MPT_PASSAGE_QUESTIONS = r(5, 10, 'observed', '6 (2022), 5 (2024 Q86
 export const MPT_PILEUP_FACTOR = 2
 
 /**
- * Difficulty. The MPT is a qualifying screening test, not a contest: most items are
- * accessible or moderate, and General Abilities is SSC-level (owner's instruction —
- * "MPT ability is not tough"). Targets are shares of a section; ranges are for 200.
+ * Difficulty. The recorded FPSC papers mix accessible, moderate and challenging items;
+ * General Abilities is SSC level, so its challenging items are two- or three-step problems,
+ * never university work. Replacements aim for 30/50/20 (General Abilities 30/55/15);
+ * see DIFFICULTY_TARGET in scripts/mpt/repair-live-series.mjs.
  */
 export const MPT_DIFFICULTY_SHAPE = {
-  target: { 1: 0.42, 2: 0.46, 3: 0.12 },
-  abilitiesTarget: { 1: 0.45, 2: 0.47, 3: 0.08 },
-  accessible: r(70, 115, 'internal', '35–57 % of the paper at difficulty 1'),
-  moderate: r(70, 115, 'internal', '35–57 % at difficulty 2'),
-  challenging: r(8, 30, 'internal', '4–15 % at difficulty 3'),
-  perSectionChallengingShare: r(0, 20, 'internal', 'No section more than 20 % challenging'),
-  abilitiesChallengingShare: r(0, 10, 'internal', 'General Abilities at most 10 % challenging (6 of 60)'),
+  target: { 1: 0.3, 2: 0.5, 3: 0.2 },
+  abilitiesTarget: { 1: 0.3, 2: 0.55, 3: 0.15 },
+  accessible: r(40, 100, 'internal', '20–50 % of the paper at difficulty 1'),
+  moderate: r(80, 125, 'internal', '40–62 % at difficulty 2'),
+  challenging: r(20, 50, 'internal', '10–25 % at difficulty 3'),
+  perSectionChallengingShare: r(0, 25, 'internal', 'No section more than 25 % challenging'),
+  abilitiesChallengingShare: r(0, 15, 'internal', 'General Abilities at most 15 % challenging (9 of 60), SSC-level multi-step problems only'),
 }
 
 /** Opening and ordering rules (internal, from the owner's instruction on the psychological opening). */

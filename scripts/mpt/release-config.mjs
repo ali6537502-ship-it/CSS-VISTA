@@ -1,9 +1,9 @@
 // Identity of the current editorial release of the official MPT series.
 export const RELEASE = {
   /** Increment when a new editorial standard supersedes earlier papers. */
-  editorialRelease: 4,
+  editorialRelease: 5,
   /** Papers frozen from any series registered below this release are replaced if their mock has not started. */
-  replaceUnstartedBelowRelease: 4,
+  replaceUnstartedBelowRelease: 5,
   /**
    * Only the papers the remaining schedule needs, repaired from the live papers already
    * frozen for those mocks (keep what is sound, replace what is defective). The running series is 40 mocks
@@ -19,8 +19,8 @@ export const RELEASE = {
   lastLivePaper: 40,
   /** Papers of earlier releases already sat (release 3 papers 1–4 = Mocks 5–8): never reused. */
   heldReleases: [{ path: 'data-archive/mpt-release-3-series.json', papers: 4 }],
-  seed: 'css-vista-mpt-editorial-release-4',
-  releaseDate: '2026-09-28',
+  seed: 'css-vista-mpt-editorial-release-5',
+  releaseDate: '2026-09-29',
   /** Time-sensitive Current Affairs must describe developments inside this window. */
   currentWindow: { from: '2025-09-01', to: '2026-09-26' },
 }

@@ -24,8 +24,19 @@ export const LIVE_SERIES_PATH = 'data-archive/mpt-live-series-b054de7.json'
 const FACTUAL = new Set(['Islamic Studies', 'General Knowledge'])
 const NEAR_DUPLICATE = MPT_REPETITION_LIMITS.nearDuplicateJaccard.max
 const SAME_TOPIC_IN_PAPER = 0.35
-/** Share of accessible items a section aims for among its replacements; the rest moderate. */
-const ACCESSIBLE_SHARE = 0.5
+/**
+ * Difficulty mix a section's replacements aim for (1 accessible, 2 moderate, 3 challenging).
+ * Release 3–4 kept almost no challenging item and students found the papers far easier than
+ * the real MPT; the recorded FPSC papers mix all three levels. General Abilities stays SSC
+ * level: its challenging items are two- or three-step problems, never university work.
+ */
+export const DIFFICULTY_TARGET = {
+  'General Abilities': { 1: 0.3, 2: 0.55, 3: 0.15 },
+  default: { 1: 0.3, 2: 0.5, 3: 0.2 },
+}
+const targetFor = (section) => DIFFICULTY_TARGET[section] ?? DIFFICULTY_TARGET.default
+/** Most challenging replacements a section may take in one paper. */
+export const challengingLimit = (section) => Math.round(MPT_SECTION_SIZE[section] * targetFor(section)[3])
 
 export function loadLiveSeries(path = LIVE_SERIES_PATH) {
   return JSON.parse(readFileSync(path, 'utf8'))
@@ -176,9 +187,8 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper, revi
     const fixBudgets = !state.headingBudget
     state.headingBudget = headingBudget
     const headingUsed = new Map()
-    const accessibleShare = new Map()
     for (const [key, list] of pool) {
-      const fresh = list.filter((q) => !state.usedIds.has(q.id) && q.difficulty < 3)
+      const fresh = list.filter((q) => !state.usedIds.has(q.id))
       // General Ability capacity counts what the family limits still allow: a skeleton
       // appears at most once per paper and in at most perSeriesFamily papers.
       let capacity = fresh.length
@@ -189,9 +199,6 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper, revi
       }
       // 90 %: some fresh items are always blocked by the repetition checks.
       if (fixBudgets) headingBudget.set(key, Math.max(1, Math.floor((capacity * 0.9) / papersLeft)))
-      const section = key.split('|')[0]
-      const sectionFresh = [...pool].filter(([k]) => k.startsWith(`${section}|`)).flatMap(([, l]) => l.filter((q) => !state.usedIds.has(q.id) && q.difficulty < 3))
-      accessibleShare.set(section, sectionFresh.length ? sectionFresh.filter((q) => q.difficulty === 1).length / sectionFresh.length : ACCESSIBLE_SHARE)
     }
     const sectionCounts = new Map()
     const hardInSection = new Map()
@@ -220,15 +227,16 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper, revi
         : [slot.heading]
       void overBudget
       const wantSubs = section === 'English' ? (ENGLISH_TOPIC.find(([re]) => re.test(slot.live.s ?? ''))?.[1] ?? []) : []
-      // The MPT is not a puzzle contest: General Abilities takes at most one challenging
-      // replacement per paper, other sections at most 10 % of the section.
-      const hardCap = section === 'General Abilities' ? 1 : Math.floor(size * 0.1)
-      // Keep each section's replacements about half accessible, half moderate.
+      // Steer every section's replacements towards its target mix of levels.
+      const hardCap = challengingLimit(section)
+      const target = targetFor(section)
       const dc = difficultyInSection.get(section) ?? { 1: 0, 2: 0, 3: 0 }
       const filled = dc[1] + dc[2] + dc[3]
-      // Aim for the accessible share the remaining bank can sustain, so the last paper is as easy as the first.
-      const aim = accessibleShare.get(section) ?? ACCESSIBLE_SHARE
-      const balance = (d) => (filled < 4 ? 0 : d === 1 && dc[1] / filled > aim + 0.05 ? 0.35 : d === 2 && dc[2] / filled > 1 - aim + 0.05 ? 0.35 : 0)
+      const balance = (d) => {
+        if (filled < 3) return 0
+        const share = dc[d] / filled
+        return share > target[d] + 0.05 ? 0.5 : share < target[d] - 0.05 ? -0.3 : 0
+      }
       const rankedFor = (heading) => {
         const candidates = pool.get(`${section}|${heading}`) ?? []
         const share = new Map()
@@ -242,7 +250,6 @@ export function repairLiveSeries({ live, bank, seed, firstPaper, lastPaper, revi
             q,
             key: rng() * 0.5 - (scores.get(q.id) ?? 0) * 0.4 + balance(q.difficulty)
               - (section === 'General Abilities' ? Math.min(0.9, (perFamily.get(q.pattern_family) ?? 0) * 0.06) : 0)
-              + (q.difficulty === 3 ? 2 : q.difficulty === 2 ? 0.1 : 0)
               + (wantSubs.length && !wantSubs.includes(q.subtopic) ? 0.8 : 0)
               + (q.quality_grade === 'B' ? 0.2 : 0),
           }))

@@ -1,6 +1,6 @@
-# MPT editorial release 4 — repaired live series
+# MPT editorial release 5 — repaired live series
 
-Series 5dca7458d1ef1fa8; 32 papers (live papers 9–40 of b054de7, i.e. Mocks 9–40); status **PASS**.
+Series fafa5f1ca0d16eaf; 32 papers (live papers 9–40 of b054de7, i.e. Mocks 9–40); status **PASS**.
 
 Each paper is the live paper already frozen for that mock. A live question was kept unless it had a concrete defect; only defective slots were refilled, in place, from the reviewed bank with an item from the same section and heading. Papers follow the official FPSC structure only (five sections with their official sizes, every official heading present, no topic quotas).
 
@@ -38,8 +38,8 @@ Each paper is the live paper already frozen for that mock. A live question was k
 - General Knowledge: sports minutiae: 34
 - English: more than 4 questions of the same frame in this paper: 34
 - General Knowledge: news or index minutiae: 33
-- General Knowledge: tests the same fact as an earlier question: 22
 - General Knowledge: time-bound fact that may be out of date: 18
+- General Knowledge: tests the same fact as an earlier question: 18
 - General Knowledge: celebrity or pop trivia, not MPT General Knowledge: 15
 - General Knowledge: catch-all option (None/All of these): 13
 - General Knowledge: same question with numbers changed: 13
@@ -268,35 +268,35 @@ Warnings: none
 
 | Paper (mock) | Fingerprint | Kept | Replaced | GA new diff 1/2/3 | GK sci/CA/PA | Passage |
 |---|---|---|---|---|---|---|
-| 1 (9) | `84117cac0488a949` | 17 | 183 | 25/35/0 | 17/14/19 | mpt-psg-a05 |
-| 2 (10) | `d291e06e8b01da14` | 10 | 190 | 25/35/0 | 19/14/17 | mpt-psg-a06 |
-| 3 (11) | `76d09e8d4de09cf6` | 17 | 183 | 25/35/0 | 19/14/17 | mpt-psg-a07 |
-| 4 (12) | `bef2d7204de8e3fa` | 27 | 173 | 25/35/0 | 21/12/17 | mpt-psg-a08 |
-| 5 (13) | `b4de279924144481` | 15 | 185 | 25/35/0 | 20/13/17 | mpt-psg-a09 |
-| 6 (14) | `f2934cc4226697bc` | 24 | 176 | 25/35/0 | 20/12/18 | mpt-psg-a10 |
-| 7 (15) | `297920ac68cf3636` | 18 | 182 | 25/35/0 | 20/13/17 | mpt-psg-a11 |
-| 8 (16) | `1ab58422dd8c996f` | 21 | 179 | 25/35/0 | 20/13/17 | mpt-psg-a12 |
-| 9 (17) | `1a5d852b373280a1` | 11 | 189 | 25/35/0 | 20/13/17 | mpt-psg-a13 |
-| 10 (18) | `3b6def6c8e941b9c` | 23 | 177 | 25/35/0 | 19/12/19 | mpt-psg-a14 |
-| 11 (19) | `7063d9509f21a1cb` | 19 | 181 | 24/36/0 | 19/13/18 | mpt-psg-a15 |
-| 12 (20) | `3c94c7b833a2e446` | 26 | 174 | 24/36/0 | 20/14/16 | mpt-psg-a16 |
-| 13 (21) | `a6f5eab786b10bcb` | 19 | 181 | 24/36/0 | 18/14/18 | mpt-psg-a17 |
-| 14 (22) | `55b9cbae9cdbab4f` | 20 | 180 | 24/36/0 | 19/14/17 | mpt-psg-a18 |
-| 15 (23) | `72e3c02266c76394` | 15 | 185 | 24/36/0 | 19/14/17 | mpt-psg-a19 |
-| 16 (24) | `7dfd6d7eefc3a32a` | 19 | 181 | 24/36/0 | 18/13/19 | mpt-psg-a20 |
-| 17 (25) | `ed4e01d1b2086a0b` | 18 | 182 | 24/36/0 | 18/13/19 | mpt-psg-a21 |
-| 18 (26) | `b71592dbd08d2c33` | 18 | 182 | 23/37/0 | 18/13/19 | mpt-psg-a22 |
-| 19 (27) | `7fb337f1d7e797d6` | 14 | 186 | 23/37/0 | 18/13/19 | mpt-psg-a23 |
-| 20 (28) | `904dde1e7a1ea8d6` | 18 | 182 | 23/37/0 | 21/12/17 | mpt-psg-a24 |
-| 21 (29) | `78cd87cd0437db6c` | 20 | 180 | 23/37/0 | 21/12/17 | mpt-psg-b01 |
-| 22 (30) | `134f33ed1d830b34` | 23 | 177 | 23/37/0 | 26/10/14 | mpt-psg-b02 |
-| 23 (31) | `d2d1ca70a4b3adad` | 17 | 183 | 22/38/0 | 24/11/15 | mpt-psg-b03 |
-| 24 (32) | `32fa591a4abe917a` | 21 | 179 | 22/38/0 | 24/11/15 | mpt-psg-b04 |
-| 25 (33) | `a504406dfaf5a950` | 14 | 186 | 22/38/0 | 22/11/17 | mpt-psg-b05 |
-| 26 (34) | `1db7aa0abac59fa2` | 24 | 176 | 20/36/0 | 23/10/17 | mpt-psg-b06 |
-| 27 (35) | `789f5bf5ec2717c3` | 18 | 182 | 21/39/0 | 22/12/16 | mpt-psg-b07 |
-| 28 (36) | `227e7a59cdcc9635` | 19 | 181 | 21/39/0 | 21/12/17 | mpt-psg-b08 |
-| 29 (37) | `5f8b62c86bd645b8` | 24 | 176 | 20/40/0 | 22/12/16 | mpt-psg-b09 |
-| 30 (38) | `f30b08fd5e3c5f61` | 19 | 181 | 20/40/0 | 22/11/17 | mpt-psg-b10 |
-| 31 (39) | `b942a244e66404b1` | 20 | 180 | 19/41/0 | 23/12/15 | mpt-psg-b11 |
-| 32 (40) | `562384c94a736da0` | 33 | 167 | 17/43/0 | 23/11/16 | mpt-psg-b12 |
+| 1 (9) | `8d2cbcdf6d3acaf5` | 17 | 183 | 20/31/9 | 17/13/20 | mpt-psg-a05 |
+| 2 (10) | `dbf52496a1d066fa` | 10 | 190 | 17/34/9 | 19/13/18 | mpt-psg-a06 |
+| 3 (11) | `7e1a7234586ed2de` | 17 | 183 | 18/33/9 | 19/13/18 | mpt-psg-a07 |
+| 4 (12) | `c278bc128fc0e24a` | 27 | 173 | 19/32/9 | 21/11/18 | mpt-psg-a08 |
+| 5 (13) | `59f9a21c174a0a5c` | 15 | 185 | 19/32/9 | 20/12/18 | mpt-psg-a09 |
+| 6 (14) | `a6815101a6460b88` | 24 | 176 | 16/35/9 | 20/11/19 | mpt-psg-a10 |
+| 7 (15) | `b2fa7e47cef4b238` | 18 | 182 | 18/33/9 | 20/12/18 | mpt-psg-a11 |
+| 8 (16) | `c1b51d5c14cf5c7a` | 21 | 179 | 16/35/9 | 20/12/18 | mpt-psg-a12 |
+| 9 (17) | `9acfb91b15acdee1` | 11 | 189 | 17/34/9 | 20/12/18 | mpt-psg-a13 |
+| 10 (18) | `61d800b3acfa05b3` | 23 | 177 | 19/32/9 | 19/11/20 | mpt-psg-a14 |
+| 11 (19) | `1f5a290c0c28b572` | 19 | 181 | 16/35/9 | 19/12/19 | mpt-psg-a15 |
+| 12 (20) | `544b1683953f8db1` | 26 | 174 | 18/33/9 | 20/13/17 | mpt-psg-a16 |
+| 13 (21) | `330d33b97dd25d01` | 19 | 181 | 18/33/9 | 18/13/19 | mpt-psg-a17 |
+| 14 (22) | `d880499970e4939b` | 20 | 180 | 15/36/9 | 19/13/18 | mpt-psg-a18 |
+| 15 (23) | `8f420f3a82d52d0f` | 15 | 185 | 17/34/9 | 19/13/18 | mpt-psg-a19 |
+| 16 (24) | `844a37afc9ee01a9` | 19 | 181 | 17/34/9 | 18/12/20 | mpt-psg-a20 |
+| 17 (25) | `4d871636a18135f8` | 18 | 182 | 16/35/9 | 18/12/20 | mpt-psg-a21 |
+| 18 (26) | `dcd15f258b8a194d` | 18 | 182 | 17/34/9 | 18/12/20 | mpt-psg-a22 |
+| 19 (27) | `80a622ff097c1240` | 14 | 186 | 21/30/9 | 18/12/20 | mpt-psg-a23 |
+| 20 (28) | `c4cceef665ae79c3` | 18 | 182 | 17/34/9 | 21/11/18 | mpt-psg-a24 |
+| 21 (29) | `db66e45b2f9c2e3c` | 20 | 180 | 20/31/9 | 21/11/18 | mpt-psg-b01 |
+| 22 (30) | `e7e27f0871b291fe` | 23 | 177 | 17/34/9 | 26/9/15 | mpt-psg-b02 |
+| 23 (31) | `6707da5ca8b04780` | 17 | 183 | 21/30/9 | 24/10/16 | mpt-psg-b03 |
+| 24 (32) | `2dcc0ad0391a2f71` | 21 | 179 | 18/33/9 | 24/10/16 | mpt-psg-b04 |
+| 25 (33) | `33fd1285eabc269a` | 14 | 186 | 18/33/9 | 22/10/18 | mpt-psg-b05 |
+| 26 (34) | `a1e3893f1e634d0d` | 24 | 176 | 17/30/9 | 23/9/18 | mpt-psg-b06 |
+| 27 (35) | `26e1f88d59312013` | 18 | 182 | 20/31/9 | 22/11/17 | mpt-psg-b07 |
+| 28 (36) | `c6b02e23f0313ca3` | 19 | 181 | 19/32/9 | 21/11/18 | mpt-psg-b08 |
+| 29 (37) | `f4010a9b22ae94b2` | 24 | 176 | 18/33/9 | 22/11/17 | mpt-psg-b09 |
+| 30 (38) | `46f82d95543e76cf` | 19 | 181 | 21/30/9 | 22/10/18 | mpt-psg-b10 |
+| 31 (39) | `886f88885f116cfc` | 20 | 180 | 17/34/9 | 23/11/16 | mpt-psg-b11 |
+| 32 (40) | `6305f2d648b29468` | 33 | 167 | 20/31/9 | 23/10/17 | mpt-psg-b12 |

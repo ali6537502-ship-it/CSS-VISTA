@@ -527,3 +527,10 @@ still exist (D-48) but are not listed.
   (238 rejected); every kept question received a factual explanation (none is left without one).
   The verdicts are `src/data/mpt/release/live-review.json`; the repair keeps only questions the
   editor passed, and the gate and tests fail otherwise. Question, options and key are unchanged.
+
+**D-57 · Release 5: a real mix of difficulty (29 Sep 2026)** — owner feedback on Mock 8 ("so easy")
+- Releases 3–4 took almost no challenging replacement (Mock 8: 8 of 200), which was far easier
+  than the real MPT. Replacements now aim for 30 % accessible / 50 % moderate / 20 %
+  challenging (General Abilities 30/55/15, at most 9 challenging items — SSC two- and
+  three-step problems of the 2024-paper kind, never university work). Measured across the
+  32 papers: 31/50/19.

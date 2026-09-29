@@ -27,13 +27,13 @@ Pile-up guard (internal): no topic takes more than 2× its share of the bank in 
 
 | Rule | Value | Basis | Note |
 |---|---|---|---|
-| difficulty.target | 1: 42%, 2: 46%, 3: 12% | internal | Target share by level (1 accessible, 2 moderate, 3 challenging) |
-| difficulty.abilitiesTarget | 1: 45%, 2: 47%, 3: 8% | internal | Target share by level (1 accessible, 2 moderate, 3 challenging) |
-| difficulty.accessible | 70–115 | internal | 35–57 % of the paper at difficulty 1 |
-| difficulty.moderate | 70–115 | internal | 35–57 % at difficulty 2 |
-| difficulty.challenging | 8–30 | internal | 4–15 % at difficulty 3 |
-| difficulty.perSectionChallengingShare | 0–20 | internal | No section more than 20 % challenging |
-| difficulty.abilitiesChallengingShare | 0–10 | internal | General Abilities at most 10 % challenging (6 of 60) |
+| difficulty.target | 1: 30%, 2: 50%, 3: 20% | internal | Target share by level (1 accessible, 2 moderate, 3 challenging) |
+| difficulty.abilitiesTarget | 1: 30%, 2: 55%, 3: 15% | internal | Target share by level (1 accessible, 2 moderate, 3 challenging) |
+| difficulty.accessible | 40–100 | internal | 20–50 % of the paper at difficulty 1 |
+| difficulty.moderate | 80–125 | internal | 40–62 % at difficulty 2 |
+| difficulty.challenging | 20–50 | internal | 10–25 % at difficulty 3 |
+| difficulty.perSectionChallengingShare | 0–25 | internal | No section more than 25 % challenging |
+| difficulty.abilitiesChallengingShare | 0–15 | internal | General Abilities at most 15 % challenging (9 of 60), SSC-level multi-step problems only |
 | order.openingWindow | 10 | internal | Opening and pacing rule |
 | order.openingMaxChallenging | 2 | internal | Opening and pacing rule |
 | order.openingFirstFiveMaxChallenging | 0 | internal | Opening and pacing rule |

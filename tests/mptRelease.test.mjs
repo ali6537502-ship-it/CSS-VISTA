@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { isDeepStrictEqual } from 'node:util'
 import { loadReviewedBank, buildRelease, readCheckedInRelease, resolveRelease, auditResolved, seriesHash, heldBankIds, loadLiveReview } from '../scripts/mpt/release-lib.mjs'
-import { loadLiveSeries } from '../scripts/mpt/repair-live-series.mjs'
+import { loadLiveSeries, challengingLimit } from '../scripts/mpt/repair-live-series.mjs'
 import { liveDefects } from '../scripts/mpt/live-review-rules.mjs'
 import { loadServedArchive, stemHash } from '../scripts/mpt/served-archive.mjs'
 import { canonical } from '../scripts/mpt/bank-lib.mjs'
@@ -107,10 +107,14 @@ test('every bank answer matches the verified bank and every bank item is explain
   }
 })
 
-test('General Abilities stays SSC-level: at most one challenging replacement per paper', () => {
+test('papers mix accessible, moderate and challenging items like the real MPT', () => {
   for (const paper of resolved) {
-    const hard = paper.filter((q) => q.section === 'General Abilities' && q.meta.origin === 'reviewed-bank' && q.meta.difficulty === 3)
-    assert.ok(hard.length <= 1)
+    const fresh = paper.filter((q) => q.meta.origin === 'reviewed-bank')
+    const hard = (section) => fresh.filter((q) => q.section === section && q.meta.difficulty === 3).length
+    assert.ok(hard('General Abilities') <= challengingLimit('General Abilities'), 'General Abilities stays SSC level')
+    const share = (d) => fresh.filter((q) => q.meta.difficulty === d).length / fresh.length
+    assert.ok(share(3) >= 0.1, `paper has only ${(share(3) * 100).toFixed(0)}% challenging items`)
+    assert.ok(share(1) >= 0.2 && share(1) <= 0.45, `accessible share ${(share(1) * 100).toFixed(0)}%`)
   }
 })
 
