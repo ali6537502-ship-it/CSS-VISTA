@@ -5,7 +5,6 @@ import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
-import NotesBundleOfferPopup from './components/NotesBundleOfferPopup'
 import Home from './pages/Home'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
@@ -121,7 +120,7 @@ function S({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Routes>
-      <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /><NotesBundleOfferPopup /></></ErrorBoundary></AdSenseProvider>}>
+      <Route element={<AdSenseProvider><ErrorBoundary><><Layout /><TrustFooter /></></ErrorBoundary></AdSenseProvider>}>
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
