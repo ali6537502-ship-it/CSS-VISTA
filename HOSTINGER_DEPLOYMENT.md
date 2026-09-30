@@ -113,7 +113,7 @@ The final Hostinger build produces `dist/index.html`, canonical `www` metadata, 
 
 ## Redeploy trigger
 
-Production redeploy re-triggered after the VISTA Journal route-integrity fix on 22 September 2026.
+Production redeploy re-triggered on 30 September 2026 after removing the homepage discount overlays.
 
 ## Other deployment target
 
