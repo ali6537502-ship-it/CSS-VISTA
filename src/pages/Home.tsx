@@ -162,7 +162,6 @@ function HomeHero() {
 const ExamIntelligenceHomeCard = lazyWithRecovery(() => import('@/components/ExamIntelligenceHomeCard'))
 const VistagramHomePreview = lazyWithRecovery(() => import('@/features/vistagram/HomePreview'))
 const TutorialAnnouncement = lazyWithRecovery(() => import('@/components/TutorialAnnouncement'))
-const NotesDiscountAnnouncement = lazyWithRecovery(() => import('@/components/NotesDiscountAnnouncement'))
 const MilestoneCelebration = lazyWithRecovery(() => import('@/components/MilestoneCelebration').then((m) => ({ default: m.MilestoneCelebration })))
 
 function DeferredExamIntelligenceHomeCard({ enabled }: { enabled: boolean }) {
@@ -224,7 +223,6 @@ function DeferredHomeExtras() {
     <div ref={markerRef} className="min-h-px">
       {ready && (
         <Suspense fallback={null}>
-          <NotesDiscountAnnouncement />
           <TutorialAnnouncement />
         </Suspense>
       )}
