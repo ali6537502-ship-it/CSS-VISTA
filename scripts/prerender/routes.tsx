@@ -8,6 +8,7 @@
  */
 import Home from '@/pages/Home'
 import StartCSS from '@/pages/StartCSS'
+import CssEligibilityCalculator from '@/pages/CssEligibilityCalculator'
 import CompulsoryList from '@/pages/CompulsoryList'
 import SubjectDetail from '@/pages/SubjectDetail'
 import OptionalSubjects from '@/pages/OptionalSubjects'
@@ -120,6 +121,7 @@ function optionalNoteRoutes(): PrerenderRoute[] {
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
   page('/start-css', () => <StartCSS />),
+  page('/css-eligibility-calculator', () => <CssEligibilityCalculator />),
   page('/subjects/compulsory', () => <CompulsoryList />),
   page('/subjects/compulsory/essay', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
   page('/subjects/compulsory/precis-composition', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
