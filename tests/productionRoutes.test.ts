@@ -77,14 +77,14 @@ const INDEXABLE = [
   '/handwritten-notes', '/books', '/journal', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
   '/copyright', '/editorial-policy', '/contact', '/disclaimer',
-  '/book-summaries',
+  '/book-summaries', '/css-eligibility-calculator',
 ]
 
 /** Routes deliberately kept out of search that must still be fully served. */
 const FUNCTIONAL_NOINDEX = [
   '/legal', '/gk', '/one-liner-gk', '/language-grammar',
   '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing', '/vistagram',
-  '/subjects/selector', '/answer-writing', '/test-series', '/study-tools', '/css-eligibility-calculator',
+  '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
   '/account', '/account/dashboard', '/account/vistagram', '/account/settings', '/dashboard',
   '/factbook', '/exam-intelligence', '/study-planner', '/sadiaali', '/sadiaali/login',
