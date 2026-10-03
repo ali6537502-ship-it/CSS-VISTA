@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
+import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
@@ -139,6 +139,7 @@ export default function AccountHome() {
 
   const mptFlow = useMptFlowEnabled() === true
   const choices = [
+    { to: '/account/resources', icon: FolderOpen, title: 'My CSS Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
     {

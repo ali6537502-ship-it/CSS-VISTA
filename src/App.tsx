@@ -70,6 +70,7 @@ const AccountHome = lazy(() => import('./pages/AccountHome'))
 const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
+const AccountResources = lazy(() => import('./pages/account/Resources'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
@@ -195,6 +196,7 @@ export default function App() {
         <Route path="/account/tasks" element={<ProfileGate><S><AccountTasks /></S></ProfileGate>} />
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
+        <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;

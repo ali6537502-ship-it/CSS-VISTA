@@ -174,6 +174,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/resources', 'My CSS Resources', 'Free book downloads for students with a 100% complete profile.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),
