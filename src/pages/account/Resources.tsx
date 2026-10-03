@@ -68,7 +68,7 @@ export default function Resources() {
   }
 
   return (
-    <AccountPage title="My CSS Resources" intro="Free books to download with your 100% complete profile.">
+    <AccountPage title="My Vista Resources" intro="Free books to download with your 100% complete profile.">
       {error && <div role="alert" className="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-900">{error}<button type="button" onClick={() => void load(new AbortController().signal)} className="ml-3 min-h-11 font-semibold underline">Try again</button></div>}
       {loading ? <p role="status" className="py-8 text-slate-600">Loading your resources…</p> : (
         <div className="grid gap-5 sm:grid-cols-2">
