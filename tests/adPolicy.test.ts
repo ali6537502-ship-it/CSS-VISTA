@@ -58,7 +58,7 @@ test('homepage exposes a stable Auto Ads excluded-area boundary around search an
 
 test('advertising is independent of indexability while thin surfaces fail closed', () => {
   // Indexable public content that deliberately carries no advertising.
-  for (const path of ['/privacy-policy', '/cookie-policy', '/terms-and-conditions', '/contact']) {
+  for (const path of ['/privacy-policy', '/cookie-policy', '/terms-and-conditions', '/contact', '/css-eligibility-calculator']) {
     const policy = getRoutePolicy(path)
     assert.equal(policy.indexable, true, path)
     assert.equal(getAdRoutePolicy(path).autoAdsEnabled, false, path)
