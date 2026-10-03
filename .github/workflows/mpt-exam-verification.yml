@@ -64,7 +64,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/cssv-mpt-private" test-artifacts dist
           echo "CSSV_PRIVATE_STORAGE_DIR=$RUNNER_TEMP/cssv-mpt-private" >> "$GITHUB_ENV"
           cp -r public/api dist/api
-          node scripts/export-mpt-papers.mjs --out dist/api/_mpt_papers --limit 8
+          node scripts/export-mpt-papers.mjs --out dist/api/_mpt_papers --limit 12
       - name: Create schema
         run: php tests/current-affairs/setup.php
       - name: Re-freeze of unstarted mocks from a newer editorial release
