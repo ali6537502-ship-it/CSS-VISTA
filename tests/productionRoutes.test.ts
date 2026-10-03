@@ -84,7 +84,7 @@ const INDEXABLE = [
 const FUNCTIONAL_NOINDEX = [
   '/legal', '/gk', '/one-liner-gk', '/language-grammar',
   '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing', '/vistagram',
-  '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
+  '/subjects/selector', '/answer-writing', '/test-series', '/study-tools', '/css-eligibility-calculator',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
   '/account', '/account/dashboard', '/account/vistagram', '/account/settings', '/dashboard',
   '/factbook', '/exam-intelligence', '/study-planner', '/sadiaali', '/sadiaali/login',
