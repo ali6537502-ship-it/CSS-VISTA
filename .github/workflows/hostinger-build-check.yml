@@ -49,8 +49,14 @@ jobs:
       - name: Lint application
         run: npm run lint
 
+      - name: Run complete project test suite
+        run: npm run test:all
+
       - name: Build with default Hostinger command
         run: npm run build
+
+      - name: Verify production direct-route refreshes
+        run: npm run test:routes
 
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
