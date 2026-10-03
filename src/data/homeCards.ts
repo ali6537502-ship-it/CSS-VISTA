@@ -5,6 +5,7 @@ import type { HomeCard } from '@/lib/admin'
 // tools later. This intentionally wins over stale locally saved card order.
 export const homeFeaturePriority = [
   'start-css',
+  'css-eligibility-calculator',
   'exam-intelligence',
   'study-planner',
   'css-subject-mcqs',
@@ -65,6 +66,7 @@ export function sortHomeCardsByPriority<T extends HomeCard>(cards: T[]): T[] {
 export const defaultHomeCards: HomeCard[] = [
   { id: 'exam-intelligence', title: 'VISTA Exam Intelligence', desc: 'Your personal preparation command center', to: '/exam-intelligence', icon: 'ChartNoAxesCombined', visible: true, order: 0.25 },
   { id: 'start-css', title: 'Start CSS', desc: 'Eligibility, stages and roadmap', to: '/start-css', icon: 'BookOpen', visible: true, order: 1 },
+  { id: 'css-eligibility-calculator', title: 'CSS Age & Attempts Calculator', desc: 'Check FPSC age window and written chances', to: '/css-eligibility-calculator', icon: 'CalendarClock', visible: true, order: 1.1 },
   { id: 'mpt', title: 'CSS MPT', desc: 'Timed MCQ tests and mocks', to: '/mpt', icon: 'ClipboardList', visible: true, order: 2 },
   { id: 'gk', title: 'GK World', desc: 'One-liners and category-wise MCQ practice', to: '/gk', icon: 'Globe', visible: true, order: 3 },
   { id: 'css-subject-mcqs', title: 'All CSS Subject MCQs', desc: 'Compulsory and optional subject banks', to: '/css-mcqs', icon: 'LibraryBig', visible: true, order: 5 },
