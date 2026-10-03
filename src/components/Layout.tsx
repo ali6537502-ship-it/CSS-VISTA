@@ -301,6 +301,8 @@ function NotificationBar() {
     })
   }
   const active = [
+    { id: 'qawaid-e-urdu-book', kind: 'platform' as const, text: 'FREE BOOK · Qawaid-e-Urdu by Sir Ali Hassan Sargana · Create your My CSS Vista account and complete your profile 100% to download', link: '/books' },
+    { id: 'my-vista-resources', kind: 'platform' as const, text: 'NEW FEATURE · My Vista Resources · Your free books and downloads, together in your account', link: '/account/resources' },
     { id: 'css-2026-result', kind: 'platform' as const, text: `CSS 2026 written result announced · ${css2026WrittenResult.qualifiedCandidates} candidates qualified · View the complete result`, link: css2026WrittenResult.pagePath },
     ...mockNotices,
     { id: 'test-series', kind: 'platform' as const, text: 'Customized CSS written test series by Miss Sadia Zahoor, PAS', link: '/test-series' },
