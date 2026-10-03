@@ -89,7 +89,7 @@ export function isValidDateOnly(value: string): value is DateOnly {
 }
 
 export function parseDisplayDate(value: string): DateOnly | null {
-  const match = /^(\d{1,2})\s*[\/.-]\s*(\d{1,2})\s*[\/.-]\s*(\d{4})$/.exec(value.trim())
+  const match = /^(\d{1,2})\s*[/.-]\s*(\d{1,2})\s*[/.-]\s*(\d{4})$/.exec(value.trim())
   if (!match) return null
   const day = Number(match[1])
   const month = Number(match[2])
