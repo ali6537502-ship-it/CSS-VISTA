@@ -85,6 +85,7 @@ const nav = [
     items: [
       { label: 'Customized Test Series', to: '/test-series', icon: Megaphone },
       { label: 'Study Tools', to: '/study-tools', icon: Wrench },
+      { label: 'CSS Age & Attempts Calculator', to: '/css-eligibility-calculator', icon: Target },
       { label: 'My Factbook', to: '/factbook', icon: BookMarked },
       { label: 'VISTA Exam Intelligence', to: '/exam-intelligence', icon: BrainCircuit },
       { label: 'FPSC Syllabus & Topic Planner', to: '/fpsc-syllabus', icon: FileCheck2 },
@@ -133,7 +134,7 @@ const primaryNav = [
 
 const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
-  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
+  { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/css-eligibility-calculator', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
   { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs', '/vistagram'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
