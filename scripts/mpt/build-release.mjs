@@ -20,7 +20,7 @@ const result = auditResolved(resolved, bank)
 const series = seriesHash(resolved)
 console.log(`Repaired ${release.papers.length} papers in ${((Date.now() - started) / 1000).toFixed(1)} s; series ${series}; kept ${Object.keys(release.kept).length}, replaced ${release.log.length}; ${result.failures.length} gate failures.`)
 result.failures.slice(0, 60).forEach((f) => console.log('FAIL', f))
-if (!process.argv.includes('--dry-run')) {
+if (!process.argv.includes('--dry-run') && result.failures.length === 0) {
   const { kept, log, ...compact } = release
   writeFileSync(SERIES_PATH, `${JSON.stringify({ ...compact, series }, null, 0)}\n`)
   writeFileSync(KEPT_PATH, `${JSON.stringify(kept, null, 0)}\n`)

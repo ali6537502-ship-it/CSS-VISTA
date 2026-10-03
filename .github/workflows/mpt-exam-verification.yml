@@ -69,6 +69,8 @@ jobs:
         run: php tests/current-affairs/setup.php
       - name: Re-freeze of unstarted mocks from a newer editorial release
         run: php tests/mpt/refreeze.php
+      - name: Three daily sittings preserve registrations and historical papers
+        run: php tests/mpt/three-daily.php
       - name: Start isolated HTTP service (8 workers for real concurrency)
         run: |
           PHP_CLI_SERVER_WORKERS=8 php -S localhost:4173 -t dist tests/current-affairs/router.php > test-artifacts/mpt-php.log 2>&1 &

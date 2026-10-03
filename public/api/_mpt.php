@@ -12,7 +12,7 @@ require_once __DIR__ . '/_mpt_schema.php';
 define('CSSV_MPT_PAPER_DIR', (getenv('CI') === 'true' && getenv('CSSV_DB_NAME') === 'cssvista_briefing_test' && getenv('CSSV_MPT_TEST_PAPER_DIR'))
     ? (string)getenv('CSSV_MPT_TEST_PAPER_DIR')
     : __DIR__ . '/_mpt_papers');
-const CSSV_MPT_DAILY_SLOTS = ['1500' => '15:00', '2230' => '22:30'];
+const CSSV_MPT_DAILY_SLOTS = ['1400' => '14:00', '1800' => '18:00', '2230' => '22:30'];
 const CSSV_MPT_PKT = 'Asia/Karachi';
 // Upcoming mocks are always visible well ahead (owner: through 10 October and
 // beyond), limited only by the paper runway. A few are created per maintenance
@@ -200,6 +200,7 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock, array $pendingReplacement 
     $manifest = mpt_paper_manifest();
     if ($manifest === null || empty($manifest['publishable'])) return false;
     $refUsed = $pdo->prepare('SELECT 1 FROM mpt_mocks WHERE paper_ref=? LIMIT 1');
+    $usedStems = null;
     foreach ($manifest['papers'] as $paper) {
         $ref = $manifest['series'] . ':' . $paper['index'];
         $refUsed->execute([$ref]);
@@ -213,6 +214,18 @@ function mpt_freeze_next_paper(PDO $pdo, array $mock, array $pendingReplacement 
             . ($exempt ? ' AND mock_id NOT IN (' . implode(',', array_fill(0, count($exempt), '?')) . ')' : '') . ' LIMIT 1');
         $overlap->execute([...$ids, ...$exempt]);
         if ($overlap->fetchColumn()) continue;
+        if ($usedStems === null) {
+            $read = $pdo->prepare('SELECT stem FROM mpt_mock_questions' . ($exempt ? ' WHERE mock_id NOT IN (' . implode(',', array_fill(0, count($exempt), '?')) . ')' : ''));
+            $read->execute($exempt);
+            $usedStems = [];
+            foreach ($read->fetchAll(PDO::FETCH_COLUMN) as $stem) $usedStems[mpt_question_text_key((string)$stem)] = true;
+        }
+        $paperStems = [];
+        foreach ($questions as $question) {
+            $key = mpt_question_text_key((string)$question['q']);
+            if (isset($usedStems[$key]) || isset($paperStems[$key])) continue 2;
+            $paperStems[$key] = true;
+        }
         // Multi-row inserts, 50 questions per statement.
         foreach (array_chunk(array_values($questions), 50, true) as $chunk) {
             $values = [];
@@ -408,10 +421,71 @@ function mpt_create_mock(PDO $pdo, array $spec): ?array
 /** Planned mocks for the running series (CSSV_MPT_PLANNED_MOCKS; 0 = unlimited). */
 function mpt_planned_mocks(): int
 {
-    return mpt_planned_mocks_from(cssv_env('CSSV_MPT_PLANNED_MOCKS'));
+    return mpt_planned_mocks_from(cssv_env('CSSV_MPT_PLANNED_MOCKS'), (int)(mpt_paper_manifest()['planned_mocks'] ?? 0));
 }
 
-/** Ensures the next daily 15:00 / 22:30 PKT slots exist while papers remain, up to the planned mock count. */
+/** Compress the unstarted automatic schedule into three daily sittings once.
+ * Keep papers, mock IDs, registrations and roll numbers; held/running/manual mocks
+ * are never moved. Called under the maintenance advisory lock.
+ */
+function mpt_migrate_three_daily(PDO $pdo, int $nowMs): int
+{
+    $key = 'schedule_three_daily_v1';
+    if (mpt_meta_get($pdo, $key) !== null) return 0;
+    $pdo->beginTransaction();
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM mpt_mocks m WHERE schedule_key LIKE 'daily-%' AND created_by='system' AND status IN ('DRAFT','PUBLISHED') AND exam_open_at>? AND NOT EXISTS (SELECT 1 FROM mpt_attempts t WHERE t.mock_id=m.id) ORDER BY exam_open_at,mock_number FOR UPDATE");
+        $stmt->execute([mpt_db_time($nowMs + 15 * 60000)]);
+        $rows = $stmt->fetchAll();
+        $zone = new DateTimeZone(CSSV_MPT_PKT);
+        $day = (new DateTimeImmutable('@' . intdiv($nowMs, 1000)))->setTimezone($zone)->setTime(0, 0);
+        // Release old unique schedule keys inside the transaction before assigning
+        // new ones: the 18:00 slot can take a mock formerly scheduled at 22:30.
+        $clear = $pdo->prepare('UPDATE mpt_mocks SET schedule_key=NULL WHERE id=?');
+        foreach ($rows as $row) $clear->execute([$row['id']]);
+        $other = $pdo->prepare('SELECT schedule_key,exam_open_at FROM mpt_mocks' . ($rows ? ' WHERE id NOT IN (' . implode(',', array_fill(0, count($rows), '?')) . ')' : ''));
+        $other->execute(array_column($rows, 'id'));
+        $occupied = [];
+        foreach ($other->fetchAll() as $row) {
+            $occupied['time:' . $row['exam_open_at']] = true;
+            if ($row['schedule_key']) $occupied['key:' . $row['schedule_key']] = true;
+        }
+        $at = 0;
+        for ($d = 0; $at < count($rows) && $d < 366; $d++) {
+            foreach (CSSV_MPT_DAILY_SLOTS as $slot => $clock) {
+                [$h, $m] = array_map('intval', explode(':', $clock));
+                $date = $day->modify("+$d day");
+                $open = (int)$date->setTime($h, $m)->format('U') * 1000;
+                if ($open <= $nowMs + 15 * 60000) continue;
+                $scheduleKey = 'daily-' . $date->format('Y-m-d') . '-' . $slot;
+                // Ignore the rows being migrated when checking timed collisions.
+                if (isset($occupied['key:' . $scheduleKey]) || isset($occupied['time:' . mpt_db_time($open)])) continue;
+                $row = $rows[$at++];
+                $old = (int)mpt_ms($row['exam_open_at']);
+                $shift = $open - $old;
+                $close = (int)mpt_ms($row['application_close_at']) + $shift;
+                $entry = (int)mpt_ms($row['entry_close_at']) + $shift;
+                $end = (int)mpt_ms($row['exam_end_at']) + $shift;
+                $pdo->prepare('UPDATE mpt_mocks SET schedule_key=?,application_open_at=?,application_close_at=?,exam_open_at=?,entry_close_at=?,exam_end_at=? WHERE id=?')->execute([
+                    $scheduleKey, mpt_db_time(min((int)mpt_ms($row['application_open_at']), $open - 60000)),
+                    mpt_db_time($close), mpt_db_time($open), mpt_db_time($entry), mpt_db_time($end), $row['id'],
+                ]);
+                $pdo->prepare('UPDATE mpt_sessions SET starts_at=?,ends_at=? WHERE mock_id=?')->execute([mpt_db_time($open), mpt_db_time($end), $row['id']]);
+                mpt_event($pdo, 'ADMIN_ACTION', null, $row['id'], null, null, ['action' => 'three_daily_schedule', 'previous_start' => $row['exam_open_at'], 'exam_open_at' => mpt_db_time($open)]);
+                if ($at === count($rows)) break;
+            }
+        }
+        if ($at !== count($rows)) throw new RuntimeException('Could not allocate the three-daily schedule.');
+        mpt_meta_set($pdo, $key, mpt_db_time($nowMs));
+        $pdo->commit();
+        return $at;
+    } catch (Throwable $error) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        throw $error;
+    }
+}
+
+/** Ensures the next daily 14:00 / 18:00 / 22:30 PKT slots exist while papers remain. */
 function mpt_auto_schedule(PDO $pdo, int $nowMs, int $maxCreate = CSSV_MPT_SCHEDULE_PER_RUN): void
 {
     $createdCount = 0;
@@ -463,8 +537,10 @@ function mpt_maintain(PDO $pdo, bool $force = false): array
         // mock takes a paper, so replacements have first claim on the audited runway.
         // All pending mocks in one pass, so the schedule is never left half on an old release.
         $refrozen = mpt_refreeze_unstarted($pdo, $now, $force ? 60 : 40);
+        $rescheduled = mpt_flag_mode() !== 'off' && strtolower((string)cssv_env('CSSV_MPT_AUTO_SCHEDULE', 'on')) !== 'off'
+            ? mpt_migrate_three_daily($pdo, $now) : 0;
         mpt_auto_schedule($pdo, $now, $force ? 40 : CSSV_MPT_SCHEDULE_PER_RUN);
-        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0) + ['refrozen' => $refrozen];
+        return mpt_sweep($pdo, $now, $force ? 5000 : 50, $force ? 45.0 : 2.0) + ['refrozen' => $refrozen, 'rescheduled' => $rescheduled];
     } finally {
         $pdo->query("SELECT RELEASE_LOCK('cssvista-mpt-maintain')");
     }

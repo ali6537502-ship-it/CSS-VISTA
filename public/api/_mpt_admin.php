@@ -34,18 +34,25 @@ function mpt_admin_runway(PDO $pdo): array
 {
     $manifest = mpt_paper_manifest();
     if ($manifest === null) return ['available' => 0, 'total' => 0, 'publishable' => false, 'series' => null, 'exhausted_at' => mpt_meta_get($pdo, 'paper_runway_exhausted_at')];
-    $used = $pdo->prepare('SELECT COUNT(*) FROM mpt_mocks WHERE paper_series=?');
-    $used->execute([$manifest['series']]);
-    $usedCount = (int)$used->fetchColumn();
+    $usedIds = array_fill_keys($pdo->query('SELECT DISTINCT question_id FROM mpt_mock_questions')->fetchAll(PDO::FETCH_COLUMN), true);
+    $usedStems = [];
+    foreach ($pdo->query('SELECT stem FROM mpt_mock_questions')->fetchAll(PDO::FETCH_COLUMN) as $stem) $usedStems[mpt_question_text_key((string)$stem)] = true;
+    $available = 0;
+    foreach ($manifest['papers'] as $paper) {
+        $questions = mpt_paper_questions((int)$paper['index']);
+        if (!$questions || count($questions) !== (int)$paper['count']) continue;
+        foreach ($questions as $q) if (isset($usedIds[$q['id']]) || isset($usedStems[mpt_question_text_key((string)$q['q'])])) continue 2;
+        $available++;
+    }
     $total = count($manifest['papers']);
     return [
-        'available' => max(0, $total - $usedCount),
+        'available' => $available,
         'total' => $total,
         'publishable' => !empty($manifest['publishable']),
         'series' => $manifest['series'],
         'generated_at' => $manifest['generated_at'] ?? null,
         'exhausted_at' => mpt_meta_get($pdo, 'paper_runway_exhausted_at'),
-        'daily_slots_remaining' => intdiv(max(0, $total - $usedCount), count(CSSV_MPT_DAILY_SLOTS)),
+        'daily_slots_remaining' => intdiv($available, count(CSSV_MPT_DAILY_SLOTS)),
     ];
 }
 
@@ -94,16 +101,51 @@ function mpt_admin_mock_row(PDO $pdo, array $mock, bool $withStats = true): arra
     ] + ($withStats ? ['stats' => mpt_admin_mock_stats($pdo, $mock)] : []);
 }
 
-function mpt_admin_overview(PDO $pdo): array
+function mpt_admin_overview(PDO $pdo, string $scope = 'all', int $page = 1, string $search = ''): array
 {
-    $rows = $pdo->query('SELECT * FROM mpt_mocks ORDER BY exam_open_at DESC LIMIT 60')->fetchAll();
+    $now = mpt_db_time(mpt_now_ms());
+    $conditions = [
+        'all' => '1=1',
+        'current' => "status<>'CANCELLED' AND exam_open_at<=? AND exam_end_at>?",
+        'upcoming' => "status<>'CANCELLED' AND exam_open_at>?",
+        'previous' => "status<>'CANCELLED' AND exam_end_at<=?",
+        'cancelled' => "status='CANCELLED'",
+    ];
+    if (!isset($conditions[$scope])) cssv_fail('Unknown mock filter.', 422, 'invalid_filter');
+    $where = $conditions[$scope];
+    $params = array_fill(0, substr_count($where, '?'), $now);
+    if ($search !== '') {
+        $where .= ' AND (title LIKE ? OR public_slug LIKE ?)';
+        $params[] = '%' . $search . '%'; $params[] = '%' . $search . '%';
+    }
+    $count = $pdo->prepare("SELECT COUNT(*) FROM mpt_mocks WHERE $where");
+    $count->execute($params);
+    $total = (int)$count->fetchColumn();
+    $page = min(max(1, $page), max(1, (int)ceil($total / 25)));
+    $order = $scope === 'upcoming' ? 'ASC' : 'DESC';
+    $stmt = $pdo->prepare("SELECT * FROM mpt_mocks WHERE $where ORDER BY exam_open_at $order,mock_number $order LIMIT 25 OFFSET " . (($page - 1) * 25));
+    $stmt->execute($params);
+    $rows = $stmt->fetchAll();
     return [
         'flag' => mpt_flag_mode(),
         'auto_schedule' => strtolower((string)cssv_env('CSSV_MPT_AUTO_SCHEDULE', 'on')) !== 'off',
         'runway' => mpt_admin_runway($pdo),
         'last_maintenance_at' => mpt_iso(mpt_ms(mpt_meta_get($pdo, 'last_maintenance_at'))),
         'mocks' => array_map(static fn(array $mock) => mpt_admin_mock_row($pdo, $mock), $rows),
+        'scope' => $scope, 'page' => $page, 'per_page' => 25, 'total' => $total,
     ] + mpt_server_clock();
+}
+
+/** Owner-only frozen paper, including its key, for current and historical review. */
+function mpt_admin_questions(PDO $pdo, array $mock): array
+{
+    $stmt = $pdo->prepare('SELECT position,question_id,section,topic,difficulty,stem,options,correct_index,explanation FROM mpt_mock_questions WHERE mock_id=? ORDER BY position');
+    $stmt->execute([$mock['id']]);
+    return array_map(static fn(array $q) => [
+        'position' => (int)$q['position'], 'id' => $q['question_id'], 'section' => $q['section'],
+        'topic' => $q['topic'], 'difficulty' => $q['difficulty'], 'q' => $q['stem'],
+        'o' => json_decode((string)$q['options'], true), 'a' => (int)$q['correct_index'], 'e' => $q['explanation'],
+    ], $stmt->fetchAll());
 }
 
 function mpt_admin_applications(PDO $pdo, array $mock, string $search, int $page, int $perPage = 50, ?string $appeared = null): array

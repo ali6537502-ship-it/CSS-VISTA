@@ -141,7 +141,7 @@ export function renderRepairMarkdown(result, meta, log) {
   const { reports } = result
   L.push(`# MPT editorial release ${meta.release} — repaired live series`, '')
   L.push(`Series ${meta.series}; ${reports.length} papers (live papers ${meta.firstLivePaper}–${meta.lastLivePaper} of ${meta.liveSeries}, i.e. Mocks ${meta.firstLivePaper}–${meta.lastLivePaper}); status **${result.failures.length ? 'BLOCKED' : 'PASS'}**.`, '')
-  L.push('Each paper is the live paper already frozen for that mock. A live question was kept unless it had a concrete defect; only defective slots were refilled, in place, from the reviewed bank with an item from the same section and heading. Papers follow the official FPSC structure only (five sections with their official sizes, every official heading present, no topic quotas).', '')
+  L.push('The original 30 repaired papers (Mocks 11–40) remain identical to release 6. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.', '')
   const sum = (pick) => reports.reduce((n, r) => n + pick(r), 0)
   const total = (obj) => Object.values(obj).reduce((a, b) => a + b, 0)
   L.push('## Series summary', '')

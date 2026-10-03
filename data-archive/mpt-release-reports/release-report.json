@@ -1,7 +1,7 @@
 {
  "meta": {
-  "release": 6,
-  "series": "bcc868d124be35cd",
+  "release": 7,
+  "series": "57d18c763f20c220",
   "liveSeries": "b054de7",
   "firstLivePaper": 11,
   "lastLivePaper": 40
@@ -2517,6 +2517,638 @@
      "source": "https://www.aljazeera.com/news/2026/1/22/trump-launches-board-of-peace-at-ceremony-in-davos"
     }
    ]
+  },
+  {
+   "paper": 31,
+   "fingerprint": "0d4d24349ddb2962",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Reasoning": 26,
+     "Quantitative Ability": 34
+    },
+    "General Knowledge": {
+     "Everyday Science": 8,
+     "Current Affairs": 23,
+     "Pakistan Affairs": 19
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 15,
+     "2": 36,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b23",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0039",
+     "event_date": "2025-11-20",
+     "source": "https://www.aljazeera.com/news/2025/11/20/turkiye-to-host-cop31-climate-summit-after-australia-concedes-bid"
+    },
+    {
+     "id": "mpt-ca-b-0077",
+     "event_date": "2026-02-28",
+     "source": "https://www.aljazeera.com/news/2026/2/28/irans-supreme-leader-ali-khamenei-killed-in-us-israeli-attacks-reports"
+    },
+    {
+     "id": "mpt-ca-b-0150",
+     "event_date": "2026-09-14",
+     "source": "https://pid.gov.pk/site/press_detail/33920"
+    },
+    {
+     "id": "mpt-ca-b-0009",
+     "event_date": "2025-09-21",
+     "source": "https://www.aljazeera.com/news/2025/9/21/canada-australia-join-uk-in-recognising-palestinian-statehood"
+    },
+    {
+     "id": "mpt-ca-b-0148",
+     "event_date": "2026-09-14",
+     "source": "https://www.aljazeera.com/news/2026/9/14/us-repeals-rules-limiting-greenhouse-gas-emissions-by-power-plants"
+    },
+    {
+     "id": "mpt-ca-b-0165",
+     "event_date": "2026-09-17",
+     "source": "https://www.aljazeera.com/news/2026/9/17/sweden-prime-minister-to-resign-as-left-wing-bloc-seals-narrow-election-win"
+    },
+    {
+     "id": "mpt-ca-b-0127",
+     "event_date": "2026-07-24",
+     "source": "https://www.aljazeera.com/news/2026/7/25/un-rights-chief-turk-wins-second-term-despite-us-and-israeli-opposition"
+    },
+    {
+     "id": "mpt-ca-b-0191",
+     "event_date": "2026-09-24",
+     "source": "https://radio.gov.pk/24-09-2026/pakistan-condemns-deliberate-unlawful-incursion-into-its-territory-from-afghanistan"
+    }
+   ]
+  },
+  {
+   "paper": 32,
+   "fingerprint": "abe840e1b8c36101",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Quantitative Ability": 31,
+     "Reasoning": 29
+    },
+    "General Knowledge": {
+     "Everyday Science": 7,
+     "Current Affairs": 23,
+     "Pakistan Affairs": 20
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 15,
+     "2": 36,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b18",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0064",
+     "event_date": "2026-01-22",
+     "source": "https://www.aljazeera.com/news/2026/1/22/death-toll-in-pakistan-shopping-centre-fire-rises-to-at-least-60"
+    },
+    {
+     "id": "mpt-ca-b-0157",
+     "event_date": "2026-09-16",
+     "source": "https://www.un.org/en/observances/ozone-day"
+    },
+    {
+     "id": "mpt-ca-b-0016",
+     "event_date": "2025-10-13",
+     "source": "https://www.aljazeera.com/news/2025/10/13/joint-egypt-qatar-turkiye-us-statement-on-gaza-the-full-text"
+    },
+    {
+     "id": "mpt-ca-b-0047",
+     "event_date": "2025-12-08",
+     "source": "https://www.arabnews.com/node/2625836/amp"
+    },
+    {
+     "id": "mpt-ca-b-0093",
+     "event_date": "2026-04-17",
+     "source": "https://www.aljazeera.com/news/2026/4/17/macron-and-starmer-host-allies-for-summit-on-hormuz-maritime-security"
+    },
+    {
+     "id": "mpt-ca-b-0089",
+     "event_date": "2026-04-10",
+     "source": "https://www.aljazeera.com/news/2026/4/10/myanmars-coup-leader-min-aung-hlaing-sworn-in-as-president"
+    },
+    {
+     "id": "mpt-ca-b-0055",
+     "event_date": "2025-12-24",
+     "source": "https://www.aljazeera.com/news/2025/12/24/trump-backed-conservative-nasry-asfura-wins-honduras-election-authorities"
+    },
+    {
+     "id": "mpt-ca-b-0053",
+     "event_date": "2025-12-23",
+     "source": "https://www.arabnews.com/node/2627260/pakistan"
+    }
+   ]
+  },
+  {
+   "paper": 33,
+   "fingerprint": "e821d574171b7c1a",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Quantitative Ability": 31,
+     "Reasoning": 29
+    },
+    "General Knowledge": {
+     "Everyday Science": 13,
+     "Current Affairs": 18,
+     "Pakistan Affairs": 19
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 18,
+     "2": 33,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b17",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0094",
+     "event_date": "2026-04-19",
+     "source": "https://www.aljazeera.com/news/2026/4/20/bulgarias-former-president-radev-wins-election-all-you-need-to-know"
+    },
+    {
+     "id": "mpt-ca-b-0078",
+     "event_date": "2026-03-08",
+     "source": "https://www.aljazeera.com/news/2026/3/8/iran-names-khameneis-son-as-new-supreme-leader-after-fathers-killing-2"
+    },
+    {
+     "id": "mpt-ca-b-0164",
+     "event_date": "2026-09-17",
+     "source": "https://www.aljazeera.com/news/2026/9/17/climate-change-had-major-role-in-triggering-nepal-floods-scientists-say"
+    },
+    {
+     "id": "mpt-ca-b-0168",
+     "event_date": "2026-09-18",
+     "source": "https://www.un.org/sustainabledevelopment/sdg-moment-18-september-2026/"
+    }
+   ]
+  },
+  {
+   "paper": 34,
+   "fingerprint": "52838464e4659231",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Reasoning": 29,
+     "Quantitative Ability": 31
+    },
+    "General Knowledge": {
+     "Everyday Science": 24,
+     "Current Affairs": 14,
+     "Pakistan Affairs": 12
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 15,
+     "2": 36,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b22",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0080",
+     "event_date": "2026-03-10",
+     "source": "https://www.aljazeera.com/news/2026/3/10/pakistan-orders-sweeping-austerity-measures-as-iran-war-triggers-oil-crisis"
+    },
+    {
+     "id": "mpt-ca-b-0018",
+     "event_date": "2025-10-17",
+     "source": "https://www.aljazeera.com/news/2025/10/17/military-leader-randrianirina-sworn-in-as-madagascars-new-president"
+    },
+    {
+     "id": "mpt-ca-b-0058",
+     "event_date": "2026-01-05",
+     "source": "https://www.aljazeera.com/news/2026/1/5/delcy-rodriguez-sworn-in-as-venezuelas-president-after-maduro-abduction"
+    }
+   ]
+  },
+  {
+   "paper": 35,
+   "fingerprint": "b78722ab8d12fa90",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Quantitative Ability": 38,
+     "Reasoning": 22
+    },
+    "General Knowledge": {
+     "Everyday Science": 23,
+     "Current Affairs": 14,
+     "Pakistan Affairs": 13
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 21,
+     "2": 30,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b24",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0087",
+     "event_date": "2026-04-02",
+     "source": "https://www.aljazeera.com/news/2026/4/2/pakistan-afghanistan-hold-talks-in-china-to-end-months-of-conflict"
+    },
+    {
+     "id": "mpt-ca-b-0054",
+     "event_date": "2025-12-23",
+     "source": "https://www.aljazeera.com/news/2025/12/23/belgium-joins-south-africas-genocide-case-against-israel-at-icj"
+    },
+    {
+     "id": "mpt-ca-b-0104",
+     "event_date": "2026-05-22",
+     "source": "https://www.aljazeera.com/economy/2026/5/22/kevin-warsh-sworn-in-as-new-us-fed-chair"
+    },
+    {
+     "id": "mpt-ca-b-0079",
+     "event_date": "2026-03-08",
+     "source": "https://www.aljazeera.com/news/2026/3/8/iran-names-khameneis-son-as-new-supreme-leader-after-fathers-killing-2"
+    },
+    {
+     "id": "mpt-ca-b-0028",
+     "event_date": "2025-10-30",
+     "source": "https://www.aljazeera.com/news/2025/10/30/trump-xi-meeting-in-busan-key-takeaways-from-the-summit"
+    },
+    {
+     "id": "mpt-ca-b-0076",
+     "event_date": "2026-02-27",
+     "source": "https://www.aljazeera.com/news/2026/2/27/pakistan-warplanes-bomb-kabul-as-clashes-with-afghanistan-intensify"
+    },
+    {
+     "id": "mpt-ca-b-0030",
+     "event_date": "2025-11-06",
+     "source": "https://www.unesco.org/en/articles/khaled-el-enany-elected-director-general-unesco"
+    },
+    {
+     "id": "mpt-ca-b-0175",
+     "event_date": "2026-09-22",
+     "source": "https://www.aljazeera.com/news/2026/9/22/us-signs-tremendous-arctic-security-deal-with-denmark-greenland"
+    }
+   ]
+  },
+  {
+   "paper": 36,
+   "fingerprint": "e7bdeefd1e3b0ffe",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Quantitative Ability": 38,
+     "Reasoning": 22
+    },
+    "General Knowledge": {
+     "Everyday Science": 17,
+     "Current Affairs": 15,
+     "Pakistan Affairs": 18
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 6,
+     "2": 11,
+     "3": 3
+    },
+    "English": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 21,
+     "2": 30,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 12,
+     "2": 28,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b20",
+   "currentAffairs": [
+    {
+     "id": "mpt-ca-b-0052",
+     "event_date": "2025-12-20",
+     "source": "https://www.aljazeera.com/news/2025/12/20/ex-pakistan-pm-imran-khan-wife-sentenced-to-17-years-in-corruption-case"
+    },
+    {
+     "id": "mpt-ca-b-0031",
+     "event_date": "2025-11-06",
+     "source": "https://www.aljazeera.com/news/2025/11/6/cameroons-biya-worlds-oldest-ruler-at-92-sworn-in-for-eighth-term"
+    },
+    {
+     "id": "mpt-ca-b-0059",
+     "event_date": "2026-01-08",
+     "source": "https://www.aljazeera.com/news/2026/1/8/trump-to-withdraw-us-from-dozens-of-un-international-organisations"
+    },
+    {
+     "id": "mpt-ca-b-0098",
+     "event_date": "2026-05-08",
+     "source": "https://www.geo.tv/latest/663510-imf-board-approves-pakistans-review-unlocking-12bn-loan"
+    },
+    {
+     "id": "mpt-ca-b-0193",
+     "event_date": "2026-09-25",
+     "source": "https://www.aljazeera.com/news/2026/9/25/houthi-attack-on-mecca-medina-would-cross-red-line-pakistan-pm-tells-un"
+    },
+    {
+     "id": "mpt-ca-b-0092",
+     "event_date": "2026-04-12",
+     "source": "https://www.aljazeera.com/news/2026/4/12/hungary-election-early-results-show-magyars-tisza-ahead-of-orbans-fidesz"
+    }
+   ]
+  },
+  {
+   "paper": 37,
+   "fingerprint": "15231b0424a46e50",
+   "kept": {},
+   "replaced": {
+    "Islamic Studies": 20,
+    "Urdu": 20,
+    "English": 50,
+    "General Abilities": 60,
+    "General Knowledge": 50
+   },
+   "keptWithoutExplanation": 0,
+   "headings": {
+    "Islamic Studies": {
+     "Islamic Studies": 20
+    },
+    "Urdu": {
+     "Urdu": 20
+    },
+    "English": {
+     "vocabulary and grammar": 44,
+     "comprehension": 6
+    },
+    "General Abilities": {
+     "Reasoning": 21,
+     "Quantitative Ability": 39
+    },
+    "General Knowledge": {
+     "Everyday Science": 22,
+     "Current Affairs": 12,
+     "Pakistan Affairs": 16
+    }
+   },
+   "newDifficulty": {
+    "Islamic Studies": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "Urdu": {
+     "1": 5,
+     "2": 11,
+     "3": 4
+    },
+    "English": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    },
+    "General Abilities": {
+     "1": 21,
+     "2": 30,
+     "3": 9
+    },
+    "General Knowledge": {
+     "1": 13,
+     "2": 27,
+     "3": 10
+    }
+   },
+   "passage": "mpt-psg-b16",
+   "currentAffairs": []
   }
  ]
 }

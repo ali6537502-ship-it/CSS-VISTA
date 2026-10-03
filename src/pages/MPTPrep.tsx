@@ -149,7 +149,7 @@ export default function MPTPrep() {
     <div>
       <PageHeader
         title="MPT Preparation"
-        description="Subject-wise practice and a release-audited bank of 40 full MPT papers, available twice daily in the official section sequence."
+        description="Subject-wise practice and release-audited full MPT papers, available at 2:00 PM, 6:00 PM and 10:30 PM PKT daily in the official section sequence."
       />
       <div className="mx-auto max-w-7xl space-y-10 px-4 py-10">
         <OfficialNotice />

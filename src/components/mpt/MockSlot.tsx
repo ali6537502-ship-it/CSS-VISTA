@@ -1,11 +1,11 @@
 import { Clock3, MoonStar, Sun, Sunrise } from 'lucide-react'
 import { mockSlot, mockSlotLabel, mockTimeWindow, pktDate } from '@/lib/mpt/copy'
 
-const ICONS = { Morning: Sunrise, Afternoon: Sun, Evening: MoonStar }
+const ICONS = { Morning: Sunrise, Afternoon: Sun, Evening: Clock3, Night: MoonStar }
 
 /**
  * The sitting a mock belongs to, always shown next to its name:
- * "Afternoon MPT Mock · 3:00 PM PKT", with the date and full time window.
+ * "Afternoon MPT Mock · 2:00 PM PKT", with the date and full time window.
  */
 export function MockSlot({ mock, withDate = true, withWindow = false, tone = 'default' }: {
   mock: { exam_open_at: string; exam_end_at?: string }

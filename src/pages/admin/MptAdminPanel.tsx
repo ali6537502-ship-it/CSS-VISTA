@@ -8,7 +8,8 @@ import { mockSlotLabel, pktDateTime, pktTime } from '@/lib/mpt/copy'
 
 type Stats = { applications: number; appeared: number; started: number; in_progress: number; completed: number; absent: number | null; average_score: number | null; completion_rate: number | null; distribution: Array<{ from: number; to: number; count: number }> }
 type AdminMock = MptMock & { results_delay_minutes: number; id: string; schedule_key: string | null; capacity: number | null; reserved_count: number; rank_min_candidates: number; scoring_version: number; cancel_reason: string | null; created_by: string; stats: Stats }
-type Overview = { flag: string; auto_schedule: boolean; runway: { available: number; total: number; publishable: boolean; generated_at?: string | null; exhausted_at: string | null; daily_slots_remaining?: number }; last_maintenance_at: string | null; mocks: AdminMock[] }
+type Overview = { flag: string; auto_schedule: boolean; runway: { available: number; total: number; publishable: boolean; generated_at?: string | null; exhausted_at: string | null; daily_slots_remaining?: number }; last_maintenance_at: string | null; mocks: AdminMock[]; page: number; per_page: number; total: number }
+type PaperQuestion = { position: number; id: string; section: string; topic: string; difficulty: string; q: string; o: string[]; a: number; e: string | null }
 type AppRow = { user_id: string; candidate: string; email: string; has_photo: boolean; candidate_code: string | null; roll_number: string; application_code: string; applied_at: string; status: string; phase: string; appeared: boolean; score: number | null }
 type AttemptRow = { user_id: string; candidate: string; email: string; has_photo: boolean; roll_number: string; application_code: string; status: string; started_at: string; submitted_at: string | null; submit_reason: string | null; score: number | null; visibility_changes: number; device_takeovers: number; void_reason: string | null }
 
@@ -55,7 +56,10 @@ function askReason(prompt: string) {
 }
 
 function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => void }) {
-  const [tab, setTab] = useState<'settings' | 'applications' | 'attempts' | 'rescore'>('applications')
+  const [tab, setTab] = useState<'settings' | 'applications' | 'attempts' | 'rescore' | 'questions'>('applications')
+  const [questions, setQuestions] = useState<PaperQuestion[] | null>(null)
+  const [paperError, setPaperError] = useState<string | null>(null)
+  const [paperSection, setPaperSection] = useState('')
   const [apps, setApps] = useState<{ rows: AppRow[]; total: number } | null>(null)
   const [attempts, setAttempts] = useState<{ rows: AttemptRow[]; total: number } | null>(null)
   const [search, setSearch] = useState('')
@@ -66,6 +70,12 @@ function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => voi
   useEffect(() => {
     if (tab === 'applications') get<{ rows: AppRow[]; total: number }>(`?view=applications&slug=${mock.slug}&q=${encodeURIComponent(search)}${appeared ? `&appeared=${appeared}` : ''}`).then(setApps).catch(() => setApps(null))
     if (tab === 'attempts') get<{ rows: AttemptRow[]; total: number }>(`?view=attempts&slug=${mock.slug}`).then(setAttempts).catch(() => setAttempts(null))
+    if (tab === 'questions') {
+      let active = true
+      setPaperError(null)
+      get<{ questions: PaperQuestion[] }>(`?view=questions&slug=${mock.slug}`).then((data) => { if (active) setQuestions(data.questions) }).catch(() => { if (active) setPaperError('Could not load this paper. Try again.') })
+      return () => { active = false }
+    }
   }, [tab, mock.slug, search, appeared, version])
   const [form, setForm] = useState(() => ({
     exam_open_at: toLocalInput(mock.exam_open_at), application_open_at: toLocalInput(mock.application_open_at),
@@ -123,10 +133,27 @@ function MockDetail({ mock, onChanged }: { mock: AdminMock; onChanged: () => voi
       )}
       {action.message && <p role="status" className="mt-3 rounded-md border bg-secondary/40 p-2 text-sm">{action.message}</p>}
       <div className="mt-4 flex flex-wrap gap-2" role="tablist">
-        {(['applications', 'attempts', 'settings', 'rescore'] as const).map((key) => (
+        {(['applications', 'attempts', 'questions', 'settings', 'rescore'] as const).map((key) => (
           <button key={key} type="button" role="tab" aria-selected={tab === key} onClick={() => setTab(key)} className={`${button} ${tab === key ? 'bg-pine text-white hover:bg-pine' : ''}`}>{key[0].toUpperCase() + key.slice(1)}</button>
         ))}
       </div>
+
+      {tab === 'questions' && (
+        <div className="mt-3 space-y-3">
+          <p className="text-sm text-muted-foreground">Frozen paper and answer key · owner access only · {questions?.length ?? mock.total_questions} questions</p>
+          <label className="block text-sm font-semibold">Section <select value={paperSection} onChange={(event) => setPaperSection(event.target.value)} className="ml-2 rounded-md border p-2"><option value="">All sections</option>{[...new Set(questions?.map((q) => q.section) ?? [])].map((section) => <option key={section}>{section}</option>)}</select></label>
+          {paperError && <p role="alert" className="text-sm text-amber-800">{paperError}</p>}
+          {!questions && !paperError && <p role="status" className="text-sm">Loading paper…</p>}
+          {questions?.filter((q) => !paperSection || q.section === paperSection).map((q) => (
+            <article key={q.position} className="rounded-md border p-3 text-sm">
+              <p className="text-xs text-muted-foreground">Question {q.position} · {q.section} · {q.difficulty} · {q.id}</p>
+              <p className="mt-1 whitespace-pre-wrap font-semibold" dir="auto">{q.q}</p>
+              <ol className="mt-2 space-y-1">{q.o.map((option, i) => <li key={i} dir="auto" className={i === q.a ? 'font-semibold text-emerald-800' : ''}>{String.fromCharCode(65 + i)}. {option}{i === q.a ? ' ✓ Correct answer' : ''}</li>)}</ol>
+              {q.e && <p className="mt-2 whitespace-pre-wrap text-muted-foreground" dir="auto">{q.e}</p>}
+            </article>
+          ))}
+        </div>
+      )}
 
       {tab === 'applications' && (
         <div className="mt-3">
@@ -234,13 +261,18 @@ export default function MptAdminPanel() {
   const [error, setError] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [version, setVersion] = useState(0)
+  const [scope, setScope] = useState('current')
+  const [page, setPage] = useState(1)
+  const [mockSearch, setMockSearch] = useState('')
   const reload = useCallback(() => setVersion((v) => v + 1), [])
   const [openAt, setOpenAt] = useState('')
   const [capacity, setCapacity] = useState('')
   const create = useAction(reload)
   useEffect(() => {
-    get<Overview>('?view=overview').then((data) => { setOverview(data); setError(null) }).catch((reason) => setError(reason instanceof HostingerApiError ? reason.message : 'Could not load MPT administration.'))
-  }, [version])
+    let active = true
+    get<Overview>(`?view=overview&scope=${scope}&page=${page}&q=${encodeURIComponent(mockSearch)}`).then((data) => { if (active) { setOverview(data); setError(null) } }).catch((reason) => { if (active) setError(reason instanceof HostingerApiError ? reason.message : 'Could not load MPT administration.') })
+    return () => { active = false }
+  }, [version, scope, page, mockSearch])
   const current = overview?.mocks.find((mock) => mock.slug === selected) ?? null
   return (
     <div className="mx-auto max-w-7xl space-y-5 px-4 py-6">
@@ -249,11 +281,11 @@ export default function MptAdminPanel() {
       {overview && (
         <>
           <div className="grid gap-3 text-sm sm:grid-cols-3">
-            <div className="rounded-xl border bg-white p-3"><p className="text-xs text-muted-foreground">Application flow</p><p className="font-bold">{overview.flag.toUpperCase()}</p><p className="text-xs text-muted-foreground">Automatic daily mocks: {overview.auto_schedule ? 'on (15:00 & 22:30 PKT)' : 'off'}</p></div>
+            <div className="rounded-xl border bg-white p-3"><p className="text-xs text-muted-foreground">Application flow</p><p className="font-bold">{overview.flag.toUpperCase()}</p><p className="text-xs text-muted-foreground">Automatic daily mocks: {overview.auto_schedule ? 'on (14:00, 18:00 & 22:30 PKT)' : 'off'}</p></div>
             <div className={`rounded-xl border p-3 ${overview.runway.available <= 4 ? 'border-amber-300 bg-amber-50' : 'bg-white'}`}>
               <p className="text-xs text-muted-foreground">Official paper runway</p>
               <p className="font-bold">{overview.runway.available} of {overview.runway.total} papers left{overview.runway.daily_slots_remaining !== undefined ? ` · ≈${overview.runway.daily_slots_remaining} days` : ''}</p>
-              <p className="text-xs text-muted-foreground">The 40 release-audited papers, used in order, never repeated.</p>
+              <p className="text-xs text-muted-foreground">Release-audited papers. Questions already allocated to a mock are excluded.</p>
               {overview.runway.exhausted_at && <p className="text-xs text-amber-800">Scheduling stopped for lack of papers at {pktDateTime(overview.runway.exhausted_at)}.</p>}
             </div>
             <div className="rounded-xl border bg-white p-3"><p className="text-xs text-muted-foreground">Last maintenance run</p><p className="font-bold">{overview.last_maintenance_at ? pktDateTime(overview.last_maintenance_at) : 'never'}</p></div>
@@ -271,6 +303,11 @@ export default function MptAdminPanel() {
             {create.message && <p role="status" className="w-full text-sm">{create.message}</p>}
           </form>
 
+          <section className="space-y-3" aria-label="Current and previous mocks">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter mocks">
+            {([['current', 'Current'], ['upcoming', 'Upcoming'], ['previous', 'Previous'], ['all', 'All mocks'], ['cancelled', 'Cancelled']] as const).map(([value, label]) => <button key={value} type="button" aria-pressed={scope === value} className={`${button} ${scope === value ? 'bg-pine text-white hover:bg-pine' : ''}`} onClick={() => { setScope(value); setPage(1); setSelected(null) }}>{label}</button>)}
+            <input aria-label="Search mocks" placeholder="Search mock title or number" value={mockSearch} onChange={(event) => { setMockSearch(event.target.value); setPage(1); setSelected(null) }} className="h-10 rounded-md border px-2 text-sm" />
+          </div>
           <div className="overflow-x-auto rounded-xl border bg-white">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-secondary/40 text-xs uppercase text-muted-foreground"><tr><th className="px-3 py-2">Mock</th><th>Exam (PKT)</th><th>Status</th><th>Applied</th><th>Appeared</th><th>Completed</th><th>Avg</th><th /></tr></thead>
@@ -284,8 +321,10 @@ export default function MptAdminPanel() {
                 ))}
               </tbody>
             </table>
-            {overview.mocks.length === 0 && <p className="p-4 text-sm text-muted-foreground">No mocks yet.</p>}
+            {overview.mocks.length === 0 && <p className="p-4 text-sm text-muted-foreground">No mocks match this view.</p>}
           </div>
+          <div className="flex items-center gap-3 text-sm"><button type="button" className={button} disabled={overview.page <= 1} onClick={() => { setPage(overview.page - 1); setSelected(null) }}>Previous page</button><span>{overview.total} mocks · page {overview.page} of {Math.max(1, Math.ceil(overview.total / overview.per_page))}</span><button type="button" className={button} disabled={overview.page * overview.per_page >= overview.total} onClick={() => { setPage(overview.page + 1); setSelected(null) }}>Next page</button></div>
+          </section>
           {current && <MockDetail key={`${current.slug}-${current.scoring_version}-${current.exam_open_at}`} mock={current} onChanged={reload} />}
         </>
       )}

@@ -144,10 +144,14 @@ check(mpt_ms('2026-10-01 10:00:00.250') === mpt_ms('2026-10-01T10:00:00.250Z'), 
 check(mpt_iso(mpt_ms('2026-10-01T15:00:00+05:00')) === '2026-10-01T10:00:00.000Z', 'offsets normalise to UTC');
 
 // Planned mocks: the scheduler stops at the running series' last mock unless the owner raises it.
-check(mpt_planned_mocks_from(null) === 40, 'planned mocks default to the 40-mock series');
+check(mpt_planned_mocks_from(null) === 47, 'planned mocks default to the 47-mock series');
 check(mpt_planned_mocks_from('46') === 46, 'owner can add mocks by raising CSSV_MPT_PLANNED_MOCKS');
 check(mpt_planned_mocks_from('0') === 0, 'CSSV_MPT_PLANNED_MOCKS=0 removes the limit');
-check(mpt_planned_mocks_from('lots') === 40, 'an invalid value falls back to the default');
+check(mpt_planned_mocks_from('lots') === 47, 'an invalid value falls back to the default');
 
+check(mpt_planned_mocks_from('40', 47) === 47, 'release includes the seven added mocks');
+check(mpt_planned_mocks_from('0', 47) === 0, 'unlimited remains unlimited');
+check(mpt_question_text_key('WHAT is Zakat?') === mpt_question_text_key('What  is zakat!'), 'question identity ignores casing, spacing and punctuation');
+check(mpt_question_text_key('What is Zakat?') !== mpt_question_text_key('What is Hajj?'), 'different questions remain distinct');
 fwrite(STDOUT, "MPT unit: $passes passed, $failures failed\n");
 exit($failures === 0 ? 0 : 1);

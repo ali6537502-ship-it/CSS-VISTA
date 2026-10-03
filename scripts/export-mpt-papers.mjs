@@ -43,6 +43,7 @@ await writeFile(join(outDir, 'manifest.php'), opaque({
   editorial_release: RELEASE.editorialRelease,
   replace_unstarted_below_release: RELEASE.replaceUnstartedBelowRelease,
   publishable: true,
+  planned_mocks: RELEASE.plannedMocks,
   generated_at: new Date().toISOString(),
   papers: selected.map((paper, index) => ({ index: index + 1, count: paper.length, fingerprint: paperFingerprint(paper) })),
 }))

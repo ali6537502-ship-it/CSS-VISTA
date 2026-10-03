@@ -14,7 +14,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'GET') {
     $page = max(1, (int)($_GET['page'] ?? 1));
     switch ($view) {
         case 'overview':
-            cssv_json(['ok' => true] + mpt_admin_overview($pdo));
+            cssv_json(['ok' => true] + mpt_admin_overview($pdo, (string)($_GET['scope'] ?? 'all'), $page, mb_substr(trim((string)($_GET['q'] ?? '')), 0, 120)));
+        case 'questions':
+            cssv_json(['ok' => true, 'questions' => mpt_admin_questions($pdo, mpt_admin_mock($pdo, $_GET['slug'] ?? null))]);
         case 'mock':
             cssv_json(['ok' => true, 'mock' => mpt_admin_mock_row($pdo, mpt_admin_mock($pdo, $_GET['slug'] ?? null))] + mpt_server_clock());
         case 'applications':

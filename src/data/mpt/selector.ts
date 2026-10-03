@@ -44,6 +44,11 @@ export interface SeriesOptions {
   currentWindow: { from: string; to: string }
   /** 0–1: how closely an item resembles the recorded FPSC papers; closer items are drawn first. */
   resemblance?: (question: MptBankQuestion) => number
+  /** Previously allocated papers: keep their IDs, concepts, passages and patterns out. */
+  previousPapers?: MptBankQuestion[][]
+  /** Editorial difficulty shares for an extension; existing releases keep their defaults. */
+  difficultyTargets?: Partial<Record<MptSection, Record<number, number>>>
+  acceptInPaper?: (question: MptBankQuestion, picked: MptBankQuestion[]) => boolean
 }
 
 // ------------------------------------------------------------------ utilities
@@ -190,7 +195,7 @@ function eligibleFor(
     if (answer.length > 3 && paper.answers.has(answer)) return false
   }
   const identity = tokenSet(identityText(q))
-  const seen = series.identity.get(q.subtopic) ?? []
+  const seen = series.identity.get(q.section) ?? []
   if (FACTUAL_SECTIONS.has(q.section) && canonicalText(q.o[q.a]).length > 3) {
     const facts = series.facts.get(canonicalText(q.o[q.a])) ?? []
     const factIdentity = tokenSet(`${q.q} ${q.o[q.a]}`)
@@ -218,9 +223,9 @@ function record(q: MptBankQuestion, series: SeriesState, paper: PaperState) {
     facts.push(tokenSet(`${q.q} ${q.o[q.a]}`))
     series.facts.set(key, facts)
   }
-  const list = series.identity.get(q.subtopic) ?? []
+  const list = series.identity.get(q.section) ?? []
   list.push(tokenSet(identityText(q)))
-  series.identity.set(q.subtopic, list)
+  series.identity.set(q.section, list)
   paper.difficulty[q.difficulty] = (paper.difficulty[q.difficulty] ?? 0) + 1
   paper.picked.push(q)
 }
@@ -256,9 +261,10 @@ function pickItems(
   candidates: MptBankQuestion[], count: number, section: MptSection, sectionPicked: MptBankQuestion[],
   series: SeriesState, paper: PaperState, rng: () => number, familyCap: number,
   caps: Map<string, number>, resemblance: (q: MptBankQuestion) => number,
+  target = difficultyTarget(section),
+  acceptInPaper: SeriesOptions['acceptInPaper'] = () => true,
 ) {
   const size = MPT_SECTION_SIZE[section]
-  const target = difficultyTarget(section)
   const hardCap = challengingCap(section, size)
   // Draw evenly across families so late papers still find several distinct ones.
   const unusedPerFamily = new Map<string, number>()
@@ -285,6 +291,7 @@ function pickItems(
     let scanned = 0
     for (const { q } of keyed) {
       if (chosen.includes(q) || (hardFull && q.difficulty === 3)) continue
+      if (!acceptInPaper(q, paper.picked)) continue
       if ((bySub.get(q.subtopic) ?? 0) >= (caps.get(q.subtopic) ?? Infinity)) continue
       if (!eligibleFor(q, series, paper, familyCap)) continue
       const score = deficit(q.difficulty) - scanned * 0.02
@@ -458,6 +465,13 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
     facts: new Map(),
     used: new Set(), concepts: new Set(), templates: new Set(), passages: new Set(), familyPapers: new Map(), identity: new Map(),
   }
+  for (const previous of options.previousPapers ?? []) {
+    const paper: PaperState = { families: new Map(), answers: new Set(), difficulty: {}, picked: [] }
+    for (const q of previous) {
+      record(q, series, paper)
+      if (q.passage_id) series.passages.add(q.passage_id)
+    }
+  }
   const papers: SelectedPaper[] = []
   for (let index = 0; index < options.papers; index += 1) {
     const paperSeed = `${options.seed}|paper-${index + 1}`
@@ -483,11 +497,11 @@ export function buildSeries(bank: MptBank, options: SeriesOptions) {
       // Every official heading is present: one item from each first, then the rest from the whole section.
       for (const heading of MPT_OFFICIAL_HEADINGS[section].headings) {
         if (sectionPicked.some((q) => officialHeading(q) === heading)) continue
-        const got = pickItems(pool.filter((q) => officialHeading(q) === heading), 1, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance)
+        const got = pickItems(pool.filter((q) => officialHeading(q) === heading), 1, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance, options.difficultyTargets?.[section], options.acceptInPaper)
         if (!got.length) throw new ReleaseError(`Paper ${index + 1}: ${section} has no fresh item under the official heading "${heading}"`)
         sectionPicked.push(...got)
       }
-      sectionPicked.push(...pickItems(pool, size - sectionPicked.length, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance))
+      sectionPicked.push(...pickItems(pool, size - sectionPicked.length, section, sectionPicked, series, paper, rng, familyCap, caps, resemblance, options.difficultyTargets?.[section], options.acceptInPaper))
       if (sectionPicked.length !== size) {
         throw new ReleaseError(`Paper ${index + 1}: ${section} has ${sectionPicked.length}/${size} after repetition checks (${pool.length} unused items left)`)
       }

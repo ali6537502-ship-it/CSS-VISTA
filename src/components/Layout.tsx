@@ -295,7 +295,7 @@ function NotificationBar() {
       id: message ? `mpt-${mptSpotlight?.kind}-${mptSpotlight?.card.mock.slug}` : 'mpt-application-flow', kind: 'platform' as const,
       text: message
         ? `${message.live ? 'LIVE NOW · ' : ''}${message.label}: ${message.text}`
-        : 'CSS MPT Mocks · daily at 3:00 PM and 10:30 PM PKT · apply in My CSS Vista to receive your Roll Number',
+        : 'CSS MPT Mocks · daily at 2:00 PM, 6:00 PM and 10:30 PM PKT · apply in My CSS Vista to receive your Roll Number',
       link: message?.to ?? '/account/mpt', expires: undefined,
     })
   }

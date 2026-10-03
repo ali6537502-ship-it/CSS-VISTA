@@ -40,6 +40,7 @@ if (!failures.length) {
     const files = readdirSync(dir).filter((f) => /^paper-\d{3}\.php$/.test(f)).sort()
     const exported = files.map(decode)
     if (manifest.series !== checked.series) failures.push(`manifest series ${manifest.series} is not the audited series ${checked.series}`)
+    if (manifest.planned_mocks !== RELEASE.plannedMocks) failures.push('manifest planned mock count differs from the release')
     if (manifest.editorial_release !== RELEASE.editorialRelease) failures.push('manifest editorial_release mismatch')
     if (exported.length !== resolvedChecked.length) failures.push(`exported ${exported.length} papers; audited ${resolvedChecked.length}`)
     exported.forEach((paper, i) => {

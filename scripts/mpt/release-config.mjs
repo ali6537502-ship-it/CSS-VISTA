@@ -1,19 +1,20 @@
 // Identity of the current editorial release of the official MPT series.
 export const RELEASE = {
   /** Increment when a new editorial standard supersedes earlier papers. */
-  editorialRelease: 6,
+  editorialRelease: 7,
   /** Papers frozen from any series registered below this release are replaced if their mock has not started. */
   replaceUnstartedBelowRelease: 6,
   /**
-   * Only the papers the remaining schedule needs, repaired from the live papers already
-   * frozen for those mocks (keep what is sound, replace what is defective). The running series is 40 mocks
-   * (CSSV_MPT_PLANNED_MOCKS, two a day at 15:00 and 22:30 PKT, mock 40 on 15 Oct 2026).
-   * Release 6 (29 Sep 2026): Mocks 1–10 have been held, so 30 remain (11–40); every kept
-   * live question has been read by an editor (src/data/mpt/release/live-review.json).
-   * Every bank item not used here stays in the bank as reserve for any mock the owner
-   * adds later; nothing is deleted.
+   * Preserve the 30 repaired papers from release 6 (Mocks 11–40), including any
+   * already sat by 3 October. Append seven reserve papers without repeating any
+   * allocated or historical question. The 47-mock schedule has three sittings a
+   * day at 14:00, 18:00 and 22:30 PKT; held mocks remain untouched.
    */
-  papers: 30,
+  papers: 37,
+  additionalPapers: 7,
+  plannedMocks: 47,
+  extensionSeed: 'css-vista-mpt-extension-7-2026-10-03',
+  baselineSeries: 'bcc868d124be35cd',
   /** The live papers repaired: Mocks 11–40 of the live series (Mocks 1–10 are held and untouched). */
   firstLivePaper: 11,
   lastLivePaper: 40,
@@ -24,7 +25,7 @@ export const RELEASE = {
    */
   heldReleases: [{ path: 'data-archive/mpt-release-3-series.json', papers: 6 }],
   seed: 'css-vista-mpt-editorial-release-6',
-  releaseDate: '2026-09-29',
+  releaseDate: '2026-10-03',
   /** Time-sensitive Current Affairs must describe developments inside this window. */
   currentWindow: { from: '2025-09-01', to: '2026-09-26' },
 }

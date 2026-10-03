@@ -31,12 +31,24 @@ test('the checked-in series is exactly what repairing the live series rebuilds',
   assert.equal(seriesHash(resolved), release.series)
 })
 
-test('only the remaining mocks get papers, none extra', () => {
-  assert.equal(RELEASE.papers, RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1)
+test('the repaired series gains exactly seven reserve papers', () => {
+  assert.equal(RELEASE.additionalPapers, 7)
+  assert.equal(RELEASE.papers, RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1 + 7)
   assert.equal(resolved.length, RELEASE.papers)
   const planned = /CSSV_MPT_PLANNED_MOCKS_DEFAULT = (\d+);/.exec(readFileSync('public/api/_mpt_core.php', 'utf8'))
-  assert.equal(Number(planned?.[1]), RELEASE.lastLivePaper, 'the scheduler stops at the last planned mock')
+  assert.equal(Number(planned?.[1]), RELEASE.plannedMocks, 'the scheduler includes the seven additional mocks')
   release.papers.forEach((p, i) => assert.equal(p.origin.paper, RELEASE.firstLivePaper + i))
+})
+
+test('existing papers remain identical and the seven additions use existing bank items', () => {
+  const baselineCount = RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1
+  assert.equal(seriesHash(resolved.slice(0, baselineCount)), RELEASE.baselineSeries)
+  for (const paper of release.papers.slice(baselineCount)) {
+    assert.equal(paper.questions.length, 200)
+    assert.ok(paper.questions.every((q) => q.src === 'bank' && !q.replaces))
+  }
+  const difficulty = (papers) => papers.flat().filter((q) => q.meta.origin === 'reviewed-bank').reduce((sum, q) => sum + q.meta.difficulty, 0) / papers.flat().filter((q) => q.meta.origin === 'reviewed-bank').length
+  assert.ok(difficulty(resolved.slice(baselineCount)) > difficulty(resolved.slice(0, baselineCount)), 'new papers are moderately harder')
 })
 
 test('every repaired paper passes every paper-level and series-level gate', () => {
@@ -46,7 +58,7 @@ test('every repaired paper passes every paper-level and series-level gate', () =
 })
 
 test('kept questions are the live questions verbatim, in their own paper, and defect-free', () => {
-  release.papers.forEach((paper, i) => {
+  release.papers.slice(0, RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1).forEach((paper, i) => {
     const livePaper = live.papers[paper.origin.paper - 1]
     const liveIds = new Map(livePaper.questions.map((q) => [q.id, q]))
     for (const s of paper.questions.filter((x) => x.src === 'live')) {

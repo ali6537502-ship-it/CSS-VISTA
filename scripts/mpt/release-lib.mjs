@@ -6,10 +6,15 @@
 import { createHash } from 'node:crypto'
 import { readFileSync, existsSync } from 'node:fs'
 import { loadBank, validateBank, canonical } from './bank-lib.mjs'
-import { loadServedArchive } from './served-archive.mjs'
+import { loadServedArchive, stemHash } from './served-archive.mjs'
 import { RELEASE, SERIES_PATH, KEPT_PATH, REVIEW_PATH } from './release-config.mjs'
 import { loadLiveSeries, repairLiveSeries, resolveRepairedPaper } from './repair-live-series.mjs'
 import { auditRepairedSeries } from './repair-audit.mjs'
+import { buildSeries, formatFamilies } from '../../src/data/mpt/selector.ts'
+import { auditPaper } from './paper-audit.mjs'
+import { resemblanceScores } from './resemblance.mjs'
+import { MPT_SECTION_ORDER } from '../../src/data/mpt/taxonomy.ts'
+import { questionFrame, MAX_FRAME_PER_PAPER } from './live-review-rules.mjs'
 
 export function loadReviewedBank() {
   const bank = loadBank()
@@ -41,6 +46,34 @@ export function buildRelease(bank, live = loadLiveSeries()) {
   const { papers, kept, log } = repairLiveSeries({
     live, bank, seed: RELEASE.seed, firstPaper: RELEASE.firstLivePaper, lastPaper: RELEASE.lastLivePaper,
     review: loadLiveReview(), heldBankIds: heldBankIds(),
+  })
+  const resolved = papers.map((p) => resolveRepairedPaper(p, bank, Object.fromEntries(kept)))
+  if (seriesHash(resolved) !== RELEASE.baselineSeries) throw new Error('The extension must preserve every release-6 paper verbatim.')
+  const byId = new Map(bank.questions.map((q) => [q.id, q]))
+  // Include every repaired paper, not just those already sat, so neither the
+  // September/October sittings nor any upcoming paper can repeat in the extension.
+  const previousPapers = resolved.map((p) => p.map((q) => byId.get(q.id) ?? {
+    ...q, subject: q.meta.heading, subtopic: `legacy.${q.section}`, pattern_family: `legacy.${q.id}`,
+    concept: q.q, difficulty: 2,
+  }))
+  const held = heldBankIds()
+  previousPapers.push([...held].map((id) => byId.get(id)).filter(Boolean))
+  const served = loadServedArchive()
+  const historicalStems = new Set(live.papers.slice(0, RELEASE.firstLivePaper - 1).flatMap((p) => p.questions.map((q) => canonical(q.q))))
+  const { scores } = resemblanceScores(bank.questions)
+  const extra = buildSeries(bank, {
+    papers: RELEASE.additionalPapers, seed: RELEASE.extensionSeed, previousPapers,
+    currentWindow: RELEASE.currentWindow,
+    isExcluded: (q) => served.ids.has(q.id) || served.stems.has(stemHash(q.q)) || historicalStems.has(canonical(q.q)),
+    resemblance: (q) => scores.get(q.id) ?? 0,
+    acceptInPaper: (q, picked) => picked.filter((p) => !p.passage_id && questionFrame(p.q) === questionFrame(q.q)).length < MAX_FRAME_PER_PAPER,
+    difficultyTargets: Object.fromEntries(MPT_SECTION_ORDER.map((s) => [s, s === 'General Abilities'
+      ? { 1: 0.25, 2: 0.60, 3: 0.15 } : { 1: 0.25, 2: 0.55, 3: 0.20 }])),
+  })
+  for (const p of extra) papers.push({
+    ...p, index: papers.length + 1,
+    origin: { series: RELEASE.extensionSeed, paper: RELEASE.lastLivePaper + p.index, key: 'reserve-extension' },
+    questions: p.questions.map((q) => ({ src: 'bank', ...q })),
   })
   return {
     editorial_release: RELEASE.editorialRelease,
@@ -77,7 +110,7 @@ export function readCheckedInRelease() {
 
 export function auditResolved(resolvedPapers, bank, served = loadServedArchive(), live = loadLiveSeries()) {
   const held = live.papers.slice(0, RELEASE.firstLivePaper - 1)
-  return auditRepairedSeries(resolvedPapers, {
+  const result = auditRepairedSeries(resolvedPapers, {
     bankById: new Map(bank.questions.map((q) => [q.id, q])),
     served,
     heldStems: new Set(held.flatMap((p) => p.questions.map((q) => canonical(q.q)))),
@@ -86,4 +119,12 @@ export function auditResolved(resolvedPapers, bank, served = loadServedArchive()
     expectedPapers: RELEASE.papers,
     reviewedKeep: new Set(Object.keys(loadLiveReview().explain ?? {})),
   })
+  for (const [i, paper] of resolvedPapers.slice(-RELEASE.additionalPapers).entries()) {
+    const report = auditPaper({ index: RELEASE.lastLivePaper + i + 1, questions: paper }, {
+      bankById: new Map(bank.questions.map((q) => [q.id, q])), currentWindow: RELEASE.currentWindow,
+      formatFamilies: formatFamilies(bank.questions),
+    })
+    result.failures.push(...report.failures)
+  }
+  return result
 }

@@ -7,10 +7,10 @@ This runbook is for the site owner and admin. The admin workspace is at
 
 Complete these steps in order. Nothing is visible to students until step 4.
 
-1. **Papers.** Nothing to configure. Every deploy exports the 40 papers of the
+1. **Papers.** Nothing to configure. Every deploy exports the 37 papers of the
    audited editorial release (`src/data/mpt/release/series.json`, built only from the
    reviewed bank in `src/data/mpt/bank/`). The build log shows
-   `MPT official series <id> (editorial release 2): exported 40 audited paper(s)` and
+   `MPT official series <id> (editorial release 7): exported 37 audited paper(s)` and
    then `MPT release gate PASS` for the exported files.
 2. **Database.** Nothing to run. The API creates the MPT tables on first use, as it does
    for the other features. To do it by hand, run `server/sql/010_mpt_exam_system.sql` in
@@ -32,29 +32,30 @@ Complete these steps in order. Nothing is visible to students until step 4.
      those accounts.
    - `'CSSV_MPT_AUTO_SCHEDULE' => 'off'` stops automatic daily mocks, so you schedule
      each one by hand.
-   - `'CSSV_MPT_PLANNED_MOCKS' => '40'` is the last mock number the scheduler creates
-     (default 40, the running series; `'0'` = no limit). To add mocks later, first
+   - `'CSSV_MPT_PLANNED_MOCKS' => '47'` is the last mock number the scheduler creates
+     (default 47, the running series; `'0'` = no limit). To add mocks later, first
      release papers for them from the reserve, then raise this number (D-55).
 
 ## 2. Daily operation
 
-With automatic scheduling on, the official mocks at **15:00 and 22:30 PKT** are
+With automatic scheduling on, the official mocks at **14:00, 18:00 and 22:30 PKT** are
 created **16 days ahead**. Each one:
 
 - **accepts applications from the moment it exists until the exam starts.** Students
   can pick any upcoming mock at any time, but never one that is already running;
 - lets applicants who are late still **enter up to 10 minutes after the start**, with the
   time remaining;
-- runs for 200 minutes (all attempts end at 18:20 or 01:50 PKT);
+- runs for 200 minutes (all attempts end at 17:20, 21:20 or 01:50 PKT);
 - issues the Roll Number 10 minutes after applying, or at exam start if that is sooner.
   Roll numbers are 6 digits, and move to 7 or more digits automatically only when a
   single mock passes 40,500 applicants. There is no limit on the number of candidates;
 - publishes each student's **result card 30 minutes after the exam ends**. At the same
   time their **wrong answers** appear in My CSS Vista → My Wrong Answers.
 
-**Paper runway.** The current question bank supports **40 unique official papers**
-(the audited set), about 20 days at two a day. Creating mocks 16 days ahead reserves
-their papers early, but does not use them up any faster. The admin overview shows "N of 40 papers left". When it
+**Paper runway.** The current question bank supports **37 audited papers**
+(30 preserved release-6 papers plus seven new reserve papers). The running schedule
+ends at Mock 47; the exported manifest raises a previously configured cap of 40 to 47. Creating mocks 16 days ahead reserves
+their papers early, but does not use them up any faster. The admin overview shows the number of usable papers left, excluding overlaps with frozen questions. When it
 reaches 0, no new mocks are created and the overview says so. No question is ever
 repeated to someone who sat an earlier official mock.
 
@@ -70,7 +71,7 @@ To extend the runway or publish a corrected release:
 The server automatically skips any exported paper that shares a question with one
 already used.
 
-**Release 3 (D-55).** The current release repairs the live papers for Mocks 5–40:
+**Release 3 (D-55).** This earlier release repaired the live papers for Mocks 5–40:
 kept questions are unchanged, defective ones are replaced from the reviewed bank. On
 deploy, each unstarted mock receives its own repaired paper (mock 5 → paper 1, …). A mock
 already held by then keeps its paper, and its repaired paper stays unused in reserve.
@@ -175,3 +176,23 @@ button again with no corrections to continue.
 | Candidate UI | `src/pages/mpt/`, `src/components/mpt/`, strings in `src/lib/mpt/copy.ts` |
 | Admin UI | `src/pages/admin/MptAdminPanel.tsx` |
 | Audit log | table `mpt_events` (append-only) |
+
+**Release 7 (3 October 2026).** Exactly seven 200-question reserve papers are
+appended; all 30 release-6 papers remain identical. No question from an allocated
+paper or the historical served archives may recur in the additions. Source labels
+remain intact; bank practice items are not claimed as recorded FPSC questions.
+The server additionally compares normalised question text to catch reused stems
+under different IDs, across every frozen mock, including 28 September–3 October.
+
+On the first enabled automatic maintenance run, unstarted system-created daily
+mocks more than 15 minutes away are moved chronologically into 14:00, 18:00 and
+22:30 PKT sittings. IDs, papers, applications and roll numbers remain unchanged.
+Held, running, cancelled, manual and already-attempted mocks are untouched.
+The migration is transactional, logged and idempotent. Already near-start mocks
+retain their announced time; the new timetable applies to the later schedule.
+Standard 200-minute sittings end at 17:20, 21:20 and 01:50 PKT respectively.
+
+In **Admin → MPT examinations**, use Current, Upcoming, Previous, All mocks or
+Cancelled; search by title/slug and page through the full history. Open a mock's
+Questions tab to inspect its frozen paper, answer key and explanations by section.
+This endpoint requires the separate owner session; candidates cannot access it.

@@ -548,3 +548,21 @@ still exist (D-48) but are not listed.
 - Release 6 covers Mocks 11–40 (Mocks 1–10 held; release 3 papers sat in Mocks 8–10 excluded).
   Simulated against the live state: 30/30 mocks re-frozen, no question in two mocks, none
   repeating a held mock.
+
+
+### D-59 — Seven reserve papers, three daily sittings and owner mock history (3 October 2026)
+
+Owner instruction: add seven moderately harder papers, use 14:00 / 18:00 / 22:30
+PKT, and exclude questions from mocks completed between 28 September and 3 October
+from every later paper. The 30 release-6 papers remain byte-for-byte equivalent at
+question/option/key level. Append seven existing-bank papers with a 25% accessible
+target (GA 25/60/15; other sections 25/55/20), preserving all editorial gates and
+provenance. The selector seeds uniqueness state from every allocated paper and
+held bank IDs. The exporter sets a 47-mock minimum even if the old environment cap
+is 40. No held question can be reused; normalised text adds protection across IDs.
+
+A one-time transaction compresses only safely unstarted automatic daily mocks
+into the three slots, keeping candidate identities, papers and registrations.
+The owner gets paginated current/upcoming/previous/cancelled filters, search and
+protected question/key review for every frozen paper. Runway counts exclude
+papers overlapping any older series, rather than counting only same-series refs.

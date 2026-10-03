@@ -1,17 +1,17 @@
-# MPT editorial release 6 — repaired live series
+# MPT editorial release 7 — repaired live series
 
-Series bcc868d124be35cd; 30 papers (live papers 11–40 of b054de7, i.e. Mocks 11–40); status **PASS**.
+Series 57d18c763f20c220; 37 papers (live papers 11–40 of b054de7, i.e. Mocks 11–40); status **PASS**.
 
-Each paper is the live paper already frozen for that mock. A live question was kept unless it had a concrete defect; only defective slots were refilled, in place, from the reviewed bank with an item from the same section and heading. Papers follow the official FPSC structure only (five sections with their official sizes, every official heading present, no topic quotas).
+The original 30 repaired papers (Mocks 11–40) remain identical to release 6. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.
 
 ## Series summary
 
-- Kept live questions: 594; replaced from the reviewed bank: 5406
-  - Islamic Studies: kept 148, replaced 452
-  - Urdu: kept 131, replaced 469
-  - English: kept 151, replaced 1349
-  - General Abilities: kept 4, replaced 1796
-  - General Knowledge: kept 160, replaced 1340
+- Kept live questions: 594; replaced from the reviewed bank: 6806
+  - Islamic Studies: kept 148, replaced 592
+  - Urdu: kept 131, replaced 609
+  - English: kept 151, replaced 1699
+  - General Abilities: kept 4, replaced 2216
+  - General Knowledge: kept 160, replaced 1690
 
 ### Why questions were replaced
 
@@ -289,3 +289,10 @@ Warnings: none
 | 28 (38) | `2097970c7b17762b` | 19 | 181 | 16/35/9 | 22/9/19 | mpt-psg-b10 |
 | 29 (39) | `0192bdf829f087c3` | 20 | 180 | 21/30/9 | 23/10/17 | mpt-psg-b11 |
 | 30 (40) | `83da7f0bb9c51fb8` | 33 | 167 | 17/34/9 | 22/10/18 | mpt-psg-b12 |
+| 31 (41) | `0d4d24349ddb2962` | 0 | 200 | 15/36/9 | 8/23/19 | mpt-psg-b23 |
+| 32 (42) | `abe840e1b8c36101` | 0 | 200 | 15/36/9 | 7/23/20 | mpt-psg-b18 |
+| 33 (43) | `e821d574171b7c1a` | 0 | 200 | 18/33/9 | 13/18/19 | mpt-psg-b17 |
+| 34 (44) | `52838464e4659231` | 0 | 200 | 15/36/9 | 24/14/12 | mpt-psg-b22 |
+| 35 (45) | `b78722ab8d12fa90` | 0 | 200 | 21/30/9 | 23/14/13 | mpt-psg-b24 |
+| 36 (46) | `e7bdeefd1e3b0ffe` | 0 | 200 | 21/30/9 | 17/15/18 | mpt-psg-b20 |
+| 37 (47) | `15231b0424a46e50` | 0 | 200 | 21/30/9 | 22/12/16 | mpt-psg-b16 |
