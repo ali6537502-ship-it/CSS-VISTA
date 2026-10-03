@@ -4,7 +4,7 @@ import { useAccount } from '@/lib/accountContext'
 import { ACCOUNT_EXPIRED_EVENT, currentHostingerAccountUser, hostingerRequest, PROFILE_UPDATED_EVENT } from '@/lib/hostingerApi'
 import { AccountPage } from './shared'
 
-type Resource = { id: string; title: string; format: string; filename: string; available: boolean }
+type Resource = { id: string; title: string; format: string; filename: string; available: boolean; cover?: string }
 
 export default function Resources() {
   const { user } = useAccount()
@@ -74,6 +74,7 @@ export default function Resources() {
         <div className="grid gap-5 sm:grid-cols-2">
           {resources.map(resource => (
             <article key={resource.id} className="rounded-2xl border border-slate-200 bg-white p-6">
+              {resource.cover && <img src={resource.cover} alt={resource.title + ' cover'} className="mb-5 mx-auto max-h-80 w-auto rounded-lg object-contain" />}
               <div className="flex items-start justify-between gap-4">
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald-50 text-emerald-800"><FileText className="h-6 w-6" /></span>
                 <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800">Free</span>

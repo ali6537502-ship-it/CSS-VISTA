@@ -7,9 +7,20 @@ export interface Book {
   cover: string
   file: string
   pages: number
+  accountRequired?: boolean
 }
 
 export const books: Book[] = [
+  {
+    id: 'qawaid-e-urdu',
+    title: 'Qawaid-e-Urdu',
+    subtitle: 'By Sir Ali Hassan Sargana · 2027 edition',
+    description: 'Urdu grammar for CSS MPT, PMS and other competitive examinations. Download the book free from My Vista Resources after completing your profile 100%.',
+    cover: '/books/qawaid-e-urdu-cover.jpg',
+    file: '/account/resources',
+    pages: 218,
+    accountRequired: true,
+  },
   {
     id: 'constitutional-history',
     title: 'Constitutional History of Pakistan',

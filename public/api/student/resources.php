@@ -10,7 +10,7 @@ cssv_require_user($pdo);
 // Repository payloads are encrypted with this server's public key. Only the
 // private runtime can decrypt them, after checking the student's saved profile.
 $catalogue = [
-    'urdu-grammar' => ['id' => 'urdu-grammar', 'title' => 'Qawaid-e-Urdu by Sir Ali Hassan Sargana', 'format' => 'PDF', 'filename' => 'Qawaid-e-Urdu-by-Sir-Ali-Hassan-Sargana.pdf'],
+    'urdu-grammar' => ['id' => 'urdu-grammar', 'title' => 'Qawaid-e-Urdu by Sir Ali Hassan Sargana', 'format' => 'PDF', 'filename' => 'Qawaid-e-Urdu-by-Sir-Ali-Hassan-Sargana.pdf', 'cover'=>'/books/qawaid-e-urdu-cover.jpg'],
 ];
 $view = (string)($_GET['view'] ?? 'list');
 if (!in_array($view, ['list', 'download'], true)) cssv_fail('Resource view not found.', 404, 'resource_not_found');

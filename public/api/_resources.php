@@ -36,7 +36,22 @@ function cssv_resource_decrypt(array $payload): string
     $wrapped = base64_decode((string)($payload['wrapped_key'] ?? ''), true);
     $iv = base64_decode((string)($payload['iv'] ?? ''), true);
     $tag = base64_decode((string)($payload['tag'] ?? ''), true);
-    $ciphertext = base64_decode((string)($payload['ciphertext'] ?? ''), true);
+    $ciphertext = '';
+    $parts = $payload['parts'] ?? null;
+    if (is_array($parts) && count($parts) > 0 && count($parts) <= 16) {
+        foreach ($parts as $part) {
+            if (!is_string($part) || !preg_match('/^[a-z0-9-]+-part-[0-9]+\.php$/D', $part)) cssv_fail('This book is temporarily unavailable.', 503, 'resource_unavailable');
+            $path = __DIR__ . '/_resource_files/' . $part;
+            if (!is_file($path)) cssv_fail('This book is temporarily unavailable.', 503, 'resource_unavailable');
+            $encoded = require $path;
+            $decoded = is_string($encoded) ? base64_decode($encoded, true) : false;
+            if ($decoded === false) cssv_fail('This book is temporarily unavailable.', 503, 'resource_unavailable');
+            $ciphertext .= $decoded;
+            unset($encoded, $decoded);
+        }
+    } else {
+        $ciphertext = base64_decode((string)($payload['ciphertext'] ?? ''), true);
+    }
     if ($wrapped === false || $iv === false || strlen($iv) !== 12 || $tag === false || strlen($tag) !== 16 || $ciphertext === false || !openssl_private_decrypt($wrapped, $key, $keys['private'], OPENSSL_PKCS1_OAEP_PADDING) || strlen($key) !== 32) {
         cssv_fail('This book is temporarily unavailable.', 503, 'resource_unavailable');
     }

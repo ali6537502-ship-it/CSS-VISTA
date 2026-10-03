@@ -76,6 +76,14 @@ try {
     $check($run('complete',['view'=>'download','id'=>'urdu-grammar']) === $pdf, 'Complete profile downloads exact bytes');
     $check(json_decode($run('incomplete',['view'=>'download','id'=>'urdu-grammar']),true)['status'] === 403, 'Cleared required field relocks an uploaded book');
     $check(json_decode($run('complete',['view'=>'download','id'=>'../_bootstrap']),true)['status'] === 404, 'Unknown paths rejected');
+    $encodedCipher = $payload['ciphertext'];
+    unset($payload['ciphertext']);
+    $payload['parts'] = ['urdu-grammar-part-1.php', 'urdu-grammar-part-2.php'];
+    foreach ([substr($encodedCipher, 0, 16), substr($encodedCipher, 16)] as $index => $part) {
+        file_put_contents($dir . '/_resource_files/' . $payload['parts'][$index], "<?php return '" . $part . "';\n");
+    }
+    file_put_contents($dir . '/_resource_files/urdu-grammar.php', "<?php return " . var_export($payload,true) . ";\n");
+    $check($run('complete',['view'=>'download','id'=>'urdu-grammar']) === $pdf, 'Multipart encrypted book downloads exact bytes');
     $payload['tag'] = base64_encode(random_bytes(16));
     file_put_contents($dir . '/_resource_files/urdu-grammar.php', "<?php return " . var_export($payload,true) . ";\n");
     $check(json_decode($run('complete',['view'=>'download','id'=>'urdu-grammar']),true)['status'] === 503, 'Corrupt file rejected');
