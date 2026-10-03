@@ -187,6 +187,7 @@ export default function StudyTools() {
         {/* Featured tool shortcuts */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {[
+            { to: '/css-eligibility-calculator', icon: CalendarDays, t: 'CSS Age & Attempts', d: 'Exact FPSC age window and written chances' },
             { to: '/factbook', icon: LibraryBig, t: 'My Factbook', d: 'Your private, searchable evidence library' },
             { to: '/answer-timer', icon: PenLine, t: 'Handwritten Answer Timer', d: '5/10/20/35-minute structure alerts' },
             { to: '/five-minute', icon: Zap, t: 'Daily Five-Minute Challenge', d: 'A quick mixed quiz against the clock' },

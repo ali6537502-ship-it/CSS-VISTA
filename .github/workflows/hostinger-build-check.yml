@@ -40,8 +40,23 @@ jobs:
       - name: Verify AdSense route and policy safeguards
         run: npm run test:ads
 
+      - name: Verify CSS eligibility rule engine
+        run: npm run test:css-eligibility
+
+      - name: Type-check application
+        run: npm run typecheck
+
+      - name: Lint application
+        run: npm run lint
+
+      - name: Run complete project test suite
+        run: npm run test:all
+
       - name: Build with default Hostinger command
         run: npm run build
+
+      - name: Verify production direct-route refreshes
+        run: npm run test:routes
 
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
