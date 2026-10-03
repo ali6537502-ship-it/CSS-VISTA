@@ -15,6 +15,8 @@ import { auditPaper } from './paper-audit.mjs'
 import { resemblanceScores } from './resemblance.mjs'
 import { MPT_SECTION_ORDER } from '../../src/data/mpt/taxonomy.ts'
 import { questionFrame, MAX_FRAME_PER_PAPER } from './live-review-rules.mjs'
+import { applyClarifications } from './clarifications.mjs'
+import { auditReasoning } from './reasoning-audit.mjs'
 
 export function loadReviewedBank() {
   const bank = loadBank()
@@ -48,7 +50,7 @@ export function buildRelease(bank, live = loadLiveSeries()) {
     review: loadLiveReview(), heldBankIds: heldBankIds(),
   })
   const resolved = papers.map((p) => resolveRepairedPaper(p, bank, Object.fromEntries(kept)))
-  if (seriesHash(resolved) !== RELEASE.baselineSeries) throw new Error('The extension must preserve every release-6 paper verbatim.')
+  if (answerLayoutHash(resolved) !== RELEASE.baselineSeries) throw new Error('The extension must preserve every release-6 question, option order and answer key.')
   const byId = new Map(bank.questions.map((q) => [q.id, q]))
   // Include every repaired paper, not just those already sat, so neither the
   // September/October sittings nor any upcoming paper can repeat in the extension.
@@ -94,12 +96,17 @@ export function bankFingerprint(bank) {
   return createHash('sha256').update(JSON.stringify([rows, passages])).digest('hex').slice(0, 16)
 }
 
-export function seriesHash(resolvedPapers) {
+export function answerLayoutHash(resolvedPapers) {
   return createHash('sha256').update(JSON.stringify(resolvedPapers.map((p) => p.map((q) => [q.id, q.o, q.a])))).digest('hex').slice(0, 16)
 }
 
+/** Wording and explanations are part of release identity, not only ids and keys. */
+export function seriesHash(resolvedPapers) {
+  return createHash('sha256').update(JSON.stringify(resolvedPapers.map((p) => p.map((q) => [q.id, q.q, q.o, q.a, q.e])))).digest('hex').slice(0, 16)
+}
+
 export function resolveRelease(release, bank) {
-  return release.papers.map((paper) => resolveRepairedPaper(paper, bank, release.kept))
+  return applyClarifications(release.papers.map((paper) => resolveRepairedPaper(paper, bank, release.kept)), bank)
 }
 
 /** The checked-in series with its kept live questions attached. */
@@ -126,5 +133,8 @@ export function auditResolved(resolvedPapers, bank, served = loadServedArchive()
     })
     result.failures.push(...report.failures)
   }
+  const reasoning = auditReasoning(resolvedPapers)
+  result.failures.push(...reasoning.failures)
+  result.warnings.push(...reasoning.historicalWarnings)
   return result
 }

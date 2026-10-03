@@ -1,14 +1,14 @@
-# MPT editorial release 7 — repaired live series
+# MPT editorial release 8 — repaired live series
 
-Series 57d18c763f20c220; 37 papers (live papers 11–40 of b054de7, i.e. Mocks 11–40); status **PASS**.
+Series 37e077d8e04f860f; 37 papers (live papers 11–40 of b054de7, i.e. Mocks 11–40); status **PASS**.
 
-The original 30 repaired papers (Mocks 11–40) remain identical to release 6. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.
+The release-6 allocation is preserved as the selection baseline. Release 8 applies explicit reviewed wording corrections and replaces weak legacy translation items in safely unstarted papers with unused reviewed bank items. Mocks through 17 remain unchanged. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.
 
 ## Series summary
 
-- Kept live questions: 594; replaced from the reviewed bank: 6806
+- Kept live questions: 527; replaced from the reviewed bank: 6873
   - Islamic Studies: kept 148, replaced 592
-  - Urdu: kept 131, replaced 609
+  - Urdu: kept 64, replaced 676
   - English: kept 151, replaced 1699
   - General Abilities: kept 4, replaced 2216
   - General Knowledge: kept 160, replaced 1690
@@ -253,46 +253,46 @@ The original 30 repaired papers (Mocks 11–40) remain identical to release 6. S
 - English: editor review: Typo changes meaning: "heated" should be "heard".: 1
 - English: editor review: Ambiguous: "may answer" and "might answer" are also grammatical.: 1
 
-Warnings: none
+Warnings: Mock 11: mpt-ga-d-0478: unique keyed answer not entailed by the delivered text ({"valid":[],"models":8,"classes":["uncertain","uncertain","false","uncertain"]}); Mock 11: mpt-ga-d-0416: “between” does not explicitly mean immediate neighbours; Mock 12: mpt-ga-d-0351: “between” does not explicitly mean immediate neighbours; Mock 12: mpt-ga-d-0364: “between” does not explicitly mean immediate neighbours; Mock 12: mpt-ga-d-0452: unique keyed answer not entailed by the delivered text ({"valid":[],"models":8,"classes":["uncertain","uncertain"]}); Mock 12: mpt-ga-d-0475: unique keyed answer not entailed by the delivered text ({"valid":[],"models":16,"classes":["uncertain","uncertain","uncertain","uncertain"]}); Mock 14: mpt-ga-d-0479: unique keyed answer not entailed by the delivered text ({"valid":[],"models":16,"classes":["uncertain","uncertain","uncertain","uncertain"]}); Mock 15: mpt-ga-d-0343: “between” does not explicitly mean immediate neighbours; Mock 15: mpt-ga-d-0476: unique keyed answer not entailed by the delivered text ({"valid":[],"models":16,"classes":["uncertain","uncertain","uncertain","uncertain"]}); Mock 15: mpt-ga-d-0387: “between” does not explicitly mean immediate neighbours; Mock 16: mpt-ga-d-0455: unique keyed answer not entailed by the delivered text ({"valid":[],"models":16,"classes":["uncertain","uncertain"]}); Mock 17: mpt-ga-d-0411: “between” does not explicitly mean immediate neighbours
 
 ## Paper by paper
 
 | Paper (mock) | Fingerprint | Kept | Replaced | GA new diff 1/2/3 | GK sci/CA/PA | Passage |
 |---|---|---|---|---|---|---|
-| 1 (11) | `cafdcedcb69ad254` | 17 | 183 | 16/35/9 | 18/13/19 | mpt-psg-a07 |
-| 2 (12) | `a0988acb2fd596cc` | 27 | 173 | 17/34/9 | 20/11/19 | mpt-psg-a08 |
-| 3 (13) | `a998e54438eb604b` | 15 | 185 | 17/34/9 | 19/12/19 | mpt-psg-a09 |
-| 4 (14) | `baf83997119746d1` | 24 | 176 | 20/31/9 | 19/11/20 | mpt-psg-a10 |
-| 5 (15) | `2d973ec5d50d0d8e` | 18 | 182 | 16/35/9 | 19/12/19 | mpt-psg-a11 |
-| 6 (16) | `cd87f494a434476b` | 21 | 179 | 16/35/9 | 20/11/19 | mpt-psg-a12 |
-| 7 (17) | `8ed1c8f48219056d` | 11 | 189 | 16/35/9 | 20/12/18 | mpt-psg-a13 |
-| 8 (18) | `d563fcca392072b4` | 23 | 177 | 16/35/9 | 19/10/21 | mpt-psg-a14 |
-| 9 (19) | `b80f421041a0379c` | 19 | 181 | 17/34/9 | 18/12/20 | mpt-psg-a15 |
-| 10 (20) | `fb478fd5093a9e8a` | 26 | 174 | 19/32/9 | 20/12/18 | mpt-psg-a16 |
-| 11 (21) | `48b5dd99fa9f776e` | 19 | 181 | 18/33/9 | 18/12/20 | mpt-psg-a17 |
-| 12 (22) | `f7e6d731df1f7124` | 20 | 180 | 18/33/9 | 18/13/19 | mpt-psg-a18 |
-| 13 (23) | `3bc7f5afd591f03e` | 15 | 185 | 19/32/9 | 18/13/19 | mpt-psg-a19 |
-| 14 (24) | `97b2587e1fbf1800` | 19 | 181 | 20/31/9 | 17/12/21 | mpt-psg-a20 |
-| 15 (25) | `85793b5bb67c57d9` | 18 | 182 | 20/31/9 | 17/12/21 | mpt-psg-a21 |
-| 16 (26) | `570c9dcebd671e1d` | 18 | 182 | 19/32/9 | 17/12/21 | mpt-psg-a22 |
-| 17 (27) | `5bcf2fa55fb42c18` | 14 | 186 | 18/33/9 | 18/12/20 | mpt-psg-a23 |
-| 18 (28) | `6a3bc1c72bc44569` | 18 | 182 | 18/33/9 | 21/11/18 | mpt-psg-a24 |
-| 19 (29) | `ebb070ad1ce07be3` | 20 | 180 | 15/36/9 | 20/11/19 | mpt-psg-b01 |
-| 20 (30) | `c65212898a6176a2` | 23 | 177 | 17/34/9 | 25/9/16 | mpt-psg-b02 |
-| 21 (31) | `13d6b1f236b05fd8` | 17 | 183 | 18/33/9 | 24/9/17 | mpt-psg-b03 |
-| 22 (32) | `d2ee6207442c082a` | 21 | 179 | 17/34/9 | 24/10/16 | mpt-psg-b04 |
-| 23 (33) | `bfd2e2e482a2c147` | 14 | 186 | 16/35/9 | 22/10/18 | mpt-psg-b05 |
-| 24 (34) | `4f81cbc9ad184cf8` | 24 | 176 | 17/30/9 | 23/9/18 | mpt-psg-b06 |
-| 25 (35) | `3b8535b469abdaf6` | 18 | 182 | 18/33/9 | 22/10/18 | mpt-psg-b07 |
-| 26 (36) | `26bfc237543e92c0` | 19 | 181 | 21/30/9 | 21/11/18 | mpt-psg-b08 |
-| 27 (37) | `2250e7a61769fc6b` | 24 | 176 | 21/30/9 | 22/10/18 | mpt-psg-b09 |
-| 28 (38) | `2097970c7b17762b` | 19 | 181 | 16/35/9 | 22/9/19 | mpt-psg-b10 |
-| 29 (39) | `0192bdf829f087c3` | 20 | 180 | 21/30/9 | 23/10/17 | mpt-psg-b11 |
-| 30 (40) | `83da7f0bb9c51fb8` | 33 | 167 | 17/34/9 | 22/10/18 | mpt-psg-b12 |
-| 31 (41) | `0d4d24349ddb2962` | 0 | 200 | 15/36/9 | 8/23/19 | mpt-psg-b23 |
-| 32 (42) | `abe840e1b8c36101` | 0 | 200 | 15/36/9 | 7/23/20 | mpt-psg-b18 |
-| 33 (43) | `e821d574171b7c1a` | 0 | 200 | 18/33/9 | 13/18/19 | mpt-psg-b17 |
-| 34 (44) | `52838464e4659231` | 0 | 200 | 15/36/9 | 24/14/12 | mpt-psg-b22 |
-| 35 (45) | `b78722ab8d12fa90` | 0 | 200 | 21/30/9 | 23/14/13 | mpt-psg-b24 |
-| 36 (46) | `e7bdeefd1e3b0ffe` | 0 | 200 | 21/30/9 | 17/15/18 | mpt-psg-b20 |
-| 37 (47) | `15231b0424a46e50` | 0 | 200 | 21/30/9 | 22/12/16 | mpt-psg-b16 |
+| 1 (11) | `8f67792414c4f9a5` | 17 | 183 | 16/35/9 | 18/13/19 | mpt-psg-a07 |
+| 2 (12) | `0543a0de2969f20f` | 27 | 173 | 17/34/9 | 20/11/19 | mpt-psg-a08 |
+| 3 (13) | `7e0c866e61f4cd18` | 15 | 185 | 17/34/9 | 19/12/19 | mpt-psg-a09 |
+| 4 (14) | `6ff0842a53a3c44c` | 24 | 176 | 20/31/9 | 19/11/20 | mpt-psg-a10 |
+| 5 (15) | `c879bd5eb1da5cb1` | 18 | 182 | 16/35/9 | 19/12/19 | mpt-psg-a11 |
+| 6 (16) | `f48a224f1f9506fd` | 21 | 179 | 16/35/9 | 20/11/19 | mpt-psg-a12 |
+| 7 (17) | `95dcc40f92c95e36` | 11 | 189 | 16/35/9 | 20/12/18 | mpt-psg-a13 |
+| 8 (18) | `1b9c35b31b385089` | 20 | 180 | 16/35/9 | 19/10/21 | mpt-psg-a14 |
+| 9 (19) | `f7641e5d00e2123d` | 16 | 184 | 17/34/9 | 18/12/20 | mpt-psg-a15 |
+| 10 (20) | `c85521b818d835d7` | 23 | 177 | 19/32/9 | 20/12/18 | mpt-psg-a16 |
+| 11 (21) | `0cd39a568436de1e` | 16 | 184 | 18/33/9 | 18/12/20 | mpt-psg-a17 |
+| 12 (22) | `1ab867005a59164d` | 17 | 183 | 18/33/9 | 18/13/19 | mpt-psg-a18 |
+| 13 (23) | `1d02cdac51623752` | 12 | 188 | 19/32/9 | 18/13/19 | mpt-psg-a19 |
+| 14 (24) | `4b565539ed8a20bc` | 16 | 184 | 20/31/9 | 17/12/21 | mpt-psg-a20 |
+| 15 (25) | `669cff35373cc856` | 15 | 185 | 20/31/9 | 17/12/21 | mpt-psg-a21 |
+| 16 (26) | `6d349185549f4f5f` | 15 | 185 | 19/32/9 | 17/12/21 | mpt-psg-a22 |
+| 17 (27) | `a955b58618eb95e6` | 12 | 188 | 18/33/9 | 18/12/20 | mpt-psg-a23 |
+| 18 (28) | `b03aab7b55e60618` | 15 | 185 | 18/33/9 | 21/11/18 | mpt-psg-a24 |
+| 19 (29) | `8c27d83adf50022b` | 17 | 183 | 15/36/9 | 20/11/19 | mpt-psg-b01 |
+| 20 (30) | `46c1411d1b91e58c` | 20 | 180 | 17/34/9 | 25/9/16 | mpt-psg-b02 |
+| 21 (31) | `99462ba2e1eb2a64` | 14 | 186 | 18/33/9 | 24/9/17 | mpt-psg-b03 |
+| 22 (32) | `c61bcec93abe7da1` | 18 | 182 | 17/34/9 | 24/10/16 | mpt-psg-b04 |
+| 23 (33) | `489fd83716d7e5c9` | 11 | 189 | 16/35/9 | 22/10/18 | mpt-psg-b05 |
+| 24 (34) | `c7ddd70b01ea6627` | 21 | 179 | 17/30/9 | 23/9/18 | mpt-psg-b06 |
+| 25 (35) | `439d14f30c0108b9` | 15 | 185 | 18/33/9 | 22/10/18 | mpt-psg-b07 |
+| 26 (36) | `33c30528ffca2370` | 16 | 184 | 21/30/9 | 21/11/18 | mpt-psg-b08 |
+| 27 (37) | `87925a38464cddfb` | 21 | 179 | 21/30/9 | 22/10/18 | mpt-psg-b09 |
+| 28 (38) | `1061afcfd35b825a` | 17 | 183 | 16/35/9 | 22/9/19 | mpt-psg-b10 |
+| 29 (39) | `ff3a44228b6d74b5` | 17 | 183 | 21/30/9 | 23/10/17 | mpt-psg-b11 |
+| 30 (40) | `a6f997a8de39f44c` | 30 | 170 | 17/34/9 | 22/10/18 | mpt-psg-b12 |
+| 31 (41) | `b6320ee35cfb1d98` | 0 | 200 | 15/36/9 | 8/23/19 | mpt-psg-b23 |
+| 32 (42) | `ab3e33a295664a0b` | 0 | 200 | 15/36/9 | 7/23/20 | mpt-psg-b18 |
+| 33 (43) | `27bfab97b8ec8a94` | 0 | 200 | 18/33/9 | 13/18/19 | mpt-psg-b17 |
+| 34 (44) | `7bc33fc4b910fbd7` | 0 | 200 | 15/36/9 | 24/14/12 | mpt-psg-b22 |
+| 35 (45) | `88c83043b06e3bae` | 0 | 200 | 21/30/9 | 23/14/13 | mpt-psg-b24 |
+| 36 (46) | `78008a701aae4f1d` | 0 | 200 | 21/30/9 | 17/15/18 | mpt-psg-b20 |
+| 37 (47) | `4a0c012035c84c48` | 0 | 200 | 21/30/9 | 22/12/16 | mpt-psg-b16 |

@@ -273,13 +273,13 @@ function mpt_register_manifest_release(PDO $pdo): ?array
     return $manifest;
 }
 
-/** Order-sensitive fingerprint of a frozen paper: question ids, options and keys. */
+/** Order-sensitive identity includes wording and explanations as well as ids and keys. */
 function mpt_frozen_paper(PDO $pdo, string $mockId): array
 {
     $stmt = $pdo->prepare('SELECT position,question_id,section,topic,difficulty,stem,options,correct_index,explanation FROM mpt_mock_questions WHERE mock_id=? ORDER BY position');
     $stmt->execute([$mockId]);
     $rows = $stmt->fetchAll();
-    $shape = array_map(static fn($r) => [(string)$r['question_id'], json_decode((string)$r['options'], true), (int)$r['correct_index']], $rows);
+    $shape = array_map(static fn($r) => [(string)$r['question_id'], (string)$r['stem'], json_decode((string)$r['options'], true), (int)$r['correct_index'], (string)($r['explanation'] ?? '')], $rows);
     return ['rows' => $rows, 'fingerprint' => hash('sha256', json_encode($shape, JSON_UNESCAPED_UNICODE))];
 }
 

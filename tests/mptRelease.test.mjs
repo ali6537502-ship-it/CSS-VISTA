@@ -2,8 +2,8 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { isDeepStrictEqual } from 'node:util'
-import { loadReviewedBank, buildRelease, readCheckedInRelease, resolveRelease, auditResolved, seriesHash, heldBankIds, loadLiveReview } from '../scripts/mpt/release-lib.mjs'
-import { loadLiveSeries, challengingLimit } from '../scripts/mpt/repair-live-series.mjs'
+import { loadReviewedBank, buildRelease, readCheckedInRelease, resolveRelease, auditResolved, seriesHash, answerLayoutHash, heldBankIds, loadLiveReview } from '../scripts/mpt/release-lib.mjs'
+import { loadLiveSeries, challengingLimit, resolveRepairedPaper } from '../scripts/mpt/repair-live-series.mjs'
 import { liveDefects } from '../scripts/mpt/live-review-rules.mjs'
 import { loadServedArchive, stemHash } from '../scripts/mpt/served-archive.mjs'
 import { canonical } from '../scripts/mpt/bank-lib.mjs'
@@ -12,6 +12,8 @@ import { MPT_BROAD_STRUCTURE, MPT_OFFICIAL_HEADINGS } from '../src/data/mpt/blue
 import { MPT_SUBTOPICS, MPT_SECTION_ORDER } from '../src/data/mpt/taxonomy.ts'
 import { MPT_PATTERN_PROFILE } from '../src/data/mpt/patternProfile.ts'
 import { RELEASE } from '../scripts/mpt/release-config.mjs'
+import { CLARIFICATIONS } from '../scripts/mpt/clarifications.mjs'
+import { checkCategorical, checkSeating, auditReasoning } from '../scripts/mpt/reasoning-audit.mjs'
 
 const { bank, problems } = loadReviewedBank()
 const release = readCheckedInRelease()
@@ -40,9 +42,10 @@ test('the repaired series gains exactly seven reserve papers', () => {
   release.papers.forEach((p, i) => assert.equal(p.origin.paper, RELEASE.firstLivePaper + i))
 })
 
-test('existing papers remain identical and the seven additions use existing bank items', () => {
+test('allocation remains unchanged and the seven additions use existing bank items', () => {
   const baselineCount = RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1
-  assert.equal(seriesHash(resolved.slice(0, baselineCount)), RELEASE.baselineSeries)
+  const original = release.papers.slice(0, baselineCount).map((p) => resolveRepairedPaper(p, bank, release.kept))
+  assert.equal(answerLayoutHash(original), RELEASE.baselineSeries)
   for (const paper of release.papers.slice(baselineCount)) {
     assert.equal(paper.questions.length, 200)
     assert.ok(paper.questions.every((q) => q.src === 'bank' && !q.replaces))
@@ -57,15 +60,20 @@ test('every repaired paper passes every paper-level and series-level gate', () =
   for (const paper of resolved) assert.equal(paper.length, 200)
 })
 
-test('kept questions are the live questions verbatim, in their own paper, and defect-free', () => {
+test('legacy questions retain their source, with only explicit reviewed edits to upcoming papers', () => {
   release.papers.slice(0, RELEASE.lastLivePaper - RELEASE.firstLivePaper + 1).forEach((paper, i) => {
     const livePaper = live.papers[paper.origin.paper - 1]
     const liveIds = new Map(livePaper.questions.map((q) => [q.id, q]))
     for (const s of paper.questions.filter((x) => x.src === 'live')) {
       const original = liveIds.get(s.id)
       assert.ok(original, `${s.id} is not in live paper ${paper.origin.paper}`)
+      const edit = CLARIFICATIONS.edits.find((e) => e.id === s.id)
+      if (edit?.replacement) {
+        assert.ok(resolved[i].some((q) => q.id === edit.replacement.id), s.id)
+        continue
+      }
       const out = resolved[i].find((q) => q.id === s.id)
-      assert.equal(out.q, original.q)
+      assert.equal(out.q, edit?.after ?? original.q)
       assert.deepEqual(out.o, original.o)
       assert.equal(out.a, original.a)
       assert.deepEqual(liveDefects({ ...original }, { servedStems: new Set(), seenStems: new Set(), gaTemplates: new Set() }), [], s.id)
@@ -107,6 +115,42 @@ test('every kept live question was read and passed by the editor review and is e
     assert.ok(q.e.trim().length >= 12, `${q.id} has no explanation`)
   }
   for (const id of Object.keys(review.reject)) assert.equal(release.kept[id], undefined, `${id} was rejected but is still kept`)
+})
+
+test('the content review preserves all papers through running Mock 17 and never invents replacements', () => {
+  const edits = new Map(CLARIFICATIONS.edits.map((e) => [e.id, e]))
+  assert.equal(edits.size, CLARIFICATIONS.edits.length)
+  for (let i = 0; i < 7; i++) assert.ok(resolved[i].every((q) => !edits.has(q.id)))
+  const ids = new Set(resolved.flat().map((q) => q.id))
+  for (const edit of edits.values()) {
+    assert.ok(edit.mock >= 18)
+    if (edit.replacement) {
+      assert.equal(ids.has(edit.id), false)
+      assert.equal(ids.has(edit.replacement.id), true)
+      assert.ok(bank.questions.some((q) => q.id === edit.replacement.id))
+    }
+  }
+  assert.equal(resolved.slice(7).flat().some((q) => q.id.startsWith('mpt-urdu-advanced-translation-')), false)
+})
+
+test('upcoming categorical and seating answers are independently entailed by their displayed text', () => {
+  const report = auditReasoning(resolved)
+  assert.deepEqual(report.failures, [])
+  assert.ok(report.checked.categorical > 50 && report.checked.seating > 50)
+  const syllogism = resolved.flat().find((q) => q.id === 'mpt-ga-d-0498')
+  assert.deepEqual(checkCategorical(syllogism).valid, [syllogism.a])
+  const ambiguous = { ...syllogism, q: syllogism.q.replace(/^Assume every named category has at least one member\. /, '') }
+  assert.ok(checkCategorical(ambiguous).valid.length !== 1, 'empty categories expose the original ambiguity')
+  const seat = resolved.flat().find((q) => q.id === 'mpt-ga-d-0410')
+  assert.deepEqual(checkSeating(seat).valid, [seat.a])
+  const underdetermined = { ...seat, q: seat.q.replace('Danish and Gul are not neighbours; ', '') }
+  assert.deepEqual(checkSeating(underdetermined).valid, [], 'all permitted arrangements, not one convenient example, must agree')
+})
+
+test('release identity changes if wording or explanation changes without a new answer key', () => {
+  const q = resolved[30][0]
+  assert.notEqual(seriesHash([[q]]), seriesHash([[{ ...q, q: q.q + ' Extra premise.' }]]))
+  assert.notEqual(seriesHash([[q]]), seriesHash([[{ ...q, e: q.e + ' Revised explanation.' }]]))
 })
 
 test('every bank answer matches the verified bank and every bank item is explained', () => {

@@ -1,14 +1,14 @@
 // Identity of the current editorial release of the official MPT series.
 export const RELEASE = {
   /** Increment when a new editorial standard supersedes earlier papers. */
-  editorialRelease: 7,
+  editorialRelease: 8,
   /** Papers frozen from any series registered below this release are replaced if their mock has not started. */
-  replaceUnstartedBelowRelease: 6,
+  replaceUnstartedBelowRelease: 8,
   /**
-   * Preserve the 30 repaired papers from release 6 (Mocks 11–40), including any
-   * already sat by 3 October. Append seven reserve papers without repeating any
-   * allocated or historical question. The 47-mock schedule has three sittings a
-   * day at 14:00, 18:00 and 22:30 PKT; held mocks remain untouched.
+   * Retain the release-6 selection baseline and the seven reserve allocations.
+   * Release 8 applies explicit content-review corrections only from Mock 18
+   * onward. The server preserves every running, held, attempted or near-start
+   * paper. The 47-mock schedule runs at 14:00, 18:00 and 22:30 PKT.
    */
   papers: 37,
   additionalPapers: 7,

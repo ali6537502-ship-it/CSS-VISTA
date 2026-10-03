@@ -1,0 +1,2217 @@
+{
+  "release": 8,
+  "review_date": "2026-10-03",
+  "base_series": "57d18c763f20c220",
+  "first_eligible_mock": 18,
+  "edits": [
+    {
+      "id": "mpt-ga-d-0109",
+      "mock": 18,
+      "before": "T is U's mother, S is the father of U and V is S's daughter. S is T's:",
+      "after": "T is U's mother, S is the father of U and V is S's daughter. S is T's: Assume full siblings and parents married to each other.",
+      "answer": "Husband",
+      "explanation": "Linking the statements: T is U's mother; S is U's father; V is S's daughter. Hence S is T's husband.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0467",
+      "mock": 18,
+      "before": "Statements: I. All players are coaches. II. All coaches are umpires. Which conclusion definitely follows from the statements?",
+      "after": "Assume every named category has at least one member. Statements: I. All players are coaches. II. All coaches are umpires. Which conclusion definitely follows from the statements?",
+      "answer": "Some umpires are players",
+      "explanation": "Some umpires are players holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0448",
+      "mock": 18,
+      "before": "(i) All painters are poets. (ii) All poets are dancers. (iii) Some painters are not dancers. (iv) No dancers are poets. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) All painters are poets. (ii) All poets are dancers. (iii) Some painters are not dancers. (iv) No dancers are poets. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is false and (iv) is false",
+      "explanation": "Checking every Venn diagram allowed by the statements: Some painters are not dancers is contradicted by the statements; No dancers are poets is contradicted by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0390",
+      "mock": 18,
+      "before": "D, E, C, A and B are sitting around a circular table facing away from the centre. D sits immediately to the right of A; E sits between C and B; B is to the immediate right of E. What is the position of A with respect to C?",
+      "after": "D, E, C, A and B are sitting around a circular table facing away from the centre. D sits immediately to the right of A; E sits immediately between C and B; B is to the immediate right of E. What is the position of A with respect to C?",
+      "answer": "Second to the left",
+      "explanation": "Facing outward, a person's right is clockwise as seen from above. The only arrangement that fits is D, A, B, E, C (anticlockwise as seen from above). Hence the answer is Second to the left.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0197",
+      "mock": 18,
+      "before": "Grandfather Rahim and his wife have four sons, and each son has two sisters. All the sons are married and live with their wives in the same house. How many female members are there in the family?",
+      "after": "Grandfather Rahim and his wife have four sons, and each son has two sisters. All the sons are married and live with their wives in the same house. How many female members are there in the family? Count only the family members described.",
+      "answer": "7",
+      "explanation": "The family has 2 parents, 4 sons and 2 daughters, 4 daughters-in-law: 12 people, of whom 7 are female and 5 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0126",
+      "mock": 19,
+      "before": "S is T's father, T is the daughter of P, Q is P's father and Q is the father of R. How is Q related to S?",
+      "after": "S is T's father, T is the daughter of P, Q is P's father and Q is the father of R. How is Q related to S? Assume full siblings and parents married to each other.",
+      "answer": "Father-in-law",
+      "explanation": "Linking the statements: S is T's father; T is P's daughter; Q is P's father; Q is R's father. Hence Q is S's father-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0485",
+      "mock": 19,
+      "before": "Statements: I. All mangoes are apples. II. Some apples are guavas. Which conclusion definitely follows from the statements?",
+      "after": "Assume every named category has at least one member. Statements: I. All mangoes are apples. II. Some apples are guavas. Which conclusion definitely follows from the statements?",
+      "answer": "Some mangoes are apples",
+      "explanation": "Some mangoes are apples holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0496",
+      "mock": 19,
+      "before": "Statements: I. Some balloons are kites. II. All balloons are toys. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some balloons are kites. II. All balloons are toys. Which of the following conclusions does NOT follow?",
+      "answer": "All toys are kites",
+      "explanation": "All toys are kites is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0106",
+      "mock": 20,
+      "before": "L is the daughter of M and K is the father of L. K is M's:",
+      "after": "L is the daughter of M and K is the father of L. K is M's: Assume full siblings and parents married to each other.",
+      "answer": "Husband",
+      "explanation": "Linking the statements: L is M's daughter; K is L's father. Hence K is M's husband.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0488",
+      "mock": 20,
+      "before": "Statements: I. No mangoes are apples. II. All apples are guavas. III. All guavas are oranges. If the statements are true, which conclusion must also be true?",
+      "after": "Assume every named category has at least one member. Statements: I. No mangoes are apples. II. All apples are guavas. III. All guavas are oranges. If the statements are true, which conclusion must also be true?",
+      "answer": "Some apples are guavas",
+      "explanation": "Some apples are guavas holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0171",
+      "mock": 20,
+      "before": "If ‘X + Y’ stands for X is the father of Y; ‘X − Y’ stands for X is the sister of Y; ‘X × Y’ stands for X is the son of Y; ‘X ÷ Y’ stands for X is the daughter of Y, then in ‘S ÷ U − T + V’, how is S related to V?",
+      "after": "If ‘X + Y’ stands for X is the father of Y; ‘X − Y’ stands for X is the sister of Y; ‘X × Y’ stands for X is the son of Y; ‘X ÷ Y’ stands for X is the daughter of Y, then in ‘S ÷ U − T + V’, how is S related to V? Assume full siblings and parents married to each other.",
+      "answer": "Cousin",
+      "explanation": "S is the daughter of U; U is the sister of T; T is the father of V; hence S is V's cousin.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0179",
+      "mock": 20,
+      "before": "How is Shahid's sister's husband related to Shahid?",
+      "after": "How is Shahid's sister's husband related to Shahid? Assume full siblings and parents married to each other.",
+      "answer": "Brother-in-law",
+      "explanation": "Work outwards from Shahid: sister → husband; that person is Shahid's brother-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0117",
+      "mock": 21,
+      "before": "Sana is the daughter of Rizwan, Sana's brother is Kamran and Rizwan's brother is Farhan. How is Farhan related to Sana?",
+      "after": "Sana is the daughter of Rizwan, Sana's brother is Kamran and Rizwan's brother is Farhan. How is Farhan related to Sana? Assume full siblings and parents married to each other.",
+      "answer": "Uncle",
+      "explanation": "Linking the statements: Sana is Rizwan's daughter; Kamran is Sana's brother; Farhan is Rizwan's brother. Hence Farhan is Sana's uncle.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0502",
+      "mock": 21,
+      "before": "Statements: I. Some cars are not buses. II. All buses are vans. III. All vans are trucks. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some cars are not buses. II. All buses are vans. III. All vans are trucks. Which of the following conclusions does NOT follow?",
+      "answer": "No vans are cars",
+      "explanation": "No vans are cars is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0489",
+      "mock": 21,
+      "before": "Statements: I. Some athletes are students. II. All athletes are swimmers. III. Some swimmers are not cyclists. If the statements are true, which conclusion must also be true?",
+      "after": "Assume every named category has at least one member. Statements: I. Some athletes are students. II. All athletes are swimmers. III. Some swimmers are not cyclists. If the statements are true, which conclusion must also be true?",
+      "answer": "Some swimmers are students",
+      "explanation": "Some swimmers are students holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0111",
+      "mock": 22,
+      "before": "Julia is the daughter of Sohail, Julia is the daughter of Iqra and Danish's daughter is Iqra. How is Julia related to Danish?",
+      "after": "Julia is the daughter of Sohail, Julia is the daughter of Iqra and Danish's daughter is Iqra. How is Julia related to Danish? Assume full siblings and parents married to each other.",
+      "answer": "Granddaughter",
+      "explanation": "Linking the statements: Julia is Sohail's daughter; Julia is Iqra's daughter; Iqra is Danish's daughter. Hence Julia is Danish's granddaughter.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0445",
+      "mock": 22,
+      "before": "(i) No boxes are cartons. (ii) All cartons are crates. (iii) No crates are cartons. (iv) Some boxes are not cartons. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) No boxes are cartons. (ii) All cartons are crates. (iii) No crates are cartons. (iv) Some boxes are not cartons. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is false and (iv) is true",
+      "explanation": "Checking every Venn diagram allowed by the statements: No crates are cartons is contradicted by the statements; Some boxes are not cartons is forced by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0531",
+      "mock": 22,
+      "before": "If it is true that all engineers are lawyers and all lawyers are bankers, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that all engineers are lawyers and all lawyers are bankers, which of the following must be false?",
+      "answer": "Some engineers are not bankers",
+      "explanation": "No diagram consistent with the statements allows “Some engineers are not bankers”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0196",
+      "mock": 22,
+      "before": "Grandfather Rahim and his wife have four sons, and each son has two sisters. How many male members does the family have?",
+      "after": "Grandfather Rahim and his wife have four sons, and each son has two sisters. How many male members does the family have? Count only the family members described.",
+      "answer": "5",
+      "explanation": "The family has 2 parents, 4 sons and 2 daughters: 8 people, of whom 3 are female and 5 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0472",
+      "mock": 22,
+      "before": "Statements: I. Some apples are mangoes. II. All apples are guavas. Which conclusion definitely follows from the statements?",
+      "after": "Assume every named category has at least one member. Statements: I. Some apples are mangoes. II. All apples are guavas. Which conclusion definitely follows from the statements?",
+      "answer": "Some mangoes are apples",
+      "explanation": "Some mangoes are apples holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0165",
+      "mock": 23,
+      "before": "If ‘X * Y’ means X is the son of Y; ‘X & Y’ means X is the daughter of Y; ‘X @ Y’ means X is the father of Y; ‘X # Y’ means X is the sister of Y, then in ‘J & L & K & M’, how is J related to M?",
+      "after": "If ‘X * Y’ means X is the son of Y; ‘X & Y’ means X is the daughter of Y; ‘X @ Y’ means X is the father of Y; ‘X # Y’ means X is the sister of Y, then in ‘J & L & K & M’, how is J related to M? Assume full siblings and parents married to each other.",
+      "answer": "Great-granddaughter",
+      "explanation": "J is the daughter of L; L is the daughter of K; K is the daughter of M; hence J is M's great-granddaughter.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0113",
+      "mock": 23,
+      "before": "Emma is the sister of Danish, Danish is the father of Farah and Rida is the sister of Emma. What is Danish to Rida?",
+      "after": "Emma is the sister of Danish, Danish is the father of Farah and Rida is the sister of Emma. What is Danish to Rida? Assume full siblings and parents married to each other.",
+      "answer": "Brother",
+      "explanation": "Linking the statements: Emma is Danish's sister; Danish is Farah's father; Rida is Emma's sister. Hence Danish is Rida's brother.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0188",
+      "mock": 23,
+      "before": "Hina is the mother of Lucy's brother's mother. How is Hina related to Lucy?",
+      "after": "Hina is the mother of Lucy's brother's mother. How is Hina related to Lucy? Assume full siblings and parents married to each other.",
+      "answer": "Maternal grandmother",
+      "explanation": "Work outwards from Lucy: brother → mother → mother; that person is Lucy's maternal grandmother.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0123",
+      "mock": 24,
+      "before": "P is the son of M, K's father is P, N's brother is K and L is the brother of N. How is P related to L?",
+      "after": "P is the son of M, K's father is P, N's brother is K and L is the brother of N. How is P related to L? Assume full siblings and parents married to each other.",
+      "answer": "Father",
+      "explanation": "Linking the statements: P is M's son; P is K's father; K is N's brother; L is N's brother. Hence P is L's father.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0528",
+      "mock": 24,
+      "before": "If it is true that all mangoes are apples and all apples are guavas, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that all mangoes are apples and all apples are guavas, which of the following must be false?",
+      "answer": "Some mangoes are not guavas",
+      "explanation": "No diagram consistent with the statements allows “Some mangoes are not guavas”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0206",
+      "mock": 24,
+      "before": "A man and his wife have two sons, and each son has two sisters. All the sons are married and live with their wives in the same house. Each married son has one son and one daughter. How many grandchildren do the couple have?",
+      "after": "A man and his wife have two sons, and each son has two sisters. All the sons are married and live with their wives in the same house. Each married son has one son and one daughter. How many grandchildren do the couple have? Count only the family members described.",
+      "answer": "4",
+      "explanation": "The family has 2 parents, 2 sons and 2 daughters, 2 daughters-in-law and 4 grandchildren: 12 people, of whom 7 are female and 5 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0414",
+      "mock": 24,
+      "before": "At a family dinner, S, W, X, T, V and U sit around a round table facing the centre. W sits opposite U; X sits between S and W; W is to the immediate left of V. Who sits opposite T?",
+      "after": "At a family dinner, S, W, X, T, V and U sit around a round table facing the centre. W sits opposite U; X sits immediately between S and W; W is to the immediate left of V. Who sits opposite T?",
+      "answer": "X",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. The only arrangement that fits is S, X, W, V, T, U (anticlockwise as seen from above). Hence the answer is X.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0185",
+      "mock": 25,
+      "before": "How is Usman's mother's father's mother related to Usman?",
+      "after": "How is Usman's mother's father's mother related to Usman? Assume full siblings and parents married to each other.",
+      "answer": "Great-grandmother",
+      "explanation": "Work outwards from Usman: mother → father → mother; that person is Usman's great-grandmother.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0378",
+      "mock": 25,
+      "before": "At a family dinner, Imran, Noman, Rizwan, Zubair and Hina sit around a round table facing the centre. Zubair is second to the right of Rizwan; Zubair sits between Noman and Hina; Rizwan sits next to Hina. Who is second to the left of Rizwan?",
+      "after": "At a family dinner, Imran, Noman, Rizwan, Zubair and Hina sit around a round table facing the centre. Zubair is second to the right of Rizwan; Zubair sits immediately between Noman and Hina; Rizwan sits next to Hina. Who is second to the left of Rizwan?",
+      "answer": "Noman",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. The only arrangement that fits is Imran, Rizwan, Hina, Zubair, Noman (anticlockwise as seen from above). Hence the answer is Noman.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0493",
+      "mock": 25,
+      "before": "Statements: I. Some files are folders. II. All folders are reports. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some files are folders. II. All folders are reports. Which of the following conclusions does NOT follow?",
+      "answer": "Some reports are not files",
+      "explanation": "Some reports are not files is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0401",
+      "mock": 25,
+      "before": "For a team photograph, Hira, Moiz, Aliya, Wajiha, Nabeel and Badar stand in a line facing south. Badar sits between Hira and Moiz; Wajiha is second to the right of Aliya; Hira does not sit next to Aliya; Nabeel sits somewhere to the right of Badar. What is the position of Hira with respect to Aliya?",
+      "after": "For a team photograph, Hira, Moiz, Aliya, Wajiha, Nabeel and Badar stand in a line facing south. Badar sits immediately between Hira and Moiz; Wajiha is second to the right of Aliya; Hira does not sit next to Aliya; Nabeel sits somewhere to the right of Badar. What is the position of Hira with respect to Aliya?",
+      "answer": "Third to the left",
+      "explanation": "Facing south, each person’s left is towards the east. The only arrangement that fits is Wajiha, Nabeel, Aliya, Moiz, Badar, Hira (west to east). Hence the answer is Third to the left.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0163",
+      "mock": 26,
+      "before": "If ‘X @ Y’ stands for X is the brother of Y; ‘X # Y’ stands for X is the father of Y; ‘X $ Y’ stands for X is the son of Y; ‘X % Y’ stands for X is the mother of Y, then in ‘P % R % S # Q’, how is P related to Q?",
+      "after": "If ‘X @ Y’ stands for X is the brother of Y; ‘X # Y’ stands for X is the father of Y; ‘X $ Y’ stands for X is the son of Y; ‘X % Y’ stands for X is the mother of Y, then in ‘P % R % S # Q’, how is P related to Q? Assume full siblings and parents married to each other.",
+      "answer": "Great-grandmother",
+      "explanation": "P is the mother of R; R is the mother of S; S is the father of Q; hence P is Q's great-grandmother.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0471",
+      "mock": 26,
+      "before": "Statements: I. Some officers are managers. II. All managers are auditors. Which of the following conclusions follows logically?",
+      "after": "Assume every named category has at least one member. Statements: I. Some officers are managers. II. All managers are auditors. Which of the following conclusions follows logically?",
+      "answer": "Some auditors are managers",
+      "explanation": "Some auditors are managers holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0450",
+      "mock": 26,
+      "before": "(i) Some lilies are roses. (ii) All lilies are tulips. (iii) All roses are lilies. (iv) Some lilies are tulips. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) Some lilies are roses. (ii) All lilies are tulips. (iii) All roses are lilies. (iv) Some lilies are tulips. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is uncertain and (iv) is true",
+      "explanation": "Checking every Venn diagram allowed by the statements: All roses are lilies is possible but not forced; Some lilies are tulips is forced by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0527",
+      "mock": 27,
+      "before": "If it is true that some athletes are students and all athletes are swimmers, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that some athletes are students and all athletes are swimmers, which of the following must be false?",
+      "answer": "Some athletes are not swimmers",
+      "explanation": "No diagram consistent with the statements allows “Some athletes are not swimmers”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0204",
+      "mock": 27,
+      "before": "A man and his wife have three daughters, and each daughter has four brothers. All the sons except one are married, and the wives live in the same house. Each married son has three sons. How many members are there in the family?",
+      "after": "A man and his wife have three daughters, and each daughter has four brothers. All the sons except one are married, and the wives live in the same house. Each married son has three sons. How many members are there in the family? Count only the family members described.",
+      "answer": "21",
+      "explanation": "The family has 2 parents, 4 sons and 3 daughters, 3 daughters-in-law and 9 grandchildren: 21 people, of whom 7 are female and 14 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0501",
+      "mock": 27,
+      "before": "Statements: I. Some doctors are teachers. II. All teachers are singers. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some doctors are teachers. II. All teachers are singers. Which of the following conclusions does NOT follow?",
+      "answer": "All doctors are singers",
+      "explanation": "All doctors are singers is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0454",
+      "mock": 27,
+      "before": "(i) Some athletes are students. (ii) Some athletes are swimmers. (iii) No athletes are swimmers. (iv) No swimmers are athletes. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) Some athletes are students. (ii) Some athletes are swimmers. (iii) No athletes are swimmers. (iv) No swimmers are athletes. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is false and (iv) is false",
+      "explanation": "Checking every Venn diagram allowed by the statements: No athletes are swimmers is contradicted by the statements; No swimmers are athletes is contradicted by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0128",
+      "mock": 27,
+      "before": "S's brother is Q, T is S's son, R is Q's brother and P's brother is R. What is T to P?",
+      "after": "S's brother is Q, T is S's son, R is Q's brother and P's brother is R. What is T to P? Assume full siblings and parents married to each other.",
+      "answer": "Nephew",
+      "explanation": "Linking the statements: Q is S's brother; T is S's son; R is Q's brother; R is P's brother. Hence T is P's nephew.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0388",
+      "mock": 27,
+      "before": "Six guards, Anam, Emad, Farah, Peter, Nabeel and Badar, stand in a circle facing outward. Peter is third to the right of Farah; Anam is second to the right of Farah; Farah sits between Emad and Nabeel. Who is second to the left of Farah?",
+      "after": "Six guards, Anam, Emad, Farah, Peter, Nabeel and Badar, stand in a circle facing outward. Peter is third to the right of Farah; Anam is second to the right of Farah; Farah sits immediately between Emad and Nabeel. Who is second to the left of Farah?",
+      "answer": "Badar",
+      "explanation": "Facing outward, a person's right is clockwise as seen from above. 2 arrangements fit (for example Anam, Emad, Farah, Nabeel, Badar, Peter (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Badar.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0156",
+      "mock": 28,
+      "before": "If ‘X * Y’ indicates X is the mother of Y; ‘X & Y’ indicates X is the brother of Y; ‘X @ Y’ indicates X is the father of Y; ‘X # Y’ indicates X is the wife of Y, then in ‘Q @ S # R’, how is Q related to R?",
+      "after": "If ‘X * Y’ indicates X is the mother of Y; ‘X & Y’ indicates X is the brother of Y; ‘X @ Y’ indicates X is the father of Y; ‘X # Y’ indicates X is the wife of Y, then in ‘Q @ S # R’, how is Q related to R? Assume full siblings and parents married to each other.",
+      "answer": "Father-in-law",
+      "explanation": "Q is the father of S; S is the wife of R; hence Q is R's father-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0484",
+      "mock": 28,
+      "before": "Statements: I. Some cars are buses. II. No buses are vans. Which of the following conclusions follows logically?",
+      "after": "Assume every named category has at least one member. Statements: I. Some cars are buses. II. No buses are vans. Which of the following conclusions follows logically?",
+      "answer": "Some cars are not vans",
+      "explanation": "Some cars are not vans holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0500",
+      "mock": 29,
+      "before": "Statements: I. Some cartons are boxes. II. All cartons are crates. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some cartons are boxes. II. All cartons are crates. Which of the following conclusions does NOT follow?",
+      "answer": "Some boxes are not crates",
+      "explanation": "Some boxes are not crates is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0400",
+      "mock": 29,
+      "before": "Five panellists, N, L, K, P and M, sit in a row on a stage facing south towards the audience. P is seated between N and M; N is second to the left of M. What is the position of M with respect to P?",
+      "after": "Five panellists, N, L, K, P and M, sit in a row on a stage facing south towards the audience. P is seated immediately between N and M; N is second to the left of M. What is the position of M with respect to P?",
+      "answer": "Immediately to the right",
+      "explanation": "Facing south, each person’s left is towards the east. 6 arrangements fit (for example M, P, N, L, K (west to east)) and all give the same answer. Hence the answer is Immediately to the right.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0419",
+      "mock": 29,
+      "before": "At a family dinner, S, U, P, T, R and Q sit around a round table facing the centre. T is not opposite Q; Q sits between S and P; T is to the immediate right of R; Q is to the immediate right of P. Who sits opposite U?",
+      "after": "At a family dinner, S, U, P, T, R and Q sit around a round table facing the centre. T is not opposite Q; Q sits immediately between S and P; T is to the immediate right of R; Q is to the immediate right of P. Who sits opposite U?",
+      "answer": "P",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. The only arrangement that fits is S, U, R, T, P, Q (anticlockwise as seen from above). Hence the answer is P.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0533",
+      "mock": 29,
+      "before": "If it is true that no students are athletes and all athletes are swimmers, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that no students are athletes and all athletes are swimmers, which of the following must be false?",
+      "answer": "All swimmers are students",
+      "explanation": "No diagram consistent with the statements allows “All swimmers are students”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0205",
+      "mock": 29,
+      "before": "Mr and Mrs Qureshi have two sons and two daughters. All the sons are married and live with their wives in the same house. Each married son has two sons and one daughter. How many male members does the family have?",
+      "after": "Mr and Mrs Qureshi have two sons and two daughters. All the sons are married and live with their wives in the same house. Each married son has two sons and one daughter. How many male members does the family have? Count only the family members described.",
+      "answer": "7",
+      "explanation": "The family has 2 parents, 2 sons and 2 daughters, 2 daughters-in-law and 6 grandchildren: 14 people, of whom 7 are female and 7 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0181",
+      "mock": 29,
+      "before": "Emma is Areeba's sister's mother's sister. What is Emma to Areeba?",
+      "after": "Emma is Areeba's sister's mother's sister. What is Emma to Areeba? Assume full siblings and parents married to each other.",
+      "answer": "Maternal aunt",
+      "explanation": "Work outwards from Areeba: sister → mother → sister; that person is Areeba's maternal aunt.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0352",
+      "mock": 30,
+      "before": "Five friends, Nida, Asad, Tariq, Zubair and Esha, are sitting in a row facing north. Tariq sits between Nida and Asad; Nida and Zubair sit side by side; Tariq sits somewhere to the left of Zubair. Who is second to the left of Nida?",
+      "after": "Five friends, Nida, Asad, Tariq, Zubair and Esha, are sitting in a row facing north. Tariq sits immediately between Nida and Asad; Nida and Zubair sit side by side; Tariq sits somewhere to the left of Zubair. Who is second to the left of Nida?",
+      "answer": "Asad",
+      "explanation": "Facing north, each person’s left is towards the west. 2 arrangements fit (for example Asad, Tariq, Nida, Zubair, Esha (west to east)) and all give the same answer. Hence the answer is Asad.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0463",
+      "mock": 31,
+      "before": "(i) No teachers are doctors. (ii) No singers are teachers. (iii) All singers are writers. (iv) All doctors are teachers. (v) Some singers are writers. If the first three statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) No teachers are doctors. (ii) No singers are teachers. (iii) All singers are writers. (iv) All doctors are teachers. (v) Some singers are writers. If the first three statements are true, which of the following is correct?",
+      "answer": "(iv) is false and (v) is true",
+      "explanation": "Checking every Venn diagram allowed by the statements: All doctors are teachers is contradicted by the statements; Some singers are writers is forced by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0412",
+      "mock": 31,
+      "before": "Six friends, V, T, S, W, X and U, sit around a circular table facing the centre. T sits between S and W; W is not opposite U; S and X are not neighbours. Who sits opposite W?",
+      "after": "Six friends, V, T, S, W, X and U, sit around a circular table facing the centre. T sits immediately between S and W; W is not opposite U; S and X are not neighbours. Who sits opposite W?",
+      "answer": "V",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. 4 arrangements fit (for example V, S, T, W, X, U (anticlockwise as seen from above)) and all give the same answer. Hence the answer is V.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0371",
+      "mock": 31,
+      "before": "Six friends, Maryam, Shahid, Dawood, Zainab, Farah and Irfan, sit around a circular table facing the centre. Shahid is third to the right of Zainab; Maryam sits between Shahid and Irfan; Shahid is seated between Maryam and Farah. What is the position of Dawood with respect to Maryam?",
+      "after": "Six friends, Maryam, Shahid, Dawood, Zainab, Farah and Irfan, sit around a circular table facing the centre. Shahid is third to the right of Zainab; Maryam sits immediately between Shahid and Irfan; Shahid is seated immediately between Maryam and Farah. What is the position of Dawood with respect to Maryam?",
+      "answer": "Opposite",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. 2 arrangements fit (for example Maryam, Shahid, Farah, Dawood, Zainab, Irfan (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Opposite.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0468",
+      "mock": 31,
+      "before": "Statements: I. All engineers are lawyers. II. Some lawyers are bankers. If the statements are true, which conclusion must also be true?",
+      "after": "Assume every named category has at least one member. Statements: I. All engineers are lawyers. II. Some lawyers are bankers. If the statements are true, which conclusion must also be true?",
+      "answer": "Some lawyers are engineers",
+      "explanation": "Some lawyers are engineers holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0155",
+      "mock": 31,
+      "before": "If ‘X + Y’ means X is the brother of Y; ‘X − Y’ means X is the husband of Y; ‘X × Y’ means X is the sister of Y; ‘X ÷ Y’ means X is the father of Y, then in ‘D ÷ C − B’, how is D related to B?",
+      "after": "If ‘X + Y’ means X is the brother of Y; ‘X − Y’ means X is the husband of Y; ‘X × Y’ means X is the sister of Y; ‘X ÷ Y’ means X is the father of Y, then in ‘D ÷ C − B’, how is D related to B? Assume full siblings and parents married to each other.",
+      "answer": "Father-in-law",
+      "explanation": "D is the father of C; C is the husband of B; hence D is B's father-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0200",
+      "mock": 31,
+      "before": "Mr and Mrs Qureshi have two sons and two daughters. All the sons except one are married, and the wives live in the same house. Each married son has one son and one daughter. How many members are there in the family?",
+      "after": "Mr and Mrs Qureshi have two sons and two daughters. All the sons except one are married, and the wives live in the same house. Each married son has one son and one daughter. How many members are there in the family? Count only the family members described.",
+      "answer": "9",
+      "explanation": "The family has 2 parents, 2 sons and 2 daughters, 1 daughter-in-law and 2 grandchildren: 9 people, of whom 5 are female and 4 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0491",
+      "mock": 32,
+      "before": "Statements: I. All officers are managers. II. All managers are auditors. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All officers are managers. II. All managers are auditors. Which of the following conclusions does NOT follow?",
+      "answer": "All managers are officers",
+      "explanation": "All managers are officers is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0530",
+      "mock": 32,
+      "before": "If it is true that all officers are managers and all managers are auditors, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that all officers are managers and all managers are auditors, which of the following must be false?",
+      "answer": "No officers are auditors",
+      "explanation": "No diagram consistent with the statements allows “No officers are auditors”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0358",
+      "mock": 32,
+      "before": "Noman, Hamza, Parveen, Emad, Vaneeza and Fatima are standing in a line facing north. Vaneeza is second to the left of Parveen; Parveen sits between Noman and Emad; Hamza is third to the left of Noman. What is the position of Fatima with respect to Noman?",
+      "after": "Noman, Hamza, Parveen, Emad, Vaneeza and Fatima are standing in a line facing north. Vaneeza is second to the left of Parveen; Parveen sits immediately between Noman and Emad; Hamza is third to the left of Noman. What is the position of Fatima with respect to Noman?",
+      "answer": "Second to the left",
+      "explanation": "Facing north, each person’s left is towards the west. The only arrangement that fits is Hamza, Fatima, Vaneeza, Noman, Parveen, Emad (west to east). Hence the answer is Second to the left.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0116",
+      "mock": 32,
+      "before": "Yusra's husband is Owais, Iqra is Owais's mother and Hina is Iqra's sister. Iqra is Yusra's:",
+      "after": "Yusra's husband is Owais, Iqra is Owais's mother and Hina is Iqra's sister. Iqra is Yusra's: Assume full siblings and parents married to each other.",
+      "answer": "Mother-in-law",
+      "explanation": "Linking the statements: Owais is Yusra's husband; Iqra is Owais's mother; Hina is Iqra's sister. Hence Iqra is Yusra's mother-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0189",
+      "mock": 33,
+      "before": "Rehan is Owais's brother's father's brother. What is Rehan to Owais?",
+      "after": "Rehan is Owais's brother's father's brother. What is Rehan to Owais? Assume full siblings and parents married to each other.",
+      "answer": "Paternal uncle",
+      "explanation": "Work outwards from Owais: brother → father → brother; that person is Owais's paternal uncle.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0474",
+      "mock": 33,
+      "before": "Statements: I. No coaches are players. II. All coaches are umpires. Which conclusion definitely follows from the statements?",
+      "after": "Assume every named category has at least one member. Statements: I. No coaches are players. II. All coaches are umpires. Which conclusion definitely follows from the statements?",
+      "answer": "Some umpires are not players",
+      "explanation": "Some umpires are not players holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0409",
+      "mock": 34,
+      "before": "Six friends, Zubair, Qasim, Emad, Talha, Yusra and Salma, sit around a circular table facing the centre. Emad is not opposite Talha; Talha does not sit next to Salma; Yusra sits between Qasim and Emad. Who sits opposite Talha?",
+      "after": "Six friends, Zubair, Qasim, Emad, Talha, Yusra and Salma, sit around a circular table facing the centre. Emad is not opposite Talha; Talha does not sit next to Salma; Yusra sits immediately between Qasim and Emad. Who sits opposite Talha?",
+      "answer": "Qasim",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. 2 arrangements fit (for example Zubair, Salma, Qasim, Yusra, Emad, Talha (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Qasim.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0406",
+      "mock": 34,
+      "before": "Salma, Rizwan, Zainab, Noman, Fatima and Laeeq are sitting in a row facing south. Rizwan does not sit next to Laeeq; Salma sits somewhere to the right of Noman; exactly one person sits between Fatima and Laeeq; Salma is seated between Zainab and Fatima. What is the position of Noman with respect to Laeeq?",
+      "after": "Salma, Rizwan, Zainab, Noman, Fatima and Laeeq are sitting in a row facing south. Rizwan does not sit next to Laeeq; Salma sits somewhere to the right of Noman; exactly one person sits between Fatima and Laeeq; Salma is seated immediately between Zainab and Fatima. What is the position of Noman with respect to Laeeq?",
+      "answer": "Immediately to the right",
+      "explanation": "Facing south, each person’s left is towards the east. The only arrangement that fits is Rizwan, Zainab, Salma, Fatima, Noman, Laeeq (west to east). Hence the answer is Immediately to the right.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0534",
+      "mock": 35,
+      "before": "If it is true that some lawyers are engineers and no bankers are lawyers, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that some lawyers are engineers and no bankers are lawyers, which of the following must be false?",
+      "answer": "All engineers are bankers",
+      "explanation": "No diagram consistent with the statements allows “All engineers are bankers”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0108",
+      "mock": 35,
+      "before": "M is the son of K and K is the son of L. M is L's:",
+      "after": "M is the son of K and K is the son of L. M is L's: Assume full siblings and parents married to each other.",
+      "answer": "Grandson",
+      "explanation": "Linking the statements: M is K's son; K is L's son. Hence M is L's grandson.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0495",
+      "mock": 35,
+      "before": "Statements: I. All files are folders. II. All folders are reports. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All files are folders. II. All folders are reports. Which of the following conclusions does NOT follow?",
+      "answer": "All folders are files",
+      "explanation": "All folders are files is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0447",
+      "mock": 35,
+      "before": "(i) All pens are pencils. (ii) All pencils are markers. (iii) Some pencils are pens. (iv) Some markers are pencils. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) All pens are pencils. (ii) All pencils are markers. (iii) Some pencils are pens. (iv) Some markers are pencils. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is true and (iv) is true",
+      "explanation": "Checking every Venn diagram allowed by the statements: Some pencils are pens is forced by the statements; Some markers are pencils is forced by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0170",
+      "mock": 36,
+      "before": "If ‘X * Y’ stands for X is the husband of Y; ‘X & Y’ stands for X is the father of Y; ‘X @ Y’ stands for X is the mother of Y; ‘X # Y’ stands for X is the wife of Y, then in ‘K & M @ J @ L’, how is K related to L?",
+      "after": "If ‘X * Y’ stands for X is the husband of Y; ‘X & Y’ stands for X is the father of Y; ‘X @ Y’ stands for X is the mother of Y; ‘X # Y’ stands for X is the wife of Y, then in ‘K & M @ J @ L’, how is K related to L? Assume full siblings and parents married to each other.",
+      "answer": "Great-grandfather",
+      "explanation": "K is the father of M; M is the mother of J; J is the mother of L; hence K is L's great-grandfather.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0187",
+      "mock": 36,
+      "before": "Sohail is Rida's husband's brother's son. What is Sohail to Rida?",
+      "after": "Sohail is Rida's husband's brother's son. What is Sohail to Rida? Assume full siblings and parents married to each other.",
+      "answer": "Nephew",
+      "explanation": "Work outwards from Rida: husband → brother → son; that person is Rida's nephew.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0469",
+      "mock": 36,
+      "before": "Statements: I. All painters are poets. II. All poets are dancers. Which conclusion definitely follows from the statements?",
+      "after": "Assume every named category has at least one member. Statements: I. All painters are poets. II. All poets are dancers. Which conclusion definitely follows from the statements?",
+      "answer": "Some dancers are poets",
+      "explanation": "Some dancers are poets holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0105",
+      "mock": 36,
+      "before": "U's husband is S and T is the brother of U. T is S's:",
+      "after": "U's husband is S and T is the brother of U. T is S's: Assume full siblings and parents married to each other.",
+      "answer": "Brother-in-law",
+      "explanation": "Linking the statements: S is U's husband; T is U's brother. Hence T is S's brother-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0504",
+      "mock": 37,
+      "before": "Statements: I. No chairs are tables. II. Some benches are tables. III. Some stools are benches. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. No chairs are tables. II. Some benches are tables. III. Some stools are benches. Which of the following conclusions does NOT follow?",
+      "answer": "Some chairs are not stools",
+      "explanation": "Some chairs are not stools is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0446",
+      "mock": 37,
+      "before": "(i) All mangoes are apples. (ii) All apples are guavas. (iii) Some mangoes are guavas. (iv) Some apples are mangoes. If the first two statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) All mangoes are apples. (ii) All apples are guavas. (iii) Some mangoes are guavas. (iv) Some apples are mangoes. If the first two statements are true, which of the following is correct?",
+      "answer": "(iii) is true and (iv) is true",
+      "explanation": "Checking every Venn diagram allowed by the statements: Some mangoes are guavas is forced by the statements; Some apples are mangoes is forced by the statements.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0413",
+      "mock": 38,
+      "before": "Six friends, Adil, Dawood, Samina, Talha, Lucy and Nabeel, sit around a circular table facing the centre. Dawood sits opposite Lucy; Nabeel sits between Talha and Lucy; Samina does not sit next to Lucy. Who sits opposite Talha?",
+      "after": "Six friends, Adil, Dawood, Samina, Talha, Lucy and Nabeel, sit around a circular table facing the centre. Dawood sits opposite Lucy; Nabeel sits immediately between Talha and Lucy; Samina does not sit next to Lucy. Who sits opposite Talha?",
+      "answer": "Adil",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. 2 arrangements fit (for example Adil, Samina, Dawood, Talha, Nabeel, Lucy (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Adil.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0173",
+      "mock": 38,
+      "before": "If ‘X @ Y’ stands for X is the mother of Y; ‘X # Y’ stands for X is the husband of Y; ‘X $ Y’ stands for X is the daughter of Y; ‘X % Y’ stands for X is the son of Y, then in ‘N $ M $ K # L’, how is N related to L?",
+      "after": "If ‘X @ Y’ stands for X is the mother of Y; ‘X # Y’ stands for X is the husband of Y; ‘X $ Y’ stands for X is the daughter of Y; ‘X % Y’ stands for X is the son of Y, then in ‘N $ M $ K # L’, how is N related to L? Assume full siblings and parents married to each other.",
+      "answer": "Granddaughter",
+      "explanation": "N is the daughter of M; M is the daughter of K; K is the husband of L; hence N is L's granddaughter.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0535",
+      "mock": 38,
+      "before": "If it is true that some balloons are kites and all balloons are toys, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that some balloons are kites and all balloons are toys, which of the following must be false?",
+      "answer": "No toys are kites",
+      "explanation": "No diagram consistent with the statements allows “No toys are kites”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0482",
+      "mock": 38,
+      "before": "Statements: I. No mangoes are apples. II. All apples are guavas. Which of the following conclusions follows logically?",
+      "after": "Assume every named category has at least one member. Statements: I. No mangoes are apples. II. All apples are guavas. Which of the following conclusions follows logically?",
+      "answer": "Some apples are not mangoes",
+      "explanation": "Some apples are not mangoes holds in every diagram consistent with the statements; the other conclusions are only possible, only possible, impossible respectively.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0395",
+      "mock": 39,
+      "before": "Six guards, Danish, John, Ghulam, Tahira, Qurat and Mike, stand in a circle facing outward. Tahira and Qurat are not neighbours; Ghulam is next to the left of Tahira; Danish is second to the left of Ghulam; Danish and Mike sit side by side. What is the position of Danish?",
+      "after": "Six guards, Danish, John, Ghulam, Tahira, Qurat and Mike, stand in a circle facing outward. Tahira and Qurat are not neighbours; Ghulam is next to the left of Tahira; Danish is second to the left of Ghulam; Danish and Mike sit side by side. Who are the immediate neighbours of Danish?",
+      "answer": "Between Qurat and Mike",
+      "explanation": "Facing outward, a person's right is clockwise as seen from above. 2 arrangements fit (for example Danish, Qurat, John, Tahira, Ghulam, Mike (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Between Qurat and Mike.",
+      "reason": "The answer options describe immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0464",
+      "mock": 39,
+      "before": "(i) No cartons are boxes. (ii) No crates are cartons. (iii) All crates are packets. (iv) All crates are cartons. (v) Some cartons are not packets. If the first three statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) No cartons are boxes. (ii) No crates are cartons. (iii) All crates are packets. (iv) All crates are cartons. (v) Some cartons are not packets. If the first three statements are true, which of the following is correct?",
+      "answer": "(iv) is false and (v) is uncertain",
+      "explanation": "Checking every Venn diagram allowed by the statements: All crates are cartons is contradicted by the statements; Some cartons are not packets is possible but not forced.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0104",
+      "mock": 39,
+      "before": "K is J's husband and L is K's sister. What is L to J?",
+      "after": "K is J's husband and L is K's sister. What is L to J? Assume full siblings and parents married to each other.",
+      "answer": "Sister-in-law",
+      "explanation": "Linking the statements: K is J's husband; L is K's sister. Hence L is J's sister-in-law.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0494",
+      "mock": 39,
+      "before": "Statements: I. All players are coaches. II. All coaches are umpires. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All players are coaches. II. All coaches are umpires. Which of the following conclusions does NOT follow?",
+      "answer": "All umpires are players",
+      "explanation": "All umpires are players is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0532",
+      "mock": 40,
+      "before": "If it is true that all doctors are teachers and no singers are teachers, which of the following must be false?",
+      "after": "Assume every named category has at least one member. If it is true that all doctors are teachers and no singers are teachers, which of the following must be false?",
+      "answer": "Some doctors are singers",
+      "explanation": "No diagram consistent with the statements allows “Some doctors are singers”; each other option is either forced or at least possible.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0410",
+      "mock": 41,
+      "before": "Six friends, Danish, Junaid, Uzma, Iqra, Gul and Mehak, sit around a circular table facing the centre. Danish and Gul are not neighbours; Junaid sits between Uzma and Mehak. Who sits opposite Iqra?",
+      "after": "Six friends, Danish, Junaid, Uzma, Iqra, Gul and Mehak, sit around a circular table facing the centre. Danish and Gul are not neighbours; Junaid sits immediately between Uzma and Mehak. Who sits opposite Iqra?",
+      "answer": "Junaid",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. 4 arrangements fit (for example Danish, Uzma, Junaid, Mehak, Gul, Iqra (anticlockwise as seen from above)) and all give the same answer. Hence the answer is Junaid.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ca-a-0443",
+      "mock": 41,
+      "before": "The Pakistan–India \"Composite Dialogue\", covering eight issues including Kashmir, was launched in:",
+      "after": "The Pakistan–India \"Composite Dialogue\", covering eight issues including Kashmir, was resumed in:",
+      "answer": "2004",
+      "explanation": "The eight-subject Composite Dialogue was resumed in 2004. Calling 2004 its original launch confuses resumption with the earlier framework.\nSource: https://www.mea.gov.in/Uploads/PublicationDocs/170_Annual-Report-2008-2009.pdf",
+      "reason": "Official annual report describes 2004 as resumption, not original launch."
+    },
+    {
+      "id": "mpt-ga-d-0394",
+      "mock": 42,
+      "before": "Six children, Emma, Haris, Bushra, Yasir, Ali and Laeeq, sit in a ring facing outwards. Laeeq sits immediately to the left of Ali; Laeeq sits between Yasir and Ali; Haris and Yasir are not neighbours; Bushra is to the immediate left of Haris. What is the position of Emma?",
+      "after": "Six children, Emma, Haris, Bushra, Yasir, Ali and Laeeq, sit in a ring facing outwards. Laeeq sits immediately to the left of Ali; Laeeq sits immediately between Yasir and Ali; Haris and Yasir are not neighbours; Bushra is to the immediate left of Haris. Who are the immediate neighbours of Emma?",
+      "answer": "Between Haris and Yasir",
+      "explanation": "Facing outward, a person's right is clockwise as seen from above. The only arrangement that fits is Emma, Haris, Bushra, Ali, Laeeq, Yasir (anticlockwise as seen from above). Hence the answer is Between Haris and Yasir.",
+      "reason": "The keyed seating solution requires immediate neighbours. The answer options describe immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0498",
+      "mock": 42,
+      "before": "Statements: I. All mangoes are apples. II. All apples are guavas. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All mangoes are apples. II. All apples are guavas. Which of the following conclusions does NOT follow?",
+      "answer": "Some guavas are not mangoes",
+      "explanation": "Some guavas are not mangoes is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0345",
+      "mock": 42,
+      "before": "Sadia, Vaneeza, Noman, Laiba and Esha are standing in a line facing north. Sadia sits immediately to the left of Noman; Esha sits between Vaneeza and Noman. Who is second to the left of Esha?",
+      "after": "Sadia, Vaneeza, Noman, Laiba and Esha are standing in a line facing north. Sadia sits immediately to the left of Noman; Esha sits immediately between Vaneeza and Noman. Who is second to the left of Esha?",
+      "answer": "Sadia",
+      "explanation": "Facing north, each person’s left is towards the west. 2 arrangements fit (for example Sadia, Noman, Esha, Vaneeza, Laiba (west to east)) and all give the same answer. Hence the answer is Sadia.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0420",
+      "mock": 43,
+      "before": "Six colleagues, Mehak, Tahira, Usman, Danish, Vaneeza and Sohail, are seated at a round table facing the centre. Danish does not sit next to Sohail; Sohail sits immediately to the right of Tahira; Tahira is seated between Usman and Sohail; Mehak is to the immediate left of Vaneeza. Who sits opposite Mehak?",
+      "after": "Six colleagues, Mehak, Tahira, Usman, Danish, Vaneeza and Sohail, are seated at a round table facing the centre. Danish does not sit next to Sohail; Sohail sits immediately to the right of Tahira; Tahira is seated immediately between Usman and Sohail; Mehak is to the immediate left of Vaneeza. Who sits opposite Mehak?",
+      "answer": "Usman",
+      "explanation": "Facing the centre, a person's right is anticlockwise as seen from above. The only arrangement that fits is Mehak, Vaneeza, Danish, Usman, Tahira, Sohail (anticlockwise as seen from above). Hence the answer is Usman.",
+      "reason": "The keyed seating solution requires immediate neighbours."
+    },
+    {
+      "id": "mpt-ga-d-0492",
+      "mock": 43,
+      "before": "Statements: I. All chairs are tables. II. Some tables are benches. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All chairs are tables. II. Some tables are benches. Which of the following conclusions does NOT follow?",
+      "answer": "No chairs are benches",
+      "explanation": "No chairs are benches is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0194",
+      "mock": 44,
+      "before": "Danish is Rizwan's sister's mother's father's father. What is Danish to Rizwan?",
+      "after": "Danish is Rizwan's sister's mother's father's father. What is Danish to Rizwan? Assume full siblings and parents married to each other.",
+      "answer": "Great-grandfather",
+      "explanation": "Work outwards from Rizwan: sister → mother → father → father; that person is Rizwan's great-grandfather.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0209",
+      "mock": 44,
+      "before": "Grandfather Rahim and his wife have three daughters, and each daughter has three brothers. All the sons are married and live with their wives in the same house. Each married son has one son and one daughter. How many grandchildren do the couple have?",
+      "after": "Grandfather Rahim and his wife have three daughters, and each daughter has three brothers. All the sons are married and live with their wives in the same house. Each married son has one son and one daughter. How many grandchildren do the couple have? Count only the family members described.",
+      "answer": "6",
+      "explanation": "The family has 2 parents, 3 sons and 3 daughters, 3 daughters-in-law and 6 grandchildren: 17 people, of whom 10 are female and 7 male.",
+      "reason": "The count must exclude unmentioned spouses and descendants."
+    },
+    {
+      "id": "mpt-ga-d-0465",
+      "mock": 44,
+      "before": "(i) No tables are chairs. (ii) All tables are benches. (iii) Some benches are not stools. (iv) All benches are stools. (v) Some benches are chairs. If the first three statements are true, which of the following is correct?",
+      "after": "Assume every named category has at least one member. (i) No tables are chairs. (ii) All tables are benches. (iii) Some benches are not stools. (iv) All benches are stools. (v) Some benches are chairs. If the first three statements are true, which of the following is correct?",
+      "answer": "(iv) is false and (v) is uncertain",
+      "explanation": "Checking every Venn diagram allowed by the statements: All benches are stools is contradicted by the statements; Some benches are chairs is possible but not forced.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0172",
+      "mock": 46,
+      "before": "If ‘X + Y’ means X is the daughter of Y; ‘X − Y’ means X is the father of Y; ‘X × Y’ means X is the son of Y; ‘X ÷ Y’ means X is the brother of Y, then in ‘B − A ÷ D + C’, how is B related to C?",
+      "after": "If ‘X + Y’ means X is the daughter of Y; ‘X − Y’ means X is the father of Y; ‘X × Y’ means X is the son of Y; ‘X ÷ Y’ means X is the brother of Y, then in ‘B − A ÷ D + C’, how is B related to C? Assume full siblings and parents married to each other.",
+      "answer": "Husband",
+      "explanation": "B is the father of A; A is the brother of D; D is the daughter of C; hence B is C's husband.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-ga-d-0497",
+      "mock": 46,
+      "before": "Statements: I. Some lilies are roses. II. All lilies are tulips. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. Some lilies are roses. II. All lilies are tulips. Which of the following conclusions does NOT follow?",
+      "answer": "Some roses are not tulips",
+      "explanation": "Some roses are not tulips is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-ga-d-0192",
+      "mock": 46,
+      "before": "Laiba is Rida's mother's brother's wife. What is Laiba to Rida?",
+      "after": "Laiba is Rida's mother's brother's wife. What is Laiba to Rida? Assume full siblings and parents married to each other.",
+      "answer": "Maternal aunt",
+      "explanation": "Work outwards from Rida: mother → brother → wife; that person is Rida's maternal aunt.",
+      "reason": "The family model assumes shared parents and marriage; make these premises explicit."
+    },
+    {
+      "id": "mpt-sci-b-0050",
+      "mock": 46,
+      "before": "Designing a building with large south-facing windows and thick walls to capture and store the Sun’s heat, without pumps or panels, is called:",
+      "after": "In the Northern Hemisphere, designing a building with large south-facing windows and thick walls to capture and store the Sun’s heat, without pumps or panels, is called:",
+      "answer": "Passive solar heating",
+      "explanation": "Passive solar design uses the building’s layout and materials to collect and store solar heat, with no mechanical or electrical equipment. South-facing glazing is appropriate in the Northern Hemisphere; the equator-facing direction reverses in the Southern Hemisphere.",
+      "reason": "South-facing solar design depends on hemisphere."
+    },
+    {
+      "id": "mpt-ga-d-0503",
+      "mock": 47,
+      "before": "Statements: I. All painters are poets. II. Some dancers are poets. III. All dancers are actors. Which of the following conclusions does NOT follow?",
+      "after": "Assume every named category has at least one member. Statements: I. All painters are poets. II. Some dancers are poets. III. All dancers are actors. Which of the following conclusions does NOT follow?",
+      "answer": "No actors are painters",
+      "explanation": "No actors are painters is not forced: a diagram satisfying the statements exists where it fails. The other three hold in every such diagram.",
+      "reason": "The original model excludes empty categories, but the stem does not state that premise."
+    },
+    {
+      "id": "mpt-sci-b-0368",
+      "mock": 47,
+      "before": "The permanent hardware address built into a device’s network adapter is called its:",
+      "after": "The factory-assigned link-layer address of a network adapter is called its:",
+      "answer": "MAC address",
+      "explanation": "The manufacturer assigns a universally administered MAC address to a network interface. Locally administered or randomized MAC addresses can override it; an IP address serves network-layer routing.\nSource: https://www.rfc-editor.org/rfc/rfc9724.html#section-2.1",
+      "reason": "A MAC address is not necessarily permanent; distinguish the factory address from local overrides."
+    },
+    {
+      "id": "mpt-pa-a-0009",
+      "mock": 47,
+      "before": "The construction of the Qutb Minar in Delhi was completed by:",
+      "after": "After Qutb-ud-Din Aibak built the first storey of the Qutb Minar, which ruler added three more storeys?",
+      "answer": "Iltutmish",
+      "explanation": "Iltutmish added three storeys to the first storey built by Aibak. Firuz Shah Tughlaq later repaired the minaret, so an unqualified question about who completed it is ambiguous.\nSource: https://www.delhitourism.gov.in/tourist_place/qutab_minar.html",
+      "reason": "Distinguish Iltutmish’s additions from later Tughlaq work."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-20-2",
+      "mock": 18,
+      "before": "درست اردو ترجمہ منتخب کریں: “The company has recalled the defective products.”",
+      "answer": "کمپنی نے ناقص مصنوعات واپس منگوا لی ہیں۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0023",
+        "order": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-20-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-02-2",
+      "mock": 18,
+      "before": "درست اردو ترجمہ منتخب کریں: “The court adjourned the hearing because the evidence was insufficient.”",
+      "answer": "عدالت نے ثبوت ناکافی ہونے کے باعث سماعت ملتوی کر دی۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0024",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-02-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-02-3",
+      "mock": 18,
+      "before": "درست اردو ترجمہ منتخب کریں: “If the parties appear, the court will hear the case tomorrow.”",
+      "answer": "اگر فریقین حاضر ہوئے تو عدالت کل مقدمہ سنے گی۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0025",
+        "order": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-02-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-36-2",
+      "mock": 19,
+      "before": "درست اردو ترجمہ منتخب کریں: “The court had already decided the same question.”",
+      "answer": "عدالت پہلے ہی اسی سوال کا فیصلہ کر چکی تھی۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0034",
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-36-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-03-1",
+      "mock": 19,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “محکمہ ہر ماہ کارکردگی کی رپورٹ جاری کرتا ہے۔”",
+      "answer": "The department issues a performance report every month.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0036",
+        "order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-03-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-03-3",
+      "mock": 19,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “نوٹیفکیشن منظوری کے بعد جاری کیا جائے گا۔”",
+      "answer": "The notification will be issued after approval.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0037",
+        "order": [
+          3,
+          0,
+          1,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-03-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-25-1",
+      "mock": 20,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “رضاکار بزرگ افراد کی مدد کرتے ہیں۔”",
+      "answer": "Volunteers assist elderly people.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0041",
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-25-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-41-1",
+      "mock": 20,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “سائنس دان مشاہدے کو مفروضے سے الگ رکھتا ہے۔”",
+      "answer": "The scientist keeps observation separate from hypothesis.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0045",
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-41-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-11-3",
+      "mock": 20,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “تربیت مکمل کیے بغیر کسی کو ذمہ داری نہیں دی جائے گی۔”",
+      "answer": "No one will be assigned responsibility without completing the training.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0046",
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-11-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-32-2",
+      "mock": 21,
+      "before": "درست اردو ترجمہ منتخب کریں: “The machines had been inspected last week.”",
+      "answer": "مشینوں کا معائنہ گزشتہ ہفتے کیا گیا تھا۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0056",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-32-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-32-1",
+      "mock": 21,
+      "before": "درست اردو ترجمہ منتخب کریں: “The factory follows safety rules.”",
+      "answer": "کارخانہ حفاظتی اصولوں پر عمل کرتا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0058",
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-32-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-11-2",
+      "mock": 21,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “ادارے نے شکایات کا نیا نظام متعارف کرایا ہے۔”",
+      "answer": "The institution has introduced a new complaints system.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0060",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-11-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-23-2",
+      "mock": 22,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “بل اکثریت سے منظور کیا گیا۔”",
+      "answer": "The bill was passed by a majority.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0062",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-23-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-23-1",
+      "mock": 22,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “پارلیمان قومی بجٹ پر بحث کر رہی ہے۔”",
+      "answer": "Parliament is debating the national budget.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0063",
+        "order": [
+          0,
+          3,
+          2,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-23-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-13-3",
+      "mock": 22,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “عوام کو پالیسی سازی میں شامل کیا جانا چاہیے۔”",
+      "answer": "The public should be involved in policymaking.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0066",
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-13-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-19-3",
+      "mock": 23,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “لفظی ترجمہ کیا جاتا تو مفہوم بدل جاتا۔”",
+      "answer": "If a literal translation had been made, the meaning would have changed.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0075",
+        "order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-19-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-24-3",
+      "mock": 23,
+      "before": "درست اردو ترجمہ منتخب کریں: “Objections may be submitted by the prescribed date.”",
+      "answer": "اعتراضات مقررہ تاریخ تک جمع کرائے جا سکتے ہیں۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0085",
+        "order": [
+          3,
+          2,
+          0,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-24-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-01-3",
+      "mock": 23,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “کمیٹی مطلوبہ دستاویزات ملنے کے بعد تجویز کا جائزہ لے گی۔”",
+      "answer": "The committee will review the proposal after receiving the required documents.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0087",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-01-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-17-1",
+      "mock": 24,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “میونسپل ادارہ کچرا روزانہ جمع کرتا ہے۔”",
+      "answer": "The municipal authority collects waste daily.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0092",
+        "order": [
+          3,
+          1,
+          0,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-17-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-02-1",
+      "mock": 24,
+      "before": "درست اردو ترجمہ منتخب کریں: “The court is hearing the appeal today.”",
+      "answer": "عدالت آج اپیل کی سماعت کر رہی ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0095",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-02-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-17-3",
+      "mock": 24,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “نالے صاف نہ کیے گئے تو سڑکیں زیرِ آب آ سکتی ہیں۔”",
+      "answer": "If the drains are not cleared, the roads may be flooded.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0102",
+        "order": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-17-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-26-3",
+      "mock": 25,
+      "before": "درست اردو ترجمہ منتخب کریں: “Heavy vehicles will not be allowed until the inspection is complete.”",
+      "answer": "معائنہ مکمل ہونے تک بھاری گاڑیوں کو اجازت نہیں دی جائے گی۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0103",
+        "order": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-26-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-15-1",
+      "mock": 25,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “لائبریری مطالعے کے لیے پُرسکون ماحول فراہم کرتی ہے۔”",
+      "answer": "The library provides a quiet environment for study.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0107",
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-15-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-15-3",
+      "mock": 25,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “جو کتاب وقت پر واپس نہ ہو اس پر جرمانہ عائد ہوگا۔”",
+      "answer": "A fine will be imposed on any book not returned on time.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0112",
+        "order": [
+          3,
+          0,
+          1,
+          2
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-15-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-39-3",
+      "mock": 26,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “قانون پر عمل نہ کیا جاتا تو ذخیرہ مزید کم ہو جاتا۔”",
+      "answer": "Had the law not been enforced, the stock would have declined further.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0116",
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-39-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-39-1",
+      "mock": 26,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “ماہی گیر موسمی پابندی کی پاسداری کرتے ہیں۔”",
+      "answer": "The fishermen observe the seasonal restriction.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0122",
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-39-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-12-1",
+      "mock": 26,
+      "before": "درست اردو ترجمہ منتخب کریں: “The journalist is verifying the report.”",
+      "answer": "صحافی خبر کی تصدیق کر رہا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0123",
+        "order": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-12-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-28-3",
+      "mock": 27,
+      "before": "درست اردو ترجمہ منتخب کریں: “If investment increases, employment opportunities will be created.”",
+      "answer": "سرمایہ کاری بڑھے گی تو روزگار کے مواقع پیدا ہوں گے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0147",
+        "order": [
+          2,
+          3,
+          1,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-28-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-42-2",
+      "mock": 27,
+      "before": "درست اردو ترجمہ منتخب کریں: “The answer books had been counted and collected.”",
+      "answer": "جوابی کتابیں گن کر جمع کی گئی تھیں۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0171",
+        "order": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-42-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-18-3",
+      "mock": 28,
+      "before": "درست اردو ترجمہ منتخب کریں: “The rule will be understood more easily if an example is given.”",
+      "answer": "مثال دی جائے تو اصول آسانی سے سمجھ آ جائے گا۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0177",
+        "order": [
+          2,
+          0,
+          3,
+          1
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-18-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-19-1",
+      "mock": 28,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “مترجم اصل مفہوم برقرار رکھتا ہے۔”",
+      "answer": "The translator preserves the original meaning.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0184",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-19-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-19-2",
+      "mock": 28,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “مترجم نے مبہم اصطلاح کی وضاحت کر دی۔”",
+      "answer": "The translator has clarified the ambiguous term.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0186",
+        "order": [
+          2,
+          0,
+          3,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-19-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-01-1",
+      "mock": 29,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “کمیٹی ہر تجویز کا بغور جائزہ لیتی ہے۔”",
+      "answer": "The committee examines every proposal carefully.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0188",
+        "order": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-01-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-01-2",
+      "mock": 29,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “کمیٹی نے تمام تجاویز کا جائزہ لے لیا ہے۔”",
+      "answer": "The committee has reviewed all the proposals.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0191",
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-01-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-10-2",
+      "mock": 29,
+      "before": "درست اردو ترجمہ منتخب کریں: “The patient had been given the medicine on time.”",
+      "answer": "مریض کو بروقت دوا دی گئی تھی۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0195",
+        "order": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-10-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-24-2",
+      "mock": 30,
+      "before": "درست اردو ترجمہ منتخب کریں: “The results have been published on the website.”",
+      "answer": "نتائج ویب گاہ پر شائع کیے جا چکے ہیں۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0199",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-24-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-38-1",
+      "mock": 30,
+      "before": "درست اردو ترجمہ منتخب کریں: “The museum preserves historical objects.”",
+      "answer": "میوزیم تاریخی اشیا کو محفوظ رکھتا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0203",
+        "order": [
+          3,
+          1,
+          2,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-38-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-38-3",
+      "mock": 30,
+      "before": "درست اردو ترجمہ منتخب کریں: “If the temperature is not controlled, the artefacts may be damaged.”",
+      "answer": "درجۂ حرارت قابو میں نہ رکھا گیا تو نوادرات کو نقصان پہنچ سکتا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0208",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-38-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-07-1",
+      "mock": 31,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “تحقیق کار اعداد و شمار کا موازنہ کر رہا ہے۔”",
+      "answer": "The researcher is comparing the data.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0209",
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-07-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-07-3",
+      "mock": 31,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “بڑا نمونہ لیا جاتا تو نتیجہ زیادہ معتبر ہوتا۔”",
+      "answer": "If a larger sample had been used, the result would have been more reliable.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0220",
+        "order": [
+          3,
+          1,
+          0,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-07-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-07-2",
+      "mock": 31,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “تحقیق نے مفروضے کی تصدیق نہیں کی۔”",
+      "answer": "The study did not confirm the hypothesis.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0229",
+        "order": [
+          2,
+          1,
+          3,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-07-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-24-1",
+      "mock": 32,
+      "before": "درست اردو ترجمہ منتخب کریں: “The commission assesses the eligibility of candidates.”",
+      "answer": "کمیشن امیدواروں کی اہلیت جانچتا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0235",
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-24-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-17-2",
+      "mock": 32,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “شہر میں نکاسیٔ آب کا نظام بہتر بنایا گیا ہے۔”",
+      "answer": "The drainage system in the city has been improved.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0238",
+        "order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-17-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-42-3",
+      "mock": 32,
+      "before": "درست اردو ترجمہ منتخب کریں: “Extra time will be given only to authorised candidates.”",
+      "answer": "اضافی وقت صرف مجاز امیدواروں کو دیا جائے گا۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0249",
+        "order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-42-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-18-1",
+      "mock": 33,
+      "before": "درست اردو ترجمہ منتخب کریں: “The teacher explains the difference between an argument and an opinion.”",
+      "answer": "استاد دلیل اور رائے میں فرق واضح کرتا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0251",
+        "order": [
+          0,
+          3,
+          2,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-18-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-40-2",
+      "mock": 33,
+      "before": "درست اردو ترجمہ منتخب کریں: “All polling material has been distributed.”",
+      "answer": "تمام پولنگ مواد تقسیم کر دیا گیا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0255",
+        "order": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-40-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-40-1",
+      "mock": 33,
+      "before": "درست اردو ترجمہ منتخب کریں: “The election staff are verifying the voter lists.”",
+      "answer": "انتخابی عملہ ووٹر فہرستوں کی تصدیق کر رہا ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0256",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-40-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-21-3",
+      "mock": 34,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “اخراج کم نہ کیے گئے تو خطرات میں اضافہ ہوگا۔”",
+      "answer": "If emissions are not reduced, the risks will increase.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0259",
+        "order": [
+          3,
+          0,
+          1,
+          2
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-21-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-21-2",
+      "mock": 34,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “درجۂ حرارت توقع سے زیادہ بڑھ گیا ہے۔”",
+      "answer": "The temperature has risen more than expected.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0260",
+        "order": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-21-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-22-3",
+      "mock": 34,
+      "before": "درست اردو ترجمہ منتخب کریں: “More supplies will be sent as soon as the route opens.”",
+      "answer": "راستہ کھلتے ہی مزید سامان بھیجا جائے گا۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0266",
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-22-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-31-1",
+      "mock": 35,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “انتظامیہ پانی کے معیار کی جانچ کرتی ہے۔”",
+      "answer": "The administration tests the quality of water.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0270",
+        "order": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-31-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-25-3",
+      "mock": 35,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “مزید لوگ شامل ہوں تو کام جلد مکمل ہو سکتا ہے۔”",
+      "answer": "The work can be completed sooner if more people join.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0306",
+        "order": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-25-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-25-2",
+      "mock": 35,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “رضاکاروں نے تمام خاندانوں کا اندراج مکمل کر لیا۔”",
+      "answer": "The volunteers have completed the registration of all families.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0307",
+        "order": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-25-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-11-1",
+      "mock": 36,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “ادارہ ملازمین کو باقاعدہ تربیت دیتا ہے۔”",
+      "answer": "The institution provides regular training to its employees.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0311",
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-11-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-06-1",
+      "mock": 36,
+      "before": "درست اردو ترجمہ منتخب کریں: “The students solve difficult questions every day.”",
+      "answer": "طلبہ روزانہ مشکل سوالات حل کرتے ہیں۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0316",
+        "order": [
+          3,
+          1,
+          2,
+          0
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-06-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-06-3",
+      "mock": 36,
+      "before": "درست اردو ترجمہ منتخب کریں: “Students should understand the question before answering it.”",
+      "answer": "طلبہ کو جواب دینے سے پہلے سوال سمجھنا چاہیے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0318",
+        "order": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-06-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-13-1",
+      "mock": 37,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “شہری قانون کی پابندی کرتے ہیں۔”",
+      "answer": "Citizens obey the law.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0320",
+        "order": [
+          2,
+          1,
+          0,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-13-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-13-2",
+      "mock": 37,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “شہریوں نے فیصلے کے خلاف پُرامن احتجاج کیا۔”",
+      "answer": "The citizens protested peacefully against the decision.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0321",
+        "order": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-13-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-15-2",
+      "mock": 37,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “لائبریری نے نایاب کتابوں کو محفوظ کر لیا ہے۔”",
+      "answer": "The library has preserved the rare books.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0323",
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-15-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-41-3",
+      "mock": 38,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “نتائج مختلف ہوتے تو مفروضہ مسترد کر دیا جاتا۔”",
+      "answer": "Had the results been different, the hypothesis would have been rejected.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0324",
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-41-3"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-41-2",
+      "mock": 38,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “تجربہ یکساں حالات میں دہرایا گیا ہے۔”",
+      "answer": "The experiment has been repeated under identical conditions.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0334",
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "a": 0,
+        "replaces": "mpt-urdu-advanced-translation-41-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-22-1",
+      "mock": 39,
+      "before": "درست اردو ترجمہ منتخب کریں: “The relief team is reaching the affected areas.”",
+      "answer": "امدادی ٹیم متاثرہ علاقوں تک پہنچ رہی ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0341",
+        "order": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-22-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-03-2",
+      "mock": 39,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “محکمہ نئی ہدایات جاری کر چکا ہے۔”",
+      "answer": "The department has issued the new instructions.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0353",
+        "order": [
+          3,
+          1,
+          2,
+          0
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-03-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-28-1",
+      "mock": 39,
+      "before": "درست اردو ترجمہ منتخب کریں: “The economy is recovering gradually.”",
+      "answer": "معیشت بتدریج بحال ہو رہی ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0433",
+        "order": [
+          3,
+          2,
+          0,
+          1
+        ],
+        "a": 3,
+        "replaces": "mpt-urdu-advanced-translation-28-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-28-2",
+      "mock": 40,
+      "before": "درست اردو ترجمہ منتخب کریں: “The inflation rate has declined slightly.”",
+      "answer": "مہنگائی کی شرح میں معمولی کمی آئی ہے۔",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0367",
+        "order": [
+          2,
+          3,
+          1,
+          0
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-28-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-09-1",
+      "mock": 40,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “کسان پانی کو احتیاط سے استعمال کرتے ہیں۔”",
+      "answer": "Farmers use water carefully.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0369",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 2,
+        "replaces": "mpt-urdu-advanced-translation-09-1"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-urdu-advanced-translation-09-2",
+      "mock": 40,
+      "before": "درست انگریزی ترجمہ منتخب کریں: “بارش شروع ہونے سے پہلے کسان فصل کاٹ چکے تھے۔”",
+      "answer": "The farmers had harvested the crop before the rain began.",
+      "replacement": {
+        "src": "bank",
+        "id": "mpt-urdu-a-0435",
+        "order": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "a": 1,
+        "replaces": "mpt-urdu-advanced-translation-09-2"
+      },
+      "reason": "Retire a legacy translation item with unrelated or nonsensical distractors; use an unused reviewed language-bank question."
+    },
+    {
+      "id": "mpt-course-english-d24q4",
+      "mock": 18,
+      "before": "Which paragraph opening is a true topic sentence?",
+      "after": "Which paragraph opening makes a specific, arguable claim that the paragraph can support?",
+      "answer": "Enforcement, not legislation, is the binding constraint.",
+      "explanation": "It states one arguable claim the paragraph can support.",
+      "reason": "State the intended meaning or style convention; the original stem treats other valid readings as errors."
+    },
+    {
+      "id": "mpt-course-english-d15q2",
+      "mock": 19,
+      "before": "Which sentence places the modifier correctly?",
+      "after": "The intended meaning is that all but a small portion of the funds have been released. Which sentence places “almost” correctly?",
+      "answer": "The department has released almost all the funds.",
+      "explanation": "Almost limits the quantity, so it belongs beside all the funds.",
+      "reason": "State the intended meaning or style convention; the original stem treats other valid readings as errors."
+    },
+    {
+      "id": "mpt-course-english-d25q10",
+      "mock": 20,
+      "before": "Find the error: “The government will analyze (A) the programme (B) and publish (C) its defence (D) of the policy.”",
+      "after": "Which marked part needs a spelling change to make the sentence consistently British English? “The government will analyze (A) the programme (B) and publish (C) its defence (D) of the policy.”",
+      "answer": "A",
+      "explanation": "The rest of the sentence uses British spelling, so analyse is required. Keep one system throughout.",
+      "reason": "State the intended meaning or style convention; the original stem treats other valid readings as errors."
+    },
+    {
+      "id": "mpt-course-english-d6q4",
+      "mock": 21,
+      "before": "Find the error: “In 1947 (A) Pakistan (B) gained independence, (C) and adopted a new flag (D).”",
+      "after": "Which marked part contains the comma that should normally be omitted between two verbs sharing the same subject? “In 1947 (A) Pakistan (B) gained independence, (C) and adopted a new flag (D).”",
+      "answer": "C",
+      "explanation": "“adopted a new flag” has no subject of its own, so no comma is needed before and.",
+      "reason": "State the intended meaning or style convention; the original stem treats other valid readings as errors."
+    },
+    {
+      "id": "mpt-course-english-d15q10",
+      "mock": 21,
+      "before": "Find the error: “He said he would (A) only sign the file (B) after the legal branch (C) had cleared it (D).”",
+      "after": "The intended restriction is on when he would sign. Which marked part contains the misplaced “only”? “He said he would (A) only sign the file (B) after the legal branch (C) had cleared it (D).”",
+      "answer": "B",
+      "explanation": "The limit is on the timing, not the act: “he would sign the file only after the legal branch had cleared it”.",
+      "reason": "State the intended meaning or style convention; the original stem treats other valid readings as errors."
+    }
+  ]
+}

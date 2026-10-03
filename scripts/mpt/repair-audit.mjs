@@ -14,7 +14,7 @@ const bareStem = (q) => (q.meta.passage_id ? q.q.slice(q.q.lastIndexOf('\nQuesti
 const FACTUAL = new Set(['Islamic Studies', 'General Knowledge'])
 
 export function paperFingerprint(questions) {
-  return createHash('sha256').update(JSON.stringify(questions.map((q) => [q.id, q.o, q.a]))).digest('hex').slice(0, 16)
+  return createHash('sha256').update(JSON.stringify(questions.map((q) => [q.id, q.q, q.o, q.a, q.e]))).digest('hex').slice(0, 16)
 }
 
 export function auditRepairedSeries(papers, context) {
@@ -141,7 +141,7 @@ export function renderRepairMarkdown(result, meta, log) {
   const { reports } = result
   L.push(`# MPT editorial release ${meta.release} — repaired live series`, '')
   L.push(`Series ${meta.series}; ${reports.length} papers (live papers ${meta.firstLivePaper}–${meta.lastLivePaper} of ${meta.liveSeries}, i.e. Mocks ${meta.firstLivePaper}–${meta.lastLivePaper}); status **${result.failures.length ? 'BLOCKED' : 'PASS'}**.`, '')
-  L.push('The original 30 repaired papers (Mocks 11–40) remain identical to release 6. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.', '')
+  L.push('The release-6 allocation is preserved as the selection baseline. Release 8 applies explicit reviewed wording corrections and replaces weak legacy translation items in safely unstarted papers with unused reviewed bank items. Mocks through 17 remain unchanged. Seven additional papers (Mocks 41–47) use existing reserve-bank items and unique comprehension passages. They exclude every allocated paper and the historical served archives. Bank provenance is retained: practice items are not represented as recorded FPSC past-paper questions. All papers follow the five official sections and sizes.', '')
   const sum = (pick) => reports.reduce((n, r) => n + pick(r), 0)
   const total = (obj) => Object.values(obj).reduce((a, b) => a + b, 0)
   L.push('## Series summary', '')

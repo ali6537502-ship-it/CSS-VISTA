@@ -1,18 +1,31 @@
 {
  "meta": {
-  "release": 7,
-  "series": "57d18c763f20c220",
+  "release": 8,
+  "series": "37e077d8e04f860f",
   "liveSeries": "b054de7",
   "firstLivePaper": 11,
   "lastLivePaper": 40
  },
  "status": "PASS",
  "failures": [],
- "warnings": [],
+ "warnings": [
+  "Mock 11: mpt-ga-d-0478: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":8,\"classes\":[\"uncertain\",\"uncertain\",\"false\",\"uncertain\"]})",
+  "Mock 11: mpt-ga-d-0416: “between” does not explicitly mean immediate neighbours",
+  "Mock 12: mpt-ga-d-0351: “between” does not explicitly mean immediate neighbours",
+  "Mock 12: mpt-ga-d-0364: “between” does not explicitly mean immediate neighbours",
+  "Mock 12: mpt-ga-d-0452: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":8,\"classes\":[\"uncertain\",\"uncertain\"]})",
+  "Mock 12: mpt-ga-d-0475: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+  "Mock 14: mpt-ga-d-0479: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+  "Mock 15: mpt-ga-d-0343: “between” does not explicitly mean immediate neighbours",
+  "Mock 15: mpt-ga-d-0476: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+  "Mock 15: mpt-ga-d-0387: “between” does not explicitly mean immediate neighbours",
+  "Mock 16: mpt-ga-d-0455: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\"]})",
+  "Mock 17: mpt-ga-d-0411: “between” does not explicitly mean immediate neighbours"
+ ],
  "papers": [
   {
    "paper": 1,
-   "fingerprint": "cafdcedcb69ad254",
+   "fingerprint": "8f67792414c4f9a5",
    "kept": {
     "Islamic Studies": 4,
     "Urdu": 7,
@@ -90,7 +103,7 @@
   },
   {
    "paper": 2,
-   "fingerprint": "a0988acb2fd596cc",
+   "fingerprint": "0543a0de2969f20f",
    "kept": {
     "Islamic Studies": 7,
     "Urdu": 7,
@@ -184,7 +197,7 @@
   },
   {
    "paper": 3,
-   "fingerprint": "a998e54438eb604b",
+   "fingerprint": "7e0c866e61f4cd18",
    "kept": {
     "Islamic Studies": 2,
     "Urdu": 7,
@@ -268,7 +281,7 @@
   },
   {
    "paper": 4,
-   "fingerprint": "baf83997119746d1",
+   "fingerprint": "6ff0842a53a3c44c",
    "kept": {
     "Islamic Studies": 7,
     "Urdu": 7,
@@ -347,7 +360,7 @@
   },
   {
    "paper": 5,
-   "fingerprint": "2d973ec5d50d0d8e",
+   "fingerprint": "c879bd5eb1da5cb1",
    "kept": {
     "Islamic Studies": 7,
     "Urdu": 5,
@@ -441,7 +454,7 @@
   },
   {
    "paper": 6,
-   "fingerprint": "cd87f494a434476b",
+   "fingerprint": "f48a224f1f9506fd",
    "kept": {
     "Islamic Studies": 6,
     "Urdu": 5,
@@ -525,7 +538,7 @@
   },
   {
    "paper": 7,
-   "fingerprint": "8ed1c8f48219056d",
+   "fingerprint": "95dcc40f92c95e36",
    "kept": {
     "Islamic Studies": 1,
     "Urdu": 5,
@@ -619,16 +632,16 @@
   },
   {
    "paper": 8,
-   "fingerprint": "d563fcca392072b4",
+   "fingerprint": "1b9c35b31b385089",
    "kept": {
     "Islamic Studies": 4,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 7,
     "General Knowledge": 7
    },
    "replaced": {
     "Islamic Studies": 16,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 43,
     "General Abilities": 60,
     "General Knowledge": 43
@@ -663,7 +676,7 @@
     },
     "Urdu": {
      "1": 4,
-     "2": 7,
+     "2": 10,
      "3": 4
     },
     "English": {
@@ -708,16 +721,16 @@
   },
   {
    "paper": 9,
-   "fingerprint": "b80f421041a0379c",
+   "fingerprint": "f7641e5d00e2123d",
    "kept": {
     "Islamic Studies": 7,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 4,
     "General Knowledge": 3
    },
    "replaced": {
     "Islamic Studies": 13,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 46,
     "General Abilities": 60,
     "General Knowledge": 47
@@ -752,7 +765,7 @@
     },
     "Urdu": {
      "1": 4,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -802,16 +815,16 @@
   },
   {
    "paper": 10,
-   "fingerprint": "fb478fd5093a9e8a",
+   "fingerprint": "c85521b818d835d7",
    "kept": {
     "Islamic Studies": 11,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 8,
     "General Knowledge": 2
    },
    "replaced": {
     "Islamic Studies": 9,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 42,
     "General Abilities": 60,
     "General Knowledge": 48
@@ -846,7 +859,7 @@
     },
     "Urdu": {
      "1": 4,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -876,15 +889,15 @@
   },
   {
    "paper": 11,
-   "fingerprint": "48b5dd99fa9f776e",
+   "fingerprint": "0cd39a568436de1e",
    "kept": {
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 13,
     "General Knowledge": 1
    },
    "replaced": {
     "Islamic Studies": 20,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 37,
     "General Abilities": 60,
     "General Knowledge": 49
@@ -919,7 +932,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 7,
+     "2": 10,
      "3": 3
     },
     "English": {
@@ -969,15 +982,15 @@
   },
   {
    "paper": 12,
-   "fingerprint": "f7e6d731df1f7124",
+   "fingerprint": "1ab867005a59164d",
    "kept": {
     "Islamic Studies": 5,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 10
    },
    "replaced": {
     "Islamic Studies": 15,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 40,
     "General Abilities": 60,
     "General Knowledge": 50
@@ -1012,7 +1025,7 @@
     },
     "Urdu": {
      "1": 4,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -1047,16 +1060,16 @@
   },
   {
    "paper": 13,
-   "fingerprint": "3bc7f5afd591f03e",
+   "fingerprint": "1d02cdac51623752",
    "kept": {
     "Islamic Studies": 3,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 6,
     "General Knowledge": 1
    },
    "replaced": {
     "Islamic Studies": 17,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 44,
     "General Abilities": 60,
     "General Knowledge": 49
@@ -1091,7 +1104,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 7,
+     "2": 10,
      "3": 3
     },
     "English": {
@@ -1136,16 +1149,16 @@
   },
   {
    "paper": 14,
-   "fingerprint": "97b2587e1fbf1800",
+   "fingerprint": "4b565539ed8a20bc",
    "kept": {
     "Islamic Studies": 4,
-    "Urdu": 5,
+    "Urdu": 2,
     "English": 7,
     "General Knowledge": 3
    },
    "replaced": {
     "Islamic Studies": 16,
-    "Urdu": 15,
+    "Urdu": 18,
     "English": 43,
     "General Abilities": 60,
     "General Knowledge": 47
@@ -1180,7 +1193,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 7,
+     "2": 10,
      "3": 3
     },
     "English": {
@@ -1235,16 +1248,15 @@
   },
   {
    "paper": 15,
-   "fingerprint": "85793b5bb67c57d9",
+   "fingerprint": "669cff35373cc856",
    "kept": {
     "Islamic Studies": 6,
-    "Urdu": 3,
     "English": 6,
     "General Knowledge": 3
    },
    "replaced": {
     "Islamic Studies": 14,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 44,
     "General Abilities": 60,
     "General Knowledge": 47
@@ -1279,7 +1291,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 8,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -1319,16 +1331,15 @@
   },
   {
    "paper": 16,
-   "fingerprint": "570c9dcebd671e1d",
+   "fingerprint": "6d349185549f4f5f",
    "kept": {
     "Islamic Studies": 3,
-    "Urdu": 3,
     "English": 9,
     "General Knowledge": 3
    },
    "replaced": {
     "Islamic Studies": 17,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 41,
     "General Abilities": 60,
     "General Knowledge": 47
@@ -1363,7 +1374,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -1393,16 +1404,15 @@
   },
   {
    "paper": 17,
-   "fingerprint": "5bcf2fa55fb42c18",
+   "fingerprint": "a955b58618eb95e6",
    "kept": {
     "Islamic Studies": 5,
-    "Urdu": 2,
     "English": 5,
     "General Knowledge": 2
    },
    "replaced": {
     "Islamic Studies": 15,
-    "Urdu": 18,
+    "Urdu": 20,
     "English": 45,
     "General Abilities": 60,
     "General Knowledge": 48
@@ -1437,7 +1447,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 9,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -1487,16 +1497,15 @@
   },
   {
    "paper": 18,
-   "fingerprint": "6a3bc1c72bc44569",
+   "fingerprint": "b03aab7b55e60618",
    "kept": {
     "Islamic Studies": 1,
-    "Urdu": 3,
     "English": 9,
     "General Knowledge": 5
    },
    "replaced": {
     "Islamic Studies": 19,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 41,
     "General Abilities": 60,
     "General Knowledge": 45
@@ -1531,7 +1540,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 9,
+     "2": 12,
      "3": 3
     },
     "English": {
@@ -1566,16 +1575,15 @@
   },
   {
    "paper": 19,
-   "fingerprint": "ebb070ad1ce07be3",
+   "fingerprint": "8c27d83adf50022b",
    "kept": {
     "Islamic Studies": 9,
-    "Urdu": 3,
     "English": 2,
     "General Knowledge": 6
    },
    "replaced": {
     "Islamic Studies": 11,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 48,
     "General Abilities": 60,
     "General Knowledge": 44
@@ -1610,7 +1618,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 8,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -1640,15 +1648,14 @@
   },
   {
    "paper": 20,
-   "fingerprint": "c65212898a6176a2",
+   "fingerprint": "46c1411d1b91e58c",
    "kept": {
     "Islamic Studies": 8,
-    "Urdu": 3,
     "General Knowledge": 12
    },
    "replaced": {
     "Islamic Studies": 12,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 50,
     "General Abilities": 60,
     "General Knowledge": 38
@@ -1683,7 +1690,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 8,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -1707,15 +1714,14 @@
   },
   {
    "paper": 21,
-   "fingerprint": "13d6b1f236b05fd8",
+   "fingerprint": "99462ba2e1eb2a64",
    "kept": {
     "Islamic Studies": 4,
-    "Urdu": 3,
     "General Knowledge": 10
    },
    "replaced": {
     "Islamic Studies": 16,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 50,
     "General Abilities": 60,
     "General Knowledge": 40
@@ -1750,7 +1756,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -1790,15 +1796,14 @@
   },
   {
    "paper": 22,
-   "fingerprint": "d2ee6207442c082a",
+   "fingerprint": "c61bcec93abe7da1",
    "kept": {
     "Islamic Studies": 10,
-    "Urdu": 3,
     "General Knowledge": 8
    },
    "replaced": {
     "Islamic Studies": 10,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 50,
     "General Abilities": 60,
     "General Knowledge": 42
@@ -1833,7 +1838,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -1863,15 +1868,14 @@
   },
   {
    "paper": 23,
-   "fingerprint": "bfd2e2e482a2c147",
+   "fingerprint": "489fd83716d7e5c9",
    "kept": {
     "Islamic Studies": 3,
-    "Urdu": 3,
     "General Knowledge": 8
    },
    "replaced": {
     "Islamic Studies": 17,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 50,
     "General Abilities": 60,
     "General Knowledge": 42
@@ -1906,7 +1910,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -1936,17 +1940,16 @@
   },
   {
    "paper": 24,
-   "fingerprint": "4f81cbc9ad184cf8",
+   "fingerprint": "c7ddd70b01ea6627",
    "kept": {
     "Islamic Studies": 2,
-    "Urdu": 3,
     "English": 4,
     "General Abilities": 4,
     "General Knowledge": 11
    },
    "replaced": {
     "Islamic Studies": 18,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 46,
     "General Abilities": 56,
     "General Knowledge": 39
@@ -1981,7 +1984,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -2021,16 +2024,15 @@
   },
   {
    "paper": 25,
-   "fingerprint": "3b8535b469abdaf6",
+   "fingerprint": "439d14f30c0108b9",
    "kept": {
     "Islamic Studies": 5,
-    "Urdu": 3,
     "English": 3,
     "General Knowledge": 7
    },
    "replaced": {
     "Islamic Studies": 15,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 47,
     "General Abilities": 60,
     "General Knowledge": 43
@@ -2065,7 +2067,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 8,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -2105,16 +2107,15 @@
   },
   {
    "paper": 26,
-   "fingerprint": "26bfc237543e92c0",
+   "fingerprint": "33c30528ffca2370",
    "kept": {
     "Islamic Studies": 6,
-    "Urdu": 3,
     "English": 3,
     "General Knowledge": 7
    },
    "replaced": {
     "Islamic Studies": 14,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 47,
     "General Abilities": 60,
     "General Knowledge": 43
@@ -2149,7 +2150,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -2184,16 +2185,15 @@
   },
   {
    "paper": 27,
-   "fingerprint": "2250e7a61769fc6b",
+   "fingerprint": "87925a38464cddfb",
    "kept": {
     "Islamic Studies": 7,
-    "Urdu": 3,
     "English": 4,
     "General Knowledge": 10
    },
    "replaced": {
     "Islamic Studies": 13,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 46,
     "General Abilities": 60,
     "General Knowledge": 40
@@ -2228,7 +2228,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -2268,16 +2268,15 @@
   },
   {
    "paper": 28,
-   "fingerprint": "2097970c7b17762b",
+   "fingerprint": "1061afcfd35b825a",
    "kept": {
     "Islamic Studies": 4,
-    "Urdu": 2,
     "English": 3,
     "General Knowledge": 10
    },
    "replaced": {
     "Islamic Studies": 16,
-    "Urdu": 18,
+    "Urdu": 20,
     "English": 47,
     "General Abilities": 60,
     "General Knowledge": 40
@@ -2312,7 +2311,7 @@
     },
     "Urdu": {
      "1": 5,
-     "2": 9,
+     "2": 11,
      "3": 4
     },
     "English": {
@@ -2352,16 +2351,15 @@
   },
   {
    "paper": 29,
-   "fingerprint": "0192bdf829f087c3",
+   "fingerprint": "ff3a44228b6d74b5",
    "kept": {
     "Islamic Studies": 5,
-    "Urdu": 3,
     "English": 5,
     "General Knowledge": 7
    },
    "replaced": {
     "Islamic Studies": 15,
-    "Urdu": 17,
+    "Urdu": 20,
     "English": 45,
     "General Abilities": 60,
     "General Knowledge": 43
@@ -2396,7 +2394,7 @@
     },
     "Urdu": {
      "1": 6,
-     "2": 8,
+     "2": 11,
      "3": 3
     },
     "English": {
@@ -2446,16 +2444,16 @@
   },
   {
    "paper": 30,
-   "fingerprint": "83da7f0bb9c51fb8",
+   "fingerprint": "a6f997a8de39f44c",
    "kept": {
     "Islamic Studies": 2,
-    "Urdu": 10,
+    "Urdu": 7,
     "English": 12,
     "General Knowledge": 9
    },
    "replaced": {
     "Islamic Studies": 18,
-    "Urdu": 10,
+    "Urdu": 13,
     "English": 38,
     "General Abilities": 60,
     "General Knowledge": 41
@@ -2490,7 +2488,7 @@
     },
     "Urdu": {
      "1": 3,
-     "2": 5,
+     "2": 8,
      "3": 2
     },
     "English": {
@@ -2520,7 +2518,7 @@
   },
   {
    "paper": 31,
-   "fingerprint": "0d4d24349ddb2962",
+   "fingerprint": "b6320ee35cfb1d98",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -2624,7 +2622,7 @@
   },
   {
    "paper": 32,
-   "fingerprint": "abe840e1b8c36101",
+   "fingerprint": "ab3e33a295664a0b",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -2728,7 +2726,7 @@
   },
   {
    "paper": 33,
-   "fingerprint": "e821d574171b7c1a",
+   "fingerprint": "27bfab97b8ec8a94",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -2812,7 +2810,7 @@
   },
   {
    "paper": 34,
-   "fingerprint": "52838464e4659231",
+   "fingerprint": "7bc33fc4b910fbd7",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -2891,7 +2889,7 @@
   },
   {
    "paper": 35,
-   "fingerprint": "b78722ab8d12fa90",
+   "fingerprint": "88c83043b06e3bae",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -2995,7 +2993,7 @@
   },
   {
    "paper": 36,
-   "fingerprint": "e7bdeefd1e3b0ffe",
+   "fingerprint": "78008a701aae4f1d",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,
@@ -3089,7 +3087,7 @@
   },
   {
    "paper": 37,
-   "fingerprint": "15231b0424a46e50",
+   "fingerprint": "4a0c012035c84c48",
    "kept": {},
    "replaced": {
     "Islamic Studies": 20,

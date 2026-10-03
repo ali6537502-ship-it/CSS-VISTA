@@ -67,6 +67,10 @@ if ($phase === 'driver') {
     write_manifest("$fixtures/release4-overlap", ['series' => 'release4series001', 'editorial_release' => 4, 'replace_unstarted_below_release' => 4, 'publishable' => true],
         [fixture_paper('legacy', 3), ...$cross]);
     echo run_phase('overlap', "$fixtures/release4-overlap");
+    $clarified = array_map(static fn($paper) => array_map(static function ($q) { $q['q'] .= ' Clarified fixture wording.'; $q['e'] .= ' Clarified fixture explanation.'; return $q; }, $paper), $cross);
+    write_manifest("$fixtures/release5-wording", ['series' => 'release5series001', 'editorial_release' => 5, 'replace_unstarted_below_release' => 5, 'publishable' => true],
+        [fixture_paper('legacy', 3), ...$clarified]);
+    echo run_phase('wording', "$fixtures/release5-wording");
     echo run_phase('cleanup', "$fixtures/legacy");
     echo "MPT refreeze integration: done\n";
     exit(0);
@@ -76,6 +80,23 @@ require_once __DIR__ . '/../../public/api/_mpt.php';
 $pdo = cssv_db();
 mpt_ensure_schema($pdo);
 $state = "$fixtures/state.json";
+
+if ($phase === 'wording') {
+    $seed = json_decode(file_get_contents($state), true);
+    $before = [];
+    foreach ($seed['mocks'] as $label => $id) $before[$label] = mpt_frozen_paper($pdo, $id);
+    $result = mpt_refreeze_unstarted($pdo, mpt_now_ms(), 20);
+    check($result['replaced'] === 2, 'wording-only release updates both safe future papers');
+    $layout = static fn($paper) => array_map(static fn($r) => [$r['question_id'], $r['options'], $r['correct_index']], $paper['rows']);
+    foreach (['future', 'future_no_apps'] as $label) {
+        $after = mpt_frozen_paper($pdo, $seed['mocks'][$label]);
+        check($layout($after) === $layout($before[$label]), "$label wording revision retains ids, option order and keys");
+        check($after['fingerprint'] !== $before[$label]['fingerprint'], "$label content fingerprint detects wording-only changes");
+        check(str_ends_with($after['rows'][0]['stem'], 'Clarified fixture wording.'), "$label receives revised wording");
+    }
+    foreach (['started', 'soon'] as $label) check(mpt_frozen_paper($pdo, $seed['mocks'][$label]) === $before[$label], "$label full frozen content stays unchanged");
+    exit($failures ? 1 : 0);
+}
 
 if ($phase === 'cleanup') {
     // Leave the disposable database as the next CI step expects it: no fixture mocks.
