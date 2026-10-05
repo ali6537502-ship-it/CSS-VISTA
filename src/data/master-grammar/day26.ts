@@ -1,0 +1,358 @@
+import type { GrammarDay } from './types'
+import { stageOf } from './types'
+
+export const day26: GrammarDay = {
+  day: 26,
+  ...stageOf(26),
+  title: 'Parallel Structure and Clear Sentences',
+  whatYouWillLearn:
+    'You will learn that items joined by "and", "or", or compared with "than" should share the same grammatical form, and how to keep long sentences clear rather than tangled.',
+  simpleExplanation: [
+    'Think of a sentence as a short list you are reading out loud: “She likes reading, writing, and painting.” All three items feel natural together because they are built the same way — reading, writing, painting. Now try: “She likes reading, writing, and to paint.” The third item suddenly feels out of step, even though nothing else is wrong with the sentence.',
+    'This matching is called parallel structure. Whenever words or ideas are joined by “and”, “or”, or compared using “than” or “as”, they should share the same grammatical shape — all nouns, all -ing forms, all infinitives, or all full clauses. When one item breaks the pattern, the sentence feels clumsy even if every individual word is correct.',
+    'The same instinct for balance also helps with clarity in general. A sentence that tries to carry too many ideas at once — piling clause after clause onto a single main idea — becomes hard to follow. Good writing usually keeps one main idea per sentence and lets a second sentence carry the next one.',
+  ],
+  rules: [
+    {
+      rule: 'Items joined by "and" or "or" in a list should share the same grammatical form.',
+      explanation: 'If the first two items in a list are -ing forms, nouns, or infinitives, the last item should match that same form.',
+      correct: 'She likes reading, writing, and painting.',
+      wrong: 'She likes reading, writing, and to paint.',
+      correction: 'The first two items are -ing forms (reading, writing); the third should match: “painting”, not “to paint”.',
+    },
+    {
+      rule: 'Correlative pairs such as both...and, either...or, neither...nor, and not only...but also need matching structure on both sides.',
+      explanation: 'Whatever grammatical form follows the first word of the pair (both, either, neither, not only) should be echoed by the same form after the second word (and, or, nor, but also).',
+      correct: 'Sara is both intelligent and hardworking.',
+      wrong: 'Sara is both intelligent and she works hard.',
+      correction: 'After “both”, the second part should match the grammatical form of the first — an adjective (hardworking) — not switch into a full clause (she works hard).',
+    },
+    {
+      rule: 'A comparison using "than" or "as" needs the same grammatical form on both sides.',
+      explanation: 'Whatever form you use before "than" or "as", use the matching form after it too.',
+      correct: 'Learning to swim is easier than learning to dive.',
+      wrong: 'Learning to swim is easier than to dive.',
+      correction: 'Both sides of the comparison should share the same form: “learning to swim” should be compared with “learning to dive”, not with “to dive” alone.',
+    },
+    {
+      rule: 'A series of verbs describing one sequence of actions should stay in the same tense and form.',
+      explanation: 'If a sentence lists several things someone did or does, all the verbs in that list should be built the same way.',
+      correct: 'He entered the room, greeted the guests, and sat down.',
+      wrong: 'He entered the room, greeted the guests, and sitting down.',
+      correction: 'All three verbs describe one past sequence, so all three should be simple past: entered, greeted, sat — not switch to “sitting”.',
+    },
+    {
+      rule: 'After "not only" and "but also", match the grammatical form used on each side.',
+      explanation: 'Whatever form follows "not only" (an adjective, a noun, an infinitive) should be echoed by the same form after "but also".',
+      correct: 'The plan is not only affordable but also practical.',
+      wrong: 'The plan is not only affordable but also it is practical.',
+      correction: 'After “but also”, match the adjective form used after “not only”: “practical”, not a full clause.',
+    },
+    {
+      rule: 'Keep one main idea per sentence; split an overloaded sentence into two clearer ones rather than piling everything into one.',
+      explanation: 'A sentence that stacks several unrelated details onto a single main clause becomes hard to follow, even if every part of it is technically grammatical.',
+      correct: 'The company had struggled for years despite several reform attempts. It finally cut costs, and profits improved.',
+      wrong: 'The company, which had been struggling for years despite several attempts at reform made by different managers at different times, finally cut costs, which then led to profits improving eventually after some time had passed.',
+      correction: 'Splitting the overloaded sentence into two shorter sentences, each with one main idea, is far easier for a reader to follow.',
+    },
+  ],
+  comparison: {
+    title: 'Parallel vs Non-parallel',
+    columnA: 'Parallel (correct)',
+    columnB: 'Non-parallel (faulty)',
+    rows: [
+      ['She likes reading, writing, and painting.', 'She likes reading, writing, and to paint.'],
+      ['He is both talented and hardworking.', 'He is both talented and he works hard.'],
+      ['Swimming is healthier than jogging on hard surfaces.', 'Swimming is healthier than to jog on hard surfaces.'],
+    ],
+  },
+  easyExamples: [
+    'Ali likes football, cricket, and swimming.',
+    'She wants to read a book, watch a movie, and sleep early.',
+    'The teacher is both strict and fair.',
+    'He can either stay here or go home.',
+  ],
+  practicalExamples: [
+    'The manager is responsible for planning, organising, and supervising the project.',
+    'The new employee is not only confident but also reliable.',
+    'Applicants must submit their form, attach their documents, and pay the fee.',
+  ],
+  examExamples: [
+    'The policy aims not only to reduce poverty but also to improve access to education.',
+    'Good governance requires transparency, accountability, and consistency in decision-making.',
+    'Effective negotiation requires patience, flexibility, and clear communication.',
+  ],
+  commonMistakes: [
+    {
+      wrong: 'She enjoys singing, dancing, and to act.',
+      right: 'She enjoys singing, dancing, and acting.',
+      why: 'All three items in the list should share the same -ing form.',
+    },
+    {
+      wrong: 'The manager is either careless or he does not care.',
+      right: 'The manager is either careless or indifferent.',
+      why: 'After “either … or”, both sides should match in grammatical form — here, two adjectives, not an adjective and a clause.',
+    },
+    {
+      wrong: 'Walking is healthier than to run on hard surfaces.',
+      right: 'Walking is healthier than running on hard surfaces.',
+      why: 'A comparison with “than” needs matching forms on both sides.',
+    },
+    {
+      wrong: 'The report is not only detailed but also it is well organised.',
+      right: 'The report is not only detailed but also well organised.',
+      why: 'After “but also”, the form should match “detailed” — an adjective, not a full clause.',
+    },
+    {
+      wrong: 'He stood up, cleared his throat, and was starting to speak.',
+      right: 'He stood up, cleared his throat, and started to speak.',
+      why: 'All three verbs in the series describe one past sequence and should share the same simple past form.',
+    },
+    {
+      wrong: 'The student, who had studied hard for many weeks despite several distractions at home that made it difficult for him to concentrate, passed the exam, which surprised his teacher who had expected him to fail based on his earlier performance in class.',
+      right: 'The student had studied hard for many weeks despite several distractions at home. He passed the exam, which surprised his teacher, who had expected him to fail based on his earlier performance.',
+      why: 'Splitting an overly long, tangled sentence into two clearer ones, each with one main idea, makes it far easier to follow.',
+    },
+  ],
+  memoryTip:
+    'When you see "and", "or", or "than", check that both sides "match" — same word type, same verb form, same structure. If one side changes shape partway through, the sentence needs repair.',
+  practice: [
+    {
+      stage: 'Recognise it',
+      prompt: 'What is wrong with “She likes reading, writing, and to paint”?',
+      answer: 'The three items in the list are not parallel.',
+      reason: '“Reading” and “writing” are -ing forms, but “to paint” switches to an infinitive.',
+    },
+    {
+      stage: 'Recognise it',
+      prompt: 'What is wrong with “He is both talented and he works hard”?',
+      answer: 'The two parts joined by “both … and” do not match in form.',
+      reason: '“Talented” is an adjective; “he works hard” is a full clause, so the two sides are not parallel.',
+    },
+    {
+      stage: 'Recognise it',
+      prompt: 'What is the main problem with this sentence: “The committee, which had met several times over the past few months to discuss the budget without reaching any firm conclusion, finally approved the plan, which many members had originally opposed for reasons that were never fully explained”?',
+      answer: 'It tries to pack too many ideas into one sentence, making it hard to follow.',
+      reason: 'Splitting it into two shorter sentences — one about the committee’s earlier meetings, one about the final approval — would make each idea clearer.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: 'Ali enjoys reading, writing, and ____ (paint / painting).',
+      answer: 'painting',
+      reason: 'It must match the -ing form used by the other two items in the list.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: 'The plan is neither realistic ____ (or / nor) affordable.',
+      answer: 'nor',
+      reason: '“Neither” pairs with “nor”, not “or”.',
+    },
+    {
+      stage: 'Fill in the blank',
+      prompt: 'The workshop covers not only theory but also ____ (practice / practical).',
+      answer: 'practice',
+      reason: 'It must match the noun form “theory” used after “not only”.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: 'Swimming is more relaxing than (to jog / jogging).',
+      answer: 'jogging',
+      reason: 'The comparison with “than” needs the same -ing form on both sides.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: 'The manager is not only strict but also (fair / she is fair).',
+      answer: 'fair',
+      reason: 'After “but also”, the form should match the adjective “strict”.',
+    },
+    {
+      stage: 'Choose the correct form',
+      prompt: 'He either finishes the report today (or he will submit / or submits) it tomorrow.',
+      answer: 'or submits',
+      reason: 'Both verbs after “either … or” should share the same present-tense form.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'She wants a job that pays well, is interesting, and offering growth.',
+      answer: 'She wants a job that pays well, is interesting, and offers growth.',
+      reason: 'All three verbs describing the job should share the same present-tense form: pays, is, offers.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'The coach told the players to warm up, to stretch, and running twice around the field.',
+      answer: 'The coach told the players to warm up, to stretch, and to run twice around the field.',
+      reason: 'All three instructions should share the same infinitive form: to warm up, to stretch, to run.',
+    },
+    {
+      stage: 'Correct the sentence',
+      prompt: 'Reading novels is more enjoyable than to watch television.',
+      answer: 'Reading novels is more enjoyable than watching television.',
+      reason: 'A comparison with “than” needs matching forms on both sides: reading / watching.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: 'The policy is designed not only to reduce unemployment but also increasing exports.',
+      answer: 'The policy is designed not only to reduce unemployment but also to increase exports.',
+      reason: 'After “but also”, the infinitive form should match “to reduce”: “to increase”.',
+    },
+    {
+      stage: 'Exam-style',
+      prompt: 'Good leadership requires vision, discipline, and to communicate clearly.',
+      answer: 'Good leadership requires vision, discipline, and clear communication.',
+      reason: 'The three items in the list should share the same noun form: vision, discipline, and clear communication.',
+    },
+  ],
+  quiz: [
+    {
+      question: 'Which sentence uses parallel structure correctly?',
+      options: [
+        'She likes reading, writing, and to paint.',
+        'She likes reading, writing, and painting.',
+        'She likes to read, writing, and painting.',
+        'She likes reads, writing, and painting.',
+      ],
+      correct: 1,
+      explanation: 'All three items share the same -ing form.',
+    },
+    {
+      question: 'Which sentence is correctly parallel?',
+      options: [
+        'He is both talented and he works hard.',
+        'He is both talented and hardworking.',
+        'He is both talented and works hard.',
+        'He is both talent and hardworking.',
+      ],
+      correct: 1,
+      explanation: '“Both … and” should join two matching adjectives: talented and hardworking.',
+    },
+    {
+      question: 'Which sentence correctly completes a comparison with "than"?',
+      options: [
+        'Swimming is healthier than to jog.',
+        'Swimming is healthier than jogging.',
+        'Swimming is healthier than jog.',
+        'To swim is healthier than jogging is.',
+      ],
+      correct: 1,
+      explanation: 'Both sides of a “than” comparison should share the same -ing form.',
+    },
+    {
+      question: 'Which sentence correctly uses "neither … nor"?',
+      options: [
+        'The plan is neither realistic or affordable.',
+        'The plan is neither realistic nor affordable.',
+        'The plan is neither realistic, nor is it affordable somehow.',
+        'The plan neither is realistic nor affordable.',
+      ],
+      correct: 1,
+      explanation: '“Neither” pairs with “nor”, and both sides should be adjectives in the same form.',
+    },
+    {
+      question: 'Which sentence keeps a parallel list of verbs correctly?',
+      options: [
+        'He stood up, cleared his throat, and was starting to speak.',
+        'He stood up, cleared his throat, and started to speak.',
+        'He standing up, cleared his throat, and started to speak.',
+        'He stood up, clearing his throat, and started to speak.',
+      ],
+      correct: 1,
+      explanation: 'All three verbs in the sequence should share the same simple past form.',
+    },
+    {
+      question: 'Which sentence correctly uses "not only … but also"?',
+      options: [
+        'The report is not only detailed but also it is well organised.',
+        'The report is not only detailed but also well organised.',
+        'The report not only is detailed but also organised well.',
+        'The report is not only detail but also organisation.',
+      ],
+      correct: 1,
+      explanation: 'After “but also”, the form should match the adjective used after “not only”: detailed / well organised.',
+    },
+    {
+      question: 'Which sentence is correctly parallel?',
+      options: [
+        'The coach told the players to warm up, to stretch, and running twice around the field.',
+        'The coach told the players to warm up, to stretch, and to run twice around the field.',
+        'The coach told the players warming up, stretching, and to run twice around the field.',
+        'The coach told the players to warm up, stretch, and to running twice.',
+      ],
+      correct: 1,
+      explanation: 'All three instructions should share the same infinitive form: to warm up, to stretch, to run.',
+    },
+    {
+      question: 'Which sentence correctly completes the list: "Good leadership requires vision, discipline, and ___"?',
+      options: [
+        'to communicate clearly',
+        'clear communication',
+        'communicating clearly is needed',
+        'clearly communicate',
+      ],
+      correct: 1,
+      explanation: '“Vision” and “discipline” are nouns, so the third item should also be a noun phrase: “clear communication”.',
+    },
+    {
+      question: 'Which sentence correctly uses "either … or"?',
+      options: [
+        'He either finishes the report today or he will submit it tomorrow.',
+        'He either finishes the report today or submits it tomorrow.',
+        'He either finishing the report today or submits it tomorrow.',
+        'Either he finishes the report today or tomorrow he will submit it.',
+      ],
+      correct: 1,
+      explanation: 'Both verbs joined by “either … or” should share the same present-tense form: finishes / submits.',
+    },
+    {
+      question: 'Which sentence best avoids an overly long, tangled structure?',
+      options: [
+        'The committee, which had met several times over the past few months to discuss the budget without reaching any firm conclusion, finally approved the plan, which many members had originally opposed for reasons that were never fully explained.',
+        'The committee met several times over the past few months to discuss the budget without reaching a firm conclusion. It finally approved the plan, which many members had originally opposed for reasons that were never fully explained.',
+        'The committee, meeting several times, discussing the budget, not reaching conclusion, approved finally the plan opposed by members for unexplained reasons.',
+        'Having met several times without conclusion regarding the budget, and having been opposed by members for reasons unexplained, the plan was approved finally by the committee.',
+      ],
+      correct: 1,
+      explanation: 'Splitting the overloaded sentence into two clear sentences, each with one main idea, is easier to follow than packing everything into one long sentence.',
+    },
+    {
+      question: 'Which sentence keeps parallel structure in a list of nouns?',
+      options: [
+        'The workshop covers theory, practice, and how to apply it.',
+        'The workshop covers theory, practice, and application.',
+        'The workshop covers theory, practising, and application.',
+        'The workshop covers theoretical, practice, and applying.',
+      ],
+      correct: 1,
+      explanation: 'All three items should be nouns: theory, practice, application.',
+    },
+    {
+      question: 'Which sentence is correctly parallel?',
+      options: [
+        'Reading novels is more enjoyable than to watch television.',
+        'Reading novels is more enjoyable than watching television.',
+        'Reading novels is more enjoyable than television watching is.',
+        'To read novels is more enjoyable than television.',
+      ],
+      correct: 1,
+      explanation: 'Both sides of the “than” comparison should use the -ing form: reading / watching.',
+    },
+    {
+      question: 'Which sentence correctly completes: "The policy is designed not only to reduce unemployment but also ___"?',
+      options: [
+        'increasing exports',
+        'to increase exports',
+        'increase of exports',
+        'it increases exports',
+      ],
+      correct: 1,
+      explanation: 'The infinitive form after “but also” should match “to reduce”: “to increase”.',
+    },
+  ],
+  quickRevision: [
+    'Items joined by "and" or "or" in a list should share the same grammatical form — all nouns, all -ing forms, or all infinitives.',
+    'Correlative pairs (both … and, either … or, neither … nor, not only … but also) need matching structure on both sides.',
+    'A comparison with "than" or "as" needs the same grammatical form on both sides.',
+    '"Neither" pairs with "nor", not "or".',
+    'A series of verbs describing one sequence of actions should share the same tense and form.',
+    'A sentence that tries to hold too many ideas at once becomes hard to follow — split it into shorter sentences, one main idea each.',
+  ],
+}
