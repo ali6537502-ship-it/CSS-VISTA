@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-01",
+  "published_at": "2026-10-01T20:00:00+05:00",
+  "edition": "Daily Current Affairs — 1 October 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-10-01-pak-afghan-airstrikes",
+      "category": "Pakistan Foreign Relations & Security",
+      "headline": "Afghan Taliban says Pakistani airstrikes killed nine in Afghanistan",
+      "summary": "The Afghan Taliban government said Pakistani airstrikes hit three houses in Kunar and Helmand provinces, killing nine people and injuring 11. Reuters said it could not independently verify the claim and Pakistan's military did not immediately respond.",
+      "why_it_matters": "The episode marked a renewed escalation in Pakistan-Afghanistan tensions over cross-border militancy.",
+      "countries": [
+        "Pakistan",
+        "Afghanistan"
+      ],
+      "people": [
+        "Zabihullah Mujahid"
+      ],
+      "topics": [
+        "Pakistan-Afghanistan relations",
+        "cross-border security"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistani airstrikes kill nine in Afghanistan, Taliban say",
+          "url": "https://www.reuters.com/world/asia-pacific/pakistani-airstrikes-afghanistan-kill-nine-kabul-says-2026-10-01/",
+          "published_at": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-01-sco-preparations",
+      "category": "Pakistan Foreign Relations",
+      "headline": "Pakistan reviews preparations for SCO summit",
+      "summary": "Foreign Minister Ishaq Dar reviewed preparations as Shanghai Cooperation Organisation national coordinators met in Islamabad and stressed practical cooperation ahead of the 2027 summit.",
+      "why_it_matters": "Pakistan's SCO engagement is relevant to regional diplomacy, connectivity and multilateral cooperation.",
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Shanghai Cooperation Organisation"
+      ],
+      "people": [
+        "Ishaq Dar"
+      ],
+      "topics": [
+        "SCO",
+        "multilateral diplomacy"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Dar reviews SCO summit preparations",
+          "url": "https://www.dawn.com/latest-news/2026-10-01",
+          "published_at": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-01-fbr-wealth-fraud",
+      "category": "Pakistan Economy & Governance",
+      "headline": "FBR says it uncovered Rs9.41 billion wealth fraud",
+      "summary": "The Federal Board of Revenue reported uncovering an alleged Rs9.41 billion wealth fraud and registered a criminal case under the Anti-Money Laundering Act 2010.",
+      "why_it_matters": "The case links tax enforcement with Pakistan's anti-money-laundering framework.",
+      "quick_gk": [
+        {
+          "label": "Reported amount",
+          "value": "Rs9.41 billion"
+        },
+        {
+          "label": "Law invoked",
+          "value": "Anti-Money Laundering Act 2010"
+        }
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Board of Revenue"
+      ],
+      "topics": [
+        "anti-money laundering",
+        "tax enforcement"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "FBR unearths Rs9.41bn wealth fraud",
+          "url": "https://www.dawn.com/latest-news/2026-10-01",
+          "published_at": "2026-10-01"
+        }
+      ]
+    }
+  ]
+}

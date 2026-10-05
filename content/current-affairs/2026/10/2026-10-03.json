@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-03",
+  "published_at": "2026-10-03T20:00:00+05:00",
+  "edition": "Daily Current Affairs — 3 October 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-10-03-fcc-pharmacy-licence",
+      "category": "Law, Courts & Constitution",
+      "headline": "Federal Constitutional Court says doctors cannot run drug stores without a licence",
+      "summary": "The Federal Constitutional Court held that the Pharmacy Act and Drugs Act perform different legal functions and set aside a 2023 Peshawar High Court order that had restrained regulatory action.",
+      "why_it_matters": "The ruling clarifies the legal distinction between medical practice and licensing requirements for drug retail.",
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Constitutional Court",
+        "Peshawar High Court"
+      ],
+      "topics": [
+        "pharmacy regulation",
+        "drug law"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Doctors cannot run drug stores without licence: FCC",
+          "url": "https://www.dawn.com/latest-news/2026-10-03",
+          "published_at": "2026-10-03"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-03-pakistan-trade-deficit",
+      "category": "Pakistan Economy",
+      "headline": "Pakistan's July-September exports rise 11% while trade deficit widens 15.13%",
+      "summary": "Pakistan's exports increased 11% while the trade deficit widened 15.13% to $10.79 billion during July-September, according to figures reported on October 3.",
+      "why_it_matters": "The figures show that export growth did not prevent external trade imbalance from widening.",
+      "quick_gk": [
+        {
+          "label": "Trade deficit, July-September",
+          "value": "$10.79 billion"
+        },
+        {
+          "label": "Trade-deficit increase",
+          "value": "15.13%"
+        },
+        {
+          "label": "Export increase",
+          "value": "11%"
+        }
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "topics": [
+        "exports",
+        "trade deficit",
+        "external sector"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Exports increase 11pc amid soaring deficit",
+          "url": "https://www.dawn.com/latest-news/2026-10-03",
+          "published_at": "2026-10-03"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-03-houthi-aramco-attack",
+      "category": "Middle East & Energy Security",
+      "headline": "Houthis claim missile and drone attack on Aramco facility in Riyadh",
+      "summary": "Yemen's Iran-aligned Houthis said they targeted an Aramco facility in Riyadh with missiles and drones amid escalating regional hostilities.",
+      "why_it_matters": "Attacks on Saudi energy infrastructure have implications for Gulf security and global energy markets.",
+      "countries": [
+        "Yemen",
+        "Saudi Arabia"
+      ],
+      "organisations": [
+        "Saudi Aramco",
+        "Houthis"
+      ],
+      "topics": [
+        "energy security",
+        "missiles",
+        "drones"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Yemen's Houthis say they attacked Aramco facility in Riyadh with missiles, drones",
+          "url": "https://www.reuters.com/business/energy/fire-smoke-seen-near-aramco-facility-riyadh-witness-says-2026-10-03/",
+          "published_at": "2026-10-03"
+        }
+      ]
+    }
+  ]
+}

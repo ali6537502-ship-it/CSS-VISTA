@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-04",
+  "published_at": "2026-10-04T20:00:00+05:00",
+  "edition": "Daily Current Affairs — 4 October 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-10-04-fao-pakistan-healthy-diet",
+      "category": "Pakistan Development & Food Security",
+      "headline": "FAO says over 60% of Pakistanis cannot afford a healthy diet",
+      "summary": "FAO's assessment on Food Supply for Healthy Diets in Pakistan said over 60% of Pakistanis cannot afford a healthy diet and called for transformation of the agrifood system.",
+      "why_it_matters": "Affordability of nutritious food connects food security, public health, poverty and agricultural policy.",
+      "quick_gk": [
+        {
+          "label": "Pakistanis unable to afford a healthy diet",
+          "value": "Over 60%"
+        }
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Food and Agriculture Organization of the United Nations"
+      ],
+      "reports": [
+        "Food Supply for Healthy Diets in Pakistan"
+      ],
+      "topics": [
+        "food security",
+        "nutrition",
+        "agrifood systems"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "FAO flags gaps in Pakistan’s nutritious food supply",
+          "url": "https://www.dawn.com/news/2034586/fao-flags-gaps-in-pakistans-nutritious-food-supply",
+          "published_at": "2026-10-04"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-04-pakistan-self-determination-un",
+      "category": "Pakistan Foreign Relations & United Nations",
+      "headline": "Pakistan calls at UN for self-determination for Kashmiris and Palestinians",
+      "summary": "Pakistan reiterated at the United Nations that the right of self-determination should be guaranteed to Kashmiris and Palestinians and argued for consistent application of international law.",
+      "why_it_matters": "The statement reflects Pakistan's continuing diplomatic positions on Kashmir, Palestine and international law.",
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "United Nations"
+      ],
+      "people": [
+        "Usman Jadoon"
+      ],
+      "topics": [
+        "self-determination",
+        "Kashmir",
+        "Palestine"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Pakistan calls on UN to guarantee right of self-determination to Kashmiris, Palestinians",
+          "url": "https://www.dawn.com/latest-news/2026-10-04",
+          "published_at": "2026-10-04"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-04-ai-regulation-altman",
+      "category": "Science, Technology & AI",
+      "headline": "OpenAI CEO argues AI benefits justify accepting some risks",
+      "summary": "OpenAI CEO Sam Altman argued for broad public access to AI and a lighter-touch regulatory approach while acknowledging risks, highlighting a widening industry debate over frontier-AI governance.",
+      "why_it_matters": "The debate is relevant to global AI regulation, cybersecurity and governance of increasingly capable systems.",
+      "people": [
+        "Sam Altman"
+      ],
+      "organisations": [
+        "OpenAI",
+        "Anthropic"
+      ],
+      "topics": [
+        "artificial intelligence",
+        "AI regulation",
+        "AI safety"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "OpenAI's Altman says AI benefits warrant accepting some risks",
+          "url": "https://www.reuters.com/business/openais-altman-says-ai-benefits-warrant-accepting-some-risks-2026-10-04/",
+          "published_at": "2026-10-04"
+        }
+      ]
+    }
+  ]
+}

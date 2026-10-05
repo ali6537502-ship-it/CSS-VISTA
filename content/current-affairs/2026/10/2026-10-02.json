@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-02",
+  "published_at": "2026-10-02T20:00:00+05:00",
+  "edition": "Daily Current Affairs — 2 October 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-10-02-mecca-pact-houthis",
+      "category": "Pakistan Foreign Relations & Middle East",
+      "headline": "Pakistan says Mecca defence pact members will discuss political engagement with Houthis",
+      "summary": "Foreign Minister Ishaq Dar said Saudi Arabia, Turkey and Pakistan would hold an emergency meeting in Riyadh to discuss Iran's suggestion of political engagement with Yemen's Houthis amid regional escalation.",
+      "why_it_matters": "The development tests the new trilateral defence framework and Pakistan's diplomatic role in Middle East security.",
+      "countries": [
+        "Pakistan",
+        "Saudi Arabia",
+        "Turkey",
+        "Iran",
+        "Yemen"
+      ],
+      "people": [
+        "Ishaq Dar"
+      ],
+      "treaties": [
+        "Mecca Joint Defence Agreement"
+      ],
+      "topics": [
+        "Houthis",
+        "Middle East security",
+        "defence cooperation"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Pakistan says Mecca pact members to hold emergency talks on engaging Houthis",
+          "url": "https://www.reuters.com/world/middle-east/pakistan-says-mecca-pact-members-hold-emergency-talks-engaging-houthis-2026-10-02/",
+          "published_at": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-02-imf-gas-reforms",
+      "category": "Pakistan Economy",
+      "headline": "IMF praises Pakistan's oil-crisis handling and urges gas-sector reforms",
+      "summary": "The IMF praised Pakistan's handling of the oil crisis while pressing for faster work on targeted gas subsidies and reforms addressing gas-sector circular debt reported at Rs3.6 trillion.",
+      "why_it_matters": "Energy-sector reform and circular debt remain central to Pakistan's macroeconomic programme and fiscal sustainability.",
+      "quick_gk": [
+        {
+          "label": "Reported gas circular debt",
+          "value": "Rs3.6 trillion"
+        }
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "International Monetary Fund"
+      ],
+      "topics": [
+        "IMF",
+        "gas sector",
+        "circular debt"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "IMF praises oil crisis handling, urges gas sector reforms",
+          "url": "https://www.dawn.com/latest-news/2026-10-02",
+          "published_at": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-02-taiwan-f16v",
+      "category": "Global Geopolitics & Security",
+      "headline": "Taiwan receives first new F-16V Block 70 fighters from 66-aircraft order",
+      "summary": "The first two aircraft from Taiwan's order of 66 new F-16V Block 70 fighters arrived, strengthening its air-defence capability amid tensions with China.",
+      "why_it_matters": "The delivery is significant to cross-Strait deterrence and US-Taiwan defence relations.",
+      "quick_gk": [
+        {
+          "label": "Aircraft ordered",
+          "value": "66 F-16V Block 70 fighters"
+        }
+      ],
+      "countries": [
+        "Taiwan",
+        "China",
+        "United States"
+      ],
+      "topics": [
+        "Taiwan Strait",
+        "F-16V",
+        "air defence"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Taiwan's first new F-16V fighter jets arrive to bolster defences against China",
+          "url": "https://www.reuters.com/business/aerospace-defense/first-new-f-16v-fighter-jets-arrive-taiwan-bolster-defences-against-china-2026-10-02/",
+          "published_at": "2026-10-02"
+        }
+      ]
+    }
+  ]
+}

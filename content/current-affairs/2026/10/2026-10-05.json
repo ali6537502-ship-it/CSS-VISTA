@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-05",
+  "published_at": "2026-10-05T09:15:00+05:00",
+  "edition": "Daily Current Affairs — 5 October 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-10-05-mecca-pact-riyadh",
+      "category": "Pakistan Foreign Relations & Middle East",
+      "headline": "Saudi Arabia, Turkey and Pakistan convene Mecca defence pact committee in Riyadh",
+      "summary": "The strategic political and defence committee of the Mecca defence pact is due to meet in Riyadh on October 5 to discuss regional developments, institutionalisation of the alliance and political engagement with Yemen's Houthis.",
+      "why_it_matters": "The meeting is a major test of the trilateral security framework and Pakistan's role in regional diplomacy.",
+      "countries": [
+        "Pakistan",
+        "Saudi Arabia",
+        "Turkey",
+        "Yemen",
+        "Iran"
+      ],
+      "people": [
+        "Hakan Fidan",
+        "Yasar Guler",
+        "Selcuk Bayraktaroglu"
+      ],
+      "treaties": [
+        "Mecca defence pact"
+      ],
+      "topics": [
+        "defence cooperation",
+        "Houthis",
+        "Middle East"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Turkey says Mecca pact committee to meet in Riyadh on October 5",
+          "url": "https://www.reuters.com/world/asia-pacific/turkey-says-mecca-pact-committee-meet-riyadh-october-5-2026-10-04/",
+          "published_at": "2026-10-04"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-05-hormuz-oil-exports",
+      "category": "Global Economy & Energy Security",
+      "headline": "Middle East crude exports rise above pre-war levels despite Strait of Hormuz attacks",
+      "summary": "Kpler shipping data cited by Reuters showed Middle East crude exports exceeded pre-war levels on four days in the final week of September, while maritime attacks around the Strait of Hormuz increased.",
+      "why_it_matters": "The Strait of Hormuz remains a critical chokepoint for global crude and LNG supply, making shipping security central to energy prices and inflation.",
+      "quick_gk": [
+        {
+          "label": "Seven-day moving average of crude exports on October 1",
+          "value": "18.5 million barrels per day"
+        },
+        {
+          "label": "Pre-war average cited",
+          "value": "18 million barrels per day"
+        }
+      ],
+      "countries": [
+        "Iran"
+      ],
+      "topics": [
+        "Strait of Hormuz",
+        "oil exports",
+        "energy security",
+        "shipping"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Middle East crude oil exports exceed pre-war levels but tanker attacks increase",
+          "url": "https://www.reuters.com/business/energy/middle-east-crude-oil-exports-exceed-pre-war-levels-tanker-attacks-increase-2026-10-05/",
+          "published_at": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-05-imf-sri-lanka",
+      "category": "International Economy & Institutions",
+      "headline": "IMF and Sri Lanka reach staff-level agreement on seventh EFF review",
+      "summary": "The IMF reached a staff-level agreement with Sri Lanka on the seventh review under its Extended Fund Facility, potentially unlocking about $345 million in financing.",
+      "why_it_matters": "The agreement is a significant milestone in Sri Lanka's post-crisis economic reform programme.",
+      "quick_gk": [
+        {
+          "label": "Potential financing",
+          "value": "About $345 million"
+        },
+        {
+          "label": "EFF review",
+          "value": "Seventh review"
+        }
+      ],
+      "countries": [
+        "Sri Lanka"
+      ],
+      "institutions": [
+        "International Monetary Fund"
+      ],
+      "topics": [
+        "IMF",
+        "Extended Fund Facility",
+        "economic reform"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "IMF, Sri Lanka strike staff-level pact on funding of $345 million",
+          "url": "https://www.reuters.com/world/asia-pacific/imf-sri-lanka-strike-staff-level-pact-funding-345-million-2026-10-05/",
+          "published_at": "2026-10-05"
+        }
+      ]
+    }
+  ]
+}

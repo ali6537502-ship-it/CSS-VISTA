@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-30",
+  "published_at": "2026-09-30T20:00:00+05:00",
+  "edition": "Daily Current Affairs — 30 September 2026",
+  "schema_version": 1,
+  "stories": [
+    {
+      "id": "ca-2026-09-30-fbr-tax-deadline",
+      "category": "Pakistan Economy & Taxation",
+      "headline": "FBR extends 2026 income-tax return filing deadline to October 15",
+      "summary": "Pakistan's Federal Board of Revenue extended the deadline for filing income-tax returns for tax year 2026 to October 15 after requests from trade bodies and professionals.",
+      "why_it_matters": "The extension affects national tax compliance and revenue administration and is a directly testable current-affairs fact.",
+      "quick_gk": [
+        {
+          "label": "New filing deadline",
+          "value": "15 October 2026"
+        }
+      ],
+      "topics": [
+        "FBR",
+        "taxation",
+        "income tax"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Board of Revenue"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "FBR extends deadline for filing income tax returns to Oct 15",
+          "url": "https://www.dawn.com/news/2033760/fbr-dismisses-fake-notification-on-extension-of-income-tax-filing-deadline",
+          "published_at": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-09-30-fcc-harassment-ruling",
+      "category": "Law, Courts & Constitution",
+      "headline": "Federal Constitutional Court narrows application of workplace-harassment law",
+      "summary": "A Federal Constitutional Court judgment set aside an Islamabad High Court verdict and held that the workplace-harassment law is invoked where harassment is sexual in nature, prompting criticism from lawyers.",
+      "why_it_matters": "The ruling is important for Pakistan's evolving constitutional and workplace-harassment jurisprudence.",
+      "topics": [
+        "Federal Constitutional Court",
+        "workplace harassment",
+        "constitutional law"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Federal Constitutional Court",
+        "Islamabad High Court"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Lawyers criticise FCC judgement setting aside IHC verdict in workplace harassment case",
+          "url": "https://www.dawn.com/latest-news/2026-09-30",
+          "published_at": "2026-09-30"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-09-30-phc-nfc-award",
+      "category": "Federalism & Governance",
+      "headline": "Peshawar High Court calls Attorney General over delayed NFC Award",
+      "summary": "The Peshawar High Court called the Attorney General in proceedings concerning delay in a revised National Finance Commission Award and Khyber Pakhtunkhwa's share.",
+      "why_it_matters": "The NFC Award is central to fiscal federalism and distribution of divisible-pool revenues among the federation and provinces.",
+      "topics": [
+        "NFC Award",
+        "fiscal federalism",
+        "Khyber Pakhtunkhwa"
+      ],
+      "countries": [
+        "Pakistan"
+      ],
+      "institutions": [
+        "Peshawar High Court",
+        "National Finance Commission"
+      ],
+      "sources": [
+        {
+          "publisher": "Dawn",
+          "title": "Peshawar High court calls attorney general over delayed NFC Award",
+          "url": "https://www.dawn.com/latest-news/2026-09-30",
+          "published_at": "2026-09-30"
+        }
+      ]
+    }
+  ]
+}
