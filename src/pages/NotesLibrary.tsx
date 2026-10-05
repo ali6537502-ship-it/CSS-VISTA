@@ -1,52 +1,25 @@
-import { BadgePercent, ChevronDown, Eye, FileImage, FileText, ListChecks, MessageCircle, PlayCircle } from 'lucide-react'
+import { ChevronDown, Eye, FileImage, FileText, ListChecks, MessageCircle, PlayCircle } from 'lucide-react'
 import { Link } from 'react-router'
 import { PageHeader } from '@/components/shared'
-import { bundle, getNoteDisplayPrice, getVisibleBundleIncludes, getVisibleNoteProducts, notesCoverageStatement, notesPurchaseActionLabel, type NoteProduct } from '@/data/notes'
+import { bundle, getVisibleBundleIncludes, getVisibleNoteProducts, notesCoverageStatement, notesPurchaseActionLabel, type NoteProduct } from '@/data/notes'
 import { mentors, waLink } from '@/data/site'
 import { formatFileSize } from '@/lib/resourceFiles'
-
-const priceFormatter = new Intl.NumberFormat('en-PK')
-
-function NotePrice({ product }: { product: NoteProduct }) {
-  const display = getNoteDisplayPrice(product)
-  if (!display.hasPrice) return null
-
-  return (
-    <div className="mt-4 flex items-center gap-3 rounded-xl border border-amber-300 bg-amber-50 p-3">
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-amber-300 text-amber-950"><BadgePercent className="h-5 w-5" /></span>
-      <span className="min-w-0 flex-1">
-        <span className="block text-[10px] font-extrabold uppercase tracking-[.14em] text-amber-800">{display.hasActiveOffer ? `Today’s ${display.discountPercent}% discount` : 'Regular price'}</span>
-        <span className="mt-0.5 flex flex-wrap items-baseline gap-2">
-          {display.hasActiveOffer && <span className="text-sm text-slate-500 line-through">PKR {priceFormatter.format(product.pricing.regularPrice)}</span>}
-          <strong className="font-display text-xl text-pine">PKR {priceFormatter.format(display.price)}</strong>
-        </span>
-        {display.hasActiveOffer && <span className="block text-[10px] text-slate-500">Today only · offer ends at midnight PKT</span>}
-      </span>
-    </div>
-  )
-}
 
 export default function NotesLibrary() {
   const ali = mentors.find((mentor) => mentor.id === 'ali')!
   const visibleProducts = getVisibleNoteProducts()
   const visibleBundleIncludes = getVisibleBundleIncludes()
   const contact = (product: NoteProduct | string) => {
-    if (typeof product === 'string') {
-      return waLink(ali.whatsapp, `Assalam-o-Alaikum, I would like to inquire about the ${product} available on CSS VISTA. Please share the price and purchase details.`)
-    }
-
-    const display = getNoteDisplayPrice(product)
+    const title = typeof product === 'string' ? product : `${product.subject} notes`
     return waLink(
       ali.whatsapp,
-      display.hasPrice
-        ? `Assalam-o-Alaikum, I would like to purchase the ${product.subject} notes listed on CSS VISTA for PKR ${priceFormatter.format(display.price)}. Please share the purchase details.`
-        : `Assalam-o-Alaikum, I would like to inquire about the ${product.subject} notes available on CSS VISTA. Please share the price and purchase details.`,
+      `Assalam-o-Alaikum, I would like to purchase the ${title} available on CSS VISTA. Please share the current purchase details.`,
     )
   }
 
   return (
     <div>
-      <PageHeader title="CSS Notes by Sir Ali Hassan Sargana" description="Explore complete topic coverage, available samples and prices for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History." />
+      <PageHeader title="CSS Notes by Sir Ali Hassan Sargana" description="Explore complete topic coverage and available samples for Current Affairs, Pakistan Affairs, Criminology, Political Science and European History. Contact directly on WhatsApp to purchase." />
       <main className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
         <section className="grid gap-5 rounded-2xl bg-pine p-5 text-white shadow-lg sm:grid-cols-[112px_1fr] sm:items-center sm:p-7">
           <img src="/images/mentor-ali.jpg" alt="Ali Hassan Sargana" className="h-28 w-28 rounded-2xl border-2 border-white/25 object-cover object-top shadow-lg" />
@@ -62,7 +35,6 @@ export default function NotesLibrary() {
             <article key={product.id} className="flex flex-col rounded-xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
               <h2 className="font-display text-xl font-bold text-pine">{product.subject}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
-              <NotePrice product={product} />
               {product.previewVideoId && (
                 <section className="mt-4 overflow-hidden rounded-xl border bg-slate-950 shadow-sm" aria-label={`${product.subject} video preview`}>
                   <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5 text-white">
@@ -114,7 +86,7 @@ export default function NotesLibrary() {
                   ))}
                 </div>
               </details>
-              <a href={contact(product)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {product.id === 'european-history' ? 'Buy European History Notes — PKR 6,000' : notesPurchaseActionLabel}</a>
+              <a href={contact(product)} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-pine px-4 text-sm font-bold text-white hover:bg-emerald-900"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel} on WhatsApp</a>
             </article>
           ))}
         </div>
@@ -122,7 +94,7 @@ export default function NotesLibrary() {
         <section className="mt-6 overflow-hidden rounded-xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 to-white">
           <div className="flex flex-col items-start justify-between gap-4 p-6 sm:flex-row sm:items-center">
             <div><span className="rounded-full bg-amber-300 px-3 py-1 text-xs font-bold text-amber-950">{bundle.badge}</span><h2 className="mt-2 font-display text-2xl font-bold text-pine">{bundle.title}</h2><p className="mt-1 text-sm text-muted-foreground">{visibleBundleIncludes}</p></div>
-            <a href={contact('complete notes bundle')} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-11 shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-6 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel}</a>
+            <a href={contact('complete notes bundle')} target="_blank" rel="noopener noreferrer" data-google-vignette="false" className="inline-flex h-11 shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-6 text-sm font-bold text-white hover:bg-emerald-700"><MessageCircle className="h-4 w-4" /> {notesPurchaseActionLabel} on WhatsApp</a>
           </div>
         </section>
       </main>
