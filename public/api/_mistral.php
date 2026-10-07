@@ -87,7 +87,7 @@ function cssv_ai_ensure_schema(PDO $pdo): void
 function cssv_ai_usage(PDO $pdo, string $userId, string $feature): array
 {
     cssv_ai_ensure_schema($pdo);
-    $stmt = $pdo->prepare('SELECT calls,input_tokens,output_tokens,units FROM ai_daily_usage WHERE user_id=? AND usage_date=UTC_DATE() AND feature=? LIMIT 1');
+    $stmt = $pdo->prepare('SELECT calls,input_tokens,output_tokens,units FROM ai_daily_usage WHERE user_id=? AND usage_date=DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)) AND feature=? LIMIT 1');
     $stmt->execute([$userId, $feature]);
     $row = $stmt->fetch();
     return [
@@ -103,7 +103,7 @@ function cssv_ai_reserve_call(PDO $pdo, string $userId, string $feature, int $li
     cssv_ai_ensure_schema($pdo);
     try {
         $pdo->beginTransaction();
-        $stmt = $pdo->prepare('SELECT calls FROM ai_daily_usage WHERE user_id=? AND usage_date=UTC_DATE() AND feature=? FOR UPDATE');
+        $stmt = $pdo->prepare('SELECT calls FROM ai_daily_usage WHERE user_id=? AND usage_date=DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)) AND feature=? FOR UPDATE');
         $stmt->execute([$userId, $feature]);
         $current = $stmt->fetchColumn();
         $calls = $current === false ? 0 : (int)$current;
@@ -112,11 +112,11 @@ function cssv_ai_reserve_call(PDO $pdo, string $userId, string $feature, int $li
             cssv_fail('You have reached today\'s limit for this AI feature.', 429, 'daily_ai_limit_reached');
         }
         if ($current === false) {
-            $insert = $pdo->prepare('INSERT INTO ai_daily_usage (user_id,usage_date,feature,calls) VALUES (?,UTC_DATE(),?,1)');
+            $insert = $pdo->prepare('INSERT INTO ai_daily_usage (user_id,usage_date,feature,calls) VALUES (?,DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)),?,1)');
             $insert->execute([$userId, $feature]);
             $calls = 1;
         } else {
-            $update = $pdo->prepare('UPDATE ai_daily_usage SET calls=calls+1 WHERE user_id=? AND usage_date=UTC_DATE() AND feature=?');
+            $update = $pdo->prepare('UPDATE ai_daily_usage SET calls=calls+1 WHERE user_id=? AND usage_date=DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)) AND feature=?');
             $update->execute([$userId, $feature]);
             $calls++;
         }
@@ -135,7 +135,7 @@ function cssv_ai_reserve_call(PDO $pdo, string $userId, string $feature, int $li
 function cssv_ai_refund_call(PDO $pdo, string $userId, string $feature): void
 {
     try {
-        $stmt = $pdo->prepare('UPDATE ai_daily_usage SET calls=GREATEST(calls-1,0) WHERE user_id=? AND usage_date=UTC_DATE() AND feature=?');
+        $stmt = $pdo->prepare('UPDATE ai_daily_usage SET calls=GREATEST(calls-1,0) WHERE user_id=? AND usage_date=DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)) AND feature=?');
         $stmt->execute([$userId, $feature]);
     } catch (Throwable $error) {
         error_log('CSSV AI usage refund failed: ' . $error->getMessage());
@@ -147,7 +147,7 @@ function cssv_ai_record_usage(PDO $pdo, string $userId, string $feature, int $in
     try {
         $stmt = $pdo->prepare(
             'UPDATE ai_daily_usage SET input_tokens=input_tokens+?,output_tokens=output_tokens+?,units=units+? '
-            . 'WHERE user_id=? AND usage_date=UTC_DATE() AND feature=?'
+            . 'WHERE user_id=? AND usage_date=DATE(DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 HOUR)) AND feature=?'
         );
         $stmt->execute([max(0, $inputTokens), max(0, $outputTokens), max(0, $units), $userId, $feature]);
     } catch (Throwable $error) {
