@@ -140,6 +140,7 @@ export default function AccountHome() {
 
   const mptFlow = useMptFlowEnabled() === true
   const choices = [
+    { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'CSS attempt settings & saved writing' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },

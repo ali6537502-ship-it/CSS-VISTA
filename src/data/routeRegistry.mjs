@@ -175,6 +175,8 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/resources', 'My Vista Resources', 'Free book downloads for students with a 100% complete profile.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/preparation', 'My Preparation', 'Your account-owned preparation attempts and saved writing.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/ai-usage', 'AI Usage', 'Your private usage and operation history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/membership', 'Membership & Payments', 'Your CSS Vista membership and private payment history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),

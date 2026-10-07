@@ -71,6 +71,8 @@ const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
 const AccountResources = lazy(() => import('./pages/account/Resources'))
+const AccountLearning = lazy(() => import('./pages/account/Learning'))
+const AccountAiUsage = lazy(() => import('./pages/account/AiUsage'))
 const AccountMembership = lazy(() => import('./pages/account/Membership'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
@@ -198,6 +200,8 @@ export default function App() {
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
+        <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
+        <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
         <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />
         <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />

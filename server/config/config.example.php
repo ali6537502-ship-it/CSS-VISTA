@@ -24,6 +24,21 @@ return [
     'CSSV_PRO_TERMS_VERSION' => '',
     'CSSV_PRO_TERMS_TEXT' => '', // supply owner-approved terms before opening
 
+    // AI foundation: private server-only configuration; no live action endpoint
+    // is published in Phase 1B. Verify model access/terms before future enabling.
+    'CSSV_AI_ENABLED' => '0',
+    'CSSV_AI_APPROVED' => '0',
+    'CSSV_AI_MODEL_VERIFIED' => '0',
+    'CSSV_OPENAI_API_KEY' => '',
+    'CSSV_AI_MODEL' => 'gpt-6-luna',
+    'CSSV_AI_LIMIT_PRECIS' => '2',
+    'CSSV_AI_LIMIT_PARAGRAPH' => '5',
+    'CSSV_AI_LIMIT_SENTENCE' => '15',
+    'CSSV_AI_LIMIT_TUTOR' => '20',
+    'CSSV_AI_LIMIT_CURRENT_AFFAIRS' => '10',
+    'CSSV_AI_LIMIT_MATHS' => '10',
+    // Handwriting/OCR remain unavailable until their separate policy is defined.
+
     // Optional one-time schema bootstrap endpoint token. Store the same value
     // as a GitHub Actions repository secret, never in a committed workflow.
     'CSSV_BOOTSTRAP_TOKEN' => 'replace_with_a_unique_random_value',

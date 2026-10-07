@@ -2,7 +2,7 @@ name: Pro membership foundations
 on:
   pull_request:
     branches: [main]
-    paths: ['public/api/_pro*.php', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
+    paths: ['public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
 permissions:
   contents: read
 jobs:
@@ -41,8 +41,9 @@ jobs:
           extensions: pdo_mysql, mbstring
       - name: Check syntax and pure membership rules
         run: |
-          for file in public/api/_pro*.php public/api/student/membership.php public/api/admin/payments.php tests/pro/*.php; do php -l "$file"; done
+          for file in public/api/_pro*.php public/api/_learning*.php public/api/_ai*.php public/api/student/membership.php public/api/admin/payments.php public/api/student/learning.php public/api/student/ai-usage.php public/api/admin/ai-usage.php tests/pro/*.php tests/learning/*.php server/bin/ai-operation-sweep.php; do php -l "$file"; done
           php tests/pro/unit.php
+          php tests/learning/unit.php
           node tests/pro/grammar-preservation.mjs
       - name: Create isolated database and HTTP runtime
         run: |
@@ -51,7 +52,9 @@ jobs:
           php -d opcache.enable=0 -S localhost:4173 -t public tests/pro/router.php > test-artifacts/pro-php.log 2>&1 &
           node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
       - name: Verify actual accounts, receipt reviews and concurrent renewals
-        run: node tests/pro/security.mjs
+        run: |
+          node tests/pro/security.mjs
+          node tests/learning/security.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log

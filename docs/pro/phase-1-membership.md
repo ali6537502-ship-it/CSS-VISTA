@@ -1,6 +1,6 @@
 # Phase 1A: membership and manual-payment foundation
 
-Status: implemented for review on `feature/css-vista-pro-foundations`; not a production launch. Price approved by the owner: PKR 1,950 / 30 days. Phase 1B (AI accounting, minimum attempt model and writing persistence) remains separate work. The broader Grammar, Précis, Current Affairs and guided preparation rollout follows the phased audit; this increment does not promise those new services are available.
+Status: implemented for review on `feature/css-vista-pro-foundations`; not a production launch. Price approved by the owner: PKR 1,950 / 30 days. Phase 1B (AI accounting, minimum attempt settings and writing persistence) is now a separate reviewable increment on the same draft PR; see [phase-1-learning.md](phase-1-learning.md). The broader Grammar, Précis, Current Affairs and guided preparation rollout follows the phased audit; this increment does not promise those new services are available.
 
 ## Account and entitlement contract
 
