@@ -77,7 +77,9 @@
     "build:mpt-release": "node scripts/mpt/build-release.mjs",
     "audit:mpt-frozen": "node scripts/mpt/audit-frozen.mjs",
     "profile:mpt-patterns": "node scripts/mpt/derive-pattern-profile.mjs",
-    "test:mpt-release": "node --test tests/mptRelease.test.mjs"
+    "test:mpt-release": "node --test tests/mptRelease.test.mjs",
+    "test:handwriting-server": "php tests/handwriting/unit.php",
+    "test:handwriting-security": "node tests/handwriting/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

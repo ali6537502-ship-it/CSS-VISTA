@@ -28,14 +28,20 @@ function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature
   if(!in_array($feature,['paragraph','sentence'],true))throw new LogicException('This AI learning feature is not wired yet.');
   if($feature==='paragraph' && preg_match('/\n\s*\n/u',$version['text']))throw new InvalidArgumentException('Submit a single paragraph for paragraph feedback.');
   if(cssv_learning_words($version['text'])>($feature==='sentence'?80:450))throw new InvalidArgumentException('Use a short sentence or one paragraph for this scope.');
-  $bucket=cssv_ai_bucket($now);
-  $pdo->prepare('INSERT IGNORE INTO ai_daily_usage(user_id,feature,bucket_date) VALUES(?,?,?)')->execute([$userId,$feature,$bucket]);
-  $q=$pdo->prepare('SELECT * FROM ai_daily_usage WHERE user_id=? AND feature=? AND bucket_date=? FOR UPDATE');$q->execute([$userId,$feature,$bucket]);$usage=$q->fetch();
-  if((int)$usage['used']+(int)$usage['reserved'] >= $limit)throw new DomainException('Your daily allowance is already used or reserved by pending work.');
-  if((int)$usage['accepted'] >= $limit*3)throw new DomainException('The daily request-attempt limit has been reached.');
-  $id=cssv_uuid_v4();$pdo->prepare('INSERT INTO ai_operations(id,user_id,request_id,payload_hash,feature,version_id,bucket_date,model,prompt_version) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$id,$userId,$request,$hash,$feature,$versionId,$bucket,$config['model'],$config['prompt_version']]);
-  $pdo->prepare('UPDATE ai_daily_usage SET reserved=reserved+1,accepted=accepted+1 WHERE user_id=? AND feature=? AND bucket_date=?')->execute([$userId,$feature,$bucket]);$pdo->commit();return $id;
+  $id=cssv_ai_reserve_usage($pdo,$userId,$request,$hash,$feature,$versionId,$config,$now);$pdo->commit();return $id;
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
+}
+/** Caller holds the account lock in a transaction. */
+function cssv_ai_reserve_usage(PDO $pdo,string $userId,string $request,string $hash,string $feature,?string $versionId,array $config,DateTimeImmutable $now,?string $handwritingId=null): string {
+ $limit=cssv_ai_limit($feature);
+ $bucket=cssv_ai_bucket($now);
+ $pdo->prepare('INSERT IGNORE INTO ai_daily_usage(user_id,feature,bucket_date) VALUES(?,?,?)')->execute([$userId,$feature,$bucket]);
+ $q=$pdo->prepare('SELECT * FROM ai_daily_usage WHERE user_id=? AND feature=? AND bucket_date=? FOR UPDATE');$q->execute([$userId,$feature,$bucket]);$usage=$q->fetch();
+ if((int)$usage['used']+(int)$usage['reserved'] >= $limit)throw new DomainException('Your daily allowance is already used or reserved by pending work.');
+ if((int)$usage['accepted'] >= ($feature==='handwriting_extract'?$limit:$limit*3))throw new DomainException('The daily request-attempt limit has been reached.');
+ $id=cssv_uuid_v4();$fields='id,user_id,request_id,payload_hash,feature,version_id,bucket_date,model,prompt_version';$values=[$id,$userId,$request,$hash,$feature,$versionId,$bucket,$config['model'],$config['prompt_version']];if($handwritingId!==null){$fields.=',handwriting_id';$values[]=$handwritingId;}
+ $pdo->prepare('INSERT INTO ai_operations('.$fields.') VALUES('.implode(',',array_fill(0,count($values),'?')).')')->execute($values);
+ $pdo->prepare('UPDATE ai_daily_usage SET reserved=reserved+1,accepted=accepted+1 WHERE user_id=? AND feature=? AND bucket_date=?')->execute([$userId,$feature,$bucket]); return $id;
 }
 function cssv_ai_operation_lock(PDO $pdo,string $id): array {
  $q=$pdo->prepare('SELECT user_id FROM ai_operations WHERE id=?');$q->execute([$id]);$user=$q->fetchColumn();if(!$user)throw new OutOfBoundsException('AI operation not found.');cssv_learning_owner_lock($pdo,$user,false);
@@ -46,10 +52,11 @@ function cssv_ai_release_reservation(PDO $pdo,array $op,int $used): void {
  $q->execute([$used,$op['user_id'],$op['feature'],$op['bucket_date']]);
  if($q->rowCount()!==1)throw new RuntimeException('AI reservation accounting is inconsistent.');
 }
-function cssv_ai_start(PDO $pdo,string $id,bool $dispatchAllowed=true): ?array {
+function cssv_ai_start(PDO $pdo,string $id,bool $dispatchAllowed=true,?callable $transition=null): ?array {
  $pdo->beginTransaction();try {
   $op=cssv_ai_operation_lock($pdo,$id);if($op['state']!=='reserved'){$pdo->commit();return null;}
   if(!$dispatchAllowed){
+   if($transition)$transition($pdo,$op,'failed',null);
    cssv_ai_release_reservation($pdo,$op,0);
    $pdo->prepare("UPDATE ai_operations SET state='failed',accounting='released',error_code='ai_preflight_unavailable',completed_at=NOW(6) WHERE id=?")->execute([$id]);$pdo->commit();return null;
   }
@@ -57,21 +64,24 @@ function cssv_ai_start(PDO $pdo,string $id,bool $dispatchAllowed=true): ?array {
   $pdo->prepare('UPDATE ai_daily_usage SET provider_calls=provider_calls+1 WHERE user_id=? AND feature=? AND bucket_date=?')->execute([$op['user_id'],$op['feature'],$op['bucket_date']]);$pdo->commit();return $op;
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
-function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,?array $result=null,string $error=''): void {
+function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,?array $result=null,string $error='',?callable $transition=null): void {
  if(!in_array($state,['succeeded','failed','unknown'],true))throw new InvalidArgumentException('Invalid AI completion state.');
  $pdo->beginTransaction();try {
   $op=cssv_ai_operation_lock($pdo,$id);if(in_array($op['state'],['succeeded','failed'],true)){$pdo->commit();return;}
-  if($state==='succeeded') {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
+  if($state==='succeeded' && $op['feature']!=='handwriting_extract') {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
+  if(in_array($op['feature'],['handwriting','handwriting_extract'],true) && !$transition)throw new LogicException('Extraction requires its persisted workflow transition.');
+  if($transition)$result=$transition($pdo,$op,$state,$result);
   $usage=$response ? cssv_ai_usage_parse($response) : ['input_tokens'=>null,'output_tokens'=>null,'cached_tokens'=>null];
   $responseId=is_string($response['id'] ?? null) ? mb_substr($response['id'],0,180) : null;$model=is_string($response['model'] ?? null)?mb_substr($response['model'],0,120):null;
   $terminal=$state!=='unknown';$accounting=$terminal ? ($state==='succeeded'?'consumed':'released') : 'reserved';
   if($terminal && $op['accounting']==='reserved')cssv_ai_release_reservation($pdo,$op,$state==='succeeded'?1:0);
   $pdo->prepare('UPDATE ai_operations SET state=?,accounting=?,provider_response_id=COALESCE(?,provider_response_id),reported_model=COALESCE(?,reported_model),input_tokens=COALESCE(?,input_tokens),cached_tokens=COALESCE(?,cached_tokens),output_tokens=COALESCE(?,output_tokens),result=?,error_code=?,completed_at=? WHERE id=?')->execute([$state,$accounting,$responseId,$model,$usage['input_tokens'],$usage['cached_tokens'],$usage['output_tokens'],$result?json_encode($result,JSON_THROW_ON_ERROR):null,$error!==''?substr($error,0,80):null,$terminal?gmdate('Y-m-d H:i:s'):null,$id]);
-  if($state==='succeeded')foreach($result['findings'] as $f)$pdo->prepare('INSERT INTO writing_findings(id,operation_id,version_id,code,severity,excerpt,explanation,hint) VALUES(?,?,?,?,?,?,?,?)')->execute([cssv_uuid_v4(),$id,$op['version_id'],$f['code'],$f['severity'],$f['excerpt'],$f['explanation'],$f['hint']]);
+  if($state==='succeeded' && $op['feature']!=='handwriting_extract')foreach($result['findings'] as $f)$pdo->prepare('INSERT INTO writing_findings(id,operation_id,version_id,code,severity,excerpt,explanation,hint) VALUES(?,?,?,?,?,?,?,?)')->execute([cssv_uuid_v4(),$id,$op['version_id'],$f['code'],$f['severity'],$f['excerpt'],$f['explanation'],$f['hint']]);
   $pdo->commit();
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
 function cssv_ai_execute(PDO $pdo,string $id,?callable $testTransport=null): void {
+ $q=$pdo->prepare('SELECT feature FROM ai_operations WHERE id=?');$q->execute([$id]);if(in_array($q->fetchColumn(),['handwriting','handwriting_extract'],true))throw new LogicException('Use the confirmation-bound handwriting workflow.');
  if($testTransport && (getenv('CI')!=='true' || getenv('CSSV_DB_NAME')!=='cssvista_briefing_test'))throw new LogicException('Test transport is unavailable.');
  $allowed=$testTransport!==null || (cssv_ai_configuration()['configured'] && function_exists('curl_init'));
  $op=cssv_ai_start($pdo,$id,$allowed);if(!$op)return;

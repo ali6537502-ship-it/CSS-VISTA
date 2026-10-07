@@ -28,7 +28,7 @@ function cssv_learning_attempt_input(array $body): array {
     sort($ids); return ['target_year'=>$year,'target_date'=>$date,'optional_subject_ids'=>$ids,'daily_minutes'=>$minutes,'stage'=>$stage];
 }
 function cssv_ai_bucket(DateTimeImmutable $now): string { return $now->setTimezone(new DateTimeZone('Asia/Karachi'))->format('Y-m-d'); }
-function cssv_ai_features(): array { return ['precis'=>2,'paragraph'=>5,'sentence'=>15,'tutor'=>20,'current_affairs'=>10,'maths'=>10]; }
+function cssv_ai_features(): array { return ['precis'=>2,'paragraph'=>5,'sentence'=>15,'tutor'=>20,'current_affairs'=>10,'maths'=>10,'handwriting'=>0,'handwriting_extract'=>0]; }
 function cssv_writing_codes(): array { return ['article_usage','subject_verb_agreement','run_on_sentence','sentence_fragment','tense_consistency','punctuation','weak_transition','vocabulary_repetition','vague_expression','weak_topic_sentence','coherence','awkward_word_choice','redundancy','informal_expression','preposition_error','pronoun_reference']; }
 function cssv_writing_result(array $result,string $text): array {
     cssv_pro_fields($result,['summary','findings']);

@@ -37,7 +37,19 @@ return [
     'CSSV_AI_LIMIT_TUTOR' => '20',
     'CSSV_AI_LIMIT_CURRENT_AFFAIRS' => '10',
     'CSSV_AI_LIMIT_MATHS' => '10',
-    // Handwriting/OCR remain unavailable until their separate policy is defined.
+    // Phase 2 remains closed until its policy, image capability and cleanup are verified.
+    'CSSV_HANDWRITING_ENABLED' => '0',
+    'CSSV_AI_VISION_VERIFIED' => '0',
+    'CSSV_HANDWRITING_CLEANUP_VERIFIED' => '0',
+    'CSSV_AI_LIMIT_HANDWRITING' => '0', // owner decision: 3 or 5 successful feedback/day
+    'CSSV_AI_LIMIT_HANDWRITING_EXTRACT' => '0', // exactly twice the evaluation limit
+    'CSSV_HANDWRITING_RETENTION_SECONDS' => '0', // owner decision: 3600 or 86400
+    'CSSV_HANDWRITING_POLICY_VERSION' => '',
+    'CSSV_HANDWRITING_PROCESSING_NOTICE' => '', // approved external-processing disclosure
+    'CSSV_HANDWRITING_MAX_BYTES' => '5242880',
+    'CSSV_HANDWRITING_MAX_EDGE' => '4096',
+    'CSSV_HANDWRITING_MAX_PIXELS' => '12000000',
+    'CSSV_HANDWRITING_MAX_WORDS' => '450',
 
     // Optional one-time schema bootstrap endpoint token. Store the same value
     // as a GitHub Actions repository secret, never in a committed workflow.
