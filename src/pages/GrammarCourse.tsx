@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   ArrowRight, BookOpen, Check, ChevronLeft, ChevronRight, CircleAlert, CircleCheck,
   ClipboardCheck, Clock3, Eye, FileText, GraduationCap, Layers, Lightbulb, ListChecks,
@@ -190,9 +190,9 @@ function CorrectionCard({ id, index, task, model, note, draft, onDraft }: {
   )
 }
 
-export default function GrammarCourse() {
+function GrammarCourseView({ initialDay, returnTo }: { initialDay?: number; returnTo?: string }) {
   const [state, setState] = useState<CourseState>(() => readState())
-  const [day, setDay] = useState(() => readState().currentDay)
+  const [day, setDay] = useState(() => initialDay ?? readState().currentDay)
   const [view, setView] = useState<View>('course')
   const [warmUpAnswers, setWarmUpAnswers] = useState<Record<string, number>>({})
   const [drillAnswers, setDrillAnswers] = useState<Record<string, number>>({})
@@ -309,6 +309,7 @@ export default function GrammarCourse() {
         description="Start from zero and finish able to write accurate, formal English. Each day explains one skill in plain language, shows worked examples, gives you a warm-up, a twelve-question drill and six sentence corrections, and ends with a short piece of writing of your own."
       >
         <div className="mt-4 flex flex-wrap gap-2">
+          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />Return to Expression Lab</Link>}
           <button type="button" onClick={() => setView('toolkit')} className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
           <Link to="/grammar-vocabulary" className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><BookOpen className="h-3.5 w-3.5" /> Vocabulary practice</Link>
           <Link to="/books" className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><FileText className="h-3.5 w-3.5" /> Handbook PDFs</Link>
@@ -757,4 +758,16 @@ export default function GrammarCourse() {
       </main>
     </div>
   )
+}
+
+/** A lesson link opens a view without overwriting the member's saved course position. */
+export default function GrammarCourse() {
+  const [params] = useSearchParams()
+  const requested = params.get('day'), initialDay = requested && /^(?:[1-9]|[12][0-9]|30)$/.test(requested) ? Number(requested) : undefined
+  const writing = params.get('writing'), version = params.get('version'), idPattern = /^[a-f0-9-]{36}$/i
+  const back = new URLSearchParams()
+  if (writing && idPattern.test(writing)) back.set('writing', writing)
+  if (version && idPattern.test(version)) back.set('version', version)
+  const returnTo = params.get('from') === 'expression' ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
+  return <GrammarCourseView key={`${initialDay || 'saved'}:${returnTo || ''}`} initialDay={initialDay} returnTo={returnTo} />
 }

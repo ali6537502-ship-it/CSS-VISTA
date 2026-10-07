@@ -1,0 +1,53 @@
+# Phase 3: typed writing and English Expression Lab
+
+Implemented for review on the existing foundations branch/draft PR #78. No production migration, merge, deployment, collection launch or external model call occurs. `/account/expression` uses the native account/full-profile gate, shared preparation attempts, immutable writing versions, existing primary Responses client and atomic usage ledger. It adds no schema, duplicate account or independent history store.
+
+## Student journey
+
+Write a sentence/short expression or one English paragraph → explicitly save → review the exact saved wording and processing disclosure → request diagnosis → inspect anchored excerpts/explanations/hints → write an independent revision → save another version → compare wording and reported findings → open relevant existing Grammar practice.
+
+The workspace continues the graphite/indigo visual direction of handwriting with side-by-side review/rewrite panels on desktop and stacked panels on mobile. It reuses existing handwritten-workspace styles rather than introducing another styling library. A contextual My Preparation link makes the tool discoverable. The private route disables ads and indexing. Public routes and account architecture stay intact.
+
+Feedback always targets the displayed **saved version**, independently of the rewrite editor. Rewrites remain separate drafts until explicitly saved. Earlier text/results are preserved. Evaluation never receives a client-supplied replacement paragraph. No generated polished answer, examination marks, full essay/subjective-answer marking or invented source facts appear.
+
+The shared structured model result retains normalized code, exact excerpt, severity, explanation and individualized hint. The response adds category, readable label, audited lesson day and a software-authored rewrite instruction from the canonical code map. Derived instructional fields do not require another model call and do not replace the original persisted findings. Selecting an excerpt highlights its first exact occurrence in the saved wording and focuses that reading context.
+
+Browser drafts use the existing autosave hook with user/record/source-version keys. Stable save identities reuse the existing account mutation handler; a committed save whose response is lost can be retried without making a duplicate version. Expected versions reject concurrent edits. A stale restored draft requires review before adopting a newer base. Keyed account components, abortable reads and before/after expected-user checks isolate account switches.
+
+## Authority, quotas and recovery
+
+`student/expression.php` accepts native authenticated/full-profile GET/POST. POST also checks CSRF/expected user, strict bounded JSON, reviewed notice/version and account/network write limits (120/hour). The server derives the sentence/paragraph scope from an owned immutable version, validates shape/size, then checks active Pro and actual feature/provider configuration. Précis and handwriting-bound records are rejected; the latter must retain their separate confirmation workflow. The Expression history excludes those page-bound records, while their successful findings can contribute to an owned cross-writing profile.
+
+Feedback supports one paragraph ≤450 software-counted words or one short expression ≤80 words, each ≤6000 characters and without blank-line paragraph separation. These are technical bounds, not official examination rules. Existing general saved writing can be longer; it must be trimmed into a new version before evaluation.
+
+Initial configurable policy remains paragraph 5/day and sentence/expression 15/day from the supplied master prompt. Each successful diagnosis consumes one allowance in its respective bucket. Accepted attempts are separately bounded at three times that bucket's allowance. Saving, highlighting, reading, comparison, profiles, Grammar links and revision use zero model calls. The UI reads actual server limits and reservations.
+
+Request identity includes feature, immutable version/hash and acknowledged expression-policy version. Matching retries return the existing result, including after expiry; changed intent conflicts. An account lock also rejects a new identity for a version already succeeded/reserved/in-flight/unknown, so racing identities cannot re-dispatch the same saved version. Known failed results may be explicitly retried within the attempt cap. Locks end before the one bounded provider POST.
+
+Existing start/settlement logic remains authoritative: dispatch once, no automatic provider retry or fallback; useful feedback/findings and consumed allowance settle together; known failures release the successful-use reservation but retain accepted attempts and reported dispatch/tokens; ambiguous outcomes keep their reservation. A per-feature readiness check releases an undispatched reservation if the feature is closed without making a provider call. Accepted work uses its original Asia/Karachi bucket and can finish after Pro expires. Status/history are retrieved without buying another interval.
+
+`CSSV_EXPRESSION_ENABLED` defaults to zero, with empty notice/version. Actual readiness additionally requires the existing approved/model-verified private provider configuration, CURL, a valid reviewed processing notice/version and a nonzero writing bucket. This increment uses the previously documented configurable primary model; no real account capability, output quality, price or provider retention is claimed as verified. The notice must accurately describe the external service; `store:false` alone does not mean zero retention. The existing packaged CLI handwriting maintenance runner executes the shared operation sweep for all scopes, including when handwriting is closed; it can maintain typed reservations without another queue/runner. It ran successfully in the disposable environment. Actual production cron execution and a verified unknown-outcome recovery procedure remain release prerequisites. Nothing enables live AI or collection here.
+
+## Comparison and evidence
+
+Comparison reads two owned versions of the same writing in earlier→later order. It returns both actual texts, deterministic word-count delta, identical-wording status and differences between their latest successful saved findings. Without feedback on both versions, it displays wording only and cannot claim an improvement. With both, labels are **No longer reported**, **Still reported** and **Newly reported**. Omission is not proof that every issue is resolved; fewer words are not automatically better. No examination score is invented. The comparison refreshes after selected-version feedback changes, preserves the chosen earlier version and has an explicit zero-call refresh action.
+
+The Writing Error Profile uses successful sentence/paragraph/confirmed-handwriting results from a bounded 30-day window. The query inspects the newest 200 successful operation rows and retains up to 100 distinct text hashes; latest repeated checks/copied wording count once. Category frequency is counted across distinct writing records, so repeated revisions of one record cannot alone establish a recurring weakness. Paragraph-only categories exclude sentence submissions. No model call runs on a profile visit.
+
+Documented conservative states:
+
+- **Insufficient evidence:** fewer than three independent writing records report the category. A single reported mistake is visible but does not establish a permanent weakness.
+- **Weak:** at least three independent records report it, and the latest three relevant records do not all omit it.
+- **Improving:** at least three independent records previously report it, while the latest three relevant records omit it.
+
+These are trends in reported model findings, not certified accuracy/mastery. **Stable/Mastered are not inferred from omitted findings.** Positive graded, skill-specific opportunities and calibrated rules belong to the preserved Grammar upgrade. Old evidence falls outside the rolling window without deleting text, feedback or history. Bounded samples can be incomplete; no full lifetime diagnosis is promised.
+
+Every normalized code maps to real authored course days (agreement 5, articles 13, reference 14, prepositions 16, connectors 19, punctuation 21, concision 22, diction/register 23, cohesion 24; remaining sentence/tense mappings are listed in `_expression_core.php`). The additive Grammar wrapper accepts a valid day 1–30 and a validated internal Expression return context. Opening a linked lesson does not overwrite the saved course position, completions, scores or notes. Explicit ordinary course navigation retains its established save behavior. No lesson/exercise/progress schema is rewritten.
+
+## Verification
+
+Local validation: TypeScript, full lint, pure evidence/mapping/comparison rules, PHP syntax, native disposable PHP/MariaDB Expression security tests, payment/learning/handwriting regressions, all 163 existing tests and Hostinger build. Expression tests cover ownership/profile/CSRF/Pro/disabled gates, strict payloads/limits, immutable version/notice identity, re-evaluation and quota races, missing-feedback honesty, known-failure abuse caps, unknown/no-retry, original-date/expiry completion, zero-dispatch disabled preflight, confirmed-handwriting separation and evidence trends/aging without deleting history. Existing Grammar source hashes, 30 lessons, 480 questions, 180 corrections and 285 examples remain unchanged.
+
+The final built application passed native HTTPS browser verification at 320px/390px/1440px: closed/Free/Pro gates; save/evaluate/rewrite/compare; exact saved excerpts; relevant Grammar day and safe return; unchanged saved course position/completions; draft restoration; lost-save-response retry without an extra version; missing-feedback honesty; refresh/fresh-session/expiry history; free revision after expiry and account-switch isolation. No overflow or JavaScript page errors occurred. Source/artifact PHP parity and the packaged maintenance runner were checked. Final independent CI results are recorded in the PR. Browser feedback is conspicuously labelled synthetic test output, not a claim of real model accuracy. No private student or production data is used. The CI invariant job sequentially replays all four native workflows on MySQL 8.
+
+Next phase: preserve/audit/polish/interconnect the existing Grammar course. Handbook-based Précis and later phases remain separate. Commercial launch terms, permitted collection, support/proof retention, handwriting-specific owner decisions and verified provider/hosting readiness are still unresolved; previously approved PKR 1,950/30 days remains unchanged.

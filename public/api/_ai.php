@@ -10,15 +10,17 @@ function cssv_ai_owned_operation(PDO $pdo,string $id,string $userId): array {
  $q=$pdo->prepare('SELECT id,feature,version_id,bucket_date,state,accounting,result,error_code,created_at,completed_at FROM ai_operations WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$op=$q->fetch();if(!$op)throw new OutOfBoundsException('AI operation not found.');
  $op['result']=$op['result'] ? json_decode($op['result'],true,32,JSON_THROW_ON_ERROR) : null;foreach(['created_at','completed_at'] as $k)$op[$k]=cssv_pro_iso($op[$k]);return $op;
 }
-function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature,string $versionId,?DateTimeImmutable $now=null): string {
+function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature,string $versionId,?DateTimeImmutable $now=null,?string $policyVersion=null): string {
  $request=cssv_pro_id($request);$versionId=cssv_pro_id($versionId);$limit=cssv_ai_limit($feature);$now ??=new DateTimeImmutable('now',new DateTimeZone('UTC'));
  $pdo->beginTransaction();
  try {
   cssv_learning_owner_lock($pdo,$userId);$version=cssv_learning_version($pdo,$versionId,$userId);
   if(in_array($feature,['paragraph','sentence','precis'],true) && $version['kind']!==$feature)throw new InvalidArgumentException('Writing type does not match this AI scope.');
-  $hash=hash('sha256',json_encode([$feature,$versionId,$version['text_hash']],JSON_THROW_ON_ERROR));
+  $intent=[$feature,$versionId,$version['text_hash']];if($policyVersion!==null)$intent[]=['expression_policy'=>$policyVersion];
+  $hash=hash('sha256',json_encode($intent,JSON_THROW_ON_ERROR));
   $q=$pdo->prepare('SELECT id,payload_hash FROM ai_operations WHERE user_id=? AND request_id=?');$q->execute([$userId,$request]);
   if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This AI request was used for different writing.');$pdo->commit();return $prior['id'];}
+  if($policyVersion!==null){$q=$pdo->prepare("SELECT id FROM ai_operations WHERE user_id=? AND version_id=? AND feature=? AND state IN ('reserved','in_flight','unknown','succeeded') LIMIT 1");$q->execute([$userId,$versionId,$feature]);if($q->fetchColumn())throw new DomainException('This saved version already has feedback or a pending request. Open its saved status.');}
   if(!cssv_profile_status(cssv_profile_for_user($pdo,$userId))['complete'])throw new DomainException('Complete your profile before requesting new AI work.');
   if(cssv_pro_membership($pdo,$userId)['status']!=='active')throw new DomainException('Active Pro access is required for new AI work.');
   $config=cssv_ai_configuration();if(!$config['configured'])throw new LogicException('AI assistance is not enabled.');
@@ -80,10 +82,10 @@ function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,
   $pdo->commit();
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
-function cssv_ai_execute(PDO $pdo,string $id,?callable $testTransport=null): void {
+function cssv_ai_execute(PDO $pdo,string $id,?callable $testTransport=null,bool $featureAllowed=true): void {
  $q=$pdo->prepare('SELECT feature FROM ai_operations WHERE id=?');$q->execute([$id]);if(in_array($q->fetchColumn(),['handwriting','handwriting_extract'],true))throw new LogicException('Use the confirmation-bound handwriting workflow.');
  if($testTransport && (getenv('CI')!=='true' || getenv('CSSV_DB_NAME')!=='cssvista_briefing_test'))throw new LogicException('Test transport is unavailable.');
- $allowed=$testTransport!==null || (cssv_ai_configuration()['configured'] && function_exists('curl_init'));
+ $allowed=$featureAllowed && ($testTransport!==null || (cssv_ai_configuration()['configured'] && function_exists('curl_init')));
  $op=cssv_ai_start($pdo,$id,$allowed);if(!$op)return;
  try {
   $v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);

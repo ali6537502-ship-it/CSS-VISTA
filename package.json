@@ -79,7 +79,9 @@
     "profile:mpt-patterns": "node scripts/mpt/derive-pattern-profile.mjs",
     "test:mpt-release": "node --test tests/mptRelease.test.mjs",
     "test:handwriting-server": "php tests/handwriting/unit.php",
-    "test:handwriting-security": "node tests/handwriting/security.mjs"
+    "test:handwriting-security": "node tests/handwriting/security.mjs",
+    "test:expression-server": "php tests/expression/unit.php",
+    "test:expression-security": "node tests/expression/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

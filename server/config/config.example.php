@@ -38,6 +38,9 @@ return [
     'CSSV_AI_LIMIT_CURRENT_AFFAIRS' => '10',
     'CSSV_AI_LIMIT_MATHS' => '10',
     // Phase 2 remains closed until its policy, image capability and cleanup are verified.
+    'CSSV_EXPRESSION_ENABLED' => '0',
+    'CSSV_EXPRESSION_POLICY_VERSION' => '',
+    'CSSV_EXPRESSION_PROCESSING_NOTICE' => '', // reviewed external-processing disclosure
     'CSSV_HANDWRITING_ENABLED' => '0',
     'CSSV_AI_VISION_VERIFIED' => '0',
     'CSSV_HANDWRITING_CLEANUP_VERIFIED' => '0',
