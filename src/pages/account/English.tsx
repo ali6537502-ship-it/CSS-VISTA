@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
 import DailyEnglishPanel from '@/components/DailyEnglishPanel'
+import HandwrittenParagraphEvaluator from '@/components/HandwrittenParagraphEvaluator'
 import { AccountPage } from './shared'
 
 export default function AccountEnglish() {
@@ -14,7 +15,10 @@ export default function AccountEnglish() {
         </Link>
       }
     >
-      <DailyEnglishPanel />
+      <div className="space-y-7">
+        <DailyEnglishPanel />
+        <HandwrittenParagraphEvaluator />
+      </div>
     </AccountPage>
   )
 }
