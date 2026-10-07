@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } 
 import { Link } from 'react-router'
 import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
+import MembershipSummary from '@/features/membership/MembershipSummary'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -199,6 +200,8 @@ export default function AccountHome() {
             My profile
           </Link>
         </header>
+
+        <MembershipSummary />
 
         <DashboardMptCard />
 

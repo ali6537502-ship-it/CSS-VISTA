@@ -14,6 +14,16 @@ return [
     'CSSV_APP_SECRET' => 'replace_with_at_least_64_random_characters',
     'CSSV_PRIVATE_STORAGE_DIR' => '/home/replace_me/cssv-private/uploads',
 
+    // Pro launch stays closed until commercial terms/account use are approved.
+    // These flags are an operational release gate, not a client entitlement.
+    'CSSV_PRO_COLLECTION_ENABLED' => '0',
+    'CSSV_PRO_COLLECTION_APPROVED' => '0',
+    'CSSV_PRO_PRICE_MINOR' => '195000', // PKR 1,950, integer paisa
+    'CSSV_PRO_RECEIVER_NUMBER' => '03055199994', // preserve leading zero
+    'CSSV_PRO_RECEIVER_TITLE' => 'Ali Hassan',
+    'CSSV_PRO_TERMS_VERSION' => '',
+    'CSSV_PRO_TERMS_TEXT' => '', // supply owner-approved terms before opening
+
     // Optional one-time schema bootstrap endpoint token. Store the same value
     // as a GitHub Actions repository secret, never in a committed workflow.
     'CSSV_BOOTSTRAP_TOKEN' => 'replace_with_a_unique_random_value',

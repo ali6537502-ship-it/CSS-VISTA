@@ -123,6 +123,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
             </Link>
           )}
         </header>
+        <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600"><Link to="/account/dashboard" className="inline-flex min-h-11 items-center hover:text-pine">My CSS Vista</Link><Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link></nav>
         <div className="mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}

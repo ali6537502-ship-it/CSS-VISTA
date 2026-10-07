@@ -40,6 +40,8 @@
     "test:css-2026-result": "node --test tests/css2026Result.test.ts",
     "test:css-eligibility": "node --test tests/cssEligibility.test.ts",
     "test:mpt": "node --test tests/mptState.test.ts",
+    "test:pro-server": "php tests/pro/unit.php",
+    "test:pro-security": "node tests/pro/security.mjs",
     "test:mpt-server": "php tests/mpt/unit.php && php tests/mpt/flag.php",
     "lint": "eslint .",
     "typecheck": "tsc -b",

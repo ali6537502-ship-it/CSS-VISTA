@@ -1,0 +1,57 @@
+name: Pro membership foundations
+on:
+  pull_request:
+    branches: [main]
+    paths: ['public/api/_pro*.php', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
+permissions:
+  contents: read
+jobs:
+  payment-invariants:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: cssvista_briefing_test
+          MYSQL_ROOT_PASSWORD: cssvista_ci_only
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pcssvista_ci_only"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    env:
+      CI: 'true'
+      CSSV_DB_HOST: 127.0.0.1
+      CSSV_DB_NAME: cssvista_briefing_test
+      CSSV_DB_USER: root
+      CSSV_DB_PASSWORD: cssvista_ci_only
+      CSSV_SITE_ORIGIN: http://localhost:4173
+      CSSV_APP_SECRET: isolated-pro-ci-only-not-production-123456789012345678901234567890
+      CSSV_PRIVATE_STORAGE_DIR: /tmp/cssv-pro-private
+      CSSV_CONFIG_FILE: /tmp/cssv-pro-private/config.php
+      PHP_CLI_SERVER_WORKERS: '8'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, mbstring
+      - name: Check syntax and pure membership rules
+        run: |
+          for file in public/api/_pro*.php public/api/student/membership.php public/api/admin/payments.php tests/pro/*.php; do php -l "$file"; done
+          php tests/pro/unit.php
+          node tests/pro/grammar-preservation.mjs
+      - name: Create isolated database and HTTP runtime
+        run: |
+          mkdir -p /tmp/cssv-pro-private test-artifacts
+          php tests/current-affairs/setup.php
+          php -d opcache.enable=0 -S localhost:4173 -t public tests/pro/router.php > test-artifacts/pro-php.log 2>&1 &
+          node -e "const retry=async()=>{for(let n=0;n<30;n++){try{await fetch('http://localhost:4173/api/auth/session.php');return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
+      - name: Verify actual accounts, receipt reviews and concurrent renewals
+        run: node tests/pro/security.mjs
+      - name: Service diagnostics on failure
+        if: failure()
+        run: tail -n 80 test-artifacts/pro-php.log
