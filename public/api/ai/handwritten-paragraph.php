@@ -144,7 +144,32 @@ Rules:
 - Scores measure the submitted paragraph only and must be internally consistent.
 - error_code must be a stable lowercase snake_case label such as subject_verb_agreement, article_usage, run_on_sentence, weak_transition, vague_expression, punctuation, tense_consistency, fragment, word_choice, repetition, coherence, topic_sentence.
 - severity must be low, medium, or high.
-Return JSON only in the requested shape.
+Return JSON only with exactly this top-level structure:
+{
+  "overall_score": 0,
+  "summary": "brief diagnosis",
+  "strengths": ["specific strength"],
+  "dimensions": {
+    "grammar": 0,
+    "sentence_structure": 0,
+    "coherence": 0,
+    "vocabulary": 0,
+    "punctuation": 0,
+    "expression": 0
+  },
+  "issues": [
+    {
+      "category": "Grammar",
+      "error_code": "stable_snake_case_code",
+      "severity": "low|medium|high",
+      "excerpt": "short exact excerpt",
+      "explanation": "what is wrong and why",
+      "hint": "a short hint without rewriting the sentence"
+    }
+  ],
+  "rewrite_task": "one focused instruction for the student"
+}
+Every score is an integer from 0 to 100. Return no markdown and no fields outside this structure.
 PROMPT;
 
     $response = cssv_mistral_request('/v1/chat/completions', [
