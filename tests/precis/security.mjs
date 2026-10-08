@@ -21,6 +21,7 @@ assert.equal((await call(endpoint,body,a.jar,{'X-CSRF-Token':'wrong'})).status,4
 assert.equal((await call(endpoint,{...body,user_id:b.id},a.jar)).status,422);assert.equal((await call(endpoint,{...body,attempt_id:fAttempt},free.jar)).status,403)
 assert.equal((await call(endpoint,{...body,self_check:{fidelity:6}},a.jar)).status,422)
 const saved=await call(endpoint,body,a.jar);assert.equal(saved.status,200,JSON.stringify(saved.data));assert.equal((await call(endpoint,body,a.jar)).data.version_id,saved.data.version_id)
+const history=(await call(endpoint,undefined,a.jar)).data;assert.match(history.writing[0].updated_at,/T.*Z$/,'History date lacks an explicit UTC timezone');assert.equal(typeof history.writing[0].version,'number');assert.equal(typeof history.attempts[0].target_year,'number')
 assert.equal((await call(endpoint,{...body,title:'Changed identity'},a.jar)).status,409)
 const url=`${endpoint}?writing_id=${saved.data.writing_id}`
 assert.equal((await call(url,undefined,b.jar)).status,404)
