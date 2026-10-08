@@ -10,7 +10,7 @@ export default function ProGate({ children, feature, fallbackAction }: { childre
   const location = useLocation()
   const { data, error, refresh } = useMembership<Overview>()
   const expired = useMembershipExpired(data?.membership.expires_at)
-  if (loading || (user && !data && !error)) return <div role="status" className="mx-auto max-w-3xl px-4 py-12">Checking Pro access…</div>
+  if (loading || (user && !data && !error)) return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">{feature}</h1><p role="status" className="mt-3 text-sm text-slate-600">Checking Pro access…</p></main>
   if (user && data?.membership.status === 'active' && !expired && !error) return <>{children}</>
   const returnTo = location.pathname + location.search
   return <main className="mx-auto max-w-3xl px-4 py-12"><div className="rounded-2xl border border-amber-200 bg-white p-6 sm:p-8">
