@@ -3,7 +3,7 @@ import { compulsorySubjects, optionalGroups } from '@/data/syllabus'
 import { vocabulary } from '@/data/vocab'
 import { grammarTopics, idioms, pairOfWords } from '@/data/grammar'
 import { installIdioms } from '@/data/installIdioms'
-import { caIssues } from '@/data/currentAffairs'
+import { caIssueIndex } from '@/data/currentAffairs'
 import { serviceGroups } from '@/data/services'
 import { libraryItems } from '@/data/library'
 import { essayThemes } from '@/data/essay'
@@ -272,11 +272,11 @@ const localCorpus: SearchDocument[] = [
     snippet: `${item.a}: ${item.aMeaning}. ${item.b}: ${item.bMeaning}.`,
     link: '/grammar-vocabulary',
   })),
-  ...caIssues.map((issue) => ({
+  ...caIssueIndex.map((issue) => ({
     id: `ca-${issue.slug}`,
     title: issue.title,
     category: 'Current Affairs',
-    snippet: `${issue.background} ${issue.pakistanImplications.join(' ')}`,
+    snippet: 'CSS Vista Pro Current Affairs issue file.',
     link: `/current-affairs#${issue.slug}`,
     date: issue.lastUpdated,
   })),
@@ -355,7 +355,7 @@ function loadRemoteCorpus(): Promise<SearchDocument[]> {
       fetchJson<RemoteSubjectMcqIndex>('/css-subject-mcqs/index.json'),
       fetchJson<RemoteFpscSyllabus>('/fpsc-syllabus.json'),
       fetchJson<RemotePastPaperAnalysisIndex>('/css-past-paper-analysis-index.json'),
-      fetchJson<RemoteRecentAffairs>('/recent-affairs/batch-2026-07-11_2026-08-16.json'),
+      Promise.resolve(null as RemoteRecentAffairs | null),
     ])
 
     const remote: SearchDocument[] = []

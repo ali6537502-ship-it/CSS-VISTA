@@ -1,3 +1,6 @@
+import ProGate from '@/features/membership/ProGate'
+import { ProBadge } from '@/features/membership/AccountSections'
+import { useMembership, useMembershipExpired, type Overview } from '@/features/membership/api'
 import { useEffect, useMemo, useState } from 'react'
 import {
   ArrowLeft, ArrowRight, BookOpenCheck, CheckCircle2, Layers3, Loader2,
@@ -55,6 +58,9 @@ const comparableName = (value: string) => value
 
 export default function CssSubjectMcqs() {
   const [index, setIndex] = useState<CssSubjectMcqIndex | null>(null)
+  const membership = useMembership<Overview>()
+  const expired = useMembershipExpired(membership.data?.membership.expires_at)
+  const paidAccess = membership.data?.membership.status === 'active' && !expired && !membership.error
   const [selected, setSelected] = useState<CssSubjectMcqSummary | null>(null)
   const [rawBank, setRawBank] = useState<CssSubjectQuestion[]>([])
   const [bank, setBank] = useState<BankQuestion[]>([])
@@ -83,6 +89,16 @@ export default function CssSubjectMcqs() {
       .catch(() => setError('The supplied subject-bank index could not be loaded. Please retry.'))
       .finally(() => setLoading(false))
   }, [])
+
+  useEffect(() => {
+    if (selected?.slug !== 'general-science-and-ability') return
+    let live = true
+    setRawBank([]); setBank([]); setLoading(true)
+    void getCssSubjectMcqBank(selected).then(questions => {
+      if (live) { setRawBank(questions); setBank(questions.map(toBankQuestion)); setError('') }
+    }).catch(() => { if (live) setError('This subject practice could not be loaded. Please retry.') }).finally(() => { if (live) setLoading(false) })
+    return () => { live = false }
+  }, [selected, paidAccess])
 
   const banksByName = useMemo(() => new Map(
     (index?.subjects ?? []).map((subject) => [comparableName(subject.name), subject]),
@@ -158,6 +174,7 @@ export default function CssSubjectMcqs() {
     setWithinQuery('')
     setPage(1)
     try {
+      if (subject.slug === 'general-science-and-ability') return
       const questions = await getCssSubjectMcqBank(subject)
       setRawBank(questions)
       setBank(questions.map(toBankQuestion))
@@ -171,9 +188,10 @@ export default function CssSubjectMcqs() {
   }
 
   if (selected) {
-    return (
+    const content = (
       <div>
-        <PageHeader
+        {selected?.slug === 'general-science-and-ability' && <p className="mx-auto max-w-5xl px-4 py-4 text-sm text-slate-600"><ProBadge /> General Ability practice is included in Pro. General Science questions remain free.</p>}
+      <PageHeader
           title={selected.name}
           description="Focused CSS subject practice from the complete structurally validated owner-supplied bank. Every answer, save, response time and mistake connects to the existing progress system."
         />
@@ -190,7 +208,7 @@ export default function CssSubjectMcqs() {
                 </p>
                 <h2 className="mt-1 font-display text-xl font-bold text-pine sm:text-2xl">{selected.name} MCQs</h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {selected.count.toLocaleString()} structurally complete questions from {selected.sourceCount.toLocaleString()} detected source items · {selected.topics.length} syllabus areas
+                  {bank.length.toLocaleString()} available questions from {selected.sourceCount.toLocaleString()} detected source items · {selected.topics.length} syllabus areas
                 </p>
                 <p className="mt-1 text-xs font-semibold text-emerald-800">
                   {answeredCount} answered · {correctCount} correct · {Math.max(0, answeredCount - correctCount)} incorrect
@@ -262,6 +280,7 @@ export default function CssSubjectMcqs() {
         </main>
       </div>
     )
+    return selected.slug === 'current-affairs' ? <ProGate feature="Current Affairs MCQs">{content}</ProGate> : content
   }
 
   return (

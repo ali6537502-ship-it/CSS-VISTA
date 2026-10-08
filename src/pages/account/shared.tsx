@@ -129,7 +129,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
           <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
           <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
           <Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link>
-          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance</Link>
+          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance <ProBadge /></Link>
           <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Ask VISTA <ProBadge /></Link>
           <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
         </nav>

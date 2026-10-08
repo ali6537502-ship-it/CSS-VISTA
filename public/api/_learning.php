@@ -38,6 +38,7 @@ function cssv_learning_mutation(PDO $pdo,string $userId,array $body): array {
     $expected=$body['expected_version'] ?? null;if (!is_int($expected) || $expected<0 || $expected>100000)throw new InvalidArgumentException('Refresh the saved version before trying again.');
     $input=$action==='attempt_save' ? cssv_learning_attempt_input($body) : ['attempt_id'=>cssv_pro_id($body['attempt_id'] ?? null),'kind'=>$body['kind'] ?? null,'title'=>cssv_learning_string($body['title'] ?? null,180,'title'),'text'=>cssv_learning_string($body['text'] ?? null,20000,'writing')];
     if ($action==='writing_save' && !in_array($input['kind'],['sentence','paragraph','precis'],true))throw new InvalidArgumentException('Choose sentence, paragraph or précis writing.');
+    if($action==='writing_save' && $input['kind']==='precis')cssv_pro_require_active($pdo,$userId);
     $hash=hash('sha256',json_encode([$action,$existing,$expected,$input],JSON_THROW_ON_ERROR));
     $pdo->beginTransaction();
     try {

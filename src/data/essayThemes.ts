@@ -113,11 +113,9 @@ export function themesByTier(tier: string): EssayThemeSummary[] {
 
 // A public, version-independent asset: fetching it directly keeps the roadmap
 // decoupled from a content-hashed JavaScript chunk across deployments.
-let cached: EssayThemeRoadmap | null = null
 
 export async function loadEssayThemeRoadmap(signal?: AbortSignal): Promise<EssayThemeRoadmap> {
-  if (cached) return cached
-  const response = await fetch('/study-material/essay-themes.json', {
+  const response = await fetch('/api/student/premium-content.php?file=study-material/essay-themes.json', {
     signal,
     headers: { Accept: 'application/json' },
   })
@@ -126,7 +124,6 @@ export async function loadEssayThemeRoadmap(signal?: AbortSignal): Promise<Essay
   if (!Array.isArray(roadmap?.themes) || roadmap.themes.length === 0) {
     throw new Error('ESSAY_THEMES_INVALID')
   }
-  cached = roadmap
   return roadmap
 }
 

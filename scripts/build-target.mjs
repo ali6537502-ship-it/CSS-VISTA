@@ -43,6 +43,7 @@ run('scripts/generate-book-catalogue.mjs')
 // Vistagram source batches are the canonical publication source. Validate the
 // full archive and generate the public feed before Vite copies public/.
 run('scripts/package-vistagram.mjs')
+run('scripts/package-premium-content.mjs')
 
 run('node_modules/typescript/bin/tsc', ['-b'])
 run('node_modules/vite/bin/vite.js', ['build'])

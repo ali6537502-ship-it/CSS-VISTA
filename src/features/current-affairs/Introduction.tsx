@@ -18,6 +18,6 @@ export default function Introduction() {
       ['05', 'Follow an issue over time', 'Search the archive by topic, institution or country. Browse editions by date and category.'],
       ['06', 'Keep a clear view', 'Published Current Affairs editions bring verified-source material into one calm, organised place, with sources visible throughout.'],
     ].map(([number, title, body]) => <div key={number}><span>{number}</span><h2>{title}</h2><p>{body}</p></div>)}</div>
-    <p className="ca-intro-note">Your account is free. When an edition is still being prepared, My CSS Vista shows its publication status and gives you access to the archive and your saved reading.</p>
+    <p className="ca-intro-note">Your account is free. Current Affairs editions, analysis and revision are included in CSS Vista Pro. When an edition is still being prepared, My CSS Vista shows its publication status and gives you access to the archive and your saved reading.</p>
   </div>
 }

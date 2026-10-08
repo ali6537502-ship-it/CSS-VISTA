@@ -89,7 +89,8 @@ export function getBankIndex(): Promise<BankIndex> {
 const chunkCache = new Map<string, Promise<BankQuestion[]>>()
 
 async function fetchShard(slug: string, chunk: number): Promise<BankQuestion[]> {
-  const url = `/mcq/cat-${slug}-${chunk}.json`
+  const path = `mcq/cat-${slug}-${chunk}.json`
+  const url = ['general-ability', 'current-affairs'].includes(slug) ? `/api/student/premium-content.php?file=${path}` : `/${path}`
   // One retry, because a transient failure previously produced a silently
   // shorter quiz with no indication that questions were missing.
   for (let attempt = 0; attempt < 2; attempt += 1) {
@@ -104,6 +105,7 @@ async function fetchShard(slug: string, chunk: number): Promise<BankQuestion[]> 
 }
 
 export function getChunk(slug: string, chunk: number): Promise<BankQuestion[]> {
+  if (['general-ability', 'current-affairs'].includes(slug)) return fetchShard(slug, chunk).then(applyMcqCorrections)
   const key = `${slug}:${chunk}`
   if (!chunkCache.has(key)) {
     const promise = fetchShard(slug, chunk)

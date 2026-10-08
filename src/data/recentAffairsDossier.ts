@@ -30,16 +30,10 @@ export interface RecentAffairsBatch {
   mcqs: RecentAffairsMcq[]
 }
 
-let batchPromise: Promise<RecentAffairsBatch> | null = null
-
-export function getRecentAffairsBatch() {
-  if (!batchPromise) {
-    batchPromise = fetch('/recent-affairs/batch-2026-07-11_2026-08-16.json').then((response) => {
-      if (!response.ok) throw new Error(`Recent affairs batch returned ${response.status}`)
-      return response.json() as Promise<RecentAffairsBatch>
-    })
-  }
-  return batchPromise
+export async function getRecentAffairsBatch(): Promise<RecentAffairsBatch> {
+  const response = await fetch('/api/student/premium-content.php?file=recent-affairs/batch-2026-07-11_2026-08-16.json')
+  if (!response.ok) throw new Error('Current Affairs requires active Pro access.')
+  return response.json() as Promise<RecentAffairsBatch>
 }
 
 export function recentAffairsToBankQuestion(question: RecentAffairsMcq): BankQuestion {

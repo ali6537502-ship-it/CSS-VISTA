@@ -42,6 +42,9 @@ const categoryLoaders = import.meta.glob<{ default: OneLinerCategory }>([
   './bundled/*.json',
   '!./bundled/index.json',
   '!./bundled/book-summaries-index.json',
+  '!./bundled/general-ability.json',
+  '!./bundled/current-affairs-archive.json',
+  '!./bundled/pakistan-current-affairs.json',
 ])
 
 const bundledIndex = bundledIndexJson as OneLinerIndex
@@ -74,6 +77,8 @@ export function getOneLinerIndex(): Promise<OneLinerIndex> {
 }
 
 export function getOneLinerCategory(slug: string): Promise<OneLinerCategory> {
+  // Paid content is never retained in a shared cache across account changes.
+  if (slug === 'general-ability' || ['current-affairs-archive', 'pakistan-current-affairs'].includes(slug)) return fetchJson<OneLinerCategory>(`/api/student/premium-content.php?file=one-liner-gk/${slug}.json`)
   const existing = categoryRequests.get(slug)
   if (existing) return existing
   const loader = categoryLoaders[`./bundled/${slug}.json`]

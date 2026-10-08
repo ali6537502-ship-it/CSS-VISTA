@@ -2,9 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { BookOpen, CheckCircle2, ChevronDown, Download, ExternalLink, FileText, Loader2, Newspaper, Printer, Search, X } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
-import { caIssues } from '@/data/currentAffairs'
+import { loadCaIssues, type CAIssue } from '@/data/currentAffairs'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
-import { mergedCaTopics, type CaTopic } from '@/lib/admin'
+import { type CaTopic } from '@/lib/admin'
 import { addMistake, getAttempt, getMistakes, recordAttempt, recordQuestionTiming } from '@/lib/progress'
 import { printPdfFile } from '@/components/PrintMenu'
 import { usePageBack } from '@/lib/backNavigation'
@@ -98,8 +98,15 @@ export default function CurrentAffairs() {
   const [searchParams, setSearchParams] = useSearchParams()
   const requestedTab = searchParams.get('tab') as Tab | null
   const tab: Tab = ['one-liners', 'mcqs', 'issue-files', 'magazine'].includes(requestedTab ?? '') ? requestedTab! : 'one-liners'
-  const [batch, setBatch] = useState<AffairsBatch | null>(null)
   const [loadError, setLoadError] = useState(false)
+  const [paidTopics, setPaidTopics] = useState<CaTopic[]>([])
+  const [caIssues, setIssues] = useState<CAIssue[]>([])
+  useEffect(() => {
+    const controller = new AbortController()
+    void Promise.all([loadCaIssues(controller.signal), fetch('/api/student/premium-content.php?file=current-affairs-topics', { signal: controller.signal }).then(r => { if (!r.ok) throw new Error('Issue files unavailable'); return r.json() as Promise<CaTopic[]> })]).then(([issues, topics]) => { setIssues(issues); setPaidTopics(topics) }).catch((error: unknown) => { if ((error as Error).name !== 'AbortError') setLoadError(true) })
+    return () => controller.abort()
+  }, [])
+  const [batch, setBatch] = useState<AffairsBatch | null>(null)
   const [query, setQuery] = useState(() => searchParams.get('q') ?? '')
   const [page, setPage] = useState(() => Math.max(1, Number.parseInt(searchParams.get('page') ?? '1', 10) || 1))
   const [viewer, setViewer] = useState(false)
@@ -124,7 +131,7 @@ export default function CurrentAffairs() {
   useEffect(() => {
     if (!needsBatch) return
     let active = true
-    fetch('/recent-affairs/batch-2026-07-11_2026-08-16.json')
+    fetch('/api/student/premium-content.php?file=recent-affairs/batch-2026-07-11_2026-08-16.json')
       .then((response) => { if (!response.ok) throw new Error('Batch unavailable'); return response.json() as Promise<AffairsBatch> })
       .then((value) => { if (active) setBatch(value) })
       .catch(() => { if (active) setLoadError(true) })
@@ -143,8 +150,8 @@ export default function CurrentAffairs() {
   const mcqs = useMemo(() => batch?.mcqs.filter((item) => !normalized || `${item.date} ${item.development} ${item.question}`.toLowerCase().includes(normalized)) ?? [], [batch, normalized])
   const topics = useMemo(() => {
     const seed: CaTopic[] = caIssues.map((issue, index) => ({ id: `seed-${issue.slug}`, title: issue.title, date: issue.lastUpdated, summary: issue.background.slice(0, 180), content: `${issue.background}\n\nMajor actors: ${issue.actors.join('; ')}.\n\nImplications for Pakistan: ${issue.pakistanImplications.join('; ')}.\n\nPolicy options: ${issue.policyOptions.join('; ')}.\n\nKey statistics: ${issue.statistics.map((stat) => `${stat.figure} (${stat.source})`).join(' | ')}`, important: false, published: true, order: index }))
-    return mergedCaTopics(seed).filter((topic) => topic.published && (!normalized || `${topic.title} ${topic.summary} ${topic.content}`.toLowerCase().includes(normalized)))
-  }, [normalized])
+    return [...new Map([...seed, ...paidTopics].map(topic => [topic.id, topic])).values()].sort((a,b) => a.order - b.order).filter((topic) => topic.published && (!normalized || `${topic.title} ${topic.summary} ${topic.content}`.toLowerCase().includes(normalized)))
+  }, [caIssues, normalized, paidTopics])
   const currentCount = tab === 'mcqs' ? mcqs.length : tab === 'one-liners' ? oneLiners.length : topics.length
   const pageSize = tab === 'mcqs' ? QUESTIONS_PER_PAGE : COLLECTION_PAGE_SIZE
   const pages = Math.max(1, Math.ceil(currentCount / pageSize))

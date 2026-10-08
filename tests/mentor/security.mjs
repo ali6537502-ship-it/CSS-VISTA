@@ -16,6 +16,8 @@ async function user(label) { const email = `mentor-${label}-${randomUUID()}@exam
 const a = await user('free'), b = await user('other'), incomplete = await user('incomplete'), endpoint = 'student/mentor.php'
 const settings = { action: 'attempt_save', expected_version: 0, target_year: 2027, target_date: null, daily_minutes: 120, stage: 'starting', optional_subject_ids: [] }
 const make = async u => (await call('student/learning.php', { ...settings, request_id: randomUUID() }, u.jar)).data.attempt_id
+assert.equal((await call(endpoint, undefined, a.jar)).status, 403, 'Free account received paid answer performance')
+php('tests/precis/fixture.php', 'activate', a.id); php('tests/precis/fixture.php', 'activate', b.id)
 const attempt = await make(a), bAttempt = await make(b)
 assert.equal((await call(endpoint)).status, 401); assert.equal((await call(endpoint, undefined, a.jar, { 'X-CSSV-User': b.id })).status, 409)
 php('tests/pro/fixture.php', 'incomplete', incomplete.id); assert.equal((await call(endpoint, undefined, incomplete.jar)).status, 403)
@@ -73,8 +75,9 @@ assert.equal((await call(endpoint + '?from=2026-01-02', undefined, a.jar)).data.
 assert.equal((await call(endpoint + '?topic=TEST%20ONLY%20institutions', undefined, a.jar)).data.summary.first.count, 1)
 assert.equal((await call(endpoint + '?offset=-1', undefined, a.jar)).status, 422)
 assert.equal((await get(a)).data.answer.series.length, 2)
-php('tests/pro/fixture.php', 'expire', a.id); assert.equal((await get(a)).status, 200)
-assert.equal((await call(endpoint, { ...question, request_id: randomUUID() }, a.jar)).status, 200, 'Expiry removed this free human-record capability')
+php('tests/pro/fixture.php', 'expire', a.id); assert.equal((await get(a)).status, 403)
+assert.equal((await call(endpoint, { ...question, request_id: randomUUID() }, a.jar)).status, 403, 'Expired Pro wrote a paid answer record')
+php('tests/precis/fixture.php', 'activate', a.id); assert.equal((await get(a)).data.answer.evaluations.length, 2, 'Renewal lost saved mentor evaluations')
 php('tests/mentor/fixture.php', 'pages', a.id, attempt)
 const page = (await call(endpoint, undefined, a.jar)).data, next = (await call(endpoint + '?offset=50', undefined, a.jar)).data
 assert.equal(page.answers.length, 50); assert.equal(page.has_more, true); assert.equal(next.has_more, false)
@@ -82,4 +85,4 @@ assert.deepEqual(next.summary, page.summary, 'History page changed evidence deno
 assert.equal(new Set([...page.answers, ...next.answers].map(a => a.id)).size, page.answers.length + next.answers.length)
 assert.equal(php('tests/mentor/fixture.php', 'usage', a.id), '0', 'Human evaluation made an AI operation')
 for (const file of ['_mentor.php', '_mentor_core.php', '_mentor_schema.php']) assert.equal((await fetch('http://localhost:4173/api/' + file)).status, 404)
-console.log('PASS: native human mentor ownership/profile/CSRF/account-switch, honest provenance, written/evaluated transitions, integer/date validation, replay and concurrent correction preservation, retry separation, weighted/all-page/filter summaries, expiry continuity, private helper protection and zero AI operations.')
+console.log('PASS: native human mentor ownership/profile/CSRF/account-switch, honest provenance, written/evaluated transitions, integer/date validation, replay and concurrent correction preservation, retry separation, weighted/all-page/filter summaries, paid access and renewal continuity, private helper protection and zero AI operations.')

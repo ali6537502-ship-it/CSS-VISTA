@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/_bootstrap.php';
 require_once __DIR__ . '/_current_affairs.php';
+require_once __DIR__ . '/_pro.php';
 cssv_require_method('GET','POST');
 $pdo=null;
 try {
@@ -12,10 +13,13 @@ try {
     $expected=$_SERVER['HTTP_X_CSSV_USER'] ?? '';
     if ($expected!=='' && !hash_equals($userId,$expected)) cssv_fail('Your account changed. Sign in again to continue.',401,'account_changed');
     if ($_SERVER['REQUEST_METHOD']==='POST') cssv_require_csrf($session);
+    $requestBody=$_SERVER['REQUEST_METHOD']==='POST' ? ca_request_json() : null;
+    $personalPreferences=$_SERVER['REQUEST_METHOD']==='GET' ? ($_GET['view']??'')==='preferences' : ($requestBody['action']??'')==='preferences';
+    if(!$personalPreferences)cssv_pro_require_active($pdo,$userId);
     ca_ensure_schema($pdo);
-    ca_sync_git_release($pdo);
+    if(!$personalPreferences)ca_sync_git_release($pdo);
     if ($_SERVER['REQUEST_METHOD']==='POST') {
-        $body=ca_request_json();
+        $body=$requestBody;
         if (array_key_exists('user_id',$body)) throw new InvalidArgumentException('Personal records always use the signed-in account.');
         $action=$body['action'] ?? '';
         if ($action==='preferences') {
