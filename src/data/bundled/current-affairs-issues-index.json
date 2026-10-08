@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "climate-vulnerability",
+    "title": "Climate Change and Pakistan’s Vulnerability",
+    "category": "Environment",
+    "lastUpdated": "2026-07-17"
+  },
+  {
+    "slug": "cpec-connectivity",
+    "title": "CPEC and Regional Connectivity",
+    "category": "Pakistan External",
+    "lastUpdated": "2026-07-17"
+  },
+  {
+    "slug": "fiscal-economy",
+    "title": "Pakistan’s Fiscal and External-Sector Challenges",
+    "category": "Economy",
+    "lastUpdated": "2026-07-17"
+  },
+  {
+    "slug": "ai-governance",
+    "title": "Artificial Intelligence and Governance",
+    "category": "Science & Tech",
+    "lastUpdated": "2026-07-17"
+  },
+  {
+    "slug": "afghanistan-regional",
+    "title": "Afghanistan and Regional Security",
+    "category": "Regional",
+    "lastUpdated": "2026-07-17"
+  },
+  {
+    "slug": "water-security",
+    "title": "Water Security and the Indus Basin",
+    "category": "Environment",
+    "lastUpdated": "2026-07-17"
+  }
+]

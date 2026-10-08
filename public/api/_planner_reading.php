@@ -14,7 +14,7 @@ function cssv_reading_schema_statements(): array {return [
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
 ];}
 
-// Published editorial content remains available under the existing free-access commitment.
+// Current Affairs study access is Pro; public Vistagram remains free.
 // This layer stores owned, dated study declarations; it does not certify factual accuracy.
 function cssv_reading_kind(mixed $kind): string {
     if (!in_array($kind, ['current_affairs', 'vistagram'], true)) throw new InvalidArgumentException('Choose Current Affairs or Vistagram.');
@@ -82,7 +82,7 @@ function cssv_reading_card(array $source,?array $r,bool $available=true): array 
         'source_changed'=>$r!==null&&(!hash_equals($r['source_hash'],$source['source_hash'])||($r['read_hash']!==null&&!hash_equals($r['read_hash'],$source['source_hash'])))];
 }
 function cssv_reading_view(PDO $pdo,string $user,string $attempt,array $query): array {
-    $kind=cssv_reading_kind($query['kind']??'current_affairs');$today=cssv_planner_day();
+    $kind=cssv_reading_kind($query['kind']??'current_affairs');if($kind==='current_affairs')cssv_pro_require_active($pdo,$user);$today=cssv_planner_day();
     if(isset($query['source_id'])){$id=cssv_learning_string($query['source_id'],128,'source');$source=cssv_reading_source($pdo,$kind,$id);$records=cssv_reading_records($pdo,$user,$attempt,$kind,[$id]);return ['items'=>[cssv_reading_card($source,$records[$kind.':'.$id]??null)],'has_more'=>false,'today'=>$today];}
     $filter=$query['filter']??'all';if(!in_array($filter,['all','saved','read','revision'],true))throw new InvalidArgumentException('Choose a reading filter.');
     $range=$query['range']??'all';if(!in_array($range,['all','7','30'],true))throw new InvalidArgumentException('Choose a date range.');
@@ -110,7 +110,7 @@ function cssv_reading_view(PDO $pdo,string $user,string $attempt,array $query): 
     return ['items'=>$items,'has_more'=>$more,'today'=>$today,'from'=>$range==='all'?null:$from];
 }
 function cssv_reading_save(PDO $pdo,string $user,string $attempt,array $body,string $today): array {
-    $kind=cssv_reading_kind($body['kind']??null);$id=cssv_learning_string($body['source_id']??null,128,'published source');$source=cssv_reading_source($pdo,$kind,$id);
+    $kind=cssv_reading_kind($body['kind']??null);if($kind==='current_affairs')cssv_pro_require_active($pdo,$user);$id=cssv_learning_string($body['source_id']??null,128,'published source');$source=cssv_reading_source($pdo,$kind,$id);
     if(!is_string($body['source_hash']??null)||!hash_equals($source['source_hash'],$body['source_hash']))throw new DomainException('The source changed. Read the updated material before saving.');
     $r=cssv_reading_records($pdo,$user,$attempt,$kind,[$id])[$kind.':'.$id]??null;$version=$r['version']??0;
     if(!is_int($body['expected_version']??null)||$body['expected_version']!==$version)throw new DomainException('This reading record changed elsewhere. Reload before saving.');

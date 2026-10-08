@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { Navigate, Routes, Route } from 'react-router'
 import { ProfileGate } from './components/ProfileGate'
 import Layout from './components/Layout'
+import ProGate, { SelectedStudyGate } from './features/membership/ProGate'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
@@ -134,7 +135,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/start-css" element={<S><StartCSS /></S>} />
         <Route path="/subjects/compulsory" element={<S><CompulsoryList /></S>} />
-        <Route path="/subjects/compulsory/:slug" element={<S><SubjectDetail /></S>} />
+        <Route path="/subjects/compulsory/:slug" element={<SelectedStudyGate><S><SubjectDetail /></S></SelectedStudyGate>} />
         <Route path="/subjects/optional" element={<S><OptionalSubjects /></S>} />
         <Route path="/subjects/selector" element={<S><SubjectSelector /></S>} />
         <Route path="/notes" element={<S><NotesLibrary /></S>} />
@@ -144,8 +145,8 @@ export default function App() {
         <Route path="/css-mcqs" element={<S><CssSubjectMcqs /></S>} />
         <Route path="/essay" element={<S><EssayModule /></S>} />
         <Route path="/study-material" element={<S><StudyMaterial /></S>} />
-        <Route path="/study-material/essay-themes" element={<ProfileGate><S><EssayThemes /></S></ProfileGate>} />
-        <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><S><EssayThemeDetail /></S></ProfileGate>} />
+        <Route path="/study-material/essay-themes" element={<ProfileGate><ProGate feature="Essay Themes"><S><EssayThemes /></S></ProGate></ProfileGate>} />
+        <Route path="/study-material/essay-themes/:slug" element={<ProfileGate><ProGate feature="Essay Themes"><S><EssayThemeDetail /></S></ProGate></ProfileGate>} />
         <Route path="/study-material/islamic-studies" element={<S><IslamicReferences /></S>} />
         <Route path="/study-material/islamic-studies/:chapter" element={<S><IslamicReferenceChapter /></S>} />
         <Route path="/study-material/islamic-studies/:chapter/:topic" element={<S><IslamicReferenceTopic /></S>} />
@@ -153,8 +154,8 @@ export default function App() {
         <Route path="/study-material/optional/:subject" element={<S><OptionalSubjectNotes /></S>} />
         <Route path="/study-material/optional/:subject/:topic" element={<S><OptionalTopicNotes /></S>} />
         <Route path="/mpt" element={<S><MPTPrep /></S>} />
-        <Route path="/mpt/bank/:bankId" element={<S><MPTQuestionBank /></S>} />
-        <Route path="/current-affairs" element={<S><CurrentAffairs /></S>} />
+        <Route path="/mpt/bank/:bankId" element={<SelectedStudyGate><S><MPTQuestionBank /></S></SelectedStudyGate>} />
+        <Route path="/current-affairs" element={<ProfileGate><ProGate feature="Current Affairs"><S><CurrentAffairs /></S></ProGate></ProfileGate>} />
         <Route path="/vistagram" element={<S><Vistagram /></S>} />
         <Route path="/vistagram/:slug" element={<S><VistagramArticle /></S>} />
         <Route path="/answer-writing" element={<S><AnswerWriting /></S>} />
@@ -172,7 +173,7 @@ export default function App() {
         <Route path="/dashboard" element={<ProfileGate><S><Dashboard /></S></ProfileGate>} />
         <Route path="/daily-challenge" element={<S><GrammarVocab /></S>} />
         <Route path="/gk" element={<S><GKWorld /></S>} />
-        <Route path="/one-liner-gk" element={<S><OneLinerGK /></S>} />
+        <Route path="/one-liner-gk" element={<SelectedStudyGate><S><OneLinerGK /></S></SelectedStudyGate>} />
         <Route path="/language-grammar" element={<S><LanguageGrammar /></S>} />
         <Route path="/grammar-course" element={<S><GrammarCourse /></S>} />
         <Route path="/book-summaries" element={<S><BookSummaries /></S>} />
@@ -187,8 +188,8 @@ export default function App() {
         <Route path="/live-theme-demos" element={<S><LiveThemeDemos /></S>} />
         <Route path="/fpsc-syllabus" element={<S><FpscSyllabus /></S>} />
         <Route path="/css-past-paper-analysis" element={<S><CssPastPaperAnalysis /></S>} />
-        <Route path="/gk/cat/:slug" element={<S><GKCategory /></S>} />
-        <Route path="/gk/quiz" element={<S><GKQuiz /></S>} />
+        <Route path="/gk/cat/:slug" element={<SelectedStudyGate><S><GKCategory /></S></SelectedStudyGate>} />
+        <Route path="/gk/quiz" element={<SelectedStudyGate><S><GKQuiz /></S></SelectedStudyGate>} />
         <Route path="/five-minute" element={<S><GKQuiz forceMode="five-minute" /></S>} />
         <Route path="/mistakes" element={<S><Mistakes /></S>} />
         <Route path="/answer-timer" element={<S><AnswerTimer /></S>} />
@@ -206,10 +207,10 @@ export default function App() {
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
-        <Route path="/account/precis" element={<ProfileGate><S><AccountPrecis /></S></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Mastery Lab"><S><AccountPrecis /></S></ProGate></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />
-        <Route path="/account/answer-performance" element={<ProfileGate><S><AccountAnswerPerformance /></S></ProfileGate>} />
+        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance"><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
         <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
         <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />

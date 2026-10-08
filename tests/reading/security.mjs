@@ -8,6 +8,7 @@ async function call(path,body,jar=new Map(),extra={}){const headers={Accept:'app
 async function user(label){const email=`reading-${label}-${randomUUID()}@example.invalid`,id=php('tests/current-affairs/setup.php','user',email),jar=new Map();assert.equal((await call('auth/login.php',{email,password:'TEST ONLY native fixture password'},jar)).status,200);return{id,jar}}
 
 const a=await user('a'),b=await user('b'),incomplete=await user('incomplete')
+php('tests/precis/fixture.php','activate',a.id);php('tests/precis/fixture.php','activate',b.id)
 async function make(u){const r=await call('student/learning.php',{action:'attempt_save',expected_version:0,target_year:2027,target_date:null,daily_minutes:90,stage:'starting',optional_subject_ids:[],request_id:randomUUID()},u.jar);assert.equal(r.status,200,JSON.stringify(r.data));return r.data.attempt_id}
 const attempt=await make(a),other=await make(b),second=await make(a),endpoint='student/planner.php'
 php('tests/planner/fixture.php','clear-rate',a.id,attempt)
@@ -57,8 +58,10 @@ assert.equal((await mutate(body(item,'read'))).status,200);assert.equal((await c
 const vista=(await get('&kind=vistagram')).data.items[0];assert.ok(vista?.sources.length,'Missing published Vistagram references');assert.equal((await mutate(body(vista,'read'))).status,200)
 assert.equal((await call(`${endpoint}?attempt=${attempt}&view=readiness`,undefined,a.jar)).data.dimensions.reading.vistagram_readings,1)
 const receipt=await call(endpoint+'?request_id='+read.request_id,undefined,a.jar);assert.equal(receipt.status,200);assert.equal((await call(endpoint+'?request_id='+read.request_id,undefined,b.jar)).status,404)
-php('tests/precis/fixture.php','activate',a.id);php('tests/pro/fixture.php','expire',a.id);assert.equal((await get('&filter=read')).status,200,'Expiry erased free-access reading history')
-item=(await detail('current_affairs',source)).data.items[0];assert.equal((await mutate(body(item,'unsave'))).status,200,'Expiry revoked existing free reading organisation')
+php('tests/precis/fixture.php','activate',a.id);php('tests/pro/fixture.php','expire',a.id);assert.equal((await get('&filter=read')).status,403,'Expired Pro received paid Current Affairs study')
+assert.equal((await get('&kind=vistagram')).status,200,'Expiry removed free Vistagram study')
+php('tests/precis/fixture.php','activate',a.id);assert.equal((await get('&filter=read')).status,200,'Renewal lost Current Affairs records')
+item=(await detail('current_affairs',source)).data.items[0];assert.equal((await mutate(body(item,'unsave'))).status,200,'Renewal lost reading organisation')
 item=(await detail('current_affairs',source)).data.items[0];assert.equal((await mutate(body(item,'save'))).status,200)
 php('tests/reading/fixture.php','withdraw',a.id,attempt);assert.equal((await detail('current_affairs',source)).status,404)
 const archived=(await get('&filter=saved')).data.items.find(i=>i.source_id===source);assert.equal(archived.available,false);assert.ok(archived.read_date);assert.equal((await mutate(body(archived,'read'))).status,404,'Withdrawn source accepted new work')
@@ -66,4 +69,4 @@ php('tests/reading/fixture.php','future',a.id,attempt);try{assert.equal((await g
 assert.equal(JSON.parse(php('tests/reading/fixture.php','counts',a.id,attempt)).ai_operations,0)
 assert.equal((await fetch('http://localhost:4173/api/_planner_reading.php')).status,404)
 assert.equal((await fetch('http://localhost:4173/vistagram-content/index.json')).status,200,'Public Vistagram promise revoked')
-console.log('PASS: published CA/Vistagram source identity, owned attempt isolation, CSRF/profile/account guards, exact receipt recovery, version/source races, bookmark vs reading vs recall evidence, server PST completion dates, publication windows, corrected/withdrawn/future source guards, due-plan integration, original reading evidence, expiry continuity and zero AI dispatch.')
+console.log('PASS: published CA/Vistagram source identity, owned attempt isolation, CSRF/profile/account guards, exact receipt recovery, version/source races, bookmark vs reading vs recall evidence, server PST completion dates, publication windows, corrected/withdrawn/future source guards, due-plan integration, original reading evidence, Pro access, renewal continuity and zero AI dispatch.')

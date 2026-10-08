@@ -9,7 +9,7 @@
 - Version 1 accepts **whole marks only**, obtained 0 through maximum, maximum 1–1000. Dates must be valid, from 2000 through today in Asia/Karachi; evaluation cannot precede writing. Zero is genuine evidence, not missing data.
 - Questions are clearly labelled Practice or Student-provided past-paper reference. The latter requires a reference and explicitly remains unverified. This phase does not certify a student-supplied question as official or manufacture verified past-paper content. Existing public verified sources stay in their present tools.
 - Question/source/subject/topic/attempt are fixed after creation. Repeat attempts copy that context and retain the original question record. Entry mistakes are corrected with a required reason and immutable earlier entries, never destructive replacement of the original entry.
-- Owned human-record creation/read/correction remain available to eligible free accounts and after Pro expiry. No previous free human-evaluation service is paywalled. Premium AI/content actions continue to use their existing entitlement checks.
+- Under the owner’s updated policy, My Answer Performance is a Pro feature. Creation, reading and correction through `student/mentor.php` require active Pro membership. Expiry does not delete records: renewal restores access to the original questions, evaluations and history. See [paid-feature-policy.md](paid-feature-policy.md).
 
 ## Evidence contract and limits
 
@@ -22,7 +22,7 @@ Topic evidence uses first-attempt totals. Below 60% suggests review; 60% and abo
 ## Native backend
 
 - Additive migration **018_mentor_records.sql**, after existing **012–017**, mirrors `_mentor_schema.php`; runtime schema creation is advisory-lock serialized as in existing preparation modules. No existing table or learning history is deleted or altered.
-- `student/mentor.php` requires the existing authenticated, active, complete-profile account. POST additionally requires native CSRF and existing expected-user protection. Validate strict action fields, subjects from the actual syllabus catalogue, bounds and dates.
+- `student/mentor.php` requires the existing authenticated, complete-profile account and active Pro membership. POST additionally requires native CSRF and existing expected-user protection. Validate strict action fields, subjects from the actual syllabus catalogue, bounds and dates.
 - Every read, parent/repeat lookup and attempt link is owner scoped. Mutation transactions lock the existing account row, check record version, and store a shared `learning_requests` receipt with a `mentor-v1` domain-separated hash. Exact replay returns the committed result; changed payload reuse or stale edits conflicts. Creating a retry advances the parent version to serialize competing repeat requests.
 - Mentor question/evaluation tables are separate from AI writing versions/findings/operations. There is no model transport, provider call or AI allowance consumption. Helpers are denied by Hostinger rewrite rules. The private account route disables ads and has noindex/nofollow metadata.
 - Form state is account keyed. Session storage retains only account-scoped opaque retry IDs and hashes, never question/comment text. All scores remain native server records; ownership checks also govern expiry history.

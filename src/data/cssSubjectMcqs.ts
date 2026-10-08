@@ -57,6 +57,12 @@ export function getCssSubjectMcqIndex() {
 }
 
 export function getCssSubjectMcqBank(subject: CssSubjectMcqSummary) {
+  if (['general-science-and-ability', 'current-affairs'].includes(subject.slug)) {
+    return fetch(`/api/student/premium-content.php?file=css-subject-mcqs/${subject.file}`).then(response => {
+      if (!response.ok) throw new Error('This practice requires active Pro access.')
+      return response.json() as Promise<CssSubjectQuestion[]>
+    })
+  }
   if (!bankCache.has(subject.slug)) {
     bankCache.set(subject.slug, fetch(`${root}/${subject.file}`).then((response) => {
       if (!response.ok) throw new Error(`${subject.name} bank returned ${response.status}`)

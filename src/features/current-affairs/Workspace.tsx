@@ -6,6 +6,8 @@ import { archiveSchema, briefingRoot, dateFilters, displayDate, factText, feedSc
 import { useBriefing } from './useBriefing'
 import { CategoryGlance, CopyButton, EditionMeta, Empty, LoadError, Loading, Pager, Publication, StoryCardView } from './ui'
 import Reader from './Reader'
+import ProGate from '@/features/membership/ProGate'
+import { ProBadge } from '@/features/membership/AccountSections'
 import Settings from './Settings'
 import './current-affairs.css'
 
@@ -15,7 +17,7 @@ const links = [
   ['/account/saved', 'Saved Items'], ['/account/search', 'Search'], ['/account/settings', 'Profile & Settings'],
 ]
 function AccountNavigation() {
-  return <nav aria-label="Current Affairs navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label}</NavLink>)}</nav>
+  return <nav aria-label="Current Affairs navigation">{links.map(([to, label]) => <NavLink key={to} end to={to} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>{label} {to !== '/account/dashboard' && to !== '/account/settings' && <ProBadge />}</NavLink>)}</nav>
 }
 function SignedInWorkspace() {
   const { signOut, user } = useAccount()
@@ -47,12 +49,12 @@ function SignedInWorkspace() {
       <details className="ca-mobile-nav"><summary>Current Affairs · Menu</summary><AccountNavigation /><div className="ca-mobile-extras"><Link to="/account/settings" className="ca-mobile-profile">{user?.photo_complete ? <img src="/api/student/photo-view.php" alt="" /> : <UserRound size={18} aria-hidden="true" />}<span>{user?.display_name || 'My profile'}</span></Link></div><button className="ca-button ca-button-light" disabled={busy} onClick={() => void logout()}>Log out</button></details>
       {error && <p className="ca-error" role="alert">{error}</p>}
       <Routes>
-        <Route path="current-affairs" element={<Feed mode="briefing" />} />
-        <Route path="current-affairs/archive" element={<Archive />} />
-        <Route path="current-affairs/:storyId" element={<Reader />} />
-        <Route path="factbook" element={<Feed mode="facts" />} />
-        <Route path="saved" element={<Feed mode="saved" />} />
-        <Route path="search" element={<Feed mode="search" />} />
+        <Route path="current-affairs" element={<ProGate feature="Current Affairs"><Feed mode="briefing" /></ProGate>} />
+        <Route path="current-affairs/archive" element={<ProGate feature="Current Affairs"><Archive /></ProGate>} />
+        <Route path="current-affairs/:storyId" element={<ProGate feature="Current Affairs"><Reader /></ProGate>} />
+        <Route path="factbook" element={<ProGate feature="Current Affairs"><Feed mode="facts" /></ProGate>} />
+        <Route path="saved" element={<ProGate feature="Current Affairs"><Feed mode="saved" /></ProGate>} />
+        <Route path="search" element={<ProGate feature="Current Affairs"><Feed mode="search" /></ProGate>} />
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<Empty title="This account page could not be found" action={<Link className="ca-button" to="/account/dashboard">Open My CSS Vista</Link>} />} />
       </Routes>

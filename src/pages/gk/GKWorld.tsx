@@ -1,3 +1,4 @@
+import { ProBadge } from '@/features/membership/AccountSections'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import {
@@ -206,7 +207,7 @@ export default function GKWorld() {
                 <div className="flex items-center justify-between">
                   <Icon className="h-5 w-5 text-emerald-800" />
                 </div>
-                <p className="mt-2 text-sm font-bold leading-snug text-foreground group-hover:text-pine">{c.name}</p>
+                <p className="mt-2 text-sm font-bold leading-snug text-foreground group-hover:text-pine">{c.name} {['general-ability', 'current-affairs'].includes(c.slug) && <ProBadge />}</p>
               </Link>
             )
           })}

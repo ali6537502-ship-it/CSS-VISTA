@@ -99,7 +99,7 @@ export default function AccountHome() {
 
   // The edition card reads the same overview the reading desk uses, so it always
   // names the edition the student would actually open.
-  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema)
+  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, section === 'pro')
 
   const snapshot = useMemo(() => {
     void version
@@ -147,10 +147,8 @@ export default function AccountHome() {
   const mptFlow = useMptFlowEnabled() === true
   const freeChoices = [
     { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
-    { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
-    { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
     {
       to: '/account/tasks', icon: CalendarCheck2, title: 'Today’s Plan',
       status: snapshot.remaining.length
@@ -164,8 +162,6 @@ export default function AccountHome() {
         : `${snapshot.english.completed} of ${snapshot.english.total} parts done`,
     },
     { to: '/grammar-course', icon: Languages, title: 'Grammar Course', status: 'Guided lessons, drills & revision' },
-    { to: '/subjects/compulsory/precis-composition', icon: BookOpen, title: 'Précis & Composition', status: 'Free study resources' },
-    { to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' },
     {
       to: '/account/progress', icon: Target, title: 'Practice & Mocks',
       status: snapshot.stats.attempted
@@ -180,17 +176,21 @@ export default function AccountHome() {
       status: syllabusPercent ? `${syllabusPercent}% complete` : 'Mark your first topic',
     },
     {
-      to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
-      status: snapshot.essayThemes.directionsDone
-        ? `${snapshot.essayThemes.themesStarted} theme${snapshot.essayThemes.themesStarted === 1 ? '' : 's'} started \u00b7 ${snapshot.essayThemes.directionsDone} direction${snapshot.essayThemes.directionsDone === 1 ? '' : 's'} done`
-        : 'Begin the 2027 research roadmap',
-    },
-    {
       to: '/account/library', icon: Bookmark, title: 'My Library',
       status: snapshot.saved ? `${snapshot.saved} saved item${snapshot.saved === 1 ? '' : 's'}` : 'Save what is worth revisiting',
     },
   ]
   const proChoices = [
+    { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
+    { to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' },
+    { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
+    {
+      to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
+      status: snapshot.essayThemes.directionsDone
+        ? `${snapshot.essayThemes.themesStarted} theme${snapshot.essayThemes.themesStarted === 1 ? '' : 's'} started \u00b7 ${snapshot.essayThemes.directionsDone} direction${snapshot.essayThemes.directionsDone === 1 ? '' : 's'} done`
+        : 'Begin the 2027 research roadmap',
+    },
+
     { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
     { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
     { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
@@ -248,7 +248,7 @@ export default function AccountHome() {
           <section className="mt-12" aria-label="Pick up where you left off">
             <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">Pick up where you left off</h2>
             <div className="mt-4 divide-y divide-slate-100 border-y border-slate-100">
-              {continueReading && (
+              {section === 'pro' && continueReading && (
                 <Link to={`${briefingRoot}/${continueReading.id}`} className="flex items-center gap-4 py-4 hover:text-emerald-800">
                   <Newspaper className="h-4 w-4 shrink-0 text-emerald-700" />
                   <span className="min-w-0 flex-1">

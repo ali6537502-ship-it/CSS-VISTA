@@ -47,6 +47,7 @@ ErrorDocument 404 /404.html
 <IfModule mod_setenvif.c>
   SetEnvIf Request_URI "^/assets/" cssv_hashed_asset=1
   SetEnvIf Request_URI "^/(?:account(?:/|$)|api/)" cssv_private_account=1
+  SetEnvIf Request_URI "^/(?:mcq/cat-(?:general-ability|current-affairs)-[0-9]+\.json|one-liner-gk/(?:general-ability|current-affairs-archive|pakistan-current-affairs)\.json|css-subject-mcqs/(?:general-science-and-ability|current-affairs)\.json|study-material/essay-themes\.json|recent-affairs/|magazines/.*\.pdf)" cssv_premium_payload=1
 </IfModule>
 
 <IfModule mod_headers.c>
@@ -94,6 +95,8 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.(?:woff2?)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
+  Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0" env=cssv_premium_payload
+  Header always set X-Robots-Tag "noindex, nofollow" env=cssv_premium_payload
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -102,6 +105,7 @@ ErrorDocument 404 /404.html
 
   # Preserve publisher Authorization on PHP/FastCGI deployments.
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteRule ^api/(?:_premium[^/]*\.php|_premium_files(?:/|$)) - [F,L,NC]
   # Protected PHP release payloads and helpers can only be included server-side.
   RewriteRule ^api/(?:_topics[^/]*\.php$|_planner[^/]*\.php$|_tutor[^/]*\.php$|_mentor[^/]*\.php$|_precis[^/]*\.php$|_grammar[^/]*\.php$|_briefing_release(?:/|$)|_current_affairs[^/]*\.php$|_mpt|_resource_files(?:/|$)|_resources\.php$) - [F,L,NC]
 
@@ -109,6 +113,9 @@ ErrorDocument 404 /404.html
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^www\.css-vista\.com$ [NC]
   RewriteRule ^ https://www.css-vista.com%{REQUEST_URI} [R=301,L,NE]
+
+  # Same URLs, native Pro checks. These rules precede static-file delivery.
+  RewriteRule ^(mcq/cat-(?:general-ability|current-affairs)-[0-9]+\.json|one-liner-gk/(?:general-ability|current-affairs-archive|pakistan-current-affairs)\.json|css-subject-mcqs/(?:general-science-and-ability|current-affairs)\.json|study-material/essay-themes\.json|recent-affairs/batch-2026-07-11_2026-08-16\.json|magazines/css-vista-current-affairs-weekly-(?:15-august|25-august|03-september)-2026\.pdf)$ api/student/premium-content.php?file=$1 [L,NC]
 
   # CSSV_GENERATED_REDIRECT_RULES_START
   # Legacy application redirects are inserted here by the production build.

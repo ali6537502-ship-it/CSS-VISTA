@@ -7,6 +7,7 @@
  * the route registry then treats as not ready for indexing.
  */
 import Home from '@/pages/Home'
+import ProGate, { SelectedStudyGate } from '@/features/membership/ProGate'
 import StartCSS from '@/pages/StartCSS'
 import CssEligibilityCalculator from '@/pages/CssEligibilityCalculator'
 import CompulsoryList from '@/pages/CompulsoryList'
@@ -124,7 +125,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/css-eligibility-calculator', () => <CssEligibilityCalculator />),
   page('/subjects/compulsory', () => <CompulsoryList />),
   page('/subjects/compulsory/essay', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
-  page('/subjects/compulsory/precis-composition', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
+  page('/subjects/compulsory/precis-composition', () => <SelectedStudyGate><SubjectDetail /></SelectedStudyGate>, '/subjects/compulsory/:slug'),
   page('/subjects/compulsory/general-science-ability', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
   page('/subjects/compulsory/current-affairs', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
   page('/subjects/compulsory/pakistan-affairs', () => <SubjectDetail />, '/subjects/compulsory/:slug'),
@@ -135,7 +136,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/css-mcqs', () => <CssSubjectMcqs />),
   page('/essay', () => <EssayModule />),
   page('/mpt', () => <MPTPrep />),
-  page('/current-affairs', () => <CurrentAffairs />),
+  page('/current-affairs', () => <ProGate feature="Current Affairs"><CurrentAffairs /></ProGate>),
   page('/psych-viva', () => <PsychViva />),
   page('/fpsc-updates', () => <FpscUpdates />),
   page('/mentors', () => <Mentors />),

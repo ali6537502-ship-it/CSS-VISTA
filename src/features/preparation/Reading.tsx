@@ -1,3 +1,4 @@
+import ProGate from '@/features/membership/ProGate'
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { BookOpen, Bookmark, Check, RotateCcw } from 'lucide-react'
@@ -181,7 +182,7 @@ function ReadingCard({
     </article>
   )
 }
-export default function ConnectedReading({
+function ReadingContent({
   attempt,
   action,
   generation,
@@ -240,7 +241,7 @@ export default function ConnectedReading({
               change('kind', e.target.value)
             }}
           >
-            <option value="current_affairs">Current Affairs</option>
+            <option value="current_affairs">★ Pro · Current Affairs</option>
             <option value="vistagram">Vistagram</option>
           </select>
         </label>
@@ -434,4 +435,10 @@ function ReadingConnection({
       )}
     </section>
   )
+}
+
+export default function ConnectedReading(props: Parameters<typeof ReadingContent>[0]) {
+  const [params] = useSearchParams()
+  const vistaParams = new URLSearchParams(params); vistaParams.set('kind', 'vistagram'); vistaParams.delete('offset')
+  return params.get('kind') === 'vistagram' ? <ReadingContent {...props} /> : <ProGate feature="Current Affairs reading & revision" fallbackAction={<Link className="mt-4 block min-h-11 py-3 text-sm font-semibold text-emerald-900" to={`/account/preparation?${vistaParams}`}>Open free Vistagram reading</Link>}><ReadingContent {...props} /></ProGate>
 }

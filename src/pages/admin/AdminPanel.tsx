@@ -23,7 +23,7 @@ import { mergedDates, mergedNotifications, mergedAnnouncements, mergedPastPapers
 import { notifications2027 as seedNotifs } from '@/data/css2027'
 import { testSeriesAnnouncements as seedAnn } from '@/data/testSeries'
 import { pastPapers as seedPapers, examinations, subjectTypes, paperParts, paperModes, ppSubjects, type PastPaper } from '@/data/pastPapers'
-import { caIssues } from '@/data/currentAffairs'
+import { loadCaIssues, type CAIssue } from '@/data/currentAffairs'
 import { quizCategories } from '@/data/quiz'
 import {
   getAdminTestSeriesRequests, updateTestSeriesRequestStatus,
@@ -66,11 +66,15 @@ const input = 'h-10 w-full rounded-md border border-input px-3 text-sm outline-n
 const textarea = 'w-full rounded-md border border-input p-3 text-sm outline-none focus:ring-2 focus:ring-ring'
 
 function CaEditor() {
+  const [caIssues, setIssues] = useState<CAIssue[]>([])
+  const [loadError, setLoadError] = useState('')
+  useEffect(() => { const controller = new AbortController(); void loadCaIssues(controller.signal).then(setIssues).catch((error: unknown) => { if ((error as Error).name !== 'AbortError') setLoadError('Issue files could not be loaded. Reopen this tab to retry.') }); return () => controller.abort() }, [])
   const seed: CaTopic[] = caIssues.map((c, i) => ({
     id: `seed-${c.slug}`, title: c.title, date: c.lastUpdated, summary: c.background.slice(0, 160),
     content: c.background, important: false, published: true, order: i,
   }))
   const [topics, setTopics] = useState<CaTopic[]>(() => mergedCaTopics(seed))
+  useEffect(() => { if (caIssues.length) setTopics(mergedCaTopics(caIssues.map((c,i) => ({id: `seed-${c.slug}`, title:c.title, date:c.lastUpdated, summary:c.background.slice(0,160), content:c.background, important:false, published:true, order:i})))) }, [caIssues])
   const blank: CaTopic = { id: '', title: '', date: new Date().toISOString().slice(0, 10), summary: '', content: '', sourceUrl: '', important: false, published: false, order: topics.length }
   const [form, setForm] = useState<CaTopic>(blank)
   const [editing, setEditing] = useState<string | null>(null)
@@ -95,6 +99,7 @@ function CaEditor() {
 
   return (
     <div className="space-y-6">
+      {loadError && <p role="alert" className="text-sm text-red-700">{loadError}</p>}
       <div className="rounded-lg border bg-white p-5">
         <h3 className="font-semibold text-pine">{editing ? 'Edit topic' : 'Add a new Current Affairs topic'}</h3>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
