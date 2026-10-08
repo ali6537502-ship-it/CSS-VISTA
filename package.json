@@ -91,7 +91,9 @@
     "test:tutor-server": "php tests/tutor/unit.php && node scripts/tutor/export-grammar.mjs --check",
     "test:tutor-security": "node tests/tutor/security.mjs",
     "test:planner-server": "php tests/planner/unit.php",
-    "test:planner-security": "node tests/planner/security.mjs"
+    "test:planner-security": "node tests/planner/security.mjs",
+    "test:reading-server": "php tests/reading/unit.php",
+    "test:reading-security": "node tests/reading/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

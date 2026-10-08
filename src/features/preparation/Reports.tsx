@@ -49,6 +49,14 @@ type Dimensions = {
       basis: string
     }
   }
+  reading: {
+    bookmarks: number
+    read_sources: number
+    due: number
+    reviews: number
+    vistagram_readings: number
+    basis: string
+  }
   current_affairs: { reading_declarations: number; basis: string }
 }
 const pct = (n: number | null) => (n === null ? 'Insufficient evidence' : `${n}%`)
@@ -153,8 +161,14 @@ export function Readiness({ attempt }: { attempt: string }) {
         <EvidenceCard
           label="Dated Current Affairs reading"
           value={String(d.current_affairs.reading_declarations)}
-          detail="Distinct developments reported read through this attempt’s plan"
+          detail="Distinct developments reported read for this attempt"
           basis={d.current_affairs.basis}
+        />
+        <EvidenceCard
+          label="Vistagram & reading revision"
+          value={`${d.reading.vistagram_readings} Vistagram articles read`}
+          detail={`${d.reading.bookmarks} attempt bookmarks · ${d.reading.due} scheduled revisions due · ${d.reading.reviews} self-reported recall reviews`}
+          basis={d.reading.basis}
         />
       </div>
       <section className="rounded-2xl border p-5">
@@ -206,6 +220,8 @@ type Period = {
   test_percentage: number | null
   paper_reviews: number
   current_affairs_readings: number
+  vistagram_readings: number
+  reading_reviews: number
   mpt_first_score: number
   mpt_first_total: number
   mpt_repeat_score: number
@@ -238,6 +254,8 @@ export function Reviews({ attempt }: { attempt: string }) {
     ['Coverage declarations / imports', (p) => `${p.coverage_declarations} / ${p.imports}`],
     ['First writing drafts / rewrites', (p) => `${p.first_drafts} / ${p.rewrites}`],
     ['Linked MCQs', (p) => `${p.mcq_questions} · ${pct(p.mcq_percentage)}`],
+    ['Vistagram articles read', (p) => String(p.vistagram_readings)],
+    ['Reading recall reviews', (p) => String(p.reading_reviews)],
     ['Linked tests', (p) => `${p.test_score}/${p.test_total} · ${pct(p.test_percentage)}`],
     [
       'Paper / Current Affairs reviews',
@@ -339,6 +357,7 @@ function ChangeHistory({ attempt }: { attempt: string }) {
       </p>
     )
   const names: Record<string, string> = {
+    reading_save: 'Reading or recall recorded',
     plan_save: 'Plan reviewed and saved',
     task_work: 'Study block reported',
     task_move: 'Remaining work rescheduled',
