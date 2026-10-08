@@ -27,7 +27,11 @@ const php = (...args) =>
       ).trim()
     : execFileSync('php', args, { env, encoding: 'utf8' }).trim()
 async function call(path, body, jar = new Map(), extra = {}) {
-  const headers = { Accept: 'application/json', 'User-Agent': 'CSSVistaTopicsIsolation', ...extra }
+  const headers = {
+    Accept: 'application/json',
+    'User-Agent': 'CSSVistaTopicsIsolation',
+    ...extra,
+  }
   if (jar.size) headers.Cookie = [...jar].map(([k, v]) => `${k}=${v}`).join('; ')
   if (body) {
     headers['Content-Type'] = 'application/json'
@@ -155,7 +159,11 @@ assert.match(detail.headers.get('cache-control'), /no-store/)
 assert.equal((await get(b, own)).status, 404)
 assert.equal((await get(a, foreign)).status, 404)
 assert.equal(
-  (await call(endpoint + `?attempt=${own}`, undefined, a.jar, { 'X-CSSV-User': b.id })).status,
+  (
+    await call(endpoint + `?attempt=${own}`, undefined, a.jar, {
+      'X-CSSV-User': b.id,
+    })
+  ).status,
   409,
 )
 php('tests/precis/fixture.php', 'activate', a.id)
@@ -214,6 +222,47 @@ assert.equal(
   'learning',
   'Study declarations manufactured understanding',
 )
+assert.deepEqual(detail.data.guided_checks, [], 'Unanswered checkpoint exposed feedback')
+const guided = mutation('guided_check', { question_id: 'learn-1', choice: 3 })
+assert.equal(
+  (await act({ ...guided, question_id: 'revision-1' })).status,
+  422,
+  'Guided practice unlocked a revision key',
+)
+assert.equal((await act({ ...guided, question_id: 'missing' })).status, 422)
+assert.equal((await act({ ...guided, choice: '0' })).status, 422)
+const guidedWrong = await act(guided)
+assert.equal(guidedWrong.status, 200, JSON.stringify(guidedWrong.data))
+assert.equal(guidedWrong.data.check.results.length, 1)
+assert.equal(guidedWrong.data.check.results[0].correct, false)
+assert.equal(
+  (await act(guided)).data.check.results[0].correct,
+  false,
+  'Lost guided response duplicated practice',
+)
+detail = await get()
+assert.equal(detail.data.progress.state, 'learning', 'Guided practice manufactured understanding')
+assert.equal(detail.data.progress.learn_score, null, 'Guided feedback replaced the complete check')
+assert.equal(detail.data.progress.next_revision, null, 'Guided feedback started recall scheduling')
+assert.equal(detail.data.guided_checks.length, 1)
+assert.equal(detail.data.guided_checks[0].id, 'learn-1')
+assert.equal(detail.data.guided_checks[0].correct, false)
+assert.deepEqual((await get(a, second)).data.guided_checks, [], 'Guided feedback crossed attempts')
+assert.equal(
+  (await act(mutation('guided_check', { question_id: 'learn-1', choice: 0 }))).status,
+  200,
+)
+detail = await get()
+assert.equal(
+  detail.data.guided_checks.length,
+  1,
+  'Latest guided result list duplicated the question',
+)
+assert.equal(
+  detail.data.guided_checks[0].correct,
+  true,
+  'Corrected checkpoint did not replace the mistake',
+)
 const answers = { 'learn-1': 0, 'learn-2': 1, 'learn-3': 2 },
   quiz = mutation('quiz', { choices: answers })
 assert.equal((await act({ ...quiz, choices: { 'learn-1': 0 } })).status, 422)
@@ -224,10 +273,13 @@ assert.equal(checked.data.state, 'understood')
 assert.equal((await act(quiz)).data.check.score, 100, 'Exact quiz receipt not replayed')
 detail = await get()
 assert.equal(detail.data.progress.next_revision > detail.data.today, true)
+assert.equal(detail.data.latest_checks.find(c => c.mode === 'learn').result.score, 100, 'Latest complete check was lost among teaching feedback')
 assert.equal(
   (
     await act(
-      mutation('review', { choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 } }),
+      mutation('review', {
+        choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 },
+      }),
     )
   ).status,
   409,
@@ -237,7 +289,11 @@ const draft = 'TEST ONLY student practice sentence with independent observations
 assert.equal(
   (
     await act(
-      mutation('draft', { notes: 'TEST ONLY private notes', draft, expected_draft_version: 0 }),
+      mutation('draft', {
+        notes: 'TEST ONLY private notes',
+        draft,
+        expected_draft_version: 0,
+      }),
     )
   ).status,
   200,
@@ -246,7 +302,15 @@ detail = await get()
 assert.equal(detail.data.progress.state, 'practised')
 assert.equal(detail.data.progress.draft_version, 1)
 assert.equal(
-  (await act(mutation('draft', { notes: 'stale notes', draft, expected_draft_version: 0 }))).status,
+  (
+    await act(
+      mutation('draft', {
+        notes: 'stale notes',
+        draft,
+        expected_draft_version: 0,
+      }),
+    )
+  ).status,
   409,
   'Older draft overwrote saved writing',
 )
@@ -267,7 +331,9 @@ assert.equal(dueCatalog.stats.mastered, 0, 'Due recall counted as current master
 assert.equal(
   (
     await act(
-      mutation('review', { choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 } }),
+      mutation('review', {
+        choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 },
+      }),
     )
   ).data.state,
   'mastered',
@@ -279,7 +345,9 @@ detail = await get()
 assert.equal(
   (
     await act(
-      mutation('review', { choices: { 'revision-1': 3, 'revision-2': 3, 'revision-3': 3 } }),
+      mutation('review', {
+        choices: { 'revision-1': 3, 'revision-2': 3, 'revision-3': 3 },
+      }),
     )
   ).data.check.passed,
   false,
@@ -291,7 +359,9 @@ detail = await get()
 assert.equal(
   (
     await act(
-      mutation('review', { choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 } }),
+      mutation('review', {
+        choices: { 'revision-1': 0, 'revision-2': 1, 'revision-3': 2 },
+      }),
     )
   ).data.check.passed,
   true,
@@ -314,7 +384,12 @@ const history = await call(
 )
 assert.equal(history.status, 200)
 assert.equal(history.data.records[0].notes, 'TEST ONLY private notes')
-assert.equal(history.data.checks.length, 4)
+assert.equal(history.data.checks.filter((c) => c.mode !== 'guided').length, 4)
+assert.equal(
+  history.data.checks.filter((c) => c.mode === 'guided').length,
+  2,
+  'Guided retry erased original answer or duplicated exact replay',
+)
 assert.equal((await call(`${endpoint}?view=history&attempt=${own}`, undefined, b.jar)).status, 404)
 const updated = {
   ...source,
@@ -322,7 +397,12 @@ const updated = {
 }
 imported = await call(
   editor,
-  { action: 'import', request_id: randomUUID(), expected_revision: 2, topic: updated },
+  {
+    action: 'import',
+    request_id: randomUUID(),
+    expected_revision: 2,
+    topic: updated,
+  },
   owner,
 )
 assert.equal(imported.status, 200, JSON.stringify(imported.data))
@@ -355,6 +435,11 @@ assert.equal(
 detail = await get()
 assert.equal(detail.data.progress.state, 'not_started')
 assert.equal(detail.data.progress.notes, '')
+assert.deepEqual(
+  detail.data.guided_checks,
+  [],
+  'Corrected source inherited an earlier edition answer',
+)
 assert.equal(detail.data.older_versions, 1)
 assert.equal(
   (await call(`${endpoint}?view=history&attempt=${own}&topic=${topicId}`, undefined, a.jar)).data
@@ -366,13 +451,24 @@ detail = await get()
 assert.equal(detail.data.content, null, 'Expired member fetched premium lesson')
 assert.equal((await act(mutation('begin'))).status, 403, 'Expired member began new premium work')
 assert.equal(
+  (await act(mutation('guided_check', { question_id: 'learn-1', choice: 0 }))).status,
+  403,
+  'Expired member submitted guided work',
+)
+assert.equal(
+  (await call(endpoint + '?request_id=' + guided.request_id, undefined, a.jar)).status,
+  200,
+  'Expiry removed the earned guided receipt',
+)
+assert.equal(
   (await call(endpoint + '?request_id=' + quiz.request_id, undefined, a.jar)).status,
   200,
   'Expiry erased an accepted quiz receipt',
 )
 assert.equal(
-  (await call(`${endpoint}?view=history&attempt=${own}&topic=${topicId}`, undefined, a.jar)).data
-    .checks.length,
+  (
+    await call(`${endpoint}?view=history&attempt=${own}&topic=${topicId}`, undefined, a.jar)
+  ).data.checks.filter((c) => c.mode !== 'guided').length,
   4,
   'Expiry erased owned results',
 )
@@ -380,7 +476,12 @@ assert.equal(
   (
     await call(
       editor,
-      { action: 'unpublish', expected_revision: 4, request_id: randomUUID(), topic_id: topicId },
+      {
+        action: 'unpublish',
+        expected_revision: 4,
+        request_id: randomUUID(),
+        topic_id: topicId,
+      },
       owner,
     )
   ).status,

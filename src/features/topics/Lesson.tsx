@@ -22,6 +22,7 @@ import {
   type Question,
 } from './types'
 import { topicPanel } from './styles'
+import { GuidedSection, MistakeReview } from './Guided'
 
 type Send = (body: Record<string, unknown>) => Promise<void>
 function PendingAction({ action }: { action: PreparationAction }) {
@@ -381,7 +382,9 @@ export default function TopicLesson({
       ? params.get('topicMode')!
       : 'read'
   const section =
-    definition?.sections.find((s) => s.id === params.get('topicSection')) || definition?.sections[0]
+    definition?.sections.find((s) => s.id === params.get('topicSection')) ||
+    definition?.sections.find((s) => !data.progress.completed.includes(s.id)) ||
+    definition?.sections[0]
   const sectionIndex = section && definition ? definition.sections.indexOf(section) : 0,
     completed = data.progress.completed
   const send: Send = (body) =>
@@ -393,11 +396,39 @@ export default function TopicLesson({
       expected_version: data.progress.version,
     })
   const due = !!data.progress.next_revision && data.progress.next_revision <= data.today
-  const latest = history.data?.checks.find(
+  const guided = data.guided_checks ?? []
+  const latest = (data.latest_checks ?? history.data?.checks)?.find(
     (c) =>
       c.topic_version_id === data.topic.version_id &&
       c.mode === (mode === 'revise' ? 'revision' : 'learn'),
   )
+  const nextSection = definition?.sections.find((s) => !completed.includes(s.id))
+  const nextStep = nextSection
+    ? {
+        mode: 'read',
+        section: nextSection.id,
+        label: 'Continue learning',
+        detail: nextSection.title,
+      }
+    : (data.progress.learn_score ?? 0) < 80
+      ? {
+          mode: 'check',
+          label: 'Check your understanding',
+          detail: 'Complete the whole-topic check.',
+        }
+      : definition && data.progress.draft_words < definition.practice.min_words
+        ? {
+            mode: 'write',
+            label: 'Build your answer',
+            detail: 'Put the topic into your own words.',
+          }
+        : due
+          ? {
+              mode: 'revise',
+              label: 'Recall today’s revision',
+              detail: 'Use the separate scheduled questions.',
+            }
+          : null
   return (
     <div className="space-y-5">
       <header className={topicPanel}>
@@ -432,10 +463,39 @@ export default function TopicLesson({
         <h3 className="mt-5 text-2xl font-semibold leading-9 sm:text-3xl">{data.topic.title}</h3>
         <p className="mt-3 text-sm leading-7 text-slate-600">{data.topic.summary}</p>
         {active && definition && (
-          <p className="mt-4 text-xs leading-6 text-slate-500">
-            Based on {definition.author}’s source material · facts reviewed through{' '}
-            {definition.as_of}
-          </p>
+          <>
+            <p className="mt-4 text-xs leading-6 text-slate-500">
+              Based on {definition.author}’s source material · facts reviewed through{' '}
+              {definition.as_of}
+            </p>
+            <p className="mt-3 text-xs leading-6 text-indigo-700">
+              {definition.sections.length} mini-lessons ·{' '}
+              {definition.questions.filter((q) => q.mode === 'learn').length} learning questions ·{' '}
+              {definition.questions.filter((q) => q.mode === 'revision').length} revision questions
+            </p>
+            {nextStep && (
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                    Your next step
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-700">{nextStep.detail}</p>
+                </div>
+                <button
+                  className={secondary}
+                  onClick={() =>
+                    nav({
+                      topicMode: nextStep.mode,
+                      ...(nextStep.section ? { topicSection: nextStep.section } : {}),
+                    })
+                  }
+                >
+                  {nextStep.label}
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            )}
+          </>
         )}
         {data.progress.next_revision && (
           <p className="mt-3 text-sm font-semibold text-indigo-700">
@@ -499,6 +559,10 @@ export default function TopicLesson({
               </button>
             ))}
           </nav>
+          <MistakeReview
+            results={guided}
+            revisit={(id) => nav({ topicMode: 'read', topicSection: id })}
+          />
           {mode === 'read' && section ? (
             <div className="grid min-w-0 gap-5 lg:grid-cols-[240px_minmax(0,1fr)]">
               <aside className="self-start rounded-2xl border bg-white p-4">
@@ -515,7 +579,9 @@ export default function TopicLesson({
                 >
                   <div
                     className="h-full rounded-full bg-indigo-600 transition-[width] motion-reduce:transition-none"
-                    style={{ width: `${(100 * completed.length) / definition.sections.length}%` }}
+                    style={{
+                      width: `${(100 * completed.length) / definition.sections.length}%`,
+                    }}
                   />
                 </div>
                 <p className="mt-2 px-2 text-xs leading-6 text-slate-500">
@@ -546,16 +612,16 @@ export default function TopicLesson({
                   {section.kind.replaceAll('-', ' ')}
                 </p>
                 <h4 className="mt-3 text-2xl font-semibold leading-9">{section.title}</h4>
-                <div className="mt-6 space-y-5">
-                  {section.blocks.map((block, i) => (
-                    <p
-                      className="whitespace-pre-line break-words text-base leading-8 text-slate-700"
-                      key={i}
-                    >
-                      {block}
-                    </p>
-                  ))}
-                </div>
+                <GuidedSection
+                  key={`${data.topic.version_id}:${section.id}`}
+                  section={section}
+                  questions={definition.questions.filter(
+                    (q) => q.mode === 'learn' && q.section_id === section.id,
+                  )}
+                  results={guided}
+                  blocked={action.blocked}
+                  send={send}
+                />
                 <div className="mt-7 space-y-2 border-t pt-5 text-xs leading-6">
                   <p className="font-semibold text-slate-500">References</p>
                   {definition.references
@@ -585,7 +651,13 @@ export default function TopicLesson({
                     <button
                       disabled={action.blocked || completed.includes(section.id)}
                       className={primary}
-                      onClick={() => void send({ action: 'checkpoint', section_id: section.id })}
+                      onClick={() => {
+                        nav({ topicSection: section.id })
+                        void send({
+                          action: 'checkpoint',
+                          section_id: section.id,
+                        })
+                      }}
                     >
                       {completed.includes(section.id)
                         ? 'Section recorded'
@@ -596,7 +668,9 @@ export default function TopicLesson({
                     <button
                       className={secondary}
                       onClick={() =>
-                        nav({ topicSection: definition.sections[sectionIndex - 1].id })
+                        nav({
+                          topicSection: definition.sections[sectionIndex - 1].id,
+                        })
                       }
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -607,7 +681,9 @@ export default function TopicLesson({
                     <button
                       className={secondary}
                       onClick={() =>
-                        nav({ topicSection: definition.sections[sectionIndex + 1].id })
+                        nav({
+                          topicSection: definition.sections[sectionIndex + 1].id,
+                        })
                       }
                     >
                       Next section

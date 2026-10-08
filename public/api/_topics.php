@@ -7,7 +7,7 @@ require_once __DIR__.'/_topics_schema.php';
 function cssv_topics_ensure(PDO $pdo): void {
     static $ready=false;if($ready)return;cssv_learning_ensure($pdo);
     if((int)$pdo->query("SELECT GET_LOCK('cssvista-topics-schema-v1',5)")->fetchColumn()!==1)throw new RuntimeException('topics_schema_busy');
-    try{foreach(cssv_topics_schema_statements() as $sql)$pdo->exec($sql);$ready=true;}finally{$pdo->query("SELECT RELEASE_LOCK('cssvista-topics-schema-v1')");}
+    try{foreach([...cssv_topics_schema_statements(),...cssv_topics_guided_schema_statements()] as $sql)$pdo->exec($sql);$ready=true;}finally{$pdo->query("SELECT RELEASE_LOCK('cssvista-topics-schema-v1')");}
 }
 function cssv_topic_progress(PDO $pdo,string $user,string $attempt,string $version): array {
     $q=$pdo->prepare('SELECT * FROM attempt_topic_progress WHERE user_id=? AND attempt_id=? AND topic_version_id=?');$q->execute([$user,$attempt,$version]);$r=$q->fetch();
@@ -46,7 +46,12 @@ function cssv_topic_detail(PDO $pdo,string $user,string $attempt,string $topic):
     }
     $progress=cssv_topic_progress($pdo,$user,$attempt,$row['version_id']);$progress['state']=cssv_topic_state($progress,$row['definition'],cssv_topic_today());
     $q=$pdo->prepare('SELECT COUNT(*) FROM attempt_topic_progress WHERE user_id=? AND attempt_id=? AND topic_id=? AND topic_version_id<>?');$q->execute([$user,$attempt,$topic,$row['version_id']]);$older=(int)$q->fetchColumn();
-    return ['membership'=>$membership,'today'=>cssv_topic_today(),'available'=>$available,'topic'=>array_intersect_key($row,array_flip(['id','title','summary','category','version_id','content_hash'])),'content'=>$available&&$membership['status']==='active'?cssv_topic_client_content($row['definition']):null,'progress'=>$progress,'older_versions'=>$older];
+    // One latest earned result per question. No unsolved key or another attempt's feedback.
+    $q=$pdo->prepare("SELECT c.id,c.result FROM attempt_topic_guided_results g JOIN attempt_topic_checks c ON c.id=g.check_id AND c.user_id=g.user_id AND c.attempt_id=g.attempt_id AND c.topic_version_id=g.topic_version_id AND c.mode='guided' WHERE g.user_id=? AND g.attempt_id=? AND g.topic_version_id=? ORDER BY g.question_id LIMIT 96");$q->execute([$user,$attempt,$row['version_id']]);$guided=array_map(fn($r)=>[...json_decode($r['result'],true,64,JSON_THROW_ON_ERROR)['results'][0],'check_id'=>$r['id']],$q->fetchAll());
+    // Teaching retries must not push the most recent complete check out of a history page.
+    $latest=[];$q=$pdo->prepare('SELECT id,topic_version_id,mode,result,created_at FROM attempt_topic_checks WHERE user_id=? AND attempt_id=? AND topic_version_id=? AND mode=? ORDER BY created_at DESC,id DESC LIMIT 1');
+    foreach(['learn','revision'] as $mode){$q->execute([$user,$attempt,$row['version_id'],$mode]);if($check=$q->fetch()){$check['topic_id']=$topic;$check['result']=json_decode($check['result'],true,64,JSON_THROW_ON_ERROR);$check['created_at']=cssv_pro_iso($check['created_at']);$latest[]=$check;}}
+    return ['membership'=>$membership,'today'=>cssv_topic_today(),'available'=>$available,'topic'=>array_intersect_key($row,array_flip(['id','title','summary','category','version_id','content_hash'])),'content'=>$available&&$membership['status']==='active'?cssv_topic_client_content($row['definition']):null,'progress'=>$progress,'older_versions'=>$older,'guided_checks'=>$guided,'latest_checks'=>$latest];
 }
 function cssv_topic_history(PDO $pdo,string $user,string $attempt,?string $topic,int $offset): array {
     cssv_learning_attempt($pdo,$attempt,$user);$where='p.user_id=? AND p.attempt_id=?';$args=[$user,$attempt];if($topic){$where.=' AND p.topic_id=?';$args[]=$topic;}
@@ -57,7 +62,7 @@ function cssv_topic_history(PDO $pdo,string $user,string $attempt,?string $topic
 }
 function cssv_topic_mutation(PDO $pdo,string $user,array $body): array {
     $action=$body['action']??'';$base=['action','attempt_id','topic_id','topic_version_id','content_hash','expected_version','request_id'];
-    cssv_pro_fields($body,match($action){'begin'=>$base,'checkpoint'=>[...$base,'section_id'],'bookmark'=>[...$base,'bookmarked'],'draft'=>[...$base,'notes','draft','expected_draft_version'],'quiz','review'=>[...$base,'choices'],default=>throw new InvalidArgumentException('Choose a topic learning action.')});
+    cssv_pro_fields($body,match($action){'begin'=>$base,'checkpoint'=>[...$base,'section_id'],'guided_check'=>[...$base,'question_id','choice'],'bookmark'=>[...$base,'bookmarked'],'draft'=>[...$base,'notes','draft','expected_draft_version'],'quiz','review'=>[...$base,'choices'],default=>throw new InvalidArgumentException('Choose a topic learning action.')});
     $request=cssv_pro_id($body['request_id']??null);$attempt=cssv_pro_id($body['attempt_id']??null);$topic=cssv_topic_slug($body['topic_id']??null);$version=cssv_pro_id($body['topic_version_id']??null);
     $expected=$body['expected_version']??null;if(!is_int($expected)||$expected<0||$expected>1000000)throw new InvalidArgumentException('Refresh the saved topic version.');
     $payload=$body;unset($payload['request_id']);$hash=hash('sha256',json_encode(['native-topics-v1',$payload],JSON_THROW_ON_ERROR));
@@ -77,6 +82,12 @@ function cssv_topic_mutation(PDO $pdo,string $user,array $body): array {
             if($action==='checkpoint'){
                 $section=$body['section_id']??null;if(!is_string($section)||!in_array($section,array_column($definition['sections'],'id'),true))throw new InvalidArgumentException('Choose an actual section of this lesson.');
                 if(in_array($section,$r['completed'],true))throw new DomainException('This section is already recorded.');$r['completed'][]=$section;
+            }elseif($action==='guided_check'){
+                $graded=cssv_topic_guided_grade($definition,$body['question_id']??null,$body['choice']??null);
+                $check=cssv_uuid_v4();$pdo->prepare('INSERT INTO attempt_topic_checks(id,attempt_id,user_id,topic_version_id,mode,result) VALUES(?,?,?,?,?,?)')->execute([$check,$attempt,$user,$version,'guided',json_encode($graded,JSON_THROW_ON_ERROR)]);
+                $pdo->prepare('INSERT INTO attempt_topic_guided_results(attempt_id,user_id,topic_version_id,question_id,check_id) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE check_id=VALUES(check_id)')->execute([$attempt,$user,$version,$body['question_id'],$check]);
+                // Teaching feedback is practice, never a substitute for a complete check or recall.
+                $result['check']=$graded;
             }elseif($action==='draft'){
                 if(!is_int($body['expected_draft_version']??null)||$body['expected_draft_version']<0)throw new InvalidArgumentException('Provide the saved draft version.');
                 if($body['expected_draft_version']!==$r['draft_version'])throw new DomainException('Your notes or writing changed elsewhere. Compare the saved draft before replacing it.');

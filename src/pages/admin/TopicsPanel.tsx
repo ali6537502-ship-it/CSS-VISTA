@@ -166,10 +166,10 @@ function TopicEditor({ data, refresh }: { data: Queue; refresh: () => void }) {
       if (
         !Array.isArray(topics) ||
         topics.length < 1 ||
-        topics.length > 100 ||
+        topics.length > 200 ||
         topics.some((t) => typeof t?.id !== 'string' || typeof t?.title !== 'string')
       )
-        throw new Error('Provide a native topic object or a package containing 1–100 topics.')
+        throw new Error('Provide a native topic object or a package containing 1–200 topics.')
       setImports(topics)
       setMessage(
         `${topics.length} native topic${topics.length === 1 ? '' : 's'} ready to import as drafts.`,

@@ -67,6 +67,7 @@ export type Question = {
   reference_ids: string[]
 }
 export type Definition = {
+  learning_format?: 'guided-course'
   id: string
   title: string
   summary: string
@@ -104,12 +105,26 @@ export type Detail = {
   content: Definition | null
   progress: Progress
   older_versions: number
+  guided_checks: GuidedResult[]
+  latest_checks: Check[]
+}
+export type GuidedResult = Omit<Question, 'mode'> & {
+  check_id: string
+  choice: number
+  answer: number
+  correct: boolean
+  explanation: string
+}
+export const checkLabels = {
+  learn: 'Understanding check',
+  revision: 'Revision check',
+  guided: 'Guided checkpoint',
 }
 export type Check = {
   id: string
   topic_version_id: string
   topic_id: string
-  mode: 'learn' | 'revision'
+  mode: 'learn' | 'revision' | 'guided'
   created_at: string
   result: {
     score: number

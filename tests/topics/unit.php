@@ -13,6 +13,14 @@ $client=cssv_topic_client_content($source);foreach($client['questions'] as $q){c
 check(!isset($client['sources'][0]['sha256']),'Raw owner-source checksum exposed in reader.');
 $first=cssv_topic_grade($source,'learn',['learn-1'=>0,'learn-2'=>1,'learn-3'=>2]);check($first['score']===100&&$first['passed'],'Fixed grading failed.');
 $wrong=cssv_topic_grade($source,'learn',['learn-1'=>3,'learn-2'=>3,'learn-3'=>3]);check($wrong['score']===0&&!$wrong['passed'],'Incorrect choices passed.');
+$guided=cssv_topic_guided_grade($source,'learn-2',1);check($guided['mode']==='guided'&&$guided['score']===100&&count($guided['results'])===1,'Guided checking must reveal only the submitted learning question.');
+invalid(fn()=>cssv_topic_guided_grade($source,'revision-1',0),'Guided endpoint exposed scheduled recall key.');
+invalid(fn()=>cssv_topic_guided_grade($source,'missing',0),'Unknown guided question accepted.');
+invalid(fn()=>cssv_topic_guided_grade($source,'learn-1','0'),'Guided checking accepted a coerced choice.');
+$guidedSource=cssv_topic_definition([...$source,'learning_format'=>'guided-course']);check($guidedSource['learning_format']==='guided-course','Guided course declaration lost.');
+$bad=$guidedSource;$bad['questions'][2]['section_id']='concept-2';invalid(fn()=>cssv_topic_definition($bad),'Guided course had a section without its own reviewed checkpoint.');
+invalid(fn()=>cssv_topic_definition([...$source,'learning_format'=>'unsupported']),'Unknown teaching format accepted.');
+check(cssv_topic_definition($source)===$source,'Legacy definitions changed their canonical source edition.');
 invalid(fn()=>cssv_topic_grade($source,'learn',['learn-1'=>0]),'Incomplete check accepted.');
 invalid(fn()=>cssv_topic_grade($source,'learn',['learn-1'=>0,'learn-2'=>1,'learn-3'=>2,'revision-1'=>0]),'Foreign question accepted.');
 invalid(fn()=>cssv_topic_grade($source,'learn',['learn-1'=>'0','learn-2'=>1,'learn-3'=>2]),'Non-integer answer accepted.');
@@ -38,5 +46,6 @@ $progress['next_revision']='2026-10-09';$progress['revision_score']=100;$progres
 $progress['revision_score']=0;check(cssv_topic_state($progress,$source,'2026-10-08')==='practised','Failed recall retained current mastery.');
 check(cssv_topic_add_days('2026-12-31',1)==='2027-01-01','Revision date rollover wrong.');
 $sql=file_get_contents(__DIR__.'/../../server/sql/022_native_pro_topics.sql');$expected=array_values(array_filter(array_map('trim',explode(';',$sql))));check($expected===cssv_topics_schema_statements(),'Runtime migration differs from SQL.');
+$sql=file_get_contents(__DIR__.'/../../server/sql/023_topic_guided_results.sql');$expected=array_values(array_filter(array_map('trim',explode(';',$sql))));check($expected===cssv_topics_guided_schema_statements(),'Additive guided result migration differs from SQL.');
 check(cssv_topic_hash($source)!==cssv_topic_hash([...$source,'title'=>'Corrected title']),'Corrected source retained its old version hash.');
 echo 'PASS: '.$checks." source, grading, state, dates, private payload and migration assertions.\n";

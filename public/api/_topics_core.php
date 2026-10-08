@@ -23,7 +23,8 @@ function cssv_topic_list(mixed $value,int $minimum,int $maximum,string $label): 
 }
 function cssv_topic_definition(mixed $input): array {
     if (!is_array($input) || array_is_list($input)) throw new InvalidArgumentException('Provide a native topic object.');
-    cssv_pro_fields($input,['id','title','summary','category','author','as_of','sources','subjects','sections','references','questions','practice']);
+    cssv_pro_fields($input,['id','title','summary','category','author','as_of','sources','subjects','sections','references','questions','practice','learning_format']);
+    if(array_key_exists('learning_format',$input) && $input['learning_format']!=='guided-course')throw new InvalidArgumentException('Choose a supported learning format.');
     $id=cssv_topic_slug($input['id']??null);
     $title=cssv_topic_text($input['title']??null,200,'topic title');
     $summary=cssv_topic_text($input['summary']??null,600,'topic summary');
@@ -70,7 +71,7 @@ function cssv_topic_definition(mixed $input): array {
         $sections[]=['id'=>$key,'title'=>cssv_topic_text($section['title']??null,160,'section title'),'kind'=>$kind,'blocks'=>$blocks,'reference_ids'=>$refList($section['reference_ids']??null)];$sectionIds[$key]=true;
     }
     $questions=[];$questionIds=[];$questionPrompts=[];$modes=['learn'=>0,'revision'=>0];
-    foreach(cssv_topic_list($input['questions']??null,6,24,'fixed practice questions') as $question) {
+    foreach(cssv_topic_list($input['questions']??null,6,96,'fixed practice questions') as $question) {
         if(!is_array($question))throw new InvalidArgumentException('Check a fixed question.');
         cssv_pro_fields($question,['id','mode','prompt','options','answer','explanation','section_id','reference_ids']);
         $key=cssv_topic_slug($question['id']??null);if(isset($questionIds[$key]))throw new InvalidArgumentException('Repeated question identity.');
@@ -83,12 +84,18 @@ function cssv_topic_definition(mixed $input): array {
         $questions[]=['id'=>$key,'mode'=>$mode,'prompt'=>$prompt,'options'=>$options,'answer'=>$answer,'explanation'=>cssv_topic_text($question['explanation']??null,2000,'answer explanation'),'section_id'=>$section,'reference_ids'=>$refList($question['reference_ids']??null)];$questionIds[$key]=true;$modes[$mode]++;
     }
     if(min($modes)<3)throw new InvalidArgumentException('Include at least three learning and three separate revision questions.');
+    if(array_key_exists('learning_format',$input)){
+        $covered=array_column(array_filter($questions,fn($q)=>$q['mode']==='learn'),'section_id');
+        foreach(array_keys($sectionIds) as $section)if(!in_array($section,$covered,true))throw new InvalidArgumentException('Each guided section needs its own reviewed learning question.');
+    }
     $practice=$input['practice']??null;if(!is_array($practice))throw new InvalidArgumentException('Provide an independent writing task.');
     cssv_pro_fields($practice,['prompt','focus','min_words','max_words']);
     $minimum=$practice['min_words']??null;$maximum=$practice['max_words']??null;
     if(!is_int($minimum)||$minimum<50||$minimum>200||!is_int($maximum)||$maximum<$minimum||$maximum>600)throw new InvalidArgumentException('Check independent-practice lengths.');
     $practice=['prompt'=>cssv_topic_text($practice['prompt']??null,1200,'writing task'),'focus'=>cssv_topic_text($practice['focus']??null,800,'writing focus'),'min_words'=>$minimum,'max_words'=>$maximum];
     $result=['id'=>$id,'title'=>$title,'summary'=>$summary,'category'=>$category,'author'=>$author,'as_of'=>$asOf,'sources'=>$sources,'subjects'=>$subjects,'sections'=>$sections,'references'=>$references,'questions'=>$questions,'practice'=>$practice];
+    // Keep existing definitions byte-canonical: the optional format changes only new editions.
+    if(array_key_exists('learning_format',$input))$result['learning_format']='guided-course';
     if(strlen(json_encode($result,JSON_THROW_ON_ERROR|JSON_UNESCAPED_UNICODE))>524288)throw new InvalidArgumentException('Keep each native module within 512 KiB.');
     return $result;
 }
@@ -108,6 +115,13 @@ function cssv_topic_grade(array $definition,string $mode,mixed $choices): array 
         $results[]=['id'=>$question['id'],'prompt'=>$question['prompt'],'options'=>$question['options'],'choice'=>$choice,'correct'=>$right,'answer'=>$question['answer'],'explanation'=>$question['explanation'],'section_id'=>$question['section_id'],'reference_ids'=>$question['reference_ids']];
     }
     return ['mode'=>$mode,'correct'=>$correct,'total'=>count($questions),'score'=>(int)round(100*$correct/count($questions)),'passed'=>$correct/count($questions)>=0.8,'results'=>$results];
+}
+function cssv_topic_guided_grade(array $definition,mixed $questionId,mixed $choice): array {
+    if(!is_string($questionId))throw new InvalidArgumentException('Choose an actual learning question.');
+    $questions=array_values(array_filter($definition['questions'],fn($q)=>$q['id']===$questionId && $q['mode']==='learn'));
+    if(count($questions)!==1)throw new InvalidArgumentException('Guided practice uses a learning question, not a scheduled revision answer.');
+    $graded=cssv_topic_grade([...$definition,'questions'=>$questions],'learn',[$questionId=>$choice]);
+    $graded['mode']='guided';return $graded;
 }
 function cssv_topic_state(array $progress,array $definition,string $today): string {
     if(!$progress || empty($progress['started_at']))return 'not_started';

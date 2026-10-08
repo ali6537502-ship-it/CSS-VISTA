@@ -18,7 +18,7 @@ All **107 files are downloaded and independently rehashed**: 3,110,025,760 bytes
 
 Twenty files yield usable native text. All **76 distinct image-only PDFs** have completed OCR across **2,377 pages**, without extraction failures. These represent 87 file copies before byte deduplication. Per-page word-confidence records accompany the OCR. Successful extraction does not establish factual correctness or remove the need to inspect tables, maps, quotations and ambiguous text.
 
-The owner’s target remains 86 learning topics. A file is not automatically one topic. A provisional private map groups originals, alternate editions and six cover-identified visual companions into 81 broad source families. Some documents, especially pre-partition material, contain multiple potential modules; differently dated editions also overlap. This is not an approved 86-module catalogue. No missing topics, authoritative editions or academic claims are inferred merely to reach the target count.
+The owner’s latest instruction covers all 107 supplied files; the earlier 86-topic target is superseded. A file is not automatically one topic. A provisional private map groups originals, alternate editions and six cover-identified visual companions into 81 broad source families. Some documents, especially pre-partition material, contain multiple potential modules; differently dated editions also overlap. This is not an approved final course catalogue. No missing topics, authoritative editions or academic claims are inferred merely to reach the target count.
 
 ## Initial readable-source samples
 
@@ -29,11 +29,13 @@ The complete file inventory, all source files, extracted text, OCR quality recor
 
 ## Native Pro increment and remaining source work
 
-Two reviewed core modules are prepared privately: **Ethnicity & National Integration** and **Governance & Institutional Capacity**, with eight sections and eight distinct fixed questions each. Each includes separate learning/revision questions and a bounded independent writing task. Owner-source checksums and accessible UNESCO/World Bank primary references bind the conceptual material. Unverified current figures, legal provisions and quotations are excluded. These are core lessons, not certification of their entire original books or completion of all 86 modules. See `phase-9-native-topics.md` for the private publication mechanism and tested account flow.
+Two reviewed core modules are prepared privately: **Ethnicity & National Integration** and **Governance & Institutional Capacity**, with eight sections and eight distinct fixed questions each. Each includes separate learning/revision questions and a bounded independent writing task. Owner-source checksums and accessible UNESCO/World Bank primary references bind the conceptual material. Unverified current figures, legal provisions and quotations are excluded. These are core lessons, not certification of their entire original books or completion of the full collection. See `phase-9-native-topics.md` for the private publication mechanism and tested account flow.
 
 1. Read the collection and compare originals, updates and visual companions; identify the authoritative source set for each topic. A later folder name alone does not prove that every claim is newer or correct.
-2. Reconcile that set against the 86-topic target, documenting any unmatched, combined or additional topics without inventing missing ones.
+2. Reconcile that set against every one of the 107 supplied files, documenting any unmatched, combined or additional topics without inventing missing ones.
 3. Create the source-to-section/subject map and flag dated facts, quotations, legal authorities, statistics and extraction problems for verification.
 4. Author native learning sections and reviewed fixed practice incrementally, using the existing account/attempt architecture and source-version controls. Preserve historical material with its actual date; do not present it as current merely because a file was recently modified.
 
-Acquisition and extraction are complete. Full academic review, the final 86-topic mapping, all native lessons and production content publication remain unfinished. Raw files and lesson packages have not been committed or uploaded to public assets.
+Acquisition and extraction are complete. Full academic review, the complete source-to-course mapping, all native lessons and production content publication remain unfinished. Raw files and lesson packages have not been committed or uploaded to public assets.
+
+The next guided-course increment is documented in `phase-9-guided-courses.md`: all 107 files have private page-checked workbooks, and three reviewed framework modules are prepared. Workbook completeness is not academic conversion or production publication.

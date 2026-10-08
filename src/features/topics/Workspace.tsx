@@ -16,7 +16,7 @@ import { field, secondary } from '@/features/preparation/api'
 import { useMembershipExpired } from '@/features/membership/api'
 import TopicLesson from './Lesson'
 import { topicPanel } from './styles'
-import { categories, stateLabels, type Catalog, type History } from './types'
+import { categories, checkLabels, stateLabels, type Catalog, type History } from './types'
 
 function TopicHistory({ attempt }: { attempt: string }) {
   const [params, setParams] = useSearchParams(),
@@ -87,8 +87,8 @@ function TopicHistory({ attempt }: { attempt: string }) {
       {load.data.checks.map((check) => (
         <details key={check.id} className={topicPanel}>
           <summary className="min-h-11 cursor-pointer text-sm font-semibold">
-            {check.mode === 'learn' ? 'Understanding check' : 'Revision check'} ·{' '}
-            {check.result.correct}/{check.result.total} correct · {check.created_at.slice(0, 10)}
+            {checkLabels[check.mode]} · {check.result.correct}/{check.result.total} correct ·{' '}
+            {check.created_at.slice(0, 10)}
           </summary>
           <div className="mt-4 space-y-5">
             {check.result.results.map((result) => (
@@ -362,7 +362,14 @@ export default function TopicWorkspace({
                         {attempt ? (
                           <button
                             className="ml-auto inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-indigo-700"
-                            onClick={() => nav({ topic: item.id, topicHistory: null })}
+                            onClick={() =>
+                              nav({
+                                topic: item.id,
+                                topicHistory: null,
+                                topicMode: 'read',
+                                topicSection: null,
+                              })
+                            }
                           >
                             Open topic
                             <ArrowRight className="h-4 w-4" aria-hidden="true" />
