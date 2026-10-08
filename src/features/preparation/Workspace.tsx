@@ -6,6 +6,7 @@ import PreparationPlan from './Plan'
 import Coverage from './Coverage'
 import ConnectedReading from './Reading'
 import TopicWorkspace from '@/features/topics/Workspace'
+import { ProBadge } from '@/features/membership/AccountSections'
 import { PlanHistory, Readiness, Reviews } from './Reports'
 const views = [
   ['plan', 'Today’s plan'],
@@ -68,6 +69,7 @@ export default function PreparationWorkspace({
             onClick={() => setParams({ attempt: attempt.id, view: id })}
           >
             {label}
+            {id === 'topics' && <ProBadge />}
           </button>
         ))}
       </nav>
