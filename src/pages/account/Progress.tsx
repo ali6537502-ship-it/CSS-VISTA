@@ -1,3 +1,4 @@
+import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
 import { ArrowRight } from 'lucide-react'
 import { AccountPage, EmptyNote, Metric, SectionTitle, daysRemaining, formatStudyTime, useAccountSnapshot, useSyllabusTotal } from './shared'
@@ -24,6 +25,7 @@ export default function AccountProgress() {
         </Link>
       }
     >
+      <AttemptContinuation />
       <SectionTitle>Where you stand</SectionTitle>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Metric label="Target exam" value={examYear ? `CSS ${examYear}` : 'Not set'} detail={examYear ? 'From your planner date' : 'Set an exam date in Planner'} />

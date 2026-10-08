@@ -1,3 +1,4 @@
+import AttemptContinuation from '@/features/preparation/Continuation'
 import { Link } from 'react-router'
 import { ArrowRight, CalendarCheck2, CheckCircle2 } from 'lucide-react'
 import { AccountPage, EmptyNote, SectionTitle, TaskItem, formatMinutes, useAccountSnapshot } from './shared'
@@ -18,6 +19,7 @@ export default function AccountTasks() {
         </Link>
       }
     >
+      <AttemptContinuation />
       <div className="grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-slate-200 p-5">
           <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">Planned today</p>

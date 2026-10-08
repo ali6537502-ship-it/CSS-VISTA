@@ -89,7 +89,9 @@
     "test:mentor-server": "php tests/mentor/unit.php",
     "test:mentor-security": "node tests/mentor/security.mjs",
     "test:tutor-server": "php tests/tutor/unit.php && node scripts/tutor/export-grammar.mjs --check",
-    "test:tutor-security": "node tests/tutor/security.mjs"
+    "test:tutor-security": "node tests/tutor/security.mjs",
+    "test:planner-server": "php tests/planner/unit.php",
+    "test:planner-security": "node tests/planner/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
