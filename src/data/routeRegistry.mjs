@@ -178,6 +178,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/expression', 'English Expression Lab', 'Your private sentence and paragraph writing, feedback and revisions.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/precis', 'Précis Mastery Lab', 'Your private handbook-based Précis course, sourced drafts and revision history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/handwriting', 'Handwritten Paragraph', 'Your private handwritten paragraph and confirmed writing history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/answer-performance', 'My Answer Performance', 'Private student-entered human mentor marks, writing history and revision evidence.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/preparation', 'My Preparation', 'Your account-owned preparation attempts and saved writing.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/ai-usage', 'AI Usage', 'Your private usage and operation history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/membership', 'Membership & Payments', 'Your CSS Vista membership and private payment history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
