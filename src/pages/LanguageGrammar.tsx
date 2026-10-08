@@ -106,6 +106,8 @@ export default function LanguageGrammar() {
 
   const returnDay = searchParams.get('return_day')
   const back = new URLSearchParams()
+  const attempt = searchParams.get('attempt')
+  if (attempt && /^[a-f0-9-]{36}$/i.test(attempt)) back.set('attempt', attempt)
   if (returnDay && /^(?:[1-9]|[12][0-9]|30)$/.test(returnDay)) back.set('day', returnDay)
   if (searchParams.get('from') === 'expression' || searchParams.get('from') === 'lab') {
     back.set('from', searchParams.get('from')!)

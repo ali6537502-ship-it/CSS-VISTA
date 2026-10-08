@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import {
   ArrowRight, BookOpen, Check, ChevronLeft, ChevronRight, CircleAlert, CircleCheck,
@@ -11,6 +11,10 @@ import { courseKey, emptySession, normalizeCourse, readCourse, STEPS, type Cours
 import { QuestionCard, CorrectionCard } from '@/features/grammar/PracticeCards'
 import ErrorLab from '@/features/grammar/ErrorLab'
 import { scheduleReview } from '@/features/grammar/practice'
+import Profile, { type GrammarProfile } from '@/features/grammar/Profile'
+import { useGrammarSync } from '@/features/grammar/useGrammarSync'
+import { attemptChoiceKey, readAttemptChoice } from '@/features/grammar/sync'
+import { useLearning, type Overview } from '@/features/learning/api'
 import { addMistake, recordActivity } from '@/lib/progress'
 import {
   GRAMMAR_PHASES, grammarCorrectionCount, grammarExampleCount, grammarLessonForDay,
@@ -18,10 +22,14 @@ import {
   type GrammarLesson, type GrammarQuestion,
 } from '@/data/grammarCourse'
 
-type View = 'course' | 'toolkit' | 'notebook' | 'lab'
+type View = 'course' | 'toolkit' | 'notebook' | 'lab' | 'profile'
 function loadCourse(userId?: string): CourseState {
   try { return userId === 'pending' ? normalizeCourse({}, grammarLessons) : readCourse(localStorage, userId, grammarLessons) }
   catch { return normalizeCourse({}, grammarLessons) }
+}
+function savedAttemptChoice(userId?: string) {
+  try { return readAttemptChoice(localStorage, userId) }
+  catch { return undefined }
 }
 
 /** Every authored question in the course, indexed by id, for the mistake notebook. */
@@ -53,8 +61,9 @@ function StepHeading({ step, title, hint, icon: Icon }: {
   )
 }
 
-function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading, onDayChange, onViewChange, lessonLink }: { initialDay?: number; initialView: View; returnTo?: string; userId?: string; loading: boolean; onDayChange: (day: number) => void; onViewChange: (view: View) => void; lessonLink: (day: number) => string }) {
-  const [state, setState] = useState<CourseState>(() => loadCourse(userId))
+type ViewProps = { initialDay?: number; initialView: View; returnTo?: string; userId?: string; loading: boolean; onDayChange: (day: number) => void; onViewChange: (view: View) => void; lessonLink: (day: number) => string; attemptId?: string; initialState?: CourseState; onCommit?: (state: CourseState) => void; accountPanel?: ReactNode; syncMessage?: string; profile?: GrammarProfile; profileDirty?: boolean; imported?: boolean }
+function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading, onDayChange, onViewChange, lessonLink, attemptId, initialState, onCommit, accountPanel, syncMessage, profile, profileDirty = false, imported = false }: ViewProps) {
+  const [state, setState] = useState<CourseState>(() => initialState ?? loadCourse(userId))
   const [day, setDay] = useState(() => initialDay ?? state.currentDay)
   const [view, setLocalView] = useState<View>(initialView)
   function setView(next: View) { setLocalView(next); onViewChange(next) }
@@ -66,8 +75,9 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
   const step = session.step
   function commit(next: CourseState) {
     setState(next)
-    try { localStorage.setItem(courseKey(userId), JSON.stringify(next)); setStorageFailed(false) }
+    try { localStorage.setItem(courseKey(userId, attemptId), JSON.stringify(next)); setStorageFailed(false) }
     catch { setStorageFailed(true) }
+    onCommit?.(next)
   }
   function updateSession(patch: Partial<Session>, base = state) {
     commit({ ...base, sessions: { ...base.sessions, [String(day)]: { ...session, ...patch } } })
@@ -149,17 +159,18 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
   function saveNotes(value: string) { commit({ ...state, notes: { ...state.notes, [String(day)]: value } }) }
   const referenceTopics: Record<number, string> = { 1: 'parts-of-speech', 2: 'sentences-clauses-and-phrases', 3: 'sentences-clauses-and-phrases', 4: 'sentences-clauses-and-phrases', 7: 'twelve-tenses', 8: 'twelve-tenses', 9: 'twelve-tenses', 11: 'active-and-passive-voice', 12: 'direct-and-indirect-speech', 13: 'articles', 14: 'pronoun-cases', 16: 'prepositions' }
   const referenceParams = new URLSearchParams({ lang: 'english', return_day: String(day) })
+  if (attemptId) referenceParams.set('attempt', attemptId)
   if (referenceTopics[day]) referenceParams.set('topic', referenceTopics[day])
   if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : 'expression'); if (source.searchParams.get('from') === 'expression') referenceParams.set('origin', 'expression'); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
   const latestAttempt = state.attempts.filter(a => a.day === day).at(-1)
 
   const bestScore = state.scores[String(day)]
-  const storageMessage = loading ? 'Checking your account before opening saved work…' : storageFailed ? 'This browser could not save your latest change. Keep this page open and copy your writing before leaving.' : userId ? 'Saved locally for your account in this browser. Device sync is not available for this course yet.' : 'Guest progress stays in this browser. Earlier course progress has been preserved.'
+  const storageMessage = loading ? 'Checking your account before opening saved work…' : storageFailed ? 'This browser could not save your latest change. Keep this page open and copy your writing before leaving.' : syncMessage ?? (userId ? 'Saved in this browser for your account. Select a preparation attempt above to save across devices.' : 'Guest progress stays in this browser. Earlier course progress has been preserved.')
 
   return (
     <div>
       <PageHeader
-        title={view === 'lab' ? 'VISTA Grammar Error Lab' : '30-Day Grammar Course'}
+        title={view === 'profile' ? 'Your Grammar Profile' : view === 'lab' ? 'VISTA Grammar Error Lab' : '30-Day Grammar Course'}
         description={view === 'lab' ? 'Focused practice, mixed questions and scheduled revision built from the existing course.' : 'Learn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped.'}
       >
         <div className="mt-4 flex flex-wrap gap-2">
@@ -170,8 +181,9 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
         </div>
       </PageHeader>
 
-      <main inert={loading} className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
-        <section hidden={view === 'lab'} className="overflow-hidden rounded-3xl bg-slate-950 text-white">
+      <main inert={loading} className="mx-auto max-w-7xl px-4 py-7 sm:py-9 [&_:focus-visible]:outline [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-indigo-600">
+        {accountPanel}
+        <section hidden={view === 'lab' || view === 'profile'} className="overflow-hidden rounded-3xl bg-slate-950 text-white">
           <div className="grid gap-7 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-indigo-200"><GraduationCap className="h-4 w-4" aria-hidden="true" />Grammar studio · Day {day} / 30</p>
@@ -201,6 +213,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
           {([
             { key: 'course' as const, label: 'Today’s lesson', icon: GraduationCap },
             { key: 'lab' as const, label: 'Error Lab', icon: Target },
+            { key: 'profile' as const, label: 'Grammar Profile', icon: ListChecks },
             { key: 'toolkit' as const, label: 'Grammar toolkit', icon: Wrench },
             { key: 'notebook' as const, label: `Mistake notebook (${notebook.length})`, icon: CircleAlert },
           ]).map((tab) => (
@@ -217,6 +230,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
         </div>
 
         {view === 'lab' && <ErrorLab state={state} commit={commit} lessonLink={lessonLink} storageMessage={storageMessage} storageFailed={storageFailed} suggestedDay={initialDay} />}
+        {view === 'profile' && <Profile profile={profile} dirty={profileDirty} imported={imported} lessonLink={lessonLink} openLab={() => setView('lab')} />}
 
         {view === 'toolkit' && (
           <section className="mt-6 space-y-6">
@@ -642,6 +656,11 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
 export default function GrammarCourse() {
   const { user, loading } = useAccount()
   const [params, setParams] = useSearchParams()
+  const [choice, setChoice] = useState<{ userId: string; value: string }>()
+  const attempts = useLearning<Overview>(user ? 'learning.php' : undefined)
+  const remembered = choice?.userId === user?.id ? choice?.value : savedAttemptChoice(user?.id)
+  const requestedAttempt = params.get('attempt') ?? remembered
+  const attemptId = requestedAttempt && /^[a-f0-9-]{36}$/i.test(requestedAttempt) ? requestedAttempt : undefined
   const requested = params.get('day'), initialDay = requested && /^(?:[1-9]|[12][0-9]|30)$/.test(requested) ? Number(requested) : undefined
   const writing = params.get('writing'), version = params.get('version'), idPattern = /^[a-f0-9-]{36}$/i
   const back = new URLSearchParams()
@@ -650,12 +669,43 @@ export default function GrammarCourse() {
   const fromLab = params.get('from') === 'lab'
   const fromExpression = params.get('from') === 'expression' || fromLab && params.get('origin') === 'expression'
   const labParams = new URLSearchParams({ view: 'lab' })
+  if (attemptId) labParams.set('attempt', attemptId)
   if (fromExpression) { labParams.set('from', 'expression'); for (const [key, value] of back) labParams.set(key, value) }
   const returnTo = fromLab ? `/grammar-course?${labParams}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
   const requestedView = params.get('view')
-  const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' ? requestedView : 'course'
-  return <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} initialDay={initialDay} initialView={initialView} returnTo={returnTo} userId={loading ? 'pending' : user?.id} loading={loading}
-    onDayChange={day => { const next = new URLSearchParams(params); next.set('day', String(day)); next.delete('view'); setParams(next, { replace: true }) }}
-    onViewChange={view => { const next = new URLSearchParams(params); if (view === 'course') next.delete('view'); else next.set('view', view); setParams(next, { replace: true }) }}
-    lessonLink={day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (fromExpression) { next.set('origin', 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` }} />
+  const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' || requestedView === 'profile' ? requestedView : 'course'
+  const panel = user && !loading ? <section className="mb-6 rounded-2xl border border-indigo-200 bg-white p-5" aria-label="Grammar preparation attempt">
+    <label htmlFor="grammar-attempt" className="text-sm font-semibold text-slate-900">Save Grammar to your preparation attempt</label>
+    <div className="mt-3 flex flex-wrap items-center gap-3"><select id="grammar-attempt" value={attemptId ?? ''} onChange={event => { const next = new URLSearchParams(params), value = event.target.value || 'browser'; if (user) { setChoice({ userId: user.id, value }); try { localStorage.setItem(attemptChoiceKey(user.id), value) } catch { /* The explicit URL still retains this choice for this session. */ } }; next.set('attempt', value); setParams(next) }} className="min-h-11 max-w-full rounded-xl border border-slate-300 bg-white px-3 text-sm">
+      <option value="">This browser only</option>
+      {attemptId && !attempts.data?.attempts.some(a => a.id === attemptId) && <option value={attemptId}>Selected attempt</option>}
+      {attempts.data?.attempts.map((a, i) => <option key={a.id} value={a.id}>CSS {a.target_year} · {a.stage.replace('_', ' ')} · attempt {i + 1}</option>)}
+    </select><Link to="/account/preparation" className="inline-flex min-h-11 items-center text-sm font-semibold text-indigo-700">Manage preparation attempts</Link></div>
+    {attempts.error && <p className="mt-3 text-sm leading-6 text-amber-900">{attempts.error} The public course remains available in this browser.</p>}
+    {!attemptId && <p className="mt-3 text-xs leading-6 text-slate-600">Choose the attempt this work belongs to. Earlier browser work stays separate until you explicitly copy it into an empty attempt.</p>}
+  </section> : undefined
+  const props: ViewProps = { initialDay, initialView, returnTo, userId: loading ? 'pending' : user?.id, loading, attemptId, accountPanel: panel,
+    onDayChange: day => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); next.set('day', String(day)); next.delete('view'); setParams(next, { replace: true }) },
+    onViewChange: view => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); if (view === 'course') next.delete('view'); else next.set('view', view); setParams(next, { replace: true }) },
+    lessonLink: day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (attemptId) next.set('attempt', attemptId); if (fromExpression) { next.set('origin', 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` },
+  }
+  return user && !loading && attemptId ? <AttemptGrammarCourse key={`${user.id}:${attemptId}`} {...props} userId={user.id} attemptId={attemptId} /> : <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} {...props} />
+}
+
+function AttemptGrammarCourse(props: ViewProps & { userId: string; attemptId: string }) {
+  const sync = useGrammarSync(props.userId, props.attemptId)
+  const [earlier] = useState(() => loadCourse(props.userId))
+  const canImport = sync.ready && sync.profile && !sync.envelope.version && !sync.envelope.dirty && (earlier.completed.length > 0 || Object.keys(earlier.sessions).length > 0 || Object.keys(earlier.notes).length > 0 || earlier.labHistory.length > 0)
+  const message = sync.error ?? (sync.saving ? 'Saving this attempt to your account…' : sync.envelope.dirty ? 'Your browser copy is saved. Account sync is pending.' : sync.envelope.version ? 'Saved to your account for this preparation attempt. Available across devices.' : 'This attempt is ready for account saving. Start a lesson to begin.')
+  const panel = <>{props.accountPanel}<section className="mb-6 rounded-2xl border bg-slate-50 p-5" aria-label="Grammar account sync">
+    <p role={sync.error ? 'alert' : 'status'} className={`text-sm leading-6 ${sync.error ? 'text-amber-900' : 'text-slate-700'}`}>{sync.ready ? message : 'Loading this attempt’s saved Grammar work…'}</p>
+    {sync.ready && <div className="mt-3 flex flex-wrap gap-3">
+      <button type="button" disabled={sync.saving || sync.conflict || !sync.envelope.dirty && !sync.envelope.pending} onClick={() => { void sync.flush() }} className="min-h-11 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white disabled:opacity-40">{sync.error ? 'Retry account save' : 'Save to account'}</button>
+      <button type="button" onClick={sync.download} className="min-h-11 rounded-xl border bg-white px-4 text-sm font-semibold">Export browser copy</button>
+      {(sync.conflict || sync.error) && <button type="button" disabled={sync.saving} onClick={() => { void sync.reloadAccount() }} className="min-h-11 rounded-xl border border-amber-300 bg-white px-4 text-sm font-semibold text-amber-950">Keep browser backup and load account copy</button>}
+      {canImport && <button type="button" onClick={() => sync.change(earlier, true)} className="min-h-11 rounded-xl border border-indigo-200 bg-white px-4 text-sm font-semibold text-indigo-700">Copy earlier browser progress into this attempt</button>}
+    </div>}
+  </section></>
+  if (!sync.ready) return <div className="mx-auto max-w-7xl px-4 py-8 [&_:focus-visible]:outline [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-indigo-600">{panel}</div>
+  return <GrammarCourseView key={`${sync.revision}:${props.initialDay ?? 'saved'}:${props.returnTo ?? ''}`} {...props} initialState={sync.envelope.state} onCommit={sync.change} accountPanel={panel} syncMessage={message} profile={sync.profile} profileDirty={sync.envelope.dirty} imported={sync.imported} />
 }

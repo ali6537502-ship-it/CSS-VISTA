@@ -36,7 +36,7 @@ export interface DayDefinition {
   examples: unknown[]
   checklist: unknown[]
 }
-export function courseKey(userId?: string) { return `cssvista:grammar-course:v4:${userId ? `account:${userId}` : 'guest'}` }
+export function courseKey(userId?: string, attemptId?: string) { return `cssvista:grammar-course:v4:${userId ? `account:${userId}${attemptId ? `:attempt:${attemptId}` : ''}` : 'guest'}` }
 export function emptySession(): Session { return { step: 0, position: {}, warmUp: {}, drill: {}, first: {}, drafts: {}, writing: '', checks: [], revealed: [], recorded: false } }
 function record(value: unknown): Record<string, unknown> { return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {} }
 function integer(value: unknown, min: number, max: number): value is number { return typeof value === 'number' && Number.isInteger(value) && value >= min && value <= max }

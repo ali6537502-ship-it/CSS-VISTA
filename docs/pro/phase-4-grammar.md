@@ -16,7 +16,7 @@ Replace the long-page default with a guided session: overview, rules, prediction
 
 Version 4 device state preserves answers, first drill responses, correction drafts/model reveals, writing, checklist, per-day step and exercise positions. Guests fall back to the unchanged legacy key; accounts receive isolated UUID-scoped state and do not auto-import unowned guest notes. Explicit contextual lesson links preserve the saved sequential-course position. Storage failures are visible. New completion requires the daily exercises and self-review; inherited completion stays intact. A completed twelve-question drill records its first-response accuracy once per round; retries and repeated completion clicks do not replace it or duplicate the entry. The last 100 completed drill rounds are retained, alongside preserved completion and best-score records. First-response results and later practice scores are distinguished, without claiming mastery. Legacy notes longer than the new input limit remain intact.
 
-Reference lookup returns to the exact day and writing context. Existing Expression links continue to return to the original writing/version. Account work is local to this browser in this increment; no cross-device sync is claimed.
+Reference lookup returns to the exact day and writing context. Existing Expression links continue to return to the original writing/version. Account work was local to this browser in the guided-session increment. The subsequent account-continuity increment below adds explicit attempt-scoped synchronization.
 
 ## Error Lab and scheduled maintenance
 
@@ -28,16 +28,18 @@ Existing missed questions and due reviews feed revision. Correct answers spaced 
 
 After all 30 days are complete, course and Lab show maintenance prompts for mixed practice and scheduled revision, preserving lesson access. Lab → lesson → reference → lesson → Lab returns to the same saved round, and an originating Expression writing/version is preserved throughout. Contextual lesson opening still leaves the sequential course position unchanged. Ordinary course answers also feed scheduling without modifying their existing first-response quiz history. Additive v4 fields keep existing progress, notes and authored source IDs intact; native account namespace/loading rules and visible storage-failure warnings apply to Lab too.
 
-## Remaining Phase 4 work
+## Account continuity and Personal Grammar Profile
 
-A calibrated Personal Grammar Profile that combines authored practice and independent writing evidence, richer maintenance summaries and validated account synchronization remain pending. Course state, Lab and review schedules are explicitly device-local. Opening lessons, answer reveals and same-day retries do not imply mastery. Collection and real AI remain disabled.
+The subsequent increment adds account/attempt-scoped storage, explicit browser import, interrupted-save recovery and conflict/export/backup safeguards. The deterministic profile combines distinct first-response practice, existing spaced revision and successful independent writing findings from the same attempt. Day-30 maintenance retains due review and lesson links. See [grammar-account-continuity.md](grammar-account-continuity.md) for the ownership, migration and evidence policy. Browser-only/guest practice remains available; public content is unchanged.
 
-## Validation
+Stable/Mastered classifications remain pending calibrated independent assessment. Opening lessons, answer reveals, completion and same-day retries do not imply mastery. Collection and real AI remain disabled.
+
+## Earlier guided-session and Error Lab validation
 
 Repository lint and TypeScript checks passed. All 177 tests passed (163 existing plus five state/ownership/migration cases and nine Error Lab selection/scoring/review/restoration cases); the preservation check confirms all authored source hashes and the existing counts. Final strict Hostinger build passed MPT release, 95 registered routes, all 1,020 indexable sitemap URLs, 59,998 resolved internal links and duplicate/thin-content gates. Final artifact route checks passed all fourteen cases.
 
 Built-app HTTPS browser checks passed at 320, 390, 768 and 1,440 pixels: complete authored Day 1 practice, first-answer error/retry without score inflation, quiz-history deduplication, completion prerequisites, exact exercise/step/draft/model/writing/checklist restoration, restart, full/guided views, original 25,000-character legacy note preservation, topic/search refresh, reference return, next-day URL/refresh consistency, explicit storage failure and native account switching. An actual disposable native writing/version made the reference → course → Expression round trip intact. No page errors or horizontal overflow. A slash-separated sequence in the existing explanation required wrapping within the course content at 320px; its text is unchanged. Public content was not gated.
 
-No production data, migration, external model call or deployment was used. Account course state is still device-local. The branch remains a draft; the remaining Phase 4 capabilities above are pending.
+No production data, migration, external model call or deployment was used. Account course state was device-local in these earlier checks. The branch remains a draft; current continuity/profile validation is recorded in grammar-account-continuity.md.
 
 Error Lab browser validation additionally covers focused/mixed coverage gates and balancing, first-answer scoring and retry, one history entry after refresh, exact draft/reveal/cursor restoration, unfinished-round confirmation, due-only revision and future exclusion, review rescheduling, maintenance prompts, visible storage failure and native account separation. Lab/lesson/reference return and an actual disposable Expression writing/version retain context. Unanswered and answered layouts pass 320/390/768/1440px with no horizontal overflow or page errors. These checks use authored course answers and disposable native accounts; no real AI or production data is used.
