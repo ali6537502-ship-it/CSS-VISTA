@@ -5,11 +5,13 @@ import { secondary, usePreparationAction, type PlanData } from './api'
 import PreparationPlan from './Plan'
 import Coverage from './Coverage'
 import ConnectedReading from './Reading'
+import TopicWorkspace from '@/features/topics/Workspace'
 import { PlanHistory, Readiness, Reviews } from './Reports'
 const views = [
   ['plan', 'Today’s plan'],
   ['coverage', 'Coverage'],
   ['reading', 'Reading & revision'],
+  ['topics', 'Pro topic learning'],
   ['readiness', 'Preparation evidence'],
   ['reviews', 'Reviews'],
   ['history', 'History'],
@@ -163,8 +165,10 @@ export default function PreparationWorkspace({
           )}
         </div>
       ) : (
-        <div key={`${view}:${view === 'reading' ? 0 : generation}`}>
-          {view === 'reading' ? (
+        <div key={`${view}:${view === 'reading' || view === 'topics' ? 0 : generation}`}>
+          {view === 'topics' ? (
+            <TopicWorkspace attempt={attempt.id} />
+          ) : view === 'reading' ? (
             <ConnectedReading attempt={attempt.id} action={action} generation={generation} />
           ) : view === 'coverage' ? (
             <Coverage attempt={attempt.id} action={action} />

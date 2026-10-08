@@ -93,7 +93,9 @@
     "test:planner-server": "php tests/planner/unit.php",
     "test:planner-security": "node tests/planner/security.mjs",
     "test:reading-server": "php tests/reading/unit.php",
-    "test:reading-security": "node tests/reading/security.mjs"
+    "test:reading-security": "node tests/reading/security.mjs",
+    "test:topics-server": "php tests/topics/unit.php",
+    "test:topics-security": "node tests/topics/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

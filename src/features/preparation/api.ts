@@ -107,10 +107,10 @@ export const secondary =
   'inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-50 disabled:opacity-50'
 export const field =
   'min-h-11 w-full min-w-0 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950'
-export function usePreparationAction(attempt: string, onSaved: () => void) {
+export function usePreparationAction(attempt: string, onSaved: () => void, endpoint = 'planner.php') {
   const { user } = useAccount(),
     id = user?.id ?? ''
-  const key = `cssvista:attempt-action:${id}:${attempt}`
+  const key = `cssvista:attempt-action:${id}:${attempt}${endpoint === 'planner.php' ? '' : `:${endpoint}`}`
   const [pending, setPending] = useState<Pending | null>(() => {
     try {
       const value = JSON.parse(sessionStorage.getItem(key) || 'null') as Pending | null
@@ -148,7 +148,7 @@ export function usePreparationAction(attempt: string, onSaved: () => void) {
       sessionStorage.setItem(key, JSON.stringify(saved))
       setPending(saved)
       setUnaccepted(false)
-      await learningRequest(id, 'planner.php', saved.body)
+      await learningRequest(id, endpoint, saved.body)
       accepted()
     } catch (cause) {
       setError(
@@ -167,7 +167,7 @@ export function usePreparationAction(attempt: string, onSaved: () => void) {
     try {
       await learningRequest(
         id,
-        `planner.php?request_id=${encodeURIComponent(String(pending.body.request_id))}`,
+        `${endpoint}?request_id=${encodeURIComponent(String(pending.body.request_id))}`,
       )
       accepted()
     } catch (cause) {
@@ -175,7 +175,7 @@ export function usePreparationAction(attempt: string, onSaved: () => void) {
         setUnaccepted(true)
         if (retry) {
           try {
-            await learningRequest(id, 'planner.php', pending.body)
+            await learningRequest(id, endpoint, pending.body)
             accepted()
           } catch (e) {
             setError(e instanceof Error ? e.message : 'The saved action could not be accepted.')

@@ -4,6 +4,7 @@ import { AccountPage } from './shared'
 import { pakistanTime } from '@/features/membership/api'
 import { buttonStyle, secondaryStyle, useLearning, type Overview, type Attempt, type Writing, type WritingVersion } from '@/features/learning/api'
 import PreparationWorkspace from '@/features/preparation/Workspace'
+import TopicWorkspace from '@/features/topics/Workspace'
 import AttemptForm from '@/features/learning/AttemptForm'
 import WritingForm from '@/features/learning/WritingForm'
 function LoadState({ error, retry }: { error?: string; retry: () => void }) {
@@ -37,6 +38,7 @@ function LearningWorkspace() {
   return <div className="space-y-6">
     {(attemptId || writingId || mode) && <button onClick={() => setParams({})} className={secondaryStyle}>All preparation records</button>}
     {writingId ? <WritingDetail key={writingId} id={writingId} versionId={params.get('version')} overview={data} onVersion={id => setParams({ writing: writingId, version: id })} onSaved={savedWriting} />
+      : !attemptId && params.get('view') === 'topics' ? <TopicWorkspace attempts={data.attempts} />
       : mode === 'writing' ? <WritingForm attempts={data.attempts} onSaved={savedWriting} />
       : mode === 'attempt' ? <AttemptForm catalog={data.catalog} onSaved={savedAttempt} />
       : attemptId ? !attempt.data ? <LoadState error={attempt.error} retry={attempt.refresh} /> : <PreparationWorkspace key={`${attemptId}:${attempt.data.attempt.version}`} attempt={attempt.data.attempt} settings={<AttemptForm key={`${attemptId}:${attempt.data.attempt.version}`} attempt={attempt.data.attempt} catalog={data.catalog} onSaved={savedAttempt} />} />
