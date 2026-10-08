@@ -45,6 +45,7 @@ earlier=(await get('&source_id='+priorSource,a,second)).data.items[0];assert.equ
 assert.equal((await call(`${endpoint}?attempt=${second}&view=readiness`,undefined,a.jar)).data.dimensions.current_affairs.reading_declarations,1)
 assert.equal((await call(`${endpoint}?attempt=${second}&view=reviews`,undefined,a.jar)).data.reviews.periods['7'].current.current_affairs_readings,0,'Old plan reading relabelled as newly read')
 php('tests/reading/fixture.php','due',a.id,attempt);item=(await detail('current_affairs',source)).data.items[0]
+for(const outcome of [null,[],42,'unknown'])assert.equal((await mutate(body(item,'review',{outcome}))).status,422,'Invalid recall outcome did not receive a validation error')
 const raced=await Promise.all([mutate(body(item,'review',{outcome:'recalled'})),mutate(body(item,'review',{outcome:'needs_review'}))]);assert.deepEqual(raced.map(r=>r.status).sort(),[200,409],'Concurrent reviews lost CAS')
 item=(await detail('current_affairs',source)).data.items[0];assert.equal(item.review_count,1);assert.ok(item.next_revision>item.read_date)
 php('tests/reading/fixture.php','due',a.id,attempt);const plan=(await call(`${endpoint}?attempt=${attempt}`,undefined,a.jar)).data;assert.ok(plan.proposal.selection.tasks.length===0,'Setup guard failed')
