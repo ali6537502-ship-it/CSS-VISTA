@@ -1,4 +1,4 @@
-# Phase 4: Existing Grammar audit and guided session upgrade
+# Phase 4: Preserved Grammar course, guided sessions and Error Lab
 
 Audited 8 October 2026. Public production fingerprint still identifies `7b01d0126b07d0bf8626b0b3d365a01a3b64ff5a`; no production writes occurred. This increment addresses the owner's instruction that the course should feel alive through actual interaction and saved work.
 
@@ -18,14 +18,26 @@ Version 4 device state preserves answers, first drill responses, correction draf
 
 Reference lookup returns to the exact day and writing context. Existing Expression links continue to return to the original writing/version. Account work is local to this browser in this increment; no cross-device sync is claimed.
 
+## Error Lab and scheduled maintenance
+
+`/grammar-course?view=lab` now adds focused practice, mixed practice and due revision to the same course and per-account device state. A My Preparation entry makes it discoverable. All sessions select at most ten existing authored questions; no new syllabus or generated question bank is introduced. Focused practice favours unresolved mistakes and uses warm-up material for uncovered lessons. Covered lessons use the daily drill. Mixed practice requires three covered lessons (preserved completion or a fully attempted authored daily drill), balances source days and withholds the current lesson label until answering. Less-used questions receive priority, but this is deliberately not a promise of repetition-free papers.
+
+One saved round holds its exact question IDs, cursor, current answers, immutable first responses, correction drafts and model reveals. Replacing an attempted unfinished round requires an explicit in-interface choice. First-response results are recorded once per completed round, with the latest 50 retained. Results show missed authored rules and links to the source lesson. Optional correction tasks come from the same lesson and use manual comparison with its existing model; they are not falsely presented as corrections of the exact MCQ sentence or automatically marked open-ended answers. Retrying never changes the saved score or earns another review success within that round.
+
+Existing missed questions and due reviews feed revision. Correct answers spaced at their due dates move through 1, 3, 7, 14 and 30 days; a failure resets the interval to one day. Early correct responses do not postpone or advance a review. Repeated failures on the same day do not inflate the lapse count, while a first failure after success is retained. The browser clock determines due status, which refreshes on focus and each minute; dates display in Pakistan Standard Time. Unresolved question counts require two spaced successes before disappearing from the weak-area list. This is a revision signal, not a calibrated skill or mastery classification. Legacy mistake history remains compatible and is not rewritten by reviews.
+
+After all 30 days are complete, course and Lab show maintenance prompts for mixed practice and scheduled revision, preserving lesson access. Lab → lesson → reference → lesson → Lab returns to the same saved round, and an originating Expression writing/version is preserved throughout. Contextual lesson opening still leaves the sequential course position unchanged. Ordinary course answers also feed scheduling without modifying their existing first-response quiz history. Additive v4 fields keep existing progress, notes and authored source IDs intact; native account namespace/loading rules and visible storage-failure warnings apply to Lab too.
+
 ## Remaining Phase 4 work
 
-The broader brief still calls for mixed-topic Error Lab sessions, scheduled revision/maintenance, a calibrated Personal Grammar Profile and validated account synchronization. They follow this guided-session increment; opening a lesson or revealing a correction must never imply mastery. No new authored syllabus or generated question bank is introduced here.
+A calibrated Personal Grammar Profile that combines authored practice and independent writing evidence, richer maintenance summaries and validated account synchronization remain pending. Course state, Lab and review schedules are explicitly device-local. Opening lessons, answer reveals and same-day retries do not imply mastery. Collection and real AI remain disabled.
 
 ## Validation
 
-Repository lint and TypeScript checks passed. All 168 tests passed (163 existing plus five state/ownership/migration cases); the preservation check confirms all authored source hashes and the existing counts. Final strict Hostinger build passed MPT release, 95 registered routes, all 1,020 indexable sitemap URLs, 59,998 resolved internal links and duplicate/thin-content gates. Final artifact route checks passed all fourteen cases.
+Repository lint and TypeScript checks passed. All 177 tests passed (163 existing plus five state/ownership/migration cases and nine Error Lab selection/scoring/review/restoration cases); the preservation check confirms all authored source hashes and the existing counts. Final strict Hostinger build passed MPT release, 95 registered routes, all 1,020 indexable sitemap URLs, 59,998 resolved internal links and duplicate/thin-content gates. Final artifact route checks passed all fourteen cases.
 
 Built-app HTTPS browser checks passed at 320, 390, 768 and 1,440 pixels: complete authored Day 1 practice, first-answer error/retry without score inflation, quiz-history deduplication, completion prerequisites, exact exercise/step/draft/model/writing/checklist restoration, restart, full/guided views, original 25,000-character legacy note preservation, topic/search refresh, reference return, next-day URL/refresh consistency, explicit storage failure and native account switching. An actual disposable native writing/version made the reference → course → Expression round trip intact. No page errors or horizontal overflow. A slash-separated sequence in the existing explanation required wrapping within the course content at 320px; its text is unchanged. Public content was not gated.
 
 No production data, migration, external model call or deployment was used. Account course state is still device-local. The branch remains a draft; the remaining Phase 4 capabilities above are pending.
+
+Error Lab browser validation additionally covers focused/mixed coverage gates and balancing, first-answer scoring and retry, one history entry after refresh, exact draft/reveal/cursor restoration, unfinished-round confirmation, due-only revision and future exclusion, review rescheduling, maintenance prompts, visible storage failure and native account separation. Lab/lesson/reference return and an actual disposable Expression writing/version retain context. Unanswered and answered layouts pass 320/390/768/1440px with no horizontal overflow or page errors. These checks use authored course answers and disposable native accounts; no real AI or production data is used.

@@ -8,6 +8,9 @@ import {
 import { PageHeader, Badge } from '@/components/shared'
 import { useAccount } from '@/lib/accountContext'
 import { courseKey, emptySession, normalizeCourse, readCourse, STEPS, type CourseState, type Session } from '@/features/grammar/state'
+import { QuestionCard, CorrectionCard } from '@/features/grammar/PracticeCards'
+import ErrorLab from '@/features/grammar/ErrorLab'
+import { scheduleReview } from '@/features/grammar/practice'
 import { addMistake, recordActivity } from '@/lib/progress'
 import {
   GRAMMAR_PHASES, grammarCorrectionCount, grammarExampleCount, grammarLessonForDay,
@@ -15,10 +18,7 @@ import {
   type GrammarLesson, type GrammarQuestion,
 } from '@/data/grammarCourse'
 
-type View = 'course' | 'toolkit' | 'notebook'
-const KIND_LABEL: Record<GrammarQuestion['kind'], string> = {
-  choice: 'Choose the correct sentence', gap: 'Complete the sentence', spot: 'Find the error',
-}
+type View = 'course' | 'toolkit' | 'notebook' | 'lab'
 function loadCourse(userId?: string): CourseState {
   try { return userId === 'pending' ? normalizeCourse({}, grammarLessons) : readCourse(localStorage, userId, grammarLessons) }
   catch { return normalizeCourse({}, grammarLessons) }
@@ -53,121 +53,11 @@ function StepHeading({ step, title, hint, icon: Icon }: {
   )
 }
 
-function QuestionCard({ question, index, answer, onAnswer, onRetry, hidden }: {
-  question: GrammarQuestion
-  index: number
-  answer: number | undefined
-  onAnswer: (option: number, answeredAt: number) => void
-  onRetry: () => void
-  hidden?: boolean
-}) {
-  const answered = answer !== undefined
-  const correct = answer === question.answer
-  const isSpot = question.kind === 'spot'
-  return (
-    <li hidden={hidden} className="rounded-xl border bg-white p-4 sm:p-5">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-slate-900">{index + 1}</span>
-        <span className="rounded bg-secondary px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-900">{KIND_LABEL[question.kind]}</span>
-      </div>
-      <p className="mt-3 text-[15px] font-medium leading-7 text-foreground">{question.prompt}</p>
-      <div className={`mt-3 grid gap-2 ${isSpot ? 'grid-cols-2 sm:grid-cols-4' : 'sm:grid-cols-2'}`}>
-        {question.options.map((option, optionIndex) => {
-          const isAnswer = optionIndex === question.answer
-          const isChosen = optionIndex === answer
-          const tone = !answered
-            ? 'border-input hover:border-emerald-600 hover:bg-emerald-50'
-            : isAnswer
-              ? 'border-emerald-600 bg-emerald-50 text-emerald-950'
-              : isChosen
-                ? 'border-red-400 bg-red-50 text-red-950'
-                : 'border-input opacity-60'
-          return (
-            <button
-              key={option}
-              type="button"
-              disabled={answered}
-              onClick={() => onAnswer(optionIndex, Date.now())}
-              className={`flex items-start gap-2 rounded-lg border px-3 py-2.5 text-sm leading-6 transition-colors ${isSpot ? 'justify-center font-bold' : 'text-left'} ${tone}`}
-            >
-              {!isSpot && <span className="mt-0.5 text-xs font-bold text-muted-foreground">{String.fromCharCode(65 + optionIndex)}</span>}
-              <span>{isSpot ? `Part ${option}` : option}</span>
-            </button>
-          )
-        })}
-      </div>
-      {answered && (
-        <div role="status" className={`mt-3 rounded-lg px-3 py-2.5 text-sm leading-6 ${correct ? 'bg-emerald-50 text-emerald-950' : 'bg-amber-50 text-amber-950'}`}>
-          <p className="font-semibold">
-            {correct
-              ? 'Correct.'
-              : isSpot
-                ? `Not quite — the error is in part ${question.options[question.answer]}.`
-                : `Not quite — the answer is ${String.fromCharCode(65 + question.answer)}.`}
-          </p>
-          <p className="mt-1">{question.why}</p>
-          {!correct && (
-            <button type="button" onClick={onRetry} className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold text-slate-900 underline underline-offset-2">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear and try this one again
-            </button>
-          )}
-        </div>
-      )}
-    </li>
-  )
-}
-
-function CorrectionCard({ index, task, model, note, draft, onDraft, revealed, onReveal, hidden }: {
-  index: number
-  task: string
-  model: string
-  note: string
-  draft: string
-  onDraft: (value: string) => void
-  revealed: boolean
-  onReveal: () => void
-  hidden?: boolean
-}) {
-  return (
-    <li hidden={hidden} className="rounded-xl border bg-white p-4 sm:p-5">
-      <div className="flex items-start gap-2">
-        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-slate-900">{index + 1}</span>
-        <p className="text-[15px] leading-7 text-red-950">{task}</p>
-      </div>
-      <label className="mt-3 block">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Write your corrected sentence</span>
-        <textarea
-          maxLength={20000}
-          value={draft}
-          onChange={(event) => onDraft(event.target.value)}
-          rows={2}
-          placeholder="Type the sentence as you would write it in the paper…"
-          className="mt-1.5 w-full rounded-lg border bg-white p-3 text-sm leading-6 outline-none focus:ring-2 focus:ring-ring"
-        />
-      </label>
-      {revealed ? (
-        <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2.5 text-sm leading-6 text-emerald-950">
-          <p><span className="font-semibold">Model answer: </span>{model}</p>
-          <p className="mt-1 text-emerald-900">{note}</p>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={onReveal}
-          disabled={!draft.trim()}
-          className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 px-3 text-xs font-semibold text-indigo-700 hover:bg-indigo-50 disabled:opacity-40"
-        >
-          <Eye className="h-3.5 w-3.5" /> Show the model answer
-        </button>
-      )}
-    </li>
-  )
-}
-
-function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange }: { initialDay?: number; returnTo?: string; userId?: string; loading: boolean; onDayChange: (day: number) => void }) {
+function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading, onDayChange, onViewChange, lessonLink }: { initialDay?: number; initialView: View; returnTo?: string; userId?: string; loading: boolean; onDayChange: (day: number) => void; onViewChange: (view: View) => void; lessonLink: (day: number) => string }) {
   const [state, setState] = useState<CourseState>(() => loadCourse(userId))
   const [day, setDay] = useState(() => initialDay ?? state.currentDay)
-  const [view, setView] = useState<View>('course')
+  const [view, setLocalView] = useState<View>(initialView)
+  function setView(next: View) { setLocalView(next); onViewChange(next) }
   const [fullLesson, setFullLesson] = useState(false)
   const [storageFailed, setStorageFailed] = useState(false)
   const session = state.sessions[String(day)] ?? emptySession()
@@ -220,8 +110,8 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
 
   useEffect(() => {
     if (loading) return
-    recordActivity({ type: 'study-tool', label: `Grammar course · Day ${lesson.day}: ${lesson.title}`, path: '/grammar-course' })
-  }, [lesson.day, lesson.title, loading])
+    recordActivity({ type: 'study-tool', label: view === 'lab' ? 'Grammar Error Lab' : `Grammar course · Day ${lesson.day}: ${lesson.title}`, path: view === 'lab' ? '/grammar-course?view=lab' : '/grammar-course' })
+  }, [lesson.day, lesson.title, loading, view])
 
   function chooseDay(next: number) {
     const target = Math.min(grammarLessons.length, Math.max(1, next))
@@ -236,7 +126,7 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
     const mistakes = option !== question.answer && !state.mistakes.includes(question.id) ? [...state.mistakes, question.id] : state.mistakes
     const recordDrill = group === 'drill' && !session.recorded && lesson.drill.every(q => first[q.id] !== undefined)
     const attempts = recordDrill ? [...state.attempts, { day, at: answeredAt, correct: lesson.drill.filter(q => first[q.id] === q.answer).length, total: lesson.drill.length }].slice(-100) : state.attempts
-    updateSession({ [group]: { ...session[group], [question.id]: option }, first, recorded: session.recorded || recordDrill }, { ...state, mistakes, attempts })
+    updateSession({ [group]: { ...session[group], [question.id]: option }, first, recorded: session.recorded || recordDrill }, { ...state, mistakes, attempts, reviews: { ...state.reviews, [question.id]: scheduleReview(state.reviews[question.id], option === question.answer, answeredAt) } })
     if (option !== question.answer) addMistake(question.id, option, `Grammar · Day ${lesson.day}: ${lesson.title}`)
   }
   function retry(question: GrammarQuestion, group: 'warmUp' | 'drill') {
@@ -260,19 +150,20 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
   const referenceTopics: Record<number, string> = { 1: 'parts-of-speech', 2: 'sentences-clauses-and-phrases', 3: 'sentences-clauses-and-phrases', 4: 'sentences-clauses-and-phrases', 7: 'twelve-tenses', 8: 'twelve-tenses', 9: 'twelve-tenses', 11: 'active-and-passive-voice', 12: 'direct-and-indirect-speech', 13: 'articles', 14: 'pronoun-cases', 16: 'prepositions' }
   const referenceParams = new URLSearchParams({ lang: 'english', return_day: String(day) })
   if (referenceTopics[day]) referenceParams.set('topic', referenceTopics[day])
-  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', 'expression'); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
+  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : 'expression'); if (source.searchParams.get('from') === 'expression') referenceParams.set('origin', 'expression'); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
   const latestAttempt = state.attempts.filter(a => a.day === day).at(-1)
 
   const bestScore = state.scores[String(day)]
+  const storageMessage = loading ? 'Checking your account before opening saved work…' : storageFailed ? 'This browser could not save your latest change. Keep this page open and copy your writing before leaving.' : userId ? 'Saved locally for your account in this browser. Device sync is not available for this course yet.' : 'Guest progress stays in this browser. Earlier course progress has been preserved.'
 
   return (
     <div>
       <PageHeader
-        title="30-Day Grammar Course"
-        description="Learn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped."
+        title={view === 'lab' ? 'VISTA Grammar Error Lab' : '30-Day Grammar Course'}
+        description={view === 'lab' ? 'Focused practice, mixed questions and scheduled revision built from the existing course.' : 'Learn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped.'}
       >
         <div className="mt-4 flex flex-wrap gap-2">
-          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />Return to Expression Lab</Link>}
+          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />{returnTo.startsWith('/grammar-course') ? 'Return to Error Lab' : 'Return to Expression Lab'}</Link>}
           <button type="button" onClick={() => setView('toolkit')} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
           <Link to="/grammar-vocabulary" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><BookOpen className="h-3.5 w-3.5" /> Vocabulary practice</Link>
           <Link to="/books" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><FileText className="h-3.5 w-3.5" /> Handbook PDFs</Link>
@@ -280,7 +171,7 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
       </PageHeader>
 
       <main inert={loading} className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
-        <section className="overflow-hidden rounded-3xl bg-slate-950 text-white">
+        <section hidden={view === 'lab'} className="overflow-hidden rounded-3xl bg-slate-950 text-white">
           <div className="grid gap-7 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-indigo-200"><GraduationCap className="h-4 w-4" aria-hidden="true" />Grammar studio · Day {day} / 30</p>
@@ -302,13 +193,14 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
             </div>
           </div>
           <div role={storageFailed ? 'alert' : 'status'} className={`border-t border-white/10 px-6 py-4 text-xs leading-6 sm:px-8 ${storageFailed ? 'bg-amber-100 text-amber-950' : 'text-slate-300'}`}>
-            {loading ? 'Checking your account before opening saved work…' : storageFailed ? 'This browser could not save your latest change. Keep this page open and copy your writing before leaving.' : userId ? 'Saved locally for your account in this browser. Device sync is not available for this course yet.' : 'Guest progress stays in this browser. Earlier course progress has been preserved.'}
+            {storageMessage}
           </div>
         </section>
 
         <div className="mt-6 flex flex-wrap gap-2 border-b pb-3">
           {([
             { key: 'course' as const, label: 'Today’s lesson', icon: GraduationCap },
+            { key: 'lab' as const, label: 'Error Lab', icon: Target },
             { key: 'toolkit' as const, label: 'Grammar toolkit', icon: Wrench },
             { key: 'notebook' as const, label: `Mistake notebook (${notebook.length})`, icon: CircleAlert },
           ]).map((tab) => (
@@ -323,6 +215,8 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
             </button>
           ))}
         </div>
+
+        {view === 'lab' && <ErrorLab state={state} commit={commit} lessonLink={lessonLink} storageMessage={storageMessage} storageFailed={storageFailed} suggestedDay={initialDay} />}
 
         {view === 'toolkit' && (
           <section className="mt-6 space-y-6">
@@ -408,6 +302,7 @@ function GrammarCourseView({ initialDay, returnTo, userId, loading, onDayChange 
           </section>
         )}
 
+        {view === 'course' && state.completed.length === grammarLessons.length && <div className="mt-6 rounded-2xl border border-indigo-200 bg-indigo-50 p-5 text-sm leading-7"><p className="font-semibold">All 30 course days are complete.</p><p>Keep practising with mixed sessions and scheduled revision.</p><button type="button" onClick={() => setView('lab')} className="mt-2 inline-flex min-h-11 items-center gap-2 font-semibold text-indigo-700">Open Error Lab<ArrowRight className="h-4 w-4" aria-hidden="true" /></button></div>}
         {view === 'course' && (
           <div className="mt-6 grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
             <div className="lg:hidden"><label htmlFor="grammar-day" className="text-xs font-semibold text-slate-600">Choose a day</label><select id="grammar-day" value={day} onChange={event => chooseDay(Number(event.target.value))} className="mt-2 min-h-12 w-full rounded-xl border bg-white p-3 text-sm">{grammarLessons.map(item => <option key={item.day} value={item.day}>Day {item.day} · {item.title}{completed.has(item.day) ? ' · Completed' : ''}</option>)}</select></div>
@@ -752,6 +647,15 @@ export default function GrammarCourse() {
   const back = new URLSearchParams()
   if (writing && idPattern.test(writing)) back.set('writing', writing)
   if (version && idPattern.test(version)) back.set('version', version)
-  const returnTo = params.get('from') === 'expression' ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
-  return <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} initialDay={initialDay} returnTo={returnTo} userId={loading ? 'pending' : user?.id} loading={loading} onDayChange={day => { const next = new URLSearchParams(params); next.set('day', String(day)); setParams(next, { replace: true }) }} />
+  const fromLab = params.get('from') === 'lab'
+  const fromExpression = params.get('from') === 'expression' || fromLab && params.get('origin') === 'expression'
+  const labParams = new URLSearchParams({ view: 'lab' })
+  if (fromExpression) { labParams.set('from', 'expression'); for (const [key, value] of back) labParams.set(key, value) }
+  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
+  const requestedView = params.get('view')
+  const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' ? requestedView : 'course'
+  return <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} initialDay={initialDay} initialView={initialView} returnTo={returnTo} userId={loading ? 'pending' : user?.id} loading={loading}
+    onDayChange={day => { const next = new URLSearchParams(params); next.set('day', String(day)); next.delete('view'); setParams(next, { replace: true }) }}
+    onViewChange={view => { const next = new URLSearchParams(params); if (view === 'course') next.delete('view'); else next.set('view', view); setParams(next, { replace: true }) }}
+    lessonLink={day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (fromExpression) { next.set('origin', 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` }} />
 }

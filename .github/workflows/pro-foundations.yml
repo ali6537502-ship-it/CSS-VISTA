@@ -2,7 +2,7 @@ name: Pro membership foundations
 on:
   pull_request:
     branches: [main]
-    paths: ['src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
+    paths: ['src/features/grammar/**', 'src/pages/LanguageGrammar.tsx', 'tests/grammarState.test.ts', 'tests/grammarPractice.test.ts', 'public/api/_expression*.php', 'public/api/student/expression.php', 'tests/expression/**', 'src/features/expression/**', 'src/pages/account/Expression.tsx', 'src/pages/GrammarCourse.tsx', 'public/api/_handwriting*.php', 'public/api/student/handwriting*.php', 'server/sql/014_handwriting_workflow.sql', 'server/bin/handwriting-maintenance.php', 'tests/handwriting/**', 'src/features/handwriting/**', 'src/pages/account/Handwriting.tsx', 'public/api/_pro*.php', 'public/api/_learning*.php', 'public/api/_ai*.php', 'public/api/student/learning.php', 'public/api/student/ai-usage.php', 'public/api/admin/ai-usage.php', 'server/sql/013_learning_foundations.sql', 'tests/learning/**', 'public/api/student/membership.php', 'public/api/admin/payments.php', 'server/sql/012_pro_membership.sql', 'tests/pro/**', 'docs/pro/grammar-preservation-map.json', '.github/workflows/pro-foundations.yml']
 permissions:
   contents: read
 jobs:
@@ -48,7 +48,7 @@ jobs:
           php tests/handwriting/unit.php
           php tests/expression/unit.php
           node tests/pro/grammar-preservation.mjs
-          node --test tests/grammarState.test.ts
+          node --test tests/grammarState.test.ts tests/grammarPractice.test.ts
       - name: Create isolated database and HTTP runtime
         run: |
           mkdir -p /tmp/cssv-pro-private test-artifacts

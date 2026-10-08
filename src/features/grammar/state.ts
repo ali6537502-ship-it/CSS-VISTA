@@ -1,3 +1,5 @@
+import { normalizePractice, type LabRound, type LabResult, type Review } from './practice.ts'
+
 /** Device-local course state. Account keys never adopt unowned browser history. */
 export const LEGACY_KEY = 'cssvista:grammar-course:v3'
 export const STEPS = ['Overview', 'Learn', 'Examples', 'Warm-up', 'Daily drill', 'Corrections', 'Your writing'] as const
@@ -22,6 +24,9 @@ export interface CourseState {
   currentDay: number
   sessions: Record<string, Session>
   attempts: QuizAttempt[]
+  lab: LabRound | null
+  labHistory: LabResult[]
+  reviews: Record<string, Review>
 }
 export interface DayDefinition {
   day: number
@@ -39,7 +44,7 @@ function text(value: unknown): string { return typeof value === 'string' ? value
 function list(value: unknown): unknown[] { return Array.isArray(value) ? value : [] }
 export function normalizeCourse(value: unknown, days: DayDefinition[]): CourseState {
   const raw = record(value), ids = new Set(days.map(d => d.day)), allQuestions = new Set(days.flatMap(d => [...d.warmUp, ...d.drill].map(q => q.id)))
-  const state: CourseState = { completed: [], scores: {}, mistakes: [], notes: {}, currentDay: 1, sessions: {}, attempts: [] }
+  const state: CourseState = { completed: [], scores: {}, mistakes: [], notes: {}, currentDay: 1, sessions: {}, attempts: [], ...normalizePractice(raw, days) }
   state.completed = [...new Set(list(raw.completed).filter((d): d is number => typeof d === 'number' && ids.has(d)))]
   state.currentDay = typeof raw.currentDay === 'number' && ids.has(raw.currentDay) ? raw.currentDay : 1
   state.mistakes = [...new Set(list(raw.mistakes).filter((q): q is string => typeof q === 'string' && allQuestions.has(q)))]

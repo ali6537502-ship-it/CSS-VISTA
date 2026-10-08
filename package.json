@@ -82,7 +82,7 @@
     "test:handwriting-security": "node tests/handwriting/security.mjs",
     "test:expression-server": "php tests/expression/unit.php",
     "test:expression-security": "node tests/expression/security.mjs",
-    "test:grammar": "node --test tests/grammarState.test.ts && node tests/pro/grammar-preservation.mjs"
+    "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts && node tests/pro/grammar-preservation.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
