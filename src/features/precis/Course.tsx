@@ -104,7 +104,7 @@ export default function Course({
       expected_version: progress.version,
       current_day: complete ? Math.min(30, day + 1) : day,
       current_chapter: Number(complete ? data.course[Math.min(29, day)].chapters[0] : chapterId),
-      completed: complete ? [...progress.completed, day] : progress.completed,
+      completed: complete ? [...new Set([...progress.completed, day])] : progress.completed,
     }
     try {
       const id = await saveIdentity(user.id, `precis:progress:${attempt}`, body)
