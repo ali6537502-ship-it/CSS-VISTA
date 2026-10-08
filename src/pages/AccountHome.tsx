@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } from 'react'
-import { Link } from 'react-router'
-import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
+import { Link, useSearchParams } from 'react-router'
+import { ArrowRight, BookOpen, Bookmark, Calculator, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, MessageCircle, Newspaper, PenLine, ScanLine, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import MembershipSummary from '@/features/membership/MembershipSummary'
+import AccountSections, { ProBadge } from '@/features/membership/AccountSections'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -36,7 +37,7 @@ function daysRemaining(examDate?: string) {
  * stagger, lift on hover and carry a sheen that follows the pointer. The
  * stylesheet disables all of it under prefers-reduced-motion.
  */
-function ChoiceCard({ to, icon: Icon, title, status, index }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number }) {
+function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to: string; icon: ComponentType<{ className?: string }>; title: string; status: string; index: number; pro?: boolean }) {
   // Hand the sheen the pointer position. Cheap enough to run inline: it only
   // writes two custom properties and never triggers a React render.
   function track(event: { currentTarget: HTMLElement; clientX: number; clientY: number }) {
@@ -51,8 +52,11 @@ function ChoiceCard({ to, icon: Icon, title, status, index }: { to: string; icon
       style={{ '--cssv-choice-index': String(index) } as CSSProperties}
       className="cssv-choice flex min-h-[9.5rem] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 hover:border-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 sm:p-6"
     >
-      <span className="cssv-choice-icon grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
-        <Icon className="h-5 w-5" />
+      <span className="flex items-start justify-between gap-3">
+        <span className="cssv-choice-icon grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
+          <Icon className="h-5 w-5" />
+        </span>
+        {pro && <ProBadge />}
       </span>
       <span className="mt-5">
         <span className="cssv-choice-title block text-lg font-bold text-slate-950">{title}</span>
@@ -67,6 +71,8 @@ function ChoiceCard({ to, icon: Icon, title, status, index }: { to: string; icon
 
 export default function AccountHome() {
   const { user } = useAccount()
+  const [params] = useSearchParams()
+  const section = params.get('plan') === 'pro' ? 'pro' : 'free'
   const [version, setVersion] = useState(0)
   const [syllabusTotal, setSyllabusTotal] = useState(0)
 
@@ -139,9 +145,9 @@ export default function AccountHome() {
   ].filter(Boolean).join(' · ')
 
   const mptFlow = useMptFlowEnabled() === true
-  const choices = [
-    { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'CSS attempt settings & saved writing' },
-    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
+  const freeChoices = [
+    { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
+    { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
@@ -157,6 +163,9 @@ export default function AccountHome() {
         ? 'Completed for today'
         : `${snapshot.english.completed} of ${snapshot.english.total} parts done`,
     },
+    { to: '/grammar-course', icon: Languages, title: 'Grammar Course', status: 'Guided lessons, drills & revision' },
+    { to: '/subjects/compulsory/precis-composition', icon: BookOpen, title: 'Précis & Composition', status: 'Free study resources' },
+    { to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' },
     {
       to: '/account/progress', icon: Target, title: 'Practice & Mocks',
       status: snapshot.stats.attempted
@@ -181,6 +190,13 @@ export default function AccountHome() {
       status: snapshot.saved ? `${snapshot.saved} saved item${snapshot.saved === 1 ? '' : 's'}` : 'Save what is worth revisiting',
     },
   ]
+  const proChoices = [
+    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
+    { to: '/account/precis', icon: BookOpen, title: 'Précis Mastery Lab', status: 'Guided course, drills & independent practice' },
+    { to: '/account/expression', icon: PenLine, title: 'English Expression Lab', status: 'Sentence & paragraph practice with saved feedback' },
+    { to: '/account/handwriting', icon: ScanLine, title: 'Handwritten Paragraph', status: 'Upload, confirm your wording & review feedback' },
+    { to: '/account/ask-vista', icon: MessageCircle, title: 'Ask VISTA', status: 'Study help linked to your preparation' },
+  ]
 
   const continueReading = briefing.data?.continue_reading?.[0]
 
@@ -203,14 +219,30 @@ export default function AccountHome() {
           </Link>
         </header>
 
-        <MembershipSummary />
+        <AccountSections selected={section} />
 
-        <DashboardMptCard />
+        {section === 'pro' && (
+          <section aria-labelledby="pro-features" className="mt-9">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h2 id="pro-features" className="text-xl font-bold text-slate-950">Pro features</h2>
+              <ProBadge />
+            </div>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Starred features use your Pro membership. Your free tools are included below.</p>
+            <MembershipSummary />
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {proChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} pro />)}
+            </div>
+          </section>
+        )}
 
-        <h2 className="mt-10 text-sm font-semibold uppercase tracking-[.14em] text-slate-400">What would you like to do today?</h2>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {choices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} />)}
-        </div>
+        <section aria-labelledby="free-features" className="mt-9">
+          <h2 id="free-features" className="text-xl font-bold text-slate-950">{section === 'pro' ? 'Your included free features' : 'Free features'}</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Study, practise and keep your progress with your free account.</p>
+          <DashboardMptCard />
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {freeChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} />)}
+          </div>
+        </section>
 
         {(continueReading || snapshot.remaining.length > 0) && (
           <section className="mt-12" aria-label="Pick up where you left off">
