@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import type { TutorResult } from '@/features/tutor/api'
 import { useAccount } from '@/lib/accountContext'
 import { currentHostingerAccountUser, hostingerRequest } from '@/lib/hostingerApi'
 export type Attempt = { id: string; target_year: number; target_date: string | null; date_source: 'student_target'; optional_subject_ids: string[]; daily_minutes: number; stage: 'starting' | 'in_progress' | 'revision'; version: number; updated_at: string }
@@ -8,7 +9,7 @@ export type Writing = WritingSummary & { versions: { id: string; version: number
 export type WritingVersion = { id: string; writing_id: string; version: number; text: string; word_count: number; created_at: string }
 export type Overview = { attempts: Attempt[]; writing: WritingSummary[]; catalog: Subject[]; has_more_attempts: boolean; has_more_writing: boolean }
 export type SaveResult = { attempt_id?: string; writing_id?: string; version_id?: string; version: number }
-export type AiUsage = { date: string; live_actions_enabled: boolean; handwriting_enabled: boolean; expression_enabled: boolean; precis_enabled: boolean; limits: { feature: string; used: number; reserved: number; limit: number; provider_calls: number }[]; operations: { id: string; feature: string; version_id: string | null; state: string; accounting: string; created_at: string; result: { summary: string; findings: { code: string; excerpt: string; explanation: string; hint: string }[] } | { readable: boolean; uncertain: boolean; reason: string } | null }[]; has_more: boolean }
+export type AiUsage = { date: string; live_actions_enabled: boolean; handwriting_enabled: boolean; expression_enabled: boolean; precis_enabled: boolean; tutor_enabled: boolean; limits: { feature: string; used: number; reserved: number; limit: number; provider_calls: number }[]; operations: { id: string; feature: string; version_id: string | null; state: string; accounting: string; created_at: string; result: { summary: string; findings: { code: string; excerpt: string; explanation: string; hint: string }[] } | { readable: boolean; uncertain: boolean; reason: string } | TutorResult | null }[]; has_more: boolean }
 export const featureNames: Record<string, string> = { precis: 'Précis feedback', paragraph: 'Paragraph feedback', sentence: 'Sentence checks', tutor: 'Ask VISTA', current_affairs: 'Current Affairs assistance', maths: 'Maths explanations', handwriting: 'Handwritten paragraph feedback', handwriting_extract: 'Handwriting extraction' }
 export async function learningRequest<T>(userId: string, path: string, body?: Record<string, unknown>, signal?: AbortSignal) {
   if (currentHostingerAccountUser() !== userId) throw new Error('Please sign in again to open your preparation records.')

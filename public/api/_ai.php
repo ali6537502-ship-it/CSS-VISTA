@@ -70,20 +70,20 @@ function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,
  if(!in_array($state,['succeeded','failed','unknown'],true))throw new InvalidArgumentException('Invalid AI completion state.');
  $pdo->beginTransaction();try {
   $op=cssv_ai_operation_lock($pdo,$id);if(in_array($op['state'],['succeeded','failed'],true)){$pdo->commit();return;}
-  if($state==='succeeded' && !in_array($op['feature'],['handwriting_extract','precis'],true)) {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
-  if(in_array($op['feature'],['handwriting','handwriting_extract','precis'],true) && !$transition)throw new LogicException('This feature requires its persisted workflow transition.');
+  if($state==='succeeded' && !in_array($op['feature'],['handwriting_extract','precis','tutor','maths','current_affairs'],true)) {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
+  if(in_array($op['feature'],['handwriting','handwriting_extract','precis','tutor','maths','current_affairs'],true) && !$transition)throw new LogicException('This feature requires its persisted workflow transition.');
   if($transition)$result=$transition($pdo,$op,$state,$result);
   $usage=$response ? cssv_ai_usage_parse($response) : ['input_tokens'=>null,'output_tokens'=>null,'cached_tokens'=>null];
   $responseId=is_string($response['id'] ?? null) ? mb_substr($response['id'],0,180) : null;$model=is_string($response['model'] ?? null)?mb_substr($response['model'],0,120):null;
   $terminal=$state!=='unknown';$accounting=$terminal ? ($state==='succeeded'?'consumed':'released') : 'reserved';
   if($terminal && $op['accounting']==='reserved')cssv_ai_release_reservation($pdo,$op,$state==='succeeded'?1:0);
   $pdo->prepare('UPDATE ai_operations SET state=?,accounting=?,provider_response_id=COALESCE(?,provider_response_id),reported_model=COALESCE(?,reported_model),input_tokens=COALESCE(?,input_tokens),cached_tokens=COALESCE(?,cached_tokens),output_tokens=COALESCE(?,output_tokens),result=?,error_code=?,completed_at=? WHERE id=?')->execute([$state,$accounting,$responseId,$model,$usage['input_tokens'],$usage['cached_tokens'],$usage['output_tokens'],$result?json_encode($result,JSON_THROW_ON_ERROR):null,$error!==''?substr($error,0,80):null,$terminal?gmdate('Y-m-d H:i:s'):null,$id]);
-  if($state==='succeeded' && $op['feature']!=='handwriting_extract')foreach($result['findings'] as $f)$pdo->prepare('INSERT INTO writing_findings(id,operation_id,version_id,code,severity,excerpt,explanation,hint) VALUES(?,?,?,?,?,?,?,?)')->execute([cssv_uuid_v4(),$id,$op['version_id'],$f['code'],$f['severity'],$f['excerpt'],$f['explanation'],$f['hint']]);
+  if($state==='succeeded' && !in_array($op['feature'],['handwriting_extract','tutor','maths','current_affairs'],true))foreach($result['findings'] as $f)$pdo->prepare('INSERT INTO writing_findings(id,operation_id,version_id,code,severity,excerpt,explanation,hint) VALUES(?,?,?,?,?,?,?,?)')->execute([cssv_uuid_v4(),$id,$op['version_id'],$f['code'],$f['severity'],$f['excerpt'],$f['explanation'],$f['hint']]);
   $pdo->commit();
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
 function cssv_ai_execute(PDO $pdo,string $id,?callable $testTransport=null,bool $featureAllowed=true): void {
- $q=$pdo->prepare('SELECT feature FROM ai_operations WHERE id=?');$q->execute([$id]);if(in_array($q->fetchColumn(),['handwriting','handwriting_extract','precis'],true))throw new LogicException('Use the dedicated context-bound feedback workflow.');
+ $q=$pdo->prepare('SELECT feature FROM ai_operations WHERE id=?');$q->execute([$id]);if(in_array($q->fetchColumn(),['handwriting','handwriting_extract','precis','tutor','maths','current_affairs'],true))throw new LogicException('Use the dedicated context-bound feedback workflow.');
  if($testTransport && (getenv('CI')!=='true' || getenv('CSSV_DB_NAME')!=='cssvista_briefing_test'))throw new LogicException('Test transport is unavailable.');
  $allowed=$featureAllowed && ($testTransport!==null || (cssv_ai_configuration()['configured'] && function_exists('curl_init')));
  $op=cssv_ai_start($pdo,$id,$allowed);if(!$op)return;

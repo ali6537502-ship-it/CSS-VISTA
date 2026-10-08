@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useParams } from 'react-router'
 import { z } from 'zod'
-import { ArrowLeft, ArrowUp, Check, Clock } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUp, Check, Clock } from 'lucide-react'
 import { briefingRequest, preferencesBody, setReading } from './api'
 import { briefingRoot, displayDate, preferencesSchema, storySchema, type Preferences, type Story } from './model'
 import { useBriefing } from './useBriefing'
@@ -55,7 +55,7 @@ function ReadingDesk({ story, preferences }: { story: Story; preferences: Prefer
     <header className="ca-reader-heading"><div className="ca-card-meta"><span className="ca-category">{story.category}</span>{story.importance && <span>{story.importance}</span>}</div>
       <h1>{story.headline}</h1><p className="ca-standfirst">{story.summary}</p>
       <div className="ca-edition-meta"><span>{displayDate(story.publication_date)}</span><span><Clock size={14} /> {story.reading_minutes} min read</span></div>
-      <StoryActions item={{ ...story, ...personal }} onStateChange={setPersonal} />
+      <StoryActions item={{ ...story, ...personal }} onStateChange={setPersonal} /><Link className="ca-text-link" to={`/account/ask-vista?category=current-affairs&context=${encodeURIComponent(`current-affairs:${story.id}`)}`}>Ask about this development <ArrowRight size={16} /></Link>
     </header>
     <div className="ca-mode" role="group" aria-label="Reading mode">
       <button aria-pressed={!full} disabled={savingMode} onClick={() => void changeMode('quick')}>Quick Read</button>

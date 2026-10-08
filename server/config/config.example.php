@@ -37,6 +37,10 @@ return [
     'CSSV_AI_LIMIT_TUTOR' => '20',
     'CSSV_AI_LIMIT_CURRENT_AFFAIRS' => '10',
     'CSSV_AI_LIMIT_MATHS' => '10',
+    // Scoped help stays closed pending verified provider access and reviewed disclosure.
+    'CSSV_TUTOR_ENABLED' => '0',
+    'CSSV_TUTOR_POLICY_VERSION' => '',
+    'CSSV_TUTOR_PROCESSING_NOTICE' => '', // selected source, short question and at most one prior exchange
     // Phase 2 remains closed until its policy, image capability and cleanup are verified.
     'CSSV_PRECIS_ENABLED' => '0',
     'CSSV_PRECIS_POLICY_VERSION' => '',

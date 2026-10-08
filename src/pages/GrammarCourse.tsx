@@ -187,7 +187,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
           <div className="grid gap-7 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-indigo-200"><GraduationCap className="h-4 w-4" aria-hidden="true" />Grammar studio · Day {day} / 30</p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">{lesson.title}</h2>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">{lesson.title}</h2><Link to={`/account/ask-vista?category=grammar&context=grammar:${lesson.day}:0${attemptId ? `&attempt=${attemptId}` : ''}`} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-indigo-200 underline underline-offset-4 hover:text-white">Ask about this lesson</Link>
               <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300">{lesson.goal}</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button type="button" onClick={() => { setFullLesson(false); chooseStep(step) }} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-indigo-500 px-5 text-sm font-semibold text-white hover:bg-indigo-400"><Play className="h-4 w-4" aria-hidden="true" />Continue {STEPS[step].toLowerCase()}</button>

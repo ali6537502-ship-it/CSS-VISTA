@@ -87,7 +87,9 @@
     "test:precis-server": "php tests/precis/unit.php && php tests/precis/feedback-unit.php",
     "test:precis-security": "node tests/precis/security.mjs && node tests/precis/feedback-security.mjs",
     "test:mentor-server": "php tests/mentor/unit.php",
-    "test:mentor-security": "node tests/mentor/security.mjs"
+    "test:mentor-security": "node tests/mentor/security.mjs",
+    "test:tutor-server": "php tests/tutor/unit.php && node scripts/tutor/export-grammar.mjs --check",
+    "test:tutor-security": "node tests/tutor/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
