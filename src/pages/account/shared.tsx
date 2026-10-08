@@ -123,6 +123,7 @@ export function AccountPage({ title, intro, action, children }: { title: string;
             </Link>
           )}
         </header>
+        <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600"><Link to="/account/dashboard" className="inline-flex min-h-11 items-center hover:text-pine">My CSS Vista</Link><Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link><Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link><Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance</Link><Link to="/account/ask-vista" className="inline-flex min-h-11 items-center hover:text-pine">Ask VISTA</Link><Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link></nav>
         <div className="mt-9">{children}</div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}

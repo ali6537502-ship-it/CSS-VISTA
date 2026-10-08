@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { ArrowLeft, Bookmark, Check, Clock3, Copy, ExternalLink, FolderPlus, Share2, UserRound } from 'lucide-react'
+import { AttemptReadingConnection } from '@/features/preparation/Reading'
 import { useAccount } from '@/lib/accountContext'
 import {
   copyVistagramUrl,
@@ -141,6 +142,7 @@ export default function VistagramArticle() {
   return (
     <main className="min-h-screen bg-white">
       <article>
+        <div className="mx-auto max-w-4xl px-4"><AttemptReadingConnection kind="vistagram" sourceId={post.id} /></div>
         <header className="border-b bg-slate-50/80">
           <div className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
             <Link to="/vistagram" className="inline-flex min-h-10 items-center gap-2 text-sm font-bold text-emerald-800"><ArrowLeft className="h-4 w-4" /> CSS Vistagram</Link>

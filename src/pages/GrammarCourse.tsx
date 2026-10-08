@@ -1,11 +1,20 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { Link, useSearchParams } from 'react-router'
 import {
   ArrowRight, BookOpen, Check, ChevronLeft, ChevronRight, CircleAlert, CircleCheck,
   ClipboardCheck, Clock3, Eye, FileText, GraduationCap, Layers, Lightbulb, ListChecks,
-  NotebookPen, PenLine, RotateCcw, Sparkles, Target, TriangleAlert, Wrench,
+  NotebookPen, PenLine, RotateCcw, Target, TriangleAlert, Wrench, Play, ArrowUpRight,
 } from 'lucide-react'
 import { PageHeader, Badge } from '@/components/shared'
+import { useAccount } from '@/lib/accountContext'
+import { courseKey, emptySession, normalizeCourse, readCourse, STEPS, type CourseState, type Session } from '@/features/grammar/state'
+import { QuestionCard, CorrectionCard } from '@/features/grammar/PracticeCards'
+import ErrorLab from '@/features/grammar/ErrorLab'
+import { scheduleReview } from '@/features/grammar/practice'
+import Profile, { type GrammarProfile } from '@/features/grammar/Profile'
+import { useGrammarSync } from '@/features/grammar/useGrammarSync'
+import { attemptChoiceKey, readAttemptChoice } from '@/features/grammar/sync'
+import { useLearning, type Overview } from '@/features/learning/api'
 import { addMistake, recordActivity } from '@/lib/progress'
 import {
   GRAMMAR_PHASES, grammarCorrectionCount, grammarExampleCount, grammarLessonForDay,
@@ -13,44 +22,14 @@ import {
   type GrammarLesson, type GrammarQuestion,
 } from '@/data/grammarCourse'
 
-type CourseState = {
-  completed: number[]
-  scores: Record<string, number>
-  mistakes: string[]
-  notes: Record<string, string>
-  currentDay: number
+type View = 'course' | 'toolkit' | 'notebook' | 'lab' | 'profile'
+function loadCourse(userId?: string): CourseState {
+  try { return userId === 'pending' ? normalizeCourse({}, grammarLessons) : readCourse(localStorage, userId, grammarLessons) }
+  catch { return normalizeCourse({}, grammarLessons) }
 }
-
-type View = 'course' | 'toolkit' | 'notebook'
-
-const STATE_KEY = 'cssvista:grammar-course:v3'
-const EMPTY_STATE: CourseState = { completed: [], scores: {}, mistakes: [], notes: {}, currentDay: 1 }
-
-const KIND_LABEL: Record<GrammarQuestion['kind'], string> = {
-  choice: 'Choose the correct sentence',
-  gap: 'Complete the sentence',
-  spot: 'Find the error',
-}
-
-function readState(): CourseState {
-  try {
-    const raw = localStorage.getItem(STATE_KEY)
-    if (!raw) return EMPTY_STATE
-    const parsed = JSON.parse(raw) as Partial<CourseState>
-    return {
-      completed: Array.isArray(parsed.completed) ? parsed.completed : [],
-      scores: parsed.scores ?? {},
-      mistakes: Array.isArray(parsed.mistakes) ? parsed.mistakes : [],
-      notes: parsed.notes ?? {},
-      currentDay: parsed.currentDay ?? 1,
-    }
-  } catch {
-    return EMPTY_STATE
-  }
-}
-
-function saveState(state: CourseState) {
-  try { localStorage.setItem(STATE_KEY, JSON.stringify(state)) } catch { /* private browsing */ }
+function savedAttemptChoice(userId?: string) {
+  try { return readAttemptChoice(localStorage, userId) }
+  catch { return undefined }
 }
 
 /** Every authored question in the course, indexed by id, for the mistake notebook. */
@@ -69,11 +48,11 @@ function StepHeading({ step, title, hint, icon: Icon }: {
 }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-pine text-sm font-bold text-white">
-        {step}
+      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white">
+        {step + 1}
       </span>
       <div className="min-w-0">
-        <h3 className="flex items-center gap-2 font-display text-lg font-bold text-pine">
+        <h3 className="flex items-center gap-2 font-display text-lg font-bold text-slate-900">
           <Icon className="h-4 w-4 text-amber-600" aria-hidden="true" /> {title}
         </h3>
         <p className="mt-0.5 text-sm leading-6 text-muted-foreground">{hint}</p>
@@ -82,122 +61,39 @@ function StepHeading({ step, title, hint, icon: Icon }: {
   )
 }
 
-function QuestionCard({ question, index, answer, onAnswer, onRetry }: {
-  question: GrammarQuestion
-  index: number
-  answer: number | undefined
-  onAnswer: (option: number) => void
-  onRetry: () => void
-}) {
-  const answered = answer !== undefined
-  const correct = answer === question.answer
-  const isSpot = question.kind === 'spot'
-  return (
-    <li className="rounded-xl border bg-white p-4 sm:p-5">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-pine">{index + 1}</span>
-        <span className="rounded bg-secondary px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-pine">{KIND_LABEL[question.kind]}</span>
-      </div>
-      <p className="mt-3 text-[15px] font-medium leading-7 text-foreground">{question.prompt}</p>
-      <div className={`mt-3 grid gap-2 ${isSpot ? 'grid-cols-2 sm:grid-cols-4' : 'sm:grid-cols-2'}`}>
-        {question.options.map((option, optionIndex) => {
-          const isAnswer = optionIndex === question.answer
-          const isChosen = optionIndex === answer
-          const tone = !answered
-            ? 'border-input hover:border-emerald-600 hover:bg-emerald-50'
-            : isAnswer
-              ? 'border-emerald-600 bg-emerald-50 text-emerald-950'
-              : isChosen
-                ? 'border-red-400 bg-red-50 text-red-950'
-                : 'border-input opacity-60'
-          return (
-            <button
-              key={option}
-              type="button"
-              disabled={answered}
-              onClick={() => onAnswer(optionIndex)}
-              className={`flex items-start gap-2 rounded-lg border px-3 py-2.5 text-sm leading-6 transition-colors ${isSpot ? 'justify-center font-bold' : 'text-left'} ${tone}`}
-            >
-              {!isSpot && <span className="mt-0.5 text-xs font-bold text-muted-foreground">{String.fromCharCode(65 + optionIndex)}</span>}
-              <span>{isSpot ? `Part ${option}` : option}</span>
-            </button>
-          )
-        })}
-      </div>
-      {answered && (
-        <div className={`mt-3 rounded-lg px-3 py-2.5 text-sm leading-6 ${correct ? 'bg-emerald-50 text-emerald-950' : 'bg-amber-50 text-amber-950'}`}>
-          <p className="font-semibold">
-            {correct
-              ? 'Correct.'
-              : isSpot
-                ? `Not quite — the error is in part ${question.options[question.answer]}.`
-                : `Not quite — the answer is ${String.fromCharCode(65 + question.answer)}.`}
-          </p>
-          <p className="mt-1">{question.why}</p>
-          {!correct && (
-            <button type="button" onClick={onRetry} className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-pine underline underline-offset-2">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear and try this one again
-            </button>
-          )}
-        </div>
-      )}
-    </li>
-  )
-}
-
-function CorrectionCard({ id, index, task, model, note, draft, onDraft }: {
-  id: string
-  index: number
-  task: string
-  model: string
-  note: string
-  draft: string
-  onDraft: (value: string) => void
-}) {
-  const [revealed, setRevealed] = useState(false)
-  useEffect(() => { setRevealed(false) }, [id])
-  return (
-    <li className="rounded-xl border bg-white p-4 sm:p-5">
-      <div className="flex items-start gap-2">
-        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-pine">{index + 1}</span>
-        <p className="text-[15px] leading-7 text-red-950">{task}</p>
-      </div>
-      <label className="mt-3 block">
-        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Write your corrected sentence</span>
-        <textarea
-          value={draft}
-          onChange={(event) => onDraft(event.target.value)}
-          rows={2}
-          placeholder="Type the sentence as you would write it in the paper…"
-          className="mt-1.5 w-full rounded-lg border bg-white p-3 text-sm leading-6 outline-none focus:ring-2 focus:ring-ring"
-        />
-      </label>
-      {revealed ? (
-        <div className="mt-3 rounded-lg bg-emerald-50 px-3 py-2.5 text-sm leading-6 text-emerald-950">
-          <p><span className="font-semibold">Model answer: </span>{model}</p>
-          <p className="mt-1 text-emerald-900">{note}</p>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setRevealed(true)}
-          className="mt-3 inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 px-3 text-xs font-semibold text-pine hover:bg-secondary"
-        >
-          <Eye className="h-3.5 w-3.5" /> Show the model answer
-        </button>
-      )}
-    </li>
-  )
-}
-
-export default function GrammarCourse() {
-  const [state, setState] = useState<CourseState>(() => readState())
-  const [day, setDay] = useState(() => readState().currentDay)
-  const [view, setView] = useState<View>('course')
-  const [warmUpAnswers, setWarmUpAnswers] = useState<Record<string, number>>({})
-  const [drillAnswers, setDrillAnswers] = useState<Record<string, number>>({})
-  const [drafts, setDrafts] = useState<Record<string, string>>({})
-  const [notes, setNotes] = useState('')
+type ViewProps = { initialDay?: number; initialView: View; returnTo?: string; userId?: string; loading: boolean; onDayChange: (day: number) => void; onViewChange: (view: View) => void; lessonLink: (day: number) => string; attemptId?: string; initialState?: CourseState; onCommit?: (state: CourseState) => void; accountPanel?: ReactNode; syncMessage?: string; profile?: GrammarProfile; profileDirty?: boolean; imported?: boolean }
+function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading, onDayChange, onViewChange, lessonLink, attemptId, initialState, onCommit, accountPanel, syncMessage, profile, profileDirty = false, imported = false }: ViewProps) {
+  const [state, setState] = useState<CourseState>(() => initialState ?? loadCourse(userId))
+  const [day, setDay] = useState(() => initialDay ?? state.currentDay)
+  const [view, setLocalView] = useState<View>(initialView)
+  function setView(next: View) { setLocalView(next); onViewChange(next) }
+  const [fullLesson, setFullLesson] = useState(false)
+  const [storageFailed, setStorageFailed] = useState(false)
+  const session = state.sessions[String(day)] ?? emptySession()
+  const warmUpAnswers = session.warmUp, drillAnswers = session.drill, drafts = session.drafts
+  const notes = state.notes[String(day)] ?? ''
+  const step = session.step
+  function commit(next: CourseState) {
+    setState(next)
+    try { localStorage.setItem(courseKey(userId, attemptId), JSON.stringify(next)); setStorageFailed(false) }
+    catch { setStorageFailed(true) }
+    onCommit?.(next)
+  }
+  function updateSession(patch: Partial<Session>, base = state) {
+    commit({ ...base, sessions: { ...base.sessions, [String(day)]: { ...session, ...patch } } })
+  }
+  function chooseStep(next: number) {
+    setView('course'); updateSession({ step: next })
+    document.getElementById('grammar-focus')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+  function exerciseNavigation(group: 'warmUp' | 'drill' | 'corrections', length: number) {
+    const position = session.position[group] ?? 0
+    return <nav aria-label={`${group} exercise navigation`} className="mt-5 flex flex-wrap items-center justify-between gap-3">
+      <button type="button" disabled={position === 0} onClick={() => updateSession({ position: { ...session.position, [group]: position - 1 } })} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-sm font-semibold disabled:opacity-40"><ChevronLeft className="h-4 w-4" aria-hidden="true" />Previous</button>
+      <p className="text-xs font-semibold text-slate-500" aria-live="polite">{position + 1} of {length}</p>
+      <button type="button" disabled={position === length - 1} onClick={() => updateSession({ position: { ...session.position, [group]: position + 1 } })} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white disabled:opacity-40">{group === 'corrections' ? 'Next correction' : 'Next question'}<ChevronRight className="h-4 w-4" aria-hidden="true" /></button>
+    </nav>
+  }
 
   const lesson = grammarLessonForDay(day)
   const completed = useMemo(() => new Set(state.completed), [state.completed])
@@ -223,132 +119,101 @@ export default function GrammarCourse() {
   }, [state.mistakes])
 
   useEffect(() => {
-    recordActivity({ type: 'study-tool', label: `Grammar course · Day ${lesson.day}: ${lesson.title}`, path: '/grammar-course' })
-  }, [lesson.day, lesson.title])
-
-  useEffect(() => {
-    setWarmUpAnswers({})
-    setDrillAnswers({})
-    setDrafts({})
-    setNotes(readState().notes[String(day)] ?? '')
-  }, [day])
+    if (loading) return
+    recordActivity({ type: 'study-tool', label: view === 'lab' ? 'Grammar Error Lab' : `Grammar course · Day ${lesson.day}: ${lesson.title}`, path: view === 'lab' ? '/grammar-course?view=lab' : '/grammar-course' })
+  }, [lesson.day, lesson.title, loading, view])
 
   function chooseDay(next: number) {
     const target = Math.min(grammarLessons.length, Math.max(1, next))
-    setView('course')
-    setDay(target)
-    setState((current) => {
-      const updated = { ...current, currentDay: target }
-      saveState(updated)
-      return updated
-    })
+    setView('course'); setDay(target)
+    commit({ ...state, currentDay: target })
+    onDayChange(target)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
-  function recordAnswer(question: GrammarQuestion, option: number, group: 'warmUp' | 'drill') {
-    const setter = group === 'warmUp' ? setWarmUpAnswers : setDrillAnswers
-    setter((current) => ({ ...current, [question.id]: option }))
-    if (option === question.answer) return
-    setState((current) => {
-      if (current.mistakes.includes(question.id)) return current
-      const updated = { ...current, mistakes: [...current.mistakes, question.id] }
-      saveState(updated)
-      return updated
-    })
-    addMistake(question.id, option, `Grammar · Day ${lesson.day}: ${lesson.title}`)
+  function recordAnswer(question: GrammarQuestion, option: number, group: 'warmUp' | 'drill', answeredAt: number) {
+    if (session[group][question.id] !== undefined) return
+    const first = group === 'drill' && session.first[question.id] === undefined ? { ...session.first, [question.id]: option } : session.first
+    const mistakes = option !== question.answer && !state.mistakes.includes(question.id) ? [...state.mistakes, question.id] : state.mistakes
+    const recordDrill = group === 'drill' && !session.recorded && lesson.drill.every(q => first[q.id] !== undefined)
+    const attempts = recordDrill ? [...state.attempts, { day, at: answeredAt, correct: lesson.drill.filter(q => first[q.id] === q.answer).length, total: lesson.drill.length }].slice(-100) : state.attempts
+    updateSession({ [group]: { ...session[group], [question.id]: option }, first, recorded: session.recorded || recordDrill }, { ...state, mistakes, attempts, reviews: { ...state.reviews, [question.id]: scheduleReview(state.reviews[question.id], option === question.answer, answeredAt) } })
+    if (option !== question.answer) addMistake(question.id, option, `Grammar · Day ${lesson.day}: ${lesson.title}`)
   }
-
   function retry(question: GrammarQuestion, group: 'warmUp' | 'drill') {
-    const setter = group === 'warmUp' ? setWarmUpAnswers : setDrillAnswers
-    setter((current) => {
-      const next = { ...current }
-      delete next[question.id]
-      return next
-    })
+    const next = { ...session[group] }; delete next[question.id]
+    updateSession({ [group]: next })
   }
-
-  function resetDrill() {
-    setDrillAnswers({})
-  }
-
+  function resetDrill() { updateSession({ drill: {}, first: {}, recorded: false, position: { ...session.position, drill: 0 } }) }
+  const correctionsWritten = lesson.corrections.filter(c => (drafts[c.id] ?? '').trim()).length
+  const warmUpAnswered = lesson.warmUp.filter(q => warmUpAnswers[q.id] !== undefined).length
+  const readyToComplete = warmUpAnswered === lesson.warmUp.length && drillAnswered === lesson.drill.length && correctionsWritten === lesson.corrections.length && Boolean(session.writing.trim()) && session.checks.length === lesson.checklist.length
   function completeDay() {
-    const percent = lesson.drill.length ? Math.round((drillScore / lesson.drill.length) * 100) : 0
-    const best = Math.max(percent, state.scores[String(day)] ?? 0)
-    const next: CourseState = {
-      ...state,
+    if (!readyToComplete) return
+    const percent = Math.round((drillScore / lesson.drill.length) * 100)
+    commit({ ...state,
       completed: completed.has(day) ? state.completed : [...state.completed, day].sort((a, b) => a - b),
-      scores: { ...state.scores, [String(day)]: best },
-      notes: { ...state.notes, [String(day)]: notes },
-      currentDay: day,
-    }
-    setState(next)
-    saveState(next)
-  }
-
-  function clearNotebook() {
-    const next = { ...state, mistakes: [] }
-    setState(next)
-    saveState(next)
-  }
-
-  function saveNotes(value: string) {
-    setNotes(value)
-    setState((current) => {
-      const updated = { ...current, notes: { ...current.notes, [String(day)]: value } }
-      saveState(updated)
-      return updated
+      scores: { ...state.scores, [String(day)]: Math.max(percent, state.scores[String(day)] ?? 0) },
     })
   }
+  function clearNotebook() { commit({ ...state, mistakes: [] }) }
+  function saveNotes(value: string) { commit({ ...state, notes: { ...state.notes, [String(day)]: value } }) }
+  const referenceTopics: Record<number, string> = { 1: 'parts-of-speech', 2: 'sentences-clauses-and-phrases', 3: 'sentences-clauses-and-phrases', 4: 'sentences-clauses-and-phrases', 7: 'twelve-tenses', 8: 'twelve-tenses', 9: 'twelve-tenses', 11: 'active-and-passive-voice', 12: 'direct-and-indirect-speech', 13: 'articles', 14: 'pronoun-cases', 16: 'prepositions' }
+  const referenceParams = new URLSearchParams({ lang: 'english', return_day: String(day) })
+  if (attemptId) referenceParams.set('attempt', attemptId)
+  if (referenceTopics[day]) referenceParams.set('topic', referenceTopics[day])
+  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : source.pathname === '/account/precis' ? 'precis' : 'expression'); if (['expression','precis'].includes(source.searchParams.get('from') || '')) referenceParams.set('origin', source.searchParams.get('from')!); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
+  const latestAttempt = state.attempts.filter(a => a.day === day).at(-1)
 
   const bestScore = state.scores[String(day)]
+  const storageMessage = loading ? 'Checking your account before opening saved work…' : storageFailed ? 'This browser could not save your latest change. Keep this page open and copy your writing before leaving.' : syncMessage ?? (userId ? 'Saved in this browser for your account. Select a preparation attempt above to save across devices.' : 'Guest progress stays in this browser. Earlier course progress has been preserved.')
 
   return (
     <div>
       <PageHeader
-        title="30-Day Grammar Course"
-        description="Start from zero and finish able to write accurate, formal English. Each day explains one skill in plain language, shows worked examples, gives you a warm-up, a twelve-question drill and six sentence corrections, and ends with a short piece of writing of your own."
+        title={view === 'profile' ? 'Your Grammar Profile' : view === 'lab' ? 'VISTA Grammar Error Lab' : '30-Day Grammar Course'}
+        description={view === 'lab' ? 'Focused practice, mixed questions and scheduled revision built from the existing course.' : 'Learn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped.'}
       >
         <div className="mt-4 flex flex-wrap gap-2">
-          <button type="button" onClick={() => setView('toolkit')} className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
-          <Link to="/grammar-vocabulary" className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><BookOpen className="h-3.5 w-3.5" /> Vocabulary practice</Link>
-          <Link to="/books" className="inline-flex h-9 items-center gap-1.5 rounded-md border border-pine/25 bg-white px-3 text-xs font-semibold text-pine hover:bg-secondary"><FileText className="h-3.5 w-3.5" /> Handbook PDFs</Link>
+          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />{returnTo.startsWith('/grammar-course') ? 'Return to Error Lab' : returnTo.startsWith('/account/precis') ? 'Return to Précis Lab' : 'Return to Expression Lab'}</Link>}
+          <button type="button" onClick={() => setView('toolkit')} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
+          <Link to="/grammar-vocabulary" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><BookOpen className="h-3.5 w-3.5" /> Vocabulary practice</Link>
+          <Link to="/books" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><FileText className="h-3.5 w-3.5" /> Handbook PDFs</Link>
         </div>
       </PageHeader>
 
-      <main className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
-        <section className="rounded-2xl border bg-pine p-5 text-emerald-50 shadow-sm sm:p-7">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-300">Learn the rule · see it work · use it · keep it</p>
-              <h2 className="mt-2 font-display text-2xl font-bold sm:text-3xl">Grammar you can actually apply in the paper</h2>
-              <p className="mt-3 text-sm leading-7 text-emerald-100">
-                Nothing here is borrowed from a general question bank. Every example and every exercise was written
-                for the lesson it sits under, so the practice on subject–verb agreement is subject–verb agreement and
-                nothing else. Work one day at a time, in order.
-              </p>
+      <main inert={loading} className="mx-auto max-w-7xl px-4 py-7 sm:py-9 [&_:focus-visible]:outline [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-indigo-600">
+        {accountPanel}
+        <section hidden={view === 'lab' || view === 'profile'} className="overflow-hidden rounded-3xl bg-slate-950 text-white">
+          <div className="grid gap-7 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+            <div>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] text-indigo-200"><GraduationCap className="h-4 w-4" aria-hidden="true" />Grammar studio · Day {day} / 30</p>
+              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">{lesson.title}</h2><Link to={`/account/ask-vista?category=grammar&context=grammar:${lesson.day}:0${attemptId ? `&attempt=${attemptId}` : ''}`} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-indigo-200 underline underline-offset-4 hover:text-white">Ask about this lesson</Link>
+              <p className="mt-4 max-w-xl text-sm leading-7 text-slate-300">{lesson.goal}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button type="button" onClick={() => { setFullLesson(false); chooseStep(step) }} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-indigo-500 px-5 text-sm font-semibold text-white hover:bg-indigo-400"><Play className="h-4 w-4" aria-hidden="true" />Continue {STEPS[step].toLowerCase()}</button>
+                <Link to={`/language-grammar?${referenceParams}`} className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-white/20 px-4 text-sm font-semibold hover:bg-white/10"><BookOpen className="h-4 w-4" aria-hidden="true" />Open reference<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+              </div>
+              <p className="mt-5 text-xs leading-6 text-slate-400">{grammarQuestionCount} authored questions · {grammarCorrectionCount} corrections · {grammarExampleCount} worked examples</p>
             </div>
-            <div className="min-w-[230px]">
-              <div className="flex items-center justify-between text-xs text-emerald-100">
-                <span>Your progress</span>
-                <span className="font-bold text-white">{completed.size}/{grammarLessons.length} days</span>
-              </div>
-              <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-white/20">
-                <div className="h-full rounded-full bg-amber-300 transition-all" style={{ width: `${progressPercent}%` }} />
-              </div>
-              <p className="mt-2 text-xs text-emerald-200">{progressPercent}% complete · currently on Day {day}</p>
+            <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+              <div className="flex items-center justify-between"><p className="text-xs font-semibold text-slate-300">Your session</p><span className="rounded-full bg-indigo-400/15 px-3 py-1 text-xs text-indigo-200">{completed.has(day) ? 'Revision' : 'In progress'}</span></div>
+              <p className="mt-4 text-xl font-semibold">{STEPS[step]}</p>
+              <dl className="mt-5 grid grid-cols-3 gap-2 border-y border-white/10 py-4"><div><dt className="text-[11px] text-slate-400">Warm-up</dt><dd className="mt-1 text-xl font-semibold">{warmUpAnswered}<span className="text-sm text-slate-400">/4</span></dd></div><div><dt className="text-[11px] text-slate-400">Drill</dt><dd className="mt-1 text-xl font-semibold">{drillAnswered}<span className="text-sm text-slate-400">/12</span></dd></div><div><dt className="text-[11px] text-slate-400">Corrections</dt><dd className="mt-1 text-xl font-semibold">{correctionsWritten}<span className="text-sm text-slate-400">/6</span></dd></div></dl>
+              <div className="mt-5 flex justify-between text-xs text-slate-300"><span>Course completion</span><span>{completed.size}/30 days</span></div>
+              <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-label="Completed course days" aria-valuenow={progressPercent} aria-valuemin={0} aria-valuemax={100}><div className="h-full rounded-full bg-indigo-400 transition-all motion-reduce:transition-none" style={{ width: `${progressPercent}%` }} /></div>
+              <p className="mt-4 text-xs leading-6 text-slate-400">About {lesson.minutes} minutes · Authored practice · Instant explanations</p>
             </div>
           </div>
-          <div className="mt-6 grid gap-2 border-t border-white/15 pt-4 text-xs text-emerald-100 sm:grid-cols-2 lg:grid-cols-4">
-            <span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4 text-amber-300" /> 45–60 minutes a day</span>
-            <span className="inline-flex items-center gap-2"><Target className="h-4 w-4 text-amber-300" /> {grammarQuestionCount} lesson-specific questions</span>
-            <span className="inline-flex items-center gap-2"><PenLine className="h-4 w-4 text-amber-300" /> {grammarCorrectionCount} sentence corrections</span>
-            <span className="inline-flex items-center gap-2"><Sparkles className="h-4 w-4 text-amber-300" /> {grammarExampleCount} worked examples</span>
+          <div role={storageFailed ? 'alert' : 'status'} className={`border-t border-white/10 px-6 py-4 text-xs leading-6 sm:px-8 ${storageFailed ? 'bg-amber-100 text-amber-950' : 'text-slate-300'}`}>
+            {storageMessage}
           </div>
         </section>
 
         <div className="mt-6 flex flex-wrap gap-2 border-b pb-3">
           {([
             { key: 'course' as const, label: 'Today’s lesson', icon: GraduationCap },
+            { key: 'lab' as const, label: 'Error Lab', icon: Target },
+            { key: 'profile' as const, label: 'Grammar Profile', icon: ListChecks },
             { key: 'toolkit' as const, label: 'Grammar toolkit', icon: Wrench },
             { key: 'notebook' as const, label: `Mistake notebook (${notebook.length})`, icon: CircleAlert },
           ]).map((tab) => (
@@ -356,17 +221,21 @@ export default function GrammarCourse() {
               key={tab.key}
               type="button"
               onClick={() => setView(tab.key)}
-              className={`inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${view === tab.key ? 'bg-pine text-white' : 'bg-secondary text-pine hover:bg-emerald-100'}`}
+              aria-pressed={view === tab.key}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${view === tab.key ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-indigo-50'}`}
             >
               <tab.icon className="h-4 w-4" /> {tab.label}
             </button>
           ))}
         </div>
 
+        {view === 'lab' && <ErrorLab state={state} commit={commit} lessonLink={lessonLink} storageMessage={storageMessage} storageFailed={storageFailed} suggestedDay={initialDay} />}
+        {view === 'profile' && <Profile profile={profile} dirty={profileDirty} imported={imported} lessonLink={lessonLink} openLab={() => setView('lab')} />}
+
         {view === 'toolkit' && (
           <section className="mt-6 space-y-6">
             <div className="rounded-xl border bg-white p-5 sm:p-7">
-              <h2 className="flex items-center gap-2 font-display text-xl font-bold text-pine"><Wrench className="h-5 w-5 text-amber-600" /> Grammar toolkit</h2>
+              <h2 className="flex items-center gap-2 font-display text-xl font-bold text-slate-900"><Wrench className="h-5 w-5 text-amber-600" /> Grammar toolkit</h2>
               <p className="mt-1 text-sm leading-7 text-muted-foreground">
                 Reference tables you will need again and again. Open this tab whenever a lesson asks you to check a
                 form, then go straight back to the drill.
@@ -374,14 +243,14 @@ export default function GrammarCourse() {
             </div>
             {grammarToolkit.map((table) => (
               <div key={table.id} className="rounded-xl border bg-white p-5 sm:p-7">
-                <h3 className="font-display text-lg font-bold text-pine">{table.title}</h3>
+                <h3 className="font-display text-lg font-bold text-slate-900">{table.title}</h3>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">{table.note}</p>
                 <div className="mt-4 overflow-x-auto">
                   <table className="w-full min-w-[520px] border-collapse text-sm">
                     <thead>
                       <tr className="bg-secondary/60 text-left">
                         {table.columns.map((column, columnIndex) => (
-                          <th key={`${column}-${columnIndex}`} className="border-b px-3 py-2 font-semibold text-pine">{column}</th>
+                          <th key={`${column}-${columnIndex}`} className="border-b px-3 py-2 font-semibold text-slate-900">{column}</th>
                         ))}
                       </tr>
                     </thead>
@@ -407,7 +276,7 @@ export default function GrammarCourse() {
               <div className="flex items-start gap-3">
                 <CircleAlert className="mt-0.5 h-5 w-5 text-amber-600" />
                 <div>
-                  <h2 className="font-display text-xl font-bold text-pine">Your mistake notebook</h2>
+                  <h2 className="font-display text-xl font-bold text-slate-900">Your mistake notebook</h2>
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">
                     Every question you answered wrongly is kept here with its rule. Read the explanation, then return
                     to that day and attempt the drill again.
@@ -415,7 +284,7 @@ export default function GrammarCourse() {
                 </div>
               </div>
               {notebook.length > 0 && (
-                <button type="button" onClick={clearNotebook} className="inline-flex h-9 items-center gap-1.5 rounded-md border px-3 text-xs font-semibold text-pine hover:bg-secondary">
+                <button type="button" onClick={clearNotebook} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border px-3 text-xs font-semibold text-slate-900 hover:bg-secondary">
                   <RotateCcw className="h-3.5 w-3.5" /> Clear notebook
                 </button>
               )}
@@ -429,8 +298,8 @@ export default function GrammarCourse() {
                 {notebook.map(({ question, lesson: source }) => (
                   <li key={question.id} className="rounded-lg border bg-secondary/25 p-4">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${grammarPhaseColors[source.phase] ?? 'bg-secondary text-pine'}`}>Day {source.day} · {source.title}</span>
-                      <button type="button" onClick={() => chooseDay(source.day)} className="inline-flex items-center gap-1 text-[11px] font-semibold text-pine underline underline-offset-2">
+                      <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${grammarPhaseColors[source.phase] ?? 'bg-secondary text-slate-900'}`}>Day {source.day} · {source.title}</span>
+                      <button type="button" onClick={() => chooseDay(source.day)} className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-900 underline underline-offset-2">
                         Open that lesson <ArrowRight className="h-3 w-3" />
                       </button>
                     </div>
@@ -447,17 +316,19 @@ export default function GrammarCourse() {
           </section>
         )}
 
+        {view === 'course' && state.completed.length === grammarLessons.length && <div className="mt-6 rounded-2xl border border-indigo-200 bg-indigo-50 p-5 text-sm leading-7"><p className="font-semibold">All 30 course days are complete.</p><p>Keep practising with mixed sessions and scheduled revision.</p><button type="button" onClick={() => setView('lab')} className="mt-2 inline-flex min-h-11 items-center gap-2 font-semibold text-indigo-700">Open Error Lab<ArrowRight className="h-4 w-4" aria-hidden="true" /></button></div>}
         {view === 'course' && (
           <div className="mt-6 grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)]">
-            <aside className="self-start rounded-xl border bg-white p-3 lg:sticky lg:top-24">
+            <div className="lg:hidden"><label htmlFor="grammar-day" className="text-xs font-semibold text-slate-600">Choose a day</label><select id="grammar-day" value={day} onChange={event => chooseDay(Number(event.target.value))} className="mt-2 min-h-12 w-full rounded-xl border bg-white p-3 text-sm">{grammarLessons.map(item => <option key={item.day} value={item.day}>Day {item.day} · {item.title}{completed.has(item.day) ? ' · Completed' : ''}</option>)}</select></div>
+            <aside className="hidden self-start rounded-2xl border bg-white p-3 lg:sticky lg:top-24 lg:block">
               <div className="flex items-center justify-between px-2 py-1">
-                <h2 className="flex items-center gap-1.5 font-display text-lg font-bold text-pine"><Layers className="h-4 w-4 text-amber-600" /> Course map</h2>
+                <h2 className="flex items-center gap-1.5 font-display text-lg font-bold text-slate-900"><Layers className="h-4 w-4 text-amber-600" /> Course map</h2>
                 <Badge>{completed.size}/{grammarLessons.length}</Badge>
               </div>
               <div className="mt-3 max-h-[70vh] space-y-4 overflow-y-auto pr-1">
                 {GRAMMAR_PHASES.map((phase) => (
                   <div key={phase.name}>
-                    <p className={`rounded-md px-2 py-1 text-[11px] font-bold uppercase tracking-wide ${grammarPhaseColors[phase.name] ?? 'bg-secondary text-pine'}`}>
+                    <p className={`rounded-md px-2 py-1 text-[11px] font-bold uppercase tracking-wide ${grammarPhaseColors[phase.name] ?? 'bg-secondary text-slate-900'}`}>
                       Days {phase.days[0]}–{phase.days[1]} · {phase.name}
                     </p>
                     <p className="px-2 pt-1 text-[11px] leading-5 text-muted-foreground">{phase.summary}</p>
@@ -473,9 +344,9 @@ export default function GrammarCourse() {
                               type="button"
                               onClick={() => chooseDay(item.day)}
                               aria-current={selected ? 'true' : undefined}
-                              className={`flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors ${selected ? 'bg-pine text-white' : 'hover:bg-secondary'}`}
+                              className={`flex w-full items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors ${selected ? 'bg-indigo-600 text-white' : 'hover:bg-secondary'}`}
                             >
-                              <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${done ? 'bg-emerald-400 text-emerald-950' : selected ? 'bg-white/20 text-white' : 'bg-secondary text-pine'}`}>
+                              <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${done ? 'bg-emerald-400 text-emerald-950' : selected ? 'bg-white/20 text-white' : 'bg-secondary text-slate-900'}`}>
                                 {done ? <Check className="h-3.5 w-3.5" /> : item.day}
                               </span>
                               <span className="min-w-0 text-xs font-semibold leading-5">{item.title}</span>
@@ -488,11 +359,16 @@ export default function GrammarCourse() {
               </div>
             </aside>
 
-            <section className="min-w-0 space-y-6">
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+            <section id="grammar-focus" className="min-w-0 scroll-mt-24 space-y-6 [overflow-wrap:anywhere]">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+                <div className="flex flex-wrap items-center justify-between gap-3"><h2 className="text-sm font-semibold text-slate-950">Your next action</h2><button type="button" onClick={() => setFullLesson(!fullLesson)} aria-pressed={fullLesson} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-3 text-xs font-semibold text-indigo-700"><FileText className="h-4 w-4" aria-hidden="true" />{fullLesson ? 'Guided session' : 'Read full lesson'}</button></div>
+                <nav aria-label="Lesson steps" className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">{STEPS.map((label, index) => <button key={label} type="button" onClick={() => { setFullLesson(false); chooseStep(index) }} aria-current={step === index ? 'step' : undefined} className={`flex min-h-12 items-center gap-2 rounded-xl px-3 text-left text-xs font-semibold ${step === index ? 'bg-indigo-600 text-white' : 'bg-slate-50 text-slate-600 hover:bg-indigo-50'}`}><span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${step === index ? 'bg-white/20' : 'bg-white'}`}>{index + 1}</span>{label}</button>)}</nav>
+              </div>
+
+              <article hidden={!fullLesson && step !== 0} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${grammarPhaseColors[lesson.phase] ?? 'bg-secondary text-pine'}`}>Day {lesson.day} of 30 · {lesson.phase}</span>
+                    <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${grammarPhaseColors[lesson.phase] ?? 'bg-secondary text-slate-900'}`}>Day {lesson.day} of 30 · {lesson.phase}</span>
                     {completed.has(lesson.day) && <Badge>Completed</Badge>}
                   </div>
                   <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -501,7 +377,7 @@ export default function GrammarCourse() {
                   </span>
                 </div>
 
-                <h2 className="mt-4 font-display text-2xl font-bold text-pine sm:text-3xl">{lesson.title}</h2>
+                <h2 className="mt-4 font-display text-2xl font-bold text-slate-900 sm:text-3xl">{lesson.title}</h2>
                 <p className="mt-3 text-base font-medium leading-7 text-foreground">{lesson.goal}</p>
 
                 <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
@@ -515,7 +391,7 @@ export default function GrammarCourse() {
                       <li>1. Read the rules slowly, once.</li>
                       <li>2. Cover the right-hand column of the examples and predict.</li>
                       <li>3. Do the warm-up; if you miss one, reread that rule.</li>
-                      <li>4. Attempt the whole drill before checking anything.</li>
+                      <li>4. Attempt the drill and read each explanation.</li>
                       <li>5. Write the six corrections out by hand.</li>
                       <li>6. Finish with the writing task in your own words.</li>
                     </ol>
@@ -528,7 +404,7 @@ export default function GrammarCourse() {
                     <dl className="mt-3 grid gap-2.5 sm:grid-cols-2">
                       {lesson.terms.map((term) => (
                         <div key={term.term} className="rounded-lg bg-white p-3">
-                          <dt className="text-sm font-semibold text-pine">{term.term}</dt>
+                          <dt className="text-sm font-semibold text-slate-900">{term.term}</dt>
                           <dd className="mt-0.5 text-sm leading-6 text-muted-foreground">{term.meaning}</dd>
                         </div>
                       ))}
@@ -537,12 +413,12 @@ export default function GrammarCourse() {
                 )}
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 1} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <StepHeading step={1} icon={Lightbulb} title="Learn the rules" hint="Read each explanation together with the example placed immediately beside the point it illustrates." />
                 <div className="mt-5 space-y-5">
                   {lesson.rules.map((rule, ruleIndex) => (
                     <div key={rule.heading} className="rounded-xl border p-4 sm:p-5">
-                      <h4 className="font-display text-base font-bold text-pine">{ruleIndex + 1}. {rule.heading}</h4>
+                      <h4 className="font-display text-base font-bold text-slate-900">{ruleIndex + 1}. {rule.heading}</h4>
                       <p className="mt-2 text-[15px] leading-8 text-foreground">{rule.plain}</p>
                       {rule.models[0] && (
                         <div className="mt-2.5 rounded-lg border-l-4 border-emerald-500 bg-emerald-50/60 px-3.5 py-2.5">
@@ -582,7 +458,7 @@ export default function GrammarCourse() {
                             <thead>
                               <tr className="bg-secondary/60 text-left">
                                 {rule.table.columns.map((column, columnIndex) => (
-                                  <th key={`${column}-${columnIndex}`} className="border-b px-3 py-2 font-semibold text-pine">{column}</th>
+                                  <th key={`${column}-${columnIndex}`} className="border-b px-3 py-2 font-semibold text-slate-900">{column}</th>
                                 ))}
                               </tr>
                             </thead>
@@ -603,20 +479,23 @@ export default function GrammarCourse() {
                 </div>
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 2} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <StepHeading step={2} icon={ClipboardCheck} title="See the rule fail and work" hint="Read the reason, not just the corrected sentence. Cover the right-hand side and predict first." />
                 <div className="mt-5 grid gap-3">
-                  {lesson.examples.map((example) => (
+                  {lesson.examples.map((example, index) => (
                     <div key={example.wrong} className="grid gap-3 rounded-xl border p-4 md:grid-cols-3">
                       <div>
                         <p className="text-[10px] font-bold uppercase tracking-wide text-red-700">Wrong</p>
                         <p className="mt-1 text-sm leading-7 text-red-950">{example.wrong}</p>
                       </div>
                       <div>
+                        {!fullLesson && !session.revealed.includes(`example:${index}`) && <button type="button" onClick={() => updateSession({ revealed: [...session.revealed, `example:${index}`] })} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-indigo-200 px-3 text-xs font-semibold text-indigo-700"><Eye className="h-4 w-4" aria-hidden="true" />Predict, then reveal</button>}
+                        <div hidden={!fullLesson && !session.revealed.includes(`example:${index}`)}>
                         <p className="text-[10px] font-bold uppercase tracking-wide text-emerald-700">Right</p>
                         <p className="mt-1 text-sm font-semibold leading-7 text-emerald-950">{example.right}</p>
+                        </div>
                       </div>
-                      <div>
+                      <div hidden={!fullLesson && !session.revealed.includes(`example:${index}`)}>
                         <p className="text-[10px] font-bold uppercase tracking-wide text-slate-600">Why</p>
                         <p className="mt-1 text-sm leading-7 text-muted-foreground">{example.why}</p>
                       </div>
@@ -637,24 +516,26 @@ export default function GrammarCourse() {
                 </div>
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 3} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <StepHeading step={3} icon={Target} title="Warm-up" hint="Four easy items to confirm you have understood the rule. Answers and reasons appear at once." />
                 <ul className="mt-5 grid gap-3">
                   {lesson.warmUp.map((question, index) => (
                     <QuestionCard
                       key={question.id}
+                      hidden={!fullLesson && index !== (session.position.warmUp ?? 0)}
                       question={question}
                       index={index}
                       answer={warmUpAnswers[question.id]}
-                      onAnswer={(option) => recordAnswer(question, option, 'warmUp')}
+                      onAnswer={(option, at) => recordAnswer(question, option, 'warmUp', at)}
                       onRetry={() => retry(question, 'warmUp')}
                     />
                   ))}
                 </ul>
+                {!fullLesson && exerciseNavigation('warmUp', lesson.warmUp.length)}
                 <p className="mt-4 text-xs text-muted-foreground">{warmUpScore}/{lesson.warmUp.length} correct so far. If you missed one, reread that rule before going on.</p>
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 4} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <div className="mb-5 rounded-xl border border-sky-200 bg-sky-50 p-4 sm:p-5">
                   <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-sky-800"><Target className="h-4 w-4" /> How examiners actually test this</h4>
                   <p className="mt-1.5 text-sm leading-7 text-sky-950">{lesson.examTip}</p>
@@ -662,7 +543,7 @@ export default function GrammarCourse() {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <StepHeading step={4} icon={ListChecks} title="Daily drill" hint="Twelve questions at examination difficulty, all on today’s topic. Anything you miss goes into your notebook." />
                   {drillAnswered > 0 && (
-                    <button type="button" onClick={resetDrill} className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border px-3 text-xs font-semibold text-pine hover:bg-secondary">
+                    <button type="button" onClick={resetDrill} className="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-md border px-3 text-xs font-semibold text-slate-900 hover:bg-secondary">
                       <RotateCcw className="h-3.5 w-3.5" /> Start the drill again
                     </button>
                   )}
@@ -671,82 +552,94 @@ export default function GrammarCourse() {
                   {lesson.drill.map((question, index) => (
                     <QuestionCard
                       key={question.id}
+                      hidden={!fullLesson && index !== (session.position.drill ?? 0)}
                       question={question}
                       index={index}
                       answer={drillAnswers[question.id]}
-                      onAnswer={(option) => recordAnswer(question, option, 'drill')}
+                      onAnswer={(option, at) => recordAnswer(question, option, 'drill', at)}
                       onRetry={() => retry(question, 'drill')}
                     />
                   ))}
                 </ul>
+                {!fullLesson && exerciseNavigation('drill', lesson.drill.length)}
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-secondary/40 px-4 py-3 text-sm">
-                  <span className="font-semibold text-pine">{drillAnswered}/{lesson.drill.length} attempted · {drillScore} correct</span>
+                  <span className="font-semibold text-slate-900">{drillAnswered}/{lesson.drill.length} attempted · {drillScore} correct</span>
                   <span className="text-xs text-muted-foreground">Aim for 8 out of 10 before you move on — but you may repeat the drill as often as you like.</span>
                 </div>
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 5} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <StepHeading step={5} icon={PenLine} title="Correct the sentence yourself" hint="Write your version first, then reveal the model. Writing it out is what transfers the rule to the paper." />
                 <ul className="mt-5 grid gap-3">
                   {lesson.corrections.map((correction, index) => (
                     <CorrectionCard
                       key={correction.id}
-                      id={correction.id}
+                      hidden={!fullLesson && index !== (session.position.corrections ?? 0)}
+                      revealed={session.revealed.includes(correction.id)}
+                      onReveal={() => updateSession({ revealed: [...session.revealed, correction.id] })}
                       index={index}
                       task={correction.task}
                       model={correction.model}
                       note={correction.note}
                       draft={drafts[correction.id] ?? ''}
-                      onDraft={(value) => setDrafts((current) => ({ ...current, [correction.id]: value }))}
+                      onDraft={(value) => updateSession({ drafts: { ...drafts, [correction.id]: value } })}
                     />
                   ))}
                 </ul>
+                {!fullLesson && exerciseNavigation('corrections', lesson.corrections.length)}
+                <p className="mt-4 text-xs leading-6 text-slate-500">Compare with the authored model and its rule. Other valid corrections are possible; this is self-review, not automated marking.</p>
               </article>
 
-              <article className="rounded-xl border bg-white p-5 sm:p-7">
+              <article hidden={!fullLesson && step !== 6} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-7">
                 <StepHeading step={6} icon={NotebookPen} title="Write it in your own words" hint="The task that turns a rule you recognise into a rule you use." />
                 <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
                   <div>
                     <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
                       <p className="text-sm leading-8 text-emerald-950">{lesson.transfer}</p>
                     </div>
+                    <label htmlFor="grammar-writing" className="mt-5 block text-sm font-semibold text-slate-900">Your writing for Day {day}</label>
+                    <textarea id="grammar-writing" maxLength={20000} value={session.writing} onChange={event => updateSession({ writing: event.target.value })} rows={7} className="mt-2 w-full rounded-xl border p-4 text-sm leading-7 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Apply today’s rule in your own words…" />
+                    <Link to="/account/expression" className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-indigo-700">Open Expression Lab<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
                     <h4 className="mt-5 text-sm font-bold uppercase tracking-wide text-emerald-800">Before you move on</h4>
                     <ul className="mt-2 space-y-1.5">
-                      {lesson.checklist.map((item) => (
+                      {lesson.checklist.map((item, index) => (
                         <li key={item} className="flex items-start gap-2 text-sm leading-7">
-                          <CircleCheck className="mt-1.5 h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden="true" />
-                          <span>{item}</span>
+                          <label className="flex min-h-11 cursor-pointer items-start gap-3"><input type="checkbox" checked={session.checks.includes(index)} onChange={() => updateSession({ checks: session.checks.includes(index) ? session.checks.filter(n => n !== index) : [...session.checks, index] })} className="mt-2 h-4 w-4 shrink-0 accent-indigo-600" /><span>{item}</span></label>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <label htmlFor="grammar-notes" className="text-sm font-semibold text-pine">My note for Day {lesson.day}</label>
+                    <label htmlFor="grammar-notes" className="text-sm font-semibold text-slate-900">My note for Day {lesson.day}</label>
                     <textarea
+                      maxLength={20000}
                       id="grammar-notes"
                       value={notes}
                       onChange={(event) => saveNotes(event.target.value)}
                       placeholder="Write the one rule you never want to get wrong again…"
                       className="mt-2 min-h-32 w-full rounded-lg border bg-white p-3 text-sm leading-6 outline-none focus:ring-2 focus:ring-ring"
                     />
-                    <p className="mt-2 text-xs text-muted-foreground">Saved on this device as you type.</p>
+                    <p className="mt-2 text-xs text-muted-foreground">{storageFailed ? 'Your latest change is not saved. Copy your work before leaving.' : 'Saved on this device as you type.'}</p>
                   </div>
                 </div>
 
-                <div className="mt-6 rounded-xl bg-pine px-4 py-3.5 text-sm leading-7 text-emerald-50">
+                <div className="mt-6 rounded-xl bg-indigo-600 px-4 py-3.5 text-sm leading-7 text-emerald-50">
                   <span className="font-bold text-amber-300">Remember this: </span>{lesson.recap}
                 </div>
               </article>
 
+              {!fullLesson && <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-white p-4"><button type="button" disabled={step === 0} onClick={() => chooseStep(step - 1)} className="inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 text-sm font-semibold disabled:opacity-40"><ChevronLeft className="h-4 w-4" aria-hidden="true" />Previous step</button><span className="text-xs text-slate-500">Step {step + 1} of {STEPS.length}</span><button type="button" disabled={step === 6} onClick={() => chooseStep(step + 1)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white disabled:opacity-40">Next step<ChevronRight className="h-4 w-4" aria-hidden="true" /></button></div>}
+              {latestAttempt && <p className="rounded-xl border bg-white p-4 text-sm leading-7 text-slate-600">Latest saved drill: {latestAttempt.correct}/{latestAttempt.total} correct on first responses. Best practice score: {bestScore ?? 0}%. Completion records work and self-review; it is not a mastery certificate.</p>}
+              {!readyToComplete && <p className="rounded-xl bg-slate-100 p-4 text-xs leading-6 text-slate-600">To complete this day: answer all 4 warm-up and 12 drill questions, write the 6 corrections, complete your writing task and tick the self-review checklist.</p>}
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-white p-4 sm:p-5">
-                <button type="button" onClick={() => chooseDay(day - 1)} disabled={day === 1} className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine disabled:opacity-40">
+                <button type="button" onClick={() => chooseDay(day - 1)} disabled={day === 1} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-slate-900 disabled:opacity-40">
                   <ChevronLeft className="h-4 w-4" /> Previous day
                 </button>
                 <div className="flex flex-wrap gap-2">
-                  <button type="button" onClick={completeDay} className="inline-flex h-10 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-white hover:bg-pine/90">
+                  <button type="button" onClick={completeDay} disabled={!readyToComplete} className="inline-flex min-h-11 disabled:opacity-40 items-center gap-1.5 rounded-md bg-indigo-600 px-5 text-sm font-semibold text-white hover:bg-indigo-600/90">
                     <ClipboardCheck className="h-4 w-4" /> {completed.has(day) ? 'Save progress again' : 'Mark this day complete'}
                   </button>
-                  <button type="button" onClick={() => chooseDay(day + 1)} disabled={day === grammarLessons.length} className="inline-flex h-10 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-pine disabled:opacity-40">
+                  <button type="button" onClick={() => chooseDay(day + 1)} disabled={day === grammarLessons.length} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-slate-900 disabled:opacity-40">
                     Next day <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
@@ -757,4 +650,63 @@ export default function GrammarCourse() {
       </main>
     </div>
   )
+}
+
+/** A lesson link opens a view without overwriting the member's saved course position. */
+export default function GrammarCourse() {
+  const { user, loading } = useAccount()
+  const [params, setParams] = useSearchParams()
+  const [choice, setChoice] = useState<{ userId: string; value: string }>()
+  const attempts = useLearning<Overview>(user ? 'learning.php' : undefined)
+  const remembered = choice?.userId === user?.id ? choice?.value : savedAttemptChoice(user?.id)
+  const requestedAttempt = params.get('attempt') ?? remembered
+  const attemptId = requestedAttempt && /^[a-f0-9-]{36}$/i.test(requestedAttempt) ? requestedAttempt : undefined
+  const requested = params.get('day'), initialDay = requested && /^(?:[1-9]|[12][0-9]|30)$/.test(requested) ? Number(requested) : undefined
+  const writing = params.get('writing'), version = params.get('version'), idPattern = /^[a-f0-9-]{36}$/i
+  const back = new URLSearchParams()
+  if (writing && idPattern.test(writing)) back.set('writing', writing)
+  if (version && idPattern.test(version)) back.set('version', version)
+  const fromLab = params.get('from') === 'lab'
+  const fromPrecis = params.get('from') === 'precis' || fromLab && params.get('origin') === 'precis'
+  const fromExpression = params.get('from') === 'expression' || fromLab && params.get('origin') === 'expression'
+  const labParams = new URLSearchParams({ view: 'lab' })
+  if (attemptId) labParams.set('attempt', attemptId)
+  if (fromPrecis || fromExpression) { labParams.set('from', fromPrecis ? 'precis' : 'expression'); for (const [key, value] of back) labParams.set(key, value) }
+  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromPrecis ? `/account/precis${back.size ? `?${back}` : ''}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
+  const requestedView = params.get('view')
+  const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' || requestedView === 'profile' ? requestedView : 'course'
+  const panel = user && !loading ? <section className="mb-6 rounded-2xl border border-indigo-200 bg-white p-5" aria-label="Grammar preparation attempt">
+    <label htmlFor="grammar-attempt" className="text-sm font-semibold text-slate-900">Save Grammar to your preparation attempt</label>
+    <div className="mt-3 flex flex-wrap items-center gap-3"><select id="grammar-attempt" value={attemptId ?? ''} onChange={event => { const next = new URLSearchParams(params), value = event.target.value || 'browser'; if (user) { setChoice({ userId: user.id, value }); try { localStorage.setItem(attemptChoiceKey(user.id), value) } catch { /* The explicit URL still retains this choice for this session. */ } }; next.set('attempt', value); setParams(next) }} className="min-h-11 max-w-full rounded-xl border border-slate-300 bg-white px-3 text-sm">
+      <option value="">This browser only</option>
+      {attemptId && !attempts.data?.attempts.some(a => a.id === attemptId) && <option value={attemptId}>Selected attempt</option>}
+      {attempts.data?.attempts.map((a, i) => <option key={a.id} value={a.id}>CSS {a.target_year} · {a.stage.replace('_', ' ')} · attempt {i + 1}</option>)}
+    </select><Link to="/account/preparation" className="inline-flex min-h-11 items-center text-sm font-semibold text-indigo-700">Manage preparation attempts</Link></div>
+    {attempts.error && <p className="mt-3 text-sm leading-6 text-amber-900">{attempts.error} The public course remains available in this browser.</p>}
+    {!attemptId && <p className="mt-3 text-xs leading-6 text-slate-600">Choose the attempt this work belongs to. Earlier browser work stays separate until you explicitly copy it into an empty attempt.</p>}
+  </section> : undefined
+  const props: ViewProps = { initialDay, initialView, returnTo, userId: loading ? 'pending' : user?.id, loading, attemptId, accountPanel: panel,
+    onDayChange: day => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); next.set('day', String(day)); next.delete('view'); setParams(next, { replace: true }) },
+    onViewChange: view => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); if (view === 'course') next.delete('view'); else next.set('view', view); setParams(next, { replace: true }) },
+    lessonLink: day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (attemptId) next.set('attempt', attemptId); if (fromPrecis || fromExpression) { next.set('origin', fromPrecis ? 'precis' : 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` },
+  }
+  return user && !loading && attemptId ? <AttemptGrammarCourse key={`${user.id}:${attemptId}`} {...props} userId={user.id} attemptId={attemptId} /> : <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} {...props} />
+}
+
+function AttemptGrammarCourse(props: ViewProps & { userId: string; attemptId: string }) {
+  const sync = useGrammarSync(props.userId, props.attemptId)
+  const [earlier] = useState(() => loadCourse(props.userId))
+  const canImport = sync.ready && sync.profile && !sync.envelope.version && !sync.envelope.dirty && (earlier.completed.length > 0 || Object.keys(earlier.sessions).length > 0 || Object.keys(earlier.notes).length > 0 || earlier.labHistory.length > 0)
+  const message = sync.error ?? (sync.saving ? 'Saving this attempt to your account…' : sync.envelope.dirty ? 'Your browser copy is saved. Account sync is pending.' : sync.envelope.version ? 'Saved to your account for this preparation attempt. Available across devices.' : 'This attempt is ready for account saving. Start a lesson to begin.')
+  const panel = <>{props.accountPanel}<section className="mb-6 rounded-2xl border bg-slate-50 p-5" aria-label="Grammar account sync">
+    <p role={sync.error ? 'alert' : 'status'} className={`text-sm leading-6 ${sync.error ? 'text-amber-900' : 'text-slate-700'}`}>{sync.ready ? message : 'Loading this attempt’s saved Grammar work…'}</p>
+    {sync.ready && <div className="mt-3 flex flex-wrap gap-3">
+      <button type="button" disabled={sync.saving || sync.conflict || !sync.envelope.dirty && !sync.envelope.pending} onClick={() => { void sync.flush() }} className="min-h-11 rounded-xl bg-indigo-600 px-4 text-sm font-semibold text-white disabled:opacity-40">{sync.error ? 'Retry account save' : 'Save to account'}</button>
+      <button type="button" onClick={sync.download} className="min-h-11 rounded-xl border bg-white px-4 text-sm font-semibold">Export browser copy</button>
+      {(sync.conflict || sync.error) && <button type="button" disabled={sync.saving} onClick={() => { void sync.reloadAccount() }} className="min-h-11 rounded-xl border border-amber-300 bg-white px-4 text-sm font-semibold text-amber-950">Keep browser backup and load account copy</button>}
+      {canImport && <button type="button" onClick={() => sync.change(earlier, true)} className="min-h-11 rounded-xl border border-indigo-200 bg-white px-4 text-sm font-semibold text-indigo-700">Copy earlier browser progress into this attempt</button>}
+    </div>}
+  </section></>
+  if (!sync.ready) return <div className="mx-auto max-w-7xl px-4 py-8 [&_:focus-visible]:outline [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-indigo-600">{panel}</div>
+  return <GrammarCourseView key={`${sync.revision}:${props.initialDay ?? 'saved'}:${props.returnTo ?? ''}`} {...props} initialState={sync.envelope.state} onCommit={sync.change} accountPanel={panel} syncMessage={message} profile={sync.profile} profileDirty={sync.envelope.dirty} imported={sync.imported} />
 }

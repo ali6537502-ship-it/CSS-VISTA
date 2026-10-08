@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 const PREFIX = 'cssvista:draft:'
 
-function readDraft<T>(key: string): T | null {
+export function readDraft<T>(key: string): T | null {
   try {
     const raw = localStorage.getItem(PREFIX + key)
     if (!raw) return null

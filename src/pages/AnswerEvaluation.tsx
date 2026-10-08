@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   CheckCircle2, Clock3, FileCheck2, MessageCircle, Save, ShieldCheck, Trash2,
 } from 'lucide-react'
@@ -154,6 +154,7 @@ export default function AnswerEvaluation() {
             <p className="mt-0.5 text-xs text-muted-foreground">Manual review, feedback and improvement guidance.</p>
           </div>
         </section>
+        <p className="text-sm leading-7 text-muted-foreground">Already received mentor marks? <Link to="/account/answer-performance" className="font-semibold text-pine underline">Record them in My Answer Performance</Link>.</p>
         <section className="grid gap-3 sm:grid-cols-3">
           <div className="vista-card p-4">
             <FileCheck2 className="h-5 w-5 text-emerald-800" />

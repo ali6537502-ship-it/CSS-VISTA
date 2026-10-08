@@ -1,0 +1,8 @@
+<?php
+declare(strict_types=1);
+// Synthetic source for disposable tests only. Never packaged as production content.
+function cssv_test_topic(string $id='test-only-native-topic'): array {
+    $questions=[];
+    foreach(['learn','revision'] as $mode)for($i=0;$i<3;$i++)$questions[]=['id'=>$mode.'-'.($i+1),'mode'=>$mode,'prompt'=>'TEST ONLY: choose marker '.($i+1).' for '.$mode.' check.','options'=>['TEST ONLY marker 1','TEST ONLY marker 2','TEST ONLY marker 3','TEST ONLY marker 4'],'answer'=>$i,'explanation'=>'TEST ONLY: this fixture tests fixed answer checking, not real examination content.','section_id'=>'concept-'.($i+1),'reference_ids'=>['fixture-source']];
+    return ['id'=>$id,'title'=>'TEST ONLY native source module','summary'=>'TEST ONLY private module for source versions, access and learning evidence.','category'=>'governance','author'=>'TEST ONLY fixture author','as_of'=>'2001-02-03','sources'=>[['title'=>'TEST ONLY owner-source fixture','sha256'=>hash('sha256','TEST ONLY actual fixture bytes'),'pages'=>[1,2,3]]],'subjects'=>['pakistan-affairs'],'sections'=>array_map(fn($i)=>['id'=>'concept-'.$i,'title'=>'TEST ONLY concept '.$i,'kind'=>$i===1?'overview':'concept-builder','blocks'=>['TEST ONLY: these fixture markers verify native learning mechanics and are not published educational claims.'],'reference_ids'=>['fixture-source']],[1,2,3]),'references'=>[['id'=>'fixture-source','label'=>'TEST ONLY verification fixture','url'=>'https://example.invalid/test-only/source','accessed_on'=>'2001-02-03','document_date'=>null]],'questions'=>$questions,'practice'=>['prompt'=>'TEST ONLY: write your own fixture text.','focus'=>'TEST ONLY native draft persistence.','min_words'=>50,'max_words'=>200]];
+}

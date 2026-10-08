@@ -71,6 +71,14 @@ const AccountTasks = lazy(() => import('./pages/account/Tasks'))
 const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
 const AccountResources = lazy(() => import('./pages/account/Resources'))
+const AccountExpression = lazy(() => import('./pages/account/Expression'))
+const AccountPrecis = lazy(() => import('./pages/account/Precis'))
+const AccountHandwriting = lazy(() => import('./pages/account/Handwriting'))
+const AccountTutor = lazy(() => import('./pages/account/Tutor'))
+const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerformance'))
+const AccountLearning = lazy(() => import('./pages/account/Learning'))
+const AccountAiUsage = lazy(() => import('./pages/account/AiUsage'))
+const AccountMembership = lazy(() => import('./pages/account/Membership'))
 const AccountLibrary = lazy(() => import('./pages/account/Library'))
 const AccountVistagram = lazy(() => import('./pages/account/Vistagram'))
 const MptArea = lazy(() => import('./pages/mpt/MptArea'))
@@ -197,6 +205,14 @@ export default function App() {
         <Route path="/account/progress" element={<ProfileGate><S><AccountProgress /></S></ProfileGate>} />
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
+        <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><S><AccountPrecis /></S></ProfileGate>} />
+        <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
+        <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />
+        <Route path="/account/answer-performance" element={<ProfileGate><S><AccountAnswerPerformance /></S></ProfileGate>} />
+        <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
+        <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
+        <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />
         <Route path="/account/library" element={<ProfileGate><S><AccountLibrary /></S></ProfileGate>} />
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;

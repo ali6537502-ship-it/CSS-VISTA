@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ComponentType, type CSSProperties } 
 import { Link } from 'react-router'
 import { ArrowRight, BookOpen, Bookmark, CalendarCheck2, ClipboardCheck, FolderOpen, Languages, ListTree, Newspaper, Sparkles, Target, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
+import MembershipSummary from '@/features/membership/MembershipSummary'
 import { getState, getStats } from '@/lib/store'
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
@@ -139,6 +140,8 @@ export default function AccountHome() {
 
   const mptFlow = useMptFlowEnabled() === true
   const choices = [
+    { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'CSS attempt settings & saved writing' },
+    { to: '/account/preparation?view=topics', icon: BookOpen, title: 'Pro Topic Learning', status: 'Pakistan & Current Affairs · lessons, practice & revision' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
@@ -199,6 +202,8 @@ export default function AccountHome() {
             My profile
           </Link>
         </header>
+
+        <MembershipSummary />
 
         <DashboardMptCard />
 

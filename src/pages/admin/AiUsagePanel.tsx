@@ -1,0 +1,19 @@
+import { useEffect, useState } from 'react'
+import { ownerRequest } from '@/lib/hostingerApi'
+import { featureNames, inputStyle, secondaryStyle } from '@/features/learning/api'
+type Report = { totals: Record<string, number | null>; features: { feature: string; accepted: number; provider_calls: number }[]; accounts: { user_id: string; display_name: string; provider_calls: number }[]; pro_users_in_period: number; calls_per_pro_user: number | null; cost_status: string }
+export default function AiUsagePanel() {
+  const [period, setPeriod] = useState('day'), [version, setVersion] = useState(0)
+  const [data, setData] = useState<Report>(), [error, setError] = useState('')
+  useEffect(() => {
+    const controller = new AbortController()
+    void ownerRequest<Report>(`admin/ai-usage.php?period=${period}`, { signal: controller.signal }).then(value => { if (!controller.signal.aborted) { setData(value); setError('') } }).catch(cause => { if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : 'Usage report unavailable.') })
+    return () => controller.abort()
+  }, [period, version])
+  return <main className="mx-auto max-w-5xl space-y-6 px-4 py-8"><h1 className="text-2xl font-bold">AI usage administration</h1><p className="max-w-2xl text-sm leading-7 text-slate-600">Usage reports show recorded operations and reported tokens. Student writing and page images remain private.</p><div className="flex flex-wrap items-end gap-3"><label className="grid gap-2 text-sm font-semibold">Pakistan-time reporting period<select value={period} onChange={e => { setPeriod(e.target.value); setData(undefined) }} className={inputStyle}><option value="day">Today</option><option value="month">This month</option></select></label><button className={secondaryStyle} onClick={() => setVersion(v => v + 1)}>Refresh report</button></div>{error && <p role="alert" className="text-red-800">{error}</p>}{!data && !error && <p role="status">Loading usage report…</p>}{data && <>
+    <dl className="grid gap-4 sm:grid-cols-3">{[['accepted', 'Accepted operations'], ['provider_calls', 'Provider dispatches'], ['succeeded', 'Successful results'], ['failed', 'Known failures'], ['pending', 'Pending / unknown'], ['input_tokens', 'Reported input tokens'], ['cached_tokens', 'Reported cached tokens'], ['output_tokens', 'Reported output tokens'], ['calls_without_token_report', 'Dispatches without token report']].map(([key, label]) => <div key={key} className="rounded-xl border p-4"><dt className="text-sm text-slate-500">{label}</dt><dd className="mt-2 text-xl font-semibold">{data.totals[key] ?? 'Unavailable'}</dd></div>)}</dl>
+    <p className="rounded-xl border p-4 text-sm leading-7">{data.cost_status} Pro members with a credited period in this reporting window: {data.pro_users_in_period}. Average dispatches per such member: {data.calls_per_pro_user === null ? 'Unavailable' : data.calls_per_pro_user.toFixed(2)}.</p>
+    <section><h2 className="font-semibold">Feature use</h2>{data.features.length === 0 ? <p className="mt-3 text-sm text-slate-500">No operations in this reporting period.</p> : <ul className="mt-3 divide-y rounded-xl border">{data.features.map(row => <li key={row.feature} className="flex flex-wrap justify-between gap-3 p-4 text-sm"><span>{featureNames[row.feature] || row.feature}</span><span>{row.provider_calls} dispatches · {row.accepted} accepted</span></li>)}</ul>}</section>
+    <section><h2 className="font-semibold">Accounts with most dispatches</h2>{data.accounts.length === 0 ? <p className="mt-3 text-sm text-slate-500">No account usage to report.</p> : <ul className="mt-3 divide-y rounded-xl border">{data.accounts.map(row => <li key={row.user_id} className="flex flex-wrap justify-between gap-3 p-4 text-sm"><span className="min-w-0 break-all">{row.display_name || 'Member'} · {row.user_id}</span><span>{row.provider_calls} dispatches</span></li>)}</ul>}</section>
+  </>}</main>
+}

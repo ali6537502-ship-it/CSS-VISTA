@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import {
   BookOpen, ChevronLeft, ChevronRight, Languages, Search,
 } from 'lucide-react'
@@ -41,13 +41,11 @@ export default function LanguageGrammar() {
     let active = true
     setCourse(null)
     setError('')
-    setQuery('')
-    setPage(1)
     getGrammarCourse(language)
       .then((data) => {
         if (!active) return
         setCourse(data)
-        setTopicSlug(data.topics[0]?.slug ?? '')
+        setTopicSlug(current => data.topics.some(topic => topic.slug === current) ? current : data.topics[0]?.slug ?? '')
       })
       .catch(() => active && setError('This grammar course could not be loaded. Please refresh and try again.'))
     return () => { active = false }
@@ -82,7 +80,11 @@ export default function LanguageGrammar() {
   const showMasterCourse = language === 'english' && searchParams.get('view') === 'master-course'
 
   function selectLanguage(next: Language) {
+    if (next === language) return
     setLanguage(next)
+    setTopicSlug('')
+    setQuery('')
+    setPage(1)
     // Switching language used to replace the whole param set, which silently
     // dropped `view` and threw the student out of the 30-day course.
     const params = new URLSearchParams(searchParams)
@@ -102,12 +104,28 @@ export default function LanguageGrammar() {
 
   if (showMasterCourse) return <MasterGrammarCourse />
 
+  const returnDay = searchParams.get('return_day')
+  const back = new URLSearchParams()
+  const attempt = searchParams.get('attempt')
+  if (attempt && /^[a-f0-9-]{36}$/i.test(attempt)) back.set('attempt', attempt)
+  if (returnDay && /^(?:[1-9]|[12][0-9]|30)$/.test(returnDay)) back.set('day', returnDay)
+  if (['expression', 'precis', 'lab'].includes(searchParams.get('from') || '')) {
+    back.set('from', searchParams.get('from')!)
+    if (['expression', 'precis'].includes(searchParams.get('origin') || '')) back.set('origin', searchParams.get('origin')!)
+    for (const key of ['writing', 'version']) {
+      const value = searchParams.get(key)
+      if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value)
+    }
+  }
+
   return (
     <div>
       <PageHeader
         title="Urdu & English Grammar"
         description="Grammar rules and reference material for Urdu and English, with a separate 30-day English practice course."
-      />
+      >
+        {back.has('day') && <Link to={`/grammar-course?${back}`} className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border border-indigo-200 bg-white px-4 text-sm font-semibold text-indigo-700"><ChevronLeft className="h-4 w-4" aria-hidden="true" />Return to Day {returnDay} session</Link>}
+      </PageHeader>
 
       <main className="mx-auto max-w-7xl px-4 py-7 sm:py-9">
         <section className="grid gap-3 sm:grid-cols-2" aria-label="Choose language course">
