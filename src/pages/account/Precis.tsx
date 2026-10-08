@@ -15,6 +15,7 @@ import Course from '@/features/precis/Course'
 import Practice, { SkillProfile } from '@/features/precis/Practice'
 import Composer from '@/features/precis/Composer'
 import History from '@/features/precis/History'
+import Feedback, { WritingEvidence } from '@/features/precis/Feedback'
 import type { Detail, Overview, Progress } from '@/features/precis/api'
 const views = [
   ['home', 'Overview'],
@@ -100,10 +101,13 @@ function Workspace() {
           </div>
           <div className="self-center rounded-2xl border border-white/15 p-5">
             <p className="text-xs text-slate-300">Full evaluation</p>
-            <p className="mt-3 text-xl font-semibold">Not open yet</p>
+            <p className="mt-3 text-xl font-semibold">
+              {data.evaluation_enabled ? 'Source-bound feedback' : 'Not open yet'}
+            </p>
             <p className="mt-3 text-xs leading-6 text-slate-300">
-              Use the course, drills and saved drafts now. Personal meaning and title feedback is
-              not available yet.
+              {data.evaluation_enabled
+                ? 'Save your own draft, review its evidence, then revise independently.'
+                : 'Use the course, drills and saved drafts now. Personal meaning and title feedback is not open yet.'}
             </p>
           </div>
         </div>
@@ -207,6 +211,7 @@ function Workspace() {
             key={detail.data.version.id}
             detail={detail.data}
             rubric={data.rubric}
+            skills={data.skills}
             active={active}
             refresh={() => {
               detail.refresh()
@@ -214,16 +219,24 @@ function Workspace() {
             }}
             onVersion={(id) => setParams({ writing, version: id })}
           />
+          <Feedback
+            key={`feedback:${detail.data.version.id}`}
+            detail={detail.data}
+            skills={data.skills}
+            active={active}
+          />
           {active && (
-            <Composer
-              key={`${writing}:${detail.data.version.id}`}
-              data={data}
-              attempt={detail.data.writing.attempt_id}
-              source={detail.data.source}
-              detail={detail.data}
-              timed={false}
-              onSaved={saved}
-            />
+            <div id="precis-rewrite" tabIndex={-1} className="scroll-mt-24">
+              <Composer
+                key={`${writing}:${detail.data.version.id}`}
+                data={data}
+                attempt={detail.data.writing.attempt_id}
+                source={detail.data.source}
+                detail={detail.data}
+                timed={false}
+                onSaved={saved}
+              />
+            </div>
           )}
         </>
       ) : active && view === 'course' ? (
@@ -351,6 +364,9 @@ function Workspace() {
             </nav>
           </section>
         </>
+      )}
+      {!writing && (view === 'home' || !active) && attempt && (
+        <WritingEvidence key={attempt} attempt={attempt} />
       )}
       {!writing && (view === 'home' || !active) && progress.data && (
         <SkillProfile progress={progress.data} attempt={attempt} />

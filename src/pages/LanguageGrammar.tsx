@@ -109,9 +109,9 @@ export default function LanguageGrammar() {
   const attempt = searchParams.get('attempt')
   if (attempt && /^[a-f0-9-]{36}$/i.test(attempt)) back.set('attempt', attempt)
   if (returnDay && /^(?:[1-9]|[12][0-9]|30)$/.test(returnDay)) back.set('day', returnDay)
-  if (searchParams.get('from') === 'expression' || searchParams.get('from') === 'lab') {
+  if (['expression', 'precis', 'lab'].includes(searchParams.get('from') || '')) {
     back.set('from', searchParams.get('from')!)
-    if (searchParams.get('origin') === 'expression') back.set('origin', 'expression')
+    if (['expression', 'precis'].includes(searchParams.get('origin') || '')) back.set('origin', searchParams.get('origin')!)
     for (const key of ['writing', 'version']) {
       const value = searchParams.get(key)
       if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value)

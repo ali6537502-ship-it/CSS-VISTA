@@ -84,8 +84,8 @@
     "test:expression-security": "node tests/expression/security.mjs",
     "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check",
     "test:precis": "node --test tests/precis.test.ts",
-    "test:precis-server": "php tests/precis/unit.php",
-    "test:precis-security": "node tests/precis/security.mjs"
+    "test:precis-server": "php tests/precis/unit.php && php tests/precis/feedback-unit.php",
+    "test:precis-security": "node tests/precis/security.mjs && node tests/precis/feedback-security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

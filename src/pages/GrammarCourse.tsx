@@ -161,7 +161,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
   const referenceParams = new URLSearchParams({ lang: 'english', return_day: String(day) })
   if (attemptId) referenceParams.set('attempt', attemptId)
   if (referenceTopics[day]) referenceParams.set('topic', referenceTopics[day])
-  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : 'expression'); if (source.searchParams.get('from') === 'expression') referenceParams.set('origin', 'expression'); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
+  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : source.pathname === '/account/precis' ? 'precis' : 'expression'); if (['expression','precis'].includes(source.searchParams.get('from') || '')) referenceParams.set('origin', source.searchParams.get('from')!); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
   const latestAttempt = state.attempts.filter(a => a.day === day).at(-1)
 
   const bestScore = state.scores[String(day)]
@@ -174,7 +174,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
         description={view === 'lab' ? 'Focused practice, mixed questions and scheduled revision built from the existing course.' : 'Learn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped.'}
       >
         <div className="mt-4 flex flex-wrap gap-2">
-          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />{returnTo.startsWith('/grammar-course') ? 'Return to Error Lab' : 'Return to Expression Lab'}</Link>}
+          {returnTo && <Link to={returnTo} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><ChevronLeft className="h-3.5 w-3.5" aria-hidden="true" />{returnTo.startsWith('/grammar-course') ? 'Return to Error Lab' : returnTo.startsWith('/account/precis') ? 'Return to Précis Lab' : 'Return to Expression Lab'}</Link>}
           <button type="button" onClick={() => setView('toolkit')} className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><Wrench className="h-3.5 w-3.5" /> Grammar toolkit</button>
           <Link to="/grammar-vocabulary" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><BookOpen className="h-3.5 w-3.5" /> Vocabulary practice</Link>
           <Link to="/books" className="inline-flex min-h-11 items-center gap-1.5 rounded-md border border-indigo-200 bg-white px-3 text-xs font-semibold text-slate-900 hover:bg-secondary"><FileText className="h-3.5 w-3.5" /> Handbook PDFs</Link>
@@ -667,11 +667,12 @@ export default function GrammarCourse() {
   if (writing && idPattern.test(writing)) back.set('writing', writing)
   if (version && idPattern.test(version)) back.set('version', version)
   const fromLab = params.get('from') === 'lab'
+  const fromPrecis = params.get('from') === 'precis' || fromLab && params.get('origin') === 'precis'
   const fromExpression = params.get('from') === 'expression' || fromLab && params.get('origin') === 'expression'
   const labParams = new URLSearchParams({ view: 'lab' })
   if (attemptId) labParams.set('attempt', attemptId)
-  if (fromExpression) { labParams.set('from', 'expression'); for (const [key, value] of back) labParams.set(key, value) }
-  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
+  if (fromPrecis || fromExpression) { labParams.set('from', fromPrecis ? 'precis' : 'expression'); for (const [key, value] of back) labParams.set(key, value) }
+  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromPrecis ? `/account/precis${back.size ? `?${back}` : ''}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
   const requestedView = params.get('view')
   const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' || requestedView === 'profile' ? requestedView : 'course'
   const panel = user && !loading ? <section className="mb-6 rounded-2xl border border-indigo-200 bg-white p-5" aria-label="Grammar preparation attempt">
@@ -687,7 +688,7 @@ export default function GrammarCourse() {
   const props: ViewProps = { initialDay, initialView, returnTo, userId: loading ? 'pending' : user?.id, loading, attemptId, accountPanel: panel,
     onDayChange: day => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); next.set('day', String(day)); next.delete('view'); setParams(next, { replace: true }) },
     onViewChange: view => { const next = new URLSearchParams(params); if (attemptId) next.set('attempt', attemptId); if (view === 'course') next.delete('view'); else next.set('view', view); setParams(next, { replace: true }) },
-    lessonLink: day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (attemptId) next.set('attempt', attemptId); if (fromExpression) { next.set('origin', 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` },
+    lessonLink: day => { const next = new URLSearchParams({ day: String(day), from: 'lab' }); if (attemptId) next.set('attempt', attemptId); if (fromPrecis || fromExpression) { next.set('origin', fromPrecis ? 'precis' : 'expression'); for (const [key, value] of back) next.set(key, value) }; return `/grammar-course?${next}` },
   }
   return user && !loading && attemptId ? <AttemptGrammarCourse key={`${user.id}:${attemptId}`} {...props} userId={user.id} attemptId={attemptId} /> : <GrammarCourseView key={`${loading ? 'pending' : user?.id ?? 'guest'}:${initialDay || 'saved'}:${returnTo || ''}`} {...props} />
 }

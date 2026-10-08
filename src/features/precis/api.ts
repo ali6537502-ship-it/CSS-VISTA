@@ -35,7 +35,7 @@ export type Overview = {
   has_more_attempts: boolean
   writing: { id: string; attempt_id: string; title: string; version: number; updated_at: string }[]
   has_more: boolean
-  evaluation_enabled: false
+  evaluation_enabled: boolean
   catalog: {
     chapters: Chapter[]
     passages: Passage[]
@@ -119,4 +119,82 @@ export function draftKey(
   version?: string,
 ) {
   return `precis:v1:${user}:${attempt}:${writing || 'new'}:${version || 'new'}:${passage}`
+}
+
+export type Criterion = {
+  skill: string
+  status: 'needs_work' | 'supported' | 'not_assessed'
+  source_excerpt: string
+  student_excerpt: string
+  explanation: string
+  hint: string
+}
+export type PrecisFeedback = {
+  summary: string
+  findings: { code: string; severity: string; excerpt: string; explanation: string; hint: string }[]
+  skills: Criterion[]
+  central_idea_note: {
+    status: string
+    source_excerpt: string
+    note_excerpt: string
+    explanation: string
+    hint: string
+  }
+}
+export type FeedbackOperation = {
+  id: string
+  version_id: string
+  state: string
+  accounting: string
+  created_at: string
+  result: PrecisFeedback | null
+}
+export type FeedbackData = {
+  grammar_skills: Record<string, { label: string; day: number }>
+  configuration: {
+    enabled: boolean
+    policy_version: string | null
+    processing_notice: string | null
+    max_source_words: number
+    max_draft_words: number
+    max_draft_characters: number
+  }
+  date: string
+  reset_at: string
+  usage: { limit: number; used: number; reserved: number; accepted: number }
+  feedback: PrecisFeedback | null
+  operations: FeedbackOperation[]
+}
+export type FeedbackComparison = {
+  grammar_skills: Record<string, { label: string; day: number }>
+  comparison: {
+    available: boolean
+    skills: { skill: string; label: string; before: string; after: string }[]
+    no_longer_reported: string[]
+    still_reported: string[]
+    newly_reported: string[]
+  }
+}
+export type WritingProfile = {
+  profile: {
+    items: {
+      skill: string
+      label: string
+      state: string
+      flagged_sources: number
+      assessed_sources: number
+    }[]
+    reviewed_sources: number
+    basis: string
+    window_days: number
+    sample_limit: number
+  }
+}
+export const feedbackStatus: Record<string, string> = {
+  needs_work: 'Needs work',
+  supported: 'Supported in this draft',
+  not_assessed: 'Not assessed',
+}
+export function precisGrammarLink(day: number, writing: string, version: string, attempt: string) {
+  return `/grammar-course?${new URLSearchParams({ day: String(day), from: 'precis', writing, version, attempt })}`
 }

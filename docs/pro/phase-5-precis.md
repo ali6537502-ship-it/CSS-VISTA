@@ -1,6 +1,6 @@
 # Phase 5A — handbook course and independent Précis practice
 
-Implemented in draft PR #78. Not merged, deployed or commercially launched. This is the first complete Précis increment; source-bound personal evaluation is the next increment, not an implemented capability here.
+Implemented in draft PR #78. Not merged, deployed or commercially launched. This documents the first complete Précis increment. The subsequent [Phase 5B](phase-5-precis-feedback.md) implements source-bound personal evaluation with live AI still disabled; the historical boundaries below describe Phase 5A itself.
 
 ## Source and pedagogy
 

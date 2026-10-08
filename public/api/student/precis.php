@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-require_once dirname(__DIR__).'/_bootstrap.php';require_once dirname(__DIR__).'/_precis.php';
+require_once dirname(__DIR__).'/_bootstrap.php';require_once dirname(__DIR__).'/_precis_feedback.php';
 cssv_require_method('GET','POST');
 try{
- $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_precis_ensure($pdo);
+ $pdo=cssv_db();$session=cssv_require_user($pdo);$user=(string)$session['user_id'];if($_SERVER['REQUEST_METHOD']==='POST')cssv_require_csrf($session);cssv_precis_feedback_ensure($pdo);
  if($_SERVER['REQUEST_METHOD']==='POST'){cssv_enforce_rate_limit($pdo,'precis_write',$user,240,3600);cssv_log_security_event($pdo,'precis_write',$user,$user);cssv_json(['ok'=>true,...cssv_precis_mutation($pdo,$user,cssv_request_json(120000))]);}
  if(isset($_GET['writing_id']))cssv_json(['ok'=>true,...cssv_precis_detail($pdo,$user,cssv_pro_id($_GET['writing_id']),isset($_GET['version_id'])?cssv_pro_id($_GET['version_id']):null)]);
  if(isset($_GET['attempt_id']))cssv_json(['ok'=>true,...cssv_precis_progress($pdo,$user,cssv_pro_id($_GET['attempt_id']))]);
@@ -13,7 +13,7 @@ try{
  foreach($writing as &$row){$row['version']=(int)$row['version'];$row['updated_at']=cssv_pro_iso($row['updated_at']);}unset($row);
  $q=$pdo->prepare('SELECT id,target_year FROM preparation_attempts WHERE user_id=? ORDER BY updated_at DESC LIMIT 1001');$q->execute([$user]);$attempts=$q->fetchAll();$attemptMore=count($attempts)>1000;
  foreach($attempts as &$row)$row['target_year']=(int)$row['target_year'];unset($row);
- cssv_json(['ok'=>true,'membership'=>$membership,'course'=>cssv_precis_course(),'rubric'=>cssv_precis_rubric(),'skills'=>cssv_precis_skills(),'attempts'=>array_slice($attempts,0,1000),'has_more_attempts'=>$attemptMore,'writing'=>$writing,'has_more'=>$more,'catalog'=>$active?cssv_precis_catalog():null,'evaluation_enabled'=>false]);
+ cssv_json(['ok'=>true,'membership'=>$membership,'course'=>cssv_precis_course(),'rubric'=>cssv_precis_rubric(),'skills'=>cssv_precis_skills(),'attempts'=>array_slice($attempts,0,1000),'has_more_attempts'=>$attemptMore,'writing'=>$writing,'has_more'=>$more,'catalog'=>$active?cssv_precis_catalog():null,'evaluation_enabled'=>cssv_precis_feedback_configuration()['enabled']]);
 }catch(Throwable $e){
  if($e instanceof InvalidArgumentException)cssv_fail($e->getMessage(),422,'precis_invalid');
  if($e instanceof OutOfBoundsException)cssv_fail($e->getMessage(),404,'precis_not_found');

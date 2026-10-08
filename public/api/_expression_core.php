@@ -42,7 +42,7 @@ function cssv_expression_profile(array $rows): array {
  foreach(cssv_expression_skills() as $code=>$skill){
   $affected=[];$records=[];$lastReported=null;
   foreach($samples as $row){
-   if(in_array($code,['weak_topic_sentence','coherence','weak_transition'],true) && $row['kind']!=='paragraph')continue;
+   if(in_array($code,['weak_topic_sentence','coherence','weak_transition'],true) && !in_array($row['kind'],['paragraph','precis'],true))continue;
    $flagged=in_array($code,array_column($row['result']['findings'],'code'),true);
    if(!isset($records[$row['writing_id']]))$records[$row['writing_id']]=$flagged;
    if($flagged){$affected[$row['writing_id']]=true;$lastReported ??=$row['created_at'];}
