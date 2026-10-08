@@ -1,6 +1,6 @@
 // Public figures for the shipped GK World bank.
 // Keep these in sync with public/mcq/index.json whenever the bank is regenerated.
-export const SHIPPED_MCQ_TOTAL = 37_546
+export const SHIPPED_MCQ_TOTAL = 37_572
 export const SHIPPED_MCQ_CATEGORY_COUNT = 42
 
 export const shippedMcqSummary =
