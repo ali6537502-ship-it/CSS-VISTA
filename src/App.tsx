@@ -72,6 +72,7 @@ const AccountProgress = lazy(() => import('./pages/account/Progress'))
 const AccountEnglish = lazy(() => import('./pages/account/English'))
 const AccountResources = lazy(() => import('./pages/account/Resources'))
 const AccountExpression = lazy(() => import('./pages/account/Expression'))
+const AccountPrecis = lazy(() => import('./pages/account/Precis'))
 const AccountHandwriting = lazy(() => import('./pages/account/Handwriting'))
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
 const AccountAiUsage = lazy(() => import('./pages/account/AiUsage'))
@@ -203,6 +204,7 @@ export default function App() {
         <Route path="/account/english" element={<ProfileGate><S><AccountEnglish /></S></ProfileGate>} />
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
+        <Route path="/account/precis" element={<ProfileGate><S><AccountPrecis /></S></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
         <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />

@@ -14,6 +14,8 @@ check(cssv_pro_status(['expires_at'=>'2026-01-31 12:00:00.000001'],$now)==='acti
 check(cssv_pro_period(new DateTimeImmutable('2026-01-31T17:00:00+05:00'),null)===$first,'Pakistan time normalizes to UTC');
 foreach (['https://evil.invalid','//evil.invalid','/grammar-course?redirect=evil','/account/admin','/grammar-course#x',null] as $bad) check(cssv_pro_destination($bad)==='/account/dashboard','Reject unsupported return destination');
 check(cssv_pro_destination('/grammar-course')==='/grammar-course','Keep supported learning destination');
+check(cssv_pro_destination('/account/precis')==='/account/precis','Keep the new private Précis destination');
+check(cssv_pro_destination('/account/precis?redirect=evil')==='/account/dashboard','Do not widen the Précis return to arbitrary queries');
 check(cssv_pro_transaction(' abc-123 ') === 'ABC-123','Transaction normalization');
 foreach (['<script>',123,'abc',str_repeat('a',81)] as $bad) { try { cssv_pro_transaction($bad); throw new RuntimeException('Invalid transaction accepted'); } catch (InvalidArgumentException) {} }
 try { cssv_pro_fields(['user_id'=>'evil'],['action']); throw new RuntimeException('Unexpected field accepted'); } catch (InvalidArgumentException) {}

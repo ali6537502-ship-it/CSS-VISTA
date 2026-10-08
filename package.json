@@ -63,7 +63,7 @@
     "audit:optional-notes": "python3 scripts/import_optional_notes.py --check",
     "audit:links": "node scripts/audit-internal-links.mjs",
     "audit:duplicates": "node scripts/audit-duplicate-content.mjs",
-    "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:css-eligibility && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes && npm run test:grammar",
+    "test:all": "npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:css-eligibility && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes && npm run test:grammar && npm run test:precis",
     "generate:book-catalogue": "node scripts/generate-book-catalogue.mjs",
     "audit:book-catalogue": "node scripts/generate-book-catalogue.mjs --check",
     "package:vistagram": "node scripts/package-vistagram.mjs",
@@ -82,7 +82,10 @@
     "test:handwriting-security": "node tests/handwriting/security.mjs",
     "test:expression-server": "php tests/expression/unit.php",
     "test:expression-security": "node tests/expression/security.mjs",
-    "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check"
+    "test:grammar": "node --test tests/grammarState.test.ts tests/grammarPractice.test.ts tests/grammarSync.test.ts && node tests/pro/grammar-preservation.mjs && node scripts/grammar/export-catalog.mjs --check",
+    "test:precis": "node --test tests/precis.test.ts",
+    "test:precis-server": "php tests/precis/unit.php",
+    "test:precis-security": "node tests/precis/security.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

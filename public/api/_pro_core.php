@@ -19,7 +19,7 @@ function cssv_pro_status(?array $membership, DateTimeImmutable $now): string
 function cssv_pro_destination(mixed $value): string
 {
     // Only approved learning destinations. Never arbitrary URLs/query/fragment.
-    $allowed = ['/account/dashboard','/account/english','/account/mpt','/grammar-course','/language-grammar','/current-affairs','/vistagram'];
+    $allowed = ['/account/dashboard','/account/english','/account/mpt','/account/precis','/grammar-course','/language-grammar','/current-affairs','/vistagram'];
     return is_string($value) && in_array($value, $allowed, true) ? $value : '/account/dashboard';
 }
 

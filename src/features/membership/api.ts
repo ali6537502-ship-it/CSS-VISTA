@@ -13,7 +13,7 @@ export type OrderResponse = { order: Order; membership: Membership; collection_e
 export const statusLabels: Record<OrderStatus, string> = { awaiting_payment: 'Awaiting payment', awaiting_verification: 'Payment awaiting verification', approved: 'Approved', rejected: 'Rejected — action required', cancelled: 'Cancelled' }
 export function money(minor: number | null) { return minor === null ? 'Price unavailable' : new Intl.NumberFormat('en-PK', { style: 'currency', currency: 'PKR', maximumFractionDigits: 2 }).format(minor / 100) }
 export function pakistanTime(value: string | null) { return value ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Karachi', dateStyle: 'medium', timeStyle: 'medium' }).format(new Date(value)) + ' PKT' : '—' }
-const destinations = ['/account/dashboard', '/account/english', '/account/mpt', '/grammar-course', '/language-grammar', '/current-affairs', '/vistagram']
+const destinations = ['/account/dashboard', '/account/english', '/account/mpt', '/account/precis', '/grammar-course', '/language-grammar', '/current-affairs', '/vistagram']
 export function learningDestination(value: string | null) { return value && destinations.includes(value) ? value : '/account/dashboard' }
 
 export async function membershipRequest<T>(userId: string, query = '', body?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {

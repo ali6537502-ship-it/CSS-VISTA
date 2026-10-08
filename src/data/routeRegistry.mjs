@@ -176,6 +176,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/resources', 'My Vista Resources', 'Free book downloads for students with a 100% complete profile.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/expression', 'English Expression Lab', 'Your private sentence and paragraph writing, feedback and revisions.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/precis', 'Précis Mastery Lab', 'Your private handbook-based Précis course, sourced drafts and revision history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/handwriting', 'Handwritten Paragraph', 'Your private handwritten paragraph and confirmed writing history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/preparation', 'My Preparation', 'Your account-owned preparation attempts and saved writing.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/ai-usage', 'AI Usage', 'Your private usage and operation history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
