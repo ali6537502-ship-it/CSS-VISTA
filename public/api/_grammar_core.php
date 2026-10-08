@@ -93,18 +93,19 @@ function cssv_grammar_history(array $previous,array $next): array {
 function cssv_grammar_profile(array $s,array $evidence,array $writing,int $now): array {
  $items=[];$totals=['questions'=>0,'correct'=>0,'due'=>0,'completed'=>count($s['completed'] ?? [])];
  foreach(cssv_grammar_catalog() as $d){
-  $questions=array_merge($d['warmUp'],$d['drill']);$answered=0;$correct=0;$due=0;$unresolved=0;$spaced=0;
-  foreach($questions as $q){$id=$q['id'];if(array_key_exists($id,$evidence)){$answered++;if($evidence[$id]===$q['answer'])$correct++;}
-   $r=$s['reviews'][$id] ?? null;$missed=in_array($id,$s['mistakes'] ?? [],true) || ($r['lapses'] ?? 0)>0;
+  $questions=array_merge($d['warmUp'],$d['drill']);$answered=0;$correct=0;$due=0;$unresolved=0;$spaced=0;$demonstrated=0;
+  foreach($questions as $q){$id=$q['id'];$r=$s['reviews'][$id] ?? null;$seen=array_key_exists($id,$evidence);$firstCorrect=$seen && $evidence[$id]===$q['answer'];
+   if($seen){$answered++;if($firstCorrect)$correct++;if($firstCorrect || ($r['streak'] ?? 0)>=2)$demonstrated++;}
+   $missed=$seen && !$firstCorrect || in_array($id,$s['mistakes'] ?? [],true) || ($r['lapses'] ?? 0)>0;
    if($r && $r['dueAt']<=$now || !$r && in_array($id,$s['mistakes'] ?? [],true))$due++;
    if($missed && ($r['streak'] ?? 0)<2)$unresolved++;if(($r['streak'] ?? 0)>=2)$spaced++;
   }
   $findings=array_values(array_filter($writing['items'],fn($item)=>$item['day']===$d['day']));$weak=count(array_filter($findings,fn($i)=>$i['state']==='Weak'))>0;
   $started=isset($s['sessions'][(string)$d['day']]) || in_array($d['day'],$s['completed'] ?? [],true);
   $status=$answered?'Practising':($started?'Learning':'Not started');
-  if($unresolved || $weak || $answered>=8 && ($answered-$correct)/$answered>=0.3)$status='Needs review';
-  elseif($answered>=8 && $correct/$answered>=0.7 && $spaced>=3)$status='Improving';
-  $items[]=['day'=>$d['day'],'title'=>$d['title'],'phase'=>$d['phase'],'state'=>$status,'answered'=>$answered,'correct'=>$correct,'available'=>count($questions),'due'=>$due,'unresolved'=>$unresolved,'spaced_questions'=>$spaced,'completed'=>in_array($d['day'],$s['completed'] ?? [],true),'writing'=>$findings];
+  if($unresolved || $weak)$status='Needs review';
+  elseif($answered>=8 && $demonstrated/$answered>=0.7 && $spaced>=3)$status='Improving';
+  $items[]=['day'=>$d['day'],'title'=>$d['title'],'phase'=>$d['phase'],'state'=>$status,'answered'=>$answered,'correct'=>$correct,'available'=>count($questions),'due'=>$due,'unresolved'=>$unresolved,'spaced_questions'=>$spaced,'demonstrated_questions'=>$demonstrated,'completed'=>in_array($d['day'],$s['completed'] ?? [],true),'writing'=>$findings];
   foreach(['questions'=>$answered,'correct'=>$correct,'due'=>$due] as $key=>$n)$totals[$key]+=$n;
  }
  return ['rule_version'=>'grammar-self-practice-v1','items'=>$items,'totals'=>$totals,'writing'=>$writing,'basis'=>'First-seen daily-drill and Error Lab responses to distinct authored questions in this attempt. Course restarts and retries do not increase this accuracy. Imported work and revision schedules are self-reported practice; independent writing feedback is shown separately. Stable and Mastered are withheld until calibrated independent assessment is available.'];
