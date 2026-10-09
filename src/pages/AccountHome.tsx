@@ -171,6 +171,7 @@ export default function AccountHome() {
     // Official MPT Mocks (docs/mpt). Shown only while the application flow is on,
     // so the tile never leads to an unavailable page.
     ...(mptFlow ? [{ to: '/account/mpt', icon: ClipboardCheck, title: 'MPT Mocks', status: '2:00 PM, 6:00 PM & 10:30 PM daily · apply, Roll Number, result card' }] : []),
+    ...(mptFlow ? [{ to: '/account/mpt/question-bank', icon: BookOpen, title: 'Previous MPT Mocks', status: 'All completed official papers · review and practise free' }] : []),
     {
       to: '/fpsc-syllabus', icon: BookOpen, title: 'My Syllabus',
       status: syllabusPercent ? `${syllabusPercent}% complete` : 'Mark your first topic',
