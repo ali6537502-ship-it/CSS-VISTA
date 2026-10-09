@@ -187,7 +187,6 @@ export type MptQuestionBankMock = {
 }
 
 export type MptQuestionBank = {
-  has_participation: boolean
   mocks: MptQuestionBankMock[]
   server_time: string
 }

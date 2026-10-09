@@ -143,13 +143,19 @@ for (const [label, viewport] of [['mobile', { width: 375, height: 800 }], ['desk
   await page.screenshot({ path: `${shots}/${label}-07b-wrong-answers.png`, fullPage: true })
 
   await page.goto(`${origin}/account/mpt`)
-  await page.getByRole('heading', { name: 'Previous MPT Question Bank' }).waitFor()
-  await page.getByRole('link', { name: 'Open Question Bank' }).click()
-  await page.getByRole('heading', { level: 1, name: 'Previous MPT Question Bank' }).waitFor()
-  await page.getByRole('link', { name: 'View Questions' }).first().click()
+  await page.getByRole('heading', { name: 'Previous MPT Mocks' }).waitFor()
+  await page.getByRole('link', { name: 'Open Previous Mocks' }).click()
+  await page.getByRole('heading', { level: 1, name: 'Previous MPT Mocks' }).waitFor()
+  await page.getByRole('link', { name: 'Review or Practise' }).first().click()
   await page.getByText('Question No. 1', { exact: true }).waitFor()
   await page.getByPlaceholder('Search Questions').fill('the')
   await page.getByPlaceholder('Search Questions').fill('')
+  if (await page.getByRole('button', { name: 'Start Practice' }).count()) {
+    await page.getByRole('button', { name: 'Start Practice' }).click()
+    await page.getByRole('button', { name: /Submit Practice/ }).first().click()
+    await page.getByText(/Practice score:/).waitFor()
+    await page.getByRole('button', { name: 'View Answer Key' }).click()
+  }
   await noHorizontalScroll(page, `${label} previous question bank`)
   await page.screenshot({ path: `${shots}/${label}-07c-previous-question-bank.png`, fullPage: true })
 

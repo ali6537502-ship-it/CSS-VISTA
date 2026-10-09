@@ -1,10 +1,10 @@
 import { Link } from 'react-router'
-import { BookOpen, LockKeyhole } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 import { mptApi } from '@/lib/mpt/api'
 import { pktDate } from '@/lib/mpt/copy'
 import { AccountPage } from '@/pages/account/shared'
 import { MptMenu } from '@/components/mpt/MptMenu'
-import { ErrorNote, MptGate, PageSkeleton, primaryButton, secondaryButton, useMptLoad } from './common'
+import { ErrorNote, MptGate, PageSkeleton, secondaryButton, useMptLoad } from './common'
 
 function QuestionBankIndex() {
   const load = useMptLoad((signal) => mptApi.questionBank(signal), [])
@@ -13,25 +13,6 @@ function QuestionBankIndex() {
   const data = load.data
   if (!data) return null
 
-  if (!data.has_participation) {
-    return (
-      <div className="space-y-5">
-        <MptMenu />
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-          <div className="flex items-start gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
-              <LockKeyhole aria-hidden="true" className="h-5 w-5" />
-            </span>
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold text-slate-950">Previous MPT Question Bank</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-600">Apply for an MPT Mock to unlock previous mock questions.</p>
-            </div>
-          </div>
-          <Link to="/account/mpt" className={"mt-5 " + primaryButton}>Apply for MPT Mock</Link>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="space-y-6">
@@ -58,7 +39,7 @@ function QuestionBankIndex() {
                     </div>
                   </div>
                 </div>
-                <Link to={`/account/mpt/question-bank/${encodeURIComponent(mock.slug)}`} className={secondaryButton}>View Questions</Link>
+                <Link to={`/account/mpt/question-bank/${encodeURIComponent(mock.slug)}`} className={secondaryButton}>Review or Practise</Link>
               </div>
             </article>
           ))}
@@ -70,7 +51,7 @@ function QuestionBankIndex() {
 
 export default function MptQuestionBank() {
   return (
-    <AccountPage title="Previous MPT Question Bank" intro="Review questions from the MPT mocks you were eligible to attempt.">
+    <AccountPage title="Previous MPT Mocks" intro="Browse every completed official MPT paper, even if you missed the original exam.">
       <MptGate><QuestionBankIndex /></MptGate>
     </AccountPage>
   )

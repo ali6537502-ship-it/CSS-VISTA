@@ -1,9 +1,10 @@
 import { Link } from 'react-router'
-import { Award, CalendarClock, ClipboardList, TrendingUp, XCircle } from 'lucide-react'
+import { Award, BookOpen, CalendarClock, ClipboardList, TrendingUp, XCircle } from 'lucide-react'
 
 /** The separate MPT options, each opening its own page (owner request: not mixed together). */
 export const MPT_MENU = [
   { to: '/account/mpt', label: 'MPT Mocks', hint: 'Apply · Enter exam', Icon: CalendarClock },
+  { to: '/account/mpt/question-bank', label: 'Previous Mocks', hint: 'All completed papers', Icon: BookOpen },
   { to: '/account/mpt/history', label: 'My Applications', hint: 'Roll Numbers & status', Icon: ClipboardList },
   { to: '/account/mpt/history?status=completed', label: 'My Results', hint: 'Result cards & scores', Icon: Award },
   { to: '/account/mpt/mistakes', label: 'My Wrong MCQs', hint: 'Mistakes to revise', Icon: XCircle },
@@ -12,7 +13,7 @@ export const MPT_MENU = [
 
 export function MptMenu({ current }: { current?: string }) {
   return (
-    <nav aria-label="MPT options" className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+    <nav aria-label="MPT options" className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
       {MPT_MENU.map(({ to, label, hint, Icon }) => {
         const active = current === to
         return (
