@@ -76,7 +76,7 @@ function UpcomingList({ cards }: { cards: MptCard[] }) {
   )
 }
 
-function PreviousQuestionBankCard({ applyHref }: { applyHref: string }) {
+function PreviousQuestionBankCard() {
   const load = useMptLoad((signal) => mptApi.questionBank(signal), [])
   const data = load.data
   return (
@@ -87,17 +87,14 @@ function PreviousQuestionBankCard({ applyHref }: { applyHref: string }) {
             <BookOpen aria-hidden="true" className="h-5 w-5" />
           </span>
           <div className="min-w-0">
-            <h2 id="previous-mpt-bank-title" className="text-lg font-bold text-slate-950">Previous MPT Question Bank</h2>
-            <p className="mt-1 text-sm leading-6 text-slate-600">Review questions from your eligible completed MPT mocks.</p>
-            {load.loading && !data && <p className="mt-2 text-xs text-slate-500">Checking access…</p>}
-            {load.error && !data && <p className="mt-2 text-xs text-amber-700">Question Bank access could not be checked right now.</p>}
-            {data && !data.has_participation && <p className="mt-2 text-sm font-semibold text-slate-800">Apply for an MPT Mock to unlock previous mock questions.</p>}
-            {data?.has_participation && <p className="mt-2 text-xs text-slate-500">{data.mocks.length ? `${data.mocks.length} completed paper${data.mocks.length === 1 ? '' : 's'} available.` : 'Completed mock papers will appear here automatically.'}</p>}
+            <h2 id="previous-mpt-bank-title" className="text-lg font-bold text-slate-950">Previous MPT Mocks</h2>
+            <p className="mt-1 text-sm leading-6 text-slate-600">Every completed official MPT paper, open to all registered students. Review questions or practise without changing your original result.</p>
+            {load.loading && !data && <p className="mt-2 text-xs text-slate-500">Checking completed papers…</p>}
+            {load.error && !data && <p className="mt-2 text-xs text-amber-700">Could not load the mock archive right now.</p>}
+            {data && <p className="mt-2 text-xs text-slate-500">{data.mocks.length ? `${data.mocks.length} completed paper${data.mocks.length === 1 ? '' : 's'} available.` : 'Completed mock papers will appear here automatically.'}</p>}
           </div>
         </div>
-        {data?.has_participation
-          ? <Link to="/account/mpt/question-bank" className={secondaryButton}>Open Question Bank</Link>
-          : data && <Link to={applyHref} className={secondaryButton}>Apply for MPT Mock</Link>}
+        <Link to="/account/mpt/question-bank" className={secondaryButton}>Open Previous Mocks</Link>
       </div>
     </section>
   )
@@ -121,7 +118,7 @@ function Area() {
         ? <MptHeroCard card={current} now={now} onBoundary={load.reload} />
         : <p className="rounded-2xl border border-dashed border-slate-300 p-6 text-sm text-slate-600">{copy.hub.noMocks}</p>}
 
-      <PreviousQuestionBankCard applyHref={current?.state.primary_action === 'apply' ? (actionHref(current) ?? '/account/mpt') : '/account/mpt'} />
+      <PreviousQuestionBankCard />
 
       <section className="space-y-3">
         <SectionTitle>{copy.dashboard.scoreTitle}</SectionTitle>
