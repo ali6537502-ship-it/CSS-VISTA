@@ -52,7 +52,7 @@ function QuestionBankPaper({ slug }: { slug: string }) {
           <h2 className="mt-1 break-words text-xl font-bold text-slate-950">{data.mock.title}</h2>
           <p className="mt-1 text-sm text-slate-600">Completed · {data.mock.question_count} questions</p>
         </div>
-        <Link to="/account/mpt/question-bank" className={secondaryButton}>Back to Question Bank</Link>
+        <Link to="/account/mpt/question-bank" className={secondaryButton}>Back to Previous Mocks</Link>
       </div>
 
       {data.answers_available && (
@@ -153,14 +153,6 @@ function QuestionBankPaper({ slug }: { slug: string }) {
               )}
               {showSolutions && question.explanation && <p className="mt-2 text-sm leading-6 text-slate-600" dir="auto">{question.explanation}</p>}
             </li>
-                  )
-                })}
-              </ol>
-              {question.correct !== null && (
-                <p className="mt-3 text-sm font-semibold text-emerald-900">Correct Answer: {LETTERS[question.correct] ?? String(question.correct + 1)}</p>
-              )}
-              {question.explanation && <p className="mt-2 text-sm leading-6 text-slate-600" dir="auto">{question.explanation}</p>}
-            </li>
           ))}
         </ol>
       )}
@@ -176,7 +168,7 @@ function QuestionBankPaper({ slug }: { slug: string }) {
 export default function MptQuestionBankPaper() {
   const { mock = '' } = useParams()
   return (
-    <AccountPage title="Previous MPT Question Bank" intro="Read every completed MPT paper or attempt it again in practice mode.">
+    <AccountPage title="Previous MPT Mocks" intro="Read every completed MPT paper or attempt it again in practice mode.">
       <MptGate><QuestionBankPaper slug={mock} /></MptGate>
     </AccountPage>
   )
