@@ -12,6 +12,9 @@ function QuestionBankPaper({ slug }: { slug: string }) {
   const load = useMptLoad((signal) => mptApi.questionBankPaper(slug, signal), [slug])
   const [subject, setSubject] = useState('ALL')
   const [search, setSearch] = useState('')
+  const [practiceMode, setPracticeMode] = useState(false)
+  const [practiceAnswers, setPracticeAnswers] = useState<Record<number, number>>({})
+  const [practiceSubmitted, setPracticeSubmitted] = useState(false)
 
   const filtered = useMemo(() => {
     const questions = load.data?.questions ?? []
@@ -22,6 +25,19 @@ function QuestionBankPaper({ slug }: { slug: string }) {
       return [question.q, ...question.o].some((value) => value.toLocaleLowerCase().includes(needle))
     })
   }, [load.data?.questions, search, subject])
+
+  const practiceQuestions = load.data?.questions ?? []
+  const practiceAnswered = practiceQuestions.filter((q) => practiceAnswers[q.p] !== undefined).length
+  const practiceCorrect = practiceQuestions.filter((q) => q.correct !== null && practiceAnswers[q.p] === q.correct).length
+  const showSolutions = !practiceMode || practiceSubmitted
+
+  function restartPractice() {
+    setPracticeAnswers({})
+    setPracticeSubmitted(false)
+    setSubject('ALL')
+    setSearch('')
+    setPracticeMode(true)
+  }
 
   if (load.loading && !load.data) return <PageSkeleton />
   if (load.error && !load.data) return <ErrorNote error={load.error} onRetry={load.reload} />
@@ -38,6 +54,33 @@ function QuestionBankPaper({ slug }: { slug: string }) {
         </div>
         <Link to="/account/mpt/question-bank" className={secondaryButton}>Back to Question Bank</Link>
       </div>
+
+      {data.answers_available && (
+        <section aria-label="Paper practice options" className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4 sm:p-5">
+          <h3 className="font-bold text-slate-950">{practiceMode ? 'Practice this completed mock' : 'Want to attempt this paper again?'}</h3>
+          <p className="mt-1 text-sm leading-6 text-slate-600">
+            Practise as often as you like. Your practice score is separate from official MPT results, ranks and applications.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {practiceMode ? (
+              <>
+                <button type="button" className={secondaryButton} onClick={() => setPracticeMode(false)}>View Answer Key</button>
+                <button type="button" className={secondaryButton} onClick={restartPractice}>Start Again</button>
+                {!practiceSubmitted && <button type="button" className="inline-flex min-h-11 items-center rounded-xl bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-950" onClick={() => setPracticeSubmitted(true)}>Submit Practice</button>}
+              </>
+            ) : (
+              <button type="button" className="inline-flex min-h-11 items-center rounded-xl bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-950" onClick={restartPractice}>Start Practice</button>
+            )}
+          </div>
+          {practiceMode && !practiceSubmitted && <p className="mt-3 text-sm font-semibold text-emerald-900">{practiceAnswered} of {practiceQuestions.length} questions answered</p>}
+          {practiceMode && practiceSubmitted && (
+            <div role="status" className="mt-4 rounded-xl border border-emerald-200 bg-white p-4">
+              <p className="text-lg font-bold text-slate-950">Practice score: {practiceCorrect} / {practiceQuestions.length}</p>
+              <p className="mt-1 text-sm text-slate-600">{practiceQuestions.length - practiceAnswered} unanswered · Solutions are now visible below.</p>
+            </div>
+          )}
+        </section>
+      )}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-3 sm:p-4">
         <label className="relative block">
@@ -81,10 +124,35 @@ function QuestionBankPaper({ slug }: { slug: string }) {
               <ol className="mt-3 space-y-2">
                 {question.o.map((option, index) => {
                   const isCorrect = question.correct === index
+                  const isSelected = practiceAnswers[question.p] === index
+                  const answerClass = showSolutions && isCorrect
+                    ? 'border-emerald-200 bg-emerald-50 font-semibold text-emerald-950'
+                    : practiceMode && isSelected
+                      ? 'border-emerald-400 bg-emerald-50 text-emerald-950'
+                      : 'border-slate-100 bg-slate-50/60 text-slate-800'
                   return (
-                    <li key={index} dir="auto" className={`rounded-xl border px-3 py-2 text-sm leading-6 ${isCorrect ? 'border-emerald-200 bg-emerald-50 font-semibold text-emerald-950' : 'border-slate-100 bg-slate-50/60 text-slate-800'}`}>
-                      <span className="mr-1 font-bold">{LETTERS[index] ?? String(index + 1)}.</span> {option}
+                    <li key={index} dir="auto" className={`rounded-xl border text-sm leading-6 ${answerClass}`}>
+                      {practiceMode && !practiceSubmitted ? (
+                        <button
+                          type="button"
+                          aria-pressed={isSelected}
+                          onClick={() => setPracticeAnswers((previous) => ({ ...previous, [question.p]: index }))}
+                          className="w-full rounded-xl px-3 py-2 text-left outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-700"
+                        >
+                          <span className="mr-1 font-bold">{LETTERS[index] ?? String(index + 1)}.</span> {option}
+                        </button>
+                      ) : (
+                        <div className="px-3 py-2"><span className="mr-1 font-bold">{LETTERS[index] ?? String(index + 1)}.</span> {option}</div>
+                      )}
                     </li>
+                  )
+                })}
+              </ol>
+              {showSolutions && question.correct !== null && (
+                <p className="mt-3 text-sm font-semibold text-emerald-900">Correct Answer: {LETTERS[question.correct] ?? String(question.correct + 1)}</p>
+              )}
+              {showSolutions && question.explanation && <p className="mt-2 text-sm leading-6 text-slate-600" dir="auto">{question.explanation}</p>}
+            </li>
                   )
                 })}
               </ol>
@@ -96,6 +164,11 @@ function QuestionBankPaper({ slug }: { slug: string }) {
           ))}
         </ol>
       )}
+      {practiceMode && !practiceSubmitted && filtered.length > 0 && (
+        <button type="button" className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-emerald-900 px-5 font-bold text-white hover:bg-emerald-950" onClick={() => setPracticeSubmitted(true)}>
+          Submit Practice · {practiceAnswered} / {practiceQuestions.length} answered
+        </button>
+      )}
     </div>
   )
 }
@@ -103,7 +176,7 @@ function QuestionBankPaper({ slug }: { slug: string }) {
 export default function MptQuestionBankPaper() {
   const { mock = '' } = useParams()
   return (
-    <AccountPage title="Previous MPT Question Bank" intro="Review-only access to an eligible completed MPT Mock.">
+    <AccountPage title="Previous MPT Question Bank" intro="Read every completed MPT paper or attempt it again in practice mode.">
       <MptGate><QuestionBankPaper slug={mock} /></MptGate>
     </AccountPage>
   )
