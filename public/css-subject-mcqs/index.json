@@ -1,8 +1,8 @@
 {
   "batch": "2026-08-24-owner-supplied-complete-import",
-  "generatedAt": "2026-09-28T00:00:00.000Z",
+  "generatedAt": "2026-10-09T14:50:00.000Z",
   "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
-  "total": 42749,
+  "total": 42767,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -411,7 +411,7 @@
       "name": "Current Affairs",
       "designation": "compulsory",
       "group": null,
-      "count": 518,
+      "count": 536,
       "topics": [
         "D1 IMF Programme, Stabilisation and Climate Resilience",
         "D2 Monetary Policy, Inflation and the 2026 Economic Setting",
@@ -449,14 +449,33 @@
         "Yemen Conflict",
         "WTO and Multilateral Trade",
         "International Human Rights",
-        "Russia-Ukraine War"
+        "Russia-Ukraine War",
+        "Pakistan Law and Constitutional Affairs",
+        "Pakistan Foreign Relations and Security",
+        "Pakistan Diplomacy",
+        "Pakistan Governance and Technology",
+        "Pakistan Economy and International Trade",
+        "Pakistan Economy and Monetary Affairs",
+        "Pakistan Fiscal and Industrial Policy",
+        "Pakistan Aviation and State Enterprises",
+        "Pakistan Security",
+        "Global Economy and Development",
+        "International Law and Awards",
+        "AI Governance and Industrial Policy",
+        "Cybersecurity and Artificial Intelligence",
+        "International Trade and Geopolitics",
+        "Global Energy and Trade",
+        "Conflict and International Security",
+        "Climate and Disaster Risk",
+        "Global Energy and Diplomacy"
       ],
       "file": "current-affairs.json",
-      "sourceCount": 518,
+      "sourceCount": 536,
       "sourceDocuments": [
         "Current_Affairs_500_Premium_MCQs_Expanded_15_Aug_2026.docx",
         "CSS Vista Current Affairs — 14 September 2026",
-        "Daily Current Affairs 2026-09-15"
+        "Daily Current Affairs 2026-09-15",
+        "Daily Current Affairs 2026-10-09"
       ],
       "audit": "four distinct options, recoverable answer, stable ID, source attribution and high-confidence duplicate facts checked"
     },
