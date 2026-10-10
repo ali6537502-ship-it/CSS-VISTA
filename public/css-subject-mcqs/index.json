@@ -1,8 +1,8 @@
 {
   "batch": "2026-08-24-owner-supplied-complete-import",
-  "generatedAt": "2026-10-09T14:50:00.000Z",
+  "generatedAt": "2026-10-10T14:48:48.460Z",
   "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
-  "total": 42767,
+  "total": 42786,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -411,7 +411,7 @@
       "name": "Current Affairs",
       "designation": "compulsory",
       "group": null,
-      "count": 536,
+      "count": 555,
       "topics": [
         "D1 IMF Programme, Stabilisation and Climate Resilience",
         "D2 Monetary Policy, Inflation and the 2026 Economic Setting",
@@ -467,15 +467,31 @@
         "Global Energy and Trade",
         "Conflict and International Security",
         "Climate and Disaster Risk",
-        "Global Energy and Diplomacy"
+        "Global Energy and Diplomacy",
+        "Pakistan Law and Governance",
+        "Pakistan Law and Courts",
+        "Pakistan Nuclear Security",
+        "Pakistan Provincial Governance",
+        "Pakistan Energy and Economy",
+        "Pakistan Federalism and Governance",
+        "Pakistan Foreign Relations",
+        "Pakistan Politics and Federalism",
+        "Pakistan Economy and Social Protection",
+        "Global Health and International Institutions",
+        "International Law and Institutions",
+        "Middle East Politics and Governance",
+        "Global Energy and Sanctions",
+        "AI Governance and Cybersecurity",
+        "Disaster Risk and Earth Science"
       ],
       "file": "current-affairs.json",
-      "sourceCount": 536,
+      "sourceCount": 555,
       "sourceDocuments": [
         "Current_Affairs_500_Premium_MCQs_Expanded_15_Aug_2026.docx",
         "CSS Vista Current Affairs — 14 September 2026",
         "Daily Current Affairs 2026-09-15",
-        "Daily Current Affairs 2026-10-09"
+        "Daily Current Affairs 2026-10-09",
+        "Daily Current Affairs 2026-10-10"
       ],
       "audit": "four distinct options, recoverable answer, stable ID, source attribution and high-confidence duplicate facts checked"
     },
