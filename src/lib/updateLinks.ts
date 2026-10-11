@@ -3,7 +3,7 @@
 export function safeUpdateLink(value: unknown): string | null {
   if (typeof value !== 'string') return null
   const candidate = value.trim()
-  if (!candidate || candidate.length > 2048 || /[\u0000-\u0020\u007f]/.test(candidate)) return null
+  if (!candidate || candidate.length > 2048 || [...candidate].some((character) => character.charCodeAt(0) <= 32 || character.charCodeAt(0) === 127)) return null
   try {
     const parsed = new URL(candidate)
     if ((parsed.protocol !== 'https:' && parsed.protocol !== 'http:') || !parsed.hostname || parsed.username || parsed.password) return null
