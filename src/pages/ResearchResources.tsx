@@ -178,7 +178,12 @@ export default function ResearchResources() {
               </div>
             ))}
           </div>
-          <p className="mt-5 text-xs leading-6 text-[#657075]">CSS Vista links to independent third-party websites; it does not host their content or control their publication schedules. Always record the original publisher, date, indicator definition and source URL before quoting a claim or statistic. Saved links are stored in this browser only.</p>
+          <p className="mt-5 text-xs leading-6 text-[#657075]">Always record the original publisher, date, indicator definition and source URL before quoting a claim or statistic. Saved links are stored in this browser only.</p>
+        </section>
+
+        <section aria-labelledby="external-source-disclaimer" className="rounded-2xl border border-[#e4e5dc] bg-white px-5 py-5 sm:px-6">
+          <h2 id="external-source-disclaimer" className="text-sm font-semibold text-[#263e45]">External Links &amp; Content Ownership</h2>
+          <p className="mt-2 text-xs leading-6 text-[#626f76] sm:text-sm">These links are provided for educational and informational reference only and lead to independently operated third-party websites. CSS Vista does not claim ownership or authorship of the linked articles, reports, research, datasets, logos or other materials; all rights remain with their respective owners. Inclusion of a link does not imply affiliation, sponsorship or endorsement. CSS Vista does not control external content or its accuracy, availability or updates. Please check the original publisher’s information and terms of use.</p>
         </section>
       </div>
     </div>
