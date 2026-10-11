@@ -67,6 +67,7 @@ const nav = [
   {
     label: 'Library',
     items: [
+      { label: 'Research & Data Library', to: '/resources', icon: Globe2 },
       { label: 'Notes Library', to: '/notes', icon: FileText },
       { label: 'Handwritten Notes by Miss Sadia Zahoor, PAS', to: '/handwritten-notes', icon: NotebookPen },
       { label: 'Free CSS Vista Lectures', to: '/lectures', icon: Video },
@@ -136,7 +137,7 @@ const mobileBottomNav = [
   { label: 'Home', to: '/', icon: HomeIcon, paths: ['/'] },
   { label: 'Study', to: '/study-tools', icon: BookOpen, paths: ['/study-tools', '/css-eligibility-calculator', '/study-planner', '/factbook', '/exam-intelligence', '/start-css', '/subjects', '/css-mcqs', '/gk', '/fpsc-syllabus'] },
   { label: 'Tests', to: '/test-series', icon: ClipboardList, paths: ['/test-series', '/mpt', '/five-minute', '/answer-writing', '/answer-evaluation', '/answer-timer', '/mistakes'] },
-  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs', '/vistagram'] },
+  { label: 'Library', to: '/notes', icon: NotebookPen, paths: ['/notes', '/handwritten-notes', '/past-papers', '/css-past-paper-analysis', '/lectures', '/books', '/book-summaries', '/current-affairs', '/vistagram', '/resources'] },
   { label: 'Profile', to: '/account', icon: UserRound, paths: ['/account', '/dashboard', '/exam-intelligence'] },
 ]
 
@@ -1268,6 +1269,7 @@ export default function Layout() {
           <div>
             <h3 className="text-sm font-semibold text-foreground">Library & Tools</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li><Link className="hover:text-pine transition-colors" to="/resources">Research & Data Library</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/notes">Notes Library</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/handwritten-notes">Handwritten Notes by Miss Sadia Zahoor, PAS</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/lectures">Free CSS Vista Lectures</Link></li>

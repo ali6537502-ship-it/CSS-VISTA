@@ -118,6 +118,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/study-material/essay-themes/:slug', 'Essay Theme Research Roadmap', 'Work through one essay theme stage by stage and tick each research direction as you complete it.', { match: 'pattern' }),
   // The study-material section root, so the parent URL resolves rather than
   // 404ing when a student truncates a deeper link.
+  publicPage('/resources', 'Research and Data Library', 'One-click links to daily newspaper reading, Pakistan statistics, international datasets, criminology journals and policy research.', 'Research and Data Library', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/study-material', 'CSS Study Material — Notes, References and Essay Roadmap', 'Topic-wise CSS optional subject notes, the bilingual Islamic Studies reference bank and the essay theme research roadmap, in one place.', 'CSS study material', { contentQuality: 'substantial', adMode: 'enabled' }),
   // Topic-wise optional-subject notes. Real study content, so indexable.
   publicPage('/study-material/optional', 'CSS Optional Subject Notes (All 7 Groups)', 'Topic-wise CSS optional subject notes across all seven FPSC groups, organised by group, subject and topic.', 'CSS optional subject notes', { contentQuality: 'substantial', adMode: 'enabled' }),

@@ -75,6 +75,7 @@ export const defaultHomeCards: HomeCard[] = [
   { id: 'five-minute', title: 'Daily Five-Minute Challenge', desc: 'A quick mixed quiz - new every day', to: '/five-minute', icon: 'Zap', visible: true, order: 7 },
   { id: 'current-affairs', title: 'Current Affairs', desc: 'Structured, sourced issue files', to: '/current-affairs', icon: 'Newspaper', visible: true, order: 8 },
   { id: 'essay', title: 'Essay Preparation', desc: 'Learn with Miss Sadia Zahoor, PAS', to: '/essay', icon: 'PenLine', visible: true, order: 10 },
+  { id: 'research-resources', title: 'Research & Data Library', desc: 'Newspapers, official data, journals and trusted research', to: '/resources', icon: 'Globe', visible: true, order: 12.75 },
   { id: 'study-material', title: 'CSS Study Material', desc: 'Optional notes, Islamic references and essay themes', to: '/study-material', icon: 'LibraryBig', visible: true, order: 13.3 },
   { id: 'optional-notes', title: 'Optional Subject Notes', desc: '34 subjects, 339 topics - all seven FPSC groups', to: '/study-material/optional', icon: 'LibraryBig', visible: true, order: 13.4 },
   { id: 'islamic-references', title: 'Islamic Studies Reference Bank', desc: '1,382 source-checked references - English & Urdu', to: '/study-material/islamic-studies', icon: 'BookMarked', visible: true, order: 13.5 },
