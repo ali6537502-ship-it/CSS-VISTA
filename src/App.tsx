@@ -7,6 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { AdSenseProvider } from './components/Ads'
 import TrustFooter from './components/TrustFooter'
 import Home from './pages/Home'
+import { MPT_HIBERNATED } from './lib/featureHibernation'
 import { lazyWithRecovery as lazy } from './lib/chunkRecovery'
 
 const StartCSS = lazy(() => import('./pages/StartCSS'))
@@ -155,8 +156,8 @@ export default function App() {
         <Route path="/study-material/optional" element={<S><OptionalNotes /></S>} />
         <Route path="/study-material/optional/:subject" element={<S><OptionalSubjectNotes /></S>} />
         <Route path="/study-material/optional/:subject/:topic" element={<S><OptionalTopicNotes /></S>} />
-        <Route path="/mpt" element={<S><MPTPrep /></S>} />
-        <Route path="/mpt/bank/:bankId" element={<SelectedStudyGate><S><MPTQuestionBank /></S></SelectedStudyGate>} />
+        <Route path="/mpt" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <S><MPTPrep /></S>} />
+        <Route path="/mpt/bank/:bankId" element={MPT_HIBERNATED ? <Navigate to="/" replace /> : <SelectedStudyGate><S><MPTQuestionBank /></S></SelectedStudyGate>} />
         <Route path="/current-affairs" element={<ProfileGate><ProGate feature="Current Affairs"><S><CurrentAffairs /></S></ProGate></ProfileGate>} />
         <Route path="/vistagram" element={<S><Vistagram /></S>} />
         <Route path="/vistagram/:slug" element={<S><VistagramArticle /></S>} />
@@ -220,17 +221,17 @@ export default function App() {
         <Route path="/account/vistagram" element={<ProfileGate><S><AccountVistagram /></S></ProfileGate>} />
         {/* MPT examination portal (docs/mpt). The server enforces every rule;
             these routes only render it, and stay inert while the flag is off. */}
-        <Route path="/account/mpt" element={<ProfileGate><S><MptArea /></S></ProfileGate>} />
-        <Route path="/account/mpt/history" element={<ProfileGate><S><MptHistory /></S></ProfileGate>} />
-        <Route path="/account/mpt/performance" element={<ProfileGate><S><MptPerformance /></S></ProfileGate>} />
-        <Route path="/account/mpt/mistakes" element={<ProfileGate><S><MptMistakes /></S></ProfileGate>} />
-        <Route path="/account/mpt/question-bank" element={<ProfileGate><S><MptQuestionBank /></S></ProfileGate>} />
-        <Route path="/account/mpt/question-bank/:mock" element={<ProfileGate><S><MptQuestionBankPaper /></S></ProfileGate>} />
-        <Route path="/account/mpt/apply/:mock" element={<ProfileGate><S><MptApply /></S></ProfileGate>} />
-        <Route path="/account/mpt/applications/:code" element={<ProfileGate><S><MptApplication /></S></ProfileGate>} />
-        <Route path="/account/mpt/entrance/:mock" element={<ProfileGate><S><MptEntrance /></S></ProfileGate>} />
-        <Route path="/account/mpt/exam/:mock" element={<ProfileGate><S><MptExam /></S></ProfileGate>} />
-        <Route path="/account/mpt/results/:code" element={<ProfileGate><S><MptResult /></S></ProfileGate>} />
+        <Route path="/account/mpt" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptArea /></S></ProfileGate>} />
+        <Route path="/account/mpt/history" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptHistory /></S></ProfileGate>} />
+        <Route path="/account/mpt/performance" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptPerformance /></S></ProfileGate>} />
+        <Route path="/account/mpt/mistakes" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptMistakes /></S></ProfileGate>} />
+        <Route path="/account/mpt/question-bank" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptQuestionBank /></S></ProfileGate>} />
+        <Route path="/account/mpt/question-bank/:mock" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptQuestionBankPaper /></S></ProfileGate>} />
+        <Route path="/account/mpt/apply/:mock" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptApply /></S></ProfileGate>} />
+        <Route path="/account/mpt/applications/:code" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptApplication /></S></ProfileGate>} />
+        <Route path="/account/mpt/entrance/:mock" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptEntrance /></S></ProfileGate>} />
+        <Route path="/account/mpt/exam/:mock" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptExam /></S></ProfileGate>} />
+        <Route path="/account/mpt/results/:code" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptResult /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
