@@ -25,6 +25,18 @@ $command = $argv[1] ?? '';
 $out = static function (mixed $value): never { echo json_encode($value, JSON_UNESCAPED_SLASHES), PHP_EOL; exit(0); };
 
 switch ($command) {
+    case 'snapshot':
+        // Only a digest leaves this guarded disposable helper, never answers or sessions.
+        $snapshot = [];
+        foreach ($pdo->query("SHOW TABLES LIKE 'mpt\\_%'")->fetchAll(PDO::FETCH_COLUMN) as $table) {
+            if (!preg_match('/^mpt_[a-z_]+$/', $table)) throw new RuntimeException('Unexpected MPT table');
+            $rows = [];
+            foreach ($pdo->query('SELECT * FROM `'.$table.'`')->fetchAll() as $row) {
+                ksort($row); $rows[] = json_encode($row, JSON_THROW_ON_ERROR);
+            }
+            sort($rows); $snapshot[$table] = hash('sha256', implode("\n", $rows));
+        }
+        ksort($snapshot); $out($snapshot);
     case 'users':
         $n = (int)($argv[2] ?? 1); $prefix = preg_replace('/[^a-z0-9-]/', '', (string)($argv[3] ?? 'mpt'));
         $users = [];

@@ -30,6 +30,39 @@ const step = (name) => console.log(`- ${name}`)
 const [A, B, C, D, E] = fixture('users', 5, 'mpt')
 // The service runs with CSSV_MPT_APPLICATION_FLOW=on here; off/pilot are covered by tests/mpt/flag.php.
 
+// The current production release deliberately hibernates MPT, overriding even
+// the on setting. Verify that policy rather than weakening it for HTTP tests.
+// Keep the complete active-engine regression below for a future enabled release.
+if (/const\s+CSSV_MPT_HIBERNATED\s*=\s*true\s*;/.test(readFileSync('dist/api/_mpt.php', 'utf8'))) {
+  step('hibernation overrides on, blocks all candidate endpoints and preserves history')
+  fixture('mock', 120)
+  const before = fixture('snapshot')
+  for (const user of [null, A]) {
+    const flow = await call(user, 'flow.php')
+    assert.equal(flow.status, 200)
+    assert.equal(flow.data.enabled, false)
+    const listing = await call(user, 'mocks.php')
+    assert.equal(listing.status, 200)
+    assert.equal(listing.data.enabled, false)
+    assert.deepEqual(listing.data.mocks, [])
+    for (const path of ['application.php', 'attempt.php', 'dashboard.php', 'history.php', 'mistakes.php', 'performance.php', 'question-bank.php', 'question-bank-paper.php?mock=mpt-mock-001', 'result.php', 'review.php']) {
+      const response = await call(user, path)
+      assert.equal(response.status, user ? 404 : 401, path)
+      assert.equal(response.data.error, user ? 'mpt_not_enabled' : 'authentication_required', path)
+      assert.ok(response.headers.get('cache-control').includes('no-store'), path)
+      assert.ok(response.headers.get('x-robots-tag').includes('noindex'), path)
+    }
+    for (const path of ['apply.php', 'save.php', 'start.php', 'submit.php', 'verify.php', 'withdraw.php']) {
+      const response = await call(user, path, { mock: 'mpt-mock-001', declaration: true })
+      assert.equal(response.status, user ? 404 : 401, path)
+      assert.equal(response.data.error, user ? 'mpt_not_enabled' : 'authentication_required', path)
+    }
+  }
+  assert.deepEqual(fixture('snapshot'), before, 'blocked HTTP requests must not mutate existing MPT data')
+  console.log('MPT hibernation verified: anonymous authentication, signed-in denial, empty public listing and unchanged records.')
+  process.exit(0)
+}
+
 step('feature flag and authentication')
 assert.equal((await call(null, 'flow.php')).data.enabled, true)
 assert.equal((await call(null, 'dashboard.php')).status, 401)
