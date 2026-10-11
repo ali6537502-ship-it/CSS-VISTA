@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useAccount } from '@/lib/accountContext'
 import { copy, pktDate, pktTime } from '@/lib/mpt/copy'
 import { formatRollNumber } from '@/lib/mpt/rollNumber'
@@ -52,7 +53,7 @@ export function spotlightMessage(spotlight: MptSpotlight, signedIn: boolean) {
 export function MptMockStrip({ className = '' }: { className?: string }) {
   const spotlight = useMptSpotlight()
   const { user } = useAccount()
-  if (!spotlight) return null
+  if (MPT_HIBERNATED || !spotlight) return null
   const message = spotlightMessage(spotlight, Boolean(user))
   return (
     <aside aria-label={copy.hub.title}
