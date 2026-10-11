@@ -1,3 +1,4 @@
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { site } from '@/data/site'
 
@@ -59,7 +60,7 @@ export default function TrustFooter() {
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link className="hover:text-pine" to="/past-papers">CSS Past Papers</Link></li>
               <li><Link className="hover:text-pine" to="/css-mcqs">CSS MCQs</Link></li>
-              <li><Link className="hover:text-pine" to="/mpt">CSS MPT & Quiz</Link></li>
+              {!MPT_HIBERNATED && <li><Link className="hover:text-pine" to="/mpt">CSS MPT & Quiz</Link></li>}
               <li><Link className="hover:text-pine" to="/fpsc-syllabus">CSS Syllabus</Link></li>
               <li><Link className="hover:text-pine" to="/current-affairs">Current Affairs</Link></li>
               <li><Link className="hover:text-pine" to="/notes">Notes & Study Resources</Link></li>
