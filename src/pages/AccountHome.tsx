@@ -145,7 +145,8 @@ export default function AccountHome() {
     snapshot.stats.streak ? `${snapshot.stats.streak}-day streak` : null,
   ].filter(Boolean).join(' · ')
 
-  const mptFlow = !MPT_HIBERNATED && useMptFlowEnabled() === true
+  const mptFlowEnabled = useMptFlowEnabled() === true
+  const mptFlow = !MPT_HIBERNATED && mptFlowEnabled
   const freeChoices = [
     { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
