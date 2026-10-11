@@ -26,6 +26,7 @@ import QuestionPagination from '@/components/QuestionPagination'
 import { questionPageForIndex, questionPageRange } from '@/lib/questionPagination'
 import { remainingSeconds } from '@/hooks/useAccurateCountdown'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 
 interface Resolved {
   title: string
@@ -45,6 +46,7 @@ export default function GKQuiz({ forceMode }: { forceMode?: string }) {
   const [sp] = useSearchParams()
   const legacyMpt = !forceMode && sp.get('mode') === 'mpt-mock'
   const applicationFlow = useMptFlowEnabled()
+  if (legacyMpt && MPT_HIBERNATED) return <Navigate to="/gk" replace />
   if (legacyMpt && applicationFlow === null) return <div className="mx-auto max-w-xl px-4 py-16 text-center text-sm text-muted-foreground" aria-busy="true">Loading…</div>
   if (legacyMpt && applicationFlow) return <Navigate to="/account/mpt" replace />
   return <LegacyGKQuiz forceMode={forceMode} />
