@@ -4,6 +4,10 @@ declare(strict_types=1);
 require __DIR__ . '/../../public/api/_mpt.php';
 $failures = 0;
 $check = static function (bool $ok, string $label) use (&$failures): void { if (!$ok) { $failures++; fwrite(STDERR, "FAIL: $label\n"); } };
+// Assert the site is locked while hibernated, then test the underlying rollout rules.
+putenv('CSSV_MPT_APPLICATION_FLOW=on');
+$check(mpt_flag_mode() === 'off', 'hibernation overrides normal on mode');
+putenv('CSSV_MPT_TEST_FLAG_LOGIC=1');
 $pilot = ['email' => 'Pilot@Example.invalid'];
 $other = ['email' => 'someone@example.invalid'];
 putenv('CSSV_MPT_APPLICATION_FLOW');
