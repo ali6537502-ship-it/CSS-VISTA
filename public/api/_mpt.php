@@ -64,7 +64,8 @@ function mpt_ensure_schema(PDO $pdo): void
  */
 function mpt_flag_mode(): string
 {
-    if (CSSV_MPT_HIBERNATED) return 'off';
+    // Unit tests can still exercise the underlying rollout logic; production is always off.
+    if (CSSV_MPT_HIBERNATED && !(PHP_SAPI === 'cli' && getenv('CSSV_MPT_TEST_FLAG_LOGIC') === '1')) return 'off';
     $mode = strtolower((string)cssv_env('CSSV_MPT_APPLICATION_FLOW', 'on'));
     return in_array($mode, ['off', 'pilot', 'on'], true) ? $mode : 'off';
 }
