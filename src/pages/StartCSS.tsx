@@ -8,6 +8,7 @@ import { migrateIndexedChecklist, setChecklistItem } from '@/lib/progress'
 import { mptFacts, mptOfficialSources, mptSyllabusSubjects } from '@/data/mptSyllabus'
 import ConsultationCard from '@/components/ConsultationCard'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
+import { PREPARATION_ROADMAPS_HIBERNATED } from '@/lib/featureHibernation'
 
 const stages = [
   { name: 'MPT - MCQ-based Preliminary Test', detail: 'A screening MCQ paper conducted before the written exam (introduced from CSS 2022). Only candidates who qualify the MPT may appear in the written examination. Qualifying threshold and pattern are set in the official notice.' },
@@ -295,6 +296,7 @@ export default function StartCSS() {
           </div>
         </Section>
 
+        {!PREPARATION_ROADMAPS_HIBERNATED && (
         <Section title="Preparation roadmaps">
           <div className="flex flex-wrap gap-2">
             {plans.map((p, i) => (
@@ -320,6 +322,7 @@ export default function StartCSS() {
             </table>
           </div>
         </Section>
+        )}
 
         <ConsultationCard variant="compact" heading="Unsure how to start CSS?" description="Discuss your preparation roadmap, optional subjects, resources and study plan privately with Sir Ali Hassan or Ms. Sadia Zahoor." />
 
