@@ -18,6 +18,7 @@ import PastPapers from '@/pages/PastPapers'
 import CssSubjectMcqs from '@/pages/CssSubjectMcqs'
 import EssayModule from '@/pages/EssayModule'
 import MPTPrep from '@/pages/MPTPrep'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import CurrentAffairs from '@/pages/CurrentAffairs'
 import PsychViva from '@/pages/PsychViva'
 import FpscUpdates from '@/pages/FpscUpdates'
@@ -135,7 +136,9 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/past-papers', () => <PastPapers />),
   page('/css-mcqs', () => <CssSubjectMcqs />),
   page('/essay', () => <EssayModule />),
-  page('/mpt', () => <MPTPrep />),
+  page('/mpt', () => MPT_HIBERNATED
+    ? <section><h1>MPT services temporarily unavailable</h1><p>The MPT mocks and preparation plan are paused.</p></section>
+    : <MPTPrep />),
   page('/current-affairs', () => <ProGate feature="Current Affairs"><CurrentAffairs /></ProGate>),
   page('/psych-viva', () => <PsychViva />),
   page('/fpsc-updates', () => <FpscUpdates />),
