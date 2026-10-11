@@ -12,6 +12,8 @@ type HostingerUpdate = {
   date: string
   tag: string
   notify: boolean
+  linkUrl?: string
+  linkLabel?: string
 }
 
 function ownerCsrfToken() {
@@ -20,7 +22,7 @@ function ownerCsrfToken() {
 }
 
 function updateFingerprint(update: HostingerUpdate) {
-  return JSON.stringify([update.title, update.body, update.date, update.tag, Boolean(update.notify)])
+  return JSON.stringify([update.title, update.body, update.date, update.tag, Boolean(update.notify), update.linkUrl || '', update.linkLabel || ''])
 }
 
 async function adminNotificationRequest(method: 'GET' | 'POST' | 'DELETE', payload?: unknown) {
