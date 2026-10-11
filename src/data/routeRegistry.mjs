@@ -184,6 +184,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/preparation', 'My Preparation', 'Your account-owned preparation attempts and saved writing.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/ai-usage', 'AI Usage', 'Your private usage and operation history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/membership', 'Membership & Payments', 'Your CSS Vista membership and private payment history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
+  protectedPage('/account/general-ability', 'General Ability — Pro', 'Guided maths lessons, worked examples, exercises and topic quizzes for CSS Vista Pro members.', { h1: 'General Ability', robots: 'noindex, nofollow' }),
   protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),

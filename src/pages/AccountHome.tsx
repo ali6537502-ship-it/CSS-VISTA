@@ -185,7 +185,7 @@ export default function AccountHome() {
   ]
   const proChoices = [
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
-    ...(!MPT_HIBERNATED ? [{ to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' }] : []),
+    { to: '/account/general-ability', icon: Calculator, title: 'General Ability', status: 'Guided maths, exercises & topic quizzes' },
     { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     {
       to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
