@@ -12,6 +12,8 @@ require_once __DIR__ . '/_mpt_schema.php';
 define('CSSV_MPT_PAPER_DIR', (getenv('CI') === 'true' && getenv('CSSV_DB_NAME') === 'cssvista_briefing_test' && getenv('CSSV_MPT_TEST_PAPER_DIR'))
     ? (string)getenv('CSSV_MPT_TEST_PAPER_DIR')
     : __DIR__ . '/_mpt_papers');
+// Reversible shutdown. Existing mocks, results and applications stay in the database.
+const CSSV_MPT_HIBERNATED = true;
 const CSSV_MPT_DAILY_SLOTS = ['1400' => '14:00', '1800' => '18:00', '2230' => '22:30'];
 const CSSV_MPT_PKT = 'Asia/Karachi';
 // Upcoming mocks are always visible well ahead (owner: through 10 October and
@@ -62,6 +64,7 @@ function mpt_ensure_schema(PDO $pdo): void
  */
 function mpt_flag_mode(): string
 {
+    if (CSSV_MPT_HIBERNATED) return 'off';
     $mode = strtolower((string)cssv_env('CSSV_MPT_APPLICATION_FLOW', 'on'));
     return in_array($mode, ['off', 'pilot', 'on'], true) ? $mode : 'off';
 }
