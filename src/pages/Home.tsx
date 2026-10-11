@@ -17,6 +17,7 @@ import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
 import { css2027Dates, notifications2027 } from '@/data/css2027'
 import { useAccount } from '@/lib/accountContext'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 
 interface LinkCard {
@@ -352,7 +353,7 @@ function ExamCountdown({ active = true }: { active?: boolean }) {
         <span className="text-[8px] font-semibold text-slate-400">Updates live</span>
       </div>
       <div className="grid grid-cols-2 gap-2">
-        {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).map((key) => {
+        {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).filter((key) => !(MPT_HIBERNATED && key === 'mpt')).map((key) => {
           const exam = officialExamDates[key]
           const remaining = remainingTime(exam.target, now)
           const isMpt = key === 'mpt'
@@ -415,7 +416,7 @@ function DailyGrandMockCard({ active = true }: { active?: boolean }) {
         <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
       </div>
       <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
-        {(['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
+        {(['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => (kind === 'gk' || !MPT_HIBERNATED) && !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
           const schedule = getDailyMockStatus(kind, new Date(now))
           const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
           const remaining = remainingTime(target, now)
@@ -588,6 +589,7 @@ export default function Home() {
     () => sortHomeCardsByPriority(homeCards
       .filter((card) => (
         card.visible
+        && !(MPT_HIBERNATED && (card.to.startsWith('/mpt') || card.id === 'mpt-grand-mock'))
         && card.id !== 'current-affairs'
         && !card.to.includes('/current-affairs')
         && card.id !== 'pakistan-affairs'
@@ -728,7 +730,7 @@ export default function Home() {
         <section className="cssv-reveal mt-6" style={{ '--cssv-delay': '120ms' } as CSSProperties} aria-labelledby="quick-access">
           <SectionHeading title="Start preparing" eyebrow="Quick access" />
           <div id="quick-access" className="grid grid-cols-2 gap-2 lg:grid-cols-5 lg:gap-2.5">
-            {quickActions.map((item) => (
+            {quickActions.filter((item) => !(MPT_HIBERNATED && item.to.startsWith('/mpt'))).map((item) => (
               <Link
                 key={item.title}
                 to={item.to}
