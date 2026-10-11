@@ -17,6 +17,7 @@ import { css2026WrittenResult } from '@/data/css2026Result'
 import { optionalGroupsWithNotes } from '@/data/optionalNotes'
 import { islamicChapters, chapterName } from '@/data/islamicReferences'
 import { essayThemeIndex } from '@/data/essayThemes'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 
 installIdioms()
 
@@ -538,6 +539,7 @@ export async function searchSite(query: string, limit = 12): Promise<SearchResul
   const results: SearchResult[] = []
 
   for (const { item } of scored) {
+    if (MPT_HIBERNATED && (item.link === '/mpt' || item.link.startsWith('/mpt/') || item.link.startsWith('/account/mpt'))) continue
     const key = `${item.category}|${item.title}`.toLocaleLowerCase()
     if (seen.has(key)) continue
     seen.add(key)
