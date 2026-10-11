@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router'
 import { Bell, BellRing, Check, ExternalLink, X } from 'lucide-react'
 import type { SiteUpdate } from '@/lib/admin'
@@ -130,6 +131,8 @@ export function NotificationOptInBar() {
   )
 }
 
+type NotificationPanelPlacement = { top: number; left: number; width: number; maxHeight: number }
+
 export default function NotificationCenter() {
   const updates = useUpdates()
   const [open, setOpen] = useState(false)
@@ -137,17 +140,75 @@ export default function NotificationCenter() {
   const prefs = getNotifPrefs()
   const unseen = unseenUpdateIds(updates.map((u) => u.id))
   const ref = useRef<HTMLDivElement>(null)
+  const bellRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [panelPlacement, setPanelPlacement] = useState<NotificationPanelPlacement | null>(null)
   const pushedIds = useRef<Set<string>>(
     new Set(JSON.parse(sessionStorage.getItem('cssvista:notification-pushes') || '[]') as string[]),
   )
 
   useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (!ref.current?.contains(target) && !panelRef.current?.contains(target)) setOpen(false)
     }
-    document.addEventListener('mousedown', onClick)
-    return () => document.removeEventListener('mousedown', onClick)
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setOpen(false)
+      bellRef.current?.focus()
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
   }, [])
+
+  // Render outside the blurred/sticky header: its backdrop filter can otherwise
+  // create a containing block and push a wide dropdown off small screens.
+  useLayoutEffect(() => {
+    if (!open) return
+
+    const placePanel = () => {
+      const anchor = bellRef.current?.getBoundingClientRect()
+      if (!anchor) return
+      const viewport = window.visualViewport
+      const viewLeft = viewport?.offsetLeft ?? 0
+      const viewTop = viewport?.offsetTop ?? 0
+      const viewWidth = viewport?.width ?? document.documentElement.clientWidth
+      const viewHeight = viewport?.height ?? window.innerHeight
+      const gutter = 12
+      const width = Math.max(0, Math.min(360, viewWidth - gutter * 2))
+      const left = viewWidth <= 640
+        ? viewLeft + (viewWidth - width) / 2
+        : Math.max(viewLeft + gutter, Math.min(anchor.right - width, viewLeft + viewWidth - gutter - width))
+      const belowTop = anchor.bottom + 8
+      const belowSpace = Math.max(0, viewTop + viewHeight - gutter - belowTop)
+      const aboveSpace = Math.max(0, anchor.top - viewTop - gutter - 8)
+      const above = belowSpace < 220 && aboveSpace > belowSpace
+      let maxHeight = Math.min(540, above ? aboveSpace : belowSpace)
+      let top = above ? anchor.top - 8 - maxHeight : belowTop
+      if (maxHeight < 120) {
+        top = viewTop + gutter
+        maxHeight = Math.max(0, viewHeight - gutter * 2)
+      }
+      const next = { top, left, width, maxHeight }
+      setPanelPlacement((old) => old && Object.keys(next).every((key) => old[key as keyof NotificationPanelPlacement] === next[key as keyof NotificationPanelPlacement]) ? old : next)
+    }
+
+    placePanel()
+    window.addEventListener('resize', placePanel)
+    window.addEventListener('scroll', placePanel, true)
+    window.visualViewport?.addEventListener('resize', placePanel)
+    window.visualViewport?.addEventListener('scroll', placePanel)
+    return () => {
+      window.removeEventListener('resize', placePanel)
+      window.removeEventListener('scroll', placePanel, true)
+      window.visualViewport?.removeEventListener('resize', placePanel)
+      window.visualViewport?.removeEventListener('scroll', placePanel)
+    }
+  }, [open])
 
   // Browser push for new notify-enabled updates (when permission granted).
   // A browser pop-up must never mark the bell item as read: students should
@@ -180,8 +241,12 @@ export default function NotificationCenter() {
   }, [updates])
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative shrink-0" ref={ref}>
       <button
+        ref={bellRef}
+        type="button"
+        aria-expanded={open}
+        aria-controls="cssvista-notification-panel"
         onClick={() => {
           setOpen(!open)
           if (!open) {
@@ -199,13 +264,27 @@ export default function NotificationCenter() {
           </span>
         )}
       </button>
-      {open && (
-        <div className="absolute right-0 z-50 mt-2 w-[min(92vw,360px)] overflow-hidden rounded-xl border bg-white shadow-xl">
+      {open && typeof document !== 'undefined' && createPortal(
+        <div
+          id="cssvista-notification-panel"
+          ref={panelRef}
+          role="region"
+          aria-label="Updates and announcements"
+          className="z-[100] flex flex-col overflow-hidden rounded-xl border bg-white shadow-xl"
+          style={{
+            position: 'fixed',
+            top: panelPlacement?.top ?? 0,
+            left: panelPlacement?.left ?? 0,
+            width: panelPlacement?.width ?? 320,
+            maxHeight: panelPlacement?.maxHeight ?? 0,
+            visibility: panelPlacement ? 'visible' : 'hidden',
+          }}
+        >
           <div className="flex items-center justify-between border-b bg-secondary/60 px-4 py-2.5">
             <p className="text-sm font-bold text-pine">Updates &amp; announcements</p>
             <span className="text-[11px] text-muted-foreground">{updates.length} total</span>
           </div>
-          <div className="max-h-80 overflow-y-auto">
+          <div className="min-h-0 max-h-80 flex-1 overflow-y-auto">
             {updates.length === 0 && (
               <p className="px-4 py-6 text-center text-sm text-muted-foreground">
                 No announcements yet. New updates from the mentors will appear here.
@@ -223,8 +302,9 @@ export default function NotificationCenter() {
               </div>
             ))}
           </div>
-          <NotificationSettings onChange={() => force((f) => f + 1)} />
-        </div>
+          <div className="shrink-0"><NotificationSettings onChange={() => force((f) => f + 1)} /></div>
+        </div>,
+        document.body,
       )}
     </div>
   )
