@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { Bell, BellRing, Check, X } from 'lucide-react'
+import { Bell, BellRing, Check, ExternalLink, X } from 'lucide-react'
 import type { SiteUpdate } from '@/lib/admin'
+import { safeUpdateLink } from '@/lib/updateLinks'
 import { getNotifPrefs, markUpdatesSeen, setNotifPrefs, unseenUpdateIds } from '@/lib/progress'
 import { useAccount } from '@/lib/accountContext'
 import { scheduleIdleWork } from '@/lib/idle'
@@ -218,6 +219,7 @@ export default function NotificationCenter() {
                 </div>
                 <p className="mt-1 text-sm font-semibold text-foreground">{u.title}</p>
                 <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{u.body}</p>
+                <NotificationAction update={u} />
               </div>
             ))}
           </div>
@@ -225,6 +227,22 @@ export default function NotificationCenter() {
         </div>
       )}
     </div>
+  )
+}
+
+function NotificationAction({ update }: { update: SiteUpdate }) {
+  const href = safeUpdateLink(update.linkUrl)
+  if (!href) return null
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-3 inline-flex max-w-full items-center gap-2 rounded-lg bg-emerald-900 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-emerald-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+    >
+      <span className="truncate">{update.linkLabel?.trim() || 'Open link'}</span>
+      <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+    </a>
   )
 }
 
