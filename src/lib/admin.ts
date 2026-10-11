@@ -176,6 +176,8 @@ export interface SiteUpdate {
   date: string
   tag: string // Mentors | Opinions | Test Series | FPSC | General
   notify: boolean
+  linkUrl?: string
+  linkLabel?: string
 }
 
 export interface McqOverride {

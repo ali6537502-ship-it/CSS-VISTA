@@ -34,11 +34,11 @@ $payload = cssv_request_json();
 if ($method === 'POST') {
     $update = cssv_validate_site_update($payload['update'] ?? $payload);
     $stmt = $pdo->prepare(
-        'INSERT INTO site_notifications (id,title,body,tag,notify,published_at) VALUES (?,?,?,?,?,?) '
-        . 'ON DUPLICATE KEY UPDATE title=VALUES(title),body=VALUES(body),tag=VALUES(tag),notify=VALUES(notify),published_at=VALUES(published_at),updated_at=NOW(6)'
+        'INSERT INTO site_notifications (id,title,body,tag,notify,link_url,link_label,published_at) VALUES (?,?,?,?,?,?,?,?) '
+        . 'ON DUPLICATE KEY UPDATE title=VALUES(title),body=VALUES(body),tag=VALUES(tag),notify=VALUES(notify),link_url=VALUES(link_url),link_label=VALUES(link_label),published_at=VALUES(published_at),updated_at=NOW(6)'
     );
     $stmt->execute([
-        $update['id'], $update['title'], $update['body'], $update['tag'], $update['notify'], $update['published_at'],
+        $update['id'], $update['title'], $update['body'], $update['tag'], $update['notify'], $update['link_url'], $update['link_label'], $update['published_at'],
     ]);
     cssv_json(['ok' => true, 'update' => $update]);
 }

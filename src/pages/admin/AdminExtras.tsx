@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  ArrowDown, ArrowUp, Bell, BellRing, Eye, EyeOff, Plus, Save, Trash2, Timer,
+  ArrowDown, ArrowUp, Bell, BellRing, ExternalLink, Eye, EyeOff, Plus, Save, Trash2, Timer,
 } from 'lucide-react'
 import { Badge } from '@/components/shared'
 import {
@@ -15,6 +15,7 @@ import { cardIcons } from '@/data/homeCardIcons'
 import { getBankIndex, getQuestionById, type BankIndex } from '@/data/mcq'
 import { mentors } from '@/data/site'
 import { notesPurchaseActionLabel } from '@/data/notes'
+import { safeUpdateLink } from '@/lib/updateLinks'
 
 const uid = () => Math.random().toString(36).slice(2, 10)
 const input = 'h-10 w-full rounded-md border border-input px-3 text-sm outline-none focus:ring-2 focus:ring-ring'
@@ -136,7 +137,7 @@ export function HomeCardsEditor() {
 // ---------------- Updates & notifications ----------------
 export function UpdatesEditor() {
   const [updates, setUpdates] = useState<SiteUpdate[]>(() => mergedUpdates())
-  const [form, setForm] = useState({ title: '', body: '', tag: 'General', notify: true })
+  const [form, setForm] = useState({ title: '', body: '', linkUrl: '', linkLabel: '', tag: 'General', notify: true })
 
   function refresh() { setUpdates(mergedUpdates()) }
 
@@ -152,6 +153,13 @@ export function UpdatesEditor() {
         <div className="mt-4 grid gap-3">
           <Field label="Title *"><input className={input} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. New VISTA Journal article published" /></Field>
           <Field label="Message *"><textarea rows={3} className={textarea} value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })} /></Field>
+          <Field label="Link URL (optional)">
+            <input type="url" maxLength={2048} className={input} value={form.linkUrl} onChange={(e) => setForm({ ...form, linkUrl: e.target.value })} placeholder="https://meet.google.com/..." />
+          </Field>
+          <Field label="Button text (optional)">
+            <input maxLength={80} className={input} value={form.linkLabel} onChange={(e) => setForm({ ...form, linkLabel: e.target.value })} placeholder="e.g. Join Google Meet, Join Zoom, View details" />
+          </Field>
+          <p className="text-xs text-muted-foreground">Add an https:// or http:// link to show a clickable button in the student's notification. Without custom button text, it will say “Open link”.</p>
           <div className="flex flex-wrap items-center gap-4">
             <Field label="Audience tag">
               <select className={input + ' w-44'} value={form.tag} onChange={(e) => setForm({ ...form, tag: e.target.value })}>
@@ -166,8 +174,14 @@ export function UpdatesEditor() {
           <button
             onClick={() => {
               if (!form.title.trim() || !form.body.trim()) return alert('Title and message are required')
-              upsertUpdate({ id: `upd-${uid()}`, title: form.title, body: form.body, tag: form.tag, notify: form.notify, date: new Date().toISOString().slice(0, 10) })
-              setForm({ title: '', body: '', tag: 'General', notify: true })
+              const linkUrl = form.linkUrl.trim()
+              if (linkUrl && !safeUpdateLink(linkUrl)) return alert('Enter a valid http:// or https:// link without spaces or login details.')
+              upsertUpdate({
+                id: `upd-${uid()}`, title: form.title.trim(), body: form.body.trim(), tag: form.tag, notify: form.notify,
+                date: new Date().toISOString().slice(0, 10),
+                ...(linkUrl ? { linkUrl, ...(form.linkLabel.trim() ? { linkLabel: form.linkLabel.trim() } : {}) } : {}),
+              })
+              setForm({ title: '', body: '', linkUrl: '', linkLabel: '', tag: 'General', notify: true })
               refresh()
             }}
             className="inline-flex w-fit items-center gap-1.5 rounded-md bg-pine px-4 py-2 text-sm font-semibold text-emerald-50 hover:bg-emerald-900"
@@ -188,6 +202,11 @@ export function UpdatesEditor() {
                   {u.notify && <Badge tone="gold">Push</Badge>}
                 </div>
                 <p className="mt-0.5 text-xs text-muted-foreground">{u.date} · {u.body.slice(0, 120)}</p>
+                {safeUpdateLink(u.linkUrl) && (
+                  <a href={safeUpdateLink(u.linkUrl) || '#'} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-emerald-800 hover:underline">
+                    {u.linkLabel || 'Open link'} <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
               <button onClick={() => { deleteUpdate(u.id); refresh() }} className="rounded p-1.5 text-red-600 hover:bg-red-50" aria-label="Delete update"><Trash2 className="h-4 w-4" /></button>
             </li>
