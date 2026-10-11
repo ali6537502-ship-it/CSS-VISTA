@@ -6,6 +6,8 @@ declare(strict_types=1);
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 $root = $argv[1] ?? dirname(__DIR__, 2) . '/public';
 require_once rtrim($root, '/') . '/api/_mpt.php';
+// Preserve all existing records, but do not schedule or process new MPT runs while suspended.
+if (CSSV_MPT_HIBERNATED) { echo "MPT mocks hibernated\\n"; exit(0); }
 $pdo = cssv_db();
 mpt_ensure_schema($pdo);
 $result = mpt_maintain($pdo, true);
