@@ -23,6 +23,7 @@ import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { shouldShowCss2026ResultAnnouncement } from '@/lib/resultAnnouncement'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 import { useMptSpotlight } from '@/lib/mpt/useMptSpotlight'
 import { spotlightMessage } from '@/components/mpt/MptMockStrip'
 import {
@@ -52,7 +53,7 @@ const nav = [
   {
     label: 'Practice',
     items: [
-      { label: 'MPT Preparation', to: '/mpt', icon: ClipboardList },
+      ...(!MPT_HIBERNATED ? [{ label: 'MPT Preparation', to: '/mpt', icon: ClipboardList }] : []),
       { label: 'Daily Five-Minute Challenge', to: '/five-minute', icon: Megaphone },
       { label: 'Mistake Notebook', to: '/mistakes', icon: FileText },
       { label: 'Essay - Miss Sadia Zahoor, PAS', to: '/essay', icon: PenLine },
@@ -129,7 +130,7 @@ const primaryNav = [
   { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
   { label: 'Subject MCQs', to: '/css-mcqs', icon: ClipboardList },
   { label: 'GK World', to: '/gk', icon: Globe2 },
-  { label: 'MPT Practice', to: '/mpt', icon: PenLine },
+  ...(!MPT_HIBERNATED ? [{ label: 'MPT Practice', to: '/mpt', icon: PenLine }] : []),
   { label: 'Past Papers', to: '/past-papers', icon: FileText },
 ]
 
@@ -144,7 +145,7 @@ const mobileBottomNav = [
 const mobileQuickLinks = [
   { label: 'Home', to: '/', icon: HomeIcon },
   { label: 'Vistagram', to: '/vistagram', icon: Sparkles },
-  ...sortHomeCardsByPriority(defaultHomeCards.filter((item) => item.visible))
+  ...sortHomeCardsByPriority(defaultHomeCards.filter((item) => item.visible && !(MPT_HIBERNATED && (item.to.startsWith('/mpt') || item.id === 'mpt-grand-mock'))))
     .map((item) => ({
       label: item.title,
       to: item.to,
@@ -274,7 +275,7 @@ function NotificationBar() {
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mptApplicationFlow = useMptFlowEnabled() === true
   const mptSpotlight = useMptSpotlight()
-  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
+  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => (kind === 'gk' || !MPT_HIBERNATED) && !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
     const status = getDailyMockStatus(kind, scheduleTime)
     return {
       id: `daily-${kind}-mock-${status.dateKey}`,
@@ -290,7 +291,7 @@ function NotificationBar() {
   })
   // With the application flow on, official MPT mocks are entered only through an
   // application and Roll Number (docs/mpt), so the free-entry notices give way.
-  if (mptApplicationFlow) {
+  if (!MPT_HIBERNATED && mptApplicationFlow) {
     // D-52: name the actual mock (live now, yours, or next) wherever the site shows notices.
     const message = mptSpotlight ? spotlightMessage(mptSpotlight, Boolean(user)) : null
     mockNotices.unshift({
@@ -1260,7 +1261,7 @@ export default function Layout() {
             <h3 className="text-sm font-semibold text-foreground">Practice</h3>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><Link className="hover:text-pine transition-colors" to="/gk">GK World</Link></li>
-              <li><Link className="hover:text-pine transition-colors" to="/mpt">MPT Mocks & Preparation</Link></li>
+              {!MPT_HIBERNATED && <li><Link className="hover:text-pine transition-colors" to="/mpt">MPT Mocks & Preparation</Link></li>}
               <li><Link className="hover:text-pine transition-colors" to="/five-minute">Five-Minute Challenge</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/mistakes">Mistake Notebook</Link></li>
               <li><Link className="hover:text-pine transition-colors" to="/grammar-vocabulary">Vocabulary and Daily Challenge</Link></li>
