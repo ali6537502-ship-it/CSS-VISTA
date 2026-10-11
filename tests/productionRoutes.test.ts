@@ -72,7 +72,7 @@ if (built) {
 const INDEXABLE = [
   '/', '/start-css', '/subjects/compulsory', '/subjects/compulsory/essay',
   '/subjects/compulsory/pakistan-affairs', '/subjects/compulsory/islamic-studies',
-  '/subjects/optional', '/fpsc-syllabus', '/past-papers', '/notes', '/essay', '/mpt',
+  '/subjects/optional', '/fpsc-syllabus', '/past-papers', '/notes', '/essay',
   '/mentors', '/services', '/analysis', '/psych-viva', '/fpsc-updates',
   '/handwritten-notes', '/books', '/journal', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
@@ -82,7 +82,7 @@ const INDEXABLE = [
 
 /** Routes deliberately kept out of search that must still be fully served. */
 const FUNCTIONAL_NOINDEX = [
-  '/legal', '/gk', '/one-liner-gk', '/language-grammar',
+  '/legal', '/gk', '/mpt', '/one-liner-gk', '/language-grammar',
   '/css-mcqs', '/css-past-paper-analysis', '/current-affairs', '/daily-briefing', '/vistagram',
   '/subjects/selector', '/answer-writing', '/test-series', '/study-tools',
   '/games', '/grammar-vocabulary', '/answer-timer', '/lectures',
