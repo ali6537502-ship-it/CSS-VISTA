@@ -14,6 +14,7 @@ import { useBriefing } from '@/features/current-affairs/useBriefing'
 import { AuthenticatedAccountAd } from '@/components/Ads'
 import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
+import { MPT_HIBERNATED } from '@/lib/featureHibernation'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -144,7 +145,7 @@ export default function AccountHome() {
     snapshot.stats.streak ? `${snapshot.stats.streak}-day streak` : null,
   ].filter(Boolean).join(' · ')
 
-  const mptFlow = useMptFlowEnabled() === true
+  const mptFlow = !MPT_HIBERNATED && useMptFlowEnabled() === true
   const freeChoices = [
     { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
@@ -183,7 +184,7 @@ export default function AccountHome() {
   ]
   const proChoices = [
     { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
-    { to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' },
+    ...(!MPT_HIBERNATED ? [{ to: '/mpt/bank/abilities', icon: Calculator, title: 'General Ability', status: 'Maths & reasoning MCQ practice' }] : []),
     { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     {
       to: '/study-material/essay-themes', icon: ListTree, title: 'Essay Themes 2027',
@@ -239,7 +240,7 @@ export default function AccountHome() {
         <section aria-labelledby="free-features" className="mt-9">
           <h2 id="free-features" className="text-xl font-bold text-slate-950">{section === 'pro' ? 'Your included free features' : 'Free features'}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-600">Study, practise and keep your progress with your free account.</p>
-          <DashboardMptCard />
+          {!MPT_HIBERNATED && <DashboardMptCard />}
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {freeChoices.map((choice, index) => <ChoiceCard key={choice.title} {...choice} index={index} />)}
           </div>
