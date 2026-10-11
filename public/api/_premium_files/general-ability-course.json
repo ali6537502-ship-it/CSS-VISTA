@@ -1,0 +1,3031 @@
+{
+  "title": "General Ability",
+  "edition": "2026-10-11-v1",
+  "attribution": "Original CSS Vista learning exercises; not presented as authentic past-paper questions.",
+  "units": [
+    {
+      "id": "number-sense",
+      "title": "Numbers, place value & estimation",
+      "stage": "Foundations",
+      "summary": "Read numbers, work with negatives and check the size of an answer.",
+      "lessons": [
+        {
+          "id": "number-sense-1",
+          "title": "Place value",
+          "idea": "A digit has a value because of its position. In 4,582, the 5 represents five hundreds.",
+          "rule": "Expanded form adds the value of each digit.",
+          "example": {
+            "problem": "Write 6,307 in expanded form.",
+            "steps": [
+              "6 thousands = 6,000; 3 hundreds = 300.",
+              "There are no tens. Seven ones = 7.",
+              "6,307 = 6,000 + 300 + 7."
+            ]
+          },
+          "exercise": {
+            "id": "number-sense-practice-1",
+            "prompt": "What is the value of the digit 7 in 47,206?",
+            "unit": "number",
+            "answer": "7000",
+            "proof": "7*1000",
+            "explanation": "The 7 is in the thousands column: 7 × 1,000 = 7,000."
+          }
+        },
+        {
+          "id": "number-sense-2",
+          "title": "Negative numbers",
+          "idea": "On a number line, adding a positive number moves right. Adding a negative number moves left.",
+          "rule": "Subtracting a negative is adding its opposite: a − (−b) = a + b.",
+          "example": {
+            "problem": "Calculate −8 − (−3).",
+            "steps": [
+              "Start at −8.",
+              "Subtracting −3 means adding 3.",
+              "−8 + 3 = −5."
+            ]
+          },
+          "exercise": {
+            "id": "number-sense-practice-2",
+            "prompt": "Calculate −12 + 7 − (−4).",
+            "unit": "number",
+            "answer": "-1",
+            "proof": "-12+7+4",
+            "explanation": "−12 + 7 = −5. Then subtracting −4 adds 4, giving −1."
+          }
+        },
+        {
+          "id": "number-sense-3",
+          "title": "Estimation",
+          "idea": "Round first to predict the size of a calculation, then compute accurately when an exact answer is required.",
+          "rule": "To round to the nearest ten, check the ones digit: 5 or more rounds up.",
+          "example": {
+            "problem": "Estimate 398 × 21 by rounding to 400 and 20.",
+            "steps": [
+              "398 is close to 400; 21 is close to 20.",
+              "400 × 20 = 8,000.",
+              "This is an estimate. The exact product is 8,358."
+            ]
+          },
+          "exercise": {
+            "id": "number-sense-practice-3",
+            "prompt": "Round 7,846 to the nearest hundred.",
+            "unit": "number",
+            "answer": "7800",
+            "proof": "7800",
+            "explanation": "The tens digit is 4, so 7,846 rounds down to 7,800."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "number-sense-quiz-1",
+          "prompt": "What is the value of 6 in 36,415?",
+          "unit": "number",
+          "options": [
+            "600",
+            "60",
+            "6000",
+            "60000"
+          ],
+          "answer": 2,
+          "proof": "6000",
+          "explanation": "The 6 occupies the thousands place."
+        },
+        {
+          "id": "number-sense-quiz-2",
+          "prompt": "Calculate −9 − (−14).",
+          "unit": "number",
+          "options": [
+            "-23",
+            "23",
+            "5",
+            "-5"
+          ],
+          "answer": 2,
+          "proof": "-9+14",
+          "explanation": "Subtracting −14 adds 14: −9 + 14 = 5."
+        },
+        {
+          "id": "number-sense-quiz-3",
+          "prompt": "Round 12,750 to the nearest hundred.",
+          "unit": "number",
+          "options": [
+            "12700",
+            "12800",
+            "13000",
+            "12000"
+          ],
+          "answer": 1,
+          "proof": "12800",
+          "explanation": "The tens digit is 5; increase the hundreds digit."
+        },
+        {
+          "id": "number-sense-quiz-4",
+          "prompt": "A temperature rises from −6°C to 8°C. What is the increase?",
+          "unit": "°C",
+          "options": [
+            "14",
+            "2",
+            "-14",
+            "-2"
+          ],
+          "answer": 0,
+          "proof": "8-(-6)",
+          "explanation": "Final minus initial = 8 − (−6) = 14°C."
+        },
+        {
+          "id": "number-sense-quiz-5",
+          "prompt": "Estimate 49 × 202 by rounding to 50 and 200.",
+          "unit": "number",
+          "options": [
+            "10000",
+            "1000",
+            "10100",
+            "9900"
+          ],
+          "answer": 0,
+          "proof": "50*200",
+          "explanation": "The stated rounded product is 50 × 200 = 10,000."
+        }
+      ]
+    },
+    {
+      "id": "basic-calculation",
+      "title": "Basic calculation & order of operations",
+      "stage": "Foundations",
+      "summary": "Calculate accurately, handle brackets and use efficient mental methods.",
+      "lessons": [
+        {
+          "id": "basic-calculation-1",
+          "title": "Operation order",
+          "idea": "Multiplication and division have equal priority and are processed left to right. Addition and subtraction then follow left to right.",
+          "rule": "Brackets → powers → multiplication/division → addition/subtraction.",
+          "example": {
+            "problem": "Calculate 18 − 6 ÷ 3 × 2.",
+            "steps": [
+              "Division and multiplication first: 6 ÷ 3 × 2 = 2 × 2 = 4.",
+              "Then subtract: 18 − 4 = 14."
+            ]
+          },
+          "exercise": {
+            "id": "basic-calculation-practice-1",
+            "prompt": "Calculate 24 ÷ 6 × 3 + 5.",
+            "unit": "number",
+            "answer": "17",
+            "proof": "24/6*3+5",
+            "explanation": "24 ÷ 6 = 4; 4 × 3 = 12; 12 + 5 = 17."
+          }
+        },
+        {
+          "id": "basic-calculation-2",
+          "title": "Brackets and powers",
+          "idea": "Brackets can change the calculation. A square means multiply the number by itself, not by two.",
+          "rule": "Evaluate the bracket before applying its power.",
+          "example": {
+            "problem": "Calculate (7 − 3)² + 6.",
+            "steps": [
+              "7 − 3 = 4.",
+              "4² = 4 × 4 = 16.",
+              "16 + 6 = 22."
+            ]
+          },
+          "exercise": {
+            "id": "basic-calculation-practice-2",
+            "prompt": "Calculate 3 × (8 − 2)².",
+            "unit": "number",
+            "answer": "108",
+            "proof": "3*(8-2)**2",
+            "explanation": "The bracket is 6; its square is 36; 3 × 36 = 108."
+          }
+        },
+        {
+          "id": "basic-calculation-3",
+          "title": "Mental calculation",
+          "idea": "Split a difficult product into easy parts. This keeps the value unchanged because multiplication distributes over addition or subtraction.",
+          "rule": "a(b + c) = ab + ac.",
+          "example": {
+            "problem": "Calculate 98 × 25.",
+            "steps": [
+              "98 = 100 − 2.",
+              "100 × 25 − 2 × 25 = 2,500 − 50.",
+              "The product is 2,450."
+            ]
+          },
+          "exercise": {
+            "id": "basic-calculation-practice-3",
+            "prompt": "Calculate 48 × 125 without a calculator.",
+            "unit": "number",
+            "answer": "6000",
+            "proof": "48*125",
+            "explanation": "125 × 8 = 1,000, and 48 = 6 × 8. The product is 6,000."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "basic-calculation-quiz-1",
+          "prompt": "Calculate 30 − 12 ÷ 4 × 3.",
+          "unit": "number",
+          "options": [
+            "13.5",
+            "24",
+            "21",
+            "27"
+          ],
+          "answer": 2,
+          "proof": "30-12/4*3",
+          "explanation": "12 ÷ 4 × 3 = 9, so 30 − 9 = 21."
+        },
+        {
+          "id": "basic-calculation-quiz-2",
+          "prompt": "Calculate (5 + 3)² − 10.",
+          "unit": "number",
+          "options": [
+            "6",
+            "24",
+            "74",
+            "54"
+          ],
+          "answer": 3,
+          "proof": "(5+3)**2-10",
+          "explanation": "The bracket is 8; 8² − 10 = 64 − 10 = 54."
+        },
+        {
+          "id": "basic-calculation-quiz-3",
+          "prompt": "Calculate 16 ÷ 4 ÷ 2.",
+          "unit": "number",
+          "options": [
+            "8",
+            "16",
+            "4",
+            "2"
+          ],
+          "answer": 3,
+          "proof": "16/4/2",
+          "explanation": "Equal-priority divisions run left to right: 4 ÷ 2 = 2."
+        },
+        {
+          "id": "basic-calculation-quiz-4",
+          "prompt": "Calculate 99 × 37.",
+          "unit": "number",
+          "options": [
+            "3700",
+            "3663",
+            "3626",
+            "3737"
+          ],
+          "answer": 1,
+          "proof": "99*37",
+          "explanation": "100 × 37 − 37 = 3,700 − 37 = 3,663."
+        },
+        {
+          "id": "basic-calculation-quiz-5",
+          "prompt": "Calculate 7 + 2 × (9 − 4)².",
+          "unit": "number",
+          "options": [
+            "57",
+            "81",
+            "32",
+            "225"
+          ],
+          "answer": 0,
+          "proof": "7+2*(9-4)**2",
+          "explanation": "The bracket is 5. Squaring gives 25; doubling and adding 7 gives 57."
+        }
+      ]
+    },
+    {
+      "id": "hcf-lcm",
+      "title": "Factors, HCF & LCM",
+      "stage": "Foundations",
+      "summary": "Use factors and multiples to group quantities and solve repeating-event problems.",
+      "lessons": [
+        {
+          "id": "hcf-lcm-1",
+          "title": "Factors and primes",
+          "idea": "A factor divides a whole number exactly. A prime number greater than 1 has exactly two positive factors: 1 and itself.",
+          "rule": "Prime factorisation breaks a number into a product of primes.",
+          "example": {
+            "problem": "Factorise 84.",
+            "steps": [
+              "84 = 2 × 42 = 2 × 2 × 21.",
+              "21 = 3 × 7.",
+              "84 = 2² × 3 × 7."
+            ]
+          },
+          "exercise": {
+            "id": "hcf-lcm-practice-1",
+            "prompt": "What is the largest prime factor of 90?",
+            "unit": "number",
+            "answer": "5",
+            "proof": "5",
+            "explanation": "90 = 2 × 3² × 5. Its prime factors are 2, 3 and 5."
+          }
+        },
+        {
+          "id": "hcf-lcm-2",
+          "title": "Highest common factor",
+          "idea": "The HCF is the largest number that divides each given quantity. It is useful when making the largest equal groups without a remainder.",
+          "rule": "For prime factors, use only shared primes with the smaller exponent.",
+          "example": {
+            "problem": "Find the HCF of 36 and 48.",
+            "steps": [
+              "36 = 2² × 3²; 48 = 2⁴ × 3.",
+              "The shared part is 2² × 3.",
+              "HCF = 12."
+            ]
+          },
+          "exercise": {
+            "id": "hcf-lcm-practice-2",
+            "prompt": "Find the HCF of 54 and 72.",
+            "unit": "number",
+            "answer": "18",
+            "proof": "18",
+            "explanation": "54 = 2 × 3³ and 72 = 2³ × 3². The shared product is 2 × 3² = 18."
+          }
+        },
+        {
+          "id": "hcf-lcm-3",
+          "title": "Least common multiple",
+          "idea": "The LCM is the smallest positive number divisible by every given number. It tells when repeating events coincide.",
+          "rule": "For prime factors, take every required prime with the larger exponent.",
+          "example": {
+            "problem": "Two bells ring every 12 and 18 minutes. After ringing together, when do they next coincide?",
+            "steps": [
+              "12 = 2² × 3; 18 = 2 × 3².",
+              "LCM = 2² × 3² = 36.",
+              "They next coincide after 36 minutes."
+            ]
+          },
+          "exercise": {
+            "id": "hcf-lcm-practice-3",
+            "prompt": "Find the LCM of 15, 20 and 30.",
+            "unit": "number",
+            "answer": "60",
+            "proof": "60",
+            "explanation": "The required prime powers are 2², 3 and 5. Their product is 60."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "hcf-lcm-quiz-1",
+          "prompt": "Find the HCF of 42 and 56.",
+          "unit": "number",
+          "options": [
+            "7",
+            "14",
+            "28",
+            "2"
+          ],
+          "answer": 1,
+          "proof": "14",
+          "explanation": "42 = 3 × 14 and 56 = 4 × 14; 14 is the greatest shared factor."
+        },
+        {
+          "id": "hcf-lcm-quiz-2",
+          "prompt": "Find the LCM of 8 and 12.",
+          "unit": "number",
+          "options": [
+            "4",
+            "48",
+            "96",
+            "24"
+          ],
+          "answer": 3,
+          "proof": "24",
+          "explanation": "8 = 2³ and 12 = 2² × 3; use 2³ × 3 = 24."
+        },
+        {
+          "id": "hcf-lcm-quiz-3",
+          "prompt": "Find the HCF of 24, 36 and 60.",
+          "unit": "number",
+          "options": [
+            "6",
+            "12",
+            "24",
+            "4"
+          ],
+          "answer": 1,
+          "proof": "12",
+          "explanation": "12 divides all three numbers; their shared prime powers give no larger factor."
+        },
+        {
+          "id": "hcf-lcm-quiz-4",
+          "prompt": "Bells ring every 16 and 24 minutes and have just rung together. After how many minutes do they next ring together?",
+          "unit": "minutes",
+          "options": [
+            "48",
+            "8",
+            "40",
+            "96"
+          ],
+          "answer": 0,
+          "proof": "48",
+          "explanation": "LCM(16, 24) = 2⁴ × 3 = 48."
+        },
+        {
+          "id": "hcf-lcm-quiz-5",
+          "prompt": "For two positive integers, HCF = 6 and LCM = 90. If one integer is 18, what is the other?",
+          "unit": "number",
+          "options": [
+            "15",
+            "54",
+            "45",
+            "30"
+          ],
+          "answer": 3,
+          "proof": "6*90/18",
+          "explanation": "For two positive integers, product = HCF × LCM. The other integer is 540 ÷ 18 = 30."
+        }
+      ]
+    },
+    {
+      "id": "fractions",
+      "title": "Fractions",
+      "stage": "Foundations",
+      "summary": "Simplify, compare and calculate with fractions before applying them to word problems.",
+      "lessons": [
+        {
+          "id": "fractions-1",
+          "title": "Equivalent fractions",
+          "idea": "A fraction represents a number of equal parts. Multiplying or dividing both numerator and denominator by the same nonzero number preserves its value.",
+          "rule": "Simplify by dividing both parts by their HCF.",
+          "example": {
+            "problem": "Simplify 18/24.",
+            "steps": [
+              "The HCF of 18 and 24 is 6.",
+              "Divide both parts by 6: 18/24 = 3/4."
+            ]
+          },
+          "exercise": {
+            "id": "fractions-practice-1",
+            "prompt": "Simplify 21/35.",
+            "unit": "fraction",
+            "answer": "3/5",
+            "proof": "21/35",
+            "explanation": "Divide numerator and denominator by 7: 21/35 = 3/5."
+          }
+        },
+        {
+          "id": "fractions-2",
+          "title": "Addition and subtraction",
+          "idea": "Fractions must describe the same-sized parts before they can be added. Use a common denominator, then combine numerators.",
+          "rule": "a/c + b/c = (a + b)/c.",
+          "example": {
+            "problem": "Calculate 2/3 + 1/4.",
+            "steps": [
+              "Use denominator 12: 2/3 = 8/12 and 1/4 = 3/12.",
+              "8/12 + 3/12 = 11/12."
+            ]
+          },
+          "exercise": {
+            "id": "fractions-practice-2",
+            "prompt": "Calculate 5/6 − 1/4.",
+            "unit": "fraction",
+            "answer": "7/12",
+            "proof": "5/6-1/4",
+            "explanation": "Use denominator 12: 10/12 − 3/12 = 7/12."
+          }
+        },
+        {
+          "id": "fractions-3",
+          "title": "Multiplication and division",
+          "idea": "Multiplication takes a fraction of a quantity. Division by a nonzero fraction multiplies by its reciprocal.",
+          "rule": "(a/b) ÷ (c/d) = (a/b) × (d/c), provided b, c and d are nonzero.",
+          "example": {
+            "problem": "Calculate (3/5) ÷ (9/10).",
+            "steps": [
+              "Multiply by the reciprocal: (3/5) × (10/9).",
+              "Cancel common factors to get 2/3."
+            ]
+          },
+          "exercise": {
+            "id": "fractions-practice-3",
+            "prompt": "A tank is 3/4 full. One third of that water is removed. What fraction of the whole tank remains?",
+            "unit": "fraction of tank",
+            "answer": "1/2",
+            "proof": "3/4*(1-1/3)",
+            "explanation": "Two thirds of the existing water remains: (3/4) × (2/3) = 1/2 of the whole tank."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "fractions-quiz-1",
+          "prompt": "Calculate 3/8 + 1/6.",
+          "unit": "fraction",
+          "options": [
+            "4/14",
+            "1/2",
+            "13/24",
+            "11/24"
+          ],
+          "answer": 2,
+          "proof": "3/8+1/6",
+          "explanation": "Use denominator 24: 9/24 + 4/24 = 13/24."
+        },
+        {
+          "id": "fractions-quiz-2",
+          "prompt": "Calculate (4/7) × (21/8).",
+          "unit": "fraction",
+          "options": [
+            "3/20",
+            "2/3",
+            "3/2",
+            "3/4"
+          ],
+          "answer": 2,
+          "proof": "4/7*21/8",
+          "explanation": "Cancel 21 with 7 and 4 with 8: the product is 3/2."
+        },
+        {
+          "id": "fractions-quiz-3",
+          "prompt": "Calculate (5/6) ÷ (10/9).",
+          "unit": "fraction",
+          "options": [
+            "25/27",
+            "4/3",
+            "3/4",
+            "1/3"
+          ],
+          "answer": 2,
+          "proof": "5/6/(10/9)",
+          "explanation": "Multiply by 9/10: 45/60 = 3/4."
+        },
+        {
+          "id": "fractions-quiz-4",
+          "prompt": "Three fifths of a class of 45 students are present. How many students are absent?",
+          "unit": "students",
+          "options": [
+            "18",
+            "27",
+            "15",
+            "9"
+          ],
+          "answer": 0,
+          "proof": "45*(1-3/5)",
+          "explanation": "Two fifths are absent: (2/5) × 45 = 18."
+        },
+        {
+          "id": "fractions-quiz-5",
+          "prompt": "Calculate 2 + 3/4 − 1/2.",
+          "unit": "number",
+          "options": [
+            "9/4",
+            "7/4",
+            "5/4",
+            "11/4"
+          ],
+          "answer": 0,
+          "proof": "2+3/4-1/2",
+          "explanation": "3/4 − 1/2 = 1/4. Adding 2 gives 9/4."
+        }
+      ]
+    },
+    {
+      "id": "decimals",
+      "title": "Decimals",
+      "stage": "Foundations",
+      "summary": "Understand decimal place value, conversions and accurate decimal operations.",
+      "lessons": [
+        {
+          "id": "decimals-1",
+          "title": "Place value and conversion",
+          "idea": "Digits after the decimal point represent tenths, hundredths and thousandths. Leading zeros matter to the value.",
+          "rule": "A terminating decimal can be written over 10, 100, 1,000 and then simplified.",
+          "example": {
+            "problem": "Convert 0.375 to a fraction.",
+            "steps": [
+              "0.375 = 375/1,000.",
+              "Divide both parts by 125: 3/8."
+            ]
+          },
+          "exercise": {
+            "id": "decimals-practice-1",
+            "prompt": "Convert 0.125 to a fraction.",
+            "unit": "fraction",
+            "answer": "1/8",
+            "proof": "125/1000",
+            "explanation": "0.125 = 125/1,000 = 1/8."
+          }
+        },
+        {
+          "id": "decimals-2",
+          "title": "Decimal operations",
+          "idea": "Align decimal points for addition and subtraction. For multiplication, track the total number of decimal places.",
+          "rule": "Multiplying or dividing by powers of ten changes place value.",
+          "example": {
+            "problem": "Calculate 2.4 × 0.15.",
+            "steps": [
+              "24 × 15 = 360.",
+              "The factors have three decimal places in total.",
+              "Place three decimal digits: 0.360 = 0.36."
+            ]
+          },
+          "exercise": {
+            "id": "decimals-practice-2",
+            "prompt": "Calculate 3.6 × 0.25.",
+            "unit": "number",
+            "answer": "9/10",
+            "proof": "36/10*25/100",
+            "explanation": "A quarter of 3.6 is 0.9; equivalently, 36 × 25 with three decimal places gives 0.900."
+          }
+        },
+        {
+          "id": "decimals-3",
+          "title": "Division and rounding",
+          "idea": "Scale both dividend and divisor equally to make decimal division easier. Round only at the requested final step.",
+          "rule": "2.7 ÷ 0.3 = 27 ÷ 3.",
+          "example": {
+            "problem": "Calculate 4.8 ÷ 0.06.",
+            "steps": [
+              "Multiply both numbers by 100: 480 ÷ 6.",
+              "The answer is 80."
+            ]
+          },
+          "exercise": {
+            "id": "decimals-practice-3",
+            "prompt": "Calculate 7.2 ÷ 0.08.",
+            "unit": "number",
+            "answer": "90",
+            "proof": "(72/10)/(8/100)",
+            "explanation": "Scale by 100: 720 ÷ 8 = 90."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "decimals-quiz-1",
+          "prompt": "Convert 0.45 to a fraction in simplest form.",
+          "unit": "fraction",
+          "options": [
+            "45/10",
+            "5/9",
+            "9/25",
+            "9/20"
+          ],
+          "answer": 3,
+          "proof": "45/100",
+          "explanation": "45/100 simplifies to 9/20."
+        },
+        {
+          "id": "decimals-quiz-2",
+          "prompt": "Calculate 0.6 × 0.4.",
+          "unit": "number",
+          "options": [
+            "2.4",
+            "0.024",
+            "1",
+            "6/25"
+          ],
+          "answer": 3,
+          "proof": "6/10*4/10",
+          "explanation": "6 × 4 = 24 with two decimal places: 0.24."
+        },
+        {
+          "id": "decimals-quiz-3",
+          "prompt": "Calculate 5.25 − 1.8.",
+          "unit": "number",
+          "options": [
+            "4.07",
+            "3.55",
+            "69/20",
+            "4.45"
+          ],
+          "answer": 2,
+          "proof": "525/100-18/10",
+          "explanation": "Write 1.8 as 1.80 and subtract to get 3.45."
+        },
+        {
+          "id": "decimals-quiz-4",
+          "prompt": "Calculate 6.3 ÷ 0.09.",
+          "unit": "number",
+          "options": [
+            "7",
+            "70",
+            "700",
+            "0.7"
+          ],
+          "answer": 1,
+          "proof": "(63/10)/(9/100)",
+          "explanation": "630 ÷ 9 = 70."
+        },
+        {
+          "id": "decimals-quiz-5",
+          "prompt": "Round 3.476 to two decimal places.",
+          "unit": "number",
+          "options": [
+            "3.47",
+            "3.5",
+            "87/25",
+            "3.46"
+          ],
+          "answer": 2,
+          "proof": "348/100",
+          "explanation": "The third decimal digit is 6, so increase the hundredths digit: 3.48."
+        }
+      ]
+    },
+    {
+      "id": "percentages",
+      "title": "Percentages",
+      "stage": "Foundations",
+      "summary": "Find parts, compare changes and reverse a percentage increase or decrease.",
+      "lessons": [
+        {
+          "id": "percentages-1",
+          "title": "Percent of a quantity",
+          "idea": "Percent means out of 100. Convert the percentage to a fraction or decimal before multiplying.",
+          "rule": "p% of x = (p/100) × x.",
+          "example": {
+            "problem": "Find 15% of 240.",
+            "steps": [
+              "10% is 24 and 5% is 12.",
+              "15% = 24 + 12 = 36."
+            ]
+          },
+          "exercise": {
+            "id": "percentages-practice-1",
+            "prompt": "Find 18% of 350.",
+            "unit": "number",
+            "answer": "63",
+            "proof": "18/100*350",
+            "explanation": "Multiply 350 by 18/100 to get 63."
+          }
+        },
+        {
+          "id": "percentages-2",
+          "title": "Percentage change",
+          "idea": "A percentage increase or decrease is measured relative to the original value, not the final value.",
+          "rule": "Percentage change = (change/original) × 100.",
+          "example": {
+            "problem": "A value rises from 80 to 100. Find the percentage increase.",
+            "steps": [
+              "Increase = 100 − 80 = 20.",
+              "20/80 × 100 = 25%."
+            ]
+          },
+          "exercise": {
+            "id": "percentages-practice-2",
+            "prompt": "A value falls from 250 to 200. Find the percentage decrease.",
+            "unit": "%",
+            "answer": "20",
+            "proof": "(250-200)/250*100",
+            "explanation": "The fall is 50, and 50/250 × 100 = 20%."
+          }
+        },
+        {
+          "id": "percentages-3",
+          "title": "Reverse and successive changes",
+          "idea": "Successive percentage changes multiply their factors. Equal increases and decreases do not usually cancel.",
+          "rule": "A 20% rise multiplies by 1.20; a 20% fall multiplies by 0.80.",
+          "example": {
+            "problem": "A price of 500 rises 10% then falls 10%. Find the final price.",
+            "steps": [
+              "500 × 1.10 = 550.",
+              "550 × 0.90 = 495.",
+              "The net change is a 1% decrease."
+            ]
+          },
+          "exercise": {
+            "id": "percentages-practice-3",
+            "prompt": "After a 20% increase, a price is 900. What was the original price?",
+            "unit": "PKR",
+            "answer": "750",
+            "proof": "900/(120/100)",
+            "explanation": "Final = original × 1.20, so original = 900 ÷ 1.20 = 750."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "percentages-quiz-1",
+          "prompt": "Find 12.5% of 320.",
+          "unit": "number",
+          "options": [
+            "40",
+            "25",
+            "32",
+            "80"
+          ],
+          "answer": 0,
+          "proof": "125/1000*320",
+          "explanation": "12.5% is 1/8; 320 ÷ 8 = 40."
+        },
+        {
+          "id": "percentages-quiz-2",
+          "prompt": "A value rises from 120 to 150. What is the percentage increase?",
+          "unit": "%",
+          "options": [
+            "25",
+            "20",
+            "30",
+            "125"
+          ],
+          "answer": 0,
+          "proof": "(150-120)/120*100",
+          "explanation": "The increase is 30, measured against 120: 25%."
+        },
+        {
+          "id": "percentages-quiz-3",
+          "prompt": "A price falls by 15% to 680. What was the original price?",
+          "unit": "PKR",
+          "options": [
+            "800",
+            "782",
+            "578",
+            "700"
+          ],
+          "answer": 0,
+          "proof": "680/(85/100)",
+          "explanation": "680 represents 85% of the original: 680 ÷ 0.85 = 800."
+        },
+        {
+          "id": "percentages-quiz-4",
+          "prompt": "A quantity rises by 20% and then by 10%. What is the overall percentage increase?",
+          "unit": "%",
+          "options": [
+            "30",
+            "2",
+            "32",
+            "132"
+          ],
+          "answer": 2,
+          "proof": "((120/100)*(110/100)-1)*100",
+          "explanation": "1.20 × 1.10 = 1.32, so the overall increase is 32%."
+        },
+        {
+          "id": "percentages-quiz-5",
+          "prompt": "A quantity falls by 25%. What percentage increase restores its original value?",
+          "unit": "%",
+          "options": [
+            "25",
+            "75",
+            "20",
+            "100/3"
+          ],
+          "answer": 3,
+          "proof": "25/75*100",
+          "explanation": "The remaining 75 must increase by 25. Relative to 75 this is 100/3%, approximately 33.33%."
+        }
+      ]
+    },
+    {
+      "id": "ratio-proportion",
+      "title": "Ratio & proportion",
+      "stage": "Foundations",
+      "summary": "Compare quantities, share totals and distinguish direct from inverse proportion.",
+      "lessons": [
+        {
+          "id": "ratio-proportion-1",
+          "title": "Simplifying and sharing",
+          "idea": "A ratio compares quantities in the same units. Add its parts before dividing a known total.",
+          "rule": "For a:b, shares are total × a/(a+b) and total × b/(a+b).",
+          "example": {
+            "problem": "Divide 420 in the ratio 2:5.",
+            "steps": [
+              "Total parts = 7; one part = 420 ÷ 7 = 60.",
+              "Shares are 120 and 300."
+            ]
+          },
+          "exercise": {
+            "id": "ratio-proportion-practice-1",
+            "prompt": "Divide 560 in the ratio 3:4. What is the smaller share?",
+            "unit": "number",
+            "answer": "240",
+            "proof": "560*3/(3+4)",
+            "explanation": "Seven parts share 560; each part is 80. Three parts give 240."
+          }
+        },
+        {
+          "id": "ratio-proportion-2",
+          "title": "Direct proportion",
+          "idea": "When the rate stays constant, twice the quantity costs twice as much. Start with the value for one unit.",
+          "rule": "If y is directly proportional to x, y/x is constant.",
+          "example": {
+            "problem": "Five notebooks cost 450. What do eight cost at the same rate?",
+            "steps": [
+              "One notebook costs 450 ÷ 5 = 90.",
+              "Eight cost 8 × 90 = 720."
+            ]
+          },
+          "exercise": {
+            "id": "ratio-proportion-practice-2",
+            "prompt": "Seven identical items cost 840. What do eleven cost at the same rate?",
+            "unit": "PKR",
+            "answer": "1320",
+            "proof": "840/7*11",
+            "explanation": "One item costs 120, so eleven cost 1,320."
+          }
+        },
+        {
+          "id": "ratio-proportion-3",
+          "title": "Inverse and compound proportion",
+          "idea": "For a fixed job at a fixed rate per worker, more workers need less time. Not every situation is directly proportional.",
+          "rule": "Equal workers × days stays constant for the same job.",
+          "example": {
+            "problem": "Six equal workers finish a job in 10 days. How long do 15 equal workers take?",
+            "steps": [
+              "The job needs 6 × 10 = 60 worker-days.",
+              "60 ÷ 15 = 4 days."
+            ]
+          },
+          "exercise": {
+            "id": "ratio-proportion-practice-3",
+            "prompt": "Eight equally productive workers finish a job in 15 days. How many days do twelve take?",
+            "unit": "days",
+            "answer": "10",
+            "proof": "8*15/12",
+            "explanation": "The fixed job needs 120 worker-days; divide by 12 to get 10 days."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "ratio-proportion-quiz-1",
+          "prompt": "Divide 720 in the ratio 5:7. What is the larger share?",
+          "unit": "number",
+          "options": [
+            "300",
+            "504",
+            "420",
+            "360"
+          ],
+          "answer": 2,
+          "proof": "720*7/12",
+          "explanation": "There are 12 parts of 60; seven parts give 420."
+        },
+        {
+          "id": "ratio-proportion-quiz-2",
+          "prompt": "A:B = 2:3 and B:C = 4:5. What is A when C = 30?",
+          "unit": "number",
+          "options": [
+            "12",
+            "16",
+            "20",
+            "24"
+          ],
+          "answer": 1,
+          "proof": "30*8/15",
+          "explanation": "Match B: A:B:C = 8:12:15. C = 30 sets one part to 2, so A = 16."
+        },
+        {
+          "id": "ratio-proportion-quiz-3",
+          "prompt": "Four metres of cloth cost 600. What do nine metres cost at the same rate?",
+          "unit": "PKR",
+          "options": [
+            "1200",
+            "1500",
+            "1350",
+            "900"
+          ],
+          "answer": 2,
+          "proof": "600/4*9",
+          "explanation": "The rate is 150 per metre; nine metres cost 1,350."
+        },
+        {
+          "id": "ratio-proportion-quiz-4",
+          "prompt": "Ten equal workers need 18 days. How long do fifteen need for the same job?",
+          "unit": "days",
+          "options": [
+            "27",
+            "15",
+            "9",
+            "12"
+          ],
+          "answer": 3,
+          "proof": "10*18/15",
+          "explanation": "180 worker-days divided by 15 gives 12 days."
+        },
+        {
+          "id": "ratio-proportion-quiz-5",
+          "prompt": "A map scale is 1:50,000. A distance of 6 cm represents how many kilometres?",
+          "unit": "km",
+          "options": [
+            "30",
+            "0.3",
+            "300",
+            "3"
+          ],
+          "answer": 3,
+          "proof": "6*50000/100000",
+          "explanation": "6 cm represents 300,000 cm = 3,000 m = 3 km."
+        }
+      ]
+    },
+    {
+      "id": "averages",
+      "title": "Averages & weighted averages",
+      "stage": "Applied maths",
+      "summary": "Recover totals, combine groups and understand how a mean changes.",
+      "lessons": [
+        {
+          "id": "averages-1",
+          "title": "Arithmetic mean",
+          "idea": "An arithmetic mean shares the total equally across the observations. A mean is not necessarily an actual observation.",
+          "rule": "Mean = total/count; total = mean × count.",
+          "example": {
+            "problem": "Find the mean of 6, 9, 11 and 14.",
+            "steps": [
+              "Total = 40; count = 4.",
+              "Mean = 40 ÷ 4 = 10."
+            ]
+          },
+          "exercise": {
+            "id": "averages-practice-1",
+            "prompt": "Find the mean of 8, 12, 15, 17 and 18.",
+            "unit": "number",
+            "answer": "14",
+            "proof": "(8+12+15+17+18)/5",
+            "explanation": "The total is 70. Divide by 5 to get 14."
+          }
+        },
+        {
+          "id": "averages-2",
+          "title": "Missing and replaced values",
+          "idea": "Use the original total to find a missing number or the effect of replacing one value. Changing one observation changes the total by the same amount.",
+          "rule": "New mean = (old total − removed value + new value)/count.",
+          "example": {
+            "problem": "Five numbers have mean 20. Four sum to 76. Find the fifth.",
+            "steps": [
+              "All five total 5 × 20 = 100.",
+              "Missing value = 100 − 76 = 24."
+            ]
+          },
+          "exercise": {
+            "id": "averages-practice-2",
+            "prompt": "Six values have mean 15. Replace a value of 9 with 21. Find the new mean.",
+            "unit": "number",
+            "answer": "17",
+            "proof": "(6*15-9+21)/6",
+            "explanation": "The total increases by 12 from 90 to 102; 102 ÷ 6 = 17."
+          }
+        },
+        {
+          "id": "averages-3",
+          "title": "Weighted means",
+          "idea": "Do not simply average two group means when their sizes differ. Weight each mean by its group size.",
+          "rule": "Combined mean = (n₁m₁ + n₂m₂)/(n₁+n₂).",
+          "example": {
+            "problem": "Ten students average 60 marks; twenty average 75. Find the combined mean.",
+            "steps": [
+              "Total marks = 10 × 60 + 20 × 75 = 2,100.",
+              "There are 30 students; mean = 70."
+            ]
+          },
+          "exercise": {
+            "id": "averages-practice-3",
+            "prompt": "Eight values average 12 and twelve values average 17. Find their combined mean.",
+            "unit": "number",
+            "answer": "15",
+            "proof": "(8*12+12*17)/(8+12)",
+            "explanation": "The totals are 96 and 204. Their combined total 300 divided by 20 is 15."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "averages-quiz-1",
+          "prompt": "Find the mean of 4, 10, 14 and 20.",
+          "unit": "number",
+          "options": [
+            "10",
+            "12",
+            "14",
+            "16"
+          ],
+          "answer": 1,
+          "proof": "(4+10+14+20)/4",
+          "explanation": "48 ÷ 4 = 12."
+        },
+        {
+          "id": "averages-quiz-2",
+          "prompt": "Five numbers average 18. Four total 64. Find the fifth.",
+          "unit": "number",
+          "options": [
+            "18",
+            "22",
+            "30",
+            "26"
+          ],
+          "answer": 3,
+          "proof": "5*18-64",
+          "explanation": "The total is 90, so the missing value is 26."
+        },
+        {
+          "id": "averages-quiz-3",
+          "prompt": "Eight values average 25. A value of 12 is replaced by 36. Find the new mean.",
+          "unit": "number",
+          "options": [
+            "27",
+            "28",
+            "26",
+            "49"
+          ],
+          "answer": 1,
+          "proof": "(8*25-12+36)/8",
+          "explanation": "The total rises by 24, increasing the mean by 3 to 28."
+        },
+        {
+          "id": "averages-quiz-4",
+          "prompt": "Groups of 15 and 5 students average 40 and 60 marks. Find the combined mean.",
+          "unit": "marks",
+          "options": [
+            "50",
+            "55",
+            "45",
+            "48"
+          ],
+          "answer": 2,
+          "proof": "(15*40+5*60)/20",
+          "explanation": "The total is 900 across 20 students; mean = 45."
+        },
+        {
+          "id": "averages-quiz-5",
+          "prompt": "Four numbers average 21. Add a fifth number to make the mean 24. Find the new number.",
+          "unit": "number",
+          "options": [
+            "24",
+            "36",
+            "33",
+            "40"
+          ],
+          "answer": 1,
+          "proof": "5*24-4*21",
+          "explanation": "The new total is 120 and the old total is 84; the added number is 36."
+        }
+      ]
+    },
+    {
+      "id": "profit-loss",
+      "title": "Profit & loss",
+      "stage": "Applied maths",
+      "summary": "Keep cost price and selling price distinct, and choose the correct percentage base.",
+      "lessons": [
+        {
+          "id": "profit-loss-1",
+          "title": "Cost and selling price",
+          "idea": "Profit is selling price minus cost price. Loss is cost price minus selling price. In standard profit/loss questions, the percentage is measured against cost price.",
+          "rule": "Profit% = profit/cost × 100; loss% = loss/cost × 100.",
+          "example": {
+            "problem": "An item costs 800 and sells for 920. Find profit%.",
+            "steps": [
+              "Profit = 120.",
+              "120/800 × 100 = 15%."
+            ]
+          },
+          "exercise": {
+            "id": "profit-loss-practice-1",
+            "prompt": "An item costs 600 and sells for 690. Find profit%.",
+            "unit": "%",
+            "answer": "15",
+            "proof": "(690-600)/600*100",
+            "explanation": "The profit is 90; relative to cost 600, this is 15%."
+          }
+        },
+        {
+          "id": "profit-loss-2",
+          "title": "Finding the selling price",
+          "idea": "Convert a target profit or loss into a multiplier of the cost price.",
+          "rule": "Selling price = cost × (1 ± percentage/100).",
+          "example": {
+            "problem": "An item costs 1,250 and is sold at a 12% loss.",
+            "steps": [
+              "It sells for 88% of cost.",
+              "1,250 × 0.88 = 1,100."
+            ]
+          },
+          "exercise": {
+            "id": "profit-loss-practice-2",
+            "prompt": "Find the selling price of an item costing 1,600 with a 25% profit.",
+            "unit": "PKR",
+            "answer": "2000",
+            "proof": "1600*125/100",
+            "explanation": "125% of 1,600 is 2,000."
+          }
+        },
+        {
+          "id": "profit-loss-3",
+          "title": "Reverse profit and combined sales",
+          "idea": "When selling price and profit% are known, divide by the profit factor. For several sales, compare total selling price against total cost.",
+          "rule": "Cost = selling price/(1 + profit rate).",
+          "example": {
+            "problem": "An item sells for 1,080 at a 20% profit. Find cost.",
+            "steps": [
+              "1,080 equals 120% of cost.",
+              "Cost = 1,080 ÷ 1.20 = 900."
+            ]
+          },
+          "exercise": {
+            "id": "profit-loss-practice-3",
+            "prompt": "Two items each cost 500. One sells at a 20% profit and the other at a 10% loss. Find total profit%.",
+            "unit": "%",
+            "answer": "5",
+            "proof": "((500*120/100+500*90/100)-1000)/1000*100",
+            "explanation": "Total selling price is 600 + 450 = 1,050. Profit is 50 on cost 1,000, or 5%."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "profit-loss-quiz-1",
+          "prompt": "An item costs 750 and sells for 900. Find profit%.",
+          "unit": "%",
+          "options": [
+            "15",
+            "20",
+            "25",
+            "50"
+          ],
+          "answer": 1,
+          "proof": "(900-750)/750*100",
+          "explanation": "Profit is 150 on a cost of 750: 20%."
+        },
+        {
+          "id": "profit-loss-quiz-2",
+          "prompt": "An item costs 1,200 and sells for 1,020. Find loss%.",
+          "unit": "%",
+          "options": [
+            "18",
+            "12",
+            "15",
+            "20"
+          ],
+          "answer": 2,
+          "proof": "(1200-1020)/1200*100",
+          "explanation": "The loss of 180 is 15% of cost."
+        },
+        {
+          "id": "profit-loss-quiz-3",
+          "prompt": "Find the selling price of an item costing 960 at a 25% profit.",
+          "unit": "PKR",
+          "options": [
+            "1185",
+            "1200",
+            "1150",
+            "1280"
+          ],
+          "answer": 1,
+          "proof": "960*125/100",
+          "explanation": "960 × 1.25 = 1,200."
+        },
+        {
+          "id": "profit-loss-quiz-4",
+          "prompt": "An item sells for 1,440 at a 20% loss. Find its cost.",
+          "unit": "PKR",
+          "options": [
+            "1728",
+            "1200",
+            "1600",
+            "1800"
+          ],
+          "answer": 3,
+          "proof": "1440/(80/100)",
+          "explanation": "1,440 is 80% of cost. Divide by 0.80 to get 1,800."
+        },
+        {
+          "id": "profit-loss-quiz-5",
+          "prompt": "Two items each sell for 600. One earns 20% profit and the other makes 20% loss. Find the overall loss%.",
+          "unit": "%",
+          "options": [
+            "4",
+            "0",
+            "20",
+            "10"
+          ],
+          "answer": 0,
+          "proof": "((600/(120/100)+600/(80/100))-1200)/(600/(120/100)+600/(80/100))*100",
+          "explanation": "Their costs are 500 and 750. Selling total 1,200 loses 50 on 1,250: 4%. Equal selling prices do not give equal costs."
+        }
+      ]
+    },
+    {
+      "id": "discounts",
+      "title": "Discounts & successive price changes",
+      "stage": "Applied maths",
+      "summary": "Work from marked price, apply successive discounts and connect discount to profit.",
+      "lessons": [
+        {
+          "id": "discounts-1",
+          "title": "Marked price and discount",
+          "idea": "Discount is the amount removed from marked price. Its percentage base is the marked price, not the selling price.",
+          "rule": "Selling price = marked price × (1 − discount rate).",
+          "example": {
+            "problem": "A marked price of 2,000 has a 15% discount.",
+            "steps": [
+              "Discount = 300.",
+              "Selling price = 2,000 − 300 = 1,700."
+            ]
+          },
+          "exercise": {
+            "id": "discounts-practice-1",
+            "prompt": "Find the selling price after a 12% discount on 2,500.",
+            "unit": "PKR",
+            "answer": "2200",
+            "proof": "2500*88/100",
+            "explanation": "The customer pays 88% of 2,500, which is 2,200."
+          }
+        },
+        {
+          "id": "discounts-2",
+          "title": "Successive discounts",
+          "idea": "Each discount applies to the price remaining after the previous one. Adding the rates overstates the reduction.",
+          "rule": "Final factor = (1 − d₁)(1 − d₂).",
+          "example": {
+            "problem": "Apply discounts of 20% then 10% to 1,000.",
+            "steps": [
+              "After 20% discount: 800.",
+              "After another 10%: 720.",
+              "The combined discount is 28%, not 30%."
+            ]
+          },
+          "exercise": {
+            "id": "discounts-practice-2",
+            "prompt": "Find the equivalent discount% for successive discounts of 10% and 20%.",
+            "unit": "%",
+            "answer": "28",
+            "proof": "(1-90/100*80/100)*100",
+            "explanation": "The final factor is 0.90 × 0.80 = 0.72; the discount is 28%."
+          }
+        },
+        {
+          "id": "discounts-3",
+          "title": "Discount and profit together",
+          "idea": "A discount can still leave a profit if marked price is sufficiently above cost. Apply the discount first and compare the result with cost.",
+          "rule": "Profit% uses cost; discount% uses marked price.",
+          "example": {
+            "problem": "Cost is 800, marked price is 1,200 and discount is 25%. Find profit%.",
+            "steps": [
+              "Selling price = 1,200 × 0.75 = 900.",
+              "Profit = 100 on cost 800.",
+              "Profit% = 12.5%."
+            ]
+          },
+          "exercise": {
+            "id": "discounts-practice-3",
+            "prompt": "Cost is 1,000 and marked price is 1,500. A 20% discount is allowed. Find profit%.",
+            "unit": "%",
+            "answer": "20",
+            "proof": "(1500*80/100-1000)/1000*100",
+            "explanation": "The selling price is 1,200; profit is 200 on 1,000, or 20%."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "discounts-quiz-1",
+          "prompt": "A price of 1,800 receives a 15% discount. Find the amount paid.",
+          "unit": "PKR",
+          "options": [
+            "1535",
+            "1500",
+            "1530",
+            "1620"
+          ],
+          "answer": 2,
+          "proof": "1800*85/100",
+          "explanation": "The customer pays 85% of 1,800 = 1,530."
+        },
+        {
+          "id": "discounts-quiz-2",
+          "prompt": "A customer pays 960 after a 20% discount. Find marked price.",
+          "unit": "PKR",
+          "options": [
+            "1152",
+            "1000",
+            "1280",
+            "1200"
+          ],
+          "answer": 3,
+          "proof": "960/(80/100)",
+          "explanation": "960 is 80% of the marked price, which is 1,200."
+        },
+        {
+          "id": "discounts-quiz-3",
+          "prompt": "Find the equivalent discount% for 25% followed by 20%.",
+          "unit": "%",
+          "options": [
+            "45",
+            "5",
+            "35",
+            "40"
+          ],
+          "answer": 3,
+          "proof": "(1-75/100*80/100)*100",
+          "explanation": "0.75 × 0.80 = 0.60, so the reduction is 40%."
+        },
+        {
+          "id": "discounts-quiz-4",
+          "prompt": "Cost is 640, marked price is 1,000 and discount is 20%. Find profit%.",
+          "unit": "%",
+          "options": [
+            "20",
+            "16",
+            "25",
+            "40"
+          ],
+          "answer": 2,
+          "proof": "(1000*80/100-640)/640*100",
+          "explanation": "Selling price 800 gives profit 160 on cost 640, or 25%."
+        },
+        {
+          "id": "discounts-quiz-5",
+          "prompt": "What marked price gives 20% profit on cost 900 after a 10% discount?",
+          "unit": "PKR",
+          "options": [
+            "1080",
+            "1188",
+            "1100",
+            "1200"
+          ],
+          "answer": 3,
+          "proof": "(900*120/100)/(90/100)",
+          "explanation": "The required selling price is 1,080. Divide by 0.90 to get marked price 1,200."
+        }
+      ]
+    },
+    {
+      "id": "time-work",
+      "title": "Time & work",
+      "stage": "Applied maths",
+      "summary": "Use rates for shared jobs, partial work and filling or draining tanks.",
+      "lessons": [
+        {
+          "id": "time-work-1",
+          "title": "Work rates",
+          "idea": "Treat a complete job as one unit. A worker who finishes in n days does 1/n of the job per day when the rate is constant.",
+          "rule": "Work = rate × time.",
+          "example": {
+            "problem": "A worker finishes a job in 12 days. What fraction is completed in 3 days?",
+            "steps": [
+              "Daily rate = 1/12.",
+              "Work in 3 days = 3/12 = 1/4."
+            ]
+          },
+          "exercise": {
+            "id": "time-work-practice-1",
+            "prompt": "A worker takes 15 days. What fraction of the job is completed in 6 days?",
+            "unit": "fraction of job",
+            "answer": "2/5",
+            "proof": "6/15",
+            "explanation": "6 × 1/15 = 2/5 of the complete job."
+          }
+        },
+        {
+          "id": "time-work-2",
+          "title": "Working together",
+          "idea": "Add rates when independent workers contribute to the same job. Add their output, not the number of days.",
+          "rule": "Together time = 1/(rate₁ + rate₂).",
+          "example": {
+            "problem": "A takes 6 days and B takes 12. Find their time together.",
+            "steps": [
+              "Combined rate = 1/6 + 1/12 = 1/4.",
+              "One job takes 4 days."
+            ]
+          },
+          "exercise": {
+            "id": "time-work-practice-2",
+            "prompt": "A takes 10 days and B takes 15. How many days do they take together?",
+            "unit": "days",
+            "answer": "6",
+            "proof": "1/(1/10+1/15)",
+            "explanation": "Their combined rate is 1/6 of a job per day, so they need 6 days."
+          }
+        },
+        {
+          "id": "time-work-3",
+          "title": "Partial work and opposing rates",
+          "idea": "After part of a job is done, divide only the remaining work by the new rate. A drain subtracts from a filling rate.",
+          "rule": "Net rate = filling rate − draining rate.",
+          "example": {
+            "problem": "A pipe fills in 8 hours and a drain empties in 24 hours. Find time to fill with both open.",
+            "steps": [
+              "Net rate = 1/8 − 1/24 = 1/12 tank per hour.",
+              "An empty tank fills in 12 hours."
+            ]
+          },
+          "exercise": {
+            "id": "time-work-practice-3",
+            "prompt": "A takes 12 days and B takes 18. They work together for 3 days, then B leaves. How many additional days does A need?",
+            "unit": "days",
+            "answer": "7",
+            "proof": "(1-3*(1/12+1/18))/(1/12)",
+            "explanation": "They complete 5/12 in three days. A finishes the remaining 7/12 at 1/12 per day, requiring 7 additional days."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "time-work-quiz-1",
+          "prompt": "A completes a job in 20 days. What fraction does A complete in 5 days?",
+          "unit": "fraction of job",
+          "options": [
+            "1/5",
+            "3/4",
+            "1/4",
+            "1/2"
+          ],
+          "answer": 2,
+          "proof": "5/20",
+          "explanation": "Five days at 1/20 per day completes 1/4."
+        },
+        {
+          "id": "time-work-quiz-2",
+          "prompt": "A takes 8 days and B takes 24. Find their time together.",
+          "unit": "days",
+          "options": [
+            "16",
+            "8",
+            "4",
+            "6"
+          ],
+          "answer": 3,
+          "proof": "1/(1/8+1/24)",
+          "explanation": "Combined rate is 1/6, so time is 6 days."
+        },
+        {
+          "id": "time-work-quiz-3",
+          "prompt": "A and B together take 6 days. A alone takes 10. Find B’s time alone.",
+          "unit": "days",
+          "options": [
+            "4",
+            "16",
+            "15",
+            "12"
+          ],
+          "answer": 2,
+          "proof": "1/(1/6-1/10)",
+          "explanation": "B’s rate is 1/6 − 1/10 = 1/15; B takes 15 days."
+        },
+        {
+          "id": "time-work-quiz-4",
+          "prompt": "A pipe fills in 6 hours while a drain empties in 18. With both open, how long to fill an empty tank?",
+          "unit": "hours",
+          "options": [
+            "12",
+            "4",
+            "9",
+            "24"
+          ],
+          "answer": 2,
+          "proof": "1/(1/6-1/18)",
+          "explanation": "Net rate is 1/9 tank per hour, so time is 9 hours."
+        },
+        {
+          "id": "time-work-quiz-5",
+          "prompt": "A takes 9 days. B takes 18. A works alone for 3 days, then B joins. How many additional days finish the job?",
+          "unit": "days",
+          "options": [
+            "6",
+            "4",
+            "3",
+            "5"
+          ],
+          "answer": 1,
+          "proof": "(1-3/9)/(1/9+1/18)",
+          "explanation": "Two thirds remain. Together the rate is 1/6, so the remaining time is 4 days."
+        }
+      ]
+    },
+    {
+      "id": "speed-distance",
+      "title": "Speed, distance & time",
+      "stage": "Applied maths",
+      "summary": "Convert units, calculate journey averages and solve relative-speed problems.",
+      "lessons": [
+        {
+          "id": "speed-distance-1",
+          "title": "Units and basic journeys",
+          "idea": "Use consistent distance and time units. Speed is distance per unit time; time is distance divided by speed.",
+          "rule": "km/h to m/s: multiply by 5/18. m/s to km/h: multiply by 18/5.",
+          "example": {
+            "problem": "A vehicle travels 150 km in 2.5 hours. Find speed.",
+            "steps": [
+              "Speed = 150 ÷ 2.5 = 60 km/h.",
+              "60 km/h = 50/3 m/s, approximately 16.67 m/s."
+            ]
+          },
+          "exercise": {
+            "id": "speed-distance-practice-1",
+            "prompt": "Convert 72 km/h into m/s.",
+            "unit": "m/s",
+            "answer": "20",
+            "proof": "72*5/18",
+            "explanation": "72 × 5/18 = 20 m/s."
+          }
+        },
+        {
+          "id": "speed-distance-2",
+          "title": "Average speed",
+          "idea": "Average speed uses total distance divided by total time. Averaging two speeds is valid for equal travel times, not generally for equal distances.",
+          "rule": "For equal distances at speeds u and v, average = 2uv/(u+v).",
+          "example": {
+            "problem": "Travel equal distances at 40 and 60 km/h. Find average speed.",
+            "steps": [
+              "Take 120 km in each direction.",
+              "Times are 3 and 2 hours. Total distance 240 km divided by 5 hours = 48 km/h."
+            ]
+          },
+          "exercise": {
+            "id": "speed-distance-practice-2",
+            "prompt": "Travel equal distances at 30 and 60 km/h. Find average speed.",
+            "unit": "km/h",
+            "answer": "40",
+            "proof": "2*30*60/(30+60)",
+            "explanation": "For equal distances, 2 × 30 × 60 ÷ 90 = 40 km/h."
+          }
+        },
+        {
+          "id": "speed-distance-3",
+          "title": "Relative speed",
+          "idea": "Opposite-direction closing speeds add. Same-direction closing speeds subtract. A train crossing a platform travels its own length plus platform length.",
+          "rule": "Crossing time = total crossing distance/relative speed.",
+          "example": {
+            "problem": "A 120 m train at 54 km/h crosses a 180 m platform.",
+            "steps": [
+              "54 km/h = 15 m/s.",
+              "The train travels 120 + 180 = 300 m.",
+              "Time = 300 ÷ 15 = 20 seconds."
+            ]
+          },
+          "exercise": {
+            "id": "speed-distance-practice-3",
+            "prompt": "A 150 m train moving at 72 km/h crosses a 250 m platform. Find the time.",
+            "unit": "seconds",
+            "answer": "20",
+            "proof": "(150+250)/(72*5/18)",
+            "explanation": "The crossing distance is 400 m and the speed is 20 m/s, giving 20 seconds."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "speed-distance-quiz-1",
+          "prompt": "How long to travel 180 km at 60 km/h?",
+          "unit": "hours",
+          "options": [
+            "2",
+            "4",
+            "3",
+            "10800"
+          ],
+          "answer": 2,
+          "proof": "180/60",
+          "explanation": "Time = distance/speed = 3 hours."
+        },
+        {
+          "id": "speed-distance-quiz-2",
+          "prompt": "Convert 90 km/h into m/s.",
+          "unit": "m/s",
+          "options": [
+            "18",
+            "25",
+            "30",
+            "324"
+          ],
+          "answer": 1,
+          "proof": "90*5/18",
+          "explanation": "90 × 5/18 = 25 m/s."
+        },
+        {
+          "id": "speed-distance-quiz-3",
+          "prompt": "Travel equal distances at 40 and 80 km/h. Find average speed.",
+          "unit": "km/h",
+          "options": [
+            "160/3",
+            "60",
+            "50",
+            "120"
+          ],
+          "answer": 0,
+          "proof": "2*40*80/(40+80)",
+          "explanation": "The harmonic mean is 160/3 km/h, approximately 53.33 km/h."
+        },
+        {
+          "id": "speed-distance-quiz-4",
+          "prompt": "Two travellers start 270 km apart and approach at 40 and 50 km/h. When do they meet?",
+          "unit": "hours",
+          "options": [
+            "6",
+            "5.4",
+            "3",
+            "2.7"
+          ],
+          "answer": 2,
+          "proof": "270/(40+50)",
+          "explanation": "Closing speed is 90 km/h, so time is 3 hours."
+        },
+        {
+          "id": "speed-distance-quiz-5",
+          "prompt": "A 180 m train passes a stationary pole at 54 km/h. Find the time.",
+          "unit": "seconds",
+          "options": [
+            "10",
+            "15",
+            "12",
+            "3.33"
+          ],
+          "answer": 2,
+          "proof": "180/(54*5/18)",
+          "explanation": "The speed is 15 m/s, and only train length is crossed: 180/15 = 12 seconds."
+        }
+      ]
+    },
+    {
+      "id": "age-problems",
+      "title": "Age problems",
+      "stage": "Applied maths",
+      "summary": "Translate past and future ages into equations while keeping age differences constant.",
+      "lessons": [
+        {
+          "id": "age-problems-1",
+          "title": "Age differences",
+          "idea": "Everyone’s age increases by the same elapsed time, so an age difference remains unchanged.",
+          "rule": "If present age is x, age t years later is x+t and t years earlier is x−t.",
+          "example": {
+            "problem": "A is 28 and B is 16. What is their age difference six years later?",
+            "steps": [
+              "They become 34 and 22.",
+              "The difference remains 12 years."
+            ]
+          },
+          "exercise": {
+            "id": "age-problems-practice-1",
+            "prompt": "A is 31 and B is 19. Find their age difference eight years later.",
+            "unit": "years",
+            "answer": "12",
+            "proof": "(31+8)-(19+8)",
+            "explanation": "Both ages increase by 8, so their difference remains 12."
+          }
+        },
+        {
+          "id": "age-problems-2",
+          "title": "Ratios of present ages",
+          "idea": "Use a common multiplier for an age ratio. A known sum or difference then determines that multiplier.",
+          "rule": "For ratio a:b, write ages as ak and bk.",
+          "example": {
+            "problem": "Ages are in ratio 3:5 and total 48.",
+            "steps": [
+              "3k + 5k = 48, so k = 6.",
+              "The ages are 18 and 30."
+            ]
+          },
+          "exercise": {
+            "id": "age-problems-practice-2",
+            "prompt": "Two ages are in ratio 2:5 and their sum is 49. Find the younger age.",
+            "unit": "years",
+            "answer": "14",
+            "proof": "49*2/7",
+            "explanation": "Seven parts total 49, so one part is 7 and the younger age is 14."
+          }
+        },
+        {
+          "id": "age-problems-3",
+          "title": "Future and past equations",
+          "idea": "Add or subtract time from each person separately before applying the stated future or past ratio.",
+          "rule": "Present age relationships need not retain the same ratio over time.",
+          "example": {
+            "problem": "A is now 3 times B. In 10 years A will be twice B. Find B’s current age.",
+            "steps": [
+              "Let B = x and A = 3x.",
+              "3x + 10 = 2(x + 10).",
+              "x = 10, so B is 10 and A is 30."
+            ]
+          },
+          "exercise": {
+            "id": "age-problems-practice-3",
+            "prompt": "A father is 4 times his son’s age. In 12 years he will be twice his son’s age. Find the son’s present age.",
+            "unit": "years",
+            "answer": "6",
+            "proof": "12/(4-2)",
+            "explanation": "4x + 12 = 2(x + 12); 2x = 12, so x = 6."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "age-problems-quiz-1",
+          "prompt": "A is 40 and B is 25. Find their age difference after 9 years.",
+          "unit": "years",
+          "options": [
+            "15",
+            "24",
+            "6",
+            "65"
+          ],
+          "answer": 0,
+          "proof": "(40+9)-(25+9)",
+          "explanation": "Their age difference stays 15 years."
+        },
+        {
+          "id": "age-problems-quiz-2",
+          "prompt": "Two present ages are in ratio 3:4 and total 56. Find the older age.",
+          "unit": "years",
+          "options": [
+            "32",
+            "24",
+            "28",
+            "42"
+          ],
+          "answer": 0,
+          "proof": "56*4/7",
+          "explanation": "Each ratio part is 8; the older age is 4 × 8 = 32."
+        },
+        {
+          "id": "age-problems-quiz-3",
+          "prompt": "A is twice B and their ages sum to 45. Find B’s age.",
+          "unit": "years",
+          "options": [
+            "30",
+            "22.5",
+            "15",
+            "10"
+          ],
+          "answer": 2,
+          "proof": "45/3",
+          "explanation": "If B = x, A = 2x; 3x = 45 gives x = 15."
+        },
+        {
+          "id": "age-problems-quiz-4",
+          "prompt": "A mother is 3 times her daughter’s age. In 8 years she will be twice the daughter’s age. Find the daughter’s current age.",
+          "unit": "years",
+          "options": [
+            "16",
+            "24",
+            "8",
+            "4"
+          ],
+          "answer": 2,
+          "proof": "8/(3-2)",
+          "explanation": "3x + 8 = 2(x + 8), giving x = 8."
+        },
+        {
+          "id": "age-problems-quiz-5",
+          "prompt": "Five years ago A was 4 times B’s age. A is now 45. Find B’s present age.",
+          "unit": "years",
+          "options": [
+            "10",
+            "15",
+            "11.25",
+            "20"
+          ],
+          "answer": 1,
+          "proof": "(45-5)/4+5",
+          "explanation": "Five years ago A was 40 and B was 10. B is now 15."
+        }
+      ]
+    },
+    {
+      "id": "word-problems",
+      "title": "Basic word problems & translating quantities",
+      "stage": "Applied maths",
+      "summary": "Choose a variable, keep units consistent and check a story against its equation.",
+      "lessons": [
+        {
+          "id": "word-problems-1",
+          "title": "Build an equation",
+          "idea": "Start with what the unknown represents. Translate each phrase in order and verify the answer in the original statement.",
+          "rule": "“Five more than three times x” is 3x + 5, not 3(x+5).",
+          "example": {
+            "problem": "Five more than three times a number is 29. Find it.",
+            "steps": [
+              "Write 3x + 5 = 29.",
+              "3x = 24, so x = 8.",
+              "Check: 3 × 8 + 5 = 29."
+            ]
+          },
+          "exercise": {
+            "id": "word-problems-practice-1",
+            "prompt": "Seven less than four times a number is 33. Find the number.",
+            "unit": "number",
+            "answer": "10",
+            "proof": "(33+7)/4",
+            "explanation": "4x − 7 = 33, so 4x = 40 and x = 10."
+          }
+        },
+        {
+          "id": "word-problems-2",
+          "title": "Count and cost",
+          "idea": "A total number of items gives one relationship; a total cost gives another. Subtract a convenient all-one-price baseline.",
+          "rule": "Extra cost divided by price difference gives the number of dearer items.",
+          "example": {
+            "problem": "Ten tickets cost 700. Adult tickets are 100 and child tickets 50. How many adult tickets?",
+            "steps": [
+              "If all ten were child tickets, cost would be 500.",
+              "The extra 200 buys four upgrades of 50.",
+              "There are four adult tickets and six child tickets."
+            ]
+          },
+          "exercise": {
+            "id": "word-problems-practice-2",
+            "prompt": "Twelve items cost 900. Each is priced at either 50 or 100. How many cost 100?",
+            "unit": "items",
+            "answer": "6",
+            "proof": "(900-12*50)/(100-50)",
+            "explanation": "The all-cheap baseline is 600. The extra 300 represents six upgrades of 50."
+          }
+        },
+        {
+          "id": "word-problems-3",
+          "title": "Mixtures and conservation",
+          "idea": "Mixing preserves the amount of the substance being tracked. A concentration refers to substance divided by total mixture.",
+          "rule": "Substance before mixing = substance after mixing, unless some is added or removed.",
+          "example": {
+            "problem": "Mix 2 L of 20% solution with 3 L of 40% solution. Find concentration%.",
+            "steps": [
+              "Tracked substance = 0.4 + 1.2 = 1.6 L.",
+              "Total mixture = 5 L.",
+              "1.6/5 × 100 = 32%."
+            ]
+          },
+          "exercise": {
+            "id": "word-problems-practice-3",
+            "prompt": "Mix 4 L of 10% solution with 6 L of 30% solution. Find the final concentration%.",
+            "unit": "%",
+            "answer": "22",
+            "proof": "(4*10/100+6*30/100)/(4+6)*100",
+            "explanation": "There are 0.4 + 1.8 = 2.2 L of the tracked substance in 10 L, giving 22%."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "word-problems-quiz-1",
+          "prompt": "Three less than twice a number equals 17. Find the number.",
+          "unit": "number",
+          "options": [
+            "7",
+            "8.5",
+            "10",
+            "20"
+          ],
+          "answer": 2,
+          "proof": "(17+3)/2",
+          "explanation": "2x − 3 = 17 gives x = 10."
+        },
+        {
+          "id": "word-problems-quiz-2",
+          "prompt": "Three consecutive integers total 72. Find the middle integer.",
+          "unit": "number",
+          "options": [
+            "24",
+            "23",
+            "25",
+            "26"
+          ],
+          "answer": 0,
+          "proof": "72/3",
+          "explanation": "The values are x−1, x, x+1, so 3x = 72 and x = 24."
+        },
+        {
+          "id": "word-problems-quiz-3",
+          "prompt": "Eight tickets cost 640. Adult tickets cost 100 and child tickets 60. Find the number of adult tickets.",
+          "unit": "tickets",
+          "options": [
+            "3",
+            "5",
+            "6",
+            "4"
+          ],
+          "answer": 3,
+          "proof": "(640-8*60)/(100-60)",
+          "explanation": "The baseline is 480; extra cost 160 buys four upgrades of 40."
+        },
+        {
+          "id": "word-problems-quiz-4",
+          "prompt": "Mix 3 L of 20% solution with 2 L of 50% solution. Find concentration%.",
+          "unit": "%",
+          "options": [
+            "35",
+            "30",
+            "32",
+            "70"
+          ],
+          "answer": 2,
+          "proof": "(3*20/100+2*50/100)/5*100",
+          "explanation": "The substance totals 1.6 L in 5 L, giving 32%."
+        },
+        {
+          "id": "word-problems-quiz-5",
+          "prompt": "Two numbers sum to 50 and differ by 8. Find the larger number.",
+          "unit": "number",
+          "options": [
+            "21",
+            "25",
+            "33",
+            "29"
+          ],
+          "answer": 3,
+          "proof": "(50+8)/2",
+          "explanation": "Let larger x and smaller 50−x. Then 2x−50 = 8, giving x = 29."
+        }
+      ]
+    },
+    {
+      "id": "number-series",
+      "title": "Number series & patterns",
+      "stage": "Algebra & geometry",
+      "summary": "Apply stated sequence rules and check differences or ratios without guessing a unique rule from a short list.",
+      "lessons": [
+        {
+          "id": "number-series-1",
+          "title": "Constant differences",
+          "idea": "An arithmetic sequence changes by the same amount each step. Its nth term uses the first term plus n−1 changes.",
+          "rule": "aₙ = a₁ + (n−1)d.",
+          "example": {
+            "problem": "Find the 10th term of 4, 7, 10, …, using a constant difference of 3.",
+            "steps": [
+              "a₁ = 4, d = 3, n = 10.",
+              "a₁₀ = 4 + 9 × 3 = 31."
+            ]
+          },
+          "exercise": {
+            "id": "number-series-practice-1",
+            "prompt": "A sequence starts at 5 and adds 4 each time. Find its 12th term.",
+            "unit": "number",
+            "answer": "49",
+            "proof": "5+(12-1)*4",
+            "explanation": "There are eleven jumps from the first to the twelfth term: 5 + 44 = 49."
+          }
+        },
+        {
+          "id": "number-series-2",
+          "title": "Constant ratios",
+          "idea": "A geometric sequence multiplies by a fixed ratio. Count the number of multiplications from the first term.",
+          "rule": "aₙ = a₁ × r^(n−1).",
+          "example": {
+            "problem": "Starting at 3 and doubling each term, find the 5th term.",
+            "steps": [
+              "The terms are 3, 6, 12, 24, 48.",
+              "3 × 2⁴ = 48."
+            ]
+          },
+          "exercise": {
+            "id": "number-series-practice-2",
+            "prompt": "A sequence starts at 2 and triples each term. Find the 5th term.",
+            "unit": "number",
+            "answer": "162",
+            "proof": "2*3**4",
+            "explanation": "Four multiplications by 3 give 2 × 81 = 162."
+          }
+        },
+        {
+          "id": "number-series-3",
+          "title": "Changing differences",
+          "idea": "A finite list can fit many rules. In practice, use the specified difference pattern rather than claiming a mathematically unique continuation.",
+          "rule": "Write consecutive differences, then test the stated rule.",
+          "example": {
+            "problem": "The sequence 2, 5, 10, 17, … uses successive odd differences 3, 5, 7, 9, … . Find the next term.",
+            "steps": [
+              "The next difference is 9.",
+              "17 + 9 = 26."
+            ]
+          },
+          "exercise": {
+            "id": "number-series-practice-3",
+            "prompt": "A sequence is 3, 7, 13, 21, … and its differences are successive even numbers 4, 6, 8, 10, … . Find the next term.",
+            "unit": "number",
+            "answer": "31",
+            "proof": "21+10",
+            "explanation": "Under the stated rule, add the next difference 10 to 21, giving 31."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "number-series-quiz-1",
+          "prompt": "A sequence starts at 7 and adds 5 each step. Find its 8th term.",
+          "unit": "number",
+          "options": [
+            "47",
+            "40",
+            "35",
+            "42"
+          ],
+          "answer": 3,
+          "proof": "7+7*5",
+          "explanation": "Seven differences give 7 + 35 = 42."
+        },
+        {
+          "id": "number-series-quiz-2",
+          "prompt": "A sequence starts at 4 and doubles each step. Find its 6th term.",
+          "unit": "number",
+          "options": [
+            "64",
+            "256",
+            "128",
+            "24"
+          ],
+          "answer": 2,
+          "proof": "4*2**5",
+          "explanation": "Five doublings give 4 × 32 = 128."
+        },
+        {
+          "id": "number-series-quiz-3",
+          "prompt": "The nth term is n² + 1. Find the 7th term.",
+          "unit": "number",
+          "options": [
+            "49",
+            "50",
+            "15",
+            "48"
+          ],
+          "answer": 1,
+          "proof": "7**2+1",
+          "explanation": "Substitute n = 7: 49 + 1 = 50."
+        },
+        {
+          "id": "number-series-quiz-4",
+          "prompt": "The sequence 1, 4, 9, 16, … has nth term n². Find the next term.",
+          "unit": "number",
+          "options": [
+            "25",
+            "24",
+            "20",
+            "32"
+          ],
+          "answer": 0,
+          "proof": "5**2",
+          "explanation": "The next term is the fifth square, 25."
+        },
+        {
+          "id": "number-series-quiz-5",
+          "prompt": "Starting at 100, subtract 7 each step. Find the 9th term.",
+          "unit": "number",
+          "options": [
+            "37",
+            "44",
+            "51",
+            "63"
+          ],
+          "answer": 1,
+          "proof": "100-8*7",
+          "explanation": "Eight subtractions give 100 − 56 = 44."
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "title": "Algebraic expressions",
+      "stage": "Algebra & geometry",
+      "summary": "Substitute values, collect like terms and expand or factor expressions.",
+      "lessons": [
+        {
+          "id": "algebra-1",
+          "title": "Substitution",
+          "idea": "A variable stands for a number. Substitute its value with brackets, particularly when it is negative.",
+          "rule": "For x = −2, x² = (−2)² = 4.",
+          "example": {
+            "problem": "Evaluate 3x² − 2x + 1 at x = −2.",
+            "steps": [
+              "3 × 4 − 2 × (−2) + 1.",
+              "12 + 4 + 1 = 17."
+            ]
+          },
+          "exercise": {
+            "id": "algebra-practice-1",
+            "prompt": "Evaluate 2x² + 3x − 1 at x = −3.",
+            "unit": "number",
+            "answer": "8",
+            "proof": "2*(-3)**2+3*(-3)-1",
+            "explanation": "2 × 9 − 9 − 1 = 8."
+          }
+        },
+        {
+          "id": "algebra-2",
+          "title": "Like terms and expansion",
+          "idea": "Like terms have the same variable parts and powers. Apply multiplication to every term inside a bracket.",
+          "rule": "3x + 2x = 5x; 3x + 2x² cannot be combined into one like term.",
+          "example": {
+            "problem": "Simplify 3(x + 4) − 2(x − 1), then use x = 5.",
+            "steps": [
+              "Expand: 3x + 12 − 2x + 2.",
+              "Collect: x + 14.",
+              "At x = 5, the value is 19."
+            ]
+          },
+          "exercise": {
+            "id": "algebra-practice-2",
+            "prompt": "Evaluate the simplified expression 4(x + 2) − 3(x − 1) at x = 6.",
+            "unit": "number",
+            "answer": "17",
+            "proof": "4*(6+2)-3*(6-1)",
+            "explanation": "Expand to 4x + 8 − 3x + 3 = x + 11. At x = 6 the value is 17."
+          }
+        },
+        {
+          "id": "algebra-3",
+          "title": "Factors and identities",
+          "idea": "Factoring reverses expansion. A square of a sum includes a middle term; it is not just the sum of two squares.",
+          "rule": "(a+b)² = a² + 2ab + b²; a²−b² = (a−b)(a+b).",
+          "example": {
+            "problem": "Calculate 51² using (50 + 1)².",
+            "steps": [
+              "50² + 2 × 50 × 1 + 1².",
+              "2,500 + 100 + 1 = 2,601."
+            ]
+          },
+          "exercise": {
+            "id": "algebra-practice-3",
+            "prompt": "Calculate 103² − 97² using the difference of squares.",
+            "unit": "number",
+            "answer": "1200",
+            "proof": "(103-97)*(103+97)",
+            "explanation": "The product (103−97)(103+97) = 6 × 200 = 1,200."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "algebra-quiz-1",
+          "prompt": "Evaluate 5x − 2 at x = 7.",
+          "unit": "number",
+          "options": [
+            "33",
+            "35",
+            "37",
+            "23"
+          ],
+          "answer": 0,
+          "proof": "5*7-2",
+          "explanation": "35 − 2 = 33."
+        },
+        {
+          "id": "algebra-quiz-2",
+          "prompt": "Evaluate x² − 3x at x = −4.",
+          "unit": "number",
+          "options": [
+            "28",
+            "4",
+            "-28",
+            "-4"
+          ],
+          "answer": 0,
+          "proof": "(-4)**2-3*(-4)",
+          "explanation": "16 + 12 = 28."
+        },
+        {
+          "id": "algebra-quiz-3",
+          "prompt": "Evaluate 2(x + 5) + 3(x − 2) at x = 4.",
+          "unit": "number",
+          "options": [
+            "20",
+            "24",
+            "26",
+            "30"
+          ],
+          "answer": 1,
+          "proof": "2*(4+5)+3*(4-2)",
+          "explanation": "The expression simplifies to 5x + 4. At 4 it equals 24."
+        },
+        {
+          "id": "algebra-quiz-4",
+          "prompt": "Calculate 48 × 52 using a difference of squares.",
+          "unit": "number",
+          "options": [
+            "2504",
+            "2496",
+            "2400",
+            "2492"
+          ],
+          "answer": 1,
+          "proof": "50**2-2**2",
+          "explanation": "(50−2)(50+2) = 2,500 − 4 = 2,496."
+        },
+        {
+          "id": "algebra-quiz-5",
+          "prompt": "For a = 3 and b = 5, calculate (a + b)².",
+          "unit": "number",
+          "options": [
+            "34",
+            "16",
+            "30",
+            "64"
+          ],
+          "answer": 3,
+          "proof": "(3+5)**2",
+          "explanation": "The whole sum is squared: 8² = 64, not a² + b² = 34."
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "title": "Equations: linear, simultaneous & quadratic",
+      "stage": "Algebra & geometry",
+      "summary": "Maintain equality, solve two unknowns and factor a quadratic with explicit answer conditions.",
+      "lessons": [
+        {
+          "id": "equations-1",
+          "title": "Linear equations",
+          "idea": "An equation remains balanced if the same operation is applied to both sides. Expand brackets before collecting terms.",
+          "rule": "Move toward an isolated variable, then substitute to check.",
+          "example": {
+            "problem": "Solve 3(x − 2) = 18.",
+            "steps": [
+              "Divide both sides by 3: x − 2 = 6.",
+              "Add 2 to both sides: x = 8.",
+              "Check: 3 × (8 − 2) = 18."
+            ]
+          },
+          "exercise": {
+            "id": "equations-practice-1",
+            "prompt": "Solve 5x + 7 = 42.",
+            "unit": "value of x",
+            "answer": "7",
+            "proof": "(42-7)/5",
+            "explanation": "Subtract 7 to get 5x = 35; divide by 5 to get x = 7."
+          }
+        },
+        {
+          "id": "equations-2",
+          "title": "Simultaneous equations",
+          "idea": "Two independent equations can determine two unknowns. Addition or subtraction may eliminate one variable.",
+          "rule": "Eliminate, solve, then substitute into either original equation.",
+          "example": {
+            "problem": "Solve x + y = 10 and x − y = 4.",
+            "steps": [
+              "Add: 2x = 14, so x = 7.",
+              "Substitute: y = 3.",
+              "Both equations are satisfied."
+            ]
+          },
+          "exercise": {
+            "id": "equations-practice-2",
+            "prompt": "Solve x + y = 13 and x − y = 5. Enter x.",
+            "unit": "value of x",
+            "answer": "9",
+            "proof": "(13+5)/2",
+            "explanation": "Add the equations: 2x = 18, so x = 9; y = 4."
+          }
+        },
+        {
+          "id": "equations-3",
+          "title": "Quadratic equations",
+          "idea": "A factored quadratic equals zero when at least one factor is zero. Check all roots and apply any explicit condition.",
+          "rule": "If (x−a)(x−b) = 0, then x = a or x = b.",
+          "example": {
+            "problem": "Solve x² − 5x + 6 = 0.",
+            "steps": [
+              "Find numbers with product 6 and sum 5: 2 and 3.",
+              "(x − 2)(x − 3) = 0.",
+              "The two roots are 2 and 3."
+            ]
+          },
+          "exercise": {
+            "id": "equations-practice-3",
+            "prompt": "For x² − 7x + 12 = 0, enter the larger root.",
+            "unit": "value of x",
+            "answer": "4",
+            "proof": "4",
+            "explanation": "Factor as (x−3)(x−4) = 0. The roots are 3 and 4; the larger is 4."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "equations-quiz-1",
+          "prompt": "Solve 4x − 9 = 23.",
+          "unit": "value of x",
+          "options": [
+            "3.5",
+            "8",
+            "7",
+            "9"
+          ],
+          "answer": 1,
+          "proof": "(23+9)/4",
+          "explanation": "4x = 32, so x = 8."
+        },
+        {
+          "id": "equations-quiz-2",
+          "prompt": "Solve 2(x + 3) = 5x − 9.",
+          "unit": "value of x",
+          "options": [
+            "3",
+            "-5",
+            "5",
+            "15"
+          ],
+          "answer": 2,
+          "proof": "(6+9)/(5-2)",
+          "explanation": "2x + 6 = 5x − 9 gives 15 = 3x, so x = 5."
+        },
+        {
+          "id": "equations-quiz-3",
+          "prompt": "Solve x + y = 18 and x − y = 6. Enter y.",
+          "unit": "value of y",
+          "options": [
+            "12",
+            "6",
+            "9",
+            "3"
+          ],
+          "answer": 1,
+          "proof": "(18-6)/2",
+          "explanation": "Subtract equations: 2y = 12, giving y = 6."
+        },
+        {
+          "id": "equations-quiz-4",
+          "prompt": "Solve 2x + y = 11 and x − y = 1. Enter x.",
+          "unit": "value of x",
+          "options": [
+            "4",
+            "3",
+            "5",
+            "6"
+          ],
+          "answer": 0,
+          "proof": "(11+1)/3",
+          "explanation": "Add equations to get 3x = 12, so x = 4 and y = 3."
+        },
+        {
+          "id": "equations-quiz-5",
+          "prompt": "For x² − 9x + 20 = 0, enter the smaller root.",
+          "unit": "value of x",
+          "options": [
+            "5",
+            "4",
+            "9",
+            "20"
+          ],
+          "answer": 1,
+          "proof": "4",
+          "explanation": "(x−4)(x−5) = 0, so the smaller root is 4."
+        }
+      ]
+    },
+    {
+      "id": "geometry-area",
+      "title": "Geometry, angles & area",
+      "stage": "Algebra & geometry",
+      "summary": "Use angle relationships, distinguish perimeter from area and apply right-triangle geometry.",
+      "lessons": [
+        {
+          "id": "geometry-area-1",
+          "title": "Angles and triangles",
+          "idea": "Angles on a straight line total 180°. Angles around a point total 360°. Interior angles in an ordinary plane triangle total 180°.",
+          "rule": "Missing triangle angle = 180° − the two known angles.",
+          "example": {
+            "problem": "A triangle has angles 50° and 65°. Find its third angle.",
+            "steps": [
+              "50 + 65 = 115.",
+              "180 − 115 = 65°."
+            ]
+          },
+          "exercise": {
+            "id": "geometry-area-practice-1",
+            "prompt": "A triangle has angles 35° and 75°. Find the third angle.",
+            "unit": "degrees",
+            "answer": "70",
+            "proof": "180-35-75",
+            "explanation": "The two known angles total 110°. The remaining angle is 70°."
+          }
+        },
+        {
+          "id": "geometry-area-2",
+          "title": "Perimeter and area",
+          "idea": "Perimeter measures boundary length; area measures enclosed surface. Square units cannot be added directly to length units.",
+          "rule": "Rectangle: area = length × width; perimeter = 2(length+width). Triangle area = ½ × base × perpendicular height.",
+          "example": {
+            "problem": "Find area and perimeter of a 9 cm by 4 cm rectangle.",
+            "steps": [
+              "Area = 9 × 4 = 36 cm².",
+              "Perimeter = 2(9+4) = 26 cm."
+            ]
+          },
+          "exercise": {
+            "id": "geometry-area-practice-2",
+            "prompt": "A triangle has base 12 cm and perpendicular height 7 cm. Find its area.",
+            "unit": "cm²",
+            "answer": "42",
+            "proof": "12*7/2",
+            "explanation": "Half of base × height is (12 × 7)/2 = 42 cm²."
+          }
+        },
+        {
+          "id": "geometry-area-3",
+          "title": "Right triangles and composite shapes",
+          "idea": "The Pythagorean theorem applies to right triangles only. The hypotenuse is opposite the right angle and is the longest side.",
+          "rule": "For a right triangle, c² = a² + b². Split composite areas into non-overlapping parts.",
+          "example": {
+            "problem": "A right triangle has perpendicular sides 6 cm and 8 cm.",
+            "steps": [
+              "Hypotenuse² = 36 + 64 = 100.",
+              "The positive hypotenuse length is 10 cm."
+            ]
+          },
+          "exercise": {
+            "id": "geometry-area-practice-3",
+            "prompt": "A rectangle is 15 cm by 10 cm. A 3 cm by 4 cm rectangular corner is removed. Find the remaining area.",
+            "unit": "cm²",
+            "answer": "138",
+            "proof": "15*10-3*4",
+            "explanation": "Subtract the removed area 12 from the original area 150, giving 138 cm²."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "geometry-area-quiz-1",
+          "prompt": "Two angles of a triangle are 42° and 68°. Find the third.",
+          "unit": "degrees",
+          "options": [
+            "80",
+            "110",
+            "60",
+            "70"
+          ],
+          "answer": 3,
+          "proof": "180-42-68",
+          "explanation": "The third angle is 180 − 110 = 70°."
+        },
+        {
+          "id": "geometry-area-quiz-2",
+          "prompt": "Find the perimeter of an 8 cm by 5 cm rectangle.",
+          "unit": "cm",
+          "options": [
+            "26",
+            "40",
+            "13",
+            "80"
+          ],
+          "answer": 0,
+          "proof": "2*(8+5)",
+          "explanation": "Add all sides: 2(8+5) = 26 cm."
+        },
+        {
+          "id": "geometry-area-quiz-3",
+          "prompt": "A triangle has base 14 cm and perpendicular height 9 cm. Find area.",
+          "unit": "cm²",
+          "options": [
+            "126",
+            "23",
+            "46",
+            "63"
+          ],
+          "answer": 3,
+          "proof": "14*9/2",
+          "explanation": "Area = ½ × 14 × 9 = 63 cm²."
+        },
+        {
+          "id": "geometry-area-quiz-4",
+          "prompt": "A right triangle has perpendicular sides 5 cm and 12 cm. Find its hypotenuse.",
+          "unit": "cm",
+          "options": [
+            "17",
+            "13",
+            "7",
+            "169"
+          ],
+          "answer": 1,
+          "proof": "13",
+          "explanation": "5² + 12² = 169 = 13², so the positive length is 13 cm."
+        },
+        {
+          "id": "geometry-area-quiz-5",
+          "prompt": "A square of side 10 cm has a non-overlapping 4 cm by 3 cm corner removed. Find the remaining area.",
+          "unit": "cm²",
+          "options": [
+            "88",
+            "76",
+            "112",
+            "28"
+          ],
+          "answer": 0,
+          "proof": "10**2-4*3",
+          "explanation": "The original area 100 minus the removed area 12 gives 88 cm²."
+        }
+      ]
+    },
+    {
+      "id": "circles",
+      "title": "Circles: circumference, area & sectors",
+      "stage": "Algebra & geometry",
+      "summary": "Use radius correctly and relate sectors or rings to complete circles.",
+      "lessons": [
+        {
+          "id": "circles-1",
+          "title": "Radius and circumference",
+          "idea": "Diameter is twice radius. Circumference is the boundary length of a circle; it uses length units.",
+          "rule": "d = 2r; circumference = 2πr = πd.",
+          "example": {
+            "problem": "Find circumference when radius is 7 cm, using π = 22/7.",
+            "steps": [
+              "2 × (22/7) × 7 = 44 cm."
+            ]
+          },
+          "exercise": {
+            "id": "circles-practice-1",
+            "prompt": "Find circumference of a circle with diameter 14 cm. Use π = 22/7.",
+            "unit": "cm",
+            "answer": "44",
+            "proof": "22/7*14",
+            "explanation": "Use πd, not 2πd: (22/7) × 14 = 44 cm."
+          }
+        },
+        {
+          "id": "circles-2",
+          "title": "Circle area and rings",
+          "idea": "A circle’s area depends on radius squared. For a ring, subtract the smaller concentric circle from the larger one.",
+          "rule": "Area = πr²; ring area = π(R²−r²).",
+          "example": {
+            "problem": "Find area for radius 7 cm, using π = 22/7.",
+            "steps": [
+              "Area = (22/7) × 49 = 154 cm²."
+            ]
+          },
+          "exercise": {
+            "id": "circles-practice-2",
+            "prompt": "A ring has outer radius 14 cm and inner radius 7 cm. Find its area. Use π = 22/7.",
+            "unit": "cm²",
+            "answer": "462",
+            "proof": "22/7*(14**2-7**2)",
+            "explanation": "Subtract areas: (22/7) × (196−49) = 462 cm²."
+          }
+        },
+        {
+          "id": "circles-3",
+          "title": "Sectors and arcs",
+          "idea": "A sector represents its central-angle fraction of a full circle. Sector area and arc length use the same fraction but different full-circle formulas.",
+          "rule": "Sector area = (θ/360)πr²; arc length = (θ/360)2πr.",
+          "example": {
+            "problem": "Find a 90° sector’s area with radius 14 cm, using π = 22/7.",
+            "steps": [
+              "The sector is one quarter of the circle.",
+              "Area = (1/4) × (22/7) × 196 = 154 cm²."
+            ]
+          },
+          "exercise": {
+            "id": "circles-practice-3",
+            "prompt": "Find the arc length of a 60° sector of radius 21 cm. Use π = 22/7.",
+            "unit": "cm",
+            "answer": "22",
+            "proof": "60/360*2*22/7*21",
+            "explanation": "A sixth of circumference 132 cm is 22 cm."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "circles-quiz-1",
+          "prompt": "A circle has radius 10 cm. Find its diameter.",
+          "unit": "cm",
+          "options": [
+            "20",
+            "5",
+            "100",
+            "10"
+          ],
+          "answer": 0,
+          "proof": "2*10",
+          "explanation": "Diameter is twice radius, so it is 20 cm."
+        },
+        {
+          "id": "circles-quiz-2",
+          "prompt": "Find circumference for radius 21 cm. Use π = 22/7.",
+          "unit": "cm",
+          "options": [
+            "66",
+            "462",
+            "132",
+            "42"
+          ],
+          "answer": 2,
+          "proof": "2*22/7*21",
+          "explanation": "2 × (22/7) × 21 = 132 cm."
+        },
+        {
+          "id": "circles-quiz-3",
+          "prompt": "Find area for diameter 28 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "2464",
+            "88",
+            "154",
+            "616"
+          ],
+          "answer": 3,
+          "proof": "22/7*14**2",
+          "explanation": "Radius is 14, so area is (22/7) × 196 = 616 cm²."
+        },
+        {
+          "id": "circles-quiz-4",
+          "prompt": "Find area of a 90° sector with radius 7 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "154",
+            "77/2",
+            "77",
+            "44"
+          ],
+          "answer": 1,
+          "proof": "90/360*22/7*7**2",
+          "explanation": "A quarter of 154 is 38.5 cm²."
+        },
+        {
+          "id": "circles-quiz-5",
+          "prompt": "Find the ring area for outer radius 21 cm and inner radius 14 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "154",
+            "385",
+            "1540",
+            "770"
+          ],
+          "answer": 3,
+          "proof": "22/7*(21**2-14**2)",
+          "explanation": "π(441−196) = (22/7) × 245 = 770 cm²."
+        }
+      ]
+    },
+    {
+      "id": "surface-area",
+      "title": "Surface area",
+      "stage": "Algebra & geometry",
+      "summary": "Identify exposed surfaces and distinguish curved area from total area.",
+      "lessons": [
+        {
+          "id": "surface-area-1",
+          "title": "Cubes and cuboids",
+          "idea": "Surface area adds the areas of exposed faces. A closed cuboid has three pairs of equal rectangular faces.",
+          "rule": "Closed cuboid: 2(lw + lh + wh). Cube: 6a².",
+          "example": {
+            "problem": "Find total surface area of a closed cuboid 5 cm × 4 cm × 3 cm.",
+            "steps": [
+              "Face pairs have areas 20, 15 and 12.",
+              "Double their sum: 2 × 47 = 94 cm²."
+            ]
+          },
+          "exercise": {
+            "id": "surface-area-practice-1",
+            "prompt": "Find the total surface area of a cube of side 6 cm.",
+            "unit": "cm²",
+            "answer": "216",
+            "proof": "6*6**2",
+            "explanation": "Each of six faces has area 36 cm²; total is 216 cm²."
+          }
+        },
+        {
+          "id": "surface-area-2",
+          "title": "Cylinders and open containers",
+          "idea": "A cylinder’s curved surface unrolls to a rectangle of width 2πr and height h. Include only the circular ends that actually exist.",
+          "rule": "Curved area = 2πrh; closed total = 2πr(h+r); open-top container = 2πrh + πr².",
+          "example": {
+            "problem": "Find total area of a closed cylinder, r = 7 cm, h = 10 cm. Use π = 22/7.",
+            "steps": [
+              "Curved area = 440 cm².",
+              "Two ends contribute 308 cm².",
+              "Total = 748 cm²."
+            ]
+          },
+          "exercise": {
+            "id": "surface-area-practice-2",
+            "prompt": "Find surface area of an open-top cylindrical container, radius 7 cm and height 10 cm. Use π = 22/7.",
+            "unit": "cm²",
+            "answer": "594",
+            "proof": "2*22/7*7*10+22/7*7**2",
+            "explanation": "Include curved side 440 and one base 154: total 594 cm²."
+          }
+        },
+        {
+          "id": "surface-area-3",
+          "title": "Cones and spheres",
+          "idea": "A cone’s curved surface uses slant height, not vertical height. A sphere has one curved surface and no circular base.",
+          "rule": "Cone total = πrl + πr². Sphere area = 4πr².",
+          "example": {
+            "problem": "Find total surface area of a cone with radius 7 cm and slant height 10 cm. Use π = 22/7.",
+            "steps": [
+              "Curved surface = (22/7) × 7 × 10 = 220.",
+              "Base area = 154.",
+              "Total = 374 cm²."
+            ]
+          },
+          "exercise": {
+            "id": "surface-area-practice-3",
+            "prompt": "Find surface area of a sphere of radius 7 cm. Use π = 22/7.",
+            "unit": "cm²",
+            "answer": "616",
+            "proof": "4*22/7*7**2",
+            "explanation": "4πr² = 4 × 154 = 616 cm²."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "surface-area-quiz-1",
+          "prompt": "Find total surface area of a cube of side 5 cm.",
+          "unit": "cm²",
+          "options": [
+            "125",
+            "25",
+            "150",
+            "100"
+          ],
+          "answer": 2,
+          "proof": "6*5**2",
+          "explanation": "Six square faces give 6 × 25 = 150 cm²."
+        },
+        {
+          "id": "surface-area-quiz-2",
+          "prompt": "Find total surface area of a closed cuboid 8 cm × 5 cm × 3 cm.",
+          "unit": "cm²",
+          "options": [
+            "120",
+            "79",
+            "240",
+            "158"
+          ],
+          "answer": 3,
+          "proof": "2*(8*5+8*3+5*3)",
+          "explanation": "Twice the face-area sum gives 2 × 79 = 158 cm²."
+        },
+        {
+          "id": "surface-area-quiz-3",
+          "prompt": "Find curved surface area of a cylinder, radius 7 cm and height 12 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "154",
+            "836",
+            "264",
+            "528"
+          ],
+          "answer": 3,
+          "proof": "2*22/7*7*12",
+          "explanation": "2πrh = 44 × 12 = 528 cm²; do not add end faces."
+        },
+        {
+          "id": "surface-area-quiz-4",
+          "prompt": "Find curved surface area of a cone, radius 14 cm and slant height 15 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "1276",
+            "616",
+            "660",
+            "1320"
+          ],
+          "answer": 2,
+          "proof": "22/7*14*15",
+          "explanation": "Curved area = πrl = (22/7) × 14 × 15 = 660 cm²."
+        },
+        {
+          "id": "surface-area-quiz-5",
+          "prompt": "Find surface area of a sphere of radius 14 cm. Use π = 22/7.",
+          "unit": "cm²",
+          "options": [
+            "616",
+            "2464",
+            "1232",
+            "88"
+          ],
+          "answer": 1,
+          "proof": "4*22/7*14**2",
+          "explanation": "4πr² = 4 × 616 = 2,464 cm²."
+        }
+      ]
+    },
+    {
+      "id": "volume",
+      "title": "Volume & capacity",
+      "stage": "Algebra & geometry",
+      "summary": "Calculate solid volume, convert capacity and use volume conservation.",
+      "lessons": [
+        {
+          "id": "volume-1",
+          "title": "Cubes, cuboids and capacity",
+          "idea": "Volume measures occupied space in cubic units. Capacity conversions must cube the length conversion.",
+          "rule": "Cuboid volume = lwh; cube volume = a³. 1 litre = 1,000 cm³; 1 m³ = 1,000 litres.",
+          "example": {
+            "problem": "Find capacity of a cuboid tank 50 cm × 40 cm × 30 cm.",
+            "steps": [
+              "Volume = 60,000 cm³.",
+              "Divide by 1,000 to get 60 litres."
+            ]
+          },
+          "exercise": {
+            "id": "volume-practice-1",
+            "prompt": "A tank is 80 cm × 50 cm × 40 cm. Find its capacity in litres.",
+            "unit": "litres",
+            "answer": "160",
+            "proof": "80*50*40/1000",
+            "explanation": "Volume is 160,000 cm³; dividing by 1,000 gives 160 litres."
+          }
+        },
+        {
+          "id": "volume-2",
+          "title": "Cylinders and displacement",
+          "idea": "Cylinder volume is base area times vertical height. For a submerged object, the water-volume increase equals the submerged volume when no water spills.",
+          "rule": "Cylinder volume = πr²h.",
+          "example": {
+            "problem": "Find volume of a cylinder with radius 7 cm and height 10 cm. Use π = 22/7.",
+            "steps": [
+              "Base area = 154 cm².",
+              "Volume = 154 × 10 = 1,540 cm³."
+            ]
+          },
+          "exercise": {
+            "id": "volume-practice-2",
+            "prompt": "Find volume of a cylinder with radius 14 cm and height 5 cm. Use π = 22/7.",
+            "unit": "cm³",
+            "answer": "3080",
+            "proof": "22/7*14**2*5",
+            "explanation": "Base area is 616 cm²; multiplying by height 5 gives 3,080 cm³."
+          }
+        },
+        {
+          "id": "volume-3",
+          "title": "Cones, spheres and scaling",
+          "idea": "A cone has one third of the volume of a cylinder with the same base and vertical height. Scaling every length by k multiplies volume by k³.",
+          "rule": "Cone = ⅓πr²h. Sphere = 4/3 πr³.",
+          "example": {
+            "problem": "Find volume of a cone with r = 7 cm and h = 12 cm. Use π = 22/7.",
+            "steps": [
+              "The matching cylinder has volume 154 × 12 = 1,848.",
+              "The cone volume is 1,848 ÷ 3 = 616 cm³."
+            ]
+          },
+          "exercise": {
+            "id": "volume-practice-3",
+            "prompt": "A cube has volume 27 cm³. Every edge is doubled. Find its new volume.",
+            "unit": "cm³",
+            "answer": "216",
+            "proof": "27*2**3",
+            "explanation": "Doubling all three dimensions multiplies volume by 8, giving 216 cm³."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "volume-quiz-1",
+          "prompt": "Find volume of a cube of side 4 cm.",
+          "unit": "cm³",
+          "options": [
+            "16",
+            "64",
+            "96",
+            "12"
+          ],
+          "answer": 1,
+          "proof": "4**3",
+          "explanation": "Volume = 4³ = 64 cm³."
+        },
+        {
+          "id": "volume-quiz-2",
+          "prompt": "Convert 2.5 litres to cm³.",
+          "unit": "cm³",
+          "options": [
+            "250",
+            "25",
+            "2500",
+            "25000"
+          ],
+          "answer": 2,
+          "proof": "25/10*1000",
+          "explanation": "Each litre is 1,000 cm³, so 2.5 litres is 2,500 cm³."
+        },
+        {
+          "id": "volume-quiz-3",
+          "prompt": "Find volume of a cylinder, radius 7 cm and height 8 cm. Use π = 22/7.",
+          "unit": "cm³",
+          "options": [
+            "1232",
+            "352",
+            "616",
+            "154"
+          ],
+          "answer": 0,
+          "proof": "22/7*7**2*8",
+          "explanation": "πr²h = 154 × 8 = 1,232 cm³."
+        },
+        {
+          "id": "volume-quiz-4",
+          "prompt": "Find volume of a cone, radius 7 cm and vertical height 9 cm. Use π = 22/7.",
+          "unit": "cm³",
+          "options": [
+            "1386",
+            "154",
+            "462",
+            "616"
+          ],
+          "answer": 2,
+          "proof": "22/7*7**2*9/3",
+          "explanation": "One third of 154 × 9 gives 462 cm³."
+        },
+        {
+          "id": "volume-quiz-5",
+          "prompt": "Find volume of a sphere with radius 3 cm. Use π = 3.14.",
+          "unit": "cm³",
+          "options": [
+            "113.4",
+            "2826/25",
+            "28.26",
+            "339.12"
+          ],
+          "answer": 1,
+          "proof": "4/3*314/100*3**3",
+          "explanation": "4/3 × 3.14 × 27 = 113.04 cm³."
+        }
+      ]
+    }
+  ]
+}

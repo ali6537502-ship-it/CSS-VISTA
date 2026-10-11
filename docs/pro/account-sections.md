@@ -10,7 +10,7 @@ The existing membership summary shows actual native membership status in the Pro
 
 ## General Ability audit before the next course stage
 
-This change adds an account link to the existing bank, now under Pro access; it does not implement a new maths course. The requested foundations-to-advanced teaching sequence is not present as a guided course.
+The first native Pro maths course is now implemented at `/account/general-ability`: 21 topics, 63 lessons with worked examples and exercises, and 105 quiz questions. It uses its own course entry independently of the MPT suspension. See [general-ability-course.md](general-ability-course.md) for the exact curriculum, saved-work rules and validation. The existing banks remain separate practice resources.
 
 The live-source bank at `public/mcq/cat-general-ability-*.json` contains 900 records used by `/mpt/bank/abilities`: arithmetic, HCF/LCM, fractions, ratio/proportion, percentages, averages, profit/loss, discount, work/rates, speed/distance/time and number-series/reasoning practice. Its labels include 400 `Number Series and Differences` records. Counts describe stored bank coverage, not academically reviewed lessons or unique tested concepts.
 
