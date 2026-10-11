@@ -91,11 +91,11 @@ test('private account routes remain noindex and never enable Auto Ads', () => {
   }
 })
 
-test('MPT overview permits one manual unit while every active assessment stays ad-free', () => {
+test('hibernated MPT overview and all assessment routes remain ad-free', () => {
   const overview = getAdRoutePolicy('/mpt')
   assert.equal(overview.autoAdsEnabled, false)
-  assert.equal(overview.manualAdsEnabled, true)
-  assert.equal(overview.minimumHeight, 250)
+  assert.equal(overview.manualAdsEnabled, false)
+  assert.equal(overview.minimumHeight, 0)
 
   const active = getAdRoutePolicy('/mpt', '', { activeAssessment: true })
   assert.equal(active.autoAdsEnabled, false)
