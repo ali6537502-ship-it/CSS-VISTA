@@ -7,6 +7,8 @@ const CSSV_SESSION_COOKIE = 'cssv_session';
 const CSSV_CSRF_COOKIE = 'cssv_csrf';
 const CSSV_ADMIN_MFA_COOKIE = 'cssv_admin_mfa';
 
+require_once __DIR__.'/_pro_release.php';
+
 $GLOBALS['CSSV_RUNTIME_CONFIG'] = [];
 $documentRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/\\');
 $defaultConfig = $documentRoot !== '' ? dirname($documentRoot) . DIRECTORY_SEPARATOR . 'cssv-private' . DIRECTORY_SEPARATOR . 'config.php' : '';
@@ -291,6 +293,7 @@ function cssv_require_user(PDO $pdo, bool $requireCompleteProfile = true): array
     }
     $expected = (string)($_SERVER['HTTP_X_CSSV_USER'] ?? '');
     if ($expected !== '' && !hash_equals($session['user_id'], $expected)) cssv_fail('Your account changed. Please refresh this page.', 409, 'account_changed');
+    if (cssv_pro_release_student_endpoint((string)($_SERVER['SCRIPT_FILENAME'] ?? ''))) cssv_pro_release_require_open();
     if ($requireCompleteProfile) {
         require_once __DIR__ . '/_profile.php';
         if (!cssv_profile_status(cssv_profile_for_user($pdo, (string)$session['user_id']))['complete']) cssv_fail('Complete all 12 profile checks to unlock your account services.', 403, 'profile_incomplete');

@@ -1,4 +1,5 @@
-import { Link } from 'react-router'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+
 import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
 import { briefingRoot, latestRange, overviewSchema } from '@/features/current-affairs/model'
 import { useBriefing } from '@/features/current-affairs/useBriefing'

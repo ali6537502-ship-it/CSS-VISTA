@@ -1,3 +1,4 @@
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import ProGate from '@/features/membership/ProGate'
 import { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router'
@@ -192,6 +193,7 @@ function ReadingContent({
   generation: number
 }) {
   const [params, setParams] = useSearchParams()
+  const paused = useProReleasePaused()
   const kind: ReadingKind = params.get('kind') === 'vistagram' ? 'vistagram' : 'current_affairs'
   const requestedFilter = params.get('filter') ?? 'all'
   const filter = ['saved', 'read', 'revision'].includes(requestedFilter) ? requestedFilter : 'all'
@@ -226,7 +228,7 @@ function ReadingContent({
         </p>
         <h2 className="mt-2 text-2xl font-semibold">Connect what you read</h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-          Read in Vistagram or Current Affairs, keep what matters for this attempt and return for
+          Read in {paused ? 'Vistagram' : 'Vistagram or Current Affairs'}, keep what matters for this attempt and return for
           revision. Publication dates stay visible as you build your reading record.
         </p>
       </header>
@@ -241,7 +243,7 @@ function ReadingContent({
               change('kind', e.target.value)
             }}
           >
-            <option value="current_affairs">★ Pro · Current Affairs</option>
+            {!paused && <option value="current_affairs">★ Pro · Current Affairs</option>}
             <option value="vistagram">Vistagram</option>
           </select>
         </label>

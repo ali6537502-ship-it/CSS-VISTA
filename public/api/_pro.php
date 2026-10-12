@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/_pro_core.php';
 require_once __DIR__ . '/_pro_schema.php';
+require_once __DIR__ . '/_pro_release.php';
 
 function cssv_pro_ensure_schema(PDO $pdo): void
 {
@@ -24,7 +25,7 @@ function cssv_pro_product(): array
     $terms = cssv_env('CSSV_PRO_TERMS_TEXT','');
     $version = cssv_env('CSSV_PRO_TERMS_VERSION','');
     $validPrice = is_string($price) && preg_match('/^[1-9][0-9]{0,8}$/D',$price);
-    $ready = cssv_env('CSSV_PRO_COLLECTION_ENABLED','0') === '1'
+    $ready = !cssv_pro_release_paused() && cssv_env('CSSV_PRO_COLLECTION_ENABLED','0') === '1'
         && cssv_env('CSSV_PRO_COLLECTION_APPROVED','0') === '1'
         && $validPrice && preg_match('/^0[0-9]{10}$/D',(string)$number)
         && mb_strlen((string)$title) > 0 && mb_strlen((string)$title) <= 120
@@ -51,6 +52,7 @@ function cssv_pro_iso(?string $value): ?string
 
 function cssv_pro_require_active(PDO $pdo, string $userId): void
 {
+    cssv_pro_release_require_open();
     // Future premium actions call this AFTER cssv_require_user. Owned history
     // does not call it. No existing free feature is gated by this increment.
     cssv_pro_ensure_schema($pdo);

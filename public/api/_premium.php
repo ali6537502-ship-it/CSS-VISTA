@@ -25,6 +25,7 @@ function cssv_premium_file(string $file): ?string {
 }
 
 function cssv_premium_active(PDO $pdo): bool {
+    if (cssv_pro_release_paused()) return false;
     $session=cssv_current_session($pdo);
     if (!$session) return false;
     cssv_pro_ensure_schema($pdo);

@@ -1,4 +1,5 @@
-import { Link, useSearchParams } from 'react-router'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+import { useSearchParams } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
 import { AccountPage } from './shared'
 import { pakistanTime } from '@/features/membership/api'

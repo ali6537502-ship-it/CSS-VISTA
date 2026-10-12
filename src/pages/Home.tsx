@@ -1,5 +1,7 @@
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { Suspense, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router'
+import { useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
   CheckCircle2, ClipboardCheck, Download, FileText, Globe2, LibraryBig,
@@ -557,6 +559,7 @@ function getContinueProgress(activity: Activity | undefined, stats: ReturnType<t
 }
 
 export default function Home() {
+  const proPaused = useProReleasePaused()
   const location = useLocation()
   const { user } = useAccount()
   const [showTimers, setShowTimers] = useState(true)
@@ -662,7 +665,7 @@ export default function Home() {
 
         <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
 
-        <WeeklyMagazineCard />
+        {!proPaused && <WeeklyMagazineCard />}
 
         <Suspense fallback={null}><VistagramHomePreview /></Suspense>
 

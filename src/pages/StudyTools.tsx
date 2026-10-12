@@ -1,5 +1,6 @@
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+
 import {
   Pause, Play, RotateCcw, Target, Timer, Coffee, Plus, Trash2,
   AlertTriangle, BookMarked, PenLine, CalendarDays, Printer, FileText, Zap, Globe,

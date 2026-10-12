@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router'
+import { Navigate, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router'
+import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
 import { ArrowRight, BookOpen, LogOut, Search, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { archiveSchema, briefingRoot, dateFilters, displayDate, factText, feedSchema, latestRange, pakistanDate, shiftDate, type Fact, type StoryCard } from './model'
