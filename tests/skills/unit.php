@@ -29,6 +29,8 @@ $bad=$data;$bad['criteria'][0]['excerpt']='invented student quote';rejects(fn()=
 $bad=$data;$bad['evidence_flags'][0]['status']='verified';rejects(fn()=>cssv_skills_ai_result($bad,$input));
 $bad=$data;$bad['summary']='Your score is 90';rejects(fn()=>cssv_skills_ai_result($bad,$input));
 $bad=$data;$bad['criteria'][1]['code']=$bad['criteria'][0]['code'];rejects(fn()=>cssv_skills_ai_result($bad,$input));
+$minimal=cssv_skills_ai_payload(['model'=>'TEST-only-model'],[...$input,'version_id'=>'PRIVATE-VERSION-DO-NOT-SEND','text_hash'=>'PRIVATE-HASH-DO-NOT-SEND','policy_hash'=>'PRIVATE-NOTICE-DO-NOT-SEND']);
+check($minimal['store']===false&&!isset($minimal['tools']),'Provider persistence/tools unexpectedly enabled.');check(!str_contains(json_encode($minimal),'DO-NOT-SEND'),'Internal account context sent to provider.');
 check(cssv_ai_features()['argumentation']===0&&cssv_ai_features()['analysis']===0&&cssv_ai_features()['essay']===0,'Unapproved default allowance.');
 $sql=implode(";\n\n",cssv_skills_schema_statements()).";\n";
 check(trim(preg_replace('/^--[^\n]*\n/m','',file_get_contents(__DIR__.'/../../server/sql/025_integrated_skills.sql')))===trim($sql),'Migration/runtime schema differ.');

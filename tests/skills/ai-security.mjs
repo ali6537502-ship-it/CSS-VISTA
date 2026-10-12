@@ -75,9 +75,9 @@ try {
   const a=await call('student/learning.php',member.jar,make({action:'attempt_save',expected_version:0,target_year:2027,target_date:null,optional_subject_ids:[],daily_minutes:60,stage:'starting'}))
   const w=await call(endpoint,member.jar,make({action:'start',feature:'essay',lesson:roadmap.themes[0].slug,level:'beginner',attempt_id:a.data.attempt_id}))
   const before=(await call(endpoint+'?workspace_id='+w.data.workspace_id,member.jar)).data
-  const saved=await call(endpoint,member.jar,make({action:'save',workspace_id:w.data.workspace_id,expected_version:0,stage:'understanding',response:'This independent explanation identifies the scope of the theme and a question for further research.'}))
+  const saved=await call(endpoint,member.jar,make({action:'save',workspace_id:w.data.workspace_id,expected_version:0,stage:'understanding',advance:true,response:'This independent explanation identifies the scope of the theme and a question for further research.'}))
   const request=make({action:'evaluate',workspace_id:w.data.workspace_id,version_id:saved.data.version_id,policy_version:before.configuration.policy_version,policy_hash:before.configuration.policy_hash,accepted:true})
-  const reserved=JSON.parse(php('tests/skills/fixture.php','reserve',member.id,JSON.stringify(request)));assert.ok(reserved.id,JSON.stringify(reserved))
+  const reserved=JSON.parse(php('tests/skills/fixture.php','reserve',member.id,JSON.stringify(request)));assert.ok(reserved.id,JSON.stringify(reserved));assert.equal(php('tests/skills/fixture.php','input-stage',reserved.id),'understanding','Feedback context followed the newer workspace position instead of its saved response')
   php('tests/skills/fixture.php','config','on',changed==='notice'?' Changed private processing notice.':'',changed==='model'?'TEST-only-different-model':'TEST-only-model')
   const recovered=await call(endpoint,member.jar,request);assert.equal(recovered.status,200,JSON.stringify(recovered.data));assert.equal(recovered.data.operation.id,reserved.id);assert.equal(recovered.data.operation.state,'failed')
   const usage=JSON.parse(php('tests/skills/fixture.php','snapshot',member.id))[0];assert.equal(Number(usage.used),0);assert.equal(Number(usage.reserved),0);assert.equal(Number(usage.provider_calls),0)

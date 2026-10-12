@@ -13,7 +13,7 @@ const browser = await chromium.launch({ executablePath: process.env.CSSV_BROWSER
 const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 390, height: 1000 }, reducedMotion: 'reduce' }), page = await context.newPage(), errors = []
 page.on('pageerror', e => errors.push(e.message))
 try {
-  await page.goto(base + '/account'); await page.getByLabel('Email address', { exact: true }).fill(email); await page.getByLabel('Password', { exact: true }).fill('TEST ONLY native fixture password'); await page.getByRole('button', { name: 'Sign in securely', exact: true }).click(); await page.waitForURL('**/account/dashboard')
+  await page.goto(base + '/account'); await page.getByLabel('Email address', { exact: true }).fill(email); await page.getByLabel('Password', { exact: true }).fill('TEST ONLY native fixture password'); const reply=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/auth/login.php'&&r.request().method()==='POST');await page.getByRole('button', { name: 'Sign in securely', exact: true }).click();const login=await reply;assert.equal(login.status(),200,'Native browser sign-in failed: '+(await login.json().catch(()=>({}))).error); await page.waitForURL('**/account/dashboard')
   await page.goto(base + '/account/general-ability'); await page.getByText('An active Pro membership is required.', { exact: false }).waitFor()
   php('tests/precis/fixture.php', 'activate', id)
   await page.reload(); await page.getByText('75 guided lessons', { exact: true }).waitFor(); await page.getByText('25 topic quizzes', { exact: true }).waitFor()

@@ -18,8 +18,8 @@ const server = https.createServer({ key: readFileSync(temporary + '/key.pem'), c
   if (pathname.startsWith('/api/') || paid) {
     const headers = { ...req.headers, host: 'localhost:4173' }
     if (headers.origin) headers.origin = 'http://localhost:4173'
-    const proxy = http.request({ hostname: '127.0.0.1', port: 4173, path: paid ? '/api/student/premium-content.php?file=' + encodeURIComponent(pathname.slice(1)) : req.url, method: req.method, headers }, response => { res.writeHead(response.statusCode, response.headers); response.pipe(res) })
-    proxy.on('error', () => { if (!res.headersSent) res.writeHead(502); res.end() })
+    const proxy = http.request({ hostname: 'localhost', port: 4173, path: paid ? '/api/student/premium-content.php?file=' + encodeURIComponent(pathname.slice(1)) : req.url, method: req.method, headers }, response => { res.writeHead(response.statusCode, response.headers); response.pipe(res) })
+    proxy.on('error', error => { console.error('Isolated native proxy:', error.code); if (!res.headersSent) res.writeHead(502, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'test_native_proxy_unavailable' })) })
     req.pipe(proxy); return
   }
   let file = path.resolve(root, '.' + pathname)

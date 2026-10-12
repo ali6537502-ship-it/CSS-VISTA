@@ -17,6 +17,8 @@ if($action==='config'){
  $q=$pdo->prepare("SELECT $column FROM $table WHERE $key=?");$q->execute([$argv[2]]);$raw=$q->fetchColumn();if(!$raw)throw new RuntimeException('Synthetic snapshot not found.');
  $sort=static function(mixed $v)use(&$sort):mixed{if(!is_array($v))return $v;if(!array_is_list($v))ksort($v);foreach($v as &$child)$child=$sort($child);unset($child);return $v;};
  $pdo->prepare("UPDATE $table SET $column=? WHERE $key=?")->execute([json_encode($sort(json_decode($raw,true,64,JSON_THROW_ON_ERROR)),JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$argv[2]]);
+}elseif($action==='input-stage'){
+ $q=$pdo->prepare('SELECT input FROM skills_ai_inputs WHERE operation_id=?');$q->execute([$argv[2]]);$input=json_decode((string)$q->fetchColumn(),true,64,JSON_THROW_ON_ERROR);echo $input['stage'];
 }elseif($action==='snapshot'){
  $q=$pdo->prepare('SELECT feature,used,reserved,accepted,provider_calls FROM ai_daily_usage WHERE user_id=?');$q->execute([$argv[2]]);echo json_encode($q->fetchAll(),JSON_THROW_ON_ERROR);
 }else throw new RuntimeException('Unknown fixture action.');

@@ -27,6 +27,7 @@ function cssv_skills_version(PDO $pdo,string $user,array $w,?string $id=null): ?
     cssv_learning_version($pdo,$v['version_id'],$user);foreach(['answers','evidence'] as $k)$v[$k]=json_decode($v[$k],true,32,JSON_THROW_ON_ERROR);$v['version']=(int)$v['version'];$v['word_count']=(int)$v['word_count'];$v['created_at']=cssv_pro_iso($v['created_at']);return $v;
 }
 function cssv_skills_append(PDO $pdo,string $user,array $w,array $answers,int $position,?string $field=null): array {
+    $responseStage=$field;
     if($w['feature']==='sentence'&&!in_array($field,['draft','revision'],true)){
         $prior=cssv_skills_version($pdo,$user,$w);$field=$prior['evidence']['writing_field']??null;
     }
@@ -38,7 +39,7 @@ function cssv_skills_append(PDO $pdo,string $user,array $w,array $answers,int $p
         $pdo->prepare('UPDATE writing_records SET version=? WHERE id=? AND user_id=?')->execute([$version,$writing,$user]);
     }else $pdo->prepare('INSERT INTO writing_records(id,user_id,attempt_id,kind,title,version) VALUES(?,?,?,?,?,?)')->execute([$writing,$user,$w['attempt_id'],$w['feature']==='sentence'?'sentence':'paragraph',$w['source']['title'],$version]);
     $pdo->prepare('INSERT INTO writing_versions(id,writing_id,version,text,text_hash,word_count) VALUES(?,?,?,?,?,?)')->execute([$id,$writing,$version,$text,hash('sha256',$text),cssv_learning_words($text)]);
-    $evidence=cssv_skills_evidence($w['source'],$answers);if($w['feature']==='sentence')$evidence['writing_field']=$field;
+    $evidence=cssv_skills_evidence($w['source'],$answers);$evidence['response_stage']=$responseStage;if($w['feature']==='sentence')$evidence['writing_field']=$field;
     $pdo->prepare('INSERT INTO skills_versions(version_id,workspace_id,answers,evidence) VALUES(?,?,?,?)')->execute([$id,$w['id'],json_encode($answers,JSON_THROW_ON_ERROR),json_encode($evidence,JSON_THROW_ON_ERROR)]);
     $pdo->prepare('UPDATE skills_workspaces SET writing_id=?,version=?,position=? WHERE id=? AND user_id=?')->execute([$writing,$version,$position,$w['id'],$user]);
     return ['workspace_id'=>$w['id'],'writing_id'=>$writing,'version_id'=>$id,'version'=>$version,'evidence'=>$evidence];
