@@ -16,6 +16,7 @@ In a second terminal with the same isolated CI environment:
 ```sh
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/skills.mjs
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/connected-skills.mjs
+CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/reasoning-quality.mjs
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/ability.mjs
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/mentor-history.mjs
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/precis.mjs

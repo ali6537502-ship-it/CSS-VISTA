@@ -69,6 +69,7 @@ export type Evidence = {
     chosen: string;
     answer: string;
     explanation: string;
+    choice_explanation?: string;
   } | null;
   basis: string;
 };

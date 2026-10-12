@@ -876,6 +876,9 @@ function Session({
               ? "Understanding check saved"
               : "Review the distinction and try again"}
           </h3>
+          {!saved.evidence.check_feedback.correct && saved.evidence.check_feedback.choice_explanation && (
+            <p className="text-sm leading-7"><span className="font-semibold">Why this choice needs review: </span>{saved.evidence.check_feedback.choice_explanation}</p>
+          )}
           <p className="text-sm leading-7">
             {saved.evidence.check_feedback.explanation}
           </p>

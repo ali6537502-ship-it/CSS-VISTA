@@ -72,7 +72,7 @@ function cssv_skills_source(string $feature,mixed $id,string $level): array {
     $source['edition']=cssv_skills_package()['version'];return $source;
 }
 function cssv_skills_public_source(array $source): array {
-    if(isset($source['check']))unset($source['check']['answer'],$source['check']['explanation']);
+    if(isset($source['check']))unset($source['check']['answer'],$source['check']['explanation'],$source['check']['option_feedback']);
     foreach($source['stages'] as &$stage)$stage['min_words']=cssv_skills_min_words($source['feature'],$stage);unset($stage);
     return $source;
 }
@@ -95,7 +95,10 @@ function cssv_skills_evidence(array $source,array $answers): array {
         $value=$answers[$stage['id']]??null;
         if($stage['id']==='check'){
             $met=$value!==null&&$value===$source['check']['answer'];
-            if($value!==null)$feedback=['correct'=>$met,'chosen'=>$source['check']['options'][$value],'answer'=>$source['check']['options'][$source['check']['answer']],'explanation'=>$source['check']['explanation']];
+            if($value!==null){
+                $feedback=['correct'=>$met,'chosen'=>$source['check']['options'][$value],'answer'=>$source['check']['options'][$source['check']['answer']],'explanation'=>$source['check']['explanation']];
+                if(is_string($source['check']['option_feedback'][$value]??null))$feedback['choice_explanation']=$source['check']['option_feedback'][$value];
+            }
         }else $met=is_string($value)&&cssv_learning_words($value)>=cssv_skills_min_words($source['feature'],$stage);
         if($met)$recorded[]=$stage['id'];
         if($index===$first&&$met)$first++;

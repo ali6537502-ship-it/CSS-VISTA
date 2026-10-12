@@ -1,5 +1,5 @@
 {
-  "version": "skills-2026-10-v1",
+  "version": "skills-2026-10-v2",
   "attribution": "Original bounded CSS Vista skills teaching. Hypothetical examples are not evidence of real events. Grammar rules link to the existing course.",
   "lessons": [
     {
@@ -497,14 +497,20 @@
         "prompt": "Which is an argument?",
         "options": [
           "The timetable should change because two required classes overlap.",
-          "I like the timetable.",
-          "The timetable contains eight entries.",
-          "The timetable is printed on paper."
+          "The timetable is convenient.",
+          "Two required classes overlap.",
+          "The timetable should change."
         ],
         "answer": 0,
-        "explanation": "The timetable proposal gives a conclusion and a relevant reason."
+        "explanation": "The timetable proposal gives a conclusion and a relevant reason.",
+        "option_feedback": [
+          "The timetable proposal gives a conclusion and a relevant reason.",
+          "This is an evaluation without a supporting reason.",
+          "This is a checkable premise, but it does not itself state a proposal and supporting reason.",
+          "This states a conclusion without explaining why it should be accepted."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "In a hypothetical school, distinguish a checkable statement, a personal preference and a reasoned proposal about its timetable. Write one of each. Label any factual-looking statement that you have not verified.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -519,15 +525,21 @@
         "id": "central-claim-check",
         "prompt": "Which is a claim rather than only a topic?",
         "options": [
-          "Different schedules.",
+          "The advantages of a study session.",
           "The school should trial an evening study session.",
-          "Evening study.",
-          "School buildings."
+          "Possible evening study arrangements.",
+          "Access for students whose classes end late."
         ],
         "answer": 1,
-        "explanation": "The sentence proposes a position that can be supported or challenged."
+        "explanation": "The sentence proposes a position that can be supported or challenged.",
+        "option_feedback": [
+          "This announces a discussion rather than a defensible position.",
+          "The sentence proposes a position that can be supported or challenged.",
+          "This names a topic rather than taking a position.",
+          "This identifies an issue or group, but does not state what should be accepted."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "A hypothetical school has one unused room. State a specific proposal for using it, then distinguish your central claim from the general topic and from a reason supporting it.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -540,17 +552,23 @@
       "example": "Hypothetical: Repairing a broken light is relevant to safe evening use; the colour of the noticeboard is not.",
       "check": {
         "id": "supporting-reasons-check",
-        "prompt": "Which reason is relevant to repairing a broken classroom light?",
+        "prompt": "Which reason directly connects repairing the light to seeing classroom material?",
         "options": [
-          "The school logo has three colours.",
-          "The headteacher likes music.",
-          "The timetable was printed yesterday.",
+          "Repairing the light would be easier than changing the timetable.",
+          "The classroom is used by several subjects.",
+          "The room has recently been repainted.",
           "Students cannot read the board clearly in that room."
         ],
         "answer": 3,
-        "explanation": "Visibility bears directly on the purpose of the repair."
+        "explanation": "Visibility bears directly on the purpose of the repair.",
+        "option_feedback": [
+          "Ease of implementation does not explain the visibility benefit being asked about.",
+          "Frequent use alone does not establish how the broken light affects seeing the material.",
+          "A room improvement does not explain why its lighting needs repair.",
+          "Visibility bears directly on the purpose of the repair."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "A hypothetical classroom light is broken. Give one reason that connects repairing it to learning in that room. Contrast it with a genuine concern that does not establish that particular benefit.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -565,15 +583,21 @@
         "id": "logical-explanation-check",
         "prompt": "Which sentence explains the reason–claim link?",
         "options": [
-          "The overlap and class exist.",
-          "Everyone wants a change.",
+          "The overlap is inconvenient, and the new timetable would look clearer.",
+          "Students favour the change, so it will remove every attendance difficulty.",
           "Moving one class would remove the overlap and allow attendance at both.",
-          "The class should move because moving is good."
+          "Moving the class is the appropriate change because it should be moved."
         ],
         "answer": 2,
-        "explanation": "It names the mechanism by which the proposed change helps."
+        "explanation": "It names the mechanism by which the proposed change helps.",
+        "option_feedback": [
+          "Naming a problem and a different benefit does not explain the attendance mechanism.",
+          "Preference does not establish either the mechanism or that all barriers disappear.",
+          "It names the mechanism by which the proposed change helps.",
+          "This restates the proposal rather than explaining how it helps."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Suppose two required sessions overlap. Propose a scheduling change, then explain step by step how it would remove that specific barrier. State one condition under which your solution would still fail.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -589,14 +613,20 @@
         "prompt": "Which evidence is most directly relevant to a claimed timetable overlap?",
         "options": [
           "The dated timetables for both required classes.",
-          "A quotation about courage.",
-          "An unrelated national statistic.",
-          "An anonymous preference for shorter lessons."
+          "A dated timetable for only one of the two classes.",
+          "A teacher availability list without the scheduled class times.",
+          "Student opinions about whether the timetable is convenient."
         ],
         "answer": 0,
-        "explanation": "The actual timetables can establish whether those class times overlap."
+        "explanation": "The actual timetables can establish whether those class times overlap.",
+        "option_feedback": [
+          "The actual timetables can establish whether those class times overlap.",
+          "A comparison requires the relevant times of both classes.",
+          "Availability does not establish when those classes actually occur.",
+          "Opinions can identify a concern, but they do not directly establish the claimed overlap."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Investigate a hypothetical claim that two required classes overlap. Name the actual records needed, their dates and what you would compare. Explain why preferences alone cannot establish their timing.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -611,15 +641,21 @@
         "id": "premises-conclusions-check",
         "prompt": "What is the conclusion in that example?",
         "options": [
-          "Classes exist.",
+          "Every class must move to the evening.",
           "The timetable needs review.",
           "Two required classes overlap.",
           "All required classes must be attendable."
         ],
         "answer": 1,
-        "explanation": "Needs review is the judgement supported by the premises."
+        "explanation": "Needs review is the judgement supported by the premises.",
+        "option_feedback": [
+          "This particular remedy does not follow from the stated premises.",
+          "Needs review is the judgement supported by the premises.",
+          "This is a supporting premise, not the resulting judgement.",
+          "This is the standard used as a premise."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "A hypothetical centre says all required workshops must be attendable, but two workshops overlap. Write the premises and the conclusion they support. Explain why these premises do not select one particular remedy.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -632,17 +668,23 @@
       "example": "A longer opening period will help only if affected students can and wish to use it.",
       "check": {
         "id": "assumptions-check",
-        "prompt": "Which assumption needs checking before an evening-access trial?",
+        "prompt": "Which assumption directly connects evening hours to the affected students gaining access?",
         "options": [
-          "The notice is printed on paper.",
-          "Every student has identical needs.",
-          "Longer hours can never have costs.",
+          "A longer opening period necessarily lowers the staffing cost.",
+          "Current morning users prefer the existing timetable.",
+          "A published notice is sufficient to remove every access barrier.",
           "Affected students can use the proposed evening hours."
         ],
         "answer": 3,
-        "explanation": "Potential access depends on whether the relevant students can actually attend."
+        "explanation": "Potential access depends on whether the relevant students can actually attend.",
+        "option_feedback": [
+          "A cost claim is not the access assumption, and a longer period does not establish lower cost.",
+          "Their preference does not establish whether the affected evening users can attend.",
+          "Information alone does not establish practical ability to use the proposed hours.",
+          "Potential access depends on whether the relevant students can actually attend."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "A hypothetical library proposes evening access. Identify an assumption linking the new hours to the intended users. Explain what observation would challenge it and how that would qualify your proposal.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -658,14 +700,20 @@
         "prompt": "Why is \"attendance rose after the notice, so the notice caused the rise\" incomplete?",
         "options": [
           "Other changes could explain the rise.",
-          "Every later event proves causation.",
-          "Timing never matters.",
-          "No causal claim can ever be tested."
+          "The order of events already identifies the notice as the cause.",
+          "A plausible explanation is sufficient without checking competing changes.",
+          "The attendance increase itself shows which change produced it."
         ],
         "answer": 0,
-        "explanation": "The sequence is compatible with causation but does not exclude other explanations."
+        "explanation": "The sequence is compatible with causation but does not exclude other explanations.",
+        "option_feedback": [
+          "The sequence is compatible with causation but does not exclude other explanations.",
+          "Earlier occurrence is compatible with causation but does not exclude other causes.",
+          "A mechanism needs assessment, not just plausibility.",
+          "An outcome alone cannot identify one cause among several possible changes."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Suppose attendance improves after a hypothetical schedule change. Explain a possible mechanism, identify a competing explanation and describe evidence that could distinguish them. Treat the improvement as part of the scenario, not a real finding.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -681,14 +729,20 @@
         "prompt": "Which statement is circular?",
         "options": [
           "The rule is justified because it is a justified rule.",
+          "The rule is justified because the administrator favours it.",
           "The rule needs review because it conflicts with another requirement.",
-          "There may be a third option.",
-          "The conclusion needs supporting evidence."
+          "The rule is justified because its wording is polished."
         ],
         "answer": 0,
-        "explanation": "The reason merely repeats the conclusion."
+        "explanation": "The reason merely repeats the conclusion.",
+        "option_feedback": [
+          "The reason merely repeats the conclusion.",
+          "This appeals to a person rather than simply restating the conclusion; it is not the circular example.",
+          "This supplies a distinct reason that can be examined.",
+          "This substitutes presentation for support, rather than repeating the conclusion."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "For a hypothetical school policy, write examples of a personal attack, a false dilemma and circular reasoning. Explain the fault in each, then replace one faulty reason with independent relevant support.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -703,15 +757,21 @@
         "id": "irrelevant-arguments-check",
         "prompt": "What follows when a reason is irrelevant?",
         "options": [
-          "The opposite claim is certainly true.",
-          "Every argument on the topic is false.",
-          "The person must be dishonest.",
+          "The opposite claim is established by the failure of this reason.",
+          "No other reason could support the claim.",
+          "More confident wording would make the reason support the claim.",
           "That reason does not support the claim."
         ],
         "answer": 3,
-        "explanation": "Failure of support is not proof of the opposite position."
+        "explanation": "Failure of support is not proof of the opposite position.",
+        "option_feedback": [
+          "Failure of one support does not establish the opposite claim.",
+          "One irrelevant reason does not exclude different relevant evidence.",
+          "Confidence does not repair the lack of logical relevance.",
+          "Failure of support is not proof of the opposite position."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Someone supports extending a hypothetical library timetable with an irrelevant reason. Explain why that reason fails without declaring the proposal false. Give a separate relevant reason that still needs verification.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -727,14 +787,20 @@
         "prompt": "Which counterargument engages an access proposal seriously?",
         "options": [
           "Longer hours may require staffing resources that are unavailable.",
-          "Opponents hate students.",
-          "Nobody should ever use libraries.",
-          "The proposal has words in it."
+          "Longer hours could give late-class students more access.",
+          "The proposal is attractive because learning matters.",
+          "The school can decide how to advertise the new hours."
         ],
         "answer": 0,
-        "explanation": "It identifies a practical constraint relevant to the proposal."
+        "explanation": "It identifies a practical constraint relevant to the proposal.",
+        "option_feedback": [
+          "It identifies a practical constraint relevant to the proposal.",
+          "This supports the proposal rather than raising a counterargument.",
+          "A favourable general statement does not engage an opposing constraint.",
+          "Advertising does not address whether the required staffing exists."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Defend a hypothetical evening study session, then formulate the strongest reasonable objection about staffing or equitable access. Explain the objection in terms its proponent could accept before attempting a reply.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -749,15 +815,21 @@
         "id": "rebuttal-check",
         "prompt": "Which reply addresses a staffing-cost objection?",
         "options": [
-          "Claim all staff work for free.",
-          "Attack the objector personally.",
+          "Treat expressed demand as proof that staffing can be funded.",
+          "Promise that efficiency will cover the cost without checking the budget.",
           "Trial limited hours within a stated budget, then compare demand and cost.",
-          "Ignore the cost because the idea is popular."
+          "Present the educational benefits again without discussing staffing."
         ],
         "answer": 2,
-        "explanation": "The reply directly addresses the constraint and proposes a test rather than inventing savings."
+        "explanation": "The reply directly addresses the constraint and proposes a test rather than inventing savings.",
+        "option_feedback": [
+          "Demand and available funding are different matters.",
+          "An unverified saving does not answer the resource constraint.",
+          "The reply directly addresses the constraint and proposes a test rather than inventing savings.",
+          "Repeating benefits leaves the cost objection unanswered."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "A hypothetical digital study tool is challenged on privacy grounds. State the objection fairly, concede a valid concern and propose a bounded response. Explain what handling or retention evidence must be checked before adoption.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -772,15 +844,21 @@
         "id": "nuance-check",
         "prompt": "Which claim is appropriately qualified?",
         "options": [
-          "Every trial is always successful.",
-          "All alternatives are impossible.",
-          "Success is guaranteed without evidence.",
+          "A trial is worthwhile whenever any demand exists, regardless of resources.",
+          "No conclusion can be reached until every uncertainty is eliminated.",
+          "A successful trial in one setting establishes success in every setting.",
           "A trial may be useful where staffing and demand justify it."
         ],
         "answer": 3,
-        "explanation": "The qualification connects the claim to relevant conditions."
+        "explanation": "The qualification connects the claim to relevant conditions.",
+        "option_feedback": [
+          "Demand alone does not satisfy the stated staffing condition.",
+          "Qualification permits a bounded judgement despite remaining uncertainty.",
+          "A limited observation cannot establish universal applicability.",
+          "The qualification connects the claim to relevant conditions."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Develop a qualified claim about a hypothetical distance-learning option. State who might benefit, the access conditions required and a case in which your claim would not apply. Do not invent results.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -795,15 +873,21 @@
         "id": "argument-paragraph-check",
         "prompt": "Which item should explain why evidence supports the claim?",
         "options": [
-          "A longer title.",
-          "A repeated slogan.",
+          "A repetition of the evidence in stronger wording.",
+          "A source label without explaining its relevance.",
           "The reasoning linking the evidence to the claim.",
-          "An unrelated anecdote."
+          "A second claim stated immediately after the evidence."
         ],
         "answer": 2,
-        "explanation": "Readers need the inferential connection, not merely a pasted fact."
+        "explanation": "Readers need the inferential connection, not merely a pasted fact.",
+        "option_feedback": [
+          "Repetition does not provide the inferential connection.",
+          "Attribution matters, but a label alone does not explain the evidence–claim link.",
+          "Readers need the inferential connection, not merely a pasted fact.",
+          "Another claim does not explain how the evidence supports the first one."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Write one hypothetical policy paragraph with a controlling claim, a supporting reason, an explicit evidence need and a qualification. Explain the inferential role of each part instead of adding an unsupported quotation.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -818,15 +902,21 @@
         "id": "argument-evaluation-check",
         "prompt": "Which review is most useful?",
         "options": [
-          "Assign an unexplained precise percentage.",
-          "Praise length alone.",
-          "Assume polished wording proves the claim.",
+          "Treat a supplied reference as verified without examining its source.",
+          "Correct the vocabulary and assume the reasoning is therefore sound.",
+          "Count supporting statements without checking whether they are relevant.",
           "Identify a specific inference or evidence gap and explain how to test it."
         ],
         "answer": 3,
-        "explanation": "Specific criticism helps the writer revise a real weakness."
+        "explanation": "Specific criticism helps the writer revise a real weakness.",
+        "option_feedback": [
+          "A reference must be checked before it is accepted as reliable support.",
+          "Language improvement alone does not validate the inference.",
+          "The number of statements does not establish the quality of their support.",
+          "Specific criticism helps the writer revise a real weakness."
+        ]
       },
-      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "task": "Evaluate your own hypothetical argument: identify its weakest inference, an unsupported premise and a serious alternative. Revise the argument to address one weakness while retaining any unresolved limitation. Use qualitative criticism, not examination marks.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -841,15 +931,21 @@
         "id": "description-analysis-check",
         "prompt": "Which question is analytical?",
         "options": [
-          "Where is its title printed?",
+          "When was the form introduced?",
           "How might the form alter processing time?",
-          "What colour is the form?",
-          "What is the form called?"
+          "Which fields does the form contain?",
+          "How many requests were entered?"
         ],
         "answer": 1,
-        "explanation": "It asks about a mechanism connecting a change to an outcome."
+        "explanation": "It asks about a mechanism connecting a change to an outcome.",
+        "option_feedback": [
+          "A date describes timing without examining the proposed mechanism.",
+          "It asks about a mechanism connecting a change to an outcome.",
+          "This asks for a description of its contents.",
+          "A count describes activity; it does not by itself explain how the form changes processing time."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "A hypothetical office replaces a paper request form with an online form. First describe the change. Then ask and answer a mechanism question about processing time, clearly distinguishing a hypothesis from established evidence.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -864,15 +960,21 @@
         "id": "causes-effects-check",
         "prompt": "What should be added to a list of causes?",
         "options": [
-          "A guarantee that the list is complete.",
+          "A description of the outcome repeated after each cause.",
           "An explanation of how each could produce the outcome.",
-          "An invented statistic.",
-          "An assertion that all causes are equal."
+          "A longer list of causes without explaining the links.",
+          "A decision that whichever cause is listed first must be strongest."
         ],
         "answer": 1,
-        "explanation": "Analysis explains links rather than merely naming possible causes."
+        "explanation": "Analysis explains links rather than merely naming possible causes.",
+        "option_feedback": [
+          "Repeating the outcome does not explain the intermediate steps.",
+          "Analysis explains links rather than merely naming possible causes.",
+          "Adding names does not show how a cause produces the outcome.",
+          "List order does not establish causal importance."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Analyse a hypothetical sequence of unclear instructions, repeated queries and delayed completion. Explain each proposed link, identify a point where the sequence could fail and name observations needed to test it.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -885,17 +987,23 @@
       "example": "Hypothetical variables: travel time and attendance. A relationship could differ with transport reliability.",
       "check": {
         "id": "variable-relationships-check",
-        "prompt": "Which pair can frame an access analysis?",
+        "prompt": "Which pair contains the proposed explanatory variable and outcome in the travel-and-attendance example?",
         "options": [
-          "The same word repeated twice.",
-          "A conclusion without any variables.",
-          "An unrelated personal insult.",
+          "Travel time and transport reliability.",
+          "Attendance and the date a register was copied.",
+          "Transport reliability and journey duration.",
           "Travel time and attendance."
         ],
         "answer": 3,
-        "explanation": "The pair allows a relationship to be examined rather than assumed."
+        "explanation": "The pair allows a relationship to be examined rather than assumed.",
+        "option_feedback": [
+          "Reliability is a possible condition; this pair omits the attendance outcome.",
+          "This pair includes the outcome but not the proposed travel-time explanatory variable.",
+          "This pair examines transport conditions but omits the stated attendance outcome.",
+          "The pair allows a relationship to be examined rather than assumed."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Consider travel time and class attendance in a hypothetical school. Identify the proposed explanatory variable, the outcome and a condition such as transport reliability. Explain why the proposed relationship still needs evidence.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -911,14 +1019,20 @@
         "prompt": "What assumption underlies a claim that online forms improve everyone’s access?",
         "options": [
           "Everyone concerned can access and use the form.",
-          "The form has a name.",
-          "No service has a user.",
-          "Every form is a printed book."
+          "The office prefers receiving online requests.",
+          "The form has fewer fields than the previous version.",
+          "People who already use online services prefer the form."
         ],
         "answer": 0,
-        "explanation": "The universal claim relies on access and usability, which need checking."
+        "explanation": "The universal claim relies on access and usability, which need checking.",
+        "option_feedback": [
+          "The universal claim relies on access and usability, which need checking.",
+          "An institutional preference does not establish access for every user.",
+          "A shorter form does not establish that all users can access and use it.",
+          "The views of existing users do not establish the circumstances of everyone concerned."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "A hypothetical office claims its online form improves access for everyone. Identify what this assumes about access and skills. Describe a counterexample and explain how it would narrow the claim.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -933,15 +1047,21 @@
         "id": "evidence-quality-check",
         "prompt": "What limitation should be noted for a voluntary survey?",
         "options": [
-          "Every respondent must be lying.",
-          "The survey proves the views of everyone.",
-          "Dates and sample selection never matter.",
+          "A large response count automatically makes the sample representative.",
+          "Written answers establish that preferences will remain unchanged.",
+          "Using one question guarantees that everyone is equally likely to respond.",
           "Respondents may differ from nonrespondents."
         ],
         "answer": 3,
-        "explanation": "Selection can affect what the findings represent."
+        "explanation": "Selection can affect what the findings represent.",
+        "option_feedback": [
+          "Sample size does not by itself resolve self-selection.",
+          "Recording current views does not establish their future stability.",
+          "A common question does not guarantee equal participation.",
+          "Selection can affect what the findings represent."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Review a hypothetical voluntary survey about a study service. Identify its population, how participants joined and whose views could be missing. State what it can suggest and what it cannot establish about all students.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -957,14 +1077,20 @@
         "prompt": "What makes an alternative explanation useful?",
         "options": [
           "A clear prediction that can be compared with observations.",
-          "Its ability to sound complicated.",
-          "A made-up citation.",
-          "Its repetition of the first explanation."
+          "Compatibility with one observation, without distinguishing the rival explanation.",
+          "Agreement with the explanation the writer already prefers.",
+          "A broader label that cannot be checked against any observation."
         ],
         "answer": 0,
-        "explanation": "A discriminating prediction helps test competing explanations."
+        "explanation": "A discriminating prediction helps test competing explanations.",
+        "option_feedback": [
+          "A discriminating prediction helps test competing explanations.",
+          "Both explanations may fit that observation; a useful test distinguishes them.",
+          "Preference does not make an alternative informative.",
+          "An untestable label cannot help distinguish the proposed causes."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Suppose a hypothetical office has long queues. Compare a staffing explanation with an approval-rule explanation. Identify an observation that would favour one over the other, rather than merely listing both.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -979,15 +1105,21 @@
         "id": "correlation-causation-check",
         "prompt": "What could explain an observed association besides direct causation?",
         "options": [
-          "All observations must be fabricated.",
-          "Mechanisms cannot matter.",
+          "The first measured variable must cause the second one.",
+          "The association rules out a factor affecting both variables.",
           "A third factor affecting both variables.",
-          "The association is necessarily proof."
+          "The stronger association must identify the direction of causation."
         ],
         "answer": 2,
-        "explanation": "A common cause can produce association without direct causation between the measured variables."
+        "explanation": "A common cause can produce association without direct causation between the measured variables.",
+        "option_feedback": [
+          "The order of measurement does not establish the order of causes.",
+          "Association does not rule out a common cause.",
+          "A common cause can produce association without direct causation between the measured variables.",
+          "Strength alone does not establish causal direction."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "In a hypothetical school, attendance and punctuality both improve during one term. Examine direct causation, reverse causation and a possible common cause. Describe what timing or comparison evidence would be needed before attributing an effect.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1002,15 +1134,21 @@
         "id": "institutional-factors-check",
         "prompt": "Which is an institutional factor?",
         "options": [
-          "A person’s favourite colour.",
-          "An unrelated weather description.",
-          "A nickname for the office.",
+          "One applicant feels frustrated by waiting.",
+          "An officer personally hopes to finish the task quickly.",
+          "The observer thinks the building looks inefficient.",
           "The rule assigning approval responsibility."
         ],
         "answer": 3,
-        "explanation": "The rule governs how the institution processes decisions."
+        "explanation": "The rule governs how the institution processes decisions.",
+        "option_feedback": [
+          "This describes a personal response rather than the institutional rule asked about.",
+          "An intention does not specify the allocation of institutional responsibility.",
+          "An impression of the building does not identify an operating institutional factor.",
+          "The rule governs how the institution processes decisions."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "A hypothetical permit request passes between offices without a decision. Analyse responsibilities, rules and resources separately from individual intentions. Explain one proposed mechanism and the records needed to test it.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1025,15 +1163,21 @@
         "id": "dimensions-check",
         "prompt": "When should a dimension be included?",
         "options": [
-          "Even when it has no connection to the issue.",
+          "When it produces the longest section in the response.",
           "When it changes an explanation, consequence or judgement.",
-          "Whenever it makes the answer longer.",
-          "Only because it sounds academic."
+          "When it supplies another heading, even without affecting the argument.",
+          "When it repeats an existing dimension under a new label."
         ],
         "answer": 1,
-        "explanation": "Relevant dimensions deepen reasoning; unrelated headings add clutter."
+        "explanation": "Relevant dimensions deepen reasoning; unrelated headings add clutter.",
+        "option_feedback": [
+          "Length does not establish relevance to the issue.",
+          "Relevant dimensions deepen reasoning; unrelated headings add clutter.",
+          "A heading adds no analytical value without a relevant relationship.",
+          "Relabelling the same issue does not add an independent dimension."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Examine a hypothetical proposal for a community learning centre. Select three relevant dimensions, such as access, staffing and distribution of benefits. Explain how each changes the judgement and exclude one tempting but irrelevant heading.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1048,15 +1192,21 @@
         "id": "time-horizons-check",
         "prompt": "Which comparison distinguishes time horizons?",
         "options": [
-          "An unrelated comparison of colours.",
+          "An assumption that implementation effects remain identical over time.",
           "Initial training costs versus possible later processing gains.",
-          "Two names for the same moment.",
-          "A guarantee about all future outcomes."
+          "The initial training schedule versus another description of that same schedule.",
+          "Possible future gains treated as evidence that training has no present cost."
         ],
         "answer": 1,
-        "explanation": "It compares immediate demands with outcomes that could emerge later."
+        "explanation": "It compares immediate demands with outcomes that could emerge later.",
+        "option_feedback": [
+          "This assumes away the adaptation that a time-horizon comparison should examine.",
+          "It compares immediate demands with outcomes that could emerge later.",
+          "These concern the same immediate activity rather than different time horizons.",
+          "A future possibility does not erase an immediate demand."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Analyse a hypothetical switch to digital record handling. Separate immediate training demands from possible later changes in repeated work. Identify a maintenance condition and explain why the longer-term outcome remains uncertain.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1071,15 +1221,21 @@
         "id": "trade-offs-check",
         "prompt": "Which question tests a trade-off?",
         "options": [
-          "Can we assume unlimited resources?",
-          "Is every cost imaginary?",
-          "Can the title be longer?",
+          "How many favourable comments does the proposal receive?",
+          "Can every benefit be counted while leaving the budget unchanged?",
+          "Would a clearer announcement make the proposal more appealing?",
           "What other service might lose resources if hours are extended?"
         ],
         "answer": 3,
-        "explanation": "It examines an opportunity cost relevant to the decision."
+        "explanation": "It examines an opportunity cost relevant to the decision.",
+        "option_feedback": [
+          "Popularity does not identify the resources or services sacrificed.",
+          "Counting benefits alone does not examine the resource constraint.",
+          "Communication does not identify the competing use of staffing resources.",
+          "It examines an opportunity cost relevant to the decision."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "A hypothetical centre has a fixed staffing budget. Compare extending opening hours with increasing support during existing hours. Explain the opportunity cost, who gains or loses and what evidence would change your preference.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1095,14 +1251,20 @@
         "prompt": "What is the relevant counterfactual?",
         "options": [
           "Attendance during that period if the timetable had not changed.",
-          "Attendance after the change only.",
-          "An unrelated school’s name.",
-          "The assumption that attendance cannot change."
+          "Attendance before the change, regardless of the trend during the later period.",
+          "Attendance after the change, without a comparison.",
+          "The announced attendance target for the new timetable."
         ],
         "answer": 0,
-        "explanation": "The comparison concerns the outcome in the absence of the change."
+        "explanation": "The comparison concerns the outcome in the absence of the change.",
+        "option_feedback": [
+          "The comparison concerns the outcome in the absence of the change.",
+          "A previous period alone may not represent what would have happened during the same later period.",
+          "The observed outcome alone does not describe the absence of the change.",
+          "An intended target is not the outcome that would occur without the intervention."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "A hypothetical school introduces a new timetable during a term when attendance was already changing. Specify the relevant outcome without that change, explain why the before–after comparison may mislead and propose a cautious comparison strategy.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1117,15 +1279,21 @@
         "id": "solution-comparison-check",
         "prompt": "What makes a comparison fair?",
         "options": [
-          "Inventing lower costs for the preferred option.",
-          "Ignoring every implementation constraint.",
+          "Ranking the options by the number of benefits their supporters name.",
+          "Assessing only the preferred option against the main implementation constraint.",
           "Using the same relevant criteria for both options.",
-          "Changing the criteria to favour one option."
+          "Using a different favourable criterion for each preferred option."
         ],
         "answer": 2,
-        "explanation": "Consistent criteria let the reader assess the trade-off."
+        "explanation": "Consistent criteria let the reader assess the trade-off.",
+        "option_feedback": [
+          "A count of claimed benefits does not evaluate comparable effects or constraints.",
+          "The competing option must also be assessed against relevant criteria.",
+          "Consistent criteria let the reader assess the trade-off.",
+          "Changing criteria prevents a consistent comparison."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Compare two hypothetical ways to improve access: later in-person hours and an online alternative. Use the same relevant criteria for both. Distinguish known constraints from assumptions and explain a conditional preference without inventing costs.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1141,14 +1309,20 @@
         "prompt": "Which conclusion is appropriately bounded?",
         "options": [
           "The trial is defensible if the staffing condition can be met.",
-          "Every view is equally supported regardless of evidence.",
-          "The trial is certain to solve every problem.",
-          "No conclusion is ever possible."
+          "The trial must be adopted because it has at least one possible benefit.",
+          "The trial must be rejected until no uncertainty remains.",
+          "Both options deserve equal weight merely because two views were presented."
         ],
         "answer": 0,
-        "explanation": "It takes a position while retaining a relevant condition."
+        "explanation": "It takes a position while retaining a relevant condition.",
+        "option_feedback": [
+          "It takes a position while retaining a relevant condition.",
+          "A possible benefit does not resolve the relevant constraint.",
+          "A bounded judgement can be possible before every uncertainty disappears.",
+          "Balance depends on the quality of support, not counting viewpoints."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Consider a hypothetical trial with possible access benefits but unresolved supervision constraints. Reach a bounded judgement, identify the strongest remaining objection and state what evidence could change your conclusion.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     },
@@ -1163,15 +1337,21 @@
         "id": "analytical-paragraph-check",
         "prompt": "Which element changes a descriptive list into analysis?",
         "options": [
-          "Using longer words without clearer reasoning.",
+          "Giving each observation a separate heading without comparing explanations.",
           "Explaining and testing relationships between the observations.",
-          "Adding more unexplained facts.",
-          "Repeating the issue title."
+          "Arranging the observations chronologically without explaining their links.",
+          "Adding a quotation without examining its relevance to the mechanism."
         ],
         "answer": 1,
-        "explanation": "Analysis depends on reasoned relationships and evidence, not length."
+        "explanation": "Analysis depends on reasoned relationships and evidence, not length.",
+        "option_feedback": [
+          "Headings do not supply the missing analytical connections.",
+          "Analysis depends on reasoned relationships and evidence, not length.",
+          "Sequence helps description, but it does not by itself explain or test a relationship.",
+          "A quotation cannot replace the causal or inferential link."
+        ]
       },
-      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "task": "Write a hypothetical paragraph about delays in processing study-service requests. Explain a mechanism, contrast a competing cause, identify a discriminating observation and reach a qualified judgement. Make the connections explicit rather than listing facts.",
       "grammar_day": null,
       "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
     }
