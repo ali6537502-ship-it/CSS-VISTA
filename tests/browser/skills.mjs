@@ -14,6 +14,8 @@ const raw=JSON.parse(readFileSync(root+'/public/api/_premium_files/skills-curric
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:1000},reducedMotion:'reduce'})
 const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(30000)
+let skillsWrites=0
+page.on('request',request=>{if(new URL(request.url()).pathname==='/api/student/skills.php'&&request.method()==='POST')skillsWrites++})
 async function signin(tab){await tab.goto(base+'/account');await tab.getByLabel('Email address',{exact:true}).fill(email);await tab.getByLabel('Password',{exact:true}).fill('TEST ONLY native fixture password');const response=tab.waitForResponse(r=>new URL(r.url()).pathname==='/api/auth/login.php'&&r.request().method()==='POST');await tab.getByRole('button',{name:'Sign in securely',exact:true}).click();const login=await response;assert.equal(login.status(),200,'Native browser sign-in failed: '+(await login.json().catch(()=>({}))).error);await tab.waitForURL('**/account/dashboard')}
 async function overflow(){assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow')}
 try{
@@ -45,19 +47,31 @@ try{
  await page.getByRole('button',{name:'Save independent response',exact:true}).click()
  await page.getByRole('button',{name:'Check saved result',exact:true}).waitFor();await page.reload();await page.getByRole('button',{name:'Check saved result',exact:true}).click();await page.getByRole('heading',{name:'Check your last save',exact:true}).waitFor({state:'hidden'})
  await page.unroute('**/api/student/skills.php')
+ const writesBeforeComparison=skillsWrites
  await page.getByRole('combobox',{name:/^Compare an earlier version/}).selectOption({label:'Version 1'})
  await page.getByRole('heading',{name:'Version 1',exact:true}).waitFor()
+ const comparison=page.getByRole('region',{name:'Revision comparison',exact:true})
+ await comparison.getByText('1 of 1 saved activities differ.',{exact:false}).waitFor()
+ assert.equal(await comparison.getByRole('combobox',{name:'Activity to compare',exact:true}).inputValue(),'understanding')
+ await comparison.getByRole('article',{name:'Version 1 · 1 · Understand the theme',exact:true}).getByText('My independent response explains a conditional reason',{exact:false}).waitFor()
+ await comparison.getByRole('article',{name:'Version 2 · 1 · Understand the theme',exact:true}).getByText('This independent revision preserves my original meaning',{exact:false}).waitFor()
+ for(const width of [320,390,768,1024,1440]){await page.setViewportSize({width,height:1000});await overflow()}
+ await page.setViewportSize({width:390,height:1000})
+ assert.equal(skillsWrites,writesBeforeComparison,'Reading comparisons must not submit or evaluate work')
+ mkdirSync(root+'/test-artifacts',{recursive:true});await comparison.screenshot({path:root+'/test-artifacts/skills-comparison-mobile.png'})
  await page.reload();await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor()
  const other=await browser.newContext({ignoreHTTPSErrors:true});const tab=await other.newPage();await signin(tab);await tab.goto(url);await tab.getByText('This independent revision preserves my original meaning',{exact:false}).first().waitFor();await other.close()
  // Refine a highlighted passage through the actual controls and explicitly return it.
  await page.getByRole('combobox',{name:'Saved response',exact:true}).selectOption('understanding')
  await page.getByRole('combobox',{name:'Practice workspace',exact:true}).selectOption('sentence')
+ const sentenceLesson=raw.lessons.filter(l=>l.feature==='sentence'&&l.level==='beginner')[1]
+ await page.getByRole('combobox',{name:'Linked practice lesson',exact:true}).selectOption(sentenceLesson.id)
  const selection=page.getByLabel('Select a passage (optional)',{exact:false}), original=await selection.inputValue(), selected='This independent revision preserves my original meaning'
  assert.ok(original.startsWith(selected))
  await selection.evaluate((element,end)=>{element.focus();element.setSelectionRange(0,end);element.dispatchEvent(new KeyboardEvent('keyup',{key:'Shift',bubbles:true}))},selected.length)
  await page.getByText(`${selected.length} characters selected. Only that passage will be refined and returned.`,{exact:true}).waitFor()
  await page.getByRole('button',{name:'Open linked practice',exact:true}).click()
- const sentenceLesson=raw.lessons.find(l=>l.feature==='sentence'&&l.level==='beginner')
+ await page.getByRole('heading',{name:sentenceLesson.title,exact:true}).waitFor()
  await page.getByRole('heading',{name:'Understand the idea',exact:true}).waitFor()
  await page.getByRole('radio').nth(sentenceLesson.check.answer).check();await page.getByRole('button',{name:'Save & continue',exact:true}).click()
  await page.getByRole('heading',{name:'Write independently',exact:true}).waitFor();await page.locator('form textarea').fill('This independent revision retains my intended meaning.');await page.getByRole('button',{name:'Save & continue',exact:true}).click()
@@ -65,6 +79,15 @@ try{
  await page.getByRole('heading',{name:'Revise independently',exact:true}).waitFor();const improved='My independent revision preserves the intended meaning'
  await page.locator('form textarea').fill(improved);await page.getByRole('button',{name:'Save independent response',exact:true}).click()
  await page.getByText(/beginner · 4 saved versions/).waitFor()
+ await page.getByRole('combobox',{name:/^Compare an earlier version/}).selectOption({label:'Version 2'})
+ await page.getByRole('combobox',{name:'Activity to compare',exact:true}).selectOption('draft')
+ await page.getByRole('region',{name:'Revision comparison'}).getByText('This independent revision retains my intended meaning.',{exact:true}).first().waitFor()
+ assert.equal(await page.getByRole('combobox',{name:'Activity to compare',exact:true}).locator('option:checked').textContent(),'Write independently · unchanged')
+ await page.getByRole('combobox',{name:'Activity to compare',exact:true}).selectOption('reflection')
+ assert.equal(await page.getByRole('combobox',{name:'Activity to compare',exact:true}).locator('option:checked').textContent(),'Review the wording · added')
+ await page.getByRole('region',{name:'Revision comparison'}).getByText('No response saved in this version.',{exact:true}).waitFor()
+ await page.getByRole('combobox',{name:'Activity to compare',exact:true}).selectOption('check')
+ await page.getByRole('region',{name:'Revision comparison'}).getByText(sentenceLesson.check.options[sentenceLesson.check.answer],{exact:true}).first().waitFor()
  await page.getByRole('link',{name:'Return to the original workspace',exact:true}).click();await page.getByRole('button',{name:'Compare returned revision',exact:true}).click()
  await page.getByRole('button',{name:'Save revision of the selected passage',exact:true}).click();await page.getByText(/beginner · 3 saved versions/).waitFor()
  await page.getByRole('combobox',{name:'Saved response',exact:true}).selectOption('understanding')
@@ -72,6 +95,10 @@ try{
  mkdirSync(root+'/test-artifacts',{recursive:true});await page.screenshot({path:root+'/test-artifacts/skills-mobile.png',fullPage:true})
  await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:root+'/test-artifacts/skills-desktop.png',fullPage:true})
  php('tests/pro/fixture.php','expire',id);await page.reload();await page.getByText('Your saved versions and feedback remain here.',{exact:false}).waitFor();assert.equal(await page.locator('form textarea').count(),0)
+ await page.getByRole('combobox',{name:/^Compare an earlier version/}).selectOption({label:'Version 1'})
+ await page.getByRole('region',{name:'Revision comparison'}).getByText('1 of 1 saved activities differ.',{exact:false}).waitFor()
+ const usage=JSON.parse(php('tests/skills/fixture.php','snapshot',id))
+ assert.equal(usage.reduce((total,row)=>total+Number(row.provider_calls),0),0)
  assert.deepEqual(errors,[])
- console.log('PASS actual built browser: four skills entry journeys, save/resume, owned Ask VISTA, 320–1440 widths, lost response receipt recovery, immutable comparison, selected-passage linked revision and return, independent signed-in device and expired read-only history; no real provider calls')
+ console.log('PASS actual built browser: four skills entry journeys, save/resume, owned Ask VISTA, 320–1440 widths, lost response receipt recovery, activity comparison (revised/unchanged/added/recognition wording), chosen linked lesson, selected-passage revision and return, independent signed-in device and expired read-only history; no real provider calls')
 }catch(e){console.log('Browser failed at',new URL(page.url()).pathname);throw e}finally{await browser.close()}

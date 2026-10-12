@@ -11,3 +11,7 @@ The reversible hide/pause change is the only production change authorised by tha
 See [the release-hold implementation and verification contract](docs/pro/release-hold.md). Preserve saved work and membership records. Use the isolated native CI environment for previews; do not weaken production restrictions to preview work.
 
 The owner's later explicit instructions take precedence over this dated hold. Do not ask for passwords, provider keys or private source content in chat when a legitimate connection is available.
+
+## Current content priority — 12 October 2026
+
+The owner subsequently asked to complete the other Pro work before returning to the large CA/PA collection. Defer further full-library PDF reading and topic conversion. Preserve retained originals, checksums, private drafts and reviewed partial modules; Word documents may be provided later. Continue core writing, reasoning, guided learning, integration and quality assurance under the same release hold. Do not count unfinished source drafts as completed or published lessons.
