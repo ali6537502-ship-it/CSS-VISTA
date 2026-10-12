@@ -4,6 +4,11 @@ if(getenv('CI')!=='true'||getenv('CSSV_DB_NAME')!=='cssvista_briefing_test')thro
 require __DIR__.'/../../public/api/_bootstrap.php';require __DIR__.'/../../public/api/_mentor.php';
 $pdo=cssv_db();cssv_mentor_ensure($pdo);$user=cssv_pro_id($argv[2]??null);
 if(($argv[1]??'')==='usage'){$q=$pdo->prepare('SELECT COUNT(*) FROM ai_operations WHERE user_id=?');$q->execute([$user]);echo $q->fetchColumn();}
+elseif(($argv[1]??'')==='snapshot'){
+ $q=$pdo->prepare('SELECT * FROM mentor_answers WHERE user_id=? ORDER BY id');$q->execute([$user]);$answers=$q->fetchAll(PDO::FETCH_ASSOC);
+ $q=$pdo->prepare('SELECT e.* FROM mentor_evaluations e JOIN mentor_answers a ON a.id=e.answer_id WHERE a.user_id=? ORDER BY e.id');$q->execute([$user]);$evaluations=$q->fetchAll(PDO::FETCH_ASSOC);
+ echo json_encode(['answers'=>count($answers),'evaluations'=>count($evaluations),'sha256'=>hash('sha256',json_encode([$answers,$evaluations],JSON_THROW_ON_ERROR))],JSON_THROW_ON_ERROR);
+}
 elseif(($argv[1]??'')==='pages'){
  $attempt=cssv_pro_id($argv[3]??null);cssv_learning_attempt($pdo,$attempt,$user);
  $q=$pdo->prepare("INSERT INTO mentor_answers(id,user_id,attempt_id,subject_id,topic,question,provenance,source_reference) VALUES(?,?,?,'essay','TEST ONLY pagination','TEST ONLY pagination question','practice','')");

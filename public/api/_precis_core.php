@@ -38,6 +38,17 @@ function cssv_precis_source(array $body): array {
  $limit=$body['word_limit'] ?? null;if($limit!==null&&(!is_int($limit)||$limit<10||$limit>2000))throw new InvalidArgumentException('An explicit word limit must be 10–2,000 words.');
  return ['id'=>null,'label'=>'Your sourced passage','text'=>$text,'source'=>cssv_learning_string($body['source_label'] ?? null,500,'source or attribution'),'limit'=>$limit];
 }
+/** Only feedback already earned by this owned attempt is returned. */
+function cssv_precis_saved_drills(array $rows): array {
+ $questions=cssv_precis_questions();$saved=[];
+ foreach($rows as $row){
+  if((int)($row['last_row']??0)!==1)continue;
+  $id=$row['question_id'];$question=$questions[$id]??null;$choice=(int)$row['choice'];
+  if(!$question||!isset($question['options'][$choice]))continue;
+  $saved[]=['question_id'=>$id,'choice'=>$choice,'correct'=>$choice===$question['answer'],'explanation'=>$question['explanation'],'created_at'=>cssv_pro_iso($row['created_at'])];
+ }
+ return $saved;
+}
 function cssv_precis_profile(array $rows): array {
  $questions=cssv_precis_questions();$by=[];
  foreach($rows as $r){$id=$r['question_id'];if(!isset($questions[$id]))continue;$by[$id][]=$r;}

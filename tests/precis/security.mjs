@@ -53,10 +53,17 @@ assert.equal((await call(endpoint,{...prog,request_id:randomUUID(),expected_vers
 assert.deepEqual((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.completed,[1,2,3],'Completed days erased')
 assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,b.jar)).status,404)
 const questions=JSON.parse(php('tests/precis/fixture.php','questions')),q=questions['qualification-tech'],answer={action:'drill_answer',request_id:randomUUID(),attempt_id:attempt,question_id:q.id,choice:(q.answer+1)%3}
+assert.deepEqual((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.saved_drills,[],'Unattempted response/feedback exposed')
 assert.equal((await call(endpoint,{...answer,choice:99},a.jar)).status,422);const wrong=await call(endpoint,answer,a.jar);assert.equal(wrong.data.correct,false)
 assert.equal((await call(endpoint,answer,a.jar)).data.correct,false);assert.equal((await call(endpoint,{...answer,choice:q.answer},a.jar)).status,409)
+let restored=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.saved_drills
+assert.equal(restored.length,1);assert.equal(restored[0].choice,answer.choice);assert.equal(restored[0].correct,false);assert.equal(restored[0].explanation,q.explanation);assert.match(restored[0].created_at,/T.*Z$/)
+assert.equal(restored[0].answer,undefined)
 assert.equal((await call(endpoint,{...answer,attempt_id:bAttempt},b.jar)).status,200,'Same request identity in another account collided with the response ledger')
 assert.equal((await call(endpoint,{...answer,request_id:randomUUID(),choice:q.answer},a.jar)).data.correct,true)
+restored=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.saved_drills
+assert.equal(restored.length,1);assert.equal(restored[0].choice,q.answer);assert.equal(restored[0].correct,true)
+assert.deepEqual((await call(`${endpoint}?attempt_id=${other}`,undefined,a.jar)).data.saved_drills,[],'Restored responses crossed preparation attempts')
 let profile=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.profile;assert.equal(profile.items[6].first_correct,0);assert.equal(profile.items[6].state,'Needs review')
 php('tests/precis/fixture.php','spaced',a.id,attempt,q.id);profile=(await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.profile;assert.equal(profile.items[6].state,'Improving');assert.equal(profile.items[6].first_correct,0)
 assert.equal((await call(`${endpoint}?attempt_id=${other}`,undefined,a.jar)).data.profile.items[6].questions,0)
@@ -64,6 +71,7 @@ const competing=await Promise.all([call(endpoint,{...prog,request_id:randomUUID(
 php('tests/pro/fixture.php','expire',a.id);assert.equal((await call(endpoint,undefined,a.jar)).data.catalog,null);record=(await call(url,undefined,a.jar)).data;assert.equal(record.model.title,model.data.model.title,'Expiry removed revealed history')
 assert.equal((await call(endpoint,rewrite,a.jar)).data.version_id,revised.data.version_id,'Expiry broke accepted-save replay');assert.equal((await call(endpoint,{...rewrite,request_id:randomUUID(),expected_version:2},a.jar)).status,403)
 assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).status,200)
+assert.equal((await call(`${endpoint}?attempt_id=${attempt}`,undefined,a.jar)).data.saved_drills[0].choice,q.answer,'Expiry erased saved drill feedback')
 assert.equal(php('tests/precis/fixture.php','usage',a.id),'0','Ordinary Précis learning made an AI operation')
 for(const file of ['_precis.php','_precis_core.php','_precis_schema.php','_precis_questions.php','_precis_handbook.php'])assert.equal((await fetch('http://localhost:4173/api/'+file)).status,404)
 console.log('PASS: native Précis profile/ownership/CSRF/Pro content enforcement, immutable original/title/version context, delayed owned model reveal, custom source/explicit limit, replay/concurrency, first-response/spaced evidence, expiry history and zero AI operations.')
