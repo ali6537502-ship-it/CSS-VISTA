@@ -42,7 +42,7 @@ function cssv_tutor_reserve(PDO $pdo,string $user,array $body,?DateTimeImmutable
   if(cssv_pro_membership($pdo,$user)['status']!=='active')throw new DomainException('Active Pro access is required for new tutoring.');
   $config=cssv_tutor_configuration();if(!$config['enabled'])throw new LogicException('Ask VISTA assistance is not open yet.');
   if($policy!==$config['policy_version']||!hash_equals($config['policy_hash'],$body['policy_hash']))throw new DomainException('The processing notice changed. Refresh and review it.');
-  $selected=cssv_tutor_context($pdo,$context);if(!hash_equals(cssv_tutor_hash($selected),$body['context_hash']))throw new DomainException('The learning source changed. Refresh it before asking.');
+  $selected=cssv_tutor_context($pdo,$context,$user);if(isset($selected['attempt_id'])&&$selected['attempt_id']!==$attempt)throw new DomainException('Use this learning workspace’s preparation attempt.');if(!hash_equals(cssv_tutor_hash($selected),$body['context_hash']))throw new DomainException('The learning source changed. Refresh it before asking.');
   if(cssv_ai_limit($selected['feature'])===0)throw new LogicException('Assistance for this learning area is not open yet.');
   $previous=null;
   if($parent){$prior=cssv_tutor_owned($pdo,$user,$parent);if($prior['attempt_id']!==$attempt||$prior['context']['id']!==$context||$prior['operation']['state']!=='succeeded')throw new DomainException('Follow up a completed exchange from the same attempt and source.');if(!hash_equals(cssv_tutor_hash($prior['context']),cssv_tutor_hash($selected)))throw new DomainException('The source changed since this exchange. Start a fresh question.');$previous=['question'=>$prior['question'],'reply'=>$prior['operation']['result']];}

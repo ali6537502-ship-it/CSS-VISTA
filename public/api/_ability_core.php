@@ -39,6 +39,11 @@ function cssv_ability_number(mixed $input): float {
     return (float)$input;
 }
 function cssv_ability_exercise(array $lesson,mixed $input): array {
+    if(($lesson['exercise']['kind']??null)==='choice'){
+        if(!is_string($input)||!preg_match('/^[0-3]$/D',$input))throw new InvalidArgumentException('Choose one of the four listed options.');
+        $q=$lesson['exercise'];$choice=(int)$input;
+        return ['lesson_id'=>$lesson['id'],'question_id'=>$q['id'],'prompt'=>$q['prompt'],'unit'=>$q['unit'],'submitted'=>$q['options'][$choice],'correct'=>$choice===$q['answer'],'answer'=>$q['options'][$q['answer']],'explanation'=>$q['explanation']];
+    }
     $answer=cssv_ability_number($input);$q=$lesson['exercise'];$expected=cssv_ability_number($q['answer']);
     $correct=abs($answer-$expected)<=0.000000001;
     // Only recurring decimal targets accept the stated two-place rounding.
@@ -51,6 +56,14 @@ function cssv_ability_exercise(array $lesson,mixed $input): array {
     }
     return ['lesson_id'=>$lesson['id'],'question_id'=>$q['id'],'prompt'=>$q['prompt'],'unit'=>$q['unit'],
         'submitted'=>trim($input),'correct'=>$correct,'answer'=>$q['answer'],'explanation'=>$q['explanation']];
+}
+/** Only unchanged reviewed units may inherit evidence from a prior edition. */
+function cssv_ability_versions(string $unitId): array {
+    static $cache=[];if(isset($cache[$unitId]))return $cache[$unitId];
+    $course=cssv_ability_course();$unit=cssv_ability_unit($unitId);
+    $hash=hash('sha256',json_encode($unit,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_THROW_ON_ERROR));$versions=[$course['version']];
+    foreach($course['previous_editions']??[] as $version=>$units)if(preg_match('/^[a-f0-9]{64}$/D',$version)&&isset($units[$unitId])&&hash_equals($hash,$units[$unitId]))$versions[]=$version;
+    return $cache[$unitId]=$versions;
 }
 function cssv_ability_quiz(array $unit,mixed $choices): array {
     if(!is_array($choices)||array_is_list($choices))throw new InvalidArgumentException('Answer all five quiz questions.');

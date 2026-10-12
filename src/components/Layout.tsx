@@ -816,8 +816,30 @@ export default function Layout() {
       releaseRestoreHeight()
       if (restoringRef.current === location.key) restoringRef.current = null
     }
-    const cancelRestore = () => {
+    let interactionReleaseFrame = 0
+    let waitingForInteractionEnd = false
+    const interactionEvents = ['pointerup', 'pointercancel', 'touchend', 'touchcancel'] as const
+    const removeInteractionListeners = () => {
+      for (const type of interactionEvents) window.removeEventListener(type, releaseAfterInteraction)
+    }
+    const releaseAfterInteraction = () => {
+      removeInteractionListeners()
+      interactionReleaseFrame = window.requestAnimationFrame(() => {
+        waitingForInteractionEnd = false
+        finishRestore()
+      })
+    }
+    const cancelRestore = (event: Event) => {
       cancelled = true
+      window.cancelAnimationFrame(frame)
+      // Removing reserved height can clamp scroll and move the pressed control.
+      // Keep it until the pointer/touch release and its click have completed.
+      if (waitingForInteractionEnd) return
+      if (reservedRestoreHeight && (event.type === 'pointerdown' || event.type === 'touchstart')) {
+        waitingForInteractionEnd = true
+        for (const type of interactionEvents) window.addEventListener(type, releaseAfterInteraction)
+        return
+      }
       finishRestore()
     }
 
@@ -874,6 +896,8 @@ export default function Layout() {
 
     return () => {
       window.cancelAnimationFrame(frame)
+      window.cancelAnimationFrame(interactionReleaseFrame)
+      removeInteractionListeners()
       window.removeEventListener('wheel', cancelRestore)
       window.removeEventListener('touchstart', cancelRestore)
       window.removeEventListener('pointerdown', cancelRestore)

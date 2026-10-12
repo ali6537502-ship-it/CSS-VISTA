@@ -8,6 +8,7 @@ function cssv_ai_limit(string $feature): int {
 }
 function cssv_ai_owned_operation(PDO $pdo,string $id,string $userId): array {
  $q=$pdo->prepare('SELECT id,feature,version_id,bucket_date,state,accounting,result,error_code,created_at,completed_at FROM ai_operations WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$op=$q->fetch();if(!$op)throw new OutOfBoundsException('AI operation not found.');
+ if(cssv_learning_has_guided($pdo)){ $q=$pdo->prepare('SELECT w.id,w.feature FROM skills_ai_inputs s JOIN skills_workspaces w ON w.id=s.workspace_id WHERE s.operation_id=? AND w.user_id=?');$q->execute([$id,$userId]);$op['guided_workspace']=$q->fetch()?:null; }
  $op['result']=$op['result'] ? json_decode($op['result'],true,32,JSON_THROW_ON_ERROR) : null;foreach(['created_at','completed_at'] as $k)$op[$k]=cssv_pro_iso($op[$k]);return $op;
 }
 function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature,string $versionId,?DateTimeImmutable $now=null,?string $policyVersion=null): string {
@@ -22,6 +23,7 @@ function cssv_ai_reserve(PDO $pdo,string $userId,string $request,string $feature
   if($prior=$q->fetch()){if(!hash_equals($prior['payload_hash'],$hash))throw new DomainException('This AI request was used for different writing.');$pdo->commit();return $prior['id'];}
   if($policyVersion!==null){$q=$pdo->prepare("SELECT id FROM ai_operations WHERE user_id=? AND version_id=? AND feature=? AND state IN ('reserved','in_flight','unknown','succeeded') LIMIT 1");$q->execute([$userId,$versionId,$feature]);if($q->fetchColumn())throw new DomainException('This saved version already has feedback or a pending request. Open its saved status.');}
   if(!cssv_profile_status(cssv_profile_for_user($pdo,$userId))['complete'])throw new DomainException('Complete your profile before requesting new AI work.');
+  if(cssv_learning_guided($pdo,$version['writing_id'],$userId))throw new DomainException('Request feedback in the guided workspace with its saved learning context.');
   if(cssv_pro_membership($pdo,$userId)['status']!=='active')throw new DomainException('Active Pro access is required for new AI work.');
   $config=cssv_ai_configuration();if(!$config['configured'])throw new LogicException('AI assistance is not enabled.');
   if($limit===0)throw new LogicException('This AI scope is not enabled.');
@@ -70,7 +72,9 @@ function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,
  if(!in_array($state,['succeeded','failed','unknown'],true))throw new InvalidArgumentException('Invalid AI completion state.');
  $pdo->beginTransaction();try {
   $op=cssv_ai_operation_lock($pdo,$id);if(in_array($op['state'],['succeeded','failed'],true)){$pdo->commit();return;}
-  if($state==='succeeded' && !in_array($op['feature'],['handwriting_extract','precis','tutor','maths','current_affairs'],true)) {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
+  $skills=$op['prompt_version']==='skills-instruction-v1';
+  if($skills && !$transition)throw new LogicException('Skills feedback requires its source-bound validation transition.');
+  if($state==='succeeded' && !$skills && !in_array($op['feature'],['handwriting_extract','precis','tutor','maths','current_affairs'],true)) {if(!$result)throw new InvalidArgumentException('Validated feedback is required.');$v=cssv_learning_version($pdo,$op['version_id'],$op['user_id']);$result=cssv_writing_result($result,$v['text']);}
   if(in_array($op['feature'],['handwriting','handwriting_extract','precis','tutor','maths','current_affairs'],true) && !$transition)throw new LogicException('This feature requires its persisted workflow transition.');
   if($transition)$result=$transition($pdo,$op,$state,$result);
   $usage=$response ? cssv_ai_usage_parse($response) : ['input_tokens'=>null,'output_tokens'=>null,'cached_tokens'=>null];
@@ -83,7 +87,7 @@ function cssv_ai_finish(PDO $pdo,string $id,string $state,?array $response=null,
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
 function cssv_ai_execute(PDO $pdo,string $id,?callable $testTransport=null,bool $featureAllowed=true): void {
- $q=$pdo->prepare('SELECT feature FROM ai_operations WHERE id=?');$q->execute([$id]);if(in_array($q->fetchColumn(),['handwriting','handwriting_extract','precis','tutor','maths','current_affairs'],true))throw new LogicException('Use the dedicated context-bound feedback workflow.');
+ $q=$pdo->prepare('SELECT feature,prompt_version FROM ai_operations WHERE id=?');$q->execute([$id]);$binding=$q->fetch();if(($binding['prompt_version']??null)==='skills-instruction-v1'||in_array($binding['feature']??null,['handwriting','handwriting_extract','precis','tutor','maths','current_affairs','argumentation','analysis','essay'],true))throw new LogicException('Use the dedicated context-bound feedback workflow.');
  if($testTransport && (getenv('CI')!=='true' || getenv('CSSV_DB_NAME')!=='cssvista_briefing_test'))throw new LogicException('Test transport is unavailable.');
  $allowed=$featureAllowed && ($testTransport!==null || (cssv_ai_configuration()['configured'] && function_exists('curl_init')));
  $op=cssv_ai_start($pdo,$id,$allowed);if(!$op)return;

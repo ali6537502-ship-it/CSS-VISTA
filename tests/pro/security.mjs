@@ -39,7 +39,7 @@ assert.equal(initial.status,200); assert.equal(initial.data.membership.status,'f
 assert.equal(initial.data.product.collection_enabled,false); assert.equal(initial.data.product.receiver_number,null)
 assert.match(initial.headers.get('cache-control'),/no-store/)
 let revision=null
-const createBody=()=>({product_revision:revision,action:'create',request_id:randomUUID(),terms_version:'test-only-v1',return_to:'/grammar-course'})
+const createBody=()=>({product_revision:revision,action:'create',request_id:randomUUID(),terms_version:'test-only-v1',return_to:'/account/essay-builder'})
 assert.equal((await call(path,createBody(),a.jar)).status,503,'Closed collection created an order')
 php('tests/pro/fixture.php','collection','on')
 revision=(await call(path,undefined,a.jar)).data.product.product_revision
@@ -52,6 +52,7 @@ async function create(member,body=createBody()) {
   const result=await call(path,body,member.jar); assert.equal(result.status,200,JSON.stringify(result.data)); assert.equal(result.data.order.amount_minor,195000);return {order:result.data.order,body}
 }
 const first=await create(a)
+assert.equal(first.order.return_to,'/account/essay-builder','Native order lost the approved new learning destination')
 assert.equal((await call(path,first.body,a.jar)).data.order.id,first.order.id,'Create replay duplicated order')
 assert.equal((await call(path,{...first.body,return_to:'/vistagram'},a.jar)).status,409,'Idempotency intent changed')
 assert.equal((await call(path+'?order_id='+first.order.id,undefined,b.jar)).status,404)

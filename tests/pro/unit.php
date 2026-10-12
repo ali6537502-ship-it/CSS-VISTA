@@ -13,6 +13,7 @@ check(cssv_pro_status(['expires_at'=>'2026-01-31 12:00:00'],$now)==='expired','E
 check(cssv_pro_status(['expires_at'=>'2026-01-31 12:00:00.000001'],$now)==='active','Microsecond precision');
 check(cssv_pro_period(new DateTimeImmutable('2026-01-31T17:00:00+05:00'),null)===$first,'Pakistan time normalizes to UTC');
 foreach (['https://evil.invalid','//evil.invalid','/grammar-course?redirect=evil','/account/admin','/grammar-course#x',null] as $bad) check(cssv_pro_destination($bad)==='/account/dashboard','Reject unsupported return destination');
+foreach(['/account/expression','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/preparation','/account/handwriting','/account/answer-performance','/account/ai-usage'] as $destination){check(cssv_pro_destination($destination)===$destination,'Keep supported private learning destination');check(cssv_pro_destination($destination.'?redirect=evil')==='/account/dashboard','Reject private destination query redirects');}
 check(cssv_pro_destination('/grammar-course')==='/grammar-course','Keep supported learning destination');
 check(cssv_pro_destination('/account/precis')==='/account/precis','Keep the new private Précis destination');
 check(cssv_pro_destination('/account/precis?redirect=evil')==='/account/dashboard','Do not widen the Précis return to arbitrary queries');

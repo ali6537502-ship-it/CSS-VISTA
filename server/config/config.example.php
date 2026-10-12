@@ -34,6 +34,13 @@ return [
     'CSSV_AI_LIMIT_PRECIS' => '2',
     'CSSV_AI_LIMIT_PARAGRAPH' => '5',
     'CSSV_AI_LIMIT_SENTENCE' => '15',
+    // New instructional scopes require an owner-approved allowance before activation.
+    'CSSV_AI_LIMIT_ARGUMENTATION' => '0',
+    'CSSV_AI_LIMIT_ANALYSIS' => '0',
+    'CSSV_AI_LIMIT_ESSAY' => '0',
+    'CSSV_SKILLS_AI_ENABLED' => '0',
+    'CSSV_SKILLS_POLICY_VERSION' => '',
+    'CSSV_SKILLS_PROCESSING_NOTICE' => '',
     'CSSV_AI_LIMIT_TUTOR' => '20',
     'CSSV_AI_LIMIT_CURRENT_AFFAIRS' => '10',
     'CSSV_AI_LIMIT_MATHS' => '10',

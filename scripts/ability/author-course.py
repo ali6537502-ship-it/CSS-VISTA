@@ -266,13 +266,15 @@ quiz(u, 'Find volume of a cylinder, radius 7 cm and height 8 cm. Use π = 22/7.'
 quiz(u, 'Find volume of a cone, radius 7 cm and vertical height 9 cm. Use π = 22/7.', '22/7*7**2*9/3', 'cm³', ['1386','154','616'], 'One third of 154 × 9 gives 462 cm³.')
 quiz(u, 'Find volume of a sphere with radius 3 cm. Use π = 3.14.', '4/3*314/100*3**3', 'cm³', ['113.4','28.26','339.12'], '4/3 × 3.14 × 27 = 113.04 cm³.')
 
-assert len(units) == 21
+import runpy
+runpy.run_path(str(Path(__file__).with_name('reasoning-course.py')))['append'](units)
+assert len(units) == 25
 assert all(len(x['lessons']) == 3 and len(x['quiz']) == 5 for x in units)
-course = dict(title='General Ability', edition='2026-10-11-v1', attribution='Original CSS Vista learning exercises; not presented as authentic past-paper questions.', units=units)
+course = dict(title='General Ability', edition='2026-10-11-v2', attribution='Original CSS Vista learning exercises; not presented as authentic past-paper questions.', units=units, previous_editions=json.loads(Path(__file__).with_name('previous-editions.json').read_text()))
 output = ROOT / 'public/api/_premium_files/general-ability-course.json'
 encoded = json.dumps(course, ensure_ascii=False, indent=2) + '\n'
 if '--check' in __import__('sys').argv:
     assert output.read_text() == encoded, 'Rebuild the authored course package.'
 else:
     output.write_text(encoded)
-print('General Ability: 21 topics, 63 lessons/exercises and 105 quiz questions verified and packaged privately.')
+print('General Ability: 25 topics, 75 lessons/exercises and 125 quiz questions verified and packaged privately.')

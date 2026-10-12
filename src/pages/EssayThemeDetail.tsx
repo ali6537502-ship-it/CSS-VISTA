@@ -121,6 +121,8 @@ export default function EssayThemeDetail() {
         <ArrowLeft className="h-3.5 w-3.5" /> All essay themes
       </Link>
 
+      <Link to={`/account/essay-builder?theme=${encodeURIComponent(slug)}`} className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-4 text-sm font-semibold">Open the interactive Essay Themes Builder ★ Pro</Link>
+
       <header className="mt-3 rounded-xl border bg-white p-4">
         <div className="flex items-start gap-3.5">
           <ProgressRing percent={completion.percent} size={52} label={`${completion.percent}% complete`} />

@@ -12,6 +12,14 @@ function cssv_learning_owner_lock(PDO $pdo,string $userId,bool $requireEnabled=t
     $q=$pdo->prepare('SELECT id FROM users WHERE id=?'.($requireEnabled?' AND disabled_at IS NULL':'').' FOR UPDATE');$q->execute([$userId]);
     if (!$q->fetchColumn()) throw new OutOfBoundsException('Account not found.');
 }
+/** Read-only discovery keeps guided records in their source-bound workspace. */
+function cssv_learning_guided(PDO $pdo,string $writingId,string $userId): ?array {
+    if(!cssv_learning_has_guided($pdo))return null;
+    $q=$pdo->prepare('SELECT id,feature FROM skills_workspaces WHERE writing_id=? AND user_id=?');$q->execute([$writingId,$userId]);return $q->fetch()?:null;
+}
+function cssv_learning_has_guided(PDO $pdo): bool {
+    static $exists;return $exists??=(bool)$pdo->query("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name='skills_workspaces'")->fetchColumn();
+}
 function cssv_learning_attempt(PDO $pdo,string $id,string $userId): array {
     $q=$pdo->prepare('SELECT * FROM preparation_attempts WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$a=$q->fetch();
     if (!$a) throw new OutOfBoundsException('Preparation attempt not found.');
@@ -21,7 +29,7 @@ function cssv_learning_attempt(PDO $pdo,string $id,string $userId): array {
 }
 function cssv_learning_writing(PDO $pdo,string $id,string $userId): array {
     $q=$pdo->prepare('SELECT * FROM writing_records WHERE id=? AND user_id=?');$q->execute([$id,$userId]);$w=$q->fetch();
-    if (!$w)throw new OutOfBoundsException('Writing record not found.');$w['version']=(int)$w['version'];
+    if (!$w)throw new OutOfBoundsException('Writing record not found.');$w['version']=(int)$w['version'];$w['guided_workspace']=cssv_learning_guided($pdo,$id,$userId);
     foreach(['created_at','updated_at'] as $k)$w[$k]=cssv_pro_iso($w[$k]);
     $q=$pdo->prepare('SELECT id,version,word_count,created_at FROM writing_versions WHERE writing_id=? ORDER BY version DESC');$q->execute([$id]);$w['versions']=$q->fetchAll();
     foreach($w['versions'] as &$v){$v['version']=(int)$v['version'];$v['word_count']=(int)$v['word_count'];$v['created_at']=cssv_pro_iso($v['created_at']);}unset($v);return $w;
@@ -57,6 +65,7 @@ function cssv_learning_mutation(PDO $pdo,string $userId,array $body): array {
             cssv_learning_attempt($pdo,$input['attempt_id'],$userId);
             if($existing){$current=cssv_learning_writing($pdo,$id,$userId);if($current['version']!==$expected)throw new DomainException('This writing was updated elsewhere. Reload its saved version before saving.');if($current['attempt_id']!==$input['attempt_id'] || $current['kind']!==$input['kind'])throw new DomainException('Saved writing stays linked to its original attempt and type.');}
             elseif($expected!==0)throw new InvalidArgumentException('New writing starts at version zero.');
+            if($existing && cssv_learning_guided($pdo,$id,$userId))throw new DomainException('Revise this guided writing in its learning workspace so its responses and history stay together.');
             $version=$expected+1;$versionId=cssv_uuid_v4();
             if($existing)$pdo->prepare('UPDATE writing_records SET title=?,version=? WHERE id=? AND user_id=?')->execute([$input['title'],$version,$id,$userId]);
             else $pdo->prepare('INSERT INTO writing_records(id,user_id,attempt_id,kind,title,version) VALUES(?,?,?,?,?,?)')->execute([$id,$userId,$input['attempt_id'],$input['kind'],$input['title'],$version]);
