@@ -8,6 +8,7 @@ import PreparationWorkspace from '@/features/preparation/Workspace'
 import TopicWorkspace from '@/features/topics/Workspace'
 import AttemptForm from '@/features/learning/AttemptForm'
 import WritingForm from '@/features/learning/WritingForm'
+import { skillsLink } from '@/features/skills/api'
 function LoadState({ error, retry }: { error?: string; retry: () => void }) {
   return <div role={error ? 'alert' : 'status'} className="rounded-xl border p-5">{error || 'Loading your preparation records…'}{error && <button onClick={retry} className={`${secondaryStyle} mt-3`}>Try again</button>}</div>
 }
@@ -23,7 +24,7 @@ function WritingDetail({ id, versionId, overview, onVersion, onSaved }: { id: st
     <section className="rounded-xl border p-5 sm:p-6"><h2 className="break-words text-xl font-semibold">{writing.title}</h2><p className="mt-2 text-sm text-slate-500">{writing.kind} · version {text.version} · {text.word_count} words · saved {pakistanTime(text.created_at)}</p><p className="mt-5 whitespace-pre-wrap break-words text-base leading-8">{text.text}</p>
       <label className="mt-6 grid gap-2 text-sm font-semibold">Saved version<select value={text.id} onChange={e => onVersion(e.target.value)} className="min-h-11 w-full rounded-lg border px-3">{writing.versions.map(v => <option key={v.id} value={v.id}>Version {v.version} · {pakistanTime(v.created_at)}</option>)}</select></label>
     </section>
-    <WritingForm key={`${id}:${text.id}`} attempts={overview.attempts} writing={writing} version={text} onSaved={newId => { record.refresh(); onSaved(newId) }} />
+    <section>{writing.guided_workspace ? <Link className={secondaryStyle} to={skillsLink(writing.guided_workspace.feature, writing.guided_workspace.id, text.id)}>Open guided responses and revise this writing</Link> : <WritingForm key={`${id}:${text.id}`} attempts={overview.attempts} writing={writing} version={text} onSaved={newId => { record.refresh(); onSaved(newId) }} />}</section>
   </div>
 }
 function LearningWorkspace() {

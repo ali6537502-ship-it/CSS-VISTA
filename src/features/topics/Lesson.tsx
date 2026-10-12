@@ -612,6 +612,7 @@ export default function TopicLesson({
                   {section.kind.replaceAll('-', ' ')}
                 </p>
                 <h4 className="mt-3 text-2xl font-semibold leading-9">{section.title}</h4>
+                <Link className={secondary} to={`/account/ask-vista?context=${encodeURIComponent(`topic:${data.topic.id}:${data.topic.version_id}:${section.id}`)}&attempt=${attempt}`}>Ask VISTA about this section</Link>
                 <GuidedSection
                   key={`${data.topic.version_id}:${section.id}`}
                   section={section}

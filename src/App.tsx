@@ -78,6 +78,7 @@ const AccountExpression = lazy(() => import('./pages/account/Expression'))
 const AccountPrecis = lazy(() => import('./pages/account/Precis'))
 const AccountHandwriting = lazy(() => import('./pages/account/Handwriting'))
 const AccountTutor = lazy(() => import('./pages/account/Tutor'))
+const AccountSkills = lazy(() => import('./pages/account/Skills'))
 const AccountGeneralAbility = lazy(() => import('./features/ability/Course'))
 const AccountAnswerPerformance = lazy(() => import('./pages/account/AnswerPerformance'))
 const AccountLearning = lazy(() => import('./pages/account/Learning'))
@@ -212,6 +213,9 @@ export default function App() {
         <Route path="/account/resources" element={<ProfileGate><S><AccountResources /></S></ProfileGate>} />
         <Route path="/account/expression" element={<ProfileGate><S><AccountExpression /></S></ProfileGate>} />
         <Route path="/account/precis" element={<ProfileGate><ProGate feature="Précis Mastery Lab"><S><AccountPrecis /></S></ProGate></ProfileGate>} />
+        <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
+        <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
+        <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />
         <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />

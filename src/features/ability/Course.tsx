@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -11,11 +11,11 @@ import {
   Layers,
   RotateCcw,
   Target,
-} from 'lucide-react'
-import { useAccount } from '@/lib/accountContext'
-import { useLearning } from '@/features/learning/api'
-import { AccountPage } from '@/pages/account/shared'
-import { ProBadge } from '@/features/membership/AccountSections'
+} from "lucide-react";
+import { useAccount } from "@/lib/accountContext";
+import { useLearning } from "@/features/learning/api";
+import { AccountPage } from "@/pages/account/shared";
+import { ProBadge } from "@/features/membership/AccountSections";
 import {
   courseLink,
   stages,
@@ -26,15 +26,15 @@ import {
   type QuizFeedback,
   type Receipt,
   type Topic,
-} from './api'
-import { useCourseSave } from './useCourseSave'
-import Explorer from './Explorers'
+} from "./api";
+import { useCourseSave } from "./useCourseSave";
+import Explorer from "./Explorers";
 
 const button =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white disabled:opacity-50'
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white disabled:opacity-50";
 const secondary =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:opacity-50'
-const panel = 'rounded-2xl border border-slate-200 bg-white p-5 sm:p-7'
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 disabled:opacity-50";
+const panel = "rounded-2xl border border-slate-200 bg-white p-5 sm:p-7";
 
 function Feedback({ receipt }: { receipt: Receipt }) {
   if (!receipt.feedback)
@@ -42,18 +42,18 @@ function Feedback({ receipt }: { receipt: Receipt }) {
       <p role="status" className="text-sm text-slate-600">
         Your place is saved.
       </p>
-    )
-  if (receipt.mode === 'exercise') {
-    const value = receipt.feedback as ExerciseFeedback
+    );
+  if (receipt.mode === "exercise") {
+    const value = receipt.feedback as ExerciseFeedback;
     return (
       <div
         role="status"
-        className={`rounded-xl border p-4 ${value.correct ? 'border-emerald-200 bg-emerald-50' : 'border-amber-200 bg-amber-50'}`}
+        className={`rounded-xl border p-4 ${value.correct ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"}`}
       >
         <p className="font-semibold text-slate-950">
           {value.correct
-            ? 'Correct — exercise saved'
-            : 'Review this step — attempt saved'}
+            ? "Correct — exercise saved"
+            : "Review this step — attempt saved"}
         </p>
         <p className="mt-2 text-sm leading-7 text-slate-700">
           {value.explanation}
@@ -62,9 +62,9 @@ function Feedback({ receipt }: { receipt: Receipt }) {
           Answer: <strong>{value.answer}</strong> {value.unit}
         </p>
       </div>
-    )
+    );
   }
-  const value = receipt.feedback as QuizFeedback
+  const value = receipt.feedback as QuizFeedback;
   return (
     <section className="space-y-4" aria-label="Saved quiz feedback">
       <div role="status" className="rounded-xl bg-slate-950 p-5 text-white">
@@ -73,21 +73,21 @@ function Feedback({ receipt }: { receipt: Receipt }) {
         </p>
         <p className="mt-2 text-sm text-slate-200">
           {value.passed
-            ? 'Quiz passed. Complete the three lesson exercises to finish this topic.'
-            : 'Use the explanations below, then try again when you are ready.'}
+            ? "Quiz passed. Complete the three lesson exercises to finish this topic."
+            : "Use the explanations below, then try again when you are ready."}
         </p>
       </div>
       {value.results.map((row, index) => (
         <article key={row.question_id} className={panel}>
           <p className="text-xs font-semibold text-slate-500">
-            Question {index + 1} · {row.correct ? 'Correct' : 'Review'}
+            Question {index + 1} · {row.correct ? "Correct" : "Review"}
           </p>
           <h3 className="mt-2 font-semibold text-slate-950">{row.prompt}</h3>
           <p className="mt-3 text-sm text-slate-600">
             Your answer: {row.options[row.choice]} {row.unit}
           </p>
           <p className="mt-1 text-sm text-slate-700">
-            Correct answer: <strong>{row.options[row.answer]}</strong>{' '}
+            Correct answer: <strong>{row.options[row.answer]}</strong>{" "}
             {row.unit}
           </p>
           <p className="mt-3 text-sm leading-7 text-slate-600">
@@ -96,31 +96,35 @@ function Feedback({ receipt }: { receipt: Receipt }) {
         </article>
       ))}
     </section>
-  )
+  );
 }
-function useDraft<T>(key: string, initial: T) {
+function useDraft<T>(key: string, initial: T, fallback: string[] = []) {
   const [value, setValue] = useState<T>(() => {
     try {
-      return (JSON.parse(localStorage.getItem(key) || 'null') as T) || initial
+      for (const candidate of [key, ...fallback]) {
+        const raw = localStorage.getItem(candidate);
+        if (raw !== null) return JSON.parse(raw) as T;
+      }
+      return initial;
     } catch {
-      return initial
+      return initial;
     }
-  })
-  const [storageError, setStorageError] = useState('')
+  });
+  const [storageError, setStorageError] = useState("");
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(value))
-      setStorageError('')
+      localStorage.setItem(key, JSON.stringify(value));
+      setStorageError("");
     } catch {
       setStorageError(
-        'This browser could not keep an unsent draft. Keep this page open until your answer is saved.',
-      )
+        "This browser could not keep an unsent draft. Keep this page open until your answer is saved.",
+      );
     }
-  }, [key, value])
-  return { value, setValue, storageError }
+  }, [key, value]);
+  return { value, setValue, storageError };
 }
 function WorkedExample({ lesson }: { lesson: Lesson }) {
-  const [visible, setVisible] = useState(0)
+  const [visible, setVisible] = useState(0);
   return (
     <section className="overflow-hidden rounded-2xl border border-indigo-100 bg-indigo-50/50">
       <div className="border-b border-indigo-100 p-5 sm:p-6">
@@ -144,10 +148,10 @@ function WorkedExample({ lesson }: { lesson: Lesson }) {
         </ol>
         {visible < lesson.example.steps.length ? (
           <button
-            className={`${secondary} ${visible ? 'mt-5' : ''}`}
+            className={`${secondary} ${visible ? "mt-5" : ""}`}
             onClick={() => setVisible((v) => v + 1)}
           >
-            Reveal {visible ? 'next' : 'first'} step{' '}
+            Reveal {visible ? "next" : "first"} step{" "}
             <ChevronRight className="h-4 w-4" />
           </button>
         ) : (
@@ -157,7 +161,7 @@ function WorkedExample({ lesson }: { lesson: Lesson }) {
         )}
       </div>
     </section>
-  )
+  );
 }
 function Practice({
   lesson,
@@ -166,30 +170,35 @@ function Practice({
   unit,
   save,
   disabled,
+  compatible = [],
 }: {
-  lesson: Lesson
-  user: string
-  version: string
-  unit: string
-  save: (body: Record<string, unknown>) => Promise<void>
-  disabled: boolean
+  lesson: Lesson;
+  user: string;
+  version: string;
+  unit: string;
+  save: (body: Record<string, unknown>) => Promise<void>;
+  disabled: boolean;
+  compatible?: string[];
 }) {
   const draft = useDraft<string>(
     `cssvista:ability:draft:v1:${user}:${version}:${lesson.id}`,
-    '',
-  )
+    "",
+    compatible.map(
+      (v) => `cssvista:ability:draft:v1:${user}:${v}:${lesson.id}`,
+    ),
+  );
   return (
     <form
       className={panel}
       onSubmit={(event) => {
-        event.preventDefault()
+        event.preventDefault();
         void save({
-          action: 'exercise',
+          action: "exercise",
           course_version: version,
           unit,
           lesson: lesson.id,
           answer: draft.value,
-        })
+        });
       }}
     >
       <p className="text-xs font-bold uppercase tracking-wider text-emerald-800">
@@ -199,28 +208,44 @@ function Practice({
         {lesson.exercise.prompt}
       </h3>
       <label className="mt-5 block text-sm font-semibold text-slate-700">
-        Your answer{' '}
+        Your answer{" "}
         <span className="font-normal text-slate-500">
           ({lesson.exercise.unit})
         </span>
-        <input
-          required
-          maxLength={60}
-          type="text"
-          autoComplete="off"
-          value={typeof draft.value === 'string' ? draft.value : ''}
-          onChange={(event) => draft.setValue(event.target.value)}
-          className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-lg text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
-          aria-describedby="ability-answer-format"
-        />
+        {lesson.exercise.kind === "choice" ? (
+          <select
+            required
+            value={String(draft.value || "")}
+            onChange={(e) => draft.setValue(e.target.value)}
+            className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base"
+          >
+            <option value="">Choose one option</option>
+            {lesson.exercise.options?.map((option, i) => (
+              <option key={i} value={String(i)}>
+                {option}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <input
+            required
+            maxLength={60}
+            type="text"
+            autoComplete="off"
+            value={typeof draft.value === "string" ? draft.value : ""}
+            onChange={(event) => draft.setValue(event.target.value)}
+            className="mt-2 min-h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-lg text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700"
+            aria-describedby="ability-answer-format"
+          />
+        )}
       </label>
       <p
         id="ability-answer-format"
         className="mt-2 text-xs leading-6 text-slate-500"
       >
-        Enter digits, a decimal or a fraction such as 3/4. Equivalent fractions
-        are accepted. Round recurring decimal answers to two places; do not
-        round exact decimals.
+        {lesson.exercise.kind === "choice"
+          ? "Use only the stated conditions. Fixed options are checked against reviewed stored answers, without AI."
+          : "Enter digits, a decimal or a fraction such as 3/4. Equivalent fractions are accepted. Round recurring decimal answers to two places; do not round exact decimals."}
       </p>
       {draft.storageError && (
         <p role="alert" className="mt-3 text-sm text-amber-800">
@@ -235,7 +260,7 @@ function Practice({
         Check & save answer <ArrowRight className="h-4 w-4" />
       </button>
     </form>
-  )
+  );
 }
 function Quiz({
   topic,
@@ -243,35 +268,38 @@ function Quiz({
   version,
   save,
   disabled,
+  compatible = [],
 }: {
-  topic: Topic
-  user: string
-  version: string
-  save: (body: Record<string, unknown>) => Promise<void>
-  disabled: boolean
+  topic: Topic;
+  user: string;
+  version: string;
+  save: (body: Record<string, unknown>) => Promise<void>;
+  disabled: boolean;
+  compatible?: string[];
 }) {
   const draft = useDraft<Record<string, number>>(
     `cssvista:ability:quiz:v1:${user}:${version}:${topic.id}`,
     {},
-  )
+    compatible.map((v) => `cssvista:ability:quiz:v1:${user}:${v}:${topic.id}`),
+  );
   const choices =
     draft.value &&
-    typeof draft.value === 'object' &&
+    typeof draft.value === "object" &&
     !Array.isArray(draft.value)
       ? draft.value
-      : {}
-  const all = topic.quiz.every((q) => Number.isInteger(choices[q.id]))
+      : {};
+  const all = topic.quiz.every((q) => Number.isInteger(choices[q.id]));
   return (
     <form
       className="space-y-5"
       onSubmit={(event) => {
-        event.preventDefault()
+        event.preventDefault();
         void save({
-          action: 'quiz',
+          action: "quiz",
           course_version: version,
           unit: topic.id,
           choices,
-        })
+        });
       }}
     >
       <section className="rounded-2xl bg-slate-950 p-6 text-white">
@@ -301,7 +329,7 @@ function Quiz({
             {question.options.map((option, i) => (
               <label
                 key={i}
-                className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border p-4 ${choices[question.id] === i ? 'border-emerald-700 bg-emerald-50' : 'border-slate-200 bg-white hover:border-slate-400'}`}
+                className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border p-4 ${choices[question.id] === i ? "border-emerald-700 bg-emerald-50" : "border-slate-200 bg-white hover:border-slate-400"}`}
               >
                 <input
                   type="radio"
@@ -331,23 +359,24 @@ function Quiz({
         Submit & save quiz <ArrowRight className="h-4 w-4" />
       </button>
     </form>
-  )
+  );
 }
 function CourseHome({ data }: { data: CourseData }) {
-  const done = data.units.filter((u) => u.complete).length
+  const done = data.units.filter((u) => u.complete).length;
+  const topics = data.units.length, lessons = data.units.reduce((sum, unit) => sum + unit.lessons.length, 0);
   const current =
     data.units.find((u) => u.id === data.position?.unit_id && !u.complete) ||
     data.units.find((u) => !u.complete) ||
-    data.units[0]
+    data.units[0];
   const savedLesson =
-    data.position?.unit_id === current.id ? data.position.lesson_id : undefined
+    data.position?.unit_id === current.id ? data.position.lesson_id : undefined;
   const nextLesson =
     savedLesson &&
-    (savedLesson === 'quiz' ||
+    (savedLesson === "quiz" ||
       current.lessons.some((l) => l.id === savedLesson))
       ? savedLesson
       : current.lessons.find((l) => !current.completed_lessons.includes(l.id))
-          ?.id || 'quiz'
+          ?.id || "quiz";
   return (
     <div className="space-y-8">
       <section className="relative overflow-hidden rounded-3xl bg-slate-950 p-6 text-white sm:p-9">
@@ -373,7 +402,7 @@ function CourseHome({ data }: { data: CourseData }) {
               className="mt-6 inline-flex min-h-12 items-center gap-3 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950"
               to={courseLink(current.id, nextLesson)}
             >
-              {done ? 'Continue learning' : 'Start learning'}
+              {done ? "Continue learning" : "Start learning"}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -381,7 +410,7 @@ function CourseHome({ data }: { data: CourseData }) {
             <Calculator className="h-7 w-7 text-amber-200" />
             <p className="mt-5 text-4xl font-bold tabular-nums">
               {done}
-              <span className="text-lg font-normal text-slate-400"> / 21</span>
+              <span className="text-lg font-normal text-slate-400"> / {topics}</span>
             </p>
             <p className="mt-2 text-xs text-slate-300">topics completed</p>
             <div
@@ -390,11 +419,11 @@ function CourseHome({ data }: { data: CourseData }) {
               aria-label="Topics completed"
               aria-valuenow={done}
               aria-valuemin={0}
-              aria-valuemax={21}
+              aria-valuemax={topics}
             >
               <div
                 className="h-full rounded-full bg-amber-200"
-                style={{ width: `${(done / 21) * 100}%` }}
+                style={{ width: `${(done / Math.max(1, topics)) * 100}%` }}
               />
             </div>
           </div>
@@ -402,15 +431,15 @@ function CourseHome({ data }: { data: CourseData }) {
       </section>
       <div className="grid gap-3 sm:grid-cols-3">
         {[
-          [BookOpen, '63 guided lessons', 'A clear idea and a worked example.'],
+          [BookOpen, `${lessons} guided lessons`, "A clear idea and a worked example."],
           [
             Calculator,
-            '63 practice exercises',
-            'Enter an answer and review the method.',
+            `${lessons} practice exercises`,
+            "Enter an answer and review the method.",
           ],
-          [Target, '21 topic quizzes', 'Five questions with saved feedback.'],
+          [Target, `${topics} topic quizzes`, "Five questions with saved feedback."],
         ].map(([Icon, title, desc]) => {
-          const Component = Icon as typeof BookOpen
+          const Component = Icon as typeof BookOpen;
           return (
             <div
               key={String(title)}
@@ -424,7 +453,7 @@ function CourseHome({ data }: { data: CourseData }) {
                 {String(desc)}
               </p>
             </div>
-          )
+          );
         })}
       </div>
       <p className="text-sm leading-7 text-slate-600">
@@ -476,9 +505,9 @@ function CourseHome({ data }: { data: CourseData }) {
                     {unit.summary}
                   </p>
                   <p className="mt-4 text-xs font-semibold text-emerald-800">
-                    {unit.completed_lessons.length}/3 exercises ·{' '}
+                    {unit.completed_lessons.length}/3 exercises ·{" "}
                     {unit.quiz_best === null
-                      ? 'Quiz not taken'
+                      ? "Quiz not taken"
                       : `Best quiz: ${unit.quiz_best}%`}
                   </p>
                 </Link>
@@ -488,29 +517,29 @@ function CourseHome({ data }: { data: CourseData }) {
       ))}
       <p className="text-xs leading-6 text-slate-500">{data.attribution}</p>
       <Link className={secondary} to="/gk/category/general-ability">
-        Open the existing Ability question bank{' '}
+        Open the existing Ability question bank{" "}
         <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
-  )
+  );
 }
 function History() {
-  const [params, setParams] = useSearchParams()
-  const offset = Math.max(0, Number(params.get('offset')) || 0)
+  const [params, setParams] = useSearchParams();
+  const offset = Math.max(0, Number(params.get("offset")) || 0);
   const history = useLearning<HistoryData>(
     `ability.php?view=history&offset=${offset}`,
-  )
+  );
   if (!history.data)
     return (
-      <p role={history.error ? 'alert' : 'status'}>
-        {history.error || 'Opening saved maths work…'}
+      <p role={history.error ? "alert" : "status"}>
+        {history.error || "Opening saved maths work…"}
         {history.error && (
           <button className={`${secondary} ml-3`} onClick={history.refresh}>
             Retry
           </button>
         )}
       </p>
-    )
+    );
   return (
     <section className="space-y-5">
       <h2 className="text-xl font-bold">Saved attempts</h2>
@@ -523,7 +552,7 @@ function History() {
       {history.data.history.map((receipt) => (
         <details key={receipt.response_id} className={panel}>
           <summary className="cursor-pointer text-sm font-semibold">
-            {receipt.unit_id.replaceAll('-', ' ')} · {receipt.mode} ·{' '}
+            {receipt.unit_id.replaceAll("-", " ")} · {receipt.mode} ·{" "}
             {new Date(receipt.saved_at).toLocaleString()}
           </summary>
           <div className="mt-5">
@@ -537,7 +566,7 @@ function History() {
             className={secondary}
             onClick={() =>
               setParams({
-                view: 'history',
+                view: "history",
                 offset: String(Math.max(0, offset - 20)),
               })
             }
@@ -549,7 +578,7 @@ function History() {
           <button
             className={secondary}
             onClick={() =>
-              setParams({ view: 'history', offset: String(offset + 20) })
+              setParams({ view: "history", offset: String(offset + 20) })
             }
           >
             Next
@@ -557,48 +586,48 @@ function History() {
         )}
       </div>
     </section>
-  )
+  );
 }
 function Workspace({ user }: { user: string }) {
   const [params] = useSearchParams(),
-    unit = params.get('unit'),
-    lessonId = params.get('lesson')
+    unit = params.get("unit"),
+    lessonId = params.get("lesson");
   const course = useLearning<CourseData>(
-    params.get('view') === 'history'
+    params.get("view") === "history"
       ? undefined
-      : 'ability.php' + (unit ? `?unit=${encodeURIComponent(unit)}` : ''),
-  )
-  const saver = useCourseSave(user, course.refresh)
+      : "ability.php" + (unit ? `?unit=${encodeURIComponent(unit)}` : ""),
+  );
+  const saver = useCourseSave(user, course.refresh);
   const data = course.data,
-    topic = data?.unit
+    topic = data?.unit;
   const lesson =
-    topic?.lessons.find((l) => l.id === lessonId) || topic?.lessons[0]
-  const isQuiz = lessonId === 'quiz',
-    summary = data?.units.find((u) => u.id === topic?.id)
+    topic?.lessons.find((l) => l.id === lessonId) || topic?.lessons[0];
+  const isQuiz = lessonId === "quiz",
+    summary = data?.units.find((u) => u.id === topic?.id);
   const currentResult =
     saver.result?.ability_course_version === data?.course_version &&
     saver.result?.unit_id === unit &&
     (isQuiz
-      ? saver.result.mode === 'quiz'
-      : saver.result.mode === 'exercise' &&
+      ? saver.result.mode === "quiz"
+      : saver.result.mode === "exercise" &&
         (saver.result.feedback as ExerciseFeedback)?.lesson_id === lesson?.id)
       ? saver.result
-      : undefined
+      : undefined;
   const prior = data?.latest?.find((r) =>
     isQuiz
-      ? r.mode === 'quiz'
-      : r.mode === 'exercise' &&
+      ? r.mode === "quiz"
+      : r.mode === "exercise" &&
         (r.feedback as ExerciseFeedback)?.lesson_id === lesson?.id,
-  )
-  const index = topic?.lessons.findIndex((l) => l.id === lesson?.id) ?? 0
+  );
+  const index = topic?.lessons.findIndex((l) => l.id === lesson?.id) ?? 0;
   const next =
-    topic && !isQuiz ? topic.lessons[index + 1]?.id || 'quiz' : undefined
-  if (params.get('view') === 'history') return <History />
+    topic && !isQuiz ? topic.lessons[index + 1]?.id || "quiz" : undefined;
+  if (params.get("view") === "history") return <History />;
   return (
     <div className="space-y-5">
       {saver.pending && (
         <section className="rounded-xl border border-amber-300 bg-amber-50 p-5">
-          <h2 className="font-semibold">A maths save needs confirmation</h2>
+          <h2 className="font-semibold">An ability save needs confirmation</h2>
           <p className="mt-2 text-sm leading-7">
             Check its saved result before sending another answer. This protects
             your attempt from being recorded twice.
@@ -641,8 +670,8 @@ function Workspace({ user }: { user: string }) {
         </p>
       )}
       {!data ? (
-        <section className={panel} role={course.error ? 'alert' : 'status'}>
-          {course.error || 'Opening your General Ability course…'}
+        <section className={panel} role={course.error ? "alert" : "status"}>
+          {course.error || "Opening your General Ability course…"}
           {course.error && (
             <button className={`${secondary} mt-4`} onClick={course.refresh}>
               Try again
@@ -671,7 +700,7 @@ function Workspace({ user }: { user: string }) {
             </p>
             <p className="mt-4 text-xs font-semibold text-slate-300">
               {summary?.complete
-                ? 'Topic completed — revisit whenever you need.'
+                ? "Topic completed — revisit whenever you need."
                 : `${summary?.completed_lessons.length || 0}/3 exercises completed`}
             </p>
           </header>
@@ -681,9 +710,9 @@ function Workspace({ user }: { user: string }) {
                 key={l.id}
                 to={courseLink(unit, l.id)}
                 aria-current={
-                  !isQuiz && lesson.id === l.id ? 'page' : undefined
+                  !isQuiz && lesson.id === l.id ? "page" : undefined
                 }
-                className={`${secondary} justify-start ${!isQuiz && lesson.id === l.id ? 'border-emerald-700 bg-emerald-50 text-emerald-900' : ''}`}
+                className={`${secondary} justify-start ${!isQuiz && lesson.id === l.id ? "border-emerald-700 bg-emerald-50 text-emerald-900" : ""}`}
               >
                 <span className="text-xs">{i + 1}.</span>
                 <span className="min-w-0 text-xs leading-5">{l.title}</span>
@@ -696,9 +725,9 @@ function Workspace({ user }: { user: string }) {
               </Link>
             ))}
             <Link
-              to={courseLink(unit, 'quiz')}
-              aria-current={isQuiz ? 'page' : undefined}
-              className={`${secondary} ${isQuiz ? 'border-emerald-700 bg-emerald-50 text-emerald-900' : ''}`}
+              to={courseLink(unit, "quiz")}
+              aria-current={isQuiz ? "page" : undefined}
+              className={`${secondary} ${isQuiz ? "border-emerald-700 bg-emerald-50 text-emerald-900" : ""}`}
             >
               <Target className="h-4 w-4" /> Topic quiz
             </Link>
@@ -709,6 +738,7 @@ function Workspace({ user }: { user: string }) {
               topic={topic}
               user={user}
               version={data.course_version}
+              compatible={data.compatible_versions}
               save={saver.save}
               disabled={saver.busy || !!saver.pending}
             />
@@ -733,6 +763,7 @@ function Workspace({ user }: { user: string }) {
                   </p>
                 </div>
               </article>
+              <Link className={secondary} to={`/account/ask-vista?context=${encodeURIComponent(`ability:${unit}:${lesson.id}`)}`}>Ask VISTA about this method</Link>
               <Explorer key={`${unit}:${lesson.id}`} unit={unit} />
               <WorkedExample key={lesson.id} lesson={lesson} />
               <Practice
@@ -740,6 +771,7 @@ function Workspace({ user }: { user: string }) {
                 lesson={lesson}
                 user={user}
                 version={data.course_version}
+                compatible={data.compatible_versions}
                 unit={unit}
                 save={saver.save}
                 disabled={saver.busy || !!saver.pending}
@@ -750,7 +782,7 @@ function Workspace({ user }: { user: string }) {
           {!currentResult && prior && (
             <details className={panel}>
               <summary className="cursor-pointer text-sm font-semibold">
-                View your last saved {isQuiz ? 'quiz' : 'exercise'} feedback
+                View your last saved {isQuiz ? "quiz" : "exercise"} feedback
               </summary>
               <div className="mt-4">
                 <Feedback receipt={prior} />
@@ -760,7 +792,7 @@ function Workspace({ user }: { user: string }) {
           <div className="flex flex-wrap gap-3">
             {next && (
               <Link className={button} to={courseLink(unit, next)}>
-                {next === 'quiz' ? 'Open topic quiz' : 'Next lesson'}
+                {next === "quiz" ? "Open topic quiz" : "Next lesson"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             )}
@@ -770,7 +802,7 @@ function Workspace({ user }: { user: string }) {
                 disabled={saver.busy || !!saver.pending}
                 onClick={() =>
                   void saver.save({
-                    action: 'position',
+                    action: "position",
                     course_version: data.course_version,
                     unit,
                     lesson: lesson.id,
@@ -784,7 +816,7 @@ function Workspace({ user }: { user: string }) {
               <RotateCcw className="h-4 w-4" /> Return to topic path
             </Link>
           </div>
-          {saver.result?.mode === 'position' &&
+          {saver.result?.mode === "position" &&
             saver.result.unit_id === unit && (
               <p role="status" className="text-sm text-slate-600">
                 Your place is saved.
@@ -793,7 +825,7 @@ function Workspace({ user }: { user: string }) {
         </>
       ) : (
         <p role="alert" className={panel}>
-          This topic is unavailable.{' '}
+          This topic is unavailable.{" "}
           <Link className="underline" to={courseLink()}>
             Return to the course
           </Link>
@@ -801,10 +833,10 @@ function Workspace({ user }: { user: string }) {
         </p>
       )}
     </div>
-  )
+  );
 }
 export default function GeneralAbility() {
-  const { user } = useAccount()
+  const { user } = useAccount();
   return (
     <AccountPage
       title="General Ability"
@@ -824,5 +856,5 @@ export default function GeneralAbility() {
       </nav>
       {user && <Workspace key={user.id} user={user.id} />}
     </AccountPage>
-  )
+  );
 }

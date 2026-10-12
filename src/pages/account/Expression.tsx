@@ -2,6 +2,8 @@ import { Link, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, BookOpen, FilePenLine, History, ShieldCheck, Sparkles } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { AccountPage } from './shared'
+import { lazy, Suspense } from 'react'
+const Studio = lazy(() => import('@/features/skills/Studio'))
 import { useLearning } from '@/features/learning/api'
 import { panelStyle, primaryStyle, secondaryStyle } from '@/features/handwriting/styles'
 import { pakistanTime } from '@/features/membership/api'
@@ -26,4 +28,4 @@ function Workspace() {
   <div className="flex flex-wrap gap-4 border-t border-slate-200 pt-5 text-sm"><Link to="/account/preparation" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">My preparation and all writing</Link><Link to="/account/handwriting" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">Handwritten paragraph</Link><Link to="/account/ai-usage" className="inline-flex min-h-11 items-center font-semibold text-indigo-700 hover:underline">AI usage and earlier results</Link></div>
  </div>
 }
-export default function ExpressionPage() { const { user } = useAccount(); return <AccountPage title="English Expression Lab" intro="Write, understand and revise through your own wording."><Workspace key={user?.id} /></AccountPage> }
+export default function ExpressionPage() { const { user } = useAccount(); const [params] = useSearchParams(); return <AccountPage title="English Expression Lab" intro="Write, understand and revise through your own wording."><nav aria-label="Expression modes" className="mb-6 flex flex-wrap gap-4 text-sm font-semibold"><Link className="inline-flex min-h-11 items-center underline" to="/account/expression?view=studio">Sentence Structure &amp; Improvement ★ Pro</Link><Link className="inline-flex min-h-11 items-center underline" to="/account/expression">Independent Expression Lab</Link></nav>{params.get('view') === 'studio' ? <Suspense fallback={<p role="status">Opening guided sentence practice…</p>}><Studio key={`${user?.id}:sentence`} feature="sentence" /></Suspense> : <Workspace key={user?.id} />}</AccountPage> }

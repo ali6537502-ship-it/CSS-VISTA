@@ -1,0 +1,1179 @@
+{
+  "version": "skills-2026-10-v1",
+  "attribution": "Original bounded CSS Vista skills teaching. Hypothetical examples are not evidence of real events. Grammar rules link to the existing course.",
+  "lessons": [
+    {
+      "feature": "sentence",
+      "id": "sentence-core",
+      "title": "A complete sentence",
+      "level": "beginner",
+      "explanation": "A sentence expresses a complete thought. Find who or what the sentence is about, then what that subject does or is. An imperative may have an understood subject: you.",
+      "example": "The researcher checked the figures. Subject: the researcher. Predicate: checked the figures.",
+      "check": {
+        "id": "sentence-core-check",
+        "prompt": "Which sentence expresses a complete thought?",
+        "options": [
+          "The committee published its report.",
+          "Because the report was late.",
+          "The report on the desk.",
+          "After checking the figures."
+        ],
+        "answer": 0,
+        "explanation": "The subject committee has a finite verb, published, and the thought is complete."
+      },
+      "task": "Write one sentence about an action you completed today. Underline the subject mentally and identify its verb.",
+      "grammar_day": 2,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "subject-predicate",
+      "title": "Subject and predicate",
+      "level": "beginner",
+      "explanation": "The subject identifies the person or thing discussed. The predicate says something about it. Extra words inside a subject do not change its head noun.",
+      "example": "The books on the upper shelf belong to Sara. Books is the head noun; belong to Sara is the predicate.",
+      "check": {
+        "id": "subject-predicate-check",
+        "prompt": "Which is the head of the subject in \"The quality of the reports matters\"?",
+        "options": [
+          "matters",
+          "of",
+          "quality",
+          "reports"
+        ],
+        "answer": 2,
+        "explanation": "Quality is the head noun; of the reports describes it."
+      },
+      "task": "Write a sentence whose subject includes an of phrase. Make the verb agree with the head noun.",
+      "grammar_day": 2,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "sentence-types",
+      "title": "Simple, compound and complex sentences",
+      "level": "beginner",
+      "explanation": "A simple sentence has one independent clause. A compound sentence joins independent clauses. A complex sentence includes an independent clause and at least one dependent clause. Length alone does not determine the type.",
+      "example": "The class ended, but the students stayed. Both clauses can stand alone.",
+      "check": {
+        "id": "sentence-types-check",
+        "prompt": "Which example is complex?",
+        "options": [
+          "The students stayed.",
+          "The class ended, and the students stayed.",
+          "The attentive students stayed quietly.",
+          "Although the class ended, the students stayed."
+        ],
+        "answer": 3,
+        "explanation": "Although introduces a dependent clause; the students stayed is independent."
+      },
+      "task": "Write a simple sentence, then revise it to show a condition using if or a contrast using although.",
+      "grammar_day": 3,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "fragments",
+      "title": "Repairing fragments",
+      "level": "beginner",
+      "explanation": "A dependent clause cannot normally stand alone in formal prose. Attach it to an independent clause, or remove the dependency while preserving meaning.",
+      "example": "Fragment: Because the road was closed. Complete: We returned because the road was closed.",
+      "check": {
+        "id": "fragments-check",
+        "prompt": "Which repair is complete?",
+        "options": [
+          "The closed road near the village.",
+          "Although the road was closed.",
+          "We postponed the visit because the road was closed.",
+          "Because the road was closed."
+        ],
+        "answer": 2,
+        "explanation": "The repair supplies an independent clause with a subject and a finite verb."
+      },
+      "task": "Repair this fragment in your own way: \"Although the proposal was promising.\" Do not invent evidence about a real proposal.",
+      "grammar_day": 4,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "run-ons",
+      "title": "Run-ons and comma splices",
+      "level": "beginner",
+      "explanation": "Two independent clauses need suitable punctuation or a conjunction. A comma alone usually cannot join them. Choose a boundary that reflects their relationship.",
+      "example": "Comma splice: The room was crowded, we waited outside. Repair: The room was crowded, so we waited outside.",
+      "check": {
+        "id": "run-ons-check",
+        "prompt": "Which punctuation joins two related independent clauses correctly?",
+        "options": [
+          "The draft is ready, the editor will review it.",
+          "The draft is ready the editor will review it.",
+          "The draft is ready; because the editor will review it.",
+          "The draft is ready; the editor will review it."
+        ],
+        "answer": 3,
+        "explanation": "A semicolon can connect closely related independent clauses."
+      },
+      "task": "Repair \"The instructions were unclear, we asked for help\" using a connector that shows the relationship.",
+      "grammar_day": 4,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "agreement",
+      "title": "Subject–verb agreement",
+      "level": "beginner",
+      "explanation": "Match the verb to the head of the subject. A nearby plural noun inside a describing phrase does not make a singular subject plural.",
+      "example": "The list of supplies is complete. List is singular.",
+      "check": {
+        "id": "agreement-check",
+        "prompt": "Choose the correct sentence.",
+        "options": [
+          "The purpose of these meetings are clear.",
+          "The purposes of this meeting is clear.",
+          "The purpose of these meetings were clear.",
+          "The purpose of these meetings is clear."
+        ],
+        "answer": 3,
+        "explanation": "The singular head purpose requires is in this present-tense sentence."
+      },
+      "task": "Write a sentence beginning \"The value of these lessons\" and complete it with an appropriate verb.",
+      "grammar_day": 5,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "tense-consistency",
+      "title": "Tense consistency",
+      "level": "beginner",
+      "explanation": "Keep the time frame clear. Tenses may change when the time changes, but an unexplained switch confuses the sequence.",
+      "example": "Yesterday I revised the outline and checked the references. Both actions belong to yesterday.",
+      "check": {
+        "id": "tense-consistency-check",
+        "prompt": "Which sentence keeps its stated past time frame?",
+        "options": [
+          "Last night, she draft the paragraph and review it.",
+          "Last night, she drafted the paragraph and reviewed it.",
+          "Last night, she drafts the paragraph and reviewed it.",
+          "Last night, she drafted the paragraph and reviews it."
+        ],
+        "answer": 1,
+        "explanation": "Drafted and reviewed both refer to the stated past period."
+      },
+      "task": "Describe two actions you completed yesterday in one sentence. Keep both verbs consistent with that time.",
+      "grammar_day": 9,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "word-order",
+      "title": "Clear word order",
+      "level": "beginner",
+      "explanation": "Put words near what they describe. Keep the main subject and verb easy to locate. Position only carefully because it can limit different parts of a sentence.",
+      "example": "Only Mina submitted a draft means nobody else did. Mina submitted only a draft means she submitted nothing else.",
+      "check": {
+        "id": "word-order-check",
+        "prompt": "Which sentence places only immediately before the submitted item?",
+        "options": [
+          "Mina only submitted a draft.",
+          "Mina submitted a draft only to the editor.",
+          "Mina submitted only a draft.",
+          "Only Mina submitted a draft."
+        ],
+        "answer": 2,
+        "explanation": "Only directly before a draft limits the item submitted."
+      },
+      "task": "Write two sentences with only in different positions, then explain how their meanings differ.",
+      "grammar_day": 15,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "modifiers",
+      "title": "Misplaced and dangling modifiers",
+      "level": "intermediate",
+      "explanation": "An opening participial phrase should describe the subject that follows. Otherwise the sentence may appear to assign an action to an object.",
+      "example": "Dangling: Walking to class, the rain soaked me. Clear: Walking to class, I was soaked by the rain.",
+      "check": {
+        "id": "modifiers-check",
+        "prompt": "Which sentence avoids a dangling modifier?",
+        "options": [
+          "After reviewing the figures, the report seemed clearer.",
+          "After reviewing the figures, the researcher corrected the table.",
+          "After reviewing the figures, the table was corrected.",
+          "After reviewing the figures, several errors appeared."
+        ],
+        "answer": 1,
+        "explanation": "The researcher is the person who reviewed the figures."
+      },
+      "task": "Repair \"After reading the instructions, the task became easier\" by naming the person who read.",
+      "grammar_day": 15,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "parallel-structure",
+      "title": "Parallel structure",
+      "level": "intermediate",
+      "explanation": "Use matching grammatical forms for ideas presented as equals. Parallel structure helps readers recognize the relationship without reinterpreting the syntax.",
+      "example": "The workshop teaches planning, drafting and revising. Each item is an -ing form.",
+      "check": {
+        "id": "parallel-structure-check",
+        "prompt": "Which list is parallel?",
+        "options": [
+          "We aim to improving access, reduce delays and explain decisions.",
+          "We aim to improve access, delays and explaining decisions.",
+          "We aim to improve access, reduce delays and explain decisions.",
+          "We aim to improve access, reducing delays and decisions explained."
+        ],
+        "answer": 2,
+        "explanation": "The coordinated verbs improve, reduce and explain share the same to."
+      },
+      "task": "Rewrite \"The programme encourages reading, to discuss ideas and revision\" with matching forms.",
+      "grammar_day": 20,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "clause-relationships",
+      "title": "Cause, contrast and condition",
+      "level": "intermediate",
+      "explanation": "Choose a connector that expresses the intended logic. Because gives a reason; although introduces contrast; if introduces a condition. These relationships are not interchangeable.",
+      "example": "If the library extends its hours, more evening study may be possible. This is conditional, not a promise.",
+      "check": {
+        "id": "clause-relationships-check",
+        "prompt": "Which connector introduces a condition?",
+        "options": [
+          "because",
+          "although",
+          "therefore",
+          "if"
+        ],
+        "answer": 3,
+        "explanation": "If sets a condition on the following claim."
+      },
+      "task": "Write three short sentences about a hypothetical study plan: one cause, one contrast and one condition.",
+      "grammar_day": 19,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "transitions",
+      "title": "Connectors and transitions",
+      "level": "intermediate",
+      "explanation": "A transition must match the relationship between ideas. However signals contrast; therefore signals a conclusion; for example introduces an illustration. Punctuation still needs to be correct.",
+      "example": "The first route is shorter. However, the second route has fewer obstacles.",
+      "check": {
+        "id": "transitions-check",
+        "prompt": "Which transition best signals an illustration?",
+        "options": [
+          "for example",
+          "nevertheless",
+          "therefore",
+          "in contrast"
+        ],
+        "answer": 0,
+        "explanation": "For example introduces an instance of the preceding general idea."
+      },
+      "task": "Write a general statement about a study habit and add an illustrative sentence with an appropriate transition.",
+      "grammar_day": 19,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "concision",
+      "title": "Concision and redundancy",
+      "level": "intermediate",
+      "explanation": "Remove words that repeat a meaning without removing necessary conditions or distinctions. Concision is faithful compression, not merely making a sentence shorter.",
+      "example": "At this point in time can usually become now. A future possibility can often become a possibility.",
+      "check": {
+        "id": "concision-check",
+        "prompt": "Which revision keeps the meaning of \"The reason for the delay is that the file is missing\"?",
+        "options": [
+          "The file is missing, causing the delay.",
+          "The file is missing.",
+          "The delay is unreasonable.",
+          "The file was destroyed."
+        ],
+        "answer": 0,
+        "explanation": "The revision retains both the missing file and its stated causal relationship to the delay."
+      },
+      "task": "Shorten \"It is necessary for students to make a plan in advance before they begin\" without losing its instruction.",
+      "grammar_day": 22,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "precision",
+      "title": "Clarity and precision",
+      "level": "intermediate",
+      "explanation": "Identify what vague words refer to. Replace a vague noun or pronoun when the context permits, but do not manufacture details the writer has not supplied.",
+      "example": "Vague: This improved things. Clear, with known context: The new timetable reduced missed classes.",
+      "check": {
+        "id": "precision-check",
+        "prompt": "What should an editor do when \"this\" has no clear referent?",
+        "options": [
+          "Replace it with a statistic.",
+          "Assume the preceding person is meant.",
+          "Ask which idea or action the writer means.",
+          "Invent a likely policy."
+        ],
+        "answer": 2,
+        "explanation": "Clarification preserves the writer’s meaning instead of inventing it."
+      },
+      "task": "Write a vague sentence with this or things, then replace the vague expression using only details you actually intend.",
+      "grammar_day": 14,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "academic-tone",
+      "title": "Word choice and academic tone",
+      "level": "intermediate",
+      "explanation": "Use accurate, proportionate wording. Formal writing does not require rare words or hostility. Avoid absolute labels when your evidence supports only a qualified criticism.",
+      "example": "Overstated: The proposal is totally useless. Precise: The proposal does not address the stated implementation problem.",
+      "check": {
+        "id": "academic-tone-check",
+        "prompt": "Which option offers a measured criticism?",
+        "options": [
+          "The argument overlooks the cost of implementation.",
+          "The argument is completely stupid.",
+          "Nobody could ever support the argument.",
+          "The argument proves that every reform fails."
+        ],
+        "answer": 0,
+        "explanation": "The criticism identifies a specific limitation without personal insult or an unsupported universal claim."
+      },
+      "task": "Rewrite \"This idea is really bad\" as a specific criticism of a hypothetical idea, clearly stating the limitation.",
+      "grammar_day": 23,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "causal-sentences",
+      "title": "Expressing cause and effect",
+      "level": "advanced",
+      "explanation": "Separate an observed association from a causal explanation. State the proposed mechanism and relevant condition. Use can or may when the claim is conditional.",
+      "example": "Hypothetical: If unclear instructions delay decisions, clarifying responsibilities may reduce that delay.",
+      "check": {
+        "id": "causal-sentences-check",
+        "prompt": "Which sentence makes a conditional causal claim?",
+        "options": [
+          "Two changes occurred together, so one must cause the other.",
+          "Decisions and responsibilities are the same thing.",
+          "Unclear responsibilities may delay decisions when approvals are required from several offices.",
+          "Unclear responsibilities always destroy all institutions."
+        ],
+        "answer": 2,
+        "explanation": "The sentence proposes an outcome and a condition without claiming inevitability."
+      },
+      "task": "Construct a causal sentence about a hypothetical administrative delay. Include a mechanism and a qualification.",
+      "grammar_day": 19,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "argumentative-sentences",
+      "title": "Building an argumentative sentence",
+      "level": "advanced",
+      "explanation": "Make a defensible claim, give a relevant reason and indicate the condition under which it applies. A strong sentence does more than announce a preference.",
+      "example": "A trial of extended study hours is worth considering if evening access is a barrier, because it would test whether access improves attendance.",
+      "check": {
+        "id": "argumentative-sentences-check",
+        "prompt": "Which sentence gives a claim supported by relevant reasoning?",
+        "options": [
+          "The timetable should be reviewed because it should be reviewed.",
+          "Everyone knows the timetable is wrong.",
+          "The timetable should be reviewed because two compulsory classes currently overlap.",
+          "The timetable should be reviewed because blue is a pleasant colour."
+        ],
+        "answer": 2,
+        "explanation": "Overlapping compulsory classes is a relevant reason for reviewing a timetable."
+      },
+      "task": "Write a claim about a hypothetical classroom improvement and support it with one relevant reason.",
+      "grammar_day": 24,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "analytical-sentences",
+      "title": "Building an analytical sentence",
+      "level": "advanced",
+      "explanation": "Show how or why an outcome could arise. Name a mechanism, condition or competing explanation. Description tells what; analysis examines the relationship.",
+      "example": "Hypothetical: A longer journey could reduce attendance by making punctual arrival harder, although class timing might also explain absences.",
+      "check": {
+        "id": "analytical-sentences-check",
+        "prompt": "Which statement offers analysis rather than only description?",
+        "options": [
+          "The library opens at a fixed time.",
+          "The library has a door.",
+          "Some students use the library.",
+          "A fixed opening time may restrict access for students whose classes finish later."
+        ],
+        "answer": 3,
+        "explanation": "It links opening time to a possible mechanism affecting a defined group."
+      },
+      "task": "Write one analytical sentence about a hypothetical access problem, including an alternative explanation.",
+      "grammar_day": 24,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "qualification",
+      "title": "Qualification without vagueness",
+      "level": "advanced",
+      "explanation": "A qualification states the scope or condition of a claim. It should make the statement more precise rather than weaken every verb with several uncertain expressions.",
+      "example": "Hypothetical: The shorter route is preferable when travel time matters more than shelter.",
+      "check": {
+        "id": "qualification-check",
+        "prompt": "Which statement has a clear condition?",
+        "options": [
+          "The shorter route is preferable when both routes are equally safe.",
+          "The shorter route is maybe perhaps sort of preferable.",
+          "The shorter route is always perfect for everyone.",
+          "The shorter route proves everything about travel."
+        ],
+        "answer": 0,
+        "explanation": "The condition specifies the circumstances in which the comparison holds."
+      },
+      "task": "Make \"Online discussion improves participation\" into a qualified hypothesis without inventing supporting data.",
+      "grammar_day": 10,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "transformation",
+      "title": "Advanced sentence transformation",
+      "level": "advanced",
+      "explanation": "Change structure while preserving who acts, what is claimed, the time frame and qualifications. A passive construction or compressed clause must not strengthen the original claim.",
+      "example": "Original: The team may finish the review if the missing files arrive. Equivalent: The review may be finished by the team if the missing files arrive.",
+      "check": {
+        "id": "transformation-check",
+        "prompt": "Which revision preserves \"The measure may reduce delays if staff receive training\"?",
+        "options": [
+          "Training has already eliminated delays.",
+          "The measure reduces delays without any conditions.",
+          "With staff training, the measure may reduce delays.",
+          "The measure will eliminate delays."
+        ],
+        "answer": 2,
+        "explanation": "May and the training condition remain; neither certainty nor timing is invented."
+      },
+      "task": "Transform a conditional sentence of your own into a different structure. Check that its qualification and meaning survive.",
+      "grammar_day": 11,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "sentence",
+      "id": "word-choice",
+      "title": "Vocabulary and word choice",
+      "level": "intermediate",
+      "explanation": "Choose words for their meaning and natural use in context. Similar dictionary meanings do not make words interchangeable. Check what a replacement would add, remove or imply.",
+      "example": "Effective concerns achieving an intended result; efficient concerns the resources used. A measure may be effective but costly. Decide which judgement you intend before choosing either word.",
+      "check": {
+        "id": "word-choice-check",
+        "prompt": "Which sentence preserves the meaning \"These figures do not provide enough support for the claim\"?",
+        "options": [
+          "These figures are significant.",
+          "These figures are insufficient to support the claim.",
+          "These figures disprove the claim.",
+          "These figures confirm the claim."
+        ],
+        "answer": 1,
+        "explanation": "Insufficient means not enough. Lack of enough support does not establish that the opposite claim is true."
+      },
+      "task": "Write a sentence using effective or efficient. Explain the meaning you intend and test an alternative word against it.",
+      "grammar_day": 23,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "fact-opinion-argument",
+      "title": "Fact, opinion and argument",
+      "level": "beginner",
+      "explanation": "A factual claim can be checked; an opinion expresses a judgement; an argument offers reasons for a conclusion. A factual-looking claim may still be unverified.",
+      "example": "Hypothetical opinion: I prefer longer library hours. Argument: The library should trial longer hours because some classes end after it closes.",
+      "check": {
+        "id": "fact-opinion-argument-check",
+        "prompt": "Which is an argument?",
+        "options": [
+          "The timetable should change because two required classes overlap.",
+          "I like the timetable.",
+          "The timetable contains eight entries.",
+          "The timetable is printed on paper."
+        ],
+        "answer": 0,
+        "explanation": "The timetable proposal gives a conclusion and a relevant reason."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "central-claim",
+      "title": "Finding a central claim",
+      "level": "beginner",
+      "explanation": "A central claim states what you want a reader to accept. Keep it specific enough to challenge and distinguish it from the topic.",
+      "example": "Topic: classroom access. Claim: A trial evening session could improve access for students with late classes.",
+      "check": {
+        "id": "central-claim-check",
+        "prompt": "Which is a claim rather than only a topic?",
+        "options": [
+          "Different schedules.",
+          "The school should trial an evening study session.",
+          "Evening study.",
+          "School buildings."
+        ],
+        "answer": 1,
+        "explanation": "The sentence proposes a position that can be supported or challenged."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "supporting-reasons",
+      "title": "Relevant supporting reasons",
+      "level": "beginner",
+      "explanation": "A reason supports a claim only when it helps explain why the conclusion should be accepted. A true but unrelated statement is not useful support.",
+      "example": "Hypothetical: Repairing a broken light is relevant to safe evening use; the colour of the noticeboard is not.",
+      "check": {
+        "id": "supporting-reasons-check",
+        "prompt": "Which reason is relevant to repairing a broken classroom light?",
+        "options": [
+          "The school logo has three colours.",
+          "The headteacher likes music.",
+          "The timetable was printed yesterday.",
+          "Students cannot read the board clearly in that room."
+        ],
+        "answer": 3,
+        "explanation": "Visibility bears directly on the purpose of the repair."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "logical-explanation",
+      "title": "Explaining the link",
+      "level": "beginner",
+      "explanation": "Explain the link between the reason and the claim. Naming two ideas beside each other does not show why one supports the other.",
+      "example": "Hypothetical: Moving a class avoids the overlap, so students can attend both required sessions.",
+      "check": {
+        "id": "logical-explanation-check",
+        "prompt": "Which sentence explains the reason–claim link?",
+        "options": [
+          "The overlap and class exist.",
+          "Everyone wants a change.",
+          "Moving one class would remove the overlap and allow attendance at both.",
+          "The class should move because moving is good."
+        ],
+        "answer": 2,
+        "explanation": "It names the mechanism by which the proposed change helps."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "evidence-selection",
+      "title": "Selecting evidence",
+      "level": "beginner",
+      "explanation": "Choose evidence that bears on the claim and has an identifiable source, date and scope. An illustrative example is not proof of a general claim.",
+      "example": "To examine library access, collect opening times and actual student schedules; a fictional example only explains the question.",
+      "check": {
+        "id": "evidence-selection-check",
+        "prompt": "Which evidence is most directly relevant to a claimed timetable overlap?",
+        "options": [
+          "The dated timetables for both required classes.",
+          "A quotation about courage.",
+          "An unrelated national statistic.",
+          "An anonymous preference for shorter lessons."
+        ],
+        "answer": 0,
+        "explanation": "The actual timetables can establish whether those class times overlap."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "premises-conclusions",
+      "title": "Premises and conclusions",
+      "level": "intermediate",
+      "explanation": "Premises are the supporting statements; the conclusion is what they are meant to establish. Check whether accepting the premises really supports that conclusion.",
+      "example": "All required classes must be attendable. Two required classes overlap. Therefore, the timetable needs review. This identifies a conflict, without proving a particular remedy.",
+      "check": {
+        "id": "premises-conclusions-check",
+        "prompt": "What is the conclusion in that example?",
+        "options": [
+          "Classes exist.",
+          "The timetable needs review.",
+          "Two required classes overlap.",
+          "All required classes must be attendable."
+        ],
+        "answer": 1,
+        "explanation": "Needs review is the judgement supported by the premises."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "assumptions",
+      "title": "Identifying assumptions",
+      "level": "intermediate",
+      "explanation": "An assumption is a step your reasoning relies on without establishing it. Name it and ask what happens if it is false.",
+      "example": "A longer opening period will help only if affected students can and wish to use it.",
+      "check": {
+        "id": "assumptions-check",
+        "prompt": "Which assumption needs checking before an evening-access trial?",
+        "options": [
+          "The notice is printed on paper.",
+          "Every student has identical needs.",
+          "Longer hours can never have costs.",
+          "Affected students can use the proposed evening hours."
+        ],
+        "answer": 3,
+        "explanation": "Potential access depends on whether the relevant students can actually attend."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "causal-arguments",
+      "title": "Cause-and-effect arguments",
+      "level": "intermediate",
+      "explanation": "A causal argument needs a mechanism, timing and consideration of alternative causes. Events occurring together do not by themselves establish causation.",
+      "example": "Hypothetical: If unclear approval responsibility delays a task, naming a responsible officer may reduce that delay.",
+      "check": {
+        "id": "causal-arguments-check",
+        "prompt": "Why is \"attendance rose after the notice, so the notice caused the rise\" incomplete?",
+        "options": [
+          "Other changes could explain the rise.",
+          "Every later event proves causation.",
+          "Timing never matters.",
+          "No causal claim can ever be tested."
+        ],
+        "answer": 0,
+        "explanation": "The sequence is compatible with causation but does not exclude other explanations."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "fallacies",
+      "title": "Recognising common fallacies",
+      "level": "intermediate",
+      "explanation": "A personal attack does not refute reasoning. A false dilemma excludes alternatives without justification. Circular reasoning restates the claim as its reason.",
+      "example": "Circular: This plan is best because no plan is better. That supplies no independent support.",
+      "check": {
+        "id": "fallacies-check",
+        "prompt": "Which statement is circular?",
+        "options": [
+          "The rule is justified because it is a justified rule.",
+          "The rule needs review because it conflicts with another requirement.",
+          "There may be a third option.",
+          "The conclusion needs supporting evidence."
+        ],
+        "answer": 0,
+        "explanation": "The reason merely repeats the conclusion."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "irrelevant-arguments",
+      "title": "Weak and irrelevant arguments",
+      "level": "intermediate",
+      "explanation": "Separate a reason that fails from a conclusion that may still be true. Rejecting one bad argument does not automatically prove the opposite conclusion.",
+      "example": "An irrelevant colour preference does not support extending library hours, but it does not prove that hours should remain unchanged.",
+      "check": {
+        "id": "irrelevant-arguments-check",
+        "prompt": "What follows when a reason is irrelevant?",
+        "options": [
+          "The opposite claim is certainly true.",
+          "Every argument on the topic is false.",
+          "The person must be dishonest.",
+          "That reason does not support the claim."
+        ],
+        "answer": 3,
+        "explanation": "Failure of support is not proof of the opposite position."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "counterarguments",
+      "title": "Constructing a counterargument",
+      "level": "advanced",
+      "explanation": "Present a serious opposing reason in a form an informed opponent might accept. Do not make the opposing view weaker for convenience.",
+      "example": "A concern about longer library hours could be staffing cost and the reliability of supervision.",
+      "check": {
+        "id": "counterarguments-check",
+        "prompt": "Which counterargument engages an access proposal seriously?",
+        "options": [
+          "Longer hours may require staffing resources that are unavailable.",
+          "Opponents hate students.",
+          "Nobody should ever use libraries.",
+          "The proposal has words in it."
+        ],
+        "answer": 0,
+        "explanation": "It identifies a practical constraint relevant to the proposal."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "rebuttal",
+      "title": "Responding with a rebuttal",
+      "level": "advanced",
+      "explanation": "Answer the actual opposing reason. Concede what is valid, show what evidence is needed and explain why your position remains defensible under stated conditions.",
+      "example": "A limited trial could test demand within an agreed staffing budget; it cannot guarantee that costs disappear.",
+      "check": {
+        "id": "rebuttal-check",
+        "prompt": "Which reply addresses a staffing-cost objection?",
+        "options": [
+          "Claim all staff work for free.",
+          "Attack the objector personally.",
+          "Trial limited hours within a stated budget, then compare demand and cost.",
+          "Ignore the cost because the idea is popular."
+        ],
+        "answer": 2,
+        "explanation": "The reply directly addresses the constraint and proposes a test rather than inventing savings."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "nuance",
+      "title": "Qualification and nuance",
+      "level": "advanced",
+      "explanation": "State where your claim applies and where it may fail. A qualified claim can be stronger because its scope matches its reasons and evidence.",
+      "example": "A trial is defensible if supervision and staffing are available; otherwise another access arrangement may be preferable.",
+      "check": {
+        "id": "nuance-check",
+        "prompt": "Which claim is appropriately qualified?",
+        "options": [
+          "Every trial is always successful.",
+          "All alternatives are impossible.",
+          "Success is guaranteed without evidence.",
+          "A trial may be useful where staffing and demand justify it."
+        ],
+        "answer": 3,
+        "explanation": "The qualification connects the claim to relevant conditions."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "argument-paragraph",
+      "title": "Developing an argumentative paragraph",
+      "level": "advanced",
+      "explanation": "Organise a paragraph around one claim, explain the reason, identify suitable evidence and relate it back to the claim. Avoid a list of disconnected slogans.",
+      "example": "Plan: claim about access → mechanism → evidence needed → limitation → qualified conclusion. This is a structure, not a supplied argument.",
+      "check": {
+        "id": "argument-paragraph-check",
+        "prompt": "Which item should explain why evidence supports the claim?",
+        "options": [
+          "A longer title.",
+          "A repeated slogan.",
+          "The reasoning linking the evidence to the claim.",
+          "An unrelated anecdote."
+        ],
+        "answer": 2,
+        "explanation": "Readers need the inferential connection, not merely a pasted fact."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "argument",
+      "id": "argument-evaluation",
+      "title": "Evaluating a complete argument",
+      "level": "advanced",
+      "explanation": "Review relevance, clarity, logical consistency, reasoning, evidence, alternatives, rebuttal and coherence. These instructional criteria are not examiner marks.",
+      "example": "A defensible argument may still need better evidence; do not confuse fluent language with a sound inference.",
+      "check": {
+        "id": "argument-evaluation-check",
+        "prompt": "Which review is most useful?",
+        "options": [
+          "Assign an unexplained precise percentage.",
+          "Praise length alone.",
+          "Assume polished wording proves the claim.",
+          "Identify a specific inference or evidence gap and explain how to test it."
+        ],
+        "answer": 3,
+        "explanation": "Specific criticism helps the writer revise a real weakness."
+      },
+      "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "description-analysis",
+      "title": "Description and analysis",
+      "level": "beginner",
+      "explanation": "Description states what happens. Analysis examines how, why or under what conditions it happens. Neither permits inventing evidence.",
+      "example": "Description: A school uses an online form. Analysis question: How could the form change the time needed to process a request?",
+      "check": {
+        "id": "description-analysis-check",
+        "prompt": "Which question is analytical?",
+        "options": [
+          "Where is its title printed?",
+          "How might the form alter processing time?",
+          "What colour is the form?",
+          "What is the form called?"
+        ],
+        "answer": 1,
+        "explanation": "It asks about a mechanism connecting a change to an outcome."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "causes-effects",
+      "title": "Causes and consequences",
+      "level": "beginner",
+      "explanation": "Separate a proposed cause from its consequences. Explain the intermediate steps, then identify what would need checking.",
+      "example": "Hypothetical chain: unclear instructions → repeated queries → delayed completion. Each link needs evidence.",
+      "check": {
+        "id": "causes-effects-check",
+        "prompt": "What should be added to a list of causes?",
+        "options": [
+          "A guarantee that the list is complete.",
+          "An explanation of how each could produce the outcome.",
+          "An invented statistic.",
+          "An assertion that all causes are equal."
+        ],
+        "answer": 1,
+        "explanation": "Analysis explains links rather than merely naming possible causes."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "variable-relationships",
+      "title": "Relationships between variables",
+      "level": "beginner",
+      "explanation": "A variable is a quantity or characteristic that can differ. Ask how a change in one might relate to another, and whether conditions alter that relationship.",
+      "example": "Hypothetical variables: travel time and attendance. A relationship could differ with transport reliability.",
+      "check": {
+        "id": "variable-relationships-check",
+        "prompt": "Which pair can frame an access analysis?",
+        "options": [
+          "The same word repeated twice.",
+          "A conclusion without any variables.",
+          "An unrelated personal insult.",
+          "Travel time and attendance."
+        ],
+        "answer": 3,
+        "explanation": "The pair allows a relationship to be examined rather than assumed."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "analysis-assumptions",
+      "title": "Recognising assumptions",
+      "level": "beginner",
+      "explanation": "Identify a step taken for granted. Ask whether it is necessary and what evidence could support or challenge it.",
+      "example": "An online service helps only if users have the access and skills needed to use it.",
+      "check": {
+        "id": "analysis-assumptions-check",
+        "prompt": "What assumption underlies a claim that online forms improve everyone’s access?",
+        "options": [
+          "Everyone concerned can access and use the form.",
+          "The form has a name.",
+          "No service has a user.",
+          "Every form is a printed book."
+        ],
+        "answer": 0,
+        "explanation": "The universal claim relies on access and usability, which need checking."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "evidence-quality",
+      "title": "Evaluating evidence",
+      "level": "beginner",
+      "explanation": "Consider source, date, method, population and relevance. A small self-selected response does not automatically represent everyone.",
+      "example": "A voluntary class survey may reveal respondents’ views but cannot alone establish the whole school’s preferences.",
+      "check": {
+        "id": "evidence-quality-check",
+        "prompt": "What limitation should be noted for a voluntary survey?",
+        "options": [
+          "Every respondent must be lying.",
+          "The survey proves the views of everyone.",
+          "Dates and sample selection never matter.",
+          "Respondents may differ from nonrespondents."
+        ],
+        "answer": 3,
+        "explanation": "Selection can affect what the findings represent."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "competing-explanations",
+      "title": "Competing explanations",
+      "level": "intermediate",
+      "explanation": "Develop plausible alternatives and ask what observations could distinguish them. Do not list alternatives and then ignore them.",
+      "example": "Absence could relate to travel, class timing or illness; different records would help distinguish these explanations.",
+      "check": {
+        "id": "competing-explanations-check",
+        "prompt": "What makes an alternative explanation useful?",
+        "options": [
+          "A clear prediction that can be compared with observations.",
+          "Its ability to sound complicated.",
+          "A made-up citation.",
+          "Its repetition of the first explanation."
+        ],
+        "answer": 0,
+        "explanation": "A discriminating prediction helps test competing explanations."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "correlation-causation",
+      "title": "Correlation and causation",
+      "level": "intermediate",
+      "explanation": "Association does not establish causal direction or exclude a third factor. Examine mechanism, sequence and competing explanations.",
+      "example": "Two outcomes might both change after a timetable revision; this does not alone show that one caused the other.",
+      "check": {
+        "id": "correlation-causation-check",
+        "prompt": "What could explain an observed association besides direct causation?",
+        "options": [
+          "All observations must be fabricated.",
+          "Mechanisms cannot matter.",
+          "A third factor affecting both variables.",
+          "The association is necessarily proof."
+        ],
+        "answer": 2,
+        "explanation": "A common cause can produce association without direct causation between the measured variables."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "institutional-factors",
+      "title": "Institutional and structural factors",
+      "level": "intermediate",
+      "explanation": "Look beyond individual intention to rules, resources, responsibilities and incentives. These factors are possible explanations, not excuses or automatic causes.",
+      "example": "A request may wait because no office has a clear approval responsibility, even when individuals want to help.",
+      "check": {
+        "id": "institutional-factors-check",
+        "prompt": "Which is an institutional factor?",
+        "options": [
+          "A person’s favourite colour.",
+          "An unrelated weather description.",
+          "A nickname for the office.",
+          "The rule assigning approval responsibility."
+        ],
+        "answer": 3,
+        "explanation": "The rule governs how the institution processes decisions."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "dimensions",
+      "title": "Analysing multiple dimensions",
+      "level": "intermediate",
+      "explanation": "Choose dimensions relevant to the issue: resources, implementation, distribution, incentives or rights. More headings do not help unless each affects the reasoning.",
+      "example": "A hypothetical education initiative can be examined for access, teaching capacity, cost and unequal effects.",
+      "check": {
+        "id": "dimensions-check",
+        "prompt": "When should a dimension be included?",
+        "options": [
+          "Even when it has no connection to the issue.",
+          "When it changes an explanation, consequence or judgement.",
+          "Whenever it makes the answer longer.",
+          "Only because it sounds academic."
+        ],
+        "answer": 1,
+        "explanation": "Relevant dimensions deepen reasoning; unrelated headings add clutter."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "time-horizons",
+      "title": "Short- and long-term implications",
+      "level": "intermediate",
+      "explanation": "Separate immediate effects from effects that depend on adaptation, maintenance or changed incentives. State uncertainty about future outcomes.",
+      "example": "A new system may take training time now and might reduce repeated work later; both claims need evidence.",
+      "check": {
+        "id": "time-horizons-check",
+        "prompt": "Which comparison distinguishes time horizons?",
+        "options": [
+          "An unrelated comparison of colours.",
+          "Initial training costs versus possible later processing gains.",
+          "Two names for the same moment.",
+          "A guarantee about all future outcomes."
+        ],
+        "answer": 1,
+        "explanation": "It compares immediate demands with outcomes that could emerge later."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "trade-offs",
+      "title": "Identifying trade-offs",
+      "level": "advanced",
+      "explanation": "A trade-off arises when improving one objective can constrain another. Explain what is gained, what may be lost and who bears the consequences.",
+      "example": "Longer opening hours may improve access but require more staffing or a narrower range of services.",
+      "check": {
+        "id": "trade-offs-check",
+        "prompt": "Which question tests a trade-off?",
+        "options": [
+          "Can we assume unlimited resources?",
+          "Is every cost imaginary?",
+          "Can the title be longer?",
+          "What other service might lose resources if hours are extended?"
+        ],
+        "answer": 3,
+        "explanation": "It examines an opportunity cost relevant to the decision."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "counterfactuals",
+      "title": "Counterfactual thinking",
+      "level": "advanced",
+      "explanation": "A counterfactual asks what might happen without the proposed cause or intervention. It helps distinguish the effect of a change from an existing trend.",
+      "example": "To assess a new timetable, ask how attendance might have changed under the previous timetable over the same period.",
+      "check": {
+        "id": "counterfactuals-check",
+        "prompt": "What is the relevant counterfactual?",
+        "options": [
+          "Attendance during that period if the timetable had not changed.",
+          "Attendance after the change only.",
+          "An unrelated school’s name.",
+          "The assumption that attendance cannot change."
+        ],
+        "answer": 0,
+        "explanation": "The comparison concerns the outcome in the absence of the change."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "solution-comparison",
+      "title": "Comparing proposed solutions",
+      "level": "advanced",
+      "explanation": "Apply consistent criteria such as feasibility, cost, access and unintended effects. State the evidence and assumptions behind each comparison.",
+      "example": "Compare a later opening time with an evening trial using the same access and staffing criteria.",
+      "check": {
+        "id": "solution-comparison-check",
+        "prompt": "What makes a comparison fair?",
+        "options": [
+          "Inventing lower costs for the preferred option.",
+          "Ignoring every implementation constraint.",
+          "Using the same relevant criteria for both options.",
+          "Changing the criteria to favour one option."
+        ],
+        "answer": 2,
+        "explanation": "Consistent criteria let the reader assess the trade-off."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "balanced-conclusions",
+      "title": "Balanced conclusions",
+      "level": "advanced",
+      "explanation": "A balanced conclusion weighs the evidence rather than giving equal weight to every view. State the most defensible judgement and the conditions or uncertainty that remain.",
+      "example": "A limited trial may be preferable if supervision is feasible; otherwise a different arrangement needs consideration.",
+      "check": {
+        "id": "balanced-conclusions-check",
+        "prompt": "Which conclusion is appropriately bounded?",
+        "options": [
+          "The trial is defensible if the staffing condition can be met.",
+          "Every view is equally supported regardless of evidence.",
+          "The trial is certain to solve every problem.",
+          "No conclusion is ever possible."
+        ],
+        "answer": 0,
+        "explanation": "It takes a position while retaining a relevant condition."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    },
+    {
+      "feature": "analysis",
+      "id": "analytical-paragraph",
+      "title": "Constructing an analytical paragraph",
+      "level": "advanced",
+      "explanation": "Develop a controlling judgement, explain a mechanism, examine an alternative, state evidence needs and reach a qualified conclusion. A list of facts is insufficient.",
+      "example": "Outline only: issue → mechanism → competing explanation → evidence needed → conditional judgement. The writer supplies the analysis.",
+      "check": {
+        "id": "analytical-paragraph-check",
+        "prompt": "Which element changes a descriptive list into analysis?",
+        "options": [
+          "Using longer words without clearer reasoning.",
+          "Explaining and testing relationships between the observations.",
+          "Adding more unexplained facts.",
+          "Repeating the issue title."
+        ],
+        "answer": 1,
+        "explanation": "Analysis depends on reasoned relationships and evidence, not length."
+      },
+      "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+      "grammar_day": null,
+      "attribution": "Original CSS Vista instructional example; not an authentic past-paper question."
+    }
+  ]
+}

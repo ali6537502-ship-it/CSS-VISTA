@@ -6,6 +6,9 @@ export const helpModes = {
   check_understanding: 'Check my understanding',
 } as const
 export const areas = {
+  ability: 'General Ability lessons',
+  topic: 'Published Pro topic lessons',
+  skills: 'My guided writing and reasoning',
   grammar: 'English & Grammar',
   precis: 'Précis methods',
   maths: 'Maths concepts',
@@ -27,6 +30,8 @@ export type TutorContext = {
   category: Area
   title: string
   text: string
+  authoritative_text?: string
+  level?: 'beginner' | 'intermediate' | 'advanced'
   attribution: string
   date: string | null
   return_path: string

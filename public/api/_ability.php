@@ -12,8 +12,15 @@ function cssv_ability_ensure(PDO $pdo): void {
 }
 function cssv_ability_summary(PDO $pdo,string $user): array {
     $course=cssv_ability_course();$version=$course['version'];
-    $q=$pdo->prepare('SELECT unit_id,mode,lesson_id,MAX(score) AS best,COUNT(*) AS tries FROM ability_responses WHERE user_id=? AND course_version=? GROUP BY unit_id,mode,lesson_id');$q->execute([$user,$version]);
-    $evidence=[];foreach($q->fetchAll() as $row)$evidence[$row['unit_id']][$row['mode']][$row['lesson_id']]=['best'=>(int)$row['best'],'tries'=>(int)$row['tries']];
+    $compatible=[$version];foreach($course['units'] as $unit)$compatible=array_merge($compatible,cssv_ability_versions($unit['id']));$compatible=array_values(array_unique($compatible));
+    $marks=implode(',',array_fill(0,count($compatible),'?'));
+    $q=$pdo->prepare('SELECT course_version,unit_id,mode,lesson_id,MAX(score) AS best,COUNT(*) AS tries FROM ability_responses WHERE user_id=? AND course_version IN ('.$marks.') GROUP BY course_version,unit_id,mode,lesson_id');$q->execute([$user,...$compatible]);
+    $evidence=[];foreach($q->fetchAll() as $row){
+        try{$valid=in_array($row['course_version'],cssv_ability_versions($row['unit_id']),true);}catch(OutOfBoundsException){$valid=false;}
+        if(!$valid)continue;
+        $prior=$evidence[$row['unit_id']][$row['mode']][$row['lesson_id']]??['best'=>0,'tries'=>0];
+        $evidence[$row['unit_id']][$row['mode']][$row['lesson_id']]=['best'=>max($prior['best'],(int)$row['best']),'tries'=>$prior['tries']+(int)$row['tries']];
+    }
     $units=[];
     foreach($course['units'] as $unit){
         $record=$evidence[$unit['id']]??[];$done=[];
@@ -24,12 +31,15 @@ function cssv_ability_summary(PDO $pdo,string $user): array {
             'completed_lessons'=>$done,'quiz_best'=>$quiz['best'],'quiz_tries'=>$quiz['tries'],
             'complete'=>count($done)===count($unit['lessons'])&&($quiz['best']??0)>=80];
     }
-    $q=$pdo->prepare('SELECT unit_id,lesson_id FROM ability_positions WHERE user_id=? AND course_version=?');$q->execute([$user,$version]);
-    return ['course_version'=>$version,'edition'=>$course['edition'],'attribution'=>$course['attribution'],'units'=>$units,'position'=>$q->fetch()?:null];
+    $q=$pdo->prepare('SELECT course_version,unit_id,lesson_id FROM ability_positions WHERE user_id=? AND course_version IN ('.$marks.') ORDER BY updated_at DESC');$q->execute([$user,...$compatible]);$position=null;
+    foreach($q->fetchAll() as $row){try{if(in_array($row['course_version'],cssv_ability_versions($row['unit_id']),true)){$position=array_intersect_key($row,array_flip(['unit_id','lesson_id']));break;}}catch(OutOfBoundsException){}}
+
+    return ['course_version'=>$version,'edition'=>$course['edition'],'attribution'=>$course['attribution'],'units'=>$units,'position'=>$position];
 }
 function cssv_ability_latest(PDO $pdo,string $user,string $unit): array {
-    $q=$pdo->prepare('SELECT result FROM (SELECT result,ROW_NUMBER() OVER(PARTITION BY mode,lesson_id ORDER BY created_at DESC,id DESC) AS rank_num FROM ability_responses WHERE user_id=? AND course_version=? AND unit_id=?) sampled WHERE rank_num=1');
-    $q->execute([$user,cssv_ability_course()['version'],$unit]);
+    $versions=cssv_ability_versions($unit);$marks=implode(',',array_fill(0,count($versions),'?'));
+    $q=$pdo->prepare('SELECT result FROM (SELECT result,ROW_NUMBER() OVER(PARTITION BY mode,lesson_id ORDER BY created_at DESC,id DESC) AS rank_num FROM ability_responses WHERE user_id=? AND course_version IN ('.$marks.') AND unit_id=?) sampled WHERE rank_num=1');
+    $q->execute([$user,...$versions,$unit]);
     return array_map(fn($row)=>json_decode($row['result'],true,32,JSON_THROW_ON_ERROR),$q->fetchAll());
 }
 function cssv_ability_receipt(PDO $pdo,string $user,string $request): array {

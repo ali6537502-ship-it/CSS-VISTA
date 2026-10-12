@@ -1,6 +1,6 @@
 {
   "title": "General Ability",
-  "edition": "2026-10-11-v1",
+  "edition": "2026-10-11-v2",
   "attribution": "Original CSS Vista learning exercises; not presented as authentic past-paper questions.",
   "units": [
     {
@@ -3026,6 +3026,1003 @@
           "explanation": "4/3 × 3.14 × 27 = 113.04 cm³."
         }
       ]
+    },
+    {
+      "id": "logical-reasoning",
+      "title": "Logical reasoning & conditional statements",
+      "stage": "Logical reasoning",
+      "summary": "Separate valid inference from assumptions using the stated premises alone.",
+      "lessons": [
+        {
+          "id": "logical-reasoning-1",
+          "title": "Use a sufficient condition",
+          "idea": "If P then Q says that whenever P holds, Q must hold. It does not say that Q has only one possible cause.",
+          "rule": "P → Q and P together entail Q.",
+          "example": {
+            "problem": "If a card is red, it is marked. This card is red. What follows?",
+            "steps": [
+              "Write red as P and marked as Q.",
+              "The rule and P give Q: the card is marked."
+            ]
+          },
+          "exercise": {
+            "id": "logical-reasoning-practice-1",
+            "prompt": "If a file is urgent (P), it is flagged (Q). It is urgent. What must follow?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "It is not urgent.",
+              "Every flagged file must be urgent.",
+              "It is flagged.",
+              "It is not flagged."
+            ],
+            "answer": 2,
+            "proof": {
+              "type": "logic",
+              "given": [
+                "P->Q",
+                "P"
+              ],
+              "formulas": [
+                "!P",
+                "rule:Q->P",
+                "Q",
+                "!Q"
+              ]
+            },
+            "explanation": "The stated rule applies because the sufficient condition P is present."
+          }
+        },
+        {
+          "id": "logical-reasoning-2",
+          "title": "Avoid reversing a condition",
+          "idea": "A result does not identify its only cause. If P implies Q, seeing Q alone does not establish P.",
+          "rule": "Check a counterexample: P false and Q true can satisfy P → Q.",
+          "example": {
+            "problem": "If a card is red it is marked. A card is marked. Is it necessarily red?",
+            "steps": [
+              "A blue card could also be marked.",
+              "The rule never said only red cards are marked.",
+              "Do not infer red from marked alone."
+            ]
+          },
+          "exercise": {
+            "id": "logical-reasoning-practice-2",
+            "prompt": "Given P → Q and Q, which statement is NOT guaranteed?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "P is true.",
+              "Q is true.",
+              "If P is true, Q is true.",
+              "If Q is false, P is false."
+            ],
+            "answer": 0,
+            "proof": {
+              "type": "logic",
+              "given": [
+                "P->Q",
+                "Q"
+              ],
+              "formulas": [
+                "P",
+                "Q",
+                "P->Q",
+                "!Q->!P"
+              ],
+              "task": "not_entailed"
+            },
+            "explanation": "The case P false and Q true satisfies both premises, so P is not guaranteed."
+          }
+        },
+        {
+          "id": "logical-reasoning-3",
+          "title": "Use the contrapositive",
+          "idea": "A conditional statement has an equivalent contrapositive: if the result is absent, its sufficient condition cannot be present.",
+          "rule": "P → Q entails not Q → not P.",
+          "example": {
+            "problem": "If a valid pass exists, entry is allowed. Entry is not allowed. What follows under this stated rule?",
+            "steps": [
+              "Let valid pass be P and allowed entry be Q.",
+              "Q is false. If P were true the rule would require Q.",
+              "Therefore P must be false."
+            ]
+          },
+          "exercise": {
+            "id": "logical-reasoning-practice-3",
+            "prompt": "Given P → Q and not Q, what must be true?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "P.",
+              "Q.",
+              "Q implies P.",
+              "Not P."
+            ],
+            "answer": 3,
+            "proof": {
+              "type": "logic",
+              "given": [
+                "P->Q",
+                "!Q"
+              ],
+              "formulas": [
+                "P",
+                "Q",
+                "rule:Q->P",
+                "!P"
+              ]
+            },
+            "explanation": "P would force Q, contradicting not Q, so not P follows. The converse is not guaranteed by the rule alone."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "logical-reasoning-quiz-1",
+          "prompt": "A permit (P) requires a signature (Q). A permit exists. Which follows?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "No permit exists.",
+            "Every signature produces a permit.",
+            "A signature exists.",
+            "No signature exists."
+          ],
+          "answer": 2,
+          "proof": {
+            "type": "logic",
+            "given": [
+              "P->Q",
+              "P"
+            ],
+            "formulas": [
+              "!P",
+              "rule:Q->P",
+              "Q",
+              "!Q"
+            ]
+          },
+          "explanation": "The sufficient condition P is present, so Q follows."
+        },
+        {
+          "id": "logical-reasoning-quiz-2",
+          "prompt": "If P then Q. Given not Q, choose the valid conclusion.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "P.",
+            "Q.",
+            "If P is false, Q must be true.",
+            "Not P."
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "logic",
+            "given": [
+              "P->Q",
+              "!Q"
+            ],
+            "formulas": [
+              "P",
+              "Q",
+              "!P->Q",
+              "!P"
+            ]
+          },
+          "explanation": "A true P would imply Q and contradict not Q."
+        },
+        {
+          "id": "logical-reasoning-quiz-3",
+          "prompt": "If P then Q. Which conditional is equivalent?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "If Q then P.",
+            "If not P then not Q.",
+            "P must be true.",
+            "If not Q then not P."
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "logic",
+            "given": [
+              "P->Q"
+            ],
+            "formulas": [
+              "Q->P",
+              "!P->!Q",
+              "P",
+              "!Q->!P"
+            ]
+          },
+          "explanation": "The contrapositive retains the same truth conditions."
+        },
+        {
+          "id": "logical-reasoning-quiz-4",
+          "prompt": "If P then Q. P is false. Which is NOT guaranteed?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "If not Q then not P.",
+            "Q is false.",
+            "P is false.",
+            "If P then Q."
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "logic",
+            "given": [
+              "P->Q",
+              "!P"
+            ],
+            "formulas": [
+              "!Q->!P",
+              "!Q",
+              "!P",
+              "P->Q"
+            ],
+            "task": "not_entailed"
+          },
+          "explanation": "Q may still be true for another reason; denying P does not determine Q."
+        },
+        {
+          "id": "logical-reasoning-quiz-5",
+          "prompt": "If P then Q and Q is true, which is NOT guaranteed?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "If P then Q.",
+            "If not Q then not P.",
+            "If Q then P.",
+            "Q is true."
+          ],
+          "answer": 2,
+          "proof": {
+            "type": "logic",
+            "given": [
+              "P->Q",
+              "Q"
+            ],
+            "formulas": [
+              "P->Q",
+              "!Q->!P",
+              "Q->P",
+              "Q"
+            ],
+            "task": "not_entailed"
+          },
+          "explanation": "The converse can fail when Q is true and P is false."
+        }
+      ]
+    },
+    {
+      "id": "ordering-arrangements",
+      "title": "Ordering & arrangements",
+      "stage": "Logical reasoning",
+      "summary": "Translate each stated restriction into positions, test all constraints, and avoid assuming a unique arrangement.",
+      "lessons": [
+        {
+          "id": "ordering-arrangements-1",
+          "title": "Before and after",
+          "idea": "Before specifies relative order; it does not necessarily mean immediately before. List positions left to right and test the rule.",
+          "rule": "A before B means position(A) < position(B).",
+          "example": {
+            "problem": "Arrange A, B and C with C before A. Is BCA allowed?",
+            "steps": [
+              "C is second and A third.",
+              "C is before A even though B comes first.",
+              "The listed order BCA is allowed."
+            ]
+          },
+          "exercise": {
+            "id": "ordering-arrangements-practice-1",
+            "prompt": "A must come before B. Which listed order is allowed?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "CBA",
+              "ACB",
+              "BAC",
+              "BCA"
+            ],
+            "answer": 1,
+            "proof": {
+              "type": "order",
+              "people": "ABC",
+              "before": [
+                [
+                  "A",
+                  "B"
+                ]
+              ]
+            },
+            "explanation": "In ACB, A is before B. Each other listed arrangement puts B before A."
+          }
+        },
+        {
+          "id": "ordering-arrangements-2",
+          "title": "Adjacent positions",
+          "idea": "Adjacent means next to each other, with no position between. Unless the order is specified, either direction can meet an adjacency rule.",
+          "rule": "Adjacent positions differ by exactly one.",
+          "example": {
+            "problem": "In CADB, are A and D adjacent?",
+            "steps": [
+              "A occupies position 2; D position 3.",
+              "Their position difference is 1.",
+              "They are adjacent."
+            ]
+          },
+          "exercise": {
+            "id": "ordering-arrangements-practice-2",
+            "prompt": "A and B must be adjacent, C first, and B before D. Which listed order is allowed?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "CABD",
+              "CADB",
+              "CDAB",
+              "ACBD"
+            ],
+            "answer": 0,
+            "proof": {
+              "type": "order",
+              "people": "ABCD",
+              "adjacent": [
+                [
+                  "A",
+                  "B"
+                ]
+              ],
+              "fixed": [
+                [
+                  0,
+                  "C"
+                ]
+              ],
+              "before": [
+                [
+                  "B",
+                  "D"
+                ]
+              ]
+            },
+            "explanation": "The prompt also needs B before D for a unique listed answer."
+          }
+        },
+        {
+          "id": "ordering-arrangements-3",
+          "title": "Combine restrictions",
+          "idea": "Test each rule independently. A plausible-looking order may satisfy one condition and violate another. Eliminate only when a stated rule fails.",
+          "rule": "Check fixed positions, relative order and adjacency separately.",
+          "example": {
+            "problem": "D must be last; A before B. Test CABD.",
+            "steps": [
+              "D is last.",
+              "A is second, before B in third.",
+              "Both stated rules hold."
+            ]
+          },
+          "exercise": {
+            "id": "ordering-arrangements-practice-3",
+            "prompt": "D must be last, A before B, and C before A. Which order works?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "ACBD",
+              "CBAD",
+              "DABC",
+              "CABD"
+            ],
+            "answer": 3,
+            "proof": {
+              "type": "order",
+              "people": "ABCD",
+              "fixed": [
+                [
+                  3,
+                  "D"
+                ]
+              ],
+              "before": [
+                [
+                  "A",
+                  "B"
+                ],
+                [
+                  "C",
+                  "A"
+                ]
+              ]
+            },
+            "explanation": "CABD satisfies all three rules; the alternatives violate at least one."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "ordering-arrangements-quiz-1",
+          "prompt": "B before C and A last: choose a valid listed order.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "BCA",
+            "CBA",
+            "ABC",
+            "CAB"
+          ],
+          "answer": 0,
+          "proof": {
+            "type": "order",
+            "people": "ABC",
+            "before": [
+              [
+                "B",
+                "C"
+              ]
+            ],
+            "fixed": [
+              [
+                2,
+                "A"
+              ]
+            ]
+          },
+          "explanation": "BCA places B before C and A last."
+        },
+        {
+          "id": "ordering-arrangements-quiz-2",
+          "prompt": "A first and D before B: which listed order works?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "ACBD",
+            "ADCB",
+            "ABCD",
+            "DACB"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "order",
+            "people": "ABCD",
+            "fixed": [
+              [
+                0,
+                "A"
+              ]
+            ],
+            "before": [
+              [
+                "D",
+                "B"
+              ]
+            ]
+          },
+          "explanation": "Only ADCB meets both stated rules among the options."
+        },
+        {
+          "id": "ordering-arrangements-quiz-3",
+          "prompt": "B and C adjacent, A first, D last: choose the allowed option.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "ACDB",
+            "BACD",
+            "ADBC",
+            "ABCD"
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "order",
+            "people": "ABCD",
+            "fixed": [
+              [
+                0,
+                "A"
+              ],
+              [
+                3,
+                "D"
+              ]
+            ],
+            "adjacent": [
+              [
+                "B",
+                "C"
+              ]
+            ]
+          },
+          "explanation": "ABCD keeps A first, D last and B next to C."
+        },
+        {
+          "id": "ordering-arrangements-quiz-4",
+          "prompt": "C before A before B, D last: choose the allowed option.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "ACBD",
+            "CBAD",
+            "BCAD",
+            "CABD"
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "order",
+            "people": "ABCD",
+            "fixed": [
+              [
+                3,
+                "D"
+              ]
+            ],
+            "before": [
+              [
+                "C",
+                "A"
+              ],
+              [
+                "A",
+                "B"
+              ]
+            ]
+          },
+          "explanation": "The relative order C, A, B and final D give CABD."
+        },
+        {
+          "id": "ordering-arrangements-quiz-5",
+          "prompt": "A and D adjacent, B first and C last: choose a valid listed order.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "ABDC",
+            "BACD",
+            "BDCA",
+            "BADC"
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "order",
+            "people": "ABCD",
+            "fixed": [
+              [
+                0,
+                "B"
+              ],
+              [
+                3,
+                "C"
+              ]
+            ],
+            "adjacent": [
+              [
+                "A",
+                "D"
+              ]
+            ]
+          },
+          "explanation": "BADC has the required endpoints and adjacent A/D."
+        }
+      ]
+    },
+    {
+      "id": "coding-decoding",
+      "title": "Coding & decoding",
+      "stage": "Logical reasoning",
+      "summary": "Use the explicitly stated coding rule, handle alphabet wraparound, and reverse a code without guessing a pattern.",
+      "lessons": [
+        {
+          "id": "coding-decoding-1",
+          "title": "Apply a stated shift",
+          "idea": "A letter code changes symbols according to a given rule. A limited example alone can admit many rules; use the rule provided in the question.",
+          "rule": "For a shift of +1, A → B and Z → A.",
+          "example": {
+            "problem": "Shift DOG forward by one.",
+            "steps": [
+              "D → E; O → P; G → H.",
+              "The code is EPH."
+            ]
+          },
+          "exercise": {
+            "id": "coding-decoding-practice-1",
+            "prompt": "Shift CAT forward by one letter, wrapping Z to A.",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "DBT",
+              "CBU",
+              "DZU",
+              "DBU"
+            ],
+            "answer": 3,
+            "proof": {
+              "type": "shift",
+              "word": "CAT",
+              "shift": 1
+            },
+            "explanation": "C → D, A → B, T → U, so CAT becomes DBU."
+          }
+        },
+        {
+          "id": "coding-decoding-2",
+          "title": "Wrap around the alphabet",
+          "idea": "Alphabet positions run from 0 to 25 for calculation. Add the shift and take the remainder after division by 26.",
+          "rule": "New position = (old position + shift) mod 26.",
+          "example": {
+            "problem": "Shift ZOO forward by two.",
+            "steps": [
+              "Z wraps to B; O becomes Q.",
+              "The result is BQQ."
+            ]
+          },
+          "exercise": {
+            "id": "coding-decoding-practice-2",
+            "prompt": "Shift YAK forward by three letters with wraparound.",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "BDM",
+              "ABN",
+              "CBN",
+              "BDN"
+            ],
+            "answer": 3,
+            "proof": {
+              "type": "shift",
+              "word": "YAK",
+              "shift": 3
+            },
+            "explanation": "Y → B, A → D, K → N, giving BDN."
+          }
+        },
+        {
+          "id": "coding-decoding-3",
+          "title": "Reverse the stated code",
+          "idea": "Decoding reverses each step of the given transformation. A forward shift of three is undone by a backward shift of three.",
+          "rule": "Subtract the encoding shift and wrap around.",
+          "example": {
+            "problem": "Decode FDW if the encoding used a forward shift of three.",
+            "steps": [
+              "F → C, D → A, W → T.",
+              "The original word is CAT."
+            ]
+          },
+          "exercise": {
+            "id": "coding-decoding-practice-3",
+            "prompt": "Decode EPH if encoding shifted each letter forward by one.",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "DOG",
+              "FOI",
+              "DPG",
+              "DNG"
+            ],
+            "answer": 0,
+            "proof": {
+              "type": "shift",
+              "word": "EPH",
+              "shift": -1
+            },
+            "explanation": "Move E, P and H one place backward to D, O and G."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "coding-decoding-quiz-1",
+          "prompt": "Shift SUN by +2 alphabet positions; wrap around at either end.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "VWP",
+            "UWP",
+            "TVO",
+            "UWO"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "shift",
+            "word": "SUN",
+            "shift": 2
+          },
+          "explanation": "Apply the stated shift to every letter, using alphabet wraparound; the answer is UWP."
+        },
+        {
+          "id": "coding-decoding-quiz-2",
+          "prompt": "Shift ZEBRA by +1 alphabet positions; wrap around at either end.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "AECQB",
+            "ZFCSB",
+            "BGDTC",
+            "AFCSB"
+          ],
+          "answer": 3,
+          "proof": {
+            "type": "shift",
+            "word": "ZEBRA",
+            "shift": 1
+          },
+          "explanation": "Apply the stated shift to every letter, using alphabet wraparound; the answer is AFCSB."
+        },
+        {
+          "id": "coding-decoding-quiz-3",
+          "prompt": "Shift BOOK by -1 alphabet positions; wrap around at either end.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "BNNJ",
+            "ANNJ",
+            "CPPL",
+            "ANOJ"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "shift",
+            "word": "BOOK",
+            "shift": -1
+          },
+          "explanation": "Apply the stated shift to every letter, using alphabet wraparound; the answer is ANNJ."
+        },
+        {
+          "id": "coding-decoding-quiz-4",
+          "prompt": "Shift AXE by +3 alphabet positions; wrap around at either end.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "EBI",
+            "DAH",
+            "DAF",
+            "CXH"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "shift",
+            "word": "AXE",
+            "shift": 3
+          },
+          "explanation": "Apply the stated shift to every letter, using alphabet wraparound; the answer is DAH."
+        },
+        {
+          "id": "coding-decoding-quiz-5",
+          "prompt": "Shift BCD by -2 alphabet positions; wrap around at either end.",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "ZAB",
+            "ABC",
+            "CDE",
+            "YZA"
+          ],
+          "answer": 0,
+          "proof": {
+            "type": "shift",
+            "word": "BCD",
+            "shift": -2
+          },
+          "explanation": "Apply the stated shift to every letter, using alphabet wraparound; the answer is ZAB."
+        }
+      ]
+    },
+    {
+      "id": "classification",
+      "title": "Classification & the stated odd one out",
+      "stage": "Logical reasoning",
+      "summary": "Classify with an explicit common property rather than relying on a guessed pattern or a subjective association.",
+      "lessons": [
+        {
+          "id": "classification-1",
+          "title": "Use an explicit property",
+          "idea": "An odd-one-out task needs a stated or defensible grouping rule. Several rules can fit a short list; this course states the property to avoid ambiguity.",
+          "rule": "Even integers are divisible by two with no remainder.",
+          "example": {
+            "problem": "Among 12, 18, 21 and 26, find the one that is not even.",
+            "steps": [
+              "12, 18 and 26 divide by two.",
+              "21 does not, so it is the odd one out under this rule."
+            ]
+          },
+          "exercise": {
+            "id": "classification-practice-1",
+            "prompt": "Which number is NOT even?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "22",
+              "31",
+              "48",
+              "14"
+            ],
+            "answer": 1,
+            "proof": {
+              "type": "classify",
+              "property": "even"
+            },
+            "explanation": "31 is odd; the other three are divisible by two."
+          }
+        },
+        {
+          "id": "classification-2",
+          "title": "Prime versus composite",
+          "idea": "A prime is an integer greater than one with exactly two positive divisors. One is not prime. Test factors up to the square root.",
+          "rule": "A composite integer greater than one has a nontrivial divisor.",
+          "example": {
+            "problem": "Among 11, 13, 15 and 17, which is not prime?",
+            "steps": [
+              "15 = 3 × 5.",
+              "11, 13 and 17 have no nontrivial divisor.",
+              "15 is the exception."
+            ]
+          },
+          "exercise": {
+            "id": "classification-practice-2",
+            "prompt": "Which of these numbers is NOT prime?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "19",
+              "23",
+              "27",
+              "29"
+            ],
+            "answer": 2,
+            "proof": {
+              "type": "classify",
+              "property": "prime"
+            },
+            "explanation": "27 = 3 × 9; the other listed numbers are prime."
+          }
+        },
+        {
+          "id": "classification-3",
+          "title": "Recognise exact powers",
+          "idea": "A perfect square is k × k for an integer k. A perfect cube is k × k × k. Nearby values do not count as exact powers.",
+          "rule": "Check the exact power, not just its approximate size.",
+          "example": {
+            "problem": "Which is not a square: 16, 25, 35 or 49?",
+            "steps": [
+              "4² = 16, 5² = 25, 7² = 49.",
+              "35 is between 5² and 6², so it is not an integer square."
+            ]
+          },
+          "exercise": {
+            "id": "classification-practice-3",
+            "prompt": "Which listed positive integer is NOT a perfect square?",
+            "unit": "listed option",
+            "kind": "choice",
+            "options": [
+              "49",
+              "63",
+              "81",
+              "36"
+            ],
+            "answer": 1,
+            "proof": {
+              "type": "classify",
+              "property": "square"
+            },
+            "explanation": "63 lies strictly between 7² = 49 and 8² = 64."
+          }
+        }
+      ],
+      "quiz": [
+        {
+          "id": "classification-quiz-1",
+          "prompt": "Which listed number is NOT a multiple of three?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "35",
+            "42",
+            "18",
+            "24"
+          ],
+          "answer": 0,
+          "proof": {
+            "type": "classify",
+            "property": "multiple3"
+          },
+          "explanation": "35 is not divisible by three; the other choices are."
+        },
+        {
+          "id": "classification-quiz-2",
+          "prompt": "Which number is NOT prime?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "39",
+            "41",
+            "31",
+            "37"
+          ],
+          "answer": 0,
+          "proof": {
+            "type": "classify",
+            "property": "prime"
+          },
+          "explanation": "39 = 3 × 13, whereas the other choices are prime."
+        },
+        {
+          "id": "classification-quiz-3",
+          "prompt": "Which number is NOT a perfect square?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "121",
+            "128",
+            "64",
+            "100"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "classify",
+            "property": "square"
+          },
+          "explanation": "128 lies between 11² = 121 and 12² = 144."
+        },
+        {
+          "id": "classification-quiz-4",
+          "prompt": "Which number is NOT a perfect cube?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "64",
+            "100",
+            "8",
+            "27"
+          ],
+          "answer": 1,
+          "proof": {
+            "type": "classify",
+            "property": "cube"
+          },
+          "explanation": "2³ = 8, 3³ = 27 and 4³ = 64; 100 is not an integer cube."
+        },
+        {
+          "id": "classification-quiz-5",
+          "prompt": "Which listed number is NOT even?",
+          "unit": "listed option",
+          "kind": "choice",
+          "options": [
+            "102",
+            "208",
+            "315",
+            "416"
+          ],
+          "answer": 2,
+          "proof": {
+            "type": "classify",
+            "property": "even"
+          },
+          "explanation": "315 is odd; the other listed numbers are even."
+        }
+      ]
     }
-  ]
+  ],
+  "previous_editions": {
+    "f47480f3046e4442caa36490ba95d9f296baf2323dd3d9fa11a692d4742bfc61": {
+      "number-sense": "7b46e94fa0c95d5ed2a499510ea03009aab515913392fa95481eddc3d325e0ac",
+      "basic-calculation": "f2a4285c5412ea74f104840188b825cc5749586d4bc69e2dcc79e85b91cf300c",
+      "hcf-lcm": "0c3e00e2c70bf099877d380cd50e14095b021b6304e0ab2193e6353605dcc22c",
+      "fractions": "64dc703350893680d8ab0c4d71f3e91d02b2fb7adf8334a397330f69c6a24c40",
+      "decimals": "b2f20d56593e07c0340bd56e545371477066d584689f8434a8f88f90f6672b90",
+      "percentages": "d46898406013365dd3b8ebb921486947447c38cd3a8ca7a057d85f11d5b1d7a0",
+      "ratio-proportion": "d43d4fb46e0af50dd48e513fb7992b6a7e753aa5792f94013128d0b0b05dae54",
+      "averages": "42bd39a9c5fb26aa5a8b2072ec6b54a4ddf3aa24eb17ac2fd6f60c3c31ab0b31",
+      "profit-loss": "e7f7f71ab653377c69f33fb850ea8c521181c6b8f47a17c055b5aeec970a0f47",
+      "discounts": "93ef3181d94e98c74e11a98c29e9a5a309327c2f80c912fd0da21730442b9f25",
+      "time-work": "6d4aab12d4c61efd70ed2d7331135ef40171afee130514d64d753999f0c8a635",
+      "speed-distance": "b8336068c0c403782f8c69e4c8e6631b5930e1383bb3f4ae9381ffff16afacef",
+      "age-problems": "54023ca8fdc96c79d9e5e9882d91cd0ab5071b68f0c80f6642e2b00f2cfd9666",
+      "word-problems": "29f0241bae019a806d884bf196748c9c4c0fe919ef3bd5c996a7b0cfcaef3966",
+      "number-series": "d341e32091a5d7ba0581de13588db22bba023605974e6f6d62440dc4710174db",
+      "algebra": "0a4a47928e7ab1dfab792334c37cd777ee88a502bcb968c138f874ed473986d9",
+      "equations": "216ad9f5c455b0bee21c6dd92815e038d98574824fad01c72aa2ae6512ae4152",
+      "geometry-area": "3e450b241b8c250fab3035766f0f794b59c50ac21cae2a00e502bc6dbe23e70c",
+      "circles": "eca55d941135f01f779573e2e4c4a8e91832f8dfead0182a5860765ed6bcf6b5",
+      "surface-area": "69ba005fd4dc90899e9512e1ed4cdde996cd7002b31b89fce99b239b5fb987ee",
+      "volume": "f0c8d5bd0cc9e01c0e6a868a9dddcfd0ebcb81d39e3b52c97836a4d7db0f70ba"
+    }
+  }
 }

@@ -22,11 +22,11 @@ try{
     }
     cssv_pro_require_active($pdo,$user);
     $result=cssv_ability_summary($pdo,$user);
-    if(isset($_GET['unit'])){$unit=cssv_ability_unit($_GET['unit']);$result['unit']=cssv_ability_client_unit($unit);$result['latest']=cssv_ability_latest($pdo,$user,$unit['id']);}
+    if(isset($_GET['unit'])){$unit=cssv_ability_unit($_GET['unit']);$result['compatible_versions']=cssv_ability_versions($unit['id']);$result['unit']=cssv_ability_client_unit($unit);$result['latest']=cssv_ability_latest($pdo,$user,$unit['id']);}
     cssv_json(['ok'=>true,...$result]);
 }catch(Throwable $error){
     if($error instanceof InvalidArgumentException)cssv_fail($error->getMessage(),422,'ability_invalid');
     if($error instanceof OutOfBoundsException)cssv_fail($error->getMessage(),404,'ability_not_found');
     if($error instanceof DomainException)cssv_fail($error->getMessage(),409,'ability_conflict');
-    error_log('CSSV Ability request failed: '.get_class($error));cssv_fail('Your maths work could not be loaded or saved. Keep your answer and try again.',503,'ability_unavailable');
+    error_log('CSSV Ability request failed: '.get_class($error));cssv_fail('Your ability practice could not be loaded or saved. Keep your answer and try again.',503,'ability_unavailable');
 }
