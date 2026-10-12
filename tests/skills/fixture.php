@@ -12,8 +12,8 @@ if($action==='config'){
  file_put_contents($path,"<?php\nreturn ".var_export($config,true).";\n");chmod($path,0600);
 }elseif($action==='reserve'){
  try{echo json_encode(['id'=>cssv_skills_ai_reserve($pdo,$argv[2],json_decode($argv[3],true,32,JSON_THROW_ON_ERROR))],JSON_THROW_ON_ERROR);}catch(Throwable $e){echo json_encode(['error'=>get_class($e),'message'=>$e->getMessage()],JSON_THROW_ON_ERROR);}
-}elseif(in_array($action,['normalize-workspace','normalize-operation'],true)){
- $table=$action==='normalize-workspace'?'skills_workspaces':'skills_ai_inputs';$column=$action==='normalize-workspace'?'source_snapshot':'input';$key=$action==='normalize-workspace'?'id':'operation_id';
+}elseif(in_array($action,['normalize-workspace','normalize-operation','normalize-topic'],true)){
+ $table=$action==='normalize-workspace'?'skills_workspaces':($action==='normalize-topic'?'pro_topic_versions':'skills_ai_inputs');$column=$action==='normalize-workspace'?'source_snapshot':($action==='normalize-topic'?'content':'input');$key=$action==='normalize-operation'?'operation_id':'id';
  $q=$pdo->prepare("SELECT $column FROM $table WHERE $key=?");$q->execute([$argv[2]]);$raw=$q->fetchColumn();if(!$raw)throw new RuntimeException('Synthetic snapshot not found.');
  $sort=static function(mixed $v)use(&$sort):mixed{if(!is_array($v))return $v;if(!array_is_list($v))ksort($v);foreach($v as &$child)$child=$sort($child);unset($child);return $v;};
  $pdo->prepare("UPDATE $table SET $column=? WHERE $key=?")->execute([json_encode($sort(json_decode($raw,true,64,JSON_THROW_ON_ERROR)),JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_THROW_ON_ERROR),$argv[2]]);

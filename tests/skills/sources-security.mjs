@@ -41,6 +41,7 @@ const context='topic:'+topic.id+':'+imported.data.version_id+':'+topic.sections[
 assert.equal((await call(path,a.jar)).status,404,'Draft source exposed to teaching')
 const publication=await call('admin/topics.php',owner,{action:'publish',request_id:randomUUID(),expected_revision:imported.data.revision,topic_id:topic.id,version_id:imported.data.version_id,reviewed:true,review_note:'TEST ONLY synthetic source validation; no production data or real academic publication.'})
 assert.equal(publication.status,200,JSON.stringify(publication.data))
+php('tests/skills/fixture.php','normalize-topic',imported.data.version_id)
 const source=await call(path,a.jar);assert.equal(source.status,200,JSON.stringify(source.data));assert.ok(source.data.context.text.includes(topic.sections[0].blocks[0]));assert.equal(source.data.context.sources.length,topic.sections[0].reference_ids.length)
 assert.equal((await call(path,free.jar)).status,403)
 const removed=await call('admin/topics.php',owner,{action:'unpublish',request_id:randomUUID(),expected_revision:publication.data.revision,topic_id:topic.id});assert.equal(removed.status,200)

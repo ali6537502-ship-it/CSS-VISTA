@@ -32,8 +32,8 @@ function cssv_tutor_context(PDO $pdo,string $id,?string $user=null): array {
  }
  if(str_starts_with($id,'topic:')){
   require_once __DIR__.'/_topics.php';cssv_topics_ensure($pdo);$parts=explode(':',$id);if(count($parts)!==4)throw new InvalidArgumentException('Choose a published topic section.');
-  $topic=cssv_topic_published($pdo,cssv_topic_slug($parts[1]));if($topic['version_id']!==cssv_pro_id($parts[2])||!hash_equals($topic['content_hash'],cssv_topic_hash($topic['definition'])))throw new OutOfBoundsException('This published topic edition changed. Reopen its current lesson.');
-  $definition=$topic['definition'];$section=null;foreach($definition['sections'] as $s)if($s['id']===$parts[3])$section=$s;
+  $topic=cssv_topic_published($pdo,cssv_topic_slug($parts[1]));$definition=cssv_topic_definition($topic['definition']);if($topic['version_id']!==cssv_pro_id($parts[2])||!hash_equals($topic['content_hash'],cssv_topic_hash($definition)))throw new OutOfBoundsException('This published topic edition changed. Reopen its current lesson.');
+  $section=null;foreach($definition['sections'] as $s)if($s['id']===$parts[3])$section=$s;
   if(!$section)throw new OutOfBoundsException('Published section unavailable.');
   $text=$definition['title']."\nEdition as of: ".$definition['as_of']."\n\n".$section['title']."\n".implode("\n\n",$section['blocks']);
   if(mb_strlen($text)>16000)throw new OutOfBoundsException('This section exceeds bounded contextual help. Read the lesson directly.');
