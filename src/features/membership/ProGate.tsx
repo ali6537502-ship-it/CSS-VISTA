@@ -7,18 +7,19 @@ import { ProPausedNotice } from './ProRelease'
 import { useProReleasePaused } from './proReleaseContext'
 
 /** Presentation only: every protected source also checks native membership. */
-export default function ProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {
+export default function ProGate({ children, feature, fallbackAction, allowExpiredHistory = false }: { children: ReactNode; feature: string; fallbackAction?: ReactNode; allowExpiredHistory?: boolean }) {
   const paused = useProReleasePaused()
-  return paused ? <ProPausedNotice /> : <OpenProGate feature={feature} fallbackAction={fallbackAction}>{children}</OpenProGate>
+  return paused ? <ProPausedNotice /> : <OpenProGate feature={feature} fallbackAction={fallbackAction} allowExpiredHistory={allowExpiredHistory}>{children}</OpenProGate>
 }
 
-function OpenProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {
+function OpenProGate({ children, feature, fallbackAction, allowExpiredHistory }: { children: ReactNode; feature: string; fallbackAction?: ReactNode; allowExpiredHistory: boolean }) {
   const { user, loading } = useAccount()
   const location = useLocation()
   const { data, error, refresh } = useMembership<Overview>()
   const expired = useMembershipExpired(data?.membership.expires_at)
   if (loading || (user && !data && !error)) return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">{feature}</h1><p role="status" className="mt-3 text-sm text-slate-600">Checking Pro access…</p></main>
-  if (user && data?.membership.status === 'active' && !expired && !error) return <>{children}</>
+  const history = allowExpiredHistory && (expired || data?.membership.status === 'expired')
+  if (user && data && !error && ((data.membership.status === 'active' && !expired) || history)) return <>{children}</>
   const returnTo = location.pathname + location.search
   return <main className="mx-auto max-w-3xl px-4 py-12"><div className="rounded-2xl border border-amber-200 bg-white p-6 sm:p-8">
     <ProBadge /><h1 className="mt-4 text-2xl font-bold text-slate-950">{feature}</h1>

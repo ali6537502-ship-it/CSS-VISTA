@@ -106,6 +106,7 @@ jobs:
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
           node tests/browser/skills.mjs
           node tests/browser/ability.mjs
+          node tests/browser/precis.mjs
           node tests/browser/pro-pause.mjs
       - name: Service diagnostics on failure
         if: failure()
