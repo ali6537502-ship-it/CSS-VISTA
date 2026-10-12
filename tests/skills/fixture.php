@@ -21,4 +21,7 @@ if($action==='config'){
  $q=$pdo->prepare('SELECT input FROM skills_ai_inputs WHERE operation_id=?');$q->execute([$argv[2]]);$input=json_decode((string)$q->fetchColumn(),true,64,JSON_THROW_ON_ERROR);echo $input['stage'];
 }elseif($action==='snapshot'){
  $q=$pdo->prepare('SELECT feature,used,reserved,accepted,provider_calls FROM ai_daily_usage WHERE user_id=?');$q->execute([$argv[2]]);echo json_encode($q->fetchAll(),JSON_THROW_ON_ERROR);
+}elseif($action==='tie-linked'){
+ $user=cssv_pro_id($argv[2]??null);$parent=cssv_skills_workspace($pdo,$user,cssv_pro_id($argv[3]??null));
+ $q=$pdo->prepare("UPDATE skills_workspaces SET updated_at='2026-01-01 00:00:00.000000' WHERE user_id=? AND parent_id=?");$q->execute([$user,$parent['id']]);
 }else throw new RuntimeException('Unknown fixture action.');

@@ -127,16 +127,42 @@ assert.equal(merge.status,200)
 changed=(await call(endpoint+'?workspace_id='+parent.id,a.jar)).data
 assert.equal(changed.saved.answers.practice,'🌿 Introductory context. '+partDetail.saved.answers.revision+' Closing qualification.')
 assert.equal((await call(endpoint,a.jar,body({action:'adopt',workspace_id:parent.id,expected_version:changed.workspace.version,child_id:partDetail.workspace.id,child_version_id:partDetail.saved.version_id}))).status,409,'Replaced a changed original selection')
+// Older linked practices remain reachable, scoped and stable across tied timestamps.
+const linkedIds=[child,partDetail.workspace.id]
+for(let n=0;n<21;n++){
+ const result=await call(endpoint,a.jar,body({action:'transfer',workspace_id:parent.id,version_id:changed.saved.version_id,field:'thesis',feature:'sentence',lesson:target.id,level:target.level}))
+ assert.equal(result.status,200);linkedIds.push(result.data.workspace_id)
+}
+php('tests/skills/fixture.php','tie-linked',a.id,parent.id)
+const linkedPath=endpoint+'?workspace_id='+parent.id
+const page1=(await call(linkedPath,a.jar)).data,page2=(await call(linkedPath+'&children_offset=20',a.jar)).data
+assert.equal(page1.children.length,20);assert.equal(page1.has_more_children,true);assert.equal(page1.children_offset,0)
+assert.equal(page2.children.length,3);assert.equal(page2.has_more_children,false);assert.equal(page2.children_offset,20)
+assert.deepEqual([...page1.children,...page2.children].map(c=>c.id),linkedIds.sort().reverse(),'Paging skipped or duplicated a tied linked workspace')
+assert.deepEqual(page2.saved,page1.saved,'Linked paging changed selected writing')
+assert.deepEqual(page2.versions,page1.versions,'Linked paging changed version history')
+const references=await call(linkedPath+'&view=linked&children_offset=20',a.jar)
+assert.equal(references.status,200)
+assert.deepEqual(Object.keys(references.data).sort(),['children','children_offset','has_more_children','ok'])
+assert.deepEqual(references.data.children,page2.children,'References-only paging disagrees with owned history')
+assert.equal((await call(linkedPath+'&view=linked&children_offset=20',b.jar)).status,404)
+assert.equal((await call(linkedPath+'&view=linked&children_offset=20')).status,401)
+for(const offset of ['-1','1.5','100001','not-a-page'])assert.equal((await call(linkedPath+'&children_offset='+offset,a.jar)).status,422)
+assert.equal((await call(linkedPath+'&children_offset=20',b.jar)).status,404)
+assert.equal((await call(endpoint+'?workspace_id='+child,a.jar)).data.children.length,0,'Parent-linked practices leaked into another workspace')
 assert.equal((await call('student/ai-usage.php',a.jar)).data.operations.length,0,'Fixed learning consumed AI')
 assert.equal((await call(endpoint,a.jar,body({action:'evaluate',workspace_id:parent.id,version_id:adopted.data.version_id,policy_version:'not-configured',policy_hash:'0'.repeat(64),accepted:true}))).status,503)
 php('tests/pro/fixture.php','expire',a.id)
 const expired=(await call(endpoint+'?workspace_id='+parent.id,a.jar)).data
 assert.equal(expired.workspace.source.explanation,undefined)
 assert.equal(expired.saved.text,changed.saved.text)
+const expiredChildren=(await call(linkedPath+'&children_offset=20',a.jar)).data
+assert.deepEqual(expiredChildren.children,page2.children,'Expiry lost owned linked history')
+assert.equal(expiredChildren.membership.status,'expired')
 assert.equal((await call(endpoint,a.jar,body({action:'save',workspace_id:parent.id,expected_version:changed.workspace.version,stage:'thesis',response:'This new paid attempt is not allowed after expiry.'}))).status,403)
 
 assert.equal((await call(endpoint+'?request_id='+parent.lastRequest.request_id,a.jar)).data.version_id,parent.last.version_id)
 assert.equal((await call(endpoint,a.jar,parent.lastRequest)).data.version_id,parent.last.version_id)
 assert.equal((await call(endpoint,a.jar,parent.last)).status,422) // A receipt object is not a writable action.
 for(const path of ['_skills.php','_skills_core.php','_skills_ai.php','_premium_files/skills-curriculum.json'])assert.equal((await fetch('http://localhost:4173/api/'+path)).status,404)
-console.log('PASS skills native: all four guided journeys, deterministic checks, scoped ownership, concurrency, exact receipts, conflicts, immutable transfer/return and expiry history')
+console.log('PASS skills native: all four guided journeys, deterministic checks, scoped ownership, concurrency, exact receipts, conflicts, immutable transfer/return, bounded older-linked paging and expiry history')

@@ -524,6 +524,18 @@ function FeedbackPanel({ detail, save }: { detail: Detail; save: Saver }) {
   );
 }
 function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
+  const [params, setParams] = useSearchParams();
+  const offset = params.get("children_offset") || "0";
+  const page = useLearning<Pick<Detail, "children" | "children_offset" | "has_more_children">>(
+    offset !== "0" ? `skills.php?workspace_id=${detail.workspace.id}&view=linked&children_offset=${encodeURIComponent(offset)}` : undefined,
+  );
+  const linked = offset === "0" ? detail : page.data;
+  function linkedPage(offset: number) {
+    const next = new URLSearchParams(params);
+    if (offset) next.set("children_offset", String(offset));
+    else next.delete("children_offset");
+    setParams(next);
+  }
   const [range, setRange] = useState<{start:number;end:number} | null>(null);
   const [field, setField] = useState(""),
     [target, setTarget] = useState<Feature>("argument");
@@ -660,10 +672,12 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
           Return to the original workspace
         </Link>
       )}
-      {detail.children.length > 0 && (
+      {page.error && <p role="alert" className="text-sm">{page.error} <button className={secondaryStyle} onClick={page.refresh}>Retry linked history</button></p>}
+      {!linked && !page.error && <p role="status" className="text-sm">Loading linked practices…</p>}
+      {linked && linked.children.length > 0 && (
         <div className="space-y-3">
           <h4 className="font-semibold">Linked revisions</h4>
-          {detail.children.map((child) => (
+          {linked.children.map((child) => (
             <div
               key={child.id}
               className="flex flex-wrap items-center gap-3 rounded-lg border p-3"
@@ -689,6 +703,12 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
             </div>
           ))}
         </div>
+      )}
+      {linked && (linked.children_offset > 0 || linked.has_more_children) && (
+        <nav aria-label="Linked practice pages" className="flex flex-wrap gap-3">
+          <button className={secondaryStyle} disabled={linked.children_offset === 0 || save.busy || !!save.pending} onClick={() => linkedPage(Math.max(0, linked.children_offset - 20))}>Newer linked practices</button>
+          <button className={secondaryStyle} disabled={!linked.has_more_children || save.busy || !!save.pending} onClick={() => linkedPage(linked.children_offset + 20)}>Older linked practices</button>
+        </nav>
       )}
       {review && !child && (
         <p role={returned.error ? "alert" : "status"} className="text-sm">
@@ -766,6 +786,7 @@ function Session({
     Number(versionParams.get("versions_offset")) || 0,
   );
   const [compare, setCompare] = useState("");
+  const [linkedRefresh, setLinkedRefresh] = useState(0);
   const earlier = useLearning<Detail>(
     compare
       ? `skills.php?workspace_id=${w.id}&version_id=${compare}`
@@ -1015,8 +1036,8 @@ function Session({
         </Link>
       )}
       <FeedbackPanel key={`${detail.saved?.version_id || "new"}:${detail.configuration.policy_hash || "disabled"}`} detail={detail} save={save} />
-      {active && saved && !old && <Transfers detail={detail} save={save} />}
-      <button className={secondaryStyle} onClick={refresh}>
+      {active && saved && !old && <Transfers key={`${versionParams.get("children_offset") || "0"}:${linkedRefresh}`} detail={detail} save={save} />}
+      <button className={secondaryStyle} onClick={() => { refresh(); setLinkedRefresh(value => value + 1); }}>
         Refresh saved status
       </button>
     </div>

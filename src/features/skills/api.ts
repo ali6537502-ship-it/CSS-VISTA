@@ -151,6 +151,8 @@ export type Detail = {
     created_at: string;
   }[];
   operations: Operation[];
+  children_offset: number;
+  has_more_children: boolean;
   children: {
     id: string;
     feature: Feature;

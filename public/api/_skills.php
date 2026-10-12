@@ -44,6 +44,13 @@ function cssv_skills_append(PDO $pdo,string $user,array $w,array $answers,int $p
     $pdo->prepare('UPDATE skills_workspaces SET writing_id=?,version=?,position=? WHERE id=? AND user_id=?')->execute([$writing,$version,$position,$w['id'],$user]);
     return ['workspace_id'=>$w['id'],'writing_id'=>$writing,'version_id'=>$id,'version'=>$version,'evidence'=>$evidence];
 }
+/** Bounded owned references; paging never loads or changes student writing. */
+function cssv_skills_linked(PDO $pdo,string $user,string $parent,mixed $offset=0): array {
+    $offset=filter_var($offset,FILTER_VALIDATE_INT,['options'=>['min_range'=>0,'max_range'=>100000]]);
+    if($offset===false)throw new InvalidArgumentException('Choose a valid linked-practice page.');
+    $q=$pdo->prepare('SELECT s.id,s.feature,s.lesson_id,s.version,s.writing_id,v.id AS version_id FROM skills_workspaces s LEFT JOIN writing_versions v ON v.writing_id=s.writing_id AND v.version=s.version WHERE s.user_id=? AND s.parent_id=? ORDER BY s.updated_at DESC,s.id DESC LIMIT 21 OFFSET '.(int)$offset);$q->execute([$user,$parent]);$children=$q->fetchAll();
+    return ['children'=>array_slice($children,0,20),'children_offset'=>(int)$offset,'has_more_children'=>count($children)>20];
+}
 function cssv_skills_mutation(PDO $pdo,string $user,array $body): array {
     $action=$body['action']??'';
     cssv_pro_fields($body,match($action){
