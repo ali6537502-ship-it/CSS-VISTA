@@ -12,6 +12,7 @@ import {
 import { ProBadge } from "@/features/membership/AccountSections";
 import { grammarLink } from "@/features/expression/api";
 import { useStudioSave } from "./useStudioSave";
+import RevisionComparison from "./RevisionComparison";
 import {
   names,
   skillsLink,
@@ -323,7 +324,7 @@ function Exercise({
             onChange={(e) => setDraft({ ...draft, response: e.target.value })}
           />
           <span className="text-xs font-normal text-slate-500">
-            This stage needs at least {stage.min_words} words for a recorded
+            This stage needs at least {stage.min_words} {stage.min_words === 1 ? "word" : "words"} for a recorded
             practice response. Length does not prove correctness.
           </span>
         </label>
@@ -527,6 +528,7 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
   const [field, setField] = useState(""),
     [target, setTarget] = useState<Feature>("argument");
   const [review, setReview] = useState("");
+  const [selectedLesson, setSelectedLesson] = useState({ feature: target, id: "" });
   const returned = useLearning<Detail>(
     review ? `skills.php?workspace_id=${review}` : undefined,
   );
@@ -548,6 +550,9 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
   );
   const catalog = useLearning<Overview>(`skills.php?view=catalog&feature=${target}`);
   const lesson =
+    catalog.data?.catalog.find(
+      (c) => selectedLesson.feature === target && c.id === selectedLesson.id,
+    ) ||
     catalog.data?.catalog.find((c) => c.level === detail.workspace.level) ||
     catalog.data?.catalog[0];
   return (
@@ -589,6 +594,28 @@ function Transfers({ detail, save }: { detail: Detail; save: Saver }) {
           </select>
         </label>
       </div>
+      <label className="grid gap-2 text-sm font-semibold">
+        Linked practice lesson
+        <select
+          className={inputStyle}
+          aria-describedby={`${detail.workspace.id}-linked-lesson-summary`}
+          value={lesson?.id || ""}
+          disabled={!catalog.data?.catalog.length}
+          onChange={(event) =>
+            setSelectedLesson({ feature: target, id: event.target.value })
+          }
+        >
+          {!lesson && <option value="">Choose a practice lesson</option>}
+          {catalog.data?.catalog.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.title} · {item.level}
+            </option>
+          ))}
+        </select>
+      </label>
+      <p id={`${detail.workspace.id}-linked-lesson-summary`} className="text-sm leading-7 text-slate-600">
+        {lesson?.summary || catalog.error || "Loading available lessons…"}
+      </p>
       {field && <label className="grid gap-2 text-sm font-semibold">Select a passage (optional)
       <textarea readOnly className={`${inputStyle} min-h-36 font-normal leading-7`} value={String(detail.saved?.answers[field] || '')} onSelect={event=>{const element=event.currentTarget;const start=Array.from(element.value.slice(0,element.selectionStart)).length;const end=Array.from(element.value.slice(0,element.selectionEnd)).length;setRange(end>start?{start,end}:null)}} />
       <span className="font-normal leading-7">{range ? `${range.end-range.start} characters selected. Only that passage will be refined and returned.` : 'Highlight one sentence or paragraph to refine part of a longer response. With no selection, the whole response is linked.'}</span>
@@ -961,20 +988,16 @@ function Session({
               </Link>
             )}
           </nav>
+          {compare && !earlier.data && !earlier.error && (
+            <p role="status" className="text-sm">Loading the saved comparison…</p>
+          )}
           {earlier.data?.saved && (
-            <div className="grid min-w-0 gap-4 md:grid-cols-2">
-              {[earlier.data.saved, saved].map((v) => (
-                <article
-                  key={v.version_id}
-                  className="min-w-0 rounded-xl border p-4"
-                >
-                  <h4 className="font-semibold">Version {v.version}</h4>
-                  <p className="mt-3 whitespace-pre-wrap break-words text-sm leading-8">
-                    {v.text}
-                  </p>
-                </article>
-              ))}
-            </div>
+            <RevisionComparison
+              key={`${earlier.data.saved.version_id}:${saved.version_id}`}
+              source={w.source}
+              before={earlier.data.saved}
+              after={saved}
+            />
           )}
           {earlier.error && (
             <p role="alert" className="text-sm">
