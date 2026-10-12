@@ -1,5 +1,7 @@
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 import { useState, type ReactNode } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useSearchParams } from 'react-router'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useLearning, type Attempt } from '@/features/learning/api'
 import { secondary, usePreparationAction, type PlanData } from './api'
 import PreparationPlan from './Plan'
@@ -25,6 +27,7 @@ export default function PreparationWorkspace({
   attempt: Attempt
   settings: ReactNode
 }) {
+  const paused = useProReleasePaused()
   const [params, setParams] = useSearchParams(),
     [generation, setGeneration] = useState(0)
   const requested = params.get('view'),
@@ -61,12 +64,12 @@ export default function PreparationWorkspace({
         </button>
       </header>
       <nav aria-label="Attempt workspace" className="flex flex-wrap gap-2">
-        {views.map(([id, label]) => (
+        {views.filter(([id]) => !paused || id !== 'topics').map(([id, label]) => (
           <button
             key={id}
             aria-current={view === id ? 'page' : undefined}
             className={`${secondary} ${view === id ? 'border-indigo-600 bg-indigo-50 text-indigo-800' : ''}`}
-            onClick={() => setParams({ attempt: attempt.id, view: id })}
+            onClick={() => setParams({ attempt: attempt.id, view: id, ...(paused && id === 'reading' ? { kind: 'vistagram' } : {}) })}
           >
             {label}
             {id === 'topics' && <ProBadge />}

@@ -1,5 +1,6 @@
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useState } from 'react'
-import { Link } from 'react-router'
+
 import { ArrowRight, CalendarDays, Clock3, RotateCcw } from 'lucide-react'
 import {
   field,

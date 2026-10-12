@@ -1,4 +1,5 @@
-import { Link } from 'react-router'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
+
 import { ArrowRight, BookMarked, LibraryBig, ListTree } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { optionalSubjectTotal, optionalTopicTotal, optionalWordTotal } from '@/data/optionalNotes'

@@ -1,5 +1,9 @@
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
+import { isProDestination } from '@/features/membership/proDestinations'
+import { ProReleaseOutlet } from '@/features/membership/ProRelease'
+import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/features/membership/ProRelease'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, NavLink, Outlet, useLocation, useNavigate, useNavigationType } from 'react-router'
+import { useLocation, useNavigate, useNavigationType } from 'react-router'
 import {
   Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine,
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
@@ -494,6 +498,8 @@ function SearchBox({ onSelect, autoFocus = false }: { onSelect?: () => void; aut
   const [q, setQ] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
+  const paused = useProReleasePaused()
+  const visibleResults = paused ? results.filter(result => !isProDestination(result.link)) : results
   const ref = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
@@ -551,13 +557,13 @@ function SearchBox({ onSelect, autoFocus = false }: { onSelect?: () => void; aut
         <div className="space-y-2 py-4" aria-label="Searching CSS Vista">
           {[1, 2, 3].map((item) => <div key={item} className="h-14 animate-pulse rounded-lg bg-secondary" />)}
         </div>
-      ) : results.length === 0 ? (
+      ) : visibleResults.length === 0 ? (
         <div className="py-6 text-center text-sm text-muted-foreground">
           No results for “{q}”. Try a subject, year, author, lecture topic or GK category.
         </div>
       ) : (
         <ul className="mt-3 max-h-[min(55vh,430px)] overflow-y-auto rounded-xl border py-1">
-          {results.map((result) => (
+          {visibleResults.map((result) => (
             <li key={`${result.category}-${result.id}`}>
               <button
                 className="block w-full px-4 py-3 text-left transition-colors hover:bg-secondary"
@@ -1244,7 +1250,7 @@ export default function Layout() {
           className={`cssv-route-stage route-transition-${routeTransition}`}
           style={renderRestoreMinHeight ? { minHeight: `${renderRestoreMinHeight}px` } : undefined}
         >
-          <Outlet />
+          <ProReleaseOutlet />
         </div>
       </main>
 

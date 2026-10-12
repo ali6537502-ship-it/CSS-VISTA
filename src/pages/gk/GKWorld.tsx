@@ -1,6 +1,7 @@
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { ProBadge } from '@/features/membership/AccountSections'
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { useSearchParams } from 'react-router'
 import {
   Award, BookOpen, Brain, CalendarDays, ClipboardList, Coins, Compass, Cpu, Flag,
   Globe, History, Landmark, Layers, MapPin, Medal, Microscope, Moon, Mountain, Shuffle,

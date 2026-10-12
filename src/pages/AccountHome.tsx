@@ -15,6 +15,7 @@ import { AuthenticatedAccountAd } from '@/components/Ads'
 import { DashboardMptCard } from '@/components/mpt/DashboardMptCard'
 import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
+import { useProReleasePaused } from '@/features/membership/proReleaseContext'
 
 function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -73,7 +74,8 @@ function ChoiceCard({ to, icon: Icon, title, status, index, pro = false }: { to:
 export default function AccountHome() {
   const { user } = useAccount()
   const [params] = useSearchParams()
-  const section = params.get('plan') === 'pro' ? 'pro' : 'free'
+  const paused = useProReleasePaused()
+  const section = !paused && params.get('plan') === 'pro' ? 'pro' : 'free'
   const [version, setVersion] = useState(0)
   const [syllabusTotal, setSyllabusTotal] = useState(0)
 

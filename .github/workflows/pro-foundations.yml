@@ -86,6 +86,8 @@ jobs:
           node tests/tutor/security.mjs
           node tests/pro/security.mjs
           node tests/pro/paid-access.mjs
+          php tests/pro/release-unit.php
+          node tests/pro/release-pause.mjs
           node tests/mentor/security.mjs
           node tests/learning/security.mjs
           node tests/handwriting/security.mjs
@@ -104,6 +106,7 @@ jobs:
           node -e "const https=require('node:https');const retry=async()=>{for(let n=0;n<30;n++){try{await new Promise((resolve,reject)=>https.get('https://localhost:3444/',{rejectUnauthorized:false},r=>{r.resume();resolve()}).on('error',reject));return}catch{}await new Promise(r=>setTimeout(r,500))}process.exit(1)};retry()"
           node tests/browser/skills.mjs
           node tests/browser/ability.mjs
+          node tests/browser/pro-pause.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log

@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { ArrowRight, Check, Star, UserRound } from 'lucide-react'
+import { useProReleasePaused } from './proReleaseContext'
 
 export type AccountSection = 'free' | 'pro'
 
@@ -14,9 +15,10 @@ export function ProBadge() {
 
 /** These links choose a workspace view. Membership is checked by the existing APIs. */
 export default function AccountSections({ selected }: { selected: AccountSection }) {
+  const paused = useProReleasePaused()
   return (
     <nav aria-label="Account sections" className="mt-7 grid gap-3 sm:grid-cols-2">
-      {(['free', 'pro'] as const).map(section => {
+      {(['free', 'pro'] as const).filter(section => !paused || section === 'free').map(section => {
         const current = selected === section
         const Icon = section === 'pro' ? Star : UserRound
         return (

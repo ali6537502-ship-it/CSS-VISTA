@@ -1,5 +1,6 @@
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
-import { Link, useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { site } from '@/data/site'
 
 type GoogleFcApi = {

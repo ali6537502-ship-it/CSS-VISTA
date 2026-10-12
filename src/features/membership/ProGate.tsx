@@ -3,9 +3,16 @@ import { Link, useLocation, useParams } from 'react-router'
 import { useAccount } from '@/lib/accountContext'
 import { useMembership, useMembershipExpired, type Overview } from './api'
 import { ProBadge } from './AccountSections'
+import { ProPausedNotice } from './ProRelease'
+import { useProReleasePaused } from './proReleaseContext'
 
 /** Presentation only: every protected source also checks native membership. */
 export default function ProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {
+  const paused = useProReleasePaused()
+  return paused ? <ProPausedNotice /> : <OpenProGate feature={feature} fallbackAction={fallbackAction}>{children}</OpenProGate>
+}
+
+function OpenProGate({ children, feature, fallbackAction }: { children: ReactNode; feature: string; fallbackAction?: ReactNode }) {
   const { user, loading } = useAccount()
   const location = useLocation()
   const { data, error, refresh } = useMembership<Overview>()

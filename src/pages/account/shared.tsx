@@ -1,5 +1,6 @@
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { Link } from 'react-router'
+
 import { ArrowLeft, Check, UserRound } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
 import { getState, getStats, updateStudyScheduleTask, type StudyScheduleTask } from '@/lib/store'

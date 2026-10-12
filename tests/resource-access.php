@@ -46,7 +46,8 @@ function cssv_json(array $value): never { echo json_encode($value); exit; }
 $_GET = json_decode(getenv('CSSV_RESOURCE_QUERY'), true);
 if (getenv('CSSV_RESOURCE_CASE') === 'changed') $_SERVER['HTTP_X_CSSV_USER'] = 'different-user';
 PHP;
-file_put_contents($dir . '/_bootstrap.php', "<?php\n" . $stubs . "\n" . $profileStatus . "\n" . $gate);
+copy(__DIR__ . '/../public/api/_pro_release.php', $dir . '/_pro_release.php');
+file_put_contents($dir . '/_bootstrap.php', "<?php\nrequire_once __DIR__ . '/_pro_release.php';\n" . $stubs . "\n" . $profileStatus . "\n" . $gate);
 $run = static function (string $case, array $query, string $endpoint = 'resources.php') use ($dir): string {
     $env = array_merge(getenv(), ['CSSV_RESOURCE_CASE'=>$case,'CSSV_RESOURCE_QUERY'=>json_encode($query),'CSSV_RESOURCE_STORAGE'=>$dir.'/private']);
     $process = proc_open([PHP_BINARY, '-n', __FILE__, 'case', $dir, $endpoint], [1=>['pipe','w'],2=>['pipe','w']], $pipes, null, $env);
