@@ -107,6 +107,7 @@ jobs:
           node tests/browser/skills.mjs
           node tests/browser/ability.mjs
           node tests/browser/precis.mjs
+          node tests/browser/mentor-history.mjs
           node tests/browser/pro-pause.mjs
       - name: Service diagnostics on failure
         if: failure()

@@ -22,7 +22,7 @@ The UI restores saved choices/feedback after refresh or another authenticated de
 
 The actual browser journey found a pre-existing expiry mismatch: the native Précis API allowed owned history, but the outer route gate blocked the page. The Précis route now explicitly opts into verified expired-member history. Unauthenticated/free accounts retain the original gate, and the production pause still takes precedence. The Lab already omits its premium catalogue, composer and new evaluation actions when inactive; the server independently blocks new paid actions. This opt-in is not applied to every Pro destination.
 
-Related inspection found that General Ability's native history endpoint also permits owned expired history while its outer route is gated; that deserves a separate scoped fix. My Answer Performance currently requires active Pro even for reads, so its history policy and inactive UI must be reconciled before changing that route. No mentor access rule, mark or record is changed here.
+Related inspection found that General Ability's native history endpoint also permits owned expired history while its outer route is gated; that deserves a separate scoped fix. My Answer Performance currently requires active Pro even for reads, so its history policy and inactive UI must be reconciled before changing that route. No mentor access rule, mark or record is changed here. The following [expiry-history increment](expiry-history-continuity.md) resolves General Ability's gate mismatch and confirms the documented renewal-required mentor policy without changing mentor access.
 
 ## Validation and release
 

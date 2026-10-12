@@ -216,10 +216,10 @@ export default function App() {
         <Route path="/account/argumentation" element={<ProfileGate><S><AccountSkills feature="argument" /></S></ProfileGate>} />
         <Route path="/account/analytical-skills" element={<ProfileGate><S><AccountSkills feature="analysis" /></S></ProfileGate>} />
         <Route path="/account/essay-builder" element={<ProfileGate><S><AccountSkills feature="essay" /></S></ProfileGate>} />
-        <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
+        <Route path="/account/general-ability" element={<ProfileGate><ProGate feature="General Ability" allowExpiredHistory expiredHistoryView="history"><S><AccountGeneralAbility /></S></ProGate></ProfileGate>} />
         <Route path="/account/handwriting" element={<ProfileGate><S><AccountHandwriting /></S></ProfileGate>} />
         <Route path="/account/ask-vista" element={<ProfileGate><S><AccountTutor /></S></ProfileGate>} />
-        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance"><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
+        <Route path="/account/answer-performance" element={<ProfileGate><ProGate feature="My Answer Performance" retainedHistoryMessage="Your saved questions, mentor marks, comments and correction history are retained. Renew Pro to reopen your records."><S><AccountAnswerPerformance /></S></ProGate></ProfileGate>} />
         <Route path="/account/preparation" element={<ProfileGate><S><AccountLearning /></S></ProfileGate>} />
         <Route path="/account/ai-usage" element={<ProfileGate><S><AccountAiUsage /></S></ProfileGate>} />
         <Route path="/account/membership" element={<ProfileGate><S><AccountMembership /></S></ProfileGate>} />
