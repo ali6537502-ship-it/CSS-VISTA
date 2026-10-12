@@ -52,7 +52,8 @@ const run = async (feature, chosen, level = chosen.level) => {
   }
   let last, lastRequest
   for(const stage of stages) {
-    const save=body({ action:'save', workspace_id:id, expected_version:detail.workspace.version, stage:stage.id, response:stage.id === 'check' ? chosen.check.answer : 'My independent reasoning states a conditional claim and explains why the hypothetical access policy might help some students while staffing constraints could limit its effects. Actual demand and dated schedules would need checking before a wider conclusion.', advance:true })
+    const response=stage.id==='check'?chosen.check.answer:feature==='sentence'&&stage.id==='draft'?'Stop.':feature==='sentence'&&stage.id==='revision'?'Wait.':'My independent reasoning states a conditional claim and explains why the hypothetical access policy might help some students while staffing constraints could limit its effects. Actual demand and dated schedules would need checking before a wider conclusion.'
+    const save=body({ action:'save', workspace_id:id, expected_version:detail.workspace.version, stage:stage.id, response, advance:true })
     const results=await Promise.all([call(endpoint,a.jar,save),call(endpoint,a.jar,save)])
     assert.equal(results[0].status,200,JSON.stringify(results[0].data)); assert.equal(results[1].status,200)
     assert.equal(results[0].data.version_id,results[1].data.version_id)

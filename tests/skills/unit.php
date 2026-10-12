@@ -17,6 +17,17 @@ foreach($package['lessons'] as $lesson){
  rejects(fn()=>cssv_skills_answers(['mastery'=>100],$source));rejects(fn()=>cssv_skills_answers(['check'=>'0'],$source));
 }
 check($counts===['sentence'=>21,'argument'=>15,'analysis'=>15],'Feature coverage mismatch.');
+$sentence=cssv_skills_source('sentence','sentence-core','beginner');$sourceHash=cssv_skills_hash($sentence);
+foreach(['Stop.','I studied.'] as $text){
+ $evidence=cssv_skills_evidence($sentence,['check'=>$sentence['check']['answer'],'draft'=>$text]);
+ check($evidence['next']===2&&in_array('draft',$evidence['recorded'],true),'Valid short sentence cannot advance to reflection.');
+ check(!in_array('reflection',$evidence['recorded'],true)&&!$evidence['all_recorded'],'Short writing certified later stages.');
+}
+foreach(['','...'] as $text)check(!in_array('draft',cssv_skills_evidence($sentence,['draft'=>$text])['recorded'],true),'Empty/punctuation-only response counted as practice.');
+$public=cssv_skills_public_source($sentence);
+check($public['stages'][1]['min_words']===1&&$public['stages'][3]['min_words']===1,'Displayed minimum differs from current practice policy.');
+check($sentence['stages'][1]['min_words']===3&&cssv_skills_hash($sentence)===$sourceHash,'Legacy source snapshot identity changed.');
+check(cssv_skills_evidence($sentence,['check'=>$sentence['check']['answer'],'draft'=>'Stop.','reflection'=>'The imperative has an understood subject.','revision'=>'Wait.'])['all_recorded'],'Independent short revision blocked.');
 $roadmap=json_decode(file_get_contents(__DIR__.'/../../public/study-material/essay-themes.json'),true,64,JSON_THROW_ON_ERROR);
 foreach($roadmap['themes'] as $theme)foreach(['beginner','intermediate','advanced'] as $level){
  $source=cssv_skills_source('essay',$theme['slug'],$level);check(count($source['stages'])===7,'Missing essay stage.');check($source['roadmap']['sections']===$theme['sections'],'Research directions altered.');

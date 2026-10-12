@@ -43,7 +43,7 @@ try {
    assert.equal((await call(endpoint,a.jar,make({action:'evaluate',workspace_id:id,version_id:d.saved.version_id,policy_version:d.configuration.policy_version,policy_hash:d.configuration.policy_hash,accepted:true}))).status,422)
   }
   const stage=d.workspace.source.stages[feature==='essay'?0:1].id
-  const saved=await call(endpoint,a.jar,make({action:'save',workspace_id:id,expected_version:d.workspace.version,stage,response:'A trial could help students if staffing permits it, but the evidence of demand remains unverified.'}))
+  const saved=await call(endpoint,a.jar,make({action:'save',workspace_id:id,expected_version:d.workspace.version,stage,response:feature==='sentence'?'Stop.':'A trial could help students if staffing permits it, but the evidence of demand remains unverified.'}))
   assert.equal(saved.status,200)
   const request=make({action:'evaluate',workspace_id:id,version_id:saved.data.version_id,policy_version:d.configuration.policy_version,policy_hash:d.configuration.policy_hash,accepted:true})
   assert.equal((await call(endpoint,b.jar,request)).status,404)

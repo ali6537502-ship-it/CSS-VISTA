@@ -324,7 +324,7 @@ function Exercise({
             onChange={(e) => setDraft({ ...draft, response: e.target.value })}
           />
           <span className="text-xs font-normal text-slate-500">
-            This stage needs at least {stage.min_words} words for a recorded
+            This stage needs at least {stage.min_words} {stage.min_words === 1 ? "word" : "words"} for a recorded
             practice response. Length does not prove correctness.
           </span>
         </label>

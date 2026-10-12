@@ -31,10 +31,11 @@ try{
   await page.getByRole('heading',{name:/1 · Understand the theme|Understand the idea/}).waitFor()
   await overflow()
   if(lesson){await page.getByRole('radio').nth(lesson.check.answer).check();await page.getByRole('button',{name:'Save & continue',exact:true}).click()}
-  const field=page.locator('form textarea').first();await field.fill('My independent response explains a conditional reason and notes that actual demand and staffing evidence require checking before any conclusion about this hypothetical issue.')
+  const field=page.locator('form textarea').first();await field.fill(feature==='sentence'?'I studied.':'My independent response explains a conditional reason and notes that actual demand and staffing evidence require checking before any conclusion about this hypothetical issue.')
   await page.getByRole('button',{name:'Save independent response',exact:true}).click()
   await page.getByText(new RegExp('beginner · '+(feature==='essay'?1:2)+' saved versions')).waitFor()
   await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor()
+  if(feature==='sentence')assert.equal(await page.getByRole('button',{name:/^Review the wording/}).isEnabled(),true,'A valid two-word sentence must unlock reflection')
   const link=page.getByRole('link',{name:'Ask VISTA about this activity',exact:true});await link.click();await page.getByText('Selected learning context',{exact:true}).waitFor();await page.getByText('Read the source context',{exact:true}).click();await page.getByText('Student response (unverified assertions; not an authoritative factual source)',{exact:false}).waitFor();await overflow()
  }
  await page.goto(base+'/account/essay-builder');await page.getByRole('link',{name:/beginner · 1 saved versions/}).first().click()
