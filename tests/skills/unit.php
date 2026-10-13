@@ -55,12 +55,13 @@ check($sentence['stages'][1]['min_words']===3&&cssv_skills_hash($sentence)===$so
 check(cssv_skills_evidence($sentence,['check'=>$sentence['check']['answer'],'draft'=>'Stop.','reflection'=>'The imperative has an understood subject.','revision'=>'Wait.'])['all_recorded'],'Independent short revision blocked.');
 $roadmap=json_decode(file_get_contents(__DIR__.'/../../public/study-material/essay-themes.json'),true,64,JSON_THROW_ON_ERROR);
 foreach($roadmap['themes'] as $theme)foreach(['beginner','intermediate','advanced'] as $level){
- $source=cssv_skills_source('essay',$theme['slug'],$level);check(count($source['stages'])===7,'Missing essay stage.');check($source['roadmap']['sections']===$theme['sections'],'Research directions altered.');
+ $source=cssv_skills_source('essay',$theme['slug'],$level);check(count($source['stages'])===7,'Missing essay stage.');check($source['edition']==='essay-guidance-2026-10-v1','Missing versioned essay guidance');check($source['roadmap_brief']===$theme['brief'],'Existing brief replaced');foreach($source['stages'] as $stage)check(count($stage['review'])===2,'Stage self-review missing');check($source['roadmap']['sections']===$theme['sections'],'Research directions altered.');
  check(!cssv_skills_evidence($source,[])['all_recorded'],'Essay opening completed learning.');
 }
 $input=['feature'=>'argument','student_text'=>'This statistic is unverified until a dated source is checked.'];
 $data=['summary'=>'The supplied wording states its limitation.','findings'=>[],'criteria'=>array_map(fn($code)=>['code'=>$code,'status'=>'developing','excerpt'=>'This statistic','explanation'=>'The source is still needed.','hint'=>'Find a dated primary source.'],array_keys(cssv_skills_rubric('argument'))),'evidence_flags'=>[['excerpt'=>'This statistic','status'=>'unverified','explanation'=>'No independent source is provided.']],'next_question'=>'What observation would challenge your reason?'];
 check(count(cssv_skills_ai_result($data,$input)['criteria'])===8,'Rubric lost.');
+$disclaimer=$data;$disclaimer['summary']='This instructional feedback is not official marks.';check(cssv_skills_ai_result($disclaimer,$input)['summary']===$disclaimer['summary'],'Valid disclaimer rejected as a mark claim.');
 $bad=$data;$bad['criteria'][0]['excerpt']='invented student quote';rejects(fn()=>cssv_skills_ai_result($bad,$input));
 $bad=$data;$bad['evidence_flags'][0]['status']='verified';rejects(fn()=>cssv_skills_ai_result($bad,$input));
 $bad=$data;$bad['summary']='Your score is 90';rejects(fn()=>cssv_skills_ai_result($bad,$input));

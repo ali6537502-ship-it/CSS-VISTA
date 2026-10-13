@@ -329,6 +329,13 @@ function Exercise({
           </span>
         </label>
       )}
+      {stage.review && saved?.evidence.recorded.includes(stage.id) && (
+        <details className="rounded-xl border border-slate-200 bg-white p-4">
+          <summary className="min-h-11 cursor-pointer font-semibold">Self-review this saved response</summary>
+          <p className="mt-3 text-sm leading-7">Use these checks to revise your own work. They do not certify that your response is correct.</p>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">{stage.review.map(item => <li key={item}>{item}</li>)}</ul>
+        </details>
+      )}
       {status === "error" && (
         <p role="alert" className="text-sm text-red-700">
           This browser cannot save the draft. Keep a copy until the account save

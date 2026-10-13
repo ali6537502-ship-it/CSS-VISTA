@@ -29,7 +29,7 @@ export type Stage = {
   teach?: string;
   example?: string;
   question?: string;
-  min_words: number;
+  min_words: number; review?: string[];
 };
 export type Source = {
   id: string;

@@ -29,10 +29,10 @@ function TranscriptionEditor({ page, refresh, busy, act, onDirty }: { page: Hand
 }
 export default function HandwritingDetailView({ data, refresh }: { data: HandwritingDetail; refresh: () => void }) {
  const { user } = useAccount(), page = data.page
- const [busy, setBusy] = useState(false), [error, setError] = useState(''), [dirty, setDirty] = useState(true)
+ const [busy, setBusy] = useState(false), [error, setError] = useState(''), [dirty, setDirty] = useState(true), [removeAccepted, setRemoveAccepted] = useState(false)
  const alive = useRef(true), running = useRef(false)
  useEffect(() => { alive.current = true; return () => { alive.current = false } }, [])
- async function act(action: 'edit' | 'confirm' | 'extract' | 'evaluate', text?: string) {
+ async function act(action: 'edit' | 'confirm' | 'extract' | 'evaluate' | 'discard_image', text?: string) {
   if (!user || running.current) return; running.current = true; setBusy(true); setError('')
   const body = { action, page_id: page.id, expected_version: page.transcription?.version || 0, ...(action === 'edit' ? { text } : action === 'confirm' ? { confirmed: true } : {}) }
   try { const identity = await saveIdentity(user.id, `handwriting:${page.id}:${action}`, body); await learningRequest(user.id, 'handwriting.php', { ...body, request_id: identity.id }); identity.done(); if (alive.current) refresh() }
@@ -47,6 +47,11 @@ export default function HandwritingDetailView({ data, refresh }: { data: Handwri
   <div className="grid items-start gap-6 lg:grid-cols-[.85fr_1.15fr]">
   <section className={`${panelStyle} min-w-0`}><p className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-indigo-700"><ScanLine className="h-4 w-4" aria-hidden="true" /> Source page</p><h2 className="break-words text-xl font-semibold tracking-tight">{page.title}</h2><p className="mt-3 inline-flex rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-semibold leading-6 text-indigo-800">{stateNames[page.state] || 'Status unavailable'}</p>
    {page.image_available && <img src={`/api/student/handwriting-image.php?page_id=${encodeURIComponent(page.id)}`} alt="Your temporarily stored handwritten page" className="mt-5 h-72 w-full rounded-2xl border border-slate-200 bg-slate-50 p-3 object-contain sm:h-96" />}
+   {page.image_available && <div className="mt-4 rounded-xl border border-slate-200 p-4 text-sm leading-7">
+    <p>Remove the temporary image whenever you have finished comparing it. Saved text and feedback stay in your account. Removal cannot undo an extraction already sent to the provider.</p>
+    <label className="mt-3 flex min-h-11 items-start gap-3"><input type="checkbox" checked={removeAccepted} disabled={busy} onChange={event => setRemoveAccepted(event.target.checked)} className="mt-1 h-5 w-5 shrink-0" /><span>I no longer need this temporary image.</span></label>
+    <button type="button" disabled={!removeAccepted || busy} onClick={() => void act('discard_image')} className={`${secondaryStyle} mt-3`}>Remove temporary image</button>
+   </div>}
    {!page.image_available && <div className="mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6"><ShieldCheck className="mb-3 h-6 w-6 text-indigo-600" aria-hidden="true" /><p className="text-sm leading-7 text-slate-500">The temporary page image is no longer available. Saved text and feedback remain in your account.</p></div>}
    {page.image_cleanup_pending && <p role="status" className="mt-3 text-sm leading-7">Image deletion is pending. The image is no longer served and cleanup will retry.</p>}
    {['uploaded', 'extraction_failed', 'awaiting_confirmation'].includes(page.state) && page.image_available && <button disabled={!enabled || busy} onClick={() => void act('extract')} className={`${buttonStyle} mt-5`}>{busy ? 'Processing…' : page.state === 'uploaded' ? 'Extract handwriting' : 'Retry extraction'}</button>}

@@ -24,11 +24,11 @@ if($action==='config'){
 }elseif($action==='tie-linked'){
  $user=cssv_pro_id($argv[2]??null);$parent=cssv_skills_workspace($pdo,$user,cssv_pro_id($argv[3]??null));
  $q=$pdo->prepare("UPDATE skills_workspaces SET updated_at='2026-01-01 00:00:00.000000' WHERE user_id=? AND parent_id=?");$q->execute([$user,$parent['id']]);
-}elseif(in_array($action,['legacy-start','sentence-legacy-start'],true)){
+}elseif(in_array($action,['legacy-start','sentence-legacy-start','essay-legacy-start'],true)){
  $user=cssv_pro_id($argv[2]??null);$attempt=cssv_pro_id($argv[3]??null);cssv_learning_attempt($pdo,$attempt,$user);cssv_pro_require_active($pdo,$user);
- $sentence=$action==='sentence-legacy-start';
- $sources=json_decode((string)file_get_contents(__DIR__.($sentence?'/sentence-legacy-sources.json':'/legacy-sources.json')),true,64,JSON_THROW_ON_ERROR);$source=$sources[(int)($argv[4]??-1)]??null;
- if(!is_array($source)||$source['edition']!==($sentence?'skills-2026-10-v2':'skills-2026-10-v1'))throw new RuntimeException('Choose a retained test source.');
+ $sentence=$action==='sentence-legacy-start';$essay=$action==='essay-legacy-start';
+ $sources=json_decode((string)file_get_contents(__DIR__.($essay?'/essay-legacy-sources.json':($sentence?'/sentence-legacy-sources.json':'/legacy-sources.json'))),true,64,JSON_THROW_ON_ERROR);$source=$sources[(int)($argv[4]??-1)]??null;
+ if(!is_array($source)||$source['edition']!==($essay?'skills-2026-10-v3':($sentence?'skills-2026-10-v2':'skills-2026-10-v1')))throw new RuntimeException('Choose a retained test source.');
  $id=cssv_uuid_v4();$q=$pdo->prepare('INSERT INTO skills_workspaces(id,user_id,attempt_id,feature,lesson_id,level,source_hash,source_snapshot,statement) VALUES(?,?,?,?,?,?,?,?,?)');
  $q->execute([$id,$user,$attempt,$source['feature'],$source['id'],$source['level'],cssv_skills_hash($source),json_encode($source,JSON_THROW_ON_ERROR),'']);echo $id;
 }elseif($action==='source-digest'){

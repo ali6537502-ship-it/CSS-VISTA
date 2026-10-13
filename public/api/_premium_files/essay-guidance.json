@@ -1,0 +1,181 @@
+{
+  "version": "essay-guidance-2026-10-v1",
+  "attribution": "Original CSS Vista conceptual guidance and hypothetical practice situations; not verified contemporary evidence, legal advice or authentic past-paper questions.",
+  "themes": [
+    {
+      "slug": "artificial-intelligence-automation-and-future-of-humanity",
+      "meaning": "AI systems use computation to perform tasks such as recognizing patterns or producing text. Automation means handing a task to a system. This theme asks which tasks should be automated, who gains or loses, and how people remain responsible.",
+      "distinction": "A useful tool is not automatically a reliable decision-maker. Distinguish assistance from giving a system authority over people.",
+      "scenario": "A hypothetical college is considering AI help for routine application sorting while staff retain final decisions.",
+      "focus": "automating application sorting with human review"
+    },
+    {
+      "slug": "governance-institutional-reform-and-state-capacity",
+      "meaning": "Governance concerns how public decisions are made and carried out. State capacity is the ability of institutions to perform their responsibilities. Reform should address a particular institutional problem rather than merely promise better government.",
+      "distinction": "A new rule and the ability to implement that rule are different questions.",
+      "scenario": "A hypothetical local office wants to reduce service delays by assigning clear responsibilities and tracking requests.",
+      "focus": "clarifying responsibilities in a local service office"
+    },
+    {
+      "slug": "democracy-constitutionalism-and-political-polarization",
+      "meaning": "Democracy concerns public participation and accountable political power. Constitutionalism concerns limits on that power. Polarization can make disagreement harder to manage; study institutions and fair rules rather than assuming that one political group is always right.",
+      "distinction": "Winning an election and exercising power within constitutional limits are different matters.",
+      "scenario": "A hypothetical elected council disagrees about how opposition members can scrutinize spending.",
+      "focus": "fair scrutiny of an elected council’s spending"
+    },
+    {
+      "slug": "pakistans-economy-and-structural-economic-reforms",
+      "meaning": "Economic reform changes how production, employment, finance or public resources are organized. Short-term stabilization addresses immediate pressures; structural reform addresses persistent constraints. A sound essay explains a proposed mechanism and its conditions.",
+      "distinction": "An immediate reduction in pressure does not by itself demonstrate long-term productivity growth.",
+      "scenario": "A hypothetical policy proposal links better vocational training with employer demand and asks what else is needed for productive employment.",
+      "focus": "linking skills training with employer demand"
+    },
+    {
+      "slug": "climate-change-climate-justice-and-resilience",
+      "meaning": "This theme connects changes in climate with exposure, vulnerability and responses. Adaptation addresses harm from climate conditions; mitigation addresses the causes of climate change. Climate justice asks how responsibilities and burdens should be shared.",
+      "distinction": "Reducing exposure to a hazard and reducing emissions are different purposes.",
+      "scenario": "A hypothetical town compares heat shelters, shaded streets and emissions reduction, asking whom each measure protects.",
+      "focus": "protecting vulnerable residents from heat"
+    },
+    {
+      "slug": "education-knowledge-economy-and-human-capital",
+      "meaning": "Education develops knowledge and capabilities. Human capital refers to skills and capacities that people can use, while a knowledge economy relies substantially on knowledge and innovation. Explore access, actual learning and opportunities to apply skills.",
+      "distinction": "Enrolment and demonstrated learning are different outcomes.",
+      "scenario": "A hypothetical school has higher attendance but wants to find out whether pupils can apply what they learn.",
+      "focus": "improving learning rather than counting attendance alone"
+    },
+    {
+      "slug": "population-growth-youth-bulge-and-employment",
+      "meaning": "Population structure concerns how people are distributed by age and other characteristics. A large young population creates needs as well as opportunities. An employment argument must explain how education, demand for work and access to jobs interact.",
+      "distinction": "More young people does not automatically mean more productive employment.",
+      "scenario": "A hypothetical district considers training for young jobseekers but has not established which employers need those skills.",
+      "focus": "matching youth training to employment opportunities"
+    },
+    {
+      "slug": "changing-world-order-multipolarity-and-pakistan",
+      "meaning": "World order concerns patterns of power and the rules governing international relationships. Multipolarity means power is distributed among several important centres. Ask which kind of power is changing and what that means for a country’s choices.",
+      "distinction": "Military, economic and institutional influence need not move together.",
+      "scenario": "A hypothetical diplomatic strategy seeks several trade partners while protecting the ability to make independent decisions.",
+      "focus": "diversifying partnerships without assuming equal influence in every domain"
+    },
+    {
+      "slug": "war-peace-nuclear-weapons-and-global-security",
+      "meaning": "Security concerns protection from threats, while peace involves more than the temporary absence of fighting. This theme examines conflict, escalation, deterrence and arrangements for reducing risks. Distinguish a proposed strategic explanation from a verified outcome.",
+      "distinction": "An intention to deter an opponent is not proof that escalation cannot occur.",
+      "scenario": "Two hypothetical neighbouring states consider a communication arrangement to reduce misunderstandings during a crisis.",
+      "focus": "reducing crisis misunderstanding through communication"
+    },
+    {
+      "slug": "water-security-agriculture-and-food-security",
+      "meaning": "Water security concerns reliable access to usable water. Agriculture turns resources into production; food security concerns access to adequate food. Explain the links without assuming that more production automatically reaches every household.",
+      "distinction": "Water supply, farm output and household food access are distinct outcomes.",
+      "scenario": "A hypothetical farming area compares repairing distribution channels with changing irrigation practices and asks which households benefit.",
+      "focus": "improving water use and examining its effect on food access"
+    },
+    {
+      "slug": "social-media-misinformation-and-post-truth-politics",
+      "meaning": "Social media connects people through platforms that select and distribute content. Misinformation is false or inaccurate information; its circulation should be distinguished from deliberate deception. Study evidence, platform incentives and responses while considering expression and trust.",
+      "distinction": "Popularity is not verification; disagreement alone does not make a claim false.",
+      "scenario": "A hypothetical platform considers source labels and appeals for disputed public claims.",
+      "focus": "improving source checks while allowing fair appeals"
+    },
+    {
+      "slug": "palestine-international-law-and-crisis-of-global-governance",
+      "meaning": "This theme examines the Palestinian question through humanitarian concerns, legal claims and international institutions. Distinguish verified events, the wording and status of a legal decision, and a political interpretation. Legal conclusions need the actual authoritative document.",
+      "distinction": "A party’s allegation, a provisional order and a final court finding are different kinds of material.",
+      "scenario": "An educational research file contains a hypothetical allegation, a provisional legal measure and a commentary; the writer must keep their status separate.",
+      "focus": "distinguishing allegations, legal decisions and commentary"
+    },
+    {
+      "slug": "women-gender-equality-and-social-transformation",
+      "meaning": "Gender equality concerns fair rights, opportunities and treatment. Examine education, work, safety, representation and unpaid care without assuming that women have identical circumstances. Explain which barrier a proposal addresses and whose position it changes.",
+      "distinction": "A formal right and a practical opportunity to exercise it are different.",
+      "scenario": "A hypothetical employer considers flexible hours and safe transport for workers with different care responsibilities.",
+      "focus": "addressing barriers to participation without treating all workers alike"
+    },
+    {
+      "slug": "energy-security-and-green-energy-transition",
+      "meaning": "Energy security concerns reliable and affordable supply. A green transition changes energy systems to reduce environmental harm. Evaluate reliability, affordability, environmental effects and the practical requirements of each option.",
+      "distinction": "Adding generating capacity and ensuring a reliable whole system are different tasks.",
+      "scenario": "A hypothetical community compares cleaner generation with storage and grid improvements under a reliability constraint.",
+      "focus": "balancing cleaner supply with reliability and affordability"
+    },
+    {
+      "slug": "justice-leadership-knowledge-and-philosophical-essays",
+      "meaning": "Philosophical essays examine an idea and defend a reasoned interpretation. Define the concept, test it with examples and counterexamples, and explain the limits of your position. A quotation cannot substitute for your own reasoning.",
+      "distinction": "A memorable slogan and a defensible argument are different.",
+      "scenario": "A hypothetical institution must decide whether a fair rule should make exceptions for different needs.",
+      "focus": "testing a conception of fairness against a serious counterexample"
+    },
+    {
+      "slug": "globalization-deglobalization-and-economic-nationalism",
+      "meaning": "Globalization concerns connections across borders through trade, finance, movement and ideas. Economic nationalism gives national interests a central role in economic policy. Examine which connections are changing instead of declaring that all international links are ending.",
+      "distinction": "Reducing one dependency does not necessarily mean ending all cross-border exchange.",
+      "scenario": "A hypothetical manufacturer considers diversifying suppliers while keeping some overseas production links.",
+      "focus": "reducing a supply dependency while retaining useful exchange"
+    },
+    {
+      "slug": "rule-of-law-human-rights-and-access-to-justice",
+      "meaning": "The rule of law concerns governing through law with constraints on arbitrary power. Human rights concern protections people can claim. Access to justice asks whether people can actually obtain fair remedies, not merely whether protections appear in written rules.",
+      "distinction": "A written legal guarantee and an accessible remedy are distinct.",
+      "scenario": "A hypothetical legal-aid service compares simpler procedures, advice and transport access for people seeking a remedy.",
+      "focus": "turning a formal protection into a usable remedy"
+    },
+    {
+      "slug": "digital-revolution-cybersecurity-and-digital-sovereignty",
+      "meaning": "Digital change uses connected systems and data to organize activities. Cybersecurity protects those systems against threats. Digital sovereignty concerns the ability to govern important digital choices and dependencies; balance that aim with privacy and useful exchange.",
+      "distinction": "Control over data and complete technological self-sufficiency are different aims.",
+      "scenario": "A hypothetical public service moves online and must decide how to protect records, maintain access and limit supplier dependence.",
+      "focus": "making an online public service secure and accessible"
+    },
+    {
+      "slug": "poverty-inequality-and-inclusive-development",
+      "meaning": "Poverty concerns insufficient resources or capabilities. Inequality concerns differences in distribution; inclusion concerns meaningful access and participation. An average improvement may hide the experience of groups who face particular barriers.",
+      "distinction": "A higher average income does not show who benefited or whose needs remain unmet.",
+      "scenario": "A hypothetical transport investment is evaluated for its effects on low-income workers rather than only average travel time.",
+      "focus": "examining who benefits from a development proposal"
+    },
+    {
+      "slug": "extremism-intolerance-and-social-cohesion",
+      "meaning": "Intolerance rejects space for difference, while social cohesion concerns the ability to live and cooperate across differences. Violent extremism must be distinguished from lawful dissent or disagreement. Examine specific mechanisms and avoid blaming a whole community.",
+      "distinction": "Disagreement, intolerance and violence should not be treated as interchangeable categories.",
+      "scenario": "A hypothetical community programme seeks to improve trust between groups and assesses its proposed mechanism without assigning collective blame.",
+      "focus": "building trust while distinguishing dissent from harmful conduct"
+    },
+    {
+      "slug": "urbanization-sustainable-cities-and-urban-governance",
+      "meaning": "Urbanization concerns the growth and organization of towns and cities. Urban governance concerns decisions about land, housing, transport and services. A sustainable city must consider access, resources and the effects of decisions over time.",
+      "distinction": "Constructing infrastructure and making it usable and maintainable are different requirements.",
+      "scenario": "A hypothetical city compares a new transport route with maintenance and access improvements for existing routes.",
+      "focus": "evaluating access and maintenance in a transport decision"
+    },
+    {
+      "slug": "science-technology-innovation-and-national-development",
+      "meaning": "Science develops knowledge; technology applies knowledge to practical purposes. Innovation involves putting a new or improved idea into use. Explore how research, skills, institutions and adoption connect rather than assuming that an invention automatically produces development.",
+      "distinction": "A research result and successful widespread use are different stages.",
+      "scenario": "A hypothetical university develops a useful device but needs to examine training, finance and adoption before claiming social benefits.",
+      "focus": "connecting a research idea with practical adoption"
+    },
+    {
+      "slug": "migration-brain-drain-and-global-mobility",
+      "meaning": "Migration is movement between places and can take different forms. Skilled emigration may affect both the people who move and institutions where they trained. Compare benefits, costs and conditions without assuming that every migrant’s situation is the same.",
+      "distinction": "Skilled emigration, internal movement and forced displacement raise different questions.",
+      "scenario": "A hypothetical training institution considers how overseas career opportunities affect local staffing and knowledge exchange.",
+      "focus": "weighing local staffing needs against mobility and exchange"
+    },
+    {
+      "slug": "media-freedom-of-expression-and-responsible-journalism",
+      "meaning": "Free expression allows ideas and criticism to circulate. Responsible journalism checks material, explains uncertainty and distinguishes reporting from opinion. Examine accountability and safeguards without assuming that any restriction or any publication is automatically justified.",
+      "distinction": "Criticism, verified reporting and an unsupported allegation are different kinds of expression.",
+      "scenario": "A hypothetical newsroom considers publishing an unverified allegation and designs verification, response and correction procedures.",
+      "focus": "checking a disputed report while protecting legitimate criticism"
+    },
+    {
+      "slug": "pakistans-foreign-policy-geo-economics-and-strategic",
+      "meaning": "Foreign policy concerns a country’s relationships and choices beyond its borders. Geo-economics examines links between economic tools and strategic interests. Strategic autonomy concerns room to make choices; evaluate actual constraints and issue-specific outcomes.",
+      "distinction": "A stated diplomatic aim and an achieved outcome are different forms of evidence.",
+      "scenario": "A hypothetical trade agreement offers market access but raises questions about dependence and freedom to change policy.",
+      "focus": "weighing economic access against policy dependence"
+    }
+  ]
+}

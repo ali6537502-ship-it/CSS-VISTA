@@ -43,7 +43,8 @@ function cssv_skills_ai_result(array $data,array $input): array {
     }unset($flag);
     $question=cssv_learning_string($data['next_question']??null,400,'one next learning question');
     foreach([$writing['summary'],$question,...array_column($writing['findings'],'explanation'),...array_column($writing['findings'],'hint'),...array_column($criteria,'explanation'),...array_column($criteria,'hint'),...array_column($flags,'explanation')] as $prose){
-        if(preg_match('~https?://|www\.|\b(?:examiner|official)\s+(?:marks?|score)|\b(?:your|student)\s+(?:score|marks?)\s*(?:is|are|:|=)|\b(?:scored|awarded)\s+\d+~iu',$prose))throw new InvalidArgumentException('Unsupported citation or examination marking claim.');
+        cssv_writing_instructional_prose($prose);
+        if(preg_match('~https?://|www\.~iu',$prose))throw new InvalidArgumentException('Unsupported citation or examination marking claim.');
     }
     return [...$writing,'criteria'=>$criteria,'evidence_flags'=>$flags,'next_question'=>$question,'rubric_version'=>'skills-instruction-v1','assessment'=>'Instructional rubric feedback; not official marks or independently verified factual research.'];
 }

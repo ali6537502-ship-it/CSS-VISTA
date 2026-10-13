@@ -23,9 +23,10 @@ function cssv_handwriting_extraction_result(array $data): array {
  cssv_pro_fields($data,['readable','text','uncertain','reason']);
  if(!is_bool($data['readable']??null) || !is_bool($data['uncertain']??null) || !is_string($data['text']??null))throw new InvalidArgumentException('Invalid extraction result.');
  $reason=cssv_learning_string($data['reason']??null,500,'reading note',true);
+ if(preg_match('/\b(?:confidence|accuracy)\s*(?:is|:|=)?\s*\d+(?:\.\d+)?\s*%/iu',$reason))throw new InvalidArgumentException('Do not invent a numerical OCR confidence.');
  $text=$data['readable'] ? cssv_handwriting_text($data['text']) : '';
  if(!$data['readable'] && trim($data['text'])!=='')throw new InvalidArgumentException('Unreadable content must not invent a transcription.');
- return ['readable'=>$data['readable'],'text'=>$text,'uncertain'=>$data['uncertain'],'reason'=>$reason];
+ return ['readable'=>$data['readable'],'text'=>$text,'uncertain'=>$data['uncertain']||preg_match('/\[\s*unreadable\s*\]/iu',$text)===1,'reason'=>$reason];
 }
 /** Header/MIME bounds precede full decode. Re-encoding removes metadata/trailing payloads. */
 function cssv_handwriting_decode(string $path): array {
