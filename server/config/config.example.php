@@ -16,6 +16,7 @@ return [
 
     // Pro launch stays closed until commercial terms/account use are approved.
     // These flags are an operational release gate, not a client entitlement.
+    'CSSV_PRO_COUPONS_ENABLED' => '0', // Separate release switch; cannot bypass the Pro release hold.
     'CSSV_PRO_COLLECTION_ENABLED' => '0',
     'CSSV_PRO_COLLECTION_APPROVED' => '0',
     'CSSV_PRO_PRICE_MINOR' => '195000', // PKR 1,950, integer paisa
