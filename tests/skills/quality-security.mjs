@@ -23,7 +23,7 @@ for(let n=0;n<sources.length;n++){
  assert.equal(retained.chosen,source.check.options[wrong]);assert.equal(retained.explanation,source.check.explanation);assert.equal(retained.choice_explanation,undefined)
  const fresh=await call(endpoint,user.jar,{action:'start',feature:source.feature,lesson:source.id,level:source.level,attempt_id:attempt.data.attempt_id});assert.equal(fresh.status,200)
  const freshId=fresh.data.workspace_id,freshPath=endpoint+'?workspace_id='+freshId,freshDetail=(await call(freshPath,user.jar)).data,newLesson=course.lessons.find(l=>l.id===source.id)
- assert.equal(freshDetail.workspace.source.edition,'skills-2026-10-v2');assert.notEqual(freshDetail.workspace.source.task,source.task)
+ assert.equal(freshDetail.workspace.source.edition,course.version);assert.notEqual(freshDetail.workspace.source.task,source.task)
  for(const key of ['answer','explanation','option_feedback'])assert.equal(freshDetail.workspace.source.check[key],undefined,'Unanswered source leaked feedback')
  const response={action:'save',workspace_id:freshId,expected_version:0,stage:'check',response:wrong,request_id:randomUUID()}
  const first=await call(endpoint,user.jar,response);assert.equal(first.status,200)
@@ -41,4 +41,4 @@ for(let n=0;n<sources.length;n++){
  assert.equal(php('tests/skills/fixture.php','source-digest',user.id,legacyId),digest,'Existing source hash/bytes were rewritten')
 }
 assert.deepEqual(JSON.parse(php('tests/skills/fixture.php','snapshot',user.id)),[])
-console.log('PASS reasoning source editions: v1 question/feedback/bytes retained, v2 focused tasks and chosen feedback, hidden unanswered reasons, immutable wrong/correct history, exact replay, ownership, expiry/renewal and zero AI usage')
+console.log('PASS reasoning source editions: v1 question/feedback/bytes retained, current focused tasks and chosen feedback, hidden unanswered reasons, immutable wrong/correct history, exact replay, ownership, expiry/renewal and zero AI usage')

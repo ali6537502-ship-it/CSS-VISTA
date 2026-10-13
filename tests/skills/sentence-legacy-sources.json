@@ -1,0 +1,118 @@
+[
+    {
+        "feature": "sentence",
+        "id": "sentence-core",
+        "title": "A complete sentence",
+        "level": "beginner",
+        "explanation": "A sentence expresses a complete thought. Find who or what the sentence is about, then what that subject does or is. An imperative may have an understood subject: you.",
+        "example": "The researcher checked the figures. Subject: the researcher. Predicate: checked the figures.",
+        "check": {
+            "id": "sentence-core-check",
+            "prompt": "Which sentence expresses a complete thought?",
+            "options": [
+                "The committee published its report.",
+                "Because the report was late.",
+                "The report on the desk.",
+                "After checking the figures."
+            ],
+            "answer": 0,
+            "explanation": "The subject committee has a finite verb, published, and the thought is complete."
+        },
+        "task": "Write one sentence about an action you completed today. Underline the subject mentally and identify its verb.",
+        "grammar_day": 2,
+        "attribution": "Original CSS Vista instructional example; not an authentic past-paper question.",
+        "stages": [
+            {
+                "id": "check",
+                "title": "Understand the idea",
+                "teach": "Read the explanation and different worked example above. Answer this recognition question before writing. A wrong answer receives an explanation and can be retried.",
+                "example": "Choose the option that follows the taught distinction.",
+                "question": "Which option is defensible?",
+                "min_words": 0
+            },
+            {
+                "id": "draft",
+                "title": "Write independently",
+                "teach": "Apply the lesson to a sentence of your own. Keep your meaning; do not copy the worked example.",
+                "example": "For an access issue, name the actor and the specific action rather than writing only “Things should improve”.",
+                "question": "Write your first sentence.",
+                "min_words": 3
+            },
+            {
+                "id": "reflection",
+                "title": "Review the wording",
+                "teach": "Identify the subject, verb and intended logical relationship. Check the relevant Grammar lesson. Optional AI feedback must target the saved wording, not your unsaved rewrite.",
+                "example": "A conditional claim should retain its if clause or an equivalent condition.",
+                "question": "What do you want the sentence to mean, and what needs checking?",
+                "min_words": 5
+            },
+            {
+                "id": "revision",
+                "title": "Revise independently",
+                "teach": "Rewrite using the lesson and any saved feedback. A new version preserves your earlier wording. You may retain wording you can defend; shorter is not automatically better.",
+                "example": "Compare who acts, what is claimed, the time frame and any qualification.",
+                "question": "Write your revised sentence.",
+                "min_words": 3
+            }
+        ],
+        "edition": "skills-2026-10-v2"
+    },
+    {
+        "feature": "sentence",
+        "id": "transformation",
+        "title": "Advanced sentence transformation",
+        "level": "advanced",
+        "explanation": "Change structure while preserving who acts, what is claimed, the time frame and qualifications. A passive construction or compressed clause must not strengthen the original claim.",
+        "example": "Original: The team may finish the review if the missing files arrive. Equivalent: The review may be finished by the team if the missing files arrive.",
+        "check": {
+            "id": "transformation-check",
+            "prompt": "Which revision preserves \"The measure may reduce delays if staff receive training\"?",
+            "options": [
+                "Training has already eliminated delays.",
+                "The measure reduces delays without any conditions.",
+                "With staff training, the measure may reduce delays.",
+                "The measure will eliminate delays."
+            ],
+            "answer": 2,
+            "explanation": "May and the training condition remain; neither certainty nor timing is invented."
+        },
+        "task": "Transform a conditional sentence of your own into a different structure. Check that its qualification and meaning survive.",
+        "grammar_day": 11,
+        "attribution": "Original CSS Vista instructional example; not an authentic past-paper question.",
+        "stages": [
+            {
+                "id": "check",
+                "title": "Understand the idea",
+                "teach": "Read the explanation and different worked example above. Answer this recognition question before writing. A wrong answer receives an explanation and can be retried.",
+                "example": "Choose the option that follows the taught distinction.",
+                "question": "Which option is defensible?",
+                "min_words": 0
+            },
+            {
+                "id": "draft",
+                "title": "Write independently",
+                "teach": "Apply the lesson to a sentence of your own. Keep your meaning; do not copy the worked example.",
+                "example": "For an access issue, name the actor and the specific action rather than writing only “Things should improve”.",
+                "question": "Write your first sentence.",
+                "min_words": 3
+            },
+            {
+                "id": "reflection",
+                "title": "Review the wording",
+                "teach": "Identify the subject, verb and intended logical relationship. Check the relevant Grammar lesson. Optional AI feedback must target the saved wording, not your unsaved rewrite.",
+                "example": "A conditional claim should retain its if clause or an equivalent condition.",
+                "question": "What do you want the sentence to mean, and what needs checking?",
+                "min_words": 5
+            },
+            {
+                "id": "revision",
+                "title": "Revise independently",
+                "teach": "Rewrite using the lesson and any saved feedback. A new version preserves your earlier wording. You may retain wording you can defend; shorter is not automatically better.",
+                "example": "Compare who acts, what is claimed, the time frame and any qualification.",
+                "question": "Write your revised sentence.",
+                "min_words": 3
+            }
+        ],
+        "edition": "skills-2026-10-v2"
+    }
+]

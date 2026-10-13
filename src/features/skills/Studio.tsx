@@ -824,7 +824,7 @@ function Session({
         {w.source.grammar_day && (
           <Link
             className="inline-flex min-h-11 items-center text-sm font-semibold underline"
-            to={grammarLink(w.source.grammar_day, undefined, undefined, w.attempt_id)}
+            to={grammarLink(w.source.grammar_day, w.writing_id || undefined, saved?.version_id, w.attempt_id, w.id)}
           >
             Review the existing Grammar lesson · day {w.source.grammar_day}
           </Link>

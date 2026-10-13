@@ -6,7 +6,7 @@ function rejects(callable $call): void {try{$call();}catch(InvalidArgumentExcept
 check(cssv_skills_hash(['b'=>['y'=>2,'x'=>1],'a'=>0])===cssv_skills_hash(['a'=>0,'b'=>['x'=>1,'y'=>2]]),'MySQL object key order invalidated saved context.');
 check(cssv_skills_hash(['a'=>['one','two']])!==cssv_skills_hash(['a'=>['two','one']]),'List ordering must remain significant.');
 $package=cssv_skills_package();check(count($package['lessons'])===51,'Curriculum scope changed.');$ids=[];$counts=[];
-$tasks=[];$keys=json_decode(file_get_contents(__DIR__.'/reasoning-answer-key.json'),true,32,JSON_THROW_ON_ERROR);
+$tasks=[];$sentenceKeys=json_decode(file_get_contents(__DIR__.'/sentence-answer-key.json'),true,32,JSON_THROW_ON_ERROR);$keys=json_decode(file_get_contents(__DIR__.'/reasoning-answer-key.json'),true,32,JSON_THROW_ON_ERROR);
 foreach($package['lessons'] as $lesson){
  check(!isset($ids[$lesson['id']]),'Repeated identity.');$ids[$lesson['id']]=true;$counts[$lesson['feature']]=($counts[$lesson['feature']]??0)+1;
  $source=cssv_skills_source($lesson['feature'],$lesson['id'],$lesson['level']);
@@ -14,9 +14,11 @@ foreach($package['lessons'] as $lesson){
  foreach(['explanation','example','task','attribution'] as $key)check(is_string($source[$key]??null)&&mb_strlen($source[$key])>20,'Incomplete teaching field '.$key);
  check(!isset(cssv_skills_public_source($source)['check']['answer']),'Answer leaked before attempt.');
  check(!isset(cssv_skills_public_source($source)['check']['option_feedback']),'Choice explanations leaked before attempt.');
+ if($source['feature']==='sentence')check($source['check']['options'][$source['check']['answer']]===$sentenceKeys[$source['id']],'Sentence recognition answer changed.');
  if(in_array($source['feature'],['argument','analysis'],true)){
   check(!isset($tasks[$source['task']]),'Reasoning lesson reused a generic task.');$tasks[$source['task']]=true;
   check($source['check']['options'][$source['check']['answer']]===$keys[$source['id']],'Reviewed recognition answer changed.');
+ }
   check(count($source['check']['option_feedback'])===4,'Missing choice explanation.');
   foreach($source['check']['options'] as $choice=>$wording){
    $feedback=cssv_skills_evidence($source,['check'=>$choice])['check_feedback'];
@@ -24,18 +26,21 @@ foreach($package['lessons'] as $lesson){
    check($feedback['choice_explanation']===$source['check']['option_feedback'][$choice],'Shuffled explanation misaligned.');
    check(mb_strlen($feedback['choice_explanation'])>25,'Insufficient choice explanation.');
   }
- }
  check(cssv_skills_evidence($source,[])['recorded']===[],'Opening awarded learning evidence.');
  check(!cssv_skills_evidence($source,['check'=>($source['check']['answer']+1)%4])['all_recorded'],'Wrong fixed check passed.');
  rejects(fn()=>cssv_skills_answers(['mastery'=>100],$source));rejects(fn()=>cssv_skills_answers(['check'=>'0'],$source));
 }
 check($counts===['sentence'=>21,'argument'=>15,'analysis'=>15],'Feature coverage mismatch.');
-check(count($tasks)===30&&$package['version']==='skills-2026-10-v2','Reasoning review scope/edition mismatch.');
+check(count($tasks)===30&&$package['version']==='skills-2026-10-v3','Reasoning review scope/edition mismatch.');
 foreach(json_decode(file_get_contents(__DIR__.'/legacy-sources.json'),true,64,JSON_THROW_ON_ERROR) as $legacy){
  $hash=cssv_skills_hash($legacy);$choice=($legacy['check']['answer']+1)%4;
  $feedback=cssv_skills_evidence($legacy,['check'=>$choice])['check_feedback'];
  check(!isset($feedback['choice_explanation'])&&$feedback['chosen']===$legacy['check']['options'][$choice],'Legacy response was relabelled with new feedback.');
  check(cssv_skills_hash($legacy)===$hash&&$legacy['edition']==='skills-2026-10-v1','Legacy source changed during grading.');
+}
+foreach(json_decode(file_get_contents(__DIR__.'/sentence-legacy-sources.json'),true,64,JSON_THROW_ON_ERROR) as $legacy){
+ $hash=cssv_skills_hash($legacy);$feedback=cssv_skills_evidence($legacy,['check'=>($legacy['check']['answer']+1)%4])['check_feedback'];
+ check(!isset($feedback['choice_explanation'])&&cssv_skills_hash($legacy)===$hash&&$legacy['edition']==='skills-2026-10-v2','Retained sentence source changed.');
 }
 $sentence=cssv_skills_source('sentence','sentence-core','beginner');$sourceHash=cssv_skills_hash($sentence);
 foreach(['Stop.','I studied.'] as $text){

@@ -1,5 +1,5 @@
 {
-  "version": "skills-2026-10-v2",
+  "version": "skills-2026-10-v3",
   "attribution": "Original bounded CSS Vista skills teaching. Hypothetical examples are not evidence of real events. Grammar rules link to the existing course.",
   "lessons": [
     {
@@ -19,7 +19,13 @@
           "After checking the figures."
         ],
         "answer": 0,
-        "explanation": "The subject committee has a finite verb, published, and the thought is complete."
+        "explanation": "The subject committee has a finite verb, published, and the thought is complete.",
+        "option_feedback": [
+          "The subject committee has a finite verb, published, and the thought is complete.",
+          "Because makes this clause dependent; it leaves the reader waiting for the main thought.",
+          "This noun phrase identifies a report but has no finite verb saying what it does or is.",
+          "After checking the figures is an introductory phrase, not a complete main clause."
+        ]
       },
       "task": "Write one sentence about an action you completed today. Underline the subject mentally and identify its verb.",
       "grammar_day": 2,
@@ -37,12 +43,18 @@
         "prompt": "Which is the head of the subject in \"The quality of the reports matters\"?",
         "options": [
           "matters",
-          "of",
+          "quality of the reports",
           "quality",
           "reports"
         ],
         "answer": 2,
-        "explanation": "Quality is the head noun; of the reports describes it."
+        "explanation": "Quality is the head noun; of the reports describes it.",
+        "option_feedback": [
+          "Matters is the predicate’s verb, not the head noun of the subject.",
+          "This is the whole subject phrase. The question asks for its head noun, quality.",
+          "Quality is the head noun; of the reports describes it.",
+          "Reports is inside the describing of phrase; quality controls agreement here."
+        ]
       },
       "task": "Write a sentence whose subject includes an of phrase. Make the verb agree with the head noun.",
       "grammar_day": 2,
@@ -61,11 +73,17 @@
         "options": [
           "The students stayed.",
           "The class ended, and the students stayed.",
-          "The attentive students stayed quietly.",
+          "The class ended; the students stayed.",
           "Although the class ended, the students stayed."
         ],
         "answer": 3,
-        "explanation": "Although introduces a dependent clause; the students stayed is independent."
+        "explanation": "Although introduces a dependent clause; the students stayed is independent.",
+        "option_feedback": [
+          "This contains one independent clause and no dependent clause, so it is simple.",
+          "And joins two independent clauses here, making a compound sentence.",
+          "The semicolon joins two independent clauses; neither is dependent, so this is compound.",
+          "Although introduces a dependent clause; the students stayed is independent."
+        ]
       },
       "task": "Write a simple sentence, then revise it to show a condition using if or a contrast using although.",
       "grammar_day": 3,
@@ -88,7 +106,13 @@
           "Because the road was closed."
         ],
         "answer": 2,
-        "explanation": "The repair supplies an independent clause with a subject and a finite verb."
+        "explanation": "The repair supplies an independent clause with a subject and a finite verb.",
+        "option_feedback": [
+          "The noun phrase names a road but has no finite verb expressing a complete thought.",
+          "Although introduces a dependent clause and leaves the contrasting main thought unstated.",
+          "The repair supplies an independent clause with a subject and a finite verb.",
+          "Because still makes the clause dependent; it needs a main clause."
+        ]
       },
       "task": "Repair this fragment in your own way: \"Although the proposal was promising.\" Do not invent evidence about a real proposal.",
       "grammar_day": 4,
@@ -111,7 +135,13 @@
           "The draft is ready; the editor will review it."
         ],
         "answer": 3,
-        "explanation": "A semicolon can connect closely related independent clauses."
+        "explanation": "A semicolon can connect closely related independent clauses.",
+        "option_feedback": [
+          "A comma alone splices these two independent clauses; use a suitable boundary or conjunction.",
+          "The independent clauses run together without punctuation or a connecting conjunction.",
+          "Because makes the second clause dependent, so it cannot stand after this semicolon as a second independent clause.",
+          "A semicolon can connect closely related independent clauses."
+        ]
       },
       "task": "Repair \"The instructions were unclear, we asked for help\" using a connector that shows the relationship.",
       "grammar_day": 4,
@@ -134,7 +164,13 @@
           "The purpose of these meetings is clear."
         ],
         "answer": 3,
-        "explanation": "The singular head purpose requires is in this present-tense sentence."
+        "explanation": "The singular head purpose requires is in this present-tense sentence.",
+        "option_feedback": [
+          "Purpose is singular; the plural meetings inside the of phrase does not require are.",
+          "Purposes is plural, so the singular is does not agree with it.",
+          "Were does not agree with the singular purpose here; the stated present meaning also calls for is.",
+          "The singular head purpose requires is in this present-tense sentence."
+        ]
       },
       "task": "Write a sentence beginning \"The value of these lessons\" and complete it with an appropriate verb.",
       "grammar_day": 5,
@@ -157,7 +193,13 @@
           "Last night, she drafted the paragraph and reviews it."
         ],
         "answer": 1,
-        "explanation": "Drafted and reviewed both refer to the stated past period."
+        "explanation": "Drafted and reviewed both refer to the stated past period.",
+        "option_feedback": [
+          "Draft and review are bare forms here; this past sequence requires drafted and reviewed.",
+          "Drafted and reviewed both refer to the stated past period.",
+          "Drafts switches to present while reviewed and last night establish the past frame being tested.",
+          "Reviews switches to present within the stated past sequence; reviewed preserves that frame."
+        ]
       },
       "task": "Describe two actions you completed yesterday in one sentence. Keep both verbs consistent with that time.",
       "grammar_day": 9,
@@ -180,7 +222,13 @@
           "Only Mina submitted a draft."
         ],
         "answer": 2,
-        "explanation": "Only directly before a draft limits the item submitted."
+        "explanation": "Only directly before a draft limits the item submitted.",
+        "option_feedback": [
+          "Only is immediately before submitted. Its scope may depend on emphasis, but it is not in the position the question asks for.",
+          "Only is immediately before to the editor, limiting the recipient rather than the submitted item.",
+          "Only directly before a draft limits the item submitted.",
+          "Only is immediately before Mina, limiting who submitted rather than the submitted item."
+        ]
       },
       "task": "Write two sentences with only in different positions, then explain how their meanings differ.",
       "grammar_day": 15,
@@ -203,7 +251,13 @@
           "After reviewing the figures, several errors appeared."
         ],
         "answer": 1,
-        "explanation": "The researcher is the person who reviewed the figures."
+        "explanation": "The researcher is the person who reviewed the figures.",
+        "option_feedback": [
+          "The report becomes the apparent reviewer; clearer wording must identify the person who reviewed the figures.",
+          "The researcher is the person who reviewed the figures.",
+          "The table becomes the apparent reviewer, although the table cannot review the figures. Name the reviewer as the subject.",
+          "Several errors becomes the apparent reviewer. The opening phrase needs the person who reviewed as its subject."
+        ]
       },
       "task": "Repair \"After reading the instructions, the task became easier\" by naming the person who read.",
       "grammar_day": 15,
@@ -226,7 +280,13 @@
           "We aim to improve access, reducing delays and decisions explained."
         ],
         "answer": 2,
-        "explanation": "The coordinated verbs improve, reduce and explain share the same to."
+        "explanation": "The coordinated verbs improve, reduce and explain share the same to.",
+        "option_feedback": [
+          "Aim to requires an infinitive here; improving does not match reduce and explain.",
+          "The list mixes improve access, the noun delays and explaining decisions instead of matching coordinated verb phrases.",
+          "The coordinated verbs improve, reduce and explain share the same to.",
+          "Improve, reducing and decisions explained do not share a grammatical form in this coordinated list."
+        ]
       },
       "task": "Rewrite \"The programme encourages reading, to discuss ideas and revision\" with matching forms.",
       "grammar_day": 20,
@@ -249,7 +309,13 @@
           "if"
         ],
         "answer": 3,
-        "explanation": "If sets a condition on the following claim."
+        "explanation": "If sets a condition on the following claim.",
+        "option_feedback": [
+          "Because introduces a reason, not the condition on which a claim depends.",
+          "Although signals a contrast or concession rather than a condition.",
+          "Therefore signals an inference or result; it does not introduce a conditional clause.",
+          "If sets a condition on the following claim."
+        ]
       },
       "task": "Write three short sentences about a hypothetical study plan: one cause, one contrast and one condition.",
       "grammar_day": 19,
@@ -272,7 +338,13 @@
           "in contrast"
         ],
         "answer": 0,
-        "explanation": "For example introduces an instance of the preceding general idea."
+        "explanation": "For example introduces an instance of the preceding general idea.",
+        "option_feedback": [
+          "For example introduces an instance of the preceding general idea.",
+          "Nevertheless introduces a concession or contrast, not an illustration of a general point.",
+          "Therefore signals a conclusion or consequence rather than an example.",
+          "In contrast points to a difference between ideas, not an illustration."
+        ]
       },
       "task": "Write a general statement about a study habit and add an illustrative sentence with an appropriate transition.",
       "grammar_day": 19,
@@ -291,11 +363,17 @@
         "options": [
           "The file is missing, causing the delay.",
           "The file is missing.",
-          "The delay is unreasonable.",
-          "The file was destroyed."
+          "The missing file may have caused the delay.",
+          "The delay caused the file to go missing."
         ],
         "answer": 0,
-        "explanation": "The revision retains both the missing file and its stated causal relationship to the delay."
+        "explanation": "The revision retains both the missing file and its stated causal relationship to the delay.",
+        "option_feedback": [
+          "The revision retains both the missing file and its stated causal relationship to the delay.",
+          "This retains the missing file but omits its stated role as the reason for the delay.",
+          "May have caused changes the original stated causal relationship into a tentative past possibility.",
+          "This reverses the causal direction: the original says the missing file caused the delay."
+        ]
       },
       "task": "Shorten \"It is necessary for students to make a plan in advance before they begin\" without losing its instruction.",
       "grammar_day": 22,
@@ -312,13 +390,19 @@
         "id": "precision-check",
         "prompt": "What should an editor do when \"this\" has no clear referent?",
         "options": [
-          "Replace it with a statistic.",
-          "Assume the preceding person is meant.",
+          "Replace this with the matter while leaving the referent unspecified.",
+          "Remove this and the claim it introduces without checking the intended meaning.",
           "Ask which idea or action the writer means.",
-          "Invent a likely policy."
+          "Choose the most likely referent without asking the writer."
         ],
         "answer": 2,
-        "explanation": "Clarification preserves the writer’s meaning instead of inventing it."
+        "explanation": "Clarification preserves the writer’s meaning instead of inventing it.",
+        "option_feedback": [
+          "The matter remains unspecified; a different vague expression does not resolve the reference.",
+          "Deleting the claim may remove intended meaning. Clarify the reference before deciding how to revise it.",
+          "Clarification preserves the writer’s meaning instead of inventing it.",
+          "Guessing a likely referent risks replacing the writer’s intention with the editor’s assumption."
+        ]
       },
       "task": "Write a vague sentence with this or things, then replace the vague expression using only details you actually intend.",
       "grammar_day": 14,
@@ -336,12 +420,18 @@
         "prompt": "Which option offers a measured criticism?",
         "options": [
           "The argument overlooks the cost of implementation.",
-          "The argument is completely stupid.",
-          "Nobody could ever support the argument.",
-          "The argument proves that every reform fails."
+          "The argument cannot possibly contribute anything useful.",
+          "The writer is incapable of understanding implementation.",
+          "Every argument for reform necessarily ignores implementation costs."
         ],
         "answer": 0,
-        "explanation": "The criticism identifies a specific limitation without personal insult or an unsupported universal claim."
+        "explanation": "The criticism identifies a specific limitation without personal insult or an unsupported universal claim.",
+        "option_feedback": [
+          "The criticism identifies a specific limitation without personal insult or an unsupported universal claim.",
+          "Cannot possibly contribute anything dismisses the whole argument instead of identifying a supported limitation.",
+          "This attacks the writer’s ability rather than explaining a specific weakness in the argument.",
+          "Every and necessarily make an unsupported universal claim rather than a measured criticism of this argument."
+        ]
       },
       "task": "Rewrite \"This idea is really bad\" as a specific criticism of a hypothetical idea, clearly stating the limitation.",
       "grammar_day": 23,
@@ -358,13 +448,19 @@
         "id": "causal-sentences-check",
         "prompt": "Which sentence makes a conditional causal claim?",
         "options": [
-          "Two changes occurred together, so one must cause the other.",
-          "Decisions and responsibilities are the same thing.",
+          "Decisions slowed after responsibilities changed, which proves that the change caused the slowdown.",
+          "The offices have unclear responsibilities and record delayed decisions.",
           "Unclear responsibilities may delay decisions when approvals are required from several offices.",
-          "Unclear responsibilities always destroy all institutions."
+          "Unclear responsibilities inevitably delay every decision."
         ],
         "answer": 2,
-        "explanation": "The sentence proposes an outcome and a condition without claiming inevitability."
+        "explanation": "The sentence proposes an outcome and a condition without claiming inevitability.",
+        "option_feedback": [
+          "Sequence alone does not prove causation. The statement excludes other explanations without support.",
+          "This records two conditions together but does not explain a causal relationship or state a condition for it.",
+          "The sentence proposes an outcome and a condition without claiming inevitability.",
+          "Inevitably and every assert an unconditional result; the question asks for a conditional causal claim."
+        ]
       },
       "task": "Construct a causal sentence about a hypothetical administrative delay. Include a mechanism and a qualification.",
       "grammar_day": 19,
@@ -382,12 +478,18 @@
         "prompt": "Which sentence gives a claim supported by relevant reasoning?",
         "options": [
           "The timetable should be reviewed because it should be reviewed.",
-          "Everyone knows the timetable is wrong.",
+          "The timetable should be reviewed because its printed layout looks dated.",
           "The timetable should be reviewed because two compulsory classes currently overlap.",
-          "The timetable should be reviewed because blue is a pleasant colour."
+          "The timetable should be reviewed because printing the same timetable on cheaper paper would save money."
         ],
         "answer": 2,
-        "explanation": "Overlapping compulsory classes is a relevant reason for reviewing a timetable."
+        "explanation": "Overlapping compulsory classes is a relevant reason for reviewing a timetable.",
+        "option_feedback": [
+          "The reason repeats the conclusion, so it provides no independent support for reviewing the timetable.",
+          "A dated printed layout does not explain a scheduling problem; it supports redesigning the presentation rather than the timetable itself.",
+          "Overlapping compulsory classes is a relevant reason for reviewing a timetable.",
+          "Cheaper paper supports a change to printing costs, not a change to the timetable’s schedule."
+        ]
       },
       "task": "Write a claim about a hypothetical classroom improvement and support it with one relevant reason.",
       "grammar_day": 24,
@@ -404,13 +506,19 @@
         "id": "analytical-sentences-check",
         "prompt": "Which statement offers analysis rather than only description?",
         "options": [
-          "The library opens at a fixed time.",
-          "The library has a door.",
-          "Some students use the library.",
+          "The library opens at the same time each weekday.",
+          "The opening timetable lists five weekday sessions.",
+          "The library opening time is inconvenient.",
           "A fixed opening time may restrict access for students whose classes finish later."
         ],
         "answer": 3,
-        "explanation": "It links opening time to a possible mechanism affecting a defined group."
+        "explanation": "It links opening time to a possible mechanism affecting a defined group.",
+        "option_feedback": [
+          "This describes a schedule without explaining how it affects access or another outcome.",
+          "This counts listed sessions without explaining a mechanism or relationship.",
+          "This expresses a judgement but does not explain who is affected or how the time creates a problem.",
+          "It links opening time to a possible mechanism affecting a defined group."
+        ]
       },
       "task": "Write one analytical sentence about a hypothetical access problem, including an alternative explanation.",
       "grammar_day": 24,
@@ -428,12 +536,18 @@
         "prompt": "Which statement has a clear condition?",
         "options": [
           "The shorter route is preferable when both routes are equally safe.",
-          "The shorter route is maybe perhaps sort of preferable.",
-          "The shorter route is always perfect for everyone.",
-          "The shorter route proves everything about travel."
+          "The shorter route might perhaps be preferable in some unspecified situations.",
+          "The shorter route is preferable regardless of the routes’ safety.",
+          "The shorter route is preferable because I like it."
         ],
         "answer": 0,
-        "explanation": "The condition specifies the circumstances in which the comparison holds."
+        "explanation": "The condition specifies the circumstances in which the comparison holds.",
+        "option_feedback": [
+          "The condition specifies the circumstances in which the comparison holds.",
+          "The repeated hedges leave the relevant situations unspecified instead of naming a clear condition.",
+          "Regardless of safety removes a relevant condition instead of defining when the preference applies.",
+          "Personal preference gives a reason for liking the route but no explicit condition delimiting the claim."
+        ]
       },
       "task": "Make \"Online discussion improves participation\" into a qualified hypothesis without inventing supporting data.",
       "grammar_day": 10,
@@ -450,13 +564,19 @@
         "id": "transformation-check",
         "prompt": "Which revision preserves \"The measure may reduce delays if staff receive training\"?",
         "options": [
-          "Training has already eliminated delays.",
-          "The measure reduces delays without any conditions.",
+          "Staff training has already enabled the measure to reduce delays.",
+          "The measure may reduce delays whether or not staff receive training.",
           "With staff training, the measure may reduce delays.",
-          "The measure will eliminate delays."
+          "With staff training, the measure will reduce delays."
         ],
         "answer": 2,
-        "explanation": "May and the training condition remain; neither certainty nor timing is invented."
+        "explanation": "May and the training condition remain; neither certainty nor timing is invented.",
+        "option_feedback": [
+          "Has already changes a conditional possibility into an asserted completed result.",
+          "Whether or not training occurs removes the original training condition and changes the claim.",
+          "May and the training condition remain; neither certainty nor timing is invented.",
+          "Will replaces may with certainty; the conditional possibility in the original must remain."
+        ]
       },
       "task": "Transform a conditional sentence of your own into a different structure. Check that its qualification and meaning survive.",
       "grammar_day": 11,
@@ -473,13 +593,19 @@
         "id": "word-choice-check",
         "prompt": "Which sentence preserves the meaning \"These figures do not provide enough support for the claim\"?",
         "options": [
-          "These figures are significant.",
+          "These figures make the claim unlikely.",
           "These figures are insufficient to support the claim.",
           "These figures disprove the claim.",
           "These figures confirm the claim."
         ],
         "answer": 1,
-        "explanation": "Insufficient means not enough. Lack of enough support does not establish that the opposite claim is true."
+        "explanation": "Insufficient means not enough. Lack of enough support does not establish that the opposite claim is true.",
+        "option_feedback": [
+          "Not enough support does not by itself establish that the claim is unlikely; that judgement needs further grounds.",
+          "Insufficient means not enough. Lack of enough support does not establish that the opposite claim is true.",
+          "Insufficient support does not show that the claim is false; disprove strengthens the original meaning.",
+          "Confirm reverses the original judgement that the figures do not provide enough support."
+        ]
       },
       "task": "Write a sentence using effective or efficient. Explain the meaning you intend and test an alternative word against it.",
       "grammar_day": 23,
