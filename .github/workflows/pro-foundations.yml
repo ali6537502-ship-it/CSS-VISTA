@@ -52,6 +52,7 @@ jobs:
           python3 scripts/skills/author-curriculum.py --check
           python3 scripts/skills/author-essay-guidance.py --check
           php tests/ability/unit.php
+          php tests/ability/evidence-unit.php
           node tests/ability/content.mjs
           node tests/ability/reasoning.mjs
           python3 scripts/ability/author-course.py --check
@@ -91,6 +92,7 @@ jobs:
           node tests/topics/security.mjs
           node tests/reading/security.mjs
           node tests/planner/security.mjs
+          node tests/planner/ability-evidence.mjs
           node tests/tutor/security.mjs
           node tests/pro/security.mjs
           node tests/pro/coupons-security.mjs
@@ -121,6 +123,7 @@ jobs:
           node tests/browser/essay-quality.mjs
           node tests/browser/handwriting-privacy.mjs
           node tests/browser/ability.mjs
+          node tests/browser/learning-continuity.mjs
           node tests/browser/precis.mjs
           node tests/browser/mentor-history.mjs
           node tests/browser/pro-pause.mjs

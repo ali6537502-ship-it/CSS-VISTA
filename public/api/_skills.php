@@ -12,7 +12,7 @@ function cssv_skills_resume(PDO $pdo,string $user,string $attempt): array {
     foreach($q->fetchAll(PDO::FETCH_COLUMN) as $id){
         $w=cssv_skills_workspace($pdo,$user,$id);$v=cssv_skills_version($pdo,$user,$w);$stage=$w['source']['stages'][$v['evidence']['next']];
         $path=match($w['feature']){'sentence'=>'/account/expression?view=studio&','argument'=>'/account/argumentation?','analysis'=>'/account/analytical-skills?','essay'=>'/account/essay-builder?'};
-        $rows[]=['id'=>$id,'feature'=>$w['feature'],'title'=>$w['source']['title'],'version'=>$v['version'],'level'=>$w['level'],'next_stage'=>$stage['title'],'recorded'=>count($v['evidence']['recorded']),'all_recorded'=>$v['evidence']['all_recorded'],'to'=>$path.'workspace='.$id];
+        $rows[]=['id'=>$id,'feature'=>$w['feature'],'title'=>$w['source']['title'],'version'=>$v['version'],'level'=>$w['level'],'next_stage'=>$stage['title'],'total_stages'=>count($w['source']['stages']),'recorded'=>count($v['evidence']['recorded']),'all_recorded'=>$v['evidence']['all_recorded'],'to'=>$path.'workspace='.$id];
     }return $rows;
 }
 function cssv_skills_workspace(PDO $pdo,string $user,string $id): array {
