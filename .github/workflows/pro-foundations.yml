@@ -48,6 +48,7 @@ jobs:
           php tests/skills/unit.php
           php tests/academic/unit.php
           node --test tests/academic/cost.test.mjs
+          node --test tests/academic/review.test.mjs
           php server/bin/pro-readiness.php
           python3 scripts/skills/author-curriculum.py --check
           python3 scripts/skills/author-essay-guidance.py --check

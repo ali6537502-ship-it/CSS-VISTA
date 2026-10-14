@@ -28,6 +28,7 @@ function cssv_academic_packet(array $case,array $op,array $input): array {
   default=>$case['feature']==='tutor'?cssv_tutor_result($result,$input):cssv_writing_result($result,$input['student_text'])
  };
  return ['status'=>'REQUIRES_HUMAN_ACADEMIC_REVIEW','case_id'=>$case['id'],'case_version'=>'pro-academic-cases-2026-10-v1','operation_id'=>$op['id'],'provider_response_id'=>$op['provider_response_id'],'configured_model'=>$op['model'],'reported_model'=>$op['reported_model'],
+  'provider'=>$op['provider'],'operation_feature'=>$op['feature'],'prompt_version'=>$op['prompt_version'],'provider_started_at'=>$op['provider_started_at'],'completed_at'=>$op['completed_at'],
   'tokens'=>array_intersect_key($op,array_flip(['input_tokens','output_tokens','cached_tokens'])),'source_snapshot'=>$input,'validated_feedback'=>$validated,'expectations'=>$case['review_expectations'],'unacceptable_behavior'=>$case['unacceptable_behavior'],
   'human_review'=>['reviewer'=>null,'meaning_preserved'=>null,'academically_correct'=>null,'actionable_hint'=>null,'evidence_boundaries_respected'=>null,'premature_solution_avoided'=>null,'notes'=>null],
   'release_approval'=>false];
