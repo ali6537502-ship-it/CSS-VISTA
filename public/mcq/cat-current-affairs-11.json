@@ -1,1 +1,512 @@
-[{"id":"current-affairs-8801","q":"Which airport was at the centre of the October 2026 Houthi-Saudi aviation escalation?","o":["King Abdulaziz International Airport","King Khalid International Airport","Hamad International Airport","Dubai International Airport"],"a":1,"e":"King Khalid International Airport in Riyadh was the airport at the centre of the October 2026 Houthi-Saudi aviation crisis. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/middle-east/yemens-houthis-renew-warning-over-saudi-airports-after-deadly-riyadh-attack-2026-10-11/"},{"id":"current-affairs-8811","q":"Which Russian region housed the Yandex data centre reported shut down on 11 October 2026?","o":["Kaluga","Vladimir","Tula","Saratov"],"a":1,"e":"Yandex said its data centre in Russia's Vladimir region shut down following a drone attack on 11 October 2026. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/europe/russias-yandex-says-data-centre-vladimir-area-shut-down-after-drone-attack-2026-10-11/"},{"id":"current-affairs-8821","q":"What steel capacity target does India's October 2026 draft policy set for 2047?","o":["450 million metric tonnes","800 million metric tonnes","300 million metric tonnes","604 million metric tonnes"],"a":3,"e":"India's October 2026 draft steel policy targets 604 million metric tonnes of steel capacity by 2047. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/india/india-unveils-steel-policy-aiming-604-million-tons-capacity-by-2047-2026-10-11/"},{"id":"current-affairs-8831","q":"Which condition did Zelenskiy attach to Ukraine halting strikes on Russian refineries?","o":["NATO withdraws from Ukraine","Russia ends attacks on Ukrainian energy infrastructure","All sanctions on Russia are lifted","Ukraine stops all attacks unconditionally"],"a":1,"e":"On 11 October 2026 Zelenskiy offered to halt Ukrainian refinery strikes only if Russia halted attacks on Ukraine's energy infrastructure. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/europe/ukraine-will-halt-strikes-refineries-if-russia-stops-energy-attacks-zelenskiy-2026-10-11/"},{"id":"current-affairs-8841","q":"Who publicly claimed on 11 October 2026 that Russia and Ukraine had reached an energy ceasefire?","o":["Vladimir Putin","Emmanuel Macron","Donald Trump","Volodymyr Zelenskiy"],"a":2,"e":"On 11 October 2026 Donald Trump publicly claimed a Russia-Ukraine 'energy ceasefire'; neither capital had immediately confirmed it. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/europe/trump-says-russia-ukraine-reached-energy-ceasefire-2026-10-11/"},{"id":"current-affairs-8851","q":"Which German foreign minister reaffirmed Berlin's support for Zelenskiy on 11 October 2026?","o":["Johann Wadephul","Boris Pistorius","Friedrich Merz","Annalena Baerbock"],"a":0,"e":"German Foreign Minister Johann Wadephul reaffirmed Berlin's support for Zelenskiy on 11 October 2026. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/germany-backs-ukraines-zelenskiy-after-trumps-call-his-removal-2026-10-11/"},{"id":"current-affairs-8861","q":"What ceasefire duration did Zelenskiy cite as a condition for organising Ukrainian elections?","o":["30 days","90 days","15 days","60 days"],"a":3,"e":"Zelenskiy conditioned holding Ukrainian elections on Russia agreeing to a 60-day ceasefire. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/europe/ukraines-zelenskiy-tells-abc-he-will-organize-elections-if-russia-agrees-60-day-2026-10-11/"},{"id":"current-affairs-8871","q":"Which city hosted the October 2026 WPC Energy Congress despite aviation disruptions?","o":["Doha","Manama","Riyadh","Abu Dhabi"],"a":2,"e":"The WPC Energy Congress went ahead in Riyadh on 11 October 2026 despite airport disruptions. Source: Reuters.","s":"Current Affairs - October 2026","d":"Intermediate","sourceUrl":"https://www.reuters.com/world/middle-east/yemens-houthis-renew-warning-over-saudi-airports-after-deadly-riyadh-attack-2026-10-11/"}]
+[
+  {
+    "id": "current-affairs-8801",
+    "q": "Which airport was at the centre of the October 2026 Houthi-Saudi aviation escalation?",
+    "o": [
+      "King Abdulaziz International Airport",
+      "King Khalid International Airport",
+      "Hamad International Airport",
+      "Dubai International Airport"
+    ],
+    "a": 1,
+    "e": "King Khalid International Airport in Riyadh was the airport at the centre of the October 2026 Houthi-Saudi aviation crisis. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/yemens-houthis-renew-warning-over-saudi-airports-after-deadly-riyadh-attack-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8811",
+    "q": "Which Russian region housed the Yandex data centre reported shut down on 11 October 2026?",
+    "o": [
+      "Kaluga",
+      "Vladimir",
+      "Tula",
+      "Saratov"
+    ],
+    "a": 1,
+    "e": "Yandex said its data centre in Russia's Vladimir region shut down following a drone attack on 11 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/russias-yandex-says-data-centre-vladimir-area-shut-down-after-drone-attack-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8821",
+    "q": "What steel capacity target does India's October 2026 draft policy set for 2047?",
+    "o": [
+      "450 million metric tonnes",
+      "800 million metric tonnes",
+      "300 million metric tonnes",
+      "604 million metric tonnes"
+    ],
+    "a": 3,
+    "e": "India's October 2026 draft steel policy targets 604 million metric tonnes of steel capacity by 2047. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/india/india-unveils-steel-policy-aiming-604-million-tons-capacity-by-2047-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8831",
+    "q": "Which condition did Zelenskiy attach to Ukraine halting strikes on Russian refineries?",
+    "o": [
+      "NATO withdraws from Ukraine",
+      "Russia ends attacks on Ukrainian energy infrastructure",
+      "All sanctions on Russia are lifted",
+      "Ukraine stops all attacks unconditionally"
+    ],
+    "a": 1,
+    "e": "On 11 October 2026 Zelenskiy offered to halt Ukrainian refinery strikes only if Russia halted attacks on Ukraine's energy infrastructure. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/ukraine-will-halt-strikes-refineries-if-russia-stops-energy-attacks-zelenskiy-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8841",
+    "q": "Who publicly claimed on 11 October 2026 that Russia and Ukraine had reached an energy ceasefire?",
+    "o": [
+      "Vladimir Putin",
+      "Emmanuel Macron",
+      "Donald Trump",
+      "Volodymyr Zelenskiy"
+    ],
+    "a": 2,
+    "e": "On 11 October 2026 Donald Trump publicly claimed a Russia-Ukraine 'energy ceasefire'; neither capital had immediately confirmed it. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/trump-says-russia-ukraine-reached-energy-ceasefire-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8851",
+    "q": "Which German foreign minister reaffirmed Berlin's support for Zelenskiy on 11 October 2026?",
+    "o": [
+      "Johann Wadephul",
+      "Boris Pistorius",
+      "Friedrich Merz",
+      "Annalena Baerbock"
+    ],
+    "a": 0,
+    "e": "German Foreign Minister Johann Wadephul reaffirmed Berlin's support for Zelenskiy on 11 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/germany-backs-ukraines-zelenskiy-after-trumps-call-his-removal-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8861",
+    "q": "What ceasefire duration did Zelenskiy cite as a condition for organising Ukrainian elections?",
+    "o": [
+      "30 days",
+      "90 days",
+      "15 days",
+      "60 days"
+    ],
+    "a": 3,
+    "e": "Zelenskiy conditioned holding Ukrainian elections on Russia agreeing to a 60-day ceasefire. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/ukraines-zelenskiy-tells-abc-he-will-organize-elections-if-russia-agrees-60-day-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-8871",
+    "q": "Which city hosted the October 2026 WPC Energy Congress despite aviation disruptions?",
+    "o": [
+      "Doha",
+      "Manama",
+      "Riyadh",
+      "Abu Dhabi"
+    ],
+    "a": 2,
+    "e": "The WPC Energy Congress went ahead in Riyadh on 11 October 2026 despite airport disruptions. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/yemens-houthis-renew-warning-over-saudi-airports-after-deadly-riyadh-attack-2026-10-11/"
+  },
+  {
+    "id": "current-affairs-20261014-01",
+    "q": "Which constitutional article did the law minister cite for the emergency covering all of KP?",
+    "o": [
+      "Article 232",
+      "Article 184(3)",
+      "Article 140A",
+      "Article 58(2)(b)"
+    ],
+    "a": 0,
+    "e": "On 14 October 2026 reporting, Pakistan's law minister clarified that the Article 232 emergency proclamation covered all of Khyber Pakhtunkhwa, not only 12 districts. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037025/emergency-applies-to-all-of-kp-not-just-12-districts"
+  },
+  {
+    "id": "current-affairs-20261014-02",
+    "q": "Who chaired the joint parliamentary opposition meeting that demanded withdrawal of KP governor's rule?",
+    "o": [
+      "Barrister Gohar Ali Khan",
+      "Mehmood Khan Achakzai",
+      "Rana Sanaullah",
+      "Allama Raja Nasir Abbas"
+    ],
+    "a": 1,
+    "e": "The 13 October 2026 joint opposition meeting opposing KP governor's rule was chaired by National Assembly Opposition Leader Mehmood Khan Achakzai, according to reporting published on 14 October. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037013/joint-opposition-flays-move-to-usurp-kp-govt-mandate"
+  },
+  {
+    "id": "current-affairs-20261014-03",
+    "q": "Which numbered Pakistan-Oman Joint Ministerial Commission session met in Islamabad on 14 October 2026?",
+    "o": [
+      "Sixth",
+      "Seventh",
+      "Eighth",
+      "Ninth"
+    ],
+    "a": 2,
+    "e": "Pakistan and Oman held the eighth session of their Joint Ministerial Commission in Islamabad on 14 October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037082/dar-hails-constructive-talks-with-oman-fm-after-jmc-meeting-in-islamabad"
+  },
+  {
+    "id": "current-affairs-20261014-04",
+    "q": "Who is the first secretary-general of the Makkah defence alliance?",
+    "o": [
+      "Khawaja Asif",
+      "Nauman Mahmood",
+      "Ishaq Dar",
+      "Ahmed Sharif Chaudhry"
+    ],
+    "a": 1,
+    "e": "Lieutenant General (retired) Nauman Mahmood was identified as the first secretary-general of the Makkah defence alliance during his 14 October 2026 meeting with Pakistan's prime minister. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037071/makkah-alliance-secretary-general-meets-pm-shehbaz-briefs-premier-on-defence-cooperation"
+  },
+  {
+    "id": "current-affairs-20261014-05",
+    "q": "Who was appointed Pakistan's special assistant to the prime minister on energy on 14 October 2026?",
+    "o": [
+      "Muhammad Zafar Iqbal",
+      "Ali Pervaiz Malik",
+      "Awais Leghari",
+      "Muhammad Aurangzeb"
+    ],
+    "a": 0,
+    "e": "On 14 October 2026, Lt Gen (retired) Muhammad Zafar Iqbal was appointed special assistant to Pakistan's prime minister on energy with minister-of-state status. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037107/pm-shehbaz-appoints-retired-lt-gen-zafar-iqbal-as-sapm-on-energy"
+  },
+  {
+    "id": "current-affairs-20261014-06",
+    "q": "For how long did the Judicial Commission extend the Sindh High Court constitutional benches?",
+    "o": [
+      "Six months",
+      "Two years",
+      "Three years",
+      "One year"
+    ],
+    "a": 3,
+    "e": "The Judicial Commission of Pakistan extended the term of the Sindh High Court's constitutional benches by one year at its October 2026 meeting. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037019/jcp-extends-term-of-constitutional-benches-at-shc"
+  },
+  {
+    "id": "current-affairs-20261014-07",
+    "q": "Which regulator issued Pakistan's new Targeted Financial Sanctions compliance guidebook?",
+    "o": [
+      "State Bank of Pakistan",
+      "Federal Board of Revenue",
+      "Securities and Exchange Commission of Pakistan",
+      "National Accountability Bureau"
+    ],
+    "a": 2,
+    "e": "Pakistan's SECP issued a Targeted Financial Sanctions guidebook to strengthen compliance with anti-money-laundering and counter-terrorist-financing obligations, reported on 14 October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037005/anti-terror-finance-controls-tightened"
+  },
+  {
+    "id": "current-affairs-20261014-08",
+    "q": "What gender-gap target for financial inclusion does SBP's Banking on Equality Policy 2026 support for 2028?",
+    "o": [
+      "15%",
+      "25%",
+      "35%",
+      "40%"
+    ],
+    "a": 1,
+    "e": "The State Bank of Pakistan's Banking on Equality Policy 2026 targets a financial-inclusion gender gap of 25% by 2028. Source: State Bank of Pakistan.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.sbp.org.pk/circulars/acfid-circular-no-02-of-2026"
+  },
+  {
+    "id": "current-affairs-20261014-09",
+    "q": "What climate-change policy coverage for financed projects was reported in Pakistan's 2025 bank sustainability benchmark?",
+    "o": [
+      "13.8%",
+      "26.8%",
+      "41.1%",
+      "75.4%"
+    ],
+    "a": 0,
+    "e": "The 2025 Benchmark of Bank Sustainability Policies in Pakistan found only 13.8% positive policy coverage for climate change in banks' financed companies and projects. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037007/banks-ignore-climate-in-project-financing"
+  },
+  {
+    "id": "current-affairs-20261014-10",
+    "q": "What share of Pakistan's youth was reported to have access to formal technical and vocational training?",
+    "o": [
+      "22%",
+      "15%",
+      "7%",
+      "31%"
+    ],
+    "a": 2,
+    "e": "A 14 October 2026 report put Pakistani youths' access to formal technical and vocational training at 7%, against a regional average of 22%. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037008/pakistani-youth-face-job-crisis"
+  },
+  {
+    "id": "current-affairs-20261014-11",
+    "q": "Which EU commissioner met Pakistani leaders to discuss migration and border security in October 2026?",
+    "o": [
+      "Magnus Brunner",
+      "Josep Borrell",
+      "Valdis Dombrovskis",
+      "Maroš Šefčovič"
+    ],
+    "a": 0,
+    "e": "EU Commissioner for Internal Affairs and Migration Magnus Brunner held talks with Pakistani leaders on migration and border security in October 2026. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037024/pakistan-eu-discuss-migration-border-security"
+  },
+  {
+    "id": "current-affairs-20261014-12",
+    "q": "Which three organisations jointly published the Disrupting Harm in Pakistan study cited in October 2026?",
+    "o": [
+      "WHO, UNDP and UNESCO",
+      "UNICEF, ECPAT International and INTERPOL",
+      "UNHCR, ILO and ITU",
+      "UNODC, WTO and FAO"
+    ],
+    "a": 1,
+    "e": "The Disrupting Harm in Pakistan study cited on 14 October 2026 was published by UNICEF, ECPAT International and INTERPOL. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2037044/online-abuse-puts-15m-pakistani-children-at-risk-study"
+  },
+  {
+    "id": "current-affairs-20261014-13",
+    "q": "What petrol price per litre was notified for Pakistan effective 14 October 2026?",
+    "o": [
+      "Rs395.37",
+      "Rs396.82",
+      "Rs392.66",
+      "Rs387.40"
+    ],
+    "a": 2,
+    "e": "Pakistan's notified petrol price effective 14 October 2026 was Rs392.66 per litre. Source: Dawn.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.dawn.com/news/2036924/govt-reduces-petrol-price-by-rs271-per-litre-high-speed-diesel-rate-by-re003"
+  },
+  {
+    "id": "current-affairs-20261014-14",
+    "q": "How many key considerations are set out in the Bangkok Blueprint for Fraud-Resilient Financial Services?",
+    "o": [
+      "8",
+      "10",
+      "12",
+      "16"
+    ],
+    "a": 2,
+    "e": "The Bangkok Blueprint for Fraud-Resilient Financial Services launched on 14 October 2026 contains 12 key considerations. Source: International Monetary Fund.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.imf.org/en/meetings/2026/annual/schedule/2026/10/14/seminar-bangkok-blueprint-launch-event-212426"
+  },
+  {
+    "id": "current-affairs-20261014-15",
+    "q": "Until which year did the IEA warn global diesel shortages might persist?",
+    "o": [
+      "2026",
+      "2027",
+      "2028",
+      "2030"
+    ],
+    "a": 1,
+    "e": "The IEA warned on 14 October 2026 that global diesel shortages could persist well into 2027. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/diesel-shortages-could-persist-well-into-2027-iea-says-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-16",
+    "q": "By how much did China's exports rise year-on-year in September 2026?",
+    "o": [
+      "36.3%",
+      "13.6%",
+      "31.0%",
+      "8.3%"
+    ],
+    "a": 0,
+    "e": "China's exports rose 36.3% year-on-year in September 2026, according to customs data reported on 14 October. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/asia-pacific/chinas-exports-surge-363-yy-september-imports-up-31-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-17",
+    "q": "Where would the proposed UN-backed Hormuz fertilizer-shipping coordination centre be located?",
+    "o": [
+      "Qatar",
+      "Bahrain",
+      "Oman",
+      "Kuwait"
+    ],
+    "a": 2,
+    "e": "The UN-backed fertilizer shipping plan discussed on 14 October 2026 proposed a coordination centre in Oman for Strait of Hormuz shipments. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/failure-activate-hormuz-fertilizer-plan-could-trigger-food-crisis-un-official-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-18",
+    "q": "Approximately how many people were reported to have lost humanitarian aid access amid Yemen's October 2026 escalation?",
+    "o": [
+      "80,000",
+      "300,000",
+      "1.8 million",
+      "800,000"
+    ],
+    "a": 3,
+    "e": "Relief agencies reported on 14 October 2026 that Yemen's intensified fighting had cut humanitarian aid access to approximately 800,000 people. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/middle-east/yemen-hospitals-overwhelmed-by-surge-war-casualties-red-cross-warns-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-19",
+    "q": "In which Saudi city is the Aramco headquarters targeted in the October 2026 escalation?",
+    "o": [
+      "Jeddah",
+      "Dhahran",
+      "Riyadh",
+      "Tabuk"
+    ],
+    "a": 1,
+    "e": "On 14 October 2026 the Houthis threatened further strikes on Saudi airports and oil facilities following an attack on Aramco's headquarters in Dhahran. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/business/energy/yemens-houthis-vow-more-attacks-saudi-airports-oil-facilities-after-aramco-hq-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-20",
+    "q": "Approximately how many people were reported without electricity after the 14 October 2026 Russian strikes on Ukraine?",
+    "o": [
+      "60,000",
+      "200,000",
+      "600,000",
+      "1.6 million"
+    ],
+    "a": 2,
+    "e": "Russian strikes on 14 October 2026 left at least 600,000 people without power in Ukraine, according to Reuters reporting. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/russian-strikes-kill-one-hit-energy-facilities-kyiv-mayor-says-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-21",
+    "q": "Which satellite communications service did Ukrainian officials say was disrupting some drone operations in October 2026?",
+    "o": [
+      "Starlink",
+      "OneWeb",
+      "Iridium Certus",
+      "Globalstar"
+    ],
+    "a": 0,
+    "e": "Ukrainian officials said on 14 October 2026 that restrictions on SpaceX's Starlink satellite service had disrupted military drone operations. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/europe/spacex-limits-starlink-operations-ukraine-disrupting-military-missions-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-22",
+    "q": "What was the value of Nvidia's five-year UK AI safety research pledge announced in October 2026?",
+    "o": [
+      "$50 million",
+      "$100 million",
+      "$500 million",
+      "$250 million"
+    ],
+    "a": 3,
+    "e": "Nvidia announced a $250 million five-year computing-resource pledge for UK AI safety research on 14 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/technology/nvidia-pledges-250-million-boost-uk-ai-safety-research-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-23",
+    "q": "How many countries were reported to have committed to the proposed global inequality panel initiative?",
+    "o": [
+      "10",
+      "15",
+      "25",
+      "40"
+    ],
+    "a": 1,
+    "e": "A 14 October 2026 initiative backed by Barbados and other states sought a new international panel on inequality, with 15 countries reportedly committed. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/china/barbados-joins-push-global-panel-tackle-inequality-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-24",
+    "q": "What was the year-on-year US CPI inflation rate for September 2026?",
+    "o": [
+      "2.6%",
+      "3.1%",
+      "3.7%",
+      "4.6%"
+    ],
+    "a": 2,
+    "e": "The US Consumer Price Index rose 3.7% year-on-year in September 2026, according to the Bureau of Labor Statistics release on 14 October. Source: U.S. Bureau of Labor Statistics.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_10142026.htm"
+  },
+  {
+    "id": "current-affairs-20261014-25",
+    "q": "Which country announced a decree requiring digital platforms to protect minors with a one-month compliance window?",
+    "o": [
+      "Mexico",
+      "Chile",
+      "Argentina",
+      "Colombia"
+    ],
+    "a": 0,
+    "e": "Mexico announced a one-month compliance period for digital platforms under a 14 October 2026 decree aimed at protecting minors. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/world/us/mexico-require-digital-platforms-protect-minors-violent-sexual-content-2026-10-14/"
+  },
+  {
+    "id": "current-affairs-20261014-26",
+    "q": "Which AI research leader called for stronger international AI safety standards in October 2026?",
+    "o": [
+      "Jensen Huang",
+      "Demis Hassabis",
+      "Satya Nadella",
+      "Yoshua Bengio"
+    ],
+    "a": 1,
+    "e": "Google DeepMind co-founder Demis Hassabis called for stronger international AI safety standards in remarks reported on 14 October 2026. Source: Reuters.",
+    "s": "Current Affairs - October 2026",
+    "d": "Intermediate",
+    "sourceUrl": "https://www.reuters.com/legal/litigation/google-deepminds-hassabis-calls-ai-hacks-early-warning-shots-2026-10-14/"
+  }
+]
