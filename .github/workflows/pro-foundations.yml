@@ -129,6 +129,7 @@ jobs:
           node tests/browser/mentor-history.mjs
           node tests/browser/pro-pause.mjs
           node tests/browser/coupons.mjs
+          node tests/browser/accessibility.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log

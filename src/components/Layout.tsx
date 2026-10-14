@@ -370,7 +370,7 @@ function NotificationBar() {
           <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><Flame className="h-3.5 w-3.5" /></span>
           <span className="rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-950">{streak.current} {streak.current === 1 ? 'day' : 'days'}</span>
         </Link>
-        <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
+        <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" role="group" aria-label="Latest features and official notices">
           <div className="vista-live-ticker-track flex w-max items-center">
             {[false, true].map((duplicate) => (
               <div
@@ -696,6 +696,8 @@ function fallbackRoute(pathname: string) {
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDrop, setOpenDrop] = useState<string | null>(null)
+  const accountMenuRef = useRef<HTMLDivElement>(null)
+  const accountMenuButtonRef = useRef<HTMLButtonElement>(null)
   const [searchOpen, setSearchOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -934,6 +936,9 @@ export default function Layout() {
         setSearchOpen(true)
       }
       if (event.key === 'Escape') {
+        if (accountMenuRef.current?.contains(document.activeElement)) {
+          accountMenuButtonRef.current?.focus({ preventScroll: true })
+        }
         setSearchOpen(false)
         setOpenDrop(null)
       }
@@ -1064,17 +1069,19 @@ export default function Layout() {
           <NotificationCenter />
           <div
             className="relative shrink-0"
+            ref={accountMenuRef}
             onBlur={(event) => {
               if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenDrop(null)
             }}
           >
             <button
               type="button"
+              ref={accountMenuButtonRef}
               onClick={() => setOpenDrop(openDrop === 'Account' ? null : 'Account')}
               className={`cssv-tap flex h-9 items-center justify-center gap-1.5 rounded-full border px-2 text-[9px] font-extrabold transition-colors sm:h-10 sm:px-3 sm:text-[10px] ${
                 openDrop === 'Account' ? 'border-emerald-300 bg-emerald-100 text-emerald-950' : 'border-emerald-200 bg-white text-pine hover:bg-emerald-50'
               }`}
-              aria-label={user ? `Open account menu for ${user.email}` : 'Open My Account menu'}
+              aria-label={user ? `Open My Account menu for ${user.email}` : 'Open My Account menu'}
               aria-expanded={openDrop === 'Account'}
               aria-haspopup="menu"
             >
@@ -1269,7 +1276,7 @@ export default function Layout() {
                 key={item.label}
                 to={item.to}
                 aria-current={active ? 'page' : undefined}
-                className={`cssv-tap flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg text-[9px] font-semibold transition-colors ${active ? 'text-emerald-800' : 'text-slate-500'}`}
+                className={`cssv-tap flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg text-[9px] font-semibold transition-colors ${active ? 'text-emerald-800' : 'text-slate-600'}`}
               >
                 <span className={`grid h-7 w-9 place-items-center rounded-full transition-colors ${active ? 'bg-emerald-50' : ''}`}>
                   <item.icon className="h-[17px] w-[17px]" strokeWidth={active ? 2.4 : 2} />
