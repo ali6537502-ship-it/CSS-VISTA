@@ -301,7 +301,7 @@ function Exercise({
                 type="radio"
                 name="recognition"
                 required
-                disabled={old || save.busy}
+                disabled={old || save.busy || !!save.pending}
                 checked={draft.response === i}
                 onChange={() => setDraft({ base: w.version, response: i })}
                 className="mt-1 h-5 w-5 shrink-0"
@@ -315,7 +315,7 @@ function Exercise({
           {stage.question || "Saved response"}
           <textarea
             required
-            disabled={old}
+            disabled={old || save.busy || !!save.pending}
             className={`${inputStyle} min-h-52 font-normal leading-8`}
             maxLength={
               w.feature === "essay" && stage.id === "practice" ? 20000 : 6000
@@ -828,22 +828,22 @@ function Session({
             {w.statement || w.source.task}
           </p>
         )}
-        {w.source.grammar_day && (
+        {w.source.grammar_day && (save.busy || save.pending ? <button type="button" disabled className="inline-flex min-h-11 items-center text-sm font-semibold opacity-60">Review the existing Grammar lesson · day {w.source.grammar_day}</button> : (
           <Link
             className="inline-flex min-h-11 items-center text-sm font-semibold underline"
             to={grammarLink(w.source.grammar_day, w.writing_id || undefined, saved?.version_id, w.attempt_id, w.id)}
           >
             Review the existing Grammar lesson · day {w.source.grammar_day}
           </Link>
-        )}
-        {w.writing_id && (
+        ))}
+        {w.writing_id && (save.busy || save.pending ? <button type="button" disabled className="inline-flex min-h-11 items-center text-sm font-semibold opacity-60">Open this wording in saved writing</button> : (
           <Link
             className="inline-flex min-h-11 items-center text-sm font-semibold underline"
             to={`/account/preparation?writing=${w.writing_id}${saved ? `&version=${saved.version_id}` : ""}`}
           >
             Open this wording in saved writing
           </Link>
-        )}
+        ))}
         {w.source.roadmap && (
           <>
             <Link
@@ -920,7 +920,7 @@ function Session({
           <button
             key={item.id}
             className={`${secondaryStyle} ${position === i ? "border-slate-900 bg-slate-100" : ""}`}
-            disabled={active && i > (saved?.evidence.next ?? 0)}
+            disabled={save.busy || !!save.pending || (active && i > (saved?.evidence.next ?? 0))}
             aria-current={position === i ? "step" : undefined}
             onClick={() => setPosition(i)}
           >
@@ -1068,7 +1068,9 @@ export default function Studio({ feature }: { feature: Feature }) {
       ? `skills.php?workspace_id=${encodeURIComponent(workspace)}${version ? `&version_id=${encodeURIComponent(version)}` : ""}&offset=${Math.max(0, Number(params.get("versions_offset")) || 0)}`
       : undefined,
   );
+  const [confirmedVersion, setConfirmedVersion] = useState<{ user: string; workspace: string; version: number }>();
   function confirmed(result: Receipt) {
+    if (user && result.workspace_id && typeof result.version === "number") setConfirmedVersion({ user: user.id, workspace: result.workspace_id, version: result.version });
     if (result.workspace_id)
       navigate(
         skillsLink(
@@ -1081,6 +1083,7 @@ export default function Studio({ feature }: { feature: Feature }) {
   }
   const save = useStudioSave(user?.id || "", confirmed);
   const load = workspace ? detail : overview;
+  const awaitingConfirmedVersion = !!workspace && confirmedVersion?.user === user?.id && confirmedVersion?.workspace === workspace && (!detail.data || detail.data.workspace.version < confirmedVersion.version);
   if (!user) return null;
   return (
     <div className="space-y-6">
@@ -1115,7 +1118,7 @@ export default function Studio({ feature }: { feature: Feature }) {
         </nav>
       </header>
       <Recovery save={save} />
-      {!load.data ? (
+      {!load.data || awaitingConfirmedVersion ? (
         <section role={load.error ? "alert" : "status"} className={panelStyle}>
           {load.error || "Loading your learning workspace…"}
           {load.error && (

@@ -64,7 +64,22 @@ try{
    await page.goto(url);await page.getByRole('heading',{name:'Write independently',exact:true}).waitFor()
    await page.locator('form textarea').fill('Stop.');await save('Save & continue');await page.getByRole('heading',{name:'Review the wording',exact:true}).waitFor()
    await page.locator('form textarea').fill('An imperative has the understood subject you and expresses a complete instruction.');await save('Save & continue');await page.getByRole('heading',{name:'Revise independently',exact:true}).waitFor()
-   await page.locator('form textarea').fill('Wait.');const revision=await save('Save independent response')
+   await page.locator('form textarea').fill('Wait.')
+   // Hold the authoritative detail refresh after acceptance: an old Grammar link
+   // must not remain actionable while the newly saved version is loading.
+   let releaseDetail;const detailGate=new Promise(resolve=>{releaseDetail=resolve})
+   const detailPattern='**/api/student/skills.php?*'
+   await page.route(detailPattern,async route=>{const u=new URL(route.request().url());if(route.request().method()==='GET'&&u.searchParams.get('workspace_id')===workspace&&u.searchParams.get('view')!=='linked')await detailGate;await route.continue().catch(()=>{})})
+   let revision
+   try{
+    const pending=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/student/skills.php'&&r.request().method()==='POST')
+    await page.getByRole('button',{name:'Save independent response',exact:true}).click();const response=await pending;assert.equal(response.status(),200);revision=await response.json()
+    await page.getByText('Loading your learning workspace…',{exact:true}).waitFor()
+    assert.equal(await page.getByRole('link',{name:/^Review the existing Grammar lesson/}).count(),0,'Old saved-version link remained actionable after acceptance')
+   }finally{releaseDetail()}
+   await page.getByText('beginner · '+revision.version+' saved versions',{exact:true}).waitFor()
+   await page.unroute(detailPattern)
+
    assert.equal(revision.evidence.all_recorded,true,'Short independent sentences failed participation progression')
    await grammarRoundtrip(page.url(),workspace,revision.version_id)
    await page.getByRole('heading',{name:'Revise independently',exact:true}).waitFor();assert.equal(await page.locator('form textarea').inputValue(),'Wait.')
