@@ -32,3 +32,19 @@ The initial audit findings and actual Escape-focus failure were corrected. Two t
 ## Preservation and release bounds
 
 No course text, answers, grade logic, student/mentor rows, subscription duration/price, source identities, feature limits, production configuration or account permissions are changed. The generated unrelated Vistagram timestamp is restored. Existing native and built student regression checks continue in Pro CI, with this accessibility journey added afterward. No production testing or real provider work is claimed. Real model/image validation, host cleanup evidence, pending launch decisions and the explicitly deferred CA/PA collection remain outstanding.
+
+## Rendered contrast follow-up — 15 October
+
+Completed a separate review of the incomplete contrast findings on the same isolated built interface. Run the optional measurement mode with the established native runtime:
+
+```sh
+CI=true CSSV_DB_NAME=cssvista_briefing_test CSSV_TEST_CONTRAST_REVIEW=1 node tests/browser/accessibility.mjs
+```
+
+Use the existing PHP-container/browser selectors when required by the local environment. This mode is restricted to loopback/reference pages. `contrast-review.mjs` records text ranges and computed foreground colors, temporarily makes glyph paint transparent, captures the real rendered background and restores the paint override. It preserves CSS colors/currentColor backgrounds and layout. It calculates WCAG relative luminance/contrast over sampled text rectangles, including foreground alpha, with the separate normal/large-text thresholds. Unsupported group opacity, filters, shadow, clipping and occlusion remain explicitly unresolved rather than being given a passing result. This is a conservative rendered-sample assessment; it is not physical assistive-technology testing or certification.
+
+Actual local result: 117 finding reviews across 25 interface states. Of these, 87 complete visible-text measurements passed (lowest ratio 5.2012:1); 25 ticker reviews passed only for their visible clipped portion and explicitly leave offscreen text unmeasured. One link was obscured by the open account menu; after the menu finished closing, the same link passed at 10.3547:1. Four low-reading findings were the clock's purely decorative middle dot, not instructional text. Its span is now explicitly hidden from screen readers, while status text and the semantic time remain unchanged; the review records a decorative classification, not a fabricated numerical pass. No meaningful text is waived merely because it is aria-hidden.
+
+Raw incomplete findings remain in `test-artifacts/accessibility.json`, alongside the measurements and menu-closed follow-up. Nothing is suppressed from axe. Initial measurements revealed the decorative case; an initial follow-up also ran before the menu's closing transition completed, so it now waits for actual hidden visibility rather than an arbitrary delay. No new palette or interface redesign was needed.
+
+Six browser reference tests validate black/white 21:1, a known low-contrast failure, large-text thresholds, alpha compositing, currentColor background preservation, safe unresolved states and the explicitly partial ticker/decorative classifications. These fixtures test the measurement method; they are not student results. The reference tests run in Pro CI; the more expensive full rendered review stays an explicit local mode. The full 25-state native/keyboard/accessibility run and six reference tests passed locally with unchanged AI usage. Final exact-head CI evidence is recorded in the draft PR and private release report.

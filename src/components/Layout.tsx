@@ -265,7 +265,7 @@ function LiveClock({
       title={userConnected && lastSyncedAt ? `Last synced ${lastSyncedAt.toLocaleString()}` : 'Account sync status and local time'}
     >
       <span className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-      {syncLabel && <><span>{syncLabel}</span><span className="text-emerald-200/50">·</span></>}
+      {syncLabel && <><span>{syncLabel}</span><span aria-hidden="true" className="text-emerald-200/50">·</span></>}
       <time dateTime={deviceTime.toISOString()}>{liveClockFormatter.format(deviceTime)}</time>
     </div>
   )

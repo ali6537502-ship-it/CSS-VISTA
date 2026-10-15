@@ -130,6 +130,7 @@ jobs:
           node tests/browser/pro-pause.mjs
           node tests/browser/coupons.mjs
           node tests/browser/accessibility.mjs
+          node --test tests/browser/contrast-review.test.mjs
       - name: Service diagnostics on failure
         if: failure()
         run: tail -n 80 test-artifacts/pro-php.log

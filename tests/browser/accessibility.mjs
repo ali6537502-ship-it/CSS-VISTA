@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import {execFileSync} from 'node:child_process'
 import {createRequire} from 'node:module'
 import {mkdirSync, readFileSync, writeFileSync} from 'node:fs'
+import {reviewContrast} from './contrast-review.mjs'
 
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw Error('Disposable native database required')
 const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
@@ -44,7 +45,8 @@ async function audit(name) {
     const structure = await window.axe.run(document, {runOnly: {type: 'rule', values: ['landmark-one-main', 'landmark-main-is-top-level']}})
     return {violations: [...result.violations, ...structure.violations].map(v => ({id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.map(n => ({target: n.target, summary: n.failureSummary}))})), incomplete: [...result.incomplete, ...structure.incomplete].map(v => ({id: v.id, help: v.help, nodes: v.nodes.map(n => ({target: n.target, summary: n.failureSummary, checks: [...n.any, ...n.all, ...n.none].map(c => c.message)}))}))}
   })
-  audits.push({name, width: page.viewportSize().width, initial_scroll_y: scroll, ...result})
+  const contrastReview = process.env.CSSV_TEST_CONTRAST_REVIEW === '1' ? await reviewContrast(page, result.incomplete.filter(issue => issue.id === 'color-contrast')) : undefined
+  audits.push({name, width: page.viewportSize().width, initial_scroll_y: scroll, ...result, contrast_review: contrastReview})
   assert.equal(await page.locator('main').count(), 1, 'One primary content landmark')
   assert.equal(await page.locator('.vista-live-ticker-track').evaluate(el => getComputedStyle(el).animationName), 'none', 'Honor reduced-motion preference')
   if (name === 'dashboard') {
@@ -130,6 +132,12 @@ try {
   await page.keyboard.press('Escape')
   assert.equal(await accountMenu.getAttribute('aria-expanded'), 'false')
   assert.equal(await accountMenu.evaluate(el => document.activeElement === el), true, 'Escape restores focus to the account menu button')
+  if (process.env.CSSV_TEST_CONTRAST_REVIEW === '1') {
+    await page.locator('[role="menu"][aria-label="My Account and CSS Vista links"]').waitFor({state: 'hidden'})
+    const hidden = audits.at(-1).contrast_review.filter(row => row.status === 'MANUAL_OBSCURED_TEXT')
+    audits.at(-1).menu_closed_contrast_review = await reviewContrast(page, [{nodes: hidden}])
+    assert.ok(audits.at(-1).menu_closed_contrast_review.every(row => row.status === 'RENDERED_CONTRAST_PASS'), 'Review obscured text after its menu is closed')
+  }
   const bell = page.getByRole('button', {name: 'Notifications', exact: true})
   await bell.focus(); await page.keyboard.press('Enter')
   await page.getByRole('region', {name: 'Updates and announcements', exact: true}).waitFor()
@@ -139,6 +147,7 @@ try {
   assert.equal(php('tests/skills/fixture.php', 'snapshot', user), before, 'Accessibility scans must not dispatch AI or spend usage')
   assert.deepEqual(errors, [], 'Browser errors during accessibility checks')
   assert.equal(audits.reduce((count, audit) => count + audit.violations.length, 0), 0, 'Resolve actual WCAG violations; see private test-artifacts/accessibility.json')
+  assert.ok(audits.every(audit => !(audit.contrast_review || []).some(row => row.status === 'RENDERED_CONTRAST_FAIL')), 'A measured text contrast failure requires review')
   console.log('PASS isolated built Pro accessibility: WCAG A/AA and single-main checks, keyboard choice/writing/grading/menu recovery, 320–1440 widths, reduced-motion preference, no model calls. Manual/assistive-technology review remains separate.')
 } finally {
   mkdirSync(root + '/test-artifacts', {recursive: true})
