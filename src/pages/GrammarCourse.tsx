@@ -161,7 +161,7 @@ function GrammarCourseView({ initialDay, initialView, returnTo, userId, loading,
   const referenceParams = new URLSearchParams({ lang: 'english', return_day: String(day) })
   if (attemptId) referenceParams.set('attempt', attemptId)
   if (referenceTopics[day]) referenceParams.set('topic', referenceTopics[day])
-  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : source.pathname === '/account/precis' ? 'precis' : 'expression'); if (['expression','precis'].includes(source.searchParams.get('from') || '')) referenceParams.set('origin', source.searchParams.get('from')!); for (const key of ['writing', 'version']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
+  if (returnTo) { const source = new URL(returnTo, 'https://www.css-vista.com'); referenceParams.set('from', source.pathname === '/grammar-course' ? 'lab' : source.pathname === '/account/precis' ? 'precis' : 'expression'); if (['expression','precis'].includes(source.searchParams.get('from') || '')) referenceParams.set('origin', source.searchParams.get('from')!); for (const key of ['writing', 'version', 'workspace']) { const value = source.searchParams.get(key); if (value) referenceParams.set(key, value) } }
   const latestAttempt = state.attempts.filter(a => a.day === day).at(-1)
 
   const bestScore = state.scores[String(day)]
@@ -669,10 +669,15 @@ export default function GrammarCourse() {
   const fromLab = params.get('from') === 'lab'
   const fromPrecis = params.get('from') === 'precis' || fromLab && params.get('origin') === 'precis'
   const fromExpression = params.get('from') === 'expression' || fromLab && params.get('origin') === 'expression'
+  const workspace = params.get('workspace')
+  if (fromExpression && workspace && idPattern.test(workspace)) back.set('workspace', workspace)
+  const expressionBack = new URLSearchParams(back)
+  if (back.has('workspace')) expressionBack.set('view', 'studio')
+  if (back.has('workspace') && attemptId) expressionBack.set('attempt', attemptId)
   const labParams = new URLSearchParams({ view: 'lab' })
   if (attemptId) labParams.set('attempt', attemptId)
   if (fromPrecis || fromExpression) { labParams.set('from', fromPrecis ? 'precis' : 'expression'); for (const [key, value] of back) labParams.set(key, value) }
-  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromPrecis ? `/account/precis${back.size ? `?${back}` : ''}` : fromExpression ? `/account/expression${back.size ? `?${back}` : ''}` : undefined
+  const returnTo = fromLab ? `/grammar-course?${labParams}` : fromPrecis ? `/account/precis${back.size ? `?${back}` : ''}` : fromExpression ? `/account/expression${expressionBack.size ? `?${expressionBack}` : ''}` : undefined
   const requestedView = params.get('view')
   const initialView: View = requestedView === 'lab' || requestedView === 'toolkit' || requestedView === 'notebook' || requestedView === 'profile' ? requestedView : 'course'
   const panel = user && !loading ? <section className="mb-6 rounded-2xl border border-indigo-200 bg-white p-5" aria-label="Grammar preparation attempt">

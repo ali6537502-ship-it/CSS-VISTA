@@ -1,0 +1,166 @@
+[
+    {
+        "feature": "argument",
+        "id": "counterarguments",
+        "title": "Constructing a counterargument",
+        "level": "advanced",
+        "explanation": "Present a serious opposing reason in a form an informed opponent might accept. Do not make the opposing view weaker for convenience.",
+        "example": "A concern about longer library hours could be staffing cost and the reliability of supervision.",
+        "check": {
+            "id": "counterarguments-check",
+            "prompt": "Which counterargument engages an access proposal seriously?",
+            "options": [
+                "Longer hours may require staffing resources that are unavailable.",
+                "Opponents hate students.",
+                "Nobody should ever use libraries.",
+                "The proposal has words in it."
+            ],
+            "answer": 0,
+            "explanation": "It identifies a practical constraint relevant to the proposal."
+        },
+        "task": "Develop your own position on whether a hypothetical school should trial evening library hours. Apply this lesson’s focus, or choose your own statement.",
+        "grammar_day": null,
+        "attribution": "Original CSS Vista instructional example; not an authentic past-paper question.",
+        "stages": [
+            {
+                "id": "check",
+                "title": "Understand the idea",
+                "teach": "Read the explanation and different worked example above. Answer this recognition question before writing. A wrong answer receives an explanation and can be retried.",
+                "example": "Choose the option that follows the taught distinction.",
+                "question": "Which option is defensible?",
+                "min_words": 0
+            },
+            {
+                "id": "claim",
+                "title": "Your claim",
+                "teach": "What do you think about the practice statement, and why? State a position that could be challenged. A topic name alone is not a claim.",
+                "example": "A limited trial may be preferable to a permanent change when demand is uncertain. This is a hypothetical claim.",
+                "question": "What is your central claim?",
+                "min_words": 5
+            },
+            {
+                "id": "reasoning",
+                "title": "Explain your reasoning",
+                "teach": "Explain how your reason supports your claim. Identify the mechanism or inference and what you are assuming.",
+                "example": "A timetable overlap prevents attending both classes; moving one could remove that particular barrier.",
+                "question": "Why should the reader accept your claim?",
+                "min_words": 10
+            },
+            {
+                "id": "evidence",
+                "title": "Select and check evidence",
+                "teach": "State what evidence would support the reason. If you offer a statistic, quotation or historical claim, include its real source and date or explicitly label it unverified. A citation supplied by a student is not automatically verified.",
+                "example": "Dated class schedules could test an overlap claim. An invented percentage cannot.",
+                "question": "What evidence is relevant, and what is its verification status?",
+                "min_words": 8
+            },
+            {
+                "id": "counterargument",
+                "title": "Consider an alternative",
+                "teach": "Give a serious objection, not a weak caricature. Explain why a reasonable opponent might raise it.",
+                "example": "Longer hours might require supervision that the available staffing cannot provide.",
+                "question": "What is the strongest relevant counterargument?",
+                "min_words": 8
+            },
+            {
+                "id": "rebuttal",
+                "title": "Answer the objection",
+                "teach": "Address the actual objection. Concede what is valid, state the conditions of your reply and identify evidence still needed.",
+                "example": "A time-limited trial within an agreed staffing budget could test feasibility; it does not make costs vanish.",
+                "question": "How do you answer or qualify your position?",
+                "min_words": 10
+            },
+            {
+                "id": "final",
+                "title": "Your final argument",
+                "teach": "Compose a connected argument in your own words. Include the claim, reasoning, evidence status, counterargument and qualified response. Optional AI reports are instructional, never examiner marks.",
+                "example": "Use one controlling claim and connect each support to it. Do not paste a list of unrelated reasons.",
+                "question": "Write your argument, then save later revisions independently.",
+                "min_words": 20
+            }
+        ],
+        "edition": "skills-2026-10-v1"
+    },
+    {
+        "feature": "analysis",
+        "id": "trade-offs",
+        "title": "Identifying trade-offs",
+        "level": "advanced",
+        "explanation": "A trade-off arises when improving one objective can constrain another. Explain what is gained, what may be lost and who bears the consequences.",
+        "example": "Longer opening hours may improve access but require more staffing or a narrower range of services.",
+        "check": {
+            "id": "trade-offs-check",
+            "prompt": "Which question tests a trade-off?",
+            "options": [
+                "Can we assume unlimited resources?",
+                "Is every cost imaginary?",
+                "Can the title be longer?",
+                "What other service might lose resources if hours are extended?"
+            ],
+            "answer": 3,
+            "explanation": "It examines an opportunity cost relevant to the decision."
+        },
+        "task": "Analyse the hypothetical statement: unclear administrative responsibilities can delay decisions. Explain mechanisms, conditions and alternatives, or enter an issue of your own.",
+        "grammar_day": null,
+        "attribution": "Original CSS Vista instructional example; not an authentic past-paper question.",
+        "stages": [
+            {
+                "id": "check",
+                "title": "Understand the idea",
+                "teach": "Read the explanation and different worked example above. Answer this recognition question before writing. A wrong answer receives an explanation and can be retried.",
+                "example": "Choose the option that follows the taught distinction.",
+                "question": "Which option is defensible?",
+                "min_words": 0
+            },
+            {
+                "id": "mechanism",
+                "title": "Explain a mechanism",
+                "teach": "Move from what happens to how or why it might happen. Name intermediate steps rather than claiming that one event proves another.",
+                "example": "Unclear responsibility could cause repeated referrals, which could lengthen the decision process. This is a hypothesis to test.",
+                "question": "What mechanism could connect the issue and outcome?",
+                "min_words": 10
+            },
+            {
+                "id": "conditions",
+                "title": "Identify conditions and assumptions",
+                "teach": "Under what conditions could the mechanism operate? Name rules, resources, institutional arrangements or assumptions that matter.",
+                "example": "Clear responsibility may not reduce waiting if the main constraint is a missing resource.",
+                "question": "What conditions or assumptions need checking?",
+                "min_words": 8
+            },
+            {
+                "id": "alternatives",
+                "title": "Compare explanations",
+                "teach": "Offer another plausible explanation and an observation that could distinguish it from yours. Consider reverse causation or a common cause where relevant.",
+                "example": "Compare an approval-rule explanation with a staffing explanation using records of where tasks wait.",
+                "question": "What competing explanation would you test?",
+                "min_words": 10
+            },
+            {
+                "id": "evidence",
+                "title": "Evaluate evidence",
+                "teach": "Identify relevant sources, dates, methods and scope. Mark unsupported claims and say what observation would support or challenge the mechanism.",
+                "example": "A self-selected survey alone cannot establish the preferences of every student.",
+                "question": "What evidence would help, and what are its limitations?",
+                "min_words": 8
+            },
+            {
+                "id": "tradeoffs",
+                "title": "Weigh consequences and trade-offs",
+                "teach": "Compare relevant dimensions, short- and long-term effects, a counterfactual and feasible options. Explain why a dimension changes the judgement.",
+                "example": "Faster processing may require training now; ask what would happen without the change before attributing later differences to it.",
+                "question": "Which consequences, trade-offs or counterfactuals matter?",
+                "min_words": 12
+            },
+            {
+                "id": "conclusion",
+                "title": "Reach a qualified conclusion",
+                "teach": "Develop a connected analytical paragraph. Weigh evidence rather than pretending every explanation is equally supported. State what remains uncertain.",
+                "example": "A limited trial may be defensible if the identified resource condition can be met.",
+                "question": "Write your reasoned conclusion and revise it after review.",
+                "min_words": 20
+            }
+        ],
+        "edition": "skills-2026-10-v1"
+    }
+]

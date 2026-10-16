@@ -103,7 +103,7 @@ export function useSyllabusTotal() {
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user } = useAccount()
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
@@ -143,12 +143,12 @@ export function AccountPage({ title, intro, action, children }: { title: string;
             route registry, not by this page. */}
         <div className="mt-12"><AuthenticatedAccountAd /></div>
       </div>
-    </main>
+    </div>
   )
 }
 
 export function SectionTitle({ children }: { children: ReactNode }) {
-  return <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-400">{children}</h2>
+  return <h2 className="text-sm font-semibold uppercase tracking-[.14em] text-slate-600">{children}</h2>
 }
 
 export function Metric({ label, value, detail }: { label: string; value: string | number; detail: string }) {

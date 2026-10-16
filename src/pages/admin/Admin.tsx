@@ -9,11 +9,12 @@ import MptAdminPanel from './MptAdminPanel'
 import AiUsagePanel from './AiUsagePanel'
 import PaymentsPanel from './PaymentsPanel'
 import TopicsPanel from './TopicsPanel'
+import CouponsPanel from './CouponsPanel'
 
 export default function Admin() {
   const navigate = useNavigate()
   const [ready, setReady] = useState(false)
-  const [workspace, setWorkspace] = useState<'students' | 'website' | 'briefing' | 'mail' | 'mpt' | 'payments' | 'ai-usage' | 'topics'>('students')
+  const [workspace, setWorkspace] = useState<'students' | 'website' | 'briefing' | 'mail' | 'mpt' | 'payments' | 'ai-usage' | 'topics' | 'coupons'>('students')
 
   useEffect(() => {
     let active = true
@@ -40,7 +41,7 @@ export default function Admin() {
   }
 
   if (workspace === 'students') {
-    return <><div className="mx-auto max-w-7xl px-4 pt-5"><button type="button" onClick={() => setWorkspace('briefing')} className="min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Daily briefing publications</button><button type="button" onClick={() => setWorkspace('topics')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Pro topic learning</button><button type="button" onClick={() => setWorkspace('mail')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Account emails</button><button type="button" onClick={() => setWorkspace('mpt')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">MPT examinations</button><button type="button" onClick={() => setWorkspace('payments')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Membership payments</button><button type="button" onClick={() => setWorkspace('ai-usage')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">AI usage</button></div><StudentManagementPanelV2 onOpenWebsiteTools={() => setWorkspace('website')} /></>
+    return <><div className="mx-auto max-w-7xl px-4 pt-5"><button type="button" onClick={() => setWorkspace('briefing')} className="min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Daily briefing publications</button><button type="button" onClick={() => setWorkspace('topics')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Pro topic learning</button><button type="button" onClick={() => setWorkspace('mail')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Account emails</button><button type="button" onClick={() => setWorkspace('mpt')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">MPT examinations</button><button type="button" onClick={() => setWorkspace('coupons')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Pro coupons</button><button type="button" onClick={() => setWorkspace('payments')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">Membership payments</button><button type="button" onClick={() => setWorkspace('ai-usage')} className="ml-2 min-h-11 rounded-md border bg-white px-4 text-sm font-semibold text-pine">AI usage</button></div><StudentManagementPanelV2 onOpenWebsiteTools={() => setWorkspace('website')} /></>
   }
 
   return (
@@ -54,7 +55,7 @@ export default function Admin() {
           <ArrowLeft className="h-4 w-4" /> Student management
         </button>
       </div>
-      {workspace === 'topics' ? <TopicsPanel /> : workspace === 'briefing' ? <CurrentAffairsAdmin /> : workspace === 'mail' ? <AccountMailPanel /> : workspace === 'mpt' ? <MptAdminPanel /> : workspace === 'payments' ? <PaymentsPanel /> : workspace === 'ai-usage' ? <AiUsagePanel /> : <AdminPanel />}
+      {workspace === 'coupons' ? <CouponsPanel /> : workspace === 'topics' ? <TopicsPanel /> : workspace === 'briefing' ? <CurrentAffairsAdmin /> : workspace === 'mail' ? <AccountMailPanel /> : workspace === 'mpt' ? <MptAdminPanel /> : workspace === 'payments' ? <PaymentsPanel /> : workspace === 'ai-usage' ? <AiUsagePanel /> : <AdminPanel />}
     </div>
   )
 }
