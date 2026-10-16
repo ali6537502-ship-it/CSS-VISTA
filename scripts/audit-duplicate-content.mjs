@@ -3,9 +3,9 @@
  *
  * Reads the generated production HTML — not the source metadata — strips the
  * shared header, footer and navigation, and compares what remains between
- * indexable pages. Numbers and punctuation are normalised out of the
- * fingerprint, so swapping a subject name, a year or a synonym cannot hide a
- * reused template.
+ * indexable pages. Case and punctuation are normalised in the fingerprint;
+ * numbers remain meaningful archive facts. Shingle comparisons detect reused
+ * templates even when a subject name or year differs.
  *
  * A page that fails here is fixed by giving it real content or by marking it
  * noindex. Padding it with filler is not a remedy.
@@ -14,6 +14,8 @@ import { readFile, readdir } from 'node:fs/promises'
 import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { resolveClientDir } from './lib/client-dir.mjs'
+import { loadGeneratedPastPapers } from './lib/past-paper-registry.mjs'
+import { validateCollectionContent } from './lib/collection-content-quality.mjs'
 import {
   contentFingerprint, extractRootHtml, isPlaceholderContent, primaryContentText, shingles, similarity,
 } from './lib/content-quality.mjs'
@@ -28,6 +30,7 @@ const SIMILARITY_LIMIT = strict ? 0.80 : 0.90
  * Below this an indexable page has essentially nothing of its own. This is an
  * emptiness floor, not a word target: page quality is judged by uniqueness and
  * by the absence of placeholder state, which the checks below measure directly.
+ * A source-verified resource collection is assessed by its catalogue instead.
  */
 const EMPTY_CONTENT_WORDS = 60
 
@@ -43,6 +46,7 @@ async function* htmlFiles(dir) {
   }
 }
 
+const sourcePapers = await loadGeneratedPastPapers(root)
 const pages = []
 for await (const file of htmlFiles(clientDir)) {
   const html = await readFile(file, 'utf8')
@@ -57,6 +61,7 @@ for await (const file of htmlFiles(clientDir)) {
   pages.push({
     file: relative(clientDir, file),
     canonical,
+    collection: validateCollectionContent(html, canonical, sourcePapers),
     text,
     words: text.split(/\s+/).filter(Boolean).length,
     exact: contentFingerprint(text),
@@ -67,7 +72,12 @@ for await (const file of htmlFiles(clientDir)) {
 const problems = []
 
 for (const page of pages) {
-  if (page.words < EMPTY_CONTENT_WORDS) {
+  if (page.collection && !page.collection.valid) {
+    for (const problem of page.collection.problems) problems.push(`${page.file}: ${problem}`)
+  }
+  // Catalogue usefulness comes from verified accessible resources and accurate
+  // identifying facts, rather than an arbitrary amount of prose around a PDF.
+  if (page.words < EMPTY_CONTENT_WORDS && !page.collection?.valid) {
     problems.push(`${page.file}: indexable page has essentially no primary content (${page.words} words)`)
   }
   if (isPlaceholderContent(page.text)) {

@@ -1,0 +1,161 @@
+{
+  "observed_at": "2026-10-15T07:52:43.453975+00:00",
+  "observations": [
+    {
+      "path": "/",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 15 Oct 2026 07:52:42 GMT",
+        "content-type": "text/html",
+        "vary": "Accept-Encoding",
+        "last-modified": "Mon, 12 Oct 2026 04:25:28 GMT",
+        "etag": "W/\"35952-6acc6138-12cb49ec2a2aa8ea;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "expires": "0",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "8ab33ad21a3eb261c0ccd475f08e2a38-phx-edge12",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.245",
+        "x-envoy-upstream-service-time": "458",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "preview": null
+    },
+    {
+      "path": "/deployment-fingerprint.json",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 15 Oct 2026 07:52:42 GMT",
+        "content-type": "application/json",
+        "content-length": "186",
+        "vary": "Accept-Encoding",
+        "last-modified": "Mon, 12 Oct 2026 04:25:31 GMT",
+        "etag": "\"ba-6acc613b-e26bc06afd0440b1;;;\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "expires": "0",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "64c46b26e1ba1bf5cf68ed498a1a7e5d-phx-edge13",
+        "x-hcdn-cache-status": "DYNAMIC",
+        "x-hcdn-upstream-rt": "0.311",
+        "accept-ranges": "bytes",
+        "x-envoy-upstream-service-time": "523",
+        "connection": "close"
+      },
+      "preview": "{\n  \"schemaVersion\": 1,\n  \"gitSha\": \"cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8\",\n  \"source\": \"git-rev-parse-head\",\n  \"buildTarget\": \"hostinger\",\n  \"builtAt\": \"2026-10-12T04:25:31.574Z\"\n}\n"
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 15 Oct 2026 07:52:43 GMT",
+        "content-type": "text/plain",
+        "content-length": "71",
+        "vary": "Accept-Encoding",
+        "last-modified": "Mon, 12 Oct 2026 04:24:48 GMT",
+        "etag": "\"47-6acc6110-39452b8f4eb692d3;;;\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "a51e63a4d2c9abf808b305255b0ba4f0-phx-edge11",
+        "x-hcdn-cache-status": "REVALIDATED",
+        "x-hcdn-upstream-rt": "0.250",
+        "accept-ranges": "bytes",
+        "x-envoy-upstream-service-time": "457",
+        "connection": "close"
+      },
+      "preview": null
+    }
+  ],
+  "initial_probe": {
+    "transport": "curl",
+    "resource": "/deployment-fingerprint.json",
+    "status": 503,
+    "interpretation": "Single transient error; subsequent independent GETs all200; no hosting root cause established."
+  },
+  "remote_main_sha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "final_followup": {
+    "observedAt": "2026-10-15T15:48:56.591195+00:00",
+    "method": "Read-only GETs with Cache-Control no-cache; no deployment or backend mutation.",
+    "responses": [
+      {
+        "path": "/",
+        "status": 200,
+        "finalUrl": "https://www.css-vista.com/",
+        "contentType": "text/html",
+        "cacheStatus": "DYNAMIC"
+      },
+      {
+        "path": "/deployment-fingerprint.json?cssv_audit=20261015-final",
+        "status": 200,
+        "finalUrl": "https://www.css-vista.com/deployment-fingerprint.json?cssv_audit=20261015-final",
+        "contentType": "application/json",
+        "cacheStatus": "DYNAMIC",
+        "fingerprint": {
+          "schemaVersion": 1,
+          "gitSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+          "source": "git-rev-parse-head",
+          "buildTarget": "hostinger",
+          "builtAt": "2026-10-12T04:25:31.574Z"
+        }
+      },
+      {
+        "path": "/robots.txt",
+        "status": 200,
+        "finalUrl": "https://www.css-vista.com/robots.txt",
+        "contentType": "text/plain",
+        "cacheStatus": "REVALIDATED"
+      }
+    ]
+  },
+  "source_followup": {
+    "observedAt": "2026-10-15T20:11:06.666630+00:00",
+    "responses": [
+      {
+        "path": "/",
+        "status": 200,
+        "contentType": "text/html"
+      },
+      {
+        "path": "/deployment-fingerprint.json?cssv_followup=20261015",
+        "status": 200,
+        "contentType": "application/json",
+        "fingerprint": {
+          "schemaVersion": 1,
+          "gitSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+          "source": "git-rev-parse-head",
+          "buildTarget": "hostinger",
+          "builtAt": "2026-10-12T04:25:31.574Z"
+        }
+      }
+    ],
+    "remoteMain": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8"
+  }
+}

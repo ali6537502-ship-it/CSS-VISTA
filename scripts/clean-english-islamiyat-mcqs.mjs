@@ -1,5 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import {
+  rejectedIslamiyatImport, isRejectedIslamiyatSourceRecord, islamiyatCrossIdReviewCandidates,
+} from './lib/islamiyat-import-quarantine.mjs'
 
 const root = process.cwd()
 const apply = process.argv.includes('--apply')
@@ -15,7 +18,6 @@ const sourceIndexPath = path.join(root, 'src', 'data', 'mcqIndex.ts')
 const metaPath = path.join(root, 'src', 'data', 'mcqMeta.ts')
 const reportPath = path.join(root, 'docs', 'english-islamiyat-mcq-audit-2026-09-15.md')
 const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'))
-const rejectedIslamiyatImport = { start: 8449, end: 10705, count: 2257 }
 
 const normalise = (value) => String(value ?? '')
   .normalize('NFKC')
@@ -23,10 +25,6 @@ const normalise = (value) => String(value ?? '')
   .replace(/[’‘]/g, "'")
   .replace(/[^\p{L}\p{N}]+/gu, ' ')
   .trim()
-
-function sequence(question) {
-  return Number.parseInt(question.id.match(/-(\d+)$/)?.[1] ?? '', 10)
-}
 
 function loadCategory(slug) {
   const category = index.categories.find((item) => item.slug === slug)
@@ -234,13 +232,11 @@ function cleanEnglish(questions) {
 function cleanIslamiyat(questions) {
   const removed = new Map()
   for (const question of questions) {
-    // IDs 8449-10705 came from the 9-10 September workbook imports. The batch
-    // contains internally contradictory answer keys, broken labels ("uran &
-    // Revelation"), misrouted topics and unsupported traditional trivia. The
-    // previously audited bank ends at 8448, so quarantine the defective batch
-    // as a unit instead of guessing which source answer is correct.
-    const id = sequence(question)
-    if (id >= rejectedIslamiyatImport.start && id <= rejectedIslamiyatImport.end) {
+    // The rejected source batch is fixed by its original IDs AND content,
+    // not by permanently reserving a sequence range. The 28 September GK
+    // import legitimately reused 28 numeric IDs with different source rows.
+    // No answer is inferred or corrected by this provenance guard.
+    if (isRejectedIslamiyatSourceRecord(question)) {
       removed.set(question.id, 'unreliable September workbook import')
     }
   }
@@ -275,7 +271,12 @@ const summary = {
     editsRequired: englishEditsRequired,
     retained: englishResult.retained.length,
   },
-  islamiyat: { before: islamiyat.questions.length, removed: islamiyatResult.removed.size, retained: islamiyatResult.retained.length },
+  islamiyat: {
+    before: islamiyat.questions.length,
+    removed: islamiyatResult.removed.size,
+    retained: islamiyatResult.retained.length,
+    crossIdEditorialReview: islamiyatCrossIdReviewCandidates(islamiyat.questions),
+  },
 }
 
 if (!apply) {
@@ -318,7 +319,7 @@ The imported workbook was not merely inconsistent in spelling. It assigned confl
 
 ## Permanent guard
 
-The repository test suite runs this cleaner in check mode. A future change fails if the quarantined Islamiyat IDs, corrupted English option joins, ambiguous composite answers, or the detected duplicate relation patterns reappear.
+The repository test suite runs this cleaner in check mode. A future change fails if original quarantined Islamiyat source records (ID plus content fingerprint), corrupted English option joins, ambiguous composite answers, or the detected duplicate relation patterns reappear. Later imports can reuse numeric IDs with different content; same historical content under a different ID is reported as an editorial review candidate, not automatically declared false.
 `
 if (englishResult.removed.size || islamiyatResult.removed.size || !fs.existsSync(reportPath)) {
   fs.writeFileSync(reportPath, report)

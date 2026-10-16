@@ -1,0 +1,422 @@
+{
+  "preparedAt": "2026-10-16T13:58:41.241460+00:00",
+  "baselineGitSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "workingTreeCandidate": true,
+  "scope": "Changed source/test/public/workflow files, scoped owner authorization and authoritative editorial JSON ledgers; audit prose/evidence excluded. Not a production deployment fingerprint.",
+  "aggregateMethod": "SHA256 of sorted UTF-8 path + NUL + SHA256(file bytes) + newline entries.",
+  "aggregateSha256": "3752aad93a597659c96dc62943a06cf742abb6fbc71102bdeeec9b6e4969ec2a",
+  "files": [
+    {
+      "path": ".github/workflows/hostinger-build-check.yml",
+      "sha256": "fab1d21a9aaca2ec109226e023d8059fbff73632e7d28208e8bc57350124322b"
+    },
+    {
+      "path": ".github/workflows/seo-monitoring.yml",
+      "sha256": "9120d210cb39ea6944f16198a6d829eb1efde8e47deeb8b1c2dab3203ab1ea4d"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "97454280e18b4a5801b660441d6787ed8c4f482ebace1bfdecd368e131937903"
+    },
+    {
+      "path": "docs/seo/editorial/book-quotation-review.json",
+      "sha256": "074e5d973f231754ca39fecc29d024211cc296bf68aa80a7d3c5140ec579b0c7"
+    },
+    {
+      "path": "docs/seo/editorial/rights-inventory.json",
+      "sha256": "5f2f782fe60ae5b18511fbbe8b81892eac571bbfaea39bc21d8a77bd512a98e1"
+    },
+    {
+      "path": "package.json",
+      "sha256": "bbefaa14a8c4a86712fc5380544eb22fd8f8b1ad5a562ad9677e05dba46b55a8"
+    },
+    {
+      "path": "public/mcq/cat-english-grammar-6.json",
+      "sha256": "416ca3eafb08772ab41237c0604b8ddf0459b895b073cc22b058081da0d51306"
+    },
+    {
+      "path": "public/mcq/cat-english-grammar-7.json",
+      "sha256": "0908bac1357cd8c50e67b9c9c4918c88a8c1a565f98a21097d76b12829f6a92b"
+    },
+    {
+      "path": "public/mcq/cat-english-grammar-8.json",
+      "sha256": "ff1713d5827af0bf98bb0c5bbf0c39764c51f37787ad00c0efb94441bb6be76a"
+    },
+    {
+      "path": "public/mcq/cat-english-grammar-9.json",
+      "sha256": "d6cece1dc30e48a53382642fb29553d865448820f024dc955059ae5cd17dc1fd"
+    },
+    {
+      "path": "public/mcq/cat-general-ability-6.json",
+      "sha256": "22ee735f040248cf06925fa12f3dd96cf69d748e3edf8f3736332a9b64b07ccf"
+    },
+    {
+      "path": "public/opinions/transcripts/index.json",
+      "sha256": "0be11e9d721b7d0b648779d642484a20298a87d4080d77a90b21bf84b4719976"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-ali-hassan.json",
+      "sha256": "5f0f919bcc9baaec7a5eb76ff376a5988d0fc68b62171a70157f7b4b20ee9a80"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-eid-eve-chaman-phatak.json",
+      "sha256": "61a5f217919d16b0db83d05f5f7f938351971cd0055781ce47794fd721e0a3e5"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-harassers-calculus.json",
+      "sha256": "868a6804b660b290bb6e4e3338ccc47d64084b9dc4804913142770da465b9f2f"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-machines-at-war.json",
+      "sha256": "e61a8c4c33310d7cdb5d3b0b52b9291f3cec1859153572a0898ea31df6be3350"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-power-without-peace.json",
+      "sha256": "222c2d246ef974071c385ea14ca49a601169ede1892039bf99a59d9c4b7bf707"
+    },
+    {
+      "path": "public/opinions/transcripts/opinion-the-next-48-hours.json",
+      "sha256": "b885d6b7a223cb1903d58485a073a0dcfd4c0fb33d61a46ab8aef431050816e8"
+    },
+    {
+      "path": "public/study-material/optional/constitutional-law/constitutional-history-of-pakistan.json",
+      "sha256": "1c6df0e0368513a8daafc111ab068c6218f8e5e2ead153a975e8586250fda3d1"
+    },
+    {
+      "path": "public/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review.json",
+      "sha256": "af0a019692b1a1f59cec285f9b7fd0a328c1b1ca30741b866da09c947ad03d22"
+    },
+    {
+      "path": "scripts/audit-duplicate-content.mjs",
+      "sha256": "4c479b06d0b390e8da8cdaacfc26e9f2ee5df092ca95db10b1ce70c96cc89880"
+    },
+    {
+      "path": "scripts/audit-mcq-data.mjs",
+      "sha256": "81d1a5dc78cd2995fbf55a3701087eb83da17a43cdbb37745134718f8521d9df"
+    },
+    {
+      "path": "scripts/audit-search-readiness.mjs",
+      "sha256": "f2dc84b7f0830bd100ffc3c7fd85f2ca9a16ba2515a89cc40376b080c3108502"
+    },
+    {
+      "path": "scripts/build-target.mjs",
+      "sha256": "47a97e69f36677f31bc6d8dd4db4b2c01ebf62b5c3972d653e17d45617663d01"
+    },
+    {
+      "path": "scripts/clean-english-islamiyat-mcqs.mjs",
+      "sha256": "ebf5f3877a8d84de56e4cc26f0a272fbd29d4bea7ff5c11586620f02324c9d33"
+    },
+    {
+      "path": "scripts/editorial/book-review-validation.mjs",
+      "sha256": "78b21e2b4fb21fbfe9752f516cd2d30b9558fa6ce1e8ade87b5ebb57ad385d31"
+    },
+    {
+      "path": "scripts/editorial/build-book-reviews.mjs",
+      "sha256": "2bb23f5b2cd425371a15ed60f7c76691399d88afeead0e85f277869a33de9dee"
+    },
+    {
+      "path": "scripts/editorial/build-journal-transcripts.mjs",
+      "sha256": "a9f5208991247c19331b51f27763732fd8f064dbebeebcc127ec4d37172e8cd8"
+    },
+    {
+      "path": "scripts/editorial/optional-note-reviews.json",
+      "sha256": "9a331a760ec7ff059797d23e1ffc87d56929ab9e970db361b76c8100a4b133b3"
+    },
+    {
+      "path": "scripts/editorial/optional_note_reviews.py",
+      "sha256": "0a272228fbde4e10a456e8793cf48654c5482922dbbc7584c529162e63ca5586"
+    },
+    {
+      "path": "scripts/editorial/reviewed-mcq-explanations.json",
+      "sha256": "8b5f6378c4eea41229821171ca62ae005f20db6a1ccfca7c0c2ade6d6bb3b68f"
+    },
+    {
+      "path": "scripts/editorial/reviewed-mcqs.mjs",
+      "sha256": "fbae9dec7f3d873943903340daee249952a1b2b776666f0ece41cc335347c3e0"
+    },
+    {
+      "path": "scripts/expand-book-summary-seo.mjs",
+      "sha256": "3e3e4f9afde2cccfa35fd9d812a0d5b6ede4577101a60c94c203b751da22683d"
+    },
+    {
+      "path": "scripts/expand-hostinger-seo.mjs",
+      "sha256": "2cc01786a057c1d7b76a68aa4ed3531bb00c79a70ee15312456462ef157fae7a"
+    },
+    {
+      "path": "scripts/expand-vistagram-pages.mjs",
+      "sha256": "13ee442b688504bd1a6b7b4b1530caeec940ba0eedd6c2e2bdb4e7ae97ad1a59"
+    },
+    {
+      "path": "scripts/import_optional_notes.py",
+      "sha256": "116091323c3861b12366d016a04f5e11275eececd52e0eea20beaa10751fc94e"
+    },
+    {
+      "path": "scripts/lib/collection-content-quality.mjs",
+      "sha256": "0cf269d619efffed8af4935d2f0093b2e0252c118282b926ae8e28d881edfe21"
+    },
+    {
+      "path": "scripts/lib/islamiyat-import-quarantine.mjs",
+      "sha256": "5f76156d1dce522708a063a2e2cf359b35d27be18676c56bfe31723cfc36b453"
+    },
+    {
+      "path": "scripts/lib/islamiyat-rejected-source-records.json",
+      "sha256": "46a9fb6bd4cc96c9a621bd00f4816f38edc03b16e287029683224b9e3dada785"
+    },
+    {
+      "path": "scripts/lib/mcq-question-identity.mjs",
+      "sha256": "9933bbfe32fae9a7716a028ab45da200ab7b6fa9fbdbe0ae37f0b57ccd82c6bc"
+    },
+    {
+      "path": "scripts/lib/publish-section.mjs",
+      "sha256": "d6fa6150fef9edf027464786698e692df0b3889c3a884b19046bffde3dfba97a"
+    },
+    {
+      "path": "scripts/lib/search-readiness.py",
+      "sha256": "5786f6ef3904639edb37d0db81a4e88414e5e35ad1d6f72dfd0e3aeed55becba"
+    },
+    {
+      "path": "scripts/prerender-real-content.mjs",
+      "sha256": "cfa060bb7efa9a82210d94ed3c36f35b620f527055b73bea590146c14a3b23b2"
+    },
+    {
+      "path": "scripts/prerender/routes.tsx",
+      "sha256": "f74704a5003f6a27bad8be791c832569eb418f3f9a619ba633a7ef8bf74888dc"
+    },
+    {
+      "path": "scripts/seo/build-rights-inventory.mjs",
+      "sha256": "e1401edcfb128970c507bb3b1c1fc6a49c3f976b7bcb900639e191a46173c66d"
+    },
+    {
+      "path": "scripts/seo/crawl-production.py",
+      "sha256": "fa97aaf171cbdd5b0436406df193a91073935aa551e76daaedbd8972f5ab847e"
+    },
+    {
+      "path": "scripts/seo/monitor-production.py",
+      "sha256": "7bea566648d9f9fad6ff9cf48ce89216208f16a04b860a415a3aff08a6610c2a"
+    },
+    {
+      "path": "scripts/seo/overlay-artifact.mjs",
+      "sha256": "43afafe1d87ea9e006c9493c28f7323b360ba8c9dc52ccfa5f0a87f971703bd6"
+    },
+    {
+      "path": "src/App.tsx",
+      "sha256": "007c24f89e1b360e2a25f2a9a0914c45fa88c44171a9e042fcbced114455cd54"
+    },
+    {
+      "path": "src/components/Ads.tsx",
+      "sha256": "d9a56dbedb9c4f3e7be8e15094aed441d26853d3c189d633be0c9d1d79aa03af"
+    },
+    {
+      "path": "src/components/ErrorBoundary.tsx",
+      "sha256": "b5f77d9724f411ea4872dfa85439db395a2845c3416ee0153a8ba6280f26945a"
+    },
+    {
+      "path": "src/components/Layout.tsx",
+      "sha256": "72c181a4dcad628dceb176f2e030d22913c18ea7a05c57a6d92d9de08e3c624f"
+    },
+    {
+      "path": "src/components/ProfileGate.tsx",
+      "sha256": "b235048f741c32ac322b4cfa65fb5e39f971340e65314da69e294c38360442fc"
+    },
+    {
+      "path": "src/components/RouteSeo.tsx",
+      "sha256": "148b42022351f5ccb70321245f6370da82af57ce0f7b0fa50bd25922c0e81fe9"
+    },
+    {
+      "path": "src/data/bookEditorial.d.mts",
+      "sha256": "afc4755406920a3a8d10fbbd3028df5eca6b8e95eb2ba2be68ba26b341a70310"
+    },
+    {
+      "path": "src/data/bookEditorial.generated.json",
+      "sha256": "1c5149ddeba07666563583e91567d045240450695f9be0496773b86d86521be2"
+    },
+    {
+      "path": "src/data/bookEditorial.mjs",
+      "sha256": "6590e31544293c193d4f48a78fa11d7e8c598e727c3bdd7f7cafe813f47d0a06"
+    },
+    {
+      "path": "src/data/books.ts",
+      "sha256": "e215ebb463187f6d4638c75e16fd4ff58d01fe7d695efbb314cd2e8914f72189"
+    },
+    {
+      "path": "src/data/bundled/optional-notes-index.json",
+      "sha256": "364e639f2f46b783f7d13f933b46309ab351922a544879d093ea342b3e1ced54"
+    },
+    {
+      "path": "src/data/css2026Result.json",
+      "sha256": "550169101dc3faba1eb418e85623d83bbf0b694942d15a0b268a214ce0049aa5"
+    },
+    {
+      "path": "src/data/journalTranscripts.generated.json",
+      "sha256": "14677d965721991cc540901066551db5ee9566d77b1b1bccb146a91a65dd6eef"
+    },
+    {
+      "path": "src/data/mcq-shards/cat-english-grammar-6.json",
+      "sha256": "416ca3eafb08772ab41237c0604b8ddf0459b895b073cc22b058081da0d51306"
+    },
+    {
+      "path": "src/data/mcq-shards/cat-english-grammar-7.json",
+      "sha256": "0908bac1357cd8c50e67b9c9c4918c88a8c1a565f98a21097d76b12829f6a92b"
+    },
+    {
+      "path": "src/data/mcq-shards/cat-english-grammar-8.json",
+      "sha256": "ff1713d5827af0bf98bb0c5bbf0c39764c51f37787ad00c0efb94441bb6be76a"
+    },
+    {
+      "path": "src/data/mcq-shards/cat-english-grammar-9.json",
+      "sha256": "d6cece1dc30e48a53382642fb29553d865448820f024dc955059ae5cd17dc1fd"
+    },
+    {
+      "path": "src/data/mcq-shards/cat-general-ability-6.json",
+      "sha256": "22ee735f040248cf06925fa12f3dd96cf69d748e3edf8f3736332a9b64b07ccf"
+    },
+    {
+      "path": "src/data/mcqMeta.ts",
+      "sha256": "7b4bce9e6c833ca60c9b7d415fa9e406e4ecb6b9432ff8dffdec2f30998745ce"
+    },
+    {
+      "path": "src/data/routeRegistry.mjs",
+      "sha256": "c222d1b976341bed8d88d124f4cc93ee35927e353563aa474109f83d804f3ef9"
+    },
+    {
+      "path": "src/data/studyMaterialMeta.d.mts",
+      "sha256": "5d7f35dcd760ec252d5ea18ad76dd30432f89410aa415051e3895ea84fac6a6d"
+    },
+    {
+      "path": "src/data/studyMaterialMeta.mjs",
+      "sha256": "6ad37fe148a8a89365f349b5ac25c504cdbafd3cc4b7b8c20a1d6745ae04d49a"
+    },
+    {
+      "path": "src/features/ability/Course.tsx",
+      "sha256": "f279216f7f20e722f688c2816c002477b1252b734075dfc28ea1dda9088a6906"
+    },
+    {
+      "path": "src/features/vistagram/api.ts",
+      "sha256": "d4f04eea208877cdb5b17853b1dd7b495b21fe04dbc0b63204f8dd5f1cce8d9d"
+    },
+    {
+      "path": "src/features/vistagram/meta.d.mts",
+      "sha256": "f579cb7c30e02d7650527d7ca8d23d2b94fcebe8cb893c40127a6ddbb20eef0b"
+    },
+    {
+      "path": "src/features/vistagram/meta.mjs",
+      "sha256": "0dd21c614ccc3ec15c7a91a5abd2d18ac5e4d39f8b05ce53b60d7f4bc843c79a"
+    },
+    {
+      "path": "src/index.css",
+      "sha256": "6831338a25da21833ac582d5c0594305524c275ac19fd19d733f694df264aff2"
+    },
+    {
+      "path": "src/lib/ads.ts",
+      "sha256": "d3ca9e50ced297e290e8a43d4ac8af44273f97d3c8c7be89297df4f9a25a1a27"
+    },
+    {
+      "path": "src/lib/subjectSelection.ts",
+      "sha256": "a925e65059f7074ccf979e378ea75f9b4817eb8a1702e7cdb074cd6dc50135df"
+    },
+    {
+      "path": "src/pages/BookSummaries.tsx",
+      "sha256": "9cbd7cc0ea8e6ad9c6aa6e2f928c2eddae5901e24056b0131f053cbb93aa3589"
+    },
+    {
+      "path": "src/pages/Css2026Result.tsx",
+      "sha256": "26c4c06baabce4cbf241583ae2e2574eff08068e7f11d6ea93a8c486e29c0d10"
+    },
+    {
+      "path": "src/pages/Home.tsx",
+      "sha256": "4a7d7dbaa64cb08d36da6f34eefbedba85e495e4bd2836fc447e842c96e1d678"
+    },
+    {
+      "path": "src/pages/IslamicReferenceTopic.tsx",
+      "sha256": "596d2831d70b15b124812ead73febe22997c75aa7bf70f9f3bc97b8078c5b2f1"
+    },
+    {
+      "path": "src/pages/OptionalSubjectNotes.tsx",
+      "sha256": "b391dfc46003a9d2077840230cc29a6aa23cd3ce0ac02951b05c2b57ca4d8c7e"
+    },
+    {
+      "path": "src/pages/OptionalTopicNotes.tsx",
+      "sha256": "5eb635e4c1a3826f79bb02140c4ac934b45625fe6c0f88a4f22157e6ebdcdaf2"
+    },
+    {
+      "path": "src/pages/SubjectSelector.tsx",
+      "sha256": "238f7a4baa3755f538787152f661368f2f7c2e942dd60d5418f09402cf834d29"
+    },
+    {
+      "path": "src/pages/VistaJournal.tsx",
+      "sha256": "0f9d5d26bb217806ede22d03e2db67ac7a4992c9a33a3783e848f0eb1a056ed0"
+    },
+    {
+      "path": "src/pages/Vistagram.tsx",
+      "sha256": "033395c117d89cde838a094386aee1b5cf1f09d87afc3007e272b68100f5913c"
+    },
+    {
+      "path": "src/pages/VistagramArticle.tsx",
+      "sha256": "930ceb6279bd82a1c912438f6f6df9cb64424f3982cf80bfb40675b351379ec1"
+    },
+    {
+      "path": "tests/adPolicy.test.ts",
+      "sha256": "0f259c533b2057fe56c227c2685d2b5ac971690dc6de7f0927dc15d72924d185"
+    },
+    {
+      "path": "tests/bookEditorial.test.mjs",
+      "sha256": "414e6c2ffc0e690740870b5f37b3d49780b96e567fa19b572cf1641584b26486"
+    },
+    {
+      "path": "tests/browser/ad-state.mjs",
+      "sha256": "2e09000499c1ff94f9d586af3ddd0cb855006821f29e9e60edfba18a05be4a27"
+    },
+    {
+      "path": "tests/browser/artifact-preview.mjs",
+      "sha256": "72faf16ed42b973c9f1ec0d801f2f43011038a6a2976688a6abd22dd01c4dd7d"
+    },
+    {
+      "path": "tests/browser/seo-performance.mjs",
+      "sha256": "3f61d56c50a57354221d1e30235fa4de3ee47dca0cf879fc393da0420b3745cb"
+    },
+    {
+      "path": "tests/browser/seo-readiness.mjs",
+      "sha256": "d25ba20b29430a77dac5ea7ec7d3e4afe11d54884089eaf219e5eaabf0b893ab"
+    },
+    {
+      "path": "tests/editorial/test_optional_note_reviews.py",
+      "sha256": "936c1fa89f69c8307d87b55826664bdc2c4900220ead92d2b146b8b2c86bc57b"
+    },
+    {
+      "path": "tests/journalTranscripts.test.ts",
+      "sha256": "2247ebed05bd8d1174a6397a301ad9726517bf51e7f1685eff93c23ce19fe77d"
+    },
+    {
+      "path": "tests/mcqAudit.test.mjs",
+      "sha256": "511225220db28dfc5c0376d222d8924fe35e10ee00d4f771941b9b23ffc83ccf"
+    },
+    {
+      "path": "tests/mcqEditorial.test.mjs",
+      "sha256": "a29eb7c761f5c3429afa174f9498b223d4ae3b453f251755b347ee971668e246"
+    },
+    {
+      "path": "tests/pastPaperCollectionQuality.test.mjs",
+      "sha256": "7d7a9e22e6a3acaba05f6c5335db7734a6cb9f68e2a4f2882d1e1c71573b89c2"
+    },
+    {
+      "path": "tests/productionRoutes.test.ts",
+      "sha256": "c32730b223bb51f4c803d7ab9659cd46f56c69073f7a5fdc28a835ce2dccc087"
+    },
+    {
+      "path": "tests/searchReadiness.test.mjs",
+      "sha256": "c00049de3fe8efdc7b21eb1258bc8db068902ab46d9ad04422a62b74a8e13d97"
+    },
+    {
+      "path": "tests/studyMaterialSeo.test.mjs",
+      "sha256": "b869abb176a1501eff1266bffcf920a36c245ef83d30276eca02353241d032bc"
+    },
+    {
+      "path": "tests/subjectSelection.test.ts",
+      "sha256": "751aa3907a9647570ebd2b97d825c0e80fec8cd14a91abc33918fbd119ec3a32"
+    },
+    {
+      "path": "tests/vistagramRoutes.test.mjs",
+      "sha256": "7b8cb600b39b5a3ae91ef763f0dc47d87747028f2f0b56b89b32f2a47515306a"
+    }
+  ]
+}

@@ -1,0 +1,1148 @@
+{
+  "reviewDate": "2026-10-16",
+  "scope": "Read-only primary record and passage review. No whole third-party book or newly published route added. Identity, quotation and rights decisions are independent.",
+  "identityRecords": [
+    {
+      "slug": "bowling-alone",
+      "url": "https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848",
+      "title": "Bowling Alone: Revised and Updated | Book by Robert D. Putnam | Official Publisher Page | Simon & Schuster",
+      "locator": "Publisher revised-and-updated edition names Robert D. Putnam. Original short title accepted; this is not edition-specific quotation verification.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "8de3f6d44d92c59cf840dcd4b64d6d15163eb502b600969cfbfd06d7f2114622",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "brave-new-world",
+      "url": "https://www.penguin.co.uk/books/357838/brave-new-world-by-huxley-aldous/9780099518471",
+      "title": "Brave New World",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "007453fc64f21bdd8c16b60bac3236bb1af51ae252ae73eb504b4195e1e639ac",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "url": "https://www.jstor.org/stable/j.ctt6wpqbc",
+      "title": "Capital in the Twenty-First Century — Harvard University Press on JSTOR",
+      "locator": "Publisher-provided book record: title, Thomas Piketty, translator Arthur Goldhammer, Harvard University Press, eISBN 9780674369542.",
+      "accessed_at": "2026-10-16",
+      "inspectionMethod": "Directly read public web extraction of publisher-provided bibliographic metadata.",
+      "note": "Title and author identity only. Direct Python response was a Client Challenge page; that response is not used as book evidence or assigned a verified-content fingerprint. No subscribed full text was accessed."
+    },
+    {
+      "slug": "globalization-and-its-discontents",
+      "url": "https://wwnorton.co.uk/books/9780393051247-globalization-and-its-discontents",
+      "title": "Globalization and Its Discontents - Description | W. W. Norton & Company Ltd.",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "0d3dd12a28b5c85ce16f80a0ca1cde7f0a12924128d882b68d25bc3171635d01",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "url": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+      "title": "Guns, Germs, and Steel - Description | W. W. Norton & Company Ltd.",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "2ef6dc8f75a96c1854ef2aa4c560dc3b9d7c376f8efe3b9d44585c35373512cc",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "invisible-women",
+      "url": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+      "title": "Invisible Women (Hardcover) | ABRAMS",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "bc28b70479cb4735686e73a5f0ee688b405f52ff4b0794b527073fee287f95b8",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "nudge",
+      "url": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+      "title": "Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and byline identify Richard H. Thaler and Cass R. Sunstein. Final Edition is a later edition; it does not establish the quotation in the original edition.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "27696d0367f057cc1b3673b14972cdab55c82fd76b7cbee8b5e4426946038d3e",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "pakistan-beyond-the-crisis-state",
+      "url": "https://www.hurstpublishers.com/wp-content/uploads/2012/04/Hurst-South-Asia-Catalogue-.pdf",
+      "title": "Hurst South Asia catalogue — Pakistan: Beyond the Crisis State",
+      "locator": "Printed page 15 / PDF page 17: title, Edited by Maleeha Lodhi, paperback ISBN 9781849041355.",
+      "accessed_at": "2026-10-16",
+      "inspectionMethod": "Directly read publisher PDF text through public web extraction.",
+      "note": "Editor credit distinguished from single authorship. Direct Python requests returned 403; no successful direct PDF fingerprint is claimed. This is not reproduction permission."
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "url": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+      "title": "Postwar by Tony Judt: 9780143037750 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "9d3051269e35b672278bba252c9b6deb28eb9ebd81629c7febfdb358a10d1e1e",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "url": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+      "title": "The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "6793f406c35f703e2133e871941ca13c44492cd00a1c3a747e9f4ec99b957af4",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-better-angels-of-our-nature",
+      "url": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/",
+      "title": "The Better Angels of Our Nature by Steven Pinker: 9780143122012 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "69468394d560d954fece4012cc6e854102bcdaecfe4e72614bd258772ee0eab0",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-bottom-billion",
+      "url": "https://www.oup.com.au/books/higher-education/politics/9780195373387",
+      "title": "The Bottom Billion | Oxford University Press",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "2e3d9073c7de0f2e0fb5bbc88ef4e30a19e8bfbdcee28d1679f392e0e63c38a8",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "url": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+      "title": "The Cold War by Odd Arne Westad | Hachette Book Group",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "24b04cec9950683a90e1cb4d3bc459c38542d05cd50b8a09a6e26f600ec63066",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "url": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+      "title": "The Entrepreneurial State by Mariana Mazzucato: 9780593656938 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "b3243447e3d0a63e6ac0c23029e0c4c44e006bdd82e9f8eff6a5e95ce8e42c11",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "url": "https://www.penguin.co.uk/books/307625/the-future-of-capitalism-by-collier-paul/9780241382295",
+      "title": "The Future of Capitalism",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "db9d2bee634ed07083c021731f5cc5efff2570ecb2ae83e81ee6609e737b56dd",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-great-transformation",
+      "url": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+      "title": "The Great Transformation by Karl Polanyi: 9780807018828 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "ed988ad3fe0489cb39f8fdb3d9193bf6a38160bcd1b9d85ae65d7b7f00d3f233",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-guns-of-august",
+      "url": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+      "title": "The Guns of August by Barbara W. Tuchman: 9780345386236 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "c941e52a800b2e749181f05c6ae89e074d9b8a70c8aa5062cfb690d9f97b59dd",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "url": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+      "title": "The Handmaid's Tale (Deluxe Edition) by Margaret Atwood: 9798217009114 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "d9e8ccb2f72a89ca0e42b136ec45138b6d9899e52bae948cbbc5e7425a590054",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-open-society-and-its-enemies",
+      "url": "https://assets.press.princeton.edu/about_pup/PUP100/book/2fPopper.pdf",
+      "title": "The Open Society and Its Enemies (two volumes) — Princeton University Press",
+      "locator": "Publisher centenary catalogue, printed page 24 / one-page PDF: title and Karl R. Popper.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "b68801ea7f5fac5b428e1e71cccc45544b927dccf81000b7e012f072fd0bdc86",
+      "note": "Historical publisher title/author record only. The separate readable first-chapter excerpt did not establish the current preface quotation."
+    },
+    {
+      "slug": "the-price-of-inequality",
+      "url": "https://wwnorton.co.uk/books/9780393345063-the-price-of-inequality",
+      "title": "The Price of Inequality - Description | W. W. Norton & Company Ltd.",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "bbcf509de9c1a071ab5f6d8bc64b915fb4cea34ce7ae806068661ffcc790050f",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+      "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+      "title": "The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "48a2a240c0977d94a8e8e78353bf129a22609f48629746011f479d7294a60982",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "url": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+      "title": "The Reluctant Fundamentalist by Mohsin Hamid: 9780593553480 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher audiobook record names Mohsin Hamid as author and reader. Title/author identity only; no printed quotation established.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "ef9dab3f1d51a7c473c497a64572f01f294a727a75f57a66c7d46ec28b2cffb5",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-second-sex",
+      "url": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+      "title": "The Second Sex by Simone De Beauvoir: 9780307277787 | PenguinRandomHouse.com: Books",
+      "locator": "Publisher byline identifies Simone de Beauvoir separately from translators Constance Borde and Sheila Malovany-Chevallier. No quotation verified by the byline.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "296d6f184f5a32bebefdd963a2560cfda0c9e37ed57e6d2a2635028af016fc53",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-shallows",
+      "url": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+      "title": "The Shallows - Description | W. W. Norton & Company Ltd.",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "e613deba6cc01a799c4815f9a832df41adfb2881afa7a4afca936b2140b99bea",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "url": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+      "title": "Tom Schelling, game theory pioneer, dies at 95 | Harvard Kennedy School",
+      "locator": "Harvard Kennedy School memorial: paragraph naming Schelling's 1960 book. Affiliated-university identification only, not a primary book passage.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "b8525dda35bcf1b418cef4ecf66f7e17c435210a3828115356e4ce8c4de91ee8",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "url": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+      "title": "The Struggle for Pakistan",
+      "locator": "Tufts Fletcher faculty publication record: title, Jalal A / Ayesha Jalal, Harvard University Press and bibliographic citation. No whole-book text verified.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "b62fe37fc403a56ad3b5f8bb52454fa91e6928f8b8fe3b20881ca5f081fe49b4",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "url": "https://www.mearsheimer.com/publications/",
+      "title": "Mearsheimer | Publications",
+      "locator": "Author publications page: named title immediately followed by John J. Mearsheimer; Norton 2001 and updated 2014 edition identified.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "605c0c9795a8191d4480ec3e313c8fcc0388c18cd26b4c10e80bd2e02e18f4a9",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "url": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+      "title": "The Wretched of the Earth | Grove Atlantic",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "5e54fb6b7386b08e00d2e40f6a5971ba1a64b10902e28d60da06cf511bc6197a",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "url": "https://www.penguin.co.uk/books/410048/to-kill-a-mockingbird-by-lee-harper/9780099466734",
+      "title": "To Kill A Mockingbird",
+      "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+      "accessed_at": "2026-10-16",
+      "httpStatus": 200,
+      "responseSha256": "1c85a84e69c824a10e4dba3ad506d531a0c681c8e4da79cf052599c62d740836",
+      "note": "Title and original author identity checked in the readable primary record. This does not verify the quotation, certify the analysis or confer reproduction rights."
+    }
+  ],
+  "quotationEvidence": [
+    {
+      "slug": "the-better-angels-of-our-nature",
+      "url": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/#excerpt",
+      "title": "The Better Angels of Our Nature — Steven Pinker, Penguin Random House",
+      "locator": "Introduction, opening paragraph; publisher Read Sample text, ISBN 9780143122012.",
+      "evidence_status": "verified_quotation",
+      "source_scope": "book_excerpt",
+      "accessed_at": "2026-10-16",
+      "note": "Actual excerpt is in the publisher page's excerpt_text_list and displayed by its Read Sample control. Existing ellipsis omits “, to be sure,”; the source continues “; and it is not guaranteed to continue.” This is an excerpt, not the full sentence or a prediction of uninterrupted progress.",
+      "shortEvidence": "The decline, to be sure, has not been smooth; it has not brought violence down to zero",
+      "httpStatus": 200,
+      "responseSha256": "69468394d560d954fece4012cc6e854102bcdaecfe4e72614bd258772ee0eab0"
+    },
+    {
+      "slug": "brave-new-world",
+      "url": "https://gutenberg.ca/ebooks/huxleya-bravenewworld/huxleya-bravenewworld-00-h.html",
+      "title": "Brave New World — Aldous Huxley, Project Gutenberg Canada transcription of Chatto & Windus 1932",
+      "locator": "Chapter III, Director citing the hypnopaedic proverb; base edition identified as London: Chatto & Windus, 1932.",
+      "evidence_status": "verified_quotation",
+      "source_scope": "book_original",
+      "accessed_at": "2026-10-16",
+      "note": "Existing quoted words occur within “But every one belongs to every one else,”. The displayed short excerpt omits But and changes initial capital/terminal punctuation. Canadian public-domain availability is not a finding of permission in every jurisdiction; no full book or added passage is distributed with CSS VISTA.",
+      "shortEvidence": "every one belongs to every one else",
+      "httpStatus": 200,
+      "responseSha256": "49d734af400adf4bd5b37e18a84f2e5a01562194ce33564d3cee9b7bc5579c40"
+    }
+  ],
+  "sourceAttempts": {
+    "initialRecords": [
+      {
+        "slug": "guns-germs-and-steel",
+        "url": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+        "httpStatus": 200,
+        "finalUrl": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+        "responseSha256": "2ef6dc8f75a96c1854ef2aa4c560dc3b9d7c376f8efe3b9d44585c35373512cc",
+        "bytes": 68768,
+        "title": "Guns, Germs, and Steel - Description | W. W. Norton & Company Ltd.",
+        "identityContexts": [
+          "hts — Worldwide including Canada, but excluding the British Commonwealth. Jared Diamond (Author) Description Details Description Winner of the Pulitzer Prize • New York Times Bestseller • Over Two Million Copies Sold "
+        ],
+        "excerptLinks": [
+          "/subjects/general-books/norton-young-readers"
+        ]
+      },
+      {
+        "slug": "capital-in-the-twenty-first-century",
+        "url": "https://www.hup.harvard.edu/books/9780674979857",
+        "httpStatus": 202,
+        "finalUrl": "https://www.hup.harvard.edu/books/9780674979857",
+        "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "title": null,
+        "identityContexts": [],
+        "excerptLinks": []
+      },
+      {
+        "slug": "the-open-society-and-its-enemies",
+        "url": "https://assets.press.princeton.edu/chapters/s9984.pdf",
+        "httpStatus": 200,
+        "finalUrl": "https://assets.press.princeton.edu/chapters/s9984.pdf",
+        "responseSha256": "26c7401185dc41a3bbfbe84c409931439f225b9f3df40fd172059b72479a7653",
+        "bytes": 499536,
+        "title": null,
+        "identityContexts": [],
+        "excerptLinks": []
+      },
+      {
+        "slug": "the-tragedy-of-great-power-politics",
+        "url": "https://www.mearsheimer.com/publications/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.mearsheimer.com/publications/",
+        "responseSha256": "605c0c9795a8191d4480ec3e313c8fcc0388c18cd26b4c10e80bd2e02e18f4a9",
+        "bytes": 160583,
+        "title": "Mearsheimer | Publications",
+        "identityContexts": [
+          " Mearsheimer | Publications R. Wendell Harrison Distinguished Professor of Political Science The University of Chicago Publications Appearance"
+        ],
+        "excerptLinks": [
+          "https://www.mearsheimer.com/wp-content/uploads/2019/07/Opinion-Iran-Is-Rushing-to-Build-a-Nuclear-Weapon-—-and-Trump-Can’t-Stop-It-The-New-York-Times.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/03/NYT-Ad-Supporting-Iran-Nuclear-Deal.September-8-2015.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/03/Dont-Arm-Ukraine-The-New-York-Times.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Getting-Ukraine-Wrong.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/IsraelFuture.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/AfghanistanJJM.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Hollow-Vic.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/The-Australian-November-18-2005.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/07/A0033x1.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Keeping-Saddam-Hussein-in-a-Box.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/War-with-Iraq-Is-Not-in-Americas-National-Interest.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Guns-Wont-Win-the-Afghan-War.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/The-Impossible-Partition.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/India-Needs-The-Bomb.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/John-J.-Mearsheimer-and-Stephen-Van-Evera.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/A-Peace-Agreement-Thats-Bound-To-Fail.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Here-We-Go-Again.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/The-Only-Exit-From-Bosnia.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Hateful-Neighbors.pdf",
+          "https://www.mearsheimer.com/wp-content/uploads/2019/06/Shrink-Bosnia-to-Save-It.pdf"
+        ]
+      },
+      {
+        "slug": "the-strategy-of-conflict",
+        "url": "https://www.hup.harvard.edu/books/9780674840317",
+        "httpStatus": 202,
+        "finalUrl": "https://www.hup.harvard.edu/books/9780674840317",
+        "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "title": null,
+        "identityContexts": [],
+        "excerptLinks": []
+      },
+      {
+        "slug": "the-guns-of-august",
+        "url": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+        "responseSha256": "c941e52a800b2e749181f05c6ae89e074d9b8a70c8aa5062cfb690d9f97b59dd",
+        "bytes": 337273,
+        "title": "The Guns of August by Barbara W. Tuchman: 9780345386236 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Guns of August by Barbara W. Tuchman: 9780345386236 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/how-to-read-more/",
+          "https://www.penguinrandomhouse.com/the-read-down/nytimes-best-books/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/"
+        ]
+      },
+      {
+        "slug": "postwar-a-history-of-europe-since-1945",
+        "url": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+        "responseSha256": "9d3051269e35b672278bba252c9b6deb28eb9ebd81629c7febfdb358a10d1e1e",
+        "bytes": 240189,
+        "title": "Postwar by Tony Judt: 9780143037750 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " Postwar by Tony Judt: 9780143037750 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-in-audio/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/"
+        ]
+      },
+      {
+        "slug": "the-cold-war-a-world-history",
+        "url": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+        "responseSha256": "24b04cec9950683a90e1cb4d3bc459c38542d05cd50b8a09a6e26f600ec63066",
+        "bytes": 317974,
+        "title": "The Cold War by Odd Arne Westad | Hachette Book Group",
+        "identityContexts": [
+          " The Cold War by Odd Arne Westad | Hachette Book Group Promotion Sign up for our newsletter to get 20% off sitewide! Close menu Explore Hachette Book Group menu G"
+        ],
+        "excerptLinks": [
+          "https://www.threads.net/@hachetteus",
+          "https://joinraisingreaders.com/"
+        ]
+      },
+      {
+        "slug": "the-great-transformation",
+        "url": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+        "responseSha256": "ed988ad3fe0489cb39f8fdb3d9193bf6a38160bcd1b9d85ae65d7b7f00d3f233",
+        "bytes": 262974,
+        "title": "The Great Transformation by Karl Polanyi: 9780807018828 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Great Transformation by Karl Polanyi: 9780807018828 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/the-read-down/audiobook-originals/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/",
+          "https://www.penguinrandomhouse.com/the-read-down/western-romance-novels-and-historical-fiction/"
+        ]
+      },
+      {
+        "slug": "globalization-and-its-discontents",
+        "url": "https://wwnorton.co.uk/books/9780393051247-globalization-and-its-discontents",
+        "httpStatus": 200,
+        "finalUrl": "https://wwnorton.co.uk/books/9780393051247-globalization-and-its-discontents",
+        "responseSha256": "0d3dd12a28b5c85ce16f80a0ca1cde7f0a12924128d882b68d25bc3171635d01",
+        "bytes": 67772,
+        "title": "Globalization and Its Discontents - Description | W. W. Norton & Company Ltd.",
+        "identityContexts": [
+          "nada, Singapore and Malaysia, but excluding the British Commonwealth. Joseph E. Stiglitz (Author) Description Details Formats Editions Description This powerful, unsettling book gives us a rare glimpse behind the close"
+        ],
+        "excerptLinks": [
+          "/subjects/general-books/norton-young-readers"
+        ]
+      },
+      {
+        "slug": "the-price-of-inequality",
+        "url": "https://wwnorton.co.uk/books/9780393345063-the-price-of-inequality",
+        "httpStatus": 200,
+        "finalUrl": "https://wwnorton.co.uk/books/9780393345063-the-price-of-inequality",
+        "responseSha256": "bbcf509de9c1a071ab5f6d8bc64b915fb4cea34ce7ae806068661ffcc790050f",
+        "bytes": 69628,
+        "title": "The Price of Inequality - Description | W. W. Norton & Company Ltd.",
+        "identityContexts": [
+          "nada, Singapore and Malaysia, but excluding the British Commonwealth. Joseph E. Stiglitz (Author) Description Details Contents Description A forceful argument against America's vicious circle of growing inequality by t"
+        ],
+        "excerptLinks": [
+          "/subjects/general-books/norton-young-readers"
+        ]
+      },
+      {
+        "slug": "the-ascent-of-money",
+        "url": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+        "responseSha256": "6793f406c35f703e2133e871941ca13c44492cd00a1c3a747e9f4ec99b957af4",
+        "bytes": 304662,
+        "title": "The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/how-to-read-more/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-in-audio/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/"
+        ]
+      },
+      {
+        "slug": "the-entrepreneurial-state",
+        "url": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+        "responseSha256": "b3243447e3d0a63e6ac0c23029e0c4c44e006bdd82e9f8eff6a5e95ce8e42c11",
+        "bytes": 248667,
+        "title": "The Entrepreneurial State by Mariana Mazzucato: 9780593656938 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Entrepreneurial State by Mariana Mazzucato: 9780593656938 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/nytimes-best-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/"
+        ]
+      },
+      {
+        "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+        "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+        "httpStatus": 200,
+        "finalUrl": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+        "responseSha256": "48a2a240c0977d94a8e8e78353bf129a22609f48629746011f479d7294a60982",
+        "bytes": 324925,
+        "title": "The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster",
+        "identityContexts": [
+          " The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster Skip to Main Content Get 20% off with code SPOOKY. Terms apply. Sign up and get a fr"
+        ],
+        "excerptLinks": [
+          "/p/must-read-classics",
+          "/p/historical-fiction-reads",
+          "/p/horror-reads",
+          "/p/must-read-romance",
+          "/p/romantasy-reads",
+          "/p/political-reads",
+          "/m/simon-kids-chapter-books-and-ready-to-reads",
+          "/p/Picture-Books-to-Read-for-Back-to-School",
+          "/p/ready-to-read",
+          "/p/star-chapter-books",
+          "/p/roadmap-to-summer-reading-adventure",
+          "/p/fall-must-reads",
+          "/recommended-reads/recent",
+          "/p/must-read-classics",
+          "/p/historical-fiction-reads",
+          "/p/horror-reads",
+          "/p/must-read-romance",
+          "/p/romantasy-reads",
+          "/p/political-reads",
+          "/m/simon-kids-chapter-books-and-ready-to-reads"
+        ]
+      },
+      {
+        "slug": "nudge",
+        "url": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+        "responseSha256": "27696d0367f057cc1b3673b14972cdab55c82fd76b7cbee8b5e4426946038d3e",
+        "bytes": 278311,
+        "title": "Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You ",
+          " Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-book-releases-october",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/",
+          "https://www.penguinrandomhouse.com/the-read-down/western-romance-novels-and-historical-fiction/"
+        ]
+      },
+      {
+        "slug": "bowling-alone",
+        "url": "https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848",
+        "httpStatus": 200,
+        "finalUrl": "https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848",
+        "responseSha256": "8de3f6d44d92c59cf840dcd4b64d6d15163eb502b600969cfbfd06d7f2114622",
+        "bytes": 372902,
+        "title": "Bowling Alone: Revised and Updated | Book by Robert D. Putnam | Official Publisher Page | Simon & Schuster",
+        "identityContexts": [
+          " Bowling Alone: Revised and Updated | Book by Robert D. Putnam | Official Publisher Page | Simon & Schuster Skip to Main Content Get 20% off with code SPOOKY. Terms apply. Sign up and get a fr"
+        ],
+        "excerptLinks": [
+          "/p/must-read-classics",
+          "/p/historical-fiction-reads",
+          "/p/horror-reads",
+          "/p/must-read-romance",
+          "/p/romantasy-reads",
+          "/p/political-reads",
+          "/m/simon-kids-chapter-books-and-ready-to-reads",
+          "/p/Picture-Books-to-Read-for-Back-to-School",
+          "/p/ready-to-read",
+          "/p/star-chapter-books",
+          "/p/roadmap-to-summer-reading-adventure",
+          "/p/fall-must-reads",
+          "/recommended-reads/recent",
+          "/p/must-read-classics",
+          "/p/historical-fiction-reads",
+          "/p/horror-reads",
+          "/p/must-read-romance",
+          "/p/romantasy-reads",
+          "/p/political-reads",
+          "/m/simon-kids-chapter-books-and-ready-to-reads"
+        ]
+      },
+      {
+        "slug": "the-better-angels-of-our-nature",
+        "url": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/",
+        "responseSha256": "69468394d560d954fece4012cc6e854102bcdaecfe4e72614bd258772ee0eab0",
+        "bytes": 298511,
+        "title": "The Better Angels of Our Nature by Steven Pinker: 9780143122012 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Better Angels of Our Nature by Steven Pinker: 9780143122012 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-book-releases-october",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/"
+        ]
+      },
+      {
+        "slug": "invisible-women",
+        "url": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+        "responseSha256": "bc28b70479cb4735686e73a5f0ee688b405f52ff4b0794b527073fee287f95b8",
+        "bytes": 74361,
+        "title": "Invisible Women (Hardcover) | ABRAMS",
+        "identityContexts": [
+          "lide 5 Invisible Women Data Bias in a World Designed for Men By Caroline Criado Perez ISBN: 9781419729072 Publication Date: March 12, 2019 Format: Hardcover Ebook Paperback Price: $30.00 Quantity: Add to Cart Also a"
+        ],
+        "excerptLinks": [
+          "/abrams-categories/chapter-books/",
+          "/overlookpress/readers/",
+          "https://www.scribd.com/document/401732647/Invisible-Women-Excerpt#from_embed",
+          "https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.abramsbooks.com%2Fproduct%2Finvisible-women_9781419729072%2F&text=What+I%27m+reading+now%3A+Invisible+Women&via=abramsbooks",
+          "http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.abramsbooks.com%2Fproduct%2Finvisible-women_9781419729072%2F&media=https%3A%2F%2Fwww.abramsbooks.com%2Fcover_images%2F2%2F9781419729072_s3.jpg&description=What+I%27m+reading+now%3A+Invisible+Women"
+        ]
+      },
+      {
+        "slug": "the-second-sex",
+        "url": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+        "responseSha256": "296d6f184f5a32bebefdd963a2560cfda0c9e37ed57e6d2a2635028af016fc53",
+        "bytes": 474048,
+        "title": "The Second Sex by Simone De Beauvoir: 9780307277787 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Second Sex by Simone De Beauvoir: 9780307277787 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-in-audio/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/"
+        ]
+      },
+      {
+        "slug": "the-wretched-of-the-earth",
+        "url": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+        "httpStatus": 200,
+        "finalUrl": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+        "responseSha256": "5e54fb6b7386b08e00d2e40f6a5971ba1a64b10902e28d60da06cf511bc6197a",
+        "bytes": 163273,
+        "title": "The Wretched of the Earth | Grove Atlantic",
+        "identityContexts": [
+          "ownload Grove Press Grove Press Grove Press The Wretched of the Earth by Frantz Fanon Translated from French by Richard Philcox Preface by Homi K. Bhabha Introduction by Cornel West “This century’s most compelling t"
+        ],
+        "excerptLinks": [
+          "/books/theme/reading-group-guide/",
+          "https://groveatlantic.com/bookseller-overview/libraryreads-picks/"
+        ]
+      },
+      {
+        "slug": "the-shallows",
+        "url": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+        "httpStatus": 200,
+        "finalUrl": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+        "responseSha256": "e613deba6cc01a799c4815f9a832df41adfb2881afa7a4afca936b2140b99bea",
+        "bytes": 75514,
+        "title": "The Shallows - Description | W. W. Norton & Company Ltd.",
+        "identityContexts": [
+          "anada, Singapore and Malaysia, but excluding the British Commonwealth. Nicholas Carr (Author) Description Details Description Finalist for the 2011 Pulitzer Prize in General Nonfiction: “Nicholas Carr has written a"
+        ],
+        "excerptLinks": [
+          "/subjects/general-books/norton-young-readers"
+        ]
+      },
+      {
+        "slug": "the-struggle-for-pakistan",
+        "url": "https://www.hup.harvard.edu/books/9780674052893",
+        "httpStatus": 202,
+        "finalUrl": "https://www.hup.harvard.edu/books/9780674052893",
+        "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "title": null,
+        "identityContexts": [],
+        "excerptLinks": []
+      },
+      {
+        "slug": "pakistan-beyond-the-crisis-state",
+        "url": "https://maleehalodhi.com/books/",
+        "httpStatus": 200,
+        "finalUrl": "https://maleehalodhi.com/books/",
+        "responseSha256": "d397a07ce6fe463db4312767c12b7be09db0c0adba7aaeb8a851696d5643e203",
+        "bytes": 116383,
+        "title": "Books - Maleeha Lodhi",
+        "identityContexts": [
+          " Books - Maleeha Lodhi Maleeha Lodhi Pakistan’s Ambassador and Permanent Representative to the United Nations Home About Articles Blogs Speeches Books G"
+        ],
+        "excerptLinks": []
+      },
+      {
+        "slug": "brave-new-world",
+        "url": "https://www.harperacademic.com/book/9780061767647/brave-new-world/",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "slug": "the-handmaid-s-tale",
+        "url": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+        "responseSha256": "d9e8ccb2f72a89ca0e42b136ec45138b6d9899e52bae948cbbc5e7425a590054",
+        "bytes": 212638,
+        "title": "The Handmaid's Tale (Deluxe Edition) by Margaret Atwood: 9798217009114 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Handmaid's Tale (Deluxe Edition) by Margaret Atwood: 9798217009114 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-book-releases-october",
+          "https://www.penguinrandomhouse.com/articles/how-to-read-more/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/"
+        ]
+      },
+      {
+        "slug": "the-reluctant-fundamentalist",
+        "url": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+        "responseSha256": "ef9dab3f1d51a7c473c497a64572f01f294a727a75f57a66c7d46ec28b2cffb5",
+        "bytes": 215039,
+        "title": "The Reluctant Fundamentalist by Mohsin Hamid: 9780593553480 | PenguinRandomHouse.com: Books",
+        "identityContexts": [
+          " The Reluctant Fundamentalist by Mohsin Hamid: 9780593553480 | PenguinRandomHouse.com: Books Skip to Main Content (Press Enter) 📝 Quiz: What Book Should You Read Next? 📝 Quiz:"
+        ],
+        "excerptLinks": [
+          "https://www.penguinrandomhouse.com/articles/quiz-what-book-should-you-read-next/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-in-audio/",
+          "https://www.penguinrandomhouse.com/articles/child-reader-type-quiz/",
+          "https://www.penguinrandomhouse.com/the-read-down/the-best-books-of-2025/",
+          "https://www.penguinrandomhouse.com/the-read-down/new-noteworthy-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/award-winning-childrens-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-to-get-your-child-reading-middle-grade/",
+          "https://www.penguinrandomhouse.com/books/leveled-readers/",
+          "https://www.penguinrandomhouse.com/the-read-down/trending-this-week/",
+          "https://www.penguinrandomhouse.com/the-read-down/romantasy-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/series/",
+          "https://www.penguinrandomhouse.com/the-read-down/books-for-anxiety/",
+          "https://www.penguinrandomhouse.com/the-read-down/large-print-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/antiracist-books/",
+          "https://www.penguinrandomhouse.com/the-read-down/reeses-book-club-x-hello-sunshine-book-picks",
+          "https://www.penguinrandomhouse.com/the-read-down/oprahs-book-club",
+          "https://www.penguinrandomhouse.com/books/706912/tell-me-everything-oprahs-book-club-by-elizabeth-strout/9780593446096/readers-guide/",
+          "https://www.penguinrandomhouse.com/books/738749/james-by-percival-everett/9780385550369/readers-guide/",
+          "https://www.penguinrandomhouse.com/the-read-down/",
+          "https://www.penguinrandomhouse.com/the-read-down/celebrity-book-club-picks-of-the-year/"
+        ]
+      }
+    ],
+    "alternateRecords": [
+      {
+        "slug": "the-bottom-billion",
+        "url": "https://www.oup.com.au/books/higher-education/politics/9780195373387",
+        "httpStatus": 200,
+        "finalUrl": "https://www.oup.com.au/books/higher-education/politics/9780195373387",
+        "responseSha256": "2e3d9073c7de0f2e0fb5bbc88ef4e30a19e8bfbdcee28d1679f392e0e63c38a8",
+        "bytes": 425604,
+        "title": "The Bottom Billion | Oxford University Press",
+        "identityContexts": [
+          "illion Why the Poorest Countries are Failing and What Can Be Done About It Paul Collier $36.95 AUD Request an inspection copy Item added to cart! View your cart . ISBN: 9780195373387 Published: 1 Jan 2009 Availability"
+        ],
+        "excerptLinks": [
+          "https://www.oup.com.au/primary/i-want-to.../read-write-inc",
+          "https://www.oup.com.au/primary/i-want-to.../elsa-phonic-readers",
+          "https://www.oup.com.au/primary/i-want-to.../oxford-reading-tree",
+          "https://www.oup.com.au/primary/reading-and-comprehension/all-reading-and-comprehension",
+          "https://www.oup.com.au/primary/reading-and-comprehension/yarning-strong",
+          "https://www.oup.com.au/primary/reading-and-comprehension/stories-for-maths",
+          "https://www.oup.com.au/primary/reading-and-comprehension/readerful",
+          "https://www.oup.com.au/primary/reading-and-comprehension/oxford-reading-for-comprehension",
+          "https://www.oup.com.au/primary/reading-and-comprehension/treetops",
+          "https://www.oup.com.au/primary/reading-and-comprehension/flying-start-to-literacy",
+          "https://www.oup.com.au/primary/reading-and-comprehension/worldwise",
+          "https://www.oup.com.au/primary/reading-intervention/all-reading-intervention",
+          "https://www.oup.com.au/primary/reading-intervention/readerful-rise",
+          "https://www.oup.com.au/primary/reading-intervention/read-write-inc.-fresh-start",
+          "https://www.oup.com.au/elt/browse-by-type/graded-readers",
+          "https://www.oup.com.au/primary/i-want-to.../read-write-inc",
+          "https://www.oup.com.au/primary/i-want-to.../elsa-phonic-readers",
+          "https://www.oup.com.au/primary/i-want-to.../oxford-reading-tree",
+          "https://www.oup.com.au/primary/reading-and-comprehension/all-reading-and-comprehension",
+          "https://www.oup.com.au/primary/reading-and-comprehension/yarning-strong"
+        ]
+      },
+      {
+        "slug": "the-future-of-capitalism",
+        "url": "https://www.penguin.co.uk/books/307625/the-future-of-capitalism-by-collier-paul/9780241382295",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguin.co.uk/books/307625/the-future-of-capitalism-by-collier-paul/9780241382295",
+        "responseSha256": "db9d2bee634ed07083c021731f5cc5efff2570ecb2ae83e81ee6609e737b56dd",
+        "bytes": 269838,
+        "title": "The Future of Capitalism",
+        "identityContexts": [
+          " for 10% off at the Penguin Shop Find the perfect gift this Christmas Home Paul Collier The Future of Capitalism The Future of Capitalism by Paul Collier , Peter Noble (Read by) Facing the New Anxieties Format: Paperb"
+        ],
+        "excerptLinks": [
+          "https://wp.penguin.co.uk/wp-content/uploads/2022/06/PRH-UK-Modern-Slavery-Statement-2025-1.pdf"
+        ]
+      },
+      {
+        "slug": "brave-new-world",
+        "url": "https://www.penguin.co.uk/books/357838/brave-new-world-by-huxley-aldous/9780099518471",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguin.co.uk/books/357838/brave-new-world-by-huxley-aldous/9780099518471",
+        "responseSha256": "007453fc64f21bdd8c16b60bac3236bb1af51ae252ae73eb504b4195e1e639ac",
+        "bytes": 433595,
+        "title": "Brave New World",
+        "identityContexts": [
+          "or 10% off at the Penguin Shop Find the perfect gift this Christmas Home Aldous Huxley Brave New World Look inside Brave New World by Aldous Huxley Format: Hardback Paperback Ebook Buy the book from: Amazon Opens in "
+        ],
+        "excerptLinks": [
+          "https://www.awin1.com/cread.php?awinmid=3017&awinaffid=117976&clickref=penguin-book-page&ued=https://www.tgjonesonline.co.uk/Search/Keyword?keyword=9780099518471",
+          "https://www.awin1.com/cread.php?awinmid=3787&awinaffid=117976&clickref=penguin-book-page&p=http%3A%2F%2Fwww.waterstones.com%2Fbook%2F9780099518471",
+          "https://wp.penguin.co.uk/wp-content/uploads/2022/06/PRH-UK-Modern-Slavery-Statement-2025-1.pdf"
+        ]
+      },
+      {
+        "slug": "to-kill-a-mockingbird",
+        "url": "https://www.penguin.co.uk/books/410048/to-kill-a-mockingbird-by-lee-harper/9780099466734",
+        "httpStatus": 200,
+        "finalUrl": "https://www.penguin.co.uk/books/410048/to-kill-a-mockingbird-by-lee-harper/9780099466734",
+        "responseSha256": "1c85a84e69c824a10e4dba3ad506d531a0c681c8e4da79cf052599c62d740836",
+        "bytes": 247838,
+        "title": "To Kill A Mockingbird",
+        "identityContexts": [
+          "or 10% off at the Penguin Shop Find the perfect gift this Christmas Home Harper Lee To Kill A Mockingbird To Kill A Mockingbird by Harper Lee Format: Paperback Buy the book from: Amazon Opens in a new tab Blackwel"
+        ],
+        "excerptLinks": [
+          "https://www.awin1.com/cread.php?awinmid=3017&awinaffid=117976&clickref=penguin-book-page&ued=https://www.tgjonesonline.co.uk/Search/Keyword?keyword=9780099466734",
+          "https://www.awin1.com/cread.php?awinmid=3787&awinaffid=117976&clickref=penguin-book-page&p=http%3A%2F%2Fwww.waterstones.com%2Fbook%2F9780099466734",
+          "https://wp.penguin.co.uk/wp-content/uploads/2022/06/PRH-UK-Modern-Slavery-Statement-2025-1.pdf"
+        ]
+      },
+      {
+        "slug": "the-struggle-for-pakistan",
+        "url": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+        "httpStatus": 200,
+        "finalUrl": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+        "responseSha256": "b62fe37fc403a56ad3b5f8bb52454fa91e6928f8b8fe3b20881ca5f081fe49b4",
+        "bytes": 95775,
+        "title": "The Struggle for Pakistan",
+        "identityContexts": [
+          "ublications Browse Publications The Struggle for Pakistan Book Sep 16, 2014 By: Jalal A Harvard University Press Fletcher Faculty Image Display Name Ayesha Jalal Copy Citation Jalal, A. (2014). The Struggle for Paki"
+        ],
+        "excerptLinks": [
+          "https://www.threads.com/@thefletcherschool",
+          "https://www.threads.com/@thefletcherschool"
+        ]
+      },
+      {
+        "slug": "capital-in-the-twenty-first-century",
+        "url": "https://piketty.pse.ens.fr/en/capital21c2",
+        "error": "HTTP Error 503: Service Unavailable"
+      },
+      {
+        "slug": "the-strategy-of-conflict",
+        "url": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+        "httpStatus": 200,
+        "finalUrl": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+        "responseSha256": "b8525dda35bcf1b418cef4ecf66f7e17c435210a3828115356e4ce8c4de91ee8",
+        "bytes": 59334,
+        "title": "Tom Schelling, game theory pioneer, dies at 95 | Harvard Kennedy School",
+        "identityContexts": [
+          " Tom Schelling, game theory pioneer, dies at 95 | Harvard Kennedy School Skip to main content Main navigation Mobile Educational Programs Master"
+        ],
+        "excerptLinks": []
+      }
+    ],
+    "extraProbes": [
+      {
+        "id": "popper-identity",
+        "url": "https://assets.press.princeton.edu/about_pup/PUP100/book/2fPopper.pdf",
+        "httpStatus": 200,
+        "finalUrl": "https://assets.press.princeton.edu/about_pup/PUP100/book/2fPopper.pdf",
+        "bytes": 62326,
+        "responseSha256": "b68801ea7f5fac5b428e1e71cccc45544b927dccf81000b7e012f072fd0bdc86"
+      },
+      {
+        "id": "brave-new-world-sample",
+        "url": "https://cdn.penguin.co.uk/dam-assets/books/9780099518471/9780099518471-sample.pdf",
+        "httpStatus": 200,
+        "finalUrl": "https://cdn.penguin.co.uk/dam-assets/books/9780099518471/9780099518471-sample.pdf",
+        "bytes": 4618753,
+        "responseSha256": "a07fa96877c4b30f2d57f3320ccd11441dd7b1eb86d82a666b4d5688d8e9ce98"
+      },
+      {
+        "id": "capital-jstor",
+        "url": "https://www.jstor.org/stable/j.ctt6wpqbc",
+        "httpStatus": 200,
+        "finalUrl": "https://www.jstor.org/stable/j.ctt6wpqbc",
+        "bytes": 3038,
+        "responseSha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea"
+      },
+      {
+        "id": "pakistan-publisher",
+        "url": "https://hurstpublishers.com/book/pakistan/",
+        "error": "HTTP Error 403: Forbidden"
+      }
+    ],
+    "additionalProbes": [
+      {
+        "id": "brave-original",
+        "url": "https://gutenberg.ca/ebooks/huxleya-bravenewworld/huxleya-bravenewworld-00-h.html",
+        "httpStatus": 200,
+        "finalUrl": "https://gutenberg.ca/ebooks/huxleya-bravenewworld/huxleya-bravenewworld-00-h.html",
+        "bytes": 402584,
+        "responseSha256": "49d734af400adf4bd5b37e18a84f2e5a01562194ce33564d3cee9b7bc5579c40"
+      },
+      {
+        "id": "piketty-crossref",
+        "url": "https://api.crossref.org/works/10.4159/9780674369559",
+        "error": "HTTP Error 404: Not Found"
+      }
+    ]
+  },
+  "totals": {
+    "inventoryEntries": 100,
+    "labelledQuotations": 89,
+    "quotationStatusCounts": {
+      "no_quote": 11,
+      "paraphrase": 1,
+      "unverified": 59,
+      "verified_exact": 9,
+      "verified_excerpt": 20
+    },
+    "verifiedBookQuotationEntries": 29,
+    "identitiesVerifiedAgainstPrimaryRecord": 100,
+    "rightsPermissionsEstablished": 0,
+    "originalSourceBodiesModified": 0,
+    "correctionCandidates": [
+      "on-war"
+    ],
+    "boundedPassLimitations": "Readable originals and legitimate author/publisher book excerpts support the verified states. Matching related author descriptions, speeches, interviews and quotations in other books remain unverified as occurrences in the named book. Unsearched/unread records are explicitly identified. All rights statuses remain separate and unresolved, including covers and translations; this is not a legal violation finding."
+  },
+  "discardedCandidates": [
+    {
+      "url": "https://hurstpublishers.com/book/pakistan/",
+      "inspection": "Readable through web extraction; actual title Pakistan: A New History and author Ian Talbot. Not the Lodhi collection; not used as its main bibliographic record."
+    },
+    {
+      "url": "https://api.crossref.org/works?query.title=Capital+in+the+Twenty-First+Century&query.author=Thomas+Piketty&filter=type%3Abook&rows=3",
+      "responseSha256": "19ceb34f88e01763d4f173c6d4fa0523d25058d2ba69bffa30e115a6c23c9e10",
+      "returnedTitles": [
+        [
+          "Twenty-First Century Psychoanalysis"
+        ],
+        [
+          "Nuclear Ethics in the Twenty-First Century"
+        ],
+        [
+          "The Reception of Hesiod in the Twentieth and Twenty-first Centuries"
+        ]
+      ],
+      "decision": "Returned works did not identify the target book; discarded rather than treating search/API success as bibliographic verification."
+    }
+  ]
+}

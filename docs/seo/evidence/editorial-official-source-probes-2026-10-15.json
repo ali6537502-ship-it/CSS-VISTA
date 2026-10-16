@@ -1,0 +1,35 @@
+{
+  "observedAt": "2026-10-15",
+  "scope": "Read-only direct official-source requests; HTTP availability is not content verification.",
+  "requests": [
+    {
+      "url": "https://na.gov.pk/en/downloads.php",
+      "status": 200,
+      "finalUrl": "https://na.gov.pk/en/downloads.php",
+      "sha256": "ea60ec5cf28cc7b39d46c723d48e0bd29ae58ef86f9f02449cc1a3ef83623446",
+      "bytes": 93519,
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf",
+      "status": 200,
+      "finalUrl": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf",
+      "sha256": "303d09fab0516c1fd723f36f5a401fbab872091fe1b5213a192e172b39b275d1",
+      "bytes": 1069582,
+      "contentType": "application/pdf"
+    },
+    {
+      "url": "https://www.fpsc.gov.pk/Results",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://www.fpsc.gov.pk/category/css-results",
+      "error": "HTTP Error 503: Service Unavailable"
+    }
+  ],
+  "contentVerification": {
+    "constitutionDownloads": "HTML directly inspected: English Constitution listed as amended up to 21 November 2025; no claim the full consolidated PDF was read.",
+    "twentySeventhAmendment": "Official 23-page Gazette PDF read; reviewed source locators are in scripts/editorial/optional-note-reviews.json. Local pdftotext confirms section 29 omits Article 184.",
+    "fpscResults": "Both direct official result endpoints returned 503 from this environment; no remote-PDF authentication claimed."
+  }
+}

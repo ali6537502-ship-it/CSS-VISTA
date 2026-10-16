@@ -1,0 +1,1635 @@
+{
+  "reviewDate": "2026-10-16",
+  "books": [
+    {
+      "slug": "why-nations-fail",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The most common reason why nations fail today is because they have extractive institutions.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The most common reason why nations fail today is because they have extractive institutions.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/205014/why-nations-fail-by-daron-acemoglu-and-james-a-robinson/",
+          "title": "Why Nations Fail — Daron Acemoglu and James A. Robinson, Penguin Random House",
+          "locator": "Publisher title/author catalog",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-narrow-corridor",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Liberty needs the state and the laws. But it is not given by the state or the elites controlling it.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Liberty needs the state and the laws. But it is not given by the state or the elites controlling it.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780735224407",
+          "title": "The Narrow Corridor — Daron Acemoglu and James A. Robinson, Penguin Random House",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "sapiens-a-brief-history-of-humankind",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Money is the most universal and most efficient system of mutual trust ever devised.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Money is the most universal and most efficient system of mutual trust ever devised.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.ynharari.com/book/sapiens/",
+          "title": "Sapiens — Yuval Noah Harari, official author book page",
+          "locator": "Official author title/description and references links",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “History followed different courses for different peoples because of differences among peoples’ environments, not because of biological differences among peoples themselves.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “History followed different courses for different peoples because of differences among peoples’ environments, not because of biological differences among peoples themselves.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+          "title": "Guns, Germs, and Steel - Description | W. W. Norton & Company Ltd.",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-lessons-of-history",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “So the first biological lesson of history is that life is competition.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “So the first biological lesson of history is that life is competition.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-Lessons-of-History/Will-Durant/9781439149959",
+          "title": "The Lessons of History — Will Durant and Ariel Durant, Simon & Schuster",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "a-short-history-of-nearly-everything",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “If this book has a lesson, it is that we are awfully lucky to be here.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “If this book has a lesson, it is that we are awfully lucky to be here.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780767908184",
+          "title": "A Short History of Nearly Everything — Bill Bryson, Penguin Random House",
+          "locator": "Publisher catalog and limited excerpt",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "factfulness",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The world cannot be understood without numbers. And it cannot be understood with numbers alone.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The world cannot be understood without numbers. And it cannot be understood with numbers alone.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer. A related primary source is linked below; it does not establish that the wording appears in this book.",
+      "sources": [
+        {
+          "url": "https://www.gapminder.org/factfulness/single/",
+          "title": "The Single Perspective Instinct — Gapminder, Factfulness",
+          "locator": "Rule8, Numbers, but not only numbers",
+          "scope": "author_related_resource"
+        },
+        {
+          "url": "https://us.macmillan.com/books/9781250107817/factfulness/",
+          "title": "Factfulness",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "thinking-fast-and-slow",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Nothing in life is as important as you think it is while you are thinking about it.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Nothing in life is as important as you think it is while you are thinking about it.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9780374533557/thinkingfastandslow/",
+          "title": "Thinking, Fast and Slow — Daniel Kahneman, Macmillan",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-black-swan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Important quotation:** “The inability to predict outliers implies the inability to predict the course of history.”",
+      "displayLine": "10. **Quotation excerpt:** “The inability to predict outliers implies the inability to predict the course of history.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780812973815",
+          "title": "The Black Swan: Second Edition — Nassim Nicholas Taleb, Penguin Random House",
+          "locator": "Prologue, Experts and Empty Suits",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-righteous-mind",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Important quotation:** “Intuitions come first, strategic reasoning second.”",
+      "displayLine": "10. **Quotation excerpt:** “Intuitions come first, strategic reasoning second.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://righteousmind.com/about-the-book/introductory-chapter/",
+          "title": "The Righteous Mind — Jonathan Haidt, official introductory chapter",
+          "locator": "Introduction, What Lies Ahead, first principle of moral psychology",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "development-as-freedom",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Important quotation:** “Development can be seen… as a process of expanding the real freedoms that people enjoy.”",
+      "displayLine": "10. **Quotation excerpt:** “Development can be seen… as a process of expanding the real freedoms that people enjoy.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://penguinrandomhousehighereducation.com/book/?isbn=9780307874290",
+          "title": "Development as Freedom — Amartya Sen, Penguin Random House",
+          "locator": "Publisher catalog and limited excerpt",
+          "scope": "identity_catalog"
+        },
+        {
+          "url": "https://api.pageplace.de/preview/DT0400.9780191027239_A23540128/preview-9780191027239_A23540128.pdf",
+          "title": "Development as Freedom — Amartya Sen, Oxford University Press paperback preview",
+          "locator": "Introduction, opening sentence, printed p. 3 (physical PDF page 20); OUP paperback first published 2001, ISBN 9780192893307.",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “When the rate of return on capital exceeds the rate of growth of output and income…”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “When the rate of return on capital exceeds the rate of growth of output and income…”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.jstor.org/stable/j.ctt6wpqbc",
+          "title": "Capital in the Twenty-First Century — Harvard University Press on JSTOR",
+          "locator": "Publisher-provided book record: title, Thomas Piketty, translator Arthur Goldhammer, Harvard University Press, eISBN 9780674369542.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-origins-of-political-order",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “Self-interest and legitimacy thus form the cornerstones of political order.”",
+      "displayLine": "10. **Important quotation:** “Self-interest and legitimacy thus form the cornerstones of political order.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9781429958936/theoriginsofpoliticalorder/",
+          "title": "The Origins of Political Order — Francis Fukuyama, Macmillan",
+          "locator": "Chapter1, The Necessity of Politics",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "political-order-and-political-decay",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “The conservatism of institutions often makes reform prohibitively difficult.”",
+      "displayLine": "10. **Important quotation:** “The conservatism of institutions often makes reform prohibitively difficult.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9780374535629/politicalorderandpoliticaldecay/",
+          "title": "Political Order and Political Decay — Francis Fukuyama, Macmillan",
+          "locator": "Chapter1, What Is Political Development?, Political Decay subsection",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "prisoners-of-geography",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “All leaders are constrained by geography.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “All leaders are constrained by geography.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/Prisoners-of-Geography/Tim-Marshall/Politics-of-Place/9781501121463",
+          "title": "Prisoners of Geography — Tim Marshall, Simon & Schuster",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-revenge-of-geography",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Geography is the backdrop to human history itself.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Geography is the backdrop to human history itself.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780812982220",
+          "title": "The Revenge of Geography — Robert D. Kaplan, Penguin Random House",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-silk-roads",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “They were-and still are-the world’s central nervous system.”",
+      "displayLine": "10. **Study-note wording (edition unverified):** “They were-and still are-the world’s central nervous system.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer. A related primary source is linked below; it does not establish that the wording appears in this book.",
+      "sources": [
+        {
+          "url": "https://www.peterfrankopan.com/the-silk-roads.html",
+          "title": "The Silk Roads — Peter Frankopan, official author book page",
+          "locator": "Book description, opening paragraphs",
+          "scope": "author_book_description"
+        }
+      ]
+    },
+    {
+      "slug": "the-age-of-surveillance-capitalism",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “Surveillance capitalism unilaterally claims human experience as free raw material for translation into behavioral data.”",
+      "displayLine": "10. **Important quotation:** “Surveillance capitalism unilaterally claims human experience as free raw material for translation into behavioral data.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://profilebooks.com/wp-content/uploads/wpallimport/files/PDFs/9781782832744_preview.pdf",
+          "title": "The Age of Surveillance Capitalism — Shoshana Zuboff, Profile Books preview",
+          "locator": "Introduction, III: What Is Surveillance Capitalism?, printedp8 (PDFpage13)",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-sixth-extinction",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “In pushing other species to extinction, humanity is busy sawing off the limb on which it perches.” - Paul Ehrlich, quoted in the book.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “In pushing other species to extinction, humanity is busy sawing off the limb on which it perches.” - Paul Ehrlich, quoted in the book.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9780805099799/thesixthextinction/",
+          "title": "The Sixth Extinction — Elizabeth Kolbert, Macmillan",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-uninhabitable-earth",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “It is worse, much worse, than you think.”",
+      "displayLine": "10. **Important quotation:** “It is worse, much worse, than you think.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://penguinrandomhouselibrary.com/book/?isbn=9780525576716",
+          "title": "The Uninhabitable Earth — David Wallace-Wells, Penguin Random House",
+          "locator": "Official publisher description and chapter excerpt",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-republic",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Until philosophers are kings … cities will never have rest from their evils.”",
+      "displayLine": "* **Quotation excerpt:** “Until philosophers are kings … cities will never have rest from their evils.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/1497/1497-h/1497-h.htm",
+          "title": "The Republic — Plato, translated by Benjamin Jowett",
+          "locator": "Book V, Socrates addressing Glaucon",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "politics",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Man is naturally a political animal.”",
+      "displayLine": "* **Quotation excerpt:** “Man is naturally a political animal.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/6762/6762-h/6762-h.htm",
+          "title": "Politics (A Treatise on Government) — Aristotle, translated by William Ellis",
+          "locator": "Book I, Chapter II",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-prince",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “It is much safer to be feared than loved.”",
+      "displayLine": "* **Quotation excerpt:** “It is much safer to be feared than loved.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/1232/1232-h/1232-h.htm",
+          "title": "The Prince — Niccolò Machiavelli, translated by W. K. Marriott",
+          "locator": "Chapter XVII, Concerning Cruelty and Clemency",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "leviathan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** Life without common authority is “solitary, poor, nasty, brutish, and short.”",
+      "displayLine": "* **Quotation excerpt:** Life without common authority is “solitary, poor, nasty, brutish, and short.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/3207/3207-h/3207-h.htm",
+          "title": "Leviathan — Thomas Hobbes",
+          "locator": "Part I, Chapter XIII",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "two-treatises-of-government",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "* **Famous quotation:** Locke identifies property as a person’s “life, liberty and estate.”",
+      "displayLine": "* **Famous quotation:** Locke identifies property as a person’s “life, liberty and estate.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/7370/7370-h/7370-h.htm",
+          "title": "Second Treatise of Government — John Locke",
+          "locator": "Chapter VII, section 87",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-social-contract",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Man is born free, and everywhere he is in chains.”",
+      "displayLine": "* **Quotation excerpt:** “Man is born free, and everywhere he is in chains.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/46333/46333-h/46333-h.htm",
+          "title": "The Social Contract & Discourses — Jean-Jacques Rousseau, translated by G. D. H. Cole",
+          "locator": "The Social Contract, Book I, Chapter I",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "on-liberty",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “If all mankind minus one were of one opinion…” the one dissenter should not be silenced.",
+      "displayLine": "* **Quotation excerpt:** “If all mankind minus one were of one opinion…” the one dissenter should not be silenced.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/34901/34901-h/34901-h.htm",
+          "title": "On Liberty — John Stuart Mill",
+          "locator": "Chapter II, Of the Liberty of Thought and Discussion",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "democracy-in-america",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “The majority possesses a power which is physical and moral at the same time.”",
+      "displayLine": "* **Quotation excerpt:** “The majority possesses a power which is physical and moral at the same time.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/815/815-h/815-h.htm",
+          "title": "Democracy in America, Volume I — Alexis de Tocqueville, translated by Henry Reeve",
+          "locator": "Chapter XV, Unlimited Power of the Majority in the United States, and Its Consequences",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-open-society-and-its-enemies",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “We must break with the habit of deference to great men.”",
+      "displayLine": "* **Quotation excerpt:** “We must break with the habit of deference to great men.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://api.pageplace.de/preview/DT0400.9781136700255_A23856467/preview-9781136700255_A23856467.pdf",
+          "title": "The Open Society and Its Enemies — Karl Popper, Routledge Classics 2011 preview",
+          "locator": "Preface to the First Edition (1943), first paragraph, physical PDF page 32; Routledge Classics 2011, ISBN 9780415610216.",
+          "scope": "book_excerpt"
+        },
+        {
+          "url": "https://assets.press.princeton.edu/about_pup/PUP100/book/2fPopper.pdf",
+          "title": "The Open Society and Its Enemies (two volumes) — Princeton University Press",
+          "locator": "Publisher centenary catalogue, printed page 24 / one-page PDF: title and Karl R. Popper.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** Totalitarianism grows among people for whom “the distinction between fact and fiction … and true and false … no longer exist.”",
+      "displayLine": "* **Study-note wording (edition unverified):** Totalitarianism grows among people for whom “the distinction between fact and fiction … and true and false … no longer exist.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9781598538069",
+          "title": "Hannah Arendt: The Origins of Totalitarianism Expanded Edition (LOA #389) | Penguin Random House Retail",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-road-to-serfdom",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://press.uchicago.edu/ucp/books/book/chicago/R/bo4138549.html",
+          "title": "The Road to Serfdom: Text and Documents — F. A. Hayek, University of Chicago Press",
+          "locator": "Official publisher catalog",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** For Sandel, justice involves “cultivating virtue and reasoning about the common good.”",
+      "displayLine": "* **Study-note wording (edition unverified):** For Sandel, justice involves “cultivating virtue and reasoning about the common good.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9780374532505/justice/",
+          "title": "Justice",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-rule-of-law",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.penguin.co.uk/books/56375/the-rule-of-law-by-tom-bingham/9780141034539",
+          "title": "The Rule of Law — Tom Bingham, Penguin",
+          "locator": "Official publisher catalog",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "how-democracies-die",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Democracies may die at the hands not of generals but of elected leaders.”",
+      "displayLine": "* **Quotation excerpt:** “Democracies may die at the hands not of generals but of elected leaders.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.americanacademy.de/berlin-journal/how-democracies-die/",
+          "title": "How Democracies Die — Steven Levitsky and Daniel Ziblatt, American Academy in Berlin book excerpt",
+          "locator": "Introduction, paragraph beginning But there is another way",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-dictator-s-handbook",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “Coming to office and staying in office are the most important things in politics.”",
+      "displayLine": "* **Study-note wording (edition unverified):** “Coming to office and staying in office are the most important things in politics.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/bruce-bueno-de-mesquita-2/the-dictators-handbook/9781541701366/",
+          "title": "The Dictator’s Handbook — Bruce Bueno de Mesquita and Alastair Smith, Hachette",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "diplomacy",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “Intellectuals analyze the operations of international systems; statesmen build them.” This means that scholars explain world politics, but political leaders must make difficult decisions and construct workable international arrangements.",
+      "displayLine": "10. **Important quotation:** “Intellectuals analyze the operations of international systems; statesmen build them.” This means that scholars explain world politics, but political leaders must make difficult decisions and construct workable international arrangements.",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/Diplomacy/Henry-Kissinger/9781439126318",
+          "title": "Diplomacy — Henry Kissinger, Simon & Schuster",
+          "locator": "Chapter1, The New World Order",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "world-order",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Order always requires a subtle balance of restraint, force, and legitimacy.” The line means that order needs power, but power must be limited by restraint and accepted as lawful or reasonable.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Order always requires a subtle balance of restraint, force, and legitimacy.” The line means that order needs power, but power must be limited by restraint and accepted as lawful or reasonable.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguin.co.uk/books/266993/world-order-by-henry-kissinger/9780241004272",
+          "title": "World Order — Henry Kissinger, Penguin",
+          "locator": "Official publisher catalog and limited excerpt if available",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The sad fact is that international politics has always been a ruthless and dangerous business.” It summarizes Mearsheimer’s belief that insecurity and power competition are permanent features of international politics.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The sad fact is that international politics has always been a ruthless and dangerous business.” It summarizes Mearsheimer’s belief that insecurity and power competition are permanent features of international politics.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.mearsheimer.com/publications/",
+          "title": "Mearsheimer | Publications",
+          "locator": "Author publications page: named title immediately followed by John J. Mearsheimer; Norton 2001 and updated 2014 edition identified.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-rise-and-fall-of-the-great-powers",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The beginning of wisdom in human as well as international affairs was knowing when to stop.” It means that leaders must recognize the limits of ambition before expansion destroys the foundations of national power.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The beginning of wisdom in human as well as international affairs was knowing when to stop.” It means that leaders must recognize the limits of ambition before expansion destroys the foundations of national power.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/91615/the-rise-and-fall-of-the-great-powers-by-paul-kennedy/",
+          "title": "The Rise and Fall of the Great Powers by Paul Kennedy: 9780679720195 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Every civilization sees itself as the center of the world.” The line explains how societies often interpret world history from their own cultural viewpoint and may misunderstand the viewpoints of others.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Every civilization sees itself as the center of the world.” The line explains how societies often interpret world history from their own cultural viewpoint and may misunderstand the viewpoints of others.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-Clash-of-Civilizations-and-the-Remaking-of-World-Order/Samuel-P-Huntington/9781451628975",
+          "title": "The Clash of Civilizations and the Remaking of World Order | Book by Samuel P. Huntington | Official Publisher Page | Simon & Schuster",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** Liberal democracy is presented as “the end-point of mankind’s ideological evolution.” The phrase means that Fukuyama considered it the strongest surviving claim to universal political legitimacy, not the end of everyday historical events.",
+      "displayLine": "10. **Study-note wording (edition unverified):** Liberal democracy is presented as “the end-point of mankind’s ideological evolution.” The phrase means that Fukuyama considered it the strongest surviving claim to universal political legitimacy, not the end of everyday historical events.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-End-of-History-and-the-Last-Man/Francis-Fukuyama/9780743284554",
+          "title": "The End of History and the Last Man | Book by Francis Fukuyama | Official Publisher Page | Simon & Schuster",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Without Ukraine, Russia ceases to be a Eurasian empire.” The line shows why Brzezinski considers Ukrainian sovereignty important to the balance of power between Russia and the rest of Europe.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Without Ukraine, Russia ceases to be a Eurasian empire.” The line shows why Brzezinski considers Ukrainian sovereignty important to the balance of power between Russia and the rest of Europe.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/zbigniew-brzezinski/the-grand-chessboard/9780465094356/",
+          "title": "The Grand Chessboard by Zbigniew Brzezinski | Hachette Book Group",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-twenty-years-crisis-1919-1939",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Mature thought combines purpose with observation and analysis.” It means that wise political thinking needs moral goals but must also examine facts, power and practical circumstances.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Mature thought combines purpose with observation and analysis.” It means that wise political thinking needs moral goals but must also examine facts, power and practical circumstances.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://link.springer.com/book/10.1057/978-1-349-95076-8",
+          "title": "The Twenty Years' Crisis, 1919-1939: Reissued with a new preface from Michael Cox | Springer Nature Link",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-anarchical-society",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “It is better to recognise that we are in darkness than to pretend that we can see the light.” The statement encourages intellectual honesty when the future of world order remains uncertain.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “It is better to recognise that we are in darkness than to pretend that we can see the light.” The statement encourages intellectual honesty when the future of world order remains uncertain.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://cup.columbia.edu/book/the-anarchical-society/9780231161282/",
+          "title": "The Anarchical Society | Columbia University Press",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Rationality is a collection of attributes.” The line reminds readers that people and governments may be rational in some respects but mistaken, emotional or inconsistent in others.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Rationality is a collection of attributes.” The line reminds readers that people and governments may be rational in some respects but mistaken, emotional or inconsistent in others.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.hks.harvard.edu/tom-schelling-game-theory-pioneer-dies-95",
+          "title": "Tom Schelling, game theory pioneer, dies at 95 | Harvard Kennedy School",
+          "locator": "Harvard Kennedy School memorial: paragraph naming Schelling's 1960 book. Affiliated-university identification only, not a primary book passage.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "on-war",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_translation",
+      "originalLine": "10. **Important quotation:** “War is merely the continuation of policy by other means.” It means that military action remains connected to political objectives and should not be conducted without a clear political purpose.",
+      "displayLine": "10. **Quotation (Graham translation):** “War is a mere continuation of policy by other means.” It means that military action remains connected to political objectives and should not be conducted without a clear political purpose.",
+      "note": "The quotation uses the J. J. Graham translation linked below. Other translations may use different wording.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/1946/1946-h/1946-h.htm",
+          "title": "On War — Carl von Clausewitz, translated by J. J. Graham",
+          "locator": "Book I, Chapter I, section 24",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-art-of-war",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Important quotation:** “All warfare is based on deception.” The statement means that controlling the opponent’s perception can be as important as possessing physical strength.",
+      "displayLine": "10. **Important quotation:** “All warfare is based on deception.” The statement means that controlling the opponent’s perception can be as important as possessing physical strength.",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/132/132-h/132-h.htm",
+          "title": "The Art of War — Sun Tzu, translated by Lionel Giles (1910)",
+          "locator": "Chapter I, Laying Plans, section 18",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-guns-of-august",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The impetus of existing plans is always stronger than the impulse to change.” The line means that leaders often continue with an established plan even when new circumstances require reconsideration.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The impetus of existing plans is always stronger than the impulse to change.” The line means that leaders often continue with an established plan even when new circumstances require reconsideration.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+          "title": "The Guns of August by Barbara W. Tuchman: 9780345386236 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** Post-war cooperative Europe “was the insecure child of anxiety.” Judt means that European unity developed partly from fear of repeating the continent’s earlier catastrophes.",
+      "displayLine": "10. **Study-note wording (edition unverified):** Post-war cooperative Europe “was the insecure child of anxiety.” Judt means that European unity developed partly from fear of repeating the continent’s earlier catastrophes.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+          "title": "Postwar by Tony Judt: 9780143037750 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “The end of the Cold War opened up new possibilities for people everywhere.” The line recognizes that the collapse of the bipolar order created opportunities, although it did not automatically produce peace or justice.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The end of the Cold War opened up new possibilities for people everywhere.” The line recognizes that the collapse of the bipolar order created opportunities, although it did not automatically produce peace or justice.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+          "title": "The Cold War by Odd Arne Westad | Hachette Book Group",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-wealth-of-nations",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Famous quotation:** “It is not from the benevolence of the butcher, the brewer, or the baker, that we expect our dinner.” The line means that economic exchange normally depends on mutual advantage rather than personal charity.",
+      "displayLine": "10. **Quotation excerpt:** “It is not from the benevolence of the butcher, the brewer, or the baker, that we expect our dinner.” The line means that economic exchange normally depends on mutual advantage rather than personal charity.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/files/3300/3300-h/3300-h.htm",
+          "title": "An Inquiry into the Nature and Causes of the Wealth of Nations — Adam Smith",
+          "locator": "Book I, Chapter II, Of the Principle which gives occasion to the Division of Labour",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-general-theory-of-employment-interest-and-money",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Famous quotation:** “The difficulty lies, not in the new ideas, but in escaping from the old ones.” Keynes means that intellectual progress requires people to abandon assumptions that no longer explain reality.",
+      "displayLine": "10. **Quotation excerpt:** “The difficulty lies, not in the new ideas, but in escaping from the old ones.” Keynes means that intellectual progress requires people to abandon assumptions that no longer explain reality.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://gutenberg.net.au/ebooks03/0300071h/engpref.html",
+          "title": "The General Theory of Employment, Interest and Money — John Maynard Keynes",
+          "locator": "Preface to English edition, signed13December1935",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-great-transformation",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “To allow the market mechanism to be sole director … would result in the demolition of society.” Polanyi warns against allowing economic calculation to govern all human and environmental concerns.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “To allow the market mechanism to be sole director … would result in the demolition of society.” Polanyi warns against allowing economic calculation to govern all human and environmental concerns.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+          "title": "The Great Transformation by Karl Polanyi: 9780807018828 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "capitalism-and-freedom",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “Economic freedom is also an indispensable means toward the achievement of political freedom.” Friedman presents economic choice as an important protection against political domination.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Economic freedom is also an indispensable means toward the achievement of political freedom.” Friedman presents economic choice as an important protection against political domination.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
+          "title": "Capitalism and Freedom, Friedman, Appelbaum",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "poor-economics",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “They have to be sophisticated economists just to survive.” The authors mean that poor families constantly make complicated decisions while possessing very little room for error.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “They have to be sophisticated economists just to survive.” The authors mean that poor families constantly make complicated decisions while possessing very little room for error.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/poor-economics/9781541706194/",
+          "title": "Poor Economics by Abhijit V. Banerjee & Esther Duflo | Hachette Book Group",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "good-economics-for-hard-times",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “We wrote this book to hold on to hope.” The line expresses the authors’ belief that intelligent and humane public policy can still solve difficult economic problems.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “We wrote this book to hold on to hope.” The line expresses the authors’ belief that intelligent and humane public policy can still solve difficult economic problems.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.minneapolisfed.org/article/2021/esther-duflo-interview-deciding-how-to-share",
+          "title": "Esther Duflo interview: Deciding how to share — Federal Reserve Bank of Minneapolis",
+          "locator": "Interviewer question on public trust in economists",
+          "scope": "attribution_in_related_interview"
+        }
+      ]
+    },
+    {
+      "slug": "the-bottom-billion",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “The societies of the bottom billion can only be rescued from within.” Collier means that outside help cannot replace responsible domestic leadership and institutional reform.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The societies of the bottom billion can only be rescued from within.” Collier means that outside help cannot replace responsible domestic leadership and institutional reform.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.oup.com.au/books/higher-education/politics/9780195373387",
+          "title": "The Bottom Billion | Oxford University Press",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-great-escape",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "10. **Famous quotation:** “Life is better now than at almost any time in history.” Deaton uses this optimistic observation while reminding readers that millions remain excluded from progress.",
+      "displayLine": "10. **Famous quotation:** “Life is better now than at almost any time in history.” Deaton uses this optimistic observation while reminding readers that millions remain excluded from progress.",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://pup-assets.imgix.net/onix/images/9780691258805/9780691258805.pdf?fm=pdf",
+          "title": "The Great Escape — Angus Deaton, Princeton University Press introduction",
+          "locator": "Introduction, What This Book Is About, printedp1 (PDFpage2)",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "globalization-and-its-discontents",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393051247-globalization-and-its-discontents",
+          "title": "Globalization and Its Discontents - Description | W. W. Norton & Company Ltd.",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-price-of-inequality",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “The power of markets is enormous, but they have no inherent moral character.” Stiglitz means that society must create rules ensuring that markets serve justice and public welfare.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The power of markets is enormous, but they have no inherent moral character.” Stiglitz means that society must create rules ensuring that markets serve justice and public welfare.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393345063-the-price-of-inequality",
+          "title": "The Price of Inequality - Description | W. W. Norton & Company Ltd.",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+          "title": "The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “As we recognize new obligations to others, we build societies better able to flourish.” Collier presents mutual responsibility as the foundation of social and economic renewal.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “As we recognize new obligations to others, we build societies better able to flourish.” Collier presents mutual responsibility as the foundation of social and economic renewal.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguin.co.uk/books/307625/the-future-of-capitalism-by-collier-paul/9780241382295",
+          "title": "The Future of Capitalism",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "doughnut-economics",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** “Between social and planetary boundaries lies an environmentally safe and socially just space in which humanity can thrive.” This sentence summarises the entire doughnut model.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Between social and planetary boundaries lies an environmentally safe and socially just space in which humanity can thrive.” This sentence summarises the entire doughnut model.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer. A related primary source is linked below; it does not establish that the wording appears in this book.",
+      "sources": [
+        {
+          "url": "https://www.kateraworth.com/doughnut/",
+          "title": "Doughnut — Kate Raworth, official author resource",
+          "locator": "Author explanation of the Doughnut",
+          "scope": "author_related_resource"
+        }
+      ]
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** Countries should “do as the United States actually did, not as they say they did.” Mazzucato means that America’s success involved active public investment, despite its free-market language.",
+      "displayLine": "10. **Study-note wording (edition unverified):** Countries should “do as the United States actually did, not as they say they did.” Mazzucato means that America’s success involved active public investment, despite its free-market language.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+          "title": "The Entrepreneurial State by Mariana Mazzucato: 9780593656938 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Famous quotation:** “Oil has meant mastery through the years.” The line captures Yergin’s argument that command over oil has repeatedly provided economic, military and geopolitical power.",
+      "displayLine": "10. **Study-note wording (edition unverified):** “Oil has meant mastery through the years.” The line captures Yergin’s argument that command over oil has repeatedly provided economic, military and geopolitical power.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+          "title": "The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "nudge",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “A nudge…alters people’s behavior in a predictable way without forbidding any options.” It means that a true nudge influences but does not compel.",
+      "displayLine": "* **Study-note wording (edition unverified):** “A nudge…alters people’s behavior in a predictable way without forbidding any options.” It means that a true nudge influences but does not compel.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+          "title": "Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and byline identify Richard H. Thaler and Cass R. Sunstein. Final Edition is a later edition; it does not establish the quotation in the original edition.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "behave",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “Anyone who says that our worst behaviors are inevitable knows too little about primates, including us.” The line rejects the belief that violence is unavoidable.",
+      "displayLine": "* **Study-note wording (edition unverified):** “Anyone who says that our worst behaviors are inevitable knows too little about primates, including us.” The line rejects the belief that violence is unavoidable.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780143110910",
+          "title": "Behave — Robert M. Sapolsky, Penguin Random House",
+          "locator": "Publisher catalog and limited chapter excerpt",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "bowling-alone",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “Social capital may turn out to be a prerequisite for…effective computer-mediated communication.” Online networks work better when some trust already exists.",
+      "displayLine": "* **Study-note wording (edition unverified):** “Social capital may turn out to be a prerequisite for…effective computer-mediated communication.” Online networks work better when some trust already exists.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/Bowling-Alone-Revised-and-Updated/Robert-D-Putnam/9781982130848",
+          "title": "Bowling Alone: Revised and Updated | Book by Robert D. Putnam | Official Publisher Page | Simon & Schuster",
+          "locator": "Publisher revised-and-updated edition names Robert D. Putnam. Original short title accepted; this is not edition-specific quotation verification.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-weirdest-people-in-the-world",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Important quotation:** “Perhaps you are WEIRD…If so, you’re likely rather psychologically peculiar.” The line reminds Western readers that their habits are not universal human nature.",
+      "displayLine": "* **Quotation excerpt:** “Perhaps you are WEIRD…If so, you’re likely rather psychologically peculiar.” The line reminds Western readers that their habits are not universal human nature.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9780374710453/theweirdestpeopleintheworld/",
+          "title": "The WEIRDest People in the World — Joseph Henrich, Macmillan",
+          "locator": "Book opening excerpt, first paragraph",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-better-angels-of-our-nature",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Important quotation:** “The decline…has not been smooth; it has not brought violence down to zero.” Pinker clearly accepts that violence remains a serious problem.",
+      "displayLine": "* **Quotation excerpt:** “The decline…has not been smooth; it has not brought violence down to zero.” Pinker clearly accepts that violence remains a serious problem.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/#excerpt",
+          "title": "The Better Angels of Our Nature — Steven Pinker, Penguin Random House",
+          "locator": "Introduction, opening paragraph; publisher Read Sample text, ISBN 9780143122012.",
+          "scope": "book_excerpt"
+        },
+        {
+          "url": "https://www.penguinrandomhouse.com/books/302858/the-better-angels-of-our-nature-by-steven-pinker/",
+          "title": "The Better Angels of Our Nature by Steven Pinker: 9780143122012 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "invisible-women",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** The gender data gap is “both a cause and a consequence” of treating humanity as almost exclusively male.",
+      "displayLine": "* **Study-note wording (edition unverified):** The gender data gap is “both a cause and a consequence” of treating humanity as almost exclusively male.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+          "title": "Invisible Women (Hardcover) | ABRAMS",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-second-sex",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “One is not born, but rather becomes, a woman.” It means that femininity is largely formed through social conditioning.",
+      "displayLine": "* **Study-note wording (edition unverified):** “One is not born, but rather becomes, a woman.” It means that femininity is largely formed through social conditioning.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+          "title": "The Second Sex by Simone De Beauvoir: 9780307277787 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher byline identifies Simone de Beauvoir separately from translators Constance Borde and Sheila Malovany-Chevallier. No quotation verified by the byline.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "a-room-of-one-s-own",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Important quotation:** “A woman must have money and a room of her own if she is to write fiction.”",
+      "displayLine": "* **Quotation excerpt:** “A woman must have money and a room of her own if she is to write fiction.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://us.macmillan.com/books/9781250418005/aroomofonesown/",
+          "title": "A Room of One’s Own — Virginia Woolf, Macmillan",
+          "locator": "Chapter1, opening discussion of women and fiction",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "orientalism",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
+      "displayLine": "* **Study-note wording (edition unverified):** Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780394740676",
+          "title": "Orientalism — Edward W. Said, Penguin Random House",
+          "locator": "Publisher catalog",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "imagined-communities",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Important quotation:** “Communities are to be distinguished…by the style in which they are imagined.” The form of shared imagination shapes the character of a nation.",
+      "displayLine": "* **Quotation excerpt:** “Communities are to be distinguished…by the style in which they are imagined.” The form of shared imagination shapes the character of a nation.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.versobooks.com/blogs/news/4011-imagined-communities-an-introduction",
+          "title": "Imagined Communities: An Introduction — Benedict Anderson, Verso Books",
+          "locator": "Introduction, paragraph discussing real and imagined communities",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** The colonized person “discovers that his life, his breath, his beating heart are the same as those of the settler.” Liberation restores human equality.",
+      "displayLine": "* **Study-note wording (edition unverified):** The colonized person “discovers that his life, his breath, his beating heart are the same as those of the settler.” Liberation restores human equality.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+          "title": "The Wretched of the Earth | Grove Atlantic",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "manufacturing-consent",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “Dissent and inconvenient information are kept within bounds and at the margins.” Limited criticism can exist without changing the dominant agenda.",
+      "displayLine": "* **Study-note wording (edition unverified):** “Dissent and inconvenient information are kept within bounds and at the margins.” Limited criticism can exist without changing the dominant agenda.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://chomsky.info/consent01/",
+          "title": "A Propaganda Model — official Noam Chomsky site, excerpt from Manufacturing Consent",
+          "locator": "Chapter1, A Propaganda Model",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “People will come to adore the technologies that undo their capacities to think.” The greatest danger may be willingly accepting distraction.",
+      "displayLine": "* **Study-note wording (edition unverified):** “People will come to adore the technologies that undo their capacities to think.” The greatest danger may be willingly accepting distraction.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+          "title": "Amusing Ourselves to Death by Neil Postman: 9780143036531 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-shallows",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Important quotation:** “The Net…is chipping away my capacity for concentration and contemplation.” Carr fears losing the ability to think slowly and deeply.",
+      "displayLine": "* **Study-note wording (edition unverified):** “The Net…is chipping away my capacity for concentration and contemplation.” Carr fears losing the ability to think slowly and deeply.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://wwnorton.co.uk/books/9780393072228-the-shallows",
+          "title": "The Shallows - Description | W. W. Norton & Company Ltd.",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "chip-war",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.simonandschuster.com/books/Chip-War/Chris-Miller/9781982172008",
+          "title": "Chip War — Chris Miller, Simon & Schuster",
+          "locator": "Official publisher catalog",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "pakistan-a-hard-country",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.penguin.co.uk/books/56657/pakistan-a-hard-country-by-lieven-anatol/9780141038247",
+          "title": "Pakistan: A Hard Country — Anatol Lieven, Penguin",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-idea-of-pakistan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.brookings.edu/books/the-idea-of-pakistan/",
+          "title": "The Idea of Pakistan — Stephen P. Cohen, Brookings Institution Press",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-pakistan-paradox",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://hurstpublishers.com/book/the-pakistan-paradox/",
+          "title": "The Pakistan Paradox — Christophe Jaffrelot, Hurst",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-sole-spokesman",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.cambridge.org/core/books/sole-spokesman/53629540A69011A6E2719E347AA80E91",
+          "title": "The Sole Spokesman — Ayesha Jalal, Cambridge University Press",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** **“Pakistan is a visibly perturbed and divided nation.”** The line captures Jalal’s concern with a country whose people possess a national identity but remain divided over power, history and the meaning of the state.",
+      "displayLine": "10. **Study-note wording (edition unverified):** **“Pakistan is a visibly perturbed and divided nation.”** The line captures Jalal’s concern with a country whose people possess a national identity but remain divided over power, history and the meaning of the state.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+          "title": "The Struggle for Pakistan",
+          "locator": "Tufts Fletcher faculty publication record: title, Jalal A / Ayesha Jalal, Harvard University Press and bibliographic citation. No whole-book text verified.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-great-partition",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "10. **Important quotation:** **“Partition stands testament to the follies of empire.”** Khan’s line reminds readers that the end of colonial rule was accompanied by hurried decisions that ruptured communities and encouraged violent state formation.",
+      "displayLine": "10. **Study-note wording (edition unverified):** **“Partition stands testament to the follies of empire.”** Khan’s line reminds readers that the end of colonial rule was accompanied by hurried decisions that ruptured communities and encouraged violent state formation.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://yalebooks.yale.edu/book/9780300230321/the-great-partition/",
+          "title": "The Great Partition — Yasmin Khan, Yale University Press",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-murder-of-history",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://vanguardbooks.com/products/the-murder-of-history",
+          "title": "The Murder of History — K. K. Aziz, Vanguard Books",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "the-indus-saga-and-the-making-of-pakistan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://rolibooks.com/product/the-indus-saga/",
+          "title": "The Indus Saga — Aitzaz Ahsan, Roli Books",
+          "locator": "Official publisher title/author record",
+          "scope": "identity_catalog"
+        }
+      ]
+    },
+    {
+      "slug": "no-exit-from-pakistan",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "10. **Important quotation:** **“More like adversaries than allies.”** This phrase captures a relationship in which formal cooperation has frequently existed alongside suspicion, conflicting strategies and mutual resentment.",
+      "displayLine": "10. **Quotation excerpt:** **“More like adversaries than allies.”** This phrase captures a relationship in which formal cooperation has frequently existed alongside suspicion, conflicting strategies and mutual resentment.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://cambridgeblog.org/2013/11/into-the-intro-no-exit-from-pakistan/",
+          "title": "Into the Intro: No Exit from Pakistan — Daniel Markey, Cambridge University Press",
+          "locator": "No Exit, paragraph beginning At the lowest points in the relationship",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "pakistan-beyond-the-crisis-state",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "no_quote",
+      "originalLine": "",
+      "displayLine": "",
+      "note": "",
+      "sources": [
+        {
+          "url": "https://www.hurstpublishers.com/wp-content/uploads/2012/04/Hurst-South-Asia-Catalogue-.pdf",
+          "title": "Hurst South Asia catalogue — Pakistan: Beyond the Crisis State",
+          "locator": "Printed page 15 / PDF page 17: title, Edited by Maleeha Lodhi, paperback ISBN 9781849041355.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "nineteen-eighty-four",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_exact",
+      "originalLine": "* **Famous quotation:** “Who controls the past controls the future: who controls the present controls the past.” The line means that those who control historical knowledge can influence how people understand both current events and future possibilities.",
+      "displayLine": "* **Famous quotation:** “Who controls the past controls the future: who controls the present controls the past.” The line means that those who control historical knowledge can influence how people understand both current events and future possibilities.",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
+      "sources": [
+        {
+          "url": "https://gutenberg.net.au/ebooks01/0100021h.html",
+          "title": "Nineteen Eighty-Four — George Orwell, Project Gutenberg Australia",
+          "locator": "PartIII, ChapterII, Winston recites the Party slogan to O’Brien",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "brave-new-world",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Every one belongs to every one else.” The slogan shows that the World State does not recognize deep personal relationships; individuals are treated as parts of a collective system rather than independent human beings.",
+      "displayLine": "* **Quotation excerpt:** “Every one belongs to every one else.” The slogan shows that the World State does not recognize deep personal relationships; individuals are treated as parts of a collective system rather than independent human beings.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://gutenberg.ca/ebooks/huxleya-bravenewworld/huxleya-bravenewworld-00-h.html",
+          "title": "Brave New World — Aldous Huxley, Project Gutenberg Canada transcription of Chatto & Windus 1932",
+          "locator": "Chapter III, Director citing the hypnopaedic proverb; base edition identified as London: Chatto & Windus, 1932.",
+          "scope": "book_original"
+        },
+        {
+          "url": "https://www.penguin.co.uk/books/357838/brave-new-world-by-huxley-aldous/9780099518471",
+          "title": "Brave New World",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "animal-farm",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “All animals are equal, but some animals are more equal than others.” The contradiction reveals how rulers preserve the language of equality while creating privileges for themselves.",
+      "displayLine": "* **Quotation excerpt:** “All animals are equal, but some animals are more equal than others.” The contradiction reveals how rulers preserve the language of equality while creating privileges for themselves.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.gutenberg.net.au/ebooks01/0100011h.html",
+          "title": "Animal Farm — George Orwell, Project Gutenberg Australia",
+          "locator": "ChapterX, single commandment painted on barn",
+          "scope": "book_original"
+        }
+      ]
+    },
+    {
+      "slug": "the-plague",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “The only means of fighting a plague is-common decency.” The statement means that extraordinary crises are often resisted through ordinary honesty, responsibility and concern for others.",
+      "displayLine": "* **Study-note wording (edition unverified):** “The only means of fighting a plague is-common decency.” The statement means that extraordinary crises are often resisted through ordinary honesty, responsibility and concern for others.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/23472/the-plague-by-albert-camus/",
+          "title": "The Plague by Albert Camus: 9780593082096 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; short title accepted, foreword/editor credits distinguished from the original author.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "things-fall-apart",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "verified_excerpt",
+      "originalLine": "* **Famous quotation:** “Proverbs are the palm-oil with which words are eaten.” The line means that proverbs give wisdom, richness and cultural meaning to ordinary conversation.",
+      "displayLine": "* **Quotation excerpt:** “Proverbs are the palm-oil with which words are eaten.” The line means that proverbs give wisdom, richness and cultural meaning to ordinary conversation.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780385474542",
+          "title": "Things Fall Apart — Chinua Achebe, Penguin Random House",
+          "locator": "Chapter1, Okoye visits Unoka",
+          "scope": "book_excerpt"
+        }
+      ]
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “You never really understand a person until you consider things from his point of view.” It teaches that empathy requires looking beyond one’s assumptions and trying to understand another person’s circumstances.",
+      "displayLine": "* **Study-note wording (edition unverified):** “You never really understand a person until you consider things from his point of view.” It teaches that empathy requires looking beyond one’s assumptions and trying to understand another person’s circumstances.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguin.co.uk/books/410048/to-kill-a-mockingbird-by-lee-harper/9780099466734",
+          "title": "To Kill A Mockingbird",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “Nolite te bastardes carborundorum.” It is deliberately invented or mock Latin, roughly meaning, “Don’t let the bastards grind you down,” and becomes a private message of resistance and survival.",
+      "displayLine": "* **Study-note wording (edition unverified):** “Nolite te bastardes carborundorum.” It is deliberately invented or mock Latin, roughly meaning, “Don’t let the bastards grind you down,” and becomes a private message of resistance and survival.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+          "title": "The Handmaid's Tale (Deluxe Edition) by Margaret Atwood: 9798217009114 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher title/subtitle and author byline; abbreviated catalogue title accepted.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “I was not certain where I belonged-in New York, in Lahore, in both, in neither.” The line expresses the confusion of migrants who remain emotionally connected to more than one society but feel fully accepted by none.",
+      "displayLine": "* **Study-note wording (edition unverified):** “I was not certain where I belonged-in New York, in Lahore, in both, in neither.” The line expresses the confusion of migrants who remain emotionally connected to more than one society but feel fully accepted by none.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+          "title": "The Reluctant Fundamentalist by Mohsin Hamid: 9780593553480 | PenguinRandomHouse.com: Books",
+          "locator": "Publisher audiobook record names Mohsin Hamid as author and reader. Title/author identity only; no printed quotation established.",
+          "scope": "identity_only"
+        }
+      ]
+    },
+    {
+      "slug": "man-s-search-for-meaning",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “The last of the human freedoms-to choose one’s attitude in any given set of circumstances.” The line means that circumstances may severely restrict a person, but the struggle to preserve moral choice and inner dignity remains important.",
+      "displayLine": "* **Study-note wording (edition unverified):** “The last of the human freedoms-to choose one’s attitude in any given set of circumstances.” The line means that circumstances may severely restrict a person, but the struggle to preserve moral choice and inner dignity remains important.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "sources": [
+        {
+          "url": "https://www.viktorfrankl.org/assets/pdf/Covey_Intro_to_Pattakos_Prisoners.pdf",
+          "title": "Prisoners of Our Thoughts — Alex Pattakos; excerpt hosted by Viktor Frankl Institute",
+          "locator": "Chapter1 overview of Chapter4, PDFpage20",
+          "scope": "attribution_in_related_book"
+        }
+      ]
+    },
+    {
+      "slug": "long-walk-to-freedom",
+      "identityStatus": "verified_primary",
+      "quotationStatus": "unverified",
+      "originalLine": "* **Famous quotation:** “No one is born hating another person because of the colour of his skin, or his background, or his religion.” The line teaches that hatred is learned through society and can therefore be challenged through education, empathy and moral leadership.",
+      "displayLine": "* **Study-note wording (edition unverified):** “No one is born hating another person because of the colour of his skin, or his background, or his religion.” The line teaches that hatred is learned through society and can therefore be challenged through education, empathy and moral leadership.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer. A related primary source is linked below; it does not establish that the wording appears in this book.",
+      "sources": [
+        {
+          "url": "https://www.nelsonmandela.org/news/entry/nelson-mandela-annual-lecture-2018-obamas-full-speech",
+          "title": "Nelson Mandela Annual Lecture2018: Obama’s full speech — Nelson Mandela Foundation",
+          "locator": "Speech passage beginning Madiba reminds us",
+          "scope": "attribution_in_related_speech"
+        }
+      ]
+    }
+  ]
+}

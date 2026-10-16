@@ -516,7 +516,7 @@ function CourseHome({ data }: { data: CourseData }) {
         </section>
       ))}
       <p className="text-xs leading-6 text-slate-500">{data.attribution}</p>
-      <Link className={secondary} to="/gk/category/general-ability">
+      <Link className={secondary} to="/gk/cat/general-ability">
         Open the existing Ability question bank{" "}
         <ArrowRight className="h-4 w-4" />
       </Link>

@@ -1,0 +1,129 @@
+{
+  "observedAt": "2026-10-14T07:09:53.483Z",
+  "artifact": "/workspace/CSS-VISTA/dist",
+  "method": "Loopback resolver preview; desktop/mobile lab browser checks, no account data or backend writes.",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "canonical": [
+        "https://www.css-vista.com/"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Everything you need to prepare. One platform. Completely free."
+      ],
+      "mainCharacters": 5812,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "status": 200,
+      "title": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Paper I - Financial Accounting (50 Marks)"
+      ],
+      "mainCharacters": 16894,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "passed": false,
+  "failure": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks: preserve substantive article/breadcrumb schema after rendering"
+}

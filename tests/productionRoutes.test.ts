@@ -19,6 +19,7 @@ import {
   CANONICAL_ORIGIN, ROUTE_REDIRECTS, findRouteDefinition, getRoutePolicy,
 } from '../src/data/routeRegistry.mjs'
 import { getAdRoutePolicy } from '../src/lib/ads.ts'
+import { loadGeneratedPastPapers } from '../scripts/lib/past-paper-registry.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const dist = join(root, 'dist')
@@ -77,7 +78,7 @@ const INDEXABLE = [
   '/handwritten-notes', '/books', '/journal', '/consultation',
   '/about', '/privacy-policy', '/terms-and-conditions', '/cookie-policy',
   '/copyright', '/editorial-policy', '/contact', '/disclaimer',
-  '/book-summaries', '/css-eligibility-calculator',
+  '/book-summaries', '/css-eligibility-calculator', '/grammar-course',
 ]
 
 /** Routes deliberately kept out of search that must still be fully served. */
@@ -169,7 +170,8 @@ test('past-paper pages are served, and indexed only when real questions exist', 
   }
 })
 
-test('year archives, GK categories and book summaries resolve on direct navigation', { skip: !built }, () => {
+test('year archives, GK categories and book summaries resolve on direct navigation', { skip: !built }, async () => {
+  const registeredPapers = (await loadGeneratedPastPapers(root)).filter((paper: { fileUrl?: string }) => paper.fileUrl)
   const families = [
     [...sitemapUrls].filter((url) => /\/past-papers\/(css|pms|ppsc|mpt)\/\d{4}$/.test(url)),
     [...sitemapUrls].filter((url) => url.includes('/gk/cat/')),
@@ -177,12 +179,26 @@ test('year archives, GK categories and book summaries resolve on direct navigati
   ]
   for (const family of families) {
     assert.ok(family.length > 0, 'expected URLs in this family')
-    for (const url of family.slice(0, 8)) {
+    // Inspect every year archive, including useful single-paper collections.
+    const urls = family[0]?.includes('/past-papers/') ? family : family.slice(0, 8)
+    for (const url of urls) {
       const path = new URL(url).pathname
       const html = served(path)
       assert.equal(canonicalOf(html), url, path)
       assert.match(metaRobots(html), /^index, follow/, path)
-      assert.ok(text(html).split(/\s+/).length > 120, `${path} has too little content`)
+      const collection = /^\/past-papers\/(css|pms|ppsc|mpt)\/(\d{4})$/.exec(path)
+      if (collection) {
+        const expected = registeredPapers.filter((paper: { examination: string; year: number }) =>
+          paper.examination.toLowerCase() === collection[1] && String(paper.year) === collection[2])
+        const links = new Set([...html.matchAll(/href="(\/past-papers\/view\/[^"]+)"/g)].map((match) => match[1]))
+        assert.ok(expected.length > 0, `${path} has no source-backed papers`)
+        assert.deepEqual([...links].sort(), expected.map((paper: { id: string }) => `/past-papers/view/${paper.id}`).sort(), `${path} catalogue differs from source`)
+        assert.match(html, /<main\b/, path)
+        assert.match(html, /<h1\b/, path)
+        assert.equal(html.includes('data-cssv-collection-context'), false, `${path} contains retired repeated study essay`)
+      } else {
+        assert.ok(text(html).split(/\s+/).length > 120, `${path} has too little content`)
+      }
     }
   }
 })
@@ -292,8 +308,7 @@ test('MPT portal routes resolve on direct navigation, stay private and follow th
     assert.equal(policy.indexable, false, path)
   }
   // The complete private MPT portal, roll-number gate, exam and results never carry ads.
-  for (const path of patterns) assert.equal(getRoutePolicy(path).adMode, 'disabled', path)
-  for (const path of exact.slice(0, 3)) assert.equal(getRoutePolicy(path).adMode, 'manual', path)
+  for (const path of [...exact, ...patterns]) assert.equal(getRoutePolicy(path).adMode, 'disabled', path)
   assert.equal(getRoutePolicy('/account/mpt/mistakes').adMode, 'disabled')
   // Unknown MPT URLs are genuine 404s, not the application shell.
   assert.equal(request('/account/mpt/unknown/value').status, 404)

@@ -4,8 +4,9 @@
  * This replaces the previous architecture, which generated search-facing copy
  * from route-name templates (a shared "Use <PAGE NAME> as the main entry
  * point…" body plus a link list). That produced one version of a page for
- * Google and a different one for visitors, and it is the direct cause of the
- * AdSense "Low value content" finding.
+ * crawlers and a different one for visitors. This is a verified content-quality
+ * defect and a plausible contributor to an AdSense "Low value content" finding;
+ * the account review evidence is needed to establish Google's actual reasons.
  *
  * Here the production build server-renders the same React components the
  * browser renders, so the initial HTML is the genuine page. A route that cannot

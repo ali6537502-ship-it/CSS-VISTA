@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "gitSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "source": "git-rev-parse-head",
+  "buildTarget": "hostinger",
+  "builtAt": "2026-10-12T04:25:31.574Z"
+}

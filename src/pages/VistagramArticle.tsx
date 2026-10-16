@@ -9,6 +9,8 @@ import {
   loadVistagramIndex,
   loadVistagramPost,
   shareVistagramPost,
+  vistagramIndexNow,
+  vistagramPostNow,
 } from '@/features/vistagram/api'
 import {
   createVistagramCollection,
@@ -21,14 +23,16 @@ import {
   useVistagramMemberState,
 } from '@/features/vistagram/member'
 import type { VistagramPost, VistagramPostSummary } from '@/features/vistagram/types'
+import { vistagramArticleStructuredData } from '@/features/vistagram/meta.mjs'
+import { CANONICAL_ORIGIN } from '@/data/routeRegistry.mjs'
 
 export default function VistagramArticle() {
   const { slug = '' } = useParams()
   const { user } = useAccount()
   const memberState = useVistagramMemberState()
-  const [post, setPost] = useState<VistagramPost | null>(null)
-  const [indexPosts, setIndexPosts] = useState<VistagramPostSummary[]>([])
-  const [loading, setLoading] = useState(true)
+  const [post, setPost] = useState<VistagramPost | null>(() => vistagramPostNow(slug))
+  const [indexPosts, setIndexPosts] = useState<VistagramPostSummary[]>(() => vistagramIndexNow()?.posts ?? [])
+  const [loading, setLoading] = useState(() => !vistagramPostNow(slug))
   const [error, setError] = useState('')
   const [note, setNote] = useState('')
   const [collectionName, setCollectionName] = useState('')
@@ -36,7 +40,8 @@ export default function VistagramArticle() {
 
   useEffect(() => {
     const controller = new AbortController()
-    setLoading(true)
+    setPost(vistagramPostNow(slug))
+    setLoading(!vistagramPostNow(slug))
     setError('')
     loadVistagramIndex(controller.signal)
       .then(async (index) => {
@@ -56,7 +61,7 @@ export default function VistagramArticle() {
   useEffect(() => {
     if (!post) return
 
-    const canonical = `${window.location.origin}/vistagram/${encodeURIComponent(post.slug)}`
+    const canonical = `${CANONICAL_ORIGIN}/vistagram/${encodeURIComponent(post.slug)}`
     const title = `${post.title} | CSS Vistagram`
     const description = post.excerpt.slice(0, 200)
     const setMeta = (selector: string, attribute: string, value: string) => {
@@ -74,20 +79,11 @@ export default function VistagramArticle() {
     document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonical)
 
     document.getElementById('cssv-vistagram-article-schema')?.remove()
+    document.getElementById('cssv-route-structured-data')?.remove()
     const schema = document.createElement('script')
-    schema.id = 'cssv-vistagram-article-schema'
+    schema.id = 'cssv-route-structured-data'
     schema.type = 'application/ld+json'
-    schema.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: post.title,
-      description,
-      datePublished: post.publishedAt,
-      dateModified: post.updatedAt || post.publishedAt,
-      mainEntityOfPage: canonical,
-      publisher: { '@type': 'Organization', name: 'CSS Vista', url: window.location.origin },
-      about: [post.category, post.topic, ...post.tags],
-    })
+    schema.text = JSON.stringify(vistagramArticleStructuredData(post, CANONICAL_ORIGIN))
     document.head.appendChild(schema)
 
     if (user) recordVistagramView(post.id)
@@ -97,6 +93,18 @@ export default function VistagramArticle() {
   useEffect(() => {
     if (post) setNote(memberState.notes[post.id] ?? '')
   }, [memberState.notes, post])
+
+  useEffect(() => {
+    if (loading || (post && !error)) return
+    // A failed or unknown data slug must not retain a canonical/schema that
+    // claims a real article, even though React matched the reader route.
+    document.title = 'Vistagram article unavailable | CSS Vista'
+    document.querySelector('link[rel="canonical"]')?.remove()
+    document.querySelector('meta[property="og:url"]')?.remove()
+    document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex, nofollow')
+    document.getElementById('cssv-route-structured-data')?.remove()
+    document.getElementById('cssv-vistagram-article-schema')?.remove()
+  }, [loading, post, error])
 
   const related = useMemo(() => {
     if (!post) return []
@@ -116,7 +124,7 @@ export default function VistagramArticle() {
   }, [indexPosts, post])
 
   if (loading) return <main className="mx-auto min-h-screen max-w-4xl px-4 py-12"><div className="h-10 w-2/3 animate-pulse rounded bg-slate-100" /><div className="mt-4 h-5 w-full animate-pulse rounded bg-slate-100" /><div className="mt-10 space-y-3">{[1,2,3,4,5].map((item) => <div key={item} className="h-4 animate-pulse rounded bg-slate-100" />)}</div></main>
-  if (error || !post) return <main className="mx-auto min-h-screen max-w-3xl px-4 py-14"><Link to="/vistagram" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-800"><ArrowLeft className="h-4 w-4" /> Back to Vistagram</Link><div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-800">{error || 'Article unavailable.'}</div></main>
+  if (error || !post) return <main data-cssv-ad-state="error" className="mx-auto min-h-screen max-w-3xl px-4 py-14"><Link to="/vistagram" className="inline-flex items-center gap-2 text-sm font-bold text-emerald-800"><ArrowLeft className="h-4 w-4" /> Back to Vistagram</Link><div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-8 text-center text-sm text-red-800"><h1 className="font-display text-xl font-bold">Vistagram article unavailable</h1><p className="mt-3">{error || 'Article unavailable.'}</p></div></main>
 
   const saved = memberState.saved.includes(post.id)
   const read = Boolean(memberState.read[post.id])

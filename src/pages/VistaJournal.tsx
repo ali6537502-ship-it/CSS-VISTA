@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ChevronLeft, ChevronRight, FileText, Send, X } from 'lucide-react'
 import { Link } from 'react-router'
 import { opinions, type Opinion } from '@/data/books'
+import journalTranscripts from '@/data/journalTranscripts.generated.json'
 import {
   formatJournalDate, journalReadingMinutes, loadPublishedJournalArticles, type JournalArticle,
 } from '@/lib/journal'
@@ -22,7 +23,7 @@ const submissionHref =
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2'
 
-function ArticleBody({ body }: { body: string }) {
+function ArticleBody({ body, archive = false }: { body: string; archive?: boolean }) {
   const blocks = body
     .replace(/\r\n/g, '\n')
     .split(/\n{2,}/)
@@ -33,13 +34,16 @@ function ArticleBody({ body }: { body: string }) {
     <div className="space-y-5">
       {blocks.map((block, index) => {
         if (/^###\s+/.test(block)) {
-          return <h4 key={index} className="pt-2 font-display text-lg font-bold text-pine">{block.replace(/^###\s+/, '')}</h4>
+          const Heading = archive ? 'h5' : 'h4'
+          return <Heading key={index} className="pt-2 font-display text-lg font-bold text-pine">{block.replace(/^###\s+/, '')}</Heading>
         }
         if (/^##\s+/.test(block)) {
-          return <h3 key={index} className="pt-3 font-display text-xl font-bold text-pine">{block.replace(/^##\s+/, '')}</h3>
+          const Heading = archive ? 'h4' : 'h3'
+          return <Heading key={index} className="pt-3 font-display text-xl font-bold text-pine">{block.replace(/^##\s+/, '')}</Heading>
         }
         if (/^#\s+/.test(block)) {
-          return <h2 key={index} className="pt-3 font-display text-2xl font-bold text-pine">{block.replace(/^#\s+/, '')}</h2>
+          const Heading = archive ? 'h4' : 'h2'
+          return <Heading key={index} className="pt-3 font-display text-2xl font-bold text-pine">{block.replace(/^#\s+/, '')}</Heading>
         }
 
         const lines = block.split('\n').map((line) => line.trim()).filter(Boolean)
@@ -133,7 +137,7 @@ export default function VistaJournal() {
   }
 
   return (
-    <div className="bg-background">
+    <div className="bg-background" data-cssv-ad-state={articlesLoading ? 'loading' : undefined}>
       <header className="border-b border-pine/10 bg-secondary/30">
         <div className="mx-auto max-w-7xl px-4 py-11 sm:py-14">
           <div className="border-l-4 border-emerald-700 pl-5 sm:pl-7">
@@ -148,6 +152,7 @@ export default function VistaJournal() {
             <a href="#featured" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Featured</a>
             {remainingArticles.length > 0 && <a href="#publications" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Latest</a>}
             <a href="#archive" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Earlier Publications</a>
+            <a href="#archive-text" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Read Archive in Text</a>
             <a href="#areas" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Editorial Areas</a>
             <a href="#write" className={`transition-colors hover:text-emerald-700 ${focusRing}`}>Write for VISTA Journal</a>
           </nav>
@@ -296,7 +301,7 @@ export default function VistaJournal() {
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-700">Image Archive</p>
             <h2 id="archive-heading" className="mt-1 font-display text-2xl font-bold text-pine">Earlier Publications</h2>
             <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-              Earlier VISTA publications are preserved in their original printed-image format. New VISTA Journal articles are published in readable text form above.
+              Earlier VISTA publications are preserved in their original page-image format, with accessible text editions below. Published text editions appear above when available.
             </p>
           </div>
 
@@ -331,6 +336,54 @@ export default function VistaJournal() {
           </div>
         </section>
 
+        <section id="archive-text" className="mt-12 scroll-mt-24" aria-labelledby="archive-text-heading">
+          <div className="mb-5 border-b border-pine/10 pb-3">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-700">Accessible Archive</p>
+            <h2 id="archive-text-heading" className="mt-1 font-display text-2xl font-bold text-pine">Read Earlier Publications in Text</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+              Transcribed from the original archive images. Dates and historical claims remain as printed; these editions do not present earlier forecasts as current updates. The original images remain available for comparison.
+            </p>
+          </div>
+          <div className="space-y-4">
+            {journalTranscripts.articles.map((transcript) => (
+              <details key={transcript.slug} id={`${transcript.slug}-text`} className="group scroll-mt-24 rounded-xl border border-pine/10 bg-white p-5 sm:p-7">
+                <summary className={`cursor-pointer text-pine ${focusRing}`}>
+                  <h3 className="inline font-display text-lg font-bold sm:text-xl">{transcript.title}</h3>
+                  <span className="mt-2 block text-xs text-muted-foreground">By {transcript.author} · <time dateTime={transcript.publishedOn}>{formatJournalDate(transcript.publishedOn)}</time> · Read text</span>
+                </summary>
+                <article className="mx-auto mt-6 max-w-3xl border-t border-pine/10 pt-6" aria-label={`${transcript.title} transcript`}>
+                  {transcript.editorialNotes.map((note) => (
+                    <aside key={note.id} className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-5" aria-labelledby={`${transcript.slug}-${note.id}`}>
+                      <p className="text-xs font-semibold text-amber-900">Editorial clarification · <time dateTime={note.issuedOn}>{formatJournalDate(note.issuedOn)}</time></p>
+                      <h4 id={`${transcript.slug}-${note.id}`} className="mt-2 font-display text-lg font-bold text-pine">{note.title}</h4>
+                      <p className="mt-3 text-sm leading-7 text-foreground/90">{note.body}</p>
+                      {note.sources.length > 0 && (
+                        <ul className="mt-3 space-y-2 text-xs leading-6">
+                          {note.sources.map((source) => (
+                            <li key={source.url}><a href={source.url} className={`font-semibold text-emerald-800 underline ${focusRing}`}>{source.label}</a></li>
+                          ))}
+                        </ul>
+                      )}
+                    </aside>
+                  ))}
+                  {transcript.editorialNotes.length > 0 && <p className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Original archived text</p>}
+                  <ArticleBody body={transcript.body} archive />
+                  <footer className="mt-7 border-t border-pine/10 pt-4 text-xs leading-6 text-muted-foreground">
+                    <p>Source: existing archive page images. Line wrapping and page furniture have been normalised for reading.</p>
+                    <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                      {transcript.imageSources.map((source) => (
+                        <a key={source.image} href={source.image} className={`font-semibold text-emerald-700 hover:underline ${focusRing}`}>
+                          Original page {source.page}
+                        </a>
+                      ))}
+                    </p>
+                  </footer>
+                </article>
+              </details>
+            ))}
+          </div>
+        </section>
+
         <section id="areas" className="mt-14 scroll-mt-24 border-y border-pine/10 py-8" aria-labelledby="areas-heading">
           <div className="grid gap-7 lg:grid-cols-[260px_1fr]">
             <div>
@@ -353,7 +406,7 @@ export default function VistaJournal() {
                 Have something worth publishing? Send us your best work.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-emerald-50/90">
-                The top two selected articles are published every Tuesday and Saturday. We welcome original, well-researched writing on public affairs, governance, international relations, economy, technology, environment, law, society and contemporary issues.
+                We welcome original, well-researched writing on public affairs, governance, international relations, economy, technology, environment, law, society and contemporary issues. Submissions are considered for publication after editorial review.
               </p>
               <p className="mt-4 text-xs leading-5 text-emerald-50/70">
                 Submission does not guarantee publication. Selection is based on editorial merit.
@@ -462,6 +515,17 @@ export default function VistaJournal() {
               <p className="mt-0.5 truncate text-xs text-emerald-300">
                 {activeLegacy.author ? `By ${activeLegacy.author} · ` : ''}{activeLegacy.outlet} · {activeLegacy.date}
               </p>
+              <a
+                href={`#${activeLegacy.slug}-text`}
+                onClick={() => {
+                  const transcript = document.getElementById(`${activeLegacy.slug}-text`)
+                  if (transcript instanceof HTMLDetailsElement) transcript.open = true
+                  setActiveLegacy(null)
+                }}
+                className={`mt-1 inline-block text-xs font-semibold text-emerald-300 underline ${focusRing}`}
+              >
+                Read accessible text
+              </a>
             </div>
             <button ref={closeRef} type="button" onClick={() => setActiveLegacy(null)} className={`shrink-0 rounded-full bg-white/10 p-2 hover:bg-white/20 ${focusRing}`} aria-label="Close archive reader">
               <X className="h-5 w-5" />

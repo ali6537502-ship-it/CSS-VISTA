@@ -26,6 +26,7 @@ import Mentors from '@/pages/Mentors'
 import Services from '@/pages/Services'
 import Analysis from '@/pages/Analysis'
 import GrammarVocab from '@/pages/GrammarVocab'
+import GrammarCourse from '@/pages/GrammarCourse'
 import GKWorld from '@/pages/gk/GKWorld'
 import OneLinerGK from '@/pages/OneLinerGK'
 import LanguageGrammar from '@/pages/LanguageGrammar'
@@ -48,6 +49,9 @@ import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
 import { BooksPage } from '@/pages/Books'
 import VistaJournal from '@/pages/VistaJournal'
+import Vistagram from '@/pages/Vistagram'
+import VistagramArticle from '@/pages/VistagramArticle'
+import { primeVistagramIndex, primeVistagramPost } from '@/features/vistagram/api'
 import {
   LegalCentre, PrivacyPolicy, CookiePolicy, TermsConditions, Disclaimer,
   CopyrightPolicy, AboutCssVista, ContactCssVista, EditorialPolicy,
@@ -120,6 +124,17 @@ function optionalNoteRoutes(): PrerenderRoute[] {
   return routes
 }
 
+function vistagramRoutes(): PrerenderRoute[] {
+  // Only the validated public package is used, never source drafts or private
+  // student saves. The package step runs before this bundle is evaluated.
+  const publicDir = join(process.cwd(), 'public')
+  const index = primeVistagramIndex(JSON.parse(readFileSync(join(publicDir, 'vistagram-content/index.json'), 'utf8')))
+  return index.posts.map((post) => {
+    primeVistagramPost(post, JSON.parse(readFileSync(join(publicDir, post.contentPath), 'utf8')))
+    return page(`/vistagram/${post.slug}`, () => <VistagramArticle />, '/vistagram/:slug')
+  })
+}
+
 export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/', () => <Home />),
   page('/start-css', () => <StartCSS />),
@@ -146,6 +161,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/services', () => <Services />),
   page('/analysis', () => <Analysis />),
   page('/grammar-vocabulary', () => <GrammarVocab />),
+  page('/grammar-course', () => <GrammarCourse />),
   page('/gk', () => <GKWorld />),
   page('/one-liner-gk', () => <OneLinerGK />),
   page('/language-grammar', () => <LanguageGrammar />),
@@ -155,6 +171,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
   page('/books', () => <BooksPage />),
   page('/journal', () => <VistaJournal />),
+  page('/vistagram', () => <Vistagram />),
   page('/consultation', () => <Consultation />),
   page('/study-material', () => <StudyMaterial />),
   page('/study-material/islamic-studies', () => <IslamicReferences />),
@@ -171,6 +188,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/contact', () => <ContactCssVista />),
   ...islamicReferenceRoutes(),
   ...optionalNoteRoutes(),
+  ...vistagramRoutes(),
 ]
 
 export const PRERENDER_ROUTE_PATHS = PRERENDER_ROUTES.map((route) => route.path)

@@ -1,0 +1,1524 @@
+{
+  "observedAt": "2026-10-16T13:38:58.068Z",
+  "method": "Chromium PerformanceObserver, six fresh-context local artifact samples, no CPU/network throttling; external resources and all API requests blocked; preview-only CSP isolation also denies external scripts and network fetches. 1.5-second observation after network idle and font readiness. No user interaction/INP measurement. Not field Core Web Vitals; local timings exclude real hosting/network/backend and advertising.",
+  "pages": [
+    {
+      "path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 928,
+        "size": 35916,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 400.39999999990687,
+          "duration": 120
+        },
+        {
+          "startTime": 522.2999999998137,
+          "duration": 223
+        },
+        {
+          "startTime": 800.1999999999534,
+          "duration": 55
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 26.699999999953434,
+          "domContentLoaded": 511.5999999998603,
+          "loadEventEnd": 517.7999999998137,
+          "transferSize": 220521
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 716
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 716
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 79.69999999995343,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 89.39999999990687,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 82.19999999995343,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 88.20000000018626,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/HomePreview-CklBwsRX.js",
+          "initiatorType": "script",
+          "duration": 72.5999999998603,
+          "transferSize": 2165,
+          "encodedBodySize": 1865,
+          "decodedBodySize": 1865
+        },
+        {
+          "path": "/assets/api-C_byrN0_.js",
+          "initiatorType": "script",
+          "duration": 73.20000000018626,
+          "transferSize": 3414,
+          "encodedBodySize": 3114,
+          "decodedBodySize": 3114
+        },
+        {
+          "path": "/assets/book-open-text-CilKtKet.js",
+          "initiatorType": "script",
+          "duration": 73.69999999995343,
+          "transferSize": 729,
+          "encodedBodySize": 429,
+          "decodedBodySize": 429
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 2.5999999998603016,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 9.700000000186265,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 14.100000000093132,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 31.800000000046566,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 40.0999999998603,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 40.10000000009313,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 37.0999999998603,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 39.0999999998603,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 39.10000000009313,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 39.4000000001397,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 55.300000000046566,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 56.699999999953434,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        }
+      ],
+      "resourceCount": 21,
+      "resourceTransferBytes": 823104,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 964,
+        "size": 14308,
+        "element": "H1"
+      },
+      "cls": 0.19707258574029313,
+      "layoutShifts": [
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1025,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1058.7000000001863,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1308.3000000000466,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1326.2000000001863,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1375.9000000001397,
+          "hadRecentInput": false
+        }
+      ],
+      "longTasks": [
+        {
+          "startTime": 313,
+          "duration": 85
+        },
+        {
+          "startTime": 404.30000000004657,
+          "duration": 123
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 11.700000000186265,
+          "domContentLoaded": 394.80000000004657,
+          "loadEventEnd": 397.60000000009313,
+          "transferSize": 175909
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 388
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 388
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 51.699999999953434,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 60.5999999998603,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 55.200000000186265,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 59.9000000001397,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/OptionalTopicNotes-e-1CWROH.js",
+          "initiatorType": "script",
+          "duration": 43.4000000001397,
+          "transferSize": 4994,
+          "encodedBodySize": 4694,
+          "decodedBodySize": 4694
+        },
+        {
+          "path": "/assets/optionalNotes-C5pd-Zl0.js",
+          "initiatorType": "script",
+          "duration": 42.800000000046566,
+          "transferSize": 1688,
+          "encodedBodySize": 1388,
+          "decodedBodySize": 1388
+        },
+        {
+          "path": "/assets/optional-notes-index-Dx-wKDw7.js",
+          "initiatorType": "script",
+          "duration": 46.799999999813735,
+          "transferSize": 38372,
+          "encodedBodySize": 38072,
+          "decodedBodySize": 38072
+        },
+        {
+          "path": "/assets/Blocks-DVw-3xKa.js",
+          "initiatorType": "script",
+          "duration": 48.0999999998603,
+          "transferSize": 2971,
+          "encodedBodySize": 2671,
+          "decodedBodySize": 2671
+        },
+        {
+          "path": "/assets/quote-CcYnIRHb.js",
+          "initiatorType": "script",
+          "duration": 52.89999999990687,
+          "transferSize": 690,
+          "encodedBodySize": 390,
+          "decodedBodySize": 390
+        },
+        {
+          "path": "/assets/lightbulb-CZHdHcbP.js",
+          "initiatorType": "script",
+          "duration": 53.60000000009313,
+          "transferSize": 587,
+          "encodedBodySize": 287,
+          "decodedBodySize": 287
+        },
+        {
+          "path": "/assets/list-COoPtTsA.js",
+          "initiatorType": "script",
+          "duration": 52.89999999990687,
+          "transferSize": 598,
+          "encodedBodySize": 298,
+          "decodedBodySize": 298
+        },
+        {
+          "path": "/assets/studyMaterialMeta-BoIIBLp8.js",
+          "initiatorType": "script",
+          "duration": 60.5,
+          "transferSize": 3633,
+          "encodedBodySize": 3333,
+          "decodedBodySize": 3333
+        },
+        {
+          "path": "/assets/islamic-references-index-DEIE6FHH.js",
+          "initiatorType": "script",
+          "duration": 60.39999999990687,
+          "transferSize": 17695,
+          "encodedBodySize": 17395,
+          "decodedBodySize": 17395
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 5,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 9.100000000093132,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 18.0999999998603,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 21.200000000186265,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 21.799999999813735,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 20.4000000001397,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 20.600000000093132,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 21,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 21,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 23.800000000046566,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 27.5,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 26.699999999953434,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 27,
+      "resourceTransferBytes": 888024,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 968,
+        "size": 22239,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 254.9000000001397,
+          "duration": 91
+        },
+        {
+          "startTime": 349.5,
+          "duration": 136
+        },
+        {
+          "startTime": 493.9000000001397,
+          "duration": 59
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 26.700000000186265,
+          "domContentLoaded": 337.5,
+          "loadEventEnd": 344.9000000001397,
+          "transferSize": 151757
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 360
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 360
+        }
+      ],
+      "resources": [
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 34.199999999953434,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 35.299999999813735,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 40.39999999990687,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 35.60000000009313,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/assets/CssEligibilityCalculator-BEWKj9_b.js",
+          "initiatorType": "script",
+          "duration": 50.300000000046566,
+          "transferSize": 22379,
+          "encodedBodySize": 22079,
+          "decodedBodySize": 22079
+        },
+        {
+          "path": "/assets/shared-B_HkcKLK.js",
+          "initiatorType": "script",
+          "duration": 49.800000000046566,
+          "transferSize": 3366,
+          "encodedBodySize": 3066,
+          "decodedBodySize": 3066
+        },
+        {
+          "path": "/assets/calendar-days-DKJ-7S7J.js",
+          "initiatorType": "script",
+          "duration": 73.5,
+          "transferSize": 790,
+          "encodedBodySize": 490,
+          "decodedBodySize": 490
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 76.4000000001397,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 12,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 4.2999999998137355,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 42.10000000009313,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 26.199999999953434,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 29.699999999953434,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 28.300000000046566,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 28.300000000046566,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 28.600000000093132,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 32.39999999990687,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 32.4000000001397,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 31.199999999953434,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 19,
+      "resourceTransferBytes": 843331,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 1128,
+        "size": 58824,
+        "element": "SPAN"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 399.5,
+          "duration": 89
+        },
+        {
+          "startTime": 489.10000000009313,
+          "duration": 261
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 17.600000000093132,
+          "domContentLoaded": 483.10000000009313,
+          "loadEventEnd": 488,
+          "transferSize": 220521
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 924
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 924
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 61.300000000046566,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 70.30000000004657,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 64.60000000009313,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 75.29999999981374,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/HomePreview-CklBwsRX.js",
+          "initiatorType": "script",
+          "duration": 160.5,
+          "transferSize": 2165,
+          "encodedBodySize": 1865,
+          "decodedBodySize": 1865
+        },
+        {
+          "path": "/assets/api-C_byrN0_.js",
+          "initiatorType": "script",
+          "duration": 161.30000000004657,
+          "transferSize": 3414,
+          "encodedBodySize": 3114,
+          "decodedBodySize": 3114
+        },
+        {
+          "path": "/assets/book-open-text-CilKtKet.js",
+          "initiatorType": "script",
+          "duration": 161,
+          "transferSize": 729,
+          "encodedBodySize": 429,
+          "decodedBodySize": 429
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 1.5,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 31.800000000046566,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 7.600000000093132,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 12.099999999860302,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 17,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 16.199999999953434,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 15.900000000139698,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 22.100000000093132,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 23,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 24.0999999998603,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 23.899999999906868,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 23.799999999813735,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        }
+      ],
+      "resourceCount": 21,
+      "resourceTransferBytes": 823104,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 1076,
+        "size": 14065,
+        "element": "H1"
+      },
+      "cls": 0.2527627314814815,
+      "layoutShifts": [
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1114.1999999999534,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1138.6000000000931,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1283.8999999999069,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1316.5,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1399.1000000000931,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1403.1000000000931,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1422.8999999999069,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1455.6999999999534,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1547.5,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1581.3999999999069,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1631,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1662.8000000000466,
+          "hadRecentInput": false
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1799.1999999999534,
+          "hadRecentInput": false
+        }
+      ],
+      "longTasks": [
+        {
+          "startTime": 272.39999999990687,
+          "duration": 87
+        },
+        {
+          "startTime": 360.10000000009313,
+          "duration": 252
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 18.600000000093132,
+          "domContentLoaded": 352,
+          "loadEventEnd": 359.30000000004657,
+          "transferSize": 175909
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 620
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 620
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 75.10000000009313,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 90.5,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 83.89999999990687,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 83.9000000001397,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/OptionalTopicNotes-e-1CWROH.js",
+          "initiatorType": "script",
+          "duration": 80.10000000009313,
+          "transferSize": 4994,
+          "encodedBodySize": 4694,
+          "decodedBodySize": 4694
+        },
+        {
+          "path": "/assets/optionalNotes-C5pd-Zl0.js",
+          "initiatorType": "script",
+          "duration": 79.39999999990687,
+          "transferSize": 1688,
+          "encodedBodySize": 1388,
+          "decodedBodySize": 1388
+        },
+        {
+          "path": "/assets/optional-notes-index-Dx-wKDw7.js",
+          "initiatorType": "script",
+          "duration": 89.0999999998603,
+          "transferSize": 38372,
+          "encodedBodySize": 38072,
+          "decodedBodySize": 38072
+        },
+        {
+          "path": "/assets/Blocks-DVw-3xKa.js",
+          "initiatorType": "script",
+          "duration": 91.30000000004657,
+          "transferSize": 2971,
+          "encodedBodySize": 2671,
+          "decodedBodySize": 2671
+        },
+        {
+          "path": "/assets/quote-CcYnIRHb.js",
+          "initiatorType": "script",
+          "duration": 92,
+          "transferSize": 690,
+          "encodedBodySize": 390,
+          "decodedBodySize": 390
+        },
+        {
+          "path": "/assets/lightbulb-CZHdHcbP.js",
+          "initiatorType": "script",
+          "duration": 91.89999999990687,
+          "transferSize": 587,
+          "encodedBodySize": 287,
+          "decodedBodySize": 287
+        },
+        {
+          "path": "/assets/list-COoPtTsA.js",
+          "initiatorType": "script",
+          "duration": 91,
+          "transferSize": 598,
+          "encodedBodySize": 298,
+          "decodedBodySize": 298
+        },
+        {
+          "path": "/assets/studyMaterialMeta-BoIIBLp8.js",
+          "initiatorType": "script",
+          "duration": 36.60000000009313,
+          "transferSize": 3633,
+          "encodedBodySize": 3333,
+          "decodedBodySize": 3333
+        },
+        {
+          "path": "/assets/islamic-references-index-DEIE6FHH.js",
+          "initiatorType": "script",
+          "duration": 44,
+          "transferSize": 17695,
+          "encodedBodySize": 17395,
+          "decodedBodySize": 17395
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 3.699999999953434,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 4.599999999860302,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 16.0999999998603,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 13.399999999906868,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 20.199999999953434,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 19.199999999953434,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 19.300000000046566,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 19.5,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 19.5999999998603,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 19.600000000093132,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 26.199999999953434,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 23.5,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 27,
+      "resourceTransferBytes": 888024,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 984,
+        "size": 32508,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 299.19999999995343,
+          "duration": 179
+        },
+        {
+          "startTime": 482.69999999995343,
+          "duration": 81
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 45.199999999953434,
+          "domContentLoaded": 294.9000000001397,
+          "loadEventEnd": 298.4000000001397,
+          "transferSize": 151757
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 496
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 496
+        }
+      ],
+      "resources": [
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 28.199999999953434,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-Dkhwn0rD.js",
+          "initiatorType": "script",
+          "duration": 30.799999999813735,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 29.399999999906868,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 29.700000000186265,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/assets/CssEligibilityCalculator-BEWKj9_b.js",
+          "initiatorType": "script",
+          "duration": 50.10000000009313,
+          "transferSize": 22379,
+          "encodedBodySize": 22079,
+          "decodedBodySize": 22079
+        },
+        {
+          "path": "/assets/shared-B_HkcKLK.js",
+          "initiatorType": "script",
+          "duration": 50.10000000009313,
+          "transferSize": 3366,
+          "encodedBodySize": 3066,
+          "decodedBodySize": 3066
+        },
+        {
+          "path": "/assets/calendar-days-DKJ-7S7J.js",
+          "initiatorType": "script",
+          "duration": 49.89999999990687,
+          "transferSize": 790,
+          "encodedBodySize": 490,
+          "decodedBodySize": 490
+        },
+        {
+          "path": "/assets/clock-3-BrVSwr_I.js",
+          "initiatorType": "script",
+          "duration": 49.699999999953434,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 5.599999999860302,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 6.199999999953434,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-Chl7qYvY.js",
+          "initiatorType": "script",
+          "duration": 7,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BFWYMmJx.js",
+          "initiatorType": "script",
+          "duration": 37.800000000046566,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-BMHJIiYw.js",
+          "initiatorType": "script",
+          "duration": 37.699999999953434,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-59zNZp5o.js",
+          "initiatorType": "script",
+          "duration": 42,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/settings-2-BXaxsYVE.js",
+          "initiatorType": "script",
+          "duration": 41.39999999990687,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-C6Bh14EC.js",
+          "initiatorType": "script",
+          "duration": 41.5999999998603,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-BILAZBGL.js",
+          "initiatorType": "script",
+          "duration": 44,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-Bn9LLxhA.js",
+          "initiatorType": "script",
+          "duration": 43.699999999953434,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-DzcXawRM.js",
+          "initiatorType": "script",
+          "duration": 42.60000000009313,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 19,
+      "resourceTransferBytes": 843331,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [],
+      "pageErrors": []
+    }
+  ],
+  "lighthouse": {
+    "output": "/workspace/CSS-VISTA/test-artifacts/lighthouse-local-mobile.json",
+    "stderr": "",
+    "localMobile": true,
+    "version": "13.5.0",
+    "successfulExternalRequests": 0,
+    "apiNetworkRequests": 0
+  }
+}

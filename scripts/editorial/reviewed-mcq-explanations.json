@@ -1,0 +1,2169 @@
+{
+  "reviewDate": "2026-10-15",
+  "scope": "A bounded editorial review of 30 existing General Ability number-series questions and 26 English questions. No content was published and no current-affairs or protected MPT release was modified.",
+  "baseline": {
+    "centralBankTotal": 37627,
+    "generalAbilityTotal": 900,
+    "generalAbilityMissingExplanations": 400,
+    "englishGrammarTotal": 2599,
+    "englishGrammarMissingExplanations": 2413
+  },
+  "sources": {
+    "bc-adjective-prepositions": {
+      "requestedUrl": "https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/adjectives-prepositions",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions",
+      "title": "Adjectives and prepositions | LearnEnglish",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "2efdbccc3a6643b2340b8ae0d3ac1d688f1666e10ac93089e4440bcfd8e48ac9",
+      "evidenceExcerpt": "We use at with adjectives like good / bad",
+      "verificationNote": "Skill adjectives use at; examples also establish worried about, afraid of, proud of, interested in and similar to."
+    },
+    "bc-passives": {
+      "requestedUrl": "https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/passives",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/passives",
+      "title": "Passives | LearnEnglish",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "fa62b4655188ea4f772bf03d459c8231fe26ded028b51a5ac3743d4ef7cf4d17",
+      "evidenceExcerpt": "We make the passive using the verb be + past participle.",
+      "verificationNote": "Passive construction and past-simple was/were + past participle."
+    },
+    "cambridge-for-since": {
+      "requestedUrl": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since",
+      "title": "For or since ? - Grammar - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "a20134de87ed754c13debd112b2be5085a4cc12f99d85a07e45807434d6807e0",
+      "evidenceExcerpt": "We use for with a period of time",
+      "verificationNote": "For takes a duration; since takes a starting point."
+    },
+    "cambridge-find": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/find",
+      "url": "https://dictionary.cambridge.org/dictionary/english/find",
+      "title": "FIND | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "3aab60e361d8eb822e8be193c79db5d768f443b959af93ba1dd7d35cbc38df7c",
+      "evidenceExcerpt": "past tense and past participle found",
+      "verificationNote": "The find entry identifies found as its past tense and past participle."
+    },
+    "cambridge-found": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/found",
+      "url": "https://dictionary.cambridge.org/dictionary/english/found",
+      "title": "FOUND | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "9c902cf335b0417af91041d06e2c3374a72ba641f3f6946ed758c528eabc6f25",
+      "evidenceExcerpt": "to bring something into existence:",
+      "verificationNote": "The distinct verb found means to establish; its regular past is founded."
+    },
+    "cambridge-commander": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/commander",
+      "url": "https://dictionary.cambridge.org/dictionary/english/commander",
+      "title": "COMMANDER | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "f8d31b13543f8e2223206acc80b6ecfb2438d55cc75ab4a322bba4825b7d9309",
+      "evidenceExcerpt": "an officer who is in charge of a military operation",
+      "verificationNote": "A commander is a person in charge; the analogy needs a person followed by an action."
+    },
+    "cambridge-legislate": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/legislate",
+      "url": "https://dictionary.cambridge.org/dictionary/english/legislate",
+      "title": "LEGISLATE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "1b5be316536d222d3f7578d1d4a3c910ffe211a67170483bf39db0afdf850a73",
+      "evidenceExcerpt": "to make laws:",
+      "verificationNote": "Legislate is a verb for making laws."
+    },
+    "cambridge-senator": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/senator",
+      "url": "https://dictionary.cambridge.org/dictionary/english/senator",
+      "title": "SENATOR | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "e302aedbff4c95c30431e6ec7c3bb0e30f34cbfe127d950e0435f5838c460701",
+      "evidenceExcerpt": "a politician who has been elected to a Senate:",
+      "verificationNote": "Senator identifies a person in a legislative chamber."
+    },
+    "senate-powers": {
+      "requestedUrl": "https://www.senate.gov/about/powers-procedures.htm",
+      "url": "https://www.senate.gov/about/powers-procedures.htm",
+      "title": "U.S. Senate: Powers and Procedures",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "ae42b20e1d8ff1cacf51941a845aa5664ab011d983e92491d9dd8f25b23b0a5a",
+      "evidenceExcerpt": "legislation",
+      "verificationNote": "Primary chamber description of the lawmaking role; supports Senator:Legislates."
+    },
+    "cambridge-emaciated": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/emaciated",
+      "url": "https://dictionary.cambridge.org/dictionary/english/emaciated",
+      "title": "EMACIATED | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "4d523dc3c046427f2d4c33881006d46332a5d0d6ee620fcc585aaaafec2d04dc",
+      "evidenceExcerpt": "very thin and weak, usually because of illness or extreme hunger:",
+      "verificationNote": "The adjective denotes unhealthy thinness, so Very thin is the matching option."
+    },
+    "cambridge-enigma": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/enigma",
+      "url": "https://dictionary.cambridge.org/dictionary/english/enigma",
+      "title": "ENIGMA | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "cc79b426df664629176a20bb2885547abe1fe03423a8975990d8c9cf0e39b682",
+      "evidenceExcerpt": "something that is mysterious and seems impossible to understand completely:",
+      "verificationNote": "Enigma denotes a mystery."
+    },
+    "cambridge-paramount": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/paramount",
+      "url": "https://dictionary.cambridge.org/dictionary/english/paramount",
+      "title": "PARAMOUNT | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "48b593861516d62f33d2060118edd7116c53995ebe5d7690410ebc6376b95ad6",
+      "evidenceExcerpt": "more important than anything else:",
+      "verificationNote": "Paramount means most important."
+    },
+    "cambridge-probity": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/probity",
+      "url": "https://dictionary.cambridge.org/dictionary/english/probity",
+      "title": "PROBITY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "5edccf6a0c7119718af96e2085d5a971c20732b8aaf2a31aea8ee3d35cf3f601",
+      "evidenceExcerpt": "complete honesty:",
+      "verificationNote": "Probity concerns honesty and correct conduct."
+    },
+    "cambridge-call-it-a-day": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/call-it-a-day",
+      "url": "https://dictionary.cambridge.org/dictionary/english/call-it-a-day",
+      "title": "CALL IT A DAY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "2b0e85921eff8b0d8709d83cc36f9545c43c591518b3a28435002299152e614a",
+      "evidenceExcerpt": "to stop working for the day:",
+      "verificationNote": "The idiom means to stop the current work."
+    },
+    "cambridge-see-eye-to-eye": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/see-eye-to-eye",
+      "url": "https://dictionary.cambridge.org/dictionary/english/see-eye-to-eye",
+      "title": "SEE EYE TO EYE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "b688d0852b039da57667e71932435f6f330586a7f213728e6fab03dda8e9675f",
+      "evidenceExcerpt": "to agree with someone:",
+      "verificationNote": "The idiom expresses agreement."
+    },
+    "cambridge-sinecure": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/sinecure",
+      "url": "https://dictionary.cambridge.org/dictionary/english/sinecure",
+      "title": "SINECURE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "5bd17b338fe68ea71458f2aa652b09be4294882a812457960c028511612f1a51",
+      "evidenceExcerpt": "a paid position that involves little or no work:",
+      "verificationNote": "The noun describes a paid post with few duties; it does not establish a salary threshold."
+    },
+    "cambridge-epic": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/epic",
+      "url": "https://dictionary.cambridge.org/dictionary/english/epic",
+      "title": "EPIC | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "cd066b505e02e6c0dbdb638bfa02db1b65f3a8f2edc1bad25da8bc7ffc7d1ce0",
+      "evidenceExcerpt": "a film, poem, or book that is long and contains a lot of action",
+      "verificationNote": "The literary sense supports the question about a long heroic narrative poem."
+    },
+    "cambridge-bigamy": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/bigamy",
+      "url": "https://dictionary.cambridge.org/dictionary/english/bigamy",
+      "title": "BIGAMY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "536ce1e89a0c659fc9545bfab707eedbbb8e629aebb784b86ada3213a555cbe9",
+      "evidenceExcerpt": "the act of marrying a person while already legally married to someone else",
+      "verificationNote": "Vocabulary definition, not jurisdiction-specific legal advice."
+    },
+    "cambridge-regicide": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/regicide",
+      "url": "https://dictionary.cambridge.org/dictionary/english/regicide",
+      "title": "REGICIDE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "212e8939e40da2abd1b600a2439ba6790124c3662de67851be9f8c71763781eb",
+      "evidenceExcerpt": "a person who kills a king, or the act of killing a king",
+      "verificationNote": "The word can denote the act as well as the person."
+    },
+    "cambridge-bohemian": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/bohemian",
+      "url": "https://dictionary.cambridge.org/dictionary/english/bohemian",
+      "title": "BOHEMIAN | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "66bc58403008f40921333d3d6d38fa137944eccc68b05bc7fa96acb55ee92a43",
+      "evidenceExcerpt": "a person who lives in a very informal style that is different from the way most people live",
+      "verificationNote": "Supports the unconventional-lifestyle sense used by the question."
+    },
+    "cambridge-scurrilous": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/scurrilous",
+      "url": "https://dictionary.cambridge.org/dictionary/english/scurrilous",
+      "title": "SCURRILOUS | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "6cc47ae02f46f5be373605cee550f29a3f0e49b2d129691112d2d78d0268e10c",
+      "evidenceExcerpt": "rude and cruel, and sometimes damaging:",
+      "verificationNote": "Scurrilous describes abusive or damaging criticism."
+    },
+    "cambridge-shallot": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/shallot",
+      "url": "https://dictionary.cambridge.org/dictionary/english/shallot",
+      "title": "SHALLOT | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "dc146028a8c96ae4bfc25e07798cc305a7229d27bd5f866b80dd5051751728fa",
+      "evidenceExcerpt": "a type of small onion",
+      "verificationNote": "Demonstrates a malformed question where none of the choices is a shallot category."
+    },
+    "cambridge-desire-thesaurus": {
+      "requestedUrl": "https://dictionary.cambridge.org/thesaurus/desire",
+      "url": "https://dictionary.cambridge.org/thesaurus/desire",
+      "title": "DESIRE - 25 Synonyms and Antonyms - Cambridge English",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "e86d4fc68e69cb310d21d5ae76a7d0cb57bff66aad8e1b8e1556025687aa7fcf",
+      "evidenceExcerpt": "Antonyms distaste aversion dislike",
+      "verificationNote": "Dislike/aversion are listed antonyms, so the original Hate key is not demonstrably a unique error."
+    }
+  },
+  "changes": [
+    {
+      "id": "general-ability-4801",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4801",
+        "q": "4, 16, 52, 160, 484, 1456, ?",
+        "o": [
+          "3935",
+          "4",
+          "4381",
+          "4372"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Multiply by 3 and add 4 at each step: 4 × 3 + 4 = 16 and 16 × 3 + 4 = 52. The same rule gives 1456 × 3 + 4 = 4372."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 3,
+        "addend": 4,
+        "completedSequence": [
+          4,
+          16,
+          52,
+          160,
+          484,
+          1456,
+          4372
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4802",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4802",
+        "q": "16, 38, 21, 47, 26, 56, ?",
+        "o": [
+          "31",
+          "24",
+          "56",
+          "38"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Read alternate positions separately. The odd-position terms are 16, 21, 26, 31, increasing by 5; the even-position terms are 38, 47, 56, increasing by 9. The missing odd-position term is 31."
+      },
+      "verification": {
+        "kind": "interleaved",
+        "increments": [
+          5,
+          9
+        ],
+        "completedSequence": [
+          16,
+          38,
+          21,
+          47,
+          26,
+          56,
+          31
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4803",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4803",
+        "q": "14, 28, 56, 112, 224, 448, ?",
+        "o": [
+          "788",
+          "806",
+          "968",
+          "896"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term doubles: 14, 28, 56, 112, 224, 448. Continuing gives 448 × 2 = 896."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 0,
+        "completedSequence": [
+          14,
+          28,
+          56,
+          112,
+          224,
+          448,
+          896
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4804",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4804",
+        "q": "3, 6, 12, 24, 30, 60, ?",
+        "o": [
+          "6",
+          "66",
+          "62",
+          "76"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Alternate multiplying by 2 and adding 6: 3 × 2 = 6, 6 + 6 = 12, 12 × 2 = 24, 24 + 6 = 30, 30 × 2 = 60. The next step is 60 + 6 = 66."
+      },
+      "verification": {
+        "kind": "alternating",
+        "operations": [
+          [
+            "multiply",
+            2
+          ],
+          [
+            "add",
+            6
+          ]
+        ],
+        "completedSequence": [
+          3,
+          6,
+          12,
+          24,
+          30,
+          60,
+          66
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4805",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4805",
+        "q": "17, 20, 23, 30, 37, 40, ?",
+        "o": [
+          "51",
+          "41",
+          "43",
+          "30"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences repeat in pairs: +3, +3, +7, +7, +3, +3. After 37 + 3 = 40, add 3 again to obtain 43."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          3,
+          3,
+          7,
+          7
+        ],
+        "completedSequence": [
+          17,
+          20,
+          23,
+          30,
+          37,
+          40,
+          43
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4806",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4806",
+        "q": "6, 5, 15, 24, ?, 71, 118",
+        "o": [
+          "43",
+          "46",
+          "47",
+          "24"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term after the first two is their sum plus 4: 6 + 5 + 4 = 15, 5 + 15 + 4 = 24, and 15 + 24 + 4 = 43. This also gives 24 + 43 + 4 = 71 and 43 + 71 + 4 = 118."
+      },
+      "verification": {
+        "kind": "previous-two",
+        "addend": 4,
+        "completedSequence": [
+          6,
+          5,
+          15,
+          24,
+          43,
+          71,
+          118
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4807",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4807",
+        "q": "1, 3, 7, 15, 31, 63, ?",
+        "o": [
+          "120",
+          "127",
+          "125",
+          "121"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Multiply by 2 and add 1 each time: 1 → 3 → 7 → 15 → 31 → 63. The next term is 63 × 2 + 1 = 127."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 1,
+        "completedSequence": [
+          1,
+          3,
+          7,
+          15,
+          31,
+          63,
+          127
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4808",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4808",
+        "q": "6, 18, 42, 90, 186, 378, ?",
+        "o": [
+          "186",
+          "762",
+          "800",
+          "671"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The rule is multiply by 2, then add 6: 6 × 2 + 6 = 18 and 18 × 2 + 6 = 42. Continuing from 378 gives 378 × 2 + 6 = 762."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 6,
+        "completedSequence": [
+          6,
+          18,
+          42,
+          90,
+          186,
+          378,
+          762
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4809",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4809",
+        "q": "6, 9, 19, 32, 55, 91, ?",
+        "o": [
+          "135",
+          "150",
+          "154",
+          "142"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Add the preceding two terms and then add 4: 6 + 9 + 4 = 19, 9 + 19 + 4 = 32, and 19 + 32 + 4 = 55. The next term is 55 + 91 + 4 = 150."
+      },
+      "verification": {
+        "kind": "previous-two",
+        "addend": 4,
+        "completedSequence": [
+          6,
+          9,
+          19,
+          32,
+          55,
+          91,
+          150
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4810",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4810",
+        "q": "6, 12, 21, ?, 51, 102, 111",
+        "o": [
+          "34",
+          "46",
+          "42",
+          "36"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The operations alternate ×2 and +9: 6 → 12 → 21 → 42 → 51 → 102 → 111. Therefore the missing term is 21 × 2 = 42."
+      },
+      "verification": {
+        "kind": "alternating",
+        "operations": [
+          [
+            "multiply",
+            2
+          ],
+          [
+            "add",
+            9
+          ]
+        ],
+        "completedSequence": [
+          6,
+          12,
+          21,
+          42,
+          51,
+          102,
+          111
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4811",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4811",
+        "q": "5, 14, 28, 37, 74, 83, ?",
+        "o": [
+          "153",
+          "139",
+          "166",
+          "14"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Alternate adding 9 and multiplying by 2: 5 → 14 → 28 → 37 → 74 → 83. The next operation is ×2, so 83 × 2 = 166."
+      },
+      "verification": {
+        "kind": "alternating",
+        "operations": [
+          [
+            "add",
+            9
+          ],
+          [
+            "multiply",
+            2
+          ]
+        ],
+        "completedSequence": [
+          5,
+          14,
+          28,
+          37,
+          74,
+          83,
+          166
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4812",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4812",
+        "q": "1344, 672, 336, 168, ?, 42, 21",
+        "o": [
+          "84",
+          "78",
+          "76",
+          "42"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term is half the preceding one: 1344 → 672 → 336 → 168 → 84 → 42 → 21. Thus 168 ÷ 2 = 84 fills the gap."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 0.5,
+        "addend": 0,
+        "completedSequence": [
+          1344,
+          672,
+          336,
+          168,
+          84,
+          42,
+          21
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4813",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4813",
+        "q": "11, 20, 37, 46, 63, 72, ?",
+        "o": [
+          "89",
+          "11",
+          "75",
+          "20"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Add 9 and 17 alternately: 11 + 9 = 20, 20 + 17 = 37, and 37 + 9 = 46. After 63 + 9 = 72, the next term is 72 + 17 = 89."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          9,
+          17
+        ],
+        "completedSequence": [
+          11,
+          20,
+          37,
+          46,
+          63,
+          72,
+          89
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4814",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4814",
+        "q": "7, 14, 8, 16, 10, 20, ?",
+        "o": [
+          "18",
+          "22",
+          "10",
+          "14"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Alternate multiplying by 2 and subtracting 6: 7 → 14 → 8 → 16 → 10 → 20. The next step is 20 − 6 = 14."
+      },
+      "verification": {
+        "kind": "alternating",
+        "operations": [
+          [
+            "multiply",
+            2
+          ],
+          [
+            "add",
+            -6
+          ]
+        ],
+        "completedSequence": [
+          7,
+          14,
+          8,
+          16,
+          10,
+          20,
+          14
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4815",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4815",
+        "q": "10, 17, 27, 40, 56, 75, ?",
+        "o": [
+          "87",
+          "97",
+          "99",
+          "40"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences are 7, 10, 13, 16 and 19; each difference increases by 3. The next difference is 22, giving 75 + 22 = 97."
+      },
+      "verification": {
+        "kind": "growing-differences",
+        "firstDifference": 7,
+        "increase": 3,
+        "completedSequence": [
+          10,
+          17,
+          27,
+          40,
+          56,
+          75,
+          97
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4816",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4816",
+        "q": "3, 7, 10, 17, 21, 24, ?",
+        "o": [
+          "10",
+          "41",
+          "40",
+          "31"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The increments repeat +4, +3, +7: 3 → 7 → 10 → 17 → 21 → 24. Continue with +7 to get 31."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          4,
+          3,
+          7
+        ],
+        "completedSequence": [
+          3,
+          7,
+          10,
+          17,
+          21,
+          24,
+          31
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4817",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4817",
+        "q": "5, 14, 32, 68, 140, 284, ?",
+        "o": [
+          "503",
+          "572",
+          "601",
+          "571"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Multiply by 2 and add 4: 5 × 2 + 4 = 14, 14 × 2 + 4 = 32, and 32 × 2 + 4 = 68. Continuing the rule gives 284 × 2 + 4 = 572."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 4,
+        "completedSequence": [
+          5,
+          14,
+          32,
+          68,
+          140,
+          284,
+          572
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4818",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4818",
+        "q": "7, 14, 22, ?, 39, 47, 57",
+        "o": [
+          "29",
+          "36",
+          "32",
+          "30"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences repeat +7, +8, +10: 7 → 14 → 22 → 32 → 39 → 47 → 57. The gap is 22 + 10 = 32, which is followed by 32 + 7 = 39."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          7,
+          8,
+          10
+        ],
+        "completedSequence": [
+          7,
+          14,
+          22,
+          32,
+          39,
+          47,
+          57
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4819",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4819",
+        "q": "18, 21, 24, 36, 48, 51, ?",
+        "o": [
+          "53",
+          "24",
+          "55",
+          "54"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences follow the repeating pattern +3, +3, +12, +12: 18 → 21 → 24 → 36 → 48 → 51 → 54. The missing term is 54."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          3,
+          3,
+          12,
+          12
+        ],
+        "completedSequence": [
+          18,
+          21,
+          24,
+          36,
+          48,
+          51,
+          54
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4820",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4820",
+        "q": "8, 11, 17, 29, 53, 101, ?",
+        "o": [
+          "197",
+          "178",
+          "216",
+          "195"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences double: 3, 6, 12, 24, 48. The next difference is 96, so the next term is 101 + 96 = 197."
+      },
+      "verification": {
+        "kind": "doubling-differences",
+        "firstDifference": 3,
+        "completedSequence": [
+          8,
+          11,
+          17,
+          29,
+          53,
+          101,
+          197
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4821",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4821",
+        "q": "2, 4, 7, 12, 19, 30, ?",
+        "o": [
+          "12",
+          "35",
+          "2",
+          "43"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Add consecutive prime numbers: 2, 3, 5, 7, 11 and 13. These give 2 → 4 → 7 → 12 → 19 → 30 → 43, so the next term is 43."
+      },
+      "verification": {
+        "kind": "prime-differences",
+        "completedSequence": [
+          2,
+          4,
+          7,
+          12,
+          19,
+          30,
+          43
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4822",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4822",
+        "q": "7, 18, 40, 84, 172, 348, ?",
+        "o": [
+          "700",
+          "703",
+          "695",
+          "630"
+        ],
+        "a": 0,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term is twice the preceding term plus 4: 7 → 18 → 40 → 84 → 172 → 348. Therefore 348 × 2 + 4 = 700."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 4,
+        "completedSequence": [
+          7,
+          18,
+          40,
+          84,
+          172,
+          348,
+          700
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4823",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4823",
+        "q": "14, 27, 19, 31, 24, 35, ?",
+        "o": [
+          "27",
+          "28",
+          "19",
+          "29"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Separate odd and even positions. The odd-position terms are 14, 19, 24, 29, increasing by 5; the even-position terms are 27, 31, 35, increasing by 4. The missing odd-position term is 29."
+      },
+      "verification": {
+        "kind": "interleaved",
+        "increments": [
+          5,
+          4
+        ],
+        "completedSequence": [
+          14,
+          27,
+          19,
+          31,
+          24,
+          35,
+          29
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4824",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4824",
+        "q": "2, 5, 11, ?, 47, 95, 191",
+        "o": [
+          "26",
+          "18",
+          "23",
+          "11"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The rule is ×2 + 1: 2 → 5 → 11 → 23 → 47 → 95 → 191. The gap is 11 × 2 + 1 = 23; the following term confirms it because 23 × 2 + 1 = 47."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 1,
+        "completedSequence": [
+          2,
+          5,
+          11,
+          23,
+          47,
+          95,
+          191
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4825",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4825",
+        "q": "3, 13, 43, 133, 403, 1213, ?",
+        "o": [
+          "3641",
+          "3643",
+          "3461",
+          "3652"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Multiply by 3 and add 4: 3 → 13 → 43 → 133 → 403 → 1213. Continuing gives 1213 × 3 + 4 = 3643."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 3,
+        "addend": 4,
+        "completedSequence": [
+          3,
+          13,
+          43,
+          133,
+          403,
+          1213,
+          3643
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4826",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4826",
+        "q": "19, 21, 23, 35, 47, 49, ?",
+        "o": [
+          "21",
+          "57",
+          "54",
+          "51"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "The differences repeat in pairs: +2, +2, +12, +12. After 47 + 2 = 49, add 2 again to obtain 51."
+      },
+      "verification": {
+        "kind": "differences",
+        "increments": [
+          2,
+          2,
+          12,
+          12
+        ],
+        "completedSequence": [
+          19,
+          21,
+          23,
+          35,
+          47,
+          49,
+          51
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4827",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4827",
+        "q": "5, 11, ?, 47, 95, 191, 383",
+        "o": [
+          "15",
+          "14",
+          "23",
+          "17"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term is twice the preceding term plus 1. Between 11 and 47, this gives 11 × 2 + 1 = 23 and 23 × 2 + 1 = 47. The later terms 95, 191 and 383 follow the same rule."
+      },
+      "verification": {
+        "kind": "affine",
+        "multiplier": 2,
+        "addend": 1,
+        "completedSequence": [
+          5,
+          11,
+          23,
+          47,
+          95,
+          191,
+          383
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4828",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4828",
+        "q": "2, 7, 13, 24, 41, 69, ?",
+        "o": [
+          "111",
+          "123",
+          "128",
+          "114"
+        ],
+        "a": 3,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Add the two preceding terms and then add 4: 2 + 7 + 4 = 13, 7 + 13 + 4 = 24, and 13 + 24 + 4 = 41. The next term is 41 + 69 + 4 = 114."
+      },
+      "verification": {
+        "kind": "previous-two",
+        "addend": 4,
+        "completedSequence": [
+          2,
+          7,
+          13,
+          24,
+          41,
+          69,
+          114
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4829",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4829",
+        "q": "8, 17, ?, 42, 67, 109, 176",
+        "o": [
+          "26",
+          "25",
+          "27",
+          "67"
+        ],
+        "a": 1,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Each term after the first two is their sum. The gap is 8 + 17 = 25, followed by 17 + 25 = 42, 25 + 42 = 67, 42 + 67 = 109 and 67 + 109 = 176."
+      },
+      "verification": {
+        "kind": "previous-two",
+        "addend": 0,
+        "completedSequence": [
+          8,
+          17,
+          25,
+          42,
+          67,
+          109,
+          176
+        ]
+      }
+    },
+    {
+      "id": "general-ability-4830",
+      "shard": "cat-general-ability-6.json",
+      "before": {
+        "id": "general-ability-4830",
+        "q": "5, 10, 15, 25, 40, ?, 105",
+        "o": [
+          "58",
+          "72",
+          "65",
+          "71"
+        ],
+        "a": 2,
+        "s": "Number Series and Differences"
+      },
+      "patch": {
+        "e": "Add the previous two terms: 5 + 10 = 15, 10 + 15 = 25 and 15 + 25 = 40. The missing term is 25 + 40 = 65, confirmed by 40 + 65 = 105."
+      },
+      "verification": {
+        "kind": "previous-two",
+        "addend": 0,
+        "completedSequence": [
+          5,
+          10,
+          15,
+          25,
+          40,
+          65,
+          105
+        ]
+      }
+    },
+    {
+      "id": "english-grammar-4886",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4886",
+        "q": "I am worried _____ the exam?",
+        "o": [
+          "in",
+          "about",
+          "on",
+          "of"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Worried takes about when naming the cause of concern. Here the concern is the exam, so the phrase is “worried about the exam”.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4894",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4894",
+        "q": "My sister is bad _____ maths.",
+        "o": [
+          "in",
+          "with",
+          "at",
+          "from"
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "For ability in a subject, use bad at: “bad at maths”. The preposition links the assessment of skill to the subject.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4900",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4900",
+        "q": "Nafeesa is afraid _____spiders?",
+        "o": [
+          "from",
+          "in",
+          "about",
+          "of"
+        ],
+        "a": 3,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Afraid is followed by of when naming what causes fear: “afraid of spiders”.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4906",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4906",
+        "q": "I am proud _____ my brother.",
+        "o": [
+          "on",
+          "of",
+          "to",
+          "at"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "The usual combination is proud of someone or something. Here “of my brother” identifies the person who inspires pride.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4913",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4913",
+        "q": "He is interested _____ history?",
+        "o": [
+          "of",
+          "in",
+          "about",
+          "on"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Interested takes in before its topic. The complete phrase is “interested in history”.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4940",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4940",
+        "q": "I am good _____ tennis?",
+        "o": [
+          "of",
+          "in",
+          "about",
+          "at"
+        ],
+        "a": 3,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Use good at to describe a skill or ability. Tennis is the skill here, so the answer is “good at tennis”.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4960",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4960",
+        "q": "He is worried _____ his future.",
+        "o": [
+          "for",
+          "of",
+          "about",
+          "with"
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Use worried about to introduce the matter causing concern. Here that matter is his future.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4964",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4964",
+        "q": "I have had problems similar _____ yours.",
+        "o": [
+          "from",
+          "with",
+          "of",
+          "to"
+        ],
+        "a": 3,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Similar takes to when comparing things: these problems are “similar to yours”. “Yours” stands for your problems.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-4957",
+      "shard": "cat-english-grammar-6.json",
+      "before": {
+        "id": "english-grammar-4957",
+        "q": "I have been working here _____ ten years?",
+        "o": [
+          "from",
+          "since",
+          "for",
+          "with"
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Ten years is a duration, so use for. Since would introduce a starting point, such as a particular year, rather than a length of time.",
+        "sourceUrl": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since"
+      },
+      "sourceIds": [
+        "cambridge-for-since"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7202",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7202",
+        "q": "Passive of Why did you disobey your parents?",
+        "o": [
+          "Why do your parents was disobey by you?",
+          "Why were your parents disobeyed by you?",
+          "Why your parents was disobeyed by you?",
+          "Why your parents were disobey by you?"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "The object “your parents” becomes the passive subject. Keep the past-simple tense with plural were + disobeyed, and invert were after why: “Why were your parents disobeyed by you?”",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/passives"
+      },
+      "sourceIds": [
+        "bc-passives"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7203",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7203",
+        "q": "Passive voice of Who taught you English”?",
+        "o": [
+          "By whom was English taught to you?",
+          "Who was taught English to you?",
+          "Who was teaches you English?",
+          "By whom is English is taught to you?"
+        ],
+        "a": 0,
+        "s": "Voice"
+      },
+      "patch": {
+        "e": "Keep the past-simple tense by using was + taught. “English” is the passive subject and “by whom” asks for the original agent: “By whom was English taught to you?”",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/passives"
+      },
+      "sourceIds": [
+        "bc-passives"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7204",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7204",
+        "q": "Past Tense of ”Find” is_____?",
+        "o": [
+          "Find",
+          "Found",
+          "Founded",
+          "Both B and"
+        ],
+        "a": 1,
+        "s": "Tenses & Verbs"
+      },
+      "patch": {
+        "e": "The irregular past tense of find is found. Founded is the past tense of the different verb found, meaning to establish.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/find"
+      },
+      "sourceIds": [
+        "cambridge-find",
+        "cambridge-found"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7262",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7262",
+        "q": "Samra is good _____ mathematics.",
+        "o": [
+          "In",
+          "For",
+          "At",
+          "To"
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Use good at when describing ability in mathematics. The complete phrase is “good at mathematics”.",
+        "sourceUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions"
+      },
+      "sourceIds": [
+        "bc-adjective-prepositions"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-6407",
+      "shard": "cat-english-grammar-8.json",
+      "before": {
+        "id": "english-grammar-6407",
+        "q": "Choose analogous pair: Commander: Commands",
+        "o": [
+          "Aerates: Aviator",
+          "Senator: Legislates",
+          "Checks: Teacher",
+          "Surgeon: Diagnosis"
+        ],
+        "a": 0,
+        "s": "Analogies"
+      },
+      "patch": {
+        "e": "The relationship is a person followed by that person’s action: a commander commands, and a senator legislates. “Aerates: Aviator” reverses the order and does not express this relationship.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/legislate",
+        "a": 1
+      },
+      "sourceIds": [
+        "cambridge-commander",
+        "cambridge-legislate",
+        "cambridge-senator",
+        "senate-powers"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      },
+      "correctionNote": "Original index 0, Aerates: Aviator, is not a person followed by that person’s action. Index 1, Senator: Legislates, is the only offered pair preserving Commander: Commands. IDs, choices, option order and past attempt records are preserved; historical scores are not recalculated."
+    },
+    {
+      "id": "english-grammar-7279",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7279",
+        "q": "Select the most appropriate synonym of the word Emaciated”?",
+        "o": [
+          "Very thin",
+          "Over nourished",
+          "Chubby",
+          "Lucky Person"
+        ],
+        "a": 0,
+        "s": "Vocabulary - Synonyms"
+      },
+      "patch": {
+        "e": "Emaciated means very thin and weak, commonly through illness or inadequate food. “Very thin” is the matching option, rather than chubby or over-nourished.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/emaciated"
+      },
+      "sourceIds": [
+        "cambridge-emaciated"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7280",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7280",
+        "q": "Select the most Appropriate synonym of the word Enigma”?",
+        "o": [
+          "Mystery",
+          "Clearness",
+          "Tricky",
+          "Impossible"
+        ],
+        "a": 0,
+        "s": "Vocabulary - Synonyms"
+      },
+      "patch": {
+        "e": "An enigma is something mysterious or difficult to understand. Among these choices, the noun “mystery” matches that meaning.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/enigma"
+      },
+      "sourceIds": [
+        "cambridge-enigma"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7281",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7281",
+        "q": "Select the most appropriate synonym of the word Paramount”?",
+        "o": [
+          "Most important",
+          "Less Important",
+          "Have no Value",
+          "Majority"
+        ],
+        "a": 0,
+        "s": "Vocabulary - Synonyms"
+      },
+      "patch": {
+        "e": "Paramount means more important than anything else. The matching option is “Most important”.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/paramount"
+      },
+      "sourceIds": [
+        "cambridge-paramount"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7282",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7282",
+        "q": "Select the most appropriate synonym of the word Probity”?",
+        "o": [
+          "Very brave",
+          "Intelligent",
+          "Complete honesty",
+          "Untrustworthy"
+        ],
+        "a": 2,
+        "s": "Vocabulary - Synonyms"
+      },
+      "patch": {
+        "e": "Probity means honesty and upright conduct. “Complete honesty” expresses this meaning.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/probity"
+      },
+      "sourceIds": [
+        "cambridge-probity"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7265",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7265",
+        "q": "Sara, You should not Call it a day”.",
+        "o": [
+          "Stop working on something",
+          "To begin working",
+          "To delay working",
+          "To refuse working"
+        ],
+        "a": 0,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "To call it a day is to stop the current work because enough has been done. In this sentence, “should not call it a day” means the person should continue working.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/call-it-a-day"
+      },
+      "sourceIds": [
+        "cambridge-call-it-a-day"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7276",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7276",
+        "q": "see eye to eye means?",
+        "o": [
+          "Disagree",
+          "Agree",
+          "Meet",
+          "Dislike"
+        ],
+        "a": 1,
+        "s": "Idioms / Phrases / Meanings"
+      },
+      "patch": {
+        "e": "To see eye to eye is to agree with another person. The phrase concerns agreement in opinion, rather than physically meeting or looking at someone.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/see-eye-to-eye"
+      },
+      "sourceIds": [
+        "cambridge-see-eye-to-eye"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-5602",
+      "shard": "cat-english-grammar-7.json",
+      "before": {
+        "id": "english-grammar-5602",
+        "q": "Choose the most suitable word: An office or post with no work but high pay",
+        "o": [
+          "Honorary",
+          "Sinecure",
+          "Gratis",
+          "Ex-Officio"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "A sinecure is a paid position involving little or no work. It is the word that identifies the lack of duties in the question; high pay is not part of a fixed numerical definition.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/sinecure"
+      },
+      "sourceIds": [
+        "cambridge-sinecure"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-5604",
+      "shard": "cat-english-grammar-7.json",
+      "before": {
+        "id": "english-grammar-5604",
+        "q": "A long poem narrating achievements of a hero or legendary figures is known as _____?",
+        "o": [
+          "Epic",
+          "Elegy",
+          "Ode",
+          "Sestina"
+        ],
+        "a": 0,
+        "s": "One-Word Substitution"
+      },
+      "patch": {
+        "e": "In literature, an epic is a long narrative poem involving heroic or historical action. That matches the long account of heroic achievements described in the question.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/epic"
+      },
+      "sourceIds": [
+        "cambridge-epic"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-5605",
+      "shard": "cat-english-grammar-7.json",
+      "before": {
+        "id": "english-grammar-5605",
+        "q": "The offence of marrying someone while already married to another person is known as _____?",
+        "o": [
+          "Bigamy",
+          "Coupe",
+          "Bigot",
+          "Biped"
+        ],
+        "a": 0,
+        "s": "One-Word Substitution"
+      },
+      "patch": {
+        "e": "Bigamy is marrying a person while still legally married to someone else. It is the vocabulary term matching the existing-marriage condition in this question.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/bigamy"
+      },
+      "sourceIds": [
+        "cambridge-bigamy"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-5606",
+      "shard": "cat-english-grammar-7.json",
+      "before": {
+        "id": "english-grammar-5606",
+        "q": "action of killing King is called_____?",
+        "o": [
+          "regicide",
+          "suicide",
+          "patricide",
+          "parricide"
+        ],
+        "a": 0,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Regicide can mean the act of killing a king as well as a person who commits that act. The question asks for the act.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/regicide"
+      },
+      "sourceIds": [
+        "cambridge-regicide"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-5609",
+      "shard": "cat-english-grammar-7.json",
+      "before": {
+        "id": "english-grammar-5609",
+        "q": "One who does not follow the usual rules of social life is called _____?",
+        "o": [
+          "egoist",
+          "frank",
+          "bohemian",
+          "reveille"
+        ],
+        "a": 2,
+        "s": "One-Word Substitution"
+      },
+      "patch": {
+        "e": "Bohemian describes a person whose unconventional, often artistic lifestyle departs from accepted social conventions. That lifestyle sense matches the question.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/bohemian"
+      },
+      "sourceIds": [
+        "cambridge-bohemian"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    },
+    {
+      "id": "english-grammar-7285",
+      "shard": "cat-english-grammar-9.json",
+      "before": {
+        "id": "english-grammar-7285",
+        "q": "Severely abusive writing in journals?",
+        "o": [
+          "imaginary",
+          "speculative",
+          "scurrilous",
+          "sarcastic"
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "patch": {
+        "e": "Scurrilous describes rude, abusive or damaging language. It characterises the criticism in the writing, rather than naming a specific journal genre.",
+        "sourceUrl": "https://dictionary.cambridge.org/dictionary/english/scurrilous"
+      },
+      "sourceIds": [
+        "cambridge-scurrilous"
+      ],
+      "verification": {
+        "kind": "grammar-or-dictionary",
+        "rationale": "Question, every option and keyed answer read together; explanation checked against the linked grammar lesson or dictionary entry."
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "english-grammar-4882",
+      "shard": "cat-english-grammar-6.json",
+      "snapshot": {
+        "id": "english-grammar-4882",
+        "q": "For the apostrophe exercise in Ali's report at the garden, choose the correct sentence.",
+        "o": [
+          "The students' projects were displayed.",
+          "The students's projects were displayed.",
+          "The students projects' were displayed.",
+          "The student's projects were displayed for all students."
+        ],
+        "a": 0,
+        "e": "A plural noun ending in -s forms its possessive by adding only an apostrophe.",
+        "s": "Punctuation and Capitalisation"
+      },
+      "issue": "The stem does not specify singular or plural ownership. Both the students’ projects and the student’s projects can be grammatical. Clarify the intended ownership before changing a key.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-4901",
+      "shard": "cat-english-grammar-6.json",
+      "snapshot": {
+        "id": "english-grammar-4901",
+        "q": "The railway track runs _____ the river.",
+        "o": [
+          "over",
+          "across",
+          "by",
+          "on"
+        ],
+        "a": 1,
+        "s": "General English"
+      },
+      "issue": "A railway can run across, over or by a river depending on the situation. The stem does not specify crossing or following the bank; do not assert a unique answer.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-6401",
+      "shard": "cat-english-grammar-8.json",
+      "snapshot": {
+        "id": "english-grammar-6401",
+        "q": "Choose analogous pair: Choose: Discard",
+        "o": [
+          "Draw: Push",
+          "Love: Adore",
+          "Walk: Run",
+          "Sit: Stand"
+        ],
+        "a": 0,
+        "s": "Analogies"
+      },
+      "issue": "The analogy offers more than one plausible opposite-action pair and an unclear choose/discard relationship. Review the original exercise and define the intended relation.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-6402",
+      "shard": "cat-english-grammar-8.json",
+      "snapshot": {
+        "id": "english-grammar-6402",
+        "q": "Choose analogous pair: Cistern: Water",
+        "o": [
+          "House: Family",
+          "Cup: Tea",
+          "Vase: Water",
+          "Book: Knowledge"
+        ],
+        "a": 1,
+        "s": "Analogies"
+      },
+      "issue": "Both Cup:Tea and Vase:Water can express container:contents; the intended degree of similarity needs clarification.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-6406",
+      "shard": "cat-english-grammar-8.json",
+      "snapshot": {
+        "id": "english-grammar-6406",
+        "q": "Choose analogous pair: Coin: Mint",
+        "o": [
+          "Grain: Field",
+          "Hay: Stable",
+          "Wine: Brewery",
+          "Book: Publisher"
+        ],
+        "a": 2,
+        "s": "Analogies"
+      },
+      "issue": "Wine:Brewery is not a sound equivalent for Coin:Mint. Other choices also admit production relationships; revise using the authentic source instead of guessing a replacement key.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-7206",
+      "shard": "cat-english-grammar-9.json",
+      "snapshot": {
+        "id": "english-grammar-7206",
+        "q": "Paw: Cat:: Hoof: _____?",
+        "o": [
+          "Horse",
+          "Lion",
+          "Lamb",
+          "Elephant"
+        ],
+        "a": 0,
+        "s": "Analogies"
+      },
+      "issue": "Both a horse and a lamb have hooves. Without a narrower condition, more than one choice fits the analogy.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-7225",
+      "shard": "cat-english-grammar-9.json",
+      "snapshot": {
+        "id": "english-grammar-7225",
+        "q": "Pongee: Silk:: Shallot: _____?",
+        "o": [
+          "Boat",
+          "Building",
+          "Ship",
+          "Stream"
+        ],
+        "a": 0,
+        "s": "Analogies"
+      },
+      "issue": "A shallot is a small onion. None of Boat, Building, Ship or Stream completes a type-of-material analogy. A possible spelling error must be checked against the source; do not silently substitute shallop.",
+      "sourceIds": [
+        "cambridge-shallot"
+      ],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-7231",
+      "shard": "cat-english-grammar-9.json",
+      "snapshot": {
+        "id": "english-grammar-7231",
+        "q": "Pride is related to Humility in the same way as Desire is related to?",
+        "o": [
+          "Wish",
+          "Hate",
+          "Suppress",
+          "Indifference"
+        ],
+        "a": 1,
+        "s": "Analogies"
+      },
+      "issue": "Desire:Hate and Desire:Indifference merit sense-specific review. Cambridge lists aversion/dislike as antonyms of desire, so a tempting automatic Hate-to-Indifference change is not established. Preserve the row pending source review.",
+      "sourceIds": [
+        "cambridge-desire-thesaurus"
+      ],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    },
+    {
+      "id": "english-grammar-7253",
+      "shard": "cat-english-grammar-9.json",
+      "snapshot": {
+        "id": "english-grammar-7253",
+        "q": "Rome was not built in a day.",
+        "o": [
+          "They did not build Rome in a day.",
+          "They could not build Rome in a day.",
+          "The Romans did not build Rome in a day.",
+          "They have not built Rome in a day."
+        ],
+        "a": 2,
+        "s": "General English"
+      },
+      "issue": "The stem is a passive sentence without an explicit instruction. Both They did not build Rome in a day and The Romans did not build Rome in a day are active forms; the latter also inserts an unstated agent.",
+      "sourceIds": [],
+      "action": "Preserved unchanged; requires an authentic-source or human editorial decision."
+    }
+  ]
+}

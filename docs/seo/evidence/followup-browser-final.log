@@ -1,0 +1,6 @@
+
+> css-vista@1.0.0 audit:browser:seo
+> node tests/browser/seo-readiness.mjs && node tests/browser/ad-state.mjs
+
+PASS: 18 public artifact routes; canonical/schema hydration, genuine 404, ad exclusions, mobile reflow, learning tools, sourced quotations/notes, result citation and six accessible Journal texts with clarifications.
+PASS runtime ad gate: loading/error suppress initial library and manual slot; ready permits loader once; account error removes manual slot. Stub Google response only. Static-first loaders and AdSense account exclusions are outside this fixture.

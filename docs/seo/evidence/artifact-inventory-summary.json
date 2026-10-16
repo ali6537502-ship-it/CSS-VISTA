@@ -1,0 +1,8 @@
+{
+  "inspected_at": "2026-10-16T13:52:42.825Z",
+  "artifact_directory": "dist",
+  "routes_inspected": 1558,
+  "sitemap_unique_urls": 1019,
+  "source_policy_authority": "src/data/routeRegistry.mjs:getRoutePolicy/findRouteDefinition",
+  "production_fields_unchanged": "status/final_url/canonical/robots/headers/sitemap_presence/http_observed remain baseline HTTP observations; local_artifact contains local build results."
+}

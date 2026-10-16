@@ -1,0 +1,91 @@
+{
+  "verifiedAt": "2026-10-16T05:04:59.976530+00:00",
+  "scope": "Prepared branch only: 29 additional book identities, two located excerpt matches, review-total safeguards and actual HTML/React verification. No production, Google submission or permission clearance.",
+  "baselineCommit": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "preparedSourceManifest": {
+    "path": "prepared-source-manifest.json",
+    "files": 94,
+    "aggregateSha256": "dfbc6eefa19662b794bf1c7df8b9df670910305e4816ed15f7feb8bc65d74fa1"
+  },
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:all",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:hostinger",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:browser:seo",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/seo/overlay-artifact.mjs dist",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check; documentation destination, implementation coverage and source-manifest verification",
+      "exitCode": 0,
+      "changedFilesDocumented": 232,
+      "sourceFilesVerified": 94,
+      "brokenLocalLinks": 0
+    }
+  ],
+  "tests": {
+    "nodeTests": 251,
+    "pythonTests": 5,
+    "passed": 256,
+    "failed": 0,
+    "skipped": 0,
+    "nodeRunnerGroups": 17,
+    "browserRoutes": 22,
+    "adFixture": "passed with stub Google response; no real ad requests"
+  },
+  "content": {
+    "additionalPrimaryIdentityRecords": 29,
+    "totalVerifiedBookIdentities": 100,
+    "unresolvedBookIdentities": 0,
+    "exactBookQuotationMatches": 9,
+    "excerptBookQuotationMatches": 20,
+    "identifiedTranslationCorrections": 1,
+    "unverifiedBookQuotations": 59,
+    "booksWithoutLabelledQuotation": 11,
+    "quotationUpgradesThisPass": 2,
+    "readersWithSources": 100,
+    "originalBookLibraryPreserved": true,
+    "originalBookLibrarySha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e",
+    "rightsPermissionsEstablished": 0
+  },
+  "artifact": {
+    "sitemapUrls": 1019,
+    "applicationHtml": 1527,
+    "allHtml": 1528,
+    "firstPartyLinks": 60961
+  },
+  "remainingDependencies": [
+    "Original editions or authorized passages for 59 unverified quotation entries.",
+    "Specific Journal/MCQ claim reviews and owner/rightsholder permission records.",
+    "Google account reports; current read-only account readiness remains subscription-blocked.",
+    "Explicit owner authorization before production deployment or AdSense review."
+  ],
+  "productionEvidence": "live-recheck-2026-10-16.json",
+  "googleEvidence": "google-access-2026-10-16.json",
+  "googleReadiness": "No reports retrieved; no approval or indexing improvement asserted."
+}

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "slug": "opinion-machines-at-war",
+  "title": "Machines at War: The AI Question Nobody in Islamabad Is Asking",
+  "author": "Ali Hassan Sargana",
+  "publishedOn": "2026-04-24",
+  "dateEvidence": "Printed date on first source image; preserved as the archive date, not independently verified external publication.",
+  "transcribedOn": "2026-10-15",
+  "sourceType": "existing-owner-repository-page-images",
+  "originalPublisher": null,
+  "originalPublicationUrl": null,
+  "externalPublicationStatus": "not independently verified",
+  "rightsStatus": "Owner-provided existing archive; no new external reproduction permission inferred.",
+  "transcriptionMethod": "OCR-assisted transcription compared visually with all original page images. Layout, line wrapping and repeated running headers/footers normalised; no factual updating or paraphrasing.",
+  "transcriptionNotes": [
+    "First image prints “Published April 24, 2026 03:00pm PKT”; archive preserves the date without inventing a separately verified timestamp.",
+    "Existing metadata said “Dawn - Opinion”, but no Dawn masthead, original URL or independent publication evidence is present in these images. Neutral “Opinion” replaces that unsupported outlet assertion.",
+    "Author-role sentences are omitted from the reading body because they are biographical page furniture, not independently verified credentials."
+  ],
+  "imageSources": [
+    {
+      "page": 1,
+      "image": "/opinions/opinion-machines-at-war-p1.jpg",
+      "sha256": "0937f5ffd20f904397e7684e77b94224ce8631ba8f464b9ad5bcd621f89b4697"
+    },
+    {
+      "page": 2,
+      "image": "/opinions/opinion-machines-at-war-p2.jpg",
+      "sha256": "09b120f6757e09fbf8115292da5465a2641d126fc362c9f7cadbd36b6cc91f8d"
+    },
+    {
+      "page": 3,
+      "image": "/opinions/opinion-machines-at-war-p3.jpg",
+      "sha256": "e0bee36945bbd8bc8924bc5415f13bf08dcc997d7550e5a610fa20eeaea8b5fe"
+    }
+  ],
+  "body": "When the United States struck over a thousand Iranian targets in a single night, it was not just bombs that fell it was an algorithm that chose them. The world changed on February 28, and we are still pretending it did not.\n\nThere is a school in Minab, in southern Iran, that no longer exists. On February 28, 2026, the Shajareh Tayyebeh girls' school was reduced to rubble in what Iran says killed at least 168 people most of them school children. The Trump administration initially blamed Tehran for the strike. The US later acknowledged it was investigating. The Washington Post reported the school appeared on an American target list. Senate Democrats have since written to Secretary Pete Hegseth demanding clarity on one specific question: was artificial intelligence used to select that target? The answer to that question may well define the ethics of warfare for the next century.\n\nThe conflict that erupted on February 28, 2026 officially labelled Operation Epic Fury was, by any serious measure, the most technologically intensive war ever fought. In the first twenty-four hours alone, American and Israeli forces struck over a thousand Iranian targets. For context, the 2003 Iraq War's opening day saw roughly half that number. The difference was not simply firepower. It was the speed, scale, and precision that only an artificial intelligence targeting system could provide. According to reporting by The Washington Post, the US military leveraged the most advanced AI it has ever deployed in an active war zone to sequence, identify, and approve those strikes. Ukraine taught the Pentagon lessons. Iran became its examination.\n\n> \"Our war fighters are leveraging a variety of advanced AI tools. These systems help us sift through vast amounts of data in seconds so our leaders can cut through the noise and make smarter decisions faster than the enemy can react.\" ~ Admiral Brad Cooper\n\nThose are the words of Admiral Brad Cooper, head of the US Central Command, delivered in a video message in March. He was not apologising. He was advertising. And in that gap between his pride and a schoolgirl's grave in Minab lies the central moral catastrophe of our age. The system Cooper was praising is known as the Maven Smart System, an AI-enabled platform that helps soldiers identify and strike military targets, and assists chain-of-command approval for strikes. NATO acquired a version of it from Palantir in 2025. The US military is now deploying its own iteration in Iran. The human, as Cooper dutifully reassured reporters, makes the \"final decision.\" What he did not explain is that when a human has twenty seconds to approve a strike on a location that an algorithm has flagged as a threat based on pattern-of-life data, satellite imagery, signals intelligence, and thermal signatures calling that a \"human decision\" is a courtesy we extend to ourselves.\n\nGeorgetown University's Center for Security and Emerging Technology has been tracking these developments closely. Lauren Kahn, a senior research analyst at the centre, observed in a conversation with NPR that the US is now using artificial intelligence \"across the gamut\" from natural language processing to computer vision, from logistics to autonomous drone navigation. \"Everything from boardroom to battlefield,\" she said. This is not tomorrow's war. This is today's. And yet one scans the Pakistani strategic discourse and finds almost no serious grappling with the implications. Our analysts debate ceasefire timelines. Islamabad celebrates its diplomatic role. Nobody is asking the harder question: in a world where AI selects targets and AI generates propaganda with equal fluency, what does national security even mean for a state like ours?\n\nConsider the information dimension, which is equally alarming. The Brookings Institution documented that within hours of Operation Epic Fury's launch, social media flooded with fabricated footage: AI-generated videos of missile strikes on US warships, deepfakes of Iranian commanders celebrating victories that never happened, recycled footage from Ukraine and surreally from video games, all dressed in the grammar of breaking news. X, formerly Twitter, announced a policy to suspend accounts posting undisclosed AI-generated conflict content. As Brookings noted, this policy relies on metadata that can be removed, and community corrections that almost never come in time. The information war of 2026 is not won by the state with the better press office. It is won by the state with the better generative model.\n\n> The Iran conflict is not the first AI war, but it is the first war in which conversational AI systems were consulted not merely for analysis, but for strategic advice a paradigm shift the world's parliaments are wholly unprepared for.\n\nMIT Technology Review, in a landmark piece published this week, made the important distinction that calling Iran \"the first AI war\" is technically imprecise. Algorithms have been parsing surveillance footage since Afghanistan. Ukraine pioneered the autonomous drone. Israel has long used machine-learning systems to generate target lists. What is genuinely new in 2026 is the integration of large language models conversational AI into the command chain itself. Commanders are not merely receiving AI-generated intelligence summaries. They are, in some documented cases, querying AI systems for tactical advice, the way a junior officer might consult a senior one. The AI responds. The human listens. The bomb falls. At what precise moment in that chain does accountability evaporate?\n\nIran, it must be noted, is not a passive object in this technological theatre. Tehran has invested substantially in its own cognitive warfare capabilities drone swarms, cyber operations, and information warfare directed at Gulf state infrastructure. In the first days of the conflict, Iranian strikes reportedly targeted AI data infrastructure in the Persian Gulf region, a signal that Iran understands perfectly well that the new front in modern warfare is the server farm, not the sandbagged trench. One must give Tehran this credit: it read the room. Meanwhile the UN General Assembly, to its modest credit, passed a resolution in December 2025 on \"Artificial Intelligence in the Military Domain and its Implications for International Peace and Security.\" A three-day multi-stakeholder meeting is scheduled for June 2026. Discussions, consultations, best practices. While the school in Minab is already a field of rubble.\n\nThe question that Pakistan and every middle power in the Global South must now answer is deceptively simple: do we have a position on autonomous and AI-assisted warfare, or do we merely have a preference about which great power wins? Islamabad has, admirably, helped broker the current ceasefire extension. Prime Minister Shehbaz Sharif deserves genuine credit for threading an extraordinarily delicate needle. But diplomacy that ends a war without interrogating the technology that fought it is incomplete diplomacy.\n\nWe are negotiating the terms of silence, not the terms of the future. There are over 1,300 people dead in Iran and among them, according to Iran's health ministry, more than 400 women and children. The algorithm did not grieve for them. It is not designed to.\n\nPakistan sits at a civilisational crossroads that its strategic planners have not fully acknowledged. We are a nuclear state. We are a state that has experienced the full weight of drone warfare on our own tribal borderlands. We are a state that has watched, across two decades, what happens when automated targeting meets incomplete intelligence in a sovereign country. And we are now, in this emerging world order, being asked to serve as a peace broker, a swing state, a responsible actor. One cannot credibly occupy that role while declining to take a principled stand on the very technology rewriting the rules of armed conflict. The International Committee of the Red Cross has called for new international rules on autonomous weapons systems for nearly a decade. Pakistan has never led that conversation. It should.\n\nThe machines at war do not tire. They do not question orders. They do not feel the weight of a name they do not know. That is precisely why the humans who design them, deploy them, and profit from them must be held by law, by treaty, by the unrelenting pressure of the international community to account for every coordinate they illuminate in the dark. The Iran war has made one thing unmistakably clear: artificial intelligence has not made war more precise. It has made war more industrial. And industries, as history teaches with grim consistency, tend to run until someone pulls the switch.",
+  "transcriptBodySha256": "d2b7aa6638c5799696578e9a3be6d123a337e5cadcb8d037d42b515833840a2a",
+  "editorialNotes": [
+    {
+      "id": "ai-adoption-and-strike-evidence-scope",
+      "issuedOn": "2026-10-15",
+      "title": "AI procurement is not proof of a particular targeting decision",
+      "body": "NATO’s 2025 annual report confirms acquisition of Maven Smart System NATO. This documents NATO adoption, rather than the target-selection process of a particular US strike. The contemporaneous 11 March 2026 US Senate letter asked whether AI tools were used in planning or executing the Minab school strike. That letter is a request for an investigation and answers, not a finding that AI selected the school. These sources do not establish the archive’s categorical targeting claims; those require event-specific evidence.",
+      "sources": [
+        {
+          "url": "https://www.nato.int/content/dam/nato/webready/documents/publications-and-reports/annual-reports/sgar25-en.pdf",
+          "label": "NATO Secretary General’s Annual Report 2025",
+          "verifiedOn": "2026-10-15",
+          "httpStatus": 200,
+          "responseSha256": "3e749617afb71befd50fca5761dffcbb0d9e2ef00907fcffbc25c4349dfa0c8c",
+          "locator": "AI capability acquisition, printed page 35 / PDF page 36; NATO-specific procurement and deployment scope"
+        },
+        {
+          "url": "https://www.foreign.senate.gov/press/dem/release/ranking-member-shaheen-joins-over-40-senators-in-pressing-dod-for-answers-on-school-bombing-and-civilian-casualties-in-iran",
+          "label": "US Senate Foreign Relations Committee: 11 March 2026 letter",
+          "verifiedOn": "2026-10-15",
+          "httpStatus": 200,
+          "responseSha256": "cf1c6b17e6bd2574efe29b5ea84cdd99745d92b67cc9beb38c6323dcf01b9e90",
+          "locator": "Published 11 March 2026: questions about AI use in planning/executing the school strike; a request for answers, not an investigative finding"
+        }
+      ]
+    }
+  ]
+}

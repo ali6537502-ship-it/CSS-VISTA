@@ -12,7 +12,7 @@ concurrency:
 
 env:
   SITE_ORIGIN: https://www.css-vista.com
-  CSSV_STRICT_CONTENT_VALIDATION: 'false'
+  CSSV_STRICT_CONTENT_VALIDATION: 'true'
 
 jobs:
   clean-lockfile-parity:
@@ -57,6 +57,17 @@ jobs:
 
       - name: Verify production direct-route refreshes
         run: npm run test:routes
+
+      - name: Install isolated browser verification tools
+        run: |
+          npm ci --prefix tests/browser --ignore-scripts --no-audit --no-fund
+          npm exec --prefix tests/browser -- playwright-core install --with-deps chromium
+
+      - name: Verify public rendering, tools and advertising state in Chromium
+        shell: bash
+        run: |
+          browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
+          CSSV_BROWSER_EXECUTABLE="$browser_path" npm run audit:browser:seo
 
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
@@ -146,7 +157,6 @@ jobs:
           find dist/api -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
       - name: Strict editorial/content audit
-        continue-on-error: true
         env:
           CSSV_STRICT_CONTENT_VALIDATION: 'true'
         run: npm run build:hostinger:strict

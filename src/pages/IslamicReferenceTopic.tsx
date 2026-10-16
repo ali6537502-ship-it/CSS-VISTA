@@ -57,7 +57,9 @@ function entryText(entry: ReferenceEntry): string {
 
 export default function IslamicReferenceTopic() {
   const { chapter: chapterSlug = '', topic: topicSlug = '' } = useParams()
-  const found = findTopicSummary(chapterSlug, topicSlug)
+  // Keep the lookup wrapper stable so download failures settle instead of
+  // restarting the loading effect after each error-state render.
+  const found = useMemo(() => findTopicSummary(chapterSlug, topicSlug), [chapterSlug, topicSlug])
   const [payload, setPayload] = useState<TopicPayload | null>(() => topicNow(chapterSlug, topicSlug))
   const [failed, setFailed] = useState(false)
   const [view, setView] = useState<LanguageView>('both')

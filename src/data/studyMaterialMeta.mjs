@@ -59,7 +59,7 @@ export function islamicTopicMeta(chapter, topic) {
  * The page-specific metadata for a study-material URL, or null when the path
  * is not a known subject, topic or chapter (the caller then keeps its default).
  */
-export function studyMaterialMetaForPath(pathname) {
+function studyMaterialPageForPath(pathname) {
   const path = String(pathname || '').split(/[?#]/, 1)[0].replace(/\/+$/, '')
   if (path.startsWith(`${OPTIONAL_BASE}/`)) {
     const [subjectSlug, topicSlug, extra] = path.slice(OPTIONAL_BASE.length + 1).split('/')
@@ -67,9 +67,18 @@ export function studyMaterialMetaForPath(pathname) {
     for (const group of optionalIndex.groups) {
       const subject = group.subjects.find((item) => item.slug === subjectSlug)
       if (!subject) continue
-      if (topicSlug === undefined) return optionalSubjectMeta(group, subject)
+      const breadcrumbs = [
+        { name: 'CSS Optional Subject Notes', path: OPTIONAL_BASE },
+        { name: subject.subject, path: `${OPTIONAL_BASE}/${subject.slug}` },
+      ]
+      if (topicSlug === undefined) return {
+        path, meta: optionalSubjectMeta(group, subject), breadcrumbs, type: 'CollectionPage', inLanguage: 'en',
+      }
       const topic = subject.topics.find((item) => item.slug === topicSlug)
-      return topic ? optionalTopicMeta(subject, topic) : null
+      return topic ? {
+        path, meta: optionalTopicMeta(subject, topic), type: 'Article', inLanguage: 'en',
+        breadcrumbs: [...breadcrumbs, { name: topic.title, path }],
+      } : null
     }
     return null
   }
@@ -78,9 +87,50 @@ export function studyMaterialMetaForPath(pathname) {
     if (extra !== undefined) return null
     const chapter = islamicIndex.chapters.find((item) => item.slug === chapterSlug)
     if (!chapter) return null
-    if (topicSlug === undefined) return islamicChapterMeta(chapter)
+    const breadcrumbs = [
+      { name: 'Islamic Studies Reference Bank', path: ISLAMIC_BASE },
+      { name: islamicChapterName(chapter), path: `${ISLAMIC_BASE}/${chapter.slug}` },
+    ]
+    if (topicSlug === undefined) return {
+      path, meta: islamicChapterMeta(chapter), breadcrumbs, type: 'CollectionPage', inLanguage: ['en', 'ur'],
+    }
     const topic = chapter.topics.find((item) => item.slug === topicSlug)
-    return topic ? islamicTopicMeta(chapter, topic) : null
+    return topic ? {
+      path, meta: islamicTopicMeta(chapter, topic), type: 'Article', inLanguage: ['en', 'ur'],
+      breadcrumbs: [...breadcrumbs, { name: topic.titleEn, path }],
+    } : null
   }
   return null
+}
+
+export function studyMaterialMetaForPath(pathname) {
+  return studyMaterialPageForPath(pathname)?.meta ?? null
+}
+
+/** Shared by the static publisher and RouteSeo, including client navigation. */
+export function studyMaterialStructuredDataForPath(pathname, siteOrigin = 'https://www.css-vista.com') {
+  const page = studyMaterialPageForPath(pathname)
+  if (!page) return null
+  const origin = new URL(siteOrigin).origin
+  const canonical = `${origin}${page.path}`
+  const mainEntity = {
+    '@type': page.type,
+    name: page.meta.title.split(' | ')[0],
+    description: page.meta.description,
+    url: canonical,
+    mainEntityOfPage: canonical,
+    inLanguage: page.inLanguage,
+    isAccessibleForFree: true,
+    publisher: { '@type': 'Organization', name: 'CSS Vista', url: `${origin}/` },
+  }
+  if (page.type === 'Article') mainEntity.headline = mainEntity.name
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [mainEntity, {
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Home', path: '/' }, ...page.breadcrumbs].map((crumb, index) => ({
+        '@type': 'ListItem', position: index + 1, name: crumb.name, item: `${origin}${crumb.path}`,
+      })),
+    }],
+  }
 }

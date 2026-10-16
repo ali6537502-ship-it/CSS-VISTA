@@ -110,7 +110,9 @@ let sitemap = await readFile(sitemapPath, 'utf8')
 const categoryEntries = categories
   .map((category) => `${siteOrigin}/gk/cat/${category.slug}`)
   .filter((url) => !sitemap.includes(`<loc>${url}</loc>`))
-  .map((url) => `  <url><loc>${escapeHtml(url)}</loc><lastmod>${escapeHtml(indexData.generatedAt || '')}</lastmod></url>`)
+  // The bank's generatedAt records an import, not each category page's
+  // substantive revision. Omit optional lastmod until per-page dates exist.
+  .map((url) => `  <url><loc>${escapeHtml(url)}</loc></url>`)
   .join('\n')
 if (categoryEntries) sitemap = sitemap.replace('</urlset>', `${categoryEntries}\n</urlset>`)
 await writeFile(sitemapPath, sitemap)

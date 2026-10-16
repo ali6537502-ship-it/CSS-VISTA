@@ -1,0 +1,389 @@
+
+> css-vista@1.0.0 test:all
+> npm run test:seo && npm run test:editorial && npm run test:ads && npm run test:factbook && npm run test:pagination && npm run test:navigation && npm run test:intelligence && npm run test:css-2026-result && npm run test:css-eligibility && npm run test:mpt && npm run test:mpt-release && npm run test:routes && npm run test:essay-themes && npm run test:islamic-references && npm run test:optional-notes && npm run test:grammar && npm run test:precis
+
+
+> css-vista@1.0.0 test:seo
+> node --test tests/searchReadiness.test.mjs tests/studyMaterialSeo.test.mjs tests/subjectSelection.test.ts tests/mcqAudit.test.mjs tests/pastPaperCollectionQuality.test.mjs
+
+✔ generic instruction stems with different choices remain distinct educational questions (1.203823ms)
+✔ duplicates are detected despite whitespace, capitalization and answer-choice reordering (0.214668ms)
+✔ historical Islamiyat quarantine rejects original source rows while preserving reused IDs (47.218204ms)
+✔ cross-ID historical content matches remain explicit editorial review candidates (2.388478ms)
+✔ a genuinely short single-paper archive qualifies through its real resources and facts (22.311505ms)
+✔ missing, extra and wrong paper links fail source membership validation (1.18825ms)
+✔ wrong examination/year identity and missing main content fail (0.353704ms)
+✔ blank or explicitly hidden resource links fail (0.428865ms)
+✔ fabricated counts or unsourced archives fail even with working links (2.847439ms)
+✔ other page families never receive this exception (0.214207ms)
+✔ valid artifact with an independently useful short main passes without a word target (178.391318ms)
+✔ 404 noindex page can omit a canonical while indexable pages cannot (308.050524ms)
+✔ duplicate canonicals and conflicting Googlebot directives fail (316.977059ms)
+✔ conflicting Open Graph and route JSON-LD URLs fail (289.879821ms)
+✔ invalid structured data and invalid/future dates fail (393.482748ms)
+✔ indexable missing main and retired collection filler fail (481.299027ms)
+✔ malformed XML, wrong namespace, and missing children fail (413.601075ms)
+✔ duplicate URLs across children and duplicate child references fail (289.74026ms)
+✔ alternate origins, fragments, and misleading lastmod fail (632.758876ms)
+✔ sitemaps exceeding the 50,000-entry limit fail (364.429968ms)
+✔ DTD and entity declarations fail instead of expanding untrusted XML (190.532643ms)
+✔ study-material schema describes real pages with canonical, ordered breadcrumbs (37.570208ms)
+✔ RouteSeo retains study-material schema on hydration and replaces it on navigation (91.596136ms)
+✔ non-study routes do not request the study metadata indexes (63.080948ms)
+✔ a delayed study import preserves the prerendered head and cannot replace a later route (20.011008ms)
+✔ a canceled failed metadata import cannot refresh or alter the next route (26.974906ms)
+✔ an active metadata import failure preserves valid static metadata and uses chunk recovery (45.064786ms)
+✔ deferred study metadata retains tracking-query and noindex policy (20.594362ms)
+✔ full official catalog generates 600 rather than the previous all-groups 900 (4.235506ms)
+✔ a higher-ranked 200-mark Group II subject is retained (1.104436ms)
+✔ two preferred 100-mark Group II subjects outrank an available 200-mark subject (0.807737ms)
+✔ Group II may be omitted when four preferred 100-mark groups follow Group I (0.504427ms)
+✔ Group I may be omitted when Group II and four other groups are preferred (0.685746ms)
+✔ selection backtracks from an incomplete Group II pair to a feasible 600 (0.771723ms)
+✔ a missing 600-mark combination is explicitly invalid (0.401766ms)
+✔ validation rejects two distinct subjects from the same single-subject group even at 600 (0.118746ms)
+✔ validation rejects duplicate subjects, and builder deduplicates its ranked input (0.558167ms)
+✔ validation rejects a lone 100-mark Group II subject and a mixed 200+100 choice (34.631916ms)
+✔ validation rejects malformed groups or marks (0.515805ms)
+✔ alternate ranking produces a different legal combination without mutating the catalog (1.182713ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5300.029265
+
+> css-vista@1.0.0 test:editorial
+> node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py
+
+✔ all existing book identities and source bodies remain usable with reviewed wording (7.684705ms)
+✔ unverified wording is qualified in the reader and in copied quotations (0.826414ms)
+✔ related primary pages do not certify quotations from a named book (0.177563ms)
+✔ a changed source quotation requires renewed review instead of stale substitution (0.495814ms)
+✔ verified original text has its actual translation and chapter citation (0.286535ms)
+✔ On War uses the explicitly identified Graham version without rewriting commentary (0.142271ms)
+✔ book source metadata is deterministic and agrees with the editorial ledger (139.833463ms)
+✔ a verified publisher identity is visible without certifying the book quotation (0.320986ms)
+✔ books without a quotation can have a real bibliography without inventing a quote (0.163602ms)
+✔ newly located passages keep their omissions and edition visible (0.727568ms)
+✔ the summary cannot claim more book verification than the individual evidence supports (9.404023ms)
+✔ a missing or unsuccessful source cannot support a verified identity (2.184687ms)
+✔ every preserved Journal article has matching text, byline, image order and original archive date (14.326827ms)
+✔ multi-column transcripts reunite source sentences in reading order (0.303629ms)
+✔ external publication is not asserted without a verified original publication URL (0.142431ms)
+✔ dated clarifications preserve the original Pacific and Eid text and remain separate from historical publication dates (0.934324ms)
+✔ Eid calendar clarification records Sunday without inventing a replacement event date (0.266155ms)
+✔ historical climate figures retain the observed study period and regional case-study scope (0.138676ms)
+✔ workforce and violence statistics cannot silently become a current population-wide prevalence estimate (0.20235ms)
+✔ procurement and a Senate request are distinguished from findings about a specific strike (0.164414ms)
+✔ the real generator refuses unsafe or unexplained verification endpoints (133.237553ms)
+✔ the bounded editorial ledger matches both copies and preserves question identity (46.586627ms)
+✔ number-series explanations fit every given term, the missing position and the keyed option (35.383884ms)
+✔ the confirmed analogy correction has evidence and does not rewrite stored attempts (0.509785ms)
+✔ ambiguous source questions stay intact and are not counted as completed repairs (10.401741ms)
+✔ review application refuses source drift and differing public/bundled copies before writing (1.383649ms)
+✔ the review tool cannot silently change options, wording or an undocumented answer (0.199315ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 987.656526
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.005s
+
+OK
+
+> css-vista@1.0.0 test:ads
+> node --test tests/adPolicy.test.ts
+
+✔ publisher ID is the verified CSS Vista publisher (1.858714ms)
+✔ the official AdSense loader is present once in the initial document head (19.259599ms)
+✔ homepage allows Auto Ads below its protected top while manual units stay disabled (0.854025ms)
+✔ homepage exposes a stable Auto Ads excluded-area boundary around search and hero (2.76764ms)
+✔ advertising is independent of indexability while thin surfaces fail closed (3.289744ms)
+✔ account management, personal navigation and practice stay ad-free with their existing noindex policy (0.799595ms)
+✔ hibernated MPT overview and all assessment routes remain ad-free (0.322278ms)
+✔ only substantial publisher content can opt into advertising (0.176451ms)
+✔ authentication transactions, admin, assessments and viewers stay ad-free (0.49268ms)
+✔ transaction, error and loading states suppress ads on an otherwise eligible route (0.393142ms)
+✔ substantial public content is Auto Ads eligible and manual units stay off until audited (1.241369ms)
+✔ the unfinished lecture route is noindex and out of the sitemap but remains usable (0.112867ms)
+✔ the mixed current-affairs page stays ad-free because it contains an active MCQ state (0.245393ms)
+✔ vignettes are blocked for protected destinations and sensitive controls (0.432741ms)
+✔ signing in never makes account management or personal records into advertising inventory (0.547902ms)
+✔ legacy artificial timing and page-count state is absent (7.884211ms)
+✔ the advertising layer never derives eligibility from indexability (1.194009ms)
+✔ privacy and policy pages are discoverable from the global header navigation (2.067202ms)
+✔ indexable routes have unique crawlable metadata and unknown paths fail closed (0.370879ms)
+✔ unreviewed utility and interactive routes fail closed while the public grammar course stays ad-free (35.693773ms)
+✔ Auto Ads never load over a sign-in, registration or password form (4.221854ms)
+✔ the provider supplies the page state, so suppression is not inert (4.33362ms)
+✔ rendered loading and failures suppress public ads while account utilities remain excluded (0.284501ms)
+✔ actual loading, fatal-error and unavailable-topic views publish runtime advertising state (4.371146ms)
+✔ an executed ad library leaves the document before entering an ad-free screen (0.414194ms)
+✔ initial, loading and same-route views cannot create an advertising refresh loop (0.426762ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 362.753754
+
+> css-vista@1.0.0 test:factbook
+> node --test tests/factbook.test.ts
+
+✔ every supported Factbook entry type has a functional definition (1.895148ms)
+✔ structured entry types start with editable rows (0.22954ms)
+✔ unsafe source protocols are rejected (0.454102ms)
+✔ plain text sanitization removes nulls and enforces limits (0.165115ms)
+✔ searchable text covers nested fields and years (0.258122ms)
+✔ database migration enforces private ownership on every Factbook entity (1.078788ms)
+✔ Factbook remains a private, noindex and ad-free study tool (0.693126ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 198.469897
+
+> css-vista@1.0.0 test:pagination
+> node --test tests/questionPagination.test.ts
+
+✔ the global question page size remains ten (1.298093ms)
+✔ 5 questions use 1 page(s) with continuous ranges (1.051919ms)
+✔ 10 questions use 1 page(s) with continuous ranges (0.174388ms)
+✔ 11 questions use 2 page(s) with continuous ranges (0.148721ms)
+✔ 20 questions use 2 page(s) with continuous ranges (0.147609ms)
+✔ 25 questions use 3 page(s) with continuous ranges (0.122602ms)
+✔ 50 questions use 5 page(s) with continuous ranges (0.12159ms)
+✔ 100 questions use 10 page(s) with continuous ranges (0.126588ms)
+✔ 200 questions use 20 page(s) with continuous ranges (0.806905ms)
+✔ question navigator indices resolve to the containing page (0.490187ms)
+✔ pages clamp safely and smart pagination retains first, last and nearby pages (0.44596ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 224.790498
+
+> css-vista@1.0.0 test:navigation
+> node --test tests/navigationState.test.ts
+
+✔ stored scroll positions tolerate corrupted and invalid session data (1.546551ms)
+✔ stored scroll positions are deduplicated and bounded (0.703072ms)
+✔ navigation decisions restore only known history entries (0.137835ms)
+✔ query-only updates preserve position while hashes and new pages receive explicit targets (0.119367ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 199.77454
+
+> css-vista@1.0.0 test:intelligence
+> node --test tests/examIntelligence.test.ts
+
+✔ empty activity never fabricates accuracy, mastery, or readiness (34.678209ms)
+✔ one ordinary quiz is activity but not a reliable readiness baseline (5.107627ms)
+✔ weakness is shown only after the five-attempt reliability threshold (43.819823ms)
+✔ mastery requires sustained, distinct and accurate real attempts (5.638484ms)
+✔ legacy timing beside its canonical event is not double counted (4.852779ms)
+✔ personal study plans use the requested duration without inventing tasks (4.958967ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 347.760497
+
+> css-vista@1.0.0 test:css-2026-result
+> node --test tests/css2026Result.test.ts
+
+✔ CSS 2026 result metadata matches the supplied FPSC document (0.751663ms)
+✔ CSS 2026 result PDF is present, complete and publicly addressable (10.394521ms)
+✔ CSS 2026 result page is ad-free under the central route policy (0.584796ms)
+✔ the retired CSS 2026 announcement does not reappear on any route (0.150203ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 185.183798
+
+> css-vista@1.0.0 test:css-eligibility
+> node --test tests/cssEligibility.test.ts
+
+✔ CE-2019 FPSC official DOB boundaries are exact and inclusive (1.403029ms)
+✔ CE-2027 normal age boundaries are exact (0.221699ms)
+✔ CE-2027 Rule 6 two-year upper-age relaxation boundaries are exact (0.164454ms)
+✔ written attempts are capped at three and MPT never consumes a written chance (0.658896ms)
+✔ maximum usable attempts respects both statutory chances and remaining age cycles (0.130954ms)
+✔ a candidate born anywhere in 1998 has final ordinary age-eligible exam CE-2028 (0.151645ms)
+✔ 2026 conceptual example distinguishes written chances from age-eligible cycles (0.260686ms)
+✔ two previous written attempts leave only one practically usable attempt (2.519713ms)
+✔ leap-day, 1 January and 31 December DOBs remain calendar-safe (1.22818ms)
+✔ normal-to-relaxation transition changes only the age window (0.61414ms)
+✔ underage and overage statuses are explicit (0.223241ms)
+✔ summary output is timezone-independent when the reference year is fixed (1.100701ms)
+✔ invalid written-attempt counts and impossible dates are rejected (12.507871ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 300.010782
+
+> css-vista@1.0.0 test:mpt
+> node --test tests/mptState.test.ts
+
+✔ state engine mirror: logged out before applications open (2.622485ms)
+✔ state engine mirror: logged out while applications open (0.170973ms)
+✔ state engine mirror: logged out once the exam has started (0.095362ms)
+✔ state engine mirror: one millisecond before applications open (0.169151ms)
+✔ state engine mirror: exactly when applications open (0.158595ms)
+✔ state engine mirror: one millisecond before the exam starts: still open (0.12156ms)
+✔ state engine mirror: no applications for an ongoing mock (0.077865ms)
+✔ state engine mirror: no applications mid-exam (0.064476ms)
+✔ state engine mirror: capacity reached (33.441177ms)
+✔ state engine mirror: capacity with one slot left (0.316438ms)
+✔ state engine mirror: draft mock (0.112447ms)
+✔ state engine mirror: archived mock (0.130563ms)
+✔ state engine mirror: cancelled mock with application (0.220457ms)
+✔ state engine mirror: reveal case A: applied 2h before, just before reveal (0.144404ms)
+✔ state engine mirror: reveal case A: applied 2h before, at reveal (0.10766ms)
+✔ state engine mirror: reveal case B: applied 5 min before, before exam open (0.096463ms)
+✔ state engine mirror: reveal case B: applied 5 min before, at exam open (0.092026ms)
+✔ state engine mirror: reveal case C: admin-extended window, applied after start, instant (0.07435ms)
+✔ state engine mirror: reschedule moves the reveal (0.086398ms)
+✔ state engine mirror: late entry one millisecond before it ends (0.062212ms)
+✔ state engine mirror: absent exactly when late entry ends (0.064285ms)
+✔ state engine mirror: cancelled application (0.068371ms)
+✔ state engine mirror: withdrawn application while open (0.058467ms)
+✔ state engine mirror: attempt in progress (0.076613ms)
+✔ state engine mirror: attempt in progress one millisecond before expiry (0.059258ms)
+✔ state engine mirror: attempt expired awaiting sweeper (immediate policy) (0.115051ms)
+✔ state engine mirror: submitted, immediate score (0.059639ms)
+✔ state engine mirror: submitted, result card 30 min after the mock: at exam end (0.061181ms)
+✔ state engine mirror: submitted, result card: one millisecond before release (0.056954ms)
+✔ state engine mirror: submitted, result card: released 30 minutes after the mock (0.056634ms)
+✔ state engine mirror: auto-submitted, result card after release (0.091947ms)
+✔ state engine mirror: voided attempt without re-sit (0.058567ms)
+✔ state engine mirror: voided attempt with re-sit granted (0.053008ms)
+✔ three reveal cases from Section 1A (0.188619ms)
+✔ late entrants get only the remaining time (0.113549ms)
+✔ roll number typo check matches the server Damm digit (0.362798ms)
+✔ every daily sitting has a distinct name and Pakistan time (21.563309ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.934623
+
+> css-vista@1.0.0 test:mpt-release
+> node --test tests/mptRelease.test.mjs
+
+✔ the reviewed bank has no editorial or structural problems (1.45803ms)
+✔ the checked-in series is exactly what repairing the live series rebuilds (53704.071208ms)
+✔ the repaired series gains exactly seven reserve papers (1.04574ms)
+✔ allocation remains unchanged and the seven additions use existing bank items (53.916678ms)
+✔ every repaired paper passes every paper-level and series-level gate (1349.132092ms)
+✔ legacy questions retain their source, with only explicit reviewed edits to upcoming papers (315.351697ms)
+✔ nothing from a held mock and no earlier-served bank question is reused (80.968841ms)
+✔ every kept live question was read and passed by the editor review and is explained (2.289213ms)
+✔ the content review preserves all papers through running Mock 17 and never invents replacements (10.096169ms)
+✔ upcoming categorical and seating answers are independently entailed by their displayed text (39.352118ms)
+✔ release identity changes if wording or explanation changes without a new answer key (0.457397ms)
+✔ every bank answer matches the verified bank and every bank item is explained (9.470223ms)
+✔ papers mix accessible, moderate and challenging items like the real MPT (2.29508ms)
+✔ time-sensitive items carry a source, an event date inside the window and a verification date (0.894615ms)
+✔ the paper structure is the official FPSC one only (1.467554ms)
+✔ pattern profile covers the four recorded papers question by question (0.373724ms)
+✔ reserve selector is deterministic and fills the official sections (151.931077ms)
+✔ reserve selector fails rather than drop an official heading (45.107396ms)
+✔ stale Current Affairs is never eligible (69.436855ms)
+✔ numeric templates are masked and numeric options are ordered naturally (0.338021ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56999.943485
+
+> css-vista@1.0.0 test:routes
+> node --test tests/productionRoutes.test.ts tests/vistagramRoutes.test.mjs
+
+✔ the production build exists (0.929517ms)
+✔ indexable routes are served with real content, self-canonical and indexable robots (48.873201ms)
+✔ the book-summary hub lists its real catalogue, not a loading shell (8.558881ms)
+✔ noindex routes remain fully served and stay out of the sitemap (15.41497ms)
+✔ past-paper pages are served, and indexed only when real questions exist (145.290923ms)
+✔ year archives, GK categories and book summaries resolve on direct navigation (35.412516ms)
+✔ legacy paths redirect once, to a real destination, without looping (0.98531ms)
+✔ a nonexistent URL returns a genuine 404 and never a homepage soft 404 (2.533734ms)
+✔ advertising state matches route policy across all nine page categories (0.992551ms)
+✔ generated HTML keeps the loader only on substantial ad-eligible pages (4.811389ms)
+✔ AdSense ownership, ads.txt and the publisher ID are intact in the build (1.860266ms)
+✔ every sitemap URL resolves, is indexable and is self-canonical (571.237543ms)
+✖ MPT portal routes resolve on direct navigation, stay private and follow their ad policy (3.496501ms)
+✔ no public API endpoint is caught by an .htaccess <Files>/<FilesMatch> deny block (3.279028ms)
+✔ the synchronous prerender cache uses the same parsed public content as the browser reader (3.392036ms)
+✔ every packaged public Vistagram post supports direct navigation with authentic text and existing exclusions (42.435302ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 15
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1118.112274
+
+✖ failing tests:
+
+test at tests/productionRoutes.test.ts:295:1
+✖ MPT portal routes resolve on direct navigation, stay private and follow their ad policy (3.496501ms)
+  AssertionError [ERR_ASSERTION]: /account/mpt
+  + actual - expected
+
+  + 'disabled'
+  - 'manual'
+
+      at TestContext.<anonymous> (file:///workspace/CSS-VISTA/tests/productionRoutes.test.ts:312:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'disabled',
+    expected: 'manual',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -5,7 +5,7 @@ import { AvailableStudyLink as Link, AvailableStudyNavLink as NavLink } from '@/
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useNavigationType } from 'react-router'
 import {
-  Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine,
+  Menu, Search, X, ChevronDown, ArrowLeft, GraduationCap, BookOpen, FileText, PenLine, Pause, Play,
   ClipboardList, Newspaper, Megaphone, Wrench, Gamepad2, UserCheck,
   Landmark, TrendingUp, Languages, Target, LayoutDashboard,
   MessageCircle, ExternalLink, Home as HomeIcon, Globe2, Grid2X2, UserRound,
@@ -272,6 +272,7 @@ function LiveClock({
 }
 
 function NotificationBar() {
+  const [tickerPaused, setTickerPaused] = useState(false)
   const [scheduleTime, setScheduleTime] = useState(() => new Date())
   const [online, setOnline] = useState(() => navigator.onLine)
   const [streak, setStreak] = useState(() => touchVisit())
@@ -366,11 +367,11 @@ function NotificationBar() {
   return (
     <div className="cssv-live-bar bg-pine-deep text-emerald-50 text-[13px]" role="region" aria-label="CSS Vista live updates">
       <div className="mx-auto flex max-w-[1520px] items-center gap-2 px-3 py-1.5 sm:px-5">
-        <Link to="/dashboard" className="flex shrink-0 items-center gap-1.5" aria-label={`${streak.current}-day study visit streak. Today's visit is counted.`} title={`Checked in today · Best: ${streak.best} days · Next milestone: ${streak.nextMilestone} days`}>
+        <Link to="/dashboard" className="relative z-10 flex min-h-11 shrink-0 items-center gap-1.5" aria-label={`${streak.current}-day study visit streak. Today's visit is counted.`} title={`Checked in today · Best: ${streak.best} days · Next milestone: ${streak.nextMilestone} days`}>
           <span className="grid h-6 w-6 place-items-center rounded-full border border-amber-300/60 bg-emerald-800 text-amber-200"><Flame className="h-3.5 w-3.5" /></span>
           <span className="rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-emerald-950">{streak.current} {streak.current === 1 ? 'day' : 'days'}</span>
         </Link>
-        <div className="vista-live-ticker min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices">
+        <div className="vista-live-ticker relative isolate min-w-0 flex-1 overflow-hidden" aria-label="Latest features and official notices" data-paused={tickerPaused || undefined}>
           <div className="vista-live-ticker-track flex w-max items-center">
             {[false, true].map((duplicate) => (
               <div
@@ -379,7 +380,7 @@ function NotificationBar() {
                 aria-hidden={duplicate || undefined}
               >
                 {active.map((item) => {
-                  const className = `group inline-flex shrink-0 items-center whitespace-nowrap px-4 text-xs outline-none hover:text-white focus:text-white sm:text-[13px] ${item.id === 'suggestion' ? 'font-semibold text-amber-200' : 'text-emerald-50/90'}`
+                  const className = `group inline-flex min-h-11 shrink-0 items-center whitespace-nowrap px-4 text-xs outline-none hover:text-white focus:text-white sm:text-[13px] ${item.id === 'suggestion' ? 'font-semibold text-amber-200' : 'text-emerald-50/90'}`
                   const content = <>
                     <span className={`mr-2 h-1.5 w-1.5 rounded-full ${item.id === 'instagram-posts' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
                     <span className="underline-offset-2 group-hover:underline group-focus:underline">
@@ -396,6 +397,15 @@ function NotificationBar() {
             ))}
           </div>
         </div>
+        <button
+          type="button"
+          className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-md text-emerald-50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-300 motion-reduce:hidden"
+          aria-label={tickerPaused ? 'Resume live updates' : 'Pause live updates'}
+          aria-pressed={tickerPaused}
+          onClick={() => setTickerPaused((paused) => !paused)}
+        >
+          {tickerPaused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
+        </button>
         <LiveClock
           online={online}
           syncLabel={syncLabel}

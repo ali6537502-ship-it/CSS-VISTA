@@ -11,3 +11,9 @@ The reversible hide/pause change is the only production change authorised by tha
 See [the release-hold implementation and verification contract](docs/pro/release-hold.md). Preserve saved work and membership records. Use the isolated native CI environment for previews; do not weaken production restrictions to preview work.
 
 The owner's later explicit instructions take precedence over this dated hold. Do not ask for passwords, provider keys or private source content in chat when a legitimate connection is available.
+
+## SEO release authorization — 16 October 2026
+
+After being told that production deployment, live verification and Google-side follow-up remained, the owner instructed: **“Whatever you have to do, do yourself.”** In that context, continue the SEO/AdSense recovery independently and release the tested SEO, content-qualification, accessibility and advertising-safety fixes through the existing GitHub-to-Hostinger workflow. Do not repeatedly request routine approval. Record validation and the actual live fingerprint.
+
+This scoped release does not reactivate Pro, MPT, payments or AI, publish private/draft material, certify unknown rights, or authorize purchasing a new subscription. Preserve those existing product restrictions and all accounts, records and resource access. Google approval/indexing remain decisions to verify, not promised outcomes.

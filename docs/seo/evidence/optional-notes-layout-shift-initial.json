@@ -1,0 +1,575 @@
+{
+  "observedDate": "2026-10-16",
+  "method": "Two fresh-context local Chromium samples with reduced motion and external/API requests blocked. Preview CSP also blocked same-origin notes JSON. This is a controlled failed-download reproduction, not normal-content or field Core Web Vitals evidence.",
+  "confirmedSource": "Adjacent topics navigation moves repeatedly between the notes skeleton and error layouts because an unstable effect dependency restarts each failed download.",
+  "pages": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "requests": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "shifts": [
+        {
+          "value": 0.039414517148058624,
+          "startTime": 900.2999999998137,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 934.2999999998137,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 951.5,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 967.2999999998137,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1032.5,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1082.6999999999534,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1177.2999999998137,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1199.0999999998603,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1315.7999999998137,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1336,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.039414517148058624,
+          "startTime": 1377.1999999999534,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 16,
+                "y": 447,
+                "width": 358,
+                "height": 58,
+                "top": 447,
+                "right": 374,
+                "bottom": 505,
+                "left": 16
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "requests": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "shifts": [
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1041.8999999999069,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1080.6000000000931,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1438.1999999999534,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1470.8000000000466,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1565.1000000000931,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1617.6999999999534,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              }
+            }
+          ]
+        },
+        {
+          "value": 0.019443287037037033,
+          "startTime": 1674.6000000000931,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "node": "<nav aria-label=\"Adjacent topics\" class=\"mt-6 flex items-stretch justify-between gap-3\"><span class=\"flex-1\"></span><a class=\"group flex min-w-0 flex-1 items-center justify-end gap-2 rounded-lg border bg-white px-3 py-2.5 text-right hover:border-emerald-700/50\" href=\"/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks\" data-discover=\"true\" data-google-v",
+              "previous": {
+                "x": 288,
+                "y": 851,
+                "width": 864,
+                "height": 49,
+                "top": 851,
+                "right": 1152,
+                "bottom": 900,
+                "left": 288
+              },
+              "current": {
+                "x": 288,
+                "y": 458.5,
+                "width": 864,
+                "height": 58,
+                "top": 458.5,
+                "right": 1152,
+                "bottom": 516.5,
+                "left": 288
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

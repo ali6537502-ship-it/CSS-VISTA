@@ -1,0 +1,84 @@
+{
+  "verifiedAt": "2026-10-15T20:09:42.085666+00:00",
+  "scope": "Further local source-supported editorial repairs. No production deployment, Google submission or rights clearance.",
+  "baselineCommit": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:all",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:hostinger",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:browser:seo",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/seo/overlay-artifact.mjs dist",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "local documentation link/source-manifest/implementation-coverage check",
+      "exitCode": 0,
+      "sourceFilesVerified": 93,
+      "changedFilesDocumented": 211,
+      "brokenLocalLinks": 0
+    }
+  ],
+  "tests": {
+    "nodeTests": 248,
+    "pythonTests": 5,
+    "passed": 253,
+    "failed": 0,
+    "skipped": 0,
+    "browserRoutes": 18
+  },
+  "content": {
+    "additionalPrimaryPublisherIdentityChecks": 13,
+    "totalVerifiedBookIdentities": 71,
+    "unresolvedBookIdentities": 29,
+    "unverifiedBookQuotations": 61,
+    "quotationUpgradesThisPass": 0,
+    "readersWithSources": 71,
+    "journalTranscripts": 6,
+    "totalJournalClarifications": 6,
+    "addedJournalClarifications": 4,
+    "originalReadingBodyHashesPreserved": true,
+    "originalBookDocxImageTrackedChanges": []
+  },
+  "artifact": {
+    "sitemapUrls": 1019,
+    "applicationHtml": 1527,
+    "allHtml": 1528,
+    "firstPartyLinks": 60961
+  },
+  "remainingDependencies": [
+    "Original editions for unverified quotations and unresolved identities.",
+    "Owner/rightsholder permission evidence.",
+    "Google account access and actual account reports.",
+    "Explicit owner authorization before production deployment or AdSense review."
+  ],
+  "googleReadiness": "Read-only retry remains payment_required; no reports retrieved."
+}

@@ -1,0 +1,67 @@
+
+> css-vista@1.0.0 audit
+> node scripts/audit-site.mjs && node scripts/audit-mcq-data.mjs && node scripts/clean-islamic-mcq-bank.mjs --check && node scripts/clean-english-islamiyat-mcqs.mjs --check && node scripts/clean-mcq-quality.mjs --check && node scripts/audit-integrated-academics.mjs && node scripts/audit-css-past-paper-analysis.mjs && node scripts/audit-past-paper-seo.mjs && node scripts/generate-book-catalogue.mjs --check && python3 scripts/import_essay_themes.py --check && python3 scripts/import_islamic_references.py --check && python3 scripts/import_optional_notes.py --check && npm run audit:editorial
+
+Site audit passed: 113 routes, 432 source files and 2023 public assets checked.
+MCQ audit passed: 37,627 questions, 37,627 unique IDs, answer distribution 10378/9140/10373/7736.
+{
+  "mode": "check",
+  "before": 3818,
+  "retained": 3818,
+  "removed": 0,
+  "repeatedExplanationGroups": 0,
+  "removedExplanationVariants": 0,
+  "removedReciprocalVariants": 0,
+  "reciprocalExamples": []
+}
+{
+  "mode": "check",
+  "english": {
+    "before": 2599,
+    "removed": 0,
+    "editsRequired": 0,
+    "retained": 2599
+  },
+  "islamiyat": {
+    "before": 3818,
+    "removed": 0,
+    "retained": 3818,
+    "crossIdEditorialReview": [
+      {
+        "currentId": "islamic-gk-8462",
+        "originalIds": [
+          "islamic-gk-8450"
+        ]
+      }
+    ]
+  }
+}
+{
+  "mode": "check",
+  "gk": {
+    "before": 37627,
+    "removed": 0
+  },
+  "css": {
+    "before": 42804,
+    "removed": 0
+  },
+  "categories": [],
+  "subjects": []
+}
+Integrated academic audit passed: 51 syllabus entries, 42,804 supplied subject MCQs, 726 recent-affairs MCQs, 30 note previews, 123 checked-paper pages and 791 remotely served study files.
+Past-paper analysis audit passed: 3,277 questions, 1,509 topics, 52 subjects.
+Past-paper SEO audit passed: 782 direct paper records.
+Book-summary catalogue is in step: 100 books, 7 categories.
+Essay-theme roadmap up to date: 25 themes, 2619 checkpoints.
+Islamic reference banks up to date: 7 chapters, 72 topics, 1382 references.
+Optional subject notes up to date: 34 subjects, 339 topics.
+
+> css-vista@1.0.0 audit:editorial
+> node scripts/editorial/build-book-reviews.mjs --check && node scripts/editorial/build-journal-transcripts.mjs --check && node scripts/editorial/reviewed-mcqs.mjs --check && node scripts/seo/build-rights-inventory.mjs --check && python3 scripts/import_optional_notes.py --check
+
+Book editorial metadata matches the reviewed 100-book inventory.
+Journal transcripts checked: 6 articles, 11 unchanged source images.
+MCQ editorial review passed: 56 individually reviewed questions; 1 documented answer-key correction(s).
+Rights inventory checked: 100 summaries/covers, 11 archive images, 23 DOCX sources, 3 other publication records. Permissions remain unverified.
+Optional subject notes up to date: 34 subjects, 339 topics.

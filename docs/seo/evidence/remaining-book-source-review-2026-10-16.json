@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-16T06:40:35.051038+00:00",
+  "scope": "Bounded primary book-passage continuation review. No application source, original book bodies, publication states, permissions, production or Google accounts were changed.",
+  "ledgerBeforeSha256": "bbeb5780dabd637ba2a26a7fbebc4380f438f8ba833b59c36679db0a26a4344f",
+  "ledgerAfterSha256": "074e5d973f231754ca39fecc29d024211cc296bf68aa80a7d3c5140ec579b0c7",
+  "originalLibrarySha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e",
+  "acceptedChanges": [
+    {
+      "slug": "development-as-freedom",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://api.pageplace.de/preview/DT0400.9780191027239_A23540128/preview-9780191027239_A23540128.pdf",
+        "title": "Development as Freedom — Amartya Sen, Oxford University Press paperback preview",
+        "locator": "Introduction, opening sentence, printed p. 3 (physical PDF page 20); OUP paperback first published 2001, ISBN 9780192893307.",
+        "note": "The existing ellipsis omits the parenthetical clause “it is argued here”; the surrounding quoted words match the directly read opening sentence. This is an abbreviated quotation, not an exact unabridged sentence. Title, author, publisher and paperback edition were checked in the preview title/copyright pages. This preview establishes the cited passage only, not the full study analysis or reproduction permission.",
+        "shortEvidence": "Development can be seen",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-16",
+        "httpStatus": 200,
+        "responseSha256": "e221709b3ebae35c97b81739405344ab80aa350add4e9c0614002726d0607eee"
+      },
+      "pdfBytes": 1550404,
+      "physicalPdfPage": 20,
+      "omissionOrTypography": "it is argued here"
+    },
+    {
+      "slug": "the-open-society-and-its-enemies",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://api.pageplace.de/preview/DT0400.9781136700255_A23856467/preview-9781136700255_A23856467.pdf",
+        "title": "The Open Society and Its Enemies — Karl Popper, Routledge Classics 2011 preview",
+        "locator": "Preface to the First Edition (1943), first paragraph, physical PDF page 32; Routledge Classics 2011, ISBN 9780415610216.",
+        "note": "The existing sentence extracts the final clause of a longer sentence in Popper’s own preface; initial “we” is capitalized in the study note. The clause itself matches the directly read book preview. The first-edition preface is distinguished from the separate Havel/Gombrich front matter. Title, author, edition and ISBN were checked in the preview. The direct Routledge product page was HTTP 403 in this environment; the independently fetched retail preview was a genuine 200 PDF, not a challenge response. This is passage verification only and does not establish reproduction rights.",
+        "shortEvidence": "we must break with the habit of deference to great men",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-16",
+        "httpStatus": 200,
+        "responseSha256": "817f7464330f00b90d6045c6d8d8a07135a3aee1a4f70206a0aa463428b17441"
+      },
+      "pdfBytes": 19291041,
+      "physicalPdfPage": 32,
+      "omissionOrTypography": "The beginning of the longer sentence is omitted; original clause starts with lowercase we."
+    }
+  ],
+  "publisherCatalogInspections": [
+    {
+      "slug": "guns-germs-and-steel",
+      "url": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+      "httpStatus": 200,
+      "finalUrl": "https://wwnorton.co.uk/books/9780393354324-guns-germs-and-steel",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 68766,
+      "responseSha256": "0e289f9393a7683baa99e63cf888b57876c1a719c8c60e5b4fd161f1c301100b",
+      "title": "Guns, Germs, and Steel - Description | W. W. Norton & Company Ltd.",
+      "textBytes": 7499,
+      "quoteCandidate": false,
+      "prefix": "history followed different courses for different peoples",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9781598538069",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouseretail.com/book/?isbn=9781598538069",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 275430,
+      "responseSha256": "28f5ac3d42d0e442d0b5924df110e60dfdf8c653f9fec051735a686cccee4bce",
+      "title": "Hannah Arendt: The Origins of Totalitarianism Expanded Edition (LOA #389) | Penguin Random House Retail",
+      "textBytes": 12682,
+      "quoteCandidate": false,
+      "prefix": "the distinction between fact and fiction and",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "url": "https://us.macmillan.com/books/9780374532505/justice/",
+      "httpStatus": 200,
+      "finalUrl": "https://us.macmillan.com/books/9780374532505/justice/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 137515,
+      "responseSha256": "652dd7bc7f49e9361d4e8deb02ddef9e22ebb2f4af4e9d35f6a5f9a468a6201f",
+      "title": "Justice",
+      "textBytes": 10103,
+      "quoteCandidate": false,
+      "prefix": "cultivating virtue and reasoning about the common",
+      "excerptLinks": [
+        "https://images.macmillan.com/folio-assets/rgg-guides/9780374532505RGG.pdf",
+        "https://images.macmillan.com/folio-assets/rgg-guides/9780374532505RGG.pdf",
+        "https://images.macmillan.com/folio-assets/discusion-guides/9780374180652DG.pdf",
+        "https://images.macmillan.com/folio-assets/discusion-guides/9780374180652DG.pdf",
+        "https://d3ialxc06lvqvq.cloudfront.net/wp-content/uploads/2025/05/08153007/Code-of-Conduct_US_April_2025_V1.pdf",
+        "https://d3ialxc06lvqvq.cloudfront.net/wp-content/uploads/2025/05/08155026/COEBP_US_April_2025_V1.pdf"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
+      "url": "https://www.simonandschuster.com/books/The-Clash-of-Civilizations-and-the-Remaking-of-World-Order/Samuel-P-Huntington/9781451628975",
+      "httpStatus": 200,
+      "finalUrl": "https://www.simonandschuster.com/books/The-Clash-of-Civilizations-and-the-Remaking-of-World-Order/Samuel-P-Huntington/9781451628975",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 331573,
+      "responseSha256": "c2d3135001d0fd22c5cd454dfff48c5b9fed91827cabe3a58753f3dc93743f81",
+      "title": "The Clash of Civilizations and the Remaking of World Order | Book by Samuel P. Huntington | Official Publisher Page | Simon & Schuster Simon and Schuster logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo",
+      "textBytes": 21050,
+      "quoteCandidate": false,
+      "prefix": "every civilization sees itself as the center",
+      "excerptLinks": [
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books",
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books",
+        "https://www.simonandschuster.com/books/The-Clash-of-Civilizations-and-the-Remaking-of-World-Order/Samuel-P-Huntington/9781451628975#excerpt"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "url": "https://www.simonandschuster.com/books/The-End-of-History-and-the-Last-Man/Francis-Fukuyama/9780743284554",
+      "httpStatus": 200,
+      "finalUrl": "https://www.simonandschuster.com/books/The-End-of-History-and-the-Last-Man/Francis-Fukuyama/9780743284554",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 316938,
+      "responseSha256": "ac2fb62e573dc5834baf1e97cdf95c54a67699781cc9016a344b5b85375465ab",
+      "title": "The End of History and the Last Man | Book by Francis Fukuyama | Official Publisher Page | Simon & Schuster Simon and Schuster logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo",
+      "textBytes": 11013,
+      "quoteCandidate": false,
+      "prefix": "the end point of mankind s ideological",
+      "excerptLinks": [
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books",
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "url": "https://www.hachettebookgroup.com/titles/zbigniew-brzezinski/the-grand-chessboard/9780465094356/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.hachettebookgroup.com/titles/zbigniew-brzezinski/the-grand-chessboard/9780465094356/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 315874,
+      "responseSha256": "410d723cc0c42e9659183a1e9cb8535eb5dd4adf48a7b977d8677746259970c4",
+      "title": "The Grand Chessboard by Zbigniew Brzezinski | Hachette Book Group Email Novel Suspects Logo",
+      "textBytes": 8054,
+      "quoteCandidate": false,
+      "prefix": "without ukraine russia ceases to be a",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-guns-of-august",
+      "url": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/180851/the-guns-of-august-by-barbara-w-tuchman/9780345386236/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 337273,
+      "responseSha256": "c941e52a800b2e749181f05c6ae89e074d9b8a70c8aa5062cfb690d9f97b59dd",
+      "title": "The Guns of August by Barbara W. Tuchman: 9780345386236 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10250,
+      "quoteCandidate": false,
+      "prefix": "the impetus of existing plans is always",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "url": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/292994/postwar-by-tony-judt/9780143037750/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 240189,
+      "responseSha256": "9d3051269e35b672278bba252c9b6deb28eb9ebd81629c7febfdb358a10d1e1e",
+      "title": "Postwar by Tony Judt: 9780143037750 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10164,
+      "quoteCandidate": false,
+      "prefix": "was the insecure child of anxiety",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "url": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.hachettebookgroup.com/titles/odd-arne-westad/the-cold-war/9780465093137/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 317974,
+      "responseSha256": "24b04cec9950683a90e1cb4d3bc459c38542d05cd50b8a09a6e26f600ec63066",
+      "title": "The Cold War by Odd Arne Westad | Hachette Book Group Email Novel Suspects Logo",
+      "textBytes": 11138,
+      "quoteCandidate": false,
+      "prefix": "the end of the cold war opened",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-great-transformation",
+      "url": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/206182/the-great-transformation-by-karl-polanyi/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 262974,
+      "responseSha256": "ed988ad3fe0489cb39f8fdb3d9193bf6a38160bcd1b9d85ae65d7b7f00d3f233",
+      "title": "The Great Transformation by Karl Polanyi: 9780807018828 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10044,
+      "quoteCandidate": false,
+      "prefix": "to allow the market mechanism to be",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "capitalism-and-freedom",
+      "url": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
+      "httpStatus": 200,
+      "finalUrl": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
+      "contentType": "text/html;charset=UTF-8",
+      "bytes": 51572,
+      "responseSha256": "4d5f9c117f57040a9b4adfe1b14b5ec161ca24b32c09dc407618a9b7971dd9db",
+      "title": "Capitalism and Freedom, Friedman, Appelbaum",
+      "textBytes": 5292,
+      "quoteCandidate": false,
+      "prefix": "economic freedom is also an indispensable means",
+      "excerptLinks": [
+        "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html#anchor-excerpt"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "poor-economics",
+      "url": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/poor-economics/9781541706194/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/poor-economics/9781541706194/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 328681,
+      "responseSha256": "c86b2294b9c43039f037f18dcc1c4dcce84d0d298f4cfb3acfe3986d125cb1c2",
+      "title": "Poor Economics by Abhijit V. Banerjee & Esther Duflo | Hachette Book Group Email Novel Suspects Logo",
+      "textBytes": 17317,
+      "quoteCandidate": false,
+      "prefix": "they have to be sophisticated economists just",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "url": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 304662,
+      "responseSha256": "6793f406c35f703e2133e871941ca13c44492cd00a1c3a747e9f4ec99b957af4",
+      "title": "The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10124,
+      "quoteCandidate": false,
+      "prefix": "the ascent of money has been essential",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "url": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/740768/the-entrepreneurial-state-by-mariana-mazzucato/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 248667,
+      "responseSha256": "b3243447e3d0a63e6ac0c23029e0c4c44e006bdd82e9f8eff6a5e95ce8e42c11",
+      "title": "The Entrepreneurial State by Mariana Mazzucato: 9780593656938 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 12218,
+      "quoteCandidate": false,
+      "prefix": "do as the united states actually did",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+      "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+      "httpStatus": 200,
+      "finalUrl": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 324925,
+      "responseSha256": "a09f5b52528643509e5e652c35fd45a83ca2cc9fa656449b54f59345c9f2f3a6",
+      "title": "The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster Simon and Schuster logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo Amazon logo Barnes and Noble logo Books a Million logo Bookshop logo Hudson Booksellers logo Target logo Walmart logo",
+      "textBytes": 12875,
+      "quoteCandidate": false,
+      "prefix": "oil has meant mastery through the years",
+      "excerptLinks": [
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books",
+        "https://www.simonandschuster.com/m/simon-kids-chapter-books-and-ready-to-reads",
+        "https://www.simonandschuster.com/p/star-chapter-books"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "nudge",
+      "url": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/690485/nudge-by-richard-h-thaler-and-cass-r-sunstein/9780525508526/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 278517,
+      "responseSha256": "b16f91abccf77aea9c607dcee3aa10502cef953aa48e0dd58ac780a08467a053",
+      "title": "Nudge by Richard H. Thaler, Cass R. Sunstein: 9780143137009 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 19952,
+      "quoteCandidate": false,
+      "prefix": "a nudge alters people s behavior in",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "invisible-women",
+      "url": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 74361,
+      "responseSha256": "bc28b70479cb4735686e73a5f0ee688b405f52ff4b0794b527073fee287f95b8",
+      "title": "Invisible Women (Hardcover) | ABRAMS",
+      "textBytes": 10466,
+      "quoteCandidate": false,
+      "prefix": "both a cause and a consequence",
+      "excerptLinks": [
+        "https://www.abramsbooks.com/abrams-categories/chapter-books/",
+        "https://www.scribd.com/document/401732647/Invisible-Women-Excerpt#from_embed"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-second-sex",
+      "url": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 474048,
+      "responseSha256": "296d6f184f5a32bebefdd963a2560cfda0c9e37ed57e6d2a2635028af016fc53",
+      "title": "The Second Sex by Simone De Beauvoir: 9780307277787 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10267,
+      "quoteCandidate": false,
+      "prefix": "one is not born but rather becomes",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "url": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+      "httpStatus": 200,
+      "finalUrl": "https://groveatlantic.com/book/the-wretched-of-the-earth/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 163257,
+      "responseSha256": "dd2392a3153459a2a85507bcb7aaaafeadacc55bc7fd98436798a29301b146c4",
+      "title": "The Wretched of the Earth | Grove Atlantic",
+      "textBytes": 16328,
+      "quoteCandidate": false,
+      "prefix": "discovers that his life his breath his",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "url": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 241334,
+      "responseSha256": "c082c63b136d0d416dbcedddb321baddf3cc0569c2a83352e75bb45dd96f1e24",
+      "title": "Amusing Ourselves to Death by Neil Postman: 9780143036531 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 10324,
+      "quoteCandidate": false,
+      "prefix": "people will come to adore the technologies",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "url": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+      "httpStatus": 200,
+      "finalUrl": "https://fletcher.tufts.edu/research/research-publications/struggle-pakistan",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 95775,
+      "responseSha256": "b62fe37fc403a56ad3b5f8bb52454fa91e6928f8b8fe3b20881ca5f081fe49b4",
+      "title": "The Struggle for Pakistan Twitter Path Mask Mask Combined Shape Bluesky Threads TikTok Twitter Path Mask Mask Combined Shape Bluesky Threads TikTok",
+      "textBytes": 2665,
+      "quoteCandidate": false,
+      "prefix": "pakistan is a visibly perturbed and divided",
+      "excerptLinks": [],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-great-partition",
+      "url": "https://yalebooks.yale.edu/book/9780300230321/the-great-partition/",
+      "httpStatus": 200,
+      "finalUrl": "https://yalebooks.yale.edu/book/9780300230321/the-great-partition/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 209215,
+      "responseSha256": "6d39a699f1db895a1d2f0cd9761c4da4a5daff98ad76b1579b045807afef2b69",
+      "title": "The Great Partition",
+      "textBytes": 6329,
+      "quoteCandidate": false,
+      "prefix": "partition stands testament to the follies of",
+      "excerptLinks": [
+        "https://www.chapters.indigo.ca/books/search?keywords=9780300230321&pageSize=10"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "url": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/815632/the-handmaids-tale-deluxe-edition-by-margaret-atwood/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 212638,
+      "responseSha256": "d9e8ccb2f72a89ca0e42b136ec45138b6d9899e52bae948cbbc5e7425a590054",
+      "title": "The Handmaid's Tale (Deluxe Edition) by Margaret Atwood: 9798217009114 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 9071,
+      "quoteCandidate": false,
+      "prefix": "nolite te bastardes carborundorum",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "url": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/704249/the-reluctant-fundamentalist-by-mohsin-hamid/9780593553480/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 215039,
+      "responseSha256": "ef9dab3f1d51a7c473c497a64572f01f294a727a75f57a66c7d46ec28b2cffb5",
+      "title": "The Reluctant Fundamentalist by Mohsin Hamid: 9780593553480 | PenguinRandomHouse.com: Books cart cart",
+      "textBytes": 9056,
+      "quoteCandidate": false,
+      "prefix": "i was not certain where i belonged",
+      "excerptLinks": [
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/",
+        "https://www.penguinrandomhouse.com/articles/happy-place-by-emily-henry-excerpt/"
+      ],
+      "scope": "Publisher catalog response inspected; no matching book passage accepted from this response."
+    }
+  ],
+  "publicPrhSampleChecks": [
+    {
+      "slug": "the-second-sex",
+      "pageUrl": "https://www.penguinrandomhouse.com/books/10379/the-second-sex-by-simone-de-beauvoir-newly-translated-by-constance-borde-and-sheila-malovany/9780307277787/",
+      "sampleIsbn": "9780307277787",
+      "result": "The publisher’s Read Sample contains a similar line in the introduction (with woman rather than a woman), not a directly read matching passage in the original author’s relevant chapter. No upgrade or correction asserted from this different translation/context."
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "sampleIsbn": "9780143116172",
+      "result": "Available publisher sample checked; current wording not located. No inference that it is absent from the full book."
+    },
+    {
+      "slug": "the-guns-of-august",
+      "sampleIsbns": [
+        "9780345386236",
+        "9780345476098"
+      ],
+      "result": "Both available publisher sample variants checked; current wording not located. No inference that it is absent from the full book."
+    },
+    {
+      "slug": "nudge",
+      "sampleIsbns": [
+        "9780143137009",
+        "9780525508526"
+      ],
+      "result": "Publisher page serves a brief Common Nudges sample rather than the sought definition passage. No upgrade; no inference that the line is absent from the book."
+    }
+  ],
+  "additionalSourceAttempts": [
+    {
+      "url": "https://www.routledge.com/The-Open-Society-and-Its-Enemies-1st-Edition/Popper-Havel-Gombrich/p/book/9780415610216",
+      "result": "Direct web-reader response 403. Its indexed preface fragment alone was not accepted. The separate retail preview PDF was downloaded and read instead."
+    },
+    {
+      "url": "https://www.vpm.org/npr-news/2010-06-02/excerpt-the-shallows/",
+      "result": "Direct HTTP and web-reader responses 403; no book-passage verification."
+    },
+    {
+      "slug": "friedman-hoover-book",
+      "url": "https://miltonfriedman.hoover.org/internal/media/dispatcher/215033/full",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "slug": "friedman-hoover-collected",
+      "url": "https://miltonfriedman.hoover.org/internal/media/dispatcher/271113/full",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://miltonfriedman.hoover.org/internal/media/dispatcher/271113/full",
+      "result": "Although direct HTTP was 403, the web reader exposed the collected Money Maker October/November 1980 article. Related author wording does not prove occurrence in Capitalism and Freedom; no upgrade."
+    },
+    {
+      "slug": "guns-bookbrowse-1",
+      "url": "https://www.bookbrowse.com/excerpts/index.cfm/book_number/1195/guns-germs-steel",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "slug": "guns-bookbrowse-3",
+      "url": "https://www.bookbrowse.com/excerpts/index.cfm/book_number/1195/page_number/3/guns-germs-steel",
+      "error": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "slug": "bottom-billion-wiley-excerpt",
+      "url": "https://www.oreilly.com/library/view/the-globalization-reader/9781118737026/c24.xhtml",
+      "httpStatus": 200,
+      "finalUrl": "https://www.oreilly.com/library/view/the-globalization-reader/9781118737026/c24.xhtml",
+      "bytes": 640008,
+      "responseSha256": "97d4c877254e16c169d2fdc6f9c8bc21bc175bad5c934f81acb6c24f77961285",
+      "textChars": 19475,
+      "relevantLinks": []
+    },
+    {
+      "url": "https://api.pageplace.de/preview/DT0400.9781351350266_A30393706/preview-9781351350266_A30393706.pdf",
+      "result": "Search candidate is an analysis of Friedman’s book, not the named original; not used as original book evidence."
+    },
+    {
+      "url": "https://us.macmillan.com/books/9781250191328/theshallows/",
+      "result": "Search candidate has an ambiguous same-title identity and was not accepted as Nicholas Carr’s book."
+    }
+  ],
+  "methodLimitations": [
+    "A 200 response is insufficient: actual PDF book text, named author, edition and locators were inspected for each accepted change.",
+    "A failed direct fetch is recorded as a limitation; no origin outage or incorrect quotation is inferred.",
+    "Short prefix checks locate possible passages; they do not establish a quotation’s identity or edition.",
+    "Source absence in a bounded excerpt is not evidence of absence from the complete book.",
+    "Retail/publisher preview access establishes neither CSS VISTA reproduction rights nor advertising approval.",
+    "Downloaded external books/previews remain in scratch only; no third-party full book or chapter was added to the repository."
+  ],
+  "finalQuotationStatusCounts": {
+    "no_quote": 11,
+    "paraphrase": 1,
+    "unverified": 57,
+    "verified_exact": 9,
+    "verified_excerpt": 22
+  },
+  "verifiedBookQuotationEntries": 31,
+  "identitiesVerifiedAgainstPrimaryRecord": 100,
+  "rightsPermissionsEstablished": 0,
+  "originalSourceBodiesModified": 0
+}

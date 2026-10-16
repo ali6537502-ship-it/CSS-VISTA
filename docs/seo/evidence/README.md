@@ -1,0 +1,61 @@
+# Live HTTP evidence — 14 October 2026
+
+These are direct public HTTP observations, collected through the managed environment's inherited proxy with TLS verification enabled. No production writes, account actions, search queries or indexing requests were made.
+
+## Scope and reproduction
+
+Run `python scripts/seo/crawl-production.py` from the repository root. Python 3 and Node.js are required; no third-party Python packages are used. `--limit` bounds public HTTP page probes to at most 300, default 120, with four workers. Sitemap files and a bounded set of shared assets are fetched separately. The audit resolves source policies with the application’s authoritative `getRoutePolicy`/`findRouteDefinition`, including overlapping route patterns. It uses source registries, React route literals, the optional-subject and reference indexes, book and MCQ inventories, generated past-paper registries, live sitemaps and sampled HTML links. It records source candidates separately from final observed robots decisions. It never enumerates private account records or authenticates.
+
+The committed baseline has 1,561 concrete discovered URLs. This is a source/sitemap/link union including private route definitions, legacy URLs and technical probes, **not Google's known URL count**. All pattern definitions are also included in `URL_INVENTORY.json`. Runtime database records, historical URLs absent from source, unexported Google examples and unvisited HTML links are not a complete crawl inventory. Unmeasured HTTP fields and all Google indexing statuses remain null. Source inventories can include working-branch content preparation; the recorded Git SHA identifies the baseline commit, not a claim that the working tree was clean.
+
+The baseline comprises 113 distinct HTML/technical response probes (108 in the bounded first pass and five targeted follow-ups), four shared-asset fetches, five sitemap fetches, nine named-user-agent comparisons and five sensitive-path **HEAD-only** checks. The default future run samples current source routes rather than reproducing exactly the same counts. Named-user-agent and HEAD follow-ups are recorded independently; they do not run automatically as part of the default audit.
+
+## Verified findings
+
+- `deployment-fingerprint.json` reports `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`, built `2026-10-12T04:25:31.574Z`. That SHA matches the baseline checkout. The original site is not an unidentified old deployment relative to that commit.
+- The sitemap index and all four child files return HTTP 200 and parse as XML. There are 1,018 entries, all unique, on the preferred origin. The 68 sampled submitted URLs return direct HTTP 200, declare the matching canonical and have no observed noindex. This validates the sample; it does not prove all 1,018 destinations were fetched.
+- Sitemap families include 339 optional topics, 33 optional subject hubs, 72 Islamic reference topics, seven chapter hubs, 100 books, 42 GK categories, 24 paper collections, 365 paper viewers and 36 other URLs. The 34th optional hub, Pure Mathematics, is excluded and its additional live sample declares noindex. Existing source-level content gates must be reviewed before changing that decision.
+- Real educational content is present in sampled raw HTML: the financial-accounting topic contains approximately 16,888 main-text characters and the first Islamic-reference topic approximately 16,602. These are observations, not Google content-length requirements or endorsements of factual accuracy.
+- All six deliberately missing page/category/topic/paper probes return genuine HTTP 404 with noindex. Unknown paths do not silently become indexable homepage responses in these samples.
+- `robots.txt` is a plain-text 200 response allowing `/` and referencing the preferred sitemap. JavaScript/CSS entry assets return 200. These observations do not establish access from Google's actual crawler IPs.
+- `ads.txt` returns the existing direct authorization for `pub-6131271603014611`. Public approved-content samples carry the existing loader. Account, sign-in, hibernated MPT, legal and interactive-only samples do not carry it. Signed-in browser behavior and consent handling require separate application tests.
+- Anonymous `/account`, `/account/dashboard` and `/account/settings` responses show the protected/noindex public shell; no personal records were fetched. HEAD requests for `.env`, `.git/config`, the premium-issues index and frozen examination-paper directory are denied (403). The sampled configuration path is 404. These probes are not a comprehensive security audit.
+- Browser-named, Googlebot-named and Mediapartners-Google-named requests return identical body hashes for `/start-css`, the financial-accounting topic and `/account`. A user-agent string is not verified Googlebot authentication, and this does not replace real crawler logs or rendered inspection.
+- `http://css-vista.com/start-css` takes two permanent redirects through HTTPS non-www before the preferred www host. The HTTPS non-www and HTTP www variants take one redirect. This is a minor consolidation improvement, not evidence of a primary indexing failure.
+- Slash, case, percent-encoded and query variants return 200 with the preferred equivalent canonical. `/index.html` declares the homepage canonical. These are alternate URLs rather than independently useful index targets; canonical hints are present, with browser behavior and Google's chosen canonical still unverified.
+- The public Journal API returns `{"ok":true,"articles":[]}`. Its raw page preserves legacy image-article archives, but there are no currently published database text articles in the observed API response. Existing code opens future database articles using modal buttons without stable detail routes; do not describe hypothetical future article failures as evidence that current text articles have disappeared.
+- No duplicate submitted main-text hashes, multiple canonical tags, or malformed structured-data JSON were detected in the sampled responses. JSON validity does not establish search-feature eligibility or factual correctness.
+
+## Files and limitations
+
+`URL_INVENTORY.json` and `.csv` hold response headers, canonical/robots, metadata, main-content observations, source provenance, links, source candidates and recommendations. The JSON's `html_evidence` field maps a URL to its saved complete raw HTML snapshot. Filenames use a short SHA-256 of the URL to avoid filesystem ambiguity.
+
+`crawl-summary.json` contains scope, family counts, source definitions, sitemap responses and shared-asset responses. `additional-live-probes.json`, `user-agent-comparison.json` and `private-path-head-probes.json` preserve the targeted follow-ups. The raw sitemap and robots/ads/fingerprint files are saved alongside representative HTML.
+
+This evidence establishes HTTP responses from this environment. It does not establish Google-selected canonicals, indexed URLs, Search Console exclusion categories, AdSense rejection wording, review history, real-user Core Web Vitals, copyright permission, editorial correctness, full JavaScript hydration or Google approval. Response durations include the proxy/network and are not Core Web Vitals. Live responses remain the pre-release baseline; local fixes must be verified separately and must not be described as deployed.
+
+## Final artifact overlay
+
+After the completed Hostinger build, run `node scripts/seo/overlay-artifact.mjs dist`. This adds a distinct `local_artifact` object for each concrete URL, using the repository’s existing `.htaccess` resolver and inspecting the resulting generated file. Local status, canonical, robots, sitemap membership, main-content size, content hash and decision reason are recorded separately from the production HTTP baseline. The CSV uses `local_artifact_*` columns. Top-level `intended_indexability` then describes the reviewed build, whereas top-level HTTP `status`, `canonical`, `robots`, `sitemap_presence`, headers and `http_observed` remain production observations. Host variants still require real HTTP server validation. Static inspection of PHP paths cannot run the backend.
+
+The overlay documents the existing noindex rationale for every document-only paper viewer without enough recorded question content, and the Pure Mathematics hub’s existing rendered-content exclusion. It does not remove their user access or resources. These are site-specific content decisions, not Google-imposed question/word-count requirements. Re-running the crawler refreshes the baseline and should be followed by the overlay to restore local build evidence.
+
+## Editorial continuation evidence — 15 October 2026
+
+`editorial-verification-results.json` and the matching command logs record the final source-supported content build, 247 tests and 16 browser routes. `browser-editorial-final.json` is distinct from earlier baseline/final reports. `editorial-preservation-check.json` measures actual source changes; `prepared-source-manifest.json` fingerprints the uncommitted candidate rather than treating its baseline Git SHA as the new release. Four `artifact-*` samples add the real Journal, quotation source notes/translation and constitutional update.
+
+`editorial-official-source-probes-2026-10-15.json`, `css-2026-result-editorial-check.json` and `mcq-editorial-sources-2026-10-15.json` record source availability, fingerprints and precise verification limits. `google-access-2026-10-15.json` records the latest subscription-blocked read-only attempt. No Google report data, permissions clearance or production outcome is inferred.
+
+## Further source follow-up evidence
+
+`followup-verification-results.json` and matching `followup-*` logs record 253 tests, the final complete build and 18 browser routes. `editorial-next-source-probes.json` and `book-bibliography-followup.json` identify inspected source responses, available metadata scope, failed/discarded candidates and publisher identity checks. `browser-followup-final.json` and the three `artifact-*-followup.html` files preserve final rendering. The current source manifest identifies the latest candidate; the first editorial manifest is retained separately for provenance. No account or permission status is inferred from these files.
+
+## Book-source continuation — 16 October 2026
+
+`book-source-review-2026-10-16.json` records 29 additional primary identities and two authentic excerpt matches, with explicit web-extraction/direct-response limits and discarded candidates. `book-pass-verification-results.json` and `book-pass-*` logs record 256 tests, the complete strict build and 22 browser routes. `browser-book-pass-final.json` and four `artifact-book-*-2026-10-16.html` snapshots show actual labels/citations. The current 94-file source manifest identifies the prepared candidate; the 15 October follow-up manifest is preserved separately. `live-recheck-2026-10-16.json` still identifies the original release, and `google-access-2026-10-16.json` documents the blocked read-only retry. Identity and quotation evidence do not confer reproduction rights or Google approval.
+
+## Final continuation evidence — 16 October
+
+The earlier sections describe the dated baseline. `google-historical-account-evidence-2026-10-16.json` and the issue examples add read-only historical account evidence without relabeling it current. `public-monitor-pre-release.json` checks 26 pages against the still-old live SHA: its only two errors are the existing grammar course's noindex and absent sitemap entry, both corrected in the candidate. This failed baseline monitor is retained rather than presented as a successful release check.
+
+Final command, browser, source-manifest and performance evidence use the `autonomous-final`/`autonomous-verification` names. The initial optional-note layout-shift sample identifies repeated adjacent-topic movement during blocked JSON downloads; it is not a real-user CWV measurement. The retry loop and preview content-fetch configuration were subsequently repaired. Discarded Lighthouse isolation attempts remain separately labeled; final measurements must meet the zero external-success/zero API-network guard. Actual GitHub and production verification are recorded in the main verification report.

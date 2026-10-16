@@ -21,7 +21,7 @@ export default function OptionalSubjectNotes() {
 
   if (!summary) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <main className="mx-auto max-w-3xl px-4 py-16 text-center" data-cssv-ad-state="error">
         <h1 className="font-display text-2xl font-bold text-pine">Subject not found</h1>
         <p className="mt-2 text-sm text-muted-foreground">No notes are published for this optional subject yet.</p>
         <Link to="/study-material/optional" className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-pine px-4 py-2 text-sm font-semibold text-emerald-50">

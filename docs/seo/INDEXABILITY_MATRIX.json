@@ -1,0 +1,1227 @@
+{
+  "date": "2026-10-16",
+  "authority": "src/data/routeRegistry.mjs plus per-page final artifact gates; Google status unavailable",
+  "families": [
+    {
+      "family": "/",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/start-css",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory/essay",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory/precis-composition",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Current product access/release hold applies; do not republish protected material for search."
+    },
+    {
+      "family": "/subjects/compulsory/general-science-ability",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory/current-affairs",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory/pakistan-affairs",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/compulsory/islamic-studies",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/optional",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/subjects/selector",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Repair always-invalid900-mark output; retain existing noindex pending independent post-fix search presentation decision; ad-free."
+    },
+    {
+      "family": "/notes",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/notes/view/:productId/:documentId",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/past-papers",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/past-papers/:exam/:year",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "Accurate archive identity and complete source-backed links, including useful one-paper archives; no filler requirement."
+    },
+    {
+      "family": "/past-papers/view/:id",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Per-paper override: 365 source-backed question pages indexable; 417 document access pages noindex. Preserve every PDF."
+    },
+    {
+      "family": "/css-mcqs",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/study-material/essay-themes",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Current product access/release hold applies; do not republish protected material for search."
+    },
+    {
+      "family": "/study-material/essay-themes/:slug",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Current product access/release hold applies; do not republish protected material for search."
+    },
+    {
+      "family": "/resources",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/study-material",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/study-material/optional",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/study-material/optional/:subject",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "339 genuine topics indexed; 33 subject hubs indexed; existing Pure Mathematics hub noindex retained for separate usefulness review. Do not pad."
+    },
+    {
+      "family": "/study-material/optional/:subject/:topic",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "339 genuine topics indexed; 33 subject hubs indexed; existing Pure Mathematics hub noindex retained for separate usefulness review. Do not pad."
+    },
+    {
+      "family": "/study-material/islamic-studies",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/study-material/islamic-studies/:chapter",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "Real bilingual reference material; retain page-specific metadata/schema. Source/translation verification remains editorial."
+    },
+    {
+      "family": "/study-material/islamic-studies/:chapter/:topic",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "Real bilingual reference material; retain page-specific metadata/schema. Source/translation verification remains editorial."
+    },
+    {
+      "family": "/essay",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/mpt",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/mpt/bank/:bankId",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/current-affairs",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Current product access/release hold applies; do not republish protected material for search."
+    },
+    {
+      "family": "/vistagram",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Existing public feed/articles remain noindex/ad-free; repair finite published-slug direct navigation, preserve publication dates and source content."
+    },
+    {
+      "family": "/vistagram/:slug",
+      "match": "pattern",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Existing public feed/articles remain noindex/ad-free; repair finite published-slug direct navigation, preserve publication dates and source content."
+    },
+    {
+      "family": "/answer-writing",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/test-series",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/study-tools",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/css-eligibility-calculator",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Useful public calculator with explanation and official-rule references; preserve indexing and ad-free interaction."
+    },
+    {
+      "family": "/photo-compressor",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/games",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/psych-viva",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/fpsc-updates",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/mentors",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/services",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/analysis",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/grammar-vocabulary",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/dashboard",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/daily-challenge",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/gk",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/one-liner-gk",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/language-grammar",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/grammar-course",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Reviewed guest lessons and practice; real SSR added. Indexable explicitly, advertising remains disabled."
+    },
+    {
+      "family": "/book-summaries",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Actual distinct summaries; preserve full readers. Quotations/cover rights require human verification."
+    },
+    {
+      "family": "/book-summaries/:slug",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "enabled",
+      "decision": "Actual distinct summaries; preserve full readers. Quotations/cover rights require human verification."
+    },
+    {
+      "family": "/lectures",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/handwritten-notes",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/study-planner",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/answer-evaluation",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/live-theme-demos",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/fpsc-syllabus",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/css-past-paper-analysis",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/gk/cat/:slug",
+      "match": "pattern",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/gk/quiz",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/five-minute",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/mistakes",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/answer-timer",
+      "match": "exact",
+      "category": "B",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free."
+    },
+    {
+      "family": "/checklists",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/books",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/journal",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "enabled",
+      "decision": "Preserve indexable legacy image archive. Public API currently empty; authentic accessible transcripts/stable text article URLs need editorial follow-up."
+    },
+    {
+      "family": "/daily-briefing",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/account/dashboard",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/tasks",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/progress",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/english",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/resources",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/expression",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/precis",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Current product access/release hold applies; do not republish protected material for search."
+    },
+    {
+      "family": "/account/handwriting",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/ask-vista",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/answer-performance",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/preparation",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/ai-usage",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/membership",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/argumentation",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/analytical-skills",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/essay-builder",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/general-ability",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/library",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/vistagram",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/current-affairs",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/current-affairs/archive",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/current-affairs/:storyId",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/mpt",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/mpt/history",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/mpt/performance",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/account/mpt/mistakes",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/question-bank",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/question-bank/:mock",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/apply/:mock",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/applications/:code",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/entrance/:mock",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/exam/:mock",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/mpt/results/:code",
+      "match": "pattern",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Hibernated product; preserve records, pause and noindex. Do not reopen for SEO."
+    },
+    {
+      "family": "/account/factbook",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/saved",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/search",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account/settings",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/account",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged."
+    },
+    {
+      "family": "/factbook",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/consultation",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/exam-intelligence",
+      "match": "exact",
+      "category": "C",
+      "access": "authenticated",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/css-2026-written-result",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy."
+    },
+    {
+      "family": "/legal",
+      "match": "exact",
+      "category": "D",
+      "access": "public",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota."
+    },
+    {
+      "family": "/privacy-policy",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/cookie-policy",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/terms-and-conditions",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/disclaimer",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/copyright",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/editorial-policy",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/about",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/contact",
+      "match": "exact",
+      "category": "A",
+      "access": "public",
+      "indexable_candidate": true,
+      "sitemap_default": true,
+      "advertising": "disabled",
+      "decision": "Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy."
+    },
+    {
+      "family": "/sadiaali",
+      "match": "exact",
+      "category": "C",
+      "access": "admin",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    },
+    {
+      "family": "/sadiaali/login",
+      "match": "exact",
+      "category": "C",
+      "access": "admin",
+      "indexable_candidate": false,
+      "sitemap_default": false,
+      "advertising": "disabled",
+      "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
+    }
+  ],
+  "googleEvidence": "Historical export/notification evidence available separately; current portal status unavailable."
+}

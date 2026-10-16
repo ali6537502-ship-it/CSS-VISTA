@@ -8,7 +8,9 @@ import { NoteBlocks } from '@/features/optional-notes/Blocks'
 
 export default function OptionalTopicNotes() {
   const { subject: subjectSlug = '', topic: topicSlug = '' } = useParams()
-  const found = findOptionalTopic(subjectSlug, topicSlug)
+  // The lookup returns a new wrapper object. Keep it stable between route
+  // changes so a failed download does not restart this effect on every render.
+  const found = useMemo(() => findOptionalTopic(subjectSlug, topicSlug), [subjectSlug, topicSlug])
   const [payload, setPayload] = useState<TopicPayload | null>(() => optionalTopicNow(subjectSlug, topicSlug))
   const [failed, setFailed] = useState(false)
 
@@ -29,7 +31,7 @@ export default function OptionalTopicNotes() {
 
   if (!found) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <main className="mx-auto max-w-3xl px-4 py-16 text-center" data-cssv-ad-state="error">
         <h1 className="font-display text-2xl font-bold text-pine">Topic not found</h1>
         <p className="mt-2 text-sm text-muted-foreground">No notes are published for this topic yet.</p>
         <Link to="/study-material/optional" className="mt-5 inline-flex items-center gap-1.5 rounded-lg bg-pine px-4 py-2 text-sm font-semibold text-emerald-50">
@@ -45,7 +47,7 @@ export default function OptionalTopicNotes() {
   const next = position >= 0 && position < subject.topics.length - 1 ? subject.topics[position + 1] : null
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-5">
+    <div className="mx-auto max-w-4xl px-4 py-5" data-cssv-ad-state={!payload ? (failed ? 'error' : 'loading') : undefined}>
       <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
         <Link to="/study-material/optional" className="font-medium text-emerald-800 hover:underline underline-offset-2">Optional notes</Link>
         <span aria-hidden="true">/</span>

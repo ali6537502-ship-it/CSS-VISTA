@@ -1,0 +1,1500 @@
+{
+  "observedAt": "2026-10-16T13:56:54.517Z",
+  "method": "Chromium PerformanceObserver, six fresh-context local artifact samples, no CPU/network throttling; external resources and all API requests blocked; preview-only CSP isolation permits same-origin public study-material/feed JSON and robots.txt fetches. 1.5-second observation after network idle and font readiness. No user interaction/INP measurement. Not field Core Web Vitals; local timings exclude real hosting/network/backend and advertising.",
+  "pages": [
+    {
+      "path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 956,
+        "size": 35916,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 428.1999999997206,
+          "duration": 97
+        },
+        {
+          "startTime": 526.1000000000931,
+          "duration": 209
+        },
+        {
+          "startTime": 789.1000000000931,
+          "duration": 74
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 66.79999999981374,
+          "domContentLoaded": 517.6999999997206,
+          "loadEventEnd": 523.6999999997206,
+          "transferSize": 220519
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 732
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 732
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 114.79999999981374,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 110.60000000009313,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 118.20000000018626,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 117.5,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/HomePreview-Dv_sDgUk.js",
+          "initiatorType": "script",
+          "duration": 92.60000000009313,
+          "transferSize": 2165,
+          "encodedBodySize": 1865,
+          "decodedBodySize": 1865
+        },
+        {
+          "path": "/assets/api-C_byrN0_.js",
+          "initiatorType": "script",
+          "duration": 95.89999999990687,
+          "transferSize": 3414,
+          "encodedBodySize": 3114,
+          "decodedBodySize": 3114
+        },
+        {
+          "path": "/assets/book-open-text-BPaOlIjW.js",
+          "initiatorType": "script",
+          "duration": 98.8000000002794,
+          "transferSize": 729,
+          "encodedBodySize": 429,
+          "decodedBodySize": 429
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 3.6000000000931323,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 12.399999999906868,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 27.299999999813735,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 24.40000000037253,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 23.700000000186265,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 28.399999999906868,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 27.90000000037253,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 27.899999999906868,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 31.100000000093132,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 31.199999999720603,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 29.700000000186265,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 32.89999999990687,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/vistagram-content/index.json",
+          "initiatorType": "fetch",
+          "duration": 7.600000000093132,
+          "transferSize": 22115,
+          "encodedBodySize": 21815,
+          "decodedBodySize": 21815
+        }
+      ],
+      "resourceCount": 22,
+      "resourceTransferBytes": 845219,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 920,
+        "size": 14308,
+        "element": "H1"
+      },
+      "cls": 0.026102807145461173,
+      "layoutShifts": [
+        {
+          "value": 0.026102807145461173,
+          "startTime": 929.3000000002794,
+          "hadRecentInput": false,
+          "sources": [
+            {
+              "element": "NAV",
+              "label": "Adjacent topics",
+              "previous": {
+                "x": 16,
+                "y": 820,
+                "width": 358,
+                "height": 24,
+                "top": 820,
+                "right": 374,
+                "bottom": 844,
+                "left": 16
+              },
+              "current": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          ]
+        }
+      ],
+      "longTasks": [
+        {
+          "startTime": 331.20000000018626,
+          "duration": 57
+        },
+        {
+          "startTime": 392.70000000018626,
+          "duration": 126
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 30.5,
+          "domContentLoaded": 384.5,
+          "loadEventEnd": 388,
+          "transferSize": 175909
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 376
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 376
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 50.3000000002794,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 45,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 82.39999999990687,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 72.89999999990687,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/OptionalTopicNotes-BWJH1HoB.js",
+          "initiatorType": "script",
+          "duration": 47.10000000009313,
+          "transferSize": 5015,
+          "encodedBodySize": 4715,
+          "decodedBodySize": 4715
+        },
+        {
+          "path": "/assets/optionalNotes-C5pd-Zl0.js",
+          "initiatorType": "script",
+          "duration": 47.200000000186265,
+          "transferSize": 1688,
+          "encodedBodySize": 1388,
+          "decodedBodySize": 1388
+        },
+        {
+          "path": "/assets/optional-notes-index-Dx-wKDw7.js",
+          "initiatorType": "script",
+          "duration": 47,
+          "transferSize": 38372,
+          "encodedBodySize": 38072,
+          "decodedBodySize": 38072
+        },
+        {
+          "path": "/assets/Blocks-C0kb4Iuk.js",
+          "initiatorType": "script",
+          "duration": 47,
+          "transferSize": 2971,
+          "encodedBodySize": 2671,
+          "decodedBodySize": 2671
+        },
+        {
+          "path": "/assets/quote-Co-QTR8Q.js",
+          "initiatorType": "script",
+          "duration": 52.5,
+          "transferSize": 690,
+          "encodedBodySize": 390,
+          "decodedBodySize": 390
+        },
+        {
+          "path": "/assets/lightbulb-DRhd4nIr.js",
+          "initiatorType": "script",
+          "duration": 52.3000000002794,
+          "transferSize": 587,
+          "encodedBodySize": 287,
+          "decodedBodySize": 287
+        },
+        {
+          "path": "/assets/list-zNG3faum.js",
+          "initiatorType": "script",
+          "duration": 51.89999999990687,
+          "transferSize": 598,
+          "encodedBodySize": 298,
+          "decodedBodySize": 298
+        },
+        {
+          "path": "/assets/studyMaterialMeta-BoIIBLp8.js",
+          "initiatorType": "script",
+          "duration": 28,
+          "transferSize": 3633,
+          "encodedBodySize": 3333,
+          "decodedBodySize": 3333
+        },
+        {
+          "path": "/assets/islamic-references-index-DEIE6FHH.js",
+          "initiatorType": "script",
+          "duration": 28.100000000093132,
+          "transferSize": 17695,
+          "encodedBodySize": 17395,
+          "decodedBodySize": 17395
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 1.3999999999068677,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 12.899999999906868,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 44.39999999990687,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 44.799999999813735,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 44.5,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 44.40000000037253,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 50,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 50.10000000009313,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 50.09999999962747,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 53.5,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 54.200000000186265,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 52.89999999990687,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks.json",
+          "initiatorType": "fetch",
+          "duration": 7.399999999906868,
+          "transferSize": 18285,
+          "encodedBodySize": 17985,
+          "decodedBodySize": 17985
+        }
+      ],
+      "resourceCount": 28,
+      "resourceTransferBytes": 906330,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 860,
+        "size": 22239,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 243.39999999990687,
+          "duration": 70
+        },
+        {
+          "startTime": 315.6999999997206,
+          "duration": 120
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 12.899999999906868,
+          "domContentLoaded": 307.79999999981374,
+          "loadEventEnd": 312.5,
+          "transferSize": 151757
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 296
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 296
+        }
+      ],
+      "resources": [
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 60.5,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 66.10000000009313,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 65.1999999997206,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 74.29999999981374,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/assets/CssEligibilityCalculator-mltps8_D.js",
+          "initiatorType": "script",
+          "duration": 76.6999999997206,
+          "transferSize": 22379,
+          "encodedBodySize": 22079,
+          "decodedBodySize": 22079
+        },
+        {
+          "path": "/assets/shared-CSQ2WQwY.js",
+          "initiatorType": "script",
+          "duration": 76.10000000009313,
+          "transferSize": 3366,
+          "encodedBodySize": 3066,
+          "decodedBodySize": 3066
+        },
+        {
+          "path": "/assets/calendar-days-BOL9irMp.js",
+          "initiatorType": "script",
+          "duration": 75.89999999990687,
+          "transferSize": 790,
+          "encodedBodySize": 490,
+          "decodedBodySize": 490
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 75.70000000018626,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 2.7000000001862645,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 9.899999999906868,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 11.799999999813735,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 16.100000000093132,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 19.600000000093132,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 18.799999999813735,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 19.399999999906868,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 19.300000000279397,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 19.199999999720603,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 20,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 18.90000000037253,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 19,
+      "resourceTransferBytes": 843331,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [],
+      "pageErrors": []
+    },
+    {
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 1048,
+        "size": 58824,
+        "element": "SPAN"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 371.39999999990687,
+          "duration": 82
+        },
+        {
+          "startTime": 454.39999999990687,
+          "duration": 215
+        },
+        {
+          "startTime": 698.2999999998137,
+          "duration": 52
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 45,
+          "domContentLoaded": 450.10000000009313,
+          "loadEventEnd": 453.10000000009313,
+          "transferSize": 220519
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 840
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 840
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 75.60000000009313,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 76.10000000009313,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 72.29999999981374,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 87.39999999990687,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/HomePreview-Dv_sDgUk.js",
+          "initiatorType": "script",
+          "duration": 111.5,
+          "transferSize": 2165,
+          "encodedBodySize": 1865,
+          "decodedBodySize": 1865
+        },
+        {
+          "path": "/assets/api-C_byrN0_.js",
+          "initiatorType": "script",
+          "duration": 112.39999999990687,
+          "transferSize": 3414,
+          "encodedBodySize": 3114,
+          "decodedBodySize": 3114
+        },
+        {
+          "path": "/assets/book-open-text-BPaOlIjW.js",
+          "initiatorType": "script",
+          "duration": 113.39999999990687,
+          "transferSize": 729,
+          "encodedBodySize": 429,
+          "decodedBodySize": 429
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 2.5,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 5.600000000093132,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/vistagram-content/index.json",
+          "initiatorType": "fetch",
+          "duration": 7.100000000093132,
+          "transferSize": 22115,
+          "encodedBodySize": 21815,
+          "decodedBodySize": 21815
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 16.5,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 24.5,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 26.399999999906868,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 27.799999999813735,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 27.5,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 27.5,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 27.600000000093132,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 29.700000000186265,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 33.200000000186265,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 33.200000000186265,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        }
+      ],
+      "resourceCount": 22,
+      "resourceTransferBytes": 845219,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 1064,
+        "size": 69615,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 255.10000000009313,
+          "duration": 83
+        },
+        {
+          "startTime": 338.60000000009313,
+          "duration": 201
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 36.3000000002794,
+          "domContentLoaded": 333.60000000009313,
+          "loadEventEnd": 337.8000000002794,
+          "transferSize": 175909
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 596
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 596
+        }
+      ],
+      "resources": [
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 49.799999999813735,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 23.100000000093132,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 22,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 28.600000000093132,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/pagead/js/adsbygoogle.js",
+          "initiatorType": "script",
+          "duration": 0,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/assets/OptionalTopicNotes-BWJH1HoB.js",
+          "initiatorType": "script",
+          "duration": 49,
+          "transferSize": 5015,
+          "encodedBodySize": 4715,
+          "decodedBodySize": 4715
+        },
+        {
+          "path": "/assets/optionalNotes-C5pd-Zl0.js",
+          "initiatorType": "script",
+          "duration": 77.89999999990687,
+          "transferSize": 1688,
+          "encodedBodySize": 1388,
+          "decodedBodySize": 1388
+        },
+        {
+          "path": "/assets/optional-notes-index-Dx-wKDw7.js",
+          "initiatorType": "script",
+          "duration": 79,
+          "transferSize": 38372,
+          "encodedBodySize": 38072,
+          "decodedBodySize": 38072
+        },
+        {
+          "path": "/assets/Blocks-C0kb4Iuk.js",
+          "initiatorType": "script",
+          "duration": 78.10000000009313,
+          "transferSize": 2971,
+          "encodedBodySize": 2671,
+          "decodedBodySize": 2671
+        },
+        {
+          "path": "/assets/quote-Co-QTR8Q.js",
+          "initiatorType": "script",
+          "duration": 77.70000000018626,
+          "transferSize": 690,
+          "encodedBodySize": 390,
+          "decodedBodySize": 390
+        },
+        {
+          "path": "/assets/lightbulb-DRhd4nIr.js",
+          "initiatorType": "script",
+          "duration": 83.39999999990687,
+          "transferSize": 587,
+          "encodedBodySize": 287,
+          "decodedBodySize": 287
+        },
+        {
+          "path": "/assets/list-zNG3faum.js",
+          "initiatorType": "script",
+          "duration": 83.20000000018626,
+          "transferSize": 598,
+          "encodedBodySize": 298,
+          "decodedBodySize": 298
+        },
+        {
+          "path": "/assets/studyMaterialMeta-BoIIBLp8.js",
+          "initiatorType": "script",
+          "duration": 58.40000000037253,
+          "transferSize": 3633,
+          "encodedBodySize": 3333,
+          "decodedBodySize": 3333
+        },
+        {
+          "path": "/assets/islamic-references-index-DEIE6FHH.js",
+          "initiatorType": "script",
+          "duration": 63.40000000037253,
+          "transferSize": 17695,
+          "encodedBodySize": 17395,
+          "decodedBodySize": 17395
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 4.2000000001862645,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 3.3000000002793968,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 6.2999999998137355,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 29.799999999813735,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 31.899999999906868,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 36.5,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 37.39999999990687,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 37.60000000009313,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 37.89999999990687,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 38,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 38.39999999990687,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 41.10000000009313,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        },
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks.json",
+          "initiatorType": "fetch",
+          "duration": 5.400000000372529,
+          "transferSize": 18285,
+          "encodedBodySize": 17985,
+          "decodedBodySize": 17985
+        }
+      ],
+      "resourceCount": 28,
+      "resourceTransferBytes": 906330,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [
+        {
+          "url": "/pagead/js/adsbygoogle.js",
+          "error": "csp"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "lcp": {
+        "startTime": 932,
+        "size": 32508,
+        "element": "P"
+      },
+      "cls": 0,
+      "layoutShifts": [],
+      "longTasks": [
+        {
+          "startTime": 261.5,
+          "duration": 91
+        },
+        {
+          "startTime": 353.79999999981374,
+          "duration": 116
+        },
+        {
+          "startTime": 474.29999999981374,
+          "duration": 50
+        }
+      ],
+      "inp": null,
+      "inpReason": "No representative user interactions; no field data available.",
+      "navigation": [
+        {
+          "responseStart": 37.1999999997206,
+          "domContentLoaded": 345,
+          "loadEventEnd": 350.29999999981374,
+          "transferSize": 151757
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "startTime": 432
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 432
+        }
+      ],
+      "resources": [
+        {
+          "path": "/fonts/inter-latin-variable.woff2",
+          "initiatorType": "link",
+          "duration": 35.10000000009313,
+          "transferSize": 48556,
+          "encodedBodySize": 48256,
+          "decodedBodySize": 48256
+        },
+        {
+          "path": "/assets/index-fWrCnyGm.js",
+          "initiatorType": "script",
+          "duration": 41.89999999990687,
+          "transferSize": 480444,
+          "encodedBodySize": 480144,
+          "decodedBodySize": 480144
+        },
+        {
+          "path": "/assets/index-DTLhoaQl.css",
+          "initiatorType": "link",
+          "duration": 44.8000000002794,
+          "transferSize": 220320,
+          "encodedBodySize": 220020,
+          "decodedBodySize": 220020
+        },
+        {
+          "path": "/images/logo.webp",
+          "initiatorType": "link",
+          "duration": 46.5,
+          "transferSize": 10752,
+          "encodedBodySize": 10452,
+          "decodedBodySize": 10452
+        },
+        {
+          "path": "/assets/CssEligibilityCalculator-mltps8_D.js",
+          "initiatorType": "script",
+          "duration": 41.5,
+          "transferSize": 22379,
+          "encodedBodySize": 22079,
+          "decodedBodySize": 22079
+        },
+        {
+          "path": "/assets/shared-CSQ2WQwY.js",
+          "initiatorType": "script",
+          "duration": 42.5,
+          "transferSize": 3366,
+          "encodedBodySize": 3066,
+          "decodedBodySize": 3066
+        },
+        {
+          "path": "/assets/calendar-days-BOL9irMp.js",
+          "initiatorType": "script",
+          "duration": 43.90000000037253,
+          "transferSize": 790,
+          "encodedBodySize": 490,
+          "decodedBodySize": 490
+        },
+        {
+          "path": "/assets/clock-3-Csk_70zt.js",
+          "initiatorType": "script",
+          "duration": 44,
+          "transferSize": 470,
+          "encodedBodySize": 170,
+          "decodedBodySize": 170
+        },
+        {
+          "path": "/favicon.ico",
+          "initiatorType": "other",
+          "duration": 10.100000000093132,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        },
+        {
+          "path": "/favicon.png",
+          "initiatorType": "other",
+          "duration": 7.199999999720603,
+          "transferSize": 10661,
+          "encodedBodySize": 10361,
+          "decodedBodySize": 10361
+        },
+        {
+          "path": "/assets/StudyActivityTracker-BWTIMbhq.js",
+          "initiatorType": "script",
+          "duration": 10.200000000186265,
+          "transferSize": 2544,
+          "encodedBodySize": 2244,
+          "decodedBodySize": 2244
+        },
+        {
+          "path": "/assets/VistaShortcut-BWTJQLjX.js",
+          "initiatorType": "script",
+          "duration": 19.899999999906868,
+          "transferSize": 23696,
+          "encodedBodySize": 23396,
+          "decodedBodySize": 23396
+        },
+        {
+          "path": "/assets/myTasks-1VxJHnn7.js",
+          "initiatorType": "script",
+          "duration": 19.899999999906868,
+          "transferSize": 6399,
+          "encodedBodySize": 6099,
+          "decodedBodySize": 6099
+        },
+        {
+          "path": "/assets/square-check-kaSsMKDn.js",
+          "initiatorType": "script",
+          "duration": 19.600000000093132,
+          "transferSize": 496,
+          "encodedBodySize": 196,
+          "decodedBodySize": 196
+        },
+        {
+          "path": "/assets/settings-2-CvE_zPKB.js",
+          "initiatorType": "script",
+          "duration": 19.5,
+          "transferSize": 553,
+          "encodedBodySize": 253,
+          "decodedBodySize": 253
+        },
+        {
+          "path": "/assets/plus-DO-LOODx.js",
+          "initiatorType": "script",
+          "duration": 22,
+          "transferSize": 454,
+          "encodedBodySize": 154,
+          "decodedBodySize": 154
+        },
+        {
+          "path": "/assets/trash-2-CmrqivXc.js",
+          "initiatorType": "script",
+          "duration": 20.899999999906868,
+          "transferSize": 629,
+          "encodedBodySize": 329,
+          "decodedBodySize": 329
+        },
+        {
+          "path": "/assets/rotate-ccw-uiMkSe7R.js",
+          "initiatorType": "script",
+          "duration": 24.700000000186265,
+          "transferSize": 501,
+          "encodedBodySize": 201,
+          "decodedBodySize": 201
+        },
+        {
+          "path": "/assets/admin-oeojMHqU.js",
+          "initiatorType": "script",
+          "duration": 22.800000000279397,
+          "transferSize": 10321,
+          "encodedBodySize": 10021,
+          "decodedBodySize": 10021
+        }
+      ],
+      "resourceCount": 19,
+      "resourceTransferBytes": 843331,
+      "overflow": false,
+      "blockedRequests": [],
+      "requestFailures": [],
+      "pageErrors": []
+    }
+  ],
+  "lighthouse": {
+    "output": "/workspace/CSS-VISTA/test-artifacts/lighthouse-local-mobile.json",
+    "stderr": "",
+    "localMobile": true,
+    "version": "13.5.0",
+    "successfulExternalRequests": 0,
+    "apiNetworkRequests": 0
+  }
+}

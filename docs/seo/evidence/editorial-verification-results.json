@@ -1,0 +1,86 @@
+{
+  "verifiedAt": "2026-10-15T15:45:55.916815+00:00",
+  "scope": "Complete local working-tree candidate. Production, Google indexing and AdSense status are unchanged/unavailable.",
+  "baselineCommit": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:all",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:hostinger",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run audit:browser:seo",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/seo/overlay-artifact.mjs dist",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "prepared source manifest / local Markdown links / implementation-file coverage",
+      "exitCode": 0,
+      "sourceFilesVerified": 93,
+      "brokenLocalLinks": 0,
+      "changedFilesDocumented": 194
+    }
+  ],
+  "tests": {
+    "nodeTests": 242,
+    "pythonEditorialTests": 5,
+    "passed": 247,
+    "failed": 0,
+    "nodeSkipped": 0,
+    "browserRoutes": 16,
+    "editorialNewTests": 23,
+    "adFixture": "Stub Google loader only; no real impressions or account access."
+  },
+  "artifact": {
+    "sitemapUrls": 1019,
+    "applicationHtml": 1527,
+    "allHtml": 1528,
+    "firstPartyLinks": 60961,
+    "journalTextReaders": 6,
+    "separateJournalClarifications": 2
+  },
+  "content": {
+    "bookInventory": 100,
+    "quotationsWithOriginalBookEvidence": 27,
+    "explicitGrahamTranslation": 1,
+    "unverifiedBookQuotations": 61,
+    "booksWithoutQuotationLabel": 11,
+    "mcqExplanationsAdded": 56,
+    "answerCorrections": 1,
+    "optionalTopicsUpdated": 2,
+    "sourceDocumentDeletions": 0
+  },
+  "limits": [
+    "No production release or Google-side submission authorized/performed.",
+    "Rights records, unresolved content sources and Google account reports remain dependencies.",
+    "GSC readiness retry remains payment_required; no AdSense connector/browser handoff.",
+    "The deployment-fingerprint gitSha names the checked-out baseline; it does not identify uncommitted source content. Use the prepared source manifest for this candidate."
+  ],
+  "remoteMainSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8"
+}

@@ -33,6 +33,7 @@ import sys
 import zipfile
 from pathlib import Path
 from xml.etree import ElementTree as ET
+from editorial.optional_note_reviews import apply_review, load_reviews
 
 W = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
 R = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}'
@@ -42,6 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / 'data-archive/optional-notes'
 OUT_DIR = ROOT / 'public/study-material/optional'
 INDEX_OUT = ROOT / 'src/data/bundled/optional-notes-index.json'
+REVIEWS = ROOT / 'scripts/editorial/optional-note-reviews.json'
 
 # Headings that introduce a subject rather than a topic of it.
 FRONT_MATTER = re.compile(
@@ -392,6 +394,8 @@ def words_in(blocks):
 
 def main():
     check = '--check' in sys.argv
+    reviews = load_reviews(REVIEWS)
+    applied_reviews = set()
     taxonomy = canonical_subjects()
     by_name = {}
     for group in taxonomy:
@@ -423,6 +427,10 @@ def main():
 
             subject_slug = slugify(subject_name)
             for topic in topics:
+                key = f'{subject_slug}/{topic["slug"]}'
+                if key in reviews:
+                    topic['blocks'] = apply_review(topic['blocks'], reviews[key])
+                    applied_reviews.add(key)
                 count = words_in(topic['blocks'])
                 if count < 25:
                     raise SystemExit(
@@ -449,6 +457,9 @@ def main():
             })
             totals['subjects'] += 1
             totals['topics'] += len(topics)
+
+    if applied_reviews != set(reviews):
+        raise SystemExit(f'Editorial reviews target missing topics: {sorted(set(reviews) - applied_reviews)}')
 
     index = {
         'groups': [

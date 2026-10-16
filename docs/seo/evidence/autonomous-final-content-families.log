@@ -1,0 +1,24 @@
+✔ all seven CSS Islamic Studies chapters are published (1.517969ms)
+✔ every chapter and topic carries both an English and an Urdu title (1.931983ms)
+✔ topic reference counts add up to the chapter total, with no gaps (115.054572ms)
+✔ the English and Urdu columns are never swapped (467.381741ms)
+✔ Arabic source passages are kept out of the two language columns (105.941101ms)
+✔ every entry carries real content (37.986396ms)
+✔ verification links are preserved as real URLs (1.674991ms)
+✔ the reference bank is public, indexable and ad-eligible (0.779815ms)
+✔ every published topic has a data file the browser can fetch (1.091907ms)
+✔ notes are published for subjects across all seven FPSC groups (1.241289ms)
+✔ every subject is a real FPSC optional subject in its declared group (0.262118ms)
+✔ subject and topic slugs are unique (0.434704ms)
+✔ every topic carries real content, and none swallowed its whole subject (64.348252ms)
+✔ block kinds are all ones the renderer knows (31.272149ms)
+✔ the notes are public, indexable and ad-eligible (0.89063ms)
+✔ every published topic has a data file the browser can fetch (1.996829ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1335.10484

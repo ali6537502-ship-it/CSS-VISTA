@@ -1,0 +1,5 @@
+
+> css-vista@1.0.0 audit:hostinger
+> node scripts/audit-hostinger-build.mjs
+
+Hostinger SEO artifact audit passed: core=588 (100 books, 79 Islamic reference pages, 372 of 373 optional-notes pages), gk=42, collections=24, papers=365; reinforced CSS Vista homepage signals and canonical routing verified.

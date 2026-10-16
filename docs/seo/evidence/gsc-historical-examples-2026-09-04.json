@@ -1,0 +1,2449 @@
+{
+  "sourceTitle": "css-vista.com-Coverage-Drilldown-2026-09-04",
+  "exportDateAsNamed": "2026-09-04",
+  "chartObservationDate": "2026-08-28",
+  "issue": "Discovered – currently not indexed",
+  "scope": "Historical issue-specific examples only; current status unavailable. No Google account changes.",
+  "examples": [
+    {
+      "url": "https://www.css-vista.com/consultation",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/current-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/exam-intelligence",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/five-minute",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/fpsc-syllabus",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/mpt",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2016",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2017",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2018",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2024",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/css/2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/mpt/2022",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/mpt/2023",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/mpt/2024",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/pms/2019",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/pms/2023",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2021",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2022",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2023",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/ppsc/2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-british-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2016-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-anthropology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-comparative-study-of-major-religions",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-mercantile-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2017-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-anthropology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2018-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-mercantile-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2019-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-balochi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-british-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-constitutional-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-criminology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-current-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-geography",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-pakistan-india",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-mercantile-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-pakistan-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-persian",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-urdu-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2021-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-balochi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-british-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-criminology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-mercantile-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-urdu-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2022-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-pakistan-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2023-urdu-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-balochi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-constitutional-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-criminology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-current-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-governance-public-policies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-pakistan-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-pashto",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2024-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-agriculture-forestry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-british-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-comparative-study-of-major-religions",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-constitutional-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-criminology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-current-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-geography",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-history-of-usa",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-mercantile-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-persian",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2025-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-agriculture-forestry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-anthropology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-applied-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-balochi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-current-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-environmental-sciences",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-european-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-gender-studies",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-general-science-ability",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-geography",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-international-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-international-relations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-islamic-history-culture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-muslim-law-jurisprudence",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-pakistan-affairs",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-pashto",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-precis-composition",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-pure-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-sindhi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/css-2026-urdu-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/mpt-2022",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/mpt-2023-special",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/mpt-2024",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/mpt-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-commerce",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-social-work",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-urdu-essay-precis",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2019-veterinary-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-agriculture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-commerce",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-english-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-mass-communication",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-persian",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-principles-of-engineering",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-social-work",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-urdu",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-urdu-essay-precis",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-veterinary-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2020-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-agriculture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-english-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-mass-communication",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-persian",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-principles-of-engineering",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-social-work",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-urdu",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-urdu-essay-precis",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-veterinary-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2022-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-arabic",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-botany",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-chemistry",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-computer-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-economics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-english-essay",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-english-literature",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-geography",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-geology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-history",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-law",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-mathematics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-persian",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-philosophy",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-physics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-political-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-principles-of-engineering",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-psychology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-punjabi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-social-work",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-sociology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-statistics",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-urdu",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-urdu-essay-precis",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-veterinary-science",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/pms-2023-zoology",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-01-lecturer-urdu-female-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-02-lecturer-urdu-male-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-03-junior-clerk-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-04-store-officer-punjab-agriculture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-06-assistant-set-1-planning-and-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-07-office-assistant-planning-and-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-09-head-clerk-assistant-planning-and-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-10-assistant-director-administration-planning-and-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-13-lecturer-history-set-1-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-14-lecturer-history-set-2-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-15-assistant-set-2-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-16-tehsildar-consolidation-officer-general-knowledge-set-1-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-17-tehsildar-consolidation-officer-english-set-2-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-18-tehsildar-consolidation-officer-general-knowledge-set-2-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-19-assistant-sub-inspector-service-quota-punjab-police",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-21-assistant-livestock-and-dairy-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2021-22-probation-officer-home",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-01-parole-probation-officer-home",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-02-assistant-director-processing-punjab-agriculture",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-03-assistant-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-04-provincial-management-service-provincial-management-service-pms",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-05-lecturer-urdu-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-06-lecturer-islamiat-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-07-lecturer-political-science-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-08-lecturer-history-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-09-lecturer-pakistan-studies-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-10-assistant-industries-commerce-investment-and-skills-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-11-assistant-center-for-professional-development-of-public-prosecutors",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-12-assistant-punjab-public-service-commission-ppsc",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-13-assistant-services-and-general-administration",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-14-assistant-punjab-employees-social-security-institution-pessi",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-15-manager-auqaf-auqaf",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-16-assistant-head-clerk-livestock-and-dairy-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-17-assistant-director-civil-defence-in-the-punjab-home-department",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-18-naib-tehsildar-english-set-1-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-19-naib-tehsildar-general-knowledge-set-1-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-20-naib-tehsildar-english-set-2-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-21-naib-tehsildar-general-knowledge-set-2-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2022-22-junior-clerk-punjab-police",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-01-assistant-director-labour-welfare-labour-and-human-resource",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-02-code-53-assistant-miscellaneous",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-03-assistant-director-intelligence-punjab-police",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-04-code-41-assistant-industries-commerce-investment-and-skills-development",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-05-junior-clerk-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-06-district-trainer-literacy-and-non-formal-basic-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-08-assistant-food-controller-punjab-food-authority",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-09-food-grain-supervisor-punjab-food-authority",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-10-food-grains-inspector-punjab-food-authority",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-11-assistant-director-accounts-budget-and-accounts-officer-accounts-officer-audit-officer-finance-audit-and-accounts",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-12-assistant-director-revenue-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-13-food-grain-supervisor-evening-punjab-food-authority",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-14-combined-competitive-examination-services-and-general-administration",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-15-junior-clerk-punjab-public-service-commission-ppsc",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-16-junior-computer-operator-punjab-public-service-commission-ppsc",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-17-junior-clerk-land-record-authority",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-19-junior-clerk-board-of-revenue",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-20-club-69-assistant-auqaf",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2023-21-code-72-deputy-secretary-controller-of-examinations-assistant-secretary-assistant-controller-of-examinations-boards-of-intermediate-and-secondary-education",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-01-01-08-06-2024-assistant-director-communication-and-works-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-02-02-08-06-2024-clubbed-case-76-evening",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-03-03-08-06-2024-clubbed-case-85-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-04-04-09-06-2024-instructor-lecturer-male-english-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-05-05-09-06-2024-medical-officer-bs-17-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-06-06-25-06-2024-accounts-officer-bs-17",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-07-07-13-07-2024-assistant-director-farms-procurement",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-08-08-13-07-2024-clubbed-case-75-evening",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-09-09-13-07-2024-clubbed-case-97-evening",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-10-10-13-07-2024-inspector-tourist-services-bs-16",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-12-12-13-07-2024-planning-officer-assistant-director-planning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-13-13-14-07-2024-assistant-director-accounts-fda-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-14-14-14-07-2024-computer-instructor-bs-17-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-17-17-10-08-2024-biomedical-engineer-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-18-18-10-08-2024-clubbed-case-91-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-19-19-10-08-2024-inspector-cooperative",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-20-20-10-08-2024-lecturer-urdu-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-22-22-11-08-2024-chief-officer-municipal-officer-regulations",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-23-23-11-08-2024-corporal-counter-terrorism-department",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-25-25-25-08-2024-clubbed-posts-labour-inspector-officer-assistant",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-27-27-08-09-2024-excise-inspector-evening",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-28-28-08-09-2024-excise-inspector-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-29-29-28-09-2024-assistant-director-labour-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-31-31-29-09-2024-clubbed-case-id-49-junior-computer-operator-bps-12",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-33-33-13-10-2024-account-and-audit-officer-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-34-34-23-11-2024-assistant-controller-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-35-35-23-11-2024-assistant-director-lda-evening",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-39-39-24-11-2024-assistant-sandgad-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-41-41-30-11-2024-junior-computer-operator-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-42-42-30-11-2024-sub-engineer-civil-bs-14-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-43-43-30-11-2024-sub-engineer-mechanical-bs-14-gk-portion",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-45-45-01-12-2024-assistant-sandgad-morning",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2024-46-46-15-12-2024-pms-general-knowledge",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-01-01-assistant-director-wildlife-bs-17-23-02-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-02-02-accountant-auditor-24-02-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-03-03-statistical-officer-bs-17-24-02-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-04-04-junior-traffic-warden-bs-11-09-03-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-05-05-assistant-sub-inspector-punjab-highway-patrol-09-03-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-06-06-enforcement-officer-pera-16-03-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-07-07-computer-operator-bs-15-clubbed-cases-3j2025-51j2024-12-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-10-10-pms-ministerial-service-quota-13-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-11-11-asi-service-quota-13-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-12-12-social-welfare-paper-20-gk-portion-26-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-13-13-assistant-director-district-development-officer-assistant-secretary-economist-manager-26-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-14-14-assistant-director-lda-27-04-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-16-16-internal-audit-specialist-bs-16-31-05-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-18-18-junior-clerk-bs-11-board-of-revenue-01-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-19-19-assistant-director-fisheries-bs-17-01-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-20-20-junior-clerk-bs-11-clubbed-case-id-125-01-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-21-21-planning-officer-bs-17-advertisement-15-case-7d2025-22-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-22-22-planning-officer-bs-17-20-gk-portion-28-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-24-24-zilladar-evening-29-06-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-25-25-assistant-director-bs-17-hud-and-phed-12-07-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-26-26-assistant-director-tepa-bs-17-13-07-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-27-27-assistant-pessi-13-07-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-28-28-assistant-director-statistics-bs-17-morning-21-09-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-29-29-assistant-director-statistics-bs-17-evening-20-gk-21-09-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-30-30-junior-clerk-bs-11-ppsc-case-28c2025-27-09-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-31-31-assistant-registrar-cooperative-societies-gk-28-09-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-32-32-sub-inspector-bs-14-19-10-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-33-33-assistant-pessi-19-10-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-35-35-assistant-clubbed-case-id-163-16-11-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-36-36-assistant-board-of-revenue-07-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-37-37-technical-inspector-bs-12-07-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-38-38-assistant-deputy-superintendent-jail-gk-13-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-39-39-junior-clerk-punjab-police-morning-14-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-40-40-junior-clerk-punjab-police-evening-14-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-41-41-junior-clerk-board-of-revenue-20-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-42-42-junior-clerk-bs-11-clubbed-case-id-169-20-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2025-43-43-sub-divisional-enforcement-officer-pera-gk-21-12-2025",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-01-01-assistant-clubbed-24-01-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-01-01-pms-gk-phase-i-25-01-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-02-02-ese-urdu-24-01-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-03-03-ese-pti-01-02-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-04-04-superintendent-01-02-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-05-05-computer-system-operator-14-02-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-06-06-ese-general-15-02-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-07-07-pera-enforcement-investigation-officer-15-03-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-08-08-assistant-bor-05-04-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-09-09-sergeant-pera-19-04-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-10-10-senior-inspector-assistant-director-19-04-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-11-11-audit-officer-06-06-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/past-papers/view/ppsc-2026-12-12-enforcement-officer-07-06-2026",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/study-tools",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    },
+    {
+      "url": "https://www.css-vista.com/subjects/optional",
+      "lastCrawledRaw": "1970-01-01",
+      "lastCrawledVerified": null
+    }
+  ]
+}

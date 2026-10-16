@@ -1,0 +1,21 @@
+> npm run audit:mpt-release
+> css-vista@1.0.0 audit:mpt-release
+> node scripts/mpt/audit-release.mjs
+  "warnings": [
+Hostinger preflight passed: Node runtime, canonical origin, and public build-time environment are safe for deployment.
+MCQ editorial review passed: 56 individually reviewed questions; 1 documented answer-key correction(s).
+Split past-paper analysis: 52 subjects, 1790.5 KB source -> 1767.4 KB across per-subject files. Largest: accounting-auditing at 117.1 KB. A visitor now loads the index plus one subject instead of 1790.5 KB.
+Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/optional-notes-index.json" with "type": "json" attributes, but it was already imported elsewhere with no attributes. Please ensure that import attributes for the same module are always consistent.
+Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/islamic-references-index.json" with "type": "json" attributes, but it was already imported elsewhere with no attributes. Please ensure that import attributes for the same module are always consistent.
+(!) /workspace/CSS-VISTA/src/features/factbook/media.ts is dynamically imported by /workspace/CSS-VISTA/src/features/factbook/service.ts but also statically imported by /workspace/CSS-VISTA/src/pages/Factbook.tsx, dynamic import will not move module into another chunk.
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+MPT official series 37e077d8e04f860f (editorial release 8): exported 37 audited paper(s).
+  "identicalToAudited": true
+CONTENT NOTICE: /contact renders 148 words of unique primary content. Verify it still answers its own title.
+CONTENT NOTICE: /study-material/optional/pure-mathematics (39 words) is served but left out of search - too little page-specific content.
+Hostinger SEO artifact audit passed: core=588 (100 books, 79 Islamic reference pages, 372 of 373 optional-notes pages), gk=42, collections=24, papers=365; reinforced CSS Vista homepage signals and canonical routing verified.
+Search-readiness audit passed: 1527 application pages; unique metadata, valid JSON-LD dates, 5 parsed sitemap files and 1019 unique sitemap URLs. Editorial quality and Google indexing require separate review.
+Route integrity verified: 103 registry routes, 4 redirect(s), 6 nonexistent URLs return a genuine 404, and all 1019 sitemap URLs resolve, are indexable and are self-canonical.
+Internal link audit passed: 60961 first-party links across 1528 generated pages all resolve.
+Duplicate/thin content audit passed: 1019 indexable pages, median 485 words of primary content, no pair above 80% similarity.
