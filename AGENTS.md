@@ -15,3 +15,7 @@ The owner's later explicit instructions take precedence over this dated hold. Do
 ## Current content priority — 12 October 2026
 
 The owner subsequently asked to complete the other Pro work before returning to the large CA/PA collection. Defer further full-library PDF reading and topic conversion. Preserve retained originals, checksums, private drafts and reviewed partial modules; Word documents may be provided later. Continue core writing, reasoning, guided learning, integration and quality assurance under the same release hold. Do not count unfinished source drafts as completed or published lessons.
+
+## Pakistan Affairs resumed — 16 October 2026
+
+The owner explicitly instructed: **“Go for Pak affairs.”** Resume preparation of bounded Pakistan Affairs modules from the retained private source collection, including source reconciliation, factual review, interactive lessons/exercises and isolated native verification. This supersedes the earlier content deferral for Pakistan Affairs. It does not reopen the entire Current Affairs collection or authorize production publication. Keep private source bodies, answer keys and lesson packages outside Git/public assets; retain original checksums, earlier editions and the active release hold.
