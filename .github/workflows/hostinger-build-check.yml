@@ -69,6 +69,12 @@ jobs:
           browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
           CSSV_BROWSER_EXECUTABLE="$browser_path" npm run audit:browser:seo
 
+      - name: Verify answer-writing timer recovery and controls in Chromium
+        shell: bash
+        run: |
+          browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
+          CSSV_BROWSER_EXECUTABLE="$browser_path" node tests/browser/answer-timer.mjs
+
       - name: Verify generated Hostinger artifact
         run: npm run audit:hostinger
 

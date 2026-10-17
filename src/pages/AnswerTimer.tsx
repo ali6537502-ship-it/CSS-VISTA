@@ -8,28 +8,14 @@ import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
-
-const PAPER_QUESTION_SECONDS = 45 * 60
-const SINGLE_RESUME_KEY = 'cssvista:single-answer-timer'
-
-interface SingleTimerSnapshot {
-  minutes: number
-  question: string
-  remaining: number
-  running: boolean
-  savedAt: number
-}
+import { PAPER_QUESTION_SECONDS, PAPER_TOTAL_SECONDS, SINGLE_RESUME_KEY, PAPER_RESUME_KEY,
+  parseSingleSnapshot, parsePaperSnapshot, restoredSingleSeconds, restoredPaperClocks,
+  type SingleTimerSnapshot, type PaperSnapshot } from '@/lib/answerTimerRecovery'
 
 function readSingleSnapshot(): SingleTimerSnapshot | null {
   try {
     const raw = localStorage.getItem(SINGLE_RESUME_KEY)
-    if (!raw) return null
-    const saved = JSON.parse(raw) as SingleTimerSnapshot
-    if (!Number.isInteger(saved.minutes) || saved.minutes < 1 || saved.minutes > 180
-      || typeof saved.question !== 'string' || saved.question.length > 10000
-      || !Number.isFinite(saved.remaining) || Math.abs(saved.remaining) > 604800
-      || typeof saved.running !== 'boolean' || !Number.isFinite(saved.savedAt)) return null
-    return saved
+    return raw ? parseSingleSnapshot(JSON.parse(raw)) : null
   } catch {
     return null
   }
@@ -118,7 +104,8 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
   const saved = useMemo(() => readSingleSnapshot(), [])
   const [question, setQuestion] = useState(saved?.question ?? '')
   const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
-  const timer = useAccurateCountdown(customMin * 60, undefined, true)
+  const initialRemaining = useMemo(() => saved ? restoredSingleSeconds(saved) : null, [saved])
+  const timer = useAccurateCountdown(initialRemaining ?? customMin * 60, undefined, true)
   const { remaining: left, running, getRemaining, start, pause } = timer
   const banner = useTimerFeedback(left, running, customMin * 60, alertMode, notificationsEnabled)
   useTimerWakeLock(keepAwake && running)
@@ -131,15 +118,13 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
   )
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
   const skipFirstSave = useRef(Boolean(saved))
+  const hasHydratedRef = useRef(!saved)
 
   // A reopened page reconstructs elapsed time from the last saved wall-clock anchor.
   useEffect(() => {
     if (!saved) return
-    const resumed = saved.running
-      ? saved.remaining - Math.max(0, Math.floor((Date.now() - saved.savedAt) / 1000))
-      : saved.remaining
-    if (saved.running) timer.startFrom(resumed)
-    else timer.reset(resumed)
+    if (saved.running) timer.startFrom(initialRemaining!)
+    else timer.reset(initialRemaining!)
     // Intentionally restore only on first mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -156,13 +141,18 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
 
   useEffect(() => {
     if (skipFirstSave.current) { skipFirstSave.current = false; return }
+    hasHydratedRef.current = true
     persist()
   }, [persist, left])
 
+  // Event listeners never write stale render snapshots during an effect cleanup.
+  const latestPersistRef = useRef(persist)
+  useEffect(() => { latestPersistRef.current = persist }, [persist])
   useEffect(() => {
-    window.addEventListener('pagehide', persist)
-    return () => { window.removeEventListener('pagehide', persist); persist() }
-  }, [persist])
+    const flush = () => { if (hasHydratedRef.current) latestPersistRef.current() }
+    window.addEventListener('pagehide', flush)
+    return () => { window.removeEventListener('pagehide', flush); flush() }
+  }, [])
 
   function reset(newMin = customMin) {
     timer.reset(newMin * 60)
@@ -333,25 +323,10 @@ function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
   )
 }
 
-interface PaperSnapshot {
-  questions: string[]
-  current: number
-  paused: boolean
-  times: (number | null)[]
-  questionElapsedBase: number
-  totalLeftBase: number
-  runningStartedAt: number | null
-}
-
-const PAPER_RESUME_KEY = 'cssvista:paper-attempt'
-
 function readPaperSnapshot(): PaperSnapshot | null {
   try {
     const raw = localStorage.getItem(PAPER_RESUME_KEY)
-    if (!raw) return null
-    const parsed = JSON.parse(raw) as PaperSnapshot
-    if (!Array.isArray(parsed.questions) || !Array.isArray(parsed.times)) return null
-    return parsed
+    return raw ? parsePaperSnapshot(JSON.parse(raw)) : null
   } catch {
     return null
   }
@@ -362,13 +337,13 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(0)
   const [qLeft, setQLeft] = useState(PAPER_QUESTION_SECONDS)
-  const [totalLeft, setTotalLeft] = useState(3 * 3600)
+  const [totalLeft, setTotalLeft] = useState(PAPER_TOTAL_SECONDS)
   const [paused, setPaused] = useState(false)
   const [times, setTimes] = useState<(number | null)[]>([null, null, null, null])
   const [resumable, setResumable] = useState<PaperSnapshot | null>(null)
   const runningStartedAtRef = useRef<number | null>(null)
   const questionElapsedBaseRef = useRef(0)
-  const totalLeftBaseRef = useRef(3 * 3600)
+  const totalLeftBaseRef = useRef(PAPER_TOTAL_SECONDS)
   const completedRef = useRef(false)
   const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
   useTimerWakeLock(keepAwake && phase === 'running' && !paused)
@@ -428,6 +403,9 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     questionElapsedBaseRef.current = snapshot.questionElapsedBase
     totalLeftBaseRef.current = snapshot.totalLeftBase
     runningStartedAtRef.current = snapshot.runningStartedAt
+    const restored = restoredPaperClocks(snapshot)
+    setQLeft(restored.questionLeft)
+    setTotalLeft(restored.paperLeft)
     setPhase('running')
     setResumable(null)
   }
@@ -474,9 +452,9 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     setCurrent(0)
     setTimes([null, null, null, null])
     setQLeft(PAPER_QUESTION_SECONDS)
-    setTotalLeft(3 * 3600)
+    setTotalLeft(PAPER_TOTAL_SECONDS)
     questionElapsedBaseRef.current = 0
-    totalLeftBaseRef.current = 3 * 3600
+    totalLeftBaseRef.current = PAPER_TOTAL_SECONDS
     runningStartedAtRef.current = Date.now()
     setPaused(false)
     recordActivity({ type: 'timer', label: 'Four-question paper attempt started', path: '/answer-timer' })
