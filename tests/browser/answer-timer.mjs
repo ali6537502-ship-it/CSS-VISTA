@@ -31,10 +31,13 @@ try {
     || await page.getByText('Not supported in this browser').count() > 0
     || await page.getByText('Blocked in browser settings').count() > 0, true)
 
+  // Seed from a non-timer route; otherwise a pagehide handler on the old timer
+  // correctly persists its current clock over this simulated saved session.
+  await page.goto(origin + '/')
   await page.evaluate(() => localStorage.setItem('cssvista:single-answer-timer', JSON.stringify({
     minutes: 35, question: 'A paused restored question', remaining: -50, running: false, savedAt: 1_000_000,
   })))
-  await page.reload()
+  await page.goto(origin + '/answer-timer')
   await page.getByRole('timer', { name: 'Elapsed overtime' }).waitFor()
   assert.equal(await page.getByRole('timer', { name: 'Elapsed overtime' }).textContent(), '-00:50')
   await page.getByRole('button', { name: /Resume/ }).last().click()
