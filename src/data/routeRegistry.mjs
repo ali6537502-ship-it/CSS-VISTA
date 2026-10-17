@@ -77,9 +77,9 @@ function defineRoute({
 }
 
 /**
- * A public page. `contentQuality` decides indexability, so a public route that
- * is only a chooser or an interactive tool stays out of search while remaining
- * completely usable.
+ * A public page. The content class provides a conservative default, while an
+ * individually reviewed useful interactive resource can explicitly opt into
+ * indexing. Advertising remains an independent decision.
  */
 const publicPage = (path, title, description, h1, options = {}) =>
   defineRoute({ path, title, description, h1, access: 'public', contentQuality: 'substantial', adMode: 'enabled', ...options })
@@ -152,7 +152,9 @@ export const ROUTE_REGISTRY = [
   publicPage('/gk', 'General Knowledge and PMS Preparation', 'Explore general-knowledge subject banks, reference material and PMS mock information.', 'General knowledge preparation', { contentQuality: 'utility', adMode: 'disabled' }),
   publicPage('/one-liner-gk', 'One-Liner GK', 'Browse searchable general-knowledge fact cards organised by subject and topic for quick revision.', 'one-liner GK questions', { contentQuality: 'utility', adMode: 'disabled' }),
   publicPage('/language-grammar', 'Urdu and English Grammar Resources', 'Browse Urdu and English grammar reference material for competitive examinations.', 'Urdu and English grammar resources', { contentQuality: 'utility', adMode: 'disabled' }),
-  publicPage('/grammar-course', '30-Day Grammar Course', 'Follow a beginner-first, practice-heavy 30-day grammar course with clear explanations, worked examples and daily drills.', '30-day grammar course', { contentQuality: 'interactive', adMode: 'disabled', minimumHeight: 0 }),
+  // Public guest lessons and worked practice are useful main content. The
+  // production prerender renders the same course; saved progress stays private.
+  publicPage('/grammar-course', '30-Day Grammar Course', 'Follow a beginner-first, practice-heavy 30-day grammar course with clear explanations, worked examples and daily drills.', '30-day grammar course', { contentQuality: 'interactive', indexable: true, adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/book-summaries', '100 Book Summaries for CSS Aspirants', 'Browse searchable book summaries and reading guidance for CSS and competitive-examination preparation.', 'Book summaries for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/book-summaries/:slug', 'Book Summary for CSS Aspirants', 'Read a complete exam-focused book summary with key ideas, lessons and quotations for CSS preparation.', 'Book summary for CSS aspirants', { contentQuality: 'substantial', adMode: 'enabled', match: 'pattern', schemaType: 'Article' }),
   protectedPage('/lectures', 'Free CSS Lectures', 'The CSS Vista lecture library is still in preparation and is not yet an indexable content resource.'),
@@ -171,10 +173,10 @@ export const ROUTE_REGISTRY = [
   publicPage('/books', 'CSS Books by Sir Ali Hassan Sargana', 'Explore CSS preparation books and publication information by Sir Ali Hassan Sargana.', 'CSS preparation books', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   publicPage('/journal', 'VISTA Journal - Articles, Analysis and Perspectives', 'Read selected original writing, informed analysis and serious perspectives on Pakistan and the wider world.', 'VISTA Journal', { contentQuality: 'substantial', adMode: 'enabled' }),
   publicPage('/daily-briefing', 'CSS Vista Current Affairs', 'Read the daily CSS Vista Current Affairs brief with explanations, sourced facts, statistics, archives and personal bookmarks.', 'Understand the day. Remember what matters.', { contentQuality: 'utility', adMode: 'disabled', minimumHeight: 0 }),
-  protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
-  protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
-  protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
-  protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/dashboard', 'My CSS Vista', 'Your simple personal preparation home for tasks, Daily English, Current Affairs and progress.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/tasks', 'My Tasks', 'View, complete, import and manage your personal study schedule.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/progress', 'My Progress', 'View syllabus, MCQ, mock, revision and study progress.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/english', 'Daily English', 'Complete your daily vocabulary, idioms and pairs of words.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/resources', 'My Vista Resources', 'Free book downloads for students with a 100% complete profile.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/expression', 'English Expression Lab', 'Your private sentence and paragraph writing, feedback and revisions.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
   protectedPage('/account/precis', 'Précis Mastery Lab', 'Your private handbook-based Précis course, sourced drafts and revision history.', { adMode: 'disabled', robots: 'noindex, nofollow' }),
@@ -188,7 +190,7 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/analytical-skills', 'Analytical Skills Builder', 'Private guided mechanisms, alternatives, evidence and conclusions.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/essay-builder', 'Essay Themes Builder', 'Private theme-bound brainstorming, thesis, arguments, outline and independent writing.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/general-ability', 'General Ability — Pro', 'Guided maths lessons, worked examples, exercises and topic quizzes for CSS Vista Pro members.', { h1: 'General Ability', robots: 'noindex, nofollow' }),
-  protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/library', 'My Library', 'Open saved items, factbook, archives and personal study material.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/vistagram', 'My CSS Vistagram', 'Your private Vistagram saves, collections, reading history, followed topics and notes.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs', 'Current Affairs', 'Your protected CSS Vista Current Affairs daily edition.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/current-affairs/archive', 'Current Affairs Archive', 'Browse protected Current Affairs editions by date and topic.', { robots: 'noindex, nofollow' }),
@@ -196,9 +198,9 @@ export const ROUTE_REGISTRY = [
   // MPT examination portal (docs/mpt/DECISIONS.md D-08). Private, never indexed or
   // prerendered. Transactions, the roll-number gate, the exam and results carry
   // no advertising; the overview, history and performance are account content.
-  protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
-  protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
-  protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt', 'My MPT Mocks', 'Apply for MPT Mocks, receive your Roll Number and track official results.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/history', 'My MPT History', 'Your MPT Mock applications, Roll Numbers and results.', { robots: 'noindex, nofollow' }),
+  protectedPage('/account/mpt/performance', 'My MPT Performance', 'Performance across your completed MPT Mocks.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/mistakes', 'My MPT Wrong Answers', 'Questions you answered incorrectly in completed MPT Mocks, with the correct answers.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/question-bank', 'Previous MPT Question Bank', 'Review questions from all completed official MPT Mocks.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/mpt/question-bank/:mock', 'Previous MPT Question Bank', 'Review a completed official MPT Mock paper.', { match: 'pattern', robots: 'noindex, nofollow' }),
@@ -211,10 +213,10 @@ export const ROUTE_REGISTRY = [
   protectedPage('/account/saved', 'My Saved Items', 'Your private saved reading.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/search', 'Search My Library', 'Search your protected Current Affairs and saved material.', { robots: 'noindex, nofollow' }),
   protectedPage('/account/settings', 'Profile & Settings', 'Manage your profile, preferences and account.', { robots: 'noindex, nofollow' }),
-  // The signed-in overview permits one bottom in-page unit. Sign-in,
-  // registration, reset and verification states are suppressed by the shared
-  // ad-state flags; Auto Ads and vignettes remain disabled on the route.
-  protectedPage('/account', 'CSS Vista Account', 'Sign in, register or manage a CSS Vista account.', { adMode: 'manual', manualAdPlacement: true, minimumHeight: 250, robots: 'noindex, nofollow' }),
+  // Account management, personal navigation, records and focused practice
+  // remain ad-free independently of their noindex/access policy. An account
+  // login alone is not evidence of substantial publisher content.
+  protectedPage('/account', 'CSS Vista Account', 'Sign in, register or manage a CSS Vista account.', { robots: 'noindex, nofollow' }),
   protectedPage('/factbook', 'My Factbook', 'Private personal knowledge library.'),
   publicPage('/consultation', 'One-to-One CSS Consultation', 'Learn about one-to-one CSS consultation, preparation guidance and booking information.', 'One-to-one CSS consultation', { contentQuality: 'substantial', adMode: 'disabled', minimumHeight: 0 }),
   protectedPage('/exam-intelligence', 'Vista Exam Intelligence', 'Private examination-planning and performance dashboard.'),

@@ -1,0 +1,401 @@
+{
+  "verifiedOn": "2026-10-17",
+  "scope": "Local source/artifact verification and separately dated remote CI/account observations. Not live deployment evidence.",
+  "remoteParentCommit": "0318039cb8f188b97254b6e3243833f0a2285816",
+  "sourceManifest": "prepared-source-manifest-2026-10-17.json",
+  "accountEvidence": "google-current-account-evidence-2026-10-17.json",
+  "failuresRetained": [
+    {
+      "scope": "Original payment-invariants",
+      "location": "tests/browser/skills.mjs:51",
+      "finding": "Fixture served homepage instead of account documents; navigation aborted on second device."
+    },
+    {
+      "scope": "Repaired fixture CI run 38994027232 first attempt",
+      "finding": "Later pro-pause Chromium ERR_TOO_MANY_RETRIES; second attempt passed. No failing assertion removed."
+    },
+    {
+      "scope": "Local disposable stress harness",
+      "finding": "Missing current_affairs_items table; applied existing schema, then three paused-product journeys passed."
+    },
+    {
+      "scope": "Intermediate archive candidate 0318039",
+      "workflowRun": 39012944111,
+      "job": 117339130608,
+      "finding": "Browser regression correctly failed on PPSC2024 mobile overflow. Long native select options stretched the grid; final correction adds shrinkable sizing."
+    }
+  ],
+  "earlierContinuationChecks": {
+    "testAll": {
+      "nodePassed": 258,
+      "pythonPassed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    "audit": "passed, including preserved source inventories and explicit unverified rights"
+  },
+  "finalSourceChecks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "strictHostingerBuild": "passed, including all final artifact gates",
+    "browser": "passed: 26 routes, archive defaults/filter refresh/reset, 320/390px mobile reflow, metadata races, tools and isolated executed-ad boundary",
+    "routes": "passed: 16 tests",
+    "httpsFixture": "passed: real account noindex/ad-free shells, private helper blocking and genuine 404",
+    "gitDiffCheck": "passed"
+  },
+  "artifactExpected": {
+    "sitemapUrls": 1019,
+    "applicationHtml": 1527,
+    "allHtml": 1528,
+    "firstPartyLinks": 60961,
+    "adLoaderDocuments": 598,
+    "adFreeDocuments": 929
+  },
+  "preservation": {
+    "bookSourceSha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e",
+    "productReleaseHold": "Pro/MPT/payments/AI/private drafts remain held",
+    "rights": "No new permissions or quotation verification claimed"
+  },
+  "production": {
+    "lastObservedGitSha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+    "builtAt": "2026-10-12T04:25:31.574Z",
+    "recoveryDeploymentVerified": false
+  },
+  "googleFollowup": {
+    "session": "signed out after runtime reset; secure reauthentication needed",
+    "postReleaseLiveRetest": "pending exact deployment verification and sign-in",
+    "adsenseReviewSubmitted": false
+  },
+  "verifiedAt": "2026-10-17T07:24:03.333356+00:00",
+  "browserObservation": {
+    "observedAt": "2026-10-17T07:22:33.580Z",
+    "passed": true,
+    "pages": [
+      {
+        "path": "/",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/why-nations-fail",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/why-nations-fail"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/the-art-of-war",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/the-art-of-war"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/on-war",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/on-war"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/journal",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/journal"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/capitalism-and-freedom",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/capitalism-and-freedom"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/the-road-to-serfdom",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/the-road-to-serfdom"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/the-better-angels-of-our-nature",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/brave-new-world",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/brave-new-world"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/capital-in-the-twenty-first-century",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/pakistan-beyond-the-crisis-state",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/development-as-freedom",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/development-as-freedom"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/book-summaries/the-open-society-and-its-enemies",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/study-material/optional/constitutional-law/constitutional-history-of-pakistan",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/study-material/optional/constitutional-law/constitutional-history-of-pakistan"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/css-2026-written-result",
+        "status": 200,
+        "robots": [
+          "index, follow, max-image-preview:large"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/css-2026-written-result"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/past-papers/ppsc/2024",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/past-papers/ppsc/2024"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/past-papers/css/2025",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/past-papers/css/2025"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/subjects/selector",
+        "status": 200,
+        "robots": [
+          "noindex, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/subjects/selector"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/css-eligibility-calculator",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/css-eligibility-calculator"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/grammar-course",
+        "status": 200,
+        "robots": [
+          "index, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/grammar-course"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/vistagram/pakistan-financial-inclusion-digital-finance",
+        "status": 200,
+        "robots": [
+          "noindex, follow"
+        ],
+        "canonical": [
+          "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance"
+        ],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/vistagram/seo-audit-deliberately-missing-20261014",
+        "status": 404,
+        "robots": [
+          "noindex, nofollow"
+        ],
+        "canonical": [],
+        "overflow": false,
+        "errors": []
+      },
+      {
+        "path": "/seo-audit-deliberately-missing-20261014",
+        "status": 404,
+        "robots": [
+          "noindex, nofollow"
+        ],
+        "canonical": [],
+        "overflow": false,
+        "errors": []
+      }
+    ]
+  },
+  "latestIntermediatePaymentCI": {
+    "commit": "0318039cb8f188b97254b6e3243833f0a2285816",
+    "run": 39012944081,
+    "job": 117339130209,
+    "conclusion": "success",
+    "attempt": 1
+  },
+  "logHashes": {
+    "recovery-typecheck-final.log": "7e4e414651659d50be012c55c96da5621a31dcc1e9565389459d0b6ab645dc08",
+    "recovery-lint-final.log": "a5ef19e41f1f592b985c2a3fa9b23149a65897a92dff6eaf45f45848fed1eaad",
+    "recovery-build-release.log": "4e84d7c6f18c9e0803498e01a47a698d68968a491abe5c11f7c7a8c55f2608f0",
+    "recovery-browser-release.log": "dd4f8c162fff27180786378e2a9510c60fe38aa587fa6325c44dcf38ec0736aa",
+    "recovery-routes-release.log": "93ac4634a8173e790228f5989695f4f0bff4a1fb22a378e4c3a531b1ff7a8be9",
+    "recovery-routing-release.log": "c8d74000fad68d36a21e01fd8416e14abc5a858b6cc53fd340fe2a135e67bd60",
+    "recovery-tests.log": "7e2c0059c5d259924566fe841f05467b80e42b1f1795075f8fa6a1e71218a839",
+    "recovery-audit.log": "28bdd49f77f6bfc18c6a8aee04ecc49ad766c8722d2e92191e51f2f4bf633a8b"
+  }
+}

@@ -1,6 +1,11 @@
 import type { VistagramIndex, VistagramPost, VistagramPostSummary, VistagramPostType } from './types'
 
 const INDEX_URL = '/vistagram-content/index.json'
+let cachedIndex: VistagramIndex | null = null
+const cachedPosts = new Map<string, VistagramPost>()
+
+export const vistagramIndexNow = () => cachedIndex
+export const vistagramPostNow = (slug: string) => cachedPosts.get(slug) ?? null
 const POST_TYPES = new Set<VistagramPostType>([
   'Concept',
   'Article',
@@ -61,25 +66,26 @@ function parseSummary(value: unknown): VistagramPostSummary | null {
   }
 }
 
-export async function loadVistagramIndex(signal?: AbortSignal): Promise<VistagramIndex> {
-  const response = await fetch(INDEX_URL, { signal, cache: 'no-cache' })
-  if (!response.ok) throw new Error('Vistagram feed is unavailable.')
-  const raw = await response.json() as Record<string, unknown>
+export function primeVistagramIndex(raw: Record<string, unknown>): VistagramIndex {
   const posts = Array.isArray(raw.posts)
     ? raw.posts.map(parseSummary).filter((item): item is VistagramPostSummary => Boolean(item))
     : []
   posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-  return {
+  cachedIndex = {
     version: Math.max(1, Math.round(Number(raw.version) || 1)),
     generatedAt: text(raw.generatedAt) || null,
     posts,
   }
+  return cachedIndex
 }
 
-export async function loadVistagramPost(summary: VistagramPostSummary, signal?: AbortSignal): Promise<VistagramPost> {
-  const response = await fetch(summary.contentPath, { signal, cache: 'no-cache' })
-  if (!response.ok) throw new Error('This Vistagram article is unavailable.')
-  const raw = await response.json() as Record<string, unknown>
+export async function loadVistagramIndex(signal?: AbortSignal): Promise<VistagramIndex> {
+  const response = await fetch(INDEX_URL, { signal, cache: 'no-cache' })
+  if (!response.ok) throw new Error('Vistagram feed is unavailable.')
+  return primeVistagramIndex(await response.json() as Record<string, unknown>)
+}
+
+export function primeVistagramPost(summary: VistagramPostSummary, raw: Record<string, unknown>): VistagramPost {
   const parsed = parseSummary(raw)
   if (!parsed || parsed.slug !== summary.slug || parsed.id !== summary.id) throw new Error('This Vistagram article is invalid.')
 
@@ -110,7 +116,7 @@ export async function loadVistagramPost(summary: VistagramPostSummary, signal?: 
         .filter((source) => source.label && /^https:\/\//i.test(source.url))
     : []
 
-  return {
+  const post = {
     ...parsed,
     subtitle: text(raw.subtitle) || undefined,
     keyPoints: stringList(raw.keyPoints),
@@ -119,6 +125,14 @@ export async function loadVistagramPost(summary: VistagramPostSummary, signal?: 
     sources,
     relatedSlugs: stringList(raw.relatedSlugs),
   }
+  cachedPosts.set(post.slug, post)
+  return post
+}
+
+export async function loadVistagramPost(summary: VistagramPostSummary, signal?: AbortSignal): Promise<VistagramPost> {
+  const response = await fetch(summary.contentPath, { signal, cache: 'no-cache' })
+  if (!response.ok) throw new Error('This Vistagram article is unavailable.')
+  return primeVistagramPost(summary, await response.json() as Record<string, unknown>)
 }
 
 export function formatVistagramDate(value: string) {

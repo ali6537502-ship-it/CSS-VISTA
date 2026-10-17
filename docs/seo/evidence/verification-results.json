@@ -1,0 +1,70 @@
+{
+  "verified_at": "2026-10-15T07:55:47.920085+00:00",
+  "scope": "Local working-tree release candidate; production deployment and Google status unchanged/unavailable.",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:all",
+      "exit_code": 0,
+      "tests": 224,
+      "passed": 224,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm run audit",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:routes",
+      "exit_code": 0,
+      "tests": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm run audit:hostinger",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run audit:browser:seo",
+      "exit_code": 0,
+      "browser_routes": 10,
+      "ad_fixture": "Stub Google responses; no live ad calls"
+    },
+    {
+      "command": "node scripts/seo/overlay-artifact.mjs dist",
+      "exit_code": 0
+    },
+    {
+      "command": "NODE_USE_ENV_PROXY=1 npm run check:adsense",
+      "exit_code": 1,
+      "limitation": "HTTPS checks pass; three plain-HTTP checks fail through Node proxy sockets; independent urllib/curl redirect evidence retained."
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "artifact": {
+    "sitemap_urls": 1019,
+    "application_html": 1527,
+    "all_generated_html": 1528,
+    "internal_links_checked": 60955,
+    "existing_vistagram_readers_restored": 22
+  },
+  "google_account": "GSC Wizard payment_required repeated 2026-10-15; no AdSense connector/browser handoff",
+  "review_readiness": "Editorial and account dependencies remain; no new review submitted/recommended yet"
+}

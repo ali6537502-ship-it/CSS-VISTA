@@ -226,6 +226,9 @@ export default function Css2026Result() {
             <p className="mt-3 text-sm leading-6 text-slate-700">
               This list records qualification in the <strong>written portion</strong> of CSS 2026; it is not the final allocation result. FPSC remains the primary authority for result corrections and all next-stage notices.
             </p>
+            <p className="mt-3 text-sm leading-6 text-slate-700">
+              For context, <a href={result.contextSource.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-800 underline">{result.contextSource.label}</a> also records 476 written qualifiers. The PDF on this page is the supplied copy; consult FPSC for corrections.
+            </p>
             <a href={result.officialResultsUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-bold text-emerald-900 ring-1 ring-emerald-900/10 hover:bg-emerald-50">
               Check FPSC results <ExternalLink className="h-4 w-4" />
             </a>

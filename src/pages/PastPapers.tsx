@@ -33,15 +33,22 @@ function collectionPaperTitle(paper: PastPaper) {
 }
 
 export default function PastPapers() {
+  const { exam, year } = useParams<{ exam?: string; year?: string }>()
+  // A different collection is a different filter baseline. Query changes stay
+  // in the same reader, while pathname navigation initializes the new archive.
+  return <PastPaperArchive key={`${exam ?? ''}/${year ?? ''}`} />
+}
+
+function PastPaperArchive() {
   const routeParams = useParams<{ exam?: string; year?: string }>()
   const [searchParams, setSearchParams] = useSearchParams()
   const papers = useMemo(() => mergedPastPapers(seedPapers), [])
   const routeExam = examinations.find((name) => name.toLowerCase() === routeParams.exam?.toLowerCase()) ?? 'All'
   const routeYear = /^\d{4}$/.test(routeParams.year ?? '') ? routeParams.year! : 'All'
   const [q, setQ] = useState(() => searchParams.get('search') ?? '')
-  const [exam, setExam] = useState(() => routeExam !== 'All' ? routeExam : searchParams.get('exam') ?? 'All')
+  const [exam, setExam] = useState(() => searchParams.get('exam') ?? routeExam)
   const [subject, setSubject] = useState(() => searchParams.get('subject') ?? 'All')
-  const [year, setYear] = useState(() => routeYear !== 'All' ? routeYear : searchParams.get('year') ?? 'All')
+  const [year, setYear] = useState(() => searchParams.get('year') ?? routeYear)
   const [stype, setStype] = useState(() => searchParams.get('subjectType') ?? 'All')
   const [optionalGroup, setOptionalGroup] = useState(() => searchParams.get('group') ?? 'All')
   const [mode, setMode] = useState(() => searchParams.get('mode') ?? 'All')
@@ -174,16 +181,18 @@ export default function PastPapers() {
   useEffect(() => {
     const next = new URLSearchParams()
     if (q.trim()) next.set('search', q.trim())
-    if (exam !== 'All') next.set('exam', exam)
+    // Collection defaults already belong to the pathname. Repeating them as
+    // filters causes RouteSeo to mark the canonical archive noindex on mount.
+    if (exam !== routeExam) next.set('exam', exam)
     if (subject !== 'All') next.set('subject', subject)
-    if (year !== 'All') next.set('year', year)
+    if (year !== routeYear) next.set('year', year)
     if (stype !== 'All') next.set('subjectType', stype)
     if (optionalGroup !== 'All') next.set('group', optionalGroup)
     if (mode !== 'All') next.set('mode', mode)
     if (savedOnly) next.set('saved', '1')
     if (currentPage > 1) next.set('page', String(currentPage))
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
-  }, [currentPage, exam, mode, optionalGroup, q, savedOnly, searchParams, setSearchParams, stype, subject, year])
+  }, [currentPage, exam, mode, optionalGroup, q, routeExam, routeYear, savedOnly, searchParams, setSearchParams, stype, subject, year])
 
   // Grouping runs over the whole filtered set, then pages are cut on group
   // boundaries. Paginating first split a subject across two pages and repeated
@@ -293,8 +302,8 @@ export default function PastPapers() {
         </section>
 
         {/* Filters */}
-        <div className="grid gap-2.5 rounded-lg border bg-white p-4 sm:grid-cols-3 lg:grid-cols-7">
-          <div className="relative sm:col-span-3 lg:col-span-2">
+        <div className="grid min-w-0 grid-cols-1 gap-2.5 rounded-lg border bg-white p-4 sm:grid-cols-3 lg:grid-cols-7">
+          <div className="relative min-w-0 sm:col-span-3 lg:col-span-2">
             <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search papers…" className="h-10 w-full rounded-md border border-input pl-8 pr-3 text-sm outline-none focus:ring-2 focus:ring-ring" aria-label="Search past papers" />
           </div>
@@ -306,25 +315,25 @@ export default function PastPapers() {
               setSubject('All')
               setYear('All')
             }}
-            className="h-10 rounded-md border border-input px-2 text-sm"
+            className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm"
             aria-label="Examination"
           >
             <option value="All">Examination</option>{examinations.map((e) => <option key={e}>{e}</option>)}
           </select>
-          <select value={subject} onChange={(e) => setSubject(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Subject">
+          <select value={subject} onChange={(e) => setSubject(e.target.value)} className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm" aria-label="Subject">
             <option value="All">Subject</option>{subjects.map((s) => <option key={s}>{s}</option>)}
           </select>
-          <select value={stype} onChange={(e) => setStype(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Compulsory or optional">
+          <select value={stype} onChange={(e) => setStype(e.target.value)} className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm" aria-label="Compulsory or optional">
             <option value="All">Subject type</option>{subjectTypes.map((s) => <option key={s}>{s}</option>)}
           </select>
-          <select value={optionalGroup} onChange={(e) => setOptionalGroup(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Optional subject group">
+          <select value={optionalGroup} onChange={(e) => setOptionalGroup(e.target.value)} className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm" aria-label="Optional subject group">
             <option value="All">Optional group</option>{optionalGroupOptions.map((group) => <option key={group} value={group}>Group {group}</option>)}
           </select>
           <div className="grid grid-cols-2 gap-2.5">
-            <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Year">
+            <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm" aria-label="Year">
               <option value="All">Year</option>{years.map((y) => <option key={y}>{y}</option>)}
             </select>
-            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-10 rounded-md border border-input px-2 text-sm" aria-label="Objective or subjective">
+            <select value={mode} onChange={(e) => setMode(e.target.value)} className="h-10 min-w-0 w-full max-w-full rounded-md border border-input px-2 text-sm" aria-label="Objective or subjective">
               <option value="All">Paper type</option>{paperModes.map((m) => <option key={m}>{m}</option>)}
             </select>
           </div>

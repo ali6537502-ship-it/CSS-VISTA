@@ -1,0 +1,2655 @@
+{
+  "reviewedOn": "2026-10-15",
+  "scope": "Existing repository material only; no external copies fetched. Source attribution and API availability do not establish copyright permission. No private permission records were available.",
+  "rightsStatus": "owner-permission-evidence-pending",
+  "books": [
+    {
+      "slug": "why-nations-fail",
+      "title": "Why Nations Fail",
+      "author": "Daron Acemoglu and James A. Robinson",
+      "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "304adc34251aaad2eedad26bf939b9e62954e3d621720ee308178ecb1b052c32",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/why-nations-fail.webp",
+        "bytes": 31526,
+        "sha256": "70464c57cdf176b5ba69eee2cb6f5e35deae2d22cb06ceb80cc625c146d91143",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL16568759W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7253519-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-narrow-corridor",
+      "title": "The Narrow Corridor",
+      "author": "Daron Acemoglu and James A. Robinson",
+      "url": "https://www.css-vista.com/book-summaries/the-narrow-corridor",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "69af537e3b4eeb9a6f6f991cea0bb294c3dfcd97ced71ea2fe58f19aeef54f1f",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-narrow-corridor.webp",
+        "bytes": 16560,
+        "sha256": "d24da7b657848ba42549f878b791fab80081cc382c92385cead6389508802788",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20220421W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8872725-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "sapiens-a-brief-history-of-humankind",
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "url": "https://www.css-vista.com/book-summaries/sapiens-a-brief-history-of-humankind",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "fe40bdebad825db2043556f08e0177a7cad05a13fac2ff641b8cde314afea096",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/sapiens-a-brief-history-of-humankind.webp",
+        "bytes": 20216,
+        "sha256": "9f60919003949941ecbe940ce0655266a05d76a77bca7d9defab1a3d6f5aae5d",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL17075811W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8634250-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "url": "https://www.css-vista.com/book-summaries/guns-germs-and-steel",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a0732ca7e47ff4b6e9a409c9406838f5606c5e182364d8fdf6dcc1b81ecf79a8",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/guns-germs-and-steel.webp",
+        "bytes": 8700,
+        "sha256": "6ad6bde1e817704c6bb4e092073180ec4ac2d84d4d0bb236aa0bf7f18d642d5d",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL276558W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7884018-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-lessons-of-history",
+      "title": "The Lessons of History",
+      "author": "Will and Ariel Durant",
+      "url": "https://www.css-vista.com/book-summaries/the-lessons-of-history",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "678376785cb6e5142b37196c096436ad9a67b6aeb36a70ff7f36d040492bda9c",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-lessons-of-history.webp",
+        "bytes": 16990,
+        "sha256": "620aa64484ab9bc79445f4093ad17c9c728770bf292df282017d5d09ff9e5f6f",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1073956W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7240225-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "a-short-history-of-nearly-everything",
+      "title": "A Short History of Nearly Everything",
+      "author": "Bill Bryson",
+      "url": "https://www.css-vista.com/book-summaries/a-short-history-of-nearly-everything",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "8555ae6e78ecc83323ed46ac20c3ec81cc8ccc575cbd7524c4d5e85e54929fd2",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/a-short-history-of-nearly-everything.webp",
+        "bytes": 23722,
+        "sha256": "cea8474148d0385792fb3ca900e33fda63821388203c5046feac1e65b647d1f5",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL74128W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12725620-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "factfulness",
+      "title": "Factfulness",
+      "author": "Hans Rosling, Ola Rosling and Anna Rosling Rönnlund",
+      "url": "https://www.css-vista.com/book-summaries/factfulness",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "89ebc7fc8e34e728a9a354847aa9f84109eb00695b8f9a869cc20f38d682bd89",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/factfulness.webp",
+        "bytes": 22570,
+        "sha256": "a9c3ee435ac702b6f76b7dcd70ed4712b0e46a1c86796681636927fc21e4ba0c",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL17877260W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8186237-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "thinking-fast-and-slow",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "url": "https://www.css-vista.com/book-summaries/thinking-fast-and-slow",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "bc0fbff47c453f94a7236602313f7e95a7220a387feffff2558cd438f8635bb3",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/thinking-fast-and-slow.webp",
+        "bytes": 13076,
+        "sha256": "c78f03774d9c1d52ff03a64eacc157279d8b42490158ac522749e771016cfb22",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15992072W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/13290711-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-black-swan",
+      "title": "The Black Swan",
+      "author": "Nassim Nicholas Taleb",
+      "url": "https://www.css-vista.com/book-summaries/the-black-swan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "aeb032881a44a5e8e8cb9213cc24e4cf792282da9ba9d121385d9077f981dd5a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-black-swan.webp",
+        "bytes": 3116,
+        "sha256": "5f8c65c2532a68f6ae2081c0a2583a426cff1c85e0c6b24582428d40449ff32d",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3295030W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/5721840-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-righteous-mind",
+      "title": "The Righteous Mind",
+      "author": "Jonathan Haidt",
+      "url": "https://www.css-vista.com/book-summaries/the-righteous-mind",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "155247c458967dcd89e8624c2ebae3f6fb196537878032c3dbd93188c5de17bb",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-righteous-mind.webp",
+        "bytes": 19444,
+        "sha256": "53f248146e77b62315e0aaaada47c043575582b16e4b3587c2d4e14f182eb0d6",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL16568840W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7256782-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "development-as-freedom",
+      "title": "Development as Freedom",
+      "author": "Amartya Sen",
+      "url": "https://www.css-vista.com/book-summaries/development-as-freedom",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "7116db7ac213dde584a41e8f018cb00b41e6bd200ce4001a0f82a5294ac9d4cb",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/development-as-freedom.webp",
+        "bytes": 8188,
+        "sha256": "8e5a27521272250d86b8af9c45a1ce21c07e5e1d7a3bf230947868e26a7417b1",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL116534W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/120233-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "title": "Capital in the Twenty-First Century",
+      "author": "Thomas Piketty",
+      "url": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "9a974b26e6f52105dfab619d8932b550211462d601e9347e80ad44435715a43d",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/capital-in-the-twenty-first-century.webp",
+        "bytes": 23008,
+        "sha256": "6dce59f30331eae78e8fdcd8dbbc395c3c84f03155dcc486fe529c7c57ccc5c2",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19718884W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10103429-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-origins-of-political-order",
+      "title": "The Origins of Political Order",
+      "author": "Francis Fukuyama",
+      "url": "https://www.css-vista.com/book-summaries/the-origins-of-political-order",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "52a2223f1cd160a6dc7a466aad0ecd2e2ddaa030bc208e50190afa082cb860ae",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-origins-of-political-order.webp",
+        "bytes": 858,
+        "sha256": "37192e7f04f0d1a7d01676b4e99886ca0b4ff54573b7232ffd76aa71440e947e",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15539013W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7895385-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "political-order-and-political-decay",
+      "title": "Political Order and Political Decay",
+      "author": "Francis Fukuyama",
+      "url": "https://www.css-vista.com/book-summaries/political-order-and-political-decay",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "48621efaaa60ee243de29762a1503d2e8b0d6ef55eeead362e3b3b8f894c4562",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/political-order-and-political-decay.webp",
+        "bytes": 25966,
+        "sha256": "aa9983017ceed547831988165cc7bcee809fcd5a7f22c2c4ccafc434776eef1b",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19986556W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9381734-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "prisoners-of-geography",
+      "title": "Prisoners of Geography",
+      "author": "Tim Marshall",
+      "url": "https://www.css-vista.com/book-summaries/prisoners-of-geography",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1861ea3e0aa4b8874ce34dd036baa493d061a7279d679b523d6a069fd8490daf",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/prisoners-of-geography.webp",
+        "bytes": 42236,
+        "sha256": "e854550b2cb4472873f3b29abfd82ae6fc4396dcccb134d9f563b04a908e88c5",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20010115W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8900233-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-revenge-of-geography",
+      "title": "The Revenge of Geography",
+      "author": "Robert D. Kaplan",
+      "url": "https://www.css-vista.com/book-summaries/the-revenge-of-geography",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "c6db0db1587b8cd8826469448fa8f5bf113cd2c10c1f7b19ef3bef57e31c6b2b",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-revenge-of-geography.webp",
+        "bytes": 17424,
+        "sha256": "cadec04ab401a8fe14815c29342aa672a62c49587702219079d9a6ae5002d0cd",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20398275W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9065634-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-silk-roads",
+      "title": "The Silk Roads",
+      "author": "Peter Frankopan",
+      "url": "https://www.css-vista.com/book-summaries/the-silk-roads",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "96559f2c3477302f371f954f7e7c7f3d706a87c712986a16ce48c04a40645ecc",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-silk-roads.webp",
+        "bytes": 95510,
+        "sha256": "7e022352f2a5ec986df85dcbfe471b6e2159fb702d48444ab465539cf2e05bab",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19666939W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8963642-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-age-of-surveillance-capitalism",
+      "title": "The Age of Surveillance Capitalism",
+      "author": "Shoshana Zuboff",
+      "url": "https://www.css-vista.com/book-summaries/the-age-of-surveillance-capitalism",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "8cbe095a8fa79f73f41943a26e0829db639930e14317094e1d7ba77e47931ff0",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-age-of-surveillance-capitalism.webp",
+        "bytes": 14676,
+        "sha256": "2b36420af0e6831d55b65a0ca6e63b2f94ab5391b225850c5e627d076f008d46",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL18201749W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8353262-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-sixth-extinction",
+      "title": "The Sixth Extinction",
+      "author": "Elizabeth Kolbert",
+      "url": "https://www.css-vista.com/book-summaries/the-sixth-extinction",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "c305f6b8d2ff014f1eff9f5d54d40e0a9cbb9e78e797c5dd4461026656d66b2e",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-sixth-extinction.webp",
+        "bytes": 28284,
+        "sha256": "c971530a5b72023ee09dfc725a3bbd1cd0cab813066acdf3e669aa385322ddce",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL16820830W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7910870-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-uninhabitable-earth",
+      "title": "The Uninhabitable Earth",
+      "author": "David Wallace-Wells",
+      "url": "https://www.css-vista.com/book-summaries/the-uninhabitable-earth",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "7715657cea576c9fcd5fb724ed8062166535f6802ced6e43b4f87e1f88ee89ab",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-uninhabitable-earth.webp",
+        "bytes": 12292,
+        "sha256": "3bd52d0760f20aaa1228e60672efe0497307d38a65d4112e3594dbac4fb9ba9c",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19096883W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8801133-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-republic",
+      "title": "The Republic",
+      "author": "Plato",
+      "url": "https://www.css-vista.com/book-summaries/the-republic",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "732e52fcce9d117cb6423d479fc02d143f2480bae3a297291728ed38164a0974",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-republic.webp",
+        "bytes": 4350,
+        "sha256": "6e825789b95f179bdb5a96d94da737eed595c9b127d7257a989b531061c904a4",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL28588519W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12828820-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "politics",
+      "title": "Politics",
+      "author": "Aristotle",
+      "url": "https://www.css-vista.com/book-summaries/politics",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1d90a65392064642138eb2b9b18a160a671146bbf4bdad00af8930b03cf48e6a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/politics.webp",
+        "bytes": 30352,
+        "sha256": "4af21c8b2a19ae61b0c74b255de93ee790e5a47ff79ade829771c8c1c9765759",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL13703833W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6528920-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-prince",
+      "title": "The Prince",
+      "author": "Niccolò Machiavelli",
+      "url": "https://www.css-vista.com/book-summaries/the-prince",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "91fd1a82b0e81e7cab29862595adbde16e798c152bd6361ec0f2f0e37033b63a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-prince.webp",
+        "bytes": 21892,
+        "sha256": "e405a8a31fb21060f32e5e4abeb0e5d21ccb6d041705f7562c3a7b3a9f453a0a",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1089297W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12726168-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "leviathan",
+      "title": "Leviathan",
+      "author": "Thomas Hobbes",
+      "url": "https://www.css-vista.com/book-summaries/leviathan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "38f4a0f9bc7e03cd8f62046d0b38901457859479f6e7d7ee64d98153319b7bf6",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/leviathan.webp",
+        "bytes": 52026,
+        "sha256": "01dba8371ae60be389d99e6a7c2cc04f3dfc916af23e8785aa2135f8d4ae32b9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL653987W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6525465-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "two-treatises-of-government",
+      "title": "Two Treatises of Government",
+      "author": "John Locke",
+      "url": "https://www.css-vista.com/book-summaries/two-treatises-of-government",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "34bc7964bbfea7509bf1c5990ea1dddf472b1edc3ca50efe10f2d17a2805d215",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/two-treatises-of-government.webp",
+        "bytes": 29664,
+        "sha256": "c295afccce3faf95539c291e609d3ba4d05f320f21696ebe18a4e5bb697f72b9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL31805824W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/13704679-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-social-contract",
+      "title": "The Social Contract",
+      "author": "Jean-Jacques Rousseau",
+      "url": "https://www.css-vista.com/book-summaries/the-social-contract",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "28b5738ceba2cda1319f365c3fb63284daf5d66ed5823b041b63db86ab9163c2",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-social-contract.webp",
+        "bytes": 59872,
+        "sha256": "152434bf5545f1734f2459d0820338c18eb6b8f411f160a65acaeb5ea707ead6",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL34030769W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/15217301-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "on-liberty",
+      "title": "On Liberty",
+      "author": "John Stuart Mill",
+      "url": "https://www.css-vista.com/book-summaries/on-liberty",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "181cf9415066278ff19bf35410f5424f5a3eadea90c5875e264ab91b2c40915a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/on-liberty.webp",
+        "bytes": 10848,
+        "sha256": "afca606639852ab07548a5cc913f345e157649451cf13d64683e398c9b6d181a",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1068091W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/966821-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "democracy-in-america",
+      "title": "Democracy in America",
+      "author": "Alexis de Tocqueville",
+      "url": "https://www.css-vista.com/book-summaries/democracy-in-america",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "95dca92344e5880d8717745eb2fe79b8ed21fd931ff87a2d1c32a6dd1aa7469b",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/democracy-in-america.webp",
+        "bytes": 22126,
+        "sha256": "58c8ee23e8139b3b772cb26a0554a66f41b7b8948b1881c0c98d3a9e520c15ec",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL38891618W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/15186498-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-open-society-and-its-enemies",
+      "title": "The Open Society and Its Enemies",
+      "author": "Karl Popper",
+      "url": "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "2a662a94562bd5ac50001ba79c4ed7bbe8bdfd3aa4d0df00c85b0c568bbaa522",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-open-society-and-its-enemies.webp",
+        "bytes": 10890,
+        "sha256": "04030dfd09b4e63c8bbc9ab6aafd6f31bfd9b28458106f04e12a07c868143b4b",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL8975462W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/3069237-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "title": "The Origins of Totalitarianism",
+      "author": "Hannah Arendt",
+      "url": "https://www.css-vista.com/book-summaries/the-origins-of-totalitarianism",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "025a8dbab82797deae02f302059e8b1ef48be07951bfc51a27e2d645758f8ac1",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-origins-of-totalitarianism.webp",
+        "bytes": 27882,
+        "sha256": "baa182fb517569d5516538cfa7fea50f7513f85a3a0c5987febafc322e61705a",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL10460640W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10793645-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-road-to-serfdom",
+      "title": "The Road to Serfdom",
+      "author": "Friedrich Hayek",
+      "url": "https://www.css-vista.com/book-summaries/the-road-to-serfdom",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "eb61a4735856970a34de7b2b2e1de7d5f45fcbcc65184e2c1a6ca8bf7aed0255",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-road-to-serfdom.webp",
+        "bytes": 17208,
+        "sha256": "a909044246cbc40800267ac18783bc608f4b47e33f3640b6b123e7eb1523c419",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1165001W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6991871-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "title": "Justice: What’s the Right Thing to Do?",
+      "author": "Michael J. Sandel",
+      "url": "https://www.css-vista.com/book-summaries/justice-what-s-the-right-thing-to-do",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "9ecee601de4b30d8033e0782a442bdff9e583d9ebe6149c8841ea3120bb008cc",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/justice-what-s-the-right-thing-to-do.webp",
+        "bytes": 5844,
+        "sha256": "21fcb1cadbf3c5d70d22434846c0590f861c1e73a9bac98510326e50973ed966",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1810923W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/1129014-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-rule-of-law",
+      "title": "The Rule of Law",
+      "author": "Tom Bingham",
+      "url": "https://www.css-vista.com/book-summaries/the-rule-of-law",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "081ac6e5220e50f59d562301eb2669f8032a86d3f0fcccf570885f2014c93f11",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-rule-of-law.webp",
+        "bytes": 26626,
+        "sha256": "5dc806aa1ba176bba0f2a5ec27a21928359237ef2d0c7afc64e919187d7f6e0e",
+        "provider": "Penguin Books",
+        "recordUrl": "https://www.penguin.co.uk/books/56375/the-rule-of-law-by-tom-bingham/9780141034539",
+        "cachedOriginalImageUrl": "https://cdn.penguin.co.uk/dam-assets/books/9780141034539/9780141034539-jacket-large.jpg",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "how-democracies-die",
+      "title": "How Democracies Die",
+      "author": "Steven Levitsky and Daniel Ziblatt",
+      "url": "https://www.css-vista.com/book-summaries/how-democracies-die",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "bb038e88c42a632c39cd5912be636352c27a3ad375811a864e743f24a978dfe8",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/how-democracies-die.webp",
+        "bytes": 14400,
+        "sha256": "6ad2400ca96598b564bc4a1327897cdcde5107b2933354c885c4d07b166c7d02",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL18139175W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8311412-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-dictator-s-handbook",
+      "title": "The Dictator’s Handbook",
+      "author": "Bruce Bueno de Mesquita and Alastair Smith",
+      "url": "https://www.css-vista.com/book-summaries/the-dictator-s-handbook",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a531735f59b652e35d3996f14b80015ea5de1624cc156fda34fc7b3745bafd73",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-dictator-s-handbook.webp",
+        "bytes": 24666,
+        "sha256": "5d957182174c8f7eeb1842a00b6ebd6979b15defb8efc656898566869e494b09",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15980652W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8114194-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "diplomacy",
+      "title": "Diplomacy",
+      "author": "Henry Kissinger",
+      "url": "https://www.css-vista.com/book-summaries/diplomacy",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a712b4135880f51ca945b5d6a912dd02395c7af388d61735dd7d90ebb9628bf3",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/diplomacy.webp",
+        "bytes": 7024,
+        "sha256": "5c5e999088b26098da745c46de5dfdc7419d84329d397ab3fda345ad0e5b328a",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1967243W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/3945662-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "world-order",
+      "title": "World Order",
+      "author": "Henry Kissinger",
+      "url": "https://www.css-vista.com/book-summaries/world-order",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "d3f9d8cbd55b8e93eb09a96b2662a1635ba8d4d9e49207799a45cc0742d0d592",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/world-order.webp",
+        "bytes": 3274,
+        "sha256": "b76c10e082fd44385d3709d662c39cffe91af4bf0af925f2054066f3f9e92a31",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1967211W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7311877-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "title": "The Tragedy of Great Power Politics",
+      "author": "John J. Mearsheimer",
+      "url": "https://www.css-vista.com/book-summaries/the-tragedy-of-great-power-politics",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "0b0e45d9e1624b856cf8460bd12c711fab644457c06d6cc407fec2df4e091e2d",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-tragedy-of-great-power-politics.webp",
+        "bytes": 16784,
+        "sha256": "f592fdd304dc0bfc7312c4c400e36a7e12517d024332da3158736b863d116ca4",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL4652460W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/246652-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-rise-and-fall-of-the-great-powers",
+      "title": "The Rise and Fall of the Great Powers",
+      "author": "Paul Kennedy",
+      "url": "https://www.css-vista.com/book-summaries/the-rise-and-fall-of-the-great-powers",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1ce782a0a80ff3aa92b721813ae4ecdf1d34a41362679b76adcf5455d9cff849",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-rise-and-fall-of-the-great-powers.webp",
+        "bytes": 34182,
+        "sha256": "6b7c76291f6a987d6f06425c0e1913d825904ba169b8097ce62ef897a539b75d",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3907743W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/14570519-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
+      "title": "The Clash of Civilizations and the Remaking of World Order",
+      "author": "Samuel P. Huntington",
+      "url": "https://www.css-vista.com/book-summaries/the-clash-of-civilizations-and-the-remaking-of-world-order",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "38c3fc940e925cdd8502fddeb176b8aa40442956647c0bdf5a506879f4fe52d3",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-clash-of-civilizations-and-the-remaking-of-world-order.webp",
+        "bytes": 19922,
+        "sha256": "3427b0cd1228e1faabac81de9be60120973e4b308ed54449bc0d70ea34b71832",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3289930W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/472725-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "title": "The End of History and the Last Man",
+      "author": "Francis Fukuyama",
+      "url": "https://www.css-vista.com/book-summaries/the-end-of-history-and-the-last-man",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "fc4eeda8f67aed7e60e447fcb868328ea139c2033a4eb21ce00eaa4a124a42d7",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-end-of-history-and-the-last-man.webp",
+        "bytes": 18736,
+        "sha256": "e41e4afed29e3e123024ba18ec92654a06676f4d46d8400c8c005c13cdcedb1c",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2670501W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/18768-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "title": "The Grand Chessboard",
+      "author": "Zbigniew Brzezinski",
+      "url": "https://www.css-vista.com/book-summaries/the-grand-chessboard",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "cbe31a50e6b4e3a154f0166d1ac9edb6fad66033f32483873d4beecfc1c0b680",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-grand-chessboard.webp",
+        "bytes": 26808,
+        "sha256": "9667dd5e18e157e874a1ce4a198a3999bedbcc09a32f467823925780b68a87e2",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2657616W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/1022262-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-twenty-years-crisis-1919-1939",
+      "title": "The Twenty Years’ Crisis, 1919–1939",
+      "author": "E. H. Carr",
+      "url": "https://www.css-vista.com/book-summaries/the-twenty-years-crisis-1919-1939",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "6c5a75e65586aca3714cfcc5340e083ca788894e2dbe413d4c81e73e1306db53",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-twenty-years-crisis-1919-1939.webp",
+        "bytes": 39992,
+        "sha256": "7c03ab7f9668f01aa236dd0a6cac0aa62d798bb0cff02319f385cceb70062ac9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1170631W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/47924-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-anarchical-society",
+      "title": "The Anarchical Society",
+      "author": "Hedley Bull",
+      "url": "https://www.css-vista.com/book-summaries/the-anarchical-society",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "63967610349a0b2a503e7157e839075281213f2dfb03a260fea2f69d03b8648a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-anarchical-society.webp",
+        "bytes": 3676,
+        "sha256": "edab596a30dc68c88b77ce4ac212409c8fbab45f44c45f2ebefaae50262825ca",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3490685W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/5005196-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "title": "The Strategy of Conflict",
+      "author": "Thomas C. Schelling",
+      "url": "https://www.css-vista.com/book-summaries/the-strategy-of-conflict",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "abb30c5b133f805de83cbdf7b3e5e259f73cbe0652f5e73868a59192ed1cfd5a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-strategy-of-conflict.webp",
+        "bytes": 27740,
+        "sha256": "f77435e3b3a32bd80cf41631b6a52158d09ad7ce8c1337b1240b102c1d993b89",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2259845W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/414074-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "on-war",
+      "title": "On War",
+      "author": "Carl von Clausewitz",
+      "url": "https://www.css-vista.com/book-summaries/on-war",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "593ec290e4ab38172aa19732bc4f3736ca1f78d090df251d15e68b2dd553ef70",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/on-war.webp",
+        "bytes": 37734,
+        "sha256": "28cb86f614de6da8bdd6f4f52cbb52f8a84807e2d4e3c104512422a9daff998f",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL62744W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9933109-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-art-of-war",
+      "title": "The Art of War",
+      "author": "Sun Tzu",
+      "url": "https://www.css-vista.com/book-summaries/the-art-of-war",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "fd2b93f7a74e4bf0f149a8b33cf735161f85813e8ed8331c558e445be60d0f08",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-art-of-war.webp",
+        "bytes": 3482,
+        "sha256": "8c91f593a2a1953dd76f9bd6d8e1dca99ca303062f394fbab97e64c2506661d5",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL244537W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/4849549-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-guns-of-august",
+      "title": "The Guns of August",
+      "author": "Barbara W. Tuchman",
+      "url": "https://www.css-vista.com/book-summaries/the-guns-of-august",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "6d9f8a792b2d4ff705baf0b471815a36f0a2aabca055ca4f5be8554e7a7ef2ba",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-guns-of-august.webp",
+        "bytes": 24976,
+        "sha256": "fc9530840ada480437f47c502ec395057c9026adec3b72913a73054a486aade4",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3378527W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6616967-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "title": "Postwar: A History of Europe Since 1945",
+      "author": "Tony Judt",
+      "url": "https://www.css-vista.com/book-summaries/postwar-a-history-of-europe-since-1945",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a78e1d231fe2a6b28bf751a1738f7ca76d32395886611d2a721e2331d9fbe4a0",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/postwar-a-history-of-europe-since-1945.webp",
+        "bytes": 5846,
+        "sha256": "7c25f9b23c99fd59c4f9f7f2685b200365e06dae78c127a42c87892b495c5612",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1894813W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/111385-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "title": "The Cold War: A World History",
+      "author": "Odd Arne Westad",
+      "url": "https://www.css-vista.com/book-summaries/the-cold-war-a-world-history",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "cbd08c5847e580adcfd644af859559c3a5e574e47dfa7f618549a7ea727acb7f",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-cold-war-a-world-history.webp",
+        "bytes": 28818,
+        "sha256": "d70e778bf220bca3a3fb5d1ddb6e339727fcb444efff3d0b9f783a054d8207e9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19715211W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10368271-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-wealth-of-nations",
+      "title": "The Wealth of Nations",
+      "author": "Adam Smith",
+      "url": "https://www.css-vista.com/book-summaries/the-wealth-of-nations",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "679e8f22d671ef33f9ced68659c72e2dabcc49b8f47b31d57de3b790c1ca92cb",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-wealth-of-nations.webp",
+        "bytes": 14880,
+        "sha256": "146cf0126c50435cfd5291d189176cc3e19040c9a0b1a94b6a88ab6e82a288be",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL76827W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12816911-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-general-theory-of-employment-interest-and-money",
+      "title": "The General Theory of Employment, Interest and Money",
+      "author": "John Maynard Keynes",
+      "url": "https://www.css-vista.com/book-summaries/the-general-theory-of-employment-interest-and-money",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "18fff54cf256d71a0bb54733c93e077239f98a7d85854214504f8947ecc7268b",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-general-theory-of-employment-interest-and-money.webp",
+        "bytes": 32816,
+        "sha256": "91cb575252a291476a1d6544d9f1fee409f139000aafd6a8f5ec2c4bd651d634",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL35951W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/116182-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-great-transformation",
+      "title": "The Great Transformation",
+      "author": "Karl Polanyi",
+      "url": "https://www.css-vista.com/book-summaries/the-great-transformation",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "b92741c4625abd8be1367d1c06bb003f36caac58eb84ca58d261e055fa5014a0",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-great-transformation.webp",
+        "bytes": 9670,
+        "sha256": "00e937c37544485659bd0838ff07b1465f2e41f25fe8e48972cb0b5ad9785993",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3617884W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/966056-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "capitalism-and-freedom",
+      "title": "Capitalism and Freedom",
+      "author": "Milton Friedman",
+      "url": "https://www.css-vista.com/book-summaries/capitalism-and-freedom",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "ab3ef23ecb8587a9edba947c1f5d979e318b91935f98ecc19856058df8dcddb6",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/capitalism-and-freedom.webp",
+        "bytes": 21244,
+        "sha256": "dc1d1aa5a20e8f84c3e68441aae6148ec93ca22c21f2d3151fc15353dc84c869",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2747782W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/140808-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "poor-economics",
+      "title": "Poor Economics",
+      "author": "Abhijit V. Banerjee and Esther Duflo",
+      "url": "https://www.css-vista.com/book-summaries/poor-economics",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "2b48a9a7fe777b82f29f135d068023190913ab49f212736ff33409b819275e2e",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/poor-economics.webp",
+        "bytes": 22508,
+        "sha256": "2ccbe61d3b96342a3f4591998195131a5145a23c26dcb43534a11366675c4936",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15743097W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6765497-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "good-economics-for-hard-times",
+      "title": "Good Economics for Hard Times",
+      "author": "Abhijit V. Banerjee and Esther Duflo",
+      "url": "https://www.css-vista.com/book-summaries/good-economics-for-hard-times",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "dfd5b862ba5fb4b3360607e7289918607e74f522f6f8a2f1e1a88bbcf519a7fa",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/good-economics-for-hard-times.webp",
+        "bytes": 13986,
+        "sha256": "6fa125fd332b1a51b103da5eb839012adecc259dfdd53dda5df1a1454ca3b891",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20659791W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9322264-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-bottom-billion",
+      "title": "The Bottom Billion",
+      "author": "Paul Collier",
+      "url": "https://www.css-vista.com/book-summaries/the-bottom-billion",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "5bbd442d77c0763b09f109f2de17287a273c257d626c6aa90c414a0033dbdaca",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-bottom-billion.webp",
+        "bytes": 16706,
+        "sha256": "371702f5cf41a860dbf3b9be42495fc1aaa42b46ab164c006a9035ceec412783",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3478148W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/1128787-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-great-escape",
+      "title": "The Great Escape",
+      "author": "Angus Deaton",
+      "url": "https://www.css-vista.com/book-summaries/the-great-escape",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1254a05105343d7f0ef8785fe7a14fd98edff0d44f5470339a2f405b771f06ed",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-great-escape.webp",
+        "bytes": 32848,
+        "sha256": "c1a6a3ed57e68958c654fb5587a4d20c6ea0260ce323a815932dd97469188b12",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20315800W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8977010-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "globalization-and-its-discontents",
+      "title": "Globalization and Its Discontents",
+      "author": "Joseph E. Stiglitz",
+      "url": "https://www.css-vista.com/book-summaries/globalization-and-its-discontents",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "6e7f1772d85591626510fb0d5f11f76cd57f37bb72623ef55150016fa4405a1a",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/globalization-and-its-discontents.webp",
+        "bytes": 22332,
+        "sha256": "a6e85db06058e8e38b96626b86dee8263cdbf4f2f43199b6a8d36d4e8706bad9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL624826W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/247709-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-price-of-inequality",
+      "title": "The Price of Inequality",
+      "author": "Joseph E. Stiglitz",
+      "url": "https://www.css-vista.com/book-summaries/the-price-of-inequality",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "71f999f11e3826004ec3dec29d3f8bb6ac1c556c84f04de6f2e66d504bdde1b6",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-price-of-inequality.webp",
+        "bytes": 23780,
+        "sha256": "a7697274187214186b493a2989a64098fb77fcf8f81713afae33b18235696aea",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20662505W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9328023-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "title": "The Ascent of Money",
+      "author": "Niall Ferguson",
+      "url": "https://www.css-vista.com/book-summaries/the-ascent-of-money",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "020e4b17eda8ec0596f7c0d75849a10534ff64c2cacaa36a0b7f117714147646",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-ascent-of-money.webp",
+        "bytes": 8362,
+        "sha256": "a2df9cfde6eb41973a65249c48c5ba4c1be9d6db1990368e9d8616574d9dcc36",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL792952W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6327852-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "title": "The Future of Capitalism",
+      "author": "Paul Collier",
+      "url": "https://www.css-vista.com/book-summaries/the-future-of-capitalism",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "adcfabadde1aa978dfe1214cb10a50106773f2e2238c60e46dcf2c232bf1fb64",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-future-of-capitalism.webp",
+        "bytes": 17844,
+        "sha256": "751de9c9b560fd2e0aa4a3091330850979376ca716aa375cc3ac89e43975ca50",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20168548W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8814733-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "doughnut-economics",
+      "title": "Doughnut Economics",
+      "author": "Kate Raworth",
+      "url": "https://www.css-vista.com/book-summaries/doughnut-economics",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "c2f3d72f1e0ace041448ed23c9a1c83a863aa60e78562e626d8880fc8ad42885",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/doughnut-economics.webp",
+        "bytes": 12940,
+        "sha256": "dda558753cee44a59ed6bc04f5d0f7abf74d309278b49376e72099e97c604045",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL18139098W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8347411-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "title": "The Entrepreneurial State",
+      "author": "Mariana Mazzucato",
+      "url": "https://www.css-vista.com/book-summaries/the-entrepreneurial-state",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "7d5509019ab57e74ed6167c7decab49c776ae8606e5d83fff134fe2d9ffe0423",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-entrepreneurial-state.webp",
+        "bytes": 15990,
+        "sha256": "680958e6f4bd2f6dc8c9d789db0adeca58acda3c64a4d56c473fd67d0e774b12",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL16808725W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7265270-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+      "title": "The Prize: The Epic Quest for Oil, Money, and Power",
+      "author": "Daniel Yergin",
+      "url": "https://www.css-vista.com/book-summaries/the-prize-the-epic-quest-for-oil-money-and-power",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "3e549ef1216f070914d15b636cfb7531848f34f55d4480b135d5af36899287af",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-prize-the-epic-quest-for-oil-money-and-power.webp",
+        "bytes": 29190,
+        "sha256": "11ea7b30dd755df52ccb51a06bb2cfe694c06ecd32c30e4d231e9f6e90f45cf5",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2748135W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/409010-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "nudge",
+      "title": "Nudge",
+      "author": "Richard H. Thaler and Cass R. Sunstein",
+      "url": "https://www.css-vista.com/book-summaries/nudge",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "40a509ba1f60c0928235452677f5ee8239fe3c8bfa103ca5cd17521724b437b1",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/nudge.webp",
+        "bytes": 14732,
+        "sha256": "556dc632965159abd4bd13db4a47a31b850b47ae6c561d799cda7f65c8819225",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3936258W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6402116-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "behave",
+      "title": "Behave",
+      "author": "Robert M. Sapolsky",
+      "url": "https://www.css-vista.com/book-summaries/behave",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "ffd0b873a9232ddf55cf61f6ed05d0a4f6a19c44709fffe9dd8747f508589639",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/behave.webp",
+        "bytes": 30168,
+        "sha256": "d93181657ca409ae5f765d24c2f996131f486b939ecd3f3df92db872ef4f2932",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL17835813W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8814831-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "bowling-alone",
+      "title": "Bowling Alone",
+      "author": "Robert D. Putnam",
+      "url": "https://www.css-vista.com/book-summaries/bowling-alone",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "9719abf2b8d817c00dc2666468198af61663ecf43313bb1c11c1f3e92b5a1b2f",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/bowling-alone.webp",
+        "bytes": 20606,
+        "sha256": "4f1e87c6ee03a19178d2be641416614621ad0417c3fabbea83a86fb2b2c09bce",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL4291077W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/426348-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-weirdest-people-in-the-world",
+      "title": "The WEIRDest People in the World",
+      "author": "Joseph Henrich",
+      "url": "https://www.css-vista.com/book-summaries/the-weirdest-people-in-the-world",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "0f82759e4c307c15452edd0e55e7ea83154a83af5deed8243016895508b07bda",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-weirdest-people-in-the-world.webp",
+        "bytes": 24720,
+        "sha256": "c99bc6b3b1435a9620f0aa610c11d4b06558dd0c0bbed45808e28ec6c3d91560",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20844844W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10154462-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-better-angels-of-our-nature",
+      "title": "The Better Angels of Our Nature",
+      "author": "Steven Pinker",
+      "url": "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "122e7e95a051b67948b29bf0c6b415e84e162a33b7e1189fa0c40336cb350f74",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-better-angels-of-our-nature.webp",
+        "bytes": 25450,
+        "sha256": "cf98a40ce910fd8925cf442f2dd56d9d82bbb4e0c145bb48478acb0c80a111aa",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL16239379W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7906239-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "invisible-women",
+      "title": "Invisible Women",
+      "author": "Caroline Criado Perez",
+      "url": "https://www.css-vista.com/book-summaries/invisible-women",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "68b284690a993934e09761f015830a4689f56c619b4463ab5f25924dcdbbd96b",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/invisible-women.webp",
+        "bytes": 19312,
+        "sha256": "8f6cb1cca6feca6562b8a4080cfc92b8e7b3052ffcfe5c0181346b507e3cc8fe",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL20157508W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8802593-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-second-sex",
+      "title": "The Second Sex",
+      "author": "Simone de Beauvoir",
+      "url": "https://www.css-vista.com/book-summaries/the-second-sex",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "c1aba877cf43235f46fdab84f9858e8283edf6c7833f0e55f02be03236cb5867",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-second-sex.webp",
+        "bytes": 4186,
+        "sha256": "b9f2d7c5968dec41bda9d5fbb2689a4e5ae5b99ade12a766c4d26ece987dc90b",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2270159W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/4230379-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "a-room-of-one-s-own",
+      "title": "A Room of One’s Own",
+      "author": "Virginia Woolf",
+      "url": "https://www.css-vista.com/book-summaries/a-room-of-one-s-own",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "39471b92fcb42da1f12f1983beb975824ed8ac4ed8e3e240e7ea7b9998613177",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/a-room-of-one-s-own.webp",
+        "bytes": 26360,
+        "sha256": "b814cfa00d8bbcf30169a7340d833c3a795ca1be3f4af951688d7c436ed2ee83",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL39379W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6559057-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "orientalism",
+      "title": "Orientalism",
+      "author": "Edward W. Said",
+      "url": "https://www.css-vista.com/book-summaries/orientalism",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "fb85f14fa6b8f11e4fb5ff19707775212dbb2fb4e0d69118e029fc1ffd6143d7",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/orientalism.webp",
+        "bytes": 40596,
+        "sha256": "a2a9987b08b9662b61747a4c6ae5486f11c49f465f960b19f890fbc4b8baeeef",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL27405W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/254331-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "imagined-communities",
+      "title": "Imagined Communities",
+      "author": "Benedict Anderson",
+      "url": "https://www.css-vista.com/book-summaries/imagined-communities",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "eac7fb46a6e7b27a90c7a1acabfed346444150ab88611833b12cacfd259323d8",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/imagined-communities.webp",
+        "bytes": 55382,
+        "sha256": "9318c3c3ed990cd6285d39589cd6e8ff13b9dd8f67e8ffbf30f573bb69e0aae9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1702855W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/652236-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "title": "The Wretched of the Earth",
+      "author": "Frantz Fanon",
+      "url": "https://www.css-vista.com/book-summaries/the-wretched-of-the-earth",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "4e500d46ffa366acd46d350f49596c55aa37308dcfe0f99f58c982cda7c9c0fe",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-wretched-of-the-earth.webp",
+        "bytes": 47110,
+        "sha256": "6d61e60a1edda5a12d32c076447129120461cfac3459c5dab51344a17e4053d3",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL24219413W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10681366-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "manufacturing-consent",
+      "title": "Manufacturing Consent",
+      "author": "Edward S. Herman and Noam Chomsky",
+      "url": "https://www.css-vista.com/book-summaries/manufacturing-consent",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a4e620a9812a85b289201b17e2be73d2eea3c80deec5cb06d9190882d2f55b62",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/manufacturing-consent.webp",
+        "bytes": 35604,
+        "sha256": "7f7bd3d940b96bdec33215931914db7113e2f365db389c9555bcf6ddbe369ea3",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL31013W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7900362-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "title": "Amusing Ourselves to Death",
+      "author": "Neil Postman",
+      "url": "https://www.css-vista.com/book-summaries/amusing-ourselves-to-death",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "954e7c07e024db26ef350a63fc6f13e4bb31848837864fcea67031eaa2f45f46",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/amusing-ourselves-to-death.webp",
+        "bytes": 37156,
+        "sha256": "2918ab02b749216c60bb0b43ab9f490fbabc9ee4eb10e79224ab79fd0d79d89b",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL137916W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/94285-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-shallows",
+      "title": "The Shallows",
+      "author": "Nicholas Carr",
+      "url": "https://www.css-vista.com/book-summaries/the-shallows",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "c087f15c4519ae3adf839f5b5daaeff1b8f2948fe395208413845be13996ef0f",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-shallows.webp",
+        "bytes": 7552,
+        "sha256": "6224d0df9c0b15461ef72e94689f37120902c523f2d04a343dc13fb353f1a7e3",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15297392W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6458532-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "chip-war",
+      "title": "Chip War",
+      "author": "Chris Miller",
+      "url": "https://www.css-vista.com/book-summaries/chip-war",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "70577aa45afc3d2d8e68a254c28fe32c50e45c566065601429c7d8ed608dd930",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/chip-war.webp",
+        "bytes": 10172,
+        "sha256": "d54746cbaade500f99352cf58c14f99bfbb7391206660a4d48b7ff9d66bd1c02",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL27846746W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12968901-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "pakistan-a-hard-country",
+      "title": "Pakistan: A Hard Country",
+      "author": "Anatol Lieven",
+      "url": "https://www.css-vista.com/book-summaries/pakistan-a-hard-country",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "498c5087fece1f87e2554885860acf79ef7002e20101f0ffd15dad0134e19543",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/pakistan-a-hard-country.webp",
+        "bytes": 42018,
+        "sha256": "03b7f4f650d71ec095b73955d7af17f83956cdd94203a3012e98563ec8733301",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL15931690W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/10355209-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-idea-of-pakistan",
+      "title": "The Idea of Pakistan",
+      "author": "Stephen P. Cohen",
+      "url": "https://www.css-vista.com/book-summaries/the-idea-of-pakistan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "ebf3fc447a1ef6458020ca9becd4fd00f4817056fb4e935835ee09228e45b36f",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-idea-of-pakistan.webp",
+        "bytes": 37370,
+        "sha256": "65961b5878eaff5f660fbc01fec5d985826e9c28e706a6767827693ba065c769",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2324513W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/613751-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-pakistan-paradox",
+      "title": "The Pakistan Paradox",
+      "author": "Christophe Jaffrelot",
+      "url": "https://www.css-vista.com/book-summaries/the-pakistan-paradox",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "e826fd800babe89dc494d9caafa23012603f8b69a27aa9473b7abaaf1385ba2b",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-pakistan-paradox.webp",
+        "bytes": 46080,
+        "sha256": "63efaaef14a38f47dbd5e4ec7e202f3db6f6550e8733e303b26af7e027f9cad6",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL18942159W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8372942-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-sole-spokesman",
+      "title": "The Sole Spokesman",
+      "author": "Ayesha Jalal",
+      "url": "https://www.css-vista.com/book-summaries/the-sole-spokesman",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "35375d797fd07116e360da6ed9b4c537ea5f0844cfa33a35b31d58862aea704d",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-sole-spokesman.webp",
+        "bytes": 29676,
+        "sha256": "246dbdc0a423cbc434237836e9c8722b99e52bef0de716bba13ecb68eb753bce",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL85854W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/340474-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "title": "The Struggle for Pakistan",
+      "author": "Ayesha Jalal",
+      "url": "https://www.css-vista.com/book-summaries/the-struggle-for-pakistan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "8b0e2481b65f161c6f79ad754a06ad1fa78497b213c3c5f3e4e5c1bc96e1296c",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-struggle-for-pakistan.webp",
+        "bytes": 30792,
+        "sha256": "a95ba5e44e55d12027d174ce8f2e6701a039b0f1ccf7a3f83a48cd07d0c602f3",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL19986815W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8881203-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-great-partition",
+      "title": "The Great Partition",
+      "author": "Yasmin Khan",
+      "url": "https://www.css-vista.com/book-summaries/the-great-partition",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a7ac4b960d45aa023af55415bce76df8f959817104eea76122e644fdb1517c15",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-great-partition.webp",
+        "bytes": 39614,
+        "sha256": "2b794f1e3fa4b1a5d98bee15b8fb8ce06bfe945143f758840a70848a1ce91cb9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL12254113W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7233894-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-murder-of-history",
+      "title": "The Murder of History",
+      "author": "K. K. Aziz",
+      "url": "https://www.css-vista.com/book-summaries/the-murder-of-history",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1520c73198e5d81489309f71d597d99fa8b72fbb3bc33674189906fe42479cbb",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-murder-of-history.webp",
+        "bytes": 5344,
+        "sha256": "e1c86f78083f44f101d677c79aacc29dcf3de0027e4cf722df93c023708f07b6",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL364053W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/6287881-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-indus-saga-and-the-making-of-pakistan",
+      "title": "The Indus Saga and the Making of Pakistan",
+      "author": "Aitzaz Ahsan",
+      "url": "https://www.css-vista.com/book-summaries/the-indus-saga-and-the-making-of-pakistan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "15221b92b9b59bab021cb3ef8d5ceb6575bea19243c03327bfa1cb58a63b8ead",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-indus-saga-and-the-making-of-pakistan.webp",
+        "bytes": 15672,
+        "sha256": "9465dd57a73936520f6887f226e32884d05162b77f460a55f9e0fa3c3f9254d7",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL2608638W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/1130306-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "no-exit-from-pakistan",
+      "title": "No Exit from Pakistan",
+      "author": "Daniel S. Markey",
+      "url": "https://www.css-vista.com/book-summaries/no-exit-from-pakistan",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "546fe54342f0009fd07b2e9c36287086f98892c3b321339e85451dab05594594",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/no-exit-from-pakistan.webp",
+        "bytes": 14182,
+        "sha256": "4001419ba88ab376b74eeb1f2656396f3f090c0b17fe9efdec5f39a75779abe9",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL17557903W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/7817393-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "pakistan-beyond-the-crisis-state",
+      "title": "Pakistan: Beyond the Crisis State",
+      "author": "Edited by Maleeha Lodhi",
+      "url": "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "1e8a92351d41ad6201b7dafbc5cf02733783780e257cba92b20263db0f261bec",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/pakistan-beyond-the-crisis-state.webp",
+        "bytes": 20400,
+        "sha256": "3278ea4f4077073ca541a33e59c84aa0b4d89bc88f3c6e064856fca785ff7626",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL21258447W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/13249164-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "nineteen-eighty-four",
+      "title": "Nineteen Eighty-Four",
+      "author": "George Orwell",
+      "url": "https://www.css-vista.com/book-summaries/nineteen-eighty-four",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "9fe0e0544a961dd88eea9144e421fcb5a80d4abe31a135ec7cbc42293d550224",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/nineteen-eighty-four.webp",
+        "bytes": 74348,
+        "sha256": "5a6ec8e118b3bf499e5792c7fcddc2afa87d8de50a5dbf1a15d14ecc136b07da",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1168083W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/9267242-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "brave-new-world",
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "url": "https://www.css-vista.com/book-summaries/brave-new-world",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a831c8a5227b1c631592326dd46ecb47d6e594d757baa0046b43683c4b362fb0",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/brave-new-world.webp",
+        "bytes": 24564,
+        "sha256": "a658bd8f7c382276b9a764662d6e513a1daabe3bcc7397fe588915d58f961456",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL64365W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8231823-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "animal-farm",
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "url": "https://www.css-vista.com/book-summaries/animal-farm",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "63ca4d1cdec65cb3df317bc373e230ad6681db66e4e204dc7dce473dfcf03600",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/animal-farm.webp",
+        "bytes": 28358,
+        "sha256": "f8e75091187e786834e0ea20fc8668bc6790bed747fa688bba5c2e4b6335f22a",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1168007W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/11261770-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-plague",
+      "title": "The Plague",
+      "author": "Albert Camus",
+      "url": "https://www.css-vista.com/book-summaries/the-plague",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "a3b8ab328e8e490db4f1b1a0933601257d119d56a0e0952d8d2007d5c4fb2d99",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-plague.webp",
+        "bytes": 41524,
+        "sha256": "c7fbe0e71f0c74f9daff4900d290ba8e7275c17d25d5ac032d41632e0bf32edf",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL480801W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/1521194-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "things-fall-apart",
+      "title": "Things Fall Apart",
+      "author": "Chinua Achebe",
+      "url": "https://www.css-vista.com/book-summaries/things-fall-apart",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "58827523c82d23d6707f5adf456798a0e1c4701a87a4ce5c8a067f3ccc5a9519",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/things-fall-apart.webp",
+        "bytes": 36324,
+        "sha256": "36d5e36c274c2ed37cdcc964220b2dd90f41da9081a7bc067a0fec9330e69946",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL891786W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12816943-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "url": "https://www.css-vista.com/book-summaries/to-kill-a-mockingbird",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "7ac638b5d2268ae2673547ba08c6b5e5b3b20a15f6e4f1730013a9a81b8a91dc",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/to-kill-a-mockingbird.webp",
+        "bytes": 54100,
+        "sha256": "88dad6e0fb3d7c937913afcbca3474823db7de4336a1e1eab9b9ac503d828021",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL3140822W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/14351077-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "title": "The Handmaid’s Tale",
+      "author": "Margaret Atwood",
+      "url": "https://www.css-vista.com/book-summaries/the-handmaid-s-tale",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "32ce122b2f85d362260ead2f45051e86faa118bc26ab9c1403b53b600eac595d",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-handmaid-s-tale.webp",
+        "bytes": 34042,
+        "sha256": "732920990e0210277755f1c336b39a01d453d7fa13d85bfc2ebf9b1aa6651919",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL675783W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/8231851-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "title": "The Reluctant Fundamentalist",
+      "author": "Mohsin Hamid",
+      "url": "https://www.css-vista.com/book-summaries/the-reluctant-fundamentalist",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "31e10c324515765a22f355ccecb1dbd937af9e38e2cacdb3d9c5a7f74e46df13",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/the-reluctant-fundamentalist.webp",
+        "bytes": 31142,
+        "sha256": "2e3e8a2ed88441dfc81411f07057b1d61886b2b53651f2969001e94da1e79d39",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL489097W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/2010955-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "man-s-search-for-meaning",
+      "title": "Man’s Search for Meaning",
+      "author": "Viktor E. Frankl",
+      "url": "https://www.css-vista.com/book-summaries/man-s-search-for-meaning",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "5312516aa18d5a41c6a946abce4f32889366d05f473cf0dff38a1944ba029985",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/man-s-search-for-meaning.webp",
+        "bytes": 12642,
+        "sha256": "2d4c42b7f0a0ea7deacd646bba1b9b66f7ead66904c0e4e0cc00d0efb44a39ca",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL8257090W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/465226-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    },
+    {
+      "slug": "long-walk-to-freedom",
+      "title": "Long Walk to Freedom",
+      "author": "Nelson Mandela",
+      "url": "https://www.css-vista.com/book-summaries/long-walk-to-freedom",
+      "summary": {
+        "source": "public/book-summaries/index.json",
+        "bodySha256": "6cf8e2ce24c0fe57931d70c3523a4ca0aaed71e234038a9da06ceb751be9b435",
+        "provenance": "Importer describes owner-provided summaries; this does not independently verify authorship or permissions.",
+        "permissionEvidence": null,
+        "action": "Owner confirms original analysis, contributor rights and basis for any quoted passages; quotation verification is recorded separately."
+      },
+      "cover": {
+        "url": "/book-summaries/covers/long-walk-to-freedom.webp",
+        "bytes": 29796,
+        "sha256": "ff1c98b60336e19ddbc7a6e583af44896fe531fc547ffd5759a6297fa70e9368",
+        "provider": "Open Library",
+        "recordUrl": "https://openlibrary.org/works/OL1783377W",
+        "cachedOriginalImageUrl": "https://covers.openlibrary.org/b/id/12702407-L.jpg?default=false",
+        "permissionEvidence": null,
+        "action": "Confirm applicable display/reproduction terms with the rightsholder or use an owner-created/licensed cover. A catalog/API record is provenance, not a licence."
+      }
+    }
+  ],
+  "journalImages": [
+    {
+      "article": "opinion-ali-hassan",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-ali-hassan-p1.jpg",
+      "bytes": 241006,
+      "sha256": "4529e11ba5354c2bbd707df39066b3cab00ce3b98ae260ad005032101e5f62a7",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-ali-hassan",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-ali-hassan-p2.jpg",
+      "bytes": 344014,
+      "sha256": "83706373ba6f57d61110a09a79db4e239eded93c738002009ff391854b2f2157",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-ali-hassan",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-ali-hassan-p3.jpg",
+      "bytes": 155421,
+      "sha256": "ab189f2245824111bb0edf78c0caf586f09b967c4dc93dba28357fa1541f13bb",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-eid-eve-chaman-phatak",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-eid-eve-chaman-phatak-p1.jpg",
+      "bytes": 495599,
+      "sha256": "70b4a4618073a82b1bbc9882be1bac49400049998c27280e67e016a95d68320d",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-eid-eve-chaman-phatak",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-eid-eve-chaman-phatak-p2.jpg",
+      "bytes": 410836,
+      "sha256": "1cc345a81d0d041271b240c7fcc57a131eeae5412b9f425174a5fc411ffc1d3a",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-machines-at-war",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-machines-at-war-p1.jpg",
+      "bytes": 283597,
+      "sha256": "0937f5ffd20f904397e7684e77b94224ce8631ba8f464b9ad5bcd621f89b4697",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-machines-at-war",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-machines-at-war-p2.jpg",
+      "bytes": 332775,
+      "sha256": "09b120f6757e09fbf8115292da5465a2641d126fc362c9f7cadbd36b6cc91f8d",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-machines-at-war",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-machines-at-war-p3.jpg",
+      "bytes": 148541,
+      "sha256": "e0bee36945bbd8bc8924bc5415f13bf08dcc997d7550e5a610fa20eeaea8b5fe",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-power-without-peace",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-power-without-peace-p1.jpg",
+      "bytes": 324716,
+      "sha256": "a46708327a2b034a869074bb4130320b066e25c4c2c05e221a211e66cc08da7f",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-the-next-48-hours",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-the-next-48-hours-p1.jpg",
+      "bytes": 373506,
+      "sha256": "03ce1b7bae27e3212258d53a43296e1fc7e469c4bd3e890c4a16a8b3c6265bf2",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    },
+    {
+      "article": "opinion-harassers-calculus",
+      "author": "Ali Hassan Sargana",
+      "url": "/opinions/opinion-harassers-calculus-p1.jpg",
+      "bytes": 376845,
+      "sha256": "c8d0c80a700b623c0624cfee6856e3182c969c5beeb059305fe649e1e238673f",
+      "originalPublisher": null,
+      "originalPublicationUrl": null,
+      "permissionEvidence": null,
+      "action": "Confirm author/publication agreement and any photograph or other embedded third-party image rights. Accessibility transcription does not establish those permissions."
+    }
+  ],
+  "optionalSourceDocuments": [
+    {
+      "path": "data-archive/optional-notes/00_Overview.docx",
+      "bytes": 10725,
+      "sha256": "0d23a04ed25b9ea355ff59fbff9442d814a7165660290f92cbf54b2bc2442690",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/01_Accountancy_Auditing.docx",
+      "bytes": 34548,
+      "sha256": "ba61fd19313ac75eca8dd78512966b088994f9b6eb147dd0f64a81c937ede49d",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/02_Economics.docx",
+      "bytes": 30716,
+      "sha256": "644b80d59d7033fd4973329fc05e795e94e4c05a488d710781182e129c4afcee",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/03_Computer_Science.docx",
+      "bytes": 48299,
+      "sha256": "216eaaf3ea1215ba957f7cd8545cab55e9f133f8a4d6ad074bcaeaf03138b252",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/04_Political_Science.docx",
+      "bytes": 33266,
+      "sha256": "98c7725fa7f1a0f97951329995a62c12d387238fb186811752089e79126e246f",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/05_International_Relations.docx",
+      "bytes": 30164,
+      "sha256": "607f162dc20993a1825b659e5cc8aa2245ed38a1d44a4f81169b712ba1f9ce60",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Botany_Expanded_Master_Notes.docx",
+      "bytes": 117925,
+      "sha256": "26a9609aeb7801b04423299f623d41acd5d0e44c0677b7f57d89920752a7339b",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/British_History_Expanded.docx",
+      "bytes": 37194,
+      "sha256": "8d4dd7b46e9ddd070ffc0d516a1459afeb7bf67233c8c0b8e7ad02bcd78e7ef0",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Business Administration - Expanded Master Study Resource.docx",
+      "bytes": 58872,
+      "sha256": "8128396825450bdb11a19f637a2664368d4608e34082b895c7a704f8b8ec8a8b",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/English_Literature_Expanded_Master_Notes.docx",
+      "bytes": 82183,
+      "sha256": "9aa4677d7d653c74fed4e3c0693a18e2b0f22294c3feec7b9ae566fe2bebe5d6",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/European_History_Expanded.docx",
+      "bytes": 35627,
+      "sha256": "423fd769ec0317c41fc158207f9b39ededc1e1dfe5d5022887f6d1fd6ef7e0ba",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Gender_Studies_Expanded_Master_Notes.docx",
+      "bytes": 63437,
+      "sha256": "9b5e4321b340cdbb8dfc774b68d9549ff408703022c8b439682b618d08873919",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group III Optional Subjects - Expanded Master Study Resource.docx",
+      "bytes": 143839,
+      "sha256": "491b67130eff564b29ddb0e366707bade49fa0ff64751e3192935664cb00bbfe",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group_II_Applied_Pure_Mathematics_Master_Resource.docx",
+      "bytes": 30074,
+      "sha256": "ebdefd9ad56d29f050926335ef05b466526f0ec673f859da9d8589ef79e59fa4",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group_II_Physics_Chemistry_Master_Resource.docx",
+      "bytes": 72239,
+      "sha256": "465193a65fe27fbfa85e0e1b435bc1f0be709b4e2c234f2e67d981ccccaf4117",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group_II_Statistics_Geology_Master_Resource.docx",
+      "bytes": 52424,
+      "sha256": "b5be8bd4b9c6798a4ef952f65a51cd42fdd1055bb0412aab3fd6dfdb0b04b84c",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group_VII_Master_Study_Resource_Sociology_Psychology_Geography_FINAL.docx",
+      "bytes": 168780,
+      "sha256": "7b99861f2d14e3b66cf7f049c1269da6a349ee2d68887270d34942827abe69d9",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Group_VI_Optional_Subjects_MASTER_STUDY_RESOURCE.docx",
+      "bytes": 154735,
+      "sha256": "91c237fea5a51f87cf4427d302aff6038a6ff41a89a6184f3453de07237e1062",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/History_of_Pakistan_and_India_Expanded.docx",
+      "bytes": 103874,
+      "sha256": "c4393f90e726385c42209dcb420b8be26fd7a34086b1f5eb058232f135a9e779",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/History_of_USA_Expanded.docx",
+      "bytes": 43631,
+      "sha256": "d39ef50949fb2a0b4455ad08ddd51616397247489a0989beff56b9305f82a967",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Islamic_History_and_Culture_Expanded.docx",
+      "bytes": 42144,
+      "sha256": "23fb73678ff13df293dc22fbcfc585e2263af37b21789dbbc9ac6dcf67107744",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Town Planning and Urban Management - Expanded Master Study Resource.docx",
+      "bytes": 28903,
+      "sha256": "016eea4428587f372ce03b1fe6a825c85849e4a75cb6b52d30c7b245cd9a4f92",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    },
+    {
+      "path": "data-archive/optional-notes/Zoology_Expanded_Master_Notes.docx",
+      "bytes": 91224,
+      "sha256": "a67b52fda0e7d7cd28a316bdeccb7070ff4b2d1cdb97d5629b4dade4140733fc",
+      "permissionEvidence": null,
+      "action": "Confirm original authorship/contributor permission and rights for any reproduced extracts or illustrations. Preserve author source and reviewed corrections separately."
+    }
+  ],
+  "otherHostedPublications": [
+    {
+      "id": "qawaid-e-urdu",
+      "title": "Qawaid-e-Urdu",
+      "assertedByline": "By Sir Ali Hassan Sargana · 2027 edition",
+      "destination": "/account/resources",
+      "accountRequired": true,
+      "localDocument": null,
+      "cover": {
+        "url": "/books/qawaid-e-urdu-cover.jpg",
+        "bytes": 198682,
+        "sha256": "b77fd07f634969e7fe79c47a6ed3cf77e147db4f9b9b9b002d65384d8595bb9d"
+      },
+      "permissionEvidence": null,
+      "action": "Confirm owner authorship and embedded-asset rights. Account-gated material was not fetched or republished."
+    },
+    {
+      "id": "constitutional-history",
+      "title": "Constitutional History of Pakistan",
+      "assertedByline": "By Ali Hassan Sargana",
+      "destination": "/books/constitutional-history-of-pakistan-ali-hassan-sargana.pdf",
+      "accountRequired": false,
+      "localDocument": {
+        "url": "/books/constitutional-history-of-pakistan-ali-hassan-sargana.pdf",
+        "bytes": 2107994,
+        "sha256": "49b4aba6326e060b3ac155f7e469cb6fab8a669f3465d280c5a8190fb87247d8"
+      },
+      "cover": {
+        "url": "/books/book-constitutional-history.jpg",
+        "bytes": 84697,
+        "sha256": "7a7374c6fef0b9fba0e25445c5fcd28cabee335355967efcdcdcccf4a656aa82"
+      },
+      "permissionEvidence": null,
+      "action": "Confirm owner authorship and embedded-asset rights. Account-gated material was not fetched or republished."
+    },
+    {
+      "id": "master-grammar",
+      "title": "Master Grammar - 30-Day Course",
+      "assertedByline": "By Ali Hassan Sargana",
+      "destination": "/books/master-grammar-30-day-course.pdf",
+      "accountRequired": false,
+      "localDocument": {
+        "url": "/books/master-grammar-30-day-course.pdf",
+        "bytes": 1427417,
+        "sha256": "fd210f8668bcd5901c044cb5bdf3c83f71f6b2600f0dd7e4b641857ebc1a18ac"
+      },
+      "cover": {
+        "url": "/books/book-master-grammar.jpg",
+        "bytes": 85182,
+        "sha256": "86a835dfe41d47556ddbd94b43e662f8aab5fecb38e839673d09e8f70b767b53"
+      },
+      "permissionEvidence": null,
+      "action": "Confirm owner authorship and embedded-asset rights. Account-gated material was not fetched or republished."
+    }
+  ],
+  "providerGuidance": [
+    {
+      "url": "https://openlibrary.org/dev/docs/api/covers",
+      "checkedOn": "2026-10-15",
+      "observation": "Official API guidance describes cover display, attribution links and bulk access limits. It does not establish this project’s rightsholder permissions."
+    }
+  ]
+}

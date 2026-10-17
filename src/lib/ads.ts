@@ -14,6 +14,15 @@ export interface AdRoutePolicy {
   minimumHeight: number
 }
 
+export type AdContentState = 'ready' | 'loading' | 'error'
+
+/** Explicit rendered-state markers, shared by the provider and slot guard. */
+export function renderedAdContentState(root: Pick<ParentNode, 'querySelector'>): AdContentState {
+  if (root.querySelector('[data-cssv-ad-state="error"]')) return 'error'
+  if (root.querySelector('[data-cssv-ad-state="loading"]')) return 'loading'
+  return 'ready'
+}
+
 export interface AdPageState {
   /** An authentication, registration, recovery or verification transaction. */
   authTransaction?: boolean
@@ -130,10 +139,12 @@ export function deriveAdPageState(input: {
   user: unknown
   loading?: boolean
   passwordRecovery?: boolean
+  contentState?: AdContentState
 }): AdPageState {
   const route = findRouteDefinition(input.pathname)
   return {
-    loadingState: Boolean(input.loading),
+    loadingState: Boolean(input.loading) || input.contentState === 'loading',
+    errorState: input.contentState === 'error',
     authTransaction: (route?.access === 'authenticated' && !input.user)
       || Boolean(input.passwordRecovery)
       || new URLSearchParams(input.search ?? '').get('reset') === '1',
@@ -161,6 +172,22 @@ export function canShowAuthenticatedAccountAd(
 export function isAdFreePath(pathname: string, search = '', state: AdPageState = {}) {
   const policy = getAdRoutePolicy(pathname, search, state)
   return !policy.autoAdsEnabled && !policy.manualAdsEnabled
+}
+
+/** A script already executed in an SPA cannot be recalled by removing its tag.
+ * Leave that document when navigating to an ad-free route; the next HTML
+ * response has no loader. Loading/error state on the same route must not cause
+ * refresh loops, so this uses route eligibility, independently of live state.
+ */
+export function needsCleanAdDocument(input: {
+  previousRoute: string
+  pathname: string
+  search: string
+  libraryPresent: boolean
+}) {
+  return input.previousRoute !== `${input.pathname}${input.search}`
+    && input.libraryPresent
+    && !getAdRoutePolicy(input.pathname, input.search).autoAdsEnabled
 }
 
 export function shouldProtectVignetteLink(input: {

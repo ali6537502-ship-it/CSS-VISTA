@@ -1,0 +1,20 @@
+{
+  "reviewedOn": "2026-10-15",
+  "localPdf": {
+    "path": "public/results/css-2026-written-qualified-candidates.pdf",
+    "sha256": "ad9629c3acc118f638a08922522a42f9aca30dc756dcff90498719190a0fd54b",
+    "bytes": 985859,
+    "pages": 7,
+    "annexEntries": 476,
+    "uniqueSerials": 476,
+    "continuousSerials1To476": true,
+    "noticeMatchesSuppliedMetadata": true
+  },
+  "publicCorroboration": {
+    "url": "https://www.app.com.pk/national/476-candidates-clear-css-written-examination/",
+    "title": "476 candidates clear CSS written examination",
+    "supported": "APP reports FPSC\u2019s announcement of 476 CSS-2026 written qualifiers, dated 31 August. This corroborates the total and announcement; it does not authenticate the hosted PDF byte-for-byte or every candidate name."
+  },
+  "officialRemotePdfMatch": "unavailable",
+  "privacy": "No candidate names or roll numbers exported into this evidence record."
+}

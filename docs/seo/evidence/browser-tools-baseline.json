@@ -1,0 +1,80 @@
+{
+  "observedAt": "2026-10-14T07:08:04.892Z",
+  "method": "Read-only navigation; interactions exclusively loopback, disposable browser localStorage. No API writes, no account login, TLS validation enabled.",
+  "tools": [
+    {
+      "path": "/subjects/selector",
+      "errors": [],
+      "initialText": "Optional Subject Selection Tool\n\nAnswer honestly about your background, time and preferences. The tool validates FPSC grouping rules and suggests combinations with reasons and risks - it does not predict scores.\n\n1\nBackground\n2\nTime & skills\n3\nInterests\n4\nPreferences\n5\nResults\nYour academic background\nSelect…\nCommerce / Business\nComputer Science / IT\nEngineering\nNatural Sciences (Bio/Chem/Physics)\nSocial Sciences / Arts\nLaw\nLanguages / Literature\nMedical\nHave you attempted CSS before?\nNo - first attempt\nYes - one attempt\nYes - multiple attempts\nReset\nNext",
+      "initialRobots": "noindex, follow",
+      "resultText": "Optional Subject Selection Tool\n\nAnswer honestly about your background, time and preferences. The tool validates FPSC grouping rules and suggests combinations with reasons and risks - it does not predict scores.\n\n1\nBackground\n2\nTime & skills\n3\nInterests\n4\nPreferences\n5\nResults\nSubject selection is a personal academic decision. Previous scoring trends do not guarantee future marks.\nSuggested combination\nTotal is 900, must be exactly 600\nPolitical Science (Group 1)\n200\nPhysics (Group 2)\n200\nPublic Administration (Group 3)\n100\nHistory of Pakistan & India (Group 4)\n100\nGender Studies (Group 5)\n100\nConstitutional Law (Group 6)\n100\nSociology (Group 7)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Physics: Very demanding without degree-level command Constitutional Law: Requires accurate citation of constitutions\n\nAlternative combination\nTotal is 900, must be exactly 600\nInternational Relations (Group 1)\n200\nChemistry (Group 2)\n200\nGovernance & Public Policies (Group 3)\n100\nIslamic History & Culture (Group 4)\n100\nEnvironmental Sciences (Group 5)\n100\nCriminology (Group 6)\n100\nAnthropology (Group 7)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Chemistry: Demanding; practical knowledge assumed\n\nBack\nStart over",
+      "invalid900": 2,
+      "overflow": false
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "errors": [],
+      "initialText": "CSS Age & Attempts Calculator\n\nCheck your FPSC age window, final age-eligible CSS examination year, written chances remaining, and the maximum attempts you can still realistically use.\n\nCalculate My CSS Eligibility\n\nAge is checked against the FPSC cut-off for each examination year, not your age today.\n\nDate of Birth\n\nEnter it as DD / MM / YYYY, or use the calendar.\n\nYour DOB is used only for this calculation and is not placed in the page URL.\n\nPrevious CSS Written Attempts\n0 - I have never appeared in a CSS written examination\n1\n2\n3\nWhat counts as a written attempt?\nFPSC Rule 6 Age Relaxation\n\nDo you qualify for the FPSC two-year upper-age relaxation under Rule 6?\n\nNo\nYes\nNot Sure\nCalculate My CSS Eligibility\nFPSC cut-off method\n\nFor CE-Y, age eligibility is determined on 31 December of Y−1. The normal DOB window runs from 1 January of Y−30 through 1 January of Y−21, inclusive.\n\nPrivacy\n\nThis feature calculates locally in your browser. It does not require CNIC and does not send your DOB to an external eligibility service.\n\nOfficial-rule notice\n\nCalculated according to FPSC CSS Competitive Examination Rules currently implemented by CSS VISTA. Eligibility remains subject to verification by FPSC and any subsequent amendment to the official rules.\n\nView FPSC Rules\nRules last verified: 3 October 2026",
+      "initialRobots": "index, follow",
+      "resultText": "CSS Age & Attempts Calculator\n\nCheck your FPSC age window, final age-eligible CSS examination year, written chances remaining, and the maximum attempts you can still realistically use.\n\nCalculate My CSS Eligibility\n\nAge is checked against the FPSC cut-off for each examination year, not your age today.\n\nDate of Birth\n\nEnter it as DD / MM / YYYY, or use the calendar.\n\nYour DOB is used only for this calculation and is not placed in the page URL.\n\nPrevious CSS Written Attempts\n0 - I have never appeared in a CSS written examination\n1\n2\n3\nWhat counts as a written attempt?\nFPSC Rule 6 Age Relaxation\n\nDo you qualify for the FPSC two-year upper-age relaxation under Rule 6?\n\nNo\nYes\nNot Sure\nCalculate My CSS Eligibility\nFPSC cut-off method\n\nFor CE-Y, age eligibility is determined on 31 December of Y−1. The normal DOB window runs from 1 January of Y−30 through 1 January of Y−21, inclusive.\n\nPrivacy\n\nThis feature calculates locally in your browser. It does not require CNIC and does not send your DOB to an external eligibility service.\n\nYOUR CSS ELIGIBILITY\n\nEligible\n\nYour age falls within the ordinary FPSC age window for CE-2027.\n\nDOB used: 15 / 06 / 1998\n\nAGE STATUS\n\nEligible\n\nFor CE-2027\n\nFINAL ELIGIBLE CSS EXAM\n\nCE-2028\n\nFinal year under the age rule used above\n\nWRITTEN ATTEMPTS REMAINING\n\n3 of 3\n\nMPT does not reduce this number\n\nAGE-ELIGIBLE OPPORTUNITIES REMAINING\n\n2\n\n2 examination years remaining\n\nMAXIMUM USABLE ATTEMPTS REMAINING\n\n2\n\nLimited by both age and the three written chances\n\nCSS Age Window Remaining\n\n2 examination years remaining\n\nFinal age-eligible examination: CSS CE-2028\n\nFuture age-eligible CE years from 2027 onward: CE-2027, CE-2028. Age eligibility does not mean applications for those years are currently open.\n\nExamination-Year Timeline\n\nEach year is checked separately against the FPSC DOB boundaries.\n\nCE-2027\n\nAge Eligible\n\nAge cut-off: 31 December 2026\n\nCE-2028\n\nAge Eligible - Final Year\n\nAge cut-off: 31 December 2027\n\nCE-2029\n\nOver Age\n\nAge cut-off: 31 December 2028\n\nHow this was calculated\nOfficial-rule notice\n\nCalculated according to FPSC CSS Competitive Examination Rules currently implemented by CSS VISTA. Eligibility remains subject to verification by FPSC and any subsequent amendment to the official rules.\n\nView FPSC Rules\nRules last verified: 3 October 2026",
+      "resultHeading": 2,
+      "overflow": false
+    },
+    {
+      "path": "/grammar-course",
+      "errors": [],
+      "initialText": "30-Day Grammar Course\n\nLearn a rule, try it, understand your mistakes and use it in your own writing. Your lesson session picks up where you stopped.\n\nGrammar toolkit\nVocabulary practice\nHandbook PDFs\n\nGRAMMAR STUDIO · DAY 1 / 30\n\nWhat every word is doing\nAsk about this lesson\n\nName the job each word performs in a sentence, so that you can see why an error is an error.\n\nContinue overview\nOpen reference\n\n480 authored questions · 180 corrections · 285 worked examples\n\nYour session\n\nIn progress\n\nOverview\n\nWarm-up\n0/4\nDrill\n0/12\nCorrections\n0/6\nCourse completion\n0/30 days\n\nAbout 45 minutes · Authored practice · Instant explanations\n\nGuest progress stays in this browser. Earlier course progress has been preserved.\nToday’s lesson\nError Lab\nGrammar Profile\nGrammar toolkit\nMistake notebook (0)\nChoose a day\nDay 1 · What every word is doing\nDay 2 · The backbone: subject, verb, object\nDay 3 · Phrases and clauses\nDay 4 · Fragments, run-ons and comma splices\nDay 5 · Subject–verb agreement\nDay 6 · Capital letters, full stops and the everyday comma\nDay 7 · Present and past: the four forms of each\nDay 8 · Perfect tenses: connecting two times\nDay 9 · Future forms and the sequence of tenses\nDay 10 · Modals and conditionals\nDay 11 · Active, passive and causative\nDay 12 · Reported speech\nDay 13 · Articles and determiners\nDay 14 · Pronouns and clear reference\nDay 15 · Modifiers: put the describing words where they belong\nDay 16 · Prepositions and word partnerships\nDay 17 · Gerunds, infinitives and participles\nDay 18 · Comparison, and a mixed-precision review\nDay 19 · Conjunctions and logical connectors\nDay 20 · Parallel structure\nDay 21 · Punctuation that carries meaning\nDay 22 · Concision: saying it in fewer words\nDay 23 · Formal register and precise diction\nDay 24 · Cohesion: making a paragraph flow\nDay 25 · Words that are constantly confused\nDay 26 · The minimum-correction method\nDay 27 · Grammar inside précis writing\nDay 28 · Editing a paragraph under pressure\nDay 29 · Timed simulation across the whole syllabus\nDay 30 · Mastery and a maintenance plan\nYour next action\nRead full lesson\n1\nOverview\n2\nLearn\n3\nExamples\n4\nWarm-up\n5\nDaily drill\n6\nCorrections\n7\nYour writing\nDay 1 of 30 · Sentence foundations\nabout 45 minutes\nWhat every word is doing\n\nName the job each word performs in a sentence, so that you can see why an error is an error.\n\nWHY THIS MATTERS IN THE PAPER\n\nError-correction questions never tell you which rule is broken. You are shown a sentence and asked to find the fault. That is only possible if you can see that in “he speaks English fluent”, the word fluent is an adjective standing in an adverb’s place.\n\nHOW TO WORK THIS DAY\n\n1. Read the rules slowly, once.\n2. Cover the right-hand column of the examples and predict.\n3. Do the warm-up; if you miss one, reread that rule.\n4. Attempt the drill and read each explanation.\n5. Write the six corrections out by hand.\n6. Finish with the writing task in your own words.\nWORDS YOU WILL NEED TODAY\nWord class (part of speech)\nThe job a word is doing in a particular sentence - not a permanent label stuck to the word.\nNoun\nA word that names a person, place, thing, group or idea: officer, Lahore, file, committee, justice.\nVerb\nA word that carries the action or the state: approve, collapse, seem, is.\nAdjective\nA word that describes a noun: a weak institution, transparent rules.\nAdverb\nA word that describes a verb, an adjective or another adverb: acted quickly, deeply unfair.\nFunction word\nA small word that joins or points rather than describes: the, of, and, because, to.\nPrevious step\nStep 1 of 7\nNext step\n\nTo complete this day: answer all 4 warm-up and 12 drill questions, write the 6 corrections, complete your writing task and tick the self-review checklist.\n\nPrevious day\nMark this day complete\nNext day",
+      "initialRobots": "noindex, follow",
+      "buttons": [
+        "",
+        "",
+        "",
+        "My Account",
+        " Back",
+        " Grammar toolkit",
+        "Continue overview",
+        " Today’s lesson",
+        " Error Lab",
+        " Grammar Profile",
+        " Grammar toolkit",
+        " Mistake notebook (0)",
+        "Read full lesson",
+        "1Overview",
+        "2Learn",
+        "3Examples",
+        "4Warm-up",
+        "5Daily drill",
+        "6Corrections",
+        "7Your writing",
+        "Previous step",
+        "Next step",
+        " Previous day",
+        " Mark this day complete",
+        "Next day ",
+        "",
+        "Privacy & Cookie Settings"
+      ],
+      "headings": [
+        "30-Day Grammar Course",
+        "What every word is doing",
+        " Course map",
+        "Your next action",
+        "What every word is doing",
+        " Words you will need today",
+        " Learn the rules",
+        " See the rule fail and work",
+        " Warm-up",
+        " Daily drill",
+        " Correct the sentence yourself",
+        " Write it in your own words",
+        "Practice",
+        "Library & Tools",
+        "Official Sources",
+        "Resources",
+        "About",
+        "Legal"
+      ],
+      "overflow": false
+    }
+  ]
+}

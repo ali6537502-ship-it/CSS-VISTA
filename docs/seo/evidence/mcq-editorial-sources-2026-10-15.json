@@ -1,0 +1,236 @@
+{
+  "checkedAt": "2026-10-15T11:53:05+00:00",
+  "method": "Direct public HTTP requests. Only short verification excerpts and response fingerprints retained; no account or Google indexing evidence.",
+  "sources": {
+    "bc-adjective-prepositions": {
+      "requestedUrl": "https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/adjectives-prepositions",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/adjectives-prepositions",
+      "title": "Adjectives and prepositions | LearnEnglish",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "2efdbccc3a6643b2340b8ae0d3ac1d688f1666e10ac93089e4440bcfd8e48ac9",
+      "evidenceExcerpt": "We use at with adjectives like good / bad",
+      "verificationNote": "Skill adjectives use at; examples also establish worried about, afraid of, proud of, interested in and similar to."
+    },
+    "bc-passives": {
+      "requestedUrl": "https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/passives",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/passives",
+      "title": "Passives | LearnEnglish",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "fa62b4655188ea4f772bf03d459c8231fe26ded028b51a5ac3743d4ef7cf4d17",
+      "evidenceExcerpt": "We make the passive using the verb be + past participle.",
+      "verificationNote": "Passive construction and past-simple was/were + past participle."
+    },
+    "cambridge-for-since": {
+      "requestedUrl": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/for-or-since",
+      "title": "For or since ? - Grammar - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "a20134de87ed754c13debd112b2be5085a4cc12f99d85a07e45807434d6807e0",
+      "evidenceExcerpt": "We use for with a period of time",
+      "verificationNote": "For takes a duration; since takes a starting point."
+    },
+    "cambridge-find": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/find",
+      "url": "https://dictionary.cambridge.org/dictionary/english/find",
+      "title": "FIND | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "3aab60e361d8eb822e8be193c79db5d768f443b959af93ba1dd7d35cbc38df7c",
+      "evidenceExcerpt": "past tense and past participle found",
+      "verificationNote": "The find entry identifies found as its past tense and past participle."
+    },
+    "cambridge-found": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/found",
+      "url": "https://dictionary.cambridge.org/dictionary/english/found",
+      "title": "FOUND | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "9c902cf335b0417af91041d06e2c3374a72ba641f3f6946ed758c528eabc6f25",
+      "evidenceExcerpt": "to bring something into existence:",
+      "verificationNote": "The distinct verb found means to establish; its regular past is founded."
+    },
+    "cambridge-commander": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/commander",
+      "url": "https://dictionary.cambridge.org/dictionary/english/commander",
+      "title": "COMMANDER | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "f8d31b13543f8e2223206acc80b6ecfb2438d55cc75ab4a322bba4825b7d9309",
+      "evidenceExcerpt": "an officer who is in charge of a military operation",
+      "verificationNote": "A commander is a person in charge; the analogy needs a person followed by an action."
+    },
+    "cambridge-legislate": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/legislate",
+      "url": "https://dictionary.cambridge.org/dictionary/english/legislate",
+      "title": "LEGISLATE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "1b5be316536d222d3f7578d1d4a3c910ffe211a67170483bf39db0afdf850a73",
+      "evidenceExcerpt": "to make laws:",
+      "verificationNote": "Legislate is a verb for making laws."
+    },
+    "cambridge-senator": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/senator",
+      "url": "https://dictionary.cambridge.org/dictionary/english/senator",
+      "title": "SENATOR | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "e302aedbff4c95c30431e6ec7c3bb0e30f34cbfe127d950e0435f5838c460701",
+      "evidenceExcerpt": "a politician who has been elected to a Senate:",
+      "verificationNote": "Senator identifies a person in a legislative chamber."
+    },
+    "senate-powers": {
+      "requestedUrl": "https://www.senate.gov/about/powers-procedures.htm",
+      "url": "https://www.senate.gov/about/powers-procedures.htm",
+      "title": "U.S. Senate: Powers and Procedures",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "ae42b20e1d8ff1cacf51941a845aa5664ab011d983e92491d9dd8f25b23b0a5a",
+      "evidenceExcerpt": "legislation",
+      "verificationNote": "Primary chamber description of the lawmaking role; supports Senator:Legislates."
+    },
+    "cambridge-emaciated": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/emaciated",
+      "url": "https://dictionary.cambridge.org/dictionary/english/emaciated",
+      "title": "EMACIATED | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "4d523dc3c046427f2d4c33881006d46332a5d0d6ee620fcc585aaaafec2d04dc",
+      "evidenceExcerpt": "very thin and weak, usually because of illness or extreme hunger:",
+      "verificationNote": "The adjective denotes unhealthy thinness, so Very thin is the matching option."
+    },
+    "cambridge-enigma": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/enigma",
+      "url": "https://dictionary.cambridge.org/dictionary/english/enigma",
+      "title": "ENIGMA | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "cc79b426df664629176a20bb2885547abe1fe03423a8975990d8c9cf0e39b682",
+      "evidenceExcerpt": "something that is mysterious and seems impossible to understand completely:",
+      "verificationNote": "Enigma denotes a mystery."
+    },
+    "cambridge-paramount": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/paramount",
+      "url": "https://dictionary.cambridge.org/dictionary/english/paramount",
+      "title": "PARAMOUNT | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "48b593861516d62f33d2060118edd7116c53995ebe5d7690410ebc6376b95ad6",
+      "evidenceExcerpt": "more important than anything else:",
+      "verificationNote": "Paramount means most important."
+    },
+    "cambridge-probity": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/probity",
+      "url": "https://dictionary.cambridge.org/dictionary/english/probity",
+      "title": "PROBITY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "5edccf6a0c7119718af96e2085d5a971c20732b8aaf2a31aea8ee3d35cf3f601",
+      "evidenceExcerpt": "complete honesty:",
+      "verificationNote": "Probity concerns honesty and correct conduct."
+    },
+    "cambridge-call-it-a-day": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/call-it-a-day",
+      "url": "https://dictionary.cambridge.org/dictionary/english/call-it-a-day",
+      "title": "CALL IT A DAY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "2b0e85921eff8b0d8709d83cc36f9545c43c591518b3a28435002299152e614a",
+      "evidenceExcerpt": "to stop working for the day:",
+      "verificationNote": "The idiom means to stop the current work."
+    },
+    "cambridge-see-eye-to-eye": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/see-eye-to-eye",
+      "url": "https://dictionary.cambridge.org/dictionary/english/see-eye-to-eye",
+      "title": "SEE EYE TO EYE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "b688d0852b039da57667e71932435f6f330586a7f213728e6fab03dda8e9675f",
+      "evidenceExcerpt": "to agree with someone:",
+      "verificationNote": "The idiom expresses agreement."
+    },
+    "cambridge-sinecure": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/sinecure",
+      "url": "https://dictionary.cambridge.org/dictionary/english/sinecure",
+      "title": "SINECURE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "5bd17b338fe68ea71458f2aa652b09be4294882a812457960c028511612f1a51",
+      "evidenceExcerpt": "a paid position that involves little or no work:",
+      "verificationNote": "The noun describes a paid post with few duties; it does not establish a salary threshold."
+    },
+    "cambridge-epic": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/epic",
+      "url": "https://dictionary.cambridge.org/dictionary/english/epic",
+      "title": "EPIC | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "cd066b505e02e6c0dbdb638bfa02db1b65f3a8f2edc1bad25da8bc7ffc7d1ce0",
+      "evidenceExcerpt": "a film, poem, or book that is long and contains a lot of action",
+      "verificationNote": "The literary sense supports the question about a long heroic narrative poem."
+    },
+    "cambridge-bigamy": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/bigamy",
+      "url": "https://dictionary.cambridge.org/dictionary/english/bigamy",
+      "title": "BIGAMY | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "536ce1e89a0c659fc9545bfab707eedbbb8e629aebb784b86ada3213a555cbe9",
+      "evidenceExcerpt": "the act of marrying a person while already legally married to someone else",
+      "verificationNote": "Vocabulary definition, not jurisdiction-specific legal advice."
+    },
+    "cambridge-regicide": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/regicide",
+      "url": "https://dictionary.cambridge.org/dictionary/english/regicide",
+      "title": "REGICIDE | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "212e8939e40da2abd1b600a2439ba6790124c3662de67851be9f8c71763781eb",
+      "evidenceExcerpt": "a person who kills a king, or the act of killing a king",
+      "verificationNote": "The word can denote the act as well as the person."
+    },
+    "cambridge-bohemian": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/bohemian",
+      "url": "https://dictionary.cambridge.org/dictionary/english/bohemian",
+      "title": "BOHEMIAN | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "66bc58403008f40921333d3d6d38fa137944eccc68b05bc7fa96acb55ee92a43",
+      "evidenceExcerpt": "a person who lives in a very informal style that is different from the way most people live",
+      "verificationNote": "Supports the unconventional-lifestyle sense used by the question."
+    },
+    "cambridge-scurrilous": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/scurrilous",
+      "url": "https://dictionary.cambridge.org/dictionary/english/scurrilous",
+      "title": "SCURRILOUS | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "6cc47ae02f46f5be373605cee550f29a3f0e49b2d129691112d2d78d0268e10c",
+      "evidenceExcerpt": "rude and cruel, and sometimes damaging:",
+      "verificationNote": "Scurrilous describes abusive or damaging criticism."
+    },
+    "cambridge-shallot": {
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/shallot",
+      "url": "https://dictionary.cambridge.org/dictionary/english/shallot",
+      "title": "SHALLOT | English meaning - Cambridge Dictionary",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "dc146028a8c96ae4bfc25e07798cc305a7229d27bd5f866b80dd5051751728fa",
+      "evidenceExcerpt": "a type of small onion",
+      "verificationNote": "Demonstrates a malformed question where none of the choices is a shallot category."
+    },
+    "cambridge-desire-thesaurus": {
+      "requestedUrl": "https://dictionary.cambridge.org/thesaurus/desire",
+      "url": "https://dictionary.cambridge.org/thesaurus/desire",
+      "title": "DESIRE - 25 Synonyms and Antonyms - Cambridge English",
+      "checkedAt": "2026-10-15T11:53:05+00:00",
+      "httpStatus": 200,
+      "responseSha256": "e86d4fc68e69cb310d21d5ae76a7d0cb57bff66aad8e1b8e1556025687aa7fcf",
+      "evidenceExcerpt": "Antonyms distaste aversion dislike",
+      "verificationNote": "Dislike/aversion are listed antonyms, so the original Hate key is not demonstrably a unique error."
+    }
+  }
+}

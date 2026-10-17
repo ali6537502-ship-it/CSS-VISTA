@@ -1,0 +1,20 @@
+{
+  "verifiedOn": "2026-10-15",
+  "baselineCommit": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "centralQuestions": 37627,
+  "idsAndOrderPreserved": true,
+  "questionStemsOptionsClassificationsPreserved": true,
+  "changedQuestions": 56,
+  "changedFields": {
+    "a": 1,
+    "e": 56,
+    "sourceUrl": 26
+  },
+  "answerCorrections": [
+    "english-grammar-6407"
+  ],
+  "reviewLedger": "scripts/editorial/reviewed-mcq-explanations.json",
+  "existingBookSourceDocxAndJournalImageChanges": [],
+  "optionalTopicCount": 339,
+  "remainingLimits": "Source/working-tree comparison; no live student history/account records read or rewritten. Archive transcriptions and rendered quotation labels are new derivative presentation, while original assets remain intact."
+}

@@ -1,0 +1,171 @@
+{
+  "checkedOn": "2026-10-15",
+  "scope": "Read-only source availability and fingerprints. Content/locator verification is documented separately; HTTP status alone does not establish a claim.",
+  "probes": [
+    {
+      "key": "monsoon",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1155/2019/8281201",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "fospah-q4",
+      "url": "https://www.fospah.gov.pk/SiteImage/Misc/files/Newsletter%20Q4.pdf",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "key": "fao-heat",
+      "url": "https://www.fao.org/newsroom/detail/extreme-heat-is-pushing-agrifood-systems-to-the-brink-worldwide/en",
+      "httpStatus": 200,
+      "finalUrl": "https://www.fao.org/newsroom/detail/extreme-heat-is-pushing-agrifood-systems-to-the-brink-worldwide/en",
+      "responseSha256": "e9cc06dee35ecb25f4ad2bfba091fccc7dc419291433c0ac01bc3531975370d3",
+      "bytes": 68454,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "key": "gender-data",
+      "url": "https://genderdata.worldbank.org/en/economies/pakistan",
+      "httpStatus": 200,
+      "finalUrl": "https://genderdata.worldbank.org/en/economies/pakistan",
+      "responseSha256": "ddb5502be1dacd1a72d54f9190836b41c4cb03d54b450e4bd86d5847a394bbb2",
+      "bytes": 50579,
+      "contentType": "text/html;charset=utf-8"
+    },
+    {
+      "key": "pdhs",
+      "url": "https://dhsprogram.com/pubs/pdf/FR354/FR354.pdf",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "monsoon-pdf",
+      "url": "https://downloads.hindawi.com/journals/amete/2019/8281201.pdf",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "monsoon-abstract",
+      "url": "https://api.crossref.org/works/10.1155/2019/8281201",
+      "httpStatus": 200,
+      "finalUrl": "https://api.crossref.org/works/10.1155/2019/8281201",
+      "bytes": 8530,
+      "responseSha256": "421e28cf78054fc78f9d120acf540fb4cec8ef1e03ed98ca8e45c55670b3070b",
+      "contentType": "application/json"
+    },
+    {
+      "key": "pdhs-unaids",
+      "url": "https://files-hivpreventioncoalition.unaids.org/gpc/attachments/demographic-and-health-survey-2017-18.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://files-hivpreventioncoalition.unaids.org/gpc/attachments/demographic-and-health-survey-2017-18.pdf",
+      "bytes": 5908148,
+      "responseSha256": "f41171f52ca0c05271f8a06790280cfc2a202be639f6139700cda804d79f86b7",
+      "contentType": "application/pdf"
+    },
+    {
+      "key": "fospah-news",
+      "url": "https://www.fospah.gov.pk/SliderDetail/ZjhmYWNmMGUtNDIxOC00YjUzLTk2YTItOWRjYWU5OGEyMjll",
+      "httpStatus": 200,
+      "finalUrl": "https://www.fospah.gov.pk/SliderDetail/ZjhmYWNmMGUtNDIxOC00YjUzLTk2YTItOWRjYWU5OGEyMjll",
+      "bytes": 29631,
+      "responseSha256": "22de9a52f6f4cd5a916dff66ccc3e561f5fa2c77fb3de3f26d056523af19c38e",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "key": "fao-doi",
+      "url": "https://doi.org/10.4060/cd9353en",
+      "httpStatus": 200,
+      "finalUrl": "https://openknowledge.fao.org/handle/20.500.14283/cd9353en",
+      "bytes": 818957,
+      "responseSha256": "2dfa9be3bf34215ef6de77acc51d754a9b8a33cb6b5fb8640d10e6c8f49ea58d",
+      "contentType": "text/html; charset=utf-8",
+      "disposition": "Discarded: candidate DOI resolved to Integrating sustainability-linked loans into agrifood finance, not the heat report. Not used as evidence for an editorial claim."
+    },
+    {
+      "key": "fao-heat-report",
+      "url": "https://doi.org/10.4060/cd9394en",
+      "httpStatus": 200,
+      "finalUrl": "https://openknowledge.fao.org/handle/20.500.14283/cd9394en",
+      "bytes": 824362,
+      "responseSha256": "f55ba13a2404b10c19f6154fc0df6079e7666d07cd494c13e5062edee1e28c05",
+      "title": "Extreme heat and agriculture",
+      "pdfLinks": [
+        "<meta name=\"citation_pdf_url\" content=\"http://openknowledge.fao.org/bitstreams/246cffd9-90e9-4d98-ab4c-2fec7a9a13fd/download\">"
+      ]
+    },
+    {
+      "key": "mofa-laws",
+      "url": "https://mofa.gov.pk/arms-control-and-disarmament",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "senate-ai",
+      "url": "https://www.foreign.senate.gov/press/dem/release/ranking-member-shaheen-joins-over-40-senators-in-pressing-dod-for-answers-on-school-bombing-and-civilian-casualties-in-iran",
+      "httpStatus": 200,
+      "finalUrl": "https://www.foreign.senate.gov/press/dem/release/ranking-member-shaheen-joins-over-40-senators-in-pressing-dod-for-answers-on-school-bombing-and-civilian-casualties-in-iran",
+      "bytes": 224269,
+      "responseSha256": "cf1c6b17e6bd2574efe29b5ea84cdd99745d92b67cc9beb38c6323dcf01b9e90",
+      "title": "[2026-03-11] Ranking Member Shaheen Joins Over 40 Senators in Pressing..."
+    },
+    {
+      "key": "nato-report",
+      "url": "https://www.nato.int/content/dam/nato/webready/documents/publications-and-reports/annual-reports/sgar25-en.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://www.nato.int/content/dam/nato/webready/documents/publications-and-reports/annual-reports/sgar25-en.pdf",
+      "bytes": 11829254,
+      "responseSha256": "3e749617afb71befd50fca5761dffcbb0d9e2ef00907fcffbc25c4349dfa0c8c"
+    },
+    {
+      "key": "fao-heat-report-pdf",
+      "url": "https://openknowledge.fao.org/bitstreams/246cffd9-90e9-4d98-ab4c-2fec7a9a13fd/download",
+      "httpStatus": 200,
+      "bytes": 17558711,
+      "responseSha256": "3fbbb65c0565d27322f7fb82da896dd104fcd70d591abc04cfbbb686d5e8dd3a"
+    },
+    {
+      "key": "female-lfpr-definition",
+      "url": "https://api.worldbank.org/v2/indicator/SL.TLF.CACT.FE.ZS?format=json",
+      "httpStatus": 200,
+      "finalUrl": "https://api.worldbank.org/v2/indicator/SL.TLF.CACT.FE.ZS?format=json",
+      "bytes": 833,
+      "responseSha256": "9f57a27372d29ac71a6a810096c5b73001a8ae1090db6a2fe88f06b06d4daeec"
+    },
+    {
+      "key": "mofa-www",
+      "url": "https://www.mofa.gov.pk/arms-control-and-disarmament",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "uchicago-friedman",
+      "url": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
+      "httpStatus": 200,
+      "finalUrl": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
+      "bytes": 51572,
+      "responseSha256": "4d5f9c117f57040a9b4adfe1b14b5ec161ca24b32c09dc407618a9b7971dd9db",
+      "title": "Capitalism and Freedom, Friedman, Appelbaum"
+    },
+    {
+      "key": "postman-record",
+      "url": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.penguinrandomhouse.com/books/297276/amusing-ourselves-to-death-by-neil-postman/",
+      "bytes": 241490,
+      "responseSha256": "f01aa52892ce8bc8ae0e52f4e6063e347f93191a269f39dee811afe79fa8421f",
+      "title": "Amusing Ourselves to Death by Neil Postman: 9780143036531 | PenguinRandomHouse.com: Books"
+    },
+    {
+      "key": "hup-schelling",
+      "url": "https://www.hup.harvard.edu/books/9780674840317",
+      "httpStatus": 202,
+      "finalUrl": "https://www.hup.harvard.edu/books/9780674840317",
+      "bytes": 0,
+      "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "title": null
+    }
+  ],
+  "usedInClarifications": {
+    "monsoon-abstract": "Climate study period, explicitly abstract-only verification endpoint",
+    "fao-heat-report-pdf": "Box 10, printed page 43 / physical PDF page 55, source list physical page 106",
+    "female-lfpr-definition": "World Bank indicator SL.TLF.CACT.FE.ZS definition and denominator only",
+    "pdhs-unaids": "Original PDHS 2017\u201318 report, Table 16.16, printed page 324",
+    "fospah-news": "FOSPAH Annual Report 2025 announcement reporting 2024\u201325 counts; no exact publication date inferred",
+    "nato-report": "Maven acquisition, printed page 35 / physical PDF page 36",
+    "senate-ai": "Contemporaneous 11 March 2026 request for answers; not an investigation finding"
+  }
+}

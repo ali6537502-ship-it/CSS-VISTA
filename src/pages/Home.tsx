@@ -366,7 +366,6 @@ function ExamCountdown({ active = true }: { active?: boolean }) {
               target="_blank"
               rel="noopener noreferrer"
               className={`cssv-glass-subcard cssv-countdown-card cssv-tap group relative overflow-hidden rounded-xl border p-2.5 ${isMpt ? 'cssv-countdown-card-primary' : ''}`}
-              aria-label={`${exam.label} countdown. Exam date ${exam.dateLabel}. Open official source.`}
             >
               <span className={`absolute -right-3 -top-3 h-14 w-14 rounded-full ${isMpt ? 'bg-amber-300/10' : 'bg-emerald-100/70'}`} aria-hidden="true" />
               <span className="relative flex items-start justify-between gap-1">
@@ -386,6 +385,7 @@ function ExamCountdown({ active = true }: { active?: boolean }) {
               </time>
               <span className="sr-only">
                 {remaining.days} days, {remaining.hours} hours, {remaining.minutes} minutes and {remaining.seconds} seconds remaining.
+                {' '}Open official exam source.
               </span>
               <span className="relative mt-1.5 flex items-center justify-between text-[8px] font-semibold text-slate-500">
                 <span>Updates every second</span>

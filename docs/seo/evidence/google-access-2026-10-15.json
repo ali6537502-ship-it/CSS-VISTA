@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-15T15:40:08.011060+00:00",
+  "authorization": "Owner authorized read-only inspection earlier in this session.",
+  "call": "gsc_wizard_get_account_info",
+  "result": "payment_required",
+  "message": "GSC Wizard trial has ended or no active subscription.",
+  "reportsRetrieved": false,
+  "adsenseConnectionAvailable": false,
+  "interactiveGoogleLoginHandoffAvailable": false,
+  "accountMutations": false,
+  "subscriptionPurchased": false,
+  "sourceFollowupRetry": {
+    "checkedAt": "2026-10-15T20:12:48.657175+00:00",
+    "call": "gsc_wizard_get_account_info",
+    "result": "payment_required",
+    "reportsRetrieved": false,
+    "accountMutations": false,
+    "subscriptionPurchased": false
+  }
+}

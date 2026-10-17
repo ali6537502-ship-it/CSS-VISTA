@@ -1,0 +1,134 @@
+# Route-family indexability decisions
+
+## Current continuation — 17 October 2026
+
+The family decisions remain unchanged. [Current prefix-report evidence](evidence/google-current-account-evidence-2026-10-17.json) supplies dated aggregate counts and only observed per-URL statuses; it does not label every family indexed or failed. Clean year-archive URLs must remain indexable after JavaScript; genuine filtered views remain noindex.
+
+A = public educational/trust/document content; B = public interactive learning; C = private/personal/hibernated/unpublished; D = utility/duplicate/transitional. Categories describe purpose, not a quality score. Every registry family is listed; individual final HTML can intentionally narrow a pattern candidate. Concrete decisions and live/local differences are in [URL inventory](URL_INVENTORY.json). Current Google status remains unavailable; historical export/notification evidence is recorded separately.
+
+No existing public resource was deleted or paywall changed. The sole explicit search opt-in is the already-public guest grammar course. Parameters/alternate case/slash forms use canonical hints; unknown routes return404; no blanket canonical consolidation or noindex rollout was introduced.
+
+| Family | Category | Access | Index candidate / sitemap default | Ads | Decision and justification |
+| --- | --- | --- | --- | --- | --- |
+| `/` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/start-css` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory/essay` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory/precis-composition` | C | authenticated | false / false | disabled | Current product access/release hold applies; do not republish protected material for search. |
+| `/subjects/compulsory/general-science-ability` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory/current-affairs` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory/pakistan-affairs` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/compulsory/islamic-studies` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/optional` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/subjects/selector` | B | public | false / false | disabled | Repair always-invalid900-mark output; retain existing noindex pending independent post-fix search presentation decision; ad-free. |
+| `/notes` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/notes/view/:productId/:documentId` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/past-papers` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/past-papers/:exam/:year` | A | public | true / false | enabled | Accurate archive identity and complete source-backed links, including useful one-paper archives; no filler requirement. |
+| `/past-papers/view/:id` | A | public | true / false | disabled | Per-paper override: 365 source-backed question pages indexable; 417 document access pages noindex. Preserve every PDF. |
+| `/css-mcqs` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/study-material/essay-themes` | C | authenticated | false / false | disabled | Current product access/release hold applies; do not republish protected material for search. |
+| `/study-material/essay-themes/:slug` | C | authenticated | false / false | disabled | Current product access/release hold applies; do not republish protected material for search. |
+| `/resources` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/study-material` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/study-material/optional` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/study-material/optional/:subject` | A | public | true / false | enabled | 339 genuine topics indexed; 33 subject hubs indexed; existing Pure Mathematics hub noindex retained for separate usefulness review. Do not pad. |
+| `/study-material/optional/:subject/:topic` | A | public | true / false | enabled | 339 genuine topics indexed; 33 subject hubs indexed; existing Pure Mathematics hub noindex retained for separate usefulness review. Do not pad. |
+| `/study-material/islamic-studies` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/study-material/islamic-studies/:chapter` | A | public | true / false | enabled | Real bilingual reference material; retain page-specific metadata/schema. Source/translation verification remains editorial. |
+| `/study-material/islamic-studies/:chapter/:topic` | A | public | true / false | enabled | Real bilingual reference material; retain page-specific metadata/schema. Source/translation verification remains editorial. |
+| `/essay` | A | public | true / true | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/mpt` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/mpt/bank/:bankId` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/current-affairs` | C | authenticated | false / false | disabled | Current product access/release hold applies; do not republish protected material for search. |
+| `/vistagram` | D | public | false / false | disabled | Existing public feed/articles remain noindex/ad-free; repair finite published-slug direct navigation, preserve publication dates and source content. |
+| `/vistagram/:slug` | D | public | false / false | disabled | Existing public feed/articles remain noindex/ad-free; repair finite published-slug direct navigation, preserve publication dates and source content. |
+| `/answer-writing` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/test-series` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/study-tools` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/css-eligibility-calculator` | A | public | true / true | disabled | Useful public calculator with explanation and official-rule references; preserve indexing and ad-free interaction. |
+| `/photo-compressor` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/games` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/psych-viva` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/fpsc-updates` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/mentors` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/services` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/analysis` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/grammar-vocabulary` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/dashboard` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/daily-challenge` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/gk` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/one-liner-gk` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/language-grammar` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/grammar-course` | B | public | true / true | disabled | Reviewed guest lessons and practice; real SSR added. Indexable explicitly, advertising remains disabled. |
+| `/book-summaries` | A | public | true / true | enabled | Actual distinct summaries; preserve full readers. Quotations/cover rights require human verification. |
+| `/book-summaries/:slug` | A | public | true / false | enabled | Actual distinct summaries; preserve full readers. Quotations/cover rights require human verification. |
+| `/lectures` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/handwritten-notes` | A | public | true / true | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/study-planner` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/answer-evaluation` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/live-theme-demos` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/fpsc-syllabus` | A | public | true / true | enabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/css-past-paper-analysis` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/gk/cat/:slug` | A | public | true / false | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/gk/quiz` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/five-minute` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/mistakes` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/answer-timer` | B | public | false / false | disabled | Useful interaction assessed independently from prose length. Preserve noindex pending route-specific main-content/rendering review; ad-free. |
+| `/checklists` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/books` | A | public | true / true | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/journal` | A | public | true / true | enabled | Preserve indexable legacy image archive. Public API currently empty; authentic accessible transcripts/stable text article URLs need editorial follow-up. |
+| `/daily-briefing` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/account/dashboard` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/tasks` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/progress` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/english` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/resources` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/expression` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/precis` | C | authenticated | false / false | disabled | Current product access/release hold applies; do not republish protected material for search. |
+| `/account/handwriting` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/ask-vista` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/answer-performance` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/preparation` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/ai-usage` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/membership` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/argumentation` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/analytical-skills` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/essay-builder` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/general-ability` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/library` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/vistagram` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/current-affairs` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/current-affairs/archive` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/current-affairs/:storyId` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/mpt` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/mpt/history` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/mpt/performance` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/account/mpt/mistakes` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/question-bank` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/question-bank/:mock` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/apply/:mock` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/applications/:code` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/entrance/:mock` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/exam/:mock` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/mpt/results/:code` | C | authenticated | false / false | disabled | Hibernated product; preserve records, pause and noindex. Do not reopen for SEO. |
+| `/account/factbook` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/saved` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/search` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account/settings` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/account` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. Advertising disabled after screen-purpose review: account management, personal navigation/records or focused practice; access and indexability unchanged. |
+| `/factbook` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/consultation` | A | public | true / true | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/exam-intelligence` | C | authenticated | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/css-2026-written-result` | A | public | true / true | disabled | Existing public educational/identity content rendered from genuine components; retain canonical indexing subject to final content gates and editorial accuracy. |
+| `/legal` | D | public | false / false | disabled | Chooser/navigation/filter hub; retain existing exclusion, linked resources available. Reassess usefulness individually, not by word quota. |
+| `/privacy-policy` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/cookie-policy` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/terms-and-conditions` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/disclaimer` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/copyright` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/editorial-policy` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/about` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/contact` | A | public | true / true | disabled | Genuine trust/policy information, publicly discoverable and ad-free; verify operational accuracy. |
+| `/sadiaali` | C | admin | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |
+| `/sadiaali/login` | C | admin | false / false | disabled | Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control. |

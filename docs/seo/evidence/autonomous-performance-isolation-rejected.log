@@ -1,0 +1,8 @@
+file:///workspace/CSS-VISTA/tests/browser/seo-performance.mjs:95
+    if (externalSuccesses.length || apiRequests.length) throw new Error('Lighthouse network isolation failed; discard this sample')
+                                                              ^
+
+Error: Lighthouse network isolation failed; discard this sample
+    at file:///workspace/CSS-VISTA/tests/browser/seo-performance.mjs:95:63
+
+Node.js v24.19.0

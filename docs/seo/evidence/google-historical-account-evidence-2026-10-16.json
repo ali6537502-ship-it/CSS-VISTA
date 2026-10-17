@@ -1,0 +1,78 @@
+{
+  "observedAt": "2026-10-16T13:23:20.527Z",
+  "access": "Read-only connected Gmail notifications and a native Drive Search Console export; no messages, labels or source files changed.",
+  "currentPortalAccess": "Live Search Console API remains subscription-blocked. No callable Browser control tools were found after capability discovery, despite the skill being listed. No current AdSense portal or Policy Center inspection is claimed.",
+  "privacy": "Recipient addresses, message IDs, tracking links, MIME headers, and private Drive identifiers are omitted from this public evidence.",
+  "adsenseNotification": {
+    "dateUtc": "2026-09-14T03:14:25.000Z",
+    "senderDomain": "google.com",
+    "publisherId": "pub-6131271603014611",
+    "site": "css-vista.com",
+    "subject": "You need to fix some issues before your site is ready for AdSense",
+    "exactDecisionExcerpt": "The team has reviewed it, but unfortunately your site isn’t ready to show ads at this time.",
+    "detail": "Email directs to the account's Sites page; it does not state the detailed low-quality-content reason. The owner's reported wording remains separately attributed.",
+    "reviewTimestampLimitation": "This is the email receipt timestamp, not a verified internal review completion timestamp."
+  },
+  "searchConsoleNotifications": [
+    {
+      "dateUtc": "2026-09-26T08:42:13.000Z",
+      "subject": "We're validating your Page indexing issue fixes for site css-vista.com",
+      "site": "css-vista.com",
+      "issue": "Discovered – currently not indexed",
+      "reportedAffectedPages": 970,
+      "status": "validation_started",
+      "limitation": "Historical notification only. Does not establish current counts or the outcome of this implementation."
+    },
+    {
+      "dateUtc": "2026-09-26T08:41:53.000Z",
+      "subject": "We're validating your Page indexing issue fixes for site css-vista.com",
+      "site": "css-vista.com",
+      "issue": "Crawled - currently not indexed",
+      "reportedAffectedPages": 38,
+      "status": "validation_started",
+      "limitation": "Historical notification only. Does not establish current counts or the outcome of this implementation."
+    },
+    {
+      "dateUtc": "2026-09-26T08:41:23.000Z",
+      "subject": "We're validating your Page indexing issue fixes for site css-vista.com",
+      "site": "css-vista.com",
+      "issue": "Duplicate, Google chose different canonical than user",
+      "reportedAffectedPages": 2,
+      "status": "validation_started",
+      "limitation": "Historical notification only. Does not establish current counts or the outcome of this implementation."
+    },
+    {
+      "dateUtc": "2026-09-16T19:07:52.000Z",
+      "subject": "Some fixes failed for Page indexing issues for site https://www.css-vista.com/",
+      "site": "https://www.css-vista.com/",
+      "issue": "Crawled - currently not indexed",
+      "reportedAffectedPages": null,
+      "status": "some_fixes_failed",
+      "limitation": "Historical notification only. Does not establish current counts or the outcome of this implementation."
+    },
+    {
+      "dateUtc": "2026-09-16T19:08:14.000Z",
+      "subject": "Page indexing issues successfully fixed for site https://www.css-vista.com/",
+      "site": "https://www.css-vista.com/",
+      "issue": "Alternative page with proper canonical tag",
+      "reportedAffectedPages": 4,
+      "status": "validation_succeeded",
+      "limitation": "Historical notification only. Does not establish current counts or the outcome of this implementation."
+    }
+  ],
+  "historicalExport": {
+    "title": "css-vista.com-Coverage-Drilldown-2026-09-04",
+    "exportDateAsNamed": "2026-09-04",
+    "chartObservationDate": "2026-08-28",
+    "chartAffectedPages": 488,
+    "issue": "Discovered – currently not indexed",
+    "scope": "All known pages",
+    "exportedExampleCount": 488,
+    "currentGoogleKnownUrlTotal": null,
+    "limitations": [
+      "This is one issue-specific historical export, not a current complete Page Indexing report.",
+      "The 1970-01-01 Last crawled values are retained as raw export placeholders, not asserted as real Google crawl dates.",
+      "Do not sum notification counts into a sitewide URL total or claim that every exported URL should be indexed."
+    ]
+  }
+}

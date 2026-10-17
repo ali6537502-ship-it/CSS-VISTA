@@ -20,6 +20,25 @@ import { MilestoneCelebration } from '@/components/MilestoneCelebration'
 import { printPage } from '@/components/PrintMenu'
 import { usePageBack } from '@/lib/backNavigation'
 import { respectServerNoindex } from '@/lib/serverRobots'
+import { bookEditorialFor, bookQuotationForCopy, reviewedBookBody } from '@/data/bookEditorial.mjs'
+
+function BookSources({ slug }: { slug: string }) {
+  const review = bookEditorialFor(slug)
+  if (!review || (!review.note && !review.sources.length)) return null
+  return (
+    <section className="mt-8 rounded-xl border bg-secondary/40 p-4" aria-label="Sources and quotation notes">
+      <h3 className="font-display text-lg font-bold text-pine">Sources and quotation notes</h3>
+      {review.note && <p className="mt-2 text-sm leading-7 text-foreground/85">{review.note}</p>}
+      {review.sources.length > 0 && <ul className="mt-3 space-y-3 text-sm">
+        {review.sources.map((source) => <li key={source.url + source.locator}>
+          <a href={source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-800 underline">{source.title}</a>
+          <span className="block text-muted-foreground">{source.locator}</span>
+          {source.scope === 'identity_only' && review.originalLine && <span className="block text-muted-foreground">Title and author record; this does not verify the quotation.</span>}
+        </li>)}
+      </ul>}
+    </section>
+  )
+}
 
 function InlineText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean)
@@ -125,11 +144,6 @@ function SummaryBody({ body }: { body: string }) {
   return <div>{blocks}</div>
 }
 
-function keyQuotation(body: string) {
-  const line = body.split('\n').map((item) => item.trim()).find((item) => /(?:famous|important) quotation/i.test(item))
-  return line?.replace(/^[*+-]\s+/, '').replace(/^\d+\.\s+/, '').replace(/\*\*/g, '') ?? ''
-}
-
 function BookReader({
   book,
   categoryName,
@@ -160,7 +174,8 @@ function BookReader({
   const [fontSize, setFontSize] = useState(() => Number(localStorage.getItem('cssvista:book-font-size') ?? 1))
   const [copied, setCopied] = useState(false)
   const [showCelebration, setShowCelebration] = useState(false)
-  const quote = useMemo(() => keyQuotation(book.body), [book.body])
+  const reviewedBody = useMemo(() => reviewedBookBody(book), [book])
+  const quote = useMemo(() => bookQuotationForCopy(book), [book])
   const readingMinutes = Math.max(2, Math.ceil(book.wordCount / 220))
 
   useEffect(() => {
@@ -235,7 +250,7 @@ function BookReader({
   async function copyQuote() {
     if (!quote) return
     try {
-      await navigator.clipboard.writeText(`${quote}\n— ${book.title}, ${book.author}`)
+      await navigator.clipboard.writeText(quote)
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1800)
     } catch {
@@ -324,7 +339,7 @@ function BookReader({
                   ))}
                 </div>
               ) : (
-                <SummaryBody body={book.body} />
+                <><SummaryBody body={reviewedBody} /><BookSources slug={book.slug} /></>
               )}
             </div>
             {book.coverSource && (
@@ -352,7 +367,8 @@ function BookReader({
           <h1 className="mt-2 text-2xl font-bold text-emerald-950">{book.title}</h1>
           <p className="mt-1 text-sm">by {book.author}</p>
           <div className="mt-5 border-l-4 border-amber-400 bg-amber-50 p-4"><p className="leading-7">{book.excerpt}</p></div>
-          <SummaryBody body={book.body} />
+          <SummaryBody body={reviewedBody} />
+          <BookSources slug={book.slug} />
         </section>
       </article>
       <MilestoneCelebration
@@ -538,7 +554,7 @@ export default function BookSummaries() {
   }, [activeBook, routeBookSlug])
 
   return (
-    <div>
+    <div data-cssv-ad-state={error || (requestedBookSlug && !activeBook) ? 'error' : requestedBookSlug && !hasSummaryBodies(library) ? 'loading' : undefined}>
       <PageHeader
         title="Book Summaries"
         description="Clear, exam-focused summaries of influential books for essays, current affairs, political thought, international relations, economics, society, Pakistan and literature."

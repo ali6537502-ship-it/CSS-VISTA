@@ -1,0 +1,41 @@
+
+> css-vista@1.0.0 test:editorial
+> node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py
+
+✔ all existing book identities and source bodies remain usable with reviewed wording (2.215607ms)
+✔ unverified wording is qualified in the reader and in copied quotations (0.450358ms)
+✔ related primary pages do not certify quotations from a named book (0.246812ms)
+✔ a changed source quotation requires renewed review instead of stale substitution (0.410808ms)
+✔ verified original text has its actual translation and chapter citation (0.265159ms)
+✔ On War uses the explicitly identified Graham version without rewriting commentary (0.211719ms)
+✔ book source metadata is deterministic and agrees with the editorial ledger (79.977454ms)
+✔ a verified publisher identity is visible without certifying the book quotation (0.423938ms)
+✔ books without a quotation can have a real bibliography without inventing a quote (1.463073ms)
+✔ every preserved Journal article has matching text, byline, image order and original archive date (13.69849ms)
+✔ multi-column transcripts reunite source sentences in reading order (0.247002ms)
+✔ external publication is not asserted without a verified original publication URL (0.127031ms)
+✔ dated clarifications preserve the original Pacific and Eid text and remain separate from historical publication dates (0.728036ms)
+✔ Eid calendar clarification records Sunday without inventing a replacement event date (0.238349ms)
+✔ historical climate figures retain the observed study period and regional case-study scope (0.281023ms)
+✔ workforce and violence statistics cannot silently become a current population-wide prevalence estimate (0.229526ms)
+✔ procurement and a Senate request are distinguished from findings about a specific strike (0.232049ms)
+✔ the real generator refuses unsafe or unexplained verification endpoints (78.488131ms)
+✔ the bounded editorial ledger matches both copies and preserves question identity (35.219165ms)
+✔ number-series explanations fit every given term, the missing position and the keyed option (1.133737ms)
+✔ the confirmed analogy correction has evidence and does not rewrite stored attempts (0.480644ms)
+✔ ambiguous source questions stay intact and are not counted as completed repairs (5.486803ms)
+✔ review application refuses source drift and differing public/bundled copies before writing (1.749014ms)
+✔ the review tool cannot silently change options, wording or an undocumented answer (0.341124ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 497.441554
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK

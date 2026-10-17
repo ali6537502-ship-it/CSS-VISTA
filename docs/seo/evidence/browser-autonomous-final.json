@@ -1,0 +1,2425 @@
+{
+  "observedAt": "2026-10-16T13:51:03.287Z",
+  "artifact": "/workspace/CSS-VISTA/dist",
+  "method": "Loopback resolver preview; desktop/mobile lab browser checks, no account data or backend writes.",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "rawHTMLCharacters": 220011,
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "canonical": [
+        "https://www.css-vista.com/"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Everything you need to prepare. One platform. Completely free."
+      ],
+      "mainCharacters": 5838,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "earlyStudyMetadataRequests": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "status": 200,
+      "rawHTMLCharacters": 175527,
+      "title": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Paper I - Financial Accounting (50 Marks)"
+      ],
+      "mainCharacters": 16894,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes",
+              "description": "Paper I - Financial Accounting (50 Marks): detailed CSS Accounting & Auditing study notes following the FPSC optional syllabus, about 13 minutes of reading.",
+              "url": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+              "inLanguage": "en",
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "CSS Optional Subject Notes",
+                  "item": "https://www.css-vista.com/study-material/optional"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Accounting & Auditing",
+                  "item": "https://www.css-vista.com/study-material/optional/accounting-and-auditing"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "Paper I - Financial Accounting (50 Marks)",
+                  "item": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+      "status": 200,
+      "rawHTMLCharacters": 199628,
+      "title": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "01 Concept of Islam: submission, faith and excellence"
+      ],
+      "mainCharacters": 16804,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References",
+              "description": "12 source-checked Qur'anic, Hadith and scholarly references on 01 concept of islam: submission, faith and excellence for CSS Islamic Studies, with Arabic passages and parallel English and Urdu.",
+              "url": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+              "inLanguage": [
+                "en",
+                "ur"
+              ],
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Islamic Studies Reference Bank",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Introduction to Islam",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "01 Concept of Islam: submission, faith and excellence",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries/why-nations-fail",
+      "status": 200,
+      "rawHTMLCharacters": 13539,
+      "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/why-nations-fail"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Why Nations Fail"
+      ],
+      "mainCharacters": 49698,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Why Nations Fail summary",
+              "description": "Why Nations Fail by Daron Acemoglu and James A. Robinson: Why Nations Fail explains why some countries become wealthy, stable and technologically advanced whi",
+              "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/why-nations-fail",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Why Nations Fail",
+                "author": {
+                  "@type": "Person",
+                  "name": "Daron Acemoglu and James A. Robinson"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Why Nations Fail",
+                  "item": "https://www.css-vista.com/book-summaries/why-nations-fail"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/the-art-of-war",
+      "status": 200,
+      "rawHTMLCharacters": 12732,
+      "title": "The Art of War by Sun Tzu - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/the-art-of-war"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "The Art of War"
+      ],
+      "mainCharacters": 49070,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "The Art of War summary",
+              "description": "The Art of War by Sun Tzu: The Art of War is an ancient Chinese work explaining how intelligence, preparation, discipline, timing and deception can produce vi",
+              "url": "https://www.css-vista.com/book-summaries/the-art-of-war",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/the-art-of-war",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "The Art of War",
+                "author": {
+                  "@type": "Person",
+                  "name": "Sun Tzu"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "The Art of War",
+                  "item": "https://www.css-vista.com/book-summaries/the-art-of-war"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/on-war",
+      "status": 200,
+      "rawHTMLCharacters": 12833,
+      "title": "On War by Carl von Clausewitz - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/on-war"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "On War"
+      ],
+      "mainCharacters": 49238,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "On War summary",
+              "description": "On War by Carl von Clausewitz: On War is one of the most influential works ever written about the nature, purpose and conduct of warfare. Clausewitz argues th",
+              "url": "https://www.css-vista.com/book-summaries/on-war",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/on-war",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "On War",
+                "author": {
+                  "@type": "Person",
+                  "name": "Carl von Clausewitz"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "On War",
+                  "item": "https://www.css-vista.com/book-summaries/on-war"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/journal",
+      "status": 200,
+      "rawHTMLCharacters": 231660,
+      "title": "VISTA Journal - Articles, Analysis and Perspectives | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/journal"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "VISTA Journal"
+      ],
+      "mainCharacters": 3170,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "VISTA Journal",
+          "description": "Read selected original writing, informed analysis and serious perspectives on Pakistan and the wider world.",
+          "url": "https://www.css-vista.com/journal",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "archiveTranscripts": 6,
+      "editorialClarifications": 6
+    },
+    {
+      "path": "/book-summaries/capitalism-and-freedom",
+      "status": 200,
+      "rawHTMLCharacters": 14102,
+      "title": "Capitalism and Freedom by Milton Friedman - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/capitalism-and-freedom"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Capitalism and Freedom"
+      ],
+      "mainCharacters": 50281,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Capitalism and Freedom summary",
+              "description": "Capitalism and Freedom by Milton Friedman: Published in 1962, Capitalism and Freedom argues that economic freedom is closely connected with political and pers",
+              "url": "https://www.css-vista.com/book-summaries/capitalism-and-freedom",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/capitalism-and-freedom",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Capitalism and Freedom",
+                "author": {
+                  "@type": "Person",
+                  "name": "Milton Friedman"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Capitalism and Freedom",
+                  "item": "https://www.css-vista.com/book-summaries/capitalism-and-freedom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/the-road-to-serfdom",
+      "status": 200,
+      "rawHTMLCharacters": 12936,
+      "title": "The Road to Serfdom by Friedrich Hayek - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/the-road-to-serfdom"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "The Road to Serfdom"
+      ],
+      "mainCharacters": 49637,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "The Road to Serfdom summary",
+              "description": "The Road to Serfdom by Friedrich Hayek: The Road to Serfdom warns that extensive central economic planning can threaten political freedom. Hayek argues that a",
+              "url": "https://www.css-vista.com/book-summaries/the-road-to-serfdom",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/the-road-to-serfdom",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "The Road to Serfdom",
+                "author": {
+                  "@type": "Person",
+                  "name": "Friedrich Hayek"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "The Road to Serfdom",
+                  "item": "https://www.css-vista.com/book-summaries/the-road-to-serfdom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/the-better-angels-of-our-nature",
+      "status": 200,
+      "rawHTMLCharacters": 13013,
+      "title": "The Better Angels of Our Nature by Steven Pinker - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "The Better Angels of Our Nature"
+      ],
+      "mainCharacters": 49476,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "The Better Angels of Our Nature summary",
+              "description": "The Better Angels of Our Nature by Steven Pinker: Steven Pinker argues that, despite wars and horrifying acts of violence, many forms of violence have decline",
+              "url": "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "The Better Angels of Our Nature",
+                "author": {
+                  "@type": "Person",
+                  "name": "Steven Pinker"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "The Better Angels of Our Nature",
+                  "item": "https://www.css-vista.com/book-summaries/the-better-angels-of-our-nature"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 2
+    },
+    {
+      "path": "/book-summaries/brave-new-world",
+      "status": 200,
+      "rawHTMLCharacters": 14143,
+      "title": "Brave New World by Aldous Huxley - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/brave-new-world"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Brave New World"
+      ],
+      "mainCharacters": 50553,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Brave New World summary",
+              "description": "Brave New World by Aldous Huxley: Brave New World presents a future society that does not usually control people through open violence. Instead, it controls t",
+              "url": "https://www.css-vista.com/book-summaries/brave-new-world",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/brave-new-world",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Brave New World",
+                "author": {
+                  "@type": "Person",
+                  "name": "Aldous Huxley"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Brave New World",
+                  "item": "https://www.css-vista.com/book-summaries/brave-new-world"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 2
+    },
+    {
+      "path": "/book-summaries/capital-in-the-twenty-first-century",
+      "status": 200,
+      "rawHTMLCharacters": 13552,
+      "title": "Capital in the Twenty-First Century by Thomas Piketty - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Capital in the Twenty-First Century"
+      ],
+      "mainCharacters": 49601,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Capital in the Twenty-First Century summary",
+              "description": "Capital in the Twenty-First Century by Thomas Piketty: Capital in the Twenty-First Century is a major study of wealth and income inequality. Using historical",
+              "url": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Capital in the Twenty-First Century",
+                "author": {
+                  "@type": "Person",
+                  "name": "Thomas Piketty"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Capital in the Twenty-First Century",
+                  "item": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/pakistan-beyond-the-crisis-state",
+      "status": 200,
+      "rawHTMLCharacters": 14525,
+      "title": "Pakistan: Beyond the Crisis State by Edited by Maleeha Lodhi - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Pakistan: Beyond the Crisis State"
+      ],
+      "mainCharacters": 50611,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Pakistan: Beyond the Crisis State summary",
+              "description": "Pakistan: Beyond the Crisis State by Edited by Maleeha Lodhi: Pakistan: Beyond the Crisis State is a collection of essays by Pakistani scholars, economists, d",
+              "url": "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Pakistan: Beyond the Crisis State",
+                "author": {
+                  "@type": "Person",
+                  "name": "Edited by Maleeha Lodhi"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Pakistan: Beyond the Crisis State",
+                  "item": "https://www.css-vista.com/book-summaries/pakistan-beyond-the-crisis-state"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 1
+    },
+    {
+      "path": "/book-summaries/development-as-freedom",
+      "status": 200,
+      "rawHTMLCharacters": 13457,
+      "title": "Development as Freedom by Amartya Sen - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/development-as-freedom"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Development as Freedom"
+      ],
+      "mainCharacters": 49507,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Development as Freedom summary",
+              "description": "Development as Freedom by Amartya Sen: Development as Freedom argues that development should not be measured only by national income, industrial output or eco",
+              "url": "https://www.css-vista.com/book-summaries/development-as-freedom",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/development-as-freedom",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Development as Freedom",
+                "author": {
+                  "@type": "Person",
+                  "name": "Amartya Sen"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Development as Freedom",
+                  "item": "https://www.css-vista.com/book-summaries/development-as-freedom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 2
+    },
+    {
+      "path": "/book-summaries/the-open-society-and-its-enemies",
+      "status": 200,
+      "rawHTMLCharacters": 13597,
+      "title": "The Open Society and Its Enemies by Karl Popper - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "The Open Society and Its Enemies"
+      ],
+      "mainCharacters": 49853,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "The Open Society and Its Enemies summary",
+              "description": "The Open Society and Its Enemies by Karl Popper: Popper’s The Open Society and Its Enemies defends a society in which institutions can be criticised, governme",
+              "url": "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "The Open Society and Its Enemies",
+                "author": {
+                  "@type": "Person",
+                  "name": "Karl Popper"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "The Open Society and Its Enemies",
+                  "item": "https://www.css-vista.com/book-summaries/the-open-society-and-its-enemies"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": [],
+      "quotationSourceLinks": 2
+    },
+    {
+      "path": "/study-material/optional/constitutional-law/constitutional-history-of-pakistan",
+      "status": 200,
+      "rawHTMLCharacters": 163606,
+      "title": "6. Constitutional History of Pakistan — CSS Constitutional Law Notes | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/constitutional-law/constitutional-history-of-pakistan"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "6. Constitutional History of Pakistan"
+      ],
+      "mainCharacters": 5555,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "6. Constitutional History of Pakistan — CSS Constitutional Law Notes",
+              "description": "6. Constitutional History of Pakistan: detailed CSS Constitutional Law study notes following the FPSC optional syllabus, about 3 minutes of reading.",
+              "url": "https://www.css-vista.com/study-material/optional/constitutional-law/constitutional-history-of-pakistan",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/optional/constitutional-law/constitutional-history-of-pakistan",
+              "inLanguage": "en",
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "6. Constitutional History of Pakistan — CSS Constitutional Law Notes"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "CSS Optional Subject Notes",
+                  "item": "https://www.css-vista.com/study-material/optional"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Constitutional Law",
+                  "item": "https://www.css-vista.com/study-material/optional/constitutional-law"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "6. Constitutional History of Pakistan",
+                  "item": "https://www.css-vista.com/study-material/optional/constitutional-law/constitutional-history-of-pakistan"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review",
+      "status": 200,
+      "rawHTMLCharacters": 162001,
+      "title": "3. Judiciary, Judicial Independence and Judicial Review — CSS Constitutional Law Notes | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "3. Judiciary, Judicial Independence and Judicial Review"
+      ],
+      "mainCharacters": 5423,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "3. Judiciary, Judicial Independence and Judicial Review — CSS Constitutional Law Notes",
+              "description": "3. Judiciary, Judicial Independence and Judicial Review: detailed CSS Constitutional Law study notes following the FPSC optional syllabus, about 3 minutes of reading.",
+              "url": "https://www.css-vista.com/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review",
+              "inLanguage": "en",
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "3. Judiciary, Judicial Independence and Judicial Review — CSS Constitutional Law Notes"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "CSS Optional Subject Notes",
+                  "item": "https://www.css-vista.com/study-material/optional"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Constitutional Law",
+                  "item": "https://www.css-vista.com/study-material/optional/constitutional-law"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "3. Judiciary, Judicial Independence and Judicial Review",
+                  "item": "https://www.css-vista.com/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/css-2026-written-result",
+      "status": 200,
+      "rawHTMLCharacters": 155028,
+      "title": "CSS 2026 Written Result - Qualified Candidates List | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/css-2026-written-result"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "CSS 2026 Written Result - Qualified Candidates List"
+      ],
+      "mainCharacters": 1523,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "NewsArticle",
+              "headline": "CSS 2026 Written Result - Qualified Candidates List",
+              "description": "View and download the CSS 2026 written result PDF with all 476 qualified candidates, announced by FPSC on 31 August 2026.",
+              "datePublished": "2026-08-31",
+              "dateModified": "2026-08-31",
+              "mainEntityOfPage": "https://www.css-vista.com/css-2026-written-result",
+              "author": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://www.css-vista.com/icon-512.png"
+                }
+              },
+              "isBasedOn": "https://www.fpsc.gov.pk/Results",
+              "about": "CSS Competitive Examination 2026 written result"
+            },
+            {
+              "@type": "DigitalDocument",
+              "name": "CSS 2026 Written Result - Qualified Candidates List",
+              "description": "View and download the CSS 2026 written result PDF with all 476 qualified candidates, announced by FPSC on 31 August 2026.",
+              "url": "https://www.css-vista.com/css-2026-written-result",
+              "contentUrl": "https://www.css-vista.com/results/css-2026-written-qualified-candidates.pdf",
+              "encodingFormat": "application/pdf",
+              "numberOfPages": 7,
+              "datePublished": "2026-08-31",
+              "inLanguage": "en",
+              "provider": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "FPSC Updates",
+                  "item": "https://www.css-vista.com/fpsc-updates"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "CSS 2026 Written Result",
+                  "item": "https://www.css-vista.com/css-2026-written-result"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/subjects/selector",
+      "status": 200,
+      "rawHTMLCharacters": 9418,
+      "title": "CSS Subject Selection Tool | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/subjects/selector"
+      ],
+      "robots": [
+        "noindex, follow"
+      ],
+      "h1": [
+        "Optional Subject Selection Tool"
+      ],
+      "mainCharacters": 561,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "CSS subject selection tool",
+          "description": "Compare CSS optional subjects by FPSC group and use the interactive selection tool to build a valid subject combination.",
+          "url": "https://www.css-vista.com/subjects/selector",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "result": "Optional Subject Selection Tool\n\nAnswer honestly about your background, time and preferences. The tool validates FPSC grouping rules and suggests combinations with reasons and risks - it does not predict scores.\n\n1\nBackground\n2\nTime & skills\n3\nInterests\n4\nPreferences\n5\nResults\nSubject selection is a personal academic decision. Previous scoring trends do not guarantee future marks.\n\nChoose exactly 600 optional marks within the group limits; you do not need a subject from every group. Check the official FPSC syllabus and the rules for your examination year before applying.\n\nSuggested combination\nValid - 600/600 marks\nPublic Administration (Group 3)\n100\nGender Studies (Group 5)\n100\nSociology (Group 7)\n100\nPolitical Science (Group 1)\n200\nHistory of Pakistan & India (Group 4)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Low structural risk; depth of preparation still decides the outcome.\n\nUse these in my study planner\nAlternative combination\nValid - 600/600 marks\nInternational Relations (Group 1)\n200\nGovernance & Public Policies (Group 3)\n100\nIslamic History & Culture (Group 4)\n100\nEnvironmental Sciences (Group 5)\n100\nConstitutional Law (Group 6)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Constitutional Law: Requires accurate citation of constitutions\n\nUse these in my study planner\nBack\nStart over"
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "status": 200,
+      "rawHTMLCharacters": 151422,
+      "title": "CSS Age & Attempts Calculator | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/css-eligibility-calculator"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "CSS Age & Attempts Calculator"
+      ],
+      "mainCharacters": 1316,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "CSS age and attempts calculator",
+          "description": "Check FPSC age eligibility, the final age-eligible examination year, written chances remaining and the maximum attempts that can still fit within the age window.",
+          "url": "https://www.css-vista.com/css-eligibility-calculator",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "result": "CSS Age & Attempts Calculator\n\nCheck your FPSC age window, final age-eligible CSS examination year, written chances remaining, and the maximum attempts you can still realistically use.\n\nCalculate My CSS Eligibility\n\nAge is checked against the FPSC cut-off for each examination year, not your age today.\n\nDate of Birth\n\nEnter it as DD / MM / YYYY, or use the calendar.\n\nYour DOB is used only for this calculation and is not placed in the page URL.\n\nPrevious CSS Written Attempts\n0 - I have never appeared in a CSS written examination\n1\n2\n3\nWhat counts as a written attempt?\nFPSC Rule 6 Age Relaxation\n\nDo you qualify for the FPSC two-year upper-age relaxation under Rule 6?\n\nNo\nYes\nNot Sure\nCalculate My CSS Eligibility\nFPSC cut-off method\n\nFor CE-Y, age eligibility is determined on 31 December of Y−1. The normal DOB window runs from 1 January of Y−30 through 1 January of Y−21, inclusive.\n\nPrivacy\n\nThis feature calculates locally in your browser. It does not require CNIC and does not send your DOB to an external eligibility service.\n\nYOUR CSS ELIGIBILITY\n\nEligible\n\nYour age falls within the ordinary FPSC age window for CE-2027.\n\nDOB used: 15 / 06 / 2001\n\nAGE STATUS\n\nEligible\n\nFor CE-2027\n\nFINAL ELIGIBLE CSS EXAM\n\nCE-2031\n\nFinal year under the age rule used above\n\nWRITTEN ATTEMPTS REMAINING\n\n3 of 3\n\nMPT does not reduce this number\n\nAGE-ELIGIBLE OPPORTUNITIES REMAINING\n\n5\n\n5 examination years remaining\n\nMAXIMUM USABLE ATTEMPTS REMAINING\n\n3\n\nLimited by both age and the three written chances\n\nCSS Age Window Remaining\n\n5 examination years remaining\n\nFinal age-eligible examination: CSS CE-2031\n\nFuture age-eligible CE years from 2027 onward: CE-2027, CE-2028, CE-2029, CE-2030, CE-2031. Age eligibility does not mean applications for those years are currently open.\n\nExamination-Year Timeline\n\nEach year is checked separately against the FPSC DOB boundaries.\n\nCE-2027\n\nAge Eligible\n\nAge cut-off: 31 December 2026\n\nCE-2028\n\nAge Eligible\n\nAge cut-off: 31 December 2027\n\nCE-2029\n\nAge Eligible\n\nAge cut-off: 31 December 2028\n\nCE-2031\n\nAge Eligible - Final Year\n\nAge cut-off: 31 December 2030\n\nCE-2032\n\nOver Age\n\nAge cut-off: 31 December 2031\n\nHow this was calculated\nOfficial-rule notice\n\nCalculated according to FPSC CSS Competitive Examination Rules currently implemented by CSS VISTA. Eligibility remains subject to verification by FPSC and any subsequent amendment to the official rules.\n\nView FPSC Rules\nRules last verified: 3 October 2026"
+    },
+    {
+      "path": "/grammar-course",
+      "status": 200,
+      "rawHTMLCharacters": 278150,
+      "title": "30-Day Grammar Course | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/grammar-course"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "30-Day Grammar Course"
+      ],
+      "mainCharacters": 3797,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "30-day grammar course",
+          "description": "Follow a beginner-first, practice-heavy 30-day grammar course with clear explanations, worked examples and daily drills.",
+          "url": "https://www.css-vista.com/grammar-course",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "fullLessonCharacters": 22490
+    },
+    {
+      "path": "/vistagram/pakistan-financial-inclusion-digital-finance",
+      "status": 200,
+      "rawHTMLCharacters": 156420,
+      "title": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth | CSS Vistagram",
+      "canonical": [
+        "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance"
+      ],
+      "robots": [
+        "noindex, follow"
+      ],
+      "h1": [
+        "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth"
+      ],
+      "mainCharacters": 4952,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth",
+          "description": "A syllabus-linked Economics explainer on why access to formal financial services matters, how digital finance can widen participation, and how inclusion connects banking with development.",
+          "url": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+          "mainEntityOfPage": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+          "datePublished": "2026-09-24T12:00:00+05:00",
+          "dateModified": "2026-09-24T12:00:00+05:00",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com"
+          },
+          "about": [
+            "Economics",
+            "Money and Banking; Financial Inclusion",
+            "Economics",
+            "Pakistan",
+            "Financial Inclusion",
+            "Banking",
+            "Digital Finance",
+            "SBP"
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/vistagram/seo-audit-deliberately-missing-20261014",
+      "status": 404,
+      "rawHTMLCharacters": 5904,
+      "title": "Vistagram article unavailable | CSS Vista",
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "h1": [
+        "Vistagram article unavailable"
+      ],
+      "mainCharacters": 91,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/seo-audit-deliberately-missing-20261014",
+      "status": 404,
+      "rawHTMLCharacters": 5904,
+      "title": "Page Not Found | CSS Vista",
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "h1": [
+        "Page not found"
+      ],
+      "mainCharacters": 101,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "contentDownloadFailures": [
+    {
+      "family": "optional-notes",
+      "failedPath": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "fixtureStatus": 503,
+      "passed": true,
+      "failedRequests": 1,
+      "stableError": true,
+      "adjacentLinksStable": true,
+      "nextPath": "/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks",
+      "nextTopicLoaded": true,
+      "jsonResponses": [
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks.json",
+          "status": 503
+        },
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks.json",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "family": "islamic-references",
+      "failedPath": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+      "fixtureStatus": 503,
+      "passed": true,
+      "failedRequests": 1,
+      "stableError": true,
+      "adjacentLinksStable": true,
+      "nextPath": "/study-material/islamic-studies/introduction-to-islam/02-importance-of-din-in-human-life",
+      "nextTopicLoaded": true,
+      "jsonResponses": [
+        {
+          "path": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence.json",
+          "status": 503
+        },
+        {
+          "path": "/study-material/islamic-studies/introduction-to-islam/02-importance-of-din-in-human-life.json",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "deferredMetadataNavigation": {
+    "passed": true,
+    "preservedPendingCanonical": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+    "destination": "/",
+    "actualSpaNavigation": true
+  },
+  "passed": true
+}

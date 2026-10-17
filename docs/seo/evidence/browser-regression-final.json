@@ -1,0 +1,829 @@
+{
+  "observedAt": "2026-10-15T07:52:27.998Z",
+  "artifact": "/workspace/CSS-VISTA/dist",
+  "method": "Loopback resolver preview; desktop/mobile lab browser checks, no account data or backend writes.",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "rawHTMLCharacters": 219265,
+      "title": "CSS Vista | Free CSS, PMS & One-Paper Preparation Platform",
+      "canonical": [
+        "https://www.css-vista.com/"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Everything you need to prepare. One platform. Completely free."
+      ],
+      "mainCharacters": 5812,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "status": 200,
+      "rawHTMLCharacters": 174717,
+      "title": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "Paper I - Financial Accounting (50 Marks)"
+      ],
+      "mainCharacters": 16894,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes",
+              "description": "Paper I - Financial Accounting (50 Marks): detailed CSS Accounting & Auditing study notes following the FPSC optional syllabus, about 13 minutes of reading.",
+              "url": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+              "inLanguage": "en",
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "Paper I - Financial Accounting (50 Marks) — CSS Accounting & Auditing Notes"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "CSS Optional Subject Notes",
+                  "item": "https://www.css-vista.com/study-material/optional"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Accounting & Auditing",
+                  "item": "https://www.css-vista.com/study-material/optional/accounting-and-auditing"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "Paper I - Financial Accounting (50 Marks)",
+                  "item": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+      "status": 200,
+      "rawHTMLCharacters": 198818,
+      "title": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "01 Concept of Islam: submission, faith and excellence"
+      ],
+      "mainCharacters": 16804,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "name": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References",
+              "description": "12 source-checked Qur'anic, Hadith and scholarly references on 01 concept of islam: submission, faith and excellence for CSS Islamic Studies, with Arabic passages and parallel English and Urdu.",
+              "url": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+              "mainEntityOfPage": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+              "inLanguage": [
+                "en",
+                "ur"
+              ],
+              "isAccessibleForFree": true,
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              },
+              "headline": "01 Concept of Islam: submission, faith and excellence — Introduction to Islam References"
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Islamic Studies Reference Bank",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Introduction to Islam",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "01 Concept of Islam: submission, faith and excellence",
+                  "item": "https://www.css-vista.com/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/book-summaries/why-nations-fail",
+      "status": 200,
+      "rawHTMLCharacters": 12799,
+      "title": "Why Nations Fail by Daron Acemoglu and James A. Robinson - Book Summary | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/book-summaries/why-nations-fail"
+      ],
+      "robots": [
+        "index, follow, max-image-preview:large"
+      ],
+      "h1": [
+        "Book Summaries",
+        "Why Nations Fail"
+      ],
+      "mainCharacters": 49395,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": "Why Nations Fail summary",
+              "description": "Why Nations Fail by Daron Acemoglu and James A. Robinson: Why Nations Fail explains why some countries become wealthy, stable and technologically advanced whi",
+              "url": "https://www.css-vista.com/book-summaries/why-nations-fail",
+              "mainEntityOfPage": "https://www.css-vista.com/book-summaries/why-nations-fail",
+              "inLanguage": "en",
+              "about": {
+                "@type": "Book",
+                "name": "Why Nations Fail",
+                "author": {
+                  "@type": "Person",
+                  "name": "Daron Acemoglu and James A. Robinson"
+                }
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "CSS Vista",
+                "url": "https://www.css-vista.com/"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.css-vista.com/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Book Summaries",
+                  "item": "https://www.css-vista.com/book-summaries"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Why Nations Fail",
+                  "item": "https://www.css-vista.com/book-summaries/why-nations-fail"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 1,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/subjects/selector",
+      "status": 200,
+      "rawHTMLCharacters": 9418,
+      "title": "CSS Subject Selection Tool | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/subjects/selector"
+      ],
+      "robots": [
+        "noindex, follow"
+      ],
+      "h1": [
+        "Optional Subject Selection Tool"
+      ],
+      "mainCharacters": 561,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "CSS subject selection tool",
+          "description": "Compare CSS optional subjects by FPSC group and use the interactive selection tool to build a valid subject combination.",
+          "url": "https://www.css-vista.com/subjects/selector",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "result": "Optional Subject Selection Tool\n\nAnswer honestly about your background, time and preferences. The tool validates FPSC grouping rules and suggests combinations with reasons and risks - it does not predict scores.\n\n1\nBackground\n2\nTime & skills\n3\nInterests\n4\nPreferences\n5\nResults\nSubject selection is a personal academic decision. Previous scoring trends do not guarantee future marks.\n\nChoose exactly 600 optional marks within the group limits; you do not need a subject from every group. Check the official FPSC syllabus and the rules for your examination year before applying.\n\nSuggested combination\nValid - 600/600 marks\nPublic Administration (Group 3)\n100\nGender Studies (Group 5)\n100\nSociology (Group 7)\n100\nPolitical Science (Group 1)\n200\nHistory of Pakistan & India (Group 4)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Low structural risk; depth of preparation still decides the outcome.\n\nUse these in my study planner\nAlternative combination\nValid - 600/600 marks\nInternational Relations (Group 1)\n200\nGovernance & Public Policies (Group 3)\n100\nIslamic History & Culture (Group 4)\n100\nEnvironmental Sciences (Group 5)\n100\nConstitutional Law (Group 6)\n100\n\nWhy these: chosen for alignment with your background and interests, overlap with compulsory subjects, your available 6 months, and your comfort profile.\n\nRisks: Constitutional Law: Requires accurate citation of constitutions\n\nUse these in my study planner\nBack\nStart over"
+    },
+    {
+      "path": "/css-eligibility-calculator",
+      "status": 200,
+      "rawHTMLCharacters": 150612,
+      "title": "CSS Age & Attempts Calculator | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/css-eligibility-calculator"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "CSS Age & Attempts Calculator"
+      ],
+      "mainCharacters": 1316,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "CSS age and attempts calculator",
+          "description": "Check FPSC age eligibility, the final age-eligible examination year, written chances remaining and the maximum attempts that can still fit within the age window.",
+          "url": "https://www.css-vista.com/css-eligibility-calculator",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "result": "CSS Age & Attempts Calculator\n\nCheck your FPSC age window, final age-eligible CSS examination year, written chances remaining, and the maximum attempts you can still realistically use.\n\nCalculate My CSS Eligibility\n\nAge is checked against the FPSC cut-off for each examination year, not your age today.\n\nDate of Birth\n\nEnter it as DD / MM / YYYY, or use the calendar.\n\nYour DOB is used only for this calculation and is not placed in the page URL.\n\nPrevious CSS Written Attempts\n0 - I have never appeared in a CSS written examination\n1\n2\n3\nWhat counts as a written attempt?\nFPSC Rule 6 Age Relaxation\n\nDo you qualify for the FPSC two-year upper-age relaxation under Rule 6?\n\nNo\nYes\nNot Sure\nCalculate My CSS Eligibility\nFPSC cut-off method\n\nFor CE-Y, age eligibility is determined on 31 December of Y−1. The normal DOB window runs from 1 January of Y−30 through 1 January of Y−21, inclusive.\n\nPrivacy\n\nThis feature calculates locally in your browser. It does not require CNIC and does not send your DOB to an external eligibility service.\n\nYOUR CSS ELIGIBILITY\n\nEligible\n\nYour age falls within the ordinary FPSC age window for CE-2027.\n\nDOB used: 15 / 06 / 2001\n\nAGE STATUS\n\nEligible\n\nFor CE-2027\n\nFINAL ELIGIBLE CSS EXAM\n\nCE-2031\n\nFinal year under the age rule used above\n\nWRITTEN ATTEMPTS REMAINING\n\n3 of 3\n\nMPT does not reduce this number\n\nAGE-ELIGIBLE OPPORTUNITIES REMAINING\n\n5\n\n5 examination years remaining\n\nMAXIMUM USABLE ATTEMPTS REMAINING\n\n3\n\nLimited by both age and the three written chances\n\nCSS Age Window Remaining\n\n5 examination years remaining\n\nFinal age-eligible examination: CSS CE-2031\n\nFuture age-eligible CE years from 2027 onward: CE-2027, CE-2028, CE-2029, CE-2030, CE-2031. Age eligibility does not mean applications for those years are currently open.\n\nExamination-Year Timeline\n\nEach year is checked separately against the FPSC DOB boundaries.\n\nCE-2027\n\nAge Eligible\n\nAge cut-off: 31 December 2026\n\nCE-2028\n\nAge Eligible\n\nAge cut-off: 31 December 2027\n\nCE-2029\n\nAge Eligible\n\nAge cut-off: 31 December 2028\n\nCE-2031\n\nAge Eligible - Final Year\n\nAge cut-off: 31 December 2030\n\nCE-2032\n\nOver Age\n\nAge cut-off: 31 December 2031\n\nHow this was calculated\nOfficial-rule notice\n\nCalculated according to FPSC CSS Competitive Examination Rules currently implemented by CSS VISTA. Eligibility remains subject to verification by FPSC and any subsequent amendment to the official rules.\n\nView FPSC Rules\nRules last verified: 3 October 2026"
+    },
+    {
+      "path": "/grammar-course",
+      "status": 200,
+      "rawHTMLCharacters": 277340,
+      "title": "30-Day Grammar Course | CSS Vista",
+      "canonical": [
+        "https://www.css-vista.com/grammar-course"
+      ],
+      "robots": [
+        "index, follow"
+      ],
+      "h1": [
+        "30-Day Grammar Course"
+      ],
+      "mainCharacters": 3797,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "30-day grammar course",
+          "description": "Follow a beginner-first, practice-heavy 30-day grammar course with clear explanations, worked examples and daily drills.",
+          "url": "https://www.css-vista.com/grammar-course",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com/"
+          }
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": [],
+      "fullLessonCharacters": 22490
+    },
+    {
+      "path": "/vistagram/pakistan-financial-inclusion-digital-finance",
+      "status": 200,
+      "rawHTMLCharacters": 155610,
+      "title": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth | CSS Vistagram",
+      "canonical": [
+        "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance"
+      ],
+      "robots": [
+        "noindex, follow"
+      ],
+      "h1": [
+        "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth"
+      ],
+      "mainCharacters": 4952,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Financial Inclusion in Pakistan: Access, Digital Finance and Inclusive Growth",
+          "description": "A syllabus-linked Economics explainer on why access to formal financial services matters, how digital finance can widen participation, and how inclusion connects banking with development.",
+          "url": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+          "mainEntityOfPage": "https://www.css-vista.com/vistagram/pakistan-financial-inclusion-digital-finance",
+          "datePublished": "2026-09-24T12:00:00+05:00",
+          "dateModified": "2026-09-24T12:00:00+05:00",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CSS Vista",
+            "url": "https://www.css-vista.com"
+          },
+          "about": [
+            "Economics",
+            "Money and Banking; Financial Inclusion",
+            "Economics",
+            "Pakistan",
+            "Financial Inclusion",
+            "Banking",
+            "Digital Finance",
+            "SBP"
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/vistagram/seo-audit-deliberately-missing-20261014",
+      "status": 404,
+      "rawHTMLCharacters": 5904,
+      "title": "Vistagram article unavailable | CSS Vista",
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "h1": [
+        "Vistagram article unavailable"
+      ],
+      "mainCharacters": 91,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "path": "/seo-audit-deliberately-missing-20261014",
+      "status": 404,
+      "rawHTMLCharacters": 5904,
+      "title": "Page Not Found | CSS Vista",
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "h1": [
+        "Page not found"
+      ],
+      "mainCharacters": 101,
+      "schemas": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://www.css-vista.com/#website",
+              "url": "https://www.css-vista.com/",
+              "name": "CSS Vista",
+              "alternateName": [
+                "CSS VISTA",
+                "css-vista.com"
+              ],
+              "description": "Free CSS, PMS and one-paper competitive examination preparation platform in Pakistan with MCQs, MPT practice, past papers, notes, current affairs and study tools.",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://www.css-vista.com/#organization"
+              }
+            },
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.css-vista.com/#organization",
+              "name": "CSS Vista",
+              "alternateName": "CSS VISTA",
+              "url": "https://www.css-vista.com/",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.css-vista.com/icon-512.png",
+                "contentUrl": "https://www.css-vista.com/icon-512.png",
+                "width": 512,
+                "height": 512,
+                "caption": "CSS Vista CV logo"
+              },
+              "image": "https://www.css-vista.com/og.png",
+              "sameAs": [
+                "https://www.instagram.com/cssvista/",
+                "https://www.youtube.com/@cssvista"
+              ]
+            }
+          ]
+        }
+      ],
+      "adLoaders": 0,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,11 @@
+{
+  "observedAt": "2026-10-16T05:01:58.705Z",
+  "operation": "gsc_wizard_get_account_info",
+  "authorizedScope": "read-only",
+  "result": "subscription_blocked",
+  "message": "payment_required: Your GSC Wizard trial has ended or you have no active subscription. Subscribe at https://tool.gscwizard.com/settings/subscription to keep using the MCP tools.",
+  "accountReportsRetrieved": false,
+  "googleSettingsChanged": false,
+  "adsenseConnectionAvailable": false,
+  "limitations": "No property counts, exclusion categories, indexed URL states, review date or AdSense Policy Center findings retrieved."
+}

@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdirSync } from 'node:fs'
 import { transform } from 'esbuild'
 import { readFile } from 'node:fs/promises'
+import { isolateNetwork } from './isolated-network.mjs'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable database required')
 const root=new URL('../../',import.meta.url).pathname.replace(/\/$/,''),base=process.env.CSSV_TEST_BROWSER_ORIGIN||'https://localhost:3444',env={...process.env}
 if (!['localhost','127.0.0.1'].includes(new URL(base).hostname)) throw new Error('Loopback only')
@@ -15,6 +16,7 @@ const email='pro-pause-browser-'+Date.now()+'@example.invalid',id=php('tests/cur
 php('tests/precis/fixture.php','activate',id)
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,reducedMotion:'reduce',viewport:{width:390,height:1000}})
+await isolateNetwork(context,base)
 const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(30000)
 try {
   assert.equal((await context.request.post(base+'/api/auth/login.php',{data:{email,password:'TEST ONLY native fixture password'}})).status(),200)

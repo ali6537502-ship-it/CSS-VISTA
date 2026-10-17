@@ -1065,7 +1065,8 @@
 }
 
 .vista-live-ticker:hover .vista-live-ticker-track,
-.vista-live-ticker:focus-within .vista-live-ticker-track {
+.vista-live-ticker:focus-within .vista-live-ticker-track,
+.vista-live-ticker[data-paused='true'] .vista-live-ticker-track {
   animation-play-state: paused;
 }
 
@@ -1151,6 +1152,7 @@
 
   .vista-live-ticker-track {
     animation: none;
+    will-change: auto;
   }
 
   .cssv-tap,
@@ -1774,11 +1776,6 @@
 
 
 /* ---- Live homepage concept demos (motion themes) ---- */
-
-/* Live updates ticker */
-.vista-live-ticker-track{animation:vista-live-ticker-scroll 52.5s linear infinite;will-change:transform}
-.vista-live-ticker:hover .vista-live-ticker-track,.vista-live-ticker:focus-within .vista-live-ticker-track{animation-play-state:paused}
-@keyframes vista-live-ticker-scroll{0%{transform:translateZ(0)}to{transform:translate3d(-50%,0,0)}}
 
 .live-demo-stage{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgb(255 255 255 / .13);border-radius:1.25rem;background:#003d2b;box-shadow:0 28px 70px #04452b38}
 

@@ -5,6 +5,7 @@ import { PageHeader, Badge } from '@/components/shared'
 import { optionalGroups, type OptionalSubject } from '@/data/syllabus'
 import { saveSelectedOptionals } from '@/lib/store'
 import { usePageBack } from '@/lib/backNavigation'
+import { buildSubjectCombination, optionalSelectionSource } from '@/lib/subjectSelection'
 
 const backgrounds = ['Commerce / Business', 'Computer Science / IT', 'Engineering', 'Natural Sciences (Bio/Chem/Physics)', 'Social Sciences / Arts', 'Law', 'Languages / Literature', 'Medical']
 const interests = ['Politics & governance', 'Economy & finance', 'History', 'Society & gender', 'Science & environment', 'Law & justice', 'Media & psychology', 'Languages & literature']
@@ -54,31 +55,6 @@ function scoreSubject(s: OptionalSubject, w: Wizard): number {
   return score
 }
 
-interface Combo { subjects: OptionalSubject[]; total: number; valid: boolean; violations: string[] }
-
-function buildCombo(ranked: OptionalSubject[]): Combo {
-  const chosen: OptionalSubject[] = []
-  const usedGroups = new Set<number>()
-  const violations: string[] = []
-  // Group I: one 200-mark subject
-  const g1 = ranked.find((s) => s.group === 1 && !usedGroups.has(1))
-  if (g1) { chosen.push(g1); usedGroups.add(1) }
-  // Group II: prefer one 200-mark or two 100-mark
-  const g2twoHundred = ranked.find((s) => s.group === 2 && s.marks === 200)
-  const g2hundreds = ranked.filter((s) => s.group === 2 && s.marks === 100).slice(0, 2)
-  if (g2twoHundred && g2twoHundred !== undefined) { chosen.push(g2twoHundred); usedGroups.add(2) }
-  else if (g2hundreds.length === 2) { chosen.push(...g2hundreds); usedGroups.add(2) }
-  // Groups III–VII: one 100-mark each
-  for (const g of [3, 4, 5, 6, 7]) {
-    const pick = ranked.find((s) => s.group === g && !chosen.includes(s))
-    if (pick) chosen.push(pick)
-    else violations.push(`No subject selected from Group ${g}`)
-  }
-  const total = chosen.reduce((a, s) => a + s.marks, 0)
-  if (total !== 600) violations.push(`Total is ${total}, must be exactly 600`)
-  return { subjects: chosen, total, valid: violations.length === 0, violations }
-}
-
 export default function SubjectSelector() {
   const [step, setStep] = useState(0)
   const [savedCombo, setSavedCombo] = useState<string | null>(null)
@@ -89,9 +65,9 @@ export default function SubjectSelector() {
     if (step < 4) return null
     const all = optionalGroups.flatMap((g) => g.subjects)
     const ranked = [...all].sort((a, b) => scoreSubject(b, w) - scoreSubject(a, w))
-    const primary = buildCombo(ranked)
+    const primary = buildSubjectCombination(ranked)
     const altRanked = ranked.filter((s) => !primary.subjects.includes(s))
-    const alt = buildCombo([...altRanked, ...primary.subjects]) // alternatives ranked next
+    const alt = buildSubjectCombination([...altRanked, ...primary.subjects]) // alternatives ranked next
     return { primary, alt, ranked }
   }, [step, w])
 
@@ -206,6 +182,10 @@ export default function SubjectSelector() {
                 <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
                 Subject selection is a personal academic decision. Previous scoring trends do not guarantee future marks.
               </div>
+              <p className="text-sm text-muted-foreground">
+                Choose exactly 600 optional marks within the group limits; you do not need a subject from every group.{' '}
+                <a href={optionalSelectionSource} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Check the official FPSC syllabus</a> and the rules for your examination year before applying.
+              </p>
               {[{ label: 'Suggested combination', c: result.primary }, { label: 'Alternative combination', c: result.alt }].map(({ label, c }) => (
                 <div key={label} className="rounded-lg border p-4">
                   <div className="flex items-center justify-between">

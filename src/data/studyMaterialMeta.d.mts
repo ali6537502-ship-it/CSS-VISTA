@@ -25,3 +25,4 @@ export function islamicTopicMeta(
 ): PageMeta
 
 export function studyMaterialMetaForPath(pathname: string): PageMeta | null
+export function studyMaterialStructuredDataForPath(pathname: string, siteOrigin?: string): Record<string, unknown> | null

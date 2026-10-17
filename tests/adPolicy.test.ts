@@ -7,6 +7,7 @@ import {
   deriveAdPageState,
   getAdRoutePolicy,
   isAdSuppressedState,
+  needsCleanAdDocument,
   shouldProtectVignetteLink,
 } from '../src/lib/ads.ts'
 import {
@@ -71,19 +72,19 @@ test('advertising is independent of indexability while thin surfaces fail closed
   }
 })
 
-test('private account routes remain noindex and never enable Auto Ads', () => {
-  const manualOverviewPages = [
+test('account management, personal navigation and practice stay ad-free with their existing noindex policy', () => {
+  const accountUtilityPages = [
     '/account', '/account/dashboard', '/account/tasks', '/account/progress',
     '/account/english', '/account/library', '/account/mpt', '/account/mpt/history',
     '/account/mpt/performance',
   ]
-  for (const path of manualOverviewPages) {
+  for (const path of accountUtilityPages) {
     const policy = getRoutePolicy(path)
     assert.equal(policy.access, 'authenticated', path)
     assert.equal(policy.indexable, false, path)
-    assert.equal(policy.adMode, 'manual', path)
+    assert.equal(policy.adMode, 'disabled', path)
     assert.equal(getAdRoutePolicy(path).autoAdsEnabled, false, path)
-    assert.equal(getAdRoutePolicy(path).manualAdsEnabled, true, path)
+    assert.equal(getAdRoutePolicy(path).manualAdsEnabled, false, path)
   }
   for (const path of ['/account/current-affairs', '/account/factbook', '/account/saved', '/dashboard', '/factbook', '/exam-intelligence', '/study-planner']) {
     assert.equal(getAdRoutePolicy(path).autoAdsEnabled, false, path)
@@ -197,11 +198,11 @@ test('vignettes are blocked for protected destinations and sensitive controls', 
   assert.equal(shouldProtectVignetteLink({ currentPath: '/gk/quiz', destinationPath: '/notes' }), true)
 })
 
-test('the signed-in account unit renders only on audited manual overview routes', () => {
+test('signing in never makes account management or personal records into advertising inventory', () => {
   const authenticated = { authenticated: true }
-  assert.equal(canShowAuthenticatedAccountAd('/account', '', authenticated), true)
-  assert.equal(canShowAuthenticatedAccountAd('/account/dashboard', '', authenticated), true)
-  assert.equal(canShowAuthenticatedAccountAd('/account/mpt', '', authenticated), true)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account/dashboard', '', authenticated), false)
+  assert.equal(canShowAuthenticatedAccountAd('/account/mpt', '', authenticated), false)
   assert.equal(canShowAuthenticatedAccountAd('/dashboard', '', authenticated), false)
   assert.equal(canShowAuthenticatedAccountAd('/account/settings', '', authenticated), false)
   assert.equal(canShowAuthenticatedAccountAd('/sadiaali', '', authenticated), false)
@@ -255,9 +256,18 @@ test('indexable routes have unique crawlable metadata and unknown paths fail clo
   assert.equal(getAdRoutePolicy('/made-up-page').autoAdsEnabled, false)
 })
 
-test('indexability fails closed for every content class that is not publishable', () => {
+test('unreviewed utility and interactive routes fail closed while the public grammar course stays ad-free', () => {
   for (const route of ROUTE_REGISTRY) {
     if (['interactive', 'utility', 'private', 'incomplete'].includes(route.contentQuality)) {
+      if (route.path === '/grammar-course') {
+        // Reviewed guest lessons and worked practice are real main content;
+        // search eligibility must not accidentally enable advertising.
+        assert.equal(route.access, 'public')
+        assert.equal(route.indexable, true)
+        assert.equal(route.sitemap, true)
+        assert.equal(getAdRoutePolicy(route.path).autoAdsEnabled, false)
+        continue
+      }
       assert.equal(route.indexable, false, route.path)
       assert.equal(route.sitemap, false, route.path)
     }
@@ -324,4 +334,46 @@ test('the provider supplies the page state, so suppression is not inert', async 
     /getAdRoutePolicy\(\s*location\.pathname,\s*location\.search,\s*pageState/.test(provider),
     'AdSenseProvider must pass the page state into the policy',
   )
+})
+
+
+test('rendered loading and failures suppress public ads while account utilities remain excluded', () => {
+  for (const contentState of ['loading', 'error'] as const) {
+    const state = deriveAdPageState({ pathname: '/notes', user: null, contentState })
+    assert.equal(getAdRoutePolicy('/notes', '', state).autoAdsEnabled, false)
+    assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, ...state }), false)
+  }
+  const ready = deriveAdPageState({ pathname: '/notes', user: null, contentState: 'ready' })
+  assert.equal(getAdRoutePolicy('/notes', '', ready).autoAdsEnabled, true)
+  assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, ...ready }), false)
+  const pendingSession = deriveAdPageState({ pathname: '/notes', user: null, loading: true, contentState: 'ready' })
+  assert.equal(getAdRoutePolicy('/notes', '', pendingSession).autoAdsEnabled, false)
+})
+
+test('actual loading, fatal-error and unavailable-topic views publish runtime advertising state', async () => {
+  const { readFile } = await import('node:fs/promises')
+  for (const [path, marker] of [
+    ['src/App.tsx', 'data-cssv-ad-state="loading"'],
+    ['src/components/ErrorBoundary.tsx', 'data-cssv-ad-state="error"'],
+    ['src/pages/OptionalTopicNotes.tsx', 'data-cssv-ad-state="error"'],
+    ['src/pages/OptionalSubjectNotes.tsx', 'data-cssv-ad-state="error"'],
+  ]) {
+    assert.ok((await readFile(new URL(`../${path}`, import.meta.url), 'utf8')).includes(marker), path)
+  }
+})
+
+
+test('an executed ad library leaves the document before entering an ad-free screen', () => {
+  for (const pathname of ['/account', '/account/dashboard', '/grammar-course', '/privacy-policy', '/made-up']) {
+    assert.equal(needsCleanAdDocument({ previousRoute: '/notes', pathname, search: '', libraryPresent: true }), true, pathname)
+    assert.equal(needsCleanAdDocument({ previousRoute: '/notes', pathname, search: '', libraryPresent: false }), false, pathname)
+  }
+  assert.equal(needsCleanAdDocument({ previousRoute: '/notes', pathname: '/past-papers', search: '', libraryPresent: true }), false)
+})
+
+test('initial, loading and same-route views cannot create an advertising refresh loop', () => {
+  for (const pathname of ['/notes', '/account', '/grammar-course']) {
+    assert.equal(needsCleanAdDocument({ previousRoute: pathname, pathname, search: '', libraryPresent: true }), false)
+  }
+  assert.equal(needsCleanAdDocument({ previousRoute: '/notes', pathname: '/notes', search: '?utm_source=example', libraryPresent: true }), false)
 })

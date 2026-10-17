@@ -11,14 +11,18 @@ if (!['hostinger', 'sites'].includes(target)) {
   throw new Error(`Unknown build target: ${target}`)
 }
 
-function run(script, args = []) {
-  const result = spawnSync(process.execPath, [join(root, script), ...args], {
+function runProgram(command, args) {
+  const result = spawnSync(command, args, {
     cwd: root,
     env: process.env,
     stdio: 'inherit',
   })
   if (result.error) throw result.error
   if (result.status !== 0) process.exit(result.status ?? 1)
+}
+
+function run(script, args = []) {
+  runProgram(process.execPath, [join(root, script), ...args])
 }
 
 process.env.CSSV_BUILD_TARGET = target
@@ -36,6 +40,12 @@ if (target === 'hostinger') {
 
 // Keep the per-subject analysis files in step with the generated payload
 // before anything copies public/ into the build output.
+// These content reviews are shared by the real application and prerendered
+// HTML. Fail stale author/source preconditions before producing an artifact.
+run('scripts/editorial/reviewed-mcqs.mjs', ['--check'])
+runProgram('python3', [join(root, 'scripts/import_optional_notes.py'), '--check'])
+run('scripts/editorial/build-book-reviews.mjs')
+run('scripts/editorial/build-journal-transcripts.mjs')
 run('scripts/split-past-paper-analysis.mjs')
 // The bundled book catalogue is derived from the same source as the full
 // library, so the shelf renders on first paint without a 314 KB fetch.
@@ -60,13 +70,15 @@ if (target === 'hostinger') {
   await import('./repair-search-visibility.mjs')
   // Real application content replaces the former route-name SEO templates.
   run('scripts/prerender-real-content.mjs')
-  await import('./enrich-past-paper-collections-before-validation.mjs')
   // Thin-content thresholds are enforced on the normal production path. There
   // is no permissive variant: a known content defect must not ship.
   await import('./strengthen-longtail-search-pages.mjs')
   await import('./expand-book-summary-seo.mjs')
   await import('./expand-islamic-references-seo.mjs')
   await import('./expand-optional-notes-seo.mjs')
+  // Restore direct navigation for already-public validated Vistagram posts.
+  // Their existing noindex/ad-free policy is preserved.
+  await import('./expand-vistagram-pages.mjs')
   await import('./polish-prerender-shells.mjs')
   await import('./reinforce-brand-homepage.mjs')
   // The homepage keeps Google's official loader for direct verification, while
@@ -77,6 +89,7 @@ if (target === 'hostinger') {
   run('scripts/write-deployment-fingerprint.mjs')
   await import('./audit-hostinger-build-v2.mjs')
   // Production-integrity gates. These fail the normal build.
+  run('scripts/audit-search-readiness.mjs')
   run('scripts/audit-route-integrity.mjs')
   run('scripts/audit-internal-links.mjs')
   run('scripts/audit-duplicate-content.mjs')

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "reviews": [
+    {
+      "topic": "constitutional-law/constitutional-history-of-pakistan",
+      "reviewedAt": "2026-10-15",
+      "reason": "Replace an outdated current-text pointer with the official edition listing and the later enacted amendment. Original historical notes remain intact.",
+      "sources": [
+        {
+          "url": "https://na.gov.pk/en/downloads.php",
+          "title": "National Assembly Constitution downloads",
+          "locator": "English Constitution listed as amended up to 21 November 2025; checked 15 October 2026"
+        },
+        {
+          "url": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf",
+          "title": "Constitution (Twenty-seventh Amendment) Act, 2025, Act XXXII of 2025",
+          "locator": "Gazette 13 November 2025; sections 19, 21 and 29; PDF pages 4, 7–11 and 12"
+        }
+      ],
+      "operations": [
+        {
+          "action": "replace",
+          "expectedBlock": {
+            "kind": "para",
+            "segments": [
+              {
+                "text": "For current preparation, the operative constitutional text and recent amendments must be checked from an official source because constitutional provisions can change. Pakistan Code currently highlights the Constitution (Twenty-sixth Amendment) Act, 2024 in its constitutional materials."
+              }
+            ]
+          },
+          "blocks": [
+            {
+              "kind": "para",
+              "segments": [
+                {
+                  "text": "For current preparation, use the "
+                },
+                {
+                  "text": "National Assembly’s official Constitution downloads",
+                  "url": "https://na.gov.pk/en/downloads.php"
+                },
+                {
+                  "text": ". On 15 October 2026, its English edition was listed as amended up to 21 November 2025. Do not stop at the Twenty-sixth Amendment (2024): the "
+                },
+                {
+                  "text": "Twenty-seventh Amendment Act (2025)",
+                  "url": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf"
+                },
+                {
+                  "text": " changes the judicial framework. Compare historical arrangements with the current official text."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "constitutional-law/judiciary-judicial-independence-and-judicial-review",
+      "reviewedAt": "2026-10-15",
+      "reason": "Add a sourced jurisdiction update so generic judicial-review guidance is not mistaken for the pre-2025 Pakistani court framework.",
+      "sources": [
+        {
+          "url": "https://na.gov.pk/en/downloads.php",
+          "title": "National Assembly Constitution downloads",
+          "locator": "English Constitution listed as amended up to 21 November 2025; checked 15 October 2026"
+        },
+        {
+          "url": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf",
+          "title": "Constitution (Twenty-seventh Amendment) Act, 2025, Act XXXII of 2025",
+          "locator": "Gazette 13 November 2025; sections 19, 21 and 29; PDF pages 4, 7–11 and 12"
+        }
+      ],
+      "operations": [
+        {
+          "action": "insert_after",
+          "expectedBlock": {
+            "kind": "para",
+            "segments": [
+              {
+                "text": "The intensity and remedy of judicial review depend on the constitutional system. Some questions may involve direct invalidation, reading down, declarations, constitutional writs or other remedies. The existence of review therefore does not by itself answer how far courts may go."
+              }
+            ]
+          },
+          "blocks": [
+            {
+              "kind": "heading",
+              "level": 3,
+              "text": "Pakistan: the 2025 judicial framework change"
+            },
+            {
+              "kind": "para",
+              "segments": [
+                {
+                  "text": "The Twenty-seventh Amendment Act, 2025 introduced the Federal Constitutional Court. Section 21 inserted Articles 175B–175L; Articles 175E and 175F address its original and appellate jurisdiction. Section 29 omitted Article 184. For a current answer, distinguish this framework from earlier discussions of Supreme Court jurisdiction under Article 184(3), and read the High Courts’ Article 199 jurisdiction alongside the updated court provisions."
+                }
+              ]
+            },
+            {
+              "kind": "callout",
+              "tone": "source",
+              "segments": [
+                {
+                  "text": "Source checked 15 October 2026: "
+                },
+                {
+                  "text": "official amendment Act, sections 19, 21 and 29",
+                  "url": "https://na.gov.pk/uploads/documents/691ec19a6a212_270.pdf"
+                },
+                {
+                  "text": ". Check later changes against the "
+                },
+                {
+                  "text": "National Assembly Constitution downloads",
+                  "url": "https://na.gov.pk/en/downloads.php"
+                },
+                {
+                  "text": ". This study update does not replace the constitutional text."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

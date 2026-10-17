@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import {
   ADSENSE_PUBLISHER_ID,
@@ -6,6 +6,9 @@ import {
   canShowAuthenticatedAccountAd,
   deriveAdPageState,
   getAdRoutePolicy,
+  renderedAdContentState,
+  needsCleanAdDocument,
+  type AdContentState,
   shouldProtectVignetteLink,
   type AdRoutePolicy,
 } from '@/lib/ads'
@@ -18,6 +21,8 @@ declare global {
     adsbygoogle?: Record<string, unknown>[]
   }
 }
+
+const AdContentStateContext = createContext<AdContentState>('ready')
 
 const initializedSlots = new WeakSet<HTMLElement>()
 let adsenseLoadPromise: Promise<boolean> | null = null
@@ -91,6 +96,33 @@ function protectVignetteLinks(currentPath: string, currentSearch: string, root: 
 export function AdSenseProvider({ children }: { children: ReactNode }) {
   const location = useLocation()
   const { loading, user, passwordRecovery } = useAccount()
+  const [contentState, setContentState] = useState<AdContentState>('ready')
+  const routeKey = `${location.pathname}${location.search}`
+  const [documentTransition, setDocumentTransition] = useState({ route: routeKey, clean: false })
+  if (documentTransition.route !== routeKey) {
+    // React re-renders this component before committing its children. This
+    // prevents the destination's private content flashing into the old document.
+    setDocumentTransition({
+      route: routeKey,
+      clean: needsCleanAdDocument({
+        previousRoute: documentTransition.route,
+        pathname: location.pathname,
+        search: location.search,
+        libraryPresent: typeof document !== 'undefined'
+          && Boolean(document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')),
+      }),
+    })
+  }
+  const cleanDocumentNeeded = documentTransition.clean
+
+  useLayoutEffect(() => {
+    if (cleanDocumentNeeded) {
+      // Use a normal same-origin document navigation before rendering private
+      // or focused-study content into a document with Google's library active.
+      window.location.replace(`${window.location.origin}${routeKey}${location.hash}`)
+      return
+    }
+  }, [cleanDocumentNeeded, routeKey, location.hash])
 
   // The live page state, so the suppression rules actually apply in production
   // rather than only in tests.
@@ -100,10 +132,12 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
     user,
     loading,
     passwordRecovery,
+    contentState,
   })
   const policy = getAdRoutePolicy(location.pathname, location.search, pageState)
 
   useEffect(() => {
+    setContentState(renderedAdContentState(document))
     protectVignetteLinks(location.pathname, location.search)
     const pendingRoots = new Set<ParentNode>()
     let scheduled = false
@@ -111,6 +145,7 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
     const flush = () => {
       scheduled = false
       if (!active) return
+      setContentState(renderedAdContentState(document))
       pendingRoots.forEach((root) => protectVignetteLinks(location.pathname, location.search, root))
       pendingRoots.clear()
     }
@@ -118,12 +153,12 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
       mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
         if (node instanceof HTMLElement) pendingRoots.add(node)
       }))
-      if (pendingRoots.size && !scheduled) {
+      if (!scheduled) {
         scheduled = true
         queueMicrotask(flush)
       }
     })
-    observer.observe(document.body, { childList: true, subtree: true })
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-cssv-ad-state'] })
     return () => {
       active = false
       pendingRoots.clear()
@@ -135,12 +170,19 @@ export function AdSenseProvider({ children }: { children: ReactNode }) {
     if (isNotesBundleExclusiveWindow()) return undefined
     if (!policy.autoAdsEnabled) return undefined
     return scheduleIdleWork(
-      () => { void loadAdSenseOnce() },
+      () => {
+        // Recheck at execution time: a fetch can fail after idle work was queued.
+        // A navigation to an ad-free route gets a clean document above.
+        if (renderedAdContentState(document) === 'ready') void loadAdSenseOnce()
+      },
       { timeout: 2_500, fallbackDelay: 1_200 },
     )
   }, [policy.autoAdsEnabled])
 
-  return children
+  if (cleanDocumentNeeded) {
+    return <div role="status" data-cssv-ad-state="loading" className="mx-auto max-w-5xl px-4 py-10">Opening the requested page…</div>
+  }
+  return <AdContentStateContext.Provider value={contentState}>{children}</AdContentStateContext.Provider>
 }
 
 function configuredContentSlot() {
@@ -180,9 +222,10 @@ export function AdSlot({
 
     const initialize = async () => {
       if (!node.isConnected || initializedSlots.has(node)) return
+      if (renderedAdContentState(document) !== 'ready') return
       initializedSlots.add(node)
       const loaded = await loadAdSenseOnce()
-      if (cancelled || !node.isConnected || !loaded) {
+      if (cancelled || !node.isConnected || !loaded || renderedAdContentState(document) !== 'ready') {
         collapse()
         return
       }
@@ -247,7 +290,11 @@ export function AdSlot({
 /** A single, below-content manual placement using the verified content slot. */
 export function ManagedContentAd() {
   const location = useLocation()
-  const policy = getAdRoutePolicy(location.pathname, location.search)
+  const contentState = useContext(AdContentStateContext)
+  const policy = getAdRoutePolicy(location.pathname, location.search, {
+    loadingState: contentState === 'loading',
+    errorState: contentState === 'error',
+  })
   const slot = configuredContentSlot()
   if (!policy.manualAdsEnabled || !slot) return null
 
@@ -264,8 +311,9 @@ export function ManagedContentAd() {
 }
 
 /**
- * One audited bottom placement for signed-in account overview routes. It
- * fails closed during authentication, recovery, assessment and error states.
+ * A reserved component for any future explicitly reviewed account-content
+ * placement. Current account management/navigation/practice routes are ad-free.
+ * Authentication, recovery, assessment and error states always fail closed.
  */
 export function AuthenticatedAccountAd({
   sensitiveControlsVisible = false,
@@ -282,6 +330,7 @@ export function AuthenticatedAccountAd({
 }) {
   const location = useLocation()
   const { loading, user, passwordRecovery } = useAccount()
+  const contentState = useContext(AdContentStateContext)
   const eligible = canShowAuthenticatedAccountAd(location.pathname, location.search, {
     authenticated: Boolean(user),
     authLoading: loading,
@@ -289,8 +338,8 @@ export function AuthenticatedAccountAd({
     sensitiveControlsVisible,
     authTransaction,
     activeAssessment,
-    errorState,
-    loadingState,
+    errorState: errorState || contentState === 'error',
+    loadingState: loadingState || contentState === 'loading',
   })
 
   if (!eligible) return null

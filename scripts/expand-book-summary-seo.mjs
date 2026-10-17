@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { bookEditorialFor, reviewedBookBody } from '../src/data/bookEditorial.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const clientDir = process.env.CSSV_CLIENT_DIR
@@ -54,13 +55,20 @@ function summaryHtml(body) {
   }).join('')
 }
 
+function sourcesHtml(book) {
+  const review = bookEditorialFor(book.slug)
+  if (!review || (!review.note && !review.sources.length)) return ''
+  const sources = review.sources.map((source) => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.title)}</a><span class="block text-slate-600">${escapeHtml(source.locator)}</span>${source.scope === 'identity_only' && review.originalLine ? '<span class="block text-slate-600">Title and author record; this does not verify the quotation.</span>' : ''}</li>`).join('')
+  return `<section class="mt-8 rounded-xl border p-4" aria-label="Sources and quotation notes"><h2 class="font-display text-xl font-bold text-pine">Sources and quotation notes</h2>${review.note ? `<p class="mt-2 text-sm leading-7">${escapeHtml(review.note)}</p>` : ''}${sources ? `<ul class="mt-3 space-y-3 text-sm">${sources}</ul>` : ''}</section>`
+}
+
 function pageBody(book) {
   const related = books
     .filter((candidate) => candidate.category === book.category && candidate.slug !== book.slug)
     .slice(0, 6)
     .map((candidate) => `<li><a href="/book-summaries/${escapeHtml(candidate.slug)}">${escapeHtml(candidate.title)} by ${escapeHtml(candidate.author)}</a></li>`)
     .join('')
-  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">by ${escapeHtml(book.author)}</p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(book.body)}</section></article>${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
+  return `<main class="mx-auto max-w-4xl px-4 py-12"><nav aria-label="Breadcrumb"><a href="/">Home</a> · <a href="/book-summaries">Book Summaries</a></nav><article class="mt-6"><p class="text-xs font-bold uppercase tracking-wide text-emerald-700">CSS Vista book summary</p><h1 class="mt-2 font-display text-4xl font-bold text-pine">${escapeHtml(book.title)} Summary</h1><p class="mt-2 text-base text-slate-600">by ${escapeHtml(book.author)}</p><div class="mt-6 rounded-xl border-l-4 border-amber-400 bg-amber-50 p-5"><p class="leading-7">${escapeHtml(plainText(book.excerpt))}</p></div><section class="mt-8" aria-label="Complete book summary">${summaryHtml(reviewedBookBody(book))}</section>${sourcesHtml(book)}</article>${related ? `<nav class="mt-10 rounded-xl border bg-white p-5" aria-label="Related book summaries"><h2 class="font-display text-2xl font-bold text-pine">Related book summaries</h2><ul class="mt-4 grid gap-3 sm:grid-cols-2">${related}</ul></nav>` : ''}<p class="mt-8"><a href="/book-summaries" class="font-bold text-emerald-800 underline">Browse all 100 book summaries</a></p></main>`
 }
 
 function jsonLd(book, canonical, description) {

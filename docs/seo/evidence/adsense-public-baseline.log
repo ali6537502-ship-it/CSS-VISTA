@@ -1,0 +1,22 @@
+
+> css-vista@1.0.0 check:adsense
+> node scripts/check-adsense-production.mjs
+
+PASS ads.txt: 200 text/plain; charset=UTF-8 -> https://www.css-vista.com/ads.txt
+PASS ads.txt variant https://css-vista.com/ads.txt: 200 -> https://www.css-vista.com/ads.txt
+FAIL ads.txt variant http://css-vista.com/ads.txt: fetch failed
+FAIL ads.txt variant http://www.css-vista.com/ads.txt: fetch failed
+PASS robots.txt: 200 text/plain
+PASS sitemap.xml: 200 application/xml; charset=UTF-8 (4 child sitemaps)
+PASS Search Console verification: 200 -> https://www.css-vista.com/googlec96e2248070e0570.html
+PASS initial HTML /: 200, indexable, ad eligible, 681 words of primary content, canonical https://www.css-vista.com/
+PASS initial HTML /current-affairs: 200, noindex, ad protected, 24 words of primary content, canonical https://www.css-vista.com/current-affairs
+PASS initial HTML /consultation: 200, indexable, ad protected, 291 words of primary content, canonical https://www.css-vista.com/consultation
+PASS initial HTML /fpsc-syllabus: 200, indexable, ad eligible, 219 words of primary content, canonical https://www.css-vista.com/fpsc-syllabus
+PASS initial HTML /gk: 200, noindex, ad protected, 75 words of primary content, canonical https://www.css-vista.com/gk
+PASS initial HTML /past-papers: 200, indexable, ad eligible, 1806 words of primary content, canonical https://www.css-vista.com/past-papers
+PASS initial HTML /legal: 200, noindex, ad protected, 39 words of primary content, canonical https://www.css-vista.com/legal
+PASS initial HTML /privacy-policy: 200, indexable, ad protected, 1087 words of primary content, canonical https://www.css-vista.com/privacy-policy
+PASS real 404: 404 /definitely-not-a-css-vista-route-1791962343755
+FAIL canonical redirect http://css-vista.com/current-affairs: fetch failed
+PASS canonical redirect https://css-vista.com/current-affairs: 301 -> https://www.css-vista.com/current-affairs -> https://www.css-vista.com/current-affairs

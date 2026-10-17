@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { mcqQuestionIdentity } from './lib/mcq-question-identity.mjs'
 
 const root = process.cwd()
 const publicDir = path.join(root, 'public', 'mcq')
@@ -51,7 +52,7 @@ let total = 0
 
 for (const category of index.categories) {
   let categoryCount = 0
-  const seenText = new Set()
+  const seenQuestions = new Set()
   const seenCurrencyCountries = new Set()
   for (let chunk = 0; chunk < category.chunks; chunk += 1) {
     const filename = `cat-${category.slug}-${chunk}.json`
@@ -73,9 +74,9 @@ for (const category of index.categories) {
       else if (new Set(question.o.map(normalize)).size !== 4) errors.push(`${question.id}: repeated option`)
       if (!Number.isInteger(question.a) || question.a < 0 || question.a > 3) errors.push(`${question.id}: invalid answer index`)
       else answerDistribution[question.a] += 1
-      const textKey = normalize(question.q)
-      if (seenText.has(textKey)) errors.push(`${question.id}: repeated question text in ${category.slug}`)
-      seenText.add(textKey)
+      const identity = mcqQuestionIdentity(question)
+      if (seenQuestions.has(identity)) errors.push(`${question.id}: repeated question and answer choices in ${category.slug}`)
+      seenQuestions.add(identity)
       if (category.slug === 'currencies') {
         const country = currencyCountry(question.q)
         if (country) {

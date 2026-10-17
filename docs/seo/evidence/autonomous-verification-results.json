@@ -1,0 +1,250 @@
+{
+  "verifiedAt": "2026-10-16T14:00:43.873414+00:00",
+  "scope": "Owner-authorized SEO release candidate. Local checks are separate from GitHub CI and observed live deployment.",
+  "baselineCommit": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+  "tests": {
+    "nodePassed": 258,
+    "pythonPassed": 5,
+    "passed": 263,
+    "failed": 0,
+    "skipped": 0,
+    "nodeRunnerGroups": 17,
+    "browserRoutes": 24,
+    "finalSourceRerun": "263/263 after both memoization fixes and final preview/performance changes"
+  },
+  "artifact": {
+    "sitemapUrls": 1019,
+    "applicationHtml": 1527,
+    "allHtml": 1528,
+    "firstPartyLinks": 60961,
+    "adLoaderDocuments": 598,
+    "adFreeDocuments": 929
+  },
+  "content": {
+    "primaryBookIdentities": 100,
+    "exactQuotationMatches": 9,
+    "excerptQuotationMatches": 22,
+    "identifiedTranslation": 1,
+    "unverifiedQuotations": 57,
+    "withoutQuotation": 11,
+    "rightsPermissionsEstablished": 0,
+    "reviewedMcqExplanations": 56,
+    "demonstratedAnswerKeyCorrections": 1,
+    "constitutionalNoteUpdates": 2,
+    "journalTranscripts": 6,
+    "separateJournalClarifications": 6,
+    "originalBookLibrarySha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e"
+  },
+  "googleEvidence": {
+    "kind": "Historical read-only connected mail and export; no current portal access",
+    "historicalExportExamples": 488,
+    "currentlyIntendedIndexableExamples": 195,
+    "currentlyExcludedOrAlternateExamples": 293,
+    "currentGoogleKnownUrls": null,
+    "currentIndexedUrls": null,
+    "currentAdSenseApproval": null,
+    "evidence": "google-historical-account-evidence-2026-10-16.json"
+  },
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "autonomous-final-typecheck.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "autonomous-final-lint.log"
+    },
+    {
+      "command": "npm run test:all",
+      "exitCode": 0,
+      "log": "autonomous-final-tests.log"
+    },
+    {
+      "command": "npm run audit",
+      "exitCode": 0,
+      "log": "autonomous-audit.log"
+    },
+    {
+      "command": "npm run build:hostinger:strict",
+      "exitCode": 0,
+      "log": "autonomous-final-build.log"
+    },
+    {
+      "command": "npm run audit:hostinger",
+      "exitCode": 0,
+      "log": "autonomous-final-hostinger.log"
+    },
+    {
+      "command": "npm run audit:browser:seo",
+      "exitCode": 0,
+      "log": "autonomous-final-browser.log"
+    },
+    {
+      "command": "CSSV_LIGHTHOUSE_CLI=<pinned external CLI> node tests/browser/seo-performance.mjs",
+      "exitCode": 0,
+      "log": "autonomous-final-performance.log"
+    }
+  ],
+  "remainingDependencies": [
+    "Current Search Console and AdSense portal/Policy Center/consent data",
+    "Edition/passage sources for 57 unverified quotation entries; broader editorial and permission records",
+    "Google reprocessing and actual Google confirmation of outcomes"
+  ],
+  "preparedSourceManifest": {
+    "path": "prepared-source-manifest.json",
+    "files": 103,
+    "aggregateSha256": "3752aad93a597659c96dc62943a06cf742abb6fbc71102bdeeec9b6e4969ec2a"
+  },
+  "browserEvidence": "browser-autonomous-final.json",
+  "contentDownloadFailures": [
+    {
+      "family": "optional-notes",
+      "failedPath": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+      "fixtureStatus": 503,
+      "passed": true,
+      "failedRequests": 1,
+      "stableError": true,
+      "adjacentLinksStable": true,
+      "nextPath": "/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks",
+      "nextTopicLoaded": true,
+      "jsonResponses": [
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks.json",
+          "status": 503
+        },
+        {
+          "path": "/study-material/optional/accounting-and-auditing/paper-i-cost-and-managerial-accounting-50-marks.json",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "family": "islamic-references",
+      "failedPath": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence",
+      "fixtureStatus": 503,
+      "passed": true,
+      "failedRequests": 1,
+      "stableError": true,
+      "adjacentLinksStable": true,
+      "nextPath": "/study-material/islamic-studies/introduction-to-islam/02-importance-of-din-in-human-life",
+      "nextTopicLoaded": true,
+      "jsonResponses": [
+        {
+          "path": "/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence.json",
+          "status": 503
+        },
+        {
+          "path": "/study-material/islamic-studies/introduction-to-islam/02-importance-of-din-in-human-life.json",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "deferredMetadataNavigation": {
+    "passed": true,
+    "preservedPendingCanonical": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+    "destination": "/",
+    "actualSpaNavigation": true
+  },
+  "performance": {
+    "evidence": "browser-performance-autonomous-final.json",
+    "lighthouseEvidence": "lighthouse-autonomous-final.json",
+    "scope": "Isolated uncompressed local artifact lab; no field CWV/INP or production speed claim. Same-origin public note JSON, homepage feed and robots allowed; all APIs and external requests blocked.",
+    "lighthouseScores": {
+      "performance": 0.52,
+      "accessibility": 1,
+      "best-practices": 0.92,
+      "seo": 1
+    },
+    "lcpMilliseconds": 6978.423999999999,
+    "totalBlockingTimeMilliseconds": 413,
+    "cls": 0,
+    "successfulExternalRequests": 0,
+    "apiNetworkRequests": 0,
+    "samples": [
+      {
+        "path": "/",
+        "width": 390,
+        "lcp": {
+          "startTime": 956,
+          "size": 35916,
+          "element": "P"
+        },
+        "cls": 0,
+        "pageErrors": []
+      },
+      {
+        "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+        "width": 390,
+        "lcp": {
+          "startTime": 920,
+          "size": 14308,
+          "element": "H1"
+        },
+        "cls": 0.026102807145461173,
+        "pageErrors": []
+      },
+      {
+        "path": "/css-eligibility-calculator",
+        "width": 390,
+        "lcp": {
+          "startTime": 860,
+          "size": 22239,
+          "element": "P"
+        },
+        "cls": 0,
+        "pageErrors": []
+      },
+      {
+        "path": "/",
+        "width": 1440,
+        "lcp": {
+          "startTime": 1048,
+          "size": 58824,
+          "element": "SPAN"
+        },
+        "cls": 0,
+        "pageErrors": []
+      },
+      {
+        "path": "/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
+        "width": 1440,
+        "lcp": {
+          "startTime": 1064,
+          "size": 69615,
+          "element": "P"
+        },
+        "cls": 0,
+        "pageErrors": []
+      },
+      {
+        "path": "/css-eligibility-calculator",
+        "width": 1440,
+        "lcp": {
+          "startTime": 932,
+          "size": 32508,
+          "element": "P"
+        },
+        "cls": 0,
+        "pageErrors": []
+      }
+    ]
+  },
+  "retainedFailures": [
+    {
+      "evidence": "autonomous-tests-stale-policy-failure.log",
+      "reason": "An old manual-account-MPT expectation contradicted the reviewed ad-free policy; corrected the assertion and reran the suite."
+    },
+    {
+      "evidence": "autonomous-performance-isolation-rejected.log",
+      "reason": "Lighthouse command-array handling allowed only local preview API 503 responses; discarded this lab sample, tightened preview CSP and argument handling, and verified the final zero-API/external guard."
+    },
+    {
+      "evidence": "public-monitor-pre-release.json",
+      "reason": "Older live release still noindexes the public grammar course and omits it from sitemap; expected before release."
+    }
+  ],
+  "evidenceFormatting": "Committed console logs retain results but normalize trailing whitespace and final blank lines."
+}

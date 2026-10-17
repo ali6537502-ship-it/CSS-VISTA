@@ -1,0 +1,342 @@
+
+> css-vista@1.0.0 prebuild:hostinger:strict
+> npm run audit:mpt-release
+
+
+> css-vista@1.0.0 audit:mpt-release
+> node scripts/mpt/audit-release.mjs
+
+{
+  "gate": "source",
+  "series": "37e077d8e04f860f",
+  "papers": 37,
+  "questions": 7400,
+  "kept": 594,
+  "warnings": [
+    "Mock 11: mpt-ga-d-0478: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":8,\"classes\":[\"uncertain\",\"uncertain\",\"false\",\"uncertain\"]})",
+    "Mock 11: mpt-ga-d-0416: “between” does not explicitly mean immediate neighbours",
+    "Mock 12: mpt-ga-d-0351: “between” does not explicitly mean immediate neighbours",
+    "Mock 12: mpt-ga-d-0364: “between” does not explicitly mean immediate neighbours",
+    "Mock 12: mpt-ga-d-0452: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":8,\"classes\":[\"uncertain\",\"uncertain\"]})",
+    "Mock 12: mpt-ga-d-0475: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+    "Mock 14: mpt-ga-d-0479: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+    "Mock 15: mpt-ga-d-0343: “between” does not explicitly mean immediate neighbours",
+    "Mock 15: mpt-ga-d-0476: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\",\"uncertain\",\"uncertain\"]})",
+    "Mock 15: mpt-ga-d-0387: “between” does not explicitly mean immediate neighbours",
+    "Mock 16: mpt-ga-d-0455: unique keyed answer not entailed by the delivered text ({\"valid\":[],\"models\":16,\"classes\":[\"uncertain\",\"uncertain\"]})",
+    "Mock 17: mpt-ga-d-0411: “between” does not explicitly mean immediate neighbours"
+  ]
+}
+MPT release gate PASS
+
+> css-vista@1.0.0 build:hostinger:strict
+> node scripts/build-target.mjs hostinger --strict
+
+Hostinger preflight passed: Node runtime, canonical origin, and public build-time environment are safe for deployment.
+MCQ editorial review passed: 56 individually reviewed questions; 1 documented answer-key correction(s).
+Optional subject notes up to date: 34 subjects, 339 topics.
+Generated source and quotation notes for 100 existing books.
+Bundled 6 Journal transcripts from 11 unchanged original images.
+Split past-paper analysis: 52 subjects, 1790.5 KB source -> 1767.4 KB across per-subject files. Largest: accounting-auditing at 117.1 KB. A visitor now loads the index plus one subject instead of 1790.5 KB.
+Generated the bundled book-summary catalogue: 100 books, 74% smaller than the full library.
+Vistagram: 3 validated batches; 22 unique posts; public feed packaged.
+vite v7.3.7 building client environment for production...
+transforming...
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/optional-notes-index.json" with "type": "json" attributes, but it was already imported elsewhere with no attributes. Please ensure that import attributes for the same module are always consistent.
+Module "src/data/studyMaterialMeta.mjs" tried to import "src/data/bundled/islamic-references-index.json" with "type": "json" attributes, but it was already imported elsewhere with no attributes. Please ensure that import attributes for the same module are always consistent.
+✓ 2224 modules transformed.
+rendering chunks...
+[plugin vite:reporter]
+(!) /workspace/CSS-VISTA/src/features/factbook/media.ts is dynamically imported by /workspace/CSS-VISTA/src/features/factbook/service.ts but also statically imported by /workspace/CSS-VISTA/src/pages/Factbook.tsx, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                                           4.02 kB │ gzip:   1.23 kB
+dist/assets/current-affairs-CFPl7oph.css                 28.99 kB │ gzip:   5.95 kB
+dist/assets/index-BwlsioJ3.css                          219.84 kB │ gzip:  38.57 kB
+dist/assets/styles-CiQFODjF.js                            0.08 kB │ gzip:   0.10 kB
+dist/assets/chevron-left-CtdwTVK7.js                      0.13 kB │ gzip:   0.14 kB
+dist/assets/Dashboard-BJGWEgEi.js                         0.14 kB │ gzip:   0.14 kB
+dist/assets/square-CZmzZnYV.js                            0.15 kB │ gzip:   0.15 kB
+dist/assets/runtimeCache-XenIxp1t.js                      0.15 kB │ gzip:   0.13 kB
+dist/assets/plus-DiTFMo2N.js                              0.15 kB │ gzip:   0.15 kB
+dist/assets/cloud-DBCpV_GW.js                             0.16 kB │ gzip:   0.16 kB
+dist/assets/arrow-up-Dz8oKCT0.js                          0.16 kB │ gzip:   0.16 kB
+dist/assets/bookmark-DqVzrGaL.js                          0.16 kB │ gzip:   0.16 kB
+dist/assets/arrow-down-BS2WlqxU.js                        0.17 kB │ gzip:   0.16 kB
+dist/assets/arrow-up-right-m8fmwPv6.js                    0.17 kB │ gzip:   0.16 kB
+dist/assets/clock-3-DeOVpsjL.js                           0.17 kB │ gzip:   0.17 kB
+dist/assets/clock-DPvObCy6.js                             0.17 kB │ gzip:   0.17 kB
+dist/assets/play-CbNC06YM.js                              0.19 kB │ gzip:   0.18 kB
+dist/assets/api-DrVOzqaB.js                               0.20 kB │ gzip:   0.17 kB
+dist/assets/square-check-zsBkOfNm.js                      0.20 kB │ gzip:   0.18 kB
+dist/assets/rotate-ccw-BemC84e2.js                        0.20 kB │ gzip:   0.18 kB
+dist/assets/info-Ztxm9j-y.js                              0.21 kB │ gzip:   0.18 kB
+dist/assets/lock-DLAWfv3e.js                              0.21 kB │ gzip:   0.19 kB
+dist/assets/circle-x-C64aTqdQ.js                          0.21 kB │ gzip:   0.18 kB
+dist/assets/bookmark-check-DPotwP5S.js                    0.21 kB │ gzip:   0.18 kB
+dist/assets/pause-CAb2PNd2.js                             0.21 kB │ gzip:   0.17 kB
+dist/assets/currentAffairs-Dh7hoFfq.js                    0.22 kB │ gzip:   0.19 kB
+dist/assets/upload-EZ5IqTC0.js                            0.23 kB │ gzip:   0.19 kB
+dist/assets/log-out-o7X-Y12X.js                           0.23 kB │ gzip:   0.19 kB
+dist/assets/activity-BqFq5IxL.js                          0.24 kB │ gzip:   0.20 kB
+dist/assets/copy-CjIcqmDt.js                              0.24 kB │ gzip:   0.21 kB
+dist/assets/database-CVGi2YVG.js                          0.24 kB │ gzip:   0.20 kB
+dist/assets/circle-question-mark-BvO2dJMX.js              0.25 kB │ gzip:   0.21 kB
+dist/assets/circle-alert-C20U5JfQ.js                      0.25 kB │ gzip:   0.19 kB
+dist/assets/useUnsavedWorkGuard-B71F2duh.js               0.25 kB │ gzip:   0.20 kB
+dist/assets/compass-DZ24pywE.js                           0.25 kB │ gzip:   0.21 kB
+dist/assets/settings-2-k4q3lrXC.js                        0.25 kB │ gzip:   0.19 kB
+dist/assets/archive-DbCt1WkW.js                           0.25 kB │ gzip:   0.21 kB
+dist/assets/funnel-DHXljPn8.js                            0.26 kB │ gzip:   0.22 kB
+dist/assets/award-Duwj3_uJ.js                             0.28 kB │ gzip:   0.23 kB
+dist/assets/pencil-CkJisSUZ.js                            0.28 kB │ gzip:   0.22 kB
+dist/assets/lightbulb-CG2bf8IJ.js                         0.29 kB │ gzip:   0.23 kB
+dist/assets/list-ColTVvSY.js                              0.30 kB │ gzip:   0.19 kB
+dist/assets/handwrittenNotes-B5X7J1aJ.js                  0.30 kB │ gzip:   0.23 kB
+dist/assets/folder-plus-zZPHAmGg.js                       0.31 kB │ gzip:   0.23 kB
+dist/assets/resourceFiles-B3HIhBtw.js                     0.32 kB │ gzip:   0.26 kB
+dist/assets/refresh-cw-BOO3QaxK.js                        0.32 kB │ gzip:   0.23 kB
+dist/assets/trash-2-2CVK2O6V.js                           0.33 kB │ gzip:   0.22 kB
+dist/assets/scan-line-27cMuZ3W.js                         0.33 kB │ gzip:   0.22 kB
+dist/assets/book-open-check-DOtM_xgI.js                   0.34 kB │ gzip:   0.23 kB
+dist/assets/shield-alert-BmrRg6an.js                      0.35 kB │ gzip:   0.26 kB
+dist/assets/share-2-CJKRKTbo.js                           0.36 kB │ gzip:   0.23 kB
+dist/assets/calendar-plus-BpsG0EJJ.js                     0.36 kB │ gzip:   0.24 kB
+dist/assets/image-plus-eeq2xFHB.js                        0.36 kB │ gzip:   0.25 kB
+dist/assets/shuffle-D1WjMgu8.js                           0.38 kB │ gzip:   0.25 kB
+dist/assets/hostingerSync-uAzihTiL.js                     0.39 kB │ gzip:   0.28 kB
+dist/assets/quote-_ed-oKxs.js                             0.39 kB │ gzip:   0.20 kB
+dist/assets/tags-DT_TE43t.js                              0.42 kB │ gzip:   0.29 kB
+dist/assets/layers-1cXSn-47.js                            0.42 kB │ gzip:   0.24 kB
+dist/assets/book-open-text-BU_zlJ0_.js                    0.43 kB │ gzip:   0.26 kB
+dist/assets/waves-Ck20SztE.js                             0.43 kB │ gzip:   0.22 kB
+dist/assets/minimize-2-ChrdcZSb.js                        0.43 kB │ gzip:   0.25 kB
+dist/assets/sun-DsXlxLmi.js                               0.47 kB │ gzip:   0.26 kB
+dist/assets/api-BrERFejC.js                               0.47 kB │ gzip:   0.30 kB
+dist/assets/rollNumber-DPgT-Mgd.js                        0.48 kB │ gzip:   0.31 kB
+dist/assets/trophy-STC2pFB2.js                            0.48 kB │ gzip:   0.28 kB
+dist/assets/calendar-days-UqOsVKea.js                     0.49 kB │ gzip:   0.26 kB
+dist/assets/mail-DqBAXAmN.js                              0.52 kB │ gzip:   0.35 kB
+dist/assets/Skills-CyySiMOM.js                            0.53 kB │ gzip:   0.36 kB
+dist/assets/calculator-DK80tIXf.js                        0.53 kB │ gzip:   0.28 kB
+dist/assets/pastPaperAnalysis-B9U_tMki.js                 0.54 kB │ gzip:   0.31 kB
+dist/assets/essayThemes-C9f9_r_k.js                       0.65 kB │ gzip:   0.42 kB
+dist/assets/useServerClock-C3AxgNHf.js                    0.69 kB │ gzip:   0.37 kB
+dist/assets/api-CDC5VRZH.js                               0.72 kB │ gzip:   0.47 kB
+dist/assets/English-BcDOWKgJ.js                           0.73 kB │ gzip:   0.48 kB
+dist/assets/useAutosavedDraft-B_cVmELQ.js                 0.73 kB │ gzip:   0.44 kB
+dist/assets/current-affairs-issues-index-7HhEnd5G.js      0.77 kB │ gzip:   0.34 kB
+dist/assets/journal-xaRv4d-C.js                           0.82 kB │ gzip:   0.56 kB
+dist/assets/NotFound-DRfw96cM.js                          0.84 kB │ gzip:   0.43 kB
+dist/assets/questionPagination-B_FxlGuj.js                0.92 kB │ gzip:   0.50 kB
+dist/assets/styles-B0lYHFg7.js                            1.12 kB │ gzip:   0.40 kB
+dist/assets/cssSubjectMcqs-CPkG23-X.js                    1.13 kB │ gzip:   0.61 kB
+dist/assets/Continuation-42vioSGx.js                      1.15 kB │ gzip:   0.61 kB
+dist/assets/FpscSyllabus-D1-z09mY.js                      1.16 kB │ gzip:   0.69 kB
+dist/assets/islamicReferences-D3Kv45CK.js                 1.19 kB │ gzip:   0.60 kB
+dist/assets/useAccurateCountdown-CIhefM_R.js              1.36 kB │ gzip:   0.63 kB
+dist/assets/optionalNotes-BBhH3gAs.js                     1.38 kB │ gzip:   0.68 kB
+dist/assets/MptMenu-BPbGBPdT.js                           1.43 kB │ gzip:   0.72 kB
+dist/assets/testSeriesRequests-CHNeyS7a.js                1.44 kB │ gzip:   0.80 kB
+dist/assets/updates-Zux2kchj.js                           1.47 kB │ gzip:   0.72 kB
+dist/assets/RollNumber-DSvSspUB.js                        1.53 kB │ gzip:   0.82 kB
+dist/assets/StatusBadge-Buknrhs9.js                       1.54 kB │ gzip:   0.74 kB
+dist/assets/useBriefing-D_9aww5d.js                       1.56 kB │ gzip:   0.87 kB
+dist/assets/MockSlot-Cdr1asPx.js                          1.58 kB │ gzip:   0.79 kB
+dist/assets/MilestoneCelebration-Cg55af0i.js              1.79 kB │ gzip:   0.81 kB
+dist/assets/HomePreview-DTQsOOUj.js                       1.87 kB │ gzip:   0.87 kB
+dist/assets/progress-DFroBCRf.js                          2.06 kB │ gzip:   0.97 kB
+dist/assets/Bilingual-DVyLxLqy.js                         2.11 kB │ gzip:   0.96 kB
+dist/assets/api-BvuOaFXX.js                               2.11 kB │ gzip:   1.04 kB
+dist/assets/QuestionPagination-DXrx-SMN.js                2.12 kB │ gzip:   0.94 kB
+dist/assets/challenges-CbYMIuo8.js                        2.13 kB │ gzip:   0.95 kB
+dist/assets/api-Yhly2hau.js                               2.23 kB │ gzip:   1.19 kB
+dist/assets/StudyActivityTracker-CaiVCtJP.js              2.24 kB │ gzip:   1.02 kB
+dist/assets/MptQuestionBank-DM1qugAd.js                   2.32 kB │ gzip:   1.02 kB
+dist/assets/Introduction-DJAxmnbK.js                      2.35 kB │ gzip:   1.13 kB
+dist/assets/CompulsoryList-DMH421Xu.js                    2.36 kB │ gzip:   1.06 kB
+dist/assets/ui-CS7k3-43.js                                2.50 kB │ gzip:   1.04 kB
+dist/assets/ExamIntelligenceHomeCard-CtlnYJHG.js          2.51 kB │ gzip:   0.95 kB
+dist/assets/IslamicReferences-CgmW8ejZ.js                 2.60 kB │ gzip:   1.15 kB
+dist/assets/member-VL_kyNlK.js                            2.63 kB │ gzip:   1.02 kB
+dist/assets/Services-KIRe_BpO.js                          2.64 kB │ gzip:   1.30 kB
+dist/assets/mptQuestionBanks-B8repa2O.js                  2.65 kB │ gzip:   1.02 kB
+dist/assets/books-Cl4TNQJE.js                             2.65 kB │ gzip:   0.98 kB
+dist/assets/Blocks-D_DfmbFs.js                            2.67 kB │ gzip:   1.15 kB
+dist/assets/PrintMenu-K8Z2HgkV.js                         2.70 kB │ gzip:   1.07 kB
+dist/assets/shared-D639PJ0u.js                            3.07 kB │ gzip:   1.23 kB
+dist/assets/api-C_byrN0_.js                               3.11 kB │ gzip:   1.45 kB
+dist/assets/MptMistakes-BqPaJQ8e.js                       3.18 kB │ gzip:   1.39 kB
+dist/assets/checklists-C3U0mPKh.js                        3.36 kB │ gzip:   1.27 kB
+dist/assets/Tasks-0kQeLfSL.js                             3.39 kB │ gzip:   1.10 kB
+dist/assets/OptionalNotes-CgsTcE5b.js                     3.44 kB │ gzip:   1.49 kB
+dist/assets/MptHistory-CVuWikr1.js                        3.49 kB │ gzip:   1.56 kB
+dist/assets/Resources-0PeEuxxA.js                         3.58 kB │ gzip:   1.65 kB
+dist/assets/ScoreChart-IEXNjL5x.js                        3.71 kB │ gzip:   1.47 kB
+dist/assets/MptPerformance-BR3ViY4i.js                    3.79 kB │ gzip:   1.55 kB
+dist/assets/OptionalSubjectNotes-CTzkebkF.js              3.80 kB │ gzip:   1.46 kB
+dist/assets/StudyMaterial-CUR1DPGz.js                     3.90 kB │ gzip:   1.73 kB
+dist/assets/PostCard-DSiRpW4I.js                          4.01 kB │ gzip:   1.42 kB
+dist/assets/common-DM24lO2m.js                            4.10 kB │ gzip:   1.89 kB
+dist/assets/Consultation-KbwXIMZU.js                      4.29 kB │ gzip:   1.33 kB
+dist/assets/Library-BF2VUs6w.js                           4.39 kB │ gzip:   1.85 kB
+dist/assets/Checklists-sUsKxHjE.js                        4.55 kB │ gzip:   1.69 kB
+dist/assets/MptApply-H73itX62.js                          4.57 kB │ gzip:   2.01 kB
+dist/assets/HandwrittenNotes-Cx6WDQMO.js                  4.61 kB │ gzip:   1.85 kB
+dist/assets/OptionalTopicNotes-6WtJLqP-.js                4.65 kB │ gzip:   1.70 kB
+dist/assets/OptionalSubjects-Y-STDS2S.js                  4.71 kB │ gzip:   1.61 kB
+dist/assets/AiUsage-DgN2lqan.js                           4.81 kB │ gzip:   1.91 kB
+dist/assets/TaskReminderOverlay-3QDHwjN8.js               4.93 kB │ gzip:   2.16 kB
+dist/assets/SubjectDetail-Q71V4LSL.js                     5.09 kB │ gzip:   1.80 kB
+dist/assets/Progress-C5xtYRtx.js                          5.20 kB │ gzip:   1.81 kB
+dist/assets/Lectures-_l7g4s0B.js                          5.38 kB │ gzip:   2.21 kB
+dist/assets/IslamicReferenceChapter-D-6Z7RQS.js           5.41 kB │ gzip:   1.77 kB
+dist/assets/Vistagram-DGZib9xU.js                         5.50 kB │ gzip:   2.20 kB
+dist/assets/PsychViva-w-b8wPA_.js                         5.72 kB │ gzip:   2.61 kB
+dist/assets/ConsultationCard-Dnb28R7o.js                  5.83 kB │ gzip:   2.25 kB
+dist/assets/EssayThemes-Cbv39aQE.js                       5.96 kB │ gzip:   2.39 kB
+dist/assets/myTasks-Bumw4EDL.js                           6.10 kB │ gzip:   2.74 kB
+dist/assets/FpscUpdates-tqPZENPf.js                       6.23 kB │ gzip:   2.27 kB
+dist/assets/EssayModule-BiRd9KpH.js                       6.28 kB │ gzip:   2.16 kB
+dist/assets/ui-DOR60nHr.js                                6.29 kB │ gzip:   2.25 kB
+dist/assets/Mentors-CDwGnTfB.js                           6.31 kB │ gzip:   2.04 kB
+dist/assets/GKCategory-DzP_jJ1z.js                        6.33 kB │ gzip:   2.85 kB
+dist/assets/shared-BOiU09TB.js                            6.60 kB │ gzip:   2.30 kB
+dist/assets/IslamicReferenceTopic-CspNj7ki.js             6.67 kB │ gzip:   2.32 kB
+dist/assets/NotesLibrary-Dv4WHjyB.js                      6.69 kB │ gzip:   2.40 kB
+dist/assets/MptQuestionBankPaper-BgqX8hyj.js              6.99 kB │ gzip:   2.38 kB
+dist/assets/Analysis-CRGgPSlG.js                          7.01 kB │ gzip:   2.87 kB
+dist/assets/copy-BvfnxM72.js                              7.24 kB │ gzip:   3.05 kB
+dist/assets/essay-Dsk-pgQR.js                             7.27 kB │ gzip:   3.14 kB
+dist/assets/LiveMockBanner-Bs822J1k.js                    7.40 kB │ gzip:   2.81 kB
+dist/assets/Mistakes-SxDp9WmQ.js                          7.58 kB │ gzip:   2.65 kB
+dist/assets/services-CbqaZ87w.js                          7.90 kB │ gzip:   2.76 kB
+dist/assets/McqCard-CYNLbR3M.js                           7.96 kB │ gzip:   2.89 kB
+dist/assets/mcq-Dk0IEUCv.js                               8.01 kB │ gzip:   3.15 kB
+dist/assets/notes-DqO5QwQe.js                             8.25 kB │ gzip:   3.23 kB
+dist/assets/Vistagram-ROjpNrMT.js                         8.48 kB │ gzip:   2.87 kB
+dist/assets/lectures-yusLJM6-.js                          8.49 kB │ gzip:   3.14 kB
+dist/assets/MPTQuestionBank-BlG4bsqC.js                   8.82 kB │ gzip:   3.74 kB
+dist/assets/MptEntrance-CsAKMzGB.js                       8.92 kB │ gzip:   3.51 kB
+dist/assets/AdminLogin-CAuUDsda.js                        9.09 kB │ gzip:   2.87 kB
+dist/assets/MptApplication-Cz8qFpXe.js                    9.11 kB │ gzip:   3.36 kB
+dist/assets/TutorialAnnouncement-DEKEFjUD.js              9.31 kB │ gzip:   3.03 kB
+dist/assets/PastPaperOpen-C39i0eNG.js                     9.46 kB │ gzip:   3.17 kB
+dist/assets/vocab-3rGdvyRa.js                             9.62 kB │ gzip:   3.64 kB
+dist/assets/LiveThemeDemos-DL4gWa8k.js                    9.79 kB │ gzip:   3.25 kB
+dist/assets/MptArea-CltAR6ov.js                           9.79 kB │ gzip:   3.08 kB
+dist/assets/AnswerWriting-Cl3uCcoz.js                     9.85 kB │ gzip:   3.41 kB
+dist/assets/PhotoCompressor-CU6l-5bW.js                   9.87 kB │ gzip:   3.78 kB
+dist/assets/admin-BG9XZMkA.js                            10.02 kB │ gzip:   3.41 kB
+dist/assets/Reading-WVOOmK1s.js                          10.28 kB │ gzip:   3.33 kB
+dist/assets/DailyEnglishPanel-6n8f2DhA.js                10.33 kB │ gzip:   3.44 kB
+dist/assets/MptExam-CJAnBwxB.js                          10.35 kB │ gzip:   3.95 kB
+dist/assets/MptResult-BU6kN3FT.js                        10.53 kB │ gzip:   3.26 kB
+dist/assets/Account-CNp5voER.js                          10.76 kB │ gzip:   3.64 kB
+dist/assets/NoteViewer-D0Otp8mu.js                       10.85 kB │ gzip:   3.70 kB
+dist/assets/Css2026Result-BkEdZ2i_.js                    11.20 kB │ gzip:   3.43 kB
+dist/assets/QuizEngine-DELRPrlp.js                       11.30 kB │ gzip:   3.90 kB
+dist/assets/EssayThemeDetail-DvC9WOmI.js                 11.42 kB │ gzip:   3.59 kB
+dist/assets/AccountHome-BP2rawBc.js                      11.69 kB │ gzip:   4.52 kB
+dist/assets/AnswerEvaluation-ahoe4g30.js                 11.75 kB │ gzip:   3.93 kB
+dist/assets/Membership-CzrsqWlJ.js                       12.04 kB │ gzip:   3.87 kB
+dist/assets/SubjectSelector-DUGA4JL8.js                  12.48 kB │ gzip:   4.43 kB
+dist/assets/CssPastPaperAnalysis-DXbR4yzt.js             12.69 kB │ gzip:   4.35 kB
+dist/assets/PastPapers-DUDuGK5o.js                       12.85 kB │ gzip:   4.46 kB
+dist/assets/GKWorld-Dg7xaCU5.js                          13.47 kB │ gzip:   5.11 kB
+dist/assets/CssSubjectMcqs-CTFgK3xB.js                   13.84 kB │ gzip:   4.68 kB
+dist/assets/VistagramArticle-DO9M18xs.js                 14.06 kB │ gzip:   4.30 kB
+dist/assets/ScheduledSyllabusBoard-DmLj4OfG.js           14.86 kB │ gzip:   4.52 kB
+dist/assets/search-CKKN6ayT.js                           15.24 kB │ gzip:   5.10 kB
+dist/assets/GrammarVocab-B0eKkiQN.js                     15.39 kB │ gzip:   4.66 kB
+dist/assets/useExamIntelligence-CYd9FHAT.js              16.03 kB │ gzip:   6.24 kB
+dist/assets/CurrentAffairs-Cro8pXVi.js                   16.77 kB │ gzip:   5.34 kB
+dist/assets/AnswerTimer-CdC_SGYu.js                      17.23 kB │ gzip:   5.18 kB
+dist/assets/astronomy-DmApbhEb.js                        17.44 kB │ gzip:   3.40 kB
+dist/assets/FpscSyllabusPlanner-DzOtbWzk.js              20.32 kB │ gzip:   6.36 kB
+dist/assets/Tutor-Bw_CiQQZ.js                            21.05 kB │ gzip:   6.72 kB
+dist/assets/StudyPlanner-D794ibDs.js                     21.90 kB │ gzip:   5.70 kB
+dist/assets/CssEligibilityCalculator-B5_jVrJa.js         22.08 kB │ gzip:   6.56 kB
+dist/assets/VistaShortcut-C5oW1Gof.js                    23.37 kB │ gzip:   6.55 kB
+dist/assets/StartCSS-Kwb93D_a.js                         23.39 kB │ gzip:   8.36 kB
+dist/assets/StudyTools-2RWtUF0E.js                       23.53 kB │ gzip:   6.79 kB
+dist/assets/ResearchResources-BTyKSxB2.js                23.59 kB │ gzip:   7.32 kB
+dist/assets/AnswerPerformance-DQIPjgww.js                23.70 kB │ gzip:   6.70 kB
+dist/assets/Expression-C6iVWo0c.js                       24.44 kB │ gzip:   7.18 kB
+dist/assets/Games-DVqgBULN.js                            25.16 kB │ gzip:   8.47 kB
+dist/assets/utils-r1caayW5.js                            25.56 kB │ gzip:   8.21 kB
+dist/assets/Course-Bj5QOgTK.js                           26.41 kB │ gzip:   7.75 kB
+dist/assets/syllabus-BCbOif_B.js                         26.57 kB │ gzip:   7.66 kB
+dist/assets/Workspace-Bg4qNsPD.js                        27.00 kB │ gzip:   8.27 kB
+dist/assets/Handwriting-Cd7Q0dxo.js                      27.29 kB │ gzip:   8.00 kB
+dist/assets/Studio-0zTKl1YW.js                           27.54 kB │ gzip:   7.70 kB
+dist/assets/OneLinerGK-BdIyAFF6.js                       27.58 kB │ gzip:   7.90 kB
+dist/assets/LegalTrust-k3Ppo5Nc.js                       28.60 kB │ gzip:   8.55 kB
+dist/assets/MPTPrep-UB977TgM.js                          30.67 kB │ gzip:   9.40 kB
+dist/assets/quiz--CQcSWa2.js                             31.67 kB │ gzip:  10.39 kB
+dist/assets/TestSeries-DoxEEpvH.js                       31.91 kB │ gzip:   9.32 kB
+dist/assets/essay-themes-index-XxmGnCys.js               36.69 kB │ gzip:   4.54 kB
+dist/assets/ExamIntelligence-BStfbHb0.js                 37.53 kB │ gzip:   9.33 kB
+dist/assets/Books-D_NyFKxz.js                            39.03 kB │ gzip:  13.00 kB
+dist/assets/Precis-DJBmoCZK.js                           56.91 kB │ gzip:  15.58 kB
+dist/assets/model-7fJKFv67.js                            67.80 kB │ gzip:  18.85 kB
+dist/assets/Learning-DXUg0qCK.js                         83.24 kB │ gzip:  20.85 kB
+dist/assets/VistaJournal-BRVE0gox.js                     89.09 kB │ gzip:  30.73 kB
+dist/assets/installIdioms-CdMX9PIP.js                    89.49 kB │ gzip:  26.45 kB
+dist/assets/GKQuiz-D7gFTNbj.js                          119.27 kB │ gzip:  41.14 kB
+dist/assets/islamic-history-qP-0NfgW.js                 121.18 kB │ gzip:  25.69 kB
+dist/assets/Factbook-CupgBNGE.js                        164.66 kB │ gzip:  41.07 kB
+dist/assets/Admin-Bw8W9NX_.js                           166.56 kB │ gzip:  40.79 kB
+dist/assets/BookSummaries-D4KoXSCn.js                   183.88 kB │ gzip:  42.94 kB
+dist/assets/pastPapers-BkiSOiFp.js                      231.84 kB │ gzip:  19.31 kB
+dist/assets/islamiat-D9E9KefI.js                        279.19 kB │ gzip:  51.61 kB
+dist/assets/LanguageGrammar-BqyIv-ib.js                 346.85 kB │ gzip:  87.91 kB
+dist/assets/geography-CwkdBwwG.js                       364.42 kB │ gzip:  62.19 kB
+dist/assets/english-language-BVkpvBtj.js                366.58 kB │ gzip:  65.91 kB
+dist/assets/computer-CDDmGoUa.js                        432.64 kB │ gzip:  80.64 kB
+dist/assets/xlsx-CKwrMZHi.js                            499.55 kB │ gzip: 162.96 kB
+dist/assets/index-xD6sDv7Q.js                           551.84 kB │ gzip: 171.86 kB
+dist/assets/pakistan-affairs-BNCWjYfN.js                552.86 kB │ gzip:  97.92 kB
+dist/assets/mock-bank-Cx7f_K4h.js                       613.24 kB │ gzip: 122.75 kB
+dist/assets/GrammarCourse-BGuSJIKD.js                   669.62 kB │ gzip: 194.54 kB
+dist/assets/science-health-BV9p8cJ2.js                  696.97 kB │ gzip: 133.02 kB
+dist/assets/vocabulary_1500-DLDrp8S3.js               1,180.41 kB │ gzip: 173.16 kB
+dist/assets/general-knowledge-Byg9V581.js             2,643.06 kB │ gzip: 501.51 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 10.89s
+MPT official series 37e077d8e04f860f (editorial release 8): exported 37 audited paper(s).
+{
+  "gate": "exported",
+  "dir": "dist/api/_mpt_papers",
+  "series": "37e077d8e04f860f",
+  "papers": 37,
+  "identicalToAudited": true
+}
+MPT release gate PASS
+Prepared static Hostinger assets for https://www.css-vista.com.
+CONTENT NOTICE: /contact renders 148 words of unique primary content. Verify it still answers its own title.
+Prerendered real page content for 48 exact routes from the application components: 37 indexable (median 305 words of primary content), 11 deliberately noindex but fully served.
+Strengthened 782 individual past-paper pages and 24 collection pages; 373 CSS paper pages received source-backed question samples.
+Generated 100 crawlable book-summary pages with stable canonicals and Article metadata.
+Generated 79 crawlable Islamic Studies reference pages from the real components (7 chapters, 72 topics, 1382 references, median 3938 words each); 79 indexable.
+CONTENT NOTICE: /study-material/optional/pure-mathematics (39 words) is served but left out of search - too little page-specific content.
+Generated 373 crawlable optional-subject note pages from the real components (34 subjects, 339 topics, median 1091 words each); 372 indexable.
+Restored direct public readers for 22 existing Vistagram posts; noindex, ad-disabled, no sitemap additions.
+Added first-paint styling to 1005 prerendered HTML pages while keeping crawler-visible content available.
+Reinforced CSS Vista brand homepage and added a visible home-brand link to 1018 indexable SEO pages.
+AdSense HTML policy applied: 598 eligible documents retain the loader; 929 protected documents do not.
+Split 1019 indexable URLs into sitemap index: core=588, gk=42, collections=24, papers=365.
+Current affairs: 26 validated editions; protected PHP release packaged.
+Deployment fingerprint written for cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8.
+Hostinger SEO artifact audit passed: core=588 (100 books, 79 Islamic reference pages, 372 of 373 optional-notes pages), gk=42, collections=24, papers=365; reinforced CSS Vista homepage signals and canonical routing verified.
+Search-readiness audit passed: 1527 application pages; unique metadata, valid JSON-LD dates, 5 parsed sitemap files and 1019 unique sitemap URLs. Editorial quality and Google indexing require separate review.
+Route integrity verified: 103 registry routes, 4 redirect(s), 6 nonexistent URLs return a genuine 404, and all 1019 sitemap URLs resolve, are indexable and are self-canonical.
+Internal link audit passed: 60961 first-party links across 1528 generated pages all resolve.
+Duplicate/thin content audit passed: 1019 indexable pages, median 485 words of primary content, no pair above 80% similarity.

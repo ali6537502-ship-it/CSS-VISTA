@@ -1,0 +1,129 @@
+{
+  "observed_at": "2026-10-14T07:09:40.978681+00:00",
+  "scope": "HEAD only, no protected content downloaded. These samples do not prove complete data protection.",
+  "responses": [
+    {
+      "url": "https://www.css-vista.com/api/_premium_files/current-affairs-issues.json",
+      "method": "HEAD",
+      "status": 403,
+      "headers": {
+        "date": "Wed, 14 Oct 2026 07:09:38 GMT",
+        "content-type": "text/html",
+        "content-length": "787",
+        "vary": "Accept-Encoding",
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "dab79cff574f6e1e7028292dc96ea3a8-phx-edge10",
+        "x-envoy-upstream-service-time": "456",
+        "connection": "close"
+      },
+      "body_read": false
+    },
+    {
+      "url": "https://www.css-vista.com/api/_mpt_papers/",
+      "method": "HEAD",
+      "status": 403,
+      "headers": {
+        "date": "Wed, 14 Oct 2026 07:09:39 GMT",
+        "content-type": "text/html",
+        "content-length": "787",
+        "vary": "Accept-Encoding",
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "25704ee85315b37c6f048e72f86fa397-phx-edge13",
+        "x-envoy-upstream-service-time": "887",
+        "connection": "close"
+      },
+      "body_read": false
+    },
+    {
+      "url": "https://www.css-vista.com/api/_config.php",
+      "method": "HEAD",
+      "status": 404,
+      "headers": {
+        "date": "Wed, 14 Oct 2026 07:09:39 GMT",
+        "content-type": "text/html",
+        "vary": "Accept-Encoding",
+        "last-modified": "Mon, 12 Oct 2026 04:25:29 GMT",
+        "etag": "W/\"1711-6acc6139-a5067723c3dd7e35;gz\"",
+        "platform": "hostinger",
+        "panel": "hpanel",
+        "content-security-policy": "upgrade-insecure-requests",
+        "x-robots-tag": "noindex, nofollow",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "SAMEORIGIN",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=()",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "cache-control": "public, max-age=300, must-revalidate",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "daa718932f9b53416d2072ab6276259e-phx-edge10",
+        "x-envoy-upstream-service-time": "443",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "body_read": false
+    },
+    {
+      "url": "https://www.css-vista.com/.git/config",
+      "method": "HEAD",
+      "status": 403,
+      "headers": {
+        "date": "Wed, 14 Oct 2026 07:09:40 GMT",
+        "content-type": "text/html",
+        "content-length": "787",
+        "vary": "Accept-Encoding",
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "98a27bc4ac25e685799431f00b984106-phx-edge11",
+        "x-envoy-upstream-service-time": "586",
+        "connection": "close"
+      },
+      "body_read": false
+    },
+    {
+      "url": "https://www.css-vista.com/.env",
+      "method": "HEAD",
+      "status": 403,
+      "headers": {
+        "date": "Wed, 14 Oct 2026 07:09:40 GMT",
+        "content-type": "text/html",
+        "content-length": "787",
+        "vary": "Accept-Encoding",
+        "cache-control": "private, no-cache, no-store, must-revalidate, max-age=0",
+        "pragma": "no-cache",
+        "server": "envoy",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "x-hcdn-request-id": "7b591080323aec4be2a1db77aea4824c-phx-edge10",
+        "x-envoy-upstream-service-time": "479",
+        "connection": "close"
+      },
+      "body_read": false
+    }
+  ]
+}

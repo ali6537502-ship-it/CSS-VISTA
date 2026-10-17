@@ -2,6 +2,7 @@ import { chromium } from 'playwright-core'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { readFileSync, mkdirSync } from 'node:fs'
+import { isolateNetwork } from './isolated-network.mjs'
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable database required')
 const base = process.env.CSSV_TEST_BROWSER_ORIGIN || 'https://localhost:3444', root = new URL('../../', import.meta.url).pathname, env = { ...process.env }
 if (!['localhost', '127.0.0.1'].includes(new URL(base).hostname)) throw new Error('Loopback fixtures only')
@@ -11,6 +12,7 @@ const email = `reasoning-browser-${Date.now()}@example.invalid`, id = php('tests
 const units = JSON.parse(readFileSync(root + '/public/api/_premium_files/general-ability-course.json')).units.filter(u => u.stage === 'Logical reasoning')
 const browser = await chromium.launch({ executablePath: process.env.CSSV_BROWSER_EXECUTABLE || chromium.executablePath(), args: ['--no-sandbox'] })
 const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 390, height: 1000 }, reducedMotion: 'reduce' }), page = await context.newPage(), errors = []
+await isolateNetwork(context, base)
 page.on('pageerror', e => errors.push(e.message))
 try {
   await page.goto(base + '/account'); await page.getByLabel('Email address', { exact: true }).fill(email); await page.getByLabel('Password', { exact: true }).fill('TEST ONLY native fixture password'); const reply=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/auth/login.php'&&r.request().method()==='POST');await page.getByRole('button', { name: 'Sign in securely', exact: true }).click();const login=await reply;assert.equal(login.status(),200,'Native browser sign-in failed: '+(await login.json().catch(()=>({}))).error); await page.waitForURL('**/account/dashboard')

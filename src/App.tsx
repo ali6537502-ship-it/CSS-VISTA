@@ -118,7 +118,7 @@ const EditorialPolicy = lazy(() => import('./pages/LegalTrust').then((m) => ({ d
 
 function PageLoader() {
   return (
-    <div className="mx-auto max-w-7xl space-y-4 px-4 py-10" aria-label="Loading page">
+    <div className="mx-auto max-w-7xl space-y-4 px-4 py-10" aria-label="Loading page" data-cssv-ad-state="loading">
       <div className="h-8 w-1/3 animate-pulse rounded bg-secondary" />
       <div className="h-4 w-2/3 animate-pulse rounded bg-secondary" />
       <div className="grid gap-3 sm:grid-cols-3">

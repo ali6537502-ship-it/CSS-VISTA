@@ -15,6 +15,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { primaryContentText, isPlaceholderContent } from './content-quality.mjs'
 import { getRoutePolicy } from '../../src/data/routeRegistry.mjs'
+import { studyMaterialStructuredDataForPath } from '../../src/data/studyMaterialMeta.mjs'
 
 /** Below this, a page is an empty shell rather than a short page. */
 const EMPTY_CONTENT_WORDS = 60
@@ -26,7 +27,7 @@ export function escapeHtml(value) {
 }
 
 function structuredData(entry, canonical, siteOrigin) {
-  return JSON.stringify({
+  return JSON.stringify(entry.structuredData ?? studyMaterialStructuredDataForPath(entry.path, siteOrigin) ?? {
     '@context': 'https://schema.org',
     '@graph': [
       {

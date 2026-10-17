@@ -2,22 +2,22 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { BookOpenText, Search, Sparkles, UserRound, X } from 'lucide-react'
 import { useAccount } from '@/lib/accountContext'
-import { loadVistagramIndex } from '@/features/vistagram/api'
+import { loadVistagramIndex, vistagramIndexNow } from '@/features/vistagram/api'
 import VistagramPostCard from '@/features/vistagram/PostCard'
 import type { VistagramPostSummary } from '@/features/vistagram/types'
 
 export default function Vistagram() {
   const { user } = useAccount()
   const [params, setParams] = useSearchParams()
-  const [posts, setPosts] = useState<VistagramPostSummary[]>([])
-  const [loading, setLoading] = useState(true)
+  const [posts, setPosts] = useState<VistagramPostSummary[]>(() => vistagramIndexNow()?.posts ?? [])
+  const [loading, setLoading] = useState(() => !vistagramIndexNow())
   const [error, setError] = useState('')
   const query = params.get('q') ?? ''
   const category = params.get('category') ?? ''
 
   useEffect(() => {
     const controller = new AbortController()
-    setLoading(true)
+    setLoading(!vistagramIndexNow())
     loadVistagramIndex(controller.signal)
       .then((index) => {
         setPosts(index.posts)

@@ -1,7 +1,9 @@
 // Public figures for the shipped GK World bank.
-// Keep these in sync with public/mcq/index.json whenever the bank is regenerated.
-export const SHIPPED_MCQ_TOTAL = 37_609
-export const SHIPPED_MCQ_CATEGORY_COUNT = 42
+// Read the bundled authoritative index so marketing figures cannot drift.
+import { bundledBankIndex } from './mcqIndex'
+
+export const SHIPPED_MCQ_TOTAL = bundledBankIndex.total
+export const SHIPPED_MCQ_CATEGORY_COUNT = bundledBankIndex.categories.length
 
 export const shippedMcqSummary =
-  `${SHIPPED_MCQ_TOTAL.toLocaleString('en-US')} verified MCQs across ${SHIPPED_MCQ_CATEGORY_COUNT} categories`
+  `${SHIPPED_MCQ_TOTAL.toLocaleString('en-US')} MCQs across ${SHIPPED_MCQ_CATEGORY_COUNT} categories`

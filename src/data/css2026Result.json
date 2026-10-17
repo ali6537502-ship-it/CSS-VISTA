@@ -11,5 +11,9 @@
   "pageCount": 7,
   "fileSizeLabel": "963 KB",
   "noticeNumber": "F.2/4/2027-CE",
-  "officialResultsUrl": "https://www.fpsc.gov.pk/Results"
+  "officialResultsUrl": "https://www.fpsc.gov.pk/Results",
+  "contextSource": {
+    "url": "https://www.app.com.pk/national/476-candidates-clear-css-written-examination/",
+    "label": "APP’s report of FPSC’s 31 August 2026 announcement"
+  }
 }
