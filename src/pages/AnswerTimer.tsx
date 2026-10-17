@@ -626,7 +626,7 @@ function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
             <button onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="inline-flex h-11 items-center rounded-md border px-4 text-xs font-semibold text-pine">
               {floatingTimer.floating ? '× Close floating timer' : '↗ Float timer'}
             </button>
-          )
+          )}
         </div>
         <div className="mt-4 flex justify-center gap-1.5">
           {times.map((t, i) => (
