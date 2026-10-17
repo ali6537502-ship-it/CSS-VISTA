@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
+import { canRequestTimerNotifications, formatTimerSeconds as fmt, requestTimerNotifications, TIMER_ALERTS, unlockTimerAudio, useFloatingAnswerTimer, useTimerFeedback, type TimerAlertMode } from '@/components/timer/TimerFeedback'
 import { PageHeader } from '@/components/shared'
 import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
@@ -7,37 +8,51 @@ import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 
-const ALERTS = [
-  { at: 5, text: '5 minutes: Outline should be ready.' },
-  { at: 10, text: '10 minutes: Begin the main argument.' },
-  { at: 20, text: '20 minutes: Check balance and evidence.' },
-  { at: 35, text: '35 minutes: Conclude and review.' },
-]
-
 const PAPER_QUESTION_SECONDS = 45 * 60
+const SINGLE_RESUME_KEY = 'cssvista:single-answer-timer'
 
-function beep() {
+interface SingleTimerSnapshot {
+  minutes: number
+  question: string
+  remaining: number
+  running: boolean
+  savedAt: number
+}
+
+function readSingleSnapshot(): SingleTimerSnapshot | null {
   try {
-    const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
-    const o = ctx.createOscillator()
-    const g = ctx.createGain()
-    o.connect(g)
-    g.connect(ctx.destination)
-    o.frequency.value = 880
-    g.gain.setValueAtTime(0.15, ctx.currentTime)
-    o.start()
-    o.stop(ctx.currentTime + 0.25)
+    const raw = localStorage.getItem(SINGLE_RESUME_KEY)
+    if (!raw) return null
+    const saved = JSON.parse(raw) as SingleTimerSnapshot
+    if (!Number.isInteger(saved.minutes) || saved.minutes < 1 || saved.minutes > 180
+      || typeof saved.question !== 'string' || saved.question.length > 10000
+      || !Number.isFinite(saved.remaining) || Math.abs(saved.remaining) > 604800
+      || typeof saved.running !== 'boolean' || !Number.isFinite(saved.savedAt)) return null
+    return saved
   } catch {
-    /* audio unavailable */
+    return null
   }
 }
 
-function fmt(s: number) {
-  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+function writeSingleSnapshot(snapshot: SingleTimerSnapshot) {
+  try { localStorage.setItem(SINGLE_RESUME_KEY, JSON.stringify(snapshot)) } catch { /* storage may be unavailable */ }
 }
 
 export default function AnswerTimer() {
   const [tab, setTab] = useState<'single' | 'paper'>('single')
+  const [alertMode, setAlertMode] = useState<TimerAlertMode>(() => {
+    try {
+      const saved = localStorage.getItem('cssvista:timer-alert-mode')
+      return saved === 'off' || saved === 'voice' || saved === 'both' ? saved : 'tones'
+    } catch { return 'tones' }
+  })
+  const [notificationPermission, setNotificationPermission] = useState(() =>
+    canRequestTimerNotifications() ? Notification.permission : 'unsupported')
+
+  useEffect(() => {
+    try { localStorage.setItem('cssvista:timer-alert-mode', alertMode) } catch { /* optional preference */ }
+  }, [alertMode])
+
   return (
     <div>
       <PageHeader
@@ -53,7 +68,24 @@ export default function AnswerTimer() {
             Four-Question Paper Mode
           </button>
         </div>
-        {tab === 'single' ? <SingleTimer /> : <PaperTimer />}
+        <div className="no-print mb-5 flex flex-wrap items-center gap-3 rounded-lg border bg-white px-4 py-3">
+          <label className="flex items-center gap-2 text-xs font-semibold text-pine">
+            <Bell className="h-4 w-4" /> Timer alerts
+            <select value={alertMode} onChange={(event) => setAlertMode(event.target.value as TimerAlertMode)} className="h-9 rounded-md border bg-white px-2 text-sm" aria-label="Timer sound and voice alerts">
+              <option value="off">Silent</option>
+              <option value="tones">Tones</option>
+              <option value="voice">Voice</option>
+              <option value="both">Voice + tones</option>
+            </select>
+          </label>
+          {canRequestTimerNotifications() && notificationPermission !== 'granted' && notificationPermission !== 'denied' && (
+            <button onClick={() => { void requestTimerNotifications().then(setNotificationPermission) }} className="rounded-md border px-3 py-2 text-xs font-semibold text-pine">
+              Enable browser notifications
+            </button>
+          )}
+          <span className="text-xs text-muted-foreground">Floating view works on supported desktop browsers while this tab stays open. Alerts may be restricted in the background.</span>
+        </div>
+        {tab === 'single' ? <SingleTimer alertMode={alertMode} /> : <PaperTimer alertMode={alertMode} />}
       </div>
     </div>
   )
@@ -63,39 +95,52 @@ function usePaperTitles() {
   return useMemo(() => mergedPastPapers(seedPapers).map((p) => p.title), [])
 }
 
-function SingleTimer() {
+function SingleTimer({ alertMode }: { alertMode: TimerAlertMode }) {
   const paperTitles = usePaperTitles()
-  const [question, setQuestion] = useState('')
-  const [customMin, setCustomMin] = useState(35)
-  const timer = useAccurateCountdown(customMin * 60)
+  const saved = useMemo(() => readSingleSnapshot(), [])
+  const [question, setQuestion] = useState(saved?.question ?? '')
+  const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
+  const timer = useAccurateCountdown(customMin * 60, undefined, true)
   const { remaining: left, running } = timer
-  const [soundOn, setSoundOn] = useState(true)
-  const [fired, setFired] = useState<number[]>([])
-  const [banner, setBanner] = useState<string | null>(null)
+  const banner = useTimerFeedback(left, running, customMin * 60, alertMode)
+  const floatingTimer = useFloatingAnswerTimer(question || 'Single question', fmt(left), running)
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
-  const bannerTimerRef = useRef<number | null>(null)
+  const skipFirstSave = useRef(Boolean(saved))
+
+  // A reopened page reconstructs elapsed time from the last saved wall-clock anchor.
+  useEffect(() => {
+    if (!saved) return
+    const resumed = saved.running
+      ? saved.remaining - Math.max(0, Math.floor((Date.now() - saved.savedAt) / 1000))
+      : saved.remaining
+    if (saved.running) timer.startFrom(resumed)
+    else timer.reset(resumed)
+    // Intentionally restore only on first mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const persist = useCallback(() => {
+    writeSingleSnapshot({
+      minutes: customMin,
+      question,
+      remaining: timer.getRemaining(),
+      running,
+      savedAt: Date.now(),
+    })
+  }, [customMin, question, running, timer.getRemaining])
 
   useEffect(() => {
-    const elapsed = Math.max(0, customMin * 60 - left)
-    const crossed = ALERTS.filter((alert) => elapsed >= alert.at * 60 && !fired.includes(alert.at))
-    if (crossed.length === 0) return
-    setFired((current) => [...current, ...crossed.map((alert) => alert.at)])
-    const latest = crossed[crossed.length - 1]
-    setBanner(latest.text)
-    if (soundOn) beep()
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
-    bannerTimerRef.current = window.setTimeout(() => setBanner(null), 8000)
-  }, [customMin, fired, left, soundOn])
+    if (skipFirstSave.current) { skipFirstSave.current = false; return }
+    persist()
+  }, [persist, left])
 
-  useEffect(() => () => {
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
-  }, [])
+  useEffect(() => {
+    window.addEventListener('pagehide', persist)
+    return () => { window.removeEventListener('pagehide', persist); persist() }
+  }, [persist])
 
   function reset(newMin = customMin) {
     timer.reset(newMin * 60)
-    setFired([])
-    setBanner(null)
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
   }
 
   function complete() {
@@ -140,9 +185,11 @@ function SingleTimer() {
               {m}m
             </button>
           ))}
-          <button onClick={() => setSoundOn(!soundOn)} className="ml-auto inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-muted-foreground hover:bg-secondary">
-            {soundOn ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />} Sound {soundOn ? 'on' : 'off'}
-          </button>
+          {floatingTimer.supported && (
+            <button onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="ml-auto rounded-md border px-3 py-1.5 text-xs font-semibold text-pine">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Float above other windows'}
+            </button>
+          )}
         </div>
       </div>
 
@@ -150,11 +197,12 @@ function SingleTimer() {
         <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {question ? question.slice(0, 80) : 'Set a question, then start the timer'}
         </p>
-        <p className={`mt-3 font-display text-5xl font-bold tabular-nums ${left < 300 ? 'text-red-600' : 'text-pine'}`}>{fmt(Math.max(0, left))}</p>
+        <p className={`mt-3 font-display text-5xl font-bold tabular-nums ${left <= 0 ? 'text-red-600' : left < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(left)}</p>
+        {left < 0 && <p className="mt-1 text-sm font-bold text-red-600">Overtime — {fmt(-left)} beyond the limit</p>}
         <div className="mt-4 flex items-center justify-center gap-2">
           {!running ? (
-            <button onClick={timer.start} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
-              <Play className="h-4 w-4" /> {left < customMin * 60 && left > 0 ? 'Resume' : 'Start'}
+            <button onClick={() => { unlockTimerAudio(); timer.start() }} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
+              <Play className="h-4 w-4" /> {left < customMin * 60 ? 'Resume' : 'Start'}
             </button>
           ) : (
             <button onClick={timer.pause} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-amber-600 px-5 text-sm font-semibold text-white">
@@ -169,8 +217,8 @@ function SingleTimer() {
           </button>
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-          {ALERTS.map((a) => (
-            <span key={a.at} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${fired.includes(a.at) ? 'bg-emerald-100 text-emerald-800' : 'bg-secondary text-muted-foreground'}`}>
+          {TIMER_ALERTS.filter((a) => a.at <= customMin).map((a) => (
+            <span key={a.at} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${left <= customMin * 60 - a.at * 60 ? 'bg-emerald-100 text-emerald-800' : 'bg-secondary text-muted-foreground'}`}>
               {a.at}m alert
             </span>
           ))}
