@@ -101,7 +101,7 @@ function SingleTimer({ alertMode }: { alertMode: TimerAlertMode }) {
   const [question, setQuestion] = useState(saved?.question ?? '')
   const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
   const timer = useAccurateCountdown(customMin * 60, undefined, true)
-  const { remaining: left, running } = timer
+  const { remaining: left, running, getRemaining } = timer
   const banner = useTimerFeedback(left, running, customMin * 60, alertMode)
   const floatingTimer = useFloatingAnswerTimer(question || 'Single question', fmt(left), running)
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
@@ -123,11 +123,11 @@ function SingleTimer({ alertMode }: { alertMode: TimerAlertMode }) {
     writeSingleSnapshot({
       minutes: customMin,
       question,
-      remaining: timer.getRemaining(),
+      remaining: getRemaining(),
       running,
       savedAt: Date.now(),
     })
-  }, [customMin, question, running, timer.getRemaining])
+  }, [customMin, question, running, getRemaining])
 
   useEffect(() => {
     if (skipFirstSave.current) { skipFirstSave.current = false; return }
@@ -476,6 +476,8 @@ function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
       setTotalLeft(snapshot.paperLeft)
       questionElapsedBaseRef.current = 0
       totalLeftBaseRef.current = snapshot.paperLeft
+      // This executes only from the Finish question button, not during render.
+      // eslint-disable-next-line react-hooks/purity
       runningStartedAtRef.current = Date.now()
       setPaused(false)
     } else {
