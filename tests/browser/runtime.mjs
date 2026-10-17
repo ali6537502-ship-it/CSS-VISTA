@@ -1,12 +1,14 @@
 import https from 'node:https'
 import http from 'node:http'
-import { readFileSync, createReadStream, statSync, mkdtempSync, rmSync } from 'node:fs'
+import { readFileSync, createReadStream, mkdtempSync, rmSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { parseHtaccess, resolveRequest } from '../../scripts/lib/htaccess-resolver.mjs'
 
 if (process.env.CI !== 'true' || process.env.CSSV_DB_NAME !== 'cssvista_briefing_test') throw new Error('Disposable test database required')
 const root = new URL('../../dist/', import.meta.url).pathname.replace(/\/$/, '')
+const rules = parseHtaccess(readFileSync(root + '/.htaccess', 'utf8'))
 const temporary = mkdtempSync(path.join(tmpdir(), 'cssv-browser-'))
 execFileSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', temporary + '/key.pem', '-out', temporary + '/cert.pem', '-days', '1', '-subj', '/CN=localhost'], { stdio: 'ignore' })
 const types = { '.js': 'text/javascript', '.css': 'text/css', '.html': 'text/html', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.woff2': 'font/woff2' }
@@ -22,11 +24,19 @@ const server = https.createServer({ key: readFileSync(temporary + '/key.pem'), c
     proxy.on('error', error => { console.error('Isolated native proxy:', error.code); if (!res.headersSent) res.writeHead(502, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ error: 'test_native_proxy_unavailable' })) })
     req.pipe(proxy); return
   }
-  let file = path.resolve(root, '.' + pathname)
+  // Use the same generated document as Apache. Falling back to index.html
+  // injects the homepage's advertising library into private account shells
+  // and races the application's required clean-document navigation boundary.
+  const route = resolveRequest(rules, root, pathname)
+  if (route.redirect) { res.writeHead(route.status, { Location: route.redirect }); res.end(); return }
+  if (!route.file || path.extname(route.file) === '.php') { res.writeHead(route.status === 200 ? 403 : route.status); res.end(); return }
+  const file = path.resolve(root, route.file)
   if (file !== root && !file.startsWith(root + '/')) { res.writeHead(404); res.end(); return }
-  try { if (!statSync(file).isFile()) file = root + '/index.html' } catch { file = root + '/index.html' }
+  res.statusCode = route.status
   res.setHeader('Content-Type', types[path.extname(file)] || 'application/octet-stream')
-  createReadStream(file).pipe(res)
+  const stream = createReadStream(file)
+  stream.on('error', () => { if (!res.headersSent) res.writeHead(404); res.end() })
+  stream.pipe(res)
 })
 server.listen(Number(process.env.CSSV_TEST_BROWSER_PORT || 3444), '127.0.0.1', () => console.log('Isolated built browser runtime ready'))
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close(() => { rmSync(temporary, { recursive: true, force: true }); process.exit(0) }))

@@ -2,6 +2,7 @@ import {chromium} from 'playwright-core'
 import assert from 'node:assert/strict'
 import {execFileSync} from 'node:child_process'
 import {readFileSync,mkdirSync} from 'node:fs'
+import {isolateNetwork} from './isolated-network.mjs'
 if(process.env.CI!=='true'||process.env.CSSV_DB_NAME!=='cssvista_briefing_test')throw new Error('Disposable test database required')
 const base=process.env.CSSV_TEST_BROWSER_ORIGIN||'https://localhost:3444',root=new URL('../../',import.meta.url).pathname.replace(/\/$/,''),env={...process.env}
 if(!['localhost','127.0.0.1'].includes(new URL(base).hostname))throw new Error('Browser fixtures may only target loopback')
@@ -13,6 +14,7 @@ php('tests/precis/fixture.php','activate',id)
 const raw=JSON.parse(readFileSync(root+'/public/api/_premium_files/skills-curriculum.json'))
 const browser=await chromium.launch({executablePath:process.env.CSSV_BROWSER_EXECUTABLE||chromium.executablePath(),headless:true,args:['--no-sandbox']})
 const context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:390,height:1000},reducedMotion:'reduce'})
+await isolateNetwork(context,base)
 const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(30000)
 async function signin(tab){await tab.goto(base+'/account');await tab.getByLabel('Email address',{exact:true}).fill(email);await tab.getByLabel('Password',{exact:true}).fill('TEST ONLY native fixture password');const response=tab.waitForResponse(r=>new URL(r.url()).pathname==='/api/auth/login.php'&&r.request().method()==='POST');await tab.getByRole('button',{name:'Sign in securely',exact:true}).click();const login=await response;assert.equal(login.status(),200,'Native browser sign-in failed: '+(await login.json().catch(()=>({}))).error);await tab.waitForURL('**/account/dashboard')}
 async function overflow(){assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow')}
@@ -48,7 +50,7 @@ try{
  await page.getByRole('combobox',{name:/^Compare an earlier version/}).selectOption({label:'Version 1'})
  await page.getByRole('heading',{name:'Version 1',exact:true}).waitFor()
  await page.reload();await page.getByRole('heading',{name:'Saved work and earlier versions',exact:true}).waitFor()
- const other=await browser.newContext({ignoreHTTPSErrors:true});const tab=await other.newPage();await signin(tab);await tab.goto(url);await tab.getByText('This independent revision preserves my original meaning',{exact:false}).first().waitFor();await other.close()
+ const other=await browser.newContext({ignoreHTTPSErrors:true});await isolateNetwork(other,base);const tab=await other.newPage();await signin(tab);await tab.goto(url);await tab.getByText('This independent revision preserves my original meaning',{exact:false}).first().waitFor();await other.close()
  // Refine a highlighted passage through the actual controls and explicitly return it.
  await page.getByRole('combobox',{name:'Saved response',exact:true}).selectOption('understanding')
  await page.getByRole('combobox',{name:'Practice workspace',exact:true}).selectOption('sentence')
