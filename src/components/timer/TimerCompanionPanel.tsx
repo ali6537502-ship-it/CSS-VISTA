@@ -99,21 +99,21 @@ export function TimerCompanionPanel({
 
         <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-4 sm:col-span-2 lg:col-span-1">
           <div className="flex items-center gap-2 text-sm font-bold text-slate-900"><Zap className="h-4 w-4 text-emerald-800" /> Keep screen awake</div>
-          <p className="mt-2 min-h-9 text-xs leading-5 text-slate-600">Optional for long sessions. Stops the screen dimming while the timer page is visible.</p>
+          <p className="mt-2 min-h-9 text-xs leading-5 text-slate-600">Optional for long sessions. Requests a screen wake lock only while the timer is running and this page is visible.</p>
           {wakeSupported ? (
             <button type="button" aria-pressed={keepAwake} onClick={() => onKeepAwakeChange(!keepAwake)}
               className={`mt-3 inline-flex min-h-10 items-center gap-2 rounded-lg px-3 text-xs font-semibold ${keepAwake ? 'bg-emerald-800 text-white' : 'border border-emerald-700 bg-white text-emerald-900'}`}>
-              {keepAwake ? <><Eye className="h-4 w-4" /> Enabled · Turn off</> : <><EyeOff className="h-4 w-4" /> Keep screen on</>}
+              {keepAwake ? <><Eye className="h-4 w-4" /> Requested · Turn off</> : <><EyeOff className="h-4 w-4" /> Keep screen on</>}
             </button>
           ) : (
             <span className="mt-3 inline-block text-xs text-slate-500">Not supported in this browser</span>
           )}
-          <p className="mt-2 text-[11px] leading-4 text-slate-500">Only active while the page is visible and the device allows it. Uses more battery.</p>
+          <p className="mt-2 text-[11px] leading-4 text-slate-500">The timer shows whether the lock is actually active after Start. The browser may refuse it or release it when you switch tabs; uses more battery.</p>
         </div>
       </div>
       <div className="flex items-start gap-2 border-t border-slate-100 bg-slate-50 px-5 py-3 text-xs leading-5 text-slate-600">
         <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-emerald-800" />
-        <p><strong className="text-slate-800">Floating timer:</strong> Select “Float timer” beside the clock to request an always-on-top window on supported desktop browsers. The floating window closes with the original browser tab. Mobile users can keep the timer page open instead.</p>
+        <p><strong className="text-slate-800">Floating timer:</strong> Select “Open floating timer” beside the clock to request an always-on-top window on supported desktop browsers. The floating window closes with the original browser tab. Mobile users can keep the timer page open instead.</p>
       </div>
     </section>
   )

@@ -19,6 +19,21 @@ await context.route('**/*', route => {
   if (req.method() !== 'GET' || new URL(req.url()).origin !== origin) return route.abort('blockedbyclient')
   return route.continue()
 })
+await context.addInitScript(() => {
+  Object.defineProperty(navigator, 'wakeLock', {
+    configurable: true,
+    value: {
+      request: async (kind) => {
+        if (kind !== 'screen') throw new Error('Unexpected wake lock kind')
+        const target = new EventTarget()
+        return Object.assign(target, {
+          released: false,
+          async release() { this.released = true; this.dispatchEvent(new Event('release')) },
+        })
+      },
+    },
+  })
+})
 const page = await context.newPage()
 const errors = []
 page.on('pageerror', error => errors.push(error.message))
@@ -30,6 +45,15 @@ try {
   assert.equal(await page.getByRole('button', { name: 'Ask my permission' }).count() > 0
     || await page.getByText('Not supported in this browser').count() > 0
     || await page.getByText('Blocked in browser settings').count() > 0, true)
+
+  await page.getByRole('button', { name: 'Keep screen on' }).click()
+  assert.equal(await page.getByRole('button', { name: /Requested · Turn off/ }).count(), 1,
+    'Wake-lock toggle clearly indicates requested, not already active')
+  await page.getByRole('button', { name: 'Start', exact: true }).click()
+  await page.getByText('Screen awake is active while this page stays visible.', { exact: false }).waitFor()
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  assert.equal(await page.getByText('Screen awake is active while this page stays visible.', { exact: false }).count(), 0,
+    'Screen wake lock status is hidden once timer is paused')
 
   // Seed from a non-timer route; otherwise a pagehide handler on the old timer
   // correctly persists its current clock over this simulated saved session.
