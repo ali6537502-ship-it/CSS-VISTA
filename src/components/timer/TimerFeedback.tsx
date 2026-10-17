@@ -166,6 +166,7 @@ export function useTimerWakeLock(enabled: boolean) {
   const supported = typeof navigator !== 'undefined' && 'wakeLock' in navigator
     && typeof window !== 'undefined' && window.isSecureContext
   const [active, setActive] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   useEffect(() => {
     if (!enabled || !supported) return
     let disposed = false
@@ -178,18 +179,25 @@ export function useTimerWakeLock(enabled: boolean) {
         const lock = await navigator.wakeLock.request('screen')
         if (disposed) { void lock.release(); return }
         sentinel = lock
+        setError(null)
         setActive(true)
         lock.addEventListener('release', () => {
           if (sentinel === lock) sentinel = null
           if (!disposed) setActive(false)
         })
       } catch {
-        if (!disposed) setActive(false)
+        if (!disposed) {
+          setActive(false)
+          setError('The browser could not keep the screen awake. Check battery-saver settings or browser permissions.')
+        }
       } finally {
         requesting = false
       }
     }
-    const visibility = () => { if (document.visibilityState === 'visible') void acquire() }
+    const visibility = () => {
+      if (document.visibilityState === 'visible') void acquire()
+      else setActive(false)
+    }
     document.addEventListener('visibilitychange', visibility)
     void acquire()
     return () => {
@@ -198,7 +206,7 @@ export function useTimerWakeLock(enabled: boolean) {
       if (sentinel) void sentinel.release()
     }
   }, [enabled, supported])
-  return { supported, active }
+  return { supported, active: enabled && active, error: enabled ? error : null }
 }
 
 interface DocumentPictureInPictureHost extends Window {
@@ -268,6 +276,7 @@ export function useFloatingAnswerTimer(
         #toggle{background:#ecfdf5;border-color:#ecfdf5;color:#064e3b;flex:1}
         #close{flex:1}
       `
+      doc.head.append(style)
       const header = doc.createElement('header')
       const brand = doc.createElement('span')
       brand.className = 'brand'
@@ -331,7 +340,7 @@ export function useFloatingAnswerTimer(
       const num = Number(display.replace('-', '').split(':')[0]) * 60
         + Number(display.split(':')[1])
       const remaining = display.startsWith('-') ? -num : num
-      fill.style.width = `${Math.max(0, Math.min(100, (remaining / allocatedSeconds) * 100))}%`
+      fill.style.width = `${Math.max(0, Math.min(100, (1 - remaining / allocatedSeconds) * 100))}%`
       fill.style.background = remaining < 0 ? '#fda4af' : '#6ee7b7'
     }
   }, [label, display, running, floating, allocatedSeconds, onToggle])
