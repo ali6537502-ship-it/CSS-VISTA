@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
+import { Bell, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
 import { canRequestTimerNotifications, formatTimerSeconds as fmt, requestTimerNotifications, TIMER_ALERTS, unlockTimerAudio, useFloatingAnswerTimer, useTimerFeedback, type TimerAlertMode } from '@/components/timer/TimerFeedback'
 import { PageHeader } from '@/components/shared'
 import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
@@ -319,7 +319,7 @@ function readPaperSnapshot(): PaperSnapshot | null {
   }
 }
 
-function PaperTimer() {
+function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(0)
@@ -331,6 +331,13 @@ function PaperTimer() {
   const runningStartedAtRef = useRef<number | null>(null)
   const questionElapsedBaseRef = useRef(0)
   const totalLeftBaseRef = useRef(3 * 3600)
+  const completedRef = useRef(false)
+  const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode)
+  const floatingTimer = useFloatingAnswerTimer(
+    `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
+    fmt(qLeft),
+    phase === 'running' && !paused,
+  )
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
   // it. The wall-clock anchors are persisted, so resuming accounts honestly for
@@ -361,7 +368,7 @@ function PaperTimer() {
 
   useEffect(() => {
     if (phase !== 'running') return
-    const persist = () => persistPaper(snapshotNow())
+    const persist = () => { if (!completedRef.current) persistPaper(snapshotNow()) }
     persist()
     const interval = window.setInterval(persist, 5000)
     document.addEventListener('visibilitychange', persist)
@@ -379,6 +386,7 @@ function PaperTimer() {
   function resumePaperAttempt() {
     const snapshot = resumable
     if (!snapshot) return
+    completedRef.current = false
     setQuestions(snapshot.questions)
     setCurrent(snapshot.current)
     setTimes(snapshot.times)
@@ -401,8 +409,8 @@ function PaperTimer() {
     const questionElapsed = questionElapsedBaseRef.current + delta
     return {
       questionElapsed,
-      questionLeft: Math.max(0, PAPER_QUESTION_SECONDS - questionElapsed),
-      paperLeft: Math.max(0, totalLeftBaseRef.current - delta),
+      questionLeft: PAPER_QUESTION_SECONDS - questionElapsed,
+      paperLeft: totalLeftBaseRef.current - delta,
     }
   }, [])
 
@@ -424,12 +432,9 @@ function PaperTimer() {
     }
   }, [clockSnapshot, phase, paused])
 
-  useEffect(() => {
-    if (phase === 'running' && totalLeft <= 0) finishPaper()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalLeft])
-
-  function startPaper() {
+   function startPaper() {
+    unlockTimerAudio()
+    completedRef.current = false
     setResumable(null)
     setPhase('running')
     setCurrent(0)
@@ -454,7 +459,7 @@ function PaperTimer() {
   }
 
   function resumePaper() {
-    if (totalLeft <= 0) return
+    unlockTimerAudio()
     runningStartedAtRef.current = Date.now()
     totalLeftBaseRef.current = totalLeft
     setPaused(false)
@@ -480,6 +485,7 @@ function PaperTimer() {
 
   function finishPaper(finalTimes?: number[]) {
     const snapshot = clockSnapshot()
+    completedRef.current = true
     runningStartedAtRef.current = null
     persistPaper(null)
     const t = finalTimes ?? times.map((value, index) => (value ?? (index === current ? snapshot.questionElapsed : null)))
@@ -590,18 +596,19 @@ function PaperTimer() {
 
   return (
     <div className="space-y-4">
+      {banner && <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900"><Bell className="mr-2 inline h-4 w-4" />{banner}</div>}
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Question {current + 1} of 4 {questions[current] ? `- ${questions[current].slice(0, 40)}` : ''}
           </p>
-          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft < 300 ? 'text-red-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
-          <p className="mt-1 text-[11px] text-muted-foreground">Target: 45 minutes per question</p>
+          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft <= 0 ? 'text-red-600' : qLeft < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">{qLeft < 0 ? 'Question overtime' : 'Target: 45 minutes per question'}</p>
         </div>
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Whole paper</p>
-          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${totalLeft < 600 ? 'text-red-600' : 'text-pine'}`}>{fmt(totalLeft)}</p>
-          <p className="mt-1 text-[11px] text-muted-foreground">3 hours total</p>
+          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${totalLeft <= 0 ? 'text-red-600' : totalLeft < 600 ? 'text-amber-600' : 'text-pine'}`}>{fmt(totalLeft)}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">{totalLeft < 0 ? 'Paper overtime' : '3 hours total'}</p>
         </div>
       </div>
       <div className="rounded-xl border bg-white p-5">
@@ -613,8 +620,13 @@ function PaperTimer() {
             <Square className="h-4 w-4" /> {current < 3 ? `Finish Q${current + 1} - start Q${current + 2}` : 'Finish Q4 & end paper'}
           </button>
           <button onClick={() => finishPaper()} className="inline-flex h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-red-600">
-            <Trash2 className="h-4 w-4" /> End paper early
+            <Trash2 className="h-4 w-4" /> End paper
           </button>
+          {floatingTimer.supported && (
+            <button onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="inline-flex h-11 items-center rounded-md border px-4 text-xs font-semibold text-pine">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Float timer'}
+            </button>
+          )
         </div>
         <div className="mt-4 flex justify-center gap-1.5">
           {times.map((t, i) => (
