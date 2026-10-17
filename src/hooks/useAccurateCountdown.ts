@@ -9,7 +9,14 @@ export function remainingSeconds(deadlineMs: number, nowMs = Date.now()) {
   return Math.max(0, Math.ceil((deadlineMs - nowMs) / 1000))
 }
 
-export function useAccurateCountdown(initialSeconds: number, onExpire?: () => void) {
+/** Remaining whole seconds, preserving overdue time below zero. */
+export function signedRemainingSeconds(deadlineMs: number, nowMs = Date.now()) {
+  if (!Number.isFinite(deadlineMs) || !Number.isFinite(nowMs)) return 0
+  return Math.ceil((deadlineMs - nowMs) / 1000)
+}
+
+/** Existing countdowns retain their stop-at-zero behavior unless overtime is opted into. */
+export function useAccurateCountdown(initialSeconds: number, onExpire?: () => void, allowOvertime = false) {
   const initial = safeSeconds(initialSeconds)
   const [remaining, setRemaining] = useState(initial)
   const [running, setRunning] = useState(false)
@@ -24,14 +31,16 @@ export function useAccurateCountdown(initialSeconds: number, onExpire?: () => vo
   const tick = useCallback(() => {
     const deadline = deadlineRef.current
     if (deadline === null) return
-    const next = remainingSeconds(deadline)
+    const next = allowOvertime ? signedRemainingSeconds(deadline) : remainingSeconds(deadline)
     setRemaining((current) => current === next ? current : next)
     if (next > 0 || expiredRef.current) return
     expiredRef.current = true
-    deadlineRef.current = null
-    setRunning(false)
+    if (!allowOvertime) {
+      deadlineRef.current = null
+      setRunning(false)
+    }
     onExpireRef.current?.()
-  }, [])
+  }, [allowOvertime])
 
   useEffect(() => {
     if (!running) return
@@ -48,22 +57,22 @@ export function useAccurateCountdown(initialSeconds: number, onExpire?: () => vo
   }, [running, tick])
 
   const startFrom = useCallback((seconds: number) => {
-    const next = safeSeconds(seconds)
-    expiredRef.current = false
+    const next = allowOvertime && Number.isFinite(seconds) ? Math.round(seconds) : safeSeconds(seconds)
+    expiredRef.current = next <= 0
     setRemaining(next)
-    if (next === 0) {
+    if (next === 0 && !allowOvertime) {
       deadlineRef.current = null
       setRunning(false)
       return
     }
     deadlineRef.current = Date.now() + next * 1000
     setRunning(true)
-  }, [])
+  }, [allowOvertime])
 
   const start = useCallback(() => {
-    if (remaining <= 0) return
+    if (remaining <= 0 && !allowOvertime) return
     startFrom(remaining)
-  }, [remaining, startFrom])
+  }, [remaining, startFrom, allowOvertime])
 
   const pause = useCallback(() => {
     tick()
@@ -74,9 +83,9 @@ export function useAccurateCountdown(initialSeconds: number, onExpire?: () => vo
   const reset = useCallback((seconds = initial) => {
     deadlineRef.current = null
     expiredRef.current = false
-    setRemaining(safeSeconds(seconds))
+    setRemaining(allowOvertime && Number.isFinite(seconds) ? Math.round(seconds) : safeSeconds(seconds))
     setRunning(false)
-  }, [initial])
+  }, [initial, allowOvertime])
 
   const toggle = useCallback(() => {
     if (running) pause()
@@ -85,8 +94,8 @@ export function useAccurateCountdown(initialSeconds: number, onExpire?: () => vo
 
   const getRemaining = useCallback(() => {
     const deadline = deadlineRef.current
-    return deadline === null ? remaining : remainingSeconds(deadline)
-  }, [remaining])
+    return deadline === null ? remaining : (allowOvertime ? signedRemainingSeconds(deadline) : remainingSeconds(deadline))
+  }, [remaining, allowOvertime])
 
   return { remaining, running, start, startFrom, pause, reset, toggle, getRemaining }
 }

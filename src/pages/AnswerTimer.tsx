@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Bell, BellOff, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
+import { Bell, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
+import { canRequestTimerNotifications, formatTimerSeconds as fmt, TIMER_ALERTS, unlockTimerAudio, useFloatingAnswerTimer, useTimerFeedback, useTimerWakeLock, type TimerAlertMode } from '@/components/timer/TimerFeedback'
+import { TimerCompanionPanel } from '@/components/timer/TimerCompanionPanel'
 import { PageHeader } from '@/components/shared'
 import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
@@ -7,37 +9,73 @@ import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
 
-const ALERTS = [
-  { at: 5, text: '5 minutes: Outline should be ready.' },
-  { at: 10, text: '10 minutes: Begin the main argument.' },
-  { at: 20, text: '20 minutes: Check balance and evidence.' },
-  { at: 35, text: '35 minutes: Conclude and review.' },
-]
-
 const PAPER_QUESTION_SECONDS = 45 * 60
+const SINGLE_RESUME_KEY = 'cssvista:single-answer-timer'
 
-function beep() {
+interface SingleTimerSnapshot {
+  minutes: number
+  question: string
+  remaining: number
+  running: boolean
+  savedAt: number
+}
+
+function readSingleSnapshot(): SingleTimerSnapshot | null {
   try {
-    const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
-    const o = ctx.createOscillator()
-    const g = ctx.createGain()
-    o.connect(g)
-    g.connect(ctx.destination)
-    o.frequency.value = 880
-    g.gain.setValueAtTime(0.15, ctx.currentTime)
-    o.start()
-    o.stop(ctx.currentTime + 0.25)
+    const raw = localStorage.getItem(SINGLE_RESUME_KEY)
+    if (!raw) return null
+    const saved = JSON.parse(raw) as SingleTimerSnapshot
+    if (!Number.isInteger(saved.minutes) || saved.minutes < 1 || saved.minutes > 180
+      || typeof saved.question !== 'string' || saved.question.length > 10000
+      || !Number.isFinite(saved.remaining) || Math.abs(saved.remaining) > 604800
+      || typeof saved.running !== 'boolean' || !Number.isFinite(saved.savedAt)) return null
+    return saved
   } catch {
-    /* audio unavailable */
+    return null
   }
 }
 
-function fmt(s: number) {
-  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+function writeSingleSnapshot(snapshot: SingleTimerSnapshot) {
+  try { localStorage.setItem(SINGLE_RESUME_KEY, JSON.stringify(snapshot)) } catch { /* storage may be unavailable */ }
 }
 
 export default function AnswerTimer() {
   const [tab, setTab] = useState<'single' | 'paper'>('single')
+  const [alertMode, setAlertMode] = useState<TimerAlertMode>(() => {
+    try {
+      const saved = localStorage.getItem('cssvista:timer-alert-mode')
+      return saved === 'off' || saved === 'voice' || saved === 'both' ? saved : 'tones'
+    } catch { return 'tones' }
+  })
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | 'unsupported'>(() =>
+    canRequestTimerNotifications() ? Notification.permission : 'unsupported')
+  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
+    try { return localStorage.getItem('cssvista:timer-notifications-enabled') === 'true' } catch { return false }
+  })
+  const [keepAwake, setKeepAwake] = useState(() => {
+    try { return localStorage.getItem('cssvista:timer-keep-awake') === 'true' } catch { return false }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('cssvista:timer-alert-mode', alertMode)
+      localStorage.setItem('cssvista:timer-notifications-enabled', String(notificationsEnabled))
+      localStorage.setItem('cssvista:timer-keep-awake', String(keepAwake))
+    } catch { /* optional preferences */ }
+  }, [alertMode, notificationsEnabled, keepAwake])
+
+  useEffect(() => {
+    const refreshPermission = () => setNotificationPermission(
+      canRequestTimerNotifications() ? Notification.permission : 'unsupported',
+    )
+    document.addEventListener('visibilitychange', refreshPermission)
+    window.addEventListener('focus', refreshPermission)
+    return () => {
+      document.removeEventListener('visibilitychange', refreshPermission)
+      window.removeEventListener('focus', refreshPermission)
+    }
+  }, [])
+
   return (
     <div>
       <PageHeader
@@ -53,7 +91,19 @@ export default function AnswerTimer() {
             Four-Question Paper Mode
           </button>
         </div>
-        {tab === 'single' ? <SingleTimer /> : <PaperTimer />}
+        <TimerCompanionPanel
+          mode={alertMode}
+          onModeChange={setAlertMode}
+          permission={notificationPermission}
+          onPermissionChange={setNotificationPermission}
+          notificationsEnabled={notificationsEnabled}
+          onNotificationsChange={setNotificationsEnabled}
+          keepAwake={keepAwake}
+          onKeepAwakeChange={setKeepAwake}
+        />
+        {tab === 'single'
+          ? <SingleTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />
+          : <PaperTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />}
       </div>
     </div>
   )
@@ -63,39 +113,59 @@ function usePaperTitles() {
   return useMemo(() => mergedPastPapers(seedPapers).map((p) => p.title), [])
 }
 
-function SingleTimer() {
+function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const paperTitles = usePaperTitles()
-  const [question, setQuestion] = useState('')
-  const [customMin, setCustomMin] = useState(35)
-  const timer = useAccurateCountdown(customMin * 60)
-  const { remaining: left, running } = timer
-  const [soundOn, setSoundOn] = useState(true)
-  const [fired, setFired] = useState<number[]>([])
-  const [banner, setBanner] = useState<string | null>(null)
+  const saved = useMemo(() => readSingleSnapshot(), [])
+  const [question, setQuestion] = useState(saved?.question ?? '')
+  const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
+  const timer = useAccurateCountdown(customMin * 60, undefined, true)
+  const { remaining: left, running, getRemaining, start, pause } = timer
+  const banner = useTimerFeedback(left, running, customMin * 60, alertMode, notificationsEnabled)
+  useTimerWakeLock(keepAwake && running)
+  const toggleFloating = useCallback(() => {
+    if (running) pause()
+    else { unlockTimerAudio(); start() }
+  }, [running, pause, start])
+  const floatingTimer = useFloatingAnswerTimer(
+    question || 'Single question', fmt(left), running, customMin * 60, toggleFloating,
+  )
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
-  const bannerTimerRef = useRef<number | null>(null)
+  const skipFirstSave = useRef(Boolean(saved))
+
+  // A reopened page reconstructs elapsed time from the last saved wall-clock anchor.
+  useEffect(() => {
+    if (!saved) return
+    const resumed = saved.running
+      ? saved.remaining - Math.max(0, Math.floor((Date.now() - saved.savedAt) / 1000))
+      : saved.remaining
+    if (saved.running) timer.startFrom(resumed)
+    else timer.reset(resumed)
+    // Intentionally restore only on first mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const persist = useCallback(() => {
+    writeSingleSnapshot({
+      minutes: customMin,
+      question,
+      remaining: getRemaining(),
+      running,
+      savedAt: Date.now(),
+    })
+  }, [customMin, question, running, getRemaining])
 
   useEffect(() => {
-    const elapsed = Math.max(0, customMin * 60 - left)
-    const crossed = ALERTS.filter((alert) => elapsed >= alert.at * 60 && !fired.includes(alert.at))
-    if (crossed.length === 0) return
-    setFired((current) => [...current, ...crossed.map((alert) => alert.at)])
-    const latest = crossed[crossed.length - 1]
-    setBanner(latest.text)
-    if (soundOn) beep()
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
-    bannerTimerRef.current = window.setTimeout(() => setBanner(null), 8000)
-  }, [customMin, fired, left, soundOn])
+    if (skipFirstSave.current) { skipFirstSave.current = false; return }
+    persist()
+  }, [persist, left])
 
-  useEffect(() => () => {
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
-  }, [])
+  useEffect(() => {
+    window.addEventListener('pagehide', persist)
+    return () => { window.removeEventListener('pagehide', persist); persist() }
+  }, [persist])
 
   function reset(newMin = customMin) {
     timer.reset(newMin * 60)
-    setFired([])
-    setBanner(null)
-    if (bannerTimerRef.current !== null) window.clearTimeout(bannerTimerRef.current)
   }
 
   function complete() {
@@ -140,21 +210,37 @@ function SingleTimer() {
               {m}m
             </button>
           ))}
-          <button onClick={() => setSoundOn(!soundOn)} className="ml-auto inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-semibold text-muted-foreground hover:bg-secondary">
-            {soundOn ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />} Sound {soundOn ? 'on' : 'off'}
-          </button>
+          {floatingTimer.supported && (
+            <button type="button" aria-pressed={floatingTimer.floating} onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="ml-auto rounded-md border border-emerald-800/30 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-950 hover:bg-emerald-100">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Open floating timer'}
+            </button>
+          )}
+          {floatingTimer.error && <p role="alert" className="w-full text-xs font-medium text-red-700">{floatingTimer.error}</p>}
         </div>
       </div>
 
-      <div className="rounded-xl border bg-white p-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-gradient-to-b from-white to-emerald-50/30 p-6 text-center shadow-sm sm:p-8">
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-full bg-emerald-900/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-emerald-950">Answer writing</span>
+          <span className={`rounded-full px-3 py-1 text-[11px] font-bold ${left < 0 ? 'bg-red-100 text-red-800' : running ? 'bg-emerald-100 text-emerald-900' : 'bg-slate-100 text-slate-600'}`}>
+            {left < 0 ? 'Overtime' : running ? 'In progress' : 'Ready / paused'}
+          </span>
+        </div>
+        <p className="mx-auto mt-4 max-w-lg truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {question ? question.slice(0, 80) : 'Set a question, then start the timer'}
         </p>
-        <p className={`mt-3 font-display text-5xl font-bold tabular-nums ${left < 300 ? 'text-red-600' : 'text-pine'}`}>{fmt(Math.max(0, left))}</p>
+        <p role="timer" aria-label={left < 0 ? 'Elapsed overtime' : 'Time remaining'} className={`mt-3 font-display text-6xl font-black tracking-[-0.035em] tabular-nums sm:text-7xl ${left <= 0 ? 'text-red-600' : left < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(left)}</p>
+        <p className="mt-2 text-xs text-slate-500">{left < 0 ? `Overtime: ${fmt(-left)} beyond your target` : `Allocated: ${customMin} minutes`}</p>
+        <div className="mx-auto mt-5 max-w-md" role="progressbar" aria-label="Time consumed" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.min(100, Math.max(0, Math.round((1 - left / (customMin * 60)) * 100)))}>
+          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+            <div className={`h-full rounded-full transition-all duration-300 ${left < 0 ? 'bg-red-500' : left < 300 ? 'bg-amber-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - left / (customMin * 60))))}%` }} />
+          </div>
+        </div>
         <div className="mt-4 flex items-center justify-center gap-2">
           {!running ? (
-            <button onClick={timer.start} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
-              <Play className="h-4 w-4" /> {left < customMin * 60 && left > 0 ? 'Resume' : 'Start'}
+            <button onClick={() => { unlockTimerAudio(); timer.start() }} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
+              <Play className="h-4 w-4" /> {left < customMin * 60 ? 'Resume' : 'Start'}
             </button>
           ) : (
             <button onClick={timer.pause} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-amber-600 px-5 text-sm font-semibold text-white">
@@ -169,8 +255,8 @@ function SingleTimer() {
           </button>
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-          {ALERTS.map((a) => (
-            <span key={a.at} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${fired.includes(a.at) ? 'bg-emerald-100 text-emerald-800' : 'bg-secondary text-muted-foreground'}`}>
+          {TIMER_ALERTS.filter((a) => a.at <= customMin).map((a) => (
+            <span key={a.at} className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${left <= customMin * 60 - a.at * 60 ? 'bg-emerald-100 text-emerald-800' : 'bg-secondary text-muted-foreground'}`}>
               {a.at}m alert
             </span>
           ))}
@@ -271,7 +357,7 @@ function readPaperSnapshot(): PaperSnapshot | null {
   }
 }
 
-function PaperTimer() {
+function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(0)
@@ -283,6 +369,9 @@ function PaperTimer() {
   const runningStartedAtRef = useRef<number | null>(null)
   const questionElapsedBaseRef = useRef(0)
   const totalLeftBaseRef = useRef(3 * 3600)
+  const completedRef = useRef(false)
+  const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
+  useTimerWakeLock(keepAwake && phase === 'running' && !paused)
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
   // it. The wall-clock anchors are persisted, so resuming accounts honestly for
@@ -313,7 +402,7 @@ function PaperTimer() {
 
   useEffect(() => {
     if (phase !== 'running') return
-    const persist = () => persistPaper(snapshotNow())
+    const persist = () => { if (!completedRef.current) persistPaper(snapshotNow()) }
     persist()
     const interval = window.setInterval(persist, 5000)
     document.addEventListener('visibilitychange', persist)
@@ -331,6 +420,7 @@ function PaperTimer() {
   function resumePaperAttempt() {
     const snapshot = resumable
     if (!snapshot) return
+    completedRef.current = false
     setQuestions(snapshot.questions)
     setCurrent(snapshot.current)
     setTimes(snapshot.times)
@@ -353,8 +443,8 @@ function PaperTimer() {
     const questionElapsed = questionElapsedBaseRef.current + delta
     return {
       questionElapsed,
-      questionLeft: Math.max(0, PAPER_QUESTION_SECONDS - questionElapsed),
-      paperLeft: Math.max(0, totalLeftBaseRef.current - delta),
+      questionLeft: PAPER_QUESTION_SECONDS - questionElapsed,
+      paperLeft: totalLeftBaseRef.current - delta,
     }
   }, [])
 
@@ -376,12 +466,9 @@ function PaperTimer() {
     }
   }, [clockSnapshot, phase, paused])
 
-  useEffect(() => {
-    if (phase === 'running' && totalLeft <= 0) finishPaper()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalLeft])
-
-  function startPaper() {
+   function startPaper() {
+    unlockTimerAudio()
+    completedRef.current = false
     setResumable(null)
     setPhase('running')
     setCurrent(0)
@@ -406,7 +493,7 @@ function PaperTimer() {
   }
 
   function resumePaper() {
-    if (totalLeft <= 0) return
+    unlockTimerAudio()
     runningStartedAtRef.current = Date.now()
     totalLeftBaseRef.current = totalLeft
     setPaused(false)
@@ -423,6 +510,8 @@ function PaperTimer() {
       setTotalLeft(snapshot.paperLeft)
       questionElapsedBaseRef.current = 0
       totalLeftBaseRef.current = snapshot.paperLeft
+      // This executes only from the Finish question button, not during render.
+      // eslint-disable-next-line react-hooks/purity
       runningStartedAtRef.current = Date.now()
       setPaused(false)
     } else {
@@ -432,6 +521,7 @@ function PaperTimer() {
 
   function finishPaper(finalTimes?: number[]) {
     const snapshot = clockSnapshot()
+    completedRef.current = true
     runningStartedAtRef.current = null
     persistPaper(null)
     const t = finalTimes ?? times.map((value, index) => (value ?? (index === current ? snapshot.questionElapsed : null)))
@@ -454,6 +544,14 @@ function PaperTimer() {
     setTotalLeft(snapshot.paperLeft)
     setPhase('done')
   }
+
+  const floatingTimer = useFloatingAnswerTimer(
+    `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
+    fmt(qLeft),
+    phase === 'running' && !paused,
+    PAPER_QUESTION_SECONDS,
+    () => { if (paused) resumePaper(); else pausePaper() },
+  )
 
   if (phase === 'setup') {
     return (
@@ -542,18 +640,27 @@ function PaperTimer() {
 
   return (
     <div className="space-y-4">
+      {banner && <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900"><Bell className="mr-2 inline h-4 w-4" />{banner}</div>}
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Question {current + 1} of 4 {questions[current] ? `- ${questions[current].slice(0, 40)}` : ''}
           </p>
-          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft < 300 ? 'text-red-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
-          <p className="mt-1 text-[11px] text-muted-foreground">Target: 45 minutes per question</p>
+          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft <= 0 ? 'text-red-600' : qLeft < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">{qLeft < 0 ? 'Question overtime' : 'Target: 45 minutes per question'}</p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+            <div className={`h-full rounded-full ${qLeft < 0 ? 'bg-red-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - qLeft / PAPER_QUESTION_SECONDS)))}%` }} />
+          </div>
         </div>
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Whole paper</p>
-          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${totalLeft < 600 ? 'text-red-600' : 'text-pine'}`}>{fmt(totalLeft)}</p>
-          <p className="mt-1 text-[11px] text-muted-foreground">3 hours total</p>
+          <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${totalLeft <= 0 ? 'text-red-600' : totalLeft < 600 ? 'text-amber-600' : 'text-pine'}`}>{fmt(totalLeft)}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">{totalLeft < 0 ? 'Paper overtime' : '3 hours total'}</p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+            <div className={`h-full rounded-full ${totalLeft < 0 ? 'bg-red-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - totalLeft / (3 * 3600))))}%` }} />
+          </div>
         </div>
       </div>
       <div className="rounded-xl border bg-white p-5">
@@ -565,8 +672,14 @@ function PaperTimer() {
             <Square className="h-4 w-4" /> {current < 3 ? `Finish Q${current + 1} - start Q${current + 2}` : 'Finish Q4 & end paper'}
           </button>
           <button onClick={() => finishPaper()} className="inline-flex h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-red-600">
-            <Trash2 className="h-4 w-4" /> End paper early
+            <Trash2 className="h-4 w-4" /> End paper
           </button>
+          {floatingTimer.supported && (
+            <button type="button" aria-pressed={floatingTimer.floating} onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="inline-flex h-11 items-center rounded-md border border-emerald-800/30 bg-emerald-50 px-4 text-xs font-bold text-emerald-950">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Open floating timer'}
+            </button>
+          )}
+          {floatingTimer.error && <p role="alert" className="w-full text-center text-xs font-medium text-red-700">{floatingTimer.error}</p>}
         </div>
         <div className="mt-4 flex justify-center gap-1.5">
           {times.map((t, i) => (
