@@ -17,7 +17,7 @@ export function signedRemainingSeconds(deadlineMs: number, nowMs = Date.now()) {
 
 /** Existing countdowns retain their stop-at-zero behavior unless overtime is opted into. */
 export function useAccurateCountdown(initialSeconds: number, onExpire?: () => void, allowOvertime = false) {
-  const initial = safeSeconds(initialSeconds)
+  const initial = allowOvertime && Number.isFinite(initialSeconds) ? Math.round(initialSeconds) : safeSeconds(initialSeconds)
   const [remaining, setRemaining] = useState(initial)
   const [running, setRunning] = useState(false)
   const deadlineRef = useRef<number | null>(null)
