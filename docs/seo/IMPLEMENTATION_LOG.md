@@ -288,3 +288,5 @@ All **274** changed or new repository files are accounted for below.
 | `tests/studyMaterialSeo.test.mjs` | Verify shared study schemas plus deferred metadata success/failure/cancellation, pending head preservation and query policy. |
 | `tests/subjectSelection.test.ts` | Focused regression coverage for the repaired behavior; existing working tests retained. |
 | `tests/vistagramRoutes.test.mjs` | Focused regression coverage for the repaired behavior; existing working tests retained. |
+
+17 October final archive pass: preserve route defaults without query noindex; preserve explicit nondefault filters across reload and reinitialize when the collection pathname changes; fix native-select mobile overflow. Added mounted-control, 320px/390px and filter/reset browser regressions. Strict artifact, 26-route browser/ad state, typecheck/lint, 16 route tests and native HTTPS routing checks pass. See continuation-verification evidence for failed intermediate checks, source hashes, retained rights limitations and pending deployment/account follow-up.

@@ -63,3 +63,5 @@ Final command, browser, source-manifest and performance evidence use the `autono
 ## Authenticated continuation — 17 October 2026
 
 `google-current-account-evidence-2026-10-17.json` records dated prefix indexing, sitemap/crawl/performance, exact AdSense findings, consent/Auto ads and one actual indexed/live URL inspection. It omits private account identifiers and distinguishes each report date from observation. The corresponding continuation report retains CI failures/recovery and account/editorial dependencies. No approval, release or account mutation is inferred.
+
+Final 17 October source/artifact checks: `continuation-verification-2026-10-17.json` records bounded browser/route observations, failed intermediate CI and log hashes; `prepared-source-manifest-2026-10-17.json` records 102 cumulative source/test/ledger paths. These are not live deployment evidence.

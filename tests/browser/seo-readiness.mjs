@@ -53,6 +53,9 @@ try {
     await page.locator('main').first().waitFor()
     // Lazy route chunks can settle after network-idle while React transitions.
     await page.locator('h1').first().waitFor({ timeout: 15000 })
+    if (/^\/past-papers\/(?:css|ppsc)\/\d{4}$/.test(path)) {
+      await page.getByRole('textbox', { name: 'Search past papers', exact: true }).waitFor()
+    }
     await page.evaluate(() => document.fonts.ready)
     const state = await page.evaluate(() => ({
       title: document.title,
@@ -81,11 +84,26 @@ try {
     if (/^\/past-papers\/(?:css|ppsc)\/\d{4}$/.test(path)) {
       assert.equal(new URL(page.url()).search, '', `${path}: defaults stay in the pathname`)
       assert.ok(state.robots.every(value => !/noindex/i.test(value)), `${path}: canonical collection stays indexable after rendering`)
+      await page.setViewportSize({ width: 320, height: 844 })
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${path}: archive filters fit a 320px viewport`)
+      await page.setViewportSize({ width: 390, height: 844 })
       await page.getByRole('textbox', { name: 'Search past papers', exact: true }).fill('english')
       await page.waitForURL('**/*search=english*')
       await page.waitForFunction(() => document.querySelector('meta[name="robots"]')?.content.includes('noindex'))
       assert.equal(new URL(page.url()).searchParams.get('exam'), null)
       assert.equal(new URL(page.url()).searchParams.get('year'), null)
+      const yearFilter = page.getByRole('combobox', { name: 'Year', exact: true })
+      await yearFilter.selectOption('All')
+      await page.waitForURL('**/*year=All*')
+      await page.reload()
+      await page.getByRole('combobox', { name: 'Year', exact: true }).waitFor()
+      assert.equal(await page.getByRole('combobox', { name: 'Year', exact: true }).inputValue(), 'All', 'Explicit all-years filter survives refresh')
+      await page.getByRole('textbox', { name: 'Search past papers', exact: true }).fill('')
+      await page.waitForURL(url => !url.searchParams.has('search') && url.searchParams.get('year') === 'All')
+      await page.waitForFunction(() => document.querySelector('meta[name="robots"]')?.content.includes('noindex'))
+      await page.getByRole('combobox', { name: 'Year', exact: true }).selectOption(path.split('/').at(-1))
+      await page.waitForURL(url => !url.search)
+      await page.waitForFunction(() => !document.querySelector('meta[name="robots"]')?.content.includes('noindex'))
     }
     if (path.includes('/study-material/') && path.split('/').length > 4) {
       const types = schemaTypes(state.schemas)
