@@ -1,5 +1,9 @@
 # Google account evidence and remaining actions
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 Direct authorized inspection is now recorded in [current evidence](evidence/google-current-account-evidence-2026-10-17.json) and [the continuation report](ACCOUNT_RECOVERY_2026-10-17.md). Verified: prefix ownership, 12 October indexing totals/reasons, sitemap success/read date, Crawl Stats, Web performance, no manual/security issues, one stored/live inspection, exact AdSense rejection, Policy Centre, consent-message configuration and existing Auto ads exclusions. No account settings changed. The replacement browser session is signed out; remaining inspections and post-release Google follow-up require secure authentication. The earlier unavailability paragraphs below describe 16 October only.

@@ -1,0 +1,18 @@
+2026-10-17T07:56:30.0427743Z PASS ads.txt: 200 text/plain; charset=UTF-8 -> https://www.css-vista.com/ads.txt
+2026-10-17T07:56:30.8763185Z PASS ads.txt variant https://css-vista.com/ads.txt: 200 -> https://www.css-vista.com/ads.txt
+2026-10-17T07:56:31.7264163Z PASS ads.txt variant http://css-vista.com/ads.txt: 200 -> https://www.css-vista.com/ads.txt
+2026-10-17T07:56:32.4218159Z PASS ads.txt variant http://www.css-vista.com/ads.txt: 200 -> https://www.css-vista.com/ads.txt
+2026-10-17T07:56:32.8317122Z PASS robots.txt: 200 text/plain
+2026-10-17T07:56:34.8612013Z PASS sitemap.xml: 200 application/xml; charset=UTF-8 (4 child sitemaps)
+2026-10-17T07:56:35.2766925Z PASS Search Console verification: 200 -> https://www.css-vista.com/googlec96e2248070e0570.html
+2026-10-17T07:56:36.1474668Z PASS initial HTML /: 200, indexable, ad eligible, 685 words of primary content, canonical https://www.css-vista.com/
+2026-10-17T07:56:36.6204853Z PASS initial HTML /current-affairs: 200, noindex, ad protected, 24 words of primary content, canonical https://www.css-vista.com/current-affairs
+2026-10-17T07:56:37.0842014Z PASS initial HTML /consultation: 200, indexable, ad protected, 291 words of primary content, canonical https://www.css-vista.com/consultation
+2026-10-17T07:56:37.5808214Z PASS initial HTML /fpsc-syllabus: 200, indexable, ad eligible, 219 words of primary content, canonical https://www.css-vista.com/fpsc-syllabus
+2026-10-17T07:56:38.0517209Z PASS initial HTML /gk: 200, noindex, ad protected, 75 words of primary content, canonical https://www.css-vista.com/gk
+2026-10-17T07:56:38.5259476Z PASS initial HTML /past-papers: 200, indexable, ad eligible, 1806 words of primary content, canonical https://www.css-vista.com/past-papers
+2026-10-17T07:56:38.9974427Z PASS initial HTML /legal: 200, noindex, ad protected, 39 words of primary content, canonical https://www.css-vista.com/legal
+2026-10-17T07:56:39.4548269Z PASS initial HTML /privacy-policy: 200, indexable, ad protected, 1087 words of primary content, canonical https://www.css-vista.com/privacy-policy
+2026-10-17T07:56:39.8782576Z PASS real 404: 404 /definitely-not-a-css-vista-route-1792223799454
+2026-10-17T07:56:41.7795146Z PASS canonical redirect http://css-vista.com/current-affairs: 301 -> https://css-vista.com/current-affairs -> https://www.css-vista.com/current-affairs
+2026-10-17T07:56:42.7799007Z PASS canonical redirect https://css-vista.com/current-affairs: 301 -> https://www.css-vista.com/current-affairs -> https://www.css-vista.com/current-affairs
