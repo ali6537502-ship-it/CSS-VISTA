@@ -219,12 +219,24 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
         </div>
       </div>
 
-      <div className="rounded-xl border bg-white p-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-gradient-to-b from-white to-emerald-50/30 p-6 text-center shadow-sm sm:p-8">
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-full bg-emerald-900/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-emerald-950">Answer writing</span>
+          <span className={`rounded-full px-3 py-1 text-[11px] font-bold ${left < 0 ? 'bg-red-100 text-red-800' : running ? 'bg-emerald-100 text-emerald-900' : 'bg-slate-100 text-slate-600'}`}>
+            {left < 0 ? 'Overtime' : running ? 'In progress' : 'Ready / paused'}
+          </span>
+        </div>
+        <p className="mx-auto mt-4 max-w-lg truncate text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {question ? question.slice(0, 80) : 'Set a question, then start the timer'}
         </p>
-        <p className={`mt-3 font-display text-5xl font-bold tabular-nums ${left <= 0 ? 'text-red-600' : left < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(left)}</p>
-        {left < 0 && <p className="mt-1 text-sm font-bold text-red-600">Overtime — {fmt(-left)} beyond the limit</p>}
+        <p role="timer" aria-label={left < 0 ? 'Elapsed overtime' : 'Time remaining'} className={`mt-3 font-display text-6xl font-black tracking-[-0.035em] tabular-nums sm:text-7xl ${left <= 0 ? 'text-red-600' : left < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(left)}</p>
+        <p className="mt-2 text-xs text-slate-500">{left < 0 ? `Overtime: ${fmt(-left)} beyond your target` : `Allocated: ${customMin} minutes`}</p>
+        <div className="mx-auto mt-5 max-w-md" role="progressbar" aria-label="Time consumed" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.max(0, Math.min(100, Math.round(100 * (1 - left / (customMin * 60))))}>
+          <div className="h-2 overflow-hidden rounded-full bg-slate-200">
+            <div className={`h-full rounded-full transition-all duration-300 ${left < 0 ? 'bg-red-500' : left < 300 ? 'bg-amber-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - left / (customMin * 60))))}%` }} />
+          </div>
+        </div>
         <div className="mt-4 flex items-center justify-center gap-2">
           {!running ? (
             <button onClick={() => { unlockTimerAudio(); timer.start() }} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-5 text-sm font-semibold text-emerald-50">
@@ -635,11 +647,19 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           </p>
           <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft <= 0 ? 'text-red-600' : qLeft < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
           <p className="mt-1 text-[11px] text-muted-foreground">{qLeft < 0 ? 'Question overtime' : 'Target: 45 minutes per question'}</p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+            <div className={`h-full rounded-full ${qLeft < 0 ? 'bg-red-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - qLeft / PAPER_QUESTION_SECONDS)))}%` }} />
+          </div>
         </div>
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Whole paper</p>
           <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${totalLeft <= 0 ? 'text-red-600' : totalLeft < 600 ? 'text-amber-600' : 'text-pine'}`}>{fmt(totalLeft)}</p>
           <p className="mt-1 text-[11px] text-muted-foreground">{totalLeft < 0 ? 'Paper overtime' : '3 hours total'}</p>
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
+            <div className={`h-full rounded-full ${totalLeft < 0 ? 'bg-red-500' : 'bg-emerald-700'}`}
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - totalLeft / (3 * 3600))))}%` }} />
+          </div>
         </div>
       </div>
       <div className="rounded-xl border bg-white p-5">
