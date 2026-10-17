@@ -372,13 +372,6 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   const completedRef = useRef(false)
   const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
   useTimerWakeLock(keepAwake && phase === 'running' && !paused)
-  const floatingTimer = useFloatingAnswerTimer(
-    `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
-    fmt(qLeft),
-    phase === 'running' && !paused,
-    PAPER_QUESTION_SECONDS,
-    () => { if (paused) resumePaper(); else pausePaper() },
-  )
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
   // it. The wall-clock anchors are persisted, so resuming accounts honestly for
@@ -551,6 +544,14 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     setTotalLeft(snapshot.paperLeft)
     setPhase('done')
   }
+
+  const floatingTimer = useFloatingAnswerTimer(
+    `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
+    fmt(qLeft),
+    phase === 'running' && !paused,
+    PAPER_QUESTION_SECONDS,
+    () => { if (paused) resumePaper(); else pausePaper() },
+  )
 
   if (phase === 'setup') {
     return (
