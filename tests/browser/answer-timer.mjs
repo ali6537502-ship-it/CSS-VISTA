@@ -41,6 +41,7 @@ try {
   await page.waitForTimeout(1250)
   assert.match(await page.getByRole('timer', { name: 'Elapsed overtime' }).textContent(), /^-00:5[1-3]$/)
   await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  await page.getByRole('button', { name: /Resume/ }).last().waitFor()
   const paused = await page.getByRole('timer', { name: 'Elapsed overtime' }).textContent()
   await page.waitForTimeout(1250)
   assert.equal(await page.getByRole('timer', { name: 'Elapsed overtime' }).textContent(), paused,
