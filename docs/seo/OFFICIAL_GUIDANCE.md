@@ -1,5 +1,9 @@
 # Official research register
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 Official helpful-content, site-readiness, JavaScript SEO, canonicalization and sitemap guidance was reopened on 17 October before this correction. Google-rendered noindex is measured separately from raw HTML and indexed-version evidence. Source/quotation matches do not establish permission or guarantee approval. The publisher-content policy endpoint returned a retrieval error in this pass; no new interpretation is claimed from that failed retrieval.
