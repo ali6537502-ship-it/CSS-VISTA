@@ -117,13 +117,20 @@ export function useTimerFeedback(
   notificationsEnabled = false,
 ) {
   const previousRef = useRef(remaining)
+  const previousRunningRef = useRef(running)
+  const previousAllocationRef = useRef(allocatedSeconds)
   const [banner, setBanner] = useState<string | null>(null)
   const timeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     const previous = previousRef.current
+    const justActivated = running && !previousRunningRef.current
+    const allocationChanged = previousAllocationRef.current !== allocatedSeconds
     previousRef.current = remaining
-    if (!running || remaining >= previous) return
+    previousRunningRef.current = running
+    previousAllocationRef.current = allocatedSeconds
+    // Reloading, switching questions and resuming must never replay old alerts.
+    if (!running || justActivated || allocationChanged || remaining >= previous) return
 
     let message: string | undefined
     let urgent = false
@@ -162,9 +169,11 @@ export function useTimerWakeLock(enabled: boolean) {
   useEffect(() => {
     if (!enabled || !supported) return
     let disposed = false
+    let requesting = false
     let sentinel: WakeLockSentinel | null = null
     async function acquire() {
-      if (disposed || document.visibilityState !== 'visible' || sentinel) return
+      if (disposed || requesting || document.visibilityState !== 'visible' || sentinel) return
+      requesting = true
       try {
         const lock = await navigator.wakeLock.request('screen')
         if (disposed) { void lock.release(); return }
@@ -176,6 +185,8 @@ export function useTimerWakeLock(enabled: boolean) {
         })
       } catch {
         if (!disposed) setActive(false)
+      } finally {
+        requesting = false
       }
     }
     const visibility = () => { if (document.visibilityState === 'visible') void acquire() }
