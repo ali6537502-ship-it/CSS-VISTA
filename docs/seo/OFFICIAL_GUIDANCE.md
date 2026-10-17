@@ -1,5 +1,9 @@
 # Official research register
 
+## Current continuation — 17 October 2026
+
+Official helpful-content, site-readiness, JavaScript SEO, canonicalization and sitemap guidance was reopened on 17 October before this correction. Google-rendered noindex is measured separately from raw HTML and indexed-version evidence. Source/quotation matches do not establish permission or guarantee approval. The publisher-content policy endpoint returned a retrieval error in this pass; no new interpretation is claimed from that failed retrieval.
+
 Research date: 14 October 2026. These pages were opened through the connected web research tool before repairs were selected. Guidance establishes evaluation criteria; it does not establish this site's account findings or guarantee approval/indexing.
 
 | Official source | Application to this audit |

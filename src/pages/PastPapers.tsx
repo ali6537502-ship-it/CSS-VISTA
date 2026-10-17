@@ -174,16 +174,18 @@ export default function PastPapers() {
   useEffect(() => {
     const next = new URLSearchParams()
     if (q.trim()) next.set('search', q.trim())
-    if (exam !== 'All') next.set('exam', exam)
+    // Collection defaults already belong to the pathname. Repeating them as
+    // filters causes RouteSeo to mark the canonical archive noindex on mount.
+    if (exam !== 'All' && exam !== routeExam) next.set('exam', exam)
     if (subject !== 'All') next.set('subject', subject)
-    if (year !== 'All') next.set('year', year)
+    if (year !== 'All' && year !== routeYear) next.set('year', year)
     if (stype !== 'All') next.set('subjectType', stype)
     if (optionalGroup !== 'All') next.set('group', optionalGroup)
     if (mode !== 'All') next.set('mode', mode)
     if (savedOnly) next.set('saved', '1')
     if (currentPage > 1) next.set('page', String(currentPage))
     if (next.toString() !== searchParams.toString()) setSearchParams(next, { replace: true })
-  }, [currentPage, exam, mode, optionalGroup, q, savedOnly, searchParams, setSearchParams, stype, subject, year])
+  }, [currentPage, exam, mode, optionalGroup, q, routeExam, routeYear, savedOnly, searchParams, setSearchParams, stype, subject, year])
 
   // Grouping runs over the whole filtered set, then pages are cut on group
   // boundaries. Paginating first split a subject across two pages and repeated

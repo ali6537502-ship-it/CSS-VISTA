@@ -1,5 +1,9 @@
 # Search indexing recovery
 
+## Current continuation — 17 October 2026
+
+Current dated baseline: **469 indexed, 719 not indexed, 1,188 known in the HTTPS www prefix report**, updated 12 October and inspected 17 October. The 678 discovered cases dominate, but exclusions must be compared individually with intended policy. The sitemap is successfully processed (last read 15 October). A live archive test found a rendered noindex defect; the repair keeps pathname defaults out of query filters. See [account evidence](evidence/google-current-account-evidence-2026-10-17.json). The older unavailable-baseline table below is historical.
+
 The goal is useful canonical public pages, not the largest index count. Baseline production has1,018 sitemap entries: core 587, GK 42, year collections 24 and paper detail365. The branch adds the already-public grammar course with real initial content; the verified final count belongs in [verification](VERIFICATION.md). Source content and private features remain available under their existing access policy.
 
 ## Baseline measurements

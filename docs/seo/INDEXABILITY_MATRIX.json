@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-16",
-  "authority": "src/data/routeRegistry.mjs plus per-page final artifact gates; Google status unavailable",
+  "date": "2026-10-17",
+  "authority": "src/data/routeRegistry.mjs plus final artifact gates; current Google report/individual evidence is recorded separately, never inferred per family.",
   "families": [
     {
       "family": "/",
@@ -1223,5 +1223,6 @@
       "decision": "Private/personal/admin or unpublished surface; preserve authentication, noindex and exclusion. Noindex is not access control."
     }
   ],
-  "googleEvidence": "Historical export/notification evidence available separately; current portal status unavailable."
+  "googleEvidence": "Historical export/notification evidence available separately; current portal status unavailable.",
+  "google_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
 }

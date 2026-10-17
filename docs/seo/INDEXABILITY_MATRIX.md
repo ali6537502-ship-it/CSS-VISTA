@@ -1,5 +1,9 @@
 # Route-family indexability decisions
 
+## Current continuation — 17 October 2026
+
+The family decisions remain unchanged. [Current prefix-report evidence](evidence/google-current-account-evidence-2026-10-17.json) supplies dated aggregate counts and only observed per-URL statuses; it does not label every family indexed or failed. Clean year-archive URLs must remain indexable after JavaScript; genuine filtered views remain noindex.
+
 A = public educational/trust/document content; B = public interactive learning; C = private/personal/hibernated/unpublished; D = utility/duplicate/transitional. Categories describe purpose, not a quality score. Every registry family is listed; individual final HTML can intentionally narrow a pattern candidate. Concrete decisions and live/local differences are in [URL inventory](URL_INVENTORY.json). Current Google status remains unavailable; historical export/notification evidence is recorded separately.
 
 No existing public resource was deleted or paywall changed. The sole explicit search opt-in is the already-public guest grammar course. Parameters/alternate case/slash forms use canonical hints; unknown routes return404; no blanket canonical consolidation or noindex rollout was introduced.

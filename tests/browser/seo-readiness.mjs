@@ -27,6 +27,7 @@ const paths = [
   '/study-material/optional/constitutional-law/constitutional-history-of-pakistan',
   '/study-material/optional/constitutional-law/judiciary-judicial-independence-and-judicial-review',
   '/css-2026-written-result',
+  '/past-papers/ppsc/2024', '/past-papers/css/2025',
   '/subjects/selector', '/css-eligibility-calculator', '/grammar-course',
   '/vistagram/pakistan-financial-inclusion-digital-finance',
   '/vistagram/seo-audit-deliberately-missing-20261014',
@@ -76,6 +77,15 @@ try {
     } else {
       assert.deepEqual(state.canonical, [`https://www.css-vista.com${path === '/' ? '/' : path}`], `${path}: canonical after rendering`)
       assert.ok(state.h1.length, `${path}: meaningful heading`)
+    }
+    if (/^\/past-papers\/(?:css|ppsc)\/\d{4}$/.test(path)) {
+      assert.equal(new URL(page.url()).search, '', `${path}: defaults stay in the pathname`)
+      assert.ok(state.robots.every(value => !/noindex/i.test(value)), `${path}: canonical collection stays indexable after rendering`)
+      await page.getByRole('textbox', { name: 'Search past papers', exact: true }).fill('english')
+      await page.waitForURL('**/*search=english*')
+      await page.waitForFunction(() => document.querySelector('meta[name="robots"]')?.content.includes('noindex'))
+      assert.equal(new URL(page.url()).searchParams.get('exam'), null)
+      assert.equal(new URL(page.url()).searchParams.get('year'), null)
     }
     if (path.includes('/study-material/') && path.split('/').length > 4) {
       const types = schemaTypes(state.schemas)

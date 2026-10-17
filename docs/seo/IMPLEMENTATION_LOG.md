@@ -1,5 +1,9 @@
 # Implementation log
 
+## Current continuation — 17 October 2026
+
+The continuation adds `tests/browser/runtime-routing.mjs` and `isolated-network.mjs`, repairs `runtime.mjs`, applies isolation to skills/ability/pro-pause fixtures, and runs the HTTPS routing regression in the existing membership workflow. `PastPapers.tsx` omits redundant route defaults from synchronized query filters; `seo-readiness.mjs` tests two archive families plus actual filtering. Current account evidence and scoped JSON/CSV inventory updates preserve all historical fields. [Full evidence and limitations](ACCOUNT_RECOVERY_2026-10-17.md). The 274-file table below is the earlier handoff inventory, not the final continuation count.
+
 Branch: `fix/seo-indexing-adsense-recovery`. Baseline `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`. Technical and source-supported editorial changes prepared 14–16 October 2026. The owner subsequently authorized the scoped SEO release. Actual GitHub/live proof is recorded in [verification](VERIFICATION.md); no Google submission or approval is implied.
 
 Repairs cover rendering/metadata, source-backed archives and content notes, reliable learning tools, advertising suitability/document boundaries, failed-download stability, accessible motion controls and strict final validation. Bounded editorial work includes 56 explanations/one answer correction, two constitutional-note updates, six accessible Journal editions/six separate clarifications and the shared 100-book provenance review. Current book totals are 31 passage matches, one identified translation, 57 unverified entries and 11 without quotation labels; permissions remain independent.

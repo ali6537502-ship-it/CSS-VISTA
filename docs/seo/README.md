@@ -1,5 +1,9 @@
 # CSS VISTA audit and repair package
 
+## Current continuation — 17 October 2026
+
+Current continuation: [17 October authenticated account/recovery report](ACCOUNT_RECOVERY_2026-10-17.md). Direct Google inspection now establishes the exact AdSense low-value-content rejection and a dated 469/719 indexing baseline. The archive's live rendered noindex defect and isolated CI harness mismatch are separately repaired/verified. Read the current report before interpreting older availability statements.
+
 Baseline research/live observations: **14 October 2026**. Local verification continued **15–16 October 2026**. Branch: `fix/seo-indexing-adsense-recovery`. The owner authorized the scoped SEO release on 16 October; Pro, MPT, paid/AI activation and private drafts remain restricted. [Release continuation](AUTONOMOUS_RELEASE_2026-10-16.md) records current implementation and account evidence; [verification](VERIFICATION.md) distinguishes the candidate from the actual live release.
 
 Start with [root cause analysis](ROOT_CAUSE_ANALYSIS.md) and [AdSense readiness](ADSENSE_READINESS.md). The owner's reported rejection is **“low quality content”**. Technical eligibility is not editorial clearance or Google approval.

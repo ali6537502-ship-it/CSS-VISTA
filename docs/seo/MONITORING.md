@@ -1,5 +1,9 @@
 # Release and monitoring runbook
 
+## Current continuation — 17 October 2026
+
+Use the [17 October account baseline](evidence/google-current-account-evidence-2026-10-17.json) for future comparisons. Start 7/14/28-day release windows only after the exact merged SHA is verified live. A 17 October release would yield 24 October, 31 October and 14 November; these dates are conditional until deployment. The existing Friday public workflow is weekly sampling, not a substitute for those account checkpoints or evidence that scheduled account checks were created.
+
 The scoped SEO release is owner-authorized; actual deployment evidence and time are recorded in [verification](VERIFICATION.md). Monitoring intervals are relative to that verified release. No Google submission or indexing/approval outcome is implied by a passing public monitor.
 
 ## Before release

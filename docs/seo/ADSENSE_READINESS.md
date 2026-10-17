@@ -1,5 +1,9 @@
 # AdSense readiness
 
+## Current continuation — 17 October 2026
+
+Sites now explicitly confirms **Low-value content**; it is no longer merely owner-reported wording. Policy Centre has no current serving restrictions, while site approval remains rejected. ads.txt is publicly correct despite the dated account Not found status. European consent configuration is published; real delivery/revocation and visual placements remain unverified. Review remains inadvisable pending editorial/rights and outstanding account checks. See [current report](ACCOUNT_RECOVERY_2026-10-17.md).
+
 Status on 16 October 2026: **technical release prepared; another AdSense review is not yet advised**. Google approval, current Policy Center clearance, consent configuration and rights are not established. The scoped SEO release is authorized; it does not activate Pro, payments, AI or hibernated preparation products. See [release continuation](AUTONOMOUS_RELEASE_2026-10-16.md) and [verification](VERIFICATION.md) for actual release state.
 
 ## Actual Google evidence

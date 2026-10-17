@@ -1,5 +1,9 @@
 # Verification evidence
 
+## Current continuation — 17 October 2026
+
+The isolated harness repair at `da5a8275acb830a7bf754a479798a62867a3a5f3` passes all GitHub workflows, including payment-invariants on its second attempt. Retain its first attempt's later Chromium failure and the original navigation failure as real failed checks. The additional archive-query correction follows Google's live rendered-noindex finding; its new checks and release outcome must be recorded separately. See [continuation](ACCOUNT_RECOVERY_2026-10-17.md). No live deployment is claimed by that CI pass.
+
 Public baseline/research:14 October 2026. Final local verification:16 October 2026. Branch `fix/seo-indexing-adsense-recovery`; baseline HEAD `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`. The initial sections describe local working-tree verification. The final continuation below records subsequent publishing/live evidence separately. The build fingerprint records checked-out HEAD and build time; its old SHA does **not** assert these uncommitted changes are live.
 
 ## Verified production baseline

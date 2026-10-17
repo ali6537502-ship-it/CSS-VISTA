@@ -1,0 +1,31 @@
+# Authenticated recovery continuation — 17 October 2026
+
+This continuation follows PR #94 on `fix/seo-indexing-adsense-recovery`. The existing scoped SEO release authorization applies; Pro/MPT, payments, AI and private drafts remain held. No AdSense review is submitted. The dated [account evidence](evidence/google-current-account-evidence-2026-10-17.json) supersedes earlier statements that current portals were unavailable. Historical reports remain historical.
+
+## Verified account findings
+
+The HTTPS www property identifies the account as a verified owner; the selector also offers the domain property, whose separate permission/report totals have not been inspected. Page Indexing, updated **12 October**, reports **469 indexed / 719 not indexed**, or **1,188 known pages in this prefix report**. Its exclusions are 678 discovered-not-indexed, 34 noindex, three crawled-not-indexed, three Google-selected-other-canonical and one 404; alternate-canonical validation shows zero affected pages. These are neither local inventory counts nor proof that every excluded URL should be indexed.
+
+The sitemap index was submitted 25 August, last read 15 October, reports **Success**, and identifies 1,018 discovered pages. Crawl Stats, updated 15 October, shows rounded 12.4k requests/1.28bn bytes over 90 days, 358 ms average response, 99% HTTP 200 and no host problems over that period. Search Console reports no manual actions or security issues. The selected three-month Web chart covers 23 August–14 October: rounded 3.54k clicks, 9.23k impressions, 38.3% CTR and position 8. Query examples are heavily branded; this does not establish why Google selected or rejected any page.
+
+AdSense Sites confirms **Low-value content**, **Needs attention**, with the displayed last update **8 October, 01:46 PKT**. Policy Centre independently says **No current issues**; that does not clear the site-approval rejection. Sites reports ads.txt **Not found**, whereas a direct current public check returned HTTP 200 with the expected existing seller record. Keep these dated observations separate rather than replacing a correct publisher or inventing Google reprocessing.
+
+The existing European message is **Published**, modified 25 August, with English plus 31 languages and Consent / Manage options / Do not consent enabled. Regional delivery and revocation are not established by this configuration screen. Auto ads is enabled; exact-page exclusions cover `/account`, `/answer-timer` and `/gk/quiz`, labelled **This page only**. Mobile preview failed to load; desktop was selected but no finished rendering was retrieved. No ad or consent settings were applied. Runtime/document guards remain essential for private descendants.
+
+## Two confirmed implementation defects
+
+The browser harness served `dist/index.html` on account URLs instead of the distinct Apache-generated noindex/ad-free account documents. The HTTPS regression failed against the old harness; the repaired harness uses the existing `.htaccess` resolver and preserves API proxying, paid-file protection, disposable-database and loopback checks. All browser journey contexts now permit loopback only, with a stub advertising library; no real ad/provider request is needed.
+
+The original account journey reproduced a document-navigation interruption. After the harness fix, saving/reopening work on a second device, lost-response recovery, expired read-only history, reasoning and paused-product checks passed. GitHub's full `payment-invariants` job passes on rerun (run **38994027232**, successful job **117285237824**). Its first attempt reached a later transient Chromium `ERR_TOO_MANY_RETRIES`; it is retained as a failed attempt, not hidden. A fresh local stress harness initially lacked `current_affairs_items`, unlike CI's earlier setup. After applying the existing disposable schema, three consecutive paused-product runs passed. No application account/payment restriction was changed.
+
+The authenticated live URL test found an additional public defect at `/past-papers/ppsc/2024`. Google's stored August snapshot allowed indexing and used the inspected URL as canonical, but the **17 October live test** fetched successfully and found **`noindex, follow`** in the rendered HTML. The tested description identifies the real collection of 47 PDFs. Source inspection shows the archive synchronizer adds its own pathname exam/year as query filters, causing RouteSeo to apply noindex. The correction omits only redundant defaults already encoded in the pathname; real search/filter/pagination views remain noindex. Browser regression coverage now checks clean PPSC/CSS archive URLs and a genuine filtered view. A post-deployment Google live retest is still required.
+
+## Editorial boundaries and remaining account work
+
+The existing historical issue spreadsheet was located. Targeted Drive filename searches did not find permission/licence/copyright records; the located book-summary folders expose cover folders, not proof of rights or original editions. No quotation, author qualification, source passage or reproduction permission is upgraded. The existing 9 exact / 22 excerpt / one translation / 57 unverified / 11 no-quotation decisions remain unchanged. The original book JSON hash must remain `f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e`.
+
+The browser/runtime session reset after inspection. A new direct visit shows Google signed out. Domain-property totals, the remaining exclusion examples, representative note/book/tool inspections, detailed CWV/HTTPS, regional consent/revocation and final visual ad placement remain specific account dependencies. No passwords or verification codes are requested in chat. Finish available engineering/release verification first, then resume secure sign-in for those checks.
+
+## Release evidence
+
+The last verified production fingerprint was still `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`, built 12 October. The committed harness repair is `da5a8275acb830a7bf754a479798a62867a3a5f3`; all associated GitHub workflows pass. The archive correction is subsequent work and needs its own completed checks before merge. Local artifacts and an open PR do not establish deployment. Exact merged SHA, live fingerprint, public monitor and Google follow-up belong in [verification](VERIFICATION.md) as they complete.

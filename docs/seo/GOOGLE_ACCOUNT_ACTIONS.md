@@ -1,5 +1,9 @@
 # Google account evidence and remaining actions
 
+## Current continuation — 17 October 2026
+
+Direct authorized inspection is now recorded in [current evidence](evidence/google-current-account-evidence-2026-10-17.json) and [the continuation report](ACCOUNT_RECOVERY_2026-10-17.md). Verified: prefix ownership, 12 October indexing totals/reasons, sitemap success/read date, Crawl Stats, Web performance, no manual/security issues, one stored/live inspection, exact AdSense rejection, Policy Centre, consent-message configuration and existing Auto ads exclusions. No account settings changed. The replacement browser session is signed out; remaining inspections and post-release Google follow-up require secure authentication. The earlier unavailability paragraphs below describe 16 October only.
+
 The owner authorized read-only inspection. The GSC Wizard account/property calls still return `payment_required`; no live API report was returned. No callable owner-browser control or AdSense portal integration is available. A project headless browser is not an account login connection. No password, session cookie, recovery/2FA code, subscription purchase or account mutation is needed for the completed repository/public-site work.
 
 ## Evidence recovered independently on 16 October

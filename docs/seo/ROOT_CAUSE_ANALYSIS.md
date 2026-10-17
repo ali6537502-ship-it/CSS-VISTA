@@ -1,5 +1,9 @@
 # CSS VISTA root cause investigation
 
+## Current continuation — 17 October 2026
+
+Google's 17 October live test established a public archive rendered-noindex blocker that raw-HTML samples missed: redundant pathname defaults become query filters after React mounts. The old indexed snapshot is distinct. The account also confirms Low-value content; this does not prove that this technical defect caused the AdSense decision. See [dated diagnosis and limitations](ACCOUNT_RECOVERY_2026-10-17.md).
+
 Baseline audit: 14 October 2026; continuation: 16 October. Branch: `fix/seo-indexing-adsense-recovery`. Baseline source/live fingerprint: `cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8`, built 12 October at 04:25:31.574 UTC. The scoped SEO release is now owner-authorized; actual live state is recorded in [verification](VERIFICATION.md). No Google review submission or approval is claimed.
 
 ## Conclusion and evidence boundaries

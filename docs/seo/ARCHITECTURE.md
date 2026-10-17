@@ -1,5 +1,9 @@
 # Production architecture and build provenance
 
+## Current continuation — 17 October 2026
+
+The architecture remains React/Vite, the existing prerender generators, Apache resolution and native PHP. The authenticated browser harness now resolves generated documents with the existing `.htaccess` resolver rather than a homepage fallback. Archive filter synchronization must not convert pathname defaults into a noindex query. Later scoped SEO authorization in AGENTS.md controls this release; older blanket-hold prose below does not cancel it.
+
 Baseline architecture: 14 October 2026; editorial integration: 15 October 2026. Preferred origin: `https://www.css-vista.com`.
 
 This is the existing React/TypeScript/Vite and native Hostinger PHP architecture. The repairs preserve it. The owner subsequently authorized a scoped SEO release; actual production proof is in [verification](VERIFICATION.md). No account mutation, private-content publication or Pro/MPT reactivation is included.

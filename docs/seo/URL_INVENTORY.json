@@ -2,9 +2,9 @@
   "observed_at": "2026-10-14T07:06:06.395798+00:00",
   "source_git_sha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
   "origin": "https://www.css-vista.com",
-  "scope": "Complete discovered source/sitemap/link union; bounded live representative HTTP sample. No Search Console/account evidence. Pattern definitions are not concrete URLs. Source inventory includes private routes but never their data.",
-  "known_google_urls": null,
-  "indexed_canonical_urls": null,
+  "scope": "Complete discovered source/sitemap/link union with dated baseline HTTP and prepared-artifact observations. Current Google aggregate and explicitly observed URLs are separately dated; no inference for uninspected URLs.",
+  "known_google_urls": 1188,
+  "indexed_canonical_urls": 469,
   "sitemap_url_entries": 1018,
   "sitemap_unique_urls": 1018,
   "sitemap_errors": [],
@@ -18144,8 +18144,8 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
-      "action_taken": "removed_repeated_archive_filler_preserved_paper_links",
+      "google_status": "Crawled - currently not indexed",
+      "action_taken": "remove_redundant_archive_defaults_that_cause_rendered_noindex",
       "http_observed": false,
       "access": "public",
       "content_quality": "substantial",
@@ -18168,7 +18168,13 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_report_updated_on": "2026-10-12",
+      "google_last_crawled": "2026-08-26",
+      "google_live_test_status": "Excluded by noindex tag",
+      "google_live_test_date": "2026-10-17",
+      "current_google_evidence": "evidence/google-current-account-evidence-2026-10-17.json"
     },
     {
       "url": "https://www.css-vista.com/past-papers/ppsc/2025",
@@ -32434,7 +32440,7 @@
       "x_robots_tag": null,
       "sitemap_presence": true,
       "intended_indexability": true,
-      "google_status": null,
+      "google_status": "Crawled - currently not indexed",
       "action_taken": "audited_preserved",
       "http_observed": false,
       "access": "public",
@@ -32458,7 +32464,10 @@
         "decision_reason": "Canonical public content remains eligible under final artifact gates; indexing and editorial accuracy still require independent evidence.",
         "verification": "Static resolution of generated .htaccess and HTML; not an observed live HTTP response."
       },
-      "local_editorial_review": null
+      "local_editorial_review": null,
+      "google_status_observed_on": "2026-10-17",
+      "google_report_updated_on": "2026-10-12",
+      "google_last_crawled": "2026-08-25"
     },
     {
       "url": "https://www.css-vista.com/past-papers/view/css-2023-pakistan-affairs",
@@ -82003,7 +82012,7 @@
     "production_fields_unchanged": "status/final_url/canonical/robots/headers/sitemap_presence/http_observed remain baseline HTTP observations; local_artifact contains local build results."
   },
   "google_evidence": {
-    "current_portal_status": "unavailable",
+    "current_portal_status": "Read-only authenticated inspection on 2026-10-17; browser signed out after later session reset",
     "historical_issue_examples": 488,
     "historical_example_prepared_classification": {
       "indexable_in_prepared_artifact": 195,
@@ -82017,6 +82026,16 @@
       "google_chose_different_canonical": 2
     },
     "sitewide_current_total": null,
-    "source": "docs/seo/evidence/google-historical-account-evidence-2026-10-16.json"
+    "source": "docs/seo/evidence/google-historical-account-evidence-2026-10-16.json",
+    "current_prefix_total": 1188,
+    "current_prefix_report_updated_on": "2026-10-12",
+    "current_source": "docs/seo/evidence/google-current-account-evidence-2026-10-17.json"
+  },
+  "current_google_report": {
+    "property": "https://www.css-vista.com/",
+    "report_updated_on": "2026-10-12",
+    "observed_on": "2026-10-17",
+    "scope": "All known pages; URL-prefix report, distinct from local inventory and domain-property totals",
+    "evidence": "evidence/google-current-account-evidence-2026-10-17.json"
   }
 }

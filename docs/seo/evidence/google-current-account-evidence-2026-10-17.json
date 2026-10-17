@@ -1,0 +1,221 @@
+{
+  "observedOn": "2026-10-17",
+  "method": "Authorized signed-in Google browser reports, inspected read-only before the session reset. Report dates are retained separately. No account settings changed or AdSense review requested.",
+  "privacy": "Email, private account URLs, document IDs, credentials, session material and student records omitted.",
+  "searchConsole": {
+    "property": "https://www.css-vista.com/",
+    "permission": "Verified owner (Settings)",
+    "propertySelectorAlsoShows": "sc-domain:css-vista.com; domain-property permission/totals not yet inspected",
+    "pageIndexing": {
+      "reportUpdatedOn": "2026-10-12",
+      "scope": "All known pages, HTTPS www URL-prefix property",
+      "indexed": 469,
+      "notIndexed": 719,
+      "total": 1188,
+      "reasons": [
+        {
+          "reason": "Crawled - currently not indexed",
+          "pages": 3,
+          "validation": "Failed"
+        },
+        {
+          "reason": "Excluded by noindex tag",
+          "pages": 34,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Not found (404)",
+          "pages": 1,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Duplicate, Google chose different canonical than user",
+          "pages": 3,
+          "validation": "Not Started"
+        },
+        {
+          "reason": "Discovered – currently not indexed",
+          "pages": 678,
+          "validation": "Started"
+        },
+        {
+          "reason": "Alternative page with proper canonical tag",
+          "pages": 0,
+          "validation": "Passed"
+        }
+      ]
+    },
+    "crawledNotIndexedExamples": [
+      {
+        "url": "https://www.css-vista.com/sitemap.xml",
+        "lastCrawled": "2026-09-06"
+      },
+      {
+        "url": "https://www.css-vista.com/past-papers/ppsc/2024",
+        "lastCrawled": "2026-08-26"
+      },
+      {
+        "url": "https://www.css-vista.com/past-papers/view/css-2023-journalism-mass-communication",
+        "lastCrawled": "2026-08-25"
+      }
+    ],
+    "crawledNotIndexedValidation": {
+      "startedOn": "2026-09-04",
+      "failedOn": "2026-09-15"
+    },
+    "sitemap": {
+      "path": "/sitemap.xml",
+      "type": "Sitemap index",
+      "submittedOn": "2026-08-25",
+      "lastReadOn": "2026-10-15",
+      "status": "Success",
+      "discoveredPages": 1018,
+      "discoveredVideos": 0
+    },
+    "manualActions": "No issues detected",
+    "securityIssues": "No issues detected",
+    "robotsTxt": "Valid",
+    "crawlStats": {
+      "updatedOn": "2026-10-15",
+      "period": "Last 90 days",
+      "requestsDisplayed": "12.4k",
+      "bytesDisplayed": "1.28bn",
+      "averageResponseMs": 358,
+      "hostStatus": "Host had no problems in the last 90 days",
+      "responseSharesShown": {
+        "200": "99%",
+        "404": "<1%",
+        "5XX": "<1%",
+        "302": "<1%",
+        "301": "<1%"
+      },
+      "purposeShares": {
+        "Refresh": "86%",
+        "Discovery": "14%"
+      },
+      "fileTypeSharesShown": {
+        "JavaScript": "49%",
+        "HTML": "22%",
+        "JSON": "10%",
+        "Other": "8%",
+        "PDF": "6%"
+      }
+    },
+    "performance": {
+      "type": "Web",
+      "selectedRange": "3 months",
+      "chartFrom": "2026-08-23",
+      "chartThrough": "2026-10-14",
+      "clicksDisplayed": "3.54k",
+      "impressionsDisplayed": "9.23k",
+      "ctrDisplayed": "38.3%",
+      "positionDisplayed": "8",
+      "topQueryExamples": [
+        {
+          "query": "css vista",
+          "clicks": 1923,
+          "impressions": 2168
+        },
+        {
+          "query": "css vista website",
+          "clicks": 834,
+          "impressions": 912
+        }
+      ],
+      "limitation": "Rounded UI headlines and two query examples, not a complete export."
+    },
+    "inspections": [
+      {
+        "url": "https://www.css-vista.com/past-papers/ppsc/2024",
+        "indexedVersion": {
+          "status": "Crawled - currently not indexed",
+          "lastCrawledDisplayed": "26 Aug 2026, 20:17:34",
+          "crawler": "Googlebot smartphone",
+          "crawlAllowed": true,
+          "pageFetch": "Successful",
+          "indexingAllowed": true,
+          "userCanonical": "https://www.css-vista.com/past-papers/ppsc/2024",
+          "googleCanonical": "Inspected URL",
+          "sitemap": "No referring sitemaps detected"
+        },
+        "liveTest": {
+          "testedTimeDisplayed": "17 Oct 2026, 07:41:31",
+          "crawler": "Google Inspection Tool smartphone",
+          "status": "URL is not available to Google",
+          "reason": "Excluded by noindex tag",
+          "crawlAllowed": true,
+          "pageFetch": "Successful",
+          "indexingAllowed": false,
+          "userCanonical": "https://www.css-vista.com/past-papers/ppsc/2024",
+          "testedHTMLRobots": "noindex, follow",
+          "testedHTMLDescription": "Browse 47 PPSC 2024 past-paper PDFs in this verified collection."
+        },
+        "diagnosis": "PastPapers writes pathname exam/year into query parameters on mount. RouteSeo treats those redundant filters as noindex. Fix removes only defaults already encoded in the pathname; genuine filtered views remain excluded."
+      }
+    ],
+    "experience": "Overview showed no CWV data and HTTPS 27 / non-HTTPS 0; the detailed CWV/HTTPS reports were not read before session reset."
+  },
+  "adsense": {
+    "site": "css-vista.com",
+    "approvalStatus": "Needs attention",
+    "exactRejectionReason": "Low-value content",
+    "displayedLastUpdated": "8 Oct 2026 01:46 PKT",
+    "adsTxtAccountStatus": "Not found",
+    "publicAdsTxt": {
+      "checkedOn": "2026-10-17",
+      "httpStatus": 200,
+      "expectedExistingSellerRecordPresent": true,
+      "limitation": "Public file passes; the dated portal status does not establish current file absence or successful reprocessing."
+    },
+    "ownershipMethod": "Existing matching AdSense code snippet selected",
+    "policyCentre": "No current issues",
+    "policyCentreLimitation": "Separate site-approval rejection is still active.",
+    "europeanConsentMessage": {
+      "site": "css-vista.com",
+      "status": "Published",
+      "lastModified": "25 Aug 2026",
+      "languages": "English plus 31",
+      "choices": {
+        "Consent": "On",
+        "Manage options": "On",
+        "Do not consent": "On",
+        "Close (do not consent)": "Off"
+      },
+      "optimiseConsent": "On",
+      "limitation": "Configuration observed, not proof of regional delivery or functioning revocation."
+    },
+    "autoAds": {
+      "enabled": true,
+      "intentFormats": "0/1",
+      "overlayFormats": "3/3",
+      "inPageFormats": "1/2",
+      "exclusionScope": "This page only",
+      "excludedPages": [
+        "css-vista.com/account",
+        "css-vista.com/answer-timer",
+        "css-vista.com/gk/quiz"
+      ],
+      "mobilePreview": "We are having trouble loading the preview. Please try again later.",
+      "desktopPreview": "Selected; no completed visual result retrieved before browser timeout",
+      "excludedAreas": "No usable area preview loaded",
+      "changesApplied": false
+    }
+  },
+  "productionBaseline": {
+    "sha": "cd9c6e4c24c96b678c7cfff2c4b840adb98a03c8",
+    "builtAt": "2026-10-12T04:25:31.574Z",
+    "recoveryDeployedAtObservation": false
+  },
+  "editorialFollowup": {
+    "historicalExport": "Named September issue spreadsheet located; unchanged historical evidence already retained.",
+    "driveSearch": "Targeted filename searches for permission/licence/copyright returned no matching records. Two book-summary folders contained cover folders; no original edition or reproduction permission was established.",
+    "quotationDecisionsUnchanged": true,
+    "permissionsCleared": false
+  },
+  "remaining": [
+    "New browser session is signed out; further Google inspection/live retest requires secure sign-in.",
+    "Domain-property reports, remaining exclusion examples and representative note/book/tool indexed/live inspections not yet completed.",
+    "Regional consent delivery/revocation, US-state applicability and complete ad visual preview remain unverified.",
+    "Quotation and reproduction permissions remain unresolved; no new AdSense review is authorized."
+  ]
+}
