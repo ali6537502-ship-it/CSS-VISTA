@@ -108,7 +108,7 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
   const timer = useAccurateCountdown(initialRemaining ?? customMin * 60, undefined, true)
   const { remaining: left, running, getRemaining, start, pause } = timer
   const banner = useTimerFeedback(left, running, customMin * 60, alertMode, notificationsEnabled)
-  useTimerWakeLock(keepAwake && running)
+  const wake = useTimerWakeLock(keepAwake && running)
   const toggleFloating = useCallback(() => {
     if (running) pause()
     else { unlockTimerAudio(); start() }
@@ -209,6 +209,11 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
         </div>
       </div>
 
+      {keepAwake && running && (
+        <p role="status" className={`rounded-lg px-3 py-2 text-xs font-semibold ${wake.active ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'}`}>
+          {wake.active ? '✓ Screen awake is active while this page stays visible.' : wake.error || 'Requesting screen awake permission…'}
+        </p>
+      )}
       <div className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-gradient-to-b from-white to-emerald-50/30 p-6 text-center shadow-sm sm:p-8">
         <div className="flex flex-wrap items-center justify-center gap-2">
           <span className="rounded-full bg-emerald-900/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-emerald-950">Answer writing</span>
@@ -346,7 +351,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   const totalLeftBaseRef = useRef(PAPER_TOTAL_SECONDS)
   const completedRef = useRef(false)
   const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
-  useTimerWakeLock(keepAwake && phase === 'running' && !paused)
+  const wake = useTimerWakeLock(keepAwake && phase === 'running' && !paused)
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
   // it. The wall-clock anchors are persisted, so resuming accounts honestly for
@@ -619,6 +624,11 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   return (
     <div className="space-y-4">
       {banner && <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900"><Bell className="mr-2 inline h-4 w-4" />{banner}</div>}
+      {keepAwake && !paused && (
+        <p role="status" className={`rounded-lg px-3 py-2 text-xs font-semibold ${wake.active ? 'bg-emerald-50 text-emerald-900' : 'bg-amber-50 text-amber-900'}`}>
+          {wake.active ? '✓ Screen awake is active while this page stays visible.' : wake.error || 'Requesting screen awake permission…'}
+        </p>
+      )}
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
