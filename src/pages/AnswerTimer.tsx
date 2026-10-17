@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Bell, Pause, PenLine, Play, Plus, RotateCcw, Square, Trash2 } from 'lucide-react'
-import { canRequestTimerNotifications, formatTimerSeconds as fmt, requestTimerNotifications, TIMER_ALERTS, unlockTimerAudio, useFloatingAnswerTimer, useTimerFeedback, type TimerAlertMode } from '@/components/timer/TimerFeedback'
+import { canRequestTimerNotifications, formatTimerSeconds as fmt, TIMER_ALERTS, unlockTimerAudio, useFloatingAnswerTimer, useTimerFeedback, useTimerWakeLock, type TimerAlertMode } from '@/components/timer/TimerFeedback'
+import { TimerCompanionPanel } from '@/components/timer/TimerCompanionPanel'
 import { PageHeader } from '@/components/shared'
 import { getTimerSessions, recordActivity, saveTimerSession, type TimerSession } from '@/lib/progress'
 import { mergedPastPapers } from '@/lib/admin'
@@ -46,12 +47,34 @@ export default function AnswerTimer() {
       return saved === 'off' || saved === 'voice' || saved === 'both' ? saved : 'tones'
     } catch { return 'tones' }
   })
-  const [notificationPermission, setNotificationPermission] = useState(() =>
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | 'unsupported'>(() =>
     canRequestTimerNotifications() ? Notification.permission : 'unsupported')
+  const [notificationsEnabled, setNotificationsEnabled] = useState(() => {
+    try { return localStorage.getItem('cssvista:timer-notifications-enabled') === 'true' } catch { return false }
+  })
+  const [keepAwake, setKeepAwake] = useState(() => {
+    try { return localStorage.getItem('cssvista:timer-keep-awake') === 'true' } catch { return false }
+  })
 
   useEffect(() => {
-    try { localStorage.setItem('cssvista:timer-alert-mode', alertMode) } catch { /* optional preference */ }
-  }, [alertMode])
+    try {
+      localStorage.setItem('cssvista:timer-alert-mode', alertMode)
+      localStorage.setItem('cssvista:timer-notifications-enabled', String(notificationsEnabled))
+      localStorage.setItem('cssvista:timer-keep-awake', String(keepAwake))
+    } catch { /* optional preferences */ }
+  }, [alertMode, notificationsEnabled, keepAwake])
+
+  useEffect(() => {
+    const refreshPermission = () => setNotificationPermission(
+      canRequestTimerNotifications() ? Notification.permission : 'unsupported',
+    )
+    document.addEventListener('visibilitychange', refreshPermission)
+    window.addEventListener('focus', refreshPermission)
+    return () => {
+      document.removeEventListener('visibilitychange', refreshPermission)
+      window.removeEventListener('focus', refreshPermission)
+    }
+  }, [])
 
   return (
     <div>
@@ -68,24 +91,19 @@ export default function AnswerTimer() {
             Four-Question Paper Mode
           </button>
         </div>
-        <div className="no-print mb-5 flex flex-wrap items-center gap-3 rounded-lg border bg-white px-4 py-3">
-          <label className="flex items-center gap-2 text-xs font-semibold text-pine">
-            <Bell className="h-4 w-4" /> Timer alerts
-            <select value={alertMode} onChange={(event) => setAlertMode(event.target.value as TimerAlertMode)} className="h-9 rounded-md border bg-white px-2 text-sm" aria-label="Timer sound and voice alerts">
-              <option value="off">Silent</option>
-              <option value="tones">Tones</option>
-              <option value="voice">Voice</option>
-              <option value="both">Voice + tones</option>
-            </select>
-          </label>
-          {canRequestTimerNotifications() && notificationPermission !== 'granted' && notificationPermission !== 'denied' && (
-            <button onClick={() => { void requestTimerNotifications().then(setNotificationPermission) }} className="rounded-md border px-3 py-2 text-xs font-semibold text-pine">
-              Enable browser notifications
-            </button>
-          )}
-          <span className="text-xs text-muted-foreground">Floating view works on supported desktop browsers while this tab stays open. Alerts may be restricted in the background.</span>
-        </div>
-        {tab === 'single' ? <SingleTimer alertMode={alertMode} /> : <PaperTimer alertMode={alertMode} />}
+        <TimerCompanionPanel
+          mode={alertMode}
+          onModeChange={setAlertMode}
+          permission={notificationPermission}
+          onPermissionChange={setNotificationPermission}
+          notificationsEnabled={notificationsEnabled}
+          onNotificationsChange={setNotificationsEnabled}
+          keepAwake={keepAwake}
+          onKeepAwakeChange={setKeepAwake}
+        />
+        {tab === 'single'
+          ? <SingleTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />
+          : <PaperTimer alertMode={alertMode} notificationsEnabled={notificationsEnabled && notificationPermission === 'granted'} keepAwake={keepAwake} />}
       </div>
     </div>
   )
@@ -95,15 +113,22 @@ function usePaperTitles() {
   return useMemo(() => mergedPastPapers(seedPapers).map((p) => p.title), [])
 }
 
-function SingleTimer({ alertMode }: { alertMode: TimerAlertMode }) {
+function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const paperTitles = usePaperTitles()
   const saved = useMemo(() => readSingleSnapshot(), [])
   const [question, setQuestion] = useState(saved?.question ?? '')
   const [customMin, setCustomMin] = useState(saved?.minutes ?? 35)
   const timer = useAccurateCountdown(customMin * 60, undefined, true)
-  const { remaining: left, running, getRemaining } = timer
-  const banner = useTimerFeedback(left, running, customMin * 60, alertMode)
-  const floatingTimer = useFloatingAnswerTimer(question || 'Single question', fmt(left), running)
+  const { remaining: left, running, getRemaining, start, pause } = timer
+  const banner = useTimerFeedback(left, running, customMin * 60, alertMode, notificationsEnabled)
+  useTimerWakeLock(keepAwake && running)
+  const toggleFloating = useCallback(() => {
+    if (running) pause()
+    else { unlockTimerAudio(); start() }
+  }, [running, pause, start])
+  const floatingTimer = useFloatingAnswerTimer(
+    question || 'Single question', fmt(left), running, customMin * 60, toggleFloating,
+  )
   const [doneTimes, setDoneTimes] = useState<{ q: string; secs: number }[]>([])
   const skipFirstSave = useRef(Boolean(saved))
 
@@ -186,10 +211,11 @@ function SingleTimer({ alertMode }: { alertMode: TimerAlertMode }) {
             </button>
           ))}
           {floatingTimer.supported && (
-            <button onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="ml-auto rounded-md border px-3 py-1.5 text-xs font-semibold text-pine">
-              {floatingTimer.floating ? '× Close floating timer' : '↗ Float above other windows'}
+            <button type="button" aria-pressed={floatingTimer.floating} onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="ml-auto rounded-md border border-emerald-800/30 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-950 hover:bg-emerald-100">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Open floating timer'}
             </button>
           )}
+          {floatingTimer.error && <p role="alert" className="w-full text-xs font-medium text-red-700">{floatingTimer.error}</p>}
         </div>
       </div>
 
@@ -319,7 +345,7 @@ function readPaperSnapshot(): PaperSnapshot | null {
   }
 }
 
-function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
+function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
   const [current, setCurrent] = useState(0)
@@ -332,11 +358,14 @@ function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
   const questionElapsedBaseRef = useRef(0)
   const totalLeftBaseRef = useRef(3 * 3600)
   const completedRef = useRef(false)
-  const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode)
+  const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
+  useTimerWakeLock(keepAwake && phase === 'running' && !paused)
   const floatingTimer = useFloatingAnswerTimer(
     `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
     fmt(qLeft),
     phase === 'running' && !paused,
+    PAPER_QUESTION_SECONDS,
+    () => { if (paused) resumePaper(); else pausePaper() },
   )
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
@@ -625,10 +654,11 @@ function PaperTimer({ alertMode }: { alertMode: TimerAlertMode }) {
             <Trash2 className="h-4 w-4" /> End paper
           </button>
           {floatingTimer.supported && (
-            <button onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="inline-flex h-11 items-center rounded-md border px-4 text-xs font-semibold text-pine">
-              {floatingTimer.floating ? '× Close floating timer' : '↗ Float timer'}
+            <button type="button" aria-pressed={floatingTimer.floating} onClick={() => { if (floatingTimer.floating) floatingTimer.close(); else void floatingTimer.open() }} className="inline-flex h-11 items-center rounded-md border border-emerald-800/30 bg-emerald-50 px-4 text-xs font-bold text-emerald-950">
+              {floatingTimer.floating ? '× Close floating timer' : '↗ Open floating timer'}
             </button>
           )}
+          {floatingTimer.error && <p role="alert" className="w-full text-center text-xs font-medium text-red-700">{floatingTimer.error}</p>}
         </div>
         <div className="mt-4 flex justify-center gap-1.5">
           {times.map((t, i) => (
