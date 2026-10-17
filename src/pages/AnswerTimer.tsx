@@ -231,7 +231,7 @@ function SingleTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode
         </p>
         <p role="timer" aria-label={left < 0 ? 'Elapsed overtime' : 'Time remaining'} className={`mt-3 font-display text-6xl font-black tracking-[-0.035em] tabular-nums sm:text-7xl ${left <= 0 ? 'text-red-600' : left < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(left)}</p>
         <p className="mt-2 text-xs text-slate-500">{left < 0 ? `Overtime: ${fmt(-left)} beyond your target` : `Allocated: ${customMin} minutes`}</p>
-        <div className="mx-auto mt-5 max-w-md" role="progressbar" aria-label="Time consumed" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.max(0, Math.min(100, Math.round(100 * (1 - left / (customMin * 60))))}>
+        <div className="mx-auto mt-5 max-w-md" role="progressbar" aria-label="Time consumed" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.min(100, Math.max(0, Math.round((1 - left / (customMin * 60)) * 100)))}
           <div className="h-2 overflow-hidden rounded-full bg-slate-200">
             <div className={`h-full rounded-full transition-all duration-300 ${left < 0 ? 'bg-red-500' : left < 300 ? 'bg-amber-500' : 'bg-emerald-700'}`}
               style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - left / (customMin * 60))))}%` }} />
