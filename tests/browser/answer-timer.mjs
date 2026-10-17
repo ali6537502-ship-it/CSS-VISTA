@@ -61,6 +61,10 @@ try {
     'Paused paper time stays fixed after restore')
   assert.equal(await page.getByRole('button', { name: 'Resume', exact: true }).count(), 1)
 
+  // Finish before the corrupted-storage test so pagehide cannot re-save the
+  // previously running paper over the intentionally malformed fixture.
+  await page.getByRole('button', { name: 'End paper' }).click()
+  await page.getByText('Paper attempt complete').waitFor()
   await page.evaluate(() => localStorage.setItem('cssvista:paper-attempt', '{"questions":["Q1"]}'))
   await page.reload()
   await page.getByRole('button', { name: 'Four-Question Paper Mode' }).click()
