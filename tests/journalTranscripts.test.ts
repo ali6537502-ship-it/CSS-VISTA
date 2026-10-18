@@ -7,6 +7,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
 import { opinions } from '../src/data/books.ts'
+import { findRouteDefinition } from '../src/data/routeRegistry.mjs'
 
 const bundle = JSON.parse(readFileSync(new URL('../src/data/journalTranscripts.generated.json', import.meta.url), 'utf8')) as {
   articles: { slug: string; title: string; author: string; publishedOn: string; body: string; transcriptBodySha256: string; originalPublisher: string | null; originalPublicationUrl: string | null; imageSources: { image: string }[]; editorialNotes: { id: string; issuedOn: string; body: string; sources: { url: string; verifiedOn: string; httpStatus: number; responseSha256: string; locator?: string; verificationUrl?: string; verificationScope?: string }[]; verification?: string }[] }[]
@@ -133,4 +134,16 @@ test('the real generator refuses unsafe or unexplained verification endpoints', 
   } finally {
     rmSync(fixture, { recursive: true, force: true })
   }
+})
+
+
+test('each real archive article has exact metadata and unknown slugs fail closed', () => {
+  for (const article of bundle.articles) {
+    const route = findRouteDefinition(`/journal/${article.slug}`)
+    assert.equal(route?.h1, article.title)
+    assert.equal(route?.indexable, true)
+    assert.equal(route?.sitemap, true)
+    assert.equal(route?.adMode, 'disabled')
+  }
+  assert.equal(findRouteDefinition('/journal/unknown-article'), null)
 })

@@ -58,6 +58,7 @@ const Mistakes = lazy(() => import('./pages/Mistakes'))
 const AnswerTimer = lazy(() => import('./pages/AnswerTimer'))
 const Checklists = lazy(() => import('./pages/Checklists'))
 const BooksPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.BooksPage })))
+const JournalArchiveArticle = lazy(() => import('./pages/JournalArchiveArticle'))
 const VistaJournal = lazy(() => import('./pages/VistaJournal'))
 const AccountWorkspace = lazy(() => import('./features/current-affairs/Workspace'))
 const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introduction'))
@@ -201,6 +202,7 @@ export default function App() {
         <Route path="/checklists" element={<S><Checklists /></S>} />
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/journal" element={<S><VistaJournal /></S>} />
+        <Route path="/journal/:slug" element={<S><JournalArchiveArticle /></S>} />
         <Route path="/opinions" element={<Navigate to="/journal" replace />} />
         <Route path="/account" element={<S><Account /></S>} />
         {/* The account home is the chooser; each declared account route renders

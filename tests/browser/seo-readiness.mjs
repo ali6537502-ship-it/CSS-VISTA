@@ -8,6 +8,7 @@ import { chromium } from 'playwright-core'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { startArtifactPreview } from './artifact-preview.mjs'
+import journalTranscripts from '../../src/data/journalTranscripts.generated.json' with { type: 'json' }
 
 const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
 const docRoot = resolve(root, process.env.CSSV_SEO_ARTIFACT || 'dist')
@@ -20,6 +21,8 @@ const paths = [
   '/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence',
   '/book-summaries/why-nations-fail',
   '/book-summaries/the-art-of-war', '/book-summaries/on-war', '/journal',
+  ...journalTranscripts.articles.map(article => `/journal/${article.slug}`),
+  '/journal/seo-audit-deliberately-missing-20261018',
   '/book-summaries/capitalism-and-freedom', '/book-summaries/the-road-to-serfdom',
   '/book-summaries/the-better-angels-of-our-nature', '/book-summaries/brave-new-world',
   '/book-summaries/capital-in-the-twenty-first-century', '/book-summaries/pakistan-beyond-the-crisis-state',
@@ -155,27 +158,30 @@ try {
       }
     }
     if (path === '/journal') {
-      assert.equal(await page.locator('#archive-text details').count(), 6, 'All existing Journal pieces have native text readers')
-      assert.ok(rawHTML.includes('punishes the complainant more reliably than the accused.'), 'Raw HTTP includes source-supported main content')
-      assert.ok(rawHTML.includes('Editorial clarification') && rawHTML.includes('weather.gov'), 'Clarifications and scientific source survive prerendering')
+      assert.equal(await page.locator('#archive-text details').count(), 6, 'All six archive entry points remain available')
       await page.locator('#opinion-ali-hassan-text > summary').click()
-      const archive = page.locator('#opinion-ali-hassan-text')
-      assert.ok(await archive.locator('aside a[href*="weather.gov"]').count(), 'Pacific clarification cites primary weather guidance')
-      assert.ok(await archive.locator('article').isVisible(), 'Native disclosure opens full article text on mobile')
-      await page.locator('#opinion-eid-eve-chaman-phatak-text > summary').click()
-      assert.match(await page.locator('#opinion-eid-eve-chaman-phatak-text aside').innerText(), /Sunday/, 'Calendar discrepancy is transparently marked')
-      assert.match(await archive.locator('aside').allInnerTexts().then(texts => texts.join(' ')), /2010–2017/, 'Climate measurement retains its actual study window')
-      await page.locator('#opinion-harassers-calculus-text > summary').click()
-      const statistics = page.locator('#opinion-harassers-calculus-text aside')
-      const statisticText = (await statistics.allInnerTexts()).join(' ')
-      assert.match(statisticText, /ever-married women aged 15–49/, 'Survey population is explicitly defined')
-      assert.match(statisticText, /2024–2025/, 'Complaint counts preserve their reporting period')
-      await page.locator('#opinion-machines-at-war-text > summary').click()
-      const targeting = page.locator('#opinion-machines-at-war-text aside')
-      assert.match(await targeting.innerText(), /not a finding that AI selected the school/, 'A request for investigation is not shown as an investigative finding')
-      assert.ok(await targeting.locator('a[href*="foreign.senate.gov"]').count(), 'The contemporaneous Senate letter is linked')
-      record.archiveTranscripts = 6
-      record.editorialClarifications = await page.locator('#archive-text aside').count()
+      assert.ok(await page.locator('#opinion-ali-hassan-text a[href="/journal/opinion-ali-hassan"]').isVisible(), 'The archive links to the complete text')
+      for (const article of journalTranscripts.articles) assert.ok(rawHTML.includes(`href="/journal/${article.slug}"`), 'Every article is discoverable without JavaScript')
+    }
+    if (path.startsWith('/journal/') && !missing) {
+      const article = journalTranscripts.articles.find(article => path === `/journal/${article.slug}`)
+      const copy = page.locator('.journal-archive-copy')
+      await copy.waitFor()
+      assert.equal(state.adLoaders, 0, 'Archive text pages remain ad-free during editorial review')
+      assert.ok(state.robots.every(value => !value.includes('noindex')), 'A valid archive article stays indexable')
+      assert.deepEqual(state.h1, [article.title], 'The article has its own exact title')
+      assert.ok(rawHTML.includes(article.title.replaceAll('&', '&amp;')), 'Article title is present before JavaScript')
+      const text = await copy.innerText()
+      assert.ok(text.includes(article.body.split('\n\n')[0]), 'The original opening is preserved')
+      for (const note of article.editorialNotes) {
+        assert.ok(text.includes(note.body), 'Dated clarification remains visible')
+        for (const source of note.sources) assert.ok(await copy.locator(`a[href="${source.url}"]`).count(), 'Existing primary source links remain usable')
+      }
+      assert.equal(await copy.locator('footer a').count(), article.imageSources.length, 'Every original page image remains accessible')
+      await page.setViewportSize({ width: 320, height: 844 })
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Article fits a 320px viewport')
+      await page.setViewportSize({ width: 390, height: 844 })
+      record.editorialClarifications = article.editorialNotes.length
     }
     if (path.includes('/constitutional-law/')) {
       const main = page.locator('main').first()
