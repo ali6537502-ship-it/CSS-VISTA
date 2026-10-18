@@ -1,3 +1,4 @@
+import ArticleBody from '@/components/JournalArticleBody'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ChevronLeft, ChevronRight, FileText, Send, X } from 'lucide-react'
 import { Link } from 'react-router'
@@ -23,51 +24,6 @@ const submissionHref =
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2'
 
-function ArticleBody({ body, archive = false }: { body: string; archive?: boolean }) {
-  const blocks = body
-    .replace(/\r\n/g, '\n')
-    .split(/\n{2,}/)
-    .map((block) => block.trim())
-    .filter(Boolean)
-
-  return (
-    <div className="space-y-5">
-      {blocks.map((block, index) => {
-        if (/^###\s+/.test(block)) {
-          const Heading = archive ? 'h5' : 'h4'
-          return <Heading key={index} className="pt-2 font-display text-lg font-bold text-pine">{block.replace(/^###\s+/, '')}</Heading>
-        }
-        if (/^##\s+/.test(block)) {
-          const Heading = archive ? 'h4' : 'h3'
-          return <Heading key={index} className="pt-3 font-display text-xl font-bold text-pine">{block.replace(/^##\s+/, '')}</Heading>
-        }
-        if (/^#\s+/.test(block)) {
-          const Heading = archive ? 'h4' : 'h2'
-          return <Heading key={index} className="pt-3 font-display text-2xl font-bold text-pine">{block.replace(/^#\s+/, '')}</Heading>
-        }
-
-        const lines = block.split('\n').map((line) => line.trim()).filter(Boolean)
-        if (lines.length > 0 && lines.every((line) => /^-\s+/.test(line))) {
-          return (
-            <ul key={index} className="list-disc space-y-2 pl-6 text-[15px] leading-7 text-foreground/90">
-              {lines.map((line, lineIndex) => <li key={lineIndex}>{line.replace(/^-\s+/, '')}</li>)}
-            </ul>
-          )
-        }
-
-        if (lines.length > 0 && lines.every((line) => /^>\s?/.test(line))) {
-          return (
-            <blockquote key={index} className="border-l-4 border-emerald-700 bg-secondary/40 px-5 py-4 font-serif text-base italic leading-7 text-pine">
-              {lines.map((line) => line.replace(/^>\s?/, '')).join(' ')}
-            </blockquote>
-          )
-        }
-
-        return <p key={index} className="whitespace-pre-line text-[15px] leading-8 text-foreground/90 sm:text-base">{block}</p>
-      })}
-    </div>
-  )
-}
 
 export default function VistaJournal() {
   const [articles, setArticles] = useState<JournalArticle[]>([])
@@ -351,34 +307,12 @@ export default function VistaJournal() {
                   <h3 className="inline font-display text-lg font-bold sm:text-xl">{transcript.title}</h3>
                   <span className="mt-2 block text-xs text-muted-foreground">By {transcript.author} · <time dateTime={transcript.publishedOn}>{formatJournalDate(transcript.publishedOn)}</time> · Read text</span>
                 </summary>
-                <article className="mx-auto mt-6 max-w-3xl border-t border-pine/10 pt-6" aria-label={`${transcript.title} transcript`}>
-                  {transcript.editorialNotes.map((note) => (
-                    <aside key={note.id} className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-5" aria-labelledby={`${transcript.slug}-${note.id}`}>
-                      <p className="text-xs font-semibold text-amber-900">Editorial clarification · <time dateTime={note.issuedOn}>{formatJournalDate(note.issuedOn)}</time></p>
-                      <h4 id={`${transcript.slug}-${note.id}`} className="mt-2 font-display text-lg font-bold text-pine">{note.title}</h4>
-                      <p className="mt-3 text-sm leading-7 text-foreground/90">{note.body}</p>
-                      {note.sources.length > 0 && (
-                        <ul className="mt-3 space-y-2 text-xs leading-6">
-                          {note.sources.map((source) => (
-                            <li key={source.url}><a href={source.url} className={`font-semibold text-emerald-800 underline ${focusRing}`}>{source.label}</a></li>
-                          ))}
-                        </ul>
-                      )}
-                    </aside>
-                  ))}
-                  {transcript.editorialNotes.length > 0 && <p className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Original archived text</p>}
-                  <ArticleBody body={transcript.body} archive />
-                  <footer className="mt-7 border-t border-pine/10 pt-4 text-xs leading-6 text-muted-foreground">
-                    <p>Source: existing archive page images. Line wrapping and page furniture have been normalised for reading.</p>
-                    <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                      {transcript.imageSources.map((source) => (
-                        <a key={source.image} href={source.image} className={`font-semibold text-emerald-700 hover:underline ${focusRing}`}>
-                          Original page {source.page}
-                        </a>
-                      ))}
-                    </p>
-                  </footer>
-                </article>
+                <div className="mt-5 space-y-4 border-t border-pine/10 pt-5">
+                  <p className="text-sm leading-7 text-muted-foreground">{transcript.body.split(/\n{2,}/).find(block => !/^#/.test(block))}</p>
+                  <Link to={`/journal/${transcript.slug}`} className={`inline-flex items-center gap-2 font-semibold text-emerald-800 underline ${focusRing}`}>
+                    Read complete article and source notes <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </details>
             ))}
           </div>

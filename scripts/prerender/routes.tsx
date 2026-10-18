@@ -49,6 +49,8 @@ import { join } from 'node:path'
 import Css2026Result from '@/pages/Css2026Result'
 import { BooksPage } from '@/pages/Books'
 import VistaJournal from '@/pages/VistaJournal'
+import JournalArchiveArticle from '@/pages/JournalArchiveArticle'
+import journalTranscripts from '@/data/journalTranscripts.generated.json'
 import Vistagram from '@/pages/Vistagram'
 import VistagramArticle from '@/pages/VistagramArticle'
 import { primeVistagramIndex, primeVistagramPost } from '@/features/vistagram/api'
@@ -171,6 +173,7 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   page('/css-past-paper-analysis', () => <CssPastPaperAnalysis />),
   page('/books', () => <BooksPage />),
   page('/journal', () => <VistaJournal />),
+  ...journalTranscripts.articles.map(article => page(`/journal/${article.slug}`, () => <JournalArchiveArticle />, '/journal/:slug')),
   page('/vistagram', () => <Vistagram />),
   page('/consultation', () => <Consultation />),
   page('/study-material', () => <StudyMaterial />),

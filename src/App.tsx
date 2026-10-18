@@ -58,6 +58,7 @@ const Mistakes = lazy(() => import('./pages/Mistakes'))
 const AnswerTimer = lazy(() => import('./pages/AnswerTimer'))
 const Checklists = lazy(() => import('./pages/Checklists'))
 const BooksPage = lazy(() => import('./pages/Books').then((m) => ({ default: m.BooksPage })))
+const JournalArchiveArticle = lazy(() => import('./pages/JournalArchiveArticle'))
 const VistaJournal = lazy(() => import('./pages/VistaJournal'))
 const AccountWorkspace = lazy(() => import('./features/current-affairs/Workspace'))
 const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introduction'))
@@ -201,6 +202,12 @@ export default function App() {
         <Route path="/checklists" element={<S><Checklists /></S>} />
         <Route path="/books" element={<S><BooksPage /></S>} />
         <Route path="/journal" element={<S><VistaJournal /></S>} />
+        <Route path="/journal/opinion-ali-hassan" element={<S><JournalArchiveArticle articleSlug="opinion-ali-hassan" /></S>} />
+        <Route path="/journal/opinion-eid-eve-chaman-phatak" element={<S><JournalArchiveArticle articleSlug="opinion-eid-eve-chaman-phatak" /></S>} />
+        <Route path="/journal/opinion-machines-at-war" element={<S><JournalArchiveArticle articleSlug="opinion-machines-at-war" /></S>} />
+        <Route path="/journal/opinion-power-without-peace" element={<S><JournalArchiveArticle articleSlug="opinion-power-without-peace" /></S>} />
+        <Route path="/journal/opinion-the-next-48-hours" element={<S><JournalArchiveArticle articleSlug="opinion-the-next-48-hours" /></S>} />
+        <Route path="/journal/opinion-harassers-calculus" element={<S><JournalArchiveArticle articleSlug="opinion-harassers-calculus" /></S>} />
         <Route path="/opinions" element={<Navigate to="/journal" replace />} />
         <Route path="/account" element={<S><Account /></S>} />
         {/* The account home is the chooser; each declared account route renders
