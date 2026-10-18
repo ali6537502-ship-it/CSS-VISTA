@@ -308,7 +308,7 @@ export default function VistaJournal() {
                   <span className="mt-2 block text-xs text-muted-foreground">By {transcript.author} · <time dateTime={transcript.publishedOn}>{formatJournalDate(transcript.publishedOn)}</time> · Read text</span>
                 </summary>
                 <div className="mt-5 space-y-4 border-t border-pine/10 pt-5">
-                  <p className="text-sm leading-7 text-muted-foreground">{transcript.body.split('\n\n')[0]}</p>
+                  <p className="text-sm leading-7 text-muted-foreground">{transcript.body.split(/\n{2,}/).find(block => !/^#/.test(block))}</p>
                   <Link to={`/journal/${transcript.slug}`} className={`inline-flex items-center gap-2 font-semibold text-emerald-800 underline ${focusRing}`}>
                     Read complete article and source notes <ArrowRight className="h-4 w-4" />
                   </Link>

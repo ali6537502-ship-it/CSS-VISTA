@@ -172,9 +172,11 @@ try {
       assert.deepEqual(state.h1, [article.title], 'The article has its own exact title')
       assert.ok(rawHTML.includes(article.title.replaceAll('&', '&amp;')), 'Article title is present before JavaScript')
       const text = await copy.innerText()
-      assert.ok(text.includes(article.body.split('\n\n')[0]), 'The original opening is preserved')
+      // The existing production plugin converts em dashes to hyphens; Markdown headings render without their markers.
+      const opening = article.body.split('\n\n')[0].replace(/^#{1,3}\s+/, '').replaceAll('—', '-')
+      assert.ok(text.includes(opening), 'The original opening is preserved through production typography')
       for (const note of article.editorialNotes) {
-        assert.ok(text.includes(note.body), 'Dated clarification remains visible')
+        assert.ok(text.includes(note.body.replaceAll('—', '-')), 'Dated clarification remains visible')
         for (const source of note.sources) assert.ok(await copy.locator(`a[href="${source.url}"]`).count(), 'Existing primary source links remain usable')
       }
       assert.equal(await copy.locator('footer a').count(), article.imageSources.length, 'Every original page image remains accessible')
