@@ -6,8 +6,9 @@ import NotFound from '@/pages/NotFound'
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2'
 
-export default function JournalArchiveArticle() {
-  const { slug } = useParams()
+export default function JournalArchiveArticle({ articleSlug }: { articleSlug?: string }) {
+  const { slug: routeSlug } = useParams()
+  const slug = articleSlug ?? routeSlug
   const transcript = journalTranscripts.articles.find(article => article.slug === slug)
   if (!transcript) return <NotFound />
   return (
