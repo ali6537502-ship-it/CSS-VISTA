@@ -18,7 +18,7 @@ export default function JournalArchiveArticle({ articleSlug }: { articleSlug?: s
         <p className="text-xs font-semibold uppercase tracking-widest text-emerald-700">Journal archive · Opinion</p>
         <h1 className="mt-3 font-display text-3xl font-bold leading-tight text-pine sm:text-5xl">{transcript.title}</h1>
         <p className="mt-5 text-sm leading-7 text-muted-foreground">By {transcript.author} · <time dateTime={transcript.publishedOn}>{formatJournalDate(transcript.publishedOn)}</time> · {journalReadingMinutes(transcript.body)} min read</p>
-        <p className="mt-4 text-sm leading-7 text-muted-foreground">This text edition preserves the archived article and its printed date. Read the dated clarifications below alongside historical claims and forecasts. Original page images are linked at the end.</p>
+        <p className="mt-4 text-sm leading-7 text-muted-foreground">This text edition preserves the archived article and its printed date. Historical claims and forecasts reflect that date; any later clarifications are labelled separately. Original page images are linked at the end.</p>
       </header>
       <article className="journal-archive-copy mx-auto mt-6 max-w-3xl border-t border-pine/10 pt-6" aria-label={`${transcript.title} transcript`}>
         {transcript.editorialNotes.map((note) => (
