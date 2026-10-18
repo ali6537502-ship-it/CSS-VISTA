@@ -49,7 +49,7 @@ function summaryHtml(body) {
       return `<ul class="mt-5 space-y-3">${lines.map((line) => `<li>${escapeHtml(plainText(line))}</li>`).join('')}</ul>`
     }
     if (lines.every((line) => /^\d+\.\s+/.test(line))) {
-      return `<ol class="mt-5 list-decimal space-y-3 pl-6">${lines.map((line) => `<li>${escapeHtml(plainText(line.replace(/^\d+\.\s+/, '')))}</li>`).join('')}</ol>`
+      return `<ol class="mt-5 list-decimal space-y-3 pl-6">${lines.map((line) => `<li value="${Number(line.match(/^(\d+)\./)[1])}">${escapeHtml(plainText(line.replace(/^\d+\.\s+/, '')))}</li>`).join('')}</ol>`
     }
     return `<p class="mt-5 leading-8 text-slate-700">${escapeHtml(plainText(lines.join(' ')))}</p>`
   }).join('')

@@ -165,11 +165,15 @@ export async function loadOptionalSubject(slug: string, signal?: AbortSignal): P
 
 /** Sub-headings inside a topic, for its in-page contents list. */
 export function topicOutline(blocks: Block[]): Array<{ id: string; text: string; level: number }> {
-  return blocks
+  const headings = blocks
     .filter((block): block is Extract<Block, { kind: 'heading' }> => block.kind === 'heading')
+  // Source documents start their units at different levels. The page owns h1;
+  // start this unit at h2 and retain its relative subheading hierarchy.
+  const firstLevel = Math.min(...headings.map((block) => block.level))
+  return headings
     .map((block, index) => ({
       id: `section-${index}`,
       text: block.text,
-      level: block.level,
+      level: Math.min(6, Math.max(2, block.level - firstLevel + 2)),
     }))
 }

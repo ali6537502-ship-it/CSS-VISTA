@@ -338,7 +338,7 @@ test('the provider supplies the page state, so suppression is not inert', async 
 
 
 test('rendered loading and failures suppress public ads while account utilities remain excluded', () => {
-  for (const contentState of ['loading', 'error'] as const) {
+  for (const contentState of ['loading', 'error', 'empty'] as const) {
     const state = deriveAdPageState({ pathname: '/notes', user: null, contentState })
     assert.equal(getAdRoutePolicy('/notes', '', state).autoAdsEnabled, false)
     assert.equal(canShowAuthenticatedAccountAd('/account', '', { authenticated: true, ...state }), false)
