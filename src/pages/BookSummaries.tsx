@@ -504,7 +504,25 @@ export default function BookSummaries() {
   const activeBookIndex = activeBook ? filteredBooks.findIndex((book) => book.slug === activeBook.slug) : -1
 
   useEffect(() => {
-    if (!activeBook || !routeBookSlug) return
+    if (!routeBookSlug) return
+    if (!activeBook) {
+      const title = 'Book summary not found | CSS Vista'
+      const description = 'This book summary is not available. Browse the existing CSS Vista reading library.'
+      document.title = title
+      for (const [selector, content] of [
+        ['meta[name="robots"]', 'noindex, nofollow'],
+        ['meta[name="description"]', description],
+        ['meta[property="og:title"]', title],
+        ['meta[property="og:description"]', description],
+        ['meta[property="og:type"]', 'website'],
+        ['meta[name="twitter:title"]', title],
+        ['meta[name="twitter:description"]', description],
+      ]) document.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content)
+      document.querySelector('link[rel="canonical"]')?.remove()
+      document.querySelector('meta[property="og:url"]')?.remove()
+      document.getElementById('cssv-route-structured-data')?.remove()
+      return
+    }
     const canonical = `https://www.css-vista.com/book-summaries/${activeBook.slug}`
     const title = `${activeBook.title} by ${activeBook.author} — Book Summary | CSS Vista`
     const description = `${activeBook.title} by ${activeBook.author}: ${activeBook.excerpt}`.slice(0, 158).trim()
@@ -512,6 +530,7 @@ export default function BookSummaries() {
       ['meta[name="description"]', description],
       ['meta[name="robots"]', respectServerNoindex(`/book-summaries/${activeBook.slug}`, 'index, follow, max-image-preview:large')],
       ['meta[property="og:title"]', title],
+      ['meta[property="og:type"]', 'article'],
       ['meta[property="og:description"]', description],
       ['meta[property="og:url"]', canonical],
       ['meta[name="twitter:title"]', title],

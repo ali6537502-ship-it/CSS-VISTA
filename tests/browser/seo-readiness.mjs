@@ -22,6 +22,7 @@ const paths = [
   '/study-material/optional/business-administration/management', '/fpsc-updates',
   '/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence',
   '/book-summaries/why-nations-fail',
+  '/book-summaries/seo-audit-deliberately-missing-20261018',
   '/book-summaries/the-art-of-war', '/book-summaries/on-war', '/journal',
   ...journalTranscripts.articles.map(article => `/journal/${article.slug}`),
   '/journal/seo-audit-deliberately-missing-20261018',
@@ -142,7 +143,24 @@ try {
       assert.ok(schemaTypes(state.schemas).includes('Article'), 'Vistagram preserves article schema')
       assert.ok(await page.getByRole('heading', { name: 'What financial inclusion means', exact: true }).count(), 'Full Vistagram article body is present')
     }
-    if (path.startsWith('/book-summaries/')) {
+    if (path.startsWith('/book-summaries/') && missing) {
+      const documentIdentity = await page.evaluate(() => performance.timeOrigin)
+      await page.getByRole('link', { name: 'Open summary of Why Nations Fail', exact: true }).click()
+      await page.waitForURL(origin + '/book-summaries/why-nations-fail')
+      await page.locator('.book-summary-reading-copy').getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
+      assert.equal(await page.evaluate(() => performance.timeOrigin), documentIdentity, 'Missing-book recovery uses ordinary SPA navigation')
+      assert.deepEqual(await page.locator('link[rel="canonical"]').evaluateAll(nodes => nodes.map(node => node.href)), ['https://www.css-vista.com/book-summaries/why-nations-fail'])
+      assert.ok((await page.title()).includes('Why Nations Fail'), 'A real reader recovers its own title')
+      assert.equal(await page.locator('meta[property="og:type"]').getAttribute('content'), 'article')
+      assert.ok(!(await page.locator('meta[name="robots"]').getAttribute('content')).includes('noindex'), 'The 404 document does not noindex a real reader reached through navigation')
+      await page.goBack()
+      await page.waitForURL(origin + path)
+      await page.getByText('This book summary is not available.', { exact: false }).waitFor()
+      await page.waitForFunction(() => !document.querySelector('link[rel="canonical"]'))
+      assert.ok((await page.locator('meta[name="robots"]').getAttribute('content')).includes('noindex'))
+      assert.equal(await page.locator('#cssv-route-structured-data').count(), 0, 'Returning to a missing book removes stale article metadata')
+    }
+    if (path.startsWith('/book-summaries/') && !missing) {
       const reader = page.locator('.book-summary-reading-copy')
       await reader.getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
       const text = await reader.innerText()

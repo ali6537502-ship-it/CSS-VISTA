@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-18T14:17:22.113032+00:00",
+  "observedAt": "2026-10-18T14:32:55.981930+00:00",
   "sourceBaseline": "60a9ae7077736ea46f2be5d990003623d62f3fd4",
   "scope": "Local candidate verification before committing; this artifact fingerprint is not represented as a deployed fix. Final CI and exact deployed fingerprint belong to the implementing PR.",
   "typecheck": "passed",
@@ -8,7 +8,8 @@
   "testAll": {
     "nodeTestsPassed": 268,
     "pythonEditorialTestsPassed": 5,
-    "failures": 0
+    "failures": 0,
+    "note": "Complete suite rerun after the final missing-reader metadata change; 268 Node tests and five Python tests passed."
   },
   "strictHostingerBuild": {
     "passed": true,
@@ -28,7 +29,7 @@
   },
   "browser": {
     "passed": true,
-    "routes": 35,
+    "routes": 36,
     "bookDownloadRecovery": {
       "passed": true,
       "bodyRequests": 3,
@@ -86,6 +87,17 @@
       "preservedPendingCanonical": "https://www.css-vista.com/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks",
       "destination": "/",
       "actualSpaNavigation": true
+    },
+    "missingBook": {
+      "path": "/book-summaries/seo-audit-deliberately-missing-20261018",
+      "status": 404,
+      "canonical": [],
+      "robots": [
+        "noindex, nofollow"
+      ],
+      "adLoaders": 0,
+      "errors": [],
+      "ordinaryLinkRecoveryAndBack": "Passed actual SPA navigation assertions in tests/browser/seo-readiness.mjs."
     }
   },
   "advertisingFixture": {
@@ -114,6 +126,6 @@
     "PHP CLI is absent locally; existing Hostinger CI must run its PHP syntax gate.",
     "No Google account status, ad account configuration or approval outcome was inspected."
   ],
-  "implementationCommit": "d2498355a59ae3dfd48c8ffe2e86718cef409e5b",
-  "releaseEvidence": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/100"
+  "releaseEvidence": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/100",
+  "initialImplementationCommit": "d2498355a59ae3dfd48c8ffe2e86718cef409e5b"
 }

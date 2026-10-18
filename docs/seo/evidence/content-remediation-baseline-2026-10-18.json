@@ -1207,5 +1207,18 @@
       "url": "https://www.fpsc.gov.pk/uploads/content/1783075774884_Advance_Public_Notice_-_CSS_Competitive_Examination-2027.pdf",
       "error": "HTTP Error 503: Service Unavailable"
     }
-  ]
+  ],
+  "missingBookBeforeMetadataCleanup": {
+    "observedOn": "2026-10-18",
+    "candidateSourceCommit": "9faa2a0b17e7a6910491637a33c419c90d81cfac",
+    "note": "Supplemental probe of the initial remediation artifact, before the final missing-book metadata cleanup; not an additional unchanged-baseline build.",
+    "path": "/book-summaries/remediation-missing-20261018",
+    "status": 404,
+    "canonical": [
+      "https://www.css-vista.com/book-summaries/remediation-missing-20261018"
+    ],
+    "robots": [
+      "noindex, nofollow"
+    ]
+  }
 }
