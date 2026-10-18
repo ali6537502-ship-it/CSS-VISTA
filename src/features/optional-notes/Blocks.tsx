@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Lightbulb, BookOpen, Quote } from 'lucide-react'
-import type { Block, Segment } from '@/data/optionalNotes'
+import { topicOutline, type Block, type Segment } from '@/data/optionalNotes'
 
 function Runs({ segments }: { segments: Segment[] }) {
   return (
@@ -33,7 +33,7 @@ const CALLOUTS = {
 /**
  * The notes as their authors wrote them.
  *
- * Headings keep their level so a long unit still reads as a structured
+ * Headings keep their relative levels so a long unit still reads as a structured
  * chapter, and the authors' own takeaway/source/intro styles are rendered as
  * callouts rather than flattened into ordinary paragraphs.
  */
@@ -41,12 +41,13 @@ export function NoteBlocks({ blocks }: { blocks: Block[] }) {
   // Anchor ids are numbered by heading order, matching topicOutline(), so the
   // "On this page" links resolve. Computed up front rather than counted during
   // render, which would mutate across renders.
-  const headingIds = useMemo(() => {
-    const ids = new Map<number, string>()
+  const headings = useMemo(() => {
+    const outline = topicOutline(blocks)
+    const ids = new Map<number, (typeof outline)[number]>()
     let position = 0
     blocks.forEach((block, index) => {
       if (block.kind === 'heading') {
-        ids.set(index, `section-${position}`)
+        ids.set(index, outline[position])
         position += 1
       }
     })
@@ -58,17 +59,19 @@ export function NoteBlocks({ blocks }: { blocks: Block[] }) {
       {blocks.map((block, index) => {
         switch (block.kind) {
           case 'heading': {
+            const heading = headings.get(index)!
+            const Heading = `h${heading.level}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
             const size = block.level <= 2
               ? 'text-[17px] sm:text-[18px]'
               : block.level === 3 ? 'text-[15px]' : 'text-[14px]'
             return (
-              <h2
+              <Heading
                 key={index}
-                id={headingIds.get(index)}
+                id={heading.id}
                 className={`scroll-mt-20 pt-1 font-display font-bold leading-snug text-pine ${size}`}
               >
                 {block.text}
-              </h2>
+              </Heading>
             )
           }
           case 'para':

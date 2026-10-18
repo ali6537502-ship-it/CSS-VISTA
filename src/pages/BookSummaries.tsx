@@ -154,6 +154,8 @@ function BookReader({
   readingState,
   onReadingStateChange,
   bodyPending = false,
+  bodyError = '',
+  onRetry,
 }: {
   book: BookSummary
   categoryName: string
@@ -165,6 +167,8 @@ function BookReader({
   onReadingStateChange: (slug: string, state: BookSummaryProgress) => void
   /** The catalogue is on screen but this summary's text has not arrived yet. */
   bodyPending?: boolean
+  bodyError?: string
+  onRetry: () => void
 }) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -193,6 +197,7 @@ function BookReader({
   }, [onClose])
 
   useEffect(() => {
+    if (bodyPending) return
     const saved = getBookSummaryProgress(book.slug)
     lastSavedProgress.current = saved.progress
     const frame = window.requestAnimationFrame(() => {
@@ -218,6 +223,7 @@ function BookReader({
   }
 
   function handleReaderScroll() {
+    if (bodyPending) return
     const reader = scrollRef.current
     if (!reader) return
     const available = reader.scrollHeight - reader.clientHeight
@@ -234,6 +240,7 @@ function BookReader({
   }
 
   function markCompleted() {
+    if (bodyPending) return
     const firstCompletion = !localReadingState.completed
     persist({ completed: true, progress: 100 })
     setReadingProgress(100)
@@ -259,6 +266,7 @@ function BookReader({
   }
 
   function printSummary() {
+    if (bodyPending) return
     printPage(true, '.book-summary-print-area')
   }
 
@@ -313,11 +321,11 @@ function BookReader({
           <button type="button" onClick={toggleSaved} aria-pressed={localReadingState.saved} className={`cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold ${localReadingState.saved ? 'border-amber-300 bg-amber-50 text-amber-900' : 'text-pine hover:bg-secondary'}`}>
             {localReadingState.saved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />} {localReadingState.saved ? 'Saved' : 'Save'}
           </button>
-          <button type="button" onClick={markCompleted} disabled={localReadingState.completed} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 text-xs font-bold text-emerald-900 disabled:opacity-70">
+          <button type="button" onClick={markCompleted} disabled={bodyPending || localReadingState.completed} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 text-xs font-bold text-emerald-900 disabled:opacity-70">
             <CheckCircle2 className="h-4 w-4" /> {localReadingState.completed ? 'Completed' : 'Mark complete'}
           </button>
           {quote && <button type="button" onClick={() => void copyQuote()} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold text-pine hover:bg-secondary"><Copy className="h-4 w-4" /> {copied ? 'Copied' : 'Key quote'}</button>}
-          <button type="button" onClick={printSummary} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold text-pine hover:bg-secondary"><Printer className="h-4 w-4" /> Print</button>
+          <button type="button" onClick={printSummary} disabled={bodyPending} className="cssv-tap inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-xs font-bold text-pine hover:bg-secondary disabled:opacity-50"><Printer className="h-4 w-4" /> Print</button>
           <span className="ml-auto flex shrink-0 items-center rounded-lg border bg-white">
             <button type="button" onClick={() => changeFontSize(fontSize - 1)} disabled={fontSize === 0} className="cssv-tap grid h-9 w-9 place-items-center text-pine disabled:opacity-35" aria-label="Decrease reading text size"><Minus className="h-4 w-4" /></button>
             <span className="text-[10px] font-bold text-slate-500">Text</span>
@@ -332,7 +340,13 @@ function BookReader({
               <p className="mt-2 leading-7 text-foreground/85">{book.excerpt}</p>
             </div>
             <div className={`book-summary-reading-copy ${fontSize === 0 ? 'book-text-small' : fontSize === 2 ? 'book-text-large' : ''}`}>
-              {bodyPending ? (
+              {bodyError ? (
+                <div role="alert" className="my-6 rounded-xl border border-amber-200 bg-amber-50 p-4">
+                  <h3 className="font-semibold text-pine">The full summary could not be downloaded</h3>
+                  <p className="mt-2 text-sm leading-7">{bodyError}</p>
+                  <button type="button" onClick={onRetry} className="mt-3 min-h-10 rounded-lg bg-pine px-4 text-sm font-bold text-white">Try again</button>
+                </div>
+              ) : bodyPending ? (
                 <div className="space-y-3 py-6" role="status" aria-label="Opening the full summary">
                   {[1, 2, 3, 4, 5].map((line) => (
                     <div key={line} className="h-4 animate-pulse rounded bg-secondary" style={{ width: `${100 - line * 7}%` }} />
@@ -554,23 +568,24 @@ export default function BookSummaries() {
   }, [activeBook, routeBookSlug])
 
   return (
-    <div data-cssv-ad-state={error || (requestedBookSlug && !activeBook) ? 'error' : requestedBookSlug && !hasSummaryBodies(library) ? 'loading' : undefined}>
+    <div data-cssv-ad-state={error || (requestedBookSlug && !activeBook) ? 'error' : !library || (requestedBookSlug && !hasSummaryBodies(library)) ? 'loading' : !activeBook && !filteredBooks.length ? 'empty' : undefined}>
       <PageHeader
         title="Book Summaries"
         description="Clear, exam-focused summaries of influential books for essays, current affairs, political thought, international relations, economics, society, Pakistan and literature."
       />
 
       <main className="mx-auto max-w-7xl space-y-7 px-4 py-8">
-        {error ? (
-          <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
+        {error && !activeBook && (
+          <div role="alert" className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
             <BookOpen className="mx-auto h-8 w-8 text-amber-700" />
-            <h2 className="mt-3 font-semibold text-pine">We could not open the reading library</h2>
+            <h2 className="mt-3 font-semibold text-pine">Full summaries are temporarily unavailable</h2>
             <p className="mt-1 text-sm text-slate-600">{error}</p>
             <button type="button" onClick={() => setLoadAttempt((attempt) => attempt + 1)} className="mt-4 min-h-10 rounded-lg bg-pine px-4 text-sm font-bold text-white">
               Try again
             </button>
           </div>
-        ) : !library ? (
+        )}
+        {!library ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" aria-label="Loading book summaries">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
               <div key={item} className="h-[430px] animate-pulse rounded-xl bg-secondary" />
@@ -739,6 +754,8 @@ export default function BookSummaries() {
           readingState={readingStates[activeBook.slug] ?? getBookSummaryProgress(activeBook.slug)}
           onReadingStateChange={(slug, state) => setReadingStates((current) => ({ ...current, [slug]: state }))}
           bodyPending={!hasSummaryBodies(library)}
+          bodyError={error}
+          onRetry={() => setLoadAttempt((attempt) => attempt + 1)}
         />
       )}
     </div>

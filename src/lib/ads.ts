@@ -14,12 +14,13 @@ export interface AdRoutePolicy {
   minimumHeight: number
 }
 
-export type AdContentState = 'ready' | 'loading' | 'error'
+export type AdContentState = 'ready' | 'loading' | 'error' | 'empty'
 
 /** Explicit rendered-state markers, shared by the provider and slot guard. */
 export function renderedAdContentState(root: Pick<ParentNode, 'querySelector'>): AdContentState {
   if (root.querySelector('[data-cssv-ad-state="error"]')) return 'error'
   if (root.querySelector('[data-cssv-ad-state="loading"]')) return 'loading'
+  if (root.querySelector('[data-cssv-ad-state="empty"]')) return 'empty'
   return 'ready'
 }
 
@@ -34,6 +35,8 @@ export interface AdPageState {
   errorState?: boolean
   /** The page has nothing rendered yet. */
   loadingState?: boolean
+  /** No publisher results are available in the selected view. */
+  emptyState?: boolean
 }
 
 export interface AuthenticatedAccountAdState extends AdPageState {
@@ -50,6 +53,7 @@ export interface AuthenticatedAccountAdState extends AdPageState {
 export function isAdSuppressedState(state: AdPageState = {}): string | null {
   if (state.errorState) return 'Error or not-found state'
   if (state.loadingState) return 'Page has not rendered content yet'
+  if (state.emptyState) return 'Empty content or search results'
   if (state.authTransaction) return 'Authentication, registration, recovery or verification transaction'
   if (state.sensitiveControlsVisible) return 'Sensitive account controls are visible'
   if (state.activeAssessment) return 'Active question, timed test or result screen'
@@ -145,6 +149,7 @@ export function deriveAdPageState(input: {
   return {
     loadingState: Boolean(input.loading) || input.contentState === 'loading',
     errorState: input.contentState === 'error',
+    emptyState: input.contentState === 'empty',
     authTransaction: (route?.access === 'authenticated' && !input.user)
       || Boolean(input.passwordRecovery)
       || new URLSearchParams(input.search ?? '').get('reset') === '1',

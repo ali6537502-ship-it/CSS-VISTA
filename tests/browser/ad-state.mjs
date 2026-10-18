@@ -19,7 +19,7 @@ function Fixture() {
   const navigate = useNavigate()
   return <AdSenseProvider><div data-cssv-ad-state={state === 'ready' ? undefined : state}>
     <h1>Runtime advertising fixture</h1>
-    {['loading','error','ready'].map(s => <button key={s} onClick={() => setState(s)}>{s}</button>)}
+    {['loading','empty','error','ready'].map(s => <button key={s} onClick={() => setState(s)}>{s}</button>)}
     <button onClick={() => navigate('/account')}>Open account</button>
     <AuthenticatedAccountAd />
   </div></AdSenseProvider>
@@ -66,6 +66,9 @@ try {
     await page.getByRole('heading', { name: 'Runtime advertising fixture' }).waitFor()
     await page.waitForTimeout(1600)
     assert.equal(loaderRequests, 0, `${path}: loading view must not request loader`)
+    await page.getByRole('button', { name: 'empty', exact: true }).click()
+    await page.waitForTimeout(1600)
+    assert.equal(loaderRequests, 0, `${path}: empty view must not request loader`)
     await page.getByRole('button', { name: 'error', exact: true }).click()
     await page.waitForTimeout(1600)
     assert.equal(loaderRequests, 0, `${path}: error view must not request loader`)

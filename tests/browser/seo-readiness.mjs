@@ -9,6 +9,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { startArtifactPreview } from './artifact-preview.mjs'
 import journalTranscripts from '../../src/data/journalTranscripts.generated.json' with { type: 'json' }
+import bookLibrary from '../../public/book-summaries/index.json' with { type: 'json' }
 
 const root = new URL('../../', import.meta.url).pathname.replace(/\/$/, '')
 const docRoot = resolve(root, process.env.CSSV_SEO_ARTIFACT || 'dist')
@@ -18,6 +19,7 @@ const report = { observedAt: new Date().toISOString(), artifact: docRoot, method
 const paths = [
   '/',
   '/study-material/optional/accounting-and-auditing/paper-i-financial-accounting-50-marks',
+  '/study-material/optional/business-administration/management', '/fpsc-updates',
   '/study-material/islamic-studies/introduction-to-islam/01-concept-of-islam-submission-faith-and-excellence',
   '/book-summaries/why-nations-fail',
   '/book-summaries/the-art-of-war', '/book-summaries/on-war', '/journal',
@@ -115,6 +117,21 @@ try {
     if (path.startsWith('/study-material/optional/') && path.split('/').length > 4) {
       await page.locator('main article h2').first().waitFor()
       assert.equal(await page.locator('[data-cssv-ad-state="error"]').count(), 0, 'Actual optional notes load beyond the heading and skeleton')
+      const payload = await (await context.request.get(origin + path + '.json')).json()
+      const headings = payload.blocks.filter(block => block.kind === 'heading')
+      const firstLevel = Math.min(...headings.map(block => block.level))
+      const expected = headings.map((block, index) => ({ id: `section-${index}`, tag: `H${Math.min(6, block.level - firstLevel + 2)}` }))
+      const rendered = await page.locator('main article [id^="section-"]').evaluateAll(nodes => nodes.map(node => ({ id: node.id, tag: node.tagName })))
+      assert.deepEqual(rendered, expected, 'Note headings retain the source hierarchy below the page title')
+      const staticHeadings = await page.evaluate(html => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('article [id^="section-"]')].map(node => ({ id: node.id, tag: node.tagName })), rawHTML)
+      assert.deepEqual(staticHeadings, expected, 'Initial HTML and reader have the same note hierarchy')
+      const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
+      if (await contents.count()) {
+        const link = contents.getByRole('link').last()
+        const target = await link.getAttribute('href')
+        await link.click()
+        assert.ok(await page.locator(target).isVisible(), 'The contents link reaches the actual section')
+      }
     }
     if (['/subjects/selector', '/css-eligibility-calculator', '/grammar-course'].includes(path)) {
       assert.equal(state.adLoaders, 0, `${path}: focused learning remains ad-free`)
@@ -129,6 +146,10 @@ try {
       const reader = page.locator('.book-summary-reading-copy')
       await reader.getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
       const text = await reader.innerText()
+      const book = bookLibrary.books.find(book => path.endsWith('/' + book.slug))
+      const expectedNumbers = [...book.body.matchAll(/^(\d+)\.\s+/gm)].map(match => Number(match[1]))
+      const staticNumbers = await page.evaluate(html => [...new DOMParser().parseFromString(html, 'text/html').querySelectorAll('[aria-label="Complete book summary"] ol')].flatMap(ol => [...ol.children].map((li, index) => li.hasAttribute('value') ? li.value : ol.start + index)), rawHTML)
+      assert.deepEqual(staticNumbers, expectedNumbers, 'Initial HTML preserves every source list number, including separated items')
       record.quotationSourceLinks = await reader.locator('a[href^="https://"]').count()
       if (path.endsWith('/why-nations-fail')) {
         assert.ok(rawHTML.includes('Study-note wording (edition unverified)'), 'Unverified quotation is qualified in HTTP HTML')
@@ -239,8 +260,72 @@ try {
       record.fullLessonCharacters = (await page.locator('main').first().innerText()).length
       assert.ok(await page.getByText('What every word is doing', { exact: true }).count(), 'Guest can access authored grammar lesson')
     }
+    if (path === '/fpsc-updates') {
+      const currency = page.getByRole('complementary', { name: 'Schedule source and currency', exact: true })
+      assert.ok(await currency.isVisible(), 'The recorded check date is visible on the default notices view')
+      assert.ok((await currency.innerText()).includes('20 August 2026'), 'The existing check date is preserved, not refreshed')
+      assert.ok(rawHTML.includes('later announcements or changes may not be included'), 'Archive currency is clear before JavaScript')
+      await page.getByRole('button', { name: 'MPT Result', exact: true }).click()
+      assert.ok(await page.getByText('No notices are recorded in this category.', { exact: false }).isVisible())
+      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 1, 'An empty notice filter suppresses managed ads')
+      await page.getByRole('button', { name: 'All', exact: true }).click()
+      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 0)
+      await page.getByRole('button', { name: 'CSS 2027 Important Dates', exact: true }).click()
+      await page.getByRole('cell', { name: 'No date recorded here.', exact: true }).first().waitFor()
+      assert.ok(await page.getByRole('cell', { name: 'No date recorded here.', exact: true }).count(), 'Missing dates describe the archive rather than unverified current official status')
+      assert.equal(await page.getByText('Not officially announced yet.', { exact: true }).count(), 0)
+    }
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${path}: no mobile overflow after interaction`)
     await context.close()
+  }
+  // Exercise the real full-screen reader with an unavailable public body,
+  // then a user-triggered retry. Only an isolated guest's local progress is used.
+  {
+    const context = await browser.newContext({ viewport: { width: 320, height: 844 }, reducedMotion: 'reduce' })
+    let failDownload = true, bodyRequests = 0
+    await context.route('**/*', route => {
+      const request = route.request(), url = new URL(request.url())
+      if (request.method() !== 'GET' || url.origin !== origin || url.pathname.startsWith('/api/')) return route.abort('blockedbyclient')
+      if (url.pathname === '/book-summaries/index.json') {
+        bodyRequests++
+        if (failDownload) return route.fulfill({ status: 503, contentType: 'application/json', body: '{}' })
+      }
+      return route.continue()
+    })
+    try {
+      const page = await context.newPage()
+      await page.goto(origin + '/book-summaries/why-nations-fail', { waitUntil: 'networkidle' })
+      const dialog = page.locator('.book-summary-backdrop')
+      await dialog.getByRole('alert').waitFor()
+      assert.equal(await dialog.getByRole('status', { name: 'Opening the full summary', exact: true }).count(), 0, 'A failed body does not remain a loading skeleton')
+      assert.ok(await dialog.getByRole('button', { name: 'Mark complete', exact: true }).isDisabled())
+      assert.ok(await dialog.getByRole('button', { name: 'Print', exact: true }).isDisabled(), 'An incomplete summary cannot be printed as a complete one')
+      await dialog.locator('.book-summary-scroll-area').evaluate(node => node.dispatchEvent(new Event('scroll')))
+      const progress = await page.evaluate(() => JSON.parse(localStorage.getItem('cssvista:progress:v1') || '{}').bookSummaries?.['why-nations-fail'])
+      assert.equal(progress?.progress ?? 0, 0, 'Scrolling a placeholder must not record reading progress')
+      assert.equal(progress?.completed ?? false, false)
+      const settledRequests = bodyRequests
+      await page.waitForTimeout(400)
+      assert.equal(bodyRequests, settledRequests, 'Failure does not retry without user action')
+      failDownload = false
+      await dialog.getByRole('button', { name: 'Try again', exact: true }).click()
+      await dialog.locator('.book-summary-reading-copy').getByRole('region', { name: 'Sources and quotation notes' }).waitFor()
+      assert.ok((await dialog.locator('.book-summary-reading-copy').innerText()).includes('The authors argue that the main difference lies in institutions'))
+      assert.equal(await dialog.getByRole('alert').count(), 0)
+      assert.ok(await dialog.getByRole('button', { name: 'Print', exact: true }).isEnabled())
+      assert.ok(await dialog.getByRole('button', { name: 'Mark complete', exact: true }).isEnabled())
+      assert.ok(bodyRequests > settledRequests, 'Retry downloads the actual body')
+      await dialog.getByRole('button', { name: 'Mark complete', exact: true }).click()
+      assert.ok(await dialog.getByRole('button', { name: 'Completed', exact: true }).isDisabled(), 'Completion remains available after a successful download')
+      await page.goto(origin + '/book-summaries?search=reader-fixture-no-such-book-20261018', { waitUntil: 'networkidle' })
+      await page.getByRole('heading', { name: 'No summaries match this search', exact: true }).waitFor()
+      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 1)
+      await page.getByRole('textbox', { name: 'Search book summaries', exact: true }).fill('')
+      await page.getByRole('link', { name: 'Open summary of Why Nations Fail', exact: true }).waitFor()
+      assert.equal(await page.locator('[data-cssv-ad-state="empty"]').count(), 0, 'Normal results clear the empty state')
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, 'Reader and empty results fit 320px')
+      report.bookDownloadRecovery = { passed: true, bodyRequests, retryInsideReader: true, incompleteProgressProtected: true, completedAfterRetry: true, emptyResultsMarked: true }
+    } finally { await context.close() }
   }
   // A failed notes request must settle on its error screen, rather than
   // automatically retrying and moving adjacent-topic links on every render.
