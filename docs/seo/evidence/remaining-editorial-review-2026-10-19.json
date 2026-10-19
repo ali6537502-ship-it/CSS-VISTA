@@ -4,7 +4,7 @@
   "inspectedCommit": "988136d2b892965760c3fbea81c423054cc6a04f",
   "scope": "Bounded continuation of unresolved quotation research. No source bodies, permissions, private material or product state changed.",
   "ledgerBeforeSha256": "074e5d973f231754ca39fecc29d024211cc296bf68aa80a7d3c5140ec579b0c7",
-  "ledgerAfterSha256": "5663f0ad0366764421bb8aaf28d8bc2e541c4184f1e99171287a48926318fcf7",
+  "ledgerAfterSha256": "17aabc6c6ab3f5812f8bfe709a44fd78f34177abd65c941e09d2530b23711950",
   "acceptedChanges": [
     {
       "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
@@ -48,7 +48,7 @@
         "url": "https://www.economics.utoronto.ca/munro5/StiglitzInequalityJun2012.pdf",
         "title": "The Price of Inequality — Joseph Stiglitz, university-hosted book excerpt",
         "locator": "Six-page excerpt dated 11 June 2012; So much at stake, physical PDF page 2, paragraph beginning change is possible.",
-        "note": "The opening page explicitly identifies this as a reprint from the named book with publisher permission for that reprint. The existing quotation extracts the clause after the colon, capitalizes The and changes its terminal punctuation; surrounding explanation is commentary. The excerpt was directly read through public web PDF text and its page image. Direct command-line HTTP was blocked, so no response hash or command-line 200 is claimed. The reprint notice does not grant CSS Vista permission.",
+        "note": "The opening page explicitly identifies this as a reprint from the named book with publisher permission for that reprint. The existing quotation extracts the clause after the colon, capitalizes The; surrounding explanation is commentary. The excerpt was directly read through public web PDF text and its page image. Direct command-line HTTP was blocked, so no response hash or command-line 200 is claimed. The reprint notice does not grant CSS Vista permission.",
         "shortEvidence": "the power of markets is enormous",
         "evidence_status": "verified_quotation",
         "source_scope": "book_excerpt",
