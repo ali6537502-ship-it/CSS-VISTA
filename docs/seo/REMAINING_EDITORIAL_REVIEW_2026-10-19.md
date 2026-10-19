@@ -42,6 +42,6 @@ The 44-route browser check passed, covering initial HTML and React citation/labe
 
 One earlier test invocation ran concurrently with build regeneration and read an unfinished artifact: its `/gk` loader assertion failed and Vistagram artifact coverage skipped. The final build and complete tests were run sequentially and passed without weakening either assertion. A later newly located Why Nations Fail passage justified rebuilding the final source snapshot. Existing Vite import-attribute/chunk notices were not suppressed.
 
-PHP CLI is absent locally; the existing CI supplies its PHP syntax/backend gates and both Hostinger install variants. The PR records final CI and any deployment fingerprint / bounded public checks. A failed research HTTP request is an evidence-access limit, not a passing factual check.
+Implementation commit: `ef11945`. PHP CLI is absent locally; the existing CI supplies its PHP syntax/backend gates and both Hostinger install variants. [PR #101](https://github.com/ali6537502-ship-it/CSS-VISTA/pull/101) records final CI and the actual deployment fingerprint / bounded public checks when available. Deployment is not inferred from the local pre-commit artifact. A failed research HTTP request is an evidence-access limit, not a passing factual check.
 
 No author body, original image/DOCX, account, credential, payment, access gate or protected product setting is modified. Source qualification improves what readers can trace and cite; it cannot establish Google approval, ownership or audience value.
