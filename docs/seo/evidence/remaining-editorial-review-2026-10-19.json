@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-19",
+  "inspectedCommit": "988136d2b892965760c3fbea81c423054cc6a04f",
+  "scope": "Bounded continuation of unresolved quotation research. No source bodies, permissions, private material or product state changed.",
+  "ledgerBeforeSha256": "074e5d973f231754ca39fecc29d024211cc296bf68aa80a7d3c5140ec579b0c7",
+  "ledgerAfterSha256": "bb53b409b2f4f1c3642c4d205b2abd66a8e55759f1ebca443eb12b709aad718f",
+  "acceptedChanges": [
+    {
+      "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://apps.usos.uj.edu.pl/apps/f/LBNqUCMn/Huntington_Clash%20of%20Civilisations%20-%20excerpt%20%281%29.pdf",
+        "title": "The Clash of Civilizations and the Remaking of World Order — Samuel P. Huntington, university-hosted chapter scan",
+        "locator": "Chapter 2, Civilizations in History and Today, printed p. 54 (physical PDF page 15), final paragraph; sentence continues on printed p. 55.",
+        "note": "The existing quotation is the first clause of a longer sentence in the scanned chapter. It stops before the continuation about writing history, so it is an excerpt rather than a complete sentence. The scan has the matching book title in running heads and chapter title; its title/copyright leaves are not included, so no specific edition or ISBN is asserted. This does not establish reproduction permission.",
+        "shortEvidence": "Every civilization sees itself as the center",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "68223757639047cf748034af7fa5e7a33c4454aa938f3a09495c2b730d953631"
+      }
+    },
+    {
+      "slug": "capitalism-and-freedom",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://wisc.pb.unizin.org/ps361spring2021/chapter/milton-friedman-capitalism-and-freedom/",
+        "title": "Capitalism and Freedom — Milton Friedman, University of Wisconsin course excerpt",
+        "locator": "PS 361: Contemporary American Political Thought, chapter 42, selection labelled 1962; paragraph beginning Economic arrangements play a dual role.",
+        "note": "The university selection explicitly names Capitalism and Freedom and 1962. The existing quotation extracts the final clause of a longer sentence, beginning with lowercase economic in the source; the study note capitalizes it. Vassar carries a matching selection but was not used alone to identify the named book. No printed page or unshown edition has been invented. Passage verification does not verify the surrounding analysis or rights.",
+        "shortEvidence": "economic freedom is also an indispensable means",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "46965693eec7844d4b6422e9391e8a8b55eb480b0453ae92d9f87716bb7d4bc1"
+      }
+    },
+    {
+      "slug": "the-price-of-inequality",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://www.economics.utoronto.ca/munro5/StiglitzInequalityJun2012.pdf",
+        "title": "The Price of Inequality — Joseph Stiglitz, university-hosted book excerpt",
+        "locator": "Six-page excerpt dated 11 June 2012; So much at stake, physical PDF page 2, paragraph beginning change is possible.",
+        "note": "The opening page explicitly identifies this as a reprint from the named book with publisher permission for that reprint. The existing quotation extracts the clause after the colon, capitalizes The and changes its terminal punctuation; surrounding explanation is commentary. The excerpt was directly read through public web PDF text and its page image. Direct command-line HTTP was blocked, so no response hash or command-line 200 is claimed. The reprint notice does not grant CSS Vista permission.",
+        "shortEvidence": "the power of markets is enormous",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "verificationMethod": "public_web_pdf_text_and_page_image"
+      }
+    },
+    {
+      "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://energytoday.energysociety.org/the-prize.html",
+        "title": "The Prize — Daniel Yergin, prologue excerpts at American Energy Society",
+        "locator": "Energy Today selection explicitly labelled excerpts from the 1991 and 2011 prologues; paragraph immediately after Mastery itself was the prize of the venture.",
+        "note": "The existing quotation extracts a contiguous phrase from a longer sentence, omitting the opening For and closing since, and capitalizing Oil. This is an excerpt, not an exact complete sentence. The page identifies the author and the prologue sources, but does not assign the individual paragraph to one edition; no printed page or specific edition is invented. This does not establish CSS Vista reproduction rights.",
+        "shortEvidence": "oil has meant mastery through the years",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "7b4ce73165eaad4222cac06172de17353dc1bf3ea93f075d48212512372ea268"
+      }
+    },
+    {
+      "slug": "invisible-women",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://www.porchlightbooks.com/blogs/excerpts/invisible-women-data-bias-in-a-world-designed-for-men",
+        "title": "Invisible Women — Caroline Criado Perez, Abrams Press excerpt at Porchlight",
+        "locator": "26 March 2019 book excerpt, final substantive paragraph beginning I will argue that it is not; credited to Abrams Press, copyright 2019.",
+        "note": "Only the short words inside quotation marks in the existing study note are being verified; its surrounding explanation is commentary. The directly read page identifies the book, author, publisher and excerpt copyright. The phrase is embedded in the longer original sentence. Linking this excerpt is not a licence for the summary or cover.",
+        "shortEvidence": "both a cause and a consequence",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "9b8d7cb339df4719da11a95ff71c6070afe0d18be64bf37439fed3ab7445d7bc"
+      }
+    },
+    {
+      "slug": "manufacturing-consent",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://penguinrandomhousehighereducation.com/book/?isbn=9780375714498",
+        "title": "Manufacturing Consent — Edward S. Herman and Noam Chomsky, Penguin Random House excerpt",
+        "locator": "Introduction, publisher excerpt for ISBN 9780375714498; paragraph beginning The beauty of the system; excerpt copyright 2002.",
+        "note": "The existing words are a clause inside a longer sentence, with initial capitalization and an ending full stop in the study note. The publisher exposes the original introduction, not merely a review or catalog description. Keep the excerpt label and surrounding commentary separate. The publisher reserves reproduction rights; this review does not establish CSS Vista permission.",
+        "shortEvidence": "dissent and inconvenient information are kept within bounds",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "1dd551bac116730bdf835351dc9c91b74e33e461b4e3d244b36bb532d3a88901"
+      }
+    },
+    {
+      "slug": "why-nations-fail",
+      "before": "unverified",
+      "after": "verified_exact",
+      "source": {
+        "url": "https://vle.pce.edu.bt/pluginfile.php/32283/mod_page/content/6/Why-Nations-Fail-Daron-Acemoglu.pdf",
+        "title": "Why Nations Fail — Daron Acemoglu and James A. Robinson, institutional-hosted original ebook",
+        "locator": "Crown Publishers, copyright 2012, first-edition catalog record, eISBN 9780307719232; chapter 13, Why Nations Fail Today, opening section How to Win the Lottery in Zimbabwe, physical PDF page 409. Copyright leaf: physical PDF page 8.",
+        "note": "The existing complete sentence matches the original ebook text after normalizing line breaks. The title/author, Crown imprint, copyright, first-edition catalog identification and eISBN were read in the actual document. PDF page 409 is an electronic file locator, not an invented printed page. The publicly accessible institutional copy was read only for verification; no full book was committed or republished, and its accessibility does not establish CSS Vista reproduction rights.",
+        "shortEvidence": "The most common reason why nations fail today",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_original",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "0eded97a297014ade9aa1959abed3c62314537a45fbae7f50e8a2edb55726c1c"
+      }
+    }
+  ],
+  "relatedPrimarySourcesWithoutBookPromotion": [
+    {
+      "slug": "good-economics-for-hard-times",
+      "status": "unverified",
+      "source": {
+        "url": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+        "title": "Can Economics Save the World? — Becker Friedman Institute event transcript",
+        "locator": "Physical PDF page 4: Banerjee introduces a reading from his new book and uses the existing short phrase inside a longer spoken sentence. Unedited event transcript, not a printed book edition.",
+        "note": "The author explicitly introduces a reading, corroborating attribution. Under the existing ledger rule that speeches do not establish a printed named-book passage, this remains unverified for a book edition. No printed page or excerpt certification is inferred.",
+        "evidence_status": "related_source_wording_verified_book_unverified",
+        "source_scope": "related_primary_source",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "f55e3e7ad6130031d14bb773269bbfbb0f20076173dd800b568fdccc0b70f0d7"
+      }
+    },
+    {
+      "slug": "doughnut-economics",
+      "status": "unverified",
+      "source": {
+        "url": "https://www.kateraworth.com/doughnut/",
+        "title": "What on Earth is the Doughnut? — Kate Raworth",
+        "locator": "Author website, paragraph immediately after the description of the environmental ceiling and social foundation; related web explanation, not a book edition.",
+        "note": "The existing sentence matches the directly read author explanation. This verifies wording on that web page only; it does not establish a book edition or printed locator.",
+        "evidence_status": "related_source_wording_verified_book_unverified",
+        "source_scope": "related_primary_source",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "4851b7afaedf3af7b06b6a336c3c40de344a7457332fe6fde7bd5d31248105b8"
+      }
+    }
+  ],
+  "publicRequests": [
+    {
+      "key": "narrow",
+      "url": "https://projects.iq.harvard.edu/files/peif/files/chapters_1_and_2.pdf",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "piketty",
+      "url": "https://piketty.pse.ens.fr/files/Piketty2014Capital21c.pdf",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "friedman",
+      "url": "https://wisc.pb.unizin.org/ps361spring2021/chapter/milton-friedman-capitalism-and-freedom/",
+      "httpStatus": 200,
+      "finalUrl": "https://wisc.pb.unizin.org/ps361spring2021/chapter/milton-friedman-capitalism-and-freedom/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 104689,
+      "responseSha256": "46965693eec7844d4b6422e9391e8a8b55eb480b0453ae92d9f87716bb7d4bc1"
+    },
+    {
+      "key": "chomsky",
+      "url": "https://chomsky.info/consent01/",
+      "httpStatus": 200,
+      "finalUrl": "https://chomsky.info/consent01/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 95085,
+      "responseSha256": "63ccce39053ada6980fde37f76517eafdd0a94d2c78e77c973739766f124c021"
+    },
+    {
+      "key": "good-economics",
+      "url": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+      "contentType": "application/pdf",
+      "bytes": 328670,
+      "responseSha256": "f55e3e7ad6130031d14bb773269bbfbb0f20076173dd800b568fdccc0b70f0d7"
+    },
+    {
+      "key": "stiglitz",
+      "url": "https://www.economics.utoronto.ca/munro5/StiglitzInequalityJun2012.pdf",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "key": "polanyi",
+      "url": "https://www.beacon.org/The-Great-Transformation-P46.aspx",
+      "httpStatus": 200,
+      "finalUrl": "https://www.beacon.org/The-Great-Transformation-P46.aspx",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 78296,
+      "responseSha256": "311a900ab67d05f69a65e4cdc07681ad8f03dbaadfe829cc5230d1fa14685808"
+    },
+    {
+      "key": "vassar-friedman",
+      "url": "https://facultysites.vassar.edu/kennett/Friedman.htm",
+      "httpStatus": 200,
+      "finalUrl": "https://facultysites.vassar.edu/kennett/Friedman.htm",
+      "contentType": "text/html",
+      "bytes": 23130,
+      "responseSha256": "bdf217041b747904350a90de709ffd50694badb867a9e52bc58941cb7e954650"
+    },
+    {
+      "key": "energy-prize",
+      "url": "https://energytoday.energysociety.org/the-prize.html",
+      "httpStatus": 200,
+      "finalUrl": "https://energytoday.energysociety.org/the-prize.html",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 52707,
+      "responseSha256": "7b4ce73165eaad4222cac06172de17353dc1bf3ea93f075d48212512372ea268"
+    },
+    {
+      "key": "huntington",
+      "url": "https://apps.usos.uj.edu.pl/apps/f/LBNqUCMn/Huntington_Clash%20of%20Civilisations%20-%20excerpt%20%281%29.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://apps.usos.uj.edu.pl/apps/f/LBNqUCMn/Huntington_Clash%20of%20Civilisations%20-%20excerpt%20%281%29.pdf",
+      "contentType": "application/pdf",
+      "bytes": 297214,
+      "responseSha256": "68223757639047cf748034af7fa5e7a33c4454aa938f3a09495c2b730d953631"
+    },
+    {
+      "key": "factfulness",
+      "url": "https://www.gapminder.org/factfulness/single/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.gapminder.org/factfulness/single/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 55492,
+      "responseSha256": "d387ff2953b4e404b2be304578e0c1d058c2127c9b6d70df75dfd44fc4c16074"
+    },
+    {
+      "key": "doughnut",
+      "url": "https://www.kateraworth.com/doughnut/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.kateraworth.com/doughnut/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 45756,
+      "responseSha256": "4851b7afaedf3af7b06b6a336c3c40de344a7457332fe6fde7bd5d31248105b8"
+    },
+    {
+      "key": "manufacturing",
+      "url": "https://penguinrandomhousehighereducation.com/book/?isbn=9780375714498",
+      "httpStatus": 200,
+      "finalUrl": "https://penguinrandomhousehighereducation.com/book/?isbn=9780375714498",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 219479,
+      "responseSha256": "1dd551bac116730bdf835351dc9c91b74e33e461b4e3d244b36bb532d3a88901"
+    },
+    {
+      "key": "invisible",
+      "url": "https://www.porchlightbooks.com/blogs/excerpts/invisible-women-data-bias-in-a-world-designed-for-men",
+      "httpStatus": 200,
+      "finalUrl": "https://www.porchlightbooks.com/blogs/excerpts/invisible-women-data-bias-in-a-world-designed-for-men",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 276887,
+      "responseSha256": "9b8d7cb339df4719da11a95ff71c6070afe0d18be64bf37439fed3ab7445d7bc"
+    },
+    {
+      "key": "prize",
+      "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+      "httpStatus": 200,
+      "finalUrl": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
+      "contentType": "text/html",
+      "bytes": 326863,
+      "responseSha256": "d4c211e85cc35a563a14d26ddeb7a591b9c6b3b0936ae038874492e55cbf0455"
+    },
+    {
+      "key": "why-nations",
+      "url": "https://vle.pce.edu.bt/pluginfile.php/32283/mod_page/content/6/Why-Nations-Fail-Daron-Acemoglu.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://vle.pce.edu.bt/pluginfile.php/32283/mod_page/content/6/Why-Nations-Fail-Daron-Acemoglu.pdf",
+      "contentType": "application/pdf",
+      "bytes": 6122982,
+      "responseSha256": "0eded97a297014ade9aa1959abed3c62314537a45fbae7f50e8a2edb55726c1c"
+    }
+  ],
+  "remainingUnverified": [
+    {
+      "slug": "the-narrow-corridor",
+      "url": "https://www.css-vista.com/book-summaries/the-narrow-corridor",
+      "quotation": "“Liberty needs the state and the laws. But it is not given by the state or the elites controlling it.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "sapiens-a-brief-history-of-humankind",
+      "url": "https://www.css-vista.com/book-summaries/sapiens-a-brief-history-of-humankind",
+      "quotation": "“Money is the most universal and most efficient system of mutual trust ever devised.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "url": "https://www.css-vista.com/book-summaries/guns-germs-and-steel",
+      "quotation": "“History followed different courses for different peoples because of differences among peoples’ environments, not because of biological differences among peoples themselves.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-lessons-of-history",
+      "url": "https://www.css-vista.com/book-summaries/the-lessons-of-history",
+      "quotation": "“So the first biological lesson of history is that life is competition.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "a-short-history-of-nearly-everything",
+      "url": "https://www.css-vista.com/book-summaries/a-short-history-of-nearly-everything",
+      "quotation": "“If this book has a lesson, it is that we are awfully lucky to be here.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "factfulness",
+      "url": "https://www.css-vista.com/book-summaries/factfulness",
+      "quotation": "“The world cannot be understood without numbers. And it cannot be understood with numbers alone.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "thinking-fast-and-slow",
+      "url": "https://www.css-vista.com/book-summaries/thinking-fast-and-slow",
+      "quotation": "“Nothing in life is as important as you think it is while you are thinking about it.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "url": "https://www.css-vista.com/book-summaries/capital-in-the-twenty-first-century",
+      "quotation": "“When the rate of return on capital exceeds the rate of growth of output and income…”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "prisoners-of-geography",
+      "url": "https://www.css-vista.com/book-summaries/prisoners-of-geography",
+      "quotation": "“All leaders are constrained by geography.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-revenge-of-geography",
+      "url": "https://www.css-vista.com/book-summaries/the-revenge-of-geography",
+      "quotation": "“Geography is the backdrop to human history itself.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-silk-roads",
+      "url": "https://www.css-vista.com/book-summaries/the-silk-roads",
+      "quotation": "“They were-and still are-the world’s central nervous system.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-sixth-extinction",
+      "url": "https://www.css-vista.com/book-summaries/the-sixth-extinction",
+      "quotation": "“In pushing other species to extinction, humanity is busy sawing off the limb on which it perches.” - Paul Ehrlich, quoted in the book.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "url": "https://www.css-vista.com/book-summaries/the-origins-of-totalitarianism",
+      "quotation": "Totalitarianism grows among people for whom “the distinction between fact and fiction … and true and false … no longer exist.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "url": "https://www.css-vista.com/book-summaries/justice-what-s-the-right-thing-to-do",
+      "quotation": "For Sandel, justice involves “cultivating virtue and reasoning about the common good.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-dictator-s-handbook",
+      "url": "https://www.css-vista.com/book-summaries/the-dictator-s-handbook",
+      "quotation": "“Coming to office and staying in office are the most important things in politics.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "world-order",
+      "url": "https://www.css-vista.com/book-summaries/world-order",
+      "quotation": "“Order always requires a subtle balance of restraint, force, and legitimacy.” The line means that order needs power, but power must be limited by restraint and accepted as lawful or reasonable.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "url": "https://www.css-vista.com/book-summaries/the-tragedy-of-great-power-politics",
+      "quotation": "“The sad fact is that international politics has always been a ruthless and dangerous business.” It summarizes Mearsheimer’s belief that insecurity and power competition are permanent features of international politics.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-rise-and-fall-of-the-great-powers",
+      "url": "https://www.css-vista.com/book-summaries/the-rise-and-fall-of-the-great-powers",
+      "quotation": "“The beginning of wisdom in human as well as international affairs was knowing when to stop.” It means that leaders must recognize the limits of ambition before expansion destroys the foundations of national power.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "url": "https://www.css-vista.com/book-summaries/the-end-of-history-and-the-last-man",
+      "quotation": "Liberal democracy is presented as “the end-point of mankind’s ideological evolution.” The phrase means that Fukuyama considered it the strongest surviving claim to universal political legitimacy, not the end of everyday historical events.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "url": "https://www.css-vista.com/book-summaries/the-grand-chessboard",
+      "quotation": "“Without Ukraine, Russia ceases to be a Eurasian empire.” The line shows why Brzezinski considers Ukrainian sovereignty important to the balance of power between Russia and the rest of Europe.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-twenty-years-crisis-1919-1939",
+      "url": "https://www.css-vista.com/book-summaries/the-twenty-years-crisis-1919-1939",
+      "quotation": "“Mature thought combines purpose with observation and analysis.” It means that wise political thinking needs moral goals but must also examine facts, power and practical circumstances.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-anarchical-society",
+      "url": "https://www.css-vista.com/book-summaries/the-anarchical-society",
+      "quotation": "“It is better to recognise that we are in darkness than to pretend that we can see the light.” The statement encourages intellectual honesty when the future of world order remains uncertain.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "url": "https://www.css-vista.com/book-summaries/the-strategy-of-conflict",
+      "quotation": "“Rationality is a collection of attributes.” The line reminds readers that people and governments may be rational in some respects but mistaken, emotional or inconsistent in others.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-guns-of-august",
+      "url": "https://www.css-vista.com/book-summaries/the-guns-of-august",
+      "quotation": "“The impetus of existing plans is always stronger than the impulse to change.” The line means that leaders often continue with an established plan even when new circumstances require reconsideration.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "url": "https://www.css-vista.com/book-summaries/postwar-a-history-of-europe-since-1945",
+      "quotation": "Post-war cooperative Europe “was the insecure child of anxiety.” Judt means that European unity developed partly from fear of repeating the continent’s earlier catastrophes.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "url": "https://www.css-vista.com/book-summaries/the-cold-war-a-world-history",
+      "quotation": "“The end of the Cold War opened up new possibilities for people everywhere.” The line recognizes that the collapse of the bipolar order created opportunities, although it did not automatically produce peace or justice.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-great-transformation",
+      "url": "https://www.css-vista.com/book-summaries/the-great-transformation",
+      "quotation": "“To allow the market mechanism to be sole director … would result in the demolition of society.” Polanyi warns against allowing economic calculation to govern all human and environmental concerns.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "poor-economics",
+      "url": "https://www.css-vista.com/book-summaries/poor-economics",
+      "quotation": "“They have to be sophisticated economists just to survive.” The authors mean that poor families constantly make complicated decisions while possessing very little room for error.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "good-economics-for-hard-times",
+      "url": "https://www.css-vista.com/book-summaries/good-economics-for-hard-times",
+      "quotation": "“We wrote this book to hold on to hope.” The line expresses the authors’ belief that intelligent and humane public policy can still solve difficult economic problems.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-bottom-billion",
+      "url": "https://www.css-vista.com/book-summaries/the-bottom-billion",
+      "quotation": "“The societies of the bottom billion can only be rescued from within.” Collier means that outside help cannot replace responsible domestic leadership and institutional reform.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "url": "https://www.css-vista.com/book-summaries/the-ascent-of-money",
+      "quotation": "“The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "url": "https://www.css-vista.com/book-summaries/the-future-of-capitalism",
+      "quotation": "“As we recognize new obligations to others, we build societies better able to flourish.” Collier presents mutual responsibility as the foundation of social and economic renewal.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "doughnut-economics",
+      "url": "https://www.css-vista.com/book-summaries/doughnut-economics",
+      "quotation": "“Between social and planetary boundaries lies an environmentally safe and socially just space in which humanity can thrive.” This sentence summarises the entire doughnut model.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "url": "https://www.css-vista.com/book-summaries/the-entrepreneurial-state",
+      "quotation": "Countries should “do as the United States actually did, not as they say they did.” Mazzucato means that America’s success involved active public investment, despite its free-market language.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "nudge",
+      "url": "https://www.css-vista.com/book-summaries/nudge",
+      "quotation": "“A nudge…alters people’s behavior in a predictable way without forbidding any options.” It means that a true nudge influences but does not compel.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "behave",
+      "url": "https://www.css-vista.com/book-summaries/behave",
+      "quotation": "“Anyone who says that our worst behaviors are inevitable knows too little about primates, including us.” The line rejects the belief that violence is unavoidable.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "bowling-alone",
+      "url": "https://www.css-vista.com/book-summaries/bowling-alone",
+      "quotation": "“Social capital may turn out to be a prerequisite for…effective computer-mediated communication.” Online networks work better when some trust already exists.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-second-sex",
+      "url": "https://www.css-vista.com/book-summaries/the-second-sex",
+      "quotation": "“One is not born, but rather becomes, a woman.” It means that femininity is largely formed through social conditioning.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "orientalism",
+      "url": "https://www.css-vista.com/book-summaries/orientalism",
+      "quotation": "Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "url": "https://www.css-vista.com/book-summaries/the-wretched-of-the-earth",
+      "quotation": "The colonized person “discovers that his life, his breath, his beating heart are the same as those of the settler.” Liberation restores human equality.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "url": "https://www.css-vista.com/book-summaries/amusing-ourselves-to-death",
+      "quotation": "“People will come to adore the technologies that undo their capacities to think.” The greatest danger may be willingly accepting distraction.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-shallows",
+      "url": "https://www.css-vista.com/book-summaries/the-shallows",
+      "quotation": "“The Net…is chipping away my capacity for concentration and contemplation.” Carr fears losing the ability to think slowly and deeply.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "url": "https://www.css-vista.com/book-summaries/the-struggle-for-pakistan",
+      "quotation": "**“Pakistan is a visibly perturbed and divided nation.”** The line captures Jalal’s concern with a country whose people possess a national identity but remain divided over power, history and the meaning of the state.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-great-partition",
+      "url": "https://www.css-vista.com/book-summaries/the-great-partition",
+      "quotation": "**“Partition stands testament to the follies of empire.”** Khan’s line reminds readers that the end of colonial rule was accompanied by hurried decisions that ruptured communities and encouraged violent state formation.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-plague",
+      "url": "https://www.css-vista.com/book-summaries/the-plague",
+      "quotation": "“The only means of fighting a plague is-common decency.” The statement means that extraordinary crises are often resisted through ordinary honesty, responsibility and concern for others.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "url": "https://www.css-vista.com/book-summaries/to-kill-a-mockingbird",
+      "quotation": "“You never really understand a person until you consider things from his point of view.” It teaches that empathy requires looking beyond one’s assumptions and trying to understand another person’s circumstances.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "url": "https://www.css-vista.com/book-summaries/the-handmaid-s-tale",
+      "quotation": "“Nolite te bastardes carborundorum.” It is deliberately invented or mock Latin, roughly meaning, “Don’t let the bastards grind you down,” and becomes a private message of resistance and survival.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "url": "https://www.css-vista.com/book-summaries/the-reluctant-fundamentalist",
+      "quotation": "“I was not certain where I belonged-in New York, in Lahore, in both, in neither.” The line expresses the confusion of migrants who remain emotionally connected to more than one society but feel fully accepted by none.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "man-s-search-for-meaning",
+      "url": "https://www.css-vista.com/book-summaries/man-s-search-for-meaning",
+      "quotation": "“The last of the human freedoms-to choose one’s attitude in any given set of circumstances.” The line means that circumstances may severely restrict a person, but the struggle to preserve moral choice and inner dignity remains important.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    },
+    {
+      "slug": "long-walk-to-freedom",
+      "url": "https://www.css-vista.com/book-summaries/long-walk-to-freedom",
+      "quotation": "“No one is born hating another person because of the colour of his skin, or his background, or his religion.” The line teaches that hatred is learned through society and can therefore be challenged through education, empathy and moral leadership.",
+      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
+    }
+  ],
+  "limits": [
+    "No new full external book, image or PDF was committed or republished. Public source accessibility is not CSS Vista permission.",
+    "Fifty quotations remain unverified. This pass does not claim to have inspected complete editions for all of them.",
+    "The University of Toronto PDF was read using public web text and page-image retrieval; command-line access was blocked."
+  ],
+  "ownerProviderStatement": "../editorial/OWNER_PROVENANCE_2026-10-19.md",
+  "researchLimits": [
+    {
+      "source": "https://www.overdrive.com/media/4608316/sample?slug=good-economics-for-hard-times",
+      "observation": "Public sample navigation reached a 403 suspicious-behavior block in Chromium. No authenticated access or bypass attempted; no book text accepted."
+    },
+    {
+      "source": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/good-economics-for-hard-times/9781610399500/",
+      "observation": "Requested record redirected to the publisher homepage, not a book excerpt. No quotation evidence accepted."
+    }
+  ],
+  "preservation": {
+    "bookCount": 100,
+    "sourceQuotationWordsUnchanged": true,
+    "originalLibrarySha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e",
+    "identityAndRightsStatesUnchanged": true,
+    "quotationStatusesChanged": 7
+  },
+  "localValidation": {
+    "observedAt": "2026-10-19T04:04:28.210503+00:00",
+    "typecheck": "passed",
+    "lint": "passed",
+    "strictHostingerBuild": "passed",
+    "nodeTests": 270,
+    "pythonTests": 5,
+    "nodeFailures": 0,
+    "nodeSkipped": 0,
+    "editorialAudit": "passed",
+    "browserRoutes": 44,
+    "browserResult": "passed",
+    "sitemapUrls": 1025,
+    "sitemapFiles": 5,
+    "internalLinks": 61746,
+    "missingPageProbes": 6,
+    "initialConcurrentArtifactTest": "/gk loader assertion failed while build regenerated dist; sequential final suite passed unchanged assertions.",
+    "php": "CLI absent locally; existing CI required.",
+    "deployment": "Not inferred from uncommitted local build fingerprint; exact release evidence will be linked from the PR.",
+    "managedAdFixture": "passed; stub Google responses only",
+    "answerTimerBrowser": "passed"
+  }
+}

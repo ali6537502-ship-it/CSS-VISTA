@@ -1,19 +1,25 @@
 {
-  "reviewDate": "2026-10-16",
+  "reviewDate": "2026-10-19",
   "books": [
     {
       "slug": "why-nations-fail",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_exact",
       "originalLine": "10. **Important quotation:** “The most common reason why nations fail today is because they have extractive institutions.”",
-      "displayLine": "10. **Study-note wording (edition unverified):** “The most common reason why nations fail today is because they have extractive institutions.”",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Important quotation:** “The most common reason why nations fail today is because they have extractive institutions.”",
+      "note": "Quotation checked against the linked book text or excerpt; use that edition and locator when citing it.",
       "sources": [
         {
           "url": "https://www.penguinrandomhouse.com/books/205014/why-nations-fail-by-daron-acemoglu-and-james-a-robinson/",
           "title": "Why Nations Fail — Daron Acemoglu and James A. Robinson, Penguin Random House",
           "locator": "Publisher title/author catalog",
           "scope": "identity_catalog"
+        },
+        {
+          "url": "https://vle.pce.edu.bt/pluginfile.php/32283/mod_page/content/6/Why-Nations-Fail-Daron-Acemoglu.pdf",
+          "title": "Why Nations Fail — Daron Acemoglu and James A. Robinson, institutional-hosted original ebook",
+          "locator": "Crown Publishers, copyright 2012, first-edition catalog record, eISBN 9780307719232; chapter 13, Why Nations Fail Today, opening section How to Win the Lottery in Zimbabwe, physical PDF page 409. Copyright leaf: physical PDF page 8.",
+          "scope": "book_original"
         }
       ]
     },
@@ -646,11 +652,17 @@
     {
       "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Important quotation:** “Every civilization sees itself as the center of the world.” The line explains how societies often interpret world history from their own cultural viewpoint and may misunderstand the viewpoints of others.",
-      "displayLine": "10. **Study-note wording (edition unverified):** “Every civilization sees itself as the center of the world.” The line explains how societies often interpret world history from their own cultural viewpoint and may misunderstand the viewpoints of others.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “Every civilization sees itself as the center of the world.” The line explains how societies often interpret world history from their own cultural viewpoint and may misunderstand the viewpoints of others.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://apps.usos.uj.edu.pl/apps/f/LBNqUCMn/Huntington_Clash%20of%20Civilisations%20-%20excerpt%20%281%29.pdf",
+          "title": "The Clash of Civilizations and the Remaking of World Order — Samuel P. Huntington, university-hosted chapter scan",
+          "locator": "Chapter 2, Civilizations in History and Today, printed p. 54 (physical PDF page 15), final paragraph; sentence continues on printed p. 55.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://www.simonandschuster.com/books/The-Clash-of-Civilizations-and-the-Remaking-of-World-Order/Samuel-P-Huntington/9781451628975",
           "title": "The Clash of Civilizations and the Remaking of World Order | Book by Samuel P. Huntington | Official Publisher Page | Simon & Schuster",
@@ -870,11 +882,17 @@
     {
       "slug": "capitalism-and-freedom",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Famous quotation:** “Economic freedom is also an indispensable means toward the achievement of political freedom.” Friedman presents economic choice as an important protection against political domination.",
-      "displayLine": "10. **Study-note wording (edition unverified):** “Economic freedom is also an indispensable means toward the achievement of political freedom.” Friedman presents economic choice as an important protection against political domination.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “Economic freedom is also an indispensable means toward the achievement of political freedom.” Friedman presents economic choice as an important protection against political domination.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://wisc.pb.unizin.org/ps361spring2021/chapter/milton-friedman-capitalism-and-freedom/",
+          "title": "Capitalism and Freedom — Milton Friedman, University of Wisconsin course excerpt",
+          "locator": "PS 361: Contemporary American Political Thought, chapter 42, selection labelled 1962; paragraph beginning Economic arrangements play a dual role.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://press.uchicago.edu/ucp/books/book/chicago/C/bo68666099.html",
           "title": "Capitalism and Freedom, Friedman, Appelbaum",
@@ -905,13 +923,19 @@
       "quotationStatus": "unverified",
       "originalLine": "10. **Famous quotation:** “We wrote this book to hold on to hope.” The line expresses the authors’ belief that intelligent and humane public policy can still solve difficult economic problems.",
       "displayLine": "10. **Study-note wording (edition unverified):** “We wrote this book to hold on to hope.” The line expresses the authors’ belief that intelligent and humane public policy can still solve difficult economic problems.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer. A related primary source is linked below; it does not establish that the wording appears in this book.",
       "sources": [
         {
           "url": "https://www.minneapolisfed.org/article/2021/esther-duflo-interview-deciding-how-to-share",
           "title": "Esther Duflo interview: Deciding how to share — Federal Reserve Bank of Minneapolis",
           "locator": "Interviewer question on public trust in economists",
           "scope": "attribution_in_related_interview"
+        },
+        {
+          "url": "https://bfi.uchicago.edu/wp-content/uploads/Can-Economics-Save-the-World_UneditedTranscript.pdf",
+          "title": "Can Economics Save the World? — Becker Friedman Institute event transcript",
+          "locator": "Physical PDF page 4: Banerjee introduces a reading from his new book and uses the existing short phrase inside a longer spoken sentence. Unedited event transcript, not a printed book edition.",
+          "scope": "related_primary_source"
         }
       ]
     },
@@ -966,11 +990,17 @@
     {
       "slug": "the-price-of-inequality",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Famous quotation:** “The power of markets is enormous, but they have no inherent moral character.” Stiglitz means that society must create rules ensuring that markets serve justice and public welfare.",
-      "displayLine": "10. **Study-note wording (edition unverified):** “The power of markets is enormous, but they have no inherent moral character.” Stiglitz means that society must create rules ensuring that markets serve justice and public welfare.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “The power of markets is enormous, but they have no inherent moral character.” Stiglitz means that society must create rules ensuring that markets serve justice and public welfare.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://www.economics.utoronto.ca/munro5/StiglitzInequalityJun2012.pdf",
+          "title": "The Price of Inequality — Joseph Stiglitz, university-hosted book excerpt",
+          "locator": "Six-page excerpt dated 11 June 2012; So much at stake, physical PDF page 2, paragraph beginning change is possible.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://wwnorton.co.uk/books/9780393345063-the-price-of-inequality",
           "title": "The Price of Inequality - Description | W. W. Norton & Company Ltd.",
@@ -1021,9 +1051,9 @@
       "sources": [
         {
           "url": "https://www.kateraworth.com/doughnut/",
-          "title": "Doughnut — Kate Raworth, official author resource",
-          "locator": "Author explanation of the Doughnut",
-          "scope": "author_related_resource"
+          "title": "What on Earth is the Doughnut? — Kate Raworth",
+          "locator": "Author website, paragraph immediately after the description of the environmental ceiling and social foundation; related web explanation, not a book edition.",
+          "scope": "related_primary_source"
         }
       ]
     },
@@ -1046,11 +1076,17 @@
     {
       "slug": "the-prize-the-epic-quest-for-oil-money-and-power",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Famous quotation:** “Oil has meant mastery through the years.” The line captures Yergin’s argument that command over oil has repeatedly provided economic, military and geopolitical power.",
-      "displayLine": "10. **Study-note wording (edition unverified):** “Oil has meant mastery through the years.” The line captures Yergin’s argument that command over oil has repeatedly provided economic, military and geopolitical power.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “Oil has meant mastery through the years.” The line captures Yergin’s argument that command over oil has repeatedly provided economic, military and geopolitical power.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://energytoday.energysociety.org/the-prize.html",
+          "title": "The Prize — Daniel Yergin, prologue excerpts at American Energy Society",
+          "locator": "Energy Today selection explicitly labelled excerpts from the 1991 and 2011 prologues; paragraph immediately after Mastery itself was the prize of the venture.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://www.simonandschuster.com/books/The-Prize/Daniel-Yergin/9781439110126",
           "title": "The Prize | Book by Daniel Yergin | Official Publisher Page | Simon & Schuster",
@@ -1148,11 +1184,17 @@
     {
       "slug": "invisible-women",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "* **Important quotation:** The gender data gap is “both a cause and a consequence” of treating humanity as almost exclusively male.",
-      "displayLine": "* **Study-note wording (edition unverified):** The gender data gap is “both a cause and a consequence” of treating humanity as almost exclusively male.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "* **Quotation excerpt:** The gender data gap is “both a cause and a consequence” of treating humanity as almost exclusively male.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://www.porchlightbooks.com/blogs/excerpts/invisible-women-data-bias-in-a-world-designed-for-men",
+          "title": "Invisible Women — Caroline Criado Perez, Abrams Press excerpt at Porchlight",
+          "locator": "26 March 2019 book excerpt, final substantive paragraph beginning I will argue that it is not; credited to Abrams Press, copyright 2019.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://www.abramsbooks.com/product/invisible-women_9781419729072/",
           "title": "Invisible Women (Hardcover) | ABRAMS",
@@ -1244,15 +1286,21 @@
     {
       "slug": "manufacturing-consent",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "* **Important quotation:** “Dissent and inconvenient information are kept within bounds and at the margins.” Limited criticism can exist without changing the dominant agenda.",
-      "displayLine": "* **Study-note wording (edition unverified):** “Dissent and inconvenient information are kept within bounds and at the margins.” Limited criticism can exist without changing the dominant agenda.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "* **Quotation excerpt:** “Dissent and inconvenient information are kept within bounds and at the margins.” Limited criticism can exist without changing the dominant agenda.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
         {
           "url": "https://chomsky.info/consent01/",
           "title": "A Propaganda Model — official Noam Chomsky site, excerpt from Manufacturing Consent",
           "locator": "Chapter1, A Propaganda Model",
+          "scope": "book_excerpt"
+        },
+        {
+          "url": "https://penguinrandomhousehighereducation.com/book/?isbn=9780375714498",
+          "title": "Manufacturing Consent — Edward S. Herman and Noam Chomsky, Penguin Random House excerpt",
+          "locator": "Introduction, publisher excerpt for ISBN 9780375714498; paragraph beginning The beauty of the system; excerpt copyright 2002.",
           "scope": "book_excerpt"
         }
       ]
