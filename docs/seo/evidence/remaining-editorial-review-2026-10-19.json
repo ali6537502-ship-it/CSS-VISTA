@@ -4,7 +4,7 @@
   "inspectedCommit": "988136d2b892965760c3fbea81c423054cc6a04f",
   "scope": "Bounded continuation of unresolved quotation research. No source bodies, permissions, private material or product state changed.",
   "ledgerBeforeSha256": "074e5d973f231754ca39fecc29d024211cc296bf68aa80a7d3c5140ec579b0c7",
-  "ledgerAfterSha256": "bb53b409b2f4f1c3642c4d205b2abd66a8e55759f1ebca443eb12b709aad718f",
+  "ledgerAfterSha256": "5663f0ad0366764421bb8aaf28d8bc2e541c4184f1e99171287a48926318fcf7",
   "acceptedChanges": [
     {
       "slug": "the-clash-of-civilizations-and-the-remaking-of-world-order",
@@ -122,6 +122,57 @@
         "accessed_at": "2026-10-19",
         "httpStatus": 200,
         "responseSha256": "0eded97a297014ade9aa1959abed3c62314537a45fbae7f50e8a2edb55726c1c"
+      }
+    },
+    {
+      "slug": "sapiens-a-brief-history-of-humankind",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://sanchika.ciil.org/server/api/core/bitstreams/0c666fda-9bcf-4cd1-97dc-ba3a3c0e8dc3/content",
+        "title": "Sapiens — Yuval Noah Harari, institutional-hosted 2014 English edition",
+        "locator": "Chapter 10, The Scent of Money, subsection How Does Money Work?, physical PDF page 157; copyright/catalog leaf physical page 3: English translation 2014, Signal Books / McClelland & Stewart, ISBN 9780771038501 (bound), 9780771038525 (html).",
+        "note": "The existing words are the final clause of a longer sentence after a colon, capitalized in the study note. The actual document identifies the English edition and author; the PDF locator is not asserted as printed pagination. Only that quoted clause is checked, not the surrounding analysis. The publicly accessible institutional copy is not evidence of CSS Vista permission.",
+        "shortEvidence": "money is the most universal and most efficient",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_original",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "e0a68c8a102d2e927e7ce17f92f809d1c23da9bae04ffcddd4281315909b779e"
+      }
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://www.vpm.org/npr-news/2008-11-24/excerpt-the-ascent-of-money/",
+        "title": "The Ascent of Money — Niall Ferguson, Penguin Press excerpt carried by VPM/NPR",
+        "locator": "Introduction, paragraph beginning Despite our deeply rooted prejudices; VPM/NPR excerpt published 24 November 2008, credited copyright 2008 and excerpt permission from Penguin Press.",
+        "note": "The existing sentence extracts the final clause of a longer sentence; the source explicitly frames the wording as adapting Jacob Bronowski. Initial capitalization differs. The excerpt identifies the book, author and publisher permission for that particular reprint, not permission for CSS Vista. No printed page was invented and no surrounding study commentary was certified.",
+        "shortEvidence": "the ascent of money has been essential",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "7cb2885ea0332f20c5e1207f32655998041c063e5d8f3c524066b030e257675e"
+      }
+    },
+    {
+      "slug": "orientalism",
+      "before": "unverified",
+      "after": "verified_excerpt",
+      "source": {
+        "url": "https://sites.evergreen.edu/politicalshakespeares/wp-content/uploads/sites/33/2014/12/Said_full.pdf",
+        "title": "Orientalism — Edward W. Said, Evergreen university-hosted Introduction selection",
+        "locator": "Introduction, third definition of Orientalism, physical PDF page 11 in this digitized selection; title/copyright leaves identify Routledge & Kegan Paul, first published 1978, paperback/reprint 1980.",
+        "note": "The existing quoted words are a phrase within a longer sentence. This university selection contains the original introduction and title/copyright identification; its file pagination differs from the original printed book. The digitized text has spacing/punctuation differences, so no exact complete-sentence or invented printed-page claim is made. The surrounding study explanation and CSS Vista permissions are not certified.",
+        "shortEvidence": "a Western style for dominating",
+        "evidence_status": "verified_quotation",
+        "source_scope": "book_excerpt",
+        "accessed_at": "2026-10-19",
+        "httpStatus": 200,
+        "responseSha256": "6b7067466a64b4952d67f68a51cfcaee078eba06c56b03fe26768cb5299ee5cd"
       }
     }
   ],
@@ -289,6 +340,33 @@
       "contentType": "application/pdf",
       "bytes": 6122982,
       "responseSha256": "0eded97a297014ade9aa1959abed3c62314537a45fbae7f50e8a2edb55726c1c"
+    },
+    {
+      "key": "sapiens",
+      "url": "https://sanchika.ciil.org/server/api/core/bitstreams/0c666fda-9bcf-4cd1-97dc-ba3a3c0e8dc3/content",
+      "httpStatus": 200,
+      "finalUrl": "https://sanchika.ciil.org/server/api/core/bitstreams/0c666fda-9bcf-4cd1-97dc-ba3a3c0e8dc3/content",
+      "contentType": "application/pdf;charset=UTF-8",
+      "bytes": 6945728,
+      "responseSha256": "e0a68c8a102d2e927e7ce17f92f809d1c23da9bae04ffcddd4281315909b779e"
+    },
+    {
+      "key": "orientalism",
+      "url": "https://sites.evergreen.edu/politicalshakespeares/wp-content/uploads/sites/33/2014/12/Said_full.pdf",
+      "httpStatus": 200,
+      "finalUrl": "https://sites.evergreen.edu/politicalshakespeares/wp-content/uploads/sites/33/2014/12/Said_full.pdf",
+      "contentType": "application/pdf",
+      "bytes": 419672,
+      "responseSha256": "6b7067466a64b4952d67f68a51cfcaee078eba06c56b03fe26768cb5299ee5cd"
+    },
+    {
+      "key": "ascent",
+      "url": "https://www.vpm.org/npr-news/2008-11-24/excerpt-the-ascent-of-money/",
+      "httpStatus": 200,
+      "finalUrl": "https://www.vpm.org/npr-news/2008-11-24/excerpt-the-ascent-of-money/",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 137731,
+      "responseSha256": "7cb2885ea0332f20c5e1207f32655998041c063e5d8f3c524066b030e257675e"
     }
   ],
   "remainingUnverified": [
@@ -296,12 +374,6 @@
       "slug": "the-narrow-corridor",
       "url": "https://www.css-vista.com/book-summaries/the-narrow-corridor",
       "quotation": "“Liberty needs the state and the laws. But it is not given by the state or the elites controlling it.”",
-      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
-    },
-    {
-      "slug": "sapiens-a-brief-history-of-humankind",
-      "url": "https://www.css-vista.com/book-summaries/sapiens-a-brief-history-of-humankind",
-      "quotation": "“Money is the most universal and most efficient system of mutual trust ever devised.”",
       "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
     },
     {
@@ -473,12 +545,6 @@
       "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
     },
     {
-      "slug": "the-ascent-of-money",
-      "url": "https://www.css-vista.com/book-summaries/the-ascent-of-money",
-      "quotation": "“The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
-      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
-    },
-    {
       "slug": "the-future-of-capitalism",
       "url": "https://www.css-vista.com/book-summaries/the-future-of-capitalism",
       "quotation": "“As we recognize new obligations to others, we build societies better able to flourish.” Collier presents mutual responsibility as the foundation of social and economic renewal.",
@@ -518,12 +584,6 @@
       "slug": "the-second-sex",
       "url": "https://www.css-vista.com/book-summaries/the-second-sex",
       "quotation": "“One is not born, but rather becomes, a woman.” It means that femininity is largely formed through social conditioning.",
-      "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
-    },
-    {
-      "slug": "orientalism",
-      "url": "https://www.css-vista.com/book-summaries/orientalism",
-      "quotation": "Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
       "requiredEvidence": "A directly read original edition or legitimate named-book excerpt with a precise locator; identity/secondary quote lists alone are insufficient."
     },
     {
@@ -595,7 +655,7 @@
   ],
   "limits": [
     "No new full external book, image or PDF was committed or republished. Public source accessibility is not CSS Vista permission.",
-    "Fifty quotations remain unverified. This pass does not claim to have inspected complete editions for all of them.",
+    "Forty-seven quotations remain unverified. Search discovery does not establish passage wording or prove absence from a complete book.",
     "The University of Toronto PDF was read using public web text and page-image retrieval; command-line access was blocked."
   ],
   "ownerProviderStatement": "../editorial/OWNER_PROVENANCE_2026-10-19.md",
@@ -607,6 +667,10 @@
     {
       "source": "https://www.hachettebookgroup.com/titles/abhijit-v-banerjee/good-economics-for-hard-times/9781610399500/",
       "observation": "Requested record redirected to the publisher homepage, not a book excerpt. No quotation evidence accepted."
+    },
+    {
+      "candidate": "University course compilation for a Fanon reading",
+      "observation": "Not accepted as an identified original edition/translation; no course or seminar material was republished."
     }
   ],
   "preservation": {
@@ -614,9 +678,261 @@
     "sourceQuotationWordsUnchanged": true,
     "originalLibrarySha256": "f4a57cab5566e5508896437d272e7c6b2e2759f9fed4c0c4b7e86cb218cf7d8e",
     "identityAndRightsStatesUnchanged": true,
-    "quotationStatusesChanged": 7
+    "quotationStatusesChanged": 10
   },
-  "localValidation": {
+  "followupSearches": [
+    {
+      "slug": "the-narrow-corridor",
+      "query": "\"Liberty needs the state and the laws. But it is not\" \"Robinson\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "sapiens-a-brief-history-of-humankind",
+      "query": "\"Money is the most universal and most efficient system of mutual\" \"Harari\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "guns-germs-and-steel",
+      "query": "\"History followed different courses for different peoples because of differences among\" \"Diamond\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-lessons-of-history",
+      "query": "\"So the first biological lesson of history is that life is\" \"Durant\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "a-short-history-of-nearly-everything",
+      "query": "\"If this book has a lesson, it is that we are\" \"Bryson\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "factfulness",
+      "query": "\"The world cannot be understood without numbers. And it cannot be\" \"Rönnlund\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "thinking-fast-and-slow",
+      "query": "\"Nothing in life is as important as you think it is\" \"Kahneman\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "capital-in-the-twenty-first-century",
+      "query": "\"When the rate of return on capital exceeds the rate of\" \"Piketty\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "prisoners-of-geography",
+      "query": "\"All leaders are constrained by geography.\" \"Marshall\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-revenge-of-geography",
+      "query": "\"Geography is the backdrop to human history itself.\" \"Kaplan\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-silk-roads",
+      "query": "\"They were-and still are-the world’s central nervous system.\" \"Frankopan\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-sixth-extinction",
+      "query": "\"In pushing other species to extinction, humanity is busy sawing off\" \"Kolbert\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-origins-of-totalitarianism",
+      "query": "\"the distinction between fact and fiction … and true and false …\" \"Arendt\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "justice-what-s-the-right-thing-to-do",
+      "query": "\"cultivating virtue and reasoning about the common good.\" \"Sandel\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-dictator-s-handbook",
+      "query": "\"Coming to office and staying in office are the most important things\" \"Smith\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "world-order",
+      "query": "\"Order always requires a subtle balance of restraint, force, and legitimacy.\" \"Kissinger\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-tragedy-of-great-power-politics",
+      "query": "\"The sad fact is that international politics has always been a ruthless\" \"Mearsheimer\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-rise-and-fall-of-the-great-powers",
+      "query": "\"The beginning of wisdom in human as well as international affairs was\" \"Kennedy\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-end-of-history-and-the-last-man",
+      "query": "\"the end-point of mankind’s ideological evolution.\" \"Fukuyama\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-grand-chessboard",
+      "query": "\"Without Ukraine, Russia ceases to be a Eurasian empire.\" \"Brzezinski\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-twenty-years-crisis-1919-1939",
+      "query": "\"Mature thought combines purpose with observation and analysis.\" \"Carr\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-anarchical-society",
+      "query": "\"It is better to recognise that we are in darkness than to\" \"Bull\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-strategy-of-conflict",
+      "query": "\"Rationality is a collection of attributes.\" \"Schelling\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-guns-of-august",
+      "query": "\"The impetus of existing plans is always stronger than the impulse to\" \"Tuchman\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "postwar-a-history-of-europe-since-1945",
+      "query": "\"was the insecure child of anxiety.\" \"Judt\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-cold-war-a-world-history",
+      "query": "\"The end of the Cold War opened up new possibilities for people\" \"Westad\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-great-transformation",
+      "query": "\"To allow the market mechanism to be sole director … would result\" \"Polanyi\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "poor-economics",
+      "query": "\"They have to be sophisticated economists just to survive.\" \"Duflo\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "good-economics-for-hard-times",
+      "query": "\"We wrote this book to hold on to hope.\" \"Duflo\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-bottom-billion",
+      "query": "\"The societies of the bottom billion can only be rescued from within.\" \"Collier\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-ascent-of-money",
+      "query": "\"The ascent of money has been essential to the ascent of man.\" \"Ferguson\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-future-of-capitalism",
+      "query": "\"As we recognize new obligations to others, we build societies better able\" \"Collier\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "doughnut-economics",
+      "query": "\"Between social and planetary boundaries lies an environmentally safe and socially just\" \"Raworth\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-entrepreneurial-state",
+      "query": "\"do as the United States actually did, not as they say they\" \"Mazzucato\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "nudge",
+      "query": "\"A nudge…alters people’s behavior in a predictable way without forbidding any options.\" \"Sunstein\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "behave",
+      "query": "\"Anyone who says that our worst behaviors are inevitable knows too little\" \"Sapolsky\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "bowling-alone",
+      "query": "\"Social capital may turn out to be a prerequisite for…effective computer-mediated communication.\" \"Putnam\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-second-sex",
+      "query": "\"One is not born, but rather becomes, a woman.\" \"Beauvoir\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "orientalism",
+      "query": "\"a Western style for dominating, restructuring, and having authority over the Orient.\" \"Said\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-wretched-of-the-earth",
+      "query": "\"discovers that his life, his breath, his beating heart are the same\" \"Fanon\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "amusing-ourselves-to-death",
+      "query": "\"People will come to adore the technologies that undo their capacities to\" \"Postman\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-shallows",
+      "query": "\"The Net…is chipping away my capacity for concentration and contemplation.\" \"Carr\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-struggle-for-pakistan",
+      "query": "\"Pakistan is a visibly perturbed and divided nation.\" \"Jalal\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-great-partition",
+      "query": "\"Partition stands testament to the follies of empire.\" \"Khan\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-plague",
+      "query": "\"The only means of fighting a plague is-common decency.\" \"Camus\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "to-kill-a-mockingbird",
+      "query": "\"You never really understand a person until you consider things from his\" \"Lee\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-handmaid-s-tale",
+      "query": "\"Nolite te bastardes carborundorum.\" \"Atwood\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "the-reluctant-fundamentalist",
+      "query": "\"I was not certain where I belonged-in New York, in Lahore, in\" \"Hamid\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "man-s-search-for-meaning",
+      "query": "\"The last of the human freedoms-to choose one’s attitude in any given\" \"Frankl\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    },
+    {
+      "slug": "long-walk-to-freedom",
+      "query": "\"No one is born hating another person because of the colour of\" \"Mandela\" -site:goodreads.com -site:azquotes.com -site:scribd.com -site:quotefancy.com",
+      "scope": "Search discovery only; no result snippet used to certify a book quotation."
+    }
+  ],
+  "initialSevenPassageValidation": {
     "observedAt": "2026-10-19T04:04:28.210503+00:00",
     "typecheck": "passed",
     "lint": "passed",
@@ -636,6 +952,7 @@
     "php": "CLI absent locally; existing CI required.",
     "deployment": "Not inferred from uncommitted local build fingerprint; exact release evidence will be linked from the PR.",
     "managedAdFixture": "passed; stub Google responses only",
-    "answerTimerBrowser": "passed"
+    "answerTimerBrowser": "passed",
+    "scope": "Historical initial seven-passage snapshot; final ten-passage validation follows separately."
   }
 }

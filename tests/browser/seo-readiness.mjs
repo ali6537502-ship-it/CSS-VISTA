@@ -32,6 +32,7 @@ const paths = [
   '/book-summaries/manufacturing-consent', '/book-summaries/the-prize-the-epic-quest-for-oil-money-and-power',
   '/book-summaries/the-clash-of-civilizations-and-the-remaking-of-world-order',
   '/book-summaries/doughnut-economics', '/book-summaries/good-economics-for-hard-times',
+  '/book-summaries/sapiens-a-brief-history-of-humankind', '/book-summaries/orientalism', '/book-summaries/the-ascent-of-money',
   '/book-summaries/the-better-angels-of-our-nature', '/book-summaries/brave-new-world',
   '/book-summaries/capital-in-the-twenty-first-century', '/book-summaries/pakistan-beyond-the-crisis-state',
   '/book-summaries/development-as-freedom', '/book-summaries/the-open-society-and-its-enemies',
@@ -191,7 +192,7 @@ try {
         assert.ok(await reader.locator('a[href*="press.uchicago.edu"]').count(), 'The real reader exposes the publisher record')
         assert.ok(rawHTML.includes('Quotation excerpt') && text.includes('Quotation excerpt'), 'The newly located clause is labelled as an excerpt in both readers')
         assert.ok(rawHTML.includes('wisc.pb.unizin.org') && await reader.locator('a[href*="wisc.pb.unizin.org"]').count(), 'The actual named-book selection is linked separately from its bibliographic record')
-      } else if (['/the-price-of-inequality', '/invisible-women', '/manufacturing-consent', '/the-prize-the-epic-quest-for-oil-money-and-power', '/the-clash-of-civilizations-and-the-remaking-of-world-order'].some(suffix => path.endsWith(suffix))) {
+      } else if (['/the-price-of-inequality', '/invisible-women', '/manufacturing-consent', '/the-prize-the-epic-quest-for-oil-money-and-power', '/the-clash-of-civilizations-and-the-remaking-of-world-order', '/sapiens-a-brief-history-of-humankind', '/orientalism', '/the-ascent-of-money'].some(suffix => path.endsWith(suffix))) {
         assert.ok(rawHTML.includes('Quotation excerpt') && text.includes('Quotation excerpt'), 'Newly traced clauses retain their excerpt labels in initial HTML and React')
         assert.ok(text.includes('Surrounding explanation is study commentary'), 'Quotation verification does not certify study commentary')
         assert.ok(record.quotationSourceLinks > 0, 'The source passage remains reachable through an ordinary link')

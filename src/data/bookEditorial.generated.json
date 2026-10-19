@@ -42,16 +42,22 @@
     {
       "slug": "sapiens-a-brief-history-of-humankind",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Important quotation:** “Money is the most universal and most efficient system of mutual trust ever devised.”",
-      "displayLine": "10. **Study-note wording (edition unverified):** “Money is the most universal and most efficient system of mutual trust ever devised.”",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “Money is the most universal and most efficient system of mutual trust ever devised.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
         {
           "url": "https://www.ynharari.com/book/sapiens/",
           "title": "Sapiens — Yuval Noah Harari, official author book page",
           "locator": "Official author title/description and references links",
           "scope": "identity_catalog"
+        },
+        {
+          "url": "https://sanchika.ciil.org/server/api/core/bitstreams/0c666fda-9bcf-4cd1-97dc-ba3a3c0e8dc3/content",
+          "title": "Sapiens — Yuval Noah Harari, institutional-hosted 2014 English edition",
+          "locator": "Chapter 10, The Scent of Money, subsection How Does Money Work?, physical PDF page 157; copyright/catalog leaf physical page 3: English translation 2014, Signal Books / McClelland & Stewart, ISBN 9780771038501 (bound), 9780771038525 (html).",
+          "scope": "book_original"
         }
       ]
     },
@@ -1012,11 +1018,17 @@
     {
       "slug": "the-ascent-of-money",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "10. **Famous quotation:** “The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
-      "displayLine": "10. **Study-note wording (edition unverified):** “The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "10. **Quotation excerpt:** “The ascent of money has been essential to the ascent of man.” Ferguson means that human economic and political development cannot be separated from financial development.",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
+        {
+          "url": "https://www.vpm.org/npr-news/2008-11-24/excerpt-the-ascent-of-money/",
+          "title": "The Ascent of Money — Niall Ferguson, Penguin Press excerpt carried by VPM/NPR",
+          "locator": "Introduction, paragraph beginning Despite our deeply rooted prejudices; VPM/NPR excerpt published 24 November 2008, credited copyright 2008 and excerpt permission from Penguin Press.",
+          "scope": "book_excerpt"
+        },
         {
           "url": "https://www.penguinrandomhouse.com/books/302900/the-ascent-of-money-by-niall-ferguson/",
           "title": "The Ascent of Money by Niall Ferguson: 9780143116172 | PenguinRandomHouse.com: Books",
@@ -1238,16 +1250,22 @@
     {
       "slug": "orientalism",
       "identityStatus": "verified_primary",
-      "quotationStatus": "unverified",
+      "quotationStatus": "verified_excerpt",
       "originalLine": "* **Important quotation:** Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
-      "displayLine": "* **Study-note wording (edition unverified):** Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
-      "note": "The wording and book edition of this study-note quotation have not yet been verified. Check an original edition before quoting it in an answer.",
+      "displayLine": "* **Quotation excerpt:** Orientalism is “a Western style for dominating, restructuring, and having authority over the Orient.”",
+      "note": "The quoted words are an excerpt. Surrounding explanation is study commentary; consult the linked passage and translation before citing.",
       "sources": [
         {
           "url": "https://www.penguinrandomhouseretail.com/book/?isbn=9780394740676",
           "title": "Orientalism — Edward W. Said, Penguin Random House",
           "locator": "Publisher catalog",
           "scope": "identity_catalog"
+        },
+        {
+          "url": "https://sites.evergreen.edu/politicalshakespeares/wp-content/uploads/sites/33/2014/12/Said_full.pdf",
+          "title": "Orientalism — Edward W. Said, Evergreen university-hosted Introduction selection",
+          "locator": "Introduction, third definition of Orientalism, physical PDF page 11 in this digitized selection; title/copyright leaves identify Routledge & Kegan Paul, first published 1978, paperback/reprint 1980.",
+          "scope": "book_excerpt"
         }
       ]
     },

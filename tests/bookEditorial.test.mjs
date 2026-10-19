@@ -89,13 +89,14 @@ test('a verified university identity is visible without certifying the book quot
 test('newly traced clauses remain excerpts when displayed and copied with study commentary', () => {
   for (const slug of ['capitalism-and-freedom', 'the-price-of-inequality', 'invisible-women',
     'manufacturing-consent', 'the-prize-the-epic-quest-for-oil-money-and-power',
-    'the-clash-of-civilizations-and-the-remaking-of-world-order']) {
+    'the-clash-of-civilizations-and-the-remaking-of-world-order', 'sapiens-a-brief-history-of-humankind',
+    'orientalism', 'the-ascent-of-money']) {
     const book = bySlug(slug)
     const review = bookEditorialFor(slug)
     assert.equal(review.quotationStatus, 'verified_excerpt', slug)
     assert.match(reviewedBookBody(book), /Quotation excerpt/)
     assert.match(bookQuotationForCopy(book), /Surrounding explanation is study commentary/)
-    assert.ok(review.sources.some(source => source.scope === 'book_excerpt'), slug)
+    assert.ok(review.sources.some(source => ['book_excerpt', 'book_original'].includes(source.scope)), slug)
     assert.equal(reviewedBookBody(book).replace(review.displayLine, review.originalLine), book.body,
       'Source wording, including surrounding commentary, is preserved')
   }
