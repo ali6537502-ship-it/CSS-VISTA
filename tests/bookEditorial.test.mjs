@@ -22,16 +22,27 @@ test('all existing book identities and source bodies remain usable with reviewed
 })
 
 test('unverified wording is qualified in the reader and in copied quotations', () => {
-  const book = bySlug('why-nations-fail')
+  const book = bySlug('guns-germs-and-steel')
   assert.match(reviewedBookBody(book), /Study-note wording \(edition unverified\)/)
   const copy = bookQuotationForCopy(book)
   assert.match(copy, /have not yet been verified/)
   assert.match(copy, /Book under discussion:/)
-  assert.doesNotMatch(copy, /— Why Nations Fail,/, 'do not copy an unverified attribution as a confirmed author quote')
+  assert.doesNotMatch(copy, /— Guns, Germs, and Steel,/, 'do not copy an unverified attribution as a confirmed author quote')
+})
+
+test('an exact ebook sentence retains a file locator without inventing print pagination', () => {
+  const book = bySlug('why-nations-fail')
+  const review = bookEditorialFor(book.slug)
+  assert.equal(review.quotationStatus, 'verified_exact')
+  assert.equal(reviewedBookBody(book), book.body, 'The original complete quotation is unchanged')
+  assert.ok(review.sources.some(source => source.scope === 'book_original'
+    && source.locator.includes('eISBN 9780307719232')
+    && source.locator.includes('physical PDF page 409')))
+  assert.match(bookQuotationForCopy(book), /physical PDF page 409/)
 })
 
 test('related primary pages do not certify quotations from a named book', () => {
-  for (const slug of ['the-silk-roads', 'long-walk-to-freedom']) {
+  for (const slug of ['the-silk-roads', 'long-walk-to-freedom', 'doughnut-economics', 'good-economics-for-hard-times']) {
     const book = bySlug(slug)
     const review = bookEditorialFor(slug)
     assert.equal(review.quotationStatus, 'unverified')
@@ -66,13 +77,29 @@ test('book source metadata is deterministic and agrees with the editorial ledger
   assert.equal(result.status, 0, result.stderr)
 })
 
-test('a verified publisher identity is visible without certifying the book quotation', () => {
-  const review = bookEditorialFor('capitalism-and-freedom')
+test('a verified university identity is visible without certifying the book quotation', () => {
+  const review = bookEditorialFor('the-strategy-of-conflict')
   assert.equal(review.identityStatus, 'verified_primary')
   assert.equal(review.quotationStatus, 'unverified')
-  assert.ok(review.sources.some((source) => new URL(source.url).hostname === 'press.uchicago.edu' && source.scope === 'identity_only'))
-  assert.match(reviewedBookBody(bySlug('capitalism-and-freedom')), /edition unverified/)
+  assert.ok(review.sources.some((source) => new URL(source.url).hostname === 'www.hks.harvard.edu' && source.scope === 'identity_only'))
+  assert.match(reviewedBookBody(bySlug('the-strategy-of-conflict')), /edition unverified/)
   assert.equal(new Set(review.sources.map((source) => source.url)).size, review.sources.length, 'Do not repeat the same source as multiple bibliography links')
+})
+
+test('newly traced clauses remain excerpts when displayed and copied with study commentary', () => {
+  for (const slug of ['capitalism-and-freedom', 'the-price-of-inequality', 'invisible-women',
+    'manufacturing-consent', 'the-prize-the-epic-quest-for-oil-money-and-power',
+    'the-clash-of-civilizations-and-the-remaking-of-world-order', 'sapiens-a-brief-history-of-humankind',
+    'orientalism', 'the-ascent-of-money']) {
+    const book = bySlug(slug)
+    const review = bookEditorialFor(slug)
+    assert.equal(review.quotationStatus, 'verified_excerpt', slug)
+    assert.match(reviewedBookBody(book), /Quotation excerpt/)
+    assert.match(bookQuotationForCopy(book), /Surrounding explanation is study commentary/)
+    assert.ok(review.sources.some(source => ['book_excerpt', 'book_original'].includes(source.scope)), slug)
+    assert.equal(reviewedBookBody(book).replace(review.displayLine, review.originalLine), book.body,
+      'Source wording, including surrounding commentary, is preserved')
+  }
 })
 
 test('books without a quotation can have a real bibliography without inventing a quote', () => {
