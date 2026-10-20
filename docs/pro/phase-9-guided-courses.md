@@ -1,6 +1,6 @@
 # All-source guided affairs learning
 
-Latest authoring increment: [original text to native interactive topic courses](original-text-topic-courses.md), 20 October 2026. Ten new text editions have 131 guided sections/checkpoints, 60 separate recall questions and ten writing tasks; all ten exact private workflows pass. Five established reform courses are reused unchanged. The separate reconciled private candidate contains 29 logical topics; the earlier 21-course baseline remains unchanged. Pro remains paused and no private content has been published to production by this work.
+Latest authoring status: [continuous original-text native courses](original-text-topic-continuation.md). All 86 catalogue headings now have bounded private workflow coverage in 58 logical courses (948 guided sections, 1,419 fixed questions). This is not complete conversion of all 107 original files or production availability. Earlier source-led and first-batch figures remain historical checkpoints. Pro remains paused; no content was published to production.
 
 The owner changed the extraction-led plan to original notes using the **86 combined CA/PA headings** fetched from the specified `/notes` page, with dated current-affairs checks. The latest format instruction requires **text directly to native interactive courses, with no further Word/PDF deliverables**. This supersedes the earlier authoring priority described below. It does not delete the supplied collection or approve a production release.
 

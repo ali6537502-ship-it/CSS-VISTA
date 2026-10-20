@@ -1,5 +1,7 @@
 # Original text to native interactive topic courses
 
+Historical first-batch checkpoint. For the current candidate, counts, source boundaries and verification, see [continuous original-text course status](original-text-topic-continuation.md).
+
 Status: **PRIVATE WORKFLOW VERIFIED — PRODUCTION RELEASE HELD**, 20 October 2026. No topic was published to production, Pro reopened, payment/AI activated, or main deployment triggered.
 
 The owner replaced extraction-led authoring with original notes based on the combined CA/PA list on `/notes`, and then explicitly instructed: “Do not create word or pdf. Just create text and then make it interactive to css vista.” New work therefore uses private UTF-8 text directly in the existing native topic engine. The original sources and previous definitions remain retained.
