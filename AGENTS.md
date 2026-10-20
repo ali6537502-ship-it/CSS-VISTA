@@ -19,3 +19,9 @@ The owner subsequently asked to complete the other Pro work before returning to 
 ## Pakistan Affairs resumed — 16 October 2026
 
 The owner explicitly instructed: **“Go for Pak affairs.”** Resume preparation of bounded Pakistan Affairs modules from the retained private source collection, including source reconciliation, factual review, interactive lessons/exercises and isolated native verification. This supersedes the earlier content deferral for Pakistan Affairs. It does not reopen the entire Current Affairs collection or authorize production publication. Keep private source bodies, answer keys and lesson packages outside Git/public assets; retain original checksums, earlier editions and the active release hold.
+
+## Original topic notes and interactive courses — 20 October 2026
+
+The owner subsequently changed the content plan to original notes based on the CA/PA topic list on `/notes`, with dated current-affairs source checks. This supersedes the older extraction-led authoring priority and permits work on that bounded Current Affairs list. It does not authorise complete optional-subject courses or production publication.
+
+The latest format instruction is: **“Do not create word or pdf. Just create text and then make it interactive to css vista.”** Author private text and convert it directly into the existing native Pro Topic Learning system. Do not create further Word/PDF deliverables. Reuse existing courses and preserve previous editions, student writing and results. Report text drafting, interactive implementation, private workflow verification and production availability separately. Continue across topics without requiring a fresh continuation instruction after each topic. The production release hold above remains active.
