@@ -1,5 +1,9 @@
 # Route-family indexability decisions
 
+## Verified live release — 17 October 2026
+
+PR #94 is merged and the exact release `b74ee781b230ebd7c047ff0a6419927a125b96db` is verified live. All post-merge workflows and the 26-page public monitor pass; Google live tests and two selective indexing confirmations are recorded. See [release outcome](RELEASE_2026-10-17.md) and [dated evidence](evidence/release-verification-2026-10-17.json). This supersedes earlier pending deployment/sign-in statements. AdSense approval, rights, regional consent/revocation and final ad preview remain unresolved; no AdSense review was requested.
+
 ## Current continuation — 17 October 2026
 
 The family decisions remain unchanged. [Current prefix-report evidence](evidence/google-current-account-evidence-2026-10-17.json) supplies dated aggregate counts and only observed per-URL statuses; it does not label every family indexed or failed. Clean year-archive URLs must remain indexable after JavaScript; genuine filtered views remain noindex.
