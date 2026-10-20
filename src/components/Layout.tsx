@@ -45,6 +45,7 @@ const nav = [
   { label: 'Books by Sir Ali', to: '/books' },
   { label: 'VISTA Journal', to: '/journal' },
   { label: 'Vistagram', to: '/vistagram' },
+  { label: 'Current Affairs Daily', to: '/daily-briefing' },
   {
     label: 'Subjects',
     items: [
