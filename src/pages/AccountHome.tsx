@@ -191,7 +191,7 @@ export default function AccountHome() {
     { to: '/account/argumentation', icon: ListTree, title: 'Argumentation Skills Builder', status: 'Claims, reasons, evidence, counterarguments & revision' },
     { to: '/account/analytical-skills', icon: Target, title: 'Analytical Skills Builder', status: 'Mechanisms, alternatives, trade-offs & conclusions' },
     { to: '/account/essay-builder', icon: BookOpen, title: 'Essay Themes Builder', status: 'Seven guided stages linked to your research roadmap' },
-    { to: briefingRoot, icon: Newspaper, title: 'Current Affairs', status: affairsStatus },
+    { to: briefingRoot, icon: Newspaper, title: 'My Current Affairs Desk', status: affairsStatus },
     { to: '/account/general-ability', icon: Calculator, title: 'General Ability', status: 'Guided maths, exercises & topic quizzes' },
     { to: '/account/answer-performance', icon: Target, title: 'My Answer Performance', status: 'Human mentor records, marks & next steps' },
     {
