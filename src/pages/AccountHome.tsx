@@ -150,6 +150,7 @@ export default function AccountHome() {
   const mptFlowEnabled = useMptFlowEnabled() === true
   const mptFlow = !MPT_HIBERNATED && mptFlowEnabled
   const freeChoices = [
+    { to: '/daily-briefing', icon: Newspaper, title: 'Current Affairs Daily', status: 'Read published editions and full analysis, free' },
     { to: '/account/preparation', icon: Target, title: 'My Preparation', status: 'Attempt plan, coverage & saved writing' },
     { to: '/account/resources', icon: FolderOpen, title: 'My Vista Resources', status: 'Free books & downloads' },
     { to: '/account/vistagram', icon: Sparkles, title: 'My CSS Vistagram', status: 'Concepts, articles, data & explainers' },
