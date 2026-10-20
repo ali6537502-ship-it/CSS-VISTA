@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { ArrowLeft, ArrowRight, ArrowUpRight, CalendarDays, Search } from 'lucide-react'
 import { z } from 'zod'
-import { cardSchema, displayDate, displayUpdated, factText, storySchema, type Fact, type Story } from './model'
+import { cardSchema, displayDate, displayUpdated, storySchema, type Fact, type Story } from './model'
 import { CopyButton, FactCard, LoadError, Loading, Sources } from './ui'
 import './current-affairs.css'
 
