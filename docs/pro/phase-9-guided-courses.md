@@ -1,5 +1,7 @@
 # All-source guided affairs learning
 
+Latest private content increment: [reform movements and institutions](pakistan-affairs-reform-courses.md), 20 October 2026. The combined package has 20 units, 336 sections/checkpoints, 168 separate recall questions and 20 writing tasks. Five new chapters have page-level dispositions and complete private workflow evidence; this does not certify every original claim or finish the PA library. The internal PA worklist has 20 families with units and 45 without. Pro remains paused and no private content has been published by this work. Earlier dated figures below describe their respective increments.
+
 The owner's latest scope is **all 107 supplied files** contributing to interactive Pakistan Affairs and Current Affairs learning in CSS Vista Pro, comparable to the existing Grammar and Précis courses. It supersedes the earlier 86-topic planning target. It does not establish 107 distinct subjects: 107 verified file identities contain 96 byte-distinct sources, with 11 extra identical copies. The existing 81 broad source families remain provisional; updated editions, compound books and visual companions require explicit reconciliation.
 
 ## Source coverage and conversion boundary
