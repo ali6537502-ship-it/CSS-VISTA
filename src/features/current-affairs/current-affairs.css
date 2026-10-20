@@ -259,3 +259,26 @@
 .ca-sidebar-profile span{min-width:0}.ca-sidebar-profile strong,.ca-sidebar-profile small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ca-sidebar-profile strong{font-size:13px}.ca-sidebar-profile small{margin-top:2px;font-size:11px;color:var(--ca-muted)}
 .ca-mobile-extras .ca-mobile-profile{display:flex;align-items:center;gap:8px;font-weight:650;color:var(--ca-ink)}
 .ca-mobile-profile img,.ca-mobile-profile>svg{width:28px;height:28px;flex:0 0 28px;border-radius:50%;object-fit:cover;background:#edf5ef;padding:5px;color:#286248}.ca-mobile-profile img{padding:0}
+
+
+/* Public daily editions. Reading never depends on an account session. */
+.ca-public-briefing{max-width:1160px}
+.ca-public-hero{max-width:800px}
+.ca-public-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) minmax(220px,1.25fr);gap:16px;padding:18px 20px;border:1px solid var(--ca-line);border-radius:13px;background:var(--ca-soft);margin:0 0 28px}
+.ca-public-toolbar label{display:flex;flex-direction:column;align-items:flex-start;gap:7px;font-size:13px;font-weight:650;color:var(--ca-ink);min-width:0}
+.ca-public-toolbar label svg{display:inline-block;vertical-align:middle}
+.ca-public-toolbar select,.ca-public-toolbar input{width:100%;min-width:0;min-height:46px;border:1px solid #cbd8cf;border-radius:7px;background:#fff;color:var(--ca-ink);font-size:15px;padding:9px 12px}
+.ca-public-edition-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:12px 0 25px}
+.ca-public-edition-heading h2{font-size:clamp(25px,3vw,34px);font-weight:750;line-height:1.3;color:var(--ca-ink);margin:0 0 6px}
+.ca-public-edition-heading p,.ca-public-edition-heading small{display:block;margin:0;font-size:14px;line-height:1.8;color:var(--ca-muted)}
+.ca-public-edition-heading small{font-size:12px}
+.ca-public-categories{margin-bottom:22px}
+.ca-public-note{margin:40px 0 0;border-top:1px solid var(--ca-line);padding:18px 0;font-size:13px;line-height:1.8;color:var(--ca-muted)}
+.ca-public-list{padding-left:23px;margin:12px 0 20px;list-style:disc;line-height:1.85;color:var(--ca-ink)}
+ol.ca-public-list{list-style:decimal}
+.ca-public-list li{padding-left:5px;margin:9px 0}
+.ca-public-reader{margin:0 auto;max-width:960px}
+.ca-public-reader .ca-reading-body{width:100%;max-width:800px}
+.ca-public-reader .ca-section h3{font-size:17px;font-weight:700;color:var(--ca-ink);margin-top:20px}
+.ca-public-end{margin-top:35px}
+@media(max-width:650px){.ca-public-toolbar{grid-template-columns:minmax(0,1fr);padding:15px;gap:12px}.ca-public-edition-heading{align-items:flex-start;flex-direction:column}.ca-public-reader .ca-reader-heading{padding-top:14px}}

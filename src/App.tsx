@@ -247,6 +247,7 @@ export default function App() {
         <Route path="/account/mpt/results/:code" element={MPT_HIBERNATED ? <Navigate to="/account/dashboard" replace /> : <ProfileGate><S><MptResult /></S></ProfileGate>} />
         <Route path="/account/*" element={<ProfileGate><S><AccountWorkspace /></S></ProfileGate>} />
         <Route path="/daily-briefing" element={<S><DailyBriefingIntro /></S>} />
+        <Route path="/daily-briefing/:storyId" element={<S><DailyBriefingIntro /></S>} />
         <Route path="/factbook" element={<ProfileGate><S><Factbook /></S></ProfileGate>} />
         <Route path="/consultation" element={<S><Consultation /></S>} />
         <Route path="/exam-intelligence" element={<S><ExamIntelligence /></S>} />
