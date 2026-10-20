@@ -16,6 +16,8 @@ In a second terminal with the same isolated CI environment:
 ```sh
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/skills.mjs
 CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/ability.mjs
+CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/mentor-history.mjs
+CSSV_BROWSER_EXECUTABLE=/path/to/chromium node tests/browser/precis.mjs
 ```
 
 `CSSV_TEST_PHP_CONTAINER` optionally selects the local disposable PHP container. `CSSV_TEST_BROWSER_ORIGIN` must be loopback. The HTTPS runtime reproduces the existing native paid-file access controls and generates a temporary certificate outside the repository. CI installs the pinned browser separately from application dependencies.
