@@ -1,5 +1,7 @@
 # All-source guided affairs learning
 
+> Follow-up quality checkpoint: [academic and assessment review](topic-academic-quality-review.md). Earlier dated package/hash evidence below remains historical.
+
 Latest authoring status: [continuous original-text native courses](original-text-topic-continuation.md). All 86 catalogue headings now have bounded private workflow coverage in 58 logical courses (948 guided sections, 1,419 fixed questions). This is not complete conversion of all 107 original files or production availability. Earlier source-led and first-batch figures remain historical checkpoints. Pro remains paused; no content was published to production.
 
 The owner changed the extraction-led plan to original notes using the **86 combined CA/PA headings** fetched from the specified `/notes` page, with dated current-affairs checks. The latest format instruction requires **text directly to native interactive courses, with no further Word/PDF deliverables**. This supersedes the earlier authoring priority described below. It does not delete the supplied collection or approve a production release.

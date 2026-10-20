@@ -1,5 +1,7 @@
 # Continuous original-text affairs courses: reviewed private candidate
 
+> Follow-up quality checkpoint: [academic and assessment review](topic-academic-quality-review.md). Earlier dated package/hash evidence below remains historical.
+
 Checked 2026-10-20T14:17:29.724796+00:00. **PRIVATE WORKFLOWS VERIFIED — PRODUCTION RELEASE HELD.**
 
 The resumed checkpoint had 62 privately verified catalogue headings and a 47-topic private candidate, including three prepared courses still awaiting their full journeys. This continuation prepared fifteen further course editions, including focused extensions, and verified those editions plus the three already prepared. New authored content remains private UTF-8 text and native JSON; no Word/PDF deliverables were created. Later copy corrections received fresh exact-package journeys.
