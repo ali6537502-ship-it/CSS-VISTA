@@ -8,7 +8,7 @@ import { mergedPastPapers } from '@/lib/admin'
 import { pastPapers as seedPapers } from '@/data/pastPapers'
 import { useAccurateCountdown } from '@/hooks/useAccurateCountdown'
 import { useUnsavedWorkGuard } from '@/hooks/useUnsavedWorkGuard'
-import { PAPER_QUESTION_SECONDS, PAPER_TOTAL_SECONDS, SINGLE_RESUME_KEY, PAPER_RESUME_KEY,
+import { PAPER_MCQ_SECONDS, PAPER_QUESTION_SECONDS, PAPER_TOTAL_SECONDS, allocatedAnswerSeconds, paperQuestionTargetSeconds, SINGLE_RESUME_KEY, PAPER_RESUME_KEY,
   parseSingleSnapshot, parsePaperSnapshot, restoredSingleSeconds, restoredPaperClocks,
   type SingleTimerSnapshot, type PaperSnapshot } from '@/lib/answerTimerRecovery'
 
@@ -66,7 +66,7 @@ export default function AnswerTimer() {
     <div>
       <PageHeader
         title="Handwritten Answer Timer"
-        description="Practise writing answers on paper under real exam timing - one question at a time, or a full four-question paper. Alerts keep your structure on track."
+        description="Practise one answer or a full three-hour paper. Finish MCQs early to distribute the saved minutes among your four written answers."
       />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <div className="no-print mb-6 flex gap-2">
@@ -74,7 +74,7 @@ export default function AnswerTimer() {
             Single Question Timer
           </button>
           <button onClick={() => setTab('paper')} className={`rounded-md px-4 py-2 text-sm font-semibold ${tab === 'paper' ? 'bg-pine text-emerald-50' : 'bg-secondary'}`}>
-            Four-Question Paper Mode
+            Full Paper: MCQs + 4 Answers
           </button>
         </div>
         <TimerCompanionPanel
@@ -310,7 +310,7 @@ function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
           return (
             <div key={session.id} className="flex flex-wrap items-center gap-2 rounded border bg-secondary/40 px-3 py-2 text-sm">
               <span className="min-w-0 flex-1 truncate">
-                {session.mode === 'paper' ? 'Four-question paper' : session.questions[0] || 'Single question'}
+                {session.mode === 'paper' ? 'Full paper practice' : session.questions[0] || 'Single question'}
               </span>
               <span className="text-xs text-muted-foreground">
                 {new Date(session.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
@@ -340,8 +340,10 @@ function readPaperSnapshot(): PaperSnapshot | null {
 function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode: TimerAlertMode; notificationsEnabled: boolean; keepAwake: boolean }) {
   const [questions, setQuestions] = useState<string[]>(['', '', '', ''])
   const [phase, setPhase] = useState<'setup' | 'running' | 'done'>('setup')
-  const [current, setCurrent] = useState(0)
-  const [qLeft, setQLeft] = useState(PAPER_QUESTION_SECONDS)
+  const [current, setCurrent] = useState(-1)
+  const [questionTarget, setQuestionTarget] = useState(PAPER_MCQ_SECONDS)
+  const [mcqElapsedSeconds, setMcqElapsedSeconds] = useState<number | null>(null)
+  const [qLeft, setQLeft] = useState(PAPER_MCQ_SECONDS)
   const [totalLeft, setTotalLeft] = useState(PAPER_TOTAL_SECONDS)
   const [paused, setPaused] = useState(false)
   const [times, setTimes] = useState<(number | null)[]>([null, null, null, null])
@@ -350,7 +352,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   const questionElapsedBaseRef = useRef(0)
   const totalLeftBaseRef = useRef(PAPER_TOTAL_SECONDS)
   const completedRef = useRef(false)
-  const banner = useTimerFeedback(qLeft, phase === 'running' && !paused, PAPER_QUESTION_SECONDS, alertMode, notificationsEnabled)
+  const banner = useTimerFeedback(qLeft, current >= 0 && phase === 'running' && !paused, questionTarget, alertMode, notificationsEnabled)
   const wake = useTimerWakeLock(keepAwake && phase === 'running' && !paused)
 
   // A three-hour attempt used to live only in memory, so one refresh destroyed
@@ -375,14 +377,20 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     current,
     paused,
     times,
+    questionTargetSeconds: questionTarget,
+    mcqElapsedSeconds,
     questionElapsedBase: questionElapsedBaseRef.current,
     totalLeftBase: totalLeftBaseRef.current,
     runningStartedAt: runningStartedAtRef.current,
-  }), [questions, current, paused, times])
+  }), [questions, current, paused, times, questionTarget, mcqElapsedSeconds])
 
+  // Persist through a current ref: changing phases or advancing questions cannot
+  // overwrite the latest session with a stale closure from an effect cleanup.
+  const snapshotNowRef = useRef(snapshotNow)
+  useEffect(() => { snapshotNowRef.current = snapshotNow }, [snapshotNow])
   useEffect(() => {
     if (phase !== 'running') return
-    const persist = () => { if (!completedRef.current) persistPaper(snapshotNow()) }
+    const persist = () => { if (!completedRef.current) persistPaper(snapshotNowRef.current()) }
     persist()
     const interval = window.setInterval(persist, 5000)
     document.addEventListener('visibilitychange', persist)
@@ -390,10 +398,10 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     return () => {
       window.clearInterval(interval)
       document.removeEventListener('visibilitychange', persist)
-      window.removeEventListener('pagehide', persist)
+      document.removeEventListener('pagehide', persist)
       persist()
     }
-  }, [phase, persistPaper, snapshotNow])
+  }, [phase, persistPaper])
 
   useUnsavedWorkGuard(phase === 'running')
 
@@ -404,6 +412,8 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     setQuestions(snapshot.questions)
     setCurrent(snapshot.current)
     setTimes(snapshot.times)
+    setQuestionTarget(paperQuestionTargetSeconds(snapshot))
+    setMcqElapsedSeconds(snapshot.mcqElapsedSeconds ?? null)
     setPaused(snapshot.paused)
     questionElapsedBaseRef.current = snapshot.questionElapsedBase
     totalLeftBaseRef.current = snapshot.totalLeftBase
@@ -426,10 +436,10 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     const questionElapsed = questionElapsedBaseRef.current + delta
     return {
       questionElapsed,
-      questionLeft: PAPER_QUESTION_SECONDS - questionElapsed,
+      questionLeft: questionTarget - questionElapsed,
       paperLeft: totalLeftBaseRef.current - delta,
     }
-  }, [])
+  }, [questionTarget])
 
   useEffect(() => {
     if (phase !== 'running' || paused) return
@@ -449,20 +459,22 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     }
   }, [clockSnapshot, phase, paused])
 
-   function startPaper() {
+  function startPaper() {
     unlockTimerAudio()
     completedRef.current = false
     setResumable(null)
     setPhase('running')
-    setCurrent(0)
+    setCurrent(-1)
     setTimes([null, null, null, null])
-    setQLeft(PAPER_QUESTION_SECONDS)
+    setMcqElapsedSeconds(null)
+    setQuestionTarget(PAPER_MCQ_SECONDS)
+    setQLeft(PAPER_MCQ_SECONDS)
     setTotalLeft(PAPER_TOTAL_SECONDS)
     questionElapsedBaseRef.current = 0
     totalLeftBaseRef.current = PAPER_TOTAL_SECONDS
     runningStartedAtRef.current = Date.now()
     setPaused(false)
-    recordActivity({ type: 'timer', label: 'Four-question paper attempt started', path: '/answer-timer' })
+    recordActivity({ type: 'timer', label: 'Three-hour MCQ and four-answer paper started', path: '/answer-timer' })
   }
 
   function pausePaper() {
@@ -482,14 +494,32 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     setPaused(false)
   }
 
+  function finishMcqs() {
+    if (current !== -1) return
+    const snapshot = clockSnapshot()
+    const allocation = allocatedAnswerSeconds(snapshot.paperLeft, 4)
+    setMcqElapsedSeconds(Math.max(0, snapshot.questionElapsed))
+    setCurrent(0)
+    setQuestionTarget(allocation)
+    setQLeft(allocation)
+    setTotalLeft(snapshot.paperLeft)
+    questionElapsedBaseRef.current = 0
+    totalLeftBaseRef.current = snapshot.paperLeft
+    runningStartedAtRef.current = Date.now()
+    setPaused(false)
+  }
+
   function finishQuestion() {
+    if (current < 0) return
     const snapshot = clockSnapshot()
     const nextTimes = [...times]
     nextTimes[current] = snapshot.questionElapsed
     setTimes(nextTimes)
     if (current < 3) {
+      const allocation = allocatedAnswerSeconds(snapshot.paperLeft, 3 - current)
       setCurrent((c) => c + 1)
-      setQLeft(PAPER_QUESTION_SECONDS)
+      setQuestionTarget(allocation)
+      setQLeft(allocation)
       setTotalLeft(snapshot.paperLeft)
       questionElapsedBaseRef.current = 0
       totalLeftBaseRef.current = snapshot.paperLeft
@@ -509,7 +539,9 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     persistPaper(null)
     const t = finalTimes ?? times.map((value, index) => (value ?? (index === current ? snapshot.questionElapsed : null)))
     const done = t.filter((x): x is number => x !== null)
-    const total = done.reduce((a, b) => a + b, 0)
+    const mcqTime = mcqElapsedSeconds ?? (current === -1 ? Math.max(0, snapshot.questionElapsed) : 0)
+    const total = done.reduce((a, b) => a + b, 0) + mcqTime
+    if (current === -1) setMcqElapsedSeconds(mcqTime)
     saveTimerSession({
       mode: 'paper',
       questions: questions.map((q2, i) => q2 || `Question ${i + 1}`),
@@ -529,10 +561,10 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
   }
 
   const floatingTimer = useFloatingAnswerTimer(
-    `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
+    current === -1 ? `MCQs · paper: ${fmt(totalLeft)}` : `Question ${current + 1} of 4 · paper: ${fmt(totalLeft)}`,
     fmt(qLeft),
     phase === 'running' && !paused,
-    PAPER_QUESTION_SECONDS,
+    questionTarget,
     () => { if (paused) resumePaper(); else pausePaper() },
   )
 
@@ -552,7 +584,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
         <p className="flex items-center gap-2 text-sm font-semibold text-pine">
           <PenLine className="h-4 w-4" /> Enter your four questions
         </p>
-        <p className="mt-1 text-xs text-muted-foreground">Standard paper: 4 questions × 45 minutes recommended, 3 hours total.</p>
+        <p className="mt-1 text-xs text-muted-foreground">3 hours total: 20 MCQs (30-minute target) followed by four written answers. Finish MCQs early and the remaining time is split evenly across all four answers. Finish any answer early to redistribute its spare time to the others.</p>
         <div className="mt-3 space-y-2">
           {questions.map((q2, i) => (
             <textarea
@@ -566,7 +598,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           ))}
         </div>
         <button onClick={startPaper} className="mt-4 inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-6 text-sm font-semibold text-emerald-50">
-          <Play className="h-4 w-4" /> Start paper (3 hours)
+          <Play className="h-4 w-4" /> Start MCQs &amp; paper clock (3 hours)
         </button>
       </div>
     )
@@ -574,7 +606,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
 
   if (phase === 'done') {
     const done = times.filter((x): x is number => x !== null)
-    const total = done.reduce((a, b) => a + b, 0)
+    const total = done.reduce((a, b) => a + b, 0) + (mcqElapsedSeconds ?? 0)
     const avg = done.length ? Math.round(total / done.length) : 0
     const longestIdx = done.length ? times.indexOf(Math.max(...done)) : -1
     const fastestIdx = done.length ? times.indexOf(Math.min(...done)) : -1
@@ -584,7 +616,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           <p className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Paper attempt complete</p>
           <p className="mt-2 font-display text-4xl font-bold text-pine">{fmt(total)}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Total attempt time · {done.length} of 4 questions finished · Average {fmt(avg)} per question
+            Total attempt time · {mcqElapsedSeconds !== null ? `MCQs ${fmt(mcqElapsedSeconds)} · ` : ''}{done.length} of 4 answers finished · Average {fmt(avg)} per answer
           </p>
         </div>
         <div className="rounded-xl border bg-white p-5">
@@ -597,7 +629,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
                   {t !== null && (
                     <div
                       className={`h-full rounded-full ${i === longestIdx ? 'bg-red-400' : i === fastestIdx ? 'bg-emerald-500' : 'bg-emerald-700'}`}
-                      style={{ width: `${Math.min(100, (t / (45 * 60)) * 100)}%` }}
+                      style={{ width: `${Math.min(100, (t / PAPER_QUESTION_SECONDS) * 100)}%` }}
                     />
                   )}
                 </div>
@@ -615,7 +647,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           )}
         </div>
         <button onClick={() => setPhase('setup')} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-6 text-sm font-semibold text-emerald-50">
-          <Plus className="h-4 w-4" /> New four-question attempt
+          <Plus className="h-4 w-4" /> New full paper attempt
         </button>
       </div>
     )
@@ -632,13 +664,13 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-white p-5 text-center">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Question {current + 1} of 4 {questions[current] ? `- ${questions[current].slice(0, 40)}` : ''}
+            {current === -1 ? 'MCQ section (20 questions)' : `Question ${current + 1} of 4 ${questions[current] ? `- ${questions[current].slice(0, 40)}` : ''}`}
           </p>
           <p className={`mt-2 font-display text-4xl font-bold tabular-nums ${qLeft <= 0 ? 'text-red-600' : qLeft < 300 ? 'text-amber-600' : 'text-pine'}`}>{fmt(qLeft)}</p>
-          <p className="mt-1 text-[11px] text-muted-foreground">{qLeft < 0 ? 'Question overtime' : 'Target: 45 minutes per question'}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">{qLeft < 0 ? (current === -1 ? 'MCQ target passed — the full paper clock still runs' : 'Answer target passed — the full paper clock still runs') : current === -1 ? 'MCQ target: 30 minutes. You can finish earlier.' : `Current answer allocation: ${fmt(questionTarget)}`}</p>
           <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200" aria-hidden="true">
             <div className={`h-full rounded-full ${qLeft < 0 ? 'bg-red-500' : 'bg-emerald-700'}`}
-              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - qLeft / PAPER_QUESTION_SECONDS)))}%` }} />
+              style={{ width: `${Math.max(0, Math.min(100, 100 * (1 - qLeft / Math.max(1, questionTarget))))}%` }} />
           </div>
         </div>
         <div className="rounded-xl border bg-white p-5 text-center">
@@ -651,13 +683,23 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           </div>
         </div>
       </div>
+      {current === -1 && (
+        <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-950">
+          Finish the MCQs as soon as you are ready. All unused time is shared between the four written answers; the three-hour overall clock never restarts.
+        </p>
+      )}
+      {current >= 0 && mcqElapsedSeconds !== null && (
+        <p className="text-xs text-muted-foreground">
+          MCQs completed in {fmt(mcqElapsedSeconds)}. Time left in the paper is automatically divided between the unanswered questions.
+        </p>
+      )}
       <div className="rounded-xl border bg-white p-5">
         <div className="flex flex-wrap items-center justify-center gap-2">
           <button onClick={paused ? resumePaper : pausePaper} className={`inline-flex h-11 items-center gap-1.5 rounded-md px-5 text-sm font-semibold text-white ${paused ? 'bg-pine' : 'bg-amber-600'}`}>
             {paused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />} {paused ? 'Resume' : 'Pause'}
           </button>
-          <button onClick={finishQuestion} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white">
-            <Square className="h-4 w-4" /> {current < 3 ? `Finish Q${current + 1} - start Q${current + 2}` : 'Finish Q4 & end paper'}
+          <button onClick={current === -1 ? finishMcqs : finishQuestion} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white">
+            <Square className="h-4 w-4" /> {current === -1 ? 'Finish MCQs — start Q1' : current < 3 ? `Finish Q${current + 1} — start Q${current + 2}` : 'Finish Q4 & end paper'}
           </button>
           <button onClick={() => finishPaper()} className="inline-flex h-11 items-center gap-1.5 rounded-md border px-4 text-sm font-semibold text-red-600">
             <Trash2 className="h-4 w-4" /> End paper
