@@ -1,7 +1,15 @@
 /** Validated, framework-independent recovery helpers for answer-writing timers. */
 
-export const PAPER_QUESTION_SECONDS = 45 * 60
 export const PAPER_TOTAL_SECONDS = 3 * 3600
+export const PAPER_MCQ_SECONDS = 30 * 60
+/** Baseline recommendation with the full 30 minutes spent on MCQs. */
+export const PAPER_QUESTION_SECONDS = (PAPER_TOTAL_SECONDS - PAPER_MCQ_SECONDS) / 4
+
+/** Divide the actual remaining exam clock between answers yet to be attempted. */
+export function allocatedAnswerSeconds(paperLeftSeconds: number, unanswered: number): number {
+  if (!Number.isFinite(paperLeftSeconds) || !Number.isInteger(unanswered) || unanswered < 1) return 0
+  return Math.max(0, Math.floor(paperLeftSeconds / unanswered))
+}
 export const SINGLE_RESUME_KEY = 'cssvista:single-answer-timer'
 export const PAPER_RESUME_KEY = 'cssvista:paper-attempt'
 
@@ -15,9 +23,13 @@ export interface SingleTimerSnapshot {
 
 export interface PaperSnapshot {
   questions: string[]
+  /** -1 = MCQ section; 0–3 = one of four descriptive questions. */
   current: number
   paused: boolean
   times: (number | null)[]
+  /** Optional to preserve old in-progress paper attempts made before redistribution. */
+  questionTargetSeconds?: number
+  mcqElapsedSeconds?: number | null
   questionElapsedBase: number
   totalLeftBase: number
   runningStartedAt: number | null
@@ -48,7 +60,12 @@ export function parsePaperSnapshot(value: unknown): PaperSnapshot | null {
     || !saved.questions.every(q => typeof q === 'string' && q.length <= 10000)
     || !Array.isArray(saved.times) || saved.times.length !== 4
     || !saved.times.every(t => t === null || (typeof t === 'number' && Number.isInteger(t) && t >= 0 && t <= 604800))
-    || !Number.isInteger(saved.current) || (saved.current as number) < 0 || (saved.current as number) > 3
+    || !Number.isInteger(saved.current) || (saved.current as number) < -1 || (saved.current as number) > 3
+    || !(saved.questionTargetSeconds === undefined || (Number.isInteger(saved.questionTargetSeconds)
+      && (saved.questionTargetSeconds as number) >= 0 && (saved.questionTargetSeconds as number) <= 604800))
+    || !(saved.mcqElapsedSeconds === undefined || saved.mcqElapsedSeconds === null
+      || (Number.isInteger(saved.mcqElapsedSeconds) && (saved.mcqElapsedSeconds as number) >= 0
+        && (saved.mcqElapsedSeconds as number) <= 604800))
     || typeof saved.paused !== 'boolean'
     || typeof saved.questionElapsedBase !== 'number'
     || !Number.isFinite(saved.questionElapsedBase) || saved.questionElapsedBase < 0 || saved.questionElapsedBase > 604800
@@ -67,7 +84,13 @@ export function restoredPaperClocks(snapshot: PaperSnapshot, now = Date.now()) {
     ? 0
     : Math.max(0, Math.floor((now - snapshot.runningStartedAt) / 1000))
   return {
-    questionLeft: PAPER_QUESTION_SECONDS - snapshot.questionElapsedBase - elapsed,
+    questionLeft: paperQuestionTargetSeconds(snapshot) - snapshot.questionElapsedBase - elapsed,
     paperLeft: snapshot.totalLeftBase - elapsed,
   }
+}
+
+/** Old saved descriptive attempts continue with their original 45-minute target. */
+export function paperQuestionTargetSeconds(snapshot: PaperSnapshot): number {
+  return snapshot.questionTargetSeconds
+    ?? (snapshot.current === -1 ? PAPER_MCQ_SECONDS : PAPER_TOTAL_SECONDS / 4)
 }
