@@ -310,7 +310,7 @@ function PastTimerSessions({ refreshKey }: { refreshKey: number }) {
           return (
             <div key={session.id} className="flex flex-wrap items-center gap-2 rounded border bg-secondary/40 px-3 py-2 text-sm">
               <span className="min-w-0 flex-1 truncate">
-                {session.mode === 'paper' ? 'Four-question paper' : session.questions[0] || 'Single question'}
+                {session.mode === 'paper' ? 'Full paper practice' : session.questions[0] || 'Single question'}
               </span>
               <span className="text-xs text-muted-foreground">
                 {new Date(session.ts).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
@@ -459,7 +459,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
     }
   }, [clockSnapshot, phase, paused])
 
-   function startPaper() {
+  function startPaper() {
     unlockTimerAudio()
     completedRef.current = false
     setResumable(null)
@@ -629,7 +629,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
                   {t !== null && (
                     <div
                       className={`h-full rounded-full ${i === longestIdx ? 'bg-red-400' : i === fastestIdx ? 'bg-emerald-500' : 'bg-emerald-700'}`}
-                      style={{ width: `${Math.min(100, (t / (45 * 60)) * 100)}%` }}
+                      style={{ width: `${Math.min(100, (t / PAPER_QUESTION_SECONDS) * 100)}%` }}
                     />
                   )}
                 </div>
@@ -647,7 +647,7 @@ function PaperTimer({ alertMode, notificationsEnabled, keepAwake }: { alertMode:
           )}
         </div>
         <button onClick={() => setPhase('setup')} className="inline-flex h-11 items-center gap-1.5 rounded-md bg-pine px-6 text-sm font-semibold text-emerald-50">
-          <Plus className="h-4 w-4" /> New four-question attempt
+          <Plus className="h-4 w-4" /> New full paper attempt
         </button>
       </div>
     )
