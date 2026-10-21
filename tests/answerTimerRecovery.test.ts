@@ -41,7 +41,7 @@ test('paused single answer is unchanged while browser is closed', () => {
 test('restores paused paper question and paper clocks without counting closed time', () => {
   assert.deepEqual(parsePaperSnapshot(paper), paper)
   assert.deepEqual(restoredPaperClocks(paper, 999_999_999), {
-    questionLeft: PAPER_QUESTION_SECONDS - 700,
+    questionLeft: 45 * 60 - 700,
     paperLeft: 5200,
   })
 })
@@ -49,7 +49,7 @@ test('restores paused paper question and paper clocks without counting closed ti
 test('restores running paper clocks through expiry and overtime', () => {
   const running = { ...paper, paused: false, runningStartedAt: 1_000_000 }
   assert.deepEqual(restoredPaperClocks(running, 1_060_000), {
-    questionLeft: PAPER_QUESTION_SECONDS - 760,
+    questionLeft: 45 * 60 - 760,
     paperLeft: 5140,
   })
   assert.deepEqual(restoredPaperClocks({ ...running, questionElapsedBase: 2600, totalLeftBase: 20 }, 1_060_000), {
