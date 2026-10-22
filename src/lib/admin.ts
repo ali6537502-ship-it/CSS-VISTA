@@ -434,8 +434,8 @@ export function mergedHomeCards(seed: HomeCard[]): HomeCard[] {
   const map = new Map<string, HomeCard>()
   seed.forEach((h) => map.set(h.id, h))
   admin.forEach((h) => {
-    if (h.id === 'gk-grand-mock') return
-    if (h.id === 'pms-grand-mock' || h.id === 'test-series') {
+    if (h.id === 'gk-grand-mock' || h.id === 'pms-grand-mock' || h.to.includes('mode=pms-mock')) return
+    if (h.id === 'test-series') {
       const current = map.get(h.id)
       map.set(h.id, {
         ...h,
