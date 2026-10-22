@@ -109,12 +109,6 @@ export const featureAnnouncements: Notification[] = [
     link: '/mpt',
   },
   {
-    id: 'feature-pms-gk-mock',
-    kind: 'platform',
-    text: 'PMS GK Grand Mock: daily entry remains open from 8:00–10:00 PM (Pakistan time).',
-    link: '/gk/quiz?mode=pms-mock',
-  },
-  {
     id: 'feature-revision',
     kind: 'platform',
     text: 'Smart Revision automatically brings questions back after 1, 3, 7, 14, 30 and 60 days.',
