@@ -278,9 +278,7 @@ try {
         const rect = element.getBoundingClientRect()
         return element.contains(document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2))
       }), 'Moving notices cannot cover the streak target')
-      const countdown = page.locator('.cssv-countdown-card').first()
-      assert.equal(await countdown.getAttribute('aria-label'), null, 'Countdown name comes from its visible text, rather than replacing it')
-      assert.match(await countdown.ariaSnapshot(), /Updates every second/)
+      assert.equal(await page.locator('.cssv-countdown-card').count(), 0, 'The removed homepage countdown is not reintroduced')
       await page.emulateMedia({ reducedMotion: 'no-preference' })
       await page.getByRole('button', { name: 'Pause live updates', exact: true }).click()
       assert.equal(await track.evaluate((element) => getComputedStyle(element).animationPlayState), 'paused')
@@ -292,6 +290,7 @@ try {
       assert.ok(rawHTML.includes('Grammar describes the patterns by which words and larger units combine and change form.'), 'Raw grammar page includes actual authored lesson explanation')
       assert.ok(state.robots.every(value => !value.includes('noindex')), 'Public grammar lesson remains intentionally indexable')
       await page.getByRole('button', { name: 'Start with Day 1', exact: true }).click()
+      await page.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).waitFor()
       record.fullLessonCharacters = (await page.locator('main').first().innerText()).length
       assert.ok(await page.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).count(), 'Guest can access authored grammar lesson')
     }
