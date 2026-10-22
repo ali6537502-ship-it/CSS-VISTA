@@ -1,0 +1,240 @@
+{
+  "contentHash": "5a0fbd4e2078b3bb1a5000239a529da851856304407705042c9e0769452fbe0d",
+  "passed": true,
+  "reports": [
+    {
+      "check": "responsive objective interface",
+      "width": 320,
+      "scroll": 320,
+      "h1": 1,
+      "main": 1
+    },
+    {
+      "check": "responsive objective interface",
+      "width": 390,
+      "scroll": 390,
+      "h1": 1,
+      "main": 1
+    },
+    {
+      "check": "responsive objective interface",
+      "width": 768,
+      "scroll": 768,
+      "h1": 1,
+      "main": 1
+    },
+    {
+      "check": "responsive objective interface",
+      "width": 1440,
+      "scroll": 1440,
+      "h1": 1,
+      "main": 1
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 1
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 2
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 3
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 4
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 5
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 6
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 7
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 8
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 9
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 10
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 11
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 12
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 13
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 14
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 15
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 16
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 17
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 18
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 19
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 20
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 21
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 22
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 23
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 24
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 25
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 26
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 27
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 28
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 29
+    },
+    {
+      "check": "lesson orientation and section navigation",
+      "day": 30
+    },
+    {
+      "check": "wrong response, feedback, actual reinforcement and immutable first response",
+      "id": "gv5-d01-q01",
+      "prompt": "In The gardener watered the roses, which expression is the whole subject?"
+    },
+    {
+      "check": "reference deep link, persisted note and bookmark, standalone practice link"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "gap",
+      "id": "gv5-d01-r12"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "multiple-gap",
+      "id": "gv5-d02-r02"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "correction",
+      "id": "gv5-d01-c01"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "transformation",
+      "id": "gv5-d01-t01"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "combining",
+      "id": "gv5-d01-r06"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "splitting",
+      "id": "gv5-d01-r07"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "ordering",
+      "id": "gv5-d01-r01"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "classification",
+      "id": "gv5-d01-r03"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "function",
+      "id": "gv5-d01-r02"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "comparison",
+      "id": "gv5-d01-r05"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "paragraph-edit",
+      "id": "gv5-d01-r17"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "writing",
+      "id": "gv5-d01-w01"
+    },
+    {
+      "check": "draft, model, rubric and honest self-review",
+      "kind": "analysis",
+      "id": "gv5-d01-r04"
+    },
+    {
+      "check": "diagnostic questions, written responses and assessment feedback boundary"
+    },
+    {
+      "check": "profile, notebook integration, glossary, export, restore and legacy preservation"
+    },
+    {
+      "check": "unreadable browser record retained; public course available"
+    },
+    {
+      "check": "unavailable lesson displays an error and retries without discarding work"
+    }
+  ],
+  "pageErrors": []
+}

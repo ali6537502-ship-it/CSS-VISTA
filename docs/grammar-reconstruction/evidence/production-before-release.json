@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-22T18:32:03.008358+00:00",
+  "status": 200,
+  "url": "https://www.css-vista.com/deployment-fingerprint.json",
+  "fingerprint": {
+    "schemaVersion": 1,
+    "gitSha": "30dabb4ebe828ec31c3d20c8257f61a1c0a27317",
+    "source": "git-rev-parse-head",
+    "buildTarget": "hostinger",
+    "builtAt": "2026-10-22T04:38:11.844Z"
+  }
+}

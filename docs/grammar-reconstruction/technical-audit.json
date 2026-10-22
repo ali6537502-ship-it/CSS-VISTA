@@ -1,0 +1,46 @@
+{
+  "baselineCommit": "6f9a940b1348573339fb4ce7e170e8774b8748dc",
+  "scope": "Course integrations, identity scopes and persistence; original defects are distinguished from constraints created by replacing the syllabus.",
+  "findings": [
+    {
+      "id": "TECH-01",
+      "kind": "original functional omission",
+      "location": "src/pages/Mistakes.tsx: question detail loader",
+      "severity": "high",
+      "evidence": "The original loader resolves the MCQ bank and q-* general quiz records, without a grammar-course question resolver. Grammar errors can therefore appear with unavailable details.",
+      "supportingReference": "Original repository source at the baseline commit; new public browser notebook journey.",
+      "proposedCorrection": "Resolve new grammar IDs from a generated question-details index and provide a deep link to the corresponding practice.",
+      "implementationStatus": "Implemented and verified for reconstructed items. Archived legacy answers are retained rather than republished as reliable new teaching."
+    },
+    {
+      "id": "TECH-02",
+      "kind": "replacement integration constraint",
+      "location": "public/api/_tutor_context.php and _tutor_grammar.php",
+      "severity": "high",
+      "evidence": "Existing lesson assistance derives its grammar text from the original rule catalogue, including rules identified as unreliable in the academic audit. Replacing the page alone would leave that catalogue unchanged.",
+      "supportingReference": "Original context loader and source exporter; current generated bounded-context catalogue; native tutor unit/security checks.",
+      "proposedCorrection": "Use reconstructed teaching for newly selected contexts; retain immutable saved exchanges and explicitly labelled related-topic aliases for old deep links. Keep all assistance release/access controls.",
+      "implementationStatus": "Implemented. New canonical contexts are separate from hidden compatibility aliases; no AI service was activated."
+    },
+    {
+      "id": "TECH-03",
+      "kind": "replacement integration constraint",
+      "location": "public/api/_planner.php, _planner_reports.php and student/planner.php; preparation task links",
+      "severity": "high",
+      "evidence": "The existing planner reads only legacy grammar progress and uses its day numbers and titles. The replacement syllabus changes those meanings. Old snapshots must remain historical while new evidence supplies new recommendations.",
+      "supportingReference": "Original planner context/candidate/report source; read-only reconstructed adapter and native dashboard isolation case.",
+      "proposedCorrection": "Adapt the new edition's first responses, due reviews and completion without modifying old records. Mark all new links with v5, label old evidence and interpret unmarked historical task links as legacy.",
+      "implementationStatus": "Implemented; native API verification checks that a legacy completion is not counted as reconstructed completion."
+    },
+    {
+      "id": "TECH-04",
+      "kind": "data preservation constraint; existing safeguard retained",
+      "location": "src/features/grammar/state.ts and sync.ts; public/api/_grammar*.php; server/sql/015_grammar_progress.sql",
+      "severity": "high",
+      "evidence": "The existing account endpoint correctly validates its own 480 objective identities, uses owner/attempt isolation and preserves initial evidence. It cannot safely accept a replacement question bank by reinterpreting its original identifiers.",
+      "supportingReference": "Original grammar catalogue/checksum gates, native schema, existing 19 grammar tests, and new restoration/concurrency tests.",
+      "proposedCorrection": "Keep the old bank, namespaces and endpoint intact. Add the v5 namespace/table/catalogue, raw local backups, conflict-aware saves and a read-only earlier-work bridge.",
+      "implementationStatus": "Implemented. No destructive migration or production learner-data access was performed."
+    }
+  ]
+}

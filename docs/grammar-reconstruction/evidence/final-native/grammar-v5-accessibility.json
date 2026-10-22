@@ -1,0 +1,35 @@
+{
+  "contentHash": "5a0fbd4e2078b3bb1a5000239a529da851856304407705042c9e0769452fbe0d",
+  "passed": true,
+  "scope": "Automated course-component WCAG 2.2 AA checks in six representative views, plus keyboard disclosure/focus. This is not a full-site certification or a substitute for assistive-technology user testing.",
+  "results": [
+    {
+      "path": "/grammar-course",
+      "violations": []
+    },
+    {
+      "path": "/grammar-course?day=24&section=gv5-d24-m02",
+      "violations": []
+    },
+    {
+      "path": "/grammar-course?day=1&section=questions",
+      "violations": []
+    },
+    {
+      "path": "/grammar-course?day=20&section=writing",
+      "violations": []
+    },
+    {
+      "path": "/grammar-course?view=profile",
+      "violations": []
+    },
+    {
+      "path": "/grammar-course?view=reference&guide=glossary",
+      "violations": []
+    }
+  ],
+  "keyboard": {
+    "tag": "SUMMARY",
+    "outline": "solid"
+  }
+}

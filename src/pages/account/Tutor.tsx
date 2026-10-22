@@ -67,6 +67,7 @@ function Source({
         </p>
       )}
       <p className="mt-3 text-sm leading-7 text-slate-500">{context.attribution}</p>
+      {context.id.startsWith('grammar:') && !context.return_path.includes('edition=v5') && <p className="mt-3 rounded-xl bg-amber-50 p-4 text-sm leading-7 text-amber-950">This saved source belongs to the earlier grammar course. Consult the reconstructed lessons for revised explanations; the saved exchange remains unchanged.</p>}
       <details className="mt-4">
         <summary className="min-h-11 cursor-pointer text-sm font-semibold text-slate-700">
           Read the source context

@@ -104,7 +104,8 @@
     "audit:browser:seo": "node tests/browser/seo-readiness.mjs && node tests/browser/ad-state.mjs",
     "audit:editorial": "node scripts/editorial/build-book-reviews.mjs --check && node scripts/editorial/build-journal-transcripts.mjs --check && node scripts/editorial/reviewed-mcqs.mjs --check && node scripts/seo/build-rights-inventory.mjs --check && python3 scripts/import_optional_notes.py --check",
     "test:editorial": "node --test tests/bookEditorial.test.mjs tests/mcqEditorial.test.mjs tests/journalTranscripts.test.ts && python3 tests/editorial/test_optional_note_reviews.py",
-    "test:grammar-v5": "node scripts/grammar-v5/build.mjs --check && node --test tests/grammarV5.test.ts"
+    "test:grammar-v5": "node scripts/grammar-v5/build.mjs --check && node --test tests/grammarV5.test.ts tests/tutor/return.test.ts",
+    "audit:grammar-release": "node scripts/grammar-v5/build.mjs --check --release"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

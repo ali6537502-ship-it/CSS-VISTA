@@ -42,6 +42,7 @@ if (target === 'hostinger') {
 // before anything copies public/ into the build output.
 // These content reviews are shared by the real application and prerendered
 // HTML. Fail stale author/source preconditions before producing an artifact.
+run('scripts/grammar-v5/build.mjs', ['--check', '--release'])
 run('scripts/editorial/reviewed-mcqs.mjs', ['--check'])
 runProgram('python3', [join(root, 'scripts/import_optional_notes.py'), '--check'])
 run('scripts/editorial/build-book-reviews.mjs')

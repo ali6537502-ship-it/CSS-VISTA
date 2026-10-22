@@ -289,11 +289,11 @@ try {
       await page.emulateMedia({ reducedMotion: 'reduce' })
     }
     if (path === '/grammar-course') {
-      assert.ok(rawHTML.includes('he speaks English fluent'), 'Raw grammar page includes actual authored lesson explanation')
+      assert.ok(rawHTML.includes('Grammar describes the patterns by which words and larger units combine and change form.'), 'Raw grammar page includes actual authored lesson explanation')
       assert.ok(state.robots.every(value => !value.includes('noindex')), 'Public grammar lesson remains intentionally indexable')
-      await page.getByRole('button', { name: 'Read full lesson', exact: true }).click()
+      await page.getByRole('button', { name: 'Start with Day 1', exact: true }).click()
       record.fullLessonCharacters = (await page.locator('main').first().innerText()).length
-      assert.ok(await page.getByText('What every word is doing', { exact: true }).count(), 'Guest can access authored grammar lesson')
+      assert.ok(await page.getByRole('heading', { name: 'Grammar, meaning and units of structure', exact: true }).count(), 'Guest can access authored grammar lesson')
     }
     if (path === '/fpsc-updates') {
       const currency = page.getByRole('complementary', { name: 'Schedule source and currency', exact: true })

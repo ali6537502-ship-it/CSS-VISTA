@@ -1,6 +1,6 @@
 # Quality assurance record
 
-Status: final release checks in progress. No production completion claim is made by this working report.
+Status: reconstructed content and native learning flows verified. Publication requires the final PR checks; the observed production fingerprint and live checks are recorded in the release evidence.
 
 ## Academic and instructional review
 
@@ -34,15 +34,17 @@ Specific verification included the two *insist* complement patterns, collective 
 - The 19 existing grammar state/practice/synchronisation tests, original-file checksum preservation and legacy server catalogue checks passed.
 - New state tests cover raw/scoped legacy backup, immutable first response, distinct exposure versus later retrieval, long original text, complete round-trip preservation, response-format coverage, real reinforcement links and cumulative scope.
 - Native PHP/MySQL unit/API checks passed in disposable GitHub CI: user/attempt isolation, CSRF, unknown-field rejection, strict catalogue validation, exact replay, concurrent version conflicts, immutable first answers, long writing, additive restoration, canonical receipts, retained legacy records and denied private implementation files. No production learner record was accessed.
-- Public Chromium tests passed 51 checks: all 30 lesson orientations/section navigation, four widths (320/390/768/1440), objective feedback/reinforcement/retry, all 13 open-response formats, notes/bookmarks, exact task resume, glossary, shared notebook resolution, JSON export/restore and corrupt-record preservation.
+- Public Chromium tests passed 53 checks: all 30 lesson orientations/section navigation, four widths (320/390/768/1440), objective feedback/reinforcement/retry, all 13 open-response formats, notes/bookmarks, exact task resume, glossary, shared notebook resolution, JSON export/restore and corrupt-record preservation.
 - Six representative course views had zero axe-core WCAG 2.2 AA violations in the tested scope. Native disclosure worked from the keyboard and visible focus was checked. This is bounded verification, not a complete full-site accessibility certification or an assistive-technology user study.
 
 ## Final release requirements
 
-The final built signed-in browser journey, latest-commit CI checks, exact content-digest sign-off and live deployment fingerprint verification remain required before changing this report to a completed release. See the PR checks and retained evidence rather than inferring readiness from manuscript size.
+The actual successful native/browser artifact is retained in `evidence/final-native/` with its run, tested commit and content digest. It includes a fresh signed-in device, a preserved conflict draft, backup-before-reload and exact recovery after a committed save loses its response. The release sign-off matches the current content digest; the build now rejects a stale or incomplete sign-off. All required checks must pass for the final PR commit before publication. Observed production verification is supplied in the [release record](https://github.com/ali6537502-ship-it/CSS-VISTA/releases/tag/grammar-v5-2026-10).
 
 Difficulty labels and diagnostic suggestions are editorial learning aids. Tests have not been normed or statistically equated. Self-review does not establish independent writing accuracy. Production account data is intentionally not inspected as part of verification; the account flow is tested against disposable native MySQL using the real application/backend.
 
 The integration review also found that contextual assistance still selected legacy rules. New bounded contexts now use the reconstructed concepts and source links, with old deep-link aliases kept outside the new picker. Shared recent activity, remembered attempt choice, Expression/Précis return links and reference round trips were restored. The first built CI browser run failed because its Node-side fixture fetch did not trust the deliberately self-signed loopback certificate; it now uses the already isolated browser request context. Global production TLS verification was not disabled.
 
 The final platform review found that the preparation planner still read only the earlier grammar edition. A read-only adapter now supplies the reconstructed bank’s actual first responses, due reviews and completion to the existing dashboard and recommendations. The old evidence remains available separately. Native verification includes a case with a legacy completion and a new objective error to ensure the legacy completion does not become new completion. Old saved plan snapshots are not rewritten; rendering adds the explicit legacy edition to their links so day numbers are interpreted correctly.
+
+The broader SEO journey was updated to open the reconstructed first sub-lesson and verify its actual authored definition in static HTML. A real foundation preview uses the canonical content in both server and client views. Historical assistance links retain the legacy edition marker, and saved old sources are clearly labelled without modifying exchanges.
