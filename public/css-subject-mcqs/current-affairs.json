@@ -9807,5 +9807,124 @@
     "source": "https://www.reuters.com/world/india/india-should-let-exchange-rate-move-first-line-defence-ongoing-shock-imf-2026-10-21/",
     "verification": "cross-checked against cited source in dated Current Affairs edition",
     "id": "css-current-affairs-20261022-04"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Global Economy and Pakistan",
+    "question": "What 2026 GDP change did the IMF project on 22 October for the Middle East, North Africa and Pakistan regional aggregate?",
+    "options": [
+      "A contraction of 1.3%",
+      "Growth of 1.3%",
+      "A contraction of 3.1%",
+      "Growth of 6.6%"
+    ],
+    "answer": 0,
+    "explanation": "The IMF's 22 October 2026 outlook projected a 1.3% GDP contraction for the Middle East, North Africa and Pakistan regional aggregate in 2026, not for Pakistan individually.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/world/middle-east/imf-sees-13-contraction-middle-east-north-africa-pakistan-2026-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-05"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Pakistan Foreign Relations and Regional Diplomacy",
+    "question": "Which city was announced on 22 October 2026 as host of seven-country ministerial talks including Pakistan?",
+    "options": [
+      "Ankara",
+      "Doha",
+      "Istanbul",
+      "Geneva"
+    ],
+    "answer": 2,
+    "explanation": "On 22 October 2026, Türkiye announced planned seven-country foreign-minister talks in Istanbul for 23 October, including Pakistan.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/world/asia-pacific/turkey-host-regional-european-foreign-ministers-talks-regional-conflicts-source-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-06"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Global Energy and Maritime Security",
+    "question": "Which oil benchmark touched an intraday high of $112.68 per barrel on 22 October 2026?",
+    "options": [
+      "Dubai Fateh",
+      "Brent crude",
+      "OPEC Reference Basket",
+      "Urals crude"
+    ],
+    "answer": 1,
+    "explanation": "Brent crude futures touched $112.68 per barrel intraday on 22 October 2026, their highest level since 18 May, according to Reuters.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/business/energy/oil-rises-us-orders-diplomats-leave-saudi-arabia-amid-escalating-tensions-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-07"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Climate Policy and International Trade",
+    "question": "Which EU body voted on 22 October 2026 to propose a three-year delay to methane rules for fuel imports?",
+    "options": [
+      "European Parliament",
+      "European Central Bank",
+      "European Court of Auditors",
+      "European Investment Bank"
+    ],
+    "answer": 0,
+    "explanation": "The European Parliament voted on 22 October 2026 to propose a three-year delay to methane rules on fossil-fuel imports; EU government agreement was still required.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/business/energy/european-parliament-votes-approve-three-year-delay-eu-methane-rules-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-08"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Global Health and International Institutions",
+    "question": "Which malaria vaccine was covered by the roughly 40% price-cut agreement announced by UNICEF and Gavi on 22 October 2026?",
+    "options": [
+      "R21/Matrix-M",
+      "BCG",
+      "Mosquirix (RTS,S/AS01)",
+      "Rotarix"
+    ],
+    "answer": 2,
+    "explanation": "On 22 October 2026, UNICEF and Gavi announced an agreement to reduce the Mosquirix malaria vaccine price by about 40%, subject to milestones.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/business/healthcare-pharmaceuticals/unicef-gavi-agree-cut-mosquirix-malaria-vaccine-price-by-40-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-09"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Technology, Industrial Policy and Energy",
+    "question": "What total R&D funding did the US Commerce Department propose on 22 October 2026 for four power-semiconductor and critical-material firms?",
+    "options": [
+      "$189 million",
+      "$289 million",
+      "$489 million",
+      "$389 million"
+    ],
+    "answer": 3,
+    "explanation": "The US Commerce Department announced on 22 October 2026 proposed R&D awards of $389 million to four power-semiconductor and critical-material companies.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/technology/us-award-389-million-rd-funds-power-semiconductors-critical-materials-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-10"
+  },
+  {
+    "subject": "Current Affairs",
+    "topic": "Technology and Critical Mineral Geopolitics",
+    "question": "Which supply-chain risk prompted TSMC to explore rare-earth-free factory motors, according to Reuters on 22 October 2026?",
+    "options": [
+      "US steel tariffs",
+      "China's rare-earth export controls",
+      "EU methane-import rules",
+      "Japanese rice export limits"
+    ],
+    "answer": 1,
+    "explanation": "Reuters reported on 22 October 2026 that TSMC was exploring rare-earth-free factory motors in response to Chinese export controls.",
+    "sourceDocument": "Daily Current Affairs 2026-10-22",
+    "source": "https://www.reuters.com/world/china/tsmc-seeks-factory-equipment-alternatives-thwart-chinas-rare-earths-grip-sources-2026-10-22/",
+    "verification": "cross-checked against cited source in dated Current Affairs edition",
+    "id": "css-current-affairs-20261022-11"
   }
 ]

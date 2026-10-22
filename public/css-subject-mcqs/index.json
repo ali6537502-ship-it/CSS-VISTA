@@ -2,7 +2,7 @@
   "batch": "2026-08-24-owner-supplied-complete-import",
   "generatedAt": "2026-10-22",
   "policy": "All structurally complete owner-supplied questions are connected after conservative removal of exact, reciprocal and high-confidence fact duplicates. Unresolved source items are counted, never guessed.",
-  "total": 42808,
+  "total": 42815,
   "detected": 50093,
   "unresolved": 380,
   "subjects": [
@@ -411,7 +411,7 @@
       "name": "Current Affairs",
       "designation": "compulsory",
       "group": null,
-      "count": 577,
+      "count": 584,
       "topics": [
         "D1 IMF Programme, Stabilisation and Climate Resilience",
         "D2 Monetary Policy, Inflation and the 2026 Economic Setting",
@@ -498,17 +498,24 @@
         "Russia-Ukraine Diplomacy",
         "European Security and Diplomacy",
         "Ukraine Politics and Ceasefire",
-        "International Energy Governance"
+        "International Energy Governance",
+        "Global Economy and Pakistan",
+        "Pakistan Foreign Relations and Regional Diplomacy",
+        "Global Energy and Maritime Security",
+        "Climate Policy and International Trade",
+        "Technology, Industrial Policy and Energy",
+        "Technology and Critical Mineral Geopolitics"
       ],
       "file": "current-affairs.json",
-      "sourceCount": 577,
+      "sourceCount": 584,
       "sourceDocuments": [
         "Current_Affairs_500_Premium_MCQs_Expanded_15_Aug_2026.docx",
         "CSS Vista Current Affairs — 14 September 2026",
         "Daily Current Affairs 2026-09-15",
         "Daily Current Affairs 2026-10-09",
         "Daily Current Affairs 2026-10-10",
-        "Daily Current Affairs 2026-10-11"
+        "Daily Current Affairs 2026-10-11",
+        "Daily Current Affairs 2026-10-22"
       ],
       "audit": "four distinct options, recoverable answer, stable ID, source attribution and high-confidence duplicate facts checked"
     },

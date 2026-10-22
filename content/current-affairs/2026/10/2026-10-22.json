@@ -1,6 +1,6 @@
 {
   "date": "2026-10-22",
-  "published_at": "2026-10-22T08:50:00+05:00",
+  "published_at": "2026-10-22T19:56:04+05:00",
   "edition": "Daily Current Affairs — 22 October 2026",
   "schema_version": 1,
   "stories": [
@@ -226,6 +226,327 @@
           "title": "India should let exchange rate move as first line of defence in ongoing shock, IMF official says",
           "url": "https://www.reuters.com/world/india/india-should-let-exchange-rate-move-first-line-defence-ongoing-shock-imf-2026-10-21/",
           "published_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-imf-menap-outlook",
+      "category": "Global Economy and Pakistan",
+      "headline": "IMF projects 1.3% contraction for Middle East, North Africa and Pakistan region in 2026",
+      "summary": "The IMF projected a 1.3% contraction in 2026 for the combined Middle East, North Africa and Pakistan regional grouping and 6.6% growth in 2027. The figure is not Pakistan's individual GDP forecast.",
+      "what_happened": "The IMF linked its forecast to disruptions in energy, shipping and trade related to the Iran conflict.",
+      "why_it_matters": "The outlook matters for regional growth, energy security, inflation and remittances.",
+      "pakistan_perspective": "The -1.3% forecast applies to the regional aggregate, not to Pakistan alone.",
+      "key_takeaways": [
+        "The IMF projected a regional GDP contraction of 1.3% in 2026.",
+        "The IMF projected a regional rebound of 6.6% in 2027."
+      ],
+      "facts": [
+        "The IMF's 22 October 2026 outlook projected a 1.3% GDP contraction for the Middle East, North Africa and Pakistan regional aggregate in 2026, not for Pakistan individually."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "The IMF projected a 1.3% contraction for the combined Middle East, North Africa and Pakistan region in 2026."
+        }
+      ],
+      "statistics": [
+        {
+          "label": "2026 regional GDP projection",
+          "value": "-1.3%",
+          "year": "2026",
+          "source": "Reuters"
+        }
+      ],
+      "topics": [
+        "IMF",
+        "MENAP",
+        "Regional Economic Outlook"
+      ],
+      "countries": [
+        "Pakistan",
+        "Iran"
+      ],
+      "institutions": [
+        "International Monetary Fund"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Middle East, North Africa and Pakistan GDP to contract 1.3% in 2026, IMF says",
+          "url": "https://www.reuters.com/world/middle-east/imf-sees-13-contraction-middle-east-north-africa-pakistan-2026-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-istanbul-regional-ministers",
+      "category": "Pakistan Foreign Relations and Regional Diplomacy",
+      "headline": "Türkiye plans Istanbul ministerial talks involving Pakistan and six other countries",
+      "summary": "Türkiye said on 22 October that Foreign Minister Hakan Fidan would host counterparts from Egypt, Pakistan, Saudi Arabia, Britain, France and Germany in Istanbul on 23 October. The meeting had not yet occurred.",
+      "what_happened": "The planned agenda covers Gaza, the Strait of Hormuz, Yemen, the Russia-Ukraine war and maritime security.",
+      "why_it_matters": "The planned agenda covers Gaza, the Strait of Hormuz, Yemen, the Russia-Ukraine war and maritime security.",
+      "pakistan_perspective": "The planned agenda covers Gaza, the Strait of Hormuz, Yemen, the Russia-Ukraine war and maritime security.",
+      "key_takeaways": [
+        "On 22 October 2026, Türkiye announced planned seven-country foreign-minister talks in Istanbul for 23 October, including Pakistan."
+      ],
+      "facts": [
+        "On 22 October 2026, Türkiye announced planned seven-country foreign-minister talks in Istanbul for 23 October, including Pakistan."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "On 22 October 2026, Türkiye announced planned seven-country foreign-minister talks in Istanbul for 23 October, including Pakistan."
+        }
+      ],
+      "question_angles": [
+        "Which city was announced on 22 October 2026 as host of seven-country ministerial talks including Pakistan?"
+      ],
+      "topics": [
+        "Pakistan Foreign Relations and Regional Diplomacy"
+      ],
+      "countries": [
+        "Türkiye",
+        "Pakistan",
+        "Egypt",
+        "Saudi Arabia",
+        "United Kingdom",
+        "France",
+        "Germany"
+      ],
+      "institutions": [
+        "Turkish Foreign Ministry"
+      ],
+      "organisations": [],
+      "reports": [],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Turkey to host regional and European foreign ministers for talks on regional conflicts, source says",
+          "url": "https://www.reuters.com/world/asia-pacific/turkey-host-regional-european-foreign-ministers-talks-regional-conflicts-source-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-brent-five-month-high",
+      "category": "Global Energy and Maritime Security",
+      "headline": "Brent crude touches $112.68 as Gulf escalation raises supply fears",
+      "summary": "Brent crude futures touched $112.68 per barrel intraday on 22 October, the highest since 18 May, as Houthi attacks and shipping risks raised supply concerns. This was an intraday high, not a closing price.",
+      "what_happened": "The price rise illustrates how Gulf conflict affects global energy markets and oil-importing economies.",
+      "why_it_matters": "The price rise illustrates how Gulf conflict affects global energy markets and oil-importing economies.",
+      "pakistan_perspective": "",
+      "key_takeaways": [
+        "Brent crude futures touched $112.68 per barrel intraday on 22 October 2026, their highest level since 18 May, according to Reuters."
+      ],
+      "facts": [
+        "Brent crude futures touched $112.68 per barrel intraday on 22 October 2026, their highest level since 18 May, according to Reuters."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "Brent crude futures touched $112.68 per barrel intraday on 22 October 2026, their highest level since 18 May, according to Reuters."
+        }
+      ],
+      "question_angles": [
+        "Which oil benchmark touched an intraday high of $112.68 per barrel on 22 October 2026?"
+      ],
+      "topics": [
+        "Global Energy and Maritime Security"
+      ],
+      "countries": [
+        "Saudi Arabia",
+        "Iran",
+        "Pakistan"
+      ],
+      "institutions": [
+        "Saudi Aramco"
+      ],
+      "organisations": [],
+      "reports": [],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "Brent hits five-month high on escalating Middle East conflict",
+          "url": "https://www.reuters.com/business/energy/oil-rises-us-orders-diplomats-leave-saudi-arabia-amid-escalating-tensions-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-eu-methane-rule-delay",
+      "category": "Climate Policy and International Trade",
+      "headline": "European Parliament votes for three-year delay to import methane rules",
+      "summary": "The European Parliament voted on 22 October to propose a three-year delay to methane requirements on fossil-fuel imports, with a proposed 31 May 2031 deadline for certain contracts. Final agreement with EU governments is pending.",
+      "what_happened": "The proposal balances methane regulation with energy supply and trade concerns.",
+      "why_it_matters": "The proposal balances methane regulation with energy supply and trade concerns.",
+      "pakistan_perspective": "",
+      "key_takeaways": [
+        "The European Parliament voted on 22 October 2026 to propose a three-year delay to methane rules on fossil-fuel imports; EU government agreement was still required."
+      ],
+      "facts": [
+        "The European Parliament voted on 22 October 2026 to propose a three-year delay to methane rules on fossil-fuel imports; EU government agreement was still required."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "The European Parliament voted on 22 October 2026 to propose a three-year delay to methane rules on fossil-fuel imports; EU government agreement was still required."
+        }
+      ],
+      "question_angles": [
+        "Which EU body voted on 22 October 2026 to propose a three-year delay to methane rules for fuel imports?"
+      ],
+      "topics": [
+        "Climate Policy and International Trade"
+      ],
+      "countries": [
+        "European Union",
+        "United States",
+        "France"
+      ],
+      "institutions": [
+        "European Parliament",
+        "Council of the European Union"
+      ],
+      "organisations": [],
+      "reports": [],
+      "treaties": [],
+      "people": [],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "European Parliament votes to approve three-year delay on EU methane rules",
+          "url": "https://www.reuters.com/business/energy/european-parliament-votes-approve-three-year-delay-eu-methane-rules-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-unicef-gavi-malaria-vaccine",
+      "category": "Global Health and International Institutions",
+      "headline": "UNICEF and Gavi agree on roughly 40% Mosquirix malaria vaccine price cut",
+      "summary": "UNICEF and Gavi announced a conditional agreement on 22 October to cut the Mosquirix malaria vaccine price by about 40% to €5.50 per dose. The lower price is expected in early 2027 subject to regulatory and manufacturing milestones.",
+      "what_happened": "The deal could save about $50 million during 2027–2029.",
+      "why_it_matters": "Lower vaccine costs can expand access to malaria prevention.",
+      "key_takeaways": [
+        "The vaccine is Mosquirix (RTS,S/AS01).",
+        "The price reduction is about 40%, subject to conditions."
+      ],
+      "facts": [
+        "On 22 October 2026, UNICEF and Gavi announced an agreement to reduce the Mosquirix malaria vaccine price by about 40%, subject to milestones."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "The UNICEF-Gavi Mosquirix agreement announced a roughly 40% price cut."
+        }
+      ],
+      "question_angles": [
+        "Which malaria vaccine was covered by the UNICEF-Gavi agreement on 22 October 2026?"
+      ],
+      "topics": [
+        "Global health",
+        "Malaria vaccination"
+      ],
+      "countries": [
+        "India"
+      ],
+      "institutions": [
+        "UNICEF",
+        "Gavi",
+        "World Health Organization"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "UNICEF and Gavi agree to cut Mosquirix malaria vaccine price by 40%",
+          "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/unicef-gavi-agree-cut-mosquirix-malaria-vaccine-price-by-40-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-us-semiconductor-rd",
+      "category": "Technology, Industrial Policy and Energy",
+      "headline": "US Commerce Department plans $389 million in semiconductor and critical-material R&D awards",
+      "summary": "The US Commerce Department announced plans on 22 October for $389 million in R&D awards to four firms developing power semiconductors and critical materials. Letters of intent are not final awards.",
+      "what_happened": "Proposed awards concern fusion-energy electronics, AI infrastructure and critical semiconductor materials.",
+      "why_it_matters": "The plan links industrial policy with energy technology and strategic semiconductor supply chains.",
+      "key_takeaways": [
+        "The proposed funding total was $389 million.",
+        "Four companies were named; final awards remain conditional."
+      ],
+      "facts": [
+        "The US Commerce Department announced on 22 October 2026 proposed R&D awards of $389 million to four power-semiconductor and critical-material companies."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "US Commerce Department proposed $389 million for four semiconductor and critical-material R&D awards on 22 October 2026."
+        }
+      ],
+      "question_angles": [
+        "What total R&D funding did the US Commerce Department propose for four power-semiconductor and critical-material firms?"
+      ],
+      "topics": [
+        "Semiconductors",
+        "Critical materials",
+        "Fusion energy"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "institutions": [
+        "US Department of Commerce"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "US to award $389 million in R&D funds for power semiconductors, critical materials",
+          "url": "https://www.reuters.com/technology/us-award-389-million-rd-funds-power-semiconductors-critical-materials-2026-10-22/",
+          "published_at": "2026-10-22"
+        }
+      ]
+    },
+    {
+      "id": "ca-2026-10-22-tsmc-rare-earths",
+      "category": "Technology and Critical Mineral Geopolitics",
+      "headline": "TSMC explores rare-earth-free factory equipment, Reuters reports",
+      "summary": "Reuters reported on 22 October that TSMC was exploring rare-earth-free factory motors to reduce exposure to China's export controls. The discussions were preliminary and no broad rollout had occurred.",
+      "why_it_matters": "The move reflects supply-chain risks for advanced chipmaking and AI infrastructure.",
+      "key_takeaways": [
+        "TSMC's discussions were preliminary."
+      ],
+      "facts": [
+        "Reuters reported on 22 October 2026 that TSMC was exploring rare-earth-free factory motors in response to Chinese export controls."
+      ],
+      "quick_gk": [
+        {
+          "label": "Verified fact",
+          "value": "TSMC explored rare-earth-free motors to address China export-control risks."
+        }
+      ],
+      "question_angles": [
+        "What export controls prompted TSMC's exploration of rare-earth-free motors?"
+      ],
+      "topics": [
+        "Rare earths",
+        "Semiconductors"
+      ],
+      "countries": [
+        "Taiwan",
+        "China"
+      ],
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "title": "TSMC seeks factory-equipment alternatives to thwart China's rare earths grip, sources say",
+          "url": "https://www.reuters.com/world/china/tsmc-seeks-factory-equipment-alternatives-thwart-chinas-rare-earths-grip-sources-2026-10-22/",
+          "published_at": "2026-10-22"
         }
       ]
     }
