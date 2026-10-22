@@ -16,6 +16,7 @@ try{
   await page.setViewportSize({width,height:900});await open('/grammar-course?day=1&section=questions');await page.getByRole('group',{name:'Answer options'}).waitFor()
   const layout=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,h1:document.querySelectorAll('h1').length,main:document.querySelectorAll('main').length}))
   assert(layout.scroll<=width+1,JSON.stringify(layout));assert.equal(layout.h1,1);assert.equal(layout.main,1)
+  assert.equal(await page.locator('.cssv-vista-shortcut').count(),0,'Floating shortcuts must not cover grammar reading or answers')
   reports.push({check:'responsive objective interface',...layout})
  }
  await page.setViewportSize({width:1440,height:1000})
