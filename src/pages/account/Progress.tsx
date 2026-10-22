@@ -65,7 +65,6 @@ export default function AccountProgress() {
           )}
           <div className="mt-5 flex flex-wrap gap-2">
             <Link to="/gk/quiz?mode=mpt-mock" className="inline-flex min-h-11 items-center rounded-lg bg-emerald-900 px-4 text-xs font-bold text-white">CSS MPT Mock</Link>
-            <Link to="/gk/quiz?mode=pms-mock" className="inline-flex min-h-11 items-center rounded-lg border border-slate-200 px-4 text-xs font-bold text-slate-700">PMS GK Mock</Link>
           </div>
         </div>
       </section>

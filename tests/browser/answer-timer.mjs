@@ -80,7 +80,7 @@ try {
     totalLeftBase: 5200, runningStartedAt: null,
   })))
   await page.reload()
-  await page.getByRole('button', { name: 'Four-Question Paper Mode' }).click()
+  await page.getByRole('button', { name: 'Full Paper: MCQs + 4 Answers' }).click()
   await page.getByRole('button', { name: 'Resume attempt' }).click()
   await page.getByText('33:20', { exact: true }).waitFor()
   await page.getByText('86:40', { exact: true }).waitFor()
@@ -95,9 +95,30 @@ try {
   await page.getByText('Paper attempt complete').waitFor()
   await page.evaluate(() => localStorage.setItem('cssvista:paper-attempt', '{"questions":["Q1"]}'))
   await page.reload()
-  await page.getByRole('button', { name: 'Four-Question Paper Mode' }).click()
+  await page.getByRole('button', { name: 'Full Paper: MCQs + 4 Answers' }).click()
   assert.equal(await page.getByRole('button', { name: 'Resume attempt' }).count(), 0,
     'Corrupted local storage is ignored, not offered as a resumable paper')
+  // Exercise the 3-hour whole-paper flow with a simulated 10-minute MCQ attempt.
+  // Leave the timer page before writing a mock snapshot, so its pagehide handler
+  // cannot replace the fixture with a previous attempt during navigation.
+  await page.goto(origin + '/')
+  await page.evaluate(() => localStorage.setItem('cssvista:paper-attempt', JSON.stringify({
+    questions: ['Q1', 'Q2', 'Q3', 'Q4'], current: -1, paused: true,
+    times: [null, null, null, null], questionTargetSeconds: 1800,
+    mcqElapsedSeconds: null, questionElapsedBase: 600,
+    totalLeftBase: 10200, runningStartedAt: null,
+  })))
+  await page.goto(origin + '/answer-timer')
+  await page.getByRole('button', { name: 'Full Paper: MCQs + 4 Answers' }).click()
+  await page.getByRole('button', { name: 'Resume attempt' }).click()
+  await page.getByText('MCQ section (20 questions)', { exact: true }).waitFor()
+  await page.getByRole('button', { name: 'Finish MCQs — start Q1' }).click()
+  await page.getByText('MCQs completed in 10:00', { exact: false }).waitFor()
+  await page.getByText('Current answer allocation: 42:30', { exact: true }).waitFor()
+  // Finishing Q1 promptly transfers the saved writing time to the remaining answers.
+  await page.getByRole('button', { name: 'Finish Q1 — start Q2' }).click()
+  await page.getByText(/Current answer allocation: 56:/).waitFor()
+  await page.getByRole('button', { name: 'End paper' }).click()
   assert.deepEqual(errors, [], 'No timer JavaScript page errors')
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true,
     'Timer setup fits small phones without horizontal scrolling')

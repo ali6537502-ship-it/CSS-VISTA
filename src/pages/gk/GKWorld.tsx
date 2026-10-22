@@ -3,18 +3,17 @@ import { ProBadge } from '@/features/membership/AccountSections'
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import {
-  Award, BookOpen, Brain, CalendarDays, ClipboardList, Coins, Compass, Cpu, Flag,
+  Award, BookOpen, Brain, CalendarDays, Coins, Compass, Cpu, Flag,
   Globe, History, Landmark, Layers, MapPin, Medal, Microscope, Moon, Mountain, Shuffle,
   Star, Sun, Target, Timer, TrendingUp, Trophy, Users, Waves, Zap, Bookmark, AlertTriangle,
   CircleHelp, Sparkles, Dices, SlidersHorizontal, Search, Building2, Scroll, HeartPulse,
-  Languages, LockKeyhole, RefreshCw,
+  Languages, RefreshCw,
   type LucideIcon,
 } from 'lucide-react'
 import { PageHeader } from '@/components/shared'
 import { bankIndexNow, getBankIndex, type BankIndex } from '@/data/mcq'
 import { getMistakes, getRevisionStats, savedMcqIds } from '@/lib/progress'
 import { mergedCategoryOverrides } from '@/lib/admin'
-import { DAILY_MOCK_TIME_LABELS, getMockAvailability } from '@/lib/store'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 
 const catIcons: Record<string, LucideIcon> = {
@@ -38,7 +37,6 @@ const modes = [
   { id: 'five', icon: Zap, title: 'Five-Minute Challenge', desc: '10 questions against the clock', to: '/five-minute' },
   { id: 'random', icon: Shuffle, title: 'Random GK Quiz', desc: 'A shuffled mix from the whole bank', to: '/gk/quiz?mode=random' },
   { id: 'timed', icon: Timer, title: 'Timed Quiz', desc: 'Set your pace, race the clock', to: '/gk/quiz?mode=timed' },
-  { id: 'pms-mock', icon: ClipboardList, title: 'PMS GK Grand Mock', desc: '100 questions · daily entry 8–10 PM', to: '/gk/quiz?mode=pms-mock' },
   { id: 'one-paper', icon: Target, title: 'One-Paper Competitive Mock', desc: '100 curated MCQs · 90 minutes', to: '/gk/quiz?mode=one-paper' },
   { id: 'revision', icon: RefreshCw, title: 'Smart Revision Queue', desc: 'Due questions selected by spaced revision', to: '/gk/quiz?mode=revision' },
   { id: 'weak', icon: Target, title: 'Weak-Area Practice', desc: 'Built from your mistake history', to: '/gk/quiz?mode=weak' },
@@ -56,27 +54,13 @@ export default function GKWorld() {
   // The bundled index renders immediately; getBankIndex() then refreshes it
   // from the live shard. No visitor and no crawler sees a loading state.
   const [idx, setIdx] = useState<BankIndex | null>(() => bankIndexNow())
-  const [now, setNow] = useState(() => new Date())
   const query = searchParams.get('q') ?? ''
   const mistakes = getMistakes().length
   const saved = savedMcqIds().length
   const revisionStats = getRevisionStats()
-  const pmsMock = getMockAvailability('gk', now)
 
   useEffect(() => {
     getBankIndex().then(setIdx)
-  }, [])
-
-  useEffect(() => {
-    // `now` only gates mock availability and a minute-precision "opens at"
-    // label, so a one-second tick re-rendered the whole page for nothing.
-    const timer = window.setInterval(() => setNow(new Date()), 30000)
-    const resync = () => setNow(new Date())
-    document.addEventListener('visibilitychange', resync)
-    return () => {
-      window.clearInterval(timer)
-      document.removeEventListener('visibilitychange', resync)
-    }
   }, [])
 
   const cats = useMemo(() => {
@@ -135,20 +119,6 @@ export default function GKWorld() {
         <h2 className="mt-10 font-display text-xl font-bold text-pine">Practice modes</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {modes.map((m) => {
-            if (m.id === 'pms-mock' && !pmsMock.available) {
-              return (
-                <div key={m.id} className="rounded-xl border bg-secondary/40 p-4">
-                  <LockKeyhole className="h-5 w-5 text-amber-700" />
-                  <p className="mt-2 text-sm font-bold text-foreground">{m.title}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    Opens {new Date(pmsMock.nextAvailableAt!).toLocaleString('en-PK', { dateStyle: 'medium', timeStyle: 'short' })}
-                  </p>
-                  <span className="mt-1.5 inline-block rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">
-                    Daily Grand Mock · {DAILY_MOCK_TIME_LABELS.gk}
-                  </span>
-                </div>
-              )
-            }
             return (
               <Link
                 key={m.id}

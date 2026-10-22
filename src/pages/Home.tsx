@@ -5,10 +5,10 @@ import { useLocation } from 'react-router'
 import {
   ArrowRight, BarChart3, BookOpen, CalendarCheck2, ChevronRight,
   CheckCircle2, ClipboardCheck, Download, FileText, Globe2, LibraryBig,
-  Newspaper, NotebookPen, PlayCircle, Printer, Search, LockKeyhole, Eye, EyeOff,
+  Newspaper, NotebookPen, PlayCircle, Printer, Search, Eye, EyeOff,
   TimerReset, UserPlus, type LucideIcon,
 } from 'lucide-react'
-import { DAILY_MOCK_TIME_LABELS, getDailyMockStatus, getState, getStats } from '@/lib/store'
+import { getState, getStats } from '@/lib/store'
 import { getRevisionStats, recentActivities, type Activity } from '@/lib/progress'
 import { defaultHomeCards, sortHomeCardsByPriority } from '@/data/homeCards'
 import { cardIcons } from '@/data/homeCardIcons'
@@ -16,11 +16,9 @@ import { buildDailyPlan, localDateKey } from '@/lib/studyPlanner'
 import { lazyWithRecovery } from '@/lib/chunkRecovery'
 import { scheduleIdleWork } from '@/lib/idle'
 import { weeklyMagazine, weeklyMagazines } from '@/data/weeklyMagazine'
-import { css2027Dates, notifications2027 } from '@/data/css2027'
 import { useAccount } from '@/lib/accountContext'
 import { MptMockStrip } from '@/components/mpt/MptMockStrip'
 import { MPT_HIBERNATED } from '@/lib/featureHibernation'
-import { useMptFlowEnabled } from '@/lib/mpt/useMptFlow'
 
 interface LinkCard {
   title: string
@@ -291,189 +289,6 @@ function AnimatedCollapse({ open, children }: { open: boolean; children: ReactNo
   )
 }
 
-const mpt2027Date = css2027Dates.find((item) => item.id === 'd4')?.date ?? '2026-10-10'
-const mpt2027Notice = notifications2027.find((item) => item.id === 'mpt-ce-2027-rescheduled')
-const mpt2027DateLabel = new Intl.DateTimeFormat('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'UTC',
-}).format(new Date(`${mpt2027Date}T00:00:00Z`))
-
-const officialExamDates = {
-  mpt: {
-    label: 'MPT 2027',
-    dateLabel: mpt2027DateLabel,
-    target: `${mpt2027Date}T00:00:00+05:00`,
-    source: mpt2027Notice?.officialUrl ?? 'https://www.fpsc.gov.pk/',
-  },
-  written: {
-    label: 'CSS Written 2027',
-    dateLabel: '27 January 2027',
-    target: '2027-01-27T00:00:00+05:00',
-    source: 'https://www.fpsc.gov.pk/',
-  },
-} as const
-
-function remainingTime(target: string, now = Date.now()) {
-  const difference = Math.max(0, new Date(target).getTime() - now)
-  return {
-    days: Math.floor(difference / 86_400_000),
-    hours: Math.floor((difference / 3_600_000) % 24),
-    minutes: Math.floor((difference / 60_000) % 60),
-    seconds: Math.floor((difference / 1_000) % 60),
-  }
-}
-
-function CountdownUnit({ value, label, emphasized = false }: { value: number; label: string; emphasized?: boolean }) {
-  const formatted = label === 'days' ? String(value) : String(value).padStart(2, '0')
-  return (
-    <span className={`min-w-0 rounded-md px-1 py-1.5 text-center ${emphasized ? 'bg-white/10' : 'bg-slate-50'}`}>
-      <span key={formatted} className="cssv-countdown-tick block text-[15px] font-black leading-none tabular-nums tracking-[-0.03em] sm:text-[17px]">{formatted}</span>
-      <span className="mt-1 block text-[7px] font-bold uppercase tracking-wide opacity-55">{label}</span>
-    </span>
-  )
-}
-
-function ExamCountdown({ active = true }: { active?: boolean }) {
-  const [now, setNow] = useState(Date.now)
-
-  useEffect(() => {
-    if (!active) return undefined
-    setNow(Date.now())
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [active])
-
-  return (
-    <section className="cssv-glass-subcard min-w-0 rounded-xl border p-2.5" aria-labelledby="exam-countdown-title">
-      <div className="mb-2 flex items-center justify-between gap-2 px-0.5">
-        <h3 id="exam-countdown-title" className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.11em] text-slate-600">
-          <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-35 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
-          Official exam dates
-        </h3>
-        <span className="text-[8px] font-semibold text-slate-400">Updates live</span>
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        {(Object.keys(officialExamDates) as Array<keyof typeof officialExamDates>).filter((key) => !(MPT_HIBERNATED && key === 'mpt')).map((key) => {
-          const exam = officialExamDates[key]
-          const remaining = remainingTime(exam.target, now)
-          const isMpt = key === 'mpt'
-          return (
-            <a
-              key={key}
-              href={exam.source}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`cssv-glass-subcard cssv-countdown-card cssv-tap group relative overflow-hidden rounded-xl border p-2.5 ${isMpt ? 'cssv-countdown-card-primary' : ''}`}
-            >
-              <span className={`absolute -right-3 -top-3 h-14 w-14 rounded-full ${isMpt ? 'bg-amber-300/10' : 'bg-emerald-100/70'}`} aria-hidden="true" />
-              <span className="relative flex items-start justify-between gap-1">
-                <span>
-                  <span className="block text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">{exam.label}</span>
-                  <span className="mt-0.5 block text-[9px] font-medium opacity-65">{exam.dateLabel}</span>
-                </span>
-                <span className={`rounded-full px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wide ${isMpt ? 'bg-amber-100 text-amber-800' : 'bg-emerald-50 text-emerald-800'}`}>
-                  {isMpt ? 'Next exam' : 'Written'}
-                </span>
-              </span>
-              <time dateTime={exam.target} className="relative mt-2 grid grid-cols-4 gap-1 text-slate-800" aria-hidden="true">
-                <CountdownUnit value={remaining.days} label="days" />
-                <CountdownUnit value={remaining.hours} label="hrs" />
-                <CountdownUnit value={remaining.minutes} label="min" />
-                <CountdownUnit value={remaining.seconds} label="sec" />
-              </time>
-              <span className="sr-only">
-                {remaining.days} days, {remaining.hours} hours, {remaining.minutes} minutes and {remaining.seconds} seconds remaining.
-                {' '}Open official exam source.
-              </span>
-              <span className="relative mt-1.5 flex items-center justify-between text-[8px] font-semibold text-slate-500">
-                <span>Updates every second</span>
-                <TimerReset className={`cssv-timer h-3.5 w-3.5 ${isMpt ? 'text-amber-600' : 'text-emerald-700'}`} />
-              </span>
-            </a>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
-function DailyGrandMockCard({ active = true }: { active?: boolean }) {
-  const [now, setNow] = useState(Date.now)
-  // With the MPT application flow on, MPT mocks are shown by MptMockStrip (D-52), as in the site notice bar.
-  const mptApplicationFlow = useMptFlowEnabled() === true
-
-  useEffect(() => {
-    if (!active) return undefined
-    setNow(Date.now())
-    const timer = window.setInterval(() => setNow(Date.now()), 1000)
-    return () => window.clearInterval(timer)
-  }, [active])
-
-  return (
-    <section className="cssv-glass-subcard cssv-daily-mock rounded-xl border p-2 text-slate-900" aria-labelledby="daily-mock-timers-title">
-      <div className="mb-1.5 flex items-center justify-between gap-2 px-0.5">
-        <h3 id="daily-mock-timers-title" className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-emerald-800">Today’s mock windows</h3>
-        <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-800">PKT</span>
-      </div>
-      <div className="grid grid-cols-2 gap-1.5 md:grid-cols-1">
-        {(['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => (kind === 'gk' || !MPT_HIBERNATED) && !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
-          const schedule = getDailyMockStatus(kind, new Date(now))
-          const target = schedule.live ? schedule.registrationClosesAt : schedule.nextAvailableAt
-          const remaining = remainingTime(target, now)
-          const totalHours = remaining.hours + (remaining.days * 24)
-          const timeValue = `${String(totalHours).padStart(2, '0')}:${String(remaining.minutes).padStart(2, '0')}:${String(remaining.seconds).padStart(2, '0')}`
-          const body = (
-            <div className={`cssv-glass-subcard cssv-tap min-w-0 rounded-lg border p-2 ${schedule.live ? 'cssv-daily-mock-live text-emerald-950' : 'text-slate-900'}`}>
-              <div className="flex min-w-0 items-center gap-1.5">
-                <span className={`cssv-glass-icon grid h-7 w-7 shrink-0 place-items-center rounded-md ${schedule.live ? 'text-amber-700' : 'text-emerald-800'}`}>
-                  {schedule.live ? <PlayCircle className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className={`block truncate text-[7px] font-extrabold uppercase tracking-[0.1em] ${schedule.live ? 'text-amber-700' : 'text-emerald-700'}`}>
-                    {schedule.live ? 'Open now' : schedule.completedToday ? 'Completed' : 'Starts in'}
-                  </span>
-                  <span className="block truncate text-[9px] font-bold leading-tight">{schedule.title.replace(' Grand Mock', '')}</span>
-                </span>
-              </div>
-              <time dateTime={target} className="mt-1.5 block font-mono text-[13px] font-black leading-none tabular-nums tracking-[-0.04em]" aria-label={`${totalHours} hours, ${remaining.minutes} minutes and ${remaining.seconds} seconds`}>
-                {timeValue}
-              </time>
-              <span className="mt-1 block truncate text-[7px] font-semibold text-slate-500">{DAILY_MOCK_TIME_LABELS[kind]}</span>
-            </div>
-          )
-          return schedule.live ? <Link key={kind} to={schedule.route}>{body}</Link> : <div key={kind}>{body}</div>
-        })}
-      </div>
-    </section>
-  )
-}
-
-function TimerHub({ open, onToggle }: { open: boolean; onToggle: () => void }) {
-  return (
-    <section className="cssv-glass-panel cssv-timer-hub cssv-reveal mt-3 rounded-2xl border p-2.5" style={{ '--cssv-delay': '70ms' } as CSSProperties} aria-labelledby="all-countdowns-title">
-      <div className="flex items-center justify-between gap-3 px-0.5">
-        <div className="min-w-0">
-          <h2 id="all-countdowns-title" className="flex items-center gap-1.5 text-[12px] font-bold text-slate-800">
-            <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-30 motion-safe:animate-ping" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" /></span>
-            Live preparation timers
-          </h2>
-          <p className="mt-0.5 text-[8px] font-medium text-slate-400">{open ? 'Daily mock windows and official exam countdowns' : 'All countdowns are hidden for this view'}</p>
-        </div>
-        <VisibilityToggle open={open} onToggle={onToggle} label="all preparation timers" />
-      </div>
-      <MptMockStrip className="mt-2" />
-      <AnimatedCollapse open={open}>
-        <div className="mt-2 grid items-start gap-2 md:grid-cols-[minmax(190px,0.62fr)_minmax(0,1.38fr)] lg:grid-cols-[minmax(210px,0.55fr)_minmax(0,1.45fr)]">
-          <DailyGrandMockCard active={open} />
-          <ExamCountdown active={open} />
-        </div>
-      </AnimatedCollapse>
-    </section>
-  )
-}
-
 function WeeklyMagazineCard() {
   const available = Boolean(weeklyMagazine.pdfUrl)
 
@@ -562,7 +377,6 @@ export default function Home() {
   const proPaused = useProReleasePaused()
   const location = useLocation()
   const { user } = useAccount()
-  const [showTimers, setShowTimers] = useState(true)
   const [showContinueStudy, setShowContinueStudy] = useState(true)
   const [homeCards, setHomeCards] = useState(defaultHomeCards)
   const initialState = useMemo(() => getState(), [])
@@ -593,6 +407,8 @@ export default function Home() {
       .filter((card) => (
         card.visible
         && !(MPT_HIBERNATED && (card.to.startsWith('/mpt') || card.id === 'mpt-grand-mock'))
+        && card.id !== 'pms-grand-mock'
+        && !card.to.includes('mode=pms-mock')
         && card.id !== 'current-affairs'
         && !card.to.includes('/current-affairs')
         && card.id !== 'pakistan-affairs'
@@ -609,7 +425,6 @@ export default function Home() {
   )
 
   useEffect(() => {
-    setShowTimers(true)
     setShowContinueStudy(true)
   }, [location.key])
 
@@ -623,8 +438,7 @@ export default function Home() {
 
   useEffect(() => {
     const restoreDismissedPanels = () => {
-      setShowTimers(true)
-      setShowContinueStudy(true)
+        setShowContinueStudy(true)
     }
     window.addEventListener('pageshow', restoreDismissedPanels)
     window.addEventListener('popstate', restoreDismissedPanels)
@@ -663,7 +477,7 @@ export default function Home() {
           <HomeHero />
         </div>
 
-        <TimerHub open={showTimers} onToggle={() => setShowTimers((current) => !current)} />
+        <MptMockStrip className="mt-3" />
 
         {!proPaused && <WeeklyMagazineCard />}
 

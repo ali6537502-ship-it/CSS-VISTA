@@ -281,7 +281,7 @@ function NotificationBar() {
   const { user, syncStatus, lastSyncedAt } = useAccount()
   const mptApplicationFlow = useMptFlowEnabled() === true
   const mptSpotlight = useMptSpotlight()
-  const mockNotices = (['mpt-afternoon', 'gk', 'mpt'] as const).filter((kind) => (kind === 'gk' || !MPT_HIBERNATED) && !(mptApplicationFlow && kind !== 'gk')).map((kind) => {
+  const mockNotices = (['mpt-afternoon', 'mpt'] as const).filter(() => !MPT_HIBERNATED && !mptApplicationFlow).map((kind) => {
     const status = getDailyMockStatus(kind, scheduleTime)
     return {
       id: `daily-${kind}-mock-${status.dateKey}`,

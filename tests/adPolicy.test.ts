@@ -46,7 +46,7 @@ test('homepage exposes a stable Auto Ads excluded-area boundary around search an
   const source = await import('node:fs/promises').then(({ readFile }) => readFile(new URL('../src/pages/Home.tsx', import.meta.url), 'utf8'))
   const topBoundary = source.indexOf('id="cssv-home-ad-free-top"')
   const hero = source.indexOf('<HomeHero />', topBoundary)
-  const lowerContent = source.indexOf('<TimerHub', hero)
+  const lowerContent = source.indexOf('<MptMockStrip className="mt-3" />', hero)
   assert.ok(topBoundary >= 0)
   assert.ok(hero > topBoundary)
   assert.ok(lowerContent > hero)
