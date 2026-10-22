@@ -2,7 +2,7 @@ name: Grammar reconstruction verification
 on:
   pull_request:
     branches: [main]
-    paths: ['content/grammar/**', 'src/features/grammar-v5/**', 'public/grammar/**', 'public/api/_grammar_v5*', 'public/api/student/grammar-v5.php', 'scripts/grammar-v5/**', 'tests/grammar-v5/**', 'tests/grammarV5.test.ts', 'tests/browser/grammar-v5*.mjs', 'scripts/prerender/routes.tsx', '.github/workflows/grammar-reconstruction.yml']
+    paths: ['content/grammar/**', 'src/features/grammar-v5/**', 'public/grammar/**', 'public/api/_grammar_v5*', 'public/api/student/grammar-v5.php', 'scripts/grammar-v5/**', 'tests/grammar-v5/**', 'tests/grammarV5.test.ts', 'tests/browser/grammar-v5*.mjs', 'scripts/prerender/routes.tsx', 'public/api/_tutor_context.php', 'public/api/_tutor_grammar_v5.php', '.github/workflows/grammar-reconstruction.yml']
 permissions:
   contents: read
 jobs:
@@ -46,6 +46,7 @@ jobs:
           node --test tests/grammarV5.test.ts
           npm run test:grammar
           php tests/grammar-v5/unit.php
+          php tests/tutor/unit.php
           php -l public/api/student/grammar-v5.php
       - name: Run the existing native account backend against disposable MySQL
         run: |

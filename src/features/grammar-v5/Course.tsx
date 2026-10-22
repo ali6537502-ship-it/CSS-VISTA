@@ -1,7 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { PageHeader } from '@/components/shared'
+import { attemptChoiceKey, readAttemptChoice } from '@/features/grammar/sync'
 import { useAccount } from '@/lib/accountContext'
+import { recordActivity } from '@/lib/progress'
 import { useLearning, type Overview } from '@/features/learning/api'
 import { conceptHref, dayHref, loadCatalog } from './content'
 import { conceptProfile } from './state'
@@ -16,16 +18,20 @@ import { LEGACY_DAY_MAP } from './legacyMap'
 const LegacyWork = lazy(() => import('./LegacyWork'))
 import './grammar.css'
 
+function rememberAttempt(user?: string) { try { return readAttemptChoice(localStorage, user) } catch { return undefined } }
 export default function GrammarLearning({ initialCatalog }: { initialCatalog?: Catalog } = {}) {
   const { user, loading } = useAccount(), [params, setParams] = useSearchParams()
   const [data, setData] = useState<{ catalog?: Catalog; error?: string }>(() => initialCatalog ? { catalog: initialCatalog } : {}), [retry, setRetry] = useState(0)
   const attempts = useLearning<Overview>(user ? 'learning.php' : undefined)
-  const chosen = params.get('attempt'), attempt = user && chosen && /^[a-f0-9-]{36}$/i.test(chosen) ? chosen : undefined
+  const [choice, setChoice] = useState<{ user: string; value: string }>()
+  const remembered = choice?.user === user?.id ? choice?.value : rememberAttempt(user?.id)
+  const chosen = params.get('attempt') ?? remembered, attempt = user && chosen && /^[a-f0-9-]{36}$/i.test(chosen) ? chosen : undefined
   useEffect(() => { let active = true; void loadCatalog().then(catalog => { if (active) setData({ catalog }) }).catch(e => { if (active) setData({ error: e.message }) }); return () => { active = false } }, [retry])
-  const panel = user && !loading ? <section className={`${surface} no-print mb-5`} aria-label="Account progress scope"><label className="text-sm font-semibold">Save to a preparation attempt<select value={attempt ?? ''} onChange={e => { const next = new URLSearchParams(params); if (e.target.value) next.set('attempt', e.target.value); else next.delete('attempt'); setParams(next) }} className="mt-2 min-h-12 w-full rounded-xl border border-slate-400 bg-white px-3 font-normal"><option value="">This browser only, for my account</option>{attempt && !attempts.data?.attempts.some(a => a.id === attempt) && <option value={attempt}>Selected preparation attempt</option>}{attempts.data?.attempts.map((a, i) => <option value={a.id} key={a.id}>CSS {a.target_year} · {a.stage.replaceAll('_', ' ')} · attempt {i + 1}</option>)}</select></label><div className="mt-3 flex flex-wrap items-center gap-3"><Link className={action} to="/account/preparation">Manage preparation attempts</Link><p className="text-xs leading-6 text-slate-600">Guest work, each account and each preparation attempt stay separate.</p></div>{attempts.error && <p role="status" className="mt-3 text-sm leading-7 text-amber-950">{attempts.error} Public reading and browser practice remain available.</p>}</section> : null
+  const referenceParams = new URLSearchParams(params); referenceParams.set('lang', 'english'); if (params.has('day')) referenceParams.set('return_day', params.get('day')!)
+  const panel = user && !loading ? <section className={`${surface} no-print mb-5`} aria-label="Account progress scope"><label className="text-sm font-semibold">Save to a preparation attempt<select value={attempt ?? ''} onChange={e => { const next = new URLSearchParams(params); const value = e.target.value || 'browser'; next.set('attempt', value); if (user) { setChoice({ user: user.id, value }); try { localStorage.setItem(attemptChoiceKey(user.id), value) } catch { /* Explicit URL scope remains available. */ } } setParams(next) }} className="mt-2 min-h-12 w-full rounded-xl border border-slate-400 bg-white px-3 font-normal"><option value="">This browser only, for my account</option>{attempt && !attempts.data?.attempts.some(a => a.id === attempt) && <option value={attempt}>Selected preparation attempt</option>}{attempts.data?.attempts.map((a, i) => <option value={a.id} key={a.id}>CSS {a.target_year} · {a.stage.replaceAll('_', ' ')} · attempt {i + 1}</option>)}</select></label><div className="mt-3 flex flex-wrap items-center gap-3"><Link className={action} to="/account/preparation">Manage preparation attempts</Link><p className="text-xs leading-6 text-slate-600">Guest work, each account and each preparation attempt stay separate.</p></div>{attempts.error && <p role="status" className="mt-3 text-sm leading-7 text-amber-950">{attempts.error} Public reading and browser practice remain available.</p>}</section> : null
   return <div className="grammar-v5 text-slate-900">
     <PageHeader title="English Grammar Master Course" description="A 30-day path from sentence foundations to advanced analysis, supported by a permanent grammar reference and continuing practice.">
-      <div className="no-print mt-4 flex flex-wrap gap-3"><Link className={action} to="/language-grammar?lang=english">Existing grammar collection</Link><Link className={action} to="/grammar-vocabulary">Vocabulary practice</Link><Link className={action} to="/mistakes">Mistake Notebook</Link><Link className={action} to="/account/expression">English Expression Lab</Link></div>
+      <div className="no-print mt-4 flex flex-wrap gap-3"><Link className={action} to={`/language-grammar?${referenceParams}`}>Existing grammar collection</Link><Link className={action} to="/grammar-vocabulary">Vocabulary practice</Link><Link className={action} to="/mistakes">Mistake Notebook</Link><Link className={action} to="/account/expression">English Expression Lab</Link></div>
     </PageHeader>
     <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
       {panel}
@@ -42,16 +48,25 @@ function Workspace({ catalog, user, attempt }: { catalog: Catalog; user?: string
     window.addEventListener('focus', refresh)
     return () => { window.clearInterval(timer); window.removeEventListener('focus', refresh) }
   }, [])
-  const state = store.state, view = params.get('view') ?? (params.has('day') ? 'lesson' : 'dashboard'), mode = params.get('mode') ?? 'revision', guide = params.get('guide') ?? 'encyclopedia'
+  const originalView = params.get('view'), compatibleView = originalView === 'course' ? 'lesson' : originalView === 'toolkit' ? 'reference' : originalView === 'notebook' ? 'lab' : originalView
+  const state = store.state, view = compatibleView ?? (params.has('day') ? 'lesson' : 'dashboard'), mode = params.get('mode') ?? (originalView === 'notebook' ? 'errors' : 'revision'), guide = params.get('guide') ?? 'encyclopedia'
   const requested = Number(params.get('day')), rawDay = Number.isInteger(requested) && requested >= 1 && requested <= 30 ? requested : state.cursor.day
   // Existing Expression/Précis links carry the previous syllabus's day numbering.
-  const day = ['expression', 'precis'].includes(params.get('from') ?? '') && params.get('edition') !== 'v5' ? LEGACY_DAY_MAP[rawDay]?.[0] ?? rawDay : rawDay
+  const day = (['expression', 'precis'].includes(params.get('from') ?? '') || params.get('from') === 'lab' && ['expression', 'precis'].includes(params.get('origin') ?? '')) && params.get('edition') !== 'v5' ? LEGACY_DAY_MAP[rawDay]?.[0] ?? rawDay : rawDay
   const section = params.get('section') ?? (params.has('day') ? 'orientation' : state.cursor.section)
+  const activityPath = `/grammar-course?${params}`
+  useEffect(() => {
+    try { recordActivity({ type: 'study-tool', label: view === 'lesson' ? `Grammar · Day ${day}: ${catalog.days[day - 1].title}` : `Grammar · ${view}`, path: activityPath }) } catch { /* Public reading remains available when browser storage is disabled. */ }
+  }, [activityPath, catalog, day, view])
   const profile = conceptProfile(state, catalog, now), weak = profile.filter(r => r.unresolved), due = Object.values(state.reviews).filter(r => r.dueAt <= now).length
   const firstUnstudied = catalog.days.find(d => !state.completed.includes(d.id)) ?? catalog.days[29]
   const next = weak[0] ? { day: weak[0].day, section: weak[0].id } : { day: firstUnstudied.day, section: 'orientation' }
   const nav = [{ id: 'dashboard', title: 'Course path' }, { id: 'lesson', title: 'Your lesson' }, { id: 'reference', title: 'Reference library' }, { id: 'lab', title: 'Practice and revision' }, { id: 'profile', title: 'Learning profile' }, { id: 'saved', title: 'Bookmarks and notes' }, { id: 'legacy', title: 'Earlier work' }]
-  function route(nextView: string, extras: Record<string, string> = {}) { const p = new URLSearchParams(attempt ? { attempt } : {}); p.set('view', nextView); for (const [key, value] of Object.entries(extras)) if (value) p.set(key, value); setParams(p) }
+  const origin = ['expression', 'precis'].includes(params.get('from') ?? '') ? params.get('from') : ['expression', 'precis'].includes(params.get('origin') ?? '') ? params.get('origin') : undefined
+  const back = new URLSearchParams(attempt ? { attempt } : {})
+  for (const key of ['writing', 'version']) { const value = params.get(key); if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value) }
+  const returnTo = origin ? `/account/${origin}${back.size ? `?${back}` : ''}` : undefined
+  function route(nextView: string, extras: Record<string, string> = {}) { const p = new URLSearchParams(attempt ? { attempt } : {}); p.set('view', nextView); if (origin) { p.set('from', origin); for (const [key, value] of back) if (key !== 'attempt') p.set(key, value) }; for (const [key, value] of Object.entries(extras)) if (value) p.set(key, value); setParams(p) }
   function navigate(d: number, s: string) {
     store.update(old => ({ ...old, cursor: { day: d, section: s, item: old.cursor.day === d && old.cursor.section === s ? old.cursor.item : '' } }))
     route('lesson', { day: String(d), section: s, edition: 'v5' })
@@ -61,6 +76,7 @@ function Workspace({ catalog, user, attempt }: { catalog: Catalog; user?: string
   function chooseGuide(id: string) { if (isLabResource(id)) route('lab', { mode: id }); else route('reference', { guide: id }) }
   const syncMessage = store.error ?? (!store.ready ? 'Loading saved work for this preparation attempt…' : store.saving ? 'Saving your preparation attempt…' : attempt ? store.envelope.dirty || store.envelope.pending ? 'Browser copy retained; account saving is pending.' : store.envelope.version ? 'Saved to your account for this preparation attempt.' : 'Ready for account saving when you begin.' : user ? 'Saved in this browser for your account. Select a preparation attempt for cross-device saving.' : 'Guest work is saved in this browser. Export a copy to keep an independent backup.')
   return <div id="grammar-workspace" tabIndex={-1} className="space-y-6 focus:outline-none">
+    {returnTo && <Link className={action} to={returnTo}>Return to your {origin === 'precis' ? 'précis' : 'Expression Lab'} work</Link>}
     <section className={`${surface} no-print`} aria-label="Learning workspace tools"><nav aria-label="Grammar workspace" className="flex flex-wrap gap-2">{nav.map(n => <button key={n.id} className={`${action} ${view === n.id ? '!border-indigo-700 !bg-indigo-700 !text-white' : ''}`} aria-current={view === n.id ? 'page' : undefined} onClick={() => n.id === 'lesson' ? navigate(state.cursor.day, state.cursor.section) : route(n.id)}>{n.title}</button>)}</nav><div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t pt-4"><label className="text-sm font-semibold">Reading depth<select value={depth} onChange={e => setDepth(e.target.value as Depth)} className="ml-3 min-h-11 max-w-full rounded-lg border border-slate-400 bg-white px-3 font-normal">{DEPTHS.map(d => <option key={d}>{d}</option>)}</select></label><div className="flex flex-wrap gap-3"><button className={action} onClick={store.download}>Export my work</button><label className={`${action} cursor-pointer`}>Restore a backup<input className="sr-only" type="file" accept="application/json,.json" onChange={e => { const file = e.target.files?.[0]; if (!file) return; void file.text().then(text => { store.restore(text); setNotice('Backup restored in this scope; the previous browser copy was retained.') }).catch(error => setNotice(error.message)); e.target.value = '' }} /></label></div></div><p className="mt-4 text-xs leading-6" role={store.error ? 'alert' : 'status'}>{syncMessage}</p>{notice && <p role="status" className="mt-3 text-sm leading-7 text-indigo-900">{notice}</p>}{attempt && <div className="mt-3 flex flex-wrap gap-3"><button className={action} disabled={!store.ready || store.saving || store.conflict || store.storageError || !store.envelope.dirty && !store.envelope.pending} onClick={() => { void store.flush() }}>{store.error ? 'Retry account save' : 'Save to account now'}</button>{(store.conflict || store.error) && <button className={action} disabled={store.saving || store.storageError} onClick={() => { void store.reloadAccount() }}>Keep browser backup and load account copy</button>}</div>}</section>
     {!store.ready && attempt ? <p role="status">Opening this preparation attempt’s saved work…</p> : <>
       {view === 'dashboard' && <>

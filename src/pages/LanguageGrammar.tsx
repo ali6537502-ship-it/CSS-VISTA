@@ -107,6 +107,7 @@ export default function LanguageGrammar() {
   const returnDay = searchParams.get('return_day')
   const back = new URLSearchParams()
   const attempt = searchParams.get('attempt')
+  if (searchParams.get('edition') === 'v5') { back.set('edition', 'v5'); const section = searchParams.get('section'); if (section && /^(?:gv5-[a-z0-9-]+|orientation|questions|corrections|transformations|writing|recall|finish)$/.test(section)) back.set('section', section) }
   if (attempt && /^[a-f0-9-]{36}$/i.test(attempt)) back.set('attempt', attempt)
   if (returnDay && /^(?:[1-9]|[12][0-9]|30)$/.test(returnDay)) back.set('day', returnDay)
   if (['expression', 'precis', 'lab'].includes(searchParams.get('from') || '')) {

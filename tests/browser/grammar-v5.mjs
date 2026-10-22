@@ -26,7 +26,7 @@ try{
   reports.push({check:'lesson orientation and section navigation',day:d.day}); if(d.day%10===0)console.log('Navigated',d.day,'days')
  }
  const q=catalog.items.find(q=>q.day===1&&q.type==='objective')
- const data=await fetch(base+'/grammar/v5/day-01.json').then(r=>r.json()),question=data.questions.find(x=>x.id===q.id)
+ const data=await context.request.get(base+'/grammar/v5/day-01.json').then(r=>r.json()),question=data.questions.find(x=>x.id===q.id)
  await open(`/grammar-course?day=1&section=questions&item=${q.id}`)
  await page.getByRole('group',{name:'Answer options'}).waitFor()
  await page.getByRole('group',{name:'Answer options'}).getByRole('button').nth((q.answer+1)%4).click()
@@ -64,6 +64,9 @@ try{
  const corrupt=await browser.newContext(),bad=await corrupt.newPage();await corrupt.addInitScript(()=>localStorage.setItem('cssvista:grammar-course:v5:guest:sync','{unreadable'))
  await bad.goto(base+'/grammar-course?day=1');await bad.getByRole('alert').filter({hasText:'Existing records have not been replaced'}).waitFor();assert.equal(await bad.evaluate(()=>localStorage.getItem('cssvista:grammar-course:v5:guest:sync')),'{unreadable');await corrupt.close()
  reports.push({check:'unreadable browser record retained; public course available'})
+ const offline=await browser.newContext({ignoreHTTPSErrors:true});await isolateNetwork(offline,base);const disconnected=await offline.newPage();await offline.route('**/grammar/v5/day-07.json*',route=>route.abort());await disconnected.goto(base+'/grammar-course?day=7',{waitUntil:'domcontentloaded'});await disconnected.getByRole('button',{name:'Retry lesson',exact:true}).waitFor();await offline.unroute('**/grammar/v5/day-07.json*');await disconnected.getByRole('button',{name:'Retry lesson',exact:true}).click();await disconnected.getByRole('heading',{name:'Learning orientation',exact:true}).waitFor();await offline.close()
+ reports.push({check:'unavailable lesson displays an error and retries without discarding work'})
+
  assert.deepEqual(errors,[])
  mkdirSync('test-artifacts',{recursive:true});writeFileSync('test-artifacts/grammar-v5-browser.json',JSON.stringify({contentHash:catalog.contentHash,passed:true,reports,pageErrors:errors},null,2))
  console.log(`PASS: ${reports.length} grammar browser checks; all 30 lessons, 13 written formats, 4 widths, persistence, notebook and restoration.`)

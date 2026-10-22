@@ -136,6 +136,24 @@ await emit('index.json', catalog)
 await emit('mistake-index.json', bank.filter(q => q.meta.type === 'objective').map(({item:q,meta}) => ({id:q.id,q:q.prompt,o:q.options,a:q.answer,e:q.why,s:concepts.get(meta.conceptId).module.title,d:meta.difficulty==='Foundation'?'Basic':meta.difficulty==='Intermediate'?'Intermediate':'Advanced'})))
 const server = { version: catalog.version, days: days.map(l => ({id:l.id,day:l.day,checklist:l.checklist.length})), concepts:indexedConcepts.map(c=>({id:c.id})),items:catalog.items }
 await emit('_grammar_v5_catalog.php', `<?php\ndeclare(strict_types=1);\n// Generated from versioned original teaching material; never edit answer indices here.\nreturn json_decode(<<<'GRAMMAR_V5'\n${JSON.stringify(server)}\nGRAMMAR_V5, true, 64, JSON_THROW_ON_ERROR);\n`, new URL('public/api/', root))
+// Teaching only: no learner writing, question bank, rubrics or answer keys enter assistance.
+const tutor = [...concepts.values()].map(({ module:m, day, referenceFile }) => {
+ const text = [m.title,m.definition,...m.foundation,...m.intermediate,...m.advanced,...m.expert,...m.patterns.map(p=>`${p.form}: ${p.meaning}`),...m.examples.map(e=>`${e.sentence}\n${e.analysis}`),...m.exceptions].join('\n\n')
+ assert(text.length <= 16000, `${m.id}: assistance context exceeds the existing bound`)
+ const query = referenceFile ? `view=reference&concept=${m.id}` : `day=${day}&section=${m.id}&edition=v5`
+ return {id:`grammar-v5:${m.id}`,category:'grammar',title:m.title,text,attribution:`CSS VISTA original reconstructed grammar teaching, edition ${catalog.version}. Context-sensitive instruction; not an official past question.`,return_path:`/grammar-course?${query}`,date:null,sources:m.sourceIds.map(id=>({publisher:sources.get(id).title,url:sources.get(id).url})).slice(0,10),feature:'tutor'}
+})
+// Old deep links remain usable; stored exchanges retain their original immutable snapshots.
+const oldTutor = await readFile(new URL('public/api/_tutor_grammar.php', root), 'utf8')
+const oldContexts = JSON.parse(oldTutor.split("\nCONTEXTS, true")[0].split("<<<'CONTEXTS'\n")[1])
+const legacyDayMap = {1:1,2:5,3:14,4:14,5:10,6:24,7:7,8:8,9:9,10:17,11:19,12:21,13:3,14:4,15:22,16:12,17:20,18:11,19:16,20:22,21:24,22:27,23:26,24:26,25:25,26:28,27:27,28:28,29:29,30:30}
+const canonicalTutor = [...tutor]
+for (const old of oldContexts) {
+ const parts = old.id.split(':'), options = canonicalTutor.filter(t=>t.return_path.includes(`day=${legacyDayMap[parts[1]]}&`)), target = options[Math.min(Number(parts[2]), options.length-1)]
+ assert(target, `Missing related teaching for old assistance link ${old.id}`)
+ tutor.push({...target,id:old.id,legacy_alias:true,title:`Reconstructed related topic: ${target.title}`})
+}
+await emit('_tutor_grammar_v5.php', `<?php\ndeclare(strict_types=1);\n// Original teaching only. Legacy aliases are excluded from the new source picker.\nreturn json_decode(<<<'GRAMMAR_V5_TUTOR'\n${JSON.stringify(tutor)}\nGRAMMAR_V5_TUTOR, true, 64, JSON_THROW_ON_ERROR);\n`, new URL('public/api/',root))
 await emit('coverage-matrix.json', { contentHash, rows: coverage, referenceExtensions: extensions.map(e=>({id:e.file,concepts:e.data.modules.map(m=>({id:m.id,coverageIds:m.coverageIds,practice:allTasks(e.data).filter(q=>q.conceptId===m.id).map(q=>q.id)}))})) }, new URL('docs/grammar-reconstruction/', root))
 await emit('question-inventory.json', { contentHash, items: bank.map(q => ({ ...q.meta, prompt: q.item.prompt, sourceIds: q.item.sourceIds, marking: q.meta.type === 'objective' ? 'verified key with explanatory feedback' : 'model-and-rubric self-review; no automated mark' })), counts: { distinctItems:bank.length, objective:bank.filter(q=>q.meta.type==='objective').length, response:bank.filter(q=>q.meta.type==='response').length }, warnings }, new URL('docs/grammar-reconstruction/', root))
 await emit('source-register.json', { contentHash, editorialConvention:'British English with explicitly qualified established variation', copyright:'Original teaching and examples. Source links identify consulted authorities, not permission to reproduce their texts.', sources:catalog.sources }, new URL('docs/grammar-reconstruction/', root))

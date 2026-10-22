@@ -5,7 +5,7 @@ require_once __DIR__.'/_precis_core.php';
 require_once __DIR__.'/_current_affairs.php';
 function cssv_tutor_static_contexts(): array {
  static $contexts=null;if($contexts!==null)return $contexts;
- $contexts=array_column(require __DIR__.'/_tutor_grammar.php',null,'id');
+ $contexts=array_column(require __DIR__.'/_tutor_grammar_v5.php',null,'id');
  // Exclude the pending official framework and chapters containing full models.
  foreach(cssv_precis_handbook()['chapters'] as $chapter){
   if(!in_array($chapter['id'],['1','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','19','21','22'],true))continue;
@@ -89,6 +89,6 @@ function cssv_tutor_catalog(PDO $pdo,string $category,int $offset,?string $user=
  if($category==='current-affairs'){
   $q=$pdo->query('SELECT i.id,i.headline,i.publication_date,i.content FROM current_affairs_items i JOIN current_affairs_days d ON d.publication_date=i.publication_date WHERE '.ca_visible().' ORDER BY i.publication_date DESC,i.id LIMIT 51 OFFSET '.$offset);$rows=$q->fetchAll();$more=count($rows)>50;
   $items=[];foreach(array_slice($rows,0,50) as $row){try{$context=cssv_tutor_published_context($row);$items[]=array_intersect_key($context,array_flip(['id','title','category','date']));}catch(OutOfBoundsException|InvalidArgumentException){/* Unusable source attribution is never offered as a teaching context. */}}
- }else{$rows=array_values(array_filter(cssv_tutor_static_contexts(),fn($c)=>$c['category']===$category));$more=count($rows)>$offset+50;$items=array_map(fn($c)=>array_intersect_key($c,array_flip(['id','title','category','date'])),array_slice($rows,$offset,50));}
+ }else{$rows=array_values(array_filter(cssv_tutor_static_contexts(),fn($c)=>$c['category']===$category && empty($c['legacy_alias'])));$more=count($rows)>$offset+50;$items=array_map(fn($c)=>array_intersect_key($c,array_flip(['id','title','category','date'])),array_slice($rows,$offset,50));}
  return ['contexts'=>$items,'has_more'=>$more];
 }

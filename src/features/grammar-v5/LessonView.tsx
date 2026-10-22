@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import ConceptView from './ConceptView'
 import { dayHref, loadLesson } from './content'
 import { Exercise, action, primary, surface, type UpdateStudy } from './Exercise'
@@ -10,6 +10,7 @@ export default function LessonView({ day, section, catalog, state, update, depth
   day: number; section: string; catalog: Catalog; state: StudyState; update: UpdateStudy; depth: Depth
   navigate: (day: number, section: string) => void; attempt?: string; requestedItem?: string
 }) {
+  const [, setParams] = useSearchParams()
   const [loaded, setLoaded] = useState<{ day: number; lesson?: Lesson; error?: string }>(), [retry, setRetry] = useState(0)
   const meta = catalog.days.find(d => d.day === day)!, lesson = loaded?.day === day ? loaded.lesson : undefined
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function LessonView({ day, section, catalog, state, update, depth
   useEffect(() => {
     update(s => s.cursor.day === day && s.cursor.section === safeSection ? s : { ...s, cursor: { day, section: safeSection, item: '' } })
   }, [day, safeSection, update])
-  function moveItem(index: number) { setPosition({ section: safeSection, index }); update(s => ({ ...s, cursor: { day, section: safeSection, item: items[index].id } })); document.getElementById('grammar-lesson-content')?.focus({ preventScroll: true }) }
+  function moveItem(index: number) { setPosition({ section: safeSection, index }); update(s => ({ ...s, cursor: { day, section: safeSection, item: items[index].id } })); setParams(previous => { const next = new URLSearchParams(previous); next.set('item', items[index].id); return next }, { replace: true }); document.getElementById('grammar-lesson-content')?.focus({ preventScroll: true }) }
   return <section className="space-y-5" aria-label={`Day ${day} lesson`}>
     <div className={`${surface} no-print`}><label className="text-sm font-semibold">Choose any day<select className="mt-2 min-h-12 w-full rounded-xl border border-slate-400 bg-white px-3 font-normal" value={day} onChange={e => navigate(Number(e.target.value), 'orientation')}>{catalog.days.map(d => <option key={d.day} value={d.day}>Day {d.day} · {d.title}{state.completed.includes(d.id) ? ' · Completed' : ''}</option>)}</select></label><p className="mt-3 text-xs leading-6 text-slate-600">No lesson is locked. Prerequisite links guide your study without restricting access.</p></div>
     <div className="grid items-start gap-6 lg:grid-cols-[250px_minmax(0,1fr)]">
