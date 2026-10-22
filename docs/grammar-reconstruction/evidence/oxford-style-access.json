@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/punctuation",
+    "status": 200,
+    "finalUrl": "https://www.ox.ac.uk/about/the-university/brand/style-guide/punctuation",
+    "sha256": "f43053a38893fd5ca143ed1155d994a1a4176345d1c0a8ef92e442bed93a4e48"
+  },
+  {
+    "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/abbreviations",
+    "status": 200,
+    "finalUrl": "https://www.ox.ac.uk/about/the-university/brand/style-guide/abbreviations",
+    "sha256": "98502f573505b79423d0793b173c143852c5ba1b25219256dc1d4731810161ee"
+  },
+  {
+    "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/words",
+    "status": 200,
+    "finalUrl": "https://www.ox.ac.uk/about/the-university/brand/style-guide/words",
+    "sha256": "835a292e8e21ec0f18a0e66ce2a2cff77ec2fb1e466e315e2875aca9188d5790"
+  }
+]

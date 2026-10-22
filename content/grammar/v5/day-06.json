@@ -1235,10 +1235,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-present-simple-i-work",
-        "C-VERB"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d06-recall02",
@@ -1256,11 +1253,7 @@
       "conceptId": "gv5-d02-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "C-PRES",
-        "cambridge-presentpast",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d06-recall03",
@@ -1278,11 +1271,7 @@
       "conceptId": "gv5-d05-m02",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-present-perfect-simple-or-present-perfect-continuous",
-        "cambridge-for-or-since",
-        "C-VERB"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

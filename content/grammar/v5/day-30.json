@@ -947,8 +947,8 @@
       "id": "gv5-d30-r08",
       "type": "response",
       "kind": "comparison",
-      "prompt": "Identify the understood editor in Salma promised Nadia to edit the draft and Salma persuaded Nadia to edit the draft. Explain the control contrast.",
-      "model": "In the normal intended promise construction, Salma is understood as the editor. In the persuade construction, Nadia is understood as the editor. The first is subject control; the second is object control. The contrast follows the lexical complement patterns rather than simply choosing the nearest noun in every infinitival construction.",
+      "prompt": "Identify the understood editor in Salma tried to edit the draft and Salma persuaded Nadia to edit the draft. Explain the control contrast.",
+      "model": "In the try construction, Salma is understood as the editor and is the person making the effort. In the persuade construction, Nadia is understood as the editor. The first illustrates subject control; the second illustrates object control. These interpretations follow the lexical patterns rather than a rule that simply selects the nearest noun.",
       "rubric": [
         "Identify Salma versus Nadia as the understood subject.",
         "Use the control labels consistently with those interpretations."
@@ -1458,9 +1458,7 @@
       "conceptId": "gv5-d30-m01",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-WORD"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d30-recall02",
@@ -1479,10 +1477,7 @@
       "conceptId": "gv5-d30-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "C-WORD",
-        "C-HEDGE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d30-recall03",
@@ -1501,11 +1496,7 @@
       "conceptId": "gv5-d30-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-WORD",
-        "C-MODAL",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

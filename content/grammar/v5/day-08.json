@@ -1287,11 +1287,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-present-perfect-simple-or-present-perfect-continuous",
-        "v5-past-perfect-simple-or-past-perfect-continuous",
-        "C-PRES"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d08-rec02",
@@ -1309,11 +1305,7 @@
       "conceptId": "gv5-d06-m01",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-present-perfect-simple-or-present-perfect-continuous",
-        "v5-past-perfect-simple-or-past-perfect-continuous",
-        "C-PRES"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d08-rec03",
@@ -1331,11 +1323,7 @@
       "conceptId": "gv5-d07-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-present-perfect-simple-or-present-perfect-continuous",
-        "v5-past-perfect-simple-or-past-perfect-continuous",
-        "C-PRES"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

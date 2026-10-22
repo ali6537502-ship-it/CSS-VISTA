@@ -1281,9 +1281,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-WORD"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d02-a02",
@@ -1301,10 +1299,7 @@
       "conceptId": "gv5-d01-m02",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "F5-INFLECTION",
-        "F5-MORPHEME"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d02-a03",
@@ -1322,9 +1317,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "F5-COMPLEMENTS"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

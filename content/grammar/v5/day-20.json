@@ -1323,12 +1323,7 @@
       "conceptId": "gv5-d05-m02",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "C-NONFINITE",
-        "V-clauses-finite-and-non-finite",
-        "N-infinitives-with-and-without-to",
-        "N-perfect-infinitive-with-to-to-have-worked"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d20-rec02",
@@ -1346,13 +1341,7 @@
       "conceptId": "gv5-d17-m01",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "E-PATTERN",
-        "N-infinitives-with-and-without-to",
-        "N-help-somebody-to-do",
-        "V-make",
-        "V-let-let-s"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d20-rec03",
@@ -1370,12 +1359,7 @@
       "conceptId": "gv5-d19-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "E-PARTICIPLE",
-        "V-clauses-finite-and-non-finite",
-        "N-perfect-infinitive-with-to-to-have-worked",
-        "N-infinitives-with-and-without-to"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

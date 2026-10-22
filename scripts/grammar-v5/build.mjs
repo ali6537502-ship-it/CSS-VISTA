@@ -60,6 +60,10 @@ for (const l of days) {
  for (const c of covered) assert(wanted.includes(c), `${l.id}: invented/unmapped coverage ${c}`)
 }
 for (const { file, data } of extensions) { id(data.id, 'reference ID'); addModules(data, file) }
+for (const extension of expected.permanentExtensions) {
+ const actual = concepts.get(extension.id); assert(actual?.referenceFile === extension.resource, `Missing permanent extension: ${extension.id}`)
+ assert.deepEqual(actual.module.coverageIds, extension.coverageIds, `Permanent extension coverage changed: ${extension.id}`)
+}
 const allTasks = l => [...l.questions, ...l.corrections, ...l.transformations, l.writing, ...l.recall]
 function addItems(items, day, group, aliases, document) {
  for (const q of items) {

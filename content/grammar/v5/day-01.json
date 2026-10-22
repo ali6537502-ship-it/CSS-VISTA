@@ -1280,11 +1280,7 @@
       "conceptId": "gv5-d01-m03",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "C-WORD",
-        "F5-DETERMINERS",
-        "F5-COMPOUNDS"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d01-a02",
@@ -1302,12 +1298,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "F5-SUBJECTS",
-        "F5-OBJECTS",
-        "F5-COMPLEMENTS",
-        "F5-ADJUNCTS"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d01-a03",
@@ -1325,12 +1316,7 @@
       "conceptId": "gv5-d01-m01",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-CLAUSE",
-        "C-WORD",
-        "F5-SUBJECTS",
-        "C-NONFINITE"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

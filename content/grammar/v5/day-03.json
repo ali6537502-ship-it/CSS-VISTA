@@ -1255,9 +1255,7 @@
       "conceptId": "gv5-d01-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-WORD"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d03-a02",
@@ -1275,9 +1273,7 @@
       "conceptId": "gv5-d02-m02",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "C-NOUN"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d03-a03",
@@ -1295,9 +1291,7 @@
       "conceptId": "gv5-d02-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-WORD"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

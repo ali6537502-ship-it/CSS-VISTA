@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { PageHeader } from '@/components/shared'
 import { useAccount } from '@/lib/accountContext'
@@ -12,12 +12,13 @@ import LessonView from './LessonView'
 import Library, { RESOURCES } from './Library'
 import Lab from './Lab'
 import Reports from './Reports'
-import LegacyWork, { LEGACY_DAY_MAP } from './LegacyWork'
+import { LEGACY_DAY_MAP } from './legacyMap'
+const LegacyWork = lazy(() => import('./LegacyWork'))
 import './grammar.css'
 
-export default function GrammarLearning() {
+export default function GrammarLearning({ initialCatalog }: { initialCatalog?: Catalog } = {}) {
   const { user, loading } = useAccount(), [params, setParams] = useSearchParams()
-  const [data, setData] = useState<{ catalog?: Catalog; error?: string }>(), [retry, setRetry] = useState(0)
+  const [data, setData] = useState<{ catalog?: Catalog; error?: string }>(() => initialCatalog ? { catalog: initialCatalog } : {}), [retry, setRetry] = useState(0)
   const attempts = useLearning<Overview>(user ? 'learning.php' : undefined)
   const chosen = params.get('attempt'), attempt = user && chosen && /^[a-f0-9-]{36}$/i.test(chosen) ? chosen : undefined
   useEffect(() => { let active = true; void loadCatalog().then(catalog => { if (active) setData({ catalog }) }).catch(e => { if (active) setData({ error: e.message }) }); return () => { active = false } }, [retry])
@@ -28,7 +29,7 @@ export default function GrammarLearning() {
     </PageHeader>
     <div className="mx-auto max-w-7xl px-4 py-6 sm:py-8">
       {panel}
-      {data?.error ? <div className={surface} role="alert"><p>{data.error}</p><button className={`${action} mt-3`} onClick={() => setRetry(n => n + 1)}>Retry course</button></div> : data?.catalog ? loading ? <p role="status">Opening your learning workspace…</p> : <Workspace key={`${user?.id ?? 'guest'}:${attempt ?? 'browser'}`} catalog={data.catalog} user={user?.id} attempt={attempt} /> : <p role="status">Opening the course and reference index…</p>}
+      {data?.error ? <div className={surface} role="alert"><p>{data.error}</p><button className={`${action} mt-3`} onClick={() => setRetry(n => n + 1)}>Retry course</button></div> : data?.catalog ? loading && !initialCatalog ? <p role="status">Opening your learning workspace…</p> : <Workspace key={`${user?.id ?? 'guest'}:${attempt ?? 'browser'}`} catalog={data.catalog} user={user?.id} attempt={attempt} /> : <p role="status">Opening the course and reference index…</p>}
     </div>
   </div>
 }
@@ -72,7 +73,7 @@ function Workspace({ catalog, user, attempt }: { catalog: Catalog; user?: string
       {view === 'lab' && <div className="space-y-5"><nav className="no-print flex flex-wrap gap-3" aria-label="Practice modes">{[{ id: 'revision', label: 'Topic practice' }, { id: 'due', label: `Due retrieval (${due})` }, { id: 'errors', label: 'Error notebook' }, { id: 'diagnostic', label: 'Initial diagnostic' }, { id: 'analysis', label: 'Analysis lab' }, { id: 'transformations', label: 'Transformations' }, { id: 'editing', label: 'Editing lab' }].map(m => <button className={action} aria-pressed={mode === m.id} key={m.id} onClick={() => route('lab', { mode: m.id })}>{m.label}</button>)}</nav><Lab key={mode} {...{ catalog, state, mode, attempt }} requestedItem={params.get('item') ?? undefined} update={store.update} /></div>}
       {view === 'profile' && <Reports {...{ catalog, state, attempt }} />}
       {view === 'saved' && <section className="space-y-4" aria-label="Bookmarked rules and notes"><div className={surface}><h2 className="text-2xl font-semibold">Bookmarked rules and personal notes</h2><p className="mt-3 text-sm leading-7">Open a rule to resume its full teaching and edit your note. Exports include notes, drafts and the learning evidence in this scope.</p></div>{catalog.concepts.filter(c => state.bookmarks.includes(c.id) || state.notes[c.id]).map(c => <article key={c.id} className={surface}><h3 className="text-lg font-semibold">{c.title}</h3>{state.notes[c.id] && <p className="mt-3 whitespace-pre-wrap text-sm leading-7">{state.notes[c.id]}</p>}<div className="mt-4 flex flex-wrap gap-3"><Link className={action} to={conceptHref(c, attempt)}>Open rule and note</Link><button className={action} aria-pressed={state.bookmarks.includes(c.id)} onClick={() => store.update(s => ({ ...s, bookmarks: s.bookmarks.includes(c.id) ? s.bookmarks.filter(id => id !== c.id) : [...s.bookmarks, c.id] }))}>{state.bookmarks.includes(c.id) ? 'Remove bookmark' : 'Bookmark'}</button></div></article>)}{catalog.days.filter(d => state.notes[d.id]).map(d => <article className={surface} key={d.id}><h3 className="text-lg font-semibold">Day {d.day} reflection</h3><p className="mt-3 whitespace-pre-wrap text-sm leading-7">{state.notes[d.id]}</p><Link className={`${action} mt-4`} to={dayHref(d.day, 'finish', attempt)}>Open reflection</Link></article>)}{!state.bookmarks.length && !Object.keys(state.notes).length && <p className={surface}>No bookmarks or notes yet. Add either while reading a sub-lesson.</p>}</section>}
-      {view === 'legacy' && <LegacyWork user={user} attempt={attempt} />}
+      {view === 'legacy' && <Suspense fallback={<p role="status">Opening earlier work…</p>}><LegacyWork user={user} attempt={attempt} /></Suspense>}
       {!nav.some(n => n.id === view) && <div className={surface}><p>This view is unavailable.</p><button className={`${action} mt-3`} onClick={() => route('dashboard')}>Open the course path</button></div>}
     </>}
   </div>

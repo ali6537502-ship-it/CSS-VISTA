@@ -1341,11 +1341,7 @@
       "conceptId": "gv5-d02-m02",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-subject-verb-agreement",
-        "v5-towson-agreement",
-        "C-VERB"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d10-rec02",
@@ -1363,11 +1359,7 @@
       "conceptId": "gv5-d04-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-subject-verb-agreement",
-        "v5-towson-agreement",
-        "C-VERB"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d10-rec03",
@@ -1385,11 +1377,7 @@
       "conceptId": "gv5-d05-m01",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "v5-subject-verb-agreement",
-        "v5-towson-agreement",
-        "C-VERB"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

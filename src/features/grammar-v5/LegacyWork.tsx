@@ -6,7 +6,8 @@ import { learningRequest } from '@/features/learning/api'
 import { action, surface } from './Exercise'
 import { dayHref } from './content'
 
-export const LEGACY_DAY_MAP: Record<number, number[]> = { 1: [1, 2, 11], 2: [1, 5, 14], 3: [13, 14, 15], 4: [14], 5: [10], 6: [24], 7: [6, 7], 8: [8], 9: [9], 10: [17, 18], 11: [19], 12: [21], 13: [3], 14: [4], 15: [11, 22], 16: [12, 25], 17: [20], 18: [11], 19: [16], 20: [22], 21: [24], 22: [26, 27], 23: [26], 24: [26], 25: [25], 26: [28], 27: [27], 28: [28], 29: [29], 30: [30] }
+import { LEGACY_DAY_MAP } from './legacyMap'
+
 export default function LegacyWork({ user, attempt }: { user?: string; attempt?: string }) {
   const [copy, setCopy] = useState<{ state?: CourseState; error?: string; loaded: boolean }>({ loaded: false })
   useEffect(() => {

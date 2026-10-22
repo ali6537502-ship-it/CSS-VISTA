@@ -1219,10 +1219,7 @@
       "conceptId": "gv5-d01-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-past-simple-i-worked",
-        "C-VERB"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d07-recall02",
@@ -1240,10 +1237,7 @@
       "conceptId": "gv5-d05-m02",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-past-continuous-i-was-working",
-        "british-council-stative"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d07-recall03",
@@ -1261,10 +1255,7 @@
       "conceptId": "gv5-d06-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-PAST",
-        "cambridge-past-perfect-continuous-i-had-been-working"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

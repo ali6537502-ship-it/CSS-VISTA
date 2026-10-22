@@ -62,7 +62,7 @@
         "A contextual gap asks which form fits the situation stated, not which form you have memorised after a particular signal word. Since can introduce a starting point or a reason; by can locate a deadline without mechanically requiring a future perfect. Read the supplied interpretation and surrounding clauses. Where an item asks for an error, keep a genuine no-error possibility available. A familiar-looking construction may be standard in a specified variety or register. Conversely, understanding the intended message does not make every word form or clause boundary acceptable in edited prose."
       ],
       "advanced": [
-        "A difficult analysis may require more than one level. In What the committee recommended remains unclear, the initial interrogative clause functions as subject of remains. The order inside it is not direct-question inversion. The content of that clause can still be analysed into its own subject, verb and object relationship. Separate this hierarchical analysis from stylistic preference. A shorter paraphrase might be easier for a particular audience, but that does not establish a grammatical defect in the original. An answer explanation should identify the relevant relationship and show why competing interpretations fail in the stated context."
+        "A difficult analysis may require more than one level. In Whether the committee recommended closure remains unclear, the initial interrogative clause functions as subject of remains. The order inside it is not direct-question inversion. The content of that clause can still be analysed into its own subject, verb and object relationship. Separate this hierarchical analysis from stylistic preference. A shorter paraphrase might be easier for a particular audience, but that does not establish a grammatical defect in the original. An answer explanation should identify the relevant relationship and show why competing interpretations fail in the stated context."
       ],
       "expert": [
         "Treat an objective key as a claim that must survive scrutiny. If two options appear defensible, state their readings and compare them with the question’s explicit conditions; do not invent an examiner’s preference. Some grammatical differences are genuine alternatives, while others become equivalent only after a meaning change. This assessment uses a British editorial default and identifies established alternatives where they matter. Its difficulty labels describe the intended depth of reasoning, not calibrated psychometric levels. When you self-review an unfamiliar analysis, distinguish a mistaken label from a faulty interpretation and from an unsupported rule; the revision action should address the actual gap."
@@ -1533,9 +1533,7 @@
       "conceptId": "gv5-d03-m04",
       "difficulty": "Foundation",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-NOUN"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d29-recall02",
@@ -1553,9 +1551,7 @@
       "conceptId": "gv5-d19-m04",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "C-PASSIVE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d29-recall03",
@@ -1574,9 +1570,7 @@
       "conceptId": "gv5-d29-m03",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "C-WORD"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

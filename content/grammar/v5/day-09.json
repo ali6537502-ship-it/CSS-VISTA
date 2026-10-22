@@ -1258,10 +1258,7 @@
       "conceptId": "gv5-d05-m01",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "v5-future-will-and-shall",
-        "v5-future-be-going-to-i-am-going-to-work"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d09-rec02",
@@ -1279,10 +1276,7 @@
       "conceptId": "gv5-d08-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-future-will-and-shall",
-        "v5-future-be-going-to-i-am-going-to-work"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d09-rec03",
@@ -1300,10 +1294,7 @@
       "conceptId": "gv5-d07-m03",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "v5-future-will-and-shall",
-        "v5-future-be-going-to-i-am-going-to-work"
-      ]
+      "sourceIds": []
     }
   ],
   "checklist": [

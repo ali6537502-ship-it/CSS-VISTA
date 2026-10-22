@@ -100,7 +100,8 @@
       ],
       "sourceIds": [
         "cambridge-punctuation",
-        "C-CLAUSE"
+        "C-CLAUSE",
+        "OX-PUNCT"
       ]
     },
     {
@@ -187,7 +188,10 @@
       ],
       "sourceIds": [
         "cambridge-punctuation",
-        "C-VARIATION"
+        "C-VARIATION",
+        "C-POSSESSION",
+        "MLA-APOSTROPHE",
+        "OX-ABBREV"
       ]
     },
     {
@@ -275,7 +279,8 @@
       ],
       "sourceIds": [
         "cambridge-punctuation",
-        "cambridge-indirect"
+        "cambridge-indirect",
+        "OX-PUNCT"
       ]
     },
     {
@@ -362,7 +367,9 @@
       ],
       "sourceIds": [
         "cambridge-punctuation",
-        "C-VARIATION"
+        "C-VARIATION",
+        "OX-WORDS",
+        "OX-ABBREV"
       ]
     }
   ],
@@ -383,10 +390,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Foundation",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q02",
@@ -404,10 +408,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q03",
@@ -425,10 +426,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Foundation",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q04",
@@ -446,10 +444,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q05",
@@ -467,10 +462,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q06",
@@ -488,10 +480,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q07",
@@ -509,10 +498,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q08",
@@ -530,10 +516,7 @@
       "conceptId": "gv5-d24-m04",
       "difficulty": "Foundation",
       "ability": "Recognition",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q09",
@@ -551,10 +534,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Advanced",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-q10",
@@ -572,10 +552,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Expert Extension",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r01",
@@ -593,10 +570,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r02",
@@ -614,10 +588,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r03",
@@ -635,10 +606,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r04",
@@ -656,10 +624,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r05",
@@ -677,10 +642,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r06",
@@ -698,10 +660,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Application",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r07",
@@ -719,10 +678,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Recognition",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r08",
@@ -740,10 +696,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r09",
@@ -761,10 +714,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r10",
@@ -782,10 +732,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r11",
@@ -803,10 +750,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r12",
@@ -824,10 +768,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r13",
@@ -845,10 +786,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Advanced",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r14",
@@ -867,10 +805,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r15",
@@ -888,10 +823,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r16",
@@ -909,10 +841,7 @@
       "conceptId": "gv5-d24-m04",
       "difficulty": "Intermediate",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r17",
@@ -930,10 +859,7 @@
       "conceptId": "gv5-d24-m04",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-r18",
@@ -951,10 +877,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Expert Extension",
       "ability": "Understanding",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     }
   ],
   "corrections": [
@@ -974,10 +897,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c02",
@@ -995,10 +915,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c03",
@@ -1016,10 +933,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c04",
@@ -1037,10 +951,7 @@
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-CLAUSE"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c05",
@@ -1058,10 +969,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c06",
@@ -1079,10 +987,7 @@
       "conceptId": "gv5-d24-m03",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "cambridge-indirect"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c07",
@@ -1100,10 +1005,7 @@
       "conceptId": "gv5-d24-m04",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-c08",
@@ -1121,10 +1023,7 @@
       "conceptId": "gv5-d24-m04",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation",
-        "C-VARIATION"
-      ]
+      "sourceIds": []
     }
   ],
   "transformations": [
@@ -1144,9 +1043,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation"
-      ]
+      "sourceIds": []
     },
     {
       "id": "gv5-d24-t02",
@@ -1164,9 +1061,7 @@
       "conceptId": "gv5-d24-m02",
       "difficulty": "Intermediate",
       "ability": "Production and revision",
-      "sourceIds": [
-        "cambridge-punctuation"
-      ]
+      "sourceIds": []
     }
   ],
   "writing": {
@@ -1187,10 +1082,7 @@
     "conceptId": "gv5-d24-m04",
     "difficulty": "Advanced",
     "ability": "Production and revision",
-    "sourceIds": [
-      "cambridge-punctuation",
-      "C-VARIATION"
-    ]
+    "sourceIds": []
   },
   "recall": [
     {
@@ -1283,6 +1175,41 @@
       "url": "https://dictionary.cambridge.org/grammar/british-grammar/punctuation",
       "consulted": "2026-10-21",
       "note": "Clause boundaries, quotations, lists and punctuation alternatives checked."
+    },
+    {
+      "id": "OX-PUNCT",
+      "title": "University of Oxford Style Guide: punctuation",
+      "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/punctuation",
+      "consulted": "2026-10-22",
+      "note": "Consulted the actual punctuation guidance for apostrophes, compounds, -ly modifiers, dashes and ellipses. These are house conventions, not universal laws."
+    },
+    {
+      "id": "OX-ABBREV",
+      "title": "University of Oxford Style Guide: abbreviations, contractions and acronyms",
+      "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/abbreviations",
+      "consulted": "2026-10-22",
+      "note": "Consulted abbreviation and contraction guidance; established alternatives are explicitly distinguished from errors."
+    },
+    {
+      "id": "OX-WORDS",
+      "title": "University of Oxford Style Guide: words",
+      "url": "https://www.ox.ac.uk/about/the-university/brand/style-guide/words",
+      "consulted": "2026-10-22",
+      "note": "The guide explicitly distinguishes its -ise preference from Oxford University Press’s -ize preference. Used to verify variation within British editorial practice."
+    },
+    {
+      "id": "MLA-APOSTROPHE",
+      "title": "MLA Style Center: Apostrophes, One Mark, Three Ways",
+      "url": "https://style.mla.org/apostrophes-three-ways/",
+      "consulted": "2026-10-22",
+      "note": "Consulted the section on individual-letter plurals and the different treatment of grades and capital-letter abbreviations. It supports a qualified style-dependent exception."
+    },
+    {
+      "id": "C-POSSESSION",
+      "title": "Cambridge English Grammar Today: possession",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/possession-john-s-car-a-friend-of-mine",
+      "consulted": "2026-10-22",
+      "note": "The article explicitly gives James’/James’s and Keats’/Keats’s alternatives, plus regular and irregular plural genitives."
     }
   ],
   "editorialNotes": []
