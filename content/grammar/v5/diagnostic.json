@@ -303,7 +303,7 @@
         "The rain stopped the; match resumed."
       ],
       "answer": 0,
-      "why": "Both sides of the semicolon in the first version are complete main clauses. The other placements interrupt constituents or leave the intended main-clause pairing incomplete.",
+      "why": "The rain stopped; the match resumed places a complete main clause on each side of the semicolon. The other placements interrupt constituents or fail to join the intended main clauses.",
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Application",

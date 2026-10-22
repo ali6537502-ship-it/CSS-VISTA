@@ -28,8 +28,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d12-c01",
-        "gv5-d12-c02"
+        "gv5-topic-d12-c01",
+        "gv5-topic-d12-c02"
       ],
       "definition": "A preposition commonly heads a phrase expressing a relationship; spatial meanings often extend to time, cause, means and other abstract relations.",
       "foundation": [
@@ -116,8 +116,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d12-c03",
-        "gv5-d12-c04"
+        "gv5-topic-d12-c03",
+        "gv5-topic-d12-c04"
       ],
       "definition": "A prepositional phrase contains a preposition as head and, commonly, a complement; the complete phrase can perform several grammatical functions.",
       "foundation": [
@@ -204,8 +204,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d12-c05",
-        "gv5-d12-c08"
+        "gv5-topic-d12-c05",
+        "gv5-topic-d12-c08"
       ],
       "definition": "Lexical selection is the requirement or preference of a particular word for a complement pattern, including a specific preposition where its meaning requires one.",
       "foundation": [
@@ -293,9 +293,9 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d12-c06",
-        "gv5-d12-c07",
-        "gv5-d12-c09"
+        "gv5-topic-d12-c06",
+        "gv5-topic-d12-c07",
+        "gv5-topic-d12-c09"
       ],
       "definition": "Multi-word verbs combine a verb with a particle, preposition or both; their object-placement patterns reveal important differences.",
       "foundation": [

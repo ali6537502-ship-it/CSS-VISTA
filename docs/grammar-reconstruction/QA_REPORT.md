@@ -1,0 +1,44 @@
+# Quality assurance record
+
+Status: final release checks in progress. No production completion claim is made by this working report.
+
+## Academic and instructional review
+
+The original authored course was reviewed across all 30 days before content replacement. The curriculum now has 260 scheduled subtopic groups and 14 explicit permanent-extension subtopics in 18 taxonomy families. All are mapped to substantive entries and real practice IDs. The generated manifest currently records 120 entries, 420 objective items and 1,000 open-response tasks. Counts are distinct stable IDs, not duplicated views of the same bank.
+
+Review passes examined rules, examples, answer context, distractors, meaning preservation, regional/register qualification and task constraints. Earlier research reviews identified corrections throughout Days 1–28 and the diagnostic/phase banks; their temporary detailed review dossiers were lost during the environment restart. The original audit matrices survived. The resumed final pass rechecked Days 10, 20, 29 and 30, the outstanding source questions, cumulative coverage, recall mappings and all potential option-position references. This limitation in the retained review trail is explicit; there is no claim of an independent external academic panel or psychometric calibration.
+
+The retained key register records each selected answer text, explanation digest, underlying concept and consulted sources. Objective keys were reviewed editorially; automatic shape validation alone is not treated as proof of grammatical correctness. Open responses have models, rubrics and alternative-answer policies and are honestly self-reviewed. Source links are reference authorities, not copied teaching. Current access checks cover 176 URLs and retain metadata/content digests rather than third-party source bodies. The metadata checks do not by themselves verify a grammatical claim.
+
+Specific verification included the two *insist* complement patterns, collective agreement and *none*, singular *they*, embedded subject questions, adjective versus modifier function, perfect/progressive interpretation, modal qualifications, non-finite subject interpretation, control/raising, prepositional passives, supplementary relative scope, and preserving actors, time, quantity and uncertainty in transformations. Cambridge’s possession article directly supports James’/James’s; Oxford’s current style guide documents hyphen/abbreviation conventions and its difference from OUP’s -ize preference; MLA’s letter-plural guidance supports the explicitly qualified apostrophe exception.
+
+## Defects found and corrected during reconstruction
+
+- Cross-day recall items sometimes named the host day’s concept or source. They now link to the principle actually elicited and inherit that entry’s sources.
+- Repeated phase writing models did not test the phase’s particular structures. They were replaced with distinct original prose and separate analysis. Later phase assessments now include fresh earlier-phase items.
+- Some transformations added causes, changed agents or quantities, lost modality or failed the requested form. Models and constraints were revised to preserve the specified meaning and recognise legitimate alternatives.
+- A capstone survey question inferred support without supplying responses. Its context now gives the results. A passive comparison changed tense unnecessarily; its example now preserves past time.
+- Prepublication answer-option rearrangement exposed five explanations that referred to an option’s old position. They now identify the actual construction, and the validator rejects positional version/distractor references.
+- Initial correct responses were incorrectly included in a count described as two spaced successes. Retention now requires two later qualifying retrievals where the initial response was correct.
+- Refresh could select the first task rather than the saved task. Initial selection now honours the saved/deep-linked item.
+- Permanent-extension practice/bookmark links incorrectly assumed a numbered day. They now use their own reference/practice routes.
+- Corrupt browser records could be normalised into empty work. Initial edition/read checks now retain them, pause writes and make raw records exportable.
+- A restored snapshot could omit newer server evidence. The native additive merge retains missing writing, original responses and newer review history and returns the canonical receipt.
+- The shared page layout already supplies `main`; the course’s nested `main` was removed. The mobile outline now collapses and keyboard focus remains visible.
+- The static-render route originally still referenced legacy teaching. It now renders the same reconstructed course, using the actual generated catalogue.
+
+## Verification completed
+
+- TypeScript checking and repository lint passed.
+- The complete existing project test suite and Hostinger build passed after integrating the current main branch. Existing account, Pro/MPT/payment and advertising restrictions were retained.
+- The 19 existing grammar state/practice/synchronisation tests, original-file checksum preservation and legacy server catalogue checks passed.
+- New state tests cover raw/scoped legacy backup, immutable first response, distinct exposure versus later retrieval, long original text, complete round-trip preservation, response-format coverage, real reinforcement links and cumulative scope.
+- Native PHP/MySQL unit/API checks passed in disposable GitHub CI: user/attempt isolation, CSRF, unknown-field rejection, strict catalogue validation, exact replay, concurrent version conflicts, immutable first answers, long writing, additive restoration, canonical receipts, retained legacy records and denied private implementation files. No production learner record was accessed.
+- Public Chromium tests passed 51 checks: all 30 lesson orientations/section navigation, four widths (320/390/768/1440), objective feedback/reinforcement/retry, all 13 open-response formats, notes/bookmarks, exact task resume, glossary, shared notebook resolution, JSON export/restore and corrupt-record preservation.
+- Six representative course views had zero axe-core WCAG 2.2 AA violations in the tested scope. Native disclosure worked from the keyboard and visible focus was checked. This is bounded verification, not a complete full-site accessibility certification or an assistive-technology user study.
+
+## Final release requirements
+
+The final built signed-in browser journey, latest-commit CI checks, exact content-digest sign-off and live deployment fingerprint verification remain required before changing this report to a completed release. See the PR checks and retained evidence rather than inferring readiness from manuscript size.
+
+Difficulty labels and diagnostic suggestions are editorial learning aids. Tests have not been normed or statistically equated. Self-review does not establish independent writing accuracy. Production account data is intentionally not inspected as part of verification; the account flow is tested against disposable native MySQL using the real application/backend.

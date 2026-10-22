@@ -24,8 +24,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d13-c01",
-        "gv5-d13-c02"
+        "gv5-topic-d13-c01",
+        "gv5-topic-d13-c02"
       ],
       "definition": "A phrase is a grammatical unit organised around a head, the element that determines its category and much of its distribution. A phrase may consist of one word or contain several nested units.",
       "foundation": [
@@ -115,8 +115,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d13-c02",
-        "gv5-d13-c03"
+        "gv5-topic-d13-c02",
+        "gv5-topic-d13-c03"
       ],
       "definition": "A dependent is material associated with a phrase's head. Determiners help establish reference or quantity; modifiers add description; complements are licensed by the head's particular grammatical pattern.",
       "foundation": [
@@ -209,8 +209,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d13-c04",
-        "gv5-d13-c05"
+        "gv5-topic-d13-c04",
+        "gv5-topic-d13-c05"
       ],
       "definition": "A hierarchical analysis groups words into units within larger units. Embedding places one unit inside another; coordination links units at a comparable structural level.",
       "foundation": [
@@ -298,8 +298,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d13-c06",
-        "gv5-d13-c07"
+        "gv5-topic-d13-c06",
+        "gv5-topic-d13-c07"
       ],
       "definition": "A constituent is a unit within a grammatical structure. Diagnostics such as substitution, movement and answering a focused question can provide evidence about units, but no one diagnostic is decisive in every context.",
       "foundation": [

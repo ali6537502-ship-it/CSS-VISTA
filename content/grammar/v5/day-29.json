@@ -49,10 +49,10 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d29-c01",
-        "gv5-d29-c02",
-        "gv5-d29-c03",
-        "gv5-d29-c06"
+        "gv5-topic-d29-c01",
+        "gv5-topic-d29-c02",
+        "gv5-topic-d29-c03",
+        "gv5-topic-d29-c06"
       ],
       "definition": "An integrated grammar assessment samples several related abilities: recognising a form, explaining its meaning, applying it in context and revising or producing language. A selected answer supplies evidence about the item attempted, not every possible use of its grammatical topic.",
       "foundation": [
@@ -141,9 +141,9 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d29-c04",
-        "gv5-d29-c05",
-        "gv5-d29-c07"
+        "gv5-topic-d29-c04",
+        "gv5-topic-d29-c05",
+        "gv5-topic-d29-c07"
       ],
       "definition": "A meaning-preserving transformation changes a requested structure while retaining the relevant participants, time, modality, quantity and logical relationships. Editing also requires deciding which changes are necessary and which are optional improvements for the specified audience.",
       "foundation": [
@@ -232,7 +232,7 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d29-c08"
+        "gv5-topic-d29-c08"
       ],
       "definition": "A topic-level performance report organises evidence by the underlying grammatical concepts and abilities sampled. Completion, first-response accuracy, repeated-item retrieval and writing self-review are separate records and support different conclusions.",
       "foundation": [

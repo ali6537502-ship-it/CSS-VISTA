@@ -23,9 +23,9 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d27-c01",
-        "gv5-d27-c05",
-        "gv5-d27-c07"
+        "gv5-topic-d27-c01",
+        "gv5-topic-d27-c05",
+        "gv5-topic-d27-c07"
       ],
       "definition": "A summary selects a text’s central message; a précis is a disciplined concise restatement under specified length and presentation constraints. Neither is a licence to invent facts or strengthen a claim.",
       "foundation": [
@@ -108,9 +108,9 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d27-c02",
-        "gv5-d27-c04",
-        "gv5-d27-c06"
+        "gv5-topic-d27-c02",
+        "gv5-topic-d27-c04",
+        "gv5-topic-d27-c06"
       ],
       "definition": "Paraphrase re-expresses a source’s message; synthesis relates messages from more than one source. Both require grammatical accuracy and faithful treatment of time, modality, attribution and logical relations.",
       "foundation": [
@@ -197,8 +197,8 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d27-c03",
-        "gv5-d27-c08"
+        "gv5-topic-d27-c03",
+        "gv5-topic-d27-c08"
       ],
       "definition": "Grammatical translation conveys the intended message through the target language’s own constructions. Formal expression selects structures appropriate to a purpose and audience while retaining meaning.",
       "foundation": [

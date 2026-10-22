@@ -24,8 +24,8 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d15-c01",
-        "gv5-d15-c02"
+        "gv5-topic-d15-c01",
+        "gv5-topic-d15-c02"
       ],
       "definition": "A relative clause connects to an antecedent through a grammatical relation within the clause. Integrated or defining relatives help identify or delimit a referent; supplementary or non-defining relatives add a separate associated comment.",
       "foundation": [
@@ -114,7 +114,7 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d15-c03"
+        "gv5-topic-d15-c03"
       ],
       "definition": "A contact relative omits an overt relative marker in an integrated construction where omission is licensed. Non-finite relatives use infinitival or participial structure rather than a full finite relative clause.",
       "foundation": [
@@ -203,9 +203,9 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d15-c04",
-        "gv5-d15-c05",
-        "gv5-d15-c06"
+        "gv5-topic-d15-c04",
+        "gv5-topic-d15-c05",
+        "gv5-topic-d15-c06"
       ],
       "definition": "A content clause expresses a proposition, question or other content associated with a selecting word. Traditional nominal-clause labels describe some external functions; they do not mean that the internal clause has become a noun word.",
       "foundation": [
@@ -300,9 +300,9 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d15-c07",
-        "gv5-d15-c08",
-        "gv5-d15-c09"
+        "gv5-topic-d15-c07",
+        "gv5-topic-d15-c08",
+        "gv5-topic-d15-c09"
       ],
       "definition": "An adverbial or adjunct clause adds a circumstance or logical relationship to another situation, including time, reason, purpose, result, condition, concession, manner or comparison.",
       "foundation": [

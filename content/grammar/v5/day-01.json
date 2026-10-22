@@ -19,9 +19,9 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d01-c01",
-        "gv5-d01-c02",
-        "gv5-d01-c04"
+        "gv5-topic-d01-c01",
+        "gv5-topic-d01-c02",
+        "gv5-topic-d01-c04"
       ],
       "definition": "Grammar describes the patterns by which words and larger units combine and change form. A grammatical analysis asks how an expression is built; interpretation asks what it means in a particular context. Neither question can be answered reliably by word order alone.",
       "foundation": [
@@ -104,8 +104,8 @@
         "A"
       ],
       "coverageIds": [
-        "gv5-d01-c03",
-        "gv5-d01-c06"
+        "gv5-topic-d01-c03",
+        "gv5-topic-d01-c06"
       ],
       "definition": "A morpheme is a smallest unit carrying lexical meaning or grammatical information. A root supplies the central lexical material; a stem is the form to which an inflection is attached. Inflection supplies grammatical forms, while derivation creates a new lexical item.",
       "foundation": [
@@ -190,8 +190,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d01-c05",
-        "gv5-d01-c07"
+        "gv5-topic-d01-c05",
+        "gv5-topic-d01-c07"
       ],
       "definition": "A word class is a grammatical category identified through a combination of form, distribution and possible combinations. A function is a role within a larger structure. Noun is a category; subject and modifier are functions. A word’s meaning alone does not establish its class.",
       "foundation": [
@@ -277,8 +277,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d01-c08",
-        "gv5-d01-c09"
+        "gv5-topic-d01-c08",
+        "gv5-topic-d01-c09"
       ],
       "definition": "The subject is a grammatical element identified by structural behaviour, not simply the person doing an action. The predicate is what is predicated of that subject. Objects, predicative complements and adjuncts perform different roles within clause structure.",
       "foundation": [

@@ -23,9 +23,9 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d28-c01",
-        "gv5-d28-c02",
-        "gv5-d28-c09"
+        "gv5-topic-d28-c01",
+        "gv5-topic-d28-c02",
+        "gv5-topic-d28-c09"
       ],
       "definition": "Grammatical error analysis identifies a problematic relationship, explains the applicable construction and checks whether a proposed repair is supported by the intended meaning. An unusual form is not itself proof of an error.",
       "foundation": [
@@ -113,9 +113,9 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d28-c03",
-        "gv5-d28-c04",
-        "gv5-d28-c05"
+        "gv5-topic-d28-c03",
+        "gv5-topic-d28-c04",
+        "gv5-topic-d28-c05"
       ],
       "definition": "A meaning ledger records the information a transformation must preserve: participants, event, time, polarity, quantity, modality and logical relationship. Reconstruction changes form while checking these features explicitly.",
       "foundation": [
@@ -204,8 +204,8 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d28-c06",
-        "gv5-d28-c07"
+        "gv5-topic-d28-c06",
+        "gv5-topic-d28-c07"
       ],
       "definition": "A suspicious construction is one a learner expects to be wrong because it is unfamiliar, formal, informal or variable. A defensible judgement examines its licensing context and intended reading before applying a preferred rewrite.",
       "foundation": [
@@ -295,7 +295,7 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d28-c08"
+        "gv5-topic-d28-c08"
       ],
       "definition": "Paragraph editing examines local sentence grammar together with reference, temporal relations and logical connections across the text. A successful edit preserves the author’s supportable message while making the expression accurate and clear.",
       "foundation": [

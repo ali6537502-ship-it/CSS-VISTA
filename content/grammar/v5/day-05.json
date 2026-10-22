@@ -23,9 +23,9 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d05-c01",
-        "gv5-d05-c02",
-        "gv5-d05-c03"
+        "gv5-topic-d05-c01",
+        "gv5-topic-d05-c02",
+        "gv5-topic-d05-c03"
       ],
       "definition": "Verbs are a word class whose members organise clauses and select characteristic patterns. Lexical verbs contribute central meanings such as wait, repair and know. Auxiliaries help express grammatical meanings and constructions. Finite and non-finite describe a verb form’s grammatical status within a clause, not whether it denotes an action.",
       "foundation": [
@@ -113,8 +113,8 @@
         "H"
       ],
       "coverageIds": [
-        "gv5-d05-c04",
-        "gv5-d05-c09"
+        "gv5-topic-d05-c04",
+        "gv5-topic-d05-c09"
       ],
       "definition": "A verb phrase can contain a lexical verb with one or more auxiliaries. English auxiliaries have an ordered relationship and select the form of the next verb. Do-support supplies auxiliary do where a neutral question or negative needs an auxiliary and no suitable one is already present.",
       "foundation": [
@@ -204,8 +204,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d05-c05",
-        "gv5-d05-c06"
+        "gv5-topic-d05-c05",
+        "gv5-topic-d05-c06"
       ],
       "definition": "Verb valency concerns the participants and complement patterns associated with a verb use. Transitive uses have an object; intransitive uses do not. Linking and complex-transitive patterns contain predicative complements that describe a subject or object rather than introduce another independent participant.",
       "foundation": [
@@ -295,8 +295,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d05-c07",
-        "gv5-d05-c08"
+        "gv5-topic-d05-c07",
+        "gv5-topic-d05-c08"
       ],
       "definition": "Dynamic meanings present events, activities or changes; stative meanings present situations such as knowledge or possession without an internal activity sequence. An ergative alternation relates a transitive use with an intransitive use in which the affected object becomes the subject, as The wind opened the door and The door opened. Its intransitive partner is active, rather than a passive construction.",
       "foundation": [
@@ -578,7 +578,7 @@
         "The tutor seemed tired."
       ],
       "answer": 2,
-      "why": "The learner is indirect object and a booklet direct object; resourceful in the last distractor is a predicative complement, not a second object.",
+      "why": "In The tutor gave the learner a booklet, the learner is indirect object and a booklet is direct object. In The tutor called the learner resourceful, resourceful is a predicative complement rather than a second object.",
       "conceptId": "gv5-d05-m03",
       "difficulty": "Intermediate",
       "ability": "Recognition",

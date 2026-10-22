@@ -25,8 +25,8 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d23-c01",
-        "gv5-d23-c02"
+        "gv5-topic-d23-c01",
+        "gv5-topic-d23-c02"
       ],
       "definition": "Inversion changes ordinary subject–verb order. Subject–auxiliary inversion places an auxiliary before its subject; other marked constructions front a complement or place a lexical verb before a following noun-phrase subject.",
       "foundation": [
@@ -119,9 +119,9 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d23-c03",
-        "gv5-d23-c04",
-        "gv5-d23-c08"
+        "gv5-topic-d23-c03",
+        "gv5-topic-d23-c04",
+        "gv5-topic-d23-c08"
       ],
       "definition": "Information structure concerns how a sentence packages its message for a particular context. Fronting and cleft constructions can establish a topic, highlight a contrast or place an important constituent in focus.",
       "foundation": [
@@ -212,9 +212,9 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d23-c05",
-        "gv5-d23-c09",
-        "gv5-d23-c10"
+        "gv5-topic-d23-c05",
+        "gv5-topic-d23-c09",
+        "gv5-topic-d23-c10"
       ],
       "definition": "Extraposition places a clausal constituent later while a dummy it occupies a grammatical position. Existential there introduces the presence of an entity or situation. Both can shape information flow without referring like ordinary pronouns.",
       "foundation": [
@@ -302,8 +302,8 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d23-c06",
-        "gv5-d23-c07"
+        "gv5-topic-d23-c06",
+        "gv5-topic-d23-c07"
       ],
       "definition": "Emphatic do adds positive emphasis to a lexical verb. Substitution replaces recoverable material with an expression such as do so or one; ellipsis leaves recoverable material unexpressed.",
       "foundation": [

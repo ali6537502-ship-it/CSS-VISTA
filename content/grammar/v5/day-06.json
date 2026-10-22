@@ -23,10 +23,10 @@
         "E"
       ],
       "coverageIds": [
-        "gv5-d06-c01",
-        "gv5-d06-c05",
-        "gv5-d06-c06",
-        "gv5-d06-c08"
+        "gv5-topic-d06-c01",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c06",
+        "gv5-topic-d06-c08"
       ],
       "definition": "The present simple is a finite present-tense construction without progressive or perfect marking. It commonly presents states, habits and generalisations; present tense does not restrict its reference to this instant.",
       "foundation": [
@@ -112,9 +112,9 @@
         "E"
       ],
       "coverageIds": [
-        "gv5-d06-c02",
-        "gv5-d06-c05",
-        "gv5-d06-c06"
+        "gv5-topic-d06-c02",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c06"
       ],
       "definition": "The present progressive, also called present continuous, consists of present be plus an -ing form and normally presents a situation as ongoing, temporary, developing or arranged.",
       "foundation": [
@@ -200,9 +200,9 @@
         "E"
       ],
       "coverageIds": [
-        "gv5-d06-c03",
-        "gv5-d06-c05",
-        "gv5-d06-c07"
+        "gv5-topic-d06-c03",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c07"
       ],
       "definition": "The present perfect combines present have with a past participle, connecting a prior situation with a present reference point. Its uses include experience, present results and situations continuing to now.",
       "foundation": [
@@ -289,10 +289,10 @@
         "E"
       ],
       "coverageIds": [
-        "gv5-d06-c04",
-        "gv5-d06-c05",
-        "gv5-d06-c07",
-        "gv5-d06-c09"
+        "gv5-topic-d06-c04",
+        "gv5-topic-d06-c05",
+        "gv5-topic-d06-c07",
+        "gv5-topic-d06-c09"
       ],
       "definition": "The present perfect progressive consists of have/has been plus an -ing form. It presents activity over a period connected to now, including recent activity whose traces are still evident.",
       "foundation": [

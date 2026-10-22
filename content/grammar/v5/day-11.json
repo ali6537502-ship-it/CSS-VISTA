@@ -24,8 +24,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d11-c01",
-        "gv5-d11-c02"
+        "gv5-topic-d11-c01",
+        "gv5-topic-d11-c02"
       ],
       "definition": "An adjective is a word class with characteristic modifying and predicative uses; no single meaning or suffix identifies every member.",
       "foundation": [
@@ -113,10 +113,10 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d11-c03",
-        "gv5-d11-c04",
-        "gv5-d11-c05",
-        "gv5-d11-c09"
+        "gv5-topic-d11-c03",
+        "gv5-topic-d11-c04",
+        "gv5-topic-d11-c05",
+        "gv5-topic-d11-c09"
       ],
       "definition": "Degree constructions locate a quality on a scale or compare it with a contextual standard; the scale depends on the adjective's sense.",
       "foundation": [
@@ -204,8 +204,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d11-c06",
-        "gv5-d11-c07"
+        "gv5-topic-d11-c06",
+        "gv5-topic-d11-c07"
       ],
       "definition": "An adverb phrase is headed by an adverb; it may modify an event, an adjective, another adverb, or a larger unit, depending on its use.",
       "foundation": [
@@ -295,7 +295,7 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d11-c08"
+        "gv5-topic-d11-c08"
       ],
       "definition": "A focusing adverb highlights alternatives; a sentence adverbial comments on a whole proposition, its likelihood, or the speaker's relation to it.",
       "foundation": [

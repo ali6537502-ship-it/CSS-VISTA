@@ -24,9 +24,9 @@
         "N"
       ],
       "coverageIds": [
-        "gv5-d21-c01",
-        "gv5-d21-c03",
-        "gv5-d21-c04"
+        "gv5-topic-d21-c01",
+        "gv5-topic-d21-c03",
+        "gv5-topic-d21-c04"
       ],
       "definition": "Direct speech presents words as a quotation; indirect speech reports their content from the current speaker’s perspective. A report can preserve a message without reproducing its wording.",
       "foundation": [
@@ -109,8 +109,8 @@
         "N"
       ],
       "coverageIds": [
-        "gv5-d21-c02",
-        "gv5-d21-c08"
+        "gv5-topic-d21-c02",
+        "gv5-topic-d21-c08"
       ],
       "definition": "Backshift is the use of a more remote tense form in a reported clause, commonly after past reporting. It does not necessarily mean that the reported situation has ceased to be true.",
       "foundation": [
@@ -196,7 +196,7 @@
         "N"
       ],
       "coverageIds": [
-        "gv5-d21-c05"
+        "gv5-topic-d21-c05"
       ],
       "definition": "An embedded interrogative is a question-like clause functioning inside a larger construction. Its word order normally differs from that of an independent question.",
       "foundation": [
@@ -282,9 +282,9 @@
         "N"
       ],
       "coverageIds": [
-        "gv5-d21-c06",
-        "gv5-d21-c07",
-        "gv5-d21-c09"
+        "gv5-topic-d21-c06",
+        "gv5-topic-d21-c07",
+        "gv5-topic-d21-c09"
       ],
       "definition": "A reporting verb selects a grammatical complement and contributes its own meaning. Reporting an instruction, promise, suggestion or exclamation requires preserving that communicative meaning.",
       "foundation": [

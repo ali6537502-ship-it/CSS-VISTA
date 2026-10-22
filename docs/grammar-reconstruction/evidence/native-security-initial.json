@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "contentHash": "5d052c20cb31adad0684c7af70b13880df535401681b7d6ed85cceee1a5ec4ef",
+  "checks": [
+    "ownership",
+    "CSRF",
+    "unknown fields",
+    "exact idempotent replay",
+    "concurrent-device CAS",
+    "immutable first response",
+    "long text",
+    "restoration",
+    "canonical receipt",
+    "legacy preservation",
+    "attempt isolation",
+    "private implementation denial"
+  ]
+}

@@ -67,6 +67,7 @@ jobs:
           browser_path=$(node --input-type=module -e "import { chromium } from './tests/browser/node_modules/playwright-core/index.mjs'; process.stdout.write(chromium.executablePath())")
           CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5.mjs
           CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5-account.mjs
+          CSSV_BROWSER_EXECUTABLE="$browser_path" CSSV_GRAMMAR_ORIGIN=https://localhost:3444 node tests/browser/grammar-v5-accessibility.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -24,8 +24,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d10-c01",
-        "gv5-d10-c02"
+        "gv5-topic-d10-c01",
+        "gv5-topic-d10-c02"
       ],
       "definition": "Subject–verb agreement is the correspondence between a subject’s grammatical person and number and the finite verb forms that show those distinctions. Agreement depends on structure and interpretation, not simply the nearest visible noun.",
       "foundation": [
@@ -113,9 +113,9 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d10-c03",
-        "gv5-d10-c04",
-        "gv5-d10-c10"
+        "gv5-topic-d10-c03",
+        "gv5-topic-d10-c04",
+        "gv5-topic-d10-c10"
       ],
       "definition": "English agreement can reflect grammatical form, the meaning of a group, or proximity in particular coordinated patterns. Collective nouns and quantifying pronouns require qualified guidance about reference, register and established regional variation.",
       "foundation": [
@@ -207,8 +207,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d10-c05",
-        "gv5-d10-c06"
+        "gv5-topic-d10-c05",
+        "gv5-topic-d10-c06"
       ],
       "definition": "Each clause has its own agreement relationships. Relative-clause verbs follow the intended antecedent, and inversion can place a subject after an auxiliary or verb. Existential there introduces an additional construction whose formal agreement commonly follows its postverbal noun phrase.",
       "foundation": [
@@ -297,9 +297,9 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d10-c07",
-        "gv5-d10-c08",
-        "gv5-d10-c09"
+        "gv5-topic-d10-c07",
+        "gv5-topic-d10-c08",
+        "gv5-topic-d10-c09"
       ],
       "definition": "Agreement with a quantity depends on what is measured or counted and how it is construed. The spelling of a noun, a percentage or a numerical expression does not by itself establish the number required in every use.",
       "foundation": [

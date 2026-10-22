@@ -23,9 +23,9 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d24-c01",
-        "gv5-d24-c06",
-        "gv5-d24-c10"
+        "gv5-topic-d24-c01",
+        "gv5-topic-d24-c06",
+        "gv5-topic-d24-c10"
       ],
       "definition": "Punctuation marks grammatical boundaries and guides interpretation. Some choices repair an incomplete or incorrectly joined structure; others offer legitimate stylistic alternatives. A pause in speech is evidence about rhythm, not a sufficient rule for inserting a comma.",
       "foundation": [
@@ -112,8 +112,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d24-c02",
-        "gv5-d24-c08"
+        "gv5-topic-d24-c02",
+        "gv5-topic-d24-c08"
       ],
       "definition": "A colon introduces an explanation, elaboration, list or quotation within an appropriate written structure. An apostrophe marks certain possessive and omitted-letter forms; it is not a general mark of plurality.",
       "foundation": [
@@ -202,9 +202,9 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d24-c03",
-        "gv5-d24-c04",
-        "gv5-d24-c05"
+        "gv5-topic-d24-c03",
+        "gv5-topic-d24-c04",
+        "gv5-topic-d24-c05"
       ],
       "definition": "Quotation marks identify quoted wording or another explicitly defined editorial use. Parentheses, brackets, dashes, hyphens and ellipses do different jobs; none is a general substitute for any inconvenient punctuation.",
       "foundation": [
@@ -291,8 +291,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d24-c07",
-        "gv5-d24-c09"
+        "gv5-topic-d24-c07",
+        "gv5-topic-d24-c09"
       ],
       "definition": "Orthography is the system of written forms, including spelling, capitalisation and word division. Some orthographic choices distinguish words; others vary legitimately between national and editorial conventions.",
       "foundation": [

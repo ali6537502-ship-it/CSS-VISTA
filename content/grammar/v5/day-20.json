@@ -26,10 +26,10 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d20-c01",
-        "gv5-d20-c02",
-        "gv5-d20-c03",
-        "gv5-d20-c04"
+        "gv5-topic-d20-c01",
+        "gv5-topic-d20-c02",
+        "gv5-topic-d20-c03",
+        "gv5-topic-d20-c04"
       ],
       "definition": "A non-finite verb form lacks the ordinary independent tense/person agreement contrasts of a finite verb. Non-finite clauses may nevertheless express complex time, aspect, voice and participant relationships through their form and larger context.",
       "foundation": [
@@ -119,7 +119,7 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d20-c05"
+        "gv5-topic-d20-c05"
       ],
       "definition": "Verb complementation concerns the patterns licensed by a particular verb and its sense. An -ing complement and an infinitival complement may be restricted alternatives or may express different meanings.",
       "foundation": [
@@ -210,8 +210,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d20-c06",
-        "gv5-d20-c07"
+        "gv5-topic-d20-c06",
+        "gv5-topic-d20-c07"
       ],
       "definition": "A non-finite adjunct adds information such as purpose, time, reason or circumstance. Participial and infinitival clauses can make writing economical, provided their interpreted subject and their relationship to the main clause remain clear.",
       "foundation": [
@@ -302,8 +302,8 @@
         "L"
       ],
       "coverageIds": [
-        "gv5-d20-c08",
-        "gv5-d20-c09"
+        "gv5-topic-d20-c08",
+        "gv5-topic-d20-c09"
       ],
       "definition": "Interpreting a non-finite clause often requires identifying its expressed or understood subject. Control and raising are analytical labels for important differences between constructions; their formal treatment varies between grammatical theories.",
       "foundation": [

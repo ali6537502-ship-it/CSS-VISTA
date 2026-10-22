@@ -23,9 +23,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d03-c01",
-        "gv5-d03-c02",
-        "gv5-d03-c03"
+        "gv5-topic-d03-c01",
+        "gv5-topic-d03-c02",
+        "gv5-topic-d03-c03"
       ],
       "definition": "Articles are a, an and the. A/an introduces one member of a countable class; the normally signals that the intended referent is identifiable in the situation or discourse. Zero article means that no article occurs, not that the noun phrase has no grammatical structure.",
       "foundation": [
@@ -111,7 +111,7 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d03-c04"
+        "gv5-topic-d03-c04"
       ],
       "definition": "Article patterns depend on noun meaning, conventional names and the activity being described. A geographical or institutional expression must be learned as a whole pattern, with regional alternatives identified where they affect interpretation.",
       "foundation": [
@@ -198,9 +198,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d03-c05",
-        "gv5-d03-c06",
-        "gv5-d03-c09"
+        "gv5-topic-d03-c05",
+        "gv5-topic-d03-c06",
+        "gv5-topic-d03-c09"
       ],
       "definition": "A determiner helps specify reference or quantity within a noun phrase. Articles, demonstratives, possessive determiners, numbers and many quantifiers take part in this system. Their distribution depends on number, countability and the meaning of the construction.",
       "foundation": [
@@ -288,8 +288,8 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d03-c07",
-        "gv5-d03-c08"
+        "gv5-topic-d03-c07",
+        "gv5-topic-d03-c08"
       ],
       "definition": "Quantity expressions differ in the expectations they create as well as the nouns they permit. Some and any interact with questions, negation and unrestricted choice; few and little often imply insufficiency, whereas a few and a little present a positive quantity.",
       "foundation": [

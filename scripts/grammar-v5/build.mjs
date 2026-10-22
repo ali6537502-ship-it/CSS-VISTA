@@ -21,6 +21,8 @@ for (const file of (await readdir(input)).filter(f => /^reference-.*\.json$/.tes
 for (const id of ['diagnostic', 'phase-1', 'phase-2', 'phase-3', 'phase-4']) { const file = `${id}.json`, raw = await readFile(new URL(file, input), 'utf8'); sourceHashes[file] = hash(raw); assessments.push(JSON.parse(raw)) }
 if (!partial) assert.equal(days.length, 30)
 const allIds = new Set(), concepts = new Map(), sources = new Map(), bank = [], manifests = [], coverage = [], objectivePrompts = new Map(), responsePrompts = new Map(), warnings = []
+for (const day of expected.days) for (const topic of day.subtopics) id(topic.id, 'curriculum topic ID')
+for (const extension of expected.permanentExtensions) for (const topic of extension.coverageIds) id(topic, 'extension topic ID')
 function id(value, label) { requireText(value, label); assert(!allIds.has(value), `Duplicate stable identifier: ${value}`); allIds.add(value) }
 function sourcesFor(document) {
  const aliases = new Map()
@@ -80,7 +82,7 @@ function addItems(items, day, group, aliases, document) {
    assert(q.options?.length === 4 && new Set(q.options.map(s => s.trim().toLowerCase())).size === 4, `${q.id}: options must be four distinct choices`)
    assert(Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4, `${q.id}: invalid answer key`); requireText(q.why, `${q.id}.why`)
    assert(!objectivePrompts.has(signature), `${q.id}: duplicate objective prompt with ${objectivePrompts.get(signature)}`); objectivePrompts.set(signature, q.id)
-   assert(!/\b(?:option|answer|choice)\s+[A-D]\b|\b(?:first|second|third|fourth) option\b/i.test(q.why), `${q.id}: position-dependent explanation needs editorial review`)
+   assert(!/\b(?:option|answer|choice)\s+[A-D]\b|\b(?:first|second|third|fourth|last) (?:option|version|distractor)\b|\bthe (?:first|second|third|fourth|last) is\b/i.test(q.why), `${q.id}: position-dependent explanation needs editorial review`)
    Object.assign(meta, { answer: q.answer, options: 4 })
   } else {
    assert.equal(q.type, 'response'); requireText(q.model, `${q.id}.model`); assert(q.rubric?.length >= 2 && q.alternatives?.length, `${q.id}: response needs model, rubric and legitimate-alternative policy`)

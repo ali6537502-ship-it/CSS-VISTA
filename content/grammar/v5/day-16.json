@@ -22,8 +22,8 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d16-c01",
-        "gv5-d16-c02"
+        "gv5-topic-d16-c01",
+        "gv5-topic-d16-c02"
       ],
       "definition": "Coordination places units alongside one another at the same structural level; subordination makes one clause dependent within a larger structure.",
       "foundation": [
@@ -109,8 +109,8 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d16-c03",
-        "gv5-d16-c04"
+        "gv5-topic-d16-c03",
+        "gv5-topic-d16-c04"
       ],
       "definition": "Correlative expressions distribute a relationship across two positions, such as both … and or either … or; their placement identifies what is being paired.",
       "foundation": [
@@ -197,8 +197,8 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d16-c05",
-        "gv5-d16-c06"
+        "gv5-topic-d16-c05",
+        "gv5-topic-d16-c06"
       ],
       "definition": "A logical connector signals the relationship a writer intends between propositions; grammatical form alone does not prove that the relationship is factually justified.",
       "foundation": [
@@ -283,7 +283,7 @@
         "M"
       ],
       "coverageIds": [
-        "gv5-d16-c07"
+        "gv5-topic-d16-c07"
       ],
       "definition": "A conjunction links syntactic units; a linking adverb or discourse marker signals a relationship without necessarily supplying the grammatical clause boundary.",
       "foundation": [

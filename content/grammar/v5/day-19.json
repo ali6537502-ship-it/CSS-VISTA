@@ -25,7 +25,7 @@
         "J"
       ],
       "coverageIds": [
-        "gv5-d19-c01"
+        "gv5-topic-d19-c01"
       ],
       "definition": "A canonical be-passive uses a form of be plus a lexical past participle and normally presents as subject an element corresponding to an object in a related active clause.",
       "foundation": [
@@ -120,8 +120,8 @@
         "J"
       ],
       "coverageIds": [
-        "gv5-d19-c02",
-        "gv5-d19-c03"
+        "gv5-topic-d19-c02",
+        "gv5-topic-d19-c03"
       ],
       "definition": "Passive constructions can background an agent, report a claim or promote different objects, while get-passives often present a dynamic event in a more conversational register.",
       "foundation": [
@@ -217,8 +217,8 @@
         "J"
       ],
       "coverageIds": [
-        "gv5-d19-c05",
-        "gv5-d19-c06"
+        "gv5-topic-d19-c05",
+        "gv5-topic-d19-c06"
       ],
       "definition": "Causative constructions express arranging, causing or enabling another action, but have, get, make, let and help differ in grammar and in the kind of involvement they commonly convey.",
       "foundation": [
@@ -311,9 +311,9 @@
         "J"
       ],
       "coverageIds": [
-        "gv5-d19-c04",
-        "gv5-d19-c07",
-        "gv5-d19-c08"
+        "gv5-topic-d19-c04",
+        "gv5-topic-d19-c07",
+        "gv5-topic-d19-c08"
       ],
       "definition": "Passivisation depends on a licensed verb-and-complement pattern; an ergative alternation instead uses the same lexical verb transitively for causing a change and intransitively for the change itself.",
       "foundation": [

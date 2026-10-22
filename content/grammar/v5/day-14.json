@@ -24,8 +24,8 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d14-c01",
-        "gv5-d14-c02"
+        "gv5-topic-d14-c01",
+        "gv5-topic-d14-c02"
       ],
       "definition": "A clause is a grammatical unit organised around a verb. Main clauses supply a principal message; subordinate clauses function within a larger structure. Finite and non-finite distinguish verb forms and clause construction, not whether an event is real.",
       "foundation": [
@@ -119,8 +119,8 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d14-c03",
-        "gv5-d14-c04"
+        "gv5-topic-d14-c03",
+        "gv5-topic-d14-c04"
       ],
       "definition": "Clause form describes grammatical construction, such as declarative or interrogative. Communicative function describes what a speaker uses it to do, such as state, ask, request or exclaim; the two do not correspond one to one.",
       "foundation": [
@@ -213,8 +213,8 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d14-c05",
-        "gv5-d14-c06"
+        "gv5-topic-d14-c05",
+        "gv5-topic-d14-c06"
       ],
       "definition": "Sentence architecture describes how clauses combine. In the finite-clause classroom classification used here, a simple sentence has one main finite clause, a compound sentence coordinates main clauses, and a complex sentence includes finite subordination.",
       "foundation": [
@@ -304,8 +304,8 @@
         "I"
       ],
       "coverageIds": [
-        "gv5-d14-c07",
-        "gv5-d14-c08"
+        "gv5-topic-d14-c07",
+        "gv5-topic-d14-c08"
       ],
       "definition": "A sentence-boundary error occurs when written clauses are left without the relationship or punctuation their intended construction needs. A bracketed parse can reveal missing main clauses, fused clauses and comma splices.",
       "foundation": [

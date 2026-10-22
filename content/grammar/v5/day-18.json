@@ -26,9 +26,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d18-c01",
-        "gv5-d18-c02",
-        "gv5-d18-c03"
+        "gv5-topic-d18-c01",
+        "gv5-topic-d18-c02",
+        "gv5-topic-d18-c03"
       ],
       "definition": "A conditional construction presents one situation as a condition under which another claim, action or conclusion applies. Its verb forms express both time relationships and the speaker’s way of presenting the possibility.",
       "foundation": [
@@ -124,8 +124,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d18-c04",
-        "gv5-d18-c05"
+        "gv5-topic-d18-c04",
+        "gv5-topic-d18-c05"
       ],
       "definition": "Wish and related constructions can express a desired difference from reality, a regret about an earlier event, a preference or an impression; each construction has its own complement pattern.",
       "foundation": [
@@ -219,7 +219,7 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d18-c06"
+        "gv5-topic-d18-c06"
       ],
       "definition": "Conditional inversion places should, had or irrealis were before the subject in specified formal conditional patterns, normally replacing an if-clause without requiring a question meaning.",
       "foundation": [
@@ -310,9 +310,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d18-c07",
-        "gv5-d18-c08",
-        "gv5-d18-c09"
+        "gv5-topic-d18-c07",
+        "gv5-topic-d18-c08",
+        "gv5-topic-d18-c09"
       ],
       "definition": "Grammatical mood concerns conventional verb forms and clause patterns associated with statements, directives or non-actual situations; it is distinct from a speaker’s emotion and from the communicative function of a sentence.",
       "foundation": [
@@ -429,7 +429,7 @@
         "If we bring the key, we can enter."
       ],
       "answer": 0,
-      "why": "Had brought plus could have entered expresses the earlier counterfactual situation; the first is open future/present, and the others do not form the intended verb chains.",
+      "why": "Had brought plus could have entered expresses the earlier counterfactual situation. If we bring the key, we can enter presents an open condition; the remaining alternatives have verb chains that do not express the stated past counterfactual.",
       "conceptId": "gv5-d18-m01",
       "difficulty": "Intermediate",
       "ability": "Application",

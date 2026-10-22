@@ -24,7 +24,7 @@
         "Q"
       ],
       "coverageIds": [
-        "gv5-d22-c01"
+        "gv5-topic-d22-c01"
       ],
       "definition": "A modifier adds descriptive or limiting information to another expression. A misplaced modifier suggests an unintended attachment; a dangling modifier lacks a suitable understood participant in its grammatical context.",
       "foundation": [
@@ -111,8 +111,8 @@
         "Q"
       ],
       "coverageIds": [
-        "gv5-d22-c02",
-        "gv5-d22-c05"
+        "gv5-topic-d22-c02",
+        "gv5-topic-d22-c05"
       ],
       "definition": "Ambiguity occurs when a form supports more than one interpretation. Attachment concerns which expression a modifier belongs to; scope concerns how much of a message an operator such as only or not affects.",
       "foundation": [
@@ -199,8 +199,8 @@
         "Q"
       ],
       "coverageIds": [
-        "gv5-d22-c03",
-        "gv5-d22-c04"
+        "gv5-topic-d22-c03",
+        "gv5-topic-d22-c04"
       ],
       "definition": "Parallelism presents related elements in comparable grammatical or conceptual forms. It supports clear comparison and coordination, while grammatical coordination ultimately depends on the functions and constructions involved.",
       "foundation": [
@@ -288,9 +288,9 @@
         "Q"
       ],
       "coverageIds": [
-        "gv5-d22-c06",
-        "gv5-d22-c07",
-        "gv5-d22-c08"
+        "gv5-topic-d22-c06",
+        "gv5-topic-d22-c07",
+        "gv5-topic-d22-c08"
       ],
       "definition": "Predication attributes a property, identity or event to a subject. Faulty predication occurs when the expressed grammatical relationship fails to convey the intended logical relationship.",
       "foundation": [
@@ -489,7 +489,7 @@
         "Her salary is higher than her assistant’s salary."
       ],
       "answer": 3,
-      "why": "The second version explicitly compares salary with salary, preserving the stated intention.",
+      "why": "Her salary is higher than her assistant’s salary explicitly compares salary with salary, preserving the stated intention.",
       "conceptId": "gv5-d22-m04",
       "difficulty": "Intermediate",
       "ability": "Application",

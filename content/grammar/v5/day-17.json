@@ -23,7 +23,7 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d17-c04"
+        "gv5-topic-d17-c04"
       ],
       "definition": "Core modal auxiliaries are a small class including can, could, may, might, will, would, shall, should and must; related expressions share some, but not all, of their grammatical behaviour.",
       "foundation": [
@@ -110,9 +110,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d17-c01",
-        "gv5-d17-c02",
-        "gv5-d17-c03"
+        "gv5-topic-d17-c01",
+        "gv5-topic-d17-c02",
+        "gv5-topic-d17-c03"
       ],
       "definition": "Modal meaning includes judgments about what is possible or likely and attitudes towards what people are able, permitted, required or willing to do.",
       "foundation": [
@@ -198,9 +198,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d17-c05",
-        "gv5-d17-c06",
-        "gv5-d17-c07"
+        "gv5-topic-d17-c05",
+        "gv5-topic-d17-c06",
+        "gv5-topic-d17-c07"
       ],
       "definition": "A modal-perfect construction combines a modal with have and a past participle, often locating a situation before the current or another reference point while retaining the modal meaning.",
       "foundation": [
@@ -287,8 +287,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d17-c08",
-        "gv5-d17-c09"
+        "gv5-topic-d17-c08",
+        "gv5-topic-d17-c09"
       ],
       "definition": "Epistemic modality concerns the status of a proposition as possible, probable or necessary given evidence; deontic modality concerns permission, requirements and related norms.",
       "foundation": [

@@ -50,10 +50,10 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d30-c01",
-        "gv5-d30-c02",
-        "gv5-d30-c03",
-        "gv5-d30-c04"
+        "gv5-topic-d30-c01",
+        "gv5-topic-d30-c02",
+        "gv5-topic-d30-c03",
+        "gv5-topic-d30-c04"
       ],
       "definition": "A capstone combines several abilities in an integrated task. A diagnostic comparison examines performance in related skill domains at two points; it does not automatically establish a calibrated gain in overall proficiency.",
       "foundation": [
@@ -141,8 +141,8 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d30-c05",
-        "gv5-d30-c06"
+        "gv5-topic-d30-c05",
+        "gv5-topic-d30-c06"
       ],
       "definition": "A useful revision plan links a demonstrated difficulty to an explanation, a fresh application and a later retrieval opportunity. It responds to the evidence available rather than assigning an unsupported global proficiency label.",
       "foundation": [
@@ -230,8 +230,8 @@
         "R"
       ],
       "coverageIds": [
-        "gv5-d30-c07",
-        "gv5-d30-c08"
+        "gv5-topic-d30-c07",
+        "gv5-topic-d30-c08"
       ],
       "definition": "A permanent grammar reference is a topic-organised resource for consultation and deeper study. The structured course is one route through it; completing the route does not end access or remove the need for continued reading, production and revision.",
       "foundation": [
@@ -646,7 +646,7 @@
         "The hearing ended; the witnesses left."
       ],
       "answer": 3,
-      "why": "The first version places a complete main clause on each side of the semicolon. The other placements interrupt structure or do not provide the requested pair.",
+      "why": "The hearing ended; the witnesses left places a complete main clause on each side of the semicolon. The other placements interrupt structure or fail to provide the requested pair.",
       "conceptId": "gv5-d24-m01",
       "difficulty": "Intermediate",
       "ability": "Application",

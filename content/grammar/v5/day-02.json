@@ -22,8 +22,8 @@
         "B"
       ],
       "coverageIds": [
-        "gv5-d02-c01",
-        "gv5-d02-c02"
+        "gv5-topic-d02-c01",
+        "gv5-topic-d02-c02"
       ],
       "definition": "A noun is a word class whose members typically head noun phrases. Meaning labels such as concrete, abstract, collective and material describe overlapping kinds of nouns; number is the grammatical contrast between singular and plural where that contrast is available.",
       "foundation": [
@@ -111,9 +111,9 @@
         "P"
       ],
       "coverageIds": [
-        "gv5-d02-c03",
-        "gv5-d02-c04",
-        "gv5-d02-c05"
+        "gv5-topic-d02-c03",
+        "gv5-topic-d02-c04",
+        "gv5-topic-d02-c05"
       ],
       "definition": "Countability describes how a noun sense combines with numbers and determiners. A count use presents separate units; a noncount use presents a mass, substance, activity or abstraction without ordinary unit counting. The distinction is grammatical and depends on lexical meaning and context.",
       "foundation": [
@@ -198,7 +198,7 @@
         "O"
       ],
       "coverageIds": [
-        "gv5-d02-c06"
+        "gv5-topic-d02-c06"
       ],
       "definition": "The genitive is a construction commonly marked by -’s or an apostrophe in writing. It expresses several relationships, including possession, association, authorship and time. An of-construction is another way to relate noun phrases, but the two patterns are not always interchangeable.",
       "foundation": [
@@ -284,8 +284,8 @@
         "N"
       ],
       "coverageIds": [
-        "gv5-d02-c07",
-        "gv5-d02-c08"
+        "gv5-topic-d02-c07",
+        "gv5-topic-d02-c08"
       ],
       "definition": "A noun phrase is organised around a noun or pronoun head and may contain determiners, modifiers and complements. Nominalisation forms or uses a noun to express an event, process or quality. Apposition places related noun phrases together to identify or describe a referent.",
       "foundation": [

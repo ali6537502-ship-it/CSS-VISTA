@@ -1,9 +1,9 @@
 """Fetch public authorities; save metadata/digests, never third-party source bodies."""
-import json,pathlib,urllib.request,urllib.error,concurrent.futures,hashlib,re,time
+import json,pathlib,urllib.request,urllib.error,concurrent.futures,hashlib,re,datetime
 root=pathlib.Path(__file__).resolve().parents[2]
 sources=json.loads((root/'docs/grammar-reconstruction/source-register.json').read_text())['sources']
 def check(s):
- result={'id':s['id'],'url':s['url'],'declaredConsultation':s['consulted'],'checkedAt':'2026-10-22','editorialNote':s['note']}
+ result={'id':s['id'],'url':s['url'],'declaredConsultation':s['consulted'],'checkedAt':datetime.datetime.now(datetime.timezone.utc).date().isoformat(),'editorialNote':s['note']}
  try:
   request=urllib.request.Request(s['url'],headers={'User-Agent':'Mozilla/5.0 (compatible; CSSVistaEditorialVerification/1.0)'})
   with urllib.request.urlopen(request,timeout=30) as response:

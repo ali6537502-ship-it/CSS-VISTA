@@ -24,9 +24,9 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d08-c01",
-        "gv5-d08-c04",
-        "gv5-d08-c09"
+        "gv5-topic-d08-c01",
+        "gv5-topic-d08-c04",
+        "gv5-topic-d08-c09"
       ],
       "definition": "Perfect constructions relate a situation to a later reference point; progressive constructions present a situation from within its development. They can combine, and neither construction alone tells the whole story about completion or present consequences.",
       "foundation": [
@@ -114,8 +114,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d08-c02",
-        "gv5-d08-c03"
+        "gv5-topic-d08-c02",
+        "gv5-topic-d08-c03"
       ],
       "definition": "Stative and dynamic describe interpretations of predicates. A stative reading presents a condition or relationship; a dynamic reading presents activity or change. Many verbs support more than one reading, and progressive compatibility depends on that reading and its context.",
       "foundation": [
@@ -202,8 +202,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d08-c06",
-        "gv5-d08-c07"
+        "gv5-topic-d08-c06",
+        "gv5-topic-d08-c07"
       ],
       "definition": "For normally introduces a duration, since a starting point in temporal uses, by a latest time or deadline, and until the endpoint of a continuing situation. These meanings guide interpretation but do not select one tense mechanically.",
       "foundation": [
@@ -292,8 +292,8 @@
         "K"
       ],
       "coverageIds": [
-        "gv5-d08-c05",
-        "gv5-d08-c08"
+        "gv5-topic-d08-c05",
+        "gv5-topic-d08-c08"
       ],
       "definition": "Time adverbs help locate events and convey expectations. Their meaning, position and compatibility with a construction must be interpreted together; they are not automatic tense selectors.",
       "foundation": [
