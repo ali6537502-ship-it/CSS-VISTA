@@ -1,0 +1,549 @@
+{
+  "id": "diagnostic",
+  "title": "Initial grammar diagnostic",
+  "orientation": "This sample explores six broad skill domains. Attempt the objective items before opening their explanations, and write the original tasks before comparing models. An unfamiliar question is useful evidence of a starting point, not a reason to lose access to advanced material. The results guide reading depth; they are not a calibrated placement test or a CEFR certificate.",
+  "items": [
+    {
+      "id": "gv5-diagnostic-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In The volunteers delivered the parcels, what is the whole subject?",
+      "options": [
+        "the parcels",
+        "The volunteers",
+        "volunteers",
+        "delivered"
+      ],
+      "answer": 1,
+      "why": "The complete noun phrase The volunteers is the subject. Volunteers alone is its head; the parcels is the direct object.",
+      "conceptId": "gv5-d01-m04",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In a stone bridge, which analysis distinguishes class from function?",
+      "options": [
+        "A is the head of the noun phrase.",
+        "Stone is a noun functioning as a modifier.",
+        "Stone becomes an adverb because it describes bridge.",
+        "Bridge is the subject in every context."
+      ],
+      "answer": 1,
+      "why": "Stone retains noun category while modifying bridge. Modifier is a function; noun is a class. A phrase has no subject function unless its larger context assigns it one.",
+      "conceptId": "gv5-d01-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "What is the head of the noun phrase those unexpectedly detailed minutes?",
+      "options": [
+        "those",
+        "unexpectedly",
+        "detailed",
+        "minutes"
+      ],
+      "answer": 3,
+      "why": "Minutes is the noun head. Those determines reference; detailed modifies the noun; unexpectedly modifies detailed.",
+      "conceptId": "gv5-d13-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about Close the door is accurate?",
+      "options": [
+        "It is an interrogative because it requests an action.",
+        "It is necessarily a fragment because it displays no subject.",
+        "It is a grammatical imperative with an ordinarily unexpressed subject.",
+        "It is a non-finite subordinate clause because close has no -s."
+      ],
+      "answer": 2,
+      "why": "An imperative can omit an overt subject and use a plain verb form. Grammatical clause type and communicative purpose are related but distinct.",
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The laboratory bought three new items of ____ for the workshop.",
+      "options": [
+        "equipments",
+        "equipment",
+        "an equipment",
+        "equipmentes"
+      ],
+      "answer": 1,
+      "why": "Equipment is ordinarily uncountable in this sense. Items supplies a countable unit, while equipment remains uninflected.",
+      "conceptId": "gv5-d02-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "A visitor mentions a particular unidentified colleague for the first time: I spoke to ____ engineer from the supplier.",
+      "options": [
+        "an",
+        "the only",
+        "zero article",
+        "a"
+      ],
+      "answer": 0,
+      "why": "Engineer begins with a vowel sound, so indefinite an is appropriate. The context supplies no basis for the added uniqueness claim the only.",
+      "conceptId": "gv5-d03-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Several children share a playroom. Which possessive is standard?",
+      "options": [
+        "the childrens’s playroom",
+        "the childrens playroom",
+        "the childrens’ playroom",
+        "the children’s playroom"
+      ],
+      "answer": 3,
+      "why": "Children is an irregular plural without final s, so its possessive takes apostrophe + s.",
+      "conceptId": "gv5-d02-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about singular they is accurate in contemporary standard usage?",
+      "options": [
+        "It can only refer to several previously named people.",
+        "It is always an agreement error.",
+        "It can refer to a person whose gender is unknown or whose pronoun is they.",
+        "It requires the verb is whenever its referent is one person."
+      ],
+      "answer": 2,
+      "why": "Singular they is established for unspecified reference and personal pronoun choice; it normally retains plural-form verb agreement, as in they are.",
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The inspector ____ the premises yesterday; the visit ended at noon.",
+      "options": [
+        "visited",
+        "is visiting",
+        "has visited",
+        "visits"
+      ],
+      "answer": 0,
+      "why": "Yesterday locates a completed visit in a finished past period. Past simple visited fits this explicitly completed event.",
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence explicitly presents an activity as continuing up to now?",
+      "options": [
+        "She has been cataloguing records for two hours and is still doing so.",
+        "She catalogued records yesterday and then went home.",
+        "She will catalogue records next week.",
+        "She had catalogued the records before the office opened."
+      ],
+      "answer": 0,
+      "why": "The perfect progressive connects the activity to now, and is still doing so explicitly establishes continuation. The other contexts locate it elsewhere in time.",
+      "conceptId": "gv5-d06-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q11",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The lights are on and I can hear voices. They must be inside. What does must express here?",
+      "options": [
+        "A legal duty to remain inside",
+        "An instruction addressed to them",
+        "A confident inference from evidence",
+        "A completed past necessity"
+      ],
+      "answer": 2,
+      "why": "The evidence motivates epistemic must: the speaker infers their presence. No rule imposing a duty is stated.",
+      "conceptId": "gv5-d17-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q12",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose the established complement pattern: The technician avoided ____ the damaged cable.",
+      "options": [
+        "touched",
+        "touch",
+        "to touch",
+        "touching"
+      ],
+      "answer": 3,
+      "why": "Avoid normally selects an -ing complement for this intended meaning: avoided touching. This is a lexical verb-pattern restriction.",
+      "conceptId": "gv5-d20-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q13",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The clerk answered the enquiry ____.",
+      "options": [
+        "politeness",
+        "a polite",
+        "polite",
+        "politely"
+      ],
+      "answer": 3,
+      "why": "Politely is an adverb modifying answered. The adjective polite would need a different syntactic construction.",
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q14",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which relative clause leaves the correct object gap?",
+      "options": [
+        "The document that I requested it arrived.",
+        "The document which I requested it arrived.",
+        "The document whom I requested arrived.",
+        "The document that I requested arrived."
+      ],
+      "answer": 3,
+      "why": "The relativised document is understood as the object of requested; repeating it fills the same position again. Whom is inappropriate for this non-person referent.",
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q15",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Complete the coordinated purposes: The review aims to reduce delays, improve records and ____.",
+      "options": [
+        "making decisions clearer",
+        "clarify decisions",
+        "the clarity of decisions",
+        "clearer decisions"
+      ],
+      "answer": 1,
+      "why": "Reduce, improve and clarify are coordinated plain-form verbs sharing to. The alternatives break that intended shared construction.",
+      "conceptId": "gv5-d22-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q16",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Replace the object with a pronoun: Please turn off the alarm.",
+      "options": [
+        "Please turn off it.",
+        "Please turn it off.",
+        "Please turn it off of.",
+        "Please turn off to it."
+      ],
+      "answer": 1,
+      "why": "With this separable phrasal verb, an unstressed object pronoun normally goes between verb and particle: turn it off.",
+      "conceptId": "gv5-d12-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q17",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which version joins two related main clauses with a semicolon?",
+      "options": [
+        "The rain stopped; the match resumed.",
+        "The rain; stopped the match resumed.",
+        "The rain stopped; because the wind changed.",
+        "The rain stopped the; match resumed."
+      ],
+      "answer": 0,
+      "why": "Both sides of the semicolon in the first version are complete main clauses. The other placements interrupt constituents or leave the intended main-clause pairing incomplete.",
+      "conceptId": "gv5-d24-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q18",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The organisation has changed ____ name.",
+      "options": [
+        "its",
+        "its’",
+        "it is",
+        "it’s"
+      ],
+      "answer": 0,
+      "why": "Its is the possessive determiner. It’s contracts it is or it has; neither expansion fits this noun phrase.",
+      "conceptId": "gv5-d24-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q19",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence avoids separating a simple subject from its verb with an unsupported comma?",
+      "options": [
+        "The new, timetable begins on Monday.",
+        "The new timetable begins on Monday.",
+        "The, new timetable begins on Monday.",
+        "The new timetable, begins on Monday."
+      ],
+      "answer": 1,
+      "why": "The subject The new timetable and predicate begins on Monday need no intervening comma. No supplementary parenthetical is present.",
+      "conceptId": "gv5-d24-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q20",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The revised procedure had a positive ____ on waiting times.",
+      "options": [
+        "effect",
+        "effective",
+        "affecting",
+        "affect"
+      ],
+      "answer": 0,
+      "why": "The noun effect fits after a positive and before on. Affect is ordinarily a verb in this intended influence/result distinction; its specialised noun sense does not fit here.",
+      "conceptId": "gv5-d25-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q21",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Both Leila and Mina are possible antecedents in Leila told Mina that she was late. Which statement is justified without more context?",
+      "options": [
+        "She must mean Leila.",
+        "She must mean Mina.",
+        "The sentence is grammatically impossible.",
+        "The reference can be ambiguous and may need clarification."
+      ],
+      "answer": 3,
+      "why": "English syntax alone does not settle this ordinary pronoun reference. Replacing she with the intended name can clarify it once the writer knows who was late.",
+      "conceptId": "gv5-d22-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q22",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which claim cautiously reports a possible association?",
+      "options": [
+        "The data establish the only possible explanation.",
+        "The data eliminate all uncertainty.",
+        "The data may indicate an association.",
+        "The data prove every cause."
+      ],
+      "answer": 2,
+      "why": "May indicate explicitly qualifies the claim. The other options assert strong conclusions absent from the stated evidence; hedging should reflect evidence rather than merely decorate prose.",
+      "conceptId": "gv5-d26-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q23",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Original: Some pilot clinics may extend their opening hours if funding continues. Which précis preserves its main qualifications?",
+      "options": [
+        "Funding continues because all clinics open longer.",
+        "All clinics will remain open longer.",
+        "Some pilot clinics may open longer if funding continues.",
+        "Pilot clinics have extended their hours permanently."
+      ],
+      "answer": 2,
+      "why": "The selected version preserves some, pilot, possibility and the funding condition. The other versions change quantity, time, certainty or the logical relationship.",
+      "conceptId": "gv5-d27-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-q24",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose the reported question: The visitor asked, Where is the records desk?",
+      "options": [
+        "The visitor asked where was the records desk.",
+        "The visitor asked that where the records desk was.",
+        "The visitor asked where the records desk was.",
+        "The visitor asked where the records desk did be."
+      ],
+      "answer": 2,
+      "why": "The embedded interrogative uses statement order: the records desk was. No that is inserted before where; the reporting context permits ordinary backshift.",
+      "conceptId": "gv5-d21-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r01",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Analyse The assistant sent the editor a revised draft: identify the subject and the two objects.",
+      "model": "The assistant is the subject; the editor is the indirect object; a revised draft is the direct object.",
+      "rubric": [
+        "Identify whole phrases rather than only their heads.",
+        "Distinguish the recipient from the document sent."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d01-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct only genuine errors: The report contains several useful informations.",
+      "model": "The report contains several useful pieces of information.",
+      "rubric": [
+        "Keep the meaning of several separate pieces.",
+        "Treat information as uncountable in this sense."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d02-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain a normal contrast between You needn’t have booked and You didn’t need to book.",
+      "model": "Needn’t have booked normally presents booking as having happened unnecessarily. Didn’t need to book states absence of necessity; whether booking happened needs context.",
+      "rubric": [
+        "Discuss the inference about whether booking occurred.",
+        "Do not claim that didn’t need to invariably means no booking happened."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The intended reviewer is Omar. Repair After reading the report, the conclusion surprised Omar.",
+      "model": "After Omar read the report, the conclusion surprised him.",
+      "rubric": [
+        "Give the reading clause its intended subject.",
+        "Preserve the fact that the conclusion surprised Omar."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d22-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Edit the boundary: The doors were locked, however, the staff were still inside.",
+      "model": "The doors were locked; however, the staff were still inside.",
+      "rubric": [
+        "Recognise however as a conjunctive adverb here.",
+        "Use a valid main-clause boundary; a full stop is also possible."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d24-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-diagnostic-r06",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write 80–100 words explaining a proposed change to a library service. Include a condition, a cautious prediction and a clear pronoun reference. Keep this sample for comparison with Day 30.",
+      "model": "The library could extend its evening opening hours if a trial shows sufficient demand. Students who work during the day may find the additional hours useful. The change would also give them more time to consult material that cannot be borrowed. However, the library should record attendance and staffing costs before making a permanent decision. If those costs remain manageable, the committee could continue the arrangement for another term. This proposal offers a limited experiment rather than a guarantee that longer opening hours will benefit every user.",
+      "rubric": [
+        "Keep the original response within80–100 words.",
+        "Include a condition with a coherent time relationship and a cautious prediction.",
+        "Make every pronoun’s intended referent recoverable.",
+        "Check sentence boundaries and preserve qualifications."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d27-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ]
+}

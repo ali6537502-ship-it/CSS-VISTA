@@ -1,0 +1,2931 @@
+{
+  "audit_scope": "Existing authored Days 11–20 only; read-only research; source snapshot /tmp/cssvista-original.json",
+  "date": "2026-10-21",
+  "original_source_unchanged": true,
+  "summary": {
+    "days": 10,
+    "objective_questions": 160,
+    "corrections": 60,
+    "examples": 100,
+    "rules": 41,
+    "issues": 114,
+    "by_severity": {
+      "high": 68,
+      "medium": 21,
+      "blocker": 23,
+      "low": 2
+    }
+  },
+  "source_register": [
+    {
+      "id": "passive",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "report",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "saytell",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/say-or-tell",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "articles",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/articles",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "who",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/who-whom",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "pronouns",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "reflexives",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-reflexive-myself-themselves-etc",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "eachother",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/each-other-one-another",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "only",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/only",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "also",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/also-as-well-or-too",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "adjectives",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adjectives-order",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "comparison",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "comparisonclauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/comparison-clauses-bigger-than-we-had-imagined",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "patterns",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "relativewhole",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses-referring-to-a-whole-sentence",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "different",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/different-from-different-to-or-different-than",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "notonly",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/not-only-but-also",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "participle",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "unique",
+      "url": "https://www.merriam-webster.com/dictionary/unique",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "notwithstanding",
+      "url": "https://www.merriam-webster.com/dictionary/notwithstanding",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "themself",
+      "url": "https://www.merriam-webster.com/dictionary/themself",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "themself-cambridge",
+      "url": "https://dictionary.cambridge.org/dictionary/english/themself",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "senior",
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/senior_1",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "circulate",
+      "url": "https://dictionary.cambridge.org/dictionary/english/circulate",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    },
+    {
+      "id": "collapse",
+      "url": "https://dictionary.cambridge.org/dictionary/english/collapse",
+      "consulted": true,
+      "access": "article/entry body retrieved and reviewed",
+      "copyright_note": "Reference authority only; original course examples were analysed, not copied from the authority."
+    }
+  ],
+  "excluded_sources": [
+    {
+      "requested": "https://dictionary.cambridge.org/grammar/british-grammar/passive-active-and-passive",
+      "reason": "HTTP 200 but article title/body is Word order: structures; not used as passive authority"
+    },
+    {
+      "requested": "https://dictionary.cambridge.org/grammar/british-grammar/adjectives-gradable-and-non-gradable",
+      "reason": "HTTP 200 soft fallback to Quite; not used as gradability authority"
+    },
+    {
+      "requested": "https://dictionary.cambridge.org/grammar/british-grammar/than",
+      "reason": "HTTP 200 soft fallback to Word choice: that or than?; not used as pronoun-case authority"
+    },
+    {
+      "requested": "https://apastyle.apa.org/style-grammar-guidelines/grammar/singular-they",
+      "reason": "Empty body despite HTTP 200; not consulted and not treated as verification"
+    }
+  ],
+  "issues": [
+    {
+      "id": "A11-20-001",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "FPSC's classic format here is direct voice conversion — \"change the voice\" given a full active or passive sentence to rewrite, not just spot-the-error — so you must reproduce the exact auxiliary for the tense, not merely recognise it. The examiner's favourite trap is an intransitive verb (occur, happen, arrive, consist) dressed up in a passive-sounding sentence, which has no correct passive at all: the only \"correction\" is to leave it active.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-002",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 843,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Reported speech dominates the \"Narration\" section as full-sentence conversion questions, not spot-the-error — you are given direct speech in quotation marks and four candidate reported versions. The reliable trap is an option that gets the tense backshift exactly right but leaves a pronoun, or here/tomorrow, unconverted, or the reverse: correct time words riding on the wrong tense, banking on candidates checking only the verb.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-003",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 12,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Articles are tested as a two-blank fill-in-the-blank item across one sentence, and as error-spotting with four underlined parts where one article is wrong (a genuine \"no error\" option is sometimes present). The favourite trap pairs a correct sound-based a/an choice with a wrong \"the\" before a general abstract noun, so a candidate who checks only the article they were already suspicious of waves the whole sentence through.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-004",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 169,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Pronoun questions are set as error-spotting (four underlined parts, one a wrong form or a mismatched antecedent) and as full-sentence rewrites that force you to remove an ambiguous reference by naming the noun again. The trap is a decoy: examiners underline \"and I\" or \"their\" in a spot that already sounds fluent, so a candidate trusting their ear over the delete-the-other-person or singular-antecedent test picks the natural-sounding wrong option.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-005",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 323,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Modifier questions are almost always error-spotting, and the underlined part is often not the misplaced word itself but a neighbouring phrase, forcing the candidate to notice that the true fault is a word's position rather than any single word's form. The trap is a dangling participle in an otherwise flawless sentence, so a candidate scanning for verb or article mistakes sails straight past it.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-006",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 476,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Prepositions are tested as a pure fill-in-the-blank vocabulary item on one fixed collocation, or as error-spotting where a wrong preposition is grafted onto an otherwise flawless sentence. The favourite trap is a verb that takes no preposition in English at all but does under Urdu influence (discuss about, request for, reach at) — it sounds natural precisely because the Urdu equivalent needs that word, which is why intuition fails here more than anywhere else in the course.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-007",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 639,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "This topic is tested with fill-in-the-blank items offering four verb forms (bare infinitive, to-infinitive, gerund, past participle) for one blank, and with error-spotting where the wrong non-finite form follows a verb that looks similar to one taking the opposite pattern. The sharpest trap pairs two near-synonyms that take different forms in the same sentence, so fixing the one fault you notice first can make you assume the sentence is now correct and miss the second.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-008",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 793,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Comparison faults appear as error-spotting where the flawed sentence sounds perfectly smooth (a rate or salary compared directly with a place name), and as rewrite items in the mixed-precision section that stack a comparison fault with an agreement or preposition fault from an earlier day. The favourite trap is a double comparative hidden inside a form that already looks irregular (more worse, most best), because a candidate checking the comparison logic assumes an odd-looking irregular form is already above suspicion.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-009",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 12,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "CSS/FPSC papers test connectors mainly through underlined error-spotting items (four segments, sometimes with a \"no error\" option) and through fill-in-the-blank items that force a choice between a conjunction, a conjunctive adverb and a prepositional phrase for the same logic. The commonest trap is a decoy that looks fine read aloud — doubled connectors like \"although … but\", or despite followed by of — because the ear accepts what the eye should reject. A second trap plants a grammatically correct but logically wrong connector, such as therefore where the sentence actually concedes a point, testing whether you read for meaning and not just structure.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-010",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 174,
+      "location": "why; examTip",
+      "severity": "high",
+      "category": "evidence",
+      "quote": "Parallelism is examined almost entirely through \"which sentence is correct/parallel\" MCQs and underlined error-spotting on lists of three or more items, rarely through a direct rule question. The standard trap hides the broken item third in a list, after two correctly matched items have already lulled the reader into accepting the pattern. A second trap swaps only the preposition or auxiliary partway through a correlative pair such as not only … but also, so the sentence still sounds balanced unless you isolate each half and test it alone.",
+      "explanation": "Claims about FPSC formats, favourite traps, frequency or examiner preferences have no source identifiers or authentic-paper evidence in this lesson. These are not verified by a grammar authority.",
+      "proposed_correction": "Remove frequency/preference guarantees; describe the newly authored practice formats. Retain examination-specific claims only after recording authentic paper/year/item evidence.",
+      "supporting_sources": [],
+      "verification_status": "source_absent_in_authored_record; claim_not_verified",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-011",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "terms[0:2]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "The subject performs the action / The subject receives the action",
+      "explanation": "Active/passive are grammatical voice relations, not invariably doer/receiver meanings; know, have and psychological verbs show why semantic labels alone are inadequate.",
+      "proposed_correction": "Define active as the unmarked voice pattern; define passive through corresponding object/subject alignment and passive verb form. Use agent/patient as common interpretations, with exceptions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-012",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 676,
+      "location": "terms[4]; rules[1].heading; recap; checklist[1]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Only transitive verbs can be made passive.",
+      "explanation": "Prepositional passives exist: a car can be broken into; a proposal can be objected to. The bare verb need not take a direct object in the active.",
+      "proposed_correction": "Teach ordinary direct-object passives plus lexical restrictions and prepositional passives; restrict no-passive advice to the relevant verb use.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-013",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[0].table.rows[9]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "He wants to sign the order. → He wants the order to be signed.",
+      "explanation": "The active identifies him as the prospective signer; the model passive allows someone else to sign. This is not a meaning-preserving voice transformation.",
+      "proposed_correction": "Use He wants to sign the order → He wants the order to be signed by him, explain awkwardness, and contrast the different control interpretation without the agent. Prefer a clearer finite-clause transformation for beginners.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-014",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[1].points[3]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "A few verbs have both uses: The prices rose. / The government raised the prices.",
+      "explanation": "Rise and raise are different lexemes; this pair does not exemplify one verb with transitive and intransitive uses.",
+      "proposed_correction": "Use The door opened / Mina opened the door for an alternation; teach rise/raise separately as a lexical contrast.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-015",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 731,
+      "location": "rules[2].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "A verb with two objects yields two possible passives",
+      "explanation": "Ditransitive constructions have lexical and regional restrictions; two objects do not guarantee both passive subjects or both passives as natural alternatives.",
+      "proposed_correction": "Qualify the generalisation with many verbs such as give/send, then teach lexical restrictions and naturalness.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-016",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[4].plain versus points[3]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "The test ... is whether the subject arranged, paid for or caused the action",
+      "explanation": "The same have + object + participle pattern can express an adverse experience rather than arranged causation, as the lesson itself notes for wallet theft.",
+      "proposed_correction": "Separate causative and experiential readings; do not use deliberate arrangement as a universal diagnostic.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-017",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 787,
+      "location": "examples[5]; d11c5",
+      "severity": "high",
+      "category": "academic",
+      "quote": "It is believed by many people that the scheme has failed.",
+      "explanation": "The sentence labelled wrong is grammatical; the proposed active rewrite is a stylistic choice. The c5 passive also need not be erroneous and will backshift is context-sensitive.",
+      "proposed_correction": "Label as valid alternatives and ask which best serves an explicitly supplied discourse context. Keep grammar scoring separate from style.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms",
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-018",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 807,
+      "location": "d11q1",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "The draft policy has circulated to all provincial departments for comment.",
+      "explanation": "Circulate has intransitive and transitive uses; the draft can circulate. The explanation incorrectly assumes an active subject must circulate some other object.",
+      "proposed_correction": "Replace with an unambiguously transitive-only verb, e.g. The draft policy has distributed to all departments, or add no error and explain the valid intransitive reading.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/dictionary/english/circulate"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-019",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 811,
+      "location": "d11q5",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "By whom the decision was taken remains unclear.",
+      "explanation": "By whom the decision was taken is an embedded interrogative subject of remains unclear. It correctly has uninverted order. The key treats it as a direct question despite its matrix predicate.",
+      "proposed_correction": "Include a no-error answer or replace with direct question By whom the decision was taken? and key the missing inversion.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-020",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 822,
+      "location": "d11c2.note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Occur and collapse are intransitive and have no passive forms.",
+      "explanation": "Collapse also has transitive senses, including folding an object. The correction is suitable for the earthquake context, but its lexical universal is false.",
+      "proposed_correction": "Say collapse is intransitive in the intended houses-fell-down reading; contrast transitive folding/demolition uses.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/dictionary/english/collapse"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-021",
+      "day": 11,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 826,
+      "location": "d11c6.note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "believe is stative and does not take the continuous",
+      "explanation": "Stative interpretations usually resist ordinary progressives, but lexical categorisation is not a complete impossibility claim. Here the impersonal passive needs is believed regardless of broader dynamic uses.",
+      "proposed_correction": "Explain the actual passive complement pattern and qualify stative progressive restrictions; avoid an unrestricted ban.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-022",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 854,
+      "location": "rules[0].plain, points, table; examples[4,9]; checklist[3]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Change all four, or the sentence will be half-reported.",
+      "explanation": "Pronouns, demonstratives and time/place expressions change only where referents or temporal/spatial viewpoint require it. Same-place/same-day reporting may retain here/today/tomorrow. Modal shifts also depend on meaning.",
+      "proposed_correction": "Give the reporting context before transformation; teach optional tense shifts and referent-preserving pronoun/deictic choices.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-023",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[1].plain",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Tell needs a person straight after it ... grammatically incomplete without naming who was addressed",
+      "explanation": "This holds for the illustrated tell + that-clause pattern, not every tell construction: tell a story, tell the truth, tell a lie and tell the difference need no recipient.",
+      "proposed_correction": "State the pattern-specific constraint and give major lexical exceptions; avoid deriving valency from the communicative meaning alone.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/say-or-tell"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-024",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[2].plain and points[4]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "no do/does/did ... Delete do, does and did",
+      "explanation": "Positive interrogative do-support disappears when embedding, but negative auxiliaries and emphatic do may remain: He asked why she did not attend.",
+      "proposed_correction": "Teach removal of positive interrogative inversion/do-support, retain negation and emphatic meaning where appropriate.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-025",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[2].points[5]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "A question tag ... follows the same rule",
+      "explanation": "An ordinary tag is not an embedded interrogative and retains its question structure: The file is ready, is it not?",
+      "proposed_correction": "Separate tag formation from embedded clause order. Show an outer direct question with an embedded question and its necessary question mark.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-026",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[3].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "an imperative ... has no subject and no finite verb at all",
+      "explanation": "Canonical imperatives commonly omit an overt subject, but their base-form verb is not thereby a to-infinitive/non-finite fragment. Some imperatives have overt subjects: You stay here.",
+      "proposed_correction": "Explain imperative clause form and understood addressee; distinguish imperative base forms from non-finite infinitival clauses.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-027",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "rules[4].plain; pitfalls[4]; d12q6.why; d12c5.note",
+      "severity": "high",
+      "category": "academic",
+      "quote": "a permanent truth ... should stay in the present",
+      "explanation": "Backshift can report a continuing truth without asserting that it ceased to be true. A present form often foregrounds continuing validity, but the past is not universally wrong.",
+      "proposed_correction": "Present both choices and their viewpoint; remove must/should never-backshift assertions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-028",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 956,
+      "location": "examples[3]; d12c4",
+      "severity": "high",
+      "category": "academic",
+      "quote": "The teacher ordered the students that they should stand up.",
+      "explanation": "Order supports content-clause constructions; a to-infinitive is often the simpler choice but a mandative that-clause is not universally ungrammatical.",
+      "proposed_correction": "Teach order + object + to and order + that-clause, with regional/register notes. Ask learners to rewrite in a specified pattern rather than mark every alternative as an error.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-029",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": null,
+      "location": "examples[7]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "He requested to submit his documents earlier ... → ... his documents be submitted",
+      "explanation": "The rewrite changes the understood agent: requesting permission to submit oneself is different from requesting someone else to submit documents. Original request + to-infinitive also requires lexical/register checking rather than a blanket ban.",
+      "proposed_correction": "Specify who must submit and use He asked to submit his documents earlier or He requested that the office submit..., with agency preserved.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-030",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 972,
+      "location": "d12w1",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "Report: I am busy today, he said.",
+      "explanation": "At least He said he is busy today and He said he was busy today can be legitimate same-day reports. No report time is specified.",
+      "proposed_correction": "Specify report made on a later day with conventional backshift, or accept the contextually valid alternatives.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-031",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 975,
+      "location": "d12w4",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "He said that he ____ finish the work by Friday.",
+      "explanation": "Will, would and can can all form grammatical reported clauses in suitable contexts; no original utterance or reporting time fixes a unique answer.",
+      "proposed_correction": "Supply original will and a later reporting context, or ask explicitly for the conventional backshift of will.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-032",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 981,
+      "location": "d12q4",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "She said that she ____ the file the previous day.",
+      "explanation": "Submitted and had submitted are both possible narrative choices; no direct original or mandated tense transformation establishes a unique answer.",
+      "proposed_correction": "Specify an exercise in backshifting an original past simple or supply a context requiring temporal disambiguation.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-033",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 984,
+      "location": "d12q7",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "You must submit it today. → He said that I ____ submit it that day.",
+      "explanation": "Must can remain in reported obligations, while had to is a common backshift. The key excludes a defensible retained modal without context.",
+      "proposed_correction": "Specify an expired obligation reported later, or discuss both must and had to.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-034",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 986,
+      "location": "d12q9",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "The witness said that he had seen the accused here the previous evening.",
+      "explanation": "Here is correct if the report is made at that location. The explanation supplies an elsewhere condition absent from the question.",
+      "proposed_correction": "State that reporting occurs elsewhere or add no error.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-035",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 989,
+      "location": "d12q12.why",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "wish itself is not further backshifted",
+      "explanation": "The keyed answer changes wish to wished. It is the embedded counterfactual past perfect that remains unchanged, not wish itself.",
+      "proposed_correction": "Identify wish → wished and had studied unchanged separately.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-036",
+      "day": 12,
+      "source_file": "src/data/grammar-course/phase2.ts",
+      "line": 1002,
+      "location": "checklist[1]; pitfalls[1]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "I never write that after ask.",
+      "explanation": "Ask may take a mandative content clause: She asked that the meeting be postponed. That is excluded before an embedded wh/if-question, not after ask in every construction.",
+      "proposed_correction": "Restrict the prohibition to reported interrogative patterns and teach ask + that for requests.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-037",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "terms[0]; rules[1].plain; recap",
+      "severity": "high",
+      "category": "academic",
+      "quote": "a/an — one of many, mentioned for the first time",
+      "explanation": "First mention is not identical to indefiniteness; the sun and a hearer-identifiable referent can take the on first mention, and a later new member can still take a. Singular generic the/a and role/institution zero uses also prevent the recap from being universal.",
+      "proposed_correction": "Base articles on countability and identifiability in context; teach generic alternatives, specificity versus definiteness, and title/role/institution exceptions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-038",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[0].points[3]",
+      "severity": "low",
+      "category": "academic",
+      "quote": "a UN resolution ... pronounced as words",
+      "explanation": "UN is normally an initialism pronounced letter by letter, unlike NATO; a is right because U begins /j/.",
+      "proposed_correction": "Correct the pronunciation explanation without changing the article.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-039",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 47,
+      "location": "rules[1].points[5]; rules[2].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Made specific by what follows: the policy that was announced in May.",
+      "explanation": "A postmodifier does not mechanically force the: a policy that was announced in May is grammatical and may refer to one among several. Specificity is not sufficient for definiteness.",
+      "proposed_correction": "Contrast a/the + identical relative modifier with explicit contexts in which a reader can/cannot identify a unique referent.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-040",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 54,
+      "location": "rules[1].models[2].note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "record high stays article-free as a fixed phrase",
+      "explanation": "The model itself says to a record high. The note contradicts the written example.",
+      "proposed_correction": "Explain the singular count noun high and its a; compare record-high adjective use if needed.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-041",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].table.rows[1]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "the Punjab, the Netherlands, the Sudan ... plural or descriptive names take the",
+      "explanation": "Punjab is not a plural name; Sudan normally appears without the in contemporary official English, while the Sudan is historically attested. The table conflates historical convention with a productive rule.",
+      "proposed_correction": "Give contemporary default forms plus historical/regional notes for the Punjab/the Sudan. Preserve the Netherlands as conventional.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-042",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[2].plain, points[6]; recap",
+      "severity": "high",
+      "category": "academic",
+      "quote": "If nothing ... narrowing ... the noun must stand alone.",
+      "explanation": "Generic reference can use a singular indefinite or definite: A tiger is a mammal; The tiger is endangered. General categories do not invariably require zero article.",
+      "proposed_correction": "Teach zero plural/mass generics alongside generic a and the, with meaning and usage differences.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-043",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 112,
+      "location": "examples[4]; d13q9; fixed expressions treatment",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Games take no article. Only musical instruments take the.",
+      "explanation": "Play violin is an established zero-article alternative, particularly in American usage and musical contexts. Definite games can also take the when independently identified.",
+      "proposed_correction": "Use the violin as the British editorial default, explicitly accept play violin, and avoid only/all article claims.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-044",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 115,
+      "location": "examples[7]",
+      "severity": "blocker",
+      "category": "academic",
+      "quote": "Teachers are one of the most respected professions in society.",
+      "explanation": "The corrected model compares people with professions and fails the course's own like-with-like requirement.",
+      "proposed_correction": "Use Teaching is one of the most respected professions, or Teachers belong to one of the most respected professions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-045",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 127,
+      "location": "d13w1",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "He waited for ____ hour outside ____ office.",
+      "explanation": "An ... an is also grammatical when the office is unidentified; the supplied answer assumes a particular office without context.",
+      "proposed_correction": "Name a previously identified office in a preceding sentence.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-046",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 128,
+      "location": "d13w2",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "____ is essential for economic growth.",
+      "explanation": "An education can be grammatical in a countable interpretation; the broad stem does not itself exclude that reading.",
+      "proposed_correction": "Ask for a general mass-noun reading or revise the alternatives/context so only the intended meaning fits.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-047",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 136,
+      "location": "d13q4",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "released from ____ prison after ____ appeal succeeded",
+      "explanation": "From prison and from the prison can both describe release of an inmate, depending on whether institutional state or identified establishment is foregrounded. The appeal context is also underspecified.",
+      "proposed_correction": "Specify institutional-state reading and prior identification, or accept both alternatives.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-048",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 139,
+      "location": "d13q7",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "an honour to serve on ____ committee that drafted the policy",
+      "explanation": "Both a committee that drafted the policy and the committee that drafted the policy are possible; uniqueness is not supplied by the relative clause alone.",
+      "proposed_correction": "Introduce a uniquely identified committee earlier, or ask what meaning the two articles convey.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-049",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 140,
+      "location": "d13q8",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "The unemployment among young graduates has risen sharply since 2019.",
+      "explanation": "The among-phrase can delimit a particular unemployment problem; definite article use is context-sensitive. It is not an unambiguous article error.",
+      "proposed_correction": "Provide a context establishing generic mass reference or use a less debatable article misuse.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-050",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 143,
+      "location": "d13q11",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "The report ____ was submitted last month ... [the … a]",
+      "explanation": "Every offered first gap is an article after an already determined report; the key yields The report the was submitted last month. The explanation describes a different question.",
+      "proposed_correction": "Replace first gap with a relative pronoun and update options/key, or remove the first The report and ask articles in two noun phrases. Validate rendered text after substitution.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-051",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "d13q12; examples[3]",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "He was admitted to the hospital as a patient ...",
+      "explanation": "The hospital is normal American English and can also refer to a specific hospital. The question marks a legitimate standard variant as an error without limiting convention.",
+      "proposed_correction": "Teach to hospital as the British default and to the hospital as the American default; assess the distinction rather than rejecting the variant.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-052",
+      "day": 13,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "d13c1; d13c6",
+      "severity": "high",
+      "category": "academic",
+      "quote": "education ... needs an urgent reform → ... urgent reform",
+      "explanation": "Reform has countable as well as mass uses. An urgent reform can denote a particular reform measure; the correction should not imply categorical uncountability. Definiteness of education also depends on context.",
+      "proposed_correction": "Accept singular countable reform where intended or specify broad systemic reform; explain both senses.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/articles"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-053",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 244,
+      "location": "terms[0]; goal; rules[3]; checklist[3]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "A pronoun must have exactly one possible antecedent.",
+      "explanation": "Pronouns can refer deictically, cataphorically, generically, to discourse propositions, or be dummy subjects. They do not all replace a previously named noun.",
+      "proposed_correction": "Distinguish reference types and actual ambiguous interpretation from legitimate discourse reference. Keep a clarity strategy rather than a universal syntactic law.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+        "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses-referring-to-a-whole-sentence"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-054",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[0].points[4]; d14q7",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "He performed better ... than ____ [me / I did]",
+      "explanation": "Than me is standard; than I did is a more explicit finite-clause alternative. Both offered answers fit.",
+      "proposed_correction": "Ask explicitly for the finite-clause version or allow both; explain that than can take an object pronoun.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-055",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].points[5]; examples[4]; d14w3; d14c3",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "whom remains required ... in relative clauses in exam-standard prose",
+      "explanation": "Object who is standard in relative clauses. The question offers both who and whom without specifying a narrow formal convention. No authentic exam evidence supports the additional rule.",
+      "proposed_correction": "Teach whom as a formal option, especially directly following a preposition; accept object who and use a precise register instruction where a particular form is required.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/who-whom"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-056",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 270,
+      "location": "rules[1].table.rows[5]; examples[8]; d14c6.note",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Themself is not a standard English word",
+      "explanation": "The form has established historical and contemporary uses. Authorities differ in labelling: Cambridge marks it not standard; Merriam-Webster records increasing use as a singular-they alternative. Non-existent/non-word claims are false, and standardness requires a stated editorial policy.",
+      "proposed_correction": "Use themselves as the course default; explain the recognised themself alternative and differing style policies without declaring the form nonexistent.",
+      "supporting_sources": [
+        "https://www.merriam-webster.com/dictionary/themself",
+        "https://dictionary.cambridge.org/dictionary/english/themself"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-057",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 231,
+      "location": "rules[2]; examples[5]; d14q3; d14q12; d14c1; d14c6",
+      "severity": "high",
+      "category": "academic",
+      "quote": "A collective noun takes it and its, not they and their",
+      "explanation": "British notional plural agreement permits collective they/their, including a group acting in concert; the rule cannot be reduced to a universal singular requirement.",
+      "proposed_correction": "Present the committee has/its and the committee have/their as context/region-sensitive patterns and maintain intended notional agreement. Do not regrade older singular choices as mastery evidence.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-058",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[2].points[5]; checklist[2]; d14q2",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "Neither ... has submitted their affidavits [excluded]",
+      "explanation": "Singular they is explicitly accepted elsewhere in the same lesson; the key then requires his, making an inclusive alternative wrong. Neither of + plural can also take plural agreement informally.",
+      "proposed_correction": "Keep singular verb in formal editorial examples but accept singular they; specify one affidavit each if distributive number matters.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+        "https://www.merriam-webster.com/dictionary/themself"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-059",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 250,
+      "location": "rules[3].points[4]; examples[9]; d14q9",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "A pronoun cannot refer to a possessive",
+      "explanation": "No general grammar constraint prevents reference to a person introduced in a possessive noun phrase. In Iqbal's poetry, he argues... can have a clear discourse interpretation.",
+      "proposed_correction": "Teach this as a possible clarity revision, not an absolute ban. Replace the scored item with genuinely ambiguous competing antecedents.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-060",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[3].points[2]; d14q10; d14c5",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "This shows ... — this what?",
+      "explanation": "Demonstrative this may clearly refer to a proposition/event in preceding discourse. The audit-delay example with This is unacceptable has an obvious propositional referent.",
+      "proposed_correction": "Ask which version names the referent most explicitly, or accept clear propositional reference; distinguish style guidance from error correction.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses-referring-to-a-whole-sentence"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-061",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 269,
+      "location": "examples[7]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "The commission published its findings, but they have not yet been acted upon ...",
+      "explanation": "They naturally refers to plural findings, reinforced by passive acted upon. Replacing it with these is an optional clarity/style choice, not a grammatical repair.",
+      "proposed_correction": "Label both versions acceptable and explain discourse focus; use a real referential ambiguity as a correction exercise.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-062",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 297,
+      "location": "d14q11",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "each other for exactly two and one another for more than two",
+      "explanation": "Both reciprocal pronouns normally occur with groups of two or more. Both first and second options explicitly name two officers and are grammatical.",
+      "proposed_correction": "Accept both and explain modern usage; if asking group size, assess the noun phrase two officers rather than impose a fictitious pronoun distinction.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/each-other-one-another"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-063",
+      "day": 14,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 303,
+      "location": "d14c3",
+      "severity": "high",
+      "category": "academic",
+      "quote": "did not accept the posting, which surprised everybody",
+      "explanation": "Sentential which can refer to the entire preceding refusal; this is a normal non-defining relative construction, not a missing antecedent.",
+      "proposed_correction": "Retain which as valid and offer his refusal as a stylistic explicit alternative.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses-referring-to-a-whole-sentence"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-064",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 340,
+      "location": "rules[0]; examples[0]; d15w1; d15q10; d15c2; d15c6; recap",
+      "severity": "blocker",
+      "category": "academic",
+      "quote": "Place only immediately before the word it limits.",
+      "explanation": "Normal mid-position only can focus a later object or adjunct. He only attempted two questions can mean he attempted just two. The lesson mistakes a clarity heuristic for a rigid scope rule, creating multiple-answer/error-free items.",
+      "proposed_correction": "Teach focus, context and prosody; recommend adjacency where needed for clarity but recognise ordinary mid-position. Rewrite scored questions to establish intended contrast.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/only"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-065",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[0].points[6]; d15q11",
+      "severity": "high",
+      "category": "academic",
+      "quote": "He also signed ... means someone else signed it as well",
+      "explanation": "The same position can add another action by him, another signer, or another related proposition, depending on context. Position alone does not uniquely fix focus.",
+      "proposed_correction": "Use an explicit preceding sentence and contrasting readings; assess contextual interpretation.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/also-as-well-or-too"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-066",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 368,
+      "location": "rules[1].plain, points[4]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "A passive main clause almost always creates a dangler.",
+      "explanation": "Passive main clauses can have perfectly aligned participial adjuncts: Having been delayed, the project was launched. The lesson itself uses a correct passive model in d15c5. Reduced clauses can have passive rather than agentive subject relations.",
+      "proposed_correction": "Teach subject interpretation, not a passive ban. Give paired active/passive examples with both good and bad attachment.",
+      "supporting_sources": [
+        "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-067",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[3].plain and points[3,6]; examples[3]; d15w3; d15q9; checklist[3]",
+      "severity": "blocker",
+      "category": "academic",
+      "quote": "Absolute adjectives ... cannot take more, most, very or any other degree marker",
+      "explanation": "Gradability depends on sense and context. Unique meaning unusual can take degree modifiers; complete can mean more comprehensive; figurative very wooden is ordinary for acting. Even non-gradable senses take appropriate intensifiers (absolutely perfect).",
+      "proposed_correction": "Teach sense-dependent gradability and suitable intensifiers. State the course's formal style preference for unique meaning one-of-a-kind, rather than marking all graded uses ungrammatical.",
+      "supporting_sources": [
+        "https://www.merriam-webster.com/dictionary/unique"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-068",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 441,
+      "location": "d15q2",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "Which sentence places the modifier correctly? ... almost released all / released almost all",
+      "explanation": "Both A and B are grammatical but make different claims. The stem supplies no intended quantity-versus-event meaning.",
+      "proposed_correction": "Specify funds are mostly released but some remain, or ask learners to explain both readings.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/only"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-069",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 443,
+      "location": "d15q4",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "Which sentence is unambiguous? ... Often students who study succeed.",
+      "explanation": "The third option is a possible sentence-initial frequency adverb and is not the medial squinting construction the question is trying to contrast. It can be at least as clear as the keyed A.",
+      "proposed_correction": "Replace C with a genuinely ambiguous construction or ask which sentence distinguishes regular study from frequent success using context.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-070",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 444,
+      "location": "d15q5",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "The minister ____ been criticised ... has repeatedly / repeatedly has",
+      "explanation": "Both has repeatedly been criticised and repeatedly has been criticised are grammatical; the latter is marked/emphatic but not wrong.",
+      "proposed_correction": "Ask for the neutral mid-position rather than the only grammatical position, or accept both.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/also-as-well-or-too"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-071",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 447,
+      "location": "d15q8",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "The scheme, after several years ... into its finances, was finally abandoned.",
+      "explanation": "The insertion is correctly paired and the subject agrees with its verb. Length may warrant editing but is not a grammatical fault. No no-error choice exists.",
+      "proposed_correction": "Add no error, or ask an unscored clarity revision while retaining the original as grammatical.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-072",
+      "day": 15,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "examples[6,8,9]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Having failed ... the department cancelled the contract / minister almost promised / explained briefly",
+      "explanation": "Models infer a doer or intended scope without context. The contract deadline may be missed by a contractor; almost promising is a valid claim; explained briefly is grammatical and a long object can follow its recipient. These rewrites can change meaning or simply express a stylistic preference.",
+      "proposed_correction": "Supply intended agency/scope explicitly, preserve valid alternative readings, and label word-order revisions as stylistic where appropriate.",
+      "supporting_sources": [
+        "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses",
+        "https://dictionary.cambridge.org/grammar/british-grammar/only"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-073",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "why; recap; rules[0].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Prepositions cannot be reasoned out ... never an infinitive",
+      "explanation": "Prepositions have productive spatial/temporal/abstract meanings as well as lexical dependencies; complement possibilities extend beyond nouns and -ing, including finite interrogatives and specialised except/but infinitival constructions.",
+      "proposed_correction": "Teach productive semantics and lexical patterns together. Qualify the prepositional-to versus infinitival-to diagnostic and identify relevant complement exceptions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-074",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].models[0].note",
+      "severity": "low",
+      "category": "academic",
+      "quote": "fixed for 10 a.m. ... note: at a point",
+      "explanation": "The model uses for 10 a.m., not at. Its explanatory note does not match the actual word used.",
+      "proposed_correction": "Use begins at 10 a.m. or explain fixed for as a separate scheduling construction.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-075",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].table.rows[10]; examples[4]; pitfalls[2]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "His approach is different than mine. [wrong]",
+      "explanation": "Different than is an established American alternative; different to also occurs in British English. A British default does not justify a universal wrong label.",
+      "proposed_correction": "Use different from as editorial default; mark different than as standard American and discuss British before-clause use.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/different-from-different-to-or-different-than"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-076",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].table.rows[7]; pitfalls[0]; checklist[1]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Never add a preposition to ... enter",
+      "explanation": "Enter into has established senses (enter into an agreement/discussion) and enter can have prepositional complements depending on meaning. The blanket wording overgeneralises a sound beginner correction for enter the hall.",
+      "proposed_correction": "Teach each verb sense and complement pattern, distinguishing direct entry to a place from enter into negotiations.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-077",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[2].points[4]; examples[6]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "confident about his ability [wrong]",
+      "explanation": "Confident about his ability is idiomatic and overlaps confident of/in; the imposed capability-versus-general-situation distinction is unsupported and too rigid. Angry at a person is also ordinary.",
+      "proposed_correction": "Provide typical preferences and meaning contrasts without declaring established overlapping prepositions universally wrong.",
+      "supporting_sources": [],
+      "verification_status": "structurally_reviewed; specific_dictionary_corroboration_pending",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-078",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[3].plain versus models[2]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "a phrasal verb ... is only out of register for the formal essay",
+      "explanation": "Many multi-word verbs occur naturally in formal writing (carry out, result in, account for). The final model itself recognises fairly formal uses.",
+      "proposed_correction": "Teach register item by item and choose exact meaning; avoid banning a structural category from formal prose.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-079",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 604,
+      "location": "d16q2",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "no easy solution ____ the energy crisis [for / to]",
+      "explanation": "Solution for the energy crisis is a legitimate alternative to solution to; the stem cannot guarantee the unique key.",
+      "proposed_correction": "Use a truly constrained collocation or compare meaning/use rather than mark for wrong.",
+      "supporting_sources": [],
+      "verification_status": "structurally_reviewed; dictionary_corroboration_pending",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-080",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "pitfalls[1]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "to + infinitive after ... used to (habit)",
+      "explanation": "Used to for a past habit does take a base infinitive; be used to meaning accustomed takes -ing. This pitfall contradicts the lesson's own accurate examples.",
+      "proposed_correction": "Replace habit with accustomed and retain the contrasted used to work / is used to working patterns.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-081",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 622,
+      "location": "d16c6",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "congratulated him for his success → ... on his success",
+      "explanation": "Congratulate on is a common neutral collocation, but congratulate for is established for an action/achievement and is not invariably wrong.",
+      "proposed_correction": "Keep on as the default recommendation while qualifying for and assess the genuine insist for/indifferent with faults separately.",
+      "supporting_sources": [],
+      "verification_status": "structurally_reviewed; dictionary_corroboration_pending",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-082",
+      "day": 16,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "transfer",
+      "severity": "medium",
+      "category": "instructional",
+      "quote": "Add ten entries a day ... by Day 30 ... three hundred",
+      "explanation": "Beginning on Day 16 provides 15 course days inclusive, hence 150 entries, not 300. The output target also prioritises a fixed quota over useful selection.",
+      "proposed_correction": "Use 150 if studying Days 16–30, or recommend a manageable number of genuinely useful collocations without an inflated total.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-083",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[0].points[2]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Both, same meaning: ... like, love, hate, prefer",
+      "explanation": "These verbs can take both forms, but choices often alter emphasis (activity enjoyment versus habitual preference/result). The same-meaning heading suppresses taught semantic distinctions.",
+      "proposed_correction": "Explain typical overlap and subtle differences, and would like/love/prefer restrictions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-084",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[1].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "The single exception ... passive of make restores to",
+      "explanation": "Perception verbs also take to-infinitives in passives: He was seen to leave; she was heard to say. Make is not the sole pattern.",
+      "proposed_correction": "Teach passive make/see/hear patterns with lexical limitations; distinguish passive let substitutions.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-085",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 704,
+      "location": "rules[2].plain and points[5]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Collecting evidence, interviewing witnesses and drafting the report takes weeks, not take",
+      "explanation": "A coordination of three activities can take plural agreement; singular agreement is possible when conceptualised as one integrated process. The universal excludes an ordinary reading.",
+      "proposed_correction": "Present take as normal for separate coordinated activities and takes only when one integrated procedure is intended, with clear contexts.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-086",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[2]; d17q8",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "We objected to him leaving the meeting ... [error]",
+      "explanation": "Accusative subjects of -ing clauses occur in standard English, including formal contexts. A possessive can foreground the event, but him is not an unconditional grammar error.",
+      "proposed_correction": "Accept both him/his with explanation of register/emphasis; if practising a named editorial convention, state it explicitly.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-087",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 785,
+      "location": "rules[3].plain; recap",
+      "severity": "high",
+      "category": "academic",
+      "quote": "a participle always borrows the subject of the main clause",
+      "explanation": "Absolute constructions can have their own subjects (Weather permitting, ...); trailing result clauses and supplement interpretations need broader analysis. Present/past participles are also not invariably active/passive (being examined; fallen leaves).",
+      "proposed_correction": "Teach the usual understood-subject pattern first, then absolute constructions, passive -ing forms, and non-passive past participial adjectives.",
+      "supporting_sources": [
+        "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-088",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "examples[7]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Finding out the fraud, the manager was suspended ... → ... head office suspended",
+      "explanation": "The original can mean the manager discovered fraud and was then suspended, e.g. retaliation. Passive voice does not itself create a dangler. The rewrite changes who discovered the fraud without evidence.",
+      "proposed_correction": "Supply a scenario identifying the discoverer, or use an unmistakably incompatible subject; preserve intended agency.",
+      "supporting_sources": [
+        "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-089",
+      "day": 17,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 759,
+      "location": "d17q3",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "I regret ____ you that your application has been rejected [informing / to inform]",
+      "explanation": "Regret informing can refer to a prior disclosure; regret to inform can introduce the disclosure now. The stem lacks the time/context that distinguishes them.",
+      "proposed_correction": "Specify This is the first notice of the decision, or assess the two meanings directly.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-090",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 810,
+      "location": "rules[0]; terms[0,1]; examples[4,8]; d18w2; checklist[2]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Use the comparative for two, the superlative for three or more",
+      "explanation": "This is a useful traditional formal convention, not an absolute grammatical restriction. Standard informal usage permits best/tallest of two. More/most is also not a universally interchangeable fallback for every two-syllable adjective.",
+      "proposed_correction": "Teach the formal default and recognised informal alternative; treat forms lexically and verify doubtful comparative spellings.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-091",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "rules[2].points[3]; examples[3]",
+      "severity": "blocker",
+      "category": "academic",
+      "quote": "This is one of the better essays I have read this year. [wrong]",
+      "explanation": "One of the better essays is grammatical and means among the comparatively good essays; best makes a stronger claim. The fixed-superlative assertion is false.",
+      "proposed_correction": "Contrast the two valid meanings; retain one of + plural noun and correct agreement without forcing a superlative.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-092",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 912,
+      "location": "d18w3",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "Lahore is older than ____ city in the province [any other / some other]",
+      "explanation": "Some other gives a weaker but grammatical comparison, whereas any other makes a superlative-like factual claim. The stem does not specify the intended strength.",
+      "proposed_correction": "Provide a stated ranking or ask which expression excludes Lahore while claiming greater age than every rival. Avoid unverified factual city-age rankings.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-093",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 913,
+      "location": "d18w4; d18c2; rules[1].table",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "Senior takes to and has no comparative form.",
+      "explanation": "Senior is gradable in modern standard use: more senior, most senior and senior enough appear in Oxford. More senior than me is a legitimate comparative alternative to senior to me.",
+      "proposed_correction": "Teach senior to and more senior than as established patterns; remove no-comparative and no-more assertions.",
+      "supporting_sources": [
+        "https://www.oxfordlearnersdictionaries.com/definition/english/senior_1"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-094",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 917,
+      "location": "d18q2; pitfalls[1]; examples of unique",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "Unique is absolute and takes no degree marker.",
+      "explanation": "The contextual unusual/rare sense can be graded in standard English. Unqualified scoring repeats the Day 15 defect.",
+      "proposed_correction": "State the intended one-of-a-kind sense or convert into a meaning/register comparison.",
+      "supporting_sources": [
+        "https://www.merriam-webster.com/dictionary/unique"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-095",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 921,
+      "location": "d18q6",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "Each of the provinces have submitted their own education plan.",
+      "explanation": "Under the lesson's own prescribed singular interpretation, both verb B and pronoun C are treated as faults; a one-segment answer does not cover the complete correction. Plural notional pronouns need context.",
+      "proposed_correction": "Target one unambiguous error or allow selection of all required changes; explain the distributive pronoun choice separately.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-096",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 922,
+      "location": "d18q7.why",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Use rather than only with verbs",
+      "explanation": "Rather than can coordinate nouns and other structures, e.g. tea rather than coffee. Its distribution is not restricted to verbs.",
+      "proposed_correction": "Teach prefer X to Y and would prefer X rather than Y with suitable complete patterns, without banning noun comparisons.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-097",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 926,
+      "location": "d18q11",
+      "severity": "medium",
+      "category": "assessment",
+      "quote": "funds ... treated as an uncountable amount of money",
+      "explanation": "Funds is a plural noun even when money is the intended aggregate; less funds and fewer funds can differ in interpretation/register. Calling the form uncountable conceals rather than explains the construction.",
+      "proposed_correction": "Use less money for an unambiguous mass/count contrast, and discuss aggregate quantity separately.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-098",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": 933,
+      "location": "d18c4.note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "inform takes of before a thing",
+      "explanation": "Inform about is also grammatical, and singular they may preserve a person-neutral reference. The model can be a valid rewrite without every changed form being compulsory.",
+      "proposed_correction": "Identify candidates/has as the required fixes; preserve valid informed about and singular their alternatives where intended.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-099",
+      "day": 18,
+      "source_file": "src/data/grammar-course/phase3.ts",
+      "line": null,
+      "location": "d18c6.model",
+      "severity": "high",
+      "category": "academic",
+      "quote": "The unemployment rate of Sindh is higher ... and it has fewer job opportunities",
+      "explanation": "The corrected model leaves it grammatically referring most directly to the unemployment rate, which cannot have job opportunities. The intended referent is Sindh.",
+      "proposed_correction": "Write ... and Sindh has fewer job opportunities..., keeping the comparison scope explicit.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-100",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[0].plain",
+      "severity": "high",
+      "category": "academic",
+      "quote": "comma before ... never a semicolon and never nothing",
+      "explanation": "A comma can be omitted between very short coordinated independent clauses; semicolons before coordinating conjunctions can separate long/complex clauses. A style default is presented as an exceptionless syntax rule.",
+      "proposed_correction": "Teach the usual comma pattern plus short-clause and complex-clause style variation; preserve sentence boundaries.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-101",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[0].table.rows[4]",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Preposition + noun: in order to, so as to",
+      "explanation": "These introduce infinitival purpose constructions, not noun complements. The category heading contradicts the structures.",
+      "proposed_correction": "Give a separate infinitival purpose column; distinguish for + noun/-ing where relevant.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-102",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[1].points[4]; d19q12.why",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Due to ... needs a form of be before it",
+      "explanation": "Contemporary due to also introduces an adjunct reason phrase without be. The question's correct was due to supplies the missing finite verb, but the explanation falsely bans due to elsewhere.",
+      "proposed_correction": "Explain the actual clause needs a finite predicate here and qualify the historical adjectival-only style preference.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-103",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 120,
+      "location": "rules[1].points[6]; examples[7]; d19q11; d19c6",
+      "severity": "blocker",
+      "category": "assessment",
+      "quote": "Notwithstanding takes a noun phrase, not a clause",
+      "explanation": "Notwithstanding is also a conjunction meaning although, including with a finite clause and without that; Merriam-Webster explicitly exemplifies that construction.",
+      "proposed_correction": "Teach the less common formal conjunctive use; do not mark the finite clause ungrammatical. Replace the scored item or include no error.",
+      "supporting_sources": [
+        "https://www.merriam-webster.com/dictionary/notwithstanding"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-104",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[2].plain",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "not only with but also [each pair is fixed]",
+      "explanation": "Also can be omitted in the not only ... but pattern, as Cambridge explains. Complete parallelism also concerns compatible syntactic functions rather than an absolute identity of word classes.",
+      "proposed_correction": "Show optional also and distinguish shared function from identical form; avoid overcorrecting accepted coordination.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/not-only-but-also"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-105",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[2].models[2].note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "arbitrary and without lawful authority ... two adjective phrases",
+      "explanation": "Without lawful authority is a prepositional phrase, functioning as a predicative complement alongside the adjective arbitrary. The example is valid but its analysis is wrong and contradicts the identical-form rule.",
+      "proposed_correction": "Label adjective phrase + prepositional phrase with compatible predicative functions; use this to explain limits of surface-form parallelism.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-106",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "examples[6]; d19q10",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "As the rains failed, so the wheat output fell ... [error]",
+      "explanation": "As ... so is an established correlative pattern, particularly proportional or emphatic constructions; a general ban is unsafe. Whether this specific causal example is stylistically preferred requires interpretation.",
+      "proposed_correction": "Use a clearly redundant because ... so exercise under an explicit standard convention, or teach as/so correlatives separately. Do not rely on the blanket one-connector law.",
+      "supporting_sources": [],
+      "verification_status": "structurally_reviewed; targeted_source_corroboration_pending",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-107",
+      "day": 19,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 142,
+      "location": "d19q5",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "reduced the syllabus; ... increased number of papers [however / moreover]",
+      "explanation": "A contrast is plausible, but moreover can legitimately add a second fact, and a policy could link them causally. Context does not uniquely establish the intended logical relation.",
+      "proposed_correction": "State that the second development is unexpected despite reduced coverage, or ask learners to explain how connector choice changes the implied relationship.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-108",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[1].points[6]; examples[6]",
+      "severity": "blocker",
+      "category": "academic",
+      "quote": "Balochistan's revenue is smaller than what Punjab collects. [wrong]",
+      "explanation": "What Punjab collects is a fused relative/nominal construction denoting the amount collected. It can serve as the comparison term. Comparisons routinely take finite clauses; noun-versus-clause alone does not invalidate them.",
+      "proposed_correction": "Accept the sentence and explain its implicit amount interpretation; teach a genuine category mismatch such as revenue versus Punjab itself.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-clauses-bigger-than-we-had-imagined"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-109",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[1].points[5]; examples[7]; d20q12.why",
+      "severity": "high",
+      "category": "academic",
+      "quote": "As ... as needs the same clause shape on both sides",
+      "explanation": "Comparative clauses need semantic comparability, not identical surface clause shape. The original poor-monitoring/generous-funding comparison may be rhetorically awkward, but its clause shape is not inherently ungrammatical.",
+      "proposed_correction": "Teach comparative clause structure and ellipsis. Frame the suggested rewrite as rhetorical parallelism, distinct from grammatical correction.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-clauses-bigger-than-we-had-imagined"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-110",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": null,
+      "location": "rules[0].points[3,4]; pitfalls[0,2,3]",
+      "severity": "high",
+      "category": "academic",
+      "quote": "Choose one form ... either repeat to before every item or use it only once",
+      "explanation": "Mixed category coordination can be grammatical when functions match; repetition of to/prepositions is not universally all-or-none, and voice can change for discourse reasons. The checklist overgeneralises a useful editing heuristic.",
+      "proposed_correction": "Teach uniform form as a clarity default, illustrate compatible unlike categories and shared/partial ellipsis, and distinguish errors from style recommendations.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-111",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 257,
+      "location": "examples[8]; d20q5",
+      "severity": "high",
+      "category": "academic",
+      "quote": "The board is examining efficiency, transparency and being accountable.",
+      "explanation": "A gerund-participial clause can occupy a nominal complement function alongside noun phrases. This may be less parallel rhetorically but is not automatically a syntactic error. Likewise d20q5 can coordinate a first clause with a second clause.",
+      "proposed_correction": "Ask for the most rhetorically parallel rewrite, or use a complement form the governing verb actually excludes. Keep objective grammar error detection unambiguous.",
+      "supporting_sources": [],
+      "verification_status": "verified_by_structural_review",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-112",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 279,
+      "location": "d20q6",
+      "severity": "high",
+      "category": "assessment",
+      "quote": "To draft a summary is harder than drafting a note. [excluded]",
+      "explanation": "A mixed to-infinitival/-ing comparison can be grammatical; matching forms is the more symmetrical rhetorical choice, not a categorical requirement.",
+      "proposed_correction": "Keep the question explicitly about matching surface form, and explain that the alternative may remain grammatical rather than label it incorrect.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/comparison-clauses-bigger-than-we-had-imagined"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": "retain historical response and authored version; do not silently regrade"
+    },
+    {
+      "id": "A11-20-113",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 281,
+      "location": "d20q8; pitfalls[3]",
+      "severity": "medium",
+      "category": "instructional",
+      "quote": "Which sentence keeps voice consistent?",
+      "explanation": "The question is answerable as a style-pattern identification, but other options with active/passive shifts are grammatical and can improve information flow. A proficiency report should not count them as grammar failures.",
+      "proposed_correction": "Tag this as style/organisation recognition; explain the discourse reasons for choosing a voice and avoid a general voice-consistency prohibition.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/passive-forms"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    },
+    {
+      "id": "A11-20-114",
+      "day": 20,
+      "source_file": "src/data/grammar-course/phase4.ts",
+      "line": 291,
+      "location": "d20c4.note",
+      "severity": "medium",
+      "category": "academic",
+      "quote": "Recommend takes gerunds, so all three items become gerunds",
+      "explanation": "Recommend also takes mandative that-clauses and object-dependent patterns. The model is a good parallel rewrite, but the explanation overstates lexical exclusivity.",
+      "proposed_correction": "Say gerunds are one valid repeated pattern; give a parallel set of that-clauses as another solution.",
+      "supporting_sources": [
+        "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing"
+      ],
+      "verification_status": "source_checked_and_structurally_reviewed",
+      "implementation_status": "identified; original source unchanged",
+      "legacy_answer_policy": null
+    }
+  ],
+  "lesson_review": [
+    {
+      "day": 11,
+      "title": "Active, passive and causative",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d11w1",
+        "d11w2",
+        "d11w3",
+        "d11w4",
+        "d11q1",
+        "d11q2",
+        "d11q3",
+        "d11q4",
+        "d11q5",
+        "d11q6",
+        "d11q7",
+        "d11q8",
+        "d11q9",
+        "d11q10",
+        "d11q11",
+        "d11q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 5,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "be-passives across common tense/aspect forms",
+          "reporting passives",
+          "two-object patterns",
+          "basic have/get causatives",
+          "agent suppression and rhetorical choice"
+        ],
+        "underdeveloped": [
+          "prepositional/get-passives",
+          "passive infinitive/perfect/progressive combinations and naturalness",
+          "valency-dependent restrictions",
+          "make/let/help causatives",
+          "quantifier/negation scope under transformations",
+          "ergative alternations",
+          "experience versus deliberate causation"
+        ],
+        "absent_as_dedicated_sections": [
+          "formal passivisation diagnostics",
+          "meaning-preserving advanced transformation analysis"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 12,
+      "title": "Reported speech",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d12w1",
+        "d12w2",
+        "d12w3",
+        "d12w4",
+        "d12q1",
+        "d12q2",
+        "d12q3",
+        "d12q4",
+        "d12q5",
+        "d12q6",
+        "d12q7",
+        "d12q8",
+        "d12q9",
+        "d12q10",
+        "d12q11",
+        "d12q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 5,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "statement/question/request reporting",
+          "basic modal/tense backshift table",
+          "say/tell/ask patterns",
+          "some no-backshift teaching"
+        ],
+        "underdeveloped": [
+          "context-dependent deixis",
+          "optional backshift versus current relevance",
+          "modal meaning-specific reporting",
+          "reporting-verb valency",
+          "speech acts versus sentence types",
+          "reported thoughts",
+          "exclamations",
+          "formal transformations preserving agency"
+        ],
+        "absent_as_dedicated_sections": [
+          "free indirect reporting and mixed quotation at extension level",
+          "full comparison of mandatory/optional/impossible shifts"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 13,
+      "title": "Articles and determiners",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d13w1",
+        "d13w2",
+        "d13w3",
+        "d13w4",
+        "d13q1",
+        "d13q2",
+        "d13q3",
+        "d13q4",
+        "d13q5",
+        "d13q6",
+        "d13q7",
+        "d13q8",
+        "d13q9",
+        "d13q10",
+        "d13q11",
+        "d13q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "sound-based a/an",
+          "basic definiteness",
+          "mass/plural zero article",
+          "institutional expressions",
+          "geographic/instrument mini-table"
+        ],
+        "underdeveloped": [
+          "specificity versus definiteness",
+          "generic singular a/the",
+          "noun-sense countability",
+          "institutional variation by region",
+          "geographic naming exceptions",
+          "predicative roles/titles",
+          "quantifier meaning and scope"
+        ],
+        "absent_as_dedicated_sections": [
+          "demonstrative/possessive/distributive/interrogative determiners",
+          "full some/any/much/many/few/little/either/neither/each/every system",
+          "numbers and determiner ordering"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 14,
+      "title": "Pronouns and clear reference",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d14w1",
+        "d14w2",
+        "d14w3",
+        "d14w4",
+        "d14q1",
+        "d14q2",
+        "d14q3",
+        "d14q4",
+        "d14q5",
+        "d14q6",
+        "d14q7",
+        "d14q8",
+        "d14q9",
+        "d14q10",
+        "d14q11",
+        "d14q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "personal subject/object forms",
+          "who/whom/whose",
+          "reflexive uses mini-table",
+          "singular they mention",
+          "basic referential ambiguity"
+        ],
+        "underdeveloped": [
+          "inclusive singular-they evidence",
+          "collective agreement variation",
+          "discourse deixis",
+          "cataphora/anaphora",
+          "reference to clauses and possessives",
+          "dummy subjects",
+          "case in coordination/register"
+        ],
+        "absent_as_dedicated_sections": [
+          "possessive versus determinative pronouns",
+          "demonstrative/interrogative/indefinite/distributive pronoun system",
+          "pedagogical binding/control reference analysis"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 15,
+      "title": "Modifiers: put the describing words where they belong",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d15w1",
+        "d15w2",
+        "d15w3",
+        "d15w4",
+        "d15q1",
+        "d15q2",
+        "d15q3",
+        "d15q4",
+        "d15q5",
+        "d15q6",
+        "d15q7",
+        "d15q8",
+        "d15q9",
+        "d15q10",
+        "d15q11",
+        "d15q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "only placement",
+          "dangling/squinting adjuncts",
+          "basic adjective order",
+          "limited degree restrictions"
+        ],
+        "underdeveloped": [
+          "scope versus linear adjacency",
+          "semantic focus/prosody",
+          "safe meaning-preserving revision",
+          "sense-dependent gradability",
+          "passive and absolute adjuncts",
+          "relative attachment hierarchy"
+        ],
+        "absent_as_dedicated_sections": [
+          "systematic ambiguity analysis with legitimate alternatives",
+          "advanced modifier classification"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 16,
+      "title": "Prepositions and word partnerships",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d16w1",
+        "d16w2",
+        "d16w3",
+        "d16w4",
+        "d16q1",
+        "d16q2",
+        "d16q3",
+        "d16q4",
+        "d16q5",
+        "d16q6",
+        "d16q7",
+        "d16q8",
+        "d16q9",
+        "d16q10",
+        "d16q11",
+        "d16q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "prepositional to versus infinitival to",
+          "in/on/at basics",
+          "lexical collocation lists",
+          "selected phrasal verb equivalents"
+        ],
+        "underdeveloped": [
+          "semantic uses beyond time/place",
+          "regional collocational variation",
+          "preposition complement range",
+          "source/cause/purpose/means/relationship",
+          "particles versus prepositions",
+          "stranding and pied-piping"
+        ],
+        "absent_as_dedicated_sections": [
+          "phrasal/prepositional/phrasal-prepositional distinction",
+          "separability and pronoun placement",
+          "valency-based lexical pattern index"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 17,
+      "title": "Gerunds, infinitives and participles",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d17w1",
+        "d17w2",
+        "d17w3",
+        "d17w4",
+        "d17q1",
+        "d17q2",
+        "d17q3",
+        "d17q4",
+        "d17q5",
+        "d17q6",
+        "d17q7",
+        "d17q8",
+        "d17q9",
+        "d17q10",
+        "d17q11",
+        "d17q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "common -ing/to verb lists",
+          "meaning-change pairs",
+          "bare infinitives",
+          "perception constructions",
+          "basic participial adjuncts"
+        ],
+        "underdeveloped": [
+          "control and subject interpretation",
+          "passive perception infinitives",
+          "non-finite tense/aspect and voice",
+          "possessive versus accusative subjects",
+          "purpose constructions",
+          "absolute clauses",
+          "adjective versus verbal participles"
+        ],
+        "absent_as_dedicated_sections": [
+          "raising versus control diagnostics",
+          "complex non-finite complements and reduced relatives"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 18,
+      "title": "Comparison, and a mixed-precision review",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d18w1",
+        "d18w2",
+        "d18w3",
+        "d18w4",
+        "d18q1",
+        "d18q2",
+        "d18q3",
+        "d18q4",
+        "d18q5",
+        "d18q6",
+        "d18q7",
+        "d18q8",
+        "d18q9",
+        "d18q10",
+        "d18q11",
+        "d18q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "regular/irregular comparison basics",
+          "like-with-like comparison",
+          "any other comparison sets",
+          "mixed sentence editing"
+        ],
+        "underdeveloped": [
+          "comparative/superlative contextual choice",
+          "sense-dependent gradability",
+          "comparative clauses/ellipsis",
+          "quantification in comparisons",
+          "parallel change and measure phrases",
+          "semantic versus syntactic comparison defects"
+        ],
+        "absent_as_dedicated_sections": [
+          "full adjective/adverb degree and scope system",
+          "graded comprehensive cumulative assessment with subtopic reporting"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 19,
+      "title": "Conjunctions and logical connectors",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d19w1",
+        "d19w2",
+        "d19w3",
+        "d19w4",
+        "d19q1",
+        "d19q2",
+        "d19q3",
+        "d19q4",
+        "d19q5",
+        "d19q6",
+        "d19q7",
+        "d19q8",
+        "d19q9",
+        "d19q10",
+        "d19q11",
+        "d19q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 4,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "coordinator/subordinator/conjunctive-adverb distinction",
+          "basic rhetorical relations",
+          "correlative pairs",
+          "fronted not only inversion"
+        ],
+        "underdeveloped": [
+          "coordination at word/phrase/clause levels",
+          "category versus function compatibility",
+          "non-finite/subordinating patterns",
+          "punctuation style variation",
+          "semantic relation context",
+          "formal notwithstanding",
+          "optional correlative material"
+        ],
+        "absent_as_dedicated_sections": [
+          "systematic concession/qualification/manner/alternatives distinctions",
+          "robust clause-versus-preposition diagnostics with exceptions"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    },
+    {
+      "day": 20,
+      "title": "Parallel structure",
+      "reviewed_fields": [
+        "day",
+        "phase",
+        "title",
+        "goal",
+        "why",
+        "examTip",
+        "minutes",
+        "terms",
+        "rules",
+        "examples",
+        "pitfalls",
+        "warmUp",
+        "drill",
+        "corrections",
+        "transfer",
+        "checklist",
+        "recap"
+      ],
+      "reviewed_question_ids": [
+        "d20w1",
+        "d20w2",
+        "d20w3",
+        "d20w4",
+        "d20q1",
+        "d20q2",
+        "d20q3",
+        "d20q4",
+        "d20q5",
+        "d20q6",
+        "d20q7",
+        "d20q8",
+        "d20q9",
+        "d20q10",
+        "d20q11",
+        "d20q12"
+      ],
+      "question_count": 16,
+      "correction_count": 6,
+      "worked_example_count": 10,
+      "rule_block_count": 3,
+      "all_authored_fields_read": true,
+      "coverage": {
+        "existing": [
+          "stem test",
+          "list/correlative/comparison parallelism",
+          "headings and paragraph rhetoric"
+        ],
+        "underdeveloped": [
+          "grammatical versus rhetorical parallelism",
+          "mixed-category coordination",
+          "comparative clause syntax",
+          "gapping and shared material",
+          "information flow under voice changes",
+          "semantic preservation in revision"
+        ],
+        "absent_as_dedicated_sections": [
+          "structured analysis distinguishing actual ill-formedness from less balanced prose"
+        ]
+      },
+      "strengths": [
+        "Original topic-specific practice, not a generic vocabulary bank",
+        "Model answers and reasoning supplied for active corrections",
+        "Writing transfer task and recall checklist present"
+      ],
+      "review_limit": "Linguistic/manual structural review performed; not every uncomplicated rule was independently checked against a second external authority. No claim that every key has passed external peer review."
+    }
+  ]
+}

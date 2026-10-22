@@ -1,0 +1,1292 @@
+{
+  "day": 16,
+  "id": "gv5-day-16",
+  "title": "Coordination, Conjunctions and Logical Relationships",
+  "orientation": "Connecting ideas is part of grammatical meaning. A report can say that a service failed because funding stopped, although funding continued, or before funding stopped; each connector tells a different story. Today you will connect words, phrases and clauses while keeping their relationships clear. You will also separate a grammatical joining device from an adverb such as however, which comments on a relationship but needs appropriate sentence punctuation. The practical work includes rewriting notices, joining evidence to conclusions and identifying alternatives without inventing a causal claim. Review clause boundaries from Day 14 and the dependent clauses from Day 15 first if those terms are unfamiliar. Advanced sections examine shared material, unlike grammatical categories with compatible functions, correlative agreement and the difference between a precise qualification and an unsupported concession.",
+  "outcomes": [
+    "Identify the units coordinated in a sentence.",
+    "Choose a connector that expresses a stated logical relation.",
+    "Punctuate clauses with however and therefore.",
+    "Construct balanced correlative alternatives and diagnose agreement problems."
+  ],
+  "prerequisiteDays": [
+    14,
+    15
+  ],
+  "modules": [
+    {
+      "id": "gv5-d16-m01",
+      "title": "Coordination and subordination: what is connected",
+      "taxonomy": [
+        "H",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d16-c01",
+        "gv5-d16-c02"
+      ],
+      "definition": "Coordination places units alongside one another at the same structural level; subordination makes one clause dependent within a larger structure.",
+      "foundation": [
+        "Start by finding the units being joined. In tea and coffee, and joins two nouns. In unusually calm and very patient, it joins two adjective phrases. In The alarm sounded and the staff left, it joins clauses. A clause normally contains a predicate; the second clause may repeat a subject or share material with the first. Subordination is different: because the alarm sounded gives a reason inside a larger sentence. Neither arrangement is inherently more sophisticated; choose the structure that represents the intended relation."
+      ],
+      "intermediate": [
+        "Coordinators include and, or and but; traditional school lists also include for, nor, so and yet. Their distributions are not identical. And can combine many kinds of unit, while causal for is mainly a clause connector in relatively formal writing. A subordinator such as although or if introduces a dependent clause. A sentence may contain both: Although the alarm sounded, the staff waited and the manager checked the corridor. First identify the outer concession, then the coordination inside the main part."
+      ],
+      "advanced": [
+        "Shared material avoids unnecessary repetition: The librarian checked and stamped the forms shares a subject and an object across coordinated predicates. Repetition is sometimes useful for emphasis or disambiguation. Coordination does not demand that every item have the same spelling or length. Even different phrase categories can perform compatible functions: The room was quiet and without windows coordinates an adjective phrase and a prepositional phrase as predicative descriptions. The editing question is whether each item fits the surrounding construction and the intended meaning."
+      ],
+      "expert": [
+        "Grammatical frameworks differ over the membership of the conjunction category and the analysis of clause-linking so or temporal after. The course uses familiar school labels while keeping category separate from function. Brackets reveal hierarchy: [Mina checked the register] and [Omar locked the door] has two coordinated clauses; Mina [checked the register and locked the door] has coordinated predicates. These descriptions explain structure without requiring a claim that every coordinated unit is an independent sentence. A repeated subject, a finite verb and the wider context help decide the analysis."
+      ],
+      "patterns": [
+        {
+          "form": "X and Y",
+          "meaning": "Both units contribute at the same structural level."
+        },
+        {
+          "form": "although + clause, main clause",
+          "meaning": "The main assertion holds despite a contrasting circumstance."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The workshop supplies paper and ink.",
+          "analysis": "Two noun heads form the direct-object coordination."
+        },
+        {
+          "sentence": "The workshop was inexpensive but exceptionally useful.",
+          "analysis": "But coordinates two predicative adjective phrases."
+        },
+        {
+          "sentence": "Although the hall was small, the speakers arrived early and the audience stayed.",
+          "analysis": "One subordinate concession precedes two coordinated main clauses."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The hall closed because the ceiling was unsafe.",
+          "b": "The hall closed, and the ceiling was unsafe.",
+          "note": "Both grammatical: because asserts a reason; and alone does not specify that causal relation."
+        }
+      ],
+      "exceptions": [
+        "Unlike categories can coordinate when their functions are compatible: calm and in control are both predicative descriptions. Surface uniformity is a useful style preference, not an exceptionless syntax law."
+      ],
+      "mistakes": [
+        {
+          "problem": "The scheme combines training and to employ graduates.",
+          "repair": "The scheme combines training and employment for graduates.",
+          "reason": "The second unit must fit as a complement of combines; a bare to-infinitival goal does not fit this intended list."
+        },
+        {
+          "problem": "Although the road flooded. The bus continued.",
+          "repair": "Although the road flooded, the bus continued.",
+          "reason": "In this intended single concession, the dependent clause needs integration with the main assertion."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "coordination",
+          "definition": "A relation joining units at the same structural level.",
+          "example": "forms and receipts"
+        },
+        {
+          "term": "subordination",
+          "definition": "A relation in which one clause is dependent within a larger structure.",
+          "example": "We waited because the road flooded."
+        }
+      ],
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-m02",
+      "title": "Correlative patterns, agreement and balanced alternatives",
+      "taxonomy": [
+        "H",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d16-c03",
+        "gv5-d16-c04"
+      ],
+      "definition": "Correlative expressions distribute a relationship across two positions, such as both … and or either … or; their placement identifies what is being paired.",
+      "foundation": [
+        "Both the receptionist and the technician attended includes two people. Either the receptionist or the technician will attend presents alternatives. Neither attended excludes both in that context. Not only adds emphasis to an inclusion: The visit was not only useful but also inexpensive. Place the first marker before the first intended unit, then make sure that the second unit can complete the same surrounding construction. Read the whole meaning before editing, because moving either or not only can change which alternatives are being offered."
+      ],
+      "intermediate": [
+        "A subject coordinated with and normally takes plural agreement: Both the map and the timetable are useful. A single package or conventional combination can instead receive singular notional agreement: Bread and butter is all that is available. With either … or and neither … nor, mixed singular and plural subjects create variation and possible awkwardness. Agreement with the nearer subject is a common editorial solution: Either the assistant or the supervisors are attending. Recasting often gives a clearer result than treating proximity as a universal linguistic law."
+      ],
+      "advanced": [
+        "Fronted not only normally triggers subject–auxiliary inversion when it introduces a clause: Not only did the team finish early, but it also documented the process. Within a predicate no such inversion is needed: The team not only finished early but also documented the process. Also is optional in some not only … but constructions. Correlative markers do not make every imperfectly symmetrical sentence ungrammatical; what matters first is whether the coordinated units fit the same syntactic position and whether the contrast is intelligible."
+      ],
+      "expert": [
+        "Negation and scope require careful reading. Neither the manager nor the deputy signed says that each failed to sign; Not both signed excludes joint success but allows one signature. Either in an ordinary choice often suggests one alternative rather than both, but inclusive or is possible where context allows it. An instruction should say whether multiple selections are permitted. In formal editing, preserve these logical differences rather than replacing all negative or alternative expressions mechanically. Grammatical agreement, logical inclusion and stylistic balance are related questions that should be diagnosed separately."
+      ],
+      "patterns": [
+        {
+          "form": "both X and Y",
+          "meaning": "Includes both coordinated alternatives."
+        },
+        {
+          "form": "not both X and Y",
+          "meaning": "Denies their joint inclusion; it does not necessarily exclude each separately."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Both the labels and the seals are missing.",
+          "analysis": "Plural coordination takes are."
+        },
+        {
+          "sentence": "Either the supervisor or the two assistants are available.",
+          "analysis": "The nearer plural encourages are; recasting avoids mixed-number awkwardness."
+        },
+        {
+          "sentence": "Not only has the archive expanded, but its catalogue has also become searchable.",
+          "analysis": "Fronting licenses has before the subject; the second clause states an additional improvement."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Neither application was approved.",
+          "b": "Not both applications were approved.",
+          "note": "Both grammatical; the first excludes approval of either, the second allows one approval."
+        }
+      ],
+      "exceptions": [
+        "Some conventional and-coordinations describe one unit and take singular agreement. If mixed-number or-coordination sounds strained, use two clauses rather than force a contested agreement choice."
+      ],
+      "mistakes": [
+        {
+          "problem": "Not only the team did finish early, but it also checked every form.",
+          "repair": "Not only did the team finish early, but it also checked every form.",
+          "reason": "Fronted clause-level not only triggers auxiliary inversion."
+        },
+        {
+          "problem": "Both the labels and the seal is missing.",
+          "repair": "Both the labels and the seal are missing.",
+          "reason": "The intended subject includes separate items joined by and."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "correlative",
+          "definition": "An expression with related markers in two positions.",
+          "example": "either tea or coffee"
+        },
+        {
+          "term": "scope",
+          "definition": "The part of a meaning over which an expression operates.",
+          "example": "Not both passed allows one to pass."
+        }
+      ],
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-m03",
+      "title": "Logic: addition, contrast, concession and qualification",
+      "taxonomy": [
+        "H",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d16-c05",
+        "gv5-d16-c06"
+      ],
+      "definition": "A logical connector signals the relationship a writer intends between propositions; grammatical form alone does not prove that the relationship is factually justified.",
+      "foundation": [
+        "Addition presents another relevant point: The room is accessible; moreover, it has hearing assistance. Contrast presents a difference: The morning group worked online, whereas the evening group met in person. Concession goes further: Although the room was small, everyone found a seat presents the second fact as holding against an expectation raised by the first. Qualification limits a claim: The method is useful, provided that the samples are representative. Read the underlying claims first, then select a relationship that the evidence supports."
+      ],
+      "intermediate": [
+        "Because introduces a reason; so can introduce a result; so that commonly introduces purpose or result depending on context. We moved the display so that visitors could see it states an intended goal. We moved it, so visitors could see it more directly presents the resulting consequence. Before, after and then organise sequence without necessarily asserting causation. Or offers an alternative, while otherwise can introduce the consequence of rejecting an option: Submit the form today; otherwise, processing will be delayed. Each relationship needs enough context to distinguish it from plausible alternatives."
+      ],
+      "advanced": [
+        "Unless normally means if not in an exceptive condition, but replacing it mechanically can disturb scope. Do not enter unless authorised means authorisation is necessary for entry; it does not promise that every authorised person will enter. While can mark time or contrast; since can mark time or reason. A reader may need a less ambiguous connector when both readings are plausible. Moreover adds information but does not itself turn it into proof. Therefore presents an inference whose validity must be assessed independently of the grammar."
+      ],
+      "expert": [
+        "Discourse relations can be implicit: The road flooded. The delivery was late leaves a causal connection available without explicitly asserting it. Choosing because commits the writer more strongly to that explanation. Likewise a contrast is not automatically a concession; two different timetables need not violate anyone's expectation. Advanced revision should ask whose expectation a concessive clause invokes, what a qualification excludes and whether an apparent inference reverses cause and effect. These questions connect grammar to pragmatic interpretation while preserving a distinction between a well-formed sentence and a sound argument."
+      ],
+      "patterns": [
+        {
+          "form": "because + reason clause",
+          "meaning": "Presents the reason for the associated assertion."
+        },
+        {
+          "form": "so that + finite clause",
+          "meaning": "Often states an intended purpose; context can support a result reading."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "We chose the ground floor because the lift was unavailable.",
+          "analysis": "The subordinate clause supplies the stated reason."
+        },
+        {
+          "sentence": "The lift was unavailable; nevertheless, all visitors reached the exhibition.",
+          "analysis": "Nevertheless marks a result contrary to a likely expectation."
+        },
+        {
+          "sentence": "The trial is promising, although its small sample limits the conclusion.",
+          "analysis": "The concession qualifies the positive assessment rather than cancelling it."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The alarm sounded before the doors opened.",
+          "b": "The alarm sounded because the doors opened.",
+          "note": "Both grammatical: the first orders events; the second makes a causal assertion."
+        }
+      ],
+      "exceptions": [
+        "A connector can have several senses: since Monday marks a starting point, whereas since nobody objected can introduce a reason. Analyse the complement and context together."
+      ],
+      "mistakes": [
+        {
+          "problem": "The alarm sounded, therefore we should ignore it. [intended consequence: evacuate]",
+          "repair": "The alarm sounded; therefore, we should evacuate.",
+          "reason": "The original contradicts the stated practical inference; punctuation also needs a clause boundary."
+        },
+        {
+          "problem": "We installed a ramp so as visitors could enter.",
+          "repair": "We installed a ramp so that visitors could enter.",
+          "reason": "A finite clause with visitors requires so that, not the infinitival expression so as to."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "concession",
+          "definition": "A relation in which an assertion holds despite a contrary expectation.",
+          "example": "Although tired, she continued."
+        },
+        {
+          "term": "qualification",
+          "definition": "A limitation on the conditions or strength of a claim.",
+          "example": "The estimate is reliable if the records are complete."
+        }
+      ],
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-m04",
+      "title": "Connector classes and punctuation in use",
+      "taxonomy": [
+        "H",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d16-c07"
+      ],
+      "definition": "A conjunction links syntactic units; a linking adverb or discourse marker signals a relationship without necessarily supplying the grammatical clause boundary.",
+      "foundation": [
+        "Compare Although it rained, the match continued with Despite the rain, the match continued. Although introduces a finite clause; despite takes a noun phrase here. However behaves differently: It rained; however, the match continued. In this formal written pattern the semicolon separates the independent clauses, while however signals concession. A full stop is equally possible. Do not decide punctuation merely by where you pause aloud. First decide whether there are two independent clauses, a main clause plus dependent material, or a phrase within one clause."
+      ],
+      "intermediate": [
+        "The neutral pattern for two independent clauses joined by a coordinator is often a comma before and, but or so. Very short clauses may omit it, and complex clauses may justify stronger separation under an editorial style. An introductory subordinate clause usually ends with a comma. A following reason clause often needs no comma, but punctuation may distinguish supplementary reasoning or remove ambiguity. However can move inside a clause: The match, however, continued. Because cannot move in the same way while retaining the same clause structure."
+      ],
+      "advanced": [
+        "A word's traditional class can differ between constructions. Before lunch is prepositional; before we ate is traditionally subordinating. Contemporary grammars may analyse before as a preposition in both, with different complement types. This is a difference in framework, not an error in the sentence. Notwithstanding also has a less common formal conjunction use with a finite clause, alongside its prepositional use. Do not reject a construction simply because a beginner table lists only its most frequent pattern. Check the actual lexical entry and the intended register."
+      ],
+      "expert": [
+        "Discourse markers such as well, anyway and in fact organise conversation or an argument as well as local logical relations. Their presence cannot repair a run-on: The queue grew however the gate stayed shut still needs punctuation in edited prose. Conversely a sentence beginning with And or But is not automatically ungrammatical; its appropriateness depends on continuity and editorial style. A reliable diagnosis identifies the missing boundary, the connector's role and any genuine semantic inconsistency. It does not count the number of linking words and infer a fault without examining their scope."
+      ],
+      "patterns": [
+        {
+          "form": "independent clause; however, independent clause",
+          "meaning": "Two assertions plus an explicit contrast."
+        },
+        {
+          "form": "because of + noun phrase",
+          "meaning": "A reason expressed through a prepositional phrase."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The bus was late because of a diversion.",
+          "analysis": "Because of takes the noun phrase a diversion."
+        },
+        {
+          "sentence": "The bus was late because the road was closed.",
+          "analysis": "Because introduces a finite reason clause."
+        },
+        {
+          "sentence": "The report was short. It was, however, fully documented.",
+          "analysis": "A sentence boundary separates the assertions; paired commas mark medial however."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Despite the delay, the hearing continued.",
+          "b": "Although the hearing was delayed, it continued.",
+          "note": "Both grammatical; the prepositional and clausal complements have different internal structures."
+        }
+      ],
+      "exceptions": [
+        "Some punctuation choices depend on style and clause length. Sentence-initial And/But and formal conjunctive notwithstanding are legitimate; do not label them universally incorrect."
+      ],
+      "mistakes": [
+        {
+          "problem": "Despite of the delay, the hearing continued.",
+          "repair": "Despite the delay, the hearing continued.",
+          "reason": "The standard expression is despite, or alternatively in spite of."
+        },
+        {
+          "problem": "The hall filled, however the doors remained open.",
+          "repair": "The hall filled; however, the doors remained open.",
+          "reason": "However does not by itself license this comma splice in edited prose."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "conjunctive adverb",
+          "definition": "An adverb that signals a discourse relation between propositions.",
+          "example": "The road closed; consequently, we turned back."
+        },
+        {
+          "term": "discourse marker",
+          "definition": "An expression that helps organise discourse or signal a relation between contributions; it need not join clauses syntactically.",
+          "example": "However can signal contrast between two punctuated sentences."
+        }
+      ],
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d16-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In “The room was quiet and without windows”, what functions do the coordinated phrases share?",
+      "options": [
+        "Relative clauses",
+        "Predicative descriptions of the room",
+        "Direct objects of was",
+        "Two independent clauses"
+      ],
+      "answer": 1,
+      "why": "Quiet is an adjective phrase and without windows a prepositional phrase; both describe the subject predicatively. They are not objects or clauses.",
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which example coordinates two complete clauses with separate overt subjects?",
+      "options": [
+        "Mina checked the forms and Omar stamped them.",
+        "the checked and stamped forms",
+        "Mina and Omar checked the forms.",
+        "Mina checked and stamped the forms."
+      ],
+      "answer": 0,
+      "why": "In the correct sentence Mina is the subject of checked and Omar is the subject of stamped, so each coordinated clause has its own overt subject and finite predicate.",
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-q03",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Both the label and the separate seal ____ missing. Choose agreement for the two-item subject.",
+      "options": [
+        "are",
+        "has",
+        "was",
+        "is"
+      ],
+      "answer": 0,
+      "why": "Two separate singular items joined by both…and form a plural subject; are supplies the plural finite verb.",
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence denies that either of the two applications was approved?",
+      "options": [
+        "Neither application was approved.",
+        "Either application was approved.",
+        "Both applications were approved.",
+        "Not both applications were approved."
+      ],
+      "answer": 0,
+      "why": "Neither excludes approval of each application. Not both allows one approval.",
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose the standard inversion after clause-initial not only.",
+      "options": [
+        "Not only did finished the team early.",
+        "Not only the team finished did early.",
+        "Not only the team did finish early.",
+        "Not only did the team finish early."
+      ],
+      "answer": 3,
+      "why": "The auxiliary did precedes the subject, and finish remains base form.",
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-q06",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Complete the stated reason: “We postponed the trip ____ the bridge was closed.”",
+      "options": [
+        "because of",
+        "because",
+        "despite",
+        "during"
+      ],
+      "answer": 1,
+      "why": "The following finite clause needs because for the requested reason; the other options do not take that complement in this pattern.",
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which connector explicitly presents a contrary-to-expectation relation?",
+      "options": [
+        "Before the room was small, everyone found a seat.",
+        "If the room was small, everyone found a seat.",
+        "Although the room was small, everyone found a seat.",
+        "Because the room was small, everyone found a seat."
+      ],
+      "answer": 2,
+      "why": "Although marks concession. Because asserts a reason, before time, and if a condition.",
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-q08",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Express purpose with the finite clause shown: “We lowered the screen ____ children could see it.”",
+      "options": [
+        "in order to",
+        "so that",
+        "because of",
+        "so as to"
+      ],
+      "answer": 1,
+      "why": "So that introduces the stated finite purpose clause. The infinitival expressions require a base verb rather than children could.",
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-q09",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Identify the fault in edited prose: “The queue grew, however the gate stayed shut.”",
+      "options": [
+        "No error",
+        "However needs were after it.",
+        "Queue must be plural.",
+        "The independent clauses need an appropriate boundary."
+      ],
+      "answer": 3,
+      "why": "The comma alone does not connect independent clauses with however. A full stop or semicolon repairs the boundary.",
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-q10",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Assess: “The report was brief; however, it addressed every objection.”",
+      "options": [
+        "however must be although",
+        "every must be all",
+        "No error",
+        "brief must be briefly"
+      ],
+      "answer": 2,
+      "why": "The semicolon separates independent clauses and however marks the contrast. Brief is a predicative adjective and every selects singular objection.",
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-r11",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify the units joined in “fresh paper and blue ink”.",
+      "model": "Two noun phrases are coordinated; paper and ink are their heads.",
+      "rubric": [
+        "Identify two noun-phrase units.",
+        "Name paper and ink as heads."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r12",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In “Because the printer failed, we used handwritten labels”, identify the dependent clause and its function.",
+      "model": "Because the printer failed is a reason adjunct clause.",
+      "rubric": [
+        "Include the entire because-clause.",
+        "Explain that it gives a reason for using labels."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r13",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine “The register was checked. The register was stamped.” with one shared subject.",
+      "model": "The register was checked and stamped.",
+      "rubric": [
+        "Retain both passive predicates.",
+        "Use one subject without changing their order of occurrence claims."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r14",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Bracket “Leena checked the files and locked the cabinet” to show the coordinated predicates.",
+      "model": "Leena [[checked the files] and [locked the cabinet]].",
+      "rubric": [
+        "Place both predicates under the shared subject.",
+        "Keep each object with its verb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r15",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Order these units, using each once, and add suitable punctuation: not only / the museum / expand / did / but / it also / extended / its hours.",
+      "model": "Not only did the museum expand, but it also extended its hours.",
+      "rubric": [
+        "Use did before the subject.",
+        "Use expand after did.",
+        "Supply the paired additive clause."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “Neither candidate signed” versus “Not both candidates signed”.",
+      "model": "Neither excludes both signatures; not both excludes their joint signing but permits exactly one.",
+      "rubric": [
+        "State the stronger exclusion of neither.",
+        "Allow one signature under not both."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r17",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why might an editor rewrite “Either the officer or the assistants are attending”? Supply a recast.",
+      "model": "Mixed subject number can sound awkward; Either the officer is attending or the assistants are.",
+      "rubric": [
+        "Identify mixed singular/plural alternatives.",
+        "Preserve the choice and number in the recast."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r18",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Locate both correlative markers and their coordinated phrases: “The grant covers not only tuition but also travel costs.”",
+      "model": "not only… but also pairs tuition with travel costs, both direct-object noun phrases within the complement of covers.",
+      "rubric": [
+        "Name both markers.",
+        "Identify both paired noun phrases."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r19",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare “We waited until the rain stopped” and “We waited because the rain stopped”.",
+      "model": "Until supplies an endpoint for waiting; because says the stopping caused the waiting.",
+      "rubric": [
+        "Distinguish time endpoint from reason.",
+        "Do not claim the forms are equivalent."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-r20",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Join these facts as an explicit concession: “The road was flooded. The clinic stayed open.”",
+      "model": "Although the road was flooded, the clinic stayed open.",
+      "rubric": [
+        "Use a concessive connector.",
+        "Retain both facts and correct clause boundary."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-r21",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "A survey found an association between commuting time and stress. Why might “therefore commuting causes stress” overstate it?",
+      "model": "Therefore presents a causal/inferential conclusion the association alone does not establish. The grammar is well formed, but the argument needs more evidence.",
+      "rubric": [
+        "Separate grammatical form from evidential warrant.",
+        "Explain the causal overclaim."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-r22",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use because or so that: “We moved the display ____ visitors could read it; we moved it ____ the old location was dark.”",
+      "model": "so that; because.",
+      "rubric": [
+        "Identify intended purpose in the first clause.",
+        "Identify the stated reason in the second."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-r23",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit clause boundaries: “The bus was full, therefore we waited. Although the next bus was smaller. We boarded it.”",
+      "model": "The bus was full; therefore, we waited. Although the next bus was smaller, we boarded it.",
+      "rubric": [
+        "Repair the comma splice.",
+        "Attach the concessive fragment to its main clause."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-r24",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare “before lunch” and “before we ate” using traditional course terminology.",
+      "model": "The first is a prepositional phrase with a noun-phrase complement; the second is a subordinate clause introduced by before.",
+      "rubric": [
+        "Identify the noun-phrase versus finite-clause complement.",
+        "Acknowledge that frameworks may label before differently."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-r25",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Split “The room was dark; nevertheless, the projector worked” into two sentences.",
+      "model": "The room was dark. Nevertheless, the projector worked.",
+      "rubric": [
+        "Replace semicolon with full stop.",
+        "Retain the concessive relation and capitalisation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-r26",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why “But the entrance remained open” need not be ungrammatical at the start of a sentence.",
+      "model": "But may connect this assertion with previous discourse; sentence-initial placement is a style/context question, not an automatic grammar error.",
+      "rubric": [
+        "Identify discourse continuity.",
+        "Avoid inventing a universal ban."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-r27",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite with not only fronted: “The pilot reduced costs and also shortened waiting times.”",
+      "model": "Not only did the pilot reduce costs, but it also shortened waiting times.",
+      "rubric": [
+        "Use auxiliary inversion.",
+        "Preserve both improvements."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-r28",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a two-sentence recommendation containing a stated limitation introduced by provided that.",
+      "model": "Extend the opening hours. This should help visitors, provided that enough staff are available.",
+      "rubric": [
+        "State a recommendation.",
+        "Make the condition limit the benefit or action clearly."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d16-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: Despite of the rain, the archive opened.",
+      "model": "Despite the rain, the archive opened.",
+      "rubric": [
+        "Delete of after despite; in spite of is a valid alternative.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: The road closed, therefore the bus turned back.",
+      "model": "The road closed; therefore, the bus turned back.",
+      "rubric": [
+        "Give the independent clauses a full stop or semicolon.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: Not only the guide did explain the route, but she also drew a map.",
+      "model": "Not only did the guide explain the route, but she also drew a map.",
+      "rubric": [
+        "Invert did and the guide after fronted not only.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: Both the receipt and the separate permit is required.",
+      "model": "Both the receipt and the separate permit are required.",
+      "rubric": [
+        "Use plural agreement for the two separate required items.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d16-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: We added captions in order that to help readers.",
+      "model": "We added captions in order to help readers.",
+      "rubric": [
+        "Use infinitival in order to + base verb; alternatively in order that readers could follow.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: Although the room was crowded, the workshop continued.",
+      "model": "No change.",
+      "rubric": [
+        "The finite concessive clause is correctly attached and punctuated.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-CLAUSE"
+      ]
+    },
+    {
+      "id": "gv5-d16-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: The report was useful. But it arrived too late.",
+      "model": "No change.",
+      "rubric": [
+        "Sentence-initial But can connect a contrast across sentence boundaries.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "C-PUNCT"
+      ]
+    },
+    {
+      "id": "gv5-d16-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct if needed; preserve the stated meaning: The sign was moved because of visitors could not see it.",
+      "model": "The sign was moved because visitors could not see it.",
+      "rubric": [
+        "A finite reason clause follows because, not because of.",
+        "Accept another grammatical repair with the same logical relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d16-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite “The bus was delayed because the road was blocked” using because of.",
+      "model": "The bus was delayed because of the blockage of the road.",
+      "rubric": [
+        "Use a noun phrase after because of.",
+        "Preserve road blockage as the reason."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d16-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite “The caretaker did not sign, and the assistant did not sign” with neither…nor.",
+      "model": "Neither the caretaker nor the assistant signed.",
+      "rubric": [
+        "Retain exclusion of both signers.",
+        "Avoid a second negative that reverses the meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "E-NOTONLY",
+        "C-AGREE"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d16-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 90–120-word notice recommending a change to a library service. Include one reason, one concession, one condition and one purpose. Underline each connector and explain its relation.",
+    "model": "We recommend keeping the reading room open later because many students work during the day. Although the current room is small, a booking system could prevent overcrowding and make the available seats easier to manage. The change should proceed provided that an additional staff member is available. We would publish the schedule online so that readers could plan their visits. The booking records would be reviewed after four weeks; however, an attendance increase alone would not prove that the new hours improve learning. The library should also collect readers’ comments before deciding whether to continue the trial.\n\nAnalysis: Underline because (reason), although (concession), provided that (condition) and so that (purpose). Each introduces the relationship stated here, rather than merely decorating the notice.",
+    "rubric": [
+      "Supply each of the four requested relations.",
+      "Punctuate independent and dependent clauses appropriately.",
+      "Keep qualifications and claims proportionate to evidence."
+    ],
+    "alternatives": [
+      "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+    ],
+    "conceptId": "gv5-d16-m03",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-CONJ"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d16-rec01",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 14: identify the finite verbs in “Although the hall was small, everyone found a seat”.",
+      "model": "was; found.",
+      "rubric": [
+        "Identify one finite verb in each clause.",
+        "Do not count although as a verb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d16-rec02",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 15: explain the difference between “because it rained” and “because of the rain”.",
+      "model": "The former contains a finite reason clause; the latter a prepositional reason phrase with a noun-phrase complement.",
+      "rubric": [
+        "Identify both complement types.",
+        "Retain the common reason meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d16-rec03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall Day 10: “Both the forms and the separate letter was missing.”",
+      "model": "Both the forms and the separate letter were missing.",
+      "rubric": [
+        "Treat the joined separate items as plural.",
+        "Keep the past tense."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d10-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I identify the units a connector joins.",
+    "I distinguish concession from simple contrast and cause from sequence.",
+    "I preserve not both/neither scope.",
+    "I punctuate however without treating it as a coordinator.",
+    "I can give a legitimate alternative when style permits more than one form."
+  ],
+  "sources": [
+    {
+      "id": "C-AGREE",
+      "title": "Subject verb agreement",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-CLAUSE",
+      "title": "Clauses and sentences",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-and-sentences",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-CONJ",
+      "title": "Conjunctions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-PUNCT",
+      "title": "Punctuation",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/punctuation",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "E-NOTONLY",
+      "title": "Not only … but also",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/not-only-but-also",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    }
+  ],
+  "editorialNotes": []
+}

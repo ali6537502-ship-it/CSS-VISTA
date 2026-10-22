@@ -1,0 +1,1407 @@
+{
+  "day": 11,
+  "id": "gv5-day-11",
+  "title": "Adjectives, Adverbs, Degree and Comparison",
+  "orientation": "An adjective helps us identify or describe something; an adverb can tell us how an event happens, how strongly a quality applies, or how a whole statement should be understood. These are useful starting points, but they do not explain every construction. A noun can modify another noun, and some adjectives occur after a linking verb rather than beside a noun. This lesson develops the structural tests that make those distinctions clearer. You will compare descriptions, place modifiers where their intended scope is recoverable, and distinguish genuinely ill-formed word choices from grammatical alternatives with different meanings. In editing a workplace report, these skills help separate what was measured from what was merely suggested. Work through ordinary descriptions first, then open the extension on comparison clauses and contextual gradability. The aim is precise expression, not adding longer words or more modifiers.",
+  "outcomes": [
+    "Distinguish attributive, predicative and postpositive adjective uses.",
+    "Form and interpret comparisons without double marking or category mismatches.",
+    "Choose adjective/adverb forms according to the actual construction.",
+    "Explain how context and placement determine an adverb's scope.",
+    "Recognise sense-dependent gradability and legitimate variation."
+  ],
+  "prerequisiteDays": [
+    1,
+    5,
+    10
+  ],
+  "modules": [
+    {
+      "id": "gv5-d11-m01",
+      "title": "Adjective classes, positions and ordered description",
+      "taxonomy": [
+        "F",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-d11-c01",
+        "gv5-d11-c02"
+      ],
+      "definition": "An adjective is a word class with characteristic modifying and predicative uses; no single meaning or suffix identifies every member.",
+      "foundation": [
+        "Start with a small contrast: a quiet room and the room is quiet. In the first, quiet is an attributive modifier inside a noun phrase. In the second, it is a predicative complement after a linking verb. Both describe the room, but they occupy different structures. An adjective phrase may contain only its head adjective or additional words: very quiet, unusually quiet for this building. A noun used before another noun remains a noun in many modern analyses: stone in a stone wall names material but need not become an adjective merely because it modifies wall."
+      ],
+      "intermediate": [
+        "Adjectives express many kinds of meaning: evaluative excellent, descriptive narrow, relational medical and participial exhausted or convincing. Participial adjectives resemble verb participles; the surrounding construction helps identify their use. The exhausted nurse needed rest describes a state, while the long shift had exhausted the nurse describes an event with a verbal object. Attributive adjective order reflects meaning: an attractive small wooden desk is neutral, with opinion before size before material. This is a preference shaped by meaning and grouping, not a mechanical requirement to fill nine slots before every noun."
+      ],
+      "advanced": [
+        "Some adjectives favour particular positions. Asleep normally follows a linking verb: the child is asleep, rather than an asleep child. Mere normally precedes its noun: a mere suggestion. Available can occur before or after the noun with small differences of information structure: available rooms and the rooms available tonight. Complements also affect placement: a room suitable for interviews is more natural than a suitable for interviews room. Adjectives ending in -ed often describe the affected experiencer, and -ing forms often describe a cause, but bored/boring is a lexical pattern to learn rather than a universal translation rule."
+      ],
+      "expert": [
+        "Postpositive means positioned after the head noun within its phrase, not necessarily a separate clause complement. Something useful has postpositive useful; the proposal is useful has a predicative complement. Coordination and adjective grouping affect punctuation: a clear, practical explanation permits two independent evaluations, whereas a dark green folder contains a colour unit. Order can change deliberately when a writer contrasts wooden rather than metal or old rather than new. Relational adjectives may acquire evaluative readings: a very political decision concerns degree of political motivation, although the same adjective can classify a subject without degree. Analyse the actual sense and structure together."
+      ],
+      "patterns": [
+        {
+          "form": "determiner + adjective phrase + noun",
+          "meaning": "A common attributive pattern: an unusually quiet room."
+        },
+        {
+          "form": "subject + linking verb + adjective phrase",
+          "meaning": "A predicative description: the room became quiet."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The soup is hot.",
+          "analysis": "Hot is an adjective functioning as subject complement, not an object."
+        },
+        {
+          "sentence": "They reserved a small circular table.",
+          "analysis": "Size precedes shape in a neutral description."
+        },
+        {
+          "sentence": "The documents available after the hearing included a revised timetable.",
+          "analysis": "Available after the hearing postmodifies documents within the subject noun phrase."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The students were bored.",
+          "b": "The lecture was boring.",
+          "note": "Both are grammatical: bored describes the affected students; boring characterises what causes boredom."
+        }
+      ],
+      "exceptions": [
+        "Position is lexical: asleep is normally predicative, while mere is normally attributive.",
+        "An adjective's figurative or evaluative sense may be gradable even when its classifying sense is not."
+      ],
+      "mistakes": [
+        {
+          "problem": "an asleep passenger",
+          "repair": "a sleeping passenger / a passenger who is asleep",
+          "reason": "Asleep normally does not occur attributively before a noun."
+        },
+        {
+          "problem": "The audience was very boring by the lecture.",
+          "repair": "The audience was very bored by the lecture.",
+          "reason": "The intended affected-experiencer reading needs bored; boring would describe an audience that caused boredom."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "attributive",
+          "definition": "Modifying a noun from within its noun phrase.",
+          "example": "a careful editor"
+        },
+        {
+          "term": "predicative complement",
+          "definition": "A complement that characterises a subject or object.",
+          "example": "The editor seems careful."
+        }
+      ],
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-m02",
+      "title": "Degree, comparison and sense-dependent gradability",
+      "taxonomy": [
+        "F",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-d11-c03",
+        "gv5-d11-c04",
+        "gv5-d11-c05",
+        "gv5-d11-c09"
+      ],
+      "definition": "Degree constructions locate a quality on a scale or compare it with a contextual standard; the scale depends on the adjective's sense.",
+      "foundation": [
+        "A gradable adjective can describe different amounts of a quality: fairly warm, very warm, warmer. A comparative relates two values or groups; a superlative identifies an extreme within a comparison set. Form is partly lexical. Short adjectives commonly take -er and -est, with spelling adjustments such as large/larger and happy/happier. Many longer adjectives use more and most. Good/better/best and bad/worse/worst are irregular. Do not add more to an already comparative form for an ordinary comparison: more colder duplicates the degree marking. Check a dictionary when a two-syllable adjective allows competing forms."
+      ],
+      "intermediate": [
+        "Comparisons require a recoverable standard: this route is shorter than the coastal route. As ... as expresses equality against a standard; not as ... as denies that equality. A comparative clause may be reduced because repeated material is understood: the office is quieter than it was yesterday. When comparing quantities associated with different places, make the intended objects clear: the district's budget is smaller than the city's, rather than a budget being smaller than a city. A clause can itself supply an amount: our revenue is less than what the branch collected. Matching surface word classes is not a universal requirement."
+      ],
+      "advanced": [
+        "Intensifiers increase a degree, while downtoners reduce it: extremely helpful, rather difficult, slightly cheaper. Their compatibility differs: much cheaper, not normally very cheaper; absolutely impossible, rather than an ordinary scale reading of very impossible. Some adjectives have an endpoint meaning, such as complete meaning having all parts, but a related sense may allow comparison: a more complete account can mean one covering more information. Unique meaning the only example of its kind resists degree logically; unique meaning unusual can be graded in established usage. In precise formal work, choose a wording that makes the intended sense explicit."
+      ],
+      "expert": [
+        "Comparison involves grammar and interpretation. One of the better applications selects from a relatively strong group; one of the best applications makes a stronger ranking claim. Neither pattern requires the other. The better of two is the traditional formal default, while the best of two is common in informal standard usage. Comparative complements may be phrases or clauses, and than me is an ordinary alternative to the explicit than I am when meaning permits it. A sentence such as Kim likes Noor more than Ali is ambiguous between people liked and people doing the liking; repeating a verb or object resolves the comparison rather than merely changing a pronoun form."
+      ],
+      "patterns": [
+        {
+          "form": "more/less + adjective + than + standard",
+          "meaning": "Compare a quality using a recoverable standard."
+        },
+        {
+          "form": "as + adjective + as + standard",
+          "meaning": "Express equality, with not as ... as expressing a lower degree."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "This path is narrower than the track beside the canal.",
+          "analysis": "Narrower marks one comparison; than introduces its standard."
+        },
+        {
+          "sentence": "Her explanation was much clearer than mine.",
+          "analysis": "Much modifies a comparative; mine stands for my explanation."
+        },
+        {
+          "sentence": "The revised estimate is higher than we expected it to be.",
+          "analysis": "The standard is supplied by a finite comparative clause with understood degree."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "one of the better answers",
+          "b": "one of the best answers",
+          "note": "Both grammatical: the second makes the stronger superlative claim."
+        }
+      ],
+      "exceptions": [
+        "Formal prose often prefers the better of two; informal standard usage also has the best of two.",
+        "Gradability belongs to a sense in context. A more complete account need not claim that a fully complete object becomes more than complete."
+      ],
+      "mistakes": [
+        {
+          "problem": "This version is more clearer.",
+          "repair": "This version is clearer.",
+          "reason": "Ordinary comparison takes one comparative marker."
+        },
+        {
+          "problem": "The cost of the plan is lower than the other town.",
+          "repair": "The cost of the plan is lower than that of the other town.",
+          "reason": "The intended comparison is cost with cost, not cost with a town."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "downtoner",
+          "definition": "A modifier that lowers the degree asserted.",
+          "example": "slightly warmer"
+        },
+        {
+          "term": "comparison set",
+          "definition": "The contextual group within which a superlative is assessed.",
+          "example": "the cheapest of these three tickets"
+        }
+      ],
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-m03",
+      "title": "Adverb forms, phrases, placement and local scope",
+      "taxonomy": [
+        "F",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-d11-c06",
+        "gv5-d11-c07"
+      ],
+      "definition": "An adverb phrase is headed by an adverb; it may modify an event, an adjective, another adverb, or a larger unit, depending on its use.",
+      "foundation": [
+        "Many manner adverbs have an adjective plus -ly form: careful becomes carefully. The ending is a useful clue, not a definition. Fast, hard and late can be adverbs without -ly; friendly and costly are commonly adjectives. Ask what construction the word participates in. She spoke calmly describes the speaking, whereas she seemed calm characterises the subject through a linking verb. A linking verb can also take a noun phrase or other complement, so this contrast should not become a claim that every word after be must be an adjective. The whole clause determines the relation."
+      ],
+      "intermediate": [
+        "Adverbs can express manner, place, time, frequency and degree, among other meanings. An adverb phrase may contain its own modifier: very slowly, quite unexpectedly. Adverbials are functions, not a single word class: at noon is a prepositional phrase functioning as a time adjunct, while yesterday can do similar work as an adverb. Neutral frequency adverbs often precede a lexical verb, follow main-verb be, or follow the first auxiliary: she usually walks; she is usually early; she has usually arrived by nine. These are common placements, not the only grammatical possibilities in every context."
+      ],
+      "advanced": [
+        "Some related forms have separate meanings. Hard means with effort or force, but hardly means almost not. Late concerns a time later than expected; lately means recently. Near concerns closeness; nearly means almost. Well commonly describes successful performance, while good is an adjective; well can also be a predicative adjective meaning healthy. Placement may change interpretation or information focus. They deliberately did not reply describes a deliberate decision not to reply; they did not deliberately reply can deny intention while leaving open whether a reply occurred. Do not diagnose scope from the nearest word alone."
+      ],
+      "expert": [
+        "Distinguish an adverb's lexical category from its clause-level function and semantic scope. An adverb can modify a verb phrase while taking a broader proposition as its interpretive domain. Fronting, parenthetical position and stress create marked readings: repeatedly she had asked for a meeting foregrounds recurrence, while she had repeatedly asked is more neutral. A long object may make an intervening manner adverb acceptable even when a short-object version sounds awkward. Analyse acceptability in context rather than replacing every unconventional position automatically. When revising, state the intended frequency, manner or scope first, then choose an order that expresses it clearly."
+      ],
+      "patterns": [
+        {
+          "form": "subject + frequency adverb + lexical verb",
+          "meaning": "A common neutral position: she often travels."
+        },
+        {
+          "form": "subject + first auxiliary + frequency adverb + remaining verb phrase",
+          "meaning": "A common neutral position: she has often travelled."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The train arrived late.",
+          "analysis": "Late is an adverb here; no -ly ending is needed."
+        },
+        {
+          "sentence": "The train has rarely arrived before sunrise.",
+          "analysis": "Rarely follows the first auxiliary and expresses frequency."
+        },
+        {
+          "sentence": "They did not deliberately omit the appendix.",
+          "analysis": "Negation can deny deliberate intention; it does not by itself prove whether the omission occurred."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The apprentice worked hard.",
+          "b": "The apprentice hardly worked.",
+          "note": "Both grammatical, with nearly opposite implications about effort or activity."
+        }
+      ],
+      "exceptions": [
+        "Well can be an adjective meaning healthy: I feel well today.",
+        "Frequency and manner adverbs have neutral positions, but emphasis and constituent length permit alternatives."
+      ],
+      "mistakes": [
+        {
+          "problem": "She answered the question confident.",
+          "repair": "She answered the question confidently.",
+          "reason": "For the intended manner of answering, the ordinary form is confidently."
+        },
+        {
+          "problem": "He worked hardly all afternoon, completing every repair.",
+          "repair": "He worked hard all afternoon, completing every repair.",
+          "reason": "Hardly means almost not and conflicts with the intended effort reading."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "adverbial",
+          "definition": "A grammatical function expressing a circumstance or relation; several phrase types can fill it.",
+          "example": "at dawn in We left at dawn"
+        },
+        {
+          "term": "scope",
+          "definition": "The material over which a modifier or operator is interpreted.",
+          "example": "not deliberately versus deliberately not"
+        }
+      ],
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-m04",
+      "title": "Focus, sentence adverbials and responsible interpretation",
+      "taxonomy": [
+        "F",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-d11-c08"
+      ],
+      "definition": "A focusing adverb highlights alternatives; a sentence adverbial comments on a whole proposition, its likelihood, or the speaker's relation to it.",
+      "foundation": [
+        "Only, even and also guide a listener toward relevant alternatives. Only Leena signed says that no other relevant person signed. Leena signed only the form contrasts that object with other things she might have signed. Even Leena signed presents her participation as surprising against an expectation. These meanings depend on a context: surprising to whom, and compared with which alternatives? When a question offers two plausible positions without supplying that context, more than one answer may be grammatical. Your task as a writer is to make the intended comparison easy to recover, not to treat every other reading as impossible."
+      ],
+      "intermediate": [
+        "Only often occupies normal mid-position even when its focus is later: Leena only signed two forms can mean that two was the limit. Moving it nearer the focus can improve precision in an ambiguous written context, but adjacency is not a universal syntax rule. Also can add a new action by the same person, another participant in the same action, or another related fact. A preceding sentence usually determines which reading is relevant. In deliberate editing, write the intended alternative in a margin note, then check whether a reader has enough context to find that interpretation."
+      ],
+      "advanced": [
+        "Sentence adverbials express stance or organise discourse: probably, fortunately, frankly and therefore do different jobs. Probably qualifies certainty; fortunately evaluates an event; frankly comments on the manner of speaking; therefore presents a conclusion. Compare Fortunately, the files survived with The files were stored fortunately, where end placement makes a manner interpretation awkward. Parenthetical commas often help separate a comment from the proposition, but punctuation follows structure and intended reading. Conjunctive adverbs do not independently license joining two full clauses by a comma: the server failed; therefore, the session ended is a standard written pattern."
+      ],
+      "expert": [
+        "Scope can interact with negation, quantification and presupposed alternatives. Not all applicants replied denies universal response; all applicants did not reply may be interpreted in more than one way, so an explicit none or some did not is clearer. Even presupposes a scale of expectation in many uses but does not tell us a measurable probability. An evaluative adverb can comment on an entire event without describing how an agent acted: surprisingly, the silent room was useful does not mean anyone acted surprisingly. Advanced analysis should identify these distinctions without pretending that every conversational inference is encoded as a rigid grammatical rule."
+      ],
+      "patterns": [
+        {
+          "form": "only + focused subject + predicate",
+          "meaning": "Exclude relevant alternative subjects."
+        },
+        {
+          "form": "sentence adverbial, + clause",
+          "meaning": "A frequent pattern for an explicit comment on the proposition."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Only Farah checked the totals.",
+          "analysis": "The exclusion concerns other relevant checkers."
+        },
+        {
+          "sentence": "Farah also checked the totals after verifying the dates.",
+          "analysis": "The context makes also add a second checking activity."
+        },
+        {
+          "sentence": "The totals were probably wrong; nevertheless, the estimate remained useful for planning.",
+          "analysis": "Probably qualifies confidence in the first claim; nevertheless marks concession between claims."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Only Hana emailed the chart.",
+          "b": "Hana emailed only the chart.",
+          "note": "Different grammatical focuses: sender versus object; neither is an error."
+        }
+      ],
+      "exceptions": [
+        "Mid-position only can focus later material. Context and stress help identify its scope.",
+        "A sentence adverbial may be mobile, but mobility does not make every punctuation pattern equivalent."
+      ],
+      "mistakes": [
+        {
+          "problem": "The signal failed, therefore the recording stopped.",
+          "repair": "The signal failed; therefore, the recording stopped.",
+          "reason": "In standard edited prose the two independent clauses need a licensed boundary."
+        },
+        {
+          "problem": "He is very taller than the others.",
+          "repair": "He is much taller than the others.",
+          "reason": "Much, rather than ordinary degree very, modifies the comparative taller."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "focusing adverb",
+          "definition": "An adverb relating a highlighted element to contextual alternatives.",
+          "example": "Only the treasurer replied."
+        },
+        {
+          "term": "stance adverbial",
+          "definition": "An expression commenting on certainty, evaluation or the speaker's perspective.",
+          "example": "Probably, the journey will take an hour."
+        }
+      ],
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d11-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which analysis of “The room became quiet” is correct?",
+      "options": [
+        "quiet is an adverb modifying became",
+        "quiet is the finite verb",
+        "quiet is an object noun",
+        "quiet is an adjective functioning as subject complement"
+      ],
+      "answer": 3,
+      "why": "Became is a linking verb here. Quiet characterises room; it is not an object, adverb or finite verb.",
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-q02",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Choose the ordinary adjective for the affected travellers: The travellers were ____ by the long delay.",
+      "options": [
+        "exhausted",
+        "exhaustedly",
+        "exhaust",
+        "exhausting"
+      ],
+      "answer": 0,
+      "why": "The travellers experienced exhaustion, so exhausted is the intended participial adjective. Exhausting would characterise something causing exhaustion.",
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which form makes an ordinary comparison with one comparative marker?",
+      "options": [
+        "more colder",
+        "coldest than",
+        "colder than",
+        "most colder"
+      ],
+      "answer": 2,
+      "why": "Colder is comparative and takes than for its standard. The alternatives duplicate degree markers or use a superlative where the stated comparison requires a comparative.",
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-q04",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "The revised instructions are ____ clearer than the first draft.",
+      "options": [
+        "most",
+        "more",
+        "much",
+        "very"
+      ],
+      "answer": 2,
+      "why": "Much can modify a comparative. Very clearer is not the ordinary degree pattern; most/more duplicate comparison already marked in clearer.",
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement accurately explains “one of the better submissions”?",
+      "options": [
+        "It identifies the single best submission.",
+        "It places a submission within a relatively strong group.",
+        "It compares a submission with itself.",
+        "It is always ungrammatical without best."
+      ],
+      "answer": 1,
+      "why": "Better is a legitimate comparative in this expression. It does not force the stronger claim made by best.",
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-q06",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "For the intended meaning “with great effort”, choose: The technician worked ____ all afternoon.",
+      "options": [
+        "hardly",
+        "hard",
+        "hardness",
+        "hardly ever"
+      ],
+      "answer": 1,
+      "why": "Hard describes effort. Hardly and hardly ever indicate little activity or low frequency and do not express the stated meaning.",
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence uses an adverb to express the manner of replying?",
+      "options": [
+        "The clerk replied politely.",
+        "The clerk seemed polite.",
+        "It was a polite reply.",
+        "The reply was polite."
+      ],
+      "answer": 0,
+      "why": "Politely modifies the replying event. Polite is an adjective in the other options.",
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which interpretation follows from “They deliberately did not answer”?",
+      "options": [
+        "They answered accidentally.",
+        "They certainly answered politely.",
+        "Their answer was delayed by weather.",
+        "They intended to withhold an answer."
+      ],
+      "answer": 3,
+      "why": "Deliberately scopes over not answering, presenting the withholding as intentional. The other interpretations are not supplied by the sentence.",
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence explicitly excludes all other relevant senders?",
+      "options": [
+        "Maya also sent the map.",
+        "Only Maya sent the map.",
+        "Maya sent even the map.",
+        "Maya sent only the map."
+      ],
+      "answer": 1,
+      "why": "Only directly focuses the subject Maya here. The other options concern added or restricted objects rather than exclusive sender identity.",
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-q10",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "In standard edited prose, identify the faulty segment or choose No error: (A) The figures were incomplete; (B) nevertheless, (C) the report was useful.",
+      "options": [
+        "No error",
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": 0,
+      "why": "The semicolon separates independent clauses; nevertheless marks concession and the comma is appropriate. The sentence needs no correction.",
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-r11",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify quiet in “a quiet office” and in “the office is quiet”, giving both word class and function.",
+      "model": "Quiet is an adjective in both. It is an attributive modifier in the first noun phrase and a subject complement in the second clause.",
+      "rubric": [
+        "Keep adjective as the word class in both.",
+        "Distinguish modifier from subject-complement function."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-r12",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Arrange these words into a neutral noun phrase, keeping a first: a / wooden / small / desk.",
+      "model": "a small wooden desk",
+      "rubric": [
+        "Use a singular noun head desk.",
+        "Place size before material for the neutral reading."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-r13",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the difference: “The residents were alarmed” and “The report was alarming”.",
+      "model": "Alarmed describes the affected residents; alarming characterises a report that causes alarm.",
+      "rubric": [
+        "Identify the experiencer and the cause.",
+        "Do not label either construction an error."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-r14",
+      "type": "response",
+      "kind": "function",
+      "prompt": "In “the rooms available after six”, identify the head and the postmodifier.",
+      "model": "Rooms is the noun head; available after six is an adjective phrase postmodifying it.",
+      "rubric": [
+        "Locate rooms as head.",
+        "Include after six within the adjective phrase."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-r15",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Supply the ordinary comparative and superlative: good → ____ → ____; bad → ____ → ____.",
+      "model": "better; best; worse; worst",
+      "rubric": [
+        "Use the irregular forms without more/most.",
+        "Distinguish comparative from superlative."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-r16",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite to compare like with like: “Our library’s opening hours are longer than the neighbouring town.”",
+      "model": "Our library’s opening hours are longer than those of the neighbouring town’s library.",
+      "rubric": [
+        "Compare opening hours with opening hours.",
+        "Keep the original direction of comparison."
+      ],
+      "alternatives": [
+        "Our library opens for longer than the library in the neighbouring town."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-r17",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why “a more complete account” can be acceptable even though complete can describe an endpoint.",
+      "model": "Complete can mean comprehensive in its coverage, so one account can include more relevant information than another. The comparison does not require a fully finished object to become more than finished.",
+      "rubric": [
+        "Identify the contextual comprehensive sense.",
+        "Distinguish it from the all-parts-present endpoint sense."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-r18",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Give two explicit versions of “Sam likes Iman more than Noor”, one for each main reading.",
+      "model": "Sam likes Iman more than Sam likes Noor. Sam likes Iman more than Noor likes Iman.",
+      "rubric": [
+        "Preserve Sam as the first liker.",
+        "Make the object comparison and subject comparison explicit."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-r19",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Write an equality comparison using efficient and the standard “the previous system”.",
+      "model": "The new system is as efficient as the previous system.",
+      "rubric": [
+        "Use as + adjective + as.",
+        "Supply a complete clause and clear comparison standard."
+      ],
+      "alternatives": [
+        "The previous system is as efficient as the new system. A different positive as…as sentence is valid if it expresses the requested equality."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-r20",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Identify the phrase class and function of “at dawn” in “We left at dawn”.",
+      "model": "At dawn is a prepositional phrase functioning as a time adverbial or adjunct.",
+      "rubric": [
+        "Distinguish phrase class from function.",
+        "Identify time as its circumstantial meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-r21",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain “She arrived late” versus “She has arrived early lately”.",
+      "model": "Late means later than expected for an arrival. Lately means recently and locates a pattern of early arrivals in a recent period.",
+      "rubric": [
+        "Give the distinct time meanings.",
+        "Do not treat lately as the manner form of late."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-r22",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Use the neutral order: has / often / she / travelled / alone.",
+      "model": "She has often travelled alone.",
+      "rubric": [
+        "Place has after the subject.",
+        "Use the neutral frequency position after the first auxiliary."
+      ],
+      "alternatives": [
+        "She has travelled alone often. (Possible with end-focused frequency.)"
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-r23",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain the possible contrast between “They deliberately did not reply” and “They did not deliberately reply”.",
+      "model": "The first presents withholding a reply as intentional. The second denies deliberate replying and can leave open an unintentional reply or no reply, depending on context.",
+      "rubric": [
+        "Identify the different scope of negation.",
+        "Avoid claiming the second entails that a reply occurred."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-r24",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine: “The analyst checked the totals. The checking was careful.” Use one clause and an adverb.",
+      "model": "The analyst checked the totals carefully.",
+      "rubric": [
+        "Use carefully to modify the checking event.",
+        "Retain analyst, totals and completed checking."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-r25",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain why “I only read two chapters” need not mean that reading was the only activity I performed.",
+      "model": "Only can occupy mid-position while focusing the later quantity two chapters. Context can establish that two, rather than another activity, is the relevant alternative.",
+      "rubric": [
+        "Recognise normal mid-position only.",
+        "Identify quantity focus as a legitimate reading."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-r26",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "State unambiguously that Lina was the sole person who inspected the roof.",
+      "model": "Only Lina inspected the roof.",
+      "rubric": [
+        "Focus the subject with only.",
+        "Do not accidentally restrict the object instead."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-r27",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify probably, fortunately and therefore by their work in a statement.",
+      "model": "Probably expresses likelihood; fortunately evaluates an event; therefore presents a conclusion from preceding information.",
+      "rubric": [
+        "Distinguish probability from evaluation.",
+        "Identify the linking/inferential role of therefore."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-r28",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit the punctuation only: “The schedule was ambitious, however the team had enough staff.”",
+      "model": "The schedule was ambitious; however, the team had enough staff.",
+      "rubric": [
+        "Separate the two independent clauses with a licensed boundary.",
+        "Retain however as the contrast marker."
+      ],
+      "alternatives": [
+        "The schedule was ambitious. However, the team had enough staff."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d11-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The two apprentices felt anxiously before the demonstration.",
+      "model": "The two apprentices felt anxious before the demonstration.",
+      "rubric": [
+        "Use an adjective for the intended emotional state.",
+        "Retain the apprentices as experiencers."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "They bought an asleep infant a blanket.",
+      "model": "They bought a sleeping infant a blanket.",
+      "rubric": [
+        "Use an adjective form that permits the ordinary attributive position.",
+        "Preserve the infant’s sleeping state."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ORDER",
+        "C-WORD",
+        "D-adjectives_2"
+      ]
+    },
+    {
+      "id": "gv5-d11-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The second explanation is more simpler.",
+      "model": "The second explanation is simpler.",
+      "rubric": [
+        "Remove duplicate comparison marking.",
+        "Retain the comparison with an earlier explanation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The fees at our college are lower than the neighbouring college.",
+      "model": "The fees at our college are lower than those at the neighbouring college.",
+      "rubric": [
+        "Compare fees with fees.",
+        "Use plural reference those or repeat fees."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "She handled the fragile parcel careful.",
+      "model": "She handled the fragile parcel carefully.",
+      "rubric": [
+        "Use the ordinary manner adverb carefully.",
+        "Leave fragile modifying parcel."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "He hardly worked all morning and finished every urgent repair. Intended meaning: he worked with great effort.",
+      "model": "He worked hard all morning and finished every urgent repair.",
+      "rubric": [
+        "Use hard for effort.",
+        "Preserve the stated completion of repairs."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-WORD",
+        "E-COMPARE",
+        "E-ALSO",
+        "D-adverbs_2",
+        "D-adverbs-and-adverb-phrases-position"
+      ]
+    },
+    {
+      "id": "gv5-d11-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Only Amina signed the register. Check whether a change is required when nobody else signed.",
+      "model": "No change is required. Only focuses Amina and excludes other relevant signers.",
+      "rubric": [
+        "Accept the grammatical original.",
+        "Explain subject focus rather than moving only automatically."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    },
+    {
+      "id": "gv5-d11-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The report was useful, therefore we retained it.",
+      "model": "The report was useful; therefore, we retained it.",
+      "rubric": [
+        "Repair the comma splice.",
+        "Retain the inferred result."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d11-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Use a possessive stand-in without changing meaning: “The coastal station’s rainfall was higher than the rainfall at the inland station.”",
+      "model": "The coastal station’s rainfall was higher than the inland station’s.",
+      "rubric": [
+        "Keep rainfall as the compared quantity.",
+        "Preserve which station has the higher amount."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-COMPARE",
+        "E-COMPCLAUSE",
+        "E-UNIQUE"
+      ]
+    },
+    {
+      "id": "gv5-d11-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite to say the chart, and no other object, was emailed by Nabil.",
+      "model": "Nabil emailed only the chart.",
+      "rubric": [
+        "Keep Nabil as sender.",
+        "Make chart the exclusive focus."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d11-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "E-ONLY",
+        "E-ALSO",
+        "C-CONJ"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d11-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 90–120-word comparison of two study rooms. Include two adjective positions, one comparative clause, an adverb of manner, and one clearly explained use of only. Then annotate the five constructions.",
+    "model": "The upstairs room is quieter than the room beside reception. Its tall windows admit daylight, but the narrow tables become crowded after lunch. The downstairs room has wider desks than we expected, and its chairs are easier to move. We tested both rooms carefully before choosing a place for the presentation. Only the upstairs room has a working projector, so our group reserved it for that event. For silent reading, however, either room is suitable before nine. Students who need more desk space may prefer the downstairs room, provided that they do not mind the occasional conversation near reception.\n\nAnalysis: Tall/narrow are attributive; quieter/suitable are predicative. Than we expected is a comparative clause; carefully modifies tested. Only excludes the downstairs room from the projector claim.",
+    "rubric": [
+      "Identify each required construction accurately.",
+      "Make the comparison standards and the focus of only clear.",
+      "Self-review grammar and meaning; the model does not automatically grade your paragraph."
+    ],
+    "alternatives": [
+      "Different room features and conclusions are acceptable if the five required constructions are present and accurately annotated."
+    ],
+    "conceptId": "gv5-d11-m04",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "E-ONLY",
+      "E-ALSO",
+      "C-CONJ"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d11-rec01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Recall Day 2: identify the countable head in “three useful suggestions” and name its number.",
+      "model": "Suggestions is the head noun; it is plural and countable.",
+      "rubric": [
+        "Identify head rather than modifier.",
+        "Explain the plural/count interpretation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d02-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d11-rec02",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 5: identify the finite auxiliary in “The rooms have been cleaned carefully”.",
+      "model": "Have is the finite auxiliary; been and cleaned are non-finite participles, and carefully is an adverb.",
+      "rubric": [
+        "Locate finite have.",
+        "Distinguish the participles from the manner adverb."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d05-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d11-rec03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall Day 10: “The quality of these examples are excellent.”",
+      "model": "The quality of these examples is excellent.",
+      "rubric": [
+        "Make the verb agree with singular quality.",
+        "Keep excellent as subject complement."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d10-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I distinguish adjective word class from modifier/complement function.",
+    "I choose degree forms from meaning and lexical patterns.",
+    "I can explain hard/hardly and late/lately.",
+    "I give explicit comparison standards.",
+    "I interpret focusing adverbs through context instead of a rigid adjacency rule."
+  ],
+  "sources": [
+    {
+      "id": "C-CONJ",
+      "title": "Conjunctions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "C-WORD",
+      "title": "Word classes and phrase classes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "D-adjectives_2",
+      "title": "Adjectives",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adjectives_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-adverbs-and-adverb-phrases-position",
+      "title": "Adverbs and adverb phrases: position",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs-and-adverb-phrases-position",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-adverbs_2",
+      "title": "Adverbs",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "E-ALSO",
+      "title": "Also, as well or too?",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/also-as-well-or-too",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-COMPARE",
+      "title": "Comparison: adjectives (bigger, biggest, more interesting)",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-COMPCLAUSE",
+      "title": "Comparison: clauses (bigger than we had imagined)",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/comparison-clauses-bigger-than-we-had-imagined",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-ONLY",
+      "title": "Only",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/only",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-ORDER",
+      "title": "Adjectives: order",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adjectives-order",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-UNIQUE",
+      "title": "Unique: Usage Guide",
+      "url": "https://www.merriam-webster.com/dictionary/unique",
+      "consulted": "2026-10-21",
+      "note": "Sense-dependent gradability: unusual/rare versus one of a kind; no copied examples."
+    }
+  ],
+  "editorialNotes": []
+}

@@ -1,0 +1,166 @@
+gv5-d30-r01 [gv5-d01-m03] In The research team will sample the water, classify research, team and sample in their contexts and identify research’s function.
+MODEL: Research is a noun functioning as a premodifier; team is the noun head of the subject phrase; sample is a plain-form lexical verb after will.
+RUBRIC: Keep word class distinct from modifier or subject function.; Use the sentence context to distinguish sample as verb from its noun use elsewhere.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r02 [gv5-d10-m04] Choose ordinary formal agreement in the stated readings: Forty per cent of the water ____ contaminated, but forty per cent of the samples ____ safe. Use past forms of be.
+MODEL: Forty per cent of the water was contaminated, but forty per cent of the samples were safe.
+RUBRIC: Use singular agreement with uncountable water and plural agreement with samples.; Do not make the percentage word alone determine number.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r03 [gv5-d06-m03] Contrast The hall has been empty for a year and The hall was empty for a year, using normal independent-clause readings.
+MODEL: The present perfect normally connects the year-long state to now. The past simple locates a year-long state in a past period and does not by itself assert that it continues now. Context can add a later situation.
+RUBRIC: Distinguish connection to now from a past period.; Avoid claiming that the simple past logically proves the hall is occupied now.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r04 [gv5-d09-m04] Explain two possible reports of a still-current timetable after The manager said: the train leaves at six / the train left at six.
+MODEL: The present can retain the timetable as currently true from the reporter’s perspective. The past can be ordinary backshift in a past report and need not mean the timetable has ceased to apply. The surrounding context selects the intended temporal perspective.
+RUBRIC: Allow retained present and ordinary backshift where the context supports each.; Do not infer that backshift necessarily makes the information false now.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r05 [gv5-d15-m01] Explain the likely reference difference between The volunteers who arrived early helped set up and The volunteers, who arrived early, helped set up.
+MODEL: Without commas the relative helps identify the subset of volunteers. With commas it supplements an identified group and normally presents early arrival as applying to that group.
+RUBRIC: Discuss restriction versus supplementary information.; Do not describe the commas as meaningless decoration.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r06 [gv5-d18-m04] Give two established formal mandative completions of The board recommended that she ... using attend, and distinguish them from an assertion about what she actually does.
+MODEL: The board recommended that she attend. / The board recommended that she should attend. Both can express a recommendation rather than assert that she actually attends. Plain subjunctive attend and mandative should are established alternatives, with regional/style preferences.
+RUBRIC: Use plain attend in the subjunctive rather than attends.; Recognise British mandative should as legitimate.; Explain recommendation versus factual assertion.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r07 [gv5-d19-m04] Explain why They slept in this bed can license This bed has been slept in, while The guests arrived cannot become The guests were arrived in ordinary standard English.
+MODEL: The prepositional construction sleep in can license a passive whose subject corresponds to the complement of in. Ordinary intransitive arrive does not license the proposed be-passive. Passive possibilities depend on the lexical construction and its argument relationships, not merely on the presence of any verb.
+RUBRIC: Identify the prepositional passive and retained in.; Explain why the arrive proposal is restricted without claiming that every intransitive-looking construction behaves alike.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r08 [gv5-d20-m04] Identify the understood editor in Salma promised Nadia to edit the draft and Salma persuaded Nadia to edit the draft. Explain the control contrast.
+MODEL: In the normal intended promise construction, Salma is understood as the editor. In the persuade construction, Nadia is understood as the editor. The first is subject control; the second is object control. The contrast follows the lexical complement patterns rather than simply choosing the nearest noun in every infinitival construction.
+RUBRIC: Identify Salma versus Nadia as the understood subject.; Use the control labels consistently with those interpretations.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r09 [gv5-d23-m01] Arrange every supplied token once into the ordinary negative-inversion pattern: such / we / have / never / seen / precision. Do not add words.
+MODEL: Never have we seen such precision.
+RUBRIC: Place fronted never before inverted have we.; Keep seen as the past participle and use all supplied tokens.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r10 [gv5-d23-m02] Use a wh-cleft to focus the needed resource: We need more reliable evidence.
+MODEL: What we need is more reliable evidence.
+RUBRIC: Use what we need as the initial fused-relative/wh-cleft unit.; Retain the need for more reliable evidence and acknowledge the shift in focus.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r11 [gv5-d16-m03] Combine using although, preserving the concession: The route was longer. It was easier to navigate.
+MODEL: Although the route was longer, it was easier to navigate.
+RUBRIC: Retain the longer route and easier navigation facts.; Use although to mark concession, not an unsupported cause.
+ALTERNATIVES: The route was easier to navigate although it was longer.
+
+gv5-d30-r12 [gv5-d14-m04] Split into two complete sentences without changing the participants or chronology: When the clock struck noon, the assistants closed the desk and the visitors left.
+MODEL: The clock struck noon. The assistants then closed the desk, and the visitors left.
+RUBRIC: Retain the noon time frame and both main events.; Use complete sentences and preserve the intended sequence without inventing a reason.
+ALTERNATIVES: At noon, the assistants closed the desk. The visitors left then. This is acceptable if the clock event is treated only as the time signal rather than an independently required reported action.
+
+gv5-d30-r13 [gv5-d26-m01] Explain how one differs from did so in The red folder is damaged; use the blue one and She promised to inspect the valve and did so.
+MODEL: One substitutes for a countable noun within the noun phrase, here a blue folder. Did so substitutes for the inspection action. The two substitutes are not interchangeable merely because both avoid repetition.
+RUBRIC: Identify the size and type of unit replaced.; Do not replace a noun with did so or an action with one in these constructions.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r14 [gv5-d24-m01] Edit genuine grammar and boundary errors while keeping every fact: The new labels was printed on Monday. The boxes were checked, however, two labels was missing. The supervisor asked where had the spare labels been stored.
+MODEL: The new labels were printed on Monday. The boxes were checked; however, two labels were missing. The supervisor asked where the spare labels had been stored.
+RUBRIC: Repair plural labels/were in both places.; Repair the boundary before connective however.; Use statement order within the embedded interrogative while preserving its past-perfect passive.
+ALTERNATIVES: A full stop before However is also valid.
+
+gv5-d30-r15 [gv5-d28-m02] Source: During a three-week trial, visits rose. The trial coincided with a local festival, and its independent effect was not measured. Explain why The trial caused visits to rise is not a faithful précis.
+MODEL: The source reports a rise during the trial, not an isolated causal effect. The festival is a competing circumstance and the independent effect was not measured. A faithful summary could say that visits rose during the trial, while its causal contribution remained uncertain.
+RUBRIC: Distinguish temporal association from asserted cause.; Retain the confounding circumstance or the explicit uncertainty it creates.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-r16 [gv5-d26-m03] Write 80–100 words explaining a cautious recommendation about a study or workplace procedure. Include a condition and a clear reference chain; mark those features after writing.
+MODEL: The department could test the revised filing procedure for one month if staff can maintain both versions during the trial. The new system may reduce the time needed to locate older records, but that benefit has not yet been measured. Staff should record search times and report any missing documents. Their reports would help the manager compare the two procedures before choosing a permanent arrangement. If the new version creates additional errors, the department should revise it rather than assume that a faster search is the only important outcome.
+
+Annotation: if staff can maintain supplies a condition; the department/the new system/staff/their reports/the manager form traceable references.
+RUBRIC: Produce 80–100 words before the annotation.; Use an appropriate condition and cautious commitment.; Make reference recoverable and retain any limitations on the recommendation.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c01 [gv5-d02-m02] Correct genuine errors: The adviser gave us several useful advices.
+MODEL: The adviser gave us several useful pieces of advice.
+RUBRIC: Retain the several separate items intended.; Use ordinary uncountable advice without a plural ending.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c02 [gv5-d04-m01] Correct ordinary coordinated-object case: The tutor spoke to Hamza and I.
+MODEL: The tutor spoke to Hamza and me.
+RUBRIC: Use objective case in the complement of to.; Preserve Hamza and the speaker as the people addressed.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c03 [gv5-d05-m02] Correct the standard auxiliary pattern: She did not submitted the application.
+MODEL: She did not submit the application.
+RUBRIC: Keep past do-support.; Use plain submit after did not.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c04 [gv5-d10-m01] Correct genuine errors: The number of incomplete forms have fallen.
+MODEL: The number of incomplete forms has fallen.
+RUBRIC: Treat the number as the singular head in this figure reading.; Preserve present-perfect meaning.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c05 [gv5-d11-m03] Correct the adverb form without changing the description of the answer: The witness answered the question confident.
+MODEL: The witness answered the question confidently.
+RUBRIC: Use an adverb for the intended manner of answering.; Do not replace the witness or the event.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c06 [gv5-d15-m01] Correct genuine errors in ordinary edited relative structure: The permit that I requested it arrived yesterday.
+MODEL: The permit that I requested arrived yesterday.
+RUBRIC: Leave the relative object position unfilled by a repeated it.; Retain the permit’s arrival yesterday.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c07 [gv5-d21-m03] Correct the embedded question: We asked whether was the entrance accessible.
+MODEL: We asked whether the entrance was accessible.
+RUBRIC: Use statement word order after whether.; Retain the yes/no content and past reference.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-c08 [gv5-d22-m01] Nadia is the intended speaker of the opening words. Repair Speaking to the registrar, the delay worried Nadia.
+MODEL: While Nadia was speaking to the registrar, the delay worried her.
+RUBRIC: Name Nadia as the speaker in an explicit finite clause.; Retain the fact that the delay worried Nadia.
+ALTERNATIVES: Speaking to the registrar, Nadia was worried about the delay.
+
+gv5-d30-c09 [gv5-d15-m01] Correct only genuine errors: This is the room which we booked for the meeting.
+MODEL: No change is required: This is the room which we booked for the meeting.
+RUBRIC: Recognise established restrictive which in standard English.; Do not impose an optional house preference for that as a universal grammar rule.
+ALTERNATIVES: This is the room that we booked for the meeting is also a valid alternative.
+
+gv5-d30-c10 [gv5-d12-m02] Correct only genuine errors in ordinary standard English: Which desk did you leave the forms on?
+MODEL: No change is required: Which desk did you leave the forms on?
+RUBRIC: Recognise standard preposition stranding.; Retain the question about the desk’s identity.
+ALTERNATIVES: On which desk did you leave the forms? is a more formal alternative.
+
+gv5-d30-t01 [gv5-d19-m01] Make passive and retain the agent and past perfect: The surveyors had marked the unsafe path.
+MODEL: The unsafe path had been marked by the surveyors.
+RUBRIC: Preserve past perfect with had been marked.; Retain both the path and the surveyors.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-t02 [gv5-d21-m03] Report the command using told and an object: The supervisor said to the assistants, Do not move the sealed boxes.
+MODEL: The supervisor told the assistants not to move the sealed boxes.
+RUBRIC: Retain the assistants as recipients of the command.; Use not + to-infinitive after told + object.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-t03 [gv5-d18-m03] Replace if with conditional inversion while preserving the counterfactual past meaning: If I had seen the notice, I would have waited.
+MODEL: Had I seen the notice, I would have waited.
+RUBRIC: Invert had and I and omit if.; Retain the perfect participle and would have waited result.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-t04 [gv5-d26-m03] Nominalise approve without deleting the named agent: The committee approved the plan, and this approval surprised the contractors. Rewrite the first event as a noun phrase that is the subject of one clause.
+MODEL: The committee’s approval of the plan surprised the contractors.
+RUBRIC: Keep the committee as approver and the plan as what was approved.; Preserve the contractors’ reaction without inventing a reason.
+ALTERNATIVES: The approval of the plan by the committee surprised the contractors.
+
+gv5-d30-recall01 [gv5-d30-m01] Compare one diagnostic and one capstone response in a shared skill domain. State what changed and one limit on the comparison. If either was unanswered, state that limitation instead of inventing a gain.
+MODEL: Example reflection: In the diagnostic I treated an entire noun phrase as if only its head could be the subject. In the capstone I identified the whole phrase and then named its head. This is evidence of a better analysis on these examples, but the items were different and the result is not a calibrated overall proficiency gain.
+RUBRIC: Use actual personal responses when available.; Name the grammatical distinction rather than only a percentage.; Acknowledge missing responses or different item difficulty where relevant.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-recall02 [gv5-d30-m02] Create a one-week continuing plan for two precise weak concepts and one original-writing task. Include a later retrieval occasion without promising mastery by the end of the week.
+MODEL: Monday: review object-relative gaps and combine four unfamiliar sentence pairs. Wednesday: contrast may, must and might in evidence-based claims and explain three new contexts. Friday: write a150-word report using both areas, then compare it with the relevant rubrics. On the scheduled retrieval dates, revisit the earlier missed items without treating repeats as new questions. Adjust the plan after inspecting the new writing.
+RUBRIC: Specify two distinctions and fresh applications.; Include original connected writing and a later retrieval occasion.; Keep improvement evidence separate from a guaranteed mastery deadline.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d30-recall03 [gv5-d30-m03] Choose a continuing resource for each need: (a) identify an unfamiliar phrase’s head; (b) preserve modality in a précis; (c) check a British/American difference. Explain the choice.
+MODEL: (a) Use phrase structure and the sentence analysis lab to identify the head and hierarchy. (b) Use the précis/formal-writing material and modality reference to retain the force of may, must or other commitments. (c) Use the variation guide and an appropriate authoritative entry to distinguish regional convention from an error.
+RUBRIC: Match each resource to the actual question.; Explain why a quick unqualified rule may be insufficient.; Do not invent an official preference when checking regional alternatives.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.

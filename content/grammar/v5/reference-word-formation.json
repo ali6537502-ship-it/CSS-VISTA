@@ -1,0 +1,494 @@
+{
+  "day": 1,
+  "id": "gv5-reference-word-formation",
+  "title": "Word formation and morphological analysis",
+  "orientation": "This permanent extension develops topics beyond the daily introductory treatment. Read its definition and foundational explanation first, then work through the examples and progressively deeper analysis. The linked exercises require reasons as well as labels. The entry remains available independently of course completion.",
+  "outcomes": [
+    "Distinguish the relevant grammatical and interpretive concepts.",
+    "Apply qualified structural analysis to unfamiliar examples.",
+    "Identify contextual or theoretical limits rather than overgeneralising.",
+    "Produce and revise an original example with a reasoned explanation."
+  ],
+  "prerequisiteDays": [
+    1,
+    2,
+    5
+  ],
+  "modules": [
+    {
+      "id": "gv5-ref-morph-processes",
+      "title": "Word formation beyond prefixes and suffixes",
+      "taxonomy": [
+        "A",
+        "L"
+      ],
+      "coverageIds": [
+        "gv5-ref-a01",
+        "gv5-ref-a02",
+        "gv5-ref-a03",
+        "gv5-ref-a04",
+        "gv5-ref-a05"
+      ],
+      "definition": "Word formation creates or establishes lexemes: vocabulary items with related grammatical forms. Affixation, compounding, conversion, clipping, blending and back-formation describe different processes; a word can participate in more than one process across its history.",
+      "foundation": [
+        "Begin by separating a change in grammatical form from the creation of a vocabulary item. In The editors work and The editor works, works belongs to the verb work and marks a grammatical contrast. In They edit and The editor arrived, editor is a separate noun related to edit. Inflection supplies forms within a lexeme; derivation contributes a related lexeme. These useful distinctions do not mean every suffix changes word class: an abstract noun can be derived from another noun. Nor does every newly established word contain a visible prefix or suffix. Always examine its category and meaning in a complete expression, then ask which operation the analysis is intended to describe."
+      ],
+      "intermediate": [
+        "Affixation adds a bound element to a base, as in readable or unreadable. Compounding combines lexical bases, as in school library or proofreader; spaces and hyphens do not by themselves decide whether an expression is a compound. Conversion establishes a different category without an overt derivational affix: a bottle contrasts with They bottle the juice. Clipping shortens an existing word: photo is a shortened form of photograph, and exam of examination. A blend combines material from source words, as in brunch from breakfast and lunch. A blend differs from an ordinary compound because its source words need not remain intact; some borderline formations resist one simple label."
+      ],
+      "advanced": [
+        "Back-formation produces a new expression by analysing an existing word as if it contained removable material. The historical relationship matters: edit developed from editor, rather than editor historically being made by adding a suffix to an already established English edit. In present-day grammatical analysis, however, speakers can understand editor as edit plus an agent-forming ending. Historical origin and a contemporary structural relationship are therefore different questions. Do not infer a word’s actual history merely because one expression is shorter. Initialisms such as BBC and word-pronounced acronyms such as NATO also establish shortened expressions, but use initial letters rather than simply removing syllables from one word. Pronunciation helps distinguish these categories."
+      ],
+      "expert": [
+        "Word-formation labels describe patterns, not automatic permission to publish any possible coinage as established vocabulary. A creative conversion or blend may be interpretable in advertising yet unsuitable without explanation in an academic report. Lexicalisation means an expression becomes established with particular meanings or restrictions; those meanings need not be completely predictable from its parts. Compound stress and semantic relations are useful evidence, but neither produces an infallible test across all English compounds. In specialist discussion, conversion is sometimes analysed using a zero derivational element, while other analyses treat category change without such an element. This theoretical difference does not require learners to invent an inaudible suffix in an ordinary sentence analysis."
+      ],
+      "patterns": [
+        {
+          "form": "base + affix → related lexeme",
+          "meaning": "The relation is derivational when it establishes a lexical item rather than simply a grammatical form."
+        },
+        {
+          "form": "noun used as lexical verb: bottle → bottle",
+          "meaning": "Conversion changes category in the stated use without an overt affix."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The technician photographed the damaged panel.",
+          "analysis": "Photographed is a past form of the verb photograph; the ending supplies inflection."
+        },
+        {
+          "sentence": "The technician emailed a photo of the panel.",
+          "analysis": "Photo is a clipping, while emailed uses the verb email with past inflection. More than one process can be relevant to a sentence."
+        },
+        {
+          "sentence": "The journal’s editor asked us to edit the abstract.",
+          "analysis": "Historically edit is a back-formation from editor; synchronically the two belong to a recognisable noun–verb family."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "a school library",
+          "b": "a brunch menu",
+          "note": "School library is a lexical-base combination; brunch itself is a blend. The whole expression brunch menu can in turn function as a noun compound."
+        }
+      ],
+      "exceptions": [
+        "Not every abbreviation is spoken in its shortened written form. Dr is normally read as doctor; exam is ordinarily spoken as exam.",
+        "Word-class conversion and syntactic function must remain distinct: stone in stone wall can be a noun modifier without becoming an adjective."
+      ],
+      "mistakes": [
+        {
+          "problem": "Every shorter word is a back-formation.",
+          "repair": "A shorter word may be a clipping, an unrelated word or a documented back-formation.",
+          "reason": "Historical evidence is needed for the direction of a back-formation."
+        },
+        {
+          "problem": "School library cannot be a compound because it has a space.",
+          "repair": "A compound may be written open, hyphenated or closed.",
+          "reason": "Orthography varies and is not a sufficient structural diagnostic."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "lexeme",
+          "definition": "A vocabulary item considered together with its grammatical forms.",
+          "example": "Write, writes, wrote and written can be forms of the lexeme write."
+        },
+        {
+          "term": "conversion",
+          "definition": "Establishing a different word class without an overt derivational affix.",
+          "example": "A host / to host a meeting."
+        },
+        {
+          "term": "back-formation",
+          "definition": "A historically new expression formed by reanalysing and removing apparent word-building material.",
+          "example": "Edit was formed from editor."
+        }
+      ],
+      "sourceIds": [
+        "morph-conversion",
+        "abbreviations",
+        "morph-blend",
+        "morph-backformation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-morph-productivity",
+      "title": "Roots, affix order and grammatical productivity",
+      "taxonomy": [
+        "A",
+        "K"
+      ],
+      "coverageIds": [
+        "gv5-ref-a06",
+        "gv5-ref-a07",
+        "gv5-ref-a08"
+      ],
+      "definition": "Productivity is the extent to which a grammatical or word-building pattern can be extended to additional suitable forms. It is constrained by category, meaning, sound, history and established vocabulary; it is not the claim that every imaginable combination is equally acceptable.",
+      "foundation": [
+        "A root is the central lexical element in an analysis. A base is any form to which an operation applies, while a stem is a form used as the base for inflection. In teachers, teach is a root, teacher is the stem receiving plural -s, and teacher is also a base for that operation. Terminology can vary between descriptions, so state which operation you mean. A bound morpheme cannot normally stand alone in its relevant use; a free morpheme can. Visible spelling pieces do not automatically correspond to meaningful morphemes: the letters er in a word are not necessarily the agent suffix found in teacher. Repeated form and a consistent grammatical relationship provide stronger evidence than appearance alone."
+      ],
+      "intermediate": [
+        "Affix order can show hierarchical structure. In unhelpfulness, -ful first relates to help, un- negates helpful, and -ness produces the abstract noun. This analysis concerns relationships, not just a list of neighbouring letters. The plural of a derived count noun usually applies outside the derivation: teacher → teachers. Inflection may also involve an irregular change rather than a simple added segment: mouse → mice. An allomorph is an alternative form of a morpheme; English plural endings have different pronunciations in cats, dogs and buses. The spelling may look similar while the sound differs, and one grammatical category can have more than one formal realisation."
+      ],
+      "advanced": [
+        "A productive pattern remains open to suitable new formations, but productivity is gradual. The suffix -ness combines readily with many adjectives, whereas some other suffixes are restricted to established lexical families. Comprehensibility does not guarantee conventional status: a reader may understand a novel coinage while a learner’s dictionary recommends an established alternative for ordinary formal writing. Existing words can compete with potential regular formations; ordinary standard past went is not replaced by goed merely because regular verbs take -ed. Such cases show why a structural pattern is a starting point for analysis rather than a complete lexical authority. Check the intended meaning and established usage before declaring a new-looking form correct or incorrect."
+      ],
+      "expert": [
+        "Morphological and syntactic structure can interact without being identical. A compound may have an internal head that determines its category or main semantic type, but exceptional or historically opaque compounds need separate lexical attention. A present-day speaker’s analysis may differ from an etymologist’s account, and plausible segmentation is not proof of historical origin. Word-building also changes over time: material in a blend or a borrowed item can become available for further coinages. An advanced analysis should therefore distinguish productivity, frequency, transparency and lexicalisation. A frequent word need not exemplify a productive rule; an unfamiliar but transparently constructed word need not be meaningless. This reference uses pedagogically useful segmentation and marks historical claims only when they have source support."
+      ],
+      "patterns": [
+        {
+          "form": "[[un + helpful] + ness]",
+          "meaning": "The outer suffix relates to the whole adjective unhelpful, not independently to help."
+        },
+        {
+          "form": "derived stem + plural inflection",
+          "meaning": "Teachers is analysed as teacher plus plural marking, rather than teach plus an arbitrary ers suffix."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Several helpful volunteers arrived.",
+          "analysis": "Helpful is an adjective related to help by derivation; volunteers carries ordinary plural inflection."
+        },
+        {
+          "sentence": "The volunteers’ helpfulness reassured the organiser.",
+          "analysis": "Helpfulness is an abstract noun derived from an adjective; its noun status differs from the adjective’s modifier function."
+        },
+        {
+          "sentence": "The editor questioned the new term’s usefulness, not its intelligibility.",
+          "analysis": "A coinage can be understandable while its suitability for a particular audience remains a separate editorial question."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "a frequent established word",
+          "b": "a productive word-building pattern",
+          "note": "Frequency concerns how often an expression occurs; productivity concerns extension of a pattern. Neither measure automatically entails the other."
+        }
+      ],
+      "exceptions": [
+        "Plural allomorphs are not three different meanings of plurality. Pronunciation conditions the regular variants.",
+        "Some apparent affixes are opaque or historically reanalysed; a synchronic analysis should not pretend every spelling can be cleanly segmented."
+      ],
+      "mistakes": [
+        {
+          "problem": "Teachers contains only one morpheme because it is one written word.",
+          "repair": "Teachers can be analysed as teach + -er + plural -s.",
+          "reason": "A written word can contain several meaningful grammatical or lexical parts."
+        },
+        {
+          "problem": "A productive suffix can attach to any English word.",
+          "repair": "Productive affixes still have category, meaning and other selection restrictions.",
+          "reason": "Productivity is not unrestricted combination."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "allomorph",
+          "definition": "A variant realisation of one morpheme.",
+          "example": "The regular plural has different sounds in cats and dogs."
+        },
+        {
+          "term": "productivity",
+          "definition": "The capacity of a pattern to extend to additional suitable forms.",
+          "example": "A speaker can use a familiar noun in a newly motivated verb use."
+        },
+        {
+          "term": "base",
+          "definition": "A form to which a morphological operation applies.",
+          "example": "Unhelpful is the base for -ness in unhelpfulness."
+        }
+      ],
+      "sourceIds": [
+        "open-morph-types",
+        "open-morph-beyond",
+        "open-derivation",
+        "open-morph-change"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-ref-wf-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which contrast illustrates conversion without an overt derivational suffix?",
+      "options": [
+        "go / went",
+        "a bottle / They bottle the juice",
+        "a report / several reports",
+        "large / larger"
+      ],
+      "answer": 1,
+      "why": "Bottle is a noun in the first use and a verb in the second, without an overt category-changing suffix. The other pairs illustrate inflection.",
+      "conceptId": "gv5-ref-morph-processes",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "morph-conversion",
+        "abbreviations",
+        "morph-blend",
+        "morph-backformation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Distinguish clipping, blending and back-formation using photo, brunch and edit.",
+      "model": "Photo shortens photograph; brunch combines source material from breakfast and lunch; edit is historically back-formed from editor.",
+      "rubric": [
+        "Explain the different processes rather than merely giving three labels.",
+        "Use historical evidence for back-formation, not shortness alone."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-processes",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "morph-conversion",
+        "abbreviations",
+        "morph-blend",
+        "morph-backformation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r02",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Can an open spelling such as school library still be a compound? Explain two limits of spelling as a diagnostic.",
+      "model": "Yes. English compounds can be open, hyphenated or closed, and conventions can vary. Spacing alone does not settle internal grammatical or lexical relationships.",
+      "rubric": [
+        "Recognise open compounds.",
+        "Distinguish orthographic convention from structural analysis."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-processes",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "morph-conversion",
+        "abbreviations",
+        "morph-blend",
+        "morph-backformation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare photo, Dr and BBC as shortened expressions.",
+      "model": "Photo is normally spoken in its clipped form; Dr is ordinarily read as doctor; BBC is pronounced as letter names.",
+      "rubric": [
+        "Describe pronunciation and formation.",
+        "Do not treat every abbreviation as the same process."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-processes",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "morph-conversion",
+        "abbreviations",
+        "morph-blend",
+        "morph-backformation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about productivity is defensible?",
+      "options": [
+        "Productivity concerns extension to suitable forms and can be constrained.",
+        "A new coinage is necessarily meaningless.",
+        "Every productive affix attaches to every word.",
+        "A frequent word always demonstrates a productive pattern."
+      ],
+      "answer": 0,
+      "why": "Productivity concerns the capacity to extend a pattern, subject to constraints. Frequency, transparency and conventional status are related but distinct.",
+      "conceptId": "gv5-ref-morph-productivity",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "open-morph-types",
+        "open-morph-beyond",
+        "open-derivation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r04",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Analyse teachers using root, derived stem and inflection.",
+      "model": "Teach is the root; teacher is the derived noun stem; plural -s inflects that stem.",
+      "rubric": [
+        "Identify the -er derivation and outer plural marking.",
+        "Do not confuse the plural with a new lexical category."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-productivity",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "open-morph-types",
+        "open-morph-beyond",
+        "open-derivation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r05",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain the hierarchical relation in unhelpfulness.",
+      "model": "Un- combines with helpful to form unhelpful, and -ness forms the noun unhelpfulness from that adjective.",
+      "rubric": [
+        "Identify the outer noun-forming operation.",
+        "Distinguish a hierarchy from an arbitrary letter sequence."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-productivity",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "open-morph-types",
+        "open-morph-beyond",
+        "open-derivation",
+        "open-morph-change"
+      ]
+    },
+    {
+      "id": "gv5-ref-wf-r06",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Why can a transparent coinage still be unsuitable in a formal report?",
+      "model": "Readers may infer its meaning, but it may be unfamiliar, register-marked or less precise than an established expression. Suitability depends on purpose and evidence of usage.",
+      "rubric": [
+        "Keep intelligibility separate from conventional status.",
+        "Avoid labelling every creative coinage ungrammatical."
+      ],
+      "alternatives": [
+        "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+      ],
+      "conceptId": "gv5-ref-morph-productivity",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "open-morph-types",
+        "open-morph-beyond",
+        "open-derivation",
+        "open-morph-change"
+      ]
+    }
+  ],
+  "corrections": [],
+  "transformations": [],
+  "writing": {
+    "id": "gv5-ref-word-formation-writing",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a short explanatory note comparing conversion and clipping using original example sentences, and explain one register constraint.",
+    "model": "The volunteer will host the event, and another volunteer will take photos. Host is a verb here, whereas the host of the event uses the same form as a noun; this illustrates conversion. Photo is a clipping of photograph, not a verb made by adding a suffix. Both uses are established, but a newly invented conversion or clipping would still need a suitable audience and context. I would check whether readers recognise it before using it in a formal report.",
+    "rubric": [
+      "Explain category change without an overt affix using host.",
+      "Explain shortening using photo, without confusing it with conversion.",
+      "Distinguish established usage from automatic permission for every coinage."
+    ],
+    "alternatives": [
+      "Accept another analysis that identifies the same grammatical relationships and preserves the stated meaning; explain any terminology difference."
+    ],
+    "conceptId": "gv5-ref-morph-productivity",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "open-morph-types",
+      "open-morph-beyond",
+      "open-derivation",
+      "open-morph-change"
+    ]
+  },
+  "recall": [],
+  "checklist": [
+    "I can explain the distinctions in my own words.",
+    "I can test a proposed analysis against context and examples."
+  ],
+  "sources": [
+    {
+      "id": "abbreviations",
+      "title": "Abbreviations, initials and acronyms - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/abbreviations-initials-and-acronyms",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "morph-backformation",
+      "title": "BACK-FORMATION | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/back-formation",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "morph-blend",
+      "title": "BLEND | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/blend",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "morph-conversion",
+      "title": "Word formation - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-formation",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "open-derivation",
+      "title": "5.6 Derivational morphology – Essentials of Linguistics, 2nd edition",
+      "url": "https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/5-5-derivational-morphology/",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "open-morph-beyond",
+      "title": "5.3 Morphology beyond affixes – Essentials of Linguistics, 2nd edition",
+      "url": "https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/5-4-morphology-beyond-affixes/",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "open-morph-change",
+      "title": "14.4 Morphological change – Essentials of Linguistics, 2nd edition",
+      "url": "https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/14-4-morphological-change/",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    },
+    {
+      "id": "open-morph-types",
+      "title": "5.2 Roots, bases, and affixes – Essentials of Linguistics, 2nd edition",
+      "url": "https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/chapter/5-2-types-of-morphology-affixes-and-beyond/",
+      "consulted": "2026-10-21",
+      "note": "Actual article body consulted for this reference’s definition, distinctions and limits; explanations and examples are original."
+    }
+  ],
+  "editorialNotes": []
+}

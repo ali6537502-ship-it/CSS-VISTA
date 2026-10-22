@@ -1,0 +1,1459 @@
+{
+  "day": 15,
+  "id": "gv5-day-15",
+  "title": "Relative, Nominal and Adverbial Clauses",
+  "orientation": "Subordinate clauses let you identify a person, report a proposition, ask an embedded question or explain when and why something happens. Those jobs differ even when the clauses begin with the same word. In the claim that she repeated, the final clause identifies a claim; in the claim that the figures were wrong, it gives the claim's content. Recognising that difference helps you choose pronouns, avoid unnecessary repetition and preserve qualifications when editing formal prose. This lesson develops relative, content, interrogative and adverbial structures in increasing depth. You will compare defining and supplementary information, practise finite and non-finite alternatives and examine how clause boundaries affect meaning. The extension distinguishes traditional labels such as noun clause from more precise descriptions of form and function. Start by identifying the relationship expressed, then choose a structure that conveys it without implying additional facts.",
+  "outcomes": [
+    "Distinguish defining relatives from supplementary relatives and explain their punctuation.",
+    "Choose and omit relative markers only where the construction licenses them.",
+    "Analyse content clauses, embedded questions and fused-relative expressions without confusing form and function.",
+    "Use finite and infinitival complements with the intended subject and meaning.",
+    "Express time, reason, result, purpose, concession, condition, comparison and manner through suitable subordinate structures."
+  ],
+  "prerequisiteDays": [
+    4,
+    5,
+    13,
+    14
+  ],
+  "modules": [
+    {
+      "id": "gv5-d15-m01",
+      "title": "Defining and supplementary relative information",
+      "taxonomy": [
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-d15-c01",
+        "gv5-d15-c02"
+      ],
+      "definition": "A relative clause connects to an antecedent through a grammatical relation within the clause. Integrated or defining relatives help identify or delimit a referent; supplementary or non-defining relatives add a separate associated comment.",
+      "foundation": [
+        "In the students who arrived early found seats, who arrived early helps identify the relevant students. The relative clause is integrated into the noun phrase, so ordinary written presentation does not enclose it in commas. In the students, who arrived early, found seats, the relative is a supplementary comment about the already identified students. The punctuation signals a different organisation of information, not simply a longer pause. Whether the speaker has one brother or several, or one class or several, cannot be inferred reliably from a noun phrase in isolation without its discourse context."
+      ],
+      "intermediate": [
+        "Who commonly relates to people; which commonly relates to things and can also introduce a comment about a whole preceding proposition. Whose marks a genitive relation and can refer to people or other entities: the school whose roof collapsed. Whom is an object form favoured in formal styles, especially after a fronted preposition. Object who is ordinary standard usage in many contexts, as in the colleague who we met. That introduces integrated relatives about people or things in established usage; it does not introduce the ordinary comma-marked supplementary pattern in edited standard English."
+      ],
+      "advanced": [
+        "Restrictive which is grammatical in British English: the route which passes the lake. Many American editorial guides prefer that for such integrated relatives, but that preference is not a universal grammatical ban on which. A relative preposition can remain at the end of a clause or move before an appropriate relative pronoun: the proposal which we agreed on; the proposal on which we agreed. That does not normally follow a fronted preposition in this construction. A whole-clause supplementary relative uses which: the train was cancelled, which delayed the meeting. Here which refers to the cancellation situation, not simply to the noun train."
+      ],
+      "expert": [
+        "Relative pronouns have a function inside their clause. In the student who wrote the letter, who is subject of wrote. In the student whom the tutor praised, whom is object of praised while the tutor is the expressed subject. Avoid choosing case by the pronoun's distance from the main verb. Traditional accounts call relative that a pronoun; many modern analyses treat it as a subordinator with an associated gap. This course accepts either terminology when it is applied consistently and the missing subject or object relation is identified. Also distinguish supplement from a claim that information is unimportant: a non-defining relative can contain information central to the writer's purpose."
+      ],
+      "patterns": [
+        {
+          "form": "noun + integrated relative clause",
+          "meaning": "The relative contributes to identifying or delimiting the noun’s referent."
+        },
+        {
+          "form": "identified noun phrase, supplementary relative, main predicate",
+          "meaning": "The comma pair marks a separate associated comment."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The visitors who had booked online entered first.",
+          "analysis": "The integrated relative restricts the relevant set to online bookers."
+        },
+        {
+          "sentence": "Dr Malik, whose research concerns wetlands, joined the panel.",
+          "analysis": "Whose links Dr Malik to the research in a supplementary relative."
+        },
+        {
+          "sentence": "The server stopped during registration, which prevented several applicants from finishing.",
+          "analysis": "Which refers to the preceding event or situation as a whole."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "My cousins who live nearby visit often.",
+          "b": "My cousins, who live nearby, visit often.",
+          "note": "The first identifies the nearby cousins within a contextually relevant set; the second treats the living-nearby information as a supplement about the identified cousins."
+        }
+      ],
+      "exceptions": [
+        "Restrictive which is established British usage; an American house-style preference for that should be labelled as style.",
+        "Whose can have a non-human antecedent: a building whose entrance faces the square.",
+        "Object who is common standard usage; whom remains useful in formal constructions and after fronted prepositions."
+      ],
+      "mistakes": [
+        {
+          "problem": "The hall, that was renovated last year, reopened.",
+          "repair": "The hall, which was renovated last year, reopened.",
+          "reason": "The ordinary supplementary relative uses which rather than that."
+        },
+        {
+          "problem": "The officer to that we wrote has replied.",
+          "repair": "The officer to whom we wrote has replied.",
+          "reason": "A fronted preposition takes the appropriate relative pronoun, not relative that."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "antecedent",
+          "definition": "The expression to which a relative or referring expression is related.",
+          "example": "the author in the author who spoke"
+        },
+        {
+          "term": "supplementary relative",
+          "definition": "A relative clause presented as a separate comment about an identified referent or situation.",
+          "example": "The author, who arrived late, apologised."
+        }
+      ],
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-m02",
+      "title": "Contact clauses and non-finite relatives",
+      "taxonomy": [
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-d15-c03"
+      ],
+      "definition": "A contact relative omits an overt relative marker in an integrated construction where omission is licensed. Non-finite relatives use infinitival or participial structure rather than a full finite relative clause.",
+      "foundation": [
+        "In the article that I recommended, that corresponds to the object of recommended. Because the relative is integrated and already contains its subject I, the marker can be omitted: the article I recommended. This is often called a contact or zero relative. It is not simply any relative clause with a word deleted. In the article that changed my view, that corresponds to the subject of changed. Omitting it would remove the subject relation needed by the intended ordinary finite relative, producing the article changed my view as a main-clause pattern rather than the same modifying structure."
+      ],
+      "intermediate": [
+        "A contact relative can leave a preposition stranded: the issue we spoke about. It does not license deleting the pronoun from an ordinary supplementary relative: the editor, whom I met yesterday, has replied. Relative adverbs also allow several patterns. The place where we met, the place at which we met and the place we met can each be grammatical with the appropriate sense. The day we met is a familiar integrated temporal relative. Learn the whole construction instead of assuming that every zero relative contains the same kind of missing object."
+      ],
+      "advanced": [
+        "Participial relatives include the people waiting outside and the papers received yesterday. Waiting outside gives a non-finite active description; received yesterday normally gives a passive interpretation. Expanding the first as who are waiting and the second as which were received can clarify their relationships, but a reduced construction is not always produced by mechanically deleting who and be. A finite relative may locate a completed event or express modality that a participial version does not preserve. The author who wrote the letter need not mean the same as the author writing the letter. Preserve the intended time and relation when choosing a shorter structure."
+      ],
+      "expert": [
+        "Infinitival relatives also have distinct patterns. The next person to speak supplies a subject interpretation for the understood speaker, while a book to read has an understood reader and an object relation to book. For Noor to read can identify that reader explicitly in a book for Noor to read. Expressions traditionally called reduced relatives overlap with participial adjective and postmodifier analyses. A retired teacher contains an attributive participial adjective in a common analysis; it need not be explained by deleting a visible relative-clause sequence. Use the non-finite form because its grammar and meaning fit the context, not because every finite relative is assumed to have one equivalent shorter form."
+      ],
+      "patterns": [
+        {
+          "form": "antecedent + subject + finite verb + object gap",
+          "meaning": "An integrated object relative may omit its overt marker: the book I borrowed."
+        },
+        {
+          "form": "noun + -ing / past-participial / infinitival clause",
+          "meaning": "Non-finite postmodification has different voice, subject and temporal interpretations."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The memo we circulated yesterday contains a correction.",
+          "analysis": "The integrated object relative has an expressed subject we and no overt marker."
+        },
+        {
+          "sentence": "The passengers waiting by the exit boarded first.",
+          "analysis": "The -ing clause identifies passengers engaged in waiting at the relevant time."
+        },
+        {
+          "sentence": "The first applicant to finish the task will receive feedback today.",
+          "analysis": "The infinitival relative associates the applicant with the subject role of finish."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "the scientist who discovered the material",
+          "b": "the scientist examining the material",
+          "note": "Both are grammatical descriptions but refer to different activities and potentially different times; shortening must preserve the intended information."
+        }
+      ],
+      "exceptions": [
+        "An ordinary integrated finite subject relative normally retains its marker: the student who arrived, rather than omitting who within the same construction.",
+        "Contact relatives are not the ordinary pattern for comma-marked supplementary information.",
+        "Participial and infinitival relatives do not preserve every tense, aspect or modal distinction of a possible finite version."
+      ],
+      "mistakes": [
+        {
+          "problem": "The volunteer arrived early received a badge, intending a single noun phrase followed by received.",
+          "repair": "The volunteer who arrived early received a badge.",
+          "reason": "The intended finite subject relative needs an overt marker."
+        },
+        {
+          "problem": "The files, I requested yesterday, have arrived, intending a supplementary relative.",
+          "repair": "The files, which I requested yesterday, have arrived.",
+          "reason": "The ordinary supplementary relative retains which; an integrated version can instead omit both commas and marker."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "contact relative",
+          "definition": "An integrated relative clause with no overt relative marker where omission is licensed.",
+          "example": "the story I read"
+        },
+        {
+          "term": "non-finite relative",
+          "definition": "A relative-like postmodifier with infinitival or participial structure.",
+          "example": "the documents signed yesterday"
+        }
+      ],
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-m03",
+      "title": "Content, nominal and embedded interrogative structures",
+      "taxonomy": [
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-d15-c04",
+        "gv5-d15-c05",
+        "gv5-d15-c06"
+      ],
+      "definition": "A content clause expresses a proposition, question or other content associated with a selecting word. Traditional nominal-clause labels describe some external functions; they do not mean that the internal clause has become a noun word.",
+      "foundation": [
+        "In she believes that the timetable is wrong, the that-clause supplies what she believes. It is a content complement of believes. Similar clauses can follow nouns and adjectives: the claim that the timetable is wrong; certain that the timetable is wrong. That introduces the clause but does not serve as its subject or object. Compare the claim that she repeated: here the relative clause has an object relation missing after repeated, linked to claim. In the claim that the timetable is wrong, the subordinate clause is internally complete and states the content of the claim."
+      ],
+      "intermediate": [
+        "Embedded questions express a question within another construction: I wonder whether the hall is open; she asked why the hall had closed. They normally use subject-before-verb order rather than direct-question inversion. Subject questions remain recognisable: I know who sent the message has who as subject of sent. Whether and if can introduce many embedded yes-no questions, but they are not interchangeable in every construction. Before a to-infinitive, use whether: she cannot decide whether to apply. The question clause whether the hall is open can also function as a subject; for formal clarity, whether is the normal choice in that position."
+      ],
+      "advanced": [
+        "Wh-expressions have more than one analysis. I wonder what she wrote presents an embedded question about the identity of her writing. I kept what she wrote can mean I kept the thing that she wrote; this is a fused-relative expression, with what combining an antecedent-like meaning and a relative relation. Many modern accounts analyse the whole fused relative as a noun phrase containing a relative clause; traditional accounts often group it with nominal clauses. State the intended interpretation and grammatical function instead of assuming that every what-clause is an indirect question. Context can also leave a genuine ambiguity between question-like content and reference to a thing."
+      ],
+      "expert": [
+        "Infinitival complements express selected relationships too. She hopes to finish normally makes she the understood finisher; she wants the assistant to finish expresses the subordinate subject. An extraposed pattern moves a heavy subject clause into a later position: that the hall is open is useful becomes it is useful that the hall is open. The it in that construction does not refer to a previously named hall; it fills the ordinary subject position. Not all verbs license the same complement types or allow the same alternations. Compare suggest that she apply or suggest applying with tell her to apply. Advanced transformation therefore begins with the selecting word's pattern, the subordinate subject and the original degree of certainty or obligation."
+      ],
+      "patterns": [
+        {
+          "form": "verb/adjective/noun + that + finite content clause",
+          "meaning": "The subordinate clause gives associated content; introductory that is not its subject or object."
+        },
+        {
+          "form": "whether + to-infinitive",
+          "meaning": "An embedded alternative can be expressed non-finitely: whether to leave."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The report confirms that the water is safe.",
+          "analysis": "The internally complete that-clause states what the report confirms."
+        },
+        {
+          "sentence": "I cannot remember where I stored the invoice.",
+          "analysis": "The embedded question keeps subject I before stored."
+        },
+        {
+          "sentence": "What the witnesses described was difficult to verify.",
+          "analysis": "A natural reading treats what the witnesses described as the things or account described, functioning as the sentence subject."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "the claim that the board rejected",
+          "b": "the claim that the board had resigned",
+          "note": "The first is relative, with a missing object after rejected; the second supplies the content of the claim and is internally complete."
+        }
+      ],
+      "exceptions": [
+        "That is often omitted after some reporting and mental-process verbs, but omission depends on the construction and clarity; it is not a compulsory deletion rule.",
+        "Whether is used before a to-infinitive; if to apply does not form the corresponding standard embedded-question pattern.",
+        "A what-expression may be an embedded question or a fused relative, depending on interpretation and the selecting construction."
+      ],
+      "mistakes": [
+        {
+          "problem": "She asked where was the register.",
+          "repair": "She asked where the register was.",
+          "reason": "An embedded question normally has subject-before-verb order."
+        },
+        {
+          "problem": "They suggested me to postpone the launch.",
+          "repair": "They suggested that I postpone the launch.",
+          "reason": "Suggest does not license the intended personal-object + to-infinitive pattern; a mandative clause preserves the recommendation."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "content clause",
+          "definition": "A clause expressing content associated with a selecting verb, noun or adjective.",
+          "example": "that the result is final in We believe that the result is final"
+        },
+        {
+          "term": "fused relative",
+          "definition": "An expression combining an antecedent-like meaning with a relative relation.",
+          "example": "what she wrote meaning the thing that she wrote"
+        },
+        {
+          "term": "embedded question",
+          "definition": "An interrogative clause functioning within a larger construction.",
+          "example": "where she went in I wonder where she went"
+        }
+      ],
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-m04",
+      "title": "Adverbial clauses and semantic relationships",
+      "taxonomy": [
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-d15-c07",
+        "gv5-d15-c08",
+        "gv5-d15-c09"
+      ],
+      "definition": "An adverbial or adjunct clause adds a circumstance or logical relationship to another situation, including time, reason, purpose, result, condition, concession, manner or comparison.",
+      "foundation": [
+        "Choose an adjunct clause by the relation you intend. We left when the rain stopped locates an event in time. We left because the room was closing gives a reason. We left early so that we could catch the train expresses purpose. The room was so crowded that we could not enter expresses a result associated with the degree of crowding. These constructions do different jobs even when all describe connected events. A cause reported by the writer is not automatically a proven scientific cause; grammatical linkage expresses the relationship being asserted in that particular account."
+      ],
+      "intermediate": [
+        "Time clauses can use when, while, before, after, until and once. Their tense choices depend on reference and meaning rather than a universal requirement to repeat the main clause's tense. In the office will open when the repairs are complete, present form refers to future time in the subordinate clause. Reason can be expressed with because, since or as, but since and as also have other senses. Make a relation explicit if ambiguity matters. Because of the cancellation is a prepositional phrase with a noun-phrase complement in the traditional account; because the service was cancelled is a finite reason clause."
+      ],
+      "advanced": [
+        "Concession presents a circumstance against which the main event is unexpected: although the route was longer, we chose it. Condition sets a situation relevant to the main proposition: if the permit arrives, we can begin. Unless often expresses a negative condition, but replacing every if-not construction mechanically can change scope or emphasis. Manner and comparison can use as, as if, as though and than in their appropriate patterns: arrange the folders as the instructions show; she spoke as if she knew the answer; the task took longer than we expected. The hypothetical interpretation of as if is developed further in Day 18."
+      ],
+      "expert": [
+        "A clause's function should not be inferred from its opening word alone. As the bell rang can express timing, while as the hall was already full may be understood as a reason in context. So that can express an intended purpose or an actual consequence, depending on context, modality and the rest of the wording. Non-finite purpose clauses such as to avoid a delay normally share an understood subject with the main clause in the relevant construction; for a different participant, name that subject or choose a finite clause. Some modern grammars classify many traditional subordinating conjunctions as prepositions taking clause complements. This terminology difference does not remove the temporal, causal or conditional relation that learners must interpret and preserve in writing."
+      ],
+      "patterns": [
+        {
+          "form": "main clause + so that + subject + can/could + verb",
+          "meaning": "A common finite purpose pattern; context determines whether it describes an intention."
+        },
+        {
+          "form": "so + adjective/adverb + that + result clause",
+          "meaning": "A result construction associates degree with a consequent situation."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "We paused while the technician tested the microphone.",
+          "analysis": "The while-clause locates the pause during a simultaneous activity."
+        },
+        {
+          "sentence": "The adviser repeated the address so that the visitors could write it down.",
+          "analysis": "The finite purpose clause has its own subject the visitors, distinct from the adviser."
+        },
+        {
+          "sentence": "Although the evidence was limited, the report reached a firm conclusion.",
+          "analysis": "The concession presents a potential obstacle to the main action without asserting that the conclusion was justified."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She lowered her voice because the baby was asleep.",
+          "b": "She lowered her voice so that the baby could sleep.",
+          "note": "Both grammatical: the first supplies a reason involving an existing state; the second expresses a purpose concerning a possible result."
+        }
+      ],
+      "exceptions": [
+        "Since and as have more than one meaning; context, not spelling alone, identifies a time, cause or manner relation.",
+        "A purpose clause with an understood subject must connect to the intended participant: to inspect the roof, the engineer climbed the ladder.",
+        "Different grammatical frameworks classify clause-introducing words differently; the pedagogical function labels remain useful if the framework is stated."
+      ],
+      "mistakes": [
+        {
+          "problem": "Because of the office had closed, we returned home.",
+          "repair": "Because the office had closed, we returned home.",
+          "reason": "The full finite clause takes because rather than because of in this construction."
+        },
+        {
+          "problem": "To collect the documents, the door was opened by the assistant, intending that the assistant collected them.",
+          "repair": "To collect the documents, the assistant opened the door.",
+          "reason": "Make the intended collector the main subject for this purpose construction."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "adverbial clause",
+          "definition": "A clause functioning as an adjunct expressing a circumstance or logical relation.",
+          "example": "when the meeting ended in We left when the meeting ended"
+        },
+        {
+          "term": "concession",
+          "definition": "A relation presenting a potential obstacle or contrary expectation alongside the main situation.",
+          "example": "although the route was longer"
+        },
+        {
+          "term": "purpose clause",
+          "definition": "A clause expressing an intended outcome or goal.",
+          "example": "so that we could finish"
+        }
+      ],
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d15-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The intended meaning singles out online applicants from a larger group. Which version marks an integrated defining relative?",
+      "options": [
+        "The applicants who registered online received a link.",
+        "The applicants, that registered online, received a link.",
+        "The applicants, received a link who registered online.",
+        "The applicants, who registered online, received a link."
+      ],
+      "answer": 0,
+      "why": "The unpunctuated who-clause identifies the relevant subset. The comma-marked version instead presents supplementary information about already identified applicants.",
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which marker is licensed in the ordinary supplementary relative: “The library, ____ roof was damaged, is closed”?",
+      "options": [
+        "what",
+        "whose",
+        "whom",
+        "that"
+      ],
+      "answer": 1,
+      "why": "Whose expresses the genitive relation to roof and can have a non-human antecedent such as library.",
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement accurately describes British English relative usage?",
+      "options": [
+        "Object who is ungrammatical in all registers.",
+        "That must follow a fronted preposition.",
+        "Defining which is grammatical, though some editorial styles prefer that.",
+        "Which is never allowed in a defining relative."
+      ],
+      "answer": 2,
+      "why": "The British pattern permits restrictive which. The other claims falsely turn a style or register preference into a universal rule.",
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence contains an ordinary integrated contact relative?",
+      "options": [
+        "The file, I requested, has arrived.",
+        "The file arrived yesterday has been approved, intending file as the subject of arrived within a relative.",
+        "The file, that I requested, has arrived.",
+        "The file I requested has arrived."
+      ],
+      "answer": 3,
+      "why": "I requested is an integrated object relative with no overt marker. Supplementary relatives and ordinary finite subject relatives do not allow that same deletion pattern.",
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which analysis of “the forms received yesterday” fits the ordinary intended reading?",
+      "options": [
+        "A finite active relative with subject forms.",
+        "A non-finite participial postmodifier with a passive interpretation.",
+        "A complete independent interrogative.",
+        "A future-perfect passive clause."
+      ],
+      "answer": 1,
+      "why": "Received yesterday is a past-participial non-finite modifier; it does not independently mark finite past tense or future perfect aspect.",
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In “the claim that the manager resigned”, how does the that-clause function?",
+      "options": [
+        "It supplies the content of the claim.",
+        "It is an adjective word rather than a clause.",
+        "It is a relative with an object gap after resigned.",
+        "It is an independent command."
+      ],
+      "answer": 0,
+      "why": "The clause the manager resigned is internally complete and states the content of the claim. There is no object gap linked to claim.",
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-q07",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Complete the standard non-finite embedded-question pattern: “She is deciding ____ to accept the offer.”",
+      "options": [
+        "what",
+        "whether",
+        "if",
+        "that"
+      ],
+      "answer": 1,
+      "why": "Whether introduces an alternative before the to-infinitive. If to accept is not the corresponding standard pattern.",
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which version has ordinary embedded-question order?",
+      "options": [
+        "We know where does the archive be.",
+        "We know that where the archive is.",
+        "We know where the archive is.",
+        "We know where is the archive."
+      ],
+      "answer": 2,
+      "why": "The embedded question keeps subject the archive before is. No additional that belongs before where in this intended pattern.",
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence explicitly expresses an intended purpose?",
+      "options": [
+        "We left early so that we could catch the shuttle.",
+        "We left when the bell rang.",
+        "We left although the discussion continued.",
+        "We left because the hall was closing."
+      ],
+      "answer": 0,
+      "why": "So that we could catch the shuttle states the intended goal. The other clauses express reason, time and concession respectively.",
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Foundation",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-q10",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Assess standard edited grammar: (A) Although the room was small, (B) the volunteers arranged the chairs (C) so that everyone could see the screen.",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "No error"
+      ],
+      "answer": 3,
+      "why": "The concession clause is attached to its main clause and the purpose clause has a clear subject and modal pattern. No correction is required.",
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r11",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the information difference between “The nurses who work nights attend at ten” and “The nurses, who work nights, attend at ten”.",
+      "model": "The integrated version identifies the night-working nurses within a relevant group. The supplementary version presents night work as an added comment about the nurses already identified.",
+      "rubric": [
+        "Explain identifying restriction versus supplement.",
+        "Do not infer a fixed number of nurses from punctuation alone."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r12",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Identify the function of whom in “the adviser whom the board appointed”.",
+      "model": "Whom functions as object of appointed inside the relative clause; the board is the relative clause’s subject.",
+      "rubric": [
+        "Identify the role within the relative clause.",
+        "Keep the board as the expressed subject."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Foundation",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r13",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "What does which refer to in “The server failed during registration, which delayed the interviews”?",
+      "model": "Which refers to the preceding event or situation—the server’s failure during registration—rather than simply the noun server.",
+      "rubric": [
+        "Identify the whole-clause antecedent.",
+        "Explain the consequence expressed in the relative."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r14",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Give a formal pied-piped relative version: “The colleague who I spoke to has replied.”",
+      "model": "The colleague to whom I spoke has replied.",
+      "rubric": [
+        "Front to with whom.",
+        "Retain the original relative relation and main predicate."
+      ],
+      "alternatives": [
+        "The original with object who and stranding is already grammatical; the task requests a formal alternative."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r15",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Omit the relative marker only if permitted: “The article that we discussed is online.”",
+      "model": "The article we discussed is online.",
+      "rubric": [
+        "Keep we as the relative clause’s subject.",
+        "Recognise the missing object relation to article."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Why does the same deletion not work inside “The article that influenced us is online”?",
+      "model": "That corresponds to the subject of influenced. Deleting it would not preserve the ordinary integrated finite relative structure; the result would appear to contain an unlinked main clause.",
+      "rubric": [
+        "Identify the subject relation.",
+        "Distinguish it from the object-relative deletion pattern."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r17",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Use a non-finite participial relative: “The parcels which were delivered this morning are in reception.”",
+      "model": "The parcels delivered this morning are in reception.",
+      "rubric": [
+        "Retain the passive relation between parcels and delivery.",
+        "Preserve this morning as the time expression."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r18",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Why is “the author writing the article” not automatically equivalent to “the author who wrote the article”?",
+      "model": "Writing presents an ongoing or characterising activity relative to context; who wrote explicitly uses a finite past form for the completed or past event. Context may make their reference overlap, but the forms do not preserve every temporal distinction.",
+      "rubric": [
+        "Identify the finite/non-finite difference.",
+        "Explain the potential change in event interpretation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r19",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Distinguish the final clauses: “the report that she criticised” / “the report that the bridge was unsafe”.",
+      "model": "The first contains a relative clause with an object relation missing after criticised. The second contains a content clause giving the report’s proposition.",
+      "rubric": [
+        "Locate the gap in the relative.",
+        "Recognise the internally complete content clause."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-r20",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare what she wrote in “I wonder what she wrote” and “I kept what she wrote”.",
+      "model": "After wonder, it is naturally an embedded question about the writing. After kept, it naturally refers to the thing or text that she wrote, a fused-relative interpretation.",
+      "rubric": [
+        "Give both interpretations.",
+        "Avoid treating every what-expression as an indirect question."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-r21",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Put the embedded question in ordinary order: “No one knows / why / did / they / leave”.",
+      "model": "No one knows why they left.",
+      "rubric": [
+        "Remove do-support from the embedded question.",
+        "Retain the past-time meaning through left."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-r22",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Use extraposition without changing the proposition: “That the replacement arrived on time is fortunate.”",
+      "model": "It is fortunate that the replacement arrived on time.",
+      "rubric": [
+        "Use anticipatory it in the subject position.",
+        "Retain the content clause and evaluation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-r23",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Identify the understood subordinate subject in “Mina hopes to finish the survey” and the expressed subordinate subject in “Mina wants the assistant to finish the survey”.",
+      "model": "Mina is understood as the finisher after hopes. The assistant is expressed as the finisher in the wants construction.",
+      "rubric": [
+        "Identify the intended participant in each infinitival clause.",
+        "Do not assume every infinitive shares the main subject."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-r24",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Name the relations: “We waited until the rain stopped”; “We stayed because the room was warm”; “We brought a lamp so that we could read”.",
+      "model": "The clauses express time endpoint, reason and purpose respectively.",
+      "rubric": [
+        "Identify all three relations.",
+        "Do not treat the clause introducers as interchangeable."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r25",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the difference: “It was so cold that the pipes froze” / “We wrapped the pipes so that they would not freeze”.",
+      "model": "The first describes a result associated with a degree of cold. The second describes an action undertaken for a preventive purpose.",
+      "rubric": [
+        "Distinguish result from intended purpose.",
+        "Preserve the actual freezing versus prevention contrast."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r26",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Give two possible relationships for as in “As the lights went out, we stopped speaking”, and explain how to make the intended relation explicit.",
+      "model": "As can locate stopping at the time the lights went out; context may instead present the outage as a reason. When or because can make the intended time or causal relation clearer.",
+      "rubric": [
+        "Recognise the contextual ambiguity.",
+        "Offer explicit alternatives without claiming the original is always wrong."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r27",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Combine with although, preserving the stipulated concession: “The evidence was incomplete. The panel reached a decision.”",
+      "model": "Although the evidence was incomplete, the panel reached a decision.",
+      "rubric": [
+        "Attach the concession clause to a main clause.",
+        "Keep the incompleteness and the decision without endorsing its quality."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-r28",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit the formal paragraph: “The hall, that was built in 1980, is being repaired. We asked where would the meeting take place. The staff moved the chairs because of the roof was leaking.”",
+      "model": "The hall, which was built in 1980, is being repaired. We asked where the meeting would take place. The staff moved the chairs because the roof was leaking.",
+      "rubric": [
+        "Use which in the supplementary relative.",
+        "Use embedded question order.",
+        "Use because before the finite reason clause."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d15-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The library, that closes at six, is beside the park.",
+      "model": "The library, which closes at six, is beside the park.",
+      "rubric": [
+        "Use which for the supplementary relative.",
+        "Retain the closing time and location."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The editor to who the message was addressed has replied. Use formal case after the fronted preposition.",
+      "model": "The editor to whom the message was addressed has replied.",
+      "rubric": [
+        "Use whom after the fronted to in the formal pattern.",
+        "Keep the passive address relation."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The student won the scholarship thanked her tutor, intending one subject noun phrase followed by thanked.",
+      "model": "The student who won the scholarship thanked her tutor.",
+      "rubric": [
+        "Restore the finite subject-relative marker.",
+        "Preserve who won and who thanked."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "“The papers we requested have arrived.” Must which be inserted?",
+      "model": "No change is required. We requested is a grammatical integrated contact relative with an object relation to papers.",
+      "rubric": [
+        "Accept the zero-relative pattern.",
+        "Do not impose an unnecessary marker."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "She wondered when would the results be published.",
+      "model": "She wondered when the results would be published.",
+      "rubric": [
+        "Keep the embedded subject before the modal.",
+        "Retain the passive publication meaning."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The adviser suggested us to wait.",
+      "model": "The adviser suggested that we wait.",
+      "rubric": [
+        "Use a licensed suggest-complement pattern.",
+        "Retain the recommendation to wait."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-clauses_2",
+        "D-complements",
+        "E-REPORTED",
+        "E-PATTERN",
+        "D-clauses-finite-and-non-finite"
+      ]
+    },
+    {
+      "id": "gv5-d15-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "We left because of the building was closing.",
+      "model": "We left because the building was closing.",
+      "rubric": [
+        "Use because before the finite clause.",
+        "Preserve the stated reason."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "To read the small print, the lamp was switched on by Noor, intending Noor as the reader.",
+      "model": "To read the small print, Noor switched on the lamp.",
+      "rubric": [
+        "Make Noor the understood reader and main subject.",
+        "Retain the purpose and action."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CONJ",
+        "D-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "E-REPORTED",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d15-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Combine using a supplementary relative: “Dr Khan chaired the panel. Her research concerns air quality.”",
+      "model": "Dr Khan, whose research concerns air quality, chaired the panel.",
+      "rubric": [
+        "Use whose to express the research relation.",
+        "Mark the supplement with a comma pair.",
+        "Retain both propositions without adding a causal claim."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-who-whom",
+        "E-WHOLEREL",
+        "D-prepositions_2"
+      ]
+    },
+    {
+      "id": "gv5-d15-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Make an integrated object contact relative: “I borrowed a book. You recommended that book.”",
+      "model": "I borrowed the book you recommended.",
+      "rubric": [
+        "Keep you as the subject of recommended.",
+        "Use the shared book as the object-linked antecedent.",
+        "Omit the marker only in the integrated relative."
+      ],
+      "alternatives": [
+        "I borrowed a book you recommended. (Valid if the reference is intentionally indefinite.)"
+      ],
+      "conceptId": "gv5-d15-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "D-relative-clauses_2",
+        "D-clauses-finite-and-non-finite",
+        "D-who-whom",
+        "D-prepositions_2"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d15-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write an 80–110-word account of a community meeting. Include one defining relative, one supplementary relative, one embedded question and clauses of purpose and concession. Annotate each relationship.",
+    "model": "Residents who live beside the canal attended the meeting on Friday. The organiser, whose family has worked in the area for years, introduced the maintenance proposal. Several visitors asked when the next inspection would take place. The engineer displayed a map so that everyone could identify the affected streets. Although the proposed timetable was ambitious, the group agreed to discuss it again after the inspection. The chair recorded each question and promised to circulate the answers. Before the visitors left, a volunteer checked that the recorded names and contact details were accurate.\n\nAnalysis: who live beside the canal is defining; whose family has worked in the area for years is supplementary; when the next inspection would take place is embedded interrogative content; so that expresses purpose; although expresses concession.",
+    "rubric": [
+      "Use all five specified clause relationships clearly.",
+      "Distinguish defining and supplementary punctuation.",
+      "Use ordinary embedded-question order.",
+      "Keep the annotation consistent with the actual passage."
+    ],
+    "alternatives": [
+      "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+    ],
+    "conceptId": "gv5-d15-m04",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-CONJ",
+      "D-clauses_2",
+      "D-clauses-finite-and-non-finite",
+      "E-REPORTED",
+      "D-prepositions_2"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d15-rec01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Recall Day 4: give the grammatical role of who in “the adviser who signed the form”.",
+      "model": "Who is the subject of signed within the relative clause and relates to adviser.",
+      "rubric": [
+        "Analyse the pronoun within its own clause.",
+        "Identify the antecedent adviser."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d15-rec02",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 14: classify the whole sentence and the embedded clause in “Do you know where the office is?”",
+      "model": "The whole sentence is a direct interrogative; where the office is is an embedded interrogative clause with subject-before-verb order.",
+      "rubric": [
+        "Keep the two levels of analysis distinct.",
+        "Explain why the final question mark belongs to the complete direct question."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d15-rec03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Recall Day 12: “We look forward to meet the volunteers who joined this week.”",
+      "model": "We look forward to meeting the volunteers who joined this week.",
+      "rubric": [
+        "Use the -ing complement after look forward to.",
+        "Retain the defining relative and its intended participants."
+      ],
+      "alternatives": [
+        "Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements."
+      ],
+      "conceptId": "gv5-d12-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I explain how a relative clause relates to its antecedent.",
+    "I distinguish integrated identification from a supplementary comment.",
+    "I omit relative markers only where the construction licenses omission.",
+    "I distinguish a content clause from a relative clause and an embedded question from a fused-relative reading.",
+    "I preserve participants, time and modality when choosing non-finite alternatives.",
+    "I choose adjunct clauses according to the relationship I intend to assert."
+  ],
+  "sources": [
+    {
+      "id": "C-CONJ",
+      "title": "Conjunctions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions",
+      "consulted": "2026-10-21",
+      "note": "Article body consulted for the relevant grammatical forms and distinctions; original explanations and exercises authored for this course."
+    },
+    {
+      "id": "D-clauses-finite-and-non-finite",
+      "title": "Clauses: finite and non-finite",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-clauses_2",
+      "title": "Clauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-complements",
+      "title": "Complements",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/complements",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-prepositions_2",
+      "title": "Prepositions",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-relative-clauses_2",
+      "title": "Relative clauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses_2",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "D-who-whom",
+      "title": "Who, whom",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/who-whom",
+      "consulted": "2026-10-21",
+      "note": "Substantive deep article body consulted; title checked to exclude soft fallback pages."
+    },
+    {
+      "id": "E-PATTERN",
+      "title": "Verb patterns: verb + infinitive or verb + -ing?",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-infinitive-or-verb-ing",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-REPORTED",
+      "title": "Reported speech: indirect speech",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "E-WHOLEREL",
+      "title": "Relative clauses referring to a whole sentence",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/relative-clauses-referring-to-a-whole-sentence",
+      "consulted": "2026-10-21",
+      "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    }
+  ],
+  "editorialNotes": []
+}

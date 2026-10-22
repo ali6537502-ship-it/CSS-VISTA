@@ -1,0 +1,386 @@
+{
+  "id": "phase-3",
+  "title": "Cumulative assessment: Days 1–18",
+  "orientation": "Attempt these newly authored items without the lesson open, then use their explanations and writing rubrics to plan targeted revision. Earlier phase concepts remain available for review. This is a self-study assessment; there is no time-to-expertise or examination-mark guarantee.",
+  "items": [
+    {
+      "id": "gv5-phase-3-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In the phrase those very old maps, the head is:",
+      "options": [
+        "very",
+        "old",
+        "maps",
+        "those"
+      ],
+      "answer": 2,
+      "why": "Maps determines the noun-phrase category; the other words determine or modify it.",
+      "conceptId": "gv5-d13-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about a constituency test is sound?",
+      "options": [
+        "One failed test proves a string can never be a constituent.",
+        "Substitution, movement and coordination can supply evidence, but individual tests have restrictions.",
+        "Every phrase can move to any sentence position.",
+        "Word adjacency alone establishes every phrase boundary."
+      ],
+      "answer": 1,
+      "why": "Constituency diagnostics are evidence rather than universal mechanical proofs. Different constructions license different replacements or movements.",
+      "conceptId": "gv5-d13-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which expression is a non-finite clause?",
+      "options": [
+        "Did the observer wait?",
+        "The observer waited.",
+        "because the observer waited",
+        "to observe the hearing"
+      ],
+      "answer": 3,
+      "why": "To observe the hearing is an infinitival non-finite clause. The others contain finite verb structure.",
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which version repairs the comma splice without changing the two propositions?",
+      "options": [
+        "The files arrived, the clerk checked them.",
+        "The files arrived; the clerk checked them.",
+        "The files, arrived the clerk checked them.",
+        "The files arrived the clerk, checked them."
+      ],
+      "answer": 1,
+      "why": "The semicolon supplies a valid boundary between related main clauses.",
+      "conceptId": "gv5-d14-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In My neighbour, who teaches chemistry, called, the commas normally mark:",
+      "options": [
+        "a supplementary relative adding information about the identified neighbour",
+        "an embedded direct question",
+        "an object pronoun gap repeated by who",
+        "a defining relative essential to choose which neighbour"
+      ],
+      "answer": 0,
+      "why": "The parenthesised relative adds information about an already identified referent; its punctuation signals supplementary rather than defining status.",
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose a standard embedded question after I wonder.",
+      "options": [
+        "where has she put the key",
+        "where she has put the key",
+        "that where she has put the key",
+        "where did she putted the key"
+      ],
+      "answer": 1,
+      "why": "The embedded interrogative uses subject-before-auxiliary order and no inserted that before where.",
+      "conceptId": "gv5-d15-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Complete the parallel correlative: The scheme will either reduce waiting times or ____.",
+      "options": [
+        "improving access",
+        "improve access",
+        "the improvement of access",
+        "access is improving"
+      ],
+      "answer": 1,
+      "why": "Either coordinates the two plain-form verb phrases reduce waiting times and improve access after shared will.",
+      "conceptId": "gv5-d16-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which punctuation fits however joining two main clauses?",
+      "options": [
+        "The trial; ended however the review continued.",
+        "The trial ended however; the review continued.",
+        "The trial ended, however, the review continued.",
+        "The trial ended; however, the review continued."
+      ],
+      "answer": 3,
+      "why": "However functions as a connective adverb here. The semicolon joins the clauses and the comma marks the introductory adverb.",
+      "conceptId": "gv5-d16-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "They should have checked the figures, but they did not. Which meaning is expressed?",
+      "options": [
+        "A neutral past habit with no evaluation",
+        "A criticism of an unperformed past action",
+        "Proof that checking was completed",
+        "Present ability to check"
+      ],
+      "answer": 1,
+      "why": "Should have checked expresses a past expectation/advisability; but they did not explicitly confirms non-performance.",
+      "conceptId": "gv5-d17-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In You must submit the form by Friday, must most naturally expresses:",
+      "options": [
+        "a comparative degree",
+        "a deduction from physical evidence",
+        "an obligation",
+        "a finished past result"
+      ],
+      "answer": 2,
+      "why": "The utterance imposes or reports a requirement, a deontic reading, rather than inferring a factual conclusion.",
+      "conceptId": "gv5-d17-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q11",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The speaker imagines a different past: If I ____ the warning, I would have waited.",
+      "options": [
+        "had seen",
+        "have see",
+        "will see",
+        "seeing"
+      ],
+      "answer": 0,
+      "why": "Past perfect had seen supplies the counterfactual past condition in this explicit context.",
+      "conceptId": "gv5-d18-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q12",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about formal mandative English is accurate?",
+      "options": [
+        "The committee recommended that she should attend is an established British construction.",
+        "Every that-clause after recommend must describe a past fact.",
+        "The plain subjunctive requires attends after she.",
+        "British English rejects should after recommend."
+      ],
+      "answer": 0,
+      "why": "Mandative should is established in British English; a plain subjunctive that she attend is another recognised construction.",
+      "conceptId": "gv5-d18-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q13",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The equipment in both storerooms ____ available.",
+      "options": [
+        "be",
+        "are",
+        "have",
+        "is"
+      ],
+      "answer": 3,
+      "why": "The subject head equipment is uncountable and singular; the plural noun storerooms is inside a modifying phrase.",
+      "conceptId": "gv5-d02-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q14",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The visitors have submitted ____ forms. Use the ordinary possessive determiner referring to those visitors.",
+      "options": [
+        "theirs",
+        "there",
+        "they",
+        "their"
+      ],
+      "answer": 3,
+      "why": "Their determines forms and refers back to the plural visitors. Theirs is an independent possessive form.",
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q15",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In The curator has been checking the labels, which word is finite?",
+      "options": [
+        "checking",
+        "labels",
+        "has",
+        "been"
+      ],
+      "answer": 2,
+      "why": "Has carries present tense and third-person singular agreement. Been and checking are non-finite forms.",
+      "conceptId": "gv5-d05-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q16",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The inspection ended yesterday: The engineer ____ the roof yesterday.",
+      "options": [
+        "checked",
+        "checks now",
+        "had check",
+        "has checked"
+      ],
+      "answer": 0,
+      "why": "Past simple checked places the event in the stated completed past period.",
+      "conceptId": "gv5-d07-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q17",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence presents a completion deadline rather than a duration endpoint?",
+      "options": [
+        "Deliver the parcel by noon.",
+        "Continue working until noon.",
+        "Remain here until noon.",
+        "Keep waiting until noon."
+      ],
+      "answer": 0,
+      "why": "By noon requires delivery no later than noon. Until marks the endpoint of the continuing situations in the other options.",
+      "conceptId": "gv5-d08-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-q18",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "The printed timetable states: The first train ____ at 06:20 tomorrow.",
+      "options": [
+        "have departed",
+        "depart",
+        "departs",
+        "departing"
+      ],
+      "answer": 2,
+      "why": "Present simple departs can express a scheduled future event and agrees with singular train.",
+      "conceptId": "gv5-d09-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-r01",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain the likely difference between The students who arrived early sat downstairs and The students, who arrived early, sat downstairs.",
+      "model": "Without commas the relative helps identify which students; with commas it supplements the already identified group and normally presents their early arrival as applying to that group.",
+      "rubric": [
+        "Explain the change in reference.",
+        "Do not remove or add commas as a purely decorative choice."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d15-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-r02",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain two formal mandative patterns after The panel recommended that.",
+      "model": "The panel recommended that he attend; the panel recommended that he should attend. Plain subjunctive attend and mandative should are established alternatives, with regional/style preferences.",
+      "rubric": [
+        "Use the plain form after he in the subjunctive.",
+        "Accept British mandative should rather than treating it as an error."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d18-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-r03",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a 90–120-word proposal about a shared learning space. Include an identifying relative clause, an open condition, a remote alternative and a cautious modal claim. Explain the differences after the passage.",
+      "model": "The room that overlooks the courtyard could become a shared study space. It is quiet during the afternoon, although it is used for classes each morning. If the department approves the proposal, we will arrange a short trial next month. Students who need a place for group discussion can book a table in advance. If we had a larger budget, we would also buy adjustable chairs, but that purchase is currently unlikely. The trial may reveal practical problems that the plan has missed. We should therefore collect comments from users before recommending a permanent change. No existing class would lose its teaching room.\n\nAnalysis: that overlooks the courtyard identifies the room. If the department approves is an open future condition. If we had a larger budget presents a remote alternative. May reveal expresses possibility, not a confirmed result.",
+      "rubric": [
+        "Write 90–120 words of connected prose, excluding the grammatical annotation.",
+        "Include every requested construction and identify its form and meaning.",
+        "Check reference, tense, clause boundaries and meaning; this is self-review, not an external grade."
+      ],
+      "alternatives": [
+        "A different response is valid if it preserves the specified meaning and satisfies every stated structural constraint."
+      ],
+      "conceptId": "gv5-d18-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.grammar-v5 { overflow-wrap: anywhere; }
+.grammar-v5 :focus-visible { outline: 3px solid #4338ca; outline-offset: 3px; }
+.grammar-v5 summary { padding-block: .35rem; }
+.grammar-v5 textarea { min-height: 6rem; }
+.grammar-v5 th, .grammar-v5 td { line-height: 1.75; }
+.grammar-reading { max-width: 80ch; }
+@media print {
+  .grammar-v5 .no-print { display: none !important; }
+  .grammar-v5 { color: #000; font-size: 11pt; }
+  .grammar-v5 details { display: block !important; break-inside: avoid; }
+  .grammar-v5 details > * { display: block !important; }
+  .grammar-v5 article { box-shadow: none; border-color: #888; }
+  .grammar-v5 a { color: #000; text-decoration: underline; }
+  .grammar-v5 textarea { white-space: pre-wrap; border: 1px solid #888; }
+  .grammar-v5 button, .grammar-v5 input[type="file"] { display: none !important; }
+}

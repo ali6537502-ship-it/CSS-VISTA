@@ -1,0 +1,164 @@
+gv5-d29-r01 [gv5-d01-m04] Analyse The board appointed Amira chair: identify the subject, object and object complement.
+MODEL: The board is the subject; Amira is the direct object; chair is a noun functioning as object complement and describing the role assigned to Amira.
+RUBRIC: Identify whole phrases rather than just their heads.; Distinguish the object from the complement predicated of that object.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r02 [gv5-d02-m02] Use ordinary general senses and keep the stated quantities: We received two ____ of advice and three ____ of equipment. Supply appropriate countable unit nouns.
+MODEL: We received two pieces of advice and three items of equipment.
+RUBRIC: Keep advice and equipment uninflected in their ordinary general senses.; Use countable unit nouns that fit two and three.
+ALTERNATIVES: Pieces can also be used for equipment; other suitable unit nouns are acceptable where their meanings fit.
+
+gv5-d29-r03 [gv5-d03-m01] Explain the normal reference difference between A visitor is waiting and The visitor is waiting.
+MODEL: A visitor introduces an indefinite visitor without presenting that person as already identifiable; the visitor presents the referent as identifiable in the current context. Neither article alone specifies whether the speaker knows the person’s identity.
+RUBRIC: Discuss identifiability to the addressee, not merely physical uniqueness.; Do not equate indefinite reference with necessarily unknown identity.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r04 [gv5-d04-m03] The intended speaker is unknown. Explain why Someone has left their bag does not require his or her in contemporary standard English.
+MODEL: Someone takes singular has in its clause; singular their is an established possessive form referring to an unspecified person. His or her is possible in suitable contexts but is not grammatically required.
+RUBRIC: Separate the agreement of someone from the pronoun paradigm used later.; Recognise singular they without making a claim about the unidentified person’s gender.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r05 [gv5-d07-m03] The file was missing when I arrived at noon. Supply an appropriate perfect form of disappear to show anteriority: By noon, the file ____.
+MODEL: By noon, the file had disappeared.
+RUBRIC: Use had + past participle to look back from the stated past reference point.; Do not add a passive auxiliary to intransitive disappear.
+ALTERNATIVES: A fuller answer such as had already disappeared is acceptable.
+
+gv5-d29-r06 [gv5-d09-m04] Explain why will is legitimate in If you will wait by the entrance, I will fetch the guide, with a willingness interpretation.
+MODEL: Will in the conditional clause can express willingness: if you are willing to wait. It is therefore not merely a mechanical future marker forbidden after every if. The main clause states the offered future action.
+RUBRIC: Identify the intended modal meaning of will.; Reject an indiscriminate ban on will in all if-clauses.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r07 [gv5-d11-m03] Classify hard and hardly in He worked hard but hardly spoke, and explain their meanings.
+MODEL: Both are adverbs here. Hard means with effort; hardly means scarcely or almost not. Their meanings are not interchangeable.
+RUBRIC: Identify the class from the constructions.; Explain the semantic contrast rather than treating -ly as a harmless spelling change.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r08 [gv5-d12-m04] Arrange all supplied tokens into one ordinary imperative: it / please / off / switch. Do not add words.
+MODEL: Please switch it off.
+RUBRIC: Use every supplied token once.; Place the unstressed pronoun object between switch and off.
+ALTERNATIVES: Switch it off, please.
+
+gv5-d29-r09 [gv5-d13-m03] Give two plausible attachments for beside the museum in I photographed the visitor beside the museum. State whether the phrase can locate the photographing event or describe the visitor.
+MODEL: It can locate the event: Beside the museum, I photographed the visitor. It can modify the visitor: I photographed the visitor who was beside the museum. Context is needed to select the intended attachment.
+RUBRIC: Supply two distinct attachment analyses.; Do not invent additional facts to insist that only one reading is possible.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r10 [gv5-d15-m01] Combine these statements using a supplementary relative clause without deleting either fact: The manuscript was damaged. It was recovered from the cellar.
+MODEL: The manuscript, which was recovered from the cellar, was damaged.
+RUBRIC: Preserve both the damage and the recovery facts.; Use commas to mark the supplementary relative and avoid a repeated object/subject pronoun inside it.
+ALTERNATIVES: The manuscript, which was damaged, was recovered from the cellar.
+
+gv5-d29-r11 [gv5-d14-m04] Split the following into two complete written sentences without adding a result or reason claim: The survey ended in April, and the findings were published in June.
+MODEL: The survey ended in April. The findings were published in June.
+RUBRIC: Retain the two dates and events.; Supply complete clauses and correct sentence-final punctuation.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r12 [gv5-d17-m03] Contrast She needn’t have travelled and She didn’t need to travel. Explain what can be inferred about the journey.
+MODEL: Needn’t have travelled normally presents an actual journey as unnecessary. Didn’t need to travel states absence of necessity; whether she travelled depends on context rather than the form alone.
+RUBRIC: Distinguish an unnecessary completed action from a statement of no necessity.; Do not claim that didn’t need to invariably proves non-performance.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r13 [gv5-d18-m01] Identify the time relationship in If the council had approved the grant, the centre would be open now.
+MODEL: The if-clause imagines a different past approval; the main clause imagines a present consequence. It is a counterfactual mixed-time conditional, not a description of an actual approval.
+RUBRIC: Identify the past condition and present result separately.; Explain the remote/counterfactual interpretation without treating numbered labels as the only possible grammar.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r14 [gv5-d24-m01] Edit genuine grammatical and boundary errors only: The old map were difficult to read. It contained several informations about wells, however, the surveyors needed a newer source.
+MODEL: The old map was difficult to read. It contained several pieces of information about wells; however, the surveyors needed a newer source.
+RUBRIC: Repair singular map/was agreement.; Use an appropriate countable unit for information.; Repair the main-clause boundary before however while preserving the contrast.
+ALTERNATIVES: A full stop before However is also valid.
+
+gv5-d29-r15 [gv5-d23-m02] Focus the location with an it-cleft: The team found the ledger in the attic. Preserve the past event and all participants.
+MODEL: It was in the attic that the team found the ledger.
+RUBRIC: Use past was in the cleft frame.; Preserve the team as finder and the ledger as object.; Recognise that focus changes even though the core event content is retained.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-r16 [gv5-d29-m03] A learner answers six distinct items correctly, then repeats one of those items four times after reading its explanation. State a defensible evidence report and one next revision action.
+MODEL: Six distinct items were answered correctly; one of them received four additional exposed responses. The extra responses are practice on one item, not four new independent successes. Next, attempt an unfamiliar response task on the same underlying concept and explain the choice.
+RUBRIC: Keep the number of distinct items at six.; Label exposure and retries separately.; Recommend an observable new application rather than declare full topic mastery.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-c01 [gv5-d10-m01] Correct genuine errors: The condition of the storage rooms have deteriorated.
+MODEL: The condition of the storage rooms has deteriorated.
+RUBRIC: Identify singular condition as the subject head.; Preserve present-perfect meaning while correcting agreement.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-c02 [gv5-d03-m01] Correct the article: A auditor inspected the original accounts.
+MODEL: An auditor inspected the original accounts.
+RUBRIC: Choose the article by the initial vowel sound in auditor.; Retain the person and completed inspection event.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-c03 [gv5-d22-m01] The guide is intended to have read the notice. Repair Having read the notice, the visitors were warned by the guide.
+MODEL: After the guide had read the notice, the visitors were warned by the guide.
+RUBRIC: Make the guide the explicit reader.; Retain the visitors as recipients of the warning.
+ALTERNATIVES: Having read the notice, the guide warned the visitors.
+
+gv5-d29-c04 [gv5-d21-m03] Correct an ordinary indirect question: The curator asked where had the painting been stored.
+MODEL: The curator asked where the painting had been stored.
+RUBRIC: Use subject-before-auxiliary order inside the embedded question.; Preserve past-perfect passive meaning.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-c05 [gv5-d16-m04] Correct the connector pattern: The inspection stopped because of the room was unsafe.
+MODEL: The inspection stopped because the room was unsafe.
+RUBRIC: Use because before a finite reason clause.; Do not remove the reason or replace it with a result.
+ALTERNATIVES: The inspection stopped because of the unsafe room.
+
+gv5-d29-c06 [gv5-d22-m03] Repair the comparison without changing the intended comparison of two salaries: Her salary is higher than her assistant.
+MODEL: Her salary is higher than her assistant’s.
+RUBRIC: Compare salary with salary.; Retain the direction of the comparison.
+ALTERNATIVES: Her salary is higher than that of her assistant.
+
+gv5-d29-c07 [gv5-d24-m01] Repair the boundary: The hearing resumed, nevertheless, the main witness was absent.
+MODEL: The hearing resumed; nevertheless, the main witness was absent.
+RUBRIC: Use a valid boundary between main clauses.; Retain the concessive relationship.
+ALTERNATIVES: The hearing resumed. Nevertheless, the main witness was absent.
+
+gv5-d29-c08 [gv5-d10-m02] In British English, with the members considered individually, correct only genuine errors: The committee are divided in their opinions.
+MODEL: No change is required: The committee are divided in their opinions.
+RUBRIC: Recognise established British plural collective agreement.; Do not force singular agreement while retaining an individual-member interpretation.
+ALTERNATIVES: The committee members are divided in their opinions is an explicit paraphrase, not a necessary correction.
+
+gv5-d29-c09 [gv5-d15-m01] Correct only genuine errors in ordinary standard English: The colleague who I spoke to has replied.
+MODEL: No change is required: The colleague who I spoke to has replied.
+RUBRIC: Recognise object who as an established relative choice.; Recognise standard preposition stranding.
+ALTERNATIVES: The colleague to whom I spoke has replied is a more formal alternative.
+
+gv5-d29-c10 [gv5-d17-m03] The journey happened unnecessarily. Correct only genuine errors: We needn’t have taken a taxi.
+MODEL: No change is required: We needn’t have taken a taxi.
+RUBRIC: Retain the completed unnecessary-action meaning.; Do not add to after modal needn’t.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-t01 [gv5-d19-m01] Make passive and retain the agent: The conservator has repaired the damaged frame.
+MODEL: The damaged frame has been repaired by the conservator.
+RUBRIC: Preserve present perfect.; Retain both participants and singular agreement.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-t02 [gv5-d21-m03] At the end of Monday, report this question asked that morning using a past reporting frame: The visitor asked the porter, Did you lock the side door?
+MODEL: The visitor asked the porter whether the porter had locked the side door.
+RUBRIC: Use an embedded yes/no question with statement order.; Keep the porter as the person asked about locking.; Use a form compatible with the stated later Monday perspective.
+ALTERNATIVES: The visitor asked the porter if the porter had locked the side door. A clear pronoun may replace the repeated role where its reference is unambiguous.
+
+gv5-d29-t03 [gv5-d23-m01] Begin with Never and preserve tense: We had never encountered such a precise description.
+MODEL: Never had we encountered such a precise description.
+RUBRIC: Invert auxiliary had and subject we.; Retain the perfect participle encountered.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-t04 [gv5-d20-m01] Replace the finite purpose clause with an infinitival purpose clause and preserve its understood subject: Priya used a torch so that she could read the faded label.
+MODEL: Priya used a torch to read the faded label.
+RUBRIC: Keep Priya as the understood reader.; Retain the torch and faded-label information.
+ALTERNATIVES: Priya used a torch in order to read the faded label.
+
+gv5-d29-recall01 [gv5-d03-m04] Without looking back, contrast few and a few in two original sentences about available seats.
+MODEL: Few seats remained, so several visitors had to stand. / A few seats remained, so we could accommodate two more visitors.
+RUBRIC: Use plural countable seats.; Make the scarcity versus small-positive-quantity distinction explicit.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-recall02 [gv5-d19-m04] Explain why The parcel arrived cannot be converted mechanically into The parcel was arrived in ordinary standard English.
+MODEL: Arrive is ordinarily intransitive in this sense and does not license that be-passive. A different verb such as deliver would describe a related event with a different argument structure, not simply passivise arrive.
+RUBRIC: Identify the valency restriction.; Do not present a lexical replacement as an exact voice transformation.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.
+
+gv5-d29-recall03 [gv5-d29-m03] Record one weak concept from this examination, the exact distinction to review and a fresh task for tomorrow. If no error was recorded, identify one written response that still merits checking.
+MODEL: Revision note: I confused a recipient object with an object complement. Tomorrow I will analyse three new verb patterns and explain whether the final phrase receives something or is predicated of the object. I will compare my analysis with the worked models before attempting later retrieval.
+RUBRIC: Name a precise concept and distinction.; Set an observable fresh application, not just reread grammar.; Keep written self-review separate from an objective mark.
+ALTERNATIVES: A different formulation is valid if it preserves the stated meaning and fulfils the specific structural requirements.

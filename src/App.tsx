@@ -65,7 +65,7 @@ const DailyBriefingIntro = lazy(() => import('./features/current-affairs/Introdu
 const Account = lazy(() => import('./pages/Account'))
 const OneLinerGK = lazy(() => import('./pages/OneLinerGK'))
 const LanguageGrammar = lazy(() => import('./pages/LanguageGrammar'))
-const GrammarCourse = lazy(() => import('./pages/GrammarCourse'))
+const GrammarCourse = lazy(() => import('./features/grammar-v5/Course'))
 const BookSummaries = lazy(() => import('./pages/BookSummaries'))
 const Lectures = lazy(() => import('./pages/Lectures'))
 const HandwrittenNotes = lazy(() => import('./pages/HandwrittenNotes'))

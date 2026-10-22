@@ -1,0 +1,154 @@
+gv5-d10-r01 [gv5-d10-m01] In The quality of the printed maps has improved, identify the subject head and explain has.
+MODEL: Quality is the singular head of the subject noun phrase; of the printed maps modifies it, so has has singular agreement.
+RUBRIC: Identify quality rather than maps.; Connect the head to the finite auxiliary has.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r02 [gv5-d10-m01] Complete: I ____ ready; the secretary ____ ready; the secretaries ____ ready. Use present forms of be.
+MODEL: I am ready; the secretary is ready; the secretaries are ready.
+RUBRIC: Use am with I, is with the singular secretary and are with plural secretaries.; Recognise that one person referred to by I does not select is.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r03 [gv5-d10-m01] Explain the agreement difference between The captain and the medic are waiting and The captain, along with the medic, is waiting.
+MODEL: And coordinates two subject referents, giving plural agreement. Along with adds an accompanying phrase to the singular subject captain, giving ordinary singular agreement.
+RUBRIC: Distinguish coordination from accompaniment.; Identify the relevant controller in each sentence.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r04 [gv5-d10-m01] The founder and treasurer is attending. What information would help decide whether the singular is appropriate?
+MODEL: Determine whether founder and treasurer describe the same person or two different people. A single individual can support singular agreement; separate coordinated people normally take plural agreement.
+RUBRIC: Ask about referential identity.; Avoid deciding identity solely from the absence of a second article.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r05 [gv5-d10-m02] Explain the unit/member contrast in The committee has published its report and The committee are discussing their individual objections.
+MODEL: The first presents a single institutional action and unit reference; the second is established British usage foregrounding the members and their individual objections.
+RUBRIC: Recognise legitimate British plural collective agreement.; Explain the interpretation behind the pronouns as well as the verb.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r06 [gv5-d10-m02] Use the usual careful formal convention: Each of the folders ____ a label. Choose a form of have.
+MODEL: Each of the folders has a label.
+RUBRIC: Use singular has with each.; Do not let plural folders inside the of-phrase control the verb.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r07 [gv5-d10-m02] Explain why Some of the medicine is missing and Some of the tablets are missing take different verbs.
+MODEL: Medicine is mass in this context; tablets is plural countable. The quantified expression reflects the relevant number interpretation.
+RUBRIC: Identify the mass/count distinction.; Avoid claiming that some always takes the same number.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r08 [gv5-d10-m02] Apply the ordinary nearer-subject editing convention, then offer a smoother rewrite: Neither the assistants nor the director ____ available.
+MODEL: Neither the assistants nor the director is available. A clearer alternative is The assistants are unavailable, and so is the director.
+RUBRIC: Use singular is with nearer director under the stated convention.; Offer a rewrite preserving that neither party is available.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r09 [gv5-d10-m03] Analyse both agreement relationships in One of the residents who work nights has complained. The intended relative describes several residents.
+MODEL: Residents is the antecedent of who, so work is plural. One is the singular outer subject, so the main clause uses has.
+RUBRIC: Identify two clauses and controllers.; Use the stated antecedent rather than automatically agreeing every verb with one.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r10 [gv5-d10-m03] Reconstruct the formal inverted sentence: near the doorway / two guards / were / standing.
+MODEL: Near the doorway were standing two guards.
+RUBRIC: Place plural two guards as the postverbal subject in the requested inversion.; Keep were agreeing with guards.
+ALTERNATIVES: Near the doorway, two guards were standing is grammatical normal order; if used, explain that it does not retain the requested inversion.
+
+gv5-d10-r11 [gv5-d10-m03] Explain why There’s two seats left may occur in conversation but There are two seats left is the normal formal edit.
+MODEL: Contracted there’s commonly introduces plural associates in speech. Careful formal agreement normally uses are with plural two seats.
+RUBRIC: Distinguish conversational attestation from the target formal convention.; Avoid calling the conversational speaker unintelligent or the pattern impossible.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r12 [gv5-d10-m03] Compare The only resident who works nights has complained and One of the residents who work nights has complained.
+MODEL: The first relative identifies a singular resident; the second relative describes a plural group. Each complete main subject is singular, so both main clauses use has.
+RUBRIC: Identify resident versus residents as the relevant antecedents.; Keep relative-clause agreement separate from main-clause agreement.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r13 [gv5-d10-m04] Complete: Half of the water ____ gone; half of the bottles ____ empty; this pair of scissors ____ blunt.
+MODEL: Half of the water is gone; half of the bottles are empty; this pair of scissors is blunt.
+RUBRIC: Use singular with mass water and singular pair.; Use plural with the counted bottles.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r14 [gv5-d10-m04] Explain the different subjects in A number of appeals are pending and The number of appeals is increasing.
+MODEL: A number of appeals quantifies several appeals and takes plural agreement. The number of appeals makes the numerical figure the subject and takes singular agreement.
+RUBRIC: Distinguish quantifying several items from discussing a figure.; Do not use the word closest to the verb as the sole test.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r15 [gv5-d10-m04] Use context to classify series: This series is complete. These two series are incomplete.
+MODEL: Series has an unchanged singular/plural spelling. This identifies one series; these two identifies two series. The verbs reflect those different numbers.
+RUBRIC: Use determiner and quantity clues.; Do not assume final -s proves plural number.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r16 [gv5-d10-m04] Explain why Three years is a long wait and Three years have passed can both be grammatical.
+MODEL: The first treats the period as one measure; the second presents the passage of plural years. Agreement depends on the construction and interpretation, not an unconditional measurement rule.
+RUBRIC: Recognise both established constructions.; Explain the difference in construal.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r17 [gv5-d10-m04] Edit only real agreement faults: The news are encouraging. The police are checking the entrances. A number of reports has arrived.
+MODEL: The news is encouraging. The police are checking the entrances. A number of reports have arrived.
+RUBRIC: Use singular agreement with news.; Retain plural police are.; Use the plural quantifying a number of construction.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-r18 [gv5-d10-m02] Write one sentence with everyone and inclusive their, and one with both. Explain the finite agreement in each.
+MODEL: Everyone has their own timetable. Everyone controls singular has. Both are available after lunch. Both controls plural are.
+RUBRIC: Use singular finite agreement with everyone despite singular their.; Use plural agreement with both.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c01 [gv5-d10-m01] Correct: The cost of the replacement windows have increased.
+MODEL: The cost of the replacement windows has increased.
+RUBRIC: Identify singular cost as controller.; Retain the plural windows inside the modifier.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c02 [gv5-d10-m02] Correct under ordinary formal agreement: Each of the candidates have a reference number.
+MODEL: Each of the candidates has a reference number.
+RUBRIC: Use singular has with each.; Do not change the intended several candidates into a single candidate.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c03 [gv5-d10-m02] Correct: The police is searching the warehouse.
+MODEL: The police are searching the warehouse.
+RUBRIC: Use the ordinary plural agreement of police.; Keep the progressive search construction.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c04 [gv5-d10-m03] Correct the two faults for the stated meaning: One of the workers who repairs these lifts have arrived. Several workers repair them; one has arrived.
+MODEL: One of the workers who repair these lifts has arrived.
+RUBRIC: Use plural repair with the stated plural worker group.; Use singular has with outer one.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c05 [gv5-d10-m03] Correct for careful formal writing: There is several unsigned forms on the desk.
+MODEL: There are several unsigned forms on the desk.
+RUBRIC: Use formal are with plural forms.; Keep the existential construction and stated location.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c06 [gv5-d10-m04] Correct: The number of missing files are alarming.
+MODEL: The number of missing files is alarming.
+RUBRIC: Make the figure expressed by the number the agreement controller.; Do not change the claim into several files being alarming.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c07 [gv5-d10-m02] Decide whether a change is required in British English: The committee have changed their minds after discussing the evidence.
+MODEL: No change is required. The plural collective agreement and their minds foreground the members in an established British pattern.
+RUBRIC: Recognise a legitimate member reading.; Do not replace their minds with its mind and alter the intended reference.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-c08 [gv5-d10-m04] Decide whether a change is required: These two series of workshops are fully booked.
+MODEL: No change is required. Two series is plural despite the unchanged spelling, so are is appropriate.
+RUBRIC: Use the stated quantity two.; Do not make every occurrence of series singular.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-t01 [gv5-d10-m01] Split into two sentences without changing the facts: The manager, who is accompanied by two consultants at today’s meeting, has approved the plan. Keep the manager as the singular subject of the approval clause.
+MODEL: The manager has approved the plan. Two consultants are accompanying the manager at today’s meeting.
+RUBRIC: Retain the manager as the stated approval subject.; Preserve the consultants’ accompanying presence at today’s meeting without adding that they approved.
+ALTERNATIVES: The manager has approved the plan. At today’s meeting, the manager is accompanied by two consultants.
+
+gv5-d10-t02 [gv5-d10-m02] Avoid the awkward mixed-number nor-subject while preserving both negative facts: Neither the director nor the assistants are available.
+MODEL: The director is unavailable, and the assistants are unavailable.
+RUBRIC: Keep both parties unavailable.; Give each clause agreement with its own explicit subject.
+ALTERNATIVES: The director is not available, and neither are the assistants.
+
+gv5-d10-rec01 [gv5-d02-m02] Recall Day 2: Why is equipment not automatically plural when it refers to several machines?
+MODEL: Equipment is ordinarily a mass noun in this sense; several items of equipment counts units without treating equipment itself as a regular plural.
+RUBRIC: Distinguish semantic quantity from grammatical countability.; Use a suitable unit expression.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-rec02 [gv5-d04-m03] Recall Day 4: Does singular they require everyone to take have in Everyone has their ticket?
+MODEL: No. Everyone controls singular has; singular their supplies personal reference without changing the antecedent’s finite agreement.
+RUBRIC: Keep pronoun reference and finite agreement distinct.; Recognise established singular they/their.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.
+
+gv5-d10-rec03 [gv5-d05-m01] Recall Day 5: In The reports have been filed, which word is finite and can show the relevant singular/plural distinction?
+MODEL: Have is finite; the corresponding singular subject would use has. Been and filed are participial forms here.
+RUBRIC: Identify have as finite.; Explain the has/have contrast without changing participles.
+ALTERNATIVES: Accept other grammatical responses that preserve the stated facts, viewpoint and relevant distinction.

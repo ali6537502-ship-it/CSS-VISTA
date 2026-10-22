@@ -1,0 +1,111 @@
+gv5-d29-q01 [gv5-d01-m03] In a glass roof, which analysis separates category from function?
+0:Glass is a noun functioning as a modifier of roof. | 1:Glass is an adverb because it describes something. | 2:Roof is necessarily the subject wherever the phrase appears. | 3:A is the noun head.
+KEY:0 Glass retains noun category while functioning as a premodifier; the phrase’s external function depends on its sentence context.
+
+gv5-d29-q02 [gv5-d01-m02] In the transparent structure care + -less + -ness, what does -ness do?
+0:Marks plural number | 1:Forms a noun from the adjective careless | 2:Marks past tense | 3:Forms a comparative adjective
+KEY:1 -ness is derivational here: careless is an adjective and carelessness is a noun. It does not mark plural, tense or comparison.
+
+gv5-d29-q03 [gv5-d05-m02] Complete the standard negative: The camera does not ____ the entrance.
+0:records | 1:recorded | 2:record | 3:recording
+KEY:2 Do-support carries present tense and agreement; the following lexical verb takes its plain form record.
+
+gv5-d29-q04 [gv5-d02-m02] The catalogue lists six individual ____ of furniture.
+0:a furniture | 1:furnituring | 2:furnitures | 3:items
+KEY:3 Items supplies a countable unit for ordinary uncountable furniture. The intended structure is six individual items of furniture.
+
+gv5-d29-q05 [gv5-d03-m01] Introduce an unidentified period of sixty minutes: We waited for ____ hour before the gates opened.
+0:an | 1:many | 2:these | 3:a
+KEY:0 Hour begins with a vowel sound, so indefinite an is appropriate. The other choices do not fit this singular noun phrase.
+
+gv5-d29-q06 [gv5-d03-m04] Which sentence presents a small but available quantity of time positively?
+0:We have many time for a check. | 1:We have a little time, so we can check the figures. | 2:We have little time, so time is abundant. | 3:We have a few time for a check.
+KEY:1 A little can present a small useful amount. Little tends to emphasise scarcity; a few and many do not quantify uncountable time in this sense.
+
+gv5-d29-q07 [gv5-d04-m03] An applicant’s gender is unspecified: Each applicant should bring their own identification. Which judgement is defensible?
+0:Their is necessarily ungrammatical. | 1:Each applicant must be changed to all applicants. | 2:The sentence uses established singular-they reference. | 3:Their must be followed by identification are.
+KEY:2 Singular their can refer to the unspecified person introduced by each applicant. The noun phrase remains singular where its own agreement requires it.
+
+gv5-d29-q08 [gv5-d04-m01] The invitation was addressed to Fatima and ____.
+0:I | 1:myself, necessarily | 2:mine | 3:me
+KEY:3 Objective me fits the coordinated complement of to. The simple case relationship is visible in addressed to me; reflexive myself is not required here.
+
+gv5-d29-q09 [gv5-d07-m01] The alarm ____ at seven yesterday, and the building was empty by eight.
+0:sounded | 1:is sounding | 2:has been sounded yesterday | 3:has sounded
+KEY:0 The completed event is located in the finished past by yesterday. Past simple sounded fits that narrative context.
+
+gv5-d29-q10 [gv5-d06-m04] Choose the wording that explicitly states continuing activity up to now.
+0:The team will sort the files next month. | 1:The team has been sorting the files since nine and is still doing so. | 2:The team sorted the files yesterday and then left. | 3:The team had sorted the files before the inspection began.
+KEY:1 The perfect progressive links the activity to now, and is still doing so explicitly confirms continuation. The other options locate the event elsewhere.
+
+gv5-d29-q11 [gv5-d09-m03] Use the future-perfect form to present completion before next Friday: By next Friday, the crew ____ the roof.
+0:will have repairing | 1:will repaired | 2:will have repaired | 3:will has repaired
+KEY:2 Future-perfect will have repaired presents the repair as complete by the future reference point. The prompt specifically requests this form; by alone would not force it in every context.
+
+gv5-d29-q12 [gv5-d10-m01] The standard of the shortlisted essays ____ improved.
+0:are | 1:were | 2:have | 3:has
+KEY:3 The singular head standard controls the main verb; essays is inside an of-phrase. Has improved is the appropriate singular perfect form.
+
+gv5-d29-q13 [gv5-d22-m03] Which comparison explicitly compares running costs with running costs?
+0:Our running costs are lower than those of the other building. | 1:Our running costs are lower than expensive buildings. | 2:Our running costs are lower than the other building is large. | 3:Our running costs are lower than the other building.
+KEY:0 Those of the other building stands for its running costs, making the compared categories parallel.
+
+gv5-d29-q14 [gv5-d11-m04] Which sentence explicitly restricts the subject to Nadia and excludes other people from knowing the access code?
+0:Nadia almost knows the access code. | 1:Only Nadia knows the access code. | 2:Nadia knows only the access code. | 3:Nadia knows the access code only on Mondays.
+KEY:1 Only Nadia focuses the subject under the intended exclusion. The other positions or adverbs restrict the object, time or degree instead.
+
+gv5-d29-q15 [gv5-d25-m02] The editor insists ____ the source before publication. Choose the standard pattern with an -ing complement.
+0:to checking | 1:on checking | 2:that checking | 3:for to check
+KEY:1 Insist on selects a noun phrase or an -ing clause here: insists on checking the source. Insist that the source be checked is another standard pattern, but requires a finite clause.
+
+gv5-d29-q16 [gv5-d13-m01] What is the head of the phrase the unusually broad avenue beside the station?
+0:station | 1:unusually | 2:broad | 3:avenue
+KEY:3 Avenue heads the whole noun phrase. Station heads the smaller noun phrase inside the postmodifying prepositional phrase.
+
+gv5-d29-q17 [gv5-d14-m03] Using the traditional finite-clause classification, choose the complex sentence.
+0:The guard nodded because the visitor had identified herself. | 1:The guard and the visitor waited outside. | 2:The guard nodded; the visitor entered. | 3:The guard nodded and opened the door.
+KEY:0 The selected sentence contains a main clause plus a finite subordinate reason clause. The first has a shared-subject coordinated predicate; the last coordinates main clauses.
+
+gv5-d29-q18 [gv5-d15-m01] Which relative construction leaves the appropriate object gap?
+0:The painting which we borrowed it is insured. | 1:The painting that we borrowed is insured. | 2:The painting that we borrowed it is insured. | 3:The painting whom we borrowed is insured.
+KEY:1 The relative marker corresponds to the object of borrowed, so no resumptive it is added in this standard edited construction. Whom is not appropriate for the non-person painting.
+
+gv5-d29-q19 [gv5-d16-m04] Choose a valid boundary before connective however.
+0:The test; ended however the review continued. | 1:The test ended, however, the review continued. | 2:The test ended; however, the review continued. | 3:The test ended however; the review continued.
+KEY:2 The semicolon separates the two main clauses, and a comma follows the introductory connective adverb. However does not by itself license a comma splice.
+
+gv5-d29-q20 [gv5-d17-m03] The reservation was made, but it was unnecessary: You ____ a table; several were empty.
+0:must not have reserved, meaning a known completed action | 1:cannot reserved | 2:needn’t to reserve | 3:needn’t have reserved
+KEY:3 Needn’t have reserved normally presents a completed reservation as unnecessary. The context explicitly supplies both completion and absence of necessity.
+
+gv5-d29-q21 [gv5-d18-m01] The speaker imagines a different past cause and present consequence: If I had accepted that job, I ____ in Leeds now.
+0:would be living | 1:will have living | 2:had living | 3:would have been lived
+KEY:0 The past-perfect condition concerns a counterfactual past decision; would be living gives the imagined present consequence, a mixed-time conditional.
+
+gv5-d29-q22 [gv5-d19-m01] Make They might have removed the warning passive while preserving its modal-perfect meaning.
+0:The warning might removed. | 1:The warning might have been removed. | 2:The warning might has been removed. | 3:The warning might have being removed.
+KEY:1 Might + have + been + removed preserves modal possibility and perfect anteriority in a passive verb phrase.
+
+gv5-d29-q23 [gv5-d20-m01] The driver paused the journey in order to check the map: The driver stopped ____.
+0:to checking the map | 1:checking the map, meaning ended that activity | 2:to check the map | 3:checked the map
+KEY:2 Stopped to check uses the infinitive to express purpose. Stopped checking would normally mean ending the checking activity, contrary to the stated meaning.
+
+gv5-d29-q24 [gv5-d21-m03] Identify an error in By whom the painting was restored remains unknown.
+0:By whom must be replaced with by who. | 1:was restored must be changed to restored was. | 2:remains must become remain. | 3:No error
+KEY:3 The initial embedded interrogative functions as the subject of remains. Its internal statement order is appropriate; by whom is a formal prepositional interrogative phrase.
+
+gv5-d29-q25 [gv5-d22-m01] Mira is the intended inspector. Which opening explicitly preserves that subject?
+0:After Mira inspected the cable, the damage alarmed her. | 1:Having inspected the cable, the damage was alarming. | 2:To inspect the cable, the damage appeared serious. | 3:After inspecting the cable, the damage alarmed Mira.
+KEY:0 The finite after-clause names Mira as the inspector, while the main clause states her reaction. The other openings make the subject interpretation faulty for the intended meaning.
+
+gv5-d29-q26 [gv5-d23-m01] Front Only after the inspection in We opened the vault only after the inspection.
+0:Only after the inspection we opened the vault. | 1:Only after the inspection did we open the vault. | 2:Only after the inspection did we opened the vault. | 3:Only after the inspection opened we did the vault.
+KEY:1 The fronted restrictive adverbial triggers subject–auxiliary inversion; do-support supplies did and the lexical verb becomes plain open.
+
+gv5-d29-q27 [gv5-d24-m02] Several nurses have separate lockers. Which plural possessive fits?
+0:the nurse’s lockers, necessarily meaning several nurses | 1:the nurses lockers’ | 2:the nurses’ lockers | 3:the nurses’s lockers
+KEY:2 The regular plural nurses ends in s, so its possessive is nurses’. Nurse’s would ordinarily identify one nurse, not the specified several.
+
+gv5-d29-q28 [gv5-d10-m02] In British English with the committee members viewed collectively, identify an error in The committee have reached their decision.
+0:have must be has in every variety and context. | 1:their must be its in every variety and context. | 2:reached must be reaching. | 3:No error
+KEY:3 Plural collective agreement and plural-member reference are established in British English. Singular unit agreement would also be possible with a compatible interpretation; it is not a compulsory correction here.

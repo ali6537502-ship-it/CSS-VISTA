@@ -1,0 +1,1475 @@
+{
+  "day": 4,
+  "id": "gv5-day-04",
+  "title": "Pronouns, Reference and Agreement",
+  "orientation": "Pronouns allow you to avoid unnecessary repetition, but they also require readers to track who or what each expression identifies. This lesson develops form and reference together: choosing me instead of I is a different task from deciding which person she means. You will practise subject, object, possessive, reflexive and reciprocal forms, then follow reference across clauses and sentences. Common traditional slogans need qualification here. It is me, singular they and each other with more than two people can be standard constructions, while a grammatically possible pronoun can still leave a reader uncertain about the intended person. The advanced layers introduce dummy subjects, forward reference, deixis and practical local restrictions on reflexives. Begin with short, explicit contexts, then revise a connected passage so that its reference chain remains clear without needlessly repeating every noun.",
+  "outcomes": [
+    "Choose taught personal, possessive and reflexive forms according to role and meaning.",
+    "Explain reciprocal, demonstrative, indefinite, interrogative and relative uses.",
+    "Track anaphoric, cataphoric and deictic reference without assuming prior noun mention is compulsory.",
+    "Use singular they and identify genuine reference ambiguity.",
+    "Distinguish referring and dummy subjects and explain ordinary local reflexive interpretation."
+  ],
+  "prerequisiteDays": [
+    2,
+    3
+  ],
+  "modules": [
+    {
+      "id": "gv5-d04-m01",
+      "title": "Personal forms, case and reflexive meaning",
+      "taxonomy": [
+        "C",
+        "P"
+      ],
+      "coverageIds": [
+        "gv5-d04-c01",
+        "gv5-d04-c03"
+      ],
+      "definition": "Personal pronouns mark speaker, addressee or other referents. Their forms can distinguish grammatical case, such as I/me and she/her. Reflexive forms such as myself and themselves can refer back to a local subject or emphasise a participant; those uses must be distinguished from ordinary object forms.",
+      "foundation": [
+        "Compare She thanked him with He thanked her. She and he are subject forms; him and her are object forms. The forms show grammatical relationships even when the people remain the same. I, we and they contrast with me, us and them; you and it do not show this case contrast in spelling. Possessive determiners accompany a noun, as my folder and their house, while independent possessives can stand without that noun, as mine and theirs. Hers, ours, yours and theirs have no additional apostrophe. Learn each form together with a short sentence rather than memorising a list without its function."
+      ],
+      "intermediate": [
+        "Coordination does not automatically change the case expected in careful edited prose: Sara and I attended; the tutor spoke to Sara and me. Temporarily removing Sara and can help reveal the ordinary subject or object pattern, although coordination has additional informal usage conventions. Do not insert I simply because it sounds polite. After be, object forms are normal standard usage: It is me and That is her. It is I survives as a highly formal alternative; calling every object form after be wrong confuses a restrictive traditional preference with present-day grammar."
+      ],
+      "advanced": [
+        "When subject and object refer to the same participant in a simple clause, a reflexive often expresses that relation: Leena blamed herself. Leena blamed her normally directs blame towards a different female referent. Reflexives can also emphasise: Leena herself checked the figures; Leena checked the figures herself. The emphatic form adds contrast or responsibility and is not the subject on its own. By herself can mean alone or without help. Do not assume that every first-language reflexive construction needs an English reflexive: She washed and dressed is ordinary when no special emphasis on doing it unaided is intended."
+      ],
+      "expert": [
+        "Case choices interact with register and construction. Than me is standard in comparisons, while than I am uses an expanded clause; compare their actual meanings rather than enforcing a bare subject form. Informal coordinated subjects with me occur in established speech, but Sara and I is the conservative edited choice. Some independent or polite reflexives occur, such as people like yourself; they are not all governed by the simple same-clause rule for direct-object reflexives. This course therefore teaches the local subject–object contrast as a reliable basic pattern while identifying emphatic, polite and discourse-sensitive uses separately."
+      ],
+      "patterns": [
+        {
+          "form": "subject + verb + reflexive object",
+          "meaning": "Leena blamed herself presents subject and object as the same person."
+        },
+        {
+          "form": "coordinated object after a preposition",
+          "meaning": "The invitation is for Bilal and me in careful edited prose."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The curator gave us her notes; the final copy is hers.",
+          "analysis": "Us is an object form, her accompanies a noun, and hers is an independent possessive."
+        },
+        {
+          "sentence": "The scientist herself recalculated the result.",
+          "analysis": "Herself is emphatic; the scientist remains the subject phrase."
+        },
+        {
+          "sentence": "Farah is taller than me, but her brother is taller than I am.",
+          "analysis": "Both comparison patterns are standard; the latter includes an explicit clause."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Amina photographed herself.",
+          "b": "Amina photographed her.",
+          "note": "Both are grammatical; the ordinary local reading is self-directed in the first and directed at another female referent in the second."
+        }
+      ],
+      "exceptions": [
+        "A polite expression such as someone like yourself can be standard without a local reflexive antecedent. This does not make Myself attended the seminar an ordinary neutral replacement for I attended the seminar."
+      ],
+      "mistakes": [
+        {
+          "problem": "In careful edited prose: The manager spoke to I.",
+          "repair": "The manager spoke to me.",
+          "reason": "A personal pronoun complement of to normally takes the object form."
+        },
+        {
+          "problem": "Intended: the speaker injured the speaker. I cut me while chopping vegetables.",
+          "repair": "I cut myself while chopping vegetables.",
+          "reason": "The reflexive marks the ordinary local same-subject-and-object relationship."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "case",
+          "definition": "A grammatical distinction in forms such as I/me associated with their structural role.",
+          "example": "I called them; they called me."
+        },
+        {
+          "term": "emphatic reflexive",
+          "definition": "A reflexive form adding emphasis to a participant rather than serving as a required object.",
+          "example": "The director herself replied."
+        }
+      ],
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-m02",
+      "title": "Pronoun families and relative choices",
+      "taxonomy": [
+        "C",
+        "I"
+      ],
+      "coverageIds": [
+        "gv5-d04-c02"
+      ],
+      "definition": "Pronoun families are grouped by their grammatical patterns and meanings. Interrogative pronouns ask for an identity, relative expressions connect a clause with an antecedent, demonstratives point, indefinites leave identity open, and reciprocal expressions present a mutual relationship.",
+      "foundation": [
+        "Who, what and which can ask for an identity: Who arrived? What happened? Which do you prefer? This, that, these and those can point without repeating a noun: These are ready. When a noun follows, the same forms have determiner uses: these reports. Indefinite pronouns such as someone, anything and nobody refer without naming an individual or thing. Everybody refers to people distributively but normally takes a singular present verb: Everybody knows. Each, either and neither can stand independently when the relevant set is understood. Their determiner uses were introduced on Day 3."
+      ],
+      "intermediate": [
+        "Relative clauses give information connected with an antecedent: the driver who helped us, the form that I submitted and the office which opened yesterday. Who is used for people; which is used for things and can introduce a relative comment on a larger situation. Whose expresses a relationship and can refer to people or things: a house whose roof needs repair. That is possible in many defining relatives, but it does not replace who or which freely in every supplementary construction. Day 15 develops defining, supplementary and reduced relatives in detail; today concentrates on reference and pronoun form."
+      ],
+      "advanced": [
+        "Who commonly functions as either subject or object in contemporary English: Who arrived? Who did you invite? Whom is an object form associated especially with formal prose and directly preceding prepositions: To whom was the letter addressed? Avoid choosing whom solely because a verb or preposition occurs nearby. In Who do you think will lead the group?, who is the subject of will lead, not the object of think. Identify the pronoun’s role inside its own clause. A formal object-relative construction can use whom, while standard object who should not be rejected without a specified register requirement."
+      ],
+      "expert": [
+        "Each other and one another ordinarily express mutual relations among two or more participants. The inherited convention reserving each other for two and one another for more than two is not a dependable modern grammar rule; the two are normally interchangeable. They helped themselves can describe self-directed action, while they helped each other describes mutual help. Mutual reference does not always mean every member acted towards every other member; context determines the pattern. Each other is written as two words, and its genitive is each other’s. Different grammatical frameworks analyse some traditional pronoun labels differently, so this course makes the actual construction explicit."
+      ],
+      "patterns": [
+        {
+          "form": "antecedent + relative clause",
+          "meaning": "The learner who asked the question links who to learner."
+        },
+        {
+          "form": "plural participants + reciprocal expression",
+          "meaning": "The colleagues supported each other presents mutual support."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Those are the files that we requested.",
+          "analysis": "Those has an independent demonstrative use; that connects a relative clause to files."
+        },
+        {
+          "sentence": "The house whose windows were broken is being repaired.",
+          "analysis": "Whose relates windows to the inanimate antecedent house."
+        },
+        {
+          "sentence": "Who do you believe can solve the problem?",
+          "analysis": "Who is subject of can solve despite the intervening do you believe."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The two neighbours helped themselves.",
+          "b": "The two neighbours helped each other.",
+          "note": "Both are grammatical. The first is self-directed; the second is reciprocal."
+        }
+      ],
+      "exceptions": [
+        "Object who is established standard English, especially outside highly formal preposition-first patterns. A formal exercise must state that it requires whom if both forms otherwise fit."
+      ],
+      "mistakes": [
+        {
+          "problem": "The volunteers supported each others.",
+          "repair": "The volunteers supported each other.",
+          "reason": "The reciprocal expression does not add plural -s."
+        },
+        {
+          "problem": "Intended: ask which person will lead. Whom do you think will lead?",
+          "repair": "Who do you think will lead?",
+          "reason": "The interrogative is subject of will lead; it is not an object of think."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "antecedent",
+          "definition": "An expression to which a referring expression is linked.",
+          "example": "The visitor who called links who with visitor."
+        },
+        {
+          "term": "reciprocal",
+          "definition": "A construction describing a mutual relationship among participants.",
+          "example": "They respect each other."
+        }
+      ],
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-m03",
+      "title": "Reference chains, agreement and inclusive pronouns",
+      "taxonomy": [
+        "C",
+        "K",
+        "P"
+      ],
+      "coverageIds": [
+        "gv5-d04-c04",
+        "gv5-d04-c05",
+        "gv5-d04-c07",
+        "gv5-d04-c08"
+      ],
+      "definition": "Reference is the connection between an expression and what it identifies in context. Anaphora looks back to an earlier expression, cataphora anticipates a later one, and deixis depends on the speaker’s situation. Clear pronoun choices maintain those connections across sentences.",
+      "foundation": [
+        "Read Mina found a wallet. She handed it to the receptionist. She refers back to Mina and it to the wallet; both are anaphoric links. A pronoun does not always replace an earlier noun: I and you identify participants in the current exchange, while this can point to an object in view. When she entered the hall, Mina noticed the broken window can use she cataphorically, with Mina supplying the later identification. The order of mention alone therefore does not decide whether a pronoun is grammatical. The reader must have enough information to establish the intended relationship."
+      ],
+      "intermediate": [
+        "Keep reference clear when several potential antecedents appear. Aisha told Hina that she had won the prize leaves the winner uncertain without more context. Repeating a name can improve clarity even though the original sentence is grammatically possible. A pronoun can refer to a larger event or proposition: The bridge was closed. This delayed deliveries. Here this refers to the closure situation, not simply to bridge. For formal exposition, a fuller phrase such as this closure often makes the link clearer. Do not declare every such broad reference wrong, but ask whether readers can recover it reliably."
+      ],
+      "advanced": [
+        "Singular they is an established way to refer to an indefinite individual: Someone has left their umbrella; if anyone calls, ask them to wait. It also serves people who use they as their personal pronoun. A singular referent does not change its usual verb forms: they are, they have. You should not automatically replace singular they with he or insist that unknown people have a binary gender. Respect a person’s stated pronouns and retain clear reference. Where a sentence becomes cumbersome, pluralising the noun phrase or repeating a name may help, provided the meaning remains equivalent."
+      ],
+      "expert": [
+        "Agreement is not a mechanical matching of neighbouring letters. Someone normally takes singular has, while subsequent they has its established are/have forms even when the referent is one person. British collective reference can follow a member-focused plural: The committee have finished their separate reports. A writer must make the intended construal coherent, rather than impose one universal rule about all group nouns. Themselves is widely used with singular they. Themself is also documented, but authorities differ in its status: Cambridge labels it not standard, while Merriam-Webster records it and discusses its increasing use. Institutional editorial preferences can therefore differ. This introductory lesson uses themselves as the broad default without calling every documented alternative nonexistent. Day 10 treats collective and notional agreement in detail."
+      ],
+      "patterns": [
+        {
+          "form": "indefinite singular antecedent + singular they",
+          "meaning": "Someone has left their folder is a standard gender-neutral reference chain."
+        },
+        {
+          "form": "ambiguous pronoun → explicit reference",
+          "meaning": "Repeat a name or descriptive noun when more than one antecedent is plausible."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Every applicant should bring their identification.",
+          "analysis": "Their can refer inclusively to each individual applicant."
+        },
+        {
+          "sentence": "Before he spoke, Omar checked the microphone.",
+          "analysis": "He can anticipate the later name Omar; this is cataphoric reference."
+        },
+        {
+          "sentence": "The reservoir was contaminated. This finding prompted a new inspection.",
+          "analysis": "This finding makes the connection to the preceding proposition explicit."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Hina told Aisha that she had been selected.",
+          "b": "Hina told Aisha, “You have been selected.”",
+          "note": "The first can be ambiguous without context; the second explicitly identifies Aisha as the selected person. The revision is suitable only if that is the intended meaning."
+        }
+      ],
+      "exceptions": [
+        "Pronouns can identify a situation rather than one noun: She resigned. That surprised us. This is grammatical when the event reference is clear; a fuller noun phrase can improve precision."
+      ],
+      "mistakes": [
+        {
+          "problem": "For the stated singular they referent: They is ready to begin.",
+          "repair": "They are ready to begin.",
+          "reason": "Singular reference does not replace the established verb form are with is."
+        },
+        {
+          "problem": "Intended: Nida won. Nida told Saba that she had won.",
+          "repair": "Nida told Saba that Nida had won.",
+          "reason": "Repeating the name removes the stated ambiguity; a correction must not silently choose the wrong winner."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "anaphora",
+          "definition": "Reference linked to an earlier expression or situation.",
+          "example": "Nida found a key and kept it."
+        },
+        {
+          "term": "cataphora",
+          "definition": "Reference anticipating a later identifying expression.",
+          "example": "Before she left, Nida checked the door."
+        },
+        {
+          "term": "deixis",
+          "definition": "Reference depending on the current speaker, location, time or pointing context.",
+          "example": "I will put this here tomorrow."
+        }
+      ],
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE",
+        "F5-THEMSELF-MW",
+        "F5-THEMSELF-C"
+      ]
+    },
+    {
+      "id": "gv5-d04-m04",
+      "title": "Dummy subjects, generic reference and local interpretation",
+      "taxonomy": [
+        "C",
+        "H",
+        "P"
+      ],
+      "coverageIds": [
+        "gv5-d04-c06",
+        "gv5-d04-c09"
+      ],
+      "definition": "A dummy subject fills a grammatical subject position without identifying a normal participant, as it in It is raining. Generic pronouns refer to people generally. Practical binding concerns how pronouns and reflexives are linked to other expressions within grammatical structure.",
+      "foundation": [
+        "In English, a neutral finite statement normally has a subject even when no ordinary actor is involved: It is raining; It is nearly noon. It is not a person causing rain or a previously mentioned object. Existential there introduces something’s existence or presence: There is a spare chair in the corridor. This there differs from locative there in Put the chair there, where it indicates a place. Grammatical descriptions differ in how they analyse the following noun phrase, but treating there as a dummy subject is useful for understanding why the sentence does not need a named actor before is."
+      ],
+      "intermediate": [
+        "Dummy it also permits delayed content: It is useful to check the references; It is clear that the figures differ. The infinitival or that-clause supplies the important content, while it fills the initial subject slot. This arrangement is called extraposition in the relevant constructions and receives advanced treatment on Day 23. Do not assume every it is empty: I found the report. It is useful has an ordinary referring it. The form alone does not settle the interpretation; examine what it is doing in that particular sentence."
+      ],
+      "advanced": [
+        "Generic you, we, one and they allow different perspectives. You can learn a great deal by listening addresses people generally in many instructional contexts. One must check one’s sources is more formal and can sound detached. We can include writer and readers in a shared generalisation; unspecified they can mean a relevant institution or authority, though naming the authority may be clearer in formal reporting. Once a perspective is selected, avoid unexplained switches such as One should check your sources. Generic reference is not an excuse to invent claims about what every reader personally experiences."
+      ],
+      "expert": [
+        "For ordinary reflexive objects, identify the relevant local subject: Nida said that Sana blamed herself normally links herself with Sana. Replacing herself with himself does not ordinarily allow it to refer across that finite clause to an earlier male name. These practical restrictions are often discussed under binding in syntax. They are not a complete theory of every reflexive use: emphatic forms, exempt or perspective-sensitive reflexives and picture-noun constructions can be more complex. A pronoun can also be grammatically possible yet misleading if its antecedent is unclear. Separate the structural restriction from the editorial task of making a reference chain easy to follow."
+      ],
+      "patterns": [
+        {
+          "form": "it + weather/time expression",
+          "meaning": "It is raining fills the subject position without a referring participant."
+        },
+        {
+          "form": "there + be + noun phrase",
+          "meaning": "There is a spare chair introduces the existence or presence of the chair."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "It is snowing outside.",
+          "analysis": "It is a dummy weather subject."
+        },
+        {
+          "sentence": "There are three unclaimed parcels at reception.",
+          "analysis": "Existential there introduces parcels; careful edited agreement is plural are."
+        },
+        {
+          "sentence": "Amir said that Leena blamed herself for the delay.",
+          "analysis": "The local subject Leena supplies the ordinary antecedent of herself."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "It is useful to read the instructions.",
+          "b": "The booklet arrived. It is useful.",
+          "note": "Both are grammatical. The first uses dummy it with delayed infinitival content; the second refers back to the booklet."
+        }
+      ],
+      "exceptions": [
+        "Reflexives used for politeness or emphasis do not all follow the ordinary local-object pattern. Do not extend a beginner’s same-clause test into a claim that all other reflexive constructions are impossible."
+      ],
+      "mistakes": [
+        {
+          "problem": "One should always check your sources. Intended: one consistent generic perspective.",
+          "repair": "One should always check one’s sources.",
+          "reason": "Maintain the selected generic pronoun pattern; You should always check your sources is also possible."
+        },
+        {
+          "problem": "Intended: Sana is self-critical. Amir said that Sana blamed himself.",
+          "repair": "Amir said that Sana blamed herself.",
+          "reason": "For the stated local reflexive meaning, herself agrees with Sana; himself does not create that intended relation."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "dummy subject",
+          "definition": "A subject expression filling a structural position without ordinary participant reference.",
+          "example": "It is late."
+        },
+        {
+          "term": "binding",
+          "definition": "The structural linking of expressions such as pronouns and reflexives with potential antecedents.",
+          "example": "In Leena blamed herself, herself is linked locally to Leena."
+        }
+      ],
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d04-q01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "Choose the ordinary object form after to in careful edited prose: The invitation was sent to ____.",
+      "options": [
+        "I",
+        "my",
+        "mine",
+        "me"
+      ],
+      "answer": 3,
+      "why": "Me is the personal object form; I is subject case, my requires a noun and mine is an independent possessive.",
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence expresses that Leena herself is the person Leena blamed?",
+      "options": [
+        "Leena blamed her’s.",
+        "Leena blamed herself.",
+        "Leena blamed she.",
+        "Leena blamed hers."
+      ],
+      "answer": 1,
+      "why": "Herself expresses the local same-participant object relationship; the distractors misuse subject, possessive or nonstandard apostrophe forms.",
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose the pronoun that is subject of will arrive: ____ do you think will arrive first?",
+      "options": [
+        "Who",
+        "Whom",
+        "Whose",
+        "Their"
+      ],
+      "answer": 0,
+      "why": "Who is subject inside will arrive; do you think does not make it an object.",
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q04",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which statement about each other and one another is accurate?",
+      "options": [
+        "One another is an ordinary singular personal subject.",
+        "Each other must add plural -s after three people.",
+        "They normally overlap and can refer to mutual relations among two or more people.",
+        "Each other is grammatical only with exactly two."
+      ],
+      "answer": 2,
+      "why": "Modern standard use does not enforce the inherited two-versus-more-than-two distinction as a universal rule.",
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q05",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "A person who uses they has arrived. Complete: ____ ready to begin.",
+      "options": [
+        "Their are",
+        "They are",
+        "They is",
+        "Them is"
+      ],
+      "answer": 1,
+      "why": "Singular they retains its usual subject form and are agreement; singular reference does not require they is.",
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In It is raining, what does it do?",
+      "options": [
+        "It fills a dummy subject position.",
+        "It must refer to a previously named cloud.",
+        "It is the direct object of raining.",
+        "It is a possessive determiner."
+      ],
+      "answer": 0,
+      "why": "Weather it need not identify a discourse referent; it occupies the grammatical subject position.",
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Foundation",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q07",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Check the standard statement: It is me [A] / who called [B] / about the repair [C]. Choose a faulty part or No error.",
+      "options": [
+        "No error",
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": 0,
+      "why": "Object me after be is standard. It is I is a highly formal alternative, not the only grammatical form.",
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Without further context, which problem affects Aisha told Hina that she had won?",
+      "options": [
+        "She must always refer to the nearest noun.",
+        "A pronoun cannot occur after that.",
+        "She has more than one plausible antecedent.",
+        "The sentence lacks a finite verb."
+      ],
+      "answer": 2,
+      "why": "Either named person can be the winner in a suitable context, so reference is ambiguous; the structure itself is possible.",
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "In Put the file there, which use of there is present?",
+      "options": [
+        "A reciprocal pronoun.",
+        "A locative expression identifying a place.",
+        "A dummy subject before be.",
+        "A possessive personal pronoun."
+      ],
+      "answer": 1,
+      "why": "There locates the file in this imperative; it differs from existential there introducing a noun phrase.",
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which reading is ordinary in Before she left, Nida checked the window?",
+      "options": [
+        "She cannot refer forward in any grammatical sentence.",
+        "Nida must be the direct object of left.",
+        "She is a possessive determiner.",
+        "She can anticipate Nida as its later identification."
+      ],
+      "answer": 3,
+      "why": "A forward reference is available in this construction; prior noun mention is not an absolute requirement for pronouns.",
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify her in I saw her and her folder was open.",
+      "model": "Object personal pronoun in I saw her; possessive determiner in her folder.",
+      "rubric": [
+        "Use the complete local construction.",
+        "Distinguish the two grammatical uses of the same spelling."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-r02",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use subject or object forms in careful edited prose: Sara and ____ attended; the tutor helped Sara and ____.",
+      "model": "I; me.",
+      "rubric": [
+        "Use subject I in the first coordination.",
+        "Use object me in the second coordination."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-r03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Explain They helped themselves versus They helped each other.",
+      "model": "The first is self-directed; the second expresses mutual help among participants.",
+      "rubric": [
+        "Distinguish reflexive and reciprocal meaning.",
+        "Do not claim the reciprocal requires exactly two participants."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r04",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Identify anaphoric links in Farah bought a lamp. She placed it on the desk.",
+      "model": "She refers to Farah; it refers to the lamp.",
+      "rubric": [
+        "Link each pronoun to its intended referent.",
+        "Do not use the nearest word as a mechanical rule."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r05",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Explain I, this and here in I will put this here while a speaker points at a shelf.",
+      "model": "I identifies the speaker, this the indicated object and here the indicated place; their interpretation depends on the speaking situation.",
+      "rubric": [
+        "Identify the relevant deictic roles.",
+        "Use the supplied pointing context."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r06",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite generically without assuming a male applicant: An applicant should bring his identification.",
+      "model": "An applicant should bring their identification.",
+      "rubric": [
+        "Use an established gender-neutral reference chain.",
+        "Preserve the requirement for an individual applicant."
+      ],
+      "alternatives": [
+        "Applicants should bring their identification is possible if a plural generalisation fits the intended context."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r07",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare It is me and It is I in current standard English.",
+      "model": "It is me is ordinary standard usage; It is I is a highly formal alternative.",
+      "rubric": [
+        "Recognise both as possible.",
+        "Describe register rather than impose a universal prohibition."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-r08",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Use a formal object pronoun after the preceding preposition: To ____ should I send the signed form?",
+      "model": "whom",
+      "rubric": [
+        "Recognise the object relationship to to.",
+        "Use the stated formal preposition-first pattern."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r09",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Distinguish these in These are ready and these reports are ready.",
+      "model": "Independent demonstrative pronoun use in the first; determiner use with reports in the second.",
+      "rubric": [
+        "Identify whether a following noun head is present.",
+        "Use the course’s stated category terminology."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r10",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Distinguish the two uses of it: The clock fell. It broke. It is nearly noon.",
+      "model": "The first it refers to the clock; the second is dummy time it.",
+      "rubric": [
+        "Identify a referring pronoun and an empty subject.",
+        "Do not assign noon a physical actor."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r11",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Make it unambiguous that Hina won: Aisha spoke to Hina. She had won the prize.",
+      "model": "Aisha spoke to Hina, who had won the prize.",
+      "rubric": [
+        "Make Hina the winner explicitly.",
+        "Preserve the speaking event."
+      ],
+      "alternatives": [
+        "Aisha spoke to Hina after Hina had won the prize is acceptable if the implied timing suits the context."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r12",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why whose is grammatical in a bridge whose supports need repair.",
+      "model": "Whose can express a relationship with an inanimate antecedent; supports belong structurally to bridge.",
+      "rubric": [
+        "Recognise established inanimate whose.",
+        "Do not impose a people-only restriction."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r13",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare There is a spare desk with The spare desk is there.",
+      "model": "The first introduces the desk’s presence using existential there; the second locates an identified desk.",
+      "rubric": [
+        "Distinguish existence/presence from location.",
+        "Identify the differing role of there."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r14",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "For the stated singular they user, repair form and reference: Rowan said they is ready. Their has brought a folder.",
+      "model": "Rowan said they are ready. They have brought a folder.",
+      "rubric": [
+        "Use they are and they have.",
+        "Use a subject pronoun rather than possessive their before have."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r15",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "In Amir said that Leena blamed herself, identify the ordinary local antecedent of herself.",
+      "model": "Leena is the local antecedent.",
+      "rubric": [
+        "Locate the clause containing blamed.",
+        "Avoid automatically choosing the first name in the sentence."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r16",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Add emphasis showing that the director personally signed: The director signed the certificate.",
+      "model": "The director herself signed the certificate.",
+      "rubric": [
+        "Keep the ordinary subject.",
+        "Use the reflexive as emphasis rather than as a replacement sole subject."
+      ],
+      "alternatives": [
+        "The director signed the certificate herself is also possible."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-r17",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain the broad reference in The road was closed. This delayed deliveries, then give a clearer formal version.",
+      "model": "This refers to the road closure. This closure delayed deliveries makes the event link explicit.",
+      "rubric": [
+        "Recognise a grammatical proposition/event reference.",
+        "Improve clarity without changing the causal claim."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-r18",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write the same generic advice with you and with one.",
+      "model": "You should check your references. One should check one’s references.",
+      "rubric": [
+        "Maintain each perspective consistently.",
+        "Explain that one is the more detached/formal option here."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d04-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct in careful edited prose: The editor spoke to Sara and I.",
+      "model": "The editor spoke to Sara and me.",
+      "rubric": [
+        "Use object me after to.",
+        "Preserve the coordinated participant Sara."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct the possessive: The blue notebook is her’s.",
+      "model": "The blue notebook is hers.",
+      "rubric": [
+        "Remove the inappropriate apostrophe.",
+        "Keep an independent possessive form."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct: The researchers checked each others results.",
+      "model": "The researchers checked each other’s results.",
+      "rubric": [
+        "Use the reciprocal genitive.",
+        "Do not add ordinary plural -s to each other."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "A person uses singular they. Correct: They has arrived early.",
+      "model": "They have arrived early.",
+      "rubric": [
+        "Use the established verb form have.",
+        "Preserve the person’s pronoun."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Make the generic perspective consistent: One should record your sources.",
+      "model": "One should record one’s sources.",
+      "rubric": [
+        "Match one with one’s.",
+        "Do not invent an unwanted change in audience."
+      ],
+      "alternatives": [
+        "You should record your sources."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct only if necessary: It was me who sent the email.",
+      "model": "No change.",
+      "rubric": [
+        "Accept ordinary object form after be.",
+        "Recognise It was I as an optional highly formal alternative."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "F5-POSSESSION"
+      ]
+    },
+    {
+      "id": "gv5-d04-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Correct only if necessary: The three neighbours thanked each other.",
+      "model": "No change.",
+      "rubric": [
+        "Accept reciprocal reference among more than two.",
+        "Do not mechanically substitute one another as compulsory."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Intended: Leena blames Leena. Correct: Amir said that Leena blamed himself.",
+      "model": "Amir said that Leena blamed herself.",
+      "rubric": [
+        "Use the local subject Leena as antecedent.",
+        "Retain the embedded reporting relationship."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d04-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-DUMMY",
+        "F5-PERSONAL",
+        "F5-REFLEXIVE",
+        "C-NONFINITE"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d04-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Rewrite with a reciprocal expression: Nadia thanked Bilal, and Bilal thanked Nadia.",
+      "model": "Nadia and Bilal thanked each other.",
+      "rubric": [
+        "Preserve mutual thanking.",
+        "Do not change the meaning to self-directed thanking."
+      ],
+      "alternatives": [
+        "Nadia and Bilal thanked one another."
+      ],
+      "conceptId": "gv5-d04-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-WHO",
+        "F5-RECIPROCAL",
+        "F5-DETERMINERS",
+        "F5-INDEFINITE"
+      ]
+    },
+    {
+      "id": "gv5-d04-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Remove the reference ambiguity while preserving the stated meaning: Sana told Mariam that she would present the report. Intended presenter: Sana.",
+      "model": "Sana told Mariam that Sana would present the report.",
+      "rubric": [
+        "Identify Sana as presenter.",
+        "Preserve the reporting participants and future presentation."
+      ],
+      "alternatives": [
+        "A possible reconstructed direct utterance is Sana told Mariam, “I will present the report”; this is not evidence of the original exact words. The repeated-name indirect report is the task’s primary faithful repair."
+      ],
+      "conceptId": "gv5-d04-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "F5-PERSONAL",
+        "F5-SEXIST",
+        "F5-THEY",
+        "F5-DEIXIS",
+        "C-AGREE"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d04-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write 80–110 words describing a meeting or shared activity. Use a clear three-sentence reference chain, singular they for an unspecified participant, a reciprocal expression and a dummy subject. Identify each afterwards.",
+    "model": "A new participant arrived while the group was arranging the chairs. They asked where to put their bag, and the coordinator showed them a shelf. They thanked the coordinator and joined the group near the window. Everyone should check their own notes before presenting, so the organisers allowed a few quiet minutes for preparation. The two organisers helped each other prepare the display. It was nearly two o’clock when the first discussion began. Clear instructions helped the group follow the activity without repeatedly asking who would do each job.\n\nAnalysis: A new participant → they → they forms the reference chain. Their in Everyone should check their own notes is singular-they reference. Each other is reciprocal; it is a dummy time subject.",
+    "rubric": [
+      "Keep the intended referents recoverable throughout.",
+      "Use singular they with established verb forms.",
+      "Identify real examples of reciprocal and dummy-subject constructions."
+    ],
+    "alternatives": [
+      "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+    ],
+    "conceptId": "gv5-d04-m03",
+    "difficulty": "Intermediate",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "F5-PERSONAL",
+      "F5-SEXIST",
+      "F5-THEY",
+      "F5-DEIXIS",
+      "C-AGREE"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d04-a01",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Recall Day 1: distinguish noun class and subject function in The committee met.",
+      "model": "Committee is a noun; the committee is the whole subject phrase.",
+      "rubric": [
+        "Give category and function separately.",
+        "Include the determiner in the complete phrase."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d01-m03",
+      "difficulty": "Intermediate",
+      "ability": "Recognition",
+      "sourceIds": [
+        "C-WORD"
+      ]
+    },
+    {
+      "id": "gv5-d04-a02",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 2: explain The team are exchanging their separate views in British English.",
+      "model": "The plural agreement and their present members as individuals.",
+      "rubric": [
+        "Recognise a member-focused collective reading.",
+        "Do not label it universally wrong."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d02-m02",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-AGREE"
+      ]
+    },
+    {
+      "id": "gv5-d04-a03",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Recall Day 3: give a standard alternative to every of the participants.",
+      "model": "every one of the participants",
+      "rubric": [
+        "Supply one with every of.",
+        "Retain reference to each participant."
+      ],
+      "alternatives": [
+        "Accept another defensible answer that meets each stated requirement and preserves the intended meaning."
+      ],
+      "conceptId": "gv5-d03-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "F5-DETERMINERS"
+      ]
+    }
+  ],
+  "checklist": [
+    "I can explain a pronoun’s form and its intended referent separately.",
+    "I recognise standard regional and register alternatives.",
+    "I use singular they with established are/have verb forms.",
+    "I revise ambiguity only after establishing the intended meaning.",
+    "I distinguish local reflexive objects from emphatic and polite reflexive uses."
+  ],
+  "sources": [
+    {
+      "id": "C-AGREE",
+      "title": "Subject–verb agreement - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "C-NONFINITE",
+      "title": "Finite and non-finite verbs - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/finite-and-non-finite-verbs",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "C-WORD",
+      "title": "Word classes and phrase classes - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-DEIXIS",
+      "title": "DEIXIS | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/deixis",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-DETERMINERS",
+      "title": "Determiners ( the, my, some, this ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/determiners-the-my-some-this",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-DUMMY",
+      "title": "Dummy subjects - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/dummy-subjects",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-INDEFINITE",
+      "title": "Pronouns: indefinite (- body, - one, - thing, - where ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-indefinite-body-one-thing-where",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-PERSONAL",
+      "title": "Pronouns: personal ( I, me, you, him, it, they, etc.) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-POSSESSION",
+      "title": "Possession ( John’s car, a friend of mine ) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/possession-john-s-car-a-friend-of-mine",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-RECIPROCAL",
+      "title": "Each other, one another - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/each-other-one-another",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-REFLEXIVE",
+      "title": "Pronouns: reflexive ( myself, themselves, etc.) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-reflexive-myself-themselves-etc",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-SEXIST",
+      "title": "Sexist language - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/sexist-language",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-THEY",
+      "title": "THEY | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/they",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-WHO",
+      "title": "Who, whom - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/who-whom",
+      "consulted": "2026-10-21",
+      "note": "Relevant definition, grammatical patterns and stated usage limits checked in the retrieved page; explanations and exercises are original."
+    },
+    {
+      "id": "F5-THEMSELF-MW",
+      "title": "THEMSELF Definition & Meaning - Merriam-Webster",
+      "url": "https://www.merriam-webster.com/dictionary/themself",
+      "consulted": "2026-10-21",
+      "note": "Retrieved entry and usage note read for contemporary singular-they reflexives; the explicit difference from Cambridge’s usage label is retained."
+    },
+    {
+      "id": "F5-THEMSELF-C",
+      "title": "THEMSELF | English meaning - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/themself",
+      "consulted": "2026-10-21",
+      "note": "Retrieved entry explicitly labels themself not standard while documenting examples; this disagreement is identified rather than concealed."
+    }
+  ],
+  "editorialNotes": []
+}

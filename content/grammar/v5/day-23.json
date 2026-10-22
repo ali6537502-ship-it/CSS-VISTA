@@ -1,0 +1,1376 @@
+{
+  "day": 23,
+  "id": "gv5-day-23",
+  "title": "Advanced English Sentence Structures",
+  "orientation": "Writers choose more than grammatical words: they decide which information to foreground and how readers will connect it with what is already known. This lesson examines marked sentence patterns used for focus, contrast, formal conditions and efficient repetition. Begin with an ordinary clause, then observe exactly what changes in inversion, fronting, clefts and extraposition. These structures build on your knowledge of auxiliaries, clauses, non-finite forms and information-bearing modifiers. They are available tools, not signs of superior writing by themselves. A short instruction often benefits from neutral order, while a discussion correcting a mistaken assumption may benefit from a cleft. You will practise both construction and interpretation, including cases that look suspicious but are grammatical. At the advanced and expert layers, distinguish framework-dependent terminology, grammatical licensing and the discourse effects that a transformation may add.",
+  "outcomes": [
+    "Apply negative-adjunct and conditional inversion accurately.",
+    "Distinguish fronted subjects, objects and adjuncts.",
+    "Construct and interpret it-clefts and pseudo-clefts.",
+    "Recognise dummy it and existential there.",
+    "Use emphatic auxiliaries and recoverable ellipsis.",
+    "Choose marked or neutral order for a stated communicative purpose."
+  ],
+  "prerequisiteDays": [
+    21,
+    22
+  ],
+  "modules": [
+    {
+      "id": "gv5-d23-m01",
+      "title": "Negative, concessive and conditional inversion",
+      "taxonomy": [
+        "J",
+        "K",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d23-c01",
+        "gv5-d23-c02"
+      ],
+      "definition": "Inversion changes ordinary subject–verb order. Subject–auxiliary inversion places an auxiliary before its subject; other marked constructions front a complement or place a lexical verb before a following noun-phrase subject.",
+      "foundation": [
+        "Ordinary statements usually place the subject before the finite verb: We had never seen the original map. With a fronted negative or restrictive adjunct, formal English uses inversion: Never had we seen the original map. Move the existing finite auxiliary; if a simple present or past lexical verb has no auxiliary, add do, does or did and use the base verb: Rarely does the museum open at night. The sentence remains a statement. The inverted order does not by itself turn it into a question."
+      ],
+      "intermediate": [
+        "Scope determines where inversion occurs. Only after the review did the panel approve the grant inverts the main clause, not the after-clause. Not until the rain stopped did we leave likewise leaves the subordinate order unchanged. A negative or only-containing subject is different: Not a single applicant complained and Only Nida knew the code have ordinary subject–verb order. Hardly ... when and no sooner ... than commonly express rapid succession, often with the past perfect, but the construction does not require past perfect in every context."
+      ],
+      "advanced": [
+        "Conditional inversion offers formal alternatives to some if-clauses: Had I known ... corresponds to If I had known ...; Should you need assistance ... corresponds to If you should need assistance ...; Were the machine to fail ... corresponds to If the machine were to fail ... . Do not simply remove if from any condition or combine both markers. Concessive patterns such as Tired though she was, she continued front the predicative expression; they do not normally invert she was. Child as he was, he understood uses an articleless fronted noun in this marked construction.",
+        "Locative full inversion is a different pattern from subject–auxiliary inversion after a negative. With a full noun phrase, Here comes the courier or At the far end stood a guard can present a newly mentioned entity. With an ordinary unstressed personal pronoun, the usual order is Here she comes, not Here comes she. The construction depends on the verb, the locative and information structure; not every verb allows the same pattern. In particular, a fronted place expression does not mechanically require inversion. Compare At the far end, she waited, which preserves subject–verb order."
+      ],
+      "expert": [
+        "Traditional teaching sometimes calls all marked order inversion, but distinguish subject–auxiliary inversion, full verb–subject inversion and concessive complement fronting. Each has different constraints. Conditional should can suggest a tentative possibility; replacing an ordinary if-condition may therefore alter register and nuance even when the broad condition survives. Use these constructions to emphasise a restriction or fit a formal genre, not to decorate every sentence. A direct neutral statement is often clearer in instructions and reports. When transforming, retain negation, temporal relationships and the scope of the limiting expression rather than merely moving the first two words."
+      ],
+      "patterns": [
+        {
+          "form": "negative/restrictive adjunct + auxiliary + subject + remainder",
+          "meaning": "Marks emphasis within a statement."
+        },
+        {
+          "form": "Had + subject + past participle, ...",
+          "meaning": "Formal conditional alternative to an if-past-perfect clause."
+        },
+        {
+          "form": "predicative expression + though/as + subject + verb, ...",
+          "meaning": "Marked concessive fronting without ordinary question inversion."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "Only after the labels were checked did the team seal the crates.",
+          "analysis": "Inversion belongs to the main clause; labels were checked retains normal order."
+        },
+        {
+          "sentence": "Should the printer stop, use the spare terminal.",
+          "analysis": "Should introduces a tentative future condition."
+        },
+        {
+          "sentence": "Exhausted though the volunteers were, they completed the inventory.",
+          "analysis": "The adjective is fronted; the volunteers were is not inverted."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "Only Farah found the key.",
+          "b": "Only then did Farah find the key.",
+          "note": "Only modifies the subject in the first and an adjunct in the second, producing different order requirements."
+        }
+      ],
+      "exceptions": [
+        "A negative subject does not trigger the adjunct-inversion rule: Nobody complained is correct without did."
+      ],
+      "mistakes": [
+        {
+          "problem": "Never I had seen the original.",
+          "repair": "Never had I seen the original.",
+          "reason": "The fronted negative adjunct triggers subject–auxiliary inversion."
+        },
+        {
+          "problem": "If had we known, we would have waited.",
+          "repair": "Had we known, we would have waited.",
+          "reason": "Do not retain if when using this conditional inversion."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "subject–auxiliary inversion",
+          "definition": "An auxiliary precedes its subject.",
+          "example": "Seldom do we agree."
+        },
+        {
+          "term": "concessive fronting",
+          "definition": "A fronted expression marks a contrast despite an acknowledged fact.",
+          "example": "Young though she is, she leads the team."
+        }
+      ],
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-m02",
+      "title": "Fronting, clefts and organising focus",
+      "taxonomy": [
+        "J",
+        "K",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d23-c03",
+        "gv5-d23-c04",
+        "gv5-d23-c08"
+      ],
+      "definition": "Information structure concerns how a sentence packages its message for a particular context. Fronting and cleft constructions can establish a topic, highlight a contrast or place an important constituent in focus.",
+      "foundation": [
+        "Compare I can repair this lock with This lock, I can repair. The fronted object remains the thing repaired; its position makes it a useful point of contrast with other locks. Fronting does not automatically require question order. In conversation, a speaker may instead use a detached topic and a resumptive pronoun: That old lock, I can repair it. This left-dislocation is established informal discourse, though formal edited writing often prefers an integrated clause. Different structures should not be treated as one interchangeable formula."
+      ],
+      "intermediate": [
+        "An it-cleft divides a message between a focusing clause and a cleft clause: It was Nida who found the error. The construction highlights Nida against relevant alternatives while treating the finding of an error as background. The initial it + be remains singular even with a plural focus: It was the auditors who found the error. In a pseudo-cleft, a wh-clause sets up an open value: What we need is a reliable backup. The following phrase supplies the focused value. These structures are useful when answering or correcting a specific contextual question."
+      ],
+      "advanced": [
+        "Focus is not identical to new information. Known information can be contrastively focused: “Was it the director?” “No, it was the clerk.” Likewise, topic is not simply the first noun in every sentence. A topic identifies what a discourse contribution is about, while a grammatical subject fulfils a syntactic function. In thematic descriptions, theme often refers to a clause’s point of departure and rheme to the remainder, but linguistic frameworks use these terms differently. Explain the actual distribution of familiar information and emphasis rather than assume one universal terminology."
+      ],
+      "expert": [
+        "Clefts can carry presuppositions and contrast. It was the red cable that failed normally treats a failure as given and identifies its source; The red cable failed can introduce the entire event. Transforming freely between them may change what readers are invited to take for granted. Pseudo-cleft agreement can vary when a plural complement follows, as in What we need is/are stronger checks; avoid forcing such a contested case into a context-free single-key test. Use unambiguous singular models first, and at the expert layer explain that agreement and interpretation interact. Marked structures work best where their focus matches a real communicative need."
+      ],
+      "patterns": [
+        {
+          "form": "focused constituent, + subject + verb ...",
+          "meaning": "Integrated fronting gives prominence without necessarily requiring inversion."
+        },
+        {
+          "form": "It + be + focus + who/that-clause",
+          "meaning": "Identifies or contrasts a focused constituent."
+        },
+        {
+          "form": "What-clause + be + focused value",
+          "meaning": "A pseudo-cleft supplies a value for the wh-clause."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The first proposal I support; the second I oppose.",
+          "analysis": "The first proposal and the second are fronted objects of support and oppose. Each clause keeps I as its subject; the fronting makes their contrast explicit."
+        },
+        {
+          "sentence": "It was the night shift that detected the leak.",
+          "analysis": "The cleft identifies the detector while retaining the leak event as background."
+        },
+        {
+          "sentence": "What the archive needs is a second scanner.",
+          "analysis": "The wh-clause sets up a need and the final noun phrase supplies its value."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "The clerk corrected the date.",
+          "b": "It was the date that the clerk corrected.",
+          "note": "Both report the correction; the cleft focuses the date against alternative things corrected."
+        }
+      ],
+      "exceptions": [
+        "A fronted object does not ordinarily cause do-inversion: This report I understand is grammatical; This report do I understand is not the normal modern pattern."
+      ],
+      "mistakes": [
+        {
+          "problem": "It were the drivers who reported the fault.",
+          "repair": "It was the drivers who reported the fault.",
+          "reason": "The cleft’s initial subject is singular it; the following clause has plural drivers."
+        },
+        {
+          "problem": "What we need a spare key.",
+          "repair": "What we need is a spare key.",
+          "reason": "The pseudo-cleft needs a linking verb connecting the wh-clause and focused value."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "focus",
+          "definition": "The part highlighted against relevant alternatives or as a key contribution.",
+          "example": "It was Monday that we met."
+        },
+        {
+          "term": "pseudo-cleft",
+          "definition": "A wh-clause plus be and a focused value.",
+          "example": "What she wants is clarity."
+        }
+      ],
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-m03",
+      "title": "Extraposition, existential presentation and end-weight",
+      "taxonomy": [
+        "J",
+        "K",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d23-c05",
+        "gv5-d23-c09",
+        "gv5-d23-c10"
+      ],
+      "definition": "Extraposition places a clausal constituent later while a dummy it occupies a grammatical position. Existential there introduces the presence of an entity or situation. Both can shape information flow without referring like ordinary pronouns.",
+      "foundation": [
+        "A long subject clause can be difficult to process at the start: That the shipment arrived before the deadline surprised us. An extraposed version is It surprised us that the shipment arrived before the deadline. The initial it does not refer to the shipment; it supports a construction with the content clause later. Similarly, It is useful to retain receipts is often more natural than To retain receipts is useful. Both are grammatical. The later clause is not an object merely because it appears after other material; analysis must consider the whole construction."
+      ],
+      "intermediate": [
+        "Existential there presents existence or availability: There are two spare chairs in the corridor. It differs from locative there meaning in that place: Put the chairs there. In formal edited writing, use are with plural chairs and is with a singular presentational noun phrase. Contracted there’s with a following plural occurs in conversation, but a formal assessment can explicitly ask for the edited agreement convention. Some analyses call existential there the grammatical dummy subject and the following noun phrase the displaced or notional subject; school grammars often call only the latter the real subject."
+      ],
+      "advanced": [
+        "End-weight is the tendency to place structurally long material later; end-focus is a common tendency for important focal material to occur near the end. They interact but are not identical. We sent the committee a report containing the full sequence of maintenance logs puts the heavy report phrase last. Passive voice can maintain a familiar topic while allowing a new agent late in the clause: The mural was restored by a team from the local college. Neither subject length nor passive voice is a grammatical defect. Choose the order according to what the reader already knows and needs to learn."
+      ],
+      "expert": [
+        "These tendencies are defaults, not bans on long initial clauses or final given material. Legal drafting, literary rhetoric and contrast may justify marked weight. Extraposition is also construction-specific: I find it surprising that nobody called requires anticipatory it in that pattern, while I know that nobody called does not take an inserted dummy object. Existential presentation commonly favours indefinite or newly introduced entities, but definite phrases occur in list-like or reminder contexts: There is still the matter of the deposit. A reliable analysis considers discourse purpose, syntactic licensing and register together before classifying an unusual sentence as erroneous."
+      ],
+      "patterns": [
+        {
+          "form": "It + predicate + that/to-clause",
+          "meaning": "A dummy it supports a later clausal constituent."
+        },
+        {
+          "form": "There + be + presentational noun phrase",
+          "meaning": "Introduces existence, presence or availability."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "It is essential that the seals remain intact.",
+          "analysis": "It is anticipatory rather than a reference to a previously named object."
+        },
+        {
+          "sentence": "There is one unresolved claim.",
+          "analysis": "The clause introduces a remaining issue."
+        },
+        {
+          "sentence": "I find it reassuring that the alarm has been tested.",
+          "analysis": "The find + it + adjective + content-clause pattern licenses anticipatory object it."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "That nobody objected was surprising.",
+          "b": "It was surprising that nobody objected.",
+          "note": "Both grammatical; the second places a heavier content clause later."
+        }
+      ],
+      "exceptions": [
+        "Existential there can introduce a definite item in a reminder or list context: There is the signed copy you requested."
+      ],
+      "mistakes": [
+        {
+          "problem": "Formal edited agreement: There is two urgent messages.",
+          "repair": "There are two urgent messages.",
+          "reason": "The supplied formal convention uses plural are with messages."
+        },
+        {
+          "problem": "I find surprising that the records survived.",
+          "repair": "I find it surprising that the records survived.",
+          "reason": "This anticipatory-object pattern requires it."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "dummy subject",
+          "definition": "A grammatical subject without an ordinary referent.",
+          "example": "It is raining."
+        },
+        {
+          "term": "end-weight",
+          "definition": "A tendency to place structurally heavier material late.",
+          "example": "We gave them a report with three annexes."
+        }
+      ],
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-m04",
+      "title": "Emphatic auxiliaries, substitution and ellipsis",
+      "taxonomy": [
+        "J",
+        "K",
+        "M"
+      ],
+      "coverageIds": [
+        "gv5-d23-c06",
+        "gv5-d23-c07"
+      ],
+      "definition": "Emphatic do adds positive emphasis to a lexical verb. Substitution replaces recoverable material with an expression such as do so or one; ellipsis leaves recoverable material unexpressed.",
+      "foundation": [
+        "A neutral statement can be strengthened with do, does or did: I do understand your concern. The auxiliary carries tense and agreement, while understand is a bare form. Do not write does understands or did understood. If an auxiliary already exists, stress that auxiliary instead: I have checked it; She can help. Emphatic do can also make an invitation warmer or an instruction more insistent: Do come inside. Emphasis changes the speaker’s stance, not necessarily the event described."
+      ],
+      "intermediate": [
+        "Substitution and ellipsis avoid repetition when the missing content is clear. The archivist promised to inspect the box and did so before lunch uses did so for inspecting the box. In I could open it, but I would rather not, the omitted complement of not is recoverable. One and ones substitute for count noun phrases: The blue folders are full; use the green ones. Do not substitute one for an uncountable mass reading: If this equipment is faulty, get better equipment or a better item, not automatically a better one."
+      ],
+      "advanced": [
+        "Ellipsis is licensed by a construction and context, not by a general permission to delete any repeated-looking word. In The first draft was accepted; the second, rejected, gapping removes was and retains a contrasting remnant. The remaining material still supports the intended clause relationship. Informal conversational ellipsis such as Seen the new notice? is established but may not fit a formal report. Leaving a relative pronoun unexpressed is possible in some defining object relatives, not in subject relatives merely to shorten them. Make missing material explicit when readers could recover more than one proposition."
+      ],
+      "expert": [
+        "Auxiliary choice preserves the structure of the understood material. “Has she filed it?” “She has” retains the perfect auxiliary; “Did she file it?” “She did” uses do. Substitution may preserve meaning only approximately if tense, agency or object reference shifts. Interpret do so and do it from context rather than regard them as universally interchangeable with every predicate, especially stative ones. In discourse, efficient ellipsis supports cohesion, while excessive compression can hide comparisons or agency. Expert control therefore includes the ability to expand a reduced construction and verify exactly which words, participants and time relations a reader must reconstruct."
+      ],
+      "patterns": [
+        {
+          "form": "do/does/did + base verb",
+          "meaning": "Adds positive emphasis while the auxiliary carries tense/agreement."
+        },
+        {
+          "form": "auxiliary + recoverable omitted predicate",
+          "meaning": "Retains relevant tense/aspect/modal structure in ellipsis."
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "The replacement did arrive, despite the earlier warning.",
+          "analysis": "Did emphasises the positive event; arrive remains bare."
+        },
+        {
+          "sentence": "The analyst checked the totals, and the editor did so too.",
+          "analysis": "Did so substitutes for the recoverable checking action."
+        },
+        {
+          "sentence": "The first box was sealed; the second, left open.",
+          "analysis": "The second clause omits was; the contrast and passive interpretation remain recoverable."
+        }
+      ],
+      "contrasts": [
+        {
+          "a": "She did check the log.",
+          "b": "She checked the log.",
+          "note": "Both assert checking; the first contrasts with doubt or denial."
+        }
+      ],
+      "exceptions": [
+        "With existing perfect have, do not add emphatic do: I have checked it can be emphatic through stress on have."
+      ],
+      "mistakes": [
+        {
+          "problem": "She does understands the issue.",
+          "repair": "She does understand the issue.",
+          "reason": "The finite auxiliary takes agreement; the lexical verb is bare."
+        },
+        {
+          "problem": "“Has the parcel arrived?” “It did.” [same perfect viewpoint intended]",
+          "repair": "“Has the parcel arrived?” “It has.”",
+          "reason": "Keep the perfect auxiliary when supplying the corresponding elliptical answer."
+        }
+      ],
+      "glossary": [
+        {
+          "term": "ellipsis",
+          "definition": "Recoverable material left unexpressed in a licensed construction.",
+          "example": "She can help, and I can too."
+        },
+        {
+          "term": "substitution",
+          "definition": "A word or expression stands for recoverable material.",
+          "example": "The blue one is mine."
+        }
+      ],
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "gv5-d23-q01",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Complete the formal negative-fronting pattern: Never ____ this route before.",
+      "options": [
+        "we have used",
+        "have we used",
+        "we used have",
+        "used have we"
+      ],
+      "answer": 1,
+      "why": "Never as a fronted negative adjunct triggers subject–auxiliary inversion: have we used.",
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-q02",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which sentence has a negative subject with ordinary order?",
+      "options": [
+        "Nobody objected.",
+        "Never nobody did objected.",
+        "Nobody did objected.",
+        "Did nobody objected."
+      ],
+      "answer": 0,
+      "why": "Nobody is the subject; a negative subject does not require inversion, and did would take a bare verb.",
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-q03",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Choose a formal inverted conditional equivalent to If we had noticed, we would have stopped.",
+      "options": [
+        "Had we noticed, we would have stopped.",
+        "Did we had noticed, we would have stopped.",
+        "Had noticed we if, we would have stopped.",
+        "If had we noticed, we would have stopped."
+      ],
+      "answer": 0,
+      "why": "Had + subject + participle replaces this if-clause; do not retain if.",
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-q04",
+      "type": "objective",
+      "kind": "spot",
+      "prompt": "Find a genuine fault, if any: “Only Mira knew the password.”",
+      "options": [
+        "the password",
+        "No error",
+        "Only Mira",
+        "knew"
+      ],
+      "answer": 1,
+      "why": "Only modifies the subject; ordinary subject–verb order is appropriate.",
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-q05",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which it-cleft retains singular initial it with a plural focus?",
+      "options": [
+        "It was the porters who finds the crate.",
+        "It are the porters who found the crate.",
+        "It were the porters who found the crate.",
+        "It was the porters who found the crate."
+      ],
+      "answer": 3,
+      "why": "Initial it takes was; the cleft clause’s plural porters takes found, whose past form is number-neutral.",
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-q06",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "What does it do in It is surprising that nobody called?",
+      "options": [
+        "Refers to a previously named caller.",
+        "Means the telephone.",
+        "Acts as dummy/anticipatory subject.",
+        "Replaces nobody as an object."
+      ],
+      "answer": 2,
+      "why": "It supports an extraposed content clause and has no ordinary referent.",
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-q07",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Use formal edited agreement: There ____ two unclaimed packages.",
+      "options": [
+        "has",
+        "was",
+        "is",
+        "are"
+      ],
+      "answer": 3,
+      "why": "The formal plural presentational pattern uses are with packages; informal there’s plural is a separate usage.",
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-q08",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which form correctly uses emphatic do?",
+      "options": [
+        "She does remember the code.",
+        "She does remembers the code.",
+        "She do remembered the code.",
+        "She did remembering the code."
+      ],
+      "answer": 0,
+      "why": "Does is finite and carries agreement; remember remains a bare form.",
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Foundation",
+      "ability": "Application",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-q09",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Complete a matching perfect elliptical answer: Has the alarm been tested? Yes, it ____.",
+      "options": [
+        "did",
+        "does",
+        "has",
+        "is do"
+      ],
+      "answer": 2,
+      "why": "Has retains the perfect auxiliary; been tested is understood.",
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-q10",
+      "type": "objective",
+      "kind": "choice",
+      "prompt": "Which analysis is accurate for Exhausted though he was, he continued?",
+      "options": [
+        "It is a direct question.",
+        "The adjective is fronted in a concessive construction.",
+        "He was must become was he.",
+        "The word exhausted must be an adverb."
+      ],
+      "answer": 1,
+      "why": "Concessive fronting differs from subject–auxiliary inversion and keeps he was here.",
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Expert Extension",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Begin with Rarely and preserve the meaning: The building rarely opens after midnight.",
+      "model": "Rarely does the building open after midnight.",
+      "rubric": [
+        "Use does before the subject.",
+        "Use base open after does."
+      ],
+      "alternatives": [
+        "The meaning supplied by Rarely limits opening frequency; retain it."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r02",
+      "type": "response",
+      "kind": "ordering",
+      "prompt": "Arrange: did / only then / we / realise / the mistake.",
+      "model": "Only then did we realise the mistake.",
+      "rubric": [
+        "Front only then.",
+        "Place did before we."
+      ],
+      "alternatives": [
+        "Only then did we notice the mistake changes vocabulary unnecessarily."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Contrast Only the technician can reset it / Only after a restart can the technician reset it.",
+      "model": "The first restricts the person; the second restricts the circumstances and uses adjunct-triggered inversion.",
+      "rubric": [
+        "Identify different scopes of only.",
+        "Explain the order difference."
+      ],
+      "alternatives": [
+        "Equivalent structural explanations are valid."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r04",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Use a pseudo-cleft to focus a spare battery: We need a spare battery.",
+      "model": "What we need is a spare battery.",
+      "rubric": [
+        "Use a wh-clause and linking is.",
+        "Keep the needed item."
+      ],
+      "alternatives": [
+        "A spare battery is what we need is a reversed pseudo-cleft."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r05",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Identify it in It was the caretaker who locked the gate.",
+      "model": "It is the cleft’s initial subject; the caretaker is focused, and who locked the gate is the cleft clause.",
+      "rubric": [
+        "Identify the cleft.",
+        "Do not refer it back to the gate."
+      ],
+      "alternatives": [
+        "Framework labels for cleft clauses may differ."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r06",
+      "type": "response",
+      "kind": "combining",
+      "prompt": "Make an it-cleft answering “Who found the error?” from The assistant found the error.",
+      "model": "It was the assistant who found the error.",
+      "rubric": [
+        "Focus assistant.",
+        "Retain the finding event."
+      ],
+      "alternatives": [
+        "That can replace who."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r07",
+      "type": "response",
+      "kind": "splitting",
+      "prompt": "Expand the ellipsis: The first draft was approved; the second, rejected.",
+      "model": "The first draft was approved. The second draft was rejected.",
+      "rubric": [
+        "Recover draft and was.",
+        "Keep opposite outcomes."
+      ],
+      "alternatives": [
+        "Repeating draft is optional if reference stays clear."
+      ],
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-r08",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain why Here she comes is normal, while Here comes the courier is also normal.",
+      "model": "Locative here can support full inversion with a noun-phrase subject; with an ordinary pronoun, subject–verb order is generally retained.",
+      "rubric": [
+        "Distinguish pronoun from noun-phrase subject.",
+        "Do not force one formula onto both."
+      ],
+      "alternatives": [
+        "Register-specific literary alternatives may exist; the normal contemporary patterns are requested."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r09",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Use formal conditional inversion: If you should need a receipt, contact the desk.",
+      "model": "Should you need a receipt, contact the desk.",
+      "rubric": [
+        "Remove if.",
+        "Place should before you."
+      ],
+      "alternatives": [
+        "The original if-pattern remains grammatical."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r10",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply the missing word: I find ____ reassuring that the backups are intact.",
+      "model": "it",
+      "rubric": [
+        "Use anticipatory object it.",
+        "Retain the content clause."
+      ],
+      "alternatives": [
+        "A full restructure, The intact backups reassure me, changes packaging but is grammatical."
+      ],
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r11",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Contrast The green cable failed / It was the green cable that failed.",
+      "model": "The cleft highlights the identity of the failed cable and usually treats a failure as background; the plain clause can introduce the whole event.",
+      "rubric": [
+        "Identify focus.",
+        "Recognise the contextual/background effect."
+      ],
+      "alternatives": [
+        "Exact presupposition strength depends on context."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Expert Extension",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r12",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Use emphatic do: He ____ agree yesterday; she ____ agree now. (Past first, present third-person singular second.)",
+      "model": "did; does",
+      "rubric": [
+        "Use finite did/does.",
+        "Keep agree bare in both."
+      ],
+      "alternatives": [
+        "Full sentences are acceptable."
+      ],
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-r13",
+      "type": "response",
+      "kind": "classification",
+      "prompt": "Classify there in There are three spare cables / Put the cables there.",
+      "model": "First: existential dummy/presentational there. Second: locative there meaning in that place.",
+      "rubric": [
+        "Distinguish existence from location.",
+        "Do not assign an ordinary place referent to existential there."
+      ],
+      "alternatives": [
+        "Notional-subject terminology may differ across frameworks."
+      ],
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Advanced",
+      "ability": "Recognition",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r14",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Explain end-weight using We sent the office a folder containing every receipt from the six-month trial.",
+      "model": "The structurally long folder phrase comes after the shorter recipient phrase; that makes processing the heavy material easier.",
+      "rubric": [
+        "Identify the heavy constituent.",
+        "Describe a tendency, not a grammatical requirement."
+      ],
+      "alternatives": [
+        "Other context-sensitive orders are possible."
+      ],
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-r15",
+      "type": "response",
+      "kind": "paragraph-edit",
+      "prompt": "Edit formal syntax: Never we had seen the original. It were the archivists who found it. Their assistant did identifies the seal.",
+      "model": "Never had we seen the original. It was the archivists who found it. Their assistant did identify the seal.",
+      "rubric": [
+        "Repair adjunct inversion.",
+        "Keep initial cleft it singular.",
+        "Use bare identify after did."
+      ],
+      "alternatives": [
+        "Neutral word order is valid if a task does not require marked emphasis."
+      ],
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-r16",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare I have checked it / I do have checked it for emphatic perfect meaning.",
+      "model": "The first is grammatical and can stress have. The second wrongly inserts do before the perfect construction.",
+      "rubric": [
+        "Identify existing perfect auxiliary.",
+        "Keep the participle checked."
+      ],
+      "alternatives": [
+        "I did check it is grammatical but uses a different tense/aspect construction."
+      ],
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-r17",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Express concession beginning with Tired though: Although the volunteers were tired, they continued.",
+      "model": "Tired though the volunteers were, they continued.",
+      "rubric": [
+        "Front the predicative adjective.",
+        "Keep the volunteers were order."
+      ],
+      "alternatives": [
+        "Tired as the volunteers were is another marked concessive pattern."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-r18",
+      "type": "response",
+      "kind": "writing",
+      "prompt": "Write a neutral version and a marked focused version of the same message; explain when the marked one helps.",
+      "model": "Neutral: The afternoon team found the missing keys. Focused: It was the afternoon team that found the missing keys. The cleft answers a dispute over which team found them.",
+      "rubric": [
+        "Retain the event and participants.",
+        "Supply a real contrast context."
+      ],
+      "alternatives": [
+        "Other clear fronted or cleft contrasts are valid."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "id": "gv5-d23-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair the fronted-negative statement: Seldom the committee meets at night.",
+      "model": "Seldom does the committee meet at night.",
+      "rubric": [
+        "Use does for the supplied singular committee reading.",
+        "Use base meet."
+      ],
+      "alternatives": [
+        "Seldom do the committee meet ... can fit notional plural BrE if explicitly intended."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: Had we knew, we would have warned you.",
+      "model": "Had we known, we would have warned you.",
+      "rubric": [
+        "Use past participle known after had.",
+        "Keep the counterfactual condition."
+      ],
+      "alternatives": [
+        "If we had known ... is valid."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-c03",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: It were the two interns who traced the fault.",
+      "model": "It was the two interns who traced the fault.",
+      "rubric": [
+        "Keep initial it singular.",
+        "Retain plural focus interns."
+      ],
+      "alternatives": [
+        "The two interns traced the fault is a neutral alternative."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-c04",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Decide whether correction is needed: This proposal I understand; the other remains unclear.",
+      "model": "No change is required.",
+      "rubric": [
+        "Recognise integrated object fronting.",
+        "Do not add question inversion."
+      ],
+      "alternatives": [
+        "I understand this proposal ... is also grammatical."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-c05",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Formal edited prose: There is several possible explanations.",
+      "model": "There are several possible explanations.",
+      "rubric": [
+        "Use formal plural agreement.",
+        "Keep the presentational construction."
+      ],
+      "alternatives": [
+        "Several possible explanations exist is an alternative."
+      ],
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-it",
+        "cambridge-there",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-c06",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: The editor did approved the changes.",
+      "model": "The editor did approve the changes.",
+      "rubric": [
+        "Keep tense in did.",
+        "Use base approve."
+      ],
+      "alternatives": [
+        "The editor approved the changes removes emphasis but remains grammatical."
+      ],
+      "conceptId": "gv5-d23-m04",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-ELLIPSIS",
+        "cambridge-do",
+        "C-VARIATION"
+      ]
+    },
+    {
+      "id": "gv5-d23-c07",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Repair: What the visitors need a clear map.",
+      "model": "What the visitors need is a clear map.",
+      "rubric": [
+        "Supply linking is.",
+        "Retain the needed item."
+      ],
+      "alternatives": [
+        "A clear map is what the visitors need is valid."
+      ],
+      "conceptId": "gv5-d23-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-CLEFT",
+        "cambridge-fronting"
+      ]
+    },
+    {
+      "id": "gv5-d23-c08",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "Decide whether correction is needed: No sooner was the gallery open than the queue began to move.",
+      "model": "No change is required.",
+      "rubric": [
+        "Accept was open without imposing past perfect.",
+        "Keep no sooner ... than."
+      ],
+      "alternatives": [
+        "A past-perfect alternative would fit a different verbal phrasing."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "C-INVERT",
+        "bc-inversion",
+        "cambridge-conditional-inversion"
+      ]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "gv5-d23-t01",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Begin with Not until and preserve both time relations: We did not recognise the fault until the second test had finished.",
+      "model": "Not until the second test had finished did we recognise the fault.",
+      "rubric": [
+        "Invert only the main clause.",
+        "Retain the earlier completed second test."
+      ],
+      "alternatives": [
+        "Not until ... did we notice ... changes vocabulary but can preserve broad meaning."
+      ],
+      "conceptId": "gv5-d23-m01",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "bc-inversion"
+      ]
+    },
+    {
+      "id": "gv5-d23-t02",
+      "type": "response",
+      "kind": "transformation",
+      "prompt": "Repackage with anticipatory it: That the sample remained stable for a month was unexpected.",
+      "model": "It was unexpected that the sample remained stable for a month.",
+      "rubric": [
+        "Retain stability duration.",
+        "Use anticipatory it with the later clause."
+      ],
+      "alternatives": [
+        "The original is grammatical; no meaning-strengthening adjective is required."
+      ],
+      "conceptId": "gv5-d23-m03",
+      "difficulty": "Advanced",
+      "ability": "Production and revision",
+      "sourceIds": [
+        "cambridge-it"
+      ]
+    }
+  ],
+  "writing": {
+    "id": "gv5-d23-w01",
+    "type": "response",
+    "kind": "writing",
+    "prompt": "Write a 100–140-word explanation of a fictional procedural failure. Include one justified cleft, one negative/restrictive inversion and one clear ellipsis. Follow it with a neutral version of the most marked sentence and explain which version suits the audience.",
+    "model": "The team checked the labels twice, but the cartons still reached the wrong desk. It was the delivery address that needed correction. Only after the courier compared the two booking records did we identify the mismatch. The first record was current; the second, copied from an earlier order. The error concerned an outdated address, rather than a failure to inspect the contents. We have therefore asked the booking clerk to confirm the current delivery address with the receiving office before printing future labels. This check may reduce similar mistakes, although we will need to review later deliveries before judging its effect.\n\nNeutral version: We identified the mismatch only after the courier compared the two booking records. This retains only while removing inversion. The neutral form suits a short instruction; the marked form can emphasise delayed recognition in an explanatory account. The ellipsis omits was in the second record clause.",
+    "rubric": [
+      "Use the cleft to express an identifiable contrast.",
+      "Apply inversion to the correct clause.",
+      "Make ellipsis recoverable without ambiguity.",
+      "Explain audience and emphasis rather than claim marked order is always superior."
+    ],
+    "alternatives": [
+      "Original accounts meeting the structural and meaning conditions are valid."
+    ],
+    "conceptId": "gv5-d23-m04",
+    "difficulty": "Advanced",
+    "ability": "Production and revision",
+    "sourceIds": [
+      "C-CLEFT",
+      "bc-inversion",
+      "C-ELLIPSIS"
+    ]
+  },
+  "recall": [
+    {
+      "id": "gv5-d23-rec01",
+      "type": "response",
+      "kind": "analysis",
+      "prompt": "Recall Day 22: Is Stored in a locked cabinet, the samples were secure dangling? Explain.",
+      "model": "No. The samples are the stored entities and the main-clause subject.",
+      "rubric": [
+        "Identify subject sharing.",
+        "Do not reject passive voice."
+      ],
+      "alternatives": [
+        "A finite when-clause can also express the relationship."
+      ],
+      "conceptId": "gv5-d22-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d23-rec02",
+      "type": "response",
+      "kind": "function",
+      "prompt": "Recall Day 14: Identify the independent clause in Although the labels were damaged, the shipment arrived.",
+      "model": "The shipment arrived is the independent clause.",
+      "rubric": [
+        "Identify the whole main clause.",
+        "Distinguish the concessive dependent clause."
+      ],
+      "alternatives": [
+        "Main clause is acceptable terminology."
+      ],
+      "conceptId": "gv5-d14-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d23-rec03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Recall Day 18: Contrast If we had known, we would have waited / If we know, we will wait.",
+      "model": "The first presents an unreal earlier condition; the second presents an open future-relevant condition.",
+      "rubric": [
+        "Distinguish past counterfactual and open condition.",
+        "Preserve their different time viewpoints."
+      ],
+      "alternatives": [
+        "Context can refine the hypothetical interpretation."
+      ],
+      "conceptId": "gv5-d18-m01",
+      "difficulty": "Intermediate",
+      "ability": "Understanding",
+      "sourceIds": []
+    }
+  ],
+  "checklist": [
+    "I distinguish negative subjects from fronted negative adjuncts.",
+    "I can expand an elliptical construction accurately.",
+    "I use clefts for a genuine focus or contrast.",
+    "I treat end-weight as a tendency, not a universal rule.",
+    "I can explain when neutral order is clearer."
+  ],
+  "sources": [
+    {
+      "id": "C-CLEFT",
+      "title": "Cleft sentences ( It was in June we got married .) - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/cleft-sentences-it-was-in-june-we-got-married",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-ELLIPSIS",
+      "title": "Ellipsis - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/ellipsis",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-INVERT",
+      "title": "Inversion - Grammar - Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/inversion",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "C-VARIATION",
+      "title": "British and American English - Cambridge Grammar",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/british-and-american-english",
+      "consulted": "2026-10-21",
+      "note": "Actual entry consulted for the relevant construction; examples and teaching here are original."
+    },
+    {
+      "id": "bc-inversion",
+      "title": "Inversion after negative adverbials",
+      "url": "https://learnenglish.britishcouncil.org/grammar/c1-grammar/inversion-after-negative-adverbials",
+      "consulted": "2026-10-21",
+      "note": "Main explanation and staff clarifications consulted for negative/restrictive inversion, no-sooner alternatives and concessive fronting."
+    },
+    {
+      "id": "cambridge-conditional-inversion",
+      "title": "Conditionals: other expressions (unless, should, as long as)",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conditionals-other-expressions-unless-should-as-long-as",
+      "consulted": "2026-10-21",
+      "note": "Conditional should/had/were-to inversion checked; no external example copied."
+    },
+    {
+      "id": "cambridge-do",
+      "title": "Do",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/do",
+      "consulted": "2026-10-21",
+      "note": "Emphatic do and auxiliary/substitute uses checked."
+    },
+    {
+      "id": "cambridge-fronting",
+      "title": "Fronting",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/fronting",
+      "consulted": "2026-10-21",
+      "note": "Object/adjunct fronting, locative inversion and informal left-dislocation checked."
+    },
+    {
+      "id": "cambridge-it",
+      "title": "It",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+      "consulted": "2026-10-21",
+      "note": "Dummy and anticipatory it, extraposed content clauses, object anticipation and clefts checked; framework-dependent labels explicitly distinguished."
+    },
+    {
+      "id": "cambridge-there",
+      "title": "There is, there’s and there are",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/there-is-there-s-and-there-are",
+      "consulted": "2026-10-21",
+      "note": "Existential presentation and formal versus informal number agreement checked."
+    }
+  ],
+  "editorialNotes": []
+}

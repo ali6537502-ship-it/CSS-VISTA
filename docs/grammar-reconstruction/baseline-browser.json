@@ -1,0 +1,30 @@
+[
+  {
+    "width": 320,
+    "scrollWidth": 320,
+    "errors": [],
+    "buttons": 136,
+    "headings": 1
+  },
+  {
+    "width": 390,
+    "scrollWidth": 390,
+    "errors": [],
+    "buttons": 136,
+    "headings": 1
+  },
+  {
+    "width": 768,
+    "scrollWidth": 768,
+    "errors": [],
+    "buttons": 136,
+    "headings": 1
+  },
+  {
+    "width": 1440,
+    "scrollWidth": 1440,
+    "errors": [],
+    "buttons": 136,
+    "headings": 1
+  }
+]

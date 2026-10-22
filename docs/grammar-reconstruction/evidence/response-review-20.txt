@@ -1,0 +1,154 @@
+gv5-d20-r11 [gv5-d20-m01] Classify the verb forms in We may have been waiting too long. Identify the finite item.
+MODEL: May is the finite modal. Have is a plain form selected by may, been is a participle selected by perfect have, and waiting is the -ing form selected by progressive be.
+RUBRIC: Identify may rather than waiting as finite.; Explain the auxiliary selection order.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r12 [gv5-d20-m01] Identify the function of Checking the details in Checking the details takes time.
+MODEL: The whole non-finite -ing clause Checking the details functions as the subject of takes.
+RUBRIC: Identify the whole clause, not only checking.; Keep its subject function separate from the verbal category of checking.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r13 [gv5-d20-m01] Complete with the required participles: The document is believed to have been ____(write), and the witness denies having ____(see) it.
+MODEL: written; seen.
+RUBRIC: Use the past participle written in the perfect passive infinitive.; Use seen after perfect having.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r14 [gv5-d20-m01] Explain the category difference between the careful examination of the files and examining the files carefully.
+MODEL: Examination is a noun head with adjective careful and an of-phrase. Examining is a verb heading a non-finite clause, taking the files as object and carefully as adverbial modifier.
+RUBRIC: Compare observable structure, not just translation.; Do not call examining finite merely because it has an object.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r15 [gv5-d20-m02] Explain a normal meaning contrast between I remembered to close the window and I remembered closing the window.
+MODEL: The first concerns remembering the task before closing; the second concerns recalling the closing event.
+RUBRIC: Identify the different memory relationships.; Do not present the sentences as automatically interchangeable.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r16 [gv5-d20-m02] Explain try to restart the system versus try restarting the system.
+MODEL: Try to restart describes an effort to achieve restarting. Try restarting proposes restarting as an experimental method that may help. Neither wording alone guarantees success.
+RUBRIC: Distinguish effort from a proposed method.; Do not invent a successful outcome.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r17 [gv5-d20-m02] Reconstruct using each supplied unit once: to finish the survey / the researcher / hoped.
+MODEL: The researcher hoped to finish the survey.
+RUBRIC: Use hoped as the finite matrix verb.; Keep the supplied infinitival complement intact without adding a new participant.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r18 [gv5-d20-m02] Why does seeing The pilot saw the kite falling not prove that the kite never reached the ground?
+MODEL: The -ing complement presents an unfolding stage of the event. It does not by itself state that the event failed to continue to completion.
+RUBRIC: Explain the viewpoint of falling.; Separate what is presented from an unsupported later outcome.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r19 [gv5-d20-m03] Combine faithfully: Amina checked the seals. After that, Amina opened the container. Use a perfect -ing opening.
+MODEL: Having checked the seals, Amina opened the container.
+RUBRIC: Keep Amina as checker and opener.; Use having checked to preserve the explicit earlier completion.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r20 [gv5-d20-m03] Expand without changing the warning recipient: Warned about the leak, the tenants were evacuated.
+MODEL: The tenants had been warned about the leak. They were then evacuated.
+RUBRIC: Keep the tenants as recipients of the warning.; Retain the evacuation rather than making the tenants its organisers.
+ALTERNATIVES: The tenants had received a warning about the leak. They were subsequently evacuated.
+
+gv5-d20-r21 [gv5-d20-m03] Why is replacing the forms that must be signed with the forms signed an unreliable meaning-preserving reduction?
+MODEL: The finite relative expresses necessity through must. The past-participial modifier does not retain that obligation and may instead suggest completed signing.
+RUBRIC: Identify the lost modal meaning.; Explain why brevity alone does not justify the change.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r22 [gv5-d20-m03] Analyse Weather permitting, we will inspect the site: identify the opening clause’s subject.
+MODEL: Weather is the expressed subject of the absolute permitting clause; it is not an activity performed by we.
+RUBRIC: Identify the internal subject weather.; Avoid applying an unconditional shared-main-subject rule.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r23 [gv5-d20-m04] Compare Nora tried to repair the hinge with Nora seems to have repaired the hinge.
+MODEL: The first attributes an effort to Nora, who is also the intended repairer. The second presents an appearance or inference about Nora’s repair; seem does not assign Nora an additional agent role.
+RUBRIC: Separate an effort from an attributed appearance/inference.; Do not turn seems into proof that the repair succeeded.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r24 [gv5-d20-m04] Identify the attendee in Omar was persuaded by Amina to attend. Does the passive change that understood role?
+MODEL: Omar is the understood attendee. The passive changes his surface main-clause position from object in Amina persuaded Omar to subject, while preserving that role.
+RUBRIC: Retain Omar as attendee.; Distinguish grammatical position from the relevant participant relationship.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r25 [gv5-d20-m04] Explain why To leave now would be unwise does not identify one named leaver without context.
+MODEL: The infinitive has no expressed subject. Context may supply us, another salient group or a general human interpretation.
+RUBRIC: Recognise contextual/arbitrary interpretation.; Do not invent a named actor from the sentence alone.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r26 [gv5-d20-m04] Compare the relation of report to read in The report is easy to read with Amina to read in Amina is eager to read.
+MODEL: Report is understood as the object of read; Amina is understood as the reader/subject in the eager construction.
+RUBRIC: Identify the two different gaps or participant relationships.; Do not classify every adjective-plus-infinitive pattern by one subject-sharing rule.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r27 [gv5-d20-m04] Repair the analysis rather than the grammatical sentence: There seems to be a delay. There must name the person who performs seeming, and be is past tense.
+MODEL: There is a dummy element in an established raising construction, not a person or an agent of seeming. Be is an infinitival plain form after to, not a past-tense verb.
+RUBRIC: Keep the original grammatical sentence.; Correct both the agent claim and the verb-form claim.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-r28 [gv5-d20-m02] Write one sentence with stop + -ing and one with stop + to-infinitive. Explain the intended difference.
+MODEL: I stopped checking the stock at six. / I stopped to check the stock before leaving. The first ends the checking activity; the second pauses another activity for checking.
+RUBRIC: Use both selected constructions accurately.; Explain the difference without asserting that all stopping events have the same purpose.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c01 [gv5-d20-m01] Correct only the genuine problem or faulty analysis: The archive appears to have been destroy last year.
+MODEL: The archive appears to have been destroyed last year.
+RUBRIC: Use the lexical past participle destroyed at the end of the perfect passive infinitive.; Retain the attributed appearance and the stated past time.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c02 [gv5-d20-m01] Correct only the genuine problem or faulty analysis: She denies having saw the confidential letter.
+MODEL: She denies having seen the confidential letter.
+RUBRIC: Use seen after perfect having.; Retain the denial rather than assert that she saw the letter.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c03 [gv5-d20-m02] Correct only the genuine problem or faulty analysis: We look forward to hear from the curator.
+MODEL: We look forward to hearing from the curator.
+RUBRIC: Recognise prepositional to in look forward to.; Use an -ing complement without changing the expected communication.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c04 [gv5-d20-m02] Correct only the genuine problem or faulty analysis: The interruption made us to start again.
+MODEL: The interruption made us start again.
+RUBRIC: Use a bare infinitive after active causative make.; Retain us as the intended starters.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c05 [gv5-d20-m02] Correct only the genuine problem or faulty analysis: They helped us to carry the records.
+MODEL: No change is required. They helped us to carry the records.
+RUBRIC: Accept standard help with to.; Do not introduce an error merely because the version without to is also possible.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c06 [gv5-d20-m03] Revise for unambiguous formal reference, explicitly naming the stated checker: Having checked the labels, the boxes were delivered to Samir. Intended: Samir checked the labels before receiving the boxes.
+MODEL: After Samir checked the labels, the boxes were delivered to him.
+RUBRIC: Give the checking its intended subject Samir.; Preserve that the boxes were delivered to Samir; do not make him the deliverer.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c07 [gv5-d20-m03] Correct only the genuine problem or faulty analysis: The papers which must be reviewed tomorrow are ready. Proposed shorter equivalent: The papers reviewed tomorrow are ready.
+MODEL: Keep the original: The papers which must be reviewed tomorrow are ready.
+RUBRIC: Recognise that the original is grammatical.; Reject the proposed equivalence because it drops must, not because all reduced relatives are wrong.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-c08 [gv5-d20-m04] Correct only the genuine problem or faulty analysis: Amina persuaded Omar to wait. Analysis: Amina is necessarily the waiter because she is the matrix subject.
+MODEL: The sentence needs no correction. In the ordinary intended reading, Omar is the waiter and Amina is the persuader.
+RUBRIC: Correct the analysis rather than the sentence.; Identify object/goal control without replacing the stated participants.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-t01 [gv5-d20-m01] Rewrite using a perfect passive infinitive without strengthening the evidence: It appears that the records were moved before the inspection.
+MODEL: The records appear to have been moved before the inspection.
+RUBRIC: Preserve appears rather than asserting confirmed movement.; Use to have been moved and retain before the inspection.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-t02 [gv5-d20-m03] Use a perfect participial opening and retain the named checker: After Nora had compared both estimates, she requested a third.
+MODEL: Having compared both estimates, Nora requested a third.
+RUBRIC: Keep Nora as comparer and requester.; Preserve earlier completed comparison with having compared.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-rec01 [gv5-d05-m02] Recall Day 5: In The curator has been checking the inventory, which item is finite and what forms follow it?
+MODEL: Has is finite; been is a participle selected by perfect have, and checking is an -ing form selected by progressive be.
+RUBRIC: Identify the finite auxiliary.; Explain the selection chain rather than calling every item finite.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-rec02 [gv5-d17-m01] Recall Day 17: Why is may have been checking not may has been checking?
+MODEL: A core modal selects the plain form have, even with a singular subject. Finite agreement is not added to have after may.
+RUBRIC: Identify the modal’s form requirement.; Do not make every verb in an auxiliary chain agree independently.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.
+
+gv5-d20-rec03 [gv5-d19-m03] Recall Day 19: Compare Nora had repaired the scanner and Nora had the scanner repaired.
+MODEL: The first is a past-perfect construction describing Nora’s repair in the ordinary reading. The second normally says Nora arranged the repair, with someone else performing it.
+RUBRIC: Distinguish auxiliary perfect have from causative have.; Preserve the different participant interpretations.
+ALTERNATIVES: Other answers are acceptable if they preserve the stated meaning and meet the listed structural requirements.

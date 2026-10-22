@@ -1,0 +1,3921 @@
+{
+  "scope": "Read-only audit of every authored field in legacy Days 1–10; all 160 questions, 60 corrections, 100 wrong/right worked examples, 47 rule blocks, all rule models/tables/definitions, writing tasks, checklists and examination claims were inspected. No website/project source was edited.",
+  "date": "2026-10-21",
+  "source_snapshot_sha256": "6b89bb6e25840aa0e28baa9d16da53da2826c742f596ea33f46f969c96f9f5f9",
+  "limitations": [
+    "This is an expert editorial review, not independent consensus or psychometric calibration.",
+    "All source URLs cited in supporting_references were fetched with HTTP 200, checked by HTML title and relevant body text. Unlisted claims retain explicit verification limitations.",
+    "Some disputed usage requires further specialist reference verification before replacement publication; these are not counted as externally verified rules.",
+    "No live learner records or private account state were accessed.",
+    "Source-access failures are recorded separately in /tmp/grammar-audit-sources/fetches.json; a retry with a browser User-Agent succeeded for the source register used here."
+  ],
+  "retained_strengths": [
+    "Individually authored, topic-aligned practice rather than an unrelated shared bank.",
+    "Plain explanations, authentic civic/academic examples, worked reasons and original-writing prompts.",
+    "Correction tasks offer models and explicitly avoid exact-string automated marking in the existing interface.",
+    "Present-perfect/past distinctions, clause boundaries and broad active production are already present."
+  ],
+  "counts": {
+    "days": 10,
+    "rules": 47,
+    "objective": 160,
+    "corrections": 60,
+    "wrong_right_examples": 100,
+    "spot_items": 43,
+    "no_error_options": 0,
+    "answer_positions": {
+      "A": 26,
+      "B": 91,
+      "C": 42,
+      "D": 1
+    },
+    "issue_count": 92
+  },
+  "issues": [
+    {
+      "id": "AUD-01-01",
+      "day": 1,
+      "location": "terms.Word class; rules[0].heading/plain/points[2]",
+      "severity": "high",
+      "category": "terminology",
+      "quote": "A word class is a job, not a name; police ... works like an adjective.",
+      "explanation": "Word class is grammatical category/form, while subject, object and modifier are functions. Police in police report is normally a noun functioning as a premodifier; descriptive meaning alone does not make it an adjective.",
+      "proposed_correction": "Distinguish category from function; teach noun modifier police and conversion chair as separate analyses.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-02",
+      "day": 1,
+      "location": "rules[0].points[4:6]",
+      "severity": "high",
+      "category": "inaccurate diagnostic",
+      "quote": "A word directly after a determiner ... or before a verb is almost always a noun.",
+      "explanation": "The large red building, the very old building, not before a verb, and intransitive verbs demonstrate why immediate neighbours are insufficient; not every verb takes an object and articles precede whole noun phrases.",
+      "proposed_correction": "Use several distributional and inflectional diagnostics, with explicitly qualified limits.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-03",
+      "day": 1,
+      "location": "rules[1].plain; points[3]; pronoun definition",
+      "severity": "high",
+      "category": "reference",
+      "quote": "A pronoun stands in for a noun you have already mentioned ... must clearly point back to one specific noun.",
+      "explanation": "Pronouns can refer deictically, generically, cataphorically, to whole propositions, or be dummy subjects. They substitute for noun phrases, not necessarily one previously mentioned noun.",
+      "proposed_correction": "Introduce referential pronouns and a brief caveat for I/you, dummy it, generic they and forward reference.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+          "title": "Pronouns: personal (I, me, you, him, it, they, etc.) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/pronouns-personal-i-me-you-him-it-they-etc.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-04",
+      "day": 1,
+      "location": "rules[1].points[2,5]; d1c3.note",
+      "severity": "high",
+      "category": "variation",
+      "quote": "A collective noun ... is singular in Pakistani and American usage.",
+      "explanation": "British group nouns may take singular or plural agreement depending on construal. An unsupported blanket Pakistani rule is inappropriate; American singular preference is not a universal ban on notional plural reference. The correction should retain government have as legitimate BrE.",
+      "proposed_correction": "Describe BrE unit/member construal, AmE usual singular preference and consistency; correct advices without mandating has.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+          "title": "Subject&ndash;verb agreement - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/agreement.html"
+        }
+      ],
+      "question_ids": [
+        "d1c3"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-05",
+      "day": 1,
+      "location": "rules[2].heading/plain/points[5]",
+      "severity": "high",
+      "category": "syntax",
+      "quote": "Every sentence needs one that carries tense; A group of words with no finite verb is not a sentence.",
+      "explanation": "This confuses full finite clauses with all utterances/sentences and omits imperatives, minor sentences and ellipsis; finite verbs need not display visible person or tense distinctions.",
+      "proposed_correction": "Qualify to ordinary full declarative clauses; contrast complete clauses, minor sentences and contextually licensed ellipsis.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-06",
+      "day": 1,
+      "location": "rules[2].points[3]; recap; checklist[2]",
+      "severity": "high",
+      "category": "complementation",
+      "quote": "After a linking verb use an adjective, not an adverb.",
+      "explanation": "Predicative complements can be adjective phrases, noun phrases, prepositional phrases or some adverb phrases: She is a doctor/in the office/here. Some same-form adverbs/adjectives require sense-specific explanation.",
+      "proposed_correction": "Teach the adjective/adverb contrast for descriptions such as seems weak; do not ban other complement categories.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-07",
+      "day": 1,
+      "location": "rules[4].models[0].note",
+      "severity": "critical",
+      "category": "inaccurate rule",
+      "quote": "insist is always followed by the preposition on.",
+      "explanation": "Insist also permits a that-clause and no complement: She insisted that he leave; I insist. The retrieved dictionary explicitly lists these patterns.",
+      "proposed_correction": "Teach insist on NP/-ing, assertive insist (that) + indicative, and mandative insist (that) + subjunctive/should.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/insist",
+          "title": "INSIST | English meaning - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/insist.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-that-clause",
+          "title": "Verb patterns: verb + that -clause - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/subjunctive.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-08",
+      "day": 1,
+      "location": "rules[4].plain/points[3]; models[3].note",
+      "severity": "moderate",
+      "category": "lexical grammar",
+      "quote": "the preposition is fixed and does not change with context; comply always takes with.",
+      "explanation": "A selected complement may be fixed for that pattern, but verbs can occur without that complement and with other adjuncts. Different patterns carry different meanings; syntax is not universal word pairing.",
+      "proposed_correction": "Say comply with + requirement when expressing compliance; teach whole patterns and distinguish complements from adjuncts.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/insist",
+          "title": "INSIST | English meaning - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/insist.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-09",
+      "day": 1,
+      "location": "rules[1].table research; examples[8].why",
+      "severity": "high",
+      "category": "register and exceptions",
+      "quote": "much pairs oddly with a formal register; research is uncountable, so it takes no plural -s.",
+      "explanation": "Much research is natural formal English. Research is normally noncount in its general sense, but researches occurs in specialised/formal senses. The original correction addresses plural marking, but adds a false register rationale.",
+      "proposed_correction": "Use She has done much research or a great deal of research; qualify ordinary noncount senses and provide contextual reference extensions.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; dictionary sense verification required before specialist exception publication",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-10",
+      "day": 1,
+      "location": "examples[6].why",
+      "severity": "high",
+      "category": "grammatical function",
+      "quote": "Find here means judge to be, a linking sense.",
+      "explanation": "In found the statement convincing, the statement is an object and convincing is its predicative complement. Find is complex-transitive here, not a simple linking verb.",
+      "proposed_correction": "Label object + object complement and cross-link to verb patterns.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-11",
+      "day": 1,
+      "location": "drill d1q2",
+      "severity": "critical",
+      "category": "ambiguous answer key",
+      "quote": "A significant ____ of complaints was received. Options number/quantity.",
+      "explanation": "Both a significant number of complaints and a significant quantity of complaints are grammatical; Cambridge explicitly allows quantity of with count nouns.",
+      "proposed_correction": "Replace quantity with an indefensible distractor or ask for the conventional phrase in a stated context; preserve both if multiple-answer format.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/amount-of-number-of-or-quantity-of",
+          "title": "Amount of, number of or quantity of ? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/quantity.html"
+        }
+      ],
+      "question_ids": [
+        "d1q2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-12",
+      "day": 1,
+      "location": "d1q11.why",
+      "severity": "moderate",
+      "category": "overgeneralisation",
+      "quote": "Capable is always followed by of plus an -ing form.",
+      "explanation": "Capable can stand alone or take of + noun phrase: a capable manager; capable of great effort. The key correctly targets handle after of, but explanation is too broad.",
+      "proposed_correction": "State that capable of requires an appropriate noun phrase or -ing clause in this construction.",
+      "supporting_references": [],
+      "question_ids": [
+        "d1q11"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-13",
+      "day": 1,
+      "location": "d1c2.note",
+      "severity": "moderate",
+      "category": "usage",
+      "quote": "Behave takes towards, not with, when describing conduct to a person.",
+      "explanation": "Towards is a clear general formal choice, but regional behave rudely with should not be declared universally ungrammatical without usage evidence. The missing article is the certain error.",
+      "proposed_correction": "Present towards as the primary editorial choice and identify any regional alternative separately.",
+      "supporting_references": [],
+      "question_ids": [
+        "d1c2"
+      ],
+      "verification_status": "usage claim needs external verification; do not publish categorical ban",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-14",
+      "day": 1,
+      "location": "transfer",
+      "severity": "high",
+      "category": "misleading production instruction",
+      "quote": "If any [adverb] is sitting next to a noun, replace it with an adjective.",
+      "explanation": "Position alone does not determine word class. Only the manager and almost all applicants contain grammatical adverbs near nouns; moving/rewriting could change focus and meaning.",
+      "proposed_correction": "Have learners identify the actual modified constituent and explain scope before revising.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-15",
+      "day": 1,
+      "location": "rules[4].points[0]; d1q10.why",
+      "severity": "moderate",
+      "category": "exception handling",
+      "quote": "never just decision standing alone as a subject; A singular countable noun cannot stand alone as a subject.",
+      "explanation": "The given ordinary prose example needs a determiner, but headlines, role complements, vocatives and institutional/fixed expressions require qualified treatment rather than a universal rule.",
+      "proposed_correction": "State the ordinary singular count noun phrase rule and reserve exceptional constructions for the reference entry.",
+      "supporting_references": [],
+      "question_ids": [
+        "d1q10"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-01-16",
+      "day": 1,
+      "location": "whole lesson scope and prerequisites",
+      "severity": "high",
+      "category": "curriculum progression",
+      "quote": "Five rule blocks cover classes, countability, collective agreement, finite verbs, adjective/adverb choice and lexical prepositions.",
+      "explanation": "A first lesson requires learners to apply exceptions and verb patterns before a clear category/function, phrase/clause and sentence framework exists. Morphology, open/closed classes and proper syntactic functions are absent.",
+      "proposed_correction": "Use the approved Day 1 conceptual framework; move detailed countability, agreement and verb patterns to their dedicated lessons.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-01",
+      "day": 2,
+      "location": "rules[0].plain/points[2:5]; recap",
+      "severity": "high",
+      "category": "inaccurate diagnostic",
+      "quote": "Every correct English sentence contains at least a subject and a finite verb ... Whatever remains before the verb is the head noun.",
+      "explanation": "Imperatives and inverted clauses disprove the universal. Mechanical deletion of every prepositional phrase can delete complements or even a subject such as After lunch is best. A remaining subject can be a phrase or clause, not just a noun.",
+      "proposed_correction": "Frame stripping as a heuristic for straightforward noun-phrase subjects, teach constituent boundaries and explicit exceptions.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-02",
+      "day": 2,
+      "location": "rules[1].points[6]",
+      "severity": "high",
+      "category": "agreement",
+      "quote": "A clause beginning with that, what, whether or how ... always takes a singular verb.",
+      "explanation": "Most clausal subjects default to singular, but fused relatives/pseudo-clefts allow plural agreement: What we need are more chairs. Coordinated and notional readings need treatment.",
+      "proposed_correction": "Teach default clausal singular and distinguish fused relatives, pseudo-clefts and plural notional agreement.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert counterexample; specialist source review required for the full advanced treatment",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-03",
+      "day": 2,
+      "location": "rules[2].plain/points[5]",
+      "severity": "critical",
+      "category": "false grammatical test",
+      "quote": "if only he/she/it (subject form) fits after be, it is a complement.",
+      "explanation": "It is me/him is standard modern usage; subject-case alone is not a complement diagnostic. Semantic receiver tests also fail for many objects. Objects are themselves complements in the broader syntactic sense.",
+      "proposed_correction": "Distinguish object, predicative complement and umbrella complement; use structural diagnostics and explain formal subject-case variants.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+          "title": "Pronouns: personal (I, me, you, him, it, they, etc.) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/pronouns-personal-i-me-you-him-it-they-etc.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-04",
+      "day": 2,
+      "location": "rules[2].models[2].note",
+      "severity": "high",
+      "category": "incorrect label",
+      "quote": "her = indirect object-like recipient",
+      "explanation": "In appointed her the interim chairperson, her is the direct object; the interim chairperson is an object-related predicative complement.",
+      "proposed_correction": "Correct the object label and contrast with sent her a notice.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-05",
+      "day": 2,
+      "location": "rules[3].plain; there terminology",
+      "severity": "moderate",
+      "category": "analysis variation",
+      "quote": "there is only a placeholder, not the subject ... the real information (who resigned)",
+      "explanation": "In many contemporary grammars dummy there/it are syntactic subjects and the postverbal phrase is the associate. A cleft relative clause is not simply the real subject. Traditional real subject terminology should be identified as pedagogical.",
+      "proposed_correction": "Separate syntactic subject from notional associate/focus and acknowledge analytical terminology.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+          "title": "Pronouns: personal (I, me, you, him, it, they, etc.) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/pronouns-personal-i-me-you-him-it-they-etc.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-06",
+      "day": 2,
+      "location": "rules[4].plain/points[0:3]; pitfalls[1]",
+      "severity": "high",
+      "category": "modifier attachment",
+      "quote": "Opening -ing or -ed phrase + comma + the doer; A passive main clause almost always breaks this rule.",
+      "explanation": "Passive participial adjuncts describe patients, not necessarily doers. Passive main clauses can attach correctly: Injured in the crash, she was taken to hospital. The existing Being a public document model itself uses a valid passive.",
+      "proposed_correction": "Require a logically compatible understood subject for subject-oriented adjuncts; teach active and passive combinations and accepted sentence-level adjuncts.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-07",
+      "day": 2,
+      "location": "warmUp d2w1",
+      "severity": "high",
+      "category": "question terminology",
+      "quote": "What is the subject of The findings of the inquiry into the collapse were published? Key findings.",
+      "explanation": "The entire noun phrase is the subject; findings is its head. The options omit the full subject and teach a category/function confusion.",
+      "proposed_correction": "Ask for the head of the subject noun phrase, or include the entire noun phrase as the key.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [
+        "d2w1"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-08",
+      "day": 2,
+      "location": "drill d2q4; d2q10",
+      "severity": "moderate",
+      "category": "ambiguous localisation",
+      "quote": "While travelling ... the briefcase ...; Having examined ... a number of irregularities ...",
+      "explanation": "The dangling relation spans opening adjunct and main subject, so choosing A rather than B is not a uniquely localised word error. A briefcase can literally travel, weakening the intended impossibility rationale.",
+      "proposed_correction": "Use full-sentence correction or explicit which revision names the intended reviewer/traveller.",
+      "supporting_references": [],
+      "question_ids": [
+        "d2q4",
+        "d2q10"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-09",
+      "day": 2,
+      "location": "correction d2c4.note",
+      "severity": "moderate",
+      "category": "unnecessary transformation",
+      "quote": "The second half needs its own subject.",
+      "explanation": "Coordinated predicates can share a subject: Reading widely and making notes regularly improve recall and are essential habits. A repeated subject is not required.",
+      "proposed_correction": "Repair agreement and offer either shared-subject coordination or two independent clauses.",
+      "supporting_references": [],
+      "question_ids": [
+        "d2c4"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-10",
+      "day": 2,
+      "location": "correction d2c6.model/note",
+      "severity": "critical",
+      "category": "model changes meaning",
+      "quote": "the reviewers found several errors, which were sent back for correction.",
+      "explanation": "The model makes errors the thing sent back, although the source likely intended the annual report. Its note says the report cannot analyse itself, but the malformed source actually has several errors as the main subject.",
+      "proposed_correction": "Name the report explicitly: After analysing the annual report, the reviewers found several errors and sent the report back for correction. Accept justified alternative intended meanings.",
+      "supporting_references": [],
+      "question_ids": [
+        "d2c6"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-02-11",
+      "day": 2,
+      "location": "transfer",
+      "severity": "high",
+      "category": "misleading diagnostic",
+      "quote": "If you cannot reduce a sentence to a backbone ... it is faulty.",
+      "explanation": "Failure to parse in five words does not establish grammatical error. Correct clauses with embedding, coordination, ellipsis or required complements may resist this arbitrary reduction.",
+      "proposed_correction": "Ask learners to identify main clauses and heads; if uncertain, consult analysis guidance rather than declare the source faulty.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-01",
+      "day": 3,
+      "location": "terms.Phrase/Clause/Subordinator; rules[0]; recap; d3w1",
+      "severity": "critical",
+      "category": "syntax terminology",
+      "quote": "A clause has a finite verb; a phrase does not; who and which listed as subordinators.",
+      "explanation": "Non-finite clauses are genuinely clauses; phrases may consist of one word. Relative pronouns who/which should not all be equated with subordinating conjunctions. This foundational definition blocks later advanced analysis.",
+      "proposed_correction": "Introduce finite and non-finite clauses progressively, distinguish phrase categories from clause status, and define relative markers accurately.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [
+        "d3w1"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-02",
+      "day": 3,
+      "location": "rules[0].points[4:5]",
+      "severity": "high",
+      "category": "invalid diagnostics",
+      "quote": "Prepositional phrases ... never [followed] by a full clause ... insert which/who/that + is/was ... probably a phrase",
+      "explanation": "Prepositions differ in their complementation; embedded interrogatives occur after prepositions, and that-clause constructions require pattern-specific analysis. The suggested insertion test does not work for arbitrary phrases.",
+      "proposed_correction": "Teach individual complement patterns and valid constituency tests, with examples such as about whether he will attend.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-03",
+      "day": 3,
+      "location": "rules[2].plain",
+      "severity": "high",
+      "category": "form-function conflation",
+      "quote": "A dependent clause works as an adverb, an adjective or a noun ... adjective clause is always glued ... cannot be moved.",
+      "explanation": "Traditional functional labels require explanation; relative clauses are clauses functioning as modifiers, not adjectives. Extraposed relatives and embedded clause complements challenge the absolute mobility claims.",
+      "proposed_correction": "Teach adjunct, modifier and complement functions separately; qualify ordinary placement and add advanced extraposition examples.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+          "title": "Word classes and phrase classes - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/classes.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-04",
+      "day": 3,
+      "location": "rules[3].points[4]",
+      "severity": "high",
+      "category": "relative reference",
+      "quote": "A proper noun or a noun already made specific by the (the president, my brother) is normally followed by a non-defining clause.",
+      "explanation": "The and possessives do not guarantee unique reference; the brother who lives abroad and the president who signed the order readily take defining clauses.",
+      "proposed_correction": "Choose punctuation from intended identifying vs supplementary function, not presence of the/my.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-05",
+      "day": 3,
+      "location": "rules[4].points[3:5]; d3q11 explanation; d3c6.note",
+      "severity": "high",
+      "category": "connector generalisation",
+      "quote": "One joining word per join; Though ... yet ... pick one member ... never both.",
+      "explanation": "The rule wrongly extends a useful caution against although ... but to any pair of logical signals. Main-clause yet/nonetheless can coexist with a concessive subordinate clause in established usage, especially emphatic/formal contexts.",
+      "proposed_correction": "Teach conjunction type, clause boundaries and redundancy/register separately; retain a clear beginner default without declaring all reinforced concessions errors.",
+      "supporting_references": [],
+      "question_ids": [
+        "d3q11",
+        "d3c6"
+      ],
+      "verification_status": "expert review; narrow although-but default source checked, specialist support needed for broader contrast",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-06",
+      "day": 3,
+      "location": "rules[4].points[5]",
+      "severity": "critical",
+      "category": "ungrammatical model",
+      "quote": "Although funds were released late. The project, nonetheless, finished on time.",
+      "explanation": "The offered repair leaves an although-clause as a fragment, contradicting the lesson and Day 4.",
+      "proposed_correction": "Use Funds were released late. The project nonetheless finished on time, or Although funds were released late, the project nonetheless finished on time.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-07",
+      "day": 3,
+      "location": "examples[2] and [9]",
+      "severity": "high",
+      "category": "meaning preservation",
+      "quote": "teacher ... has retired, is coming today -> teacher ... has retired; witnesses ... that supported the alibi -> called to support the alibi",
+      "explanation": "The teacher correction deletes the coming-today proposition. The witnesses correction converts an asserted supporting relationship into purpose, which need not preserve truth conditions.",
+      "proposed_correction": "Offer two coherent clauses for both teacher facts; disambiguate witnesses and preserve the intended facts rather than invent purpose.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-08",
+      "day": 3,
+      "location": "examples[3]; correction d3c2",
+      "severity": "high",
+      "category": "context-dependent correction",
+      "quote": "The students, who had not paid the fee, ... -> students who had not paid ...",
+      "explanation": "The original supplementary clause can truthfully say the whole contextually identified group had not paid. Removing commas changes the meaning without evidence that this was intended.",
+      "proposed_correction": "Supply a context stating only a subset failed to pay, or explain both grammatical readings.",
+      "supporting_references": [],
+      "question_ids": [
+        "d3c2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-03-09",
+      "day": 3,
+      "location": "drill d3q9",
+      "severity": "high",
+      "category": "style treated as grammar",
+      "quote": "Which sentence is punctuated correctly? A If ... succeeds the ...; B If ... succeeds, ...; C ... reduced, if ...",
+      "explanation": "An introductory short conditional can sometimes omit a comma, and a final condition can be set off as an afterthought. B is the neutral edited default, not necessarily the sole grammatical possibility without context.",
+      "proposed_correction": "Ask for neutral formal punctuation with no afterthought, or replace alternatives with unmistakable boundary errors.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/although-or-though",
+          "title": "Although or though ? - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/although.html"
+        }
+      ],
+      "question_ids": [
+        "d3q9"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-04-01",
+      "day": 4,
+      "location": "rules[1].plain/points/table; checklist",
+      "severity": "high",
+      "category": "internal contradiction",
+      "quote": "exactly five legitimate ways ... A colon is a sixth option",
+      "explanation": "The explanatory count is internally contradictory and makes a non-exhaustive practical list universal; a dash and carefully controlled rhetorical punctuation add further possibilities.",
+      "proposed_correction": "Present several common formal repairs, include the colon where explanatory, and avoid exhaustive legal/illegal language.",
+      "supporting_references": [
+        {
+          "url": "https://www.sussex.ac.uk/informatics/punctuation/comma",
+          "title": "The Comma",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/commas.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-04-02",
+      "day": 4,
+      "location": "rules[0].points[5]; rules[3]; why",
+      "severity": "moderate",
+      "category": "register and unsupported exam claims",
+      "quote": "if it needs the previous sentence to make sense, it is a fragment; marked as [an accident] by default",
+      "explanation": "Grammatical anaphora makes complete sentences depend on context; context-dependence is not a fragment test. Claimed examiner scoring and script volumes have no cited evidence.",
+      "proposed_correction": "Use structural clause tests, distinguish rhetorical fragments from formal prose preferences and remove unsupported examiner claims.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-04-03",
+      "day": 4,
+      "location": "drill d4q5",
+      "severity": "critical",
+      "category": "no unique error segment",
+      "quote": "Having examined ... in the regional office (D). Key D.",
+      "explanation": "The missing matrix clause is a defect of the entire group, not specifically in segment D. Adding a clause after any plausible boundary or restructuring A repairs it.",
+      "proposed_correction": "Ask which complete revision supplies a main clause, or use free correction with model alternatives.",
+      "supporting_references": [],
+      "question_ids": [
+        "d4q5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-04-04",
+      "day": 4,
+      "location": "drill d4q6",
+      "severity": "critical",
+      "category": "multiple keys under taught definition",
+      "quote": "Which sentence is NOT a run-on? B The rains came, the crops recovered. C ... and ...",
+      "explanation": "The glossary explicitly equates run-on with fused sentence and distinguishes comma splice. Both B and C are not fused sentences, though only C is acceptable neutral formal punctuation.",
+      "proposed_correction": "Ask which option avoids both a fused sentence and a comma splice, or define run-on as an umbrella term consistently.",
+      "supporting_references": [],
+      "question_ids": [
+        "d4q6"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-04-05",
+      "day": 4,
+      "location": "drill d4q7; examples[2].why",
+      "severity": "high",
+      "category": "incorrect explanation",
+      "quote": "Which ... has no subject of its own; Which cannot begin a free-standing sentence.",
+      "explanation": "Which is the subject of the finite relative clause. It lacks an independent matrix clause in the intended formal context, not a subject. Which also begins grammatical independent interrogatives.",
+      "proposed_correction": "Explain relative vs interrogative which and matrix-clause dependence; preserve rhetorical fragment variation.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+          "title": "Clauses: finite and non-finite - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/nonfinite.html"
+        }
+      ],
+      "question_ids": [
+        "d4q7"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-01",
+      "day": 5,
+      "location": "why/examTip; rules[0].plain; terms.Intervening phrase",
+      "severity": "high",
+      "category": "unsupported examination evidence",
+      "quote": "Agreement is the single most tested ... single most repeated ...",
+      "explanation": "No authentic paper corpus, count or source is provided for these prevalence/superlative claims. Calling intervening phrases words designed to distract also misdefines normal language through test tactics.",
+      "proposed_correction": "Retain agreement importance as an instructional observation and define intervening constituents without invented examination evidence.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-02",
+      "day": 5,
+      "location": "rules[1].plain/points[5]",
+      "severity": "high",
+      "category": "agreement explanation",
+      "quote": "Or and nor do not join subjects at all ... proximity governs pronoun choice",
+      "explanation": "Or/nor do coordinate alternatives. Proximity is a practical agreement convention, not a claim that only the nearer subject exists; reference and pronoun meaning cannot simply be assigned by proximity.",
+      "proposed_correction": "Explain alternative coordination and proximity/notional choices; recommend recasting mismatched person/number constructions.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-03",
+      "day": 5,
+      "location": "rules[2].points[0]; d5c2.note",
+      "severity": "high",
+      "category": "variation",
+      "quote": "Always singular ... neither; Neither is singular even when followed by a plural noun.",
+      "explanation": "Formal singular agreement after neither of is a useful default, but plural agreement is common and recognised especially in informal speech.",
+      "proposed_correction": "Distinguish careful formal default from accepted informal variation; do not label every plural instance universally wrong.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/neither-neither-nor-and-not-either",
+          "title": "Neither, neither &hellip; nor and not &hellip; either - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/neither.html"
+        }
+      ],
+      "question_ids": [
+        "d5c2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-04",
+      "day": 5,
+      "location": "drill d5q2",
+      "severity": "critical",
+      "category": "incorrect key",
+      "quote": "The committee ____ its recommendations last Thursday. Key has submitted.",
+      "explanation": "Present perfect with the definite finished time last Thursday conflicts with the taught standard. The intended submitted option is absent. Were submitting could be possible under BrE collective construal and appropriate narrative context, so the item also needs a stated unit reading.",
+      "proposed_correction": "Use The panel, acting as one body, submitted its recommendations last Thursday with present/past agreement distractors, or remove finished time.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+          "title": "Subject&ndash;verb agreement - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/agreement.html"
+        }
+      ],
+      "question_ids": [
+        "d5q2"
+      ],
+      "verification_status": "confirmed key/context mismatch against retrieved tense reference",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-05",
+      "day": 5,
+      "location": "examples[6].why",
+      "severity": "high",
+      "category": "explanation does not match error",
+      "quote": "The series ... has not was implemented -> has not been; reason head noun singular",
+      "explanation": "The actual correction is the participle after perfect has; agreement is already singular in the original.",
+      "proposed_correction": "Explain has + past participle been + passive participle implemented; use an actual series agreement error if agreement is the objective.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-06",
+      "day": 5,
+      "location": "examples[7]; correction d5c5",
+      "severity": "high",
+      "category": "legitimate alternatives",
+      "quote": "Either the commissioner or his staff is responsible -> are; Fifty thousand rupees were recovered -> was",
+      "explanation": "Staff permits unit or member construal in BrE and singular is standard AmE; the original cannot be declared wrong without context. Money expressions can focus on a sum or individual currency units.",
+      "proposed_correction": "Supply member/unit context or accept both staff agreement patterns. In d5c5 definitely correct news was; qualify optional sum-of-money agreement.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+          "title": "Subject&ndash;verb agreement - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/agreement.html"
+        }
+      ],
+      "question_ids": [
+        "d5c5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-05-07",
+      "day": 5,
+      "location": "rules[3]; d5q7/d5q12; d5c6.note",
+      "severity": "moderate",
+      "category": "over-mechanical relative agreement",
+      "quote": "The word only is doing all the work ... switches who antecedent automatically",
+      "explanation": "Plural is the usual interpretation in one of those who, and only one typically invites singular, but attachment and intended referent govern interpretation. Singular their can refer to a single applicant and need not become his.",
+      "proposed_correction": "Teach intended antecedent explicitly, preserve singular they and reserve disputed one-of agreement for expert variation notes.",
+      "supporting_references": [],
+      "question_ids": [
+        "d5q7",
+        "d5q12",
+        "d5c6"
+      ],
+      "verification_status": "preferred conventional analysis identified; broader variant status requires specialist source verification",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-01",
+      "day": 6,
+      "location": "rules[0].plain/points[4,6]; why",
+      "severity": "high",
+      "category": "style/unsupported transfer claim",
+      "quote": "capitalisation is a purely referential device ... In a book or article title, capitalise ... all main words.",
+      "explanation": "I and sentence initials refute purely referential. Sentence case vs title case, numbered labels and official-title capitals depend on style. Attribution to Urdu/Persian respect conventions is unsupported and Urdu has no uppercase/lowercase distinction.",
+      "proposed_correction": "Specify British editorial defaults and legitimate style-guide variation; remove unsupported cross-language causal explanation.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-02",
+      "day": 6,
+      "location": "rules[1].plain/points[1]",
+      "severity": "high",
+      "category": "punctuation and clause type",
+      "quote": "Statement order always takes a full stop; A polite request in question form takes a full stop: Kindly confirm receipt.",
+      "explanation": "Declarative questions can take question marks, embedded questions occur inside matrix questions, and Kindly confirm receipt is an imperative rather than interrogative form.",
+      "proposed_correction": "Determine punctuation from the whole utterance and intended speech act; correctly label the imperative example.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "title": "Reported speech: indirect speech - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/reported-speech-indirect-speech.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-03",
+      "day": 6,
+      "location": "rules[2].plain/table; recap; transfer",
+      "severity": "high",
+      "category": "incomplete punctuation model",
+      "quote": "A comma does four jobs ... and nothing else; If [not] one of them, delete it.",
+      "explanation": "The course itself adds a fifth job; omitted cases include direct address, interjections, dates, quotations, ellipsis and emphasis. Optional compound-predicate and short-introductory commas are wrongly treated as categorical.",
+      "proposed_correction": "Present a starter set with cross-links, never an exhaustive ban; qualify no comma solely separating an ordinary subject from its verb.",
+      "supporting_references": [
+        {
+          "url": "https://www.sussex.ac.uk/informatics/punctuation/comma",
+          "title": "The Comma",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/commas.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-04",
+      "day": 6,
+      "location": "rules[3].plain/points[3:5]; d6q11",
+      "severity": "moderate",
+      "category": "editorial variation",
+      "quote": "It’s = it is ... apostrophe never makes a plural; joint ownership only last name",
+      "explanation": "It’s also means it has. Apostrophes in single-letter plurals are allowed by some styles, and joint/separate possessive punctuation has variation and pronoun-specific constraints. A preferred convention is not an exhaustive grammar law.",
+      "proposed_correction": "Teach it is/it has, ordinary plural default, letter-plural style variation and a qualified joint-possession convention.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/possession-john-s-car-a-friend-of-mine",
+          "title": "Possession ( John&rsquo;s car, a friend of mine ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/possessives.html"
+        }
+      ],
+      "question_ids": [
+        "d6q11"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-05",
+      "day": 6,
+      "location": "drill d6q6",
+      "severity": "critical",
+      "category": "incorrect key/rendered answer",
+      "quote": "____, the department revised ... Key After receiving several complaints,",
+      "explanation": "The prompt already supplies a comma. Key B creates a double comma. Option A yields the correctly punctuated sentence.",
+      "proposed_correction": "Change answer index from 1 to 0 or remove the prompt comma, then render-test every punctuation gap.",
+      "supporting_references": [],
+      "question_ids": [
+        "d6q6"
+      ],
+      "verification_status": "confirmed by literal prompt-option substitution",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-06-06",
+      "day": 6,
+      "location": "drill d6q4; corrections d6c2/d6c5",
+      "severity": "high",
+      "category": "optional punctuation treated as error",
+      "quote": "no comma is needed before and -> find the error; remove relative-clause commas",
+      "explanation": "Not needed does not entail ungrammatical: a compound-predicate comma can mark contrast/rhythm, though normally omitted here. d6c2 can keep supplementary commas while fixing Officers and have; d6c5 can instead delete the stray comma after meeting for a defining reading.",
+      "proposed_correction": "Supply intended reading/house style; accept meaning-preserving defining and supplementary alternatives.",
+      "supporting_references": [
+        {
+          "url": "https://www.sussex.ac.uk/informatics/punctuation/comma",
+          "title": "The Comma",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/commas.html"
+        }
+      ],
+      "question_ids": [
+        "d6q4",
+        "d6c2",
+        "d6c5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-01",
+      "day": 7,
+      "location": "title/goal; scope",
+      "severity": "high",
+      "category": "coverage mismatch",
+      "quote": "Present and past: the four forms of each",
+      "explanation": "The title/goal promises eight constructions, but full rule blocks teach only present simple/progressive and past simple/progressive. Perfect forms are deferred and past-perfect progressive gets limited later treatment.",
+      "proposed_correction": "Use the approved progressive Days 6–8 scope, with explicit prerequisites, forms, question/negative patterns and cross-links.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-02",
+      "day": 7,
+      "location": "terms.Time marker; rules[2].plain/models[2]",
+      "severity": "high",
+      "category": "false tense determinism",
+      "quote": "A word that fixes the tense ... only the past simple can carry [a named past occasion].",
+      "explanation": "Named past times can accompany progressive and past perfect as well as simple past. Time markers help establish temporal relations but do not fix one tense/aspect mechanically.",
+      "proposed_correction": "Teach time, reference time and aspect separately; contrast At nine I was working vs I had finished by nine.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+          "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/pastperfect.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-03",
+      "day": 7,
+      "location": "rules[1].points/table; examples[0,4,7,8]; checklist[1]",
+      "severity": "high",
+      "category": "aspect and context",
+      "quote": "never put know, have, own, believe or contain into the continuous; author is arguing ... wrong",
+      "explanation": "Stative restrictions depend on sense and construal. The checklist bans even having a meeting despite d7c2 explaining it. Progressive literary commentary and two simultaneous progressives can be grammatical.",
+      "proposed_correction": "Teach usual restrictions and dynamic/temporary interpretations; present alternative aspectual meanings rather than automatically correct them.",
+      "supporting_references": [
+        {
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+          "title": "Stative verbs | LearnEnglish",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/continuous.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-04",
+      "day": 7,
+      "location": "drill d7q4",
+      "severity": "high",
+      "category": "ambiguous context",
+      "quote": "The novel ____ the collapse ... describes/is describing/described/was describing",
+      "explanation": "Literary present is a conventional editorial choice, but past-tense discussion and progressive discourse are grammatical in context.",
+      "proposed_correction": "Ask for the conventional literary-present default explicitly, or provide discourse forcing one temporal perspective.",
+      "supporting_references": [],
+      "question_ids": [
+        "d7q4"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-05",
+      "day": 7,
+      "location": "drill d7q7",
+      "severity": "critical",
+      "category": "multiple defensible keys",
+      "quote": "While the delegates ____, the secretariat ____. B were debating/circulated; A debated/was circulating; D were debating/was circulating",
+      "explanation": "A, B and D describe distinct entirely possible past situations; C can describe a present habitual process. The prompt does not state the event relationship needed to choose B.",
+      "proposed_correction": "Specify that debate was in progress when a single completed circulation occurred, or ask learners to compare the meanings of all grammatical alternatives.",
+      "supporting_references": [],
+      "question_ids": [
+        "d7q7"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-06",
+      "day": 7,
+      "location": "drill d7q11",
+      "severity": "critical",
+      "category": "grammatical sentence marked wrong",
+      "quote": "the case, which he is finding unusually complex",
+      "explanation": "Progressive find in an ongoing experience/judgement is natural: I am finding this course difficult. The purported error is not a necessary grammatical defect.",
+      "proposed_correction": "Use a genuine no-error option, or replace with a stative sense that resists progressive and explain the sense distinction.",
+      "supporting_references": [
+        {
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+          "title": "Stative verbs | LearnEnglish",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/continuous.html"
+        }
+      ],
+      "question_ids": [
+        "d7q11"
+      ],
+      "verification_status": "expert judgement; general sense-dependent stativity verified; specific find example needs dictionary confirmation before publication",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-07",
+      "day": 7,
+      "location": "drill d7q12",
+      "severity": "critical",
+      "category": "multiple defensible keys",
+      "quote": "While the assembly ... the opposition ... Key was debating/was protesting",
+      "explanation": "The simple pair debated/protested is grammatical for concurrent completed activities, and the progressive pair highlights ongoing overlap. Other time contexts permit present habitual.",
+      "proposed_correction": "State in-progress future/past reference explicitly or assess explanation of the contrast.",
+      "supporting_references": [],
+      "question_ids": [
+        "d7q12"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-07-08",
+      "day": 7,
+      "location": "drill d7q1.why; corrections d7c1/d7c4/d7c6; transfer",
+      "severity": "high",
+      "category": "context-dependent correction",
+      "quote": "Since 2018 requires present perfect continuous; nowadays signals simple; neither paragraph ... a single verb from the other tense",
+      "explanation": "Present perfect simple can describe repeated continuing issuing. Nowadays can describe current temporary trends with progressive. Literary past can be legitimate. Mixed past and present across explanatory prose can be justified.",
+      "proposed_correction": "Accept meaningful tense/aspect alternatives; require explicit continuing/current context, and ask learners to justify legitimate tense changes.",
+      "supporting_references": [
+        {
+          "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+          "title": "Stative verbs | LearnEnglish",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/continuous.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        }
+      ],
+      "question_ids": [
+        "d7q1",
+        "d7c1",
+        "d7c4",
+        "d7c6"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-01",
+      "day": 8,
+      "location": "rules[0].plain/table; pitfalls; checklist[0]",
+      "severity": "high",
+      "category": "time-expression overgeneralisation",
+      "quote": "a date ... if one is present, the present perfect is automatically wrong",
+      "explanation": "A date in a since-phrase or embedded clause is compatible with present perfect; present time spans and event time must be distinguished. Already/just/recently do not mechanically require present perfect, especially in AmE.",
+      "proposed_correction": "Limit the finished-past prohibition to adverbials locating the perfect event in a finished past period; teach AmE and context variation.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-02",
+      "day": 8,
+      "location": "rules[1].points[3:4]",
+      "severity": "critical",
+      "category": "incorrect structural formula",
+      "quote": "It is + present perfect + since ... It is three years since the policy was launched.",
+      "explanation": "The stated formula has no present-perfect verb in its example. Since-clauses can themselves use perfect forms depending on continuing states, so they do not invariably take past simple.",
+      "proposed_correction": "Write It is/has been + duration + since + past/perfect clause and explain the meaning distinction with verified examples.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-03",
+      "day": 8,
+      "location": "rules[3].plain/points[5]",
+      "severity": "high",
+      "category": "past-perfect restriction",
+      "quote": "past perfect exists purely to prevent ambiguity ... no second past event ... do not use",
+      "explanation": "Past perfect also supports reported speech, counterfactuals, changed plans and an implicitly established past reference time. A second event need not appear in the same sentence.",
+      "proposed_correction": "Teach anteriority relative to an explicit or contextual past viewpoint and its other functions.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+          "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/pastperfect.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-04",
+      "day": 8,
+      "location": "drill d8q2",
+      "severity": "critical",
+      "category": "multiple defensible keys",
+      "quote": "The roads are still wet because it ____ all night. rained/has rained/has been raining",
+      "explanation": "Simple past and present perfect simple can both explain wet roads as well as the continuous. Present relevance does not uniquely force progressive.",
+      "proposed_correction": "Give a continuation cue and ask which choice foregrounds ongoing duration; accept valid alternative interpretations.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        }
+      ],
+      "question_ids": [
+        "d8q2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-05",
+      "day": 8,
+      "location": "drill d8q6",
+      "severity": "critical",
+      "category": "missing temporal context",
+      "quote": "How long ____ you ____ for the result? have/been waiting vs did/wait",
+      "explanation": "Did you wait is a fully grammatical question about a completed wait. Nothing in the prompt says the person is still waiting.",
+      "proposed_correction": "Add You are still waiting now or use explanation of ongoing vs completed waits.",
+      "supporting_references": [],
+      "question_ids": [
+        "d8q6"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-06",
+      "day": 8,
+      "location": "drill d8q7; warmUp d8w1",
+      "severity": "high",
+      "category": "past-perfect context ambiguity",
+      "quote": "I had finished the paper two hours ago; The committee had submitted ... last Friday",
+      "explanation": "Both past-perfect alternatives can be licensed by a discourse-established later past reference. Without such context simple past is the unmarked default, but the other choices are not universally incorrect.",
+      "proposed_correction": "Ask for a context-free neutral report explicitly, or provide an explicit reference frame that separates the meanings.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+          "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/pastperfect.html"
+        }
+      ],
+      "question_ids": [
+        "d8q7",
+        "d8w1"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-07",
+      "day": 8,
+      "location": "drill d8q9",
+      "severity": "critical",
+      "category": "multiple grammatical answers",
+      "quote": "The file ____ on the table where the clerk had left it. lay/was laid down",
+      "explanation": "Both lay and was laid down yield grammatical, coherent sentences, with different focus/agent implications.",
+      "proposed_correction": "Replace passive was laid down with an invalid form if testing the past of lie; or ask for the intransitive past form explicitly.",
+      "supporting_references": [],
+      "question_ids": [
+        "d8q9"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-08",
+      "day": 8,
+      "location": "correction d8c5.note",
+      "severity": "high",
+      "category": "adverb position",
+      "quote": "already sits between had and the participle",
+      "explanation": "Most candidates already had submitted is a legitimate alternative with focus on already, even though had already submitted is more usual. The note mistakes normal placement for a categorical constraint.",
+      "proposed_correction": "Present had already submitted as the neutral default, and accept already had submitted in a suitable emphasis context.",
+      "supporting_references": [],
+      "question_ids": [
+        "d8c5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-08-09",
+      "day": 8,
+      "location": "recap",
+      "severity": "critical",
+      "category": "contradictory grammatical rule",
+      "quote": "Neither tense works with a finished time expression.",
+      "explanation": "The statement bans finished-time expressions with past perfect, contradicting the lesson’s own By 2020 ... had been abandoned example and standard past-perfect usage.",
+      "proposed_correction": "Distinguish present perfect with finished event-time adverbials from past perfect relative to an earlier/later past frame.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+          "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/pastperfect.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+          "title": "Past simple or present perfect? - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/presentpast.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-01",
+      "day": 9,
+      "location": "terms.Sequence of tenses; rules[3].plain/points; examples[2,5,8]; pitfalls",
+      "severity": "critical",
+      "category": "optional backshift made mandatory",
+      "quote": "a universal truth stays present ... pulling it into past misrepresents it as no longer true",
+      "explanation": "Backshift is frequently optional when truth remains current, and backshifted universal truths do not assert that they have ceased to be true. The source contradicts Day 12’s optionality.",
+      "proposed_correction": "Teach temporal viewpoint, continued validity and reported-speaker stance; present both legitimate forms with context.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "title": "Reported speech: indirect speech - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/grammar-audit-sources/reported-speech-indirect-speech.html"
+        }
+      ],
+      "question_ids": [
+        "d9q4",
+        "d9q7",
+        "d9c3",
+        "d9c5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-02",
+      "day": 9,
+      "location": "rules[0].plain/points[4:5]; models[3]",
+      "severity": "high",
+      "category": "future meaning overgeneralisation",
+      "quote": "will is least committed; I finish my degree next year sounds wrong; going to not will for evidence",
+      "explanation": "Future constructions overlap. Simple present can express a settled personal schedule, and will can make an evidence-based prediction. Formal writing does not universally prefer passive voice; shall also has formal first-person future uses.",
+      "proposed_correction": "Teach tendencies and discourse choices with contrasts, not exclusive substitutions.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-will-and-shall",
+          "title": "Future: will and shall - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/future.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-be-going-to-i-am-going-to-work",
+          "title": "Future: be going to ( I am going to work ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/willgoing.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-03",
+      "day": 9,
+      "location": "rules[1].heading/plain; checklist[0]; recap",
+      "severity": "high",
+      "category": "categorical restriction",
+      "quote": "Never use will in a time or condition clause; connectors already announce future",
+      "explanation": "When/if can introduce embedded questions, and willingness, result-as-condition and other modal meanings license will/would. The lesson itself gives one exception while the headline/checklist deny any.",
+      "proposed_correction": "Distinguish future adjunct clauses from content interrogatives and explain willingness/result conditions consistently.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/conditionals-if",
+          "title": "Conditionals: if - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/conditionals.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-04",
+      "day": 9,
+      "location": "rules[2].plain; examples[3,7]; d9w3/d9q8/d9c2",
+      "severity": "critical",
+      "category": "optional future perfect marked obligatory",
+      "quote": "By + a future point ... future perfect is required",
+      "explanation": "We will finish by Friday is fully grammatical. By marks a deadline, not a compulsory tense. Future perfect foregrounds completion before a future reference time. An explicit future point may also be understood from context.",
+      "proposed_correction": "Use meaning contrasts and require the requested future-perfect form only when explicitly assessing that transformation.",
+      "supporting_references": [],
+      "question_ids": [
+        "d9w3",
+        "d9q8",
+        "d9c2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-05",
+      "day": 9,
+      "location": "drill d9q2",
+      "severity": "critical",
+      "category": "overlapping future keys",
+      "quote": "The conference ____ on 12 April according to the published schedule. will begin/begins/is going to begin",
+      "explanation": "All three are grammatical descriptions of a scheduled event. Present simple is a useful conventional default, not an exclusive grammatical answer.",
+      "proposed_correction": "Ask which form is the present simple for a schedule, or supply a transformation instruction.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-will-and-shall",
+          "title": "Future: will and shall - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/future.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-be-going-to-i-am-going-to-work",
+          "title": "Future: be going to ( I am going to work ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/willgoing.html"
+        }
+      ],
+      "question_ids": [
+        "d9q2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-06",
+      "day": 9,
+      "location": "warmUp d9w2; drill d9q5",
+      "severity": "high",
+      "category": "meaning underdetermined",
+      "quote": "currency will be/is going to come under pressure; This time next week ... will write/will have written/will be writing",
+      "explanation": "The evidence context does not make will ungrammatical. A future point can locate the start, completion or progress of an event depending on what the author intends.",
+      "proposed_correction": "State the targeted meaning explicitly: activity already in progress at that moment, or prediction with a specified contrast.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-will-and-shall",
+          "title": "Future: will and shall - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/future.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-be-going-to-i-am-going-to-work",
+          "title": "Future: be going to ( I am going to work ) - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/willgoing.html"
+        }
+      ],
+      "question_ids": [
+        "d9w2",
+        "d9q5"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-07",
+      "day": 9,
+      "location": "drill d9q12",
+      "severity": "critical",
+      "category": "multiple defensible keys",
+      "quote": "By June she will have taught/will have been teaching for twenty years",
+      "explanation": "Both perfect simple and perfect progressive are grammatical with teach and duration. Progressive foregrounds continuity; simple can summarise the total career duration.",
+      "proposed_correction": "Ask which form foregrounds ongoing activity or use an explicit structure-identification task.",
+      "supporting_references": [],
+      "question_ids": [
+        "d9q12"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-09-08",
+      "day": 9,
+      "location": "correction d9c5",
+      "severity": "moderate",
+      "category": "unverified non-linguistic example",
+      "quote": "Indus flows through four provinces",
+      "explanation": "The precise geographical claim is not sourced and may confuse flowing through with forming a boundary. It is unnecessary for teaching continued truth/backshift.",
+      "proposed_correction": "Use a simple verified scientific/general fact or an invented clearly labelled scenario; do not introduce unverified geographical assertions.",
+      "supporting_references": [],
+      "question_ids": [
+        "d9c5"
+      ],
+      "verification_status": "non-linguistic factual claim flagged for verification, not asserted false",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-01",
+      "day": 10,
+      "location": "rules[0].heading/plain; terms.Modal verb; checklist",
+      "severity": "moderate",
+      "category": "terminological consistency",
+      "quote": "A modal is always followed by bare infinitive; ought to listed among modals",
+      "explanation": "The broad headline includes ought to but immediately names it as an exception. Modal and semi-modal categories vary; negatives can intervene, and finite vs non-finite restrictions need structure-based explanation.",
+      "proposed_correction": "Define central modals and marginal/semi-modal patterns; present ought to as its own pattern and keep formulas consistent.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-02",
+      "day": 10,
+      "location": "rules[1].plain/points[0:4]; shall statement",
+      "severity": "high",
+      "category": "modality and register",
+      "quote": "official notifications almost always use have to ... shall binding obligation stronger ... might more tentative",
+      "explanation": "Must can express external rules and is standard in formal notices. Shall is not intrinsically stronger than must; legal drafting depends on jurisdiction/style. May and might do not encode fixed probability levels.",
+      "proposed_correction": "Teach default speaker/circumstance tendencies, epistemic vs deontic meanings, overlap and style-sensitive legal drafting.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-will-and-shall",
+          "title": "Future: will and shall - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/future.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-03",
+      "day": 10,
+      "location": "rules[1].models[1].note/table; terms.Perfect modal",
+      "severity": "high",
+      "category": "meaning and scope",
+      "quote": "might not = less likely; should have = the right thing was not done; could have = possible but did not happen",
+      "explanation": "Might not expresses possible non-occurrence, not merely a fixed lower probability. Should have can express an expectation whose outcome is unknown; could have can express uncertain past possibility. Perfect modal constructions may also concern completion before a future point.",
+      "proposed_correction": "Provide separate epistemic, evaluative and counterfactual readings and explicit negation scope.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "expert review; specialist modal-source check required before full replacement publication",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-04",
+      "day": 10,
+      "location": "rules[2].plain/points[4]; checklist[1]; examples[1,3,6]",
+      "severity": "high",
+      "category": "conditional coverage",
+      "quote": "each type fixes tense of both halves; never will/would in if-clause",
+      "explanation": "Pedagogical conditional types do not exhaust real conditionals, speech-act conditions, relevance conditions and modal willingness/result conditions. The source itself contains could in an if clause.",
+      "proposed_correction": "Teach numbered patterns as a useful starting framework with exceptions and pragmatic uses, preserving a formal default for counterfactual past.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/conditionals-if",
+          "title": "Conditionals: if - Grammar - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/conditionals.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-05",
+      "day": 10,
+      "location": "rules[3].points[2]; example[8]; d10w3",
+      "severity": "high",
+      "category": "legitimate standard variation",
+      "quote": "Use were, not was, after if in unreal conditions",
+      "explanation": "Irrealis were is the formal default, but was is widespread acceptable informal standard usage with I/he/she/it; its presence alone does not prove a grammatical error.",
+      "proposed_correction": "Specify formal written register when requiring were, and explain indicative past vs irrealis meanings separately.",
+      "supporting_references": [],
+      "question_ids": [
+        "d10w3"
+      ],
+      "verification_status": "expert review; full register comparison source required before publication",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-06",
+      "day": 10,
+      "location": "rules[4].plain/models[0]; pitfalls[4]",
+      "severity": "critical",
+      "category": "British English variation",
+      "quote": "should ... acceptable in speech but weaker in formal written English; be not should be",
+      "explanation": "Mandative should is a standard British option in formal as well as informal usage. The lesson mislabels a legitimate form as weaker/nonformal and restricts subjunctive use inaccurately.",
+      "proposed_correction": "Teach subjunctive and mandative should as legitimate alternatives; explain regional distribution and preserve their equivalent directive reading.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-that-clause",
+          "title": "Verb patterns: verb + that -clause - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/subjunctive.html"
+        }
+      ],
+      "question_ids": [],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-07",
+      "day": 10,
+      "location": "examples[7]; d10c2",
+      "severity": "high",
+      "category": "verb sense distinction",
+      "quote": "She insisted that the report was revised ... -> be revised",
+      "explanation": "Insist can assert a fact or demand an action. Was revised is a grammatical assertion; be revised expresses a demand and may change intended meaning. Suggest likewise has evidential and recommending senses.",
+      "proposed_correction": "Provide context choosing insist= demand vs assert, and compare both grammatical constructions.",
+      "supporting_references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/insist",
+          "title": "INSIST | English meaning - Cambridge Dictionary",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/insist.html"
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-that-clause",
+          "title": "Verb patterns: verb + that -clause - Cambridge Grammar",
+          "retrieved": "2026-10-21",
+          "status": 200,
+          "body": "/tmp/audit1-sources/subjunctive.html"
+        }
+      ],
+      "question_ids": [
+        "d10c2"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-08",
+      "day": 10,
+      "location": "examples[5]; corrections d10c4/d10c6",
+      "severity": "high",
+      "category": "meaning inferred without context",
+      "quote": "must not -> need not because the sentence means no obligation",
+      "explanation": "A literal prohibition is grammatically well-formed; e-registration rules could indeed prohibit extra documents. The course invents the intended policy meaning.",
+      "proposed_correction": "Supply an explicit no-obligation scenario or ask learners to explain the semantic difference instead of correct a grammatical sentence.",
+      "supporting_references": [],
+      "question_ids": [
+        "d10c4",
+        "d10c6"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-09",
+      "day": 10,
+      "location": "drill d10q8",
+      "severity": "critical",
+      "category": "multiple error segments",
+      "quote": "every candidate carries (A) ... and reports (C) ... Key A",
+      "explanation": "If the task requires the bare subjunctive, both carries in A and reports in C need changing. Moreover indicative mandative constructions vary by region/register, so the instruction must specify the requested form.",
+      "proposed_correction": "Ask for a complete subjunctive transformation or place both verbs in one answer segment with explicit formal structure requirements.",
+      "supporting_references": [],
+      "question_ids": [
+        "d10q8"
+      ],
+      "verification_status": "confirmed two-segment repair needed under the item’s stated answer rationale",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-10-10",
+      "day": 10,
+      "location": "drill d10q2; d10q12",
+      "severity": "moderate",
+      "category": "insufficient semantic context",
+      "quote": "can’t have signed because on leave; speaks as if he made ... has made/makes",
+      "explanation": "Being on leave does not preclude remote signing; the modal expresses speaker inference, not logically proven fact. As-if content can describe an ongoing current claim or a completed decision, and lack of authority does not fix tense.",
+      "proposed_correction": "Make evidential certainty and temporal content explicit; ask for intended modality rather than treat alternative meanings as grammar faults.",
+      "supporting_references": [],
+      "question_ids": [
+        "d10q2",
+        "d10q12"
+      ],
+      "verification_status": "expert review; source support as listed",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-00-01",
+      "day": 0,
+      "location": "Days 1–10 examTip, why and explanatory prose",
+      "severity": "high",
+      "category": "unsupported examination claims",
+      "quote": "single most tested; signature CSS trap; examiners ... never/always",
+      "explanation": "No authenticated paper references, count methodology or examiner reports support the repeated frequency, preference and psychometric assertions.",
+      "proposed_correction": "Replace with original-practice descriptions; retain official-exam claims only after source verification.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "all 10 day fields reviewed; no supporting examination sources present in authored data",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-00-02",
+      "day": 0,
+      "location": "Days 1–10 objective inventory",
+      "severity": "high",
+      "category": "assessment balance",
+      "quote": "160 objective items: answer positions A26/B91/C42/D1; 43 spot items; zero no-error options",
+      "explanation": "Extreme B skew makes the intended answer predictable; all error-spotting items assume an error. Few task types and weak contextual constraints reduce construct validity.",
+      "proposed_correction": "Review and rebalance distractors and positions after verifying keys; include genuine correct/no-error sentences and production/analysis activities.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "automatically counted from all 160 authored items",
+      "implementation_status": "identified; original source unchanged"
+    },
+    {
+      "id": "AUD-00-03",
+      "day": 0,
+      "location": "Days 1–10 lesson schema",
+      "severity": "high",
+      "category": "assessment metadata and curriculum mapping",
+      "quote": "Questions have id/kind/prompt/options/answer/why only",
+      "explanation": "There are no stable grammatical-concept tags, difficulty levels, abilities, prerequisite mappings, alternative-answer metadata or source registers. Every day has 4 warm-ups, 12 drills and 6 corrections, below the new production targets.",
+      "proposed_correction": "Create versioned concept-linked content and question models; author additional substantive targeted practice; preserve historical ids in the legacy version.",
+      "supporting_references": [],
+      "question_ids": [],
+      "verification_status": "all fields and data model inspected",
+      "implementation_status": "identified; original source unchanged"
+    }
+  ],
+  "coverage": [
+    {
+      "day": 1,
+      "present": "Word classes, basic countability, linking vs lexical verbs, adjective/adverb choice and function words are present.",
+      "missing_or_inadequate": "Morphemes, roots/stems, open/closed classes, inflection/derivation, accurate category/function distinction and a progressive clause framework are absent or inadequate."
+    },
+    {
+      "day": 2,
+      "present": "Noun-head agreement, subject types, objects/complements, inversion, dummy constructions and participial attachment are present.",
+      "missing_or_inadequate": "Valency, full constituent analysis, finite/non-finite distinction, passive attachment nuance, and reliable grammatical diagnostics need development."
+    },
+    {
+      "day": 3,
+      "present": "Basic finite clause types, clause joining, restrictive/supplementary relatives and connector choices are present.",
+      "missing_or_inadequate": "Non-finite clauses, phrase hierarchy, content vs fused relative clauses, extraposed relatives, clause functions and contextual punctuation are missing or misdescribed."
+    },
+    {
+      "day": 4,
+      "present": "Fragments, fused sentences, comma splices and practical boundary repairs are taught and practised.",
+      "missing_or_inadequate": "Contextually licensed fragments, utterance vs clause distinction, rhetorical punctuation and non-local diagnosis need qualification."
+    },
+    {
+      "day": 5,
+      "present": "Head agreement, and/or/nor, quantifiers, relative agreement, inversion and several special nouns are present.",
+      "missing_or_inadequate": "Regional collective agreement, proximity vs notional agreement, titles/mathematical cases, nuanced fractions/measurements and disputed relative agreement are underdeveloped."
+    },
+    {
+      "day": 6,
+      "present": "Capitalisation, stops/questions, introductory/list/nonrestrictive/coordinate commas and apostrophes are present.",
+      "missing_or_inadequate": "Style-guide variation, genuine interrogative requests, letter plurals, contraction has, fuller comma functions and robust punctuation gap validation are missing."
+    },
+    {
+      "day": 7,
+      "present": "Present/past simple and progressive, stative restriction and tense consistency are present.",
+      "missing_or_inadequate": "Title promises eight forms but explicit teaching covers four; forms/negatives/interrogatives, past habit used to/would, dynamic stative senses and narrative viewpoint need expansion."
+    },
+    {
+      "day": 8,
+      "present": "Present perfect, perfect progressive, past perfect, since/for and irregular participles are present.",
+      "missing_or_inadequate": "Advanced repeated/resultative/duration contrasts, contextual reference time, negative/interrogative forms, past-perfect progressive and regional variation are insufficiently developed."
+    },
+    {
+      "day": 9,
+      "present": "Will/going to, arranged/scheduled futures, perfect/progressive future, future clauses and backshift are present.",
+      "missing_or_inadequate": "Future constructions overlap, current relevance/backshift optionality, future-in-the-past, modal exceptions and context-based assessment need substantial correction."
+    },
+    {
+      "day": 10,
+      "present": "Central modal forms, broad modal meanings, perfect modals, zero/first/second/third/mixed conditionals, irrealis were, inversion and mandative subjunctive are present.",
+      "missing_or_inadequate": "Ability/permission/deduction paradigms, marginal modals, didn’t need to vs needn’t have, mood distinctions, formal hedging, pragmatic conditions and mandative-should variation need deep treatment."
+    }
+  ],
+  "question_review_inventory": [
+    {
+      "id": "d1w1",
+      "day": 1,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1w2",
+      "day": 1,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1w3",
+      "day": 1,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1w4",
+      "day": 1,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q1",
+      "day": 1,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q2",
+      "day": 1,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-01-11"
+      ]
+    },
+    {
+      "id": "d1q3",
+      "day": 1,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q4",
+      "day": 1,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q5",
+      "day": 1,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q6",
+      "day": 1,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q7",
+      "day": 1,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q8",
+      "day": 1,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q9",
+      "day": 1,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d1q10",
+      "day": 1,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-01-15"
+      ]
+    },
+    {
+      "id": "d1q11",
+      "day": 1,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-01-12"
+      ]
+    },
+    {
+      "id": "d1q12",
+      "day": 1,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2w1",
+      "day": 2,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-02-07"
+      ]
+    },
+    {
+      "id": "d2w2",
+      "day": 2,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2w3",
+      "day": 2,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2w4",
+      "day": 2,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q1",
+      "day": 2,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q2",
+      "day": 2,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q3",
+      "day": 2,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q4",
+      "day": 2,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-02-08"
+      ]
+    },
+    {
+      "id": "d2q5",
+      "day": 2,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q6",
+      "day": 2,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q7",
+      "day": 2,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q8",
+      "day": 2,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q9",
+      "day": 2,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q10",
+      "day": 2,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-02-08"
+      ]
+    },
+    {
+      "id": "d2q11",
+      "day": 2,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d2q12",
+      "day": 2,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3w1",
+      "day": 3,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-03-01"
+      ]
+    },
+    {
+      "id": "d3w2",
+      "day": 3,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3w3",
+      "day": 3,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3w4",
+      "day": 3,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q1",
+      "day": 3,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q2",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q3",
+      "day": 3,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q4",
+      "day": 3,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q5",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q6",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q7",
+      "day": 3,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q8",
+      "day": 3,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q9",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-03-09"
+      ]
+    },
+    {
+      "id": "d3q10",
+      "day": 3,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d3q11",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-03-05"
+      ]
+    },
+    {
+      "id": "d3q12",
+      "day": 3,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4w1",
+      "day": 4,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4w2",
+      "day": 4,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4w3",
+      "day": 4,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4w4",
+      "day": 4,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q1",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q2",
+      "day": 4,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q3",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q4",
+      "day": 4,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q5",
+      "day": 4,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 3,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-04-03"
+      ]
+    },
+    {
+      "id": "d4q6",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-04-04"
+      ]
+    },
+    {
+      "id": "d4q7",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-04-05"
+      ]
+    },
+    {
+      "id": "d4q8",
+      "day": 4,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q9",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q10",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q11",
+      "day": 4,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d4q12",
+      "day": 4,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5w1",
+      "day": 5,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5w2",
+      "day": 5,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5w3",
+      "day": 5,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5w4",
+      "day": 5,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q1",
+      "day": 5,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q2",
+      "day": 5,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-05-04"
+      ]
+    },
+    {
+      "id": "d5q3",
+      "day": 5,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q4",
+      "day": 5,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q5",
+      "day": 5,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q6",
+      "day": 5,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q7",
+      "day": 5,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-05-07"
+      ]
+    },
+    {
+      "id": "d5q8",
+      "day": 5,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q9",
+      "day": 5,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q10",
+      "day": 5,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q11",
+      "day": 5,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d5q12",
+      "day": 5,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-05-07"
+      ]
+    },
+    {
+      "id": "d6w1",
+      "day": 6,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6w2",
+      "day": 6,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6w3",
+      "day": 6,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6w4",
+      "day": 6,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q1",
+      "day": 6,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q2",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q3",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q4",
+      "day": 6,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-06-06"
+      ]
+    },
+    {
+      "id": "d6q5",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q6",
+      "day": 6,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-06-05"
+      ]
+    },
+    {
+      "id": "d6q7",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q8",
+      "day": 6,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q9",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q10",
+      "day": 6,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d6q11",
+      "day": 6,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-06-04"
+      ]
+    },
+    {
+      "id": "d6q12",
+      "day": 6,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7w1",
+      "day": 7,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7w2",
+      "day": 7,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7w3",
+      "day": 7,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7w4",
+      "day": 7,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q1",
+      "day": 7,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-07-08"
+      ]
+    },
+    {
+      "id": "d7q2",
+      "day": 7,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q3",
+      "day": 7,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q4",
+      "day": 7,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-07-04"
+      ]
+    },
+    {
+      "id": "d7q5",
+      "day": 7,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q6",
+      "day": 7,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q7",
+      "day": 7,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-07-05"
+      ]
+    },
+    {
+      "id": "d7q8",
+      "day": 7,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q9",
+      "day": 7,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q10",
+      "day": 7,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d7q11",
+      "day": 7,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-07-06"
+      ]
+    },
+    {
+      "id": "d7q12",
+      "day": 7,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-07-07"
+      ]
+    },
+    {
+      "id": "d8w1",
+      "day": 8,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-08-06"
+      ]
+    },
+    {
+      "id": "d8w2",
+      "day": 8,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8w3",
+      "day": 8,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8w4",
+      "day": 8,
+      "group": "warmUp",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q1",
+      "day": 8,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q2",
+      "day": 8,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-08-04"
+      ]
+    },
+    {
+      "id": "d8q3",
+      "day": 8,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q4",
+      "day": 8,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q5",
+      "day": 8,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q6",
+      "day": 8,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-08-05"
+      ]
+    },
+    {
+      "id": "d8q7",
+      "day": 8,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-08-06"
+      ]
+    },
+    {
+      "id": "d8q8",
+      "day": 8,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q9",
+      "day": 8,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-08-07"
+      ]
+    },
+    {
+      "id": "d8q10",
+      "day": 8,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q11",
+      "day": 8,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d8q12",
+      "day": 8,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9w1",
+      "day": 9,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9w2",
+      "day": 9,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-06"
+      ]
+    },
+    {
+      "id": "d9w3",
+      "day": 9,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-04"
+      ]
+    },
+    {
+      "id": "d9w4",
+      "day": 9,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q1",
+      "day": 9,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q2",
+      "day": 9,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-05"
+      ]
+    },
+    {
+      "id": "d9q3",
+      "day": 9,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q4",
+      "day": 9,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-01"
+      ]
+    },
+    {
+      "id": "d9q5",
+      "day": 9,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-06"
+      ]
+    },
+    {
+      "id": "d9q6",
+      "day": 9,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q7",
+      "day": 9,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-01"
+      ]
+    },
+    {
+      "id": "d9q8",
+      "day": 9,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-04"
+      ]
+    },
+    {
+      "id": "d9q9",
+      "day": 9,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q10",
+      "day": 9,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q11",
+      "day": 9,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d9q12",
+      "day": 9,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-09-07"
+      ]
+    },
+    {
+      "id": "d10w1",
+      "day": 10,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10w2",
+      "day": 10,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10w3",
+      "day": 10,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 2,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-10-05"
+      ]
+    },
+    {
+      "id": "d10w4",
+      "day": 10,
+      "group": "warmUp",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q1",
+      "day": 10,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q2",
+      "day": 10,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-10-10"
+      ]
+    },
+    {
+      "id": "d10q3",
+      "day": 10,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q4",
+      "day": 10,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q5",
+      "day": 10,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q6",
+      "day": 10,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q7",
+      "day": 10,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q8",
+      "day": 10,
+      "group": "drill",
+      "kind": "spot",
+      "answer_index": 0,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-10-09"
+      ]
+    },
+    {
+      "id": "d10q9",
+      "day": 10,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q10",
+      "day": 10,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q11",
+      "day": 10,
+      "group": "drill",
+      "kind": "choice",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "read; no specific defect identified in this review; not an independent certification",
+      "issues": []
+    },
+    {
+      "id": "d10q12",
+      "day": 10,
+      "group": "drill",
+      "kind": "gap",
+      "answer_index": 1,
+      "option_count": 4,
+      "structural_key_valid": true,
+      "review_status": "requires correction/context review",
+      "issues": [
+        "AUD-10-10"
+      ]
+    }
+  ],
+  "source_register": {
+    "classes": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-classes-and-phrase-classes",
+      "title": "Word classes and phrase classes - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/classes.html"
+    },
+    "nonfinite": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-finite-and-non-finite",
+      "title": "Clauses: finite and non-finite - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/nonfinite.html"
+    },
+    "agreement": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "title": "Subject&ndash;verb agreement - Grammar - Cambridge Dictionary",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/agreement.html"
+    },
+    "insist": {
+      "url": "https://dictionary.cambridge.org/dictionary/english/insist",
+      "title": "INSIST | English meaning - Cambridge Dictionary",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/insist.html"
+    },
+    "although": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/although-or-though",
+      "title": "Although or though ? - Grammar - Cambridge Dictionary",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/although.html"
+    },
+    "presentpast": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-perfect-simple-or-past-simple",
+      "title": "Past simple or present perfect? - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/presentpast.html"
+    },
+    "future": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-will-and-shall",
+      "title": "Future: will and shall - Grammar - Cambridge Dictionary",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/future.html"
+    },
+    "conditionals": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conditionals-if",
+      "title": "Conditionals: if - Grammar - Cambridge Dictionary",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/conditionals.html"
+    },
+    "possessives": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/possession-john-s-car-a-friend-of-mine",
+      "title": "Possession ( John&rsquo;s car, a friend of mine ) - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/possessives.html"
+    },
+    "pastperfect": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/past-perfect-simple-i-had-worked",
+      "title": "Past perfect simple ( I had worked ) - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/pastperfect.html"
+    },
+    "willgoing": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/future-be-going-to-i-am-going-to-work",
+      "title": "Future: be going to ( I am going to work ) - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/willgoing.html"
+    },
+    "subjunctive": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-patterns-verb-that-clause",
+      "title": "Verb patterns: verb + that -clause - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/subjunctive.html"
+    },
+    "quantity": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/amount-of-number-of-or-quantity-of",
+      "title": "Amount of, number of or quantity of ? - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/quantity.html"
+    },
+    "neither": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/neither-neither-nor-and-not-either",
+      "title": "Neither, neither &hellip; nor and not &hellip; either - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/neither.html"
+    },
+    "commas": {
+      "url": "https://www.sussex.ac.uk/informatics/punctuation/comma",
+      "title": "The Comma",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/audit1-sources/commas.html"
+    },
+    "reported": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+      "title": "Reported speech: indirect speech - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/grammar-audit-sources/reported-speech-indirect-speech.html"
+    },
+    "pronouns": {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-him-it-they-etc",
+      "title": "Pronouns: personal (I, me, you, him, it, they, etc.) - Cambridge Grammar",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/grammar-audit-sources/pronouns-personal-i-me-you-him-it-they-etc.html"
+    },
+    "stative": {
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/stative-verbs",
+      "title": "Stative verbs | LearnEnglish",
+      "retrieved": "2026-10-21",
+      "status": 200,
+      "body": "/tmp/grammar-audit-sources/continuous.html"
+    }
+  },
+  "ready_for_next_step": true
+}
