@@ -4,8 +4,8 @@ import { Exercise, action, surface, type UpdateStudy } from './Exercise'
 import type { StudyState } from './state'
 import { DEPTHS, type Catalog, type Concept, type Depth, type Lesson } from './types'
 
-export default function ConceptView({ concept, lesson, catalog, state, update, depth, attempt, reference = false }: {
-  concept: Concept; lesson: Lesson; catalog: Catalog; state: StudyState; update: UpdateStudy; depth: Depth; attempt?: string; reference?: boolean
+export default function ConceptView({ concept, lesson, catalog, state, update, depth, attempt, reference = false, feedbackEnabled = true }: {
+  concept: Concept; lesson: Lesson; catalog: Catalog; state: StudyState; update: UpdateStudy; depth: Depth; attempt?: string; reference?: boolean; feedbackEnabled?: boolean
 }) {
   const levels = [concept.foundation, concept.intermediate, concept.advanced, concept.expert], current = DEPTHS.indexOf(depth)
   const guided = lesson.questions.filter(q => q.conceptId === concept.id).slice(0, 2)
@@ -26,6 +26,6 @@ export default function ConceptView({ concept, lesson, catalog, state, update, d
       <div className="mt-6 flex flex-wrap gap-3 no-print"><button className={action} aria-pressed={state.studied.includes(concept.id)} onClick={() => update(s => ({ ...s, studied: [...new Set([...s.studied, concept.id])] }))}>{state.studied.includes(concept.id) ? 'Recorded as studied' : 'Record this section as studied'}</button><Link className={action} to={`/account/ask-vista?category=grammar&context=grammar-v5:${concept.id}${attempt ? `&attempt=${attempt}` : ''}`}>Lesson assistance (account)</Link><Link className={action} to={catalog.concepts.find(c => c.id === concept.id)?.referenceFile ? `/grammar-course?view=lab&mode=${catalog.concepts.find(c => c.id === concept.id)!.referenceFile}${attempt ? `&attempt=${attempt}` : ''}` : dayHref(lesson.day, 'questions', attempt)}>Independent practice</Link></div><p className="mt-2 text-xs leading-6 text-slate-600">Reading progress and practice evidence are recorded separately.</p>
       <label className="mt-6 block text-sm font-semibold">My note on {concept.title}<textarea value={state.notes[concept.id] ?? ''} onChange={e => { const value = e.target.value; update(s => ({ ...s, notes: { ...s.notes, [concept.id]: value } })) }} rows={3} className="mt-2 w-full rounded-xl border border-slate-400 p-3 font-normal leading-7" /></label>
     </article>
-    {guided.length > 0 && <section className="space-y-4" aria-label="Guided concept practice"><div className="rounded-xl bg-indigo-50 p-4 text-sm leading-7"><h3 className="font-semibold">Guided practice</h3><p>Use the patterns above and explain your choice. These tasks also appear in the day’s practice bank; each task is counted once.</p></div>{guided.map(q => <Exercise key={q.id} item={q} {...{ catalog, state, update, attempt }} />)}</section>}
+    {guided.length > 0 && <section className="space-y-4" aria-label="Guided concept practice"><div className="rounded-xl bg-indigo-50 p-4 text-sm leading-7"><h3 className="font-semibold">Guided practice</h3><p>Use the patterns above and explain your choice. These tasks also appear in the day’s practice bank; each task is counted once.</p></div>{guided.map(q => <Exercise key={q.id} item={q} feedbackEnabled={feedbackEnabled} {...{ catalog, state, update, attempt }} />)}</section>}
   </div>
 }

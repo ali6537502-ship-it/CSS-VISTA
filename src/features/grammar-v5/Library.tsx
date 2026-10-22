@@ -33,7 +33,7 @@ export default function Library({ catalog, state, update, depth, conceptId, guid
     return () => { active = false }
   }, [selected, retry])
   const query = search.trim().toLocaleLowerCase(), glossary = guide === 'glossary'
-  const concepts = catalog.concepts.filter(c => (family === 'all' || c.taxonomy.includes(family)) && (prerequisite === 'all' || c.prerequisiteDays.includes(Number(prerequisite))) && (!query || c.searchText.toLocaleLowerCase().includes(query)) && (guide !== 'exceptions' || c.hasExceptions) && (guide !== 'variation' || c.taxonomy.includes('P')) && (guide !== 'formal' || c.taxonomy.some(x => ['N', 'R', 'M'].includes(x))) && (guide !== 'confused' || c.day === 25 || c.taxonomy.includes('L')))
+  const concepts = catalog.concepts.filter(c => (family === 'all' || c.taxonomy.includes(family)) && (prerequisite === 'all' || c.prerequisiteDays.includes(Number(prerequisite))) && (!query || c.searchText.toLocaleLowerCase().includes(query)) && (guide !== 'exceptions' || c.hasExceptions) && (guide !== 'variation' || c.taxonomy.includes('P')) && (guide !== 'formal' || c.taxonomy.some(x => ['N', 'R', 'M'].includes(x))) && (guide !== 'confused' || c.day >= 2 && c.day <= 28 || c.referenceFile))
   const terms = concepts.flatMap(c => c.glossary.map((g, i) => ({ ...g, id: `${c.id}-${i}`, concept: c }))).filter(g => !query || `${g.term} ${g.definition} ${g.example}`.toLocaleLowerCase().includes(query)).sort((a, b) => a.term.localeCompare(b.term, 'en'))
   const lesson = loaded && selected && loaded.day === selected.day && loaded.lesson?.modules.some(c => c.id === selected.id) ? loaded.lesson : undefined, concept = lesson?.modules.find(c => c.id === conceptId)
   return <section className="space-y-6" aria-label="Permanent grammar reference library">

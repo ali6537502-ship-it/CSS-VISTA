@@ -2,13 +2,16 @@ name: Grammar reconstruction verification
 on:
   pull_request:
     branches: [main]
-    paths: ['content/grammar/**', 'src/features/grammar-v5/**', 'public/grammar/**', 'public/api/_grammar_v5*', 'public/api/student/grammar-v5.php', 'scripts/grammar-v5/**', 'tests/grammar-v5/**', 'tests/grammarV5.test.ts', 'tests/browser/grammar-v5*.mjs', 'scripts/prerender/routes.tsx', 'public/api/_tutor_context.php', 'public/api/_tutor_grammar_v5.php', '.github/workflows/grammar-reconstruction.yml']
+    paths: ['content/grammar/**', 'src/features/grammar-v5/**', 'public/grammar/**', 'public/api/_grammar_v5*', 'public/api/student/grammar-v5.php', 'scripts/grammar-v5/**', 'tests/grammar-v5/**', 'tests/grammarV5.test.ts', 'tests/browser/grammar-v5*.mjs', 'scripts/prerender/routes.tsx', 'public/api/_tutor_context.php', 'public/api/_planner.php', 'public/api/student/planner.php', 'public/api/_tutor_grammar_v5.php', '.github/workflows/grammar-reconstruction.yml']
+concurrency:
+  group: grammar-reconstruction-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   native-grammar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     services:
       mysql:
         image: mysql:8.0

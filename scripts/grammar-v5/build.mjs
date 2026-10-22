@@ -134,7 +134,7 @@ for (const a of assessments) await emit(`${a.id}.json`, a)
 for (const e of extensions) await emit(`${e.file}.json`, e.data)
 await emit('index.json', catalog)
 await emit('mistake-index.json', bank.filter(q => q.meta.type === 'objective').map(({item:q,meta}) => ({id:q.id,q:q.prompt,o:q.options,a:q.answer,e:q.why,s:concepts.get(meta.conceptId).module.title,d:meta.difficulty==='Foundation'?'Basic':meta.difficulty==='Intermediate'?'Intermediate':'Advanced'})))
-const server = { version: catalog.version, days: days.map(l => ({id:l.id,day:l.day,checklist:l.checklist.length})), concepts:indexedConcepts.map(c=>({id:c.id})),items:catalog.items }
+const server = { version: catalog.version, days: days.map(l => ({id:l.id,day:l.day,title:l.title,checklist:l.checklist.length})), concepts:indexedConcepts.map(c=>({id:c.id,day:c.day,title:c.title})),items:catalog.items }
 await emit('_grammar_v5_catalog.php', `<?php\ndeclare(strict_types=1);\n// Generated from versioned original teaching material; never edit answer indices here.\nreturn json_decode(<<<'GRAMMAR_V5'\n${JSON.stringify(server)}\nGRAMMAR_V5, true, 64, JSON_THROW_ON_ERROR);\n`, new URL('public/api/', root))
 // Teaching only: no learner writing, question bank, rubrics or answer keys enter assistance.
 const tutor = [...concepts.values()].map(({ module:m, day, referenceFile }) => {

@@ -9,7 +9,7 @@ const reports=[],errors=[];const context=await browser.newContext({ignoreHTTPSEr
 await isolateNetwork(context,base)
 const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message))
 async function open(path){await page.goto(base+path,{waitUntil:'domcontentloaded'});await page.locator('#grammar-workspace').waitFor();}
-async function state(){return page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:grammar-course:v5:guest')))}
+async function state(){await page.waitForLoadState('networkidle');return page.evaluate(()=>JSON.parse(localStorage.getItem('cssvista:grammar-course:v5:guest')))}
 try{
  await context.addInitScript(()=>{if(!localStorage.getItem('cssvista:grammar-course:v3'))localStorage.setItem('cssvista:grammar-course:v3','{"completed":[1],"notes":{"1":"Original legacy note"}}')})
  for(const width of [320,390,768,1440]){
@@ -36,8 +36,8 @@ try{
  await page.getByRole('button',{name:'Try this item again',exact:true}).click();await page.getByRole('group',{name:'Answer options'}).getByRole('button').nth(q.answer).click()
  await page.getByText('Correct on this response.',{exact:true}).waitFor();assert.equal((await state()).answers[q.id].first,(q.answer+1)%4)
  reports.push({check:'wrong response, feedback, actual reinforcement and immutable first response',id:q.id,prompt:question.prompt})
- await open('/grammar-course?day=1&section=questions');await page.getByLabel('Jump to task').selectOption('4');const cursor=(await state()).cursor.item
- await page.reload();await page.getByLabel('Jump to task').waitFor();assert.equal(await page.getByLabel('Jump to task').inputValue(),'4');assert.equal((await state()).cursor.item,cursor)
+ await open('/grammar-course?day=1&section=questions');const cursor=data.questions[4].id;await page.getByLabel('Jump to task').selectOption('4');await page.locator(`[id="${cursor}"]`).waitFor();await page.waitForLoadState('networkidle')
+ await page.waitForURL(url=>url.searchParams.get('item')===cursor);await page.reload({waitUntil:'domcontentloaded'});await page.getByLabel('Jump to task').waitFor();assert.equal(await page.getByLabel('Jump to task').inputValue(),'4');assert.equal((await state()).cursor.item,cursor)
  // Deep-linked reference notes, bookmarks and a real standalone extension bank.
  await open('/grammar-course?view=reference&concept=gv5-ref-morph-processes');await page.getByRole('button',{name:'Bookmark rule',exact:true}).waitFor()
  await page.getByRole('button',{name:'Bookmark rule',exact:true}).click();const note=page.getByRole('textbox',{name:/My note on/});await note.fill('My original note about clipping and conversion.');await page.reload();await page.getByRole('textbox',{name:/My note on/}).waitFor();assert.equal(await page.getByRole('textbox',{name:/My note on/}).inputValue(),'My original note about clipping and conversion.')
@@ -50,6 +50,17 @@ try{
   const button=article.getByRole('button',{name:'Compare with model and rubric'});assert(await button.isDisabled());await article.getByLabel('Your response',{exact:true}).fill('An original response retained for self-review.');await button.click();await article.getByText('One model solution',{exact:true}).waitFor();await article.getByRole('combobox',{name:'Your self-review',exact:true}).selectOption('developing')
   assert.equal((await state()).selfReviews[q.id],'developing');reports.push({check:'draft, model, rubric and honest self-review',kind,id:q.id})
  }
+
+ // The diagnostic withholds both keyed and model feedback until all tasks have responses.
+ const diagnostic=JSON.parse(readFileSync('public/grammar/v5/diagnostic.json','utf8'));await open('/grammar-course?view=lab&mode=diagnostic')
+ for(let i=0;i<diagnostic.items.length;i++){
+  const q=diagnostic.items[i],article=page.locator(`[id="${q.id}"]`);await article.waitFor()
+  if(q.type==='objective')await article.getByRole('group',{name:'Answer options'}).getByRole('button').nth(q.answer).click()
+  else await article.getByLabel('Your response',{exact:true}).fill('My independent explanation for the diagnostic task.')
+  if(i===0)assert.equal(await article.getByText('Correct answer',{exact:true}).count(),0)
+  if(i<diagnostic.items.length-1)await page.getByRole('button',{name:'Next task',exact:true}).click()
+ }
+ await page.getByRole('button',{name:'Compare with model and rubric',exact:true}).click();await page.getByText('One model solution',{exact:true}).waitFor();reports.push({check:'diagnostic questions, written responses and assessment feedback boundary'})
  await open('/grammar-course?view=profile');await page.getByRole('heading',{name:'Four abilities, separate evidence'}).waitFor();await page.getByRole('heading',{name:'Diagnostic and capstone comparison'}).waitFor()
  // Public notebook resolves the new grammar IDs and links to their actual practice.
  await page.goto(base+'/mistakes');await page.getByText(question.prompt,{exact:true}).waitFor();assert(await page.getByRole('link',{name:'Retry',exact:true}).first().getAttribute('href').then(x=>x.startsWith('/grammar-course?')))
@@ -61,7 +72,7 @@ try{
  const legacy=await page.evaluate(()=>({raw:localStorage.getItem('cssvista:grammar-course:v3'),backup:JSON.parse(localStorage.getItem('cssvista:grammar-course:v5:guest:legacy-backup'))}));assert.equal(legacy.raw,legacy.backup.value)
  reports.push({check:'profile, notebook integration, glossary, export, restore and legacy preservation'})
  // An unreadable record is retained and its raw text remains exportable.
- const corrupt=await browser.newContext(),bad=await corrupt.newPage();await corrupt.addInitScript(()=>localStorage.setItem('cssvista:grammar-course:v5:guest:sync','{unreadable'))
+ const corrupt=await browser.newContext({ignoreHTTPSErrors:true}),bad=await corrupt.newPage();await corrupt.addInitScript(()=>localStorage.setItem('cssvista:grammar-course:v5:guest:sync','{unreadable'))
  await bad.goto(base+'/grammar-course?day=1');await bad.getByRole('alert').filter({hasText:'Existing records have not been replaced'}).waitFor();assert.equal(await bad.evaluate(()=>localStorage.getItem('cssvista:grammar-course:v5:guest:sync')),'{unreadable');await corrupt.close()
  reports.push({check:'unreadable browser record retained; public course available'})
  const offline=await browser.newContext({ignoreHTTPSErrors:true});await isolateNetwork(offline,base);const disconnected=await offline.newPage();await offline.route('**/grammar/v5/day-07.json*',route=>route.abort());await disconnected.goto(base+'/grammar-course?day=7',{waitUntil:'domcontentloaded'});await disconnected.getByRole('button',{name:'Retry lesson',exact:true}).waitFor();await offline.unroute('**/grammar/v5/day-07.json*');await disconnected.getByRole('button',{name:'Retry lesson',exact:true}).click();await disconnected.getByRole('heading',{name:'Learning orientation',exact:true}).waitFor();await offline.close()

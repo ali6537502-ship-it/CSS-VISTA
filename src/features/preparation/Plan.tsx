@@ -49,7 +49,7 @@ function TaskRow({
       <p className="mt-3 text-sm font-medium">
         {task.actual_minutes} minutes recorded · {task.minutes} allocated
       </p>
-      <Link to={task.snapshot.to} className={`${secondary} mt-3`}>
+      <Link to={task.kind === 'grammar' && task.snapshot.to.startsWith('/grammar-course?') && !/[?&]edition=/.test(task.snapshot.to) ? `${task.snapshot.to}&edition=legacy` : task.snapshot.to} className={`${secondary} mt-3`}>
         Open study material <ArrowRight className="ml-2 h-4 w-4" />
       </Link>
       {open && (

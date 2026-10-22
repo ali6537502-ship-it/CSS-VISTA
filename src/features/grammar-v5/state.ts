@@ -46,11 +46,13 @@ export function answerStudy(state: StudyState, q: QuestionIndex, selected: numbe
   return { ...state, answers: { ...state.answers, [q.id]: { first: old?.first ?? selected, firstAt: old?.firstAt ?? now, latest: selected, latestAt: now, exposures: Math.min(100000, (old?.exposures ?? 0) + 1) } }, reviews: { ...state.reviews, [q.id]: scheduleReview(state.reviews[q.id], selected === q.answer, now) } }
 }
 export function conceptProfile(state: StudyState, catalog: Catalog, now: number) {
+  const byConcept = new Map<string, QuestionIndex[]>()
+  for (const item of catalog.items) { const pool = byConcept.get(item.conceptId) ?? []; pool.push(item); byConcept.set(item.conceptId, pool) }
   return catalog.concepts.map(c => {
-    const qs = catalog.items.filter(q => q.conceptId === c.id && q.type === 'objective'), seen = qs.filter(q => state.answers[q.id]), correct = seen.filter(q => state.answers[q.id].first === q.answer).length
+    const related = byConcept.get(c.id) ?? [], qs = related.filter(q => q.type === 'objective'), seen = qs.filter(q => state.answers[q.id]), correct = seen.filter(q => state.answers[q.id].first === q.answer).length
     const unresolved = seen.filter(q => (state.answers[q.id].first !== q.answer || state.reviews[q.id]?.lapses > 0) && (state.reviews[q.id]?.streak ?? 0) < 2).length
     const retained = seen.filter(q => { const r = state.reviews[q.id]; return r && r.streak - (state.answers[q.id].first === q.answer && !r.lapses ? 1 : 0) >= 2 }).length, due = seen.filter(q => state.reviews[q.id]?.dueAt <= now).length
-    const written = catalog.items.filter(q => q.conceptId === c.id && q.type === 'response'), drafts = written.filter(q => state.drafts[q.id]?.trim()).length
+    const written = related.filter(q => q.type === 'response'), drafts = written.filter(q => state.drafts[q.id]?.trim()).length
     return { ...c, seen: seen.length, available: qs.length, correct, unresolved, retained, due, drafts, selfReviewed: written.filter(q => state.selfReviews[q.id]).length, status: unresolved ? 'Needs review' : retained >= 3 ? 'Retention evidence' : seen.length || drafts ? 'Practising' : state.studied.includes(c.id) ? 'Studied; practice pending' : 'Not studied' }
   })
 }

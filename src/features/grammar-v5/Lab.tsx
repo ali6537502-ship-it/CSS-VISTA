@@ -4,9 +4,10 @@ import { Exercise, action, surface, type UpdateStudy } from './Exercise'
 import type { StudyState } from './state'
 import { DEPTHS, type Catalog, type Item } from './types'
 
-export default function Lab({ catalog, state, update, mode, attempt, requestedItem }: { catalog: Catalog; state: StudyState; update: UpdateStudy; mode: string; attempt?: string; requestedItem?: string }) {
-  const [day, setDay] = useState(state.cursor.day), [depth, setDepth] = useState('all'), [kind, setKind] = useState('all'), [now, setNow] = useState(() => Date.now())
+export default function Lab({ catalog, state, update, mode, attempt, requestedItem, initialDay }: { catalog: Catalog; state: StudyState; update: UpdateStudy; mode: string; attempt?: string; requestedItem?: string; initialDay?: number }) {
+  const [day, setDay] = useState(initialDay ?? state.cursor.day), [depth, setDepth] = useState('all'), [kind, setKind] = useState('all'), [now, setNow] = useState(() => Date.now())
   const [loaded, setLoaded] = useState<{ key: string; items?: Item[]; error?: string }>(), [retry, setRetry] = useState(0), [position, setPosition] = useState(0)
+  const assessment = /^(?:diagnostic|phase-[1-4])$/.test(mode)
   const special = catalog.assessments.some(a => a.id === mode), dueMode = mode === 'due' || mode === 'errors'
   const eligible = catalog.items.filter(q => q.type === 'objective' && state.answers[q.id] && (mode === 'due' ? state.reviews[q.id]?.dueAt <= now : (state.answers[q.id].first !== q.answer || state.reviews[q.id]?.lapses > 0) && (state.reviews[q.id]?.streak ?? 0) < 2)).sort((a, b) => (state.reviews[a.id]?.dueAt ?? 0) - (state.reviews[b.id]?.dueAt ?? 0))
   const [queue, setQueue] = useState(() => eligible.map(q => q.id))
@@ -44,7 +45,7 @@ export default function Lab({ catalog, state, update, mode, attempt, requestedIt
     </div>
     {loaded?.key === key && loaded.error ? <div role="alert" className={surface}><p>{loaded.error}</p><button className={`${action} mt-3`} onClick={() => setRetry(n => n + 1)}>Retry practice</button></div> : items ? <>
       <p className="text-sm leading-7 text-slate-600" role="status">{items.length} matching tasks{items.length ? ` · Task ${at + 1}` : ''}.</p>
-      {item && <Exercise key={`${item.id}:${mode}`} {...{ item, catalog, state, update, attempt }} retrieval={dueMode} feedbackEnabled={!special || Boolean(loaded?.items?.every(q => q.type === 'objective' ? state.answers[q.id] : state.drafts[q.id]?.trim()))} />}
+      {item && <Exercise key={`${item.id}:${mode}`} {...{ item, catalog, state, update, attempt }} retrieval={dueMode} feedbackEnabled={!assessment || Boolean(loaded?.items?.every(q => q.type === 'objective' ? state.answers[q.id] : state.drafts[q.id]?.trim()))} />}
       {item && dueMode && state.answers[item.id] && <div className={`${surface} text-sm leading-7`}><h3 className="font-semibold">Recorded response and review history</h3><p className="mt-2">First response: {item.type === 'objective' ? item.options[state.answers[item.id].first] : ''}</p><p>Most recent response: {item.type === 'objective' ? item.options[state.answers[item.id].latest] : ''}</p><p>Recorded responses: {state.answers[item.id].exposures} · spaced successes: {state.reviews[item.id]?.streak ?? 0} · lapses: {state.reviews[item.id]?.lapses ?? 0}.</p><p>Review due: {state.reviews[item.id] ? new Date(state.reviews[item.id].dueAt).toLocaleString() : 'Now'}.</p></div>}
       {items.length > 0 && <nav className="flex flex-wrap justify-between gap-3" aria-label="Practice task navigation"><button className={action} disabled={at === 0} onClick={() => setPosition(at - 1)}>Previous task</button><button className={action} disabled={at === items.length - 1} onClick={() => setPosition(at + 1)}>Next task</button></nav>}
       {!items.length && <div className={surface}><p className="text-sm leading-7">{dueMode ? 'There are no matching reviews in this queue. You can continue with topic practice while waiting for the next scheduled retrieval.' : 'No tasks match these filters. Try another day or clear the difficulty and response-type filters.'}</p></div>}
