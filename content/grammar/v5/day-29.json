@@ -1201,6 +1201,24 @@
       "sourceIds": [
         "C-WORD"
       ]
+    },
+    {
+      "id": "gv5-d29-tag01",
+      "type": "objective",
+      "kind": "gap",
+      "prompt": "For an ordinary confirmation tag, complete: Nobody has objected, ____?",
+      "options": [
+        "hasn’t he",
+        "has they",
+        "haven’t they",
+        "have they"
+      ],
+      "answer": 3,
+      "why": "Nobody makes the statement negative, so an ordinary confirmation tag is positive. Referring singular they takes have, even though nobody takes has in the main clause.",
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Advanced",
+      "ability": "Application",
+      "sourceIds": []
     }
   ],
   "corrections": [

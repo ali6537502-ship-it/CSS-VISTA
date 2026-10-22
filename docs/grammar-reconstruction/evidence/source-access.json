@@ -2462,5 +2462,83 @@
     "sha256": "cdcd92e0fe8299d9a32af7413ddc014c4b8a25f3db2de55833dd173087538de7",
     "accessibleArticle": true,
     "verification": "Fetched metadata; editorial relevance requires review, not inferred from HTTP status."
+  },
+  {
+    "id": "source-87abd5256028a9",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Article body consulted for auxiliary choice, opposite/same polarity, intonation, imperative tags and informal invariant tags. Original teaching and tasks.",
+    "status": 200,
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+    "title": "Question tags — Cambridge English Grammar Today",
+    "sha256": "b344d482bec0aa34b6be38b283f265cbb5d2e712c6f4980dc002d367cbbbbd29",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
+  },
+  {
+    "id": "source-798d4263fc6e87",
+    "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/question-tags",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Article body consulted for negative statements including nobody with singular they, and I am/aren’t I.",
+    "status": 200,
+    "finalUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/question-tags",
+    "title": "Question tags | LearnEnglish",
+    "sha256": "ae4c8f78c5bf2f7c0adcc2f624550dd9b9bbdda8feed662a3c418d5d3f1f68f0",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
+  },
+  {
+    "id": "source-92d827cce9b472",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Article body consulted for declarative echo questions, wh-words in situ and their conversational purposes.",
+    "status": 200,
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+    "title": "Questions: echo and checking questions — Cambridge English Grammar Today",
+    "sha256": "c084f91b89dc23bc89d445646b77bc023be1f8c85db2471ab279d22344051376",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
+  },
+  {
+    "id": "source-c4f7acd64e00ab",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Article body consulted for negative questions, expected confirmation, offers and contracted versus uncontracted not.",
+    "status": 200,
+    "finalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+    "title": "Questions: yes-no questions ( Are you feeling cold? ) - Cambridge Grammar",
+    "sha256": "98115614bdb7a016cc3bdb736b08003396ae1de06e9778d2f55442d7c26dd7d9",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
+  },
+  {
+    "id": "source-d85ca5e784b8e3",
+    "url": "https://style.mla.org/split-infinitives/",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Full article read for permitted split infinitives and the importance of modifier placement, scope and clarity.",
+    "status": 200,
+    "finalUrl": "https://style.mla.org/split-infinitives/",
+    "title": "Is it OK to split an infinitive? | MLA Style Center",
+    "sha256": "8e61468ad92359bf2fb3dbba946bbe0d68d7ebd0bb4f23f089ee90a57111ac4a",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
+  },
+  {
+    "id": "source-1b181d51d43d3f",
+    "url": "https://dictionary.cambridge.org/dictionary/english/split-infinitive",
+    "declaredConsultation": "2026-10-22",
+    "checkedAt": "2026-10-22",
+    "editorialNote": "Definition and usage note read; distinguishes a split construction from objections made by some usage traditions.",
+    "status": 200,
+    "finalUrl": "https://dictionary.cambridge.org/dictionary/english/split-infinitive",
+    "title": "SPLIT INFINITIVE | English meaning - Cambridge Dictionary",
+    "sha256": "aa69c84fffb577913ca761eff1b8017994117854b30eccf0b1c52402f7402999",
+    "accessibleArticle": true,
+    "verification": "Actual named article body retrieved and read; new question-system and infinitive-usage coverage checked editorially."
   }
 ]

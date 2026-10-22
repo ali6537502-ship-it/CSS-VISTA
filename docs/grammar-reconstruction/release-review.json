@@ -1,7 +1,7 @@
 {
   "curriculumVersion": "grammar-v5-2026-10",
-  "contentHash": "9317005a104adbdd9a99e1eda1025c6bf707fb79f84e8a5ed2fc3a04027a7471",
-  "reviewedAt": "2026-10-22T18:50:42.381511+00:00",
+  "contentHash": "30405b4c3981b96e17d6455966255af79fbb0569594727a6e01b0162e34625b0",
+  "reviewedAt": "2026-10-22T19:00:23.426838+00:00",
   "allObjectivesReviewed": true,
   "allLessonsReviewed": true,
   "accountJourneyVerified": true,
@@ -25,7 +25,7 @@
     "nativeApiSecurityChecks": 13,
     "accessibilityViews": 6,
     "finalCommitChecks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/107/checks",
-    "note": "The retained c6b8d07 artifact predates a reviewed wording refinement in the final pr\u00e9cis model. All required tests, including native browser verification, must pass again for the final commit before publication; the release record retains the exact final evidence."
+    "note": "The retained c6b8d07 artifact predates final reviewed wording and question-system coverage refinements. Native grammar CI also passed for 9a28e17. All required tests must pass again for the final commit before publication; the release record retains the exact final evidence."
   },
   "publicationGate": "Publish only after every required check for the final PR commit succeeds. Production observations are recorded separately against the deployed fingerprint.",
   "limits": [

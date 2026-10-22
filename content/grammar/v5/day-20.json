@@ -39,7 +39,8 @@
         "An -ing clause can fill several functions: Reading the instructions carefully takes time has a subject clause; She enjoys reading the instructions has a complement; Reading the instructions carefully, she noticed an exception has an adjunct. Traditional teaching often calls the first two gerunds and the last a participle. Some modern grammars use the combined label gerund-participial for the verbal form. Neither terminology makes every -ing word a verb. In the careful reading of the instructions, reading is a noun with a determiner and adjective; in reading the instructions carefully, the verb takes a direct object and adverb."
       ],
       "advanced": [
-        "Build longer forms by applying ordinary auxiliary selection. To have written is a perfect infinitive; to be written is passive; to have been written combines perfect and passive. Having written is a perfect -ing form, and having been written is perfect passive. These forms have no independently inflected tense, but the perfect commonly locates a situation before a contextual reference point. The committee claims to have checked the files attributes the earlier checking as a claim rather than independently guaranteeing its truth. A negative can precede the non-finite phrase: not to sign; not having signed."
+        "Build longer forms by applying ordinary auxiliary selection. To have written is a perfect infinitive; to be written is passive; to have been written combines perfect and passive. Having written is a perfect -ing form, and having been written is perfect passive. These forms have no independently inflected tense, but the perfect commonly locates a situation before a contextual reference point. The committee claims to have checked the files attributes the earlier checking as a claim rather than independently guaranteeing its truth. A negative can precede the non-finite phrase: not to sign; not having signed.",
+        "A split infinitive places an intervening expression between infinitival to and the plain verb: to carefully compare the estimates. This is a grammatical option in contemporary standard English, not an automatic error. Adverb placement can affect attachment and emphasis. In The team decided to immediately suspend the trial, immediately clearly modifies suspend; The team immediately decided to suspend the trial can instead locate the decision. Do not move an adverb merely to obey an absolute prohibition if that move changes the intended meaning. Some editors prefer an unsplit form where it is equally clear and natural. Follow a specified house style where necessary, while distinguishing its preference from a universal rule of grammar."
       ],
       "expert": [
         "Present participle and past participle are traditional form names, not automatic time labels. The files being checked tomorrow refers to future checking even though being is an -ing form; the files checked yesterday has past time because the context supplies it. A non-finite clause may contain auxiliaries, an object and other dependants; it is not merely a loose phrase with no internal syntax. Conversely, a plain verb form does not prove non-finiteness in every context: an imperative such as Write clearly is a main-clause construction. Determine the clause type and selecting environment before assigning a form or function label."
@@ -73,10 +74,16 @@
           "a": "The careful reading of the report took an hour.",
           "b": "Reading the report carefully took an hour.",
           "note": "Both are grammatical. The first has a noun reading with adjective careful; the second has a verbal -ing clause with object and adverb."
+        },
+        {
+          "a": "The team decided to immediately suspend the trial.",
+          "b": "The team immediately decided to suspend the trial.",
+          "note": "Both can be grammatical. The split version clearly attaches immediately to suspension; the second can place immediacy on deciding. Choose a form that preserves the intended timing."
         }
       ],
       "exceptions": [
-        "Traditional gerund/participle labels and modern gerund-participial terminology analyse the same many verbal forms differently. Identify the observable pattern before arguing about the label. Irregular forms need lexical checking: written is a participle; wrote is a past-tense form."
+        "Traditional gerund/participle labels and modern gerund-participial terminology analyse the same many verbal forms differently. Identify the observable pattern before arguing about the label. Irregular forms need lexical checking: written is a participle; wrote is a past-tense form.",
+        "A split infinitive is not inherently ungrammatical. Register, rhythm, scope and a specified editorial style may affect which adverb position is preferred."
       ],
       "mistakes": [
         {
@@ -100,13 +107,20 @@
           "term": "gerund-participial",
           "definition": "A modern umbrella label for verbal -ing forms used in several clause functions.",
           "example": "Checking every signature carefully takes time."
+        },
+        {
+          "term": "split infinitive",
+          "definition": "A to-infinitival construction with an expression, often an adverb, between to and the plain verb.",
+          "example": "They agreed to jointly fund the laboratory."
         }
       ],
       "sourceIds": [
         "C-NONFINITE",
         "V-clauses-finite-and-non-finite",
         "N-infinitives-with-and-without-to",
-        "N-perfect-infinitive-with-to-to-have-worked"
+        "N-perfect-infinitive-with-to-to-have-worked",
+        "F-SPLIT-MLA",
+        "F-SPLIT-DEF"
       ]
     },
     {
@@ -1039,6 +1053,24 @@
         "V-make",
         "V-let-let-s"
       ]
+    },
+    {
+      "id": "gv5-d20-split01",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare The team decided to immediately suspend the trial with The team immediately decided to suspend the trial. Must the first be corrected? What possible timing difference matters?",
+      "model": "The split infinitive in the first is grammatical. Immediately clearly modifies suspension there; in the second it can modify the decision. Revise only if clarity or a stated style requirement calls for it, preserving the intended timing.",
+      "rubric": [
+        "Reject an absolute grammatical ban on split infinitives.",
+        "Explain the possible difference in adverb attachment and preserve the intended meaning."
+      ],
+      "alternatives": [
+        "A context can make both refer to the same timing. A stated house-style preference may justify a clear unsplit rewrite, but does not make all splits ungrammatical."
+      ],
+      "conceptId": "gv5-d20-m01",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
     }
   ],
   "corrections": [
@@ -1453,6 +1485,20 @@
       "url": "https://www.merriam-webster.com/dictionary/nominative%20absolute",
       "consulted": "2026-10-21",
       "note": "Definition explicitly describes a noun/pronoun plus a non-finite predicate functioning as a sentence modifier. Consulted for the absolute construction and its internal subject; course examples are original."
+    },
+    {
+      "id": "F-SPLIT-MLA",
+      "title": "Is it OK to split an infinitive? — MLA Style Center",
+      "url": "https://style.mla.org/split-infinitives/",
+      "consulted": "2026-10-22",
+      "note": "Full article read for permitted split infinitives and the importance of modifier placement, scope and clarity."
+    },
+    {
+      "id": "F-SPLIT-DEF",
+      "title": "Split infinitive — Cambridge Dictionary",
+      "url": "https://dictionary.cambridge.org/dictionary/english/split-infinitive",
+      "consulted": "2026-10-22",
+      "note": "Definition and usage note read; distinguishes a split construction from objections made by some usage traditions."
     }
   ],
   "editorialNotes": []

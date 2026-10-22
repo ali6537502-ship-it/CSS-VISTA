@@ -124,16 +124,20 @@
       ],
       "definition": "Clause form describes grammatical construction, such as declarative or interrogative. Communicative function describes what a speaker uses it to do, such as state, ask, request or exclaim; the two do not correspond one to one.",
       "foundation": [
-        "A declarative clause commonly places a subject before its verb: the workshop begins at ten. An interrogative clause commonly asks a question: does the workshop begin at ten? An imperative commonly directs action: begin the workshop at ten. An exclamative commonly expresses a reaction to a striking degree or quality: how quickly the workshop ended! These are useful central patterns, not interchangeable labels for punctuation marks. A full stop does not turn a question-shaped clause into a declarative, and an exclamation mark alone does not make a structure an exclamative clause."
+        "A declarative clause commonly places a subject before its verb: the workshop begins at ten. An interrogative clause commonly asks a question: does the workshop begin at ten? An imperative commonly directs action: begin the workshop at ten. An exclamative commonly expresses a reaction to a striking degree or quality: how quickly the workshop ended! These are useful central patterns, not interchangeable labels for punctuation marks. A full stop does not turn a question-shaped clause into a declarative, and an exclamation mark alone does not make a structure an exclamative clause.",
+        "A question tag is a short question attached to another clause: The drawer is locked, isn’t it? For an ordinary confirmation tag, identify the statement’s auxiliary or modal and the subject it refers to. Use a subject pronoun in the tag and normally reverse polarity: a positive statement takes a negative tag; a negative statement takes a positive tag. With no auxiliary in a positive simple present or past statement, use do, does or did: Sara checks the receipts, doesn’t she? This is a useful starting pattern, not a rule for every conversational tag."
       ],
       "intermediate": [
-        "Interrogatives include yes-no and wh-patterns. Does Amina teach here? is a yes-no interrogative. Where does Amina teach? asks for a place. Who teaches here? asks about the subject and does not need do-support or an extra subject after the verb. An embedded question normally has different order: I wonder where Amina teaches. The complete clause I wonder ... is declarative, although one part is an interrogative complement. Pay attention to the boundary at which each form label applies rather than treating a sentence containing any wh-word as one direct question."
+        "Interrogatives include yes-no and wh-patterns. Does Amina teach here? is a yes-no interrogative. Where does Amina teach? asks for a place. Who teaches here? asks about the subject and does not need do-support or an extra subject after the verb. An embedded question normally has different order: I wonder where Amina teaches. The complete clause I wonder ... is declarative, although one part is an interrogative complement. Pay attention to the boundary at which each form label applies rather than treating a sentence containing any wh-word as one direct question.",
+        "In The gate has not opened, has it?, the tag repeats auxiliary has and refers to the gate as it. Negative words also matter: Nobody has signed yet, have they? treats nobody as negative and uses a positive tag. Nobody takes singular has in the statement, while the referring singular they takes have in the tag. Never similarly supports a positive confirmation tag: You never park here, do you? Two conventional special cases are I’m next, aren’t I? and Let’s check again, shall we? The uncontracted am I not? is possible in a formal style. After an imperative, will you? is common, but can you?, could you? and won’t you? can express different interpersonal attitudes. Do not apply statement polarity mechanically to commands."
       ],
       "advanced": [
-        "Form and purpose can diverge. Could you close the window? is interrogative in form but often functions as a polite request. You will submit the form today can function as an instruction, prediction or reminder depending on situation and intonation. Imperatives can offer advice, invitations or permissions as well as commands: have another biscuit. A declarative with rising intonation may seek confirmation in conversation, but the absence of inversion remains part of its grammatical form. Describe the form and the likely use separately instead of replacing grammatical analysis with a guess about the speaker's attitude."
+        "Form and purpose can diverge. Could you close the window? is interrogative in form but often functions as a polite request. You will submit the form today can function as an instruction, prediction or reminder depending on situation and intonation. Imperatives can offer advice, invitations or permissions as well as commands: have another biscuit. A declarative with rising intonation may seek confirmation in conversation, but the absence of inversion remains part of its grammatical form. Describe the form and the likely use separately instead of replacing grammatical analysis with a guess about the speaker's attitude.",
+        "Ordinary opposite-polarity tags often invite confirmation. Falling intonation commonly signals greater confidence; rising intonation commonly leaves more room for a genuine check. Neither tone mechanically determines a speaker’s intention. A positive statement can also have a positive tag: You locked it, did you? may register newly received information, surprise or a challenge. Context and delivery decide among these readings. Thus didn’t you? and did you? can both be grammatical after You locked it, but they are not automatically interchangeable. Informal right? and yeah? can remain unchanged across different subjects; they belong to conversational usage and do not follow the auxiliary agreement pattern."
       ],
       "expert": [
-        "The central what- and how-exclamative patterns have their own order: what an unusual design this is; how carefully she explained it. A question can also express surprise: wasn't that remarkable? It remains interrogative in construction even when it performs an exclamatory function. In formal writing, punctuation should reflect the complete utterance and its intended force. An indirect question embedded in a statement usually ends with a full stop, while can you tell me where the office is? ends with a question mark because the complete construction is a direct interrogative. These distinctions become essential in reporting speech and in distinguishing an embedded question from a faulty inversion."
+        "The central what- and how-exclamative patterns have their own order: what an unusual design this is; how carefully she explained it. A question can also express surprise: wasn't that remarkable? It remains interrogative in construction even when it performs an exclamatory function. In formal writing, punctuation should reflect the complete utterance and its intended force. An indirect question embedded in a statement usually ends with a full stop, while can you tell me where the office is? ends with a question mark because the complete construction is a direct interrogative. These distinctions become essential in reporting speech and in distinguishing an embedded question from a faulty inversion.",
+        "An echo question can repeat a heard statement or leave the questioned expression in its original position: You put the parcel where? This can request repetition or express surprise; it is not a failed attempt at neutral Where did you put the parcel? Negative yes-no questions also carry expectations: Isn’t the library open? often checks a belief that it is open; Won’t you sit down? can invite. The full not normally follows the subject in Is the library not open?, which sounds more formal than Isn’t the library open? When answering a negative question, add an explicit clause to avoid misunderstanding: Yes, it is open; No, it isn’t open. Form, interaction, register and interpretation must all be considered before correcting conversational word order."
       ],
       "patterns": [
         {
@@ -143,6 +147,14 @@
         {
           "form": "what + noun phrase + subject + verb / how + adjective or adverb + subject + verb",
           "meaning": "Central exclamative patterns; their word order differs from a neutral direct question."
+        },
+        {
+          "form": "statement + auxiliary/modal + subject pronoun?",
+          "meaning": "An ordinary confirmation tag normally reverses statement polarity and preserves subject reference."
+        },
+        {
+          "form": "declarative order + wh-expression in the questioned position",
+          "meaning": "One conversational echo-question pattern: You sent it to whom? It is not the default neutral information question."
         }
       ],
       "examples": [
@@ -157,6 +169,22 @@
         {
           "sentence": "Could you tell me where the archive is?",
           "analysis": "The complete sentence is interrogative, while the embedded question where the archive is has no inversion."
+        },
+        {
+          "sentence": "The spare key is in the drawer, isn’t it?",
+          "analysis": "Positive is takes negative isn’t; it refers to the key."
+        },
+        {
+          "sentence": "Nobody has signed yet, have they?",
+          "analysis": "Negative nobody supports a positive tag; singular they takes have, although nobody takes has."
+        },
+        {
+          "sentence": "Let’s compare the two estimates, shall we?",
+          "analysis": "The conventional shall we tag seeks agreement to an inclusive suggestion."
+        },
+        {
+          "sentence": "You stored the files where?",
+          "analysis": "A conversational echo question keeps where in place to check or react to the location just mentioned."
         }
       ],
       "contrasts": [
@@ -164,11 +192,24 @@
           "a": "How quickly did she finish?",
           "b": "How quickly she finished!",
           "note": "The first is a direct interrogative; the second is a how-exclamative with subject before verb."
+        },
+        {
+          "a": "You locked it, didn’t you?",
+          "b": "You locked it, did you?",
+          "note": "Both are possible. The first commonly seeks confirmation; the second can respond to newly received information or convey surprise/challenge. Intonation and context constrain interpretation."
+        },
+        {
+          "a": "Isn’t the library open?",
+          "b": "Is the library not open?",
+          "note": "Both are negative interrogatives. The full not usually follows the subject and is more formal; neither construction guarantees a particular answer."
         }
       ],
       "exceptions": [
         "A subject wh-question such as who left? does not use the same auxiliary-subject inversion as who did she meet?",
-        "Communicative force depends on context: a polite interrogative can request action without being an imperative in grammatical form."
+        "Communicative force depends on context: a polite interrogative can request action without being an imperative in grammatical form.",
+        "Opposite polarity is the ordinary confirmation pattern, not a ban on positive-positive tags. Imperative tags have their own conventional choices.",
+        "Nobody can take singular has in the main clause and referring singular they with have in a tag; agreement is local to each clause.",
+        "Echo questions and invariant conversational tags should not be judged solely by the pattern for neutral inverted yes-no questions."
       ],
       "mistakes": [
         {
@@ -197,12 +238,26 @@
           "term": "exclamative",
           "definition": "A grammatical construction characteristically expressing a striking degree or quality.",
           "example": "What a quiet room this is!"
+        },
+        {
+          "term": "question tag",
+          "definition": "A short interrogative attached to a clause to invite a response, often using an auxiliary and a referring pronoun.",
+          "example": "The bus has left, hasn’t it?"
+        },
+        {
+          "term": "echo question",
+          "definition": "A conversational question repeating or querying recently heard information, often retaining statement order.",
+          "example": "You booked how many rooms?"
         }
       ],
       "sourceIds": [
         "D-clause-types",
         "D-clauses_2",
-        "E-REPORTED"
+        "E-REPORTED",
+        "F-TAGS",
+        "F-BC-TAGS",
+        "F-ECHO",
+        "F-YESNO"
       ]
     },
     {
@@ -1035,6 +1090,78 @@
         "C-PUNCT",
         "C-CONJ"
       ]
+    },
+    {
+      "id": "gv5-d14-tag01",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply an ordinary confirmation tag: The spare key is in the drawer, ____?",
+      "model": "isn’t it?",
+      "rubric": [
+        "Use negative is after the positive statement.",
+        "Use it to refer to the singular key."
+      ],
+      "alternatives": [
+        "is it not? is a possible more formal uncontracted tag."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag02",
+      "type": "response",
+      "kind": "gap",
+      "prompt": "Supply an ordinary confirmation tag: Nobody has signed yet, ____?",
+      "model": "have they?",
+      "rubric": [
+        "Treat nobody as negative, so use a positive tag.",
+        "Use referring singular they with have; do not copy has without checking the tag subject."
+      ],
+      "alternatives": [
+        "An explicitly restructured question can be grammatical, but this task asks for the ordinary attached tag."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag03",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "Compare You locked it, didn’t you? and You locked it, did you? Are both grammatical? Describe likely uses without claiming that intonation fixes only one meaning.",
+      "model": "Both can be grammatical. The opposite-polarity tag commonly seeks confirmation; the positive-positive tag can react to new information, surprise or challenge. Context and intonation distinguish particular uses.",
+      "rubric": [
+        "Accept both constructions rather than imposing opposite polarity universally.",
+        "Explain a plausible interactional contrast and qualify it by context."
+      ],
+      "alternatives": [
+        "Other context-supported interpretations are valid if explained."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag04",
+      "type": "response",
+      "kind": "multiple-gap",
+      "prompt": "Supply conventional tags for these contexts: (a) an inclusive suggestion: Let’s check the totals, ____? (b) ordinary confirmation: I’m next, ____?",
+      "model": "(a) shall we? (b) aren’t I?",
+      "rubric": [
+        "Use the conventional shall we for the inclusive let’s suggestion.",
+        "Recognise aren’t I as the usual contracted negative tag after I am."
+      ],
+      "alternatives": [
+        "For (b), am I not? is possible in a more formal style. Explain any regional alternative instead of calling it the universal default."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Application",
+      "sourceIds": []
     }
   ],
   "corrections": [
@@ -1221,6 +1348,42 @@
         "C-PUNCT",
         "C-CONJ"
       ]
+    },
+    {
+      "id": "gv5-d14-tag-c01",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The speaker intends an ordinary opposite-polarity confirmation tag, without echo or challenge: You didn’t call, didn’t you? Revise the tag for that stated purpose.",
+      "model": "You didn’t call, did you?",
+      "rubric": [
+        "Use a positive tag after the negative statement for the stated confirmation pattern.",
+        "Keep past time and the same addressee."
+      ],
+      "alternatives": [
+        "The prompt fixes the intended ordinary confirmation; marked conversational echo readings do not make every same-polarity sequence universally ungrammatical."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
+    },
+    {
+      "id": "gv5-d14-tag-c02",
+      "type": "response",
+      "kind": "correction",
+      "prompt": "The tag is intended to refer to the same addressee as you: You could help, couldn’t he? Correct that reference.",
+      "model": "You could help, couldn’t you?",
+      "rubric": [
+        "Keep could as the modal and the negative confirmation tag.",
+        "Refer to the stated addressee with you rather than switching to he."
+      ],
+      "alternatives": [
+        "A different full question may be grammatical, but must keep the same intended addressee and possibility."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Intermediate",
+      "ability": "Production and revision",
+      "sourceIds": []
     }
   ],
   "transformations": [
@@ -1423,6 +1586,34 @@
       "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
       "consulted": "2026-10-21",
       "note": "Actual article title and body checked; used for the named construction, not as proof of every specialist analytical label."
+    },
+    {
+      "id": "F-TAGS",
+      "title": "Question tags — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/question-tags",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for auxiliary choice, opposite/same polarity, intonation, imperative tags and informal invariant tags. Original teaching and tasks."
+    },
+    {
+      "id": "F-BC-TAGS",
+      "title": "Question tags — British Council LearnEnglish",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/question-tags",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for negative statements including nobody with singular they, and I am/aren’t I."
+    },
+    {
+      "id": "F-ECHO",
+      "title": "Questions: echo and checking questions — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-echo-and-checking-questions",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for declarative echo questions, wh-words in situ and their conversational purposes."
+    },
+    {
+      "id": "F-YESNO",
+      "title": "Questions: yes-no questions — Cambridge English Grammar Today",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-yes-no-questions-are-you-feeling-cold",
+      "consulted": "2026-10-22",
+      "note": "Article body consulted for negative questions, expected confirmation, offers and contracted versus uncontracted not."
     }
   ],
   "editorialNotes": []

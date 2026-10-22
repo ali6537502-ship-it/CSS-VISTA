@@ -1684,6 +1684,13 @@
             "phase-3",
             "day-29",
             "day-30"
+          ],
+          "coverageDetails": [
+            "ordinary confirmation tags, auxiliaries and polarity",
+            "negative subjects and singular-they tags",
+            "imperative and let’s tags; I am/aren’t I",
+            "same-polarity tags, intonation and register",
+            "echo questions and negative yes-no questions"
           ]
         },
         {
@@ -2400,6 +2407,10 @@
             "phase-4",
             "day-29",
             "day-30"
+          ],
+          "coverageDetails": [
+            "to-infinitives and bare infinitives",
+            "split infinitives, adverb scope and style-dependent preferences"
           ]
         },
         {

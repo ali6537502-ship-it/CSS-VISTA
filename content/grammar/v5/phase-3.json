@@ -381,6 +381,24 @@
       "difficulty": "Intermediate",
       "ability": "Production and revision",
       "sourceIds": []
+    },
+    {
+      "id": "gv5-phase-3-tag01",
+      "type": "response",
+      "kind": "comparison",
+      "prompt": "A colleague says, “You filed the application where?” Explain why this can be acceptable in conversation, and give a neutral information-question version.",
+      "model": "The original can be an echo question checking or reacting to a location just mentioned. A neutral version is Where did you file the application?",
+      "rubric": [
+        "Identify echo-question use and its conversational context.",
+        "Produce the neutral wh-question with did plus subject plus plain file."
+      ],
+      "alternatives": [
+        "Different punctuation or context descriptions are acceptable if the echo function and neutral word order are clear."
+      ],
+      "conceptId": "gv5-d14-m02",
+      "difficulty": "Advanced",
+      "ability": "Understanding",
+      "sourceIds": []
     }
   ]
 }
