@@ -64,8 +64,10 @@ function Workspace({ catalog, user, attempt }: { catalog: Catalog; user?: string
   const nav = [{ id: 'dashboard', title: 'Course path' }, { id: 'lesson', title: 'Your lesson' }, { id: 'reference', title: 'Reference library' }, { id: 'lab', title: 'Practice and revision' }, { id: 'profile', title: 'Learning profile' }, { id: 'saved', title: 'Bookmarks and notes' }, { id: 'legacy', title: 'Earlier work' }]
   const origin = ['expression', 'precis'].includes(params.get('from') ?? '') ? params.get('from') : ['expression', 'precis'].includes(params.get('origin') ?? '') ? params.get('origin') : undefined
   const back = new URLSearchParams(attempt ? { attempt } : {})
-  for (const key of ['writing', 'version']) { const value = params.get(key); if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value) }
-  const returnTo = origin ? `/account/${origin}${back.size ? `?${back}` : ''}` : undefined
+  for (const key of ['writing', 'version', 'workspace']) { const value = params.get(key); if (value && /^[a-f0-9-]{36}$/i.test(value)) back.set(key, value) }
+  const returnParams = new URLSearchParams(back)
+  if (origin === 'expression' && back.has('workspace')) returnParams.set('view', 'studio')
+  const returnTo = origin ? `/account/${origin}${returnParams.size ? `?${returnParams}` : ''}` : undefined
   function route(nextView: string, extras: Record<string, string> = {}) { const p = new URLSearchParams(attempt ? { attempt } : {}); p.set('view', nextView); if (origin) { p.set('from', origin); for (const [key, value] of back) if (key !== 'attempt') p.set(key, value) }; for (const [key, value] of Object.entries(extras)) if (value) p.set(key, value); setParams(p) }
   function navigate(d: number, s: string) {
     store.update(old => ({ ...old, cursor: { day: d, section: s, item: old.cursor.day === d && old.cursor.section === s ? old.cursor.item : '' } }))

@@ -17,20 +17,22 @@ export default function AccountProgress() {
 
   return (
     <AccountPage
-      title="Progress & Mocks"
-      intro="Everything you have measured so far: preparation, practice, revision and recorded mock attempts."
+      title="Progress"
+      intro="Device-only practice and self-reported preparation are shown separately from account-owned evidence."
       action={
         <Link to="/exam-intelligence" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
           Exam Intelligence <ArrowRight className="h-4 w-4" />
         </Link>
       }
     >
+      <p className="mb-5 rounded-xl border p-4 text-sm leading-7">The metrics below belong to this browser. Syllabus ticks are self-reported completion; recorded quiz results measure those attempts. They do not establish mastery or predict examination marks.</p>
+      <Link to="/account/library/search" className="mb-5 inline-flex min-h-11 items-center text-[#14543D] underline">Open synchronized evidence and saved versions</Link>
       <AttemptContinuation />
       <SectionTitle>Where you stand</SectionTitle>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <Metric label="Target exam" value={examYear ? `CSS ${examYear}` : 'Not set'} detail={examYear ? 'From your planner date' : 'Set an exam date in Planner'} />
         <Metric label="Days remaining" value={examDays ?? '—'} detail={examDays === null ? 'Set your exam date first' : 'Based on your planner date'} />
-        <Metric label="Syllabus progress" value={`${syllabusPercent}%`} detail={`${snapshot.syllabusCompleted} topics completed`} />
+        <Metric label="Self-reported syllabus" value={`${syllabusPercent}%`} detail={`${snapshot.syllabusCompleted} topics marked complete`} />
         <Metric label="Study streak" value={`${snapshot.stats.streak}d`} detail={`${snapshot.stats.accuracy}% overall MCQ accuracy`} />
         <Metric label="MCQs attempted" value={snapshot.stats.attempted.toLocaleString()} detail={`${snapshot.stats.accuracy}% accuracy`} />
         <Metric label="Saved resources" value={snapshot.savedResources} detail="Bookmarks and saved answers" />

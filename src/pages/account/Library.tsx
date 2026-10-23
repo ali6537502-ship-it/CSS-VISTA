@@ -1,78 +1,20 @@
-import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
-
-import { Archive, ArrowRight, Bookmark, Newspaper, Search, Sparkles } from 'lucide-react'
-import { briefingRoot, latestRange, overviewSchema } from '@/features/current-affairs/model'
-import { useBriefing } from '@/features/current-affairs/useBriefing'
-import { ProBadge } from '@/features/membership/AccountSections'
-import { useMembership, useMembershipExpired, type Overview } from '@/features/membership/api'
-import RecallDeck from '@/features/current-affairs/RecallDeck'
-import { AccountPage, SectionTitle, useAccountSnapshot } from './shared'
-
-const destinations = [
-  { to: '/account/saved', icon: Bookmark, title: 'Saved items', detail: 'Developments and material you kept for revision.' },
-  { to: '/account/factbook', icon: Sparkles, title: 'Daily Factbook', detail: 'Facts, statistics and quick GK, ready to revise.' },
-  { to: briefingRoot + '/archive', icon: Archive, title: 'Current Affairs archive', detail: 'Return to any earlier day’s edition.' },
-  { to: '/account/search', icon: Search, title: 'Search your library', detail: 'Find a topic across headlines, facts and sources.' },
-]
-
+import { Link } from 'react-router'
+import { AvailableStudyLink } from '@/features/membership/ProRelease'
+import { AccountPage } from './shared'
+import { useWorkspace } from '@/features/workspace/api'
+import { WorkspaceHold, WorkspaceLoad, WorkspaceRecords } from '@/features/workspace/Records'
 export default function AccountLibrary() {
-  const { snapshot } = useAccountSnapshot()
-  const membership = useMembership<Overview>()
-  const expired = useMembershipExpired(membership.data?.membership.expires_at)
-  const active = membership.data?.membership.status === 'active' && !expired && !membership.error
-  // Revision cards are built from the facts in the latest published edition.
-  const briefing = useBriefing('view=overview&date=' + latestRange, overviewSchema, active)
-  const facts = (briefing.data?.facts ?? [])
-    .flatMap((story) => story.facts.map((fact) => ({ fact, story })))
-    .slice(0, 10)
-
-  return (
-    <AccountPage
-      title="My Library"
-      intro="Your saved reading, revision facts and every past edition, kept in one place."
-      action={
-        <Link to={briefingRoot} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-emerald-900 px-5 text-sm font-semibold text-white hover:bg-emerald-800">
-          <Newspaper className="h-4 w-4" /> Current Affairs <ProBadge />
-        </Link>
-      }
-    >
-      <div className="rounded-2xl border border-slate-200 p-5 sm:p-6">
-        <p className="text-[10px] font-extrabold uppercase tracking-[.12em] text-slate-500">Saved on this device</p>
-        <p className="mt-2 text-3xl font-bold text-slate-950">{snapshot.savedResources}</p>
-        <p className="mt-1 text-sm text-slate-500">Bookmarks and saved answers from across CSS Vista.</p>
-      </div>
-
-      {facts.length > 0 && (
-        <section className="mt-12">
-          <SectionTitle>Quick revision</SectionTitle>
-          <p className="mt-2 text-sm text-slate-500">One fact at a time. Recall the answer, reveal it, then read it in context.</p>
-          <div className="mt-4"><RecallDeck facts={facts} /></div>
-        </section>
-      )}
-
-      <section className="mt-12">
-        <SectionTitle>Open your library</SectionTitle>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {destinations.map(({ to, icon: Icon, title, detail }) => (
-            <Link
-              key={to}
-              to={to}
-              className="group flex items-start gap-4 rounded-2xl border border-slate-200 p-5 transition-colors hover:border-emerald-700"
-            >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-800">
-                <Icon className="h-5 w-5" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="flex items-center gap-1.5 font-bold text-slate-950">
-                  {title} <ProBadge />
-                  <ArrowRight className="h-4 w-4 text-emerald-700 opacity-0 transition-opacity group-hover:opacity-100" />
-                </span>
-                <span className="mt-1 block text-sm text-slate-500">{detail}</span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-    </AccountPage>
-  )
+  const load = useWorkspace()
+  return <AccountPage title="Library" intro="Find your saved work, personal references and original sources without creating a folder first.">
+    <Link to="/account/library/search" className="mb-6 inline-flex min-h-11 items-center rounded-lg bg-[#14543D] px-5 py-3 font-semibold text-white">Search saved work</Link>
+    <section className="mb-8"><h2 className="mb-3 text-lg font-semibold">Your collections</h2><div className="flex flex-wrap gap-3">
+      <Link className="min-h-11 rounded-lg border px-4 py-3" to="/factbook">My Factbook</Link>
+      <Link className="min-h-11 rounded-lg border px-4 py-3" to="/account/library/search?type=writing">Saved writing</Link>
+      <Link className="min-h-11 rounded-lg border px-4 py-3" to="/account/library/search?type=reading">Saved reading and sources</Link>
+      <Link className="min-h-11 rounded-lg border px-4 py-3" to="/account/library/search?type=grammar">Grammar evidence</Link>
+      <AvailableStudyLink className="min-h-11 rounded-lg border px-4 py-3" to="/account/factbook">Daily Facts</AvailableStudyLink>
+      <Link className="min-h-11 rounded-lg border px-4 py-3" to="/account/resources">Device bookmarks and saved answers</Link>
+    </div></section>
+    {!load.data ? <WorkspaceLoad error={load.error} retry={load.refresh} /> : <div className="space-y-5"><WorkspaceHold paused={load.data.paused} /><h2 className="text-lg font-semibold">Recent account work</h2>{load.data.items.length ? <WorkspaceRecords items={load.data.items} /> : <p className="rounded-xl border p-5">No available account records yet. Your device-only work remains in its original tool.</p>}</div>}
+  </AccountPage>
 }

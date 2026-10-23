@@ -18,26 +18,28 @@ async function signin(tab){await tab.goto(base+'/account');await tab.getByLabel(
 async function save(button){const pending=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/student/skills.php'&&r.request().method()==='POST');await page.getByRole('button',{name:button,exact:true}).click();const r=await pending,d=await r.json();assert.equal(r.status(),200,JSON.stringify(d));await page.getByText(new RegExp('saved versions')).first().waitFor();return d}
 async function overflow(){assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Sentence quality horizontal overflow')}
 async function grammarRoundtrip(original,workspace,version){
- const review=page.getByRole('link',{name:/^Review the existing Grammar lesson/});await review.click()
- await page.getByRole('link',{name:'Return to Expression Lab',exact:true}).waitFor()
- const direct=page.getByRole('link',{name:'Return to Expression Lab',exact:true}),href=await direct.getAttribute('href'),target=new URL(href,base)
+ const returnLink=()=>page.getByRole('link',{name:'Return to your Expression Lab work',exact:true})
+ await page.getByRole('link',{name:/^Review the existing Grammar lesson/}).click()
+ await returnLink().waitFor()
+ const target=new URL(await returnLink().getAttribute('href'),base)
  assert.equal(target.pathname,'/account/expression');assert.equal(target.searchParams.get('view'),'studio');assert.equal(target.searchParams.get('workspace'),workspace);assert.equal(target.searchParams.get('version'),version)
- await page.getByRole('link',{name:'Open reference',exact:true}).click();await page.getByRole('link',{name:/^Return to Day .* session$/}).click();await page.getByRole('link',{name:'Return to Expression Lab',exact:true}).click()
- await page.getByRole('heading',{name:'A complete sentence',exact:true}).waitFor();assert.equal(new URL(page.url()).searchParams.get('workspace'),workspace);assert.equal(new URL(page.url()).searchParams.get('version'),version)
- // Switching to Error Lab and back through its linked lesson must retain this origin.
- await page.getByRole('link',{name:/^Review the existing Grammar lesson/}).click();await page.getByRole('button',{name:'Error Lab',exact:true}).click()
- // Answer an existing free Grammar question and follow its lesson/reference route.
- const lessonReview=page.getByRole('link',{name:'Review this lesson',exact:true})
- if(!await lessonReview.count()){
-  if(!await page.getByRole('region',{name:'Practice question',exact:true}).count())await page.getByRole('button',{name:'Start session',exact:true}).click()
-  await page.getByRole('region',{name:'Practice question',exact:true}).locator('li button').first().click()
- }
- await lessonReview.click();await page.getByRole('link',{name:'Return to Error Lab',exact:true}).waitFor()
+ await page.getByRole('link',{name:'Existing grammar collection',exact:true}).click()
+ await page.getByRole('link',{name:/^Return to Day .* session$/}).click()
+ await returnLink().click()
+ await page.getByRole('heading',{name:'A complete sentence',exact:true}).waitFor()
  assert.equal(new URL(page.url()).searchParams.get('workspace'),workspace)
- await page.getByRole('link',{name:'Open reference',exact:true}).click();await page.getByRole('link',{name:/^Return to Day .* session$/}).click();await page.getByRole('link',{name:'Return to Error Lab',exact:true}).click()
+ assert.equal(new URL(page.url()).searchParams.get('version'),version)
+ await page.getByRole('link',{name:/^Review the existing Grammar lesson/}).click()
+ await page.getByRole('button',{name:'Practice and revision',exact:true}).click()
  assert.equal(new URL(page.url()).searchParams.get('view'),'lab')
- await page.getByRole('link',{name:'Return to Expression Lab',exact:true}).click();await page.getByRole('heading',{name:'A complete sentence',exact:true}).waitFor()
- assert.equal(new URL(page.url()).searchParams.get('workspace'),workspace);assert.equal(new URL(page.url()).searchParams.get('version'),version)
+ assert.equal(new URL(page.url()).searchParams.get('workspace'),workspace)
+ await page.getByRole('button',{name:'Reference library',exact:true}).click()
+ await page.getByRole('button',{name:'Your lesson',exact:true}).click()
+ assert.equal(new URL(page.url()).searchParams.get('edition'),'v5')
+ await returnLink().click()
+ await page.getByRole('heading',{name:'A complete sentence',exact:true}).waitFor()
+ assert.equal(new URL(page.url()).searchParams.get('workspace'),workspace)
+ assert.equal(new URL(page.url()).searchParams.get('version'),version)
  assert.equal(new URL(page.url()).searchParams.get('attempt'),attemptContext)
  if(new URL(original).searchParams.has('version'))assert.equal(await page.getByRole('button',{name:'Check & save response',exact:true}).count(),0)
 }

@@ -22,6 +22,7 @@ const reviewer = JSON.parse(php('tests/pro/fixture.php', 'reviewer'))
 const headers = { Cookie: `cssv_owner_session=${reviewer.token}; cssv_owner_csrf=${reviewer.csrf}`, 'X-CSRF-Token': reviewer.csrf, 'Content-Type': 'application/json' }
 // Node uses the native HTTP loopback API; browser traffic uses the isolated HTTPS proxy.
 async function nativeAdmin(data) {
+  if(data.action==='publish' && data.version_id) data={...data,review_manifest_id:php('tests/topics/review-fixture.php',data.version_id)}
   const response = await fetch('http://localhost:4173/api/admin/topics.php', { method: 'POST', headers, body: JSON.stringify(data) })
   const result = await response.json()
   assert.equal(response.status, 200, JSON.stringify(result))

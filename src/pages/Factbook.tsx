@@ -229,6 +229,18 @@ export default function Factbook() {
     setSaveState('idle')
   }, [selectedCategoryId, selectedSubjectId, subjects, user])
 
+  const linkedEntry = routeParams.get('entry')
+  useEffect(() => {
+    if (!user || !linkedEntry) return
+    let active = true
+    void loadFactbookEntriesByIds(user.id, [linkedEntry]).then(items => {
+      if (!active) return
+      if (!items.length) { showNotice('This entry is unavailable in your account.', 'error'); return }
+      openEntry(items[0])
+    }).catch(() => { if (active) showNotice('This entry could not be opened. Return to Library and retry.', 'error') })
+    return () => { active = false }
+  }, [linkedEntry, user, openEntry, showNotice])
+
   useEffect(() => {
     if (!user || loading || quickAddHandled.current || routeParams.get('quick-add') !== '1') return
     const title = (routeParams.get('title') ?? '').trim().slice(0, 180)

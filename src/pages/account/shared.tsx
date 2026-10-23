@@ -1,3 +1,5 @@
+import WorkspaceBreadcrumbs from '@/features/workspace/Breadcrumbs'
+import WorkspaceNavigation from '@/features/workspace/Navigation'
 import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 
@@ -8,7 +10,6 @@ import { getRevisionStats, getStudyAnalytics, recentActivities } from '@/lib/pro
 import { activeStudyTasks, dueStudyTasks, localTaskDateKey, readTaskArchiveState } from '@/lib/myTasks'
 import { PROGRESS_CHANGED_EVENT } from '@/lib/progressEvents'
 import { AuthenticatedAccountAd } from '@/components/Ads'
-import { ProBadge } from '@/features/membership/AccountSections'
 
 export function formatMinutes(minutes: number) {
   if (minutes < 60) return `${minutes}m`
@@ -103,8 +104,8 @@ export function useSyllabusTotal() {
 export function AccountPage({ title, intro, action, children }: { title: string; intro: string; action?: ReactNode; children: ReactNode }) {
   const { user } = useAccount()
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
+    <div className="min-h-screen bg-[#F6F8F7] text-[#17251F] [&_.text-slate-500]:text-[#47564D]">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12">
         <Link to="/account/dashboard" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-800">
           <ArrowLeft className="h-4 w-4" /> My CSS Vista
         </Link>
@@ -125,20 +126,17 @@ export function AccountPage({ title, intro, action, children }: { title: string;
             </Link>
           )}
         </header>
-        <nav aria-label="Account" className="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold text-slate-600">
-          <Link to="/account/dashboard?plan=free" className="inline-flex min-h-11 items-center hover:text-pine">Free account</Link>
-          <Link to="/account/dashboard?plan=pro" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Pro account <ProBadge /></Link>
-          <Link to="/account/membership" className="inline-flex min-h-11 items-center hover:text-pine">Membership &amp; Payments</Link>
-          <Link to="/account/preparation" className="inline-flex min-h-11 items-center hover:text-pine">My Preparation</Link>
-          <Link to="/account/answer-performance" className="inline-flex min-h-11 items-center hover:text-pine">My Answer Performance <ProBadge /></Link>
-          <Link to="/account/general-ability" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">General Ability <ProBadge /></Link>
-          <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Ask VISTA <ProBadge /></Link>
-          <Link to="/account/essay-builder" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Essay Builder <ProBadge /></Link>
-          <Link to="/account/argumentation" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Argumentation <ProBadge /></Link>
-          <Link to="/account/analytical-skills" className="inline-flex min-h-11 items-center gap-2 hover:text-pine">Analysis <ProBadge /></Link>
-          <Link to="/account/ai-usage" className="inline-flex min-h-11 items-center hover:text-pine">AI Usage</Link>
-        </nav>
-        <div className="mt-9">{children}</div>
+        <div className="mt-6 grid min-w-0 gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+          <aside><WorkspaceNavigation /><nav aria-label="Account utilities" className="mt-3 flex flex-wrap gap-3 text-sm lg:flex-col">
+            <Link to="/account/library/search" className="inline-flex min-h-11 items-center text-[#14543D] underline">Search</Link>
+            <Link to="/account/preparation" className="inline-flex min-h-11 items-center text-[#14543D] underline">Preparation attempts</Link>
+            <Link to="/account/membership" className="inline-flex min-h-11 items-center text-[#14543D] underline">Membership</Link>
+            <Link to="/account/settings" className="inline-flex min-h-11 items-center text-[#14543D] underline">Profile</Link>
+            <Link to="/account/ask-vista" className="inline-flex min-h-11 items-center text-[#14543D] underline">Ask VISTA</Link>
+            <Link to="/contact" className="inline-flex min-h-11 items-center text-[#14543D] underline">Help</Link>
+          </nav></aside>
+          <div className="min-w-0"><WorkspaceBreadcrumbs title={title} />{children}</div>
+        </div>
         {/* Signed-in account content. Advertising eligibility is decided by the
             route registry, not by this page. */}
         <div className="mt-12"><AuthenticatedAccountAd /></div>
