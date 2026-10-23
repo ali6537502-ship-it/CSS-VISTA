@@ -11,6 +11,16 @@ $q=$questions['qualification-tech'];$rows=[['question_id'=>$q['id'],'choice'=>($
 $rows[]=['question_id'=>$q['id'],'choice'=>$q['answer'],'created_at'=>'2026-10-01 13:00:00'];check(cssv_precis_profile($rows)['items'][6]['state']==='Needs review','Immediate retry erased error');
 $rows[1]['created_at']='2026-10-04 12:00:00';$item=cssv_precis_profile($rows)['items'][6];check($item['state']==='Improving'&&$item['first_correct']===0,'Spaced review changed baseline');
 check(!array_intersect(['Stable','Mastered'],array_column(cssv_precis_profile($rows)['items'],'state')),'Recognition became writing mastery');
+$saved=cssv_precis_saved_drills([
+ ['question_id'=>$q['id'],'choice'=>($q['answer']+1)%3,'created_at'=>'2026-10-01 12:00:00','last_row'=>2],
+ ['question_id'=>$q['id'],'choice'=>$q['answer'],'created_at'=>'2026-10-01 12:00:00','last_row'=>1],
+ ['question_id'=>'retired-question','choice'=>0,'created_at'=>'2026-10-01 12:00:00','last_row'=>1],
+ ['question_id'=>$q['id'],'choice'=>99,'created_at'=>'2026-10-01 12:00:00','last_row'=>1],
+]);
+check(count($saved)===1&&$saved[0]['choice']===$q['answer']&&$saved[0]['correct']===true,'Not restoring the latest valid response only');
+check($saved[0]['explanation']===$q['explanation']&&!isset($saved[0]['answer']),'Saved feedback mismatch or answer index leak');
+check(str_ends_with($saved[0]['created_at'],'Z'),'Saved timestamp has no UTC timezone');
+check(cssv_precis_saved_drills([])===[],'Unattempted answers exposed');
 $rows[1]['last_wrong_at']='2026-10-04 11:50:00';check(cssv_precis_profile($rows)['items'][6]['state']==='Needs review','A recent repeat error was erased by an immediate retry');
 foreach([['a real progress',3],['Don’t re-write 2026 reports.',4],['پانی اور تعلیم',3],['hello—world',2],['',0]] as [$text,$expected])check(cssv_learning_words($text)===$expected,'Word-count convention changed');
 $context=cssv_precis_context(['title'=>'TEST ONLY title','scratch'=>['central_idea'=>'TEST ONLY central idea'],'self_check'=>['fidelity'=>5]]);check($context['self_check']['fidelity']===5&&$context['self_check']['title']===null,'Missing self-ratings fabricated');

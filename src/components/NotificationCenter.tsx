@@ -154,8 +154,9 @@ export default function NotificationCenter() {
     }
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') return
+      const ownsFocus = ref.current?.contains(document.activeElement) || panelRef.current?.contains(document.activeElement)
       setOpen(false)
-      bellRef.current?.focus()
+      if (ownsFocus) bellRef.current?.focus({ preventScroll: true })
     }
     document.addEventListener('pointerdown', onPointerDown)
     document.addEventListener('keydown', onKeyDown)

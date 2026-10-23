@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AvailableStudyLink as Link } from '@/features/membership/ProRelease'
 import { pakistanTime } from '@/features/membership/api'
 import { useLearning } from '@/features/learning/api'
 import { field, secondary, type Plan, type PreparationAction, type Capacity } from './api'
@@ -11,7 +12,16 @@ type Score = {
   obtained?: number
   maximum?: number
 }
+type AbilityEvidence = {
+  scope: 'account'; first_exercises: { correct: number; total: number }; exercise_attempts: number; repeated_exercises: number;
+  first_quizzes: { correct: number; total: number; quizzes: number }; quiz_attempts: number; repeated_quizzes: number;
+  completed_exercises: number; total_exercises: number; completed_topics: number; total_topics: number;
+  latest_review: { missed: number }[]; unavailable_records: number; basis: string;
+}
 type Dimensions = {
+  pro_learning_available: boolean
+  ability: AbilityEvidence | null
+  guided_writing: { id: string; title: string; recorded: number; total_stages: number; next_stage: string; all_recorded: boolean; level: string; to: string }[]
   basis: string
   coverage: Capacity
   revision: { scheduled: number; due: number; current_percentage: number | null; basis: string }
@@ -171,6 +181,8 @@ export function Readiness({ attempt }: { attempt: string }) {
           basis={d.reading.basis}
         />
       </div>
+      {d.ability && <section className="rounded-2xl border p-5" aria-label="General Ability evidence"><h3 className="font-semibold">General Ability — account-wide practice</h3><p className="mt-3 text-sm leading-7 text-slate-600">{d.ability.basis}</p><dl className="mt-4 grid gap-4 sm:grid-cols-2"><div><dt className="text-sm text-slate-500">First exercise answers</dt><dd className="mt-1 font-semibold">{d.ability.first_exercises.total ? `${d.ability.first_exercises.correct}/${d.ability.first_exercises.total} correct · ${d.ability.repeated_exercises} ${d.ability.repeated_exercises === 1 ? 'retry' : 'retries'}` : 'No exercise submitted'}</dd></div><div><dt className="text-sm text-slate-500">First quiz answers</dt><dd className="mt-1 font-semibold">{d.ability.first_quizzes.total ? `${d.ability.first_quizzes.correct}/${d.ability.first_quizzes.total} correct · ${d.ability.repeated_quizzes} repeat ${d.ability.repeated_quizzes === 1 ? 'quiz' : 'quizzes'}` : 'No quiz submitted'}</dd></div><div><dt className="text-sm text-slate-500">Recorded course completion</dt><dd className="mt-1 font-semibold">{d.ability.completed_exercises}/{d.ability.total_exercises} exercises correct at least once · {d.ability.completed_topics}/{d.ability.total_topics} topics meet the course rule</dd></div><div><dt className="text-sm text-slate-500">Latest work to review</dt><dd className="mt-1 font-semibold">{d.ability.latest_review.reduce((sum, row) => sum + row.missed, 0)} incorrect exercise or quiz answers</dd></div></dl>{d.ability.unavailable_records > 0 && <p role="status" className="mt-3 text-sm">Some saved responses could not be included in this summary. Their original history is retained.</p>}</section>}
+      {!!d.guided_writing?.length && <section className="rounded-2xl border p-5" aria-label="Guided writing evidence"><h3 className="font-semibold">Recent guided writing</h3><p className="mt-2 text-sm leading-7 text-slate-600">Up to six recent saved workspaces for this preparation attempt. Recorded stages show participation; they are not AI assessment, mastery or examiner marks.</p><ul className="mt-4 space-y-3">{d.guided_writing.map(work => <li key={work.id} className="rounded-xl border p-4"><Link className="font-semibold text-indigo-700 underline" to={work.to}>{work.title}</Link><p className="mt-2 text-sm">{work.recorded}/{work.total_stages} stages recorded · {work.level}</p><p className="mt-2 text-sm text-slate-600">{work.all_recorded ? 'Review your saved responses and revise independently.' : `Next activity: ${work.next_stage}`}</p></li>)}</ul></section>}
       <section className="rounded-2xl border p-5">
         <h3 className="font-semibold">Independent précis writing evidence</h3>
         <p className="mt-2 text-sm leading-6 text-slate-600">{d.precis.writing.basis}</p>
@@ -252,7 +264,7 @@ export function Reviews({ attempt }: { attempt: string }) {
     ['Completed / skipped / moved blocks', (p) => `${p.completed} / ${p.skipped} / ${p.moved}`],
     ['Section study blocks', (p) => String(p.studied_units)],
     ['Coverage declarations / imports', (p) => `${p.coverage_declarations} / ${p.imports}`],
-    ['First writing drafts / rewrites', (p) => `${p.first_drafts} / ${p.rewrites}`],
+    ['First / later saved writing versions', (p) => `${p.first_drafts} / ${p.rewrites}`],
     ['Linked MCQs', (p) => `${p.mcq_questions} · ${pct(p.mcq_percentage)}`],
     ['Vistagram articles read', (p) => String(p.vistagram_readings)],
     ['Reading recall reviews', (p) => String(p.reading_reviews)],
@@ -320,7 +332,7 @@ export function Reviews({ attempt }: { attempt: string }) {
         })}
       </div>
       <p className="text-sm text-slate-500">
-        Zero recorded activity does not prove no study happened. Unavailable assessments stay
+        Later writing versions can add a guided-stage response or revise earlier wording; the count does not prove an independent rewrite. Zero recorded activity does not prove no study happened. Unavailable assessments stay
         unassessed; no readiness prediction is generated.
       </p>
     </div>

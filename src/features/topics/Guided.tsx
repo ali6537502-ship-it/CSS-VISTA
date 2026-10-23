@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Lightbulb, RotateCcw } from 'lucide-react'
 import { primary, secondary } from '@/features/preparation/api'
 import type { GuidedResult, Question, Section } from './types'
+import { orderedTopicOptions } from './optionOrder'
 
 type Send = (body: Record<string, unknown>) => Promise<void>
 
@@ -68,7 +69,7 @@ function GuidedQuestion({
           {question.prompt}
         </legend>
         <div className="mt-2 grid gap-3">
-          {question.options.map((option, index) => (
+          {orderedTopicOptions(question).map(({ option, index }) => (
             <label
               key={index}
               className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-xl border p-4 text-sm leading-6 ${choice === index ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 hover:bg-slate-50'}`}

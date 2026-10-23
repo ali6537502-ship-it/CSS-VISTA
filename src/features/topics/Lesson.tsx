@@ -23,6 +23,7 @@ import {
 } from './types'
 import { topicPanel } from './styles'
 import { GuidedSection, MistakeReview } from './Guided'
+import { orderedTopicOptions } from './optionOrder'
 
 type Send = (body: Record<string, unknown>) => Promise<void>
 function PendingAction({ action }: { action: PreparationAction }) {
@@ -159,7 +160,7 @@ function KnowledgeCheck({
               {index + 1}. {question.prompt}
             </legend>
             <div className="mt-3 grid gap-3">
-              {question.options.map((option, i) => (
+              {orderedTopicOptions(question).map(({ option, index: i }) => (
                 <label
                   key={i}
                   className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-xl border p-4 text-sm leading-6 ${choices[question.id] === i ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 hover:bg-slate-50'}`}

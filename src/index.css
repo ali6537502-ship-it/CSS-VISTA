@@ -2388,6 +2388,11 @@
   .cssv-tutorial-dialog {
     animation: none;
   }
+  /* Later theme rules must not restart the announcement ticker. */
+  .vista-live-ticker-track {
+    animation: none;
+    transform: none;
+  }
 }
 
 @media (max-width: 767px) {

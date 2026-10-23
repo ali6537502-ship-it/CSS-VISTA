@@ -30,14 +30,19 @@ function cssv_learning_attempt_input(array $body): array {
 function cssv_ai_bucket(DateTimeImmutable $now): string { return $now->setTimezone(new DateTimeZone('Asia/Karachi'))->format('Y-m-d'); }
 function cssv_ai_features(): array { return ['precis'=>2,'paragraph'=>5,'sentence'=>15,'tutor'=>20,'current_affairs'=>10,'maths'=>10,'handwriting'=>0,'handwriting_extract'=>0,'argumentation'=>0,'analysis'=>0,'essay'=>0]; }
 function cssv_writing_codes(): array { return ['article_usage','subject_verb_agreement','run_on_sentence','sentence_fragment','tense_consistency','punctuation','weak_transition','vocabulary_repetition','vague_expression','weak_topic_sentence','coherence','awkward_word_choice','redundancy','informal_expression','preposition_error','pronoun_reference']; }
+/** Instructional prose may disclaim marking, but may not assign invented marks. */
+function cssv_writing_instructional_prose(string $text): void {
+ if(preg_match('~\b(?:your|student|examiner|official)\s+(?:score|marks?)\s*(?:is|are|:|=)\s*\d|\b(?:you|student)\s+(?:scored|earned|received)\s+\d|\b(?:scored|awarded)\s+\d|\bI\s+(?:am|am acting as)\s+(?:the|an?|your)\s+(?:official\s+)?examiner\b~iu',$text))throw new InvalidArgumentException('Feedback must not assign examination marks or impersonate an examiner.');
+}
 function cssv_writing_result(array $result,string $text): array {
     cssv_pro_fields($result,['summary','findings']);
-    $summary=cssv_learning_string($result['summary'] ?? null,2000,'feedback summary'); $findings=$result['findings'] ?? null;
+    $summary=cssv_learning_string($result['summary'] ?? null,2000,'feedback summary');cssv_writing_instructional_prose($summary); $findings=$result['findings'] ?? null;
     if (!is_array($findings) || !array_is_list($findings) || count($findings)>30) throw new InvalidArgumentException('Invalid findings.');
     foreach ($findings as &$f) {
         if (!is_array($f)) throw new InvalidArgumentException('Invalid finding.'); cssv_pro_fields($f,['code','severity','excerpt','explanation','hint']);
         if (!in_array($f['code'] ?? null,cssv_writing_codes(),true) || !in_array($f['severity'] ?? null,['minor','moderate','major'],true)) throw new InvalidArgumentException('Unknown finding category.');
         foreach (['excerpt','explanation','hint'] as $key) $f[$key]=cssv_learning_string($f[$key] ?? null,2000,$key);
+        cssv_writing_instructional_prose($f['explanation']);cssv_writing_instructional_prose($f['hint']);
         if (!str_contains($text,$f['excerpt'])) throw new InvalidArgumentException('Finding is not anchored in submitted wording.');
     } unset($f);
     return ['summary'=>$summary,'findings'=>$findings];

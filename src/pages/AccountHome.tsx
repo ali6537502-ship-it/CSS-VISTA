@@ -211,7 +211,7 @@ export default function AccountHome() {
   const continueReading = briefing.data?.continue_reading?.[0]
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 py-10 sm:py-14">
         <header className="flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -286,6 +286,6 @@ export default function AccountHome() {
             route registry, not by this page. */}
         <div className="mt-12"><AuthenticatedAccountAd /></div>
       </div>
-    </main>
+    </div>
   )
 }

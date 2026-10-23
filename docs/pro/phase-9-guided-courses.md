@@ -1,6 +1,12 @@
 # All-source guided affairs learning
 
-The owner's latest scope is **all 107 supplied files** contributing to interactive Pakistan Affairs and Current Affairs learning in CSS Vista Pro, comparable to the existing Grammar and Précis courses. It supersedes the earlier 86-topic planning target. It does not establish 107 distinct subjects: 107 verified file identities contain 96 byte-distinct sources, with 11 extra identical copies. The existing 81 broad source families remain provisional; updated editions, compound books and visual companions require explicit reconciliation.
+> Follow-up quality checkpoint: [academic and assessment review](topic-academic-quality-review.md). Earlier dated package/hash evidence below remains historical.
+
+Latest authoring status: [continuous original-text native courses](original-text-topic-continuation.md). All 86 catalogue headings now have bounded private workflow coverage in 58 logical courses (948 guided sections, 1,419 fixed questions). This is not complete conversion of all 107 original files or production availability. Earlier source-led and first-batch figures remain historical checkpoints. Pro remains paused; no content was published to production.
+
+The owner changed the extraction-led plan to original notes using the **86 combined CA/PA headings** fetched from the specified `/notes` page, with dated current-affairs checks. The latest format instruction requires **text directly to native interactive courses, with no further Word/PDF deliverables**. This supersedes the earlier authoring priority described below. It does not delete the supplied collection or approve a production release.
+
+Historical source scope: 107 verified file identities contain 96 byte-distinct sources, including eleven extra identical copies. The 81 provisional source families and earlier bounded conversions remain retained. The [representation/reform increment](pakistan-affairs-representation-course.md), [five reform courses](pakistan-affairs-reform-courses.md) and dated figures below describe their earlier stages, not a claim that every original file or current catalogue heading is complete.
 
 ## Source coverage and conversion boundary
 
@@ -31,3 +37,15 @@ PHP syntax and 51 pure topic assertions pass. Native PHP/PDO checks cover single
 The built-app HTTPS browser flow imports and reviews the actual private three-module package in the disposable database, then verifies guided idea navigation, saved wrong feedback, refresh/retry/mistake correction, complete checks, writing, cross-device comparison, scheduled recall, expiry history, response-loss recovery and 320/390/768/1024/1440 reflow, without page errors or model calls.
 
 An additional wildcard run across all 245 test cases exposed existing failures outside the standard suite: an Islamiyat cleanup audit, stale current-affairs/reasoning count expectations, and stale notes-pricing expectations. The relevant data/test files are unchanged by this increment. One generated-HTML advertising assertion was evaluated while the build was still applying its HTML policy; the completed-build standard route suite subsequently passes. These optional audit issues are recorded rather than changing current owner content or old exam banks to fit stale expectations. No claim is made that the wildcard suite passes.
+
+## Pakistan Affairs resumed — 16 October
+
+The owner resumed bounded Pakistan Affairs preparation under the continuing production hold. The [federalism foundations increment](pakistan-affairs-federalism.md) adds a privately reviewed 16-section module with 16 learning and eight separate recall questions. The combined private package now has six partial modules, 76 sections, 76 learning checks and 38 revision checks; the preceding five definitions retain their canonical hashes. All-source/full-book conversion remains incomplete. Current Affairs collection work is not automatically resumed, and no lesson is published to production through this increment.
+
+## Further Pakistan Affairs units — 16 October
+
+The [subsequent five-unit increment](pakistan-affairs-governance-units.md) adds National Interests, Local Government, Democratic Consolidation, Civil Service Reform and Accountability/Corruption: 96 further teaching sections and learning checkpoints, 48 separate recall questions and five writing tasks. Each final unit passes its actual isolated native/admin/browser journey, including owned persistence, revision scheduling, access boundaries, expiry history, mobile reflow and zero AI. The combined private package has 11 partial source units / 172 sections / 172 learning checks / 86 revision questions. All six previous definitions and all 107 original file hashes are preserved. Held claims and remaining source families stay content incomplete. No production publication or activation is authorized or performed.
+
+## Economics and history foundations — 20 October
+
+The [four-unit economics/history increment](pakistan-affairs-economics-history.md) adds Economic Challenges, Ideology, 1947 Transfer of Power and Initial State-Building: 68 sections/checkpoints, 34 separate recall questions and four writing tasks. Exact-package private native/admin/browser evidence covers all four units; economics/ideology were tested on 16 October and transfer/initial on 20 October. The combined package now contains 15 partial units / 240 sections / 240 learning checks / 120 recall questions / 15 writing tasks. All 11 earlier definitions and 107 original file identities remain unchanged. The native combined-package validator, 51 pure assertions and topic security regression pass. Source-specific held claims, earlier history and remaining chapters are incomplete; full-source conversions remain zero. Pro remains paused and no private content is published. Later public-site work on main is inspected and preserved for future candidate reconciliation.

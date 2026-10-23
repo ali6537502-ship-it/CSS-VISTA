@@ -52,8 +52,12 @@ try {
   assert.equal(await page.getByRole('heading',{name:'Weekly Current Affairs Magazine',exact:true}).count(),0)
   const after=(await (await context.request.get(base+'/api/student/membership.php')).json()).membership
   assert.deepEqual(after,before,'Pause changed membership/expiry')
+  php('tests/pro/fixture.php','expire',id)
+  for(const path of ['/account/general-ability?view=history','/account/precis?view=skills']){await page.goto(base+path);await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()}
+  assert.equal((await context.request.get(base+'/api/student/ability.php?view=history')).status(),503,'Expired history bypassed production pause')
+  assert.equal((await context.request.get(base+'/api/student/precis.php')).status(),503,'Expired Précis bypassed production pause')
   assert.deepEqual(errors,[])
   mkdirSync(root+'/test-artifacts',{recursive:true})
   await page.screenshot({path:root+'/test-artifacts/pro-paused-home.png'})
-  console.log('PASS: active Pro account remains Free-only while paused; paid links omitted, fourteen direct routes blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
+  console.log('PASS: active Pro account remains Free-only while paused; paid links omitted, fourteen direct routes plus expired history blocked, 320–1440 reflow, free Grammar and Vistagram reading retained, expiry unchanged, no page errors. Disposable database only.')
 } finally { php('tests/pro/release-fixture.php','restore');await browser.close() }

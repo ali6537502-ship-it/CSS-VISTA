@@ -221,6 +221,7 @@ export default function PreparationPlan({
           <Link className={primary} to={data.continue.grammar}>
             Continue Grammar <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
+          {data.continue.ability && <Link className={secondary} to={data.continue.ability}>Continue General Ability</Link>}
           {data.active && (
             <Link className={secondary} to={data.continue.precis}>
               Continue Précis
@@ -231,8 +232,7 @@ export default function PreparationPlan({
           </Link>
         </div>
         <p className="mt-3 text-sm leading-6 text-slate-600">
-          Your saved lesson position and actual practice remain linked to this attempt. Opened pages
-          receive no progress credit.
+          Grammar and writing follow this attempt. General Ability uses your account-wide course record. Opened pages receive no progress credit.
         </p>
       </section>
       <div className="grid gap-3 sm:grid-cols-3">

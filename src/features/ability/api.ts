@@ -83,9 +83,10 @@ export const stages = [
   "Algebra & geometry",
   "Logical reasoning",
 ];
-export function courseLink(unit?: string, lesson?: string) {
+export function courseLink(unit?: string, lesson?: string, preparation?: string) {
   const params = new URLSearchParams();
   if (unit) params.set("unit", unit);
   if (lesson) params.set("lesson", lesson);
+  if (preparation && /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(preparation)) params.set("preparation", preparation);
   return "/account/general-ability" + (params.size ? "?" + params : "");
 }
