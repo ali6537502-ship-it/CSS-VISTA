@@ -1840,12 +1840,14 @@
       "exit_code": 0
     },
     {
-      "command": "npm run lint (one preexisting warning)",
-      "exit_code": 0
+      "command": "npm run lint",
+      "exit_code": 0,
+      "note": "one preexisting warning"
     },
     {
-      "command": "npm run test:all (277 tests)",
-      "exit_code": 0
+      "command": "npm run test:all",
+      "exit_code": 0,
+      "note": "277 tests"
     },
     {
       "command": "npm run build:hostinger:strict",
@@ -1880,7 +1882,11 @@
       "exit_code": 0
     },
     {
-      "command": "node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs",
+      "command": "node --test tests/workspace/navigation.test.ts tests/topicOptionOrder.test.ts",
+      "exit_code": 0
+    },
+    {
+      "command": "node --test tests/workspace/routes.test.mjs",
       "exit_code": 0
     }
   ]
