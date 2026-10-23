@@ -217,6 +217,8 @@ export default function Factbook() {
     if (!user) return
     if (entry) {
       const draft: FactbookEntryDraft = { ...entry, sources: entry.sources.map((source) => ({ ...source })), tags: [...entry.tags], content: structuredClone(entry.content) }
+      // Opening an existing record is a read. Only changed wording should autosave.
+      lastSavedSignature.current = JSON.stringify(draft)
       setEditorDraft(loadLocalFactbookDraft(user.id, entry.id) ?? draft)
     } else {
       const subjectId = selectedSubjectId ?? subjects[0]?.id

@@ -28,9 +28,13 @@ try{
  }
  await page.goto(base+'/account/library/search');await page.getByRole('textbox',{name:'Search saved work'}).fill('Synthetic research 03');await page.getByRole('button',{name:'Search',exact:true}).click();await page.getByRole('link',{name:'Synthetic research 03',exact:true}).click();await page.waitForURL('**/account/preparation?writing='+seeded.writing[3]);await page.getByRole('textbox',{name:'Your writing',exact:true}).waitFor();await page.goBack();await page.getByRole('link',{name:'Synthetic research 03',exact:true}).waitFor()
 
+ let factbookWrites=0
+ page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/factbook/data.php'){try{if(request.postDataJSON()?.action==='save_entry')factbookWrites++}catch{}}})
  await page.goto(base+'/factbook?entry='+seeded.factbook)
  const editor=page.getByRole('textbox',{name:'Formatted note',exact:true})
  await editor.waitFor()
+ await page.waitForTimeout(1600) // Longer than the existing autosave debounce.
+ assert.equal(factbookWrites,0,'Opening retained work created an unrequested save')
  assert.ok((await editor.innerHTML()).includes('Legacy meaning'))
  assert.equal(await page.evaluate(()=>window.__factbookUnsafe||0),0,'Stored legacy markup executed in editor')
  await editor.focus()
