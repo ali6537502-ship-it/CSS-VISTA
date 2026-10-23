@@ -60,7 +60,7 @@ jobs:
           php tests/topics/unit.php
           php tests/topics/writing-unit.php
           php tests/topics/review-unit.php
-          node --test tests/workspace/navigation.test.ts
+          node --test tests/workspace/navigation.test.ts tests/workspace/routes.test.mjs
           php tests/reading/unit.php
           php tests/planner/unit.php
           php tests/tutor/unit.php
