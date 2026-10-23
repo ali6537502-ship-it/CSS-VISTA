@@ -18,12 +18,12 @@ function OpenProGate({ children, feature, fallbackAction, allowExpiredHistory, e
   const location = useLocation()
   const { data, error, refresh } = useMembership<Overview>()
   const expired = useMembershipExpired(data?.membership.expires_at)
-  if (loading || (user && !data && !error)) return <main className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">{feature}</h1><p role="status" className="mt-3 text-sm text-slate-600">Checking Pro access…</p></main>
+  if (loading || (user && !data && !error)) return <section className="mx-auto max-w-3xl px-4 py-12"><h1 className="text-2xl font-bold text-slate-950">{feature}</h1><p role="status" className="mt-3 text-sm text-slate-600">Checking Pro access…</p></section>
   const ended = expired || data?.membership.status === 'expired'
   const history = allowExpiredHistory && ended && (!expiredHistoryView || new URLSearchParams(location.search).get('view') === expiredHistoryView)
   if (user && data && !error && ((data.membership.status === 'active' && !expired) || history)) return <>{children}</>
   const returnTo = location.pathname + location.search
-  return <main className="mx-auto max-w-3xl px-4 py-12"><div className="rounded-2xl border border-amber-200 bg-white p-6 sm:p-8">
+  return <section className="mx-auto max-w-3xl px-4 py-12"><div className="rounded-2xl border border-amber-200 bg-white p-6 sm:p-8">
     <ProBadge /><h1 className="mt-4 text-2xl font-bold text-slate-950">{feature}</h1>
     <p className="mt-3 text-sm leading-7 text-slate-600">{error ? 'Your membership could not be checked. Please retry.' : `${feature} is included in CSS Vista Pro. ${expired || data?.membership.status === 'expired' ? 'Renew your membership to continue.' : 'An active Pro membership is required.'}`}</p>
     {user && data && !error && ended && retainedHistoryMessage && <p className="mt-3 text-sm leading-7 text-slate-600">{retainedHistoryMessage}</p>}
@@ -31,7 +31,7 @@ function OpenProGate({ children, feature, fallbackAction, allowExpiredHistory, e
     {error ? <button onClick={refresh} className="mt-5 min-h-11 rounded-lg border px-4 font-semibold">Retry access check</button> : <Link to={user ? '/account/membership' : `/account?returnTo=${encodeURIComponent(returnTo)}`} className="mt-5 inline-flex min-h-11 items-center rounded-lg bg-emerald-900 px-5 text-sm font-semibold text-white">{user ? 'View Pro membership' : 'Sign in to continue'}</Link>}
     {fallbackAction}
     <Link to="/account/dashboard?plan=free" className="mt-4 block min-h-11 py-3 text-sm font-semibold text-emerald-900">Back to Free account</Link>
-  </div></main>
+  </div></section>
 }
 
 /** Shared routes remain free unless they select a paid study category. */

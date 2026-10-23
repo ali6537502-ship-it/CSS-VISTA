@@ -69,6 +69,10 @@ try{
  }
  assert.equal(await page.evaluate(()=>window.factbookSafety.sanitizeRichText('<p>Meaning <strong>kept</strong> — اردو</p>')),'<p>Meaning <strong>kept</strong> — اردو</p>')
  mkdirSync('test-artifacts/workspace',{recursive:true});await page.evaluate(() => window.scrollTo(0,0));await page.screenshot({path:'test-artifacts/workspace/search.png',fullPage:true})
+ php('tests/pro/fixture.php','incomplete',user)
+ await page.goto(base+'/account/dashboard')
+ await page.getByRole('heading',{name:'One profile. All your study services.',exact:true}).waitFor()
+ assert.equal(await page.locator('main').count(),1,'Incomplete-profile state must retain one primary landmark')
  assert.deepEqual(errors,[])
  writeFileSync('test-artifacts/workspace/browser.json',JSON.stringify({widths:[320,390,768,1024,1440],routes:7,sanitizerAttacks:attacks.length,pageErrors:errors,scope:'Chromium lab; no physical device or assistive-technology certification'},null,2))
  console.log('PASS: built native sign-in, seven workspace views at five widths, exact saved-writing navigation and Back, six DOM sanitizer attack classes and repeated sanitization; no page errors.')
