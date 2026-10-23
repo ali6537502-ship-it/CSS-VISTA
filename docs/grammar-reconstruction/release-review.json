@@ -17,15 +17,15 @@
     "evidence/resumed-editorial-review.json"
   ],
   "technicalEvidence": {
-    "nativeRun": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39831533837",
-    "testedHead": "c6b8d075cf641a55cdff85fe8ce2780eda395a0d",
+    "nativeRun": "https://github.com/ali6537502-ship-it/CSS-VISTA/actions/runs/39837712322",
+    "testedHead": "a45e6d529b51c4f39a19edcd49c84a78929b8467",
     "retainedReports": "evidence/final-native/",
     "publicBrowserChecks": 53,
     "nativeAccountBrowserChecks": 7,
     "nativeApiSecurityChecks": 13,
     "accessibilityViews": 6,
     "finalCommitChecks": "https://github.com/ali6537502-ship-it/CSS-VISTA/pull/107/checks",
-    "note": "The retained c6b8d07 artifact predates final reviewed wording and question-system coverage refinements. Native grammar CI also passed for 9a28e17. All required tests must pass again for the final commit before publication; the release record retains the exact final evidence."
+    "note": "Retained evidence verifies the final application and current teaching digest. Subsequent changes concern browser-test typography selectors and documentation only. Every required check must still pass for the final PR commit before publication; the release record retains exact final-commit and production evidence."
   },
   "publicationGate": "Publish only after every required check for the final PR commit succeeds. Production observations are recorded separately against the deployed fingerprint.",
   "limits": [

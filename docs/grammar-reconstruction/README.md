@@ -9,7 +9,7 @@ This directory records the reconstruction of the existing CSS VISTA grammar cour
 - `content-manifest.json` records source hashes and actual counts; `question-inventory.json` lists every distinct task, operation, concept, depth and marking method.
 - `source-register.json` identifies consulted authorities. `evidence/source-access.json` records current access checks and content digests; an HTTP success is not proof of academic relevance.
 - Original manuscripts live in `content/grammar/v5/`; generated public resources live in `public/grammar/v5/`. Teaching is separated from React rendering. The build rejects missing days, duplicate IDs/prompts, absent explanations, unmapped concepts and malformed keys.
-- `evidence/` retains current review and testing material. Temporary files from the earlier environment were lost at restart; outstanding findings are being reviewed again and retained here.
+- `evidence/` retains current review and testing material. Temporary files from the earlier environment were lost at restart; the resumed editorial review and final native verification are retained here.
 
 No CEFR certification, guaranteed examination result or 30-day expertise claim is made. Open writing is compared with models and explicit rubrics; the site does not automatically grade its grammatical accuracy. First responses, repeated-item retention, study completion and written self-review remain separate.
 
