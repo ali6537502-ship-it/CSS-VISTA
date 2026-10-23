@@ -37,6 +37,7 @@ try {
   for (const path of ['/account/expression','/account/precis','/account/argumentation','/account/analytical-skills','/account/essay-builder','/account/general-ability','/account/handwriting','/account/ask-vista','/account/answer-performance','/account/ai-usage','/account/membership','/current-affairs','/study-material/essay-themes','/account/preparation?view=topics']) {
     await page.goto(base+path)
     await page.getByRole('heading',{name:'CSS Vista Pro is temporarily unavailable',exact:true}).waitFor()
+    assert.equal(await page.locator('main').count(),1,'Paused routes must retain one primary landmark')
     assert.equal(await page.locator('main textarea, main input[type=file]').count(),0)
   }
   await page.goto(base+'/account/preparation?attempt='+attempt)
